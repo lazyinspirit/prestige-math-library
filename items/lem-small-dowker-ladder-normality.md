@@ -2,7 +2,7 @@
 id: lem-small-dowker-ladder-normality
 kind: lemma
 title: Small Dowker ladder normality
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-ladder-topology, def-axiom-of-choice, thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal, def-normal-and-t4-spaces, def-hausdorff-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

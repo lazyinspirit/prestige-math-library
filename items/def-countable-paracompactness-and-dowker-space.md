@@ -2,7 +2,9 @@
 id: def-countable-paracompactness-and-dowker-space
 kind: definition
 title: Countable paracompactness and Dowker spaces
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [def-cover-refinement-and-local-finiteness, def-normal-and-t4-spaces]
 provenance:

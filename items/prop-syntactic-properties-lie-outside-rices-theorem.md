@@ -2,7 +2,7 @@
 id: prop-syntactic-properties-lie-outside-rices-theorem
 kind: proposition
 title: "Syntactic machine properties lie outside the scope of Rice's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-index-set-and-extensional-machine-property, thm-rices-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

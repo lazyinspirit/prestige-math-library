@@ -6,6 +6,7 @@ status: published
 origin: pipeline
 deps: [def-measure, thm-finite-and-countable-subadditivity-of-measures, thm-continuity-from-below-for-measures, def-boolean-algebra-for-stone-duality, def-complete-boolean-algebra-and-regular-open-sets, def-axiom-of-choice, lem-extended-reals-complete]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

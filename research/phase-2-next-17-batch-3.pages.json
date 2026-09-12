@@ -1,0 +1,809 @@
+[
+  {
+    "order": 288.113,
+    "id": "central-limit-theorems",
+    "kind": "A",
+    "category": "probability",
+    "title": "Central Limit Theorems",
+    "companion": "central-limit-theorems-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "infinite-product-measures-and-kolmogorov-extension",
+      "modes-of-convergence-for-random-variables",
+      "weak-laws-and-series-of-independent-random-variables",
+      "strong-laws-of-large-numbers",
+      "weak-convergence-tightness-and-representation",
+      "characteristic-functions-inversion-and-continuity",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "the-lp-spaces-holder-minkowski-and-riesz-fischer",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "darboux-lhopital-and-taylor"
+    ],
+    "items": [
+      {
+        "id": "lem-characteristic-function-of-a-normal-law",
+        "kind": "lemma",
+        "title": "Characteristic function of a normal law",
+        "statement": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+        "strategy": "Authored argument and exact inputs are in items/lem-characteristic-function-of-a-normal-law.md and the batch proof contract. Let g(x)=exp(-x^2/2)/sqrt(2pi). First compute its finite first absolute moment by the finite-interval FTC, the Riemann-Lebesgue bridge, and monotone convergence, and use integration against the density to put the characteristic function under Lebesgue integration. The published moment-differentiation lemma then gives phi'(t)=integral ix exp(itx)g(x) dx. On [-R,R], use Euler's formula, the sine/cosine and chain rules, and real-component integration by parts; exponential decay kills the boundary and dominated convergence gives phi'=-t phi. The chain, algebra, and zero-derivative rules make exp(t^2/2)phi(t) constant, so phi(t)=exp(-t^2/2). Apply the affine characteristic-function identity and treat sigma=0 explicitly. AC supplies the published normal law and the compact Riemann-Lebesgue bridge.",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-continuous-implies-integrable",
+          "thm-ftc-second-part",
+          "thm-integration-by-parts",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-integration-against-a-density",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "lem-moments-give-derivatives-of-the-characteristic-function",
+          "thm-dominated-convergence",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-and-cosine-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-complex-exponential-addition-and-real-extension",
+          "def-real-exponential-function-and-e",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Example 3.3.5",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Norris, Probability and Measure, Section 8",
+              "url": "https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-second-order-characteristic-function-expansion",
+        "kind": "lemma",
+        "title": "Second-order characteristic-function expansion",
+        "statement": "If $\\mathbb EX=0$ and $\\mathbb EX^2=\\sigma^2<\\infty$, then $\\varphi_X(t)=1-\\sigma^2t^2/2+o(t^2)$ as $t\\to0$. No third moment or choice axiom is assumed. The same scalar estimates give $0\\le1-\\cos u\\le u^2/2$ for every real u. More precisely, for $r(u)=e^{iu}-1-iu+u^2/2$, $$|r(u)|\\le \\min(|u|^3/3,4u^2),\\qquad |e^{iu}-1-iu|\\le u^2.$$",
+        "strategy": "Authored argument and exact inputs are in items/lem-second-order-characteristic-function-expansion.md and the batch proof contract. Write exp(iu)=1+iu-u^2/2+r(u). Taylor bounds give r(u)/u^2->0 and |r(u)|<=C u^2. Hence r(tX)/t^2 tends pointwise to zero and is dominated by C X^2; dominated convergence finishes after centering removes the linear term. This is the required truncation/DCT route.",
+        "deps": [
+          "cor-taylor-remainder-bound",
+          "thm-sine-and-cosine-derivatives",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-dominated-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-characteristic-function-of-a-real-random-variable",
+          "def-moments-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Lemmas 5.4-5.5",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            },
+            {
+              "title": "Varadhan, Probability Theory, Chapter 3, Section 3.6",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-product-of-near-one-characteristic-factors",
+        "kind": "lemma",
+        "title": "Products of near-one characteristic factors",
+        "statement": "Let each row $(z_{n,k})_{1\\le k\\le k_n}$ be a finite family of complex numbers; empty rows are allowed with maximum zero. Suppose $\\max_k|z_{n,k}-1|\\to0$, $M:=\\sup_n\\sum_k|z_{n,k}-1|<\\infty$, and $\\sum_k|z_{n,k}-1|^2\\to0$. Then $$\\prod_k z_{n,k}-\\exp\\!\\left(\\sum_k(z_{n,k}-1)\\right)\\longrightarrow0.$$",
+        "strategy": "Authored argument and exact inputs are in items/lem-product-of-near-one-characteristic-factors.md and the batch proof contract. Write w=z-1. The complex exponential series gives |exp(w)-(1+w)|<=C|w|^2 uniformly for |w|<=1/2. Compare the finite products of (1+w_k) and exp(w_k) by telescoping; bound both partial-product families by exp(sum|w_k|). The resulting error is at most a fixed constant times exp(2M) sum|w_k|^2, while finite exponential additivity identifies the comparison product with exp(sum w_k). This is Durrett's direct near-one product argument and uses no complex logarithm or contour integration.",
+        "deps": [
+          "def-complex-exponential",
+          "lem-complex-exponential-series-converges-everywhere",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, proof of Theorem 3.4.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, proof of Theorem 5.3",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-lindeberg-levy-iid-central-limit-theorem",
+        "kind": "theorem",
+        "title": "Lindeberg-Levy iid central limit theorem",
+        "statement": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+        "strategy": "Authored argument and exact inputs are in items/thm-lindeberg-levy-iid-central-limit-theorem.md and the batch proof contract. Standardize. The second-order expansion gives phi(t/sqrt(n))=1-t^2/(2n)+o(1/n); independence makes the normalized-sum transform its nth power. The near-one product lemma yields exp(-t^2/2), already identified as the normal transform and continuous at zero, so Levy's criterion applies. AC is declared because the current normal and Levy suppliers carry it.",
+        "deps": [
+          "lem-second-order-characteristic-function-expansion",
+          "lem-product-of-near-one-characteristic-factors",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-normal-law",
+          "cor-characteristic-function-criterion-for-weak-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-partial-sums-and-sample-means",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Theorem 3.4.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Theorem 5.2",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+        "kind": "lemma",
+        "title": "AC supplies countable selections and prescribed serial paths",
+        "statement": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+        "strategy": "Choose from the fixed successor fibers under AC and iterate the resulting self-map by the earlier recursion theorem; countable choice is a restriction of AC.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, §2.4, pp22–23; elementary AC-to-DC restriction proof",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-de-moivre-laplace-central-limit-theorem",
+        "kind": "corollary",
+        "title": "De Moivre-Laplace central limit theorem",
+        "statement": "Assume AC and fix $0<p<1$. If $B_n$ has law $\\operatorname{Bin}(n,p)$ for every $n\\ge1$, then $$(B_n-np)/\\sqrt{np(1-p)}\\Rightarrow N(0,1).$$ No relationship between the probability spaces of the $B_n$ is required.",
+        "strategy": "Authored argument and exact inputs are in items/cor-de-moivre-laplace-central-limit-theorem.md and the batch proof contract. Realize B_n as a sum of iid Bernoulli(p) variables, use their published mean and variance, and apply the iid CLT. The product-space realization is the stated use of choice. No error rate or continuity correction is asserted.",
+        "deps": [
+          "cor-countable-independent-copies-exist",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 3.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Corollary 6.1",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-row-wise-independent-centered-triangular-array",
+        "kind": "definition",
+        "title": "Row-wise independent centered triangular array",
+        "statement": "For each integer $n\\ge1$, let $k_n\\ge1$ be a finite integer and let $X_{n,1},\\ldots,X_{n,k_n}$ be integrable real random variables on a probability space $(\\Omega_n,\\mathcal F_n,\\mathbb P_n)$. The family is a **centered triangular array** when $\\mathbb E_nX_{n,k}=0$ for every admissible pair $(n,k)$. It is **row-wise independent** when, for each fixed n and all Borel sets $B_1,\\ldots,B_{k_n}$, $$\\mathbb P_n\\!\\left(\\bigcap_{k=1}^{k_n}\\{X_{n,k}\\in B_k\\}\\right)=\\prod_{k=1}^{k_n}\\mathbb P_n(X_{n,k}\\in B_k).$$ Taking unused B_k equal to the real line gives the same factorization for each subfamily, which is independence in [[def-independent-random-elements]]. Random variables and integrability have the meanings in [[def-random-element-and-real-random-variable]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. There is no independence requirement between different rows. The spaces may differ with n; assertions about row sums compare their laws. A single-entry row is independent automatically, and deterministic zero entries are allowed. Empty rows are excluded by $k_n\\ge1$. This definition makes no existence or choice assumption.",
+        "strategy": "Authored argument and exact inputs are in items/def-row-wise-independent-centered-triangular-array.md and the batch proof contract. Definition only. Permit different probability spaces for different rows because all conclusions concern row laws, and explicitly separate row-wise from global independence.",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 3.4.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, Section 27",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-total-row-variance-and-lindeberg-condition",
+        "kind": "definition",
+        "title": "Total row variance and the Lindeberg condition",
+        "statement": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+        "strategy": "Authored argument and exact inputs are in items/def-total-row-variance-and-lindeberg-condition.md and the batch proof contract. Definition only. State both unnormalized and normalized forms, require s_n>0 before division, and check measurable indicators and finite truncated moments by domination.",
+        "deps": [
+          "def-row-wise-independent-centered-triangular-array",
+          "def-moments-variance-and-covariance",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Theorem 3.4.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, Section 27",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-lindeberg-condition-implies-feller-negligibility",
+        "kind": "lemma",
+        "title": "The Lindeberg condition implies Feller negligibility",
+        "statement": "For a centered triangular array with $\\sum_k\\mathbb EX_{n,k}^2=1$, the Lindeberg condition implies **Feller negligibility**: $\\max_k\\operatorname{Var}(X_{n,k})\\to0$. Independence is not needed.",
+        "strategy": "Authored argument and exact inputs are in items/lem-lindeberg-condition-implies-feller-negligibility.md and the batch proof contract. Split E[X_{n,k}^2] at |X_{n,k}|<=epsilon. The first part is at most epsilon^2 and the second is at most the full row's Lindeberg sum. Take the row maximum, limsup, then epsilon down to zero. Independence is not used.",
+        "deps": [
+          "def-total-row-variance-and-lindeberg-condition",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-moments-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 3.4.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, Section 27",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+        "kind": "theorem",
+        "title": "Lindeberg-Feller central limit theorem: sufficiency",
+        "statement": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+        "strategy": "Authored argument and exact inputs are in items/thm-lindeberg-feller-central-limit-theorem-sufficiency.md and the batch proof contract. Normalize first. Euler's formula and second-order Taylor bounds, split at |X|<=epsilon, combine with Lindeberg to give sum_k(phi_{n,k}(t)-1)->-t^2/2. The same quadratic bound and total row variance give a uniform bound on the absolute-deviation sums, while Feller negligibility gives maximal near-oneness and makes the squared deviations vanish. Apply the near-one product lemma directly to the independent product; no logarithm or contour argument is used. The limit is the normal transform and is continuous at zero, so Levy's criterion applies. AC is inherited from the normal and Levy suppliers.",
+        "deps": [
+          "def-total-row-variance-and-lindeberg-condition",
+          "lem-second-order-characteristic-function-expansion",
+          "lem-lindeberg-condition-implies-feller-negligibility",
+          "lem-product-of-near-one-characteristic-factors",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-normal-law",
+          "cor-characteristic-function-criterion-for-weak-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Theorem 3.4.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, Theorem 27.2",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-feller-converse-to-lindeberg-feller",
+        "kind": "theorem",
+        "title": "Feller converse to Lindeberg-Feller",
+        "statement": "Assume AC. Let a centered row-wise independent triangular array satisfy $\\sum_k\\mathbb EX_{n,k}^2=1$ and $\\max_k\\operatorname{Var}(X_{n,k})\\to0$. If $\\sum_kX_{n,k}\\Rightarrow N(0,1)$, then it satisfies the Lindeberg condition.",
+        "strategy": "The authored proof uses Feller negligibility and the near-one product bound to identify the limiting exponential modulus. The nonnegative cosine deficit then has integral tending to zero. For each epsilon, t=4/epsilon bounds its tail below by t^2 X^2/4 and proves Lindeberg. No Helly extraction or converse-sufficiency loop is used.",
+        "deps": [
+          "lem-second-order-characteristic-function-expansion",
+          "lem-product-of-near-one-characteristic-factors",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-levy-continuity-theorem-forward-direction",
+          "lem-characteristic-function-of-a-normal-law",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension",
+          "def-complex-exponential",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "def-total-row-variance-and-lindeberg-condition",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Billingsley, Probability and Measure, Theorems 28.1-28.4 and Example 28.4",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-lyapunov-central-limit-theorem",
+        "kind": "corollary",
+        "title": "Lyapunov central limit theorem",
+        "statement": "Assume AC. Let a centered row-wise independent triangular array have finite second moments and $s_n>0$. If for some $\\delta>0$ its $(2+\\delta)$ moments are finite and $$s_n^{-(2+\\delta)}\\sum_k\\mathbb E|X_{n,k}|^{2+\\delta}\\longrightarrow0,$$ then $s_n^{-1}\\sum_kX_{n,k}\\Rightarrow N(0,1)$.",
+        "strategy": "Authored argument and exact inputs are in items/cor-lyapunov-central-limit-theorem.md and the batch proof contract. On |X|>epsilon s_n, bound X^2 by |X|^{2+delta}/(epsilon s_n)^delta. After summing and normalizing this proves Lindeberg; apply its sufficiency theorem. Keep delta and all powers of s_n explicit.",
+        "deps": [
+          "def-total-row-variance-and-lindeberg-condition",
+          "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-axiom-of-choice",
+          "thm-real-power-laws",
+          "def-real-power",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Exercise 3.4.12",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Corollary 6.2",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-multivariate-normal-law",
+        "kind": "definition",
+        "title": "Multivariate normal law, including singular covariance",
+        "statement": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+        "strategy": "Authored argument and exact inputs are in items/def-multivariate-normal-law.md and the batch proof contract. Verify covariance matrices are symmetric positive semidefinite. Use the published non-negative square root, construct finitely many independent standard normals under AC, and push the vector through z->m+Sigma^{1/2}z. Singular and zero Sigma require no density or inverse. Later characteristic-function uniqueness gives independence of realization.",
+        "deps": [
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "cor-countable-independent-copies-exist",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-law-or-distribution-of-a-random-element",
+          "def-standard-normal-and-normal-laws",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Norris, Probability and Measure, Sections 8.1-8.2",
+              "url": "https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf"
+            },
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 3.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+        "kind": "lemma",
+        "title": "Characteristic function of a multivariate normal law",
+        "statement": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+        "strategy": "Authored argument and exact inputs are in items/lem-characteristic-function-of-a-multivariate-normal-law.md and the batch proof contract. Apply the scalar normal-transform lemma to t dot X. Conversely, equality of transforms gives equality of every projection law; Cramer-Wold gives equality of vector laws. No determinant or nonsingularity is used.",
+        "deps": [
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-cramer-wold-device",
+          "def-characteristic-function-of-a-real-random-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Norris, Probability and Measure, Theorem 8.2.1",
+              "url": "https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Theorem 8.2",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-multivariate-iid-central-limit-theorem",
+        "kind": "theorem",
+        "title": "Multivariate iid central limit theorem",
+        "statement": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+        "strategy": "Authored argument and exact inputs are in items/thm-multivariate-iid-central-limit-theorem.md and the batch proof contract. For fixed u, apply the scalar iid CLT to u dot (X_k-m) when u^T Sigma u>0. When the variance is zero, the projection vanishes almost surely and converges to the degenerate normal. Thus every projection has the required limit; Cramer-Wold finishes without division in singular directions.",
+        "deps": [
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "def-multivariate-normal-law",
+          "thm-cramer-wold-device",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-continuous-mapping-theorem",
+          "def-moments-variance-and-covariance",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Theorem 3.10.7",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Theorem 8.4",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-clt-convergence-is-only-in-distribution",
+        "kind": "remark",
+        "title": "Central-limit convergence is only in distribution",
+        "statement": "The conclusions of [[thm-lindeberg-levy-iid-central-limit-theorem]], [[thm-lindeberg-feller-central-limit-theorem-sufficiency]] and [[thm-multivariate-iid-central-limit-theorem]] compare the row-sum laws with a Gaussian law. In [[def-convergence-in-distribution-of-random-elements]], the limit is specified by tests on laws; the theorem does not construct a Gaussian random vector jointly with the original summands. The AC hypotheses of the cited theorems remain in force when applying them.\n\nBy contrast, [[def-convergence-in-probability]] requires the probabilities of distance-from-the-limit events on a common probability space to tend to zero. [[def-almost-sure-convergence-of-random-variables]] requires pointwise convergence outside a null set on such a space. Neither conclusion is supplied merely by identifying the Gaussian limit law; a coupling or further argument is required. These statements do not deny that a suitable coupling can sometimes give stronger convergence.\n\nThe special result [[thm-convergence-in-distribution-to-a-constant-is-convergence-in-probability]] concerns a point-mass limit. It applies to fully degenerate Gaussian limits on a common space, but does not turn a positive-variance normal limit into convergence in probability to a newly chosen Gaussian. A singular covariance with some positive-variance directions still gives a nonconstant law. No convergence rate or almost-sure version is asserted here.",
+        "strategy": "Authored argument and exact inputs are in items/rem-clt-convergence-is-only-in-distribution.md and the batch proof contract. Read the three modes from their definitions: distributional convergence compares laws and specifies no joint coupling. Contrast with the special published equivalence for a constant limit; the Gaussian limits here are generally nonconstant. Assert no stronger mode.",
+        "deps": [
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "thm-multivariate-iid-central-limit-theorem",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-convergence-in-probability",
+          "def-almost-sure-convergence-of-random-variables",
+          "thm-convergence-in-distribution-to-a-constant-is-convergence-in-probability"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Sections 3.2 and 3.4",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Lectures 5-6",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.114,
+    "id": "central-limit-theorems-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Central Limit Theorems — Examples",
+    "companion": "central-limit-theorems",
+    "requires": [
+      "central-limit-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-normal-approximation-to-binomial-probabilities",
+        "kind": "example",
+        "title": "Normal approximation to binomial probabilities",
+        "statement": "Assume AC and fix $0<p<1$. Write $\\Phi(x)=\\int_{-\\infty}^x e^{-y^2/2}/\\sqrt{2\\pi}\\,dy$. For fixed real $a<b$ and $B_n\\sim\\operatorname{Bin}(n,p)$, $$\\mathbb P\\!\\left(a\\le\\frac{B_n-np}{\\sqrt{np(1-p)}}\\le b\\right)\\longrightarrow\\Phi(b)-\\Phi(a).$$ For a finite integer interval, continuity correction is a numerical approximation, not an error bound supplied by this theorem.",
+        "strategy": "Authored argument and exact inputs are in items/ex-normal-approximation-to-binomial-probabilities.md and the batch proof contract. Standardize the integer interval and use weak convergence at the atomless normal endpoints. In a concrete symmetric example compare raw endpoints with a+/-1/2 corrected endpoints, labelling continuity correction as an approximation rather than a proved error rate.",
+        "deps": [
+          "cor-de-moivre-laplace-central-limit-theorem",
+          "thm-portmanteau-theorem",
+          "def-standard-normal-and-normal-laws",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 3.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Corollary 6.1",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-clt-for-sums-of-uniform-random-variables",
+        "kind": "example",
+        "title": "CLT for sums of uniform random variables",
+        "statement": "Assume AC. If $(U_k)$ are iid with density $\\mathbf1_{[0,1]}$, then $$\\sqrt{12/n}\\left(\\sum_{k=1}^nU_k-n/2\\right)\\Rightarrow N(0,1).$$",
+        "strategy": "Authored argument and exact inputs are in items/ex-clt-for-sums-of-uniform-random-variables.md and the batch proof contract. Integrate to get E[U]=1/2 and E[U^2]=1/3, hence variance 1/12. Construct independent copies under AC and apply the iid CLT. The exact Irwin-Hall density is unnecessary.",
+        "deps": [
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-integration-against-a-density",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "cor-countable-independent-copies-exist",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-continuous-implies-integrable",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 3.4.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Theorem 5.2",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-lyapunov-condition-for-nonidentical-summands",
+        "kind": "example",
+        "title": "Lyapunov condition for nonidentical summands",
+        "statement": "Assume AC. Take independent symmetric signs $\\epsilon_{n,k}\\in\\{-1,1\\}$, $1\\le k\\le n$, and set $X_{n,k}=k\\epsilon_{n,k}$. With $s_n^2=\\sum_{k=1}^nk^2$, the Lyapunov condition holds for $\\delta=1$, and $s_n^{-1}\\sum_{k=1}^nX_{n,k}\\Rightarrow N(0,1)$. In every row of length at least two the summand laws are distinct.",
+        "strategy": "Authored argument and exact inputs are in items/ex-lyapunov-condition-for-nonidentical-summands.md and the batch proof contract. Here s_n^2=sum k^2 and sum E|X_{n,k}|^3=sum k^3. Elementary bounds make their ratio O(n^{-1/2}). Symmetry centers the entries and their scales distinguish the laws. Apply Lyapunov; AC realizes the independent array.",
+        "deps": [
+          "cor-lyapunov-central-limit-theorem",
+          "cor-countable-independent-copies-exist",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-row-wise-independent-centered-triangular-array",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, exercises after Theorem 3.4.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Corollary 6.2",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-lindeberg-array-with-no-identically-distributed-row",
+        "kind": "example",
+        "title": "A Lindeberg array with no identically distributed row",
+        "statement": "Assume AC. For $1\\le k\\le n$, take independent Bernoulli variables $B_{n,k}$ with $p_{n,k}=k/(2n+2)$ and put $X_{n,k}=B_{n,k}-p_{n,k}$. The centered laws are distinct within each row of length at least two, yet the array satisfies Lindeberg and $s_n^{-1}\\sum_kX_{n,k}\\Rightarrow N(0,1)$.",
+        "strategy": "Authored argument and exact inputs are in items/ex-lindeberg-array-with-no-identically-distributed-row.md and the batch proof contract. Take independent B_{n,k} with distinct p_{n,k}=k/(2n+2), center, and normalize by total row standard deviation. The entries are bounded by one and the total variance grows linearly, so the largest normalized entry tends uniformly to zero and all Lindeberg indicators eventually vanish. Apply Lindeberg-Feller; AC supplies the array.",
+        "deps": [
+          "thm-countable-product-of-probability-spaces",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "def-total-row-variance-and-lindeberg-condition",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Examples 3.4.11-3.4.13",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, Section 27",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-degenerate-multivariate-gaussian-limit",
+        "kind": "example",
+        "title": "A degenerate multivariate Gaussian limit",
+        "statement": "Assume AC. Let $Y_k$ be centered iid real variables of variance $\\sigma^2>0$ and set $X_k=(Y_k,Y_k)$. Then $$n^{-1/2}\\sum_{k=1}^nX_k\\Rightarrow(Z,Z),\\qquad Z\\sim N(0,\\sigma^2).$$ The limit covariance is $\\Sigma=\\sigma^2\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$, a singular matrix of rank one.",
+        "strategy": "Authored argument and exact inputs are in items/ex-degenerate-multivariate-gaussian-limit.md and the batch proof contract. Compute the rank-one covariance. Every projection is (u_1+u_2)Y_k, so scalar CLT applies, including the zero-variance branch when u_1+u_2=0. The multivariate theorem identifies the limit as the diagonal linear image of N(0,sigma^2).",
+        "deps": [
+          "thm-multivariate-iid-central-limit-theorem",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Norris, Probability and Measure, Section 8.1",
+              "url": "https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf"
+            },
+            {
+              "title": "Aldous and Chewi, Probability Theory notes, Lecture 8",
+              "url": "https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling",
+        "kind": "counterexample",
+        "title": "Infinite variance can defeat square-root-n CLT scaling",
+        "statement": "Assume AC. There are iid real variables with density $c(x)=1/[\\pi(1+x^2)]$ and infinite second moment such that $n^{-1/2}\\sum_{k=1}^nX_k$ has no weak limit. In particular square-root-n scaling need not produce a normal limit when finite variance is dropped.",
+        "strategy": "Authored argument and exact inputs are in items/cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling.md and the batch proof contract. Construct the Cauchy probability from its displayed density, normalized by the arctangent integral. To compute its transform without a later Fourier-analysis supplier, first integrate the two exponential half-lines and obtain the symmetric Laplace density exp(-|x|)/2 with characteristic function 1/(1+t^2). This transform is integrable. Apply the published density-inversion corollary to the Laplace law, identify its continuous inversion density with exp(-|x|)/2, and reflect variables to obtain that the Cauchy density has transform exp(-|t|); this is Durrett's real inversion route and cites no examples-page item. Density integration and monotone convergence show the Cauchy second moment diverges, since x^2/(1+x^2)>=1/2 for |x|>=1. Take countably many independent copies under AC. Their normalized-sum transforms are exp(-sqrt(n)|t|), tending to zero off zero and one at zero. A weak limit would have this pointwise transform limit by forward Levy, contradicting continuity of every characteristic function at zero.",
+        "deps": [
+          "thm-ftc-second-part",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-derivative-of-exponential",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-integration-against-a-density",
+          "thm-principal-inverse-tangent-calculus",
+          "def-principal-inverse-tangent",
+          "cor-density-inversion-from-an-integrable-characteristic-function",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-countable-independent-copies-exist",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-levy-continuity-theorem-forward-direction",
+          "lem-basic-properties-of-characteristic-functions",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-continuous-implies-integrable",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-algebra-of-derivatives",
+          "thm-complex-exponential-addition-and-real-extension",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Example 3.3.16",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, continuity theorem",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-feller-negligibility-cannot-be-removed-from-the-converse",
+        "kind": "counterexample",
+        "title": "Feller negligibility cannot be removed from the converse",
+        "statement": "Assume AC. A centered row-wise independent triangular array can have total row variance one and row-sum law N(0,1) for every n, while its maximum summand variance stays one and Lindeberg fails. Thus Feller negligibility cannot be omitted from the converse theorem.",
+        "strategy": "Authored argument and exact inputs are in items/cex-feller-negligibility-cannot-be-removed-from-the-converse.md and the batch proof contract. Set X_{n,1}=Z_n~N(0,1) and X_{n,k}=0 for k>=2. The row sum is exactly Z_n and total variance is one, but max variance is one and the Lindeberg quantity is E[Z_n^2 1_{|Z_n|>epsilon}]>0. This precisely locates the converse's Feller hypothesis. AC is inherited from normal-law construction.",
+        "deps": [
+          "lem-characteristic-function-of-a-normal-law",
+          "def-total-row-variance-and-lindeberg-condition",
+          "thm-integration-against-a-density",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-exponential-is-strictly-increasing",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-row-wise-independent-centered-triangular-array",
+          "def-standard-normal-and-normal-laws",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, discussion after Theorem 3.4.14",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Billingsley, Probability and Measure, Example 28.4",
+              "url": "https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

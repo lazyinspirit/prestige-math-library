@@ -2,7 +2,7 @@
 id: thm-pcf-generators-restrict-finitely-cover-and-carry-scales
 kind: theorem
 title: Pcf generators restrict, finitely cover, and carry scales
-status: draft
+status: published
 origin: pipeline
 deps: [lem-progressive-products-and-true-cofinality-transfers, lem-pcf-cofinality-ideals-and-cutoff-conventions, thm-pcf-ideal-directedness-and-ultrafilter-cofinality-cutoffs, thm-progressive-pcf-has-a-maximum-and-continuous-cutoff-ideals, thm-progressive-pcf-has-universally-cofinal-sequences, lem-universal-pcf-sequences-have-strong-increase-and-exact-bounds, thm-pcf-cofinality-ideals-have-single-generators, def-axiom-of-choice, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption, thm-ultrafilter-lemma]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-field-cohomology-of-an-infinite-wedge-of-circles
 kind: example
 title: Field cohomology of an infinite wedge of circles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, def-axiom-of-choice, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

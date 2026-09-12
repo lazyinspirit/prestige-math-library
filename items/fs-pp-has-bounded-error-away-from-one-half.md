@@ -2,7 +2,7 @@
 id: fs-pp-has-bounded-error-away-from-one-half
 kind: false-statement
 title: "FALSE: every PP algorithm has bounded error separated from one half by a fixed constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-rp-corp-zpp-bpp-and-pp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

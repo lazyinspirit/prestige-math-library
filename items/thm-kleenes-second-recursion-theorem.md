@@ -2,7 +2,7 @@
 id: thm-kleenes-second-recursion-theorem
 kind: theorem
 title: "Kleene's second recursion theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [lem-self-reference-construction-from-smn, def-computable-program-transfor
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

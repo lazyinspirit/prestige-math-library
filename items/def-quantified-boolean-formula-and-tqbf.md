@@ -2,13 +2,14 @@
 id: def-quantified-boolean-formula-and-tqbf
 kind: definition
 title: "Quantified Boolean formulas and the language TQBF"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

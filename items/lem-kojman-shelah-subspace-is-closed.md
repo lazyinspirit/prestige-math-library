@@ -2,7 +2,9 @@
 id: lem-kojman-shelah-subspace-is-closed
 kind: lemma
 title: The scale subspace is closed
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [def-kojman-shelah-scale-subspace, lem-kojman-shelah-tail-supremum-closure, lem-rudin-box-space-basic-neighborhoods-and-p-space, def-axiom-of-choice, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion]
 proof_strategy: direct

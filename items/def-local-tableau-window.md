@@ -2,13 +2,14 @@
 id: def-local-tableau-window
 kind: definition
 title: "Local 2x3 tableau windows and legality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-bounded-computation-tableau]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

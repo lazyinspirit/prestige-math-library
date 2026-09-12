@@ -2,7 +2,7 @@
 id: lem-bounding-projections-give-exact-upper-bounds
 kind: lemma
 title: Bounding projections produce an exact upper bound with large coordinate cofinalities
-status: draft
+status: published
 origin: pipeline
 deps: [def-strong-increase-and-bounding-projections-for-countable-products, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

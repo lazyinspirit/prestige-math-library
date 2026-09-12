@@ -2,13 +2,14 @@
 id: def-boolean-formula-cnf-and-sat
 kind: definition
 title: "Boolean formulas, conjunctive normal form, and the satisfiability language SAT"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

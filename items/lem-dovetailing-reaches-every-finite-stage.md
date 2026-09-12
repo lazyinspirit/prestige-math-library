@@ -2,7 +2,7 @@
 id: lem-dovetailing-reaches-every-finite-stage
 kind: lemma
 title: "A dovetailing schedule reaches every finite simulation stage"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dovetailing-schedule]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

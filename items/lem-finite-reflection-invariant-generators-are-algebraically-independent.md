@@ -2,13 +2,14 @@
 id: lem-finite-reflection-invariant-generators-are-algebraically-independent
 kind: lemma
 title: Finite reflection invariant generators are algebraically independent
-status: draft
+status: "published"
 origin: pipeline
 deps: [def-finite-linear-invariant-and-coinvariant-polynomial-algebras, thm-hilbert-basis-theorem, thm-noetherian-ring-ideal-characterisations]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

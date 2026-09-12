@@ -2,13 +2,14 @@
 id: def-boolean-prime-ideal-principle
 kind: definition
 title: The Boolean prime ideal principle
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-ideals-filters-and-primality]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

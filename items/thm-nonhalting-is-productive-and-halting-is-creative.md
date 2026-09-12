@@ -2,7 +2,7 @@
 id: thm-nonhalting-is-productive-and-halting-is-creative
 kind: theorem
 title: "The nonhalting set is productive and the halting set is creative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-productive-and-creative-set, prop-fixed-machine-coding-is-acceptable,
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

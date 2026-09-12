@@ -2,7 +2,7 @@
 id: def-boolean-homomorphism-and-quotient
 kind: definition
 title: Boolean homomorphisms and quotient relation
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-algebra-for-stone-duality, def-boolean-ideals-filters-and-primality, def-equivalence-relation]
 justified_by: [lem-boolean-quotient-congruence]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-computation-history-domino-encoding
 kind: lemma
 title: "Accepting computation histories can be encoded by modified-PCP domino matches"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-modified-post-correspondence-problem, def-effective-encoding-of-turing-machines, def-halting-computation-and-divergence, prop-valid-computation-histories-are-decidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

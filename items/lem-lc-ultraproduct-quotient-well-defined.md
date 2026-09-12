@@ -4,6 +4,7 @@ kind: "lemma"
 title: "The ultraproduct is a well-defined nonempty structure"
 deps: ["def-lc-set-ultraproduct", "thm-ultrafilter-characterisation", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

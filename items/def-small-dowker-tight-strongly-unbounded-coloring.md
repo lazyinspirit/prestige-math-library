@@ -2,13 +2,14 @@
 id: def-small-dowker-tight-strongly-unbounded-coloring
 kind: definition
 title: "Tight strongly unbounded colorings"
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-luzin-stick-and-ad-principles]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

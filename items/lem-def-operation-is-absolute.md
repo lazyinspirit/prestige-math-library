@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Absoluteness of the definable power-set operation"
 deps: ["def-definable-subsets-of-a-membership-structure", "lem-finite-tuple-satisfaction-is-absolute"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-pda-acceptance-by-final-state
 kind: definition
 title: "Acceptance by final state for a PDA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-pda-configuration-and-step]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

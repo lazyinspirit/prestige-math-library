@@ -2,7 +2,9 @@
 id: thm-excision-for-singular-cohomology
 kind: theorem
 title: Excision for singular cohomology
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-relative-singular-cochain-complex, thm-cover-small-inclusion-is-a-chain-homotopy-equivalence, def-cover-small-singular-chain-subcomplex, def-singular-cochain-complex-with-coefficients, thm-naturality-of-the-singular-cohomology-pair-sequence]

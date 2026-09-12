@@ -2,7 +2,7 @@
 id: lem-cook-levin-map-is-polynomial-time
 kind: lemma
 title: "The Cook-Levin reduction map is computable in polynomial time"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-computation-tableau, lem-exactly-one-symbol-constraints-have-polynomial-size, lem-start-accept-and-transition-constraints-have-polynomial-size, def-worst-case-time-and-space-complexity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

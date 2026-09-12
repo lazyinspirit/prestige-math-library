@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Scott coding and set-likeness of ultrapower membership"
 deps: ["def-lc-scott-ultrapower-and-class-embedding-convention", "def-filter"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

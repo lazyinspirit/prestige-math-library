@@ -11,6 +11,10 @@ external_dependency:
   necessity: The design explicitly requests a Wiener Tauberian orientation. It supplies no logical dependency to any item in this batch.
 verification:
   precheck: n/a
+  sources_checked:
+    date: 2026-09-12
+    scope: "Theorem 3.1 and Corollary 3.4 on printed pp. 4–7; L1–L∞ duality orientation on p. 1"
+    by: codex-owner-operator
 status: published
 origin: pipeline
 landmark: false

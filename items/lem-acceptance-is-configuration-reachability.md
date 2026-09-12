@@ -2,7 +2,7 @@
 id: lem-acceptance-is-configuration-reachability
 kind: lemma
 title: "Acceptance is reachability of an accepting configuration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-configuration-graph, def-halting-computation-and-divergence, def-nond
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

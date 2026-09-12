@@ -9,6 +9,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-12
 sources:
   references:
     - title: "Lietz, Set Theory, Lemma 7.11, pp.57–58; weak-level finite-history gap completed locally"

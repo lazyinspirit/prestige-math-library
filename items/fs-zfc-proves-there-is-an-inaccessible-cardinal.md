@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "ZFC proves there is an inaccessible cardinal"
 deps: ["thm-lc-inaccessible-rank-segments-model-zfc", "thm-set-language-first-order-soundness", "thm-relativization-and-set-satisfaction"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

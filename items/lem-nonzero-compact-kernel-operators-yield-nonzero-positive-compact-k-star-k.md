@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Nonzero compact kernel operators yield nonzero positive compact k star k"
 deps: ["lem-conjugate-transpose-kernels-give-adjoints", "def-l-two-operator-conventions-for-weak-mixing", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

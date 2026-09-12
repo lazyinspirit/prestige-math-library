@@ -2,7 +2,7 @@
 id: cex-birational-does-not-imply-isomorphic
 kind: counterexample
 title: "The affine line and its punctured principal open are birational but not isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-birational-equivalence-varieties, def-principal-open-classical-variety, thm-coordinate-ring-principal-open, thm-affine-morphisms-coordinate-ring-anti-equivalence, ex-hyperbola-is-multiplicative-group-variety]
 justified_by: []
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

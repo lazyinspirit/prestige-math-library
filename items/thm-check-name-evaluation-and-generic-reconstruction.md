@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Check-name evaluation and reconstruction of G"
 deps: ["def-check-names-and-the-canonical-generic-name"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

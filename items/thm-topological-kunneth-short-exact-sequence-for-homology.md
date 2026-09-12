@@ -2,7 +2,7 @@
 id: thm-topological-kunneth-short-exact-sequence-for-homology
 kind: theorem
 title: Topological Kunneth short exact sequence for homology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [lem-singular-product-chain-equivalence-by-simplex-models, thm-pid-kunneth-exactness-from-cycle-boundary-presentations, def-axiom-of-choice, def-singular-cochain-complex-with-coefficients, def-singular-chain-cross-product-on-generators]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

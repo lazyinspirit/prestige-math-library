@@ -2,7 +2,7 @@
 id: prop-subset-construction-can-require-exponentially-many-states
 kind: proposition
 title: "The subset construction can require exponentially many states"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nfa-with-epsilon-moves, def-deterministic-finite-automaton, def-finite-cardinality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-set-sized-parallel-henkinization-preserves-consistency
 kind: lemma
 title: Parallel Henkinization for arbitrary set languages
-status: draft
+status: published
 origin: pipeline
 deps: [lem-proof-fresh-constant-elimination, lem-fresh-henkin-axiom-preserves-consistency, lem-derivation-finite-support-and-concatenation]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

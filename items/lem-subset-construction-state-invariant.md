@@ -2,7 +2,7 @@
 id: lem-subset-construction-state-invariant
 kind: lemma
 title: "Subset construction tracks exactly the reachable NFA state set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-subset-construction-dfa, def-extended-nfa-transition]
 proof_strategy: induction
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

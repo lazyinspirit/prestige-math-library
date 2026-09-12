@@ -13,6 +13,8 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

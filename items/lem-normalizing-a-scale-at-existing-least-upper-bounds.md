@@ -2,7 +2,7 @@
 id: lem-normalizing-a-scale-at-existing-least-upper-bounds
 kind: lemma
 title: Normalizing a scale at existing least upper bounds
-status: draft
+status: published
 origin: pipeline
 deps: [def-reduced-ordinal-products-and-scales, thm-pcf-aleph-omega-plus-one-scale, thm-transfinite-recursion, def-axiom-of-choice, thm-regularity-of-the-alephs, thm-cofinality-basics]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

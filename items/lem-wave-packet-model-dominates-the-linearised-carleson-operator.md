@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Wave packet model dominates the linearised carleson operator"
 deps: ["def-carleson-operator-and-measurable-linearisation", "def-carleson-tiles-wave-packets-and-tile-order", "cor-schwartz-convolution-and-product-transform-laws", "thm-fourier-inversion-on-schwartz-space", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-dominated-convergence", "thm-monotone-convergence-for-the-integral", "thm-complex-holder-minkowski-and-the-quotient-norm", "thm-layer-cake-formula-for-l-p-powers", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

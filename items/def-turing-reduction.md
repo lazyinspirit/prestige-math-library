@@ -2,13 +2,14 @@
 id: def-turing-reduction
 kind: definition
 title: "Turing reductions via oracle deciders"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-decidable-and-recognizable-language]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

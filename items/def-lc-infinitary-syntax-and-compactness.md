@@ -4,6 +4,7 @@ kind: "definition"
 title: "Infinitary syntax and compactness conventions"
 deps: ["def-set-structures-and-variable-assignments", "thm-recursion-on-well-founded-setlike-relations", "def-cardinal", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

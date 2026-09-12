@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: Lassueur–Farrell, Chapter 7, §29, Theorem 29.4 and proof
       url: https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload2.pdf
 proof_strategy: direct
-status: draft
+status: published
 origin: pipeline
 ---
 

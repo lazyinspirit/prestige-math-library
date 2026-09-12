@@ -2,7 +2,7 @@
 id: lem-rudin-internal-hull-tail-domination
 kind: lemma
 title: Internally increasing hulls dominate countable tail bounds
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ordinal-box-space, def-rudin-ambient-ordinal-box-space, lem-rudin-bounded-cofinality-hull-transfer, thm-regularity-of-the-alephs, def-axiom-of-choice, prop-cumulative-hierarchy-transitivity-and-growth]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

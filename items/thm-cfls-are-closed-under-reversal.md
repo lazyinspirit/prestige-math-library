@@ -2,7 +2,7 @@
 id: thm-cfls-are-closed-under-reversal
 kind: theorem
 title: "Context-free languages are closed under reversal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-context-free-grammar, def-language-generated-by-a-cfg, def-word-and-language-reversal, thm-derivation-parse-tree-correspondence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

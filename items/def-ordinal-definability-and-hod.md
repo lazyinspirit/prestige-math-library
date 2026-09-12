@@ -4,6 +4,7 @@ kind: "definition"
 title: "Ordinal definability and HOD"
 deps: ["lem-finite-tuple-satisfaction-is-absolute", "def-cumulative-hierarchy-stages", "prop-transitive-closure-minimality", "thm-montague-levy-finite-reflection"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

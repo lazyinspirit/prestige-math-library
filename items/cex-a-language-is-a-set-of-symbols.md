@@ -2,7 +2,7 @@
 id: cex-a-language-is-a-set-of-symbols
 kind: counterexample
 title: "The language $\\{01\\}$ is not a set of alphabet symbols"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-language-over-an-alphabet, fs-a-language-is-a-set-of-symbols]
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

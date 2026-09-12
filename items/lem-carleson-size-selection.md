@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Carleson size selection"
 deps: ["def-density-size-and-tree-count-for-carleson-tiles", "def-carleson-tiles-wave-packets-and-tile-order", "thm-plancherel", "def-axiom-of-choice", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

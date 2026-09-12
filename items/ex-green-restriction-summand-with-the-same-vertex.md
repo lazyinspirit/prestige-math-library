@@ -2,7 +2,9 @@
 id: ex-green-restriction-summand-with-the-same-vertex
 kind: example
 title: Green restriction summand with the same vertex
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [cor-green-correspondence-for-modules-of-vertex-exactly-p, thm-higman-criterion-for-relative-projectivity, def-vertex-and-source-of-an-indecomposable-module, def-axiom-of-choice]
 provenance:

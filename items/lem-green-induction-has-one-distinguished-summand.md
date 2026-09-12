@@ -2,13 +2,14 @@
 id: lem-green-induction-has-one-distinguished-summand
 kind: lemma
 title: Green induction has one distinguished summand
-status: draft
+status: published
 origin: pipeline
 deps: [thm-green-vertex-source-existence-and-conjugacy, def-green-exceptional-intersection-families, lem-green-exceptional-family-containment-and-fusion, lem-green-vertex-retention-and-inducing-lift, lem-green-mackey-intersections-force-proper-vertices, lem-green-restriction-has-one-distinguished-summand, lem-relative-projectivity-mackey-intersections-for-finite-modules, thm-krull-schmidt-for-finite-dimensional-kg-modules, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

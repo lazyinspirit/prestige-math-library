@@ -2,7 +2,9 @@
 id: thm-bpi-equivalent-to-boolean-filter-extension
 kind: theorem
 title: BPI is equivalent to extending proper Boolean filters
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [def-boolean-prime-ideal-principle, lem-boolean-quotient-congruence, lem-generated-boolean-filter-and-ultrafilter-tests]
 proof_strategy: direct

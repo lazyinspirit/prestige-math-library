@@ -5375,6 +5375,10 @@ by Gauss's lemma and Hopf–Rinow.
 
 ### B page — `geodesics-the-exponential-map-completeness-and-hopf-rinow-examples`
 
+**Additional B-page prerequisite:** published
+`the-fundamental-group-of-the-circle`, used by the shrinking-cusp
+noncontractibility argument in item 11.
+
 1. `ex-straight-lines-as-euclidean-geodesics` — **example** `[LL]`.
 2. `ex-great-circles-as-round-sphere-geodesics` — **example** `[LA]`.
 3. `ex-geodesics-of-a-riemannian-product` — **example** `[LL]`.

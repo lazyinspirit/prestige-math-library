@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Los schema for the universe ultrapower"
 deps: ["lem-lc-scott-quotients-are-sets-and-membership-is-setlike", "thm-lc-los-for-set-ultraproducts", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

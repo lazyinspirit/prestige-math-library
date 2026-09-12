@@ -2,7 +2,7 @@
 id: lem-state-elimination-preserves-path-language
 kind: lemma
 title: "State elimination preserves the language between every surviving state pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-generalized-nfa, def-gnfa-state-elimination, lem-denotation-is-structurally-well-defined]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

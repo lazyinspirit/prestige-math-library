@@ -6,7 +6,9 @@ deps: [cor-normalized-haar-probability-on-a-compact-group, thm-tychonoff, thm-rm
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 sources:
   references:

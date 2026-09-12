@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Measurable cardinals are weakly compact"
 deps: ["thm-lc-measurability-normal-measures-and-embeddings", "lem-lc-complete-measures-small-fibres-and-inaccessibility", "lem-lc-tree-partition-equivalence", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

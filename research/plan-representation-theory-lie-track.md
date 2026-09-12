@@ -119,9 +119,9 @@ requirements need not be repeated):
 | RL-10 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `verma-modules-and-shapovalov-forms`, `homomorphisms-between-verma-modules-and-linkage`, `category-o-finiteness-duality-and-blocks`, `projectives-standard-filtrations-and-bgg-reciprocity`, plus exact future localisation/$D$-module A suppliers | algebraic prefix may later split; Duflo landmarks remain non-items until a full proof route exists |
 | RL-11 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-bgg-resolution`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `derived-functors`, `ext-and-balanced-resolutions`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` | build-held until every A supplier is published |
 | RL-12 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-topology-of-euclidean-space` | tensor-quotient definition and extreme-value interface only; no B prerequisite |
-| RL-13 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-12 B prerequisite |
+| RL-13 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `finite-weyl-invariants-bruhat-and-kostant-harmonics` | the published Lie-owned finite root/string/Killing spine replaces the two still-empty DG page labels; no RL-12 B prerequisite |
 | RL-14 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `verma-modules-and-shapovalov-forms`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-13 B prerequisite |
-| RL-15 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `integrable-highest-weight-kac-moody-modules` | no RL-14 B prerequisite |
+| RL-15 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `affine-lie-algebras-and-loop-central-extensions`, `integrable-highest-weight-kac-moody-modules` | RL-13 supplies the affine root list, multiplicities and affine Weyl group; no B-page prerequisite |
 
 Apply the same rule to the new Phase-2 pair below: its B page requires only its
 companion and has no consumers. The published RL-3 B page must
@@ -163,12 +163,15 @@ Its B companion is
 has title “Finite Weyl Invariants, Bruhat Order, and Kostant Harmonics”, kind
 `A`, category `lie-theory`, and order `510.0002`; its B companion has the same
 title followed by “: Examples”, kind `B`, category `lie-theory`, and order
-`510.0004`. The A `requires` exactly
-`semisimple-lie-algebras-cohomology-and-levi-theory`,
-`cartan-subalgebras-and-root-space-decompositions`,
-`root-systems-dynkin-diagrams-and-cartan-killing-classification`, and
-`highest-weight-theory-for-complex-semisimple-lie-algebras`; never their B
-companions. The B `requires` exactly its A. Author in this order:
+`510.0004`. After its Phase-2 local finite-root and finite-semisimple expansion,
+the A `requires` exactly `polynomial-rings-and-roots`,
+`noetherian-rings-and-hilbert-basis`, `koszul-complexes-and-regular-sequences`,
+`rees-modules-artin-rees-and-hilbert-samuel-theory`,
+`depth-and-cohen-macaulay-modules`, `artinian-rings-and-length`,
+`diagonalisation-and-the-minimal-polynomial`, and
+`the-complex-exponential-and-eulers-formula`. These are the actual owners of
+its remaining external item dependencies; the empty DG pages are no longer
+page prerequisites. The B `requires` exactly its A. Author in this order:
 
 1. `def-bruhat-order-on-a-finite-weyl-group` (subword/cover definition and
    equivalence needed by the $A_2$ Verma example).
@@ -1319,6 +1322,13 @@ affine GCM/root system. Twisted types are stated with their finite-order
 automorphism construction but not classified again. Full treatments:
 Kleshchev §§6--8, pp.77--115 and Perrin §§12, 14, pp.101--110, 121--126.
 
+**Requires:** `kac-moody-algebras-from-generalized-cartan-matrices` and
+`finite-weyl-invariants-bruhat-and-kostant-harmonics`. The latter already
+publishes the finite semisimple Killing form, root/string structure, positive
+roots and normalized root vectors that this construction needs. In the
+`alpha_0` lemma below, finiteness and the root-string argument establish the
+unique highest root locally; no unbuilt DG pair is assumed.
+
 | id | kind and mathematical content | for / dependency role | statement provenance | proof provenance | source locator |
 |---|---|---|---|---|---|
 | `def-loop-algebra-of-a-simple-lie-algebra` | Definition: $L\mathfrak g=\mathfrak g\otimes\mathbb C[t,t^{-1}]$ with pointwise bracket. | Algebraic, not analytic, loop object. | literature-derived | not-applicable | Kleshchev §7.1, pp.91--92; Perrin §12.1, pp.101--102 |
@@ -1330,7 +1340,7 @@ Kleshchev §§6--8, pp.77--115 and Perrin §§12, 14, pp.101--110, 121--126.
 | `prop-the-derived-affine-algebra-omits-only-the-degree-derivation` | Proposition: $[\widehat{\mathfrak g},\widehat{\mathfrak g}]=L\mathfrak g\oplus\mathbb Cc$. | Distinguishes full and derived conventions. | literature-derived | ai-altered | Kleshchev §7.2, pp.95--98; Perrin §12.1, pp.104--105 |
 | `def-null-root-central-coroot-and-affine-level` | Definition: $\delta$ vanishes on finite Cartan and $c$ but has $\delta(d)=1$; the level of weight $\Lambda$ is $\Lambda(c)$. | Names imaginary direction and representation parameter. | literature-derived | not-applicable | Kleshchev §6.1, pp.77--82; Perrin §12.2, pp.105--107 |
 | `prop-roots-of-an-untwisted-affine-lie-algebra` | Proposition: real roots are $\alpha+n\delta$ and nonzero imaginary roots are $n\delta$, with multiplicities $1$ and $\operatorname{rank}\mathfrak g$. | Complete untwisted root list used by Weyl--Kac products. | literature-derived | ai-altered | Kleshchev §§6--7, pp.77--98; Perrin §12.2, pp.105--109 |
-| `lem-the-affine-simple-root-alpha-zero-is-delta-minus-the-highest-root` | Lemma: $\alpha_0=\delta-\theta$ with coroot determined by $c-\theta^\vee$ in the untwisted normalisation. | Matches loop and GCM presentations. | literature-derived | ai-altered | Kleshchev §6.1, pp.77--83; Perrin §12.2, pp.105--108 |
+| `lem-the-affine-simple-root-alpha-zero-is-delta-minus-the-highest-root` | Lemma: first derive the unique highest root $\theta$ from the supplied finite positive-root/string structure, then prove $\alpha_0=\delta-\theta$ with coroot determined by $c-\theta^\vee$ in the untwisted normalisation. | Matches loop and GCM presentations without an unbuilt highest-root supplier. | literature-derived | ai-altered | Kleshchev §6.1, pp.77--83; Perrin §12.2, pp.105--108 |
 | `thm-loop-and-affine-gcm-presentations-are-isomorphic` | Theorem: with $e_0=f_\theta\otimes t$, $f_0=e_\theta\otimes t^{-1}$ and the finite simple generators, the loop extension satisfies the untwisted affine GCM presentation. | Closes the two-construction seam. | literature-derived | ai-altered | Kleshchev §§6--7, pp.77--98; Perrin §12, pp.101--110 |
 | `prop-affine-weyl-group-is-a-coroot-lattice-semidir-product` | Proposition: $W_{\mathrm{aff}}\cong W_0\ltimes Q^\vee$ with translations realised by affine reflections. | Supplies orbit geometry for affine weights. | literature-derived | ai-altered | Kleshchev §6.2, pp.83--90; Perrin §12.3, pp.108--110 |
 | `def-evaluation-module-at-nonzero-loop-parameter` | Definition: pull a finite-dimensional $\mathfrak g$-module back along $x\otimes f\mapsto f(a)x$, with $c$ acting zero. | Supplies an important level-zero module family. | literature-derived | not-applicable | Kleshchev §7.2, pp.96--98; Perrin §12.1, pp.103--105 |

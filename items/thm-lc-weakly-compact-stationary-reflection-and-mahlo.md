@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Weak compactness implies stationary reflection and Mahloness"
 deps: ["def-lc-weakly-compact-cardinal", "lem-lc-nonreflection-regressive-injection", "lem-lc-inaccessible-size-and-rank-bounds", "thm-fodor-pressing-down", "def-axiom-of-choice", "prop-basic-stationary-set-calculus"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

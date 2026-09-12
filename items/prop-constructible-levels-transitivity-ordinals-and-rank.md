@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Transitivity, growth, ordinals and rank in L"
 deps: ["def-constructible-hierarchy-and-constructible-rank", "thm-ordinals-and-omega-are-absolute-in-transitive-models", "prop-cumulative-hierarchy-transitivity-and-growth"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,0 +1,605 @@
+[
+  {
+    "order": 620.2,
+    "id": "sat-tableaux-and-quantified-space-completeness",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "SAT Tableaux and Quantified-Space Completeness",
+    "companion": "sat-tableaux-and-quantified-space-completeness-examples",
+    "requires": [
+      "effective-numberings-reductions-resources-and-randomness",
+      "resource-bounds-and-machine-invariance",
+      "turing-machines-configurations-and-computation"
+    ],
+    "items": [
+      {
+        "id": "def-boolean-formulas-cnf-and-satisfiability-interface",
+        "kind": "definition",
+        "title": "Boolean formulas, CNF, and satisfiability",
+        "deps": [
+          "def-polynomial-time-verifier-and-reduction-interface"
+        ],
+        "statement": "Fix a total binary parser for Boolean formulas over variables x_0,x_1,... with connectives not, and, and or. Define assignments and recursive evaluation, literals, clauses, CNF, and k-CNF (clauses of size at most k), and let SAT and 3SAT be the languages of well-formed satisfiable formulas in the indicated forms; malformed strings are no-instances. Formula size counts symbols in this fixed encoding.",
+        "proof_strategy": "Give the parser, syntax tree, and evaluation recursion explicitly. The encoding makes variable and connective parsing polynomial time, and an assignment restricted to variables occurring in the formula is a polynomial-size certificate. Keep semantic equivalence distinct from the equisatisfiability used later.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-bounded-turing-computation-tableau-interface",
+        "kind": "definition",
+        "title": "Bounded Turing-computation tableaux",
+        "deps": [
+          "def-boolean-formulas-cnf-and-satisfiability-interface",
+          "def-polynomial-time-verifier-and-reduction-interface",
+          "def-turing-machine-configuration",
+          "def-one-step-configuration-relation",
+          "def-turing-machine-initial-and-halting-configuration-interface",
+          "thm-multitape-machines-have-one-tape-simulations",
+          "lem-multitape-simulation-has-quadratic-time-overhead"
+        ],
+        "statement": "For a fixed deterministic multitape verifier M, first take its published polynomial-overhead one-tape simulator. For input x, witness length p(|x|), and resulting time bound T(|x|), define a normalized accepting T-by-T tableau over a finite augmented alphabet. Its Boolean variables assert the unique symbol in each cell; its formula is the conjunction of exactly-one, initial-row, accepting-row, boundary, and constant-width local-transition clauses. A stationary accepting sink is added explicitly, and the semi-infinite left boundary is encoded rather than suppressed.",
+        "proof_strategy": "Apply the published fixed-machine one-tape simulation and its quadratic bound, so a polynomial-time multitape verifier still has a polynomial T. Normalize that one-tape machine so each row has one state/head marker, pad shorter accepting computations with the accepting sink, and note that at most T cells can be reached. Define one variable for each time, cell, and augmented symbol. List all clause types and use a fixed local window, with separate windows at cell zero. No draft simulation wrapper or configuration-graph theorem is imported.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3.2",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+        "kind": "lemma",
+        "title": "The tableau formula characterizes accepting computations",
+        "deps": [
+          "def-bounded-turing-computation-tableau-interface",
+          "def-one-step-configuration-relation",
+          "def-turing-machine-initial-and-halting-configuration-interface"
+        ],
+        "statement": "The bounded-tableau formula for M,x and its witness variables is satisfiable if and only if some permitted witness makes M accept x within T(|x|) steps. Every satisfying assignment determines one genuine row-by-row computation under the library's clamped left-boundary convention.",
+        "proof_strategy": "Forward, encode the symbols of an accepting computation and pad with the accepting sink. Reverse, exactly-one clauses decode each row; the initial and accepting clauses identify the endpoints. Induct on time. In each column, the relevant local window is legal, so the decoded next row agrees with the unique machine transition there; overlapping windows enforce global consistency, including the head cell and cell-zero boundary. Thus no spurious satisfying tableau is possible.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3.4, proof of Lemma 2.12",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "kind": "lemma",
+        "title": "Tableau formulas have polynomial-size polynomial-time CNF encodings",
+        "deps": [
+          "def-boolean-formulas-cnf-and-satisfiability-interface",
+          "def-bounded-turing-computation-tableau-interface",
+          "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations"
+        ],
+        "statement": "For fixed M and polynomial p,T, the tableau formula and an equisatisfiable CNF formula can be produced from x in polynomial time and have polynomial size. The conversion introduces one extension variable per nonliteral gate and constant-size clauses enforcing that gate; it preserves satisfiability in both directions, not literal logical equivalence over the enlarged variable set.",
+        "proof_strategy": "Count O(T^2) cells and constantly many variables and local patterns per cell; exactly-one clauses remain constant size because the alphabet is fixed. Enumerate all clauses with polynomial counters. For a general formula DAG, process gates bottom-up and conjoin constant-size equivalence clauses plus a unit output clause. Extending a satisfying assignment by gate values and restricting any satisfying extension proves equisatisfiability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3.2",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Kabanets, CMPT 710 Lecture 7, \u00a71",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l7.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cook-levin-sat-completeness-interface",
+        "kind": "theorem",
+        "title": "Cook-Levin: SAT is NP-complete",
+        "deps": [
+          "def-boolean-formulas-cnf-and-satisfiability-interface",
+          "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+          "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+          "def-polynomial-time-verifier-and-reduction-interface"
+        ],
+        "statement": "SAT is NP-complete under the fixed polynomial-time many-one reduction convention. More precisely, every verifier-defined language L has a polynomial-time map x to a well-formed CNF formula Phi_x such that x is in L if and only if Phi_x is satisfiable; malformed SAT encodings are no-instances.",
+        "proof_strategy": "Membership guesses the finite assignment and evaluates the parsed formula. For hardness, specialize the tableau construction to the fixed verifier for L, leaving witness-row symbols unconstrained except for syntax, and apply the polynomial CNF conversion. Correctness is the tableau lemma, and the size/construction lemma supplies the reduction bound. Handle finitely many malformed or very short source encodings explicitly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, Theorem 2.10",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Kabanets, CMPT 710 Lecture 7, Theorem 1",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l7.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-three-sat-completeness-interface",
+        "kind": "theorem",
+        "title": "3SAT is NP-complete",
+        "deps": [
+          "def-boolean-formulas-cnf-and-satisfiability-interface",
+          "thm-cook-levin-sat-completeness-interface"
+        ],
+        "statement": "3SAT, with clauses of size at most three under the fixed parser, is NP-complete. There is a polynomial-time equisatisfiable conversion from arbitrary CNF to 3-CNF using fresh variables, including explicit handling of clauses of sizes zero, one, and two.",
+        "proof_strategy": "Membership is inherited from SAT. Replace each clause of length m greater than three by the standard linear chain of m-2 clauses using fresh linking variables, and leave clauses of size at most three unchanged. Show extension from a satisfying original clause and conversely that the chain forces an original literal true. The empty clause stays empty. Sum the linear size and compose with Cook-Levin.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Kabanets, CMPT 710 Lecture 8, Theorem 3",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l8.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-polynomial-space-and-nondeterministic-polynomial-space",
+        "kind": "definition",
+        "title": "Polynomial space and nondeterministic polynomial space",
+        "deps": [
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-worst-case-time-and-space-complexity",
+          "def-uniform-asymptotic-time-space-comparison"
+        ],
+        "statement": "PSPACE is the union over integers k at least one of DSPACE(n^k), and NPSPACE is the analogous union of NSPACE(n^k), using the library's all-tape visited-cell measure and all-branch-halting convention. Fixed multiplicative constants and finitely many short inputs are absorbed by the existing O convention.",
+        "proof_strategy": "This is a notation interface over the published DSPACE and NSPACE definitions. Spell out that one fixed machine, exponent, and asymptotic constant witness membership, and that input-tape cells are counted; do not import Savitch's theorem or identify PSPACE with NPSPACE here.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, Definition 4.5",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-space-bounded-machine-configuration-count",
+        "kind": "lemma",
+        "title": "A space-bounded machine has exponentially many configurations",
+        "deps": [
+          "def-polynomial-space-and-nondeterministic-polynomial-space",
+          "def-multitape-and-nondeterministic-machines",
+          "def-turing-machine-configuration",
+          "def-turing-machine-initial-and-halting-configuration-interface"
+        ],
+        "statement": "For a fixed k-tape machine M and a single fixed input x of length n, configurations reachable using at most S visited cells have injective fixed-length binary encodings of length O_M(S+log(n+2)) and number at most 2^{O_M(S+log(n+2))}. The decoder may use x to recover its unchanged unvisited suffix; for S>=n this is 2^{O_M(S)}.",
+        "proof_strategy": "Fix one input. Encode canonical prefixes containing heads and changed cells, decoding unvisited input from that fixed input; count fields and handle S<k as an empty set. Never count configurations uniformly over all unvisited input suffixes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a74.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Kabanets, CMPT 710 Lecture 12, \u00a72",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l12.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-tqbf-pspace-completeness-interface",
+        "kind": "theorem",
+        "title": "TQBF is PSPACE-complete",
+        "deps": [
+          "def-boolean-formulas-cnf-and-satisfiability-interface",
+          "def-polynomial-space-and-nondeterministic-polynomial-space",
+          "lem-space-bounded-machine-configuration-count",
+          "def-multitape-and-nondeterministic-machines",
+          "def-one-step-configuration-relation",
+          "def-turing-machine-initial-and-halting-configuration-interface",
+          "def-polynomial-time-verifier-and-reduction-interface",
+          "lem-tableau-to-cnf-map-has-polynomial-size-and-time"
+        ],
+        "statement": "Define a closed quantified Boolean formula by a quantifier prefix followed by a Boolean matrix, with truth given recursively, and let TQBF contain exactly the well-formed true encodings (malformed strings are no-instances). TQBF is PSPACE-complete under polynomial-time many-one reductions. The hardness reduction produces polynomial-size formulas and uses only polynomial workspace.",
+        "proof_strategy": "Membership recursively evaluates the leading quantifier, reusing workspace between its children. For hardness, normalize a deterministic polynomial-space decider with a unique accepting sink and encode configurations locally. Let Reach_i(X,Y) express reachability within 2^i steps. Existentially choose midpoint Z, universally choose a selector bit and one fresh endpoint pair (U,V), constrain (U,V) to be either (X,Z) or (Z,Y), then invoke one copy of Reach_i(U,V). Induct on semantic correctness and polynomial formula-size/construction-space recurrences. Use the configuration count for the final depth. Build equality and one-step predicates directly from the finite transition table, not draft reachability items.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, Theorem 4.11",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            },
+            {
+              "title": "Kabanets, CMPT 710 Lectures 12-13, TQBF PSPACE-completeness",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l13.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 620.4,
+    "id": "sat-tableaux-and-quantified-space-completeness-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "SAT Tableaux and Quantified-Space Completeness: Examples",
+    "companion": "sat-tableaux-and-quantified-space-completeness",
+    "requires": [
+      "sat-tableaux-and-quantified-space-completeness"
+    ],
+    "items": [
+      {
+        "id": "ex-a-two-step-computation-tableau-and-its-local-clauses",
+        "kind": "example",
+        "title": "A two-step computation tableau and its local clauses",
+        "deps": [
+          "def-bounded-turing-computation-tableau-interface",
+          "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations"
+        ],
+        "statement": "For a fixed tiny machine that scans one bit and accepts after two transitions, write the complete three-row bounded tableau, including cell zero, and exhibit the exactly-one, initial, transition, and accepting clauses that its satisfying assignment meets.",
+        "proof_strategy": "Specify the machine table and input, list each augmented row symbol, translate representative interior and left-boundary windows into clauses, and evaluate them under the tableau assignment. Change one successor symbol to show the corresponding local clause fails.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3.2",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-tseitin-conversion-preserves-satisfiability",
+        "kind": "example",
+        "title": "A Tseitin conversion preserves satisfiability",
+        "deps": [
+          "lem-tableau-to-cnf-map-has-polynomial-size-and-time"
+        ],
+        "statement": "Convert the formula (x and not y) or z to CNF with one fresh variable per internal gate, display the clauses, and verify extension and restriction of satisfying assignments while noting that the enlarged CNF is not literally equivalent on all assignments to the fresh variables.",
+        "proof_strategy": "Name bottom-up gate values, write both implications for each equivalence and the output unit clause, then check both directions. Give one assignment to original variables and inconsistent extension variables to demonstrate the warned distinction.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Arora and Barak, Computational Complexity: A Modern Approach, \u00a72.3",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-qbf-reachability-recursion-space-accounting",
+        "kind": "example",
+        "title": "Space accounting for the QBF reachability recursion",
+        "deps": [
+          "lem-space-bounded-machine-configuration-count",
+          "thm-tqbf-pspace-completeness-interface"
+        ],
+        "statement": "For configuration codes of length m, expand the first two levels of the quantifier-reusing reachability formula and tabulate formula-size and construction-workspace recurrences, contrasting them with the exponentially duplicating naive midpoint recursion.",
+        "proof_strategy": "Write Reach_1 and Reach_2 with renamed bound variables. Count one recursive copy and O(m) equality/selector syntax per level to obtain O(mi) structural growth before fixed local matrix conversion, while a literal two-copy recurrence doubles. Show that a depth-first transducer stores only the level, renaming counters, and O(m) endpoint blocks.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Kabanets, CMPT 710 Lecture 13, \u00a71",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l13.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  },
+  {
+    "order": 626.2,
+    "id": "nondeterministic-recursive-padding-and-time-separation",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Nondeterministic Recursive Padding and Time Separation",
+    "companion": "nondeterministic-recursive-padding-and-time-separation-examples",
+    "requires": [
+      "effective-numberings-reductions-resources-and-randomness",
+      "resource-bounds-and-machine-invariance",
+      "robust-machine-models-and-universal-computation"
+    ],
+    "items": [
+      {
+        "id": "def-nondeterministic-acceptance-time-and-exact-clock",
+        "kind": "definition",
+        "title": "Nondeterministic acceptance time and exact clocks",
+        "deps": [
+          "def-nondeterministic-accepting-computation",
+          "def-dtime-ntime-dspace-and-nspace",
+          "def-worst-case-time-and-space-complexity",
+          "def-uniform-asymptotic-time-space-comparison",
+          "def-machine-time-and-space-constructibility"
+        ],
+        "statement": "For a finitely branching nondeterministic multitape machine N, define tau_N(x) as the length of its shortest accepting branch and infinity when none exists. Define acceptance within t, the t-cutoff language, and the corresponding acceptance-time class without requiring nonaccepting branches to halt. Separately, an exact clock for T is a deterministic machine halting after exactly T(n) transitions on every length-n input. Record the conversion running an acceptor beside such a clock to obtain the library's all-branch-halting NTIME convention with fixed linear overhead.",
+        "proof_strategy": "Extend the published one-tape existential acceptance definition to the published finite-valued multitape transition convention. The minimum exists for a nonempty set of accepting lengths. For clocking, use disjoint tapes and finite-control round robin: accept immediately on accept, otherwise reject when the clock halts. Prove preservation of the cutoff language and an O(n+T(n)) all-branch bound. Keep shortest acceptance and maximum branch time distinct.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, pp. 147-148",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+        "kind": "lemma",
+        "title": "Linear acceptance-time simulation on two tapes",
+        "deps": [
+          "def-nondeterministic-acceptance-time-and-exact-clock",
+          "def-multitape-and-nondeterministic-machines"
+        ],
+        "statement": "Every fixed finitely branching nondeterministic multitape machine M has a nondeterministic two-tape simulator S recognizing the same language and constants c,d with tau_S(x) at most c(tau_M(x)+|x|)+d whenever M accepts x. Conversely every accepting branch of S verifies a genuine accepting branch of M. The statement uses semi-infinite tapes and includes input-copy and left-boundary costs.",
+        "proof_strategy": "Guess finite scanned-symbol/state displays and actions, then physically replay each virtual tape on tape one while scanning the display on tape two. Maintain and erase a frontier track between the fixed number of passes. Prove language soundness and completeness and count O_M(n+t+1) steps.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, Lemma 3, pp. 149-150",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+        "kind": "lemma",
+        "title": "Prefix program codes admit linear nondeterministic universal simulation",
+        "deps": [
+          "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable"
+        ],
+        "statement": "There is an effective prefix-free code e for nondeterministic two-tape machines, decidable in O(|e|), and one nondeterministic two-tape universal machine U such that U on e x simulates M_e on x. For each fixed valid e there are c_e,d_e with tau_U(e x) at most c_e(|x|+tau_{M_e}(x))+d_e on accepted inputs, and U has no accepting branch on malformed codes or when M_e has none.",
+        "proof_strategy": "Use canonical payloads with a unary padding trailer whose length is the total decoder runtime; validate by advancing the trailer head alongside the decoder. Interpret two virtual block tapes on a fixed multitape interpreter, then normalize that one interpreter to two tapes. Track per-code constants.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, coding conditions (1)-(3), p. 152",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-time-controlled-self-reference-for-nondeterministic-machines",
+        "kind": "lemma",
+        "title": "Time-controlled self-reference for nondeterministic machines",
+        "deps": [
+          "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+          "thm-smn-for-the-fixed-acceptable-numbering",
+          "thm-kleene-fixed-point-theorem-for-program-indices"
+        ],
+        "statement": "Given an effective transformation that from prefix e produces a nondeterministic two-tape acceptor H_e with uniform finite compilation and the displayed interpreter bounds, one can effectively obtain e_0 whose accepted language is that of H_{e_0}. The construction preserves the explicit machine-dependent linear acceptance overhead needed by padding; equality is extensional and does not claim literal code equality.",
+        "proof_strategy": "Construct target-syntax literal compiler f and a two-tape Q which, given d on tape two, computes f(d), compiles H_f(d), and interprets it on preserved x. Set e0=f(code(Q)). Prove equality directly and bound fixed compiler work, O(n) preparation and nondeterministic interpretation separately; do not use deterministic dovetailing for a time bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, Lemma 6, p. 152",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+        "kind": "lemma",
+        "title": "Clocks, cutoffs, and finite unions preserve nondeterministic time bounds",
+        "deps": [
+          "def-nondeterministic-acceptance-time-and-exact-clock",
+          "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time"
+        ],
+        "statement": "For fixed nondeterministic acceptors A,B and exact clocks, cutoff, finite union, and finite intersection languages have explicit nondeterministic machines with shortest-acceptance bounds obtained by fixed linear rescaling and input-copy cost. Clocked versions halt on every branch and recognize the same cutoff languages. Constants are machine-dependent but input-independent.",
+        "proof_strategy": "For union select A or B; for intersection maintain two input copies, guess an accepting branch of each in sequence, and accept only after both. For cutoff interleave the acceptor with the deterministic exact clock, suppress late acceptances, and reject at expiry. Apply the two-tape simulator to normalize tape count. Prove both language directions and record min, sum, and fixed-factor bounds, including short inputs.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, Lemma 1 and clock discussion, pp. 148-149",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+        "kind": "lemma",
+        "title": "No recursive bound covers all recursive unary languages",
+        "deps": [
+          "def-nondeterministic-acceptance-time-and-exact-clock"
+        ],
+        "statement": "For every total recursive b:N to N there is a recursive unary language R not accepted within O(b(n)) shortest-acceptance time by any nondeterministic machine. No single recursive bound, even after arbitrary fixed multiplicative constants and finite exceptional lengths, covers all recursive unary languages.",
+        "proof_strategy": "Enumerate arbitrary finite tape counts and machine/constant pairs repeatedly at unbounded unary lengths. Exhaust the finite tree through c*b(n), take the opposite answer, and diagonalize beyond the competitor tail threshold. Treat b(n)=0 directly without absorbing exceptional lengths by division.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, Corollary 2.1, p. 148",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nondeterministic-recursive-padding-separation",
+        "kind": "theorem",
+        "title": "Nondeterministic recursive-padding separation",
+        "deps": [
+          "def-nondeterministic-acceptance-time-and-exact-clock",
+          "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+          "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+          "lem-time-controlled-self-reference-for-nondeterministic-machines",
+          "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+          "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+          "def-uniform-asymptotic-time-space-comparison"
+        ],
+        "statement": "Let T:N to N have an exact clock and satisfy T(n)>=n. There is a binary language L in the library's all-branch-halting NTIME(T) such that, for every total recursive a with a(n)>=n and a(n+1)=o(T(n)), L is not in NTIME(a). Constants implicit in both classes are fixed per machine. No monotonicity assumption beyond the shifted little-o condition is used.",
+        "proof_strategy": "Use one fixed L_T(U). Under a lower-bound acceptor assumption form V recognizing L(U), with fast acceptance on the cutoff. For each recursive unary R compile a self-referential padding acceptor. Prove the language identity downward from the decider-time padding, then the quantitative cutoff induction one padding symbol at a time, using fixed d, kappa, B0 and A(n+1)=o(T(n)). The bound m+1+sum_{j<=2m}T(j) would cover every recursive unary language; contradict the unary diagonal lemma. L itself is directly clocked.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, Theorem 4 and Corollary 4.1, pp. 152-155",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            },
+            {
+              "title": "Kabanets, CMPT 710 Lecture 10, Theorem 2",
+              "url": "https://www.cs.sfu.ca/~kabanets/710_2007/new_lectures/l10.pdf"
+            },
+            {
+              "title": "Vadhan, CS221 Lecture 6, Theorem 6",
+              "url": "https://people.seas.harvard.edu/~salil/cs221/fall02/scribenotes/oct2.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 626.4,
+    "id": "nondeterministic-recursive-padding-and-time-separation-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Nondeterministic Recursive Padding and Time Separation: Examples",
+    "companion": "nondeterministic-recursive-padding-and-time-separation",
+    "requires": [
+      "nondeterministic-recursive-padding-and-time-separation"
+    ],
+    "items": [
+      {
+        "id": "ex-nondeterministic-polynomial-logarithmic-time-separation",
+        "kind": "example",
+        "title": "A nondeterministic polynomial/logarithmic time separation",
+        "deps": [
+          "thm-nondeterministic-recursive-padding-separation"
+        ],
+        "statement": "For each fixed integer k>=2, there is a language in NTIME((n+1)^k) that is not in NTIME(ceil((n+1)^k/log_2(n+2))). Hence the latter nondeterministic time class is a proper subclass of the former under the library's all-branch convention.",
+        "proof_strategy": "Use the actual exact running-time function T_k of a fixed k-level nested-loop clock and verify T_k(n)=Theta((n+1)^k). Put a(n)=max(n,ceil((n+1)^k/log_2(n+2))). Then a is total recursive, a>=n, and a(n+1)=o(T_k(n)). Apply the theorem for nonmembership; invariance under constant factors identifies the resulting upper and lower classes with the displayed bounds. Since a=O((n+1)^k), reverse inclusion yields proper containment.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, Corollary 4.1, p. 155",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-shortest-acceptance-and-clocked-all-branch-halting",
+        "kind": "example",
+        "title": "Shortest acceptance versus clocked all-branch halting",
+        "deps": [
+          "def-nondeterministic-acceptance-time-and-exact-clock",
+          "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds"
+        ],
+        "statement": "Construct a nondeterministic acceptor with a one-step accepting branch and a diverging branch, compute its shortest acceptance time, and clock it to obtain an all-branch-halting machine for the same cutoff language. This separates the conventions without identifying their raw machine running times.",
+        "proof_strategy": "Give the two-choice machine explicitly. On the yes input one branch accepts and the other moves right forever, so shortest acceptance is one but worst-branch time is undefined. Product it with a small exact clock, enumerate product branches, and verify acceptance preservation and all-branch halting with fixed scheduling overhead.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Seiferas, Fischer, and Meyer, pp. 147-149",
+              "url": "https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

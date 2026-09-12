@@ -2,7 +2,9 @@
 id: lem-directed-progressive-products-have-club-continuous-chains
 kind: lemma
 title: Directed progressive products have club continuous chains
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [lem-progressive-products-and-true-cofinality-transfers, lem-club-continuity-produces-strongly-increasing-subsequences, lem-strong-increase-gives-bounding-projections, lem-bounding-projections-give-exact-upper-bounds, def-axiom-of-choice, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption]
 proof_strategy: direct

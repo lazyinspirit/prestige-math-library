@@ -2,7 +2,7 @@
 id: ex-cfg-to-pda-construction
 kind: example
 title: "Building a PDA for $\\{a^n b^n : n \\ge 0\\}$ from the standard grammar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-cfg-to-pda-construction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

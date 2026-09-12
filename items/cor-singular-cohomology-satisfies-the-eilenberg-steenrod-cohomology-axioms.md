@@ -2,7 +2,7 @@
 id: cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms
 kind: corollary
 title: Singular cohomology satisfies the Eilenberg Steenrod cohomology axioms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-naturality-of-the-singular-cohomology-pair-sequence, thm-excision-for-singular-cohomology, def-axiom-of-choice, def-singular-cochain-complex-with-coefficients, def-relative-singular-cochain-complex, def-prism-operator-for-a-homotopy, thm-singular-chain-homotopy-formula, thm-path-connected-implies-connected, lem-finite-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

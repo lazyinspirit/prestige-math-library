@@ -2,7 +2,7 @@
 id: lem-small-dowker-ladder-shrinking-obstruction
 kind: lemma
 title: Small Dowker ladder shrinking obstruction
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-ladder-topology, lem-small-dowker-ladder-normality, thm-countable-paracompactness-shrinking-criterion, thm-dowker-product-characterization, def-axiom-of-choice, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

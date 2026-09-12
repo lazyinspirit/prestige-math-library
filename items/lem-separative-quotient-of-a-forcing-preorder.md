@@ -2,7 +2,7 @@
 id: lem-separative-quotient-of-a-forcing-preorder
 kind: lemma
 title: Separative quotient and compatibility
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-preorder-compatibility-and-filter, def-equivalence-relation]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

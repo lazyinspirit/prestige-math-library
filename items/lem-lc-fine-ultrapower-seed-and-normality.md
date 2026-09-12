@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Fine ultrapower seeds and normality"
 deps: ["def-lc-fine-ultrafilters-strong-compactness-and-supercompactness", "thm-lc-countable-completeness-and-well-founded-ultrapowers", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

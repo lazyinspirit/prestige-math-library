@@ -15,6 +15,8 @@ sources:
   references:
     - title: "Arora–Barak §§1.2–1.3; local explicit uniform-constant and small-input conventions"
       url: https://theory.cs.princeton.edu/complexity/book.pdf
+verification:
+  audited: 2026-09-12
 ---
 
 ## Definition

@@ -2,7 +2,7 @@
 id: thm-small-dowker-conditional-aleph-one-constructions
 kind: theorem
 title: Conditional Dowker constructions of cardinality aleph one
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-luzin-stick-and-ad-principles, def-small-dowker-tight-strongly-unbounded-coloring, lem-small-dowker-ch-gives-luzin-set, lem-small-dowker-luzin-gives-tight-coloring, lem-small-dowker-coloring-gives-ad-guessing, lem-small-dowker-stick-gives-ad-guessing, def-small-dowker-ladder-topology, lem-small-dowker-ladder-normality, lem-small-dowker-ladder-shrinking-obstruction, thm-balogh-continuum-sized-zfc-dowker-space, thm-small-intersections-of-clubs, def-diamond-on-omega-one, def-ostaszewski-club-principle, prop-diamond-implies-ostaszewski-club, lem-limit-points-of-unbounded-sets, thm-cantor-powerset, def-axiom-of-choice, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-pumping-lemma-for-context-free-languages
 kind: theorem
 title: "The pumping lemma for context-free languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-height-and-yield-bound-for-cnf-trees, thm-chomsky-normal-form, thm-derivation-parse-tree-correspondence, def-language-generated-by-a-cfg]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

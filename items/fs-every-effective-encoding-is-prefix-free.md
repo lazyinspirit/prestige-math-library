@@ -2,7 +2,7 @@
 id: fs-every-effective-encoding-is-prefix-free
 kind: false-statement
 title: "FALSE: every effective encoding is prefix-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-effective-binary-encoding-and-decoder]
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

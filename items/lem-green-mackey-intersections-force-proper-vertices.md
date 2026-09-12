@@ -2,13 +2,14 @@
 id: lem-green-mackey-intersections-force-proper-vertices
 kind: lemma
 title: Green mackey intersections force proper vertices
-status: draft
+status: published
 origin: pipeline
 deps: [def-green-exceptional-intersection-families, lem-green-exceptional-family-containment-and-fusion, lem-relative-projectivity-mackey-intersections-for-finite-modules, thm-krull-schmidt-for-finite-dimensional-kg-modules, thm-green-vertex-source-existence-and-conjugacy, thm-higman-criterion-for-relative-projectivity, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

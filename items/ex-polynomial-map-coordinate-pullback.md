@@ -2,7 +2,9 @@
 id: ex-polynomial-map-coordinate-pullback
 kind: example
 title: "A polynomial map and its pullback on coordinate rings"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: ai-generated

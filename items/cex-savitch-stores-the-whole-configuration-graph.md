@@ -2,7 +2,7 @@
 id: cex-savitch-stores-the-whole-configuration-graph
 kind: counterexample
 title: "A Savitch recursion that never materializes the full configuration graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-savitch-stores-the-whole-configuration-graph]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

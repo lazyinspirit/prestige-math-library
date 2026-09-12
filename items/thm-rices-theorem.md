@@ -2,7 +2,7 @@
 id: thm-rices-theorem
 kind: theorem
 title: "Every nontrivial extensional property of Turing-machine languages is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computable-many-one-reduction, def-index-set-and-extensional-machine-property, lem-rice-witness-machine-construction, thm-machine-acceptance-is-undecidable]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

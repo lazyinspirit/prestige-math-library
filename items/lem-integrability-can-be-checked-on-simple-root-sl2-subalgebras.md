@@ -2,13 +2,14 @@
 id: lem-integrability-can-be-checked-on-simple-root-sl2-subalgebras
 kind: lemma
 title: Integrability can be checked on simple root sl2 subalgebras
-status: draft
+status: published
 origin: pipeline
 deps: [def-integrable-kac-moody-module, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, prop-kac-moody-root-spaces-are-finite-dimensional]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

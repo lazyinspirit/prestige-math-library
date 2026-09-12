@@ -2,7 +2,7 @@
 id: ex-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable
 kind: example
 title: "Running the basic regular-language decision procedures on small DFA's"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

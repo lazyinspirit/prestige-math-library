@@ -2,7 +2,7 @@
 id: thm-dfa-to-regular-expression
 kind: theorem
 title: "Every DFA language is denoted by a regular expression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-generalized-nfa, def-gnfa-state-elimination, lem-state-elimination-preserves-path-language, def-dfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

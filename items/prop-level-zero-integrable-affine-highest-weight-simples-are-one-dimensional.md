@@ -2,13 +2,14 @@
 id: prop-level-zero-integrable-affine-highest-weight-simples-are-one-dimensional
 kind: proposition
 title: Level zero integrable affine highest weight simples are one dimensional
-status: draft
+status: published
 origin: pipeline
 deps: [lem-affine-central-coroot-from-the-transpose-null-ray, lem-dominance-is-necessary-for-an-integrable-highest-weight-module]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "run": "phase-2-next-17",
+  "group": "f",
+  "decisions": [
+    {
+      "obligation": "authored:10:def-boolean-formulas-cnf-and-satisfiability-interface",
+      "id": "def-boolean-formulas-cnf-and-satisfiability-interface",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Definition-level review. Checked the binary prefix encoding (tags 000/001 constants, 010 variable with self-delimiting canonical numeral, 011 negation, 100/101 binary connectives, 110 clause list, 111 CNF list), the stack parser's rejection of unfinished trees, noncanonical numerals and trailing bits, the recursive evaluation semantics (negation 1-a, conjunction ab, disjunction max) on the finitely many occurring indices, and that malformed words belong to neither language. Boundaries verified: empty binary word malformed, zero-length clause false, empty conjunction true, variable-free true formula with the empty assignment, empty clause unsatisfiable, repeated and complementary literals allowed. The verifier/reduction convention cited is the published interface. No proof obligation, no AC use.",
+      "defect_ids": [],
+      "subject_sha256": "f0bab21f52b82fa4e79ffa7894912123c8e003d29536d18ffc178e6cc2b5957d"
+    },
+    {
+      "obligation": "authored:10:def-bounded-turing-computation-tableau-interface",
+      "id": "def-bounded-turing-computation-tableau-interface",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Definition reviewed against the published configuration, one-step, initial/halting, one-tape simulation and quadratic-overhead items. Verified: normalization to fixed-length certificates, T(n)>=2n+1+p(n)+1 and hence T(n) greater than the whole input length, augmented alphabet Q x Gamma, the tableau-only stationary extension of halting configurations, and the local allowed relation. For a genuine one-head row every window triple has exactly one allowed output (centre preserved; prescribed write with clamped left move at cell zero; arrival of a neighbour's head with target state and written symbol; halting freeze), while multiple heads, conflicting arrivals and exterior-marker heads are forbidden, so no spurious head or symbol can appear. Row zero is pinned to exactly one head including n=0, and cell W-1=T+1 stays blank because the head at time t<=T is at most t, so the right boundary cannot cut a genuine run. Full-window forbidden-tuple clauses are enumerated for every t<T and cell.",
+      "defect_ids": [],
+      "subject_sha256": "481888fc244c3e9ead89b31145a11e5a8f2b877cf643988a9ba1a3be64f7a978"
+    },
+    {
+      "obligation": "authored:10:lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+      "id": "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-3.1. Step 1.1 builds the assignment from a permitted certificate and a bounded accepting run and pads with the stationary halting row; every unit, one-hot, forbidden-window and the final accepting clause holds, with the head-position bound keeping cell T+1 blank. Step 1.2 decodes one symbol per cell by exactly-one and uses uniqueness of the local rule on genuine rows (at most one head per window, so the only allowed successor symbol is the padded successor). Step 2.1 iterates T times and deletes the repeated terminal rows to obtain an accepting computation of length at most T; step 3.1 covers empty input, empty certificates, the already-accepting-row case and the absence of any choice. Both directions checked.",
+      "defect_ids": [],
+      "subject_sha256": "90df31a347dcc5c6d123a40ef5ce5f6895194171a2b2923a332c0e953b31975d"
+    },
+    {
+      "obligation": "authored:10:lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+      "id": "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-3.1 and recomputed the bounds: a(T+1)(T+2) cell variables, one width-a clause and at most a(a-1)/2 binary clauses per cell, at most a^4 width-four update clauses per cell and t<T, O(T) pinning clauses, one accepting clause of width a(T+2), and literal indices of O(log(T+2)) bits, so the encoded formula and the enumeration time are polynomial in n because T is a fixed polynomial. Checked that the NOT, AND and OR clause patterns each enforce exactly the gate value in both directions, that constants and empty list connectives reduce to unit clauses, that the output wire is required by a unit clause, and that the tableau formula is already a conjunction of clauses. Degenerate cases: zero gates, lone literal or constant output, empty CNF true, empty clause false.",
+      "defect_ids": [],
+      "subject_sha256": "dccc264b2e0046d85e6459ddf310b9cddc94e5959754077158d1388ad07eafbb"
+    },
+    {
+      "obligation": "authored:10:thm-cook-levin-sat-completeness-interface",
+      "id": "thm-cook-levin-sat-completeness-interface",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-2.1. Step 1.1 verifies SAT in verifier-defined NP with the one-bit-per-distinct-variable certificate and polynomial parse/evaluation, malformed inputs rejected, the empty conjunction and true constant needing no witness bits and the empty clause and false constant never passing. Step 1.2 fixes the verifier, normalizes guarded certificates through the published length field, and derives x in L iff Phi_{M,x} satisfiable for every binary x with no promise on x. Step 2.1 outputs the CNF from the size lemma (total, always well formed), so the composition is a total polynomial many-one reduction and SAT is NP-hard; with 1.1 this is NP-completeness. Length zero covered by the enlarged polynomial bound.",
+      "defect_ids": [],
+      "subject_sha256": "4f654831e162cc2b590b210031eaa6d16536ba62a5131c81540b5ec7ec0ee644"
+    },
+    {
+      "obligation": "authored:10:thm-three-sat-completeness-interface",
+      "id": "thm-three-sat-completeness-interface",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-4.1. The clause chain for m>3 was checked in both directions: extending a true clause by y_j=1 iff l_1..l_{j+1} are all false satisfies the first, middle and last clauses, and conversely a false clause forces y_1=1, then all later y_j=1, so the last clause is false; m=4 has no middle clauses and the same argument applies. Clauses of size 0-3 are left unchanged (including empty clauses), fresh variables are used per clause, the replacement has m-2 clauses and linear literal count, and malformed CNF maps to a fixed CNF with an empty clause. Composition with Cook-Levin and the NP membership of 3SAT close NP-completeness.",
+      "defect_ids": [],
+      "subject_sha256": "3147b50042c3a9a67fc0976161348f9bd9ba99d75e1580e9196a7f71e1743b2e"
+    },
+    {
+      "obligation": "authored:10:def-polynomial-space-and-nondeterministic-polynomial-space",
+      "id": "def-polynomial-space-and-nondeterministic-polynomial-space",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Definition reviewed: PSPACE and NPSPACE as unions of the published all-tape DSPACE(n^k) and NSPACE(n^k) classes with one fixed finite-tape machine, one exponent and input-independent constants. Checked the imported conventions (deterministic decider; nondeterministic machine halting on every branch and accepting existentially), the finiteness argument for finitely branching all-halting trees (an infinite tree has a least-indexed child with infinitely many descendants, giving an infinite branch; no AC), the space accounting (initial head cells counted, unvisited input cells not), the O(n+1) cost of storing the input, and the invariance of the union under replacing a bound by C(n+1)^k dominating n+1. No PSPACE=NPSPACE claim is made.",
+      "defect_ids": [],
+      "subject_sha256": "50fa5fe9f507d6ac9cc63d02416bf03f4f27b087ec21550f4700a8e5380572cb"
+    },
+    {
+      "obligation": "authored:10:lem-space-bounded-machine-configuration-count",
+      "id": "lem-space-bounded-machine-configuration-count",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-3.1. Verified the injective fixed-length code built from the canonical prefix of each tape (least prefix containing the head and every cell whose content differs from its initial content), the field layout (state, k prefix-length and head-offset fields, concatenated prefixes, zero padding), decoding from the fixed input x plus blank suffixes, the length O_M(S+log(n+2)) and count 2^{O_M(S+log(n+2))}, and the simplification to O_M(S) and 2^{O_M(S)} when S>=n. Boundaries: S<k makes the bounded reachable set empty because all initial head cells are counted, empty input and blank-only data need no extra field, and no uniform code independent of x is claimed.",
+      "defect_ids": [],
+      "subject_sha256": "f04ec03f8846dfedf7764fbc3ae017433bdb3780d70e6e4e81419c10682a2b97"
+    },
+    {
+      "obligation": "authored:10:thm-tqbf-pspace-completeness-interface",
+      "id": "thm-tqbf-pspace-completeness-interface",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Critical item, all eight steps read. 1.1 verifies TQBF in polynomial space by recursive evaluation with at most N frames and a size-O(N^2) parsed representation, empty prefix evaluated directly. 1.2 builds the full-prefix configuration graph with validity, head offsets and tagged sink a_*; 2.1 writes the edge formula (instruction, target state, clamped offsets, written symbols, equality off the scanned cells), omits transitions leaving the S-cell interval, and adds accepting-to-sink edges, so reachable vertices are genuine configurations and a_* is reachable iff M accepts x. 3.1-4.1 verify in both directions that R_{i+1}=exists Z forall b,U,V (not G or R_i(U,V)) characterises paths of length at most 2^i; 5.1 bounds simple paths by 2^m; 6.1 verifies the prenex pull identity and the O(m^2 log(m+2)) encoded size; 7.1 verifies the 3CNF and 3DNF matrix variants (existential gates for F, universal gates for not F); 7.2/8.1 restate the generation in terms of the labelled input/output-excluding auxiliary-space convention with a constant number of O(log(n+2)) registers. Source check: Arora-Barak Theorem 4.11 (sec. 4.3) and Kabanets lectures 12-13 were read; the recurrence and prenex conversion are the standard ones.",
+      "defect_ids": [],
+      "subject_sha256": "63f34a2ba17ae2081723d3c0a086fdbbd50176942034751fe0f488bfafecb465"
+    },
+    {
+      "obligation": "authored:10:ex-a-two-step-computation-tableau-and-its-local-clauses",
+      "id": "ex-a-two-step-computation-tableau-and-its-local-clauses",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Checked the machine (q0,0)->(q1,0,R) and (q1,blank)->(qacc,blank,L) with the catch-all rejecting instructions, the one-bit input 0 as the n=0 encoding, the three rows for T=2 and W=4, the local windows of both transitions with the exterior marker at cell zero, the pinned right-guard cells, and the falsified clause: changing cell (1,0) to unmarked 1 makes the three-literal clause for (#,a0,B,1) false with all premises true. Consistent with the tableau definition and the correctness lemma; larger bounds pad by repeating the last row and blank columns.",
+      "defect_ids": [],
+      "subject_sha256": "a981b89f8727f66c62463b9cb9b142a12aecc98613f166dc7ab455f50d94f169"
+    },
+    {
+      "obligation": "authored:10:ex-tseitin-conversion-preserves-satisfiability",
+      "id": "ex-tseitin-conversion-preserves-satisfiability",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Checked F=(x and not y) or z with gates u=not y, v=x and u, w=v or z, and the nine listed clauses: the NOT pair, the AND triple, the OR triple and the output unit are exactly the size lemma's gate clauses. Verified both directions: the explicit extension u=1-y, v=xu, w=max(v,z) satisfies all nine clauses, while the first eight force the gate values and the ninth forces w=1, hence F=1. The witness (x,y,z)=(0,1,0) has forced gate values (0,0,0) and no satisfying extension, and step 2.1's observation that the enlarged formula is not equivalent to F on all six variables is correct.",
+      "defect_ids": [],
+      "subject_sha256": "9076b27f5758e30a1f94734bd94c3046a045f877c06f7f7090fcfb810fa67a68"
+    },
+    {
+      "obligation": "authored:10:ex-qbf-reachability-recursion-space-accounting",
+      "id": "ex-qbf-reachability-recursion-space-accounting",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Checked the four-vertex graph with edges 00->01 and 01->10, its E and R_0, the evaluation R_1(00,10)=1 through Z=01 (the two selected pairs satisfy R_0 and every other selector value makes the implication true), R_1(00,11)=0 by exhausting the four midpoints, and R_0(11,11)=1 from equality. The size comparison (3m+1 new bound bits per level; one-copy B+Cdm against duplicated 2^d B) and the depth-first workspace accounting (at most N variable bits, at most N frames with an O(log(N+2)) position and one saved bit, O(N^2) even if whole residuals are stored) were checked.",
+      "defect_ids": [],
+      "subject_sha256": "c348e48a36166d7daea14b2f8159be26f48fc0521b1a70a45ee1752dc3f515fe"
+    },
+    {
+      "obligation": "authored:10:def-nondeterministic-acceptance-time-and-exact-clock",
+      "id": "def-nondeterministic-acceptance-time-and-exact-clock",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Reviewed the definition and both conventions it keeps apart. tau_N(x) as the minimum accepting-branch length or infinity is well defined (finite branching, least length exists); acceptance within t and L_b(N) are machine-level notions distinct from the library's all-branch NTIME; an exact clock is a deterministic fixed multitape machine halting after exactly T(n) transitions on every binary input of length n, with nonhalting initial state, hence T(n)>=1. The cutoff machine checks acceptance at the initial instant and after each of the T(n) rounds, rejects at expiry, replaces stays by a two-move right/left excursion, and C sequential clock copies give the CT(n) cutoff. No monotonicity of T is imported and no arbitrary unclocked b is converted; the text states explicitly where it differs from the published maximum-branch convention.",
+      "defect_ids": [],
+      "subject_sha256": "e12e209963d9ab9ca9d0619c2b362d559c2cad6e94052955830930891046320a"
+    },
+    {
+      "obligation": "authored:10:lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+      "id": "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-5.1. The guess pass writes displays and allowed actions with state and instruction checks and permits divergence; the replay pass for each of the k virtual tapes compares the actual scanned symbol with that display component and executes that action component, with the clamped move at zero; tape one starts from the input and later passes from blank, and the erase frontier lies within max(|x|,t)+1 cells because a simulated head starts at cell zero and moves at most one cell per step, so the k passes and erasures cost c_M(|x|+t+1). Induction on j gives the soundness of every accepting branch, and a shortest accepting run supplies displays and actions passing every check, giving tau_S(x)<=c(|x|+tau_M(x))+d. Empty input and t=0 are covered by the same procedure.",
+      "defect_ids": [],
+      "subject_sha256": "cc15197458751a267f9b9aaab5a9323b82dffa0fdc15e76600843ede6b82a4dc"
+    },
+    {
+      "obligation": "authored:10:lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+      "id": "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-4.1. The adapted payload syntax (state and alphabet sizes plus finite instruction lists in lexicographic order) is parsed by a total machine D with exact running time r(d); e(d)=1^{|d|}0d1^{r(d)}0 is prefix-free (differing payload lengths put a zero against a one; equal lengths give equal payloads and a padding run that cannot be a proper prefix) and its validity is decided in O(|e|+1) time by running D one step per consumed padding symbol, rejecting early zeros, expiry, extra padding and trailing bits. The fixed interpreter translates the input into fixed-width blocks, costs a constant per simulated step and O_e(|x|+1) for the translation, and the two-tape simulation lemma is applied once, giving c_e(|x|+tau_{M_e}(x))+d_e. Empty data and invalid or incomplete prefixes are handled.",
+      "defect_ids": [],
+      "subject_sha256": "cf9b3e138b31fbfc06fa66045440b4673e22390bb95749bc9ac09910aca54185"
+    },
+    {
+      "obligation": "authored:10:lem-time-controlled-self-reference-for-nondeterministic-machines",
+      "id": "lem-time-controlled-self-reference-for-nondeterministic-machines",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-5.1. The explicit compiler f writes the literal code d on tape two and then executes d's table with that preset tape; Q computes f(d) and the total h(e), arranges h(e)x on tape one and runs the fixed interpreter; e_0=f(q) makes M_{e_0} run Q with d=q, so L(M_{e_0})=L(H_{e_0}) in both directions including empty languages. The time bound absorbs the fixed computations on q and the O_A(|x|+1) prefix shift, and the final specialization (prepend the literal e and run A) gives the tau_A(e_0x) form. The published s-m-n and fixed-point theorems enter only as extensional statements, and no deterministic dovetailing is concealed. Empty x is permitted.",
+      "defect_ids": [],
+      "subject_sha256": "071278f91cffc0cfffc11f63b9f79ca4cca29582c833c2ccf9a1e210b3c4f912"
+    },
+    {
+      "obligation": "authored:10:lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+      "id": "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-2.1. The union machine makes an initial finite choice and runs the selected machine on a copy of the input, so the faster accepting alternative gives O(n+min(tau_A,tau_B)+1) and divergent unselected branches do not matter; the intersection runs A first and continues with B on an untouched copy, giving O(n+tau_A+tau_B+1) by concatenating the two accepting instruction sequences. The cutoff simulation runs A and an exact clock in rounds, tests acceptance no later than the inclusive last round, rejects at expiry, and halts on every branch in O_A(n+T(n)+1); finite unions and intersections of clocked machines inherit all-branch halting. Step 2.1 correctly declines to claim all-branch halting for the two-tape normalization.",
+      "defect_ids": [],
+      "subject_sha256": "d71829004bc9c467ce609a8a6c7a14e5af8ff92e8c2add8ac054bd6c91794864"
+    },
+    {
+      "obligation": "authored:10:lem-no-recursive-bound-covers-all-recursive-unary-languages",
+      "id": "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Read 1.1-4.1. The enumeration assigns the nth triple (e,c,j) to length n by increasing e+c+j, so every pair (e,c) occurs at unbounded lengths; on input 1^n the deterministic procedure exhausts the finite tree of M_e to depth c*b(n) and answers the opposite of whether an accepting node occurs, which is recursive and handles b(n)=0. The diagonalization was checked in both cases: acceptance inside the bounded tree makes M_e accept a word excluded from R, and no acceptance forces membership in R although the supposed C*b(n)<=c*b(n) bound would put an accepting node in the tree. Arbitrary fixed machine constants and finite exceptional lengths are covered by the unbounded repetition of each pair, and no AC is used.",
+      "defect_ids": [],
+      "subject_sha256": "c122f3e93b10dfde5b53fb0b26808cc8ded3c0da5c140fce76e9e4a215ff69cc"
+    },
+    {
+      "obligation": "authored:10:thm-nondeterministic-recursive-padding-separation",
+      "id": "thm-nondeterministic-recursive-padding-separation",
+      "route": "item",
+      "verdict": "repaired",
+      "evidence": "Critical item; every step read, and the two repaired steps re-read afterwards. 1.1 derives L=L_T(U) in NTIME(T) and the A(n)=K(a(n)+n+1) shortest-acceptance bound for the union V of the assumed all-branch machine B and U, using L subset L(U) so L(V)=L(U), with A(n)>=n+1 and A(n+1)=o(T(n)). 1.2 builds H (parse e1^m0^k, bounded D simulation, otherwise guess k'>k and run V). 2.1 applies the two-tape simulation and the self-reference lemma to obtain e_0 and P=M_{e_0}, the two conditional estimates with constant d, and kappa from the universal machine. 3.1 proves w_k in L(P) iff 1^m in R by downward induction; the repaired 3.2 states and proves the step-down estimate tau_P(w_k)<=d(N_k+2+A(N_k+1)) (hence <=2dA(N_k+1)); 4.1 carries the bound induction (base range plus the now explicit step from k+1 to k) to tau_P(1^m)<=T(m+ell); 4.2 filters to unary and bounds the shortest acceptance by b(m)=m+1+sum_{j<=2m}T(j), which dominates T(m+ell) without monotonicity and contradicts F6, so no all-branch machine recognises L in O(a). Source note: the primary SFM URL is the owner-dropped 403 link and the two accessible lecture notes prove the hierarchy theorem under the stronger hypothesis of a time-constructible lower bound, so the item's generality rests on the local argument, which I followed step by step including the little-o and induction bookkeeping. Repaired steps 3.2 (truncated) and 4.1 (self-citation).",
+      "defect_ids": [
+        "p2-next17-5a-f-padding-step-truncated",
+        "p2-next17-5a-f-padding-self-citation"
+      ],
+      "repair_confidence": 1,
+      "subject_sha256": "4de2a593dffd8b92a5b376d4d40724ae969401f81dabff39aa99b4277e7c45ea"
+    },
+    {
+      "obligation": "authored:10:ex-nondeterministic-polynomial-logarithmic-time-separation",
+      "id": "ex-nondeterministic-polynomial-logarithmic-time-separation",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Checked the Theta((n+1)^k) exact clock built from k unary tapes and k nested loops with resets, with both input bits following the same scan instructions so T_k depends only on n; the effective definition of g(n)=ceil((n+1)^k/log_2(n+2)) as the least j with (n+2)^j>=2^{(n+1)^k}; and the little-o estimate a(n+1)/T_k(n)->0 for k>=2, whose first term needs k>=2, second term uses a bounded ratio of k-th powers against a diverging logarithm, and which also yields n=o(T_k(n)). The class comparisons use only O-robustness: NTIME(g) subset NTIME(a), the separating language is in NTIME(T_k)=NTIME((n+1)^k) and outside NTIME(a), and g<=(n+1)^k+1 gives the upper inclusion, so the containment is proper. n=0 checked.",
+      "defect_ids": [],
+      "subject_sha256": "e874a88ae895211de57eed25e356ce93fabc046cf0911bc3476a054612fede1e"
+    },
+    {
+      "obligation": "authored:10:ex-shortest-acceptance-and-clocked-all-branch-halting",
+      "id": "ex-shortest-acceptance-and-clocked-all-branch-halting",
+      "route": "item",
+      "verdict": "accepted",
+      "evidence": "Checked the four-state machine with the two options at q0 and the diverging q_infinity loop: on every input including the empty word the accepting branch has length one, so tau_N(x)=1 and the language is all binary words, while the q_infinity branch never halts, so N has no finite all-branch running time. The one-transition exact clock has T(n)=1, and the optimized two-branch cutoff machine halts on every branch in one step with language {x: tau_N(x)<=1}; the cutoff-zero language is empty, and step 3.1's point that the last-round acceptance test is essential is correct. Endpoints and the absence of AC verified.",
+      "defect_ids": [],
+      "subject_sha256": "2369e9a546f7d01b0cf5d3d7a49642ca7830a021d61c810473f6496b928d9c11"
+    },
+    {
+      "obligation": "authored:10:sat-tableaux-and-quantified-space-completeness",
+      "id": "sat-tableaux-and-quantified-space-completeness",
+      "route": "page",
+      "verdict": "accepted",
+      "evidence": "Page-level review against its nine items in manifest order: parser and SAT definition, tableau definition, decoding lemma, size lemma, Cook-Levin, 3SAT, PSPACE/NPSPACE definition, configuration counting and TQBF. The summary's claims (symbol-by-symbol decoding, separate polynomial construction bound, gate clauses over fresh variables, the clause chain including empty clauses, the all-tape visited-cell space convention, configuration counting with the fixed input suffix, explicit transition predicate and single-copy midpoint recurrence with both truth directions, prenex conversion and generation bounds, and the labelled auxiliary-space convention for restricted matrices) all match the proved items. Item order equals the manifest order and no unproved extra claim is introduced.",
+      "defect_ids": [],
+      "subject_sha256": "9c375e841804f6fdd1b472905033067358fa91fa22c2377c53b632b13d70f9ac"
+    },
+    {
+      "obligation": "authored:10:sat-tableaux-and-quantified-space-completeness-examples",
+      "id": "sat-tableaux-and-quantified-space-completeness-examples",
+      "route": "page",
+      "verdict": "accepted",
+      "evidence": "Page-level review: the three examples appear in the authoring order and the summary matches them (the two-transition tableau with a falsified local clause, the full Tseitin extension with an inconsistent extension separating equisatisfiability from equivalence, and the true and false quantified reachability instances with bound-variable and workspace counts). The frontmatter keeps items empty and lists exactly the three examples, matching the manifest and the item kinds.",
+      "defect_ids": [],
+      "subject_sha256": "acd3cf345f04a87a3e51aa04aae7bed6cc46f9f3114783b6f81a9dc4ad5bff2d"
+    },
+    {
+      "obligation": "authored:10:nondeterministic-recursive-padding-and-time-separation",
+      "id": "nondeterministic-recursive-padding-and-time-separation",
+      "route": "page",
+      "verdict": "accepted",
+      "evidence": "Page-level review against its seven items: shortest-acceptance and exact-clock definition, linear two-tape simulation, prefix coding and universal simulation, time-controlled self-reference, cutoff/union lemma, unary diagonal lemma and the main separation theorem. The summary states the shortest-acceptance versus all-branch distinction, the display/action verifier, the padded code and literal compiler, the union and cutoff timing guarantees, the two downward inductions with fixed machine constants, the single cutoff language in NTIME(T) outside every shifted little-o class without monotonicity, and effective finite constructions without AC, all of which match the proved items. Item order equals the manifest order.",
+      "defect_ids": [],
+      "subject_sha256": "11f809e15d36bb4525ddb9e7bb669cfd33a6e2ebcf03491b7a19c497228290cb"
+    },
+    {
+      "obligation": "authored:10:nondeterministic-recursive-padding-and-time-separation-examples",
+      "id": "nondeterministic-recursive-padding-and-time-separation-examples",
+      "route": "page",
+      "verdict": "accepted",
+      "evidence": "Page-level review: the two examples appear in order and the summary matches them (the nested-loop clock with the explicit shifted little-o inequality and both class inclusions, and the one-step accepting branch plus diverging branch with the cutoff-one and cutoff-zero endpoint discussion). The frontmatter keeps items empty and lists exactly the two examples, matching the manifest and the item kinds.",
+      "defect_ids": [],
+      "subject_sha256": "4fc83f2cf453a13f33ce3d0690ace07a574b227334b506dd311dac9cca8b6012"
+    }
+  ]
+}

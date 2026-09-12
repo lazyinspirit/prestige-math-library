@@ -2,7 +2,7 @@
 id: thm-universal-simulation-with-logarithmic-overhead
 kind: theorem
 title: "A universal simulator can realize T steps with machine-dependent O(T log T) overhead"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-effective-encoding-of-turing-machines, lem-machine-encoding-is-inject
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: ex-coordinate-cross-reducible
 kind: example
 title: "The coordinate cross V(xy) is reducible and its coordinate ring has zero divisors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps:
   - def-coordinate-ring-affine-algebraic-set
   - thm-zariski-closed-sets-affine-space
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-a-language-is-a-set-of-symbols
 kind: false-statement
 title: "FALSE: a language is a set of symbols"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-language-over-an-alphabet, def-computation-alphabet-and-word-conventi
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

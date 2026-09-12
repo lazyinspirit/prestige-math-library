@@ -2,7 +2,7 @@
 id: def-morphism-classical-varieties
 kind: definition
 title: "Morphisms of classical affine varieties"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Exercise 3.2.5"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

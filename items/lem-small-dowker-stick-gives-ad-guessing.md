@@ -2,7 +2,7 @@
 id: lem-small-dowker-stick-gives-ad-guessing
 kind: lemma
 title: "Stick gives strong diagonal almost-disjoint guessing"
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-luzin-stick-and-ad-principles, def-axiom-of-choice, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal, thm-transfinite-recursion, thm-diagonal-intersection-of-clubs]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

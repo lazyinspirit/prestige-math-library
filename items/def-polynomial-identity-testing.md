@@ -2,7 +2,9 @@
 id: def-polynomial-identity-testing
 kind: definition
 title: "Polynomial identity testing"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: literature-derived

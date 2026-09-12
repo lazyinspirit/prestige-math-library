@@ -2,7 +2,7 @@
 id: ex-majority-error-bound-from-chebyshev
 kind: example
 title: "A concrete majority-vote error estimate from Chebyshev's inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-majority-error-bound-from-chebyshev]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

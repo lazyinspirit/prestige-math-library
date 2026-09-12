@@ -2,7 +2,7 @@
 id: prop-singular-cohomology-is-contravariantly-functorial
 kind: proposition
 title: Singular cohomology is contravariantly functorial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cohomology-with-coefficients, def-singular-cochain-complex-with-coefficients, def-induced-singular-chain-map, lem-induced-singular-chain-maps-commute-with-boundaries]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-rice-witness-machine-construction
 kind: lemma
 title: "A nontrivial extensional property admits a uniform witness machine construction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-index-set-and-extensional-machine-property, def-turing-machine-acceptance-problem, def-effective-encoding-of-turing-machines, lem-finite-tuples-admit-effective-prefix-free-encodings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

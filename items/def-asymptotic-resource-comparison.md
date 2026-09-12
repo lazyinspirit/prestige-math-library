@@ -2,7 +2,7 @@
 id: def-asymptotic-resource-comparison
 kind: definition
 title: "Asymptotic comparison of resource bounds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-worst-case-time-and-space-complexity]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

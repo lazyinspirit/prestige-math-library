@@ -4,6 +4,7 @@ kind: "counterexample"
 title: "Chacon correlation subsequence prevents mixing"
 deps: ["def-chacon-three-cut-one-spacer-towers", "lem-chacon-tower-height-correlations-obstruct-mixing", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

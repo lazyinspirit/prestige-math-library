@@ -16,6 +16,8 @@ sources:
     - title: "Gallier §5.1, Theorem 5.1; specialization proof route"
       url: https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf
 proof_strategy: "direct"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

@@ -2,13 +2,14 @@
 id: def-dovetailing-schedule
 kind: definition
 title: "A dovetailing schedule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-sequence]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-index-set-and-extensional-machine-property
 kind: definition
 title: "Index sets and extensional properties of Turing-machine languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-effective-encoding-of-turing-machines, def-language-recognized-and-decided]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

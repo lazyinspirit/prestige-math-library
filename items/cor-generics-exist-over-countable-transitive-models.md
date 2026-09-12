@@ -4,6 +4,7 @@ kind: "corollary"
 title: "Generics over countable transitive models in ZF"
 deps: ["def-dense-open-sets-and-model-generic-filters", "thm-transfinite-recursion"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

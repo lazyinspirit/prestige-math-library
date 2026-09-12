@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Weak mixing is equivalent to absence of nonconstant eigenfunctions"
 deps: ["def-unitary-eigenfunction-for-a-probability-system", "lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace", "lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner", "lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces", "lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors", "thm-ergodicity-and-invariant-functions", "prop-mixing-correlations-extend-to-l-two", "def-strong-and-weak-mixing", "thm-tonelli-and-fubini-for-completed-product-measures", "thm-measure-preservation-on-a-generating-pi-system", "def-completion-of-a-measure-space", "lem-square-integrable-kernels-define-bounded-compact-integral-operators", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-pda-to-cfg-construction-preserves-unambiguity
 kind: proposition
 title: "If a PDA has at most one accepting computation on each word, the standard PDA-to-CFG construction is unambiguous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ambiguity-and-inherent-ambiguity, thm-pda-to-cfg-construction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

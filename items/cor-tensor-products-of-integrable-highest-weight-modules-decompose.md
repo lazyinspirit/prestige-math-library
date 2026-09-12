@@ -2,13 +2,14 @@
 id: cor-tensor-products-of-integrable-highest-weight-modules-decompose
 kind: corollary
 title: Tensor products of integrable highest weight modules decompose
-status: draft
+status: published
 origin: pipeline
 deps: [thm-complete-reducibility-of-integrable-kac-moody-o-modules, thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules, thm-universal-property-and-pbw-character-of-kac-moody-verma-modules, def-axiom-of-choice, def-kac-moody-category-o]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

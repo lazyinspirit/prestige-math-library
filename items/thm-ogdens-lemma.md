@@ -2,7 +2,7 @@
 id: thm-ogdens-lemma
 kind: theorem
 title: "Ogden's lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-marked-position-decomposition, def-language-generated-by-a-cfg, def-parse-tree-and-yield, thm-chomsky-normal-form, thm-derivation-parse-tree-correspondence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

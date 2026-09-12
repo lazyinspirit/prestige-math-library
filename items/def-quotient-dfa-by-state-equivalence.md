@@ -2,13 +2,14 @@
 id: def-quotient-dfa-by-state-equivalence
 kind: definition
 title: "The quotient DFA by state equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-right-language-and-equivalent-dfa-states, lem-state-equivalence-is-a-right-congruence, def-equivalence-relation, def-deterministic-finite-automaton, def-dfa-acceptance-and-recognized-language]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

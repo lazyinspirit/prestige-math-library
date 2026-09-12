@@ -2,7 +2,7 @@
 id: ex-three-sat-is-np-complete
 kind: example
 title: "Converting a small Boolean formula to equisatisfiable 3-CNF with extension variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-three-sat-is-np-complete, lem-tseitin-transformation-is-linear-size-and-equisatisfiable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "Weak mixing implies strong mixing"
 deps: ["def-chacon-three-cut-one-spacer-towers", "lem-chacon-tower-height-correlations-obstruct-mixing", "thm-chacon-transformation-is-weakly-mixing-but-not-mixing", "def-strong-and-weak-mixing", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-balogh-combinatorial-map
 kind: lemma
 title: Balogh combinatorial map
-status: draft
+status: published
 origin: pipeline
 deps: [def-balogh-finite-restriction-data, lem-balogh-countable-restriction-enumeration, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

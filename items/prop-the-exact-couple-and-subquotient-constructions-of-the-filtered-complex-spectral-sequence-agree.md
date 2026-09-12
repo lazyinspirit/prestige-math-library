@@ -14,6 +14,8 @@ sources:
   references:
     - title: "Weibel, Section 5.9, filtered-complex comparison"
       url: https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

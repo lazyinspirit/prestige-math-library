@@ -2,7 +2,7 @@
 id: def-dominant-morphism-and-rational-map
 kind: definition
 title: "Dominant morphisms and dominant rational maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry, Proposition 5.38"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

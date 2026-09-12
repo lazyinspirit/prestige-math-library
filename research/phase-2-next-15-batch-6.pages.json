@@ -1,0 +1,2869 @@
+[
+  {
+    "order": 475,
+    "id": "the-de-rham-theorem-and-degree",
+    "kind": "A",
+    "category": "differential-geometry",
+    "title": "The De Rham Theorem and Degree",
+    "companion": "the-de-rham-theorem-and-degree-examples",
+    "requires": [
+      "sard-theorem-and-transversality",
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "manifolds-with-boundary-collars-and-orientations",
+      "integration-of-forms-and-the-general-stokes-theorem",
+      "the-de-rham-complex-homotopy-and-mayer-vietoris",
+      "singular-cochains-mayer-vietoris-and-smooth-singular-comparison",
+      "singular-cohomology-and-coefficient-theorems",
+      "cup-cap-cross-products-and-cohomology-rings",
+      "orientations-poincare-lefschetz-and-alexander-duality",
+      "chain-complexes-and-homology",
+      "chain-homotopy-and-the-homotopy-category",
+      "long-exact-sequences-in-homology",
+      "free-modules-and-exact-sequences"
+    ],
+    "items": [
+      {
+        "id": "def-standard-orientation-of-the-affine-simplex",
+        "kind": "definition",
+        "title": "Standard orientation of the affine simplex",
+        "deps": [
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-orientation-of-a-simplex"
+        ],
+        "statement": "The ordered vertices orient Δ^k, and the induced orientation on the ith face is (-1)^i times the orientation from its ordered remaining vertices.",
+        "strategy": "Fix the affine basis v_1-v_0,…,v_k-v_0 and use the outward-normal-first boundary convention to compute the face signs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-integral-of-a-form-over-a-smooth-singular-simplex",
+        "kind": "definition",
+        "title": "Integral of a form over a smooth singular simplex",
+        "deps": [
+          "def-standard-orientation-of-the-affine-simplex",
+          "def-smooth-singular-simplex",
+          "lem-compactly-supported-riemann-integral-is-well-defined"
+        ],
+        "statement": "For a smooth singular k-simplex σ and k-form ω near its image, define ∫_σ ω=∫_{Δ^k}σ*ω; in degree zero this is evaluation at σ(v_0).",
+        "strategy": "Use affine coordinates on the simplex’s span and the published Jordan integral; the next lemma proves independence of the chosen positive affine identification.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-simplex-integrals-are-independent-of-affine-coordinate-identification",
+        "kind": "lemma",
+        "title": "Simplex integrals are independent of affine coordinate identification",
+        "deps": [
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "thm-change-of-variables-for-compact-jordan-sets"
+        ],
+        "statement": "The integral in the preceding definition is unchanged by replacing one orientation-preserving affine identification of aff(Δ^k) with another.",
+        "strategy": "Apply compact-Jordan change of variables; the constant positive determinant supplies exactly the coefficient-form transformation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-stokes-theorem-for-the-standard-simplex",
+        "kind": "lemma",
+        "title": "Stokes theorem for the standard simplex",
+        "deps": [
+          "def-standard-orientation-of-the-affine-simplex",
+          "def-integral-of-a-form-over-a-smooth-singular-simplex"
+        ],
+        "statement": "For k≥1 and a smooth (k-1)-form η near Δ^k, ∫_{Δ^k}dη=Σ_i(-1)^i∫_{Δ^{k-1}}δ_i*η.",
+        "strategy": "Expand η in affine coordinates, slice the polytope one coordinate at a time, apply one-variable FTC, and match every boundary term with the face orientation; this avoids any corners theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-stokes-theorem-for-smooth-singular-chains",
+        "kind": "theorem",
+        "title": "Stokes theorem for smooth singular chains",
+        "deps": [
+          "lem-stokes-theorem-for-the-standard-simplex",
+          "def-smooth-singular-chain-and-cochain-complexes"
+        ],
+        "statement": "For every finite smooth singular chain c and differential form ω of matching degree, ∫_c dω=∫_{∂c}ω.",
+        "strategy": "Apply simplex Stokes to every generator and sum coefficients; the alternating face boundary is precisely the signed face sum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-de-rham-integration-cochain-map",
+        "kind": "definition",
+        "title": "De Rham integration cochain",
+        "deps": [
+          "def-integral-of-a-form-over-a-smooth-singular-simplex",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "def-de-rham-cochain-complex"
+        ],
+        "statement": "Define I_M(ω)(σ)=∫_σ ω and extend linearly to smooth singular chains.",
+        "strategy": "Linearity makes I_M(ω) a smooth singular cochain; cochain compatibility is proved separately.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-de-rham-integration-is-a-cochain-map",
+        "kind": "theorem",
+        "title": "De Rham integration is a cochain map",
+        "deps": [
+          "def-de-rham-integration-cochain-map",
+          "thm-stokes-theorem-for-smooth-singular-chains"
+        ],
+        "statement": "For every form ω, δI_M(ω)=I_M(dω).",
+        "strategy": "Evaluate both sides on an arbitrary smooth simplex and invoke chain Stokes: δI(ω)(σ)=I(ω)(∂σ)=∫_σdω.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-the-de-rham-map-on-cohomology-is-well-defined",
+        "kind": "theorem",
+        "title": "The de Rham map on cohomology is well defined",
+        "deps": [
+          "thm-de-rham-integration-is-a-cochain-map",
+          "def-de-rham-cohomology"
+        ],
+        "statement": "Integration induces I_M:H^k_dR(M)→H^k_{sing,∞}(M;R) in every degree.",
+        "strategy": "A closed form integrates to a cocycle and replacing it by ω+dη changes its cochain by δI(η); print these calculations before passing to quotients.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-naturality-of-the-de-rham-map",
+        "kind": "proposition",
+        "title": "Naturality of the de Rham map",
+        "deps": [
+          "thm-the-de-rham-map-on-cohomology-is-well-defined",
+          "prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps",
+          "thm-pullback-induces-a-well-defined-map-on-de-rham-cohomology"
+        ],
+        "statement": "For every smooth F:M→N, I_M∘F*=F*∘I_N on forms, cochains, and cohomology.",
+        "strategy": "For each simplex σ, integrate σ*F*ω=(F∘σ)*ω; functoriality then descends the equality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains",
+        "kind": "lemma",
+        "title": "The de Rham map is an isomorphism on convex coordinate domains",
+        "deps": [
+          "prop-naturality-of-the-de-rham-map",
+          "thm-poincare-lemma-for-differential-forms-on-star-shaped-domains",
+          "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains"
+        ],
+        "statement": "On a nonempty convex Euclidean coordinate domain the de Rham map is an isomorphism in all degrees.",
+        "strategy": "Both theories are R in degree zero and vanish above zero: use the radial form homotopy and the smooth affine-prism contraction; integration sends 1 to the constant cocycle 1.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-the-de-rham-and-smooth-singular-mayer-vietoris-diagram-commutes-away-from-connectors",
+        "kind": "lemma",
+        "title": "The de Rham and smooth singular Mayer–Vietoris diagram commutes away from connectors",
+        "deps": [
+          "prop-naturality-of-the-de-rham-map",
+          "thm-mayer-vietoris-sequence-in-de-rham-cohomology",
+          "thm-smooth-singular-mayer-vietoris-sequence",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming AC_ω, for an ordered cover M=U∪V, the restriction and difference squares in the two Mayer–Vietoris sequences commute with de Rham integration.",
+        "strategy": "Check each component by restriction naturality, retaining the common V-U difference convention.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors",
+        "kind": "lemma",
+        "title": "The de Rham map commutes with Mayer–Vietoris connectors",
+        "deps": [
+          "lem-the-de-rham-and-smooth-singular-mayer-vietoris-diagram-commutes-away-from-connectors",
+          "prop-explicit-de-rham-mayer-vietoris-connecting-class",
+          "thm-smooth-singular-mayer-vietoris-sequence",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming AC_ω and the common ordered-cover sign convention, integration intertwines the de Rham and smooth-singular Mayer–Vietoris connecting homomorphisms.",
+        "strategy": "Choose the partition-of-unity lift (-ρ_Vω,ρ_Uω) and the basiswise singular lift. Evaluate their differentials simplexwise, subdivide subordinate to the cover, and construct the resulting lower-degree coboundary; verify the V-U sign explicitly.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-the-de-rham-map-is-an-isomorphism-on-a-two-open-union-when-it-is-on-the-pieces-and-intersection",
+        "kind": "theorem",
+        "title": "The de Rham map is an isomorphism on a two-open union",
+        "deps": [
+          "lem-the-de-rham-and-smooth-singular-mayer-vietoris-diagram-commutes-away-from-connectors",
+          "lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors",
+          "thm-five-lemma-for-modules",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming AC_ω, if the de Rham map is an isomorphism on U, V, and U∩V, then it is an isomorphism on U∪V.",
+        "strategy": "Place the two Mayer–Vietoris five-term segments in a commutative diagram, including the separately checked connectors, and apply the module five lemma.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-de-rham-theorem-for-smooth-singular-cohomology",
+        "kind": "theorem",
+        "title": "De Rham theorem for smooth singular cohomology",
+        "deps": [
+          "lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains",
+          "thm-the-de-rham-map-is-an-isomorphism-on-a-two-open-union-when-it-is-on-the-pieces-and-intersection",
+          "thm-countable-mayer-vietoris-open-set-principle",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming AC_ω, integration is a natural isomorphism H^k_dR(M)≅H^k_{sing,∞}(M;R) for every smooth manifold, including the published boundary variant.",
+        "strategy": "Verify the empty, rational-box and half-box cases, connector compatibility, and countable disjoint-union products, then apply the two-stage Euclidean-open/manifold principle.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology",
+        "kind": "corollary",
+        "title": "De Rham vector-space comparison with continuous singular cohomology",
+        "deps": [
+          "thm-de-rham-theorem-for-smooth-singular-cohomology",
+          "thm-smooth-and-continuous-real-singular-cohomology-agree"
+        ],
+        "statement": "Assuming AC_ω, integration followed by the smooth-to-continuous comparison is a natural linear isomorphism H^k_dR(M)≅H^k_sing(M;R) in every degree.",
+        "strategy": "Compose the natural smooth-singular de Rham isomorphism with the inverse of restriction from continuous to smooth singular cohomology, checking the contravariant naturality squares.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-de-rham-integration-respects-wedge-and-cup-in-cohomology",
+        "kind": "lemma",
+        "title": "De Rham integration respects wedge and cup in cohomology",
+        "deps": [
+          "def-singular-cup-product-on-cochains",
+          "thm-cup-product-leibniz-identity"
+        ],
+        "statement": "For closed forms α,β, the smooth singular cocycles I(α∧β) and I(α)∪I(β) differ by a coboundary, naturally in the manifold.",
+        "strategy": "Construct the standard natural bilinear degree -1 cochain homotopy on affine simplices, normalized in degree zero, and verify I(α∧β)-Iα∪Iβ=δK+K(dα,β)+(-1)^degαK(α,dβ). The AT-7 cochain convention is load-bearing and currently unavailable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel W. Robbin, The de Rham Theorem",
+              "url": "https://people.math.wisc.edu/~jwrobbin/751dir/deRham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-de-rham-theorem",
+        "kind": "theorem",
+        "title": "The de Rham theorem",
+        "deps": [
+          "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology",
+          "lem-de-rham-integration-respects-wedge-and-cup-in-cohomology",
+          "def-singular-cohomology-ring",
+          "thm-singular-cohomology-is-graded-commutative"
+        ],
+        "statement": "Assuming AC_ω, integration followed by smooth/continuous comparison is a natural graded-algebra isomorphism H*_dR(M)≅H*_{sing}(M;R) for every smooth manifold.",
+        "strategy": "Compose the two natural vector-space isomorphisms; use the preceding cochain homotopy for multiplicativity and the AT-7 graded-commutativity theorem to align the singular signs with wedge signs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            },
+            {
+              "title": "Joel W. Robbin, The de Rham Theorem",
+              "url": "https://people.math.wisc.edu/~jwrobbin/751dir/deRham.pdf"
+            }
+          ]
+        },
+        "landmark": true
+      },
+      {
+        "id": "cor-de-rham-cohomology-depends-only-on-the-underlying-homotopy-type",
+        "kind": "corollary",
+        "title": "De Rham cohomology depends only on the underlying homotopy type",
+        "deps": [
+          "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology",
+          "thm-de-rham-cohomology-is-smooth-homotopy-invariant",
+          "cor-singular-cohomology-is-homotopy-invariant"
+        ],
+        "statement": "Assuming AC_ω, homeomorphic or homotopy-equivalent underlying spaces have isomorphic real de Rham cohomology groups; for smooth homotopies this agrees with the direct de Rham homotopy operator.",
+        "strategy": "Transport along smooth/continuous singular comparison for topological homotopy equivalences, and compare with the direct smooth-homotopy result by naturality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-ring-form-of-the-de-rham-theorem-needs-the-singular-cup-product",
+        "kind": "remark",
+        "title": "The ring form of de Rham’s theorem needs the singular cup product",
+        "deps": [
+          "thm-de-rham-theorem",
+          "lem-de-rham-integration-respects-wedge-and-cup-in-cohomology"
+        ],
+        "statement": "The vector-space comparison alone does not imply multiplicativity; the ring form uses the exact AT-7 cup convention and the explicit wedge–cup comparison homotopy, with no compactness hypothesis.",
+        "strategy": "Record the load-bearing distinction and point to the separate compatibility lemma rather than attributing connector or product compatibility to naturality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel W. Robbin, The de Rham Theorem",
+              "url": "https://people.math.wisc.edu/~jwrobbin/751dir/deRham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-compactly-supported-de-rham-cochain-complex-and-cohomology",
+        "kind": "definition",
+        "title": "Compactly supported de Rham cohomology",
+        "deps": [
+          "def-compactly-supported-differential-form",
+          "def-de-rham-cochain-complex"
+        ],
+        "statement": "Because supp(dω)⊆supp(ω), compactly supported forms form a subcomplex Ω_c^•(M); define H_c^k(M) as its cohomology.",
+        "strategy": "Check the local vanishing implication for d and then take the ordinary cohomology of the subcomplex.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-proper-smooth-maps-pull-back-compactly-supported-forms",
+        "kind": "proposition",
+        "title": "Proper smooth maps pull back compactly supported forms",
+        "deps": [
+          "def-compactly-supported-de-rham-cochain-complex-and-cohomology"
+        ],
+        "statement": "If F:M→N is smooth and proper, then F* sends Ω_c^k(N) to Ω_c^k(M).",
+        "strategy": "Prove supp(F*ω)⊆F^{-1}(suppω); the right side is compact by the stated inverse-image definition of properness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps",
+        "kind": "proposition",
+        "title": "Compactly supported de Rham cohomology is contravariant for proper smooth maps",
+        "deps": [
+          "prop-proper-smooth-maps-pull-back-compactly-supported-forms",
+          "thm-pullback-induces-a-well-defined-map-on-de-rham-cohomology"
+        ],
+        "statement": "Proper smooth maps induce contravariant maps on compactly supported de Rham cohomology, compatible with identities and composition.",
+        "strategy": "Restrict the usual pullback cochain map to compact supports and repeat the cocycle/coboundary calculation; support inclusion proves functorial composition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-integration-descends-to-compactly-supported-top-de-rham-cohomology",
+        "kind": "theorem",
+        "title": "Integration descends to compactly supported top de Rham cohomology",
+        "deps": [
+          "def-compactly-supported-de-rham-cochain-complex-and-cohomology",
+          "def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold",
+          "cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero"
+        ],
+        "statement": "On an oriented boundaryless n-manifold, integration induces a linear map H_c^n(M)→R.",
+        "strategy": "Top-degree forms are closed and compactly supported exact top forms integrate to zero by general Stokes.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-zero-integral-compactly-supported-top-forms-on-euclidean-space-have-compactly-supported-primitives",
+        "kind": "lemma",
+        "title": "Zero-integral compactly supported top forms on Euclidean space have compactly supported primitives",
+        "deps": [
+          "thm-integration-descends-to-compactly-supported-top-de-rham-cohomology"
+        ],
+        "statement": "If ω∈Ω_c^n(R^n) and ∫ω=0, there is η∈Ω_c^{n-1}(R^n) with dη=ω; the n=0 case is interpreted separately.",
+        "strategy": "Induct by integrating the last coefficient in x_n and subtracting a normalized bump in x_n times the x_n-integral; the remaining (n-1)-variable coefficient has integral zero and is handled inductively. Track a product compact support at every step.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compactly-supported-top-cohomology-propagates-across-overlapping-oriented-coordinate-balls",
+        "kind": "lemma",
+        "title": "Compactly supported top cohomology propagates across overlapping oriented coordinate balls",
+        "deps": [
+          "lem-zero-integral-compactly-supported-top-forms-on-euclidean-space-have-compactly-supported-primitives",
+          "thm-integration-descends-to-compactly-supported-top-de-rham-cohomology"
+        ],
+        "statement": "For overlapping oriented coordinate balls, normalized compactly supported bump top forms represent the same ambient H_c^n class; any zero-integral form supported in one ball is ambiently exact with compact support.",
+        "strategy": "Choose a smaller oriented ball in the overlap and use Euclidean compact primitives to transfer each normalized bump to it; extend primitives by zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology",
+        "kind": "theorem",
+        "title": "Integration is an isomorphism on top compactly supported de Rham cohomology",
+        "deps": [
+          "lem-zero-integral-compactly-supported-top-forms-on-euclidean-space-have-compactly-supported-primitives",
+          "lem-compactly-supported-top-cohomology-propagates-across-overlapping-oriented-coordinate-balls",
+          "thm-integration-descends-to-compactly-supported-top-de-rham-cohomology"
+        ],
+        "statement": "For a nonempty connected oriented boundaryless n-manifold, ∫_M:H_c^n(M)→R is an isomorphism, in ZF.",
+        "strategy": "Surjectivity uses one normalized chart bump. For injectivity, cover the compact support by finitely many oriented charts, connect them to one base chart by finitely many paths and finite chains of overlapping balls, transfer every mass to the base, then apply the Euclidean zero-integral primitive. Only finite selections are made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        },
+        "landmark": true
+      },
+      {
+        "id": "cor-top-de-rham-cohomology-of-a-closed-connected-oriented-manifold-is-real",
+        "kind": "corollary",
+        "title": "Top de Rham cohomology of a closed connected oriented manifold is real",
+        "deps": [
+          "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology"
+        ],
+        "statement": "For a nonempty closed connected oriented n-manifold, integration identifies H_dR^n(M) with R.",
+        "strategy": "Compactness makes every form compactly supported, so the ordinary and compact-support complexes agree.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology",
+        "kind": "definition",
+        "title": "Degree of a proper smooth map by compact-support cohomology",
+        "deps": [
+          "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology",
+          "prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps"
+        ],
+        "statement": "For a proper smooth F:M^n→N^n between nonempty connected oriented boundaryless manifolds, deg(F) is the unique scalar satisfying ∫_M F*ω=deg(F)∫_Nω for every compactly supported top form ω.",
+        "strategy": "The pullback endomorphism between one-dimensional top compact-support cohomology groups is multiplication by a unique scalar; comparison with closed-manifold homological degree is postponed to the regular-value theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-degree-is-well-defined-and-independent-of-the-normalized-top-form",
+        "kind": "lemma",
+        "title": "Degree is well defined and independent of the normalized top form",
+        "deps": [
+          "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology"
+        ],
+        "statement": "The preceding scalar exists uniquely and equals ∫_M F*ω for every compactly supported ω on N with integral one.",
+        "strategy": "Use one-dimensionality on source and target and linearity; forms with equal integral differ by a compactly supported exact form.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-local-orientation-sign-of-a-regular-preimage",
+        "kind": "definition",
+        "title": "Local orientation sign of a regular preimage",
+        "deps": [
+          "def-local-orientation-of-a-regular-c-one-map",
+          "def-oriented-smooth-manifold-and-oriented-chart"
+        ],
+        "statement": "At a regular preimage p of a same-dimensional smooth map, sgn(dF_p) is +1 or -1 according as dF_p preserves or reverses the supplied orientations; in dimension zero compare determinant-line rays directly.",
+        "strategy": "Use oriented bases in positive dimension and the intrinsic two-ray definition in dimension zero, avoiding the vacuous 0×0 determinant.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-regular-value-formula-for-compact-support-degree",
+        "kind": "theorem",
+        "title": "Regular-value formula for compact-support degree",
+        "deps": [
+          "lem-degree-is-well-defined-and-independent-of-the-normalized-top-form",
+          "def-local-orientation-sign-of-a-regular-preimage",
+          "thm-transverse-preimage-theorem",
+          "prop-transversality-to-a-point-is-the-regular-value-condition"
+        ],
+        "statement": "If y is a regular value of a proper smooth F:M^n→N^n between nonempty connected oriented boundaryless manifolds, then F^{-1}(y) is finite and the compact-support degree is Σ_{p∈F^{-1}(y)}sgn(dF_p)∈Z.",
+        "strategy": "Properness makes the discrete regular fibre compact and hence finite. Choose a normalized top form in a coordinate ball about y, shrink to disjoint inverse-function neighborhoods of the fibre, and apply oriented change of variables on each branch; the pullback vanishes outside those neighborhoods and the local integrals sum with their orientation signs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-regular-value-formula-for-degree",
+        "kind": "theorem",
+        "title": "Regular-value formula for degree",
+        "deps": [
+          "thm-regular-value-formula-for-compact-support-degree",
+          "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-kronecker-evaluation-pairing",
+          "def-degree-of-a-map-between-oriented-closed-manifolds"
+        ],
+        "statement": "If y is a regular value of proper F:M^n→N^n, then F^{-1}(y) is finite and deg(F)=Σ_{p∈F^{-1}(y)}sgn(dF_p)∈Z; for closed manifolds this equals AT-8 homological degree.",
+        "strategy": "Use the preceding compact-support signed-count theorem. In the closed case carry the de Rham top class through the natural continuous-singular vector-space comparison and evaluate it on the AT-8 fundamental classes via the Kronecker pairing; AT-8's definition then identifies the scalar with homological degree.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-degree-is-an-integer-and-independent-of-the-regular-value",
+        "kind": "corollary",
+        "title": "Degree is an integer and independent of the regular value",
+        "deps": [
+          "thm-regular-value-formula-for-compact-support-degree"
+        ],
+        "statement": "Every regular fibre gives the same integer signed count, namely the compact-support degree.",
+        "strategy": "Apply the formula to any regular value; the left-hand degree was defined independently of a value.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-degree-is-multiplicative-under-composition",
+        "kind": "proposition",
+        "title": "Degree is multiplicative under composition",
+        "deps": [
+          "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology",
+          "prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps",
+          "prop-manifold-degree-is-functorial-and-detected-by-top-cohomology"
+        ],
+        "statement": "For composable proper smooth maps between connected oriented n-manifolds, deg(G∘F)=deg(F)deg(G); on closed manifolds this agrees with AT-8 functoriality.",
+        "strategy": "Evaluate (G∘F)*=F*G* on a normalized compactly supported top form and apply the defining scalar twice; identify the closed restriction using the AT-8 comparison.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+        "kind": "proposition",
+        "title": "Degree of an orientation-preserving or reversing diffeomorphism",
+        "deps": [
+          "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology",
+          "thm-change-of-variables-for-oriented-manifold-diffeomorphisms"
+        ],
+        "statement": "An orientation-preserving diffeomorphism has degree +1 and an orientation-reversing diffeomorphism has degree -1.",
+        "strategy": "Diffeomorphisms are proper and oriented change of variables gives the defining integral identity with the appropriate sign.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-degree-is-invariant-under-proper-smooth-homotopy",
+        "kind": "theorem",
+        "title": "Degree is invariant under proper smooth homotopy",
+        "deps": [
+          "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology",
+          "cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero"
+        ],
+        "statement": "If H:M×[0,1]→N is a proper smooth homotopy between proper maps F_0,F_1, then deg(F_0)=deg(F_1). Proper endpoints alone do not suffice.",
+        "strategy": "For compactly supported top ω, use the standard interval homotopy formula F_1*ω-F_0*ω=dKω; properness of H keeps Kω compactly supported, so its integral vanishes.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-a-nonzero-degree-map-to-a-connected-manifold-is-surjective",
+        "kind": "corollary",
+        "title": "A nonzero-degree map to a connected manifold is surjective",
+        "deps": [
+          "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology"
+        ],
+        "statement": "A proper smooth same-dimensional map of nonzero degree to a connected oriented target is surjective.",
+        "strategy": "First prove a proper map between manifolds is closed: intersect with a relatively compact target neighborhood, use compact inverse image, and project its closed compact image. If y is missed, choose a normalized compactly supported top form in a coordinate ball disjoint from that closed image; its pullback is zero, forcing degree zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-degree-of-the-antipodal-map-on-the-sphere",
+        "kind": "proposition",
+        "title": "Degree of the antipodal map on the sphere",
+        "deps": [
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism",
+          "prop-pointwise-orientation-sign-of-a-local-diffeomorphism"
+        ],
+        "statement": "For n≥1, the antipodal map on oriented S^n has degree (-1)^{n+1}.",
+        "strategy": "Compare the boundary orientation at x and -x: the ambient derivative has determinant (-1)^{n+1} after accounting for the reversed outward normal; then use the diffeomorphism degree.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-degree-of-the-power-map-on-the-circle",
+        "kind": "proposition",
+        "title": "Degree of the power map on the circle",
+        "deps": [
+          "lem-degree-is-well-defined-and-independent-of-the-normalized-top-form",
+          "def-circle-as-real-line-mod-integers"
+        ],
+        "statement": "For every integer m, z↦z^m on the oriented circle has degree m.",
+        "strategy": "Pull back the normalized angular form dθ/(2π); the lift θ↦mθ multiplies it by m, including m=0 and negative m.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-the-de-rham-map-is-a-cochain-map-without-stokes-on-simplices",
+        "kind": "false-statement",
+        "title": "The de Rham map is a cochain map without Stokes on simplices",
+        "deps": [
+          "thm-de-rham-integration-is-a-cochain-map"
+        ],
+        "statement": "False: simplex Stokes is exactly the identity δI=Id.",
+        "strategy": "Evaluate on one simplex to expose the equivalence, so omitting simplex Stokes leaves the cochain claim unproved.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-naturality-alone-implies-that-two-comparison-maps-commute-with-mayer-vietoris-connectors",
+        "kind": "false-statement",
+        "title": "Naturality alone gives Mayer–Vietoris connector compatibility",
+        "deps": [
+          "lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors"
+        ],
+        "statement": "False: ordinary restriction naturality does not by itself identify the lift-differential definitions of two connecting maps.",
+        "strategy": "Point to the explicit partition/basis lift comparison and its sign calculation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-the-de-rham-theorem-as-built-here-is-an-isomorphism-of-rings",
+        "kind": "false-statement",
+        "title": "The vector-space de Rham comparison is automatically a ring isomorphism",
+        "deps": [
+          "lem-de-rham-integration-respects-wedge-and-cup-in-cohomology",
+          "def-singular-cohomology-ring"
+        ],
+        "statement": "False: a vector-space comparison need not preserve products; wedge–cup compatibility is an additional cochain-homotopy obligation.",
+        "strategy": "Contrast the linear Mayer–Vietoris proof with the separate multiplicativity identity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel W. Robbin, The de Rham Theorem",
+              "url": "https://people.math.wisc.edu/~jwrobbin/751dir/deRham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-compactly-supported-cohomology-is-contravariant-for-every-smooth-map",
+        "kind": "false-statement",
+        "title": "Compactly supported cohomology is contravariant for every smooth map",
+        "deps": [
+          "prop-proper-smooth-maps-pull-back-compactly-supported-forms"
+        ],
+        "statement": "False: pullback need not preserve compact support unless an appropriate properness condition holds.",
+        "strategy": "Use a constant form supported near a point and a nonproper constant map whose inverse image of that support is noncompact.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-the-degree-of-a-proper-map-is-the-number-of-points-in-a-regular-fibre",
+        "kind": "false-statement",
+        "title": "Degree is the unsigned number of points in a regular fibre",
+        "deps": [
+          "thm-regular-value-formula-for-degree"
+        ],
+        "statement": "False: degree is the signed sum of local orientation signs.",
+        "strategy": "Exhibit two regular preimages with opposite signs, whose unsigned count is two but degree contribution is zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-a-homotopy-between-proper-maps-is-automatically-a-proper-homotopy",
+        "kind": "false-statement",
+        "title": "A homotopy between proper maps is automatically proper",
+        "deps": [
+          "thm-degree-is-invariant-under-proper-smooth-homotopy"
+        ],
+        "statement": "False: properness of the combined map M×[0,1]→N is an extra hypothesis.",
+        "strategy": "Use the explicit B-page endpoint example where points escape to infinity at intermediate parameter values.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 476,
+    "id": "the-de-rham-theorem-and-degree-examples",
+    "kind": "B",
+    "category": "differential-geometry",
+    "title": "The De Rham Theorem and Degree — Examples",
+    "companion": "the-de-rham-theorem-and-degree",
+    "requires": [
+      "the-de-rham-theorem-and-degree"
+    ],
+    "items": [
+      {
+        "id": "ex-de-rham-integration-cochain-on-a-smooth-path",
+        "kind": "example",
+        "title": "De Rham integration cochain on a smooth path",
+        "deps": [
+          "def-de-rham-integration-cochain-map"
+        ],
+        "statement": "For σ:[0,1]→M and a one-form ω, I(ω)(σ)=∫_0^1ω_{σ(t)}(σ'(t))dt.",
+        "strategy": "Pull back the form to the standard one-simplex and write its coefficient.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-chain-stokes-on-an-oriented-two-simplex",
+        "kind": "example",
+        "title": "Chain Stokes on an oriented two-simplex",
+        "deps": [
+          "thm-stokes-theorem-for-smooth-singular-chains"
+        ],
+        "statement": "For an oriented smooth two-simplex, the integral of dη equals the alternating integral over its three oriented edges.",
+        "strategy": "Expand ∂[v_0v_1v_2]=[v_1v_2]-[v_0v_2]+[v_0v_1] and apply chain Stokes.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-the-de-rham-map-on-the-angular-form",
+        "kind": "example",
+        "title": "The de Rham map on the angular form",
+        "deps": [
+          "def-de-rham-integration-cochain-map",
+          "prop-degree-of-the-power-map-on-the-circle"
+        ],
+        "statement": "The normalized angular one-form integrates to one on the positively oriented generator of S^1.",
+        "strategy": "Parametrize the circle once and compute the pullback dθ/(2π).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-the-local-de-rham-comparison-on-a-ball",
+        "kind": "example",
+        "title": "The local de Rham comparison on a ball",
+        "deps": [
+          "lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains"
+        ],
+        "statement": "On a Euclidean ball, the de Rham map is identity on constants and both sides vanish in positive degree.",
+        "strategy": "Display the radial contraction for forms and the affine prism for smooth singular chains.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-connector-compatibility-for-a-two-arc-cover-of-the-circle",
+        "kind": "example",
+        "title": "Connector compatibility for a two-arc cover of the circle",
+        "deps": [
+          "lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors"
+        ],
+        "statement": "For a two-arc cover of S^1, the signed overlap zero-cocycle and partition lift map to the same generator under the two connectors.",
+        "strategy": "Choose ordered arcs, write the V-U overlap values and compute the positive lift differential on both sides.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter S. Park, Proof of de Rham's Theorem",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-a-normalized-compactly-supported-top-form-on-euclidean-space",
+        "kind": "example",
+        "title": "A normalized compactly supported top form on Euclidean space",
+        "deps": [
+          "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology"
+        ],
+        "statement": "A product of normalized one-variable smooth bumps times dx_1∧…∧dx_n is a compactly supported top form of integral one.",
+        "strategy": "Use Fubini for the product coefficient and the standard orientation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-degree-of-a-reflection-of-a-sphere",
+        "kind": "example",
+        "title": "Degree of a reflection of a sphere",
+        "deps": [
+          "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism"
+        ],
+        "statement": "Reflection in one ambient coordinate restricts to an orientation-reversing diffeomorphism of S^n and has degree -1.",
+        "strategy": "Compare outward-normal-first oriented bases and apply the diffeomorphism formula.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-degree-of-z-to-the-m-on-the-circle-from-a-regular-value",
+        "kind": "example",
+        "title": "Degree of z to the m on the circle from a regular value",
+        "deps": [
+          "thm-regular-value-formula-for-compact-support-degree",
+          "prop-degree-of-the-power-map-on-the-circle"
+        ],
+        "statement": "For m≠0 every regular value of z↦z^m has |m| preimages, all with sign sgn(m), so the signed count is m.",
+        "strategy": "List the lifted angles and differentiate θ↦mθ.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-a-two-sheeted-orientation-preserving-cover-has-degree-two",
+        "kind": "example",
+        "title": "A displayed two-sheeted orientation-preserving covering has degree two",
+        "deps": [
+          "thm-regular-value-formula-for-compact-support-degree"
+        ],
+        "statement": "For the displayed proper local diffeomorphism with exactly two orientation-preserving sheets, every fibre contributes +1+1 and the degree is two.",
+        "strategy": "Verify directly for this map that the two inverse branches are orientation preserving; no general covering theorem is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-map-with-two-preimages-but-degree-zero",
+        "kind": "counterexample",
+        "title": "A map with two preimages but degree zero",
+        "deps": [
+          "thm-regular-value-formula-for-compact-support-degree"
+        ],
+        "statement": "The smooth proper map F:S^1→S^1 given by F(e^{iθ})=e^{i sin θ} has the regular value 1 with exactly two preimages and opposite local signs, hence degree zero.",
+        "strategy": "The equation sin θ=0 modulo 2π has exactly θ=0,π because sin θ∈[-1,1]. In oriented angular coordinates the derivative is cos θ, giving signs +1 and -1; compactness makes F proper.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-proper-endpoint-homotopy-that-is-not-a-proper-combined-map",
+        "kind": "counterexample",
+        "title": "Proper endpoint maps joined by a nonproper combined homotopy",
+        "deps": [
+          "thm-degree-is-invariant-under-proper-smooth-homotopy"
+        ],
+        "statement": "There are proper smooth maps F_0,F_1:R→R and a smooth homotopy H between them whose combined map R×[0,1]→R is not proper.",
+        "strategy": "Take H(x,t)=(2t-1)^2x on R×[0,1]. Both endpoint maps are the identity and hence proper, but H^{-1}({0}) contains the noncompact set R×{1/2}, so the combined homotopy is not proper.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nonzero-degree-forces-surjectivity-on-closed-oriented-manifolds",
+        "kind": "example",
+        "title": "Nonzero degree forces surjectivity on closed oriented manifolds",
+        "deps": [
+          "cor-a-nonzero-degree-map-to-a-connected-manifold-is-surjective"
+        ],
+        "statement": "A closed oriented same-dimensional map computed to have nonzero degree cannot omit any target point.",
+        "strategy": "Assume a missed point, support a normalized top form in a small chart around it, and obtain zero pullback, contradicting the degree.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robbin–Salamon, Introduction to Differential Topology",
+              "url": "https://zaco.au/lib/math/text/differential-geometry/difftop.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 481,
+    "id": "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+    "kind": "A",
+    "category": "differential-geometry",
+    "title": "Geodesics the Exponential Map Completeness and Hopf Rinow",
+    "companion": "geodesics-the-exponential-map-completeness-and-hopf-rinow-examples",
+    "requires": [
+      "euclidean-ordinary-differential-equations-with-smooth-dependence",
+      "vector-fields-flows-and-lie-derivatives",
+      "riemannian-metrics-length-distance-and-volume",
+      "connections-levi-civita-and-parallel-transport",
+      "compactness",
+      "completeness-and-uniform-continuity"
+    ],
+    "items": [
+      {
+        "id": "rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow",
+        "kind": "remark",
+        "title": "Boundaryless convention for geodesic flow and Hopf–Rinow",
+        "deps": [
+          "def-riemannian-metric-and-riemannian-manifold",
+          "def-topological-manifold-without-boundary"
+        ],
+        "statement": "Throughout this page, geodesic flow, exponential maps, geodesic completeness, and Hopf–Rinow are asserted for smooth manifolds without boundary. Metric statements explicitly about an embedded submanifold may still allow boundary. Without this convention a compact interval is metric-complete but its outward geodesics have no two-sided continuation inside the interval.",
+        "strategy": "Record the scope convention before the geodesic definition; boundary variants require inward/tangent initial data, doubling, or a different completeness notion and are not silently inferred.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            },
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-geodesic-of-an-affine-connection",
+        "kind": "definition",
+        "title": "Geodesic of an affine connection",
+        "deps": [
+          "rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow",
+          "def-covariant-derivative-along-a-curve",
+          "def-affine-connection-on-a-smooth-manifold"
+        ],
+        "statement": "On a smooth manifold without boundary, a smooth curve γ is an affinely parametrized geodesic when D_tγ'=0.",
+        "strategy": "Use the intrinsic covariant derivative along a curve; constant curves are included.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection",
+        "kind": "proposition",
+        "title": "Geodesics have constant speed for a metric-compatible connection",
+        "deps": [
+          "def-geodesic-of-an-affine-connection",
+          "def-metric-compatible-connection-on-a-riemannian-vector-bundle"
+        ],
+        "statement": "For a metric-compatible connection, g(γ',γ') is constant along every geodesic.",
+        "strategy": "Differentiate the squared speed using metric compatibility and substitute D_tγ'=0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-coordinate-geodesic-equation",
+        "kind": "proposition",
+        "title": "Coordinate geodesic equation",
+        "deps": [
+          "def-geodesic-of-an-affine-connection",
+          "def-christoffel-symbols-of-an-affine-connection"
+        ],
+        "statement": "In coordinates a curve is geodesic iff x¨^k+Γ^k_{ij}(x)x˙^i x˙^j=0 for every k.",
+        "strategy": "Expand D_t(x˙^j∂_j) with the connection Leibniz rule.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-geodesic-spray",
+        "kind": "definition",
+        "title": "Geodesic spray",
+        "deps": [
+          "prop-coordinate-geodesic-equation"
+        ],
+        "statement": "The geodesic spray on TM has local expression v^i∂_{x^i}-Γ^k_{ij}(x)v^iv^j∂_{v^k}.",
+        "strategy": "Define it in induced tangent-bundle coordinates; coordinate independence is the next obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm",
+        "kind": "lemma",
+        "title": "The geodesic spray is a well-defined smooth vector field on TM",
+        "deps": [
+          "def-geodesic-spray",
+          "thm-christoffel-symbol-transformation-law"
+        ],
+        "statement": "The local spray formulas agree on overlaps and define a smooth vector field whose integral curves are exactly velocity lifts of geodesics.",
+        "strategy": "Differentiate the tangent-coordinate transformation, insert the Christoffel transformation law, and identify the resulting first-order system with the intrinsic geodesic equation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+        "kind": "theorem",
+        "title": "Existence uniqueness and smooth dependence of geodesics",
+        "deps": [
+          "lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm",
+          "thm-unique-maximal-integral-curve-through-each-point",
+          "thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves"
+        ],
+        "statement": "For every (p,v)∈TM there is a unique maximal geodesic γ_{p,v}, and (t,p,v)↦γ_{p,v}(t) is smooth on an open domain.",
+        "strategy": "Apply the maximal-flow theorem to the spray and project its integral curve; the velocity component proves the prescribed initial data and the coordinate equation proves the converse.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic",
+        "kind": "proposition",
+        "title": "Affine reparametrization of a geodesic is a geodesic",
+        "deps": [
+          "def-geodesic-of-an-affine-connection"
+        ],
+        "statement": "If γ is geodesic and at+b stays in its domain, t↦γ(at+b) is geodesic; its speed is |a| times the original speed.",
+        "strategy": "Apply the covariant chain rule twice, obtaining D_t(γ∘ℓ)'=a²(D_sγ')∘ℓ.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-geodesic-scaling-identity",
+        "kind": "lemma",
+        "title": "Geodesic scaling identity",
+        "deps": [
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic"
+        ],
+        "statement": "γ_{p,av}(t)=γ_{p,v}(at) wherever both sides are defined.",
+        "strategy": "The two curves solve the same initial-value problem at zero, so uniqueness identifies them on the common interval.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-geodesically-complete-riemannian-manifold",
+        "kind": "definition",
+        "title": "Geodesically complete Riemannian manifold",
+        "deps": [
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics"
+        ],
+        "statement": "A boundaryless Riemannian manifold is geodesically complete when every maximal geodesic is defined on all of R.",
+        "strategy": "Quantify over every initial vector, including zero; componentwise interpretation handles disconnected manifolds.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-domain-and-exponential-map-of-a-connection",
+        "kind": "definition",
+        "title": "Domain and exponential map of a connection",
+        "deps": [
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics"
+        ],
+        "statement": "Let E={v∈TM:1∈I_v}; define exp(v)=γ_v(1) and exp_p as its restriction to E∩T_pM.",
+        "strategy": "Use maximal geodesic domains, so no global completeness is presumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth",
+        "kind": "theorem",
+        "title": "The exponential domain is open and the exponential map is smooth",
+        "deps": [
+          "def-domain-and-exponential-map-of-a-connection",
+          "thm-fundamental-theorem-on-flows"
+        ],
+        "statement": "E is open in TM and exp:E→M is smooth.",
+        "strategy": "The spray’s maximal flow domain is open; intersect it with time 1 and project the smooth flow.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-exponential-map-scales-geodesic-time",
+        "kind": "proposition",
+        "title": "The exponential map scales geodesic time",
+        "deps": [
+          "def-domain-and-exponential-map-of-a-connection",
+          "lem-geodesic-scaling-identity"
+        ],
+        "statement": "Whenever defined, exp_p(tv)=γ_{p,v}(t).",
+        "strategy": "Apply scaling with γ_{p,tv}(1)=γ_{p,v}(t).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-the-differential-of-exp-p-at-zero-is-the-identity",
+        "kind": "theorem",
+        "title": "The differential of exp at zero is the identity",
+        "deps": [
+          "prop-exponential-map-scales-geodesic-time",
+          "thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth"
+        ],
+        "statement": "Under T_{0_p}(T_pM)≅T_pM, d(exp_p)_{0_p}=id.",
+        "strategy": "Differentiate s↦exp_p(sw)=γ_{p,w}(s) at s=0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+        "kind": "lemma",
+        "title": "Choice-free smooth inverse function theorem in Euclidean space",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-invertible-euclidean-linear-map",
+          "lem-newton-contraction-near-an-invertible-derivative",
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "def-total-derivative-in-euclidean-space",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "statement": "In ZF, a smooth map between positive finite-dimensional Euclidean open sets with invertible derivative at a point restricts to a diffeomorphism between neighborhoods of that point and its image.",
+        "strategy": "Normalize the derivative and use the Newton contraction on a closed Euclidean ball. Prove that ball complete directly: a Cauchy sequence converges in Euclidean space and the norm inequality keeps its limit in the ball. Banach iteration gives the unique local inverse without a selection. The estimate makes the inverse continuous; differentiating f(g(y))=y gives Dg=(Df∘g)^{-1}, and induction on derivatives bootstraps g from C1 to smooth.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-existence-of-normal-neighborhoods",
+        "kind": "theorem",
+        "title": "Existence of normal neighborhoods",
+        "deps": [
+          "thm-the-differential-of-exp-p-at-zero-is-the-identity",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
+        ],
+        "statement": "For every p, exp_p is a diffeomorphism from a star-shaped neighborhood of 0 in T_pM onto a neighborhood of p.",
+        "strategy": "In positive dimension apply the choice-free Euclidean inverse lemma in linear and manifold charts, then shrink the source to a ball contained in the inverse-function neighborhood. In dimension zero the exponential map is locally the identity on the discrete manifold.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-normal-neighborhood-and-normal-coordinate-chart",
+        "kind": "definition",
+        "title": "Normal neighborhood and normal coordinate chart",
+        "deps": [
+          "thm-existence-of-normal-neighborhoods"
+        ],
+        "statement": "A normal neighborhood of p is the image under exp_p of a star-shaped zero-neighborhood on which exp_p is a diffeomorphism; a supplied basis of T_pM gives its normal coordinates.",
+        "strategy": "Separate the intrinsic exponential chart from the basis-dependent R^n coordinate representation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-properties-of-normal-coordinates-at-the-center",
+        "kind": "proposition",
+        "title": "Properties of normal coordinates at the center",
+        "deps": [
+          "def-normal-neighborhood-and-normal-coordinate-chart",
+          "prop-coordinate-geodesic-equation",
+          "prop-christoffel-formula-for-the-levi-civita-connection"
+        ],
+        "statement": "With an orthonormal starting basis, g_{ij}(p)=δ_{ij}, Γ^k_{ij}(p)=0, and radial coordinate lines are geodesics.",
+        "strategy": "The basis gives the metric value; radial lines follow exponential scaling. Insert all radial initial vectors into the geodesic equation to show the symmetric Christoffel coefficients vanish at p.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-injectivity-radius-at-a-point-and-of-a-manifold",
+        "kind": "definition",
+        "title": "Injectivity radius at a point and of a manifold",
+        "deps": [
+          "thm-existence-of-normal-neighborhoods"
+        ],
+        "statement": "inj(p) is the supremum of r>0 for which exp_p is defined and diffeomorphic on B_r(0); inj(M)=inf_p inj(p).",
+        "strategy": "Allow +∞ for the pointwise supremum and zero for the global infimum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-injectivity-radius-at-each-point-is-positive",
+        "kind": "proposition",
+        "title": "Injectivity radius at each point is positive",
+        "deps": [
+          "def-injectivity-radius-at-a-point-and-of-a-manifold",
+          "thm-existence-of-normal-neighborhoods"
+        ],
+        "statement": "Every point has positive injectivity radius, although the global infimum can be zero.",
+        "strategy": "A normal ball supplies a positive admissible radius; the counterexample page treats failure of a uniform lower bound.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-smooth-variation-and-variation-field-of-a-curve",
+        "kind": "definition",
+        "title": "Smooth variation and variation field of a curve",
+        "deps": [
+          "def-smooth-map-between-manifolds-with-boundary"
+        ],
+        "statement": "A smooth variation is a smooth map α:(-ε,ε)×[a,b]→M with α(0,t)=γ(t); V=∂_sα|_0. Fixed-endpoint variations keep both endpoint curves constant.",
+        "strategy": "State separately proper endpoint variations, where endpoint values may move and boundary terms remain.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-energy-of-a-piecewise-smooth-curve",
+        "kind": "definition",
+        "title": "Energy of a piecewise smooth curve",
+        "deps": [
+          "def-riemannian-speed-and-length"
+        ],
+        "statement": "For γ:[a,b]→M piecewise smooth, E(γ)=1/2∫_a^b|γ'|²dt.",
+        "strategy": "Sum the ordinary integrals over any finite smooth subdivision; additivity makes the result subdivision-independent.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-length-energy-inequality-and-constant-speed-equality-case",
+        "kind": "proposition",
+        "title": "Length-energy inequality and equality case",
+        "deps": [
+          "def-energy-of-a-piecewise-smooth-curve",
+          "def-riemannian-speed-and-length"
+        ],
+        "statement": "L(γ)²≤2(b-a)E(γ), with equality exactly when speed is constant almost everywhere, hence on each smooth piece.",
+        "strategy": "Apply Cauchy–Schwarz to |γ'| and 1; characterize equality by proportionality and use continuity on pieces.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-first-variation-formula-for-energy",
+        "kind": "theorem",
+        "title": "First variation formula for energy",
+        "deps": [
+          "def-smooth-variation-and-variation-field-of-a-curve",
+          "def-energy-of-a-piecewise-smooth-curve",
+          "thm-fundamental-theorem-of-riemannian-geometry"
+        ],
+        "statement": "For a smooth variation of a smooth curve, dE/ds|_0=g(V,γ')|_a^b-∫_a^b g(V,D_tγ')dt; for piecewise-smooth curves add the signed corner terms.",
+        "strategy": "Differentiate under the integral, use metric compatibility and torsion-free interchange D_s∂_t=D_t∂_s, then integrate by parts on each smooth piece.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-geodesics-are-exactly-critical-points-of-energy-with-fixed-endpoints",
+        "kind": "corollary",
+        "title": "Geodesics are exactly critical points of energy with fixed endpoints",
+        "deps": [
+          "thm-first-variation-formula-for-energy",
+          "def-geodesic-of-an-affine-connection"
+        ],
+        "statement": "A smooth curve is geodesic iff every smooth fixed-endpoint variation has zero first energy variation.",
+        "strategy": "One direction kills boundary and integral terms. Conversely realize arbitrary compactly supported vector fields along γ by the exponential/tubular local construction and apply the fundamental lemma.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-first-variation-formula-for-length",
+        "kind": "theorem",
+        "title": "First variation formula for length",
+        "deps": [
+          "def-smooth-variation-and-variation-field-of-a-curve",
+          "thm-first-variation-formula-for-energy",
+          "def-riemannian-speed-and-length"
+        ],
+        "statement": "For a regular central curve, the first length variation equals the endpoint tangential terms minus the integral of V against the covariant derivative of the unit tangent, with corner terms piecewise.",
+        "strategy": "Differentiate |∂_tα|, divide by the nonzero speed, use metric compatibility, and integrate by parts after decomposing acceleration into tangential and normal parts.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gauss-lemma",
+        "kind": "theorem",
+        "title": "Gauss lemma",
+        "deps": [
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "prop-exponential-map-scales-geodesic-time",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics"
+        ],
+        "statement": "Where exp_p is defined, d(exp_p)_v sends the radial vector v to γ'_{p,v}(1), preserves its squared norm, and makes it orthogonal to images of vectors tangent to the sphere |v|=constant.",
+        "strategy": "Use the two-parameter variation exp_p(t(v+sw)); torsion-free interchange and the geodesic equation show d/dt g(∂_s,∂_t)=1/2∂_s|∂_t|². Constant initial speed makes this zero for w⊥v; integrate from t=0 and handle the radial component separately.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        },
+        "landmark": true
+      },
+      {
+        "id": "cor-polar-form-of-the-metric-in-normal-coordinates",
+        "kind": "corollary",
+        "title": "Polar form of the metric in normal coordinates",
+        "deps": [
+          "thm-gauss-lemma",
+          "def-normal-neighborhood-and-normal-coordinate-chart"
+        ],
+        "statement": "Away from the center of a normal neighborhood, the metric has polar form dr²+g_r with no radial-angular cross terms.",
+        "strategy": "Split each tangent vector into radial and sphere-tangent components and apply Gauss lemma.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood",
+        "kind": "theorem",
+        "title": "Radial geodesics minimize length in a normal neighborhood",
+        "deps": [
+          "thm-gauss-lemma",
+          "cor-polar-form-of-the-metric-in-normal-coordinates"
+        ],
+        "statement": "In a normal ball, the radial geodesic from p to exp_p(v) minimizes length among curves remaining in the ball; equality forces a monotone radial reparametrization.",
+        "strategy": "Write any competitor in polar coordinates. Gauss gives |c'|²=(r')²+|angular|²≥(r')², integrate |r'|≥|Δr|, and analyze equality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-local-formula-for-distance-from-the-center-of-a-normal-neighborhood",
+        "kind": "corollary",
+        "title": "Local distance formula in a normal neighborhood",
+        "deps": [
+          "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood",
+          "def-riemannian-distance-on-a-connected-manifold"
+        ],
+        "statement": "For v in a normal ball, d(p,exp_pv)=|v|.",
+        "strategy": "The radial segment has length |v|; any curve leaving a smaller containing normal ball pays at least its boundary radius, while curves staying inside satisfy radial minimality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-sufficiently-short-geodesic-segments-are-uniquely-minimizing",
+        "kind": "corollary",
+        "title": "Sufficiently short geodesic segments are uniquely minimizing",
+        "deps": [
+          "thm-existence-of-normal-neighborhoods",
+          "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood"
+        ],
+        "statement": "A geodesic segment lying inside a normal ball with initial velocity shorter than its normal radius is uniquely minimizing there, up to monotone reparametrization; consequently every point has a neighborhood where sufficiently short segments have this property.",
+        "strategy": "Represent the segment radially by exponential scaling. Radial minimality gives the length bound and its equality case; injectivity of the normal chart gives uniqueness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-existence-of-geodesically-convex-neighborhoods",
+        "kind": "theorem",
+        "title": "Existence of geodesically convex neighborhoods",
+        "deps": [
+          "thm-existence-of-normal-neighborhoods",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood",
+          "thm-compactness-under-continuous-maps",
+          "cor-heine-borel-in-the-product-topology"
+        ],
+        "statement": "Every point has a sufficiently small strongly convex neighborhood: each two points are joined by a unique minimizing geodesic lying inside and smoothly depending on endpoints; finite nonempty intersections remain strongly convex.",
+        "strategy": "After Gauss-law radial minimality, apply the inverse theorem to (q,v)↦(q,exp_qv) near the zero section and shrink uniformly in a relatively compact coordinate ball. The resulting endpoint solution stays in the ball and is uniquely minimizing; global uniqueness makes finite nonempty intersections strongly convex.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization",
+        "kind": "theorem",
+        "title": "Length minimizers are constant-speed geodesics up to reparametrization",
+        "deps": [
+          "thm-first-variation-formula-for-length",
+          "cor-sufficiently-short-geodesic-segments-are-uniquely-minimizing",
+          "prop-length-energy-inequality-and-constant-speed-equality-case"
+        ],
+        "statement": "A nonconstant length-minimizing piecewise-smooth curve has no corners and, after constant-speed reparametrization, is a geodesic.",
+        "strategy": "Replace short subarcs by unique local minimizers to remove corners; fixed-endpoint first variation yields the geodesic equation, and length-energy equality supplies constant speed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset",
+        "kind": "lemma",
+        "title": "Geodesics continue while velocity lifts remain compact",
+        "deps": [
+          "lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm",
+          "prop-the-maximal-solution-domain-is-open"
+        ],
+        "statement": "If the velocity lift (γ,γ') stays in a compact subset of TM as t approaches a finite endpoint of its maximal interval, the geodesic extends past that endpoint.",
+        "strategy": "Cover the compact set by finitely many spray flow boxes with a uniform positive existence time; enter one box near the endpoint and concatenate by uniqueness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-a-finite-endpoint-of-a-maximal-unit-speed-geodesic-produces-a-cauchy-curve",
+        "kind": "lemma",
+        "title": "A finite endpoint of a maximal unit-speed geodesic produces a Cauchy curve",
+        "deps": [
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection",
+          "prop-length-dominates-endpoint-distance"
+        ],
+        "statement": "A unit-speed geodesic on [0,b), b<∞, is Cauchy as t↑b.",
+        "strategy": "For s<t, distance is at most the length of the segment, namely t-s.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-metric-completeness-implies-geodesic-completeness",
+        "kind": "theorem",
+        "title": "Metric completeness implies geodesic completeness",
+        "deps": [
+          "lem-a-finite-endpoint-of-a-maximal-unit-speed-geodesic-produces-a-cauchy-curve",
+          "thm-existence-of-geodesically-convex-neighborhoods",
+          "thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves",
+          "def-complete-metric-space"
+        ],
+        "statement": "A connected boundaryless metrically complete Riemannian manifold is geodesically complete.",
+        "strategy": "Rescale a nonconstant geodesic to unit speed. A finite maximal endpoint gives a Cauchy curve and hence p∈M. Choose a strongly convex normal neighborhood of p; sufficiently late tails stay inside it and, being geodesic, are its unique radial segments, so they extend through p. Local spray existence and uniqueness then extend beyond the alleged endpoint.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            },
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-radial-geodesics-from-one-point-reach-every-point-under-global-exp-domain",
+        "kind": "lemma",
+        "title": "Radial geodesics from one point reach every point under global exponential domain",
+        "deps": [
+          "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood",
+          "thm-existence-of-geodesically-convex-neighborhoods",
+          "cor-heine-borel-in-the-product-topology",
+          "thm-compactness-under-continuous-maps"
+        ],
+        "statement": "If exp_p is defined on all T_pM, every q in the connected component of p is joined to p by a minimizing radial geodesic.",
+        "strategy": "Let A be points reached minimizing radially; convex-neighborhood extension makes it open. For q in its closure put r=d(p,q) and minimize h(u)=d(exp_p(ru),q) on the compact unit sphere. For every ε>0 a reached x within ε of q supplies a minimizing direction u with h(u)<2ε, so the attained minimum is zero without choosing a sequence. Thus A is closed, and connectedness gives A=M.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hopf-rinow",
+        "kind": "theorem",
+        "title": "Hopf–Rinow theorem",
+        "deps": [
+          "thm-metric-completeness-implies-geodesic-completeness",
+          "lem-radial-geodesics-from-one-point-reach-every-point-under-global-exp-domain",
+          "lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset",
+          "thm-compactness-under-continuous-maps",
+          "cor-heine-borel-in-the-product-topology"
+        ],
+        "statement": "For a connected boundaryless Riemannian manifold, metric completeness, geodesic completeness, global exp_p for one/every p, and compactness of every closed bounded set are equivalent; under them every two points admit a minimizing geodesic.",
+        "strategy": "Prove metric⇒geodesic by the preceding theorem; geodesic⇒global exp by scaling; one global exp⇒radial minimizers. Express a closed ball as exp_p of a compact tangent ball to obtain properness. Properness makes Cauchy sequences have convergent subsequences and hence converge. All compact selections are finite-dimensional and choice-free.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            },
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        },
+        "landmark": true
+      },
+      {
+        "id": "cor-complete-connected-riemannian-manifolds-are-proper-length-spaces",
+        "kind": "corollary",
+        "title": "Complete connected Riemannian manifolds are proper length spaces",
+        "deps": [
+          "thm-hopf-rinow",
+          "def-riemannian-distance-on-a-connected-manifold"
+        ],
+        "statement": "A complete connected Riemannian manifold has compact closed bounded sets and its distance is realized by minimizing geodesics.",
+        "strategy": "Read the properness and minimizer clauses of Hopf–Rinow; the Riemannian distance is already the induced length metric.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-compact-riemannian-manifolds-are-geodesically-complete",
+        "kind": "corollary",
+        "title": "Compact Riemannian manifolds are geodesically complete",
+        "deps": [
+          "thm-hopf-rinow",
+          "thm-compactness-agrees-with-metric-compactness"
+        ],
+        "statement": "Every compact boundaryless connected Riemannian manifold is metrically and geodesically complete; apply componentwise in general.",
+        "strategy": "A compact metric space is complete by the published compactness theory, and Hopf–Rinow gives geodesic completeness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric",
+        "kind": "corollary",
+        "title": "Closed embedded submanifolds of complete Riemannian manifolds are complete",
+        "deps": [
+          "def-riemannian-distance-on-a-connected-manifold",
+          "thm-the-riemannian-distance-topology-is-the-manifold-topology",
+          "def-complete-metric-space"
+        ],
+        "statement": "A closed embedded submanifold with the induced Riemannian metric is complete when the ambient Riemannian manifold is complete.",
+        "strategy": "An intrinsic Cauchy sequence is ambient Cauchy because ambient distance is no larger. Its ambient limit lies in the closed submanifold. On a compact coordinate neighborhood, local metric comparison makes ambient convergence imply intrinsic convergence. This direct proof avoids the published closed-subspace theorem’s AC dependency.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-local-isometries-send-geodesics-to-geodesics",
+        "kind": "lemma",
+        "title": "Local isometries send geodesics to geodesics",
+        "deps": [
+          "def-riemannian-isometry-and-local-isometry",
+          "thm-fundamental-theorem-of-riemannian-geometry",
+          "def-geodesic-of-an-affine-connection"
+        ],
+        "statement": "A local Riemannian isometry intertwines the two Levi-Civita covariant derivatives locally and therefore sends affinely parametrized geodesics to affinely parametrized geodesics.",
+        "strategy": "Restrict to neighborhoods on which the map is an isometry. Pull the target connection back and verify torsion-freeness and metric compatibility; uniqueness of Levi-Civita identifies it with the source connection. Apply this identity to the velocity field along a curve.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-a-local-isometry-from-a-complete-connected-manifold-has-geodesically-complete-target-image",
+        "kind": "corollary",
+        "title": "A local isometry from a complete connected manifold has geodesically complete target image",
+        "deps": [
+          "def-riemannian-isometry-and-local-isometry",
+          "thm-hopf-rinow",
+          "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "lem-local-isometries-send-geodesics-to-geodesics"
+        ],
+        "statement": "If F:M→N is a local isometry and M is complete and connected, every target geodesic whose initial data lie in F(M) remains in F(M) for all time; hence the target image with its induced local Riemannian structure is geodesically complete.",
+        "strategy": "Lift the initial velocity through dF_p, run the source geodesic globally, and use preservation of Levi-Civita connections plus uniqueness to identify its image with the target geodesic. No covering-map conclusion is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-a-riemannian-product-is-complete-iff-each-factor-is-complete",
+        "kind": "proposition",
+        "title": "A Riemannian product is complete iff each factor is complete",
+        "deps": [
+          "thm-hopf-rinow",
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection"
+        ],
+        "statement": "A finite Riemannian product is metrically/geodesically complete exactly when each factor is complete.",
+        "strategy": "The product Levi-Civita connection splits, so geodesics split into factor geodesics; apply geodesic completeness in both directions, using constant factors for the converse.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-a-connected-riemannian-manifold-is-incomplete-iff-some-unit-speed-geodesic-escapes-every-compact-set-in-finite-time",
+        "kind": "proposition",
+        "title": "Incompleteness is finite-time geodesic escape",
+        "deps": [
+          "lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset",
+          "thm-hopf-rinow",
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection",
+          "thm-compactness-under-continuous-maps",
+          "cor-heine-borel-in-the-product-topology"
+        ],
+        "statement": "A connected boundaryless Riemannian manifold is incomplete iff a unit-speed maximal geodesic has a finite endpoint and eventually leaves every compact subset.",
+        "strategy": "Incompleteness and Hopf–Rinow give a finite maximal geodesic; normalize speed. If it met a compact base set arbitrarily late, its unit velocity lift would lie in the compact unit-sphere bundle over that set, contradicting continuation. Conversely such finite escape precludes a global geodesic.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-every-affinely-reparametrized-geodesic-remains-unit-speed",
+        "kind": "false-statement",
+        "title": "Every affinely reparametrized geodesic remains unit speed",
+        "deps": [
+          "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic"
+        ],
+        "statement": "False: affine reparametrization preserves the geodesic equation but multiplies speed by the absolute slope.",
+        "strategy": "Apply t↦2t to a unit-speed Euclidean line.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-the-exponential-map-is-defined-on-all-of-tm-for-every-riemannian-manifold",
+        "kind": "false-statement",
+        "title": "The exponential map is always defined on all of TM",
+        "deps": [
+          "def-domain-and-exponential-map-of-a-connection",
+          "thm-hopf-rinow"
+        ],
+        "statement": "False: global exponential domain is equivalent to geodesic completeness on each connected component.",
+        "strategy": "Use a radial geodesic in an open Euclidean ball that reaches the boundary in finite time.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-normal-coordinates-make-the-metric-euclidean-throughout-the-chart",
+        "kind": "false-statement",
+        "title": "Normal coordinates make the metric Euclidean throughout the chart",
+        "deps": [
+          "prop-properties-of-normal-coordinates-at-the-center"
+        ],
+        "statement": "False: normal coordinates normalize the metric and Christoffel symbols only at their center.",
+        "strategy": "On a round sphere, curvature prevents a neighborhood from being isometric to Euclidean space.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-every-geodesic-segment-is-globally-length-minimizing",
+        "kind": "false-statement",
+        "title": "Every geodesic segment is globally length minimizing",
+        "deps": [
+          "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood"
+        ],
+        "statement": "False: geodesics minimize only locally before cut phenomena.",
+        "strategy": "A sufficiently long great-circle arc is beaten by the complementary shorter arc.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-any-two-points-of-a-riemannian-manifold-are-joined-by-a-minimizing-geodesic",
+        "kind": "false-statement",
+        "title": "Any two points admit a minimizing geodesic",
+        "deps": [
+          "thm-hopf-rinow"
+        ],
+        "statement": "False without completeness.",
+        "strategy": "In R²\\{0}, opposite points have infimal distance realized only by a straight segment through the missing origin.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-geodesic-completeness-means-the-manifold-is-compact",
+        "kind": "false-statement",
+        "title": "Geodesic completeness means compactness",
+        "deps": [
+          "thm-hopf-rinow"
+        ],
+        "statement": "False: completeness gives compact closed bounded subsets, not compactness of the whole manifold.",
+        "strategy": "Euclidean space is complete and noncompact.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 482,
+    "id": "geodesics-the-exponential-map-completeness-and-hopf-rinow-examples",
+    "kind": "B",
+    "category": "differential-geometry",
+    "title": "Geodesics the Exponential Map Completeness and Hopf Rinow — Examples",
+    "companion": "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+  "requires": [
+    "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+    "the-fundamental-group-of-the-circle"
+  ],
+    "items": [
+      {
+        "id": "ex-straight-lines-as-euclidean-geodesics",
+        "kind": "example",
+        "title": "Straight lines as Euclidean geodesics",
+        "deps": [
+          "prop-coordinate-geodesic-equation"
+        ],
+        "statement": "For the Euclidean metric, geodesics are exactly affine lines with affine parameter.",
+        "strategy": "All Christoffel symbols vanish, so x¨=0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-great-circles-as-round-sphere-geodesics",
+        "kind": "example",
+        "title": "Great circles as round-sphere geodesics",
+        "deps": [
+          "def-geodesic-of-an-affine-connection",
+          "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection"
+        ],
+        "statement": "Nonconstant geodesics of the round sphere trace great circles at constant speed.",
+        "strategy": "Use the ambient acceleration decomposition: intrinsic acceleration vanishes iff γ'' is normal to the sphere, then solve γ''=-c²γ.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-geodesics-of-a-riemannian-product",
+        "kind": "example",
+        "title": "Geodesics of a Riemannian product",
+        "deps": [
+          "prop-a-riemannian-product-is-complete-iff-each-factor-is-complete"
+        ],
+        "statement": "A curve in a Riemannian product is geodesic iff each factor curve is geodesic with the same affine parameter.",
+        "strategy": "Compute the split Levi-Civita connection and set both components of the covariant acceleration to zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-geodesics-in-the-poincare-upper-half-plane",
+        "kind": "example",
+        "title": "Geodesics in the Poincare upper half-plane",
+        "deps": [
+          "prop-coordinate-geodesic-equation"
+        ],
+        "statement": "For g=(dx²+dy²)/y², geodesics are vertical lines and Euclidean semicircles orthogonal to the boundary, up to affine parametrization.",
+        "strategy": "Compute the Christoffel symbols, verify the two families, and use existence/uniqueness through every point and tangent direction to exhaust geodesics.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-normal-coordinates-on-the-round-sphere",
+        "kind": "example",
+        "title": "Normal coordinates on the round sphere",
+        "deps": [
+          "def-normal-neighborhood-and-normal-coordinate-chart",
+          "ex-great-circles-as-round-sphere-geodesics"
+        ],
+        "statement": "At p∈S^n, exp_p(v)=cos|v|p+sin|v|v/|v|, with the continuous value p at v=0; it is injective on |v|<π.",
+        "strategy": "Solve the great-circle initial-value problem and locate the first antipodal collision at radius π.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-the-exponential-map-of-a-flat-torus-is-not-injective",
+        "kind": "example",
+        "title": "The exponential map of a flat torus is not injective",
+        "deps": [
+          "def-domain-and-exponential-map-of-a-connection",
+          "ex-the-flat-torus-metric-from-periodic-euclidean-coordinates"
+        ],
+        "statement": "For R^n/Λ with its flat metric, exp_[x](v)=[x+v], so it is globally defined but Λ-periodic and noninjective.",
+        "strategy": "Descend Euclidean straight lines and compare vectors differing by a lattice vector.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-the-punctured-euclidean-plane-is-geodesically-incomplete",
+        "kind": "example",
+        "title": "The punctured Euclidean plane is geodesically incomplete",
+        "deps": [
+          "def-geodesically-complete-riemannian-manifold",
+          "ex-straight-lines-as-euclidean-geodesics"
+        ],
+        "statement": "R²\\{0} with the Euclidean metric is geodesically incomplete.",
+        "strategy": "The unit-speed line t↦(t,0), t>0, reaches the deleted origin at finite time and has no extension in the manifold.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-an-open-unit-ball-with-euclidean-metric-is-metrically-incomplete",
+        "kind": "example",
+        "title": "An open Euclidean unit ball is metrically incomplete",
+        "deps": [
+          "def-complete-metric-space"
+        ],
+        "statement": "The open unit ball with Euclidean distance is incomplete.",
+        "strategy": "A radial sequence approaching a boundary point is Cauchy but has no limit in the ball.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hyperbolic-space-is-complete",
+        "kind": "example",
+        "title": "Hyperbolic space is complete",
+        "deps": [
+          "thm-hopf-rinow",
+          "ex-geodesics-in-the-poincare-upper-half-plane"
+        ],
+        "statement": "The Poincare upper half-plane is geodesically and metrically complete.",
+        "strategy": "Parametrize vertical lines and orthogonal semicircles by hyperbolic arclength and show their parameter domains are all R; Hopf–Rinow gives metric completeness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-antipodal-points-on-a-round-sphere-have-many-minimizing-geodesics",
+        "kind": "counterexample",
+        "title": "Antipodal points on a round sphere have many minimizing geodesics",
+        "deps": [
+          "ex-great-circles-as-round-sphere-geodesics",
+          "thm-hopf-rinow"
+        ],
+        "statement": "Antipodal points of a round sphere are joined by infinitely many minimizing half-great-circles.",
+        "strategy": "Every two-plane through the antipodal axis gives a half great circle of length π, and the sphere distance is π.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ved Datar, Lectures on Riemannian Geometry",
+              "url": "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-complete-manifold-with-zero-global-injectivity-radius",
+        "kind": "counterexample",
+        "title": "A complete manifold with zero global injectivity radius",
+        "deps": [
+          "def-injectivity-radius-at-a-point-and-of-a-manifold",
+          "thm-hopf-rinow",
+          "lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset",
+          "thm-fundamental-group-of-the-circle"
+        ],
+        "statement": "A hyperbolic cusp is complete while its pointwise injectivity radii tend to zero, so its global injectivity radius is zero.",
+        "strategy": "Use S^1×R with g=du²+e^{-2u}dθ². The geodesic energy and angular momentum e^{-2u}θ' are constant, so position and velocity remain bounded on each finite time interval; continuation and Hopf–Rinow give completeness. The loop θ↦(θ,u) has length 2πe^{-u} and is noncontractible by projection to S^1. If inj(θ,u)>πe^{-u}, the loop lies in a normal ball diffeomorphic to a Euclidean ball and would be contractible. Hence inj(θ,u)≤πe^{-u}→0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bruno Martelli, Hyperbolic Geometry",
+              "url": "https://people.dm.unipi.it/martelli/didattica/matematica/2014/Hyperbolic_geometry.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hopf-rinow-on-a-flat-cylinder",
+        "kind": "example",
+        "title": "Hopf–Rinow on a flat cylinder",
+        "deps": [
+          "thm-hopf-rinow",
+          "ex-the-exponential-map-of-a-flat-torus-is-not-injective"
+        ],
+        "statement": "The flat cylinder S¹×R is complete and proper, every two points have a minimizing geodesic, and exponential maps are noninjective.",
+        "strategy": "Lift to R², minimize Euclidean distance among integer translates of one endpoint, and project the chosen segment; closed bounded sets lie in a compact circle times a bounded interval.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ben Andrews, Geodesics and Completeness",
+              "url": "https://maths-people.anu.edu.au/andrews/DG/DG_chap11.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

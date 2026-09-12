@@ -4,6 +4,7 @@ kind: "example"
 title: "A principal ultrapower is the original structure"
 deps: ["def-lc-set-ultraproduct"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

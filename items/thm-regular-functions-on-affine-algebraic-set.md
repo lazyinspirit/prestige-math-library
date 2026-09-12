@@ -2,7 +2,7 @@
 id: thm-regular-functions-on-affine-algebraic-set
 kind: theorem
 title: "Polynomial functions on an affine algebraic set are exactly its coordinate ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.5"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
 ---
 

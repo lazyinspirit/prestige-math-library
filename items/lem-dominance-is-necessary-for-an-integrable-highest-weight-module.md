@@ -2,13 +2,14 @@
 id: lem-dominance-is-necessary-for-an-integrable-highest-weight-module
 kind: lemma
 title: Dominance is necessary for an integrable highest weight module
-status: draft
+status: published
 origin: pipeline
 deps: [def-kac-moody-integral-and-dominant-integral-weights, lem-integrability-can-be-checked-on-simple-root-sl2-subalgebras, thm-kac-moody-verma-module-has-a-unique-simple-quotient, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

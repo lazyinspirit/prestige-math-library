@@ -2,7 +2,7 @@
 id: def-balogh-continuum-topology
 kind: definition
 title: Balogh continuum topology
-status: draft
+status: published
 origin: pipeline
 deps: [lem-balogh-combinatorial-map, def-axiom-of-choice]
 justified_by: [lem-balogh-neighborhood-basis]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

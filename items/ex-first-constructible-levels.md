@@ -4,6 +4,7 @@ kind: "example"
 title: "The first constructible levels"
 deps: ["def-constructible-hierarchy-and-constructible-rank", "def-cumulative-hierarchy-stages", "def-definable-subsets-of-a-membership-structure"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

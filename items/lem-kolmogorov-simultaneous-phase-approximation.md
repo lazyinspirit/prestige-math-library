@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Kolmogorov simultaneous phase approximation"
 deps: ["def-period-one-fourier-coefficients-partial-sums-and-convolution", "thm-fejer-uniform-convergence-for-continuous-periodic-functions"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Finite-tuple satisfaction is absolute"
 deps: ["thm-set-structure-satisfaction-recursion", "lem-satisfaction-coincidence", "thm-ordinals-and-omega-are-absolute-in-transitive-models", "thm-structural-recursion-on-set-coded-syntax"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-polynomially-related-encodings-preserve-polynomial-classes
 kind: proposition
 title: "Polynomially related encodings preserve polynomial-time and polynomial-space classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-dtime-ntime-dspace-and-nspace, def-instance-size-under-an-encoding, p
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

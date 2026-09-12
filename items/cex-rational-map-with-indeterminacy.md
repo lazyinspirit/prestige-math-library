@@ -2,7 +2,9 @@
 id: cex-rational-map-with-indeterminacy
 kind: counterexample
 title: "The rational map (x,y) mapsto y / x on the affine plane is undefined along x = 0"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: ai-altered

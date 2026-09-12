@@ -2,7 +2,7 @@
 id: cor-pit-is-in-corp
 kind: corollary
 title: "Polynomial identity testing is in coRP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-rp-corp-zpp-bpp-and-pp, def-polynomial-identity-testing, thm-schwartz-zippel-lemma]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

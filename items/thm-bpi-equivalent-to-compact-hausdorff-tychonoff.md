@@ -2,7 +2,7 @@
 id: thm-bpi-equivalent-to-compact-hausdorff-tychonoff
 kind: theorem
 title: Compact Hausdorff Tychonoff is equivalent to BPI
-status: draft
+status: published
 origin: pipeline
 deps: [thm-bpi-equivalent-to-set-ultrafilter-lemma, thm-bpi-equivalent-to-propositional-compactness, def-stone-ultrafilter-space-and-clopens, def-product-topology, thm-compact-iff-fip]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

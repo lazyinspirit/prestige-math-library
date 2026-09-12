@@ -2,7 +2,7 @@
 id: def-configuration-graph
 kind: definition
 title: "The configuration graph of a machine on an input"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ deps:
   - def-multigraph-loop-and-digraph
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

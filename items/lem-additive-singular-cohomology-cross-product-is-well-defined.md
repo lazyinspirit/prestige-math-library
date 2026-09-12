@@ -2,7 +2,7 @@
 id: lem-additive-singular-cohomology-cross-product-is-well-defined
 kind: lemma
 title: The additive singular cohomology cross product is well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-additive-singular-cohomology-cross-product, lem-singular-product-chain-equivalence-by-simplex-models, def-singular-cochain-complex-with-coefficients, def-singular-cohomology-with-coefficients]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

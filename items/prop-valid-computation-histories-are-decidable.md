@@ -2,7 +2,7 @@
 id: prop-valid-computation-histories-are-decidable
 kind: proposition
 title: "For a fixed machine and input, valid accepting computation histories form a decidable language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-language-recognized-and-decided, def-halting-computation-and-divergen
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: def-cyk-table-and-span-variable
 kind: definition
 title: "The CYK parsing table and span variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-context-free-grammar, def-chomsky-normal-form, def-computation-alphabet-and-word-convention]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

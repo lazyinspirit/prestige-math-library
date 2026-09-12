@@ -2,7 +2,7 @@
 id: thm-savitchs-theorem
 kind: theorem
 title: "Savitch's theorem: NSPACE(s(n)) is contained in DSPACE(s(n)^2)"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-dtime-ntime-dspace-and-nspace, lem-space-bounded-machines-have-expone
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

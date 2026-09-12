@@ -2,7 +2,7 @@
 id: thm-local-ring-affine-variety-localization
 kind: theorem
 title: "The local ring at a point of an affine variety is the localization at its maximal ideal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Michael Artin, Notes for a Course in Algebraic Geometry, 5.1.10"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

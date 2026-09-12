@@ -2,7 +2,7 @@
 id: cex-recursion-theorem-needs-source-file-access
 kind: counterexample
 title: "A quine obtained without inspecting its own source file"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-recursion-theorem-needs-source-file-access]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

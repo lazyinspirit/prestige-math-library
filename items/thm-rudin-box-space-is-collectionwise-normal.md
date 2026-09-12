@@ -2,7 +2,7 @@
 id: thm-rudin-box-space-is-collectionwise-normal
 kind: theorem
 title: Rudin spaces are collectionwise normal
-status: draft
+status: published
 origin: pipeline
 deps: [lem-rudin-box-space-basic-neighborhoods-and-p-space, lem-rudin-disjoint-box-refinement, lem-rudin-discrete-families-have-discrete-ambient-closures, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

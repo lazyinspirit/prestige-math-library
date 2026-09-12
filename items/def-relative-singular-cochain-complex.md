@@ -2,7 +2,7 @@
 id: def-relative-singular-cochain-complex
 kind: definition
 title: Relative singular cochain complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cohomology-with-coefficients, def-singular-cochain-complex-with-coefficients, def-singular-chain-complex-of-a-pair, lem-singular-boundary-descends-to-relative-chains]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

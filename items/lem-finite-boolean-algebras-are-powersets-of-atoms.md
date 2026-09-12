@@ -2,7 +2,7 @@
 id: lem-finite-boolean-algebras-are-powersets-of-atoms
 kind: lemma
 title: Finite Boolean algebras are powersets of their atoms
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-algebra-for-stone-duality, lem-generated-boolean-filter-and-ultrafilter-tests]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

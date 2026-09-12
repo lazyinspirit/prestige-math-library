@@ -2,7 +2,7 @@
 id: lem-balogh-failure-of-countable-shrinking
 kind: lemma
 title: Balogh failure of countable shrinking
-status: draft
+status: published
 origin: pipeline
 deps: [lem-balogh-combinatorial-map, def-balogh-continuum-topology, lem-balogh-neighborhood-basis, thm-countable-paracompactness-shrinking-criterion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

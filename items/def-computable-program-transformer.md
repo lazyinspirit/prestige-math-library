@@ -2,13 +2,14 @@
 id: def-computable-program-transformer
 kind: definition
 title: "Computable program transformers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-numbering-of-partial-computable-functions]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

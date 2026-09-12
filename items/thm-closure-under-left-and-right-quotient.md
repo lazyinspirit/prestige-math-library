@@ -2,7 +2,7 @@
 id: thm-closure-under-left-and-right-quotient
 kind: theorem
 title: "Regular languages are closed under left and right quotient with regular languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-dfa-acceptance-and-recognized-language, def-nfa-acceptance-and-recognized-language, cor-dfas-and-nfas-recognize-the-same-languages, thm-product-dfa-for-union-and-intersection]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -4,6 +4,7 @@ kind: theorem
 title: Clocked universal simulation with time and space bounds
 deps: ["def-machine-time-and-space-constructibility", "def-effective-encoding-of-turing-machines", "lem-machine-encoding-is-injective-and-decodable", "def-multitape-and-nondeterministic-machines", "def-turing-machine-initial-and-halting-configuration-interface", "def-one-step-configuration-relation"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

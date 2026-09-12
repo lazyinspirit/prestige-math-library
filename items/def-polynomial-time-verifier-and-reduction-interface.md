@@ -16,6 +16,8 @@ sources:
     - title: "Arora–Barak §§2.1–2.2 verifier/reduction definitions; source reading incomplete"
       url: https://theory.cs.princeton.edu/complexity/book.pdf
 proof_strategy: "direct"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Definition

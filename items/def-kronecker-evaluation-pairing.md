@@ -2,7 +2,7 @@
 id: def-kronecker-evaluation-pairing
 kind: definition
 title: Kronecker evaluation pairing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cohomology-with-coefficients, def-singular-chain-complex-and-singular-homology]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

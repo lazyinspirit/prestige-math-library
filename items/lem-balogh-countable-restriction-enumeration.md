@@ -2,7 +2,7 @@
 id: lem-balogh-countable-restriction-enumeration
 kind: lemma
 title: Balogh countable restriction enumeration
-status: draft
+status: published
 origin: pipeline
 deps: [def-balogh-finite-restriction-data, def-axiom-of-choice, thm-transfinite-recursion, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

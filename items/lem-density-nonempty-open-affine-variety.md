@@ -2,7 +2,7 @@
 id: lem-density-nonempty-open-affine-variety
 kind: lemma
 title: "Every nonempty open subset of an affine variety is dense"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, irreducibility discussion in §1.5"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

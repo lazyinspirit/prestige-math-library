@@ -2,7 +2,7 @@
 id: thm-affine-variety-prime-coordinate-ring
 kind: theorem
 title: "A classical affine variety has a domain as its coordinate ring, and conversely"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Lemma 1.5.4"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

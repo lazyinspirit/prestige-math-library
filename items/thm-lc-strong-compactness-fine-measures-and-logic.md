@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Strong compactness, fine measures and infinitary logic"
 deps: ["def-lc-fine-ultrafilters-strong-compactness-and-supercompactness", "thm-lc-infinitary-los", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-small-dowker-luzin-stick-and-ad-principles
 kind: definition
 title: "Luzin sets, stick, and almost-disjoint guessing at omega one"
-status: draft
+status: published
 origin: pipeline
 deps: [def-baire-sequence-space, def-diamond-on-omega-one, def-ostaszewski-club-principle, def-axiom-of-choice, thm-omega-one-is-the-least-uncountable-ordinal, thm-countable-subsets-of-omega-one-are-bounded]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

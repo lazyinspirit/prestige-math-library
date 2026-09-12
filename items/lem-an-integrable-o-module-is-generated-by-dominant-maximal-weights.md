@@ -2,13 +2,14 @@
 id: lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights
 kind: lemma
 title: Maximal and primitive weights in integrable category O modules
-status: draft
+status: published
 origin: pipeline
 deps: [def-kac-moody-category-o, lem-dominance-is-necessary-for-an-integrable-highest-weight-module, lem-bounded-above-kac-moody-weight-modules-are-generated-by-primitive-vectors, thm-universal-property-and-pbw-character-of-kac-moody-verma-modules]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

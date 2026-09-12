@@ -9,6 +9,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-12
 sources:
   references:
     - title: "Kunen, Set Theory, Chapter VI §§2–4, pp. 169–176"
@@ -68,6 +73,6 @@ capture-free renaming and universal closure conventions.
 
 4.1 The constructions in steps 2.1–3.1 use only finite list operations, structural recursion on a checked formula parse, capture-free substitution, and concatenation or index-shifting of finite derivations. Induction on the subformula schedule proves that every generated line is either one of the six logical schemes of the fixed calculus, an axiom carrying its F5 certificate, or one of its three rules applied to earlier lines. PA formalizes this bounded induction and the line-prefix induction of the proof checker. It therefore proves that the dispatcher is total and that every accepted target-axiom certificate is sent to a ZF proof whose conclusion is its literal $D$-relativization. On malformed input the dispatcher returns a fixed proof of a tautology; correctness is asserted only under the accepted-certificate antecedent. The large concrete endpoint codes and executable regression checks are useful finite checks of the selection, but are not being identified with this PA derivation. [F3, F5, step 2.1, step 2.2, step 3.1, induction]
 
-5.1 Now fix finite $\Delta$. Apply the dispatcher to its finitely many members and let $\Gamma$ be the union of the ZF axiom occurrences in the resulting proofs, together with the finitely many fixed interpretation-obligation proofs. Every member of $\Gamma$ has an F5 certificate, so $\Gamma$ is a finite fragment of ZF, and weakening makes each translated axiom proof a $\Gamma$-proof. The empty fragment gives the empty union plus only the fixed logical interpretation obligations. [F3, F5, step 4.1]
+5.1 Now fix finite $\Delta$. Apply the dispatcher to its finitely many members. From the resulting translated-axiom proofs and the finitely many fixed interpretation-obligation proofs, extract every nonlogical ZF axiom sentence that actually occurs, and let $\Gamma$ be the union of those finite supports. Proof codes themselves are not members of $\Gamma$. Every member of $\Gamma$ therefore has an F5 axiom certificate, so $\Gamma$ is a finite fragment of ZF, and weakening makes every translated-axiom and interpretation-obligation derivation a $\Gamma$-proof. For empty $\Delta$, only the ZF axiom occurrences in the fixed interpretation-obligation derivations remain. [F3, F5, step 4.1]
 
 6.1 Give the finite source theory $\Delta$ the restricted target certificates and the interpretation of step 1.1. The lookup in its finite list of translated axiom proofs is effective. F4 therefore translates every finite $\Delta$-derivation into a $\Gamma$-derivation of its guarded $L$-translation. More generally, dispatching axiom lines as in step 4.1 and logical lines by F4 yields one PA-verified primitive-recursive translator for arbitrary certified $\mathrm{ZFC}+\mathrm{GCH}$ proofs. This proves both the stated finite-fragment result and the uniform formalized clause, without a transitive-model assumption. [F3, F4, step 4.1, step 5.1] ∎

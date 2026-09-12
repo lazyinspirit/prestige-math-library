@@ -2,13 +2,14 @@
 id: def-deterministic-pda
 kind: definition
 title: "Deterministic pushdown automata and deterministic context-free languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-nondeterministic-pushdown-automaton, def-pda-acceptance-by-final-state]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

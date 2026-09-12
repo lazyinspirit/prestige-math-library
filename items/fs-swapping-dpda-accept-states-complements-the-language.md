@@ -2,7 +2,7 @@
 id: fs-swapping-dpda-accept-states-complements-the-language
 kind: false-statement
 title: "FALSE: swapping the accepting states of a DPDA automatically complements its language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-deterministic-pda, prop-deterministic-cfls-are-closed-under-complement]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Kolmogorov gliding hump series converges in lone"
 deps: ["lem-kolmogorov-block-polynomial-with-large-partial-sums", "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima", "thm-complex-lp-completeness-and-almost-everywhere-subsequences", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

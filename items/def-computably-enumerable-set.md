@@ -2,13 +2,14 @@
 id: def-computably-enumerable-set
 kind: definition
 title: "Computably enumerable sets and languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computable-and-partial-computable-function, def-language-over-an-alphabet]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

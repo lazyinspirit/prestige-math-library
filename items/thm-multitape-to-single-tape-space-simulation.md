@@ -2,7 +2,7 @@
 id: thm-multitape-to-single-tape-space-simulation
 kind: theorem
 title: "Every multitape space-S computation has a single-tape simulation in O(n+S(n)) space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-asymptotic-resource-comparison, def-dtime-ntime-dspace-and-nspace, de
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

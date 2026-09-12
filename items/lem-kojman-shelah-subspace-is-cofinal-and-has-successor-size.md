@@ -2,7 +2,7 @@
 id: lem-kojman-shelah-subspace-is-cofinal-and-has-successor-size
 kind: lemma
 title: Cofinality and size of the scale subspace
-status: draft
+status: published
 origin: pipeline
 deps: [def-kojman-shelah-scale-subspace, lem-scale-tail-suprema-have-prescribed-cofinality, thm-cofinality-basics, def-axiom-of-choice, thm-regularity-of-the-alephs, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption, thm-transfinite-recursion]
 proof_strategy: construction
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

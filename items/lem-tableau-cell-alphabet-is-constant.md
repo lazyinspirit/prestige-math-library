@@ -2,7 +2,7 @@
 id: lem-tableau-cell-alphabet-is-constant
 kind: lemma
 title: "For a fixed machine, each tableau cell ranges over a constant-size extended alphabet"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-computation-tableau]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

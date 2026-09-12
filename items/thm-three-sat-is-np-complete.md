@@ -2,7 +2,7 @@
 id: thm-three-sat-is-np-complete
 kind: theorem
 title: "3-SAT is NP-complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-np-hard-and-np-complete, def-polynomial-time-many-one-reduction, prop-sat-is-in-np, thm-cook-levin-sat-is-np-complete, lem-tseitin-transformation-is-linear-size-and-equisatisfiable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

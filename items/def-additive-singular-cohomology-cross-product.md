@@ -2,7 +2,7 @@
 id: def-additive-singular-cohomology-cross-product
 kind: definition
 title: Additive singular cohomology cross product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [lem-singular-product-chain-equivalence-by-simplex-models, def-singular-cohomology-with-coefficients, def-singular-cochain-complex-with-coefficients]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

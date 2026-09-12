@@ -2,7 +2,7 @@
 id: lem-rational-map-equivalence-transitive
 kind: lemma
 title: "The rational-map equivalence relation is transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, rational-map discussion in §3.2"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
 ---
 

@@ -1,0 +1,3218 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-characteristic-function-of-a-normal-law",
+    "lem-second-order-characteristic-function-expansion",
+    "lem-product-of-near-one-characteristic-factors",
+    "thm-lindeberg-levy-iid-central-limit-theorem",
+    "cor-de-moivre-laplace-central-limit-theorem",
+    "def-row-wise-independent-centered-triangular-array",
+    "def-total-row-variance-and-lindeberg-condition",
+    "lem-lindeberg-condition-implies-feller-negligibility",
+    "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+    "thm-feller-converse-to-lindeberg-feller",
+    "cor-lyapunov-central-limit-theorem",
+    "def-multivariate-normal-law",
+    "lem-characteristic-function-of-a-multivariate-normal-law",
+    "thm-multivariate-iid-central-limit-theorem",
+    "rem-clt-convergence-is-only-in-distribution",
+    "ex-normal-approximation-to-binomial-probabilities",
+    "ex-clt-for-sums-of-uniform-random-variables",
+    "ex-lyapunov-condition-for-nonidentical-summands",
+    "ex-lindeberg-array-with-no-identically-distributed-row",
+    "ex-degenerate-multivariate-gaussian-limit",
+    "cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling",
+    "cex-feller-negligibility-cannot-be-removed-from-the-converse",
+    "lem-ac-supplies-sequential-choices-for-probability-constructions"
+  ],
+  "contracts": {
+    "lem-characteristic-function-of-a-normal-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-moments-give-derivatives-of-the-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a nonnegative integer, and suppose $\\mathbb E|X|^k<\\infty$, with $|X|^0=1$. Then $\\varphi_X\\in C^k(\\mathbb R)$ and $$\\varphi_X^{(j)}(t)=\\mathbb E[(iX)^j e^{itX}],\\qquad 0\\le j\\le k.$$ No converse is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $g(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ and let $Z$ be the coordinate under its probability law. By [F1]–[F2], this is a probability law with density $g$. For any measurable complex $h$ with $\\int |h|g<\\infty$, apply [F11] to the positive and negative parts of $\\operatorname{Re}h$ and $\\operatorname{Im}h$. The definitions in [F19] then give $\\mathbb E h(Z)=\\int h(x)g(x)\\,dx$; in particular, every density-integral identity used below is covered. The derivative rules give $g\\prime(x)=-xg(x)$. All compact-interval functions below are continuously differentiable, so [F6]–[F9] apply also to each real and imaginary component. AC is used through the normal-law construction and the countable-choice Riemann/Lebesgue bridge; no sequence of arbitrary witnesses is selected.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F11",
+            "F19"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $R\\ge1$, the series in [F20] has nonnegative terms at $R^2/2$, so $e^{R^2/2}\\ge(R^2/2)^2/2=R^4/8$. By [F18], $e^{-R^2/2}=1/e^{R^2/2}$; hence $0<g(R)\\le8/(\\sqrt{2\\pi}R^4)$ and both $g(R)$ and $Rg(R)$ tend to zero. For each positive integer $R$, FTC on each half interval gives $\\int_{-R}^R|x|g(x)\\,dx=2[g(0)-g(R)]$. Thus MCT proves $\\mathbb E|Z|=2g(0)<\\infty$. Also $\\int_{-R}^R xg(x)\\,dx=g(-R)-g(R)=0$; DCT with majorant $|x|g(x)$ proves $\\mathbb EZ=0$. Integration by parts with $u=x,v=g$ gives $\\int_{-R}^R x^2g(x)\\,dx=\\int_{-R}^R g(x)\\,dx-2Rg(R)$. MCT and [F2] now give $\\mathbb EZ^2=1$. All truncations here use the explicit integers R.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F7",
+            "F8",
+            "F10",
+            "F13",
+            "F18",
+            "F20",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the finite first moment and [F12], $\\varphi_Z\\prime(t)=i\\int x e^{itx}g(x)\\,dx$. On $[-R,R]$, componentwise integration by parts, using [F14]–[F15], gives $\\int x e^{itx}g(x)\\,dx=-[e^{itx}g(x)]_{-R}^R+it\\int e^{itx}g(x)\\,dx$. The boundary has modulus at most $2g(R)\\to0$. The two integrands are dominated respectively by $|x|g(x)$ and $g(x)$, already integrable. DCT therefore gives $\\varphi_Z\\prime(t)=-t\\varphi_Z(t)$ for every t, with no improper differentiation left unjustified.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F8",
+            "F12",
+            "F13",
+            "F14",
+            "F15"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By the real-component product and chain rules, $H(t)=e^{t^2/2}\\varphi_Z(t)$ has derivative zero. Apply [F16] to its real and imaginary parts on every real interval. Since $H(0)=\\int g=1$, $H(t)=1$ for all t, hence $\\varphi_Z(t)=e^{-t^2/2}$. For $X=m+\\sigma Z$ in law, [F17] yields $e^{imt}\\varphi_Z(\\sigma t)$, and [F18] combines the exponents. Its moments follow by expanding the finite integrable expressions: $\\mathbb EX=m+\\sigma\\mathbb EZ=m$ and $\\mathbb E(X-m)^2=\\sigma^2\\mathbb EZ^2=\\sigma^2$. For $\\sigma=0$ the variable equals m almost surely and both formulas give the Dirac law directly.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F4",
+            "F5",
+            "F16",
+            "F17",
+            "F18"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability law cannot have empty underlying mass; all integrations use the nonempty real line."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 include t=0 and sigma=0 without dividing by them."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 checks phi(0)=1; step 2.1 proves standard variance one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the Dirac normal sigma=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 check both compact boundary terms and their limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the exact inherited AC use; truncations use integer R."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an explicit transform and moment identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed in this lemma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 21 dependencies, 19 facts, limiting and boundary-sensitive). Step-7 Alpha derived the signed and complex density-integration identity from the cited nonnegative theorem using positive-negative and real-imaginary parts. Alpha checked the standard-normal core: E|Z|=2g(0)<infinity by FTC on half intervals, EZ=0 by symmetry with majorant |x|g, EZ^2=1 by parts with boundary term 2Rg(R)->0, phi_prime_Z(t)=-t phi_Z(t) from finite-interval integration by parts plus dominated convergence, and H(t)=e^{t^2/2}phi_Z(t) having zero derivative, hence phi_Z(t)=e^{-t^2/2}. The affine step X=m+sigma Z and the sigma=0 point mass are consistent. AC is used exactly as declared. Accepted after the licensed density-interface repair."
+      }
+    },
+    "lem-second-order-characteristic-function-expansion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-taylor-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\in\\mathbb N$, and suppose $f$ has derivatives through order $n+1$ on the closed interval between $a$ and $x$, with the usual endpoint continuity. If $|f^{(n+1)}(t)|\\le M$ throughout that interval, then\n$$|R_{n,a}f(x)|\\le \\frac{M}{\\iota((n+1)!)}|x-a|^{n+1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-characteristic-function-of-a-real-random-variable",
+          "source_section": "Definition",
+          "quote": "For a real random variable $X$ on $(\\Omega,\\mathcal F,\\mathbb P)$, its **characteristic function** is\n$$\\varphi_X(t)=\\mathbb E[e^{itX}]=\\int_{\\mathbb R}e^{itx}\\,\\mathbb P_X(dx),\\qquad t\\in\\mathbb R.$$\nFor a specified Borel probability measure $\\mu$ on $\\mathbb R$, write $\\varphi_\\mu(t)=\\int e^{itx}\\,\\mu(dx)$.\n\nThe complex integral means the sum of the real integral and $i$ times the imaginary integral, as in [[def-integrable-real-and-complex-functions-and-their-integrals]]. Euler's formula in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] gives $e^{itx}=\\cos(tx)+i\\sin(tx)$, a continuous function of $x$ with modulus one. Its components are bounded and measurable, hence integrable against a probability measure. [[thm-change-of-variables-for-expectation]] therefore applies to this bounded Borel function and proves the displayed identity. [[thm-integral-triangle-inequality]] gives $|\\varphi_\\mu(t)|\\le\\int1\\,d\\mu=1$.\n\nNo moment assumption is imposed. In particular $X=0$ gives $\\varphi_X\\equiv1$ and a constant $X=c$ gives $\\varphi_X(t)=e^{itc}$. These definitions require no choice of representatives or new use of AC.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Taylor at zero through degree two for cosine and sine, with third derivatives bounded by one, gives $|\\cos u-1+u^2/2|\\le|u|^3/6$ and $|\\sin u-u|\\le|u|^3/6$. Euler form and the triangle inequality give $|r(u)|\\le|u|^3/3$. Taylor through degree one gives $|\\cos u-1|\\le u^2/2$ and $|\\sin u-u|\\le u^2/2$, hence $|e^{iu}-1-iu|\\le u^2$. Adding $u^2/2$ bounds $|r(u)|\\le3u^2/2\\le4u^2$ for all real u. At u=0 all remainders vanish.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For $0<|t|\\le1/n$, the first step gives $|r(tX)|/t^2\\le X^2\\min(|X|/(3n),4)$. This is a measurable nonnegative sequence tending pointwise to zero, bounded by the integrable $4X^2$. DCT therefore makes its expectations tend to zero. The bound is uniform over all such t, so $\\mathbb E r(tX)=o(t^2)$ as a genuine two-sided real limit, without choosing a sequence of frequencies or requiring $\\mathbb E|X|^3<\\infty$. Also $|X|\\le1+X^2$ gives integrability of the linear term.",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "By linearity, $\\varphi_X(t)=1+it\\mathbb EX-t^2\\mathbb EX^2/2+\\mathbb E r(tX)$. Insert the stated moments and the preceding remainder limit. If $\\sigma=0$, the same majorants have zero integral, so the remainder vanishes and the formula still holds. At t=0 the defining expectation is one. Every limiting integrand was explicitly specified; no choice principle enters.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The law is a probability, so empty total mass is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 treat u=0,t=0 and variance zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks phi(0)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles zero variance by zero majorant integral."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the two-sided real limit with a uniform 1/n bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a prescribed sequence of majorants and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an expansion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse moment claim is made."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 7 dependencies, 6 facts, limiting and boundary-sensitive). Alpha checked the Taylor bounds |cos u-1+u^2/2|<=|u|^3/6 and |sin u-u|<=|u|^3/6 giving |r(u)|<=|u|^3/3, the degree-one bounds giving |e^{iu}-1-iu|<=u^2, and hence |r(u)|<=4u^2. The DCT step uses the majorant X^2 min(|X|/(3n),4) valid for 0<|t|<=1/n, so no third moment is assumed and the limit is two-sided with no frequency subsequence. Accepted."
+      }
+    },
+    "lem-product-of-near-one-characteristic-factors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-exponential-series-converges-everywhere",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$, the series $\\sum z^n/n!$ converges absolutely. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-exponential-series-has-infinite-radius]], [[thm-absolute-convergence-of-complex-series]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Put $w_{n,k}=z_{n,k}-1$. For $|w|\\le1/2$, absolute convergence gives $|e^w-1-w|\\le\\sum_{j\\ge2}|w|^j/j!\\le |w|^2\\sum_{j\\ge2}(1/2)^{j-2}/2=|w|^2$. Also $|1+w|\\le1+|w|\\le e^{|w|}$ and $|e^w|\\le\\sum_{j\\ge0}|w|^j/j!=e^{|w|}$. The real series is nonnegative term by term, which proves the middle inequality without a logarithm.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For arbitrary finite lists a,b of length r, subtracting successive mixed products gives $\\prod_{k=1}^r a_k-\\prod_{k=1}^r b_k=\\sum_{j=1}^r(a_j-b_j)(\\prod_{k<j}a_k)(\\prod_{k>j}b_k)$. The cancellation follows by expanding each difference; for r=0 both products are one and the sum zero. Apply it with $a_k=1+w_{n,k}$ and $b_k=e^{w_{n,k}}$. For all sufficiently large n every modulus of w is at most 1/2. Each pair of partial products is bounded by $\\exp(\\sum_{k\\ne j}|w_{n,k}|)\\le e^M$, so the difference of the row products has modulus at most $e^M\\sum_j|w_{n,j}|^2$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The bound tends to zero by hypothesis. Repeated exponential addition identifies the comparison product with $\\exp(\\sum_k w_{n,k})$, including empty and one-factor rows. If M=0 then all w vanish and equality is exact in every row. All products and telescoping sums are finite; no branch of logarithm or choice principle is used.",
+          "inputs": [
+            "step 2.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 check empty rows: both products one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks M=0 and every factor equal to one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 include single-factor rows and z=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 gives exact equality for identically one rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes |w|=1/2; the hypotheses put all later rows in that bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses finite algebra only; no choices or logarithm branches."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a sufficient product estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The hypotheses are not claimed necessary."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk high (score 5: 3 facts, limiting and boundary-sensitive). Alpha checked |e^w-1-w|<=|w|^2 for |w|<=1/2 from the exponential series, the finite-product telescoping identity prod a_k - prod b_k = sum_j (a_j-b_j)(prod_{k<j}a_k)(prod_{k>j}b_k), and the bound e^M sum_j |w_{n,j}|^2 using |1+w|<=e^{|w|}. Empty and single-factor rows and M=0 are covered. Accepted."
+      }
+    },
+    "thm-lindeberg-levy-iid-central-limit-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-second-order-characteristic-function-expansion",
+          "source_section": "Statement",
+          "quote": "If $\\mathbb EX=0$ and $\\mathbb EX^2=\\sigma^2<\\infty$, then $\\varphi_X(t)=1-\\sigma^2t^2/2+o(t^2)$ as $t\\to0$. No third moment or choice axiom is assumed. The same scalar estimates give $0\\le1-\\cos u\\le u^2/2$ for every real u. More precisely, for $r(u)=e^{iu}-1-iu+u^2/2$, $$|r(u)|\\le \\min(|u|^3/3,4u^2),\\qquad |e^{iu}-1-iu|\\le u^2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-near-one-characteristic-factors",
+          "source_section": "Statement",
+          "quote": "Let each row $(z_{n,k})_{1\\le k\\le k_n}$ be a finite family of complex numbers; empty rows are allowed with maximum zero. Suppose $\\max_k|z_{n,k}-1|\\to0$, $M:=\\sup_n\\sum_k|z_{n,k}-1|<\\infty$, and $\\sum_k|z_{n,k}-1|^2\\to0$. Then $$\\prod_k z_{n,k}-\\exp\\!\\left(\\sum_k(z_{n,k}-1)\\right)\\longrightarrow0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-characteristic-function-criterion-for-weak-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For Borel probability laws $\\mu_n$ and a specified Borel probability law $\\mu$ on $\\mathbb R$,\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)\\ \\text{for every }t\\in\\mathbb R.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Set $Y_k=(X_k-m)/\\sigma$. The affine functions are Borel; independence is preserved because an event concerning Y_k is the corresponding inverse-image event concerning X_k. Their laws agree, and linearity gives $\\mathbb EY_k=0$, $\\mathbb EY_k^2=1$. The normalized sum in the statement is $n^{-1/2}\\sum_{k=1}^nY_k$. The positive finite variance makes every division well defined.",
+          "inputs": [
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Fix a nonzero real t and write $w_n=\\varphi_{Y_1}(t/\\sqrt n)-1$. By [F1], $nw_n\\to-t^2/2$. Therefore $w_n\\to0$, $n|w_n|$ is bounded, and $n|w_n|^2=(n|w_n|)|w_n|\\to0$. The bounds extend to the finitely many early n since their values are finite. Apply [F2] to the row with n copies of $1+w_n$. Its product differs from $e^{nw_n}$ by a quantity tending to zero. Continuity of the exponential yields the limit $e^{-t^2/2}$. At t=0 each factor is exactly one.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "By [F3], row independence identifies that product with the characteristic function of the normalized sum. By [F4] its limit is the standard-normal transform, continuous at zero and equal to one there. Thus [F5] proves the claimed convergence of laws. AC is inherited only through the normal-law and Levy-criterion suppliers; the iid sequence is given and no new copies are constructed. This theorem excludes sigma=0 because its displayed normalization divides by sigma.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Rows have length n>=1; the iid sequence is given on a probability space.",
+          "reviewed": {
+            "upheld": true,
+            "by": "codex-owner-operator",
+            "reason": "The displayed iid sum is indexed by n at least one in the theorem statement, so no empty sample sum is quantified; the sequence of random variables is supplied on a probability space."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies frequency zero; step 3.1 explains exclusion of variance zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 standardizes variance to one and step 2.1 includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 states why deterministic summands are outside this normalized formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles both signs of fixed t using the two-sided expansion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies inherited AC; no independent copies are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a convergence theorem, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse moment condition is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 10 dependencies, 6 facts, limiting and boundary-sensitive). Alpha checked the standardization Y_k=(X_k-m)/sigma, the expansion n w_n -> -t^2/2 for w_n=phi_{Y_1}(t/sqrt n)-1, the three hypotheses of the near-one product lemma (max|w|->0, bounded n|w_n|, n|w_n|^2->0), and the resulting pointwise transform limit e^{-t^2/2} continuous at zero, to which Levy applies at every fixed t (t=0 trivially). Accepted."
+      }
+    },
+    "cor-de-moivre-laplace-central-limit-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-countable-independent-copies-exist",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. Every probability measure $\\nu$\non $(S,\\Sigma)$ is the common law of a countable independent family of\n$S$-valued random elements.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bernoulli-and-binomial-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "If $X$ is Bernoulli$(p)$, then $\\mathbb E[X]=p$ and $\\operatorname{Var}(X)=p(1-p)$. If $S$ is binomial$(n,p)$, then\n$$\\mathbb E[S]=np,\\qquad \\operatorname{Var}(S)=np(1-p).$$\nThese formulas include $p=0$, $p=1$, and $n=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "For $p\\in[0,1]$, a **Bernoulli$(p)$ random variable** takes the value $1$ with probability $p$ and $0$ with probability $1-p$.\n\nFor $n\\in\\mathbb N$, a **binomial$(n,p)$ random variable** is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "By [F2], AC supplies the countable and dependent choice required in [F1]. Apply that result to the two-point probability with masses 1-p and p to obtain iid Bernoulli variables $I_k$. The law of $C_n=\\sum_{k=1}^n I_k$ is Bin(n,p) by [F5]. In particular it agrees with the specified law of B_n for each n; equality persists under the displayed affine standardization.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "By [F3], $\\mathbb EI_k=p$ and $\\operatorname{Var}(I_k)=p(1-p)>0$. The variables are bounded, hence their second moments are finite. [F4] gives $(C_n-np)/\\sqrt{np(1-p)}\\Rightarrow N(0,1)$. Equality of laws in step 1.1 transfers the conclusion to B_n. The excluded p=0,1 and n=0 would make the denominator zero; no claim using that denominator is made there. Neither a finite-n error estimate nor continuity correction follows from this limit theorem.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes n=0 because its denominator is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes p=0 rather than dividing by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes p=1; n=1 has a positive denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explains both deterministic endpoint laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the fixed condition 0<p<1 is used for positive variance; endpoints are expressly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 names AC-to-DC-to-countable-choice and the independent-copy construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a limit conclusion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse or error bound is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 8: 6 dependencies, 5 facts, limiting and boundary-sensitive). Alpha checked the AC -> DC + AC_omega transfer, the independent Bernoulli copies from the countable-copy corollary, the binomial law of the partial sums C_n, the positivity p(1-p)>0 for 0<p<1, and the transfer of the limit by equality of laws for each n. The statement correctly avoids any coupling between the different B_n. Accepted."
+      }
+    },
+    "def-row-wise-independent-centered-triangular-array": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition excludes empty rows by k_n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits identically zero entries and requires every mean zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition explains independence for a single-entry row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows deterministic zero entries."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes k=1 and k=k_n in every finite row."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition specifies given rows and imposes no selection axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition derives subfamily factorization by taking other sets to be the real line and cites the exact rectangle criterion for equivalence with generated-sigma-algebra independence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition cites the exact rectangle criterion for both directions and recovers the full-row identity by taking the full subfamily."
+        }
+      ]
+    },
+    "def-total-row-variance-and-lindeberg-condition": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition uses the positive finite row lengths of the array definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero terms but prohibits division by a zero total variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition proves total normalized variance one and 0<=L<=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition distinguishes an all-zero-variance row from a normalizable row."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition specifies strict cutoff and epsilon>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition consists of given finite sums and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition scales the cutoff event from Y to X."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition uses the same exact event equality to scale from X to Y."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 11: existence/well-definedness, biconditional, 5 dependencies, limiting and boundary-sensitive language). Alpha checked the definitions of v_{n,k}, s_n, and the Lindeberg quantities; the integrand bound by X_{n,k}^2 gives 0<=L_n(epsilon)<=1, and the equivalence with the normalized form follows from the exact identity |Y_{n,k}|>epsilon iff |X_{n,k}|>epsilon s_n and scalar homogeneity of the expectation. The zero-variance exclusion and the strict-inequality cutoff are explicit, and no choice or independence is needed. Accepted."
+      }
+    },
+    "lem-lindeberg-condition-implies-feller-negligibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-row-variance-and-lindeberg-condition",
+          "source_section": "Definition",
+          "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Fix $\\varepsilon>0$. For each entry split its square on $|X_{n,k}|\\le\\varepsilon$ and its complement. The first integral is at most $\\varepsilon^2\\mathbb P(|X_{n,k}|\\le\\varepsilon)\\le\\varepsilon^2$. The second is one nonnegative term of $L_n(\\varepsilon)$. Centering identifies variance with second moment, hence $0\\le\\max_k\\operatorname{Var}(X_{n,k})\\le\\varepsilon^2+L_n(\\varepsilon)$. The maximum exists because the row is finite and nonempty.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For any $\\eta>0$, take $0<\\varepsilon<\\sqrt{\\eta/2}$. Lindeberg gives an index after which $L_n(\\varepsilon)<\\eta/2$. The preceding bound is then less than eta, proving convergence to zero. Values at the cutoff stay in the small part, zero entries satisfy the bound, and a single variance-one summand in every row would contradict this conclusion and hence could not satisfy Lindeberg. The proof uses only given finite rows and explicit inequalities, not independence or choice.",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses nonempty finite rows to define the maximum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes zero entries and step 2.1 proves a zero limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies why persistent single-entry variance-one rows cannot meet Lindeberg."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows degenerate entries without dividing by their variances."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 assigns equality at epsilon to the small part."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 requires no independence or choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the Lindeberg-to-negligibility implication is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Feller negligibility alone is not asserted to imply Lindeberg."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk high (score 7: 4 dependencies, 3 facts, limiting and boundary-sensitive). Alpha checked the splitting E X^2 = E[X^2 1_{|X|<=epsilon}] + E[X^2 1_{|X|>epsilon}] with the first term at most epsilon^2 and the second a nonnegative term of L_n(epsilon), giving max_k Var(X_{n,k}) <= epsilon^2 + L_n(epsilon); choosing epsilon<sqrt(eta/2) and n large proves convergence. Zero entries, the cutoff convention and independence are handled as claimed. Accepted."
+      }
+    },
+    "thm-lindeberg-feller-central-limit-theorem-sufficiency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-row-variance-and-lindeberg-condition",
+          "source_section": "Definition",
+          "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-second-order-characteristic-function-expansion",
+          "source_section": "Statement",
+          "quote": "If $\\mathbb EX=0$ and $\\mathbb EX^2=\\sigma^2<\\infty$, then $\\varphi_X(t)=1-\\sigma^2t^2/2+o(t^2)$ as $t\\to0$. No third moment or choice axiom is assumed. The same scalar estimates give $0\\le1-\\cos u\\le u^2/2$ for every real u. More precisely, for $r(u)=e^{iu}-1-iu+u^2/2$, $$|r(u)|\\le \\min(|u|^3/3,4u^2),\\qquad |e^{iu}-1-iu|\\le u^2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-lindeberg-condition-implies-feller-negligibility",
+          "source_section": "Statement",
+          "quote": "For a centered triangular array with $\\sum_k\\mathbb EX_{n,k}^2=1$, the Lindeberg condition implies **Feller negligibility**: $\\max_k\\operatorname{Var}(X_{n,k})\\to0$. Independence is not needed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-product-of-near-one-characteristic-factors",
+          "source_section": "Statement",
+          "quote": "Let each row $(z_{n,k})_{1\\le k\\le k_n}$ be a finite family of complex numbers; empty rows are allowed with maximum zero. Suppose $\\max_k|z_{n,k}-1|\\to0$, $M:=\\sup_n\\sum_k|z_{n,k}-1|<\\infty$, and $\\sum_k|z_{n,k}-1|^2\\to0$. Then $$\\prod_k z_{n,k}-\\exp\\!\\left(\\sum_k(z_{n,k}-1)\\right)\\longrightarrow0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-characteristic-function-criterion-for-weak-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For Borel probability laws $\\mu_n$ and a specified Borel probability law $\\mu$ on $\\mathbb R$,\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)\\ \\text{for every }t\\in\\mathbb R.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Put $Y_{n,k}=X_{n,k}/s_n$ and $v_{n,k}=\\mathbb EY_{n,k}^2$. By [F1], the normalized row has total variance one, remains centered and independent, and its tail sum $L_n(\\varepsilon)$ tends to zero. Fix real t and write $w_{n,k}=\\varphi_{Y_{n,k}}(t)-1$. The centering and scalar bound in [F2] give $|w_{n,k}|=|\\mathbb E(e^{itY_{n,k}}-1-itY_{n,k})|\\le t^2v_{n,k}$, using [F8]–[F9]. Consequently $\\sum_k|w_{n,k}|\\le t^2$, $\\max_k|w_{n,k}|\\le t^2\\max_kv_{n,k}\\to0$, and $\\sum_k|w_{n,k}|^2\\le t^4\\max_kv_{n,k}\\to0$ by [F3].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "With r as in [F2], linearity gives $\\sum_k w_{n,k}=-t^2/2+\\sum_k\\mathbb E r(tY_{n,k})$. On $|Y_{n,k}|\\le\\varepsilon$ the cubic bound gives $|r(tY_{n,k})|\\le |t|^3\\varepsilon Y_{n,k}^2/3$; on the complement the quadratic bound gives $|r(tY_{n,k})|\\le4t^2Y_{n,k}^2$. Therefore $|\\sum_k\\mathbb E r(tY_{n,k})|\\le |t|^3\\varepsilon/3+4t^2L_n(\\varepsilon)$. First take limsup in n, then let the arbitrary positive epsilon decrease to zero. This proves $\\sum_k w_{n,k}\\to-t^2/2$, without interchanging an unbounded number of unquantified little-o terms.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "All hypotheses of [F4] were verified in step 1.1, so $\\prod_k(1+w_{n,k})-\\exp(\\sum_k w_{n,k})\\to0$. Step 2.1 makes its limit $e^{-t^2/2}$. By [F5] this product is the row-sum transform, and by [F6] its limit is the transform of N(0,1), continuous at zero. [F7] proves the result. At t=0 all factors and the limit are exactly one. AC is inherited in [F6]–[F7]; rows on different probability spaces cause no difficulty because only their laws are compared.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each row has positive finite length by the array convention.",
+          "reviewed": {
+            "upheld": true,
+            "by": "codex-owner-operator",
+            "reason": "The triangular-array definition explicitly requires k_n at least one, and this theorem also assumes positive total variance s_n, so its row sum never ranges over an empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles t=0; step 1.1 uses s_n>0 before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes normalized variance one, step 3.1 checks transform value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero entries are allowed in step 1.1; a zero total row is excluded by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes equality in the small cutoff region."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies inherited AC and needs no coupling across rows."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves sufficiency only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse requires an additional hypothesis and is not used here."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 10 dependencies, 9 facts, limiting and boundary-sensitive). Alpha checked every estimate: centering gives |w_{n,k}|<=t^2 v_{n,k}, hence sum|w|<=t^2, max|w|->0 and sum|w|^2<=t^4 max_k v_{n,k}->0 by Feller negligibility; the two-region remainder bound |sum_k E r(tY_{n,k})|<=|t|^3 epsilon/3 + 4t^2 L_n(epsilon) yields sum_k w_{n,k}->-t^2/2 after limsup and epsilon->0; the near-one product lemma then gives the transform limit e^{-t^2/2}, so Levy applies. Accepted."
+      }
+    },
+    "thm-feller-converse-to-lindeberg-feller": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-second-order-characteristic-function-expansion",
+          "source_section": "Statement",
+          "quote": "If $\\mathbb EX=0$ and $\\mathbb EX^2=\\sigma^2<\\infty$, then $\\varphi_X(t)=1-\\sigma^2t^2/2+o(t^2)$ as $t\\to0$. No third moment or choice axiom is assumed. The same scalar estimates give $0\\le1-\\cos u\\le u^2/2$ for every real u. More precisely, for $r(u)=e^{iu}-1-iu+u^2/2$, $$|r(u)|\\le \\min(|u|^3/3,4u^2),\\qquad |e^{iu}-1-iu|\\le u^2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-product-of-near-one-characteristic-factors",
+          "source_section": "Statement",
+          "quote": "Let each row $(z_{n,k})_{1\\le k\\le k_n}$ be a finite family of complex numbers; empty rows are allowed with maximum zero. Suppose $\\max_k|z_{n,k}-1|\\to0$, $M:=\\sup_n\\sum_k|z_{n,k}-1|<\\infty$, and $\\sum_k|z_{n,k}-1|^2\\to0$. Then $$\\prod_k z_{n,k}-\\exp\\!\\left(\\sum_k(z_{n,k}-1)\\right)\\longrightarrow0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-levy-continuity-theorem-forward-direction",
+          "source_section": "Statement",
+          "quote": "If Borel probability laws $\\mu_n\\Rightarrow\\mu$ on $\\mathbb R$, then $\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)$ for every real $t$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-total-row-variance-and-lindeberg-condition",
+          "source_section": "Definition",
+          "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Fix real t and put $v_{n,k}=\\mathbb EX_{n,k}^2$ and $w_{n,k}=\\mathbb E(e^{itX_{n,k}}-1)$. Centering, [F1], [F9] and [F10] give $|w_{n,k}|\\le t^2v_{n,k}$. Thus $\\sum_k|w_{n,k}|\\le t^2$, $\\max_k|w_{n,k}|\\to0$, and $\\sum_k|w_{n,k}|^2\\le t^4\\max_kv_{n,k}\\to0$. By [F2]–[F5] and the assumed normal limit, $\\exp(\\sum_k w_{n,k})\\to e^{-t^2/2}$. This inference uses the forward continuity theorem only, not Lindeberg sufficiency.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Define the nonnegative function $d_t(x)=t^2x^2/2-(1-\\cos(tx))$. Nonnegativity follows from the cosine Taylor bound in [F1]; also $d_t(x)\\le t^2x^2/2$ because $\\cos(tx)\\le1$. Hence $D_n(t):=\\sum_k\\mathbb E d_t(X_{n,k})$ is finite and nonnegative. Total variance one and [F9] give $\\operatorname{Re}\\sum_k w_{n,k}=-t^2/2+D_n(t)$. Exponential addition and Euler modulus show $|\\exp(\\sum_k w_{n,k})|=e^{-t^2/2+D_n(t)}$. Step 1.1 therefore implies $e^{D_n(t)}\\to1$. Since the nonnegative series gives $0\\le D_n(t)\\le e^{D_n(t)}-1$, we obtain $D_n(t)\\to0$. No complex logarithm or subsequence of measures is needed.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Now fix any $\\varepsilon>0$ and take the single frequency $t=4/\\varepsilon$. On $|x|>\\varepsilon$ we have $t^2x^2>16$, and $1-\\cos(tx)\\le2$ yields $d_t(x)\\ge t^2x^2/2-2\\ge t^2x^2/4$. On the complementary set d_t is nonnegative. Integrating and summing gives $\\sum_k\\mathbb E[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon\\}}]\\le4D_n(t)/t^2\\to0$. This is precisely [F11], for every positive epsilon. AC is inherited from the target normal-law construction; the proof uses no Helly selection, uniqueness inversion or backward application of sufficiency. Zero entries and t=0 in the earlier steps are harmless, but the final chosen t is nonzero.",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "F11"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Finite positive row lengths are part of the array convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles zero entries and notes the final chosen t is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the exact total variance one; exp(D)>=1+D controls the limit one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows zero-variance summands without dividing by their variances."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 controls the strict tail |x|>epsilon and leaves the complementary boundary in the nonnegative part."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies inherited AC and explicitly eliminates the scaffold selection argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 prove necessity under Feller negligibility."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Sufficiency is a separate earlier theorem and is not assumed by this proof."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 12 dependencies, 11 facts, limiting and boundary-sensitive). Alpha checked that |w_{n,k}|<=t^2 v_{n,k} gives the near-one product hypotheses, so exp(sum w_{n,k})->e^{-t^2/2} from the assumed normal limit and the forward continuity theorem. With d_t(x)=t^2x^2/2-(1-cos(tx))>=0 one has Re sum w_{n,k}=-t^2/2+D_n(t) and |exp(sum w)|=e^{-t^2/2+D_n(t)}, so D_n(t)->0; at the single frequency t=4/epsilon, d_t>=t^2x^2/4 on |x|>epsilon gives the Lindeberg bound 4D_n(t)/t^2. No converse or logarithm is used. Accepted."
+      }
+    },
+    "cor-lyapunov-central-limit-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-row-variance-and-lindeberg-condition",
+          "source_section": "Definition",
+          "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Fix $\\varepsilon>0$. On $|X_{n,k}|>\\varepsilon s_n>0$, monotonicity of the positive real power gives $|X_{n,k}|^\\delta>(\\varepsilon s_n)^\\delta$. Multiplying by $X_{n,k}^2/(\\varepsilon s_n)^\\delta$ gives $X_{n,k}^2\\le |X_{n,k}|^{2+\\delta}/(\\varepsilon s_n)^\\delta$ there. Off that event the truncated square is zero and the right side is nonnegative, including X=0. [F3] therefore bounds $L_n(\\varepsilon)\\le\\varepsilon^{-\\delta}s_n^{-(2+\\delta)}\\sum_k\\mathbb E|X_{n,k}|^{2+\\delta}$. The exponent simplification uses [F4]. For positive delta, monotonicity of log and exp in the defining formula [F5] gives the asserted power monotonicity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The right side tends to zero for this fixed positive epsilon, so Lindeberg holds for every epsilon. All hypotheses of [F2] are now satisfied: finite second moments, centered independent rows and positive total standard deviations were given. Apply it to obtain the stated limit. The positive delta is fixed across all rows; delta=0 is excluded because the displayed normalized second-moment sum would be one. AC is inherited from [F2].",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Rows have positive finite lengths."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes X=0 and uses epsilon*s_n>0 before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explains that delta=0 would give a normalized moment sum of one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero entries cause no difficulty in step 1.1; all-zero rows are excluded by s_n>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 applies on the strict tail and treats its complement separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies AC inherited from Lindeberg sufficiency."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Lyapunov is a sufficient moment condition only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No necessity of a higher moment is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 9 dependencies, 5 facts, limiting and boundary-sensitive). Alpha checked the tail estimate X^2 <= |X|^{2+delta}/(epsilon s_n)^delta on |X|>epsilon s_n, giving L_n(epsilon)<=epsilon^{-delta}s_n^{-(2+delta)} sum_k E|X_{n,k}|^{2+delta}->0 for each epsilon, so Lindeberg and hence the CLT follow; delta>0 is fixed across rows and delta=0 is correctly excluded. Accepted."
+      }
+    },
+    "def-multivariate-normal-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-countable-independent-copies-exist",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. Every probability measure $\\nu$\non $(S,\\Sigma)$ is the common law of a countable independent family of\n$S$-valued random elements.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For any square-integrable vector X, covariance entries $\\Sigma_{ij}=\\mathbb E[(X_i-m_i)(X_j-m_j)]$ exist because $2|ab|\\le a^2+b^2$. They are symmetric. Finite linearity gives $u^T\\Sigma u=\\mathbb E(\\sum_i u_i(X_i-m_i))^2\\ge0$, so covariance matrices are positive semidefinite. Conversely let a symmetric positive semidefinite Sigma be given and take its nonnegative symmetric square root A by [F2], so $AA^T=A^2=\\Sigma$.",
+          "inputs": [
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "By [F3]–[F4], AC realizes d independent standard normals $Z_1,\\ldots,Z_d$, each of mean zero and second moment one by [F1]. Define $X=m+AZ$. Coordinate linear combinations are measurable, so X is a Borel random vector and its pushforward is a probability by [F9]. For any u and real t, [F5] and [F1] give $\\mathbb E e^{it u\\cdot X}=e^{it u\\cdot m}\\prod_j e^{-t^2(A^Tu)_j^2/2}=e^{it u\\cdot m-t^2u^T\\Sigma u/2}$. This equals the characteristic function of $N(u\\cdot m,u^T\\Sigma u)$ by [F1]; [F6] gives equality of scalar laws. Thus the required projection condition holds, including u=0 and all null directions.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Finite linearity gives $\\mathbb EX=m$. By [F7], $\\mathbb EZ_iZ_j=0$ for i different from j, and [F1] gives $\\mathbb EZ_i^2=1$. Hence the covariance of AZ is $A I A^T=\\Sigma$, with every product integrable by the bound in step 1.1. If Sigma=0 then A=0 and the law is the point mass at m; no inverse or density is required even when only some directions are null. For d=1 the construction agrees with the scalar affine normal. If dimension zero is admitted, use the unique law on the singleton empty tuple instead. AC is spent in the standard-normal construction, independent-copy realization and scalar uniqueness supplier.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F7",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 supplies the optional zero-dimensional singleton convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 handle u=0 and Sigma=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks d=1 and each standard coordinate has variance one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles singular covariance and point masses without inversion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The parameter space has no interval endpoints; its semidefinite boundary is covered by the singular case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies all AC uses and the finite-dimensional square-root supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves covariance is necessarily symmetric positive semidefinite."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 construct a law for every stated symmetric positive semidefinite pair."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 11: 12 dependencies, 9 facts, existence/uniqueness, limiting and boundary-sensitive). Alpha checked the construction X=m+AZ with A=Sigma^{1/2} symmetric positive semidefinite: projections u dot X have transform exp(i t u dot m - t^2 u^T Sigma u/2), matching N(u dot m,u^T Sigma u); the mean is m and the covariance A I A^T = Sigma; singular Sigma including Sigma=0 is handled; uniqueness is correctly deferred to the following characteristic-function lemma. AC is spent exactly in the standard-normal and copy constructions plus the scalar uniqueness supplier."
+      }
+    },
+    "lem-characteristic-function-of-a-multivariate-normal-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For fixed t, [F1] makes $t\\cdot X$ scalar normal of mean $t\\cdot m$ and variance $t^T\\Sigma t$. Evaluate its characteristic function from [F2] at scalar frequency one. This gives the displayed formula. If t=0 both sides are one; if $t^T\\Sigma t=0$ the scalar law is the point mass at $t\\cdot m$ and the same formula applies.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Let Y have another Borel probability law with the same displayed vector transform. For every u and scalar s, $\\varphi_{u\\cdot Y}(s)=\\Phi_Y(su)=\\Phi_X(su)=\\varphi_{u\\cdot X}(s)$. Scalar uniqueness [F3] identifies each pair of projection laws. Then [F4] identifies the vector laws. Thus the construction in [F1] is independent of any realization choices. No determinant or inverse of Sigma is used. AC is inherited from [F1]–[F4]; in dimension zero the single possible law makes the assertion immediate.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the optional zero-dimensional singleton law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the zero vector frequency."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the scalar transform at frequency one and obtains value one at t=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats every null covariance direction as a scalar point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoints; semidefinite boundary cases are treated in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies inherited AC and independence of realization."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains the transform from the projection-law definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows that the same transform forces the same vector law."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk high (score 6: 6 dependencies, 4 facts, boundary-sensitive). Alpha checked the transform formula from the scalar projection law at frequency one, the degenerate case t^T Sigma t=0 giving the point mass at t dot m, and uniqueness via scalar uniqueness on all projections plus Cramer-Wold. No determinant or inverse of Sigma is used, so the singular case is covered. Accepted."
+      }
+    },
+    "thm-multivariate-iid-central-limit-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed $u\\in\\mathbb R^d$ set $Y_k=u\\cdot(X_k-m)$. These are iid: inverse images under the continuous projection preserve the finite independence identities and the common law. By [F6], $|Y_k|^2\\le\\|u\\|^2\\|X_k-m\\|^2$; the latter is integrable since $\\|X_k-m\\|^2\\le2\\|X_k\\|^2+2\\|m\\|^2$. Each centered coordinate product is integrable by $2|ab|\\le a^2+b^2$, and symmetry of these products gives $\\Sigma_{ij}=\\Sigma_{ji}$. Finite linearity gives $\\mathbb EY_k=0$ and $\\mathbb EY_k^2=u^T\\Sigma u=:v\\ge0$. Because this holds for every $u$, the symmetric matrix $\\Sigma$ is positive semidefinite. Consequently [F2] supplies the target law $G=N_d(0,\\Sigma)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If v>0, [F1] gives $(nv)^{-1/2}\\sum_{k=1}^nY_k\\Rightarrow N(0,1)$. Scaling by $\\sqrt v$ is continuous; [F7] gives $n^{-1/2}\\sum_kY_k\\Rightarrow N(0,v)$, which is the u-projection of G by [F2]. If v=0, [F4] applied to $Y_k^2$ gives $Y_k=0$ almost surely for each k. For each fixed n the union of the finitely many exceptional null sets is null, so the projected row sum is zero almost surely and has exactly the law N(0,0). Thus the same projection convergence holds without dividing by v.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The preceding convergence holds for every fixed u to the projections of the same specified probability G. [F3] therefore proves the vector conclusion. AC is inherited in the scalar CLT, Gaussian construction and Cramer–Wold theorem. A common null set across all u is neither claimed nor needed. When Sigma=0 all projections are in the zero-variance case. For d=1 this agrees with the scalar result after scaling.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the normalized sums are indexed by positive integers n (n^(-1/2) is only defined here for n>=1, and X_k starts at k=1), so each sum has n>=1 terms. The stated finite dimension d>=1 also excludes an empty coordinate family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 handle variance zero and the zero projection."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks d=1; step 2.1 uses the variance-one scalar law only when v>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly avoids division in singular directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur; the semidefinite boundary is the zero-variance branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies AC and explains why no simultaneous choice of null sets over u is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives convergence from iid finite second moments."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse moment or independence claim is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 12: biconditional, 10 dependencies, 7 facts, limiting and boundary-sensitive). Step-7 Alpha restricted the theorem to finite integer d>=1, matching the exact multivariate-normal and Cramer-Wold interfaces. Alpha checked the projection variables Y_k=u dot (X_k-m): iid, centered, of variance u^T Sigma u = v, square-integrable by Cauchy-Schwarz; for v>0 the scalar CLT plus continuous scaling gives the projection limit N(0,v); for v=0 E Y_k^2=0 forces Y_k=0 a.s. and finitely many null sets suffice per n, giving the exact law N(0,0). Cramer-Wold then identifies the vector limit, with no common null set claimed. Accepted after the licensed domain repair."
+      }
+    },
+    "rem-clt-convergence-is-only-in-distribution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark concerns laws on probability spaces, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement distinguishes the point-mass zero-covariance case from positive-variance limits."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical unit case affects these mode definitions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement applies the cited real constant-limit theorem only to scalar degenerate normal limits and explicitly distinguishes the unsupported vector extension; it also distinguishes partially singular covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or cutoff."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement preserves the cited AC hypotheses and specify that no joint coupling is constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No new equivalence is asserted; the constant-limit theorem is cited with its restriction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from distributional to almost-sure convergence is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk high (score 7: 7 dependencies, limiting and boundary-sensitive). Step-7 Alpha narrowed the real constant-limit theorem's application to scalar degenerate normal limits and explicitly notes that a multivariate extension needs a vector argument. The remark correctly distinguishes convergence in distribution from convergence in probability and almost sure convergence on a common space, and explicitly disclaims rates and almost-sure conclusions. Accepted after the licensed interface repair."
+      }
+    },
+    "ex-normal-approximation-to-binomial-probabilities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-de-moivre-laplace-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and fix $0<p<1$. If $B_n$ has law $\\operatorname{Bin}(n,p)$ for every $n\\ge1$, then $$(B_n-np)/\\sqrt{np(1-p)}\\Rightarrow N(0,1).$$ No relationship between the probability spaces of the $B_n$ is required.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-portmanteau-theorem",
+          "source_section": "Statement",
+          "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Every at most countable subset $E \\subseteq \\mathbb{R}^n$\n([[def-countable]]) is Lebesgue measurable with\n\n$$\\lambda_n(E) \\;=\\; 0,$$\n\nso $E$ is a $\\lambda_n$-null set ([[def-measure-null-set-and-almost-everywhere]]).\nIn particular every singleton is null, and on the real line the set\n$\\mathbb{Q}_{\\mathbb{R}}$ of rational reals ([[lem-rat-embeds-dense]]) satisfies\n$\\lambda_1(\\mathbb{Q}_{\\mathbb{R}}) = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The normal law assigns zero mass to each singleton: its bounded density integrates to zero on a Lebesgue-null singleton by [F3]–[F4]. The boundary of [a,b] is contained in the two endpoints, so it is a continuity set. Apply [F1] and the continuity-set implication of [F2] to get the displayed limit. Open, closed or half-open choices of the two fixed standardized endpoints have the same limit. If a=b the closed singleton has limiting probability zero; if a>b the event is empty.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Take n=100,p=1/2 and the event $45\\le B_{100}\\le55$. Its mean is 50 and standard deviation is $\\sqrt{100/4}=5$. Raw standardization gives endpoints -1 and 1, and the corresponding normal probability is $\\Phi(1)-\\Phi(-1)\\approx0.68268949$. The half-unit cell endpoints $89/2$ and $111/2$ give corrected standardized endpoints -1.1 and 1.1, and the corrected normal probability is $\\Phi(1.1)-\\Phi(-1.1)\\approx0.72866788$. These decimal evaluations are of the displayed normal integrals. The theorem does not bound either finite-n approximation error or prove that the correction always improves it. AC is inherited through [F1] and the normal-density and null-set construction.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 states that reversed endpoints give an empty event."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The repaired Example quantifies the binomial sequence only for integers n>=1, so the zero denominator at n=0 lies outside its domain; step 1.1 separately checks zero mass of boundary singletons."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the raw standardized endpoints +/-1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats a=b as a singleton continuity set with zero limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks all endpoint inclusion conventions; step 2.1 computes half-unit correction explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 names the inherited AC uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes asymptotic probabilities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No finite-n rate or guaranteed improvement is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 8: 6 dependencies, 4 facts, limiting and boundary-sensitive). Step-7 Alpha made the positive-index domain explicit, excluding the undefined n=0 normalization. Alpha checked the continuity-set argument (singleton endpoints are null) and recomputed the numerical illustration: for n=100, p=1/2 the means and standard deviation are 50 and 5, raw endpoints -1 and 1 give Phi(1)-Phi(-1) about 0.68268949, and the half-unit cell endpoints 89/2 and 111/2 standardize to -1.1 and 1.1 giving about 0.72866788. The item correctly disclaims any finite-n error bound. Accepted after the licensed boundary repair."
+      }
+    },
+    "ex-clt-for-sums-of-uniform-random-variables": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-countable-independent-copies-exist",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. Every probability measure $\\nu$\non $(S,\\Sigma)$ is the common law of a countable independent family of\n$S$-valued random elements.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The nonnegative Borel density $\\mathbf1_{[0,1]}$ defines a measure by [F1]. On [0,1] the primitives x, $x^2/2$ and $x^3/3$ have derivatives 1,x and $x^2$ by [F4]. Those derivatives are continuous and integrable by [F9], so [F3] and [F5] give integrals 1,1/2 and 1/3 respectively. Thus the measure is a probability. Apply [F2] separately to the globally nonnegative functions $x^+=\\max\\{x,0\\}$ and $x^-=\\max\\{-x,0\\}$. Their products with the density are respectively $x\\mathbf1_{[0,1]}$ and zero, so [F10] gives $\\mathbb EU=1/2-0=1/2$. Applying [F2] to the nonnegative function $x^2$ gives $\\mathbb EU^2=1/3$, hence $\\operatorname{Var}(U)=1/3-1/4=1/12$. The density-supported integrands are bounded, so no tail or improper integral is involved.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If copies need realization, [F7] lets AC supply the DC and countable choice in [F6]; the resulting coordinate variables have exactly this density law and are iid. For given iid U_k the same moment computation applies. [F8] gives $(\\sum_kU_k-n/2)/\\sqrt{n/12}\\Rightarrow N(0,1)$, and $1/\\sqrt{n/12}=\\sqrt{12/n}$ proves the displayed form. The variance is strictly positive and n>=1, so the normalization is defined. AC is used in the integral bridge, copy construction when needed, and CLT supplier.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 restricts to n>=1; no empty sum is normalized."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates primitives at zero and obtains positive variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates at endpoint one and verifies total mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves variance 1/12, excluding degeneracy for this law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates both closed-interval endpoints explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the copy construction and inherited choice assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is one computed CLT instance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse or exact finite-sum density is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk high (score 7: 12 dependencies, 10 facts, limiting language). Step-7 Alpha checked EU=1/2 by applying the nonnegative density theorem separately to the positive and negative parts of the identity, then used the signed-integral definition; EU^2=1/3 and Var(U)=1/12 follow from the primitive computation. The scaling identity sqrt(12/n)=1/sqrt(n/12) links the displayed normalization to the CLT form. The copy-construction step is correctly conditional (only if copies must be realized) and AC supplies DC and AC_omega. Accepted after the licensed density-interface repair."
+      }
+    },
+    "ex-lyapunov-condition-for-nonidentical-summands": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-lyapunov-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let a centered row-wise independent triangular array have finite second moments and $s_n>0$. If for some $\\delta>0$ its $(2+\\delta)$ moments are finite and $$s_n^{-(2+\\delta)}\\sum_k\\mathbb E|X_{n,k}|^{2+\\delta}\\longrightarrow0,$$ then $s_n^{-1}\\sum_kX_{n,k}\\Rightarrow N(0,1)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-countable-independent-copies-exist",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. Every probability measure $\\nu$\non $(S,\\Sigma)$ is the common law of a countable independent family of\n$S$-valued random elements.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Use [F2]–[F3] on the law assigning mass 1/2 to each sign, and index its coordinates by $n(n-1)/2+k$ for $1\\le k\\le n$. These indices are distinct across the array and exhaust the positive integers. Thus the required signs exist and are independent. Direct two-point integration gives $\\mathbb EX_{n,k}=(k-k)/2=0$, $\\mathbb EX_{n,k}^2=k^2$ and $\\mathbb E|X_{n,k}|^3=k^3$. Different k have disjoint supports $\\{-k,k\\}$, so their laws differ.",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "At least n/2 integers k in the row satisfy $k\\ge n/2$, so $s_n^2\\ge(n/2)(n/2)^2=n^3/8$. Also $\\sum_{k=1}^nk^3\\le n\\,n^3=n^4$. Hence $s_n^{-3}\\sum_k\\mathbb E|X_{n,k}|^3\\le8^{3/2}/\\sqrt n\\to0$. These bounds remain valid for n=1. The rows are centered, independent and have finite moments and positive s_n, so [F1] with delta=1 proves the assertion. AC is used by the copy construction and inherited in [F1].",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 indexes nonempty rows n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes centered means zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks n=1 and uses delta=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves positive row variance; no degenerate normalization occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the k>=n/2 threshold and both row endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 identify copy construction and inherited AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example verifies a sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No necessity of third moments is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk high (score 5: 5 dependencies, 3 facts, limiting language). Alpha checked E|X_{n,k}|^3=k^3, s_n^2>=n^3/8 from at least n/2 indices with k>=n/2, sum k^3<=n^4, and hence s_n^{-3} sum_k E|X_{n,k}|^3 <= 8^{3/2}/sqrt n -> 0, so Lyapunov holds with delta=1; distinct laws within a row follow from disjoint supports. Accepted."
+      }
+    },
+    "ex-lindeberg-array-with-no-identically-distributed-row": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-countable-product-of-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. For probability spaces\n$(E_n,\\mathcal E_n,\\mu_n)_{n\\in\\mathbb N}$ there is a unique probability measure\n$\\mu$ on $\\mathcal C_{\\mathbb N}$ such that, for every finite $F$, its\n$F$-coordinate marginal is $\\bigotimes_{n\\in F}\\mu_n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "source_section": "Statement",
+          "quote": "Under the measure of [[thm-countable-product-of-probability-spaces]], the coordinate maps $X_n(x)=x_n$ have laws $\\mu_n$ and are independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bernoulli-and-binomial-mean-and-variance",
+          "source_section": "Statement",
+          "quote": "If $X$ is Bernoulli$(p)$, then $\\mathbb E[X]=p$ and $\\operatorname{Var}(X)=p(1-p)$. If $S$ is binomial$(n,p)$, then\n$$\\mathbb E[S]=np,\\qquad \\operatorname{Var}(S)=np(1-p).$$\nThese formulas include $p=0$, $p=1$, and $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a centered row-wise independent triangular array has finite second moments, $s_n>0$ and the Lindeberg condition, then $$s_n^{-1}\\sum_{k=1}^{k_n}X_{n,k}\\Rightarrow N(0,1).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Each $0<p_{n,k}<1/2$ defines a two-point probability. Index the pairs by $n(n-1)/2+k$ and use [F1]–[F3] to construct all coordinates independently. By [F4], the centered entry has mean zero and variance $p_{n,k}(1-p_{n,k})$. Its values are $-p_{n,k}$ and $1-p_{n,k}$, both of absolute value less than one. Distinct p have distinct negative support points with positive mass, hence distinct centered laws. Normalizing every entry in a fixed row by the same positive s_n also preserves this distinction.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Since $1-p_{n,k}>1/2$, $s_n^2\\ge\\frac12\\sum_{k=1}^n k/(2n+2)=n/8$. Here $\\sum_{k=1}^n k=n(n+1)/2$, obtained by pairing k with n+1-k and adding the n equal pair sums. Thus s_n is positive and tends to infinity. For any fixed epsilon>0, eventually $\\varepsilon s_n>1$, so every event $|X_{n,k}|>\\varepsilon s_n$ is empty. The Lindeberg sum is then exactly zero. All second moments are finite, so [F5] gives the claimed limit. AC is used only through the stated product construction and CLT suppliers; no cross-row independence is needed by the theorem.",
+          "inputs": [
+            "step 1.1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 makes every tail event empty eventually."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies zero means; step 2.1 gives Lindeberg sum exactly zero eventually."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the bound |X|<1; singleton row n=1 is permitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves s_n^2>=n/8>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies 0<p<1/2 even at k=1 and k=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 identify AC-to-product uses and no need for cross-row independence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a constructed sufficient-condition example."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No assertion that identically distributed rows are necessary is made."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 8 dependencies, 5 facts, limiting and boundary-sensitive). Alpha checked p_{n,k}=k/(2n+2) in (0,1/2), the centered Bernoulli variances p(1-p), the bound s_n^2 >= (1/2) sum_k k/(2n+2) = n/8 via sum_k k = n(n+1)/2, the fact that every entry has modulus below one, so for fixed epsilon the tail event |X|>epsilon s_n is eventually empty and Lindeberg holds exactly; distinct centered laws and positive s_n are verified. Accepted."
+      }
+    },
+    "ex-degenerate-multivariate-gaussian-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The vector has mean (0,0), second norm moment $2\\mathbb EY_k^2=2\\sigma^2$, and each covariance entry equals $\\mathbb EY_k^2=\\sigma^2$. The two columns of Sigma agree and are nonzero, so its rank is one and determinant zero. Its eigenvectors (1,1) and (1,-1) have eigenvalues $2\\sigma^2$ and zero. [F1] therefore gives convergence to $N_2(0,\\Sigma)$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For a scalar $Z\\sim N(0,\\sigma^2)$, every projection of (Z,Z) is $(u_1+u_2)Z$. By [F4]–[F6], this has law $N(0,\\sigma^2(u_1+u_2)^2)$, including a negative coefficient and coefficient zero. Since $u^T\\Sigma u=\\sigma^2(u_1+u_2)^2$, [F2]–[F3] identify (Z,Z) with the target law. It is supported on the diagonal, and the (1,-1) projection is identically zero both before and after the limit. If the optional case sigma=0 is allowed, all centered Y_k vanish almost surely and the example reduces to the point mass (0,0). AC is inherited from the Gaussian and multivariate CLT suppliers.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has exactly two coordinates and positive row lengths."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero projection u_1+u_2=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 calculates rank one and the two explicit eigenvectors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the diagonal support and optional zero-covariance point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no cutoff or interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 states the inherited AC uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains the covariance-limit law."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies all projections of the proposed (Z,Z) realization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 8 dependencies, 6 facts, limiting and boundary-sensitive). Alpha checked Sigma=sigma^2[[1,1],[1,1]] with eigenvalues 2 sigma^2 and 0, the multivariate CLT application to X_k=(Y_k,Y_k), and the identification of the limit with the law of (Z,Z) via projections: (u_1+u_2)Z has variance sigma^2(u_1+u_2)^2 = u^T Sigma u, and the (1,-1) projection vanishes before and after the limit. Accepted."
+      }
+    },
+    "cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-principal-inverse-tangent-calculus",
+          "source_section": "Statement",
+          "quote": "For every $x\\in\\mathbb R$,\n\n$$\\frac{d}{dx}\\arctan x=\\frac1{1+x^2},\\qquad \\arctan x=\\int_0^x\\frac{dt}{1+t^2}.$$\n\nFor $|x|<1$,\n\n$$\\arctan x=\\sum_{n=0}^{\\infty}\\frac{(-1)^n x^{2n+1}}{2n+1}.$$\n\nAt the endpoint, the ordinarily convergent alternating series satisfies\n\n$$\\frac\\pi4=1-\\frac13+\\frac15-\\frac17+\\cdots.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-principal-inverse-tangent",
+          "source_section": "Definition",
+          "quote": "By [[lem-tangent-principal-branch-is-bijective]], tangent restricts to a\ncontinuous strictly increasing bijection\n\n$$\\tan:(-\\pi/2,\\pi/2)\\longrightarrow\\mathbb R.$$\n\nIts inverse is the **principal inverse tangent**\n\n$$\\arctan:\\mathbb R\\longrightarrow(-\\pi/2,\\pi/2).$$\n\nThus $\\tan(\\arctan y)=y$ for every real $y$, while\n$\\arctan(\\tan x)=x$ precisely for $x$ in the displayed principal interval.\nThe inverse is continuous and strictly increasing by [[thm-continuous-inverse]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-density-inversion-from-an-integrable-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $\\varphi_X\\in L^1(\\mathbb R)$, then the law $\\mu$ of $X$ has the bounded continuous probability density $$f(x)=\\frac1{2\\pi}\\int_{\\mathbb R}e^{-itx}\\varphi_X(t)\\,dt.$$ Thus $\\mu(B)=\\int_B f(x)\\,dx$ for every Borel set $B$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-countable-independent-copies-exist",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and dependent choice. Every probability measure $\\nu$\non $(S,\\Sigma)$ is the common law of a countable independent family of\n$S$-valued random elements.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-levy-continuity-theorem-forward-direction",
+          "source_section": "Statement",
+          "quote": "If Borel probability laws $\\mu_n\\Rightarrow\\mu$ on $\\mathbb R$, then $\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)$ for every real $t$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "lem-basic-properties-of-characteristic-functions",
+          "source_section": "Statement",
+          "quote": "Every characteristic function $\\varphi$ on $\\mathbb R$ satisfies $\\varphi(0)=1$, $|\\varphi(t)|\\le1$, $\\varphi(-t)=\\overline{\\varphi(t)}$, and is uniformly continuous on $\\mathbb R$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "The **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "First construct the symmetric Laplace density $l(x)=e^{-|x|}/2$. On [0,R] the primitive of $e^{-x}$ is $-e^{-x}$, so [F1]–[F3], [F5] and [F20] give integral $1-e^{-R}$; the other half interval gives the same value by the primitive $e^x$. The bridge [F2] and MCT [F6] yield $\\int l=1$. The elementary exponential series bound $e^R\\ge1+R$ makes $e^{-R}\\to0$. Thus [F8] defines a probability with density l. For every bounded measurable complex $h=u+iv$, apply [F9] to $u^+,u^-,v^+,v^-$; these four functions are bounded by $|h|$, so their products with $l$ have finite integral. The real/imaginary definition [F21] then gives $\\int h\\,d(l\\,d\\lambda)=\\int hl\\,d\\lambda$. In particular the characteristic function of the constructed law is its density integral. For real t, componentwise differentiation using [F3]–[F5] gives the primitive $e^{(-1+it)x}/(-1+it)$ on the positive half-line and $e^{(1+it)x}/(1+it)$ on the negative half-line. Their nonzero denominators have modulus at least one. Taking integer R limits with DCT majorant $e^{-|x|}$ and [F19] gives $\\varphi_l(t)=\\tfrac12((1-it)^{-1}+(1+it)^{-1})=1/(1+t^2)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F19",
+            "F20",
+            "F21"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "By [F10]–[F11], $\\int_{-R}^R(1+t^2)^{-1}\\,dt=\\arctan R-\\arctan(-R)<\\pi$. The integrands are continuous, so the bridge and MCT make $\\varphi_l$ Lebesgue integrable. [F12] supplies the continuous density $f(y)=(2\\pi)^{-1}\\int e^{-ity}/(1+t^2)\\,dt$ for the Laplace law. It equals l everywhere: both are continuous and have the same integral on every interval, whereas any nonzero value of f-l would, by continuity, have one strict sign bounded away from zero on a nonempty interval, contradicting that integral equality and [F13]. At y=0 this identity gives $\\int(1+t^2)^{-1}\\,dt=\\pi$. Therefore [F8] makes c a probability density. At y=-u the same identity, multiplied by two, gives $\\int e^{iux}c(x)\\,dx=e^{-|u|}$. No contour integral is used.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F6",
+            "F8",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F20"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "For R>=1, $\\int_1^R x^2c(x)\\,dx\\ge(R-1)/(2\\pi)$ because $x^2/(1+x^2)\\ge1/2$ for x>=1. Nonnegative integral monotonicity and [F13] give this lower bound, tending to infinity; [F9] identifies the second moment as infinite. By [F14]–[F15], AC realizes iid copies of the c law. By [F16], their normalized-sum characteristic function is $(e^{-|t|/\\sqrt n})^n=e^{-\\sqrt n|t|}$. It tends to zero for t different from zero and stays one at zero.",
+          "inputs": [
+            "step 2.1",
+            "F9",
+            "F13",
+            "F14",
+            "F15",
+            "F16"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "If those row laws had any weak limit probability, [F17] would make its characteristic function equal to the pointwise limit just calculated. That function is discontinuous at zero, contradicting [F18]. Thus there is no weak probability limit, and in particular no normal limit. AC was used through the Lebesgue bridge, density inversion and independent-copy construction; the direct moment lower bound and discontinuity argument make no additional selections.",
+          "inputs": [
+            "step 3.1",
+            "F17",
+            "F18"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Rows contain n>=1 variables; a probability limit is the claim refuted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 compare t=0 with every nonzero t."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies density mass one by inversion at zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 excludes every possible weak probability limit, including point masses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compute both compact endpoints and their tails before passing to limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 identifies AC in the bridge, inversion and independent copies."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example refutes a universal finite-variance-free conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not claim every infinite-variance law fails every CLT normalization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 25 dependencies, 21 facts, limiting and boundary-sensitive). Step 7 confirmed the density-interface rejection: the cited theorem covers only nonnegative integrands. Step 1.1 now applies it separately to the positive and negative parts of the real and imaginary components of a bounded complex function and invokes the exact complex-integral definition, proving the density identity needed for the Laplace characteristic function. The remaining Laplace inversion, Cauchy second-moment divergence, normalized-sum transforms e^{-sqrt n |t|}, and continuity contradiction are unchanged and were rechecked."
+      }
+    },
+    "cex-feller-negligibility-cannot-be-removed-from-the-converse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-row-variance-and-lindeberg-condition",
+          "source_section": "Definition",
+          "quote": "For a centered triangular array as in [[def-row-wise-independent-centered-triangular-array]], suppose every entry has finite second moment. Write $$v_{n,k}=\\mathbb E_nX_{n,k}^2=\\operatorname{Var}_n(X_{n,k}),\\qquad s_n^2=\\sum_{k=1}^{k_n}v_{n,k}.$$ Variance is defined in [[def-moments-variance-and-covariance]]. Every term is finite and nonnegative, so the finite sum and its nonnegative square root s_n exist. Whenever $s_n>0$, define $$L_n(\\varepsilon)=s_n^{-2}\\sum_{k=1}^{k_n}\\mathbb E_n\\!\\left[X_{n,k}^2\\mathbf1_{\\{|X_{n,k}|>\\varepsilon s_n\\}}\\right]\\quad(\\varepsilon>0).$$ The **Lindeberg condition** is $L_n(\\varepsilon)\\to0$ for every fixed $\\varepsilon>0$, with $s_n>0$ for all n under consideration. The event is measurable because absolute value is continuous and the entries are measurable; products are measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Its nonnegative integrand is bounded by $X_{n,k}^2$, so its expectation exists and is finite by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. In particular $0\\le L_n(\\varepsilon)\\le1$.\n\nFor $Y_{n,k}=X_{n,k}/s_n$, scalar homogeneity gives $\\sum_k\\mathbb E_nY_{n,k}^2=1$. The equality $|Y_{n,k}|>\\varepsilon\\Longleftrightarrow |X_{n,k}|>\\varepsilon s_n$ gives $$L_n(\\varepsilon)=\\sum_k\\mathbb E_n[Y_{n,k}^2\\mathbf1_{\\{|Y_{n,k}|>\\varepsilon\\}}].$$ Thus the normalized and unnormalized conditions are exactly equivalent, not merely asymptotic. The cutoff uses strict inequality; equality at the threshold is excluded. A zero-variance row is allowed in the initial variance definition, but its normalization and Lindeberg expression above are undefined. No independence or choice is needed to define these quantities.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "On the standard-normal probability space supplied by [F7], let Z be its coordinate and define $X_{n,1}=Z$, $X_{n,k}=0$ for $2\\le k\\le n$. By [F1], every entry is centered and the total variance is one. Each row is independent: if an event for a zero coordinate excludes zero, both the intersection probability and the product are zero; otherwise all those events are the full space and the identity reduces to the event for Z. Thus the row sum is exactly Z for every n, its law is N(0,1), and the maximum summand variance equals one. Independence between rows is not required.",
+          "inputs": [
+            "F1",
+            "F7"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For each fixed epsilon>0, [F2] gives the Lindeberg quantity $\\mathbb E[Z^2\\mathbf1_{\\{|Z|>\\varepsilon\\}}]$, independent of n. On $[\\varepsilon+1,\\varepsilon+2]$, the integrand against the normal density is at least $(\\varepsilon+1)^2 e^{-(\\varepsilon+2)^2/2}/\\sqrt{2\\pi}>0$, by [F3] and [F5]. Integrating this bound over the length-one interval with [F4]–[F6] proves strict positivity. Hence the Lindeberg limit is not zero for any epsilon>0, despite exact normality of all row sums. The example works for n=1 as well. AC is inherited solely through construction of the normal law and its Lebesgue density; one Z is reused and no independent sequence across rows is constructed.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses rows n>=1, with an empty zero-coordinate list when n=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies deterministic zero entries and all means zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks total and maximal variance one and n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits degenerate zero summands while one nondegenerate summand carries all variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 puts a whole positive-length interval strictly beyond epsilon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies inherited AC and avoids constructing independent rows."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example disproves deleting the Feller hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not contradict the converse with that hypothesis, because the maximum variance stays one."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 9: 10 dependencies, 7 facts, limiting and boundary-sensitive). Step 7 confirmed that the characteristic-function lemma supplies moments only conditional on an existing normal law. Step 1.1 now separately cites the standard-normal definition for the probability space and uses the lemma only for its mean and variance. The array calculation and the strictly positive normal-tail second moment were rechecked and are unchanged."
+      }
+    },
+    "lem-ac-supplies-sequential-choices-for-probability-constructions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. That is precisely the situation $\\mathrm{AC}_\\omega$ does not\ncover, and it is why a construction \"pick $x_{n+1}$ depending on $x_n$, for every\n$n$ at once\" is not licensed by countable choice.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. The reverse derivation is standard and is not needed anywhere in\nthis library, so it is not carried out; every use below prescribes $x_0$.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For an omega-indexed family $(A_n)$ of nonempty sets, its image $\\mathcal S=\\{A_n:n\\in\\mathbb N\\}$ is a set of nonempty sets. By [F1] choose $c$ with $c(A)\\in A$ for every $A\\in\\mathcal S$. Then $b(n)=c(A_n)$ is a function and $b(n)\\in A_n$, which is [F2]. Repeated sets use the same selected value and cause no ambiguity. For an empty index family the empty function already suffices; singleton fibers force their unique value.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "For the stated serial R, every fiber $R[x]=\\{y\\in X:xRy\\}$ is nonempty. AC applied to the set of all these fibers gives c with $c(R[x])\\in R[x]$. Define the self-map $s(x)=c(R[x])$ on X. No recursively changing choice is being assumed: s is now one fixed function chosen from a fixed set of nonempty fibers. It satisfies $xRs(x)$ for every x.",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "Apply [F4] to X, the prescribed a and s to obtain $x_0=a$ and $x_{n+1}=s(x_n)$ for every natural n. The defining property of s gives $x_nRx_{n+1}$, precisely [F3]. If X has one element and R is serial, this is its constant sequence. Empty X is excluded by the prescribed a. The uses of AC are exactly the two fixed-family selections in steps 1.1 and 1.2; recursion itself requires no further choice. This proves the two implications from AC, not either converse.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles an empty index family; step 2.1 excludes an empty path space by a in X."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the prescribed index-zero value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle singleton fibers and singleton path spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows a constant path and repeated values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks every natural successor, with no terminal index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 2.1 identify the exact AC selections and the choice-free recursion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 establish each asserted implication from AC."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from DC or countable choice to AC is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha phase-2-next-17 group a — Step 5A direct authored-content review (Codex)",
+        "notes": "Risk critical (score 8: 4 dependencies, 4 facts, recursion/minimality, boundary-sensitive). Alpha checked AC => AC_omega via a choice function on the image family {A_n}, and AC => DC via the fixed fiber-choice function s(x)=c(R[x]) followed by the recursion theorem, which yields x_0=a and x_n R x_{n+1}. The lemma asserts only these implications, excludes empty X by the prescribed starting point, and uses exactly two fixed-family selections. Accepted."
+      }
+    }
+  }
+}

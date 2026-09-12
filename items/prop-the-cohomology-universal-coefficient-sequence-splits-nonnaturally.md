@@ -2,7 +2,9 @@
 id: prop-the-cohomology-universal-coefficient-sequence-splits-nonnaturally
 kind: proposition
 title: The cohomology universal coefficient sequence splits nonnaturally
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, lem-singular-uct-extension-from-cycle-projections, def-axiom-of-choice, lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces]

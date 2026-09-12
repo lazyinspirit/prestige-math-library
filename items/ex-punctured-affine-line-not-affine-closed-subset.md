@@ -2,7 +2,9 @@
 id: ex-punctured-affine-line-not-affine-closed-subset
 kind: example
 title: "The punctured affine line is a principal open with Laurent-polynomial coordinate ring but is not closed in its ambient affine line"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: literature-derived

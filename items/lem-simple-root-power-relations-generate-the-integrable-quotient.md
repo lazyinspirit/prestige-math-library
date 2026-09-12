@@ -2,13 +2,14 @@
 id: lem-simple-root-power-relations-generate-the-integrable-quotient
 kind: lemma
 title: Simple root power relations generate the integrable quotient
-status: draft
+status: published
 origin: pipeline
 deps: [thm-universal-property-and-pbw-character-of-kac-moody-verma-modules, def-kac-moody-integral-and-dominant-integral-weights, def-integrable-kac-moody-module, lem-serre-elements-vanish-before-serre-generation, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, def-kac-moody-category-o]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -9,6 +9,11 @@ proof_strategy: contradiction
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-12
 sources:
   references:
     - title: "Lietz, Set Theory, Theorem 7.20 and Proposition 7.21, pp.60–61"

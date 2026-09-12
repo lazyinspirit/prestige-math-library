@@ -2,7 +2,7 @@
 id: lem-many-one-reducibility-is-a-preorder
 kind: lemma
 title: "Computable many-one reducibility is reflexive and transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computable-many-one-reduction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

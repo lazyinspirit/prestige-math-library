@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Chacon partial maps extend to an invertible map mod null sets"
 deps: ["def-chacon-three-cut-one-spacer-towers", "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant", "thm-finite-and-countable-subadditivity-of-measures", "thm-continuity-from-below-for-measures", "def-invertible-measure-preserving-system", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

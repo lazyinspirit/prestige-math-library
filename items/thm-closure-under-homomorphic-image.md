@@ -2,7 +2,7 @@
 id: thm-closure-under-homomorphic-image
 kind: theorem
 title: "Regular languages are closed under homomorphic image"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-alphabet-homomorphism-and-induced-word-map, def-regular-expression-denotation, lem-denotation-is-structurally-well-defined, thm-kleenes-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

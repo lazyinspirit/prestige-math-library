@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
       url: https://jpsaunders.uk/ModRep/NotesWebsite.pdf
     - title: Lassueur–Farrell, Chapter 7, §29, Theorem 29.4 and proof
       url: https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload2.pdf
-status: draft
+status: published
 origin: pipeline
 ---
 

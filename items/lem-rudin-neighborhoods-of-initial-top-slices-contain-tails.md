@@ -2,7 +2,9 @@
 id: lem-rudin-neighborhoods-of-initial-top-slices-contain-tails
 kind: lemma
 title: Neighborhoods of Rudin initial-top slices contain tails
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [lem-rudin-internal-hull-tail-domination, lem-rudin-box-space-basic-neighborhoods-and-p-space, thm-regularity-of-the-alephs, thm-cofinality-basics, def-axiom-of-choice, prop-cumulative-hierarchy-transitivity-and-growth]
 proof_strategy: direct

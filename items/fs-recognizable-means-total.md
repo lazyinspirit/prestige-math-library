@@ -2,7 +2,7 @@
 id: fs-recognizable-means-total
 kind: false-statement
 title: "FALSE: recognizable means total halting"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

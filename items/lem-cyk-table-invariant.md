@@ -2,7 +2,7 @@
 id: lem-cyk-table-invariant
 kind: lemma
 title: "A variable lies in a CYK table cell exactly when it derives that span"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cyk-table-and-span-variable, def-one-step-and-reflexive-transitive-derivation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

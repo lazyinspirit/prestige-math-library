@@ -2,7 +2,9 @@
 id: cex-nilpotent-polynomial-data-invisible-to-zero-locus
 kind: counterexample
 title: "The ideals (x) and (x^2) have the same zero locus but different quotient rings"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: literature-derived

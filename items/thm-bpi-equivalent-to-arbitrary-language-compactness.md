@@ -2,7 +2,7 @@
 id: thm-bpi-equivalent-to-arbitrary-language-compactness
 kind: theorem
 title: BPI and arbitrary-language first-order compactness
-status: draft
+status: published
 origin: pipeline
 deps: [lem-set-sized-parallel-henkinization-preserves-consistency, thm-bpi-equivalent-to-propositional-compactness, thm-set-language-first-order-soundness, thm-henkin-closed-term-truth-lemma, lem-consistent-sentence-decision, lem-hilbert-propositional-and-equality-rules, lem-derivation-finite-support-and-concatenation]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

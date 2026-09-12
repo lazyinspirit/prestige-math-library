@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Elementary ZF axioms inside L"
 deps: ["def-constructible-hierarchy-and-constructible-rank", "prop-constructible-levels-transitivity-ordinals-and-rank"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

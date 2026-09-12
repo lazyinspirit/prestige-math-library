@@ -2,13 +2,14 @@
 id: lem-casimir-separates-comparable-dominant-primitive-weights
 kind: lemma
 title: Casimir separates comparable dominant primitive weights
-status: draft
+status: published
 origin: pipeline
 deps: [thm-generalized-kac-moody-casimir-is-central-and-scalar-on-highest-weight-modules, thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra, lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights, def-generalized-casimir-on-restricted-kac-moody-modules, def-kac-moody-category-o]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Chacon transformation is weakly mixing but not mixing"
 deps: ["lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets", "lem-chacon-eigenfunctions-are-constant", "thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions", "lem-chacon-tower-height-correlations-obstruct-mixing", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

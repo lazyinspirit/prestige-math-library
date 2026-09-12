@@ -2,7 +2,7 @@
 id: thm-rp-one-sided-amplification
 kind: theorem
 title: "RP admits one-sided amplification to exponentially small error"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-rp-corp-zpp-bpp-and-pp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

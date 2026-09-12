@@ -2,7 +2,7 @@
 id: ex-modified-pcp-is-undecidable
 kind: example
 title: "A computation-history domino system whose matches spell a halting run"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [lem-computation-history-domino-encoding, thm-modified-pcp-is-undecidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

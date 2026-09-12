@@ -2,7 +2,9 @@
 id: prop-the-homology-kunneth-sequence-splits-nonnaturally
 kind: proposition
 title: The homology Kunneth sequence splits nonnaturally
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-kunneth-short-exact-sequence-for-homology, thm-pid-kunneth-splitting-from-cycle-boundary-presentations, def-axiom-of-choice, lem-singular-product-chain-equivalence-by-simplex-models]

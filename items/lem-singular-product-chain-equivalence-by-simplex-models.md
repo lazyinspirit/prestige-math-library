@@ -2,7 +2,7 @@
 id: lem-singular-product-chain-equivalence-by-simplex-models
 kind: lemma
 title: Singular product chain equivalence by simplex models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-chain-cross-product-on-generators, lem-singular-chain-cross-product-boundary-formula, prop-singular-chain-cross-products-are-natural, thm-singular-chain-homotopy-formula, def-singular-cochain-complex-with-coefficients]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

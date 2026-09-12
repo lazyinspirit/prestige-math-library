@@ -2,7 +2,7 @@
 id: ex-machine-descriptions-form-a-decidable-language
 kind: example
 title: "Testing a few short binary strings for machine-code well-formedness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-machine-descriptions-form-a-decidable-language, lem-machine-encoding-is-injective-and-decodable, def-effective-encoding-of-turing-machines]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

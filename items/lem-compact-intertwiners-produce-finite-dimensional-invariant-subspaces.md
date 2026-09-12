@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Compact intertwiners produce finite dimensional invariant subspaces"
 deps: ["lem-nonzero-compact-kernel-operators-yield-nonzero-positive-compact-k-star-k", "lem-nonzero-positive-compact-self-adjoint-operators-have-positive-finite-dimensional-eigenspaces", "lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner", "def-unitary-eigenfunction-for-a-probability-system", "def-axiom-of-choice", "thm-rank-nullity"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

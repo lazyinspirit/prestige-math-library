@@ -4414,7 +4414,7 @@ a second independent complete full-text proof is a publication blocker.
 
 ## MT-22. Measure-Preserving Transformations and Poincaré Recurrence
 
-`requires`: MT-21a, MT-21b, MT-8, MT-2, MT-4, MT-17, MT-3, `compactness`,
+`requires`: MT-21a, MT-21b, MT-8, MT-2, MT-4, MT-17, MT-20, MT-3, `compactness`,
 `countability-and-uncountability`, `the-topology-of-euclidean-space`,
 `sequences-and-limits`
 

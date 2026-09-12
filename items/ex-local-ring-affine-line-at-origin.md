@@ -2,7 +2,9 @@
 id: ex-local-ring-affine-line-at-origin
 kind: example
 title: "The local ring of the affine line at the origin consists of rational functions defined at the origin"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: literature-derived

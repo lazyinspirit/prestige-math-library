@@ -2,7 +2,7 @@
 id: lem-variety-ideal-galois-connection
 kind: lemma
 title: "Vanishing ideals and zero loci form a Galois connection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Proposition 1.3.1 and Lemma 1.6.1"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

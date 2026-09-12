@@ -4,6 +4,7 @@ kind: "false-statement"
 title: "A generic filter belongs to its ground model"
 deps: ["prop-atomless-generics-are-not-ground-model-elements", "cor-generics-exist-over-countable-transitive-models", "ex-cohen-name-valuation-and-dense-set-meeting"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

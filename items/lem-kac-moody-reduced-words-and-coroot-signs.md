@@ -2,13 +2,14 @@
 id: lem-kac-moody-reduced-words-and-coroot-signs
 kind: lemma
 title: Reduced words, root signs and finite coroot inversions
-status: draft
+status: published
 origin: pipeline
 deps: [def-kac-moody-real-coroot-inversions, prop-kac-moody-root-spaces-are-finite-dimensional, prop-the-weyl-group-preserves-roots-and-root-multiplicities, def-simple-reflections-and-the-kac-moody-weyl-group, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, lem-serre-elements-vanish-before-serre-generation]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

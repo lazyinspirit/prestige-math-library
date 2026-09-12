@@ -15,6 +15,8 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
 status: published
 origin: "pipeline"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement refuted

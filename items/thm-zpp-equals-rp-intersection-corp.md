@@ -2,7 +2,7 @@
 id: thm-zpp-equals-rp-intersection-corp
 kind: theorem
 title: "ZPP equals RP intersection coRP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-rp-corp-zpp-bpp-and-pp, thm-markov-inequality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

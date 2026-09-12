@@ -2,7 +2,7 @@
 id: fs-every-total-computable-function-is-primitive-recursive
 kind: false-statement
 title: "FALSE: every total computable function is primitive recursive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-ackermann-is-total-computable-but-not-primitive-recursive]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1074,7 +1074,9 @@ not silently given a multiplication.
 
 **A page:** `orientations-poincare-lefschetz-and-alexander-duality`
 **B page:** `orientations-poincare-lefschetz-and-alexander-duality-examples`
-**Requires:** `cup-cap-cross-products-and-cohomology-rings`
+**Requires:** `relative-homology-excision-and-mayer-vietoris`,
+`cup-cap-cross-products-and-cohomology-rings`, and
+`simplicial-subdivision-and-simplicial-approximation`
 
 This pair is topological: it defines topological manifolds and their homological
 orientations itself and does not depend on the later smooth-manifold track.
@@ -2747,7 +2749,7 @@ a synthetic range id.
 | AT-5 `homology-axioms-degree-and-classical-applications` | `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology` |
 | AT-6 `singular-cohomology-and-coefficient-theorems` | `singular-chains-and-singular-homology`; `relative-homology-excision-and-mayer-vietoris`; `homology-axioms-degree-and-classical-applications`; `universal-coefficients-and-kunneth-theorems`; `kunneth-exactness-and-splittings-over-principal-ideal-domains` |
 | AT-7 `cup-cap-cross-products-and-cohomology-rings` | `cw-complexes-and-cellular-homology`; `singular-cohomology-and-coefficient-theorems` |
-| AT-8 `orientations-poincare-lefschetz-and-alexander-duality` | `relative-homology-excision-and-mayer-vietoris`; `cup-cap-cross-products-and-cohomology-rings` |
+| AT-8 `orientations-poincare-lefschetz-and-alexander-duality` | `relative-homology-excision-and-mayer-vietoris`; `cup-cap-cross-products-and-cohomology-rings`; `simplicial-subdivision-and-simplicial-approximation` |
 | AT-9 `bocksteins-steenrod-squares-and-cohomology-operations` | `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality` |
 | AT-10 `higher-homotopy-groups-and-cofiber-sequences` | `cw-complexes-and-cellular-homology`; `the-fundamental-group`; `homotopy-and-homotopy-equivalence`; `mapping-cones-cylinders-and-chain-triangles` |
 | AT-11 `fibrations-fiber-bundles-and-homotopy-exact-sequences` | `higher-homotopy-groups-and-cofiber-sequences`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; `uniform-spaces`; `partitions-of-unity-and-paracompactness` |

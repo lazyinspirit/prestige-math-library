@@ -2,7 +2,7 @@
 id: lem-cofinal-aleph-product-cardinality
 kind: lemma
 title: A cofinal aleph-subproduct has the cardinality of the aleph-omega product
-status: draft
+status: published
 origin: pipeline
 deps: [lem-cardinal-arithmetic-basic-laws, def-aleph-and-beth-hierarchies, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

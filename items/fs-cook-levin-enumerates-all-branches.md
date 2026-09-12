@@ -2,7 +2,7 @@
 id: fs-cook-levin-enumerates-all-branches
 kind: false-statement
 title: "FALSE: the Cook-Levin reduction enumerates all nondeterministic branches"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-computation-tableau, lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

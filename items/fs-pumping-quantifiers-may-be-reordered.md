@@ -2,7 +2,7 @@
 id: fs-pumping-quantifiers-may-be-reordered
 kind: false-statement
 title: "FALSE: the pumping lemma still works if its quantifiers are reordered"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-pumping-lemma-for-regular-languages]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-regular-map-image-and-fibre-classical
 kind: definition
 title: "Images and fibres of a regular map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry, Chapter 3h"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

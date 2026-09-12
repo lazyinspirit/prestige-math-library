@@ -96,6 +96,26 @@ test('functional-analysis pages live in their own top-level category directory',
   rmSync(goodRepo, { recursive: true, force: true });
 });
 
+test('a quoted page id is the same home as its unquoted plan id', () => {
+  const repo = mkdtempSync(join(tmpdir(), 'validate-plan-quoted-home-'));
+  mkdirSync(join(repo, 'research'));
+  mkdirSync(join(repo, 'items'));
+  mkdirSync(join(repo, 'library', 'foundations'), { recursive: true });
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+    { order: 1, id: 'page-a', title: 'A', kind: 'A', category: 'foundations',
+      companion: 'page-a-examples', requires: [],
+      items: [{ id: 'lem-already-authored', kind: 'lemma', deps: [] }] },
+    { order: 2, id: 'page-a-examples', title: 'B', kind: 'B', category: 'foundations',
+      companion: 'page-a', requires: ['page-a'], items: [] },
+  ] }, null, 2));
+  writeFileSync(join(repo, 'items', 'lem-already-authored.md'), '---\nid: lem-already-authored\nstatus: published\n---\n');
+  writeFileSync(join(repo, 'library', 'foundations', 'page-a.md'),
+    '---\npage: "page-a"\nstatus: published\nitems: [lem-already-authored]\n---\n');
+  const result = run(repo);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('foundations pages cannot require the Set Theory deferred catalogue', () => {
   const repo = mkdtempSync(join(tmpdir(), 'validate-plan-set-boundary-'));
   mkdirSync(join(repo, 'research'), { recursive: true });

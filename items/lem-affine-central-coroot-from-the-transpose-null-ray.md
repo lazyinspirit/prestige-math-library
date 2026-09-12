@@ -2,13 +2,14 @@
 id: lem-affine-central-coroot-from-the-transpose-null-ray
 kind: lemma
 title: Affine central coroot from the transpose null ray
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms, def-realization-of-a-generalized-cartan-matrix, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, def-kac-moody-algebra-associated-to-a-gcm]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

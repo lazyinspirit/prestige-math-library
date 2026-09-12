@@ -2,13 +2,14 @@
 id: cex-a-kac-moody-verma-module-is-not-integrable-in-general
 kind: counterexample
 title: A kac moody verma module is not integrable in general
-status: draft
+status: published
 origin: pipeline
 deps: [thm-universal-property-and-pbw-character-of-kac-moody-verma-modules, def-integrable-kac-moody-module, def-kac-moody-verma-module, lem-pbw-for-countably-presented-kac-moody-lie-algebras, prop-kac-moody-root-spaces-are-finite-dimensional]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

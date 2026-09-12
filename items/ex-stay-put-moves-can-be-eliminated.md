@@ -2,7 +2,7 @@
 id: ex-stay-put-moves-can-be-eliminated
 kind: example
 title: "Replacing a stay-put transition by a right-left macro"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-stay-put-moves-can-be-eliminated, def-turing-machine-configuration]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

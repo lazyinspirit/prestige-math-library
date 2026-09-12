@@ -2,7 +2,7 @@
 id: ex-syntactic-properties-lie-outside-rices-theorem
 kind: example
 title: "Adding an unreachable state changes syntax without changing the recognized language"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-syntactic-properties-lie-outside-rices-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

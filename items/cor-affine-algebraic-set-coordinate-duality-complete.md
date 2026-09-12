@@ -2,7 +2,7 @@
 id: cor-affine-algebraic-set-coordinate-duality-complete
 kind: corollary
 title: "The affine algebraic-set dictionary is contravariantly full and faithful on classical affine varieties"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Theorem 3.2.1 together with the affine dictionary of Chapter 1"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

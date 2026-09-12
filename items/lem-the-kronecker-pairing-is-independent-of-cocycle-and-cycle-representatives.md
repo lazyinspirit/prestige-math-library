@@ -2,7 +2,7 @@
 id: lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives
 kind: lemma
 title: The kronecker pairing is independent of cocycle and cycle representatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-kronecker-evaluation-pairing, prop-singular-cohomology-is-contravariantly-functorial, prop-singular-chains-and-homology-are-covariantly-functorial, def-singular-cochain-complex-with-coefficients, def-singular-cohomology-with-coefficients, def-singular-chain-complex-and-singular-homology]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

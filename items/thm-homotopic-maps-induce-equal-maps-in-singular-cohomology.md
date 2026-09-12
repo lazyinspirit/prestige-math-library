@@ -2,7 +2,7 @@
 id: thm-homotopic-maps-induce-equal-maps-in-singular-cohomology
 kind: theorem
 title: Homotopic maps induce equal maps in singular cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [prop-singular-cohomology-is-contravariantly-functorial, thm-singular-chain-homotopy-formula, def-singular-cochain-complex-with-coefficients, def-singular-cohomology-with-coefficients]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-deterministic-nonhalting-configurations-have-unique-successors
 kind: lemma
 title: "Every nonhalting deterministic configuration has a unique successor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-deterministic-one-tape-turing-machine, def-one-step-configuration-rel
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

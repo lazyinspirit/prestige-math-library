@@ -2,13 +2,14 @@
 id: def-distinguishing-word
 kind: definition
 title: "Distinguishing words for states and for prefixes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-right-language-and-equivalent-dfa-states, def-nerode-equivalence, def-dfa-acceptance-and-recognized-language]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

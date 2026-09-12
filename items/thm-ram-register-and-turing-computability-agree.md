@@ -2,7 +2,7 @@
 id: thm-ram-register-and-turing-computability-agree
 kind: theorem
 title: "RAM/register computation and Turing computation agree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-random-access-and-register-machine-programs, def-language-recognized-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

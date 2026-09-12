@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: The Stacks Project, Definition 12.5.1 (axiom checklist; model verified locally)
       url: https://stacks.math.columbia.edu/tag/00ZX
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 proof_strategy: direct

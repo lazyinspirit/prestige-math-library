@@ -2,7 +2,7 @@
 id: def-rational-function-regular-at-point
 kind: definition
 title: "A rational function is regular at a point exactly when it lies in the local ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry, Chapter 5k-l"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
 ---
 

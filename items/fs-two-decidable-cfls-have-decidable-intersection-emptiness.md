@@ -2,7 +2,7 @@
 id: fs-two-decidable-cfls-have-decidable-intersection-emptiness
 kind: false-statement
 title: "FALSE: decidable CFLs have a decidable intersection-emptiness problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-cfl-membership-is-decidable, thm-cfg-intersection-emptiness-is-undecidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

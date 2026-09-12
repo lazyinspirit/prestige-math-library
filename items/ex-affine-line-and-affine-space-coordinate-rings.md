@@ -2,7 +2,7 @@
 id: ex-affine-line-and-affine-space-coordinate-rings
 kind: example
 title: "Affine space has zero vanishing ideal and polynomial coordinate ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
   - def-coordinate-ring-affine-algebraic-set
   - lem-a-nonzero-polynomial-in-several-variables-does-not-vanish-on-an-infinite-subring
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

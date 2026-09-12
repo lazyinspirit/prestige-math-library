@@ -2,7 +2,7 @@
 id: prop-deterministic-cfls-are-unambiguous
 kind: proposition
 title: "Deterministic context-free languages are unambiguous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ambiguity-and-inherent-ambiguity, def-deterministic-pda, lem-dpdas-have-unique-computations, prop-pda-to-cfg-construction-preserves-unambiguity]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

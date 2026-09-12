@@ -2,7 +2,7 @@
 id: def-composition-and-primitive-recursion-schemes
 kind: definition
 title: "Composition and primitive recursion as closure schemes on arithmetic functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-initial-arithmetic-functions, thm-recursion]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

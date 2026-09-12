@@ -2,7 +2,7 @@
 id: thm-pcf-aleph-omega-plus-one-scale
 kind: theorem
 title: An aleph omega plus one scale on an infinite set of successor alephs
-status: draft
+status: published
 origin: pipeline
 deps: [lem-eventual-products-below-aleph-omega-have-a-continuous-long-chain, lem-strong-increase-gives-bounding-projections, lem-bounding-projections-give-exact-upper-bounds, def-reduced-ordinal-products-and-scales, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

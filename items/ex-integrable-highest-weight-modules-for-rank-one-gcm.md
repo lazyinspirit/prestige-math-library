@@ -2,12 +2,14 @@
 id: ex-integrable-highest-weight-modules-for-rank-one-gcm
 kind: example
 title: Integrable highest weight modules for rank one gcm
-status: draft
+status: published
 origin: pipeline
 deps: [thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules, lem-dominance-is-necessary-for-an-integrable-highest-weight-module, def-realization-of-a-generalized-cartan-matrix, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, thm-universal-property-and-pbw-character-of-kac-moody-verma-modules]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: Kleshchev, Lectures on Infinite Dimensional Lie Algebras

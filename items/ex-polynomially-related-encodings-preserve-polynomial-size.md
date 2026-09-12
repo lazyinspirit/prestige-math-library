@@ -2,7 +2,7 @@
 id: ex-polynomially-related-encodings-preserve-polynomial-size
 kind: example
 title: "Ordinary binary numerals and doubled-bit numerals are polynomially related"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-instance-size-under-an-encoding, prop-polynomially-related-encodings-
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Carleson maximal operator is strong ltwo"
 deps: ["lem-wave-packet-model-dominates-the-linearised-carleson-operator", "lem-hunt-exceptional-set-and-distribution-estimates", "lem-carleson-restricted-weak-interpolation", "def-carleson-operator-and-measurable-linearisation", "lem-schwartz-space-is-dense-in-l-two", "lem-complex-lp-completeness-density-and-inner-product", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

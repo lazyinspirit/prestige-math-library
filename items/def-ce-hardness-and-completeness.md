@@ -2,13 +2,14 @@
 id: def-ce-hardness-and-completeness
 kind: definition
 title: "Computably enumerable hardness and completeness under computable many-one reductions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computable-many-one-reduction, def-decidable-and-recognizable-language]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

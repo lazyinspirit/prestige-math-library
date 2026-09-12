@@ -2,7 +2,7 @@
 id: lem-majority-error-bound-from-chebyshev
 kind: lemma
 title: "Chebyshev bounds the majority error of repeated Bernoulli trials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-linearity-of-expectation, lem-bernoulli-and-binomial-mean-and-variance, cor-variance-adds-for-pairwise-independent-random-variables, thm-chebyshev-inequality]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

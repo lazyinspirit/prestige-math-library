@@ -2,13 +2,14 @@
 id: thm-kostant-harmonic-decomposition-of-the-symmetric-algebra
 kind: theorem
 title: Kostant harmonic decomposition of the symmetric algebra
-status: draft
+status: "published"
 origin: pipeline
 deps: [lem-kostant-harmonics-give-an-invariant-polynomial-complement, lem-local-chevalley-restriction-for-kostant-freeness, thm-chevalley-shephard-todd-for-finite-weyl-groups]
 provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Measurability, normal measures and elementary embeddings"
 deps: ["lem-lc-ultrapower-critical-point", "def-lc-scott-ultrapower-and-class-embedding-convention", "thm-ultrafilter-characterisation", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

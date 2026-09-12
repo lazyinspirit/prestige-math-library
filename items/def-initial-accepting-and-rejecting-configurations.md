@@ -2,7 +2,7 @@
 id: def-initial-accepting-and-rejecting-configurations
 kind: definition
 title: "Initial, accepting, and rejecting configurations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps:
   - def-computation-alphabet-and-word-convention
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

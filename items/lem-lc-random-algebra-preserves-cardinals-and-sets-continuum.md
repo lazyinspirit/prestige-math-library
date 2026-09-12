@@ -6,6 +6,7 @@ status: published
 origin: pipeline
 deps: [lem-lc-boolean-generic-zfc-and-ordinals, lem-lc-boolean-generic-truth, lem-lc-generic-boolean-ground-joins, lem-lc-probability-algebra-completeness, lem-lc-inaccessible-size-and-rank-bounds, thm-hessenberg, thm-generic-extension-transitivity-and-rank-bound, thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, def-axiom-of-choice]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-zariski-topology-cofinite-on-affine-line
 kind: corollary
 title: "On the affine line, the classical Zariski topology is cofinite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry, Chapter 2c"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

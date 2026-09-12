@@ -2,13 +2,14 @@
 id: ex-the-basic-level-one-weight-of-affine-sl2
 kind: example
 title: The basic level one weight of affine sl2
-status: draft
+status: published
 origin: pipeline
 deps: [lem-affine-central-coroot-from-the-transpose-null-ray, thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules, prop-integrable-affine-highest-weights-have-nonnegative-integral-level, thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms, def-realization-of-a-generalized-cartan-matrix, def-kac-moody-integral-and-dominant-integral-weights]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

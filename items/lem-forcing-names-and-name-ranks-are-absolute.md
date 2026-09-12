@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Absoluteness of names and their ranks"
 deps: ["def-forcing-names-and-name-rank", "thm-ordinals-and-omega-are-absolute-in-transitive-models", "lem-bounded-definitions-of-basic-set-operations"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

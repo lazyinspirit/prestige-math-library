@@ -2,7 +2,7 @@
 id: ex-subset-construction-can-require-exponentially-many-states
 kind: example
 title: "A three-state NFA whose equivalent DFA needs four states"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-subset-construction-dfa, prop-subset-construction-can-require-exponentially-many-states]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-exactly-one-symbol-constraints-have-polynomial-size
 kind: lemma
 title: "The exactly-one-symbol constraints have polynomial size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-formula-cnf-and-sat, def-bounded-computation-tableau, lem-tableau-cell-alphabet-is-constant]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

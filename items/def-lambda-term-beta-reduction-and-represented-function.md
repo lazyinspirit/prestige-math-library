@@ -2,7 +2,7 @@
 id: def-lambda-term-beta-reduction-and-represented-function
 kind: definition
 title: "Lambda terms, beta reduction, and the partial functions they represent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-function, def-natural-numbers]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

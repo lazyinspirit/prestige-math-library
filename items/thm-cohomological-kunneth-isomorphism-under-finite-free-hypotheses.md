@@ -2,7 +2,7 @@
 id: thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses
 kind: theorem
 title: Cohomological Kunneth isomorphism under finite free hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-additive-singular-cohomology-cross-product, lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces, def-axiom-of-choice, lem-additive-singular-cohomology-cross-product-is-well-defined, lem-singular-product-chain-equivalence-by-simplex-models, thm-free-modules-are-projective-with-choice-boundary, def-singular-cochain-complex-with-coefficients]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

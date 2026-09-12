@@ -5,6 +5,7 @@ title: "Set ultraproducts and constant-map ultrapowers"
 deps: ["def-set-structures-and-variable-assignments", "def-ultrafilter", "def-axiom-of-choice"]
 justified_by: ["lem-lc-ultraproduct-quotient-well-defined"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Weak compactness and small infinitary theories"
 deps: ["def-lc-weakly-compact-cardinal", "lem-lc-henkin-truth-tree", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

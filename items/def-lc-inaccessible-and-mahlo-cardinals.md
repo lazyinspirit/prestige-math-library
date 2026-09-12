@@ -4,6 +4,7 @@ kind: "definition"
 title: "Inaccessible and Mahlo cardinals"
 deps: ["def-cardinal", "def-cofinality", "def-cardinal-arithmetic", "def-club-subsets-of-ordinals", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

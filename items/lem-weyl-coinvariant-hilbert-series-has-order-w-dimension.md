@@ -2,13 +2,14 @@
 id: lem-weyl-coinvariant-hilbert-series-has-order-w-dimension
 kind: lemma
 title: Weyl coinvariant hilbert series has order w dimension
-status: draft
+status: "published"
 origin: pipeline
 deps: [lem-reflection-basic-invariants-form-a-regular-sequence, lem-finite-reflection-invariant-generators-are-algebraically-independent, def-finite-linear-invariant-and-coinvariant-polynomial-algebras]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

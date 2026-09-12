@@ -2,7 +2,7 @@
 id: lem-scale-tail-suprema-have-prescribed-cofinality
 kind: lemma
 title: Tail suprema and normalized scales
-status: draft
+status: published
 origin: pipeline
 deps: [lem-normalizing-a-scale-at-existing-least-upper-bounds, thm-cofinality-basics, def-axiom-of-choice, thm-regularity-of-the-alephs]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

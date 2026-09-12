@@ -2,7 +2,7 @@
 id: lem-small-dowker-luzin-gives-tight-coloring
 kind: lemma
 title: "A Luzin cylinder set gives a tight strongly unbounded coloring"
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-luzin-stick-and-ad-principles, def-small-dowker-tight-strongly-unbounded-coloring, def-axiom-of-choice, thm-countable-union-of-countable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

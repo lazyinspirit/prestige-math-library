@@ -2,7 +2,7 @@
 id: thm-naturality-of-the-singular-cohomology-pair-sequence
 kind: theorem
 title: Naturality of the singular cohomology pair sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-long-exact-sequence-of-a-pair-in-singular-cohomology, prop-singular-cohomology-is-contravariantly-functorial, def-relative-singular-cochain-complex]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

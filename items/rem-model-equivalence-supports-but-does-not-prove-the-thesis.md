@@ -2,7 +2,7 @@
 id: rem-model-equivalence-supports-but-does-not-prove-the-thesis
 kind: remark
 title: "Model-equivalence theorems support but do not prove the Church-Turing thesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-church-turing-thesis, thm-one-way-and-two-way-tapes-are-equivalent, thm-nondeterministic-and-deterministic-recognizability-agree, thm-ram-register-and-turing-computability-agree, thm-existence-of-a-universal-turing-machine]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

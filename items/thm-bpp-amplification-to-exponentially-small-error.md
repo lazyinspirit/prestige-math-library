@@ -2,7 +2,7 @@
 id: thm-bpp-amplification-to-exponentially-small-error
 kind: theorem
 title: "BPP amplification to exponentially small error"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rp-corp-zpp-bpp-and-pp, lem-chernoff-bound-for-bernoulli-trials]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

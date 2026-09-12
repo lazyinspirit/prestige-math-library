@@ -2,7 +2,7 @@
 id: lem-reversal-is-an-involution-and-reverses-concatenation
 kind: lemma
 title: "Reversal is an involution and reverses concatenation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-word-and-language-reversal, def-language-concatenation-powers-and-kle
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

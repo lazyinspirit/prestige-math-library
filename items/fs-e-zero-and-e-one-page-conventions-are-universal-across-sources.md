@@ -15,7 +15,9 @@ sources:
     - title: Raffaele Vitolo, On different geometric formulations of Lagrangian formalism (corrected author version), Appendix B p33; filtered
         normalization pp34–35
       url: https://poincare.unisalento.it/vitolo/vitolo_files/publications/journals/6a_VsComp.pdf
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 proof_strategy: direct

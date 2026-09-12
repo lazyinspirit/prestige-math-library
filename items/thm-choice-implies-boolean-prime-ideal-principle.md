@@ -2,7 +2,7 @@
 id: thm-choice-implies-boolean-prime-ideal-principle
 kind: theorem
 title: AC implies BPI
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-prime-ideal-principle, lem-generated-boolean-filter-and-ultrafilter-tests, def-axiom-of-choice, thm-zorn]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

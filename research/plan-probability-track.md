@@ -1345,7 +1345,7 @@ the characteristic-function and moment arguments remain on this page.
 7. `def-row-wise-independent-centered-triangular-array` (definition) — $(X_{n,k})_{1\le k\le k_n}$ with independence only within each row and zero means.
 8. `def-total-row-variance-and-lindeberg-condition` (definition) — $s_n^2=\sum_kEX_{n,k}^2$ and, after normalization $s_n^2\to1$, $\sum_kE[X_{n,k}^2;|X_{n,k}|>\varepsilon]\to0$ for every $\varepsilon>0$.
 9. `lem-lindeberg-condition-implies-feller-negligibility` (lemma) — $\max_k\operatorname{Var}(X_{n,k})\to0$ under normalized row variance.
-10. `lem-logarithm-of-a-product-of-near-one-characteristic-functions` (lemma) — control the remainder uniformly using Feller negligibility.
+10. `lem-product-of-near-one-characteristic-factors` (lemma) — compare each factor with its complex exponential by the quadratic series remainder and telescope the finite products; this direct Durrett route avoids complex logarithms and contour integration.
 11. `thm-lindeberg-feller-central-limit-theorem-sufficiency` (theorem) — normalized row sums satisfying Lindeberg converge to $N(0,1)$.
 12. `thm-feller-converse-to-lindeberg-feller` (theorem) — under Feller negligibility, asymptotic normality of the row sum forces the Lindeberg condition.
 13. `cor-lyapunov-central-limit-theorem` (corollary) — the $(2+\delta)$ moment condition implies Lindeberg.

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Size and rank bounds below an inaccessible"
 deps: ["def-lc-inaccessible-and-mahlo-cardinals", "def-cumulative-hierarchy-stages", "def-membership-rank-of-a-set", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

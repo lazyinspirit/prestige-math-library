@@ -2,7 +2,7 @@
 id: fs-rices-theorem-applies-to-state-count
 kind: false-statement
 title: "FALSE: Rice's theorem applies to having at most a fixed number of states"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-syntactic-properties-lie-outside-rices-theorem, thm-rices-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

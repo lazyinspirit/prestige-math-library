@@ -2,13 +2,14 @@
 id: lem-green-distinguished-summands-are-mutually-inverse
 kind: lemma
 title: Green distinguished summands are mutually inverse
-status: draft
+status: published
 origin: pipeline
 deps: [lem-green-restriction-has-one-distinguished-summand, lem-green-induction-has-one-distinguished-summand, lem-green-exceptional-family-containment-and-fusion, thm-krull-schmidt-for-finite-dimensional-kg-modules, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

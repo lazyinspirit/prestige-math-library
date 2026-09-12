@@ -2,13 +2,14 @@
 id: thm-chevalley-shephard-todd-for-finite-weyl-groups
 kind: theorem
 title: Chevalley shephard todd for finite weyl groups
-status: draft
+status: "published"
 origin: pipeline
 deps: [lem-finite-reflection-invariant-generators-are-algebraically-independent, lem-reflection-basic-invariants-form-a-regular-sequence, lem-weyl-coinvariant-hilbert-series-has-order-w-dimension]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

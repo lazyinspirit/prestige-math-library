@@ -2,7 +2,7 @@
 id: thm-rice-shapiro-positive-information-direction
 kind: theorem
 title: "Recognizable extensional properties are positively witnessed by finite information"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-index-set-and-extensional-machine-property, def-effective-encoding-of-turing-machines, def-turing-machine-acceptance-problem, thm-machine-acceptance-is-recognizable, thm-machine-acceptance-is-undecidable, thm-decidable-iff-language-and-complement-are-recognizable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

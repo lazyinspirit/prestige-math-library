@@ -2,7 +2,7 @@
 id: cex-reusing-random-bits-amplifies-success
 kind: counterexample
 title: "Repeating a randomized test with the same coin string gives no amplification"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-reusing-random-bits-amplifies-success]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-affine-algebraic-sets-coordinate-duality
 kind: theorem
 title: "Affine algebraic sets and reduced affine k-algebras at the object level"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Chapter 1 affine-variety dictionary"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

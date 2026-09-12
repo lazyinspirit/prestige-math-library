@@ -2,7 +2,7 @@
 id: thm-proper-inclusions-in-the-chomsky-hierarchy
 kind: theorem
 title: "The inclusions in the language-class ladder are proper"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-chomsky-hierarchy, thm-pumping-lemma-for-regular-languages, thm-pumping-lemma-for-context-free-languages, def-language-generated-by-a-cfg, cor-cfl-membership-is-decidable, thm-machine-acceptance-is-ce-complete, thm-machine-acceptance-is-undecidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

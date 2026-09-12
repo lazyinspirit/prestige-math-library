@@ -2,7 +2,9 @@
 id: thm-kojman-shelah-space-weight-and-character
 kind: theorem
 title: Weight and character of the Kojman-Shelah scale subspace
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [def-kojman-shelah-scale-subspace, lem-kojman-shelah-subspace-is-cofinal-and-has-successor-size, lem-rudin-box-space-basic-neighborhoods-and-p-space, def-weight-density-and-character, lem-weight-is-well-defined, lem-character-is-well-defined, def-axiom-of-choice, thm-cofinality-basics, thm-regularity-of-the-alephs, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption, lem-ordinal-sum-as-an-order-type, lem-cofinality-is-well-defined]
 proof_strategy: direct

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Carleson forest summation gives restricted weak ltwo"
 deps: ["lem-carleson-density-selection", "lem-carleson-size-selection", "lem-carleson-single-tree-estimate", "def-axiom-of-choice", "def-density-size-and-tree-count-for-carleson-tiles"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

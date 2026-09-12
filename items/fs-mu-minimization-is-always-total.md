@@ -2,7 +2,7 @@
 id: fs-mu-minimization-is-always-total
 kind: false-statement
 title: "FALSE: applying mu-minimization to a computable search predicate always yields a total function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-mu-minimization-and-partial-recursive-function]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

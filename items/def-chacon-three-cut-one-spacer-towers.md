@@ -4,6 +4,7 @@ kind: "definition"
 title: "Chacon three cut one spacer towers"
 deps: ["def-lebesgue-measure-and-the-lebesgue-sigma-algebra", "thm-lebesgue-measure-is-a-complete-measure", "thm-lebesgue-measure-of-a-box-of-every-kind", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

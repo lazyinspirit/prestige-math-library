@@ -2,7 +2,7 @@
 id: prop-polynomial-time-and-space-are-model-invariant
 kind: proposition
 title: "Polynomial-time and polynomial-space computation are invariant across standard machine models"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-multitape-to-single-tape-time-simulation, thm-multitape-to-single-tap
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

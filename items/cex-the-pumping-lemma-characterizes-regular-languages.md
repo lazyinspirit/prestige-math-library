@@ -2,7 +2,7 @@
 id: cex-the-pumping-lemma-characterizes-regular-languages
 kind: counterexample
 title: "A nonregular language can still satisfy the regular pumping lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-the-pumping-lemma-characterizes-regular-languages, cor-distinguishable-prefix-nonregularity-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

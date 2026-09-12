@@ -2,7 +2,9 @@
 id: ex-cohomology-of-lens-spaces-from-uct
 kind: example
 title: Cohomology of lens spaces from UCT
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, def-axiom-of-choice, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, prop-cellular-maps-induce-cellular-chain-maps, lem-the-cellular-boundary-squares-to-zero, cor-homology-of-spheres, cor-integral-cohomology-detects-adjacent-homology-torsion]

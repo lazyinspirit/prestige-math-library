@@ -1,0 +1,1331 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-great-circles-as-round-sphere-geodesics",
+    "ex-normal-coordinates-on-the-round-sphere",
+    "ex-the-punctured-euclidean-plane-is-geodesically-incomplete",
+    "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric",
+    "lem-local-isometries-send-geodesics-to-geodesics",
+    "fs-every-affinely-reparametrized-geodesic-remains-unit-speed",
+    "fs-normal-coordinates-make-the-metric-euclidean-throughout-the-chart",
+    "fs-every-geodesic-segment-is-globally-length-minimizing"
+  ],
+  "contracts": {
+    "ex-great-circles-as-round-sphere-geodesics": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-the-n-sphere-with-its-standard-smooth-atlas",
+          "source_section": "Example",
+          "quote": "For $n\\ge1$, let\n\n$$S^n:=\\{(x_1,\\dots,x_{n+1})\\in\\mathbb R^{n+1}:x_1^2+\\cdots+x_{n+1}^2=1\\}.$$\n\nWith north and south poles $N=(0,\\dots,0,1)$ and $S=(0,\\dots,0,-1)$, the\nstereographic charts\n\n$$\\sigma_N(x)=\\frac{(x_1,\\dots,x_n)}{1-x_{n+1}},\\qquad \\sigma_S(x)=\\frac{(x_1,\\dots,x_n)}{1+x_{n+1}}$$\n\ndefine a smooth atlas on $S^n$. Their overlap transition is\n$u\\mapsto u/\\|u\\|^2$ on $\\mathbb R^n\\setminus\\{0\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-riemannian-metric-and-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "A **Riemannian metric** on a Hausdorff second-countable smooth manifold $M$ is a smooth symmetric covariant two-tensor $g$ such that $g_p(v,v)>0$ for every point $p$ and every nonzero $v\\in T_pM$. A **Riemannian manifold** is the pair $(M,g)$.\n\nThis is a [[def-smooth-tensor-field]] giving a [[def-smooth-bundle-metric]] on $TM$. Dimension zero is allowed: its zero bilinear form is positive definite because there are no nonzero vectors. The empty manifold has its unique empty metric. Boundaries are allowed where stated, with smoothness understood up to the boundary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-theorem-of-riemannian-geometry",
+          "source_section": "Statement",
+          "quote": "Every supplied smooth Riemannian metric on a smooth manifold, including a manifold with boundary, has exactly one Levi–Civita connection. The construction adds no choice assumption.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-geodesic-of-an-affine-connection",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold without boundary with affine connection $\\nabla$, and let $I\\subseteq\\mathbb R$ be an interval with nonempty interior. A smooth curve $\\gamma:I\\to M$ is an **affinely parametrized geodesic** when\n$$D_t\\gamma'(t)=0\\qquad(t\\in I),$$\nwith one-sided interpretation at an included endpoint. Constant curves are geodesics. Unless another parametrization is explicitly stated, “geodesic” means affinely parametrized geodesic.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:I\\to M$ be a geodesic for a metric-compatible affine connection on a Riemannian manifold. Then $g(\\gamma',\\gamma')$ and the speed $|\\gamma'|$ are constant on $I$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating $\\langle p,p\\rangle=1$ along sphere curves shows $T_pS^n\\subseteq p^\\perp$. Both spaces have dimension $n$ by [F1], so equality holds. For tangent fields $X,Y$, differentiating $\\langle Y,p\\rangle=0$ gives $\\langle D_XY,p\\rangle=-\\langle X,Y\\rangle$; hence the tangent projection of the ambient derivative is $$\\widetilde\\nabla_XY=D_XY+\\langle X,Y\\rangle p.$$ The ordinary componentwise product rule makes this an affine connection. Its normal correction is orthogonal to tangent vectors, so differentiating the Euclidean pairing proves metric compatibility. Also $D_XY-D_YX=[X,Y]$ componentwise, while the displayed normal correction is symmetric in $X,Y$; thus its torsion vanishes. By [F2], $\\widetilde\\nabla$ is the round sphere's Levi--Civita connection.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the formula from step 1.1 along $\\gamma$ to a tangent field $V$ gives $$D_t^{\\widetilde\\nabla}V=V'+\\langle\\gamma',V\\rangle\\gamma.$$ In particular, [F3] says that $\\gamma$ is a geodesic exactly when $$\\gamma''+|\\gamma'|^2\\gamma=0.$$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $\\gamma$ is a geodesic. Its speed is a constant $c\\geq0$ by [F4]. If $c=0$, every ambient component of $\\gamma$ has zero derivative and [L4] makes $\\gamma$ constant. For a nonconstant geodesic, therefore, $c>0$. Put $p=\\gamma(t_0)$ and $u=\\gamma'(t_0)/c$. The sphere constraint gives $|p|=1$ and $\\langle p,\\gamma'(t_0)\\rangle=0$, so $p,u$ are orthonormal; step 2.1 gives $\\gamma''=-c^2\\gamma$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "L4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Define $q(t)=\\cos(c(t-t_0))p+\\sin(c(t-t_0))u$. By [L1], [L2], and the orthonormality from step 3.1, $q(t)\\in S^n$, $q(t_0)=p$, $q'(t_0)=cu=\\gamma'(t_0)$, and $q''=-c^2q$. For $h=\\gamma-q$, the nonnegative function $E=|h'|^2+c^2|h|^2$ satisfies $$E'=2\\langle h',h''+c^2h\\rangle=0.$$ By [L4], $E$ is constant; its value at $t_0$ is zero, so $h=0$ throughout $I$. This also covers an included endpoint $t_0$, using the one-sided derivatives and endpoint continuity in [L4].",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The orthonormal vectors $p,u$ span a two-plane through the origin, and [L3] shows that the formula in step 4.1, defined for every real $t$, covers its unit circle with constant speed $c$. It is a geodesic by step 2.1, so it extends the original curve; consequently the corresponding maximal geodesic is defined on all of $\\mathbb R$ and has the whole great circle as image. Conversely, starting with orthonormal $p,u$ and $c>0$, [L1]--[L2] give $|q'|=c$ and $q''=-c^2q$, so step 2.1 gives $D_t^{\\widetilde\\nabla}q'=0$ and [F3] makes $q$ a geodesic; a constant curve is a geodesic by [F3]. No point, direction, or plane is selected from a family: all are supplied or obtained uniquely from $\\gamma,t_0$, so the argument uses no choice principle.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "L1",
+            "L2",
+            "L3",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example supplies a curve and a time on the nonempty round sphere S^n with n at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 separates zero speed and proves the constant-curve case; step 5.1 includes it in the converse."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 identifies the same two-plane formula on S^1, so the n=1 endpoint of the dimension range is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles c=0 separately from the nonconstant c>0 formula, and step 5.1 checks the converse constant curve."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 extends the ODE identity to included parameter endpoints by continuity and one-sided differentiation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses only the supplied t_0, p, and velocity to construct the all-real great circle; no family of choices is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 4.1 derive the great-circle formula for every supplied nonconstant affine geodesic."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 directly verifies that the displayed great-circle parametrization, including the constant case, satisfies the geodesic equation."
+        }
+      ]
+    },
+    "ex-normal-coordinates-on-the-round-sphere": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-domain-and-exponential-map-of-a-connection",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $M$ be a smooth manifold without boundary with an affine connection. For $v\\in T_pM$, let $\\gamma_{p,v}:I_{p,v}\\to M$ be its unique maximal geodesic. The **domain of the exponential map** is\n$$\\mathcal E=\\{v\\in TM:1\\in I_{p,v}\\text{ for }p=\\pi(v)\\}.$$\nThe **exponential map** and its fibrewise restrictions are\n$$\\exp:\\mathcal E\\longrightarrow M,\\qquad \\exp(v)=\\gamma_{p,v}(1),\\qquad \\exp_p=\\exp|_{\\mathcal E_p}:\\mathcal E_p\\longrightarrow M,$$\nwhere $\\mathcal E_p=\\mathcal E\\cap T_pM$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-neighborhood-and-normal-coordinate-chart",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. A **normal neighbourhood centred at $p$** is an open set $U\\subseteq M$ for which there is an open star-shaped neighbourhood $D\\subseteq T_pM$ of $0_p$ such that $D\\subseteq\\mathcal E_p$ and $\\exp_p:D\\to U$ is a diffeomorphism.\n\nGiven a supplied ordered basis $e=(e_1,\\ldots,e_n)$ of $T_pM$, let $E_e:\\mathbb R^n\\to T_pM$ be $E_e(a^1,\\ldots,a^n)=\\sum_i a^ie_i$. The associated **normal coordinate chart** is\n$$x_e=E_e^{-1}\\circ\\exp_p^{-1}:U\\longrightarrow E_e^{-1}(D)\\subseteq\\mathbb R^n.$$\nWhen $e$ is orthonormal, these are orthonormal normal coordinates.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "ex-great-circles-as-round-sphere-geodesics",
+          "source_section": "Example",
+          "quote": "Let $n\\geq1$, and give\n$$S^n=\\{x\\in\\mathbb R^{n+1}:\\langle x,x\\rangle=1\\}$$\nthe round metric induced by the Euclidean inner product. Let $I\\subseteq\\mathbb R$ be an interval with nonempty interior. For any supplied $t_0\\in I$, a nonconstant affinely parametrized geodesic $\\gamma:I\\to S^n$ has constant speed $c>0$ and can be written\n$$\\gamma(t)=\\cos(c(t-t_0))p+\\sin(c(t-t_0))u,$$\nwhere $p=\\gamma(t_0)$ and $u=\\gamma'(t_0)/c$ are orthonormal. Its image is therefore an arc of the great circle $S^n\\cap\\operatorname{span}\\{p,u\\}$; the corresponding maximal geodesic has the whole great circle as its image. Conversely, every such constant-speed parametrization of a great circle is a geodesic. Constant geodesics are obtained separately by taking $\\gamma(t)=p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $v\\in T_pS^n$. If $v=0$, [F3] gives the constant geodesic $\\gamma(t)=p$. If $v\\ne0$, put $r=|v|$ and $u=v/r$; then $p,u$ are orthonormal and [F3] gives the geodesic $$\\gamma_v(t)=\\cos(rt)p+\\sin(rt)u.$$ It is defined for every real $t$, so $v$ lies in the exponential domain. Evaluating at time one as in [F1] yields the two displayed branches for $\\exp_p(v)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], there is a normal domain $D_0$ at $p$. Its intersection $D_0\\cap B_\\pi(0_p)$ is open and star-shaped about zero, and restricting the diffeomorphism $\\exp_p:D_0\\to\\exp_p(D_0)$ gives a diffeomorphism on that intersection, so at least one normal domain lies in $B_\\pi(0_p)$. Now let $D\\subseteq B_\\pi(0_p)$ be any normal domain at $p$ and let $v=\\sum_i v^ie_i\\in D$. The definition in [F2] gives $$x_e(\\exp_p(v))=E_e^{-1}(v)=(v^1,\\ldots,v^n),$$ which proves the asserted formula for every such $D$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $v\\ne0$, with $r=|v|$, step 1.1 gives $$|\\exp_p(v)-p|\\leq|\\cos r-1|+|\\sin r|.$$ As $v\\to0$, one has $r\\to0$, and [L1] makes the right side tend to zero. Thus the nonzero branch converges to $p=\\exp_p(0)$, proving the asserted continuous value without assigning a value to $v/|v|$ at zero.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Suppose $v,w\\in B_\\pi(0_p)$ and $\\exp_p(v)=\\exp_p(w)$. Put $r=|v|$ and $s=|w|$. Taking the Euclidean inner product with $p$ in the formula of step 1.1 gives $\\cos r=\\cos s$, because $v,w\\perp p$. Since $r,s\\in[0,\\pi)$ and cosine is strictly decreasing there by [L2], $r=s$. If this common value is zero, then $v=w=0$. If it is positive, [L3] gives $\\sin r>0$, and equality of the components perpendicular to $p$ gives $(\\sin r/r)v=(\\sin r/r)w$, hence $v=w$. This proves injectivity on the open ball, including all zero/nonzero combinations.",
+          "step": "2.2",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vectors $\\pi e_1$ and $-\\pi e_1$ are distinct because $n\\geq1$ and $e_1$ is a unit vector. Step 1.1 and [L3]--[L4] give $$\\exp_p(\\pi e_1)=-p=\\exp_p(-\\pi e_1).$$ Thus radius $\\pi$ is the first boundary at which the antipodal collision can occur: step 2.2 excludes collisions at smaller radii, while the displayed pair realizes one at radius $\\pi$. The source ball is open, so its endpoint is not silently included. Dimension zero is outside the stated $n\\geq1$ claim; there the tangent space is the singleton $\\{0_p\\}$ and no antipodal-direction pair exists. An empty sphere has no supplied $p$. The explicit calculations and displayed collision pair make no choices; $\\mathrm{AC}_\\omega$ is used exactly through the inherited exponential/normal-neighborhood framework recorded in [A1]--[F2].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "L3",
+            "L4",
+            "step 1.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A centre p and basis are supplied on S^n with n at least one, so no empty-manifold instance is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 define the zero-vector exponential value separately and prove continuity there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the supplied unit e_1, which exists already for n=1, for the antipodal collision."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats v=0 as the constant geodesic; step 2.1 checks that the nonzero formula tends to this value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 proves injectivity only for |v|<pi, and step 3.1 exhibits the distinct collision at the excluded radius pi."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 invoke the current AC_omega exponential and normal-chart interfaces; all subsequent vectors and calculations are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a formula, continuity and injectivity, not the forward half of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The boundary collision is a counterwitness, not the reverse half of an equivalence."
+        }
+      ]
+    },
+    "ex-the-punctured-euclidean-plane-is-geodesically-incomplete": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $W\\subseteq\\mathbb R^n$ be open. Then $W$ is a smooth\n$n$-manifold: the one-chart atlas $\\{(W,\\mathrm{id}_W)\\}$ is a smooth atlas, and the\nsmooth structure it generates is the one induced on the open subset $W$ of\n$\\mathbb R^n$. A chart $(U,\\varphi)$ on $W$ belongs to this structure exactly\nwhen both transition maps between $\\varphi$ and the identity are smooth, that\nis, exactly when $\\varphi:U\\to\\varphi(U)$ and its inverse are smooth as maps\nbetween Euclidean open sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-riemannian-metric-and-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "A **Riemannian metric** on a Hausdorff second-countable smooth manifold $M$ is a smooth symmetric covariant two-tensor $g$ such that $g_p(v,v)>0$ for every point $p$ and every nonzero $v\\in T_pM$. A **Riemannian manifold** is the pair $(M,g)$.\n\nThis is a [[def-smooth-tensor-field]] giving a [[def-smooth-bundle-metric]] on $TM$. Dimension zero is allowed: its zero bilinear form is positive definite because there are no nonzero vectors. The empty manifold has its unique empty metric. Boundaries are allowed where stated, with smoothness understood up to the boundary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-christoffel-formula-for-the-levi-civita-connection",
+          "source_section": "Statement",
+          "quote": "In coordinates for a Riemannian metric with matrix $(g_{ij})$ and inverse $(g^{ij})$, its Levi–Civita symbols are\n$$\\Gamma^k{}_{ij}=\\tfrac12\\sum_\\ell g^{k\\ell}(\\partial_i g_{j\\ell}+\\partial_j g_{i\\ell}-\\partial_\\ell g_{ij}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-coordinate-geodesic-equation",
+          "source_section": "Statement",
+          "quote": "In coordinates $x^1,\\ldots,x^n$, a smooth curve $\\gamma$ is a geodesic if and only if, throughout every parameter subinterval lying in the chart,\n$$\\ddot x^k+\\Gamma^k{}_{ij}(x)\\dot x^i\\dot x^j=0\\qquad(1\\le k\\le n),$$\nwith summation over repeated indices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every $(p,v)\\in TM$ there is a unique maximal geodesic $\\gamma_{p,v}:I_{p,v}\\to M$ with $\\gamma_{p,v}(0)=p$ and $\\gamma'_{p,v}(0)=v$. Each $I_{p,v}$ is an open interval containing zero, the domain\n$$\\mathcal G=\\{(t,p,v):t\\in I_{p,v}\\}\\subseteq\\mathbb R\\times TM$$\nis open, and $(t,p,v)\\mapsto\\gamma_{p,v}(t)$ is smooth on $\\mathcal G$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-geodesically-complete-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. A Riemannian manifold without boundary is **geodesically complete** when, for every initial vector $v\\in T_pM$, the unique maximal geodesic has domain\n$$I_{p,v}=\\mathbb R.$$\nFor a disconnected manifold this condition is componentwise. The zero initial vector is included.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $z\\in M$, the ball of radius $\\lVert z\\rVert/2$ about $z$ misses the origin by the reverse triangle inequality, so $M$ is open. By [F1], its identity chart makes it a boundaryless smooth two-manifold. In that chart $g_{ij}=\\delta_{ij}$, which is a smooth positive-definite symmetric matrix, so [F1] also makes $(M,g)$ a Riemannian manifold.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The coefficients $g_{ij}=\\delta_{ij}$ are constant, so [F2] gives $\\Gamma^k{}_{ij}=0$ throughout $M$. For $t<1$, the point $\\gamma(t)=(1-t,0)$ is nonzero; moreover $\\gamma(0)=(1,0)$, $\\gamma'(0)=(-1,0)$, $\\gamma''(t)=0$, and $\\lVert\\gamma'(t)\\rVert_g=1$. Thus [F3] makes $\\gamma:(-\\infty,1)\\to M$ a unit-speed geodesic with the claimed initial data.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\Gamma:I\\to M$ be the unique maximal geodesic with those initial data from [F4]. Uniqueness makes $\\Gamma$ and $\\gamma$ agree on their common interval. Their union is therefore a well-defined geodesic on the interval $I\\cup(-\\infty,1)$, so maximality forces $(-\\infty,1)\\subseteq I$. If $1\\in I$, continuity of $M\\hookrightarrow\\mathbb R^2$ and the equality for $t<1$ would give $\\Gamma(1)=\\lim_{t\\uparrow1}(1-t,0)=(0,0)\\notin M$, a contradiction. Because $I$ is an interval containing zero, it cannot contain a time greater than $1$ without containing $1$. Hence $I\\subseteq(-\\infty,1)$ and therefore $I=(-\\infty,1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The maximal interval in step 3.1 is not $\\mathbb R$, so [F5] makes $(M,g)$ geodesically incomplete. The witness has a finite excluded upper endpoint, while $M$ itself is nonempty and boundaryless; its starting velocity is nonzero and has norm one. The formula for $\\gamma$, its geodesic calculation, and the extension obstruction make no choices. The sole use of $\\mathrm{AC}_\\omega$ is through [F4] and [F5], whose current library formulations use it to supply and name unique maximal geodesics.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits the nonempty punctured plane and step 2.1 supplies its point (1,0)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes unit initial speed, so the witness is not the globally defined zero-velocity geodesic."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes dimension two and makes no assertion about a one-dimensional manifold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 establish a nonempty boundaryless manifold and a nonconstant unit-speed witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that t=1 is excluded and continuity at the deleted origin forbids any extension through it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 identifies AC_omega only in the cited maximal-geodesic and completeness interfaces; the manifold and witness are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a single incompleteness assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse completeness assertion is stated."
+        }
+      ]
+    },
+    "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding",
+          "source_section": "Statement",
+          "quote": "If $S\\subseteq M$ is an embedded submanifold equipped with the smooth structure\nfrom its restricted slice charts, then the inclusion $i:S\\hookrightarrow M$ is\na smooth embedding.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pullback-riemannian-metric",
+          "source_section": "Definition",
+          "quote": "For smooth $F:M\\to N$ and a Riemannian metric $h$ on $N$, its **pullback tensor** is $(F^*h)_p(v,w)=h_{F(p)}(dF_pv,dF_pw)$.\n\nThis is [[def-pullback-of-a-covariant-tensor-field]] for the tensor in [[def-riemannian-metric-and-riemannian-manifold]]. It is always symmetric and positive semidefinite; the name does not assert positive definiteness. Smoothness and the precise immersion criterion are established next.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions",
+          "source_section": "Statement",
+          "quote": "$F^*h$ is Riemannian if and only if $F$ is an immersion. In general it is positive semidefinite, with radical $\\ker dF_p$ at $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-riemannian-distance-on-a-connected-manifold",
+          "source_section": "Definition",
+          "quote": "On a connected Riemannian manifold define $d_g(p,q)=\\inf\\{L_g(\\gamma):\\gamma\\text{ is piecewise }C^1\\text{ from }p\\text{ to }q\\}$.\n\nLengths are those of [[def-riemannian-speed-and-length]]. For each pair $p,q$, [[lem-any-two-points-in-a-connected-smooth-manifold-can-be-joined-by-a-piecewise-c-one-curve]] supplies a curve, so the set of lengths is nonempty, contains a finite real number and is bounded below by zero. Applying the least-upper-bound property [[cor-cauchy-reals-lub-complete]] to the negatives gives a finite nonnegative infimum. On the empty connected manifold this defines the empty distance function; there are no pairs to evaluate. No minimizing curve is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-riemannian-distance-topology-is-the-manifold-topology",
+          "source_section": "Statement",
+          "quote": "The topology of $d_g$ is the manifold topology on every connected Riemannian manifold.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\n$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).\n\nA subset $A \\subseteq X$ is called **complete** when the metric subspace\n$(A, d_A)$ is complete ([[def-isometry-and-metric-embedding]]); as always, the\nmetric is part of the data, and $d_A$ is the restriction of $d$ to $A \\times A$.\n\n**The limit is unique when it exists**, since limits in a metric space are unique\n([[lem-metric-limits-unique]]), so a complete space assigns to each of its Cauchy\nsequences one point and not a set of points.\n\n**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the\ntopology of $d$.** Both quantifiers in the definition are about the metric: the\nCauchy condition is stated with distances, and so is convergence. Two metrics on\nthe same set can have the same open sets while exactly one of them is complete,\nwhich is the content of [[fs-completeness-is-a-topological-property]] and its\nwitness. Read the word *complete* as an abbreviation for *complete with respect\nto this metric*, always.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $i$ is an immersion. Hence [F2] and [F3] show that $h=i^*g$ is indeed a Riemannian metric on $S$. Connected coordinate balls form a neighbourhood basis, so every connected component of a manifold is open; hence the restriction of $h$ to the connected submanifold $C$ is again Riemannian.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $M_0$ be the connected component of $M$ containing $C$. If $\\gamma$ is a piecewise-$C^1$ curve in $C$, then [F2] gives pointwise equality of speeds and therefore $$L_h(\\gamma)=L_g(i\\circ\\gamma).$$ Every such curve is also an ambient curve in $M_0$. Taking the two infima in [F4] consequently gives $$d_g(x,y)\\le d_h(x,y)\\qquad(x,y\\in C).$$",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The inequality in step 2.1 makes $(x_n)$ a $d_g$-Cauchy sequence in $M_0$. By the assumed completeness of $M_0$ and [F6], there is $p\\in M_0$ such that $d_g(x_n,p)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F5], $x_n\\to p$ in the manifold topology of $M_0$. If $p\\notin S$, then $M_0\\cap(M\\setminus S)$ would be an open neighbourhood of $p$ in $M_0$ containing none of the $x_n$, contradicting this convergence. Thus $p\\in S$. If $O$ is any neighbourhood of $p$ in $S$, [F1] gives an ambient-open $V$ such that $p\\in S\\cap V\\subseteq O$. Since $V\\cap M_0$ is a neighbourhood of $p$ in $M_0$, eventually $x_n\\in V\\cap S\\subseteq O$. Hence $x_n\\to p$ in $S$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Choose a connected coordinate ball $U$ about $p$ in $S$. By step 4.1, all sufficiently large $x_n$ lie in $U$. Thus $U$ meets $C$; because $U$ is connected and $C$ is the connected component containing each $x_n$, one has $U\\subseteq C$. In particular $p\\in C$, and $x_n\\to p$ in the manifold topology of $C$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Apply [F5] to the connected Riemannian manifold $C$. Step 5.1 then gives $d_h(x_n,p)\\to0$. The arbitrary $d_h$-Cauchy sequence $(x_n)$ therefore converges to a point of $C$, so [F6] proves that $(C,d_h)$ is complete. Since $C$ was arbitrary, the componentwise statement and its connected special case follow.",
+          "step": "6.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 6.1 concludes componentwise; an empty S has no nonempty component or Cauchy sequence to test."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 6.1 includes a zero-dimensional component, whose local connected chart is a singleton."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 uses no dimension restriction, so the same Cauchy and topology argument covers a one-dimensional component."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 applies to arbitrary Cauchy sequences, including constant and eventually constant sequences."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This corollary has no interval endpoint or geodesic-extension claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 fixes one arbitrary Cauchy sequence and invokes ambient completeness once; no choice principle or sequence of selections is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary states only the implication from ambient completeness and closed embeddedness to induced completeness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary claims no converse from intrinsic completeness to ambient completeness or closedness."
+        }
+      ]
+    },
+    "lem-local-isometries-send-geodesics-to-geodesics": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-riemannian-isometry-and-local-isometry",
+          "source_section": "Definition",
+          "quote": "An **isometry** $F:(M,g)\\to(N,h)$ is a diffeomorphism with $F^*h=g$. A **local isometry** is a smooth local diffeomorphism with $F^*h=g$. An **isometric immersion** is a smooth immersion satisfying that same pullback identity.\n\nUse [[def-pullback-riemannian-metric]] and [[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]. Positivity forces injective differential by [[prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions]]. In equal dimensions on boundaryless manifolds, the inverse function theorem as applied in the next proposition makes a metric-preserving smooth map a local isometry. At a boundary the definition retains the local-diffeomorphism requirement. An isometric immersion need not have equal source and target dimensions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-theorem-of-riemannian-geometry",
+          "source_section": "Statement",
+          "quote": "Every supplied smooth Riemannian metric on a smooth manifold, including a manifold with boundary, has exactly one Levi–Civita connection. The construction adds no choice assumption.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-geodesic-of-an-affine-connection",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold without boundary with affine connection $\\nabla$, and let $I\\subseteq\\mathbb R$ be an interval with nonempty interior. A smooth curve $\\gamma:I\\to M$ is an **affinely parametrized geodesic** when\n$$D_t\\gamma'(t)=0\\qquad(t\\in I),$$\nwith one-sided interpretation at an included endpoint. Constant curves are geodesics. Unless another parametrization is explicitly stated, “geodesic” means affinely parametrized geodesic.",
+          "uses": [
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $p\\in M$. By [F1], there are open sets $p\\in U\\subseteq M$ and $F(p)\\in V\\subseteq N$ for which $f=F|_U:U\\to V$ is a diffeomorphism. Shrinking $U$ to a coordinate neighborhood of $p$ and replacing $V$ by its image preserves this property. The pullback identity restricts to $f^*(h|_V)=g|_U$, so $f$ is an isometry between these neighborhoods.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For vector fields $X,Y$ on $U$, define $$\\overline\\nabla_XY=(f^{-1})_*\\bigl(\\nabla^N_{f_*X}(f_*Y)\\bigr).$$ This is well defined because a diffeomorphism sends vector fields on $U$ bijectively to vector fields on $V$. For $a\\in C^\\infty(U)$ one has $f_*(aX)=(a\\circ f^{-1})f_*X$, $f_*(aY)=(a\\circ f^{-1})f_*Y$, and $(f_*X)(a\\circ f^{-1})=X(a)\\circ f^{-1}$. The connection axioms for $\\nabla^N$ therefore give $C^\\infty(U)$-linearity in $X$, real-linearity in $Y$, and $\\overline\\nabla_X(aY)=X(a)Y+a\\overline\\nabla_XY$. Thus $\\overline\\nabla$ is an affine connection on $U$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Diffeomorphisms preserve brackets: for every $u\\in C^\\infty(V)$, $$[f_*X,f_*Y](u)=\\bigl([X,Y](u\\circ f)\\bigr)\\circ f^{-1},$$ so $[f_*X,f_*Y]=f_*[X,Y]$. Since $\\nabla^N$ is torsion free, $$f_*\\bigl(\\overline\\nabla_XY-\\overline\\nabla_YX-[X,Y]\\bigr)=\\nabla^N_{f_*X}(f_*Y)-\\nabla^N_{f_*Y}(f_*X)-[f_*X,f_*Y]=0.$$ The differential of $f$ is invertible, hence $\\overline\\nabla$ is torsion free.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Because $g(Y,Z)=h(f_*Y,f_*Z)\\circ f$, the chain rule and metric compatibility of $\\nabla^N$ give $$X\\bigl(g(Y,Z)\\bigr)=g(\\overline\\nabla_XY,Z)+g(Y,\\overline\\nabla_XZ).$$ Indeed, after composing this scalar identity with $f^{-1}$ and using step 2.1, it is exactly $$(f_*X)h(f_*Y,f_*Z)=h(\\nabla^N_{f_*X}f_*Y,f_*Z)+h(f_*Y,\\nabla^N_{f_*X}f_*Z).$$ Thus $\\overline\\nabla$ is compatible with $g|_U$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The connection $\\overline\\nabla$ and the restriction of $\\nabla^M$ to $U$ are both torsion free and compatible with $g|_U$. Uniqueness in [F2] gives $\\overline\\nabla=\\nabla^M|_U$. Applying $f_*$ to the definition in step 2.1 yields the asserted local intertwining identity.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Fix $t_0\\in I$ and use step 1.1 at $\\gamma(t_0)$. On a relative interval $J\\subseteq I$ about $t_0$ with $\\gamma(J)\\subseteq U$, take the coordinate frame $E_1,\\ldots,E_n$ on $U$ and write $W(t)=w^i(t)E_i|_{\\gamma(t)}$. The defining coefficient rule for covariant differentiation along a curve and step 4.1 give $$\\begin{aligned}D_t^N(dF(W))&=(w^i)'f_*E_i+w^i\\nabla^N_{(f\\circ\\gamma)'}(f_*E_i)\\\\&=df\\bigl((w^i)'E_i+w^i\\nabla^M_{\\gamma'}E_i\\bigr)=df(D_t^M W).\\end{aligned}$$ on $J$. Since $t_0$ was arbitrary, the identity holds on all of $I$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Apply step 5.1 to $W=\\gamma'$. Then $dF(\\gamma')=(F\\circ\\gamma)'$, and if $\\gamma$ is geodesic, [F3] gives $$D_t^N(F\\circ\\gamma)'=dF(D_t^M\\gamma')=dF(0)=0.$$ Therefore $F\\circ\\gamma$ is an affinely parametrized geodesic. This uses only the local connection identity, so none of completeness, connectedness, surjectivity, or global injectivity enters.",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Constant curves are covered because their velocity and acceleration are zero. If $M$ is empty there are no curves to check; in dimension zero every curve from an interval is locally constant, and the same conclusion holds. The proof is unchanged in dimension one. At an included endpoint, step 5.1 is read on a one-sided relative interval and [F3] supplies the one-sided covariant derivative. Each neighborhood is used only after fixing one supplied point or parameter value; no simultaneous selection of neighborhoods is made, so the argument uses no form of the Axiom of Choice. The claim is one-way rather than an equivalence, and it concerns affine parametrization, not preservation of minimizing behavior.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 5.1",
+            "step 6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 7.1 notes that an empty source manifold has no curves and the universal implication is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 7.1 checks that a curve into a zero-dimensional manifold is locally constant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 7.1 notes that no argument requires dimension above one, so local coordinate-frame differentiation applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 7.1 checks constant curves by vanishing velocity and acceleration."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 5.1 and 7.1 use the source geodesic definition's one-sided included-endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 7.1 selects one local neighborhood only after fixing a supplied point; no simultaneous choice family or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states one-way preservation of affine geodesics under a local isometry."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or converse geodesic-lifting assertion is claimed."
+        }
+      ]
+    },
+    "fs-every-affinely-reparametrized-geodesic-remains-unit-speed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-coordinate-geodesic-equation",
+          "source_section": "Statement",
+          "quote": "In coordinates $x^1,\\ldots,x^n$, a smooth curve $\\gamma$ is a geodesic if and only if, throughout every parameter subinterval lying in the chart,\n$$\\ddot x^k+\\Gamma^k{}_{ij}(x)\\dot x^i\\dot x^j=0\\qquad(1\\le k\\le n),$$\nwith summation over repeated indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic",
+          "source_section": "Statement",
+          "quote": "If $\\gamma:I\\to M$ is an affinely parametrized geodesic and $\\ell(t)=at+b$ maps an interval $J$ into $I$, then $\\gamma\\circ\\ell$ is a geodesic. For any supplied Riemannian metric, its speed at $t$ is $|a|$ times the speed of $\\gamma$ at $at+b$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the global Cartesian coordinate on the Euclidean line, the flat connection has $\\Gamma^1{}_{11}=0$. The coordinate function of $\\gamma$ is $x(s)=s$, so $\\ddot x=0$ and [F1] makes $\\gamma$ a geodesic. Its velocity is $\\partial_x$, whose norm for $dx^2$ is $1$, so $\\gamma$ has unit speed.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The affine map $\\ell(t)=2t$ has nonzero constant slope and hence is a genuine affine reparametrization. By [F2], $\\widetilde\\gamma=\\gamma\\circ\\ell$ is still a geodesic, but $|\\dot{\\widetilde\\gamma}(t)|=|2|\\,|\\dot\\gamma(2t)|=2$, so it is not unit speed.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the displayed curve and reparametrization refute the universal claim. The exact failure is the missing restriction $|a|=1$: slopes $1$ and $-1$ preserve unit speed, every other nonzero absolute slope changes it, and slope $0$ would give a constant geodesic rather than a reparametrization diffeomorphism. The witness is one-dimensional, has no finite parameter endpoints or degenerate interval, and is explicit, so no choice principle is used.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is the nonempty Euclidean real line with an explicit curve."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes slope zero from the reparametrization-diffeomorphism hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 compute original speed one and identify precisely the slopes of absolute value one that preserve it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 use nonzero slope two and a nonconstant all-real line, not a degenerate constant map."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both curve and affine reparametrization have all of R as domain, with no included endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 gives a fully explicit line and slope-two map and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct counterexample to a universal assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted."
+        }
+      ]
+    },
+    "fs-normal-coordinates-make-the-metric-euclidean-throughout-the-chart": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-the-n-sphere-with-its-standard-smooth-atlas",
+          "source_section": "Example",
+          "quote": "For $n\\ge1$, let\n\n$$S^n:=\\{(x_1,\\dots,x_{n+1})\\in\\mathbb R^{n+1}:x_1^2+\\cdots+x_{n+1}^2=1\\}.$$\n\nWith north and south poles $N=(0,\\dots,0,1)$ and $S=(0,\\dots,0,-1)$, the\nstereographic charts\n\n$$\\sigma_N(x)=\\frac{(x_1,\\dots,x_n)}{1-x_{n+1}},\\qquad \\sigma_S(x)=\\frac{(x_1,\\dots,x_n)}{1+x_{n+1}}$$\n\ndefine a smooth atlas on $S^n$. Their overlap transition is\n$u\\mapsto u/\\|u\\|^2$ on $\\mathbb R^n\\setminus\\{0\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-riemannian-metric-and-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "A **Riemannian metric** on a Hausdorff second-countable smooth manifold $M$ is a smooth symmetric covariant two-tensor $g$ such that $g_p(v,v)>0$ for every point $p$ and every nonzero $v\\in T_pM$. A **Riemannian manifold** is the pair $(M,g)$.\n\nThis is a [[def-smooth-tensor-field]] giving a [[def-smooth-bundle-metric]] on $TM$. Dimension zero is allowed: its zero bilinear form is positive definite because there are no nonzero vectors. The empty manifold has its unique empty metric. Boundaries are allowed where stated, with smoothness understood up to the boundary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-fundamental-theorem-of-riemannian-geometry",
+          "source_section": "Statement",
+          "quote": "Every supplied smooth Riemannian metric on a smooth manifold, including a manifold with boundary, has exactly one Levi–Civita connection. The construction adds no choice assumption.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every $(p,v)\\in TM$ there is a unique maximal geodesic $\\gamma_{p,v}:I_{p,v}\\to M$ with $\\gamma_{p,v}(0)=p$ and $\\gamma'_{p,v}(0)=v$. Each $I_{p,v}$ is an open interval containing zero, the domain\n$$\\mathcal G=\\{(t,p,v):t\\in I_{p,v}\\}\\subseteq\\mathbb R\\times TM$$\nis open, and $(t,p,v)\\mapsto\\gamma_{p,v}(t)$ is smooth on $\\mathcal G$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-existence-of-normal-neighborhoods",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every point $p$ of a boundaryless Riemannian manifold, there is an open star-shaped neighbourhood $\\widetilde U_p$ of $0_p$ in $T_pM$, contained in $\\mathcal E_p$, such that\n$$\\exp_p:\\widetilde U_p\\longrightarrow U_p:=\\exp_p(\\widetilde U_p)$$\nis a diffeomorphism and $U_p$ is an open neighbourhood of $p$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-neighborhood-and-normal-coordinate-chart",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. A **normal neighbourhood centred at $p$** is an open set $U\\subseteq M$ for which there is an open star-shaped neighbourhood $D\\subseteq T_pM$ of $0_p$ such that $D\\subseteq\\mathcal E_p$ and $\\exp_p:D\\to U$ is a diffeomorphism.\n\nGiven a supplied ordered basis $e=(e_1,\\ldots,e_n)$ of $T_pM$, let $E_e:\\mathbb R^n\\to T_pM$ be $E_e(a^1,\\ldots,a^n)=\\sum_i a^ie_i$. The associated **normal coordinate chart** is\n$$x_e=E_e^{-1}\\circ\\exp_p^{-1}:U\\longrightarrow E_e^{-1}(D)\\subseteq\\mathbb R^n.$$\nWhen $e$ is orthonormal, these are orthonormal normal coordinates.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-properties-of-normal-coordinates-at-the-center",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $(x^1,\\ldots,x^n)$ be normal coordinates centred at $p$ from an orthonormal ordered basis $(e_1,\\ldots,e_n)$ of $T_pM$. Then\n$$x(p)=0,\\qquad \\left.\\partial_i\\right|_p=e_i,\\qquad g_{ij}(p)=\\delta_{ij},\\qquad \\Gamma^k{}_{ij}(p)=0,\\qquad \\partial_k g_{ij}(p)=0.$$\nMoreover, if $v=\\sum_i v^ie_i$, then every part of its geodesic lying in the normal neighbourhood has coordinate expression\n$$x(\\gamma_{p,v}(t))=(tv^1,\\ldots,tv^n).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating the equation $q\\mathbin{\\boldsymbol\\cdot}q=1$ gives $T_qS^2=q^\\perp$. Hence $g_q(u,w)=u\\mathbin{\\boldsymbol\\cdot}w$ is smooth and positive definite on each tangent plane, so it is a Riemannian metric by [F1]. If $D$ is the Euclidean derivative and $P_q(z)=z-(z\\mathbin{\\boldsymbol\\cdot}q)q$, then $\\nabla_XY=P(D_XY)$ is metric compatible because orthogonal projection does not change dot products with tangent vectors, and it is torsion free because $D_XY-D_YX=[X,Y]$ is tangent. Uniqueness in [F1] therefore identifies this projected derivative with the round Levi--Civita connection.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $v\\in T_NS^2$ with $r=|v|>0$, put $\\gamma_v(t)=\\cos(tr)N+\\sin(tr)v/r$. Then $|\\gamma_v(t)|=1$, $\\gamma_v(0)=N$, $\\dot\\gamma_v(0)=v$, and $\\ddot\\gamma_v=-r^2\\gamma_v$ is normal to the sphere. Step 1.1 gives $D_t\\dot\\gamma_v=P_{\\gamma_v}(\\ddot\\gamma_v)=0$, so $\\gamma_v$ is a geodesic. Its formula extends at $v=0$ by the constant curve, and uniqueness in [F2] yields $\\exp_N(v)=\\cos r\\,N+(\\sin r/r)v$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2], restrict $\\exp_N$ to a sufficiently small ball $B_\\rho(0)\\subseteq T_NS^2$ on which it is a diffeomorphism, and use the supplied basis to form normal coordinates. Choose $0<r<\\min\\{\\rho,\\pi\\}$ and set $x=re_1$, $w=e_2$. Since $x\\mathbin{\\boldsymbol\\cdot}w=0$, differentiating the formula of step 2.1 in the direction $w$ gives $d(\\exp_N)_x(w)=(\\sin r/r)e_2$. Thus at $q=\\exp_N(x)$ the second coordinate vector has squared round length $g_{22}(q)=(\\sin r/r)^2<1$, using the elementary strict inequality $0<\\sin r<r$ for $0<r<\\pi$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The metric coefficient in step 3.1 is not the Euclidean value $1$, even though [F2] gives $g_{22}(N)=1$ and vanishing first metric derivatives at the centre. This is the exact failure: normal coordinates normalize the metric's value and first derivatives at their centre, not its values throughout the chart. The witness is two-dimensional and uses an interior point with $r>0$; $r=0$ is precisely the normalized centre, while empty and zero-dimensional manifolds cannot supply this counterexample. Assumption [A1] is used only through the library interfaces collected in [F2]; every construction and calculation in steps 1.1--3.1 is explicit and makes no choice.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 fixes the nonempty round S^2 and a north-pole chart; no empty-manifold witness is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 contrasts the centre value g_22(N)=1 with the noncentral coefficient, separating r=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This witness needs a transverse coordinate direction on S^2; it makes no dimension-one assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 select r>0 and distinguish it from the degenerate centre r=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses 0<r<min(rho,pi) strictly inside the normal-chart domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 declares AC_omega only through current maximal-geodesic and normal-chart interfaces; the sphere calculation is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal metric-coefficient claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse normal-coordinate assertion is stated."
+        }
+      ]
+    },
+    "fs-every-geodesic-segment-is-globally-length-minimizing": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-existence-uniqueness-and-smooth-dependence-of-geodesics",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For every $(p,v)\\in TM$ there is a unique maximal geodesic $\\gamma_{p,v}:I_{p,v}\\to M$ with $\\gamma_{p,v}(0)=p$ and $\\gamma'_{p,v}(0)=v$. Each $I_{p,v}$ is an open interval containing zero, the domain\n$$\\mathcal G=\\{(t,p,v):t\\in I_{p,v}\\}\\subseteq\\mathbb R\\times TM$$\nis open, and $(t,p,v)\\mapsto\\gamma_{p,v}(t)$ is smooth on $\\mathcal G$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Suppose $\\exp_p:B_\\rho(0_p)\\to U$ is a diffeomorphism, where $\\rho>0$, and let $v\\in B_\\rho(0_p)$. The radial geodesic $\\gamma_v(t)=\\exp_p(tv)$, $0\\le t\\le1$, has length $|v|_{g_p}$ and minimizes length among all piecewise smooth curves in $U$ from $p$ to $\\exp_p(v)$.\n\nIf $v\\ne0$, equality holds precisely for the monotone radial reparametrizations\n$$c(t)=\\exp_p\\left(r(t)\\frac v{|v|_{g_p}}\\right),$$\nwhere $r$ is continuous, piecewise smooth, nondecreasing, and has endpoint values $0$ and $|v|_{g_p}$. For $v=0$, equality holds precisely for the constant curve.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-christoffel-formula-for-the-levi-civita-connection",
+          "source_section": "Statement",
+          "quote": "In coordinates for a Riemannian metric with matrix $(g_{ij})$ and inverse $(g^{ij})$, its Levi–Civita symbols are\n$$\\Gamma^k{}_{ij}=\\tfrac12\\sum_\\ell g^{k\\ell}(\\partial_i g_{j\\ell}+\\partial_j g_{i\\ell}-\\partial_\\ell g_{ij}).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-coordinate-geodesic-equation",
+          "source_section": "Statement",
+          "quote": "In coordinates $x^1,\\ldots,x^n$, a smooth curve $\\gamma$ is a geodesic if and only if, throughout every parameter subinterval lying in the chart,\n$$\\ddot x^k+\\Gamma^k{}_{ij}(x)\\dot x^i\\dot x^j=0\\qquad(1\\le k\\le n),$$\nwith summation over repeated indices.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-circle-as-real-line-mod-integers",
+          "source_section": "Definition",
+          "quote": "Use the canonical copy of $\\mathbb Z$ inside $\\mathbb R$ fixed in\n[[lem-integer-part]]. For $x,y\\in\\mathbb R$, put\n\n$$x\\sim y\\quad\\Longleftrightarrow\\quad x-y\\in\\mathbb Z.$$\n\nThis is an equivalence relation. Indeed, $x-x=0\\in\\mathbb Z$; if\n$x-y\\in\\mathbb Z$, then $y-x=-(x-y)\\in\\mathbb Z$; and if\n$x-y,y-z\\in\\mathbb Z$, then $x-z=(x-y)+(y-z)\\in\\mathbb Z$. The closure facts\nused here are part of the additive-group structure supplied by\n[[thm-int-comm-ring]], and the quotient-set construction is that of\n[[def-quotient-topology]].\n\nLet $[x]$ denote the equivalence class of $x$. Let\n$p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ be the canonical projection,\n$p(x)=[x]$. Thus\n\n$$p(x)=p(y)\\quad\\Longleftrightarrow\\quad x-y\\in\\mathbb Z.$$\n\nLet $\\mathbb R/\\mathbb Z$ carry the quotient topology induced by $p$.\nThe circle is $S^1:=\\mathbb R/\\mathbb Z$ with the quotient topology induced by $p(x)=[x]$ and basepoint $[0]$; moreover $p^{-1}([0])=\\mathbb Z$ and $p(x+n)=p(x)$ for every real $x$ and integer $n$.\n\nThe last assertions follow directly from the displayed fibre criterion:\n$p(x)=[0]$ exactly when $x\\in\\mathbb Z$, while\n$(x+n)-x=n\\in\\mathbb Z$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-riemannian-metric-and-riemannian-manifold",
+          "source_section": "Definition",
+          "quote": "A **Riemannian metric** on a Hausdorff second-countable smooth manifold $M$ is a smooth symmetric covariant two-tensor $g$ such that $g_p(v,v)>0$ for every point $p$ and every nonzero $v\\in T_pM$. A **Riemannian manifold** is the pair $(M,g)$.\n\nThis is a [[def-smooth-tensor-field]] giving a [[def-smooth-bundle-metric]] on $TM$. Dimension zero is allowed: its zero bilinear form is positive definite because there are no nonzero vectors. The empty manifold has its unique empty metric. Boundaries are allowed where stated, with smoothness understood up to the boundary.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-riemannian-speed-and-length",
+          "source_section": "Definition",
+          "quote": "The **Riemannian speed** on a $C^1$ piece is $|\\dot\\gamma(t)|_g=\\sqrt{g_{\\gamma(t)}(\\dot\\gamma(t),\\dot\\gamma(t))}$. Its **length** is $L_g(\\gamma)=\\sum_j\\int_{t_{j-1}}^{t_j}|\\dot\\gamma(t)|_g\\,dt$.\n\nThe curve convention is [[def-piecewise-c-one-curve-on-a-manifold]] and the norm is [[def-pointwise-norm-and-angle-from-a-riemannian-metric]]. Each integrand is continuous on its closed piece with the one-sided endpoint derivative, hence Riemann integrable and nonnegative. Values chosen at the finitely many corners do not change its integral. For a singleton interval the empty sum is zero; a constant curve also has zero length. Partition independence is established by [[lem-riemannian-length-is-independent-of-piecewise-c-one-subdivision]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $I\\subset\\mathbb R$ is an open interval of length at most $1$, then $p|_I$ is injective by [F3]. Moreover $p^{-1}(p[I])=\\bigcup_{n\\in\\mathbb Z}(I+n)$ is open, and for every open $U\\subset I$ the saturation $p^{-1}(p[U])=\\bigcup_{n\\in\\mathbb Z}(U+n)$ is open; hence $p[I]$ is open and $(p|_I)^{-1}$ is a quotient chart. On each component of an overlap, two such lifted coordinates differ by a fixed integer translation, so their derivatives are $1$ and the local tensors $d\\theta^2$ agree; they therefore define the stated smooth positive metric by [F4]. Its coefficient is the constant $g_{11}=1$, so [F2] gives $\\Gamma^1{}_{11}=0$ in every lifted chart.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $\\gamma:[0,1]\\to S^1$ by $\\gamma(t)=p(3t/4)$. Its image lies in the quotient chart lifted from $(-1/8,7/8)$, where its coordinate is $\\theta(t)=3t/4$. Thus $\\ddot\\theta=0$, and [F2] and step 1.1 show that $\\gamma$ is a geodesic segment. Its speed is constantly $3/4$, so [F4] gives $L(\\gamma)=3/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $c:[0,1]\\to S^1$ by $c(t)=p(-t/4)$. It joins the same endpoints because $p(-1/4)=p(3/4)$ by [F3]. Its image lies in the chart lifted from $(-3/8,1/8)$, where its coordinate is $-t/4$ and its speed is constantly $1/4$, so [F4] gives $L(c)=1/4<3/4=L(\\gamma)$. Hence the geodesic segment $\\gamma$ is not globally length minimizing.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "More generally, a lifted change $a$ with $1/2<a<1$ has length $a$, while the complementary lift $a-1$ has length $1-a<a$; equality occurs exactly at $a=1/2$. This locates the failure at the half-circumference threshold: the local coordinate equation still makes the long arc geodesic, but the quotient supplies another lift of its endpoint. By step 1.1, the geodesic with initial velocity $v$ at $[0]$ is $t\\mapsto p(tv)$, so uniqueness in [F1] gives $\\exp_{[0]}(v)=p(v)$. Hence the initial vector $3/4$ lies in no symmetric normal ball on which the exponential is injective: any such ball containing $3/4$ also contains $-1/4$, and [F3] gives the same image for those vectors. Thus [F1]'s local theorem does not apply to the long radial representative. Empty and zero-dimensional manifolds provide no counterexample, while this nonconstant one-dimensional witness has included endpoints and no degenerate interval. Assumption [A1] is used only for the uniqueness and local-minimality comparison in this step; steps 1.1--3.1 make no choice.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the explicit nonempty quotient circle and no empty-manifold instance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 separates its nonconstant positive-length segment from zero-velocity geodesics."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 establishes the complete one-dimensional quotient-circle witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use a nonconstant segment on a nondegenerate closed interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 define and compare both endpoint-inclusive curves on [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 separates the explicit choice-free length comparison from AC_omega used only by the cited local theorem interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item provides one counterexample to global minimizing, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse global-minimizing implication is asserted."
+        }
+      ]
+    }
+  }
+}

@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-of-a-pair-in-singular-cohomology
 kind: theorem
 title: Long exact sequence of a pair in singular cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-relative-singular-cochain-complex, def-singular-cochain-complex-with-coefficients, lem-the-singular-coboundary-squares-to-zero, prop-singular-cohomology-is-contravariantly-functorial]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

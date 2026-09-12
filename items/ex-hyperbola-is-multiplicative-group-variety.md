@@ -2,7 +2,9 @@
 id: ex-hyperbola-is-multiplicative-group-variety
 kind: example
 title: "The hyperbola xy = 1 is isomorphic to the punctured affine line"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: literature-derived

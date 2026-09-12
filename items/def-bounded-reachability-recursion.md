@@ -2,13 +2,14 @@
 id: def-bounded-reachability-recursion
 kind: definition
 title: "The bounded reachability recursion for directed paths of length at most 2^i"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-multigraph-loop-and-digraph]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

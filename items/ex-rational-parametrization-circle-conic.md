@@ -2,7 +2,7 @@
 id: ex-rational-parametrization-circle-conic
 kind: example
 title: "When char(k) is not 2, the affine circle x^2 + y^2 = 1 is birational to the affine line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-birational-equivalence-varieties, def-rational-map-varieties, def-ring-characteristic]
 justified_by: []
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

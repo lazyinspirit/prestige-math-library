@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Infinitary Los theorem"
 deps: ["def-lc-infinitary-syntax-and-compactness", "thm-lc-los-for-set-ultraproducts", "def-lc-complete-ultrafilters-and-measurable-cardinals", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

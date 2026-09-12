@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Separated frequency blocks do not disturb earlier partial sum maxima"
 deps: ["def-kolmogorov-analytic-partial-sum-maximal-function", "def-period-one-fourier-coefficients-partial-sums-and-convolution"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

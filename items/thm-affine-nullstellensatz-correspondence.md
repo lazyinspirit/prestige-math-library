@@ -2,7 +2,7 @@
 id: thm-affine-nullstellensatz-correspondence
 kind: theorem
 title: "Affine algebraic sets correspond to radical ideals, and irreducible ones to prime ideals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.5-1.6"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

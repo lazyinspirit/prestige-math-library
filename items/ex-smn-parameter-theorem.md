@@ -2,7 +2,7 @@
 id: ex-smn-parameter-theorem
 kind: example
 title: "Specializing a two-argument program to obtain a unary residual program"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-smn-parameter-theorem, cor-effective-program-specialization]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

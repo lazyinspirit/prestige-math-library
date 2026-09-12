@@ -2,7 +2,7 @@
 id: lem-time-bounds-imply-space-bounds
 kind: lemma
 title: "A time bound always yields the same-order space bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-asymptotic-resource-comparison, def-worst-case-time-and-space-complex
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

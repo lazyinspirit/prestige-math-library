@@ -2,7 +2,7 @@
 id: def-affine-open-subset-classical-variety
 kind: definition
 title: "Affine open subsets of a classical affine variety"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry, Chapter 3c"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

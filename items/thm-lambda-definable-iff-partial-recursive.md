@@ -2,7 +2,7 @@
 id: thm-lambda-definable-iff-partial-recursive
 kind: theorem
 title: "A partial function is lambda-definable if and only if it is partial recursive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-lambda-term-beta-reduction-and-represented-function, def-mu-minimizat
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The canonical definable global well-order of L"
 deps: ["lem-canonical-well-order-of-finite-definition-codes", "def-constructible-hierarchy-and-constructible-rank", "prop-constructible-levels-transitivity-ordinals-and-rank", "lem-def-operation-is-absolute", "thm-constructible-universe-basic-axioms", "thm-separation-in-the-constructible-universe", "thm-internal-power-set-in-the-constructible-universe", "thm-replacement-in-the-constructible-universe", "thm-constructibility-is-absolute-and-l-is-minimal"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -23,7 +24,7 @@ proof_strategy: "direct"
 
 ## Statement
 
-In ZF there is a parameter-free definable setlike class well-order $<_L$ of $L$. Each $L_\alpha$ is an initial segment, and its restriction is a set well-order. The canonical construction performed internally in $L$ gives the same relation. Fix once and for all the natural-number formula/arity coding of the preceding lemma.
+In ZF there is a parameter-free definable setlike class well-order $<_L$ of $L$. It is the unique coherent recursion that starts with the empty order, retains the old order at a successor stage, places every old member before every new member, orders the new members by their least definition codes from the fixed natural-number formula/arity coding of the preceding lemma, and takes unions at nonzero limits. Each $L_\alpha$ is an initial segment, and its restriction is a set well-order. The same recursion performed internally in $L$ gives the same relation.
 
 ## Facts & Assumptions
 

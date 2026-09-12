@@ -2,7 +2,7 @@
 id: thm-birational-equivalence-function-fields
 kind: theorem
 title: "Irreducible affine varieties are birational exactly when their function fields are isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §3.1-§3.2"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

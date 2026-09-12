@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Carleson hunt maximal inequality on the torus"
 deps: ["lem-hunt-exceptional-set-and-distribution-estimates", "lem-carleson-restricted-weak-interpolation", "lem-wave-packet-model-dominates-the-linearised-carleson-operator", "lem-carleson-real-line-to-torus-transfer", "def-period-one-fourier-coefficients-partial-sums-and-convolution", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-progressive-products-and-true-cofinality-transfers
 kind: lemma
 title: Progressive products and true cofinality transfers
-status: draft
+status: published
 origin: pipeline
 deps: [def-reduced-ordinal-products-and-scales, def-filter, def-ultrafilter, thm-ultrafilter-lemma, thm-ultrafilter-characterisation, def-axiom-of-choice, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

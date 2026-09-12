@@ -2,7 +2,7 @@
 id: thm-kleenes-theorem
 kind: theorem
 title: "A language is regular if and only if some regular expression denotes it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-regular-expression-to-epsilon-nfa, thm-subset-construction-preserves-language, thm-dfa-to-regular-expression, def-regular-language-by-dfa-recognition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

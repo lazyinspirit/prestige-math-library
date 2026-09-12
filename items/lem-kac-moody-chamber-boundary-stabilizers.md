@@ -2,12 +2,14 @@
 id: lem-kac-moody-chamber-boundary-stabilizers
 kind: lemma
 title: Dominant representatives, wall stabilizers and terminating reflection descent
-status: draft
+status: published
 origin: pipeline
 deps: [lem-kac-moody-reduced-words-and-coroot-signs, def-kac-moody-integral-and-dominant-integral-weights, def-simple-reflections-and-the-kac-moody-weyl-group]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: Kleshchev, Lectures on Infinite Dimensional Lie Algebras, Lemmas3.3.1–3.3.3 and Proposition3.4.1(i)–(iii), pp42–44,47

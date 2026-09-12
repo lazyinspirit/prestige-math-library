@@ -2,7 +2,7 @@
 id: lem-generated-boolean-filter-and-ultrafilter-tests
 kind: lemma
 title: Generated filters and the complementary-pair tests
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-ideals-filters-and-primality, def-boolean-homomorphism-and-quotient]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

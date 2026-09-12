@@ -2,7 +2,7 @@
 id: lem-modified-pcp-reduces-to-pcp
 kind: lemma
 title: "Modified PCP many-one reduces to PCP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-post-correspondence-problem, def-modified-post-correspondence-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-integral-cohomology-detects-adjacent-homology-torsion
 kind: corollary
 title: Integral cohomology detects adjacent homology torsion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, prop-the-cohomology-universal-coefficient-sequence-splits-nonnaturally, def-axiom-of-choice, cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules, lem-singular-uct-extension-from-cycle-projections, def-ext-via-a-projective-resolution-of-the-first-variable]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

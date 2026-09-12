@@ -2,7 +2,7 @@
 id: thm-many-one-reductions-transfer-decidability-and-recognizability
 kind: theorem
 title: "Computable many-one reductions transfer decidability and recognizability backward"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computable-many-one-reduction, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

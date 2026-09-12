@@ -2,7 +2,7 @@
 id: cex-recognizable-means-total
 kind: counterexample
 title: "A recognizer for {0} that loops on every nonmember"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-recognizable-means-total, def-decidable-and-recognizable-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

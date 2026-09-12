@@ -2,7 +2,7 @@
 id: thm-global-regular-functions-affine-variety-coordinate-ring
 kind: theorem
 title: "Global regular functions on a classical affine variety are its coordinate ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Michael Artin, Notes for a Course in Algebraic Geometry, Proposition 2.5.2"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

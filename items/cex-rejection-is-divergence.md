@@ -2,7 +2,7 @@
 id: cex-rejection-is-divergence
 kind: counterexample
 title: "Immediate rejection is a halting computation, not a divergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [fs-rejection-is-divergence, def-initial-accepting-and-rejecting-configura
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

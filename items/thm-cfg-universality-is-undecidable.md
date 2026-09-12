@@ -2,7 +2,7 @@
 id: thm-cfg-universality-is-undecidable
 kind: theorem
 title: "CFG universality is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [prop-valid-computation-histories-are-decidable, def-halting-computation-and-divergence, def-language-generated-by-a-cfg, def-computable-many-one-reduction, thm-machine-acceptance-is-undecidable, thm-many-one-reductions-transfer-decidability-and-recognizability]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

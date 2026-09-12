@@ -4,6 +4,7 @@ kind: "definition"
 title: "Fine measures, strong compactness and supercompactness"
 deps: ["def-lc-complete-ultrafilters-and-measurable-cardinals", "def-cofinality", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

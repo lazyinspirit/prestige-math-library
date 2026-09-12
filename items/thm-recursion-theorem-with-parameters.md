@@ -2,7 +2,7 @@
 id: thm-recursion-theorem-with-parameters
 kind: theorem
 title: "The recursion theorem with parameters"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kleenes-second-recursion-theorem, thm-smn-parameter-theorem, def-computable-program-transformer]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

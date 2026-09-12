@@ -2,7 +2,7 @@
 id: thm-epsilon-elimination-for-nfas
 kind: theorem
 title: "Epsilon-moves can be eliminated from NFAs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-epsilon-closure-of-a-state-set, def-nfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

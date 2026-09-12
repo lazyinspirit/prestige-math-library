@@ -2,7 +2,9 @@
 id: cor-field-kunneth-isomorphism-for-homology-of-products
 kind: corollary
 title: Field Kunneth isomorphism for homology of products
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-kunneth-short-exact-sequence-for-homology, def-axiom-of-choice, cor-every-vector-space-has-a-basis, thm-free-modules-are-projective-with-choice-boundary, def-balanced-tor-bifunctor, lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel]

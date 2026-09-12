@@ -2,7 +2,7 @@
 id: lem-filtered-freeness-lifts-from-associated-graded-algebras
 kind: lemma
 title: Filtered freeness lifts from associated graded algebras
-status: draft
+status: "published"
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

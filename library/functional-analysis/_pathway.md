@@ -15,20 +15,23 @@ parts:
       - schwartz-space-and-the-plancherel-theorem
       - geometric-hahn-banach-and-convex-separation
       - norming-and-separation-under-hahn-banach
+      - distributions-test-functions-and-differentiation
       - dual-spaces-adjoint-operators-and-annihilators
       - locally-convex-spaces-and-continuous-separation
+      - weak-and-weak-star-topologies
 ---
 
 ## foundations
 
-The track separates normed-space structure from Banach completeness: closed subspaces, products,
-series, completion, bounded maps and quotient norms build operator theory, while
-finite-dimensional norm equivalence, Riesz's lemma and Baire category under DC give the
-open-mapping, bounded-inverse and closed-graph theorems, and sequential uniform boundedness uses
+Normed-space structure separates from Banach completeness: subspaces, products, series,
+completion, bounded maps and quotients build operator theory, while finite-dimensional norm
+equivalence and Riesz's lemma precede Baire category under DC, giving the open-mapping,
+bounded-inverse and closed-graph theorems; sequential uniform boundedness uses
 $\mathrm{AC}_\omega$ via near-norming vectors. Fourier analysis runs alongside: convolution
 becomes multiplication under the $L^1$ transform, Gaussian kernels give approximate identities
-and inversion, transforms determine finite complex measures, and Schwartz space, with its
-seminorm topology, supports inversion, Parseval pairing, the unitary Plancherel extension and
-Poisson summation. Hahn--Banach supplies norming functionals, bidual maps and geometric
-separation; dual-space theory covers annihilators, transposes, closed range and weak-star
-closure; and locally convex spaces, gauges and continuous separation close the track.
+and inversion, and Schwartz space supports Parseval, unitary Plancherel and Poisson summation.
+Hahn--Banach supplies norming functionals, bidual maps and geometric separation; distributions
+follow, test-function topology and local finite order yielding derivatives, support and
+structure, with choice hypotheses stated; dual-space theory covers annihilators, transposes and
+closed range; and weak, weak-star and locally convex topologies, with continuous separation,
+close the track.

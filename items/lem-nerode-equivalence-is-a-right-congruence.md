@@ -2,7 +2,7 @@
 id: lem-nerode-equivalence-is-a-right-congruence
 kind: lemma
 title: "Nerode-equivalent words stay equivalent after right concatenation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nerode-equivalence, def-equivalence-relation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

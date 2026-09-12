@@ -2,7 +2,7 @@
 id: lem-denotation-is-structurally-well-defined
 kind: lemma
 title: "Regular-expression denotation is structurally well-defined"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-expression-syntax, def-regular-expression-denotation]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

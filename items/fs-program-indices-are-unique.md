@@ -2,7 +2,7 @@
 id: fs-program-indices-are-unique
 kind: false-statement
 title: "FALSE: a partial computable function has a unique program index"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kleenes-second-recursion-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -18,6 +18,8 @@ provenance:
 proof_strategy: direct
 status: published
 origin: "pipeline"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

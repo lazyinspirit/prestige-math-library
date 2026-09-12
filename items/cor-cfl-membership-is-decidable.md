@@ -2,7 +2,7 @@
 id: cor-cfl-membership-is-decidable
 kind: corollary
 title: "Context-free-language membership is decidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-chomsky-normal-form, thm-cyk-membership-algorithm]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

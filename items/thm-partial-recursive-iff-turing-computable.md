@@ -2,7 +2,7 @@
 id: thm-partial-recursive-iff-turing-computable
 kind: theorem
 title: "A partial function is partial recursive if and only if it is Turing computable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-partial-function-computed-by-a-machine, def-mu-minimization-and-parti
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

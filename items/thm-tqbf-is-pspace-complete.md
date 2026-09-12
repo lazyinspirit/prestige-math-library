@@ -2,7 +2,7 @@
 id: thm-tqbf-is-pspace-complete
 kind: theorem
 title: "TQBF is PSPACE-complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-tqbf-is-in-pspace, lem-space-bounded-machines-have-exponentially-man
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

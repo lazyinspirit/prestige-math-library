@@ -2,13 +2,14 @@
 id: def-extended-nfa-transition
 kind: definition
 title: "The extended transition function of an NFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-epsilon-closure-of-a-state-set]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

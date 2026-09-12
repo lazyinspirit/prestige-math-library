@@ -2,7 +2,7 @@
 id: thm-kojman-shelah-zfc-dowker-space
 kind: theorem
 title: A ZFC Dowker space of size aleph omega plus one
-status: draft
+status: published
 origin: pipeline
 deps: [lem-kojman-shelah-subspace-is-closed, lem-kojman-shelah-subspace-is-cofinal-and-has-successor-size, thm-rudin-box-space-is-collectionwise-normal, thm-rudin-tail-neighborhood-obstruction, thm-countable-paracompactness-shrinking-criterion, def-countable-paracompactness-and-dowker-space, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

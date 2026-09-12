@@ -2,7 +2,7 @@
 id: ex-time-bounds-imply-space-bounds
 kind: example
 title: "A machine that runs in O(n^2) time necessarily uses at most O(n^2) space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [lem-time-bounds-imply-space-bounds]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

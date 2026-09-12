@@ -2,7 +2,7 @@
 id: lem-algebraic-set-finite-irreducible-components
 kind: lemma
 title: "Every affine algebraic set has finitely many irreducible components"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Theorem 1.5.3"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
 ---
 

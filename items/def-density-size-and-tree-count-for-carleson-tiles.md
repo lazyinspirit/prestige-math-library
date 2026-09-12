@@ -4,6 +4,7 @@ kind: "definition"
 title: "Density size and tree count for carleson tiles"
 deps: ["def-carleson-tiles-wave-packets-and-tile-order", "def-carleson-operator-and-measurable-linearisation", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

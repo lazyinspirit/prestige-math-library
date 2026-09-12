@@ -5,6 +5,7 @@ title: "Boolean-valued semantics for names"
 justified_by: [lem-boolean-valued-semantics-is-well-defined]
 deps: ["def-forcing-names-and-name-rank", "def-complete-boolean-algebra-and-regular-open-sets", "thm-recursion-on-well-founded-setlike-relations"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

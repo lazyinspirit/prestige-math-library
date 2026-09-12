@@ -4,6 +4,7 @@ kind: "example"
 title: "Cohen-name valuation and dense-set meeting"
 deps: ["lem-names-for-pairs-functions-and-ordinals", "def-dense-open-sets-and-model-generic-filters"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

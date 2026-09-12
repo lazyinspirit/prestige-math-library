@@ -6,6 +6,7 @@ status: published
 origin: pipeline
 deps: [lem-lc-solovay-density-locality-and-null-joins, lem-lc-generic-evaluation-of-measurable-densities, lem-lc-boolean-generic-truth, lem-lc-generic-boolean-ground-joins, thm-check-name-evaluation-and-generic-reconstruction, thm-generic-extension-transitivity-and-rank-bound, lem-bounded-definitions-of-basic-set-operations, def-axiom-of-choice]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

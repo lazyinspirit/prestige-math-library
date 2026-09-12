@@ -2,7 +2,7 @@
 id: thm-cyk-membership-algorithm
 kind: theorem
 title: "The CYK algorithm decides membership for CNF grammars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-cyk-table-invariant, def-language-generated-by-a-cfg]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

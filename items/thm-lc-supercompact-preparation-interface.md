@@ -17,6 +17,8 @@ sources:
       url: https://arxiv.org/pdf/math/9808012
     - title: Karagila, Forcing, fixed-formula forcing and mixing section 2, two-step iteration section 6.1; local complete Boolean and bounded-name proofs
       url: https://karagila.org/files/Forcing-2023.pdf
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

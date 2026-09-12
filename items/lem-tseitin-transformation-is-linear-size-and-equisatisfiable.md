@@ -2,7 +2,7 @@
 id: lem-tseitin-transformation-is-linear-size-and-equisatisfiable
 kind: lemma
 title: "The Tseitin transformation has linear size and preserves satisfiability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-formula-cnf-and-sat, def-tseitin-extension-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-bounded-reachability-recursion-is-correct
 kind: example
 title: "A four-vertex digraph where the bounded reachability recursion finds a path via a midpoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-bounded-reachability-recursion, lem-bounded-reachability-recursion-is-correct]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

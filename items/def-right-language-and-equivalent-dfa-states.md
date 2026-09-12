@@ -2,13 +2,14 @@
 id: def-right-language-and-equivalent-dfa-states
 kind: definition
 title: "The right language of a DFA state and state equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-deterministic-finite-automaton, def-extended-dfa-transition-function, def-dfa-acceptance-and-recognized-language]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

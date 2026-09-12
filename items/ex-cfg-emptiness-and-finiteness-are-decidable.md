@@ -2,7 +2,7 @@
 id: ex-cfg-emptiness-and-finiteness-are-decidable
 kind: example
 title: "Running the emptiness and finiteness tests on small grammars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-cfg-emptiness-and-finiteness-are-decidable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

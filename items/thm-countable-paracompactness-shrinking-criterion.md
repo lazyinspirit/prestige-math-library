@@ -2,7 +2,7 @@
 id: thm-countable-paracompactness-shrinking-criterion
 kind: theorem
 title: Increasing-cover and decreasing-closed-set criteria
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-paracompactness-and-dowker-space, lem-locally-finite-unions-and-closures, lem-normality-via-shrinking, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

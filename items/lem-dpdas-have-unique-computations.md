@@ -2,7 +2,7 @@
 id: lem-dpdas-have-unique-computations
 kind: lemma
 title: "A DPDA has at most one computation on each input"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-deterministic-pda, def-pda-configuration-and-step]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

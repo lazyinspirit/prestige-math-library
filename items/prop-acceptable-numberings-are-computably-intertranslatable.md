@@ -2,7 +2,7 @@
 id: prop-acceptable-numberings-are-computably-intertranslatable
 kind: proposition
 title: "Acceptable numberings are computably intertranslatable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-universal-and-acceptable-numbering, prop-fixed-machine-coding-is-acce
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

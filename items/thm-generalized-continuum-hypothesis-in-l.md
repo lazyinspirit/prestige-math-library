@@ -9,6 +9,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-12
 sources:
   references:
     - title: "Lietz, Set Theory, Theorem 7.15, p.59; Kunen, Chapter VI Corollaries 4.7–4.8, p.175"

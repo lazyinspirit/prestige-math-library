@@ -2,7 +2,7 @@
 id: ex-ap-equals-pspace
 kind: example
 title: "An alternating machine for a quantified Boolean formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-quantified-formula-game, thm-tqbf-truth-iff-existential-player-has-a-winning-strategy, thm-ap-equals-pspace]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

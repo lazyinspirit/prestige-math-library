@@ -2,13 +2,14 @@
 id: def-chomsky-hierarchy
 kind: definition
 title: "The regular, context-free, decidable, and recognizable language-class ladder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-regular-language-by-dfa-recognition, def-language-generated-by-a-cfg, def-language-recognized-and-decided]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

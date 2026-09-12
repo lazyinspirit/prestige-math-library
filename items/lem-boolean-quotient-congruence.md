@@ -2,7 +2,7 @@
 id: lem-boolean-quotient-congruence
 kind: lemma
 title: Quotient operations are well defined
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-homomorphism-and-quotient]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

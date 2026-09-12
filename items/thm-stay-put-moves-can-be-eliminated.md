@@ -2,7 +2,7 @@
 id: thm-stay-put-moves-can-be-eliminated
 kind: theorem
 title: "Stay-put moves can be eliminated from fixed-tape Turing-machine models"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-multitape-and-nondeterministic-machines, def-language-recognized-and-
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

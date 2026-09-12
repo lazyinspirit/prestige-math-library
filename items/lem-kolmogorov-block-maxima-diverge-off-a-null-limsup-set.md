@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Kolmogorov block maxima diverge off a null limsup set"
 deps: ["lem-kolmogorov-gliding-hump-series-converges-in-lone", "lem-kolmogorov-block-polynomial-with-large-partial-sums", "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima", "thm-first-borel-cantelli", "def-period-one-fourier-coefficients-partial-sums-and-convolution", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Hilbert cesaro averages converge to the fixed subspace"
 deps: ["lem-closed-l-two-subspaces-have-orthogonal-projections", "def-l-two-operator-conventions-for-weak-mixing", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "thm-complex-lp-completeness-and-almost-everywhere-subsequences", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

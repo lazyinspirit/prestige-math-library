@@ -2,7 +2,7 @@
 id: thm-stone-space-recovered-from-its-clopens
 kind: theorem
 title: A Stone space is recovered from its clopens
-status: draft
+status: published
 origin: pipeline
 deps: [def-stone-ultrafilter-space-and-clopens, lem-generated-boolean-filter-and-ultrafilter-tests, thm-compact-iff-fip]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

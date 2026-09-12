@@ -2,7 +2,7 @@
 id: ex-kronecker-pairing-for-a-cellular-circle-generator
 kind: example
 title: Kronecker pairing for a cellular circle generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, cor-homology-of-spheres, def-axiom-of-choice, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, lem-singular-uct-extension-from-cycle-projections]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

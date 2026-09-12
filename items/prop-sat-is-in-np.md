@@ -2,7 +2,7 @@
 id: prop-sat-is-in-np
 kind: proposition
 title: "SAT lies in NP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-formula-cnf-and-sat, def-np-by-verifiers, def-polynomially-balanced-verifier]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

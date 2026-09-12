@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Pavel Etingof, Representations of Lie Groups, Theorem10.1 pp54\u201355; local polynomial-density and finite character proof"
       url: "https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf"
-status: "draft"
+status: "published"
 origin: "pipeline"
 proof_strategy: "direct"
 ---

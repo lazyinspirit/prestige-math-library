@@ -2,7 +2,9 @@
 id: thm-stone-regular-open-boolean-completion
 kind: theorem
 title: The regular open completion of a Boolean algebra
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [thm-regular-open-sets-form-a-complete-boolean-algebra, thm-stone-clopen-representation-under-bpi]
 proof_strategy: direct

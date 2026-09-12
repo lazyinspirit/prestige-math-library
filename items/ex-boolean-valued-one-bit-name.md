@@ -4,6 +4,7 @@ kind: "example"
 title: "A one-bit Boolean-valued name"
 deps: ["lem-boolean-valued-semantics-is-well-defined", "def-forcing-name-valuation-and-generic-extension"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

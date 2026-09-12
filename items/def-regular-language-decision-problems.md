@@ -2,13 +2,14 @@
 id: def-regular-language-decision-problems
 kind: definition
 title: "Membership, emptiness, finiteness, equivalence, and containment for regular languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-language-over-an-alphabet, def-language-boolean-operations, def-dfa-acceptance-and-recognized-language, def-regular-language-by-dfa-recognition]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

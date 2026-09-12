@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Carleson restricted weak interpolation"
 deps: ["thm-layer-cake-formula-for-l-p-powers", "def-sublinear-operator-weak-and-strong-type-p-q", "def-carleson-tiles-wave-packets-and-tile-order", "thm-complex-holder-minkowski-and-the-quotient-norm", "thm-dominated-convergence", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

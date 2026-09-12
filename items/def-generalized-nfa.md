@@ -2,13 +2,14 @@
 id: def-generalized-nfa
 kind: definition
 title: "Generalized NFA's and their accepted languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-regular-expression-denotation, def-deterministic-finite-automaton, def-language-over-an-alphabet]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

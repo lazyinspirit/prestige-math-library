@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Names for pairs, functions and ordinals"
 deps: ["def-forcing-names-and-name-rank", "def-forcing-name-valuation-and-generic-extension", "def-check-names-and-the-canonical-generic-name", "thm-check-name-evaluation-and-generic-reconstruction"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

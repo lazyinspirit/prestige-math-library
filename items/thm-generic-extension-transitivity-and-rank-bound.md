@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Transitivity and a valuation rank bound"
 deps: ["def-forcing-name-valuation-and-generic-extension", "def-forcing-names-and-name-rank", "def-membership-rank-of-a-set"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

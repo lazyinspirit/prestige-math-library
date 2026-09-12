@@ -4,6 +4,7 @@ kind: "example"
 title: "Summable exceptional measures in the kolmogorov induction"
 deps: ["thm-first-borel-cantelli"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

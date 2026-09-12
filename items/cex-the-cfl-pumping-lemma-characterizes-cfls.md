@@ -2,7 +2,7 @@
 id: cex-the-cfl-pumping-lemma-characterizes-cfls
 kind: counterexample
 title: "A non-context-free language can still satisfy the Bar-Hillel pumping condition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ deps: [fs-the-cfl-pumping-lemma-characterizes-cfls,
        thm-pdas-recognize-exactly-the-cfls]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

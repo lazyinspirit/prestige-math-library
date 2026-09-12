@@ -13,6 +13,8 @@ sources:
   references:
     - title: Ved Datar, Lectures on Riemannian Geometry
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: prop-the-converse-fails
 kind: proposition
 title: "Turing reducibility is strictly weaker than computable many-one reducibility"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computable-many-one-reduction, def-turing-reduction, def-turing-machine-acceptance-problem, thm-machine-acceptance-is-recognizable, thm-machine-acceptance-is-undecidable, thm-decidable-iff-language-and-complement-are-recognizable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-machine-acceptance-is-ce-complete
 kind: theorem
 title: "The Turing-machine acceptance problem is computably enumerable complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-ce-hardness-and-completeness, def-turing-machine-acceptance-problem, thm-machine-acceptance-is-recognizable, def-effective-encoding-of-turing-machines, lem-finite-tuples-admit-effective-prefix-free-encodings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Chacon tower height correlations obstruct mixing"
 deps: ["def-chacon-three-cut-one-spacer-towers", "lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets", "lem-chacon-levels-approximate-measurable-sets", "def-strong-and-weak-mixing", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

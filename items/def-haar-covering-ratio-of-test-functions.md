@@ -6,9 +6,10 @@ deps: [def-left-haar-integral-and-left-haar-measure, lem-translations-preserve-c
 provenance:
   statement: literature-derived
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable
 kind: theorem
 title: "DFA membership, emptiness, finiteness, equivalence, and containment are decidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-language-decision-problems, def-dfa-acceptance-and-recognized-language, thm-product-dfa-for-union-and-intersection, thm-complementing-accept-states-complements-the-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

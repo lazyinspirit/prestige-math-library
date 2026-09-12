@@ -211,7 +211,10 @@ try {
       if (e.isDirectory()) walk(fp);
       else if (e.name.endsWith('.md') && !e.name.startsWith('_')) {
         const src = readFileSync(fp, 'utf8');
-        const pageId = src.match(/^page:\s*(\S+)/m)?.[1] ?? e.name.slice(0, -3);
+        // A YAML page id may be quoted. Treating the quotes as part of the id
+        // makes an already-composed item appear re-homed onto its own page.
+        const rawPageId = src.match(/^page:\s*(\S+)/m)?.[1];
+        const pageId = rawPageId?.replace(/^(['"])(.*)\1$/, '$2') ?? e.name.slice(0, -3);
         const rel = relative(libraryRoot, fp);
         pageLocationOf.set(pageId, { category: rel.split(/[\\/]/)[0], file: rel });
         const pageItems = [];

@@ -1,0 +1,302 @@
+[
+  {
+    "order": 510.029,
+    "id": "the-weyl-kac-character-formula",
+    "kind": "A",
+    "category": "lie-theory",
+    "title": "The Weyl Kac Character Formula",
+    "companion": "the-weyl-kac-character-formula-examples",
+    "requires": [
+      "kac-moody-algebras-from-generalized-cartan-matrices",
+      "integrable-highest-weight-kac-moody-modules"
+    ],
+    "items": [
+      {
+        "id": "def-kac-moody-formal-character-completion",
+        "kind": "definition",
+        "title": "Kac Moody formal character completion",
+        "statement": "For a finite generalized Cartan matrix, let E be the complex vector space of formal sums sum_mu c_mu e^mu whose support is contained in a finite union of downward cones lambda_j-Q^+. Define e^lambda e^mu=e^(lambda+mu), coefficientwise addition, and ch V=sum_mu dim(V_mu)e^mu for V in category O. Every coefficient of a product is a finite sum.",
+        "deps": ["def-kac-moody-category-o", "def-kac-moody-root-lattice-height-and-positive-cone"],
+        "strategy": "For fixed cone tops and output weight, nonnegative simple-root coordinates of a decomposition have bounded height, hence only finitely many decompositions occur. Category O supplies finite weight spaces and the required support. This completion is formal, not analytic.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Lectures on Infinite Dimensional Lie Algebras, Section 9.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Introduction to Kac-Moody Groups and Lie Algebras, Section 10.7", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]}
+      },
+      {
+        "id": "def-kac-moody-weyl-vector",
+        "kind": "definition",
+        "title": "Kac Moody Weyl vector",
+        "statement": "A Weyl vector is rho in h* with rho(h_i)=1 for every simple coroot. It exists but need not be unique when the simple coroots do not span h; shifted formulas are unchanged by a Weyl-invariant difference.",
+        "deps": ["def-realization-of-a-generalized-cartan-matrix"],
+        "strategy": "Prescribe value one on the span of the independent simple coroots and extend over a finite-dimensional complement. The difference of two choices vanishes on all h_i and is fixed by every simple reflection.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Lectures on Infinite Dimensional Lie Algebras, Sections 2.3 and 10.1", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Introduction to Kac-Moody Groups and Lie Algebras, Chapter 11", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]}
+      },
+      {
+        "id": "def-kac-moody-denominator-product-with-root-multiplicities",
+        "kind": "definition",
+        "title": "Kac Moody denominator product with root multiplicities",
+        "statement": "For symmetrizable A define D=e^rho product_{alpha in Delta^+}(1-e^-alpha)^(mult alpha) in E, where mult alpha=dim g_alpha. The normalized product e^-rho D has constant coefficient one. Imaginary-root factors retain their actual multiplicities.",
+        "deps": ["def-kac-moody-formal-character-completion", "def-kac-moody-weyl-vector", "prop-kac-moody-root-spaces-are-finite-dimensional"],
+        "strategy": "At a fixed beta in Q^+, only positive-root degrees of height at most ht(beta) contribute, and each root space is finite dimensional. Thus each coefficient is a finite integer sum and the constant term is one.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Sections 9.2 and 10.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Sections 10.7 and 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]}
+      },
+      {
+        "id": "lem-the-kac-moody-denominator-is-weyl-skew",
+        "kind": "lemma",
+        "title": "The Kac Moody denominator is Weyl skew",
+        "statement": "For each simple reflection s_i, s_i(D)=-D as a transformed formal product; hence w(D)=epsilon(w)D. This does not assert a global Weyl action on every downward-cone series.",
+        "deps": ["def-kac-moody-denominator-product-with-root-multiplicities", "prop-the-weyl-group-preserves-roots-and-root-multiplicities"],
+        "strategy": "The reflection permutes Delta^+ minus {alpha_i}, preserving multiplicities, and sends alpha_i to -alpha_i. Combine s_i(rho)=rho-alpha_i with the transformed alpha_i factor to get one minus sign. All coefficient rearrangements are finite.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Lemma 10.1.1 and Section 10.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Section 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-casimir-constrained-verma-character-expansion",
+        "kind": "lemma",
+        "title": "Casimir constrained Verma character expansion",
+        "statement": "If V is a symmetrizable Kac-Moody highest-weight module of highest weight Lambda in O, then coefficientwise locally finitely ch V=sum_mu c_mu ch M(mu), with integers c_mu, c_Lambda=1, and c_mu nonzero only if mu<=Lambda and ||mu+rho||^2=||Lambda+rho||^2.",
+        "deps": ["def-kac-moody-formal-character-completion", "def-kac-moody-weyl-vector", "lem-bounded-above-kac-moody-weight-modules-are-generated-by-primitive-vectors", "thm-universal-property-and-pbw-character-of-kac-moody-verma-modules", "thm-kac-moody-verma-module-has-a-unique-simple-quotient", "thm-generalized-kac-moody-casimir-is-central-and-scalar-on-highest-weight-modules"],
+        "strategy": "Use finite truncations above each requested weight to obtain the locally finite simple-character expansion. Expand Vermas unitriangularly in simple characters and invert the locally finite system. A simple factor below a primitive vector of weight mu is a quotient of M(mu), so the central Casimir forces equality of shifted norms. Inversion preserves each norm block and the top coefficient.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Proposition 9.2.5", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Lemma 11.2.4", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "unitriangular inversion"
+      },
+      {
+        "id": "lem-the-denominator-quotient-has-only-imaginary-cone-support",
+        "kind": "lemma",
+        "title": "The denominator quotient has only imaginary cone support",
+        "statement": "Let A_rho=sum_w epsilon(w)e^(w rho). Its normalization has constant term one and is invertible. For C=D/A_rho, the quotient is Weyl invariant and every exponent e^-beta in its normalized support has beta in K^+={gamma in Q^+:w gamma in Q^+ for every w}. If its nonconstant support is nonempty, a least-height beta in that support satisfies beta(h_i)<=0 for every i. This does not identify K^+ with the imaginary roots.",
+        "deps": ["lem-the-kac-moody-denominator-is-weyl-skew", "def-kac-moody-real-coroot-inversions", "lem-kac-moody-reduced-words-and-coroot-signs", "def-real-and-imaginary-kac-moody-roots", "def-kac-moody-formal-character-completion"],
+        "strategy": "Reduced-word inversion sets make the alternant coefficientwise locally finite. Recursively invert its normalized Q^+-adic series. Skew divided by skew is invariant; comparison with every Weyl translate forces support into the intersection of all w^-1 Q^+. A minimal-height support term and its simple reflection give beta(h_i)<=0 without relying on cancellation.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Sections 5.3 and 10.1-10.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Section 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "minimal support"
+      },
+      {
+        "id": "lem-casimir-norm-excludes-nonzero-denominator-corrections",
+        "kind": "lemma",
+        "title": "Casimir norm excludes nonzero denominator corrections",
+        "statement": "The quotient C has no nonzero beta in its normalized support, and therefore C=1. The exclusion uses the invariant form and Casimir constraint, not a claim that every beta in K^+ is a root.",
+        "deps": ["lem-the-denominator-quotient-has-only-imaginary-cone-support", "lem-casimir-constrained-verma-character-expansion", "thm-universal-property-and-pbw-character-of-kac-moody-verma-modules", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra", "def-kac-moody-weyl-vector"],
+        "strategy": "Apply the constrained Verma expansion to the trivial module and multiply by the inverse Verma product, so every surviving e^(rho-beta) in D obeys ||rho-beta||^2=||rho||^2. Choose a least-height nonzero beta in C. No normalized-alternant term can occur at this same beta: such a term is rho-w rho, so it already satisfies the norm equality, while beta in K^+ and least-height invariance give beta^2<=0<2(rho,beta), a contradiction. All mixed product terms use smaller nonzero support of C and vanish by minimality. Hence the D coefficient is the nonzero C coefficient and must satisfy the norm equality, giving the same contradiction.",
+        "provenance": {"statement": "ai-altered", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Proposition 9.2.5 and Theorem 10.2.1", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Lemmas 11.2.4-11.2.6", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "minimal support contradiction"
+      },
+      {
+        "id": "thm-kac-moody-denominator-identity",
+        "kind": "theorem",
+        "title": "Kac Moody denominator identity",
+        "statement": "For symmetrizable A, e^rho product_{alpha in Delta^+}(1-e^-alpha)^(mult alpha)=sum_w epsilon(w)e^(w rho) in the formal downward-cone completion. Both sides are coefficientwise locally finite.",
+        "deps": ["lem-the-denominator-quotient-has-only-imaginary-cone-support", "lem-casimir-norm-excludes-nonzero-denominator-corrections"],
+        "strategy": "The quotient lemma constructs C=D/A_rho and the norm lemma proves C=1. Multiply by the normalized alternant. Retain actual root multiplicities and formal local finiteness.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Theorem 10.2.1 at Lambda=0", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Theorem 11.2.6 at lambda=0", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "quotient correction"
+      },
+      {
+        "id": "lem-the-shifted-integrable-character-numerator-is-weyl-skew",
+        "kind": "lemma",
+        "title": "The shifted integrable character numerator is Weyl skew",
+        "statement": "For dominant integral Lambda, D ch L(Lambda) is Weyl skew in the formal completion. The weight-space invariance used here is proved by explicit finite rank-one operators and is choice-free.",
+        "deps": ["lem-the-kac-moody-denominator-is-weyl-skew", "def-kac-moody-integral-and-dominant-integral-weights", "def-integrable-kac-moody-module", "lem-integrability-can-be-checked-on-simple-root-sl2-subalgebras", "thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules", "def-simple-reflections-and-the-kac-moody-weyl-group", "def-contragredient-lie-algebra-before-the-maximal-ideal-quotient", "def-kac-moody-formal-character-completion"],
+        "strategy": "For each simple-root sl2, local nilpotence makes exp(e_i)exp(-f_i)exp(e_i) finite on each vector. This invertible operator maps V_mu to V_(s_i mu), proving character invariance without basis choices. Combine with denominator skewness. Do not use the inherited weight-invariance item whose broad statement declares AC.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Section 10.1", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Section 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "rank-one reflection operators"
+      },
+      {
+        "id": "lem-only-the-highest-dot-orbit-can-occur-in-the-integrable-numerator",
+        "kind": "lemma",
+        "title": "Only the highest dot orbit can occur in the integrable numerator",
+        "statement": "In the constrained Verma expansion for L(Lambda), skewness forces every nonzero coefficient onto w(Lambda+rho)-rho with coefficient epsilon(w); no extra dominant or imaginary-cone correction occurs.",
+        "deps": ["lem-the-shifted-integrable-character-numerator-is-weyl-skew", "lem-casimir-constrained-verma-character-expansion", "def-kac-moody-integral-and-dominant-integral-weights", "def-kac-moody-real-coroot-inversions", "lem-kac-moody-reduced-words-and-coroot-signs", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra"],
+        "strategy": "Use reduced-word descent to move a regular shifted weight to the dominant chamber; singular weights have zero skew coefficient. If a distinct dominant mu+rho=Lambda+rho-beta occurs with beta=sum k_i alpha_i in Q^+, then both Lambda+rho and mu+rho are strictly dominant. Thus (beta,Lambda+mu+2rho)=sum_i k_i d_i((Lambda+rho)(h_i)+(mu+rho)(h_i)) is strictly positive, contradicting equality of their squared norms. Hence beta=0, and skewness determines the orbit signs.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Lemma 10.1.2 and Theorem 10.2.1", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Lemma 11.2.5 and Theorem 11.2.6", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "dominant representative and norm exclusion"
+      },
+      {
+        "id": "thm-weyl-kac-character-formula",
+        "kind": "theorem",
+        "title": "Weyl Kac character formula",
+        "statement": "For symmetrizable A and dominant integral Lambda, D ch L(Lambda)=sum_w epsilon(w)e^(w(Lambda+rho)); equivalently ch L(Lambda) is the shifted alternant divided by product_{alpha>0}(1-e^-alpha)^(mult alpha), in the formal completion.",
+        "deps": ["thm-kac-moody-denominator-identity", "lem-only-the-highest-dot-orbit-can-occur-in-the-integrable-numerator", "thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules"],
+        "strategy": "Identify the numerator by the preceding lemma, then divide by the normalized denominator with constant term one. Preserve symmetrizability, dominant integrality, actual root multiplicities, and formal rather than analytic meaning.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Theorem 10.2.1", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Theorem 11.2.6", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "formal alternant quotient"
+      },
+      {
+        "id": "def-generalized-kostant-partition-function",
+        "kind": "definition",
+        "title": "Generalized Kostant partition function",
+        "statement": "Define K(beta) by product_{alpha>0}(1-e^-alpha)^(-mult alpha)=sum_{beta in Q^+}K(beta)e^-beta and set K(gamma)=0 outside Q^+. Imaginary roots occur with mult alpha colors; K(0)=1 and every value is finite.",
+        "deps": ["def-kac-moody-formal-character-completion", "def-kac-moody-denominator-product-with-root-multiplicities"],
+        "strategy": "Use binomial series factorwise and the denominator height bound. Equivalently K(beta) counts finite colored multisets of positive roots totaling beta, with mult alpha colors.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Corollary 10.2.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Section 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]}
+      },
+      {
+        "id": "cor-kac-moody-kostant-multiplicity-formula",
+        "kind": "corollary",
+        "title": "Kac Moody Kostant multiplicity formula",
+        "statement": "For every weight mu, dim L(Lambda)_mu=sum_w epsilon(w)K(w(Lambda+rho)-(mu+rho)); only finitely many terms are nonzero.",
+        "deps": ["thm-weyl-kac-character-formula", "def-generalized-kostant-partition-function"],
+        "strategy": "Expand the inverse denominator and compare the e^mu coefficient. Reduced-word height growth and the fixed cone make the contributing Weyl elements finite.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Corollary 10.2.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Section 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "coefficient extraction"
+      },
+      {
+        "id": "cor-weyl-kac-specializes-to-the-finite-weyl-character-formula",
+        "kind": "corollary",
+        "title": "Weyl Kac specializes to the finite Weyl character formula",
+        "statement": "For finite-type A, all positive roots are real of multiplicity one and the Weyl group and root set are finite, so Weyl-Kac is the ordinary Weyl character formula for the corresponding complex semisimple Lie algebra.",
+        "deps": ["thm-weyl-kac-character-formula", "prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras"],
+        "strategy": "Substitute the finite-type root data and the semisimple identification into the formula; every sum and product becomes finite and follows the positive-Borel convention.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Theorem 10.2.1 and finite-type discussion", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Theorem 11.2.6", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "specialization"
+      },
+      {
+        "id": "prop-affine-denominator-separates-real-and-imaginary-root-factors",
+        "kind": "proposition",
+        "title": "Affine denominator separates real and imaginary root factors",
+        "statement": "For an untwisted affine algebra from a finite root system Phi_0 of rank ell, the denominator product splits over real roots alpha+n delta and -alpha+(n+1)delta, each with multiplicity one, and imaginary roots n delta with multiplicity ell.",
+        "deps": ["thm-kac-moody-denominator-identity", "def-null-root-central-coroot-and-affine-level", "prop-roots-of-an-untwisted-affine-lie-algebra", "thm-loop-and-affine-gcm-presentations-are-isomorphic"],
+        "strategy": "Use the explicit untwisted affine root list and multiplicities, partition the product, and reindex the negative finite roots. The needed RL13 suppliers are absent from the current plan inventory, so this item is escalated rather than silently reproved or weakened.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Sections 6.1-6.3 and 10.3", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Chapter 12", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "root-family partition"
+      },
+      {
+        "id": "rem-weyl-kac-products-are-formal-not-analytic-identities-here",
+        "kind": "remark",
+        "title": "Weyl Kac products are formal not analytic identities here",
+        "statement": "Every infinite sum, product, quotient and coefficient extraction on this page is in the formal downward-cone completion. No complex evaluation, analytic convergence, or rearrangement of a conditionally convergent series is asserted.",
+        "deps": ["def-kac-moody-formal-character-completion", "def-kac-moody-denominator-product-with-root-multiplicities"],
+        "strategy": "Collect the established coefficientwise-finiteness clauses. Equality means equality of formal coefficients, each determined by a finite computation; analytic specializations remain out of scope.",
+        "provenance": {"statement": "ai-altered", "proof": "not-applicable"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Sections 9.2 and 10.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Sections 10.7 and 11.2", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]}
+      }
+    ]
+  },
+  {
+    "order": 510.03,
+    "id": "the-weyl-kac-character-formula-examples",
+    "kind": "B",
+    "category": "lie-theory",
+    "title": "The Weyl Kac Character Formula — Examples",
+    "companion": "the-weyl-kac-character-formula",
+    "requires": ["the-weyl-kac-character-formula"],
+    "items": [
+      {
+        "id": "ex-finite-a1-specialization-of-weyl-kac",
+        "kind": "example",
+        "title": "Finite A1 specialization of Weyl Kac",
+        "statement": "For A=(2) and dominant m omega, Weyl-Kac becomes (e^((m+1)omega)-e^(-(m+1)omega))/(e^omega-e^-omega)=sum_{j=0}^m e^((m-2j)omega), the character of the (m+1)-dimensional simple sl2-module.",
+        "deps": ["thm-weyl-kac-character-formula", "prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras"],
+        "strategy": "Use alpha=2omega, rho=omega, and W={1,s}. Cancel the finite geometric difference formally and list the weights, including m=0.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Theorem 10.2.1 specialized to A1", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Theorem 11.2.6 specialized to A1", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "direct computation"
+      },
+      {
+        "id": "ex-real-and-imaginary-factors-in-the-affine-sl2-denominator",
+        "kind": "example",
+        "title": "Real and imaginary factors in the affine sl2 denominator",
+        "statement": "For untwisted affine sl2, with q=e^-delta and z=e^-alpha, the positive-root product is product_{n>=1}(1-q^n) product_{n>=0}(1-zq^n) product_{n>=1}(1-z^-1q^n); the first factor is imaginary and the others real.",
+        "deps": ["prop-affine-denominator-separates-real-and-imaginary-root-factors"],
+        "strategy": "Set ell=1 and Phi_0^+={alpha}; translate the three root families, preserving the distinct index starts. This is formal, not analytic Jacobi convergence.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Section 10.3", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Section 12.3", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "specialization"
+      },
+      {
+        "id": "ex-first-weight-layers-of-the-basic-affine-sl2-character",
+        "kind": "example",
+        "title": "First weight layers of the basic affine sl2 character",
+        "statement": "For the basic level-one module L(Lambda_0) of untwisted affine sl2, expand the Weyl-Kac quotient through the first two delta-degrees and display the actual weight multiplicities, coefficientwise in the formal completion.",
+        "deps": ["thm-weyl-kac-character-formula", "ex-the-basic-level-one-weight-of-affine-sl2", "prop-roots-of-an-untwisted-affine-lie-algebra", "prop-affine-weyl-group-is-a-coroot-lattice-semidir-product"],
+        "strategy": "Use affine Weyl translations to enumerate orbit terms contributing through degree two and invert only denominator factors of relevant height. The needed RL13 root and affine-Weyl suppliers are absent from the plan inventory, so no numerical table is invented now.",
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Sections 6.4 and 11.2", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Chapter 12", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "finite formal expansion"
+      },
+      {
+        "id": "cex-using-multiplicity-one-for-imaginary-roots-gives-the-wrong-affine-denominator",
+        "kind": "counterexample",
+        "title": "Using multiplicity one for imaginary roots gives the wrong affine denominator",
+        "statement": "In untwisted affine type A2, delta has multiplicity two. Replacing every imaginary-root multiplicity by one changes (1-e^-delta)^2 to (1-e^-delta), so the normalized denominator already has the wrong e^-delta coefficient.",
+        "deps": ["def-kac-moody-denominator-product-with-root-multiplicities", "cex-imaginary-root-spaces-need-not-have-multiplicity-one"],
+        "strategy": "Use the published loop-algebra witness g_delta=h_0 tensor t of dimension rank(sl3)=2. The direct delta-factor contribution changes from -2 to -1 while all other factor contributions agree, giving a formal coefficient mismatch.",
+        "provenance": {"statement": "ai-altered", "proof": "ai-altered"},
+        "sources": {"references": [
+          {"title": "Kleshchev, Sections 6.1-6.3 and 10.3", "url": "https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf"},
+          {"title": "Perrin, Sections 4.2 and 12.3", "url": "https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf"}
+        ]},
+        "proof_strategy": "coefficient comparison"
+      }
+    ]
+  }
+]

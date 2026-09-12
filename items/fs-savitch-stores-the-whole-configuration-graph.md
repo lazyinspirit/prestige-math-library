@@ -2,7 +2,7 @@
 id: fs-savitch-stores-the-whole-configuration-graph
 kind: false-statement
 title: "FALSE: Savitch's algorithm stores the whole configuration graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-reachability-recursion, lem-bounded-reachability-uses-logarithmic-recursion-depth]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

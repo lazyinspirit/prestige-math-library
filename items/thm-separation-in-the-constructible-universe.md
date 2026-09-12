@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Separation in the constructible universe"
 deps: ["lem-finite-reflection-along-constructible-levels", "def-definable-subsets-of-a-membership-structure"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-singular-cohomology-with-coefficients
 kind: definition
 title: Singular cohomology with coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cochain-complex-with-coefficients, lem-the-singular-coboundary-squares-to-zero]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-parameter-specialization-function
 kind: definition
 title: "Parameter-specialization functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-universal-and-acceptable-numbering, def-natural-number-coding-of-finite-sequences]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

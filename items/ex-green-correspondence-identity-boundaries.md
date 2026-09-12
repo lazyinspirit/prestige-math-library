@@ -2,13 +2,14 @@
 id: ex-green-correspondence-identity-boundaries
 kind: example
 title: Green correspondence identity boundaries
-status: draft
+status: published
 origin: pipeline
 deps: [thm-green-correspondence-with-exceptional-families, cor-green-correspondence-for-modules-of-vertex-exactly-p, def-relative-projectivity, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

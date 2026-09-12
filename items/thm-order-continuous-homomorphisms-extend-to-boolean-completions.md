@@ -2,7 +2,9 @@
 id: thm-order-continuous-homomorphisms-extend-to-boolean-completions
 kind: theorem
 title: Order-continuous Boolean homomorphisms extend uniquely to completions
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [def-complete-boolean-algebra-and-regular-open-sets, thm-stone-regular-open-boolean-completion, thm-regular-open-sets-form-a-complete-boolean-algebra, thm-stone-clopen-representation-under-bpi, def-axiom-of-choice, thm-choice-implies-boolean-prime-ideal-principle, thm-zorn]
 proof_strategy: direct

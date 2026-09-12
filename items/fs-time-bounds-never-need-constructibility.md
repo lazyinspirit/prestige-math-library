@@ -2,7 +2,7 @@
 id: fs-time-bounds-never-need-constructibility
 kind: false-statement
 title: "FALSE: clocked-simulation and time-hierarchy arguments never need constructibility hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-time-and-space-constructible-function, lem-clocked-machine-constructi
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

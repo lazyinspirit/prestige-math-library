@@ -2,7 +2,7 @@
 id: thm-closure-under-inverse-homomorphism
 kind: theorem
 title: "Regular languages are closed under inverse homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-alphabet-homomorphism-and-induced-word-map, def-dfa-acceptance-and-recognized-language, def-extended-dfa-transition-function, def-regular-language-by-dfa-recognition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

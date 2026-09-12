@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The constructible universe satisfies AC"
 deps: ["thm-canonical-definable-global-well-order-of-l", "thm-constructible-universe-basic-axioms", "thm-replacement-in-the-constructible-universe", "thm-separation-in-the-constructible-universe", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

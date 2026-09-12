@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ d3a2df3a20c5 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ f2a6d3354af1 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 8063 |
+| defects caught before publication | 8220 |
 | now mechanically prevented | 274 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -646,6 +646,25 @@
 | citation-inaccurate |  | 1 |  |
 | missing-choice-scope |  |  | 1 |
 | false-boundary-disposition |  | 1 |  |
+
+## phase-2-next-17 — 157 row(s)
+
+| subclass | 5a-adjudicate | 6-judge | 7-adjudicate |
+|---|---|---|---|
+| citation-inflated |  | 53 | 2 |
+| citation-misattributed | 1 | 28 |  |
+| citation-missing |  | 16 | 7 |
+| missing-hypothesis |  | 10 | 5 |
+| ill-typed-construction |  | 6 | 2 |
+| false-or-overstrong-statement |  | 7 |  |
+| false-claim |  | 5 |  |
+| invalid-inference | 2 | 1 |  |
+| undefined-notation |  | 3 |  |
+| ill-typed-claim |  | 2 | 1 |
+| false-or-overstrong-title |  | 3 |  |
+| unsupported-inference |  | 1 |  |
+| citation-inaccurate |  | 1 |  |
+| contract-mismatch |  |  | 1 |
 
 ## phase-2-next-20 — 132 row(s)
 

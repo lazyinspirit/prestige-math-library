@@ -2,7 +2,7 @@
 id: ex-valid-computation-histories-are-decidable
 kind: example
 title: "Checking a short accepting history for a unary increment machine"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [prop-valid-computation-histories-are-decidable, def-halting-computation-a
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

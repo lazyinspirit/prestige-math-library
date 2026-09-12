@@ -2,7 +2,7 @@
 id: lem-rudin-box-space-basic-neighborhoods-and-p-space
 kind: lemma
 title: Clopen boxes and the P-space property
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ordinal-box-space, thm-cofinality-basics, def-axiom-of-choice, def-rudin-ambient-ordinal-box-space, def-order-topology-on-an-ordinal]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Los theorem for set ultraproducts"
 deps: ["lem-lc-ultraproduct-quotient-well-defined", "thm-set-structure-satisfaction-recursion", "thm-ultrafilter-characterisation", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

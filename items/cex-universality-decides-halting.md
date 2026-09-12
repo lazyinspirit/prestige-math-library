@@ -2,7 +2,7 @@
 id: cex-universality-decides-halting
 kind: counterexample
 title: "A universal machine diverges on a looping machine/input pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [fs-universality-decides-halting, thm-existence-of-a-universal-turing-mach
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

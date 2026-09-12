@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Regressive injections on nonreflecting sets of cardinals"
 deps: ["def-cofinality", "def-club-subsets-of-ordinals", "thm-transfinite-recursion", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

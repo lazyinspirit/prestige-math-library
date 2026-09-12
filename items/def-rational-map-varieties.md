@@ -2,7 +2,7 @@
 id: def-rational-map-varieties
 kind: definition
 title: "Rational maps between irreducible classical affine varieties"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, paragraph before Example 3.2.3"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
 ---
 

@@ -2,7 +2,7 @@
 id: lem-language-concatenation-is-associative
 kind: lemma
 title: "Language concatenation is associative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-language-concatenation-powers-and-kleene-star, def-computation-alphab
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

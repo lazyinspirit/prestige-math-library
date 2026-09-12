@@ -2,7 +2,7 @@
 id: lem-maximal-ideals-are-points-over-algebraically-closed-field
 kind: lemma
 title: "Points of an affine algebraic set correspond to maximal ideals of its coordinate ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.2 and §1.5"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

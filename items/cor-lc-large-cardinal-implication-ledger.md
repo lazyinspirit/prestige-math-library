@@ -4,6 +4,7 @@ kind: "corollary"
 title: "Large-cardinal implication and consistency ledger"
 deps: ["thm-lc-supercompactness-closed-embedding-characterization", "thm-lc-strong-compactness-fine-measures-and-logic", "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness", "thm-lc-measurable-implies-weakly-compact", "thm-lc-weakly-compact-stationary-reflection-and-mahlo", "thm-lc-inaccessible-rank-segments-model-zfc", "thm-set-language-first-order-soundness", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

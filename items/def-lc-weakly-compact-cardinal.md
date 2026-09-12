@@ -4,6 +4,7 @@ kind: "definition"
 title: "Weakly compact cardinals"
 deps: ["def-lc-inaccessible-and-mahlo-cardinals", "def-kappa-tree-and-tree-property", "def-partition-arrow-notation", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

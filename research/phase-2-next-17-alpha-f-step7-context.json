@@ -1,0 +1,449 @@
+{
+  "group": "f",
+  "batches": [
+    "10"
+  ],
+  "pages_read": [
+    "sat-tableaux-and-quantified-space-completeness",
+    "sat-tableaux-and-quantified-space-completeness-examples",
+    "nondeterministic-recursive-padding-and-time-separation",
+    "nondeterministic-recursive-padding-and-time-separation-examples"
+  ],
+  "items_read": [
+    "def-boolean-formulas-cnf-and-satisfiability-interface",
+    "def-bounded-turing-computation-tableau-interface",
+    "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+    "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+    "thm-cook-levin-sat-completeness-interface",
+    "thm-three-sat-completeness-interface",
+    "def-polynomial-space-and-nondeterministic-polynomial-space",
+    "lem-space-bounded-machine-configuration-count",
+    "thm-tqbf-pspace-completeness-interface",
+    "ex-a-two-step-computation-tableau-and-its-local-clauses",
+    "ex-tseitin-conversion-preserves-satisfiability",
+    "ex-qbf-reachability-recursion-space-accounting",
+    "def-nondeterministic-acceptance-time-and-exact-clock",
+    "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+    "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+    "lem-time-controlled-self-reference-for-nondeterministic-machines",
+    "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+    "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+    "thm-nondeterministic-recursive-padding-separation",
+    "ex-nondeterministic-polynomial-logarithmic-time-separation",
+    "ex-shortest-acceptance-and-clocked-all-branch-halting"
+  ],
+  "conventions": [
+    {
+      "convention": "Binary formula syntax: 3-bit tags; a variable is 010 followed by a unary length header $1^{|b|}0$ and the canonical numeral $b$; clauses (110) and CNFs (111) are additional formula nodes with unary count headers; a $k$-CNF allows clause length zero; empty disjunction is false and empty conjunction true; malformed words, including the empty binary word, lie in neither SAT nor 3SAT.",
+      "fixed_by": "def-boolean-formulas-cnf-and-satisfiability-interface",
+      "matters_for": [
+        "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "thm-cook-levin-sat-completeness-interface",
+        "thm-three-sat-completeness-interface",
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-tseitin-conversion-preserves-satisfiability"
+      ]
+    },
+    {
+      "convention": "SAT/3SAT are read through the verifier-reduction interface: NP is the verifier-defined class with a polynomial guard $p$, NP-completeness is membership plus a total polynomial many-one reduction from every verifier-defined language, and satisfiability permits fresh variables (equisatisfiability) while semantic equivalence does not.",
+      "fixed_by": "def-boolean-formulas-cnf-and-satisfiability-interface",
+      "matters_for": [
+        "thm-cook-levin-sat-completeness-interface",
+        "thm-three-sat-completeness-interface",
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-tseitin-conversion-preserves-satisfiability"
+      ]
+    },
+    {
+      "convention": "Tableau parameters: $T=T(n)\\ge\\ell+1$ with $\\ell=2n+1+p(n)$ the length of the verifier input $1^n0xz$ ($|x|=n$, $|z|=p(n)$, $p$ the post-normalization fixed certificate length); $W=T+2$ cells indexed $0,\\ldots,W-1$, rows $0,\\ldots,T$, last cell pinned to unmarked blank.",
+      "fixed_by": "def-bounded-turing-computation-tableau-interface",
+      "matters_for": [
+        "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+        "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "thm-cook-levin-sat-completeness-interface",
+        "ex-a-two-step-computation-tableau-and-its-local-clauses"
+      ]
+    },
+    {
+      "convention": "For tableaux only the step relation is extended so every halting configuration is stationary (acceptance an absorbing sink); each row carries exactly one marked symbol, the head never reaches cell $T+1$, and unpadding means deleting repeated halting rows.",
+      "fixed_by": "def-bounded-turing-computation-tableau-interface",
+      "matters_for": [
+        "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+        "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "ex-a-two-step-computation-tableau-and-its-local-clauses"
+      ]
+    },
+    {
+      "convention": "SPACE classes use the all-tape visited-cell count (distinct tape/cell pairs once, initial head cells included, initialized-but-unvisited input not counted) and polynomial bounds may be enlarged to an integer polynomial $C(n+1)^k$ dominating $n+1$ and the number of tapes; PSPACE/NPSPACE are the unions over $k\\ge1$ of $\\mathrm{DSPACE}(n^k)$/\\mathrm{NSPACE}(n^k)$.",
+      "fixed_by": "def-polynomial-space-and-nondeterministic-polynomial-space",
+      "matters_for": [
+        "lem-space-bounded-machine-configuration-count",
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-qbf-reachability-recursion-space-accounting"
+      ]
+    },
+    {
+      "convention": "Configuration counting: configurations reached from a fixed input within a visited-cell bound $S$ receive injective fixed-length codes of $O_M(S+\\log(n+2))$ bits ($O_M(S)$ when $S\\ge n$), the decoder may use the fixed input $x$, and the code uses the least prefix containing the head and every cell whose content differs from the initial content.",
+      "fixed_by": "lem-space-bounded-machine-configuration-count",
+      "matters_for": [
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-qbf-reachability-recursion-space-accounting"
+      ]
+    },
+    {
+      "convention": "TQBF instances are closed prenex formulas over {0,1} with distinct bound names; the prefix is a unary length header then one quantifier bit plus a self-delimiting variable numeral per entry, followed by the matrix encoding; duplicates, free variables, trailing bits and malformed input are rejected; false/true variable-free matrices belong with empty prefix.",
+      "fixed_by": "thm-tqbf-pspace-completeness-interface",
+      "matters_for": [
+        "ex-qbf-reachability-recursion-space-accounting"
+      ]
+    },
+    {
+      "convention": "The reachability recursion is single-copy: $R_{i+1}(X,Y)=\\exists Z\\,\\forall b\\,\\forall U\\,\\forall V\\,(\\neg G\\vee R_i(U,V))$ with $G=(\\neg b\\wedge U=X\\wedge V=Z)\\vee(b\\wedge U=Z\\wedge V=Y)$; $R_i$ means valid endpoints joined by a path of at most $2^i$ edges, accepting configurations have an edge to a special vertex with a self-loop, rejecting configurations have none.",
+      "fixed_by": "thm-tqbf-pspace-completeness-interface",
+      "matters_for": [
+        "ex-qbf-reachability-recursion-space-accounting"
+      ]
+    },
+    {
+      "convention": "Auxiliary-space claims that exclude a read-only input tape and a write-only output tape are labelled as such (the TQBF generator's $O_M(\\log(n+2))$ claim); the default library measure remains the all-tape visited-cell count, which is never below $n$.",
+      "fixed_by": "thm-tqbf-pspace-completeness-interface",
+      "matters_for": [
+        "thm-tqbf-pspace-completeness-interface"
+      ]
+    },
+    {
+      "convention": "Shortest acceptance $\\tau_N(x)$ is the minimal length of an accepting branch ($\\infty$ if none), bounded by $O(b(|x|))$ only on accepted inputs; 'acceptance within $t$' means $\\tau_N(x)\\le t$; by contrast the library class NTIME$(t)$ requires every branch to halt within $O(t)$, and the two conventions are connected only by the explicit clocked conversion.",
+      "fixed_by": "def-nondeterministic-acceptance-time-and-exact-clock",
+      "matters_for": [
+        "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+        "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+        "lem-time-controlled-self-reference-for-nondeterministic-machines",
+        "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+        "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+        "thm-nondeterministic-recursive-padding-separation",
+        "ex-nondeterministic-polynomial-logarithmic-time-separation",
+        "ex-shortest-acceptance-and-clocked-all-branch-halting"
+      ]
+    },
+    {
+      "convention": "An exact clock for $T$ is a deterministic fixed multitape machine halting after exactly $T(n)$ transitions on every binary input of length $n$; the initial state is nonhalting so $T(n)\\ge1$; no monotonicity and no equivalence with an output constructor is asserted.",
+      "fixed_by": "def-nondeterministic-acceptance-time-and-exact-clock",
+      "matters_for": [
+        "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+        "thm-nondeterministic-recursive-padding-separation",
+        "ex-nondeterministic-polynomial-logarithmic-time-separation",
+        "ex-shortest-acceptance-and-clocked-all-branch-halting"
+      ]
+    },
+    {
+      "convention": "Clock cutoffs are inclusive: acceptance is tested at the initial instant and after each of the $T(n)$ N-transitions, including the last allowed one, and the branch rejects after expiry; missing transition options count as rejecting branches.",
+      "fixed_by": "def-nondeterministic-acceptance-time-and-exact-clock",
+      "matters_for": [
+        "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+        "ex-shortest-acceptance-and-clocked-all-branch-halting"
+      ]
+    },
+    {
+      "convention": "Prefix program codes are $e(d)=1^{|d|}0d1^{r(d)}0$ for canonically decodable payloads $d$ ($r(d)$ the exact decoder time), hence prefix-free with valid-code language decidable in $O(|e|+1)$ time; a word beginning with a valid code splits uniquely into code and data.",
+      "fixed_by": "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+      "matters_for": [
+        "lem-time-controlled-self-reference-for-nondeterministic-machines",
+        "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+        "thm-nondeterministic-recursive-padding-separation"
+      ]
+    },
+    {
+      "convention": "Self-reference is extensional: $L(M_{e_0})=L(H_{e_0})$ with constants $C,D$ fixed for the construction, and the cited s-m-n and fixed-point theorems supply equality of partial functions only, no time estimate.",
+      "fixed_by": "lem-time-controlled-self-reference-for-nondeterministic-machines",
+      "matters_for": [
+        "thm-nondeterministic-recursive-padding-separation"
+      ]
+    },
+    {
+      "convention": "The separation's little-o hypothesis is shifted, $a(n+1)=o(T(n))$ not $a(n)=o(T(n))$, and the excluded class is the all-branch class NTIME$(a)$; $T$ is not assumed monotone.",
+      "fixed_by": "thm-nondeterministic-recursive-padding-separation",
+      "matters_for": [
+        "ex-nondeterministic-polynomial-logarithmic-time-separation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-nondeterministic-recursive-padding-separation",
+      "statement": "Let $T:\\mathbb N\\to\\mathbb N$ have an exact clock and satisfy $T(n)\\ge n$. There is one binary language $L\\in\\mathrm{NTIME}(T)$ such that for every total recursive $a\\ge n$ with $a(n+1)=o(T(n))$, one has $L\\notin\\mathrm{NTIME}(a)$.",
+      "used_by": [
+        "ex-nondeterministic-polynomial-logarithmic-time-separation"
+      ]
+    },
+    {
+      "id": "def-nondeterministic-acceptance-time-and-exact-clock",
+      "statement": "An **exact clock for $T$** here is a deterministic fixed multitape machine that halts after exactly $T(n)$ transitions on every binary input of length $n$. Its initial state is nonhalting, so $T(n)\\ge1$.; $\\tau_N(x)$ is the minimum length of an accepting branch, or $\\infty$ if there is none.",
+      "used_by": [
+        "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+        "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+        "lem-time-controlled-self-reference-for-nondeterministic-machines",
+        "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+        "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+        "thm-nondeterministic-recursive-padding-separation",
+        "ex-nondeterministic-polynomial-logarithmic-time-separation",
+        "ex-shortest-acceptance-and-clocked-all-branch-halting"
+      ]
+    },
+    {
+      "id": "def-bounded-turing-computation-tableau-interface",
+      "statement": "Write $T=T(n)$ and $W=T+2$. Rows are indexed $0,\\ldots,T$ and cells $0,\\ldots,W-1$. This is the bounded $T$-by-$T$ construction up to the necessary additive endpoint cells.; Its ordinary binary input is $w=1^n0xz$, where $|x|=n$ and $|z|=p(n)$ ... Thus the complete input length $\\ell=2n+1+p(n)$ is less than $T(n)$.",
+      "used_by": [
+        "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+        "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "thm-cook-levin-sat-completeness-interface",
+        "ex-a-two-step-computation-tableau-and-its-local-clauses"
+      ]
+    },
+    {
+      "id": "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations",
+      "statement": "The formula $\\Phi_{M,x}$ is satisfiable exactly when some permitted certificate makes the normalized verifier accept within $T(|x|)$ steps. Every satisfying assignment decodes a genuine computation followed only by repetitions of its halting configuration.",
+      "used_by": [
+        "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "thm-cook-levin-sat-completeness-interface",
+        "ex-a-two-step-computation-tableau-and-its-local-clauses"
+      ]
+    },
+    {
+      "id": "thm-cook-levin-sat-completeness-interface",
+      "statement": "SAT is NP-complete under polynomial-time many-one reductions. For each verifier-defined language $L$ there is a total polynomial-time map $x\\mapsto\\Phi_x$ to CNF encodings such that $x\\in L$ iff $\\Phi_x$ is satisfiable.",
+      "used_by": [
+        "thm-three-sat-completeness-interface"
+      ]
+    },
+    {
+      "id": "def-boolean-formulas-cnf-and-satisfiability-interface",
+      "statement": "Empty disjunction is false and empty conjunction true. A $k$-CNF has every clause length at most $k$, including zero. Repeated or complementary literals are allowed.",
+      "used_by": [
+        "def-bounded-turing-computation-tableau-interface",
+        "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+        "thm-cook-levin-sat-completeness-interface",
+        "thm-three-sat-completeness-interface",
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-tseitin-conversion-preserves-satisfiability"
+      ]
+    },
+    {
+      "id": "lem-tableau-to-cnf-map-has-polynomial-size-and-time",
+      "statement": "For a fixed verifier and polynomial certificate and time bounds, $x\\mapsto\\Phi_{M,x}$ is a polynomial-time map to a polynomial-size CNF. More generally a finite Boolean formula, or a finite acyclic Boolean gate list, has a polynomial-time equisatisfiable CNF encoding with one extension variable per internal gate and a unit clause requiring its output.",
+      "used_by": [
+        "thm-cook-levin-sat-completeness-interface",
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-tseitin-conversion-preserves-satisfiability"
+      ]
+    },
+    {
+      "id": "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+      "statement": "There is an effective prefix-free coding $e$ of finite nondeterministic two-tape machines over binary inputs whose valid-code language is decidable in $O(|e|+1)$ time. One fixed nondeterministic two-tape machine $U$ recognizes precisely $\\{ex:e\\text{ is a valid code and }x\\in L(M_e)\\}$. For each fixed valid $e$ there are constants $c_e,d_e$ such that $\\tau_U(ex)\\le c_e(|x|+\\tau_{M_e}(x))+d_e$ on accepted inputs.",
+      "used_by": [
+        "lem-time-controlled-self-reference-for-nondeterministic-machines",
+        "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+        "thm-nondeterministic-recursive-padding-separation"
+      ]
+    },
+    {
+      "id": "lem-time-controlled-self-reference-for-nondeterministic-machines",
+      "statement": "One can effectively construct a valid code $e_0$ with $L(M_{e_0})=L(H_{e_0})$ and constants $C,D$, fixed for this construction, such that $\\tau_{M_{e_0}}(x)\\le C(|x|+\\tau_{H_{e_0}}(x))+D$ on accepted inputs. This is extensional language equality, not code equality.",
+      "used_by": [
+        "thm-nondeterministic-recursive-padding-separation"
+      ]
+    },
+    {
+      "id": "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+      "statement": "For every fixed finitely branching nondeterministic $k$-tape machine $M$ there is a nondeterministic two-tape machine $S$ recognizing the same language, with constants $c,d$ such that $\\tau_S(x)\\le c(|x|+\\tau_M(x))+d$ whenever $M$ accepts $x$.",
+      "used_by": [
+        "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation",
+        "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+        "thm-nondeterministic-recursive-padding-separation"
+      ]
+    },
+    {
+      "id": "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds",
+      "statement": "For fixed acceptors A,B there are acceptors for $L(A)\\cup L(B)$ and $L(A)\\cap L(B)$ with shortest acceptance bounded respectively by $O(n+\\min(\\tau_A(x),\\tau_B(x))+1)$ and $O(n+\\tau_A(x)+\\tau_B(x)+1)$ ... Exact-clock cutoffs $L_T(A)$ have all-branch-halting machines with time $O_A(n+T(n)+1)$.",
+      "used_by": [
+        "thm-nondeterministic-recursive-padding-separation",
+        "ex-shortest-acceptance-and-clocked-all-branch-halting"
+      ]
+    },
+    {
+      "id": "lem-no-recursive-bound-covers-all-recursive-unary-languages",
+      "statement": "For every total recursive $b:\\mathbb N\\to\\mathbb N$ there is a recursive unary language $R\\subseteq\\{1\\}^*$ which no nondeterministic finite-tape machine recognizes with shortest acceptance time $O(b(n))$.",
+      "used_by": [
+        "thm-nondeterministic-recursive-padding-separation"
+      ]
+    },
+    {
+      "id": "thm-tqbf-pspace-completeness-interface",
+      "statement": "TQBF is PSPACE-complete under polynomial-time many-one reductions. Its hardness reduction has polynomial output length and can be computed in polynomial time, hence polynomial workspace.",
+      "used_by": [
+        "ex-qbf-reachability-recursion-space-accounting"
+      ]
+    },
+    {
+      "id": "lem-space-bounded-machine-configuration-count",
+      "statement": "Configurations reached from this input while using at most $S$ visited cells have injective fixed-length binary encodings of length $O_M(S+\\log(n+2))$, and there are at most $2^{O_M(S+\\log(n+2))}$ of them. The decoder may use the fixed $x$. If $S\\ge n$ the bounds are $O_M(S)$ and $2^{O_M(S)}$ for nonempty feasible configurations.",
+      "used_by": [
+        "thm-tqbf-pspace-completeness-interface",
+        "ex-qbf-reachability-recursion-space-accounting"
+      ]
+    },
+    {
+      "id": "def-polynomial-space-and-nondeterministic-polynomial-space",
+      "statement": "$\\mathrm{PSPACE}=\\bigcup_{k\\ge1}\\mathrm{DSPACE}(n^k)$, $\\mathrm{NPSPACE}=\\bigcup_{k\\ge1}\\mathrm{NSPACE}(n^k)$; a nondeterministic machine must halt on every branch and accept exactly when an accepting branch exists.",
+      "used_by": [
+        "lem-space-bounded-machine-configuration-count",
+        "thm-tqbf-pspace-completeness-interface"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-polynomial-time-verifier-and-reduction-interface",
+      "used_for": "Fixes the verifier/NP presentation, the polynomial guard p, the total polynomial many-one reduction convention, and the length-field construction that turns guarded witnesses into fixed-length certificates used by the tableau (so that |z|=p(n)).",
+      "opened": true
+    },
+    {
+      "id": "def-turing-machine-configuration",
+      "used_for": "Configuration = (state, head position, finite-support tape); supplies the objects the tableau rows and the configuration-count encoding code.",
+      "opened": true
+    },
+    {
+      "id": "def-one-step-configuration-relation",
+      "used_for": "Ordinary deterministic transition (scanned-cell rewrite, clamped left move) and the remark that halting configurations have no one-step successor; used by the tableau local rule and the TQBF edge predicate.",
+      "opened": true
+    },
+    {
+      "id": "def-turing-machine-initial-and-halting-configuration-interface",
+      "used_for": "Initial tape/head conventions, the initial state being nonhalting, and the accepting/rejecting predicates; used for tableau row zero and TQBF initial/accepting vertices.",
+      "opened": true
+    },
+    {
+      "id": "thm-multitape-machines-have-one-tape-simulations",
+      "used_for": "Converts the fixed multitape verifier to a one-tape machine before the tableau is built.",
+      "opened": true
+    },
+    {
+      "id": "lem-multitape-simulation-has-quadratic-time-overhead",
+      "used_for": "Supplies the polynomial running-time bound that becomes the tableau's T(n) (and hence W and the row count).",
+      "opened": true
+    },
+    {
+      "id": "def-dtime-ntime-dspace-and-nspace",
+      "used_for": "Definition of NTIME/DSPACE/NSPACE with all-branch halting and the finite-valued nondeterministic transition map; needed to separate the all-branch classes from the shortest-acceptance classes.",
+      "opened": true
+    },
+    {
+      "id": "def-worst-case-time-and-space-complexity",
+      "used_for": "Worst-case (maximum-branch) time/space convention that the shortest-acceptance definition is explicitly contrasted with.",
+      "opened": true
+    },
+    {
+      "id": "def-uniform-asymptotic-time-space-comparison",
+      "used_for": "O/o and O_M conventions, run conventions (heads at cell zero, clamped left move), the n+1 lower guard, and the requirement that input-tape-excluding space bounds be labelled separately; used throughout the padding theorem and the TQBF bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-machine-time-and-space-constructibility",
+      "used_for": "The exact-clock terminology and the explicit statement that no equivalence between exact clocks and output constructors is asserted; the local clock definition does not import its monotonicity guard.",
+      "opened": true
+    },
+    {
+      "id": "def-nondeterministic-accepting-computation",
+      "used_for": "Existential acceptance by a finite configuration list, extended by tau_N to a minimum accepting-branch length.",
+      "opened": true
+    },
+    {
+      "id": "def-multitape-and-nondeterministic-machines",
+      "used_for": "Multitape/nondeterministic model (finite-valued transition map, one symbol read/written per tape per step) used by the two-tape simulation and the resource classes.",
+      "opened": true
+    },
+    {
+      "id": "def-effective-encoding-of-turing-machines",
+      "used_for": "Concrete self-delimiting numeric tuple syntax and prefix-free tuple encoder, reused for the payloads of the prefix program codes.",
+      "opened": true
+    },
+    {
+      "id": "lem-machine-encoding-is-injective-and-decodable",
+      "used_for": "Injective total decoding of finite tables, reused (by the same unique-decoding argument) for the longer prefix payloads.",
+      "opened": true
+    },
+    {
+      "id": "thm-smn-for-the-fixed-acceptable-numbering",
+      "used_for": "Effective specialization by literal parameter compilation, cited only for extensional equality of partial functions (no time estimate) in the self-reference lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-kleene-fixed-point-theorem-for-program-indices",
+      "used_for": "Extensional fixed-point theorem, cited as insufficient for the quantitative assertion; the construction proves the time-controlled version directly.",
+      "opened": true
+    },
+    {
+      "id": "effective-numberings-reductions-resources-and-randomness",
+      "used_for": "Declared page prerequisite of both A pages: supplies def-uniform-asymptotic-time-space-comparison, def-machine-time-and-space-constructibility, def-polynomial-time-verifier-and-reduction-interface and the smn/fixed-point theorems the group cites.",
+      "opened": true
+    },
+    {
+      "id": "resource-bounds-and-machine-invariance",
+      "used_for": "Declared page prerequisite of both A pages: supplies def-dtime-ntime-dspace-and-nspace, def-worst-case-time-and-space-complexity and the multitape/one-tape simulation results the tableau and resource conventions rest on.",
+      "opened": true
+    },
+    {
+      "id": "turing-machines-configurations-and-computation",
+      "used_for": "Declared page prerequisite of sat-tableaux-and-quantified-space-completeness: supplies def-turing-machine-configuration, def-one-step-configuration-relation, def-multitape-and-nondeterministic-machines and def-nondeterministic-accepting-computation.",
+      "opened": true
+    },
+    {
+      "id": "robust-machine-models-and-universal-computation",
+      "used_for": "Declared page prerequisite of nondeterministic-recursive-padding-and-time-separation: supplies def-effective-encoding-of-turing-machines, lem-machine-encoding-is-injective-and-decodable, thm-multitape-machines-have-one-tape-simulations and lem-multitape-simulation-has-quadratic-time-overhead.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-bounded-turing-computation-tableau-interface",
+      "concern": "The local rule is given only in prose and the clause family is specified as 'for each forbidden tuple (a,b,c,d)', but the definition never states that the forbidden tuples are exactly the complement of the allowed relation R_j, nor that the boundary clause 'omit exterior literals and enumerate only the fixed exterior symbol' ranges over exactly the windows whose absent neighbour is the fixed marker. Both directions of lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations (step 1.1's 'Every local tuple is allowed' and step 1.2's 'Any different new symbol would make the forbidden-tuple clause for these actual four symbols false') need that exhaustive reading; it is recoverable only from 'This defines a finite allowed relation R_j(a,b,c,d)'.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "def-bounded-turing-computation-tableau-interface",
+      "concern": "$p(n)$ is reused for the post-normalization certificate length: 'certificates of one fixed length $p(n)$' together with 'If its original certificates have variable guarded length, first use the length-field construction' means $p$ is the length-field word of def-polynomial-time-verifier-and-reduction-interface (length 2p_orig(n)+1, not the original guard). The identity $\\ell=2n+1+p(n)$ and every polynomial bound downstream depend on that reading, which is left implicit.",
+      "severity": "presentation"
+    },
+    {
+      "id": "thm-nondeterministic-recursive-padding-separation",
+      "concern": "Step 4.1's 'possible by F7' claim that $2B_0A(N+1)\\le T(N)$ for all $N\\ge N_0$ does not follow from $a(n+1)=o(T(n))$ alone; it also needs $n=o(T(n))$, which follows only by combining $a\\ge n$ with the shift ($a(n+1)\\ge n+1$). The two-term estimate $A(N+1)=K(a(N+1)+N+2)=o(T(N))$ is nowhere written out, and $T(n)\\ge n$ is the only lower hypothesis on $T$.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "thm-nondeterministic-recursive-padding-separation",
+      "concern": "The two downward inductions silently switch on H's two modes: the base range $k\\ge r(m)$ uses step 2.1's first estimate, while every descent step uses step 3.2, which is stated only under the hypothesis $k<r(m)$. The text says 'descend through $k=r(m)-1,\\ldots,0$' but never restates that the descent step is exactly the $k<r(m)$ case of H (D's bounded test versus the unbounded extension guess); a reader must verify the case split is respected.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-time-controlled-self-reference-for-nondeterministic-machines",
+      "concern": "Step 1.1 defines f(d)'s machine as writing the literal d on tape two and then 'executes the table described by d from its start state, with that nonblank second tape', but never states that this means running M_d from its start state on the configuration (x, d) - which is what Q's 'expects x on tape one and a valid d on tape two' requires - nor that a fixed interpreter gives one constant per simulated step. Step 5.1 likewise writes $\\tau_{H_e}(x)\\le A_e(|x|+1)+\\tau_A(ex)$, i.e. cost one per simulated step of A, which holds only on the literal-composition reading ('directly runs A').",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "thm-tqbf-pspace-completeness-interface",
+      "concern": "Step 1.1 claims TQBF in PSPACE via 'at most $N$ frames and a size-$O(N^2)$ parsed representation' and matrix evaluation in $O(N^2)$ cells, but gives no layout for the claimed parsed representation and only asserts 'the same child workspace' is reused. Under the all-tape visited-cell convention of def-polynomial-space-and-nondeterministic-polynomial-space a reader must verify the second evaluation of a child literally reuses the first's cells (and that the matrix evaluation is polynomial), since any per-call copy of the residual formula would be exponential.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "lem-space-bounded-machine-configuration-count",
+      "concern": "The statement's first bound carries a $\\log(n+2)$ term the proof never uses: the code length produced in step 3.1 is $O_M(S)$ for $S\\ge k$, and the case $S<k$ is disposed of as vacuous ('the reachable set is empty'), so the injective fixed-length claim in the $S<k$ case is only the empty map. A reader must also accept that no plane of the canonical-prefix code (step 2.1) depends on the history rather than the configuration.",
+      "severity": "presentation"
+    },
+    {
+      "id": "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time",
+      "concern": "Step 3.1 maintains 'a track marking the furthest initialized or visited cell' and sweeps 'from zero through this frontier' inside a two-tape machine whose tape alphabet is fixed by M; the per-step cost of this multi-track bookkeeping and of the erase/rewind pass is charged to the same linear budget without an explicit statement that tracks are a constant factor rather than extra tapes (the definition only supplies the stay-put excursion macro). The 'It lies within max(|x|,t)+1' claim likewise needs the frontier-track invariant spelled out.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": []
+}

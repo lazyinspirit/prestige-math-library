@@ -571,8 +571,9 @@ minimality of `L`; HOD comparison; semantic and formal inner-model theorem.
 definable subsets; constructible power sets appear before the next cardinal;
 covering of constructible subsets by levels; `L |= GCH`; `V=L` implies diamond;
 diamond builds Suslin trees; formal interpretation yielding
-`Con(ZF) -> Con(ZFC+GCH)`; positive CH/GCH consistency corollaries;
-`fs-l-equals-v-in-zf`.
+`Con(ZF) -> Con(ZFC+GCH)`; positive CH/GCH consistency corollaries. The
+tempting inference from the inner-model theorem to ambient `V=L` is deferred
+to SET-14, where its forcing refutation has a backward proof route.
 
 **Targets.** Completes `rem-godel-constructible-universe` and the positive
 halves of `rem-independence-of-ch-and-gch`; supplies the `L` direction of
@@ -597,7 +598,10 @@ countable transitive model; finite-fragment/Boolean-valued formalization;
 proof-theoretic `Con` transfer; `fs-the-ctm-presentation-proves-con-zfc`.
 
 **Proof trap.** The final formal item, not the CTM narrative, licenses every
-relative-consistency conclusion below.
+relative-consistency conclusion below. The B page also owns
+`fs-l-equals-v-in-zf`: atomless forcing, ordinal preservation, and
+constructibility absoluteness give a model with `V` not equal to `L`, while the
+formal transfer supplies the required relative-consistency refutation.
 
 ## SET-15. Preservation, Cohen Forcing, and the Continuum
 

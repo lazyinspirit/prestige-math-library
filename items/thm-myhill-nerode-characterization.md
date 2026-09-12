@@ -2,7 +2,7 @@
 id: thm-myhill-nerode-characterization
 kind: theorem
 title: "A language is regular if and only if its Nerode equivalence has finite index"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nerode-equivalence, lem-nerode-equivalence-is-a-right-congruence, lem-dfa-states-refine-nerode-classes, def-deterministic-finite-automaton, def-dfa-acceptance-and-recognized-language, def-regular-language-by-dfa-recognition]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

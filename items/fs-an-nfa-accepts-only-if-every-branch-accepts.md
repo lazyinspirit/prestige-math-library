@@ -2,7 +2,7 @@
 id: fs-an-nfa-accepts-only-if-every-branch-accepts
 kind: false-statement
 title: "FALSE: an NFA accepts only if every branch accepts"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

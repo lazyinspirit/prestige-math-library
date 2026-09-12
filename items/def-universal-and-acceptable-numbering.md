@@ -2,7 +2,7 @@
 id: def-universal-and-acceptable-numbering
 kind: definition
 title: "Universal and acceptable numberings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-numbering-of-partial-computable-functions, def-natural-number-coding-of-finite-sequences]
 landmark: true
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

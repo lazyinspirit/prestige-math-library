@@ -2,7 +2,7 @@
 id: lem-computation-words-agree-with-published-finite-words
 kind: lemma
 title: "The computation-word convention agrees with the published finite-word definition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-computation-alphabet-and-word-convention, def-finite-words-factor-avo
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

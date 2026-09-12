@@ -2,7 +2,7 @@
 id: thm-dowker-product-characterization
 kind: theorem
 title: Dowker product characterization
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-paracompactness-shrinking-criterion, def-product-topology, lem-normality-is-closed-hereditary, def-axiom-of-choice, lem-normality-via-shrinking, lem-locally-finite-unions-and-closures, thm-heine-borel-r, thm-of-archimedean]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

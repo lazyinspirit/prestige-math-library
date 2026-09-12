@@ -1,0 +1,593 @@
+[
+  {
+    "order": 510.061,
+    "id": "brauers-first-main-theorem",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "Brauers First Main Theorem",
+    "companion": "brauers-first-main-theorem-examples",
+    "requires": [
+      "blocks-defect-groups-and-the-brauer-homomorphism",
+      "vertices-sources-and-the-green-correspondence",
+      "modular-representations-and-projective-covers",
+      "brauer-characters-and-decomposition-matrices"
+    ],
+    "items": [
+      {
+        "id": "thm-modular-block-central-characters-correspond-to-blocks",
+        "kind": "theorem",
+        "title": "Modular block central characters correspond to blocks",
+        "deps": [
+          "def-p-blocks-by-primitive-central-idempotents",
+          "def-block-bimodule-for-the-double-group",
+          "def-splitting-p-modular-system-for-a-finite-group"
+        ],
+        "statement": "Let k be the residue field of a splitting p-modular system for a finite group G. The k-algebra homomorphisms from Z(kG) to k are in bijection with the block idempotents b of kG. The homomorphism λ_b belonging to b is uniquely characterized by λ_b(b)=1 and λ_b(c)=0 for every other block idempotent c.",
+        "strategy": "Write 1 as the finite sum of primitive central block idempotents. Any algebra homomorphism to the field k sends exactly one of these idempotents to 1 and the rest to 0. Conversely, for a fixed block b, the nonzero finite-dimensional algebra kGb has a maximal-dimensional proper left ideal, and its quotient is a simple kGb-module S. Every element of Z(kGb) acts B-linearly on S and hence, because k is splitting, acts by a scalar; this gives a k-algebra homomorphism Z(kGb)→k. The center Z(kGb) is local by the block-bimodule result, so the kernel is its unique maximal ideal and the scalar map is independent of S. Extend it by zero on the other central block factors. These constructions are inverse and establish both existence and uniqueness of λ_b without an implicit simple-module existence assumption.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martínez, Representation Theory of Finite Groups, Theorem 2.11, p. 15",
+              "url": "https://www.uv.es/jomimar8/pdfs/course%20notes.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, central-character setup, pp. 4–6",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-induced-block-from-a-subgroup",
+        "kind": "definition",
+        "title": "A block induced from a subgroup",
+        "deps": [
+          "def-block-bimodule-for-the-double-group",
+          "def-p-blocks-by-primitive-central-idempotents",
+          "thm-krull-schmidt-for-finite-dimensional-kg-modules"
+        ],
+        "statement": "Fix a splitting p-modular system and write k for its residue field. For H≤G and a block b of kH, the induced block b^G is the unique block B of kG, when one exists, for which the (kH,kH)-bimodule b is an indecomposable direct summand of Res^{G×G}_{H×H} B. Block induction is undefined when there is no such unique B.",
+        "strategy": "Regard block ideals as modules for the double groups. Krull–Schmidt makes the words 'direct summand' and 'unique block' unambiguous. Keep definedness explicit; no theorem on this page silently assigns b^G outside its stated hypotheses. Later compare this formulation with the central-character/Brauer-map criterion on the normalizer interval where that criterion is available.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Definition 5.13",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Definition 40.1, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-induced-blocks-have-controlled-defect",
+        "kind": "lemma",
+        "title": "Induced blocks have controlled defect",
+        "deps": [
+          "def-induced-block-from-a-subgroup",
+          "thm-block-bimodule-has-a-diagonal-vertex",
+          "lem-relative-projectivity-mackey-intersections-for-finite-modules",
+          "def-defect-group-and-numerical-defect-of-a-block"
+        ],
+        "statement": "If b is a block of kH with defect group D and b^G is defined, then D is contained in a defect group of b^G (after the usual G-conjugation of the latter).",
+        "strategy": "Choose ΔD as a vertex of the indecomposable k[H×H]-module b. Since b is a summand of Res B, Mackey vertex containment places ΔD in an (H×H)-conjugate of an intersection of H×H with a conjugate of a diagonal vertex ΔE of B. Projecting to G gives D≤_G E. This proves only containment, not equality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Lemma 5.14(i)",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Proposition 40.3(i), §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-block-induction-exists-under-centralizer-containment",
+        "kind": "lemma",
+        "title": "Centralizer containment makes block induction well-defined",
+        "deps": [
+          "def-induced-block-from-a-subgroup",
+          "lem-group-algebra-bimodule-is-induced-from-the-diagonal",
+          "lem-relative-projectivity-mackey-intersections-for-finite-modules",
+          "thm-block-bimodule-has-a-diagonal-vertex",
+          "def-defect-group-and-numerical-defect-of-a-block",
+          "prop-central-idempotents-under-the-brauer-homomorphism",
+          "thm-modular-block-central-characters-correspond-to-blocks",
+          "def-block-bimodule-for-the-double-group",
+          "prop-normal-p-subgroups-act-trivially-on-simple-modules",
+          "thm-krull-schmidt-for-finite-dimensional-kg-modules"
+        ],
+        "statement": "Let b be a block of kH with defect group D. If C_G(D)≤H≤G, then b^G is defined. If in addition H≤N_G(D), its block idempotent is equivalently selected by the traditional central-character formula λ_{b^G}=λ_b∘Br_D on class sums.",
+        "strategy": "Use the defect-group definition to identify ΔD as a vertex of b, then prove the double-coset stabilizer exclusion and multiplicity one. For central characters, use the unique b-isotypic corner modulo its local radical in End of the restricted group algebra, proving cross-composites through nonisomorphic indecomposables are radical. This identifies the coefficient-projection character with the induced block. When D is normal in H, noncentralizing D-orbit sums act by zero on a simple b-module because normal p-subgroups act trivially; this gives the Brauer projection formula.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Proposition 40.3(iii), §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            },
+            {
+              "title": "Martínez, Representation Theory of Finite Groups, Theorem 4.5, pp. 24–25",
+              "url": "https://www.uv.es/jomimar8/pdfs/course%20notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-block-induction-is-transitive",
+        "kind": "lemma",
+        "title": "Block induction is transitive when both stages are defined",
+        "deps": [
+          "def-induced-block-from-a-subgroup"
+        ],
+        "statement": "For K≤H≤G and a block c of kK, if c^H, (c^H)^G, and c^G are all defined, then c^G=(c^H)^G.",
+        "strategy": "The summand relation is transitive under restriction: c is a summand of Res_K(c^H), and c^H is a summand of Res_H((c^H)^G), so c is a summand of Res_K((c^H)^G). Since c^G is defined, it is the unique block of kG whose restriction contains c; hence c^G=(c^H)^G. The argument assumes all three displayed induced blocks are defined and makes no unsupported existence claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Lemma 5.14(ii)",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Proposition 40.3(ii), §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-block-idempotents-are-fixed-by-normal-p-subgroup-brauer-projection",
+        "kind": "lemma",
+        "title": "Normal p-subgroups fix block idempotents under Brauer projection",
+        "statement": "If D is a normal p-subgroup of H, then Br_D fixes every central idempotent of kH.",
+        "deps": [
+          "thm-modular-block-central-characters-correspond-to-blocks",
+          "prop-normal-p-subgroups-act-trivially-on-simple-modules",
+          "def-brauer-homomorphism-for-a-p-subgroup",
+          "thm-brauer-homomorphism-is-multiplicative"
+        ],
+        "strategy": "Use normal-p trivial action on simple modules to kill every noncentralizing D-orbit sum, then equality of central characters detects equality of central idempotents.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martínez, Theorem4.5 proof, normal-p orbit localization; local central-idempotent consequence",
+              "url": "https://www.uv.es/jomimar8/pdfs/course%20notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-first-main-theorem-local-block-existence",
+        "kind": "lemma",
+        "title": "A global block of defect D determines a local block of defect D",
+        "deps": [
+          "lem-block-idempotents-are-fixed-by-normal-p-subgroup-brauer-projection",
+          "thm-maximal-brauer-pairs-exist-and-are-conjugate",
+          "thm-maximal-brauer-pairs-detect-defect-groups",
+          "thm-defect-groups-are-maximal-brauer-support",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "thm-modular-block-central-characters-correspond-to-blocks",
+          "def-brauer-homomorphism-for-a-p-subgroup"
+        ],
+        "statement": "Fix a p-subgroup D≤G and N=N_G(D). If B is a block of kG having D as a defect group, then there is a unique block b of kN among those having defect group D such that b^G=B; its idempotent is Br_D(f) when f is the idempotent of B.",
+        "strategy": "Construct the local block from Br_D(f), prove it has defect D, and use the central-character formula only for competing local blocks that also have defect D. The original Green restriction shortcut is not used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.4, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, Theorem 1.12, pp. 9–10",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-first-main-theorem-surjectivity",
+        "kind": "lemma",
+        "title": "Every local full-defect block induces to a global block of defect D",
+        "deps": [
+          "lem-block-idempotents-are-fixed-by-normal-p-subgroup-brauer-projection",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "thm-defect-groups-are-maximal-brauer-support",
+          "lem-idempotents-lift-through-finite-commutative-algebra-quotients",
+          "thm-brauer-homomorphism-is-multiplicative",
+          "def-brauer-homomorphism-for-a-p-subgroup",
+          "thm-sylow-second-theorem",
+          "thm-modular-block-central-characters-correspond-to-blocks"
+        ],
+        "statement": "Fix D≤G and N=N_G(D). For every block b of kN with defect group D, block induction b^G is defined and b^G has defect group D.",
+        "strategy": "Complete Brauer-map and central-idempotent argument; the original Green restriction shortcut is not used. Exact authored proof supplies all support and lifting steps.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Theorem 5.16",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.4, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-first-main-theorem-injectivity",
+        "kind": "lemma",
+        "title": "Distinct local full-defect blocks induce to distinct global blocks",
+        "deps": [
+          "lem-first-main-theorem-surjectivity",
+          "lem-first-main-theorem-local-block-existence",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "thm-modular-block-central-characters-correspond-to-blocks"
+        ],
+        "statement": "Fix D≤G and N=N_G(D). If b and c are blocks of kN with defect group D and b^G=c^G, then b=c.",
+        "strategy": "Complete Brauer-map and central-idempotent argument; the original Green restriction shortcut is not used. Exact authored proof supplies all support and lifting steps.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Theorem 5.16",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.4, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-brauer-first-main-theorem",
+        "kind": "theorem",
+        "title": "Brauer's First Main Theorem",
+        "deps": [
+          "lem-first-main-theorem-local-block-existence",
+          "lem-first-main-theorem-injectivity",
+          "lem-first-main-theorem-surjectivity"
+        ],
+        "statement": "Let D be a fixed p-subgroup of a finite group G and N=N_G(D). Block induction b↦b^G is a bijection from the blocks of kN having D as a defect group to the blocks of kG having D as a defect group. The assertion is a bijection of possibly empty sets and is equivariant under replacing D by a G-conjugate; it does not choose a canonical representative of a defect conjugacy class.",
+        "strategy": "Use the fully authored choice-free Brauer-idempotent bijection and its conjugation compatibility; no stronger Green theorem is consumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martínez, Representation Theory of Finite Groups, Theorem 4.10, pp. 27–28",
+              "url": "https://www.uv.es/jomimar8/pdfs/course%20notes.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, Theorem 1.12, pp. 9–10",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.4, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-brauer-correspondent-of-a-block",
+        "kind": "definition",
+        "title": "The Brauer correspondent of a block",
+        "deps": [
+          "thm-brauer-first-main-theorem"
+        ],
+        "statement": "Fix an actual defect group D of a block B of kG. The Brauer correspondent of B in N_G(D) is the unique defect-D block b of kN_G(D) satisfying b^G=B. Replacing D by gDg^{-1} replaces b by its g-conjugate, so the construction is canonical only up to that conjugacy.",
+        "strategy": "Use the fully authored choice-free Brauer-idempotent bijection and its conjugation compatibility; no stronger Green theorem is consumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martínez, Representation Theory of Finite Groups, Theorem 4.10, pp. 27–28",
+              "url": "https://www.uv.es/jomimar8/pdfs/course%20notes.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, Definition following Theorem 1.12, p. 10",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-corresponding-block-bimodules-are-green-correspondents",
+        "kind": "theorem",
+        "title": "Corresponding block bimodules are Green correspondents",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-brauer-correspondent-of-a-block",
+          "def-block-bimodule-for-the-double-group",
+          "cor-green-correspondence-for-modules-of-vertex-exactly-p",
+          "def-defect-group-and-numerical-defect-of-a-block"
+        ],
+        "statement": "Assume AC. If B is a block of kG with defect group D and b is its Brauer correspondent in N=N_G(D), then the indecomposable block bimodules B and b are Green correspondents for G×G and N×N with respect to ΔD.",
+        "strategy": "The proof of the bijection constructs b as the unique distinguished N×N summand in Res B with vertex ΔD. Conversely, induction of b has B as its unique distinguished G×G summand. These two uniqueness assertions are exactly the Green-correspondence characterization. AC is used through that theorem and nowhere else.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Theorem 5.16",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.4, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tensoring-preserves-relative-projectivity-for-finite-group-modules",
+        "kind": "lemma",
+        "title": "Tensoring preserves relative projectivity for finite-group modules",
+        "deps": [
+          "def-relative-projectivity",
+          "lem-relative-projectivity-mackey-intersections-for-finite-modules",
+          "thm-krull-schmidt-for-finite-dimensional-kg-modules",
+          "thm-green-vertex-source-existence-and-conjugacy"
+        ],
+        "statement": "Let H be finite and let X and Y be finite-dimensional kH-modules, with diagonal H-action on X⊗_kY. If X is relatively R-projective for R≤H, then X⊗_kY is relatively R-projective. Consequently, if no indecomposable summand of X has a vertex containing an H-conjugate of Q, then the same is true of X⊗_kY.",
+        "strategy": "If X splits from Ind_R^H W, tensor the split inclusion and projection with Y and use the explicit H-isomorphism (Ind_R^H W)⊗_kY ≅ Ind_R^H(W⊗_k Res_R^H Y), sending (h⊗w)⊗y to h⊗(w⊗h^{-1}y). This proves the first assertion. For the consequence, decompose X into finitely many indecomposables, choose a vertex R_i for each, tensor each summand with Y, and decompose again. Every resulting indecomposable is relatively R_i-projective, so vertex containment puts its vertex in an H-conjugate of R_i. It therefore cannot contain a conjugate of Q under the stated hypothesis. All decompositions and choices are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Exercise 31(a) as used in Theorem 40.5, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-brauer-green-nagao-block-compatibility",
+        "kind": "theorem",
+        "title": "Brauer–Green block compatibility",
+        "deps": [
+          "def-induced-block-from-a-subgroup",
+          "def-block-bimodule-for-the-double-group",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "lem-relative-projectivity-mackey-intersections-for-finite-modules",
+          "lem-tensoring-preserves-relative-projectivity-for-finite-group-modules",
+          "thm-krull-schmidt-for-finite-dimensional-kg-modules",
+          "thm-vertices-of-modules-in-a-block-lie-in-a-defect-group"
+        ],
+        "statement": "Let Q≤G, let H≤G contain Q C_G(Q), and let V be an indecomposable kG-module with vertex Q. If U is an indecomposable direct summand of Res^G_H V with vertex Q, b is the block of kH containing U, and B is the block of kG containing V, then b^G is defined and equals B.",
+        "strategy": "First choose a defect group D_b of b containing Q; then C_G(D_b)≤C_G(Q)≤H, so centralizer containment defines b^G. If b^G≠B, use the double action, point stabilizers, vertex containment, and C_G(Q)≤H to prove directly that every off-identity double-coset summand avoids vertices containing ΔQ. After restriction to the diagonal, the tensor lemma gives the same exclusion for eB⊗_k eV, but explicit multiplication maps split U from that tensor product, a contradiction. This direct block-idempotent proof is choice-free and does not consume the later Nagao decomposition theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.5, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            },
+            {
+              "title": "Saunders, Modular Representation Theory, Theorem 5.17 and Corollary 5.18",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-every-block-has-an-indecomposable-module-of-full-defect-vertex",
+        "kind": "corollary",
+        "title": "Every block contains a module whose vertex is a full defect group",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-brauer-correspondent-of-a-block",
+          "thm-brauer-green-nagao-block-compatibility",
+          "thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras",
+          "thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules",
+          "prop-normal-p-subgroups-act-trivially-on-simple-modules",
+          "cor-block-defect-groups-are-p-radical",
+          "cor-green-correspondence-for-modules-of-vertex-exactly-p",
+          "lem-restriction-to-a-containing-p-subgroup-retains-a-vertex",
+          "def-p-blocks-by-primitive-central-idempotents",
+          "thm-higman-criterion-for-relative-projectivity",
+          "thm-green-vertex-source-existence-and-conjugacy",
+          "lem-relative-projectivity-mackey-intersections-for-finite-modules"
+        ],
+        "statement": "Assume AC. If B is a block of kG with defect group D, then B contains an indecomposable kG-module whose vertex is D.",
+        "strategy": "Let b be the Brauer correspondent in N=N_G(D). Since D is normal in N and is a defect group of b, p-radicality gives D=O_p(N). The nonzero finite-dimensional algebra b has a maximal-dimensional proper left ideal, so its quotient is a simple b-module S. The normal p-subgroup D acts trivially on S, so S descends to k[N/D]; take its indecomposable projective cover P there and inflate it to N. The central block idempotents decompose P, while its simple head lies in b, so indecomposability forces P to remain in b. Projectivity makes P a summand of a finite direct sum of k[N/D]=Ind_D^N k, hence relatively D-projective. Its restriction to D is a nonzero sum of trivial modules, each with vertex D; the restriction-retention lemma then forces the vertex of P to be D. Its Green correspondent V has vertex D, and block compatibility puts V in b^G=B. AC enters only through existence of the selected correspondent under the published Green theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Corollary 40.7, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            },
+            {
+              "title": "Saunders, Modular Representation Theory, Corollary 5.19",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 510.062,
+    "id": "brauers-first-main-theorem-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "Brauers First Main Theorem — Examples",
+    "companion": "brauers-first-main-theorem",
+    "requires": [
+      "brauers-first-main-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-brauer-correspondence-in-s7",
+        "kind": "example",
+        "title": "Brauer correspondence for a defect-D8 block of S7 in characteristic 2",
+        "deps": [
+          "thm-brauer-first-main-theorem",
+          "prop-principal-block-has-sylow-defect",
+          "thm-blocks-partition-ordinary-and-brauer-irreducible-characters",
+          "thm-kg-is-local-iff-g-is-a-p-group",
+          "thm-defect-groups-are-maximal-brauer-support",
+          "def-brauer-homomorphism-for-a-p-subgroup"
+        ],
+        "statement": "Let k have characteristic 2. In G=S7 take D=⟨(12),(1324)⟩≅D8 on {1,2,3,4}. Then N_G(D)=D×S3. The unique nonprincipal block of kN_G(D) with defect group D is the Brauer correspondent of the defect-D block of kS7; the principal local block has the larger Sylow defect D×C2.",
+        "strategy": "Compute the normalizer and the two local blocks explicitly: kS3 = kC2 × M2(k) in characteristic 2. Tensor with kD, prove primitivity by locality, and compute Brauer support of the nonprincipal idempotent. Apply the choice-free First Main bijection; no global character table is required.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, §1.6 example for S7, pp. 13–16",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-brauer-correspondence-for-sl2-over-fp",
+        "kind": "example",
+        "title": "Brauer correspondence for SL2(Fp) in defining characteristic",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-brauer-first-main-theorem",
+          "thm-brauer-green-nagao-block-compatibility",
+          "thm-blocks-partition-ordinary-and-brauer-irreducible-characters",
+          "cor-number-of-simple-kg-modules-equals-number-of-p-regular-conjugacy-classes",
+          "thm-kg-is-local-iff-g-is-a-p-group",
+          "thm-higman-criterion-for-relative-projectivity",
+          "lem-block-idempotents-are-fixed-by-normal-p-subgroup-brauer-projection",
+          "thm-defect-groups-are-maximal-brauer-support",
+          "thm-defect-zero-blocks-are-simple-algebras",
+          "thm-green-vertex-source-existence-and-conjugacy",
+          "lem-relative-projectivity-mackey-intersections-for-finite-modules",
+          "cor-green-correspondence-for-modules-of-vertex-exactly-p"
+        ],
+        "statement": "Assume AC, let p>2, G=SL2(F_p), let D be the lower-unitriangular Sylow p-subgroup, and N=N_G(D) the lower-triangular subgroup. The two positive-defect blocks of kG, containing respectively the odd-index and even-index simple modules in the standard list, correspond to the two defect-D blocks of kN detected by the matching parity of the heads of their Green correspondents; the Steinberg block is defect zero and is not in this defect-D bijection.",
+        "strategy": "Derive the p simple symmetric powers using two unipotent Jordan calculations and count p-regular classes by trace. Compute lower-Borel restrictions, their heads, projectivity and vertices. Normal-p Brauer fixedness gives the two local sign idempotents. First Main and block compatibility give the parity blocks; projective simplicity separates Steinberg. AC is used only for the declared exact-vertex Green identification.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Examples 4.31 and 5.5",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-centralizer-containment-is-not-necessary-for-block-induction",
+        "kind": "counterexample",
+        "title": "Centralizer containment is sufficient but not necessary",
+        "deps": [
+          "def-induced-block-from-a-subgroup",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "prop-principal-block-has-sylow-defect",
+          "thm-kg-is-local-iff-g-is-a-p-group"
+        ],
+        "statement": "Let p=2, let G=D_{2n} with n odd, and let H=C_n be its normal 2-complement. The principal block b_0(H) has trivial defect and b_0(H)^G=b_0(G) is defined, although C_G(1)=G is not contained in H. Thus C_G(D)≤H is not necessary for block induction to exist.",
+        "strategy": "Use the explicit averaging idempotent of the odd-order rotation subgroup. Its G ideal is kC2 and is primitive by locality; all other block ideals are annihilated by the averaging idempotent, proving uniqueness of block induction. Compute C_G(1)=G.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Saunders, Modular Representation Theory, Example 5.15",
+              "url": "https://jpsaunders.uk/ModRep/NotesWebsite.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-defect-one-first-main-theorem-boundary",
+        "kind": "example",
+        "title": "The trivial-defect-group and identity-normalizer boundaries",
+        "deps": [
+          "thm-brauer-first-main-theorem",
+          "thm-defect-zero-blocks-are-simple-algebras",
+          "def-induced-block-from-a-subgroup"
+        ],
+        "statement": "For D=1 one has N_G(D)=G, and Brauer's First Main Theorem is the identity bijection on defect-zero blocks. More generally, whenever N_G(D)=G, its defect-D bijection is the identity. These assertions remain valid when the relevant sets of blocks are empty.",
+        "strategy": "Compute restriction to the identical double group and uniqueness of the same block summand. Specialize D=1 to defect-zero matrix blocks and check the empty identity map. The calculation and First Main theorem used here are choice-free.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Martínez, Representation Theory of Finite Groups, Theorem 4.10, pp. 27–28",
+              "url": "https://www.uv.es/jomimar8/pdfs/course%20notes.pdf"
+            },
+            {
+              "title": "Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem 40.4, §40 (printed pp.8–12 of upload17)",
+              "url": "https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

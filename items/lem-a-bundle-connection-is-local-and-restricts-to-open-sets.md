@@ -13,6 +13,8 @@ sources:
   references:
     - title: Ved Datar, Lectures on Riemannian Geometry, Lemma 5.1.1 and Corollary 5.1.2
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

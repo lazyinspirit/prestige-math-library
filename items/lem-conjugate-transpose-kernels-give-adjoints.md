@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Conjugate transpose kernels give adjoints"
 deps: ["lem-square-integrable-kernels-define-bounded-compact-integral-operators", "def-l-two-operator-conventions-for-weak-mixing", "thm-tonelli-and-fubini-for-completed-product-measures", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

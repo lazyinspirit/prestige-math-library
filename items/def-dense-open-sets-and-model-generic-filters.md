@@ -4,6 +4,7 @@ kind: "definition"
 title: "Dense open sets and generic filters over a model"
 deps: ["def-forcing-preorder-compatibility-and-filter", "thm-ordinals-and-omega-are-absolute-in-transitive-models"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

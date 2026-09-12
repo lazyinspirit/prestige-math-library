@@ -2,7 +2,7 @@
 id: thm-rudin-dowker-space-and-cardinality
 kind: theorem
 title: Rudin ZFC Dowker space and its size
-status: draft
+status: published
 origin: pipeline
 deps: [thm-rudin-box-space-is-collectionwise-normal, thm-rudin-tail-neighborhood-obstruction, thm-countable-paracompactness-shrinking-criterion, lem-cardinal-arithmetic-basic-laws, lem-cofinal-aleph-product-cardinality, thm-regularity-of-the-alephs, def-axiom-of-choice, def-countable-paracompactness-and-dowker-space, lem-ordinal-product-as-an-order-type, cor-cardinal-absorption, thm-cofinality-basics, def-rudin-ordinal-box-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

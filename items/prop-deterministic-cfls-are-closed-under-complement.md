@@ -2,7 +2,7 @@
 id: prop-deterministic-cfls-are-closed-under-complement
 kind: proposition
 title: "Deterministic context-free languages are closed under complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-deterministic-pda]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

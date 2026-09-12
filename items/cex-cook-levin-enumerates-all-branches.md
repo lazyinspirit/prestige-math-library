@@ -2,7 +2,7 @@
 id: cex-cook-levin-enumerates-all-branches
 kind: counterexample
 title: "A machine with two branches shows that one satisfying tableau need not encode every branch"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [fs-cook-levin-enumerates-all-branches, def-bounded-computation-tableau, lem-exactly-one-symbol-constraints-have-polynomial-size, lem-start-accept-and-transition-constraints-have-polynomial-size]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

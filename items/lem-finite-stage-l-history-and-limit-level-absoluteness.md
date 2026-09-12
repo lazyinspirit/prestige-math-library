@@ -88,8 +88,10 @@ levels.
 by their numerical formula/arity code and then lexicographically among tuples
 of that fixed arity, including its designated empty-carrier code.
 
-[F7] [[thm-canonical-definable-global-well-order-of-l]] identifies the
-published canonical order as the coherent recursion using those least codes.
+[F7] [[thm-canonical-definable-global-well-order-of-l]] defines the published
+canonical order by the unique coherent recursion that retains the old order,
+puts old members before new ones, orders new members by their least fixed
+formula/arity definition codes, and takes unions at nonzero limits.
 
 [F8] [[thm-transfinite-recursion]] supplies the external unique hierarchy and
 augmented-order histories; no recursion is performed internally in a weak

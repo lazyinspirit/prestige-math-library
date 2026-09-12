@@ -2,7 +2,7 @@
 id: thm-pdas-recognize-exactly-the-cfls
 kind: theorem
 title: "PDAs recognize exactly the context-free languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cfg-to-pda-construction, thm-pda-to-cfg-construction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -2,13 +2,14 @@
 id: lem-reflection-basic-invariants-form-a-regular-sequence
 kind: lemma
 title: Reflection basic invariants form a regular sequence
-status: draft
+status: "published"
 origin: pipeline
 deps: [lem-finite-linear-group-invariant-polynomials-separate-orbits, lem-finite-reflection-invariant-generators-are-algebraically-independent, def-regular-sequence-on-a-module, def-depth-with-respect-to-an-ideal, def-cohen-macaulay-local-module-and-ring, thm-depth-bounded-by-support-dimension, thm-dimension-and-parameters-for-modules, cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module, thm-hilbert-basis-theorem]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

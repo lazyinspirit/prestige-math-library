@@ -2,7 +2,7 @@
 id: fs-reusing-random-bits-amplifies-success
 kind: false-statement
 title: "FALSE: reusing the same random bits amplifies success"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-bpp-amplification-to-exponentially-small-error]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: lem-height-and-yield-bound-for-cnf-trees
 kind: lemma
 title: "A Chomsky-normal-form parse tree of height $h$ has yield length at most $2^{h-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-parse-tree-and-yield, def-chomsky-normal-form, def-nat-power]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

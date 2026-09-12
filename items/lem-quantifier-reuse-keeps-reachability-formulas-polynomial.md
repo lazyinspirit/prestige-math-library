@@ -2,7 +2,7 @@
 id: lem-quantifier-reuse-keeps-reachability-formulas-polynomial
 kind: lemma
 title: "Quantifier reuse keeps the reachability formulas polynomial in size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-reachable-configuration-formula]
 proof_strategy: induction
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

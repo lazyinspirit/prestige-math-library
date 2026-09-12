@@ -2,7 +2,7 @@
 id: thm-minimal-dfa-is-unique-up-to-pointed-isomorphism
 kind: theorem
 title: "Minimal DFAs are unique up to start-state-preserving isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-nerode-classes-give-the-canonical-minimal-dfa, def-reachable-dfa-state, lem-removing-unreachable-states-preserves-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

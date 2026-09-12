@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Carleson density selection"
 deps: ["def-density-size-and-tree-count-for-carleson-tiles", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

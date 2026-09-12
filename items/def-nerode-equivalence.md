@@ -2,13 +2,14 @@
 id: def-nerode-equivalence
 kind: definition
 title: "Nerode equivalence of words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computation-alphabet-and-word-convention, def-language-over-an-alphabet]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

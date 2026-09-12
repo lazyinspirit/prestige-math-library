@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Pavel Etingof, Lie Groups and Lie Algebras, \u00a7\u00a715\u201317; finite-dimensional local trace proof"
       url: "https://ocw.mit.edu/courses/18-755-lie-groups-and-lie-algebras-ii-spring-2024/mit18_755_s24_lec_full.pdf"
-status: "draft"
+status: "published"
 origin: "pipeline"
 ---
 

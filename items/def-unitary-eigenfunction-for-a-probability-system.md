@@ -4,6 +4,7 @@ kind: "definition"
 title: "Eigenfunction for a probability system"
 deps: ["def-koopman-operator-on-l-p", "def-invertible-measure-preserving-system", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "def-integral-of-a-nonnegative-simple-function", "def-nonnegative-lebesgue-integral", "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

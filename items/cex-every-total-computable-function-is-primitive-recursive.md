@@ -2,7 +2,7 @@
 id: cex-every-total-computable-function-is-primitive-recursive
 kind: counterexample
 title: "The Ackermann function refutes the claim that all total computable functions are primitive recursive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [prop-ackermann-is-total-computable-but-not-primitive-recursive]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

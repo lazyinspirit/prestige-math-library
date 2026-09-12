@@ -6,7 +6,9 @@ deps: [lem-haar-integral-comparison-inequality, thm-rmk-uniqueness-among-radon-m
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 sources:
   references:

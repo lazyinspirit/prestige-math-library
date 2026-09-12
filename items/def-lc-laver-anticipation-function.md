@@ -4,6 +4,7 @@ kind: "definition"
 title: "Laver anticipation functions"
 deps: ["def-lc-fine-ultrafilters-strong-compactness-and-supercompactness", "thm-lc-supercompactness-closed-embedding-characterization", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

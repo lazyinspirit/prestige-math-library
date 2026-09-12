@@ -2,7 +2,7 @@
 id: lem-induced-word-map-has-the-free-extension-property
 kind: lemma
 title: "The induced word map is the unique concatenation-preserving extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-alphabet-homomorphism-and-induced-word-map, def-computation-alphabet-
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

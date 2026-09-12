@@ -2,7 +2,7 @@
 id: thm-pumping-lemma-for-regular-languages
 kind: theorem
 title: "The pumping lemma for regular languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-language-by-dfa-recognition, def-deterministic-finite-automaton, def-dfa-acceptance-and-recognized-language, def-extended-dfa-transition-function, lem-pigeonhole]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

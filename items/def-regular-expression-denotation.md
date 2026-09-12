@@ -2,13 +2,14 @@
 id: def-regular-expression-denotation
 kind: definition
 title: "The language denoted by a regular expression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-regular-expression-syntax, def-language-over-an-alphabet, def-language-boolean-operations, def-language-concatenation-powers-and-kleene-star]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

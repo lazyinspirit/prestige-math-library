@@ -12,7 +12,9 @@ sources:
       url: https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf
     - title: Romyar Sharifi, Homological Algebra
       url: https://math.ucla.edu/~sharifi/homalg.pdf
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 proof_strategy: direct

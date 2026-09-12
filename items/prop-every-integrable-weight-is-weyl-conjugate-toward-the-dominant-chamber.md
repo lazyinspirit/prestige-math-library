@@ -2,13 +2,14 @@
 id: prop-every-integrable-weight-is-weyl-conjugate-toward-the-dominant-chamber
 kind: proposition
 title: Every integrable weight is weyl conjugate toward the dominant chamber
-status: draft
+status: published
 origin: pipeline
 deps: [prop-integrable-weight-sets-and-multiplicities-are-weyl-invariant, def-kac-moody-integral-and-dominant-integral-weights, def-kac-moody-category-o, def-simple-reflections-and-the-kac-moody-weyl-group, lem-kac-moody-chamber-boundary-stabilizers, def-integrable-kac-moody-module, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, thm-universal-property-and-pbw-character-of-kac-moody-verma-modules]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

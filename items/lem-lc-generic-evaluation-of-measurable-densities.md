@@ -6,6 +6,7 @@ status: published
 origin: pipeline
 deps: [lem-lc-generic-boolean-ground-joins, lem-lc-probability-algebra-completeness, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-extended-real-valued-measurable-function, def-dedekind-cut, def-cut-addition, thm-check-name-evaluation-and-generic-reconstruction, thm-ordinals-and-omega-are-absolute-in-transitive-models, def-axiom-of-choice]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -14,6 +14,8 @@ sources:
 status: published
 origin: "pipeline"
 proof_strategy: "direct"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Example

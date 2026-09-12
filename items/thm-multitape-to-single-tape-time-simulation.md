@@ -2,7 +2,7 @@
 id: thm-multitape-to-single-tape-time-simulation
 kind: theorem
 title: "Every multitape time-T computation has a single-tape simulation in O((n+T(n))^2) time"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-asymptotic-resource-comparison, def-dtime-ntime-dspace-and-nspace, th
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-reduced-ordinal-products-and-scales
 kind: definition
 title: Reduced products, true cofinality and scales
-status: draft
+status: published
 origin: pipeline
 deps: [def-cofinality, def-axiom-of-choice]
 justified_by: [lem-progressive-products-and-true-cofinality-transfers]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

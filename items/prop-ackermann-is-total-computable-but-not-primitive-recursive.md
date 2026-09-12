@@ -2,7 +2,7 @@
 id: prop-ackermann-is-total-computable-but-not-primitive-recursive
 kind: proposition
 title: "The Ackermann function is total computable but not primitive recursive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-primitive-recursive-function, def-partial-function-computed-by-a-mach
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

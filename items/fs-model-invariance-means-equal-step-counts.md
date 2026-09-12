@@ -2,7 +2,7 @@
 id: fs-model-invariance-means-equal-step-counts
 kind: false-statement
 title: "FALSE: machine invariance means equivalent models perform exactly the same number of steps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [prop-polynomial-time-and-space-are-model-invariant, def-multitape-and-non
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

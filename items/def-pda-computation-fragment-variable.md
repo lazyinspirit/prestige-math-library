@@ -2,13 +2,14 @@
 id: def-pda-computation-fragment-variable
 kind: definition
 title: "The PDA fragment variable $[p,Z,q]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-context-free-grammar, def-pda-configuration-and-step]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

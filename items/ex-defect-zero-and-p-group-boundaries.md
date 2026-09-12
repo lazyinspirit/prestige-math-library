@@ -6,9 +6,10 @@ deps: [prop-principal-block-has-sylow-defect, thm-defect-zero-blocks-are-simple-
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

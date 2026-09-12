@@ -2,7 +2,7 @@
 id: ex-language-concatenation-is-associative
 kind: example
 title: "A concrete calculation of $(L_1L_2)L_3=L_1(L_2L_3)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [lem-language-concatenation-is-associative, def-language-concatenation-pow
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-cyk-needs-no-normal-form-preprocessing
 kind: false-statement
 title: "FALSE: CYK needs no normal-form preprocessing"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cyk-table-and-span-variable, thm-cyk-membership-algorithm, thm-chomsky-normal-form]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

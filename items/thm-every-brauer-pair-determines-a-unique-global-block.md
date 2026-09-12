@@ -6,8 +6,10 @@ deps: [thm-brauer-pair-order-is-independent-of-the-normal-chain, lem-brauer-homo
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: Jacobsen, Block fusion systems and the center of the group ring, Lemma 2.32 and Theorem 2.33, pp.18–19; general-field lifting proved locally

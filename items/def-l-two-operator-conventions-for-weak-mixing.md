@@ -4,6 +4,7 @@ kind: "definition"
 title: "L two operator conventions for weak mixing"
 deps: ["thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

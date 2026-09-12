@@ -2,7 +2,7 @@
 id: fs-the-cfl-pumping-lemma-characterizes-cfls
 kind: false-statement
 title: "FALSE: the context-free pumping lemma characterizes the context-free languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ deps: [thm-cfls-are-not-closed-under-intersection,
        thm-pdas-recognize-exactly-the-cfls]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

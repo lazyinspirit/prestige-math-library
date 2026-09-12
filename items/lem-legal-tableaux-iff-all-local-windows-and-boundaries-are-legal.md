@@ -2,7 +2,7 @@
 id: lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal
 kind: lemma
 title: "A tableau is legal exactly when the start row is correct and every local window is legal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-computation-tableau, def-local-tableau-window]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

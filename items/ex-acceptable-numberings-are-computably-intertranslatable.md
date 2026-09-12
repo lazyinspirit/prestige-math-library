@@ -2,7 +2,7 @@
 id: ex-acceptable-numberings-are-computably-intertranslatable
 kind: example
 title: "Compiling between two acceptable numberings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-acceptable-numberings-are-computably-intertranslatable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

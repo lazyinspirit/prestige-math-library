@@ -2,7 +2,7 @@
 id: thm-balogh-continuum-sized-zfc-dowker-space
 kind: theorem
 title: Balogh continuum-sized ZFC Dowker space
-status: draft
+status: published
 origin: pipeline
 deps: [lem-balogh-hereditary-normality, lem-balogh-failure-of-countable-shrinking, thm-dowker-product-characterization, def-axiom-of-choice, def-balogh-continuum-topology, lem-balogh-neighborhood-basis, def-countable-paracompactness-and-dowker-space, cor-cardinal-absorption]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

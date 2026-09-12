@@ -2,7 +2,7 @@
 id: thm-cfg-intersection-emptiness-is-undecidable
 kind: theorem
 title: "Emptiness of the intersection of two CFGs is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-post-correspondence-problem, thm-post-correspondence-is-undecidable, def-computable-many-one-reduction, def-language-generated-by-a-cfg, thm-many-one-reductions-transfer-decidability-and-recognizability]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

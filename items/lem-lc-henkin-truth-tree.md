@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Henkin truth trees for infinitary compactness"
 deps: ["def-lc-infinitary-syntax-and-compactness", "lem-lc-inaccessible-size-and-rank-bounds", "def-kappa-tree-and-tree-property", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

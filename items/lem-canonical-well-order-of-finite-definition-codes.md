@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Well-ordering finite definition codes"
 deps: ["def-definable-subsets-of-a-membership-structure", "thm-transfinite-induction"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

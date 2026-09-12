@@ -2,7 +2,7 @@
 id: def-small-dowker-ladder-topology
 kind: definition
 title: Small Dowker ladder topology
-status: draft
+status: published
 origin: pipeline
 deps: [def-small-dowker-luzin-stick-and-ad-principles, def-axiom-of-choice, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, thm-omega-one-is-the-least-uncountable-ordinal, def-topological-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

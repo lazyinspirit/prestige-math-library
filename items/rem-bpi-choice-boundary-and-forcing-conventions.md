@@ -2,13 +2,14 @@
 id: rem-bpi-choice-boundary-and-forcing-conventions
 kind: remark
 title: Choice and forcing boundary
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-prime-ideal-principle, thm-choice-implies-boolean-prime-ideal-principle, thm-bpi-equivalent-to-arbitrary-language-compactness, thm-bpi-equivalent-to-compact-hausdorff-tychonoff, thm-forcing-preorders-have-regular-open-completions]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-pit-is-in-corp
 kind: example
 title: "A random evaluation test that separates the zero polynomial from x^2-y^2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-polynomial-identity-testing, thm-schwartz-zippel-lemma, cor-pit-is-in-corp]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

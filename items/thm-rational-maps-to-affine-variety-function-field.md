@@ -2,7 +2,7 @@
 id: thm-rational-maps-to-affine-variety-function-field
 kind: theorem
 title: "Dominant rational maps to an affine variety correspond to injective homomorphisms of function fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, Theorem 3.2.1 together with §3.1-§3.2"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

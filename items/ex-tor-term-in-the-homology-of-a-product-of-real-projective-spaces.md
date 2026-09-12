@@ -2,7 +2,7 @@
 id: ex-tor-term-in-the-homology-of-a-product-of-real-projective-spaces
 kind: example
 title: Tor term in the homology of a product of real projective spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-kunneth-short-exact-sequence-for-homology, prop-the-homology-kunneth-sequence-splits-nonnaturally, lem-real-projective-space-cellular-homology-and-pinch-map, def-balanced-tor-bifunctor, thm-free-modules-are-projective-with-choice-boundary, def-axiom-of-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

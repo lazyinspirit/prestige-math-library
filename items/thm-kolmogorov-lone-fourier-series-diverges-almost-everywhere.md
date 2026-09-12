@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Kolmogorov lone fourier series diverges almost everywhere"
 deps: ["lem-kolmogorov-gliding-hump-series-converges-in-lone", "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

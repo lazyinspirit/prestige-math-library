@@ -2,13 +2,14 @@
 id: def-epsilon-closure-of-a-state-set
 kind: definition
 title: "The epsilon-closure of a set of NFA states"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-nfa-with-epsilon-moves, def-subset-and-proper-subset]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

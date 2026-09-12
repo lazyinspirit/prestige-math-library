@@ -6,6 +6,7 @@ status: published
 origin: pipeline
 deps: [thm-lc-strong-compactness-fine-measures-and-logic, def-lc-fine-ultrafilters-strong-compactness-and-supercompactness, def-lc-complete-ultrafilters-and-measurable-cardinals, thm-ordinal-arithmetic-monotonicity, thm-hartogs, thm-mostowski-collapse]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: lem-rudin-disjoint-box-refinement
 kind: lemma
 title: Disjoint box refinements in the ambient Rudin space
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [def-rudin-ambient-ordinal-box-space, lem-rudin-box-space-basic-neighborhoods-and-p-space, thm-transfinite-recursion, thm-regularity-of-the-alephs, lem-ordinal-basics, def-axiom-of-choice, def-ordinal, thm-cofinality-basics]
 proof_strategy: direct

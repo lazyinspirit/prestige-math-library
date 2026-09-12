@@ -2,7 +2,7 @@
 id: thm-cfls-are-not-closed-under-intersection
 kind: theorem
 title: "Context-free languages are not closed under intersection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-language-generated-by-a-cfg, thm-cfl-closure-under-union-concatenation-star-and-homomorphism, thm-pumping-lemma-for-context-free-languages]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

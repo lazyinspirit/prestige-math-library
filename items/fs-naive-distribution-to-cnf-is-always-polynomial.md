@@ -2,7 +2,7 @@
 id: fs-naive-distribution-to-cnf-is-always-polynomial
 kind: false-statement
 title: "FALSE: distributing an arbitrary formula into CNF always has polynomial size"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-formula-cnf-and-sat, lem-tseitin-transformation-is-linear-size-and-equisatisfiable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

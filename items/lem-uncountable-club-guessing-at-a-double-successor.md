@@ -2,7 +2,7 @@
 id: lem-uncountable-club-guessing-at-a-double-successor
 kind: lemma
 title: Club guessing at the double successor of an uncountable regular cardinal
-status: draft
+status: published
 origin: pipeline
 deps: [thm-small-intersections-of-clubs, thm-regular-cofinality-strata-are-stationary, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

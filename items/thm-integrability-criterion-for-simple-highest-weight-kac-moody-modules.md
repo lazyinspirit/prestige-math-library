@@ -2,13 +2,14 @@
 id: thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules
 kind: theorem
 title: Integrability criterion for simple highest weight kac moody modules
-status: draft
+status: published
 origin: pipeline
 deps: [lem-dominance-is-necessary-for-an-integrable-highest-weight-module, lem-simple-root-power-relations-generate-the-integrable-quotient, thm-kac-moody-verma-module-has-a-unique-simple-quotient]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

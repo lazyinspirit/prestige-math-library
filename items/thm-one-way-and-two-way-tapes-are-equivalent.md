@@ -2,7 +2,7 @@
 id: thm-one-way-and-two-way-tapes-are-equivalent
 kind: theorem
 title: "One-way and two-way infinite tape conventions are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [thm-stay-put-moves-can-be-eliminated, def-language-recognized-and-decided
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

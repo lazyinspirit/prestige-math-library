@@ -2,7 +2,7 @@
 id: prop-tqbf-is-in-pspace
 kind: proposition
 title: "TQBF is in PSPACE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-quantified-boolean-formula-and-tqbf, def-pspace-and-npspace]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

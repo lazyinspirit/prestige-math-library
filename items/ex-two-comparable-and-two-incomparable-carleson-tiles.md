@@ -4,6 +4,7 @@ kind: "example"
 title: "Two comparable and two incomparable carleson tiles"
 deps: ["def-carleson-tiles-wave-packets-and-tile-order"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-regular-functions-form-sheaf-classical
 kind: lemma
 title: "Regular functions on a classical affine variety form a sheaf"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Michael Artin, Notes for a Course in Algebraic Geometry, 2.5"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

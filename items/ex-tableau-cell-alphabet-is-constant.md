@@ -2,7 +2,7 @@
 id: ex-tableau-cell-alphabet-is-constant
 kind: example
 title: "Counting the constant-size extended alphabet for a fixed nondeterministic machine"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-tableau-cell-alphabet-is-constant]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

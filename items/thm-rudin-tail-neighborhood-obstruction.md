@@ -2,7 +2,7 @@
 id: thm-rudin-tail-neighborhood-obstruction
 kind: theorem
 title: Rudin shrinking obstruction
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ordinal-box-space, lem-rudin-neighborhoods-of-initial-top-slices-contain-tails, thm-cofinality-basics, thm-regularity-of-the-alephs, def-axiom-of-choice, lem-ordinal-sum-as-an-order-type, cor-cardinal-absorption]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

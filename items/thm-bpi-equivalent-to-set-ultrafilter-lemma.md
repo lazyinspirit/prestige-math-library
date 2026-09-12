@@ -2,7 +2,7 @@
 id: thm-bpi-equivalent-to-set-ultrafilter-lemma
 kind: theorem
 title: BPI and the set ultrafilter lemma are equivalent
-status: draft
+status: published
 origin: pipeline
 deps: [thm-bpi-equivalent-to-boolean-filter-extension, lem-finite-boolean-algebras-are-powersets-of-atoms, def-filter, def-ultrafilter, lem-fip-generates-filter]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: prop-integrable-weight-sets-and-multiplicities-are-weyl-invariant
 kind: proposition
 title: Integrable weight sets and multiplicities are weyl invariant
-status: draft
+status: published
 origin: pipeline
 deps: [def-integrable-kac-moody-module, def-simple-reflections-and-the-kac-moody-weyl-group, lem-integrability-can-be-checked-on-simple-root-sl2-subalgebras, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, def-axiom-of-choice, cor-every-vector-space-has-a-basis]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

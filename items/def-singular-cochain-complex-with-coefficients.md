@@ -2,7 +2,7 @@
 id: def-singular-cochain-complex-with-coefficients
 kind: definition
 title: Singular cochain complex with coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-chain-complex-and-singular-homology, def-singular-simplex-and-singular-chain-group-with-coefficients, def-singular-boundary-operator]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-rudin-ambient-ordinal-box-space
 kind: definition
 title: The ambient Rudin box space
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ordinal-box-space]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Supercompactness and closed elementary embeddings"
 deps: ["lem-lc-fine-ultrapower-seed-and-normality", "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

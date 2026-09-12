@@ -2,13 +2,14 @@
 id: def-strong-increase-and-bounding-projections-for-countable-products
 kind: definition
 title: Strong increase and bounding projections in countable ordinal products
-status: draft
+status: published
 origin: pipeline
 deps: [def-reduced-ordinal-products-and-scales, thm-cofinality-basics, def-axiom-of-choice, lem-progressive-products-and-true-cofinality-transfers]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

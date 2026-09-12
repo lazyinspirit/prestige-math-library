@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Kolmogorov block polynomial with large partial sums"
 deps: ["def-kolmogorov-analytic-partial-sum-maximal-function", "lem-kolmogorov-atomic-kernel-maxima", "lem-fejer-kernel-is-a-positive-approximate-identity", "thm-continuity-from-below-for-measures", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

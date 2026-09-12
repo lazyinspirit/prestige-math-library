@@ -2,7 +2,7 @@
 id: def-function-field-variety
 kind: definition
 title: "The function field of an irreducible classical affine variety"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Michael Artin, Notes for a Course in Algebraic Geometry, Definition 3.4.3"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

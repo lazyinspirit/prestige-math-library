@@ -2,7 +2,7 @@
 id: lem-the-singular-coboundary-squares-to-zero
 kind: lemma
 title: The singular coboundary squares to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cochain-complex-with-coefficients, thm-the-singular-boundary-squares-to-zero]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

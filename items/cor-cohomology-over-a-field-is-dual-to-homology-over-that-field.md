@@ -2,7 +2,7 @@
 id: cor-cohomology-over-a-field-is-dual-to-homology-over-that-field
 kind: corollary
 title: Cohomology over a field is dual to homology over that field
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cohomology-with-coefficients, lem-singular-uct-extension-from-cycle-projections, def-axiom-of-choice, def-singular-cochain-complex-with-coefficients, thm-every-independent-set-extends-to-a-basis]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

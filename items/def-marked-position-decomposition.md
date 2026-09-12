@@ -2,13 +2,14 @@
 id: def-marked-position-decomposition
 kind: definition
 title: "Marked positions and admissible Ogden decompositions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computation-alphabet-and-word-convention]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

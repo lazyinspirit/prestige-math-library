@@ -2,7 +2,7 @@
 id: lem-rudin-discrete-families-have-discrete-ambient-closures
 kind: lemma
 title: Discrete Rudin families have discrete ambient closures
-status: draft
+status: published
 origin: pipeline
 deps: [lem-rudin-bounded-cofinality-hull-transfer, lem-rudin-box-space-basic-neighborhoods-and-p-space, def-axiom-of-choice, prop-cumulative-hierarchy-transitivity-and-growth]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

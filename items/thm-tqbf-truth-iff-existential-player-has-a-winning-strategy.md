@@ -2,7 +2,7 @@
 id: thm-tqbf-truth-iff-existential-player-has-a-winning-strategy
 kind: theorem
 title: "A quantified Boolean formula is true if and only if the existential player has a winning strategy in its game"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-quantified-boolean-formula-and-tqbf, def-quantified-formula-game]
 proof_strategy: induction
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

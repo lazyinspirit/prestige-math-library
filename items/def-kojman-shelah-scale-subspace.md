@@ -2,13 +2,14 @@
 id: def-kojman-shelah-scale-subspace
 kind: definition
 title: Kojman-Shelah scale subspace
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ordinal-box-space, lem-normalizing-a-scale-at-existing-least-upper-bounds]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

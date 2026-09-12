@@ -2,7 +2,7 @@
 id: thm-cfg-emptiness-and-finiteness-are-decidable
 kind: theorem
 title: "CFG emptiness and finiteness are decidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-language-generated-by-a-cfg, thm-elimination-of-useless-symbols, thm-elimination-of-epsilon-productions, thm-elimination-of-unit-productions]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

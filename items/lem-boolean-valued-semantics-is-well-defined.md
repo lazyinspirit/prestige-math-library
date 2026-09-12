@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Well-definedness of Boolean-valued semantics"
 deps: ["def-boolean-valued-name-semantics", "def-forcing-names-and-name-rank", "thm-recursion-on-well-founded-setlike-relations"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

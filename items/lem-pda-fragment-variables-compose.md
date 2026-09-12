@@ -2,7 +2,7 @@
 id: lem-pda-fragment-variables-compose
 kind: lemma
 title: "PDA fragment variables compose"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pda-computation-fragment-variable]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

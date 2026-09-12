@@ -7,10 +7,10 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-homological-delta-functor, def-cohomological-delta-functor, prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws, ex-a-degreewise-split-sequence-with-nonzero-connecting-map]
+deps: [def-homological-delta-functor, def-cohomological-delta-functor, prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws, thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact, prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign]
 proof_strategy: direct
 verification:
-  audited: 2026-09-05
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -30,13 +30,13 @@ pipeline_run: frontier-30
 > long exact sequence is automatically a delta functor.
 ## Facts & Assumptions
 
-**Given:** The homology delta functor on complexes and one short exact sequence of complexes whose connecting map is nonzero.
+**Given:** The homology delta functor on complexes and the canonical cone sequence of the identity on the stalk complex $\mathbb Z[0]$.
 
 [L1] A delta functor requires naturality of the connecting maps, not only exactness of the long sequence ([[def-homological-delta-functor]], [[def-cohomological-delta-functor]]).
 
 [L2] Homology of complexes is a genuine homological delta functor ([[prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws]]).
 
-[L3] There exists a short exact sequence of complexes with a nonzero connecting map ([[ex-a-degreewise-split-sequence-with-nonzero-connecting-map]]).
+[L3] [[thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact]] makes the cone sequence of $1_{\mathbb Z[0]}$ short exact, and [[prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign]] makes its connecting map $H_1(\mathbb Z[1])\to H_0(\mathbb Z[0])$ equal to $\pm1$ on $\mathbb Z$, hence nonzero.
 
 ## Refutation
 

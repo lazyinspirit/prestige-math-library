@@ -2,7 +2,7 @@
 id: thm-stone-clopen-representation-under-bpi
 kind: theorem
 title: Stone clopen representation under BPI
-status: draft
+status: published
 origin: pipeline
 deps: [def-stone-ultrafilter-space-and-clopens, thm-bpi-equivalent-to-boolean-filter-extension]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

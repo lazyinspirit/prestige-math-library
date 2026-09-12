@@ -2,7 +2,7 @@
 id: def-domain-of-definition-rational-map
 kind: definition
 title: "The maximal domain of definition of a rational map to an affine variety"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ sources:
     - title: "J. S. Milne, Algebraic Geometry, Proposition 5.8"
       url: "https://www.jmilne.org/math/CourseNotes/AG.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

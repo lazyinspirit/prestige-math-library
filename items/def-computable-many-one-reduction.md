@@ -2,13 +2,14 @@
 id: def-computable-many-one-reduction
 kind: definition
 title: "Computable many-one reductions between languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computable-and-partial-computable-function, def-decidable-and-recognizable-language]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cex-model-invariance-means-equal-step-counts
 kind: counterexample
 title: "An equivalent one-tape simulation need not preserve the original step count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [thm-multitape-to-single-tape-time-simulation, def-multitape-and-nondeterm
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

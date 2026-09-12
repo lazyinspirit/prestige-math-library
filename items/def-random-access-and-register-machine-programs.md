@@ -2,7 +2,7 @@
 id: def-random-access-and-register-machine-programs
 kind: definition
 title: "Register programs and RAM programs with unbounded natural-number memory"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-function, def-natural-numbers]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

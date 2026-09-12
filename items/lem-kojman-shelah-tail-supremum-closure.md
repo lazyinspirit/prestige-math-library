@@ -2,7 +2,7 @@
 id: lem-kojman-shelah-tail-supremum-closure
 kind: lemma
 title: Tail suprema land in the scale subspace
-status: draft
+status: published
 origin: pipeline
 deps: [def-kojman-shelah-scale-subspace, lem-scale-tail-suprema-have-prescribed-cofinality, def-axiom-of-choice, thm-regularity-of-the-alephs, thm-cofinality-basics]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

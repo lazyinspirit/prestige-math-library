@@ -4,6 +4,7 @@ kind: "definition"
 title: "Kolmogorov analytic partial sum maximal function"
 deps: ["def-period-one-fourier-coefficients-partial-sums-and-convolution"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

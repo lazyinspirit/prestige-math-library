@@ -2,7 +2,7 @@
 id: thm-ap-equals-pspace
 kind: theorem
 title: "AP equals PSPACE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-alternating-polynomial-time, thm-tqbf-is-pspace-complete, thm-tqbf-tr
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

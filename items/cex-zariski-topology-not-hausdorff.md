@@ -2,7 +2,9 @@
 id: cex-zariski-topology-not-hausdorff
 kind: counterexample
 title: "The Zariski topology on the affine line over an infinite field is not Hausdorff"
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: session
 provenance:
   statement: ai-generated

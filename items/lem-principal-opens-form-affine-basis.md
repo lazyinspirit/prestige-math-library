@@ -2,7 +2,7 @@
 id: lem-principal-opens-form-affine-basis
 kind: lemma
 title: "Principal opens form a basis for the Zariski topology on an affine variety"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.3 and localization discussion"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

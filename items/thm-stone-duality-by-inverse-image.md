@@ -2,7 +2,7 @@
 id: thm-stone-duality-by-inverse-image
 kind: theorem
 title: Stone duality and its natural maps
-status: draft
+status: published
 origin: pipeline
 deps: [thm-stone-clopen-representation-under-bpi, thm-stone-space-recovered-from-its-clopens, def-boolean-homomorphism-and-quotient]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

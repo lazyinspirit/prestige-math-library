@@ -1765,7 +1765,11 @@ from inversion/dense range, not merely from isometry.
 
 **Requires:** FA-6 for Banach–Steinhaus context, FA-23 for smooth cutoffs and
 Schwartz comparison; planned predecessors MT-7, MT-8, and MT-15; and the
-published multivariable-calculus pages.  Sobolev spaces are not required.
+published multivariable-calculus pages.  The published Zorn/AC page supplies
+`thm-zorn`; the local structure proof derives its one required norm-preserving
+extension directly by the chain-union and one-dimensional-extension argument,
+so it does not import the boundary-unsafe choice-strength remarks on the later
+Hahn–Banach application pages.  Sobolev spaces are not required.
 
 **Source backing read:** Dyatlov chs. 2–4 and 6, pp. 27–75 (*Definition of
 distributions*; *Distributions and convergence*; *Localization*;
@@ -1808,7 +1812,7 @@ Items:
 26. `cor-smooth-functions-are-weakly-dense-in-distributions` (corollary).
 27. `thm-distributions-form-a-sheaf` (theorem) — compatible distributions on an open cover glue uniquely, with a locally finite partition of unity proving continuity on each fixed-support test space.
 28. `thm-compactly-supported-distributions-have-global-finite-order` (theorem) — a cutoff equal to one near the support converts the local finite-order estimate into one estimate on all test functions.
-29. `thm-local-structure-of-distributions-as-derivatives-of-continuous-functions` (theorem) — on every compact $K\Subset\Omega$, a distribution agrees on $\mathcal D_K$ with a finite derivative of a continuous regular distribution.
+29. `thm-local-structure-of-distributions-as-derivatives-of-continuous-functions` (theorem) — assuming AC, on every compact $K\Subset\Omega$, a distribution agrees on $\mathcal D_K$ with a finite derivative of a continuous regular distribution; prove the needed extension locally from Zorn.
 30. `thm-global-locally-finite-structure-of-distributions` (theorem) — write every distribution as a locally finite sum $\sum_\alpha\partial^\alpha u_{g_\alpha}$ with continuous $g_\alpha$; finite global order permits only finitely many nonzero orders.
 31. `thm-associativity-of-distribution-convolution-under-compact-support` (theorem) — when the support conditions make every pairing defined, convolution is associative and derivatives commute with convolution.
 

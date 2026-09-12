@@ -4,6 +4,7 @@ kind: "example"
 title: "Identity and successor in a normal ultrapower"
 deps: ["thm-lc-measurability-normal-measures-and-embeddings", "lem-lc-ultrapower-critical-point", "thm-lc-los-schema-for-universe-ultrapowers"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

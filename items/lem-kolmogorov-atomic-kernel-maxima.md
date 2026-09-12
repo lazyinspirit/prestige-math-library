@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Kolmogorov atomic kernel maxima"
 deps: ["lem-kolmogorov-simultaneous-phase-approximation", "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel", "prop-countable-subsets-of-rn-are-lebesgue-null", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

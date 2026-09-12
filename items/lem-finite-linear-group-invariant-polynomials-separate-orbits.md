@@ -2,13 +2,14 @@
 id: lem-finite-linear-group-invariant-polynomials-separate-orbits
 kind: lemma
 title: Finite linear group invariant polynomials separate orbits
-status: draft
+status: "published"
 origin: pipeline
 deps: [def-finite-linear-invariant-and-coinvariant-polynomial-algebras]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

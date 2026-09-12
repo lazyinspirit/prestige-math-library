@@ -9,6 +9,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-12
 sources:
   references:
     - title: "Kunen, Set Theory, Chapter VI Corollary 4.9, p. 175"

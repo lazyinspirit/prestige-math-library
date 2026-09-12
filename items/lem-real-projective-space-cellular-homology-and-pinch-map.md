@@ -2,7 +2,7 @@
 id: lem-real-projective-space-cellular-homology-and-pinch-map
 kind: lemma
 title: Real projective space cellular homology and the pinch map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, prop-cellular-maps-induce-cellular-chain-maps, prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps, thm-global-sphere-degree-is-the-sum-of-local-degrees, lem-local-sphere-orientations-and-finite-puncture-excision, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, def-axiom-of-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

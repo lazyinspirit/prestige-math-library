@@ -2,13 +2,14 @@
 id: prop-integrable-affine-highest-weights-have-nonnegative-integral-level
 kind: proposition
 title: Integrable affine highest weights have nonnegative integral level
-status: draft
+status: published
 origin: pipeline
 deps: [lem-affine-central-coroot-from-the-transpose-null-ray, def-kac-moody-integral-and-dominant-integral-weights, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

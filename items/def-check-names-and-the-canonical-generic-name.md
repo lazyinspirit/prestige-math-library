@@ -4,6 +4,7 @@ kind: "definition"
 title: "Check names without a largest condition"
 deps: ["def-forcing-name-valuation-and-generic-extension", "thm-recursion-on-well-founded-setlike-relations"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-homology-of-a-product-of-spheres-by-kunneth
 kind: example
 title: Homology of a product of spheres by Kunneth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-kunneth-short-exact-sequence-for-homology, cor-homology-of-spheres, def-axiom-of-choice, def-balanced-tor-bifunctor, thm-free-modules-are-projective-with-choice-boundary, def-singular-chain-cross-product-on-generators]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

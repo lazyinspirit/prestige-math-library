@@ -2,7 +2,7 @@
 id: lem-kleene-star-has-the-expected-least-closure-property
 kind: lemma
 title: "Kleene star is the least concatenation-closed language containing $L$ and $\\varepsilon$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-language-concatenation-powers-and-kleene-star]
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

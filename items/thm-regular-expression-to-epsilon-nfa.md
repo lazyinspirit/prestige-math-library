@@ -2,7 +2,7 @@
 id: thm-regular-expression-to-epsilon-nfa
 kind: theorem
 title: "Every regular expression has an equivalent epsilon-NFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-regular-expression-denotation, lem-denotation-is-structurally-well-defined, def-nfa-with-epsilon-moves, def-nfa-acceptance-and-recognized-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

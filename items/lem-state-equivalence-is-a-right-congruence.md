@@ -2,7 +2,7 @@
 id: lem-state-equivalence-is-a-right-congruence
 kind: lemma
 title: "State-equivalent DFA states stay equivalent after every input word"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-right-language-and-equivalent-dfa-states, def-equivalence-relation, def-extended-dfa-transition-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

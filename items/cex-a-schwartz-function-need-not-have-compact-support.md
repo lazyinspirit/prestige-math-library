@@ -15,6 +15,8 @@ sources:
     - title: Gerald Teschl, Topics in Real and Functional Analysis (2017)
       url: https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf
       locator: §14.1
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

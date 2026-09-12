@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Tree and partition characterizations at an inaccessible"
 deps: ["def-lc-weakly-compact-cardinal", "lem-lc-inaccessible-size-and-rank-bounds", "thm-transfinite-recursion", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

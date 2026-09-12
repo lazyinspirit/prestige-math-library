@@ -2,13 +2,14 @@
 id: def-pda-configuration-and-step
 kind: definition
 title: "PDA configurations and one-step moves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-nondeterministic-pushdown-automaton]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

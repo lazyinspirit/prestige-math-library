@@ -6,7 +6,9 @@ deps: [def-left-haar-integral-and-left-haar-measure, lem-haar-covering-ratios-ar
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 sources:
   references:

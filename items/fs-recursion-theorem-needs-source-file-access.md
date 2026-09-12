@@ -2,7 +2,7 @@
 id: fs-recursion-theorem-needs-source-file-access
 kind: false-statement
 title: "FALSE: the recursion theorem requires source-code access"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-kleenes-second-recursion-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

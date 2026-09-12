@@ -2,7 +2,7 @@
 id: ex-polynomially-related-encodings-preserve-polynomial-classes
 kind: example
 title: "Changing between two polynomially related tuple encodings preserves polynomial complexity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [prop-polynomially-related-encodings-preserve-polynomial-classes]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

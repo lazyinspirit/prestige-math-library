@@ -2,7 +2,7 @@
 id: fs-reductions-may-reverse-yes-and-no
 kind: false-statement
 title: "FALSE: a valid many-one reduction may reverse yes-instances and no-instances"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computable-many-one-reduction]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

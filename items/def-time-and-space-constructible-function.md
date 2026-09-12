@@ -2,7 +2,7 @@
 id: def-time-and-space-constructible-function
 kind: definition
 title: "Time-constructible and space-constructible functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-asymptotic-resource-comparison, def-effective-binary-encoding-and-decoder]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

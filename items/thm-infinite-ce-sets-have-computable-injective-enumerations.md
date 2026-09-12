@@ -2,7 +2,7 @@
 id: thm-infinite-ce-sets-have-computable-injective-enumerations
 kind: theorem
 title: "Infinite computably enumerable sets have computable injective enumerations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computably-enumerable-set, def-computable-and-partial-computable-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

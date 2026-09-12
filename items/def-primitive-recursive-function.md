@@ -2,7 +2,7 @@
 id: def-primitive-recursive-function
 kind: definition
 title: "Primitive recursive functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-initial-arithmetic-functions, def-composition-and-primitive-recursion-schemes]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

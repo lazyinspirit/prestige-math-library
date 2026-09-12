@@ -2,13 +2,14 @@
 id: def-integrable-kac-moody-module
 kind: definition
 title: Integrable kac moody module
-status: draft
+status: published
 origin: pipeline
 deps: [def-kac-moody-category-o, def-kac-moody-algebra-associated-to-a-gcm]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

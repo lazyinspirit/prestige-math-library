@@ -13,6 +13,8 @@ sources:
       url: https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf
 status: published
 origin: "pipeline"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

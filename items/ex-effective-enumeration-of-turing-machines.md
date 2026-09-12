@@ -2,7 +2,7 @@
 id: ex-effective-enumeration-of-turing-machines
 kind: example
 title: "Listing the first few well-formed machine codes in shortlex order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [cor-effective-enumeration-of-turing-machines, lem-machine-encoding-is-inj
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

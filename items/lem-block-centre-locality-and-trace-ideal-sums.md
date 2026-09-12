@@ -6,8 +6,10 @@ deps: [def-block-bimodule-for-the-double-group, thm-krull-schmidt-for-finite-dim
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: Webb, A Course in Finite Group Representation Theory, §§11.3, 11.6 and 12.3–12.5, especially pp.240–245

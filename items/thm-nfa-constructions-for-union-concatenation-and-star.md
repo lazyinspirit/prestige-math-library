@@ -2,7 +2,7 @@
 id: thm-nfa-constructions-for-union-concatenation-and-star
 kind: theorem
 title: "NFAs can be constructed for union, concatenation, and Kleene star"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-nfa-acceptance-and-recognized-language, def-language-boolean-operations, def-language-concatenation-powers-and-kleene-star]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

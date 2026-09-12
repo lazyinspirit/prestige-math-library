@@ -16,6 +16,8 @@ sources:
     - title: "Gallier §3.1, acceptable indexing and universal/composition interfaces"
       url: https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf
 proof_strategy: "direct"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Definition

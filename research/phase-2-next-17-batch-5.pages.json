@@ -1,0 +1,2305 @@
+[
+  {
+    "order": 366.013,
+    "id": "cup-cap-cross-products-and-cohomology-rings",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Cup Cap Cross Products and Cohomology Rings",
+    "companion": "cup-cap-cross-products-and-cohomology-rings-examples",
+    "requires": [
+      "cw-complexes-and-cellular-homology",
+      "singular-cohomology-and-coefficient-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-alexander-whitney-diagonal-approximation",
+        "kind": "definition",
+        "title": "Alexander--Whitney map and diagonal approximation",
+        "statement": "For spaces X,Y and a commutative unital ring R, AW:C_n(X times Y;R) to direct-sum_{p+q=n} C_p(X;R) tensor_R C_q(Y;R) sends sigma to sum_{p=0}^n (pr_X sigma)|[v_0,...,v_p] tensor (pr_Y sigma)|[v_p,...,v_n]. The diagonal approximation is D_X=AW composed with Delta_#. Empty spaces and the zero ring give the zero map.",
+        "deps": [
+          "def-singular-cochain-complex-with-coefficients",
+          "def-induced-singular-chain-map",
+          "def-product-topology"
+        ],
+        "strategy": "This is the front/back-face formula. Expanding the alternating boundary makes all middle cuts cancel and leaves the signed tensor differential, so AW and D_X are chain maps. Postcomposition on faces proves naturality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.2; Miller Lecture 28",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+        "kind": "theorem",
+        "title": "Alexander--Whitney and shuffle are natural chain-homotopy inverses",
+        "statement": "The Alexander--Whitney map AW and signed shuffle S are natural chain maps over every commutative unital ring R; AW S and S AW are naturally chain homotopic to the identities and preserve degree-zero augmentation. No AC is required.",
+        "deps": [
+          "def-alexander-whitney-diagonal-approximation",
+          "def-singular-chain-cross-product-on-generators",
+          "lem-singular-chain-cross-product-boundary-formula",
+          "prop-singular-chain-cross-products-are-natural",
+          "lem-singular-product-chain-equivalence-by-simplex-models",
+          "thm-singular-chain-homotopy-formula",
+          "def-singular-cochain-complex-with-coefficients"
+        ],
+        "strategy": "The prerequisite shuffle comparison supplies a specified natural inverse T and homotopies using fixed contractions of simplex models. AW and T agree in degree zero. Inductively, the difference on the universal n-simplex minus the already-built lower homotopy is an augmentation-zero cycle; the fixed model contraction fills it, giving AW~T naturally. Compose with TS~1 and ST~1, then extend scalars to R.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.2; Miller Lemma 33.2",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-singular-cup-product-on-cochains",
+        "kind": "definition",
+        "title": "Singular cup product on cochains",
+        "statement": "Let R be a commutative unital ring and delta phi=phi boundary. For phi in C^p(X;R), psi in C^q(X;R), define (phi cup psi)(sigma)=phi(sigma|[v_0,...,v_p]) psi(sigma|[v_p,...,v_{p+q}]). Equivalently this is diagonal pullback of the AW external cochain formula J(phi,psi)AW. For cocycles its class agrees with diagonal pullback of the earlier additive external product defined using T. No multiplication is assigned to coefficients in a bare abelian group.",
+        "deps": [
+          "def-alexander-whitney-diagonal-approximation",
+          "def-additive-singular-cohomology-cross-product",
+          "def-singular-cochain-complex-with-coefficients",
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "lem-additive-singular-cohomology-cross-product-is-well-defined"
+        ],
+        "strategy": "Evaluate J(phi,psi)AW on the diagonal in bidegree (p,q). Distinguish the earlier T-based external cochain from AW: AW-T=dK+Kd implies J(AW-T)=delta(JK) for cocycles. The tensor-functional Leibniz identity proves the needed closedness. Thus agreement is on cohomology, not an asserted literal cochain equality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.2, Cup Product; Miller Construction 28.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-cup-product-leibniz-identity",
+        "kind": "theorem",
+        "title": "Cup product Leibniz identity",
+        "statement": "For phi in C^p(X;R) and psi in C^q(X;R), delta(phi cup psi)=delta phi cup psi+(-1)^p phi cup delta psi. Thus cocycles multiply and changing either representative changes the product by a coboundary.",
+        "deps": [
+          "def-singular-cup-product-on-cochains",
+          "lem-additive-singular-cohomology-cross-product-is-well-defined"
+        ],
+        "strategy": "Apply the AW chain-map identity and evaluate the signed tensor differential. Expand representative changes and use the identity twice, including delta a cup delta b=delta(a cup delta b), to exhibit every extra term as a coboundary.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher Lemma 3.6; Miller Lecture 28",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-singular-cohomology-ring",
+        "kind": "definition",
+        "title": "Singular cohomology ring",
+        "statement": "For a space X and commutative unital ring R, H^*(X;R)=direct-sum_{n>=0}H^n(X;R), with [phi][psi]=[phi cup psi], is the singular cohomology graded ring. Its unit is the class of the zero-cochain taking value 1 on every singular vertex in every component.",
+        "deps": [
+          "thm-cup-product-leibniz-identity",
+          "def-singular-cohomology-with-coefficients"
+        ],
+        "strategy": "Leibniz gives descent. The proposed unit is closed because it agrees on the endpoints of every edge, and the front/back formula makes it a two-sided unit.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.2, The Cohomology Ring; Miller Definition 29.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-cup-product-is-natural-unital-and-associative",
+        "kind": "proposition",
+        "title": "Cup product is natural, unital and associative",
+        "statement": "For continuous f:X to Y, f^*(a cup b)=f^*a cup f^*b and f^*(1)=1. Cup is associative already on cochains, so f^* is a unital graded-ring homomorphism.",
+        "deps": [
+          "def-singular-cup-product-on-cochains",
+          "def-singular-cohomology-ring",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"
+        ],
+        "strategy": "Postcomposition commutes with every face. Both parenthesizations evaluate the three factors on vertex blocks 0..p, p..p+q, and p+q..p+q+r, proving strict associativity. The unit calculation is immediate.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher Proposition 3.10; Miller Proposition 28.3",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal",
+        "kind": "lemma",
+        "title": "Factor reversal gives the commutativity chain homotopy",
+        "statement": "Let tau interchange X times X and T(a tensor b)=(-1)^{pq}b tensor a in bidegree (p,q). The natural chain maps T AW tau_# and AW are naturally chain homotopic. Their composites with Delta_# are therefore naturally chain homotopic. No AC is required.",
+        "deps": [
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "def-singular-chain-cross-product-on-generators"
+        ],
+        "strategy": "Check the Koszul twist chain identity by expanding the tensor differential. Swapping horizontal and vertical shuffle steps changes the inversion count by pq modulo two, proving tau S=S W. From AS-1=dU+Ud and SA-1=dV+Vd construct B=W A tau, L=W U W and K=L A-B V; then dK+Kd=B-A. Precompose with the diagonal. No choices or acyclic-model existence appeal remain.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher proof of Theorem 3.11; Miller Lecture 29",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-singular-cohomology-is-graded-commutative",
+        "kind": "theorem",
+        "title": "Singular cohomology is graded commutative",
+        "statement": "For a in H^p(X;R), b in H^q(X;R) over a commutative unital ring, a cup b=(-1)^{pq}b cup a. The defining cochain operation need not be graded commutative.",
+        "deps": [
+          "lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal",
+          "def-singular-cohomology-ring"
+        ],
+        "strategy": "Evaluate cocycles on the two homotopic diagonal approximations. The tensor twist contributes (-1)^{pq}; evaluation on a chain homotopy differs by a coboundary, so equality holds on classes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher Theorem 3.11; Miller Lecture 29",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-relative-cup-product",
+        "kind": "definition",
+        "title": "Relative cup product for an excisive triad",
+        "statement": "For subspaces A,B of X, the front/back formula sends C^p(X,A;R) tensor C^q(X,B;R) to cochains vanishing on C_*(A)+C_*(B). If A and B are open and cover A union B (or a stated neighborhood/subcomplex replacement gives this chain comparison), small-chain excision identifies the target with H^{p+q}(X,A union B;R), defining the relative cup product. A hypothesis is necessary because a simplex in A union B need not lie wholly in either member.",
+        "deps": [
+          "def-singular-cup-product-on-cochains",
+          "def-relative-singular-cochain-complex",
+          "lem-two-open-cover-small-chains-are-the-sum-of-the-two-singular-subcomplexes",
+          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
+          "lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision",
+          "thm-barycentric-subdivision-is-chain-homotopic-to-the-identity",
+          "def-barycentric-subdivision-chain-operator",
+          "def-barycentric-subdivision-prism-homotopy",
+          "thm-cup-product-leibniz-identity"
+        ],
+        "strategy": "A simplex wholly in A kills the first factor and one wholly in B kills the second. Leibniz gives descent for C_*(A)+C_*(B). Subdivide chains subordinate to the two-open cover; the small-chain inclusion is a chain-homotopy equivalence, identifying that sum with chains on A union B. No arbitrary-triad claim is made.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher relative products after Proposition 3.10; Miller Lecture 34",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-relative-cup-products-are-natural-and-compatible-with-connectors",
+        "kind": "proposition",
+        "title": "Relative cup products are natural and connector-compatible",
+        "statement": "For maps of excisive triples, relative cup products are natural. If d is the cohomology connector, x has degree p, and restrictions make the products meaningful, d(x cup i^*y)=d(x) cup y and d(i^*x cup y)=(-1)^p x cup d(y), using the positive coboundary and displayed factor order.",
+        "deps": [
+          "def-relative-cup-product",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-cup-product-leibniz-identity",
+          "prop-cup-product-is-natural-unital-and-associative"
+        ],
+        "strategy": "Use cochain lifts in the short exact relative-cochain sequences. Apply delta and Leibniz: the first closed factor leaves no sign and the second connector crosses a degree-p factor, producing (-1)^p. These lifted coboundaries define the connectors. Naturality is termwise, and small-chain comparison transports the identities.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher relative cup products; Miller Lecture 34",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-cap-product-with-cohomology-first",
+        "kind": "definition",
+        "title": "Cap product with cohomology written first",
+        "statement": "For phi in C^p(X;R) and an n-simplex sigma with n>=p, phi cap sigma=phi(sigma|[v_0,...,v_p]) sigma|[v_p,...,v_n], extended R-bilinearly and zero for n<p. Cohomology is written first; evaluation uses the front face and retains the back face.",
+        "deps": [
+          "def-singular-cup-product-on-cochains",
+          "def-singular-simplex-and-singular-chain-group-with-coefficients"
+        ],
+        "strategy": "This is the (p,n-p) component of the AW diagonal followed by evaluation in the first tensor factor. Fixing the order here fixes all later signs.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.3, Cap Product; Miller Lecture 34",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-cap-product-boundary-identity",
+        "kind": "theorem",
+        "title": "Cap product boundary identity",
+        "statement": "For phi in C^p(X;R) and c in C_n(X;R), boundary(phi cap c)=(-1)^p(phi cap boundary c-delta phi cap c). Therefore cap descends to H^p(X;R) tensor H_n(X;R) to H_{n-p}(X;R).",
+        "deps": [
+          "def-cap-product-with-cohomology-first",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-boundary-operator"
+        ],
+        "strategy": "Expand the retained back-face boundary. Internal faces match phi cap boundary c; the omitted first back face is the final face in delta phi with the displayed sign. Regroup, then apply the identity to cycles, boundaries, cocycles and coboundaries.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher cap boundary formula p.239; Miller Lecture 34",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-cap-product-naturality-and-projection-formula",
+        "kind": "proposition",
+        "title": "Cap naturality and projection formula",
+        "statement": "For f:X to Y, f_*(f^*alpha cap x)=alpha cap f_*x. Also (alpha cup beta) cap x=beta cap(alpha cap x) under the cohomology-first convention.",
+        "deps": [
+          "thm-cap-product-boundary-identity",
+          "def-singular-cup-product-on-cochains",
+          "prop-cup-product-is-natural-unital-and-associative"
+        ],
+        "strategy": "Postcomposition commutes with front/back restrictions. Both projection-formula sides evaluate alpha on 0..p, beta on p..p+q, retain p+q..n, and multiply in the same order. Boundary identity gives descent.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher cap formula (20); Miller Proposition 34.1",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-relative-cap-product",
+        "kind": "definition",
+        "title": "Relative cap products with quotient domains displayed",
+        "statement": "For subspaces A,B of X the chain formula induces C^p(X,A;R) tensor C_n(X)/(C_n(A)+C_n(B)) to C_{n-p}(X,B;R). Under the excisive hypotheses of the relative cup definition this gives H^p(X,A) tensor H_n(X,A union B) to H_{n-p}(X,B), including H^p(X,A) tensor H_n(X,A) to H_{n-p}(X) and H^p(X,A) tensor H_n(X) to H_{n-p}(X,A).",
+        "deps": [
+          "def-relative-cup-product",
+          "thm-cap-product-boundary-identity",
+          "def-relative-singular-homology"
+        ],
+        "strategy": "Chains in B retain a back face in B; chains in A evaluate to zero. Thus both quotient relations are respected. The boundary identity proves descent, and the same small-chain comparison replaces the sum by A union B only under the stated hypotheses.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher relative cap products pp.239--241; Miller Lecture 34",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-relative-singular-product-chain-equivalence-for-cw-pairs",
+        "kind": "lemma",
+        "title": "Relative singular product comparison for CW pairs",
+        "statement": "For CW pairs (X,A),(Y,B) with supplied characteristic maps and any commutative unital ring R, the natural relative shuffle C(X,A;R) tensor C(Y,B;R) to C(X times Y,A times Y union X times B;R) is a chain homotopy equivalence. Its dual and inverse AW comparison identify relative external products, naturally on cohomology. Ordinary product topologies, unnormalized chains, arbitrary dimensions, no AC.",
+        "deps": [
+          "prop-relative-cw-inclusions-are-cofibrations",
+          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
+          "def-prism-operator-for-a-homotopy",
+          "lem-the-prism-triangulation-has-the-stated-oriented-boundary",
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "def-relative-singular-cochain-complex",
+          "def-relative-cup-product"
+        ],
+        "strategy": "Use the HEP strip retractions to thicken the product triad. Combine the small-chain retraction with a preserving prism to contract the difference of the two quotient complexes. Extend that contraction on the singular basis and descend natural AW/shuffle homotopies. Dualize the explicit identities.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.B, printed p.276 relative quotient comparison and pp.277–278 shuffle; local proof gives the singular chain/cochain comparison",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses",
+        "kind": "lemma",
+        "title": "Relative cohomological Kunneth under finite free homology hypotheses",
+        "statement": "Assume AC. For CW pairs (X,A),(Y,B), a commutative PID R, and every H_q(Y,B;R) finite free, the relative external product direct-sum_{p+q=n} H^p(X,A;R) tensor H^q(Y,B;R) to H^n(X times Y,A times Y union X times B;R) is an isomorphism. The symmetric finite-free homology hypothesis suffices. No dimension or singular-chain-rank bound.",
+        "deps": [
+          "lem-relative-singular-product-chain-equivalence-for-cw-pairs",
+          "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-relative-singular-cochain-complex",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Deform the free relative singular chain complex onto its degreewise finite-free homology using explicitly computed PID sections. Evaluate duals against a finite basis in each degree, retain finite total-degree diagonals, and identify the resulting comparison with the actual relative AW external product. Spell out the symmetric sign and every AC selection.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, §3.B p.276 relative quotient; §3.2 pp.216–219 cohomological comparison. Local algebra proves the exact finite-free homology version.",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+        "kind": "theorem",
+        "title": "Cohomological Kunneth cross product is a ring isomorphism",
+        "statement": "Over any commutative unital R, external product is multiplicative for the graded tensor multiplication with Koszul sign, choice-free. Assuming AC and R a commutative PID, it is an isomorphism for arbitrary spaces if one factor has finite-free R-homology in every degree. For CW pairs the same holds for the relative external product when one relative homology factor is finite free in every degree, without dimension or chain-rank bounds. Absolute maps preserve units; relative rings need not have units. AC only for additive bijectivity.",
+        "deps": [
+          "thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses",
+          "thm-singular-cohomology-is-graded-commutative",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "def-relative-cup-product",
+          "def-axiom-of-choice",
+          "lem-relative-singular-product-chain-equivalence-for-cw-pairs",
+          "lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses",
+          "lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal",
+          "thm-cup-product-leibniz-identity",
+          "def-singular-cup-product-on-cochains",
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "lem-additive-singular-cohomology-cross-product-is-well-defined"
+        ],
+        "strategy": "Identify the absolute AW product with the additive shuffle-inverse map. For relative rings compare the two subalgebras of cochains through the quotient-cochain isomorphism. The natural diagonal homotopy supplies a middle-factor swap primitive vanishing on both product subspaces; Leibniz places the four-factor correction in the same quotient algebra. Apply the exact absolute and local relative additive suppliers only after multiplicativity is established.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher Theorems 3.15 and 3.18; Miller Proposition 29.2 and Theorem 33.3",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-local-coordinate-cup-products-generate-top-relative-cohomology",
+        "kind": "lemma",
+        "title": "Local coordinate cup products generate top relative cohomology",
+        "statement": "Assume AC and R=Z or F2. For p,q>=1, the relative cup product for the two open coordinate complements in R^{p+q} sends the projection pullbacks of the local degree-p and degree-q generators to a top local generator. With integral generators dual to positively oriented coordinate cubes, the result is the positive generator for the concatenated coordinates. All comparisons with CW cube pairs are proved explicitly.",
+        "deps": [
+          "lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses",
+          "lem-relative-singular-product-chain-equivalence-for-cw-pairs",
+          "prop-relative-cup-products-are-natural-and-compatible-with-connectors",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-naturality-of-the-singular-cohomology-pair-sequence",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "def-oriented-cellular-chain-group",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "def-singular-chain-cross-product-on-generators",
+          "lem-singular-chain-cross-product-boundary-formula",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use radial deformations and the natural cohomology pair sequence to compare punctured Euclidean pairs, their coordinate complements and product complements with finite CW cube pairs. Apply the exact relative finite-free Kunneth lemma and identify its actual product. Evaluate AW against the relative shuffle of positive cube generators; permutation determinants fix the integral sign. Treat p=1 and q=1 with the H0 quotient by constants.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, proof of Theorem 3.19, printed p.221, local coordinate/cube product; detailed comparison supplied locally",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-cup-length-over-a-coefficient-ring",
+        "kind": "definition",
+        "title": "Cup length over a coefficient ring",
+        "statement": "For nonempty X and commutative unital R, cup-length_R(X) is the supremum in nonnegative integers union {infinity} of k for which positive-degree reduced classes a_1,...,a_k have nonzero product. It is 0 if none exists and infinity if lengths are unbounded.",
+        "deps": [
+          "def-singular-cohomology-ring",
+          "thm-singular-cohomology-is-graded-commutative",
+          "prop-cup-product-is-natural-unital-and-associative"
+        ],
+        "strategy": "The supremum convention covers absence of a largest finite length. Positive degree prevents unit-padding, and ring naturality gives homotopy invariance.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.2 ring examples; Miller Lectures 28--29",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-positive-degree-cup-products-on-a-suspension-vanish",
+        "kind": "proposition",
+        "title": "Positive-degree cup products on a suspension vanish",
+        "statement": "For a nonempty CW complex X and its two-cone unreduced suspension Sigma X, every product of two positive-degree reduced classes over a commutative unital ring is zero; cup-length is at most 1.",
+        "deps": [
+          "def-relative-cup-product",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "def-adjunction-cone-suspension",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "def-cup-length-over-a-coefficient-ring",
+          "thm-the-exponential-law"
+        ],
+        "strategy": "Cover Sigma X by its two contractible cone neighborhoods U,V. Homotopy invariance and the direct cochain calculation for a point make their positive-degree cohomology zero. Exactness therefore lifts the two factors to H^*(Sigma X,U) and H^*(Sigma X,V). Their relative product lies in H^*(Sigma X,U union V)=H^*(Sigma X,Sigma X)=0 and maps to the absolute product.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher relative cup method §3.2; Miller Lectures 28--29",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-integral-surface-cup-pairing-from-the-oriented-polygon",
+        "kind": "lemma",
+        "title": "Integral surface cup pairing from the oriented polygon",
+        "statement": "Assume AC for UCT. For the closed oriented genus-g surface, H^0=Z, H^1=Z^{2g}, H^2=Z omega and higher groups vanish. The edge-dual classes a_i,b_i obey a_i b_j=delta_ij omega, b_i a_j=-delta_ij omega, a_i a_j=b_i b_j=0, with omega normalized to evaluate as +1 on the oriented polygon cycle. Positive-degree products involving omega vanish; g=0 included.",
+        "deps": [
+          "thm-cellular-homology-computes-singular-homology",
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "def-oriented-cellular-chain-group",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "def-singular-cup-product-on-cochains",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "thm-singular-cohomology-is-graded-commutative",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Construct the signed central-fan singular cycle and prove its cellular generator normalization through the disk pair. Use UCT only to select actual singular edge-dual cocycles. Their values on radial edges satisfy a recurrence from the singular triangle cocycle equations. Four contributions per commutator block sum to u(a_i)v(b_i)-u(b_i)v(a_i), yielding all cup products and signs.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Example 3.7, pp207–208; complete signed singular fan calculation",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.014,
+    "id": "cup-cap-cross-products-and-cohomology-rings-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Cup Cap Cross Products and Cohomology Rings — Examples",
+    "companion": "cup-cap-cross-products-and-cohomology-rings",
+    "requires": [
+      "cup-cap-cross-products-and-cohomology-rings",
+      "koszul-complexes-and-regular-sequences"
+    ],
+    "items": [
+      {
+        "id": "ex-integral-cohomology-ring-of-a-torus",
+        "kind": "example",
+        "title": "Integral cohomology ring of a torus",
+        "statement": "Assume AC for the current UCT and additive Kunneth suppliers. For T^2=S^1 times S^1, H^*(T^2;Z) is Lambda_Z(x,y), |x|=|y|=1, x^2=y^2=0, xy=-yx, and xy evaluates to +1 on the positively oriented product cycle. The product signs and normalization calculation themselves are choice-free.",
+        "deps": [
+          "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+          "cor-homology-of-spheres",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "def-axiom-of-choice",
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "def-singular-chain-cross-product-on-generators",
+          "lem-singular-chain-cross-product-boundary-formula",
+          "thm-topological-kunneth-short-exact-sequence-for-homology",
+          "def-exterior-algebra-of-a-finite-free-module"
+        ],
+        "strategy": "UCT gives H^0(S^1)=H^1(S^1)=Z and no other groups. Kunneth sends the two factor generators to x,y and their tensor to xy. Dimension forces both squares to vanish; the tensor-ring Koszul sign gives yx=-xy. AC is inherited only from the current UCT/Kunneth suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Example 3.16, printed p.216 (products of odd-dimensional spheres)",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-integral-cohomology-ring-of-an-orientable-surface",
+        "kind": "example",
+        "title": "Integral cohomology ring of a closed orientable surface",
+        "statement": "Assume AC for UCT. For the closed oriented genus-g surface, H^0=Z, H^1=Z^{2g}, H^2=Z omega and higher groups vanish. The edge-dual classes a_i,b_i obey a_i b_j=delta_ij omega, b_i a_j=-delta_ij omega, a_i a_j=b_i b_j=0, with omega normalized to evaluate as +1 on the oriented polygon cycle. Positive-degree products involving omega vanish; g=0 included.",
+        "deps": [
+          "thm-cellular-homology-computes-singular-homology",
+          "def-cellular-boundary-from-three-consecutive-skeleta",
+          "def-oriented-cellular-chain-group",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "def-singular-cup-product-on-cochains",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "thm-singular-cohomology-is-graded-commutative",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Construct the signed central-fan singular cycle and prove its cellular generator normalization through the disk pair. Use UCT only to select actual singular edge-dual cocycles. Their values on radial edges satisfy a recurrence from the singular triangle cocycle equations. Four contributions per commutator block sum to u(a_i)v(b_i)-u(b_i)v(a_i), yielding all cup products and signs.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher Example 3.7",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-mod-two-cohomology-ring-of-real-projective-space",
+        "kind": "example",
+        "title": "Mod-two cohomology ring of real projective space",
+        "statement": "Assume AC. For n>=0, H^*(RP^n;F2)=F2[x]/(x^{n+1}), |x|=1. Standard restrictions preserve x; at n=0 the named degree-one class is zero.",
+        "deps": [
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-naturality-of-the-singular-cohomology-pair-sequence",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-excision-for-singular-cohomology",
+          "lem-local-coordinate-cup-products-generate-top-relative-cohomology",
+          "prop-relative-cup-products-are-natural-and-compatible-with-connectors",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the standard one-cell-in-each-dimension CW structure. The lift of each attaching map to the sphere has incidence degree 1+(-1)^k, so the integral cellular differential is 2 in even positive degrees and 0 in odd degrees. Cellular comparison and the finite-field UCT give one F_2 in degrees 0..n. For i+j=n, embed RP^i and RP^j as complementary coordinate projective subspaces meeting at one point p. Excision and the explicit deformation retractions of their complements identify their generators with the local classes of the coordinate factors R^i,R^j in the affine chart at p. Relative Kunneth sends their cross product to the local top generator, so naturality makes every x^n nonzero. Restriction and dimension give the truncated polynomial ring. AC is inherited from the current finite-field cohomology/Kunneth suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Theorem 3.19, complete finite-dimensional proof pp220–221",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-integral-cohomology-ring-of-complex-projective-space",
+        "kind": "example",
+        "title": "Integral cohomology ring of complex projective space",
+        "statement": "Assume AC. For n>=0, H^*(CP^n;Z)=Z[u]/(u^{n+1}), |u|=2, normalized by evaluation +1 on complex-oriented CP^1 when n>=1; restrictions preserve u. At n=0 the named class is zero.",
+        "deps": [
+          "thm-cellular-homology-computes-singular-homology",
+          "def-oriented-cellular-chain-group",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-naturality-of-the-singular-cohomology-pair-sequence",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "thm-excision-for-singular-cohomology",
+          "lem-local-coordinate-cup-products-generate-top-relative-cohomology",
+          "prop-relative-cup-products-are-natural-and-compatible-with-connectors",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The standard CW structure has one cell in each even dimension through 2n and none in odd dimensions, so its cellular boundary is zero. Cellular comparison and UCT give one Z in each even cohomological degree through 2n. Repeat the complementary-coordinate-subspace proof for CP^i,CP^j inside CP^{i+j}: they meet in one point, their complements deformation retract onto the preceding projective subspaces, and the affine chart is C^i times C^j with product complex orientation. Excision and relative Kunneth therefore make the cup of generators a top generator. Induction yields u^k nonzero and normalized positively; restriction and dimension give the quotient. AC is inherited only from the current UCT and Kunneth suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Theorem 3.19, complete finite-dimensional proof pp220–221; complex signs and CW construction supplied explicitly",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-cap-product-on-the-oriented-circle",
+        "kind": "example",
+        "title": "Cap product on the oriented circle",
+        "statement": "Let z be the positive singular one-cycle going once around S^1 and alpha in H^1(S^1;Z) evaluate to 1 on z. With cohomology written first, alpha cap [z] is the positive generator of H_0(S^1;Z).",
+        "deps": [
+          "def-cap-product-with-cohomology-first",
+          "thm-cap-product-boundary-identity",
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "cor-homology-of-spheres"
+        ],
+        "strategy": "Choose the usual single singular loop sigma with coincident endpoints representing the positive class z, and a cocycle representative alpha with alpha(sigma)=1. The cap formula evaluates on the full one-simplex and retains its terminal vertex, so alpha cap sigma is that vertex. The direct H_0 path-component description identifies it with the positive generator; the boundary identity verifies passage to classes. The assumed evaluation normalization removes any need for a prerequisite example-page computation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher cap-product construction p.239",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-same-additive-cohomology-different-rings-cp-three-and-a-wedge",
+        "kind": "example",
+        "title": "Equal additive cohomology but different rings",
+        "statement": "Assume AC. CP^3 and S^2 wedge S^4 wedge S^6 have equal integral cohomology groups in every degree, but their graded cohomology rings are not isomorphic: the CP degree-two generator has nonzero square, whereas every product of positive-degree classes on the wedge is zero.",
+        "deps": [
+          "ex-integral-cohomology-ring-of-complex-projective-space",
+          "thm-cellular-homology-computes-singular-homology",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "prop-cup-product-is-natural-unital-and-associative",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Compute the finite wedge cellular chains and the actual summand inclusions, then use natural UCT evaluation to make restriction to all sphere summands jointly injective in positive degrees. A product restricts to zero on every sphere for degree reasons, so is zero. Contrast the primitive nonzero square from the completed CP ring calculation; AC inherited from UCT and CP local additive supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher cohomology-ring examples §3.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-the-cup-product-of-arbitrary-abelian-group-valued-cochains-is-not-canonical",
+        "kind": "counterexample",
+        "title": "An additive coefficient group does not determine a cup multiplication",
+        "statement": "The additive group Z^2 supports nonisomorphic unital commutative ring structures Z times Z and Z[epsilon]/(epsilon^2). Additive coefficients alone do not specify a unital cup multiplication: no unital bilinear multiplication on Z^2 is invariant under all additive automorphisms. The zero bilinear pairing is canonical but does not give a unit on this nonzero group.",
+        "deps": [
+          "def-singular-cup-product-on-cochains"
+        ],
+        "strategy": "Display the coordinate multiplications and units; classify idempotents in both rings. Equivariance under minus identity would force twice every product to vanish, hence every product to be zero on Z^2, contradicting a unit. Relate this missing coefficient multiplication to the front/back formula, while acknowledging the canonical zero pairing.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher §3.2 coefficient-ring warning",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-cochain-cup-product-is-not-graded-commutative-on-the-nose",
+        "kind": "counterexample",
+        "title": "Cochain cup product is not strictly graded commutative",
+        "statement": "On the standard singular two-simplex, there are integral one-cochains alpha,beta with (alpha cup beta)(id_Delta2)=1 but (beta cup alpha)(id_Delta2)=0. Thus strict graded commutativity fails before passage to cohomology, even though the induced ring is graded commutative.",
+        "deps": [
+          "def-singular-cup-product-on-cochains",
+          "thm-singular-cohomology-is-graded-commutative"
+        ],
+        "strategy": "Let alpha be 1 on the front edge [0,1] and zero on all other singular one-simplex basis elements; let beta be 1 on [1,2] and zero otherwise. The front/back formula gives alpha cup beta=1 on id_Delta2, while beta vanishes on [0,1], so beta cup alpha=0 there. These need not be cocycles; the example concerns cochains.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher proof of Theorem 3.11 and cup formula",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.015,
+    "id": "orientations-poincare-lefschetz-and-alexander-duality",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Orientations Poincare Lefschetz and Alexander Duality",
+    "companion": "orientations-poincare-lefschetz-and-alexander-duality-examples",
+    "requires": [
+      "relative-homology-excision-and-mayer-vietoris",
+      "cup-cap-cross-products-and-cohomology-rings",
+      "simplicial-subdivision-and-simplicial-approximation",
+      "the-total-derivative"
+    ],
+    "items": [
+      {
+        "id": "def-topological-manifold-with-and-without-boundary",
+        "kind": "definition",
+        "title": "Topological manifolds with and without boundary",
+        "statement": "An n-dimensional topological manifold with boundary is a Hausdorff second-countable space locally homeomorphic to open subspaces of the closed half-space R^n_+; its boundary is the set of points carried to the hyperplane boundary in some half-space chart, and its interior is the complement. A manifold without boundary has empty boundary, equivalently it is locally Euclidean. For n=0 the boundary is empty. Components and the empty manifold are allowed.",
+        "deps": [
+          "def-hausdorff-space",
+          "def-countable",
+          "def-topology-basis-subbasis",
+          "def-subspace-topology-top"
+        ],
+        "strategy": "This fixes the Hausdorff and second-countable convention and the half-space model. Intrinsic independence of the chart and of n is not assumed here; it is established by the following local-homology theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+        "kind": "theorem",
+        "title": "Local homology detects manifold dimension, interior, and boundary",
+        "statement": "Let M be an n-manifold with boundary and x in M. With integral coefficients, H_k(M,M-{x}) is Z for k=n and zero otherwise when x is interior, and is zero in every degree when x is a boundary point. Consequently the boundary subset is intrinsic and n is intrinsic when M is nonempty, and homeomorphisms preserve them. The same calculation holds over a coefficient ring R, with Z replaced by R at interior points.",
+        "deps": [
+          "def-topological-manifold-with-and-without-boundary",
+          "thm-excision-for-singular-homology",
+          "cor-homology-of-spheres",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "prop-relative-homology-is-functorial-for-maps-of-pairs"
+        ],
+        "strategy": "Excise the closed complement of a small coordinate ball. Compute point homology directly and use explicit contractions and the pair exact sequence. A punctured interior ball retracts to a sphere; a punctured boundary half-ball contracts toward a point strictly above the hyperplane. Integral local support distinguishes boundary membership in every chart. Any nonempty chart contains an interior point, which detects the dimension; the empty space has no intrinsic dimension.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3, pp.230–231",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-coordinate-ball-classes-identify-local-homology-stalks",
+        "kind": "lemma",
+        "title": "Coordinate-ball classes identify local homology stalks",
+        "statement": "Let M be a boundaryless n-manifold and K a closed coordinate ball of positive radius lying inside a larger concentric chart ball. For every x in int K and commutative unital ring R, the restriction H_n(M,M-K;R) to H_n(M,M-{x};R) is an isomorphism. If another such coordinate ball J lies inside int K, restriction from K to J is an isomorphism and commutes with all point restrictions over int J. In dimension zero use singleton chart balls.",
+        "deps": [
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "thm-excision-for-singular-homology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "def-relative-homology-connecting-homomorphism-on-cycles",
+          "cor-the-long-exact-homology-sequence-is-natural",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "prop-relative-homology-is-functorial-for-maps-of-pairs",
+          "thm-heine-borel-rn",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "strategy": "Excise outside the larger chart ball. Retract its annulus onto an intermediate sphere. After translation by minus x, the sphere inclusion is homotopic through u-tx to the centered sphere inclusion in punctured Euclidean space. Pair connecting maps give the required restriction isomorphism, and functoriality gives nested-ball compatibility.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, local orientation comparisons, pp.233–234",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-orientation-local-system-and-orientation-cover",
+        "kind": "definition",
+        "title": "Orientation local system and orientation cover",
+        "statement": "For a boundaryless n-manifold M, the orientation local system has stalk O_x=H_n(M,M-{x};Z); restriction through sufficiently small coordinate balls and homotopy invariance transport stalk generators along paths. The space of the two generators in each stalk, with the chartwise topology, is the orientation double cover, componentwise and also for the empty manifold.",
+        "deps": [
+          "lem-coordinate-ball-classes-identify-local-homology-stalks",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "prop-relative-homology-is-functorial-for-maps-of-pairs",
+          "thm-heine-borel-rn",
+          "thm-lebesgue-number-lemma"
+        ],
+        "strategy": "Use the authored uniform coordinate-ball restriction lemma. For two ball sections agreeing at x, restrict to a smaller closed coordinate ball inside their intersection to prove agreement on a neighborhood. This gives an étale local system and two-generator covering. Finite subdivisions of paths and a finite grid for path homotopies establish choice-independent transport using the local trivializations.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3, pp.233–235",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-r-orientation-of-a-topological-manifold",
+        "kind": "definition",
+        "title": "R-orientation of a topological manifold",
+        "statement": "For a commutative unital ring R, an R-orientation of a boundaryless n-manifold is a continuous section x |-> mu_x of the local R-homology system whose value generates H_n(M,M-{x};R) as an R-module. A manifold with boundary is R-oriented when its interior is so oriented. Choices are made independently on components.",
+        "deps": [
+          "def-orientation-local-system-and-orientation-cover",
+          "def-commutative-ring",
+          "lem-coordinate-ball-classes-identify-local-homology-stalks",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension"
+        ],
+        "strategy": "Construct the local R-system directly by the uniform ball restriction isomorphisms, with the same overlap proof as for the integral system. Define orientation as a section of local module generators; in a ball chart these are exactly units times one generator. Cover boundaryless interiors and include the zero ring explicitly, without silently selecting orientations on infinitely many components.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3, pp.235–236",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+        "kind": "proposition",
+        "title": "Every manifold is F2-orientable and orientability is componentwise",
+        "statement": "Every topological manifold is canonically F_2-oriented. For any commutative unital R, restriction gives a bijection between R-orientations of M and supplied families of R-orientations of its connected components. These assertions and finiteness of the component set for compact M are choice-free. Assuming AC only for selection of a component orientation from each nonempty orientation set, M is R-orientable if and only if each component is R-orientable.",
+        "deps": [
+          "def-r-orientation-of-a-topological-manifold",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "thm-path-connected-implies-connected",
+          "def-connected-component-and-quasicomponent",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The F_2 generator is unique in each rank-one stalk. Convex half-ball neighborhoods are connected and lie inside components, proving components are open. Restriction and union of already supplied sections are inverse constructions. Compactness makes the component cover finite. Use AC explicitly only to pass from separate existence of component orientations to a family of them.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-relative-homology-mayer-vietoris-for-closed-supports",
+        "kind": "lemma",
+        "title": "Relative homology Mayer–Vietoris for closed supports",
+        "statement": "For closed subsets A,B of X, write H_k(X||K;R)=H_k(X,X-K;R). There is an exact sequence from H_{k+1}(X||A intersect B) to H_k(X||A union B), then to H_k(X||A) direct-sum H_k(X||B), then to H_k(X||A intersect B); the latter two maps are diagonal restriction and the difference of restrictions. It includes empty supports and requires no AC.",
+        "deps": [
+          "def-relative-singular-homology",
+          "def-relative-cup-product",
+          "thm-long-exact-sequence-in-homology"
+        ],
+        "strategy": "Form the short exact sequence of quotient chain complexes for C(U), C(V), with U=X-A and V=X-B. Identify their intersection generatorwise and their sum quotient by the authored open-cover quotient-chain homotopy equivalence. Apply the homological exact-sequence theorem with diagonal and difference signs.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Lemma 3.27 proof, first exact sequence, p.237",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+        "kind": "lemma",
+        "title": "Compatible orientation classes over compact subsets",
+        "statement": "Let M be a boundaryless n-manifold and K compact. Then H_i(M,M-K;R)=0 for i>n, and restriction of H_n(M,M-K;R) to all point stalks over K is injective. Every continuous section of the local R-homology system on M is realized over K by a unique class. In particular an R-orientation determines [M]_K restricting to its local generators, compatible under inclusion of compact sets and splitting over the finitely many components meeting K. No AC is required.",
+        "deps": [
+          "def-r-orientation-of-a-topological-manifold",
+          "def-relative-singular-homology",
+          "thm-excision-for-singular-homology",
+          "lem-relative-homology-mayer-vietoris-for-closed-supports",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-heine-borel-rn",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-path-connected-implies-connected",
+          "def-connected-component-and-quasicomponent",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension"
+        ],
+        "strategy": "Prove high-degree vanishing, pointwise injectivity and section realization together. Verify convex compact coordinate supports by radial retractions, then finite unions via closed-support Mayer–Vietoris. Thicken the boundary-avoiding support of each relative cycle by finitely many closed balls centered in K to handle an arbitrary compact coordinate support. Finally cover a general compact set by finitely many compact chart pieces and use the same union induction. Uniqueness then gives natural restrictions and componentwise splitting. Component openness is proved directly from connected ball neighborhoods.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Lemma 3.27, pp.236–238",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Lecture 32",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-fundamental-class-of-a-compact-oriented-manifold",
+        "kind": "definition",
+        "title": "Fundamental class of a compact oriented manifold",
+        "statement": "For a compact R-oriented boundaryless n-manifold M, its fundamental class [M] in H_n(M;R)=H_n(M,M-M;R) is the class [M]_M. It restricts to the chosen local generator on every component; reversing one component orientation negates that component summand.",
+        "deps": [
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "thm-excision-for-singular-homology"
+        ],
+        "strategy": "Apply the preceding existence-and-uniqueness lemma to K=M. Compactness leaves finitely many open-and-closed components, so the class is the finite direct sum of their prescribed classes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.26 and Lemma 3.27",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-top-homology-characterizes-compact-orientable-manifolds",
+        "kind": "theorem",
+        "title": "Top homology of a connected manifold",
+        "statement": "If M is a nonempty connected boundaryless n-manifold, then H_i(M;R)=0 for i>n. If M is noncompact, H_n(M;R)=0. If M is compact, restriction to a local stalk identifies H_n(M;R) with R when M is R-orientable and with R[2]={r in R:2r=0} when it is not R-orientable. Thus the nonorientable alternative need not vanish over rings with 2-torsion. No choice principle is required.",
+        "deps": [
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-orientation-local-system-and-orientation-cover",
+          "def-r-orientation-of-a-topological-manifold",
+          "thm-long-exact-sequence-in-homology",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "cor-homology-of-spheres",
+          "thm-path-connected-implies-connected",
+          "thm-heine-borel-rn",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-excision-for-singular-homology",
+          "prop-relative-homology-is-functorial-for-maps-of-pairs",
+          "cor-the-long-exact-homology-sequence-is-natural",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology"
+        ],
+        "strategy": "Prove coefficient extension takes each integral stalk generator to a coefficient-ring generator by mapping the coefficient-one relative disk class through the natural pair sequence, radial ball comparison, chart map and excision; naturality gives monodromy signs plus or minus one. Identify global local-system sections with monodromy-fixed elements at a basepoint without selecting paths. For compact M apply the full compact-support lemma to M. For any cycle choose relatively compact U containing its image, set V=M minus closure(U), and derive the triple sequence from quotient chains; high-degree compact-support vanishing gives H_i(U) injection into H_i(M,M minus closure(U)) for i>=n. Use this injection to prove all higher-degree and noncompact top-degree vanishing. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.26 and Proposition 3.29",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Lectures 31–32",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+        "kind": "definition",
+        "title": "Compactly supported singular cohomology",
+        "statement": "For a locally compact Hausdorff space X and an R-module G, define H_c^p(X;G)=colim_K H^p(X,X-K;G), over compact K ordered by inclusion and maps induced by (X,X-L)->(X,X-K) for K subset L. For compact X the terminal object K=X identifies this with ordinary cohomology.",
+        "deps": [
+          "def-relative-singular-cochain-complex",
+          "def-filtered-category-and-filtered-colimit",
+          "thm-locally-compact-hausdorff-basics"
+        ],
+        "strategy": "Compact subsets form a filtered poset because finite unions are compact. Contravariance of relative cohomology reverses the inclusions of complements and hence supplies the displayed directed system; a terminal compact subset gives the compact case.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3, pp.242–243",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 20 §5",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-cap-duality-map-for-an-oriented-manifold",
+        "kind": "definition",
+        "title": "The cap-duality map of an oriented manifold",
+        "statement": "For an R-oriented boundaryless n-manifold M, compact-support representatives define an R-linear cap-duality map D_M:H_c^p(M;R) to H_{n-p}(M;R), by [K,a] mapping to a cap [M]_K with cohomology first. This is independent of representatives and enlargement of K, requires no AC, and recovers cap with [M] for compact M.",
+        "deps": [
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "def-relative-cap-product",
+          "thm-cap-product-boundary-identity",
+          "def-fundamental-class-of-a-compact-oriented-manifold"
+        ],
+        "strategy": "Cap a relative cocycle vanishing off K with a relative orientation cycle whose boundary lies off K. Relative-cap descent handles representative changes. For K subset L, compatibility makes z_L-z_K a boundary plus a chain outside K; the latter has zero front-face evaluation, while the former caps to an explicit boundary. The compact-support colimit universal property supplies D_M.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, construction preceding Theorem 3.35, p.245",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls",
+        "kind": "lemma",
+        "title": "Cap duality on a Euclidean coordinate ball",
+        "statement": "Assume AC. For an oriented open n-ball U and every p, cap with its compatible local orientation classes induces an isomorphism H_c^p(U;R)->H_{n-p}(U;R); it is zero-to-zero except for the canonical isomorphism H_c^n(U;R)->H_0(U;R).",
+        "deps": [
+          "def-cap-duality-map-for-an-oriented-manifold",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "lem-coordinate-ball-classes-identify-local-homology-stalks",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "cor-homology-of-spheres",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "prop-cap-product-naturality-and-projection-formula",
+          "thm-heine-borel-rn",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use a cofinal family of closed concentric balls in coordinates R^n. Compute their integral relative homology by radial complement retractions and the pair sequence; apply the current UCT, whose statement explicitly includes relative pairs and evaluation. Normalize compatible integral classes at the center and write the R-orientation as a unit times their coefficient extension. The front/back cap formula followed by augmentation is evaluation times this unit, hence an isomorphism. Check all support transitions via natural evaluation and the common center, and n=0 separately. AC occurs only in UCT.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Example 3.34 p.244 and proof of Theorem 3.35 step (1), p.248",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 20 §5, Step 1",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder",
+        "kind": "lemma",
+        "title": "Cap product and the Mayer–Vietoris duality ladder",
+        "statement": "For oriented open U,V in an oriented manifold, the compact-support cohomology Mayer–Vietoris sequence and the homology Mayer–Vietoris sequence form a commuting ladder under cap duality, after the boundary maps carry the signs forced by the positive coboundary and cohomology-first cap conventions. Filtered colimits preserve the exact top row.",
+        "deps": [
+          "def-cap-duality-map-for-an-oriented-manifold",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "thm-excision-for-singular-cohomology",
+          "thm-excision-for-singular-homology",
+          "prop-cap-product-naturality-and-projection-formula",
+          "def-relative-cup-product",
+          "thm-long-exact-sequence-in-homology",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
+          "thm-cap-product-boundary-identity",
+          "thm-locally-compact-hausdorff-basics"
+        ],
+        "strategy": "Construct open extension by support excision, prove the signed cochain short exact sequence and directed-module-colimit exactness elementwise, and compute partial D=(-1)^(p+1)D delta on a three-open-small orientation chain.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Lemma 3.36 and its complete proof, pp.246–247",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 20 §5, Step 2",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-cap-duality-passes-to-increasing-open-unions",
+        "kind": "lemma",
+        "title": "Cap duality passes to increasing open unions",
+        "statement": "For an increasing sequence of oriented open submanifolds U_j with union M, compactly supported cohomology and singular homology are the colimits of their stage groups. Cap duality is the induced colimit map; stagewise isomorphisms imply an isomorphism on M, without an additional choice assumption.",
+        "deps": [
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Use compactness for support cofinality and finite cycle/boundary containment, then lift or kill one colimit representative using a stage duality isomorphism.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, proof of Theorem 3.35, increasing-union step (B), p.248",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-cap-duality-for-open-subsets-of-euclidean-space",
+        "kind": "lemma",
+        "title": "Cap duality for open subsets of Euclidean space",
+        "statement": "Assume AC. Every R-oriented open subset O of Euclidean n-space has cap-duality isomorphisms in all degrees. AC is inherited only from the local-ball universal-coefficient proof; the rational-box cover and gluing are choice-free.",
+        "deps": [
+          "lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "prop-cap-product-naturality-and-projection-formula",
+          "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "lem-cap-duality-passes-to-increasing-open-unions",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Prove the two-open gluing implication from the signed ladder and five lemma. Finite intersections of rational open boxes are empty or boxes, so induction proves finite box unions. Enumerate rational boxes inside O and pass to increasing finite unions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, proof of Theorem 3.35 step (2), p.248; rational boxes replace bounded convex sets",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls",
+        "kind": "lemma",
+        "title": "Duality extends to finite unions of coordinate balls",
+        "statement": "Assume AC. Duality on U, V and their intersection implies duality on U union V. It holds for every finite union of oriented coordinate balls, including the originally specified case where finite intersections have finite ball refinements. No such finite-refinement assertion is needed: an overlap with the last chart is an arbitrary Euclidean open subset, handled by the preceding supplier.",
+        "deps": [
+          "lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls",
+          "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "lem-cap-duality-for-open-subsets-of-euclidean-space",
+          "prop-cap-product-naturality-and-projection-formula",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Apply the signed five lemma for the two-open implication. In the finite chart induction, identify the intersection with the last chart as an arbitrary open Euclidean subset; transfer cap via the chain naturality identity and transported compact orientation classes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, proof of Theorem 3.35, step (A) p.247 and steps (2)–(3) p.248",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 20 §5, Steps 2 and 4",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-manifold-exhaustion-passes-local-duality-to-the-colimit",
+        "kind": "lemma",
+        "title": "A manifold exhaustion passes duality to the colimit",
+        "statement": "Assume AC. A Hausdorff second-countable manifold has an increasing countable exhaustion by finite unions of relatively compact coordinate balls, using coordinate half-balls at boundary points, with closure(U_j) contained in U_(j+1). Compactly supported cohomology and homology are their stage colimits. For a boundaryless R-oriented manifold compatible stage cap isomorphisms induce one on M.",
+        "deps": [
+          "def-topological-manifold-with-and-without-boundary",
+          "thm-heine-borel-rn",
+          "thm-locally-compact-hausdorff-basics",
+          "def-axiom-of-choice",
+          "lem-cap-duality-passes-to-increasing-open-unions",
+          "lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "thm-excision-for-singular-cohomology"
+        ],
+        "strategy": "Choose balls containing eligible countable-basis members using AC, form finite initial unions and recursively use the least index containing the previous compact closure. Prove support-colimit and finite cycle/boundary containment directly; use the already authored increasing-union cap lemma. No categorical AB5 implication is consumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, proof of Theorem 3.35, pp.245–248",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Lecture 36",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-poincare-duality-for-oriented-topological-manifolds",
+        "kind": "theorem",
+        "title": "Poincaré duality for oriented topological manifolds",
+        "statement": "Assume AC. For every R-oriented boundaryless n-manifold M, possibly disconnected or noncompact, cap with the compatible orientation classes gives natural isomorphisms H_c^p(M;R)->H_{n-p}(M;R). If M is compact this is cap with [M] and H_c^p=H^p. The assertion is componentwise and includes the empty manifold.",
+        "deps": [
+          "def-cap-duality-map-for-an-oriented-manifold",
+          "lem-manifold-exhaustion-passes-local-duality-to-the-colimit",
+          "lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls",
+          "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "def-axiom-of-choice",
+          "thm-path-connected-implies-connected",
+          "def-connected-component-and-quasicomponent",
+          "def-topological-manifold-with-and-without-boundary"
+        ],
+        "strategy": "Apply the proved exhaustion and finite-union cap isomorphisms, then their proved cap-compatible colimit. Identify compact terminal support and derive the component direct sums from finite compact supports and finite simplex chains. Naturality means extension for open inclusions, as explicitly stated.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.35, pp.241–248",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Lectures 35–36",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 20 §5",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-closed-oriented-pid-manifolds-have-finitely-generated-homology",
+        "kind": "lemma",
+        "title": "Finite generation from cap with a finite fundamental cycle",
+        "statement": "Assume AC. If M is a closed R-oriented n-manifold and R is a PID, its singular homology and cohomology groups are finitely generated R-modules and vanish outside degrees 0 through n. This includes fields and Z. AC is inherited from Poincare duality.",
+        "deps": [
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "def-cap-product-with-cohomology-first",
+          "cor-submodules-of-finite-free-pid-modules-are-free",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Fix a finite fundamental cycle. In degree q all cap images lie in the finite free span of its q-dimensional back faces. The submodule of cycles in this span is finite free over a PID and surjects onto homology by duality; cohomology follows by duality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arvind Nair, Topology II (2024), Theorem 1.11.1, printed p.11; statement restricted here to PID coefficients with a direct finite-cap proof",
+              "url": "https://mathweb.tifr.res.in/~arvind/topology/manifolds2024.pdf"
+            },
+            {
+              "title": "Hatcher, Algebraic Topology, Poincare duality and finite generation discussion, section 3.3",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-poincare-duality-gives-a-nonsingular-cup-pairing",
+        "kind": "corollary",
+        "title": "Poincaré duality gives a nonsingular cup pairing",
+        "statement": "Assume AC. If M is a closed R-oriented n-manifold, the pairing (a,b)|-><a cup b,[M]> is perfect when R is a field and the relevant homology is finite-dimensional. For R=Z it induces the usual unimodular pairing on the torsion-free quotients. No perfectness over an arbitrary ring is asserted.",
+        "deps": [
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "lem-closed-oriented-pid-manifolds-have-finitely-generated-homology",
+          "def-cap-product-with-cohomology-first",
+          "def-singular-cup-product-on-cochains",
+          "thm-singular-cohomology-is-graded-commutative",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "lem-singular-uct-extension-from-cycle-projections",
+          "def-singular-cochain-complex-with-coefficients",
+          "cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Compute evaluation of a cup on a fundamental cycle as evaluation on its cap. General PID UCT applied to field chains gives exact evaluation isomorphisms; over Z use finite generation and diagonal cyclic resolutions to identify the evaluation kernel with torsion. Compose evaluation with duality and use graded commutativity for the other adjoint.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, pp.249–250",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Theorem 38.8",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-degree-of-a-map-between-oriented-closed-manifolds",
+        "kind": "definition",
+        "title": "Degree of a map between oriented closed manifolds",
+        "statement": "For a continuous map between nonempty connected closed integrally oriented n-manifolds, degree is the unique integer d with f_*[M]=d[N]. Nonemptiness is required for the generator and uniqueness. The chosen orientations determine sign, including n=0, without AC.",
+        "deps": [
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "thm-top-homology-characterizes-compact-orientable-manifolds",
+          "prop-singular-chains-and-homology-are-covariantly-functorial"
+        ],
+        "strategy": "Top homology of each connected closed oriented manifold is infinite cyclic on its chosen fundamental class, so functoriality supplies a unique integer scalar.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, section 3.3 Exercise 7, printed p.258",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-manifold-degree-is-functorial-and-detected-by-top-cohomology",
+        "kind": "proposition",
+        "title": "Manifold degree is functorial and detected in top cohomology",
+        "statement": "For nonempty connected closed integrally oriented n-manifolds, degree respects identity and composition; reversing one orientation negates it. Assuming AC for top-cohomology detection, each M has a unique u_M evaluating to 1 on [M], and f^*u_N=deg(f)u_M. Functoriality and orientation-sign clauses are choice-free.",
+        "deps": [
+          "def-degree-of-a-map-between-oriented-closed-manifolds",
+          "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "def-cap-product-with-cohomology-first",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Apply the homology functor to fundamental-class coordinates for degree laws. PD followed by H_0 augmentation is exactly evaluation on [M], by the top cap formula, so evaluation on all of H^n is an isomorphism. Cochain precomposition then computes the pullback scalar.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3, pp.258–259",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-topological-collaring-for-manifold-boundaries",
+        "kind": "theorem",
+        "title": "Topological manifold boundaries admit collars",
+        "statement": "If M is a compact topological manifold with boundary, there is an open neighborhood V of the boundary and a homeomorphism boundary(M) times [0,1) -> V restricting to the identity at height zero. Consequently the boundary inclusion is a cofibration and the interior inclusion is a homotopy equivalence. No choice principle is required.",
+        "deps": [
+          "def-topological-manifold-with-and-without-boundary",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-heine-borel-rn",
+          "thm-finite-products-of-compact-spaces",
+          "thm-quotient-universal-property"
+        ],
+        "strategy": "Construct a finite normalized bump family on the compact boundary. In the attached external collar stretch signed normal coordinates by the explicit affine formula and its inverse, proving gluing at the fixed bottom and compact base support. Pull back the external top collar. An explicit inward push gives the interior homotopy inverse; an explicit strip retraction proves the full unbased HEP directly for arbitrary target spaces, without relying on a later cofibration definition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Proposition 3.42 and complete proof, printed p.253",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 21 §4",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class",
+        "kind": "lemma",
+        "title": "A collar constructs the relative orientation class and its boundary class",
+        "statement": "For a compact R-oriented n-manifold M with boundary A, there is a unique z in H_n(M,A;R) with the prescribed local orientation at every interior point. Its homology boundary has generator restrictions at every point of A and determines the induced boundary orientation. In tangent coordinates followed by inward normal, the boundary class has sign (-1)^n, equivalently outward-normal-first. No AC is used.",
+        "deps": [
+          "thm-topological-collaring-for-manifold-boundaries",
+          "def-topological-manifold-with-and-without-boundary",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-excision-for-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "thm-long-exact-sequence-in-homology",
+          "def-relative-cup-product",
+          "def-singular-chain-cross-product-on-generators",
+          "lem-singular-chain-cross-product-boundary-formula",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "cor-homology-of-spheres"
+        ],
+        "strategy": "Use compact interior cores and collar excision for existence/uniqueness. Localize at a vertical boundary fiber: the half-space relative group is zero, and the quotient-chain connecting map is an isomorphism from the interior-segment supported group to the boundary point stalk. Naturality identifies it with the boundary of z. An explicit shuffle prism computes the bottom-face sign (-1)^n.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Proposition 3.42 and Theorem 3.43 exercise, pp.252–254",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 21 §4, pp.169–170",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-relative-fundamental-class-and-boundary-orientation",
+        "kind": "definition",
+        "title": "Relative fundamental class and boundary orientation",
+        "statement": "For a compact R-oriented n-manifold M with boundary, define [M,boundary M] to be the unique relative class supplied by the collar lemma. Define the induced boundary orientation by requiring the homology connector to send [M,boundary M] to [boundary M]; this fixes the outward-normal-first convention and all component signs.",
+        "deps": [
+          "lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class"
+        ],
+        "strategy": "Existence, uniqueness, and the connector compatibility have already been proved by the preceding lemma, so these names are well-defined without a forward reference.",
+        "sources": {
+          "references": [
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 21 §4",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-poincare-lefschetz-duality",
+        "kind": "theorem",
+        "title": "Poincaré–Lefschetz duality",
+        "statement": "Assume AC. If M is a compact R-oriented n-manifold with boundary, cap with [M,boundary M] gives isomorphisms H^p(M;R)->H_{n-p}(M,boundary M;R) and H^p(M,boundary M;R)->H_{n-p}(M;R). When the boundary is empty these are Poincaré duality.",
+        "deps": [
+          "def-relative-fundamental-class-and-boundary-orientation",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "def-relative-cap-product",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "def-axiom-of-choice",
+          "thm-topological-collaring-for-manifold-boundaries",
+          "thm-excision-for-singular-cohomology",
+          "thm-excision-for-singular-homology",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "thm-cap-product-boundary-identity"
+        ],
+        "strategy": "Use compact collar complements as a cofinal support family, cohomology excision and pair five lemma to identify relative cohomology with interior compact supports; compare actual cap representatives. Prove all four pair-ladder squares with the connector sign (-1)^p and apply the five lemma. AC only inherited from absolute duality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.43, pp.253–254",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, relative Poincaré duality, pp.170–171",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fully-relative-poincare-lefschetz-duality",
+        "kind": "theorem",
+        "title": "Fully relative Poincaré–Lefschetz duality",
+        "statement": "Assume AC. Let M be a compact R-oriented n-manifold and decompose boundary(M)=A union B, where A and B are compact (n-1)-manifolds with common boundary A intersect B. Collar neighborhoods make the triad excisive. Cap with [M,boundary M] gives H^p(M,A;R) isomorphic to H_{n-p}(M,B;R), including A or B empty.",
+        "deps": [
+          "thm-poincare-lefschetz-duality",
+          "def-relative-cap-product",
+          "thm-excision-for-singular-homology",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "def-axiom-of-choice",
+          "thm-topological-collaring-for-manifold-boundaries",
+          "def-relative-cup-product",
+          "thm-excision-for-singular-cohomology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class",
+          "lem-compatible-local-orientation-classes-exist-over-compact-subsets",
+          "thm-cap-product-boundary-identity",
+          "prop-cap-product-naturality-and-projection-formula"
+        ],
+        "strategy": "Glue the two seam collars to produce U,V open in the boundary; prove the replacement pair isomorphisms and quotient comparison. Split the small boundary of a fundamental cycle and identify its V component with the relative fundamental class of B by compact-core uniqueness. Construct the cohomology triple sequence locally and prove its signed cap ladder with the homology pair sequence. Five lemma and replacement naturality give the claimed map.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.43, pp.254–255",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Theorem 37.1",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts",
+        "kind": "theorem",
+        "title": "Compact locally contractible Euclidean subsets are neighborhood retracts",
+        "statement": "Assume AC. A compact subset K of R^m is a retract of an open neighborhood exactly when it is weakly locally contractible: every neighborhood U of x in K contains a neighborhood V whose inclusion in U is nullhomotopic. Moreover, for such K the direct limit of singular cohomology over its decreasing open neighborhoods maps isomorphically to H^*(K).",
+        "deps": [
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "def-axiom-of-choice",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "prop-singular-cohomology-is-contravariantly-functorial"
+        ],
+        "strategy": "Construct the locally finite shrinking dyadic cell structure of the complement and a controlled partial retraction by finite skeletal induction. Handle zero infimum of extension diameters by a constant extension. Explicit nested radii prove continuity and a neighborhood domain. Converse uses a small ball in the retraction preimage. For cohomology prove the neighborhood-colimit representative criterion and eventual factorization through K by a straight-line homotopy on a smaller open neighborhood.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Appendix Theorem A.7, pp.8–10",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATapp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+        "kind": "theorem",
+        "title": "Alexander duality for compact locally contractible subsets of a sphere",
+        "statement": "Assume AC. If K is a nonempty proper compact locally contractible subspace of S^n and R is a commutative unital coefficient ring, then reduced H_i(S^n-K;R) is naturally isomorphic to reduced H^{n-i-1}(K;R) for all integers i, with both sides interpreted by the standard reduced conventions.",
+        "deps": [
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "def-compactly-supported-singular-cohomology-of-a-locally-compact-space",
+          "thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "thm-excision-for-singular-cohomology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
+          "thm-five-lemma-for-a-morphism-of-long-exact-sequences",
+          "cor-homology-of-spheres",
+          "def-axiom-of-choice",
+          "def-zero-simplex-augmentation-and-reduced-singular-homology",
+          "lem-coordinate-ball-classes-identify-local-homology-stalks",
+          "def-orientation-local-system-and-orientation-cover",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Fix the sphere orientation. Identify compact-support cohomology of its complement with relative cohomology of (sphere,K) using excision, ENR neighborhood continuity and an explicit elementwise exact-colimit/five-lemma argument. Apply open-natural PD. The sphere cohomology pair sequence then gives the duality, with the degree-zero augmentation kernel and degree-zero cohomology quotient computed explicitly instead of canceling unspecified summands. Prove all integer endpoints and inclusion naturality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.44 and Corollary 3.45, pp.254–256",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            },
+            {
+              "title": "Miller, Lectures on Algebraic Topology, Theorem 38.4",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-jordan-brouwer-separation",
+        "kind": "theorem",
+        "title": "Jordan–Brouwer separation",
+        "statement": "Assume AC. For n>=1, the image K of an embedding S^(n-1)->S^n has exactly two complementary path components and is the common boundary of both. In R^n the corresponding two-component bounded/unbounded assertion holds for n>=2. For n=1 an embedded S^0 in R consists of a<b and has the three interval complements, one bounded and two unbounded. No closure is asserted to be a ball.",
+        "deps": [
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "cor-homology-of-spheres",
+          "def-axiom-of-choice",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "cor-intermediate-value-theorem-topological",
+          "cor-intermediate-value-theorem-topological"
+        ],
+      "strategy": "Compute the required reduced sphere cohomology by Alexander duality for the explicit standard equator, then apply duality to K. A basis-difference argument makes reduced H0=Z imply exactly two path components. Removing a small spherical cap from the domain leaves a closed disk with connected complement; this forces every point of K into both frontiers. For the Euclidean embedding, lift its image by inverse stereographic projection so infinity is outside the lifted sphere. For n>=2 prove deletion of infinity preserves path connectedness by a local punctured-ball detour. Calculate the exceptional line case explicitly.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Proposition 2B.1, pp.169–171",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            },
+            {
+              "title": "J. J. Walton, Algebraic Topology IV, Theorem 4.7.3, pp.95–98",
+              "url": "https://jjwalton.github.io/maths_notes/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-invariance-of-domain",
+        "kind": "theorem",
+        "title": "Invariance of domain",
+        "statement": "Assume AC. For n>=0, if U is open in R^n and f:U->R^n is continuous and injective, then f(U) is open and f is a homeomorphism from U onto its image.",
+        "deps": [
+          "thm-jordan-brouwer-separation",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "def-axiom-of-choice",
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "thm-heine-borel-rn",
+          "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology",
+          "prop-singular-cohomology-is-contravariantly-functorial"
+        ],
+        "strategy": "Restrict to a compact closed ball and prove the restriction is an embedding by closed images of compact subsets. Alexander duality applied to its embedded contractible disk makes the sphere complement path connected. The spherical Jordan-Brouwer theorem gives two components of the boundary complement; its two disjoint path-connected pieces must be exactly these components. Local coordinate balls make them open. Apply the same argument to every open subdomain to obtain an open map and continuous inverse.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 2B.3, pp.172–173",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            },
+            {
+              "title": "J. J. Walton, Algebraic Topology IV, Theorem 4.4.7, p.98",
+              "url": "https://jjwalton.github.io/maths_notes/AT.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-horn-replacement-block-has-injective-commutator-meridian",
+        "kind": "lemma",
+        "title": "A horn replacement block has an injective commutator meridian",
+        "statement": "There exists an explicitly cap-marked closed three-ball C containing two disjoint closed solid tori, each meeting its boundary in exactly one cap disk, whose complementary pair is the once-punctured torus times an open interval with its boundary annulus. The annulus generator maps to the commutator of marked child meridians. For a collared insertion replacing a pillbox whose meridian is a member of a free exterior basis, the exterior inclusion is injective and replaces that basis member by the two child meridians. Arbitrarily small future meridional pillboxes can be prepared by disjoint interior-supported homeomorphisms fixing both incoming caps. These finite constructions use no choice axiom.",
+        "deps": [
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-seifert-van-kampen",
+          "thm-fundamental-group-of-finite-wedge-of-circles",
+          "thm-reduced-words-form-the-free-group",
+          "prop-retracts-inject-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality",
+          "thm-heine-borel-rn",
+          "thm-compactness-agrees-with-metric-compactness",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "strategy": "Construct the tori as complementary Clifford solid tori separated by a thick torus collar; remove a small angular coordinate cube and explicitly straighten it by a Lipschitz perturbation to prove its complement is a ball. Identify the punctured-torus complement and meridian words exactly, give a two-sided annular collar and open-cover van Kampen calculation, prove reduced-word injectivity, and compress two disjoint coordinate cylinders to prepare small next slices.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Example 2B.2 pp170–172; explicit marked-coordinate realization and collared-cover proof supplied locally",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-controlled-nested-horn-construction-embeds-a-closed-three-ball",
+        "kind": "lemma",
+        "title": "A controlled nested horn construction embeds a closed three-ball",
+        "statement": "Assume AC. The explicit marked horn replacement can be iterated with target slice diameters below 2^(-|s|) and compatible source half-balls of radii 8^(-|s|). The decreasing finite compact sets have intersection homeomorphic to a closed three-ball, with boundary an embedded two-sphere. Finite embeddings have a common tail inverse estimate derived from explicit continuous maps q_n on their solid-torus envelopes. All cuts use relative interiors and all marked collars and meridian paths persist in the actual recursion.",
+        "deps": [
+          "lem-horn-replacement-block-has-injective-commutator-meridian",
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-heine-borel-rn",
+          "thm-compactness-agrees-with-metric-compactness",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-extreme-value-metric",
+          "thm-intermediate-value",
+          "thm-invariance-of-domain",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Prove the restricted relative two- and three-cap matching lemma by supported planar perturbations and disk-collar correction. Construct the exact target tree and a compatible half-ball source tree, paste finite embeddings, build explicit finite inverse extensions q_n, prove the quantitative inverse bound, and prove the uniform limit is bijective. Apply invariance of domain only for the final interior and boundary identification, retaining AC for recursive map selection and that theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Daverman–Venema, Embeddings in Manifolds, §2.1 pp47–51; explicit relative cap transport and finite inverse-control construction supplied locally",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/davenema.pdf"
+            },
+            {
+              "title": "Hatcher, Algebraic Topology, Example 2B.2 pp170–172; marked recursive horn replacement",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-lefschetz-number-of-a-finite-cw-self-map",
+        "kind": "definition",
+        "title": "Lefschetz number of a finite CW self-map",
+        "statement": "For a continuous self-map f of a finite CW complex X, define L(f)=sum_i (-1)^i tr(f_*:H_i(X;Q)->H_i(X;Q)). Cellular comparison makes every vector space finite-dimensional and only finitely many are nonzero. L(f) depends only on the homotopy class of f.",
+        "deps": [
+          "def-trace-of-an-endomorphism",
+          "thm-cellular-homology-computes-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "thm-relative-homology-of-consecutive-cw-skeleta"
+        ],
+        "strategy": "Finite cellular chains are finite-dimensional and bounded, so their homology is as well and the alternating sum exists. Homotopic maps induce the same homology endomorphisms, proving homotopy invariance.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §2.C, pp.179–180",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-hopf-trace-formula",
+        "kind": "lemma",
+        "title": "Hopf trace formula",
+        "statement": "If C is a bounded chain complex of finite-dimensional vector spaces and T:C->C is a chain map, then sum_i(-1)^i tr(T_i)=sum_i(-1)^i tr(H_i(T)).",
+        "deps": [
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-dimension-of-a-linear-subspace"
+        ],
+        "strategy": "Choose decompositions C_i=B_i direct-sum H_i' direct-sum S_i with cycles B_i direct-sum H_i' and differential S_i isomorphic to B_{i-1}. In adapted bases the diagonal blocks of T on H_i' induce H_i(T), while the S_i block and the B_{i-1} block are conjugate through the differential and have equal traces. Their contributions cancel in adjacent degrees, leaving the homology traces.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Hopf trace formula, p.180",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-simplicial-approximation-after-sufficient-subdivision",
+        "kind": "theorem",
+        "title": "Simplicial approximation after sufficient subdivision",
+        "statement": "Let K,L be finite simplicial complexes, A a subcomplex of K, and f:|K|->|L| continuous and simplicial on A in the chosen triangulation. There is r>=0 and a simplicial map g:D_A^r K->L whose realization agrees with f on A and is homotopic to f relative to A. Relative approximation here means this relative homotopy conclusion, not an additional pointwise carrier condition for f. With A empty the subdivision is ordinary barycentric subdivision.",
+        "deps": [
+          "thm-relative-simplicial-approximation-after-subdivision",
+          "def-relative-derived-subdivision-of-a-finite-simplicial-pair"
+        ],
+        "strategy": "Verify the chosen triangulation satisfies the published relative theorem, and use its actual g and relative homotopy. Identify the unchanged A and the empty-A ordinary subdivision from the relative-derived definition. Spell out endpoints, full and empty fixed subcomplexes, and the distinction between homotopic relative approximation and a strict carrier condition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 2C.1, pp.177–179",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            },
+            {
+              "title": "E. C. Zeeman, Relative simplicial approximation, pp.39–42",
+              "url": "https://www.lms.ac.uk/sites/default/files/1964%20Relative%20simplicial%20approximation.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-finite-cw-complexes-are-euclidean-neighborhood-retracts",
+        "kind": "lemma",
+        "title": "Finite CW complexes are Euclidean neighborhood retracts",
+        "statement": "Assume AC. Every finite CW complex embeds in some Euclidean space as a retract of an open neighborhood; equivalently it is a compact ENR.",
+        "deps": [
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts",
+          "def-axiom-of-choice",
+          "thm-heine-borel-rn",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "strategy": "Induct over the finite cells. If A embeds in R^m and X=A union_f D^k, embed the new disk, A, and the mapping-cylinder line segments in R^k times R^m times R; the quotient topology and compact-to-Hausdorff criterion identify the image with X. CW characteristic maps contract sufficiently small neighborhoods inside larger ones, so finite CW complexes are locally contractible. Apply the Euclidean neighborhood-retract theorem to the compact image.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Appendix Corollary A.10, pp.10–11",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATapp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-lefschetz-fixed-point-theorem-for-finite-complexes",
+        "kind": "theorem",
+        "title": "Lefschetz fixed-point theorem for finite complexes",
+        "statement": "Assume AC. If X is a finite CW complex and f:X->X has L(f) nonzero, then f has a fixed point. This is a sufficient condition only.",
+        "deps": [
+          "def-lefschetz-number-of-a-finite-cw-self-map",
+          "lem-hopf-trace-formula",
+          "lem-finite-cw-complexes-are-euclidean-neighborhood-retracts",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-axiom-of-choice",
+          "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero",
+          "lem-the-open-star-criterion-produces-a-simplicial-map",
+          "thm-lebesgue-number-lemma",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Embed X as a neighborhood retract and choose a finite simplicial neighborhood K. If f has no fixed point, compactness gives positive separation; shrink K so i f r:K->K is fixed-point-free and choose a sufficiently close simplicial approximation g after subdivision. No simplex meets its image, so every diagonal coefficient of the chain map is zero. Hopf trace gives L(g)=0. In each degree tr((i f)_*r_*)=tr(r_*(i f)_*)=tr(f_*), so L(g)=L(f), contradiction.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 2C.3, pp.179–181",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.016,
+    "id": "orientations-poincare-lefschetz-and-alexander-duality-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Orientations Poincare Lefschetz and Alexander Duality — Examples",
+    "companion": "orientations-poincare-lefschetz-and-alexander-duality",
+    "requires": [
+      "orientations-poincare-lefschetz-and-alexander-duality"
+    ],
+    "items": [
+      {
+        "id": "ex-fundamental-classes-and-duality-for-spheres-and-tori",
+        "kind": "example",
+        "title": "Fundamental classes and duality for spheres and tori",
+        "statement": "Assume AC. For n>=1 the standard oriented sphere class generates H_n(S^n;Z); S^0 has boundary-oriented class [+1]-[-1] in H0=Z². For m>=0 the ordered iterated shuffle of circle classes is [T^m]. With x_I the increasing degree-one monomials and b_J the oriented coordinate-subtorus classes (basepoint in missing factors), x_I cap [T^m]=(-1)^{sum_r(i_r-r)} b_{I^c}. Empty products give T0 a positive point. Exact AC uses inherited from UCT, additive Kunneth and PD.",
+        "deps": [
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism",
+          "cor-homology-of-spheres",
+          "def-axiom-of-choice",
+          "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
+          "thm-topological-kunneth-short-exact-sequence-for-homology",
+          "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses",
+          "def-singular-chain-cross-product-on-generators",
+          "lem-singular-chain-cross-product-boundary-formula",
+          "prop-cap-product-naturality-and-projection-formula",
+          "def-cap-product-with-cohomology-first",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "thm-top-homology-characterizes-compact-orientable-manifolds",
+          "thm-heine-borel-rn",
+          "prop-cup-product-is-natural-unital-and-associative"
+        ],
+        "strategy": "Check compact oriented manifold charts and one local normalization of the explicit oriented cycles. Induct on circle factors using actual additive cohomological and homological Kunneth, and evaluate AW against shuffle to prove dual coordinate bases. Apply the cohomology-first cap/cup identity and the computed permutation sign; handle S0 and T0 separately.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-intersection-pairing-of-a-closed-oriented-surface",
+        "kind": "example",
+        "title": "Intersection pairing of a closed oriented surface",
+        "statement": "Assume AC. For the closed oriented genus-g surface and the standard classes a_1,b_1,...,a_g,b_g in H^1(-;Z), evaluation on the fundamental class has matrix made of g blocks [[0,1],[-1,0]]. It is unimodular and alternating.",
+        "deps": [
+          "lem-integral-surface-cup-pairing-from-the-oriented-polygon",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "thm-top-homology-characterizes-compact-orientable-manifolds",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the completed singular fan cup calculation with its oriented generator normalization. Identify that cycle with the fundamental class by positive local restriction and injectivity into one stalk. Compute the g block matrix, its integral inverse, determinant and zero diagonal pairing explicitly, including g=0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Example 3.7",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-poincare-lefschetz-duality-for-a-disk-and-its-boundary",
+        "kind": "example",
+        "title": "Poincaré–Lefschetz duality for a disk",
+        "statement": "Assume AC. For the standard orientation of D^n, n>=0, with S^(-1)=empty at n=0, [D^n,S^(n-1)] generates H_n(D^n,S^(n-1);Z), its connector is the outward-normal-first class [S^(n-1)], and cap gives H^0(D^n;Z)=Z isomorphic to H_n(D^n,S^(n-1);Z) and H^n(D^n,S^(n-1);Z)=Z isomorphic to H_0(D^n;Z). For n=1 the boundary class is [+1]-[-1] in Z^2.",
+        "deps": [
+          "def-relative-fundamental-class-and-boundary-orientation",
+          "thm-poincare-lefschetz-duality",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "cor-homology-of-spheres",
+          "def-axiom-of-choice",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-relative-cap-product",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "The pair sequence and contractibility of the disk identify its relative top group with reduced H_{n-1}(S^{n-1}). Choose the relative generator whose connector is the standard boundary orientation. All other groups vanish, and the two cap maps send the normalized unit/top cocycle to the displayed generators.",
+        "sources": {
+          "references": [
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 21 §4",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-mod-two-duality-for-real-projective-space",
+        "kind": "example",
+        "title": "Mod-two duality for real projective space",
+        "statement": "For n>=0, RP^n is a nonempty compact connected boundaryless n-manifold with a canonical F_2 orientation and mod-two fundamental class; these facts require no AC. Under AC, cap gives H^p(RP^n;F_2) isomorphic to H_(n-p)(RP^n;F_2), both F_2 for 0<=p<=n and zero otherwise. For positive even n integral orientability fails; RP^0 is an oriented point.",
+        "deps": [
+          "def-topological-manifold-with-and-without-boundary",
+          "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise",
+          "thm-poincare-duality-for-oriented-topological-manifolds",
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-axiom-of-choice",
+          "thm-top-homology-characterizes-compact-orientable-manifolds",
+          "thm-heine-borel-rn",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "def-fundamental-class-of-a-compact-oriented-manifold",
+          "thm-path-connected-implies-connected"
+        ],
+        "strategy": "Affine projective charts verify the manifold and compactness hypotheses directly. The canonical nonzero local F_2 classes orient it. Its one-cell-per-degree cellular differential vanishes mod two, giving one F_2 in every degree 0 through n; Poincaré duality pairs complementary degrees.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §3.3 and Example 3.8",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-alexander-duality-for-the-standard-equator",
+        "kind": "example",
+        "title": "Alexander duality for the standard equator",
+        "statement": "Assume AC and n>=1. For the standard equator S^(n-1) subset S^n, Alexander duality identifies the complement reduced H_0 with Z and all other reduced homology with zero; geometrically the complement is exactly the disjoint union of two contractible open hemispheres. Their pole-class difference generates reduced H_0. The geometric homology computation is choice-free.",
+        "deps": [
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "prop-zero-th-singular-homology-is-free-on-path-components",
+          "def-axiom-of-choice",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "thm-heine-borel-rn",
+          "cor-intermediate-value-theorem-topological"
+        ],
+        "strategy": "Insert the sphere cohomology groups in the Alexander formula. The only nonzero reduced group occurs at i=0. The last-coordinate sign explicitly identifies the two contractible complementary hemispheres and matches the reduced H_0 generator.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Corollary 3.45",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-lefschetz-number-of-the-identity-is-euler-characteristic",
+        "kind": "example",
+        "title": "The Lefschetz number of the identity is Euler characteristic",
+        "statement": "For every finite CW complex X, L(id_X)=chi(X). In particular a nonempty finite contractible complex has identity Lefschetz number one and its identity fixes every point. The empty complex has both invariants zero. No AC is required.",
+        "deps": [
+          "def-lefschetz-number-of-a-finite-cw-self-map",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "lem-hopf-trace-formula",
+          "thm-relative-homology-of-consecutive-cw-skeleta",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point"
+        ],
+        "strategy": "The trace of the identity on H_i(X;Q) is its dimension, equal to the integral Betti number. Substitute in the definition and apply Euler–Poincaré. Contractibility leaves only H_0=Q.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §2.C",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-a-nonorientable-manifold-has-no-ordinary-integral-fundamental-class",
+        "kind": "counterexample",
+        "title": "A nonorientable closed manifold has no integral fundamental class",
+        "statement": "The real projective plane is a connected compact boundaryless 2-manifold but H_2(RP^2;Z)=0, so there is no ordinary integral class restricting to a generator of every local top-homology group. Its mod-two fundamental class still exists.",
+        "deps": [
+          "ex-mod-two-duality-for-real-projective-space",
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-local-homology-detects-interior-points-boundary-points-and-dimension",
+          "thm-top-homology-characterizes-compact-orientable-manifolds"
+        ],
+        "strategy": "Use the one-cell-in-each-degree CW structure on RP^2: the top cellular boundary is multiplication by two, hence H_2 with Z coefficients is zero. The antipodal transition reverses the local integral generator, exhibiting nonorientability, while mod two removes the sign.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Corollary 3.28",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-ordinary-cohomology-does-not-give-noncompact-poincare-duality",
+        "kind": "counterexample",
+        "title": "Ordinary cohomology does not give noncompact Poincaré duality",
+        "statement": "For n>0 and a nonzero commutative unital ring R, ordinary H^0(R^n;R)=R while H_n(R^n;R)=0, so ordinary cohomology cannot replace compactly supported cohomology in noncompact Poincare duality. Under AC, correctly H_c^n(R^n;R)=R caps isomorphically to H_0(R^n;R)=R; the counterexample calculation itself is choice-free.",
+        "deps": [
+          "lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls",
+          "cor-contractible-nonempty-spaces-have-the-homology-of-a-point",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Euclidean space is connected, contractible, oriented, and noncompact. The top-homology theorem kills H_n, while UCT and H_0=Z compute ordinary H^0=R. The local compact-support calculation places the nonzero compactly supported group in degree n and verifies the corrected cap map.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Theorem 3.35",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-an-alexander-horned-sphere-has-complementary-components-that-need-not-be-balls",
+        "kind": "counterexample",
+        "title": "A horned sphere has complementary components that need not be balls",
+        "statement": "Assume AC for the cited Jordan–Brouwer route. There is a topological embedding of S^2 in S^3, the Alexander horned sphere, whose complement has the two components required by Jordan–Brouwer but one component is not simply connected and therefore is not an open 3-ball. Separation does not imply tameness.",
+        "deps": [
+          "thm-jordan-brouwer-separation",
+          "def-axiom-of-choice",
+          "lem-horn-replacement-block-has-injective-commutator-meridian",
+          "lem-controlled-nested-horn-construction-embeds-a-closed-three-ball",
+          "thm-seifert-van-kampen",
+          "prop-fundamental-groups-of-punctured-euclidean-spaces",
+          "cor-geometric-unit-circle-has-fundamental-group-z",
+          "prop-retracts-inject-fundamental-groups",
+          "thm-heine-borel-rn",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
+        ],
+        "strategy": "Use the explicit marked horn block and controlled nested-ball suppliers. Compute the initial meridian group in a Clifford-torus exterior, verify each actual inclusion sends a parent free generator to the marked child commutator and is injective, and exclude a contracting disk by finite-stage compactness. Prove the puncturing-at-infinity fundamental-group comparison by a coordinate-ball van Kampen cover, then identify the two spherical components and the non-ball exterior. Linking number is not used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, Example 2B.2 pp170–172; explicit geometric and inverse-control suppliers supplied locally",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-zero-lefschetz-number-does-not-imply-no-fixed-points",
+        "kind": "counterexample",
+        "title": "Zero Lefschetz number does not imply absence of fixed points",
+        "statement": "The identity map of S^1 has L(id)=1-1=0, yet every point is fixed. Thus the Lefschetz theorem has no converse.",
+        "deps": [
+          "def-lefschetz-number-of-a-finite-cw-self-map",
+          "cor-homology-of-spheres"
+        ],
+        "strategy": "The identity acts as the identity on H_0(S^1;Q)=Q and H_1(S^1;Q)=Q and all other groups vanish, so the alternating trace is zero. Pointwise the map is the identity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Algebraic Topology, §2.C",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

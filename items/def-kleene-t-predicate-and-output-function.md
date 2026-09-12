@@ -2,7 +2,7 @@
 id: def-kleene-t-predicate-and-output-function
 kind: definition
 title: "Kleene's T-predicate and output function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effective-encoding-of-turing-machines, def-natural-number-coding-of-finite-sequences, def-halting-computation-and-divergence, thm-sequence-length-and-coordinate-functions-are-primitive-recursive, lem-turing-step-coding-is-primitive-recursive, prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

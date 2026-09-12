@@ -4,6 +4,7 @@ kind: "example"
 title: "First three chacon tower heights"
 deps: ["def-chacon-three-cut-one-spacer-towers"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

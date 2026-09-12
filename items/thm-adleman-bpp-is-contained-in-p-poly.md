@@ -2,7 +2,7 @@
 id: thm-adleman-bpp-is-contained-in-p-poly
 kind: theorem
 title: "Adleman's theorem: BPP is contained in P/poly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-rp-corp-zpp-bpp-and-pp, thm-bpp-amplification-to-exponentially-small-
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

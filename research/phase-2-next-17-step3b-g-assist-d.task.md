@@ -1,0 +1,5 @@
+# Step 3b group G supplemental authoring for D
+
+The original group G batch 11 is complete. This owner-directed supplemental authoring dispatch owns only these batch-7 A-page false-statement items: `fs-every-affinely-reparametrized-geodesic-remains-unit-speed.md`, `fs-normal-coordinates-make-the-metric-euclidean-throughout-the-chart.md`, and `fs-every-geodesic-segment-is-globally-length-minimizing.md`. Their declared scaffold suppliers currently exist. Keep the promised false claims visibly false, give explicit counterexamples and exact failure points, and do not weaken the original targets. The active group D author owns all other batch-7 items.
+
+Before each write, confirm the owned item file is absent; never overwrite another author's work. Write only these three item files and `research/phase-2-next-17-step3b-g-assist-d.md`. Do not edit shared batch manifest, contract, coverage, scope, decisions, page, plan, group-D report, or published item. Run focused precheck and rendering, and report exact dependencies and canonical integration needed. Do not claim a Step-3 gate pass or independent audit.

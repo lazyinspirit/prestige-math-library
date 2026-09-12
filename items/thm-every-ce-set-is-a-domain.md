@@ -2,7 +2,7 @@
 id: thm-every-ce-set-is-a-domain
 kind: theorem
 title: "Every computably enumerable set is the domain of a partial computable function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-computably-enumerable-set, def-computable-and-partial-computable-function]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

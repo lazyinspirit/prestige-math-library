@@ -6,6 +6,7 @@ status: published
 origin: pipeline
 deps: [lem-lc-generic-boolean-ground-joins, def-boolean-valued-name-semantics, lem-boolean-valued-semantics-is-well-defined, def-forcing-name-valuation-and-generic-extension, lem-forcing-names-and-name-ranks-are-absolute, def-forcing-names-and-name-rank]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

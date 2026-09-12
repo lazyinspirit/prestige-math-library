@@ -2,7 +2,7 @@
 id: fs-the-pumping-lemma-characterizes-regular-languages
 kind: false-statement
 title: "FALSE: the pumping lemma characterizes the regular languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-pumping-lemma-for-regular-languages, cor-distinguishable-prefix-nonregularity-criterion]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

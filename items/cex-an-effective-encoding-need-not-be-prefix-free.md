@@ -2,7 +2,7 @@
 id: cex-an-effective-encoding-need-not-be-prefix-free
 kind: counterexample
 title: "The encoding $w\\mapsto 1w$ is effective but not prefix-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [def-effective-binary-encoding-and-decoder, fs-every-effective-encoding-is
 proof_strategy: direct
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

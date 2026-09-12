@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Chacon eigenfunctions are constant"
 deps: ["def-unitary-eigenfunction-for-a-probability-system", "thm-chacon-transformation-is-ergodic", "lem-chacon-levels-approximate-measurable-sets", "lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets", "def-chacon-three-cut-one-spacer-towers", "thm-ergodicity-and-invariant-functions", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

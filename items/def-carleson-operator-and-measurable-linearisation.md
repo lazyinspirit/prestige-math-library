@@ -4,6 +4,7 @@ kind: "definition"
 title: "Carleson operator and measurable linearisation"
 deps: ["def-fourier-transform-on-l-one-of-rn", "def-schwartz-space-and-its-seminorms", "lem-l-one-fourier-transform-is-well-defined", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "lem-schwartz-functions-and-all-derivatives-are-integrable", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

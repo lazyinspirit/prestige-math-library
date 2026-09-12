@@ -2,7 +2,7 @@
 id: lem-chernoff-bound-for-bernoulli-trials
 kind: lemma
 title: "A Chernoff bound for sums of independent Bernoulli trials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-independence-of-finite-random-variables, thm-markov-inequality, lem-bernoulli-and-binomial-mean-and-variance, thm-expectation-of-products-of-independent-random-variables]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

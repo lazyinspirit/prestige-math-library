@@ -2,13 +2,14 @@
 id: def-probabilistic-polynomial-time-machine
 kind: definition
 title: "Probabilistic polynomial-time Turing machines"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-worst-case-time-and-space-complexity, def-multitape-and-nondeterministic-machines]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

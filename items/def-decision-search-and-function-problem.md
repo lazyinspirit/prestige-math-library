@@ -2,7 +2,7 @@
 id: def-decision-search-and-function-problem
 kind: definition
 title: "Decision problems, search problems, and function problems"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ deps:
   - def-function
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

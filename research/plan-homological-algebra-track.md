@@ -3741,7 +3741,7 @@ hypotheses explicitly.
 
 **page id** `grothendieck-spectral-sequences-and-computations`  
 **`requires`** `double-complexes-exact-couples-and-convergence`,
-`derived-functors`, `delta-functors-and-universality`,
+`derived-categories`, `derived-functors`, `delta-functors-and-universality`,
 `group-cohomology-as-a-derived-functor`,
 `universal-coefficients-and-kunneth-theorems`,
 `group-extensions-complements-and-schur-zassenhaus`
@@ -3754,6 +3754,14 @@ composition of left exact functors with its exact acyclicity hypothesis. The
 page closes by recovering UCT/Künneth and deriving the
 Lyndon–Hochschild–Serre sequence; it never treats an $E_2$ page as the answer
 without convergence and extension data.
+
+The bounded-below homotopically-injective interface is taken from the
+published `derived-categories` page. The Cartan–Eilenberg existence theorem
+uses the earlier published `def-dependent-choice` interface (or supplied
+successive choices), not the later duplicate serial-relation definition. The
+LHS five-term theorem defines its inflation, restriction, and transgression
+as the relevant edge maps and $d_2$ locally, so it has no forward dependency
+on the later low-degree group-cohomology page.
 
 ### A-page items, in dependency order
 

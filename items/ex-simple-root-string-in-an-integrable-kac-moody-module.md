@@ -2,13 +2,14 @@
 id: ex-simple-root-string-in-an-integrable-kac-moody-module
 kind: example
 title: Simple root string in an integrable kac moody module
-status: draft
+status: published
 origin: pipeline
 deps: [def-integrable-kac-moody-module, def-contragredient-lie-algebra-before-the-maximal-ideal-quotient, def-simple-reflections-and-the-kac-moody-weyl-group, prop-integrable-weight-sets-and-multiplicities-are-weyl-invariant]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

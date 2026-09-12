@@ -2,13 +2,14 @@
 id: def-modified-post-correspondence-problem
 kind: definition
 title: "The modified Post correspondence problem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-post-correspondence-problem]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

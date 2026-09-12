@@ -4,6 +4,7 @@ kind: "proposition"
 title: "Atomless generic filters are not in the ground model"
 deps: ["def-dense-open-sets-and-model-generic-filters"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

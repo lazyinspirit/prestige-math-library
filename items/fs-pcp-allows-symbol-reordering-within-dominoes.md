@@ -2,7 +2,7 @@
 id: fs-pcp-allows-symbol-reordering-within-dominoes
 kind: false-statement
 title: "FALSE: PCP permits reordering symbols inside a domino"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-post-correspondence-problem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

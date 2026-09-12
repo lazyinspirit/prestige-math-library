@@ -2,7 +2,7 @@
 id: def-rudin-ordinal-box-space
 kind: definition
 title: Rudin ordinal box spaces on infinite index sets
-status: draft
+status: published
 origin: pipeline
 deps: [def-reduced-ordinal-products-and-scales, def-order-topology-on-an-ordinal, def-product-topology, def-axiom-of-choice]
 justified_by: [lem-rudin-box-space-basic-neighborhoods-and-p-space]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

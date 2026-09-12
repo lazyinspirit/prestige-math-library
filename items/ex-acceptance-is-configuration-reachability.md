@@ -2,7 +2,7 @@
 id: ex-acceptance-is-configuration-reachability
 kind: example
 title: "A branching configuration graph with one accepting path and one looping path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -13,6 +13,7 @@ deps: [lem-acceptance-is-configuration-reachability, fs-nondeterministic-accepta
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

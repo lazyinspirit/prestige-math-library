@@ -2,7 +2,7 @@
 id: thm-zariski-closed-sets-affine-space
 kind: theorem
 title: "Zero loci in affine space are the closed sets of the classical Zariski topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.3"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
 ---
 

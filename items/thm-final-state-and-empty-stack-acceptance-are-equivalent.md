@@ -2,7 +2,7 @@
 id: thm-final-state-and-empty-stack-acceptance-are-equivalent
 kind: theorem
 title: "Acceptance by final state and by empty stack are equivalent for PDAs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pda-acceptance-by-final-state, def-pda-acceptance-by-empty-stack]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

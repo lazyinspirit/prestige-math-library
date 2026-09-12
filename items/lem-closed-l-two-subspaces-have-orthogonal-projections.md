@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Closed l two subspaces have orthogonal projections"
 deps: ["def-l-two-operator-conventions-for-weak-mixing", "thm-complex-lp-completeness-and-almost-everywhere-subsequences", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

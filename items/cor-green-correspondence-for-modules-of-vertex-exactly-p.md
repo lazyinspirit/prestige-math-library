@@ -2,12 +2,14 @@
 id: cor-green-correspondence-for-modules-of-vertex-exactly-p
 kind: corollary
 title: Green correspondence for modules of vertex exactly p
-status: draft
+status: published
 origin: pipeline
 deps: [thm-green-correspondence-with-exceptional-families, lem-green-exceptional-family-containment-and-fusion, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: Saunders, Modular Representation Theory, Lemmas 4.18–4.19 and 4.35–4.38, Theorem 4.34

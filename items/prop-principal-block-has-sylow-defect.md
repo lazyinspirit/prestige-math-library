@@ -6,8 +6,10 @@ deps: [thm-vertices-of-modules-in-a-block-lie-in-a-defect-group, thm-higman-crit
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: Webb, A Course in Finite Group Representation Theory, §§11.3, 11.6 and 12.3–12.5, especially pp.240–245

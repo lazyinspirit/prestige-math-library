@@ -2,7 +2,7 @@
 id: lem-irreducible-space-open-intersections
 kind: lemma
 title: "Irreducibility is equivalent to every pair of nonempty open sets meeting"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.5"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

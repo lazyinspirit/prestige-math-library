@@ -2,7 +2,7 @@
 id: lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs
 kind: lemma
 title: "The Cook-Levin formula is satisfiable if and only if an accepting bounded tableau exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-boolean-formula-cnf-and-sat, def-bounded-computation-tableau, lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal, lem-exactly-one-symbol-constraints-have-polynomial-size, lem-start-accept-and-transition-constraints-have-polynomial-size]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

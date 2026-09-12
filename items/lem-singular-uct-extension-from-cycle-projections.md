@@ -2,7 +2,7 @@
 id: lem-singular-uct-extension-from-cycle-projections
 kind: lemma
 title: Singular UCT extension from cycle projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-axiom-of-choice, lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces, def-ext-via-a-projective-resolution-of-the-first-variable, def-singular-cochain-complex-with-coefficients, thm-free-modules-are-projective-with-choice-boundary]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

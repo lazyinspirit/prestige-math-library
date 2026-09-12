@@ -2,7 +2,7 @@
 id: lem-bounded-reachability-uses-logarithmic-recursion-depth
 kind: lemma
 title: "The bounded reachability recursion uses logarithmic recursion depth"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-bounded-reachability-recursion, lem-space-bounded-machines-have-exponentially-many-configurations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

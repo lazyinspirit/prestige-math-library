@@ -2,7 +2,7 @@
 id: cor-cfls-are-not-closed-under-complement
 kind: corollary
 title: "Context-free languages are not closed under complement"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cfls-are-not-closed-under-intersection, thm-cfl-closure-under-union-concatenation-star-and-homomorphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

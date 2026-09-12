@@ -4,6 +4,7 @@ kind: "definition"
 title: "Complete ultrafilters and measurable cardinals"
 deps: ["def-ultrafilter", "def-cardinal", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

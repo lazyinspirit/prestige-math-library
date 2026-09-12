@@ -2,13 +2,14 @@
 id: def-nondeterministic-pushdown-automaton
 kind: definition
 title: "Nondeterministic pushdown automata"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-computation-alphabet-and-word-convention, def-finite-cardinality, def-function]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-kac-moody-real-coroot-inversions
 kind: definition
 title: Real coroot signs, word length and inversion sets
-status: draft
+status: published
 origin: pipeline
 justified_by: [lem-kac-moody-reduced-words-and-coroot-signs]
 deps: [def-simple-reflections-and-the-kac-moody-weyl-group, def-realization-of-a-generalized-cartan-matrix, def-kac-moody-integral-and-dominant-integral-weights]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

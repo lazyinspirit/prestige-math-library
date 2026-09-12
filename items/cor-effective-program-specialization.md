@@ -2,7 +2,7 @@
 id: cor-effective-program-specialization
 kind: corollary
 title: "Effective program specialization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [thm-smn-parameter-theorem]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

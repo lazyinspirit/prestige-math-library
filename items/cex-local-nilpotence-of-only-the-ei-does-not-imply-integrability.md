@@ -2,13 +2,14 @@
 id: cex-local-nilpotence-of-only-the-ei-does-not-imply-integrability
 kind: counterexample
 title: Local nilpotence of only the ei does not imply integrability
-status: draft
+status: published
 origin: pipeline
 deps: [cex-a-kac-moody-verma-module-is-not-integrable-in-general, thm-universal-property-and-pbw-character-of-kac-moody-verma-modules]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

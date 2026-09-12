@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Absoluteness, idempotence and minimality of L"
 deps: ["lem-def-operation-is-absolute", "thm-constructible-universe-basic-axioms", "thm-separation-in-the-constructible-universe", "thm-internal-power-set-in-the-constructible-universe", "thm-replacement-in-the-constructible-universe"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

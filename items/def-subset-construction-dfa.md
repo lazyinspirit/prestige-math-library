@@ -2,13 +2,14 @@
 id: def-subset-construction-dfa
 kind: definition
 title: "The subset-construction DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-deterministic-finite-automaton, def-epsilon-closure-of-a-state-set, def-nfa-with-epsilon-moves]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

@@ -5,6 +5,7 @@ title: "Scott ultrapowers and class-embedding conventions"
 deps: ["def-lc-complete-ultrafilters-and-measurable-cardinals", "def-membership-rank-of-a-set", "thm-relativization-and-set-satisfaction"]
 justified_by: ["lem-lc-scott-quotients-are-sets-and-membership-is-setlike"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

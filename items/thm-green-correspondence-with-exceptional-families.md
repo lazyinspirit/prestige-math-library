@@ -2,13 +2,14 @@
 id: thm-green-correspondence-with-exceptional-families
 kind: theorem
 title: Green correspondence with exceptional families
-status: draft
+status: published
 origin: pipeline
 deps: [def-green-exceptional-intersection-families, lem-green-restriction-has-one-distinguished-summand, lem-green-induction-has-one-distinguished-summand, lem-green-distinguished-summands-are-mutually-inverse, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

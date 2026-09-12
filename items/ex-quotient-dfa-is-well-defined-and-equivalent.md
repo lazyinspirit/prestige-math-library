@@ -2,7 +2,7 @@
 id: ex-quotient-dfa-is-well-defined-and-equivalent
 kind: example
 title: "Merging equivalent sink-like states in a small DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-quotient-dfa-is-well-defined-and-equivalent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

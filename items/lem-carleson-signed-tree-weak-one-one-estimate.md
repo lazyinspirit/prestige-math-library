@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Carleson signed tree weak one one estimate"
 deps: ["def-carleson-tiles-wave-packets-and-tile-order", "thm-plancherel", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "thm-almost-every-point-is-a-lebesgue-point", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-regular-expression-to-epsilon-nfa
 kind: example
 title: "Constructing an epsilon-NFA for $(a+b)^{*}abb$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [thm-regular-expression-to-epsilon-nfa]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

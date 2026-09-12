@@ -2,7 +2,7 @@
 id: ex-a-n-b-n-is-deterministic-context-free-and-unambiguous
 kind: example
 title: "The language $\\{a^n b^n : n \\ge 0\\}$ is deterministic context-free and unambiguous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [def-deterministic-pda, prop-deterministic-cfls-are-unambiguous]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

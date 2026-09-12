@@ -2,13 +2,14 @@
 id: def-pspace-and-npspace
 kind: definition
 title: "The classes PSPACE and NPSPACE"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-dtime-ntime-dspace-and-nspace]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: ex-integral-cohomology-of-real-projective-space-from-uct
 kind: example
 title: Integral cohomology of real projective space from UCT
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, cor-integral-cohomology-detects-adjacent-homology-torsion, lem-real-projective-space-cellular-homology-and-pinch-map, def-axiom-of-choice]

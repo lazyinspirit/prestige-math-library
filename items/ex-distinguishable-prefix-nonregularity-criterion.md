@@ -2,7 +2,7 @@
 id: ex-distinguishable-prefix-nonregularity-criterion
 kind: example
 title: "The prefixes 0^n distinguish the language {0^n1^n : n >= 0}"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [cor-distinguishable-prefix-nonregularity-criterion, def-distinguishing-word]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

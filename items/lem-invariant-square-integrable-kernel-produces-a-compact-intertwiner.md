@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Invariant square integrable kernel produces a compact intertwiner"
 deps: ["lem-square-integrable-kernels-define-bounded-compact-integral-operators", "lem-conjugate-transpose-kernels-give-adjoints", "lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace", "lem-product-rectangle-kernels-are-dense-in-complex-l-two", "thm-measure-preservation-on-a-generating-pi-system", "thm-tonelli-and-fubini-for-completed-product-measures", "def-axiom-of-choice", "def-unitary-eigenfunction-for-a-probability-system"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

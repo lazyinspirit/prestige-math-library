@@ -2,7 +2,7 @@
 id: thm-table-filling-minimization-algorithm
 kind: theorem
 title: "The table-filling algorithm computes state equivalence and DFA minimization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-distinguishing-word, lem-state-equivalence-is-a-right-congruence, def-quotient-dfa-by-state-equivalence, lem-quotient-dfa-is-well-defined-and-equivalent, lem-removing-unreachable-states-preserves-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

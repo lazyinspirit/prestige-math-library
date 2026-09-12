@@ -2,7 +2,7 @@
 id: def-mu-minimization-and-partial-recursive-function
 kind: definition
 title: "Unbounded minimization and partial recursive functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-function, def-primitive-recursive-function]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

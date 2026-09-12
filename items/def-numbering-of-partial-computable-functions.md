@@ -2,13 +2,14 @@
 id: def-numbering-of-partial-computable-functions
 kind: definition
 title: "Numberings of partial computable functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [thm-partial-recursive-iff-turing-computable]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

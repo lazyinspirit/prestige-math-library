@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Countable completeness and transitive collapse"
 deps: ["thm-lc-los-schema-for-universe-ultrapowers", "lem-lc-scott-quotients-are-sets-and-membership-is-setlike", "thm-mostowski-collapse-for-extensional-relations", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

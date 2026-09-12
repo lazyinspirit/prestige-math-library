@@ -2,13 +2,14 @@
 id: def-bounded-computation-tableau
 kind: definition
 title: "A bounded computation tableau for a nondeterministic Turing-machine run"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
 deps: [def-dtime-ntime-dspace-and-nspace, def-turing-machine-configuration, def-tape-finite-support-convention]
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

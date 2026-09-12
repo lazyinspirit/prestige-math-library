@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Nonzero finite dimensional complex invariant subspaces have unitary eigenvectors"
 deps: ["def-unitary-eigenfunction-for-a-probability-system", "cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue", "thm-fundamental-theorem-of-algebra-minimum-modulus-proof", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

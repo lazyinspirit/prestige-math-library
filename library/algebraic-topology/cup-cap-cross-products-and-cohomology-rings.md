@@ -1,0 +1,13 @@
+---
+page: "cup-cap-cross-products-and-cohomology-rings"
+title: "Cup Cap Cross Products and Cohomology Rings"
+status: "draft"
+items: ["def-alexander-whitney-diagonal-approximation","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-singular-cup-product-on-cochains","thm-cup-product-leibniz-identity","def-singular-cohomology-ring","prop-cup-product-is-natural-unital-and-associative","lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal","thm-singular-cohomology-is-graded-commutative","def-relative-cup-product","prop-relative-cup-products-are-natural-and-compatible-with-connectors","def-cap-product-with-cohomology-first","thm-cap-product-boundary-identity","prop-cap-product-naturality-and-projection-formula","def-relative-cap-product","lem-relative-singular-product-chain-equivalence-for-cw-pairs","lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses","thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism","lem-local-coordinate-cup-products-generate-top-relative-cohomology","def-cup-length-over-a-coefficient-ring","prop-positive-degree-cup-products-on-a-suspension-vanish","lem-integral-surface-cup-pairing-from-the-oriented-polygon"]
+examples: []
+---
+
+Cup product turns singular cohomology with a commutative unital coefficient ring into a graded ring. The construction begins with the Alexander–Whitney front/back faces and the shuffle comparison. Its cochain identities prove descent, associativity and naturality; the explicit factor-reversal homotopy explains why graded commutativity holds on cohomology even though it can fail on individual cochains.
+
+We use the positive coboundary and write cap products with cohomology first. For a degree-$p$ cochain the boundary identity is $\partial(\alpha\cap c)=(-1)^p(\alpha\cap\partial c-\delta\alpha\cap c)$. Relative products retain their actual subspace domains. Open-complement products use the small-chain comparison, while CW product pairs receive a separate chain equivalence before relative Künneth is applied.
+
+The ring Künneth theorem distinguishes its choice-free multiplication identity from additive bijectivity, which assumes AC and the stated degreewise finite-free homology condition. Local coordinate products and the oriented polygon calculation provide explicit suppliers for projective-space rings and surface pairings. Cup length and the vanishing of positive-degree products on suspensions give useful ways to distinguish spaces beyond their additive groups. The companion calculations check generators, orientation signs and coefficient hypotheses.

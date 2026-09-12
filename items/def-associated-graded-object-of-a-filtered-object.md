@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf
     - title: Romyar Sharifi, Homological Algebra
       url: https://math.ucla.edu/~sharifi/homalg.pdf
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 justified_by: ["lem-associated-graded-quotients-are-well-defined-subquotients"]

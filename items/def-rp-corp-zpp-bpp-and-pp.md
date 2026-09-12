@@ -2,7 +2,7 @@
 id: def-rp-corp-zpp-bpp-and-pp
 kind: definition
 title: "The classes RP, coRP, ZPP, BPP, and PP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-probabilistic-polynomial-time-machine]
 landmark: true
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

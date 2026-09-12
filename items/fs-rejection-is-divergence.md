@@ -2,7 +2,7 @@
 id: fs-rejection-is-divergence
 kind: false-statement
 title: "FALSE: rejection is divergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-halting-computation-and-divergence, def-initial-accepting-and-rejecti
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

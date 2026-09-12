@@ -4,6 +4,7 @@ kind: "theorem"
 title: "An inaccessible rank segment models ZFC"
 deps: ["lem-lc-inaccessible-size-and-rank-bounds", "prop-cumulative-hierarchy-transitivity-and-growth", "thm-relativization-and-set-satisfaction", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

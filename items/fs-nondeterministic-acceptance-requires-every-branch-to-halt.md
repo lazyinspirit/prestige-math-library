@@ -2,7 +2,7 @@
 id: fs-nondeterministic-acceptance-requires-every-branch-to-halt
 kind: false-statement
 title: "FALSE: nondeterministic acceptance requires every branch to halt"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -11,6 +11,7 @@ deps: [def-nondeterministic-accepting-computation]
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

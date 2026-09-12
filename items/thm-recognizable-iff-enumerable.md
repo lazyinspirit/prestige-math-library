@@ -2,7 +2,7 @@
 id: thm-recognizable-iff-enumerable
 kind: theorem
 title: "A binary language is recognizable if and only if it is computably enumerable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-decidable-and-recognizable-language, def-computably-enumerable-set]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

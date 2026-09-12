@@ -2,7 +2,7 @@
 id: ex-empty-affine-algebraic-set-unit-ideal
 kind: example
 title: "The empty affine algebraic set corresponds to the unit ideal and the zero coordinate ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ deps:
   - def-coordinate-ring-affine-algebraic-set
   - def-vanishing-ideal-affine-set
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

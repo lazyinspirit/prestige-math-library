@@ -2,7 +2,7 @@
 id: lem-quotient-dfa-is-well-defined-and-equivalent
 kind: lemma
 title: "The quotient by state equivalence is a well-defined equivalent DFA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-quotient-dfa-by-state-equivalence, lem-state-equivalence-is-a-right-congruence, def-dfa-acceptance-and-recognized-language, def-extended-dfa-transition-function, def-right-language-and-equivalent-dfa-states]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

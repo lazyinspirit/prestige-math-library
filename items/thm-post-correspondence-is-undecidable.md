@@ -2,7 +2,7 @@
 id: thm-post-correspondence-is-undecidable
 kind: theorem
 title: "The Post correspondence problem is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [lem-modified-pcp-reduces-to-pcp, thm-modified-pcp-is-undecidable, thm-many-one-reductions-transfer-decidability-and-recognizability]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

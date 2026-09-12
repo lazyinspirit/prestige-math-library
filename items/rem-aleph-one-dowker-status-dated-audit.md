@@ -2,13 +2,14 @@
 id: rem-aleph-one-dowker-status-dated-audit
 kind: remark
 title: Dated aleph-one Dowker status
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -16,6 +16,8 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
     - title: "The Stacks Project, Homological Algebra"
       url: "https://stacks.math.columbia.edu/download/homology.pdf"
+verification:
+  audited: 2026-09-12
 ---
 
 ## Statement

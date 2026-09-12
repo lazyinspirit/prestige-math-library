@@ -2,13 +2,14 @@
 id: ex-a2-coinvariant-algebra-and-basic-invariants
 kind: example
 title: A2 coinvariant algebra and basic invariants
-status: draft
+status: "published"
 origin: pipeline
 deps: [thm-chevalley-shephard-todd-for-finite-weyl-groups, def-finite-linear-invariant-and-coinvariant-polynomial-algebras]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

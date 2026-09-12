@@ -2,7 +2,7 @@
 id: cex-regular-expression-syntax-is-its-denoted-language
 kind: counterexample
 title: "The expression $a+b$ is not literally the set $\\{a,b\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [fs-regular-expression-syntax-is-its-denoted-language]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

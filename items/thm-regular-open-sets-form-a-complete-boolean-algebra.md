@@ -2,7 +2,7 @@
 id: thm-regular-open-sets-form-a-complete-boolean-algebra
 kind: theorem
 title: Regular open algebra in ZF
-status: draft
+status: published
 origin: pipeline
 deps: [def-complete-boolean-algebra-and-regular-open-sets, lem-boolean-quotient-congruence]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

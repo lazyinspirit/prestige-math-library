@@ -4,6 +4,7 @@ kind: "definition"
 title: "Valuation of names and M[G]"
 deps: ["lem-forcing-names-and-name-ranks-are-absolute", "thm-recursion-on-well-founded-setlike-relations"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-gnfa-state-elimination
 kind: definition
 title: "The GNFA state-elimination update"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
 deps: [def-generalized-nfa, def-language-boolean-operations, def-language-concatenation-powers-and-kleene-star]
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

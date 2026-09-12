@@ -2,7 +2,7 @@
 id: thm-smn-parameter-theorem
 kind: theorem
 title: "The s-m-n theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-parameter-specialization-function, def-universal-and-acceptable-numbe
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

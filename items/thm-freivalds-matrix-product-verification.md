@@ -2,7 +2,7 @@
 id: thm-freivalds-matrix-product-verification
 kind: theorem
 title: "Freivalds' one-trial matrix-product test has one-sided error"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-matrix-space, def-matrix-product-and-identity-matrix, def-field]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

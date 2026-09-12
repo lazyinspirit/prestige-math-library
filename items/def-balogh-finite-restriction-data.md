@@ -2,7 +2,7 @@
 id: def-balogh-finite-restriction-data
 kind: definition
 title: Balogh finite restriction data
-status: draft
+status: published
 origin: pipeline
 deps: [thm-downward-lowenheim-skolem-with-parameters, thm-membership-rank-and-hierarchy-levels, prop-cumulative-hierarchy-transitivity-and-growth, def-axiom-of-choice, thm-regularity-of-the-alephs, thm-cofinality-basics]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

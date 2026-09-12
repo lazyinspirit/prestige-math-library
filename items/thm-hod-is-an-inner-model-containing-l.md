@@ -4,6 +4,7 @@ kind: "theorem"
 title: "HOD as an inner model and comparison with L"
 deps: ["def-ordinal-definability-and-hod", "thm-constructibility-is-absolute-and-l-is-minimal", "lem-canonical-well-order-of-finite-definition-codes", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

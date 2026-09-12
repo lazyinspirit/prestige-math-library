@@ -4,6 +4,7 @@ kind: "theorem"
 title: "The covering-embedding characterization of strong compactness"
 deps: ["thm-lc-strong-compactness-fine-measures-and-logic", "lem-lc-fine-ultrapower-seed-and-normality", "lem-lc-ultrapower-critical-point"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

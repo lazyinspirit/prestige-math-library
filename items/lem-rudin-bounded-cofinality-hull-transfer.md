@@ -2,7 +2,7 @@
 id: lem-rudin-bounded-cofinality-hull-transfer
 kind: lemma
 title: Elementary hull transfer for bounded cofinality strata
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ambient-ordinal-box-space, thm-downward-lowenheim-skolem-with-parameters, thm-tarski-vaught-set-structure-test, thm-transfinite-recursion, thm-membership-rank-and-hierarchy-levels, prop-cumulative-hierarchy-transitivity-and-growth, thm-regularity-of-the-alephs, thm-cofinality-basics, cor-cardinal-absorption, def-axiom-of-choice]
 proof_strategy: construction
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-every-countable-language-is-decidable
 kind: false-statement
 title: "FALSE: every countable language is decidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -10,6 +10,7 @@ provenance:
 deps: [def-countable, def-decidable-and-recognizable-language, cor-effective-enumeration-of-turing-machines, def-effective-encoding-of-turing-machines, def-computation-alphabet-and-word-convention]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

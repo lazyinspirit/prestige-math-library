@@ -2,7 +2,7 @@
 id: thm-mayer-vietoris-sequence-in-singular-cohomology
 kind: theorem
 title: Mayer vietoris sequence in singular cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cohomology-with-coefficients, def-singular-cochain-complex-with-coefficients, prop-singular-cohomology-is-contravariantly-functorial, thm-cover-small-inclusion-is-a-chain-homotopy-equivalence, thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence, thm-long-exact-sequence-of-a-pair-in-singular-cohomology]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

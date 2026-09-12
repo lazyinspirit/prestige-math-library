@@ -2,13 +2,14 @@
 id: def-stone-ultrafilter-space-and-clopens
 kind: definition
 title: Stone ultrafilter space and its clopen basis
-status: draft
+status: published
 origin: pipeline
 deps: [lem-generated-boolean-filter-and-ultrafilter-tests, def-topological-space, def-hausdorff-space, def-compact-space]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: ex-s3-bruhat-order-and-inversion-sets
 kind: example
 title: S3 bruhat order and inversion sets
-status: draft
+status: "published"
 origin: pipeline
 deps: []
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

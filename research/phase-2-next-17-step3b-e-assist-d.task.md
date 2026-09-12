@@ -1,0 +1,5 @@
+# Step 3b group E supplemental authoring for D
+
+The original group E batches 8 and 9 are complete. This owner-directed supplemental authoring dispatch owns only batch-7 A-page `lem-radial-geodesics-from-one-point-reach-every-point-under-global-exp-domain.md`. Its declared scaffold suppliers currently exist. Author the full exact lemma needed by Hopf--Rinow, with the necessary minimization and endpoint argument established from actual suppliers. The active group D author owns every other batch-7 A-page item, including the continuation and Hopf--Rinow theorems.
+
+Before writing, confirm the owned item file is absent; never overwrite another author's work. Write only this item file and `research/phase-2-next-17-step3b-e-assist-d.md`. Do not edit shared batch manifest, contract, coverage, scope, decisions, page, plan, group-D report, or published item. Run focused precheck and rendering, and report exact dependencies and canonical integration needed. Do not claim a Step-3 gate pass or independent audit.

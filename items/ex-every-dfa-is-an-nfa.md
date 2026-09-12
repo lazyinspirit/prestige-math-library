@@ -2,7 +2,7 @@
 id: ex-every-dfa-is-an-nfa
 kind: example
 title: "Viewing a small DFA as an NFA with singleton transitions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -12,6 +12,7 @@ generation:
 deps: [prop-every-dfa-is-an-nfa]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

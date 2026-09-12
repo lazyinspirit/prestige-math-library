@@ -30,18 +30,19 @@ parts:
       - complex-riesz-thorin-endpoint-interpolation
       - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
       - weak-mixing-and-the-chacon-transformation
+      - measure-preserving-transformations-and-poincare-recurrence
 ---
 
 ## sigma-algebras-and-borel-sets
 
 A sigma-algebra, outer measure and Carathéodory give Lebesgue measure, measurable functions,
-integration, convergence, products, signed measures, Radon--Nikodym and the $L^p$ calculus;
+integration, convergence, products, signed measures, Radon--Nikodym and the $L^p$ calculus.
 Riesz--Markov, Vitali covering, maximal estimates, differentiation and Hausdorff measure support
-the stated representation, FTC and dimension results; complex $L^p$ conventions keep components,
-almost-everywhere equality and the applicable sigma-finite or semifinite hypotheses explicit;
-Riesz--Thorin interpolates complex endpoint bounds from finite simple cores, with countable
-choice for full-space extensions. Measure preservation yields Koopman isometries, invariant
-sigma-algebras, ergodicity and strong mixing criteria through generating families, while weak
-mixing is characterized by vanishing Cesàro correlations, product ergodicity and absence of
-nonconstant eigenfunctions, proved via projections and compact intertwiners; the three-cut,
-one-spacer Chacon transformation is ergodic and weakly mixing but not strongly mixing.
+the representation, FTC and dimension results; complex $L^p$ conventions keep components,
+almost-everywhere equality and sigma-finite or semifinite hypotheses explicit; Riesz--Thorin
+interpolates complex endpoint bounds from finite cores under countable choice for full spaces.
+Measure preservation gives Koopman isometries, invariant sigma-algebras, ergodicity and strong
+mixing criteria through generating families; weak mixing means vanishing Cesàro correlations,
+product ergodicity and no nonconstant eigenfunctions. Then come Poincaré recurrence, first-return
+maps and Kac's formula, rotations and expanding maps, the fair-coin shift and Krylov--Bogolyubov;
+the three-cut Chacon transformation is ergodic and weakly, not strongly, mixing.

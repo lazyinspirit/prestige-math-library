@@ -2,7 +2,7 @@
 id: thm-nondeterministic-and-deterministic-recognizability-agree
 kind: theorem
 title: "Deterministic and nondeterministic Turing machines recognize the same languages"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -11,6 +11,7 @@ deps: [def-nondeterministic-accepting-computation, def-language-recognized-and-d
 justified_by: []
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

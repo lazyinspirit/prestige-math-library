@@ -2,13 +2,14 @@
 id: thm-kac-moody-verma-module-has-a-unique-simple-quotient
 kind: theorem
 title: Kac moody verma module has a unique simple quotient
-status: draft
+status: published
 origin: pipeline
 deps: [thm-universal-property-and-pbw-character-of-kac-moody-verma-modules, def-kac-moody-category-o]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

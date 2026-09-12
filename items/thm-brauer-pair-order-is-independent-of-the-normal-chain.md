@@ -6,8 +6,10 @@ deps: [thm-unique-normal-subpair-below-a-brauer-pair, lem-relative-brauer-homomo
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
+verification:
+  audited: 2026-09-12
 sources:
   references:
     - title: AKO, Fusion Systems in Algebra and Topology, IV §2 Theorem 2.10, Lemmas 2.11–2.12 and Proposition 2.14, printed pp.180–183; six-clause formulation retained from BKY Theorem 2.2

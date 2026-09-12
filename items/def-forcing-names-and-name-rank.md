@@ -4,6 +4,7 @@ kind: "definition"
 title: "Forcing names and their rank"
 deps: ["def-forcing-preorder-compatibility-and-filter", "thm-transfinite-recursion", "thm-recursion-on-well-founded-setlike-relations"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

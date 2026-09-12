@@ -2,7 +2,7 @@
 id: fs-state-elimination-has-a-unique-output-expression
 kind: false-statement
 title: "FALSE: state elimination has a unique output expression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-gnfa-state-elimination, thm-dfa-to-regular-expression]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

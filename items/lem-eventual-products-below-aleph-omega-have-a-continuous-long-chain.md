@@ -2,7 +2,9 @@
 id: lem-eventual-products-below-aleph-omega-have-a-continuous-long-chain
 kind: lemma
 title: A long chain with club continuity below aleph omega
-status: draft
+status: published
+verification:
+  audited: 2026-09-12
 origin: pipeline
 deps: [lem-club-continuity-produces-strongly-increasing-subsequences, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct

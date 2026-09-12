@@ -2,7 +2,7 @@
 id: thm-forcing-preorders-have-regular-open-completions
 kind: theorem
 title: Choice-free regular open completion of forcing preorders
-status: draft
+status: published
 origin: pipeline
 deps: [lem-separative-quotient-of-a-forcing-preorder, thm-regular-open-sets-form-a-complete-boolean-algebra]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-complete-reducibility-of-integrable-kac-moody-o-modules
 kind: theorem
 title: Complete reducibility of integrable kac moody o modules
-status: draft
+status: published
 origin: pipeline
 deps: [lem-casimir-separates-comparable-dominant-primitive-weights, lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights, thm-kac-moody-verma-module-has-a-unique-simple-quotient, def-axiom-of-choice, def-kac-moody-category-o, thm-universal-property-and-pbw-character-of-kac-moody-verma-modules]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

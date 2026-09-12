@@ -2,7 +2,7 @@
 id: thm-bpi-equivalent-to-propositional-compactness
 kind: theorem
 title: BPI is equivalent to arbitrary-set propositional compactness
-status: draft
+status: published
 origin: pipeline
 deps: [thm-bpi-equivalent-to-boolean-filter-extension, lem-finite-boolean-algebras-are-powersets-of-atoms]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

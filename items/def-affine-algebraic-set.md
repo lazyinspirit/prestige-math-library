@@ -2,7 +2,7 @@
 id: def-affine-algebraic-set
 kind: definition
 title: "An affine algebraic set in affine space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ sources:
     - title: "Donu Arapura, Notes on Basic Algebraic Geometry, §1.1"
       url: "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
 verification:
+  audited: 2026-09-12
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

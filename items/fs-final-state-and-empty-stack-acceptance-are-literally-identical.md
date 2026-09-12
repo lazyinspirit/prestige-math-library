@@ -2,7 +2,7 @@
 id: fs-final-state-and-empty-stack-acceptance-are-literally-identical
 kind: false-statement
 title: "FALSE: acceptance by final state and by empty stack are literally identical"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-pda-acceptance-by-final-state, def-pda-acceptance-by-empty-stack, thm-final-state-and-empty-stack-acceptance-are-equivalent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

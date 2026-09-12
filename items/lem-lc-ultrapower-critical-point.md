@@ -4,6 +4,7 @@ kind: "lemma"
 title: "The critical point of a measurable ultrapower"
 deps: ["thm-lc-countable-completeness-and-well-founded-ultrapowers", "lem-lc-complete-measures-small-fibres-and-inaccessibility", "def-axiom-of-choice", "lem-lc-inaccessible-size-and-rank-bounds"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

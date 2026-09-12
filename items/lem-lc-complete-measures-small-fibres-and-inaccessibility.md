@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Measurable cardinals are inaccessible"
 deps: ["def-lc-complete-ultrafilters-and-measurable-cardinals", "thm-ultrafilter-characterisation", "def-lc-inaccessible-and-mahlo-cardinals", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: ex-green-correspondence-for-a-trivial-intersection-subgroup
 kind: example
 title: Green correspondence for a trivial intersection subgroup
-status: draft
+status: published
 origin: pipeline
 deps: [thm-green-correspondence-with-exceptional-families, lem-green-exceptional-family-containment-and-fusion, thm-higman-criterion-for-relative-projectivity, def-relative-projectivity, thm-green-vertex-source-existence-and-conjugacy, def-axiom-of-choice, lem-relative-projectivity-mackey-intersections-for-finite-modules]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-cfg-ambiguity-is-undecidable
 kind: theorem
 title: "CFG ambiguity is undecidable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cfg-equivalence-and-ambiguity-problems, def-ambiguity-and-inherent-ambiguity, def-post-correspondence-problem, def-computable-many-one-reduction, thm-post-correspondence-is-undecidable, thm-many-one-reductions-transfer-decidability-and-recognizability]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

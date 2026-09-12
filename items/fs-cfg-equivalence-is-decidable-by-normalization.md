@@ -2,7 +2,7 @@
 id: fs-cfg-equivalence-is-decidable-by-normalization
 kind: false-statement
 title: "FALSE: CFG equivalence is decidable by normalization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-cfg-equivalence-and-ambiguity-problems]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

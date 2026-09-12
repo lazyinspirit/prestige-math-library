@@ -2,7 +2,7 @@
 id: thm-affine-morphisms-coordinate-ring-anti-equivalence
 kind: theorem
 title: "Affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ sources:
     - title: "Michael Artin, Notes for a Course in Algebraic Geometry, Corollary 2.5.6"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
 ---
 

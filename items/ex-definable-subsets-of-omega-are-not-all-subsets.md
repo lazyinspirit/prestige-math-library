@@ -4,6 +4,7 @@ kind: "example"
 title: "Def(omega) is countable while P(omega) is not"
 deps: ["def-definable-subsets-of-a-membership-structure"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

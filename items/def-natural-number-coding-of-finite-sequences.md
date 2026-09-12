@@ -2,7 +2,7 @@
 id: def-natural-number-coding-of-finite-sequences
 kind: definition
 title: "A natural-number coding of finite sequences"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-effective-binary-encoding-and-decoder, lem-finite-tuples-admit-effective-prefix-free-encodings]
 justified_by: []
 verification:
+  audited: 2026-09-12
   precheck: n/a
 sources:
   scraped: []

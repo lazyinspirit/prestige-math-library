@@ -2,7 +2,7 @@
 id: lem-space-bounded-machines-have-exponentially-many-configurations
 kind: lemma
 title: "A machine using space s(n) has at most exponentially many configurations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-worst-case-time-and-space-complexity, def-multitape-and-nondeterministic-machines]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

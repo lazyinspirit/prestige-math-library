@@ -2,7 +2,7 @@
 id: def-complete-boolean-algebra-and-regular-open-sets
 kind: definition
 title: Completeness, regular opens, and order continuity
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-algebra-for-stone-duality, def-boolean-homomorphism-and-quotient, def-topological-space]
 justified_by: [thm-regular-open-sets-form-a-complete-boolean-algebra]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-function-field-independent-affine-open
 kind: theorem
 title: "All nonempty affine opens of an irreducible affine variety have the same function field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ sources:
     - title: "Michael Artin, Notes for a Course in Algebraic Geometry, Proposition 2.6.1 and Definition 3.4.3"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
+  audited: 2026-09-12
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

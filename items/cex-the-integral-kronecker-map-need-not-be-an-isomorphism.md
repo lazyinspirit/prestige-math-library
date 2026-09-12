@@ -2,7 +2,7 @@
 id: cex-the-integral-kronecker-map-need-not-be-an-isomorphism
 kind: counterexample
 title: The integral Kronecker map need not be an isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, def-axiom-of-choice, lem-real-projective-space-cellular-homology-and-pinch-map, lem-singular-uct-extension-from-cycle-projections, def-ext-via-a-projective-resolution-of-the-first-variable]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

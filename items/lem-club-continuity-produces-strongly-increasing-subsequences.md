@@ -2,7 +2,7 @@
 id: lem-club-continuity-produces-strongly-increasing-subsequences
 kind: lemma
 title: Club continuity produces strongly increasing subsequences
-status: draft
+status: published
 origin: pipeline
 deps: [def-strong-increase-and-bounding-projections-for-countable-products, lem-uncountable-club-guessing-at-a-double-successor, thm-small-intersections-of-clubs, thm-cofinality-basics, thm-transfinite-recursion, def-axiom-of-choice, thm-regularity-of-the-alephs]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

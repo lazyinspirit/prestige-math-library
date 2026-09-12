@@ -2,7 +2,7 @@
 id: thm-cfg-to-pda-construction
 kind: theorem
 title: "Every context-free grammar has an equivalent PDA"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -10,6 +10,7 @@ provenance:
 deps: [def-context-free-grammar, def-language-generated-by-a-cfg, def-leftmost-and-rightmost-derivation, def-pda-acceptance-by-empty-stack]
 proof_strategy: direct
 verification:
+  audited: 2026-09-12
   precheck: pass
 sources:
   scraped: []

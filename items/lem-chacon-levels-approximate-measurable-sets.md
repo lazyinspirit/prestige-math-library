@@ -4,6 +4,7 @@ kind: "lemma"
 title: "Chacon levels approximate measurable sets"
 deps: ["def-chacon-three-cut-one-spacer-towers", "lem-finite-measure-sets-are-approximable-by-a-generating-algebra", "lem-half-open-boxes-generate-the-borel-sigma-algebra-on-rn", "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure", "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

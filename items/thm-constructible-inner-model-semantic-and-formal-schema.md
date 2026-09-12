@@ -4,6 +4,7 @@ kind: "theorem"
 title: "Semantic and formal inner-model theorem for L"
 deps: ["thm-constructible-universe-basic-axioms", "thm-separation-in-the-constructible-universe", "thm-internal-power-set-in-the-constructible-universe", "thm-replacement-in-the-constructible-universe", "thm-constructibility-is-absolute-and-l-is-minimal", "thm-constructible-universe-satisfies-choice", "thm-relativization-and-set-satisfaction", "thm-set-language-first-order-soundness"]
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

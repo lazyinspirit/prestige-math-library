@@ -2,7 +2,7 @@
 id: thm-topological-universal-coefficient-short-exact-sequence-for-cohomology
 kind: theorem
 title: Topological universal coefficient short exact sequence for cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-singular-cohomology-with-coefficients, lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives, lem-singular-uct-extension-from-cycle-projections, def-axiom-of-choice, def-singular-cochain-complex-with-coefficients, def-relative-singular-cochain-complex, prop-singular-chains-and-homology-are-covariantly-functorial]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-12
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
