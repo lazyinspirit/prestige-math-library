@@ -6,7 +6,6 @@ import { fileURLToPath } from 'node:url';
 import { axiomCertificate } from './support-phase-2-next-17-zf-axiom-operation-kernel.mjs';
 import { boundedFactories } from './support-phase-2-next-17-internal-finite-word-predicate.mjs';
 import { iterativeFormulaCode, semanticFormulas } from './support-phase-2-next-17-internal-tab-decode.mjs';
-import { translateFormulaEndpoint } from './support-phase-2-next-17-uax-proof-obligation-checker.mjs';
 
 const read = name => readFileSync(new URL(name, import.meta.url), 'utf8');
 const fence = name => read(name).match(/```javascript\n([\s\S]*?)\n```/)[1];
@@ -216,12 +215,6 @@ export function uAxiomCertificate(formulaCode, certificate) {
     return fields.length === 1 && ((fields[0] === 3n && formulaCode === selected.acCode)
       || (fields[0] === 4n && formulaCode === selected.gchCode));
   } catch { return false; }
-}
-
-export function selectedAxiomObligation(formulaCode, certificate) {
-  if (!uAxiomCertificate(formulaCode, certificate)) return null;
-  const selected = selectedEncoding();
-  return translateFormulaEndpoint(selected.domainCode, formulaCode);
 }
 
 // A compact, exact endpoint program for cases where eagerly duplicating the
