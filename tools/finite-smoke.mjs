@@ -85,6 +85,48 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'binary-shift-disjoint-cylinder-independence': ({ max_coordinates = 3 } = {}) => {
+    // A finite countermodel search for the exact cylinder calculation used in
+    // the fair-coin shift proof. Enumerate words, not the independence formula:
+    // a wrong shift offset, overlap threshold or empty-prescription convention
+    // changes the counted intersections. This does not prove Borel mixing or
+    // the extension to the completed measure.
+    const width = boundedInteger(max_coordinates, 3, 1, 3);
+    const patterns = [];
+    for (let code = 0; code < 3 ** width; code++) {
+      let digits = code;
+      const fixed = [];
+      for (let coordinate = 0; coordinate < width; coordinate++) {
+        const digit = digits % 3;
+        digits = Math.floor(digits / 3);
+        if (digit) fixed.push([coordinate, digit - 1]);
+      }
+      patterns.push(fixed);
+    }
+    const matches = (word, fixed, offset) => fixed.every(([coordinate, value]) =>
+      ((word >> (coordinate + offset)) & 1) === value);
+    let cases = 0;
+    for (let shift = width; shift <= width + 2; shift++) {
+      const words = 1 << (shift + width);
+      for (const first of patterns) for (const second of patterns) {
+        let countFirst = 0, countShifted = 0, countBoth = 0;
+        for (let word = 0; word < words; word++) {
+          const inFirst = matches(word, first, 0);
+          const inShifted = matches(word, second, shift);
+          if (inFirst) countFirst++;
+          if (inShifted) countShifted++;
+          if (inFirst && inShifted) countBoth++;
+        }
+        if (countFirst * 2 ** first.length !== words
+          || countShifted * 2 ** second.length !== words
+          || countBoth * words !== countFirst * countShifted) {
+          return { ok: false, summary: `cylinder count mismatch at shift ${shift}, first ${JSON.stringify(first)}, second ${JSON.stringify(second)}` };
+        }
+        cases++;
+      }
+    }
+    return { ok: true, summary: `enumerated ${cases} cylinder pairs with empty and nonempty prescriptions on ${width} coordinates and disjoint shifts; finite counts match product masses` };
+  },
   'polynomial-gaussian-derivatives': () => {
     // Compare two independently computed finite jets: differentiate the
     // product's Taylor coefficients, versus the claimed polynomial recurrence.

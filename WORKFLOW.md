@@ -145,6 +145,10 @@ The finite-smoke registry includes an exact Gaussian derivative check: finite
 Taylor jets are compared with polynomial differentiation, including zero and
 signed coefficients. Its bounded success does not certify decay or Fourier
 analysis proofs; contracts must name the actual assertion it checks.
+For the fair-coin shift, a separate finite check enumerates short binary words
+and disjoint cylinder prescriptions, including empty ones, to challenge the
+exact product-mass identity used in the mixing proof. It does not certify Borel
+mixing or the completed-measure argument.
 
 ## Review, sources and impact
 

@@ -36,6 +36,16 @@ test('finite-smoke reports its coverage, not only a bare check count', (t) => {
     'a bare check count cannot distinguish 1/291 from 291/291');
 });
 
+test('finite-smoke enumerates the fair-coin shift cylinder calculation', () => {
+  const r = spawnSync(process.execPath, [join(REPO, 'tools', 'finite-smoke.mjs'), '--self-test', '--json'],
+    { cwd: REPO, encoding: 'utf8', timeout: 300_000 });
+  assert.equal(r.status, 0, r.stderr || r.stdout);
+  const report = JSON.parse(r.stdout);
+  const row = report.outcomes.find((outcome: any) => outcome.name === 'binary-shift-disjoint-cylinder-independence');
+  assert.equal(row?.ok, true, 'the registered check must exercise its finite enumeration');
+  assert.match(row.summary, /cylinder pairs/);
+});
+
 test('the url gate declares a liveness floor', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
