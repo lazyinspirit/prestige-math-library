@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { permittedNewLemmas } from '../../step7-new-lemmas.mjs';
+import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems } from '../../auditor-created-items.mjs';
 
 const texts: Record<string, string> = {
   'thm-consumer': 'kind: theorem\ndeps: [lem-missing]\n',
@@ -65,6 +66,11 @@ test('the actual Step-7 guard admits a new fatal-repair lemma and rejects an unr
     }
     const before = '---\nid: thm-consumer\nkind: theorem\ndeps: []\n---\nClaim.\n';
     const after = before.replace('deps: []', 'deps: [lem-missing]');
+    writeFileSync(join(root, 'items/thm-consumer.md'), before);
+    writeFileSync(join(root, 'research/demo-batch-1.pages.json'), JSON.stringify([
+      { id: 'page', items: [{ id: 'thm-consumer' }] },
+    ]));
+    writeAuditorCreatedBaseline(root, 'demo', 7);
     writeFileSync(join(root, 'items/thm-consumer.md'), after);
     writeFileSync(join(root, 'items/lem-missing.md'), '---\nid: lem-missing\nkind: lemma\ndeps: []\n---\nProof.\n');
     writeFileSync(join(root, 'research/touches.json'), JSON.stringify({ snapshots: [
@@ -83,6 +89,31 @@ test('the actual Step-7 guard admits a new fatal-repair lemma and rejects an unr
     let result = run();
     assert.equal(result.status, 0, result.stdout + result.stderr);
     assert.deepEqual(JSON.parse(result.stdout).created, ['lem-missing']);
+    writeFileSync(join(root, 'research/demo-batch-1.pages.json'), JSON.stringify([
+      { id: 'page', items: [{ id: 'thm-consumer' }, { id: 'lem-missing' }] },
+    ]));
+    mkdirSync(join(root, 'research/demo-dispatch'));
+    writeFileSync(join(root, 'research/demo-dispatch/author.result.json'), JSON.stringify({
+      run: 'demo', role: 'alpha-adjudicate', label: 'step7-a', covers: ['1'], ok: true,
+      started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+    }));
+    certifyAuditorCreatedItems(root, 'demo', 7);
+    const certifiedGuard = () => spawnSync(process.execPath, ['tools/step7-guard.mjs',
+      '--touches', 'research/touches.json', '--baseline', 'pre-step7',
+      '--judge-ledger', 'research/judge.jsonl', '--adjudications', 'research/adjudications.jsonl',
+      '--scope', 'research/scope.json', '--auditor-certifications',
+      'research/demo-step7-auditor-certifications.json', '--json'], { cwd: root, encoding: 'utf8' });
+    result = certifiedGuard();
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    writeFileSync(join(root, 'research/demo-batch-1.proof-contracts.json'), JSON.stringify({
+      contracts: { 'lem-missing': { risk: 'high' } },
+    }));
+    result = certifiedGuard();
+    assert.equal(result.status, 1);
+    assert.match(result.stdout, /stale Step 7 auditor-created certification carriers/);
+    certifyAuditorCreatedItems(root, 'demo', 7);
+    result = certifiedGuard();
+    assert.equal(result.status, 0, result.stdout + result.stderr);
     writeFileSync(join(root, 'items/lem-unrelated.md'), 'kind: lemma\ndeps: []\n');
     result = run();
     assert.equal(result.status, 1, result.stdout + result.stderr);

@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { stages } from '../stages/mathlib.mts';
+import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems } from '../../auditor-created-items.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'step8-changes.mjs');
@@ -132,6 +133,42 @@ test('Step 8 prepares, reviews, renders, and freezes in strict sequence', () => 
     assert.deepEqual(render.plan(ctx).map((entry: any) => entry.label), ['step8-scope-render']);
     assert.ok(freeze.plan(ctx)[0].argv.includes('post-step8-scope'));
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+for (const carrier of ['item', 'contract', 'manifest']) test(`Step-8 planning holds a stale carried ${carrier} until refresh, then schedules no self-review`, t => {
+  const root = hookFixture(); t.after(() => rmSync(root, { recursive: true, force: true }));
+  writeAuditorCreatedBaseline(root, 'demo', 7);
+  const path = join(root, 'items/lem-created.md');
+  const text = '---\nid: lem-created\nkind: lemma\ndeps: []\n---\nComplete proof.\n';
+  writeFileSync(path, text);
+  const manifest = join(root, 'research/demo-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(manifest, 'utf8'));
+  pages[0].items.push({ id: 'lem-created' });
+  writeFileSync(manifest, JSON.stringify(pages));
+  mkdirSync(join(root, 'research/demo-dispatch'));
+  const result = { run: 'demo', role: 'alpha-adjudicate', label: 'step7-a', covers: ['1'], ok: true,
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z' };
+  writeFileSync(join(root, 'research/demo-dispatch/author.result.json'), JSON.stringify(result));
+  certifyAuditorCreatedItems(root, 'demo', 7);
+  writeAuditorCreatedBaseline(root, 'demo', 8);
+  writeFileSync(join(root, 'research/demo-touches.json'), JSON.stringify({ snapshots: [{
+    label: 'post-step7', hashes: { modified: shortHash(itemHashGuard('repaired theorem\n')),
+      'lem-created': shortHash(itemHashGuard(text)) },
+  }] }));
+  if (carrier === 'item') writeFileSync(path, `${text}\nAdditional proof detail.\n`);
+  else if (carrier === 'contract') writeFileSync(join(root, 'research/demo-batch-1.proof-contracts.json'),
+    JSON.stringify({ contracts: { 'lem-created': { risk: 'high' } } }));
+  else { pages[0].items[1].statement = 'Changed interface'; writeFileSync(manifest, JSON.stringify(pages)); }
+  const stage: any = stages.find(candidate => candidate.id === '8-changes-judge');
+  const ctx = { repo: root, run: 'demo' };
+  assert.throws(() => stage.plan(ctx), /stale Step 7 auditor-created certification carriers/);
+  assert.throws(() => certifyAuditorCreatedItems(root, 'demo', 8), /no successful Step 8/);
+  writeFileSync(join(root, 'research/demo-dispatch/receipts.result.json'), JSON.stringify({
+    ...result, role: 'alpha', label: 'receipts-fix-1',
+  }));
+  certifyAuditorCreatedItems(root, 'demo', 8);
+  const plans = stage.plan(ctx);
+  assert.match(plans.find((plan: any) => plan.job === 'judgement').argv.at(-1), /nothing to judge/);
 });
 
 test('a closure retry judges only ids that are actually stale', async () => {

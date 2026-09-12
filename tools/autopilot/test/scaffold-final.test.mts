@@ -67,7 +67,8 @@ test('Step-3 auditor-created items bypass self-review but inherit the approved b
   writeFileSync(join(f.root, 'items', 'lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\n## Statement\n\nCreated.\n\n## Proof\n\nDirect.\n');
   mkdirSync(join(f.root, 'research', 'demo-dispatch'));
   f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-01T00:00:00.000Z',
   });
   certifyAuditorItems(f.root, 'demo');
@@ -76,6 +77,29 @@ test('Step-3 auditor-created items bypass self-review but inherit the approved b
   const final = f.check();
   assert.equal(final.closed, true);
   assert.equal(final.accepted, 4);
+});
+
+test('Step-3 author coverage must be an explicit exact-batch array, never an implicit global', t => {
+  const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  writeFileSync(join(f.root, 'items/lem-created.md'), '---\ndeps: []\n---\nComplete proof.\n');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  const result = (covers: any) => f.put('demo-dispatch/alpha-high-author.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers,
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  });
+  for (const covers of [undefined, null, '1', 'all', [], ['all'], ['2']]) {
+    result(covers);
+    assert.throws(() => certifyAuditorItems(f.root, 'demo'), /no successful Step 3.*covers batch 1/);
+  }
+  result(['1']);
+  assert.deepEqual(certifyAuditorItems(f.root, 'demo').items.map(row => row.id), ['lem-created']);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-created').closed, true);
+  for (const covers of [undefined, null, '1', [], ['all']]) {
+    result(covers);
+    assert.throws(() => itemDecision(loadStep3(f.root, 'demo'), 'lem-created'), /missing successful Step 3 author-result provenance/);
+  }
 });
 
 test('Step-3 auditor additions cannot turn an insufficient baseline scope into approval', t => {
@@ -87,7 +111,8 @@ test('Step-3 auditor additions cannot turn an insufficient baseline scope into a
   writeFileSync(join(f.root, 'items', 'lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: []\n---\nCreated.\n');
   mkdirSync(join(f.root, 'research', 'demo-dispatch'));
   f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-01T00:00:00.000Z',
   });
   certifyAuditorItems(f.root, 'demo');
@@ -106,7 +131,8 @@ test('recovery certifies only completed V2 inputs and never approves an incomple
     writeFileSync(join(f.root, `items/${id}.md`), `---\nid: ${id}\ndeps: []\n---\nAuthored proof.\n`);
   mkdirSync(join(f.root, 'research/demo-dispatch'));
   f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-01T00:00:00.000Z',
   });
   const later = new Date('2100-01-02T00:00:00.000Z');
@@ -129,7 +155,8 @@ test('recovery certifies only completed V2 inputs and never approves an incomple
   assert.deepEqual(certifyCompletedAuditorItems(f.root, 'demo').items, receipt.items);
   writeFileSync(join(f.root, 'items/lem-unwritten.md'), '---\ndeps: []\n---\nNew proof.\n');
   f.put('demo-dispatch/alpha-high-step3b-a-fresh.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-fresh', covers: ['1'],
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-03T00:00:00.000Z',
   });
   assert.equal(certifyAuditorItems(f.root, 'demo').items.length, 3);
@@ -152,7 +179,8 @@ test('recovery certification does not wait for a sibling author result', t => {
     writeFileSync(join(f.root, `items/${id}.md`), '---\ndeps: []\n---\nProof.\n');
   mkdirSync(join(f.root, 'research/demo-dispatch'));
   f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-01T00:00:00.000Z',
   });
   const receipt = certifyCompletedAuditorItems(f.root, 'demo');
@@ -178,7 +206,8 @@ test('unchanged V2 recovery receipts preserve bytes and mtime while pending diag
   writeFileSync(join(f.root, 'items/lem-ready.md'), '---\ndeps: []\n---\nReady proof.\n');
   mkdirSync(join(f.root, 'research/demo-dispatch'));
   const resultPath = 'demo-dispatch/alpha-high-step3b-a.result.json';
-  const author = { run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+  const author = { run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-01T00:00:00.000Z' };
   f.put(resultPath, author);
   const first = certifyCompletedAuditorItems(f.root, 'demo');
@@ -237,7 +266,8 @@ test('stalemate recovery certifies completed groups before routing only the name
   writeFileSync(join(f.root, 'items/lem-created.md'), '---\ndeps: []\n---\nComplete proof.\n');
   mkdirSync(join(f.root, 'research/demo-dispatch'));
   f.put('demo-dispatch/alpha-high-step3b-a-old.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-old', covers: ['1'],
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2000-01-01T00:00:00.000Z',
     ended_at: '2100-01-01T00:00:00.000Z',
   });
   assert.ok(f.check().work.some((w: any) => w.item === 'lem-created'));
@@ -266,7 +296,7 @@ for (const source of ['proof', 'plan']) test(`Step-3 recertification rejects a t
   writeFileSync(join(f.root, 'items/lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: [lem-a]\n---\n\n## Proof\n\nUses lem-a.\n');
   mkdirSync(join(f.root, 'research/demo-dispatch'));
   const resultPath = 'demo-dispatch/alpha-high-step3b-a.result.json';
-  const author = { run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+  const author = { run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
     started_at: '2024-12-31T00:00:00.000Z', ended_at: '2025-01-02T00:00:00.000Z' };
   f.put(resultPath, author);
   const authoredAt = new Date('2025-01-01T00:00:00.000Z');
@@ -313,7 +343,7 @@ for (const mode of ['legacy', 'post-end']) test(`Step-3 ${mode} supplier provena
   }
   mkdirSync(join(f.root, 'research/demo-dispatch'));
   const resultPath = 'demo-dispatch/alpha-high-step3b-a.result.json';
-  const author = { run: 'demo', role: 'alpha-high', label: 'step3b-a', covers: ['1'], ok: true,
+  const author = { run: 'demo', role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'], ok: true,
     started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z' };
   f.put(resultPath, author);
   const first = certifyAuditorItems(f.root, 'demo');

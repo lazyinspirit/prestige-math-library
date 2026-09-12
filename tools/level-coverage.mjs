@@ -71,7 +71,7 @@ const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
 const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--auditor-certifications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
+  return !['--run', '--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--auditor-certifications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
 });
 if (!batchFiles.length) usage();
 if (judgeOnly) {
@@ -242,12 +242,17 @@ const proofScope = scope.filter((id) => isProofBearing(items.get(resolve(id) ?? 
 
 // Auditor/adjudicator-created items are an explicit non-judge certification
 // class. Only Step-7/8 receipts are relevant here. The receipt is hash-bound to
-// the current judge-form item bytes and never manufactures ledger rows.
+// all current item/manifest/contract carriers and never manufactures ledger rows.
 const auditorCertified = new Map();
-for (const path of (auditorCertificationsArg ?? '').split(',').map(value => value.trim()).filter(Boolean)) {
+let auditorCertificationBlocked = false;
+{
   let rows = [];
-  try { rows = loadAuditorCreatedCertifications(resolvePath(path), { steps: [7, 8] }); }
-  catch (cause) { error('auditor-certification-shape', cause.message); continue; }
+  try { rows = loadAuditorCreatedCertifications((auditorCertificationsArg ?? '').split(',')
+    .map(value => value.trim()).filter(Boolean).map(resolvePath), { root: REPO, run: option('--run'), steps: [7, 8] }); }
+  catch (cause) {
+    auditorCertificationBlocked = true;
+    error('auditor-certification-shape', cause.message);
+  }
   for (const row of rows) {
     const item = items.get(resolve(row.id) ?? row.id);
     if (!item || !judgeScope.includes(row.id)) continue;
@@ -439,7 +444,7 @@ if (judgeAdjudicationsPath) {
 const currentHashes = new Map();
 if (verifyCurrent && judgePath && existsSync(resolvePath(judgePath))) {
   try {
-    for (const result of await buildCurrentContextHashes(judgeScope.filter(id => !auditorCertified.has(id)), { cwd: REPO, cachePath: contextHashCachePath })) {
+    for (const result of await buildCurrentContextHashes(auditorCertificationBlocked ? [] : judgeScope.filter(id => !auditorCertified.has(id)), { cwd: REPO, cachePath: contextHashCachePath })) {
       if (result.ok) currentHashes.set(result.id, { context: result.context, item: result.item });
       else error('context-hash', result.error, result.id);
     }
@@ -488,6 +493,9 @@ const judgeCoverage = [];
 const terminalResolved = [];
 const terminalSuperseded = [];
 for (const id of judgePath ? judgeScope : []) {
+  // An invalid certification is a certification hold, not a paid self-review
+  // target. Keep closure false without manufacturing coverage or judge work.
+  if (auditorCertificationBlocked) continue;
   const auditor = auditorCertified.get(id);
   if (auditor) {
     judgeCoverage.push({ id, auditor_certified: true, certification_step: auditor.step,
@@ -604,6 +612,7 @@ if (outPath) {
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     terminal_superseded: terminalSuperseded.sort((a, b) => a.id.localeCompare(b.id)),
     auditor_certified: [...auditorCertified.keys()].sort(),
+    auditor_certification_blocked: auditorCertificationBlocked,
     needs_rejudge: needsRejudge.sort(),
     unadjudicated: unadjudicated.sort(),
     unadjudicated_rows: unadjudicatedRows.sort((a, b) =>

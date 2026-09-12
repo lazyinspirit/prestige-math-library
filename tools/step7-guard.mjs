@@ -473,12 +473,13 @@ for (const id of created) if (!newLemmas.has(id)) error('step7-creation',
   `${id}: a new Step-7 item must be a dependency lemma used by a licensed fatal repair`, id);
 if (auditorCertificationsPath) {
   let certified = [];
-  try { certified = loadAuditorCreatedCertifications(resolvePath(auditorCertificationsPath), { steps: [7] }); }
+  try { certified = loadAuditorCreatedCertifications(resolvePath(auditorCertificationsPath),
+    { root: REPO, run: scope.run, steps: [7] }); }
   catch (cause) { error('auditor-certification-shape', cause.message); }
   const current = new Map(certified.map(row => [row.id, row]));
   for (const id of created) {
     const row = current.get(id);
-    if (!row || shortHash(row.guard_sha256) !== now[id]) error('step7-creation-uncertified',
+    if (!row) error('step7-creation-uncertified',
       `${id}: new Step-7 lemma lacks a current auditor/adjudicator-created certification`, id);
   }
 }

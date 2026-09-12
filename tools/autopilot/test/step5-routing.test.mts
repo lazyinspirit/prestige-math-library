@@ -11,6 +11,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { step5Stages } from '../stages/mathlib.step5.mts';
 import { Executor } from '../src/executor.mts';
 import { itemHashGuard } from '../../item-hash.mjs';
+import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems } from '../../auditor-created-items.mjs';
 
 const REPO = join(import.meta.dirname, '..', '..', '..');
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
@@ -800,6 +801,45 @@ test('direct review includes local lemmas and rejects stale or unaccounted repai
     writeFileSync(path, JSON.stringify(doc));
     fx.run('stamp', '--run', 'r');
     assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /repair-confidence|decision-ledger-refs/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('direct Step-5 closure uses full current certification without demanding a supplier self-verdict', () => {
+  const fx = fixture();
+  try {
+    writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), '');
+    writeAuditorCreatedBaseline(fx.root, 'r', 5);
+    fx.run('prepare-direct', '--run', 'r');
+    const manifestPath = join(fx.root, 'research/r-batch-1.pages.json');
+    const pages = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    pages[0].items.push('lem-local-supplier');
+    writeFileSync(manifestPath, JSON.stringify(pages));
+    writeFileSync(join(fx.root, 'items/lem-local-supplier.md'), 'A fully authored local lemma.');
+    const decisionPath = join(fx.root, 'research/r-alpha-a-5a-decisions.json');
+    writeFileSync(decisionPath, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [...fx.ids, 'p'].map(id => ({
+      obligation: `authored:1:${id}`, id, route: id === 'p' ? 'page' : 'item',
+      verdict: 'accepted', evidence: 'Read every original argument.', defect_ids: [],
+    })) }));
+    fx.run('stamp', '--run', 'r');
+    mkdirSync(join(fx.root, 'research/r-dispatch'));
+    writeFileSync(join(fx.root, 'research/r-dispatch/author.result.json'), JSON.stringify({
+      run: 'r', role: 'alpha', label: '5a-a', covers: ['1'], ok: true,
+      started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+    }));
+    certifyAuditorCreatedItems(fx.root, 'r', 5);
+    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
+    const contractsPath = join(fx.root, 'research/r-batch-1.proof-contracts.json');
+    const contracts = JSON.parse(readFileSync(contractsPath, 'utf8'));
+    contracts.contracts['lem-local-supplier'] = { risk: 'high' };
+    writeFileSync(contractsPath, JSON.stringify(contracts));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr,
+      /stale Step 5 auditor-created certification carriers/);
+    certifyAuditorCreatedItems(fx.root, 'r', 5);
+    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
+    const decisions = JSON.parse(readFileSync(decisionPath, 'utf8'));
+    assert.ok(!decisions.decisions.some((row: any) => row.id === 'lem-local-supplier'));
+    decisions.decisions.shift(); writeFileSync(decisionPath, JSON.stringify(decisions));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-missing/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

@@ -759,21 +759,15 @@ const step8ScopeDeltaPath = (ctx) => `research/${ctx.run}-step8-scope-delta.json
 const step8ScopeReviewPath = (ctx) => `research/${ctx.run}-alpha-step8-review.md`;
 const step8ScopeRegisterPath = (ctx) => `research/${ctx.run}-alpha-step8.md`;
 const auditorCertificationsPath = (ctx, step: number) => `research/${ctx.run}-step${step}-auditor-certifications.json`;
-const auditorCertificationArgs = (ctx) => ['--auditor-certifications',
+const auditorCertificationArgs = (ctx) => ['--run', ctx.run, '--auditor-certifications',
   [7, 8].map(step => auditorCertificationsPath(ctx, step)).join(',')];
 const auditorCreatedGate = (ctx, step: 7 | 8) => gate(`step${step}-auditor-created-certifications`,
   ['node', 'tools/auditor-created-items.mjs', 'certify', '--run', ctx.run, '--step', String(step)]);
 
 function currentAuditorCreatedIds(ctx, step: 7 | 8): Set<string> {
-  const path = R(ctx, auditorCertificationsPath(ctx, step));
-  let rows: any[] = [];
-  try { rows = loadAuditorCreatedCertifications(path, { steps: [step] }); } catch { return new Set(); }
-  return new Set(rows.filter(row => {
-    try {
-      const source = readFileSync(R(ctx, 'items', `${row.id}.md`), 'utf8');
-      return itemHashJudge(source) === row.judge_sha256;
-    } catch { return false; }
-  }).map(row => row.id));
+  const paths = [7, 8].filter(value => value <= step).map(value => R(ctx, auditorCertificationsPath(ctx, value)));
+  const rows = loadAuditorCreatedCertifications(paths, { root: ctx.repo, run: ctx.run, steps: [7, 8] });
+  return new Set(rows.filter(row => row.step === step).map(row => row.id));
 }
 
 const step8ChangesRefreshArgv = (ctx: any): string[] => ['tools/step8-changes.mjs',
@@ -844,8 +838,9 @@ function readStep8Changes(ctx): string[] {
 /** Derive the same Step-8 delta before its receipt exists so the first judge
  * dispatch already has the exact set. */
 function step8ChangesOnDisk(ctx): string[] {
+  // Certification errors are holds, not an empty mathematical change set.
+  const certified = currentAuditorCreatedIds(ctx, 8);
   try {
-    const certified = currentAuditorCreatedIds(ctx, 8);
     const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
     const baseline = [...(touches.snapshots ?? [])].reverse().find((s: any) => s.label === 'post-step7');
     if (!baseline?.hashes) return [];

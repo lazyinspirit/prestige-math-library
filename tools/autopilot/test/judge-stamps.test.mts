@@ -11,12 +11,13 @@
 // rewrite left in the audit-targeted evidence block.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
 import { itemHashJudge } from '../../item-hash.mjs';
+import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems, loadAuditorCreatedCertifications } from '../../auditor-created-items.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP, MODELS } from '../../models.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
@@ -113,22 +114,74 @@ test('--items stamps an explicitly certified subset without needing a manifest-w
 });
 
 test('a current Step-8 auditor-created certification needs no judge stamp or ledger pass', () => {
-  const dir = fixture(['lem-auditor-created']);
+  const dir = fixture([]);
+  writeFileSync(join(dir, 'research/r-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: [] }]));
+  writeAuditorCreatedBaseline(dir, 'r', 8);
+  writeFileSync(join(dir, 'items/lem-auditor-created.md'), itemText('lem-auditor-created'));
+  writeFileSync(join(dir, 'research/r-batch-1.pages.json'), JSON.stringify([{ id: 'page-a', items: [{ id: 'lem-auditor-created' }] }]));
+  mkdirSync(join(dir, 'research/r-dispatch'));
+  writeFileSync(join(dir, 'research/r-dispatch/alpha-step8-lead.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha', label: 'step8-lead', ok: true, covers: ['1'],
+    started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
+  }));
+  certifyAuditorCreatedItems(dir, 'r', 8);
   const text = readFileSync(join(dir, 'items', 'lem-auditor-created.md'), 'utf8');
-  const h = itemHashJudge(text);
   // Keep configured lanes present in the append-only ledger, but deliberately
   // give this item no usable judge pass. Its separate receipt is the authority.
   writeLedger(dir, LANES.map((model) => ledgerRow('unrelated', model, false, '0'.repeat(64))));
-  writeFileSync(join(dir, 'research', 'auditor.json'), JSON.stringify({
-    version: 1, run: 'r', step: 8, policy: 'auditor-created-stage-bypass-v2',
-    items: [{ id: 'lem-auditor-created', judge_sha256: h, author_result: 'alpha-step8-lead.result.json' }],
-  }));
   const result = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
-    '--items', 'lem-auditor-created', '--auditor-certifications', 'research/auditor.json', '--verify'],
+    '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications', 'research/r-step8-auditor-certifications.json', '--verify'],
   { cwd: dir, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /1 auditor-created certified/);
   assert.doesNotMatch(text, /^ {2}judge:/m);
+  writeFileSync(join(dir, 'research/r-batch-1.proof-contracts.json'), JSON.stringify({
+    contracts: { 'lem-auditor-created': { risk: 'high' } },
+  }));
+  const stale = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--items', 'lem-auditor-created', '--run', 'r', '--auditor-certifications',
+    'research/r-step8-auditor-certifications.json', '--verify'], { cwd: dir, encoding: 'utf8' });
+  assert.equal(stale.status, 2);
+  assert.match(stale.stderr, /stale Step 8 auditor-created certification carriers/);
+});
+
+for (const stampInitially of [false, true]) for (const precheck of [false, true])
+test(`auditor certification survives judge-stamp add/remove, apply→verify→recertify (${stampInitially}/${precheck})`, t => {
+  const dir = fixture([]); t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const manifest = join(dir, 'research/r-batch-1.pages.json');
+  writeFileSync(manifest, JSON.stringify([{ id: 'page-a', items: [] }]));
+  writeAuditorCreatedBaseline(dir, 'r', 8);
+  const id = 'lem-auditor-created', path = join(dir, `items/${id}.md`);
+  const plain = precheck ? itemText(id) : itemText(id).replace('verification:\n  precheck: pass\n', '');
+  const stamp = '  judge:\n    model: "old"\n    verdict: pass\n';
+  const stamped = precheck ? plain.replace('  precheck: pass\n', `  precheck: pass\n${stamp}`)
+    : plain.replace('status: draft\n', `status: draft\nverification:\n${stamp}`);
+  writeFileSync(path, stampInitially ? stamped : plain);
+  writeFileSync(manifest, JSON.stringify([{ id: 'page-a', items: [{ id }] }]));
+  const at = new Date('2025-01-01T00:00:05Z');
+  for (const file of [path, manifest]) utimesSync(file, at, at);
+  mkdirSync(join(dir, 'research/r-dispatch'));
+  writeFileSync(join(dir, 'research/r-dispatch/author.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha', label: 'step8-lead', covers: ['1'], ok: true,
+    started_at: '2025-01-01T00:00:00Z', ended_at: '2025-01-01T00:00:10Z',
+  }));
+  const original = certifyAuditorCreatedItems(dir, 'r', 8);
+  const receiptPath = join(dir, 'research/r-step8-auditor-certifications.json');
+  writeLedger(dir, LANES.map(model => ledgerRow('unrelated', model, false, '0'.repeat(64))));
+  const check = (mode: string) => spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--items', id, '--run', 'r', '--auditor-certifications', receiptPath, mode], { cwd: dir, encoding: 'utf8' });
+  if (!stampInitially) writeFileSync(path, stamped);
+  assert.equal(loadAuditorCreatedCertifications(receiptPath).length, 1, 'adding the stamp leaves certification current');
+  let result = check('--apply'); assert.equal(result.status, 0, result.stderr);
+  assert.doesNotMatch(readFileSync(path, 'utf8'), /^ {2}judge:/m);
+  result = check('--verify'); assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(certifyAuditorCreatedItems(dir, 'r', 8).items, original.items,
+    'no post-author dispatch is needed, and historical V2 carrier evidence stays intact');
+  assert.equal(loadAuditorCreatedCertifications(receiptPath).length, 1);
+  writeFileSync(path, precheck ? plain.replace('precheck: pass', 'precheck: fail')
+    : plain.replace('status: draft\n', 'status: draft\nverification:\n  precheck: fail\n'));
+  assert.throws(() => loadAuditorCreatedCertifications(receiptPath), /stale/);
+  assert.throws(() => certifyAuditorCreatedItems(dir, 'r', 8), /no successful Step 8/);
 });
 
 test('apply creates verification for a definition with no precheck and preserves verdict currency', () => {

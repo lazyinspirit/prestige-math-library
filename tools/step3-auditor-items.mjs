@@ -10,6 +10,7 @@ import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from '
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
+import { authorResultAllowed, loadStep3AuditorProvenance } from './auditor-created-items.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
@@ -63,8 +64,8 @@ function successfulAuthorResults(root, run) {
   for (const file of readdirSync(dir).filter(f => /^alpha-high-.*\.result\.json$/.test(f) && !f.includes('.attempt-'))) {
     let row;
     try { row = json(join(dir, file)); } catch { continue; }
-    if (row.run === run && row.ok === true && row.role === 'alpha-high'
-      && /^step3b-/.test(row.label ?? '') && Array.isArray(row.covers) && row.ended_at) rows.push(row);
+    if (row.run === run && authorResultAllowed(3, row)
+      && Array.isArray(row.covers) && Date.parse(row.started_at) <= Date.parse(row.ended_at)) rows.push(row);
   }
   return rows;
 }
@@ -102,6 +103,7 @@ function certify(root, run, partial) {
       const prior = json(certificationPath);
       if (prior.version === 1 && prior.run === run && prior.policy === CERTIFICATION_POLICY
         && prior.baseline_sha256 === digest(baseline) && Array.isArray(prior.items)) {
+        loadStep3AuditorProvenance(root, run);
         priorReceipt = prior;
         priorById = new Map(prior.items.map(row => [row.id, row]));
       }

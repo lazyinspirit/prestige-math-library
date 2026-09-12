@@ -134,7 +134,7 @@ analysis proofs; contracts must name the actual assertion it checks.
 
 Step 5a reviews actual authored mathematics directly, not scaffolds again.
 Accept sound content, repair locally with fully authored suppliers, or escalate
-substantial gaps. Every baseline item/page needs a direct decision. A genuine
+substantial gaps. Every original baseline item/page needs a direct decision. A genuine
 post-baseline supplier created and fully authored by the Step-5 auditor receives
 a hash-bound item/manifest/contract certificate after the successful dispatch
 and does not require a self-review decision. High-risk and every static content,
@@ -153,6 +153,51 @@ the immutable v1 inventory baseline. Reuse requires the same run and baseline
 hash. The latest carrier write must be no later than the dispatch's `ended_at`;
 there is no post-completion timestamp allowance. Failed migration leaves the
 old receipt untouched but unavailable as certification evidence.
+
+Every certification consumer checks the complete current carrier hashes, run,
+batch/home and immutable baseline/origin binding, not only the normalized judge
+hash. A stale latest certificate blocks closure and judge planning; it never
+becomes an ordinary self-review target. A later Step 5/7/8 author may refresh an
+earlier auditor-created item only with a legitimate covering dispatch from that
+later step and a change in that item's own carriers. New stage baselines capture
+per-item `item_carriers`; a sibling's shared manifest/contract file write cannot
+promote an unchanged item. Legacy baselines remain immutable. Earlier receipts
+cannot reconstruct the later boundary's missing per-item carrier snapshots,
+including from a Step-3 transitive hash. Without that boundary evidence no new
+cross-stage promotion is issued; existing genuine same-stage V2 certifications
+retain their ordinary reuse path.
+Consumers also reject a carried row whose recorded carriers show no such
+candidate-specific delta, even if a successful later dispatch exists.
+The new receipt records `origin_step` and `origin_baseline_sha256`;
+the original baseline and receipt remain unchanged. This does not relabel any
+scaffold original or preexisting file, waive owner holds, license new scope, or
+replace content, dependency, contract, impact or repair-authority gates.
+Unchanged earlier evidence remains usable until a later author changes its
+carriers. Step-3 origin alone is not a later-stage judge waiver.
+The originating receipt must still resolve to a successful dispatch with its
+own run, allowed role/label, batch coverage and valid time ordering. A canonical
+receipt row without that dispatch is not origin evidence. Baselines, receipts
+and dispatch results are engine-owned evidence, not agent-writable attestations:
+the receipt records the historical write-window check, while current hashes
+are recomputed independently. Filesystem touches alone do not erase that check.
+Adding or removing only `verification.judge` is also certification-neutral.
+The receipt's raw item hash, guard hash and Step-5 composite remain historical audit
+evidence; currency compares the judge-normalized item plus the exact manifest
+and contract entries. Other verification fields remain hash-bound. Mechanical
+stamp cleanup therefore needs no fresh author dispatch and preserves the prior
+V2 carrier evidence.
+
+Author provenance recognizes only the exact stage-specific emitted label families:
+Step 3's hashed group-author labels; Step 5's group, lead, gate-batch and scoped
+gate/edge repairs; Step 7's adjudication, guard, preflight, cross-group, closure,
+repair and final-adjudicator queues; and Step 8's lead, changed/carried/close,
+impact and receipts repairs. Roles must match the corresponding emitter.
+Generic substring labels, other stages, malformed counters and reversed dispatch
+windows cannot certify current carriers.
+Every author result must carry an explicit coverage array. Missing, null or
+non-array coverage is invalid, never global. Steps 5/7/8 retain explicit `[]`
+and `["all"]` global routes; Step 3 still requires the item's exact batch in
+the array.
 
 Snapshot order is pre-author before Step 3b, post-author in Step 4, post-5a after
 group review, and post-step7 after repair. Impact checks include authoring changes.
@@ -253,7 +298,9 @@ recognition grants no licence for a new edit or exemption from later certificati
 Step 8 reviews scope and post-repair changes, closes impact and applies current
 stamps through the tool. Genuine Step-8 auditor/adjudicator-created additions
 receive the same distinct hash-bound certification and are excluded from the
-judge/re-adjudication loop; edits to baseline items are not. Receipt recovery addresses only failed checks and
+judge/re-adjudication loop. The same applies to legitimately refreshed earlier
+auditor-created items with retained origin evidence; ordinary baseline originals
+are not exempt. Receipt recovery addresses only failed checks and
 missing contracts; it preserves completed spine readings and valid evidence.
 Coverage checks skip context hashing when the judge ledger is missing and keep
 the hash cache separate from the ledger, including nonstandard filenames.

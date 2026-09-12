@@ -222,13 +222,15 @@ function currentDecisionCarrier(decision, target, live) {
   return undefined;
 }
 
-function currentAuditorCertification(target, live) {
-  if (!target?.direct || target.route !== 'item' || !target.added) return null;
+function currentAuditorCertification(target) {
+  if (!target?.direct || target.route !== 'item') return null;
   let rows = [];
-  try { rows = loadAuditorCreatedCertifications(auditorCertificationsPath, { steps: [5] }); }
+  try { rows = loadAuditorCreatedCertifications(auditorCertificationsPath, { root: ROOT, run, steps: [5] }); }
   catch (cause) { fail(`step5-scope: ${cause.message}`, 1); }
   const row = rows.find(candidate => candidate.id === target.id && String(candidate.batch) === String(target.batch));
-  return row && row.step5_subject_sha256 === hashValue(live?.items?.[target.id]) ? row : null;
+  // The shared reader already checked the exact current carriers, excluding
+  // only the mechanical judge stamp. Do not reintroduce a raw-byte comparison.
+  return row ?? null;
 }
 
 function hashSnapshotErrors(doc, batch, label) {
@@ -1014,8 +1016,9 @@ if (command === 'check') {
             error('decision-subject-missing', `[${decision.id}] ${decision.obligation} has no current carrier`);
           } else {
             const currentSha = hashValue(currentValue);
-            if (!/^[a-f0-9]{64}$/.test(decision.subject_sha256 ?? '')
-              || decision.subject_sha256 !== currentSha) {
+            if ((!/^[a-f0-9]{64}$/.test(decision.subject_sha256 ?? '')
+              || decision.subject_sha256 !== currentSha)
+              && !currentAuditorCertification(target)) {
               error('decision-stale', `[${decision.id}] ${decision.obligation} subject_sha256 does not match the current item, contract, manifest, or page carrier`);
             }
             if (target && !target.direct && ['touched', 'page'].includes(target.route)) {
@@ -1044,8 +1047,8 @@ if (command === 'check') {
         }
       }
       for (const [obligation, target] of expected) if (!seen.has(obligation)) {
-        if (target?.direct && target.route === 'item' && target.added
-          && currentAuditorCertification(target, liveFor(target.batch))) continue;
+        if (target?.direct && target.route === 'item'
+          && currentAuditorCertification(target)) continue;
         error('decision-missing', `[${target.id}] ${group.label} did not decide ${obligation}`);
       }
     }

@@ -132,9 +132,10 @@ const ids = manifestsArg
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 const auditorRows = new Map();
-for (const path of auditorCertificationsArg.split(',').map(entry => entry.trim()).filter(Boolean)) {
+{
   let loaded;
-  try { loaded = loadAuditorCreatedCertifications(path, { steps: [7, 8] }); }
+  try { loaded = loadAuditorCreatedCertifications(auditorCertificationsArg.split(',')
+    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run'), steps: [7, 8] }); }
   catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
   for (const row of loaded) {
     const prior = auditorRows.get(row.id);
