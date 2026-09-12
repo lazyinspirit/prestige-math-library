@@ -180,6 +180,20 @@ function provenanceRows(root, run, step, cache = new Map()) {
           && covers.includes(String(row.batch)) : author.result_file === row.author_result
           && (!covers.length || covers.includes('all') || covers.includes(String(row.batch))));
     })) throw Error(`${row.id}: missing successful Step ${step} author-result provenance`);
+    if (step === 3 && row.owner_recertification !== undefined) {
+      const marker = row.owner_recertification;
+      const ownerPath = join(root, 'research', `${run}-step3b-owner-${safe(row.id, 'item ID')}.json`);
+      if (!/^[a-f0-9]{64}$/.test(marker?.sha256 ?? '') || !existsSync(ownerPath))
+        throw Error(`${row.id}: missing owner recertification provenance`);
+      const owner = read(ownerPath);
+      if (sha(JSON.stringify(owner)) !== marker.sha256 || owner.at !== marker.at
+        || owner.version !== 1 || owner.run !== run || owner.phase !== 'item'
+        || owner.target !== row.id || owner.owner !== true || owner.decision !== 'repaired'
+        || owner.sha256 !== row.sha256 || !Array.isArray(owner.dependencies)
+        || JSON.stringify(owner.dependencies) !== JSON.stringify(row.dependencies)
+        || !String(owner.reason ?? '').trim())
+        throw Error(`${row.id}: invalid owner recertification provenance`);
+    }
     const originStep = row.origin_step ?? step;
     if (![3, 5, 7, 8].includes(originStep) || originStep > step)
       throw Error(`${row.id}: invalid auditor-created origin step`);

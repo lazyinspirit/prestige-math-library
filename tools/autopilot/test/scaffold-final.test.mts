@@ -9,6 +9,7 @@ import { loadStep3, scopeHash, itemHash, itemDecision, recordStep3, checkStep3 }
 import { stages, step3Plan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { writeAuditorBaseline, certifyAuditorItems, certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
+import { loadStep3AuditorProvenance } from '../../auditor-created-items.mjs';
 
 function fixture(t: any) {
   const root = mkdtempSync(join(tmpdir(), 'step3-'));
@@ -326,6 +327,36 @@ for (const source of ['proof', 'plan']) test(`Step-3 recertification rejects a t
   utimesSync(supplierPath, touchedAt, touchedAt);
   assert.deepEqual(certifyAuditorItems(f.root, 'demo').items, refreshed.items,
     'unchanged hash-bound evidence survives restart and carrier touches');
+});
+
+test('owner gate repair recertifies an existing auditor-created item without forging a later author result', t => {
+  const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: ['lem-a'] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  writeFileSync(join(f.root, 'items/lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: [lem-a]\n---\n\n## Proof\n\nUses lem-a.\n');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'],
+    started_at: '2024-12-31T00:00:00.000Z', ended_at: '2025-01-02T00:00:00.000Z',
+  });
+  const authoredAt = new Date('2025-01-01T00:00:00.000Z');
+  for (const path of ['items/lem-created.md', 'items/lem-published.md',
+    'research/demo-batch-1.pages.json', 'research/plan-spec.json'])
+    utimesSync(join(f.root, path), authoredAt, authoredAt);
+  const first = certifyAuditorItems(f.root, 'demo').items.find(row => row.id === 'lem-created');
+  f.published('Changed supplier proof');
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /changed after its latest successful Step 3/);
+  f.record({ phase: 'item', item: 'lem-created', owner: true, decision: 'repaired',
+    dependencies: ['lem-a'], reason: 'Owner read the changed supplier and verified the dependent proof still holds.' });
+  const renewed = certifyAuditorItems(f.root, 'demo').items.find(row => row.id === 'lem-created');
+  assert.notEqual(renewed.sha256, first.sha256);
+  assert.equal(renewed.author_result, first.author_result, 'historical author origin is retained');
+  assert.match(renewed.owner_recertification.sha256, /^[a-f0-9]{64}$/);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-created').closed, true);
+  const ownerPath = join(f.root, 'research/demo-step3b-owner-lem-created.json');
+  const owner = JSON.parse(readFileSync(ownerPath, 'utf8'));
+  writeFileSync(ownerPath, JSON.stringify({ ...owner, reason: 'Tampered reason' }));
+  assert.throws(() => loadStep3AuditorProvenance(f.root, 'demo'), /invalid owner recertification provenance/);
 });
 
 for (const mode of ['legacy', 'post-end']) test(`Step-3 ${mode} supplier provenance must be revalidated`, t => {

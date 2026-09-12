@@ -70,6 +70,24 @@ function successfulAuthorResults(root, run) {
   return rows;
 }
 
+// A later owner repair can recertify an item that was genuinely auditor-created
+// before the immutable baseline. The original author result remains its origin
+// evidence; the current owner decision is a separate, hash-bound repair verdict.
+function currentOwnerRepair(s, id, dependencies, sha256) {
+  const path = join(s.root, 'research', `${s.run}-step3b-owner-${safe(id)}.json`);
+  if (!existsSync(path)) return null;
+  const row = json(path);
+  if (row.version !== 1 || row.run !== s.run || row.phase !== 'item'
+    || row.target !== id || row.owner !== true || row.decision !== 'repaired'
+    || row.sha256 !== sha256 || !Array.isArray(row.dependencies)
+    || JSON.stringify(row.dependencies) !== JSON.stringify(dependencies)
+    || !String(row.reason ?? '').trim()) return null;
+  const decided = Date.parse(row.at);
+  if (!Number.isFinite(decided) || itemInputPaths(s, id, dependencies)
+    .some(path => statSync(path).mtimeMs > decided)) return null;
+  return { sha256: digest(row), at: row.at };
+}
+
 export function certifyAuditorItems(root, run) {
   return certify(root, run, false);
 }
@@ -130,24 +148,26 @@ function certify(root, run, partial) {
     const prior = priorById.get(id);
     const priorCurrent = prior?.sha256 === sha256 && prior.page === value.page.id && prior.batch === batch
       && JSON.stringify(prior.dependencies) === JSON.stringify(dependencies);
-    let author;
+    let author, ownerRecertification;
     if (priorCurrent) author = { label: prior.author_result };
     else {
       author = results.filter(row => row.covers.map(String).includes(batch))
         .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
-      if (!author) {
-        defer(`${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
-        continue;
-      }
-      const ended = Date.parse(author.ended_at);
-      if (!Number.isFinite(ended)
+      const ended = Date.parse(author?.ended_at);
+      if (!author || !Number.isFinite(ended)
         || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended)) {
-        defer(`${id}: changed after its latest successful Step 3 auditor/author result`);
-        continue;
+        ownerRecertification = prior && currentOwnerRepair(s, id, dependencies, sha256);
+        if (!ownerRecertification) {
+          defer(author ? `${id}: changed after its latest successful Step 3 auditor/author result`
+            : `${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
+          continue;
+        }
+        author = { label: prior.author_result };
       }
     }
     certified.push({ id, page: value.page.id, batch, dependencies,
-      sha256, author_result: author.label });
+      sha256, author_result: author.label,
+      ...(ownerRecertification ? { owner_recertification: ownerRecertification } : {}) });
   }
 
   const scopes = [];

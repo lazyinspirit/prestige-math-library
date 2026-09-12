@@ -101,12 +101,24 @@ repair cannot collide with the already-completed pre-direction call.
 
 Step-3 auditor certification checks writes across the same transitive item and
 manifest/plan inputs bound by its item hash. Changed supplier content requires
-a successful covering author dispatch after those writes. Unchanged certificates
-survive restart and file touches; failed recertification preserves prior receipts.
+either a successful covering author dispatch after those writes or the owner
+repair certificate described below. Unchanged certificates survive restart and
+file touches; failed recertification preserves prior receipts.
 Provenance receipts use `auditor-authored-step3-bypass-v2`; v1 receipts cannot
 close decisions or reuse the unchanged-hash path. They must be revalidated
-against the original immutable v1 inventory baseline. No input write after
-the author result's `ended_at` is accepted, including subsecond writes.
+against the original immutable v1 inventory baseline. On the author-dispatch
+path, no input write after the result's `ended_at` is accepted, including
+subsecond writes.
+
+For an item already certified as auditor-created, a later owner-held gate repair
+may instead use a current `record-item --owner --decision repaired` receipt with
+the exact examined dependencies and a reason. The certifier checks that this
+owner decision postdates every current transitive input write, binds the current
+item hash, and preserves the original successful author result as origin
+evidence. It records a hash of the owner receipt in the renewed V2 certificate;
+altering that receipt invalidates provenance. This path cannot certify a newly
+created item lacking an original successful author dispatch, and a `reopen` or
+`hold` owner decision cannot serve as a repair certificate.
 
 Artifact-incomplete Step-3 results are owner-held and are not synthetically
 redispatched. After owner-authorized correction, eligible completed authors can
