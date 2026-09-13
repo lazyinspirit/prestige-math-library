@@ -49,8 +49,11 @@ The dispatcher and item-judge prompt apply this rule to every role.
 
 tools/models.mjs owns profiles; stages override role defaults. Rate limits do
 not authorize substitution. Group capacity is nine, batch capacity 27; the
-global limit is in autopilot.config.json. Dispatches start three seconds apart.
-Shared-file stages are serial. Writing agents checkpoint after each item and
+global limit is in autopilot.config.json. The `alpha-high` lane permits twelve
+concurrent authors for an owner-directed three-lead/nine-helper partition;
+helpers write only their assigned pair files and leads integrate shared batch
+artifacts. Dispatches start three seconds apart. Shared-file stages are serial.
+Writing agents checkpoint after each item and
 reread current proofs, dependencies and sources after compaction. Read-only
 roles write no extra files. Compaction starts at 200,000 total context tokens;
 usage telemetry is not a billing estimate.

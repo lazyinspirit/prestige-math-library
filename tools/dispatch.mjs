@@ -53,7 +53,10 @@ const ROLES = Object.freeze({
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
   // Step 3 selects Sol-xhigh for this pair-author lane; later stages
   // select their own explicit profile when reusing it for pathway prose.
-  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'pair authoring and pathway prose; full-repository read access, stage-selected model profile' },
+  // Twelve slots let an owner-authorized three-lead/nine-helper partition run
+  // concurrently. File ownership and lead-only shared-file writes still
+  // determine which authors may safely overlap.
+  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 12, web: true, why: 'pair authoring and pathway prose; twelve disjoint lead/helper writers, stage-selected model profile' },
   // Final reporting is read-only; source uncertainty still requires research.
   'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
   // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The active
