@@ -112,3 +112,21 @@ test('doctor checks a shimmed command against its real target, not the shim', as
   assert.ok(res.problems.some((p: string) => /defines no --fail\b/.test(p)),
     `--fail passed by substring against --fail-on-dead; problems: ${res.problems.join('; ') || '(none)'}`);
 });
+
+test('doctor probes a plan with the stage\'s declared unit identities', async (t) => {
+  if (!existsSync(join(REPO, 'tools'))) return t.skip('target repo not present');
+  const { doctor } = await import('../src/doctor.mts');
+  const url = 'data:text/javascript,' + encodeURIComponent(`
+    export const stages = [{
+      id: 'pair-plan', label: 'pair-plan', units: () => ['pair-a'], pattern: /x/,
+      gates: () => [{ id: 'g', argv: ['node', '--version'] }],
+      plan: (_ctx, pending) => {
+        if (pending.length !== 1 || pending[0] !== 'pair-a')
+          throw new Error('received synthetic units ' + pending.join(','));
+        return [];
+      },
+    }];`);
+  const res = await doctor({ repo: REPO, run: 'frontier-14', stagesPath: url, config: {} });
+  assert.ok(!res.problems.some((p: string) => /pair-plan: plan\(\) threw/.test(p)),
+    `doctor ignored the stage's unit identities: ${res.problems.join('; ')}`);
+});

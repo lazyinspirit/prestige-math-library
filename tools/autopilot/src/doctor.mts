@@ -43,7 +43,27 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
 
   const mod = await import(stagesPath);
   const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`), config };
-  const units = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  const syntheticUnits = ['1', '2', '3', '4', '5', '6', '7', '8'];
+
+  // Probe each plan with the identities that its own unit function declares.
+  // Batch numbers are not universal identities: Step 3's current dispatches
+  // are keyed by A-page ID. Passing the old synthetic numeric list to those
+  // plans makes doctor reject a valid freshly planned run as "Unknown Step 3
+  // pair 1". Keep the synthetic list only for stages whose prerequisites have
+  // not materialized enough units yet, so later command descriptors still get
+  // their preflight flag/schema coverage.
+  const planUnits = new Map<any, string[]>();
+  for (const st of mod.stages) {
+    try {
+      const declared = st.units?.(ctx) ?? [];
+      planUnits.set(st, Array.isArray(declared) && declared.length
+        ? declared.map(String)
+        : syntheticUnits);
+    } catch (err: any) {
+      problems.push(`${st.id}: units() threw — ${err?.message ?? err}`);
+      planUnits.set(st, syntheticUnits);
+    }
+  }
 
   // 0. the spec must be able to fail. A stage with no gate reports success
   //    unconditionally, and the terminal one doing that is how frontier-14
@@ -72,7 +92,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
       collect(`${st.id}/${g.id}`, typeof g.argv === 'function' ? g.argv() : g.argv);
     }
     let plans = [];
-    try { plans = st.plan?.(ctx, units) ?? []; } catch (err: any) { problems.push(`${st.id}: plan() threw — ${err?.message ?? err}`); }
+    try { plans = st.plan?.(ctx, planUnits.get(st)!) ?? []; } catch (err: any) { problems.push(`${st.id}: plan() threw — ${err?.message ?? err}`); }
     for (const p of plans) if (p.argv) collect(`${st.id}/${p.label}`, p.argv);
     for (const [where, tools, line] of cmds) {
       toolCommands += 1;
@@ -149,7 +169,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   const outputSchemas = new Set<string>();
   for (const st of mod.stages) {
     try {
-      for (const plan of (st.plan?.(ctx, units) ?? [])) if (plan.outputSchema) outputSchemas.add(plan.outputSchema);
+      for (const plan of (st.plan?.(ctx, planUnits.get(st)!) ?? [])) if (plan.outputSchema) outputSchemas.add(plan.outputSchema);
     } catch { /* plan errors were already reported by the command check */ }
   }
   for (const rel of outputSchemas) {
@@ -248,7 +268,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
 
   // 6. configured judge runner — checked only if a stage mentions it.
   const usesJudge = mod.stages.some((s: any) => {
-    try { return (s.plan?.(ctx, units) ?? []).some((p: any) => (p.argv ?? []).join(' ').includes('judge')); }
+    try { return (s.plan?.(ctx, planUnits.get(s)!) ?? []).some((p: any) => (p.argv ?? []).join(' ').includes('judge')); }
     catch { return false; }
   });
   if (usesJudge) {

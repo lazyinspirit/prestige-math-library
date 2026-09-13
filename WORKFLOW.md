@@ -396,6 +396,11 @@ node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts status --run RUN --stat
 node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts doctor --run RUN --state-dir .autopilot/RUN
 ```
 
+Doctor probes each dispatch plan with that stage's current declared unit IDs;
+pair-keyed stages therefore receive A-page IDs rather than synthetic batch
+numbers. For stages whose prerequisites have not produced units yet, it retains
+synthetic probes so later command flags and schemas are still checked.
+
 The command also supports plan, start, pause, resume, retry, stop and report.
 pause stops new dispatches, not active work. resume clears pause but does not
 start a dead controller. retry re-arms unfinished work after intervention without
