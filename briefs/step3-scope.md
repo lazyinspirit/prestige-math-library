@@ -5,7 +5,7 @@
 - Record `sufficient` only when the planned definitions, results and examples cover the intended subject adequately.
 - Record `insufficient` otherwise, naming omitted topics/results and recommending enrichment or a specific pair merger. Stop on that pair; do not edit scaffolds or choose for the owner.
 - The owner alone decides to proceed, merge pairs or enrich the scaffold. A merger/enrichment remains blocked until applied and the owner records `proceed` for the resulting scope.
-- Read current manifests, coverage, prose, plan and any owner decisions. Write a concise group report and one scope decision per A page. Do not write item approvals or owner records.
+- Read current manifests, coverage, prose, plan and any owner decisions. Write a concise dispatch report and one scope decision per assigned A page. Do not write item approvals or owner records.
 
 ```bash
 node tools/step3-decisions.mjs record-scope --run RUN --page A_ID --decision sufficient --reason "Scope evidence and report path"

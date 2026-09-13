@@ -148,18 +148,26 @@ function certify(root, run, partial) {
     const prior = priorById.get(id);
     const priorCurrent = prior?.sha256 === sha256 && prior.page === value.page.id && prior.batch === batch
       && JSON.stringify(prior.dependencies) === JSON.stringify(dependencies);
+    const pair = [...s.pairs].find(([, pages]) => pages.some(page => page.id === value.page.id))?.[0];
     let author, ownerRecertification;
     if (priorCurrent) author = { label: prior.author_result };
     else {
-      author = results.filter(row => row.covers.map(String).includes(batch))
+      author = results.filter(row => row.label.startsWith('step3b-pair-')
+        ? Boolean(pair && row.label.startsWith(`step3b-pair-${pair}-`) && row.covers.includes(pair))
+        : row.covers.map(String).includes(batch))
         .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
       const ended = Date.parse(author?.ended_at);
+      // Later authors of a second pair can update this batch's shared manifest.
+      // The item hash binds the current per-item entry; their unrelated write
+      // must not invalidate an earlier pair author's evidence window.
+      const paths = itemInputPaths(s, id, dependencies).filter(path =>
+        !author?.label?.startsWith('step3b-pair-') || !/-batch-\d+\.pages\.json$/.test(path));
       if (!author || !Number.isFinite(ended)
-        || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended)) {
+        || paths.some(path => statSync(path).mtimeMs > ended)) {
         ownerRecertification = prior && currentOwnerRepair(s, id, dependencies, sha256);
         if (!ownerRecertification) {
           defer(author ? `${id}: changed after its latest successful Step 3 auditor/author result`
-            : `${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
+            : `${id}: no successful Step 3 auditor/author result covers batch ${batch} or pair ${pair}`);
           continue;
         }
         author = { label: prior.author_result };

@@ -139,7 +139,8 @@ export function writeAuditorCreatedBaseline(root, run, step) {
 export function authorResultAllowed(step, row) {
   if (row?.ok !== true || !row.ended_at || !row.started_at || !Array.isArray(row.covers)) return false;
   const label = String(row.label ?? '');
-  if (Number(step) === 3) return row.role === 'alpha-high' && /^step3b-[a-z]-[a-f0-9]{16}$/.test(label);
+  if (Number(step) === 3) return row.role === 'alpha-high'
+    && /^(?:step3b-[a-z]|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
   if (Number(step) === 5) return row.role === 'alpha'
     && /^(?:5a-[a-z]|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
   if (Number(step) === 7) return (row.role === 'final-adjudicator'
@@ -230,9 +231,15 @@ function provenanceRows(root, run, step, cache = new Map()) {
     if (!authors.some(author => {
       const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
       const covers = author.covers.map(String);
+      const page = step === 3 ? read(join(root, 'research', `${run}-batch-${safe(String(row.batch))}.pages.json`))
+        .find(value => value.id === row.page) : null;
+      const pair = page?.kind === 'A' ? page.id : page?.companion;
+      const step3Covered = author.label.startsWith('step3b-pair-')
+        ? Boolean(pair && author.label.startsWith(`step3b-pair-${pair}-`) && covers.includes(pair))
+        : covers.includes(String(row.batch));
       return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
         && (step === 3 ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
-          && covers.includes(String(row.batch)) : author.result_file === row.author_result
+          && step3Covered : author.result_file === row.author_result
           && (!covers.length || covers.includes('all') || covers.includes(String(row.batch))));
     })) throw Error(`${row.id}: missing successful Step ${step} author-result provenance`);
     if (step === 3 && row.owner_recertification !== undefined) {

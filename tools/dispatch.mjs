@@ -51,9 +51,9 @@ const ROLES = Object.freeze({
   alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'Sol-high group Alpha, <=3 batches each; nine groups cover the 27-batch ceiling' },
   // Assignment is validated mechanically. All roles retain source access.
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
-  // Step 3 selects Astra-medium for this group-author lane; later stages
+  // Step 3 selects Sol-xhigh for this pair-author lane; later stages
   // select their own explicit profile when reusing it for pathway prose.
-  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'group authoring and pathway prose; stage-selected model profile' },
+  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'pair authoring and pathway prose; full-repository read access, stage-selected model profile' },
   // Final reporting is read-only; source uncertainty still requires research.
   'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
   // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The active
@@ -142,7 +142,7 @@ const ROLES = Object.freeze({
   // TWO THINGS THIS LANE MAY NEVER DO, and both are load-bearing:
   //
   // 1. **Author mathematical content.** Item authoring stays on Step 3's
-  //    explicitly selected group-author profile; this mechanical role must
+  //    explicitly selected Step-3 author profile; this mechanical role must
   //    not become an author.
   // 2. **Produce anything its judge lane will later judge.** A model reviewing
   //    its own output is self-agreement, not corroboration.
@@ -315,7 +315,8 @@ owner with exact evidence. Never invent confidence, source reading or proof
 completion. This rule applies to every workflow role, including reviewers.\n`;
 if (resolvedBrief === join(REPO, 'briefs/group-author.md')) {
   prompt += `\n\n## Context continuity\n\nRead complete relevant source passages in bounded chunks; truncated output is incomplete
-evidence. Prefer current owned files; avoid historical runs and dispatch logs.
+evidence. Read current owned files and relevant sibling pair or library files;
+avoid historical runs and dispatch logs.
 After each item, checkpoint in the assigned notes: IDs, exact claim/conventions,
 source locators, dependencies, decisions, checks, open gaps, and next action.
 Context may compact mid-proof. Resume by rereading those notes, the current item,

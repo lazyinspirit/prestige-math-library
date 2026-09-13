@@ -1,8 +1,16 @@
-# Step 3b — group author
+# Step 3b — scaffold auditor and item author
 
-Own the batches listed in this dispatch. Audit their scaffolds, repair them
-where necessary, then author every assigned item and A/B page. Work one item
+Own the A/B pair(s) listed in this dispatch. Audit their scaffolds, repair them
+where necessary, then author every assigned item and A/B page. Preserve other
+pairs in any shared batch files. Work one item
 at a time in prerequisite order; checkpoint before moving on.
+
+Read access covers the entire library and every pair in this frontier, including
+pairs still being constructed. Read sibling manifests, items and pages whenever
+needed to check prerequisites, conventions or cross-pair dependencies. Do not
+edit another pair's files; route a needed change to its owner or escalate it.
+Treat a sibling's in-progress draft as provisional and recheck its completed
+claim before closing a dependent item.
 
 ## Read and decide
 
@@ -24,7 +32,7 @@ Escalate substantial unmet prerequisites, irrecoverable source uncertainty or
 required cross-group changes to the owner, with exact IDs and proposed remedies.
 Never mark an unresolved item complete or override an owner-held escalation.
 
-Report every potentially defective published item to the owner in the group
+Report every potentially defective published item to the owner in the dispatch
 report: exact item/page IDs, evidence, confidence, required suppliers and repair
 strategy. Distinguish suspicion from a confirmed defect. The serial reconciler
 updates published-consumer-supplier-ledger.md; do not race another group on it.
@@ -47,9 +55,9 @@ empty, zero, one, degenerate, endpoint, choice and both iff cases. Mark a case
 inapplicable only with an item-specific reason. Preserve accurate provenance;
 generated statements must remain permitted leaf examples/corollaries.
 
-Maintain each owned batch's cross-batch dependency input, including same-group
-edges, under briefs/tasks/frontier-dependency-ledger.md. Shared plan/prose
-amendments belong in the group report for serial reconciliation in Step 4.
+Maintain each containing batch's cross-batch dependency input, preserving rows
+for sibling pairs, under briefs/tasks/frontier-dependency-ledger.md. Shared plan/prose
+amendments belong in the dispatch report for serial reconciliation in Step 4.
 After local scaffold repairs/additions, refresh sufficient scope decisions for
 the preserved pair; unresolved or owner-held scope still requires the owner.
 Record item decisions after authoring, not merely after accepting a strategy.
@@ -65,7 +73,7 @@ pre-author baseline and, after your successful dispatch, gives those additions
 the current scope and item certifications needed to enter Step 4. This exception
 does not waive content, dependency, source, rendering, or proof-contract gates.
 
-For each batch, run explicit-path precheck and rendering, content-policy,
+For each containing batch, run explicit-path precheck and rendering, content-policy,
 strict proof-contract checks, and validate-plan with research/plan-spec.json.
 Report pre-splice plan mismatches for Step 4; do not hide actual unresolved
 dependencies. Refresh current scope-decline decisions with evidence, never an
@@ -74,7 +82,7 @@ invented owner ruling. Preserve independent review records.
 Use tools/step3-decisions.mjs record-item with accept or repaired only after
 the complete item is written and checked, confidence 1, examined dependency
 IDs, and a concrete evidence reason. Otherwise record escalate. The owner alone
-resolves escalations. At the group handoff list completed IDs, checks actually
+resolves escalations. At handoff list completed IDs, checks actually
 run, local suppliers added, published concerns and all open obligations.
 
 After compaction reread the checkpoint, current item, relevant dependencies and

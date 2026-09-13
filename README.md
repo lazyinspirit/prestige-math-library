@@ -26,7 +26,8 @@ Executable tools and configuration determine current behavior.
 
 Step 1 is drift review → scaffold construction → an owner-held final gate.
 Scaffolders record item readiness; unresolved findings do not trigger repair agents.
-Step 3 group authors audit scaffolds, repair local gaps and author all content.
+Step 3 assigns one scope reviewer and one scaffold auditor/item author per A/B pair.
+Authors sharing a batch run sequentially while other batches may run in parallel.
 They may supply local definitions/lemmas; substantial prerequisites and potential
 published defects go to the owner. Step 4 splices the plan and snapshots content.
 Step 5a reviews authored content; Step 5b reconciles dependencies and closes it.

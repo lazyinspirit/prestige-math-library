@@ -40,7 +40,7 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Assignment | Model / effort |
 |---|---|
 | Step 1 scaffolding; group Alpha | Sol / high |
-| Step 3a scope and Step 3b group authors | Sol / xhigh |
+| Step 3a pair scope and Step 3b pair authors | Sol / xhigh |
 | Step 5a/5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
 | Assignment; ordinary Step 8 work | Terra / high |
 | Item judges | Terra / xhigh |
@@ -70,8 +70,10 @@ findings for the owner/operator; it does not launch a scaffold repair loop.
 Preserve selected pairs and reconcile prose, plan, Phase-2 files and the consumer
 ledger before clearing affected prerequisites.
 
-Step 3a reviews scope; insufficient scope remains owner-held. Step 3b group
-authors audit scaffolds and actual prerequisites, repair locally, then write
+Step 3a assigns one scope reviewer per A/B pair; insufficient scope remains owner-held.
+Step 3b assigns one scaffold auditor/item author per A/B pair. Authors sharing
+a batch run sequentially because manifests and proof contracts are shared.
+They audit scaffolds and actual prerequisites, repair locally, then write
 every assigned item, example, counterexample, page and proof contract. They may
 insert necessary definitions/lemmas on assigned existing A pages before consumers.
 Escalate substantial prerequisites, broader scope changes and unresolved
@@ -218,7 +220,8 @@ stamp cleanup therefore needs no fresh author dispatch and preserves the prior
 V2 carrier evidence.
 
 Author provenance recognizes only the exact stage-specific emitted label families:
-Step 3's hashed group-author labels; Step 5's group, lead, gate-batch and scoped
+Step 3's hashed group-author labels for existing runs and pair-author labels for
+new runs; Step 5's group, lead, gate-batch and scoped
 gate/edge repairs; Step 7's adjudication, guard, preflight, cross-group, closure,
 repair and final-adjudicator queues; and Step 8's lead, changed/carried/close,
 impact and receipts repairs. Roles must match the corresponding emitter.
@@ -226,8 +229,8 @@ Generic substring labels, other stages, malformed counters and reversed dispatch
 windows cannot certify current carriers.
 Every author result must carry an explicit coverage array. Missing, null or
 non-array coverage is invalid, never global. Steps 5/7/8 retain explicit `[]`
-and `["all"]` global routes; Step 3 still requires the item's exact batch in
-the array.
+and `["all"]` global routes; Step 3 requires the exact batch for a legacy group
+dispatch or the exact A-page ID for its pair dispatch.
 
 Snapshot order is pre-author before Step 3b, post-author in Step 4, post-5a after
 group review, and post-step7 after repair. Impact checks include authoring changes.

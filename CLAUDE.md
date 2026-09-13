@@ -84,9 +84,11 @@ infer arbitrary-index choice from finite choice or DC. Keep choice-free
 arguments choice-free. This authorization does not permit using recorded
 results as suppliers or bypassing the Foundations bootstrapping boundary.
 
-**Step 3.** Group authors audit scaffolds, repair local gaps, then author every
-assigned item and A/B page. They may add necessary definitions and lemmas to
-assigned existing A pages before consumers. Escalate substantial unmet
+**Step 3.** Each A/B pair has its own scaffold auditor and item author. Authors
+audit scaffolds, repair local gaps, then author every assigned item and A/B page.
+Pairs sharing a batch author sequentially to protect shared files. They may add
+necessary definitions and lemmas to assigned existing A pages before consumers.
+Escalate substantial unmet
 prerequisites and unresolved mathematics to the owner. Report potentially
 defective published items with exact evidence for the canonical ledger.
 Do not drop claims, add pairs, override owner decisions or edit published items.

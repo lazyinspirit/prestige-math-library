@@ -88,6 +88,20 @@ export function authorArtifacts(ctx: any, unit: string): string[] {
   return [...new Set(out)];
 }
 
+/** A pair author owes only its own pages and items, even in a shared batch. */
+export function pairAuthorArtifacts(ctx: any, unit: string): string[] {
+  const pair = loadStep3(ctx.repo, ctx.run).pairs.get(unit);
+  if (!pair) return [];
+  const out: string[] = [];
+  for (const page of pair) {
+    out.push(`research/${ctx.run}-batch-${page.batch}.pages.json`);
+    out.push(`research/${ctx.run}-batch-${page.batch}.proof-contracts.json`);
+    if (typeof page.category === 'string') out.push(`library/${page.category}/${page.id}.md`);
+    for (const item of page.items ?? []) out.push(`items/${item.id}.md`);
+  }
+  return [...new Set(out)];
+}
+
 /**
  * Group Alphas: one per <=3 batches, read from the assignment an agent made at
  * stage `2-assign` and `tools/alpha-groups.mjs` validated.
@@ -1525,7 +1539,7 @@ const resultPattern = (role: string, labelSource: string): RegExp =>
   new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
 
 // ---------------------------------------------------------------------------
-// Scope, group authoring, splicing and review are whole-frontier barriers.
+// Scope, authoring, splicing and review are whole-frontier barriers.
 // Ownership is assigned by 2-assign; no reader starts while authors are active.
 // ---------------------------------------------------------------------------
 
@@ -1560,6 +1574,67 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
     task, timeout: phase === 'scope' ? 10800 : 21600 };
 }
 
+/** Existing group dispatches keep their batch-sized identity through completion. */
+function legacyStep3(ctx: any): boolean {
+  const dir = R(ctx, 'research');
+  if (!existsSync(dir)) return false;
+  const task = new RegExp(`^${ctx.run}-step3[ab]-[a-z]-[a-f0-9]{16}\\.task\\.md$`);
+  return readdirSync(dir).some(f => task.test(f));
+}
+
+function step3Pairs(ctx: any): string[] {
+  return batches(ctx).length ? [...loadStep3(ctx.repo, ctx.run).pairs.keys()] : [];
+}
+
+function pairBatches(ctx: any, unit: string, snapshot = loadStep3(ctx.repo, ctx.run)): string[] {
+  const pair = snapshot.pairs.get(unit) ?? [];
+  return [...new Set<string>(pair.map((p: any) => String(p.batch)))];
+}
+
+function pairAuthorCohort(ctx: any, unit: string): string[] {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const owned = new Set(pairBatches(ctx, unit, snapshot));
+  return [...snapshot.pairs.keys()].filter(id =>
+    pairBatches(ctx, id, snapshot).some(batch => owned.has(batch)));
+}
+
+/** Same briefs and model as a group dispatch; only its assigned work is narrowed. */
+export function step3PairPlan(ctx: any, unit: string, phase: 'scope' | 'final') {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const pair = snapshot.pairs.get(unit);
+  if (!pair) throw Error(`Unknown Step 3 pair ${unit}`);
+  const inputs = phase === 'scope' ? [scopeHash(snapshot, unit)] : [
+    ...pair.flatMap((p: any) => p.items.map((i: any) => itemHash(snapshot, i.id))),
+    ...[R(ctx, 'research', `${ctx.run}-owner-authoring-direction.md`),
+      ...pair.flatMap((p: any) => p.items.map((i: any) =>
+        R(ctx, 'research', `${ctx.run}-step3b-owner-${i.id}.json`)))
+    ].filter(existsSync).map(path => readFileSync(path, 'utf8')),
+  ];
+  const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
+  const prefix = phase === 'scope' ? 'step3a' : 'step3b';
+  const label = `${prefix}-pair-${unit}-${key}`;
+  const task = `research/${ctx.run}-${label}.task.md`;
+  const report = `research/${ctx.run}-${prefix}-pair-${unit}.md`;
+  writeFileSync(R(ctx, task), `# ${prefix}: A/B pair ${unit}\n\n- Run: ${ctx.run}\n- A page: ${unit}\n- B page: ${pair[1].id}\n- Batches: ${pairBatches(ctx, unit).join(', ')}\n- Own only this pair; preserve other pairs in shared batch files.\n- Read access: the entire library and all current-frontier A/B pairs, including sibling pairs still being constructed. Inspect their current manifests, items and pages when dependencies require it.\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write ${report}.\n`);
+  return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
+    profile: SOL_XHIGH, job: phase === 'scope' ? 'audit' : 'authoring', covers: [unit],
+    brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
+    task, timeout: phase === 'scope' ? 10800 : 21600 };
+}
+
+function pairPlans(ctx: any, pending: string[], phase: 'scope' | 'final') {
+  if (!pending.length || !batches(ctx).length) return [];
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const selected: string[] = [], selectedBatches = new Set<string>();
+  for (const unit of pending) {
+    const owned = pairBatches(ctx, unit, snapshot);
+    if (phase === 'final' && owned.some(batch => selectedBatches.has(batch))) continue;
+    selected.push(unit);
+    if (phase === 'final') for (const batch of owned) selectedBatches.add(batch);
+  }
+  return selected.map(unit => step3PairPlan(ctx, unit, phase));
+}
+
 const step3Gate = (ctx: any, phase: 'scope' | 'final') => gate(
   phase === 'scope' ? 'step3-scope' : 'step3-items',
   ['node', 'tools/step3-decisions.mjs', 'check', '--run', ctx.run, '--phase', phase]);
@@ -1587,10 +1662,18 @@ async function step3Failure({ ctx, executor, stage, failure }: any, phase: 'scop
   // The synthetic failure names only inactive, artifact-incomplete units. Do
   // not sweep in an active sibling (or receipt-only work outside this failure).
   const recoveryUnits = failure.id === 'stage-stalemate' ? new Set((failure.units ?? []).map(String)) : null;
-  const groups = alphaGroups(ctx).filter(g => g.covers.some(b => owed.has(String(b))
-    && (!recoveryUnits || recoveryUnits.has(String(b)))));
-  if (!groups.length) return { owner: { reason: 'No group owns the missing Step 3 decisions.' } };
-  const plans = groups.map(g => step3Plan(ctx, g, phase));
+  let plans;
+  if (legacyStep3(ctx)) {
+    const groups = alphaGroups(ctx).filter(g => g.covers.some(b => owed.has(String(b))
+      && (!recoveryUnits || recoveryUnits.has(String(b)))));
+    plans = groups.map(g => step3Plan(ctx, g, phase));
+  } else {
+    const owedPairs = new Set(result.work.map((w: any) => [...snapshot.pairs].find(([id, pages]: any) =>
+      w.item ? pages.some((page: any) => page.items.some((item: any) => item.id === w.item))
+        : id === w.page || pages.some((page: any) => page.id === w.page))?.[0]).filter(Boolean));
+    plans = pairPlans(ctx, [...owedPairs].filter(id => !recoveryUnits || recoveryUnits.has(String(id))), phase);
+  }
+  if (!plans.length) return { owner: { reason: 'No dispatch owns the missing Step 3 decisions.' } };
   const dir = R(ctx, 'research', `${ctx.run}-dispatch`);
   const finished = existsSync(dir) ? readdirSync(dir).filter(f => f.endsWith('.result.json')).map(f => {
     try { return JSON.parse(readFileSync(join(dir, f), 'utf8')).label; } catch { return null; }
@@ -1722,18 +1805,20 @@ export const stages = [
     })],
   },
 
-  // Scope is a barrier: no group author starts before all scope decisions clear.
+  // Scope is a barrier: no author starts before all scope decisions clear.
   {
     id: '3a-scope',
     label: 'Step 3a — scope review and owner decisions',
     modelProfile: SOL_XHIGH,
     role: 'alpha',
-    units: batches,
-    pattern: resultPattern('alpha', 'step3a-[a-z]+-[a-f0-9]+'),
+    units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
+    pattern: ctx => resultPattern('alpha', legacyStep3(ctx)
+      ? 'step3a-[a-z]+-[a-f0-9]+' : 'step3a-pair-[a-z0-9-]+-[a-f0-9]+'),
     concurrency: 9,
-    plan: (ctx, pending) => alphaGroups(ctx)
-      .filter(g => g.covers.some(b => pending.includes(String(b))))
-      .map(g => step3Plan(ctx, g, 'scope')),
+    plan: (ctx, pending) => legacyStep3(ctx)
+      ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
+        .map(g => step3Plan(ctx, g, 'scope'))
+      : pairPlans(ctx, pending, 'scope'),
     gates: ctx => [scopeGate(ctx), step3Gate(ctx, 'scope')],
     maxFixRounds: Infinity,
     onGateFailure: args => step3Failure(args, 'scope'),
@@ -1753,19 +1838,21 @@ export const stages = [
   },
   {
     id: '3b-author',
-    label: 'Step 3b — group scaffold audit, repair and authoring',
+    label: 'Step 3b — pair scaffold audit, repair and authoring',
     modelProfile: SOL_XHIGH,
     role: 'alpha-high',
-    units: batches,
-    exclusiveCohort: alphaCohort,
-    artifacts: authorArtifacts,
-    pattern: resultPattern('alpha-high', 'step3b-[a-z]+-[a-f0-9]+'),
+    units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
+    exclusiveCohort: (ctx, u) => legacyStep3(ctx) ? alphaCohort(ctx, u) : pairAuthorCohort(ctx, u),
+    artifacts: (ctx, u) => legacyStep3(ctx) ? authorArtifacts(ctx, u) : pairAuthorArtifacts(ctx, u),
+    pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)
+      ? 'step3b-[a-z]+-[a-f0-9]+' : 'step3b-pair-[a-z0-9-]+-[a-f0-9]+'),
     concurrency: 9,
-    plan: (ctx, pending) => alphaGroups(ctx)
-      .filter(g => g.covers.some(b => pending.includes(String(b))))
-      .map(g => step3Plan(ctx, g, 'final')),
+    plan: (ctx, pending) => legacyStep3(ctx)
+      ? alphaGroups(ctx).filter(g => g.covers.some(b => pending.includes(String(b))))
+        .map(g => step3Plan(ctx, g, 'final'))
+      : pairPlans(ctx, pending, 'final'),
     gates: ctx => [scopeGate(ctx),
-      // A successful group auditor may create and fully author local supplier
+      // A successful scaffold auditor may create and fully author local supplier
       // items. They are absent from the pre-author scaffold inventory and are
       // certified mechanically as a distinct owner-authorized class before the
       // ordinary Step 3 receipt gate. They do not enter a review/repair/author
@@ -1915,7 +2002,7 @@ export const stages = [
   },
 
 
-  // Direct review follows group authoring and the mechanical Step 4 barrier.
+  // Direct review follows Step 3 authoring and the mechanical Step 4 barrier.
   ...step5Stages({
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,

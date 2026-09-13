@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { loadStep3, scopeHash, itemHash, itemDecision, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
-import { stages, step3Plan } from '../stages/mathlib.mts';
+import { stages, step3Plan, step3PairPlan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { writeAuditorBaseline, certifyAuditorItems, certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 import { loadStep3AuditorProvenance } from '../../auditor-created-items.mjs';
@@ -43,9 +43,9 @@ test('Step 3 is two barriers with the requested profiles, not a Beta loop', t =>
   assert.ok(pair.every(s => !s.pipeline));
   for (const [s, profile, phase] of [[pair[0], MODEL_PROFILE_NAMES.solXHigh, 'scope'], [pair[1], MODEL_PROFILE_NAMES.solXHigh, 'final']] as any) {
     assert.equal(s.modelProfile, profile);
-    const plan = step3Plan(f.ctx, { label: 'a', covers: ['1'] }, phase);
+    const plan = step3PairPlan(f.ctx, 'a', phase);
     assert.equal(plan.profile, profile);
-    assert.ok(s.pattern.test(`${plan.role}-${plan.label}.result.json`));
+    assert.ok(s.pattern(f.ctx).test(`${plan.role}-${plan.label}.result.json`));
   }
 });
 
@@ -76,6 +76,36 @@ test('an unrelated pair scope edit does not block a current pair item audit', t 
   assert.throws(() => f.audit('lem-other'), /3a must clear/);
 });
 
+test('Step 3 dispatches each pair and serializes authors sharing a batch', t => {
+  const f = fixture(t);
+  f.pages.push(
+    { id: 'other-a', kind: 'A', companion: 'other-b', order: 3, category: 'topic', items: [
+      { id: 'lem-other', kind: 'lemma', statement: 'Other', deps: [] }] },
+    { id: 'other-b', kind: 'B', companion: 'other-a', order: 4, category: 'topic', items: [] },
+  );
+  f.put('demo-batch-1.pages.json', f.pages);
+  f.put('demo-batch-2.pages.json', [
+    { id: 'third-a', kind: 'A', companion: 'third-b', order: 5, category: 'topic', items: [] },
+    { id: 'third-b', kind: 'B', companion: 'third-a', order: 6, category: 'topic', items: [] },
+  ]);
+  const scope: any = stages.find(s => s.id === '3a-scope');
+  const author: any = stages.find(s => s.id === '3b-author');
+  assert.deepEqual(scope.units(f.ctx), ['a', 'other-a', 'third-a']);
+  assert.deepEqual(scope.plan(f.ctx, scope.units(f.ctx)).map((p: any) => p.covers),
+    [['a'], ['other-a'], ['third-a']]);
+  assert.deepEqual(author.plan(f.ctx, author.units(f.ctx)).map((p: any) => p.covers),
+    [['a'], ['third-a']]);
+  assert.deepEqual(author.exclusiveCohort(f.ctx, 'other-a'), ['a', 'other-a']);
+  assert.deepEqual(author.plan(f.ctx, ['other-a', 'third-a']).map((p: any) => p.covers),
+    [['other-a'], ['third-a']]);
+  const artifacts = author.artifacts(f.ctx, 'a');
+  assert.ok(artifacts.includes('items/lem-a.md'));
+  assert.ok(!artifacts.includes('items/lem-other.md'));
+  const plan = author.plan(f.ctx, ['a'])[0];
+  assert.equal(plan.brief, 'briefs/group-author.md');
+  assert.match(readFileSync(join(f.root, plan.task), 'utf8'), /Read access: the entire library and all current-frontier A\/B pairs/);
+});
+
 test('Step-3 auditor-created items bypass self-review but inherit the approved baseline scope', t => {
   const f = fixture(t);
   f.scope();
@@ -97,14 +127,14 @@ test('Step-3 auditor-created items bypass self-review but inherit the approved b
   assert.equal(final.accepted, 4);
 });
 
-test('Step-3 author coverage must be an explicit exact-batch array, never an implicit global', t => {
+test('Step-3 author coverage must identify its exact batch or pair', t => {
   const f = fixture(t); f.scope(); writeAuditorBaseline(f.root, 'demo');
   f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', deps: [] });
   f.put('demo-batch-1.pages.json', f.pages);
   writeFileSync(join(f.root, 'items/lem-created.md'), '---\ndeps: []\n---\nComplete proof.\n');
   mkdirSync(join(f.root, 'research/demo-dispatch'));
-  const result = (covers: any) => f.put('demo-dispatch/alpha-high-author.result.json', {
-    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers,
+  const result = (covers: any, label = 'step3b-a-0123456789abcdef') => f.put('demo-dispatch/alpha-high-author.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label, covers,
     started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
   });
   for (const covers of [undefined, null, '1', 'all', [], ['all'], ['2']]) {
@@ -113,9 +143,14 @@ test('Step-3 author coverage must be an explicit exact-batch array, never an imp
   }
   result(['1']);
   assert.deepEqual(certifyAuditorItems(f.root, 'demo').items.map(row => row.id), ['lem-created']);
+  result(['a'], 'step3b-pair-a-0123456789abcdef');
+  assert.deepEqual(certifyAuditorItems(f.root, 'demo').items.map(row => row.id), ['lem-created']);
+  result(['wrong-a'], 'step3b-pair-wrong-a-0123456789abcdef');
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /no successful Step 3.*covers batch 1/);
+  result(['a'], 'step3b-pair-a-0123456789abcdef');
   assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-created').closed, true);
   for (const covers of [undefined, null, '1', [], ['all']]) {
-    result(covers);
+    result(covers, 'step3b-pair-a-0123456789abcdef');
     assert.throws(() => itemDecision(loadStep3(f.root, 'demo'), 'lem-created'), /missing successful Step 3 author-result provenance/);
   }
 });
@@ -265,6 +300,7 @@ test('unchanged V2 recovery receipts preserve bytes and mtime while pending diag
 
 test('stalemate recovery certifies completed groups before routing only the named inactive owner', async t => {
   const f = fixture(t), started: any[] = [];
+  f.put('demo-step3a-a-0123456789abcdef.task.md', 'legacy group dispatch');
   const other = (a: string, b: string, id: string) => [
     { id: a, kind: 'A', companion: b, order: 3, items: [{ id, kind: 'lemma', statement: id, deps: [] }] },
     { id: b, kind: 'B', companion: a, order: 4, items: [] },
@@ -525,14 +561,14 @@ test('final gate retains mechanical and cross-batch checks', t => {
   assert.ok(ids.some((id: string) => /policy/.test(id)));
 });
 
-test('fresh missing decisions dispatch only the owning groups', async t => {
+test('fresh missing decisions dispatch only the owning pair', async t => {
   const f = fixture(t), started: any[] = [];
   const scope: any = stages.find(s => s.id === '3a-scope');
   const args = { ctx: f.ctx, stage: scope, failure: { id: 'step3-scope' },
     executor: { start: (_s: any, plan: any) => started.push(plan) } };
   await scope.onGateFailure(args);
   assert.equal(started.length, 1);
-  assert.deepEqual(started[0].covers, ['1']);
+  assert.deepEqual(started[0].covers, ['a']);
   assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solXHigh);
   f.scope(); started.length = 0;
   writeAuditorBaseline(f.root, 'demo');
@@ -576,5 +612,5 @@ test('prompts require concise scope decisions and impartial sequential dependenc
   const base = new URL('../../../briefs/', import.meta.url);
   assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /owner alone decides/);
   const audit = readFileSync(new URL('group-author.md', base), 'utf8');
-  for (const re of [/one item\s+at a time/, /impartial/, /honest/, /authoritative sources/, /published item/, /cross-batch/, /confidence 1/, /still needs authored content/]) assert.match(audit, re);
+  for (const re of [/one item\s+at a time/, /impartial/, /honest/, /authoritative sources/, /published item/, /cross-batch/, /confidence 1/, /still needs authored content/, /entire library/, /pairs still being constructed/]) assert.match(audit, re);
 });

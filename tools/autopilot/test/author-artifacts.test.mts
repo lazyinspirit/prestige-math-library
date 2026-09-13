@@ -31,6 +31,7 @@ test('Step 3 requires every manifest-declared page and item, not only a contract
       'items/ex-third.md',
     ];
     assert.deepEqual(authorArtifacts({ run: 'r', repo: root }, '1'), expected);
+    writeFileSync(join(root, 'research', 'r-step3a-a-0123456789abcdef.task.md'), 'legacy');
     const author = stages.find((stage: any) => stage.id === '3b-author') as any;
     assert.deepEqual(author.artifacts({ run: 'r', repo: root }, '1'), expected);
   } finally {

@@ -1,8 +1,9 @@
 # Same-frontier dependency record
 
 The unified ledger is `research/<run>-cross-batch-dependencies.json`.
-It covers different batches in this run, including batches in the same Alpha
-group. It is separate from the Step-5 verdicts and the published-consumer ledger.
+It covers different batches in this run, including dependencies among pairs
+being built in the same frontier. It is separate from the Step-5 verdicts and
+the published-consumer ledger.
 
 Step-3 adjudicators must identify every such page prerequisite and item
 dependency, including implicit proof uses, well-definedness justifications and
@@ -20,9 +21,11 @@ Write one JSON array per owned consumer batch to
 Use `kind: page` for page IDs. Use `open`, `verified`, or `removed`; verification
 needs a current mathematical check, and removal needs evidence that the use was
 actually removed. One row per `(kind, consumer, supplier)`; update it instead of
-appending duplicates. Only the consumer's owner edits its input file. Route
-outside findings to that owner. Replace inputs atomically; never edit the unified
-ledger by hand. Step 8's serial lead may reconcile all batch inputs after the
+appending duplicates. Only the consumer's owner edits its input file. Pair
+authors sharing a consumer batch run sequentially and preserve existing rows
+for sibling pairs. Route outside findings to that owner. Replace inputs
+atomically; never edit the unified ledger by hand. Step 8's serial lead may
+reconcile all batch inputs after the
 owning writers finish. After each input or dependency edit, run:
 
 `node tools/frontier-dependency-ledger.mjs refresh --run <run>`
