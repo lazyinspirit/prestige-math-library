@@ -442,8 +442,23 @@ export class Executor {
     // the previous behaviour exactly.
     const activeIds = new Set(stage ? this.pipelineGroup(stage).map((s: any) => s.id) : []);
     const stages = this.stages.map((s: any) => {
-      const st = this.stageStatus(s, ctx);
-      return { id: s.id, label: s.label, done: st.done, why: st.why, current: activeIds.has(s.id) && !st.done };
+      try {
+        const st = this.stageStatus(s, ctx);
+        return { id: s.id, label: s.label, done: st.done, why: st.why, current: activeIds.has(s.id) && !st.done };
+      } catch (error: any) {
+        // Future-stage units can read artifacts that an active earlier-stage
+        // worker is replacing. A direct JSON write has a brief empty/partial
+        // window; reporting must not terminate the controller merely because
+        // it sampled that window. The owning stage's gates still reject a
+        // malformed final artifact before transition.
+        return {
+          id: s.id,
+          label: s.label,
+          done: false,
+          why: `status temporarily unavailable while inputs are changing: ${error?.message ?? error}`,
+          current: activeIds.has(s.id),
+        };
+      }
     });
     const running: RunningEntry[] = [...this.inflight.values()].map((d: any) => ({
       label: d.meta.label,

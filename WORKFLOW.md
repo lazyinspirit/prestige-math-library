@@ -400,6 +400,9 @@ Doctor probes each dispatch plan with that stage's current declared unit IDs;
 pair-keyed stages therefore receive A-page IDs rather than synthetic batch
 numbers. For stages whose prerequisites have not produced units yet, it retains
 synthetic probes so later command flags and schemas are still checked.
+Status snapshots tolerate transient parse failures in future-stage artifacts
+while an earlier worker is replacing them; the owning stage's gates still
+reject any malformed artifact that remains when the stage closes.
 
 The command also supports plan, start, pause, resume, retry, stop and report.
 pause stops new dispatches, not active work. resume clears pause but does not

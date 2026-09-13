@@ -361,6 +361,31 @@ test('a stage is not done when a unit\'s artifact is missing, however the result
   assert.equal(ex.stageStatus(stages[0]).unitsDone, true, 'and its units complete once the artifact exists');
 });
 
+test('status reporting survives a transiently unreadable future-stage artifact', () => {
+  const fx = fixture();
+  const stages = [
+    {
+      id: 's1', label: 'active writer', units: () => ['1'], pattern: /^worker-/,
+      concurrency: 1,
+      plan: () => [{ role: 'worker', label: 'u1', job: 'authoring', covers: ['1'] }],
+      gatesWaived: NO_GATES,
+    },
+    {
+      id: 's2', label: 'future reader',
+      units: () => { throw new SyntaxError('partial JSON'); },
+      pattern: /^finisher-/,
+      concurrency: 1,
+      plan: () => [{ role: 'finisher', label: 'final', job: 'audit', covers: ['all'] }],
+      gates: () => [PASSING_GATE],
+    },
+  ];
+  const ex = makeExecutor(fx, stages);
+  const snapshot = ex.snapshot();
+  assert.equal(snapshot.stage?.id, 's1');
+  assert.match(snapshot.stages.find((stage) => stage.id === 's2')?.why ?? '',
+    /status temporarily unavailable.*partial JSON/);
+});
+
 test('adoption is scoped to the stage — a later stage\'s agent does not cover an earlier one', async () => {
   // A 5a adjudicator running with --covers 7 blocked a preliminary reader re-run for
   // batch 7, because adoption matched only the unit and not the stage.
