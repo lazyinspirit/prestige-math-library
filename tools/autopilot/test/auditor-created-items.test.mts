@@ -56,6 +56,47 @@ function recoveryFixture(t: any, step = 7) {
   return { root, result };
 }
 
+function carriedStep7Fixture(t: any, { itemChanged = true, itemAt = '2025-01-01T00:00:25.000Z',
+  step7Result = {} }: any = {}) {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  writeAuditorCreatedBaseline(root, 'r', 5);
+  const id = 'lem-created';
+  const itemPath = join(root, 'items', `${id}.md`);
+  const manifestPath = join(root, 'research/r-batch-1.pages.json');
+  const contractPath = join(root, 'research/r-batch-1.proof-contracts.json');
+  writeFileSync(itemPath, item(id));
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  manifest[0].items.push({ id, deps: [] });
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+  writeFileSync(contractPath, JSON.stringify({ contracts: { [id]: { risk: 'low' } } }));
+  const step5At = new Date('2025-01-01T00:00:05.000Z');
+  for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, step5At, step5At);
+  writeFileSync(join(root, 'research/r-dispatch/step5.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha', ok: true, label: '5a-a', covers: ['1'],
+    started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z',
+  }));
+  certifyAuditorCreatedItems(root, 'r', 5);
+  writeAuditorCreatedBaseline(root, 'r', 7);
+  const baselinePath = join(root, 'research/r-step7-auditor-baseline.json');
+  const baseline = JSON.parse(readFileSync(baselinePath, 'utf8'));
+  baseline.at = '2025-01-01T00:00:15.000Z';
+  writeFileSync(baselinePath, JSON.stringify(baseline));
+  writeFileSync(itemPath, itemChanged ? item(id).replace('Immediate.', 'Repaired proof.') : item(id));
+  utimesSync(itemPath, new Date(itemAt), new Date(itemAt));
+  writeFileSync(contractPath, JSON.stringify({ contracts: { [id]: { risk: 'high' } } }));
+  const late = new Date('2025-01-01T00:00:35.000Z');
+  utimesSync(contractPath, late, late);
+  writeFileSync(join(root, 'research/r-dispatch/step7.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-adjudicate', ok: true, label: 'step7-a', covers: ['1'],
+    started_at: '2025-01-01T00:00:20.000Z', ended_at: '2025-01-01T00:00:30.000Z',
+    ...step7Result,
+  }));
+  const evidence = join(root, 'research/owner-lem-created.md');
+  writeFileSync(evidence, 'lem-created: owner checked the repaired proof, manifest and late contract against current sources.');
+  return { root, id, itemPath, manifestPath, contractPath, evidence };
+}
+
 for (const label of ['repair-8-a-round-1', 'cross-group-z-round-12',
   'adjudicate-closure-recovery-a-1', 'repair-8-round-2', 'adjudicate-closure-recovery-3']) {
   test(`Step 7 certifies its legitimate recovery dispatch ${label}`, t => {
@@ -107,6 +148,110 @@ test('an owner-held Step-7 contract repair can recertify an already auditor-crea
   assert.equal(loadAuditorCreatedCertifications(path).length, 1);
   writeFileSync(evidence, 'tampered evidence');
   assert.throws(() => loadAuditorCreatedCertifications(path), /invalid owner recertification/);
+});
+
+test('Step 7 can first certify a carried item after a late contract repair with owner evidence', t => {
+  const f = carriedStep7Fixture(t);
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/);
+  recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'Reviewed the current Step-7 item, manifest entry and late contract repair.');
+  const receipt = certifyAuditorCreatedItems(f.root, 'r', 7);
+  assert.equal(receipt.items.length, 1);
+  assert.equal(receipt.items[0].author_result, 'step7.result.json');
+  assert.ok(receipt.items[0].owner_recertification?.sha256);
+  assert.equal(loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step7-auditor-certifications.json')).length, 1);
+  writeFileSync(f.evidence, 'tampered evidence');
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step7-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+for (const [label, options] of [
+  ['item written after the author dispatch', { itemAt: '2025-01-01T00:00:31.000Z' }],
+  ['wrong author role', { step7Result: { role: 'tool' } }],
+  ['wrong author label', { step7Result: { label: 'unrecognized-step7' } }],
+  ['wrong batch coverage', { step7Result: { covers: ['2'] } }],
+  ['failed author dispatch', { step7Result: { ok: false } }],
+] as const) {
+  test(`Step-7 first owner attestation rejects ${label}`, t => {
+    const f = carriedStep7Fixture(t, options);
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+      'Review cannot replace missing author provenance.'), /no prior auditor-created certification.*eligible Step 7 owner bootstrap/);
+  });
+}
+
+test('Step-7 first owner attestation requires earlier Step-5 provenance', t => {
+  const f = carriedStep7Fixture(t);
+  rmSync(join(f.root, 'research/r-step5-auditor-certifications.json'));
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'An author dispatch alone cannot establish a carried origin.'), /no prior auditor-created certification.*eligible Step 7 owner bootstrap/);
+});
+
+test('Step-7 first owner attestation stays bound to the exact current contract', t => {
+  const f = carriedStep7Fixture(t);
+  recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'Reviewed the current Step-7 item, manifest entry and late contract repair.');
+  writeFileSync(f.contractPath, JSON.stringify({ contracts: { [f.id]: { risk: 'critical' } } }));
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/);
+});
+
+test('Step 7 first certifies a carried contract-only delta with owner-authored evidence', t => {
+  const f = carriedStep7Fixture(t, { itemChanged: false,
+    itemAt: '2025-01-01T00:00:05.000Z' });
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/);
+  rmSync(f.evidence);
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'Owner reviewed the current contract entry.'), /owner evidence must be a research file/);
+  writeFileSync(f.evidence, 'lem-created: owner verified unchanged item and manifest, and reviewed the revised contract entry.');
+  const recorded = recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'Owner reviewed the current contract entry after the successful Step-7 adjudication.');
+  const owner = JSON.parse(readFileSync(recorded.path, 'utf8'));
+  assert.equal(owner.owner, true);
+  assert.equal(owner.basis, 'initial-step7-contract-only');
+  assert.equal(owner.author_result, 'step7.result.json');
+  const receipt = certifyAuditorCreatedItems(f.root, 'r', 7);
+  assert.equal(receipt.items.length, 1);
+  assert.equal(receipt.items[0].author_result, 'step7.result.json');
+  assert.ok(receipt.items[0].owner_recertification?.sha256);
+  writeFileSync(f.evidence, 'tampered evidence');
+  assert.throws(() => loadAuditorCreatedCertifications(join(f.root,
+    'research/r-step7-auditor-certifications.json')), /invalid owner recertification/);
+});
+
+for (const [label, options] of [
+  ['wrong adjudicator role', { step7Result: { role: 'tool' } }],
+  ['wrong adjudicator label', { step7Result: { label: 'unrecognized-step7' } }],
+  ['wrong batch coverage', { step7Result: { covers: ['2'] } }],
+  ['failed adjudicator dispatch', { step7Result: { ok: false } }],
+  ['dispatch predating the Step-7 baseline', { step7Result: {
+    started_at: '2025-01-01T00:00:10.000Z', ended_at: '2025-01-01T00:00:14.000Z' } }],
+] as const) {
+  test(`Step-7 contract-only bootstrap rejects ${label}`, t => {
+    const f = carriedStep7Fixture(t, { itemChanged: false,
+      itemAt: '2025-01-01T00:00:05.000Z', ...options });
+    assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+      'A changed contract still requires genuine Step-7 provenance.'), /eligible Step 7 owner bootstrap/);
+  });
+}
+
+test('Step-7 contract-only bootstrap rejects changed item or manifest and unchanged contract', t => {
+  const f = carriedStep7Fixture(t, { itemChanged: false,
+    itemAt: '2025-01-01T00:00:05.000Z' });
+  writeFileSync(f.itemPath, item(f.id).replace('Immediate.', 'Unreviewed proof change.'));
+  utimesSync(f.itemPath, new Date('2025-01-01T00:00:05.000Z'), new Date('2025-01-01T00:00:05.000Z'));
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'A changed item cannot use contract-only provenance.'), /eligible Step 7 owner bootstrap/);
+  writeFileSync(f.itemPath, item(f.id));
+  const manifest = JSON.parse(readFileSync(f.manifestPath, 'utf8'));
+  manifest[0].items.find((entry: any) => entry.id === f.id).deps = ['lem-base'];
+  writeFileSync(f.manifestPath, JSON.stringify(manifest));
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'A changed manifest cannot use contract-only provenance.'), /eligible Step 7 owner bootstrap/);
+  manifest[0].items.find((entry: any) => entry.id === f.id).deps = [];
+  writeFileSync(f.manifestPath, JSON.stringify(manifest));
+  writeFileSync(f.contractPath, JSON.stringify({ contracts: { [f.id]: { risk: 'low' } } }));
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, f.id, f.evidence,
+    'An unchanged contract needs no contract-only recertification.'), /eligible Step 7 owner bootstrap/);
 });
 
 for (const step of [5, 8]) test(`Step ${step} cannot use Step-7 recovery provenance`, t => {
@@ -238,6 +383,36 @@ test('an item file already present at the baseline cannot be relabelled auditor-
     started_at: '2000-01-01T00:00:00.000Z', ended_at: '2100-01-01T00:00:00.000Z',
   }));
   assert.throws(() => certifyAuditorCreatedItems(root, 'r', 7), /existed on disk before Step 7/);
+});
+
+test('Step-3 certification tolerates later shared-manifest rewrites but rejects later proof edits', t => {
+  const root = fixture(); t.after(() => rmSync(root, { recursive: true, force: true }));
+  const manifestPath = join(root, 'research/r-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  Object.assign(pages[0], { kind: 'A', companion: 'page-b' });
+  pages.push({ id: 'page-b', kind: 'B', companion: 'page-a', items: [] });
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  writeAuditorBaseline(root, 'r');
+
+  const itemPath = join(root, 'items/lem-created.md');
+  writeFileSync(itemPath, item('lem-created'));
+  pages[0].items.push({ id: 'lem-created', deps: [] });
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  const authoredAt = new Date('2025-01-01T00:00:05.000Z');
+  for (const path of [itemPath, manifestPath]) utimesSync(path, authoredAt, authoredAt);
+  writeFileSync(join(root, 'research/r-dispatch/alpha-high-author.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-high', label: 'step3b-a-0123456789abcdef', covers: ['1'], ok: true,
+    started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z',
+  }));
+
+  pages[1].title = 'Later sibling-page edit';
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  utimesSync(manifestPath, new Date('2025-01-01T00:00:11.000Z'), new Date('2025-01-01T00:00:11.000Z'));
+  assert.deepEqual(certifyAuditorItems(root, 'r').items.map((row: any) => row.id), ['lem-created']);
+
+  writeFileSync(itemPath, `${item('lem-created')}\nUnreviewed later proof change.\n`);
+  utimesSync(itemPath, new Date('2025-01-01T00:00:12.000Z'), new Date('2025-01-01T00:00:12.000Z'));
+  assert.throws(() => certifyAuditorItems(root, 'r'), /changed after its latest successful Step 3/);
 });
 
 for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a covering author dispatch`, () => {

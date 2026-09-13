@@ -36,6 +36,10 @@ parts:
       - forcing-orders-names-and-generic-extensions
       - the-forcing-theorem-and-formal-consistency-transfer
       - condensation-gch-and-diamond-in-l
+      - symmetric-extensions-and-basic-choice-failure-models
+      - finite-support-iterations-and-martins-axiom
+      - preservation-cohen-forcing-and-the-continuum
+      - permutation-models-and-transfer-to-zf
 ---
 
 ## sets-relations-and-functions
@@ -59,14 +63,15 @@ first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Ordinals first: well-ordering, transfinite recursion, rank, the cumulative hierarchy, ordinal
-and cardinal arithmetic, cofinality, alephs and weak-choice distinctions inside ZF. Clubs,
-stationarity, pressing down, trees, delta systems, Diamond, Borel codes, analytic sets,
-determinacy, PCF scales, ZFC Dowker spaces. Deduction, soundness, completeness, compactness and
-arithmetized incompleteness; reflection, absoluteness and elementary submodels; Boolean ideals,
-BPI, Stone duality. Large cardinals: inaccessibility, Mahloness, weak and strong compactness,
-measurability and supercompactness, via ultrafilters, ultrapowers, measures and covering
-embeddings; the constructible hierarchy and HOD give inner models with definable well-orders and
-choice. Condensation in $L$ gives GCH, diamond under $V=L$ and a Suslin tree, plus a
-finite-fragment consistency transfer; forcing closes the part through generics, names, the truth
-lemma, generic ZF/ZFC extensions and formal consistency transfer.
+Ordinals: well-ordering, transfinite recursion, rank, cumulative hierarchy, ordinal and
+cardinal arithmetic, cofinality, alephs, weak choice. Clubs, stationarity, trees, delta
+systems, Diamond; Borel/analytic sets, determinacy; PCF, Dowker spaces; soundness,
+completeness, incompleteness; reflection, elementary submodels; Boolean ideals, BPI,
+Stone duality. Large cardinals from inaccessibility to supercompactness via ultrafilters,
+ultrapowers, embeddings; $L$ and HOD give inner models with definable well-orders,
+condensation yielding GCH, diamond, a Suslin tree. Forcing closes the part: generics,
+names, the truth lemma; closure, distributivity, chain conditions with nice-name counting
+for Cohen, collapse, Lévy-collapse forcing; symmetric extensions and permutation models
+(Fraenkel--Mostowski, second Fraenkel, ordered Mostowski) fail choice: Dedekind-finite
+sets of reals, non-well-orderable atoms, countable pairs, the ZFA version transferred to
+ZF by Jech--Sochor; finite-support iterations force Martin's Axiom with $\neg$CH.

@@ -1,0 +1,1534 @@
+[
+  {
+    "order": 288.121,
+    "id": "martingale-inequalities-and-convergence",
+    "kind": "A",
+    "category": "probability",
+    "title": "Martingale Inequalities and Convergence",
+    "companion": "martingale-inequalities-and-convergence-examples",
+    "requires": [
+      "modes-of-convergence-for-random-variables",
+      "central-limit-theorems",
+      "conditional-expectation",
+      "discrete-time-martingales",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "modes-of-convergence-egorov-and-lusin",
+      "the-lp-spaces-holder-minkowski-and-riesz-fischer"
+    ],
+    "items": [
+      {
+        "id": "def-upcrossing-number-of-an-interval",
+        "kind": "definition",
+        "title": "Upcrossing number of an interval",
+        "statement": "For a real sequence x=(x_n)_{n>=0}, reals a<b, and N>=0, U_N[a,b](x) is the supremum of k over all finite integer tuples 0<=s_1<t_1<...<s_k<t_k<=N with x_{s_i}<=a and x_{t_i}>=b. Put U_infinity[a,b]=sup_N U_N[a,b]. For a real process X these are pointwise random variables.",
+        "strategy": "The supremum is over a finite set for fixed N, so U_N is the maximum of finitely many measurable indicator-defined conditions and is measurable. U_infinity is the increasing countable supremum of the U_N. This definition never selects optimizing stopping indices and therefore introduces no choice principle.",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-doob-upcrossing-inequality",
+        "kind": "lemma",
+        "title": "Doob upcrossing inequality",
+        "statement": "Assume AC. Let X be an integrable submartingale and a<b. For every N, (b-a) E[U_N[a,b](X)] <= E[(X_N-a)^+]-E[(X_0-a)^+] <= E[(X_N-a)^+].",
+        "strategy": "Replace X by the submartingale Y=a+(X-a)^+, which has the same upcrossings of [a,b]. Define the predictable buy-low/sell-high indicator H recursively from the observed path. Every completed upcrossing contributes at least b-a to (H dot Y)_N, while an incomplete final holding contributes nonnegatively, so (b-a)U_N<=(H dot Y)_N. With K=1-H, the identity Y_N-Y_0=(H dot Y)_N+(K dot Y)_N and the nonnegative predictable-transform inequality give E[(K dot Y)_N]>=0. Taking expectations yields the displayed bound. No optimizing tuple or stopping-time theorem is used.",
+        "deps": [
+          "def-upcrossing-number-of-an-interval",
+          "def-martingale-submartingale-and-supermartingale",
+          "cor-nonnegative-predictable-transforms-preserve-submartingale-gains",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-convex-functions-of-martingales-are-submartingales",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-doob-submartingale-convergence",
+        "kind": "theorem",
+        "title": "Doob submartingale convergence theorem",
+        "statement": "Assume AC. If X is a submartingale with sup_n E[X_n^+]<infinity, then there is an integrable finite random variable X_infinity such that X_n converges to X_infinity almost surely.",
+        "strategy": "For every rational a<b, the upcrossing inequality gives E U_infinity[a,b]<infinity by monotone convergence and the uniform positive-part bound, hence U_infinity[a,b]<infinity almost surely. Intersect the resulting full-measure events over the countable rational pairs; any path with liminf below limsup crosses some rational interval infinitely often, so it converges in the extended reals. Since E X_n>=E X_0, E X_n^- = E X_n^+-E X_n <= sup_m E X_m^+-E X_0. Fatou applied to positive and negative parts shows the limit is finite and integrable.",
+        "deps": [
+          "lem-doob-upcrossing-inequality",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-fatou-lemma",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "lem-q-and-irrationals-dense-r",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-doob-l1-maximal-inequality",
+        "kind": "theorem",
+        "title": "Doob L1 maximal inequality",
+        "statement": "Assume AC. If X is a nonnegative submartingale and lambda>0, then lambda P(max_{0<=k<=N} X_k>=lambda) <= E[X_N 1_{max_{0<=k<=N}X_k>=lambda}] <= E[X_N].",
+        "strategy": "Partition the first-crossing event into the disjoint measurable events A_k={X_0<lambda,...,X_{k-1}<lambda,X_k>=lambda}. On A_k, lambda<=X_k. The multistep submartingale inequality and the defining integral identity for conditional expectation yield E[X_k 1_{A_k}]<=E[X_N 1_{A_k}]. Sum over the finite partition. This proof is finite-time and does not invoke stopping times or optional sampling.",
+        "deps": [
+          "def-martingale-submartingale-and-supermartingale",
+          "lem-multistep-martingale-characterization",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-doob-lp-maximal-inequality",
+        "kind": "theorem",
+        "title": "Doob Lp maximal inequality",
+        "statement": "Assume AC. Let $N\\in\\mathbb N_0$, $p>1$, and $q=p/(p-1)$. If $X=(X_n)_{n\\ge0}$ is a nonnegative submartingale and $X_N\\in L^p$, then\n$$\\left\\|\\max_{0\\le k\\le N}X_k\\right\\|_p\\le q\\|X_N\\|_p.$$\nIn particular, for a martingale $M$ with $M_N\\in L^p$,\n$$\\left\\|\\max_{0\\le k\\le N}|M_k|\\right\\|_p\\le q\\|M_N\\|_p.$$",
+        "strategy": "Apply the refined L1 maximal inequality at every level lambda to X and use layer cake for bounded truncations of X_N^*=max_{k<=N}X_k. Integrating p lambda^{p-2} times the level inequality and using Tonelli converts the tail integral to q E[X_N (X_N^*)^{p-1}], where q=p/(p-1). Holder bounds this by q||X_N||_p ||X_N^*||_p^{p-1}; divide, then let the truncation increase using monotone convergence. For a martingale, |M| is a nonnegative submartingale by conditional Jensen and |M_N| is its terminal value.",
+        "deps": [
+          "thm-doob-l1-maximal-inequality",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "thm-holder-inequality-for-integrals",
+          "thm-monotone-convergence-for-the-integral",
+          "cor-absolute-value-and-powers-of-a-martingale-are-submartingales",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-lp-bounded-martingale-convergence",
+        "kind": "theorem",
+        "title": "Lp bounded martingale convergence",
+        "statement": "Assume AC. Let p>1. If M is a martingale and sup_n E|M_n|^p<infinity, then there is M_infinity in Lp such that M_n converges to M_infinity almost surely and in Lp. Moreover M_n=E[M_infinity|F_n] almost surely and ||sup_n |M_n|||_p <= p/(p-1) sup_n ||M_n||_p.",
+        "strategy": "The submartingale |M| satisfies the positive-part hypothesis, so Doob convergence gives an almost-sure finite limit. Apply the finite-horizon Lp maximal inequality and monotone convergence to get sup_n|M_n| in Lp and the stated norm bound. Then |M_n-M_infinity|^p is dominated by (2 sup_k|M_k|)^p, so dominated convergence gives Lp convergence. Conditional Lp contraction and the multistep martingale identity let m tend to infinity in M_n=E[M_m|F_n], yielding the terminal-value representation.",
+        "deps": [
+          "thm-doob-submartingale-convergence",
+          "thm-doob-lp-maximal-inequality",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "cor-conditional-lp-contraction",
+          "lem-multistep-martingale-characterization",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-uniformly-integrable-martingale-convergence",
+        "kind": "theorem",
+        "title": "Uniformly integrable martingale convergence",
+        "statement": "Assume AC. A uniformly integrable martingale M converges almost surely and in L1 to an integrable random variable M_infinity.",
+        "strategy": "Uniform integrability implies sup_n E|M_n|<infinity, hence in particular a uniform bound on E M_n^+. Doob convergence supplies an almost-sure integrable limit. Almost-sure convergence implies convergence in probability, and uniform integrability together with convergence in probability gives L1 convergence. No assertion that mere L1 boundedness gives L1 convergence is made.",
+        "deps": [
+          "thm-doob-submartingale-convergence",
+          "def-uniformly-integrable-family",
+          "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-closed-martingale-characterization",
+        "kind": "theorem",
+        "title": "Closed martingale characterization",
+        "statement": "Assume AC. For a martingale M, the following are equivalent: (i) {M_n:n>=0} is uniformly integrable; (ii) M_n converges in L1 to some M_infinity; (iii) there is X in L1 with M_n=E[X|F_n] almost surely for every n. In this case one may take X=M_infinity, and M_n also converges almost surely.",
+        "strategy": "The UI convergence theorem proves (i)=>(ii). L1 convergence and conditional L1 contraction allow the multistep identity M_n=E[M_m|F_n] to pass to m=infinity, proving (ii)=>(iii). For (iii)=>(i), invoke uniform integrability of the conditional expectations of one fixed L1 variable. The almost-sure conclusion follows from the UI theorem. AC is exactly the inherited Radon–Nikodym/conditional-expectation dependency and, when simultaneous representatives are desired, the countable selection of versions.",
+        "deps": [
+          "thm-uniformly-integrable-martingale-convergence",
+          "lem-multistep-martingale-characterization",
+          "cor-conditional-lp-contraction",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-reverse-filtration-and-reverse-martingale",
+        "kind": "definition",
+        "title": "Reverse filtration and reverse martingale",
+        "statement": "Assume AC. A reverse filtration is a decreasing sequence G_0 superset G_1 superset ... of sub-sigma-algebras. An integrable process X_n adapted to G_n is a reverse martingale if E[X_m|G_n]=X_n almost surely whenever m<=n; equivalently E[X_n|G_{n+1}]=X_{n+1}. Write G_infinity=intersection_n G_n.",
+        "strategy": "The adjacent and multistep formulations are equivalent by the tower property, exactly as for forward martingales with the inclusions reversed. AC is inherited from conditional-expectation existence and may select the countable family of representatives; all equations remain almost-sure class identities.",
+        "deps": [
+          "def-filtration-and-filtered-probability-space",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-tower-property-of-conditional-expectation",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-reverse-martingale-convergence",
+        "kind": "theorem",
+        "title": "Reverse martingale convergence",
+        "statement": "Assume AC. If (X_n,G_n) is a reverse martingale, then X_n converges almost surely and in L1 to E[X_0|G_infinity].",
+        "strategy": "The reverse identity gives X_n=E[X_0|G_n], so the family is uniformly integrable. A finite reversed segment satisfies the ordinary upcrossing estimate after reversing its time order; letting the segment grow and using the rational-interval argument yields an almost-sure finite limit X_infinity. Uniform integrability upgrades this to L1 convergence. For A in G_infinity, A belongs to every G_n, so integral_A X_n=integral_A X_0; pass to the L1 limit. Measurability of the pointwise limit with respect to every G_n makes it G_infinity-measurable, and the defining conditional-expectation test identifies X_infinity=E[X_0|G_infinity]. AC is used only through conditional expectation and countable representatives.",
+        "deps": [
+          "def-reverse-filtration-and-reverse-martingale",
+          "lem-doob-upcrossing-inequality",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence",
+          "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-levy-upward-convergence-of-conditional-expectations",
+        "kind": "theorem",
+        "title": "Levy upward convergence of conditional expectations",
+        "statement": "Assume AC. If F_n is increasing, F_infinity=sigma(union_n F_n), and X is in L1, then E[X|F_n] converges almost surely and in L1 to E[X|F_infinity].",
+        "strategy": "The conditional-expectation process is a martingale and its values are uniformly integrable because they condition one fixed L1 variable. The closed-martingale theorem gives an almost-sure and L1 limit Y. For A in union_n F_n, the defining integral identity holds for all sufficiently large n and passes to Y by L1 convergence. The class of A in F_infinity for which integral_A Y=integral_A X is a monotone class containing the algebra union_n F_n, so the monotone-class theorem identifies Y as E[X|F_infinity]. AC is inherited from conditional expectations and countable version selection.",
+        "deps": [
+          "lem-conditional-expectation-process-is-a-martingale",
+          "thm-uniform-integrability-of-conditional-expectations-of-one-variable",
+          "thm-closed-martingale-characterization",
+          "thm-monotone-class",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-levy-downward-convergence-of-conditional-expectations",
+        "kind": "theorem",
+        "title": "Levy downward convergence of conditional expectations",
+        "statement": "Assume AC. If G_n is decreasing, G_infinity=intersection_n G_n, and X is in L1, then E[X|G_n] converges almost surely and in L1 to E[X|G_infinity].",
+        "strategy": "Set X_n=E[X|G_n]. The tower property shows that (X_n,G_n) is a reverse martingale with X_0 replaced, if necessary, by E[X|G_0]. Apply reverse martingale convergence. A final tower identity gives E[E[X|G_0]|G_infinity]=E[X|G_infinity]. AC is inherited from the conditional-expectation inputs.",
+        "deps": [
+          "thm-reverse-martingale-convergence",
+          "thm-tower-property-of-conditional-expectation",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-kolmogorov-zero-one-law-from-reverse-martingales",
+        "kind": "corollary",
+        "title": "Kolmogorov zero-one law from martingale convergence",
+        "statement": "Assume AC. For an independent sequence of random elements and its tail sigma-algebra T, every A in T has probability zero or one.",
+        "strategy": "Let H_n be the sigma-algebra generated by the first n variables. Tail-event independence from each finite initial sigma-algebra gives E[1_A|H_n]=P(A). Levy upward convergence says these constants converge almost surely and in L1 to E[1_A|sigma(union_n H_n)]. Since A lies in that generated sigma-algebra, the limit is 1_A. Thus 1_A=P(A) almost surely, forcing P(A) in {0,1}. This is an independent martingale proof and does not consume the already-published zero-one theorem it recovers.",
+        "deps": [
+          "def-tail-sigma-algebra-of-a-sequence",
+          "lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-levy-upward-convergence-of-conditional-expectations",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+        "kind": "lemma",
+        "title": "Conditional Hoeffding bound for bounded martingale differences",
+        "statement": "Assume AC. Let D be integrable with E[D|G]=0 almost surely. Let A,B be finite G-measurable random variables such that A<=D<=B and B-A<=c almost surely for a deterministic c>=0. Then for every real lambda, E[exp(lambda D)|G] <= exp(lambda^2 c^2/8) almost surely.",
+        "strategy": "The width bound and A<=D<=B imply D-c<=A<=D<=B<=D+c, so A and B are integrable. Conditional monotonicity then gives A<=E[D|G]=0<=B. Pointwise convexity places exp(lambda D) below the chord joining its endpoint values at A and B. Condition on G and use the centered identity; the resulting G-measurable two-point expression is bounded by exp(lambda^2(B-A)^2/8) through the one-variable Hoeffding calculation, and B-A<=c gives the claim. Thus exp(lambda D) is bounded by exp(|lambda|c) and its conditional expectation is well-defined in L1. AC is used only for conditional-expectation representatives.",
+        "deps": [
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-exponential-two-point-convexity",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Notes 20: Azuma's Inequality",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes20.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-azuma-hoeffding-inequality",
+        "kind": "theorem",
+        "title": "Azuma-Hoeffding inequality",
+        "statement": "Assume AC. Let (M_k,F_k)_{k=0}^n be a martingale. Suppose finite F_{k-1}-measurable A_k,B_k and deterministic c_k>=0 satisfy A_k<=M_k-M_{k-1}<=B_k and B_k-A_k<=c_k almost surely. Then for every t>0, P(M_n-M_0>=t) <= exp(-2t^2/sum_{k=1}^n c_k^2), and the analogous lower-tail bound holds.",
+        "strategy": "Apply the conditional Hoeffding lemma to each martingale difference and iteratively condition to obtain E exp(lambda(M_n-M_0))<=exp(lambda^2 sum_k c_k^2/8). Markov's inequality gives the Chernoff bound exp(-lambda t+lambda^2 V/8). Optimize at lambda=4t/V; handle V=0 separately. Apply the same proof to -M, with endpoints -B_k,-A_k, for the lower tail. AC enters only through the conditional-expectation lemma and martingale definition.",
+        "deps": [
+          "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "thm-tower-property-of-conditional-expectation",
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Notes 20: Azuma's Inequality",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes20.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-symmetric-bounded-increment-azuma-bound",
+        "kind": "corollary",
+        "title": "Symmetric bounded-increment Azuma bound",
+        "statement": "Assume AC. If (M_k,F_k)_{k=0}^n is a martingale and |M_k-M_{k-1}|<=c_k almost surely for deterministic c_k>=0, then P(|M_n-M_0|>=t)<=2 exp(-t^2/(2 sum_{k=1}^n c_k^2)) for every t>0.",
+        "strategy": "Apply Azuma-Hoeffding with A_k=-c_k and B_k=c_k to M and -M, then combine the two tail events by the union bound. Terms with c_k=0 cause no difficulty; if all c_k vanish the event is empty for t>0. AC is exactly the conditional-expectation dependence inherited from Azuma-Hoeffding.",
+        "deps": [
+          "thm-azuma-hoeffding-inequality",
+          "thm-finite-union-bound",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Notes 20: Azuma's Inequality",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes20.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-square-integrable-martingale-difference-array-and-variance-clock",
+        "kind": "definition",
+        "title": "Square-integrable martingale-difference array and variance clock",
+        "statement": "Assume AC on a fixed probability space $(\\Omega,\\mathcal F,P)$. A **rowwise square-integrable martingale-difference array** consists of families $(\\mathcal F_{n,k})_{n\\ge1,k\\ge0}$ and $(Z_{n,k})_{n,k\\ge1}$ such that for each $n$ the $\\mathcal F_{n,k}$ form an increasing filtration of sub-$\\sigma$-algebras of $\\mathcal F$, $Z_{n,k}\\in L^2$ is $\\mathcal F_{n,k}$-measurable, and\n$$\\mathbb E[Z_{n,k}\\mid\\mathcal F_{n,k-1}]=0\\quad\\text{a.s.}$$\nDefine\n$$M_{n,m}=\\sum_{k=1}^mZ_{n,k},\\qquad v_{n,k}=\\mathbb E[Z_{n,k}^2\\mid\\mathcal F_{n,k-1}],\\qquad \\Gamma_{n,m}=\\sum_{k=1}^m v_{n,k}.$$\nEach $v_{n,k}$ is nonnegative, integrable, and $\\mathcal F_{n,k-1}$-measurable; hence $\\Gamma_{n,m}$ is an increasing predictable **variance clock**, while $M_{n,m}$ is a rowwise $L^2$ martingale. A finite triangular row is included by putting $Z_{n,k}=0$ and holding the filtration fixed after its last column. This preserves both limiting sums. AC is used only through conditional-moment existence and countable representative selection.",
+        "strategy": "Every conditional second moment exists in L1 and is nonnegative and measurable with respect to the preceding sigma-algebra; finite sums define an increasing predictable variance clock. The partial sums form a rowwise L2 martingale. Padding after a finite row preserves both objects and their limits. AC is the inherited Radon–Nikodym dependency for conditional moments and countable representatives.",
+        "deps": [
+          "def-martingale-difference-sequence",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Notes 19: Martingale CLT",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes19.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-martingale-central-limit-theorem",
+        "kind": "theorem",
+        "title": "Martingale central limit theorem",
+        "statement": "Assume AC. Let $(Z_{n,k},\\mathcal F_{n,k})$ be a square-integrable martingale-difference array such that, for every $n$, $M_{n,m}$ and $\\Gamma_{n,m}$ converge almost surely as $m\\to\\infty$ to finite limits $M_{n,\\infty}$ and $\\Gamma_{n,\\infty}$. If\n$$\\Gamma_{n,\\infty}\\longrightarrow1\\quad\\text{in probability}$$\nand, for every $\\varepsilon>0$,\n$$L_n(\\varepsilon):=\\sum_{k\\ge1}\\mathbb E[Z_{n,k}^2 1_{\\{|Z_{n,k}|>\\varepsilon\\}}]\\longrightarrow0,$$\nthen $M_{n,\\infty}\\Rightarrow N(0,1)$.",
+        "strategy": "Fix t and first truncate each row at a deterministic column so that the two almost-sure row limits are approximated with arbitrarily high probability. Use the conditional characteristic-function expansion exp(iu)=1+iu-u^2/2+r(u), telescope the one-step conditional factors, and split each remainder at |Z_{n,k}|<=epsilon. The unconditional Lindeberg sum controls the large-jump terms, while its small-jump complement is bounded by epsilon times the accumulated second moments. Localize the variance clock at a deterministic level, use Gamma_{n,infinity}->1 in probability to replace the variance product by exp(-t^2/2), and then remove both localizations with the converging-together lemma. The characteristic-function criterion gives the normal limit. The clock and Lindeberg hypotheses are used separately, and no independence is assumed. AC is used for conditional moments.",
+        "deps": [
+          "def-square-integrable-martingale-difference-array-and-variance-clock",
+          "lem-second-order-characteristic-function-expansion",
+          "lem-characteristic-function-of-a-normal-law",
+          "cor-characteristic-function-criterion-for-weak-convergence",
+          "thm-converging-together-lemma",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "def-conditional-expectation-as-an-ae-class",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Notes 19: Martingale CLT",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes19.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.122,
+    "id": "martingale-inequalities-and-convergence-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Martingale Inequalities and Convergence — Examples",
+    "companion": "martingale-inequalities-and-convergence",
+    "requires": [
+      "martingale-inequalities-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "ex-doob-maximal-bound-for-a-centered-random-walk",
+        "kind": "example",
+        "title": "Doob maximal bound for a centered random walk",
+        "statement": "Assume AC. Let S_k=sum_{j=1}^k xi_j, where the independent increments are centered and square-integrable, and put sigma_k^2=E[xi_k^2]. Then for lambda>0, P(max_{0<=k<=n}|S_k|>=lambda)<=lambda^{-2}sum_{k=1}^n sigma_k^2, and E[max_{0<=k<=n}|S_k|^2]<=4sum_{k=1}^n sigma_k^2.",
+        "strategy": "Verify directly from independence and centering that S is a martingale and compute E S_n^2=sum sigma_k^2 by expanding the square and killing cross terms. Apply the L1 maximal inequality to the nonnegative submartingale S_k^2 for the probability bound, and Doob's L2 inequality to |S_k| for the norm bound.",
+        "deps": [
+          "thm-doob-l1-maximal-inequality",
+          "thm-doob-lp-maximal-inequality",
+          "thm-convex-functions-of-martingales-are-submartingales",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nonnegative-martingale-converges-almost-surely",
+        "kind": "example",
+        "title": "A nonnegative martingale converges almost surely",
+        "statement": "Assume AC. Every nonnegative martingale M has an almost-sure finite integrable limit M_infinity, with E[M_infinity]<=E[M_0]. Equality and L1 convergence are not asserted without uniform integrability.",
+        "strategy": "Since E M_n=E M_0, the positive parts have uniformly bounded expectations. Apply Doob submartingale convergence. Fatou gives E M_infinity<=liminf E M_n=E M_0. The subsequent counterexamples explain why this conclusion cannot be strengthened in general.",
+        "deps": [
+          "thm-doob-submartingale-convergence",
+          "thm-fatou-lemma",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-dyadic-martingale-converges-to-the-original-l1-variable",
+        "kind": "example",
+        "title": "A dyadic martingale converges to the original L1 variable",
+        "statement": "Assume AC. On ([0,1],B,lambda), let F_n be generated by the dyadic half-open intervals of length 2^{-n}. For every X in L1, M_n=E[X|F_n] converges almost surely and in L1 to X.",
+        "strategy": "The dyadic sigma-algebras increase and their union generates the Borel sigma-algebra: dyadic intervals form a countable base after taking countable unions. Levy upward convergence therefore gives convergence to E[X|B]=X. Endpoint conventions affect only a null set and are fixed with half-open cells plus {1}.",
+        "deps": [
+          "thm-levy-upward-convergence-of-conditional-expectations",
+          "thm-generated-sigma-algebra-exists-and-is-minimal",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-reverse-martingale-and-the-tail-sigma-algebra",
+        "kind": "example",
+        "title": "A reverse martingale and the tail sigma-algebra",
+        "statement": "Assume AC. Let $Z_0,Z_1,\\ldots$ be integrable random variables, $\\mathcal G_n=\\sigma(Z_n,Z_{n+1},\\ldots)$, and $X\\in L^1$. The process $Y_n=\\mathbb E[X\\mid\\mathcal G_n]$ is a reverse martingale with respect to the decreasing filtration $(\\mathcal G_n)$. Moreover,\n$$\\mathbb E[X\\mid\\mathcal G_n]\\longrightarrow\\mathbb E[X\\mid\\mathcal T]$$\nalmost surely and in $L^1$, where $\\mathcal T=\\bigcap_n\\mathcal G_n$ is the tail $\\sigma$-algebra.",
+        "strategy": "The sigma-algebras G_n decrease by construction, and the conditional expectations form a reverse martingale by the tower property. Apply Levy downward convergence. For independent Z_n, the zero-one corollary further makes E[1_A|T]=1_A constant almost surely for every tail event A.",
+        "deps": [
+          "thm-levy-downward-convergence-of-conditional-expectations",
+          "thm-tower-property-of-conditional-expectation",
+          "def-tail-sigma-algebra-of-a-sequence",
+          "cor-kolmogorov-zero-one-law-from-reverse-martingales",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-lp-bounded-martingale-with-an-lp-terminal-value",
+        "kind": "example",
+        "title": "An Lp-bounded martingale with an Lp terminal value",
+        "statement": "Assume AC. If p>1, X is in Lp, and F_n is a filtration, then M_n=E[X|F_n] is an Lp-bounded martingale and converges almost surely and in Lp to an F_infinity-measurable M_infinity; if F_infinity=sigma(union_nF_n), then M_infinity=E[X|F_infinity].",
+        "strategy": "The conditional-expectation process is a martingale and conditional Lp contraction gives sup_n||M_n||_p<=||X||_p. Apply Lp-bounded martingale convergence. Levy upward convergence identifies the limit with E[X|F_infinity]. AC is exactly the inherited conditional-expectation dependency.",
+        "deps": [
+          "thm-lp-bounded-martingale-convergence",
+          "thm-levy-upward-convergence-of-conditional-expectations",
+          "cor-conditional-lp-contraction",
+          "lem-conditional-expectation-process-is-a-martingale",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-l1-bounded-martingale-need-not-converge-in-l1",
+        "kind": "counterexample",
+        "title": "An L1-bounded martingale need not converge in L1",
+        "statement": "Assume AC. On $([0,1],\\mathcal B,\\lambda)$ put $A_n=(0,2^{-n}]$ for $n\\ge1$, let $\\mathcal F_0=\\{\\varnothing,[0,1]\\}$ and $\\mathcal F_n=\\sigma(A_1,\\ldots,A_n)$, and define $M_0=1$ and $M_n=2^n1_{A_n}$ for $n\\ge1$. Then $M$ is a nonnegative martingale with $\\mathbb EM_n=1$ for every $n$, hence $\\sup_n\\mathbb E|M_n|=1$, but $M_n\\to0$ almost surely and not in $L^1$.",
+        "strategy": "On ([0,1],B,lambda), set A_n=(0,2^{-n}] and F_n=sigma(A_1,...,A_n), and define M_n=2^n 1_{A_n}, with M_0=1. Directly compute E[M_{n+1}|F_n]=M_n: on A_n the next set occupies half the mass, and off A_n both variables vanish. Every x except 0 eventually leaves A_n, so M_n tends to 0 almost surely, while E|M_n|=1. The exceptional point 0 is null.",
+        "deps": [
+          "def-martingale-submartingale-and-supermartingale",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-almost-sure-martingale-convergence-need-not-preserve-expectation",
+        "kind": "counterexample",
+        "title": "Almost-sure martingale convergence need not preserve expectation",
+        "statement": "Assume AC. Almost-sure convergence of integrable martingales need not preserve expectations: the martingale M_n=2^n 1_{(0,2^{-n}]} has E M_n=1 for every n but has almost-sure limit 0 with expectation 0.",
+        "strategy": "Use the preceding nested-set martingale and its already verified almost-sure limit. Compare the constant sequence E M_n=1 with E M_infinity=0. The failure is precisely the absence of uniform integrability, so there is no conflict with closed-martingale convergence.",
+        "deps": [
+          "cex-l1-bounded-martingale-need-not-converge-in-l1",
+          "thm-closed-martingale-characterization",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-doob-lp-maximal-inequality-excludes-p-equals-one",
+        "kind": "counterexample",
+        "title": "Doob Lp maximal inequality excludes p equals one",
+        "statement": "Assume AC. There is no universal constant C such that E[max_{0<=k<=n}|M_k|]<=C E|M_n| for every integrable martingale and every n.",
+        "strategy": "For each horizon n, use A_k=(0,2^{-k}] and F_k=sigma(A_1,...,A_k), and take the closed martingale M_k=E[2^n1_{A_n}|F_k]=2^k1_{A_k} for k<=n. Then E|M_n|=1. The maximum equals 2^j on A_j minus A_{j+1} for 0<=j<n and equals 2^n on A_n, so its expectation is n/2+1. This diverges with n and disproves any horizon-independent L1 analogue.",
+        "deps": [
+          "lem-conditional-expectation-process-is-a-martingale",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-azuma-bound-for-simple-random-walk",
+        "kind": "example",
+        "title": "Azuma bound for simple random walk",
+        "statement": "Assume AC. For a simple symmetric random walk $S_n$ with $S_0=0$ and independent increments taking values $-1$ and $1$,\n$$\\mathbb P(|S_n|\\ge t)\\le2e^{-t^2/(2n)}$$\nfor every integer $n\\ge1$ and every $t>0$.",
+        "strategy": "Independence and zero mean make S a martingale in its natural filtration, and every increment has absolute value one. Apply the symmetric bounded-increment Azuma bound with c_k=1. For deviations t=x sqrt(n), the exponent becomes -x^2/2, matching the Gaussian/binomial moderate-deviation scale, while the factor 2 and absence of lattice information show that this is a robust bound rather than the exact binomial tail.",
+        "deps": [
+          "cor-symmetric-bounded-increment-azuma-bound",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Notes 20: Azuma's Inequality",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes20.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.123,
+    "id": "stopping-times-and-optional-stopping",
+    "kind": "A",
+    "category": "probability",
+    "title": "Stopping Times and Optional Stopping",
+    "companion": "stopping-times-and-optional-stopping-examples",
+    "requires": [
+      "conditional-expectation",
+      "discrete-time-martingales",
+      "martingale-inequalities-and-convergence"
+    ],
+    "items": [
+      {
+        "id": "def-discrete-stopping-time",
+        "kind": "definition",
+        "title": "Discrete stopping time",
+        "statement": "For a filtration (F_n)_{n>=0}, a map tau:Omega->{0,1,2,...} union {infinity} is a stopping time if {tau<=n} belongs to F_n for every n>=0. It is bounded if tau<=N almost surely for some deterministic N, and finite if P(tau<infinity)=1.",
+        "strategy": "Measurability as an extended-integer-valued random variable follows from the event tests proved next. Bounded and almost-surely finite are deliberately distinct. No completion of the filtration is assumed, so the stopping-time event condition is literal, not merely modulo null sets.",
+        "deps": [
+          "def-filtration-and-filtered-probability-space",
+          "def-random-element-and-real-random-variable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-equivalent-event-tests-for-a-discrete-stopping-time",
+        "kind": "lemma",
+        "title": "Equivalent event tests for a discrete stopping time",
+        "statement": "For tau:Omega->N_0 union {infinity}, the following are equivalent: {tau<=n} in F_n for every n; {tau=n} in F_n for every n; and {tau>n} in F_n for every n. Under any of these, {tau>=n} belongs to F_{n-1} for n>=1.",
+        "strategy": "Take complements to pass between {tau<=n} and {tau>n}. Use {tau=n}={tau<=n} minus {tau<=n-1}, with the n=0 case separate. Conversely, {tau<=n} is the finite union of {tau=k}, 0<=k<=n. Finally {tau>=n} is the complement of {tau<=n-1}.",
+        "deps": [
+          "def-discrete-stopping-time",
+          "def-sigma-algebra"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time",
+        "kind": "lemma",
+        "title": "First hitting time of an adapted process is a stopping time",
+        "statement": "If X is adapted and B is Borel, then tau=inf{n>=0:X_n belongs to B}, with inf(empty set)=infinity, is a stopping time.",
+        "strategy": "For each n, {tau<=n}=union_{k=0}^n {X_k in B}. Adaptedness puts {X_k in B} in F_k, hence in F_n; the union is finite. The convention for a path that never hits B exactly produces tau=infinity.",
+        "deps": [
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time",
+          "def-adapted-and-integrable-stochastic-process"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-minimum-maximum-and-bounded-shifts-of-stopping-times",
+        "kind": "lemma",
+        "title": "Minimum maximum and deterministic shifts of stopping times",
+        "statement": "If sigma and tau are stopping times, then sigma wedge tau and sigma vee tau are stopping times. If c is a nonnegative integer, tau+c is a stopping time for (F_n), with infinity+c=infinity. More generally, if rho is a stopping time for the shifted filtration G_n=F_{n+c}, then rho+c is a stopping time for (F_n); this shifted-filtration convention must be stated when used. The earlier shift (tau-c)^+ is a stopping time for (F_{n+c}) but need not be one for (F_n). Truncations tau wedge N are bounded stopping times.",
+        "strategy": "Use {sigma wedge tau<=n}={sigma<=n} union {tau<=n} and {sigma vee tau<=n}={sigma<=n} intersection {tau<=n}. For tau+c, the event is empty for n<c and otherwise belongs to F_{n-c} subset F_n. If rho is G-stopping, {rho+c<=n}={rho<=n-c} lies in G_{n-c}=F_n. For the earlier shift, {(tau-c)^+<=n}={tau<=n+c} belongs to F_{n+c}; this explains why the unshifted-filtration assertion would be invalid. Truncation is the minimum with a deterministic stopping time.",
+        "deps": [
+          "def-discrete-stopping-time",
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sigma-algebra-at-a-stopping-time",
+        "kind": "definition",
+        "title": "Sigma-algebra at a stopping time",
+        "statement": "For a stopping time tau, define F_tau={A in F: A intersection {tau<=n} belongs to F_n for every n>=0}. This is the information observable by time tau.",
+        "strategy": "The definition is meaningful for possibly infinite tau and does not identify events modulo null sets. Closure and comparison properties are proved in the next lemma rather than built into the definition.",
+        "deps": [
+          "def-discrete-stopping-time",
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-stopping-time-sigma-algebra-is-a-sigma-algebra",
+        "kind": "lemma",
+        "title": "The stopping-time event family is a sigma-algebra",
+        "statement": "For every stopping time tau, F_tau is a sigma-algebra contained in F. For deterministic tau=n it equals F_n. If sigma<=tau pointwise, then F_sigma is contained in F_tau.",
+        "strategy": "Omega passes the defining test. Complements pass because A^c intersection {tau<=n}={tau<=n} minus (A intersection {tau<=n}), and countable unions pass by distributing intersection over the union. For deterministic tau=n, the tests reduce to A in F_n. For the inclusion, if A is in F_sigma then A intersection {tau<=n} is the finite union over k<=n of A intersection {sigma<=k} intersection {tau=k}; each term lies in F_k and hence F_n.",
+        "deps": [
+          "def-sigma-algebra-at-a-stopping-time",
+          "def-sigma-algebra"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-stopped-random-variable-and-stopped-process",
+        "kind": "definition",
+        "title": "Stopped random variable and stopped process",
+        "statement": "For an adapted real process X, a stopping time tau, and a fixed real cemetery value x_infinity, define X_tau=sum_{n>=0}X_n 1_{tau=n}+x_infinity 1_{tau=infinity}. Define the stopped process X^tau_n=X_{n wedge tau}; because n wedge tau is finite, this does not use the cemetery value. If a terminal variable X_infinity is separately supplied, it may replace x_infinity on {tau=infinity} and must be stated explicitly.",
+        "strategy": "The disjoint level sets of tau make the pointwise sum unambiguous: exactly one term is active on {tau<infinity}. The cemetery convention prevents the expression X_tau from being undefined on {tau=infinity}. For each deterministic n, n wedge tau takes only 0,...,n.",
+        "deps": [
+          "def-discrete-stopping-time",
+          "def-adapted-and-integrable-stochastic-process"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-stopped-random-variable-is-measurable-at-the-stopping-time",
+        "kind": "lemma",
+        "title": "A stopped random variable is measurable at the stopping time",
+        "statement": "If X is adapted, tau is a stopping time, and the value on {tau=infinity} is a fixed real number, then X_tau is F_tau-measurable. In particular, X_{tau wedge n} is F_{tau wedge n}-measurable.",
+        "strategy": "For a Borel set B, the inverse image {X_tau in B} is the countable union of the measurable finite-level events {tau=k} intersection {X_k in B}, together when appropriate with {tau=infinity}; hence it belongs to the ambient F. For each m, its intersection with {tau<=m} is the finite union over k<=m of {tau=k} intersection {X_k in B}, which lies in F_m because each term lies in F_k. The infinity value disappears on {tau<=m}. Thus the inverse image passes the defining F_tau tests. Apply the same argument to tau wedge n.",
+        "deps": [
+          "def-stopped-random-variable-and-stopped-process",
+          "def-sigma-algebra-at-a-stopping-time",
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-a-stopped-martingale-is-a-martingale",
+        "kind": "theorem",
+        "title": "A stopped martingale is a martingale",
+        "statement": "Assume AC. If M is a martingale and tau is a stopping time, then M^tau_n=M_{n wedge tau} is a martingale with respect to the original filtration.",
+        "strategy": "Use the pathwise increment identity M^tau_n-M^tau_{n-1}=1_{tau>=n}(M_n-M_{n-1}). The indicator is F_{n-1}-measurable by the stopping-time event test and bounded. Each stopped value is integrable because it is a finite sum of integrable variables over the events {tau=k} plus M_n on {tau>=n}. Taking the conditional expectation of the increment gives zero. AC is inherited from the martingale and conditional-expectation definitions.",
+        "deps": [
+          "def-stopped-random-variable-and-stopped-process",
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time",
+          "def-discrete-martingale-transform",
+          "def-martingale-submartingale-and-supermartingale",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-optional-sampling-for-bounded-stopping-times",
+        "kind": "theorem",
+        "title": "Optional sampling for bounded stopping times",
+        "statement": "Assume AC. If $M$ is a martingale and $\\sigma\\le\\tau$ are stopping times bounded by a deterministic $N$, then\n$$\\mathbb E[M_\\tau\\mid\\mathcal F_\\sigma]=M_\\sigma\\quad\\text{a.s.},$$\nso $\\mathbb EM_\\tau=\\mathbb EM_\\sigma$. For a submartingale $X$ the conditional and expectation inequalities point upward; for a supermartingale they point downward.",
+        "strategy": "Write X_tau-X_sigma=sum_{k=1}^N H_k(X_k-X_{k-1}), where H_k=1_{sigma<k<=tau}. The event defining H_k is in F_{k-1}. For A in F_sigma, 1_A H_k is nonnegative and F_{k-1}-measurable because A intersection {sigma<=k-1} is in F_{k-1}. The predictable-transform identity and the one-step conditional inequality show that the integral over A of X_tau-X_sigma is nonnegative for a submartingale, zero for a martingale, and nonpositive for a supermartingale. Measurability at F_sigma and the conditional-expectation test finish. Take A=Omega for expectations. AC enters through conditional expectation.",
+        "deps": [
+          "def-sigma-algebra-at-a-stopping-time",
+          "lem-stopped-random-variable-is-measurable-at-the-stopping-time",
+          "thm-bounded-predictable-transforms-preserve-martingales",
+          "cor-nonnegative-predictable-transforms-preserve-submartingale-gains",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-optional-stopping-under-uniform-integrability",
+        "kind": "theorem",
+        "title": "Optional stopping under uniform integrability",
+        "statement": "Assume AC. Let $M$ be a uniformly integrable martingale and let $\\sigma\\le\\tau$ be pointwise ordered, almost-surely finite stopping times. Define $M_\\sigma$ and $M_\\tau$ using the fixed cemetery value $0$ on the respective null events where the stopping time is infinite. Then $M_\\sigma,M_\\tau\\in L^1$ and\n$$\\mathbb E[M_\\tau\\mid\\mathcal F_\\sigma]=M_\\sigma\\quad\\text{a.s.}, \\qquad \\mathbb EM_\\tau=\\mathbb EM_\\sigma.$$",
+        "strategy": "Closed-martingale convergence supplies M_infinity in L1 with M_n=E[M_infinity|F_n]. Bounded optional sampling gives M_{tau wedge n}=E[M_infinity|F_{tau wedge n}], so the stopped family is uniformly integrable. Almost-sure finiteness gives M_{tau wedge n}->M_tau pointwise, hence UI gives L1 convergence; the defining event tests identify M_tau=E[M_infinity|F_tau]. Apply the same argument to sigma. The earlier stopping-time sigma-algebra comparison lemma proves F_sigma subset F_tau from pointwise sigma<=tau; the tower property gives E[M_tau|F_sigma]=M_sigma. AC is used for conditional expectations and simultaneous representatives.",
+        "deps": [
+          "thm-closed-martingale-characterization",
+          "def-stopped-random-variable-and-stopped-process",
+          "def-sigma-algebra-at-a-stopping-time",
+          "lem-stopping-time-sigma-algebra-is-a-sigma-algebra",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-tower-property-of-conditional-expectation",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-optional-stopping-with-integrable-time-and-bounded-increments",
+        "kind": "theorem",
+        "title": "Optional stopping with integrable time and bounded increments",
+        "statement": "Assume AC. Let $M$ be a martingale with $|M_n-M_{n-1}|\\le C$ almost surely for every $n\\ge1$, for deterministic $C<\\infty$. If $\\tau$ is a stopping time with $\\mathbb E\\tau<\\infty$, define $M_\\tau=0$ on the null event $\\{\\tau=\\infty\\}$. Then $M_\\tau\\in L^1$ and $\\mathbb EM_\\tau=\\mathbb EM_0$.",
+        "strategy": "The bounded theorem gives E M_{tau wedge n}=E M_0. Markov inequality gives P(tau=infinity)<=E tau/m for every positive m, hence tau<infinity almost surely. The pathwise bound |M_{tau wedge n}-M_tau|<=C(tau-n)^+<=C tau gives an integrable dominator and tends to zero pointwise, so dominated convergence yields L1 convergence and passes expectations to the limit. This is the exact use of both bounded increments and E tau<infinity. AC is inherited from the martingale and bounded optional-sampling results.",
+        "deps": [
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-dominated-convergence",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-markov-inequality-for-random-variables",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-optional-stopping-with-a-dominating-integrable-variable",
+        "kind": "theorem",
+        "title": "Optional stopping with a dominating integrable variable",
+        "statement": "Assume AC. Let $M$ be a martingale and $\\tau$ an almost-surely finite stopping time. If $Y\\in L^1$ and $|M_{\\tau\\wedge n}|\\le Y$ almost surely for every $n$, define $M_\\tau=M_{\\tau(\\omega)}(\\omega)$ on $\\{\\tau<\\infty\\}$ and $M_\\tau=0$ on $\\{\\tau=\\infty\\}$. Then $M_\\tau\\in L^1$ and $\\mathbb EM_\\tau=\\mathbb EM_0$.",
+        "strategy": "Since $\\tau<\\infty$ almost surely, $M_{\\tau\\wedge n}$ eventually equals $M_\\tau$ almost surely. On the null event $\\{\\tau=\\infty\\}$ the stipulated cemetery value makes the stopped variable total; all limit assertions are almost-sure assertions. The assumed bound passes to $|M_\\tau|\\le Y$, proving integrability, and also gives $$|M_{\\tau\\wedge n}-M_\\tau|\\le2Y.$$ F2 therefore yields $L^1$ convergence. F1 gives $\\mathbb EM_{\\tau\\wedge n}=\\mathbb EM_0$ for every $n$. Pass to the $L^1$ limit from step 1.1 to get $\\mathbb EM_\\tau=\\mathbb EM_0$. AC has exactly the inherited role in F3.",
+        "deps": [
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-dominated-convergence",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-wald-first-equation-under-integrable-stopping",
+        "kind": "corollary",
+        "title": "Wald first equation under integrable stopping",
+        "statement": "Let X_1,X_2,... be iid integrable real random variables with mean mu, let F_n=sigma(X_1,...,X_n), and let tau be an F_n-stopping time with E tau<infinity. Then sum_{k=1}^tau X_k is integrable and E[sum_{k=1}^tau X_k]=mu E tau.",
+        "strategy": "Write the stopped sum as sum_{k>=1}X_k 1_{tau>=k}. The event {tau>=k} is F_{k-1}-measurable and hence independent of X_k, so factorization gives E[|X_k|1_{tau>=k}]=E|X_1|P(tau>=k). Apply finite linearity and monotone convergence to the partial sums of absolute values and to tau=sum_{k>=1}1_{tau>=k}; this gives absolute integrability E|X_1|E tau. The signed partial sums are dominated by that integrable absolute series, so dominated convergence and finite linearity pass expectation through the series. Factorization gives E[X_k1_{tau>=k}]=mu P(tau>=k), and monotone convergence for tau finishes. This is the discrete Tonelli argument and exposes the exact integrability hypothesis.",
+        "deps": [
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-gamblers-ruin-hitting-probability-from-optional-stopping",
+        "kind": "corollary",
+        "title": "Gambler's ruin hitting probability from optional stopping",
+        "statement": "Assume AC. Let $N\\ge2$ and $i\\in\\{1,\\ldots,N-1\\}$ be integers, let $S_n=i+\\sum_{k=1}^n\\xi_k$, where the independent increments take $1$ and $-1$ with probability $1/2$, and use the natural filtration $\\mathcal F_n=\\sigma(\\xi_1,\\ldots,\\xi_n)$, with $\\mathcal F_0$ trivial. For\n$$\\tau=\\inf\\{n:S_n\\in\\{0,N\\}\\},$$\n$\\tau$ is almost surely finite; use the cemetery value $S_\\tau=0$ on $\\{\\tau=\\infty\\}$. Then $\\mathbb P(S_\\tau=N)=i/N$.",
+        "strategy": "Adaptedness and F1 make $\\tau$ a stopping time. At the start of any block of $N$ fresh increments, conditional on not yet having exited, the event that all $N$ increments are $+1$ has probability $2^{-N}$ and forces an upper exit within that block. Independence of successive increments therefore gives inductively $$\\mathbb P(\\tau>mN)\\le(1-2^{-N})^m\\longrightarrow0.$$ Thus $\\tau<\\infty$ almost surely. Since $\\mathbb E\\xi_k=0$ and $\\xi_k$ is independent of the past, F2 gives $\\mathbb E[S_k\\mid\\mathcal F_{k-1}]=S_{k-1}$. Before and at exit the nearest-neighbour path stays in $[0,N]$, so $|S_{\\tau\\wedge n}|\\le N$. F3 with dominator $N$ yields $\\mathbb ES_\\tau=\\mathbb ES_0=i$. At the finite exit time, $S_\\tau\\in\\{0,N\\}$; the chosen value zero on the null event $\\{\\tau=\\infty\\}$ preserves this assertion everywhere. Therefore $$i=\\mathbb ES_\\tau=N\\mathbb P(S_\\tau=N),$$ which gives the result. AC is used exactly through F4.",
+        "deps": [
+          "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time",
+          "thm-optional-stopping-with-a-dominating-integrable-variable",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-gamblers-ruin-expected-duration",
+        "kind": "corollary",
+        "title": "Gambler's ruin expected duration",
+        "statement": "Assume AC. In the symmetric gambler's ruin setting with S_0=i and absorbing levels 0 and N, the exit time tau satisfies E tau=i(N-i).",
+        "strategy": "For the simple symmetric walk, S_n^2-n is a martingale. Apply bounded optional sampling at tau wedge n to obtain E[S_{tau wedge n}^2]-E[tau wedge n]=i^2. The first term is bounded by N^2 and converges by dominated convergence to E S_tau^2=N^2 P(S_tau=N)=Ni; monotone convergence sends E[tau wedge n] to E tau, initially allowing infinity. Rearrangement gives E tau=Ni-i^2.",
+        "deps": [
+          "cor-gamblers-ruin-hitting-probability-from-optional-stopping",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "thm-square-minus-predictable-quadratic-variation-is-a-martingale",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-optional-stopping-requires-a-passage-to-the-limit-hypothesis",
+        "kind": "remark",
+        "title": "Optional stopping requires a passage-to-the-limit hypothesis",
+        "statement": "Assume AC. Almost-sure finiteness of tau alone, and even integrability of tau alone when martingale increments are unrestricted, do not justify E M_tau=E M_0. A valid unbounded-time argument must supply uniform integrability, bounded increments together with E tau<infinity, an integrable dominator, or another explicit passage-to-the-limit condition.",
+        "strategy": "Bounded optional sampling controls M_{tau wedge n}, not its limit automatically. The three preceding extension theorems identify sufficient mechanisms for passing expectations, and the companion counterexamples exhibit the two advertised failures. This remark introduces no new theorem.",
+        "deps": [
+          "thm-optional-stopping-under-uniform-integrability",
+          "thm-optional-stopping-with-integrable-time-and-bounded-increments",
+          "thm-optional-stopping-with-a-dominating-integrable-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.124,
+    "id": "stopping-times-and-optional-stopping-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Stopping Times and Optional Stopping — Examples",
+    "companion": "stopping-times-and-optional-stopping",
+    "requires": [
+      "stopping-times-and-optional-stopping"
+    ],
+    "items": [
+      {
+        "id": "ex-first-exit-time-from-an-interval",
+        "kind": "example",
+        "title": "First exit time from an interval",
+        "statement": "If X is an adapted real process and a<b, then tau=inf{n>=0:X_n is not in (a,b)} is a stopping time. It may equal infinity, and no integrability conclusion follows from the stopping-time property alone.",
+        "strategy": "Take the Borel target (-infinity,a] union [b,infinity) in the first-hitting-time lemma. Explicitly, {tau<=n}=union_{k=0}^n({X_k<=a} union {X_k>=b}), an event in F_n. The infinity warning preserves the definition's cemetery convention.",
+        "deps": [
+          "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-gamblers-ruin-probability-for-a-biased-walk",
+        "kind": "example",
+        "title": "Gambler's ruin probability for a biased walk",
+        "statement": "Assume AC. Let $N$ and $i$ be integers with $0<i<N$, set $S_0=i$, and let the independent increments $\\xi_k=S_k-S_{k-1}$ be $+1$ with probability $p$ and $-1$ with probability $q=1-p$, where $0<p<1$ and $p\\ne q$. Use the natural filtration $\\mathcal F_n=\\sigma(\\xi_1,\\ldots,\\xi_n)$, with $\\mathcal F_0$ trivial. For $\\tau=\\inf\\{n:S_n\\in\\{0,N\\}\\}$,\n$$\\mathbb P(S_\\tau=N)=\\frac{1-(q/p)^i}{1-(q/p)^N}.$$",
+        "strategy": "Set r=q/p. Independence gives E[r^{S_{n+1}}|F_n]=r^{S_n}(pr+q/r)=r^{S_n}, so r^{S_n} is a martingale. The same finite-block argument as in symmetric ruin makes tau almost surely finite. Since r^{S_{tau wedge n}} is bounded between min(1,r^N) and max(1,r^N), dominated optional stopping gives r^i=E r^{S_tau}=P(S_tau=0)+r^N P(S_tau=N). Solve the two-outcome equation.",
+        "deps": [
+          "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time",
+          "thm-optional-stopping-with-a-dominating-integrable-variable",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-expected-duration-of-simple-gamblers-ruin",
+        "kind": "example",
+        "title": "Expected duration of simple gambler's ruin",
+        "statement": "Assume AC. A simple symmetric random walk started at i in {1,...,N-1} and stopped on first hitting 0 or N has expected duration i(N-i); in particular, from the midpoint of an even interval the mean duration is N^2/4.",
+        "strategy": "Apply the gambler's ruin expected-duration corollary. At i=N/2 substitute directly to obtain the quadratic value, illustrating that almost-sure exit need not mean a uniformly short game.",
+        "deps": [
+          "cor-gamblers-ruin-expected-duration",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-walds-equation-for-a-bounded-stopping-time",
+        "kind": "example",
+        "title": "Wald equation for a bounded success time",
+        "statement": "Let X_k be iid Bernoulli(p), 0<p<=1, and tau=min(inf{k>=1:X_k=1},N). Then E tau=(1-(1-p)^N)/p and E[sum_{k=1}^tau X_k]=1-(1-p)^N=p E tau.",
+        "strategy": "The bounded time tau is a stopping time. Its tail probabilities are P(tau>=k)=(1-p)^{k-1} for 1<=k<=N, so summing them gives the displayed E tau. The stopped sum is the indicator that at least one of the first N trials succeeds, whose expectation is 1-(1-p)^N. This verifies Wald's identity concretely, including the truncation convention at N.",
+        "deps": [
+          "cor-wald-first-equation-under-integrable-stopping"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-stopping-a-likelihood-ratio-martingale",
+        "kind": "example",
+        "title": "Likelihood ratio at a bounded stopping time",
+        "statement": "Assume AC. Let Q be absolutely continuous with respect to P on F_N and let L_n=E_P[dQ/dP|F_n], 0<=n<=N. For every stopping time tau<=N, L_tau is nonnegative, F_tau-measurable, and E_P L_tau=1; moreover Q(A)=E_P[1_A L_tau] for every A in F_tau.",
+        "strategy": "Radon–Nikodym and conditional expectation make L a nonnegative closed martingale with terminal density L_N=dQ/dP. Bounded optional sampling gives E_P L_tau=E_P L_0=1. For A in F_tau, apply the conditional form E[L_N|F_tau]=L_tau, or decompose A by {tau=n}, to obtain E_P[1_A L_tau]=E_P[1_A L_N]=Q(A). AC is used exactly in Radon–Nikodym and conditional-expectation existence.",
+        "deps": [
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-conditional-expectation-process-is-a-martingale",
+          "thm-optional-sampling-for-bounded-stopping-times",
+          "lem-stopped-random-variable-is-measurable-at-the-stopping-time",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-last-exit-time-need-not-be-a-stopping-time",
+        "kind": "counterexample",
+        "title": "A last exit time need not be a stopping time",
+        "statement": "A last-visit time generally is not a stopping time. For two independent fair coin tosses X_1,X_2 and F_n=sigma(X_1,...,X_n), let rho=max({k in {1,2}:X_k=1} union {0}). Then rho is not a stopping time.",
+        "strategy": "The event {rho<=1} is exactly {X_2=0}. It is not F_1-measurable because independence gives conditional probability 1/2 rather than an indicator measurable with respect to F_1. Thus deciding by time 1 whether the last success occurred no later than 1 requires observing the future second toss.",
+        "deps": [
+          "def-discrete-stopping-time",
+          "def-independent-random-elements"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-optional-stopping-fails-for-unbounded-simple-random-walk-hitting-time",
+        "kind": "counterexample",
+        "title": "Optional stopping fails at the first hit of plus one",
+        "statement": "Assume AC. For simple symmetric random walk S_0=0 and tau=inf{n>=0:S_n=1}, tau is almost surely finite, but S_tau=1 almost surely and E S_tau=1 differs from E S_0=0.",
+        "strategy": "For a>=1, stop on first hitting 1 or -a. The symmetric ruin probability gives P(hit 1 before -a)=a/(a+1). These events increase to {tau<infinity}; letting a tend to infinity proves tau is finite almost surely. By definition S_tau=1. The expectation mismatch shows that almost-sure finiteness alone does not permit passage from bounded stopping times tau wedge n to tau.",
+        "deps": [
+          "cor-gamblers-ruin-hitting-probability-from-optional-stopping",
+          "rem-optional-stopping-requires-a-passage-to-the-limit-hypothesis",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-almost-surely-finite-stopping-does-not-imply-integrable-stopping",
+        "kind": "counterexample",
+        "title": "An almost-surely finite stopping time need not be integrable",
+        "statement": "Assume AC. The first time tau that a simple symmetric random walk started at zero hits 1 is almost surely finite but has E tau=infinity.",
+        "strategy": "Almost-sure finiteness was proved in the preceding counterexample. If E tau were finite, the walk's increments are bounded by one, so the integrable-time bounded-increment optional-stopping theorem would imply E S_tau=E S_0. But these values are 1 and 0, a contradiction. Therefore E tau is infinite.",
+        "deps": [
+          "cex-optional-stopping-fails-for-unbounded-simple-random-walk-hitting-time",
+          "thm-optional-stopping-with-integrable-time-and-bounded-increments",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, fifth edition",
+              "url": "https://web.archive.org/web/20240514054731if_/https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-integrable-stopping-time-alone-does-not-suffice-for-arbitrary-martingale-increments",
+        "kind": "counterexample",
+        "title": "An integrable stopping time alone does not control unbounded increments",
+        "statement": "Assume AC. There is a martingale M and an integrable stopping time tau such that M_tau is integrable but E M_tau differs from E M_0; thus E tau<infinity is insufficient when martingale increments are unbounded.",
+        "strategy": "On ([0,1],B,lambda), let A_n=(0,2^{-n}], F_n=sigma(A_1,...,A_n), M_0=1, and M_n=2^n1_{A_n}. Define tau=inf{n>=1:M_n=0}. Then {tau>n}=A_n, so the tail-sum formula gives E tau=sum_{n>=0}P(tau>n)=2. The process is the nested-set martingale verified on the previous companion page, tau is a stopping time, and M_tau=0 almost surely, while E M_0=1. The increment magnitudes grow without bound on the surviving atoms, exactly violating the bounded-increment hypothesis.",
+        "deps": [
+          "def-martingale-submartingale-and-supermartingale",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "lem-equivalent-event-tests-for-a-discrete-stopping-time",
+          "thm-monotone-convergence-for-the-integral",
+          "rem-optional-stopping-requires-a-passage-to-the-limit-hypothesis",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Martingales, Diffusions and Financial Mathematics",
+              "url": "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

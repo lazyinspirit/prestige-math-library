@@ -293,7 +293,10 @@ for (const r of rows) {
   clusters.get(key).push(r);
 }
 const templateCandidates = [...clusters.entries()]
-  .filter(([, members]) => members.length >= minCluster)
+  // This signal is reuse *across items*. One item may legitimately cite one
+  // proof step for several boundary axes; counting its six rows as six
+  // independent template instances invents a cross-item finding.
+  .filter(([, members]) => new Set(members.map((r) => r.id)).size >= minCluster)
   .map(([key, members]) => ({
     status: members[0].status,
     members: members.length,

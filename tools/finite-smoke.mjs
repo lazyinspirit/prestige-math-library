@@ -85,6 +85,49 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'base-b-digit-orbit-cylinders': ({ max_base = 4 } = {}) => {
+    // Independent finite arithmetic views of the selected digit-cylinder
+    // lemma: repeated quotient/remainder digits versus the half-open interval
+    // test after a shift. Coprime denominators avoid terminating base-b
+    // expansions. This can catch an index or endpoint convention error; it
+    // does not prove the statement for every real number.
+    const largestBase = boundedInteger(max_base, 4, 2, 5);
+    let cases = 0;
+    for (let base = 2; base <= largestBase; base++) {
+      for (const denominator of [7, 11, 13]) {
+        for (let numerator = 1; numerator < denominator; numerator++) {
+          const digits = [];
+          let remainder = numerator;
+          for (let place = 0; place < 6; place++) {
+            const scaled = base * remainder;
+            digits.push(Math.floor(scaled / denominator));
+            remainder = scaled % denominator;
+          }
+          for (let start = 1; start <= 3; start++) {
+            for (let length = 1; length <= 3; length++) {
+              const modulus = base ** length;
+              const shifted = (numerator * base ** (start - 1)) % denominator;
+              for (let word = 0; word < modulus; word++) {
+                const expected = [];
+                let code = word;
+                for (let position = length - 1; position >= 0; position--) {
+                  expected[position] = code % base;
+                  code = Math.floor(code / base);
+                }
+                const digitMatch = expected.every((digit, offset) => digits[start - 1 + offset] === digit);
+                const intervalMatch = word * denominator <= shifted * modulus
+                  && shifted * modulus < (word + 1) * denominator;
+                if (digitMatch !== intervalMatch) return { ok: false,
+                  summary: `digit/interval mismatch at b=${base}, x=${numerator}/${denominator}, j=${start}, length=${length}, word=${word}` };
+                cases++;
+              }
+            }
+          }
+        }
+      }
+    }
+    return { ok: true, summary: `checked ${cases} exact nonterminating rational digit/interval cases across bases 2–${largestBase}` };
+  },
   'binary-shift-disjoint-cylinder-independence': ({ max_coordinates = 3 } = {}) => {
     // A finite countermodel search for the exact cylinder calculation used in
     // the fair-coin shift proof. Enumerate words, not the independence formula:

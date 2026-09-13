@@ -1,0 +1,622 @@
+[
+  {
+    "order": 510.063,
+    "id": "brauers-second-main-theorem",
+    "kind": "A",
+    "category": "representation-theory",
+    "title": "Brauers Second Main Theorem",
+    "companion": "brauers-second-main-theorem-examples",
+    "requires": [
+      "blocks-defect-groups-and-the-brauer-homomorphism",
+      "vertices-sources-and-the-green-correspondence",
+      "brauers-first-main-theorem",
+      "brauer-characters-and-decomposition-matrices"
+    ],
+    "items": [
+      {
+        "id": "lem-commuting-p-and-p-prime-parts-of-a-finite-group-element",
+        "kind": "lemma",
+        "title": "Every finite-group element has unique commuting p- and p-prime parts",
+        "deps": [
+          "def-p-regular-and-p-singular-elements",
+          "thm-bezout-identity"
+        ],
+        "statement": "Let G be finite and g in G have order p^a m with gcd(p,m)=1. There are unique commuting powers g_p and g_{p'} of g such that g=g_p g_{p'}, the order of g_p is a power of p, and the order of g_{p'} is prime to p.",
+        "strategy": "Choose integers r,s with r p^a+s m=1 and put g_p=g^{s m}, g_{p'}=g^{r p^a}. They are commuting powers with the required product and orders. If g=uv is another commuting p-by-p-prime factorization, then u and v are powers of g: raising to exponents inverse to m modulo p^a and to p^a modulo m recovers them. This also proves conjugation-equivariance of the two parts. Only integer Bezout and finiteness are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Part IV §4.4, p. 272",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, Chapter 1 §1.5, pp. 13–14",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-p-section-of-a-p-element",
+        "kind": "definition",
+        "title": "The p-section of a p-element",
+        "deps": [
+          "lem-commuting-p-and-p-prime-parts-of-a-finite-group-element"
+        ],
+        "statement": "For a p-element u of G, its p-section is S_G(u)={g in G : g_p is G-conjugate to u}. Equivalently, it is the union of the G-conjugacy classes meeting {uv : v is a p-prime element of C_G(u)}.",
+        "strategy": "This is a definition. The equivalence follows by conjugating the unique commuting p-by-p-prime factorization, using conjugation-equivariance from the preceding lemma. The identity section is exactly the set of p-regular elements.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, Definition 6.7.5 and Lemma 6.7.6, pp. 163–164",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, Chapter 1 §1.5, pp. 13–14",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-generalized-decomposition-numbers",
+        "kind": "definition",
+        "title": "Generalized decomposition numbers",
+        "deps": [
+          "def-p-section-of-a-p-element",
+          "def-splitting-p-modular-system-for-a-finite-group",
+          "def-brauer-character-of-a-finite-dimensional-kg-module",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "def-decomposition-numbers-and-decomposition-matrix"
+        ],
+        "statement": "Fix a splitting p-modular system (K,O,k), chi in Irr_K(G), a p-element u, and H=C_G(u). Write Res^G_H chi=sum_zeta n_{chi,zeta} zeta. Since u is central in H, let lambda_{u,zeta} be its scalar on the irreducible constituent zeta. For phi in IBr(H), define d^u_{chi,phi}=sum_zeta n_{chi,zeta} lambda_{u,zeta} d_{zeta,phi}; this is the generalized decomposition number.",
+        "strategy": "Maschke gives the unique irreducible multiplicities n_{chi,zeta}, and Schur gives the scalar lambda_{u,zeta}; the ordinary decomposition numbers d_{zeta,phi} are already defined, so the displayed finite sum is an unconditional definition with no forward well-definedness dependency. The coefficient lies in K (equivalently the relevant cyclotomic subring), not necessarily in the nonnegative integers. The next theorem proves that these numbers are exactly the unique coefficients in the p-section expansion and that u=1 recovers ordinary decomposition numbers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Chapter 1 §1.5, pp. 13–14",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Part IV after Theorem 5.4, pp. 277–278",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-generalized-decomposition-numbers-exist-and-are-unique",
+        "kind": "theorem",
+        "title": "Generalized decomposition numbers exist and are unique",
+        "deps": [
+          "def-generalized-decomposition-numbers",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "def-decomposition-numbers-and-decomposition-matrix",
+          "thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions"
+        ],
+        "statement": "For every chi in Irr_K(G) and p-element u, there is a unique family (d^u_{chi,phi}) indexed by IBr(C_G(u)) satisfying the generalized decomposition expansion on the p-regular elements of C_G(u). If Res^G_{C_G(u)} chi=sum_zeta n_{chi,zeta} zeta and u acts in zeta as the scalar lambda_{u,zeta}, then d^u_{chi,phi}=sum_zeta n_{chi,zeta} lambda_{u,zeta} d_{zeta,phi}.",
+        "strategy": "Restrict to the centralizer and decompose semisimply. Centrality and the splitting-field hypothesis make u act by a scalar; its p-power order follows from the scalar equation, without the inapplicable algebraically-closed characteristic-zero diagonalization theorem. Expand each constituent on p-regular elements, collect the finite sums, and use independence of the irreducible Brauer basis. At u=1 the scalar is one and the ordinary decomposition numbers are recovered.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, §1.5, Theorem 1.18 and the construction preceding it, pp. 13–14",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Part IV pp. 277–278",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-block-idempotents-lift-uniquely-from-kh-to-oh",
+        "kind": "lemma",
+        "title": "Block idempotents lift uniquely from kH to OH",
+        "deps": [
+          "def-splitting-p-modular-system-for-a-finite-group",
+          "def-p-blocks-by-primitive-central-idempotents"
+        ],
+        "statement": "Let (K,O,k) be a splitting p-modular system and H finite. Reduction modulo the maximal ideal induces a bijection between the primitive central idempotents of OH and those of kH. Thus every kH-block c has a unique central block lift c-hat in OH.",
+        "strategy": "The finite O-algebra OH is complete for the maximal-ideal topology. Lift an idempotent successively modulo m^n by the standard polynomial correction to e^2-e and pass to the complete limit. If e lifts a central idempotent, each finite O-module X=eOH(1-e) or (1-e)OHe satisfies X=mX. For a finite generating tuple, write these relations as (I-A)x=0 with entries of A in m; the adjugate identity gives det(I-A)X=0, while det(I-A) is congruent to 1 modulo m and hence is a unit. Thus X=0 and e is central. This finite determinant argument replaces the published AC-stated Nakayama theorem. Central lifts are unique modulo the radical: if central idempotents e,f have e-f in J, then e(1-f) and f(1-e) are idempotents in J and hence zero. Orthogonal decompositions therefore lift and reduce bijectively, so primitivity is preserved in both directions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Proposition 4.9 and discussion, pp. 267–270",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, notation and lifting convention, preliminary pages and Chapter 2",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-relative-projectivity-and-vertices-for-og-lattices",
+        "kind": "definition",
+        "title": "Relative projectivity and vertices for integral group lattices",
+        "deps": [
+          "def-og-lattice-and-reduction-modulo-the-maximal-ideal"
+        ],
+        "statement": "Let H be finite, Q<=H, and M an OH-lattice. The lattice M is relatively Q-projective if it is an OH-direct summand of Ind_Q^H Res_Q^H M. A vertex of a nonzero indecomposable OH-lattice is a minimal p-subgroup Q with this property.",
+        "strategy": "This is the explicit integral definition, with direct summands and induction taken in the category of O-free finite-rank lattices; it does not import the published arbitrary-module relative-projectivity interface or its AC-stated free-module comparison. Existence of a p-subgroup witness follows by averaging from any Sylow p-subgroup because its index is a unit of O; finiteness then gives a minimal witness. No global choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, §§2.1–2.2, pp. 19–22",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Definition 4.1 and Theorem 5.4 proof, pp. 264 and 276–277",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-krull-schmidt-for-og-lattices",
+        "kind": "theorem",
+        "title": "Krull-Schmidt holds for finite-rank OH-lattices",
+        "deps": [
+          "def-relative-projectivity-and-vertices-for-og-lattices"
+        ],
+        "statement": "Every finite-rank OH-lattice is a finite direct sum of indecomposable OH-lattices, and the multiset of their isomorphism classes is unique. The endomorphism ring of an indecomposable OH-lattice is local.",
+        "strategy": "For M, the O-algebra E=End_OH(M) is finite over the complete local ring O. Every element of mE is topologically nilpotent, so 1-mE consists of units by the convergent geometric series and mE lies in J(E). Successive correction and completeness lift idempotents from the finite-dimensional algebra E/mE; lifting a complete primitive orthogonal decomposition there shows that E is semiperfect. Repeatedly split nontrivial idempotents of E; positive O-rank strictly decreases, so existence terminates. If M is indecomposable, E has no nontrivial idempotent. Since idempotents lift and E/J(E) is semisimple Artinian, its decomposition has a single primitive identity, so E/J(E) is a division ring and E is local. For two finite decompositions, restrict the identity to one indecomposable summand; a finite sum equal to 1 in its local endomorphism ring has a unit term, so that summand is isomorphic to one on the other side. Split and cancel it, then induct on O-rank. This supplies the semiperfect/exchange proof directly and uses neither the published AC-stated Nakayama theorem nor the DC-stated finite-length interface.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Theorem 2.1 and §§2.1–2.2, pp. 18–22",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Jin, Basic Modular Representation Theory, §§3–4 and Green indecomposability proof, pp. 5–7",
+              "url": "https://web.math.princeton.edu/~gyujino/Modrepthy.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-integral-mackey-and-higman-for-og-lattices",
+        "kind": "lemma",
+        "title": "Integral Mackey decomposition and Higman's criterion for group lattices",
+        "deps": [
+          "def-relative-projectivity-and-vertices-for-og-lattices",
+          "thm-krull-schmidt-for-og-lattices"
+        ],
+        "statement": "For finite groups and finite-free integral group lattices, restriction of induction has the Mackey double-coset decomposition, induction is transitive, and relative Q-projectivity is equivalent to the integral relative-trace criterion. A vertex of a nonzero indecomposable lattice is contained in a conjugate of every subgroup relative to which the lattice is projective.",
+        "strategy": "Construct every Mackey summand on its finite double coset. Bridge the direct-summand definition to a split induction counit by the explicit section h tensor v maps to h tensor (1 tensor v), composed with the summand inclusion and retraction. Extract and reconstruct the identity-coset coefficient to prove Higman. Multiply the two finite trace identities, regroup by diagonal orbits, and use locality of the endomorphism ring plus vertex minimality for containment.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Proposition 2.3 and §§2.1–2.2, pp. 19–22; Proposition 3.11, p. 36",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-green-indecomposability-for-index-p-integral-induction",
+        "kind": "theorem",
+        "title": "Green indecomposability for index-p integral induction",
+        "deps": [
+          "thm-krull-schmidt-for-og-lattices",
+          "def-relative-projectivity-and-vertices-for-og-lattices",
+          "def-algebraically-closed-field"
+        ],
+        "statement": "Let (K,O,k) be a splitting p-modular system with k algebraically closed. If N is normal in H with [H:N]=p and L is a nonzero indecomposable ON-lattice, then Ind_N^H L is an indecomposable OH-lattice.",
+        "strategy": "Use locality of End_ON(L) and algebraic closedness to identify its residue division algebra with k. Split into the two inertia-group cases. For inertia N, cyclic permutation of the p residual factors leaves only diagonal idempotents 0 and 1. For inertia H, the residual centralizer is k[z]/((z-mu)^p), using the pth root supplied by algebraic closedness, and is local. Radical kernels then rule out every nontrivial idempotent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jin, Basic Modular Representation Theory, Theorem 4.1 and proof, pp. 6–7",
+              "url": "https://web.math.princeton.edu/~gyujino/Modrepthy.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, Theorem 2.20 proof, pp. 28–29",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-central-p-subgroups-lie-in-every-block-defect-group",
+        "kind": "lemma",
+        "title": "Central p-subgroups lie in every block defect group",
+        "deps": [
+          "def-brauer-homomorphism-for-a-p-subgroup",
+          "thm-defect-groups-are-maximal-brauer-support",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. If Z is a central p-subgroup of a finite group H and c is a block of kH, then every defect group of c contains Z.",
+        "strategy": "Because C_H(Z)=H, the Brauer homomorphism Br_Z on (kH)^Z=kH is the identity coefficient projection, hence Br_Z(c)=c is nonzero. Maximal Brauer support puts Z inside a conjugate of any defect group D of c. Since Z is central, conjugating that containment back leaves Z fixed, so Z<=D. This also proves that for a p-element u, block induction from C_G(u) is defined for every local block: its defect groups contain <u>, hence their G-centralizers lie in C_G(u). AC is inherited exactly from the published maximal-Brauer-support contract through its finite-dimensional Krull-Schmidt supplier; the displayed finite subgroup argument adds no choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Lemma 1.2 and §1.3, pp. 2 and 7–9",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, §§6.6–6.7, pp. 156–165",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-brauer-subsection",
+        "kind": "definition",
+        "title": "Brauer subsections and B-subsections",
+        "deps": [
+          "def-p-section-of-a-p-element",
+          "lem-central-p-subgroups-lie-in-every-block-defect-group",
+          "def-induced-block-from-a-subgroup",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. A Brauer subsection of G is a pair (u,c), with u a p-element and c a block of kC_G(u), considered up to G-conjugacy. For a block B of kG it is a B-subsection when c^G=B.",
+        "strategy": "This is a definition, but its notation has a nontrivial well-definedness check. The preceding central-subgroup lemma puts <u> in every defect group D of c, so C_G(D)<=C_G(u); the published centralizer-containment theorem therefore defines c^G. Conjugation equivariance of block induction makes the B-condition invariant under simultaneous G-conjugacy. The convention is local-to-global induction, never restriction of B. AC is inherited exactly from the cited published block-induction contracts and the preceding support lemma; no new choice is made in forming a finite conjugacy class.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, §1.5 and Theorem 1.19, pp. 13–16",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Theorems 5.4–5.5, pp. 276–278",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-relative-projectivity-forces-p-section-character-vanishing",
+        "kind": "lemma",
+        "title": "Relative projectivity forces character vanishing off the controlling p-section",
+        "deps": [
+          "def-relative-projectivity-and-vertices-for-og-lattices",
+          "thm-krull-schmidt-for-og-lattices",
+          "thm-green-indecomposability-for-index-p-integral-induction",
+          "lem-integral-mackey-and-higman-for-og-lattices",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let (K,O,k) be a splitting p-modular system with k algebraically closed. If an OH-lattice M is relatively Q-projective and x has p-part not H-conjugate into Q, then the ordinary character of K tensor_O M vanishes at x.",
+        "strategy": "Restrict the induced summand to the cyclic subgroup C generated by x. Mackey intersections avoid the p-part and lie in the unique index-p subgroup L of C. Integral induction transitivity, Krull--Schmidt, and Green indecomposability show that the restricted summand is a sum of entire modules induced from L. The matrix of x cyclically permutes their p coset summands, so every trace is zero. The proof itself is finite; AC is retained and propagated from the pair contract.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Theorem 2.20 and proof, pp. 28–29",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Theorem 5.4 proof, pp. 276–277",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nagao-decomposition-for-restriction-to-a-centralizer",
+        "kind": "theorem",
+        "title": "Nagao decomposition for restriction to a centralizer",
+        "deps": [
+          "lem-block-idempotents-lift-uniquely-from-kh-to-oh",
+          "def-relative-projectivity-and-vertices-for-og-lattices",
+          "thm-krull-schmidt-for-og-lattices",
+          "lem-integral-mackey-and-higman-for-og-lattices",
+          "def-induced-block-from-a-subgroup",
+          "lem-block-induction-exists-under-centralizer-containment",
+          "lem-block-centre-locality-and-trace-ideal-sums",
+          "cor-normal-p-core-lies-in-every-block-defect-group",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Let B be a block of kG with lift B-hat in OG, let D be a p-subgroup, and let D C_G(D)<=H<=N_G(D). If M is an O-free OG-lattice with B-hat M=M, then Res^G_H M=M_corr direct-sum M_err, where every indecomposable summand of M_corr belongs to the lift of a block c of kH with c^G=B, and every indecomposable summand of M_err has a vertex that does not contain D.",
+        "strategy": "Because D is normal in H, the normal-p-core defect theorem puts D in every local defect group, so all local inductions are defined. Split the restricted lattice by lifted local block idempotents. For a noncorresponding component, block-center locality puts the relevant block corner in the radical; the remaining finite class sums are relative traces from centralizers not containing D. Integral Higman and vertex containment then force every error vertex to miss D. Either summand may be zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Theorems 2.17–2.18 and §§3.1–3.3, pp. 26–36",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Theorem 5.4 proof, pp. 276–277",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nagao-error-terms-have-zero-trace-on-the-relevant-p-section",
+        "kind": "lemma",
+        "title": "Nagao error terms have zero trace on the relevant p-section",
+        "deps": [
+          "lem-commuting-p-and-p-prime-parts-of-a-finite-group-element",
+          "def-p-section-of-a-p-element",
+          "lem-relative-projectivity-forces-p-section-character-vanishing",
+          "thm-nagao-decomposition-for-restriction-to-a-centralizer",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let (K,O,k) be a splitting p-modular system with k algebraically closed. For u a p-element, H=C_G(u), and Nagao decomposition at D=<u>, the full and correspondent characters agree at uv for every p-regular v in H; each indecomposable error character vanishes there.",
+        "strategy": "Ordinary trace is additive on the finite direct-sum decomposition M_corr direct-sum M_err. Decompose M_err into indecomposable OH-lattices. Each has a vertex Q not containing <u>. Since u is central in H, it is not H-conjugate into Q, while the p-part of uv is u by the commuting-parts lemma. The relative-projectivity vanishing lemma therefore kills the character of every error summand at uv; summing yields the equality. AC is inherited exactly through the two preceding AC-stated lemmas; trace additivity and the finite sum add no choice. This identifies the exact use of Green indecomposability and avoids any unsupported cancellation claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Lemma 2.21 and proof, p. 29",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Theorem 5.4 proof, pp. 276–277",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-local-block-projection-controls-generalized-decomposition-support",
+        "kind": "lemma",
+        "title": "Local block projection controls p-section character support",
+        "deps": [
+          "lem-block-idempotents-lift-uniquely-from-kh-to-oh",
+          "def-brauer-subsection",
+          "thm-nagao-decomposition-for-restriction-to-a-centralizer",
+          "lem-nagao-error-terms-have-zero-trace-on-the-relevant-p-section",
+          "thm-blocks-partition-ordinary-and-brauer-irreducible-characters",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let (K,O,k) be a splitting p-modular system with k algebraically closed. If chi lies in a block B of G, u is a p-element, H=C_G(u), and c is a block of kH, then c^G not equal to B implies that the character of the lifted c-component of Res_H^G chi vanishes at uv for every p-regular v in H.",
+        "strategy": "Choose an O-free G-stable lattice M affording chi and apply Nagao with D=<u>. The lifted central idempotent c-hat cuts out exactly the ordinary H-constituents in block c, independently of the lattice. If c^G differs from B, c-hat annihilates M_corr because all its indecomposable summands belong to corresponding local blocks. Thus c-hat M is a direct summand of the Nagao error part. Apply the error-trace lemma to that block component (or termwise to its indecomposable summands) to obtain the asserted vanishing. AC is inherited exactly from the subsection and Nagao contracts; the block projection itself is finite. Block orthogonality supplies the annihilation; no converse is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Lemma 2.21 and Theorem 2.22, pp. 29–30",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, Lemmas 6.7.8–6.7.14, pp. 164–169",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-brauer-second-main-theorem",
+        "kind": "theorem",
+        "title": "Brauer's Second Main Theorem",
+        "deps": [
+          "thm-generalized-decomposition-numbers-exist-and-are-unique",
+          "def-brauer-subsection",
+          "lem-local-block-projection-controls-generalized-decomposition-support",
+          "thm-blocks-partition-ordinary-and-brauer-irreducible-characters",
+          "prop-decomposition-matrix-is-block-diagonal-after-block-ordering",
+          "thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let (K,O,k) be a splitting p-modular system with k algebraically closed. If B is a block of kG, chi lies in Irr_K(G,B), u is a p-element, c is a block of kC_G(u), and phi lies in IBr(c), then d^u_{chi,phi} nonzero implies c^G=B. Equivalently, the generalized decomposition expansion of chi(uv) over p-regular v sums only over local blocks inducing to B.",
+        "strategy": "Partition the irreducible Brauer basis of C_G(u) by its local blocks. The generalized decomposition expansion splits accordingly into the local block-projected class functions chi_c. The preceding projection lemma makes every summand with c^G different from B identically zero on the p-regular set. Linear independence of the Brauer basis inside each block forces all its coefficients d^u_{chi,phi} to vanish, proving the support implication and the displayed restricted sum. Conversely the support implication immediately deletes exactly those zero block-columns from the full generalized expansion. The induction c^G is defined by the subsection well-definedness lemma. AC is inherited exactly from those two AC-stated suppliers; this final basis partition and all sums are finite and add no further choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Theorems 1.19 and 2.22, pp. 14 and 29–30",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, Theorem 6.7.15, pp. 169–170",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            },
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Theorems 5.4–5.5, pp. 276–278",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-generalized-decomposition-columns-have-corresponding-block-support",
+        "kind": "corollary",
+        "title": "Generalized decomposition columns have corresponding block support",
+        "deps": [
+          "thm-brauer-second-main-theorem",
+          "thm-blocks-partition-ordinary-and-brauer-irreducible-characters",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let (K,O,k) be a splitting p-modular system with k algebraically closed. A generalized-decomposition column indexed by a Brauer character in a local block c can have nonzero rows only in the single global block c^G; the entire column may be zero.",
+        "strategy": "Apply the Second Main Theorem to each row chi. Any nonzero entry forces the block containing chi to equal the single induced block c^G. Since ordinary irreducibles belong to unique blocks, nonzero rows of the column have exactly that global block support. AC is inherited exactly from the Second Main Theorem; the rowwise application is finite. This is only a support statement and does not assert that a permitted column is nonzero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Craven, The Brauer Correspondence, Theorems 1.19 and 2.22, pp. 14 and 29–30",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            },
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, Theorem 6.7.15 and Corollaries 6.7.16–6.7.17, pp. 169–171",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 510.064,
+    "id": "brauers-second-main-theorem-examples",
+    "kind": "B",
+    "category": "representation-theory",
+    "title": "Brauers Second Main Theorem — Examples",
+    "companion": "brauers-second-main-theorem",
+    "requires": [
+      "brauers-second-main-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-p-sections-and-brauer-subsections-in-a-small-finite-group",
+        "kind": "example",
+        "title": "p-sections and Brauer subsections in S3",
+        "deps": [
+          "def-p-section-of-a-p-element",
+          "def-brauer-subsection",
+          "lem-central-p-subgroups-lie-in-every-block-defect-group",
+          "def-brauer-homomorphism-for-a-p-subgroup",
+          "thm-defect-groups-are-maximal-brauer-support",
+          "prop-principal-block-has-sylow-defect",
+          "thm-brauer-first-main-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For G=S3 and p=2, the identity section contains 1 and the two 3-cycles, while a transposition section contains all three transpositions. The unique block of kC_G(t)=kC2 induces to the principal block B0, not the defect-zero block B1; at u=1 the two global blocks give their own identity subsections.",
+        "strategy": "Compute p-parts from cycle types and compute C_G(t)=<t>. Show kC2 is local. Directly calculate the central idempotents of kS3, use augmentation and Brauer coefficient projection to identify the principal and defect-zero blocks, and then apply Brauer First because N_G(<t>)=<t>. At u=1 induction is the identity. AC is inherited only through the cited block contracts.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Example 4.25 and Theorems 5.1, 5.4, pp. 274–277",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, §§1.5–1.6, pp. 13–16",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-second-main-theorem-at-u-equals-one",
+        "kind": "example",
+        "title": "The Second Main Theorem at u=1 is block-diagonal decomposition",
+        "deps": [
+          "def-generalized-decomposition-numbers",
+          "def-brauer-subsection",
+          "thm-brauer-second-main-theorem",
+          "prop-decomposition-matrix-is-block-diagonal-after-block-ordering",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let (K,O,k) be a splitting p-modular system with k algebraically closed. At u=1, generalized decomposition numbers are ordinary decomposition numbers and local block induction is the identity, so Brauer Second Main is exactly ordinary block diagonality.",
+        "strategy": "The scalar by which u=1 acts is 1, so the explicit generalized-coefficient formula becomes the ordinary decomposition coefficient. Block induction from G to itself is the identity by its defining central-character criterion. Substitute these two identities into the theorem. AC is inherited exactly from the subsection and Second Main Theorem contracts; the specialization itself adds no choice. The resulting vanishing is exactly the published block-diagonal proposition, which independently checks the boundary specialization; no new theorem item is created.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, Theorem 6.7.15 and Corollary 6.7.16, pp. 169–170",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            },
+            {
+              "title": "Craven, The Brauer Correspondence, §1.5, pp. 13–14",
+              "url": "https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-second-main-theorem-with-no-inducing-local-block",
+        "kind": "example",
+        "title": "A p-section with no local block inducing to the chosen global block",
+        "deps": [
+          "ex-p-sections-and-brauer-subsections-in-a-small-finite-group",
+          "lem-block-idempotents-lift-uniquely-from-kh-to-oh",
+          "thm-blocks-partition-ordinary-and-brauer-irreducible-characters",
+          "thm-brauer-second-main-theorem",
+          "def-algebraically-closed-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For G=S3 at p=2 over a splitting system with algebraically closed residue field, the sole local block over a transposition induces to B0, so the generalized coefficient in the defect-zero standard-character row is zero and chi_std(t)=0.",
+        "strategy": "Use the preceding local S3 calculation to identify the sole local block and its induced block B0. Lift the explicitly computed defect-zero idempotent and show it annihilates the standard plane, placing chi_std in B1 without an external example. Brauer Second Main kills the unique local coefficient; the one p-regular value and an explicit transposition matrix both give trace zero. AC and algebraic closedness are inherited from the main theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aschbacher–Kessar–Oliver, Fusion Systems in Algebra and Topology, Example 4.25 and Theorem 5.4, pp. 274–277",
+              "url": "https://www.math.univ-paris13.fr/~bobol/ako.pdf"
+            },
+            {
+              "title": "Meierfrankenfeld, MTH 912 Class Notes, Theorem 6.7.15, pp. 169–170",
+              "url": "https://web.archive.org/web/20220618221643id_/https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

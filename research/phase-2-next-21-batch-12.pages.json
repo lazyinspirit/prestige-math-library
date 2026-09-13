@@ -1,0 +1,1000 @@
+[
+  {
+    "order": 689,
+    "id": "permutation-models-and-transfer-to-zf",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Permutation Models and Transfer to ZF",
+    "companion": "permutation-models-and-transfer-to-zf-examples",
+    "requires": [
+      "the-forcing-theorem-and-formal-consistency-transfer",
+      "weak-choice-principles-and-sierpinskis-theorem",
+      "condensation-gch-and-diamond-in-l"
+    ],
+    "items": [
+      {
+        "id": "def-zfa-universe-atoms-and-kernel",
+        "kind": "definition",
+        "title": "ZFA universes, atoms, pure sets, and the kernel",
+        "statement": "A ZFA universe has a distinguished set A of atoms: atoms have no members but remain distinct from the empty set, while Extensionality is restricted to sets. Define the hierarchy over A and its pure kernel. The kernel is a transitive ZF model; ambient AC restricts to AC in the kernel.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-transitive-closure-of-a-set",
+          "thm-transfinite-recursion"
+        ],
+        "strategy": "State the ZFA axioms and define V_0(A)=A and successor power-set stages. Induct on rank to identify the pure part with the ordinary hierarchy and verify ZF there. The kernel result is choice-free; the optional AC clause restricts a choice function from a pure family and is the exact AC use.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 4, pp. 39–46",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §7.1, pp. 167–171",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-permutation-support-system-and-normal-filter",
+        "kind": "definition",
+        "title": "Permutation groups, stabilizers, supports, and normal filters",
+        "statement": "A group G of atom permutations acts recursively on the ZFA hierarchy. Define stabilizers, normal filters of subgroups, F-symmetry, and finite supports E by fix_G(E) contained in sym_G(x). Normal filters contain atom stabilizers, are upward and finite-intersection closed, and are conjugation invariant.",
+        "deps": [
+          "def-zfa-universe-atoms-and-kernel",
+          "def-group-action",
+          "def-filter"
+        ],
+        "strategy": "Extend atom permutations by rank recursion and prove membership preservation. Prove sym(gx)=g sym(x)g^{-1}; conjugation closure makes symmetry invariant. Finite unions combine supports, and singleton stabilizers make atoms symmetric. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 4 §§2–3, pp. 42–46",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §7.1, pp. 168–171",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-symmetric-and-hereditarily-symmetric-sets",
+        "kind": "definition",
+        "title": "Symmetric and hereditarily symmetric sets",
+        "statement": "A ZFA atom is a **hereditarily $\\mathcal F$-symmetric** base case: its singleton stabilizer belongs to the normal filter by [[def-permutation-support-system-and-normal-filter]]. For an atom $a$ put $\\operatorname{TC}_{\\mathrm{ZFA}}(a)=\\varnothing$. For a set $x$ define the membership-descendant closure by rank recursion,\n\n$$\n\\operatorname{TC}_{\\mathrm{ZFA}}(x)=\\bigcup_{y\\in x}\\bigl(\\{y\\}\\cup\\operatorname{TC}_{\\mathrm{ZFA}}(y)\\bigr).\n$$\n\nA set $x$ is hereditarily $\\mathcal F$-symmetric when every object in $\\{x\\}\\cup\\operatorname{TC}_{\\mathrm{ZFA}}(x)$ is $\\mathcal F$-symmetric. Rank induction on the displayed recursion proves equivalently that $x$ is symmetric and every $y\\in x$ is hereditarily symmetric, using the atom base case when $y$ is an atom. On pure sets this closure agrees with [[def-transitive-closure-of-a-set]]. Write $\\mathrm{HS}_{\\mathcal F}$ for all hereditarily symmetric objects, with inherited membership and the original atoms. If $y\\in x\\in\\mathrm{HS}_{\\mathcal F}$, the recursive clause gives $y\\in\\mathrm{HS}_{\\mathcal F}$, so this permutation subuniverse is transitive. Symmetry alone is insufficient: a symmetric set can contain a nonsymmetric member.",
+        "deps": [
+          "def-permutation-support-system-and-normal-filter",
+          "def-transitive-closure-of-a-set"
+        ],
+        "strategy": "Give the equivalent rank recursion and prove equivalence with the transitive-closure formulation. Transitivity of HS_F follows immediately. Distinguish symmetry from hereditary symmetry. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 4 §2, pp. 42–44",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §7.1, pp. 169–171",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fraenkel-mostowski-permutation-model",
+        "kind": "theorem",
+        "title": "Fraenkel–Mostowski permutation-model theorem",
+        "statement": "For a transitive ZFA model M and a normal permutation system (A,G,F), HS_F^M is a transitive ZFA model with the same atoms and pure kernel. Even if M satisfies AC, HS_F^M need not.",
+        "deps": [
+          "def-symmetric-and-hereditarily-symmetric-sets",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Transitivity gives the elementary axioms. Pairing and Union use finite intersections of stabilizers. Power Set takes the hereditarily symmetric subsets. Separation uses invariance of a formula and supported parameters. For Replacement, uniqueness plus equivariance supports the ambient image and hereditary symmetry supports its values. The construction is choice-free; AC is cited only to mark the noninheritance claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Theorem 4.1 and support formulation, pp. 44–47",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §7.1, pp. 169–171",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-basic-fraenkel-model",
+        "kind": "theorem",
+        "title": "The basic Fraenkel model",
+        "statement": "With countably infinite atoms, the full permutation group and finite supports yield a ZFA model in which every atom subset is finite or cofinite. The atom set is infinite, admits no injection from omega, is not well-orderable, and AC fails.",
+        "deps": [
+          "thm-fraenkel-mostowski-permutation-model",
+          "thm-dedekind-infinite-iff-countable-subset",
+          "def-axiom-of-choice",
+          "thm-well-ordering-theorem"
+        ],
+        "strategy": "A supported subset cannot distinguish two atoms outside its finite support, by their transposition. An omega injection would have an infinite coinfinite even-indexed range. A well-order's least atom outside the support can be moved while the order is fixed. AC is used only through well-orderability in the failure conclusion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, basic Fraenkel model, pp. 46–48",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Lemma 7.2 and Proposition 7.3, pp. 171–172",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-second-fraenkel-model-countable-pairs-without-choice",
+        "kind": "theorem",
+        "title": "The second Fraenkel model has countable pairs without a choice function",
+        "statement": "Let A be the disjoint union of pairs P_n and let G preserve each P_n setwise, with finite supports. The sequence (P_n) exists in the permutation model, but its range has no choice function; AC_{omega,2} fails.",
+        "deps": [
+          "thm-fraenkel-mostowski-permutation-model",
+          "def-choice-for-pairs-and-countable-finite-choice"
+        ],
+        "strategy": "Each pair and the sequence are fixed by G. If c chose from every pair, take n whose pair misses a finite support for c. Swapping the two atoms of P_n fixes the support and every input pair but moves c(n), contradiction. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, second Fraenkel model, pp. 48–49",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Theorem 7.6, pp. 173–174",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ordered-mostowski-model",
+        "kind": "theorem",
+        "title": "The ordered Mostowski model",
+        "statement": "For densely ordered atoms, order automorphisms and finite supports, the order relation belongs to the permutation model and every symmetric set has a unique least finite support. The atom set is linearly ordered but not well-orderable, so AC fails.",
+        "deps": [
+          "thm-fraenkel-mostowski-permutation-model",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The order has empty support. Prove intersections of supports remain supports by decomposing an order automorphism fixing the intersection into factors alternately fixing each support; finite descent gives a least support. A supported well-order is contradicted by moving its least atom outside the support within an order interval. AC appears only through well-orderability.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, ordered Mostowski model, pp. 50–52",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Lemmas 7.10–7.12, pp. 174–176",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-boundable-sentence-over-an-atom-set",
+        "kind": "definition",
+        "title": "Boundable sentences over an atom set",
+        "statement": "For a set $X$, define the relative hierarchy by\n\n$$V_0(X)=X,\\qquad V_{\\alpha+1}(X)=V_\\alpha(X)\\cup\\mathcal P(V_\\alpha(X)),\\qquad V_\\lambda(X)=\\bigcup_{\\alpha<\\lambda}V_\\alpha(X).$$\n\nFor a finite tuple of sets $\\vec x=(x_0,\\ldots,x_{k-1})$, put $\\bigcup\\vec x=x_0\\cup\\cdots\\cup x_{k-1}$. The free variables here range over sets, not bare atoms; atoms can still occur as members of those sets and in quantified tests. A formula $\\varphi(\\vec x)$ is **boundable** when there is a fixed ordinal $\\alpha$, given by an absolute definition, such that ZFA proves\n\n$$\\varphi(\\vec x)\\quad\\longleftrightarrow\\quad\\varphi^{V_\\alpha(\\bigcup\\vec x)}(\\vec x).$$\n\nwhere the superscript means that every quantifier is relativized to the displayed relative-rank segment. A sentence is boundable when it is the existential closure $\\exists\\vec x\\,\\varphi(\\vec x)$ of such a formula. Thus syntactically bounding the quantifiers is not alone sufficient: the displayed equivalence must be provable uniformly in ZFA. After tuple, ordered-pair, relation, and function encodings are expanded, a fixed finite stack of power sets is a common way to prove this equivalence.\n\nFor example, “there is a countable family of pairs without a choice function” is boundable: witnesses code the family and its $\\omega$-enumeration; pair membership and a proposed choice graph live within finitely many power-set iterates, yielding the required ZFA-provable relativization equivalence. This does not make the full Axiom of Choice, arbitrary sentences, or unrestricted conjunctions boundable.\n\nRelative-rank boundability alone gives no ZFA-to-ZF transfer. The broad syntax can test whether an object is an atom or has no members; such tests need not be preserved when atoms are replaced by sets. Transfer requires an additional typed certificate: all quantifiers range over named carried sorts, the base sort is opaque, and every atomic incidence and any pure parameter are preserved. An existential sentence follows only after its transported typed witness implies the target sentence. The certificate must also bound every possible choice graph, not just the given family. A hierarchy based only on the atom set needs an ordinal height such as $\\omega+\\omega$ to contain the pure $\\omega$ and all its graph codes; the finite-stack observation above uses the already supplied family and enumeration parameters.",
+        "deps": [
+          "def-zfa-universe-atoms-and-kernel",
+          "def-power-set",
+          "def-coded-first-order-zf-theory"
+        ],
+        "strategy": "Relate the power-iterate and relative-rank conventions by bounding tuple and relation codes. Show that a countable family of pairs with no choice function is boundable after coding its sequence and alleged choice graphs. Do not claim arbitrary sentences or universal choice principles are boundable. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 6 Problem 1, pp. 99–100",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Corollary 17.3, p. 339",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-jech-sochor-first-embedding",
+        "kind": "theorem",
+        "title": "Jech–Sochor first embedding theorem",
+        "statement": "Let $M$ be a transitive model of ZFA+AC with atom set $A$ and pure kernel\n$K$, and let $V=\\mathrm{HS}_{\\mathcal F}^{M}$ be a permutation submodel\ngiven by a normal group/filter system on $A$. Fix an ordinal $\\alpha$ of\n$M$. Use ambient AC to choose a pure set $A'\\in K$ equipotent to $A$ and a\nregular cardinal $\\kappa$ above $|\\mathcal P^\\alpha(A)|$ and $|A|$, and put\n$P=\\operatorname{Fn}_{<\\kappa}((A'\\times\\kappa)\\times\\kappa,2)\\in K$.\n**In any outer universe containing a $K$-generic filter for this $P$**, there\nis a symmetric ZF extension $W$ of $K$ and $A^*\\in W$ such\nthat $\\mathcal P^\\alpha(A)^V$ and $\\mathcal P^\\alpha(A^*)^W$ are\nmembership-isomorphic, respecting all lower iterates. The ambient AC\nhypothesis supplies the cardinal comparison and a pure coordinate copy\nof $A$; no AC is asserted in $V$ or $W$.",
+        "deps": [
+          "def-zfa-universe-atoms-and-kernel",
+          "thm-fraenkel-mostowski-permutation-model",
+          "thm-forcing-theorem",
+          "thm-generic-extensions-satisfy-zf-and-zfc",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "In ambient M use AC to choose regular kappa above the atom-containing power iterate and a bijection from atoms A to a pure coordinate set A-prime. Force over the pure ZFC kernel K with partial functions on (A-prime times kappa) times kappa; transport atom permutations through the bijection. The forcing theorem supplies equivariance and truth. A simultaneous rank induction proves equality/membership preservation; the ambient size bound and kernel closure give surjectivity through P^alpha(A). The target W need not satisfy AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Theorem 6.1 and proof, printed pp. 85–89",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Theorem 17.2 and proof, pp. 334–339",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-jech-sochor-transfer-for-boundable-sentences",
+        "kind": "theorem",
+        "title": "Jech–Sochor transfer for certified atom-blind boundable sentences",
+        "statement": "Let $M$ be a transitive model of $\\mathrm{ZFA+AC}$ with atom set $A$ and pure\nkernel $K$, and let $V=\\mathrm{HS}_{\\mathcal F}^{M}$ be the permutation\nsubmodel defined by an $M$-internal normal group/filter system. Fix an\niterate height $\\alpha$ and a $K$-generic outer universe for the pure forcing of\n[[thm-jech-sochor-first-embedding]] at that height. Let $W$ and\n$A^*$ be its symmetric ZF model and atom-image set.\n\nA **transfer certificate** for a sentence $T$ consists of a fixed formula\n$\\theta$ in the many-sorted incidence structure naming finitely many levels\n$\\mathcal P^\\beta(A)$ for $\\beta\\le\\alpha$ and, if needed, finitely many\npure-kernel parameters shown to be fixed by the embedding. Each quantifier is\nrestricted to one named carried sort; every atomic membership/equality test,\nincluding one involving a pure parameter, is certified to be preserved by\nthe corresponding isomorphism. The base sort is treated as opaque; the\nformula never tests whether an atom image has members outside the carried\nstructure. The typed formula itself, with any carried parameters, has the\nsame truth value on corresponding source and target tuples. If a global\nsentence $T$ is sought, a certificate may prove that $T$ in $V$ is equivalent to\n$\\theta$ on the source sorts and that $T$ in $W$ is equivalent to the same\n$\\theta$ on the corresponding $A^*$ sorts. Then $V\\models T$ implies\n$W\\models T$ (and the converse holds in these fixed models). A sentence\nmerely called boundable by [[def-boundable-sentence-over-an-atom-set]] has no\nsuch transfer conclusion without this additional certificate. In particular,\nthe assertion that two distinct objects have no members is atom-sensitive and\nis excluded; no whole-universe elementary embedding is claimed.",
+        "deps": [
+          "def-boundable-sentence-over-an-atom-set",
+          "thm-jech-sochor-first-embedding"
+        ],
+        "strategy": "Under the embedding theorem's ambient ZFA+AC premise, choose alpha above the sentence's bound and witness ranks, apply the embedding, and induct on the bounded formula. Atomic formulas use the membership isomorphism; bounded quantifiers range over preserved power iterates. No additional choice is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 6 Problem 1, printed p. 95",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Corollary 17.3, p. 339",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-pincus-transfer-interface-and-preservation-limits",
+        "kind": "remark",
+        "title": "Pincus transfer interfaces and preservation limits",
+        "statement": "Pincus enlarges the transferable class to specified conjunctions of injectively boundable statements and, in a standard form, BPI. The syntactic hypotheses must be proved itemwise. Neither transfer theorem preserves arbitrary ZFA truth; atom-sensitive assertions expose the limit.",
+        "deps": [
+          "thm-jech-sochor-transfer-for-boundable-sentences"
+        ],
+        "strategy": "State injective cardinality and the strengthened theorem as an interface, but do not consume it on this pair. Contrast it with the proved boundable fragment and the nontransferable assertion that two distinct empty atoms exist. Later consumers must not infer conjunction or BPI preservation from page membership alone.",
+        "sources": {
+          "references": [
+            {
+              "title": "Pincus, Zermelo–Fraenkel consistency results by Fraenkel–Mostowski methods, JSL 37 (1972), pp. 721–743",
+              "url": "https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/zermelofraenkel-consistency-results-by-fraenkelmostowski-methods/7D3C3F4E1CD90397E45CD6B228CF29EE"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §17.1 and Related Result 93, pp. 334–341",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-jech-sochor-socks-transfer-is-uniformly-formalizable",
+        "kind": "lemma",
+        "title": "Fixed finite-fragment verification for the Jech–Sochor socks transfer",
+        "statement": "Let $T$ be the ZF sentence saying that a countable family of two-element sets has no choice function. For every externally fixed finite fragment $\\Delta$ of $\\mathrm{ZF}+T$, some finite fragment $\\Gamma$ of $\\mathrm{ZFC}+\\mathrm{GCH}$ proves that a set model of $\\Delta$ exists, using the second Fraenkel permutation model and the Jech–Sochor first embedding. This is fixed-fragment semantic transfer. No PA-verified uniform proof-code constructor, and no model of full ZFC inferred from its consistency, is claimed.",
+        "deps": [
+          "def-zfa-universe-atoms-and-kernel",
+          "thm-second-fraenkel-model-countable-pairs-without-choice",
+          "thm-jech-sochor-first-embedding",
+          "thm-jech-sochor-transfer-for-boundable-sentences",
+          "thm-montague-levy-finite-reflection",
+          "cor-countable-transitive-models-of-fixed-zfc-fragments",
+          "lem-finite-fragment-l-interpretation-with-gch",
+          "def-choice-for-pairs-and-countable-finite-choice"
+        ],
+        "strategy": "For each fixed ZF+socks fragment, construct the tagged second-Fraenkel source, select a Jech–Sochor iterate carrying all choice graphs, verify the atom-blind transfer certificate and finite HS-model axiom support, then reflect a finite source model.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, second Fraenkel model and First Embedding Theorem, pp. 48–49, 90–100",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Theorem 7.6, Theorem 17.2 and Corollary 17.3",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_base": "Externally indexed ZFC+GCH fixed-fragment proofs; ambient AC"
+      },
+      {
+        "id": "cor-zf-countable-family-of-pairs-without-choice",
+        "kind": "corollary",
+        "title": "Relative consistency of a countable family of pairs without choice",
+        "statement": "Externally, $\\operatorname{Con}(\\mathrm{ZF})$ implies the consistency of ZF plus a countable family of pairs with no choice function. Consequently $\\mathrm{AC}_{\\omega,2}$ is not a theorem of ZF if ZF is consistent. The implication uses fixed finite-fragment model transfer; it does not claim a PA-verified uniform Jech–Sochor refutation transformer.",
+        "deps": [
+          "lem-jech-sochor-socks-transfer-is-uniformly-formalizable",
+          "thm-formal-consistency-of-zfc-plus-gch-from-zf",
+          "def-choice-for-pairs-and-countable-finite-choice"
+        ],
+        "strategy": "A contradiction uses one finite ZF+socks fragment. Its model existence is provable in ZFC+GCH by the preceding lemma. Compose external consistency with the ZF-to-ZFC+GCH result.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, pp. 48–49 and 90–100",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, pp. 173–174 and 334–339",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_base": "External metatheorem over Con(ZF)"
+      }
+    ]
+  },
+  {
+    "order": 690,
+    "id": "permutation-models-and-transfer-to-zf-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Permutation Models and Transfer to ZF: Examples and Counterexamples",
+    "companion": "permutation-models-and-transfer-to-zf",
+    "requires": [
+      "permutation-models-and-transfer-to-zf"
+    ],
+    "items": [
+      {
+        "id": "ex-basic-fraenkel-finite-or-cofinite-support-test",
+        "kind": "example",
+        "title": "Finite support forces a finite-or-cofinite atom subset",
+        "statement": "A subset of the basic Fraenkel atoms supported by E is contained in E or contains every atom outside E.",
+        "deps": [
+          "thm-basic-fraenkel-model"
+        ],
+        "strategy": "Transpose any two atoms outside E and split on membership of one outside atom. Include the vacuous finite-complement case. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Lemma 7.2, p. 171",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-second-fraenkel-sock-swap",
+        "kind": "example",
+        "title": "The unsupported sock swap",
+        "statement": "A pair outside a proposed choice function's finite support admits an internal swap that fixes every input but changes the chosen output.",
+        "deps": [
+          "thm-second-fraenkel-model-countable-pairs-without-choice"
+        ],
+        "strategy": "Choose the least pair missing the support, swap its atoms, and compute the action on the function graph. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Theorem 7.6(c), p. 174",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-ordered-mostowski-order-has-empty-support",
+        "kind": "example",
+        "title": "The ordered Mostowski relation has empty support",
+        "statement": "The dense order on the atoms is fixed by every allowed permutation and has empty support, although no well-order of the atoms is symmetric.",
+        "deps": [
+          "thm-ordered-mostowski-model"
+        ],
+        "strategy": "Compute pi[R_<]=R_<, then contrast it with a well-order by moving its least atom outside a finite support. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, Lemma 7.10, p. 174",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "fs-a-zfa-model-is-a-zf-model",
+        "kind": "false-statement",
+        "title": "A ZFA model is a ZF model",
+        "statement": "False: distinct atoms have no members, violating unrestricted Extensionality. The pure kernel is a ZF model; bounded atom-to-set transfer is available only under the first embedding theorem's ambient ZFA+AC premise.",
+        "deps": [
+          "def-zfa-universe-atoms-and-kernel",
+          "thm-jech-sochor-first-embedding"
+        ],
+        "strategy": "Take two distinct atoms with identical member sets. The counterexample and pure-kernel repair need no AC; the optional bounded Jech–Sochor transfer is stated only under its ambient ZFA+AC premise.",
+        "sources": {
+          "references": [
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §7.1 and Theorem 17.2",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 691,
+    "id": "symmetric-extensions-and-basic-choice-failure-models",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Symmetric Extensions and Basic Choice-Failure Models",
+    "companion": "symmetric-extensions-and-basic-choice-failure-models-examples",
+    "requires": [
+      "permutation-models-and-transfer-to-zf",
+      "condensation-gch-and-diamond-in-l"
+    ],
+    "items": [
+      {
+        "id": "def-forcing-name-automorphism-action",
+        "kind": "definition",
+        "title": "Automorphisms acting on forcing names",
+        "statement": "A forcing automorphism preserves order and incompatibility and acts recursively on names by applying itself to every condition and subname. It fixes check names and preserves name rank.",
+        "deps": [
+          "def-forcing-preorder-compatibility-and-filter",
+          "def-forcing-names-and-name-rank",
+          "def-group-isomorphism-and-automorphism",
+          "thm-transfinite-recursion"
+        ],
+        "strategy": "Define the action by name-rank recursion. Induct to prove composition, inverse, rank preservation and fixation of check names. Images of dense sets are dense and generics map to generics. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Definitions 10.1–10.5, pp. 47–48",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 5 §5, pp. 72–75",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-symmetric-forcing-system-and-hereditarily-symmetric-names",
+        "kind": "definition",
+        "title": "Symmetric forcing systems, supports, and hereditarily symmetric names",
+        "statement": "A symmetric system (P,G,F) has a forcing preorder, an automorphism group and a normal subgroup filter. Define symmetric and hereditarily symmetric names, supports, and the symmetric interpretation HS_F^{G_0}.",
+        "deps": [
+          "def-forcing-name-automorphism-action",
+          "def-permutation-support-system-and-normal-filter"
+        ],
+        "strategy": "Adapt stabilizers and normality from atom actions. Conjugation proves pi[HS]=HS; subnames give hereditary closure. Keep the generic G_0 distinct from the automorphism group G. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Definitions 10.12–10.16, pp. 48–49",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 5 §§5–6, pp. 73–77",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-symmetry-lemma-for-forcing-automorphisms",
+        "kind": "lemma",
+        "title": "Symmetry lemma for forcing automorphisms",
+        "statement": "For every forcing automorphism $\\pi$ and formula $\\varphi$, the ordinary forcing relation satisfies $p\\Vdash\\varphi(\\vec\\tau)$ iff $\\pi p\\Vdash\\varphi(\\pi\\vec\\tau)$ for every tuple of $P$-names. In a symmetric system with automorphism group $G$, if $\\pi\\in G$ and the parameter names $\\vec\\tau$ are hereditarily symmetric, then $\\pi\\vec\\tau$ are hereditarily symmetric and the same ordinary-forcing equivalence applies to these tuples. No separate forcing relation with existential quantifiers restricted to HS names is asserted.",
+        "deps": [
+          "def-forcing-name-automorphism-action",
+          "def-symmetric-forcing-system-and-hereditarily-symmetric-names",
+          "def-forcing-relation-for-atomic-formulas",
+          "def-forcing-relation-for-formulas"
+        ],
+        "strategy": "Simultaneously induct on name ranks for atomic membership/equality, using preservation of dense-below sets. Continue by formula complexity; the HS existential case uses pi[HS]=HS. Apply pi inverse for the reverse direction. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Lemma 10.8 and Exercise 10.19, pp. 48–49",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Lemma 5.13, pp. 76–77",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-canonical-check-names-are-hereditarily-symmetric",
+        "kind": "lemma",
+        "title": "Canonical check names are hereditarily symmetric",
+        "statement": "Every ground set x has a check name fixed by every forcing automorphism; it is hereditarily symmetric and evaluates to x. Thus the ground model lies in every symmetric extension.",
+        "deps": [
+          "def-forcing-name-automorphism-action",
+          "def-symmetric-forcing-system-and-hereditarily-symmetric-names",
+          "thm-check-name-evaluation-and-generic-reconstruction"
+        ],
+        "strategy": "Induct on rank of x; all subnames are HS and the recursive check name is fixed. Evaluation gives x. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Exercise 10.6 and Theorem 10.17(1), pp. 48–49",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Chapter 5 §6, pp. 75–77",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-hereditarily-symmetric-interpretations-form-a-zf-model",
+        "kind": "theorem",
+        "title": "Hereditarily symmetric interpretations form a transitive ZF model",
+        "statement": "For a transitive ZF ground model M, symmetric system and M-generic G_0, N=HS_F^{G_0} is a transitive ZF model with M subset N subset M[G_0]. No Choice hypothesis is required.",
+        "deps": [
+          "lem-symmetry-lemma-for-forcing-automorphisms",
+          "lem-canonical-check-names-are-hereditarily-symmetric",
+          "thm-generic-extensions-satisfy-zf-and-zfc",
+          "thm-forcing-theorem"
+        ],
+        "strategy": "Hereditary closure gives transitivity and check names give M subset N. Prove N almost universal relative to M[G_0] by using a ground-definable least HS-name-rank function on dom(dot x) x P and ZF Replacement to obtain one bound without choosing representatives; the resulting all-HS-names-below-bound name is invariant. Prove Delta_0-Separation by a forcing-defined subname with finite parameter support. Use almost universality and Delta_0-Separation inside M[G_0] to obtain the eight boundedly definable Godel-operation outputs, then apply Jech's transitive-class criterion there to derive full Comprehension and the remaining ZF axioms. No Choice is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 10.17 and proof, pp. 49–50",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Theorem 3.2, pp. 35–36, and Theorem 5.14",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-basic-cohen-symmetric-system",
+        "kind": "definition",
+        "title": "The basic Cohen symmetric system",
+        "statement": "For P=Add(omega,omega), finite permutations act on the first coordinate and F is generated by finite pointwise stabilizers. Define the nth Cohen real name a_n and the orbit-set name A={a_n:n in omega}.",
+        "deps": [
+          "thm-hereditarily-symmetric-interpretations-form-a-zf-model",
+          "def-forcing-preorder-compatibility-and-filter"
+        ],
+        "strategy": "Specify finite partial functions and coordinate action. Check normality, compute pi(a_n)=a_{pi(n)} and pi(A)=A, and support every condition by its finite first-coordinate projection. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, §10.4, pp. 50–51",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, basic Cohen model, pp. 78–80",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-basic-cohen-generic-reals-form-a-symmetric-set",
+        "kind": "lemma",
+        "title": "The Cohen reals form a symmetric set but their enumeration is not symmetric",
+        "statement": "Each a_n has support {n}, A has empty support, and A is forced infinite with distinct members. The canonical enumeration n maps to a_n has no finite support and is absent from the symmetric model.",
+        "deps": [
+          "def-basic-cohen-symmetric-system",
+          "lem-symmetry-lemma-for-forcing-automorphisms"
+        ],
+        "strategy": "Use the coordinate action. Fresh bits force distinctness. A transposition outside any finite E fixes A but changes the enumeration graph. This proves nonmembership of that name, not yet absence of all enumerations. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Propositions 10.22–10.24, p. 50",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, pp. 78–79",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-basic-cohen-generic-real-set-has-no-countably-infinite-subset",
+        "kind": "theorem",
+        "title": "The basic Cohen set has no countably infinite subset",
+        "statement": "Every map from omega into A in the basic Cohen model has finite range; therefore no injection omega to A, no countably infinite subset, and no enumeration of A exists.",
+        "deps": [
+          "lem-basic-cohen-generic-reals-form-a-symmetric-set",
+          "lem-symmetry-lemma-for-forcing-automorphisms"
+        ],
+        "strategy": "Support a function name and condition by finite E. If an extension forces f(i)=a_n outside E, transpose n with a fresh m outside E and the condition support. The condition and its image are compatible but force f(i) equal to distinct reals. Hence the range is contained in the finite E-orbit. Fresh naturals are selected one at a time; no AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 10.25, pp. 50–51",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Theorem 5.16, pp. 79–80",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals",
+        "kind": "theorem",
+        "title": "The basic Cohen model has an infinite Dedekind-finite set of reals",
+        "statement": "A is infinite and Dedekind-finite. For A, no countably infinite subset, no injection from omega, and no bijection with a proper subset are equivalent and all hold.",
+        "deps": [
+          "thm-basic-cohen-generic-real-set-has-no-countably-infinite-subset",
+          "def-dedekind-infinite-set",
+          "thm-dedekind-infinite-iff-countable-subset"
+        ],
+        "strategy": "Each finite initial collection of distinct a_n witnesses infinitude without placing its full enumeration in the model. Apply the choice-free ZF equivalence between Dedekind infinitude, an omega injection, and a bijection with a proper subset, and negate its clauses. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Proposition 10.24 through Theorem 10.25",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Theorem 5.16",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-basic-cohen-model-fails-well-orderability-and-choice",
+        "kind": "corollary",
+        "title": "The basic Cohen model fails well-orderability and AC",
+        "statement": "The infinite Dedekind-finite set A cannot be well-ordered. Hence the basic Cohen symmetric model satisfies ZF plus not AC.",
+        "deps": [
+          "thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals",
+          "def-axiom-of-choice",
+          "thm-well-ordering-theorem"
+        ],
+        "strategy": "An infinite well-order yields its first omega elements by recursion, contradicting Dedekind finiteness. If AC held, the well-ordering theorem would well-order A. This reductio is the exact AC use.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 10.25, p. 51",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Jech, The Axiom of Choice, Theorem 5.16",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-basic-cohen-symmetric-construction-is-uniformly-formalizable",
+        "kind": "lemma",
+        "title": "Fixed finite-fragment verification for the basic Cohen symmetric model",
+        "statement": "For every externally fixed finite fragment $\\Delta$ of $\\mathrm{ZF}+\\neg\\mathrm{AC}$, ZFC proves that a set model of $\\Delta$ exists, using the basic Cohen symmetric construction. Each such proof uses some finite fragment of ZFC. The finite fragment and its proof may depend on $\\Delta$; no PA-verified uniform proof-code constructor is asserted.",
+        "deps": [
+          "def-basic-cohen-symmetric-system",
+          "def-forcing-relation-for-atomic-formulas",
+          "def-forcing-relation-for-formulas",
+          "lem-symmetry-lemma-for-forcing-automorphisms",
+          "thm-hereditarily-symmetric-interpretations-form-a-zf-model",
+          "cor-basic-cohen-model-fails-well-orderability-and-choice",
+          "thm-montague-levy-finite-reflection",
+          "cor-countable-transitive-models-of-fixed-zfc-fragments",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Fix the actual formulas of $\\Delta$ and their subformulas. Use $P=\\operatorname{Add}(\\omega,\\omega)$, the finite permutations of the first coordinate, and the finite-support normal filter of F2. For each of these fixed formulas the recursions in F1 give ordinary set-theoretic proofs of definability, strengthening, truth and equivariance. Name-rank induction is an object-level transfinite induction in those proofs, not a numerical search over names. Here is the almost-universality argument used by the HS-model construction. In an ambient generic extension let $x=\\dot x_{G_0}\\subseteq N=\\mathrm{HS}^{G_0}$. In the ground model assign to each $(\\tau,p)\\in\\operatorname{dom}(\\dot x)\\times P$ the least rank of an HS name $\\sigma$ such that $p\\Vdash\\tau=\\sigma$, or zero if none exists. Ground Replacement bounds these ranks strictly by an ordinal $\\gamma$. For every $u\\in x$, a subname $\\tau$ evaluating to $u$ and the truth lemma give such an equality at some condition in $G_0$. Thus $u$ has an HS name of rank below $\\gamma$. The ground set of all HS names below that rank is invariant under every automorphism; placing all these names at the top condition gives an HS name for an $N$-set containing $x$. This proves relative almost universality. For a bounded matrix, rank-bounded HS subnames satisfying its ordinary forcing clause form the exact cut of an $N$-set. Bounded absoluteness identifies that clause with truth in $N$; the parameter stabilizers and equivariance make the cut HS. For completeness, the failure-of-Choice argument in F3 has two supported-map branches. Distinct coordinate names $\\dot a_n$ are forced unequal by assigning opposite values at a fresh bit. If an HS name $\\dot f$ were an injection from $\\omega$ to $A$, take a finite support $E$ for it and a condition $p$ forcing this. If no strengthening decides any value outside $\\{a_n:n\\in E\\}$, density of value decisions confines its range to that finite set, contradicting injectivity. Otherwise choose a strengthening $q$ deciding $f(i)=a_n$ with $n\\notin E$, and $m$ outside $E\\cup\\operatorname{supp}(q)\\cup\\{n\\}$. The transposition of $n,m$ fixes $p,\\dot f$; $q$ and its image agree off the swapped coordinates and have disjoint domains on them, so their union forces two distinct values for $f(i)$. Thus $A$ is infinite and has no injection from $\\omega$; a well-order of $A$ would give one by successively choosing its least remaining element. Hence $N\\models\\neg\\mathrm{AC}$. These are set-theoretic arguments within the chosen proof, not operations performed by a numerical proof constructor. Pairing HS names directly gives unordered and Kuratowski pairs in $N$. Each of Jech's eight operations (pair, difference, product, domain, restricted membership and three triple-coordinate permutations) produces an ambient set of $N$-elements. Step 2.1 puts it inside an $N$-set; its bounded defining formula cuts out the operation's exact value. To obtain general Separation, induct externally on the fixed formula's complexity. Atomic relations follow from these operations, negation from relative difference, and conjunction from intersection. For an existential subformula $\\exists v\\,\\psi(v,\\bar u)$, ambient Separation and Replacement collect, for every parameter tuple, the set of all $N$-witnesses of least rank, or the empty set. Starting from the argument set and the parameters, close under these witness sets for $\\omega$ stages. This yields an ambient set containing witnesses for every relevant tuple. Almost universality puts it inside a set $Y\\in N$; the induction hypothesis constructs the relation for $\\psi$ on $Y$, and projection followed by restriction gives the existential relation on the original argument set. This is the cited Jech all-witness and transitive-class argument, with no choice of a distinguished witness. For a fixed functional Replacement matrix, ambient Replacement bounds its unique $N$-values on the domain, almost universality supplies an internal container, and the just-proved internal Separation cuts out the image. Only bounded matrices used the direct subname cut of step 2.1. For the externally fixed $\\Delta$, the finitely many formula inductions just described yield finite ZFC derivations of its HS-model axioms and step 2.2. Collect their actual Separation, Replacement, recursion and forcing instances into a finite ground support $\\Gamma$, enlarging it for the names, valuations and generic construction. The preceding argument applied to a countable transitive $\\Gamma$-model proves that its symmetric extension satisfies each member of $\\Delta$; full ZFC in that ground model is not used. F4 proves in ambient ZFC that such a countable transitive source model exists. Enumerate its dense subsets, construct a generic filter, and take the set of valuations of its HS names. This gives a set model of the particular $\\Delta$. Ambient AC has precisely the source-model and generic-construction role of F5. The ambient ZFC derivation in step 4.1 is finite, so it too uses only finitely many axioms and schema instances. The choice of this proof is made separately for the given external $\\Delta$. Neither a single internally quantified model-existence assertion nor a PA-total selector of these proofs follows from this argument. This proves exactly the fixed-fragment assertion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, Theorems 5.14 and 5.16, pp. 77–80",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorems 10.17 and 10.25, pp. 49–51",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-formal-consistency-of-zf-with-failure-of-choice",
+        "kind": "theorem",
+        "title": "Relative consistency of ZF with failure of Choice",
+        "statement": "Externally, $\\operatorname{Con}(\\mathrm{ZF})$ implies $\\operatorname{Con}(\\mathrm{ZF}+\\neg\\mathrm{AC})$. The implication uses separately fixed finite-fragment model proofs; no PA-verified uniform symmetric-model proof transformer or transitive model of full ZF is asserted.",
+        "deps": [
+          "lem-basic-cohen-symmetric-construction-is-uniformly-formalizable",
+          "thm-formal-consistency-of-zfc-plus-gch-from-zf",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The hypothetical contradiction proof uses a finite list $\\Delta$ of axioms of ZF and the negation of F3. Fix this list externally. F2 provides a ZFC proof that a set model of $\\Delta$ exists. Soundness for the particular finite contradiction proof gives a ZFC proof that no such model exists. Thus target inconsistency implies inconsistency of ZFC. F1 makes ZFC consistent whenever ZF is consistent. Contraposition in step 1.1 therefore proves the stated external relative-consistency implication. Source Choice is available in the ambient ZFC construction; the symmetric target refutes it. Each target proof is handled separately, without a claim that PA verifies a uniform map on proof codes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, basic Cohen model, pp. 77–80",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, §§10.3–10.4, pp. 49–51",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-atom-free-socks-symmetric-system",
+        "kind": "definition",
+        "title": "The atom-free socks symmetric system",
+        "statement": "Let forcing add reals r_{n,i,j} for n,j in omega and i<2. Put R_{n,i}={r_{n,i,j}:j in omega} and P_n={R_{n,0},R_{n,1}}. Let automorphisms swap the two i-blocks at each n and permute j-coordinates within blocks, with finite coordinate supports. Define the sequence (P_n).",
+        "deps": [
+          "thm-hereditarily-symmetric-interpretations-form-a-zf-model",
+          "def-choice-for-pairs-and-countable-finite-choice"
+        ],
+        "strategy": "Use finite binary partial functions on (omega times 2 times omega) times omega. Verify block swaps, internal coordinate permutations and normality of the finite-coordinate support filter. Each unordered P_n and the indexed sequence are symmetric, while choosing an individual set R_{n,i} requires a coordinate in its n-block. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, second Cohen model, §5.4, pp. 68–71",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Halbeisen, Combinatorial Set Theory, §§7.1 and 17.1",
+              "url": "https://people.math.ethz.ch/~halorenz/publications/pdf/cst.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-atom-free-socks-model-has-countable-pairs-without-choice",
+        "kind": "theorem",
+        "title": "An atom-free symmetric model has countable pairs without choice",
+        "statement": "The atom-free socks symmetric extension is a ZF model containing the countable family (P_n) of pairs of sets of reals but no choice function; AC_{omega,2} fails directly in pure ZF.",
+        "deps": [
+          "def-atom-free-socks-symmetric-system",
+          "lem-symmetry-lemma-for-forcing-automorphisms",
+          "def-choice-for-pairs-and-countable-finite-choice"
+        ],
+        "strategy": "Support a proposed choice name and condition finitely. At a fresh n, strengthen to decide a chosen set R_{n,i} and swap the two n-blocks. Permute unused j-coordinates so the image condition is compatible. A common extension forces the choice equal to two distinct sets of reals. The general symmetric theorem supplies ZF. No Recorded result, atoms or AC are used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, second Cohen model and Theorem 5.20, §5.4, pp. 68–71",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            },
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, support-swap method, §10.4",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 692,
+    "id": "symmetric-extensions-and-basic-choice-failure-models-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Symmetric Extensions and Basic Choice-Failure Models: Examples and Counterexamples",
+    "companion": "symmetric-extensions-and-basic-choice-failure-models",
+    "requires": [
+      "symmetric-extensions-and-basic-choice-failure-models"
+    ],
+    "items": [
+      {
+        "id": "ex-basic-cohen-orbit-name-without-enumeration",
+        "kind": "example",
+        "title": "An orbit set can be symmetric when its enumeration is not",
+        "statement": "A={a_n:n in omega} has empty support although the graph n maps to a_n is moved by transpositions outside every finite support.",
+        "deps": [
+          "lem-basic-cohen-generic-reals-form-a-symmetric-set"
+        ],
+        "strategy": "Apply pi(a_n)=a_{pi(n)}: the range is invariant but the ordered graph changes. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Propositions 10.22–10.24",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-equivalent-dedekind-finiteness-tests-in-basic-cohen-model",
+        "kind": "example",
+        "title": "Equivalent Dedekind-finiteness tests in the basic Cohen model",
+        "statement": "For A, derive the equivalence of no countably infinite subset, no omega injection and no bijection with a proper subset without Choice.",
+        "deps": [
+          "thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals",
+          "thm-dedekind-infinite-iff-countable-subset"
+        ],
+        "strategy": "Use the range of an omega injection, the orbit of a missed point under an injective nonsurjective self-map, and a shift on an enumerated subset. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, paragraph after Theorem 10.25",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-atom-free-socks-coordinate-swap",
+        "kind": "example",
+        "title": "A coordinate swap defeats an atom-free sock choice",
+        "statement": "A fresh n-block swap has a compatible image condition and reverses a proposed decided choice between the two sets of reals in P_n.",
+        "deps": [
+          "thm-atom-free-socks-model-has-countable-pairs-without-choice"
+        ],
+        "strategy": "Choose n outside finite supports, decide c(n), permute unused j-coordinates within the swapped blocks to ensure compatibility, and unite the conditions to read contradictory equalities. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, The Axiom of Choice, second Cohen model, §5.4, pp. 68–71",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "fs-every-symmetric-submodel-satisfies-choice",
+        "kind": "false-statement",
+        "title": "Every symmetric submodel satisfies Choice",
+        "statement": "False: full generic extensions of choice models preserve AC, but HS names may omit enumerations and choice functions. The basic Cohen model omits an enumeration of its symmetric real set; the atom-free socks model omits a choice function for its countable family of pairs of sets of reals.",
+        "deps": [
+          "cor-basic-cohen-model-fails-well-orderability-and-choice",
+          "thm-atom-free-socks-model-has-countable-pairs-without-choice",
+          "thm-generic-extensions-satisfy-zf-and-zfc"
+        ],
+        "strategy": "Contrast M[G] with HS^G and exhibit the invariant set/family whose enumerations or choice functions are excluded by support swaps.",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, §§10.3–10.4",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

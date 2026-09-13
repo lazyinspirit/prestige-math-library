@@ -1145,7 +1145,8 @@ theorems rather than footnotes.
 
 **A page:** `bocksteins-steenrod-squares-and-cohomology-operations`
 **B page:** `bocksteins-steenrod-squares-and-cohomology-operations-examples`
-**Requires:** `cup-cap-cross-products-and-cohomology-rings`
+**Requires:** `cup-cap-cross-products-and-cohomology-rings`,
+`orientations-poincare-lefschetz-and-alexander-duality`
 
 These operations are included because obstruction theory and characteristic
 classes consume them.  The cup-$i$ construction is decomposed far enough to
@@ -1164,10 +1165,15 @@ ground the Steenrod axioms; computations remain dependency-leaf examples.
 - `thm-steenrod-squares-are-well-defined-and-natural` — **theorem** — the cup-$i$ identity proves independence and commutation with pullback. For: establishes the operation. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `prop-steenrod-square-normalization-instability-and-top-square` — **proposition** — $Sq^0=1$, $Sq^i x=0$ for $i>|x|$, and $Sq^{|x|}x=x^2$. For: boundary degrees and ring detection. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `thm-cartan-formula-for-steenrod-squares` — **theorem** — $Sq^n(xy)=\sum_{i+j=n}Sq^i(x)Sq^j(y)$. For: calculates operations on polynomial generators. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
+- `lem-free-cyclic-resolution-and-transfer-for-power-operations` — **lemma** — the explicit alternating $T-1,N$ free resolution computes $H^*(BC_p;\mathbb F_p)$, and finite-coset transfer kills the mixed terms after diagonal restriction. For: local odd-primary and Adem machinery. **Source locator:** Steenrod–Epstein, *Cohomology Operations*, V §§2, 5, 7.
+- `lem-equivariant-p-fold-external-power-and-diagonal` — **lemma** — the cocycle-level $p$-fold external power is natural and resolution-independent, and diagonal restriction gives additive coefficient operations $D_j$. For: reduced powers. **Source locator:** Steenrod–Epstein, VII §§2–4.
+- `lem-wreath-double-power-coefficient-symmetry` — **lemma** — compare iterated and one-step $p^2$-powers and prove the row–column transposition coefficient identity, including its odd-prime sign. For: both Adem relations. **Source locator:** Steenrod–Epstein, VIII §1, Lemmas 1.1–1.3.
+- `lem-adem-double-power-comparison` — **lemma** — extract the mod-two binomial coefficients from the wreath identity without citing Adem as a premise. For: the square Adem theorem. **Source locator:** Steenrod–Epstein, VIII §1, Theorem 1.5.
 - `thm-adem-relations-for-steenrod-squares` — **theorem** — for $a<2b$, $Sq^aSq^b$ is the stated binomial sum of admissible composites. For: presents the Steenrod algebra action without treating composites as free. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `prop-first-steenrod-square-is-the-mod-two-bockstein` — **proposition** — $Sq^1=\beta$ for the $\mathbb Z/4$ coefficient sequence. For: connects the two constructions. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `def-total-steenrod-square` — **definition** — $Sq(x)=\sum_iSq^i(x)$, finite on each homogeneous class, and multiplicative by Cartan. For: characteristic-class formulas. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `def-wu-classes-of-a-closed-manifold` — **definition** — duality uniquely determines $v_i$ by $\langle v_i x,[M]\rangle=\langle Sq^ix,[M]\rangle$. For: algebraic precursor of the Wu formula. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
+- `lem-cyclic-p-fold-power-construction` — **lemma** — transfer and the cyclic coefficient basis give additive $D_j$, their allowed degrees, $D_0(x)=x^p$, and the calibrated $D_{q(p-1)}(x)=a_qx$. For: exact normalization of odd-primary powers. **Source locator:** Steenrod–Epstein, VII §§3–5.
 - `def-mod-p-reduced-power-operations` — **definition** — for odd prime $p$, $P^i:H^n(-;\mathbb F_p)\to H^{n+2i(p-1)}(-;\mathbb F_p)$ with Bockstein composites. For: the odd-primary analogue used in spectral calculations. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `thm-reduced-powers-satisfy-naturality-instability-cartan-and-adem-relations` — **theorem** — states the full odd-primary formulas with binomial coefficients and degree bounds. For: makes computations and obstruction use precise. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 
@@ -1177,7 +1183,7 @@ ground the Steenrod axioms; computations remain dependency-leaf examples.
 - `ex-steenrod-squares-on-real-projective-space` — **example** — $Sq^i(x^j)=\binom ji x^{i+j}$. For: Cartan and instability computation. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `ex-steenrod-squares-on-complex-projective-space-mod-two` — **example** — computes operations on the degree-two generator. For: later Chern/SW comparison. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `ex-adem-relation-sq-one-sq-one-equals-zero` — **example** — verifies the first nontrivial relation and agrees with the Bockstein square. For: finite relation check. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
-- `ex-wu-classes-of-a-closed-surface` — **example** — identifies the low-degree class through the intersection pairing. For: duality-operation check. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
+- `ex-wu-classes-of-a-closed-surface` — **example** — constructs $w_1$ from orientation transport on singular one-simplices, then identifies the low-degree Wu class through the surface intersection pairing. This avoids the later AT-12 Hurewicz theorem. For: duality-operation check. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Mosher–Tangora, *Cohomology Operations and Applications*, Chapter 4 §1.
 - `cex-the-top-square-formula-does-not-define-all-lower-squares` — **counterexample** — spaces with the same cup squares can have distinct lower operations. For: explains the cup-$i$ construction. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 - `cex-steenrod-squares-are-not-integral-cohomology-operations` — **counterexample** — their construction and axioms are intrinsically mod two. For: coefficient discipline. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, *Algebraic Topology*, §§3.E and 4.L, pp. 303--306, 494--518.
 
@@ -1188,6 +1194,12 @@ ground the Steenrod axioms; computations remain dependency-leaf examples.
 - May, *A Concise Course in Algebraic Topology*, Chapter 22 §§4--5
   “Cohomology operations” and “The Steenrod algebra,” printed pp. 181--186,
   together with Chapter 18 §1, pp. 137--140.
+- Steenrod–Epstein, *Cohomology Operations*, Chapters V, VII and VIII,
+  especially V §§2, 5, 7; VII §§2–6; VIII §§1–2, for the explicit resolution,
+  transfer, double-power comparison, coefficient formulas and singular
+  extension. In VII Definition 6.1 the printed factorial exponent appears
+  positive, while the proof of Lemma 6.4 uses the inverse; the scaffold uses
+  the inverse, as $p=5$, $q=1$ otherwise makes $P^0=-1$.
 
 ## AT-10 — `higher-homotopy-groups-and-cofiber-sequences`
 
@@ -1779,7 +1791,10 @@ not a prerequisite for defining every generalized theory.
 - `ex-the-zero-stem-is-the-integers`;
 - `ex-stabilizing-a-map-between-spheres`;
 - `ex-suspension-prespectra-of-spheres-are-shifts`;
-- `cex-an-unstable-homotopy-class-need-not-yet-be-stable`.
+- `cex-an-unstable-homotopy-class-need-not-yet-be-stable` — the
+  nontrivial commutator in $\pi_1(S^1\vee S^1)$ dies under suspension because
+  $\pi_2$ is abelian. This uses published free-group and suspension
+  suppliers and makes no unproved $\pi_4(S^3)$ calculation.
 
 Use May, *A Concise Course*, Chapter 25 §§3,6--7, pp. 223--234, and Hatcher,
 *Spectral Sequences in Algebraic Topology*, Chapter 2 §1 “Spectra,” as the two
@@ -1853,7 +1868,9 @@ model.
 16. `thm-poincare-lefschetz-duality-with-local-coefficients` — give the two
     absolute/relative forms and the boundary-orientation restriction.
 17. `lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems`
-    — reconcile AT-11 monodromy with the groupoid definition.
+    — reconcile AT-11 monodromy with the groupoid definition; dualize the
+    earlier singular-chain prism homotopy to get cohomology invariance locally,
+    without a forward reference to the later comparison page.
 
 ### B page — `local-coefficients-twisted-homology-and-duality-examples`
 
@@ -1873,22 +1890,37 @@ page requires only its A companion.
 
 **A page:** `obstruction-theory-postnikov-towers-and-classifying-spaces`
 **B page:** `obstruction-theory-postnikov-towers-and-classifying-spaces-examples`
-**Requires:** `hurewicz-whitehead-freudenthal-and-cw-approximation`,
-`bocksteins-steenrod-squares-and-cohomology-operations`
+**Requires:** `singular-cohomology-and-coefficient-theorems`,
+`bocksteins-steenrod-squares-and-cohomology-operations`,
+`higher-homotopy-groups-and-cofiber-sequences`,
+`fibrations-fiber-bundles-and-homotopy-exact-sequences`,
+`hurewicz-whitehead-freudenthal-and-cw-approximation`,
+`local-coefficients-twisted-homology-and-duality`, and
+`applications-of-the-fundamental-group`.
 
 Obstructions are built from explicit cellular extension data before the page
 introduces representability and Postnikov towers.  Principal bundles are
 classified only for paracompact/numerable bases; the page does not inherit an
 unstated niceness hypothesis.
 
+The local coefficient supplier is the same-run AT-23 A page, including its
+cellular-cochain-to-singular comparison. For $n\ge2$, the $n$-skeleton has the
+same fundamental groupoid as $X$ and supports the abelian moving-basepoint
+system. At $n=1$, an abelian, trivial-action $\pi_1Y$ is required before
+forming an ordinary cochain group. Davis–Kirk §7.3 Theorem 7.6 proves the
+cocycle by relative Hurewicz and consecutive boundary maps; §7.4 proves
+the difference and realization lemmas on cell prisms. The arbitrary-cell
+extension, lifting, representability and dependent Postnikov claims carry
+the explicit AC hypothesis needed to choose simultaneous cell fillers.
+
 ### A-page items, in dependency order
 
 - `lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere` — **lemma** — an extension across $D^{n+1}$ exists exactly when the boundary class in $\pi_n(Y)$ vanishes. For: local obstruction datum. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `def-primary-cellular-obstruction-cochain` — **definition** — for a map on $X^n$, evaluation on each $(n+1)$-cell gives a cochain in $C^{n+1}(X,A;\pi_nY)$, with local coefficients when $\pi_1$ acts. For: globalises cellwise failures. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `thm-the-primary-obstruction-cochain-is-a-cocycle` — **theorem** — the attaching relations on $(n+2)$-cells make its cellular coboundary vanish. For: defines the obstruction class. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
+- `def-primary-cellular-obstruction-cochain` — **definition** — for a map on $X^n\cup A$, evaluation on each $(n+1)$-cell gives a cochain in $C^{n+1}(X,A;f^*\Pi_nY)$; the abelian coefficient condition is explicit. For: globalises cellwise failures. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, §7.3, pp. 169–171; AT-23 local coefficient comparison.
+- `thm-the-primary-obstruction-cochain-is-a-cocycle` — **theorem** — relative Hurewicz identifies its cell values and consecutive relative-homotopy boundary maps make its twisted cellular coboundary zero. For: defines the obstruction class. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, §7.3, Theorem 7.6, pp. 171–172; AT-23 local coefficient comparison.
+- `def-difference-cochain-between-two-cellular-extensions` — **definition** — evaluating the cylinder obstruction on $n$-cell prisms gives a cochain one degree lower, with interval-last signs and a homotopy-induced coefficient identification. For: classification and uniqueness of extensions. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, §7.4, Lemma 7.8, pp. 172–173.
 - `thm-the-primary-obstruction-class-is-independent-of-cellular-choices` — **theorem** — changing the partial extension alters the cocycle by a coboundary. For: well-definedness in cohomology. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton` — **theorem** — a correcting cochain changes the partial map exactly when the class vanishes. For: both directions of the extension criterion. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `def-difference-cochain-between-two-cellular-extensions` — **definition** — gluing their disk restrictions gives a cochain one degree lower. For: classification and uniqueness of extensions. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `thm-difference-cochains-classify-homotopies-of-extensions-in-the-stable-stage` — **theorem** — the difference is a cocycle and vanishes in cohomology exactly when the maps are homotopic rel the prior skeleton, under the printed connectivity hypotheses. For: uniqueness as well as existence. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `thm-obstruction-theory-for-lifting-through-a-fibration` — **theorem** — a section/lift over skeleta has obstructions in cohomology with the local system $\pi_*(F)$. For: bundle sections and characteristic obstructions. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `def-eilenberg-maclane-space` — **definition** — a connected CW complex $K(A,n)$ has $\pi_n=A$ and all other homotopy groups zero, with $A$ abelian for $n\ge2$. For: represent ordinary cohomology. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
@@ -1897,23 +1929,23 @@ unstated niceness hypothesis.
 - `cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces` — **corollary** — natural operations are determined by the image of the universal class. For: organises Bockstein and Steenrod operations. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `def-postnikov-section-and-postnikov-tower` — **definition** — $P_nX$ preserves $\pi_i$ for $i\le n$ and kills it for $i>n$, with compatible fibrations $P_nX\to P_{n-1}X$. For: reconstructs homotopy type by stages. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `thm-postnikov-towers-exist-for-connected-cw-complexes` — **theorem** — mapping-path replacements of cell-killing maps yield the tower and its Eilenberg--MacLane fibers. For: rigorous staged construction. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `def-postnikov-k-invariant` — **definition** — the fibration stage is classified by a class in $H^{n+1}(P_{n-1}X;\pi_nX)$ with the relevant local action. For: encodes how homotopy groups are assembled. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
+- `def-postnikov-k-invariant` — **definition** — for simple $X$ and $n\ge2$, the fibration stage is classified by a class in $H^{n+1}(P_{n-1}X;\pi_nX)$; nontrivial $\pi_1$ action requires local coefficients. For: encodes how homotopy groups are assembled. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Hatcher, *Algebraic Topology*, §4.3, pp. 410–413.
 - `thm-simple-postnikov-stages-are-classified-by-k-invariants` — **theorem** — with the action and lower stage fixed, homotopy classes of the extensions correspond to the stated cohomology data up to equivalence. For: turns towers into calculable invariants. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `def-universal-principal-bundle-and-classifying-space` — **definition** — a free contractible $G$-space $EG$ gives $BG=EG/G$ and $EG\to BG$. For: classification and universal characteristic classes. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `thm-milnor-join-model-is-a-contractible-free-g-space` — **theorem** — the infinite join $G*G*\cdots$ is free and contractible with numerable quotient bundle. For: existence for general topological groups. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
+- `thm-milnor-join-model-is-a-contractible-free-g-space` — **theorem** — the infinite join $G*G*\cdots$ is free and contractible with numerable quotient bundle. For: existence for general topological groups in the compactly generated conventions. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Cohen, *The Topology of Fiber Bundles*, Chapter 2 §4.1, pp. 63--66, gives the weak-colimit join, free action and universal bundle but only weak contractibility; Stanley--Ronagh, *Algebraic Topology*, §3, pp. 64--66, states contractibility and numerability but sketches the former only by connectivity. The local proof must use the explicit intervalwise even-coordinate homotopy read in the fetched Husemöller §12.3, then cone to an unused odd-slot identity vertex. Its continuity at time 1 is checked on every finite join, where the homotopy is eventually the identity. The original Husemöller URL timed out in the current citation gate and is retained in the retired-source evidence, not claimed as reader-openable.
 - `thm-principal-bundles-are-classified-by-maps-to-bg` — **theorem** — for paracompact bases, pullback gives a natural bijection $[X,BG]\cong\operatorname{Prin}_G(X)$, including the trivial bundle as the constant map. For: exact classification interface. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `prop-loop-space-of-bg-recovers-g-up-to-homotopy` — **proposition** — the universal fibration LES gives $G\simeq\Omega BG$ under the stated well-pointed hypotheses. For: bridge to spectra and bundles. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `cor-classifying-space-of-a-discrete-group-is-a-k-g-one` — **corollary** — contractible $EG$ makes $BG$ aspherical with fundamental group $G$. For: group cohomology interface without reminting covering classification. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 
 ### B page — `obstruction-theory-postnikov-towers-and-classifying-spaces-examples`
 
-- `ex-primary-obstruction-to-a-nowhere-zero-section-of-a-sphere-fibration` — **example** — identifies the first possible obstruction group without developing DT applications. For: lifting-theory calibration. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
+- `ex-primary-obstruction-to-a-nowhere-zero-section-of-a-sphere-fibration` — **example** — for $r\ge1$ identifies the first possible $S^r$-section obstruction group and its orientation local system; $r=0$ is excluded. For: lifting-theory calibration. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Chapter 7, pp. 169–176.
 - `ex-k-z-one-as-the-infinite-complex-projective-space` — **example** — the universal circle bundle shows $\mathbb{CP}^{\infty}\simeq K(\mathbb Z,2)$ after looping conventions are applied. For: universal degree-two class. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `ex-real-projective-infinity-as-b-z-two` — **example** — $S^\infty\to\mathbb{RP}^\infty$ is the universal double cover. For: discrete classifying-space model. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `ex-first-postnikov-stage-of-a-simply-connected-space` — **example** — identifies $P_nX$ when $\pi_n$ is the first nonzero group. For: tower boundary case. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
 - `ex-trivial-principal-bundle-corresponds-to-a-nullhomotopic-classifying-map` — **example** — constructs both implications over a paracompact base. For: classification basepoint check. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `cex-cellwise-vanishing-obstructions-with-incompatible-choices-need-not-give-a-global-extension` — **counterexample** — the cochain must vanish as a class, not by unrelated local nullhomotopies. For: motivates cocycle compatibility. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
-- `cex-principal-bundle-classification-can-fail-without-numerability` — **counterexample** — a source-standard nonnumerable bundle is not pulled back from the chosen universal numerable bundle. For: preserves the base hypothesis. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Davis--Kirk, *Lecture Notes in Algebraic Topology*, Ch. 7 and §8.6, pp. 165--193, 217--218.
+- `cex-cellwise-vanishing-obstructions-with-incompatible-choices-need-not-give-a-global-extension` — **counterexample** — two 2-cells attached along `ab` and `ab²` can each be filled after different degree choices on the common 1-cell, while no common choice fills both. A fixed map on the full 1-skeleton with every cell obstruction zero does extend by CW gluing. For: the exact quantifier distinction in obstruction compatibility. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** published circle-loop degree and nullhomotopy items; direct two-cell calculation.
+- `cex-principal-bundle-classification-can-fail-without-numerability` — **counterexample** — the frame bundle of the tangent line bundle of the smooth long line is nonnumerable: a numeration would yield a continuous positive tangent metric and metrize the nonmetrizable base. It therefore is not a pullback of Milnor's numerable universal bundle. This example uses a non-second-countable topological base, outside the paracompact/CW classification claim. For: preserves the base hypothesis. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Peter Nyikos, *The Topological Structure of the Tangent and Cotangent Bundles on the Long Line*, *Topology Proceedings* 4 (1979), pp. 271–276; the numerability contradiction is proved locally.
 
 ### Sources and exact locators
 

@@ -157,11 +157,13 @@ function certify(root, run, partial) {
         : row.covers.map(String).includes(batch))
         .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
       const ended = Date.parse(author?.ended_at);
-      // Later authors of a second pair can update this batch's shared manifest.
-      // The item hash binds the current per-item entry; their unrelated write
-      // must not invalidate an earlier pair author's evidence window.
+      // A batch manifest is a shared carrier in both the legacy group and
+      // per-pair layouts. Later repairs can rewrite it without changing this
+      // item or any of its dependency files. The item hash binds the current
+      // per-item manifest entry; require the item's actual proof inputs to
+      // remain inside the successful author's write window.
       const paths = itemInputPaths(s, id, dependencies).filter(path =>
-        !author?.label?.startsWith('step3b-pair-') || !/-batch-\d+\.pages\.json$/.test(path));
+        !/-batch-\d+\.pages\.json$/.test(path));
       if (!author || !Number.isFinite(ended)
         || paths.some(path => statSync(path).mtimeMs > ended)) {
         ownerRecertification = prior && currentOwnerRepair(s, id, dependencies, sha256);

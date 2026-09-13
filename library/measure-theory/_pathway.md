@@ -31,18 +31,21 @@ parts:
       - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
       - weak-mixing-and-the-chacon-transformation
       - measure-preserving-transformations-and-poincare-recurrence
+      - the-ergodic-theorems-of-von-neumann-and-birkhoff
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra, outer measure and Carathéodory give Lebesgue measure, measurable functions,
-integration, convergence, products, signed measures, Radon--Nikodym and the $L^p$ calculus.
-Riesz--Markov, Vitali covering, maximal estimates, differentiation and Hausdorff measure support
-the representation, FTC and dimension results; complex $L^p$ conventions keep components,
-almost-everywhere equality and sigma-finite or semifinite hypotheses explicit; Riesz--Thorin
-interpolates complex endpoint bounds from finite cores under countable choice for full spaces.
-Measure preservation gives Koopman isometries, invariant sigma-algebras, ergodicity and strong
-mixing criteria through generating families; weak mixing means vanishing Cesàro correlations,
-product ergodicity and no nonconstant eigenfunctions. Then come Poincaré recurrence, first-return
-maps and Kac's formula, rotations and expanding maps, the fair-coin shift and Krylov--Bogolyubov;
-the three-cut Chacon transformation is ergodic and weakly, not strongly, mixing.
+Carathéodory extension and Lebesgue measure, measurable functions, integration and
+convergence, product and signed measures, Radon--Nikodym, the $L^p$ calculus and
+duality, Riesz--Markov representation, Vitali covering, maximal estimates,
+differentiation, Hausdorff measure, complex $L^p$ conventions, Riesz--Thorin
+interpolation and the sharp FTC, with choice and sigma-finiteness hypotheses explicit.
+Measure preservation then gives Koopman isometries, invariant sigma-algebras, ergodicity
+and strong mixing criteria; weak mixing means vanishing Cesàro correlations, product
+ergodicity and no nonconstant eigenfunctions; Poincaré recurrence, first-return maps,
+Kac's formula, rotations, shifts and Krylov--Bogolyubov lead to the Chacon
+transformation, ergodic and weakly but not strongly mixing. The dynamics closes with the
+maximal ergodic inequality, Birkhoff's almost-everywhere theorem and von Neumann's $L^2$
+mean theorem, unique ergodicity, Weyl equidistribution, Borel normality and the
+fair-coin strong law.

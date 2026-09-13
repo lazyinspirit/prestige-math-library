@@ -37,7 +37,7 @@ export const auditorCreatedCertificationsPath = (root, run, step) =>
 const ownerRecertificationPath = (root, run, step, id, hashes) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-owner-recertification-${safe(id, 'item ID')}-${hashValue({ id, carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) }).slice(0, 16)}.json`);
 
-function ownerRecertification(root, run, step, id, hashes, authorResult) {
+function ownerRecertification(root, run, step, id, hashes, authorResult, basis = null) {
   const path = ownerRecertificationPath(root, run, step, id, hashes);
   if (!existsSync(path)) return null;
   const bytes = readFileSync(path, 'utf8');
@@ -47,6 +47,9 @@ function ownerRecertification(root, run, step, id, hashes, authorResult) {
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
     || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
     || receipt.owner !== true || receipt.author_result !== authorResult
+    || (basis && receipt.basis !== basis)
+    || (receipt.basis !== undefined && !['initial-step7-item-repair',
+      'initial-step7-contract-only'].includes(receipt.basis))
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
     || sha(readFileSync(evidencePath, 'utf8')) !== receipt.evidence_sha256
@@ -55,18 +58,57 @@ function ownerRecertification(root, run, step, id, hashes, authorResult) {
   return { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) };
 }
 
+// A carried Step-5 item can be repaired by a Step-7 adjudicator before the
+// Step-7 certification gate first runs. If a shared batch contract is then
+// repaired outside that dispatch, there is no Step-7 receipt to recertify.
+// Admit an initial owner attestation when the item itself has a genuine Step-7
+// content delta in a successful author window. A separate contract-only branch
+// covers a carried item whose item and manifest are byte-identical to the
+// Step-7 baseline, but whose exact contract entry changed after adjudication.
+// Its owner receipt, rather than a fictional item write, binds that repair.
+function bootstrapStep7Author(root, run, id, row, hashes) {
+  if (!provenanceRows(root, run, 5).some(prior => prior.id === id)) return null;
+  const baseline = stageBaseline(root, run, 7);
+  const listed = baseline.items.some(value => value.id === id
+    && value.page === row.page && String(value.batch) === row.batch);
+  const before = baseline.item_carriers?.[id];
+  if (!listed || !baseline.existing_item_files.includes(id) || !before
+    || before.page !== row.page || String(before.batch) !== row.batch
+    || matchesCarriers(before, row, hashes)) return null;
+  const itemChanged = before.judge_sha256 !== hashes.judge_sha256;
+  const contractOnly = before.item_file_sha256 === hashes.item_file_sha256
+    && before.manifest_sha256 === hashes.manifest_sha256
+    && before.contract_sha256 !== hashes.contract_sha256;
+  if (!itemChanged && !contractOnly) return null;
+  const changedAt = itemChanged
+    ? statSync(join(root, 'items', `${safe(id, 'item ID')}.md`)).mtimeMs : null;
+  const baselineAt = Date.parse(baseline.at);
+  return successfulAuthorResults(root, run, 7).filter(author => {
+    const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
+    const covers = author.covers.map(String);
+    return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
+      && (itemChanged ? changedAt >= started - 1500 && changedAt <= ended
+        : Number.isFinite(baselineAt) && started >= baselineAt)
+      && (!covers.length || covers.includes('all') || covers.includes(row.batch));
+  }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at))
+    .map(author => ({ ...author, basis: itemChanged
+      ? 'initial-step7-item-repair' : 'initial-step7-contract-only' })).at(-1) ?? null;
+}
+
 export function recordOwnerRecertification(root, run, step, id, evidence, reason) {
   step = Number(step);
   if (![5, 7, 8].includes(step)) throw Error('Owner recertification supports steps 5, 7, and 8');
   safe(run, 'run'); safe(id, 'item ID');
   if (!String(reason ?? '').trim()) throw Error(`${id}: owner recertification needs a reason`);
-  const priorPath = auditorCreatedCertificationsPath(root, run, step);
-  if (!existsSync(priorPath)) throw Error(`${id}: no prior auditor-created certification to recertify`);
-  const prior = provenanceRows(root, run, step).find(row => row.id === id);
-  if (!prior) throw Error(`${id}: no prior successful auditor/adjudicator author provenance`);
   const row = inventory(root, run).find(row => row.id === id);
   if (!row) throw Error(`${id}: item is absent from the current run manifest`);
   const hashes = carrierHashes(root, run, row);
+  const priorPath = auditorCreatedCertificationsPath(root, run, step);
+  const prior = existsSync(priorPath)
+    ? provenanceRows(root, run, step).find(value => value.id === id) : null;
+  const bootstrap = !prior && step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null;
+  const authorResult = prior?.author_result ?? bootstrap?.result_file;
+  if (!authorResult) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step 7 owner bootstrap`);
   const evidencePath = resolve(root, evidence);
   const researchRoot = resolve(root, 'research');
   if (!evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
@@ -74,14 +116,16 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     throw Error(`${id}: owner evidence must be a research file naming the item`);
   const path = ownerRecertificationPath(root, run, step, id, hashes);
   if (existsSync(path)) {
-    ownerRecertification(root, run, step, id, hashes, prior.author_result);
+    ownerRecertification(root, run, step, id, hashes, authorResult,
+      bootstrap?.basis === 'initial-step7-contract-only' ? bootstrap.basis : null);
     return { path, reused: true };
   }
   const receipt = { version: 1, policy: OWNER_RECERTIFICATION_POLICY, run, step, id,
     owner: true, at: new Date().toISOString(), reason: String(reason).trim(),
     evidence: `research/${evidencePath.split('/').at(-1)}`,
     evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
-    author_result: prior.author_result,
+    author_result: authorResult,
+    ...(bootstrap ? { basis: bootstrap.basis } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
   return { path, reused: false };
@@ -392,10 +436,14 @@ export function certifyAuditorCreatedItems(root, run, step) {
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
     const covering = priorCurrent ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
-    const owner = !priorCurrent && !covering && prior
-      ? ownerRecertification(root, run, step, id, hashes, prior.author_result) : null;
+    const bootstrap = !priorCurrent && !covering && !prior && step === 7 && carried
+      ? bootstrapStep7Author(root, run, id, row, hashes) : null;
+    const authorResult = prior?.author_result ?? bootstrap?.result_file;
+    const owner = !priorCurrent && !covering && authorResult
+      ? ownerRecertification(root, run, step, id, hashes, authorResult,
+        bootstrap?.basis === 'initial-step7-contract-only' ? bootstrap.basis : null) : null;
     const author = priorCurrent ? { result_file: prior.author_result }
-      : covering ?? (owner ? { result_file: prior.author_result } : null);
+      : covering ?? (owner ? { result_file: authorResult } : null);
     if (!author) throw Error(`${id}: no successful Step ${step} auditor/adjudicator dispatch authored its current carriers`);
     const originStep = carried?.origin_step ?? carried?.step;
     if (priorCurrent) for (const key of Object.keys(hashes)) hashes[key] = prior[key];

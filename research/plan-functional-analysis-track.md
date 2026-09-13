@@ -790,10 +790,10 @@ Bell, *The Axiom of Choice*, pp. 59–64, and Rossi, arXiv:0911.0332.
 Items:
 
 1. `lem-dual-ball-as-a-closed-subset-of-a-product` (lemma) — embed $B_{X^*}$ by evaluations into $\prod_{x\in X}\{z:|z|\le\|x\|\}$ and characterize linearity by closed equations.
-2. `thm-banach-alaoglu` (theorem) — $B_{X^*}$ is weak-star compact, with BPI—not full AC—as the exact recorded principle.
+2. `thm-banach-alaoglu` (theorem) — $B_{X^*}$ is weak-star compact under the ultrafilter lemma, using the earlier compact-Hausdorff product theorem. This is the BPI-equivalent choice strength without a forward dependency on the later Boolean-algebra page.
 3. `thm-weak-star-compactness-of-polar-sets` (theorem) — the polar of any neighborhood of zero is weak-star compact after scaling.
 4. `thm-dual-ball-weak-star-metrizable-for-separable-predual` (theorem) — give the explicit bounded metric from a fixed dense sequence.
-5. `cor-separable-banach-dual-ball-is-weak-star-sequentially-compact` (corollary) — once item 4 supplies the metric, compactness implies sequential compactness in ZF by intersecting the nested closures of the tails of a given sequence and then taking least admissible indices; the corollary inherits BPI from Alaoglu, not an additional countable-choice cost.
+5. `cor-separable-banach-dual-ball-is-weak-star-sequentially-compact` (corollary) — once item 4 supplies the metric, compactness implies sequential compactness in ZF by intersecting the nested closures of the tails of a given sequence and then taking least admissible indices; the corollary inherits the ultrafilter lemma from Alaoglu, not an additional countable-choice cost.
 6. `thm-goldstine` (theorem) — $J_X(B_X)$ is weak-star dense in $B_{X^{**}}$.
 7. `cor-goldstine-finite-data-approximation` (corollary) — approximate finitely many values of $x^{**}$ by one point of $B_X$.
 8. `thm-banach-dieudonne-linear-subspace-criterion` (theorem) — for a linear subspace $E\subset X^*$, weak-star closedness of $E$ is equivalent to weak-star closedness of $E\cap B_{X^*}$; state the Banach hypothesis and use the sourced polar proof.
@@ -807,16 +807,16 @@ Items:
 
 **Hard proof and choice plan.**  Alaoglu checks the image is closed under each
 linearity equation and norm inequality before invoking compactness.  Goldstine
-argues by finite-dimensional separation: a missing basic weak-star
+argues by the earlier Euclidean strict point/closed-convex separation theorem: a missing basic weak-star
 neighborhood would give a finite linear combination of evaluations separating
 $x^{**}$ from $J_X(B_X)$, contradicting the dual norm inequality; it consumes
 HB and no compactness theorem.  The Banach–Dieudonné item follows BS §3.3
-literally: its weak-star compact finite-intersection step costs BPI, its
+literally: its weak-star compact finite-intersection step uses the ultrafilter lemma, its
 recursive finite sets cost DC, and its final separation costs HB.
 Krein–Milman orders nonempty compact faces by
 reverse inclusion; the proof implemented with the dual Zorn lemma is labelled
-AC.  Bell's result that KM plus BPI yields AC is recorded, so the combined
-corollary in item 15 is never mislabeled merely BPI.
+AC.  The combined corollary in item 15 uses AC to supply the ultrafilter
+lemma through the earlier published filter-extension theorem.
 
 **B page:** `banach-alaoglu-goldstine-and-krein-milman-examples`
 
@@ -826,66 +826,89 @@ corollary in item 15 is never mislabeled merely BPI.
 4. `cex-the-c0-unit-ball-has-no-extreme-points` — perturb a sufficiently small coordinate.
 5. `cor-c0-is-not-isometrically-a-dual-space` — Alaoglu plus Krein–Milman and item 4; the stronger isomorphic statement waits for FA-12.
 6. `cex-weak-star-compact-does-not-imply-weak-star-sequentially-compact` — the dual ball of a suitable nonseparable predual.
-7. `rem-banach-alaoglu-versus-sequential-alaoglu` (remark, L/NA) — keep BPI and countable-choice costs distinct.
+7. `rem-banach-alaoglu-versus-sequential-alaoglu` (remark, L/NA) — keep the ultrafilter lemma and countable-choice costs distinct.
 
 ### FA-10 — Reflexivity and Eberlein–Šmulian
 
 **A page:** `reflexivity-and-eberlein-smulian`
 
 **Requires:** FA-6–FA-9; planned predecessors MT-14 and MT-16 for concrete
-$L^p$ consequences.
+$L^p$ consequences; the earlier compact-Hausdorff product theorem under the
+ultrafilter lemma for the countable-compactness proof. The $1<p<2$ Clarkson
+inequality uses Kuriyama–Miyagi–Okada–Miyoshi's elementary scalar argument,
+so it does not require the later three-lines theorem.
 
 **Source backing read:** Bühler–Salamon §§2.4.1–2.4.3 and 3.4, pp. 88–94 and
 142–148 (*The Bidual Space*; *Reflexive Banach Spaces*; *Separable Banach
 Spaces*; *The Eberlein–Smulyan Theorem*); Teschl §§4.4 and 5.5, pp. 125–133
-and 156–160 (*Weak convergence*; *Uniformly convex spaces*); Whitley, “An
-elementary proof of the Eberlein–Smulian theorem,” Math. Ann. 172 (1967),
-pp. 116–118; Megginson §§2.8 and 2.9 for James and Bishop–Phelps; Brezis
-§3.6, pp. 73–76 (*Separable Spaces*).
+and 156–160 (*Weak convergence*; *Uniformly convex spaces*); Haase,
+*The Functional Analysis Notes*, Appendix E.1 and E.5, pp. 345–347 and
+353–356 for the complete alternative countable-compactness proof. Whitley,
+“An elementary proof of the Eberlein–Smulian theorem,” Math. Ann. 172
+(1967), pp. 116–118, remains historical provenance; the source-drop record
+states that its full text was unavailable and is not claimed as read.
+Megginson §1.13, Lemmas 1.13.10 and 1.13.13 and Theorems 1.13.11,
+1.13.14–15, pp. 122–134, for the complete general James proof.
+Kuriyama–Miyagi–Okada–Miyoshi, *Elementary Proof of Clarkson’s Inequalities
+and Their Generalization*, Theorems 2.5, 3.2 and 3.4, pp. 120–124, for the
+real scalar derivative argument, complex phase reduction and integrated
+inequality. Loewen–Wang, *A Generalized Variational Principle*, Theorem 2.2,
+Proposition 5.1(i), and Theorem 5.2, for Bishop–Phelps; Brezis §3.6,
+pp. 73–76 (*Separable Spaces*).
 
 Items:
 
 1. `thm-reflexive-iff-unit-ball-weakly-compact` (theorem) — both directions, with Goldstine closing the converse.
-2. `thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive` (theorem).
+2. `thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive` (theorem) — declare HB for bidual separation and $\mathrm{AC}_\omega$ for the complete-image closedness step.
 3. `thm-closed-subspaces-of-reflexive-spaces-are-reflexive` (theorem).
-4. `thm-quotients-of-reflexive-spaces-are-reflexive` (theorem).
+4. `thm-quotients-of-reflexive-spaces-are-reflexive` (theorem) — declare HB for functional extension and $\mathrm{AC}_\omega$ for quotient completeness.
 5. `thm-reflexivity-of-lp-for-one-less-p-less-infinity` (theorem) — a short abstract corollary of MT-16, not a second proof of $L^p$ duality.
 6. `def-relative-weak-compactness-and-three-sequential-notions` (definition) — compact, sequentially compact, and countably compact are not conflated.
 7. `lem-eberlein-smulian-separable-reduction` (lemma) — replace a sequence by the closed separable span it generates and track dual restrictions.
-8. `lem-eberlein-smulian-metrization-on-the-relevant-dual-ball` (lemma) — construct the countable family used in Whitley's argument.
+8. `lem-eberlein-smulian-metrization-on-the-relevant-dual-ball` (lemma) — construct the countable family used for compact-to-sequential reduction.
 9. `thm-eberlein-smulian` (theorem) — relative weak compactness, relative weak sequential compactness, and relative weak countable compactness are equivalent.
-10. `cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence` (corollary).
+10. `cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence` (corollary) — under the ultrafilter lemma, DC, and HB, matching the weak-compactness and Eberlein–Šmulian suppliers.
 11. `def-schur-property` (definition).
 12. `thm-ell-one-has-the-schur-property` (theorem) — gliding-hump proof with one bounded sign functional contradicting weak nullity.
-13. `cor-ell-one-is-not-reflexive` (corollary) — its unit ball is not norm sequentially compact, hence not weakly sequentially compact.
+13. `cor-ell-one-is-not-reflexive` (corollary) — under the same ultrafilter lemma, DC, and HB assumptions, the coordinate unit vectors cannot have a weakly convergent subsequence by Schur.
 14. `def-uniformly-convex-banach-space` (definition).
 15. `lem-uniform-convexity-gives-unique-asymptotic-centers` (lemma) — quantitative midpoint drop.
-16. `thm-milman-pettis` (theorem) — uniformly convex Banach spaces are reflexive.
+16. `thm-milman-pettis` (theorem) — under relative HB and Countable Choice, uniformly convex Banach spaces are reflexive; Countable Choice closes the complete canonical image after Goldstine supplies norm density.
 17. `cor-lp-is-uniformly-convex-for-one-less-p-less-infinity` (corollary) — cite the Clarkson inequalities in the exact scalar $L^p$ setting.
-18. `lem-james-noncompactness-sequence` (lemma) — from failure of weak compactness construct the separated convex-tail data used by James.
-19. `lem-james-norm-attainment-compactness-criterion` (lemma) — the combinatorial core with all nested choices and completeness hypotheses explicit.
-20. `thm-james-reflexivity-theorem` (theorem) — a Banach space is reflexive iff every continuous functional attains its norm on its closed unit ball.
+18. `lem-james-noncompactness-sequence` (lemma) — under the ultrafilter lemma, DC, and relative HB, reduce nonreflexivity to a separable closed subspace and construct a pointwise-null dual-ball sequence separated from its annihilator.
+19. `lem-james-norm-attainment-compactness-criterion` (lemma) — under DC and relative HB, the convex-block induction has exact full-norm and strict prefix bounds; with the ultrafilter lemma, the preceding noncompactness sequence gives a nonattaining functional.
+20. `thm-james-reflexivity-theorem` (theorem) — under the ultrafilter lemma, DC, and relative HB, a real or complex Banach space is reflexive iff every continuous scalar-linear functional attains its norm on the closed unit ball.
 21. `lem-bishop-phelps-support-cone-construction` (lemma) — the complete-metric variational step for a real closed bounded convex set.
 22. `thm-bishop-phelps` (theorem) — support functionals are norm dense in $X^*$; specialize to norm-attaining functionals on $B_X$.
 23. `thm-separable-dual-implies-separable-primal` (theorem) — if $X^*$ is norm separable, choose a dense sequence of functionals, norm them on a sequence of points, and use annihilator separation to obtain a countable dense subspace of $X$.
 24. `cor-separable-reflexive-space-has-separable-dual` (corollary) — apply item 23 to $X^*$ and the canonical identification $X\cong X^{**}$; retain the false converse warning supplied by $L^1$ and $L^\infty$.
 
-**Hard proof plan.**  Eberlein–Šmulian follows Whitley's separable reduction,
-not the false general claim that weak compact sets are metrizable.  James's
-hard direction is explicitly split into the noncompactness sequence and the
-norm-attainment criterion; a future builder must follow Megginson's complete
-proof, including the use of completeness, rather than cite the theorem inside
-its own proof.  Bishop–Phelps uses the real theorem; the complex general-convex
-extension is not asserted because Lomonosov's counterexample forbids it.
+**Hard proof plan.** Eberlein–Šmulian uses Haase's Grothendieck theorem for
+relatively countably compact subsets of $C_p(K)$ and a separate countable
+reduction to put the pointwise closure back in the canonical image of $X$.
+Compact-to-sequential uses only a separable closed span; it does not claim
+all weak compact sets are metrizable. James's hard direction is split into
+separable reduction and annihilator separation, followed by Megginson's
+eight-claim convex-block induction and geometric-weight nonattainment
+estimate. The scaffold records every bound and its DC/HB use; Step 3 must
+author the full proof rather than cite James inside itself. Bishop–Phelps
+uses the maximizing Ekeland construction under DC and a dominated-HB
+support-cone argument; the complex general-convex extension is not asserted
+because Lomonosov's counterexample forbids it.
 
 **B page:** `reflexivity-and-eberlein-smulian-examples`
 
-1. `ex-hilbert-spaces-are-uniformly-convex` — parallelogram-law proof, finalized after FA-13.
+**Additional published prerequisite:** `inner-product-spaces-and-orthogonality`.
+The two Hilbert examples define completeness locally and prove the needed
+parallelogram and Riesz arguments inside their examples, so this pair does not
+depend on the later FA-13 page.
+
+1. `ex-hilbert-spaces-are-uniformly-convex` — local parallelogram-law proof and explicit modulus.
 2. `ex-reflexivity-of-ell-p-and-lp` — cite MT-14/MT-16 and separate endpoints.
 3. `cex-c0-is-not-reflexive` — canonical image in $\ell^\infty$.
 4. `cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences` — Schur's warning.
 5. `cex-complex-bishop-phelps-for-general-convex-sets` — source-cited Lomonosov boundary, L/NS and non-load-bearing.
-6. `ex-norm-attaining-functionals-on-a-hilbert-space` — all functionals attain, by FA-13's Riesz theorem.
+6. `ex-norm-attaining-functionals-on-a-hilbert-space` — all functionals attain, by the local nearest-point/Riesz proof.
 
 ### FA-11 — Schauder bases, approximation, and Banach-space pathologies
 
@@ -1979,7 +2002,8 @@ DAG.  These are the only deliberate cross-pair scheduling constraints:
 - FA-6 consumes the published complete-metric Baire theorem.  It neither proves
   nor restates Baire.  FA-8, FA-10, and parts of FA-15 consume the particular
   FA-6 consequence they name and inherit that result's choice label.
-- FA-9 consumes published compact-Hausdorff Tychonoff through BPI.  Its
+- FA-9 consumes the earlier published compact-Hausdorff Tychonoff theorem
+  under the ultrafilter lemma, the BPI-equivalent form available at its order. Its
   Krein–Milman proof has a separate AC cost; those costs are not merged into a
   vague “uses choice” label.
 - FA-10's Eberlein–Šmulian proof may cite FA-9 Alaoglu and FA-8 topology, but
@@ -2063,15 +2087,15 @@ four Baire distinctions already recorded in `DEFERRED.md` §0.
 | coordinate functionals of a Schauder basis are bounded | $\mathsf{AC}_\omega$ in the selected proof | Apply the same sequential UBP to the partial-sum projections; later basis results cite this item. |
 | unconditional-series equivalences and Dvoretzky–Rogers | HB for the sourced hardest equivalence; $\mathsf{AC}_\omega$ for the selected block construction | Mu's proof of uniform finite-tail control uses Hahn–Banach.  The Dvoretzky–Rogers proof then chooses one finite block for each natural index; no reverse-strength claim is made. |
 | duals separate points, isometric bidual embedding, Goldstine | HB | Goldstine uses finite-dimensional separation/dual norming, not Alaoglu. |
-| Banach–Alaoglu and weak-star compact polars | BPI | Rossi proves equivalence with the Boolean prime ideal theorem for the general theorem. |
-| Banach–Dieudonné linear-subspace criterion | HB + BPI + DC in the BS implementation | BS §3.3 explicitly uses Alaoglu compactness, a dependent construction of finite sets, and Hahn–Banach separation.  No claim of logical optimality or converse is made. |
+| Banach–Alaoglu and weak-star compact polars | ultrafilter lemma (BPI-equivalent) | The earlier published compact-Hausdorff product theorem supplies the exact implementation without importing the later Boolean-algebra page. Rossi proves the BPI equivalence for the general theorem. |
+| Banach–Dieudonné linear-subspace criterion | HB + ultrafilter lemma + DC in the BS implementation | BS §3.3 explicitly uses Alaoglu compactness, a dependent construction of finite sets, and Hahn–Banach separation. No claim of logical optimality or converse is made. |
 | weak-star metrizability on a dual ball once a dense sequence is supplied | ZF | The metric is written from the supplied sequence.  Producing such a sequence from bare separability may require a countable selection convention. |
 | compact metrizable implies sequentially compact | ZF | For a supplied sequence, the closures of its tails are a nested family of nonempty closed subsets of a compact space.  Choose one point from their intersection once, then take least natural indices in successively smaller metric balls.  No countable family of arbitrary choices is made. |
 | sequential characterization of compact operators | ZF from relative compactness to the subsequence property; DC for the selected converse proof | Relative compactness remains the definition.  The forward direction uses nested tail closures.  The converse proof recursively constructs an $\varepsilon$-separated image sequence if total boundedness fails and therefore records DC; no logical optimality is claimed. |
 | Krein–Milman through maximal compact faces | AC | The source proof uses the dual Zorn lemma.  Bell shows KM together with BPI yields AC, so the combined dual-ball extreme-point corollary is never labelled merely BPI. |
-| reflexivity equivalences that use Alaoglu/Goldstine | HB + BPI | State which direction uses which principle.  Do not attach the combined label to elementary directions. |
+| reflexivity equivalences that use Alaoglu/Goldstine | HB + ultrafilter lemma | State which direction uses which principle. Do not attach the combined label to elementary directions. |
 | Schauder compact-adjoint theorem and closed-range duality | HB in the selected dual-norming proof | Directions that only use compact metric estimates stay ZF; every norming/separation step cites its FA-4 dependency. |
-| Eberlein–Šmulian standard diagonal/subsequence proof | DC, plus inherited compactness hypotheses | The builder must audit each direction separately; weak compactness imported through Alaoglu carries BPI only when Alaoglu is actually used. |
+| Eberlein–Šmulian countable-compactness proof | DC, plus inherited compactness hypotheses | Audit each direction separately; weak compactness imported through Alaoglu carries the ultrafilter lemma only when Alaoglu is actually used. |
 | Schur property of $\ell^1$ by gliding humps | $\mathsf{AC}_\omega$ for the standard recursive selection | Once the witnessing subsequences and finite sets are supplied, estimates are ZF. |
 | James's reflexivity theorem and Bishop–Phelps | AC for the standard proofs | These are not used to lower the cost of earlier reflexivity items; exact proof-local uses of Zorn/separation must be exposed. |
 | Hamel-basis constructions, arbitrary algebraic complements, arbitrary discontinuous functional examples | AC | B-page only and never dependencies. |
@@ -2080,7 +2104,7 @@ four Baire distinctions already recorded in `DEFERRED.md` §0.
 | Hilbert nearest point under the library's Cauchy-sequence completeness | $\mathsf{AC}_\omega$ for the standard proof | Choose one approximate minimizer for each $1/n$.  Blackadar–Farah–Karagila show a ZF proof under the stronger sigma/Cantor-completeness definition; the two completeness notions need not agree in ZF. |
 | Riesz representation in a Hilbert space once the nearest-point theorem is available | ZF | The kernel decomposition is canonical from a supplied nonzero functional; the inherited projection cost remains visible in dependencies. |
 | Bochner approximation from strong measurability | $\mathsf{AC}_\omega$ where a sequence of simple approximants must be selected | A given approximating sequence incurs no further choice.  Scalar measure theorems retain their own MT ledger labels. |
-| Dunford–Pettis theorem for $L^1$ on a finite measure space | inherits the proof-local HB + BPI + DC costs of FA-9/FA-10 in the selected weak-compactness proof, plus MT-10/MT-16's own labels | The scaffold makes no claim that this combined accounting is the theorem's exact reverse-mathematical strength; directions that can be proved with less must retain their lower item-level labels. |
+| Dunford–Pettis theorem for $L^1$ on a finite measure space | inherits the proof-local HB + ultrafilter lemma + DC costs of FA-9/FA-10 in the selected weak-compactness proof, plus MT-10/MT-16's own labels | The scaffold makes no claim that this combined accounting is the theorem's exact reverse-mathematical strength; directions that can be proved with less must retain their lower item-level labels. |
 | maximal ideals/characters in a general unital Banach algebra | AC for the scaffolded Zorn implementation | Special concrete character computations may be ZF.  No claim of exact equivalence is made. |
 | commutative Gelfand–Naimark, including the nonunital $C_0$ form | inherits maximal-ideal AC and the chosen Stone–Weierstrass route | Unitization, restriction of supplied characters, and the proper-map arrow checks add no new choice principle.  The future build records proof-local costs rather than a single global slogan. |
 | approximate unit for a commutative $C^*$-algebra | ZF relative to the locally compact Urysohn input | Index by the set of all compactly supported positive contractions, ordered by domination, instead of choosing a bump function for every compact subset. |
@@ -2121,9 +2145,9 @@ prerequisite closure.
 | `rem-closed-graph-theorem` | included | FA-6 items 9–12 prove closed graph and closability criteria. |
 | `rem-uniform-boundedness` | included | FA-6 items 1–3 give the Baire and Sokal routes with separate choice ledgers. |
 | `rem-weak-and-weak-star-topologies` | included | FA-8 defines both topologies by their dual pairs, develops nets and closures, and distinguishes WOT/SOT. |
-| `rem-banach-alaoglu` | included | FA-9 items 1–5 prove Alaoglu, polars, and the separable weak-star metric, labelled BPI. |
+| `rem-banach-alaoglu` | included | FA-9 items 1–5 prove Alaoglu, polars, and the separable weak-star metric, under the earlier ultrafilter-lemma product theorem. |
 | `rem-mazur-lemma` | included | FA-5 item 15 proves equality of weak and norm closures for convex sets; FA-5 B explicitly distinguishes this from Mazur's basic-sequence lemma. |
-| `rem-eberlein-smulian` | included | FA-10 items 6–10 scaffold Whitley's separable-reduction proof of the three compactness formulations. |
+| `rem-eberlein-smulian` | included | FA-10 items 6–10 use the fully sourced Haase/Grothendieck countable-compactness route and separable reduction for the three compactness formulations. |
 | `rem-schur-property-l1` | included | FA-10 items 11–13 prove the gliding-hump theorem and its nonreflexivity consequence. |
 | `rem-riesz-representation-hilbert` | included | FA-13 items 17–18 prove the double-orthogonal-complement step and Hilbert representation theorem after projection, with the inner-product convention explicit. |
 | `rem-separable-hilbert-isometric-l2` | included | FA-14 items 7–10 separate arbitrary-basis AC from deterministic Gram–Schmidt on a fixed dense sequence. |
@@ -3106,9 +3130,10 @@ not automatically approved replacements.
   require the published RMK hypotheses.
 - **FA-10:** insert
   `lem-clarkson-inequalities-for-real-and-complex-lp` immediately before the
-  uniform-convexity corollary.  Eberlein--Šmulian is backed by the complete
-  Whitley proof recorded in §11.6.  The general James theorem remains blocked
-  until a complete proof, not only a theorem name, has been acquired.  The
+  uniform-convexity corollary. Eberlein–Šmulian is backed by Haase's
+  Grothendieck/pointwise-closure route; the unavailable Whitley full text is
+  a documented source drop. The general James proof is now sourced to
+  Megginson §1.13 with the exact two local helper interfaces. The
   Lomonosov item is the non-load-bearing remark
   `rem-complex-bishop-phelps-for-general-convex-sets`.
 - **FA-11:** after the basis definitions insert
@@ -3390,9 +3415,11 @@ remain blocked from consuming it.
 6. An arbitrary $L^2$ kernel has no canonical diagonal.  The trace-by-
    diagonal example must retain hypotheses such as continuity and positivity
    that make the diagonal formula meaningful.
-7. Full-text absence remains a blocker for James's theorem and the RNP
-   equivalences.  Eberlein--Šmulian has the complete Whitley proof recorded in
-   §11.6.  The Lidskii and square-kernel prerequisite pairs now have the
+7. Full-text absence remains a blocker for the RNP equivalences.
+   Megginson §1.13 now supplies the complete general James proof and Haase
+   Appendix E supplies the Eberlein–Šmulian alternative; Whitley's full text
+   remains unavailable and is documented as dropped for the current run.
+   The Lidskii and square-kernel prerequisite pairs now have the
    complete proof sources recorded in §14.5.  Structural coverage and
    source-list shape checks do not replace reading the proof.
 

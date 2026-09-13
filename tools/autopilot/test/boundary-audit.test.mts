@@ -84,6 +84,16 @@ test('a templated wrapper with unique quoted middles still clusters', () => {
   assert.equal(out.templates[0].members, 3);
 });
 
+test('repeating one boundary rationale across axes of one item is not cross-item template reuse', () => {
+  const repeated = contractsWith({
+    'thm-one-proof': { boundaries: ['empty', 'zero', 'one', 'degenerate', 'endpoints', 'nonempty-choice']
+      .map((axis) => ({ case: axis, status: 'checked', evidence: 'Step 2.1 evaluates the supplied finite model explicitly.' })) },
+  });
+  const result = run([repeated, '--json', '--fail-on-template']);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(JSON.parse(result.stdout).templates.length, 0);
+});
+
 test('--fail-on-template turns a cluster into a failing gate', () => {
   const r = run([templated, '--fail-on-template']);
   assert.notEqual(r.status, 0, 'clusters were reported but the gate exited 0');

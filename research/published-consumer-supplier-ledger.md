@@ -4,9 +4,318 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1370, U-C 0, A-R 187, A-P 306. The
+Current classifications: U-P 1365, U-C 0, A-R 190, A-P 326. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## High-impact arithmetic spine follow-up — 2026-09-14
+
+Independent read-only Sol xhigh checks of the Step-8 top-100 consumer-cone
+spine found three local published-item repairs after the earlier Frontier-22
+bounded no-repair-needed readings. The current published files were not edited;
+the old bounded readings remain historical evidence, not current clearances of
+these new findings. None requires a draft Phase-2 supplier.
+
+- `lem-nat-trichotomy` (raw SHA-256
+  `580714869a5474e4e4752191d2e07f8dae8e9638e6cb3d43dd11037657bd4e81`):
+  proof 1.3 and both strict-order conclusions in 2.1 infer $m<n$ from
+  $n=m+j$ and $j\ne0$ without showing the required $m\ne n$. The conclusion
+  is true: if $m+j=m=m+0$, commutativity and published
+  `lem-nat-add-cancellative` give $j=0$, a contradiction. Add this derivation
+  once and cite it at each use, then check direct consumers. All necessary
+  suppliers are already published; no Phase-2 dependency is needed. This is
+  an item-specific proof-completeness finding, not a counterexample.
+- `thm-recursion` (raw SHA-256
+  `f94afd7ad48ea0267245bd4bd88d63c94da9c3fd70f83b0d6d976aa06ddc8e71`):
+  Fact L1 attributes induction for an arbitrary Peano system $N$ to
+  `thm-induction-principle`, whose Statement is about $\omega$. The already
+  declared published `def-peano-system` axiom P3 supplies precisely the
+  induction used in proof 2.1, 5.1 and 6.1. Correct L1's source attribution
+  and reassess the now-redundant theorem dependency; the construction and
+  uniqueness argument remain valid. No Phase-2 supplier is needed.
+- `lem-of-naturals-positive` (raw SHA-256
+  `aa86d0261f064b0cf6fba826d10df6937adf76556d9688ea660709fca232e453`):
+  proof 1.4 and 2.3 use natural addition associativity, the multiplication
+  recursion $m(n+1)=mn+m$, and induction, but frontmatter `deps` records only
+  ordered-field suppliers. Add the direct published natural-arithmetic and
+  induction suppliers (`def-nat-addition`, `def-nat-multiplication`,
+  `lem-nat-add-associative`, `thm-induction-principle`) and their precise uses,
+  checking canonical order and direct consumers. The equations themselves
+  are sound. No Phase-2 supplier is needed.
+
+## Fraenkel socks remark: Jech–Sochor transfer scope — 2026-09-13
+
+Bounded owner review of published `rem-fraenkel-socks-model` (SHA-256
+`5a5e8f95f026163bef5468df6397143f7e964aae612d5b1b4ee95b144fc93040`)
+found one overbroad transfer claim in its Statement discussion: the First
+Embedding Theorem is said to preserve “any statement bounded in that segment.”
+An isomorphism of the carried hierarchy does not transfer arbitrary
+atom-sensitive formulas into pure ZF: two distinct atoms may both have no
+members in ZFA, whereas pure ZF has only one empty set. The specific socks
+conclusion is sound, but its transfer needs a typed certificate for the
+designated family of pairs and its no-choice property, followed by the
+existential consequence. In Phase 3, replace the universal sentence with this
+restricted account, using the new draft suppliers
+`thm-jech-sochor-first-embedding`,
+`thm-jech-sochor-transfer-for-boundable-sentences`, and
+`lem-jech-sochor-socks-transfer-is-uniformly-formalizable` only after their
+publication; audit direct published consumers for reliance on the broad
+wording. This is a new A-P item-specific prose finding, not a finding that the
+consistency statement is false. The published item was not edited.
+
+## Geometric Hahn–Banach separation choice chain — 2026-09-13
+
+On published page `geometric-hahn-banach-and-convex-separation`, direct review
+confirmed four choice-interface defects. All four suppliers/items are already
+published; no new Phase-2 pair is needed.
+
+- `thm-separation-of-an-open-convex-set-and-a-point` (SHA-256
+  `4fc51abc14acbf66f6a6eabc217af079197569ee3e196a7634463bcd088ca2a8`)
+  states AC and uses the AC-bearing dominated Hahn–Banach extension in proof
+  2.1, but its direct `deps` omit published `def-axiom-of-choice`. Add the
+  direct axiom edge and audit its consumers. This is a new direct A-P finding
+  from owner reading of the group-c supplier chain.
+- `thm-separation-of-disjoint-convex-sets-one-open` (SHA-256
+  `89c6b8b64f2b49b43d54193c7bd23f15c2b760bc11f2f7f07701f3a327524e03`)
+  has an unconditional Statement, while proof 2.1 invokes the preceding
+  AC-stated separation theorem. Either state and declare AC or replace that
+  step by an adequate published relative-HB argument and state its exact
+  hypothesis. The current proof is not licensed as unconditional.
+- `cor-closed-convex-set-is-an-intersection-of-closed-half-spaces` (SHA-256
+  `20cc842f6a948fc22cf04d9efa7705447467f0c589d35c677d272d105430ba41`)
+  states its result unconditionally and uses the preceding AC-bearing
+  separation theorem in proof 1.2. Reopen its earlier bounded no-repair-needed
+  receipt as A-P for this independent assumption-propagation finding; qualify
+  its hypothesis and propagate it to consumers, or supply an exact relative-HB
+  route. The earlier scan's bounded conclusion is retained as history, not
+  treated as a current closure of this new defect.
+- `thm-mazur-weak-and-norm-closure-of-convex-sets` (SHA-256
+  `51ddfc82c44f2ef0542e76c3634ee46c484e927c0fce9358f4b4ece477866405`)
+  states the weak/norm closure equality unconditionally but proof 1.2 invokes
+  the same AC-bearing separation theorem. Add and propagate the exact choice
+  hypothesis, or replace the chain with a supplied relative-HB proof.
+
+The published axiom supplier is `def-axiom-of-choice` (SHA-256
+`9c045248c142fcf687fdc3c5d25d8b3890ac08d1eca8b4e6d71bb00a4eb6ff58`).
+The group-c source finding and exact cited proof steps are in
+`research/phase-2-next-21-step3b-c.md`; the owner reread the four published
+files and the immediate separation supplier. These are bounded
+assumption-interface audits, not full proof rejudgments. The current run's
+FA-10 items use separately stated relative-HB suppliers and do not depend on
+this defective chain. No published item was edited.
+
+## Meagre sigma-ideal Countable Choice interface — 2026-09-13
+
+`prop-meagre-subsets-form-a-sigma-ideal` on published page
+`complete-metrizability-and-baire` (current item SHA-256
+`6dced923c4759e0dcebdd8a63f63f1a3ce007491223b712f231b62c58089227e`)
+states Countable Choice as a hypothesis but omits `def-countable-choice` from
+its direct dependencies. Its proof 2.1 says only to flatten countably many
+countable covers; the missing step is to choose one witnessing sequence of
+nowhere dense sets for each member of the countable family. This is a
+confirmed prerequisite and proof-detail defect, classified A-P after direct
+statement, proof and frontmatter review. The published supplier
+`def-countable-choice` is already available (SHA-256
+`f2eae5f2bbc369965aa20105bd55319557a4b74781d9a26c9122ca03a76c3183`);
+no new Phase-2 item or pair is needed. Add the direct choice dependency and
+write the countable selection and flattening as an item-specific proof. Audit
+the two direct published consumers,
+`prop-open-and-residual-subspaces-of-baire-spaces` and
+`cor-nowhere-differentiable-functions-are-residual-in-c01`, for propagation of
+the assumption. Bounded owner review of these two direct consumers confirms:
+
+- `prop-open-and-residual-subspaces-of-baire-spaces` (SHA-256
+  `5400520894c5326955453e4c380079b8d4151048c17b01007260a5e41be81a60`)
+  states its residual-subspace conclusion unconditionally, while proof 2.1
+  explicitly uses the Countable-Choice-stated sigma-ideal theorem. State
+  `AC_omega` for the affected conclusion, add direct `def-countable-choice`,
+  and expand the residual-subspace argument; the open-subspace clause may be
+  retained without the added assumption if separately proved. New A-P.
+- `cor-nowhere-differentiable-functions-are-residual-in-c01` (SHA-256
+  `c8a26684a688c068967fc9c9c99a4fe2fb46247bea7e695efb1e54d0e15b3641`)
+  already assumes DC, which implies `AC_omega` by published
+  `thm-choice-implies-dependent-implies-countable-choice`. Its proof 2.1
+  consumes the sigma-ideal theorem and proof 2.1 also cites a DC-stated
+  density theorem, but its direct dependencies declare neither
+  `def-dependent-choice` nor the implication supplier. Add those direct
+  dependencies and make the DC-to-Countable-Choice use explicit before the
+  sigma-ideal application; revalidate after the supplier repair. New A-P
+  interface finding, not a claim that the conclusion is false.
+
+The source finding is
+`research/phase-2-next-21-step3b-d.md`. No published content was edited.
+
+## Current-run published choice-interface confirmations — 2026-09-13
+
+Bounded owner reread of `thm-vector-fields-form-a-lie-algebra` (SHA-256
+`d023fe3eba6a4727dbe0b7a6211a25efd4092b1f938874934cc2473c904b8535`)
+confirms an independent choice-interface defect. Its Statement has no choice
+qualification, but proof 1.1 invokes
+`thm-derivations-of-smooth-functions-are-smooth-vector-fields` (SHA-256
+`3fc4b4269d0357cd723f6e0052dba94b27363ca2529a352c0a9dfd2712315082`),
+whose direct dependencies include
+`def-smooth-vector-field-as-a-tangent-bundle-section` (SHA-256
+`f164b78ec29cded07a8edcdd83a8047c62ea1cea893e3f5b8665952a04ce494c`),
+which explicitly assumes `AC_omega` for the canonical smooth tangent bundle.
+The finite operator-commutator Jacobi calculation in proof 1.3 is correct;
+the earlier bounded-clear row reviewed that algebra, not this axiom interface.
+Repair the published theorem by declaring `AC_omega` and the direct
+`def-countable-choice` edge and auditing consumers, or prove its full
+smooth-field closure independently of the AC-stated supplier. New A-P from
+the prior bounded-clear disposition; no new Phase-2 pair. Current selected
+`thm-first-bianchi-identity` can avoid the conditional published theorem by
+proving the finite local commutator/Jacobi calculation directly from its
+already supplied bracket, with local coordinate closure for the given fields.
+This is a bounded dependency review, not a whole published closure audit.
+Originating finding: `research/phase-2-next-21-step3b-a.md`; helper cross-check:
+`research/phase-2-next-21-step3b-helper-a-3-curvature-pages.md`.
+
+Independent Step-3b review confirmed two further published choice-interface
+defects on page `vector-fields-flows-and-lie-derivatives`. The published
+`thm-compactly-supported-vector-fields-are-complete` (SHA-256
+`50443a6823852eca6ca90c4e335ec7c27bea9f7e0e52b8cd13e491dd700702e0`)
+states completeness unconditionally, but its direct `deps` include
+`def-smooth-vector-field-as-a-tangent-bundle-section` (SHA-256
+`f164b78ec29cded07a8edcdd83a8047c62ea1cea893e3f5b8665952a04ce494c`),
+which explicitly assumes `AC_omega` for the smooth tangent-bundle structure.
+Its proof's finite-endpoint extension also uses the published flow theorem;
+the compact-support argument is otherwise sound in this bounded review.
+The direct published consumer
+`cor-every-smooth-vector-field-on-a-compact-manifold-is-complete` (SHA-256
+`d9081f94558ee42590f76e1f6246307abecfe498e51188ae89f8ce478e16fedb`)
+states its corollary unconditionally and uses the preceding theorem in proof
+2.1. Both items need an explicit `AC_omega` statement, direct published
+`def-countable-choice` supplier (SHA-256
+`f2eae5f2bbc369965aa20105bd55319557a4b74781d9a26c9122ca03a76c3183`),
+and a bounded consumer-impact audit. These are two new A-P findings; all
+suppliers are already published, and no new Phase-2 pair is needed. Current
+draft action-angle and compact-fibre proofs are actual consumers of the
+corollary and must carry the premise or supply an unconditional local route.
+Exact paths and limits are in
+`research/phase-2-next-21-independent-cert-a.md`. No published file was
+edited.
+
+The same independent audit confirmed a separate **proof error** in published
+`thm-fundamental-theorem-on-flows` on
+`vector-fields-flows-and-lie-derivatives` (SHA-256
+`199df412bfa4464b0ddf31bb9ef9f7d4ac9feb83787c0dd2bff3f84028bab4a2`).
+Proof 2.1 defines
+$t_0=\inf\{t\in\mathbb R:(t,p_0)\notin W\}$ with $W\subseteq\mathcal D$.
+If the maximal interval $I_{p_0}$ has a finite lower endpoint, every earlier
+time lies in this set, so its infimum is $-\infty$, contrary to the next
+claim that $t_0\in I_{p_0}$. Even when $I_{p_0}$ is unbounded below, this
+global infimum is not shown to be the first bad time on the chosen positive
+segment. The instruction to replace a negative bad $\tau$ by
+$-\tau$ does not preserve badness. Proof 3.1's piecewise first branch also
+lacks a common nearby-point domain. Repair the published proof by taking the
+first bad parameter along the supplied segment from $0$ to $\tau$ (use
+$\lambda\in[0,1]$), then compose the smooth local flow at a nearby earlier
+good time with $\Phi(t_1,\cdot)$ on one product neighbourhood; uniqueness
+and maximality give the needed common domain and contradiction for either
+sign of $\tau$. This is the standard good-time open/closed continuation in
+Merry, *Differential Geometry*, Theorem 9.10 proof, pp. 69–70
+(https://www2.math.ethz.ch/will-merry/files/Merry%20-%20Differential%20Geometry%20(2021).pdf).
+The local-existence, uniqueness and maximal-integral-curve suppliers are
+already published; no new Phase-2 pair is needed. This is a new A-P finding,
+bounded to the exact failed continuation step; it does not assert the flow
+theorem's conclusion is false. Current draft consumers may use the correct
+statement, while published proof repair remains pending. Exact independent
+check is in `research/phase-2-next-21-independent-cert-a.md`.
+The same theorem also has a separate assumption-interface obligation:
+its unconditional smooth-field premise reaches the published
+`prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components`
+through its direct local-existence supplier, then the `AC_omega`-conditional
+smooth-vector-field definition above. At repair, declare the choice premise
+and direct `def-countable-choice` edge as well as fixing the continuation
+proof; do not close this one A-P row after only one of those repairs.
+
+`lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed`
+on published page `vector-fields-flows-and-lie-derivatives` (SHA-256
+`2831f096aa2d174cb548e84625c588643404a29838086d1178c663cec9417e76`)
+was an existing U-P assumption-impact candidate. Direct proof review now
+confirms a choice-edge defect: proof 2.1 invokes the published smooth
+partition-of-unity theorem to glue a chart-indexed family, and proof 4.1
+invokes the published smooth Urysohn theorem. Its global clause additionally
+uses the tubular-neighbourhood theorem. These selected suppliers require or
+inherit Countable Choice, while the lemma's Statement and direct dependencies
+do not declare `def-countable-choice`. Move its one index row to A-P. State
+`AC_omega` for the affected construction, add the direct published supplier,
+and audit consumers; the current Phase-2 induced-connection item supplies its
+own point-local extension and does not consume this lemma. The partition
+theorem's existing A-P defects remain open. Exact originating evidence:
+`research/phase-2-next-21-step3b-a.md`. No new Phase-2 pair is required.
+
+`thm-nakayama-lemma` on published page
+`localisation-of-modules-and-support` (SHA-256
+`f1cdb55dbc8959c515e6f7c17b488dcb07651aacb3089f6385c7e032451e72e8`)
+explicitly assumes the Axiom of Choice but omits published
+`def-axiom-of-choice` (SHA-256
+`9c045248c142fcf687fdc3c5d25d8b3890ac08d1eca8b4e6d71bb00a4eb6ff58`)
+from `deps`. This is a confirmed direct dependency defect, new A-P after
+statement, proof and frontmatter review. Add the direct edge and audit
+consumers for the AC-bearing branch. The theorem's two-line determinant
+argument is not claimed false; the current Brauer author uses a separate
+finite-dimensional argument. Exact originating evidence:
+`research/phase-2-next-21-step3b-b.md`. No new Phase-2 pair is required.
+One direct published consumer, `cor-nakayama-generators-modulo-an-ideal`
+(SHA-256 `3f6e437caff1de40d7374ab907ea9ed802641bda14a876a59cb777ae9c1a20f7`),
+also states AC and invokes the AC-stated Nakayama theorem in proof 2.1, but
+its direct dependencies omit `def-axiom-of-choice`. A bounded owner review
+confirms this separate direct-edge defect: add the published axiom supplier,
+then revalidate against the repaired Nakayama theorem. It is new A-P; the
+remaining direct consumers are not cleared by this one-item audit.
+Its direct published consumer `cor-minimal-generators-over-a-local-ring`
+(SHA-256 `2247184a9b6e7fdca8051e1394cd98f4384e11e7a71564fb77322f2a05999544`)
+also states AC and uses the AC-stated generator-lifting corollary in proofs
+1.1 and 1.2, but likewise omits direct `def-axiom-of-choice`. Bounded owner
+review confirms a second downstream direct-edge defect: add the published
+axiom dependency and revalidate after its two Nakayama suppliers are repaired.
+This is new A-P; deeper consumers remain unaudited by this bounded pass.
+
+Further bounded owner review of three direct published consumers confirms:
+
+- `lem-depth-infinity-when-ideal-acts-surjectively` (SHA-256
+  `e74bec226a8b447788fb2f77c20c0472b766570ed911093ca9055bb6f4517d56`)
+  keeps its first depth-convention clause choice-free and explicitly assumes
+  AC for its local nonzero-module clause. Proof 2.1 invokes AC-stated
+  `thm-nakayama-lemma`, but direct dependencies omit published
+  `def-axiom-of-choice`. Add that edge for the second clause and revalidate
+  after the Nakayama repair. New A-P; the first clause is not challenged.
+- `lem-local-koszul-acyclicity-inductive-converse` (SHA-256
+  `448b16aa5e4b9987e778180e0b28aa74aa342388622da0b457a9d50fdaf2d436`)
+  states its local acyclicity converse unconditionally, while proof 2.1 uses
+  the AC-stated Nakayama theorem to kill each positive homology module.
+  State and declare AC for this proof route, or replace it with a sufficient
+  published choice-free Nakayama supplier, then audit its consumers. New A-P.
+- `lem-projective-dimension-from-last-nonzero-betti-number` (SHA-256
+  `bbc9080244fcf5dbf21556341b4b01bed429a2e739f71d96fdebf7cd4e186aa4`)
+  has unconditional conclusions, but its Facts say "We work with the Axiom
+  of Choice" and proof 1.1 invokes both AC-stated `thm-nakayama-lemma` and
+  AC-stated `lem-finite-local-modules-admit-minimal-free-resolutions` (SHA-256
+  `05265101003640ff777f6cb2ad2410bc6557dd775e133b0980872678c4cc073f`).
+  Qualify the Statement, add direct `def-axiom-of-choice`, and revalidate
+  those two exact suppliers. Promote its existing U-P impact candidate to
+  A-P for this bounded direct assumption-interface finding; the older Tor
+  reconciliation remains open separately.
+
+All named suppliers in these three findings are published. No new Phase-2
+pair is needed and no published file was edited.
+`thm-krull-schmidt-for-finite-dimensional-kg-modules` is already A-P for
+its separate composition-series choice interface; the group-b read confirms
+that existing finding without creating a duplicate row. No published content
+was edited in this reconciliation.
+
+A further bounded owner review found the same missing direct axiom edge in
+`cor-parameter-ideal-multiplicity-positive` (SHA-256
+`9d7fa2e5c486001ba488f8dd95a2f9a4cb2635c3f5b44afdcd6c1b38140d3b4a`).
+Its Statement and Facts explicitly assume AC, and proof 1.2 invokes the
+AC-stated published `cor-nakayama-generators-modulo-an-ideal` to show that
+$M/I^{n+1}M$ is nonzero. Its frontmatter declares that supplier but omits
+published `def-axiom-of-choice`. Add the direct axiom edge and revalidate
+after the Nakayama supplier repair; the positivity argument is not alleged
+false. Both suppliers are already published, so no Phase-2 pair is needed.
+This is a direct assumption-interface audit of this one proof, not a full
+transitive audit; no published item was edited. New A-P.
 
 ## Step-5b cross-batch audit and in-window published-repair verification — 2026-09-12
 
@@ -29197,15 +29506,45 @@ interfaces suffice and the live full-AC connection proof gives the needed local
 argument, so no new pair or current blocker results. Exact evidence:
 `research/phase-2-next-20-published-boundary-partition-audit.md`.
 
+### PBW confluence proof review — 2026-09-13
+
+Bounded owner review of published
+`thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra` (SHA-256
+`4229c730cb27d9bf211ae459dfe92acb6e6a6a6390109822d00163a0d5d768a4`):
+proof 1.1 establishes termination, and proof 1.2 calculates the disjoint and
+three-letter critical pairs, but then asserts unique normal forms without
+proving the terminating-local-confluence implication for this linear
+rewriting system or citing an adequate earlier supplier. Proof 2.1 uses that
+unsupported uniqueness to establish independence. The claim is standard and
+no counterexample is alleged. Etingof, *Lie Groups and Lie Algebras I*,
+Lecture 11, §11.2, printed pp. 60–62,
+https://math.mit.edu/~etingof/lnlg.pdf, supplies the missing well-defined
+linear normal-form construction with the adjacent-transposition and Jacobi
+checks. Repair the published proof by adding a complete confluence/normal-
+form induction or importing a proved Diamond-lemma supplier, then revalidate
+its published consumers. Group a-2's new local PBW independence lemma is a
+separate draft supplier and does not silently repair this published item.
+This is a new A-P proof-completeness finding; no published file was edited.
+
+The same bounded review read published
+`def-universal-enveloping-algebra-as-a-tensor-quotient` (SHA-256
+`8bbcc86a1cfb81edd881321c4802d3a3abdf913a263b7b04d423cbe64a8f9497`).
+Its tensor quotient and generated ideal are mathematically well defined;
+the empty `deps` list is only an implicit-supplier metadata omission in this
+definition. Under the classification rule that correct implicit use of an
+adequate published supplier is not itself defect debt, its earlier bounded
+clear disposition remains unchanged. The new pair declares its own exact
+dependencies.
+
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,941 unique
+subsequently reconciled published IDs. It currently contains **2,954 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-12 from item front matter, has **16,555 published items**. All
-2,941 indexed IDs are published; **13,614 published items remain outside this
+2,954 indexed IDs are published; **13,601 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -29214,14 +29553,13 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1370 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1365 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 315 | Recorded direct review and an unresolved item-specific repair. |
+| A-R | Audited and repaired items | 190 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 326 | Recorded direct review and an unresolved item-specific repair. |
 
-1,078 further reference-pool items have bounded no-repair-needed dispositions
-below, outside these four active defect classes. Thus the four queues contain
-1,871 items and the expanded reference pool contains 2,949 unique items.
+Bounded no-repair-needed dispositions appear below, outside these four active
+defect classes. The four queues currently contain 1,881 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29518,7 +29856,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `def-nat-finite-sum-and-product` | Frontier-22 natural finite-sum audit 2026-09-11: product-valued recursion defines natural sums/products, empty values and the unique truncated difference without selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-finite-sum-audit.md`. |
 | `lem-nat-finite-sum-laws-and-the-canonical-embedding` | Frontier-22 natural finite-sum audit 2026-09-11: induction proves the natural finite laws and zero cases, and the canonical real embedding preserves both operations and strict order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-finite-sum-audit.md`. |
 | `def-nat-order` | Frontier-22 natural-order audit 2026-09-11: the additive existence-of-a-gap relation coherently defines nonstrict and strict natural order; later theorems supply its advertised properties. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
-| `lem-nat-trichotomy` | Frontier-22 natural-order audit 2026-09-11: induction over the second argument proves exhaustive comparison, while cancellation and nonzero-successor arithmetic make the cases disjoint. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
 | `thm-nat-linear-order` | Frontier-22 natural-order audit 2026-09-11: zero gaps, concatenated gaps and cancellation prove reflexivity, transitivity and antisymmetry; the independent trichotomy lemma supplies totality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
 | `lem-nat-discrete` | Frontier-22 natural-order audit 2026-09-11: a nonzero additive gap is a successor and conversely, proving `m<n` iff `sigma(m)<=n` and excluding intermediate naturals. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
 | `lem-nat-order-is-membership` | Frontier-22 natural-order audit 2026-09-11: induction from additive order proves strict order equals von Neumann membership and nonstrict order equals inclusion without circularity. Its old U-P label tracked only a page prerequisite; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
@@ -29527,14 +29864,12 @@ The separate page-header cutover obligations remain in their category sections.
 | `lem-of-no-zero-divisors` | Frontier-22 field-contract audit 2026-09-11: multiplying `ab=0` by the inverse of a nonzero first factor gives the second factor zero under the current total multiplication contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `lem-of-mult-cancel` | Frontier-22 field-contract audit 2026-09-11: multiplying `ac=bc` by the inverse of the nonzero common factor and using associativity proves cancellation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `def-archimedean-field` | Frontier-22 Archimedean-core audit 2026-09-11: cofinality is exactly the quantified canonical-natural condition, and the reciprocal remark follows from the published positive-inverse order law. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
-| `lem-of-naturals-positive` | Frontier-22 Archimedean-core audit 2026-09-11: induction proves positivity/successor growth, while separate inductions prove compatibility with natural addition and multiplication. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
 | `thm-of-archimedean` | Frontier-22 Archimedean-core audit 2026-09-11: the supremum-minus-one contradiction proves cofinality without choice. Its old U-P label was a supplier-impact tag from an unrelated repaired counterexample, not an item defect; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
 | `cor-archimedean-reciprocal` | Frontier-22 Archimedean-core audit 2026-09-11: apply cofinality to the positive inverse and reverse the strict positive inequality to obtain `1/n<epsilon`; all inverses are defined. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
 | `def-injection-surjection-bijection` | Frontier-22 countability-core audit 2026-09-11: the three predicates match the function/image contracts; inverse claims use unique preimages and explicitly exclude arbitrary-surjection right inverses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `def-countable` | Frontier-22 countability-core audit 2026-09-11: finite, countably infinite, at-most-countable and uncountable are coherent under the stated convention, including the empty set. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `lem-countable-iff-surjection-from-n` | Frontier-22 countability-core audit 2026-09-11: a finite nonempty bijection extends by one fixed value, and a supplied surjection gives the canonical least-preimage injection without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `lem-subset-of-countable` | Frontier-22 countability-core audit 2026-09-11: bounded natural subsets are finite by strong induction; successive least elements give a choice-free bijection from the naturals onto each unbounded subset. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
-| `thm-recursion` | Frontier-22 finite-sum/recursion audit 2026-09-11: the least closed relation is set-sized, induction proves totality, deletion proves functionality, and induction proves uniqueness without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `def-finite-sum` | Frontier-22 finite-sum/recursion audit 2026-09-11: product-valued recursion carries the running index, induction identifies it, and recursion uniqueness defines real finite sums/products including empty values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `lem-finite-sum-laws` | Frontier-22 finite-sum/recursion audit 2026-09-11: universal property induction and trailing-length induction prove additivity, scaling, splitting, monotonicity, telescoping and product laws with all zero cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `def-interval` | Frontier-22 finite-sum/recursion audit 2026-09-11: the nine forms have the stated convexity, boundedness and degeneracy; midpoint and explicit unboundedness witnesses handle the nontrivial clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
@@ -29573,7 +29908,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `def-lie-bracket-of-smooth-vector-fields` | Frontier-22 vector-field bracket audit 2026-09-11: the definition correctly introduces the operator commutator and explicitly defers vector-field closure to the following results. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `lem-the-commutator-of-vector-field-derivations-is-a-derivation` | Frontier-22 vector-field bracket audit 2026-09-11: two Leibniz expansions cancel the mixed first-order terms and leave exactly the derivation rule. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `thm-derivations-of-smooth-functions-are-smooth-vector-fields` | Frontier-22 vector-field bracket audit 2026-09-11: the repaired manifold bump globalizes germs and coordinate functions near one point; their images under the derivation are smooth local coefficients and give the unique inducing field. U-P to bounded clear after resolving the historical bump impact. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
-| `thm-vector-fields-form-a-lie-algebra` | Frontier-22 vector-field bracket audit 2026-09-11: derivation closure and the finite operator-commutator identities prove closure, bilinearity, antisymmetry and Jacobi. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `prop-leibniz-rules-for-the-lie-bracket-with-function-multiples` | Frontier-22 vector-field bracket audit 2026-09-11: direct action on a test function gives both displayed function-multiple formulas; tangent derivations detect equality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `def-dual-and-hom-vector-bundles` | Frontier-22 dual/Hom audit 2026-09-11: the fibrewise dual and linear-map sets are coherent, and the definition explicitly defers their smooth structures to the following theorem. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
 | `def-vector-bundle-chart-and-transition-function` | Frontier-22 dual/Hom audit 2026-09-11: overlap maps have the stated orientation `v_beta=g_(beta alpha)v_alpha`, which gives the audited inverse-transpose and conjugation formulas. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
@@ -29925,7 +30259,6 @@ owner's scan policy.
 | `cor-cohen-macaulayness-localises` | 2026-09-09 scan, Sol 2: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-closed-family-irreducible-equal-dimensional-fibres` | 2026-09-09 scan, Sol 2: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-cohen-macaulay-modules-have-no-embedded-associated-primes` | 2026-09-09 scan, Sol 1: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
-| `cor-closed-convex-set-is-an-intersection-of-closed-half-spaces` | 2026-09-09 scan, Sol 1: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded` | 2026-09-09 scan, Sol 1: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cex-strong-maximum-principle-needs-connectedness` | 2026-09-09 scan, Sol 3: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-canonical-process-realizes-consistent-finite-dimensional-laws` | 2026-09-09 scan, Sol 2: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
@@ -30416,6 +30749,30 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `rem-fraenkel-socks-model` | Bounded owner review 2026-09-13: the Statement discussion overstates Jech–Sochor by claiming transfer of any statement bounded in the carried hierarchy. Replace with the typed pair-family no-choice certificate and existential consequence; audit direct consumers for the general wording. The socks consistency conclusion remains sound. New A-P; exact hash and scope in “Fraenkel socks remark: Jech–Sochor transfer scope” above. |
+| `lem-nat-trichotomy` | Independent Sol xhigh proof-body review 2026-09-14: steps 1.3 and 2.1 omit the nonzero-addend proof needed for strict inequality. Use existing published commutativity and `lem-nat-add-cancellative` to show `m+j=m` forces `j=0`; cite the argument at each use and audit direct consumers. Earlier Frontier-22 bounded clear remains historical. Exact hash and scope are in “High-impact arithmetic spine follow-up” above. |
+| `thm-recursion` | Independent Sol xhigh proof-body review 2026-09-14: L1 cites induction on omega for an arbitrary Peano system. Repoint to axiom P3 of already-declared published `def-peano-system`, reassess the redundant theorem dependency, and audit direct consumers. Earlier Frontier-22 bounded clear remains historical. Exact hash and scope are above. |
+| `lem-of-naturals-positive` | Independent Sol xhigh proof-body review 2026-09-14: Steps 1.4 and 2.3 use published natural-addition, multiplication and induction laws missing from `deps`. Add exact published supplier edges and fact uses, verify canonical order, and audit direct consumers. The equations remain sound. Earlier Frontier-22 bounded clear remains historical. Exact hash and scope are above. |
+| `thm-vector-fields-form-a-lie-algebra` | Bounded owner review 2026-09-13: unconditional smooth-field closure in proof 1.1 invokes the derivation-to-vector-field supplier, whose direct smooth-vector-field definition explicitly assumes `AC_omega`. Declare the choice interface and `def-countable-choice`, or give a complete choice-free closure proof; audit consumers. The finite Jacobi identity itself is sound. New A-P from prior bounded algebraic clear; exact hashes and limited scope in “Current-run published choice-interface confirmations” above. |
+| `thm-compactly-supported-vector-fields-are-complete` | Independent bounded choice-interface review 2026-09-13: unconditional Statement and direct smooth-field definition dependency, whose canonical tangent-bundle structure requires `AC_omega`. Declare/count the exact premise with `def-countable-choice`, then audit consumers; compact-support extension argument remains sound in this limited review. New A-P; exact item and supplier hashes in “Current-run published choice-interface confirmations” above. |
+| `cor-every-smooth-vector-field-on-a-compact-manifold-is-complete` | Independent bounded review 2026-09-13: unconditional Statement and proof 2.1 directly invoke the preceding AC_omega-dependent compact-support theorem. Declare `AC_omega` and its direct axiom edge, then audit action-angle and other consumers. New A-P; exact hash and path above. |
+| `thm-fundamental-theorem-on-flows` | Independent bounded proof review 2026-09-13: proof 2.1 takes a global infimum of times outside the good set W; if the maximal interval has a finite lower endpoint the set is unbounded below, and otherwise no first bad time on the chosen segment is established. Restrict to a first bad parameter on the 0-to-tau segment and compose the local flow from a preceding good time on a common product neighbourhood; repair proof 3.1's domain argument. The local-existence supplier also reaches the AC_omega-conditional smooth-field definition while the statement is unqualified; declare `def-countable-choice`. Both obligations remain in this one A-P row. Published suppliers suffice; no new pair. Exact SHA, source and repair above. |
+| `thm-separation-of-an-open-convex-set-and-a-point` | Direct review 2026-09-13: Statement assumes AC; direct dependencies omit published `def-axiom-of-choice` while proof 2.1 spends dominated Hahn–Banach. Add the axiom edge and audit consumers. Existing U-P to A-P; no new pair. Exact hashes and scope: “Geometric Hahn–Banach separation choice chain” above; origin `research/phase-2-next-21-step3b-c.md`. |
+| `thm-separation-of-disjoint-convex-sets-one-open` | Group-c and owner direct review 2026-09-13: unconditional Statement, proof 2.1 invokes AC-stated open-convex-point separation. Qualify and declare AC or provide an exact relative-HB proof, then propagate. Existing U-P to A-P; no new pair. Exact evidence: “Geometric Hahn–Banach separation choice chain” above. |
+| `cor-closed-convex-set-is-an-intersection-of-closed-half-spaces` | Group-c and owner direct review 2026-09-13: unconditional Statement, proof 1.2 invokes the AC-bearing disjoint-convex separation. Reopened from earlier bounded clear for this independent choice-interface finding. Qualify/propagate or use a proven relative-HB route; no new pair. Exact evidence: “Geometric Hahn–Banach separation choice chain” above. |
+| `thm-mazur-weak-and-norm-closure-of-convex-sets` | Group-c and owner direct review 2026-09-13: unconditional Statement, proof 1.2 invokes AC-bearing disjoint-convex separation. Qualify/propagate or supply a relative-HB proof. Existing U-P to A-P; no new pair. Exact evidence: “Geometric Hahn–Banach separation choice chain” above. |
+| `lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed` | Group-a direct review 2026-09-13 confirms undeclared `AC_omega` through chart gluing and the smooth Urysohn/global clause. State and depend on published `def-countable-choice`, then audit published consumers. Existing U-P candidate promoted to A-P; no new Phase-2 pair. Exact hashes and supplier map: “Current-run published choice-interface confirmations” above; origin `research/phase-2-next-21-step3b-a.md`. |
+| `thm-nakayama-lemma` | Group-b direct review 2026-09-13 confirms that the published theorem states AC but omits direct `def-axiom-of-choice`. Add that published dependency and audit AC-bearing consumers. New A-P; no new Phase-2 pair. Exact hashes and source evidence: “Current-run published choice-interface confirmations” above; origin `research/phase-2-next-21-step3b-b.md`. |
+| `cor-nakayama-generators-modulo-an-ideal` | Bounded owner review 2026-09-13: Statement assumes AC and proof 2.1 uses the AC-stated Nakayama theorem, but direct `def-axiom-of-choice` is absent. Add the published axiom edge and revalidate after supplier repair. New A-P. Exact hash and scope: “Current-run published choice-interface confirmations” above. |
+| `cor-parameter-ideal-multiplicity-positive` | Bounded owner review 2026-09-13: Statement assumes AC, proof 1.2 uses the AC-stated Nakayama generator-lifting corollary, but direct `def-axiom-of-choice` is absent. Add that published edge and revalidate after the Nakayama supplier repair. New A-P; exact SHA and scope above. |
+| `thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra` | Bounded owner review 2026-09-13: proof 1.2 resolves local critical pairs but omits the confluence/normal-form induction on which proof 2.1's independence depends. Add a complete linear rewriting argument or a proved Diamond-lemma supplier, then revalidate published consumers. New A-P; exact SHA, Etingof locator and limited review scope in “PBW confluence proof review” above. |
+| `cor-minimal-generators-over-a-local-ring` | Bounded owner review 2026-09-13: Statement assumes AC and proofs 1.1–1.2 use the AC-stated generator-lifting corollary, but direct `def-axiom-of-choice` is absent. Add the published axiom edge and revalidate after both Nakayama suppliers are repaired. New A-P. Exact hash and scope: “Current-run published choice-interface confirmations” above. |
+| `lem-depth-infinity-when-ideal-acts-surjectively` | Bounded owner review 2026-09-13: the AC-stated second clause uses AC-stated Nakayama in proof 2.1, but direct `def-axiom-of-choice` is absent. Add the edge and revalidate after supplier repair; first depth-convention clause remains choice-free. New A-P. Exact hash and scope: “Current-run published choice-interface confirmations” above. |
+| `lem-local-koszul-acyclicity-inductive-converse` | Bounded owner review 2026-09-13: unconditional Statement, proof 2.1 uses AC-stated Nakayama. Declare AC and add `def-axiom-of-choice` or supply an adequate choice-free route; audit consumers. New A-P. Exact hash and scope: “Current-run published choice-interface confirmations” above. |
+| `lem-projective-dimension-from-last-nonzero-betti-number` | Bounded owner review 2026-09-13: unconditional Statement but Facts assume AC, and proof 1.1 uses AC-stated Nakayama and minimal-resolution existence. Qualify and declare AC, then revalidate both exact suppliers. Existing U-P impact candidate promoted to A-P; prior Tor reconciliation stays open. Exact hashes and scope: “Current-run published choice-interface confirmations” above. |
+| `prop-meagre-subsets-form-a-sigma-ideal` | Direct review 2026-09-13: Countable Choice is stated but not declared; proof 2.1 omits the simultaneous witness selection. Add published `def-countable-choice`, expand the selection/flattening proof, and audit the two direct published consumers. No new Phase-2 pair. Exact evidence and hashes: “Meagre sigma-ideal Countable Choice interface” above; originating author handoff: `research/phase-2-next-21-step3b-d.md`. |
+| `prop-open-and-residual-subspaces-of-baire-spaces` | Bounded owner review 2026-09-13: proof 2.1 consumes the `AC_omega`-stated meagre sigma-ideal supplier while its residual-subspace conclusion is unconditional. Declare `AC_omega` and add `def-countable-choice`, or prove that clause independently; expand the proof and revalidate after supplier repair. New A-P. Exact hash and scope: “Meagre sigma-ideal Countable Choice interface” above. |
+| `cor-nowhere-differentiable-functions-are-residual-in-c01` | Bounded owner review 2026-09-13: DC is already stated, but direct `def-dependent-choice` and the DC-to-`AC_omega` implication supplier are missing while proof 2.1 consumes the Countable-Choice sigma-ideal theorem and a DC-stated density theorem. Add edges and explicit implication, then revalidate after supplier repair. New A-P. Exact hash and scope: “Meagre sigma-ideal Countable Choice interface” above. |
 | `thm-sine-and-cosine-parametrize-the-unit-circle` | Frontier-22 unit-circle audit 2026-09-11: proof 2.1 attributes exact fibre classification to a theorem that proves only zero sets and the least positive global common period. Add the published subtraction-formula supplier and derive `sin(s-t)=0`, `cos(s-t)=1`, hence `s-t` is an even multiple of `pi`. New A-P; four active consumers reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
 | `thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle` | Frontier-22 unit-circle audit 2026-09-11: continuity, descent, surjectivity and compact-Hausdorff closure are sound, but proof 3.1 directly invokes the affected parametrization injectivity clause. Revalidate after the same local subtraction-formula repair. New A-P impact; four active consumers reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
 | `def-weak-convergence-of-borel-probability-measures` | Frontier-22 Prokhorov audit 2026-09-11: the bounded-continuous-test definition and finite bound are correct, but the integrals use A-P integrable-function/integral machinery. Apply the common repair. New A-P impact; active use reported. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
@@ -30506,11 +30863,8 @@ owner's scan policy.
 | `thm-simple-indefinite-integral-is-a-measure` | Frontier-22 nonnegative-integral follow-up 2026-09-11: the finite weighted-measure calculation is sound after the simple integral is well defined, but the proof directly uses the affected arbitrary-representation foundation without the zero-complement repair. Install that finite refinement locally or upstream. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `thm-monotone-convergence-for-the-integral` | Frontier-22 nonnegative-integral follow-up 2026-09-11: its standard increasing-set/simple-minorant argument is sound after repair, but it load-bearingly uses the affected nonnegative-integral definition, simple-integral agreement, positive homogeneity and simple indefinite measure. U-P to A-P; same finite choice-free repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-integral-of-a-nonnegative-simple-function` | Frontier-22 nonnegative-integral audit 2026-09-11: the formula is standard, but its named well-definedness justification incorrectly treats arbitrary displays as covering partitions. Add zero-coefficient complement cells before the common refinement. U-P to A-P; finite choice-free repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
-| `lem-well-definedness-of-the-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: proof 1.1 asserts `E_i=disjoint_union_j(E_i intersection F_j)` for arbitrary simple representations even though a zero-valued region may be omitted from the `F_j`. Adjoin both union complements with coefficient zero, then take the finite common refinement. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
-| `prop-basic-properties-of-the-nonnegative-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: its finite refinement argument is repairable through the preceding lemma, but zero-scalar homogeneity writes `0*(+infinity)` when the simple integral is infinite, contrary to the global extended-real convention. State the zero case separately or define the local scalar action. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-nonnegative-lebesgue-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: taking the supremum of arbitrary simple-integral values relies on the affected representation-independence justification. Repair that finite zero-complement refinement; extended-real completeness itself is clear. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `prop-the-nonnegative-integral-agrees-with-the-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: its supremum argument is sound after the load-bearing arbitrary-representation well-definedness repair. Move the existing U-P row to A-P rather than duplicating it. No new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
-| `prop-order-and-scalar-rules-for-the-nonnegative-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: monotonicity and positive-scalar homogeneity are sound after the simple-integral refinement repair, but the claimed zero-scalar equation forms the globally undefined `0*(+infinity)` when the integral is infinite. Split off `integral(0f)=0` without that product or define a local scalar action. New A-P; active Solovay uses only monotonicity and strictly positive finite scalars, so a local restricted proof suffices. Exact hash/impact: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-relative-projectivity` | Frontier-22 choice-contract correction 2026-09-11: the relative-`1` comparison explicitly assumes AC and its basis/free-summand argument is mathematically sound, but the item contract omits `def-axiom-of-choice` despite the repository's specific rule 11 requiring every direct AC use to declare that dependency. Add the axiom and published basis supplier while retaining the exact qualification. Its active consumers either declare AC or use only the choice-free defining clause, so no current frontier blocker. Bounded clear to A-P with both earlier dispositions preserved as history; no new pair. Exact hashes/scope: `research/phase-2-frontier-22-published-choice-contract-reconciliation.md`. |
 | `def-integration-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11 corrects its initial same-day clear: defining `L^1(nu)=L^1(|nu|)` and the approximation integral requires `|nu|` to be a measure, but that exact supplier remains A-P for its countable partition-selection/supremum proof. Repair the upstream theorem by finite near-maximal partitions and partial sums; the remaining Cauchy/independence argument is sound. Active finite-complex-measure Fourier use was reported. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `prop-simple-integrals-are-bounded-by-total-variation` | Frontier-22 total-variation consumer audit 2026-09-11: the finite weighted-sum inequality is sound, but the proof invokes the already-A-P total-variation-measure theorem to integrate `|s|` and use monotonicity without inlining the finite-additivity bypass. Repair that supplier or prove its finite clauses locally. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
@@ -30525,7 +30879,6 @@ owner's scan policy.
 | `thm-doob-dynkin-lemma` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: proof 2.1 simultaneously selects a Borel lift for every rational threshold without a choice hypothesis. Add `def-countable-choice` and the rational indexing supplier. Proof 3.1 must also establish the special right-intersection identity `B_q=intersection_(r>q) B_r`; monotonicity alone does not imply its infimum-cut equality. U-C to A-P. Active kernel factorization supplies a local pointwise AC proof, so no current blocker/new pair. Exact hash, calculation and limits: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: proof 1.2 uses `g_(j+1)g_j^(-1)` on right Cayley edges, but the basis-letter increment is `g_j^(-1)g_(j+1)`; the edge `a -> ab` exposes the error. Correct the order, use distinct vertices to exclude adjacent cancellation and telescope the cyclic word to the identity. Existing Cayley/reduced-word/normal-form suppliers suffice. U-C to A-P; active HG proves this locally, so no current blocker/new pair. Alpha-d 5A 2026-09-11: the local alternative supplier `lem-hg-toolkit-free-cayley-tree-from-reduced-words` is now authored and reviewed (draft, not published) and is used by the toolkit's free-tree examples; the published item's own repair is unchanged and remains pending Phase 3. Exact hash/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `def-metric-topology` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: its unqualified neighbourhood means only an open set containing the point, conflicting with canonical `def-neighbourhood-top`, where arbitrary supersets of open sets are neighbourhoods. Rewrite as “open neighbourhood” or state the ball-base fact; the metric topology is sound. U-C to A-P; active locally convex work uses the canonical definition. Exact hashes/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
-| `def-complex-lp-and-euclidean-test-function-conventions` | Frontier-22 active-foundation follow-up 2026-09-11: for finite `p`, the displayed `N_p(f)=(integral |f|^p)^(1/p)` is applied to every measurable finite-valued complex function, although the integral may be `+infinity` and canonical `def-extended-reals` explicitly leaves exponentiation undefined. This makes `N_p` and the following membership predicate partial. Define `N_p=+infinity` in the infinite-integral case, or define the raw class by integral finiteness and its real norm afterward. Current Fourier/Schwartz consumers use finite-norm members and remain valid after stating this local convention, but the definition is load-bearing. Existing published power/integral interfaces suffice; no new pair. Exact hash/consumers/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `def-period-one-fourier-coefficients-partial-sums-and-convolution` | Frontier-22 active-foundation follow-up 2026-09-11: with no dependencies or proof, the definition asserts that general `L^1(T)` convolution exists a.e., is integrable and descends independently of representatives. Supply one-periodic Borel representatives, joint measurability, finite-square Tonelli/Fubini, periodic translation and quotient-descent calculations, with the applicable choice contract. The current Carleson theorem consumes only the sound coefficient/finite-partial-sum normalization, and the bounded Dirichlet-kernel convolution exists pointwise, so no Step-3 blocker/new pair. Exact hash/impact/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `lem-the-cohomology-universal-coefficient-extension-map` | Group-e UCT reconciliation 2026-09-11: target omits AC required by its free-cycle/boundary supplier and DC plus supplied-resolution data required by balanced Ext. Proof 2.1 does not prove descent, injectivity or naturality: for a cycle projection `pi`, changing `psi` by `g|B` changes `psi d` by `delta(g pi)`; conversely a primitive restricts to the required extension on cycles. Add AC and use the published PID-complex decomposition/projective-resolution interfaces, or state the exact balanced-Ext data and comparisons. U-C to A-P; draft singular UCT is not a published backward repair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
 | `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Group-e UCT reconciliation 2026-09-11: explicit AC is adequate for choice, but the proof directly uses the affected extension map and compresses the same kernel quotient. A zero-evaluation cocycle vanishes on cycles and factors through `d_n`; identifying coboundaries with restrictions from `Z_{n-1}` requires a cycle projection. Repair the preceding map, write this calculation and check naturality. U-C to A-P; no new pair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. Batch-4 Grothendieck Step 5A audit 2026-09-12 adds a second, distinct finding on the same item: published body line 27 assumes the Axiom of Choice and line 36 uses it for the free-submodule splitting, while `deps` omit `def-axiom-of-choice`. Owned consumers `prop-collapse-of-uct-or-kunneth-still-leaves-the-recorded-extension-problem`, `fs-collapse-of-the-uct-spectral-sequence-gives-a-natural-splitting` and the UCT example already declare AC; add the direct AC edge and re-audit the closure. Both findings stay open until repaired. Evidence: `research/phase-2-next-17-alpha-c-5a.md`. |
@@ -30746,6 +31099,10 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 
 | Published item | Repair evidence and scope |
 |---|---|
+| `def-complex-lp-and-euclidean-test-function-conventions` | Repaired 2026-09-13: the finite-`p` functional now assigns `+∞` directly when the nonnegative integral diverges and uses the real power only on finite values, making its membership predicate total. Focused rendercheck passes; the definition has no precheck proof block. No new supplier or judge. Exact hashes and scope: `research/phase-2-next-21-published-complex-lp-repair.md`; original finding: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
+| `prop-order-and-scalar-rules-for-the-nonnegative-integral` | Repaired 2026-09-13: positive-scalar homogeneity and the zero-function integral are stated separately; the proof declares and uses the simple-integral scaling supplier and avoids both undefined `0f` and `0·(+infinity)` expressions. Monotonicity is retained. Focused precheck, rendercheck and depcheck pass; no independent judge. Exact hashes and local scope: `research/phase-2-next-21-published-simple-integral-repair.md`; original finding: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `prop-basic-properties-of-the-nonnegative-simple-integral` | Repaired 2026-09-13 after its representation-independence supplier: the statement and proof separate the zero-scalar result from positive-scalar homogeneity, avoiding the globally undefined `0·(+infinity)` product. Common finite refinement supplies monotonicity and additivity. Focused precheck and rendercheck pass; no independent judge. Exact before/after hashes and local scope: `research/phase-2-next-21-published-simple-integral-repair.md`; original finding: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `lem-well-definedness-of-the-simple-integral` | Repaired 2026-09-13: both arbitrary simple representations are completed with measurable zero-coefficient complements before their finite common refinement. Equal coefficients on nonempty intersection cells and finite additivity establish representation independence, including infinite-measure zero cells. Focused precheck and rendercheck pass; depcheck exits 0 with unrelated warnings. No new Phase-2 supplier, no independent judge. Exact before/after hashes and scope: `research/phase-2-next-21-published-simple-integral-repair.md`; original finding: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. Downstream items with independent defects remain A-P. |
 | `ex-the-euclidean-levi-civita-connection` | Bounded prerequisite repair 2026-09-12: added the published affine-connection Leibniz-law and parallel-transport-definition suppliers at their exact proof uses; qualified the transport domain and invoked unique parallel-section identification. The Cartesian calculation and conclusion are unchanged. Focused precheck passes. No Phase-2 supplier; no independent verification stamp claimed. See the Euclidean Levi--Civita finding above. Step-5b cross-batch audit 2026-09-12: the affected published consumer `ex-hessian-and-divergence-in-euclidean-coordinates` was re-read at its [F2] use (Cartesian Christoffel symbols vanish) against the repaired file and remains licensed; no clause the consumer consumes was altered. |
 | `def-field` | Frontier-22 field-contract audit 2026-09-11: commit `369534ce2b43b80abc28fae2a5af336c2ae5457d` repaired the older multiplication clause by asserting associativity, commutativity and the unit law on all field elements, including zero; owner approval and the countermodel are recorded in the item. Exact before/after/current hashes and bounded scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `def-c-zero-and-ell-infinity` | Manifold-null/normalization audit 2026-09-11 restores A-R after dismissing the later complex-scalar concern under the adequate-implicit-use rule. The actual LUB repair remains in the current file; published complex-norm conventions and modulus laws prove its coordinatewise norm claims. Historical reopening retained; no second repair. Exact current hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
@@ -31001,7 +31358,6 @@ mathematical repairs. Evidence:
 | `cex-a-smooth-approximation-without-relative-control-destroys-prescribed-values` | UC34 supplier reconciliation 2026-09-09: Published direct-consumer assumption-impact candidate from the bounded scan in research/uc34-2026-09-09-smoothing-followups-astra-1.md. Review exact use of repaired Urysohn/absolute or relative Euclidean Whitney (now explicitly countable-choice); supplier is published, not pending Phase 2. Determine whether choice propagates, dependency is extraneous, or a local choice-free proof suffices. Not a confirmed defect or whole-proof audit. |
 | `fs-uniform-approximation-is-the-right-global-notion-on-every-noncompact-manifold` | UC34 supplier reconciliation 2026-09-09: Published direct-consumer assumption-impact candidate from the bounded scan in research/uc34-2026-09-09-smoothing-followups-astra-1.md. Review exact use of repaired Urysohn/absolute or relative Euclidean Whitney (now explicitly countable-choice); supplier is published, not pending Phase 2. Determine whether choice propagates, dependency is extraneous, or a local choice-free proof suffices. Not a confirmed defect or whole-proof audit. |
 | `thm-the-double-has-a-well-defined-smooth-structure` | UC34 supplier reconciliation 2026-09-09: Published direct-consumer assumption-impact candidate from the bounded scan in research/uc34-2026-09-09-smoothing-followups-astra-1.md. Review exact use of repaired Urysohn/absolute or relative Euclidean Whitney (now explicitly countable-choice); supplier is published, not pending Phase 2. Determine whether choice propagates, dependency is extraneous, or a local choice-free proof suffices. Not a confirmed defect or whole-proof audit. |
-| `lem-a-vector-field-along-an-embedded-submanifold-extends-to-a-neighbourhood-and-globally-when-closed` | UC34 supplier reconciliation 2026-09-09: Published direct-consumer assumption-impact candidate from the bounded scan in research/uc34-2026-09-09-smoothing-followups-astra-1.md. Review exact use of repaired Urysohn/absolute or relative Euclidean Whitney (now explicitly countable-choice); supplier is published, not pending Phase 2. Determine whether choice propagates, dependency is extraneous, or a local choice-free proof suffices. Not a confirmed defect or whole-proof audit. |
 | `lem-a-smooth-exhaustion-separates-the-locally-finite-chart-bands` | UC34 supplier reconciliation 2026-09-09: Published direct-consumer assumption-impact candidate from the bounded scan in research/uc34-2026-09-09-smoothing-followups-astra-1.md. Review exact use of repaired Urysohn/absolute or relative Euclidean Whitney (now explicitly countable-choice); supplier is published, not pending Phase 2. Determine whether choice propagates, dependency is extraneous, or a local choice-free proof suffices. Not a confirmed defect or whole-proof audit. |
 | `cor-smooth-functions-separate-points-from-closed-sets` | UC34 supplier reconciliation 2026-09-09: Published direct-consumer assumption-impact candidate from the bounded scan in research/uc34-2026-09-09-smoothing-followups-astra-1.md. Review exact use of repaired Urysohn/absolute or relative Euclidean Whitney (now explicitly countable-choice); supplier is published, not pending Phase 2. Determine whether choice propagates, dependency is extraneous, or a local choice-free proof suffices. Not a confirmed defect or whole-proof audit. |
 | `prop-the-kunneth-cross-product-is-graded-commutative-under-the-twist-map` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
@@ -31011,7 +31367,6 @@ mathematical repairs. Evidence:
 | `lem-the-universal-coefficient-tor-obstruction-map-for-homology` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `lem-the-kunneth-tor-map` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `lem-regular-element-reduction-preserves-minimal-resolution` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
-| `lem-projective-dimension-from-last-nonzero-betti-number` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `lem-minimal-free-resolution-reduces-to-zero-differential` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `def-betti-numbers-of-a-finite-local-module` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `thm-integration-against-a-radon-nikodym-derivative` | UC34 supplier reconciliation 2026-09-09: Astra1 direct-consumer pass: density h is supplied, so no existence choice. Review finite-piece L1 before linearity and remove unused existence edges where possible. This is incomplete impact review, not a confirmed AC defect; no new Phase-2 supplier indicated. |
@@ -32191,7 +32546,6 @@ mathematical repairs. Evidence:
 | `thm-margulis-family-has-uniform-spectral-gap` | 51. Exact live-plan metadata resynchronization set |
 | `thm-martin-lof-randomness-implies-computable-randomness` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order` | finite-averaging-and-character-theory-prerequisites |
-| `thm-mazur-weak-and-norm-closure-of-convex-sets` | norming-and-separation-under-hahn-banach |
 | `thm-mean-value-inequality` | 9.5 Forward order and load-bearing body links |
 | `thm-mean-value-inequality-for-total-derivatives` | Null preservation: newly identified repair target |
 | `thm-mertens-primes-arithmetic-progressions` | Transitive consumers (166), grouped by home page |
@@ -32266,8 +32620,6 @@ mathematical repairs. Evidence:
 | `thm-schur-index-equals-division-algebra-index` | Transitive consumers (166), grouped by home page |
 | `thm-second-column-orthogonality-relation-for-irreducible-complex-characters` | finite-averaging-and-character-theory-prerequisites |
 | `thm-segre-image-rank-one-minors` | AV-1 draft-page impact partition (Phase 3 only) |
-| `thm-separation-of-an-open-convex-set-and-a-point` | norming-and-separation-under-hahn-banach |
-| `thm-separation-of-disjoint-convex-sets-one-open` | norming-and-separation-under-hahn-banach |
 | `thm-serre-normality-criterion` | Item-exact impact of the Dependent Choice rehome |
 | `thm-shapovalov-determinant-formula` | Phase-3 local Shapovalov suppliers (not Phase 2) |
 | `thm-shoenfield-limit-lemma` | def-numbering-of-partial-computable-functions (home: acceptable-numberings-smn-and-the-recursion-theorem) |
@@ -32424,3 +32776,58 @@ earlier repair receipt retained. Published content is unchanged, as this
 dispatch does not licence published repairs.
 Evidence and scope: `research/phase-2-next-17-alpha-c-5a.md`; this is a
 bounded defect-focused review, not a whole-closure audit.
+
+## Step 5A group-c supplier-interface review — 2026-09-13
+
+Group `c` of run `phase-2-next-21` (batches 1, 2, 3) read every published
+direct supplier interface cited by its 126 authored items: the ergodic-theory
+and compactness suppliers for batch 1, the weak-star, reflexivity, Schur,
+James, Bishop-Phelps and Lp-duality suppliers for batch 2, and the Schwartz
+space, distribution and Fourier suppliers for batch 3. Statements,
+hypotheses and choice declarations were compared with the exact uses in the
+local proofs. **No new published-item defect was found.** This is a bounded
+defect-focused review of the cited interfaces, not a whole-closure audit, and
+no published byte was edited.
+
+One recorded audit-status change applies. A family of A-P rows carries the
+blocking condition "until the common finite foundation repair is installed"
+(the finite zero-complement simple-integral representation-independence
+repair): `def-integral-of-a-nonnegative-simple-function`,
+`def-nonnegative-lebesgue-integral`,
+`prop-the-nonnegative-integral-agrees-with-the-simple-integral`,
+`thm-monotone-convergence-for-the-integral`,
+`thm-integrals-are-invariant-under-measure-preserving-maps`,
+`thm-linearity-of-the-lebesgue-integral-on-l-one`,
+`thm-dominated-convergence`,
+`thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality`,
+`thm-finite-measure-l-r-includes-into-l-p-for-p-less-r`,
+`def-calligraphic-l-p-on-a-measure-space`,
+`def-l-p-space-as-a-quotient-by-null-functions`,
+`thm-minkowski-inequality-for-integrals`,
+`thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space`.
+That blocking condition is now satisfied: the repairs were installed on
+2026-09-13 and are documented with before/after hashes in
+`research/phase-2-next-21-published-simple-integral-repair.md` (three items)
+and `research/phase-2-next-21-published-complex-lp-repair.md` (one item). The
+rows therefore remain A-P only for their Phase-3 revalidation step; this
+update is an audit-status correction, not a repair and not a certification.
+Two rows were re-read in full during this review,
+`def-integral-of-a-nonnegative-simple-function` and
+`def-nonnegative-lebesgue-integral`: their current text names the repaired
+representation-independence lemma as justification and contains no false
+claim. The remaining A-P consumer proofs were **not** re-read here and retain
+their recorded repair strategies unchanged.
+
+Three published suppliers named in the group-c Step-1 notes,
+`prop-indefinite-integral-of-an-integrable-function-is-countably-additive`,
+`thm-vitali-convergence-theorem-on-finite-and-sigma-finite-measure-spaces` and
+`thm-chebyshev-markov-inequality-for-the-integral`, have **no current ledger row
+of their own** and are not listed above as A-P rows with a recorded blocking
+condition. They inherit the affected foundation chain through their proofs and
+are queued for the Phase-3 reconciliation of published consumers; this review
+did not audit their proofs and makes no claim about their internal repair
+strategy.
+
+Local adjudication scope and verdicts: `research/phase-2-next-21-alpha-c-5a.md`
+and `research/phase-2-next-21-alpha-c-5a-decisions.json` (134 obligations,
+all accepted, no escalations).

@@ -206,6 +206,15 @@ test('a terminal resolution becomes stale when either exact hash differs', () =>
       '--judge-ledger', ledger, '--terminal-resolutions', receipt, manifest]);
     assert.notEqual(result.status, 0);
     assert.match(result.stderr, /terminal-resolution-stale/);
+    const pending = join(dir, 'pending.json');
+    const scopeGate = run(['tools/level-coverage.mjs', '--judge-only', '--verify-current-context',
+      '--allow-pending-rejudge', '--judge-ledger', ledger, '--terminal-resolutions', receipt,
+      '--out', pending, manifest]);
+    assert.equal(scopeGate.status, 0, scopeGate.stderr || scopeGate.stdout);
+    const receiptData = JSON.parse(readFileSync(pending, 'utf8'));
+    assert.equal(receiptData.closed, false, 'a scope allowance cannot certify final closure');
+    assert.deepEqual(receiptData.needs_rejudge, [ITEM]);
+    assert.equal(receiptData.terminal_resolved.length, 0);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

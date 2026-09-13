@@ -548,7 +548,12 @@ for (const id of judgePath ? judgeScope : []) {
         continue;
       }
       if (status === 'stale') {
-        error('terminal-resolution-stale', `${id}: terminal resolution does not match the current item and pair context`, id);
+        // Step 8 deliberately edits a frozen Step-7 item before its changed-item
+        // judge runs. The old terminal fallback must cease to certify that item,
+        // but the scope gate may carry it as explicit pending rejudge work.
+        // Final closure omits --allow-pending-rejudge and remains strict.
+        (allowPendingRejudge ? warn : error)('terminal-resolution-stale',
+          `${id}: terminal resolution does not match the current item and pair context`, id);
       } else {
         terminalSuperseded.push({ id, context_sha256: current, item_sha256: currentItem });
       }

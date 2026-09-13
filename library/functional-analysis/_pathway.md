@@ -18,20 +18,25 @@ parts:
       - distributions-test-functions-and-differentiation
       - dual-spaces-adjoint-operators-and-annihilators
       - locally-convex-spaces-and-continuous-separation
+      - tempered-distributions-and-the-fourier-transform
       - weak-and-weak-star-topologies
+      - reflexivity-and-eberlein-smulian
+      - banach-alaoglu-goldstine-and-krein-milman
 ---
 
 ## foundations
 
-Normed-space structure separates from Banach completeness: subspaces, products, series,
-completion, bounded maps and quotients build operator theory, while finite-dimensional norm
-equivalence and Riesz's lemma precede Baire category under DC, giving the open-mapping,
-bounded-inverse and closed-graph theorems; sequential uniform boundedness uses
-$\mathrm{AC}_\omega$ via near-norming vectors. Fourier analysis runs alongside: convolution
-becomes multiplication under the $L^1$ transform, Gaussian kernels give approximate identities
-and inversion, and Schwartz space supports Parseval, unitary Plancherel and Poisson summation.
-Hahn--Banach supplies norming functionals, bidual maps and geometric separation; distributions
-follow, test-function topology and local finite order yielding derivatives, support and
-structure, with choice hypotheses stated; dual-space theory covers annihilators, transposes and
-closed range; and weak, weak-star and locally convex topologies, with continuous separation,
-close the track.
+Normed spaces, Banach completeness: subspaces, products, series, completion, bounded
+maps, quotients; finite-dimensional equivalence and Riesz's lemma precede Baire category
+under DC, giving open mapping, bounded inverse, closed graph and $\mathrm{AC}_\omega$
+uniform boundedness. Fourier analysis follows: convolution-to-product under the $L^1$
+transform, Gaussian approximate identities, inversion, Schwartz-space Parseval, unitary
+Plancherel, Poisson summation; tempered distributions on $\mathcal S'$ add
+finite-seminorm bounds, weak and strong dual topologies and the $2\pi$-normalized
+Fourier automorphism. Hahn--Banach supplies norming functionals, bidual maps,
+separation; distributions, annihilators, transposes, closed range complete the dual
+theory, choice hypotheses stated. Weak, weak-star and locally convex topologies, with
+continuous separation, close the track: Banach--Alaoglu, Goldstine, weak-star
+metrizability, Krein--Milman, Bauer, Milman, then reflexivity as unit-ball weak
+compactness, with $L^p$, Eberlein--Šmulian, Schur, uniform convexity, James,
+Bishop--Phelps.

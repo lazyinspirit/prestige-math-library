@@ -1,0 +1,146 @@
+---
+id: lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes
+kind: lemma
+title: Natural singular-cohomology identities are detected on finite regular complexes
+status: draft
+origin: pipeline
+deps: ["def-singular-simplex-and-singular-chain-group-with-coefficients", "def-singular-chain-complex-and-singular-homology", "def-singular-cochain-complex-with-coefficients", "prop-singular-cohomology-is-contravariantly-functorial", "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives", "def-axiom-of-choice"]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-13
+sources:
+  references:
+    - title: Allen Hatcher, Algebraic Topology
+      url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
+      locator: Section 2.1, finite Delta-complex realization of cycles on printed pages 108--109, subdivision chain homotopy on printed pages 121--123, and Exercise 23 on printed page 133
+    - title: N. E. Steenrod and D. B. A. Epstein, Cohomology Operations
+      url: https://web.archive.org/web/20230124163804if_/https://people.math.rochester.edu/faculty/doug/otherpapers/steenrod-epstein.pdf
+      locator: Chapter VIII section 2, extension to arbitrary singular cohomology, printed pages 123--124
+---
+
+## Statement
+
+Assume AC. Fix a prime $p$ and $m,n\geq0$. Suppose that for every space $X$
+there is a map
+
+$$R_X:H^m(X;\mathbb F_p)\longrightarrow H^n(X;\mathbb F_p)$$
+
+natural in the sense that $f^*R_X(x)=R_K(f^*x)$ for every continuous
+$f:K\to X$. If $R_K=0$ for every finite regular cell complex $K$, then
+$R_X=0$ for every space $X$. Neither additivity of $R$ nor a simultaneous
+finite model for all classes is required.
+
+## Facts & Assumptions
+
+**Given:** AC, the prime $p$, nonnegative degrees $m,n$, and the natural
+family $R$ in the statement.
+
+[F1] Singular chain groups are made of finite formal sums
+([[def-singular-simplex-and-singular-chain-group-with-coefficients]]); their
+boundary squares to zero, and homology is cycles modulo boundaries
+([[def-singular-chain-complex-and-singular-homology]]).
+
+[F2] Over $\mathbb F_p$, singular cochains are the full linear dual of the
+singular chains
+([[def-singular-cochain-complex-with-coefficients]]).
+
+[F3] The singular-cochain coboundary is $\delta\psi=\psi\partial$
+([[def-singular-cochain-complex-with-coefficients]]).
+
+[F4] A continuous map pulls a cohomology class back by precomposition with its
+induced singular chain map
+([[prop-singular-cohomology-is-contravariantly-functorial]]).
+
+[F5] The mod-$p$ Kronecker pairing is well-defined and natural:
+$\langle f^*\alpha,z\rangle=\langle\alpha,f_*z\rangle$
+([[lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives]]).
+
+[F6] AC supplies a choice function for every family of nonempty sets
+([[def-axiom-of-choice]]).
+
+## Proof
+
+**Proof technique:** realize each individual singular cycle on a finite
+Delta complex, subdivide it to a finite regular complex, and use evaluation to
+detect the cohomology class.
+
+1.1 Realize a mod-$p$ singular cycle on a finite regular complex. [F1]
+Let $z\in Z_n(X;\mathbb F_p)$ and write its finite support as
+$z=\sum_{r=1}^Na_r\sigma_r$. Form the finite Delta complex $P_z$ generated
+by these labeled top simplices and all their iterated face restrictions:
+two face occurrences are attached to the same lower simplex exactly when
+they are the same singular simplex of $X$, and all attaching maps are the
+corresponding order-preserving affine face maps. The simplicial identities
+make these attachments compatible in lower dimensions. Mapping the cell
+labeled by a singular simplex $\tau$ by $\tau$ itself gives a continuous map
+$g:P_z\to X$.
+
+Put $\xi=\sum_ra_r[\sigma_r]_{P_z}$ in the Delta-chain group. For every
+labeled $(n-1)$-simplex $\tau$, its coefficient in $\partial\xi$ is exactly
+the coefficient of the singular basis element $\tau$ in $\partial z$, hence
+is zero in $\mathbb F_p$. Thus $\xi$ is a mod-$p$ cycle and
+$g_*[\xi]=[z]$. This construction also covers $n=0$: $P_z$ is the finite
+discrete set of labeled vertices in the support, carrying their coefficients
+$a_r$.
+
+The second barycentric subdivision $K_z$ of a Delta complex is a finite
+simplicial complex, hence a finite regular cell complex. The affine subdivision
+operator is a chain map and the cone calculation
+$\partial T+T\partial=1-S$ makes it chain-homotopic to the identity. Therefore
+the subdivided cycle $\zeta$ and the composite $f:K_z\to P_z\to X$ satisfy
+
+$$f_*[\zeta]=[z].$$
+
+All face identifications, coefficient operations, and subdivisions here are
+finite prescribed operations; no choice principle is used.
+
+1.2 Prove that evaluation detects a mod-$p$ cohomology class. [F2, F3, F6]
+Let a degree-$n$ cocycle $\varphi$ vanish on every degree-$n$ cycle. If
+$n=0$, every zero-chain is a cycle and hence $\varphi=0$. Suppose $n>0$.
+For $u\in B_{n-1}=\partial C_n(X;\mathbb F_p)$, choose any $c$ with
+$\partial c=u$ and define $b_0(u)=\varphi(c)$. This is well-defined: two
+choices differ by a cycle, on which $\varphi$ vanishes. It is linear by using
+sums and scalar multiples of preimages. By [F6], choose a vector-space
+complement $M$ with $C_{n-1}=B_{n-1}\oplus M$, and extend $b_0$ by zero on
+$M$ to a cochain $b$. Then [F3] gives
+
+$$\delta b(c)=b(\partial c)=b_0(\partial c)=\varphi(c)$$
+
+for every $c\in C_n$. Thus $\varphi=\delta b$. Consequently, if a class in
+$H^n(X;\mathbb F_p)$ pairs to zero with every homology class, it is zero.
+The sole AC use is the complement of the possibly infinite-dimensional
+boundary subspace.
+
+2.1 Apply the finite hypothesis to every evaluation cycle. [given, F4, F5, step 1.1, step 1.2]
+Fix a space $X$ and $x\in H^m(X;\mathbb F_p)$, and put
+$\alpha=R_X(x)$. For any mod-$p$ $n$-cycle $z$, choose $f:K_z\to X$ and
+$\zeta$ as in step 1.1. Naturality of $R$ and the assumed finite-complex
+vanishing give
+
+$$f^*\alpha=f^*R_X(x)=R_{K_z}(f^*x)=0.$$
+
+By [F5] and $f_*[\zeta]=[z]$,
+
+$$\langle\alpha,[z]\rangle=\langle\alpha,f_*[\zeta]\rangle=\langle f^*\alpha,[\zeta]\rangle=0.$$
+
+Step 1.2 now yields $\alpha=0$. Since $X$ and $x$ were arbitrary, $R_X=0$
+for every space.
+
+3.1 Check empty, zero, endpoint, and degeneracy cases. [F1, F2, F3, F6, step 1.1, step 1.2, step 2.1]
+If $X$ is empty, its chain, homology, and cohomology groups in the stated
+degrees are zero. The zero cycle may be represented by the empty finite
+complex and evaluates to zero. The case $n=0$ was handled separately in the
+evaluation-detection step; degree $m=0$ requires no change because naturality
+alone is used on the
+input. A one-term zero-cycle with any nonzero coefficient is represented by
+one weighted vertex. Degenerate singular simplices are still finite basis
+elements and may label cells whose map to $X$ is degenerate. Both implications in the displayed
+naturality equality are literal equalities, not directions of a biconditional.
+Finite face identification and subdivision use no choice; AC is used only for the
+complement in step 1.2. ∎

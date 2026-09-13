@@ -5455,7 +5455,9 @@ builds their path-lifting argument locally in DG-23/Lie theory.
 
 **A page:** `riemann-curvature-and-riemannian-submanifolds`
 **B page:** `riemann-curvature-and-riemannian-submanifolds-examples`
-**Requires:** DG-4, DG-5, DG-11, and DG-18–DG-20.
+**Requires:** DG-4, DG-5, DG-11, DG-18–DG-20, and the published
+`the-spectral-theorem-and-singular-value-decomposition` page. Principal
+curvatures use its finite-dimensional real self-adjoint spectral theorem.
 
 The sign convention from §3.2 is repeated on the page before any identity.
 Curvature is first defined for an affine connection, proved tensorial, and
@@ -6450,7 +6452,9 @@ and Chern–Gauss–Bonnet are not proved or used.
 **Requires:** DG-3, DG-4, DG-8–DG-12, DG-19–DG-20, and published
 group/matrix pages `monoids-groups-and-subgroups`,
 `matrices-and-the-matrix-of-a-linear-map`, and
-`determinants-of-matrices-over-a-commutative-ring`.
+`determinants-of-matrices-over-a-commutative-ring`. The complex Lie-group
+definition also uses published `holomorphic-functions-of-several-variables`
+for holomorphic operations in charts.
 
 Lie groups are finite-dimensional real smooth manifolds unless “complex” is
 printed. The bracket is transported from left-invariant vector fields. This
@@ -9818,7 +9822,7 @@ MIT 18.745 Lecture 23,
 <https://www.jmilne.org/math/CourseNotes/LAG.pdf>;
 Cannas da Silva,
 <https://www.math.ist.utl.pt/~acannas/Books/symplectic.pdf>; Meinrenken,
-<https://www.math.toronto.edu/~mein/teaching/LectureNotes/symplectic.pdf>;
+<https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf>;
 Hatcher, <https://pi.math.cornell.edu/~hatcher/AT/AT.pdf>; Arvind Nair,
 *Topology II*,
 <https://mathweb.tifr.res.in/~arvind/topology/manifolds2024.pdf>; Park,

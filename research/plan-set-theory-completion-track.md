@@ -613,9 +613,16 @@ forcing `2^aleph_0 >= aleph_2`; name counting under ground GCH; exact continuum
 regular cardinal; `Con(ZFC)->Con(ZFC+not GCH)`; Easton-support orientation;
 `fs-ccc-means-countably-closed`.
 
+The distributivity/no-new-short-sequences equivalence is stated for
+separative orders, or for the separative quotient of an arbitrary preorder.
+The $2^{<\kappa}$ delta-system specialization assumes regular $\kappa$;
+the general lemma retains its explicit cardinal-arithmetic hypothesis.
+
 **Target.** Supplies the negative halves of
 `rem-independence-of-ch-and-gch`. AC failure does not appear here: ordinary
-forcing over a ZFC ground model still satisfies AC.
+forcing over a ZFC ground model still satisfies AC. The two consistency
+corollaries use externally selected finite-fragment model proofs; they do not
+claim PA-verified uniform refutation transformers.
 
 ## SET-16. Finite-Support Iterations and Martin's Axiom
 
@@ -627,7 +634,8 @@ the `omega_2` bookkeeping iteration; preservation and continuum computation;
 cardinal exponentiation and ccc products; `fs-ma-implies-ch`.
 
 **Target.** Every clause in `rem-martins-axiom` receives an internal proof or
-formal relative-consistency destination here.
+relative-consistency destination here. The MA consistency tail is an external
+fixed-fragment metatheorem, not a PA-verified proof-code reduction.
 
 ## SET-17. Suslin Trees, Lines, Algebras, and Independence
 
@@ -679,7 +687,9 @@ family of pairs has no choice function”; `fs-a-zfa-model-is-a-zf-model`.
 
 **Target.** Proves `rem-fraenkel-socks-model`, including the atom-to-ZF step.
 The Jech--Sochor proof uses the forcing theorem from SET-14; it is not inferred
-from permutation-model syntax alone.
+from permutation-model syntax alone. Its socks consistency corollary uses
+fixed finite fragments and a certified atom-blind carried-sort transfer;
+no uniform PA proof-code constructor is claimed.
 
 ## SET-19. Symmetric Extensions and Basic Choice-Failure Models
 
@@ -690,7 +700,7 @@ Cohen model; the set of generic reals exists but its enumeration does not;
 infinite Dedekind-finite set of reals; equivalence here of no countably infinite
 subset, no injection from omega and no bijection with a proper subset; failure
 of well-orderability and AC;
-formal `Con(ZF)->Con(ZF+not AC)` transfer; atom-free socks model;
+formal `Con(ZF)->Con(ZF+not AC)` transfer; atom-free socks model with pairs of sets of reals;
 `fs-every-symmetric-submodel-satisfies-choice`.
 
 **Targets.** Proves `rem-cohen-forcing-ac-independent`,

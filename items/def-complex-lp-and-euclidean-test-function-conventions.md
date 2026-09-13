@@ -26,7 +26,9 @@ sources:
 ## Definition
 
 Let $(X,\mathcal A,\mu)$ be a measure space. A finite-valued function $f=u+iv:X\to\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write
-$$N_p(f)=\left(\int_X|f|^p\,d\mu\right)^{1/p}\quad(1\le p<\infty),\qquad N_\infty(f)=\inf\{M\in[0,\infty]:|f|\le M\text{ a.e.}\}.$$
+$$N_p(f)=\begin{cases}\left(\int_X|f|^p\,d\mu\right)^{1/p},&\displaystyle\int_X|f|^p\,d\mu<\infty,\\+\infty,&\displaystyle\int_X|f|^p\,d\mu=+\infty,\end{cases}\quad(1\le p<\infty),\qquad N_\infty(f)=\inf\{M\in[0,\infty]:|f|\le M\text{ a.e.}\}.$$
+The finite case uses the real power; the infinite case is assigned directly,
+so $N_p(f)$ is defined for every measurable finite-valued complex $f$.
 The infimum of the empty set of finite bounds is $\infty$; equivalently allow $M=\infty$. Define $\mathcal L^p(\mu;\mathbb C)=\{f:f\text{ measurable},N_p(f)<\infty\}$ and its **set quotient** $L^p(\mu;\mathbb C)=\mathcal L^p/\!\sim$, where $f\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.
 
 Here $|u+iv|=\sqrt{u^2+v^2}$ and $\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and
