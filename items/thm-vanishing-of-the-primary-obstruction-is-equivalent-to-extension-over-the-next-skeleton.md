@@ -2,7 +2,7 @@
 id: thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton
 kind: theorem
 title: Vanishing of the primary obstruction is equivalent to extension over the next skeleton
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-the-primary-obstruction-class-is-independent-of-cellular-choices", "def-difference-cochain-between-two-cellular-extensions", "lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: lem-smooth-polynomially-bounded-multipliers-on-schwartz-space
 kind: lemma
 title: Smooth polynomially bounded multipliers on schwartz space
-status: draft
+status: published
 origin: pipeline
 deps: [def-schwartz-space-and-its-seminorms, def-schwartz-topology-and-convergence, def-ck-and-multi-index-notation-in-several-variables, def-tempered-distribution, def-weak-and-strong-topologies-on-tempered-distributions]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

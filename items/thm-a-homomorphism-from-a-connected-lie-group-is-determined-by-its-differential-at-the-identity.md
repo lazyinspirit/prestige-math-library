@@ -2,7 +2,7 @@
 id: thm-a-homomorphism-from-a-connected-lie-group-is-determined-by-its-differential-at-the-identity
 kind: theorem
 title: A homomorphism from a connected Lie group is determined by its differential at the identity
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-exponential-map-is-natural-for-lie-group-homomorphisms", "cor-the-exponential-map-is-a-local-diffeomorphism-at-zero", "def-lie-group-homomorphism-isomorphism-and-automorphism", "def-connected-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Proposition 3.9 and complete proof, printed page 31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

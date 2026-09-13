@@ -2,7 +2,7 @@
 id: thm-adem-relations-for-steenrod-squares
 kind: theorem
 title: Adem relations for Steenrod squares
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-adem-double-power-comparison", "lem-finite-cellular-cyclic-squares-agree-with-singular-cup-i-squares", "lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes", "thm-cartan-formula-for-steenrod-squares", "prop-steenrod-square-normalization-instability-and-top-square", "thm-steenrod-squares-are-well-defined-and-natural", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "thm-cellular-homology-computes-singular-homology", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

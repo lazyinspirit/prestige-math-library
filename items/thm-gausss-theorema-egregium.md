@@ -2,7 +2,7 @@
 id: thm-gausss-theorema-egregium
 kind: theorem
 title: Gauss’s Theorema Egregium
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","thm-gauss-equation-for-a-riemannian-submanifold","thm-weingarten-equation-and-adjointness-of-the-shape-operator","thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space","thm-fundamental-theorem-of-riemannian-geometry","def-determinant-of-a-linear-operator","def-sectional-curvature"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Theorem 8.6 with complete proof, printed pages 143–144
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure
 kind: theorem
 title: Every symplectic manifold admits a compatible almost-complex structure
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-every-smooth-manifold-admits-a-riemannian-metric", "lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots", "def-compatible-complex-structure-on-a-symplectic-vector-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Discussion preceding Definition 3.31, p. 42, using Theorem 2.26
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-bishop-phelps-support-cone-construction
 kind: lemma
 title: Quantitative Bishop–Phelps support functional construction
-status: draft
+status: published
 origin: pipeline
 deps: [def-banach-space, def-dependent-choice, def-hahn-banach-extension-principle-relative, thm-relative-hahn-banach-dominated-extension, thm-complete-subspace-iff-closed, thm-monotone-convergence, thm-infimum-property, def-dual-space-of-a-normed-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Prove the needed maximizing Ekeland inequality by one dependent-choice recursion on nested ascent sets, then use its support cone to build a sublinear gauge and apply dominated Hahn–Banach."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

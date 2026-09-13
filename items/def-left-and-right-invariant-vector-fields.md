@@ -2,7 +2,7 @@
 id: def-left-and-right-invariant-vector-fields
 kind: definition
 title: Left- and right-invariant vector fields
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle", "def-smooth-vector-field-as-a-tangent-bundle-section", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Definition 2.26, printed page 21
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

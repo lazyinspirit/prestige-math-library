@@ -1,7 +1,7 @@
 ---
 page: brauers-second-main-theorem-examples
 title: Brauers Second Main Theorem — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-p-sections-and-brauer-subsections-in-a-small-finite-group

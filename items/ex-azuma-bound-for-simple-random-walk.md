@@ -2,7 +2,9 @@
 id: ex-azuma-bound-for-simple-random-walk
 kind: example
 title: Azuma bound for simple random walk
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [cor-symmetric-bounded-increment-azuma-bound, lem-conditioning-a-known-variable-and-an-independent-variable, def-axiom-of-choice]
 proof_strategy: direct

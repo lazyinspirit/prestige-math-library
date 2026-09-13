@@ -2,13 +2,14 @@
 id: lem-continuous-functions-determine-borel-probabilities-on-compact-metric-spaces
 kind: lemma
 title: Continuous functions determine Borel probabilities on compact metric spaces
-status: draft
+status: published
 origin: pipeline
 deps: [def-continuous-real-functions-on-a-compact-metric-space, thm-dominated-convergence, lem-finite-measure-uniqueness-on-a-pi-system, lem-distance-to-set-is-lipschitz, thm-metric-closure-characterisation]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

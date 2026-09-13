@@ -2,7 +2,7 @@
 id: def-postnikov-section-and-postnikov-tower
 kind: definition
 title: Postnikov section and Postnikov tower
-status: draft
+status: published
 origin: pipeline
 deps: ["def-n-connected-space-and-n-connected-map"]
 proof_strategy: definition
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

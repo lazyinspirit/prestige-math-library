@@ -2,7 +2,9 @@
 id: thm-poincare-birkhoff-witt
 kind: theorem
 title: Poincaré–Birkhoff–Witt theorem
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [lem-symmetric-algebra-has-an-ordered-commutative-monomial-basis, lem-pbw-spanning-by-ordered-monomials, lem-pbw-linear-independence-by-the-regular-representation-on-the-symmetric-algebra, def-pbw-symbol-map-from-the-symmetric-algebra]

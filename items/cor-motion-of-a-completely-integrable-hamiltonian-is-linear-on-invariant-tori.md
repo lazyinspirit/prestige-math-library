@@ -2,7 +2,7 @@
 id: cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori
 kind: corollary
 title: Motion of a completely integrable Hamiltonian is linear on invariant tori
-status: draft
+status: published
 origin: pipeline
 deps: ["def-hamiltonian-vector-field-and-hamiltonian-function"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Theorem 6.21, p. 75
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

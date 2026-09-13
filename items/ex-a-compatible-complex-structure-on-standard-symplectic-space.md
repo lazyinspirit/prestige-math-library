@@ -2,7 +2,7 @@
 id: ex-a-compatible-complex-structure-on-standard-symplectic-space
 kind: example
 title: A compatible complex structure on standard symplectic space
-status: draft
+status: published
 origin: pipeline
 deps: ["def-compatible-complex-structure-on-a-symplectic-vector-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Example 2.25, p. 13
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

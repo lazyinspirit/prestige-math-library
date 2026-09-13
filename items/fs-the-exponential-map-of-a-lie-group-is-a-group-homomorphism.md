@@ -2,7 +2,7 @@
 id: fs-the-exponential-map-of-a-lie-group-is-a-group-homomorphism
 kind: false-statement
 title: The exponential map of a Lie group is a group homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-matrix-units, def-matrix-product-and-identity-matrix, lem-exponential-series-has-infinite-radius]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

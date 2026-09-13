@@ -2,13 +2,14 @@
 id: def-zfa-universe-atoms-and-kernel
 kind: definition
 title: ZFA universes, atoms, pure sets, and the kernel
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-transitive-closure-of-a-set, thm-transfinite-recursion]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

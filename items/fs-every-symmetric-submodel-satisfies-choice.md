@@ -2,7 +2,7 @@
 id: fs-every-symmetric-submodel-satisfies-choice
 kind: false-statement
 title: Every symmetric submodel satisfies Choice
-status: draft
+status: published
 origin: pipeline
 deps: [cor-basic-cohen-model-fails-well-orderability-and-choice, thm-atom-free-socks-model-has-countable-pairs-without-choice, thm-generic-extensions-satisfy-zf-and-zfc]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

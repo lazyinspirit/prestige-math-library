@@ -2,13 +2,14 @@
 id: lem-dual-ball-as-a-closed-subset-of-a-product
 kind: lemma
 title: Dual ball as a closed subset of a product
-status: draft
+status: published
 origin: pipeline
 deps: ["def-weak-star-topology", "def-product-topology", "def-dual-space-of-a-normed-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

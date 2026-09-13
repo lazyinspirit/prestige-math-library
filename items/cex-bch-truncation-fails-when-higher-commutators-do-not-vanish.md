@@ -2,7 +2,9 @@
 id: cex-bch-truncation-fails-when-higher-commutators-do-not-vanish
 kind: counterexample
 title: BCH truncation fails when higher commutators do not vanish
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-matrix-units, def-matrix-product-and-identity-matrix, ex-matrix-exponential-as-the-lie-group-exponential]

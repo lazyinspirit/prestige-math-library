@@ -2,7 +2,7 @@
 id: thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup
 kind: theorem
 title: Images are immersed Lie subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup, thm-lie-group-homomorphisms-have-constant-rank, thm-constant-rank-theorem-for-manifolds, def-quotient-topology, thm-quotient-universal-property, lem-open-or-closed-surjection-is-quotient]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 4.7 and Corollary 9.5, printed pages 29 and 53–54
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

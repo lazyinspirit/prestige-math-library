@@ -2,7 +2,7 @@
 id: thm-every-orbit-is-an-injectively-immersed-homogeneous-space
 kind: theorem
 title: Every orbit is an injectively immersed homogeneous space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-stabilizers-are-closed-embedded-lie-subgroups, thm-quotient-manifold-by-a-closed-lie-subgroup, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-constant-rank-theorem-for-manifolds]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

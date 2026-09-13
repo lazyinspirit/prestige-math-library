@@ -2,7 +2,7 @@
 id: ex-second-main-theorem-with-no-inducing-local-block
 kind: example
 title: A p-section with no local block inducing to the chosen global block
-status: draft
+status: published
 origin: pipeline
 deps: [ex-p-sections-and-brauer-subsections-in-a-small-finite-group, lem-block-idempotents-lift-uniquely-from-kh-to-oh, thm-blocks-partition-ordinary-and-brauer-irreducible-characters, thm-brauer-second-main-theorem, def-algebraically-closed-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

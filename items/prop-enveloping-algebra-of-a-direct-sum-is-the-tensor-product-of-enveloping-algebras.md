@@ -2,7 +2,7 @@
 id: prop-enveloping-algebra-of-a-direct-sum-is-the-tensor-product-of-enveloping-algebras
 kind: proposition
 title: Enveloping algebra of a direct sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-direct-product-and-direct-sum-of-lie-algebras, prop-functoriality-of-the-universal-enveloping-algebra, thm-tensor-product-of-algebras-over-a-commutative-ring, thm-universal-property-of-module-tensor-products, thm-universal-property-of-the-universal-enveloping-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

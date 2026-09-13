@@ -2,7 +2,7 @@
 id: thm-moser-stability-theorem
 kind: theorem
 title: Moser stability theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "lem-moser-pullback-differentiation-equation", "lem-smooth-parametric-primitives-for-a-smooth-exact-family-on-a-compact-manifold", "thm-time-dependent-vector-fields-have-local-smooth-evolution-operators", "def-the-standard-smooth-step-function"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 7, Theorem 7.3 and proof, pp. 44--45
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

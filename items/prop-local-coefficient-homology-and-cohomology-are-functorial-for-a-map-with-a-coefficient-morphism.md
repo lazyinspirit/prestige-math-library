@@ -2,12 +2,13 @@
 id: prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism
 kind: proposition
 title: Functoriality with coefficient morphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-homology-and-cohomology-with-local-coefficients, def-local-system-of-r-modules-and-its-pullback]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

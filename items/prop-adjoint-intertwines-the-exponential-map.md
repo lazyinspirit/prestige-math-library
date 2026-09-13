@@ -2,7 +2,7 @@
 id: prop-adjoint-intertwines-the-exponential-map
 kind: proposition
 title: Adjoint intertwines the exponential map
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-conjugation-and-the-adjoint-representation-of-a-lie-group", "prop-exponential-map-is-natural-for-lie-group-homomorphisms"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.7(5) and proof, printed pages 30–31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-ma-reduction-to-small-ccc-orders
 kind: lemma
 title: Martin's Axiom reduces to small ccc orders
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

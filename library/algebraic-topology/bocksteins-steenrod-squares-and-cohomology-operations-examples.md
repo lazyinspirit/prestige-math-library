@@ -1,7 +1,7 @@
 ---
 page: bocksteins-steenrod-squares-and-cohomology-operations-examples
 title: Bocksteins Steenrod Squares and Cohomology Operations — Examples
-status: draft
+status: published
 items: []
 examples: [ex-bockstein-detects-the-integral-two-torsion-of-real-projective-space, ex-steenrod-squares-on-real-projective-space, ex-steenrod-squares-on-complex-projective-space-mod-two, ex-adem-relation-sq-one-sq-one-equals-zero, ex-wu-classes-of-a-closed-surface, cex-the-top-square-formula-does-not-define-all-lower-squares, cex-steenrod-squares-are-not-integral-cohomology-operations]
 ---

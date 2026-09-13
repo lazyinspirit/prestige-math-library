@@ -2,13 +2,14 @@
 id: def-stopped-random-variable-and-stopped-process
 kind: definition
 title: Stopped random variable and stopped process
-status: draft
+status: published
 origin: pipeline
 deps: [def-discrete-stopping-time, def-adapted-and-integrable-stochastic-process]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

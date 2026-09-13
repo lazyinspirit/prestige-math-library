@@ -2,13 +2,14 @@
 id: lem-sigma-finite-ergodic-oscillation-sets-have-finite-measure
 kind: lemma
 title: Sigma-finite ergodic oscillation sets have finite measure
-status: draft
+status: published
 origin: pipeline
 deps: [thm-maximal-ergodic-theorem, def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, lem-mod-null-invariant-sets-have-strictly-invariant-representatives, def-finite-sigma-finite-and-semifinite-measures, thm-integral-triangle-inequality]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

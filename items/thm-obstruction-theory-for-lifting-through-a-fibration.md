@@ -2,7 +2,7 @@
 id: thm-obstruction-theory-for-lifting-through-a-fibration
 kind: theorem
 title: Obstruction theory for lifting through a fibration
-status: draft
+status: published
 origin: pipeline
 deps: ["def-hurewicz-and-serre-fibrations", "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace", "prop-higher-homotopy-basepoint-transport-and-moving-homotopies", "thm-the-primary-obstruction-cochain-is-a-cocycle", "thm-the-primary-obstruction-class-is-independent-of-cellular-choices", "thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

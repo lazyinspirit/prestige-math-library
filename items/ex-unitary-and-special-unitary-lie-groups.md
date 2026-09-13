@@ -2,7 +2,9 @@
 id: ex-unitary-and-special-unitary-lie-groups
 kind: example
 title: Unitary and special unitary Lie groups
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-lie-group, def-lie-bracket-on-the-tangent-space-of-a-lie-group, cor-square-matrix-invertible-iff-determinant-is-a-unit, cor-inverse-matrix-by-adjugate, thm-constant-rank-theorem-for-manifolds, def-complex-conjugate-real-imaginary-part-and-modulus, def-determinant-of-a-square-matrix]

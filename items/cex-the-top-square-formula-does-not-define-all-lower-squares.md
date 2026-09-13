@@ -2,7 +2,7 @@
 id: cex-the-top-square-formula-does-not-define-all-lower-squares
 kind: counterexample
 title: Top squares do not determine lower squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-steenrod-square-normalization-instability-and-top-square, ex-bockstein-detects-the-integral-two-torsion-of-real-projective-space, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, lem-real-projective-space-cellular-homology-and-pinch-map, lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients, thm-cellular-homology-computes-singular-homology, cor-homology-of-spheres, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, def-axiom-of-choice]
@@ -20,6 +20,7 @@ sources:
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: Chapter 22, Section 5, printed pages 184--186
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

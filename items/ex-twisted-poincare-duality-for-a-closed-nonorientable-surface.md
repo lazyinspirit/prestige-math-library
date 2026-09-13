@@ -2,12 +2,13 @@
 id: ex-twisted-poincare-duality-for-a-closed-nonorientable-surface
 kind: example
 title: Twisted duality for a nonorientable surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-poincare-duality-with-the-orientation-local-system, thm-cellular-chains-compute-homology-with-local-coefficients, prop-the-manifold-orientation-system-is-a-local-system]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

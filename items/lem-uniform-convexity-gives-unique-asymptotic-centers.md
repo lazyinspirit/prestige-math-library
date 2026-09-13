@@ -2,7 +2,7 @@
 id: lem-uniform-convexity-gives-unique-asymptotic-centers
 kind: lemma
 title: Uniform convexity gives unique asymptotic centers
-status: draft
+status: published
 origin: pipeline
 deps: [def-uniformly-convex-banach-space, def-countable-choice, def-limsup-liminf, lem-limsup-epsilon-characterisation, thm-infimum-property, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-naturals-positive, def-banach-space, def-relative-normed-convexity-and-separation, thm-metric-sequential-closure]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-generated
 proof_strategy: "Use countable choice to select centers whose radii decrease to the infimum.  The triangle inequality handles radius zero; at positive radius, normalize two near-minimizers by one common radius and apply uniform convexity to their midpoint.  Completeness, closedness and a directly proved Lipschitz estimate give existence, and the same midpoint argument gives uniqueness."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

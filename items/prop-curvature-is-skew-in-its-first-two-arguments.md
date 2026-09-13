@@ -2,7 +2,7 @@
 id: prop-curvature-is-skew-in-its-first-two-arguments
 kind: proposition
 title: Curvature is skew in its first two arguments
-status: draft
+status: published
 origin: pipeline
 deps: ["def-curvature-of-an-affine-connection"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 7.4(a), printed pages 121–122
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-separable-reflexive-space-has-separable-dual
 kind: corollary
 title: Separable reflexive space has separable dual
-status: draft
+status: published
 origin: pipeline
 deps: [thm-separable-dual-implies-separable-primal, def-reflexive-banach-space, def-separable-space, def-countable-choice, def-hahn-banach-extension-principle-relative]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

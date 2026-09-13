@@ -1,7 +1,7 @@
 ---
 page: permutation-models-and-transfer-to-zf
 title: "Permutation Models and Transfer to ZF"
-status: draft
+status: published
 items: [def-zfa-universe-atoms-and-kernel, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, thm-fraenkel-mostowski-permutation-model, thm-basic-fraenkel-model, thm-second-fraenkel-model-countable-pairs-without-choice, thm-ordered-mostowski-model, def-boundable-sentence-over-an-atom-set, thm-jech-sochor-first-embedding, thm-jech-sochor-transfer-for-boundable-sentences, rem-pincus-transfer-interface-and-preservation-limits, lem-jech-sochor-socks-transfer-is-uniformly-formalizable, cor-zf-countable-family-of-pairs-without-choice]
 examples: []
 ---

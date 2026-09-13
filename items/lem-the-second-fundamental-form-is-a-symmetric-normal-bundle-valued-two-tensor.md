@@ -2,7 +2,7 @@
 id: lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor
 kind: lemma
 title: The second fundamental form is a symmetric normal-bundle-valued two-tensor
-status: draft
+status: published
 origin: pipeline
 deps: ["def-induced-connection-and-second-fundamental-form", "thm-the-induced-connection-is-levi-civita", "prop-connection-laws-in-directional-form"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Lemma 8.1 with complete proof, printed pages 134–135
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

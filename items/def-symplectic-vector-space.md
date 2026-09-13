@@ -2,7 +2,7 @@
 id: def-symplectic-vector-space
 kind: definition
 title: Symplectic vector space
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-alternating-forms-have-a-symplectic-normal-form"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, §1.1, pp. 1--3
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

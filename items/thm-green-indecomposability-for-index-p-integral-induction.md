@@ -2,7 +2,7 @@
 id: thm-green-indecomposability-for-index-p-integral-induction
 kind: theorem
 title: Green indecomposability for index-p integral induction
-status: draft
+status: published
 origin: pipeline
 deps: [thm-krull-schmidt-for-og-lattices, def-relative-projectivity-and-vertices-for-og-lattices, def-algebraically-closed-field]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

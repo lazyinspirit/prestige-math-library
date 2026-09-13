@@ -2,13 +2,14 @@
 id: thm-weak-star-compactness-of-polar-sets
 kind: theorem
 title: Weak-star compactness of polar sets
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "lem-basic-weak-star-neighborhoods", "def-absolute-polar-in-a-normed-dual-pair"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

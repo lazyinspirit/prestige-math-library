@@ -2,7 +2,7 @@
 id: lem-nagao-error-terms-have-zero-trace-on-the-relevant-p-section
 kind: lemma
 title: Nagao error terms have zero trace on the relevant p-section
-status: draft
+status: published
 origin: pipeline
 deps: [lem-commuting-p-and-p-prime-parts-of-a-finite-group-element, def-p-section-of-a-p-element, lem-relative-projectivity-forces-p-section-character-vanishing, thm-nagao-decomposition-for-restriction-to-a-centralizer, def-algebraically-closed-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

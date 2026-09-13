@@ -2,7 +2,7 @@
 id: lem-the-smooth-structure-on-g-mod-h-is-independent-of-the-local-complement
 kind: lemma
 title: The smooth structure on G/H is independent of the local complement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-quotient-manifold-by-a-closed-lie-subgroup, thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero, thm-smooth-inverse-function-theorem-on-manifolds]
@@ -15,6 +15,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Homogeneous Space Construction Theorem 21.17, quotient-chart compatibility argument, printed pages 551–552
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

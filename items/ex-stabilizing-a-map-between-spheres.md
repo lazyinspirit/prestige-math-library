@@ -2,11 +2,12 @@
 id: ex-stabilizing-a-map-between-spheres
 kind: example
 title: Stabilizing a map between spheres
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stable-stem-of-the-sphere", "prop-maps-of-prespectra-induce-functorial-maps-on-stable-homotopy-groups", "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

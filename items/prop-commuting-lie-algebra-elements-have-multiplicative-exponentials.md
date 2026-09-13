@@ -2,7 +2,7 @@
 id: prop-commuting-lie-algebra-elements-have-multiplicative-exponentials
 kind: proposition
 title: Commuting Lie-algebra elements have multiplicative exponentials
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-lie-group", "thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute", "prop-exponential-scales-one-parameter-subgroups", "def-lie-bracket-on-the-tangent-space-of-a-lie-group", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields", "def-one-parameter-subgroup-of-a-lie-group", "thm-one-parameter-subgroups-are-exactly-exponentials", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.36 and complete flow proof, printed page 39
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

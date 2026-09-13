@@ -2,7 +2,7 @@
 id: thm-gauss-equation-for-a-riemannian-submanifold
 kind: theorem
 title: Gauss equation for a Riemannian submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-weingarten-equation-and-adjointness-of-the-shape-operator", "def-induced-connection-and-second-fundamental-form", "thm-the-induced-connection-is-levi-civita", "def-curvature-of-an-affine-connection", "def-riemann-curvature-four-tensor"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Theorem 8.4 with complete proof, printed pages 136–137
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

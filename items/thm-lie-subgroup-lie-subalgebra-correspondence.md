@@ -2,7 +2,7 @@
 id: thm-lie-subgroup-lie-subalgebra-correspondence
 kind: theorem
 title: Lie subgroup–Lie subalgebra correspondence
-status: draft
+status: published
 origin: pipeline
 deps: [def-left-translated-distribution-associated-to-a-lie-subalgebra, lem-a-lie-subalgebra-distribution-is-involutive, thm-frobenius-local-coordinate-theorem, thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds, def-countable-choice, thm-smooth-inverse-function-theorem-on-manifolds]
 landmark: true
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Sections 9.3 and 10.2, printed pages 55 and 60–61
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

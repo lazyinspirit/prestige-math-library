@@ -2,7 +2,7 @@
 id: thm-a-stopped-martingale-is-a-martingale
 kind: theorem
 title: A stopped martingale is a martingale
-status: draft
+status: published
 origin: pipeline
 deps: [def-stopped-random-variable-and-stopped-process, lem-equivalent-event-tests-for-a-discrete-stopping-time, def-discrete-martingale-transform, def-martingale-submartingale-and-supermartingale, thm-taking-out-what-is-known, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-von-neumann-mean-ergodic-theorem-in-l-two
 kind: theorem
 title: Von Neumann mean ergodic theorem in L2
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, prop-ergodic-averages-are-well-defined-and-l-p-contractive, lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace, def-axiom-of-choice, def-complex-lp-and-euclidean-test-function-conventions]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

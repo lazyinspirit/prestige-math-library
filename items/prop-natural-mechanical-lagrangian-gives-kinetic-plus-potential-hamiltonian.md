@@ -2,7 +2,7 @@
 id: prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian
 kind: proposition
 title: A natural mechanical Lagrangian gives the kinetic-plus-potential Hamiltonian
-status: draft
+status: published
 origin: pipeline
 deps: ["def-energy-and-hamiltonian-of-a-hyperregular-lagrangian"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lectures 18--19, mechanical Hamiltonians and Legendre transform, pp. 107 and 114--116
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

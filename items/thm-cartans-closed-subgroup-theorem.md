@@ -2,7 +2,7 @@
 id: thm-cartans-closed-subgroup-theorem
 kind: theorem
 title: Cartan closed subgroup theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, thm-baker-campbell-hausdorff, def-baker-campbell-hausdorff-series, lem-local-convergence-of-the-baker-campbell-hausdorff-series, prop-exponential-scales-one-parameter-subgroups, thm-smooth-inverse-function-theorem-on-manifolds, lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice, cor-bolzano-weierstrass-in-rn, def-embedded-submanifold-and-slice-chart, def-immersed-embedded-and-closed-lie-subgroup, prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]
@@ -19,6 +19,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Chapter I §10, quotient and closed-subgroup discussion, printed page 77
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

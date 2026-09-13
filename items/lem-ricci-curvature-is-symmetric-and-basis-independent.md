@@ -2,7 +2,7 @@
 id: lem-ricci-curvature-is-symmetric-and-basis-independent
 kind: lemma
 title: Ricci curvature is symmetric and basis independent
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-ricci-curvature","thm-algebraic-symmetries-of-the-riemann-tensor","lem-contraction-is-independent-of-the-basis-formula"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, Lemma 7.6, printed pages 124–125
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

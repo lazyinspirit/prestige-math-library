@@ -2,13 +2,14 @@
 id: def-basic-cohen-symmetric-system
 kind: definition
 title: The basic Cohen symmetric system
-status: draft
+status: published
 origin: pipeline
 deps: [thm-hereditarily-symmetric-interpretations-form-a-zf-model, def-forcing-preorder-compatibility-and-filter, def-cohen-collapse-and-levy-collapse-forcings]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

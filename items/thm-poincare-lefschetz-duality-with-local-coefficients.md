@@ -2,12 +2,13 @@
 id: thm-poincare-lefschetz-duality-with-local-coefficients
 kind: theorem
 title: Poincare–Lefschetz duality with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-poincare-duality-with-the-orientation-local-system, def-orientation-local-system-on-a-manifold-with-boundary, lem-canonical-twisted-fundamental-classes-over-compact-subsets, def-cup-and-cap-products-with-local-coefficient-pairings, def-compactly-supported-cohomology-with-local-coefficients, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, thm-pair-long-exact-sequences-with-local-coefficients, thm-excision-and-mayer-vietoris-with-local-coefficients, thm-topological-collaring-for-manifold-boundaries, thm-five-lemma-for-a-morphism-of-long-exact-sequences, thm-poincare-lefschetz-duality, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

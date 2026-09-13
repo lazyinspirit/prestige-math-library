@@ -2,7 +2,7 @@
 id: lem-relative-projectivity-forces-p-section-character-vanishing
 kind: lemma
 title: Relative projectivity forces character vanishing off the controlling p-section
-status: draft
+status: published
 origin: pipeline
 deps: [def-relative-projectivity-and-vertices-for-og-lattices, thm-krull-schmidt-for-og-lattices, thm-green-indecomposability-for-index-p-integral-induction, lem-integral-mackey-and-higman-for-og-lattices, def-algebraically-closed-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: symmetric-extensions-and-basic-choice-failure-models
 title: "Symmetric Extensions and Basic Choice-Failure Models"
-status: draft
+status: published
 items: [def-forcing-name-automorphism-action, def-symmetric-forcing-system-and-hereditarily-symmetric-names, lem-symmetry-lemma-for-forcing-automorphisms, lem-canonical-check-names-are-hereditarily-symmetric, thm-hereditarily-symmetric-interpretations-form-a-zf-model, def-basic-cohen-symmetric-system, lem-basic-cohen-generic-reals-form-a-symmetric-set, thm-basic-cohen-generic-real-set-has-no-countably-infinite-subset, thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals, cor-basic-cohen-model-fails-well-orderability-and-choice, lem-basic-cohen-symmetric-construction-is-uniformly-formalizable, thm-formal-consistency-of-zf-with-failure-of-choice, def-atom-free-socks-symmetric-system, thm-atom-free-socks-model-has-countable-pairs-without-choice]
 examples: []
 ---

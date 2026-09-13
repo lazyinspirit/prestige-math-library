@@ -2,7 +2,7 @@
 id: ex-special-linear-as-a-closed-lie-subgroup-of-general-linear
 kind: example
 title: SL(n) as a closed Lie subgroup of GL(n)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-lie-group, def-determinant-of-a-square-matrix, def-trace-of-a-square-matrix-over-a-commutative-ring, thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup, prop-tangent-space-of-a-regular-level-set-is-the-kernel]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Examples 3.2-3.3, printed pages 25-26; Corollary 9.5, printed pages 53-54
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

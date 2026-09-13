@@ -2,7 +2,7 @@
 id: thm-second-bianchi-identity-for-a-bundle-connection
 kind: theorem
 title: Second Bianchi identity for a bundle connection
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-curvature-two-form-structure-equation", "def-product-connection-on-tensor-and-hom-bundles", "prop-induced-connection-on-exterior-powers-is-a-degree-zero-derivation", "thm-the-exterior-derivative-is-a-graded-derivation", "thm-the-exterior-derivative-squares-to-zero"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lecture 6, Proposition 6.1.5, printed pages 39–40
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

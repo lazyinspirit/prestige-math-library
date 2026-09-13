@@ -2,7 +2,7 @@
 id: thm-algebraic-symmetries-of-the-riemann-tensor
 kind: theorem
 title: Algebraic symmetries of the Riemann tensor
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-riemann-curvature-four-tensor","prop-curvature-is-skew-in-its-first-two-arguments","thm-first-bianchi-identity","def-levi-civita-connection"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 7.4, complete proof on printed pages 121–123
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

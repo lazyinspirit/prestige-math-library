@@ -2,7 +2,7 @@
 id: ex-two-cohen-reals-as-mutually-generic-coordinates
 kind: example
 title: Two Cohen reals as mutually generic coordinates
-status: draft
+status: published
 origin: pipeline
 deps: [thm-mutually-generic-cohen-coordinate-reals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

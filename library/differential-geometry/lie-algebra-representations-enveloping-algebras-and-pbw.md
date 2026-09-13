@@ -1,7 +1,7 @@
 ---
 page: lie-algebra-representations-enveloping-algebras-and-pbw
 title: Lie Algebra Representations, Enveloping Algebras, and PBW
-status: draft
+status: published
 items:
   - def-lie-algebra-over-a-field
   - def-lie-subalgebra-ideal-and-center

@@ -2,7 +2,7 @@
 id: thm-omega-two-iteration-forces-ma-and-not-ch
 kind: theorem
 title: The omega_2 iteration forces MA and continuum aleph_2
-status: draft
+status: published
 origin: pipeline
 deps: [def-omega-two-ma-bookkeeping-iteration, thm-finite-support-iterations-preserve-ccc, lem-bounded-stage-capture-in-finite-support-iterations, lem-finite-support-iteration-size-bound, lem-ma-reduction-to-small-ccc-orders, def-cohen-collapse-and-levy-collapse-forcings, thm-chain-condition-preserves-cofinalities-and-cardinals, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

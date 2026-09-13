@@ -2,7 +2,7 @@
 id: ex-basic-fraenkel-finite-or-cofinite-support-test
 kind: example
 title: Finite support forces a finite-or-cofinite atom subset
-status: draft
+status: published
 origin: pipeline
 deps: [thm-basic-fraenkel-model]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

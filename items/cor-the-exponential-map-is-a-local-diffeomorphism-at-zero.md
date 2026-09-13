@@ -2,7 +2,7 @@
 id: cor-the-exponential-map-is-a-local-diffeomorphism-at-zero
 kind: corollary
 title: The exponential map is a local diffeomorphism at zero
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero", "thm-smooth-inverse-function-theorem-on-manifolds"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.7(2) and proof, printed pages 30–31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

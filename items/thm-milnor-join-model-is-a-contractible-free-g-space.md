@@ -2,7 +2,7 @@
 id: thm-milnor-join-model-is-a-contractible-free-g-space
 kind: theorem
 title: Milnor's join model is a contractible free G-space
-status: draft
+status: published
 origin: pipeline
 deps: ["def-milnor-infinite-join-model-of-eg", "lem-finite-join-models-for-circle-and-two-point-groups", "lem-locally-finite-sums-are-continuous", "def-locally-trivial-fiber-bundle"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

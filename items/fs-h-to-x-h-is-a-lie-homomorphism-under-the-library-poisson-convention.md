@@ -2,7 +2,7 @@
 id: fs-h-to-x-h-is-a-lie-homomorphism-under-the-library-poisson-convention
 kind: false-statement
 title: $H\mapsto X_H$ is a Lie homomorphism under the library Poisson convention
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, conclusion of §18.3, p. 109
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

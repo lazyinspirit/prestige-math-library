@@ -2,7 +2,7 @@
 id: lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere
 kind: lemma
 title: Extending over one cell is equivalent to nullhomotoping the attaching sphere
-status: draft
+status: published
 origin: pipeline
 deps: []
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

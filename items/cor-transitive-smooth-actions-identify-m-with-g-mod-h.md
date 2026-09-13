@@ -2,7 +2,7 @@
 id: cor-transitive-smooth-actions-identify-m-with-g-mod-h
 kind: corollary
 title: Transitive smooth actions identify M with G/H
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-every-orbit-is-an-injectively-immersed-homogeneous-space, thm-quotient-manifold-by-a-closed-lie-subgroup, thm-morse-sard-for-smooth-manifolds, prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold, thm-smooth-inverse-function-theorem-on-manifolds]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 4.12 and proof, printed pages 30–31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

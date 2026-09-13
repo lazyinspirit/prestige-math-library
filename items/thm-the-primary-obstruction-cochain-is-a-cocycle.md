@@ -2,7 +2,7 @@
 id: thm-the-primary-obstruction-cochain-is-a-cocycle
 kind: theorem
 title: The primary obstruction cochain is a cocycle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-primary-cellular-obstruction-cochain", "thm-cellular-chains-compute-homology-with-local-coefficients", "thm-long-exact-sequence-of-relative-homotopy-groups", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "lem-relative-single-cell-layer-has-compatible-homotopy-and-homology-bases", "prop-the-first-hurewicz-map-in-degree-one-is-abelianization", "thm-long-exact-sequence-of-a-pair-in-singular-homology"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

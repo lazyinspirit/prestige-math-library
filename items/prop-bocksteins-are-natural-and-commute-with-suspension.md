@@ -2,7 +2,7 @@
 id: prop-bocksteins-are-natural-and-commute-with-suspension
 kind: proposition
 title: Bocksteins are natural and stable
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stable-natural-cohomology-operation", "def-bockstein-connecting-operation", "lem-the-bockstein-is-independent-of-lift-and-cocycle-representative", "thm-naturality-of-the-singular-cohomology-pair-sequence", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "thm-excision-for-singular-cohomology", "def-axiom-of-choice"]
 proof_strategy: diagram chase
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

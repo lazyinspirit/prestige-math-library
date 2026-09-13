@@ -2,7 +2,7 @@
 id: thm-compact-connected-regular-fibres-are-tori
 kind: theorem
 title: Compact connected regular fibres are tori
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Proposition 6.10 and proof, pp. 68--69
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-graphs-of-exact-and-closed-one-forms-as-lagrangians
 kind: example
 title: Graphs of exact and closed one-forms as Lagrangians
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-graph-of-a-one-form-is-lagrangian-iff-the-one-form-is-closed"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 2, graphs of one-forms, pp. 17--18
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

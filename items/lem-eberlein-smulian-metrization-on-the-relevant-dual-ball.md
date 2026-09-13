@@ -2,7 +2,7 @@
 id: lem-eberlein-smulian-metrization-on-the-relevant-dual-ball
 kind: lemma
 title: Eberlein–Šmulian metrization on the relevant dual ball
-status: draft
+status: published
 origin: pipeline
 deps: ["def-weak-topology-on-a-normed-space", "def-separable-space", "lem-countable-iff-surjection-from-n", "cor-relative-hahn-banach-dual-norming", "def-countable-choice", "def-hahn-banach-extension-principle-relative", "def-product-topology", "thm-reals-cauchy-complete", "thm-complex-plane-is-complete", "lem-standard-complete-metric-on-a-countable-product", "thm-metric-hausdorff-separation", "thm-compactness-under-continuous-maps"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

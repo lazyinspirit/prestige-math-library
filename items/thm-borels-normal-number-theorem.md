@@ -2,7 +2,7 @@
 id: thm-borels-normal-number-theorem
 kind: theorem
 title: Borel's normal number theorem
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints, thm-birkhoff-ergodic-theorem, thm-ergodicity-and-invariant-functions, thm-dominated-convergence, thm-integrals-are-invariant-under-measure-preserving-maps, thm-integer-base-map-is-strongly-mixing, thm-mixing-implies-weak-mixing-implies-ergodicity, thm-lebesgue-measure-of-a-box-of-every-kind, thm-finite-and-countable-subadditivity-of-measures, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

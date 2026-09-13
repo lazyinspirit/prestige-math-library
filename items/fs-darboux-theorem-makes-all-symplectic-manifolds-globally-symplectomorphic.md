@@ -2,7 +2,7 @@
 id: fs-darboux-theorem-makes-all-symplectic-manifolds-globally-symplectomorphic
 kind: false-statement
 title: Darboux theorem makes all symplectic manifolds globally symplectomorphic
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-darboux-theorem"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 8, Theorem 8.1 and its local consequence, p. 47
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

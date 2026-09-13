@@ -1,7 +1,7 @@
 ---
 page: reflexivity-and-eberlein-smulian-examples
 title: Reflexivity and Eberlein Smulian — Examples
-status: draft
+status: published
 items: []
 examples: [ex-hilbert-spaces-are-uniformly-convex, ex-reflexivity-of-ell-p-and-lp, cex-c0-is-not-reflexive, cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences, rem-complex-bishop-phelps-for-general-convex-sets, ex-norm-attaining-functionals-on-a-hilbert-space]
 ---

@@ -2,7 +2,7 @@
 id: lem-irrational-torus-flow-is-free-with-dense-orbits
 kind: lemma
 title: The irrational torus flow is free with dense orbits
-status: draft
+status: published
 origin: pipeline
 deps: [def-smooth-left-action-of-a-lie-group, lem-pigeonhole]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Irrational torus winding, Example 3.14(2), printed page 26; immersed-subgroup Example 4.6(1), printed page 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

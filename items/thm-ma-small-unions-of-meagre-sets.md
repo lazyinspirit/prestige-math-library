@@ -2,7 +2,7 @@
 id: thm-ma-small-unions-of-meagre-sets
 kind: theorem
 title: MA makes unions of fewer than continuum many meagre sets meagre
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, def-nowhere-dense-meagre-and-residual-subsets, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-basic-cohen-model-fails-well-orderability-and-choice
 kind: corollary
 title: The basic Cohen model fails well-orderability and AC
-status: draft
+status: published
 origin: pipeline
 deps: [def-basic-cohen-symmetric-system, thm-hereditarily-symmetric-interpretations-form-a-zf-model, thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals, def-axiom-of-choice, thm-well-ordering-theorem]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-hilbert-spaces-are-uniformly-convex
 kind: example
 title: Hilbert spaces are uniformly convex
-status: draft
+status: published
 origin: pipeline
 deps: [def-banach-space, def-uniformly-convex-banach-space, def-inner-product-space, def-inner-product-norm, cor-triangle-inequality-for-inner-product-norm, thm-of-square-roots, lem-of-square-monotone]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

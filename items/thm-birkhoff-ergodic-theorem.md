@@ -2,7 +2,9 @@
 id: thm-birkhoff-ergodic-theorem
 kind: theorem
 title: Birkhoff pointwise ergodic theorem
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 landmark: true
 deps: [lem-sigma-finite-ergodic-oscillation-sets-have-finite-measure, thm-maximal-ergodic-theorem, def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, thm-fatou-lemma, thm-integrals-are-invariant-under-measure-preserving-maps, thm-finite-and-countable-subadditivity-of-measures]

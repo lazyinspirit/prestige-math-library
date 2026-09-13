@@ -2,7 +2,7 @@
 id: def-poisson-bracket-on-a-symplectic-manifold
 kind: definition
 title: Poisson bracket on a symplectic manifold
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Definition 18.5, p. 108
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

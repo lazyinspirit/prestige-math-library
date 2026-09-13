@@ -2,7 +2,7 @@
 id: prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra
 kind: proposition
 title: Kernel of the infinitesimal orbit map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-fundamental-vector-field-of-a-left-action, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, thm-stabilizers-are-closed-embedded-lie-subgroups, thm-constant-rank-theorem-for-manifolds, thm-quotient-manifold-by-a-closed-lie-subgroup, prop-tangent-space-of-a-homogeneous-quotient, thm-quotient-universal-property]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

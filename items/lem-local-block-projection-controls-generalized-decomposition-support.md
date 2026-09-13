@@ -2,7 +2,7 @@
 id: lem-local-block-projection-controls-generalized-decomposition-support
 kind: lemma
 title: Local block projection controls p-section character support
-status: draft
+status: published
 origin: pipeline
 deps: [lem-block-idempotents-lift-uniquely-from-kh-to-oh, def-brauer-subsection, thm-nagao-decomposition-for-restriction-to-a-centralizer, lem-nagao-error-terms-have-zero-trace-on-the-relevant-p-section, thm-blocks-partition-ordinary-and-brauer-irreducible-characters, def-algebraically-closed-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice
 kind: lemma
 title: Stabilizer of the $\mathbb R^n$-action on a compact connected regular fibre is a full lattice
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","prop-regular-common-level-sets-are-lagrangian-submanifolds","prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action","cor-every-smooth-vector-field-on-a-compact-manifold-is-complete","cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Proposition 6.10 and proof, pp. 68--69
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

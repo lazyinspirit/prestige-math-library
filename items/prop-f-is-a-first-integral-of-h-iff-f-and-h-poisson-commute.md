@@ -2,7 +2,7 @@
 id: prop-f-is-a-first-integral-of-h-iff-f-and-h-poisson-commute
 kind: proposition
 title: $F$ is a first integral of $H$ iff $F$ and $H$ Poisson commute
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-observable-evolution-equation", "def-first-integral-and-poisson-commuting-functions"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Theorem 18.9, p. 109
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

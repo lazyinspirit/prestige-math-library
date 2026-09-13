@@ -2,7 +2,7 @@
 id: ex-ma-diagonal-real
 kind: example
 title: MA produces a real outside a small listed family
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, def-cohen-collapse-and-levy-collapse-forcings]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-the-heisenberg-lie-group-and-algebra
 kind: example
 title: The Heisenberg Lie group and algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-matrix-units, def-lie-bracket-on-the-tangent-space-of-a-lie-group, def-lie-bracket-of-smooth-vector-fields]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

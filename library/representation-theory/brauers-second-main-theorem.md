@@ -1,7 +1,7 @@
 ---
 page: brauers-second-main-theorem
 title: Brauers Second Main Theorem
-status: draft
+status: published
 items:
   - lem-commuting-p-and-p-prime-parts-of-a-finite-group-element
   - def-p-section-of-a-p-element

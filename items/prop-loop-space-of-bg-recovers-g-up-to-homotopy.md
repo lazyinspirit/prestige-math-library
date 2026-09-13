@@ -2,7 +2,7 @@
 id: prop-loop-space-of-bg-recovers-g-up-to-homotopy
 kind: proposition
 title: The based loop space of BG recovers G weakly
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-milnor-join-model-is-a-contractible-free-g-space", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-whitehead-theorem", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

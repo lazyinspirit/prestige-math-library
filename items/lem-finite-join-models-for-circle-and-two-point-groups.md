@@ -2,7 +2,7 @@
 id: lem-finite-join-models-for-circle-and-two-point-groups
 kind: lemma
 title: Finite join models for the circle and the two-point group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-milnor-infinite-join-model-of-eg", "thm-of-square-roots", "thm-heine-borel-rn", "thm-finite-products-of-compact-spaces", "thm-compactness-under-continuous-maps", "thm-quotient-universal-property", "thm-product-universal-property", "lem-algebra-of-continuous-real-maps-on-a-space", "lem-metrics-on-rn", "thm-metric-hausdorff-separation"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

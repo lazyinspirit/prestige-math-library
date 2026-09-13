@@ -2,7 +2,7 @@
 id: ex-the-mobius-line-bundle-as-an-associated-bundle
 kind: example
 title: The Möbius line bundle as an associated bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-principal-g-bundle-and-associated-fiber-bundle, def-associated-bundle-to-a-principal-bundle-and-representation, thm-associated-vector-bundle-is-well-defined]
@@ -15,6 +15,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Möbius Bundle Example 10.3, printed pages 251–252, and Problem 21-9, printed pages 560–561
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

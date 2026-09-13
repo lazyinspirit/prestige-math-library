@@ -2,7 +2,7 @@
 id: lem-block-idempotents-lift-uniquely-from-kh-to-oh
 kind: lemma
 title: Block idempotents lift uniquely from kH to OH
-status: draft
+status: published
 origin: pipeline
 deps: [def-splitting-p-modular-system-for-a-finite-group, def-p-blocks-by-primitive-central-idempotents]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

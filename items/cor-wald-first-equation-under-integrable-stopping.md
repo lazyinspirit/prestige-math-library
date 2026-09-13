@@ -2,7 +2,7 @@
 id: cor-wald-first-equation-under-integrable-stopping
 kind: corollary
 title: Wald first equation under integrable stopping
-status: draft
+status: published
 origin: pipeline
 deps: [lem-equivalent-event-tests-for-a-discrete-stopping-time, def-identically-distributed-and-iid-random-variables, thm-grouping-independent-sigma-algebras, thm-factorization-of-expectations-for-independent-variables, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, thm-linearity-of-the-lebesgue-integral-on-l-one]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

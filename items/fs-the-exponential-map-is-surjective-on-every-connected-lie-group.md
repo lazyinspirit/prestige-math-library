@@ -2,7 +2,7 @@
 id: fs-the-exponential-map-is-surjective-on-every-connected-lie-group
 kind: false-statement
 title: The exponential map is surjective on every connected Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-exponential-map-of-a-lie-group, def-determinant-of-a-square-matrix, def-matrix-product-and-identity-matrix, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval, lem-exponential-series-has-infinite-radius, thm-polar-decomposition]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

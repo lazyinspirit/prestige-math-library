@@ -2,13 +2,14 @@
 id: thm-fourier-transform-of-a-compactly-supported-distribution-is-a-smooth-polynomially-bounded-multiplier
 kind: theorem
 title: Fourier transform of a compactly supported distribution is a smooth polynomially bounded multiplier
-status: draft
+status: published
 origin: pipeline
 deps: [def-fourier-transform-of-a-tempered-distribution, thm-compactly-supported-distributions-are-tempered, lem-compactly-supported-distributions-extend-to-smooth-functions, lem-distribution-pairing-with-smooth-parameter-families, lem-smooth-polynomially-bounded-multipliers-on-schwartz-space, lem-schwartz-parameter-pairing-and-integral-interchange, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

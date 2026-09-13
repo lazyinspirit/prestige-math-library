@@ -2,13 +2,14 @@
 id: def-strict-map-and-structure-compatible-homotopy-of-sequential-prespectra
 kind: definition
 title: Strict maps and structure-compatible homotopies of sequential prespectra
-status: draft
+status: published
 origin: pipeline
 deps: ["def-sequential-prespectrum-spectrum-and-adjoint-structure-maps"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

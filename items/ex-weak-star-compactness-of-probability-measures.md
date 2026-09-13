@@ -2,13 +2,14 @@
 id: ex-weak-star-compactness-of-probability-measures
 kind: example
 title: Weak-star compactness of probability measures
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "lem-positive-c-zero-functionals-have-finite-regular-representing-measures", "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals", "def-regular-borel-measure-on-an-lch-space", "def-locally-compact-space", "def-compact-support-c-c-and-c-zero-on-an-lch-space", "thm-closed-subspace-of-a-compact-space-is-compact"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

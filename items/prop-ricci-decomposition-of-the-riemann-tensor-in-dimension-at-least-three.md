@@ -2,7 +2,7 @@
 id: prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three
 kind: proposition
 title: Ricci decomposition of the Riemann tensor in dimension at least three
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-kulkarni-nomizu-product-trace-free-ricci-and-weyl-curvature","thm-algebraic-symmetries-of-the-riemann-tensor","lem-contraction-is-independent-of-the-basis-formula","lem-ricci-curvature-is-symmetric-and-basis-independent","def-scalar-curvature","cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lemma 13.1.5, Lemma 13.1.7, Remark 13.1.9, and Theorem 13.2.1, printed pages 91–95
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-every-lie-subgroup-is-an-embedded-closed-subset
 kind: false-statement
 title: Not every Lie subgroup is embedded and closed
-status: draft
+status: published
 origin: pipeline
 deps: [def-immersed-embedded-and-closed-lie-subgroup, lem-irrational-torus-flow-is-free-with-dense-orbits]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Definition 4.5 and Proposition 4.7, printed page 30
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras
 kind: proposition
 title: Kernels, images, and the first isomorphism theorem for Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-quotient-lie-algebra, thm-first-isomorphism-theorem-modules, def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

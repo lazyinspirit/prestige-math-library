@@ -2,13 +2,14 @@
 id: ex-fourier-transform-of-dirac-and-one
 kind: example
 title: Fourier transform of dirac and one
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

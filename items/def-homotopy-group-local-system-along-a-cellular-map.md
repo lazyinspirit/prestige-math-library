@@ -2,13 +2,14 @@
 id: def-homotopy-group-local-system-along-a-cellular-map
 kind: definition
 title: Homotopy-group local system along a cellular map
-status: draft
+status: published
 origin: pipeline
 deps: ["def-fiber-transport-and-monodromy-action", "def-local-system-of-r-modules-and-its-pullback", "prop-higher-homotopy-basepoint-transport-and-moving-homotopies", "lem-high-relative-cells-do-not-change-lower-homotopy"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: rem-mean-curvature-and-minimal-submanifolds
 kind: remark
 title: Mean curvature and minimal submanifolds
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-mean-curvature-vector", "prop-first-variation-of-volume-for-a-normal-variation", "def-totally-geodesic-submanifold", "def-shape-operator", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "def-riemannian-volume-density", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-connection-laws-in-directional-form", "thm-the-induced-connection-is-levi-civita"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Gaussian and Mean Curvatures and the minimal-hypersurface discussion, printed pages 142–143
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

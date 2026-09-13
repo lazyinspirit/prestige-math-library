@@ -2,11 +2,12 @@
 id: cex-an-unstable-homotopy-class-need-not-yet-be-stable
 kind: counterexample
 title: An unstable homotopy class need not yet be stable
-status: draft
+status: published
 origin: pipeline
 deps: ["def-suspension-prespectrum-and-sphere-prespectrum", "def-stable-homotopy-groups-of-a-sequential-prespectrum", "thm-freudenthal-suspension-theorem", "cor-fundamental-group-of-two-circle-wedge", "thm-reduced-words-form-the-free-group", "thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one", "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex"]
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

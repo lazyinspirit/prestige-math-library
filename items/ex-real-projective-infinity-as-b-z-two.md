@@ -2,7 +2,7 @@
 id: ex-real-projective-infinity-as-b-z-two
 kind: example
 title: Real projective infinity as BZ/2
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-finite-join-models-for-circle-and-two-point-groups", "thm-milnor-join-model-is-a-contractible-free-g-space", "cor-classifying-space-of-a-discrete-group-is-a-k-g-one", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: fs-every-nondegenerate-two-form-is-symplectic
 kind: false-statement
 title: Every nondegenerate two-form is symplectic
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-form-and-symplectic-manifold"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, definition of a symplectic form, pp. 4--5
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

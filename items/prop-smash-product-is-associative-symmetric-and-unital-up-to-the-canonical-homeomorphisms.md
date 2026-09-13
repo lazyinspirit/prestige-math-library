@@ -2,11 +2,12 @@
 id: prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms
 kind: proposition
 title: Canonical associativity, symmetry, and unit maps for smash products
-status: draft
+status: published
 origin: pipeline
 deps: ["def-smash-product-of-based-spaces", "lem-compact-test-exponential-law-and-products-of-quotients", "thm-quotient-universal-property"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

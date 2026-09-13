@@ -2,7 +2,7 @@
 id: ex-the-round-sphere-has-positive-constant-sectional-curvature
 kind: example
 title: The round sphere has positive constant sectional curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","thm-a-regular-level-set-is-an-embedded-submanifold","prop-tangent-space-of-a-regular-level-set-is-the-kernel","prop-christoffel-formula-for-the-levi-civita-connection","prop-connection-laws-in-directional-form","thm-gauss-equation-for-a-riemannian-submanifold","thm-weingarten-equation-and-adjointness-of-the-shape-operator","ex-euclidean-space-has-zero-curvature","def-sectional-curvature"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Equations (8.2)–(8.4), printed pages 140–141
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

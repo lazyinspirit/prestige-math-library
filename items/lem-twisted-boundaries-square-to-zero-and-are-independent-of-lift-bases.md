@@ -2,12 +2,13 @@
 id: lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases
 kind: lemma
 title: Twisted boundaries square to zero and ignore lift bases
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-singular-and-cellular-chain-complexes-with-local-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

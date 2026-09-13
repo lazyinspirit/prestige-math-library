@@ -2,7 +2,7 @@
 id: thm-nondegeneracy-is-equivalent-to-a-nonvanishing-top-wedge
 kind: theorem
 title: Nondegeneracy is equivalent to a nonvanishing top wedge
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-form-and-symplectic-manifold", "def-wedge-product-of-differential-forms", "thm-alternating-forms-have-a-symplectic-normal-form"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §3.1, Proposition 3.2, pp. 31--32
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

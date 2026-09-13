@@ -2,7 +2,7 @@
 id: prop-coordinate-formula-for-the-curvature-tensor
 kind: proposition
 title: Coordinate formula for the curvature tensor
-status: draft
+status: published
 origin: pipeline
 deps: ["def-curvature-of-an-affine-connection", "def-christoffel-symbols-of-an-affine-connection", "prop-coordinate-vector-fields-commute"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, equations (7.3)–(7.4), printed pages 117–119
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

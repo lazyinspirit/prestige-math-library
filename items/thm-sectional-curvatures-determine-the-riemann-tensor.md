@@ -2,7 +2,7 @@
 id: thm-sectional-curvatures-determine-the-riemann-tensor
 kind: theorem
 title: Sectional curvatures determine the Riemann tensor
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Lemma 8.9, complete proof on printed pages 146–147
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

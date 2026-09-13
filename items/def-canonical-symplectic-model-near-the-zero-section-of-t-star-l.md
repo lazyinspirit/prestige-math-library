@@ -2,7 +2,7 @@
 id: def-canonical-symplectic-model-near-the-zero-section-of-t-star-l
 kind: definition
 title: Canonical symplectic model near the zero section of $T^*L$
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-canonical-cotangent-two-form-is-symplectic"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Lemma 5.13 and Theorem 5.14, pp. 62--63
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-lie-group-homomorphism-isomorphism-and-automorphism
 kind: definition
 title: Lie-group homomorphism, isomorphism, and automorphism
-status: draft
+status: published
 origin: pipeline
 deps: ["def-lie-group", "def-group-homomorphism", "lem-inverse-of-bijective-group-homomorphism"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Text immediately after Definition 2.1, printed page 14
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

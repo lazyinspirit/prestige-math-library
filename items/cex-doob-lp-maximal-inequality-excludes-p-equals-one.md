@@ -2,7 +2,7 @@
 id: cex-doob-lp-maximal-inequality-excludes-p-equals-one
 kind: counterexample
 title: Doob Lp maximal inequality excludes p equals one
-status: draft
+status: published
 origin: pipeline
 deps: [lem-conditional-expectation-process-is-a-martingale, def-expectation-of-a-nonnegative-or-integrable-random-variable, def-axiom-of-choice]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

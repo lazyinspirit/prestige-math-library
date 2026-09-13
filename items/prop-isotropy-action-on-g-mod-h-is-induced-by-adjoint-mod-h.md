@@ -2,7 +2,7 @@
 id: prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h
 kind: proposition
 title: The isotropy action on G/H is induced by Ad modulo h
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, prop-tangent-space-of-a-homogeneous-quotient, def-conjugation-and-the-adjoint-representation-of-a-lie-group]
@@ -15,6 +15,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Homogeneous spaces and adjoint action, §§4.1 and 9.1, printed pages 28 and 53
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

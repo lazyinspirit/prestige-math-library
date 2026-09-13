@@ -2,7 +2,7 @@
 id: thm-hamiltonian-flows-commute-iff-their-hamiltonians-poisson-commute-up-to-locally-constant-bracket
 kind: theorem
 title: Hamiltonian flows commute iff their Hamiltonians Poisson commute up to locally constant bracket
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism", "thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute", "prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Proposition 18.3 and §18.4, pp. 108--110
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

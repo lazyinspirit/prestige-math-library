@@ -2,7 +2,7 @@
 id: thm-lp-bounded-martingale-convergence
 kind: theorem
 title: Lp-bounded martingale convergence
-status: draft
+status: published
 origin: pipeline
 deps: [thm-doob-submartingale-convergence, thm-doob-lp-maximal-inequality, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, cor-conditional-lp-contraction, lem-multistep-martingale-characterization, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

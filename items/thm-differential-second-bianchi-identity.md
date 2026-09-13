@@ -2,7 +2,7 @@
 id: thm-differential-second-bianchi-identity
 kind: theorem
 title: Differential second Bianchi identity
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-second-bianchi-identity-for-a-bundle-connection", "def-riemann-curvature-four-tensor", "prop-induced-connections-commute-with-contraction-and-permutation", "def-levi-civita-connection"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 7.5, complete proof on printed pages 123–124
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

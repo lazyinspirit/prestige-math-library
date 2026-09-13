@@ -2,7 +2,7 @@
 id: ex-trivial-principal-bundle-corresponds-to-a-nullhomotopic-classifying-map
 kind: example
 title: The trivial principal bundle has a nullhomotopic classifying map
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-principal-bundles-are-classified-by-maps-to-bg", "def-milnor-infinite-join-model-of-eg"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

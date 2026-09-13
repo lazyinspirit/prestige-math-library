@@ -2,11 +2,12 @@
 id: prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems
 kind: proposition
 title: The sphere prespectrum groups are the classical stable stems
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stable-stem-of-the-sphere", "lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

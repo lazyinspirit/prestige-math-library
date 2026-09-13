@@ -2,13 +2,14 @@
 id: lem-schwartz-parameter-pairing-and-integral-interchange
 kind: lemma
 title: Schwartz parameter pairing and integral interchange
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-seminorm-bound-characterizes-tempered-distributions, thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space, thm-dominated-convergence, thm-integral-triangle-inequality, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

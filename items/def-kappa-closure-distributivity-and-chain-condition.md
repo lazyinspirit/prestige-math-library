@@ -2,13 +2,14 @@
 id: def-kappa-closure-distributivity-and-chain-condition
 kind: definition
 title: Closure, distributivity, and chain conditions for forcing orders
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-preorder-compatibility-and-filter, def-poset-ccc-and-knaster-property, def-cofinality]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

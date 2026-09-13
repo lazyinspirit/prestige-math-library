@@ -2,7 +2,7 @@
 id: thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields
 kind: theorem
 title: One-parameter subgroups are integral curves of left-invariant fields
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-one-parameter-subgroup-of-a-lie-group", "def-integral-curve-of-a-vector-field", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "thm-left-invariant-vector-fields-are-complete", "thm-unique-maximal-integral-curve-through-each-point", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Proposition 3.1 and complete real-case proof, printed page 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

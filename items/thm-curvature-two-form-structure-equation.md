@@ -2,7 +2,7 @@
 id: thm-curvature-two-form-structure-equation
 kind: theorem
 title: Curvature two-form structure equation
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form", "def-connection-one-form-in-a-local-frame", "prop-local-coordinate-formula-for-a-bundle-connection", "thm-local-coordinate-formula-for-the-exterior-derivative", "def-wedge-product-of-differential-forms"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lecture 6, Proposition 6.1.3 and Remark 6.1.4, printed pages 38–39
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

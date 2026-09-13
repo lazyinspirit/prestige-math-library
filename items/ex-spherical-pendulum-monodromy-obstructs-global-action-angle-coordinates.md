@@ -2,7 +2,7 @@
 id: ex-spherical-pendulum-monodromy-obstructs-global-action-angle-coordinates
 kind: example
 title: Spherical-pendulum monodromy obstructs global action–angle coordinates
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://arxiv.org/pdf/1901.00705
       locator: Theorem 2.7 and §3.1, PDF pp. 5--11
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

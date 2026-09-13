@@ -1,7 +1,7 @@
 ---
 page: hamiltonian-mechanics-and-completely-integrable-systems-examples
 title: Hamiltonian Mechanics and Completely Integrable Systems — Examples
-status: draft
+status: published
 items: []
 examples: ["ex-free-particle-hamiltonian-flow","ex-harmonic-oscillator-and-elliptic-phase-curves","ex-simple-pendulum-phase-portrait","ex-geodesic-flow-as-a-hamiltonian-flow-on-the-cotangent-bundle","ex-angular-momentum-as-a-cotangent-lift-hamiltonian","ex-poisson-brackets-in-canonical-coordinates","ex-a-symplectic-nonhamiltonian-vector-field-on-the-two-torus","ex-legendre-transform-of-a-natural-mechanical-lagrangian","ex-action-angle-coordinates-for-the-harmonic-oscillator","ex-spherical-pendulum-monodromy-obstructs-global-action-angle-coordinates","cex-a-singular-common-level-need-not-be-a-torus","cex-poisson-commuting-functions-with-dependent-differentials-do-not-give-liouville-arnold-coordinates"]
 ---

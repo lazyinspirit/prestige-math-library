@@ -2,7 +2,7 @@
 id: thm-weinstein-lagrangian-neighborhood-theorem
 kind: theorem
 title: Weinstein Lagrangian neighborhood theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-canonical-symplectic-model-near-the-zero-section-of-t-star-l", "thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure", "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold", "thm-relative-moser-theorem"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 8, Theorem 8.4 and proof, pp. 48--49
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

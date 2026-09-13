@@ -1,7 +1,7 @@
 ---
 page: reflexivity-and-eberlein-smulian
 title: Reflexivity and Eberlein Smulian
-status: draft
+status: published
 items: [thm-reflexive-iff-unit-ball-weakly-compact, thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive, thm-closed-subspaces-of-reflexive-spaces-are-reflexive, thm-quotients-of-reflexive-spaces-are-reflexive, lem-complex-lp-duality-from-real-lp-duality, thm-reflexivity-of-lp-for-one-less-p-less-infinity, def-relative-weak-compactness-and-three-sequential-notions, lem-eberlein-smulian-separable-reduction, lem-eberlein-smulian-metrization-on-the-relevant-dual-ball, lem-eberlein-smulian-countable-compactness-closes-in-the-bidual, thm-eberlein-smulian, cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence, def-schur-property, thm-ell-one-has-the-schur-property, cor-ell-one-is-not-reflexive, def-uniformly-convex-banach-space, lem-uniform-convexity-gives-unique-asymptotic-centers, thm-milman-pettis, lem-james-noncompactness-sequence, lem-james-norm-attainment-compactness-criterion, thm-james-reflexivity-theorem, lem-bishop-phelps-support-cone-construction, thm-bishop-phelps, thm-separable-dual-implies-separable-primal, cor-separable-reflexive-space-has-separable-dual, lem-clarkson-inequalities-for-real-and-complex-lp, cor-lp-is-uniformly-convex-for-one-less-p-less-infinity, lem-real-and-complex-c-zero-are-banach]
 examples: []
 ---

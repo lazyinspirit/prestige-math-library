@@ -2,7 +2,7 @@
 id: fs-the-canonical-map-g-to-u-g-is-injective-by-the-definition-of-a-quotient
 kind: false-statement
 title: Injectivity is not part of the enveloping quotient definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-universal-enveloping-algebra, cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-the-tautological-one-form-is-intrinsic-and-smooth
 kind: lemma
 title: The tautological one-form is intrinsic and smooth
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-tautological-one-form-on-a-cotangent-bundle"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §3.4, Definition 3.10 and Proposition 3.14, pp. 34--36
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

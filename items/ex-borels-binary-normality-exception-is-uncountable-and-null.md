@@ -2,7 +2,7 @@
 id: ex-borels-binary-normality-exception-is-uncountable-and-null
 kind: example
 title: Borel's exceptional set can be uncountable and null
-status: draft
+status: published
 origin: pipeline
 deps: [thm-borels-normal-number-theorem, def-canonical-base-b-expansion-and-normality, lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints, thm-continuity-from-above-for-measures, thm-lebesgue-measure-of-a-box-of-every-kind, thm-cantor-powerset, lem-countable-iff-surjection-from-n, def-countable-choice]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

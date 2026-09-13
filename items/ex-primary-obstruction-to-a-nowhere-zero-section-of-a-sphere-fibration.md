@@ -2,7 +2,7 @@
 id: ex-primary-obstruction-to-a-nowhere-zero-section-of-a-sphere-fibration
 kind: example
 title: Primary obstruction to a nowhere-zero section of a sphere fibration
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-obstruction-theory-for-lifting-through-a-fibration", "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic", "thm-based-sphere-maps-are-classified-by-geometric-degree", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

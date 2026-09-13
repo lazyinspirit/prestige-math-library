@@ -2,7 +2,7 @@
 id: prop-an-ideal-integrates-to-a-connected-immersed-normal-subgroup
 kind: proposition
 title: An ideal integrates to a connected immersed normal subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-lie-subgroup-lie-subalgebra-correspondence, def-lie-subalgebra-and-ideal, def-conjugation-and-the-adjoint-representation-of-a-lie-group, prop-adjoint-is-a-smooth-lie-group-representation, thm-the-differential-of-adjoint-is-ad, prop-adjoint-exponential-identity, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]
@@ -18,6 +18,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Proposition 1.91 and the ideals/normal-subgroups discussion in Chapter I §10, printed pages 80–81
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

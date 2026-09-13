@@ -2,7 +2,7 @@
 id: def-scalar-curvature
 kind: definition
 title: Scalar curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","lem-ricci-curvature-is-symmetric-and-basis-independent","def-contraction-of-a-mixed-tensor","thm-the-musical-maps-are-smooth-inverse-bundle-isomorphisms"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, Ricci and Scalar Curvatures, printed pages 124–125
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

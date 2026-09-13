@@ -2,7 +2,7 @@
 id: lem-generalized-delta-system-for-small-supports
 kind: lemma
 title: Generalized delta systems for small supports
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-delta-system, thm-cofinality-basics, cor-cardinal-absorption, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

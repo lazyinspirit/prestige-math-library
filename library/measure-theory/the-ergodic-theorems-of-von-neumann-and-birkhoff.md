@@ -1,7 +1,7 @@
 ---
 page: the-ergodic-theorems-of-von-neumann-and-birkhoff
 title: The Ergodic Theorems of von Neumann and Birkhoff
-status: draft
+status: published
 items:
   - def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace
   - prop-ergodic-averages-are-well-defined-and-l-p-contractive

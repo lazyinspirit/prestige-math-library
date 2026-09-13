@@ -2,13 +2,14 @@
 id: thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials
 kind: theorem
 title: Fourier transform of delta constants plane waves and polynomials
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions, thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions, thm-compactly-supported-distributions-are-tempered, thm-polynomial-growth-functions-define-tempered-distributions, def-dirac-delta-and-its-derivatives, thm-fourier-translation-modulation-dilation-and-reflection-laws, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

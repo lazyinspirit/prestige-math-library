@@ -2,7 +2,7 @@
 id: rem-compatible-almost-complex-structures-and-kahler-geometry
 kind: remark
 title: Compatible almost-complex structures and Kähler geometry
-status: draft
+status: published
 origin: pipeline
 deps: ["def-compatible-almost-kahler-metric", "def-lie-bracket-of-smooth-vector-fields"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definition 3.32 and Remark 3.33, pp. 42--43
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

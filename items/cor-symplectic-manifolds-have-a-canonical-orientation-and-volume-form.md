@@ -2,7 +2,7 @@
 id: cor-symplectic-manifolds-have-a-canonical-orientation-and-volume-form
 kind: corollary
 title: Symplectic manifolds have a canonical orientation and volume form
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-nondegeneracy-is-equivalent-to-a-nonvanishing-top-wedge", "def-oriented-smooth-manifold-and-oriented-chart"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §3.1, Definition 3.3 and following paragraph, p. 32
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

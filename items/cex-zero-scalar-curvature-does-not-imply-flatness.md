@@ -2,7 +2,7 @@
 id: cex-zero-scalar-curvature-does-not-imply-flatness
 kind: counterexample
 title: Zero scalar curvature does not imply flatness
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-curvature-of-an-affine-connection","cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases","ex-the-round-sphere-has-positive-constant-sectional-curvature","ex-hyperbolic-space-has-negative-constant-sectional-curvature","ex-curvature-of-a-riemannian-product","prop-scalar-curvature-is-twice-the-sum-of-sectional-curvatures-of-coordinate-planes"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 3.5(c), printed pages 38–42; scalar and model curvature formulas, printed pages 147–149; Problem 8-7(a)–(b), printed page 151
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

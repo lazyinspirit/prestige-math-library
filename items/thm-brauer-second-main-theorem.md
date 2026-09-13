@@ -2,7 +2,7 @@
 id: thm-brauer-second-main-theorem
 kind: theorem
 title: Brauer's Second Main Theorem
-status: draft
+status: published
 origin: pipeline
 deps: [thm-generalized-decomposition-numbers-exist-and-are-unique, def-brauer-subsection, lem-local-block-projection-controls-generalized-decomposition-support, thm-blocks-partition-ordinary-and-brauer-irreducible-characters, prop-decomposition-matrix-is-block-diagonal-after-block-ordering, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions, def-algebraically-closed-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

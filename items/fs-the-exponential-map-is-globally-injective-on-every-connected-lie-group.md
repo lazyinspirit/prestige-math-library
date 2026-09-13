@@ -2,7 +2,7 @@
 id: fs-the-exponential-map-is-globally-injective-on-every-connected-lie-group
 kind: false-statement
 title: The exponential map is globally injective on every connected Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-exponential-map-of-a-lie-group, def-lie-group, thm-continuous-image-of-a-connected-space]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

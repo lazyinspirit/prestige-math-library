@@ -2,7 +2,7 @@
 id: lem-relative-poincare-primitive-near-a-submanifold
 kind: lemma
 title: Relative Poincaré primitive near a submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold", "thm-de-rham-homotopy-formula-for-a-smooth-homotopy"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 7, proof of Theorem 7.4, p. 45
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

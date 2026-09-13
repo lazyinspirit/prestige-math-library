@@ -2,7 +2,7 @@
 id: thm-quotients-of-reflexive-spaces-are-reflexive
 kind: theorem
 title: Quotients of reflexive spaces are reflexive
-status: draft
+status: published
 origin: pipeline
 deps: ["def-reflexive-banach-space", "thm-dual-of-a-quotient-is-the-annihilator", "thm-relative-hahn-banach-norm-preserving-extension", "thm-quotient-of-banach-by-closed-subspace-is-banach", "def-hahn-banach-extension-principle-relative", "def-countable-choice"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-local-convergence-of-the-baker-campbell-hausdorff-series
 kind: lemma
 title: Local convergence of the Baker–Campbell–Hausdorff series
-status: draft
+status: published
 origin: pipeline
 deps: ["def-baker-campbell-hausdorff-series", "def-finite-dimensional-lie-algebra", "thm-coordinate-map-for-a-finite-dimensional-normed-space", "cor-finite-dimensional-normed-spaces-are-banach", "lem-exponential-series-has-infinite-radius", "thm-exponential-addition-formula", "thm-binomial-theorem", "thm-binomial-closed-formula", "thm-geometric-series"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Appendix B §4, Theorem B.22 and formulas (B.23)–(B.24), printed pages 669–671
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

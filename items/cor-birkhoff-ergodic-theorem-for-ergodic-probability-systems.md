@@ -2,7 +2,7 @@
 id: cor-birkhoff-ergodic-theorem-for-ergodic-probability-systems
 kind: corollary
 title: Birkhoff ergodic theorem for ergodic finite-measure systems
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [thm-birkhoff-ergodic-theorem, thm-birkhoff-limit-identification-on-finite-measure-spaces, lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces, thm-ergodicity-and-invariant-functions, def-axiom-of-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-left-maurer-cartan-form
 kind: definition
 title: Left Maurer--Cartan form
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-lie-group", "def-vector-bundle-map-over-a-smooth-base-map", "prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 2, Definition 9 and the following smoothness assertion, printed page 27
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-adem-relation-sq-one-sq-one-equals-zero
 kind: example
 title: The relation Sq^1Sq^1=0
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-first-steenrod-square-is-the-mod-two-bockstein, def-bockstein-connecting-operation]
@@ -16,6 +16,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Section 3.E, Bockstein square zero, printed page 305
 verification:
+  audited: 2026-09-14
   precheck: pass
 ---
 

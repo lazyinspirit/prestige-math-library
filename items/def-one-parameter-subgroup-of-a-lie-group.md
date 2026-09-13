@@ -2,7 +2,7 @@
 id: def-one-parameter-subgroup-of-a-lie-group
 kind: definition
 title: One-parameter subgroup of a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-lie-group", "def-lie-group-homomorphism-isomorphism-and-automorphism"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Note following Theorem 2.29, printed page 23
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

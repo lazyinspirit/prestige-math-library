@@ -2,7 +2,7 @@
 id: ex-k-z-one-as-the-infinite-complex-projective-space
 kind: example
 title: Infinite complex projective space is K(Z,2)
-status: draft
+status: published
 origin: pipeline
 deps: ["def-eilenberg-maclane-space", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "lem-finite-join-models-for-circle-and-two-point-groups", "thm-milnor-join-model-is-a-contractible-free-g-space", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

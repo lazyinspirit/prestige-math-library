@@ -2,7 +2,7 @@
 id: def-induced-connection-and-second-fundamental-form
 kind: definition
 title: Induced connection and second fundamental form
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tangential-and-normal-projections-along-a-riemannian-submanifold", "def-levi-civita-connection", "def-affine-connection-on-a-smooth-manifold", "def-embedded-submanifold-and-slice-chart"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, equation (8.1), Lemma 8.1(a), and definition of II, printed pages 133–135
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

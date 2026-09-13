@@ -2,13 +2,14 @@
 id: lem-minimizer-face-of-a-continuous-affine-functional
 kind: lemma
 title: Minimizer face of a continuous affine functional
-status: draft
+status: published
 origin: pipeline
 deps: ["def-extreme-point-and-face", "thm-compactness-under-continuous-maps", "thm-closed-subspace-of-a-compact-space-is-compact"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

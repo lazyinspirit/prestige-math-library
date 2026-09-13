@@ -2,7 +2,7 @@
 id: thm-azuma-hoeffding-inequality
 kind: theorem
 title: Azuma-Hoeffding inequality
-status: draft
+status: published
 origin: pipeline
 deps: [lem-conditional-hoeffding-bound-for-bounded-martingale-differences, thm-tower-property-of-conditional-expectation, thm-taking-out-what-is-known, cor-markov-inequality-for-random-variables, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

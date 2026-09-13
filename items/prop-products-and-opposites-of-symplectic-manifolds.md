@@ -2,7 +2,7 @@
 id: prop-products-and-opposites-of-symplectic-manifolds
 kind: proposition
 title: Products and opposites of symplectic manifolds
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-form-and-symplectic-manifold", "thm-the-exterior-derivative-commutes-with-pullback"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §4.4, product and opposite convention, pp. 51--52
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

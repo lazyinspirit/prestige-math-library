@@ -2,7 +2,9 @@
 id: lem-wreath-double-power-coefficient-symmetry
 kind: lemma
 title: Wreath double-power comparison and coefficient transposition
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["lem-equivariant-p-fold-external-power-and-diagonal", "lem-free-cyclic-resolution-and-transfer-for-power-operations", "def-axiom-of-choice"]
 proof_strategy: direct

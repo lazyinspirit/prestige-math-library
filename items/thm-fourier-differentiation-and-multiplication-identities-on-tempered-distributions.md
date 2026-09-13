@@ -2,13 +2,14 @@
 id: thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions
 kind: theorem
 title: Fourier differentiation and multiplication identities on tempered distributions
-status: draft
+status: published
 origin: pipeline
 deps: [thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions, def-fourier-transform-of-a-tempered-distribution, thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space, thm-fourier-transform-maps-schwartz-space-continuously-to-itself, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-representation-kernels-are-ideals-and-faithfulness-is-injectivity
 kind: proposition
 title: Representation kernels are ideals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-representation-of-a-lie-algebra, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

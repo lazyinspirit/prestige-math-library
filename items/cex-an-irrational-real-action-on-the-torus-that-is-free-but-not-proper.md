@@ -2,7 +2,7 @@
 id: cex-an-irrational-real-action-on-the-torus-that-is-free-but-not-proper
 kind: counterexample
 title: A free irrational torus action that is not proper
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-and-proper-lie-group-actions, lem-irrational-torus-flow-is-free-with-dense-orbits, thm-finite-products-of-compact-spaces, lem-unit-interval-circle-is-a-nonempty-compact-metric-space, thm-compactness-under-continuous-maps]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Example 21.3, printed page 542
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

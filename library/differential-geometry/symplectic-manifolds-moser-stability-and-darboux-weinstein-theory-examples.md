@@ -1,7 +1,7 @@
 ---
 page: symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples
 title: Symplectic Manifolds, Moser Stability, and Darboux–Weinstein Theory — Examples
-status: draft
+status: published
 items: []
 examples: ["ex-the-standard-symplectic-vector-space","ex-isotropic-coisotropic-and-lagrangian-coordinate-subspaces","ex-the-cotangent-bundle-of-a-circle-as-a-symplectic-cylinder","ex-graphs-of-exact-and-closed-one-forms-as-lagrangians","ex-product-and-opposite-symplectic-manifolds","ex-a-compatible-complex-structure-on-standard-symplectic-space","ex-moser-isotopy-for-area-forms-on-a-compact-surface","ex-darboux-coordinates-for-a-nonconstant-area-form","ex-the-zero-section-and-cotangent-fibres-as-lagrangians","cex-a-nondegenerate-nonclosed-two-form-in-dimension-at-least-four","cex-cohomology-class-obstructs-a-global-symplectomorphism","cex-a-compatible-almost-complex-structure-that-is-not-integrable"]
 ---

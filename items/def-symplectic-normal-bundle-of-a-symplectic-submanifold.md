@@ -2,7 +2,7 @@
 id: def-symplectic-normal-bundle-of-a-symplectic-submanifold
 kind: definition
 title: Symplectic normal bundle of a symplectic submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds", "def-symplectic-orthogonal-complement"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definition 5.16 and Example 5.17(c), pp. 63--64
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

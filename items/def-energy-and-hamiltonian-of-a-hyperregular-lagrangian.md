@@ -2,7 +2,7 @@
 id: def-energy-and-hamiltonian-of-a-hyperregular-lagrangian
 kind: definition
 title: Energy and Hamiltonian of a hyperregular Lagrangian
-status: draft
+status: published
 origin: pipeline
 deps: ["def-regular-and-hyperregular-lagrangian"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 19, energy and Hamiltonian, pp. 114--116
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

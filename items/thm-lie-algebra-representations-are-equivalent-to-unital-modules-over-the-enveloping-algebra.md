@@ -2,7 +2,9 @@
 id: thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra
 kind: theorem
 title: Lie representations are U(g)-modules
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-universal-property-of-the-universal-enveloping-algebra, def-universal-enveloping-algebra, def-representation-of-a-lie-algebra, def-subrepresentation-quotient-representation-and-intertwiner, def-left-and-right-modules]

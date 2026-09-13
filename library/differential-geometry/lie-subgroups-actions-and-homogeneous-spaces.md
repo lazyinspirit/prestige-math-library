@@ -1,7 +1,7 @@
 ---
 page: lie-subgroups-actions-and-homogeneous-spaces
 title: Lie Subgroups, Actions, and Homogeneous Spaces
-status: draft
+status: published
 items:
   - def-lie-subalgebra-and-ideal
   - def-immersed-embedded-and-closed-lie-subgroup

@@ -1,7 +1,7 @@
 ---
 page: lie-groups-invariant-fields-and-the-exponential-map
 title: Lie Groups, Invariant Fields, and the Exponential Map
-status: draft
+status: published
 items:
   - def-lie-group
   - def-lie-group-homomorphism-isomorphism-and-automorphism

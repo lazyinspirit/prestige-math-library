@@ -2,13 +2,14 @@
 id: thm-unit-lattice-dirac-comb-is-fourier-invariant-in-tempered-distributions
 kind: theorem
 title: Dirac comb is fourier invariant
-status: draft
+status: published
 origin: pipeline
 deps: [def-dirac-comb, def-fourier-transform-of-a-tempered-distribution, thm-poisson-summation-for-schwartz-functions, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

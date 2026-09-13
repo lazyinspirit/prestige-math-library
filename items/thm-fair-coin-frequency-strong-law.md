@@ -2,7 +2,9 @@
 id: thm-fair-coin-frequency-strong-law
 kind: theorem
 title: Fair-coin frequency strong law
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-birkhoff-ergodic-theorem, thm-ergodicity-and-invariant-functions, thm-dominated-convergence, thm-integrals-are-invariant-under-measure-preserving-maps, thm-fair-coin-one-sided-shift-is-measure-preserving-and-mixing, thm-mixing-implies-weak-mixing-implies-ergodicity, thm-fair-coin-measure-on-binary-sequences, def-countable-choice]
 provenance:

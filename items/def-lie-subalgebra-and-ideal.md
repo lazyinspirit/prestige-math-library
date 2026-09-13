@@ -2,7 +2,7 @@
 id: def-lie-subalgebra-and-ideal
 kind: definition
 title: Lie subalgebras and ideals
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-dimensional-lie-algebra, def-linear-subspace]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Section 3.4, Definitions 3.43 and 3.46
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

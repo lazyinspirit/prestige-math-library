@@ -2,7 +2,7 @@
 id: prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form
 kind: proposition
 title: Vector-bundle curvature is an endomorphism-valued two-form
-status: draft
+status: published
 origin: pipeline
 deps: ["def-curvature-of-a-vector-bundle-connection", "prop-connection-laws-in-directional-form", "prop-leibniz-rules-for-the-lie-bracket-with-function-multiples", "def-smooth-differential-k-form", "def-dual-and-hom-vector-bundles", "thm-dual-and-hom-transition-functions-define-smooth-bundles", "lem-finite-tensor-products-of-smooth-vector-bundles"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lecture 6, Lemma 6.1.2 and Proposition 6.1.3, printed pages 38–39
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

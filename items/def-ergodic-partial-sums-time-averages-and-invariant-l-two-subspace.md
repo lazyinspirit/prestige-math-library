@@ -2,7 +2,7 @@
 id: def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace
 kind: definition
 title: Ergodic partial sums, time averages, and the invariant L2 subspace
-status: draft
+status: published
 origin: pipeline
 deps: [def-measure-preserving-transformation-and-system, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-strict-and-mod-null-invariant-sigma-algebras]
 justified_by: [prop-ergodic-averages-are-well-defined-and-l-p-contractive]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

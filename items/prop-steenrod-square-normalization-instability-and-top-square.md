@@ -2,7 +2,7 @@
 id: prop-steenrod-square-normalization-instability-and-top-square
 kind: proposition
 title: Steenrod normalization, instability, suspension, and top square
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-steenrod-squares-are-well-defined-and-natural", "def-steenrod-squares-from-cup-i-products", "def-higher-cup-i-products", "thm-cup-i-coboundary-identity", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "thm-excision-for-singular-cohomology"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

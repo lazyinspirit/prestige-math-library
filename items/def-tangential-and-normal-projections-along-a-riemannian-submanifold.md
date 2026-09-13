@@ -2,7 +2,7 @@
 id: def-tangential-and-normal-projections-along-a-riemannian-submanifold
 kind: definition
 title: Tangential and normal projections along a Riemannian submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-normal-and-conormal-bundles-of-an-embedded-submanifold", "prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle", "prop-orthogonal-complements-of-subbundles-are-smooth-subbundles"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lecture 14, Section 14.1, normal bundle, orthogonal decomposition, and projection maps, printed page 101
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

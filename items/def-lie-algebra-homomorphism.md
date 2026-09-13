@@ -2,7 +2,7 @@
 id: def-lie-algebra-homomorphism
 kind: definition
 title: Lie-algebra homomorphism
-status: draft
+status: published
 origin: pipeline
 deps: ["def-finite-dimensional-lie-algebra", "def-linear-map"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Definition 3.17 and following sentence, printed page 33
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

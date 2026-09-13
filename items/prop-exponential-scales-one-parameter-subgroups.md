@@ -2,7 +2,7 @@
 id: prop-exponential-scales-one-parameter-subgroups
 kind: proposition
 title: Exponential scales one-parameter subgroups
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-exponential-map-of-a-lie-group", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields", "def-one-parameter-subgroup-of-a-lie-group", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Note immediately following Definition 3.2 and Theorem 3.7(3), printed page 30
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

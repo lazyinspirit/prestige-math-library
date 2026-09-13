@@ -2,7 +2,9 @@
 id: thm-martingale-central-limit-theorem
 kind: theorem
 title: Martingale central limit theorem
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-square-integrable-martingale-difference-array-and-variance-clock, lem-second-order-characteristic-function-expansion, lem-characteristic-function-of-a-normal-law, cor-characteristic-function-criterion-for-weak-convergence, thm-converging-together-lemma, thm-tower-property-of-conditional-expectation, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, thm-dominated-convergence, def-axiom-of-choice]
 proof_strategy: direct

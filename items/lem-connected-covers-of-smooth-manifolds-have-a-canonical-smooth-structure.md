@@ -2,7 +2,7 @@
 id: lem-connected-covers-of-smooth-manifolds-have-a-canonical-smooth-structure
 kind: lemma
 title: Connected covers of smooth manifolds have a canonical smooth structure
-status: draft
+status: published
 origin: pipeline
 deps: [def-covering-map-and-evenly-covered-neighbourhoods, def-smooth-manifold, def-topological-manifold-without-boundary, prop-local-path-connectedness-lifts-and-descends-along-coverings, thm-connected-and-locally-path-connected-implies-path-connected, thm-locally-connected-iff-components-of-open-sets-are-open, thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Smooth covering maps, Chapter 4; covering Lie groups, Theorem 21.32, printed page 558
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

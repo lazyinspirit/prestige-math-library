@@ -2,7 +2,7 @@
 id: thm-weyl-equidistribution-for-irrational-rotations
 kind: theorem
 title: Weyl equidistribution for irrational rotations
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-equidistribution-mod-one, thm-irrational-circle-rotations-are-uniquely-ergodic, thm-unique-ergodicity-is-equivalent-to-uniform-ergodic-averages, thm-lebesgue-measure-of-a-box-of-every-kind, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

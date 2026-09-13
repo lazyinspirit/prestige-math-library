@@ -2,7 +2,7 @@
 id: cex-cellwise-vanishing-obstructions-with-incompatible-choices-need-not-give-a-global-extension
 kind: counterexample
 title: Incompatible choices do not define one global obstruction problem
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere", "prop-degree-laws-for-circle-loops", "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero", "prop-standard-circle-loops-have-their-integer-degrees", "def-primary-cellular-obstruction-cochain"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

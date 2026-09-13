@@ -2,7 +2,7 @@
 id: lem-conditional-hoeffding-bound-for-bounded-martingale-differences
 kind: lemma
 title: Conditional Hoeffding bound for bounded martingale differences
-status: draft
+status: published
 origin: pipeline
 deps: [thm-basic-algebra-and-order-properties-of-conditional-expectation, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, thm-exponential-two-point-convexity, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

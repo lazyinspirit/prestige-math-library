@@ -2,11 +2,12 @@
 id: prop-a-ring-prespectrum-gives-a-graded-product-on-stable-homotopy-groups
 kind: proposition
 title: A ring prespectrum gives a graded product on stable homotopy groups
-status: draft
+status: published
 origin: pipeline
 deps: ["def-pairing-and-unital-multiplication-of-sequential-prespectra", "def-stable-homotopy-groups-of-a-sequential-prespectrum", "prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

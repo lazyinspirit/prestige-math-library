@@ -2,7 +2,7 @@
 id: thm-mutually-generic-cohen-coordinate-reals
 kind: theorem
 title: Cohen coordinates are distinct and mutually generic
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-collapse-and-levy-collapse-forcings, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, def-dense-open-sets-and-model-generic-filters, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

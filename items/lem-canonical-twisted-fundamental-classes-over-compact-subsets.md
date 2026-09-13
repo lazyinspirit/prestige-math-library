@@ -2,12 +2,13 @@
 id: lem-canonical-twisted-fundamental-classes-over-compact-subsets
 kind: lemma
 title: Canonical twisted fundamental classes over compact subsets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-the-manifold-orientation-system-is-a-local-system, def-orientation-local-system-on-a-manifold-with-boundary, def-singular-and-cellular-chain-complexes-with-local-coefficients, def-homology-and-cohomology-with-local-coefficients, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, thm-excision-and-mayer-vietoris-with-local-coefficients, thm-pair-long-exact-sequences-with-local-coefficients, lem-relative-homology-mayer-vietoris-for-closed-supports, thm-local-homology-detects-interior-points-boundary-points-and-dimension, thm-heine-borel-rn, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-path-connected-implies-connected, def-connected-component-and-quasicomponent, thm-topological-collaring-for-manifold-boundaries, thm-five-lemma-for-a-morphism-of-long-exact-sequences]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

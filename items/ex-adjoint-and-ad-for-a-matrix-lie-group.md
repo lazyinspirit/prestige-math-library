@@ -2,7 +2,7 @@
 id: ex-adjoint-and-ad-for-a-matrix-lie-group
 kind: example
 title: Adjoint and ad for a matrix Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-conjugation-and-the-adjoint-representation-of-a-lie-group, thm-the-differential-of-adjoint-is-ad, ex-matrix-exponential-as-the-lie-group-exponential]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: lie-groups-invariant-fields-and-the-exponential-map-examples
 title: Lie Groups, Invariant Fields, and the Exponential Map — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-the-additive-and-multiplicative-real-lie-groups

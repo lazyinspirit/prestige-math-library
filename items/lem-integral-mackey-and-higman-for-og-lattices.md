@@ -2,7 +2,7 @@
 id: lem-integral-mackey-and-higman-for-og-lattices
 kind: lemma
 title: Integral Mackey decomposition and Higman's criterion for group lattices
-status: draft
+status: published
 origin: pipeline
 deps: [def-relative-projectivity-and-vertices-for-og-lattices, thm-krull-schmidt-for-og-lattices]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

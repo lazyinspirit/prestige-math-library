@@ -2,7 +2,7 @@
 id: thm-principal-bundles-are-classified-by-maps-to-bg
 kind: theorem
 title: Numerable principal bundles are classified by maps to BG
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-milnor-join-model-is-a-contractible-free-g-space", "prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-principal-g-bundle-and-associated-fiber-bundle", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

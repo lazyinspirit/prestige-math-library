@@ -2,7 +2,7 @@
 id: ex-su-two-to-so-three-as-a-covering-homomorphism
 kind: example
 title: SU(2) to SO(3) as a covering homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-covering-homomorphism-of-lie-groups, def-quaternions, thm-quaternions-form-a-division-ring, thm-a-regular-level-set-is-an-embedded-submanifold, thm-cartans-closed-subgroup-theorem, thm-smooth-inverse-function-theorem-on-manifolds, def-determinant-of-a-square-matrix, def-transpose-of-a-matrix, thm-sine-and-cosine-parametrize-the-unit-circle]
@@ -18,6 +18,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Introduction, Problems 6-9, printed pages 20-21
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

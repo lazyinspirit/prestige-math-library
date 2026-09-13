@@ -2,7 +2,7 @@
 id: thm-cohen-forcing-closure-and-chain-condition
 kind: theorem
 title: Closure and chain conditions of Cohen forcing
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-collapse-and-levy-collapse-forcings, lem-generalized-delta-system-for-small-supports, thm-regular-uncountable-finite-delta-system, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

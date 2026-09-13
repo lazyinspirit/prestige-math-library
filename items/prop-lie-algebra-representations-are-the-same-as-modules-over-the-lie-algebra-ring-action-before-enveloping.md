@@ -2,7 +2,9 @@
 id: prop-lie-algebra-representations-are-the-same-as-modules-over-the-lie-algebra-ring-action-before-enveloping
 kind: proposition
 title: Lie representations as actions before enveloping
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-representation-of-a-lie-algebra, def-left-and-right-modules]

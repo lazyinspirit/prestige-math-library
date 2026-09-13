@@ -2,7 +2,7 @@
 id: cor-cohomology-operations-are-universal-classes-on-eilenberg-maclane-spaces
 kind: corollary
 title: Cohomology operations are universal classes on Eilenberg--Mac Lane spaces
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-eilenberg-maclane-spaces-represent-singular-cohomology", "prop-singular-cohomology-is-contravariantly-functorial", "thm-singular-chain-homotopy-formula", "def-stable-natural-cohomology-operation", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

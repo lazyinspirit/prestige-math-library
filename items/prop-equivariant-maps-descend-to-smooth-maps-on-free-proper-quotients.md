@@ -2,7 +2,7 @@
 id: prop-equivariant-maps-descend-to-smooth-maps-on-free-proper-quotients
 kind: proposition
 title: Equivariant maps descend on free proper quotients
-status: draft
+status: published
 origin: pipeline
 deps: [def-equivariant-map-and-equivariant-vector-bundle, thm-free-proper-action-quotient-manifold, thm-quotient-universal-property, thm-constant-rank-theorem-for-manifolds]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Quotient-map smoothness criterion used in Theorem 21.10, printed pages 544–547
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

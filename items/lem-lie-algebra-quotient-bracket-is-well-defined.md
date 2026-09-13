@@ -2,7 +2,7 @@
 id: lem-lie-algebra-quotient-bracket-is-well-defined
 kind: lemma
 title: The quotient Lie-algebra bracket is well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-lie-subalgebra-ideal-and-center, def-quotient-module, thm-quotient-module-laws]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

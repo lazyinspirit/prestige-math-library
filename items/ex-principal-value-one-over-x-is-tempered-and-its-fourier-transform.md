@@ -2,13 +2,14 @@
 id: ex-principal-value-one-over-x-is-tempered-and-its-fourier-transform
 kind: example
 title: Principal value one over x is tempered and its fourier transform
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-seminorm-bound-characterizes-tempered-distributions, thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions, thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials, thm-local-finite-order-characterization-of-distributions, thm-a-distribution-with-zero-derivatives-on-a-connected-open-set-is-constant, def-countable-choice, thm-tempered-distributions-embed-continuously-in-distributions, def-multiplication-of-a-distribution-by-a-smooth-function, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, thm-integral-triangle-inequality]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

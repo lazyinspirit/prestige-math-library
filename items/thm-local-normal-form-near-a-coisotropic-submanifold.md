@@ -2,7 +2,7 @@
 id: thm-local-normal-form-near-a-coisotropic-submanifold
 kind: theorem
 title: Local normal form near a coisotropic submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-characteristic-distribution-of-a-coisotropic-submanifold-is-involutive", "thm-frobenius-local-coordinate-theorem", "cor-every-vector-subbundle-has-a-smooth-complement", "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold", "lem-relative-poincare-primitive-near-a-submanifold", "thm-relative-moser-theorem"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 9, coisotropic embedding classification, p. 53
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

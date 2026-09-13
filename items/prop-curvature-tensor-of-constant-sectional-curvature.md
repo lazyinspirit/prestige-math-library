@@ -2,7 +2,7 @@
 id: prop-curvature-tensor-of-constant-sectional-curvature
 kind: proposition
 title: Curvature tensor of constant sectional curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-constant-sectional-curvature-and-space-form","thm-sectional-curvatures-determine-the-riemann-tensor"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Lemma 8.10, printed pages 148–149
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

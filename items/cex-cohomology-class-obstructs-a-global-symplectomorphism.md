@@ -2,7 +2,7 @@
 id: cex-cohomology-class-obstructs-a-global-symplectomorphism
 kind: counterexample
 title: A cohomology class obstructs a global symplectomorphism
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding", "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 7, cohomology obstruction, pp. 42--43
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

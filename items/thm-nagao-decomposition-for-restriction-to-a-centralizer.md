@@ -2,7 +2,7 @@
 id: thm-nagao-decomposition-for-restriction-to-a-centralizer
 kind: theorem
 title: Nagao decomposition for restriction to a centralizer
-status: draft
+status: published
 origin: pipeline
 deps: [lem-block-idempotents-lift-uniquely-from-kh-to-oh, def-relative-projectivity-and-vertices-for-og-lattices, thm-krull-schmidt-for-og-lattices, lem-integral-mackey-and-higman-for-og-lattices, def-induced-block-from-a-subgroup, lem-block-induction-exists-under-centralizer-containment, lem-block-centre-locality-and-trace-ideal-sums, cor-normal-p-core-lies-in-every-block-defect-group, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

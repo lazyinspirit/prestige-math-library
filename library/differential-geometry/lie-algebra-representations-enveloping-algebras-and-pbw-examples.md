@@ -1,7 +1,7 @@
 ---
 page: lie-algebra-representations-enveloping-algebras-and-pbw-examples
 title: Lie Algebra Representations, Enveloping Algebras, and PBW — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-adjoint-and-trivial-lie-algebra-representations

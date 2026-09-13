@@ -2,7 +2,7 @@
 id: ex-levy-collapse-of-a-regular-cardinal
 kind: example
 title: The Lévy collapse of a regular uncountable cardinal
-status: draft
+status: published
 origin: pipeline
 deps: [thm-collapse-and-levy-collapse-effects]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

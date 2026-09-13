@@ -1,7 +1,7 @@
 ---
 page: symmetric-extensions-and-basic-choice-failure-models-examples
 title: "Symmetric Extensions and Basic Choice-Failure Models: Examples and Counterexamples"
-status: draft
+status: published
 items: [ex-basic-cohen-orbit-name-without-enumeration, ex-equivalent-dedekind-finiteness-tests-in-basic-cohen-model, ex-atom-free-socks-coordinate-swap, fs-every-symmetric-submodel-satisfies-choice]
 examples: []
 ---

@@ -2,13 +2,14 @@
 id: def-relative-weak-compactness-and-three-sequential-notions
 kind: definition
 title: Relative weak compactness and three sequential notions
-status: draft
+status: published
 origin: pipeline
 deps: ["def-weak-topology-on-a-normed-space"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

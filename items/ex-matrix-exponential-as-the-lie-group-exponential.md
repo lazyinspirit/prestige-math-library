@@ -2,7 +2,7 @@
 id: ex-matrix-exponential-as-the-lie-group-exponential
 kind: example
 title: Matrix exponential as the Lie-group exponential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-exponential-map-of-a-lie-group, lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval, def-matrix-product-and-identity-matrix, lem-exponential-series-has-infinite-radius]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

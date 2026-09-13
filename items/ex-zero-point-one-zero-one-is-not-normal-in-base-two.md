@@ -2,7 +2,7 @@
 id: ex-zero-point-one-zero-one-is-not-normal-in-base-two
 kind: example
 title: The binary number 0.1010... is not normal
-status: draft
+status: published
 origin: pipeline
 deps: [def-canonical-base-b-expansion-and-normality]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

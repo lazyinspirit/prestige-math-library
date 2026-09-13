@@ -2,7 +2,7 @@
 id: def-lie-bracket-on-the-tangent-space-of-a-lie-group
 kind: definition
 title: Lie bracket on the tangent space of a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "prop-the-lie-bracket-of-left-invariant-fields-is-left-invariant", "def-lie-bracket-of-smooth-vector-fields"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Chapter I §10, printed page 69
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-first-bianchi-identity
 kind: theorem
 title: First Bianchi identity
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-curvature-of-an-affine-connection","def-levi-civita-connection","def-lie-bracket-of-smooth-vector-fields","prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 7.4(d), proof on printed pages 122–123
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

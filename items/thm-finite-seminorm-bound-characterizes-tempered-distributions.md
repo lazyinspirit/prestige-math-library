@@ -2,13 +2,14 @@
 id: thm-finite-seminorm-bound-characterizes-tempered-distributions
 kind: theorem
 title: Finite seminorm bound characterizes tempered distributions
-status: draft
+status: published
 origin: pipeline
 deps: [def-tempered-distribution]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

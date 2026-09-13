@@ -2,7 +2,7 @@
 id: def-mod-p-reduced-power-operations
 kind: definition
 title: Mod-p reduced power operations
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-cyclic-p-fold-power-construction", "def-bockstein-connecting-operation", "lem-the-bockstein-is-independent-of-lift-and-cocycle-representative", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-doob-maximal-bound-for-a-centered-random-walk
 kind: example
 title: Doob maximal bounds for a centered random walk
-status: draft
+status: published
 origin: pipeline
 deps: [thm-doob-l1-maximal-inequality, thm-doob-lp-maximal-inequality, thm-convex-functions-of-martingales-are-submartingales, lem-conditioning-a-known-variable-and-an-independent-variable, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

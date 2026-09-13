@@ -2,7 +2,7 @@
 id: prop-symplectic-reduction-of-a-coisotropic-vector-subspace
 kind: proposition
 title: Symplectic reduction of a coisotropic vector subspace
-status: draft
+status: published
 origin: pipeline
 deps: ["def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §2.4, Proposition 2.20 and following paragraph, pp. 11--12
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

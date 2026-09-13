@@ -1,7 +1,7 @@
 ---
 page: permutation-models-and-transfer-to-zf-examples
 title: "Permutation Models and Transfer to ZF: Examples and Counterexamples"
-status: draft
+status: published
 items: [ex-basic-fraenkel-finite-or-cofinite-support-test, ex-second-fraenkel-sock-swap, ex-ordered-mostowski-order-has-empty-support, fs-a-zfa-model-is-a-zf-model]
 examples: []
 ---

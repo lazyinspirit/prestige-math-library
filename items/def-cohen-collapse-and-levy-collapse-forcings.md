@@ -2,13 +2,14 @@
 id: def-cohen-collapse-and-levy-collapse-forcings
 kind: definition
 title: Cohen, collapse, and Lévy-collapse forcing orders
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-preorder-compatibility-and-filter, def-cardinal-arithmetic, def-aleph-and-beth-hierarchies]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

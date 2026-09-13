@@ -2,7 +2,7 @@
 id: def-semidirect-product-of-lie-algebras
 kind: definition
 title: Semidirect products of Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, def-direct-product-and-direct-sum-of-lie-algebras, def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: def-square-integrable-martingale-difference-array-and-variance-clock
 kind: definition
 title: Square-integrable martingale-difference array and variance clock
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-martingale-difference-sequence, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice]
 provenance:

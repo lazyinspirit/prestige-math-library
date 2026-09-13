@@ -2,7 +2,7 @@
 id: def-wu-classes-of-a-closed-manifold
 kind: definition
 title: Wu classes of a closed manifold
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise", "cor-poincare-duality-gives-a-nonsingular-cup-pairing", "thm-steenrod-squares-are-well-defined-and-natural", "prop-steenrod-square-normalization-instability-and-top-square", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

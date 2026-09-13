@@ -2,7 +2,7 @@
 id: thm-basic-fraenkel-model
 kind: theorem
 title: The basic Fraenkel model
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fraenkel-mostowski-permutation-model, thm-dedekind-infinite-iff-countable-subset, def-axiom-of-choice, thm-well-ordering-theorem]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

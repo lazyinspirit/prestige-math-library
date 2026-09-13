@@ -2,12 +2,13 @@
 id: thm-excision-and-mayer-vietoris-with-local-coefficients
 kind: theorem
 title: Excision and Mayer–Vietoris with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-homology-and-cohomology-with-local-coefficients, thm-long-exact-sequence-in-homology, thm-long-exact-sequence-in-cohomology, thm-excision-for-singular-homology, thm-excision-for-singular-cohomology, thm-mayer-vietoris-sequence-in-singular-homology, thm-mayer-vietoris-sequence-in-singular-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

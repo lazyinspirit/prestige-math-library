@@ -2,7 +2,7 @@
 id: lem-finite-cellular-cyclic-squares-cartan-and-basis-action
 kind: lemma
 title: Finite-cellular cyclic squares, Cartan formula, and cyclic-basis action
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-equivariant-p-fold-external-power-and-diagonal", "lem-free-cyclic-resolution-and-transfer-for-power-operations", "def-barycentric-subdivision-of-an-abstract-simplicial-complex", "thm-barycentric-subdivision-realizes-homeomorphically", "lem-real-projective-space-cellular-homology-and-pinch-map", "thm-cellular-homology-computes-singular-homology", "prop-cellular-maps-induce-cellular-chain-maps", "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field", "def-singular-cup-product-on-cochains", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses", "prop-cup-product-is-natural-unital-and-associative", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

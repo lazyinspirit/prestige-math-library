@@ -2,7 +2,7 @@
 id: thm-universal-covering-lie-group
 kind: theorem
 title: Universal covering Lie group
-status: draft
+status: published
 origin: pipeline
 deps: [thm-universal-cover-existence, thm-universal-cover-uniqueness-and-dominating-property, thm-uniqueness-of-lifts-from-a-connected-space, thm-a-connected-covering-space-of-a-connected-lie-group-carries-a-unique-lifted-lie-group-structure, def-semilocally-simply-connected-space, prop-topological-manifolds-are-locally-compact-and-locally-path-connected, thm-connected-and-locally-path-connected-implies-path-connected, thm-product-of-connected-spaces]
 landmark: true
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 3.5 and Corollary 3.6, printed page 26
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

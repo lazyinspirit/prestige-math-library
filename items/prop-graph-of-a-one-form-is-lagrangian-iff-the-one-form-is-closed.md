@@ -2,7 +2,7 @@
 id: prop-graph-of-a-one-form-is-lagrangian-iff-the-one-form-is-closed
 kind: proposition
 title: A graph of a one-form is Lagrangian exactly when the form is closed
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-canonical-cotangent-two-form-is-symplectic", "def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds", "thm-equivalent-characterizations-of-lagrangian-subspaces", "thm-the-exterior-derivative-commutes-with-pullback"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §3.4, Proposition 3.24, pp. 39--40
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

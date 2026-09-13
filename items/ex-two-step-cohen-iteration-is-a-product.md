@@ -2,7 +2,7 @@
 id: ex-two-step-cohen-iteration-is-a-product
 kind: example
 title: A two-step Cohen iteration is a product
-status: draft
+status: published
 origin: pipeline
 deps: [def-two-step-forcing-iteration, thm-two-step-generic-factorization-and-ccc, thm-mutually-generic-cohen-coordinate-reals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

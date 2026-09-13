@@ -2,7 +2,7 @@
 id: thm-maximal-ergodic-theorem
 kind: theorem
 title: Maximal ergodic theorem
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, prop-ergodic-averages-are-well-defined-and-l-p-contractive, thm-integrals-are-invariant-under-measure-preserving-maps, thm-monotone-convergence-for-the-integral, thm-linearity-of-the-lebesgue-integral-on-l-one]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

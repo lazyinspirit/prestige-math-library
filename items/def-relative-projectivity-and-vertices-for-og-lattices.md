@@ -2,13 +2,14 @@
 id: def-relative-projectivity-and-vertices-for-og-lattices
 kind: definition
 title: Relative projectivity and vertices for integral group lattices
-status: draft
+status: published
 origin: pipeline
 deps: [def-og-lattice-and-reduction-modulo-the-maximal-ideal]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

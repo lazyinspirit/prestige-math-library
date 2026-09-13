@@ -2,7 +2,7 @@
 id: cor-classifying-space-of-a-discrete-group-is-a-k-g-one
 kind: corollary
 title: The classifying space of a discrete group is a K(G,1)
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-loop-space-of-bg-recovers-g-up-to-homotopy", "thm-milnor-join-model-is-a-contractible-free-g-space", "def-eilenberg-maclane-space", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: fs-differential-at-the-identity-determines-a-homomorphism-from-a-disconnected-lie-group
 kind: false-statement
 title: Differential at the identity determines a homomorphism from a disconnected Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-lie-group-homomorphism-isomorphism-and-automorphism, def-lie-group]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

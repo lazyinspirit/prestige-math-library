@@ -2,7 +2,7 @@
 id: cex-c0-is-not-reflexive
 kind: counterexample
 title: $c_0$ is not reflexive
-status: draft
+status: published
 origin: pipeline
 deps: [lem-real-and-complex-c-zero-are-banach, def-reflexive-banach-space,
        def-c-zero-and-ell-infinity, thm-dual-of-c0-is-ell-one,
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

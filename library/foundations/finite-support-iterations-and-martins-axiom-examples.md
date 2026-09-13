@@ -1,7 +1,7 @@
 ---
 page: finite-support-iterations-and-martins-axiom-examples
 title: "Finite-Support Iterations and Martin's Axiom: Examples and Counterexamples"
-status: draft
+status: published
 items: [ex-two-step-cohen-iteration-is-a-product, ex-ma-diagonal-real, ex-ma-small-set-is-null-and-meagre, fs-ma-implies-ch]
 examples: []
 ---

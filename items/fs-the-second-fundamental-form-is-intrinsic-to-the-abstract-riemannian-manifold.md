@@ -2,7 +2,7 @@
 id: fs-the-second-fundamental-form-is-intrinsic-to-the-abstract-riemannian-manifold
 kind: false-statement
 title: The second fundamental form is intrinsic to the abstract Riemannian manifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-induced-connection-and-second-fundamental-form","prop-christoffel-formula-for-the-levi-civita-connection"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Examples 14.2.5–14.2.6 and Remark 14.2.9, printed pages 105–107
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

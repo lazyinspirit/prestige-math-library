@@ -2,7 +2,7 @@
 id: lem-eberlein-smulian-countable-compactness-closes-in-the-bidual
 kind: lemma
 title: Countable compactness closes in the bidual
-status: draft
+status: published
 origin: pipeline
 deps: ["def-relative-weak-compactness-and-three-sequential-notions", "def-weak-topology-on-a-normed-space", "def-weak-star-topology", "lem-basic-weak-star-neighborhoods", "thm-banach-alaoglu", "thm-uniform-boundedness-principle", "thm-bounded-operator-space-is-banach", "cor-relative-hahn-banach-bidual-isometry", "def-dependent-choice", "def-hahn-banach-extension-principle-relative", "thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma", "thm-a-compact-hausdorff-space-is-regular-and-normal", "lem-regularity-via-closed-neighbourhoods", "def-product-topology", "thm-heine-borel-rn", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-iff-fip", "thm-closure-characterisation-top", "def-separable-space", "lem-countable-iff-surjection-from-n", "thm-product-of-countable", "thm-of-archimedean", "cor-archimedean-reciprocal", "thm-reals-cauchy-complete", "thm-complex-plane-is-complete", "lem-standard-complete-metric-on-a-countable-product", "thm-metric-hausdorff-separation", "thm-compactness-under-continuous-maps"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

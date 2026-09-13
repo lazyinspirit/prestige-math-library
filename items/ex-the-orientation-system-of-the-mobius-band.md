@@ -2,12 +2,13 @@
 id: ex-the-orientation-system-of-the-mobius-band
 kind: example
 title: Orientation system of the Mobius band
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-the-manifold-orientation-system-is-a-local-system, def-orientation-local-system-on-a-manifold-with-boundary]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

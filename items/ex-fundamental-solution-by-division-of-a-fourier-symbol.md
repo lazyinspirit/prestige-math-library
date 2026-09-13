@@ -2,13 +2,14 @@
 id: ex-fundamental-solution-by-division-of-a-fourier-symbol
 kind: example
 title: Fundamental solution by division of a fourier symbol
-status: draft
+status: published
 origin: pipeline
 deps: [thm-constant-coefficient-differential-operators-become-polynomial-multipliers, thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms, thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions, thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

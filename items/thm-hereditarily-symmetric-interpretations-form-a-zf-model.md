@@ -2,7 +2,7 @@
 id: thm-hereditarily-symmetric-interpretations-form-a-zf-model
 kind: theorem
 title: Hereditarily symmetric interpretations form a transitive ZF model
-status: draft
+status: published
 origin: pipeline
 deps: [lem-symmetry-lemma-for-forcing-automorphisms, lem-canonical-check-names-are-hereditarily-symmetric, thm-generic-extensions-satisfy-zf-and-zfc, thm-forcing-theorem]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

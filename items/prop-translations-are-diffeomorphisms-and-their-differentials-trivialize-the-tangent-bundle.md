@@ -2,7 +2,7 @@
 id: prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle
 kind: proposition
 title: Translations are diffeomorphisms and their differentials trivialize the tangent bundle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-left-and-right-translations-on-a-lie-group", "thm-the-global-differential-of-a-smooth-map-is-smooth", "cor-the-differential-of-a-diffeomorphism-is-an-isomorphism", "prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 2.27 and proof, printed pages 21–22
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

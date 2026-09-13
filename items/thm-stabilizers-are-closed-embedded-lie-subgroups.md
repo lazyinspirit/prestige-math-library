@@ -2,7 +2,7 @@
 id: thm-stabilizers-are-closed-embedded-lie-subgroups
 kind: theorem
 title: Stabilizers are closed embedded Lie subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, thm-cartans-closed-subgroup-theorem, def-topological-manifold-without-boundary]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Definition 4.5 and Proposition 4.7, printed page 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

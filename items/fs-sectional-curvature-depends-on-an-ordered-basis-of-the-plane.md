@@ -2,7 +2,7 @@
 id: fs-sectional-curvature-depends-on-an-ordered-basis-of-the-plane
 kind: false-statement
 title: Sectional curvature depends on an ordered basis of the plane
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","lem-sectional-curvature-is-independent-of-the-basis-of-the-plane"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 8.8 and proof, printed pages 145–146
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

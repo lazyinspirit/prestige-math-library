@@ -2,13 +2,14 @@
 id: thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions
 kind: theorem
 title: Fourier transform is a topological automorphism of tempered distributions
-status: draft
+status: published
 origin: pipeline
 deps: [lem-fourier-transform-on-tempered-distributions-is-well-defined-and-continuous, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

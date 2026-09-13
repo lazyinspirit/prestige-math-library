@@ -1,7 +1,7 @@
 ---
 page: obstruction-theory-postnikov-towers-and-classifying-spaces-examples
 title: Obstruction Theory, Postnikov Towers, and Classifying Spaces — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-primary-obstruction-to-a-nowhere-zero-section-of-a-sphere-fibration

@@ -2,7 +2,7 @@
 id: thm-the-differential-of-adjoint-is-ad
 kind: theorem
 title: The differential of Ad is ad
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-adjoint-is-a-smooth-lie-group-representation", "def-conjugation-and-the-adjoint-representation-of-a-lie-group", "def-adjoint-representation-of-a-lie-algebra", "def-left-and-right-translations-on-a-lie-group", "def-left-and-right-invariant-vector-fields", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "def-lie-bracket-on-the-tangent-space-of-a-lie-group", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields", "def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism", "def-lie-derivative-of-a-vector-field", "thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 2, Proposition 7 and complete proof, printed pages 21–22
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

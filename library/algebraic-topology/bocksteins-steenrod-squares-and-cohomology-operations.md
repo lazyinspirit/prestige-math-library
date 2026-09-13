@@ -1,7 +1,7 @@
 ---
 page: bocksteins-steenrod-squares-and-cohomology-operations
 title: "Bocksteins Steenrod Squares and Cohomology Operations"
-status: draft
+status: published
 items: [def-stable-natural-cohomology-operation, def-bockstein-connecting-operation, lem-the-bockstein-is-independent-of-lift-and-cocycle-representative, prop-bocksteins-are-natural-and-commute-with-suspension, prop-the-mod-two-bockstein-is-a-derivation, lem-natural-higher-diagonal-approximations-on-singular-chains, def-higher-cup-i-products, thm-cup-i-coboundary-identity, def-steenrod-squares-from-cup-i-products, thm-steenrod-squares-are-well-defined-and-natural, prop-steenrod-square-normalization-instability-and-top-square, lem-cartan-coherence-for-higher-diagonal-approximations, thm-cartan-formula-for-steenrod-squares, lem-free-cyclic-resolution-and-transfer-for-power-operations, lem-equivariant-p-fold-external-power-and-diagonal, lem-wreath-double-power-coefficient-symmetry, lem-finite-cellular-cyclic-squares-cartan-and-basis-action, lem-adem-double-power-comparison, lem-finite-cellular-cyclic-squares-agree-with-singular-cup-i-squares, lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes, thm-adem-relations-for-steenrod-squares, lem-bockstein-square-parity-recurrence, prop-first-steenrod-square-is-the-mod-two-bockstein, def-total-steenrod-square, def-wu-classes-of-a-closed-manifold, lem-cyclic-p-fold-power-construction, def-mod-p-reduced-power-operations, thm-reduced-powers-satisfy-naturality-instability-cartan-and-adem-relations, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, lem-mod-two-cohomology-rings-of-complex-projective-spaces]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: def-completely-integrable-hamiltonian-system
 kind: definition
 title: Completely integrable Hamiltonian system
-status: draft
+status: published
 origin: pipeline
 deps: ["def-first-integral-and-poisson-commuting-functions"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definition 6.20, pp. 74--75
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action
 kind: proposition
 title: Commuting Hamiltonian vector fields integrate to a local $\mathbb R^n$-action
-status: draft
+status: published
 origin: pipeline
 deps: ["def-completely-integrable-hamiltonian-system", "prop-regular-common-level-sets-are-lagrangian-submanifolds", "thm-hamiltonian-flows-commute-iff-their-hamiltonians-poisson-commute-up-to-locally-constant-bracket", "thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Lemma 18.11 and discussion, p. 110
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

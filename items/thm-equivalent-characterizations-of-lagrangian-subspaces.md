@@ -2,7 +2,7 @@
 id: thm-equivalent-characterizations-of-lagrangian-subspaces
 kind: theorem
 title: Equivalent characterizations of Lagrangian subspaces
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-symplectic-double-orthogonal-and-dimension-identities", "def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §2.2, discussion after Definition 2.7, pp. 8--9
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

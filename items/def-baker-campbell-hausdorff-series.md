@@ -2,7 +2,7 @@
 id: def-baker-campbell-hausdorff-series
 kind: definition
 title: Baker–Campbell–Hausdorff series
-status: draft
+status: published
 origin: pipeline
 deps: ["def-finite-dimensional-lie-algebra", "def-adjoint-representation-of-a-lie-algebra"]
 justified_by: ["lem-local-convergence-of-the-baker-campbell-hausdorff-series"]
@@ -18,6 +18,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Appendix B §4, Theorem B.22 and formulas (B.23)–(B.24), printed pages 669–671
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

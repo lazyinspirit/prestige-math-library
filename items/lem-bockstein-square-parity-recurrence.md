@@ -2,7 +2,9 @@
 id: lem-bockstein-square-parity-recurrence
 kind: lemma
 title: Bockstein parity recurrence for Steenrod squares
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["lem-natural-higher-diagonal-approximations-on-singular-chains", "def-higher-cup-i-products", "def-steenrod-squares-from-cup-i-products", "thm-steenrod-squares-are-well-defined-and-natural", "thm-cup-i-coboundary-identity", "def-bockstein-connecting-operation", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses"]
 proof_strategy: direct

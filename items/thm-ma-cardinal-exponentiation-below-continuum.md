@@ -2,7 +2,7 @@
 id: thm-ma-cardinal-exponentiation-below-continuum
 kind: theorem
 title: Cardinal exponentiation below the continuum under MA
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, lem-continuum-sized-almost-disjoint-family-on-omega, def-cardinal-arithmetic, thm-konig, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

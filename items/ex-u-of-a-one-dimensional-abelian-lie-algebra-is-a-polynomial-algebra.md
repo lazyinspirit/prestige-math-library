@@ -2,7 +2,7 @@
 id: ex-u-of-a-one-dimensional-abelian-lie-algebra-is-a-polynomial-algebra
 kind: example
 title: The enveloping algebra of a one-dimensional abelian Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-enveloping-algebra-of-an-abelian-lie-algebra-is-its-symmetric-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

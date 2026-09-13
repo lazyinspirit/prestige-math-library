@@ -2,7 +2,7 @@
 id: prop-direct-sum-dual-hom-and-tensor-representations
 kind: proposition
 title: Direct-sum, dual, Hom, and tensor representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-representation-of-a-lie-algebra, def-direct-sum-of-a-family-of-modules, thm-universal-property-of-module-tensor-products, def-vector-space-of-linear-maps]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

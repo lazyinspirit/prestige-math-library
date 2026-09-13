@@ -2,7 +2,9 @@
 id: def-fundamental-groupoid-of-a-space
 kind: definition
 title: Fundamental groupoid of a space
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-category, def-homotopy-relative-and-path-homotopy, thm-fundamental-group-laws]

@@ -2,7 +2,7 @@
 id: cor-hamiltonian-flow-has-zero-divergence-with-respect-to-symplectic-volume
 kind: corollary
 title: Hamiltonian flow has zero divergence with respect to symplectic volume
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-liouville-volume-preservation", "def-divergence-relative-to-a-volume-form"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Hamiltonian-flow invariance, p. 105
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

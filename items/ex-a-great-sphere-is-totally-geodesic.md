@@ -2,7 +2,7 @@
 id: ex-a-great-sphere-is-totally-geodesic
 kind: example
 title: A great sphere is totally geodesic
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-a-regular-level-set-is-an-embedded-submanifold", "prop-tangent-space-of-a-regular-level-set-is-the-kernel", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-connection-laws-in-directional-form", "thm-the-induced-connection-is-levi-civita", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "def-totally-geodesic-submanifold"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Proposition 15.3.1 with complete proof, printed pages 117–118
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

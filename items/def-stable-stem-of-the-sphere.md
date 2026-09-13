@@ -2,13 +2,14 @@
 id: def-stable-stem-of-the-sphere
 kind: definition
 title: Stable stems of the sphere
-status: draft
+status: published
 origin: pipeline
 deps: ["def-suspension-prespectrum-and-sphere-prespectrum", "def-stable-homotopy-groups-of-a-sequential-prespectrum"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

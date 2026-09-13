@@ -2,7 +2,7 @@
 id: lem-bounded-stage-capture-in-finite-support-iterations
 kind: lemma
 title: Small sets of ground ordinals are captured at a bounded iteration stage
-status: draft
+status: published
 origin: pipeline
 deps: [lem-iteration-restrictions-and-complete-embeddings, thm-finite-support-iterations-preserve-ccc, thm-chain-condition-preserves-cofinalities-and-cardinals, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

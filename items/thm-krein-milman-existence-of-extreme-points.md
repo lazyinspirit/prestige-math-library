@@ -2,13 +2,14 @@
 id: thm-krein-milman-existence-of-extreme-points
 kind: theorem
 title: Krein–Milman existence of extreme points
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-minimizer-face-of-a-continuous-affine-functional", "thm-locally-convex-continuous-dual-separates-points", "thm-compact-iff-fip", "thm-zorn", "def-axiom-of-choice", "thm-hahn-banach-dominated-extension"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

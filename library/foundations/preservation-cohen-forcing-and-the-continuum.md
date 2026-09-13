@@ -1,7 +1,7 @@
 ---
 page: preservation-cohen-forcing-and-the-continuum
 title: "Preservation, Cohen Forcing, and the Continuum"
-status: draft
+status: published
 items: [def-kappa-closure-distributivity-and-chain-condition, thm-closure-distributivity-and-no-short-sequences, thm-chain-condition-preserves-cofinalities-and-cardinals, def-nice-name-for-a-subset, thm-nice-name-reduction-and-counting, def-cohen-collapse-and-levy-collapse-forcings, lem-generalized-delta-system-for-small-supports, thm-cohen-forcing-closure-and-chain-condition, thm-collapse-and-levy-collapse-effects, thm-mutually-generic-cohen-coordinate-reals, thm-cohen-forcing-controls-the-continuum, thm-higher-cohen-forcing-violates-gch, rem-easton-support-for-continuum-patterns, lem-formal-cohen-forcing-verification-compiler, cor-formal-negative-consistency-of-ch-and-gch]
 examples: []
 ---

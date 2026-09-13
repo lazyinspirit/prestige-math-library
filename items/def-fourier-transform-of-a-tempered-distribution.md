@@ -2,13 +2,14 @@
 id: def-fourier-transform-of-a-tempered-distribution
 kind: definition
 title: Fourier transform of a tempered distribution
-status: draft
+status: published
 origin: pipeline
 deps: [def-tempered-distribution, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

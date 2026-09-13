@@ -2,7 +2,7 @@
 id: fs-cohomologous-symplectic-forms-on-a-noncompact-manifold-are-always-isotopic
 kind: false-statement
 title: Cohomologous symplectic forms on a noncompact manifold are always isotopic
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-moser-stability-theorem", "thm-compact-support-moser-stability-on-a-noncompact-manifold"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 7, compactness discussion after Theorem 7.3, p. 45
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

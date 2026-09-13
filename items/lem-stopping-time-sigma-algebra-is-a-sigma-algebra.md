@@ -2,7 +2,7 @@
 id: lem-stopping-time-sigma-algebra-is-a-sigma-algebra
 kind: lemma
 title: The stopping-time sigma-algebra is a sigma-algebra
-status: draft
+status: published
 origin: pipeline
 deps: [def-sigma-algebra-at-a-stopping-time, def-sigma-algebra]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

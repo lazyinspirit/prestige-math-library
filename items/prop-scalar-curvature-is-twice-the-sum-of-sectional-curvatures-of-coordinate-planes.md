@@ -2,7 +2,7 @@
 id: prop-scalar-curvature-is-twice-the-sum-of-sectional-curvatures-of-coordinate-planes
 kind: proposition
 title: Scalar curvature is twice the sum of sectional curvatures of orthonormal coordinate planes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-scalar-curvature","lem-ricci-curvature-is-symmetric-and-basis-independent","def-sectional-curvature","thm-algebraic-symmetries-of-the-riemann-tensor"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, geometric interpretation of Ricci and scalar curvature, printed pages 147–148
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

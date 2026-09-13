@@ -2,7 +2,7 @@
 id: def-finite-dimensional-lie-algebra
 kind: definition
 title: Finite-dimensional Lie algebra
-status: draft
+status: published
 origin: pipeline
 deps: ["def-vector-space", "def-dimension"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Definition 3.17, printed page 33
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

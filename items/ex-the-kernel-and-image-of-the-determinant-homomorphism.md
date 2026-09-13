@@ -2,7 +2,7 @@
 id: ex-the-kernel-and-image-of-the-determinant-homomorphism
 kind: example
 title: The kernel and image of the determinant homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, prop-first-isomorphism-factorization-for-lie-group-homomorphisms, def-determinant-of-a-square-matrix, thm-determinant-multiplicative]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Matrix-group examples, printed pages 23–25, and Corollary 9.5, printed pages 53–54
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

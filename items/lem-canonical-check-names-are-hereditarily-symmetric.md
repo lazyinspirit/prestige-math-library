@@ -2,7 +2,7 @@
 id: lem-canonical-check-names-are-hereditarily-symmetric
 kind: lemma
 title: Canonical check names are hereditarily symmetric
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-name-automorphism-action, def-symmetric-forcing-system-and-hereditarily-symmetric-names, thm-check-name-evaluation-and-generic-reconstruction]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

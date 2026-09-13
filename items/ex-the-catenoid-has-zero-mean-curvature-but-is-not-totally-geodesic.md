@@ -2,7 +2,7 @@
 id: ex-the-catenoid-has-zero-mean-curvature-but-is-not-totally-geodesic
 kind: example
 title: The catenoid has zero mean curvature but is not totally geodesic
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions", "thm-a-regular-level-set-is-an-embedded-submanifold", "def-induced-connection-and-second-fundamental-form", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "def-mean-curvature-vector", "def-totally-geodesic-submanifold", "def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-connection-laws-in-directional-form"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Parametrized Euclidean shape formulas, printed pages 142–143, and Problem 8-4, printed page 150
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

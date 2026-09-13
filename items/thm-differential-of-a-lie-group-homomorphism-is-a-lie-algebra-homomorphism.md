@@ -2,7 +2,7 @@
 id: thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism
 kind: theorem
 title: Differential of a Lie-group homomorphism is a Lie-algebra homomorphism
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-lie-algebra-homomorphism", "def-lie-group-homomorphism-isomorphism-and-automorphism", "prop-related-vector-fields-have-related-lie-brackets", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "def-lie-bracket-on-the-tangent-space-of-a-lie-group", "lem-the-differential-sends-derivations-to-derivations-and-is-linear", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Proposition 3.12(1), statement and proof, printed page 32; the authored proof uses related invariant fields to avoid the source proof's forward reference to exponential naturality
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

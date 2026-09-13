@@ -2,7 +2,7 @@
 id: thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals
 kind: theorem
 title: The basic Cohen model has an infinite Dedekind-finite set of reals
-status: draft
+status: published
 origin: pipeline
 deps: [lem-basic-cohen-generic-reals-form-a-symmetric-set, thm-basic-cohen-generic-real-set-has-no-countably-infinite-subset, def-dedekind-infinite-set, thm-dedekind-infinite-iff-countable-subset]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-tempered-convolution-is-smooth-with-polynomial-growth
 kind: theorem
 title: Tempered convolution is smooth with polynomial growth
-status: draft
+status: published
 origin: pipeline
 deps: [def-convolution-of-a-tempered-distribution-with-a-schwartz-function, thm-polynomial-growth-functions-define-tempered-distributions, thm-finite-seminorm-bound-characterizes-tempered-distributions, thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

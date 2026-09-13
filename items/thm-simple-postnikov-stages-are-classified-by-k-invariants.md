@@ -2,7 +2,7 @@
 id: thm-simple-postnikov-stages-are-classified-by-k-invariants
 kind: theorem
 title: Simple Postnikov stages are classified by k-invariants
-status: draft
+status: published
 origin: pipeline
 deps: ["def-postnikov-k-invariant", "thm-obstruction-theory-for-lifting-through-a-fibration", "thm-eilenberg-maclane-spaces-represent-singular-cohomology", "thm-existence-and-homotopy-uniqueness-of-eilenberg-maclane-spaces", "def-homotopy-fiber-of-a-map", "thm-mapping-path-factorization", "def-fiber-and-fiber-homotopy-equivalence", "def-hurewicz-and-serre-fibrations", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

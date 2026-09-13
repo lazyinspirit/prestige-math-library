@@ -2,13 +2,14 @@
 id: fs-birkhoff-limit-is-always-constant
 kind: false-statement
 title: A Birkhoff limit need not be constant
-status: draft
+status: published
 origin: pipeline
 deps: [def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, prop-circle-rotations-preserve-lebesgue-measure, thm-lebesgue-measure-of-a-box-of-every-kind, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

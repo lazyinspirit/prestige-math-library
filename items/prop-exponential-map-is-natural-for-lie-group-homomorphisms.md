@@ -2,7 +2,7 @@
 id: prop-exponential-map-is-natural-for-lie-group-homomorphisms
 kind: proposition
 title: Exponential map is natural for Lie-group homomorphisms
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-one-parameter-subgroups-are-exactly-exponentials", "def-lie-group-homomorphism-isomorphism-and-automorphism", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.7(4) and complete uniqueness proof, printed pages 30–31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-ricci-equation-for-the-normal-connection
 kind: theorem
 title: Ricci equation for the normal connection
-status: draft
+status: published
 origin: pipeline
 deps: ["def-normal-connection", "def-shape-operator", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "def-curvature-of-a-vector-bundle-connection"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.uci.edu/~cterng/LectureNotes1353.pdf
       locator: Section 2.1, Ricci equations (2.1.9) and (2.1.11) with surrounding conventions, printed pages 26–28
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

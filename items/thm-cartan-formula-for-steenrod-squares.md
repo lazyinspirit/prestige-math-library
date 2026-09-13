@@ -2,7 +2,7 @@
 id: thm-cartan-formula-for-steenrod-squares
 kind: theorem
 title: Cartan formula for Steenrod squares
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-steenrod-square-normalization-instability-and-top-square", "lem-cartan-coherence-for-higher-diagonal-approximations", "thm-steenrod-squares-are-well-defined-and-natural", "def-steenrod-squares-from-cup-i-products", "def-singular-cup-product-on-cochains", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

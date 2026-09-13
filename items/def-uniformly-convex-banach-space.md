@@ -2,13 +2,14 @@
 id: def-uniformly-convex-banach-space
 kind: definition
 title: Uniformly convex Banach space
-status: draft
+status: published
 origin: pipeline
 deps: [def-banach-space]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

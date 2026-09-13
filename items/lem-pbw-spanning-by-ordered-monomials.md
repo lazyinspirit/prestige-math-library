@@ -2,7 +2,7 @@
 id: lem-pbw-spanning-by-ordered-monomials
 kind: lemma
 title: PBW spanning by ordered monomials
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-pbw-filtration-on-the-universal-enveloping-algebra, def-linear-basis, def-partial-order, def-pbw-symbol-map-from-the-symmetric-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

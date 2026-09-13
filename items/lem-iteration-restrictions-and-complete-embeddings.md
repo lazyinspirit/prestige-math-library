@@ -2,7 +2,7 @@
 id: lem-iteration-restrictions-and-complete-embeddings
 kind: lemma
 title: Restriction maps and complete embeddings in an iteration
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-support-forcing-iteration, thm-two-step-generic-factorization-and-ccc, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

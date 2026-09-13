@@ -2,7 +2,7 @@
 id: rem-complex-bishop-phelps-for-general-convex-sets
 kind: remark
 title: Complex Bishop--Phelps for general convex sets
-status: draft
+status: published
 origin: pipeline
 proved_here: false
 deps: [thm-bishop-phelps]
@@ -10,6 +10,11 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
+  sources_checked:
+    date: 2026-09-14
+    scope: citations
+    by: owner-audit
   precheck: n/a
 sources:
   references:

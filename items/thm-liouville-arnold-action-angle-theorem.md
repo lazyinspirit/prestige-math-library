@@ -2,7 +2,7 @@
 id: thm-liouville-arnold-action-angle-theorem
 kind: theorem
 title: Liouville–Arnold action–angle theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-completely-integrable-hamiltonian-system","prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action","lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice","thm-compact-connected-regular-fibres-are-tori","def-action-and-angle-coordinates","cor-every-smooth-vector-field-on-a-compact-manifold-is-complete","cor-local-normal-form-for-submersions","thm-cartans-magic-formula","thm-poincare-lemma-for-star-shaped-domains","thm-smooth-inverse-function-theorem-on-manifolds"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Theorem 18.12, pp. 110--111
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

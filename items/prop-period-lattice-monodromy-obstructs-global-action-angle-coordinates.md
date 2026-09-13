@@ -2,7 +2,7 @@
 id: prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates
 kind: proposition
 title: Period-lattice monodromy obstructs global action–angle coordinates
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","thm-liouville-arnold-action-angle-theorem"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §6.2, global action-angle obstructions, pp. 73--74
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

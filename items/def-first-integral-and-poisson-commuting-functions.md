@@ -2,7 +2,7 @@
 id: def-first-integral-and-poisson-commuting-functions
 kind: definition
 title: First integral and Poisson-commuting functions
-status: draft
+status: published
 origin: pipeline
 deps: ["def-poisson-bracket-on-a-symplectic-manifold"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Theorem 18.9 and discussion, pp. 109--110
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

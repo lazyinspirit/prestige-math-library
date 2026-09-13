@@ -2,13 +2,14 @@
 id: thm-irrational-circle-rotations-are-uniquely-ergodic
 kind: theorem
 title: Irrational circle rotations are uniquely ergodic
-status: draft
+status: published
 origin: pipeline
 deps: [thm-unique-ergodicity-is-equivalent-to-uniform-ergodic-averages, thm-birkhoff-ergodic-theorem, thm-ergodicity-and-invariant-functions, thm-dominated-convergence, thm-integrals-are-invariant-under-measure-preserving-maps, thm-circle-rotation-is-ergodic-iff-angle-is-irrational, prop-circle-rotations-preserve-lebesgue-measure, thm-lebesgue-measure-of-a-box-of-every-kind, lem-equicontinuity-on-a-compact-domain-is-uniform, lem-unit-interval-circle-is-a-nonempty-compact-metric-space, thm-heine-cantor-metric, thm-extreme-value-metric, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

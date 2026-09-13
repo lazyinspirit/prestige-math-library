@@ -2,7 +2,7 @@
 id: thm-continuous-homomorphisms-between-lie-groups-are-smooth
 kind: theorem
 title: Continuous homomorphisms between Lie groups are smooth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-cartans-closed-subgroup-theorem, thm-local-homology-detects-interior-points-boundary-points-and-dimension, thm-smooth-inverse-function-theorem-on-manifolds, prop-exponential-map-is-natural-for-lie-group-homomorphisms]
@@ -18,6 +18,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Closed Subgroup Theorem 20.12, printed pages 523–525
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

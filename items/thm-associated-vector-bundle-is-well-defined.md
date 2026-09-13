@@ -2,7 +2,7 @@
 id: thm-associated-vector-bundle-is-well-defined
 kind: theorem
 title: Associated vector bundles are well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-associated-bundle-to-a-principal-bundle-and-representation, thm-vector-bundle-construction-from-a-smooth-cocycle, def-vector-bundle-chart-and-transition-function, def-smooth-fibre-bundle-and-local-trivialization]
@@ -15,6 +15,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Vector Bundle Chart Lemma 10.6 and complete proof, printed pages 252–253; fibre-bundle conventions, printed pages 267–268
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

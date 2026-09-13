@@ -2,7 +2,7 @@
 id: ex-pbw-basis-for-the-heisenberg-lie-algebra
 kind: example
 title: PBW basis for the Heisenberg Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-poincare-birkhoff-witt]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

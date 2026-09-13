@@ -2,7 +2,7 @@
 id: prop-tangent-space-of-a-homogeneous-quotient
 kind: proposition
 title: Tangent space of a homogeneous quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-quotient-manifold-by-a-closed-lie-subgroup, thm-quotient-module-universal-property, prop-tangent-space-of-a-regular-level-set-is-the-kernel]
@@ -15,6 +15,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Theorem 4.1 and quotient tangent calculation, printed page 28
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

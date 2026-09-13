@@ -2,13 +2,14 @@
 id: thm-dual-ball-weak-star-metrizable-for-separable-predual
 kind: theorem
 title: Dual ball weak-star metrizable for a separable predual
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-basic-weak-star-neighborhoods"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

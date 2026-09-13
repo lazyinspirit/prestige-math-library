@@ -2,11 +2,12 @@
 id: ex-the-zero-stem-is-the-integers
 kind: example
 title: The zero stable stem is the integers
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stable-stem-of-the-sphere", "lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres", "thm-based-sphere-maps-are-classified-by-geometric-degree", "prop-suspension-preserves-sphere-map-degree"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

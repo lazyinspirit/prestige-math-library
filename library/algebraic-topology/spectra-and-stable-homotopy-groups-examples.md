@@ -1,7 +1,7 @@
 ---
 page: spectra-and-stable-homotopy-groups-examples
 title: Spectra and Stable Homotopy Groups — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-the-zero-stem-is-the-integers

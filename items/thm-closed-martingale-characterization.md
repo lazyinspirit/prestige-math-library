@@ -2,7 +2,7 @@
 id: thm-closed-martingale-characterization
 kind: theorem
 title: Closed martingale characterization
-status: draft
+status: published
 origin: pipeline
 deps: [thm-uniformly-integrable-martingale-convergence, lem-multistep-martingale-characterization, cor-conditional-lp-contraction, thm-uniform-integrability-of-conditional-expectations-of-one-variable, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

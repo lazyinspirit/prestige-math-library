@@ -2,7 +2,9 @@
 id: cor-ell-one-is-not-reflexive
 kind: corollary
 title: Ell one is not reflexive
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-ell-one-has-the-schur-property, cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence, lem-finite-truncations-are-dense-in-c0-and-ell-one, def-dependent-choice, def-hahn-banach-extension-principle-relative]
 provenance:

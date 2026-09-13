@@ -2,12 +2,13 @@
 id: prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group
 kind: proposition
 title: Vertex groups recover the fundamental group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-fundamental-groupoid-of-a-space, def-based-loops-and-fundamental-group, thm-fundamental-group-laws]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

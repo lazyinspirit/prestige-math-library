@@ -2,7 +2,7 @@
 id: thm-relative-moser-theorem
 kind: theorem
 title: Relative Moser theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "lem-moser-pullback-differentiation-equation", "lem-relative-poincare-primitive-near-a-submanifold", "thm-time-dependent-vector-fields-have-local-smooth-evolution-operators"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 7, Theorem 7.4 and proof, pp. 45--46
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

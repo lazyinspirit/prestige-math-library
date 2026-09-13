@@ -2,7 +2,7 @@
 id: cex-a-singular-common-level-need-not-be-a-torus
 kind: counterexample
 title: A singular common level need not be a torus
-status: draft
+status: published
 origin: pipeline
 deps: ["def-completely-integrable-hamiltonian-system"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Definition 18.10 and Theorem 18.12, pp. 110--111
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

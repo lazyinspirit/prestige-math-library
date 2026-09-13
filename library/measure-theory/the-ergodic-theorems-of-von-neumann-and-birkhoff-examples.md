@@ -1,7 +1,7 @@
 ---
 page: the-ergodic-theorems-of-von-neumann-and-birkhoff-examples
 title: The Ergodic Theorems of von Neumann and Birkhoff — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-borels-binary-normality-exception-is-uncountable-and-null

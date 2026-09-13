@@ -2,7 +2,7 @@
 id: def-canonical-transformation
 kind: definition
 title: Canonical transformation
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Hamiltonian flows as symplectomorphisms, p. 105
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

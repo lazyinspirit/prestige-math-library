@@ -2,7 +2,7 @@
 id: cex-a-real-invertible-matrix-with-no-real-logarithm
 kind: counterexample
 title: A real invertible matrix with no real logarithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, ex-general-and-special-linear-lie-groups, ex-matrix-exponential-as-the-lie-group-exponential, def-determinant-of-a-square-matrix]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

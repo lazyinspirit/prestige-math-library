@@ -2,13 +2,14 @@
 id: thm-closed-subspaces-of-reflexive-spaces-are-reflexive
 kind: theorem
 title: Closed subspaces of reflexive spaces are reflexive
-status: draft
+status: published
 origin: pipeline
 deps: ["def-reflexive-banach-space", "def-annihilator-and-preannihilator", "thm-relative-hahn-banach-geometric-separation", "lem-closed-subspace-of-a-banach-space-is-banach", "def-hahn-banach-extension-principle-relative", "thm-relative-hahn-banach-norm-preserving-extension"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-tangent-space-of-a-free-proper-quotient
 kind: proposition
 title: Tangent space of a free proper quotient
-status: draft
+status: published
 origin: pipeline
 deps: [thm-free-proper-action-quotient-manifold, thm-quotient-module-universal-property, lem-local-slice-for-a-free-proper-action]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Product and quotient coordinates in Theorem 21.10, printed pages 545–547
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

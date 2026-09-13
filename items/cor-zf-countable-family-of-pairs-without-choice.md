@@ -2,7 +2,7 @@
 id: cor-zf-countable-family-of-pairs-without-choice
 kind: corollary
 title: Relative consistency of a countable family of pairs without choice
-status: draft
+status: published
 origin: pipeline
 deps: [lem-jech-sochor-socks-transfer-is-uniformly-formalizable, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-choice-for-pairs-and-countable-finite-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

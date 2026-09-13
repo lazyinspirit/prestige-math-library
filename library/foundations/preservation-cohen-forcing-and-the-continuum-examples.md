@@ -1,7 +1,7 @@
 ---
 page: preservation-cohen-forcing-and-the-continuum-examples
 title: "Preservation, Cohen Forcing, and the Continuum: Examples and Counterexamples"
-status: draft
+status: published
 items: [ex-nice-name-for-a-cohen-coordinate-real, ex-levy-collapse-of-a-regular-cardinal, ex-two-cohen-reals-as-mutually-generic-coordinates, fs-ccc-means-countably-closed]
 examples: []
 ---

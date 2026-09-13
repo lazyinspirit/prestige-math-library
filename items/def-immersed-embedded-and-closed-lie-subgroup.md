@@ -2,7 +2,7 @@
 id: def-immersed-embedded-and-closed-lie-subgroup
 kind: definition
 title: Immersed, embedded, and closed Lie subgroups
-status: draft
+status: published
 origin: pipeline
 deps: [def-lie-group, def-lie-group-homomorphism-isomorphism-and-automorphism, def-immersed-submanifold, def-smooth-embedding, def-topological-space]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Definitions 3.10 and 4.5, printed pages 26 and 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

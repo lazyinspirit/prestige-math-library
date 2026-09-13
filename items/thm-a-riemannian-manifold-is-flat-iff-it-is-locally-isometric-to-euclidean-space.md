@@ -2,7 +2,7 @@
 id: thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space
 kind: theorem
 title: A Riemannian manifold is flat iff it is locally isometric to Euclidean space
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-flat-connection-admits-local-parallel-frames", "def-riemann-curvature-four-tensor", "def-levi-civita-connection", "lem-commuting-independent-vector-fields-give-a-coordinate-system", "def-riemannian-isometry-and-local-isometry", "thm-gram-schmidt-orthonormalisation", "prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://www2.math.ethz.ch/will-merry/files/Merry%20-%20Differential%20Geometry%20(2021).pdf
       locator: Theorem 33.9, local triviality of a flat connection
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

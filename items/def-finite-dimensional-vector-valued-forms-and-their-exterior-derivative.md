@@ -2,7 +2,7 @@
 id: def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative
 kind: definition
 title: Finite-dimensional vector-valued forms and their exterior derivative
-status: draft
+status: published
 origin: pipeline
 deps: ["def-vector-space", "def-dimension", "def-smooth-differential-k-form", "def-exterior-derivative-by-the-invariant-vector-field-formula", "lem-the-invariant-exterior-derivative-formula-is-c-infinity-multilinear"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 2, Definition 9 and Proposition 9 with the component expansion immediately after its proof, printed pages 27--28
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

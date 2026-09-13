@@ -2,7 +2,7 @@
 id: cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups
 kind: corollary
 title: Discrete subgroups are closed embedded zero-dimensional Lie subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-cartans-closed-subgroup-theorem]
@@ -15,6 +15,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Proposition 21.28 and complete proof, printed page 556
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-james-norm-attainment-compactness-criterion
 kind: lemma
 title: James convex-block norm-attainment criterion
-status: draft
+status: published
 origin: pipeline
 deps: [lem-james-noncompactness-sequence, thm-relative-hahn-banach-dominated-extension, def-dependent-choice, def-hahn-banach-extension-principle-relative, thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma, def-dual-space-of-a-normed-space, def-limsup-liminf, lem-limsup-exists, thm-limsup-subadditive, lem-limsup-reflection, cor-liminf-is-least-subsequential-limit, thm-infimum-property, thm-monotone-convergence, thm-bounded-operator-space-is-banach, thm-banach-series-criterion, def-series-and-absolute-convergence-in-a-normed-space, thm-geometric-series, lem-index-map-grows]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "James's nested convex-block induction, followed by the exact tail-weight telescoping estimate and a geometric-weight nonattainment argument."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-bockstein-detects-the-integral-two-torsion-of-real-projective-space
 kind: example
 title: Bockstein detects integral two-torsion in real projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-bockstein-connecting-operation, lem-the-bockstein-is-independent-of-lift-and-cocycle-representative, prop-first-steenrod-square-is-the-mod-two-bockstein, prop-steenrod-square-normalization-instability-and-top-square, lem-real-projective-space-cellular-homology-and-pinch-map, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, def-axiom-of-choice]
@@ -16,6 +16,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Section 3.E, definition and Examples 3E.1--3E.2, printed pages 303--305
 verification:
+  audited: 2026-09-14
   precheck: pass
 ---
 

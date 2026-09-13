@@ -2,7 +2,7 @@
 id: thm-uniformly-integrable-martingale-convergence
 kind: theorem
 title: Uniformly integrable martingale convergence
-status: draft
+status: published
 origin: pipeline
 deps: [thm-doob-submartingale-convergence, def-uniformly-integrable-family, thm-almost-sure-convergence-implies-convergence-in-probability, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

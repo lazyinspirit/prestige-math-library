@@ -2,13 +2,14 @@
 id: rem-paley-wiener-and-microlocal-analysis
 kind: remark
 title: Paley wiener and microlocal analysis
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

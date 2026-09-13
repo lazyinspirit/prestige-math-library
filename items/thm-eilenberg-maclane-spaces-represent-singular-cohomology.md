@@ -2,7 +2,7 @@
 id: thm-eilenberg-maclane-spaces-represent-singular-cohomology
 kind: theorem
 title: Eilenberg--Mac Lane spaces represent singular cohomology
-status: draft
+status: published
 origin: pipeline
 deps: ["def-eilenberg-maclane-space", "thm-difference-cochains-classify-homotopies-of-extensions-in-the-stable-stage", "thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton", "def-singular-cohomology-with-coefficients", "def-relative-singular-cochain-complex", "thm-cellular-cochains-compute-cohomology-with-local-coefficients", "def-axiom-of-choice", "thm-absolute-hurewicz-theorem", "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology", "def-kronecker-evaluation-pairing"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

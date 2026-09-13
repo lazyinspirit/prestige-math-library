@@ -2,7 +2,7 @@
 id: def-bockstein-connecting-operation
 kind: definition
 title: Bockstein connecting operation
-status: draft
+status: published
 origin: pipeline
 deps: ["def-singular-cochain-complex-with-coefficients", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "def-axiom-of-choice"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Section 3.E, printed pages 303--306
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

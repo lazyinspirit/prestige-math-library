@@ -2,7 +2,7 @@
 id: ex-ma-small-set-is-null-and-meagre
 kind: example
 title: A small set of reals is both null and meagre under MA
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ma-small-unions-of-meagre-sets, thm-ma-small-unions-of-null-sets]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

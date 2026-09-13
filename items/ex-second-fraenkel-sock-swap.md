@@ -2,7 +2,7 @@
 id: ex-second-fraenkel-sock-swap
 kind: example
 title: The unsupported sock swap
-status: draft
+status: published
 origin: pipeline
 deps: [thm-second-fraenkel-model-countable-pairs-without-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

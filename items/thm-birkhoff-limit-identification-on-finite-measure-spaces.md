@@ -2,13 +2,14 @@
 id: thm-birkhoff-limit-identification-on-finite-measure-spaces
 kind: theorem
 title: Finite-measure identification of the Birkhoff limit
-status: draft
+status: published
 origin: pipeline
 deps: [thm-birkhoff-ergodic-theorem, thm-maximal-ergodic-theorem, def-strict-and-mod-null-invariant-sigma-algebras, lem-mod-null-invariant-sets-have-strictly-invariant-representatives, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integrals-are-invariant-under-measure-preserving-maps, prop-indefinite-integral-of-an-integrable-function-is-countably-additive, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

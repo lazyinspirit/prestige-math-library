@@ -2,13 +2,14 @@
 id: thm-fourier-transform-converts-allowed-tempered-convolutions-to-products
 kind: theorem
 title: Fourier transform converts allowed tempered convolutions to products
-status: draft
+status: published
 origin: pipeline
 deps: [thm-tempered-convolution-is-smooth-with-polynomial-growth, lem-smooth-polynomially-bounded-multipliers-on-schwartz-space, lem-schwartz-parameter-pairing-and-integral-interchange, thm-fourier-transform-of-a-compactly-supported-distribution-is-a-smooth-polynomially-bounded-multiplier, lem-compact-distribution-convolution-preserves-schwartz-and-tempered-spaces, thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions, cor-schwartz-convolution-and-product-transform-laws, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

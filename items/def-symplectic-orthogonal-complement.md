@@ -2,7 +2,7 @@
 id: def-symplectic-orthogonal-complement
 kind: definition
 title: Symplectic orthogonal complement
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-vector-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §2.2, Definition 2.4, p. 7
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

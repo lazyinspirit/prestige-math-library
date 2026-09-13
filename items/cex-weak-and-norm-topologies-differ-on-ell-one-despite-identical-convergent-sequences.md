@@ -2,7 +2,7 @@
 id: cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences
 kind: counterexample
 title: Weak and norm topologies differ on $\ell^1$ despite identical convergent sequences
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ell-one-has-the-schur-property,
        def-weak-topology-on-a-normed-space, def-norm-and-normed-space,
@@ -15,6 +15,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

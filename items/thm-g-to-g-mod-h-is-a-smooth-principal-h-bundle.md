@@ -2,7 +2,7 @@
 id: thm-g-to-g-mod-h-is-a-smooth-principal-h-bundle
 kind: theorem
 title: G to G/H is a smooth principal H-bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-principal-h-bundle-g-to-g-mod-h, thm-quotient-manifold-by-a-closed-lie-subgroup, thm-constant-rank-theorem-for-manifolds, thm-cartans-closed-subgroup-theorem]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Theorem 4.1, printed page 28
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

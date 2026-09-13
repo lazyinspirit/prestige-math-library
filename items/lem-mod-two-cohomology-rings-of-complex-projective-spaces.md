@@ -2,7 +2,7 @@
 id: lem-mod-two-cohomology-rings-of-complex-projective-spaces
 kind: lemma
 title: Mod-two cohomology rings of complex projective spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary, thm-cellular-homology-computes-singular-homology, def-oriented-cellular-chain-group, prop-cellular-maps-induce-cellular-chain-maps, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-naturality-of-the-singular-cohomology-pair-sequence, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, thm-excision-for-singular-cohomology, lem-local-coordinate-cup-products-generate-top-relative-cohomology, prop-relative-cup-products-are-natural-and-compatible-with-connectors, def-singular-cochain-complex-with-coefficients, def-singular-cup-product-on-cochains, prop-singular-cohomology-is-contravariantly-functorial, prop-cup-product-is-natural-unital-and-associative, def-axiom-of-choice]
@@ -16,6 +16,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Theorem 3.19 and its complete proof, printed pages 220--221
 verification:
+  audited: 2026-09-14
   precheck: pass
 ---
 

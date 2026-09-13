@@ -2,7 +2,7 @@
 id: prop-canonical-liouville-vector-field-on-a-cotangent-bundle-is-radial-in-momenta
 kind: proposition
 title: The canonical Liouville vector field on a cotangent bundle is radial in momenta
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-liouville-vector-field-on-an-exact-symplectic-manifold", "def-tautological-one-form-on-a-cotangent-bundle"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, cotangent coordinates, pp. 11--12
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal
 kind: proposition
 title: Derivations form a Lie algebra and inner derivations an ideal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-derivation-of-a-lie-algebra, def-lie-subalgebra-ideal-and-center, def-lie-algebra-over-a-field]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

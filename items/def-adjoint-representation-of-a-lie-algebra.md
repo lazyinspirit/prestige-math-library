@@ -2,7 +2,7 @@
 id: def-adjoint-representation-of-a-lie-algebra
 kind: definition
 title: Adjoint representation of a Lie algebra
-status: draft
+status: published
 origin: pipeline
 deps: ["def-finite-dimensional-lie-algebra", "def-vector-space-of-linear-maps"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.16 and equivalent last identity in (3.6), printed page 33
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

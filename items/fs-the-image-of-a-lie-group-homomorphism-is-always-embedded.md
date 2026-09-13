@@ -2,7 +2,7 @@
 id: fs-the-image-of-a-lie-group-homomorphism-is-always-embedded
 kind: false-statement
 title: A homomorphism image need not be embedded
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup, lem-irrational-torus-flow-is-free-with-dense-orbits, def-immersed-embedded-and-closed-lie-subgroup]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Irrational winding Examples 3.14(2) and 4.6(1), printed pages 26 and 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-tautological-one-form-on-a-cotangent-bundle
 kind: definition
 title: Tautological one-form on a cotangent bundle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-cotangent-bundle-has-a-canonical-smooth-2n-manifold-structure", "thm-existence-and-uniqueness-of-the-exterior-derivative"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §3.4, Definition 3.10, pp. 34--35
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

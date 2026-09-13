@@ -2,7 +2,7 @@
 id: ex-ordered-mostowski-order-has-empty-support
 kind: example
 title: The ordered Mostowski relation has empty support
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ordered-mostowski-model]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: thm-banach-alaoglu
 kind: theorem
 title: Banach–Alaoglu
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-dual-ball-as-a-closed-subset-of-a-product", "thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma", "thm-heine-borel-rn", "thm-closed-subspace-of-a-compact-space-is-compact"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

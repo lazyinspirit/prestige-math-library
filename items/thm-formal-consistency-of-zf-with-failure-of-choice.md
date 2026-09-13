@@ -2,7 +2,7 @@
 id: thm-formal-consistency-of-zf-with-failure-of-choice
 kind: theorem
 title: Relative consistency of ZF with failure of Choice
-status: draft
+status: published
 origin: pipeline
 deps: [lem-basic-cohen-symmetric-construction-is-uniformly-formalizable, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

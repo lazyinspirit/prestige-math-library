@@ -2,7 +2,7 @@
 id: ex-simple-pendulum-phase-portrait
 kind: example
 title: Simple pendulum phase portrait
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-hamilton-equations-in-canonical-cotangent-coordinates"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Homework 13, Simple Pendulum, p. 112
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

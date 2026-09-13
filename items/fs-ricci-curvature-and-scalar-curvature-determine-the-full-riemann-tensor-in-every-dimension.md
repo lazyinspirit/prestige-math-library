@@ -2,7 +2,7 @@
 id: fs-ricci-curvature-and-scalar-curvature-determine-the-full-riemann-tensor-in-every-dimension
 kind: false-statement
 title: Ricci curvature and scalar curvature determine the full Riemann tensor in every dimension
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three","thm-algebraic-symmetries-of-the-riemann-tensor","def-ricci-curvature","def-scalar-curvature","def-riemann-curvature-four-tensor","prop-coordinate-criterion-for-a-riemannian-metric","prop-christoffel-formula-for-the-levi-civita-connection","prop-coordinate-formula-for-the-curvature-tensor","thm-increasing-basis-wedges-form-a-basis"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Proposition 12.1.1, printed pages 80–82; Lemma 11.3.1, printed pages 74–75; and Lecture 13, Lemmas 13.1.5 and 13.1.7 through Theorem 13.2.1, printed pages 89–95
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

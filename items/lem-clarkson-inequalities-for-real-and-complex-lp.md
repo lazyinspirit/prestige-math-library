@@ -2,7 +2,7 @@
 id: lem-clarkson-inequalities-for-real-and-complex-lp
 kind: lemma
 title: Clarkson inequalities in both exponent ranges
-status: draft
+status: published
 origin: pipeline
 deps: [def-conjugate-exponents, def-real-power, def-natural-logarithm, def-complex-conjugate-real-imaginary-part-and-modulus, lem-complex-conjugation-and-modulus-laws, thm-real-power-laws, thm-real-power-continuity-and-derivatives, thm-natural-logarithm-laws, thm-logarithm-derivative-and-integral, thm-algebra-of-derivatives, thm-chain-rule, thm-monotonicity-from-the-derivative, thm-intermediate-value, thm-holder-finite-real-exponents, def-calligraphic-l-p-on-a-measure-space, def-complex-lp-and-euclidean-test-function-conventions, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-complex-holder-minkowski-and-the-quotient-norm, prop-order-and-scalar-rules-for-the-nonnegative-integral, cor-additivity-of-the-nonnegative-lebesgue-integral]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

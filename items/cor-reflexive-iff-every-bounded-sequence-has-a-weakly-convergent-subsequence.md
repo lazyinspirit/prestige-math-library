@@ -2,7 +2,7 @@
 id: cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence
 kind: corollary
 title: Reflexivity is equivalent to weak subsequential compactness of bounded sequences
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-reflexive-iff-unit-ball-weakly-compact", "thm-eberlein-smulian", "def-weak-topology-on-a-normed-space", "cor-relative-hahn-banach-dual-norming", "def-dependent-choice", "def-hahn-banach-extension-principle-relative"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

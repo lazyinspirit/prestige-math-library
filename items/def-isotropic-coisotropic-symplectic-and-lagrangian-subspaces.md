@@ -2,7 +2,7 @@
 id: def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces
 kind: definition
 title: Isotropic, coisotropic, symplectic, and Lagrangian subspaces
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-orthogonal-complement"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §2.2, Definitions 2.7 and 2.19, pp. 8 and 11
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

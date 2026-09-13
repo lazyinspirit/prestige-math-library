@@ -2,7 +2,7 @@
 id: def-direct-product-and-direct-sum-of-lie-algebras
 kind: definition
 title: Direct products and direct sums of Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-lie-algebra-over-a-field, def-direct-sum-of-a-family-of-modules, def-vector-space]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

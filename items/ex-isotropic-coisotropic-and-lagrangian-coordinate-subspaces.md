@@ -2,7 +2,7 @@
 id: ex-isotropic-coisotropic-and-lagrangian-coordinate-subspaces
 kind: example
 title: Isotropic, coisotropic, symplectic, and Lagrangian coordinate subspaces
-status: draft
+status: published
 origin: pipeline
 deps: ["def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definition 2.7 and Examples 2.8--2.9, pp. 8--9
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

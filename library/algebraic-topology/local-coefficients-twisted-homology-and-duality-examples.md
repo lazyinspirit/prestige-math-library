@@ -1,7 +1,7 @@
 ---
 page: local-coefficients-twisted-homology-and-duality-examples
 title: Local Coefficients, Twisted Homology, and Duality — Examples
-status: draft
+status: published
 items: []
 examples: [ex-circle-homology-with-a-module-automorphism, ex-sign-local-system-on-real-projective-space, ex-the-orientation-system-of-the-mobius-band, ex-twisted-poincare-duality-for-a-closed-nonorientable-surface, cex-constant-coefficients-do-not-compute-a-nontrivial-monodromy-system, cex-the-untwisted-e-two-page-misses-monodromy-in-a-mapping-torus]
 ---

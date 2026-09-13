@@ -2,7 +2,7 @@
 id: def-free-and-proper-lie-group-actions
 kind: definition
 title: Free and proper Lie-group actions
-status: draft
+status: published
 origin: pipeline
 deps: [def-smooth-left-action-of-a-lie-group, def-compact-space]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Definitions and discussion preceding Proposition 21.4, printed pages 542–543
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

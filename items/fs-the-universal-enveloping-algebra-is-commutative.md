@@ -2,7 +2,7 @@
 id: fs-the-universal-enveloping-algebra-is-commutative
 kind: false-statement
 title: An enveloping algebra need not be commutative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra, cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-central-p-subgroups-lie-in-every-block-defect-group
 kind: lemma
 title: Central p-subgroups lie in every block defect group
-status: draft
+status: published
 origin: pipeline
 deps: [def-brauer-homomorphism-for-a-p-subgroup, thm-defect-groups-are-maximal-brauer-support, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

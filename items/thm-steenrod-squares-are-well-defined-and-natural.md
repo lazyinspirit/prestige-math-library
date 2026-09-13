@@ -2,7 +2,9 @@
 id: thm-steenrod-squares-are-well-defined-and-natural
 kind: theorem
 title: Steenrod squares are well-defined and natural
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["def-steenrod-squares-from-cup-i-products", "thm-cup-i-coboundary-identity", "lem-natural-higher-diagonal-approximations-on-singular-chains"]
 proof_strategy: direct

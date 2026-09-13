@@ -2,7 +2,7 @@
 id: thm-unique-ergodicity-is-equivalent-to-uniform-ergodic-averages
 kind: theorem
 title: Unique ergodicity is equivalent to uniform ergodic averages
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-unique-ergodicity, lem-continuous-functions-determine-borel-probabilities-on-compact-metric-spaces, lem-borel-probability-sequences-on-compact-metric-spaces-have-integral-convergent-subsequences, thm-integrals-are-invariant-under-measure-preserving-maps, thm-extreme-value-metric, thm-integral-triangle-inequality, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-countable-choice]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

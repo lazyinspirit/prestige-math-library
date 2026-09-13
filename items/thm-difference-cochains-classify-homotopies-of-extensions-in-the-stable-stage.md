@@ -2,7 +2,7 @@
 id: thm-difference-cochains-classify-homotopies-of-extensions-in-the-stable-stage
 kind: theorem
 title: Difference cochains classify homotopies of extensions in the stable stage
-status: draft
+status: published
 origin: pipeline
 deps: ["def-difference-cochain-between-two-cellular-extensions", "thm-the-primary-obstruction-class-is-independent-of-cellular-choices", "thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

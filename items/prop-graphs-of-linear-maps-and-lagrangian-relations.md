@@ -2,7 +2,7 @@
 id: prop-graphs-of-linear-maps-and-lagrangian-relations
 kind: proposition
 title: Graphs of linear maps and Lagrangian relations
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-equivalent-characterizations-of-lagrangian-subspaces"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §4.4, Example 4.21, pp. 51--52
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

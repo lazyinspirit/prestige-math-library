@@ -2,7 +2,7 @@
 id: prop-adjoint-is-a-smooth-lie-group-representation
 kind: proposition
 title: Adjoint is a smooth Lie-group representation
-status: draft
+status: published
 origin: pipeline
 deps: ["def-conjugation-and-the-adjoint-representation-of-a-lie-group", "def-lie-group", "def-finite-dimensional-representation-of-a-group-over-a-field", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Formula (3.4) and preceding paragraph, printed page 33
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

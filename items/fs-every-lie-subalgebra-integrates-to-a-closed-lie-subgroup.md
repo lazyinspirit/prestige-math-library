@@ -2,7 +2,7 @@
 id: fs-every-lie-subalgebra-integrates-to-a-closed-lie-subgroup
 kind: false-statement
 title: A Lie subalgebra need not integrate to a closed subgroup
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, thm-lie-subgroup-lie-subalgebra-correspondence, lem-irrational-torus-flow-is-free-with-dense-orbits, prop-components-of-a-topological-manifold-are-open-and-at-most-countable, thm-components-partition-and-are-closed, thm-product-of-connected-spaces, thm-continuous-image-of-a-connected-space]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Lie subgroups and subalgebras, Proposition 4.7, printed page 30
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-smash-product-of-based-spaces
 kind: definition
 title: Smash product of based spaces
-status: draft
+status: published
 origin: pipeline
 deps: ["def-compactly-generated-based-space-and-well-pointed-object", "lem-compact-test-exponential-law-and-products-of-quotients", "thm-quotient-universal-property"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

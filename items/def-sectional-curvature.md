@@ -2,7 +2,7 @@
 id: def-sectional-curvature
 kind: definition
 title: Sectional curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-riemann-curvature-four-tensor","thm-algebraic-symmetries-of-the-riemann-tensor"]
 justified_by: ["lem-sectional-curvature-is-independent-of-the-basis-of-the-plane"]
@@ -18,6 +18,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Proposition 8.8, printed page 146
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

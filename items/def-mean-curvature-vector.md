@@ -2,7 +2,7 @@
 id: def-mean-curvature-vector
 kind: definition
 title: Mean curvature vector
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor", "def-contraction-of-a-mixed-tensor", "lem-contraction-is-independent-of-the-basis-formula", "thm-the-musical-maps-are-smooth-inverse-bundle-isomorphisms", "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases", "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions", "prop-orthogonal-complements-of-subbundles-are-smooth-subbundles", "thm-pullback-connection-is-well-defined-and-functorial", "cor-every-immersion-is-locally-an-embedding"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.uci.edu/~cterng/LectureNotes1353.pdf
       locator: Section 2.1, unnormalized trace convention and first-variation formula (2.1.22), printed pages 30–31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

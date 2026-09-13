@@ -2,13 +2,14 @@
 id: thm-compactly-supported-distributions-are-tempered
 kind: theorem
 title: Compactly supported distributions are tempered
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-seminorm-bound-characterizes-tempered-distributions, lem-compactly-supported-distributions-extend-to-smooth-functions, lem-test-function-inclusion-in-schwartz-space-is-continuous]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

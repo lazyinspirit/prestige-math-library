@@ -2,7 +2,7 @@
 id: def-liouville-vector-field-on-an-exact-symplectic-manifold
 kind: definition
 title: Liouville vector field on an exact symplectic manifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-form-and-symplectic-manifold", "thm-cartans-magic-formula"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, exact cotangent form, and Lecture 18, Hamiltonian conventions
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

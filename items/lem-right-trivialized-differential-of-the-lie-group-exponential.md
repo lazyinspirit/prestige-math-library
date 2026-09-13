@@ -2,7 +2,7 @@
 id: lem-right-trivialized-differential-of-the-lie-group-exponential
 kind: lemma
 title: Right-trivialized differential of the Lie-group exponential
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-left-and-right-translations-on-a-lie-group", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields", "thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero", "prop-adjoint-exponential-identity", "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval", "thm-coordinate-map-for-a-finite-dimensional-normed-space", "lem-exponential-series-has-infinite-radius", "thm-termwise-differentiation-of-a-real-power-series", "cor-vector-valued-ftc-and-lipschitz-bound", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~aknapp/download/Beyond2.pdf
       locator: Errata insertion for printed page 110, differential-of-exponential formula, errata printed page 814
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

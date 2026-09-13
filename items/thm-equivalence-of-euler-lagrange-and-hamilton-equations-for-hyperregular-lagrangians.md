@@ -2,7 +2,7 @@
 id: thm-equivalence-of-euler-lagrange-and-hamilton-equations-for-hyperregular-lagrangians
 kind: theorem
 title: Equivalence of Euler–Lagrange and Hamilton equations for hyperregular Lagrangians
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-euler-lagrange-equations", "def-energy-and-hamiltonian-of-a-hyperregular-lagrangian", "thm-hamilton-equations-in-canonical-cotangent-coordinates"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 19, equivalence of the two formalisms, pp. 114--116
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-angular-momentum-as-a-cotangent-lift-hamiltonian
 kind: example
 title: Angular momentum as a cotangent-lift Hamiltonian
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-cotangent-lift-of-a-vector-field-is-hamiltonian"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, cotangent-lift exercise, p. 106; Lecture 22, Rotation, pp. 137--138
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

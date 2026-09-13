@@ -2,7 +2,7 @@
 id: fs-a-zfa-model-is-a-zf-model
 kind: false-statement
 title: A ZFA model is a ZF model
-status: draft
+status: published
 origin: pipeline
 deps: [def-zfa-universe-atoms-and-kernel, thm-jech-sochor-first-embedding]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-baker-campbell-hausdorff
 kind: theorem
 title: Baker–Campbell–Hausdorff theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-local-logarithm-on-a-lie-group", "lem-local-convergence-of-the-baker-campbell-hausdorff-series", "lem-right-trivialized-differential-of-the-lie-group-exponential", "prop-adjoint-is-a-smooth-lie-group-representation", "prop-adjoint-exponential-identity", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields", "def-left-and-right-translations-on-a-lie-group", "def-formal-exponential-logarithm-and-powers", "thm-formal-exponential-logarithm-identities", "lem-exponential-series-has-infinite-radius", "thm-geometric-series", "lem-tube-lemma-for-a-compact-factor", "thm-coordinate-map-for-a-finite-dimensional-normed-space", "thm-uniform-limit-interchanges-riemann-integration", "cor-vector-valued-ftc-and-lipschitz-bound", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.37, printed page 38
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

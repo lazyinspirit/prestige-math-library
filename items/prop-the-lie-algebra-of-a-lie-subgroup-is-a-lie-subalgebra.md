@@ -2,7 +2,7 @@
 id: prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra
 kind: proposition
 title: The Lie algebra of a Lie subgroup is a Lie subalgebra
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-immersed-embedded-and-closed-lie-subgroup, thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism, def-lie-subalgebra-and-ideal]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Proposition 3.12(1), printed page 32
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

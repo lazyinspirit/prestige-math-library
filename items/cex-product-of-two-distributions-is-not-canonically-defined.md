@@ -2,13 +2,14 @@
 id: cex-product-of-two-distributions-is-not-canonically-defined
 kind: counterexample
 title: Product of two distributions is not canonically defined
-status: draft
+status: published
 origin: pipeline
 deps: [def-distributional-derivative, def-multiplication-of-a-distribution-by-a-smooth-function, def-dirac-delta-and-its-derivatives, def-locally-integrable-function-on-r-n, def-regular-distribution-from-a-locally-integrable-function, thm-locally-integrable-functions-embed-in-distributions, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

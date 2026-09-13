@@ -2,7 +2,7 @@
 id: ex-norm-attaining-functionals-on-a-hilbert-space
 kind: example
 title: Norm-attaining functionals on a Hilbert space
-status: draft
+status: published
 origin: pipeline
 deps: [def-inner-product-space, def-inner-product-norm,
        cor-triangle-inequality-for-inner-product-norm, def-banach-space,
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

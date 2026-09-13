@@ -2,13 +2,14 @@
 id: cor-separable-banach-dual-ball-is-weak-star-sequentially-compact
 kind: corollary
 title: A separable predual has weak-star sequentially compact dual ball
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "thm-dual-ball-weak-star-metrizable-for-separable-predual", "thm-compact-implies-the-other-compactness-forms", "def-separable-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

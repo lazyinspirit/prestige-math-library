@@ -2,12 +2,13 @@
 id: cex-the-untwisted-e-two-page-misses-monodromy-in-a-mapping-torus
 kind: counterexample
 title: An untwisted E2 table misses mapping-torus monodromy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-cellular-chains-compute-homology-with-local-coefficients, lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems, def-fiber-transport-and-monodromy-action]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

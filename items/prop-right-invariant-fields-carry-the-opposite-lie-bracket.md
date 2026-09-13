@@ -2,7 +2,7 @@
 id: prop-right-invariant-fields-carry-the-opposite-lie-bracket
 kind: proposition
 title: Right-invariant fields carry the opposite Lie bracket
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-lie-group", "def-lie-bracket-on-the-tangent-space-of-a-lie-group", "def-left-and-right-invariant-vector-fields", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "cor-diffeomorphism-pushforward-preserves-lie-brackets", "thm-chain-rule-for-differentials-of-smooth-maps", "thm-canonical-tangent-and-cotangent-splittings-for-products", "def-differential-of-a-smooth-map", "lem-the-differential-sends-derivations-to-derivations-and-is-linear", "def-lie-bracket-of-smooth-vector-fields"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 3, Group Actions and Vector Fields, Proposition 1 and proof, printed pages 44–45
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

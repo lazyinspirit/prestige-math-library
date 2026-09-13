@@ -2,11 +2,12 @@
 id: def-orientation-local-system-on-a-manifold-with-boundary
 kind: definition
 title: Orientation local system on a manifold with boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-orientation-local-system-and-orientation-cover, prop-the-manifold-orientation-system-is-a-local-system, def-local-system-of-r-modules-and-its-pullback, thm-topological-collaring-for-manifold-boundaries]
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

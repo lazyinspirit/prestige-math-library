@@ -2,13 +2,14 @@
 id: def-equidistribution-mod-one
 kind: definition
 title: Equidistribution modulo one
-status: draft
+status: published
 origin: pipeline
 deps: [def-circle-rotation-and-doubling-map]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

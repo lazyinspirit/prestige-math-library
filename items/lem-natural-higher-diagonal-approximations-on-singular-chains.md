@@ -2,7 +2,7 @@
 id: lem-natural-higher-diagonal-approximations-on-singular-chains
 kind: lemma
 title: Natural higher diagonal approximations
-status: draft
+status: published
 origin: pipeline
 deps: ["def-alexander-whitney-diagonal-approximation", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

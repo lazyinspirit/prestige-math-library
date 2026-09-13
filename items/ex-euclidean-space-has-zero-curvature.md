@@ -2,7 +2,7 @@
 id: ex-euclidean-space-has-zero-curvature
 kind: example
 title: Euclidean space has zero curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-coordinate-criterion-for-a-riemannian-metric", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-coordinate-formula-for-the-curvature-tensor"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Equation (7.3) and the Euclidean-to-flat direction of Theorem 7.3, printed pages 117–120
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

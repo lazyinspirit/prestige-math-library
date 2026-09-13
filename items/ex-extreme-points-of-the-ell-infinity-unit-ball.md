@@ -2,13 +2,14 @@
 id: ex-extreme-points-of-the-ell-infinity-unit-ball
 kind: example
 title: Extreme points of the ell-infinity unit ball
-status: draft
+status: published
 origin: pipeline
 deps: ["def-extreme-point-and-face", "def-c-zero-and-ell-infinity"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-constant-sectional-curvature-and-space-form
 kind: definition
 title: Constant sectional curvature and space form
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-sectional-curvature","def-geodesically-complete-riemannian-manifold"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, printed page 148; Chapter 11 after Corollary 11.13, printed page 206
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

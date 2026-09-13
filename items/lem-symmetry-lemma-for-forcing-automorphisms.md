@@ -2,7 +2,7 @@
 id: lem-symmetry-lemma-for-forcing-automorphisms
 kind: lemma
 title: Symmetry lemma for forcing automorphisms
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-name-automorphism-action, def-symmetric-forcing-system-and-hereditarily-symmetric-names, def-forcing-relation-for-atomic-formulas, def-forcing-relation-for-formulas]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

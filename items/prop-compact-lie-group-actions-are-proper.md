@@ -2,7 +2,7 @@
 id: prop-compact-lie-group-actions-are-proper
 kind: proposition
 title: Compact Lie-group actions are proper
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-and-proper-lie-group-actions, def-compact-space, def-locally-compact-space, def-hausdorff-space, thm-finite-products-of-compact-spaces, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, thm-compactness-under-continuous-maps, lem-products-preserve-t0-t1-and-hausdorff]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Corollary 21.6 and proof, printed page 544
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,9 @@
 id: def-pairing-and-unital-multiplication-of-sequential-prespectra
 kind: definition
 title: Pairings and unital multiplication of sequential prespectra
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms", "def-sequential-prespectrum-spectrum-and-adjoint-structure-maps"]
 provenance:

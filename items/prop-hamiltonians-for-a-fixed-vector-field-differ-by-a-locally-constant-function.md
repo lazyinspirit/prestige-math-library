@@ -2,7 +2,7 @@
 id: prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function
 kind: proposition
 title: Hamiltonians for a fixed vector field differ by a locally constant function
-status: draft
+status: published
 origin: pipeline
 deps: ["def-hamiltonian-vector-field-and-hamiltonian-function"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, §18.1, p. 106
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

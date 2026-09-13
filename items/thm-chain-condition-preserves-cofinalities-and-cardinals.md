@@ -2,7 +2,7 @@
 id: thm-chain-condition-preserves-cofinalities-and-cardinals
 kind: theorem
 title: Chain conditions preserve high cofinalities and ccc preserves cardinals
-status: draft
+status: published
 origin: pipeline
 deps: [def-kappa-closure-distributivity-and-chain-condition, thm-forcing-theorem, thm-forcing-preserves-ordinals, thm-cofinality-basics, cor-cardinal-absorption, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

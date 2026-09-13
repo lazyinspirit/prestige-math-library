@@ -2,7 +2,7 @@
 id: def-left-and-right-translations-on-a-lie-group
 kind: definition
 title: Left and right translations on a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-lie-group"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Section 2.6, printed page 21; its right-action parameter is inverted relative to the translation convention here
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

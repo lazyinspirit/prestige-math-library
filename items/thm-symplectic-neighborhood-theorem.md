@@ -2,7 +2,7 @@
 id: thm-symplectic-neighborhood-theorem
 kind: theorem
 title: Symplectic neighborhood theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-symplectic-normal-bundle-of-a-symplectic-submanifold", "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold", "lem-relative-poincare-primitive-near-a-submanifold", "lem-moser-pullback-differentiation-equation", "thm-time-dependent-vector-fields-have-local-smooth-evolution-operators"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Theorem 5.12 and Definition 5.16--Example 5.17(c), pp. 62--64
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

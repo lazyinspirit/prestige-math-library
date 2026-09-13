@@ -2,7 +2,9 @@
 id: ex-the-real-symplectic-matrix-group
 kind: example
 title: The real symplectic matrix group
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, ex-general-and-special-linear-lie-groups, def-transpose-of-a-matrix, thm-constant-rank-theorem-for-manifolds]

@@ -2,13 +2,14 @@
 id: thm-tempered-distributions-embed-continuously-in-distributions
 kind: theorem
 title: Tempered distributions embed continuously in distributions
-status: draft
+status: published
 origin: pipeline
 deps: [lem-test-function-inclusion-in-schwartz-space-is-continuous, def-weak-and-strong-topologies-on-tempered-distributions, def-weak-and-strong-topologies-on-distributions]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

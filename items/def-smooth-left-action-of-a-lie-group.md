@@ -2,7 +2,7 @@
 id: def-smooth-left-action-of-a-lie-group
 kind: definition
 title: Smooth left actions of Lie groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-lie-group, def-c-r-and-smooth-maps-between-smooth-manifolds]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Chapter 21 opening conventions, printed page 541
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

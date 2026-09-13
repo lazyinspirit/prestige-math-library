@@ -2,7 +2,9 @@
 id: ex-general-and-special-linear-lie-groups
 kind: example
 title: General and special linear Lie groups
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-lie-group, def-lie-bracket-on-the-tangent-space-of-a-lie-group, def-determinant-of-a-square-matrix, def-trace-of-a-square-matrix-over-a-commutative-ring, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel]

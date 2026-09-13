@@ -1,7 +1,7 @@
 ---
 page: local-coefficients-twisted-homology-and-duality
 title: Local Coefficients, Twisted Homology, and Duality
-status: draft
+status: published
 items: [def-fundamental-groupoid-of-a-space, prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group, def-local-system-of-r-modules-and-its-pullback, thm-local-systems-on-a-connected-cw-complex-correspond-to-modules-over-its-group-ring, def-right-group-ring-action-on-the-chains-of-a-universal-cover, def-singular-and-cellular-chain-complexes-with-local-coefficients, lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases, def-homology-and-cohomology-with-local-coefficients, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, thm-cellular-chains-compute-homology-with-local-coefficients, thm-pair-long-exact-sequences-with-local-coefficients, thm-excision-and-mayer-vietoris-with-local-coefficients, thm-cellular-cochains-compute-cohomology-with-local-coefficients, def-compactly-supported-cohomology-with-local-coefficients, prop-the-manifold-orientation-system-is-a-local-system, def-orientation-local-system-on-a-manifold-with-boundary, lem-canonical-twisted-fundamental-classes-over-compact-subsets, def-cup-and-cap-products-with-local-coefficient-pairings, thm-poincare-duality-with-the-orientation-local-system, thm-poincare-lefschetz-duality-with-local-coefficients, lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems]
 examples: []
 ---

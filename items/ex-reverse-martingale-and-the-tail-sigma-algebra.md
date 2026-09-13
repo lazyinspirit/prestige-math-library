@@ -2,7 +2,9 @@
 id: ex-reverse-martingale-and-the-tail-sigma-algebra
 kind: example
 title: A reverse martingale and the tail sigma-algebra
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-levy-downward-convergence-of-conditional-expectations, thm-tower-property-of-conditional-expectation, def-tail-sigma-algebra-of-a-sequence, cor-kolmogorov-zero-one-law-from-reverse-martingales, def-axiom-of-choice]
 proof_strategy: direct

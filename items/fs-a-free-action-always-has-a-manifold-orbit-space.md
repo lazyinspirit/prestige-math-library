@@ -2,7 +2,7 @@
 id: fs-a-free-action-always-has-a-manifold-orbit-space
 kind: false-statement
 title: A free action need not have a manifold quotient
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-and-proper-lie-group-actions, thm-free-proper-action-quotient-manifold, lem-irrational-torus-flow-is-free-with-dense-orbits, def-topological-manifold-without-boundary]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Example 21.3, printed page 542; Theorem 21.10, printed pages 544–547
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

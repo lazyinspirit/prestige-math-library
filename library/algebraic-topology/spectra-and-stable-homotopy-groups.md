@@ -1,7 +1,7 @@
 ---
 page: spectra-and-stable-homotopy-groups
 title: Spectra and Stable Homotopy Groups
-status: draft
+status: published
 items:
   - def-compactly-generated-based-space-and-well-pointed-object
   - def-smash-product-of-based-spaces

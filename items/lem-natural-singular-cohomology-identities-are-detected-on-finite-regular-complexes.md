@@ -2,7 +2,7 @@
 id: lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes
 kind: lemma
 title: Natural singular-cohomology identities are detected on finite regular complexes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-singular-simplex-and-singular-chain-group-with-coefficients", "def-singular-chain-complex-and-singular-homology", "def-singular-cochain-complex-with-coefficients", "prop-singular-cohomology-is-contravariantly-functorial", "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball
 kind: proposition
 title: Flat connections have locally path-independent parallel transport on a coordinate ball
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form", "thm-existence-and-uniqueness-of-parallel-sections", "def-parallel-transport-along-a-piecewise-smooth-curve", "thm-smooth-dependence-of-ode-solutions-on-parameters"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Proposition 11.2.1 proof, printed pages 73–74, adapted from the tangent bundle to a vector bundle
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

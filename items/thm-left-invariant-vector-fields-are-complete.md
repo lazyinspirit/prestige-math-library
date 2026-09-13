@@ -2,7 +2,7 @@
 id: thm-left-invariant-vector-fields-are-complete
 kind: theorem
 title: Left-invariant vector fields are complete
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-left-and-right-invariant-vector-fields", "def-complete-vector-field", "def-integral-curve-of-a-vector-field", "thm-unique-maximal-integral-curve-through-each-point", "thm-chain-rule-for-differentials-of-smooth-maps", "prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Proposition 3.1 and proof of the real case, printed page 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

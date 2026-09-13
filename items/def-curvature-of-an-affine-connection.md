@@ -2,7 +2,7 @@
 id: def-curvature-of-an-affine-connection
 kind: definition
 title: Curvature of an affine connection
-status: draft
+status: published
 origin: pipeline
 deps: ["def-affine-connection-on-a-smooth-manifold", "def-lie-bracket-of-smooth-vector-fields"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, page 117, equation (7.3) and Proposition 7.1
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

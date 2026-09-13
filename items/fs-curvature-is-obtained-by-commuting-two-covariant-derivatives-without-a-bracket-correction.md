@@ -2,7 +2,7 @@
 id: fs-curvature-is-obtained-by-commuting-two-covariant-derivatives-without-a-bracket-correction
 kind: false-statement
 title: Curvature is obtained by commuting two covariant derivatives without a bracket correction
-status: draft
+status: published
 origin: pipeline
 deps: ["def-curvature-of-an-affine-connection", "lem-curvature-is-c-infinity-linear-in-all-three-vector-fields", "def-affine-connection-on-a-smooth-manifold", "prop-connection-laws-in-directional-form", "prop-leibniz-rules-for-the-lie-bracket-with-function-multiples"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, flatness criterion (7.3), curvature definition, and Proposition 7.1 proof, printed pages 117–118
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

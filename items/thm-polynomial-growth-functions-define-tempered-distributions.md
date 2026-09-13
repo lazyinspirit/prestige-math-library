@@ -2,7 +2,9 @@
 id: thm-polynomial-growth-functions-define-tempered-distributions
 kind: theorem
 title: Polynomial growth functions define tempered distributions
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-finite-seminorm-bound-characterizes-tempered-distributions, def-regular-distribution-from-a-locally-integrable-function, def-locally-integrable-function-on-r-n, thm-holder-inequality-for-integrals, def-complex-lp-and-euclidean-test-function-conventions, thm-p-series-real-exponents]
 provenance:

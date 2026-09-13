@@ -2,7 +2,7 @@
 id: thm-levy-downward-convergence-of-conditional-expectations
 kind: theorem
 title: Levy downward convergence of conditional expectations
-status: draft
+status: published
 origin: pipeline
 deps: [thm-reverse-martingale-convergence, thm-tower-property-of-conditional-expectation, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-the-local-lie-group-law-is-determined-by-the-lie-bracket
 kind: corollary
 title: The local Lie-group law is determined by the Lie bracket
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-baker-campbell-hausdorff, def-local-logarithm-on-a-lie-group]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

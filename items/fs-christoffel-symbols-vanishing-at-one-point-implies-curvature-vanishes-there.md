@@ -2,7 +2,7 @@
 id: fs-christoffel-symbols-vanishing-at-one-point-implies-curvature-vanishes-there
 kind: false-statement
 title: Christoffel symbols vanishing at one point implies curvature vanishes there
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-coordinate-formula-for-the-curvature-tensor","thm-existence-of-normal-neighborhoods","def-normal-neighborhood-and-normal-coordinate-chart","prop-properties-of-normal-coordinates-at-the-center","def-countable-choice","thm-a-regular-level-set-is-an-embedded-submanifold","prop-tangent-space-of-a-regular-level-set-is-the-kernel","def-shape-operator","def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface","prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures","def-sectional-curvature"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 5.11, printed pages 77–78, and equations (7.3)–(7.4), printed pages 117–119
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

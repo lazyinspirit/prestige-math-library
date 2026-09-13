@@ -2,7 +2,7 @@
 id: thm-a-flat-connection-admits-local-parallel-frames
 kind: theorem
 title: A flat connection admits local parallel frames
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball", "def-parallel-transport-along-a-piecewise-smooth-curve", "def-local-frame-and-global-frame-of-a-vector-bundle", "thm-smooth-dependence-of-ode-solutions-on-parameters", "prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lemma 11.2.3 and its use in Proposition 11.2.1, printed pages 73–74
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

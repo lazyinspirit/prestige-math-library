@@ -2,7 +2,7 @@
 id: thm-postnikov-towers-exist-for-connected-cw-complexes
 kind: theorem
 title: Postnikov towers exist for connected CW complexes
-status: draft
+status: published
 origin: pipeline
 deps: ["def-postnikov-section-and-postnikov-tower", "thm-long-exact-sequence-of-relative-homotopy-groups", "lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere", "def-axiom-of-choice", "lem-high-relative-cells-do-not-change-lower-homotopy", "cor-homotopy-groups-of-a-cw-complex-depend-on-finite-skeleta-in-each-representative"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

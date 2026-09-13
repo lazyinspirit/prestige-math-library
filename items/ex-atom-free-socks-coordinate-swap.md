@@ -2,7 +2,7 @@
 id: ex-atom-free-socks-coordinate-swap
 kind: example
 title: A coordinate swap defeats an atom-free sock choice
-status: draft
+status: published
 origin: pipeline
 deps: [def-atom-free-socks-symmetric-system, lem-symmetry-lemma-for-forcing-automorphisms, thm-atom-free-socks-model-has-countable-pairs-without-choice]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

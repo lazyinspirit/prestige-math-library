@@ -2,13 +2,14 @@
 id: ex-dirac-comb-and-poisson-summation
 kind: example
 title: Dirac comb and poisson summation
-status: draft
+status: published
 origin: pipeline
 deps: [thm-unit-lattice-dirac-comb-is-fourier-invariant-in-tempered-distributions, def-dirac-comb, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

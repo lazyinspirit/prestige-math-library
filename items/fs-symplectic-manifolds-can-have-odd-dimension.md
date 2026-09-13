@@ -2,7 +2,7 @@
 id: fs-symplectic-manifolds-can-have-odd-dimension
 kind: false-statement
 title: Symplectic manifolds can have odd dimension
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-symplectic-vector-spaces-have-even-dimension"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, linear symplectic algebra, pp. 3--5
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

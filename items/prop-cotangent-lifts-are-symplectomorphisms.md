@@ -2,7 +2,7 @@
 id: prop-cotangent-lifts-are-symplectomorphisms
 kind: proposition
 title: Cotangent lifts are symplectomorphisms
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-canonical-cotangent-two-form-is-symplectic", "thm-the-exterior-derivative-commutes-with-pullback"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, Proposition 1.3, pp. 12--13
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

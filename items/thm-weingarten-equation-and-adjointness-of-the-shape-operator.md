@@ -2,7 +2,7 @@
 id: thm-weingarten-equation-and-adjointness-of-the-shape-operator
 kind: theorem
 title: Weingarten equation and adjointness of the shape operator
-status: draft
+status: published
 origin: pipeline
 deps: ["def-shape-operator", "def-normal-connection", "lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor", "def-induced-connection-and-second-fundamental-form", "def-levi-civita-connection"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Lemma 8.3 with complete proof, printed pages 135–136
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

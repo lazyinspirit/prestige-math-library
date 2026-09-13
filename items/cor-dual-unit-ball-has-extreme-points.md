@@ -2,13 +2,14 @@
 id: cor-dual-unit-ball-has-extreme-points
 kind: corollary
 title: Dual unit ball has extreme points
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "thm-krein-milman-existence-of-extreme-points", "lem-basic-weak-star-neighborhoods", "def-axiom-of-choice", "thm-ultrafilter-lemma", "thm-hahn-banach-dominated-extension"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

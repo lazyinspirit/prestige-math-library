@@ -2,7 +2,7 @@
 id: thm-doob-submartingale-convergence
 kind: theorem
 title: Doob submartingale convergence theorem
-status: draft
+status: published
 origin: pipeline
 deps: [lem-doob-upcrossing-inequality, thm-monotone-convergence-for-the-integral, thm-fatou-lemma, thm-finite-and-countable-subadditivity-of-measures, lem-q-and-irrationals-dense-r, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

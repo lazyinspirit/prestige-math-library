@@ -2,7 +2,7 @@
 id: ex-fair-coin-strong-law-from-the-shift
 kind: example
 title: The fair-coin strong law as a shift average
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fair-coin-frequency-strong-law, def-binary-sequence-cylinders-and-fair-coin-content, def-countable-choice]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: prop-maurer-cartan-form-is-a-pointwise-isomorphism-and-left-invariant
 kind: proposition
 title: Maurer--Cartan form is a pointwise isomorphism and left invariant
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-left-and-right-translations-on-a-lie-group", "def-left-maurer-cartan-form", "thm-chain-rule-for-differentials-of-smooth-maps", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 2, Definition 9 and the two sentences immediately following it, printed page 27
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

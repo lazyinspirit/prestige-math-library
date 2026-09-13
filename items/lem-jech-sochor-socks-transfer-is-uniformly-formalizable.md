@@ -2,7 +2,7 @@
 id: lem-jech-sochor-socks-transfer-is-uniformly-formalizable
 kind: lemma
 title: Fixed finite-fragment verification for the Jech–Sochor socks transfer
-status: draft
+status: published
 origin: pipeline
 deps: [def-zfa-universe-atoms-and-kernel, thm-second-fraenkel-model-countable-pairs-without-choice, thm-jech-sochor-first-embedding, thm-jech-sochor-transfer-for-boundable-sentences, thm-montague-levy-finite-reflection, cor-countable-transitive-models-of-fixed-zfc-fragments, lem-finite-fragment-l-interpretation-with-gch, def-choice-for-pairs-and-countable-finite-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

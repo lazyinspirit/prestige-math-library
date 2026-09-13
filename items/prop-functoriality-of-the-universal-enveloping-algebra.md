@@ -2,7 +2,7 @@
 id: prop-functoriality-of-the-universal-enveloping-algebra
 kind: proposition
 title: Functoriality of the enveloping algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-universal-property-of-the-universal-enveloping-algebra, lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

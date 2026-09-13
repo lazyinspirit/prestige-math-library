@@ -2,7 +2,7 @@
 id: lem-symmetric-algebra-has-an-ordered-commutative-monomial-basis
 kind: lemma
 title: Ordered monomial basis of a symmetric algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-universal-property-of-the-symmetric-algebra, def-linear-basis, def-partial-order]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

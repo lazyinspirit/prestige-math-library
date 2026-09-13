@@ -2,7 +2,7 @@
 id: def-equivariant-map-and-equivariant-vector-bundle
 kind: definition
 title: Equivariant maps and equivariant vector bundles
-status: draft
+status: published
 origin: pipeline
 deps: [def-smooth-left-action-of-a-lie-group, def-vector-bundle-map-over-a-smooth-base-map]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Homogeneous Space Characterization Theorem 21.18, printed pages 552–553
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

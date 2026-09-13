@@ -2,7 +2,7 @@
 id: thm-optional-stopping-with-integrable-time-and-bounded-increments
 kind: theorem
 title: Optional stopping with integrable time and bounded increments
-status: draft
+status: published
 origin: pipeline
 deps: [thm-optional-sampling-for-bounded-stopping-times, thm-dominated-convergence, def-expectation-of-a-nonnegative-or-integrable-random-variable, cor-markov-inequality-for-random-variables, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-fundamental-vector-field-of-a-left-action
 kind: definition
 title: Fundamental vector fields for a left action
-status: draft
+status: published
 origin: pipeline
 deps: [def-smooth-left-action-of-a-lie-group, def-exponential-map-of-a-lie-group, def-smooth-vector-field-as-a-tangent-bundle-section, thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero, def-countable-choice]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Equation (20.11) and Theorem 20.18, printed pages 529–530; sign translated to the standing convention
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

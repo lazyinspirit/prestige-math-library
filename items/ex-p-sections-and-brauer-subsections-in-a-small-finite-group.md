@@ -2,7 +2,7 @@
 id: ex-p-sections-and-brauer-subsections-in-a-small-finite-group
 kind: example
 title: p-sections and Brauer subsections in S3
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-section-of-a-p-element, def-brauer-subsection, lem-central-p-subgroups-lie-in-every-block-defect-group, def-brauer-homomorphism-for-a-p-subgroup, thm-defect-groups-are-maximal-brauer-support, prop-principal-block-has-sylow-defect, thm-brauer-first-main-theorem, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

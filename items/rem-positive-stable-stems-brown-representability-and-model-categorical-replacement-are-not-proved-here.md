@@ -2,13 +2,14 @@
 id: rem-positive-stable-stems-brown-representability-and-model-categorical-replacement-are-not-proved-here
 kind: remark
 title: Scope boundary for stable homotopy theory
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems", "prop-a-ring-prespectrum-gives-a-graded-product-on-stable-homotopy-groups", "prop-maps-of-prespectra-induce-functorial-maps-on-stable-homotopy-groups"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-schurs-lemma-for-pointwise-constant-sectional-curvature
 kind: theorem
 title: Schur's lemma for pointwise constant sectional curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","thm-sectional-curvatures-determine-the-riemann-tensor","def-sectional-curvature","lem-ricci-curvature-is-symmetric-and-basis-independent","def-scalar-curvature","thm-contracted-second-bianchi-identity","def-levi-civita-connection","prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, Proposition 7.8, printed pages 125–126, for the Einstein contraction step
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

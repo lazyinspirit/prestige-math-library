@@ -2,7 +2,7 @@
 id: prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures
 kind: proposition
 title: Euclidean hypersurface sectional curvature from principal curvatures
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface","thm-weingarten-equation-and-adjointness-of-the-shape-operator","thm-gauss-equation-for-a-riemannian-submanifold","thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space","def-sectional-curvature"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Euclidean hypersurface Gauss equation (8.4) and principal-curvature diagonalization, printed pages 140–142
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

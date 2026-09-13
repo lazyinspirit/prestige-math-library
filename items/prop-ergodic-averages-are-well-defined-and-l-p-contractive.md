@@ -2,13 +2,14 @@
 id: prop-ergodic-averages-are-well-defined-and-l-p-contractive
 kind: proposition
 title: Ergodic averages are measurable, representative independent, and Lp contractive
-status: draft
+status: published
 origin: pipeline
 deps: [def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, thm-integrals-are-invariant-under-measure-preserving-maps, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-minkowski-inequality-for-integrals, def-essential-supremum-with-respect-to-a-measure, def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

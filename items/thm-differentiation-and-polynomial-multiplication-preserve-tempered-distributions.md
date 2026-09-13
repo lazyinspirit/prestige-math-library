@@ -2,13 +2,14 @@
 id: thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions
 kind: theorem
 title: Differentiation and polynomial multiplication preserve tempered distributions
-status: draft
+status: published
 origin: pipeline
 deps: [def-tempered-distribution, def-weak-and-strong-topologies-on-tempered-distributions, thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space, lem-smooth-polynomially-bounded-multipliers-on-schwartz-space, def-distributional-derivative, def-multiplication-of-a-distribution-by-a-smooth-function]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

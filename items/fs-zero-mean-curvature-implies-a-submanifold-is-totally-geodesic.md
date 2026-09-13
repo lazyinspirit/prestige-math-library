@@ -2,7 +2,7 @@
 id: fs-zero-mean-curvature-implies-a-submanifold-is-totally-geodesic
 kind: false-statement
 title: Zero mean curvature implies a submanifold is totally geodesic
-status: draft
+status: published
 origin: pipeline
 deps: ["def-mean-curvature-vector", "def-totally-geodesic-submanifold", "def-induced-connection-and-second-fundamental-form", "prop-christoffel-formula-for-the-levi-civita-connection", "thm-hyperbolic-identities-and-derivatives", "thm-sine-and-cosine-derivatives", "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Gaussian and mean curvatures and minimal-hypersurface discussion, printed pages 142–143
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

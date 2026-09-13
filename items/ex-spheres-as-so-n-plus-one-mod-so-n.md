@@ -2,7 +2,7 @@
 id: ex-spheres-as-so-n-plus-one-mod-so-n
 kind: example
 title: Spheres as SO(n+1)/SO(n)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, cor-transitive-smooth-actions-identify-m-with-g-mod-h]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Example 4.17(1), printed page 31
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

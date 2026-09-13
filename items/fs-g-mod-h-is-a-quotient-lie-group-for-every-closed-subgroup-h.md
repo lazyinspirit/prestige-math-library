@@ -2,7 +2,7 @@
 id: fs-g-mod-h-is-a-quotient-lie-group-for-every-closed-subgroup-h
 kind: false-statement
 title: G/H need not be a quotient Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-quotient-manifold-by-a-closed-lie-subgroup, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Theorem 4.1 and Proposition 4.7, printed pages 28-29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

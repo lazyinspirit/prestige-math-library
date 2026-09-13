@@ -2,7 +2,7 @@
 id: ex-first-postnikov-stage-of-a-simply-connected-space
 kind: example
 title: First nontrivial Postnikov stage of a simply connected space
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-postnikov-towers-exist-for-connected-cw-complexes", "thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one", "def-eilenberg-maclane-space"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

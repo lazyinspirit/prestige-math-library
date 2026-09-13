@@ -2,7 +2,7 @@
 id: prop-symmetric-and-exterior-powers-are-lie-algebra-representations
 kind: proposition
 title: Symmetric and exterior powers are representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-direct-sum-dual-hom-and-tensor-representations, def-symmetric-and-exterior-powers-over-an-arbitrary-field, thm-quotient-module-universal-property]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-gaussian-curvature-of-a-surface-of-revolution
 kind: example
 title: Gaussian curvature of a surface of revolution
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions","prop-christoffel-formula-for-the-levi-civita-connection","prop-coordinate-formula-for-the-curvature-tensor","def-riemann-curvature-four-tensor","def-sectional-curvature"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Exercise 3.3(b)–(c), printed pages 25–26; Problem 5-2(a), printed page 87; Problem 8-1(a), printed page 150
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

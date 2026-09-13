@@ -2,7 +2,7 @@
 id: ex-orthogonal-and-special-orthogonal-lie-groups
 kind: example
 title: Orthogonal and special orthogonal Lie groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, ex-general-and-special-linear-lie-groups, def-transpose-of-a-matrix, thm-constant-rank-theorem-for-manifolds]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

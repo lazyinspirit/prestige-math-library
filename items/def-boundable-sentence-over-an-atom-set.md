@@ -2,13 +2,14 @@
 id: def-boundable-sentence-over-an-atom-set
 kind: definition
 title: Boundable sentences over an atom set
-status: draft
+status: published
 origin: pipeline
 deps: [def-zfa-universe-atoms-and-kernel, def-power-set, def-coded-first-order-zf-theory]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

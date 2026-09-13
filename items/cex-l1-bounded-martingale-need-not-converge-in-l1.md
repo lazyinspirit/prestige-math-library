@@ -2,7 +2,9 @@
 id: cex-l1-bounded-martingale-need-not-converge-in-l1
 kind: counterexample
 title: An L1-bounded martingale need not converge in L1
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-martingale-submartingale-and-supermartingale, def-conditional-expectation-given-a-sigma-algebra, def-expectation-of-a-nonnegative-or-integrable-random-variable, def-axiom-of-choice]
 proof_strategy: counterexample

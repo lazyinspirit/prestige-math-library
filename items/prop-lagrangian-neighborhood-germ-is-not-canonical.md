@@ -2,7 +2,7 @@
 id: prop-lagrangian-neighborhood-germ-is-not-canonical
 kind: proposition
 title: A Lagrangian neighborhood germ is not uniquely determined
-status: draft
+status: published
 origin: pipeline
 deps: []
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Theorem 5.14 and Remark 5.15, p. 63
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

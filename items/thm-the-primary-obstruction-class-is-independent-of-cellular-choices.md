@@ -2,7 +2,7 @@
 id: thm-the-primary-obstruction-class-is-independent-of-cellular-choices
 kind: theorem
 title: The primary obstruction class is independent of cellular choices
-status: draft
+status: published
 origin: pipeline
 deps: ["def-primary-cellular-obstruction-cochain", "def-homotopy-group-local-system-along-a-cellular-map", "prop-higher-homotopy-basepoint-transport-and-moving-homotopies", "thm-the-primary-obstruction-cochain-is-a-cocycle", "def-difference-cochain-between-two-cellular-extensions"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

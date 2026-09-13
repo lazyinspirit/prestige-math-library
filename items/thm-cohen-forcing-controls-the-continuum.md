@@ -2,7 +2,7 @@
 id: thm-cohen-forcing-controls-the-continuum
 kind: theorem
 title: Cohen forcing raises and, under a name count, fixes the continuum
-status: draft
+status: published
 origin: pipeline
 deps: [thm-cohen-forcing-closure-and-chain-condition, thm-chain-condition-preserves-cofinalities-and-cardinals, thm-nice-name-reduction-and-counting, thm-mutually-generic-cohen-coordinate-reals, def-cardinal-arithmetic, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

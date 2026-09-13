@@ -2,13 +2,14 @@
 id: cor-bauer-maximum-principle
 kind: corollary
 title: Bauer maximum principle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-extreme-point-and-face", "thm-locally-convex-continuous-dual-separates-points", "thm-compact-iff-fip", "thm-zorn", "def-axiom-of-choice", "thm-hahn-banach-dominated-extension", "def-upper-semicontinuous-real-map-on-a-topological-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

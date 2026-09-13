@@ -2,12 +2,13 @@
 id: thm-cellular-cochains-compute-cohomology-with-local-coefficients
 kind: theorem
 title: Cellular cochains compute cohomology with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-homology-and-cohomology-with-local-coefficients, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, thm-cellular-chains-compute-homology-with-local-coefficients, thm-pair-long-exact-sequences-with-local-coefficients, lem-the-skeletal-telescope-projects-by-a-homotopy-equivalence-of-pairs, thm-excision-and-mayer-vietoris-with-local-coefficients, thm-excision-for-singular-cohomology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

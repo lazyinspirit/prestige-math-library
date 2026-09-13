@@ -1,7 +1,7 @@
 ---
 page: lie-subgroups-actions-and-homogeneous-spaces-examples
 title: Lie Subgroups, Actions, and Homogeneous Spaces — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-an-irrational-line-as-a-dense-immersed-lie-subgroup-of-a-torus

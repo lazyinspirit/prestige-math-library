@@ -2,11 +2,12 @@
 id: lem-the-stable-homotopy-colimit-is-independent-of-the-chosen-cofinal-tail
 kind: lemma
 title: Stable homotopy colimits are independent of a cofinal tail
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stable-homotopy-groups-of-a-sequential-prespectrum", "def-limit-and-colimit-of-a-diagram"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

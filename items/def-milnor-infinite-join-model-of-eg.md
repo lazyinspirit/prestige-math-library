@@ -2,7 +2,9 @@
 id: def-milnor-infinite-join-model-of-eg
 kind: definition
 title: Milnor's infinite-join model of EG
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["def-universal-principal-bundle-and-classifying-space", "def-quotient-topology"]
 provenance:

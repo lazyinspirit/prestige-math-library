@@ -2,7 +2,7 @@
 id: lem-finite-cellular-cyclic-squares-agree-with-singular-cup-i-squares
 kind: lemma
 title: Finite-cellular cyclic squares agree with singular cup-i squares
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-finite-cellular-cyclic-squares-cartan-and-basis-action", "lem-equivariant-p-fold-external-power-and-diagonal", "lem-natural-higher-diagonal-approximations-on-singular-chains", "def-steenrod-squares-from-cup-i-products", "thm-cellular-homology-computes-singular-homology", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses", "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: def-real-and-complex-lie-groups
 kind: definition
 title: Real and complex Lie groups
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-lie-group, def-holomorphic-map-and-complex-jacobian, thm-chain-rule-for-holomorphic-maps-in-several-variables]

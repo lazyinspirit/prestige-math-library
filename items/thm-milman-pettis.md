@@ -2,7 +2,7 @@
 id: thm-milman-pettis
 kind: theorem
 title: Milman–Pettis theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-uniformly-convex-banach-space, thm-goldstine, cor-relative-hahn-banach-bidual-isometry, lem-complete-subspace-is-closed, def-reflexive-banach-space, def-hahn-banach-extension-principle-relative, cor-goldstine-finite-data-approximation, def-countable-choice, def-dual-space-of-a-normed-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Transfer the uniform-convexity estimate to the bidual using two independent finite-data Goldstine approximants: one fixed dual test preserves separation and an arbitrary second test measures the midpoint.  An almost-norming weak-star slice then norm-approximates every bidual unit vector by the canonical image.  HB supplies Goldstine and the canonical isometry; Countable Choice makes the complete canonical image norm closed."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

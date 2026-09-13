@@ -2,13 +2,14 @@
 id: cex-weak-star-compact-does-not-imply-weak-star-sequentially-compact
 kind: counterexample
 title: Weak-star compact does not imply weak-star sequentially compact
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "def-weak-star-convergence", "def-c-zero-and-ell-infinity"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

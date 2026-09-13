@@ -2,7 +2,7 @@
 id: def-lie-group
 kind: definition
 title: Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-group", "def-smooth-map-between-manifolds-with-boundary"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Definition 2.1, printed page 14
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

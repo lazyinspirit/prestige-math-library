@@ -2,7 +2,9 @@
 id: lem-free-cyclic-resolution-and-transfer-for-power-operations
 kind: lemma
 title: Free cyclic resolution, group cohomology, and cochain transfer
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["def-singular-cohomology-with-coefficients", "def-bockstein-connecting-operation", "def-additive-singular-cohomology-cross-product"]
 proof_strategy: direct

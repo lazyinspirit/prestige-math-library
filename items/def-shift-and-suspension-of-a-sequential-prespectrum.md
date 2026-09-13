@@ -2,13 +2,14 @@
 id: def-shift-and-suspension-of-a-sequential-prespectrum
 kind: definition
 title: Shift and suspension of sequential prespectra
-status: draft
+status: published
 origin: pipeline
 deps: ["def-sequential-prespectrum-spectrum-and-adjoint-structure-maps", "lem-the-stable-homotopy-colimit-is-independent-of-the-chosen-cofinal-tail"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

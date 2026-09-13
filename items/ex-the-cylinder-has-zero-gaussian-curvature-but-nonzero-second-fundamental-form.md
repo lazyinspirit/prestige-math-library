@@ -2,7 +2,7 @@
 id: ex-the-cylinder-has-zero-gaussian-curvature-but-nonzero-second-fundamental-form
 kind: example
 title: The cylinder has zero Gaussian curvature but nonzero second fundamental form
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-shape-operator","thm-weingarten-equation-and-adjointness-of-the-shape-operator","prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures","def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface","prop-christoffel-formula-for-the-levi-civita-connection","prop-connection-laws-in-directional-form"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Plane/half-cylinder principal-curvature comparison, printed pages 5–6
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

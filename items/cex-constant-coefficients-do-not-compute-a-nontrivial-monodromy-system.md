@@ -2,12 +2,13 @@
 id: cex-constant-coefficients-do-not-compute-a-nontrivial-monodromy-system
 kind: counterexample
 title: Constant coefficients miss monodromy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-cellular-chains-compute-homology-with-local-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

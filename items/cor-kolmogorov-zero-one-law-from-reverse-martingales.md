@@ -2,7 +2,9 @@
 id: cor-kolmogorov-zero-one-law-from-reverse-martingales
 kind: corollary
 title: Kolmogorov zero-one law from martingale convergence
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-tail-sigma-algebra-of-a-sequence, lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra, lem-conditioning-a-known-variable-and-an-independent-variable, thm-levy-upward-convergence-of-conditional-expectations, def-axiom-of-choice]
 proof_strategy: direct

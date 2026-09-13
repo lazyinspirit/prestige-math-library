@@ -2,7 +2,7 @@
 id: cor-gamblers-ruin-expected-duration
 kind: corollary
 title: Expected duration of symmetric gambler's ruin
-status: draft
+status: published
 origin: pipeline
 deps: [cor-gamblers-ruin-hitting-probability-from-optional-stopping, thm-optional-sampling-for-bounded-stopping-times, thm-square-minus-predictable-quadratic-variation-is-a-martingale, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

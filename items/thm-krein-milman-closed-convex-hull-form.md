@@ -2,13 +2,14 @@
 id: thm-krein-milman-closed-convex-hull-form
 kind: theorem
 title: Krein–Milman closed-convex-hull form
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-krein-milman-existence-of-extreme-points", "thm-locally-convex-strict-separation", "lem-minimizer-face-of-a-continuous-affine-functional", "thm-hahn-banach-dominated-extension", "thm-compact-subset-of-a-hausdorff-space-is-closed", "lem-locally-convex-closures-and-finite-compact-convex-hulls"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

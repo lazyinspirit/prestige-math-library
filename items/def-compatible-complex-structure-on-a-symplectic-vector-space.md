@@ -2,7 +2,7 @@
 id: def-compatible-complex-structure-on-a-symplectic-vector-space
 kind: definition
 title: Compatible complex structure on a symplectic vector space
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-vector-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definition 2.24 and the calculation following it, pp. 13--14
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

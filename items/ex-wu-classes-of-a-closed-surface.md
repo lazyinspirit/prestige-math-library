@@ -2,12 +2,13 @@
 id: ex-wu-classes-of-a-closed-surface
 kind: example
 title: Wu classes of a closed surface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-wu-classes-of-a-closed-manifold, prop-first-steenrod-square-is-the-mod-two-bockstein, prop-steenrod-square-normalization-instability-and-top-square, def-bockstein-connecting-operation, def-orientation-local-system-and-orientation-cover, def-fundamental-class-of-a-compact-oriented-manifold, def-singular-cochain-complex-with-coefficients, def-axiom-of-choice, prop-the-manifold-orientation-system-is-a-local-system, def-singular-and-cellular-chain-complexes-with-local-coefficients, lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases, lem-canonical-twisted-fundamental-classes-over-compact-subsets, def-cup-and-cap-products-with-local-coefficient-pairings]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

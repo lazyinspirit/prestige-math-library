@@ -2,7 +2,7 @@
 id: fs-pbw-symmetrization-is-an-algebra-isomorphism-for-a-nonabelian-lie-algebra
 kind: false-statement
 title: PBW symmetrization is generally not multiplicative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

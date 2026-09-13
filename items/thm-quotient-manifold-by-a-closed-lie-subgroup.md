@@ -2,7 +2,7 @@
 id: thm-quotient-manifold-by-a-closed-lie-subgroup
 kind: theorem
 title: Quotient manifold by a closed Lie subgroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 landmark: true
@@ -19,6 +19,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Theorem 4.1 and quotient-chart construction, printed page 28
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

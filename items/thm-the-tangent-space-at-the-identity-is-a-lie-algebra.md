@@ -2,7 +2,7 @@
 id: thm-the-tangent-space-at-the-identity-is-a-lie-algebra
 kind: theorem
 title: The tangent space at the identity is a Lie algebra
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-lie-group", "cor-the-tangent-space-of-an-n-manifold-has-dimension-n", "def-lie-bracket-on-the-tangent-space-of-a-lie-group", "def-finite-dimensional-lie-algebra", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "thm-vector-fields-form-a-lie-algebra"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.16 and proof, printed page 33, for the tangent Jacobi identity via its logarithmic-product construction
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-curvature-is-c-infinity-linear-in-all-three-vector-fields
 kind: lemma
 title: Curvature is C-infinity-linear in all three vector fields
-status: draft
+status: published
 origin: pipeline
 deps: ["def-curvature-of-an-affine-connection", "prop-connection-laws-in-directional-form", "prop-leibniz-rules-for-the-lie-bracket-with-function-multiples"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, Proposition 7.1, printed pages 117–118
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-a-connected-covering-space-of-a-connected-lie-group-carries-a-unique-lifted-lie-group-structure
 kind: theorem
 title: A connected cover with a chosen lifted identity has a unique lifted Lie-group structure
-status: draft
+status: published
 origin: pipeline
 deps: [thm-covering-space-lifting-criterion, thm-uniqueness-of-lifts-from-a-connected-space, lem-loop-products-in-a-topological-group-agree-up-to-homotopy, lem-connected-covers-of-smooth-manifolds-have-a-canonical-smooth-structure, thm-product-of-connected-spaces, thm-connected-and-locally-path-connected-implies-path-connected]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 3.5 and proof, printed page 26
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

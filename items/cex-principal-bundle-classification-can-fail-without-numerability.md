@@ -2,7 +2,7 @@
 id: cex-principal-bundle-classification-can-fail-without-numerability
 kind: counterexample
 title: Principal-bundle classification can fail without numerability
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-principal-bundles-are-classified-by-maps-to-bg", "def-principal-g-bundle-and-associated-fiber-bundle", "def-locally-trivial-fiber-bundle", "lem-locally-finite-sums-are-continuous"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

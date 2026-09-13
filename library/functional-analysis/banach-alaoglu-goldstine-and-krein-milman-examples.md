@@ -1,7 +1,7 @@
 ---
 page: banach-alaoglu-goldstine-and-krein-milman-examples
 title: Banach Alaoglu Goldstine and Krein Milman — Examples
-status: draft
+status: published
 items: []
 examples: [ex-weak-star-compactness-of-probability-measures, ex-extreme-points-of-the-probability-measures-are-dirac-masses, ex-extreme-points-of-the-ell-infinity-unit-ball, cex-the-c0-unit-ball-has-no-extreme-points, cor-c0-is-not-isometrically-a-dual-space, cex-weak-star-compact-does-not-imply-weak-star-sequentially-compact, rem-banach-alaoglu-versus-sequential-alaoglu]
 ---

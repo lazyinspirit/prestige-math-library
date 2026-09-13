@@ -2,7 +2,7 @@
 id: ex-hyperbolic-space-has-negative-constant-sectional-curvature
 kind: example
 title: Hyperbolic space has negative constant sectional curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","prop-coordinate-criterion-for-a-riemannian-metric","prop-christoffel-formula-for-the-levi-civita-connection","prop-coordinate-formula-for-the-curvature-tensor","thm-curvature-is-a-type-one-three-tensor","def-riemann-curvature-four-tensor","def-sectional-curvature"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Proposition 3.5(c), printed pages 38–42, and Sectional Curvatures of the Model Spaces, printed pages 148–149
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

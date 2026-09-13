@@ -2,13 +2,14 @@
 id: thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms
 kind: theorem
 title: Fourier transform agrees with l one and plancherel transforms
-status: draft
+status: published
 origin: pipeline
 deps: [thm-polynomial-growth-functions-define-tempered-distributions, def-fourier-transform-of-a-tempered-distribution, thm-plancherel, thm-l-one-l-two-agreement-of-fourier-transform, lem-schwartz-space-is-dense-in-l-two, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-holder-inequality-for-integrals, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

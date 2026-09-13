@@ -2,13 +2,14 @@
 id: lem-unit-interval-circle-is-a-nonempty-compact-metric-space
 kind: lemma
 title: The unit-interval circle is a nonempty compact metric space
-status: draft
+status: published
 origin: pipeline
 deps: [def-circle-rotation-and-doubling-map, thm-heine-borel-rn, thm-compactness-under-continuous-maps, thm-compactness-agrees-with-metric-compactness]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

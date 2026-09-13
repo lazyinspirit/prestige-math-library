@@ -2,7 +2,7 @@
 id: cor-fundamental-group-of-a-connected-lie-group-is-abelian
 kind: corollary
 title: The fundamental group of a connected Lie group is abelian
-status: draft
+status: published
 origin: pipeline
 deps: [thm-fundamental-group-of-a-topological-group-is-abelian]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 3.5(ii) and Remark 3.7, printed page 26
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

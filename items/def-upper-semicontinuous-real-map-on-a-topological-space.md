@@ -2,13 +2,14 @@
 id: def-upper-semicontinuous-real-map-on-a-topological-space
 kind: definition
 title: Upper semicontinuous real map on a topological space
-status: draft
+status: published
 origin: pipeline
 deps: ["def-topological-space", "thm-semicontinuity-level-set-characterisation"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

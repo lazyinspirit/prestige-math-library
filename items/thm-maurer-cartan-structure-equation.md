@@ -2,7 +2,7 @@
 id: thm-maurer-cartan-structure-equation
 kind: theorem
 title: Maurer--Cartan structure equation
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative", "prop-maurer-cartan-form-is-a-pointwise-isomorphism-and-left-invariant", "def-lie-bracket-on-the-tangent-space-of-a-lie-group", "thm-the-tangent-space-at-the-identity-is-a-lie-algebra", "thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity", "def-exterior-derivative-by-the-invariant-vector-field-formula"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 2, Proposition 9 and complete proof, printed pages 27--28
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-a-lie-subalgebra-distribution-is-involutive
 kind: lemma
 title: A Lie-subalgebra distribution is involutive
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-left-translated-distribution-associated-to-a-lie-subalgebra, prop-local-frame-characterization-of-a-smooth-distribution, prop-involutivity-can-be-checked-on-a-local-frame, prop-the-lie-bracket-of-left-invariant-fields-is-left-invariant]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Lemma 19.24 and proof, printed page 506
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

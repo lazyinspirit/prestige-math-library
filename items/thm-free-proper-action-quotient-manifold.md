@@ -2,7 +2,7 @@
 id: thm-free-proper-action-quotient-manifold
 kind: theorem
 title: Free proper action quotient manifold
-status: draft
+status: published
 origin: pipeline
 deps: [lem-local-slice-for-a-free-proper-action, def-quotient-topology, thm-quotient-universal-property, lem-open-or-closed-surjection-is-quotient, prop-topological-manifolds-are-locally-compact-and-locally-path-connected, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, thm-compact-subset-of-a-hausdorff-space-is-closed, thm-closed-subspace-of-a-compact-space-is-compact, thm-compactness-under-continuous-maps, thm-constant-rank-theorem-for-manifolds]
 landmark: true
@@ -15,6 +15,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Proposition 21.4 and Theorem 21.10 with proofs, printed pages 543–547
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

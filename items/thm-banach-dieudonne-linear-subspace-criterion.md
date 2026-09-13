@@ -2,13 +2,14 @@
 id: thm-banach-dieudonne-linear-subspace-criterion
 kind: theorem
 title: Banach–Dieudonné linear-subspace criterion
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma", "def-dependent-choice", "def-hahn-banach-extension-principle-relative", "thm-dual-of-c0-is-ell-one", "thm-banach-series-criterion", "lem-basic-weak-star-neighborhoods"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

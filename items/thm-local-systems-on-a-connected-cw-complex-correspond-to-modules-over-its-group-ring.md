@@ -2,12 +2,13 @@
 id: thm-local-systems-on-a-connected-cw-complex-correspond-to-modules-over-its-group-ring
 kind: theorem
 title: Local systems correspond to group-ring modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-local-system-of-r-modules-and-its-pullback, prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group, thm-group-actions-and-group-ring-modules-correspond, def-cw-complex-with-closure-finiteness-and-weak-topology, def-axiom-of-choice]
 proof_strategy: constructive
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

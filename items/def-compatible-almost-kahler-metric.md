@@ -2,7 +2,7 @@
 id: def-compatible-almost-kahler-metric
 kind: definition
 title: Compatible almost-Kähler metric
-status: draft
+status: published
 origin: pipeline
 deps: ["def-compatible-complex-structure-on-a-symplectic-vector-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definitions 3.31--3.32 and Remark 3.33, pp. 42--43
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

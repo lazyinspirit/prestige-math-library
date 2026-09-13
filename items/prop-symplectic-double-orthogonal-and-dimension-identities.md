@@ -2,7 +2,7 @@
 id: prop-symplectic-double-orthogonal-and-dimension-identities
 kind: proposition
 title: Symplectic double-orthogonal and dimension identities
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-orthogonal-complement"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §2.2, Proposition 2.5, p. 7
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

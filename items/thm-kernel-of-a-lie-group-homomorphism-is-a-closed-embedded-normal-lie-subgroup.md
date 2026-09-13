@@ -2,7 +2,7 @@
 id: thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup
 kind: theorem
 title: Kernels are closed embedded normal Lie subgroups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-lie-group-homomorphisms-have-constant-rank, thm-cartans-closed-subgroup-theorem, thm-constant-rank-theorem-for-manifolds]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Corollary 9.5 and proof, printed pages 53–54
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

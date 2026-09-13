@@ -2,7 +2,7 @@
 id: thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism
 kind: theorem
 title: The Hamiltonian vector-field map is a Lie antihomomorphism
-status: draft
+status: published
 origin: pipeline
 deps: ["def-poisson-bracket-on-a-symplectic-manifold", "prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed", "prop-cartan-commutator-identities"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Proposition 18.3 and discussion after Definition 18.5, pp. 108--109
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

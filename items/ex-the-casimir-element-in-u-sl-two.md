@@ -2,7 +2,7 @@
 id: ex-the-casimir-element-in-u-sl-two
 kind: example
 title: The Casimir element in U(sl_2)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-universal-enveloping-algebra, ex-pbw-reordering-in-sl-two]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

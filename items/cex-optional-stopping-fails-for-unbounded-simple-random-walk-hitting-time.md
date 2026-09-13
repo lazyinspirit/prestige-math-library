@@ -2,7 +2,7 @@
 id: cex-optional-stopping-fails-for-unbounded-simple-random-walk-hitting-time
 kind: counterexample
 title: Optional stopping fails for an unbounded simple-random-walk hitting time
-status: draft
+status: published
 origin: pipeline
 deps: [cor-gamblers-ruin-hitting-probability-from-optional-stopping, rem-optional-stopping-requires-a-passage-to-the-limit-hypothesis, def-axiom-of-choice]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

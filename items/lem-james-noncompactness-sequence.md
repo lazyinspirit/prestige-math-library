@@ -2,7 +2,7 @@
 id: lem-james-noncompactness-sequence
 kind: lemma
 title: James nonreflexivity sequence separated from an annihilator
-status: draft
+status: published
 origin: pipeline
 deps: [def-reflexive-banach-space, thm-reflexive-iff-unit-ball-weakly-compact, thm-eberlein-smulian, cor-relative-hahn-banach-bidual-isometry, thm-relative-hahn-banach-dominated-extension, thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma, def-dependent-choice, def-countable-choice, def-hahn-banach-extension-principle-relative, lem-eberlein-smulian-separable-reduction, cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence, lem-complete-subspace-is-closed, thm-relative-hahn-banach-norm-preserving-extension, def-separable-space, lem-countable-iff-surjection-from-n, def-annihilator-and-preannihilator, def-dual-space-of-a-normed-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Reduce nonreflexivity to a separable closed nonreflexive span, separate its closed canonical image in the bidual, realize finite quotient norms by Hahn–Banach, and use DC-derived Countable Choice to select compatible dual-ball witnesses and their ambient extensions."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

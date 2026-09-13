@@ -2,7 +2,7 @@
 id: ex-the-zero-section-and-cotangent-fibres-as-lagrangians
 kind: example
 title: The zero section and cotangent fibres as Lagrangians
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-canonical-cotangent-two-form-is-symplectic", "thm-equivalent-characterizations-of-lagrangian-subspaces", "def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 2, cotangent examples, pp. 16--18
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

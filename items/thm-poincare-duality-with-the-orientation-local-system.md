@@ -2,12 +2,13 @@
 id: thm-poincare-duality-with-the-orientation-local-system
 kind: theorem
 title: Poincare duality with the orientation local system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-compactly-supported-cohomology-with-local-coefficients, prop-the-manifold-orientation-system-is-a-local-system, lem-canonical-twisted-fundamental-classes-over-compact-subsets, def-cup-and-cap-products-with-local-coefficient-pairings, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, thm-cellular-cochains-compute-cohomology-with-local-coefficients, thm-excision-and-mayer-vietoris-with-local-coefficients, thm-five-lemma-for-a-morphism-of-long-exact-sequences, lem-manifold-exhaustion-passes-local-duality-to-the-colimit, thm-rationals-countable, lem-q-and-irrationals-dense-r, thm-poincare-duality-for-oriented-topological-manifolds, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

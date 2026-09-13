@@ -2,7 +2,7 @@
 id: def-riemann-curvature-four-tensor
 kind: definition
 title: Riemann curvature four-tensor
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-curvature-is-a-type-one-three-tensor", "def-riemannian-metric-and-riemannian-manifold", "thm-fundamental-theorem-of-riemannian-geometry"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, equation (7.4), printed page 118
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

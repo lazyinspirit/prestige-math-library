@@ -2,7 +2,7 @@
 id: thm-lie-group-homomorphisms-have-constant-rank
 kind: theorem
 title: Lie-group homomorphisms have constant rank
-status: draft
+status: published
 origin: pipeline
 deps: [def-lie-group-homomorphism-isomorphism-and-automorphism, def-left-and-right-translations-on-a-lie-group, thm-chain-rule-for-differentials-of-smooth-maps]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 4.7 and proof in Section 9.1, printed pages 29 and 53–54
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

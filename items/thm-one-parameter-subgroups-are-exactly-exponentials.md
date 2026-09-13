@@ -2,7 +2,7 @@
 id: thm-one-parameter-subgroups-are-exactly-exponentials
 kind: theorem
 title: One-parameter subgroups are exactly exponentials
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-exponential-scales-one-parameter-subgroups", "def-one-parameter-subgroup-of-a-lie-group", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Proposition 3.1 and proof, printed page 29; Definition 3.2 and following scaling argument, printed page 30
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-codazzi-equation-for-a-riemannian-submanifold
 kind: theorem
 title: Codazzi equation for a Riemannian submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-normal-connection", "def-induced-connection-and-second-fundamental-form", "lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor", "thm-the-induced-connection-is-levi-civita", "def-curvature-of-an-affine-connection"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.uci.edu/~cterng/LectureNotes1353.pdf
       locator: Section 2.1, Codazzi equation (2.1.8) and surrounding adapted-frame definitions, printed pages 25–27
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

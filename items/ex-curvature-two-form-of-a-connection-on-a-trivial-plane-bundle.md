@@ -2,7 +2,7 @@
 id: ex-curvature-two-form-of-a-connection-on-a-trivial-plane-bundle
 kind: example
 title: Curvature two-form of a connection on a trivial plane bundle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-connection-on-a-smooth-vector-bundle", "thm-curvature-two-form-structure-equation", "thm-local-coordinate-formula-for-the-exterior-derivative", "def-wedge-product-of-differential-forms", "def-matrix-product-and-identity-matrix"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Proposition 6.1.3 and Remark 6.1.4, printed pages 38–39
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

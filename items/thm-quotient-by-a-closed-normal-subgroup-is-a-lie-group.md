@@ -2,7 +2,7 @@
 id: thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group
 kind: theorem
 title: Quotient by a closed normal subgroup is a Lie group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, thm-quotient-manifold-by-a-closed-lie-subgroup, thm-quotient-universal-property, prop-tangent-space-of-a-homogeneous-quotient, thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism, thm-the-differential-of-adjoint-is-ad]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 4.7, printed page 29
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

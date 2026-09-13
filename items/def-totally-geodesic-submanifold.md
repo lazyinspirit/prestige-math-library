@@ -2,7 +2,7 @@
 id: def-totally-geodesic-submanifold
 kind: definition
 title: Totally geodesic submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-induced-connection-and-second-fundamental-form", "lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, definition of totally geodesic and Exercise 8.4(c), printed page 139
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

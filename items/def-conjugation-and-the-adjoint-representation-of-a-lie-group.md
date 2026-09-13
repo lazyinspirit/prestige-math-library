@@ -2,7 +2,7 @@
 id: def-conjugation-and-the-adjoint-representation-of-a-lie-group
 kind: definition
 title: Conjugation and the adjoint representation of a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-lie-group", "def-lie-group-homomorphism-isomorphism-and-automorphism", "def-differential-of-a-smooth-map", "cor-the-differential-of-a-diffeomorphism-is-an-isomorphism", "def-linear-isomorphism-and-invertible-linear-map", "def-dimension", "def-vector-space-of-linear-maps", "def-coordinate-column-and-matrix-of-a-linear-map", "cor-determinant-is-a-polynomial-in-the-matrix-entries", "thm-real-square-matrix-invertible-iff-determinant-nonzero", "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Section 2.6 and formula (2.4), printed page 21
 verification:
+  audited: 2026-09-14
   precheck: pass
 ---
 

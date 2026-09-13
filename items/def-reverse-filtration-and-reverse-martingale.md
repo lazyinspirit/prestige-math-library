@@ -2,13 +2,14 @@
 id: def-reverse-filtration-and-reverse-martingale
 kind: definition
 title: Reverse filtration and reverse martingale
-status: draft
+status: published
 origin: pipeline
 deps: [def-filtration-and-filtered-probability-space, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

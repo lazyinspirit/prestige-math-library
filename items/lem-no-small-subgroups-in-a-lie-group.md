@@ -2,7 +2,7 @@
 id: lem-no-small-subgroups-in-a-lie-group
 kind: lemma
 title: No small subgroups in a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: [def-differential-of-a-smooth-map]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Lie-group multiplication and exponential-chart discussion in Chapter 20, especially Proposition 20.8, printed pages 519–521
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

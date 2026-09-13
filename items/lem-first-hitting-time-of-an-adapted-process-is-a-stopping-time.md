@@ -2,7 +2,7 @@
 id: lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time
 kind: lemma
 title: First hitting time of an adapted process is a stopping time
-status: draft
+status: published
 origin: pipeline
 deps: [lem-equivalent-event-tests-for-a-discrete-stopping-time, def-adapted-and-integrable-stochastic-process]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: prop-maps-of-prespectra-induce-functorial-maps-on-stable-homotopy-groups
 kind: proposition
 title: Strict prespectrum maps act functorially on stable homotopy groups
-status: draft
+status: published
 origin: pipeline
 deps: ["def-strict-map-and-structure-compatible-homotopy-of-sequential-prespectra", "def-stable-homotopy-groups-of-a-sequential-prespectrum", "lem-the-stable-homotopy-colimit-is-independent-of-the-chosen-cofinal-tail", "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

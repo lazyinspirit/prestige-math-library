@@ -2,7 +2,9 @@
 id: lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints
 kind: lemma
 title: Base-b digit cylinders are orbit cylinders
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-canonical-base-b-expansion-and-normality, def-integer-base-map-on-the-circle, thm-countable-union-of-countable, prop-countable-subsets-of-rn-are-lebesgue-null, def-countable-choice]
 provenance:

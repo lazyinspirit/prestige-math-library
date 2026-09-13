@@ -2,7 +2,7 @@
 id: thm-the-induced-connection-is-levi-civita
 kind: theorem
 title: The induced connection is Levi–Civita
-status: draft
+status: published
 origin: pipeline
 deps: ["def-induced-connection-and-second-fundamental-form", "thm-fundamental-theorem-of-riemannian-geometry", "def-levi-civita-connection"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, Theorem 8.2 with complete proof, printed pages 134–135
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

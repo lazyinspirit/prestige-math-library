@@ -2,7 +2,7 @@
 id: def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface
 kind: definition
 title: Principal curvatures, Gaussian curvature, and mean curvature of an oriented hypersurface
-status: draft
+status: published
 origin: pipeline
 deps: ["def-codimension-and-hypersurface", "def-shape-operator", "thm-weingarten-equation-and-adjointness-of-the-shape-operator", "cor-real-spectral-theorem-for-self-adjoint-endomorphisms", "def-determinant-of-a-linear-operator", "def-trace-of-an-endomorphism"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, scalar second fundamental form through Gaussian and mean curvatures, printed pages 139–142
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

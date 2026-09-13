@@ -2,13 +2,14 @@
 id: def-brauer-subsection
 kind: definition
 title: Brauer subsections and B-subsections
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-section-of-a-p-element, lem-central-p-subgroups-lie-in-every-block-defect-group, def-induced-block-from-a-subgroup, lem-block-induction-exists-under-centralizer-containment, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

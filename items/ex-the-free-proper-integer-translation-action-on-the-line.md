@@ -2,7 +2,7 @@
 id: ex-the-free-proper-integer-translation-action-on-the-line
 kind: example
 title: Integer translations on the line
-status: draft
+status: published
 origin: pipeline
 deps: [def-lie-group, def-free-and-proper-lie-group-actions, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, thm-finite-products-of-compact-spaces, thm-closed-subspace-of-a-compact-space-is-compact, thm-a-free-proper-action-makes-m-to-m-mod-g-a-principal-g-bundle]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Covering Lie groups, Proposition 3.5 and Example 3.7, printed pages 26–27
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-curvature-of-a-vector-bundle-connection
 kind: definition
 title: Curvature of a vector-bundle connection
-status: draft
+status: published
 origin: pipeline
 deps: ["def-connection-on-a-smooth-vector-bundle", "def-lie-bracket-of-smooth-vector-fields"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Lecture 6, Section 6.1, printed pages 37–39
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

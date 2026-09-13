@@ -2,11 +2,12 @@
 id: ex-suspension-prespectra-of-spheres-are-shifts
 kind: example
 title: Suspension prespectra of spheres are shifts
-status: draft
+status: published
 origin: pipeline
 deps: ["def-suspension-prespectrum-and-sphere-prespectrum", "def-shift-and-suspension-of-a-sequential-prespectrum", "prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

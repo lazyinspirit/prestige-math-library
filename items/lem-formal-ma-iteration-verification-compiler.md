@@ -2,7 +2,7 @@
 id: lem-formal-ma-iteration-verification-compiler
 kind: lemma
 title: Fixed finite-fragment verification for the MA iteration
-status: draft
+status: published
 origin: pipeline
 deps: [thm-omega-two-iteration-forces-ma-and-not-ch, lem-finite-fragment-l-interpretation-with-gch, cor-countable-transitive-models-of-fixed-zfc-fragments, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: tempered-distributions-and-the-fourier-transform-examples
 title: Tempered Distributions and the Fourier Transform — Examples
-status: draft
+status: published
 items: []
 examples: [ex-fourier-transform-of-dirac-and-one, ex-fourier-transform-of-a-plane-wave, ex-fourier-transform-of-delta-derivatives-and-monomials, ex-principal-value-one-over-x-is-tempered-and-its-fourier-transform, ex-dirac-comb-and-poisson-summation, ex-fundamental-solution-by-division-of-a-fourier-symbol, cex-product-of-two-distributions-is-not-canonically-defined, cex-convolution-of-two-tempered-distributions-need-not-exist, rem-paley-wiener-and-microlocal-analysis]
 ---

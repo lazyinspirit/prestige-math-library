@@ -2,7 +2,7 @@
 id: thm-equivalent-characterizations-of-a-totally-geodesic-submanifold
 kind: theorem
 title: Equivalent characterizations of a totally geodesic submanifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-totally-geodesic-submanifold", "def-induced-connection-and-second-fundamental-form", "thm-the-induced-connection-is-levi-civita", "lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor", "def-geodesic-of-an-affine-connection", "def-covariant-derivative-along-a-curve", "thm-existence-uniqueness-and-smooth-dependence-of-geodesics"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 8, definition of totally geodesic and Exercise 8.4, printed page 139
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

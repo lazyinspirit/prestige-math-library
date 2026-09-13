@@ -2,7 +2,7 @@
 id: cex-a-compatible-almost-complex-structure-that-is-not-integrable
 kind: counterexample
 title: A compatible almost-complex structure that is not integrable
-status: draft
+status: published
 origin: pipeline
 deps: ["rem-compatible-almost-complex-structures-and-kahler-geometry", "def-compatible-complex-structure-on-a-symplectic-vector-space"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Nijenhuis tensor and compatible almost-complex structures, pp. 41--43
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

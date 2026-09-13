@@ -2,7 +2,7 @@
 id: ex-legendre-transform-of-a-natural-mechanical-lagrangian
 kind: example
 title: Legendre transform of a natural mechanical Lagrangian
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 19, Legendre transform, pp. 114--116
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

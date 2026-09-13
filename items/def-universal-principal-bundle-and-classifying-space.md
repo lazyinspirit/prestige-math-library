@@ -2,7 +2,9 @@
 id: def-universal-principal-bundle-and-classifying-space
 kind: definition
 title: Universal principal bundles and classifying spaces
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["def-principal-g-bundle-and-associated-fiber-bundle", "def-compactly-generated-conventions-for-based-homotopy"]
 provenance:

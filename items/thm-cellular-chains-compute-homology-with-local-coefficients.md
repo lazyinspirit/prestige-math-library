@@ -2,12 +2,13 @@
 id: thm-cellular-chains-compute-homology-with-local-coefficients
 kind: theorem
 title: Cellular chains compute local homology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-homology-and-cohomology-with-local-coefficients, lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases, thm-excision-for-singular-homology, lem-compact-cw-images-have-finite-cell-support-without-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

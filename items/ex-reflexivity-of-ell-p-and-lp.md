@@ -2,7 +2,9 @@
 id: ex-reflexivity-of-ell-p-and-lp
 kind: example
 title: Reflexivity of $\ell^p$ and $L^p$
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-countable-choice, thm-reflexivity-of-lp-for-one-less-p-less-infinity, rem-ell-p-is-l-p-of-counting-measure, def-complex-lp-and-euclidean-test-function-conventions, lem-real-and-complex-c-zero-are-banach, cor-ell-one-is-not-reflexive, def-dependent-choice, def-hahn-banach-extension-principle-relative, def-reflexive-banach-space, def-c-zero-and-ell-infinity, thm-dual-of-c0-is-ell-one, cor-ell-p-duality-by-counting-measure, thm-complex-dual-of-ell-one-is-ell-infinity, lem-c-zero-is-a-closed-subspace-of-ell-infinity, thm-closed-subspaces-of-reflexive-spaces-are-reflexive]
 provenance:

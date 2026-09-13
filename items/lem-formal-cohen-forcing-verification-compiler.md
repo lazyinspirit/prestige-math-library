@@ -2,7 +2,7 @@
 id: lem-formal-cohen-forcing-verification-compiler
 kind: lemma
 title: Fixed finite-fragment verification for the Cohen countermodels
-status: draft
+status: published
 origin: pipeline
 deps: [lem-forcing-transfer-for-finite-zfc-fragments, thm-cohen-forcing-controls-the-continuum, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds
 kind: definition
 title: Isotropic, coisotropic, symplectic, and Lagrangian submanifolds
-status: draft
+status: published
 origin: pipeline
 deps: ["def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces", "def-symplectic-form-and-symplectic-manifold"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §§4.3 and 4.5, pp. 50--54
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

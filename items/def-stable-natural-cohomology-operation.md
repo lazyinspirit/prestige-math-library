@@ -2,7 +2,7 @@
 id: def-stable-natural-cohomology-operation
 kind: definition
 title: Stable natural cohomology operation
-status: draft
+status: published
 origin: pipeline
 deps: ["def-natural-transformation", "def-functor-and-contravariant-functor", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: Chapter 22, Section 5, printed pages 184--186
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

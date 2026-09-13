@@ -2,7 +2,7 @@
 id: ex-kac-reciprocal-return-frequency-from-birkhoff
 kind: example
 title: Reciprocal return frequency from Birkhoff
-status: draft
+status: published
 origin: pipeline
 deps: [cor-birkhoff-ergodic-theorem-for-ergodic-probability-systems, thm-kac-return-time-formula, def-first-return-time-and-induced-transformation, def-axiom-of-choice]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

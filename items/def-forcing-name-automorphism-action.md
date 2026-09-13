@@ -2,13 +2,14 @@
 id: def-forcing-name-automorphism-action
 kind: definition
 title: Automorphisms acting on forcing names
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-preorder-compatibility-and-filter, def-forcing-names-and-name-rank, def-group-isomorphism-and-automorphism, thm-transfinite-recursion]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

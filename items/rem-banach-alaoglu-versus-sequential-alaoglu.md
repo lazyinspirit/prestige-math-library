@@ -2,13 +2,14 @@
 id: rem-banach-alaoglu-versus-sequential-alaoglu
 kind: remark
 title: Banach–Alaoglu versus sequential Alaoglu
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-banach-alaoglu", "cor-separable-banach-dual-ball-is-weak-star-sequentially-compact", "cor-dual-unit-ball-has-extreme-points"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

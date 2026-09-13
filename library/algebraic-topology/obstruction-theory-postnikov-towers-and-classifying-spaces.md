@@ -1,7 +1,7 @@
 ---
 page: obstruction-theory-postnikov-towers-and-classifying-spaces
 title: Obstruction Theory, Postnikov Towers, and Classifying Spaces
-status: draft
+status: published
 items:
   - lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere
   - def-homotopy-group-local-system-along-a-cellular-map

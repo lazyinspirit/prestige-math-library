@@ -2,7 +2,7 @@
 id: fs-every-representation-of-a-lie-algebra-is-completely-reducible
 kind: false-statement
 title: Lie-algebra representations need not be completely reducible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

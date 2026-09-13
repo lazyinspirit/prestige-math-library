@@ -2,7 +2,7 @@
 id: ex-a-nonsplit-two-dimensional-representation-of-a-solvable-lie-algebra
 kind: example
 title: A nonsplit two-dimensional representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

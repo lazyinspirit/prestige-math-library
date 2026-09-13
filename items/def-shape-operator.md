@@ -2,7 +2,7 @@
 id: def-shape-operator
 kind: definition
 title: Shape operator
-status: draft
+status: published
 origin: pipeline
 deps: ["def-normal-connection", "def-tangential-and-normal-projections-along-a-riemannian-submanifold", "prop-connection-laws-in-directional-form"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Proposition 14.1.4(1), printed page 103, and hypersurface Definition 14.2.1, printed page 104
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

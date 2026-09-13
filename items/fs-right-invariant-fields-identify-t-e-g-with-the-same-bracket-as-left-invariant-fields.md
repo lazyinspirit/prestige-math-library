@@ -2,7 +2,7 @@
 id: fs-right-invariant-fields-identify-t-e-g-with-the-same-bracket-as-left-invariant-fields
 kind: false-statement
 title: Right-invariant fields identify T_eG with the same bracket as left-invariant fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, prop-right-invariant-fields-carry-the-opposite-lie-bracket, def-matrix-units]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

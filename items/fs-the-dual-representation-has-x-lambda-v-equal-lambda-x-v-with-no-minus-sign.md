@@ -2,7 +2,7 @@
 id: fs-the-dual-representation-has-x-lambda-v-equal-lambda-x-v-with-no-minus-sign
 kind: false-statement
 title: The dual action needs a minus sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-direct-sum-dual-hom-and-tensor-representations]
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

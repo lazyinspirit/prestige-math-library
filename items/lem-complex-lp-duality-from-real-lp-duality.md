@@ -2,13 +2,14 @@
 id: lem-complex-lp-duality-from-real-lp-duality
 kind: lemma
 title: Complex Lp duality from real Lp duality
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity", "def-complex-lp-and-euclidean-test-function-conventions", "thm-complex-holder-minkowski-and-the-quotient-norm", "def-countable-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

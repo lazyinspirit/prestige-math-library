@@ -2,7 +2,9 @@
 id: thm-reduced-powers-satisfy-naturality-instability-cartan-and-adem-relations
 kind: theorem
 title: Reduced powers satisfy naturality, instability, Cartan, and Adem relations
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: ["def-mod-p-reduced-power-operations", "lem-cyclic-p-fold-power-construction", "lem-wreath-double-power-coefficient-symmetry", "lem-free-cyclic-resolution-and-transfer-for-power-operations", "def-bockstein-connecting-operation", "prop-bocksteins-are-natural-and-commute-with-suspension", "prop-the-mod-two-bockstein-is-a-derivation", "lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-stable-natural-cohomology-operation", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "thm-excision-for-singular-cohomology", "def-axiom-of-choice"]
 proof_strategy: direct

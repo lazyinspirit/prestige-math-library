@@ -2,7 +2,7 @@
 id: prop-the-lie-bracket-of-left-invariant-fields-is-left-invariant
 kind: proposition
 title: The Lie bracket of left-invariant fields is left invariant
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-left-and-right-invariant-vector-fields", "prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle", "cor-diffeomorphism-pushforward-preserves-lie-brackets"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Definition 2.26, printed page 21, for the invariance convention
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

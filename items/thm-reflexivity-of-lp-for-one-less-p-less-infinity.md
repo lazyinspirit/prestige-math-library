@@ -2,13 +2,14 @@
 id: thm-reflexivity-of-lp-for-one-less-p-less-infinity
 kind: theorem
 title: Reflexivity of Lp for one less p less infinity
-status: draft
+status: published
 origin: pipeline
 deps: ["def-reflexive-banach-space", "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity", "lem-complex-lp-duality-from-real-lp-duality", "thm-riesz-fischer-completeness-of-l-p", "thm-complex-holder-minkowski-and-the-quotient-norm", "def-countable-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

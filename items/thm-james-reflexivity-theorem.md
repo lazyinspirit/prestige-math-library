@@ -2,7 +2,7 @@
 id: thm-james-reflexivity-theorem
 kind: theorem
 title: James reflexivity theorem
-status: draft
+status: published
 origin: pipeline
 deps: [def-reflexive-banach-space, lem-james-norm-attainment-compactness-criterion, thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma, def-dependent-choice, def-hahn-banach-extension-principle-relative, thm-relative-hahn-banach-norm-preserving-extension, cor-relative-hahn-banach-bidual-isometry, def-dual-space-of-a-normed-space, def-banach-space]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Prove the reflexive direction by one norm-preserving Hahn–Banach extension; prove the real converse by the preceding James lemma and the complex converse by an explicit real-dual/complex-dual correspondence."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

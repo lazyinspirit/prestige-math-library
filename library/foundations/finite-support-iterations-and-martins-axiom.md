@@ -1,7 +1,7 @@
 ---
 page: finite-support-iterations-and-martins-axiom
 title: "Finite-Support Iterations and Martin's Axiom"
-status: draft
+status: published
 items: [def-two-step-forcing-iteration, thm-two-step-generic-factorization-and-ccc, def-finite-support-forcing-iteration, lem-iteration-restrictions-and-complete-embeddings, thm-finite-support-iterations-preserve-ccc, lem-bounded-stage-capture-in-finite-support-iterations, lem-finite-support-iteration-size-bound, def-martins-axiom, thm-rasiowa-sikorski-and-ch-implies-ma, lem-ma-reduction-to-small-ccc-orders, def-omega-two-ma-bookkeeping-iteration, thm-omega-two-iteration-forces-ma-and-not-ch, lem-formal-ma-iteration-verification-compiler, cor-formal-consistency-of-ma-and-not-ch, lem-continuum-sized-almost-disjoint-family-on-omega, thm-ma-cardinal-exponentiation-below-continuum, thm-ma-small-unions-of-meagre-sets, thm-ma-small-unions-of-null-sets, thm-ma-products-of-ccc-spaces-are-ccc]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: ex-moser-isotopy-for-area-forms-on-a-compact-surface
 kind: example
 title: Moser isotopy for area forms on a compact surface
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-moser-stability-theorem", "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Homework 6, Problem 3(b), pp. 49--50
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

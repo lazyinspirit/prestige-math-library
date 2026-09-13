@@ -2,12 +2,13 @@
 id: lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems
 kind: lemma
 title: Fiber transport gives the Serre local systems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-fiber-transport-and-monodromy-action, def-local-system-of-r-modules-and-its-pullback, thm-singular-chain-homotopy-formula, def-singular-cochain-complex-with-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

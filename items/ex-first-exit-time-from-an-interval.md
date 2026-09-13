@@ -2,7 +2,7 @@
 id: ex-first-exit-time-from-an-interval
 kind: example
 title: First exit time from an interval
-status: draft
+status: published
 origin: pipeline
 deps: [lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

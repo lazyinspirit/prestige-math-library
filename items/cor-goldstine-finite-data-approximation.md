@@ -2,13 +2,14 @@
 id: cor-goldstine-finite-data-approximation
 kind: corollary
 title: Goldstine finite-data approximation
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-goldstine", "lem-basic-weak-star-neighborhoods", "def-hahn-banach-extension-principle-relative"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

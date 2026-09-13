@@ -2,7 +2,7 @@
 id: def-normal-connection
 kind: definition
 title: Normal connection
-status: draft
+status: published
 origin: pipeline
 deps: ["def-tangential-and-normal-projections-along-a-riemannian-submanifold", "def-induced-connection-and-second-fundamental-form", "def-levi-civita-connection", "prop-connection-laws-in-directional-form", "def-metric-compatible-connection-on-a-riemannian-vector-bundle"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.uci.edu/~cterng/LectureNotes1353.pdf
       locator: Section 2.1, definition of the induced normal connection and its adapted-frame formula, printed pages 25–26
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

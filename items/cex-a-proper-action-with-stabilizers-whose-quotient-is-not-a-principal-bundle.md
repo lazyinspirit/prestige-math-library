@@ -2,7 +2,7 @@
 id: cex-a-proper-action-with-stabilizers-whose-quotient-is-not-a-principal-bundle
 kind: counterexample
 title: A proper nonfree action is not a principal bundle
-status: draft
+status: published
 origin: pipeline
 deps: [prop-compact-lie-group-actions-are-proper, def-free-and-proper-lie-group-actions, def-principal-g-bundle-and-associated-fiber-bundle]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Example 21.2(e), printed pages 541–542; Corollary 21.6, printed page 544
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

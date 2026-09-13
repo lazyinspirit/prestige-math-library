@@ -2,7 +2,7 @@
 id: thm-smooth-functions-form-a-poisson-algebra
 kind: theorem
 title: Smooth functions form a Poisson algebra
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-poisson-bracket-satisfies-the-jacobi-identity", "prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Definition 18.7 and conclusion, p. 109
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

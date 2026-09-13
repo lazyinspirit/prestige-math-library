@@ -2,7 +2,7 @@
 id: ex-second-main-theorem-at-u-equals-one
 kind: example
 title: The Second Main Theorem at u=1 is block-diagonal decomposition
-status: draft
+status: published
 origin: pipeline
 deps: [def-generalized-decomposition-numbers, def-brauer-subsection, thm-brauer-second-main-theorem, prop-decomposition-matrix-is-block-diagonal-after-block-ordering, def-algebraically-closed-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

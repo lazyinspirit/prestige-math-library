@@ -2,7 +2,7 @@
 id: thm-basic-cohen-generic-real-set-has-no-countably-infinite-subset
 kind: theorem
 title: The basic Cohen set has no countably infinite subset
-status: draft
+status: published
 origin: pipeline
 deps: [lem-basic-cohen-generic-reals-form-a-symmetric-set, lem-symmetry-lemma-for-forcing-automorphisms]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

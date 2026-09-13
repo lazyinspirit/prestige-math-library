@@ -2,7 +2,7 @@
 id: lem-equivariant-p-fold-external-power-and-diagonal
 kind: lemma
 title: Equivariant p-fold external power and diagonal decomposition
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-free-cyclic-resolution-and-transfer-for-power-operations", "def-cellular-boundary-from-three-consecutive-skeleta", "lem-the-cellular-boundary-squares-to-zero", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

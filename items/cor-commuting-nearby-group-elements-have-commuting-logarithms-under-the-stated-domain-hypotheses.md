@@ -2,7 +2,7 @@
 id: cor-commuting-nearby-group-elements-have-commuting-logarithms-under-the-stated-domain-hypotheses
 kind: corollary
 title: Commuting nearby group elements have commuting logarithms under the stated domain hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-local-logarithm-on-a-lie-group, prop-adjoint-intertwines-the-exponential-map, prop-adjoint-exponential-identity, lem-right-trivialized-differential-of-the-lie-group-exponential]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

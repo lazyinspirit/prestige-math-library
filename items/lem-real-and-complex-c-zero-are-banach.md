@@ -2,7 +2,7 @@
 id: lem-real-and-complex-c-zero-are-banach
 kind: lemma
 title: Real and complex $c_0$ are Banach
-status: draft
+status: published
 origin: pipeline
 deps: [def-c-zero-and-ell-infinity, thm-reals-cauchy-complete,
        thm-complex-plane-is-complete, def-axiom-schema-of-replacement,
@@ -12,6 +12,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

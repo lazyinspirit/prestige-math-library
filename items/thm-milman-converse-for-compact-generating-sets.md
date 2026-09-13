@@ -2,13 +2,14 @@
 id: thm-milman-converse-for-compact-generating-sets
 kind: theorem
 title: Milman converse for compact generating sets
-status: draft
+status: published
 origin: pipeline
 deps: ["def-extreme-point-and-face", "def-locally-convex-topological-vector-space", "thm-compact-subset-of-a-hausdorff-space-is-closed", "thm-closed-subspace-of-a-compact-space-is-compact", "lem-locally-convex-closures-and-finite-compact-convex-hulls", "lem-finite-choice"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

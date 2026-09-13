@@ -2,7 +2,7 @@
 id: def-left-translated-distribution-associated-to-a-lie-subalgebra
 kind: definition
 title: The left-translated distribution associated to a Lie subalgebra
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-choice, def-lie-subalgebra-and-ideal, prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle, def-smooth-distribution-on-a-manifold]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Equation (19.7) and Lemma 19.24, printed page 506
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

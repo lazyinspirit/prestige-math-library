@@ -2,13 +2,14 @@
 id: lem-compact-distribution-convolution-preserves-schwartz-and-tempered-spaces
 kind: lemma
 title: Compact distribution convolution preserves schwartz and tempered spaces
-status: draft
+status: published
 origin: pipeline
 deps: [lem-compactly-supported-distributions-extend-to-smooth-functions, def-schwartz-space-and-its-seminorms, def-schwartz-topology-and-convergence, lem-distribution-pairing-with-smooth-parameter-families, lem-convolution-of-distributions-is-well-defined-under-the-support-hypothesis, def-tempered-distribution, thm-tempered-distributions-embed-continuously-in-distributions, def-convolution-of-distributions-when-one-has-compact-support]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

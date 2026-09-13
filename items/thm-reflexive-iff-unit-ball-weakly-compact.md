@@ -2,13 +2,14 @@
 id: thm-reflexive-iff-unit-ball-weakly-compact
 kind: theorem
 title: Reflexive iff unit ball weakly compact
-status: draft
+status: published
 origin: pipeline
 deps: ["def-reflexive-banach-space", "cor-relative-hahn-banach-bidual-isometry", "thm-banach-alaoglu", "thm-goldstine", "def-weak-topology-on-a-normed-space", "def-weak-star-topology", "lem-basic-weak-star-neighborhoods", "thm-compactness-under-continuous-maps", "thm-compact-subset-of-a-hausdorff-space-is-closed", "thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma", "def-hahn-banach-extension-principle-relative"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

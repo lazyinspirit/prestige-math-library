@@ -2,7 +2,7 @@
 id: cex-same-intrinsic-plane-with-different-extrinsic-curvature-after-bending
 kind: counterexample
 title: The same intrinsic planar strip can have different extrinsic curvature after bending
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions", "def-induced-connection-and-second-fundamental-form", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-connection-laws-in-directional-form", "thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Examples 14.2.5–14.2.6, printed pages 105–106
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

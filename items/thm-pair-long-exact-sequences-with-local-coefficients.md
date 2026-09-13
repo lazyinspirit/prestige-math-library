@@ -2,12 +2,13 @@
 id: thm-pair-long-exact-sequences-with-local-coefficients
 kind: theorem
 title: Pair exact sequences with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-homology-and-cohomology-with-local-coefficients, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, thm-long-exact-sequence-of-a-pair-in-singular-homology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

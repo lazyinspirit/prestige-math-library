@@ -2,7 +2,9 @@
 id: ex-rational-half-rotation-has-a-nonconstant-ergodic-average
 kind: example
 title: A rational half-rotation has a nonconstant ergodic limit
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [def-ergodic-partial-sums-time-averages-and-invariant-l-two-subspace, prop-circle-rotations-preserve-lebesgue-measure, thm-lebesgue-measure-of-a-box-of-every-kind, def-countable-choice]
 provenance:

@@ -2,13 +2,14 @@
 id: def-stable-homotopy-groups-of-a-sequential-prespectrum
 kind: definition
 title: Stable homotopy groups of a sequential prespectrum
-status: draft
+status: published
 origin: pipeline
 deps: ["def-sequential-prespectrum-spectrum-and-adjoint-structure-maps", "def-higher-homotopy-group-by-based-cubes", "prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant", "thm-set-has-all-small-colimits"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

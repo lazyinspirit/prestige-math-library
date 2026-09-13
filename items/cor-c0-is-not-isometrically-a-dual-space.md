@@ -2,13 +2,14 @@
 id: cor-c0-is-not-isometrically-a-dual-space
 kind: corollary
 title: c0 is not isometrically a dual space
-status: draft
+status: published
 origin: pipeline
 deps: ["cex-the-c0-unit-ball-has-no-extreme-points", "cor-dual-unit-ball-has-extreme-points"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-hamiltonian-flows-preserve-the-symplectic-form
 kind: theorem
 title: Hamiltonian flows preserve the symplectic form
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed", "prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, §18.1, p. 105
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

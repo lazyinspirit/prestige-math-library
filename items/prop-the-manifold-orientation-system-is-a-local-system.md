@@ -2,12 +2,13 @@
 id: prop-the-manifold-orientation-system-is-a-local-system
 kind: proposition
 title: The orientation system is a local system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-orientation-local-system-and-orientation-cover, def-local-system-of-r-modules-and-its-pullback, def-tensor-product-of-modules-by-generators-and-relations]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

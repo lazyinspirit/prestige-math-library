@@ -2,7 +2,7 @@
 id: lem-local-slice-for-a-free-proper-action
 kind: lemma
 title: Local slice for a free proper action
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-and-proper-lie-group-actions, thm-smooth-inverse-function-theorem-on-manifolds, thm-compactness-under-continuous-maps, thm-constant-rank-theorem-for-manifolds, prop-topological-manifolds-are-locally-compact-and-locally-path-connected, cor-a-linear-subspace-has-a-complement, thm-closed-subspace-of-a-compact-space-is-compact]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Proposition 21.5 and proof, printed pages 543–544; slice construction in Theorem 21.10, printed pages 545–547
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

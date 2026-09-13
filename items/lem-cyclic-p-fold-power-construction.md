@@ -2,7 +2,7 @@
 id: lem-cyclic-p-fold-power-construction
 kind: lemma
 title: Cyclic p-fold power construction
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-free-cyclic-resolution-and-transfer-for-power-operations", "lem-equivariant-p-fold-external-power-and-diagonal", "lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes", "thm-cellular-homology-computes-singular-homology", "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses", "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology", "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism", "def-bockstein-connecting-operation", "prop-the-mod-two-bockstein-is-a-derivation", "prop-bocksteins-are-natural-and-commute-with-suspension", "def-axiom-of-choice"]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

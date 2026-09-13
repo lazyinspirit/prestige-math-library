@@ -2,11 +2,12 @@
 id: def-compactly-supported-cohomology-with-local-coefficients
 kind: definition
 title: Compactly supported cohomology with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-homology-and-cohomology-with-local-coefficients, def-compactly-supported-singular-cohomology-of-a-locally-compact-space, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism]
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

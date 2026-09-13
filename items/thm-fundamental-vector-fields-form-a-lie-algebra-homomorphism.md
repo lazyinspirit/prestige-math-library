@@ -2,7 +2,7 @@
 id: thm-fundamental-vector-fields-form-a-lie-algebra-homomorphism
 kind: theorem
 title: Fundamental vector fields form a Lie-algebra homomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-fundamental-vector-field-of-a-left-action, def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism, def-lie-derivative-of-a-vector-field, thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket, thm-the-differential-of-adjoint-is-ad, prop-adjoint-intertwines-the-exponential-map]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 9.1 and proof, printed page 53; opposite convention translated explicitly
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

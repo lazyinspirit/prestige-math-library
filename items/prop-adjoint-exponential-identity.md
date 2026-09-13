@@ -2,7 +2,7 @@
 id: prop-adjoint-exponential-identity
 kind: proposition
 title: Adjoint exponential identity
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-the-differential-of-adjoint-is-ad", "prop-adjoint-is-a-smooth-lie-group-representation", "thm-one-parameter-subgroups-are-exactly-exponentials", "prop-exponential-scales-one-parameter-subgroups", "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval"]
 provenance:
@@ -20,6 +20,7 @@ sources:
       url: https://math.duke.edu/~bryant/ParkCityLectures.pdf
       locator: Lecture 2, Proposition 7 and complete proof, printed pages 21–22
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

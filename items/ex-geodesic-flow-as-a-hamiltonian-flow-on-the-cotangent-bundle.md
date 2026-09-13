@@ -2,7 +2,7 @@
 id: ex-geodesic-flow-as-a-hamiltonian-flow-on-the-cotangent-bundle
 kind: example
 title: Geodesic flow as a Hamiltonian flow on the cotangent bundle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian", "thm-equivalence-of-euler-lagrange-and-hamilton-equations-for-hyperregular-lagrangians", "thm-fundamental-theorem-of-riemannian-geometry"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 3, Application to Geodesic Flow, pp. 24--25; Lecture 19, pp. 114--116
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

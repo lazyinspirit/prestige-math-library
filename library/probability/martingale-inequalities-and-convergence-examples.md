@@ -1,7 +1,7 @@
 ---
 page: martingale-inequalities-and-convergence-examples
 title: "Martingale Inequalities and Convergence — Examples"
-status: draft
+status: published
 items: [ex-doob-maximal-bound-for-a-centered-random-walk, ex-nonnegative-martingale-converges-almost-surely, ex-dyadic-martingale-converges-to-the-original-l1-variable, ex-reverse-martingale-and-the-tail-sigma-algebra, ex-lp-bounded-martingale-with-an-lp-terminal-value, cex-l1-bounded-martingale-need-not-converge-in-l1, cex-almost-sure-martingale-convergence-need-not-preserve-expectation, cex-doob-lp-maximal-inequality-excludes-p-equals-one, ex-azuma-bound-for-simple-random-walk]
 examples: []
 ---

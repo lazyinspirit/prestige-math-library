@@ -2,7 +2,7 @@
 id: thm-a-free-proper-action-makes-m-to-m-mod-g-a-principal-g-bundle
 kind: theorem
 title: A free proper action makes M to M/G a principal bundle
-status: draft
+status: published
 origin: pipeline
 deps: [thm-free-proper-action-quotient-manifold, lem-local-slice-for-a-free-proper-action, def-smooth-fibre-bundle-and-local-trivialization, def-principal-g-bundle-and-associated-fiber-bundle]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Local product and quotient-chart construction in Theorem 21.10, printed pages 545–547
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

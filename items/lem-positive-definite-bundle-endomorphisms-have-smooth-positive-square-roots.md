@@ -2,7 +2,7 @@
 id: lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots
 kind: lemma
 title: Positive-definite bundle endomorphisms have smooth positive square roots
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-non-negative-square-root-exists-and-is-unique", "thm-parametrized-implicit-function-theorem-with-higher-regularity"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Theorem 2.26 and its fibrewise use before Definition 3.31, pp. 14 and 42
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

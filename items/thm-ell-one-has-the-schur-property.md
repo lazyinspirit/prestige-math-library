@@ -2,7 +2,7 @@
 id: thm-ell-one-has-the-schur-property
 kind: theorem
 title: Real and complex ell one have the Schur property
-status: draft
+status: published
 origin: pipeline
 deps: [def-schur-property, def-weak-convergence-of-nets-and-sequences, def-c-zero-and-ell-infinity, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-reals-cauchy-complete, thm-complex-plane-is-complete, thm-nonnegative-series-bounded-partial-sums, thm-well-ordering-principle, thm-recursion, lem-index-map-grows]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Reduce to a weakly null sequence. If its norms do not tend to zero, use least admissible indices and least finite cutoffs to form disjoint gliding-hump blocks. A single bounded sign or conjugate-phase sequence has a uniformly large pairing with every chosen vector, contradicting weak nullity."
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

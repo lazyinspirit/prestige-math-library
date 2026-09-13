@@ -2,7 +2,7 @@
 id: thm-reverse-martingale-convergence
 kind: theorem
 title: Reverse martingale convergence
-status: draft
+status: published
 origin: pipeline
 deps: [def-reverse-filtration-and-reverse-martingale, lem-doob-upcrossing-inequality, thm-uniform-integrability-of-conditional-expectations-of-one-variable, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, thm-almost-sure-convergence-implies-convergence-in-probability, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

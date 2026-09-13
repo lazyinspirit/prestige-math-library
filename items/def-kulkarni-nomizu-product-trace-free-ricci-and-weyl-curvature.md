@@ -2,7 +2,7 @@
 id: def-kulkarni-nomizu-product-trace-free-ricci-and-weyl-curvature
 kind: definition
 title: Kulkarni–Nomizu product, trace-free Ricci tensor, and Weyl curvature
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","def-ricci-curvature","def-scalar-curvature","def-tensor-product-of-multilinear-tensors"]
 justified_by: ["prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three"]
@@ -15,6 +15,7 @@ sources:
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
       locator: Definitions 13.1.2 and 13.1.6, Lemma 13.1.7, and Theorem 13.2.1, printed pages 90–95
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

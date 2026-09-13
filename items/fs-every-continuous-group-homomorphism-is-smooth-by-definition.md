@@ -2,7 +2,7 @@
 id: fs-every-continuous-group-homomorphism-is-smooth-by-definition
 kind: false-statement
 title: Every continuous group homomorphism is smooth by definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-lie-group-homomorphism-isomorphism-and-automorphism]
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

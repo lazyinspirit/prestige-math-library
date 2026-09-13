@@ -2,7 +2,7 @@
 id: def-exponential-map-of-a-lie-group
 kind: definition
 title: Exponential map of a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Definition 3.2, printed page 30
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

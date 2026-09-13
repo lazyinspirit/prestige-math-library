@@ -2,7 +2,7 @@
 id: lem-smooth-parametric-primitives-for-a-smooth-exact-family-on-a-compact-manifold
 kind: lemma
 title: Smooth parametric primitives for a smooth exact family on a compact manifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "thm-every-smooth-manifold-admits-a-riemannian-metric", "thm-existence-of-geodesically-convex-neighborhoods", "lem-manifold-bump-for-a-compact-set-inside-an-open-set", "thm-de-rham-homotopy-formula-for-a-smooth-homotopy"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 7, proof of Theorem 7.3, pp. 44--45
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

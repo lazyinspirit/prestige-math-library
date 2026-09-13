@@ -2,11 +2,12 @@
 id: def-singular-and-cellular-chain-complexes-with-local-coefficients
 kind: definition
 title: Singular and cellular local chain complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-right-group-ring-action-on-the-chains-of-a-universal-cover, def-tensor-product-of-modules-by-generators-and-relations, def-singular-cochain-complex-with-coefficients, def-local-system-of-r-modules-and-its-pullback]
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

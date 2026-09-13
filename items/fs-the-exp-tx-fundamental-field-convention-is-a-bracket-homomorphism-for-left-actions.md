@@ -2,7 +2,7 @@
 id: fs-the-exp-tx-fundamental-field-convention-is-a-bracket-homomorphism-for-left-actions
 kind: false-statement
 title: The plus exponential convention is not a homomorphism for left actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-fundamental-vector-field-of-a-left-action, thm-fundamental-vector-fields-form-a-lie-algebra-homomorphism, def-lie-group, def-determinant-of-a-square-matrix, def-matrix-units]
@@ -18,6 +18,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Proposition 9.1 and proof, printed page 53
 verification:
+  audited: 2026-09-14
   precheck: pass
 proof_strategy: direct
 ---

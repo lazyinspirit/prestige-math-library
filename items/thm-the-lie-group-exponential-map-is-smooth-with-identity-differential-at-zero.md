@@ -2,7 +2,7 @@
 id: thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero
 kind: theorem
 title: The Lie-group exponential map is smooth with identity differential at zero
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-exponential-map-of-a-lie-group", "prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle", "thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields", "thm-fundamental-theorem-on-flows", "prop-exponential-scales-one-parameter-subgroups", "def-one-parameter-subgroup-of-a-lie-group", "thm-chain-rule-for-differentials-of-smooth-maps"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://math.stanford.edu/~conrad/249BW16Page/handouts/249B_2016.pdf
       locator: Appendix G.1 complete smoothness proof, printed pages 182–183
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

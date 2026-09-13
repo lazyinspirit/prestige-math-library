@@ -2,13 +2,14 @@
 id: def-sigma-algebra-at-a-stopping-time
 kind: definition
 title: Sigma-algebra at a stopping time
-status: draft
+status: published
 origin: pipeline
 deps: [def-discrete-stopping-time, lem-equivalent-event-tests-for-a-discrete-stopping-time]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

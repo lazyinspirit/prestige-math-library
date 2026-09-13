@@ -2,7 +2,7 @@
 id: ex-the-tangent-bundle-of-g-mod-h-as-an-associated-bundle
 kind: example
 title: The tangent bundle of G/H as an associated bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-countable-choice, def-associated-bundle-to-a-principal-bundle-and-representation, thm-associated-vector-bundle-is-well-defined, thm-g-to-g-mod-h-is-a-smooth-principal-h-bundle, prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h, prop-tangent-space-of-a-homogeneous-quotient]
@@ -18,6 +18,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Homogeneous Space Construction and Characterization Theorems 21.17–21.18, printed pages 551–553
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

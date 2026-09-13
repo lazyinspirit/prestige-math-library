@@ -2,7 +2,7 @@
 id: def-orbit-stabilizer-and-orbit-map-of-a-smooth-action
 kind: definition
 title: Orbits, stabilizers, and orbit maps of smooth actions
-status: draft
+status: published
 origin: pipeline
 deps: [def-smooth-left-action-of-a-lie-group]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Quotients of Manifolds by Group Actions, printed page 541
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

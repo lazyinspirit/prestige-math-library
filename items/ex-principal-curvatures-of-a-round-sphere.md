@@ -2,7 +2,7 @@
 id: ex-principal-curvatures-of-a-round-sphere
 kind: example
 title: Principal curvatures of a round sphere
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-shape-operator", "def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-connection-laws-in-directional-form"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Principal-curvature definition and round-sphere calculation, printed pages 141–142
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

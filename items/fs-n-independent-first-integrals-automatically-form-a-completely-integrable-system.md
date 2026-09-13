@@ -2,7 +2,7 @@
 id: fs-n-independent-first-integrals-automatically-form-a-completely-integrable-system
 kind: false-statement
 title: $n$ independent first integrals automatically form a completely integrable system
-status: draft
+status: published
 origin: pipeline
 deps: ["def-completely-integrable-hamiltonian-system", "def-poisson-bracket-on-a-symplectic-manifold", "def-hamiltonian-vector-field-and-hamiltonian-function"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 18, Definition 18.10, p. 110
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

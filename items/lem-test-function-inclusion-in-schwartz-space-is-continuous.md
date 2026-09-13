@@ -2,13 +2,14 @@
 id: lem-test-function-inclusion-in-schwartz-space-is-continuous
 kind: lemma
 title: Test function inclusion in schwartz space is continuous
-status: draft
+status: published
 origin: pipeline
 deps: [lem-test-function-lf-topology-universal-property, def-schwartz-space-and-its-seminorms, def-schwartz-topology-and-convergence, lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

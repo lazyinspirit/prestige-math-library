@@ -2,7 +2,7 @@
 id: cex-steenrod-squares-are-not-integral-cohomology-operations
 kind: counterexample
 title: Steenrod squares do not all lift integrally
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [ex-steenrod-squares-on-real-projective-space, lem-real-projective-space-cellular-homology-and-pinch-map, lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients, thm-cellular-homology-computes-singular-homology, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, def-singular-cohomology-with-coefficients, def-bockstein-connecting-operation, prop-bocksteins-are-natural-and-commute-with-suspension, prop-first-steenrod-square-is-the-mod-two-bockstein, def-axiom-of-choice]
@@ -19,6 +19,7 @@ sources:
       url: https://math.mit.edu/~hrm/papers/notes-905.pdf
       locator: Theorem 27.1 and proof, printed pages 73--74
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

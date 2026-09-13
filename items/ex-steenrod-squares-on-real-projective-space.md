@@ -2,7 +2,7 @@
 id: ex-steenrod-squares-on-real-projective-space
 kind: example
 title: Steenrod squares on real projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-cartan-formula-for-steenrod-squares, prop-steenrod-square-normalization-instability-and-top-square, def-total-steenrod-square, thm-steenrod-squares-are-well-defined-and-natural, prop-cup-product-is-natural-unital-and-associative, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, lem-real-projective-space-cellular-homology-and-pinch-map, lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients, thm-cellular-homology-computes-singular-homology, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, def-axiom-of-choice]
@@ -16,6 +16,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Section 4.L, formula (*) and its derivation, printed pages 490--491
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

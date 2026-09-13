@@ -2,7 +2,7 @@
 id: def-covering-homomorphism-of-lie-groups
 kind: definition
 title: Covering homomorphisms of Lie groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-lie-group-homomorphism-isomorphism-and-automorphism, def-covering-map-and-evenly-covered-neighbourhoods]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf
       locator: Section 3.2 and Proposition 3.5, printed pages 25–26
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

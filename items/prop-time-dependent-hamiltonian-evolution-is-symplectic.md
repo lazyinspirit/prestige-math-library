@@ -2,7 +2,7 @@
 id: prop-time-dependent-hamiltonian-evolution-is-symplectic
 kind: proposition
 title: Time-dependent Hamiltonian evolution is symplectic
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "def-time-dependent-hamiltonian-vector-field-and-flow", "thm-differentiation-of-a-pulled-back-form-along-a-time-dependent-flow"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: §5.1, flow differentiation and Moser calculation, pp. 56--58
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

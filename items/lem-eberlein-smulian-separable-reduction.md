@@ -2,7 +2,7 @@
 id: lem-eberlein-smulian-separable-reduction
 kind: lemma
 title: Eberlein–Šmulian separable reduction
-status: draft
+status: published
 origin: pipeline
 deps: ["def-weak-topology-on-a-normed-space", "def-separable-space", "thm-rationals-countable", "lem-rat-embeds-dense", "thm-product-of-countable", "lem-countable-iff-surjection-from-n", "thm-relative-hahn-banach-norm-preserving-extension", "thm-relative-hahn-banach-geometric-separation", "lem-closed-subspace-of-a-banach-space-is-banach", "def-hahn-banach-extension-principle-relative"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

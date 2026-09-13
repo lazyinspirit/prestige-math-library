@@ -2,11 +2,12 @@
 id: def-cup-and-cap-products-with-local-coefficient-pairings
 kind: definition
 title: Cup and cap products with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-local-system-of-r-modules-and-its-pullback, def-homology-and-cohomology-with-local-coefficients, def-relative-cap-product, def-alexander-whitney-diagonal-approximation, thm-cup-product-leibniz-identity, thm-cap-product-boundary-identity]
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

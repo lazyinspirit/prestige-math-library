@@ -2,7 +2,7 @@
 id: cor-connected-lie-subgroups-with-the-same-lie-algebra-are-equal-as-immersed-subgroups
 kind: corollary
 title: Connected Lie subgroups with the same Lie algebra are equal as immersed subgroups
-status: draft
+status: published
 origin: pipeline
 deps: [thm-lie-subgroup-lie-subalgebra-correspondence]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: Uniqueness clause of Theorem 19.26, printed pages 506–507
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

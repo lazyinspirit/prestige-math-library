@@ -2,7 +2,7 @@
 id: thm-optional-stopping-under-uniform-integrability
 kind: theorem
 title: Optional stopping under uniform integrability
-status: draft
+status: published
 origin: pipeline
 deps: [thm-closed-martingale-characterization, def-stopped-random-variable-and-stopped-process, def-sigma-algebra-at-a-stopping-time, lem-stopping-time-sigma-algebra-is-a-sigma-algebra, thm-optional-sampling-for-bounded-stopping-times, thm-tower-property-of-conditional-expectation, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

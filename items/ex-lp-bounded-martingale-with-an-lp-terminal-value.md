@@ -2,7 +2,7 @@
 id: ex-lp-bounded-martingale-with-an-lp-terminal-value
 kind: example
 title: An Lp-bounded martingale with an Lp terminal value
-status: draft
+status: published
 origin: pipeline
 deps: [thm-lp-bounded-martingale-convergence, thm-levy-upward-convergence-of-conditional-expectations, cor-conditional-lp-contraction, lem-conditional-expectation-process-is-a-martingale, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

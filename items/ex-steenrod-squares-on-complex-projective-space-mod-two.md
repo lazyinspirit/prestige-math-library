@@ -2,7 +2,7 @@
 id: ex-steenrod-squares-on-complex-projective-space-mod-two
 kind: example
 title: Steenrod squares on complex projective space mod two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-cartan-formula-for-steenrod-squares, prop-steenrod-square-normalization-instability-and-top-square, def-total-steenrod-square, thm-steenrod-squares-are-well-defined-and-natural, prop-cup-product-is-natural-unital-and-associative, lem-mod-two-cohomology-rings-of-complex-projective-spaces, def-axiom-of-choice]
@@ -16,6 +16,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Section 4.L, projective-space formulas after (*), printed pages 490--491
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

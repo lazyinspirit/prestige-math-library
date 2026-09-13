@@ -2,7 +2,7 @@
 id: cor-schurs-lemma-for-irreducible-lie-algebra-representations
 kind: corollary
 title: Schur’s lemma for irreducible Lie-algebra representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra, thm-schurs-lemma-for-modules, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

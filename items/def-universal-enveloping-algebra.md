@@ -2,7 +2,7 @@
 id: def-universal-enveloping-algebra
 kind: definition
 title: Universal enveloping algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [def-tensor-algebra-of-a-vector-space, def-generated-and-principal-ideals, def-quotient-ring]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

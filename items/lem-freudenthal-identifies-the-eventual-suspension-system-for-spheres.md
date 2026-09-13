@@ -2,11 +2,12 @@
 id: lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres
 kind: lemma
 title: Freudenthal identifies the eventual suspension system for spheres
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stable-stem-of-the-sphere", "thm-freudenthal-suspension-theorem", "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic", "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex"]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-pbw-symbol-map-from-the-symmetric-algebra
 kind: definition
 title: PBW symbol map from the symmetric algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [prop-the-pbw-filtration-is-multiplicative-and-its-associated-graded-algebra-is-commutative, def-associated-graded-algebra-of-a-filtered-algebra, thm-universal-property-of-the-symmetric-algebra]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-mod-two-cohomology-ring-of-infinite-real-projective-space
 kind: lemma
 title: Mod-two cohomology ring of infinite real projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [lem-real-projective-space-cellular-homology-and-pinch-map, thm-cellular-homology-computes-singular-homology, prop-cellular-maps-induce-cellular-chain-maps, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-naturality-of-the-singular-cohomology-pair-sequence, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, thm-excision-for-singular-cohomology, lem-local-coordinate-cup-products-generate-top-relative-cohomology, prop-relative-cup-products-are-natural-and-compatible-with-connectors, prop-cup-product-is-natural-unital-and-associative, def-axiom-of-choice]
@@ -16,6 +16,7 @@ sources:
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Theorem 3.19 and its complete proof, printed pages 220--221
 verification:
+  audited: 2026-09-14
   precheck: pass
 ---
 

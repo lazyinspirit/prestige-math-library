@@ -2,7 +2,9 @@
 id: thm-doob-lp-maximal-inequality
 kind: theorem
 title: Doob Lp maximal inequality
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-doob-l1-maximal-inequality, thm-layer-cake-formula-for-l-p-powers, thm-holder-inequality-for-integrals, thm-monotone-convergence-for-the-integral, cor-absolute-value-and-powers-of-a-martingale-are-submartingales, def-axiom-of-choice]
 proof_strategy: direct

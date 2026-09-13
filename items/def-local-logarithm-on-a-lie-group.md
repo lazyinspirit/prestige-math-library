@@ -2,7 +2,7 @@
 id: def-local-logarithm-on-a-lie-group
 kind: definition
 title: Local logarithm on a Lie group
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "cor-the-exponential-map-is-a-local-diffeomorphism-at-zero"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf
       locator: Theorem 3.7(2), printed page 30
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

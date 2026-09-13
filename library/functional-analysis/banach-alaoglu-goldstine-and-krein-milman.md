@@ -1,7 +1,7 @@
 ---
 page: banach-alaoglu-goldstine-and-krein-milman
 title: Banach Alaoglu Goldstine and Krein Milman
-status: draft
+status: published
 items: [lem-dual-ball-as-a-closed-subset-of-a-product, thm-banach-alaoglu, def-absolute-polar-in-a-normed-dual-pair, thm-weak-star-compactness-of-polar-sets, thm-dual-ball-weak-star-metrizable-for-separable-predual, cor-separable-banach-dual-ball-is-weak-star-sequentially-compact, thm-goldstine, cor-goldstine-finite-data-approximation, thm-banach-dieudonne-linear-subspace-criterion, def-extreme-point-and-face, lem-minimizer-face-of-a-continuous-affine-functional, thm-krein-milman-existence-of-extreme-points, thm-krein-milman-closed-convex-hull-form, def-upper-semicontinuous-real-map-on-a-topological-space, cor-bauer-maximum-principle, thm-milman-converse-for-compact-generating-sets, cor-dual-unit-ball-has-extreme-points]
 examples: []
 ---

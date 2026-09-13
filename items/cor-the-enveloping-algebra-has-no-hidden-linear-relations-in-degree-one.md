@@ -2,7 +2,7 @@
 id: cor-the-enveloping-algebra-has-no-hidden-linear-relations-in-degree-one
 kind: corollary
 title: No hidden linear relations in degree one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-poincare-birkhoff-witt, def-pbw-filtration-on-the-universal-enveloping-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

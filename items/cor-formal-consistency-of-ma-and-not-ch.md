@@ -2,7 +2,7 @@
 id: cor-formal-consistency-of-ma-and-not-ch
 kind: corollary
 title: Externally fixed-fragment relative consistency of MA and not CH
-status: draft
+status: published
 origin: pipeline
 deps: [lem-formal-ma-iteration-verification-compiler]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

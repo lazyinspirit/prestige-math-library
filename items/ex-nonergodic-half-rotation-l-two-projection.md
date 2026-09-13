@@ -2,7 +2,9 @@
 id: ex-nonergodic-half-rotation-l-two-projection
 kind: example
 title: The invariant L2 projection for a half-rotation
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-von-neumann-mean-ergodic-theorem-in-l-two, thm-birkhoff-ergodic-theorem, prop-circle-rotations-preserve-lebesgue-measure, thm-lebesgue-measure-of-a-box-of-every-kind, def-axiom-of-choice]
 provenance:

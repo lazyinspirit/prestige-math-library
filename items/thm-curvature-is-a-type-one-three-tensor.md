@@ -2,7 +2,7 @@
 id: thm-curvature-is-a-type-one-three-tensor
 kind: theorem
 title: Curvature is a type (1,3) tensor
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-curvature-is-c-infinity-linear-in-all-three-vector-fields", "def-smooth-tensor-field"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, Proposition 7.1, printed pages 117–118
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

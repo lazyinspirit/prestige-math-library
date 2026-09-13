@@ -2,7 +2,7 @@
 id: ex-gamblers-ruin-probability-for-a-biased-walk
 kind: example
 title: Gambler's ruin probability for a biased walk
-status: draft
+status: published
 origin: pipeline
 deps: [lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time, thm-optional-stopping-with-a-dominating-integrable-variable, lem-conditioning-a-known-variable-and-an-independent-variable, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

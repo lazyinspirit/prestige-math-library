@@ -2,7 +2,7 @@
 id: ex-the-cotangent-bundle-of-a-circle-as-a-symplectic-cylinder
 kind: example
 title: The cotangent bundle of a circle as a symplectic cylinder
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice", "lem-the-tautological-one-form-is-intrinsic-and-smooth", "thm-the-canonical-cotangent-two-form-is-symplectic"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 1, cotangent coordinates, pp. 11--12
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

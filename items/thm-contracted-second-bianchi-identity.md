@@ -2,7 +2,7 @@
 id: thm-contracted-second-bianchi-identity
 kind: theorem
 title: Contracted second Bianchi identity
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","thm-differential-second-bianchi-identity","def-scalar-curvature","lem-ricci-curvature-is-symmetric-and-basis-independent","prop-induced-connections-commute-with-contraction-and-permutation","lem-contraction-is-independent-of-the-basis-formula","thm-algebraic-symmetries-of-the-riemann-tensor","def-levi-civita-connection"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Chapter 7, Lemma 7.7, printed page 125
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

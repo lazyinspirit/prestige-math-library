@@ -2,7 +2,7 @@
 id: fs-liouville-arnold-gives-global-action-angle-coordinates-on-the-entire-manifold
 kind: false-statement
 title: Liouville–Arnold gives global action–angle coordinates on the entire manifold
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","thm-liouville-arnold-action-angle-theorem","prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://arxiv.org/pdf/1901.00705
       locator: Theorem 2.7 and §3.1, pp. 5--11
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

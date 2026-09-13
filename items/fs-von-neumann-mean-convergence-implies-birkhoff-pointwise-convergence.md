@@ -2,7 +2,9 @@
 id: fs-von-neumann-mean-convergence-implies-birkhoff-pointwise-convergence
 kind: false-statement
 title: Norm convergence alone does not imply pointwise convergence
-status: draft
+status: published
+verification:
+  audited: 2026-09-14
 origin: pipeline
 deps: [thm-von-neumann-mean-ergodic-theorem-in-l-two, thm-birkhoff-ergodic-theorem, thm-maximal-ergodic-theorem, thm-lebesgue-measure-of-a-box-of-every-kind, def-axiom-of-choice]
 provenance:

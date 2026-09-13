@@ -2,13 +2,14 @@
 id: def-p-section-of-a-p-element
 kind: definition
 title: The p-section of a p-element
-status: draft
+status: published
 origin: pipeline
 deps: [lem-commuting-p-and-p-prime-parts-of-a-finite-group-element]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

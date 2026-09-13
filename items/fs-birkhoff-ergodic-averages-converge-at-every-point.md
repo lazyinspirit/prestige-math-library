@@ -2,13 +2,14 @@
 id: fs-birkhoff-ergodic-averages-converge-at-every-point
 kind: false-statement
 title: Birkhoff averages need not converge at every point
-status: draft
+status: published
 origin: pipeline
 deps: [thm-birkhoff-ergodic-theorem, def-integer-base-map-on-the-circle, lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints, prop-integer-base-map-preserves-lebesgue-measure, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

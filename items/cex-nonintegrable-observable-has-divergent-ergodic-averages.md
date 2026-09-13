@@ -2,7 +2,7 @@
 id: cex-nonintegrable-observable-has-divergent-ergodic-averages
 kind: counterexample
 title: A nonintegrable observable with divergent ergodic averages
-status: draft
+status: published
 origin: pipeline
 deps: [thm-birkhoff-ergodic-theorem, thm-doubling-map-is-ergodic-for-lebesgue-measure, thm-ergodicity-and-invariant-functions, thm-integrals-are-invariant-under-measure-preserving-maps, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, def-extended-real-valued-measurable-function, thm-borel-sets-are-lebesgue-measurable, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral, thm-lebesgue-measure-of-a-box-of-every-kind, thm-p-series-rational, def-integrable-real-and-complex-functions-and-their-integrals, thm-finite-and-countable-subadditivity-of-measures, def-countable-choice]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

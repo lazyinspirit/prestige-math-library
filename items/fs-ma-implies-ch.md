@@ -2,7 +2,7 @@
 id: fs-ma-implies-ch
 kind: false-statement
 title: Martin's Axiom implies CH
-status: draft
+status: published
 origin: pipeline
 deps: [thm-rasiowa-sikorski-and-ch-implies-ma, cor-formal-consistency-of-ma-and-not-ch]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-curvature-of-a-riemannian-product
 kind: example
 title: Curvature of a Riemannian product
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-choice","prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure","thm-canonical-tangent-and-cotangent-splittings-for-products","prop-coordinate-criterion-for-a-riemannian-metric","thm-fundamental-theorem-of-riemannian-geometry","prop-christoffel-formula-for-the-levi-civita-connection","prop-connection-laws-in-directional-form","prop-coordinate-formula-for-the-curvature-tensor","thm-curvature-is-a-type-one-three-tensor","def-riemann-curvature-four-tensor","def-sectional-curvature"]
 provenance:
@@ -17,6 +17,7 @@ sources:
       url: https://webhomes.maths.ed.ac.uk/~v1ranick/papers/leeriemm.pdf
       locator: Product metric (3.3), printed pages 26–27, and Problem 8-7(a)–(b), printed page 151
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-action-and-angle-coordinates
 kind: definition
 title: Action and angle coordinates
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symplectic-form-and-symplectic-manifold"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf
       locator: Definitions 6.16 and 6.18, pp. 72--74
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

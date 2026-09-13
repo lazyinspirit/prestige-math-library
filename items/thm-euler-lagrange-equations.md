@@ -2,7 +2,7 @@
 id: thm-euler-lagrange-equations
 kind: theorem
 title: Euler–Lagrange equations
-status: draft
+status: published
 origin: pipeline
 deps: ["def-lagrangian-action-functional-on-curves", "thm-integration-by-parts"]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf
       locator: Lecture 19, Euler--Lagrange derivation, pp. 112--114
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

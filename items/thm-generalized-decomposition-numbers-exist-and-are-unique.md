@@ -2,7 +2,7 @@
 id: thm-generalized-decomposition-numbers-exist-and-are-unique
 kind: theorem
 title: Generalized decomposition numbers exist and are unique
-status: draft
+status: published
 origin: pipeline
 deps: [def-generalized-decomposition-numbers, thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order, cor-schurs-lemma-for-irreducible-representations, def-decomposition-numbers-and-decomposition-matrix, def-brauer-character-of-a-finite-dimensional-kg-module, thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

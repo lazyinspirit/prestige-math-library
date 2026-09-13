@@ -2,12 +2,13 @@
 id: ex-sign-local-system-on-real-projective-space
 kind: example
 title: Sign local system on real projective space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-21
 deps: [thm-cellular-chains-compute-homology-with-local-coefficients, prop-the-manifold-orientation-system-is-a-local-system, thm-fundamental-group-of-the-circle, thm-higher-dimensional-spheres-are-simply-connected, thm-deck-group-of-a-universal-cover-is-the-fundamental-group, prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
