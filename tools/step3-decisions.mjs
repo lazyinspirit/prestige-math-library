@@ -243,7 +243,11 @@ export function recordStep3(root, { run, phase, page, item, decision, reason, ow
     throw Error('Only the owner may change an owner scope decision');
   if (phase === 'item') {
     const pair = [...s.pairs].find(([, ps]) => ps.some(p => p.items.some(i => i.id === id)));
-    if (!pair || !checkStep3(s, 'scope').closed) throw Error('Step 3a must clear before item auditing');
+    // During concurrent Step 3b authoring, another group can change its own
+    // pair's scope. That must not prevent auditing an unchanged, approved pair.
+    // The final Step 3 gate still requires every pair scope to be current.
+    if (!pair || !scopeDecision(s, pair[0]).closed)
+      throw Error('Step 3a must clear for the item pair before item auditing');
     if (!Array.isArray(dependencies)) throw Error('Record the examined dependency IDs, including an explicit empty list');
     const previous = itemDecision(s, id).decision;
     if (!owner && previous?.decision !== 'reopen' && (previous?.owner || previous?.decision === 'escalate'))

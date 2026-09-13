@@ -235,6 +235,17 @@ const fetchOne = async (url) => {
     if (last.error) continue;
     if (last.status && ![403, 405, 501, 400].includes(last.status)) return last;
   }
+  // A host may briefly refuse every protocol attempt even though the cited
+  // document is live. Retry only transport failures, with short bounded
+  // backoff, before consulting the archive or declaring a citation dead.
+  // A real HTTP rejection remains a rejection; it is not retried away.
+  if (last?.error) {
+    for (const delayMs of [1500, 4000, 8000]) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      last = await fetchOnce(url, ATTEMPTS[0]);
+      if (last.ok || !last.error) return last;
+    }
+  }
   return last;
 };
 
@@ -320,10 +331,27 @@ const recoverOne = async (url) => {
   return null;
 };
 
+// Wayback serves many recovered citations from one host. Sending all eight
+// workers there at once intermittently makes it refuse connections while the
+// same URLs answer individually. Keep one archive probe in flight; other
+// publisher hosts still use the configured worker concurrency.
+let archiveLane = Promise.resolve();
+const probe = (url) => {
+  if (!/^https?:\/\/web\.archive\.org\//i.test(url)) return fetchOne(url);
+  const result = archiveLane.then(async () => {
+    // Space requests as well as serializing them: Wayback can refuse a burst
+    // of consecutive connections even when no requests overlap.
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    return fetchOne(url);
+  });
+  archiveLane = result.then(() => undefined, () => undefined);
+  return result;
+};
+
 const worker = async () => {
   while (cursor < queue.length) {
     const index = cursor++;
-    rows[index] = await fetchOne(queue[index]);
+    rows[index] = await probe(queue[index]);
   }
 };
 await Promise.all(Array.from({ length: Math.min(concurrency, queue.length || 1) }, worker));

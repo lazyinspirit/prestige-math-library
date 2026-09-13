@@ -59,6 +59,23 @@ test('scope is required; legacy sufficient pair verdicts cannot approve items', 
   assert.equal(f.check().closed, false);
 });
 
+test('an unrelated pair scope edit does not block a current pair item audit', t => {
+  const f = fixture(t);
+  f.pages.push(
+    { id: 'other-a', kind: 'A', companion: 'other-b', order: 3, requires: [], items: [
+      { id: 'lem-other', kind: 'lemma', statement: 'Other', strategy: 'Other proof', deps: [] }] },
+    { id: 'other-b', kind: 'B', companion: 'other-a', order: 4, requires: ['other-a'], items: [
+      { id: 'ex-other', kind: 'example', statement: 'Other example', strategy: 'Compute', deps: ['lem-other'] }] },
+  );
+  f.put('demo-batch-1.pages.json', f.pages);
+  f.put('plan-spec.json', { pages: f.pages });
+  f.scope();
+  assert.equal(f.check('scope').closed, false);
+  assert.doesNotThrow(() => f.audit('lem-a'));
+  assert.equal(f.check().closed, false, 'the final run-wide gate still requires the other scope');
+  assert.throws(() => f.audit('lem-other'), /3a must clear/);
+});
+
 test('Step-3 auditor-created items bypass self-review but inherit the approved baseline scope', t => {
   const f = fixture(t);
   f.scope();

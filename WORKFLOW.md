@@ -81,7 +81,10 @@ reconciler updates published-consumer-supplier-ledger.md.
 
 Use tools/step1-decisions.mjs and tools/step3-decisions.mjs for current evidence.
 Step 3 item decisions are recorded after authoring and bind to transitive examined
-dependencies. A genuine post-baseline item created and fully authored by the
+dependencies. During concurrent authoring, an item decision requires current
+scope approval for its own A/B pair; another pair's in-progress scope edit does
+not block it. The final Step 3 gate still requires all pair scopes to close.
+A genuine post-baseline item created and fully authored by the
 Step-3 auditor is instead certified mechanically after that successful dispatch;
 it does not enter a self-review/repair/author loop. Its item and scope-delta
 certificates are hash-bound, and the scope delta inherits (but cannot replace)
@@ -254,6 +257,8 @@ Temporary outages do not establish permanent unavailability. Preserve genuine
 fetch, URL and source-backing evidence; a PDF page count does not establish reading.
 URL sweeps that fail only with transport errors wait for network recovery;
 they do not retire reviewed sources or dispatch reharvesting workers.
+The liveness probe uses bounded backoff for transport failures and spaces
+Wayback requests; an HTTP rejection remains a failed citation.
 Compressed PDFs require mutool. Documents under four pages require the complete
 short_document_reading receipt specified by the fetch tool and scaffold brief.
 The dispatcher explicitly enables shell network access for workspace-write
