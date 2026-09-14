@@ -298,6 +298,77 @@ test('same-stage dependency cycles become a visible blocker with no dispatch', a
     row.key === 'unit-prerequisites:dag' && /a -> b -> a/.test(row.message)));
 });
 
+test('same-stage dependency evaluation defers a transient read failure while a writer is live', () => {
+  const fx = fixture();
+  const stage: any = {
+    id: 'dag', label: 'dag', units: () => ['reader', 'writer'], pattern: /^worker-/,
+    unitPrerequisites: () => { throw new SyntaxError('partial JSON'); },
+    gatesWaived: 'The test assertions directly verify transient readiness handling.',
+  };
+  const ex = makeExecutor(fx, [stage]);
+
+  const transient = ex.unitReadiness(stage, ex.ctx(), ['reader'], new Set(['writer']));
+  assert.deepEqual(transient, { ready: [], problem: null, deferred: true },
+    'a live stage writer makes an unreadable dependency snapshot retryable');
+
+  const persistent = ex.unitReadiness(stage, ex.ctx(), ['reader']);
+  assert.deepEqual(persistent.ready, []);
+  assert.match(persistent.problem ?? '', /unit prerequisite evaluation threw: partial JSON/,
+    'the same unreadable snapshot remains a blocker after every writer drains');
+
+  stage.unitPrerequisites = () => { throw new Error('broken dependency loader'); };
+  const semanticFailure = ex.unitReadiness(stage, ex.ctx(), ['reader'], new Set(['writer']));
+  assert.match(semanticFailure.problem ?? '', /unit prerequisite evaluation threw: broken dependency loader/,
+    'a live writer must not hide a non-syntax implementation failure');
+
+  stage.unitPrerequisites = (_ctx: any, unit: string) => unit === 'reader' ? ['writer'] : ['reader'];
+  const cycle = ex.unitReadiness(stage, ex.ctx(), ['reader'], new Set(['writer']));
+  assert.match(cycle.problem ?? '', /reader -> writer -> reader/,
+    'a live writer must not hide a dependency cycle');
+});
+
+test('repair fan-out retains a prerequisite blocker across a deferred dependency read', async () => {
+  const fx = fixture();
+  let condition: 'semantic' | 'syntax' | 'valid' = 'semantic';
+  const stage: any = {
+    id: 'dag', label: 'dag', units: () => ['reader', 'writer'], pattern: /^worker-/,
+    unitPrerequisites: () => {
+      if (condition === 'semantic') throw new Error('broken dependency loader');
+      if (condition === 'syntax') throw new SyntaxError('partial JSON');
+      return [];
+    },
+    gatesWaived: 'The test assertions directly verify repair prerequisite blocker ownership.',
+  };
+  const ex = makeExecutor(fx, [stage]);
+  const plan = { role: 'worker', label: 'repair-reader', job: 'authoring', covers: ['reader'] };
+
+  assert.equal(ex.startMany(stage, [plan]), false);
+  assert.ok(ex.state.data.blockers.some((row: any) =>
+    row.key === 'unit-prerequisites:dag' && /broken dependency loader/.test(row.message)));
+
+  ex.inflight.set('dag:live-writer', {
+    promise: new Promise(() => {}), startedAt: Date.now(),
+    meta: { stage: 'dag', role: 'worker', label: 'live-writer', covers: ['writer'], attempt: 1 },
+  });
+  condition = 'syntax';
+  assert.equal(ex.startMany(stage, [plan]), true);
+  assert.deepEqual(inflightAt(ex, 'dag').map((row: any) => row.meta.label), ['live-writer']);
+  assert.ok(ex.state.data.blockers.some((row: any) => row.key === 'unit-prerequisites:dag'),
+    'a deferred read must not retire the preceding hard blocker');
+
+  ex.inflight.clear();
+  assert.equal(ex.startMany(stage, [plan]), false);
+  assert.ok(ex.state.data.blockers.some((row: any) =>
+    row.key === 'unit-prerequisites:dag' && /partial JSON/.test(row.message)),
+  'a persistent parse failure updates the dedicated blocker after the writer drains');
+
+  condition = 'valid';
+  assert.equal(ex.startMany(stage, [plan]), true);
+  assert.equal(ex.state.data.blockers.some((row: any) => row.key === 'unit-prerequisites:dag'), false,
+    'only a conclusive valid graph retires the blocker');
+  await Promise.allSettled([...ex.inflight.values()].map((row: any) => row.promise));
+});
+
 test('repair fan-out defers a consumer while launching its supplier', async () => {
   const fx = fixture();
   const stage: any = {

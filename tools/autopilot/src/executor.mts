@@ -440,7 +440,9 @@ export class Executor {
    * makes the supplier bytes unstable. Building and validating the whole graph
    * here prevents a cycle from degrading into a silent no-work tick. */
   unitReadiness(stage: Stage, ctx: Ctx, candidates: Unit[], active = new Set<Unit>(),
-    writes = new Set<Unit>(), cohortWrites = writes): { ready: Unit[]; problem: string | null } {
+    writes = new Set<Unit>(), cohortWrites = writes): {
+      ready: Unit[]; problem: string | null; deferred?: boolean;
+    } {
     if (!stage.unitPrerequisites) return { ready: candidates, problem: null };
     try {
       const owed = (stage.units ? stage.units(ctx) : []).map(String);
@@ -507,6 +509,13 @@ export class Executor {
         problem: null,
       };
     } catch (error: any) {
+      // Stage-owned manifests are currently written by agent processes, which
+      // means a reader can sample an empty or partial JSON file between the
+      // truncate and close.  If this stage has a live writer, defer the whole
+      // readiness decision for one tick and evaluate the finished bytes later.
+      // With no live writer the same exception is persistent input damage and
+      // must remain an owner-visible blocker.
+      if (active.size && error instanceof SyntaxError) return { ready: [], problem: null, deferred: true };
       return { ready: [], problem: `unit prerequisite evaluation threw: ${error?.message ?? error}` };
     }
   }
@@ -724,6 +733,34 @@ export class Executor {
     }
   }
 
+  recordUnitPrerequisiteBlocker(stage: Stage, problem: string): void {
+    const message = `stage ${stage.id}: invalid unit prerequisites — ${problem}`;
+    const key = `unit-prerequisites:${stage.id}`;
+    const existing = this.state.data.blockers.find((blocker: any) =>
+      blocker.stage === stage.id && (blocker.key ?? blocker.message) === key);
+    if (existing) {
+      if (existing.message !== message) {
+        existing.message = message;
+        existing.at = new Date().toISOString();
+        this.state.save();
+        this.reporter.notify('blocked', message, { stage: stage.id, updated: true });
+      }
+    } else if (this.state.addBlocker(stage.id, message, key)) {
+      this.reporter.notify('blocked', message, { stage: stage.id });
+    }
+  }
+
+  retireUnitPrerequisiteBlocker(stage: Stage): void {
+    const key = `unit-prerequisites:${stage.id}`;
+    const before = this.state.data.blockers.length;
+    this.state.data.blockers = this.state.data.blockers.filter((blocker: any) =>
+      blocker.stage !== stage.id || (blocker.key ?? blocker.message) !== key);
+    if (this.state.data.blockers.length !== before) {
+      this.state.save();
+      this.reporter.notify('unblocked', `${stage.id}: unit prerequisite graph is valid`);
+    }
+  }
+
   /** Start one dispatch. Never awaited inline — the engine keeps ticking while
    *  agents run, which is what allows a slow lane and a fast lane to overlap. */
   start(stage: Stage, plan: Plan, { preflighted = false } = {}): boolean {
@@ -909,18 +946,25 @@ export class Executor {
       const writes = new Set<Unit>(plans.flatMap(plan => (plan.covers ?? []).map(String)));
       const graph = this.unitReadiness(stage, this.ctx(), [], active, writes, new Set());
       if (graph.problem) {
-        this.recordPlanPreflightBlocker(stage, plans[0], graph.problem);
+        this.recordUnitPrerequisiteBlocker(stage, graph.problem);
         return false;
       }
+      if (graph.deferred) return true;
       const acceptedWrites = new Set<Unit>();
-      readyPlans = plans.filter(plan => {
+      readyPlans = [];
+      for (const plan of plans) {
         const covered = (plan.covers ?? []).map(String);
         const readiness = this.unitReadiness(stage, this.ctx(), covered, active, writes, acceptedWrites);
-        if (readiness.problem || (covered.length
-          && !covered.every(unit => readiness.ready.map(String).includes(unit)))) return false;
+        if (readiness.problem) {
+          this.recordUnitPrerequisiteBlocker(stage, readiness.problem);
+          return false;
+        }
+        if (readiness.deferred) return true;
+        if (covered.length && !covered.every(unit => readiness.ready.map(String).includes(unit))) continue;
+        readyPlans.push(plan);
         for (const unit of covered) acceptedWrites.add(unit);
-        return true;
-      });
+      }
+      this.retireUnitPrerequisiteBlocker(stage);
     }
     for (const plan of readyPlans) this.start(stage, plan, { preflighted: true });
     return true;
@@ -1309,13 +1353,11 @@ export class Executor {
           && !(s.exclusiveCohort?.(ctx, u) ?? []).some((other) => active.has(String(other))));
         const readiness = this.unitReadiness(s, ctx, missing, active);
         if (readiness.problem) {
-          const msg = `stage ${s.id}: invalid unit prerequisites — ${readiness.problem}`;
-          if (this.state.addBlocker(s.id, msg, `unit-prerequisites:${s.id}`)) {
-            this.reporter.notify('blocked', msg, { stage: s.id });
-          }
+          this.recordUnitPrerequisiteBlocker(s, readiness.problem);
           this.reporter.report(this.snapshot(), { force: true });
           return 'blocked';
         }
+        if (readiness.deferred) continue;
         missing = readiness.ready;
         if (!missing.length) continue;
         const failure = { id: 'stage-stalemate', ok: false, units: missing,
@@ -1396,21 +1438,13 @@ export class Executor {
     // supplier or an independent branch later in the list.
     const prerequisiteReadiness = this.unitReadiness(stage, ctx, need, runningUnits);
     if (prerequisiteReadiness.problem) {
-      const msg = `stage ${stage.id}: invalid unit prerequisites — ${prerequisiteReadiness.problem}`;
-      if (this.state.addBlocker(stage.id, msg, `unit-prerequisites:${stage.id}`)) {
-        this.reporter.notify('blocked', msg, { stage: stage.id });
-      }
+      this.recordUnitPrerequisiteBlocker(stage, prerequisiteReadiness.problem);
       this.reporter.report(this.snapshot(), { force: true });
       return 'blocked';
     }
+    if (prerequisiteReadiness.deferred) return 'ok';
     need = prerequisiteReadiness.ready;
-    const prerequisiteKey = `unit-prerequisites:${stage.id}`;
-    const beforePrerequisiteBlockers = this.state.data.blockers.length;
-    this.state.data.blockers = this.state.data.blockers.filter((row: any) => row.key !== prerequisiteKey);
-    if (this.state.data.blockers.length !== beforePrerequisiteBlockers) {
-      this.state.save();
-      this.reporter.notify('unblocked', `${stage.id}: unit prerequisite graph is valid`);
-    }
+    this.retireUnitPrerequisiteBlocker(stage);
 
     // Retry policy: a unit whose lane failed gets `maxAttempts` tries, then
     // becomes a blocker. Unbounded retry of a deterministically failing lane

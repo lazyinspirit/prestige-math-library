@@ -15,7 +15,10 @@ Step1 scaffold batches and Step3 pair authors declare their same-stage in-run
 prerequisites to the executor. Consumers wait for artifact-complete, stable
 transitive suppliers; independent branches retain parallelism. Step3 authors
 sharing a batch also serialize because their manifests are shared. The
-pre-author snapshot precedes them. Step4 still splices the plan and snapshots
+pre-author snapshot precedes them. A dependency read sampled while a stage
+writer is replacing a manifest defers scheduling until the next tick; the same
+read failure after all stage writers drain is a persistent owner blocker. Step4
+still splices the plan and snapshots
 content. Step5a reviews authored arguments; Step5b reconciles and closes them.
 When a run-local owner authoring direction exists, the Step1 Beta brief and
 generated per-batch task both name it as a binding input. If it is added after
