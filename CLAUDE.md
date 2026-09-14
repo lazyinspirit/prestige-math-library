@@ -55,6 +55,8 @@ Approve all command-prompt requests from other agents.
 construct scaffolds along the in-run page-prerequisite DAG. A consumer batch
 waits for artifact-complete, stable transitive supplier batches; independent
 branches run in parallel. A cyclic condensed batch graph is a planning error.
+If `research/<run>-owner-authoring-direction.md` exists, every Beta scaffolder
+must read it before constructing items; it overrides stale task or design text.
 Record each item as ready or escalated.
 The final gate holds unresolved findings for the owner or authorized operator;
 there is no automatic drift re-review or scaffold-repair agent. Reconcile

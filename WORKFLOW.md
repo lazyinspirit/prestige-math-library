@@ -73,6 +73,10 @@ independent DAG branches remain parallel. A cyclic condensed batch graph is a
 planning error and blocks before dispatch. Every item needs a current
 ready/escalated record. The final gate holds unresolved
 findings for the owner/operator; it does not launch a scaffold repair loop.
+When `research/<run>-owner-authoring-direction.md` exists, every Step-1 Beta
+prompt and generated batch task names it as a mandatory, precedence-bearing
+input; creating the direction after planning requires refreshing the tasks
+before dispatch.
 Preserve selected pairs and reconcile prose, plan, Phase-2 files and the consumer
 ledger before clearing affected prerequisites.
 

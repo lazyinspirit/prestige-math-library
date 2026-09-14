@@ -17,6 +17,10 @@ transitive suppliers; independent branches retain parallelism. Step3 authors
 sharing a batch also serialize because their manifests are shared. The
 pre-author snapshot precedes them. Step4 still splices the plan and snapshots
 content. Step5a reviews authored arguments; Step5b reconciles and closes them.
+When a run-local owner authoring direction exists, the Step1 Beta brief and
+generated per-batch task both name it as a binding input. If it is added after
+`plan`, run `refresh-tasks` before any Beta dispatch so materialized prompts do
+not omit it.
 Step7 completes repairs and checks, runs one rejudge and one terminal
 adjudication pass, then snapshots for Step8. No post-final repair loop exists.
 Coverage, artifacts and gates are independently required. Every agent must be

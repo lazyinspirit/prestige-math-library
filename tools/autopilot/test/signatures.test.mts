@@ -70,6 +70,7 @@ test('newly generated tasks cover every current stage, including the composed re
     { id: 'fixture-a', kind: 'A', companion: 'fixture-b', category: 'algebra', title: 'Fixture', order: 1, requires: [], items: [] },
     { id: 'fixture-b', kind: 'B', companion: 'fixture-a', category: 'algebra', title: 'Fixture examples', order: 2, requires: ['fixture-a'], items: [] },
   ]));
+  writeFileSync(join(REPO, 'research', `${run}-owner-authoring-direction.md`), '# Binding fixture direction\n');
   for (const flags of [[], ['--check']]) {
     const result = spawnSync(process.execPath, [join(REPO, 'tools/run-tasks.mjs'), '--run', run, ...flags],
       { cwd: REPO, encoding: 'utf8' });
@@ -77,6 +78,9 @@ test('newly generated tasks cover every current stage, including the composed re
   }
   assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-5a-direct.task.md`)));
   assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-step7.task.md`)));
+  const betaTask = readFileSync(join(REPO, 'research', `${run}-beta-1.task.md`), 'utf8');
+  assert.match(betaTask, new RegExp(`research/${run}-owner-authoring-direction\\.md`));
+  assert.match(betaTask, /binding and overrides stale task or design text/);
 });
 
 test('doctor catches an invented flag — actually planted, not merely absent', async (t) => {

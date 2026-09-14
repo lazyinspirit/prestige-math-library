@@ -79,6 +79,8 @@ for (let i = 0; i < batches.length; i += 3) groupLabels.push(String.fromCharCode
 
 const spec = readJson(R('research/plan-spec.json'));
 const pageById = new Map(spec.pages.map((p) => [p.id, p]));
+const ownerDirectionRel = `research/${run}-owner-authoring-direction.md`;
+const hasOwnerDirection = existsSync(R(ownerDirectionRel));
 
 const manifestOf = (b) => readJson(R('research', `${run}-batch-${b}.pages.json`));
 /** The A pages of a batch, in manifest order, with their spec records. */
@@ -291,6 +293,10 @@ for (const b of batches) {
   lines.push('');
   lines.push(`${pages.length} A/B pair${pages.length === 1 ? '' : 's'} in ${cats.join(' and ')}. Own only these pairs.`);
   lines.push('');
+  if (hasOwnerDirection) {
+    lines.push(`Read \`${ownerDirectionRel}\` before constructing any item. It is binding and overrides stale task or design text.`);
+    lines.push('');
+  }
 
   for (const p of pages) {
     lines.push(`## \`${p.id}\``);
