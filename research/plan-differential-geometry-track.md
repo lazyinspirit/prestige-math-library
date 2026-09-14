@@ -8164,8 +8164,9 @@ classification depend on them.
 - `fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition` —
   **false statement** `[LL]`.
 - `fs-the-weyl-character-formula-is-an-ordinary-quotient-of-functions-before-formal-cancellation-is-justified` —
-  **false statement** `[LL]`; RL-7 works in the localized formal group algebra
-  before proving cancellation to a finite character.
+  **false statement** `[LL]`; even in the local rank-one calculation, first
+  prove divisibility/cancellation of the finite geometric sums before
+  interpreting the quotient as a character.
 
 ### B page — `highest-weight-theory-for-complex-semisimple-lie-algebras-examples`
 
@@ -8180,19 +8181,18 @@ classification depend on them.
 5. `ex-exterior-powers-and-fundamental-weights-of-sl-n` — **example** `[LA]`.
 6. `ex-the-adjoint-representation-and-the-highest-root` — **example** `[LL]`.
 7. `ex-weyl-character-and-dimension-formulas-for-sl-two` — **example** `[LA]`;
-   cite RL-7 for the formulas and retain only the finite rank-one check here.
+   derive both formulas locally from the explicit finite
+   $\mathfrak{sl}_2$ weight string and its geometric sum, including the
+   cancellation at the identity.
 8. `ex-the-eight-dimensional-adjoint-representation-of-sl-three` —
    **example** `[LA]`.
 9. `ex-a-tensor-product-decomposition-for-sl-two` — **example** `[LA]`;
-   Clebsch–Gordan checked directly from $\mathfrak{sl}_2$ strings, with RL-7's
-   character derivation cited as an alternative.
+   prove Clebsch–Gordan directly from $\mathfrak{sl}_2$ strings.
 10. `cex-a-nondominant-integral-verma-quotient-that-is-infinite-dimensional` —
     **counterexample** `[LL]`; retained as a non-load-bearing RL-2 ownership
     pointer.
 11. `cex-the-full-weight-lattice-does-not-integrate-to-every-central-quotient-group` —
     **counterexample** `[LL]`; preview $SU(2)$ versus $SO(3)$.
-12. `ex-kostant-multiplicity-in-type-a-two` — **example** `[LA]`; cite RL-7
-    for Kostant's formula and keep the finite arithmetic check as a DG leaf.
 
 ### Sources and exact locators
 
@@ -8403,17 +8403,27 @@ them except where averaging or $L^2(G)$ is expressly used.
 43. `prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights` —
     **proposition** `[LA]`; a Lie-algebra module integrates iff its weights
     satisfy the group lattice condition.
-44. `thm-weyl-character-formula-for-compact-connected-lie-groups` —
+44. `lem-weyl-denominator-and-anti-invariant-orbit-sum-basis` — **lemma**
+    `[LA]`; prove the denominator identity in the character lattice of the
+    appropriate central cover and prove that Weyl anti-invariants have the
+    alternating orbit sums as a triangular basis. Half-roots are bookkeeping
+    on the cover, not assumed characters of $T$.
+45. `lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator` —
+    **lemma** `[LA]`; combine Weyl integration with character orthogonality and
+    the highest-weight triangularity from items 42--44 to identify the
+    numerator, including its leading coefficient and exclusion of lower
+    anti-invariant terms.
+46. `thm-weyl-character-formula-for-compact-connected-lie-groups` —
     **theorem** `[LA]`; prove the compact formula locally from the Weyl
     denominator/alternant identity, Weyl integration, and character
-    orthogonality. Apply that argument on the simply connected cover of the
-    derived group. For \(\lambda\in X^*(T)\), prove independence of the chosen
-    lift and descend the quotient to regular $t\in T$ before extending
-    continuously across singular elements. DG-32 and RL-7 are
-    non-load-bearing orientation only: neither supplies this formula. Neither
-    \(\rho\) nor each \(\alpha/2\) is assumed to be a character of the original
-    non-simply-connected torus.
-45. `cor-representation-ring-has-the-dominant-character-basis` — **corollary**
+    orthogonality through items 44--45. Use the finite central covering
+    $Z(G)^0\times G_{\mathrm{der}}^{\mathrm{sc}}\to G$, not merely the derived
+    cover. For \(\lambda\in X^*(T)\), prove independence of the chosen lift and
+    descend the quotient to regular $t\in T$ before extending continuously
+    across singular elements. DG-32 and RL-7 are non-load-bearing orientation
+    only: neither supplies this formula. Neither \(\rho\) nor the individual
+    half-roots \(\alpha/2\) need lie in $X^*(T)$.
+47. `cor-representation-ring-has-the-dominant-character-basis` — **corollary**
     `[LA]`; multiplication is tensor product and characters embed it in
     $\mathbb Z[X^*(T)]^W$.
 
