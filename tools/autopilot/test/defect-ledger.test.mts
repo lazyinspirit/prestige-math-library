@@ -116,6 +116,16 @@ test('a confirmed-fatal Step-6 reader warning has exactly one defect-ledger row'
   const doubled = check(duplicate, ['--reader-decisions', join(duplicate, 'reader.jsonl')]);
   assert.notEqual(doubled.status, 0);
   assert.match(doubled.stderr, /one defect, one row/);
+
+  const corrected = fixture([row({ adjudication_ref: [exactRef] }),
+    row({ defect_id: 'r9-D002', adjudication_ref: [exactRef] }), row({
+    defect_id: 'r9-D003',
+    supersedes: ['r9-D001', 'r9-D002'],
+    adjudication_ref: [exactRef],
+  })], []);
+  writeFileSync(join(corrected, 'reader.jsonl'), `${JSON.stringify(decision)}\n`);
+  assert.equal(check(corrected, ['--reader-decisions', join(corrected, 'reader.jsonl')]).status, 0,
+    'an append-only correction leaves one active owner while preserving prior rows');
 });
 
 test('coverage reports a run whose only confirmed fatal came from a Step-6 reader', () => {

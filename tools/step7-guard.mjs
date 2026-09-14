@@ -77,15 +77,20 @@ const againstLabel = option('--against');
 const publishedRepairsPath = option('--published-repairs');
 const terminalResolutionsPath = option('--terminal-resolutions');
 const auditorCertificationsPath = option('--auditor-certifications');
-// A fatal repair can expose a defect in one of its own run-local prerequisites.
-// That prerequisite has no judge row of its own, so the ordinary fatal licence
-// cannot name it.  After automatic repair exhaustion, either the owner or the
-// independent final adjudicator reviewing the exposing item may authorize that
-// one dependency repair explicitly.  The receipt is deliberately exact: same
-// group, direct dependency, a real confirmed-fatal exposing item, baseline and
-// repaired hashes, and the authoritative sources used for the correction.  An
-// FA licence additionally has to match that exposing item's terminal receipt;
-// prose claiming that an FA was involved is not authority.
+// A fatal repair can expose a defect in one of its own run-local prerequisites,
+// or force a downstream consumer to stop naming the retracted interface. Those
+// items have no judge rejection of their own, so the ordinary fatal licence
+// cannot name them. After automatic repair exhaustion the owner may authorize
+// an exact downstream impact repair; prerequisites may also be authorized by
+// the independent final adjudicator reviewing the exposing item. Both receipt
+// forms are deliberately exact: same group, baseline and repaired hashes, the
+// authoritative sources used for the correction, and either one direct
+// prerequisite edge or an ordered consumer path rooted at a real fatal. Every
+// intermediate consumer in an impact path must already have its own licence,
+// so one fatal cannot silently bless arbitrary edits throughout its dependency
+// cone. An FA prerequisite licence additionally has to match the exposing
+// item's terminal receipt; prose claiming that an FA was involved is not
+// authority.
 const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
 
 const usage = () => {
@@ -205,11 +210,20 @@ if (existsSync(alertsPath) && existsSync(alertDecisionsPath)) {
   try { alerts = JSON.parse(readFileSync(alertsPath, 'utf8'))?.alerts ?? []; }
   catch { error('reader-warning-alerts-json', `${alertsPath}: invalid JSON`); }
   const byAlert = new Map(alerts.map((alert) => [alert.alert_id, alert]));
+  const latestDecisions = new Map();
   for (const [index, line] of readFileSync(alertDecisionsPath, 'utf8').split(/\r?\n/).entries()) {
     if (!line.trim()) continue;
     let record;
     try { record = JSON.parse(line); }
     catch { error('reader-warning-decision-json', `${alertDecisionsPath}:${index + 1}: invalid JSON`); continue; }
+    if (typeof record?.alert_id === 'string') latestDecisions.set(record.alert_id, { record, index });
+  }
+  // The decisions ledger is append-only. Match step7-scope's disposition
+  // semantics: a later row for the same stable alert id supersedes the earlier
+  // decision while preserving it as history. Validating every historical fatal
+  // row makes a corrected hash receipt impossible to record without deleting
+  // evidence, which is the opposite of the ledger contract.
+  for (const { record, index } of latestDecisions.values()) {
     if (record.outcome !== 'confirmed_fatal') continue;
     const alert = byAlert.get(record.alert_id);
     const where = `${alertDecisionsPath}:${index + 1}`;
@@ -340,7 +354,7 @@ if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
 
 // ---- exact owner-authorized run-local prerequisite repairs -----------------
 
-/** id -> Set of baseline states licensed by an exact owner prerequisite row. */
+/** id -> Set of baseline states licensed by an exact owner run-local repair row. */
 const ownerPrerequisiteLicences = new Map();
 if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepairsPath))) {
   for (const [index, line] of readFileSync(resolvePath(ownerPrerequisiteRepairsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
@@ -352,7 +366,9 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
     const where = `${ownerPrerequisiteRepairsPath}:${index + 1}`;
     const authorizedByOwner = record?.authorized_by === 'owner';
     const authorizedByFa = record?.authorized_by === 'final-adjudicator';
-    if (record?.version !== 1 || record?.kind !== 'owner-prerequisite-repair'
+    const prerequisiteRepair = record?.kind === 'owner-prerequisite-repair';
+    const impactRepair = record?.kind === 'owner-impact-repair';
+    if (record?.version !== 1 || (!prerequisiteRepair && !impactRepair)
       || record?.run !== scope.run || (!authorizedByOwner && !authorizedByFa)
       || typeof record?.id !== 'string' || typeof record?.found_via !== 'string'
       || typeof record?.defect !== 'string' || record.defect.trim().length < 20
@@ -363,7 +379,7 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       || !/^[a-f0-9]{64}$/.test(record?.pre_sha256 ?? '')
       || !/^[a-f0-9]{64}$/.test(record?.post_sha256 ?? '')) {
       error('owner-prerequisite-repair-shape',
-        `${where}: requires a version-1 owner-prerequisite-repair with run, id, found_via, `
+        `${where}: requires a version-1 owner-prerequisite-repair or owner-impact-repair with run, id, found_via, `
         + 'authorized_by:"owner" or "final-adjudicator", exact pre/post hashes, at least two HTTPS source URLs, and concrete defect/correction evidence',
         record?.id ?? null);
       continue;
@@ -377,17 +393,62 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       error('owner-prerequisite-repair-group', `${where}: prerequisite and exposing item must belong to the recorded group`, record.id);
       continue;
     }
-    const exposingText = readFileSync(join(ITEMS, `${record.found_via}.md`), 'utf8');
-    const deps = frontmatterList(exposingText, 'deps');
-    if (!deps.includes(record.id)) {
-      error('owner-prerequisite-repair-not-direct', `${where}: ${record.id} is not a direct dependency of ${record.found_via}`, record.id);
-      continue;
+    if (prerequisiteRepair) {
+      const exposingText = readFileSync(join(ITEMS, `${record.found_via}.md`), 'utf8');
+      const deps = frontmatterList(exposingText, 'deps');
+      if (!deps.includes(record.id)) {
+        error('owner-prerequisite-repair-not-direct', `${where}: ${record.id} is not a direct dependency of ${record.found_via}`, record.id);
+        continue;
+      }
+      if (!(fatalLicences.get(record.found_via)?.size)) {
+        error('owner-prerequisite-repair-no-fatal', `${where}: found_via has no exact confirmed-fatal judge adjudication`, record.id);
+        continue;
+      }
+    } else {
+      if (!authorizedByOwner) {
+        error('owner-impact-repair-authority', `${where}: downstream impact repairs require authorized_by:"owner"`, record.id);
+        continue;
+      }
+      const path = record.dependency_path;
+      if (!Array.isArray(path) || path.length < 2 || path[0] !== record.found_via
+        || path.at(-1) !== record.id || new Set(path).size !== path.length
+        || path.some((id) => typeof id !== 'string')) {
+        error('owner-impact-repair-path', `${where}: dependency_path must be a unique ordered path from found_via to id`, record.id);
+        continue;
+      }
+      if (path.some((id) => !runItems.has(id) || scope.by_item?.[id] !== group)) {
+        error('owner-impact-repair-scope', `${where}: every dependency_path item must belong to group ${group}`, record.id);
+        continue;
+      }
+      let brokenEdge = null;
+      for (let i = 1; i < path.length; i += 1) {
+        const consumerText = readFileSync(join(ITEMS, `${path[i]}.md`), 'utf8');
+        if (!frontmatterList(consumerText, 'deps').includes(path[i - 1])) {
+          brokenEdge = `${path[i - 1]} -> ${path[i]}`;
+          break;
+        }
+      }
+      if (brokenEdge) {
+        error('owner-impact-repair-not-path', `${where}: ${brokenEdge} is not a declared supplier-to-consumer edge`, record.id);
+        continue;
+      }
+      const rootLicensed = fatalLicences.get(path[0])?.has(baseline.hashes?.[path[0]])
+        || readerFatalLicences.get(path[0])?.has(baseline.hashes?.[path[0]]);
+      if (!rootLicensed) {
+        error('owner-impact-repair-no-fatal', `${where}: dependency_path root has no exact fatal licence against the Step-7 baseline`, record.id);
+        continue;
+      }
+      const unlicensedIntermediate = path.slice(1, -1).find((id) =>
+        !(fatalLicences.get(id)?.has(baseline.hashes?.[id])
+          || readerFatalLicences.get(id)?.has(baseline.hashes?.[id])
+          || ownerPrerequisiteLicences.get(id)?.has(baseline.hashes?.[id])));
+      if (unlicensedIntermediate) {
+        error('owner-impact-repair-unlicensed-intermediate',
+          `${where}: ${unlicensedIntermediate} must have its own earlier exact repair licence`, record.id);
+        continue;
+      }
     }
-    if (!(fatalLicences.get(record.found_via)?.size)) {
-      error('owner-prerequisite-repair-no-fatal', `${where}: found_via has no exact confirmed-fatal judge adjudication`, record.id);
-      continue;
-    }
-    if (authorizedByFa) {
+    if (prerequisiteRepair && authorizedByFa) {
       const terminal = terminalParsed.latest.get(record.found_via);
       const terminalSources = new Set(terminal?.final_adjudicator?.authoritative_sources ?? []);
       if (terminal?.resolved_by !== 'final-adjudicator' || terminal?.disposition !== 'repaired'
@@ -405,7 +466,8 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       }
     }
     if (shortHash(record.pre_sha256) !== baseline.hashes?.[record.id]
-      || shortHash(record.post_sha256) !== now?.[record.id]) {
+      || shortHash(record.post_sha256) !== now?.[record.id]
+      || record.pre_sha256 === record.post_sha256) {
       error('owner-prerequisite-repair-stale', `${where}: exact pre/post hashes do not match the Step-7 baseline and current item`, record.id);
       continue;
     }
@@ -505,7 +567,7 @@ if (asJson) {
 } else {
   console.log(`step7-guard: baseline "${baselineLabel}"${baseline.at ? ` (${baseline.at})` : ''} vs ${summary.compared_against}`);
   console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal judge/reader adjudication, exact owner prerequisite repair, or terminal resolution`);
+  console.log(`  ${summary.licensed_by_fatal_or_terminal_resolution}/${changed.length} change(s) licensed by a confirmed_fatal judge/reader adjudication, exact owner run-local repair, or terminal resolution`);
   for (const w of warnings) console.log(`  WARN  ${w.code}: ${w.message}`);
   for (const e of errors) console.log(`  ERROR ${e.code}: ${e.message}`);
   console.log(errors.length ? `\nFAIL — ${errors.length} error(s)` : '\nOK — every step-7 edit is licensed by a confirmed fatal defect');

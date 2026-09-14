@@ -1,7 +1,20 @@
 // Reflow proof-body paragraphs to single physical lines, because the precheck
-// checker (tools/precheck.mts) is line-based: each numbered step must sit on one
-// physical line. Generators sometimes hard-wrap a long step across several lines;
-// run this before precheck to join them back.
+// checker (tools/precheck.mts) is line-based: a step's justification tags are
+// read off the END of a physical line, and generators sometimes hard-wrap a
+// long step across several lines.
+//
+// ONE EXCEPTION, because joining can DESTROY that credit. Many authored batches
+// (all of phase-2-next-18's batch 1, among others) end a step's FIRST physical
+// line with its bracketed justification group and continue the step on the
+// following lines. Joining such a paragraph moves the tag off the end and
+// replaces it with whatever the step happens to end in — a content bracket such
+// as "[finite counting]" (precheck: bad-tag) or nothing at all (precheck:
+// untagged-steps) — turning an item that passes into one that fails. A line
+// that starts a numbered step AND already ends with a bracketed group is
+// therefore emitted as its own logical line, and only its continuation is
+// joined. A paragraph whose step tag is not yet at the end of a physical line
+// (the wrapped-tag shape) is still joined exactly as before, which is the case
+// this tool exists for.
 //
 // Only touches text from the '## Facts & Assumptions' marker onward, and only
 // joins soft-wrapped lines WITHIN a paragraph. Frontmatter, the prose above the
@@ -10,6 +23,10 @@
 //
 //   node tools/tsx-run.mjs tools/reflow.mts items/<id>.md [more.md ...]
 import { readFileSync, writeFileSync } from "node:fs";
+
+/** A bracketed tag group at the end of a line, optionally followed by "." and
+ *  a QED glyph — the shape the line-based checker credits. */
+const ENDS_IN_BRACKET = /\]\s*(?:∎|□|■|\\square|\\blacksquare)?\s*\.?\s*$/;
 
 function reflow(md: string): string {
   const marker = "\n## Facts & Assumptions\n";
@@ -33,6 +50,11 @@ function reflow(md: string): string {
       // like "2.2 ...", which precheck then read as a numbered step after the
       // QED. Continuation lines still join onto their own bullet.
       else if (/^([-*+]|\d+[.)])\s+/.test(s)) { flush(); buf.push(ln); }
+      // The tagged-step exception described in the header: keep this line as a
+      // logical line of its own, so the checker still reads its trailing tag.
+      else if (buf.length === 0 && /^\d+\.\d+\s/.test(s) && ENDS_IN_BRACKET.test(s)) {
+        flush(); merged.push(ln);
+      }
       else buf.push(ln);
     }
     flush();

@@ -1,0 +1,1729 @@
+[
+  {
+    "order": 366.029,
+    "id": "topological-vector-bundles-and-grassmannian-classification",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Topological Vector Bundles and Grassmannian Classification",
+    "companion": "topological-vector-bundles-and-grassmannian-classification-examples",
+    "requires": [
+      "fibrations-fiber-bundles-and-homotopy-exact-sequences",
+      "obstruction-theory-postnikov-towers-and-classifying-spaces",
+      "partitions-of-unity-and-paracompactness"
+    ],
+    "items": [
+      {
+        "id": "def-real-and-complex-topological-vector-bundle",
+        "kind": "definition",
+        "title": "Real and complex topological vector bundles",
+        "statement": "For F equal to R or C, GL_n(F) carries the Euclidean matrix subspace topology, and a rank-n F-vector bundle is locally a product with fiberwise-linear charts. Evaluating chart changes on the standard basis proves their matrix-valued transition functions are continuous. Rank zero, empty bases, and numerable linear atlases are included.",
+        "deps": [
+          "def-locally-trivial-fiber-bundle",
+          "def-invertible-matrix-and-general-linear-group"
+        ],
+        "strategy": "This fixes the linear-chart and transition-function conventions, including the multiplication order. Local constancy of rank follows from charts but variable rank is deferred to the K-theory page.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a72",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+        "kind": "lemma",
+        "title": "AC supplies the dependent-choice instances used in vector-bundle constructions",
+        "statement": "In ZF, AC implies the prescribed-initial-point form of DC: for every nonempty set X, every entire relation R on X, and every a in X, there is a sequence x:N\u2192X with x_0=a and x_n R x_{n+1} for every n. Consequently a vector-bundle theorem stated under AC may discharge a separately declared DC hypothesis without another choice principle.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "strategy": "For each x choose one element of its nonempty R-successor set by AC, obtaining a function s:X\u2192X. Recursion from the prescribed a defines x_0=a and x_{n+1}=s(x_n), which is the required DC sequence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas J. Jech, The Axiom of Choice, \u00a72.4.1",
+              "url": "https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-vector-bundles-glued-from-transition-cocycles",
+        "kind": "theorem",
+        "title": "Vector bundles are glued from transition cocycles",
+        "statement": "Continuous GL_n(F)-valued cocycles glue to a vector bundle. The coproduct quotient is open, its restriction over each cover member is quotient, and this proves continuity of the projection and local trivializations; coboundary changes give isomorphic bundles.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "thm-quotient-universal-property"
+        ],
+        "strategy": "Prove the coproduct quotient is open via the overlap homeomorphisms, then restrict the quotient map to each saturated chart domain to establish the projection and chart continuity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a7\u00a72\u20133",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-vector-bundle-map-section-subbundle-and-isomorphism",
+        "kind": "definition",
+        "title": "Bundle maps, sections, subbundles, and isomorphisms",
+        "statement": "A vector-bundle map E\u2192E' over f:X\u2192Y is continuous, lies over f, and is linear on fibers. A section s:X\u2192E satisfies ps=id; it is nowhere zero when s(x)\u22600 in every fiber. A rank-r subbundle is a subset whose fibers are linear subspaces and which is locally carried by bundle charts to U\u00d7F^r\u00d7{0}. A bundle isomorphism is an invertible bundle map over the identity. Short exact sequences mean fiberwise exact bundle maps with the kernel and image carrying these subbundle structures.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle"
+        ],
+        "strategy": "The locally split clause prevents a merely fiberwise family of subspaces from being called a subbundle and makes the later quotient and orthogonal-complement constructions well-defined.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a7\u00a72\u20133",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-pullback-vector-bundle-and-pullback-section",
+        "kind": "definition",
+        "title": "Pullback vector bundles and sections",
+        "statement": "For f:X\u2192Y and q:E\u2192Y, define f*E={(x,e):f(x)=q(e)} with projection to X and fiberwise operations inherited from E. Pulling a linear chart over U back to f^{-1}(U) makes f*E a vector bundle, and (x,e)\u21a6e is its canonical bundle map over f. A section s of E pulls back to x\u21a6(x,s(f(x))).",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "def-subspace-topology-top"
+        ],
+        "strategy": "Use the subspace of X\u00d7E and the pulled-back chart formula. The defining equation proves that all fiberwise operations and the universal bundle map are well-defined.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a73",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism",
+        "kind": "proposition",
+        "title": "Vector-bundle pullback is canonically functorial",
+        "statement": "For E\u2192Z and X\u2192^f Y\u2192^g Z there are canonical bundle isomorphisms id*E\u2245E and f*(g*E)\u2245(g\u2218f)*E, natural in bundle maps and coherent for three composable maps. Under them, pullback of sections respects identities and composition.",
+        "deps": [
+          "def-pullback-vector-bundle-and-pullback-section"
+        ],
+        "strategy": "Delete the redundant coordinates: (x,(f(x),e))\u21a6(x,e). The inverse inserts f(x); subspace/product continuity proves both directions, and every coherence diagram sends a tuple to the same final pair.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a73",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
+        "kind": "definition",
+        "title": "Whitney sum, tensor, dual, Hom, and exterior-power bundles",
+        "statement": "For finite-rank F-bundles E,F over X, transition matrices define E\u2295F, E\u2297F, E*, Hom(E,F)=E*\u2297F, and \u039b^kE, with the expected fiber operations. For complex E they also define the conjugate bundle and the underlying real bundle. The zero exterior power is the trivial line, \u039b^kE is the zero bundle for k>rank(E), and all constructions commute with pullback up to the canonical isomorphisms.",
+        "deps": [
+          "thm-vector-bundles-glued-from-transition-cocycles",
+          "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism"
+        ],
+        "strategy": "Apply each finite-dimensional functor to the transition matrices; functoriality preserves cocycles. Standard fiberwise linear comparison maps in charts give independence of choices and pullback compatibility.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a73",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-numerable-vector-bundles-admit-bundle-metrics",
+        "kind": "theorem",
+        "title": "Numerable vector bundles admit bundle metrics",
+        "statement": "Assume AC. Every numerable real vector bundle has a continuous positive-definite fiber inner product, and every numerable complex vector bundle has a continuous Hermitian metric. Consequently this holds for bundles over paracompact Hausdorff bases. AC supplies the dependent-choice consequence used by the published partition theorem; the metric construction itself is choice-free when numerating charts and their subordinate partition are supplied as data.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "def-partition-of-unity-subordinate-to-a-cover",
+          "thm-subordinate-partitions-of-unity-exist",
+          "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Give F^n its standard Euclidean or Hermitian form in each numerating chart and take the locally finite weighted sum using the subordinate partition. At each point the coefficients sum to one, so the result is positive definite; support containment makes zero extension continuous.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-short-exact-sequences-of-vector-bundles-split-over-the-base",
+        "kind": "corollary",
+        "title": "Short exact sequences of numerable vector bundles split",
+        "statement": "Assume AC. If 0\u2192E'\u2192E\u2192E''\u21920 is a short exact sequence of finite-rank real or complex vector bundles over a paracompact Hausdorff base, then E\u2245E'\u2295E'' over the base. More generally it suffices that E admit a bundle metric. The splitting need not be canonical.",
+        "deps": [
+          "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "thm-numerable-vector-bundles-admit-bundle-metrics"
+        ],
+        "strategy": "Take the metric-orthogonal complement of E' in E. In local adapted frames it is a subbundle, and the quotient map restricts fiberwise to an isomorphism onto E''. Its inverse is continuous in local matrices, yielding the splitting.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lecture 16",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-finite-rank-complement-theorem-over-compact-hausdorff-bases",
+        "kind": "theorem",
+        "title": "Finite-rank complement theorem over compact Hausdorff bases",
+        "statement": "Assume AC. If E is a finite-rank real or complex vector bundle over a compact Hausdorff space X, then for some finite N there is a finite-rank bundle E' with E\u2295E'\u2245X\u00d7F^N. The empty base and rank-zero bundle satisfy the assertion with N=0.",
+        "deps": [
+          "cor-compact-hausdorff-partitions-of-unity",
+          "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+          "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose a finite trivializing subcover and a finite subordinate partition. Weighted local coordinate functionals give a fiberwise injection E\u2192X\u00d7F^N. With a bundle metric on the product, the orthogonal complement is locally a subbundle and supplies E'. Compactness is exactly what makes N finite.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.4",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lecture 20",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-homotopy-invariance-of-vector-bundle-pullback",
+        "kind": "theorem",
+        "title": "Homotopy invariance of vector-bundle pullback",
+        "statement": "Assume AC. Let X be paracompact Hausdorff and H:X\u00d7I\u2192Y a homotopy from f_0 to f_1. For every numerable finite-rank real or complex vector bundle E\u2192Y, the endpoint pullbacks f_0*E and f_1*E are isomorphic. Equivalently, the restrictions at X\u00d7{0} and X\u00d7{1} of H*E are isomorphic. No canonical endpoint isomorphism is asserted.",
+        "deps": [
+          "def-pullback-vector-bundle-and-pullback-section",
+          "thm-subordinate-partitions-of-unity-exist",
+          "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+          "thm-principal-bundles-are-classified-by-maps-to-bg",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use a locally finite numerated system of linear charts for H*E and subdivide each vertical interval into finitely many chart strips, as in the numerable-bundle lifting proof. Compose the resulting fiberwise-linear chart transports. The locally finite weighting/least-strip construction makes the endpoint map continuous and invertible by reversing the interval.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.7",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lecture 17",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-frame-bundle-and-associated-vector-bundle",
+        "kind": "definition",
+        "title": "Frame bundles and associated vector bundles",
+        "statement": "For a rank-n F-vector bundle E, Fr(E) has fiber the ordered linear isomorphisms F^n\u2192E_x and right action by precomposition with GL_n(F); linear bundle charts make it a principal GL_n(F)-bundle. Conversely, for a principal GL_n(F)-bundle P, the standard left representation on F^n gives P\u00d7_{GL_n(F)}F^n. Evaluation [u,v]\u21a6u(v) canonically identifies Fr(E)\u00d7_{GL_n(F)}F^n with E, compatibly with pullback and numerations.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "def-principal-g-bundle-and-associated-fiber-bundle",
+          "prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback"
+        ],
+        "strategy": "Write the frame and evaluation formulas in each linear chart. The GL action is free and transitive on frames, and the associated quotient relation is precisely what makes evaluation independent of the chosen frame representative.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.906 notes, Lectures 16 and 18",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            },
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-oriented-real-vector-bundle-and-oriented-frame-bundle",
+        "kind": "definition",
+        "title": "Oriented real bundles and oriented frame bundles",
+        "statement": "An orientation of a rank-n real vector bundle is a section of its orientation double cover, equivalently a continuous choice of orientation of its fibers. Orientation-preserving bundle maps have positive-determinant local matrices. The positively oriented frames form a principal GL_n^+(R)-bundle. The rank-zero bundle has its canonical orientation. An H-reduction of a principal G-bundle is a principal H-subbundle whose extension of structure group is the original G-bundle.",
+        "strategy": "Construct the orientation double cover in linear charts, identify its sections with positive-frame components, and check that the transition functions between oriented charts lie in GL_n^+(R). This definition uses neither a metric nor a choice principle.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "def-principal-g-bundle-and-associated-fiber-bundle"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles and K-Theory, Sections 1.1-1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "oriented bundles and frames, printed pp.25-27"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Choice-free definition; the later SO(n)-reduction proposition assumes a supplied metric."
+      },
+      {
+        "id": "prop-orientation-is-equivalent-to-an-so-n-reduction",
+        "kind": "proposition",
+        "title": "Orientation is equivalent to an SO(n)-reduction",
+        "statement": "For a numerable rank-n real vector bundle with a bundle metric, orientations are in natural bijection with reductions of its orthonormal frame bundle from O(n) to SO(n). Orientation-preserving isomorphisms preserve these reductions.",
+        "strategy": "An orientation selects the positive component in each O(n)-fiber, producing an SO(n)-subbundle. Conversely an SO(n)-subbundle transports the standard orientation. Verify the constructions are inverse in local orthonormal charts.",
+        "deps": [
+          "def-oriented-real-vector-bundle-and-oriented-frame-bundle"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles and K-Theory, Sections 1.1-1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "oriented structure-group reduction, printed pp.25-27"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Local bundle argument after a metric is fixed."
+      },
+      {
+        "id": "def-stiefel-space-grassmannian-and-tautological-bundle",
+        "kind": "definition",
+        "title": "Stiefel spaces, Grassmannians, and tautological bundles",
+        "statement": "V_n(F^N) is the space of orthonormal n-frames in F^N and Gr_n(F^N) the space of n-planes, with V_n\u2192Gr_n the principal O(n)- or U(n)-bundle. The tautological bundle \u03b3_n^N has total space {(W,v):v\u2208W}. Standard coordinate inclusions define V_n(F^\u221e), Gr_n(F^\u221e), and \u03b3_n with the weak direct-limit topology; the later Schubert theorem proves that this is a CW topology. Gr_0(F^N) and Gr_0(F^\u221e) are points.",
+        "deps": [
+          "def-frame-bundle-and-associated-vector-bundle",
+          "thm-vector-bundles-glued-from-transition-cocycles",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology"
+        ],
+        "strategy": "Projection matrices or graph charts give the finite Grassmannian topology and local trivializations; the tautological bundle is associated to the Stiefel principal bundle. The stable spaces use the specified finite-stage inclusions and weak topology.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a75",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-oriented-grassmannian-and-tautological-oriented-bundle",
+        "kind": "definition",
+        "title": "Oriented Grassmannians and the universal oriented bundle",
+        "statement": "Gr_n^+(R^N) is the space of oriented n-planes, with tautological oriented bundle gamma_n^+. Its stable colimit Gr_n^+(R^infinity) is the chosen model BSO(n). For n>=1 the forgetful map Gr_n^+->Gr_n is a double cover and pulls gamma_n back to gamma_n^+ after forgetting orientation; for n=0 both Grassmannians are points.",
+        "strategy": "Construct Gr_n^+ as the quotient of oriented orthonormal n-frames by SO(n). The Stiefel total space is free, and the tautological orientation descends from the ordered frame.",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-oriented-real-vector-bundle-and-oriented-frame-bundle"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles and K-Theory, Sections 1.1-1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "oriented Grassmannians following Theorem 1.16, printed p.31"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Definition and quotient construction."
+      },
+      {
+        "id": "thm-stable-stiefel-space-is-contractible",
+        "kind": "theorem",
+        "title": "The stable Stiefel space is contractible",
+        "statement": "For F=R or C and fixed n\u22650, V_n(F^\u221e) is contractible. For n=0 the space is already a point; for n>0 an explicit contraction is obtained by moving every frame to odd coordinates and then rotating it to a fixed frame in the even coordinates. Both the odd- and even-coordinate embeddings are homotopic to the identity through Gram-normalized injective linear paths.",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle"
+        ],
+        "strategy": "Let O and P send coordinate i to coordinates 2i-1 and 2i, respectively, and let E be the fixed frame in coordinates 2,4,...,2n. The injective maps (1-s)I+sO and (1-s)I+sP, followed by continuous Gram normalization, give both parity displacement homotopies. Orthogonality makes cos(theta)O(u)+sin(theta)E a frame and contracts to E. Finite Stiefel stages are compact Hausdorff, so the k-omega finite-product theorem turns stagewise continuity into ordinary continuity on the product with the interval.",
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 18.906 notes, Lectures 20\u201321",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            },
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Franklin and Thomas, A Survey of k-omega Spaces",
+              "url": "https://topology.nipissingu.ca/tp/reprints/v02/tp02105.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-a-bundle-embedding-produces-its-grassmannian-classifying-map",
+        "kind": "lemma",
+        "title": "A bundle embedding produces its Grassmannian classifying map",
+        "statement": "Assume AC. If j:E\u2192X\u00d7F^N is a continuous fiberwise-linear embedding of a rank-n bundle, then c_j(x)=j(E_x) is continuous as a map X\u2192Gr_n(F^N), and e\u21a6(p(e),j(e)) identifies E with c_j*\u03b3_n^N. A supplied numeration gives an embedding into X\u00d7F^S with locally finite coordinates. Every numeration has a countable numerable refinement, so S may be N and the target F^infinity; over a compact Hausdorff base only finitely many coordinates are needed.",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-partition-of-unity-subordinate-to-a-cover",
+          "thm-finite-rank-complement-theorem-over-compact-hausdorff-bases",
+          "thm-principal-bundles-are-classified-by-maps-to-bg",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "In a local frame, the embedding is a full-rank matrix; its Gram projection A(A* A)^{-1}A* varies continuously and records the image plane. Weighted chart coordinates give the locally finite global embedding. Use the published countabilization of a numeration to obtain F^infinity under AC; compactness leaves a finite numeration. The displayed map to the tautological pullback is a chartwise bundle isomorphism.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Theorem 1.16",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lecture 20",
+              "url": "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely",
+        "kind": "lemma",
+        "title": "Homotopic Grassmannian maps classify isomorphic bundles and conversely",
+        "statement": "Fix F=R or C and assume AC. Homotopic maps X\u2192Gr_n(F^\u221e) pull back isomorphic tautological bundles over paracompact Hausdorff X; conversely isomorphic pullbacks have homotopic stabilized classifying maps.",
+        "deps": [
+          "thm-homotopy-invariance-of-vector-bundle-pullback",
+          "lem-a-bundle-embedding-produces-its-grassmannian-classifying-map",
+          "thm-stable-stiefel-space-is-contractible",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The forward implication is endpoint invariance of the pulled-back tautological bundle. For the reverse, use the isomorphism to view both maps as embeddings of one bundle, move their ambient coordinate blocks apart, and rotate one stabilized embedding to the other through fiberwise injections; taking image planes gives the homotopy. The infinite coordinate shift is homotopic to the identity through the contractible stable frame space.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Theorem 1.16",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lectures 19\u201321",
+              "url": "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
+        "kind": "theorem",
+        "title": "Numerable vector bundles are classified by stable Grassmannians",
+        "statement": "Assume AC. For every paracompact Hausdorff CGWH space X and n\u22650, pullback gives natural bijections [X,Gr_n(R^\u221e)]\u2245Vect_n^R(X) and [X,Gr_n(C^\u221e)]\u2245Vect_n^C(X), where the right sides are isomorphism classes of numerable rank-n bundles. These Grassmannians are BO(n) and BU(n) in this model. The assertion also holds for any CGWH X when numerability is supplied explicitly; it does not classify nonnumerable bundles.",
+        "deps": [
+          "lem-a-bundle-embedding-produces-its-grassmannian-classifying-map",
+          "lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely",
+          "def-frame-bundle-and-associated-vector-bundle",
+          "thm-stable-stiefel-space-is-contractible",
+          "thm-principal-bundles-are-classified-by-maps-to-bg",
+          "thm-subordinate-partitions-of-unity-exist",
+          "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "A numerable atlas and partition give the locally finite Grassmannian map and tautological pullback. The preceding uniqueness lemma makes the class independent of embedding and proves injectivity. Pullback gives surjectivity and naturality. The frame-bundle/Milnor comparison verifies that this concrete model has the same numerability boundary as the published BG theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Theorem 1.16",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, Theorem 5.6 and Corollary 5.10",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lectures 19\u201321",
+              "url": "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-oriented-real-vector-bundles-are-classified-by-bso",
+        "kind": "theorem",
+        "title": "Oriented real vector bundles are classified by BSO(n)",
+        "statement": "Assume AC. For a paracompact Hausdorff CGWH base X and n>=0, pullback of gamma_n^+ gives a natural bijection between homotopy classes [X,Gr_n^+(R^infinity)]=[X,BSO(n)] and orientation-preserving isomorphism classes of numerable oriented rank-n real vector bundles. For n=0 both sets are singletons.",
+        "strategy": "Repeat the Grassmannian embedding construction with an oriented orthonormal frame. The Gauss map lifts uniquely to the oriented Grassmannian; oriented bundle homotopies give orientation-preserving isomorphisms, and the converse follows from the oriented version of the embedding homotopy.",
+        "deps": [
+          "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
+          "prop-orientation-is-equivalent-to-an-so-n-reduction",
+          "def-oriented-grassmannian-and-tautological-oriented-bundle",
+          "def-axiom-of-choice"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles and K-Theory, Sections 1.1-1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "oriented classification after Theorem 1.16, printed p.31"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "AC is inherited exactly from countabilizing arbitrary numerations and the paracompact numerability supplier used by the stable-Grassmannian classification theorem."
+      },
+      {
+        "id": "def-schubert-cells-in-real-and-complex-grassmannians",
+        "kind": "definition",
+        "title": "Schubert cells in real and complex Grassmannians",
+        "statement": "Fix the coordinate flag F^1\u2282\u22ef\u2282F^N. A Schubert symbol a=(a_1<\u22ef<a_n) specifies the n-planes W for which dim(W\u2229F^{a_i})=i and dim(W\u2229F^{a_i-1})=i-1. Reduced row-echelon coordinates identify this stratum with F^{d(a)}, where d(a)=\u03a3_i(a_i-i); its real dimension is d(a) for F=R and 2d(a) for F=C. Equivalently symbols are partitions fitting the n by (N-n) rectangle. For n=0 the empty symbol gives the one-point cell of dimension zero.",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle"
+        ],
+        "strategy": "The unique pivot-normalized echelon basis gives the free coordinates and the stated dimensions. The flag-incidence equalities make the definition independent of a chosen representative matrix.",
+        "sources": {
+          "references": [
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a76",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            },
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.17",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+        "kind": "theorem",
+        "title": "Schubert cells give the stable Grassmannian CW structure",
+        "statement": "The Schubert strata are open cells whose closures are unions of cells with componentwise smaller pivot symbols. They form a finite CW structure on Gr_n(F^N), and the standard inclusions Gr_n(F^N)\u2192Gr_n(F^{N+1}) are cellular subcomplex inclusions. Their union is the stated CW structure on Gr_n(F^\u221e), with each finite-dimensional subcomplex contained in a finite stage.",
+        "deps": [
+          "def-schubert-cells-in-real-and-complex-grassmannians",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology"
+        ],
+        "strategy": "Compactify each echelon coordinate chart by orthonormal pivot-normalized frames. Boundary degeneration lowers at least one pivot and hence the cell dimension. The characteristic maps satisfy closure finiteness, and the direct-limit topology is exactly the weak CW topology.",
+        "sources": {
+          "references": [
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, Theorem 6.4",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            },
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.17",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-clutching-construction-for-bundles-over-a-suspension",
+        "kind": "definition",
+        "title": "Clutching construction for bundles over a suspension",
+        "statement": "For a compact CGWH space A and continuous g:A\u2192GL_n(F), form E_g over \u03a3A by taking the trivial bundles on the two cones C_+A and C_-A and identifying (a,v)_+ with (a,g(a)v)_- on the equator. This convention makes the circle map z\u21a6z clutch the chosen Hopf line over S^2; interchanging hemispheres replaces g by g^{-1}. The construction includes n=0.",
+        "deps": [
+          "thm-vector-bundles-glued-from-transition-cocycles",
+          "def-reduced-cone-suspension-and-cofiber-sequence"
+        ],
+        "strategy": "Use collar neighborhoods of the equator to turn the gluing formula into a two-chart transition cocycle. Quotient charts prove local triviality, and the printed hemisphere convention fixes the later sign.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Clutching Functions in \u00a71.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a73",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range",
+        "kind": "theorem",
+        "title": "Clutching classifies vector bundles over spheres in the stable range",
+        "statement": "For q\u22651, rank-n F-bundles over S^q are obtained by clutching maps S^{q-1}\u2192GL_n(F); two maps give isomorphic bundles exactly when they differ by homotopy and by left and right changes of hemisphere trivialization that extend over the two disks. For F=C and q\u22652 this is \u03c0_{q-1}(GL_n(C)); stabilization is already an isomorphism for q\u22642n. For F=R it is stable for q<n, with the q=1 component/orbit case kept separate. Rank zero gives one class.",
+        "deps": [
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration"
+        ],
+        "strategy": "A finite-cover version of the transition-chart transport proves directly, without choice, that bundles on each disk are trivial; read the equatorial transition. An isomorphism changes it by maps extending over the disks, while a homotopy supplies a bundle over S^{q-1}\u00d7I. Deformation retraction GL_n(C)\u2192U(n) and GL_n(R)\u2192O(n), together with the quotient sphere fibrations U(n)\u2192U(n+1) and O(n)\u2192O(n+1), gives the printed stable ranges. The q=1 orbit statement avoids a false based classification for disconnected GL_n(R).",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.11",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lectures 17 and 21",
+              "url": "https://ocw.mit.edu/courses/18-906/algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-oriented-clutching-classifies-oriented-bundles-over-spheres",
+        "kind": "theorem",
+        "title": "Oriented clutching classifies oriented bundles over spheres",
+        "statement": "For n>=1 and k>=1, orientation-preserving isomorphism classes of oriented rank-n real bundles over S^k are classified by homotopy classes [S^{k-1},GL_n^+(R)], equivalently [S^{k-1},SO(n)]. Reversing the chosen orientation acts by conjugating with an orientation-reversing matrix.",
+        "strategy": "Choose oriented trivializations on the two hemispheres, so the equatorial transition lies in GL_n^+. Repeat the clutching equivalence proof with orientation-preserving gauge transformations and use polar deformation GL_n^+ homotopy equivalent to SO(n). Track orientation reversal explicitly.",
+        "deps": [
+          "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range",
+          "def-oriented-real-vector-bundle-and-oriented-frame-bundle",
+          "prop-orientation-is-equivalent-to-an-so-n-reduction"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles and K-Theory, Sections 1.1-1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "oriented clutching discussion, printed pp.25-27"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Finite-cover clutching argument."
+      }
+    ]
+  },
+  {
+    "order": 366.03,
+    "id": "topological-vector-bundles-and-grassmannian-classification-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Topological Vector Bundles and Grassmannian Classification \u2014 Examples",
+    "companion": "topological-vector-bundles-and-grassmannian-classification",
+    "requires": [
+      "topological-vector-bundles-and-grassmannian-classification"
+    ],
+    "items": [
+      {
+        "id": "ex-mobius-and-trivial-real-lines-over-the-circle",
+        "kind": "example",
+        "title": "The M\u00f6bius and trivial real lines over the circle",
+        "statement": "The two isomorphism classes of real line bundles over S^1 are the product line and the M\u00f6bius line. In the clutching description over S^1=\u03a3S^0 they are distinguished by whether the two transition values lie in the same or opposite components of GL_1(R).",
+        "deps": [
+          "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range"
+        ],
+        "strategy": "Normalize one transition value to +1. The other has positive or negative sign, unchanged by homotopy; positive gives the cylinder and negative gives the M\u00f6bius identification. These exhaust \u03c0_0(GL_1(R)).",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1 M\u00f6bius example",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-tautological-real-and-complex-lines-over-projective-space",
+        "kind": "example",
+        "title": "Tautological lines over projective spaces",
+        "statement": "The tautological line over finite real or complex projective space has the standard finite-stage Grassmannian classifying map. At N=\u221e, projective space and its tautological line are the filtered unions inside F^\u221e, and the classifying map is the identity of BO(1) or BU(1).",
+        "deps": [
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians"
+        ],
+        "strategy": "The image plane of the tautological inclusion is the line labeling the base point, so the embedding lemma returns exactly the standard Grassmannian inclusion and its tautological pullback.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Examples in \u00a7\u00a71.1\u20131.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a7\u00a72 and 5",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-hopf-line-bundle-over-the-two-sphere-by-clutching",
+        "kind": "example",
+        "title": "The Hopf line bundle over S\u00b2 by clutching",
+        "statement": "Identify S^2 with CP^1 and use the clutching convention fixed above. The equatorial map g(z)=z in GL_1(C) produces the tautological Hopf line \u03b3. Interchanging the northern and southern charts changes the transition to z^{-1} and produces the dual line \u03b3*; thus the sign convention is explicit.",
+        "deps": [
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "ex-tautological-real-and-complex-lines-over-projective-space"
+        ],
+        "strategy": "Use affine coordinates [1:w] and [w':1] on CP^1. On |w|=1 their canonical local frames differ by multiplication by w, exactly the printed clutching map; reversing chart order inverts it.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Example 1.10",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-all-complex-vector-bundles-over-the-circle-are-trivial",
+        "kind": "example",
+        "title": "All complex vector bundles over the circle are trivial",
+        "statement": "Every finite-rank complex vector bundle over S^1 is trivial, including rank zero. This contrasts with the M\u00f6bius real line.",
+        "deps": [
+          "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range"
+        ],
+        "strategy": "Clutching over S^1 uses a map from S^0. Normalize one value; GL_n(C) is path connected by polar deformation followed by diagonal phase paths, so the other value is homotopic to the identity and the clutching is trivial.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 1.11 discussion",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-rank-zero-and-empty-base-vector-bundle-classification",
+        "kind": "example",
+        "title": "Rank-zero and empty-base vector-bundle classification",
+        "statement": "For every X the rank-zero vector bundle is uniquely X\u2192X, so Vect_0^F(X) and [X,Gr_0(F^\u221e)] are singletons. For X empty and any n, the unique empty total-space bundle and the unique map from the empty space likewise give singleton classification sets.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "def-stiefel-space-grassmannian-and-tautological-bundle"
+        ],
+        "strategy": "A zero-dimensional fiber has one vector and all chart maps are forced. There is one map to the one-point Gr_0, and exactly one function with empty domain to any Grassmannian.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1 conventions",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-oriented-two-plane-bundles-over-s-two-by-winding-number",
+        "kind": "example",
+        "title": "Oriented two-plane bundles over the two-sphere by winding number",
+        "statement": "Oriented real two-plane bundles over S^2 are indexed by the winding number m in pi_1(SO(2))=Z of their clutching map. Reversing the fiber orientation sends m to -m.",
+        "strategy": "Identify SO(2) with the circle and apply oriented clutching. Conjugation by a reflection sends a rotation to its inverse, so the induced loop has opposite winding number.",
+        "deps": [
+          "thm-oriented-clutching-classifies-oriented-bundles-over-spheres",
+          "thm-fundamental-group-of-the-circle"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles and K-Theory, Sections 1.1-1.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf",
+              "locator": "oriented clutching and low-dimensional examples, printed pp.25-27"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Explicit homotopy calculation."
+      },
+      {
+        "id": "cex-the-tautological-line-over-rp-infinity-has-no-finite-rank-complement",
+        "kind": "counterexample",
+        "title": "The tautological line over RP\u221e has no finite-rank complement",
+        "statement": "Assume AC. The tautological real line \u03b3 over RP^\u221e has no finite-rank bundle \u03b7 for which \u03b3\u2295\u03b7 is trivial. Thus compactness cannot be removed from the finite-rank complement theorem.",
+        "deps": [
+          "ex-tautological-real-and-complex-lines-over-projective-space",
+          "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "thm-cellular-homology-computes-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "def-compactly-generated-conventions-for-based-homotopy",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "If \u03b3 had a complement inside a finite trivial bundle, its classifying map id:RP^\u221e\u2192RP^\u221e would be homotopic to a map through some finite RP^{N-1}. The published finite-projective-space calculation proves that all cellular differentials reduce to zero over F_2; together with the stable Schubert CW structure and the cellular comparison theorem this gives nonzero H_k(RP^\u221e;F_2) in every degree, whereas H_k(RP^{N-1};F_2)=0 for k\u2265N. Homotopy invariance gives the contradiction. AC is inherited only from the classification theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Example 3.6 referenced after Proposition 1.4",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, Problem 5-E",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-vector-bundle-classification-without-numerability-can-fail",
+        "kind": "counterexample",
+        "title": "Vector-bundle classification can fail without numerability",
+        "statement": "Assume AC. Let L be the smooth long line. Its tangent line bundle TL is locally trivial but nonnumerable, so it is not pulled back from the universal tautological line over Gr_1(R^\u221e) by any map L\u2192Gr_1(R^\u221e). The locally compact Hausdorff space L is CGWH but is outside the library's second-countable manifold convention.",
+        "deps": [
+          "thm-numerable-vector-bundles-admit-bundle-metrics",
+          "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Nyikos proves that the differentiable long line is nonmetrizable. If TL had a numeration, its locally finite weighted local inner products would give a continuous Riemannian metric; the associated path-length metric is proved directly to induce the long-line topology, a contradiction. Under AC the stable-classification proof supplies a numeration of the universal tautological line, whose pullback would be numerable, so no classifying map exists. AC is used only for that universal numeration.",
+        "sources": {
+          "references": [
+            {
+              "title": "Nyikos, The Topological Structure of the Tangent and Cotangent Bundles on the Long Line",
+              "url": "https://web.archive.org/web/20240207153423if_/http://topology.nipissingu.ca/tp/reprints/v04/tp04126s.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lectures 16 and 19",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.031,
+    "id": "complex-topological-k-theory-and-bott-periodicity",
+    "kind": "A",
+    "category": "algebraic-topology",
+    "title": "Complex Topological K Theory and Bott Periodicity",
+    "companion": "complex-topological-k-theory-and-bott-periodicity-examples",
+    "requires": [
+      "cup-cap-cross-products-and-cohomology-rings",
+      "topological-vector-bundles-and-grassmannian-classification",
+      "spectra-and-stable-homotopy-groups",
+      "simply-connected-plane-domains"
+    ],
+    "items": [
+      {
+        "id": "def-whitney-sum-monoid-of-complex-vector-bundles",
+        "kind": "definition",
+        "title": "The Whitney-sum monoid of complex vector bundles",
+        "statement": "For compact Hausdorff X, let Vect_C(X) be the set of isomorphism classes of finite-rank complex vector bundles whose rank is allowed to be locally constant on X. Whitney sum makes this a commutative monoid with zero the rank-zero bundle. On the empty space it is the one-element monoid.",
+        "deps": [
+          "def-real-and-complex-topological-vector-bundle",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
+          "def-vector-bundle-map-section-subbundle-and-isomorphism"
+        ],
+        "strategy": "Canonical swap, reassociation, and zero-bundle isomorphisms prove the monoid laws on isomorphism classes. Local charts show that rank is locally constant, and no single rank is imposed across disconnected components.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-complex-topological-k-zero-by-grothendieck-completion",
+        "kind": "definition",
+        "title": "Complex topological K\u2070 by Grothendieck completion",
+        "statement": "For compact Hausdorff X, K^0(X) is the Grothendieck group of Vect_C(X): it consists of formal differences [E]-[F] modulo (E,F)\u223c(E',F') when some bundle H satisfies E\u2295F'\u2295H\u2245E'\u2295F\u2295H. Addition is induced by Whitney sum and the map Vect_C(X)\u2192K^0(X) is universal among monoid maps to abelian groups.",
+        "deps": [
+          "def-whitney-sum-monoid-of-complex-vector-bundles"
+        ],
+        "strategy": "Use the standard group-completion quotient of M\u00d7M. The common-summand relation is an equivalence and gives the universal extension by sending (a,b) to f(a)-f(b).",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases",
+        "kind": "proposition",
+        "title": "Equality in K\u2070 is stable isomorphism over compact bases",
+        "statement": "Assume AC. For compact Hausdorff X, [E]-[F]=[E']-[F'] in K^0(X) exactly when E\u2295F'\u2295H\u2245E'\u2295F\u2295H for a finite-rank bundle H; by adding a finite complement to H, this is equivalent to E\u2295F'\u2295\u03b5^N\u2245E'\u2295F\u2295\u03b5^N for some N. In particular [E]=[F] exactly when E and F become isomorphic after adding the same trivial bundle.",
+        "deps": [
+          "def-complex-topological-k-zero-by-grothendieck-completion",
+          "thm-finite-rank-complement-theorem-over-compact-hausdorff-bases",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The first equivalence is the defining group-completion relation. Add a complement H' with H\u2295H' trivial to both sides for the trivial-stabilization form; the converse takes H=\u03b5^N.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 2.1 and following construction",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-grothendieck-ring-structure-and-rank-map",
+        "kind": "definition",
+        "title": "Grothendieck ring structure and rank map",
+        "statement": "Tensor product distributes over Whitney sum and therefore gives K^0(X) a commutative unital ring structure, with unit the trivial complex line. Fiber dimension is topologically locally constant and extends to a ring homomorphism rk:K^0(X)\u2192H^0(X;Z), where degree-zero singular cohomology is the group of integer-valued functions constant on path components. The rank of [E]-[F] is x\u21a6dim E_x-dim F_x.",
+        "deps": [
+          "def-complex-topological-k-zero-by-grothendieck-completion",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
+          "def-singular-cohomology-ring"
+        ],
+        "strategy": "Bilinearity of tensor product descends through group completion and proves the ring laws. A zero-cocycle is exactly an integer-valued function constant along every singular path, so the locally constant rank function represents its H^0 class; sum and tensor give addition and multiplication of ranks.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.1 Ring Structure",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-reduced-complex-k-theory",
+        "kind": "definition",
+        "title": "Reduced complex K-theory",
+        "statement": "For a based compact Hausdorff space (X,x_0), define K~^0(X)=ker(i_{x_0}*:K^0(X)\u2192K^0(*)\u2245Z). This is the subgroup of virtual bundles with virtual rank zero on the basepoint component; on other components the rank may differ. It is an ideal in K^0(X). For X empty reduced based K-theory is not invoked because there is no basepoint.",
+        "deps": [
+          "def-grothendieck-ring-structure-and-rank-map"
+        ],
+        "strategy": "Restriction to the chosen fiber is a unital ring map and K^0(*) is the group completion of finite-dimensional complex vector spaces, hence Z. Its kernel is therefore an ideal, with the stated component convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant",
+        "kind": "proposition",
+        "title": "K\u2070 is contravariantly functorial and homotopy invariant",
+        "statement": "Assume AC. Pullback extends uniquely to unital ring maps f*:K^0(Y)\u2192K^0(X) for maps of compact Hausdorff spaces, with id*=id and (g\u2218f)*=f*g*. Homotopic maps induce equal maps. Based maps preserve reduced K^0.",
+        "deps": [
+          "def-complex-topological-k-zero-by-grothendieck-completion",
+          "def-grothendieck-ring-structure-and-rank-map",
+          "def-reduced-complex-k-theory",
+          "prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism",
+          "thm-homotopy-invariance-of-vector-bundle-pullback",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Pullback respects Whitney sum and tensor product, so universality extends it to virtual bundles and the canonical pullback isomorphisms prove functoriality. Endpoint bundle isomorphisms for a homotopy make the two maps equal on generators, hence on the completion. A based map commutes with restriction to the basepoint.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-reduced-k-theory-exact-sequence-of-a-cofibration",
+        "kind": "theorem",
+        "title": "Reduced K-theory exact sequence of a cofibration",
+        "statement": "Assume AC. A closed based cofibration of compact Hausdorff well-pointed CGWH spaces yields exact K~^0(X/A)\u2192K~^0(X)\u2192K~^0(A), continuing indefinitely to the left through reduced suspensions. No positive-degree or desuspension groups are asserted before Bott periodicity.",
+        "deps": [
+          "def-reduced-complex-k-theory",
+          "prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant",
+          "prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases",
+          "thm-finite-rank-complement-theorem-over-compact-hausdorff-bases",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
+          "thm-tietze-extension-theorem",
+          "cor-compact-hausdorff-partitions-of-unity",
+          "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Descend stabilized bundle data across X\u2192X/A and apply the same argument to successive mapping cones, obtaining the exact sequence indefinitely to the left through suspensions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 2.9",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a7\u00a71\u20132",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-external-product-in-complex-k-theory",
+        "kind": "definition",
+        "title": "External product in complex K-theory",
+        "statement": "For compact Hausdorff X,Y, define a\u22a0b=pr_X*(a)\u00b7pr_Y*(b), giving a bilinear ring homomorphism K^0(X)\u2297K^0(Y)\u2192K^0(X\u00d7Y). This unreduced formula is choice-free. Assume AC for the reduced clause: for based well-pointed spaces, reduced classes restrict to zero on X\u2228Y; exactness and the two projection retractions identify their product with a unique class in K~^0(X\u2227Y). This is the reduced external product.",
+        "deps": [
+          "def-grothendieck-ring-structure-and-rank-map",
+          "prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant",
+          "thm-reduced-k-theory-exact-sequence-of-a-cofibration",
+          "def-smash-product-of-based-spaces",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "On bundles the formula is pr_X*E\u2297pr_Y*F, so distributivity makes it bilinear and multiplicative. A reduced factor vanishes on the corresponding wedge summand. The wedge inclusion is split by projections, forcing the preceding Puppe boundary to vanish and quotient pullback to be injective onto the restriction kernel, which supplies the unique smash class.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.1 External Product",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-determinant-classifies-loops-in-complex-general-linear-groups",
+        "kind": "lemma",
+        "title": "Determinant classifies loops in complex general linear groups",
+        "statement": "For every n\u22651, determinant induces an isomorphism \u03c0_1(GL_n(C),I)\u2192\u03c0_1(C^\u00d7,1)\u2245Z. A loop of integer k is homotopic through invertible matrices to diag(z^k,1,\u2026,1). The result is choice-free.",
+        "deps": [
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
+          "thm-higher-dimensional-spheres-are-simply-connected",
+          "cor-winding-number-classifies-loops-in-the-punctured-plane"
+        ],
+        "strategy": "Gram\u2013Schmidt gives a deformation retraction GL_n(C)\u2192U(n). Determinant has fiber SU(n) and a section diag(z,1,\u2026,1). Inductively SU(n-1)\u2192SU(n)\u2192S^{2n-1} is a locally trivial bundle; the homotopy exact sequence and simple connectivity of the sphere show SU(n) is simply connected. The determinant sequence then gives the isomorphism and the section gives the displayed representative.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Proposition 1.11",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "MIT 18.906 notes, Lectures 18 and 21",
+              "url": "https://ocw.mit.edu/courses/18-906-algebraic-topology-ii-spring-2020/e8a061a73ca1a451df8809c7a7fbc846_MIT18_906S20_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+        "kind": "theorem",
+        "title": "Hopf-line calculation of K\u2070(S\u00b2)",
+        "statement": "Assume AC. Let \u03b3 be the tautological Hopf line on S^2=CP^1 and \u03b2=[\u03b3]-1. Then K^0(S^2)\u2245Z[\u03b2]/(\u03b2^2), K~^0(S^2)=Z\u03b2, and restriction to a point is the projection to the integer summand. The sign of \u03b2 uses the earlier clutching convention g(z)=z.",
+        "deps": [
+          "def-external-product-in-complex-k-theory",
+          "lem-determinant-classifies-loops-in-complex-general-linear-groups",
+          "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range",
+          "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Clutching and the determinant lemma reduce every rank-n bundle to \u03b3^k\u2295\u03b5^{n-1}. The loops diag(z\u00b2,1) and diag(z,z) have the same determinant and hence are homotopic by that lemma, so \u03b3\u00b2\u22951\u2245\u03b3\u2295\u03b3 and \u03b2\u00b2=0. Thus [\u03b3^k]=1+k\u03b2 for every integer k. Winding number proves distinct k give distinct reduced classes, yielding the presentation and its rank splitting.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Corollary 2.3 with Example 1.13",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-normalized-clutching-data-for-bundles-over-x-times-s-two",
+        "kind": "lemma",
+        "title": "Normalized clutching data for bundles over X\u00d7S\u00b2",
+        "statement": "Assume AC and let X be compact Hausdorff. Every complex vector bundle on X\u00d7S^2 is represented, after adding a trivial bundle if necessary, as [E,f]: two copies of pr_X*E on X\u00d7D^2 glued by a bundle automorphism f of pr_X*E on X\u00d7S^1. The family can be normalized so f(x,1)=id_{E_x}; choices of normalized hemisphere trivializations for a fixed bundle give homotopic normalized clutching maps. Homotopies through normalized automorphisms give isomorphic stabilized bundles.",
+        "deps": [
+          "thm-finite-rank-complement-theorem-over-compact-hausdorff-bases",
+          "thm-homotopy-invariance-of-vector-bundle-pullback",
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Each hemisphere restriction is pulled back from X by contracting the disk. The equatorial isomorphism at z=1 identifies the two X-bundles; postcompose one trivialization by that inverse to normalize f. Two normalized trivializations differ by disk maps into Aut(E) equal to the identity at z=1, and contraction of each disk to that point gives a normalized homotopy. Stabilization puts formal differences into this common-bundle form, and gluing a homotopy over the cylinder proves invariance.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Theorem 2.2, pp.42\u201343",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-uniform-laurent-approximation-through-bundle-automorphisms",
+        "kind": "lemma",
+        "title": "Uniform Laurent approximation through bundle automorphisms",
+        "statement": "Assume AC. For compact Hausdorff X, a normalized automorphism f of pr_X*E over X\u00d7S^1 is homotopic through normalized automorphisms to a finite Laurent-polynomial family in z in local bundle coordinates. A finite partition of unity combines the local coefficient families, and the approximation can be chosen uniformly close enough to remain invertible. Moreover, normalized Laurent approximations of homotopic normalized clutching maps can be joined by a normalized Laurent-polynomial homotopy.",
+        "deps": [
+          "def-external-product-in-complex-k-theory",
+          "lem-normalized-clutching-data-for-bundles-over-x-times-s-two",
+          "cor-compact-domain-maps-are-uniformly-continuous",
+          "thm-continuous-implies-integrable",
+          "cor-compact-hausdorff-partitions-of-unity",
+          "lem-ac-supplies-dependent-choice-for-vector-bundle-constructions",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Convolve each matrix entry in the circle coordinate with the finite Poisson/Fej\u00e9r Laurent kernel. Uniform continuity on compact chart closures proves uniform convergence using the elementary split into a short arc and its complement; Riemann sums define continuous coefficient functions of x. Patch finitely many chart-supported approximants. The automorphism bundle is open, so the straight-line homotopy from f to a sufficiently close approximation stays invertible; right multiplication by its value at 1 restores normalization. Apply the same construction over X\u00d7I and concatenate Laurent endpoint corrections to obtain the homotopy clause. No Stone\u2013Weierstrass theorem is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Theorem 2.2, pp.43\u201344",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization",
+        "kind": "lemma",
+        "title": "Negative Laurent powers are cleared by Hopf-line stabilization",
+        "statement": "Assume AC. If f(z)=\u03a3_{j=-r}^s a_j z^j is Laurent-polynomial clutching data for E over X\u00d7S^2, multiplication by z^r makes it polynomial. Under the fixed clutching convention this multiplication tensors the glued bundle by pr_{S^2}*\u03b3^r. Thus the original K-class is recovered after multiplying by the inverse unit [\u03b3]^{-r}.",
+        "deps": [
+          "lem-uniform-laurent-approximation-through-bundle-automorphisms",
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "def-external-product-in-complex-k-theory",
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The scalar clutching map z^r commutes with f and is exactly the transition of \u03b3^r. Tensoring transition functions multiplies them, clearing every negative exponent. Since [\u03b3]=1+\u03b2 and \u03b2\u00b2=0, its inverse is 1-\u03b2, so this operation loses no K-class information.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Theorem 2.2, p.44",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-polynomial-clutching-families-stabilize-to-linear-clutching",
+        "kind": "lemma",
+        "title": "Polynomial clutching families stabilize to linear clutching",
+        "statement": "Let p(z)=a_0+a_1z+\u22ef+a_rz^r be polynomial clutching data that is invertible for |z|=1. After adding finitely many identity clutching summands, elementary block row and column homotopies through invertible clutching maps replace p by a general linear family a(x)z+b(x) on a finite Whitney sum of copies of E. The construction is continuous in x and preserves the stabilized clutching class.",
+        "deps": [
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles"
+        ],
+        "strategy": "Use Hatcher's explicit induction: adjoining one identity block and multiplying by elementary triangular block matrices lowers the degree by one while leaving a linear last row. Iteration converts diag(p,I,\u2026,I) to a matrix az+b. Each elementary factor is homotopic to the identity through invertible clutching maps, and all formulas are finite polynomials in the coefficient bundle maps.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, proof of Theorem 2.2, pp.44\u201345",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-linear-clutching-splits-into-eigenbundles",
+        "kind": "lemma",
+        "title": "Linear clutching splits into spectral subbundles",
+        "statement": "Assume AC. Suppose a(x)z+b(x) is invertible for every x\u2208X and |z|=1. A M\u00f6bius homotopy first reduces it, after multiplying by a constant bundle automorphism, to zI-A_x. The generalized eigenspaces of A_x with eigenvalues inside and outside the unit circle then form complementary vector subbundles E_< and E_>. The bundle clutched by zI-A has K-class pr_X*[E_>] + pr_X*[E_<]\u00b7pr_{S^2}*[\u03b3], up to the fixed inside/outside convention, so it lies in the span of 1 and \u03b2 over K^0(X).",
+        "deps": [
+          "lem-polynomial-clutching-families-stabilize-to-linear-clutching",
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "cor-winding-number-classifies-loops-in-the-punctured-plane",
+          "def-external-product-in-complex-k-theory",
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use Hatcher's explicit disk-automorphism homotopy (1+tz)(a(z+t)/(1+tz)+b)=(a+tb)z+ta+b. Since a+b is invertible, compactness permits t_0<1 with a+t_0b invertible; right multiplication by its inverse gives zI-A. Factor each characteristic polynomial into inside/outside factors. Winding number keeps root multiplicities locally constant under perturbation, so the factors and the Bezout image/kernel splitting vary continuously and form subbundles. On E_>, zI-A deforms to a constant invertible map; on E_< it deforms to zI, giving \u03b3. Uniqueness of the spectral splitting proves compatibility with direct sums.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 2.7 and Lemma 2.8, pp.46\u201349",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fundamental-product-theorem-for-complex-k-theory",
+        "kind": "theorem",
+        "title": "Fundamental product theorem for complex K-theory",
+        "statement": "Assume AC. For every compact Hausdorff X, external product is a natural ring isomorphism K^0(X)\u2297_Z K^0(S^2)\u2192K^0(X\u00d7S^2). Under K^0(S^2)=Z{1,\u03b2}, every class has a unique form pr_X*a+pr_X*b\u00b7pr_{S^2}*\u03b2.",
+        "deps": [
+          "lem-normalized-clutching-data-for-bundles-over-x-times-s-two",
+          "lem-uniform-laurent-approximation-through-bundle-automorphisms",
+          "lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization",
+          "lem-polynomial-clutching-families-stabilize-to-linear-clutching",
+          "lem-linear-clutching-splits-into-eigenbundles",
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "thm-homotopy-invariance-of-vector-bundle-pullback",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The five reductions put every stabilized clutching family into the spectral form and prove surjectivity. For injectivity, repeat the spectral-projection construction functorially to define \u03bd:K^0(X\u00d7S^2)\u2192K^0(X)\u2295K^0(X); on a+b\u03b2 it returns (a,b). Homotopies and elementary stabilization leave \u03bd unchanged, so \u03bd is a well-defined left inverse as well as the normal-form map.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Theorem 2.2 and complete proof",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-negative-degree-complex-k-groups",
+        "kind": "definition",
+        "title": "Negative-degree complex K-groups",
+        "statement": "For compact Hausdorff X and n\u22650, define K^{-n}(X)=K~^0(\u03a3^n X_+), where X_+ is X with a disjoint basepoint and suspensions use the based CGWH convention. For a based compact X use K~^{-n}(X)=K~^0(\u03a3^nX), and for a compact pair (X,A) use K^{-n}(X,A)=K~^0(\u03a3^n(X/A)). Degree zero agrees canonically with unreduced K^0(X).",
+        "deps": [
+          "def-reduced-complex-k-theory",
+          "def-reduced-cone-suspension-and-cofiber-sequence",
+          "def-compactly-generated-based-space-and-well-pointed-object"
+        ],
+        "strategy": "This fixes grading before periodic shorthand. Splitting X_+ at its added basepoint identifies the n=0 reduced group with K^0(X); quotient conventions define the relative form.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-complex-bott-periodicity",
+        "kind": "theorem",
+        "title": "Complex Bott periodicity",
+        "statement": "Assume AC. Reduced external product with \u03b2\u2208K~^0(S^2)=K^{-2}(*) is a natural isomorphism K~^{-n}(X)\u2192K~^{-n-2}(X) for every n\u22650 and based finite CW complex X, and similarly for compact pairs. It extends the grading uniquely to natural isomorphisms K^q(X)\u2245K^{q-2}(X) for every integer q.",
+        "deps": [
+          "thm-fundamental-product-theorem-for-complex-k-theory",
+          "def-negative-degree-complex-k-groups",
+          "def-external-product-in-complex-k-theory",
+          "thm-reduced-k-theory-exact-sequence-of-a-cofibration",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Apply the product theorem to based X and split K^0(X\u00d7S^2) into the two axis restrictions plus the smash summand. The coefficient of \u03b2 identifies K~^0(X) with K~^0(X\u2227S^2)=K~^0(\u03a3\u00b2X). Suspend n times and use exact-sequence naturality; then define positive degrees by the inverse two-periodic isomorphisms.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Bott Periodicity in \u00a72.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-complex-k-theory-of-spheres",
+        "kind": "corollary",
+        "title": "Complex K-theory of spheres",
+        "statement": "Assume AC. For m\u22650, K~^0(S^{2m})\u2245Z, generated by the m-fold Bott product (with S^0 interpreted in the reduced sense), while K~^0(S^{2m+1})=0. Equivalently K~^q(S^n) is Z when q-n is even and zero when q-n is odd.",
+        "deps": [
+          "thm-complex-bott-periodicity",
+          "thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range",
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The base groups are K~^0(S^0)=Z and K~^0(S^1)=0, the latter because every complex bundle on S^1 is trivial. Repeated twofold suspension via Bott gives all even and odd cases and fixes the generator multiplicatively.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.2 consequences",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory",
+        "kind": "theorem",
+        "title": "Complex K-theory is a two-periodic generalized cohomology theory",
+        "statement": "Assume AC. On finite CW pairs, K^q is a two-periodic multiplicative generalized cohomology theory with the standard even and odd coefficients. Absolute products use X_+\u2227Y_+\u2245(X\u00d7Y)_+, while reduced and relative products use smash products and quotient spaces.",
+        "deps": [
+          "prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant",
+          "thm-reduced-k-theory-exact-sequence-of-a-cofibration",
+          "def-external-product-in-complex-k-theory",
+          "def-negative-degree-complex-k-groups",
+          "thm-complex-bott-periodicity",
+          "cor-complex-k-theory-of-spheres",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Combine suspended cofibration exactness and Bott periodicity. Construct reduced products on smash products and absolute products on X_+\u2227Y_+\u2245(X\u00d7Y)_+.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a7\u00a72.1\u20132.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72, KU prespectrum",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.032,
+    "id": "complex-topological-k-theory-and-bott-periodicity-examples",
+    "kind": "B",
+    "category": "algebraic-topology",
+    "title": "Complex Topological K Theory and Bott Periodicity \u2014 Examples",
+    "companion": "complex-topological-k-theory-and-bott-periodicity",
+    "requires": [
+      "complex-topological-k-theory-and-bott-periodicity"
+    ],
+    "items": [
+      {
+        "id": "ex-k-theory-of-a-point-and-the-empty-space",
+        "kind": "example",
+        "title": "K-theory of a point and the empty space",
+        "statement": "Choice-free, K^0(*)\u2245Z by complex dimension, with the trivial line representing 1, while K^0(\u2205)=0 and reduced K~^0(*)=0. Assuming AC for the periodic assertion, K^{2k}(*)\u2245Z and K^{2k+1}(*)=0.",
+        "deps": [
+          "def-complex-topological-k-zero-by-grothendieck-completion",
+          "def-reduced-complex-k-theory",
+          "thm-complex-bott-periodicity",
+          "cor-complex-k-theory-of-spheres",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Finite-dimensional complex vector spaces are classified by dimension, so group completion of N is Z. Over the empty base all bundles are isomorphic and give the zero monoid. The reduced kernel at a point is zero. Bott gives period two, while the sphere calculation supplies the necessary odd coefficient K^{-1}(*)=K~^0(S^1)=0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a7\u00a72.1\u20132.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a7\u00a71\u20132",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-complex-k-ring-of-the-two-sphere",
+        "kind": "example",
+        "title": "The complex K-ring of S\u00b2",
+        "statement": "Assume AC. With \u03b3 clutched by z and \u03b2=[\u03b3]-1, K^0(S^2)=Z\u2295Z\u03b2 with \u03b2\u00b2=0. Reversing the hemisphere convention replaces \u03b2 by [\u03b3*]-1=-\u03b2, so the chosen Bott generator records the earlier clutching orientation.",
+        "deps": [
+          "thm-hopf-line-calculation-of-k-zero-of-the-two-sphere",
+          "def-clutching-construction-for-bundles-over-a-suspension",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the established presentation. Since [\u03b3]^{-1}=1-\u03b2 when \u03b2\u00b2=0, the dual-line convention changes \u03b2 to -\u03b2 and no other relation changes.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Corollary 2.3",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-complex-k-theory-of-even-and-odd-spheres",
+        "kind": "example",
+        "title": "Complex K-theory of even and odd spheres",
+        "statement": "Assume AC. For n\u22651, K^0(S^{2n})\u2245Z\u2295Z and K^0(S^{2n+1})\u2245Z, with reduced groups Z and 0 respectively. More generally K~^q(S^n) is Z exactly when q-n is even and is zero otherwise.",
+        "deps": [
+          "cor-complex-k-theory-of-spheres",
+          "ex-k-theory-of-a-point-and-the-empty-space",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Add the rank summand Z to the reduced sphere calculation for nonempty connected spheres, then apply the two-periodic grading formula. The n=0 boundary is covered separately by the point example.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a72.2",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a72",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-complex-k-ring-of-complex-projective-space",
+        "kind": "example",
+        "title": "The complex K-ring of CP\u207f",
+        "statement": "Assume AC. For n\u22650 and \u03b3 the tautological complex line on CP^n, K^0(CP^n)\u2245Z[x]/(x^{n+1}), where x=[\u03b3]-1. Thus 1,x,\u2026,x^n is an additive basis; for n=0, x=0 and the ring is Z.",
+        "deps": [
+          "thm-reduced-k-theory-exact-sequence-of-a-cofibration",
+          "thm-complex-bott-periodicity",
+          "def-external-product-in-complex-k-theory",
+          "ex-complex-k-ring-of-the-two-sphere",
+          "ex-complex-k-theory-of-even-and-odd-spheres",
+          "thm-schubert-cells-give-the-stable-grassmannian-cw-structure",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the CW filtration CP^0\u2282\u22ef\u2282CP^n with quotient S^{2n}; exactness and odd-sphere vanishing give short exact sequences. For Hatcher's closed-ball cover CP^r=C_0\u222a\u22ef\u222aC_r, lift x=L\u22121 to x_i\u2208K(CP^r,C_i). The relative product x_1\u22efx_r restricts on C_0/\u2202C_0\u2245S^{2r} to the r-fold Bott product, so x^r generates the restriction kernel. Apply the same argument at r+1 to obtain x^{r+1}=0 after restriction to CP^r, then induct to get the basis and truncated polynomial presentation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, Proposition 2.24, printed pp.66\u201368",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a73 projective bundle theorem",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-rank-map-on-a-disconnected-compact-space",
+        "kind": "example",
+        "title": "The rank map on a disconnected compact space",
+        "statement": "For X=X_1\u2294X_2 with both pieces nonempty compact and open, the bundle \u03b5^1 on X_1 and \u03b5^2 on X_2 has rank class (1,2) in H^0(X;Z)\u2245H^0(X_1;Z)\u00d7H^0(X_2;Z). Hence the rank map is genuinely componentwise and cannot in general be replaced by one integer.",
+        "deps": [
+          "def-grothendieck-ring-structure-and-rank-map",
+          "def-whitney-sum-monoid-of-complex-vector-bundles"
+        ],
+        "strategy": "Glue the two product bundles across the disjoint open-and-closed components. Its locally constant fiber dimension is one on the first and two on the second, giving the displayed zero-cocycle and disproving a global-rank convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "May, A Concise Course in Algebraic Topology, Chapter 24 \u00a71",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+            },
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, beginning of \u00a72.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-stable-isomorphism-does-not-imply-actual-bundle-isomorphism",
+        "kind": "counterexample",
+        "title": "Stable isomorphism does not imply actual bundle isomorphism",
+        "statement": "The real tangent bundle TS^2 is nontrivial but TS^2\u2295\u03b5_R^1\u2245\u03b5_R^3. Thus stable isomorphism need not imply actual bundle isomorphism. This real boundary example concerns the cancellation distinction underlying Grothendieck completion; it is not asserted as an equality between complex bundles in K^0.",
+        "deps": [
+          "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles",
+          "thm-no-nowhere-zero-tangent-vector-field-on-an-even-sphere"
+        ],
+        "strategy": "The normal line of the unit sphere is trivial, and tangent plus normal is the restriction of the trivial ambient R^3 bundle. The hairy-ball theorem shows TS^2 has no nowhere-zero section, hence is not a trivial rank-two bundle. The explicit scope sentence prevents conflating this real example with complex K^0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hatcher, Vector Bundles & K-Theory, \u00a71.1 tangent-bundle example",
+              "url": "https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf"
+            },
+            {
+              "title": "Milnor and Stasheff, Characteristic Classes, \u00a72",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/milnstas.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

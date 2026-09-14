@@ -1,0 +1,1405 @@
+[
+  {
+    "order": 705,
+    "id": "prikry-forcing-and-gitiks-singular-cardinal-model",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Prikry Forcing and Gitik's Singular-Cardinal Model",
+    "companion": "prikry-forcing-and-gitiks-singular-cardinal-model-examples",
+    "requires": [
+      "large-cardinals-measures-and-elementary-embeddings",
+      "symmetric-collapse-and-ultrafilter-free-models"
+    ],
+    "items": [
+      {
+        "id": "def-prikry-forcing-and-direct-extension",
+        "kind": "definition",
+        "title": "Prikry forcing and its direct-extension order",
+        "deps": [
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "def-forcing-preorder-compatibility-and-filter",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC let kappa carry a normal measure U. A Prikry condition is (s,A), where s is a finite strictly increasing sequence from kappa, A is in U, and max(s)<min(A) when s is nonempty. The stronger order end-extends s using points from A and shrinks the tail; q<=*p means q<=p with the same stem.",
+        "strategy": "Check reflexivity and transitivity with the library's stronger-below convention. Normality and kappa-completeness are not hidden in the definition; AC is declared because the page works in ZFC and later simultaneously selects homogeneous measure-one sets.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, Definition 9.9",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-normal-measure-rowbottom-homogeneity",
+        "kind": "lemma",
+        "title": "Finite-set homogeneity for a normal measure",
+        "deps": [
+          "thm-lc-measurability-normal-measures-and-embeddings",
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "If U is a normal measure on kappa and, for every n<omega, c_n maps [kappa]^n into a set of cardinality below kappa, then some A in U makes every c_n constant on [A]^n.",
+        "strategy": "For one arity prove Rowbottom homogeneity by induction, using normality to diagonalize the measure-one successor sets. Use AC to choose those sets uniformly. Apply the result for each n and use countable completeness to intersect the A_n. This is the exact homogeneity used by the Prikry-property proof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, Lemma 9.12",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-prikry-property",
+        "kind": "theorem",
+        "title": "The Prikry property",
+        "deps": [
+          "def-prikry-forcing-and-direct-extension",
+          "lem-normal-measure-rowbottom-homogeneity",
+          "lem-forcing-monotonicity-density-and-decision",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For every Prikry condition p and forcing-language sentence phi, some direct extension q<=*p decides phi.",
+        "strategy": "Colour each finite increasing extension of the stem by 0, 1, or 2 according as some tail condition forces phi, forces its negation, or neither. Homogenize all arities on one measure-one set. Density excludes colour 2 at the least relevant length, and homogeneity plus downward closure pushes the decision back to the unchanged stem. The preceding lemma owns the AC selection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, Lemmas 9.11–9.12",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-prikry-generic-sequence-changes-cofinality",
+        "kind": "theorem",
+        "title": "The Prikry generic sequence changes cofinality to omega",
+        "deps": [
+          "def-prikry-forcing-and-direct-extension",
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "def-dense-open-sets-and-model-generic-filters",
+          "thm-forcing-theorem",
+          "def-cofinality"
+        ],
+        "statement": "If G is generic for Prikry forcing at kappa, the union of the stems in G is a strictly increasing omega-sequence cofinal in kappa; hence the extension satisfies cf(kappa)=omega.",
+        "strategy": "Conditions with stem length at least n are dense, so the union has domain omega. For each alpha<kappa, shrinking the tail above alpha is a direct extension and makes a later point exceed alpha. Genericity meets both families of dense sets, and the forcing theorem transfers the conclusion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, Theorem 9.10(1)",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-prikry-forcing-adds-no-bounded-subsets",
+        "kind": "theorem",
+        "title": "Prikry forcing adds no bounded subsets of kappa",
+        "deps": [
+          "thm-prikry-property",
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "thm-forcing-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "If gamma<kappa and a Prikry name is forced to be a subset of gamma, then below every condition a direct extension forces it equal to a ground-model subset of gamma.",
+        "strategy": "Recursively for xi<gamma apply the Prikry property to decide xi-membership while retaining the stem. At limits intersect fewer than kappa measure-one tails. The final condition decides all memberships and Separation forms the ground subset. AC chooses the decision sequence; the forcing theorem identifies the valuation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, Theorem 9.10(2)",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-prikry-kappa-plus-chain-condition",
+        "kind": "lemma",
+        "title": "Prikry forcing is kappa-plus-cc but not ccc",
+        "deps": [
+          "def-prikry-forcing-and-direct-extension",
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "def-kappa-closure-distributivity-and-chain-condition",
+          "cor-cardinal-absorption",
+          "def-aleph-and-beth-hierarchies",
+          "def-cardinal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Prikry forcing at an uncountable measurable kappa has no antichain of size kappa-plus, but it has a kappa-sized antichain and is not ccc.",
+        "strategy": "There are only kappa finite stems. Two members of a kappa-plus family share a stem and become compatible after intersecting their measure-one tails. Conversely the singleton-stem conditions indexed by alpha<kappa are pairwise incompatible because one stem cannot end-extend two distinct length-one stems.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, cardinal-preservation discussion",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-prikry-forcing-preserves-cardinals",
+        "kind": "theorem",
+        "title": "Prikry forcing preserves every cardinal",
+        "deps": [
+          "thm-prikry-forcing-adds-no-bounded-subsets",
+          "lem-prikry-kappa-plus-chain-condition",
+          "thm-prikry-generic-sequence-changes-cofinality",
+          "lem-lc-complete-measures-small-fibres-and-inaccessibility",
+          "thm-chain-condition-preserves-cofinalities-and-cardinals",
+          "thm-every-infinite-cardinal-is-an-aleph",
+          "thm-regularity-of-the-alephs",
+          "cor-cardinal-absorption",
+          "def-aleph-and-beth-hierarchies",
+          "def-cardinal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Prikry forcing changes cf(kappa) to omega while preserving every ground-model cardinal.",
+        "strategy": "No new bounded subsets preserves cardinals at or below kappa. The kappa-plus chain condition preserves cardinals at and above kappa-plus by the antichain bound on names for functions. Keep the cofinality change logically separate from cardinal collapse.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, §9.2, Theorem 9.10(3)",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-magidor-and-extender-prikry-orientation",
+        "kind": "remark",
+        "title": "Magidor and extender Prikry forcing are orientation, not substitutes",
+        "deps": [
+          "thm-prikry-forcing-preserves-cardinals",
+          "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness"
+        ],
+        "statement": "Magidor forcing changes cofinality to a prescribed regular value and extender-based Prikry forcing coordinates longer measure systems. Here they are orientation only: neither substitutes for Gitik's proper-class strongly-compact-ultrafilter construction.",
+        "strategy": "Contrast parameters and outcomes with ordinary Prikry forcing and state the boundary. No consumer relies on an undeveloped Magidor or extender theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dimitriou, Symmetric Models, Singular Cardinal Patterns, and Indiscernibles, Chapter 2",
+              "url": "https://d-nb.info/1020630655/34"
+            },
+            {
+              "title": "Poveda Ruzafa, Contributions to the theory of Large Cardinals through the method of Forcing, Section 7.1",
+              "url": "https://diposit.ub.edu/bitstreams/d2c6bc55-7884-4c44-ae09-820e7c3f0fbb/download"
+            },
+            {
+              "title": "Merimovich, Prikry on Extenders, Revisited",
+              "url": "https://arxiv.org/abs/math/0305269"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-gitik-strongly-compact-filter-system-and-class-forcing",
+        "kind": "definition",
+        "title": "Gitik's filter system and proper-class forcing",
+        "deps": [
+          "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness",
+          "thm-lc-strong-compactness-fine-measures-and-logic",
+          "def-prikry-forcing-and-direct-extension",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume ZFC with a definable global well-order and a proper class of strongly compact cardinals, thinned to have no regular limit points. Assign complete uniform ultrafilters to type-1 regular coordinates and coherent ultrafilter sequences to type-2 limit coordinates using fine measures. Gitik's definable class forcing has finite coherent Prikry stems with measure-one tree upper parts; P_theta is its set-sized restriction below theta.",
+        "strategy": "Define the coordinate types, cf-prime map, finite stems, next-coordinate rule, branching clauses, direct extensions and restrictions. Strong compactness supplies only the stated fine complete ultrafilters. The ground global well-order and AC choose them coherently. Explicitly flag that ordinary set forcing does not automatically cover this proper class.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, §§1–2, pp. 2–9",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Dimitriou, Symmetric Models, Singular Cardinal Patterns, and Indiscernibles, Chapter 2 §5.1, pp. 57–60",
+              "url": "https://d-nb.info/1020630655/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-gitik-restriction-amalgamation-and-prikry-property",
+        "kind": "lemma",
+        "title": "Restriction, amalgamation, and the set-sized Prikry property",
+        "deps": [
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "cor-lc-large-cardinal-implication-ledger",
+          "cor-cardinal-absorption",
+          "def-kappa-closure-distributivity-and-chain-condition",
+          "lem-forcing-monotonicity-density-and-decision",
+          "thm-forcing-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Restrictions to finite coordinate sets closed under cf-prime preserve conditions and admit trunk amalgamation. Every regular initial segment is a complete set subforcing, every set name is bounded in one such segment, and the full set extension is their union. On a dense cone at a strongly compact cutoff, each finite-support restriction factors into a small lower part and a sufficiently closed Prikry-type tail; the tail has the direct-extension Prikry property and adds no bounded subsets below its completeness bound.",
+        "strategy": "Prove restriction and amalgamation from clauses P5–P10, then lift compatibility with a maximal antichain in a regular initial segment to establish completeness; bound the set of coordinates in the transitive closure of each set name. Factor a fixed finite support at kappa after pruning type-2 index coordinates so all tail filters are kappa-complete. The lower finite-coordinate forcing has size below kappa and its extension preserves the generated filters as kappa-complete ultrafilters. Prove direct kappa-closure by branchwise intersections. For the Prikry property, enumerate the finitely supported tail slots, define backward three-colourings by ultrafilter majority, and prune all levels simultaneously; then run the bounded-name recursion. Normality and the ordinary Rowbottom lemma are not used because the coordinate filters need not be normal.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, Lemmas 1–6, pp. 5–11",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Dimitriou, Symmetric Models, Theorem 2.37 and Claims 1–5, pp. 61–69",
+              "url": "https://d-nb.info/1020630655/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gitik-expanded-proper-class-forcing-theorem",
+        "kind": "theorem",
+        "title": "The forcing theorem for Gitik's expanded proper-class language",
+        "deps": [
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "lem-gitik-restriction-amalgamation-and-prikry-property",
+          "def-forcing-relation-for-formulas",
+          "thm-forcing-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For Gitik's definable proper-class forcing and the language expanded by predicates for the ground, generic class and ground global well-order, forcing is definable and satisfies truth. Every finite tuple of set names and every particular witness is contained in a complete set-sized restriction, and atomic membership and equality stabilize on all sufficiently large restrictions; no uniform stage-locality is asserted for arbitrary formulas mentioning the generic-class predicate.",
+        "strategy": "Follow Schürz Lemmas 6–8. Every set name belongs to some complete set subforcing P_alpha. Define atomic membership and equality by eventual agreement of the ordinary P_alpha forcing relations; completeness makes the value independent of larger alpha. Define the three added atomic predicates B, A and WO by the displayed dense extension clauses. Recurse on formula complexity, quantifying over the definable class of names at existential stages, and prove the truth lemma simultaneously: a true existential has a set name, hence bounded support, while a forced existential is met by the generic class. Boolean steps take common bounds for their finitely many name parameters and actual witnesses. The ground global well-order is available when a canonical ground witness is required. This yields a first-order definable forcing predicate for each fixed formula and the truth lemma without appealing to the ordinary set-forcing theorem for the whole class.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, Lemma 8, pp. 10–12",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gitik-intermediate-model-zf-minus-power-set",
+        "kind": "theorem",
+        "title": "The intermediate extension satisfies ZF minus Power Set plus Collection",
+        "deps": [
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "thm-gitik-expanded-proper-class-forcing-theorem",
+          "lem-gitik-restriction-amalgamation-and-prikry-property",
+          "def-forcing-relation-for-formulas",
+          "def-axiom-of-choice"
+        ],
+        "statement": "M[G] satisfies Extensionality, Pairing, Union, Infinity, Separation, Foundation and Collection, hence Replacement; Power Set is not asserted. The expanded ground-well-order predicate definably well-orders M[G].",
+        "strategy": "Use the expanded forcing theorem and Schürz Theorems 10–11. Extensionality, Pairing, Union, Infinity and Foundation localize to a complete P_alpha containing the relevant names. For Separation, for every name occurrence (sigma,p) in a, take a set maximal antichain below p deciding phi(sigma), and assemble the positive pieces; all definable antichains are sets because a hypothetical proper-class antichain thins to conditions with identical bounded parts and pairwise disjoint upper supports, which are compatible. For Collection, use the definable global well-order to choose the least regular stage and least-rank witness for each domain name. The same antichain-set argument bounds these stages over the set dom(a); ground Replacement gives one regular alpha and R_alpha^{M[G_alpha]} collects all witnesses. Separation plus Collection yields Replacement. Power Set is deliberately omitted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, Lemmas 9–10, pp. 12–13",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gitik-intermediate-model-makes-every-set-countable",
+        "kind": "theorem",
+        "title": "Every set is countable in the intermediate extension",
+        "deps": [
+          "thm-gitik-intermediate-model-zf-minus-power-set",
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "def-cofinality",
+          "lem-cofinality-is-well-defined",
+          "thm-cofinality-basics",
+          "def-countable",
+          "def-countable-choice",
+          "thm-countable-union-of-countable",
+          "lem-countable-iff-surjection-from-n",
+          "thm-transfinite-induction"
+        ],
+        "statement": "In M[G], every set is at most countable. Equivalently, every nonempty set is the range of a map from omega; the empty set is finite and is not a range of a map from nonempty omega.",
+        "strategy": "For each infinite regular ground coordinate delta, density makes the generic union g_delta a total injective map omega→delta with cofinal—not generally surjective—range. Compose it with a ground cofinal map at cf^M(lambda) to give every nonzero limit ordinal lambda cofinality omega in M[G]. Transfinite induction, the definable global well-order (hence AC_omega), and the countable-union theorem then make every ordinal at most countable. Finally well-order an arbitrary set x by the definable global order and transfer countability from its ordinal order type. Separate the empty case before using the surjection characterization.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, abstract and §2 conclusion",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-gitik-finite-support-symmetric-submodel",
+        "kind": "definition",
+        "title": "Gitik's finite-support symmetric submodel",
+        "deps": [
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "lem-gitik-restriction-amalgamation-and-prikry-property",
+          "def-symmetric-forcing-system-and-hereditarily-symmetric-names",
+          "def-forcing-name-automorphism-action"
+        ],
+        "statement": "Finite-support coordinatewise permutations act on dense invariant domains and hence on the Boolean completion. The normal filter is generated by pointwise stabilizers of finite cf-prime-closed coordinate sets. NG is the class of values of hereditarily symmetric names, equivalently the union of its set-sized supported stages.",
+        "strategy": "Verify the dense partial actions, extension to the completion and normality. Prove both directions of the stage-union characterization using finite supports and canonical name extension. The direct symmetric-collapse prerequisite supplies methodological context, while this Gitik-specific support claim is proved locally and is not inferred from Feferman–Levy support.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, pp. 9–11",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Dimitriou, Symmetric Models, Chapter 2 §5.1, pp. 59–61",
+              "url": "https://d-nb.info/1020630655/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-gitik-support-approximation-and-bounded-stage",
+        "kind": "lemma",
+        "title": "Finite-support symmetry and bounded-stage approximation",
+        "deps": [
+          "def-gitik-finite-support-symmetric-submodel",
+          "thm-gitik-expanded-proper-class-forcing-theorem",
+          "lem-symmetry-lemma-for-forcing-automorphisms",
+          "lem-gitik-restriction-amalgamation-and-prikry-property"
+        ],
+        "statement": "For pure membership formulas, truth about hereditarily symmetric parameters supported by e is decided by restriction to e. Every symmetric set has finite support and lies in a set-sized supported stage; every supported set of ordinals has a canonical name over its finite coordinate restriction. No restriction claim is made for formulas mentioning the full generic-class predicate.",
+        "strategy": "If p forces a pure formula but an extension q of p restricted to e forces its negation, equalize their finite supports and trunks, use a support-fixing finite permutation and amalgamation to make an image of p compatible with q, and contradict the symmetry lemma. Replace a supported name for a bounded set of ordinals by the name of membership decisions restricted to e. The general bounded-stage statement follows from bounded transitive closure of the HS set name; formulas mentioning the expanded generic-class predicate are excluded because that predicate is not fixed by coordinate automorphisms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, Lemmas 7 and 11–12, pp. 11–14",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Dimitriou, Symmetric Models, Lemma 2.36, pp. 60–61",
+              "url": "https://d-nb.info/1020630655/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-gitik-strong-compact-support-homogenization",
+        "kind": "lemma",
+        "title": "Strong compactness bounds symmetric decision patterns",
+        "deps": [
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "lem-gitik-restriction-amalgamation-and-prikry-property",
+          "lem-gitik-support-approximation-and-bounded-stage",
+          "thm-gitik-intermediate-model-zf-minus-power-set",
+          "thm-gitik-expanded-proper-class-forcing-theorem",
+          "cor-lc-large-cardinal-implication-ledger",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Above a strongly compact kappa containing the cardinality, rank and support data of a name x, membership decisions for symmetric subsets of x can be homogenized by kappa-complete coordinate ultrafilters and injected into a fixed ground set of three-valued codes on restrictions below kappa. Hence M[G] has a set collecting all subsets of x which lie in the symmetric model.",
+        "strategy": "Use Schürz Lemmas 13, 15 and 16 and Theorem 17. Choose kappa above the transitive-closure cardinality and rank of x as well as its support data, ensuring that every intersection used below has length below kappa. First prune every upper tree so filters on big coordinates are kappa-complete and equal small restrictions yield equal possible-extension sets. Prune again so every upper stem combined with a compatible small stem reaches the tree. For a symmetric y⊆x, choose canonical name, support and condition, then simultaneously homogenize the three-valued decision (forces in / forces out / undecided) for every z∈dom(x) and bounded small stem. Encode y by this function in the ground set 3^(dom(x)×P_2|kappa). If two support bounds agree, a symmetric-difference witness gives codes 1 and 0; if they differ, a trunk containing the larger bound gives a non-2 colour versus 2. The injection and Collection in M[G] give a set of all symmetric subsets without using Power Set in M[G].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, Lemmas 13, 15 and 16 and Theorem 17, pp. 12–20",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Dimitriou, Symmetric Models, Theorem 2.37, pp. 61–69",
+              "url": "https://d-nb.info/1020630655/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gitik-symmetric-submodel-satisfies-zf",
+        "kind": "theorem",
+        "title": "Gitik's symmetric submodel satisfies ZF",
+        "deps": [
+          "thm-gitik-intermediate-model-zf-minus-power-set",
+          "def-gitik-finite-support-symmetric-submodel",
+          "lem-gitik-support-approximation-and-bounded-stage",
+          "lem-gitik-strong-compact-support-homogenization",
+          "thm-hereditarily-symmetric-interpretations-form-a-zf-model",
+          "def-axiom-of-choice"
+        ],
+        "statement": "NG is a transitive model of every axiom of ZF. Separation, Replacement, Power Set and Foundation are obtained without importing Choice into NG.",
+        "strategy": "Use the stage-union theorem and the ordinary set-forcing symmetric-model theorem for transitivity and the elementary axioms. For x in NG, the support-homogenization lemma gives the ambient set of all NG-subsets of x; Collection bounds its members in one symmetric set stage, where it is exactly that stage's Power Set of x. Recursively form the NG-rank segments using this internal Power Set, ambient Replacement at limits and a common-stage bound. Every ambient set of NG-elements is then contained in one NG-rank segment, proving relative almost universality. Bounded absoluteness gives bounded Separation and closure under the eight Gödel operations; the standard formula-complexity argument yields full Separation, and ambient Replacement plus almost universality and internal Separation yield Replacement. Ambient global choice selects canonical bounds and witnesses, but no choice function is transferred to NG.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, Lemmas 12 and 17 and final theorem, pp. 13–20",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gitik-every-limit-ordinal-has-cofinality-omega",
+        "kind": "theorem",
+        "title": "Every limit ordinal has cofinality omega in Gitik's model",
+        "deps": [
+          "thm-gitik-symmetric-submodel-satisfies-zf",
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "def-gitik-finite-support-symmetric-submodel",
+          "def-cofinality",
+          "thm-cofinality-basics"
+        ],
+        "statement": "In NG every nonzero limit ordinal has a cofinal omega-sequence.",
+        "strategy": "For a nonzero limit ordinal lambda, compute its ground cofinality delta and choose a ground increasing cofinal map h:delta→lambda. If delta is omega, h already lies in NG. Otherwise delta is an infinite regular ground coordinate. The canonical name for the generic union g_delta:omega→delta is supported by {delta}, hence belongs to NG, and the forcing densities make its range cofinal—not onto—in delta. Then h∘g_delta is an NG cofinal omega-map into lambda. No finite map is cofinal in a limit ordinal, so the cofinality is exactly omega.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, main theorem",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Dimitriou, Symmetric Models, Lemma 2.38 and Corollary 2.41, pp. 69–70",
+              "url": "https://d-nb.info/1020630655/34"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-gitik-every-uncountable-cardinal-is-singular",
+        "kind": "corollary",
+        "title": "Every uncountable cardinal is singular in Gitik's model",
+        "deps": [
+          "thm-gitik-symmetric-submodel-satisfies-zf",
+          "thm-gitik-every-limit-ordinal-has-cofinality-omega",
+          "thm-cardinal-arithmetic-agrees-with-finite-counting",
+          "def-cardinal",
+          "def-cofinality"
+        ],
+        "statement": "NG satisfies that every uncountable cardinal has cofinality omega and hence is singular.",
+        "strategy": "In ZF an infinite initial ordinal cannot be a successor ordinal: its predecessor would have the same cardinality. Hence every uncountable cardinal is a nonzero limit ordinal. Apply the preceding theorem to obtain cofinality omega; finite cofinality is impossible for a limit ordinal, so the cardinal is singular.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, main theorem",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-gitik-relative-consistency-from-strongly-compact-cardinals",
+        "kind": "theorem",
+        "title": "Relative consistency from a proper class of strongly compact cardinals",
+        "deps": [
+          "thm-finite-fragment-relative-consistency-transfer",
+          "thm-montague-levy-finite-reflection",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "lem-derivation-finite-support-and-concatenation",
+          "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness",
+          "def-gitik-strongly-compact-filter-system-and-class-forcing",
+          "thm-gitik-expanded-proper-class-forcing-theorem",
+          "thm-gitik-symmetric-submodel-satisfies-zf",
+          "thm-gitik-every-limit-ordinal-has-cofinality-omega",
+          "cor-gitik-every-uncountable-cardinal-is-singular",
+          "def-axiom-of-choice"
+        ],
+        "statement": "If ZFC plus a proper class of strongly compact cardinals is consistent, then ZF plus 'every uncountable cardinal is singular, indeed of cofinality omega' is consistent.",
+        "strategy": "For each external finite target fragment, expand the fixed-formula Gitik forcing and symmetry proofs and retain their finitely many ground and class-theory instances. In the source theory, alternate finite reflection points with strongly compact cardinals; their omega-supremum is a transitive finite-fragment model which still sees strongly compacts unbounded, and a countable elementary collapse supplies the required CTM. Apply Felgner's no-new-sets class forcing to give it an amenable global well-order, then construct the externally countable Gitik generic and its symmetric set model. The external finite-fragment transfer theorem yields the consistency implication. Do not infer a full transitive model from consistency and do not claim an unverified uniform arithmetic proof-code map.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Schürz, Gitik's model, complete thesis",
+              "url": "https://repositum.tuwien.at/bitstream/20.500.12708/5394/2/Schuerz%20Johannes%20Philipp%20-%202018%20-%20Gitiks%20model%20or%20a%20model%20of%20ZF%20where%20all...pdf"
+            },
+            {
+              "title": "Felgner, Comparison of the axioms of local and universal choice, Theorems 1–2 and Lemmas 1–20, pages 43–59",
+              "url": "http://matwbn.icm.edu.pl/ksiazki/fm/fm71/fm7113.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 706,
+    "id": "prikry-forcing-and-gitiks-singular-cardinal-model-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Prikry Forcing and Gitik's Singular-Cardinal Model: Examples and Counterexamples",
+    "companion": "prikry-forcing-and-gitiks-singular-cardinal-model",
+    "requires": [
+      "prikry-forcing-and-gitiks-singular-cardinal-model"
+    ],
+    "items": [
+      {
+        "id": "ex-prikry-stems-and-direct-extensions",
+        "kind": "example",
+        "title": "Stems, direct extensions, and the generic sequence",
+        "deps": [
+          "def-prikry-forcing-and-direct-extension",
+          "thm-prikry-generic-sequence-changes-cofinality",
+          "def-dense-open-sets-and-model-generic-filters"
+        ],
+        "statement": "Concrete compatible and incompatible Prikry conditions illustrate stem end-extension, tail shrinking, and the dense sets making the generic union cofinal.",
+        "strategy": "Compare conditions with stems <alpha>, <alpha,beta>, and <gamma> for distinct first points; then write the dense length and height requirements.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing lecture notes, Section 9.2, Definition 9.9 and Theorem 9.10(3)",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-prikry-bounded-name-fusion",
+        "kind": "example",
+        "title": "A bounded-name direct-extension fusion",
+        "deps": [
+          "thm-prikry-property",
+          "thm-prikry-forcing-adds-no-bounded-subsets",
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For a name for a subset of gamma<kappa, a gamma-step direct-extension fusion decides every membership question while retaining one stem.",
+        "strategy": "Display the recursion and limit intersections, explain exactly where gamma<kappa and kappa-completeness enter, and extract the ground subset.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "fs-prikry-forcing-is-ccc",
+        "kind": "false-statement",
+        "title": "False: Prikry forcing is ccc",
+        "deps": [
+          "lem-prikry-kappa-plus-chain-condition",
+          "def-prikry-forcing-and-direct-extension",
+          "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "def-kappa-closure-distributivity-and-chain-condition"
+        ],
+        "statement": "The assertion that Prikry forcing is ccc is false, although it is kappa-plus-cc.",
+        "strategy": "Use the kappa singleton-stem conditions as an uncountable antichain and contrast them with the same-stem kappa-plus-cc argument.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 711,
+    "id": "minimal-walks-oscillation-and-l-and-s-spaces",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Minimal Walks, Oscillation, and L- and S-Spaces",
+    "companion": "minimal-walks-oscillation-and-l-and-s-spaces-examples",
+    "requires": [
+      "proper-forcing-countable-support-iterations-and-pfa",
+      "condensation-gch-and-diamond-in-l",
+      "borel-analytic-sets-perfect-sets-and-determinacy"
+    ],
+    "items": [
+      {
+        "id": "def-set-theoretic-l-and-s-spaces",
+        "kind": "definition",
+        "title": "L-spaces and S-spaces",
+        "deps": [
+          "def-regular-and-t3-spaces",
+          "def-hausdorff-space",
+          "def-separable-space",
+          "def-compactness-variants",
+          "def-hereditary-property"
+        ],
+        "statement": "In ZFC an L-space is a regular Hausdorff space that is hereditarily Lindelof but not hereditarily separable; an S-space is regular Hausdorff, hereditarily separable, but not Lindelof. A strong S-space has every finite power hereditarily separable.",
+        "strategy": "Expand the hereditary clauses over all subspaces and fix the library's regular/T3 convention. Nonseparability of the whole space witnesses not hereditarily separable. A regular hereditarily separable space that is not hereditarily Lindelof contains a regular hereditarily separable non-Lindelof subspace, so the alternate literature convention has the same existence content but is not silently made the definition. The raw definitions are choice-free; later ZFC constructions declare AC at their actual uses.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            },
+            {
+              "title": "Hart–Kunen, Ultra Strong S-Spaces, §1",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-c-sequences-and-minimal-walk-traces-on-omega-one",
+        "kind": "definition",
+        "title": "C-sequences and minimal-walk traces",
+        "deps": [
+          "def-cofinality",
+          "def-ordinal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Fix a C-sequence <C_alpha:alpha<omega_1> with C_0 empty, C_{alpha+1}={alpha}, and for limit alpha, C_alpha a cofinal omega-sequence meeting each gamma<alpha finitely. The minimal walk from beta to alpha repeatedly takes min(C_current minus alpha); Tr(alpha,beta) is its finite upper trace and L(alpha,beta) the finite set of maxima C_current intersect alpha.",
+        "strategy": "Use AC exactly once to choose locally finite cofinal sequences at all countable limits, and adjoin 0 (successor sets are {0,eta}). The walk is strictly descending, hence terminates by ordinal well-foundedness. Define the lower trace by running maxima and set its alpha=0 value explicitly, so max(empty) is never used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §2, pp. 3–5",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-minimal-walk-trace-concatenation-and-limit-control",
+        "kind": "lemma",
+        "title": "Trace concatenation and limit control",
+        "deps": [
+          "def-c-sequences-and-minimal-walk-traces-on-omega-one"
+        ],
+        "statement": "If alpha<=beta<=gamma and max L(beta,gamma)<min L(alpha,beta), upper and lower traces concatenate through beta. For fixed beta and limit alpha<beta, min L(xi,beta) tends to alpha as xi tends to alpha.",
+        "strategy": "For concatenation, the separation inequality forces every C-intersection on the gamma-to-beta segment below alpha, so the walks toward alpha and beta agree until beta and their running maxima concatenate. For limit control prove Moore's exact Fact 2: for a limit target delta, min L(xi,delta)=max(C_delta intersect xi), which tends to delta by cofinality. The scaffold's fixed-upper-endpoint variant is false and is not used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §2, Facts 1–3",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-minimal-walk-weights-and-coherent-functions",
+        "kind": "definition",
+        "title": "Minimal-walk weights and coherent functions",
+        "deps": [
+          "def-c-sequences-and-minimal-walk-traces-on-omega-one",
+          "thm-solovay-stationary-partition",
+          "thm-cantor-powerset",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Using Moore's stationary bookkeeping and distinct real parameters, define rho_1(alpha,beta) as the maximal local C-sequence weight along the upper trace, e_beta(alpha)=rho_1(alpha,beta), and the labelled lower trace mu(alpha,beta) from the prescribed continuous maps.",
+        "strategy": "Give both walk-indexed and recursive formulas, including first-occurrence labels at repeated lower-trace maxima. Solovay's stationary partition supplies stationary repetition of the countable continuous-map family; Cantor plus AC supplies omega_1 distinct reals. Coherence and finite-to-one behaviour remain conclusions of the next lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §2, definitions of rho_1, e_beta and mu",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-minimal-walk-functions-are-coherent-and-finite-to-one",
+        "kind": "lemma",
+        "title": "The minimal-walk functions are coherent and finite-to-one",
+        "deps": [
+          "lem-minimal-walk-trace-concatenation-and-limit-control",
+          "def-minimal-walk-weights-and-coherent-functions"
+        ],
+        "statement": "For beta<gamma<omega_1, e_beta and e_gamma restricted to beta differ at finitely many arguments, and each e_beta:beta->omega is finite-to-one.",
+        "strategy": "For beta<=beta' and n, put into D every alpha where e_beta(alpha)<=n or the two functions disagree. At any limit delta<=beta, finite upper traces and local finiteness give a tail on which all upper-segment weights stabilize, while |C_delta intersect alpha| dominates them and n. Hence D has no limit point and is finite. Its two indicated subsets give finite fibers and coherence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §2, Fact 5 and proof",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-oscillation-on-minimal-walk-lower-traces",
+        "kind": "definition",
+        "title": "Oscillation on lower traces",
+        "deps": [
+          "lem-minimal-walk-functions-are-coherent-and-finite-to-one",
+          "def-minimal-walk-weights-and-coherent-functions"
+        ],
+        "statement": "For integer-valued functions s,t on a finite ordered set, Osc(s,t) records adjacent positions where s<=t before the step and s>t after it. For alpha<beta, osc(alpha,beta) counts these crossings on L(alpha,beta); the refined colouring o(alpha,beta) also records mu labels modulo pairwise coprime integers.",
+        "strategy": "Use the inherited order on the finite lower trace, define the empty and singleton cases before taking predecessors, and verify that the modular sum has finite support and excludes modulus zero. Keep plain Osc/osc, the integer o, the least-nondividing-prime transform, and the later binary pattern values distinct.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §§4–5",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-moore-club-extension-for-minimal-walks",
+        "kind": "lemma",
+        "title": "Moore's club extension lemma",
+        "deps": [
+          "def-minimal-walk-weights-and-coherent-functions",
+          "lem-minimal-walk-trace-concatenation-and-limit-control",
+          "lem-minimal-walk-functions-are-coherent-and-finite-to-one",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "def-club-subsets-of-ordinals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For uncountable pairwise-disjoint families of fixed finite subsets of omega_1 and a prescribed coordinate relation (equality or strict inequality), club many countable-model cut points admit an extension whose lower traces concatenate and whose selected e-values realize that relation.",
+        "strategy": "Take a countable elementary model M with cut delta from a club of cuts. In the equality branch, coherence gives a common tail and reflection repeats the full finite trace-and-label type above delta. In the strict branch, first reflect the finite-to-one domination property to an uncountable set E of useful limit cuts, then choose the b-block and use E to choose an a-block dominating it. In both branches verify the two Delta bounds, exact trace splice, old-label restriction, and new w_delta label.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §4, Lemma 4.2",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-moore-oscillation-block-lemma",
+        "kind": "theorem",
+        "title": "The oscillation block lemma",
+        "deps": [
+          "lem-moore-club-extension-for-minimal-walks",
+          "def-oscillation-on-minimal-walk-lower-traces",
+          "def-minimal-walk-weights-and-coherent-functions",
+          "lem-minimal-walk-functions-are-coherent-and-finite-to-one",
+          "lem-minimal-walk-trace-concatenation-and-limit-control",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "def-club-filter-and-nonstationary-ideal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For uncountable pairwise-disjoint fixed-size families A,B, a coordinate map and n<omega, some a in A below b in B realizes n successive new oscillations at each prescribed coordinate with the required mu labels.",
+        "strategy": "Choose a model cut delta in the club extension set with w_delta=w. Recursively apply the equality branch and then the strict branch: the equality block resets the terminal comparison and the strict block creates exactly one new downward crossing, while first-disagreement bounds and label restrictions preserve all old data. For each finite n, reflect one a below delta so its lower trace splices uniformly into the first n stages.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §4, Lemma 4.1",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-moore-oscillation-colouring-pattern",
+        "kind": "theorem",
+        "title": "The Moore colouring realizes finite binary patterns",
+        "deps": [
+          "thm-moore-oscillation-block-lemma",
+          "def-oscillation-on-minimal-walk-lower-traces",
+          "def-minimal-walk-weights-and-coherent-functions",
+          "thm-chinese-remainder-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "There is c:[omega_1]^2->2 such that for uncountable pairwise-disjoint finite families A,B, every coordinate assignment and finite binary pattern is simultaneously realized by some a in A below b in B.",
+        "strategy": "Thin A to one continuous label w taking distinct primes q_i>8 at its coordinate reals. A common oscillation block changes only the q_i-count by the block index. Use CRT to choose x with q_i-residue 6-r_i+2^{chi(i)}; then o=2^{chi(i)} modulo 6, so its least nondividing prime has index chi(i), while o mod 2 realizes the complementary bit. This proves exactly the functional graph of pi, not an arbitrary matrix.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §5, Theorem 5.3",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-moore-l-space-topology",
+        "kind": "definition",
+        "title": "Moore's clopen-generated topology",
+        "deps": [
+          "thm-moore-oscillation-colouring-pattern",
+          "def-set-theoretic-l-and-s-spaces"
+        ],
+        "statement": "Put W_alpha={alpha} union {beta>alpha:c(alpha,beta)=1}. For X subseteq omega_1, tau[X] is generated by W_xi intersect X as clopen subbasic sets. With T the unit circle, the map e_X:X->{-1,1}^{omega_1} subseteq T^{omega_1}, defined by e_X(x)(xi)=-1 exactly when x lies in W_xi intersect X and by 1 otherwise, is an embedding whose image has exactly tau[X].",
+        "strategy": "Finite Boolean combinations of the clopen subbasic sets form a base. Pad coordinates xi outside X constantly by 1; for xi in X the coordinate cylinders pull back to W_xi intersect X and its complement. If x<y, the y-coordinate separates them, so e_X is an embedding with exactly tau[X]. Point-countability follows simply from x in W_xi implying xi<=x, while the clopen separating base gives zero-dimensional regular Hausdorffness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7, definition before Theorem 7.6",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-moore-topology-is-nonseparable",
+        "kind": "lemma",
+        "title": "Every uncountable Moore subspace is nonseparable",
+        "deps": [
+          "def-moore-l-space-topology",
+          "def-separable-space"
+        ],
+        "statement": "If X subseteq omega_1 is uncountable, (X,tau[X]) is nonseparable.",
+        "strategy": "For countable D subseteq X choose beta in X above sup D. The clopen W_beta intersect X contains beta and no point of D, so D is not dense.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-moore-no-cross-injection",
+        "kind": "lemma",
+        "title": "The Moore colouring forbids cross-injections",
+        "deps": [
+          "def-moore-l-space-topology",
+          "thm-moore-oscillation-colouring-pattern",
+          "lem-uncountable-delta-system-for-finite-sets",
+          "def-axiom-of-choice"
+        ],
+        "statement": "If X,Y subseteq omega_1 have countable intersection, no uncountable subspace of (X,tau[X]) continuously injects into (Y,tau[Y]).",
+        "strategy": "Delete domain points and images in the countable intersection, choose finite basic neighborhoods carried into W_{f(alpha)}, and Delta-system-thin their supports, membership bits, orientations and insertion positions. Apply the functional binary-pattern theorem to each free support with f(alpha) inserted and to the ordered pair {beta,f(beta)}. It makes beta satisfy the old neighborhood condition while forcing c(f(alpha),f(beta))=0, contradicting continuity. The column map treats both ordinal orientations uniformly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7, Theorem 7.7",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-moore-topology-is-hereditarily-lindelof",
+        "kind": "lemma",
+        "title": "Moore's topology is hereditarily Lindelof",
+        "deps": [
+          "thm-moore-oscillation-colouring-pattern",
+          "def-moore-l-space-topology",
+          "def-compactness-variants",
+          "def-hereditary-property",
+          "lem-uncountable-delta-system-for-finite-sets",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For every X subseteq omega_1, (X,tau[X]) is hereditarily Lindelof.",
+        "strategy": "From a cover without a countable subcover recursively choose a strictly ordinal-increasing right-separated sequence; the uncovered remainder is always uncountable, since a countable remainder could be covered by countably many further members. Shrink to finite Boolean neighborhoods, Delta-system-thin their supports and bits, and apply the functional coloring theorem to one petal and one later singleton. The realized petal bits and the later point's own root bits put it into an earlier forbidden neighborhood.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7, Corollary 7.8",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-moore-zfc-l-space",
+        "kind": "theorem",
+        "title": "A ZFC L-space",
+        "deps": [
+          "def-set-theoretic-l-and-s-spaces",
+          "def-moore-l-space-topology",
+          "lem-moore-topology-is-nonseparable",
+          "lem-moore-topology-is-hereditarily-lindelof"
+        ],
+        "statement": "ZFC proves that (omega_1,tau[omega_1]) is regular Hausdorff, hereditarily Lindelof and nonseparable, hence an L-space.",
+        "strategy": "Take X=omega_1. Combine the topology's zero-dimensional regular Hausdorff property with hereditary Lindelofness and nonseparability. Since the whole space is one of its own subspaces, nonseparability witnesses failure of hereditary separability. Propagate the AC used by the minimal-walk bookkeeping, model selection and thinning; the final assembly makes no new choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7, Theorems 7.6–7.7 and Corollary 7.8",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-ordered-fundamental-space-and-nice-refinement",
+        "kind": "definition",
+        "title": "Ordered fundamental spaces and nice refinements",
+        "deps": [
+          "def-set-theoretic-l-and-s-spaces",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "def-axiom-of-choice"
+        ],
+        "statement": "An ordered fundamental space on omega_1 has nested countable clopen local bases W_n^alpha below alpha. A nice refinement uses compact clopen tails V_n^alpha={alpha} union the H_l^alpha for l>=n, recursively selected along countable elementary submodels and satisfying Hart–Kunen's approximation condition star_alpha.",
+        "strategy": "State Hart–Kunen's fundamental-space clauses, the intermediate topologies R_n^xi(alpha), the exact nice-refinement closure and tail conditions, the model chain, ring-compatible metrics, Gamma danger-zone families and star_alpha quantifiers. The W-bases are neighborhoods in the original space and are not subsets of alpha; only the compact H-rings lie below alpha. Ground ZFC supplies the auxiliary model, metric and recursive choices.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hart–Kunen, Ultra Strong S-Spaces, Definitions 4.1, 4.7 and 4.10–4.11",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nice-refinement-exists-and-is-not-lindelof",
+        "kind": "lemma",
+        "title": "Nice refinements exist and are regular but not Lindelof",
+        "deps": [
+          "def-ordered-fundamental-space-and-nice-refinement",
+          "def-regular-and-t3-spaces",
+          "def-compact-space",
+          "def-compactness-variants",
+          "def-locally-compact-space",
+          "thm-compact-implies-complete-and-totally-bounded",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "thm-transfinite-recursion",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Every ordered fundamental space has a nice locally compact, locally countable, zero-dimensional Hausdorff refinement satisfying star; the refined omega_1 is not Lindelof.",
+        "strategy": "At stage alpha enumerate the compact families belonging to the countable model, with every family repeated infinitely. A finite Hausdorff-metric net exists because the already chosen compact rings are totally bounded and the remaining W-tail has diameter at most 2^{-nu}; enlarge the next compact clopen ring piece to absorb every earlier net member's trace. This puts each chosen net inside Gamma(S,omega), proving star. The resulting V-tails are compact clopen countable neighbourhoods, omega remains dense, and every initial segment is open; the cover by proper initial segments has no countable subcover.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hart–Kunen, Ultra Strong S-Spaces, Lemmas 4.5, 4.8 and 4.12",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ch-nice-refinement-is-strongly-hereditarily-separable",
+        "kind": "lemma",
+        "title": "CH makes the nice refinement strongly hereditarily separable",
+        "deps": [
+          "def-set-theoretic-l-and-s-spaces",
+          "def-ordered-fundamental-space-and-nice-refinement",
+          "lem-nice-refinement-exists-and-is-not-lindelof",
+          "rem-continuum-hypothesis",
+          "def-second-countable-space",
+          "cor-urysohn-metrization",
+          "def-product-topology",
+          "lem-uncountable-delta-system-for-finite-sets",
+          "def-club-subsets-of-ordinals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume CH and start with a second-countable ordered fundamental space. A nice refinement satisfying star has every finite power hereditarily separable.",
+        "strategy": "First prove the closure-transfer lemma from star: use the Hausdorff approximations when a compactum avoids every danger zone, reduce finitely many bad rings by standard Vietoris neighborhoods, and induct on the compactum's maximum for targets above the model stage. For a left-separated hyperspace sequence, second countability of every intermediate topology yields a club of countable dense initial segments. CH puts one such segment into a later model; pairwise-disjoint free parts let a still later compactum avoid the intervening ordinal interval, so closure transfers to the final topology, a contradiction. A Delta-system reduces fixed-size finite subsets to that case. Finally the original metrizable topology is coarser, and disjoint metric cells transfer any left-separated finite-power sequence to one of finite subsets.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hart–Kunen, Ultra Strong S-Spaces, Lemmas 4.13–4.15, Theorem 4.17 and Corollary 4.18",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-ch-implies-an-s-space-exists",
+        "kind": "theorem",
+        "title": "CH implies that an S-space exists",
+        "deps": [
+          "def-set-theoretic-l-and-s-spaces",
+          "def-ordered-fundamental-space-and-nice-refinement",
+          "lem-cantor-and-baire-sequence-coding",
+          "rem-continuum-hypothesis",
+          "lem-nice-refinement-exists-and-is-not-lindelof",
+          "lem-ch-nice-refinement-is-strongly-hereditarily-separable",
+          "def-product-topology",
+          "lem-products-preserve-regularity",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "def-axiom-of-choice"
+        ],
+        "statement": "ZFC plus CH proves that there is a strong S-space.",
+        "strategy": "Under CH, transport the Cantor-space cylinder topology along a bijection with omega_1 chosen so that omega is the finite-support dense set. Cylinders give a second-countable ordered fundamental space with strict clopen local bases, and every nonempty cylinder has size aleph_1. Take its star-satisfying nice refinement. The preceding lemmas give hereditary separability of every positive finite power and non-Lindelofness of the first power; product preservation gives regular Hausdorffness, while projection onto the first coordinate shows that no positive finite power is Lindelof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hart–Kunen, Ultra Strong S-Spaces, Definition 4.1 discussion and Corollary 4.18",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-simple-dichotomy-for-omega-one-generated-ideals",
+        "kind": "definition",
+        "title": "The simple dichotomy for omega-one-generated ideals",
+        "deps": [
+          "def-cardinal",
+          "def-countable",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For an ideal I of countable subsets of uncountable S generated modulo finite by omega_1 members, the simple dichotomy says some uncountable X is inside I (all countable subsets lie in I) or outside I (I restricted to X consists only of finite sets).",
+        "strategy": "Define generated modulo finite, inside and outside and note that the alternatives are exclusive. This exact interface, weaker than full PID, is what the topology consumes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abraham, Three applications of ideal dichotomy, slides 1–4",
+              "url": "https://www.winterschool.eu/files/4-P-Ideal_Dichotomy_III.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pfa-implies-the-simple-ideal-dichotomy",
+        "kind": "theorem",
+        "title": "PFA implies the simple ideal dichotomy",
+        "deps": [
+          "def-simple-dichotomy-for-omega-one-generated-ideals",
+          "def-proper-forcing-axiom",
+          "def-countable-model-generic-master-condition-and-proper-poset",
+          "lem-proper-master-condition-characterizations",
+          "thm-ccc-and-countably-closed-forcings-are-proper",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "lem-uncountable-delta-system-for-finite-sets",
+          "thm-countable-union-of-countable",
+          "cor-cardinal-absorption",
+          "def-axiom-of-choice"
+        ],
+        "statement": "The Proper Forcing Axiom implies the simple dichotomy for every omega_1-generated ideal of countable sets.",
+        "strategy": "Prove Abraham's two stronger forms, not PID (an omega_1-generated ideal need not be a P-ideal). For Form 1 force with triples (x,d,N): finite x,d subsets of omega_1 and a finite membership chain of countable models separating x, with points above a model forbidden from every inside-ideal set in that model and d freezing intersections with the generators. Adding M intersect H(omega_2) gives an M-master condition; the lower-part and definable-fibre induction produces a compatible condition in each dense D in M. PFA makes the generic x uncountable and outside unless the ground set was already a countable union of inside sets. Under failure of an uncountable inside set, Form 1 makes every uncountable subset contain an uncountable outside subset. For Form 2 use the ccc finite-colouring poset whose finite side set freezes old colour intersections with the generators; two Delta-system thinnings prove ccc and PFA makes its generic union a countable partition into outside pieces. Either form yields the simple dichotomy. AC supplies model choices, enumerations, thinnings and the uncountable-piece selection.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abraham, Lecture notes on the P-ideal dichotomy, Theorems 1.3–1.4",
+              "url": "https://paperzz.com/doc/7877075/lecture-notes-on-the-p-ideal-dichotomy"
+            },
+            {
+              "title": "Abraham, Three applications of ideal dichotomy",
+              "url": "https://www.winterschool.eu/files/4-P-Ideal_Dichotomy_III.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-regular-nonhereditarily-lindelof-space-yields-ideal-witness",
+        "kind": "lemma",
+        "title": "A non-hereditarily-Lindelof regular space yields an ideal witness",
+        "deps": [
+          "def-set-theoretic-l-and-s-spaces",
+          "def-simple-dichotomy-for-omega-one-generated-ideals",
+          "thm-positive-heredity-of-separation-axioms",
+          "lem-regularity-via-closed-neighbourhoods",
+          "def-axiom-of-choice"
+        ],
+        "statement": "A regular Hausdorff non-hereditarily-Lindelof space has a right-separated S={x_alpha:alpha<omega_1}. Neighbourhoods U_alpha with closure in the corresponding initial segment generate an omega_1-generated ideal whose inside and outside uncountable sets are both nonseparable.",
+        "strategy": "From an open cover of a non-Lindelof subspace with no countable subcover, recursively choose x_alpha outside the earlier chosen cover members; their traces make every initial segment of S open. Hereditary regularity and Hausdorffness let each x_alpha have an open U_alpha whose S-closure lies in the corresponding countable initial segment. Generate the ideal modulo finite by these closed sets. Inside: every countable E is contained in a countable closed finite union plus its finite error, so it misses a nonempty relatively open part of an uncountable D. Outside: D meets each closure(U_alpha) finitely; remove the other finitely many points from U_alpha using T1 to make D discrete. Either outcome is nonseparable.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abraham, Three applications of ideal dichotomy, slides 2–4",
+              "url": "https://www.winterschool.eu/files/4-P-Ideal_Dichotomy_III.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-pfa-implies-there-are-no-s-spaces",
+        "kind": "theorem",
+        "title": "PFA implies there are no S-spaces",
+        "deps": [
+          "thm-pfa-implies-the-simple-ideal-dichotomy",
+          "lem-regular-nonhereditarily-lindelof-space-yields-ideal-witness",
+          "def-set-theoretic-l-and-s-spaces",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Under PFA every regular Hausdorff hereditarily separable space is hereditarily Lindelof; hence no S-space exists.",
+        "strategy": "Assume a regular Hausdorff hereditarily separable space is not hereditarily Lindelof. The topological lemma supplies its right-separated subspace and omega_1-generated ideal. The PFA consequence supplies an uncountable inside or outside set, and the same lemma proves either witness is a nonseparable subspace, contradicting hereditary separability. An S-space is itself non-Lindelof and therefore fails hereditary Lindelofness, so none exists.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abraham, Lecture notes on the P-ideal dichotomy, Theorem 1.5",
+              "url": "https://paperzz.com/doc/7877075/lecture-notes-on-the-p-ideal-dichotomy"
+            },
+            {
+              "title": "Moore, A solution to the L space problem, Theorem 7.5",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-supercompact-consistency-of-no-s-spaces",
+        "kind": "corollary",
+        "title": "A supercompact gives the relative consistency of no S-spaces",
+        "deps": [
+          "thm-pfa-implies-there-are-no-s-spaces",
+          "cor-formal-consistency-of-pfa-from-a-supercompact",
+          "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness",
+          "thm-formal-relative-consistency-from-verified-proof-reduction",
+          "lem-primitive-recursive-syntax-and-proof-checking",
+          "lem-derivation-finite-support-and-concatenation",
+          "thm-primitive-recursive-numeralwise-representability"
+        ],
+        "statement": "If ZFC plus a supercompact cardinal is consistent, then ZFC plus 'there are no S-spaces' is consistent.",
+        "strategy": "Use the formal supercompact-to-PFA consistency reduction, then compose it with the primitive-recursive map that appends the fixed ZFC+PFA proof that PFA implies there are no S-spaces. The verified proof-reduction theorem gives the second consistency implication. Preserve the conditional consistency form; do not infer a transitive model or assert PFA in ZFC.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, Theorem 7.5 and discussion",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            },
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Theorem 24.11",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-l-and-s-space-existence-is-asymmetric",
+        "kind": "theorem",
+        "title": "L-space and S-space existence is asymmetric",
+        "deps": [
+          "thm-moore-zfc-l-space",
+          "thm-ch-implies-an-s-space-exists",
+          "thm-pfa-implies-there-are-no-s-spaces",
+          "cor-supercompact-consistency-of-no-s-spaces",
+          "thm-v-equals-l-implies-diamond",
+          "prop-diamond-implies-continuum-hypothesis",
+          "def-axiom-of-choice"
+        ],
+        "statement": "ZFC proves an L-space exists. CH, and therefore V=L, gives an S-space, while PFA rules S-spaces out. The existence questions are not dual ZFC theorems.",
+        "strategy": "Keep three theories separate: Moore supplies ZFC existence; CH supplies an S-space, and V=L implies Diamond then CH; PFA gives nonexistence. Use the preceding consistency corollary only for the qualified metatheoretic conclusion that, relative to a supercompact, S-space existence is not provable in ZFC. Never combine the incompatible CH/V=L and PFA branches.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, §7",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            },
+            {
+              "title": "Hart–Kunen, Ultra Strong S-Spaces, §4",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            },
+            {
+              "title": "Abraham, Three applications of ideal dichotomy",
+              "url": "https://www.winterschool.eu/files/4-P-Ideal_Dichotomy_III.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 712,
+    "id": "minimal-walks-oscillation-and-l-and-s-spaces-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Minimal Walks, Oscillation, and L- and S-Spaces: Examples and Counterexamples",
+    "companion": "minimal-walks-oscillation-and-l-and-s-spaces",
+    "requires": [
+      "minimal-walks-oscillation-and-l-and-s-spaces"
+    ],
+    "items": [
+      {
+        "id": "ex-a-finite-minimal-walk-and-its-lower-trace",
+        "kind": "example",
+        "title": "A finite minimal walk and its lower trace",
+        "deps": [
+          "def-c-sequences-and-minimal-walk-traces-on-omega-one",
+          "lem-minimal-walk-trace-concatenation-and-limit-control"
+        ],
+        "statement": "A finite C-sequence fragment is used to compute a minimal walk, upper trace, lower trace and valid concatenation through an intermediate ordinal.",
+        "strategy": "Specify the finite C_beta intersections forcing beta=beta_0>...>beta_n=alpha, compute the maxima, and choose an intermediate node satisfying the separation inequality.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-oscillation-pattern-controls-clopen-membership",
+        "kind": "example",
+        "title": "An oscillation pattern controls clopen membership",
+        "deps": [
+          "thm-moore-oscillation-colouring-pattern",
+          "def-moore-l-space-topology"
+        ],
+        "statement": "A two-coordinate binary pattern prescribes simultaneous membership and nonmembership in two clopen subbasic sets.",
+        "strategy": "Request bits (1,0), translate c(alpha_i,beta_i)=1 into beta_i in W_{alpha_i}, and display the finite Boolean neighbourhood used by the topology.",
+        "generation": {
+          "role": "example"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "fs-l-space-and-s-space-existence-are-dual-zfc-theorems",
+        "kind": "false-statement",
+        "title": "False: L-space and S-space existence are dual ZFC theorems",
+        "deps": [
+          "thm-l-and-s-space-existence-is-asymmetric"
+        ],
+        "statement": "It is false that ZFC settles L-space and S-space existence in parallel by dual arguments.",
+        "strategy": "Contrast the ZFC L-space with CH existence and PFA nonexistence for S-spaces; exchanging separable and Lindelof does not dualize the proof or axiom strength.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Moore, A solution to the L space problem, Theorem 1.3 and Section 7",
+              "url": "https://arxiv.org/pdf/math/0501524"
+            },
+            {
+              "title": "Hart--Kunen, Ultra Strong S-Spaces, Corollary 4.18",
+              "url": "https://www.uwosh.edu/faculty_staff/hartj/ultra.pdf"
+            },
+            {
+              "title": "Abraham, Three applications of ideal dichotomy, slides 1--4",
+              "url": "https://www.winterschool.eu/files/4-P-Ideal_Dichotomy_III.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

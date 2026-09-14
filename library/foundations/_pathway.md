@@ -40,6 +40,14 @@ parts:
       - finite-support-iterations-and-martins-axiom
       - preservation-cohen-forcing-and-the-continuum
       - permutation-models-and-transfer-to-zf
+      - minimal-walks-oscillation-and-l-and-s-spaces
+      - proper-forcing-countable-support-iterations-and-pfa
+      - halpern-lauchli-and-bpi-without-choice
+      - symmetric-collapse-and-ultrafilter-free-models
+      - suslin-trees-lines-algebras-and-independence
+      - prikry-forcing-and-gitiks-singular-cardinal-model
+      - boolean-prime-ideal-theorem-in-the-basic-cohen-model
+      - solovays-model-and-regularity-of-all-sets-of-reals
 ---
 
 ## sets-relations-and-functions
@@ -63,15 +71,18 @@ first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Ordinals: well-ordering, transfinite recursion, rank, cumulative hierarchy, ordinal and
-cardinal arithmetic, cofinality, alephs, weak choice. Clubs, stationarity, trees, delta
-systems, Diamond; Borel/analytic sets, determinacy; PCF, Dowker spaces; soundness,
-completeness, incompleteness; reflection, elementary submodels; Boolean ideals, BPI,
-Stone duality. Large cardinals from inaccessibility to supercompactness via ultrafilters,
-ultrapowers, embeddings; $L$ and HOD give inner models with definable well-orders,
-condensation yielding GCH, diamond, a Suslin tree. Forcing closes the part: generics,
-names, the truth lemma; closure, distributivity, chain conditions with nice-name counting
-for Cohen, collapse, Lévy-collapse forcing; symmetric extensions and permutation models
-(Fraenkel--Mostowski, second Fraenkel, ordered Mostowski) fail choice: Dedekind-finite
-sets of reals, non-well-orderable atoms, countable pairs, the ZFA version transferred to
-ZF by Jech--Sochor; finite-support iterations force Martin's Axiom with $\neg$CH.
+Ordinals: well-ordering, recursion, rank, arithmetic, cofinality, alephs,
+weak choice; clubs, stationarity, trees, delta systems, Diamond; analytic
+sets, determinacy; PCF, Dowker spaces; completeness, incompleteness;
+reflection, elementary submodels; BPI, Stone duality, Halpern--Läuchli, BPI
+below Choice (basic Cohen model). Large cardinals: ultrafilters,
+ultrapowers, embeddings, supercompactness yielding PFA by countable-support
+proper iterations; Prikry forcing, Gitik's all-singular model; minimal
+walks: ZFC L-space, PFA killing S-spaces. $L$, HOD: definable well-orders,
+condensation, GCH, diamond; Suslin trees, lines, algebras equivalent, SH
+conditionally independent. Forcing: generics, names, truth lemma, chain
+conditions, Cohen, collapse, Lévy collapse, finite-support iterations
+forcing MA+$\neg$CH; symmetric extensions and permutation models fail
+choice: Dedekind-finite reals, non-well-orderable atoms, countable pairs,
+Jech--Sochor. Feferman--Levy, Blass, Solovay give countable unions of
+countable sets, principal ultrafilters, regular sets of reals.

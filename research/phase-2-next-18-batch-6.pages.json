@@ -1,0 +1,1622 @@
+[
+  {
+    "order": 687,
+    "id": "suslin-trees-lines-algebras-and-independence",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Suslin Trees, Lines, Algebras, and Independence",
+    "companion": "suslin-trees-lines-algebras-and-independence-examples",
+    "requires": [
+      "finite-support-iterations-and-martins-axiom",
+      "condensation-gch-and-diamond-in-l",
+      "weak-choice-principles-and-sierpinskis-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-suslin-hypothesis-and-suslin-algebra",
+        "kind": "definition",
+        "title": "The Suslin Hypothesis and Suslin algebras",
+        "statement": "In ZFC, SH says that no Suslin line exists. A Suslin algebra is a complete atomless ccc Boolean algebra satisfying countable distributivity. The one-element algebra is excluded.",
+        "deps": [
+          "def-suslin-line-order-interface",
+          "def-complete-boolean-algebra-and-regular-open-sets",
+          "def-poset-ccc-and-knaster-property",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "State the exact countable diagonal distributive law and retain the published strong Suslin-line and stronger-is-smaller forcing conventions.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Sections 9 and 15",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-suslin-tree-normal-splitting-refinement",
+        "kind": "lemma",
+        "title": "Every Suslin tree has a normal splitting refinement",
+        "statement": "Every Suslin tree has a normal splitting Suslin refinement whose branches and antichains lift to the original tree.",
+        "deps": [
+          "def-aronszajn-suslin-and-special-tree",
+          "def-normal-splitting-set-theoretic-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "thm-countable-union-of-countable",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Prune bounded cones; replace nodes by predecessor histories to enforce Hausdorff limits; then recursively restrict to continuous cofinal levels, choosing a common higher level above countably many splitting antichains. Lift any forbidden chain or antichain back to the original tree.",
+        "axiom_base": "ZFC; AC supplies simultaneous enumerations and splitting choices",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Lemma 9.12, pp.65-68",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-suslin-tree-branch-first-difference-order",
+        "kind": "lemma",
+        "title": "The first-difference order on branches",
+        "statement": "The maximal branches of a normal splitting Suslin tree, lexicographically ordered at their first difference using countable successor orders, form a dense no-endpoint ccc order with no separable nonempty interval.",
+        "deps": [
+          "lem-suslin-tree-normal-splitting-refinement",
+          "lem-normal-set-theoretic-tree-sequence-representation",
+          "lem-tree-predecessors-and-common-extensions",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "thm-countable-union-of-countable",
+          "def-axiom-of-choice",
+          "thm-zorn"
+        ],
+        "strategy": "Extend nodes to maximal branches, compare at the least differing level, and use splitting for insertion. Normality makes every maximal branch have countable limit length, while extension to every higher level prevents a maximal branch from ending at a node. Disjoint branch intervals yield a tree antichain. For a countable proposed dense set, bound its branch lengths below one countable level and choose a cone interval above that bound which it misses.",
+        "axiom_base": "ZFC; AC selects successor orders and branch extensions",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorem 9.13, pp.68-69",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-linear-order-completion-existence-uniqueness-and-density",
+        "kind": "lemma",
+        "title": "Linear-order completion and density",
+        "statement": "Every linear order has a Dedekind completion unique over it. If a dense order is order-dense in its completion, ccc and the absence of separable nonempty intervals pass to the completion after deleting possible endpoints.",
+        "deps": [
+          "def-partial-order",
+          "def-interval",
+          "def-dense-top",
+          "def-separable-space",
+          "def-countable",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Construct the completion from principal elements and proper initial segments; prove uniqueness via suprema. Refine completion intervals to intervals with endpoints in the original order to transfer ccc and nonseparability.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorems 9.14-9.15 and Corollary 9.16, pp.69-72",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-suslin-tree-implies-suslin-line",
+        "kind": "theorem",
+        "title": "A Suslin tree yields a Suslin line",
+        "statement": "In ZFC, existence of a Suslin tree implies existence of a Suslin line in the strong published convention.",
+        "deps": [
+          "def-suslin-line-order-interface",
+          "lem-suslin-tree-normal-splitting-refinement",
+          "lem-suslin-tree-branch-first-difference-order",
+          "lem-linear-order-completion-existence-uniqueness-and-density",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Normalize the tree, form its branch first-difference order, take its completion, and delete endpoints. The local lemmas verify density, completeness, ccc, and nonseparability rather than citing the earlier Recorded equivalence.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorems 9.12-9.16, pp.65-72",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-suslin-line-nowhere-separable-quotient",
+        "kind": "lemma",
+        "title": "Nowhere-separable quotient of a Suslin line",
+        "statement": "Quotienting a Suslin line by the convex equivalence relation generated by separable closed intervals and completing yields a dense complete no-endpoint ccc line with no separable nonempty interval.",
+        "deps": [
+          "def-suslin-line-order-interface",
+          "lem-linear-order-completion-existence-uniqueness-and-density",
+          "thm-countable-union-of-countable",
+          "def-axiom-of-choice",
+          "thm-zorn"
+        ],
+        "strategy": "A maximal disjoint family of nonempty interior intervals shows each convex class is separable and that only countably many nontrivial classes meet a fixed interval. A separable quotient interval would then lift to a separable original interval. Transfer ccc by choosing interior representatives, then complete.",
+        "axiom_base": "ZFC; AC supplies maximal families and dense-set choices",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorem 9.17, pp.72-74",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-nowhere-separable-suslin-line-nested-interval-tree",
+        "kind": "lemma",
+        "title": "Nested intervals form a Suslin tree",
+        "statement": "A dense ccc line with no separable nonempty interval yields an omega_1-tree of nested closed intervals with countable levels and no uncountable branch or antichain.",
+        "deps": [
+          "lem-suslin-line-nowhere-separable-quotient",
+          "def-set-theoretic-tree-and-levels",
+          "def-aronszajn-suslin-and-special-tree",
+          "def-axiom-of-choice",
+          "thm-transfinite-recursion",
+          "thm-countable-union-of-countable"
+        ],
+        "strategy": "At alpha choose a closed interval inside a gap avoiding all earlier endpoints and order indices by nesting. Incomparable indices give disjoint open intervals; a cofinal branch gives uncountably many disjoint annular intervals. Ccc rules out both, and levels are countable antichains.",
+        "axiom_base": "ZFC; AC selects endpoints through the omega_1 recursion",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorem 9.18, pp.74-75",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-suslin-line-implies-suslin-tree",
+        "kind": "theorem",
+        "title": "A Suslin line yields a Suslin tree",
+        "statement": "In ZFC, existence of a Suslin line implies existence of a Suslin tree.",
+        "deps": [
+          "lem-suslin-line-nowhere-separable-quotient",
+          "lem-nowhere-separable-suslin-line-nested-interval-tree",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Apply the quotient and nested-interval lemmas and check the resulting ordinal-indexed tree has the exact published Suslin-tree convention.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorems 9.17-9.18, pp.72-75",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-suslin-tree-forcing-is-countably-distributive",
+        "kind": "lemma",
+        "title": "Suslin-tree forcing is countably distributive",
+        "statement": "A normal Suslin tree in reverse order is ccc and countably distributive, and forcing with it adds no new omega-sequences of ordinals.",
+        "deps": [
+          "def-kappa-closure-distributivity-and-chain-condition",
+          "def-dense-open-sets-and-model-generic-filters",
+          "def-normal-splitting-set-theoretic-tree",
+          "def-aronszajn-suslin-and-special-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "def-axiom-of-choice",
+          "thm-zorn",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "cor-countable-choice-and-omega-one-cofinality",
+          "thm-closure-distributivity-and-no-short-sequences",
+          "thm-forcing-preserves-ordinals"
+        ],
+        "strategy": "Choose maximal antichains inside countably many dense opens. Their union is countable, so one level lies above all of them; normality extends any condition to that level, below a member of every antichain. Apply the published distributivity/no-short-sequences interface.",
+        "axiom_base": "ZFC; AC chooses maximal antichains and bounds their union",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Propositions 15.43-15.44, pp.277-278",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            },
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorems 4.22-4.23",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-suslin-tree-regular-open-algebra-is-suslin",
+        "kind": "theorem",
+        "title": "A Suslin tree has a Suslin regular-open algebra",
+        "statement": "The regular-open completion of a normal splitting Suslin tree is a complete atomless ccc countably distributive Boolean algebra.",
+        "deps": [
+          "def-suslin-hypothesis-and-suslin-algebra",
+          "lem-suslin-tree-forcing-is-countably-distributive",
+          "thm-forcing-preorders-have-regular-open-completions",
+          "thm-regular-open-sets-form-a-complete-boolean-algebra",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Splitting gives atomlessness. Pull Boolean antichains back through the dense tree embedding for ccc. Translate countable Boolean distributivity to dense-open requirements and use countable distributivity of the tree forcing.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Lemma 15.45, p.278",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-suslin-algebra-refining-antichain-tree",
+        "kind": "lemma",
+        "title": "Refining antichains of a Suslin algebra form a tree",
+        "statement": "Every Suslin algebra admits a continuous omega_1-sequence of countable maximal antichains strictly refining at successors; their union in reverse Boolean order is a normal splitting Suslin tree.",
+        "deps": [
+          "def-suslin-hypothesis-and-suslin-algebra",
+          "def-normal-splitting-set-theoretic-tree",
+          "def-aronszajn-suslin-and-special-tree",
+          "thm-transfinite-recursion",
+          "thm-countable-union-of-countable",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Fix successor splits and recurse. At countable limits take exactly the nonzero coherent branch meets; the diagonal distributive law makes their join one, so this is already a maximal antichain, and ccc makes it countable. A tree antichain is a Boolean antichain, while a cofinal branch yields uncountably many disjoint successive differences.",
+        "axiom_base": "ZFC; AC fixes simultaneous successor splits and countable enumerations",
+        "sources": {
+          "references": [
+            {
+              "title": "Jech, Set Theory, Definition 30.19 and the converse Suslin-algebra assertion, printed p. 594",
+              "url": "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/30-complete_Boolean_algebras.pdf"
+            },
+            {
+              "title": "Bukovsky, Generic extensions of models of ZFC, Lemma 9 proof, printed pp. 356-357",
+              "url": "https://cmuc.karlin.mff.cuni.cz/pdf/cmuc1703/bukovsky.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras",
+        "kind": "theorem",
+        "title": "Kurepa equivalence",
+        "statement": "In ZFC, existence of a Suslin tree, a Suslin line, and a Suslin algebra are equivalent. Thus SH is equivalent to nonexistence of either of the other two objects.",
+        "deps": [
+          "def-suslin-hypothesis-and-suslin-algebra",
+          "lem-suslin-tree-normal-splitting-refinement",
+          "thm-suslin-tree-implies-suslin-line",
+          "thm-suslin-line-implies-suslin-tree",
+          "thm-suslin-tree-regular-open-algebra-is-suslin",
+          "lem-suslin-algebra-refining-antichain-tree",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Combine the four proved directions. Do not depend on the earlier Recorded Kurepa remark.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Sections 9 and 15",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            },
+            {
+              "title": "Jech, Set Theory, Definition 30.19 and the Suslin tree/algebra equivalence, printed p. 594",
+              "url": "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/30-complete_Boolean_algebras.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-suslin-tree-yields-nonproductive-ccc",
+        "kind": "corollary",
+        "title": "A Suslin tree yields nonproductive ccc",
+        "statement": "If a Suslin tree exists, there is a ccc poset whose square is not ccc.",
+        "deps": [
+          "lem-suslin-tree-normal-splitting-refinement",
+          "thm-splitting-suslin-tree-poset-square-not-ccc",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Normalize the tree and apply the published split-pair antichain theorem to its reverse-order poset.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Proposition 9.34, printed pp. 86-87 (sibling-selection argument); product deduction supplied by the cited local theorem",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ma-aleph-one-eliminates-suslin-trees",
+        "kind": "theorem",
+        "title": "MA(aleph_1) eliminates Suslin trees",
+        "statement": "In ZFC, MA(aleph_1) implies that no Suslin tree exists.",
+        "deps": [
+          "def-martins-axiom",
+          "def-finite-aronszajn-specialization-poset",
+          "thm-aronszajn-specialization-poset-ccc",
+          "lem-specialization-dense-domains-and-union",
+          "def-aronszajn-suslin-and-special-tree",
+          "thm-countable-union-of-countable",
+          "cor-cardinal-absorption",
+          "thm-schroder-bernstein",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "First use AC, countable levels, and cardinal absorption to prove that an omega_1-tree has size exactly aleph_1. Apply MA(aleph_1) to the nonempty ccc finite-specialization poset and its at-most-aleph_1 family of dense domain sets. The filter's union specializes the tree; its countably many antichain fibers would all be countable in a Suslin tree and hence could not cover it.",
+        "axiom_base": "ZFC + MA(aleph_1)",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Proposition 7.4",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Monk, Set theory following Jech, Theorem 16.35",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-ma-and-not-ch-implies-suslin-hypothesis",
+        "kind": "corollary",
+        "title": "MA plus not CH implies SH",
+        "statement": "In ZFC, MA plus not CH implies the Suslin Hypothesis.",
+        "deps": [
+          "def-martins-axiom",
+          "rem-continuum-hypothesis",
+          "def-aleph-and-beth-hierarchies",
+          "lem-cardinality-of-a-well-orderable-set",
+          "lem-cardinal-arithmetic-basic-laws",
+          "thm-cardinal-power-set-and-cantor",
+          "thm-ma-aleph-one-eliminates-suslin-trees",
+          "thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Negate the set-sized CH definition to obtain a strict intermediate witness; use AC, cardinality comparison, Cantor's cardinal form, and the successor-cardinal definition to derive aleph_1 below the continuum. Thus MA includes MA(aleph_1); eliminate Suslin trees and apply the no-tree-to-SH direction of Kurepa equivalence.",
+        "axiom_base": "ZFC + MA + not CH",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Section 7",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-countable-normal-tree-end-extension-forcing",
+        "kind": "definition",
+        "title": "Countable normal-tree end-extension forcing",
+        "statement": "Conditions are countable normal splitting trees of countable successor height on fixed ordinal-coded levels, ordered by end extension; stronger trees do not alter earlier levels or predecessor relations.",
+        "deps": [
+          "def-normal-splitting-set-theoretic-tree",
+          "def-forcing-preorder-compatibility-and-filter",
+          "def-countable",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Fix node coding, height, normality, splitting, and exact end extension so descending omega-unions and generic directed unions are well defined.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 4.25",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Monk, Set theory following Jech, Theorem 15.38, pp.273-275",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-countably-closed-forcing-adds-a-normal-suslin-tree",
+        "kind": "theorem",
+        "title": "A countably closed forcing adds a normal Suslin tree",
+        "statement": "Countable normal-tree end-extension forcing is countably closed, preserves omega_1, and forces its generic union to be a normal splitting Suslin tree of height omega_1.",
+        "deps": [
+          "def-countable-normal-tree-end-extension-forcing",
+          "lem-countable-tree-antichain-sealing",
+          "def-kappa-closure-distributivity-and-chain-condition",
+          "thm-closure-distributivity-and-no-short-sequences",
+          "cor-countable-choice-and-omega-one-cofinality",
+          "thm-countable-union-of-countable",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "thm-transfinite-recursion",
+          "thm-forcing-theorem",
+          "lem-forcing-monotonicity-density-and-decision",
+          "def-forcing-relation-for-atomic-formulas",
+          "thm-forcing-preserves-ordinals",
+          "thm-generic-extensions-satisfy-zf-and-zfc",
+          "thm-zorn",
+          "def-aronszajn-suslin-and-special-tree",
+          "lem-splitting-cofinal-branch-gives-antichain",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For every countable descending chain, distinguish an attained successor supremum from a limit-height union; in the latter case add a branch-coded top level, proving full aleph_1-closure. Use regularity to preserve omega_1 and recursively prove height-density. For a maximal-antichain name, first decide a ground node of the antichain comparable with each current node, fuse twice-countably many decisions, and seal the resulting actual maximal antichain at a new top level; all later end extensions preserve the seal. Extend arbitrary antichains to maximal ones in the ZFC extension, then use splitting to exclude cofinal branches.",
+        "axiom_base": "ZFC; an internal forcing theorem, not an assertion of a generic over V",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 4.25",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Monk, Set theory following Jech, Theorem 15.38",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-every-countable-linear-order-embeds-in-the-rationals",
+        "kind": "theorem",
+        "title": "Every countable linear order embeds in the rationals",
+        "statement": "Every countable linear order admits a strictly order-preserving injection into Q.",
+        "strategy": "Enumerate the order and recursively place each new point into a rational interval between the images of its finitely many already-placed lower and upper constraints. Density and absence of endpoints of Q provide a fresh rational at every step.",
+        "deps": [
+          "def-partial-order",
+          "def-countable",
+          "def-injection-surjection-bijection",
+          "lem-countable-iff-surjection-from-n",
+          "thm-rationals-countable",
+          "thm-rat-ordered-field",
+          "thm-recursion",
+          "thm-induction-principle",
+          "thm-well-ordering-principle"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf",
+              "locator": "Lemma 9.36, printed pp.86-87"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "ZF. A nonempty at-most-countable order supplies one surjection from N, Q supplies one bijection from N, and least rational indices make the finite-stage recursion canonical; no choice function is used."
+      },
+      {
+        "id": "thm-special-trees-are-exactly-rationally-special",
+        "kind": "theorem",
+        "title": "Special trees are exactly rationally special",
+        "statement": "For a tree T, the following are equivalent: T is a countable union of antichains; there is a strictly order-increasing map f:T->Q. Thus the antichain-cover and rational-specialization conventions agree.",
+        "strategy": "A rational labeling yields a countable antichain cover. Conversely color by the least index in a countable antichain cover. Encode the predecessor colors at indices at most the node's color by a finite-support binary sequence. If s<t, the two codes differ by coordinate c(t), so their first difference p satisfies p<=c(t); predecessor inclusion then forces the s-code to have 0 and the t-code 1 at p. Explicitly enumerate finite binary words, lex-order the countable code image, embed it into Q, and compose.",
+        "deps": [
+          "def-aronszajn-suslin-and-special-tree",
+          "def-partial-order",
+          "def-countable",
+          "lem-countable-iff-surjection-from-n",
+          "lem-subset-of-countable",
+          "thm-recursion",
+          "thm-induction-principle",
+          "thm-well-ordering-principle",
+          "thm-every-countable-linear-order-embeds-in-the-rationals"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf",
+              "locator": "Proposition 9.37, printed pp.86-87; use the local finite-support bound recorded in the run blocker-resolution note"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "ZF. Least cover indices, the canonical length-lexicographic enumeration of finite binary words, and the completed countable-order embedding are all choice-free."
+      },
+      {
+        "id": "thm-specializing-forcing-kills-a-suslin-tree",
+        "kind": "theorem",
+        "title": "Specializing forcing kills a Suslin tree",
+        "statement": "For a Suslin tree T, its ccc finite-specialization forcing preserves cardinals and omega_1 and forces that T has a total specializing map to omega, hence is not Suslin.",
+        "deps": [
+          "def-aronszajn-suslin-and-special-tree",
+          "def-finite-aronszajn-specialization-poset",
+          "thm-aronszajn-specialization-poset-ccc",
+          "lem-specialization-dense-domains-and-union",
+          "thm-chain-condition-preserves-cofinalities-and-cardinals",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "thm-countable-union-of-countable",
+          "def-forcing-name-valuation-and-generic-extension",
+          "thm-check-name-evaluation-and-generic-reconstruction",
+          "lem-forcing-monotonicity-density-and-decision",
+          "thm-forcing-theorem",
+          "thm-generic-extensions-satisfy-zf-and-zfc",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Name the generic union explicitly. Dense domain sets make it a total specialization, and compatibility makes it functional. Ccc preserves omega_1 and all cardinals; in the ZFC extension, a countable cofinal branch or a countable union of countable specialization fibers would make the height set countably cofinal in omega_1. Thus no cofinal branch exists and some fiber is an uncountable antichain. State the conclusion through the internal forcing relation, not by postulating a generic over V.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorems 16.37-16.38",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-finite-support-iteration-kills-all-named-suslin-trees",
+        "kind": "theorem",
+        "title": "Finite-support bookkeeping kills all named Suslin trees",
+        "statement": "Over a ZFC+GCH ground, the length-omega_2 finite-support ccc bookkeeping iteration captures every final Suslin-tree name and later schedules its ccc specialization forcing; its final model satisfies SH.",
+        "deps": [
+          "def-omega-two-ma-bookkeeping-iteration",
+          "lem-bounded-stage-capture-in-finite-support-iterations",
+          "thm-finite-support-iterations-preserve-ccc",
+          "thm-specializing-forcing-kills-a-suslin-tree",
+          "thm-chain-condition-preserves-cofinalities-and-cardinals",
+          "def-aronszajn-suslin-and-special-tree",
+          "lem-iteration-restrictions-and-complete-embeddings",
+          "thm-forcing-equivalence-and-boolean-completion",
+          "thm-forcing-theorem",
+          "thm-generic-extensions-satisfy-zf-and-zfc",
+          "thm-regularity-of-the-alephs",
+          "cor-cardinal-absorption",
+          "thm-schroder-bernstein",
+          "thm-countable-union-of-countable",
+          "thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Assume a final Suslin tree, use its nonempty countable levels and AC to transport it to a tree on omega_1, and code its relation by a subset of omega_1. Regularity of omega_2 and bounded-stage capture put that code in an earlier extension; final Suslinity and preservation of omega_1 imply it was Suslin there and at every later intermediate stage. Its finite-specialization order is ccc and has size aleph_1, so canonical-code bookkeeping schedules an isomorphic top-adjoined presentation on the actual positive branch. Stage factorization and dense forcing equivalence yield a total specializing map, which persists to the final extension. Its countable antichain fibers cannot cover the omega_1-sized carrier, contradicting final Suslinity. Apply the proved Kurepa equivalence for the exact SH conclusion and state the generic-existence qualification.",
+        "axiom_base": "ZFC + ground GCH",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Sections 7.2-7.3",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-formal-consistency-of-suslin-hypothesis",
+        "kind": "corollary",
+        "title": "Formal relative consistency of SH",
+        "statement": "For the fixed arithmetizations, Con(ZFC) implies Con(ZFC+SH), without inferring a transitive model of full ZFC.",
+        "deps": [
+          "cor-formal-consistency-of-ma-and-not-ch",
+          "cor-ma-and-not-ch-implies-suslin-hypothesis",
+          "thm-formal-relative-consistency-from-verified-proof-reduction",
+          "def-arithmetic-provability-and-consistency"
+        ],
+        "strategy": "For the fixed proof checkers, splice the fixed ZFC+MA+not-CH derivation of SH into every SH-axiom occurrence of a hypothetical ZFC+SH refutation, producing a refutation of the stronger MA theory. Apply the published external fixed-fragment consistency transfer to obtain a ZFC refutation and contrapose. Do not call the MA transfer a base-theory-verified total proof-code reduction: its supplier explicitly withholds that stronger claim, and the verified-reduction theorem explains what additional data would be required.",
+        "axiom_base": "formal arithmetic over fixed certified theories",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 7.10 and Proposition 7.4",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-formal-consistency-of-not-suslin-hypothesis",
+        "kind": "corollary",
+        "title": "Formal relative consistency of not SH",
+        "statement": "For the fixed arithmetizations, Con(ZFC) implies Con(ZFC+not SH), via L, diamond, and a Suslin tree; no full transitive model is extracted from consistency.",
+        "deps": [
+          "lem-finite-fragment-l-interpretation-with-gch",
+          "cor-v-equals-l-gives-a-suslin-tree",
+          "thm-suslin-tree-implies-suslin-line",
+          "thm-formal-relative-consistency-from-verified-proof-reduction",
+          "thm-constructible-inner-model-semantic-and-formal-schema",
+          "def-suslin-hypothesis-and-suslin-algebra",
+          "def-arithmetic-provability-and-consistency",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the formal inner-model theorem and the fixed proofs V=L to a Suslin tree to a strong Suslin line to build one fixed ZF derivation of the L-relativization of not-SH. Add a literal not-SH axiom-certificate branch to the existing PA-verified primitive-recursive L-interpretation dispatcher. Translate every certified ZFC+not-SH refutation to a certified ZF, hence ZFC, refutation and apply the verified-reduction theorem in PA. L supplies AC internally; do not infer a transitive model from the consistency implication.",
+        "axiom_base": "formal arithmetic; L internally supplies AC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorems 9.12-9.13 and 15.42",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-conditional-independence-of-suslin-hypothesis",
+        "kind": "theorem",
+        "title": "Conditional independence of SH",
+        "statement": "If ZFC is consistent, both ZFC+SH and ZFC+not SH are consistent; hence, conditional on Con(ZFC), ZFC proves neither side.",
+        "deps": [
+          "cor-formal-consistency-of-suslin-hypothesis",
+          "cor-formal-consistency-of-not-suslin-hypothesis",
+          "def-arithmetic-provability-and-consistency",
+          "def-suslin-hypothesis-and-suslin-algebra"
+        ],
+        "strategy": "In the external metatheory, combine the two consistency transfers. A certified ZFC proof of either side, viewed in the opposite extension and followed by that extension's single added axiom plus a fixed propositional contradiction block, would refute the opposite consistency conclusion.",
+        "axiom_base": "external metatheory over Con(ZFC)",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Chapters 15-16",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 688,
+    "id": "suslin-trees-lines-algebras-and-independence-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Suslin Trees, Lines, Algebras, and Independence: Examples and Counterexamples",
+    "companion": "suslin-trees-lines-algebras-and-independence",
+    "requires": [
+      "suslin-trees-lines-algebras-and-independence"
+    ],
+    "items": [
+      {
+        "id": "ex-first-difference-order-on-a-binary-branching-tree",
+        "kind": "example",
+        "title": "First-difference order on a binary tree",
+        "statement": "Compute the first-difference lexicographic order on the terminal branches of the binary tree of height three, and identify which density conclusions require unbounded normal splitting.",
+        "deps": [
+          "lem-suslin-tree-branch-first-difference-order"
+        ],
+        "strategy": "List the eight terminal maximal branches, mark first differing coordinates, and compare finite gaps with insertion between maximal branches in the general proof.",
+        "axiom_base": "ZF",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorem 9.13",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-nested-interval-tree-from-a-suslin-line",
+        "kind": "example",
+        "title": "First stages of the nested-interval tree",
+        "statement": "Trace three stages of the line-to-tree recursion and verify that every new closed interval is nested in or disjoint from each earlier interval.",
+        "deps": [
+          "lem-nowhere-separable-suslin-line-nested-interval-tree",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose each gap away from previous endpoints and check the three possible relative positions directly; incomparable indices produce disjoint open intervals.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorem 9.18",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-antichain-sealing-in-countable-tree-forcing",
+        "kind": "example",
+        "title": "Sealing a named maximal antichain",
+        "statement": "Work through one fusion-and-top-level sealing step, distinguishing an antichain of a current countable tree from a name for an antichain of the generic tree.",
+        "deps": [
+          "thm-countably-closed-forcing-adds-a-normal-suslin-tree",
+          "def-countable-normal-tree-end-extension-forcing",
+          "lem-countable-tree-antichain-sealing",
+          "thm-closure-distributivity-and-no-short-sequences",
+          "lem-forcing-monotonicity-density-and-decision",
+          "def-forcing-relation-for-atomic-formulas",
+          "thm-forcing-theorem",
+          "thm-countable-union-of-countable",
+          "thm-transfinite-recursion",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Enumerate every evolving countable condition in successive omega-rounds, decide ground members of the named antichain comparable with its nodes, fuse twice, and form the countable ground antichain in the limit union. Seal it with branch tops and use literal end extension to verify that every future node remains comparable with it, forcing equality with the original named antichain.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, proof of Theorem 4.25",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-specialization-generic-kills-a-tree",
+        "kind": "example",
+        "title": "A specialization generic kills a tree",
+        "statement": "For a fixed Suslin tree, exhibit the dense domain requirements and show how the generic union partitions it into countably many antichains, one uncountable.",
+        "deps": [
+          "thm-specializing-forcing-kills-a-suslin-tree",
+          "def-finite-aronszajn-specialization-poset",
+          "lem-specialization-dense-domains-and-union",
+          "def-aronszajn-suslin-and-special-tree",
+          "thm-countable-union-of-countable",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For each node t explicitly extend a finite condition by label 0 when its range is empty and otherwise by one above its finite maximum. Use directedness of a supplied generic to calculate the union function and its antichain fibers; preserved omega_1 and countable-union boundedness show that not all fibers can be countable.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Monk, Set theory following Jech, Theorem 16.38",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "fs-suslin-hypothesis-is-equivalent-to-continuum-hypothesis",
+        "kind": "false-statement",
+        "title": "SH is not equivalent to CH",
+        "statement": "FALSE: SH is equivalent to CH. Assuming Con(ZFC), MA+not CH gives SH+not CH, while V=L gives CH together with a Suslin tree and hence not SH.",
+        "deps": [
+          "cor-formal-consistency-of-ma-and-not-ch",
+          "cor-ma-and-not-ch-implies-suslin-hypothesis",
+          "lem-finite-fragment-l-interpretation-with-gch",
+          "thm-formal-consistency-of-zfc-plus-gch-from-zf",
+          "thm-constructible-inner-model-semantic-and-formal-schema",
+          "thm-v-equals-l-implies-diamond",
+          "prop-diamond-implies-continuum-hypothesis",
+          "cor-v-equals-l-gives-a-suslin-tree",
+          "thm-suslin-tree-implies-suslin-line",
+          "def-suslin-hypothesis-and-suslin-algebra",
+          "thm-formal-relative-consistency-from-verified-proof-reduction",
+          "def-arithmetic-provability-and-consistency",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Prove joint relative consistency, not two unrelated marginal consistency claims. The external MA transfer plus its fixed SH proof yields Con(ZFC+SH+not CH). Extend the verified L-dispatcher by fixed CH and not-SH relativization blocks obtained inside L to yield Con(ZFC+CH+not SH). These branches refute the two implications separately without asserting an actual model from consistency.",
+        "axiom_base": "external metatheory conditional on Con(ZFC)",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Section 7",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Monk, Set theory following Jech, Theorem 15.42",
+              "url": "https://euclid.colorado.edu/~monkd/jech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 707,
+    "id": "proper-forcing-countable-support-iterations-and-pfa",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Proper Forcing, Countable-Support Iterations, and PFA",
+    "companion": "proper-forcing-countable-support-iterations-and-pfa-examples",
+    "requires": [
+      "finite-support-iterations-and-martins-axiom",
+      "large-cardinals-measures-and-elementary-embeddings",
+      "suslin-trees-lines-algebras-and-independence"
+    ],
+    "items": [
+      {
+        "id": "def-countable-support-forcing-iteration",
+        "kind": "definition",
+        "title": "Countable-support forcing iterations",
+        "statement": "A countable-support iteration uses the usual two-step successor and inverse limit at limits, with every condition having countable nontrivial coordinate support; restrictions, quotient names, and stronger-is-smaller coordinate order are explicit.",
+        "deps": [
+          "def-two-step-forcing-iteration",
+          "def-finite-support-forcing-iteration",
+          "def-forcing-names-and-name-rank",
+          "def-countable"
+        ],
+        "strategy": "Define the iteration from set-indexed carriers with supplied top names. Restrictions and unions of coherent initial segments are conditions because their supports are countable unions of countable sets; no claim is made that an arbitrary coordinatewise descending sequence has a lower bound. Distinguish inverse countable-support limits from direct finite-support limits.",
+        "axiom_base": "ZF for the definition; countable-union arguments later declare their choice cost",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Chapters 5 and 24",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-countable-model-generic-master-condition-and-proper-poset",
+        "kind": "definition",
+        "title": "Master conditions and proper posets",
+        "statement": "For a countable M elementary in a sufficiently rich well-ordered H_theta structure, q is (M,P)-generic when every dense D in M has D intersect M predense below q. It is a master below p in P intersect M when q<=p. A poset is proper when such masters exist for all relevant countable elementary models.",
+        "deps": [
+          "def-dense-open-sets-and-model-generic-filters",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "def-hereditary-size-and-h-kappa",
+          "def-club-filter-and-nonstationary-ideal"
+        ],
+        "strategy": "Fix predensity, not the erroneous requirement that q belong to every dense set; state all H_theta parameters and defer equivalent formulations to the next lemma.",
+        "axiom_base": "ZF for the definition",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Definition 8.1",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Definition 24.1",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-proper-master-condition-characterizations",
+        "kind": "lemma",
+        "title": "Master-condition characterizations",
+        "statement": "For countable M, predensity below q is equivalent to q forcing that the generic meets D intersect M for every dense D in M and to q forcing M[G] intersect V=M, equivalently equality on ordinals. The club-of-models formulation and the all-model formulation in sufficiently large well-ordered H_theta structures define the same proper posets.",
+        "deps": [
+          "def-countable-model-generic-master-condition-and-proper-poset",
+          "thm-forcing-theorem",
+          "lem-forcing-monotonicity-density-and-decision",
+          "thm-downward-lowenheim-skolem-with-parameters",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Translate predensity to forced intersection. Decide names for ground objects by maximal antichains in M for M[G] cap V; use ordinal names conversely. Enlarge a specified model into a club witness by a Skolem hull and inherit predensity.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Proposition 8.4",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Lemma 24.2",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ccc-and-countably-closed-forcings-are-proper",
+        "kind": "theorem",
+        "title": "Ccc and countably closed forcings are proper",
+        "statement": "Every ccc forcing and every countably closed forcing is proper; no converse is asserted.",
+        "deps": [
+          "lem-proper-master-condition-characterizations",
+          "def-poset-ccc-and-knaster-property",
+          "def-kappa-closure-distributivity-and-chain-condition",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For ccc P, a maximal antichain in a countable M is countable and contained in M, so p itself is master. For countably closed P, enumerate M's dense sets, descend through them, and take a lower bound.",
+        "axiom_base": "ZFC; AC supplies enumerations and recursive choices",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Propositions 8.5 and 8.7",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-proper-forcing-preserves-stationary-subsets-of-omega-one",
+        "kind": "theorem",
+        "title": "Proper forcing preserves stationary subsets of omega_1",
+        "statement": "Every proper forcing preserves each ground stationary subset of omega_1, hence preserves omega_1.",
+        "deps": [
+          "lem-proper-master-condition-characterizations",
+          "def-club-filter-and-nonstationary-ideal",
+          "thm-forcing-theorem",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For a club name choose M with delta=M cap omega_1 in the stationary set and a master q. In M[G] the club is cofinal in delta, and closure puts delta in it. A collapse of omega_1 contradicts the preserved stationary/cofinality conclusion.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorems 8.8-8.9",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-proper-iteration-master-condition",
+        "kind": "lemma",
+        "title": "Proper iteration master-condition lemma",
+        "statement": "Let M be countable elementary and contain a countable-support iteration P_delta whose iterands are forced proper. If eta lies in M intersect delta, q_eta is (M,P_eta)-generic, and a P_eta-name p-dot is forced below q_eta to take a value in P_delta intersect M whose restriction to eta belongs to the P_eta-generic, then some (M,P_delta)-generic q has restriction q_eta and forces p-dot into the P_delta-generic.",
+        "deps": [
+          "def-countable-support-forcing-iteration",
+          "lem-proper-master-condition-characterizations",
+          "thm-two-step-generic-factorization-and-ccc",
+          "thm-forcing-theorem",
+          "thm-transfinite-induction",
+          "thm-countable-union-of-countable",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Follow Jech's Proper Iteration Lemma. At successors use properness in the intermediate extension. In the essential limit case enumerate the dense sets in M and an increasing sequence cofinal in delta intersect M; recursively choose names p_n forced to take values in P_delta intersect M and conditions q_n whose restrictions satisfy q_{n+1}|eta_n=q_n. The final condition is the union of these coherent initial segments, filled by top names above sup(M intersect delta), not a coordinatewise lower bound of arbitrary descending iterand conditions. Values p_n in M have support contained in M, which verifies the final generic membership. Verify successor names by two-step factorization.",
+        "axiom_base": "ZFC; AC supplies models, enumerations, and name choices",
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Jech, Set Theory, Chapter 31, Theorem 31.15 and Lemmas 31.16-31.18",
+              "url": "https://fa.ewi.tudelft.nl/~hart/onderwijs/set_theory/Jech/31-proper_forcing.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-countable-support-iterations-preserve-properness",
+        "kind": "theorem",
+        "title": "Countable-support iterations preserve properness",
+        "statement": "If every iterand in a countable-support iteration is forced proper by its preceding stage, the full iteration and every initial segment are proper.",
+        "deps": [
+          "lem-proper-iteration-master-condition",
+          "def-countable-model-generic-master-condition-and-proper-poset",
+          "lem-proper-master-condition-characterizations",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Apply the master-condition lemma with eta=0. Its successor, countable-cofinality fusion, and uncountable-cofinality bounded-model cases exhaust all lengths.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Fact 8.15",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            },
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Chapter 24",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-proper-forcing-axiom",
+        "kind": "definition",
+        "title": "The Proper Forcing Axiom",
+        "statement": "PFA says that for every proper poset and every family of at most omega_1 dense subsets, there is a filter meeting them all. This is not replaced by FA_(less than continuum)(proper) before the continuum is computed.",
+        "deps": [
+          "def-countable-model-generic-master-condition-and-proper-poset",
+          "def-martins-axiom"
+        ],
+        "strategy": "State the omega_1-dense-set convention and the shared stronger-is-smaller filter convention, explicitly distinguishing PFA from MA.",
+        "axiom_base": "ZF for the definition; applications on this page work in ZFC plus PFA",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Definition 24.10",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "cor-pfa-implies-ma-aleph-one-and-suslin-hypothesis",
+        "kind": "corollary",
+        "title": "PFA implies MA(aleph_1) and SH",
+        "statement": "PFA implies MA(aleph_1), because every ccc poset is proper, and therefore implies SH.",
+        "deps": [
+          "def-proper-forcing-axiom",
+          "thm-ccc-and-countably-closed-forcings-are-proper",
+          "thm-ma-aleph-one-eliminates-suslin-trees",
+          "thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Restrict PFA to ccc forcings, eliminate Suslin trees, and translate tree nonexistence to the line-form SH by Kurepa equivalence.",
+        "axiom_base": "ZFC + PFA",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Sections 7-8",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-p-ideals-pid-pseudointersection-number-and-s-spaces",
+        "kind": "definition",
+        "title": "P-ideals, PID, p, and S-spaces",
+        "statement": "Define P-ideals of countable subsets, finite orthogonality, both alternatives of PID, the pseudointersection number p, and an S-space as a regular Hausdorff hereditarily separable non-Lindelof space.",
+        "deps": [
+          "def-countable",
+          "def-cardinal",
+          "def-regular-and-t3-spaces",
+          "def-hausdorff-space",
+          "def-separable-space",
+          "def-compactness-variants",
+          "def-hereditary-property",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "State every finite-modulo convention, require ideals to contain finite sets, and make all hereditary topological quantifiers explicit.",
+        "axiom_base": "ZF for the ideal and topological predicates; ZFC for the well-defined cardinal invariant p",
+        "sources": {
+          "references": [
+            {
+              "title": "Todorcevic, Forcing with a coherent Souslin tree, Sections 2 and 7",
+              "url": "https://www.math.toronto.edu/~stevo/todorcevic_chain_cond.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-pfa-implies-p-ideal-dichotomy",
+        "kind": "theorem",
+        "title": "PFA implies PID",
+        "statement": "Under PFA, every P-ideal of countable subsets satisfies the P-ideal dichotomy.",
+        "deps": [
+          "def-proper-forcing-axiom",
+          "def-p-ideals-pid-pseudointersection-number-and-s-spaces",
+          "lem-proper-master-condition-characterizations",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use Todorcevic's forcing Q_I as presented with a complete properness and density proof in Venturi §§6.2.2–6.4. A condition consists of a finite candidate subset Z_p of the base and a finite membership chain of suitable elementary submodels; new points above a retained model N must lie in the P-ideal pseudounion I_N. Adding M∩H(theta) produces a master condition. For a dense set D in M, thin the finite remainders to a J^+-splitting family (J is generated by I-perp), then choose coordinates successively inside every I_P attached to the finitely many outer models; the union condition witnesses compatibility with D∩M. Thus Q_I is proper. If the base is not countably covered by I-orthogonal sets, the generic union is uncountable; PFA applied to the omega_1 decision dense sets produces an uncountable Z all of whose countable subsets lie in I, which is the first PID alternative.",
+        "axiom_base": "ZFC + PFA",
+        "sources": {
+          "references": [
+            {
+              "title": "Todorcevic, Forcing with a coherent Souslin tree, Sections 2 and 6-7 (statement/background, not the complete direct proof)",
+              "url": "https://www.math.toronto.edu/~stevo/todorcevic_chain_cond.pdf"
+            },
+            {
+              "title": "Justin Tatch Moore, The Proper Forcing Axiom: a tutorial (notes by Giorgio Venturi)",
+              "url": "https://pi.math.cornell.edu/~justin/Ftp/Raach_notes.pdf",
+              "locator": "§§3.2, 4.3 and 5, pp.4–9; definition of Q_I, complete properness proof and Theorem 5.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        }
+      },
+      {
+        "id": "lem-pfa-raises-the-pseudointersection-number",
+        "kind": "lemma",
+        "title": "PFA implies p is greater than omega_1",
+        "statement": "PFA implies p>omega_1: every omega_1-sized strong-finite-intersection family of infinite subsets of omega has an infinite pseudointersection.",
+        "deps": [
+          "def-p-ideals-pid-pseudointersection-number-and-s-spaces",
+          "cor-pfa-implies-ma-aleph-one-and-suslin-hypothesis",
+          "def-martins-axiom",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the sigma-centered forcing of pairs (s,F), where s is finite and F a finite subfamily, extending s only through their common intersection. MA(aleph_1) meets dense sets making the union infinite and almost contained in each member.",
+        "axiom_base": "ZFC + PFA",
+        "sources": {
+          "references": [
+            {
+              "title": "Todorcevic, Forcing with a coherent Souslin tree, Section 2 and Theorem 4.3",
+              "url": "https://www.math.toronto.edu/~stevo/todorcevic_chain_cond.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces",
+        "kind": "theorem",
+        "title": "PID plus p greater than omega_1 eliminates S-spaces",
+        "statement": "PID plus p>omega_1 implies every regular Hausdorff hereditarily separable space is hereditarily Lindelof, so no S-space exists.",
+        "deps": [
+          "def-p-ideals-pid-pseudointersection-number-and-s-spaces",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Pass to an omega_1-sized right-separated subspace X and choose x in V_x subset cl(V_x) subset U_x with U_x meeting X countably. Put I={A in [X]^<=omega: |A intersect cl(V_x)|<omega for every x}. Derive directly from p>|X| that every at-most-|X| family in omega^omega has an eventual dominator, and use tail unions to prove I is a P-ideal. PID's first alternative gives an uncountable discrete subspace. In the second, choose an uncountable orthogonal piece Y and a countable dense D in it. The family {D minus cl(V_x):x in X} has the strong finite intersection property; a pseudointersection is an infinite member of I contained in Y, contradicting orthogonality. Apply this argument inside every subspace to obtain hereditary Lindelofness.",
+        "axiom_base": "ZFC + PID + p>omega_1",
+        "sources": {
+          "references": [
+            {
+              "title": "Todorcevic, Forcing with a coherent Souslin tree, Section 7, pp.20-22",
+              "url": "https://www.math.toronto.edu/~stevo/todorcevic_chain_cond.pdf"
+            },
+            {
+              "title": "Todorcevic, Combinatorial Dichotomies in Set Theory, Theorem 23.2 and preceding proof discussion, pp.45-46",
+              "url": "https://www.math.toronto.edu/~stevo/dichotomies4.pdf"
+            },
+            {
+              "title": "Brech, The P-ideal dichotomy and some applications (one-page abstract only)",
+              "url": "https://www.ime.usp.br/~lucia/stw2013/Brech.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        }
+      },
+      {
+        "id": "cor-pfa-implies-no-s-spaces",
+        "kind": "corollary",
+        "title": "PFA implies no S-spaces",
+        "statement": "Under PFA there are no regular Hausdorff hereditarily separable non-Lindelof spaces.",
+        "deps": [
+          "thm-pfa-implies-p-ideal-dichotomy",
+          "lem-pfa-raises-the-pseudointersection-number",
+          "thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces"
+        ],
+        "strategy": "PFA gives PID by the preceding proper-forcing theorem and gives p>omega_1 by the preceding sigma-centered forcing argument. Apply the PID plus p>omega_1 theorem to every regular Hausdorff hereditarily separable space; each is hereditarily Lindelof, so an S-space cannot exist.",
+        "axiom_base": "ZFC + PFA",
+        "sources": {
+          "references": [
+            {
+              "title": "Todorcevic, Forcing with a coherent Souslin tree, Section 7",
+              "url": "https://www.math.toronto.edu/~stevo/todorcevic_chain_cond.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-laver-preparation-versus-pfa-bookkeeping",
+        "kind": "remark",
+        "title": "Laver preparation versus PFA bookkeeping",
+        "statement": "Laver preparation gives indestructibility by directed-closed forcing. The PFA iteration uses the Laver function to anticipate proper forcings; it does not assert arbitrary proper forcing preserves supercompactness and does not use preparation as a load-bearing step.",
+        "deps": [
+          "def-lc-laver-anticipation-function",
+          "thm-lc-laver-function-existence",
+          "thm-lc-supercompact-preparation-interface",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Compare the two published interfaces, isolate their shared Laver-function input, and record the non-implication preventing a closure mismatch.",
+        "axiom_base": "ZFC + a supercompact for existence assertions",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Chapter 24",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-laver-guided-proper-bookkeeping-iteration",
+        "kind": "definition",
+        "title": "Laver-guided proper bookkeeping iteration",
+        "statement": "Given supercompact kappa and a Laver function, define a length-kappa countable-support iteration using ell(alpha) when it is a name for a proper forcing and the trivial forcing otherwise; the countably closed collapses Col(omega_1,alpha) occur among anticipated proper forcings.",
+        "deps": [
+          "def-countable-support-forcing-iteration",
+          "def-lc-laver-anticipation-function",
+          "thm-lc-laver-function-existence",
+          "def-cohen-collapse-and-levy-collapse-forcings",
+          "def-countable-model-generic-master-condition-and-proper-poset"
+        ],
+        "strategy": "Use a trivial fallback for malformed guesses and inaccessible size bounds for hereditary presentations below kappa. State explicitly when collapses are inserted; do not invoke Laver indestructibility.",
+        "axiom_base": "ZF for the construction from the supplied iteration data; existence uses ZFC plus a supercompact cardinal",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, proof of Theorem 24.11, pp.99-101",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-laver-guided-iteration-size-collapse-and-factorization",
+        "kind": "lemma",
+        "title": "Size, collapse, and factorization for the PFA iteration",
+        "statement": "The Laver-guided iteration is proper, size kappa and kappa-cc, preserves omega_1, collapses every cardinal strictly between omega_1 and kappa, and forces kappa=omega_2. An embedding anticipating Q factors j(P_kappa) as P_kappa*Q*R.",
+        "deps": [
+          "def-laver-guided-proper-bookkeeping-iteration",
+          "thm-countable-support-iterations-preserve-properness",
+          "thm-proper-forcing-preserves-stationary-subsets-of-omega-one",
+          "thm-lc-supercompactness-closed-embedding-characterization",
+          "cor-lc-large-cardinal-implication-ledger",
+          "lem-lc-inaccessible-size-and-rank-bounds",
+          "lem-generalized-delta-system-for-small-supports",
+          "thm-chain-condition-preserves-cofinalities-and-cardinals",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use iteration properness for omega_1. Bound hereditary presentations below inaccessible kappa and apply a generalized delta-system/root argument to countable supports for kappa-cc and size. Bookkept Levy collapses reduce every alpha<kappa to omega_1, while kappa-cc preserves kappa. Elementarity and j(ell)(kappa)=Q identify the factorization.",
+        "axiom_base": "ZFC + a supercompact; AC is used in size and embedding choices",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Theorem 24.11, pp.99-101",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-a-supercompact-cardinal-can-be-forced-to-give-pfa",
+        "kind": "theorem",
+        "title": "A supercompact cardinal can be forced to give PFA",
+        "statement": "If kappa is supercompact, the Laver-guided countable-support iteration forces PFA and kappa=omega_2 while preserving omega_1 and ZFC.",
+        "deps": [
+          "def-proper-forcing-axiom",
+          "def-laver-guided-proper-bookkeeping-iteration",
+          "lem-laver-guided-iteration-size-collapse-and-factorization",
+          "thm-lc-laver-function-existence",
+          "thm-generic-extensions-satisfy-zf-and-zfc",
+          "thm-forcing-theorem",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "In V[G] fix proper Q and omega_1 dense sets. Choose j with Laver value naming them, factor j(P)=P*Q*R, extend and lift j, and use the filter generated by j double-prime of the Q-generic to meet all image dense sets. Reflect its existence to V[G].",
+        "axiom_base": "ZFC + a supercompact cardinal",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Theorem 24.11, pp.99-101",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-formal-pfa-iteration-verification-compiler",
+        "kind": "lemma",
+        "title": "Finite-fragment compiler for the PFA iteration",
+        "statement": "For fixed certified presentations, arithmetic verifies total constructors taking each finite target fragment to proofs of the finite ground and forcing facts needed to model that fragment of ZFC+PFA from ZFC plus a supercompact. No CTM is inferred from consistency.",
+        "deps": [
+          "thm-a-supercompact-cardinal-can-be-forced-to-give-pfa",
+          "lem-forcing-transfer-for-finite-zfc-fragments",
+          "thm-formal-consistency-transfer-by-forcing",
+          "lem-primitive-recursive-syntax-and-proof-checking",
+          "lem-certified-syntax-coding-operations-are-primitive-recursive",
+          "thm-primitive-recursive-numeralwise-representability"
+        ],
+        "strategy": "Fix Gödel codings for the source and target theories and for Cummings's Laver-guided iteration proof. Given a code of a finite target fragment, primitive recursion extracts the finitely many ZFC instances and PFA instances used, instantiates the forcing-relation recursion only for their subformulas and names, and emits the corresponding finite Laver-bookkeeping, proper-iteration, factorization, master-condition and forcing-truth derivations. Each constructor is a bounded syntactic substitution or composition of the fixed proof templates, so arithmetic verifies its totality and verifies the output proof code. Applied to a target refutation, the constructor appends the forced axioms and soundness blocks and returns a source refutation while retaining the supercompact axiom. This is a proof-code reduction and never infers a countable transitive model from consistency.",
+        "axiom_base": "formal arithmetic with certified source and target theories",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Theorem 24.11",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-formal-consistency-of-pfa-from-a-supercompact",
+        "kind": "corollary",
+        "title": "Formal consistency of PFA from a supercompact",
+        "statement": "For fixed arithmetizations, Con(ZFC+there is a supercompact cardinal) implies Con(ZFC+PFA), without extracting a full transitive model.",
+        "deps": [
+          "lem-formal-pfa-iteration-verification-compiler",
+          "thm-formal-relative-consistency-from-verified-proof-reduction"
+        ],
+        "strategy": "Assume a coded refutation of ZFC+PFA. It uses a finite target fragment. Feed its code to the verified compiler to obtain a coded refutation of ZFC plus a supercompact cardinal, and use the formal proof-reduction theorem to verify the transformation in arithmetic. Contraposition yields the stated consistency implication; no model-existence principle is used.",
+        "axiom_base": "formal arithmetic",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, Theorem 24.11",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 708,
+    "id": "proper-forcing-countable-support-iterations-and-pfa-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Proper Forcing, Countable-Support Iterations, and PFA: Examples and Counterexamples",
+    "companion": "proper-forcing-countable-support-iterations-and-pfa",
+    "requires": [
+      "proper-forcing-countable-support-iterations-and-pfa"
+    ],
+    "items": [
+      {
+        "id": "ex-ccc-posets-are-proper-by-maximal-antichains",
+        "kind": "example",
+        "title": "Ccc posets are proper by maximal antichains",
+        "statement": "For ccc P in countable elementary M, every p in P intersect M is already an (M,P)-master condition.",
+        "deps": [
+          "thm-ccc-and-countably-closed-forcings-are-proper"
+        ],
+        "strategy": "Take a maximal antichain A inside D in M; ccc and elementarity make A countable and contained in M, hence predense below p.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Proposition 8.5",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-baumgartner-club-shooting-is-proper",
+        "kind": "example",
+        "title": "Baumgartner's finite-condition generic club forcing is proper",
+        "statement": "Let B consist of finite partial functions p:omega_1 to omega_1 which extend to a normal function, ordered by reverse inclusion. Then B is proper and the union of a generic filter is a normal function whose range is a new club in omega_1.",
+        "deps": [
+          "def-countable-model-generic-master-condition-and-proper-poset",
+          "lem-proper-master-condition-characterizations",
+          "def-club-filter-and-nonstationary-ideal",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For countable suitable M and p in B intersect M, put delta=M cap omega_1 and q=p union {(delta,delta)}. For every r<=q, r intersect M is a condition in M; extend it inside a prescribed dense D in M and verify that extension is compatible with r, proving D intersect M predense below q. Separately use dense domain requirements and finite extendibility to show the generic union is a continuous strictly increasing omega_1-function, whose range is club and new.",
+        "axiom_base": "ZFC",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Theorem 8.13",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-countable-support-fusion-at-a-limit-stage",
+        "kind": "example",
+        "title": "Countable-support fusion at a limit",
+        "statement": "At a countable-cofinality limit, trace a proper-iteration fusion sequence through cofinal stages while meeting one countable model's enumerated dense sets.",
+        "deps": [
+          "lem-proper-iteration-master-condition",
+          "lem-proper-master-condition-characterizations",
+          "def-countable-support-forcing-iteration"
+        ],
+        "strategy": "Write eta_n, D_n, p_n, and q_n explicitly, use the quotient master at step n, preserve q_{n+1}|eta_n=q_n, and take the union of the coherent initial segments. The example does not claim coordinatewise fusion for arbitrary proper iterands.",
+        "axiom_base": "ZFC; AC supplies the countable enumerations and recursive choices",
+        "sources": {
+          "references": [
+            {
+              "title": "Cummings, Iterated Forcing and Elementary Embeddings, proper iteration interface",
+              "url": "https://www.math.cmu.edu/users/jcumming/papers/repaper_finished_june_2008.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-pfa-specializes-an-aronszajn-tree",
+        "kind": "example",
+        "title": "PFA specializes an Aronszajn tree",
+        "statement": "PFA applied to the ccc, hence proper, finite-specialization forcing and its omega_1 dense domain sets produces a total specialization of any Aronszajn tree.",
+        "deps": [
+          "def-proper-forcing-axiom",
+          "thm-ccc-and-countably-closed-forcings-are-proper",
+          "thm-aronszajn-specialization-poset-ccc",
+          "lem-specialization-dense-domains-and-union",
+          "thm-hessenberg",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Verify the dense family has size omega_1, invoke PFA, and union the directed filter using the published dense-domain lemma.",
+        "axiom_base": "ZFC + PFA",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Sections 7-8",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "fs-ccc-and-proper-are-equivalent",
+        "kind": "false-statement",
+        "title": "Ccc and proper are not equivalent",
+        "statement": "FALSE: proper iff ccc. Every ccc forcing is proper, but the forcing of countable partial functions from omega_1 to 2 is countably closed and proper while admitting an omega_1-antichain, so it is not ccc.",
+        "deps": [
+          "thm-ccc-and-countably-closed-forcings-are-proper",
+          "def-cohen-collapse-and-levy-collapse-forcings",
+          "def-poset-ccc-and-knaster-property",
+          "thm-countable-union-of-countable",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Countable unions prove closure. For alpha<omega_1 let p_alpha have domain alpha+1, value 0 below alpha, and value 1 at alpha; p_alpha and p_beta disagree at the smaller index when alpha differs from beta, giving an omega_1-antichain.",
+        "axiom_base": "ZFC; countable choice is used for countable closure",
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Forcing & Symmetric Extensions, Propositions 8.5 and 8.7",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

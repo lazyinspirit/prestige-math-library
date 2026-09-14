@@ -13,6 +13,7 @@ import {
   recordOwnerRecertification,
 } from '../../auditor-created-items.mjs';
 import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
+import { recordStep3 } from '../../step3-decisions.mjs';
 import { itemHashJudge } from '../../item-hash.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO
@@ -413,6 +414,44 @@ test('Step-3 certification tolerates later shared-manifest rewrites but rejects 
   writeFileSync(itemPath, `${item('lem-created')}\nUnreviewed later proof change.\n`);
   utimesSync(itemPath, new Date('2025-01-01T00:00:12.000Z'), new Date('2025-01-01T00:00:12.000Z'));
   assert.throws(() => certifyAuditorItems(root, 'r'), /changed after its latest successful Step 3/);
+});
+
+test('Step-3 first certification pairs original author provenance with a current owner repair', t => {
+  const root = fixture(); t.after(() => rmSync(root, { recursive: true, force: true }));
+  const manifestPath = join(root, 'research/r-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  Object.assign(pages[0], { kind: 'A', companion: 'page-b' });
+  pages.push({ id: 'page-b', kind: 'B', companion: 'page-a', items: [] });
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  writeAuditorBaseline(root, 'r');
+
+  const id = 'lem-created';
+  const itemPath = join(root, `items/${id}.md`);
+  pages[0].items.push({ id, deps: [] });
+  writeFileSync(manifestPath, JSON.stringify(pages));
+  writeFileSync(itemPath, item(id).replace('Immediate.', 'Owner-repaired proof.'));
+  const repairedAt = new Date('2025-01-01T00:00:12.000Z');
+  utimesSync(itemPath, repairedAt, repairedAt);
+  recordStep3(root, { run: 'r', phase: 'scope', page: 'page-a', item: undefined,
+    decision: 'proceed', reason: 'Owner approved the current scope containing the necessary local supplier.',
+    owner: true, confidence: undefined, dependencies: undefined });
+  recordStep3(root, { run: 'r', phase: 'item', page: undefined, item: id,
+    decision: 'repaired', dependencies: [],
+    reason: 'Owner checked the repaired proof and its current empty dependency closure.',
+    owner: true, confidence: undefined });
+
+  assert.throws(() => certifyAuditorItems(root, 'r'), /no successful Step 3/,
+    'an owner repair cannot replace original author provenance');
+  const authorLabel = 'step3b-a-0123456789abcdef';
+  writeFileSync(join(root, 'research/r-dispatch/alpha-high-author.result.json'), JSON.stringify({
+    run: 'r', role: 'alpha-high', label: authorLabel, covers: ['1'], ok: true,
+    started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z',
+  }));
+
+  const receipt = certifyAuditorItems(root, 'r');
+  assert.equal(receipt.items.length, 1);
+  assert.equal(receipt.items[0].author_result, authorLabel);
+  assert.ok(receipt.items[0].owner_recertification?.sha256);
 });
 
 for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a covering author dispatch`, () => {

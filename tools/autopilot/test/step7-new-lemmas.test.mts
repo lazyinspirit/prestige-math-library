@@ -123,3 +123,68 @@ test('the actual Step-7 guard admits a new fatal-repair lemma and rejects an unr
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('owner impact receipts license only an exact, ordered downstream repair path', () => {
+  const root = mkdtempSync(join(tmpdir(), 'step7-impact-repair-'));
+  const sourceTools = new URL('../../', import.meta.url).pathname;
+  try {
+    for (const dir of ['tools', 'items', 'research']) mkdirSync(join(root, dir));
+    for (const file of readdirSync(sourceTools).filter((name) => name.endsWith('.mjs'))) {
+      if (file === 'step7-guard.mjs') copyFileSync(join(sourceTools, file), join(root, 'tools', file));
+      else symlinkSync(join(sourceTools, file), join(root, 'tools', file));
+    }
+    const before: Record<string, string> = {
+      'def-root': '---\nid: def-root\nkind: definition\ndeps: []\n---\nOld interface.\n',
+      'lem-middle': '---\nid: lem-middle\nkind: lemma\ndeps: [def-root]\n---\nUses old interface.\n',
+      'cor-target': '---\nid: cor-target\nkind: corollary\ndeps: [lem-middle]\n---\nUses old conclusion.\n',
+    };
+    const after: Record<string, string> = {
+      'def-root': before['def-root'].replace('Old interface.', 'Corrected interface.'),
+      'lem-middle': before['lem-middle'].replace('old interface', 'corrected interface'),
+      'cor-target': before['cor-target'].replace('old conclusion', 'corrected conclusion'),
+    };
+    for (const [id, text] of Object.entries(after)) writeFileSync(join(root, `items/${id}.md`), text);
+    writeFileSync(join(root, 'research/touches.json'), JSON.stringify({ snapshots: [
+      { label: 'pre-step7', hashes: Object.fromEntries(Object.entries(before)
+        .map(([id, text]) => [id, shortHash(itemHashGuard(text))])) },
+    ] }));
+    writeFileSync(join(root, 'research/scope.json'), JSON.stringify({ run: 'demo', groups: [{ label: 'a' }],
+      by_item: { 'def-root': 'a', 'lem-middle': 'a', 'cor-target': 'a' } }));
+    const tuple = { id: 'def-root', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64) };
+    writeFileSync(join(root, 'research/judge.jsonl'), JSON.stringify({ ...tuple, keep: false }) + '\n');
+    writeFileSync(join(root, 'research/adjudications.jsonl'), JSON.stringify({ ...tuple,
+      outcome: 'confirmed_fatal', item_sha256: itemHashGuard(before['def-root']), defect_type: 'logic' }) + '\n');
+    const common = {
+      version: 1, kind: 'owner-impact-repair', run: 'demo', group: 'a', found_via: 'def-root',
+      authorized_by: 'owner', at: '2026-09-14T00:00:00Z',
+      defect: 'The fatal root correction invalidates this downstream consumer interface.',
+      correction_basis: 'The repaired consumer follows the corrected root through every declared dependency edge, and this fixture records that exact ordered path and both content states.',
+      source_urls: ['https://example.test/primary', 'https://example.test/secondary'],
+    };
+    const rows = [
+      { ...common, id: 'lem-middle', dependency_path: ['def-root', 'lem-middle'],
+        pre_sha256: itemHashGuard(before['lem-middle']), post_sha256: itemHashGuard(after['lem-middle']) },
+      { ...common, id: 'cor-target', dependency_path: ['def-root', 'lem-middle', 'cor-target'],
+        pre_sha256: itemHashGuard(before['cor-target']), post_sha256: itemHashGuard(after['cor-target']) },
+    ];
+    const repairs = join(root, 'research/owner-repairs.jsonl');
+    const writeRows = (value: any[]) => writeFileSync(repairs, value.map((row) => JSON.stringify(row)).join('\n') + '\n');
+    writeRows(rows);
+    const run = () => spawnSync(process.execPath, ['tools/step7-guard.mjs',
+      '--touches', 'research/touches.json', '--baseline', 'pre-step7',
+      '--judge-ledger', 'research/judge.jsonl', '--adjudications', 'research/adjudications.jsonl',
+      '--scope', 'research/scope.json', '--owner-prerequisite-repairs', 'research/owner-repairs.jsonl',
+      '--json'], { cwd: root, encoding: 'utf8' });
+    let result = run();
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    assert.equal(JSON.parse(result.stdout).summary.licensed_by_fatal_or_terminal_resolution, 3);
+
+    writeRows([rows[0], { ...rows[1], dependency_path: ['def-root', 'cor-target'] }]);
+    result = run();
+    assert.equal(result.status, 1, result.stdout + result.stderr);
+    assert.ok(JSON.parse(result.stdout).errors.some((error: any) =>
+      error.code === 'owner-impact-repair-not-path' && error.id === 'cor-target'));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

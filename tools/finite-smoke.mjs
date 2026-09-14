@@ -304,6 +304,71 @@ function makeChecks() { return {
     if (subset.includes(outer)) return { ok: false, summary: `the ambient meet ${outer} is retained, so the subposet cannot differ for this reason` };
     return { ok: true, summary: `ambient meet of ${a},${b} is ${outer}; the full subposet omits it, so its meet is ${inner} — the inclusion does not preserve this limit` };
   },
+
+  // The covariance calculation for two Brownian increments reduces to a
+  // four-minimum identity. Enumerating every ordered pair of integer intervals
+  // checks all endpoint interleavings, including coincident and zero-length
+  // intervals. This tests the finite algebra in the citing example, not the
+  // probabilistic construction of Brownian motion.
+  'brownian-increment-overlap-identity': ({ max_endpoint = 8 } = {}) => {
+    const max = boundedInteger(max_endpoint, 8, 0, 30);
+    let cases = 0;
+    for (let s = 0; s <= max; s += 1) for (let t = s; t <= max; t += 1) {
+      for (let u = 0; u <= max; u += 1) for (let v = u; v <= max; v += 1) {
+        const expanded = Math.min(t, v) - Math.min(t, u) - Math.min(s, v) + Math.min(s, u);
+        const overlap = Math.max(0, Math.min(t, v) - Math.max(s, u));
+        if (expanded !== overlap) {
+          return { ok: false,
+            summary: `four-minimum covariance ${expanded} differs from overlap ${overlap} for [${s},${t}] and [${u},${v}]` };
+        }
+        cases += 1;
+      }
+    }
+    return { ok: true, summary: `checked ${cases} ordered interval pairs with endpoints through ${max}, including all zero-length and coincident-endpoint cases` };
+  },
+
+  // Derive the adjoint matrices of the standard sl_2 basis directly from 2x2
+  // commutators, then calculate the Killing Gram matrix. This independently
+  // checks the signs, basis order, trace pairings and determinant asserted by
+  // the citing example; it is not a general semisimplicity test.
+  'sl2-killing-form-matrix-calculation': () => {
+    const mul2 = (A, B) => [
+      A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3],
+      A[2] * B[0] + A[3] * B[2], A[2] * B[1] + A[3] * B[3],
+    ];
+    const commutator = (A, B) => {
+      const AB = mul2(A, B), BA = mul2(B, A);
+      return AB.map((value, i) => value - BA[i]);
+    };
+    const coordinates = (A) => {
+      if (A[3] !== -A[0]) throw new Error(`non-traceless commutator [${A}]`);
+      return [A[1], A[2], A[0]]; // coefficients of (e,f,h)
+    };
+    const e = [0, 1, 0, 0], f = [0, 0, 1, 0], h = [1, 0, 0, -1];
+    const basis = [e, f, h];
+    const adjoint = (x) => {
+      const columns = basis.map((y) => coordinates(commutator(x, y)));
+      return Array.from({ length: 3 }, (_, row) => columns.map((column) => column[row]));
+    };
+    const mul3 = (A, B) => Array.from({ length: 3 }, (_, i) =>
+      Array.from({ length: 3 }, (_, j) => A[i].reduce((sum, value, k) => sum + value * B[k][j], 0)));
+    const traceProduct = (A, B) => {
+      const C = mul3(A, B);
+      return C[0][0] + C[1][1] + C[2][2];
+    };
+    const ads = basis.map(adjoint);
+    const gram = ads.map((A) => ads.map((B) => traceProduct(A, B)));
+    const expected = [[0, 4, 0], [4, 0, 0], [0, 0, 8]];
+    if (JSON.stringify(gram) !== JSON.stringify(expected)) {
+      return { ok: false, summary: `computed Killing Gram matrix ${JSON.stringify(gram)}, expected ${JSON.stringify(expected)}` };
+    }
+    const determinant = gram[0][0] * (gram[1][1] * gram[2][2] - gram[1][2] * gram[2][1])
+      - gram[0][1] * (gram[1][0] * gram[2][2] - gram[1][2] * gram[2][0])
+      + gram[0][2] * (gram[1][0] * gram[2][1] - gram[1][1] * gram[2][0]);
+    if (determinant !== -128) return { ok: false, summary: `Killing Gram determinant is ${determinant}, expected -128` };
+    return { ok: true, summary: 'derived all nine Killing pairings from 2x2 commutators and obtained Gram determinant -128' };
+  },
+
   'cyclic-subgroup-lagrange': ({ max_modulus = 24 }) => {
     const max = boundedInteger(max_modulus, 24, 1, 200);
     for (let modulus = 1; modulus <= max; modulus += 1) {

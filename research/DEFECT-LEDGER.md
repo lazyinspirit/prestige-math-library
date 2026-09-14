@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 435f24fb2c8f by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ b08cb1a3f847 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 8482 |
-| now mechanically prevented | 284 |
+| defects caught before publication | 8799 |
+| now mechanically prevented | 299 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -665,6 +665,37 @@
 | unsupported-inference |  | 1 |  |
 | citation-inaccurate |  | 1 |  |
 | contract-mismatch |  |  | 1 |
+
+## phase-2-next-18 — 317 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate | 7-rejudge | owner |
+|---|---|---|---|---|---|---|
+| citation-inflated |  |  | 2 | 46 | 9 | 1 |
+| citation-missing | 1 | 10 | 6 | 5 | 9 | 4 |
+| invalid-inference | 2 |  | 4 | 17 | 3 | 4 |
+| citation-inaccurate |  |  | 9 | 15 | 3 | 1 |
+| undefined-notation | 13 |  | 1 | 3 | 2 | 4 |
+| missing-hypothesis |  |  | 2 | 11 | 10 |  |
+| ill-typed-claim |  |  | 7 | 6 | 4 |  |
+| false-claim | 1 |  | 1 | 14 |  |  |
+| unsupported-inference |  |  | 1 | 10 | 5 |  |
+| ill-typed-construction |  |  | 2 | 9 | 2 |  |
+| false-or-overstrong-statement | 1 |  |  | 3 | 6 | 1 |
+| ill-formed | 4 |  |  |  | 1 | 3 |
+| unlicensed-inference | 1 |  |  |  | 5 | 1 |
+| missing-case | 3 |  | 1 |  | 2 |  |
+| citation-misattributed |  |  |  | 3 | 2 |  |
+| false-or-overstrong-title |  |  |  | 4 |  |  |
+| false-boundary-disposition | 3 |  |  |  |  |  |
+| citation-truncated |  |  | 1 | 1 | 1 |  |
+| missing-choice-scope |  |  |  | 2 | 1 |  |
+| arithmetic-error | 1 |  |  |  | 1 |  |
+| other | 1 |  |  |  |  |  |
+| false-computation |  |  | 1 |  |  |  |
+| citation-corrupted |  |  |  | 1 |  |  |
+| contract-mismatch |  |  |  | 1 |  |  |
+| frontmatter-schema |  |  |  | 1 |  |  |
+| unsupported-universal-property |  |  |  |  | 1 |  |
 
 ## phase-2-next-20 — 132 row(s)
 

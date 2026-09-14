@@ -271,6 +271,36 @@ function validate(rows, runFilter) {
   return errs;
 }
 
+/** Resolve append-only ownership corrections without deleting history.
+ *
+ * A correction row may supersede earlier rows for the same run and subject.
+ * The earlier rows remain part of the audit trail, but only the newest active
+ * row owns an adjudication. Requiring backward references prevents a row from
+ * hiding a future or unrelated defect. */
+function activeOwnershipRows(rows, errs) {
+  const seen = new Map();
+  const superseded = new Set();
+  for (const row of rows) {
+    if (row.supersedes !== undefined) {
+      if (!Array.isArray(row.supersedes) || !row.supersedes.length
+        || new Set(row.supersedes).size !== row.supersedes.length
+        || row.supersedes.some((id) => typeof id !== 'string' || !id)) {
+        errs.push(`${row.defect_id}: supersedes must be a nonempty array of unique defect ids`);
+      } else {
+        for (const id of row.supersedes) {
+          const prior = seen.get(id);
+          if (!prior) errs.push(`${row.defect_id}: supersedes ${id}, which is not an earlier ledger row`);
+          else if (prior.run !== row.run || prior.subject !== row.subject) {
+            errs.push(`${row.defect_id}: may supersede only an earlier row for the same run and subject`);
+          } else superseded.add(id);
+        }
+      }
+    }
+    if (row.defect_id) seen.set(row.defect_id, row);
+  }
+  return rows.filter((row) => !superseded.has(row.defect_id));
+}
+
 const filtered = (rows) => { const r = opt('run'); return r ? rows.filter((x) => x.run === r) : rows; };
 
 // ---------------------------------------------------------------------------
@@ -486,6 +516,7 @@ if (cmd === 'check') {
   const rows = loadLedger();
   const mine = rows.filter((r) => r.run === run);
   const errs = validate(rows, run);
+  const ownershipMine = activeOwnershipRows(mine, errs);
   const references = (r) => (r.adjudication_ref ?? []).filter((ref) => ref && typeof ref === 'object');
 
   // (a) exact-hash bijection: every confirmed_fatal adjudication row appears in
@@ -502,11 +533,11 @@ if (cmd === 'check') {
       // old item-only references only when no exact owner exists, preserving
       // pre-contract ledgers without letting them double-own a current row.
       const sameItem = (r, ref) => a.item_sha256 ? ref.item_sha256 === a.item_sha256 : r.subject === a.id;
-      const exactOwners = mine.filter((r) => references(r).some((ref) => sameItem(r, ref)
+      const exactOwners = ownershipMine.filter((r) => references(r).some((ref) => sameItem(r, ref)
         && (!ref.id || ref.id === a.id)
         && (!a.model || ref.model === a.model)
         && (!a.context_sha256 || ref.context_sha256 === a.context_sha256)));
-      const legacyOwners = mine.filter((r) => references(r).some((ref) => sameItem(r, ref)
+      const legacyOwners = ownershipMine.filter((r) => references(r).some((ref) => sameItem(r, ref)
         && (!ref.id || ref.id === a.id)
         && (!ref.model || !ref.context_sha256)));
       const owners = exactOwners.length ? exactOwners : legacyOwners;
@@ -523,7 +554,7 @@ if (cmd === 'check') {
       .map((l) => { try { return JSON.parse(l); } catch { return null; } })
       .filter((a) => a?.outcome === 'confirmed_fatal');
     for (const a of fatals) {
-      const owners = mine.filter((r) => references(r).some((ref) =>
+      const owners = ownershipMine.filter((r) => references(r).some((ref) =>
         ref.alert_id === a.alert_id && ref.item === a.item && ref.item_sha256 === a.item_sha256));
       if (owners.length === 0) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} has no ledger row — the defect the adjudicator confirmed was never recorded`);
       if (owners.length > 1) errs.push(`confirmed_fatal reader warning ${a.alert_id} on ${a.item} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);

@@ -1,0 +1,1852 @@
+[
+  {
+    "order": 288.125,
+    "id": "markov-kernels-and-markov-chains",
+    "kind": "A",
+    "category": "probability",
+    "title": "Markov Kernels and Markov Chains",
+    "companion": "markov-kernels-and-markov-chains-examples",
+    "requires": [
+      "infinite-product-measures-and-kolmogorov-extension",
+      "conditional-expectation",
+      "conditional-distributions-and-regular-conditional-probability",
+      "stopping-times-and-optional-stopping",
+      "product-measures-and-the-fubini-tonelli-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-time-homogeneous-markov-chain-with-transition-kernel",
+        "kind": "definition",
+        "title": "Time-homogeneous Markov chain with transition kernel",
+        "statement": "Assume Choice. For a probability kernel K on (E,Ecal), an E-valued process adapted to (F_n) is a time-homogeneous Markov chain when P(X_{n+1} in A | F_n)=K(X_n,A) almost surely for every n and measurable A. The natural-filtration case is distinguished, and all conditional-probability equalities are equalities of versions almost surely.",
+        "strategy": "State both filtration conventions and verify K(X_n,A) is measurable. Choice enters only through the published Radon-Nikodym construction of conditional probability; no regular conditional law is asserted.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "def-conditional-probability-given-a-sigma-algebra",
+          "def-filtration-and-filtered-probability-space",
+          "def-stochastic-process-and-finite-dimensional-distributions"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Sections 5.1-5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bounded-function-form-of-the-markov-property",
+        "kind": "lemma",
+        "title": "Bounded-function form of the Markov property",
+        "statement": "Assume Choice. The indicator Markov property is equivalent to E[f(X_{n+1})|F_n]=Kf(X_n) almost surely for every bounded measurable real f.",
+        "strategy": "Pass from indicators to nonnegative simple functions, then bounded nonnegative functions by monotone approximation, and finally signed functions by positive and negative parts. Kernel integration gives measurability; conversely take f=1_A.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-monotone-class",
+          "thm-taking-out-what-is-known",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "lem-conditional-expectation-is-unique-almost-surely"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-conditional-independence-given-a-sigma-algebra",
+        "kind": "definition",
+        "title": "Conditional independence given a sigma-algebra",
+        "statement": "Random elements Y and Z are conditionally independent given G if E[f(Y)g(Z)|G]=E[f(Y)|G]E[g(Z)|G] almost surely for every bounded measurable f and g. The same notation applies to sigma-algebras by using bounded measurable random variables from each side.",
+        "strategy": "Give both random-element and sigma-algebra forms and check symmetry, ordinary independence when G is trivial, and the degenerate case when one variable is G-measurable.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-conditional-expectation-as-an-ae-class"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Aldous-Chewi probability notes, Lecture 9",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf",
+              "locator": "Definition 9.1, pp.35-36"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Choice enters only through the published conditional-expectation interface."
+      },
+      {
+        "id": "lem-conditional-independence-equivalences-and-preservation",
+        "kind": "lemma",
+        "title": "Conditional-independence equivalences and preservation",
+        "statement": "Conditional independence is equivalent to E[g(Z)|G sigma(Y)]=E[g(Z)|G] for every bounded measurable g. It is preserved by measurable maps of either variable and by adjoining a G-measurable variable to either side.",
+        "strategy": "Use the defining product identity to test against bounded G sigma(Y)-measurable functions, first on products and then by the monotone-class theorem. The preservation statements follow by substitution and the pull-out property.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "thm-monotone-class",
+          "thm-dynkin-pi-lambda",
+          "thm-taking-out-what-is-known",
+          "thm-tower-property-of-conditional-expectation",
+          "lem-conditional-expectation-is-unique-almost-surely"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Aldous-Chewi probability notes, Lecture 9",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf",
+              "locator": "Definition 9.1 and Easy Fact, p.35"
+            },
+            {
+              "title": "Varadhan, Probability Theory, Chapter 4",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf",
+              "locator": "Theorem 4.9, pp.119-120"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Uses the existing conditional-expectation and monotone-class theorems."
+      },
+      {
+        "id": "lem-conditional-independence-splicing-over-a-standard-borel-variable",
+        "kind": "lemma",
+        "title": "Conditional-independence splice lemma",
+        "statement": "Let mu_12 on S_1 times S_2 and mu_23 on S_2 times S_3 have the same S_2 marginal, with all three spaces standard Borel. There is a unique probability law on S_1 times S_2 times S_3 with those two marginals and with the first and third coordinates conditionally independent given the second.",
+        "strategy": "Disintegrate mu_23 over its S_2 marginal to a kernel Q_23. Integrate Q_23 against mu_12. The kernel depends on (s_1,s_2) only through s_2, so the conditional-expectation equivalence proves conditional independence; rectangles and a pi-lambda argument give uniqueness.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-conditional-independence-equivalences-and-preservation",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dynkin-pi-lambda"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Aldous-Chewi probability notes, Lecture 9",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf",
+              "locator": "Lemma 9.2 and proof, pp.35-36"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Standard-Borel disintegration uses the declared regular-conditional-distribution supplier."
+      },
+      {
+        "id": "thm-markov-property-as-past-future-conditional-independence",
+        "kind": "theorem",
+        "title": "The Markov property is past-future conditional independence",
+        "statement": "For a discrete-time process, the Markov conditional-expectation identity is equivalent to conditional independence of the past sigma-algebra F_n and the future sigma-algebra sigma(X_n,X_{n+1},...) given sigma(X_n), for every n.",
+        "strategy": "The future-functional Markov theorem gives E[g(future)|F_n]=E[g(future)|X_n]; apply the conditional-independence equivalence. Conversely specialize conditional independence to g(X_{n+1}) and note that X_n is F_n-measurable.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-conditional-independence-equivalences-and-preservation",
+          "thm-markov-property-for-bounded-future-path-functionals"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Aldous-Chewi probability notes, Lecture 9",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf",
+              "locator": "Theorem 9.3(c)-(d), pp.36-37"
+            },
+            {
+              "title": "Varadhan, Probability Theory, Chapter 4",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf",
+              "locator": "equations (4.7)-(4.9) and Theorem 4.9, pp.119-120"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Choice follows the conditional-expectation interfaces already used by the Markov theorem."
+      },
+      {
+        "id": "def-initial-distribution-of-a-markov-chain",
+        "kind": "definition",
+        "title": "Initial distribution of a Markov chain",
+        "statement": "The initial distribution is the law mu of X_0; P_mu denotes a specified chain law with that initial distribution.",
+        "strategy": "Specialize the law of a random element to time zero and distinguish the distribution from a path-space realization.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-time-homogeneous-markov-chain-with-transition-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-iterated-transition-kernels",
+        "kind": "definition",
+        "title": "Iterated transition kernels",
+        "statement": "Define K^0(x,A)=1_A(x) and K^{n+1}=K^n K. Every K^n is a probability kernel.",
+        "strategy": "Use the identity kernel and recursive composition; the published composition theorem supplies measurability, mass one, and associativity.",
+        "deps": [
+          "def-composition-of-probability-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres, Wilmer, Markov Chains and Mixing Times, Sections 1.1-1.2",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "Section 1.1, equation (1.10) and the following t-step transition-probability identity, printed pp. 4-5"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-chapman-kolmogorov-equations",
+        "kind": "theorem",
+        "title": "Chapman-Kolmogorov equations",
+        "statement": "For m,n>=0, K^{m+n}=K^m K^n, including both zero cases. For a Markov chain with kernel K, every bounded measurable f satisfies E[f(X_{m+n})|F_m]=K^n f(X_m) almost surely; equivalently P(X_{m+n} in A|F_m)=K^n(X_m,A).",
+        "strategy": "Induct on n from the recursive kernel definition and use associativity, checking that K^0 is a two-sided identity. Iterate the bounded-function Markov identity with the tower property; indicators give the conditional transition law.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-iterated-transition-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "lem-bounded-function-form-of-the-markov-property",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-taking-out-what-is-known"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres, Wilmer, Markov Chains and Mixing Times, Section 1.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "Section 1.1, equation (1.10) and the following t-step transition-probability identity, printed pp. 4-5"
+            },
+            {
+              "title": "Varadhan, Probability Theory, Chapter 4",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf",
+              "locator": "Theorem 4.8, pp.117-119"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-finite-dimensional-laws-of-a-markov-chain",
+        "kind": "theorem",
+        "title": "Finite-dimensional laws of a Markov chain",
+        "statement": "Assume Choice. For 0<=n_0<...<n_r, the joint law of (X_{n_0},...,X_{n_r}) is the iterated integral obtained from the initial law and kernels K^{n_j-n_{j-1}}; equivalently the corresponding formula holds for every product of bounded measurable test functions.",
+        "strategy": "Condition backward at successive listed times, using the bounded-function Markov property and tower property; Chapman-Kolmogorov handles gaps. Indicators give rectangles, and rectangle uniqueness gives the law.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-initial-distribution-of-a-markov-chain",
+          "lem-bounded-function-form-of-the-markov-property",
+          "thm-chapman-kolmogorov-equations",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-dynkin-pi-lambda"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+        "kind": "theorem",
+        "title": "Ionescu-Tulcea construction of a Markov chain",
+        "statement": "Assume Choice. For measurable spaces E_n, an initial probability mu_0, and history-dependent probability kernels K_n from E_0 x ... x E_n to E_{n+1}, there is a unique countable-product probability measure with the prescribed iterated-integral cylinder laws. The homogeneous last-coordinate specialization constructs a Markov chain.",
+        "strategy": "Build consistent finite-path laws by kernel integration and a cylinder premeasure. For decreasing cylinders of positive limiting mass, recursively choose compatible finite coordinates of positive remaining mass, contradicting empty intersection; extend by Caratheodory and prove cylinder uniqueness. Choice is used in that recursion and by the extension interface. Verify the Markov identity first on cylinders and extend by monotone class.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined",
+          "def-premeasure-on-an-algebra",
+          "thm-caratheodory-extension-theorem",
+          "thm-monotone-class",
+          "thm-dynkin-pi-lambda",
+          "def-time-homogeneous-markov-chain-with-transition-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shalizi, Building Infinite Processes from Finite-Dimensional Distributions, Theorem 33",
+              "url": "https://www.stat.cmu.edu/~cshalizi/754/2006/notes/lecture-03.pdf",
+              "locator": "Theorem 33 and complete proof, all 5 PDF pages; course pp. 22-24"
+            },
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-canonical-markov-chain-on-path-space",
+        "kind": "corollary",
+        "title": "Canonical Markov chain on path space",
+        "statement": "Assume Choice. For every initial probability mu and kernel K on an arbitrary measurable E, E^{N_0} carries a unique Ionescu-Tulcea law under which its coordinates form the Markov chain (mu,K).",
+        "strategy": "Specialize Ionescu-Tulcea to the homogeneous last-coordinate kernel and identify the coordinate filtration and product sigma-algebra.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shalizi, Building Infinite Processes from Finite-Dimensional Distributions, Theorem 33",
+              "url": "https://www.stat.cmu.edu/~cshalizi/754/2006/notes/lecture-03.pdf",
+              "locator": "Theorem 33 and complete proof, all 5 PDF pages; course pp. 22-24"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-markov-chain-law-is-determined-by-initial-law-and-kernel",
+        "kind": "theorem",
+        "title": "A Markov-chain law is determined by its initial law and kernel",
+        "statement": "Assume Choice. Markov chains with the same initial law and kernel have the same finite-dimensional laws and the same induced law on the canonical cylinder sigma-algebra.",
+        "strategy": "Apply the iterated-integral formula to both chains and then the published determination of path-space law by finite-dimensional distributions.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-finite-dimensional-laws-of-a-markov-chain",
+          "thm-a-process-law-on-cylinder-space-is-determined-by-finite-dimensional-distributions"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-shift-operator-and-future-coordinate-sigma-algebra",
+        "kind": "definition",
+        "title": "Shift operator and future-coordinate sigma-algebra",
+        "statement": "On E^{N_0}, theta(x_0,x_1,...)= (x_1,x_2,...). The future sigma-algebra from n is sigma(X_n,X_{n+1},...), and a future path functional is H(X_n,X_{n+1},...) for measurable H on path space.",
+        "strategy": "Define the shift and generated sigma-algebra and verify coordinatewise measurability from the product sigma-algebra.",
+        "deps": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-markov-property-for-bounded-future-path-functionals",
+        "kind": "theorem",
+        "title": "Markov property for bounded future path functionals",
+        "statement": "Assume Choice. For bounded measurable H on path space, h(x)=E_x H is measurable and E[H(X_n,X_{n+1},...)|F_n]=h(X_n) almost surely.",
+        "strategy": "Prove the identity and measurability for bounded cylinder products by iterated kernels, then extend them simultaneously to all bounded product-measurable H by monotone class.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-shift-operator-and-future-coordinate-sigma-algebra",
+          "cor-canonical-markov-chain-on-path-space",
+          "lem-bounded-function-form-of-the-markov-property",
+          "thm-monotone-class",
+          "thm-dynkin-pi-lambda",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-discrete-strong-markov-property",
+        "kind": "theorem",
+        "title": "Discrete strong Markov property",
+        "statement": "Assume Choice. For any discrete stopping time tau and bounded measurable H, on {tau<infinity} one has E[1_{tau<infinity} H(X_tau,X_{tau+1},...)|F_tau]=1_{tau<infinity} h(X_tau) almost surely, with h(x)=E_x H. No X_infinity is defined. The almost-surely finite form follows immediately.",
+        "strategy": "For A in F_tau and each n, A intersect {tau=n} lies in F_n. Apply deterministic-time future Markov on every slice and sum the disjoint integrals over n. Bounded convergence handles the countable sum; both sides are explicitly zero on {tau=infinity}.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-markov-property-for-bounded-future-path-functionals",
+          "def-discrete-stopping-time",
+          "def-sigma-algebra-at-a-stopping-time",
+          "lem-stopping-time-sigma-algebra-is-a-sigma-algebra",
+          "lem-stopped-random-variable-is-measurable-at-the-stopping-time",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-post-hitting-chain-restarts-from-the-hit-state",
+        "kind": "corollary",
+        "title": "The post-hitting chain restarts from the hit state",
+        "statement": "Assume Choice. At any hitting time tau, on {tau<infinity} and conditional on F_tau the shifted chain has the canonical law started from X_tau, expressed through all bounded measurable path functionals. No value X_infinity is used.",
+        "strategy": "Apply the eventwise strong Markov theorem to the hitting time and identify h through the canonical path-space law.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-discrete-strong-markov-property",
+          "cor-canonical-markov-chain-on-path-space"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-killed-and-absorbed-transition-kernels",
+        "kind": "definition",
+        "title": "Killed and absorbed transition kernels",
+        "statement": "For measurable D, the absorbed kernel makes each point of D absorbing and leaves K on D^c. The kernel killed upon exiting D lives on E union {Delta}: from D it follows K within D and sends K(x,D^c) to the absorbing cemetery Delta. The cemetery sigma-algebra and formulas are explicit.",
+        "strategy": "Give formulas on every measurable target set and distinguish absorption at D from killing on exit from D.",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Sections 5.1-5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-killed-and-absorbed-kernels-are-probability-kernels",
+        "kind": "lemma",
+        "title": "Killed and absorbed kernels are probability kernels",
+        "statement": "Both preceding constructions are probability kernels on their stated measurable spaces.",
+        "strategy": "Check countable additivity and total mass pointwise; split source points across D, D^c, and Delta to prove evaluation measurability.",
+        "deps": [
+          "def-killed-and-absorbed-transition-kernels",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-discrete-generator-of-a-countable-state-transition-matrix",
+        "kind": "definition",
+        "title": "Discrete generator of a countable-state transition matrix",
+        "statement": "On countable S with its power set, Lf(x)=sum_y p(x,y)(f(y)-f(x))=Pf(x)-f(x) for bounded f; the sum is absolutely convergent.",
+        "strategy": "Bound the absolute sum by 2||f||_infinity and record the power-set measurability convention.",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Markov Chains: Martingale Methods, Note 24, Section 1",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-countable-state-martingale-problem-characterization",
+        "kind": "theorem",
+        "title": "Countable-state martingale-problem characterization",
+        "statement": "Assume Choice. An adapted S-valued process has transition matrix p iff, for every bounded f, M_n^f=f(X_n)-sum_{m<n}Lf(X_m) is an (F_n)-martingale.",
+        "strategy": "Forward: conditional mean of each increment is zero and boundedness gives integrability. Converse: take f=1_A for every subset A and rearrange the martingale identity into the conditional transition formula.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-generator-of-a-countable-state-transition-matrix",
+          "lem-bounded-function-form-of-the-markov-property",
+          "def-martingale-submartingale-and-supermartingale"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Markov Chains: Martingale Methods, Theorem 24.2",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-bounded-harmonic-functions-yield-markov-chain-martingales",
+        "kind": "corollary",
+        "title": "Bounded harmonic functions yield Markov-chain martingales",
+        "statement": "Assume Choice. If bounded f satisfies Pf=f, then f(X_n) is a bounded martingale for every p-chain.",
+        "strategy": "Harmonicity is Lf=0, so the compensator in the martingale-problem theorem vanishes; boundedness supplies integrability.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-countable-state-martingale-problem-characterization",
+          "def-discrete-generator-of-a-countable-state-transition-matrix"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Markov Chains: Martingale Methods, Note 24, Section 1",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.126,
+    "id": "markov-kernels-and-markov-chains-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Markov Kernels and Markov Chains — Examples",
+    "companion": "markov-kernels-and-markov-chains",
+    "requires": [
+      "markov-kernels-and-markov-chains"
+    ],
+    "items": [
+      {
+        "id": "ex-iid-sequences-as-markov-chains-with-state-independent-kernel",
+        "kind": "example",
+        "title": "IID sequences as Markov chains with state-independent kernel",
+        "statement": "An iid sequence with law nu is Markov with K(x,A)=nu(A).",
+        "strategy": "Use independence of X_{n+1} from the past to compute conditional expectations and match the constant kernel integral.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-bounded-function-form-of-the-markov-property",
+          "def-independent-random-elements",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-deterministic-dynamical-system-as-a-markov-kernel",
+        "kind": "example",
+        "title": "A deterministic dynamical system as a Markov kernel",
+        "statement": "For measurable T:E->E, K(x,A)=1_A(Tx) is a probability kernel and X_{n+1}=T(X_n) is a K-chain.",
+        "strategy": "Verify the Dirac kernel axioms and identify the conditional indicator with the known F_n-measurable variable 1_A(TX_n).",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-simple-random-walk-transition-kernel",
+        "kind": "example",
+        "title": "Simple random-walk transition kernel",
+        "statement": "Nearest-neighbour simple random walk on Z has p(x,x+1)=p(x,x-1)=1/2 and Lf(x)=(f(x+1)-2f(x)+f(x-1))/2.",
+        "strategy": "Condition on the next independent sign, then substitute the only two nonzero matrix entries in the generator.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "def-discrete-generator-of-a-countable-state-transition-matrix",
+          "def-independent-random-elements",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-grouping-independent-sigma-algebras"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Roch, Markov Chains: Martingale Methods, Exercise 24.1",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes24.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-absorbing-gamblers-ruin-chain",
+        "kind": "example",
+        "title": "Absorbing gambler's-ruin chain",
+        "statement": "The biased nearest-neighbour walk on {0,...,N} with 0 and N absorbing is an absorbed kernel; first entrance into the boundary is a hitting time.",
+        "strategy": "Write all matrix rows, verify boundary Dirac rows, and identify the boundary entrance event before applying the restart corollary.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-killed-and-absorbed-transition-kernels",
+          "lem-killed-and-absorbed-kernels-are-probability-kernels",
+          "cor-post-hitting-chain-restarts-from-the-hit-state"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres, Wilmer, Markov Chains and Mixing Times, Section 2.1",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "Gambler's ruin construction and absorbing endpoints, printed pp. 21-22"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-gaussian-ar-one-chain",
+        "kind": "example",
+        "title": "Gaussian AR(1) chain",
+        "statement": "If X_{n+1}=aX_n+sigma Z_{n+1} with fresh iid standard normals, then K(x,.)=N(ax,sigma^2) is its kernel.",
+        "strategy": "Condition on the past, use independence of the innovation, and identify the translated-scaled normal integral for bounded Borel tests.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-bounded-function-form-of-the-markov-property",
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-dynkin-pi-lambda"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-random-mapping-representation-for-a-finite-transition-matrix",
+        "kind": "example",
+        "title": "Random-mapping representation for a finite transition matrix",
+        "statement": "After ordering finite S, every transition matrix p admits F:S x [0,1]->S such that F(x,U) has row law p(x,.); from an S-valued random element X_0, fresh iid uniforms independent of X_0 construct its chain.",
+        "strategy": "Partition [0,1] by cumulative row probabilities with a fixed endpoint convention, compute interval lengths, and induct using fresh uniform independence.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-bounded-function-form-of-the-markov-property",
+          "cor-canonical-markov-chain-on-path-space",
+          "def-independent-random-elements",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-grouping-independent-sigma-algebras"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Levin, Peres, Wilmer, Markov Chains and Mixing Times, Section 1.2",
+              "url": "https://pages.uoregon.edu/dlevin/MARKOV/markovmixing.pdf",
+              "locator": "Random-mapping definition and Proposition 1.5 with proof, printed pp. 5-7"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-identical-one-step-marginals-do-not-determine-a-markov-chain",
+        "kind": "counterexample",
+        "title": "Identical one-time marginals do not determine a Markov chain",
+        "statement": "A stationary iid fair-bit chain and a constant fair-bit chain have identical one-time marginals but different kernels and two-time laws.",
+        "strategy": "Compute each marginal as Bernoulli(1/2), then compare P(X_0=X_1), equal to 1/2 versus 1.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-markov-chain-law-is-determined-by-initial-law-and-kernel",
+          "ex-iid-sequences-as-markov-chains-with-state-independent-kernel",
+          "ex-deterministic-dynamical-system-as-a-markov-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-process-with-the-right-transition-probabilities-relative-to-its-natural-filtration-may-fail-for-a-larger-filtration",
+        "kind": "counterexample",
+        "title": "The Markov property can fail for a larger filtration",
+        "statement": "An iid fair-bit sequence has the constant fair kernel naturally, but enlarging F_0 to reveal X_1 makes P(X_1=1|F_0)=1_{X_1=1}, not 1/2.",
+        "strategy": "Verify the iid property, define the enlarged filtration, and compare the conditional probabilities on X_1=0 and X_1=1.",
+        "deps": [
+          "def-axiom-of-choice",
+          "ex-iid-sequences-as-markov-chains-with-state-independent-kernel",
+          "def-time-homogeneous-markov-chain-with-transition-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-time-inhomogeneous-chain-cannot-be-encoded-by-one-kernel-without-enlarging-state",
+        "kind": "counterexample",
+        "title": "A time-inhomogeneous chain may require enlarged state",
+        "statement": "The deterministic process X_0=0,X_1=0,X_2=1 cannot have one homogeneous kernel on {0,1}; adjoining time to the state makes it homogeneous.",
+        "strategy": "The two occurrences of state 0 force incompatible values K(0,{1})=0 and 1. Then give the deterministic kernel on (n,x) that advances time.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-time-homogeneous-markov-chain-with-transition-kernel"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 5.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.131,
+    "id": "brownian-motion-construction-and-continuity",
+    "kind": "A",
+    "category": "probability",
+    "title": "Brownian Motion Construction and Continuity",
+    "companion": "brownian-motion-construction-and-continuity-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "infinite-product-measures-and-kolmogorov-extension",
+      "weak-convergence-tightness-and-representation",
+      "central-limit-theorems",
+      "markov-kernels-and-markov-chains",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "complete-metrizability-and-baire",
+      "function-space-topologies"
+    ],
+    "items": [
+      {
+        "id": "def-gaussian-process",
+        "kind": "definition",
+        "title": "Gaussian process",
+        "statement": "Assume Choice. A real process is Gaussian when every finite linear combination of its values is normal, allowing variance zero; equivalently every finite evaluation vector has a possibly singular multivariate normal law.",
+        "strategy": "State both conventions and prove equivalence by the linear-image characterization, retaining degenerate cases for repeated times and zero coefficients.",
+        "deps": [
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.1",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            },
+            {
+              "title": "Yoshida, Probability Theory, Section 6.1",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws",
+        "kind": "lemma",
+        "title": "Mean and covariance determine Gaussian finite-dimensional laws",
+        "statement": "Assume Choice. Gaussian processes with the same mean and covariance have identical finite-dimensional distributions.",
+        "strategy": "For each finite time list, compute the multivariate-normal characteristic function from its mean vector and covariance matrix and invoke uniqueness.",
+        "deps": [
+          "def-gaussian-process",
+          "def-axiom-of-choice",
+          "lem-characteristic-function-of-a-multivariate-normal-law"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.1",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-positive-semidefiniteness-of-the-brownian-covariance-kernel",
+        "kind": "lemma",
+        "title": "Positive semidefiniteness of the Brownian covariance kernel",
+        "statement": "C(s,t)=min(s,t) on nonnegative times is symmetric positive semidefinite.",
+        "strategy": "Sort the finitely many time levels and rewrite every quadratic form as a finite weighted sum of squares of tail coefficient sums. This is the interval-indicator Gram calculation evaluated explicitly and uses no integration or choice.",
+        "deps": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Sousi, Advanced Probability, Section 6.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-consistency-of-brownian-finite-dimensional-laws",
+        "kind": "lemma",
+        "title": "Consistency of Brownian finite-dimensional laws",
+        "statement": "Assume Choice. Centered Gaussian laws with covariance matrices (min(t_i,t_j)) are well-defined, permutation-compatible, and consistent under deletion and repetition of coordinates.",
+        "strategy": "PSD supplies each possibly singular Gaussian law. Compute the means and covariances after coordinate permutations or projections, then use characteristic-function uniqueness.",
+        "deps": [
+          "lem-positive-semidefiniteness-of-the-brownian-covariance-kernel",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-kolmogorov-construction-of-the-canonical-gaussian-process",
+        "kind": "theorem",
+        "title": "Kolmogorov construction of the canonical Gaussian process",
+        "statement": "Assume Choice. The consistent Brownian Gaussian finite-dimensional laws determine a probability on R^{[0,infinity)} whose coordinates are centered Gaussian with covariance min(s,t). This asserts neither continuous paths nor Brownian motion.",
+        "strategy": "Apply Kolmogorov extension for standard Borel coordinate R and its canonical-process corollary. Infer Gaussianity solely from finite-dimensional laws and explicitly defer regularity.",
+        "deps": [
+          "lem-consistency-of-brownian-finite-dimensional-laws",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "cor-canonical-process-realizes-consistent-finite-dimensional-laws",
+          "def-gaussian-process",
+          "def-standard-borel-space",
+          "def-polish-space",
+          "thm-euclidean-space-complete",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Sousi, Advanced Probability, Section 6.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+        "kind": "lemma",
+        "title": "Brownian covariance is equivalent to independent stationary normal increments",
+        "statement": "Assume Choice. For a real process X with X_0=0 almost surely, being a centered Gaussian process with covariance min(s,t) is equivalent to requiring, for every increasing finite list 0=t_0<t_1<...<t_n, that the increments X_{t_j}-X_{t_{j-1}} are mutually independent and distributed N(0,t_j-t_{j-1}).",
+        "strategy": "In the forward direction compute the jointly Gaussian increment covariance matrix; its diagonal form makes the characteristic function factor and gives independence. Conversely express every finite linear combination of process values as an affine sum of independent normal increments, then compute the mean and shared variance up to min(s,t).",
+        "deps": [
+          "def-gaussian-process",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Sections 6.1-6.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            },
+            {
+              "title": "Yoshida, Probability Theory, Section 6.1",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-brownian-motion",
+        "kind": "definition",
+        "title": "Brownian motion",
+        "statement": "Assume Choice. A standard Brownian motion starts at zero almost surely, has independent stationary increments B_t-B_s distributed N(0,t-s), and has almost surely continuous paths. No completed or right-continuous filtration is silently imposed.",
+        "strategy": "State increment and continuity clauses separately; covariance is an equivalent finite-dimensional Gaussian characterization, never a replacement for continuity.",
+        "deps": [
+          "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+          "def-law-modification-and-indistinguishability-of-processes",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.1",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-kolmogorov-continuity-criterion-one-parameter",
+        "kind": "theorem",
+        "title": "Kolmogorov continuity criterion in one parameter",
+        "statement": "Let X_t on [0,infinity) take values in a complete separable metric space. If alpha,beta>0 and finite constants C_T are given so that on each [0,T], E[d(X_t,X_s)^alpha]<=C_T|t-s|^{1+beta}, then X has a continuous modification, locally Holder of every order gamma<beta/alpha.",
+        "strategy": "Use Markov on adjacent dyadic increments and sum levels; Borel-Cantelli gives eventual dyadic control and chaining gives Holder bounds on the dense grid. Completeness supplies limits and separability secures measurability; fixed-time convergence in probability proves the modification property. Patch integer compacts by indistinguishability on rational overlaps, and intersect only countably many rational exponents and compacts.",
+        "deps": [
+          "def-complete-metric-space",
+          "def-separable-space",
+          "cor-markov-inequality-for-random-variables",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-geometric-series",
+          "lem-geometric-sequence-null",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "def-law-modification-and-indistinguishability-of-processes",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Yoshida, Probability Theory, Section 6.3",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-gaussian-even-moment-bound-for-brownian-increments",
+        "kind": "lemma",
+        "title": "Gaussian even-moment bound for Brownian increments",
+        "statement": "Assume Choice. If X_t-X_s has law N(0,|t-s|), then for every integer m>=1, E|X_t-X_s|^{2m}=c_m|t-s|^m with c_m=E|Z|^{2m}=(2m-1)!!<infinity; for m>=2 this meets Kolmogorov with alpha=2m and beta=m-1.",
+        "strategy": "Identify the increment law as sqrt(|t-s|)Z, scale its moment, and prove c_m finite from the normal density or moment recursion. Choice is declared because the current normal-law supplier imports it.",
+        "deps": [
+          "def-standard-normal-and-normal-laws",
+          "thm-change-of-variables-for-expectation",
+          "thm-integration-against-a-density",
+          "thm-integration-by-parts",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-exponential-definition-equivalence",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "lem-derivative-of-a-power",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-existence-of-continuous-brownian-motion",
+        "kind": "theorem",
+        "title": "Existence of continuous Brownian motion",
+        "statement": "Assume Choice. The canonical centered Gaussian coordinate process with covariance min(s,t) has a continuous modification, which is Brownian motion.",
+        "strategy": "Apply the continuity criterion with an even moment m>=2. A modification preserves each finite-dimensional law after a finite union of null sets, so the Gaussian covariance and independent stationary normal increments survive; add continuity and B_0=0.",
+        "deps": [
+          "thm-kolmogorov-construction-of-the-canonical-gaussian-process",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "thm-kolmogorov-continuity-criterion-one-parameter",
+          "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+          "def-brownian-motion",
+          "thm-euclidean-space-complete",
+          "def-separable-space",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Sousi, Advanced Probability, Section 6.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-brownian-paths-are-locally-holder-of-every-order-below-one-half",
+        "kind": "corollary",
+        "title": "Brownian paths are locally Holder below one half",
+        "statement": "Assume Choice. Every standard Brownian motion has one probability-one event on which its paths are Holder on every compact interval for every exponent gamma<1/2 simultaneously.",
+        "strategy": "For each rational gamma<1/2 choose m with gamma<(m-1)/(2m), apply Kolmogorov on each integer compact, and intersect countably. An arbitrary smaller exponent follows from a larger rational exponent on each compact.",
+        "deps": [
+          "def-brownian-motion",
+          "thm-kolmogorov-continuity-criterion-one-parameter",
+          "lem-gaussian-even-moment-bound-for-brownian-increments",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal",
+          "thm-of-archimedean",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.3",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            },
+            {
+              "title": "Yoshida, Probability Theory, Section 6.3",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-uniform-on-compacts-metric-on-continuous-path-space",
+        "kind": "definition",
+        "title": "Uniform-on-compacts metric on continuous path space",
+        "statement": "On C([0,infinity),R), d_uoc(f,g)=sum_{n>=1}2^{-n}(1 wedge sup_{t<=n}|f(t)-g(t)|) is a metric inducing uniform convergence on compact sets.",
+        "strategy": "Check metric axioms termwise. Equivalence with uniform convergence on every [0,n] follows by controlling finitely many head terms and the geometric tail; every compact lies in an integer interval.",
+        "deps": [
+          "def-topology-of-compact-convergence",
+          "def-metric-space",
+          "def-continuous-map-top",
+          "thm-geometric-series",
+          "lem-geometric-sequence-null",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-of-archimedean"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Weak Convergence and Empirical Processes, Sections 4.1 and 4.5",
+              "url": "https://www.stat.washington.edu/people/aa/research/WeakConvergence.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-continuous-path-space-is-polish",
+        "kind": "lemma",
+        "title": "Under countable choice, continuous path space is Polish",
+        "statement": "Assume countable choice as required by the library interface. The uoc metric makes C([0,infinity),R) complete and separable.",
+        "strategy": "A uoc-Cauchy sequence converges uniformly on every [0,n]; complete uniform function spaces give compatible continuous limits that glue. Eventually constant rational polygonal paths form a countable dense set by uniform continuity on compacts.",
+        "deps": [
+          "def-uniform-on-compacts-metric-on-continuous-path-space",
+          "thm-geometric-series",
+          "lem-geometric-sequence-null",
+          "thm-function-space-is-complete-for-a-complete-target",
+          "thm-uniform-limit-theorem",
+          "thm-heine-cantor-metric",
+          "thm-euclidean-space-complete",
+          "thm-heine-borel-rn",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "thm-product-of-countable",
+          "thm-countable-union-of-countable",
+          "thm-of-archimedean",
+          "def-polish-space",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Weak Convergence and Empirical Processes, Sections 4.1 and 4.5",
+              "url": "https://www.stat.washington.edu/people/aa/research/WeakConvergence.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-wiener-measure-on-continuous-path-space",
+        "kind": "definition",
+        "title": "Wiener measure on continuous path space",
+        "statement": "Assume Choice. Wiener measure is the pushforward law of a continuous Brownian sample-path map into C([0,infinity),R), after setting one fixed path on the common exceptional null set.",
+        "strategy": "Prove the path map measurable by expressing uoc-ball conditions through suprema over rational times, then take its pushforward. The common null-set redefinition is made before mapping into C.",
+        "deps": [
+          "thm-existence-of-continuous-brownian-motion",
+          "def-uniform-on-compacts-metric-on-continuous-path-space",
+          "lem-continuous-path-space-is-polish",
+          "def-separable-space",
+          "def-random-element-and-real-random-variable",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "thm-product-of-countable",
+          "lem-subset-of-countable",
+          "def-metric-topology",
+          "def-borel-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Sousi, Advanced Probability, Section 6.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+        "kind": "lemma",
+        "title": "Borel sigma-algebra of continuous path space is generated by coordinates",
+        "statement": "For the uoc topology, B(C)=sigma(pi_t:t>=0)=sigma(pi_q:q>=0 rational).",
+        "strategy": "Evaluations are continuous. Conversely express uoc balls through compact suprema over rational times; continuity makes rational suprema exact. Irrational evaluation maps are pointwise limits along fixed rational sequences.",
+        "deps": [
+          "def-uniform-on-compacts-metric-on-continuous-path-space",
+          "def-borel-sigma-algebra",
+          "def-generated-sigma-algebra",
+          "thm-generated-sigma-algebra-exists-and-is-minimal",
+          "def-evaluation-map",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "lem-integer-part",
+          "thm-n-cross-n-countable",
+          "thm-recursion",
+          "thm-product-of-countable",
+          "lem-subset-of-countable",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "cor-archimedean-reciprocal",
+          "thm-geometric-series",
+          "lem-geometric-sequence-null",
+          "def-metric-topology"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "van der Vaart, Weak Convergence and Empirical Processes, Section 4.1",
+              "url": "https://www.stat.washington.edu/people/aa/research/WeakConvergence.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-uniqueness-of-wiener-measure",
+        "kind": "theorem",
+        "title": "Uniqueness of Wiener measure",
+        "statement": "Assume Choice. Exactly one probability on B(C([0,infinity),R)) gives the coordinate process centered Gaussian finite-dimensional laws with covariance min(s,t).",
+        "strategy": "Existence is the pushforward. Two candidates agree on rational finite-coordinate cylinders; these form a pi-system generating the Borel sigma-algebra, so probability-measure uniqueness applies.",
+        "deps": [
+          "def-wiener-measure-on-continuous-path-space",
+          "def-brownian-motion",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws",
+          "def-lambda-system",
+          "thm-continuity-from-below-for-measures",
+          "thm-dynkin-pi-lambda",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-brownian-scaling",
+        "kind": "theorem",
+        "title": "Brownian scaling",
+        "statement": "Assume Choice. For c>0, (c^{-1/2}B_{ct}) is Brownian and has Wiener law.",
+        "strategy": "Rescaling preserves continuity; its covariance is c^{-1}min(cs,ct)=min(s,t), equivalently its increments have the required normal laws. Invoke Wiener uniqueness.",
+        "deps": [
+          "def-brownian-motion",
+          "def-gaussian-process",
+          "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+          "def-wiener-measure-on-continuous-path-space",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "thm-uniqueness-of-wiener-measure",
+          "thm-of-square-roots",
+          "thm-reals-field",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.3",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            },
+            {
+              "title": "Yoshida, Probability Theory, Section 6.2",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-brownian-time-inversion",
+        "kind": "theorem",
+        "title": "Brownian time inversion",
+        "statement": "Assume Choice. If B is Brownian, Y_0=0 and Y_t=tB_{1/t} for t>0 define another Brownian motion, including continuity at zero.",
+        "strategy": "At positive times compute the centered Gaussian covariance st min(1/s,1/t)=min(s,t). On the countable positive rational index set, finite-dimensional equality and a cylinder pi-lambda argument transfer the measurable event of convergence to zero from B to the inverted process. Positive-time continuity and rational density then give full continuity at zero.",
+        "deps": [
+          "def-brownian-motion",
+          "def-gaussian-process",
+          "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+          "lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "lem-finite-coordinate-cylinders-form-a-pi-system",
+          "def-random-element-and-real-random-variable",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "def-lambda-system",
+          "thm-continuity-from-below-for-measures",
+          "thm-dynkin-pi-lambda",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "cor-archimedean-reciprocal",
+          "lem-probability-measure-basic-identities",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.3",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            },
+            {
+              "title": "Yoshida, Probability Theory, Section 6.2",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-d-dimensional-brownian-motion",
+        "kind": "definition",
+        "title": "d-dimensional Brownian motion",
+        "statement": "Assume Choice. For positive integer d, a d-dimensional Brownian motion is a continuous R^d-valued process starting at zero with independent increments of law N_d(0,hI_d); equivalently its coordinate processes are independent standard Brownian motions.",
+        "strategy": "First prove that a vector has law N_d(0,hI_d) exactly when its coordinates are independent N(0,h) variables. On each finite time grid, expand vector increments into the full scalar coordinate-increment family and use rectangle factorization in both directions. Promote finite coordinate-cylinder independence to independence of the complete coordinate-process random elements, and intersect the finitely many coordinate continuity events for the reverse implication.",
+        "deps": [
+          "def-brownian-motion",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "def-independent-random-elements",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "lem-finite-coordinate-cylinders-form-a-pi-system",
+          "thm-pi-system-criterion-for-independent-sigma-algebras",
+          "thm-componentwise-limits-and-continuity",
+          "lem-probability-measure-basic-identities",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yoshida, Probability Theory, Definition 6.1.1, Lemma 6.1.3, and Proposition 6.1.4",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf"
+            },
+            {
+              "title": "Sousi, Advanced Probability, Section 6.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-existence-and-scaling-of-d-dimensional-brownian-motion",
+        "kind": "corollary",
+        "title": "Existence and scaling of d-dimensional Brownian motion",
+        "statement": "Assume Choice. Independent copies of constructed one-dimensional Brownian motion form d-dimensional Brownian motion, and c^{-1/2}B_{ct} has the same d-dimensional law.",
+        "strategy": "Apply the independent-copy theorem to Wiener measure on continuous path space, then use the coordinate-process characterization to assemble the first d copies. For scaling, prove the time-scale map is cylinder-measurable, preserve independence under it, apply scalar Brownian scaling coordinatewise, and promote equality of all finite-dimensional laws to equality of the full cylinder-space process laws.",
+        "deps": [
+          "def-d-dimensional-brownian-motion",
+          "thm-existence-of-continuous-brownian-motion",
+          "def-wiener-measure-on-continuous-path-space",
+          "lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates",
+          "cor-countable-independent-copies-exist",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-brownian-scaling",
+          "lem-measurable-functions-preserve-independence",
+          "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "lem-finite-coordinate-cylinders-form-a-pi-system",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Sousi, Advanced Probability, Sections 6.2--6.3",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-continuous-time-filtration-and-all-pairs-martingale",
+        "kind": "definition",
+        "title": "Continuous-time filtrations and all-pairs martingales",
+        "statement": "Assume Choice. A continuous-time filtration is an increasing family (F_t)_{t>=0} of sub-sigma-algebras. A real process M is an all-pairs continuous-time martingale when it is adapted, integrable at every time, and E[M_t|F_s]=M_s almost surely for every 0<=s<=t. The natural filtration of a process is generated by all observations up to time t and is neither completed nor right-continuously augmented by this definition.",
+        "strategy": "Define filtration, adaptation, timewise integrability, the natural filtration for arbitrary random-element processes, and the all-pairs martingale condition. Use generated-sigma-algebra minimality to verify nesting, adaptation, and minimality; distinguish the time index from path continuity and record conditional expectation as an almost-everywhere class.",
+        "deps": [
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "thm-generated-sigma-algebra-exists-and-is-minimal",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Sections 2 and 3.1",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf",
+              "locator": "Section 2 and Definition 2.1, printed pp. 13-14, for natural filtration, adaptation, integrability, and the all-pairs identity; Section 3.1, printed pp. 28 and 33, for continuous-time filtrations and the unchanged martingale definition."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.132,
+    "id": "brownian-motion-construction-and-continuity-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Brownian Motion Construction and Continuity — Examples",
+    "companion": "brownian-motion-construction-and-continuity",
+    "requires": [
+      "brownian-motion-construction-and-continuity"
+    ],
+    "items": [
+      {
+        "id": "ex-brownian-finite-dimensional-density",
+        "kind": "example",
+        "title": "Brownian finite-dimensional density",
+        "statement": "Assume Choice. For 0<t_1<...<t_n, (B_{t_1},...,B_{t_n}) has the product density of successive centered normal increments, with x_0=0.",
+        "strategy": "Derive each positive-variance normal density from its affine-pushforward definition by the Borel change-of-variables theorem. Use Tonelli and uniqueness of sigma-finite product measures to identify the independent increment-vector density. Then apply the explicit mutually inverse cumulative-sum and first-difference linear maps; the first-difference matrix is lower triangular with determinant one, so Borel change of variables gives the displayed level density.",
+        "deps": [
+          "def-brownian-motion",
+          "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+          "def-standard-normal-and-normal-laws",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-determinant-of-a-triangular-matrix",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 6.1",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf",
+              "locator": "Section 6.1, printed p. 51, for the independent normal-increment definition; the density and triangular substitution are derived locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-covariance-of-overlapping-brownian-increments",
+        "kind": "example",
+        "title": "Covariance of overlapping Brownian increments",
+        "statement": "Assume Choice. For 0<=s<=t and 0<=u<=v, Cov(B_t-B_s,B_v-B_u) is the length max(0,min(t,v)-max(s,u)) of the overlap of [s,t] and [u,v].",
+        "strategy": "Use covariance bilinearity to obtain the four-term minimum-kernel expression. By symmetry assume s<=u, then treat t<=u, u<t<=v, and u<=v<t; these cases give respectively zero, t-u, and v-u and include every endpoint and zero-length degeneration.",
+        "deps": [
+          "def-brownian-motion",
+          "lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Section 7.1, printed p. 355, for E[B_s B_t]=min(s,t); the four-term overlap case split is local."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-linear-combinations-of-brownian-values-are-gaussian",
+        "kind": "example",
+        "title": "Linear combinations of Brownian values are Gaussian",
+        "statement": "Assume Choice. Every finite sum sum_j a_jB_{t_j} is centered normal with variance sum_{i,j}a_i a_j min(t_i,t_j), including variance zero.",
+        "strategy": "Treat the Brownian evaluation vector as a possibly singular multivariate normal with zero mean and minimum-kernel covariance. Project along the coefficient vector, then independently compute the variance by covariance bilinearity and use positive semidefiniteness for nonnegativity. Handle the empty sum directly as N(0,0), retaining repeated and zero times rather than deleting them.",
+        "deps": [
+          "def-gaussian-process",
+          "def-brownian-motion",
+          "def-multivariate-normal-law",
+          "lem-positive-semidefiniteness-of-the-brownian-covariance-kernel",
+          "thm-covariance-bilinearity-and-symmetry",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yoshida, Probability Theory, Section 6.1",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf",
+              "locator": "Lemma 6.1.3 and equation (6.5), printed pp. 174-175, for mean-zero Gaussian Brownian collections and their covariance."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-brownian-bridge-from-brownian-motion",
+        "kind": "example",
+        "title": "Brownian bridge from Brownian motion",
+        "statement": "Assume Choice. On [0,1], beta_t=B_t-tB_1 is a centered Gaussian process with one almost-surely continuous path event, covariance min(s,t)-st, beta_0=0 almost surely, and beta_1=0 identically.",
+        "strategy": "Rewrite every finite linear combination of beta values as one finite linear combination of Brownian values, with time 1 appended, and use expectation linearity for centering. Expand the covariance by bilinearity. Intersect the Brownian continuity and initial-value events, then use the algebra of continuous functions and verify both endpoints directly.",
+        "deps": [
+          "def-gaussian-process",
+          "def-brownian-motion",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-covariance-bilinearity-and-symmetry",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "lem-probability-measure-basic-identities",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yoshida, Probability Theory, Exercise 6.1.10",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf",
+              "locator": "Exercise 6.1.10, printed p. 180, for the general bridge formula."
+            },
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 8.4",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Section 8.4, printed pp. 412-413, for B_t-tB_1 and its covariance."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-deterministic-integral-construction-of-a-gaussian-process",
+        "kind": "example",
+        "title": "A deterministic integral construction of a Gaussian process",
+        "statement": "Assume Choice. Fix the measurable probability-one continuity event A of a Brownian motion B and define X_t as the Riemann integral of B over [0,t] on A and as zero off A. Then X is a centered Gaussian process with covariance integral_0^s integral_0^t min(u,v) dv du; for 0<=s<=t this equals s^2(3t-s)/6.",
+        "strategy": "Use uniform left-endpoint Riemann sums, measurable pointwise limits, and pasting on A to make every X_t a genuine random variable. Their covariances are product-grid Riemann sums for min(u,v). For every finite linear combination, almost-sure convergence of centered normal sums and dominated convergence of their characteristic functions identify a possibly degenerate normal limit. Polarization then gives the covariance, and elementary polynomial antiderivatives give its closed form.",
+        "deps": [
+          "def-brownian-motion",
+          "def-gaussian-process",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-continuous-implies-integrable",
+          "thm-darboux-equals-riemann",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-multidimensional-darboux-equals-riemann",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-covariance-bilinearity-and-symmetry",
+          "def-characteristic-function-of-a-real-random-variable",
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-dominated-convergence",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "def-standard-normal-and-normal-laws",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yoshida, Probability Theory, Sections 6.1-6.3",
+              "url": "https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf",
+              "locator": "Section 6.1, Lemma 6.1.3 and equation (6.5), printed pp. 174-175, for Gaussian finite combinations and the Brownian covariance; Section 6.3 for Brownian path regularity. The zero repair and Riemann-sum limiting proof are local."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-multidimensional-brownian-radial-second-moment",
+        "kind": "example",
+        "title": "Radial second moment of multidimensional Brownian motion",
+        "statement": "Assume Choice. For d-dimensional Brownian B and its natural filtration F_t=sigma(B_u:0<=u<=t), E|B_t|^2=dt and M_t=|B_t|^2-dt satisfies E[M_t|F_s]=M_s almost surely for every 0<=s<=t; thus M is a continuous-time martingale in the all-pairs sense.",
+        "strategy": "Use scalar coordinate moments to prove E|B_t|^2=dt, integrability, and adaptation. For fixed s<t, prove that B_t-B_s is independent of the entire uncompleted natural past: verify factorization on finite past-observation cylinders by sorting one finite time grid and grouping independent increments, then promote it to F_s by a pi-lambda argument. Condition the squared-norm expansion; Cauchy-Schwarz justifies every cross product, the centered cross terms vanish, and the future squared norm contributes d(t-s). Treat s=0 and s=t separately inside the same argument.",
+        "deps": [
+          "def-d-dimensional-brownian-motion",
+          "def-continuous-time-filtration-and-all-pairs-martingale",
+          "def-euclidean-inner-product",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "thm-dynkin-pi-lambda",
+          "lem-probability-measure-basic-identities",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-taking-out-what-is-known",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "cor-cauchy-schwarz-for-random-variables",
+          "lem-characteristic-function-of-a-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.5",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 7.5.4 and its complete proof, printed p. 376, for the scalar square martingale. The finite-dimensional extension and natural-past pi-lambda argument are local."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-kolmogorov-extension-alone-does-not-give-a-continuous-version",
+        "kind": "counterexample",
+        "title": "Kolmogorov extension alone does not give a continuous version",
+        "statement": "Assume Choice. Give every finite F subset [0,1] the uniform law on {0,1}^F. These laws are consistent and have a Kolmogorov extension whose canonical coordinates are independent fair bits, but that process has no continuous modification.",
+        "strategy": "Use q_n=1/(n+1) tending to the endpoint 0. Second Borel-Cantelli, applied separately to the events {X_{q_n}=1} and their complements, makes both bit values occur infinitely often almost surely. A putative continuous modification agrees with X simultaneously at all q_n on a countable full-measure intersection, contradicting sequential continuity at 0.",
+        "deps": [
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "cor-canonical-process-realizes-consistent-finite-dimensional-laws",
+          "def-independent-random-elements",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "lem-mutual-independence-under-subfamilies-and-complements",
+          "lem-probability-measure-basic-identities",
+          "def-law-modification-and-indistinguishability-of-processes",
+          "thm-sequential-criterion-for-continuity",
+          "lem-of-triangle-inequality",
+          "cor-archimedean-reciprocal",
+          "lem-of-inverse-positive",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Section 7.1",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Theorem 7.1.1 and the following discussion, printed p. 356; the Bernoulli witness and no-modification argument are local."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-modifying-a-process-at-each-time-can-destroy-path-continuity-on-an-uncountable-index-set",
+        "kind": "counterexample",
+        "title": "Pointwise modification can destroy path continuity",
+        "statement": "Assume countable choice. On [0,1] with normalized Lebesgue measure let U(omega)=omega, X_t=0, and Y_t=1_{U=t}. Then Y is a modification of X, every X path is continuous, every Y path has a discontinuous spike, and their simultaneous-equality event is empty, so they are not indistinguishable.",
+        "strategy": "Construct the trace Lebesgue probability space and verify that every coordinate indicator is measurable. For fixed t the exceptional singleton has measure zero. For each outcome, test the path at its spike with epsilon 1/2 and an explicit nearby point, separately covering the right and left endpoints. At t=omega simultaneous equality fails for every outcome.",
+        "deps": [
+          "def-law-modification-and-indistinguishability-of-processes",
+          "def-probability-measure",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "def-continuity-real",
+          "cor-interval-uncountable",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sousi, Advanced Probability, Section 3.2",
+              "url": "https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf",
+              "locator": "Definition 3.6, Remark 3.7, and Example 3.8, printed pp. 31--32."
+            }
+          ]
+        }
+      }
+    ],
+    "forwardRefs": [
+      "euclidean-surface-measure-divergence-and-green-identities",
+      "weak-choice-principles-and-sierpinskis-theorem"
+    ]
+  }
+]

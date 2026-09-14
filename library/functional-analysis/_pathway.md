@@ -22,21 +22,25 @@ parts:
       - weak-and-weak-star-topologies
       - reflexivity-and-eberlein-smulian
       - banach-alaoglu-goldstine-and-krein-milman
+      - schauder-bases-approximation-and-banach-space-pathologies
+      - banach-valued-integration-and-the-radon-nikodym-property
 ---
 
 ## foundations
 
-Normed spaces, Banach completeness: subspaces, products, series, completion, bounded
-maps, quotients; finite-dimensional equivalence and Riesz's lemma precede Baire category
-under DC, giving open mapping, bounded inverse, closed graph and $\mathrm{AC}_\omega$
-uniform boundedness. Fourier analysis follows: convolution-to-product under the $L^1$
-transform, Gaussian approximate identities, inversion, Schwartz-space Parseval, unitary
-Plancherel, Poisson summation; tempered distributions on $\mathcal S'$ add
-finite-seminorm bounds, weak and strong dual topologies and the $2\pi$-normalized
-Fourier automorphism. Hahn--Banach supplies norming functionals, bidual maps,
-separation; distributions, annihilators, transposes, closed range complete the dual
-theory, choice hypotheses stated. Weak, weak-star and locally convex topologies, with
-continuous separation, close the track: Banach--Alaoglu, Goldstine, weak-star
-metrizability, Krein--Milman, Bauer, Milman, then reflexivity as unit-ball weak
-compactness, with $L^p$, Eberlein--Šmulian, Schur, uniform convexity, James,
-Bishop--Phelps.
+Normed spaces and Banach completeness: subspaces, products, series,
+completion, bounded maps, quotients; finite-dimensional equivalence, Riesz's
+lemma, Baire category under DC: open mapping, bounded inverse, closed graph,
+$\mathrm{AC}_\omega$ uniform boundedness. Fourier analysis: convolution,
+Gaussian approximate identities, inversion, Schwartz-space Parseval, unitary
+Plancherel, Poisson summation, tempered distributions with finite-seminorm
+bounds and the $2\pi$-normalized Fourier automorphism. Hahn--Banach supplies
+norming functionals, bidual maps and separation. Distributions, annihilators,
+transposes, closed range and the weak, weak-star and locally convex
+topologies follow, choice hypotheses stated: Banach--Alaoglu, Goldstine,
+Krein--Milman, reflexivity, $L^p$, Eberlein--Šmulian, Schur, uniform
+convexity, James, Bishop--Phelps. Schauder bases, unconditional convergence,
+bounded approximation, the charge dual of $\ell^\infty$, James space, Enflo's
+reflexive space without approximation, then Bochner integration, vector
+measures, the Radon--Nikodym property and Dunford--Pettis, failing for $c_0$,
+$L^1([0,1])$.

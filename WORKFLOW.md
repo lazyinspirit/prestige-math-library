@@ -306,6 +306,15 @@ consumers. A genuinely new supplier fully authored by the Step-7 adjudicator is
 mechanically certified as a distinct class and receives no fabricated judge row;
 existing-item repairs still require the configured rejudge route.
 
+When a confirmed-fatal interface correction makes an existing downstream item
+state the retracted interface, the owner records an `owner-impact-repair` in the
+run's owner-repair ledger. The receipt binds the downstream item's Step-7
+baseline and repaired hashes, its group, authoritative sources, and an ordered
+declared dependency path rooted at the fatal item. Each intermediate changed
+consumer must already have its own exact licence. This permits required impact
+synchronization without inventing a rejection for an item the judge accepted,
+and does not license unrelated edits elsewhere in the dependency cone.
+
 Step 7 is: group repairs → preflight checks → one Terra rejudge → terminal
 resolution → snapshot → Step 8. Only the engine dispatches judges. A gate-held
 rejection is resolved by the owner against the exact rejected text and context:

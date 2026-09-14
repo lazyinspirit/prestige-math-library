@@ -166,13 +166,15 @@ function certify(root, run, partial) {
         !/-batch-\d+\.pages\.json$/.test(path));
       if (!author || !Number.isFinite(ended)
         || paths.some(path => statSync(path).mtimeMs > ended)) {
-        ownerRecertification = prior && currentOwnerRepair(s, id, dependencies, sha256);
+        const originAuthorResult = prior?.author_result ?? author?.label;
+        ownerRecertification = originAuthorResult
+          ? currentOwnerRepair(s, id, dependencies, sha256) : null;
         if (!ownerRecertification) {
           defer(author ? `${id}: changed after its latest successful Step 3 auditor/author result`
             : `${id}: no successful Step 3 auditor/author result covers batch ${batch} or pair ${pair}`);
           continue;
         }
-        author = { label: prior.author_result };
+        author = { label: originAuthorResult };
       }
     }
     certified.push({ id, page: value.page.id, batch, dependencies,

@@ -46,6 +46,20 @@ test('finite-smoke enumerates the fair-coin shift cylinder calculation', () => {
   assert.match(row.summary, /cylinder pairs/);
 });
 
+test('finite-smoke executes the registered phase-2 finite calculations', () => {
+  const r = spawnSync(process.execPath, [join(REPO, 'tools', 'finite-smoke.mjs'), '--self-test', '--json'],
+    { cwd: REPO, encoding: 'utf8', timeout: 300_000 });
+  assert.equal(r.status, 0, r.stderr || r.stdout);
+  const report = JSON.parse(r.stdout) as {
+    outcomes: Array<{ name: string; ok: boolean; summary: string }>;
+  };
+  const byName = new Map(report.outcomes.map((outcome) => [outcome.name, outcome]));
+  assert.equal(byName.get('brownian-increment-overlap-identity')?.ok, true);
+  assert.match(byName.get('brownian-increment-overlap-identity')?.summary ?? '', /ordered interval pairs/);
+  assert.equal(byName.get('sl2-killing-form-matrix-calculation')?.ok, true);
+  assert.match(byName.get('sl2-killing-form-matrix-calculation')?.summary ?? '', /determinant -128/);
+});
+
 test('the url gate declares a liveness floor', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };

@@ -1,0 +1,1312 @@
+[
+  {
+    "order": 288.067,
+    "id": "schauder-bases-approximation-and-banach-space-pathologies",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Schauder Bases Approximation and Banach Space Pathologies",
+    "companion": "schauder-bases-approximation-and-banach-space-pathologies-examples",
+    "requires": [
+      "reflexivity-and-eberlein-smulian"
+    ],
+    "items": [
+      {
+        "id": "def-schauder-basis-and-coordinate-functionals",
+        "kind": "definition",
+        "title": "Schauder basis and coordinate functionals",
+        "deps": [
+          "def-banach-space",
+          "def-series-and-absolute-convergence-in-a-normed-space"
+        ],
+        "statement": "A Schauder basis (e_n) of a real or complex Banach space X gives every x a unique fixed-order norm-convergent expansion x=sum a_n e_n; define e_n*(x)=a_n.",
+        "strategy": "Uniqueness proves coordinate linearity; continuity is deliberately postponed."
+      },
+      {
+        "id": "def-partial-sum-projections-and-basis-constant",
+        "kind": "definition",
+        "title": "Partial sum projections and basis constant",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-operator-norm"
+        ],
+        "statement": "Define P_Nx=sum_{n<=N}e_n*(x)e_n and K=sup_N||P_N||, initially allowing infinity.",
+        "strategy": "Separate the algebraic finite-rank maps from their later continuity."
+      },
+      {
+        "id": "lem-schauder-coefficient-space-is-banach",
+        "kind": "lemma",
+        "title": "Schauder coefficient space is banach",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space"
+        ],
+        "statement": "The coefficient sequences a for which sum a_ne_n converges form a Banach space E in sup_N||sum_{n<=N}a_ne_n||; summation E->X is a bounded bijection.",
+        "strategy": "An E-Cauchy sequence has coordinatewise limits by finite-dimensional coordinate continuity. Compare its finite blocks with one close coefficient sequence to obtain uniform Cauchy tails and completeness. This uses no prior continuity of e_n* on X."
+      },
+      {
+        "id": "thm-coordinate-functionals-of-a-schauder-basis-are-bounded",
+        "kind": "theorem",
+        "title": "Coordinate functionals of a schauder basis are bounded",
+        "deps": [
+          "def-dependent-choice",
+          "def-partial-sum-projections-and-basis-constant",
+          "lem-schauder-coefficient-space-is-banach",
+          "thm-bounded-inverse-theorem"
+        ],
+        "statement": "Assume DC. Every e_n* and P_N is bounded and K<infinity.",
+        "strategy": "Apply bounded inverse to summation E->X; coefficient evaluation and truncation are bounded on E. The resulting ||P_Nx||<=||S^{-1}x||_E gives a common bound. This replaces the circular design route that invoked UBP before P_N continuity."
+      },
+      {
+        "id": "cor-banach-space-with-a-schauder-basis-is-separable",
+        "kind": "corollary",
+        "title": "Banach space with a schauder basis is separable",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals"
+        ],
+        "statement": "Every Banach space with a Schauder basis is separable.",
+        "strategy": "Rational, or Gaussian-rational, finite combinations are countable and dense by convergence of basis partial sums."
+      },
+      {
+        "id": "def-unconditional-convergence-of-a-banach-space-series",
+        "kind": "definition",
+        "title": "Unconditional convergence of a banach space series",
+        "deps": [
+          "def-series-and-absolute-convergence-in-a-normed-space"
+        ],
+        "statement": "A series is unconditionally convergent when every permutation converges to the same sum; this is distinct from sum ||x_n||<infinity.",
+        "strategy": "Keep fixed-order, rearranged, subseries, and absolute convergence separate."
+      },
+      {
+        "id": "def-unconditional-and-conditional-basis",
+        "kind": "definition",
+        "title": "Unconditional and conditional basis",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-unconditional-convergence-of-a-banach-space-series"
+        ],
+        "statement": "A Schauder basis is unconditional if every basis expansion converges unconditionally, and conditional otherwise.",
+        "strategy": "Quantify over every expansion, not the formal basis sequence."
+      },
+      {
+        "id": "thm-unconditional-convergence-equivalences",
+        "kind": "theorem",
+        "title": "Unconditional convergence equivalences",
+        "deps": [
+          "def-banach-space",
+          "def-unconditional-convergence-of-a-banach-space-series"
+        ],
+        "statement": "For a Banach-space series, permutation-invariant convergence, convergence of the finite-subset net, uniform smallness of finite tails, convergence of every subseries, and convergence under every bounded scalar multiplier are equivalent.",
+        "strategy": "Mueger A.4: failure of tail control gives disjoint bad blocks and a divergent rearrangement/subseries. Tail control gives Cauchy nets. Decompose real/imaginary multipliers into signed [0,1] parts and use finite convex layer-cake combinations of indicators, avoiding the published dual-norming result and its hidden AC."
+      },
+      {
+        "id": "def-approximation-property-and-bounded-approximation-property",
+        "kind": "definition",
+        "title": "Approximation property and bounded approximation property",
+        "deps": [
+          "def-banach-space",
+          "def-bounded-linear-operator",
+          "def-operator-norm"
+        ],
+        "statement": "AP means uniform approximation of the identity on each norm-compact set by bounded finite-rank maps; lambda-BAP adds ||T||<=lambda, and BAP means lambda-BAP for some finite lambda.",
+        "strategy": "Define finite rank by finite-dimensional image and do not require a sequence in nonseparable spaces."
+      },
+      {
+        "id": "lem-pointwise-convergent-uniformly-bounded-operators-converge-uniformly-on-compact-sets",
+        "kind": "lemma",
+        "title": "Pointwise convergent uniformly bounded operators converge uniformly on compact sets",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-operator-norm"
+        ],
+        "statement": "Uniformly bounded bounded-linear T_n which converge pointwise converge uniformly on every norm-compact set.",
+        "strategy": "The limit is bounded by taking limits. A finite delta-net reduces the estimate to finitely many pointwise thresholds plus 2M delta; handle M=0."
+      },
+      {
+        "id": "thm-schauder-basis-implies-bounded-approximation-property",
+        "kind": "theorem",
+        "title": "Schauder basis implies bounded approximation property",
+        "deps": [
+          "def-dependent-choice",
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-approximation-property-and-bounded-approximation-property",
+          "thm-coordinate-functionals-of-a-schauder-basis-are-bounded",
+          "lem-pointwise-convergent-uniformly-bounded-operators-converge-uniformly-on-compact-sets"
+        ],
+        "statement": "Assume DC. A Schauder-basis space has K-BAP.",
+        "strategy": "The defining Schauder expansions give pointwise convergence of the finite-rank P_N, while the coordinate theorem gives their common norm bound; apply the compact-uniform lemma. DC is exactly inherited from bounded inverse."
+      },
+      {
+        "id": "def-finitely-additive-charge-and-total-variation-on-the-power-set-of-n",
+        "kind": "definition",
+        "title": "Finitely additive charge and total variation on the power set of n",
+        "deps": [
+          "def-c-zero-and-ell-infinity"
+        ],
+        "statement": "A scalar charge on P(N) is finitely additive; |nu|(A) is the supremum of sum||nu(A_j)|| over finite partitions, and ba consists of finite-variation charges.",
+        "strategy": "Distinguish finite from countable additivity, for real and complex scalars."
+      },
+      {
+        "id": "lem-finite-range-sequences-are-uniformly-dense-in-ell-infinity",
+        "kind": "lemma",
+        "title": "Finite range sequences are uniformly dense in ell infinity",
+        "deps": [
+          "def-c-zero-and-ell-infinity"
+        ],
+        "statement": "Finite-range scalar sequences are sup-norm dense in ell-infinity.",
+        "strategy": "Quantize a bounded interval or complex square into finitely many cells."
+      },
+      {
+        "id": "def-finitely-additive-integral-on-ell-infinity",
+        "kind": "definition",
+        "title": "Finitely additive integral on ell infinity",
+        "deps": [
+          "def-finitely-additive-charge-and-total-variation-on-the-power-set-of-n",
+          "lem-finite-range-sequences-are-uniformly-dense-in-ell-infinity"
+        ],
+        "justified_by": [
+          "lem-finitely-additive-integral-is-well-defined-and-isometric"
+        ],
+        "statement": "For finite-range s=sum c_j1_{A_j} on a finite disjoint partition set I_nu(s)=sum c_jnu(A_j); use its continuous extension for arbitrary bounded sequences once proved.",
+        "strategy": "Common-refinement independence precedes extension; do not import countably additive integration."
+      },
+      {
+        "id": "lem-finitely-additive-integral-is-well-defined-and-isometric",
+        "kind": "lemma",
+        "title": "Finitely additive integral is well defined and isometric",
+        "deps": [
+          "def-finitely-additive-integral-on-ell-infinity",
+          "thm-reals-cauchy-complete",
+          "thm-complex-plane-is-complete"
+        ],
+        "statement": "The finite-range formula is representation-independent and extends uniquely to I_nu in (ell-infinity)* with ||I_nu||=|nu|(N).",
+        "strategy": "Use common refinements and the variation inequality. Apply a fixed dyadic quantizer to each bounded sequence; its integrals are scalar Cauchy and their limit is independent of the quantizer, giving the extension without choice. Phases on a nearly extremal finite partition prove the reverse norm bound."
+      },
+      {
+        "id": "thm-dual-of-ell-infinity-is-ba",
+        "kind": "theorem",
+        "title": "Dual of ell infinity is ba",
+        "deps": [
+          "lem-finitely-additive-integral-is-well-defined-and-isometric",
+          "def-dual-space-of-a-normed-space"
+        ],
+        "statement": "The map phi to [A maps to phi(1_A)] is a linear isometric isomorphism (ell-infinity)* -> ba(P(N)).",
+        "strategy": "Linearity gives finite additivity; phase choices bound variation. The inverse agrees on indicators, finite-range sequences, then all ell-infinity by density."
+      },
+      {
+        "id": "thm-existence-of-a-shift-invariant-mean-on-bounded-sequences",
+        "kind": "theorem",
+        "title": "Existence of a shift invariant mean on bounded sequences",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-hahn-banach-dominated-extension",
+          "def-c-zero-and-ell-infinity",
+          "def-cesaro-mean",
+          "def-sublinear-functional",
+          "def-limsup-liminf",
+          "thm-limsup-subadditive"
+        ],
+        "statement": "Assume AC. There is a positive norm-one real-linear L on ell-infinity with L(1)=1, L(Sx)=L(x), extending ordinary limits.",
+        "strategy": "Extend the ordinary limit on the subspace of convergent sequences via real Hahn–Banach under limsup Cesaro means. Domination of x and -x yields positivity and normalization; shift invariance follows from the telescoping Cesaro averages of x-Sx. AC is used precisely in Hahn–Banach."
+      },
+      {
+        "id": "cor-countably-additive-part-of-ba-is-ell-one",
+        "kind": "corollary",
+        "title": "Countably additive part of ba is ell one",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-dual-of-ell-infinity-is-ba",
+          "thm-existence-of-a-shift-invariant-mean-on-bounded-sequences"
+        ],
+        "statement": "Assume AC. Countably additive finite-variation charges on P(N) are exactly ell-one sums and form a proper subspace of ba.",
+        "strategy": "Singleton masses are ell-one and reconstruct a countably additive charge. A Banach-mean charge vanishes on all singletons but gives N mass one."
+      },
+      {
+        "id": "def-james-space",
+        "kind": "definition",
+        "title": "James space",
+        "deps": [
+          "def-c-zero-and-ell-infinity"
+        ],
+        "statement": "For real x in c0 and increasing finite p, set q_p(x)^2 to one half the cyclic sum of squared successive differences; J={x:sup_pq_p(x)<infinity} with that norm.",
+        "strategy": "Freeze Bühler–Salamon's endpoint and factor 1/2; do not identify equivalent James norms isometrically."
+      },
+      {
+        "id": "lem-james-formula-defines-a-norm",
+        "kind": "lemma",
+        "title": "James formula defines a norm",
+        "deps": [
+          "def-james-space"
+        ],
+        "statement": "The James formula is a norm and dominates every coordinate absolute value.",
+        "strategy": "Two-point tuples give definiteness; Euclidean Minkowski on each cyclic difference vector gives the triangle inequality."
+      },
+      {
+        "id": "thm-james-space-is-complete-and-separable",
+        "kind": "theorem",
+        "title": "James space is complete and separable",
+        "deps": [
+          "def-james-space",
+          "lem-james-formula-defines-a-norm",
+          "lem-c-zero-is-a-closed-subspace-of-ell-infinity",
+          "def-schauder-basis-and-coordinate-functionals"
+        ],
+        "statement": "James space is Banach and separable; its unit vectors form a Schauder basis and truncations are contractive.",
+        "strategy": "A J-Cauchy sequence converges coordinatewise and uniformly to c0; pass finite q_p inequalities to the limit. The sourced interval-deletion estimate makes truncations contractive and convergent. Rational finite-support sequences are dense."
+      },
+      {
+        "id": "lem-james-space-dual-and-bidual-identification",
+        "kind": "lemma",
+        "title": "James space dual and bidual identification",
+        "deps": [
+          "def-countable-choice",
+          "def-james-space",
+          "thm-james-space-is-complete-and-separable",
+          "cor-ell-p-duality-by-counting-measure"
+        ],
+        "statement": "Assume AC_omega. Restriction to ell-two identifies J* with the coefficient sequences y in ell-two having finite dual norm, finite-support sequences are norm dense in J*, and J** identifies with real sequences equal to a constant sequence plus an element of J under the sourced max-of-two-variation norm; the canonical image is the zero-constant part.",
+        "strategy": "Use the published real ell-two duality instead of the later Hilbert Riesz page, then follow Bühler–Salamon Lemmas 2.79–2.80 through the directly proved contractive coordinate truncations and dual coefficient tails. AC_omega selects the sequence of finite-support witnesses in the contrapositive density argument; no DC-relative general basis theorem is used."
+      },
+      {
+        "id": "thm-canonical-image-of-james-space-has-codimension-one",
+        "kind": "theorem",
+        "title": "Canonical image of james space has codimension one",
+        "deps": [
+          "def-countable-choice",
+          "lem-james-space-dual-and-bidual-identification",
+          "def-reflexive-banach-space"
+        ],
+        "statement": "Assume AC_omega. The canonical image of J is closed of codimension one in J**, hence J is not reflexive.",
+        "strategy": "The bidual model splits uniquely into J plus scalar constants; quotient by the zero-constant image is one-dimensional."
+      },
+      {
+        "id": "thm-james-space-is-isometrically-isomorphic-to-its-bidual",
+        "kind": "theorem",
+        "title": "James space is isometrically isomorphic to its bidual",
+        "deps": [
+          "def-countable-choice",
+          "lem-james-space-dual-and-bidual-identification"
+        ],
+        "statement": "Assume AC_omega. J is linearly isometric to J**, although its canonical embedding is not onto.",
+        "strategy": "Use the sourced map from x to the convergent sequence (x_{n+1}-x_1), with constant limit -x_1, and check the cyclic variation norm in both directions."
+      },
+      {
+        "id": "def-enflo-finite-support-localized-trace-system",
+        "kind": "definition",
+        "title": "Enflo finite-support and localized-trace system",
+        "statement": "Fix a linearly independent sequence (e_j) with dense span in a Banach space B. A finite-expansion operator sends each e_j to a finite linear combination T e_j=sum_i a_ij e_i. For a finite subset M of the generators define Tr(M,T)=sum_{e_i in M}a_ii and its normalization by |M|; property A is the coordinate-deletion estimate ||sum_j a_j e_j||>=|a_k|||e_k||.",
+        "strategy": "Use Enflo's fixed-generator matrix coefficients, not a representation-independent tensor trace. Verify that finite-expansion operators form the correct finite-rank test class and record the normalized localized trace and property A exactly as in pp.310-311.",
+        "deps": [
+          "def-approximation-property-and-bounded-approximation-property"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Enflo, A counterexample to the approximation problem in Banach spaces",
+              "url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+              "locator": "Sections 1-2, pp.309-312"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_audit": "Finite linear algebra and norm estimates; no choice principle is used."
+      },
+      {
+        "id": "lem-enflo-quantitative-trace-obstruction-to-the-approximation-property",
+        "kind": "lemma",
+        "title": "Quantitative trace obstruction to the approximation property",
+        "statement": "Let B have a dense independent generator with property A and mutually disjoint finite subsets M_m. If dim(M_{m+1})>dim(M_m)^a for some a>1 and every finite-expansion T satisfies |normalized-Tr(M_{m+1},T)-normalized-Tr(M_m,T)|<=K||T||/log dim(M_m), then every finite-rank T satisfies ||I-T||_(M_m)>=1-C||T||/log dim(M_m), with C=K/(1-a^{-1}).",
+        "strategy": "Prove Enflo Lemmas 1-3: approximate a finite-rank operator in norm by a finite-expansion operator; property A bounds localized normalized trace by the restriction norm; finite rank makes the normalized traces tend to zero; telescope and use the dimension growth to sum the logarithmic tail.",
+        "deps": [
+          "def-enflo-finite-support-localized-trace-system",
+          "def-approximation-property-and-bounded-approximation-property"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Enflo, A counterexample to the approximation problem in Banach spaces",
+              "url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+              "locator": "The finite-rank/trace criterion in Sections 1-2, pp.309-312"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Choice-free quantitative contradiction."
+      },
+      {
+        "id": "lem-enflo-walsh-block-estimates",
+        "kind": "lemma",
+        "title": "Enflo Walsh block estimates",
+        "statement": "For every positive integer n, on H=Z_2^{2n} let W^m be the products of m distinct Rademacher functions and F_m their sum. Then Enflo's four exact F_m identities and bounds hold; moreover every operator on span(W^{n-1} union W^{n+1}) has a finite Walsh symmetry U for which the difference of the two normalized diagonal traces is at most 2 n^{-1}||TUf||/||Uf||, where f is the difference of the normalized F_{n-1} and F_{n+1}.",
+        "strategy": "Use the generating identity sum_m z^mF_m(a)=(1-z)^r(1+z)^{2n-r}, its reciprocal coefficient identity, the exact weight-two endpoint calculation, and weighted Hölder log-convexity for the four Walsh bounds. Average the operator over coordinate permutations and translations: translations annihilate off-diagonal Walsh coefficients, permutations make the diagonal constant on each layer, and one summand in the finite average dominates the averaged image of f.",
+        "deps": [
+          "def-enflo-finite-support-localized-trace-system"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Enflo, A counterexample to the approximation problem in Banach spaces",
+              "url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+              "locator": "Walsh-function estimates and equations in Sections 2-3, pp.311-314"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "The Walsh families are explicit finite objects."
+      },
+      {
+        "id": "lem-enflo-symmetry-averaging-and-block-assembly",
+        "kind": "lemma",
+        "title": "Enflo symmetry averaging and block assembly",
+        "statement": "Assume AC. There is a separable reflexive Banach space B with a dense independent generator having property A and pairwise disjoint finite subsets M_m satisfying both hypotheses of the quantitative trace lemma; hence its finite-rank operators obey Enflo's displayed logarithmic lower bound.",
+        "strategy": "Follow Enflo pp.313-317. Take the Hilbertian sum of the finite-dimensional C(K_m), link W^{n_m+1} copies in K_m to W^{n_{m+1}-1} copies in K_{m+1}, and verify the exact conditions 4-6, including |N_{m,i} cap N_{m,j}| <= 2t_{m+1}/n_{m+1}. Prove Lemmas 6-7 and realize the conditions by Enflo's lexicographic incidence construction with n_m=floor(a^m), k_m=floor(t_m^gamma), L_m=floor(k_m/t_{m+1}), and the source's spacing estimate t_m/nu_m > n_{m+1}. Prove the ambient block sum reflexive and then use closed-subspace stability under the stated AC hypothesis.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-enflo-finite-support-localized-trace-system",
+          "lem-enflo-quantitative-trace-obstruction-to-the-approximation-property",
+          "lem-enflo-walsh-block-estimates",
+          "thm-hahn-banach-dominated-extension",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Enflo, A counterexample to the approximation problem in Banach spaces",
+              "url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+              "locator": "Symmetry lemma and final block construction, Sections 3-4, pp.313-317"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Assume AC. The finite Walsh averaging and lexicographic construction are explicit; AC is used exactly through closed-subspace stability of reflexivity."
+      },
+      {
+        "id": "thm-reflexive-approximation-property-implies-metric-approximation-property",
+        "kind": "theorem",
+        "title": "Reflexive approximation property implies metric approximation property",
+        "landmark": true,
+        "statement": "Assume AC. Every real or complex reflexive Banach space with the approximation property has the metric approximation property.",
+        "strategy": "Follow Ryan’s proof of Grothendieck’s theorem. Prove the reflexive-range vector-density theorem through representability of weakly compact operators on L1, using the existing Countable-Choice separability theorem for each countably generated restriction and the dense-image closed-span argument for its range; use it to identify nuclear, Pietsch-integral, and integral norms; use AP on one compact null sequence to remove the projective-tensor kernel; then apply Ryan’s isometric tensor criterion, bipolar density, and a finite-net argument to obtain compact-uniform approximation by finite-rank contractions.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-approximation-property-and-bounded-approximation-property",
+          "def-reflexive-banach-space",
+          "thm-hahn-banach-dominated-extension",
+          "thm-complex-hahn-banach-norm-preserving-extension",
+          "thm-banach-alaoglu",
+          "lem-bounded-real-c-zero-functional-is-a-difference-of-positive-functionals",
+          "lem-positive-c-zero-functionals-have-finite-regular-representing-measures",
+          "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-reflexive-iff-unit-ball-weakly-compact",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "thm-eberlein-smulian",
+          "thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Raymond A. Ryan, Introduction to Tensor Products of Banach Spaces",
+              "url": "https://djvu.online/file/ATNjYmfESxgzE",
+              "locator": "Proposition 4.12 and Theorem 4.14; Theorem 5.32; Proposition 5.36 and Corollary 5.37; Theorem 5.44 and Corollary 5.45; Theorem 5.50 and Corollary 5.51, printed pp. 78–81 and 113–122"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Assume AC. It is the umbrella assumption for scalar Radon–Nikodym, Banach–Alaoglu and weak compactness/subsequence selection, real and complex Hahn–Banach and bipolar separation, norming functionals, regular-measure representation, countably generated L1 separability, and the countable approximation and tensor-representation choices. The zero space and both scalar fields are covered."
+      },
+      {
+        "id": "thm-enflo-separable-reflexive-banach-space-without-the-approximation-property",
+        "kind": "theorem",
+        "title": "A separable reflexive Banach space without the approximation property",
+        "landmark": true,
+        "statement": "Assume AC. There exists a separable reflexive Banach space X that fails the approximation property. Consequently X has no Schauder basis.",
+        "strategy": "The block assembly gives a separable reflexive space with no BAP. The local Grothendieck supplier turns hypothetical AP into MAP and hence BAP, a contradiction; a Schauder basis likewise gives BAP.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-enflo-quantitative-trace-obstruction-to-the-approximation-property",
+          "lem-enflo-symmetry-averaging-and-block-assembly",
+          "thm-reflexive-approximation-property-implies-metric-approximation-property",
+          "thm-coordinate-functionals-of-a-schauder-basis-are-bounded",
+          "thm-schauder-basis-implies-bounded-approximation-property"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Enflo, A counterexample to the approximation problem in Banach spaces",
+              "url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+              "locator": "Main theorem and completed construction, pp.309-317"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_audit": "Assume AC. The construction is explicit; AC is propagated from the reflexive closed-subspace step and is also the ordinary setting of Grothendieck's reflexive AP-implies-MAP theorem."
+      },
+      {
+        "id": "rem-enflo-space-without-the-approximation-property",
+        "kind": "remark",
+        "title": "Enflo space without the approximation property",
+        "deps": [
+          "def-dependent-choice",
+          "def-approximation-property-and-bounded-approximation-property",
+          "thm-schauder-basis-implies-bounded-approximation-property"
+        ],
+        "statement": "Enflo constructed in ZFC a separable Banach space without AP; under the declared DC hypothesis of the local basis-implies-BAP theorem, it therefore has no Schauder basis.",
+        "strategy": "Non-load-bearing exact primary boundary; combine Enflo's recorded result only with the locally proved DC-relative basis-implies-BAP implication, and never use this remark as a dependency.",
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Per Enflo, A counterexample to the approximation problem in Banach spaces",
+              "url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+              "locator": "Acta Mathematica 130 (1973), pp.309-317, complete paper"
+            }
+          ]
+        },
+        "external_dependency": {
+          "source_url": "https://projecteuclid.org/journals/acta-mathematica/volume-130/issue-none/A-counterexample-to-the-approximation-problem-in-Banach-spaces/10.1007/BF02392270.pdf",
+          "exact_statement": "There exists a separable Banach space without the approximation property.",
+          "local_proof_attempt": "This dispatch reconstructed Enflo's finite-dimensional trace estimates and block assembly through failure of BAP. The final AP conclusion still requires the missing Grothendieck reflexive AP-implies-MAP/BAP supplier; this literature-only leaf cannot supply it.",
+          "necessity": "The design requires this historical leaf boundary."
+        }
+      },
+      {
+        "id": "lem-finite-dimensional-auerbach-basis",
+        "kind": "lemma",
+        "title": "Finite dimensional auerbach basis",
+        "deps": [
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "thm-heine-borel-rn"
+        ],
+        "statement": "Every nonzero finite-dimensional normed space has a basis with ||x_i||=||x_i*||=1.",
+        "strategy": "Starting from the basis witnessing finite dimension, normalize it and maximize the absolute determinant on the finite compact product of unit spheres. Replacing one column proves every dual coordinate norm is at most one; biorthogonality gives equality. No family choice is used."
+      },
+      {
+        "id": "lem-dvoretzky-rogers-finite-block-estimate",
+        "kind": "lemma",
+        "title": "Dvoretzky rogers finite block estimate",
+        "deps": [
+          "lem-finite-dimensional-auerbach-basis"
+        ],
+        "statement": "If r>=2, V has scalar dimension at least r(r-1), and d_1,...,d_r are positive, there are x_1,...,x_r in V with ||x_i||^2=d_i and ||sum_{i in A}x_i||^2<=3 sum_{i in A}d_i for every subset A of {1,...,r}.",
+        "strategy": "Dvoretzky–Rogers Lemmas 1-2. In an r(r-1)-dimensional real coordinate subspace, normalize the symmetric unit ball so a maximum-volume centered ellipsoid is Euclidean; the Auerbach coordinates and finite-dimensional compactness justify existence of the maximizer. The paper's triangular contact-point construction gives r boundary points and the quadratic estimate. Scale the contact points by sqrt(d_i). For complex V, apply the real argument to a real subspace; scalar dimension at least r(r-1) supplies enough real dimension."
+      },
+      {
+        "id": "thm-dvoretzky-rogers",
+        "kind": "theorem",
+        "title": "Dvoretzky rogers",
+        "deps": [
+          "def-countable-choice",
+          "lem-dvoretzky-rogers-finite-block-estimate",
+          "thm-unconditional-convergence-equivalences"
+        ],
+        "statement": "Assume AC_omega. Every infinite-dimensional Banach space has an unconditionally but not absolutely convergent series.",
+        "strategy": "Choose explicit positive a_n in ell-two but not ell-one and split them into the least consecutive blocks whose square-sum tails make the sum of block square-roots finite. Apply the finite-block lemma with d_i=a_i^2 in one sufficiently large subspace per block; AC_omega is used exactly to choose these countably many block families. Its uniform subset-sum estimate gives the unconditional Cauchy criterion, while sum ||x_n||=sum a_n diverges."
+      },
+      {
+        "id": "cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional",
+        "kind": "corollary",
+        "title": "Absolute and unconditional convergence agree universally iff finite dimensional",
+        "deps": [
+          "def-countable-choice",
+          "thm-dvoretzky-rogers",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "thm-unconditional-convergence-equivalences"
+        ],
+        "statement": "Assume AC_omega. Every unconditional series is absolute iff the Banach space is finite-dimensional, including dimension zero.",
+        "strategy": "Finite-dimensional coordinates reduce to scalar unconditional series, which are absolute; the converse is the locally proved Dvoretzky–Rogers theorem."
+      }
+    ],
+    "summary": "FA-11 has a coefficient-space repair before coordinate boundedness, a local Auerbach supplier, a complete primary-source Dvoretzky–Rogers chain, and a tensor-duality proof of Grothendieck’s reflexive AP-implies-MAP theorem. That theorem upgrades the reconstructed Enflo no-BAP obstruction to the promised failure of AP."
+  },
+  {
+    "order": 288.068,
+    "id": "schauder-bases-approximation-and-banach-space-pathologies-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Schauder Bases Approximation and Banach Space Pathologies — Examples",
+    "companion": "schauder-bases-approximation-and-banach-space-pathologies",
+    "requires": [
+      "schauder-bases-approximation-and-banach-space-pathologies"
+    ],
+    "items": [
+      {
+        "id": "ex-standard-schauder-bases-of-c0-and-ell-p",
+        "kind": "example",
+        "title": "Standard schauder bases of c0 and ell p",
+        "deps": [
+          "def-partial-sum-projections-and-basis-constant",
+          "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "rem-ell-p-is-l-p-of-counting-measure"
+        ],
+        "statement": "The standard unit vectors form a Schauder basis of c0 and ell-p, 1<=p<infinity, with basis constant one.",
+        "strategy": "Coordinate truncations converge in the defining norm and are contractions; uniqueness is coordinatewise."
+      },
+      {
+        "id": "cex-standard-unit-vectors-are-not-a-schauder-basis-of-ell-infinity",
+        "kind": "counterexample",
+        "title": "Standard unit vectors are not a schauder basis of ell infinity",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-c-zero-and-ell-infinity"
+        ],
+        "statement": "The unit vectors are not a Schauder basis of ell-infinity.",
+        "strategy": "Every norm limit of finite-support sequences is in c0, but the constant-one sequence is not."
+      },
+      {
+        "id": "ex-the-summing-basis-of-c0-is-conditional",
+        "kind": "example",
+        "title": "The summing basis of c0 is conditional",
+        "deps": [
+          "def-unconditional-and-conditional-basis",
+          "thm-unconditional-convergence-equivalences"
+        ],
+        "statement": "The summing vectors s_n=(1,...,1,0,...) form a conditional Schauder basis of c0.",
+        "strategy": "Coefficients x_n-x_{n+1} telescope. For x_n=(-1)^n/(n+1), select one sign of coefficients; the first coordinate subseries diverges, violating the subseries criterion."
+      },
+      {
+        "id": "cex-reordering-a-conditional-basis-can-destroy-convergence",
+        "kind": "counterexample",
+        "title": "Reordering a conditional basis can destroy convergence",
+        "deps": [
+          "ex-the-summing-basis-of-c0-is-conditional",
+          "thm-unconditional-convergence-equivalences"
+        ],
+        "statement": "A convergent Schauder expansion in c0 has a divergent rearrangement.",
+        "strategy": "Use the preceding explicit conditional expansion; interleave its divergent selected subseries with the complement, as in the equivalence proof."
+      },
+      {
+        "id": "ex-banach-limit-revisited-as-a-charge",
+        "kind": "example",
+        "title": "Banach limit revisited as a charge",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-dual-of-ell-infinity-is-ba",
+          "thm-existence-of-a-shift-invariant-mean-on-bounded-sequences"
+        ],
+        "statement": "Assume AC. A Banach mean yields a charge nu with nu({n})=0 and nu(N)=1, so it is not countably additive.",
+        "strategy": "Apply the ba identification, shift invariance, positivity, and normalization."
+      },
+      {
+        "id": "cex-ell-one-and-ell-infinity-are-not-reflexive",
+        "kind": "counterexample",
+        "title": "Ell one and ell infinity are not reflexive",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive",
+          "cor-ell-one-is-not-reflexive",
+          "cor-ell-p-duality-by-counting-measure",
+          "thm-complex-dual-of-ell-one-is-ell-infinity",
+          "thm-dual-of-ell-infinity-is-ba",
+          "cor-countably-additive-part-of-ba-is-ell-one"
+        ],
+        "statement": "Assume AC. Neither ell-one nor ell-infinity is reflexive.",
+        "strategy": "Schur gives ell-one nonreflexive; since its dual is ell-infinity, dual-reflexivity equivalence transfers the failure. The strict ell-one subset of ba displays bidual surplus."
+      },
+      {
+        "id": "rem-subspaces-of-classical-spaces-can-fail-ap",
+        "kind": "remark",
+        "title": "Subspaces of classical spaces can fail ap",
+        "deps": [
+          "def-approximation-property-and-bounded-approximation-property"
+        ],
+        "statement": "For 1<=p<2, ell-p has a closed subspace without AP; related p>2 examples follow from Enflo.",
+        "strategy": "Record Szankowski’s external theorem exactly as stated by the Hebrew University publication abstract: for every 1<=p<2, ell-p contains a closed subspace without AP. This is a non-load-bearing historical boundary with proved_here=false and no consumers; the page does not claim to reproduce the seven-page combinatorial proof. The separate 1<p<2 reconstruction confirms the construction away from the endpoint.",
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrzej Szankowski, Subspaces without the approximation property",
+              "url": "https://cris.huji.ac.il/en/publications/subspaces-without-the-approximation-property/",
+              "locator": "Institutional publication record and exact abstract for Israel Journal of Mathematics 30 (1978), pp.123–129"
+            }
+          ]
+        }
+      }
+    ],
+    "summary": "All seven design examples are retained. The Szankowski statement is an explicitly non-load-bearing literature leaf supported by the exact author-institution abstract; it does not claim a local proof."
+  },
+  {
+    "order": 288.069,
+    "id": "banach-valued-integration-and-the-radon-nikodym-property",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Banach Valued Integration and the Radon Nikodym Property",
+    "companion": "banach-valued-integration-and-the-radon-nikodym-property-examples",
+    "requires": [
+      "schauder-bases-approximation-and-banach-space-pathologies"
+    ],
+    "items": [
+      {
+        "id": "def-banach-valued-simple-function-and-integral",
+        "kind": "definition",
+        "title": "Banach valued simple function and integral",
+        "deps": [
+          "def-banach-space",
+          "def-measure-space"
+        ],
+        "justified_by": [
+          "lem-banach-valued-simple-integral-is-well-defined"
+        ],
+        "statement": "An integrable X-valued simple function has a finite disjoint measurable representation sum x_j1_{A_j}, with nonzero coefficients supported on finite-measure sets; define its integral as sum mu(A_j)x_j.",
+        "strategy": "The support rule avoids 0 times infinity; refinement independence follows next."
+      },
+      {
+        "id": "lem-banach-valued-simple-integral-is-well-defined",
+        "kind": "lemma",
+        "title": "Banach valued simple integral is well defined",
+        "deps": [
+          "def-banach-valued-simple-function-and-integral",
+          "def-measure",
+          "def-integral-of-a-nonnegative-simple-function"
+        ],
+        "statement": "The simple integral is representation-independent, linear, null-insensitive, and satisfies ||integral s||<=integral||s||.",
+        "strategy": "Pass to a finite common refinement, use finite additivity, and apply the norm triangle inequality."
+      },
+      {
+        "id": "def-strongly-measurable-banach-valued-function",
+        "kind": "definition",
+        "title": "Strongly measurable banach valued function",
+        "deps": [
+          "def-banach-valued-simple-function-and-integral",
+          "def-measure-null-set-and-almost-everywhere"
+        ],
+        "statement": "Strong measurability means being an a.e. pointwise norm limit of measurable X-valued simple functions.",
+        "strategy": "Do not replace it by weak or merely Borel measurability."
+      },
+      {
+        "id": "thm-pettis-measurability-criterion-for-strong-measurability",
+        "kind": "theorem",
+        "title": "Pettis measurability criterion for strong measurability",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-strongly-measurable-banach-valued-function",
+          "def-dual-space-of-a-normed-space",
+          "def-complete-measure-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-separable-space",
+          "thm-hahn-banach-dominated-extension"
+        ],
+        "statement": "Assume AC and a complete measure space. A function is strongly measurable iff weakly measurable and essentially separably valued.",
+        "strategy": "One direction follows from simple approximants. Conversely restrict to a separable closed range, obtain a countable norming family by Hahn–Banach, prove small norm balls have measurable preimages, and choose least centers at each scale. AC is used through Hahn–Banach."
+      },
+      {
+        "id": "def-bochner-integrable-function",
+        "kind": "definition",
+        "title": "Bochner integrable function",
+        "deps": [
+          "def-strongly-measurable-banach-valued-function",
+          "lem-banach-valued-simple-integral-is-well-defined"
+        ],
+        "justified_by": [
+          "thm-bochner-integrability-criterion"
+        ],
+        "statement": "f is Bochner integrable when integrable simple s_n satisfy integral||f-s_n||->0; define integral f as the norm limit of their integrals.",
+        "strategy": "The simple norm inequality and completeness give existence; independence follows in the criterion."
+      },
+      {
+        "id": "thm-bochner-integrability-criterion",
+        "kind": "theorem",
+        "title": "Bochner integrability criterion",
+        "deps": [
+          "def-bochner-integrable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "statement": "A strongly measurable f is Bochner integrable iff integral||f||<infinity, and its integral is approximation-independent.",
+        "strategy": "Choose pointwise simple approximants with rapidly summable integral errors after truncation; conversely apply scalar triangle inequalities to the defining L1 approximation."
+      },
+      {
+        "id": "lem-bochner-integral-norm-inequality",
+        "kind": "lemma",
+        "title": "Bochner integral norm inequality",
+        "deps": [
+          "thm-bochner-integrability-criterion",
+          "lem-banach-valued-simple-integral-is-well-defined",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "statement": "For Bochner-integrable f, ||integral_Ef||<=integral_E||f||.",
+        "strategy": "Prove for simple functions and pass through an L1-simple approximation."
+      },
+      {
+        "id": "thm-bochner-dominated-convergence",
+        "kind": "theorem",
+        "title": "Bochner dominated convergence",
+        "deps": [
+          "def-countable-choice",
+          "def-strongly-measurable-banach-valued-function",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "lem-banach-valued-simple-integral-is-well-defined",
+          "thm-dominated-convergence",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "statement": "Assume AC_omega. If strongly measurable f_n converge a.e. in norm to f and ||f_n||<=g for integrable g, then f is Bochner integrable, integral||f_n-f||->0, and their integrals converge.",
+        "strategy": "AC_omega is used exactly to select one simple-approximation sequence for each f_n; a diagonal choice proves strong measurability of f. Apply scalar DCT to ||f_n-f||<=2g, then the norm inequality."
+      },
+      {
+        "id": "thm-bounded-linear-maps-commute-with-bochner-integration",
+        "kind": "theorem",
+        "title": "Bounded linear maps commute with bochner integration",
+        "deps": [
+          "def-bochner-integrable-function",
+          "def-bounded-linear-operator",
+          "lem-banach-valued-simple-integral-is-well-defined"
+        ],
+        "statement": "For bounded linear T, Tf is Bochner integrable and T(integral f)=integral Tf.",
+        "strategy": "Check simple functions and pass to the defining L1 approximation using boundedness."
+      },
+      {
+        "id": "def-banach-valued-vector-measure-and-variation",
+        "kind": "definition",
+        "title": "Banach valued vector measure and variation",
+        "deps": [
+          "def-banach-space",
+          "def-measure"
+        ],
+        "statement": "An X-valued vector measure is norm-countably additive. Its scalar variation is the supremum of sums of norms over finite partitions; bounded variation and nu<<mu are separate conditions.",
+        "strategy": "Keep norm additivity, variation, and null-set absolute continuity distinct."
+      },
+      {
+        "id": "lem-bounded-variation-of-a-vector-measure-is-a-finite-measure",
+        "kind": "lemma",
+        "title": "Bounded variation of a vector measure is a finite measure",
+        "deps": [
+          "def-banach-valued-vector-measure-and-variation",
+          "def-dual-space-of-a-normed-space"
+        ],
+        "statement": "If nu is a norm-countably additive vector measure of bounded variation, then |nu| is a finite positive countably additive measure; moreover |x* circ nu|<=||x*|| |nu| for every bounded functional x*.",
+        "strategy": "Partition refinement gives finite additivity of |nu| and the functional estimate. For disjoint E_n with union E, finite additivity gives sum_{n<=N}|nu|(E_n)<=|nu|(E). Conversely, for every finite partition (A_i) of E, norm countable additivity and the triangle inequality give sum_i||nu(A_i)||<=sum_n sum_i||nu(A_i intersect E_n)||<=sum_n|nu|(E_n). Take the supremum over partitions and combine the inequalities."
+      },
+      {
+        "id": "lem-bochner-density-defines-an-absolutely-continuous-vector-measure",
+        "kind": "lemma",
+        "title": "Bochner density defines an absolutely continuous vector measure",
+        "deps": [
+          "def-banach-valued-vector-measure-and-variation",
+          "lem-bounded-variation-of-a-vector-measure-is-a-finite-measure",
+          "lem-bochner-integral-norm-inequality",
+          "def-bochner-integrable-function",
+          "def-banach-valued-simple-function-and-integral",
+          "lem-banach-valued-simple-integral-is-well-defined",
+          "prop-indefinite-integral-of-an-integrable-function-is-countably-additive"
+        ],
+        "statement": "For Bochner f, nu_f(E)=integral_Ef is norm-countably additive, nu_f<<mu, and |nu_f|(E)=integral_E||f||.",
+        "strategy": "The norm inequality and scalar continuity of the integral give norm countable additivity without any new choice. The same inequality gives one variation bound; one defining simple approximation and its level-set partition give the reverse."
+      },
+      {
+        "id": "def-radon-nikodym-property",
+        "kind": "definition",
+        "title": "Radon nikodym property",
+        "deps": [
+          "def-banach-valued-vector-measure-and-variation",
+          "def-bochner-integrable-function"
+        ],
+        "statement": "X has RNP if every bounded-variation X-valued measure absolutely continuous with respect to a finite scalar measure has a Bochner density.",
+        "strategy": "The scalar measure is finite; density equality is on all measurable sets."
+      },
+      {
+        "id": "def-dentable-bounded-set-and-slice",
+        "kind": "definition",
+        "title": "Dentable bounded set and slice",
+        "deps": [
+          "def-dual-space-of-a-normed-space"
+        ],
+        "statement": "A slice of a nonempty bounded C is {x in C: Re x*(x)>sup_C Re x* - alpha}; C is dentable if it has slices of arbitrarily small norm diameter.",
+        "strategy": "Use real parts in complex spaces. Permit the zero functional only for the degenerate whole-set slice (needed for zero-diameter sets); every slice that genuinely cuts a positive-diameter set may and will use a nonzero functional."
+      },
+      {
+        "id": "lem-dentable-average-ranges-give-vector-measure-densities",
+        "kind": "lemma",
+        "title": "Dentable average ranges give vector measure densities",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radon-nikodym-property",
+          "def-dentable-bounded-set-and-slice",
+          "thm-bochner-integrability-criterion",
+          "lem-bounded-variation-of-a-vector-measure-is-a-finite-measure",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-bochner-density-defines-an-absolutely-continuous-vector-measure",
+          "thm-integration-against-a-density",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-banach-valued-simple-integral-is-well-defined"
+        ],
+        "statement": "Assume AC. If every nonempty bounded closed convex subset of X is dentable, then X has RNP.",
+        "strategy": "Pisier Theorem 2.3: dent small slices of average ranges on positive-measure sets, select maximal disjoint pieces, exhaust the remainder, and build L1-Cauchy simple averages representing the measure. AC covers recursive choices and maximal disjoint families."
+      },
+      {
+        "id": "lem-nondentability-produces-a-vector-measure-without-density",
+        "kind": "lemma",
+        "title": "Nondentability produces a vector measure without density",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radon-nikodym-property",
+          "def-dentable-bounded-set-and-slice",
+          "thm-hahn-banach-dominated-extension",
+          "thm-relative-hahn-banach-geometric-separation",
+          "def-bochner-integrable-function",
+          "lem-bochner-integral-norm-inequality",
+          "thm-continuity-from-below-for-measures",
+          "prop-measure-of-a-set-difference",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure"
+        ],
+        "statement": "Assume AC. A nondentable nonempty bounded closed convex set yields, on the Lebesgue interval, an absolutely continuous bounded-variation vector measure with range in a closed separable subspace and without a Bochner density.",
+        "strategy": "Strict separation converts failure of small slices into a uniformly separated convex bush. Pisier Lemma 2.4/Theorem 2.5 then build a finite-branching martingale on refining interval partitions. Insert the dyadic grids and extend the consistent algebra measure by its Lebesgue domination. Its range lies in the closed span of the countable bush. A density would force the finite-partition averages to converge in L1, contradicting the fixed separation. AC covers separation, recursive selections, and the extension."
+      },
+      {
+        "id": "thm-rnp-dentability-characterization",
+        "kind": "theorem",
+        "title": "Rnp dentability characterization",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radon-nikodym-property",
+          "lem-dentable-average-ranges-give-vector-measure-densities",
+          "lem-nondentability-produces-a-vector-measure-without-density"
+        ],
+        "statement": "Assume AC. X has RNP iff every nonempty bounded closed convex subset is dentable.",
+        "strategy": "Combine the two explicit directions; the theorem hides neither long construction."
+      },
+      {
+        "id": "lem-rnp-is-invariant-under-banach-space-isomorphism",
+        "kind": "lemma",
+        "title": "Rnp is invariant under banach space isomorphism",
+        "deps": [
+          "def-radon-nikodym-property",
+          "def-topological-isomorphism-of-normed-spaces",
+          "thm-bounded-linear-maps-commute-with-bochner-integration"
+        ],
+        "statement": "RNP is invariant under bounded linear isomorphisms with bounded inverse.",
+        "strategy": "Push vector measures through the inverse and densities through the map; bounded maps preserve variation, absolute continuity, and Bochner integrals."
+      },
+      {
+        "id": "lem-rnp-is-separably-determined",
+        "kind": "lemma",
+        "title": "Rnp is separably determined",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radon-nikodym-property",
+          "thm-rnp-dentability-characterization",
+          "lem-nondentability-produces-a-vector-measure-without-density",
+          "thm-bounded-linear-maps-commute-with-bochner-integration"
+        ],
+        "statement": "Assume AC. X has RNP iff every closed separable subspace has RNP.",
+        "strategy": "Use the dentability characterization for inheritance by closed subspaces. Conversely, the strengthened nondentability lemma supplies a density-free Lebesgue vector measure whose range lies in a closed separable subspace; any density there would become an ambient density under the bounded inclusion. AC is inherited from the characterization and witness construction."
+      },
+      {
+        "id": "lem-rnp-may-be-tested-on-the-lebesgue-interval",
+        "kind": "lemma",
+        "title": "Rnp may be tested on the lebesgue interval",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radon-nikodym-property",
+          "thm-rnp-dentability-characterization",
+          "lem-nondentability-produces-a-vector-measure-without-density"
+        ],
+        "statement": "Assume AC. It suffices to test the RNP density condition for vector measures on the Lebesgue interval.",
+        "strategy": "The forward implication is immediate. Conversely, if X fails RNP, nondentability gives a bounded uniformly separated finite-branching tree. Approximate its convex coefficients level by level by dyadic rationals, with summable errors smaller than one quarter of the separation, and realize the perturbed tree on a subsequence of the dyadic filtration of [0,1]. Its bounded martingale defines an absolutely continuous interval vector measure with no Bochner density, since a density would force martingale convergence. AC is exactly the dentability/tree construction's declared cost."
+      },
+      {
+        "id": "lem-lipschitz-curves-and-dominated-interval-vector-measures",
+        "kind": "lemma",
+        "title": "Lipschitz curves and dominated interval vector measures",
+        "deps": [
+          "def-countable-choice",
+          "def-lipschitz-holder-contraction",
+          "def-banach-valued-vector-measure-and-variation",
+          "thm-continuity-from-below-for-measures",
+          "prop-measure-of-a-set-difference",
+          "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure"
+        ],
+        "statement": "Assume AC_omega and let X be a real or complex Banach space. A Lipschitz F:[0,1]->X with F(0)=0 determines a unique X-valued vector measure on the Lebesgue sigma-algebra by nu((a,b])=F(b)-F(a), with |nu|<=Lip(F)lambda; conversely every such dominated vector measure has this Lipschitz indefinite integral.",
+        "strategy": "Define nu first on the rational half-open interval algebra. Its variation domination makes values Cauchy under approximation in Lebesgue symmetric difference; the published countable-algebra approximation lemma, the identification of the Lebesgue sigma-algebra as the completion of the Borel one, and completeness of X give a unique extension. Verify norm countable additivity from domination. The reverse direction is the one-line increment estimate. AC_omega is exactly the approximation lemma's cost."
+      },
+      {
+        "id": "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+        "kind": "lemma",
+        "title": "AC supplies the countable and dependent choices used in Banach integration",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "statement": "In ZF, AC implies Countable Choice and the prescribed-initial-point form of Dependent Choice.",
+        "strategy": "Apply AC once to a countable family's set of values. For a serial relation, apply AC once to its family of nonempty successor sets to obtain a self-map, then iterate that fixed self-map by recursion from the prescribed point."
+      },
+      {
+        "id": "thm-rnp-lipschitz-differentiability-characterization",
+        "kind": "theorem",
+        "title": "Rnp lipschitz differentiability characterization",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "lem-rnp-may-be-tested-on-the-lebesgue-interval",
+          "lem-lipschitz-curves-and-dominated-interval-vector-measures",
+          "lem-bounded-variation-of-a-vector-measure-is-a-finite-measure",
+          "lem-bochner-density-defines-an-absolutely-continuous-vector-measure",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-c1-lipschitz-ac-bv-hierarchy",
+          "thm-countable-union-of-null-is-null",
+          "cor-dual-separates-points",
+          "def-strongly-measurable-banach-valued-function",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-bochner-dominated-convergence",
+          "thm-bounded-linear-maps-commute-with-bochner-integration"
+        ],
+        "statement": "Assume AC. X has RNP iff every Lipschitz F:[0,1]->X has a norm derivative almost everywhere.",
+        "strategy": "The interval-measure lemma turns a Lipschitz curve into a vector measure dominated by Lebesgue measure. RNP supplies a Bochner density; scalar Lebesgue differentiation applied to the norm errors of one simple approximation sequence proves that its indefinite integral has that norm derivative almost everywhere. Conversely use scalar RN to split |nu| into disjoint levels where its density is bounded, apply Lipschitz differentiability to each restricted indefinite integral, use scalar absolute continuity and the scalar FTC after every bounded functional, invoke dual separation and interval-measure uniqueness, and paste the resulting densities in L1. The interval-test lemma then gives RNP."
+      },
+      {
+        "id": "thm-separable-dual-spaces-have-rnp",
+        "kind": "theorem",
+        "title": "Separable dual spaces have rnp",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-hahn-banach-dominated-extension",
+          "def-radon-nikodym-property",
+          "def-separable-space",
+          "lem-countable-iff-surjection-from-n",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "thm-product-of-countable",
+          "thm-countable-union-of-countable",
+          "lem-bounded-variation-of-a-vector-measure-is-a-finite-measure",
+          "thm-separable-dual-implies-separable-primal",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "cor-finite-complex-measures-admit-integrable-radon-nikodym-densities",
+          "thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-bochner-integrability-criterion"
+        ],
+        "statement": "Assume AC. Every norm-separable dual Banach space has RNP.",
+        "strategy": "Write X=Y* and let nu<<mu have bounded variation. Separability of X implies separability of Y. Scalar RN gives g=d|nu|/dmu. On a countable rational dense subspace D of Y, choose simultaneously the scalar densities of y circ nu; the variation estimate makes them linear and bounded by g||y|| off one common null set. Extend pointwise from D to f(omega) in Y*. Coordinate measurability plus a countable dense subset of the unit ball of Y makes ||f-x*|| measurable for every x*, and norm separability of X then makes f strongly measurable; ||f||<=g gives Bochner integrability. Pairing integrals with D and then all of Y proves nu(E)=integral_E f. AC is used for scalar RN and the countable simultaneous representatives."
+      },
+      {
+        "id": "thm-hilbert-spaces-are-reflexive-by-riesz-representation",
+        "kind": "theorem",
+        "title": "Hilbert spaces are reflexive by riesz representation",
+        "deps": [
+          "def-countable-choice",
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "def-banach-space",
+          "def-dual-space-of-a-normed-space",
+          "def-reflexive-banach-space",
+          "thm-bounded-operator-space-is-banach",
+          "thm-infimum-property",
+          "lem-inf-epsilon",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "prop-pythagorean-parallelogram-and-polarisation-identities"
+        ],
+        "statement": "Assume AC_omega. Every complete real or complex inner-product space is reflexive.",
+        "strategy": "AC_omega is used exactly to select a norm-minimizing sequence in the nonempty closed affine hyperplane phi=1. The parallelogram identity makes it Cauchy; midpoint minimality shows its limit y is orthogonal to ker(phi), which yields phi(x)=<x,y>/||y||^2 in the library's linear-first convention. Thus H is conjugate-linearly isometric to H*. Apply the same representation to a functional on H*, transport its representing vector back through this isometry, and track the complex conjugations to identify it with canonical evaluation at a vector of H. Hence the canonical bidual map is onto."
+      },
+      {
+        "id": "thm-reflexive-spaces-have-rnp",
+        "kind": "theorem",
+        "title": "Reflexive spaces have rnp",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-hahn-banach-dominated-extension",
+          "thm-complex-hahn-banach-norm-preserving-extension",
+          "def-reflexive-banach-space",
+          "def-separable-space",
+          "lem-rnp-is-separably-determined",
+          "lem-rnp-is-invariant-under-banach-space-isomorphism",
+          "thm-separable-dual-spaces-have-rnp",
+          "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+          "cor-relative-hahn-banach-bidual-isometry"
+        ],
+        "statement": "Assume AC. Every reflexive Banach space has RNP.",
+        "strategy": "Reduce to a closed separable subspace Y. AC supplies HB, so Y is reflexive and its canonical map is a surjective isometry onto the separable dual space Y**. Apply separable-dual RNP to Y**, transfer RNP back along the canonical isomorphism, and use separable determination."
+      },
+      {
+        "id": "thm-c0-fails-the-radon-nikodym-property",
+        "kind": "theorem",
+        "title": "C0 fails the radon nikodym property",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-rnp-dentability-characterization",
+          "def-dentable-bounded-set-and-slice",
+          "def-c-zero-and-ell-infinity",
+          "lem-real-and-complex-c-zero-are-banach",
+          "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "thm-dual-of-c0-is-ell-one"
+        ],
+        "statement": "Assume AC. c0 does not have RNP.",
+        "strategy": "Every slice of its unit ball has diameter two: represent the functional by ell-one, choose a far small-coefficient coordinate, and change it near plus/minus one while staying in the slice."
+      },
+      {
+        "id": "thm-l-one-of-zero-one-fails-rnp",
+        "kind": "theorem",
+        "title": "L one of zero one fails rnp",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-restriction-of-a-measure",
+          "prop-restriction-is-a-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-rnp-lipschitz-differentiability-characterization"
+        ],
+        "statement": "Assume AC. Nonatomic L1[0,1] does not have RNP.",
+        "strategy": "Use Cheeger–Kleiner's explicit 1-Lipschitz curve F(t)=1_(0,t). At every interior t, the positive difference quotients along h and h/2 have L1-distance one, so they are not Cauchy and no norm derivative exists. Apply the Lipschitz characterization. The nonatomic Lebesgue model is explicit and is not sequence ell-one."
+      },
+      {
+        "id": "cor-c0-is-not-isomorphic-to-a-dual-space",
+        "kind": "corollary",
+        "title": "C0 is not isomorphic to a dual space",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-c-zero-and-ell-infinity",
+          "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "def-separable-space",
+          "lem-countable-iff-surjection-from-n",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "thm-product-of-countable",
+          "thm-countable-union-of-countable",
+          "def-topological-isomorphism-of-normed-spaces",
+          "lem-rnp-is-invariant-under-banach-space-isomorphism",
+          "thm-separable-dual-spaces-have-rnp",
+          "thm-c0-fails-the-radon-nikodym-property"
+        ],
+        "statement": "Assume AC. c0 is not isomorphic to any dual Banach space.",
+        "strategy": "Rational or Gaussian-rational finite-support sequences are countable and dense in c0 by the published truncation lemma. If c0 is isomorphic to Y*, that norm-separable dual has RNP; isomorphism invariance contradicts c0 failure."
+      },
+      {
+        "id": "thm-dunford-pettis-for-l-one-on-a-finite-measure-space",
+        "kind": "theorem",
+        "title": "Dunford pettis for l one on a finite measure space",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-ultrafilter-lemma",
+          "def-hahn-banach-extension-principle-relative",
+          "thm-hahn-banach-dominated-extension",
+          "def-banach-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-absolute-continuity-of-the-integral",
+          "thm-holder-inequality-for-integrals",
+          "thm-sigma-finite-duality-for-bounded-functionals-on-l-p",
+          "def-weak-topology-on-a-normed-space",
+          "def-weak-star-topology",
+          "lem-basic-weak-star-neighborhoods",
+          "thm-banach-alaoglu",
+          "thm-eberlein-smulian",
+          "thm-weakly-convergent-sequences-are-norm-bounded",
+          "lem-index-map-grows",
+          "def-relative-weak-compactness-and-three-sequential-notions",
+          "thm-uniform-integrability-equivalent-to-l-one-boundedness-and-uniform-absolute-continuity-on-finite-measure-spaces",
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "thm-reflexive-iff-unit-ball-weakly-compact",
+          "cor-relative-hahn-banach-bidual-isometry",
+          "thm-baire-category-for-complete-metric-spaces",
+          "thm-finite-products-of-compact-spaces",
+          "thm-compactness-under-continuous-maps",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
+        ],
+        "statement": "Assume AC. On a finite measure space, K in real L1 is relatively weakly compact iff it is uniformly integrable in the library's boundedness-plus-uniform-absolute-continuity sense.",
+        "strategy": "Brezis Theorem 4.30/Problem 23. If K is relatively weakly compact, Eberlein–Smulian reduces failure of uniform absolute continuity to a weakly convergent sequence. On the complete metric space of indicator functions in L1, apply Baire to the closed sets on which the integrals of its tails are uniformly Cauchy; symmetric-difference and positive/negative-part tests give uniform absolute continuity, while uniform boundedness gives the L1 bound. Conversely, uniform integrability makes the truncations T_M(K) uniformly L-infinity bounded and hence bounded in reflexive L2; Holder makes their weak L2 compactness weak L1 compactness. Since K lies within arbitrarily small L1-norm neighborhoods of these weakly compact sets, Banach–Alaoglu in L1** and closedness of the canonical image show that the weak-star closure of K lies in L1 and is weakly compact. AC covers the named compactness, Baire, uniform-boundedness, and duality inputs."
+      }
+    ],
+    "summary": "FA-12 is expanded through explicit dentability, isomorphism, separable-determination, and interval-test lemmas before their consumers. AC is explicit only on branches that use it."
+  },
+  {
+    "order": 288.07,
+    "id": "banach-valued-integration-and-the-radon-nikodym-property-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Banach Valued Integration and the Radon Nikodym Property — Examples",
+    "companion": "banach-valued-integration-and-the-radon-nikodym-property",
+    "requires": [
+      "banach-valued-integration-and-the-radon-nikodym-property"
+    ],
+    "items": [
+      {
+        "id": "ex-bochner-integral-of-a-countably-valued-function",
+        "kind": "example",
+        "title": "Bochner integral of a countably valued function",
+        "deps": [
+          "def-banach-valued-simple-function-and-integral",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "lem-bochner-integral-norm-inequality",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "statement": "For disjoint A_n with sum mu(A_n)||x_n||<infinity, f=sum x_n1_{A_n} is Bochner integrable and integral f=sum mu(A_n)x_n.",
+        "strategy": "Finite partial sums are simple and Cauchy in integral norm; completeness and the criterion identify the limit."
+      },
+      {
+        "id": "cex-weakly-measurable-need-not-be-strongly-measurable",
+        "kind": "counterexample",
+        "title": "Weakly measurable need not be strongly measurable",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-banach-space",
+          "def-separable-space",
+          "thm-countable-union-of-countable",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "thm-pettis-measurability-criterion-for-strong-measurability",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "statement": "Assume AC. f(t)=e_t from [0,1] to ell-two([0,1]) is weakly but not strongly measurable.",
+        "strategy": "Every ell-two vector has countable support, so scalar evaluations vanish off a countable set. The range remains uncountably sqrt(2)-separated after deleting any null set, so Pettis rules out strong measurability."
+      },
+      {
+        "id": "ex-vector-measure-induced-by-an-l-one-function",
+        "kind": "example",
+        "title": "Vector measure induced by an l one function",
+        "deps": [
+          "lem-bochner-density-defines-an-absolutely-continuous-vector-measure",
+          "def-banach-valued-simple-function-and-integral",
+          "def-bochner-integrable-function",
+          "thm-bochner-integrability-criterion",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "statement": "For Bochner f, E maps to integral_Ef as an absolutely continuous vector measure with variation integral_E||f||.",
+        "strategy": "Apply the density lemma and calculate a countably valued special case."
+      },
+      {
+        "id": "ex-hilbert-spaces-have-rnp",
+        "kind": "example",
+        "title": "Hilbert spaces have rnp",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "thm-reflexive-spaces-have-rnp",
+          "thm-hilbert-spaces-are-reflexive-by-riesz-representation"
+        ],
+        "statement": "Assuming AC, every Hilbert space has RNP.",
+        "strategy": "Use the local Riesz-representation proof that complete inner-product spaces are reflexive, then apply reflexive-spaces-have-RNP."
+      },
+      {
+        "id": "cex-c0-unit-ball-is-not-dentable",
+        "kind": "counterexample",
+        "title": "C0 unit ball is not dentable",
+        "deps": [
+          "def-dentable-bounded-set-and-slice",
+          "def-c-zero-and-ell-infinity",
+          "lem-real-and-complex-c-zero-are-banach",
+          "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "thm-dual-of-c0-is-ell-one"
+        ],
+        "statement": "Every slice of the c0 closed unit ball has diameter two.",
+        "strategy": "Choose a coordinate where the ell-one slice functional is small and two slice points differing there by almost two; the ball diameter gives equality."
+      },
+      {
+        "id": "rem-l-one-sequence-versus-l-one-nonatomic-rnp",
+        "kind": "remark",
+        "title": "L one sequence versus l one nonatomic rnp",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-separable-space",
+          "lem-countable-iff-surjection-from-n",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "thm-product-of-countable",
+          "thm-countable-union-of-countable",
+          "thm-separable-dual-spaces-have-rnp",
+          "thm-dual-of-c0-is-ell-one",
+          "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "thm-bounded-operator-space-is-banach",
+          "thm-l-one-of-zero-one-fails-rnp"
+        ],
+        "statement": "ell-one has RNP, while L1[0,1] does not.",
+        "strategy": "ell-one is the separable dual of c0; contrast this with the explicit nonatomic vector-measure obstruction."
+      },
+      {
+        "id": "rem-rnp-is-not-the-scalar-radon-nikodym-theorem",
+        "kind": "remark",
+        "title": "Rnp is not the scalar radon nikodym theorem",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-radon-nikodym-property",
+          "def-banach-valued-vector-measure-and-variation",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value"
+        ],
+        "statement": "Scalar RN is a theorem about scalar measures; RNP is an extra geometric property of a Banach target ensuring vector-valued densities.",
+        "strategy": "Spell out scalar variation/measurable density versus norm-countable additivity/bounded variation/Bochner density."
+      },
+      {
+        "id": "ex-dunford-pettis-uniformly-integrable-and-concentrating-families",
+        "kind": "example",
+        "title": "Dunford pettis uniformly integrable and concentrating families",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-restriction-of-a-measure",
+          "prop-restriction-is-a-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "def-integral-of-a-nonnegative-simple-function",
+          "thm-dunford-pettis-for-l-one-on-a-finite-measure-space",
+          "thm-absolute-continuity-of-the-integral"
+        ],
+        "statement": "Assume AC. A family dominated by one L1 function is relatively weakly compact, while f_n=n1_(0,1/n) is L1-bounded but neither UI nor relatively weakly compact.",
+        "strategy": "Absolute continuity of the integral proves UI in the first case. The spike has unit integral on a set of measure 1/n; apply Dunford–Pettis."
+      }
+    ],
+    "summary": "All eight design examples are retained. The Hilbert RNP example uses the local reflexivity supplier authored on the companion A page, with its inherited choice assumption explicit."
+  }
+]

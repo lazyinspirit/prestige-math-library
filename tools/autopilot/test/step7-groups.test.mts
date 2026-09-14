@@ -16,7 +16,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { writeFileSync, readFileSync, rmSync, existsSync, mkdtempSync, mkdirSync } from 'node:fs';
+import { appendFileSync, writeFileSync, readFileSync, rmSync, existsSync, mkdtempSync, mkdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -626,6 +626,15 @@ test('a fatal reader warning requires an exact repaired post-state', () => {
       const stale = check(run);
       assert.notEqual(stale.status, 0);
       assert.match(`${stale.stdout}${stale.stderr}`, /does not match the current item bytes/);
+      appendFileSync(generated[7], `${JSON.stringify({
+        version: 1, alert_id: alert.alert_id, from_group: 'a', owning_group: 'a',
+        item: READER_WARNING_ITEM, outcome: 'confirmed_fatal', defect_type: 'logic',
+        item_sha256: 'a'.repeat(64), post_sha256: post,
+        rationale: 'This later append-only row corrects the stale historical repair receipt against the same stable alert.',
+        at: new Date().toISOString(),
+      })}\n`);
+      const corrected = check(run);
+      assert.equal(corrected.status, 0, `${corrected.stdout}${corrected.stderr}`);
     } finally {
       for (const path of generated) rmSync(path, { force: true });
     }
