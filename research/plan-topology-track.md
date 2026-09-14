@@ -710,9 +710,10 @@ the page instead.**
 
 Its statement is **"assuming dependent choice"**, and the hypothesis is
 deliberately stated as *sufficient and not necessary*: the published
-`rem-baire-category-choice-strength` records that BCT for compact Hausdorff
-spaces is equivalent over ZF to **DMC**, strictly weaker than DC (Fossy–Morillon
-1998), and **explicitly declines to assert the locally compact form's
+`rem-baire-category-choice-strength` is intended to record that BCT for compact
+Hausdorff spaces is equivalent over ZF to **DMC**. DC implies DMC; strictness is
+known in ZFA, while whether DMC implies DC in ZF remains open (Fossy–Morillon
+1998 and Morillon's later full author text). It **explicitly declines to assert the locally compact form's
 equivalence** because the Bacsich (1972) attribution was never confirmed against
 a primary source. Page 255 does not assert it either; it mentions that item via
 `external_refs`, which is the sanctioned surviving use of the ‡ tier.

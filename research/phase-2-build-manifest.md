@@ -1,49 +1,22 @@
 # Phase 2 A/B-pair build manifest
 
-Snapshot date: 2026-09-11 (Australia/Sydney).
+Snapshot date: 2026-09-15 (Australia/Sydney).
 
-Active frontier: **all22 selected A/B pairs**, recorded in
-`phase-2-frontier-22.json`. The existing run names are execution partitions of
-that one frontier: `phase-2-next-20` owns the original20 and
-`phase-2-fourier-support-2` owns the2 Fourier pairs. They share prerequisite
-and completion scope; the Fourier pairs do not replace any original pair.
+Active run: **`phase-2-remaining-27`**, containing every pair not yet published.
+The stopped `phase-2-remaining-26` run omitted a binding Hilbert--Schmidt
+supplier and its receipts are evidence only; none may clear the fresh run.
 
-The owner directs authoring all22 immediately. At18:36 UTC, seven mathematical
-authoring/repair workers are assigned: original AT6, supplemental connections,
-smooth cohomology, fibrations and forcing, plus finite-Weyl repairs and the
-Carleson author now resolving the fibration scope escalation. Supplemental lanes
-write disjoint items and isolated fragments, serially merged by root; the engine
-retains every transition. Forcing completed one local coordinate supplier and
-its persistent session was resumed with the requested partial measure candidate.
-Preparation and full PMEA remain mathematically incomplete.
-
-Carleson-Hunt proofs are fully authored and locally owner-reviewed, including
-all-p interpolation, averaged reconstruction, strong-L2 extension and exact
-normalized torus transfer. Fremlin backing is resolved using14 exact hashed local
-alternatives; this is not a source fetch stamp or independent adjudication.
-Finite-Weyl core and Killing/Engel/trace repairs are locally closed; four general
-Lie/Kostant claims remain held. Earlier closed authoring groups include
-Chacon24/24, probability81/81, hyperbolic36/36, convergence55/55 and computability22/22;
-transitive hash changes are reconciled before engine acceptance.
-
-Fourier57/57 passed author gates, Step4 and independent Step5a. Step5b impact
-closure continues while peer authors change the shared frontier. Neither engine
-is paused. Current original-run inventory554 includes necessary local A suppliers;
-no pair has been added. Scope approval and local proof review do not replace the
-independent gates. See `phase-2-next-20-owner-authoring-direction.md` and the
-supervision record for exact completed work and outstanding obligations.
-
-Programme: **147 pairs =44 published +22 selected in this frontier +81 waiting**.
-Only FA22 Fourier transform/convolution and FA23 Schwartz/Plancherel were
-added under the at-most-five cap; three slots remain unused. The25-pair
-expansion proposal is superseded. No pair or result was dropped.
+Programme: **148 pairs = 121 published + 27 selected + 0 waiting**.
+FA22 Fourier transform/convolution, FA23 Schwartz/Plancherel, and the necessary
+square-integrable-kernel/Hilbert--Schmidt supplier are the three additions under
+the at-most-five cap; two slots remain unused. No pair or result is dropped.
 Admission evidence: `phase-2-five-cap-admission.md` and its exact
 published-interface census. New content remains draft pending publication.
 
-Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
+Historical local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
 The affine propositions and example remain binding; no loop-algebra pair is added.
 
-Current supervision: `phase-2-next-20-supervision.md`.
+Historical supervision: `phase-2-next-20-supervision.md`.
 Historical checkpoints and decisions: `phase-2-prior-run-history-through-2026-09-10.md`.
 Historical status claims do not override publication files or engine state.
 
@@ -71,7 +44,7 @@ whenever a pair publishes or a controlling file changes.
 retirement supplier root. `P` means an unpublished prerequisite. Each row names its A page; its B
 page is the exact A-page id followed by `-examples`.
 
-Current census: **147 pair obligations = 45 direct roots + 17 retirement roots + 85 prerequisite pairs**. The
+Current census: **148 pair obligations = 45 direct roots + 17 retirement roots + 86 prerequisite pairs**. The
 original consumer-repair closure contained 70 pairs. A ground-truth traversal
 of every published page's declared prerequisite closure added 52 existing
 planned pairs: nine direct page-level roots and 43 transitive prerequisites.
@@ -89,10 +62,9 @@ with configuration-space bounds. Both obligations are binding in
 `plan-computability-theory-track.md` §53.1, remain unpublished, and do not
 change the active wave. The canonical ledger records their consumers.
 
-The first 19 pairs and the subsequent 25-pair run are published: 44 pairs
-in total. The owner authorizes one22-pair frontier: the original20 plus the two Fourier
-pairs selected under the five-pair cap, leaving81 pairs waiting. Source and
-proof completion gates remain mandatory.
+Filesystem and plan reconciliation finds 121 published pairs. The owner now
+authorizes the remaining 27-pair frontier, including the square-kernel supplier
+selected under the five-pair cap. Source and proof completion gates remain mandatory.
 
 Nine of the twelve published-page edges that caused the earlier expansion
 are stale placement/B-page declarations, exposing seven apparent direct roots
@@ -160,6 +132,7 @@ supplier pair or its other outstanding consumers.
 | functional-analysis | P | waiting | `hilbert-space-geometry-and-riesz-representation` |
 | functional-analysis | P | waiting | `orthonormal-bases-parseval-and-fourier-series` |
 | functional-analysis | P | waiting | `compact-operators-and-riesz-schauder-theory` |
+| functional-analysis | P | selected: phase-2-remaining-27 | `square-integrable-kernels-and-hilbert-schmidt-compactness` |
 | functional-analysis | D | waiting | `banach-space-differential-calculus-and-banach-manifolds` |
 | functional-analysis | P | waiting | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` |
 | functional-analysis | D | waiting | `banach-algebras-spectrum-and-holomorphic-functional-calculus` |
@@ -266,7 +239,8 @@ queued after the active first wave; none belongs to its frozen scope.
 These existing scaffold destinations close the Set Theory catalogue's missing
 proof destinations and the de Rham comparison endpoint. `R` means a retirement
 supplier root; `P` means its additional prerequisite. Inclusion is not source
-clearance: the SET-20 Blass proof and SET-22 disputed DMC clause remain gates.
+clearance: the SET-20 Blass proof remains gated. SET-22 must use the resolved
+DMC/DC status (DC implies DMC; strict in ZFA; reversal open in ZF).
 
 | category | role | current state | A page id |
 |---|---:|---|---|
@@ -310,13 +284,15 @@ The new bridge supplies the general parameter-reduction multiplicity proof, not 
 
 | group-theory | D | published | `boone-machine-simulation-and-fixed-presentation-undecidability` |
 
-The direct Boone pair has 13 A items and 3 B items, binding in the group and computability prose and plan-spec.json. It supplies three pending published refutations and the Novikov–Boone retirement endpoint. The previously proposed Higman bridge is not required by this route. Current scope: 147 pairs; 19 published, 24 selected for catch-up, one paused after Step 6, and 103 other unpublished pairs. Unclosed O'Nan–Scott and other retirement proof gates still prohibit a whole-library self-containment certificate.
+The direct Boone pair has 13 A items and 3 B items, binding in the group and computability prose and plan-spec.json. It supplies three pending published refutations and the Novikov–Boone retirement endpoint. The previously proposed Higman bridge is not required by this route. That paragraph records a concluded historical checkpoint; the current 148-pair census and 27-pair active run are stated at the top of this file. Unclosed O'Nan–Scott and other retirement proof gates still prohibit a whole-library self-containment certificate.
 
 ## Selected current run
 
-All 20 A/B pairs are recorded in `phase-2-next-20-planning-notes.md` and
-the immutable 40-page scope ledger `phase-2-next-20-scope-ledger.json`.
-The engine packs them into 14 batches. It owns every dispatch and transition.
+All 27 A/B pairs are selected for `phase-2-remaining-27`; its planning notes,
+54-page immutable scope ledger, batch manifests, and task files are generated
+afresh by the engine. The engine owns every dispatch and transition. The
+table's older state labels are historical provenance; the current state is the
+121/27/0 census above and is recomputed from publication files and run scope.
 
 ## Content gates
 
@@ -331,9 +307,10 @@ machinery as a blocker and repair the scaffold before authoring the endpoint.
 - `symmetric-collapse-and-ultrafilter-free-models`: recover and inspect the
   complete Blass ultrafilter-free-model proof; the catalogue statement is
   not a supplier.
-- `choice-strength-in-baire-urysohn-stone-and-tychonoff`: resolve the
-  unsupported global `DMC < DC` clause against authoritative full text.
-  Do not infer it from a set-relative choice separation or call it proved.
+- `choice-strength-in-baire-urysohn-stone-and-tychonoff`: state only the
+  recovered authoritative status: DC implies DMC, strictness holds in ZFA,
+  and whether DMC implies DC in ZF is open. The contrary published catalogue
+  sentence is Phase-3 repair debt and is never a supplier.
 
 - `tor-flatness-and-global-dimension` is a page-release obligation: its A page, B page and all 49 items are now published. Preserve all 49 items and the B page. Check A-page
   release readiness separately; no new authoring is authorized for this pair.

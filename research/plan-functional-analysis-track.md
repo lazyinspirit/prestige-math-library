@@ -1233,7 +1233,9 @@ operators are finite rank.  No use is made of the false general statement
 **A page:** `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`
 
 **Requires:** FA-13–FA-15; planned predecessors MT-11 and MT-14 for product
-integration and $L^2$.
+integration and $L^2$; and the earlier binding pair
+`square-integrable-kernels-and-hilbert-schmidt-compactness` for the
+Hilbert--Schmidt definition, basis independence, compactness, and kernel theorem.
 
 **Source backing read:** Teschl §§3.2, 3.5, and 3.6, pp. 72–78 and 89–100
 (*The spectral theorem for compact symmetric operators*; *Singular value
@@ -1253,32 +1255,31 @@ Items:
 7. `lem-positive-square-root-of-a-compact-positive-operator` (lemma) — the compact self-adjoint expansion gives a unique compact positive $S$ with $S^2=T$, including the kernel and the possible accumulation at zero.
 8. `def-absolute-value-and-singular-values-of-a-compact-operator` (definition) — $|T|=(T^*T)^{1/2}$ using item 7, with singular values the nonzero eigenvalues of $|T|$ repeated by multiplicity; later reconcile this construction with FA-19's continuous functional calculus.
 9. `thm-singular-value-decomposition-for-compact-operators` (theorem) — $Tx=\sum s_n\langle x,e_n\rangle f_n$ on the support, including kernels/cokernels.
-10. `cor-compact-operator-iff-singular-values-tend-to-zero` (corollary) — on Hilbert space, with finite-rank truncations.
-11. `cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators` (corollary) — truncate the singular expansion by finite-rank orthogonal projections of norm at most one; no separately undefined approximation-property variant is invoked.
-12. `def-hilbert-schmidt-operator` (definition) — $\sum_e\|Te\|^2<\infty$ for an orthonormal basis, with arbitrary-index sums understood as finite-subset suprema.
-13. `thm-hilbert-schmidt-norm-is-basis-independent` (theorem) — Parseval/Tonelli proof.
-14. `thm-hilbert-schmidt-operators-form-a-two-sided-ideal` (theorem).
-15. `thm-hilbert-schmidt-operators-are-compact` (theorem) — finite-rank basis truncations.
-16. `thm-l-two-kernels-give-hilbert-schmidt-operators` (theorem) — norm identity via Fubini/Parseval.
-17. `def-trace-class-operator` (definition) — $\sum s_n(T)<\infty$.
-18. `thm-trace-class-iff-product-of-two-hilbert-schmidt-operators` (theorem).
-19. `thm-trace-class-is-a-two-sided-banach-operator-ideal` (theorem).
-20. `def-trace-of-a-trace-class-operator` (definition) — $\operatorname{tr}T=\sum_e\langle Te,e\rangle$.
-21. `thm-trace-is-absolutely-convergent-and-basis-independent` (theorem).
-22. `thm-cyclicity-of-the-trace` (theorem) — $\operatorname{tr}(ST)=\operatorname{tr}(TS)$ whenever one factor is trace class and the other bounded.
-23. `thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues` (theorem).
-24. `thm-lidskii-for-trace-class-operators` (theorem) — trace equals the algebraic-multiplicity sum of eigenvalues; mark as the deep endpoint and decompose via finite-dimensional approximation/source proof.
+10. `lem-singular-values-equal-approximation-numbers` (lemma) — identify the singular values with best finite-rank approximation errors after compactness and the SVD are available.
+11. `cor-compact-operator-iff-approximation-numbers-tend-to-zero` (corollary) — the compactness criterion for arbitrary bounded Hilbert operators; only then identify the compact case with singular values.
+12. `cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators` (corollary) — truncate the singular expansion by finite-rank orthogonal projections of norm at most one; no separately undefined approximation-property variant is invoked.
+13. `thm-hilbert-schmidt-operators-form-a-two-sided-ideal` (theorem) — import the definition and basis-independence theorem from the earlier square-kernel pair.
+14. `def-trace-class-operator` (definition) — $\sum s_n(T)<\infty$.
+15. `thm-trace-class-iff-product-of-two-hilbert-schmidt-operators` (theorem).
+16. `lem-nuclear-series-characterizes-trace-norm` (lemma) — establish the nuclear-series characterization before using trace-norm completeness.
+17. `thm-trace-class-is-a-two-sided-banach-operator-ideal` (theorem).
+18. `def-trace-of-a-trace-class-operator` (definition) — $\operatorname{tr}T=\sum_e\langle Te,e\rangle$.
+19. `thm-trace-is-absolutely-convergent-and-basis-independent` (theorem).
+20. `thm-cyclicity-of-the-trace` (theorem) — $\operatorname{tr}(ST)=\operatorname{tr}(TS)$ whenever one factor is trace class and the other bounded.
+21. `thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues` (theorem).
+
+The Hilbert--Schmidt definition, basis independence, compactness theorem, and
+$L^2$-kernel theorem live only in §14.5's earlier square-kernel pair. Lidskii
+lives only in §14.5's later Fredholm-determinant pair and is not an FA-16 item.
 
 **Choice and proof plan.**  A sequence of approximate maximizers uses
 countable choice under the library's ordinary completeness convention.  The
 spectral theorem itself constructs a countable list only for the nonzero
 spectral subspaces; a basis for a possibly nonseparable kernel is a separate
-AC consequence and is not smuggled into item 5.  Basis independence of the
-Hilbert–Schmidt norm and trace is proved first for finite sums, then by
-monotone/absolute convergence.  Lidskii is retained because trace class without
-the eigenvalue trace formula is incomplete, but its proof must follow a
-standard source and may be split into a dedicated A/B pair if the sixty-item
-proof-obligation count requires it.
+AC consequence and is not smuggled into item 5. Basis independence of the
+trace is proved first for finite sums, then by monotone/absolute convergence.
+Lidskii is deliberately deferred to the dedicated Fredholm-determinant A/B
+pair because its complete proof requires that pair's determinant machinery.
 
 **B page:** `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples`
 

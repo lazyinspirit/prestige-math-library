@@ -2,11 +2,14 @@
 
 The owner authorizes at most five additional existing Phase 2 pairs, provided
 the additions do not introduce substantial unmet prerequisites themselves.
-Admit **two**: Fourier Transform, Convolution and Approximate Identities
-(FA22), then Schwartz Space and the Plancherel Theorem (FA23). Retain all
-original20. Three slots remain unused; the earlier25-pair proposal is superseded.
-This admission closes the identified Fourier supplier gap in the intended
-construction; it does not claim that the Lie or large-cardinal gaps are solved.
+Admit **three**: Fourier Transform, Convolution and Approximate Identities
+(FA22), Schwartz Space and the Plancherel Theorem (FA23), and Square-Integrable
+Kernels and Hilbert--Schmidt Compactness (§14.5). Two slots remain unused; the
+earlier 25-pair proposal is superseded. The third admission is necessary:
+binding §14.5 moves the Hilbert--Schmidt definition, basis independence,
+compactness, and kernel theorem before FA16, while FA16 retains the
+Hilbert--Schmidt ideal theorem and imports that interface. Its declared
+prerequisites are published or earlier in the same remaining run.
 
 ## Evidence and limits
 
@@ -113,14 +116,15 @@ claims of the moved example are all retained.
 
 ## Execution
 
-The supplemental engine run `phase-2-fourier-support-2` owns these four pages
-only, with FA22 before FA23 and explicit lower-order in-run dependence.
-The original `phase-2-next-20` stays held with its artifacts intact. No
-original pair has two writers. Normal scaffold, source, author and judgment
-gates apply. If a new substantial prerequisite is discovered, hold that
-admission rather than quietly consuming a sixth pair or certifying a gap.
+The Fourier admission was completed in `phase-2-fourier-support-2`. The fresh
+engine run `phase-2-remaining-27` owns the 54 pages still unpublished, including
+the square-kernel pair before FA16. The stopped `phase-2-remaining-26` artifacts
+remain evidence only. No pair has two writers. Normal scaffold, source, author
+and judgment gates apply. If a new substantial prerequisite is discovered,
+hold that admission rather than quietly consuming another cap slot or
+certifying a gap.
 
-The other three slots are reserved, not selected. In particular, do not
+The other two slots are reserved, not selected. In particular, do not
 admit the root-system/highest-weight pairs merely because they supply needed
 results: their own rank-one/semisimple prerequisite closure is still unresolved.
 

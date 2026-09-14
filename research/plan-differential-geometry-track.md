@@ -7722,11 +7722,13 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
 8. `ex-regular-and-singular-diagonal-elements-of-sl-n` — **example** `[LL]`.
 9. `cex-a-maximal-abelian-subalgebra-that-is-not-a-cartan-subalgebra-in-a-nonsemisimple-algebra` —
    **counterexample** `[LA]`.
-10. `cex-a-nonreduced-restricted-root-system-of-type-bc` — **counterexample**
-    `[LL]`; $BC_n$ is reserved for DG-34 and does not contradict item 27.
-11. `ex-weyl-reflection-in-sl-two` — **example** `[LL]`.
-12. `ex-the-killing-form-identifies-roots-with-coroot-directions` —
+10. `ex-weyl-reflection-in-sl-two` — **example** `[LL]`.
+11. `ex-the-killing-form-identifies-roots-with-coroot-directions` —
     **example** `[LA]`.
+
+The nonreduced restricted-root example lives only on DG-34 B as
+`ex-a-nonreduced-bc-root-system-from-a-real-form`; DG-30 neither constructs
+restricted roots nor points forward to that example as a proof supplier.
 
 ### Sources and exact locators
 
@@ -8402,12 +8404,15 @@ them except where averaging or $L^2(G)$ is expressly used.
     **proposition** `[LA]`; a Lie-algebra module integrates iff its weights
     satisfy the group lattice condition.
 44. `thm-weyl-character-formula-for-compact-connected-lie-groups` —
-    **theorem** `[LA]`; pull DG-32's formal formula to the simply connected
-    cover of the derived group and evaluate it there. For
-    \(\lambda\in X^*(T)\), prove independence of the chosen lift and descend
-    the quotient to regular $t\in T$ before extending continuously across
-    singular elements. Neither \(\rho\) nor each \(\alpha/2\) is assumed to
-    be a character of the original non-simply-connected torus.
+    **theorem** `[LA]`; prove the compact formula locally from the Weyl
+    denominator/alternant identity, Weyl integration, and character
+    orthogonality. Apply that argument on the simply connected cover of the
+    derived group. For \(\lambda\in X^*(T)\), prove independence of the chosen
+    lift and descend the quotient to regular $t\in T$ before extending
+    continuously across singular elements. DG-32 and RL-7 are
+    non-load-bearing orientation only: neither supplies this formula. Neither
+    \(\rho\) nor each \(\alpha/2\) is assumed to be a character of the original
+    non-simply-connected torus.
 45. `cor-representation-ring-has-the-dominant-character-basis` — **corollary**
     `[LA]`; multiplication is tensor product and characters embed it in
     $\mathbb Z[X^*(T)]^W$.

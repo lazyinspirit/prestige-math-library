@@ -2140,7 +2140,12 @@ Items:
 10. `cor-heat-semigroup-martingale` (corollary) — $P_{T-t}g(B_t)$ is a martingale for bounded Borel $g$, using smoothing for $t<T$ and conditional expectation at the endpoint.
 11. `thm-levy-characterization-of-brownian-motion` (theorem) — a continuous local martingale with $M_0=0$ and $[M]_t=t$ is Brownian with respect to its filtration.
 12. `cor-vector-levy-characterization` (corollary) — a continuous $d$-dimensional local martingale with $[M^i,M^j]_t=\delta_{ij}t$ is $d$-dimensional Brownian motion.
-13. `def-brownian-generator` (definition) — on $C^2$ test functions the Brownian generator is $Lf=\tfrac12\Delta f$.
+13. `def-brownian-generator` (definition) — define the Brownian/Itô
+    differential operator on $C^2(\mathbb R^d)$ by $Lf=\tfrac12\Delta f$.
+    Do not identify every $C^2$ function with the infinitesimal-generator
+    domain of the heat semigroup on $C_0(\mathbb R^d)$. If semigroup-generator
+    language is used, state its actual domain and use $C_c^\infty$ as the
+    standard core.
 14. `thm-dynkin-formula-for-bounded-brownian-stopping` (theorem) — for $f\in C_c^2(\mathbb R^d)$ and a bounded stopping time $\tau$, $E_xf(B_\tau)=f(x)+E_x\int_0^\tau Lf(B_s)ds$.
 15. `rem-ito-versus-stratonovich-boundary` (remark, L/NA) — Stratonovich integration and any Ito--Stratonovich conversion theorem are not developed or asserted on this page.
 16. `rem-general-semimartingale-calculus-is-outside-this-block` (remark, L/NA) — jumps, general local-martingale integrators, Girsanov, SDEs, Tanaka/local time, and stochastic differential geometry remain in the scope denials.

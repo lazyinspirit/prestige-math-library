@@ -767,11 +767,12 @@ items for `URY -> DMC?` and exact Stone-versus-AC strength; DC implies DMC;
 BPI does not imply DMC; DMC is not a ZF theorem; the sourced DMC-versus-MC/AC
 and ZFA qualifications; arbitrary compact products are compact iff AC.
 
-**Source blockers.** The currently recorded assertion “DMC is strictly weaker
-than DC in ZF” remains a required target but is **unverified**: the accessible
-Fossy--Morillon abstract says the reversal was open, while a later slide asserts
-strictness without the primary proof recovered. Step 1 must recover the proof
-and source or record a fatal correction; it may not silently weaken the claim.
+**Resolved source status.** The exact supported statement is: DC implies DMC;
+strictness is known in ZFA; whether DMC implies DC in ZF remains open. Morillon's
+full author text and Fossy--Morillon support this qualification, not a strict
+ZF separation. SET-22 must state the implication, the ZFA separation, and the
+open ZF reversal exactly. The conflicting published catalogue wording remains
+read-only Phase-3 repair debt and is not a supplier or a Phase-2 target.
 
 **Targets.** Proves all supported clauses in
 `rem-baire-category-choice-strength`, `rem-urysohn-lemma-not-a-zf-theorem`,
@@ -1140,7 +1141,7 @@ not permission to omit it.
 | `rem-solovay-model` | ZF+DC model; all sets of reals measurable, Baire, and perfect-set regular; no named choice pathologies; inaccessible-relative consistency | SET-24 |
 | `rem-shelah-inaccessible-and-the-baire-property` | Baire-property model from Con(ZF/ZFC) without inaccessible; measurability has inaccessible inner-model lower bound/equiconsistency | SET-25 |
 | `rem-gitik-all-uncountable-cardinals-singular` | every limit ordinal, hence every uncountable cardinal, has cofinality omega in a ZF model from the stated strongly compact hypothesis | SET-26 |
-| `rem-baire-category-choice-strength` | metric BCT iff DC; separable complete BCT in ZF; compact Hausdorff BCT iff DMC; supported separations; disputed DMC<DC clause retained for source recovery | SET-22 |
+| `rem-baire-category-choice-strength` | metric BCT iff DC; separable complete BCT in ZF; compact Hausdorff BCT iff DMC; supported separations; DC implies DMC, strict in ZFA, while DMC-to-DC is open in ZF | SET-22 |
 | `rem-urysohn-lemma-not-a-zf-theorem` | failure in ZF and ZF+`AC_omega`; DC and DMC sufficiency; BPI insufficiency; Tietze consequence; `URY->DMC?` status only | SET-22 |
 | `rem-stone-theorem-choice-strength` | Stone theorem under AC; failure with DC and with BPI; effective strengthening implies MC=AC; exact-strength question status only | SET-22 |
 | `rem-schechter-kelley-tychonoff` | Kelley's topological error; cofinite product=BPI; isolated-point repair; compact Hausdorff product=BPI and compact `T_1` product=AC | SET-7 and SET-22 |
@@ -1170,8 +1171,9 @@ claim-to-item map. Before publication, require:
    Theorem 4.12. The current explanation is mathematically invalid.
 2. **Blass model:** recover and use the construction by finite-modification
    classes and parameter-HOD; the current item admits it has no full method.
-3. **DMC versus DC:** the strictness claim is not presently supported by the
-   recovered primary source. It remains a named blocker, not a deleted clause.
+3. **DMC versus DC:** preserve the recovered exact status: DC implies DMC,
+   strictness is known in ZFA, and the reversal remains open in ZF. Do not
+   promote the ZFA separation to ZF.
 4. **Urysohn under `AC_omega`:** author from Tachtsis's paper **and erratum**.
 5. **Shelah:** retain only the exact recovered equiconsistency and
    `omega_1`-in-`L` lower bound unless stronger wording is separately proved.
@@ -1564,8 +1566,8 @@ dependency, justification, or proof source.
 
 This subsection is binding over the two Phase-2 classifications in §7.3.  The
 old SET-21 root reaches source-blocked SET-20, and the old SET-22 root reaches
-SET-21/20 while sharing a page with the unresolved `DMC < DC` assertion.  They
-are therefore **not** Phase-2 supplier roots.  The cheapest adequate cut is two
+SET-21/20 while sharing a page with the incorrect strict-ZF `DMC < DC`
+assertion. They are therefore **not** Phase-2 supplier roots. The cheapest adequate cut is two
 new pairs, because the two interfaces have disjoint mathematics and forcing
 the Baire theorem through the Cohen-model proof would create a gratuitous
 dependency.  These pairs prove only the interfaces required by the published
@@ -1667,8 +1669,8 @@ its A companion and is a dependency leaf.
 | 9 | `thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf` | theorem | Dependent Choice is equivalent to the complete-metric Baire principle over ZF | the two preceding implication theorems |
 | B1 | `ex-blair-sequence-space-for-a-serial-relation` | example | Blair's sequence space for a serial relation | companion A only; zero consumers |
 
-The Baire pair contains no DMC item or claim.  In particular, the unresolved
-strict `DMC < DC` assertion cannot enter this pair through prose, dependency,
+The Baire pair contains no DMC item or claim. In particular, the corrected
+DMC/DC status cannot enter this pair through prose, dependency,
 `justified_by`, or `external_refs`.
 
 ### Old-root cutover and exact published impact
@@ -1708,8 +1710,9 @@ After this cutover, the old SET-21 and SET-22 roots are planned-only/Phase-3
 cleanup, with zero published impact; they are not Phase-2 work.  SET-21 may
 retain its full Halpern--Läuchli enrichment and SET-22 may retain its supported
 Urysohn/Stone/Tychonoff/DMC program, but neither page may be used to unblock a
-published consumer.  SET-20's missing Blass full proof and SET-22's unresolved
-`DMC < DC` claim remain blockers only for those planned enrichment pages.
+published consumer. SET-20's missing Blass full proof remains a blocker for its
+planned enrichment page. SET-22 instead owns the exact resolved status: DC
+implies DMC, strict in ZFA, with the reversal open in ZF.
 
 The exact later-page prerequisite amendments are also binding, but are not
 part of the four-shell Phase-2 integration patch.  SET-6 is published and
