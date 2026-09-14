@@ -2,7 +2,7 @@
 id: rem-rnp-is-not-the-scalar-radon-nikodym-theorem
 kind: remark
 title: "The RNP is not the scalar Radon--Nikodym theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -66,36 +67,10 @@ bounded variation and asks for Bochner densities on every measurable set
 
 **Given:** AC and the two stated Radon--Nikodym assertions.
 
-1.1 Isolate what the scalar theorem supplies. [given, A1, L1, L2]
-For a real signed measure $\nu\ll\mu$ satisfying [L1]'s common
-finite-exhaustion hypotheses, [L1] supplies a scalar measurable $f$ with
-$\nu(E)=\int_Ef\,d\mu$ for every measurable $E$. When $\nu$ has finite
-variation, $f\in L^1$, and [L2] identifies
-$|\nu|(E)=\int_E|f|\,d\mu$. Thus existence, uniqueness up to almost-everywhere
-equality, and scalar variation all live inside the ordered scalar theory.
+1.1 Isolate what the scalar theorem supplies. For a real signed measure $\nu\ll\mu$ satisfying [L1]'s common finite-exhaustion hypotheses, [L1] supplies a scalar measurable $f$ with $\nu(E)=\int_Ef\,d\mu$ for every measurable $E$. When $\nu$ has finite variation, $f\in L^1$, and [L2] identifies $|\nu|(E)=\int_E|f|\,d\mu$. Thus existence, uniqueness up to almost-everywhere equality, and scalar variation all live inside the ordered scalar theory. [given, A1, L1, L2]
 
-2.1 Compare the vector quantifiers and density notion. [L3, step 1.1]
-For a Banach target $X$, [L3] begins with a norm-countably additive map
-$\nu:\mathcal A\to X$, not a signed scalar measure. Its bounded variation is
-the supremum of sums of vector norms over finite partitions. The requested
-density is an $X$-valued strongly measurable, norm-integrable Bochner
-function, and its integral must recover $\nu(E)$ for every $E$. None of these
-target-valued existence assertions follows merely by replacing absolute values
-with norms in step 1.1.
+2.1 Compare the vector quantifiers and density notion. For a Banach target $X$, [L3] begins with a norm-countably additive map $\nu:\mathcal A\to X$, not a signed scalar measure. Its bounded variation is the supremum of sums of vector norms over finite partitions. The requested density is an $X$-valued strongly measurable, norm-integrable Bochner function, and its integral must recover $\nu(E)$ for every $E$. None of these target-valued existence assertions follows merely by replacing absolute values with norms in step 1.1. [L3, step 1.1]
 
-3.1 Locate the overlap without overclaiming. [A1, L1, L2, L3, step 1.1, step 2.1]
-When $X=\mathbb R$, a norm-countably additive vector measure is a signed
-measure, bounded variation is finite scalar total variation, and scalar
-measurability/integrability is the real Bochner notion. On a finite control
-measure the constant exhaustion meets [L1], so the scalar theorem supplies this
-special RNP case, with [L2] supplying its variation formula. For a general
-$X$, [L3] remains a genuine extra geometric requirement.
+3.1 Locate the overlap without overclaiming. When $X=\mathbb R$, a norm-countably additive vector measure is a signed measure, bounded variation is finite scalar total variation, and scalar measurability/integrability is the real Bochner notion. On a finite control measure the constant exhaustion meets [L1], so the scalar theorem supplies this special RNP case, with [L2] supplying its variation formula. For a general $X$, [L3] remains a genuine extra geometric requirement. [A1, L1, L2, L3, step 1.1, step 2.1]
 
-4.1 Audit the boundaries and assumptions. [A1, L1, L3, step 3.1]
-The empty measurable space and zero scalar measure give zero densities in both
-settings. The zero Banach target has RNP trivially, but this says nothing about
-nonzero targets. The cited scalar theorem is real; no complex scalar theorem is
-silently extracted from it. Its sigma-finite-style common exhaustion is more
-general than the finite control measures in the RNP definition, while finite
-variation is what makes its scalar density $L^1$. AC is stated because [L1]
-requires it. [given, A1, L1, L2, L3, step 1.1, step 2.1, step 3.1] ∎
+4.1 Audit the boundaries and assumptions. [A1, L1, L3, step 3.1] The empty measurable space and zero scalar measure give zero densities in both settings. The zero Banach target has RNP trivially, but this says nothing about nonzero targets. The cited scalar theorem is real; no complex scalar theorem is silently extracted from it. Its sigma-finite-style common exhaustion is more general than the finite control measures in the RNP definition, while finite variation is what makes its scalar density $L^1$. AC is stated because [L1] requires it. [given, A1, L1, L2, L3, step 1.1, step 2.1, step 3.1] ∎

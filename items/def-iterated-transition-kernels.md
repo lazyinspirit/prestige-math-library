@@ -2,7 +2,7 @@
 id: def-iterated-transition-kernels
 kind: definition
 title: "Iterated transition kernels"
-status: draft
+status: published
 origin: pipeline
 deps: [def-composition-of-probability-kernels, lem-kernel-composition-is-well-defined-and-associative]
 proof_strategy: definition
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

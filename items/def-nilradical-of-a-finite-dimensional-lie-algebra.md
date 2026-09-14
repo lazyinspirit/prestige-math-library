@@ -2,7 +2,7 @@
 id: def-nilradical-of-a-finite-dimensional-lie-algebra
 kind: definition
 title: Nilradical
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lower-central-series-and-nilpotent-lie-algebra, def-lie-subalgebra-ideal-and-center]
@@ -11,6 +11,8 @@ landmark: false
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Milne, Lie Algebras, Corollary 2.24"

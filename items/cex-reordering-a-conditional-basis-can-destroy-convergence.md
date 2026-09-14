@@ -2,7 +2,7 @@
 id: cex-reordering-a-conditional-basis-can-destroy-convergence
 kind: counterexample
 title: "Reordering a conditional basis expansion can destroy convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-radon-nikodym-property
 kind: definition
 title: "Radon--Nikodym property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: []
 aliases: [RNP]
 landmark: true
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-bounded-linear-maps-commute-with-bochner-integration
 kind: theorem
 title: "Bounded linear maps commute with Bochner integration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -53,18 +54,8 @@ simple sequence ([[def-bochner-integrable-function]]).
 
 **Given:** $T,f,E$ as in the Statement.
 
-1.1 Restrict a defining approximation to the measurable set. [given, L2, choose]
-Choose integrable simple $s_n$ with $\int\|f-s_n\|\to0$. Then
-$\mathbf1_ETs_n$ is an integrable $Y$-valued simple function: every nonzero
-level is a finite union of level sets of $\mathbf1_Es_n$.
+1.1 Restrict a defining approximation to the measurable set. Choose integrable simple $s_n$ with $\int\|f-s_n\|\to0$. Then $\mathbf1_ETs_n$ is an integrable $Y$-valued simple function: every nonzero level is a finite union of level sets of $\mathbf1_Es_n$. [given, L2, choose]
 
-2.1 Prove Bochner integrability after applying $T$. [L1, L2, step 1.1]
-By [L1],
-$\int\|\mathbf1_ETf-\mathbf1_ETs_n\|\leq C\int_E\|f-s_n\|\to0$.
-Thus [L2] makes $\mathbf1_ETf$ Bochner integrable.
+2.1 Prove Bochner integrability after applying $T$. By [L1], $\int\|\mathbf1_ETf-\mathbf1_ETs_n\|\leq C\int_E\|f-s_n\|\to0$. Thus [L2] makes $\mathbf1_ETf$ Bochner integrable. [L1, L2, step 1.1]
 
-3.1 Commute $T$ with the defining limit. [L1, L2, L3, step 1.1, step 2.1]
-For each simple $s_n$, finite linearity in [L3] gives
-$T(\int_Es_n)=\int_ETs_n$. Boundedness makes $T$ norm-continuous, so taking
-limits in this equality and using [L2] proves the displayed identity. If
-$T=0$, $f=0$, or $E=\varnothing$, both sides are explicitly zero. [L1, L2, L3, step 1.1, step 2.1] ∎
+3.1 Commute $T$ with the defining limit. [L1, L2, L3, step 1.1, step 2.1] For each simple $s_n$, finite linearity in [L3] gives $T(\int_Es_n)=\int_ETs_n$. Boundedness makes $T$ norm-continuous, so taking limits in this equality and using [L2] proves the displayed identity. If $T=0$, $f=0$, or $E=\varnothing$, both sides are explicitly zero. [L1, L2, L3, step 1.1, step 2.1] ∎

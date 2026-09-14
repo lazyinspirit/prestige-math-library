@@ -2,7 +2,7 @@
 id: ex-brownian-finite-dimensional-density
 kind: example
 title: "Brownian finite-dimensional density"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-standard-normal-and-normal-laws, thm-independent-random-elements-have-product-joint-law, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, thm-continuous-partial-derivatives-imply-total-differentiability, thm-determinant-of-a-triangular-matrix, lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 forward_refs: []
@@ -11,6 +11,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

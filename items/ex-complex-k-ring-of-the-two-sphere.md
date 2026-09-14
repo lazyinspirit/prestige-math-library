@@ -2,7 +2,7 @@
 id: ex-complex-k-ring-of-the-two-sphere
 kind: example
 title: The complex K-ring of S²
-status: draft
+status: published
 origin: pipeline
 deps: [thm-hopf-line-calculation-of-k-zero-of-the-two-sphere, def-clutching-construction-for-bundles-over-a-suspension, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: ex-linear-combinations-of-brownian-values-are-gaussian
 kind: example
 title: "Linear combinations of Brownian values are Gaussian"
-status: draft
+status: published
 origin: pipeline
 deps: [def-gaussian-process, def-brownian-motion, def-multivariate-normal-law, lem-positive-semidefiniteness-of-the-brownian-covariance-kernel, thm-covariance-bilinearity-and-symmetry, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

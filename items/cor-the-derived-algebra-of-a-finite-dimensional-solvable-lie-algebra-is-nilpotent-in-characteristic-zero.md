@@ -2,7 +2,7 @@
 id: cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero
 kind: corollary
 title: The derived algebra of a solvable Lie algebra is nilpotent in characteristic zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-derived-algebra-of-a-solvable-linear-lie-algebra-is-nilpotent, prop-a-central-extension-of-a-nilpotent-lie-algebra-is-nilpotent, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras, def-restriction-and-extension-of-scalars]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

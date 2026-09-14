@@ -2,7 +2,7 @@
 id: prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical
 kind: proposition
 title: The radical is characteristic and its quotient has zero radical
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-radical-of-a-finite-dimensional-lie-algebra, thm-sum-of-solvable-ideals-is-solvable, prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras, def-quotient-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -57,28 +57,7 @@ endomorphism ring ([[thm-krull-schmidt-for-og-lattices]]).
 
 1.1 Decompose $H$ into its finite $A$-$B$ double cosets. The summand of $\mathcal OH\otimes_{\mathcal OB}V$ supported on $AxB$ is identified with $$\mathcal OA\otimes_{\mathcal O L_x}{}^xV, \qquad a\otimes v\longmapsto ax\otimes v,$$ where $q\in L_x$ acts on ${}^xV$ as $x^{-1}qx$ acts on $V$. These maps and their inverses are well-defined on the tensor relations, and their finite direct sum is the displayed Mackey isomorphism. Tensor associativity gives $\operatorname{Ind}_A^H\operatorname{Ind}_B^A \cong\operatorname{Ind}_B^H$ for $B\leq A\leq H$. Since $\mathcal OH$ is finite free as a right subgroup algebra, these operations preserve finite-free lattices; functoriality preserves split inclusions and retractions. [F1, algebra]
 
-1.2 First connect F1's summand definition to a split induction counit.  Put
-$Y=\operatorname{Ind}_Q^H V=\mathcal OH\otimes_{\mathcal OQ}V$.  The counit
-$\varepsilon_Y:\operatorname{Ind}_Q^H\operatorname{Res}_Q^H Y\to Y$ has the
-explicit $H$-linear section
-$$s_Y(h\otimes v)=h\otimes(1\otimes v).$$
-It respects the relation $hq\otimes v=h\otimes qv$ because
-$q\otimes v=1\otimes qv$ in $Y$, and $\varepsilon_Ys_Y=1_Y$.  If $M$ is a
-summand of $Y$ with inclusion $i:M\to Y$ and retraction $r:Y\to M$, then
-$$s_M=(\operatorname{Ind}_Q^H\operatorname{Res}_Q^H r)\,s_Yi$$
-splits the counit for $M$, by naturality of the counit and $ri=1_M$.
-Conversely, a split counit displays $M$ as a summand of its induced module.
-
-Now let $T$ be left-coset representatives for $H/Q$.  The induction counit
-$\varepsilon:\mathcal OH\otimes_{\mathcal OQ}M\to M$ is
-$\varepsilon(h\otimes m)=hm$.  Given an $H$-linear section $s$, write $s(m)$
-in the direct sum indexed by $T$ and let $\alpha(m)$ be its coefficient in the
-identity-coset component. Equivariance makes $\alpha$ $Q$-linear, and
-$\varepsilon s=1$ says
-$$1_M=\sum_{t\in T}t\alpha t^{-1}=\operatorname{Tr}_Q^H(\alpha).$$
-Conversely this trace identity makes
-$s(m)=\sum_{t\in T}t\otimes\alpha(t^{-1}m)$ an $H$-linear section of
-$\varepsilon$. This proves the integral Higman criterion. [F1, algebra]
+1.2 First connect F1's summand definition to a split induction counit.  Put $Y=\operatorname{Ind}_Q^H V=\mathcal OH\otimes_{\mathcal OQ}V$.  The counit $\varepsilon_Y:\operatorname{Ind}_Q^H\operatorname{Res}_Q^H Y\to Y$ has the explicit $H$-linear section $$s_Y(h\otimes v)=h\otimes(1\otimes v).$$ It respects the relation $hq\otimes v=h\otimes qv$ because $q\otimes v=1\otimes qv$ in $Y$, and $\varepsilon_Ys_Y=1_Y$.  If $M$ is a summand of $Y$ with inclusion $i:M\to Y$ and retraction $r:Y\to M$, then $$s_M=(\operatorname{Ind}_Q^H\operatorname{Res}_Q^H r)\,s_Yi$$ splits the counit for $M$, by naturality of the counit and $ri=1_M$. Conversely, a split counit displays $M$ as a summand of its induced module. Now let $T$ be left-coset representatives for $H/Q$.  The induction counit $\varepsilon:\mathcal OH\otimes_{\mathcal OQ}M\to M$ is $\varepsilon(h\otimes m)=hm$.  Given an $H$-linear section $s$, write $s(m)$ in the direct sum indexed by $T$ and let $\alpha(m)$ be its coefficient in the identity-coset component. Equivariance makes $\alpha$ $Q$-linear, and $\varepsilon s=1$ says $$1_M=\sum_{t\in T}t\alpha t^{-1}=\operatorname{Tr}_Q^H(\alpha).$$ Conversely this trace identity makes $s(m)=\sum_{t\in T}t\otimes\alpha(t^{-1}m)$ an $H$-linear section of $\varepsilon$. This proves the integral Higman criterion. [F1, algebra]
 
 2.1 The image of every relative trace is a two-sided ideal of $E=\operatorname{End}_{\mathcal OH}(M)$: an $H$-endomorphism can be moved inside either side of the finite trace sum. Suppose now that $M$ is indecomposable, relatively $P$-projective and relatively $R$-projective. By step 1.2 choose trace expressions for $1_M$ from $P$ and from $R$ and multiply them. The diagonal $H$-orbits on the finite set $H/P\times H/R$ regroup the product as a finite sum of relative traces from their stabilizers $$sPs^{-1}\cap tRt^{-1}.$$ The element inside each orbit trace is fixed by that stabilizer, so every summand belongs to the corresponding trace ideal. [step 1.2, algebra]
 

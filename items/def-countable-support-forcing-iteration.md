@@ -2,7 +2,7 @@
 id: def-countable-support-forcing-iteration
 kind: definition
 title: "Countable-support forcing iterations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-two-step-forcing-iteration, def-finite-support-forcing-iteration, def-forcing-names-and-name-rank, def-countable]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: not-applicable
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

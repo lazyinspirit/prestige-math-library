@@ -2,7 +2,7 @@
 id: lem-orthogonal-complements-under-invariant-forms-are-ideals
 kind: lemma
 title: Orthogonal complements under invariant forms are ideals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lie-subalgebra-ideal-and-center]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -48,4 +49,5 @@ $[\mathfrak g,\mathfrak i]\subseteq\mathfrak i$
 **Proof technique:** direct.
 
 1.1 The equations defining $\mathfrak i^\perp$ are linear in $u$, so it is a linear subspace. If $u\in\mathfrak i^\perp$, $z\in\mathfrak g$, and $v\in\mathfrak i$, invariance gives $B([z,u],v)=-B(u,[z,v])$. The second argument on the right belongs to $\mathfrak i$ by [L1], so the right side is zero. Hence $[z,u]\in\mathfrak i^\perp$, proving ideality. [L1, given, algebra]
+
 2.1 Taking $\mathfrak i=\mathfrak g$ in step 1.1 gives that $\mathfrak g^\perp$ is an ideal. This includes the zero algebra, the zero form, and the nondegenerate case $\mathfrak g^\perp=0$ without any separate choice. [step 1.1] ∎

@@ -67,38 +67,11 @@ set lying inside the relative subspace's interior
 
 **Proof technique:** natural cochain diagrams with the cone-pair sign.
 
-1.1 The Bockstein is natural in spaces. [given, F1, F2]
-For $f\colon X\to Y$, if $q_*b=c$ and $i_*a=\delta b$ on $Y$, then
-$q_*f^*b=f^*c$ and $i_*f^*a=\delta f^*b$. Therefore
-$\beta_X(f^*[c])=f^*\beta_Y[c]$; [F2] removes dependence on the displayed
-representatives.
+1.1 The Bockstein is natural in spaces. For $f\colon X\to Y$, if $q_*b=c$ and $i_*a=\delta b$ on $Y$, then $q_*f^*b=f^*c$ and $i_*f^*a=\delta f^*b$. Therefore $\beta_X(f^*[c])=f^*\beta_Y[c]$; [F2] removes dependence on the displayed representatives. [given, F1, F2]
 
-1.2 The Bockstein is natural in the coefficient sequence. [given, F1, F2]
-For a commutative morphism of short exact sequences with vertical maps
-$u\colon A\to A'$, $v\colon B\to B'$, and $w\colon C\to C'$, the cochain
-$v_*b$ lifts $w_*c$, and
-$\delta(v_*b)=v_*i_*a=i'_*u_*a$. Hence
-$\beta'[w_*c]=u_*\beta[c]$.
+1.2 The Bockstein is natural in the coefficient sequence. For a commutative morphism of short exact sequences with vertical maps $u\colon A\to A'$, $v\colon B\to B'$, and $w\colon C\to C'$, the cochain $v_*b$ lifts $w_*c$, and $\delta(v_*b)=v_*i_*a=i'_*u_*a$. Hence $\beta'[w_*c]=u_*\beta[c]$. [given, F1, F2]
 
-1.3 The cone quotient comparison defines the signed suspension. [F3, F4, F6, F7, F8]
-Take a based CW complex $X$. If its chosen basepoint lies inside a
-positive-dimensional open cell, subdivide that one characteristic disk
-radially at the point and retain the same attaching maps for higher cells;
-this finite refinement makes the basepoint a vertex without changing the
-based space or choosing any new data. Form
-$CX=(X\times I)/(X\times\{1\}\cup\{x_0\}\times I)$ and
-$\Sigma X=CX/X$. For each nonbasepoint $n$-cell of $X$, its product with
-the open height interval is an $(n+1)$-cell of $CX$; the height-zero
-cells form the cone base $X$, while the height-one face and basepoint
-track collapse to one vertex. The product characteristic maps have
-finite boundary-cell support, so their quotient map-out and CW
-weak-topology tests make $CX$ a CW complex with $X$ a closed
-subcomplex. A cellwise radial collar of this subcomplex, extended over
-the characteristic disks and assembled by the weak topology, gives an
-open neighborhood $V$ that strongly deformation retracts onto $X$.
-Since $V$ contains the whole fibre $X$ collapsed by
-$q:CX\to\Sigma X$, it is saturated; $q(V)$ is open and its descended
-flow retracts onto the quotient vertex.
+1.3 The cone quotient comparison defines the signed suspension. Take a based CW complex $X$. If its chosen basepoint lies inside a positive-dimensional open cell, subdivide that one characteristic disk radially at the point and retain the same attaching maps for higher cells; this finite refinement makes the basepoint a vertex without changing the based space or choosing any new data. Form $CX=(X\times I)/(X\times\{1\}\cup\{x_0\}\times I)$ and $\Sigma X=CX/X$. For each nonbasepoint $n$-cell of $X$, its product with the open height interval is an $(n+1)$-cell of $CX$; the height-zero cells form the cone base $X$, while the height-one face and basepoint track collapse to one vertex. The product characteristic maps have finite boundary-cell support, so their quotient map-out and CW weak-topology tests make $CX$ a CW complex with $X$ a closed subcomplex. A cellwise radial collar of this subcomplex, extended over the characteristic disks and assembled by the weak topology, gives an open neighborhood $V$ that strongly deformation retracts onto $X$. Since $V$ contains the whole fibre $X$ collapsed by $q:CX\to\Sigma X$, it is saturated; $q(V)$ is open and its descended flow retracts onto the quotient vertex. [F3, F4, F6, F7, F8]
 
 The pair sequences [F6] and homotopy invariance [F7] give
 $H^*(V,X;G)=H^*(q(V),\{*\};G)=0$. The restriction short exact
@@ -118,11 +91,7 @@ $$
 
 This degree sign is part of the stable convention; [F3] makes $\sigma$ natural.
 
-2.1 The coefficient connector anticommutes with the unsigned cone-pair connector. [F1, F5, step 1.3]
-Take $q_*b=c$ on $X$, with $i_*a=\delta b$. Extend $c,b,a$ by zero on the
-singular simplices of $CX$ not lying in $X$, writing the extensions with bars.
-Then $d:=\delta\bar b-i_*\bar a$ is a relative $B$-cochain lifting the
-relative cocycle $\delta\bar c$, and
+2.1 The coefficient connector anticommutes with the unsigned cone-pair connector. Take $q_*b=c$ on $X$, with $i_*a=\delta b$. Extend $c,b,a$ by zero on the singular simplices of $CX$ not lying in $X$, writing the extensions with bars. Then $d:=\delta\bar b-i_*\bar a$ is a relative $B$-cochain lifting the relative cocycle $\delta\bar c$, and [F1, F5, step 1.3]
 
 $$
 \delta d=-i_*\delta\bar a.
@@ -130,8 +99,7 @@ $$
 
 Thus $\beta\partial_C=-\partial_A\beta$ on reduced cohomology.
 
-3.1 The signed suspension commutes with the Bockstein. [F4, step 1.1, step 1.2, step 1.3, step 2.1]
-For $x\in\widetilde H^n(X;C)$,
+3.1 The signed suspension commutes with the Bockstein. For $x\in\widetilde H^n(X;C)$, [F4, step 1.1, step 1.2, step 1.3, step 2.1]
 
 $$
 \beta\sigma_n^C(x)=(-1)^n\beta\partial_C(x)=(-1)^{n+1}\partial_A\beta(x)=\sigma_{n+1}^A\beta(x).

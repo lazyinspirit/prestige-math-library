@@ -2,7 +2,7 @@
 id: thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical
 kind: theorem
 title: The commutator with the radical lies in the nilradical
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-radical-of-a-finite-dimensional-lie-algebra, def-nilradical-of-a-finite-dimensional-lie-algebra, thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero, def-semidirect-product-of-lie-algebras, prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras, cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero, prop-nilpotent-lie-algebras-are-solvable]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

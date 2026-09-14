@@ -2,12 +2,13 @@
 id: thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence
 kind: theorem
 title: Gysin sequence from a sphere-fiber Serre spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, thm-cohomological-serre-spectral-sequence, prop-degree-and-parity-criteria-for-serre-collapse, def-serre-edge-homomorphisms-and-transgression, def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived
@@ -32,12 +33,16 @@ The class
 $$e(p):=d_{n+1}(u)\in E_{n+1}^{n+1,0}=H^{n+1}(B;R)$$
 is the spherical Euler, or transgression, class. There is a natural Gysin long
 exact sequence
-$$\cdots\longrightarrow H^{k-n-1}(B;R)\xrightarrow{\smile e(p)}H^k(B;R)\xrightarrow{p^*}H^k(E;R)\xrightarrow{p_!}H^{k-n}(B;R)\xrightarrow{\smile e(p)}H^{k+1}(B;R)\longrightarrow\cdots. \tag{1}$$
+$$
+\cdots\longrightarrow H^{k-n-1}(B;R)\xrightarrow{\smile e(p)}H^k(B;R)\xrightarrow{p^*}H^k(E;R)\xrightarrow{p_!}H^{k-n}(B;R)\xrightarrow{\smile e(p)}H^{k+1}(B;R)\longrightarrow\cdots. \tag{1}
+$$
 Here $p_!$ is the canonical quotient from the two-row abutment filtration to
 $E_\infty^{k-n,n}$, followed by the supplied orientation; it is integration
 along the fiber in this spectral-sequence sense. With the product
 and differential conventions of the multiplicative Serre theorem,
-$$d_{n+1}(a u)=(-1)^{|a|}a\smile e(p). \tag{2}$$
+$$
+d_{n+1}(a u)=(-1)^{|a|}a\smile e(p). \tag{2}
+$$
 The signs in (1) are normalized by multiplying alternate connecting arrows by
 $-1$; this does not change their kernels or images. The construction is
 natural for pullback squares preserving the supplied orientation. No
@@ -67,7 +72,7 @@ vector-bundle Euler class is used.
 
 2.1 Put $e=d_{n+1}(u)$. Since no earlier differential reaches $(n+1,0)$, [F3] identifies its target with $H^{n+1}(B;R)$, so $e$ is an actual base class. A bottom-row class $a$ has zero differential. The Leibniz rule in [F2], applied to the product $a u$, gives $d_{n+1}(a u)=(-1)^{|a|}a e$, proving (2). Thus the only page differential is, up to the displayed unit sign, cup multiplication by $e$. [F2, F3, step 1.1]
 
-3.1 In total degree $k$, the two stable terms are therefore $$E_\infty^{k,0}=\operatorname{coker}\bigl(H^{k-n-1}(B;R)\xrightarrow{\smile e}H^k(B;R)\bigr)$$ and $$E_\infty^{k-n,n}=\ker\bigl(H^{k-n}(B;R)\xrightarrow{\smile e}H^{k+1}(B;R)\bigr).$$ The decreasing abutment filtration has no other nonzero quotient, so [F1] and [F4] give a natural short exact sequence $$0\longrightarrow E_\infty^{k,0}\longrightarrow H^k(E;R)\longrightarrow E_\infty^{k-n,n}\longrightarrow0. \tag{3}$$ The left arrow is the bottom edge. Naturality of [F1] applied to the map of fibrations from $p$ to the identity fibration of $B$ identifies its composite from $H^k(B;R)$ with $p^*$. The right arrow followed by the orientation is, by definition, $p_!$. [F1, F4, step 2.1]
+3.1 In total degree $k$, the two stable terms are therefore $$E_\infty^{k,0}=\operatorname{coker}\bigl(H^{k-n-1}(B;R)\xrightarrow{\smile e}H^k(B;R)\bigr)$$ and $$E_\infty^{k-n,n}=\ker\bigl(H^{k-n}(B;R)\xrightarrow{\smile e}H^{k+1}(B;R)\bigr).$$ The decreasing abutment filtration has no other nonzero quotient, so [F1] and [F4] give a natural short exact sequence $$0\longrightarrow E_\infty^{k,0}\longrightarrow H^k(E;R)\longrightarrow E_\infty^{k-n,n}\longrightarrow0. \qquad\text{(3)}$$ The left arrow is the bottom edge. Naturality of [F1] applied to the map of fibrations from $p$ to the identity fibration of $B$ identifies its composite from $H^k(B;R)$ with $p^*$. The right arrow followed by the orientation is, by definition, $p_!$. [F1, F4, step 2.1]
 
 4.1 Exactness of (3) says successively that the kernel of $p^*$ is the image of cup multiplication by $e$, the image of $p^*$ is the kernel of $p_!$, and the image of $p_!$ is the kernel of the next cup multiplication. Placing these short exact sequences for consecutive total degrees next to one another gives (1), with no appeal to a homological exact-couple connector. Formula (2) contributes $(-1)^{|a|}$ to every other displayed cup map; multiplying that arrow by the unit $-1$ produces the stated cup-$e$ convention without changing kernels or images. [F2, step 2.1, step 3.1]
 

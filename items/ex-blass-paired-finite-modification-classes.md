@@ -2,7 +2,7 @@
 id: ex-blass-paired-finite-modification-classes
 kind: example
 title: Blass's paired finite-modification classes
-status: draft
+status: published
 origin: pipeline
 deps: [lem-blass-paired-finite-modification-classes-form-a-russell-set, def-blass-finite-modification-classes-and-parameter-hod-model, lem-feferman-tail-complement-automorphism, lem-forcing-truth-lemma, lem-symmetry-lemma-for-forcing-automorphisms]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

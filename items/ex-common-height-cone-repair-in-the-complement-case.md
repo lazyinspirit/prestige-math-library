@@ -2,7 +2,7 @@
 id: ex-common-height-cone-repair-in-the-complement-case
 kind: example
 title: "The common-height cone repair in the complement case"
-status: draft
+status: published
 origin: pipeline
 deps: [def-halpern-lauchli-finitistic-trees-density-and-matrices]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

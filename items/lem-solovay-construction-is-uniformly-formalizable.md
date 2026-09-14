@@ -2,7 +2,7 @@
 id: lem-solovay-construction-is-uniformly-formalizable
 kind: lemma
 title: Fixed finite-fragment verification for the Solovay construction
-status: draft
+status: published
 origin: pipeline
 deps: [def-solovay-levy-collapse-setup, thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, thm-solovay-inner-model-satisfies-dependent-choice, thm-every-solovay-model-set-of-reals-is-lebesgue-measurable, thm-every-solovay-model-set-of-reals-has-the-baire-property, thm-every-uncountable-solovay-model-set-of-reals-has-a-perfect-subset, cor-solovay-model-has-no-vitali-or-bernstein-set, thm-solovay-model-has-no-hamel-basis-or-discontinuous-additive-function, cor-solovay-model-has-no-banach-tarski-decomposition, thm-solovay-model-fails-full-choice, thm-montague-levy-finite-reflection, thm-countable-elementary-submodels-and-transitive-collapses, lem-finite-fragment-l-interpretation-with-gch, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 proof_strategy: fixed-fragment-model-transfer
 sources: {references: [{title: "Solovay 1970, p. 2 formal-consistency remark and Parts I–III", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
+verification:
+  audited: 2026-09-14
 ---
 
 ## Statement

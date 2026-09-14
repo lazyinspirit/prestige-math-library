@@ -2,7 +2,7 @@
 id: thm-pfa-implies-there-are-no-s-spaces
 kind: theorem
 title: PFA implies there are no S-spaces
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-pfa-implies-the-simple-ideal-dichotomy
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

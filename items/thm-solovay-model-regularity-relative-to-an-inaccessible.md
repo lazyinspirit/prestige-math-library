@@ -2,7 +2,7 @@
 id: thm-solovay-model-regularity-relative-to-an-inaccessible
 kind: theorem
 title: Solovay-model regularity is consistent relative to an inaccessible cardinal
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-construction-is-uniformly-formalizable, thm-finite-fragment-relative-consistency-transfer, thm-solovay-model-fails-full-choice, cor-solovay-model-has-no-vitali-or-bernstein-set, thm-solovay-model-has-no-hamel-basis-or-discontinuous-additive-function, cor-solovay-model-has-no-banach-tarski-decomposition]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 proof_strategy: finite-fragment-relative-consistency
 sources: {references: [{title: "Solovay 1970, Theorem 1 and p. 2", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
+verification:
+  audited: 2026-09-14
 ---
 
 ## Statement

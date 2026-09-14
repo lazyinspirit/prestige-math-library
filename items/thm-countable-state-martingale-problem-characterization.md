@@ -2,7 +2,7 @@
 id: thm-countable-state-martingale-problem-characterization
 kind: theorem
 title: "Countable-state martingale-problem characterization"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-discrete-generator-of-a-countable-state-transition-matrix, lem-bounded-function-form-of-the-markov-property, def-martingale-submartingale-and-supermartingale]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

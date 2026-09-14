@@ -2,13 +2,15 @@
 id: lem-linear-order-completion-existence-uniqueness-and-density
 kind: lemma
 title: "Linear-order completion and density"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partial-order, def-interval, def-dense-top, def-separable-space, def-countable, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Monk, Set theory following Jech, Theorems 9.14-9.15 and Corollary 9.16, printed pp. 69-72"

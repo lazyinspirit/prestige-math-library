@@ -2,12 +2,13 @@
 id: def-disk-sphere-and-thom-space-of-a-metric-vector-bundle
 kind: definition
 title: Disk, sphere, and Thom spaces of a metric vector bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-real-and-complex-topological-vector-bundle]
 proof_strategy: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

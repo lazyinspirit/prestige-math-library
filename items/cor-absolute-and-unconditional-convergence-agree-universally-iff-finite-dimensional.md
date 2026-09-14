@@ -2,7 +2,7 @@
 id: cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional
 kind: corollary
 title: "Universal agreement of absolute and unconditional convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: equivalence
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

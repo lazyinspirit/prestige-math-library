@@ -2,7 +2,7 @@
 id: thm-feferman-model-prime-ideals-on-p-omega-are-principal
 kind: theorem
 title: Every prime ideal on the power set of omega is principal in the tail-flip symmetric model
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [lem-feferman-tail-complement-automorphism, thm-forcing-theorem, lem-symmetry-lemma-for-forcing-automorphisms, def-boolean-ideals-filters-and-primality, def-set-difference-and-symmetric-difference]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

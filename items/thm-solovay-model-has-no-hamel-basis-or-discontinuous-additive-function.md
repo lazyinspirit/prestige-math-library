@@ -2,13 +2,15 @@
 id: thm-solovay-model-has-no-hamel-basis-or-discontinuous-additive-function
 kind: theorem
 title: The Solovay model has no Hamel basis and no discontinuous additive real function
-status: draft
+status: published
 origin: pipeline
 deps: [thm-every-solovay-model-set-of-reals-is-lebesgue-measurable, thm-solovay-inner-model-satisfies-dependent-choice, thm-choice-implies-dependent-implies-countable-choice, def-linear-basis, def-linear-combination-and-span, cor-a-measurable-subgroup-of-rn-of-positive-measure-is-rn, prop-measure-monotonicity, thm-finite-and-countable-subadditivity-of-measures, thm-lebesgue-measure-of-a-box-of-every-kind, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-rationals-countable, thm-steinhaus-difference-set-contains-a-ball, thm-cauchy-functional-equation-regularity]
 provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: contradiction-and-regularity
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Solovay, A model of set-theory in which every set of reals is Lebesgue measurable"

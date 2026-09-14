@@ -2,12 +2,13 @@
 id: lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients
 kind: lemma
 title: The first Serre differential is the cellular boundary with local coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-relative-homology-over-one-base-cell-is-the-shifted-fiber-homology, thm-a-filtered-complex-produces-an-exact-couple, prop-the-exact-couple-and-subquotient-constructions-of-the-filtered-complex-spectral-sequence-agree, prop-elementwise-formula-for-the-connecting-map-in-module-categories, def-singular-and-cellular-chain-complexes-with-local-coefficients, lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases, thm-cellular-chains-compute-homology-with-local-coefficients, lem-compact-cw-images-have-finite-cell-support-without-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

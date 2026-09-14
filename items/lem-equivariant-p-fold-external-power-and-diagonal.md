@@ -99,11 +99,7 @@ skeletal quotient map
 choices by equivariant acyclic carriers, decompose diagonal cochains
 coordinatewise, and kill mixed terms by transfer.
 
-1.1 Fix the finite cellular cochain model. [given, F3, F4]
-By [F3] and [F4], $C=C_*(K;\mathbb F_p)$ is a nonnegative chain complex and
-$C^*=\operatorname{Hom}_{\mathbb F_p}(C,\mathbb F_p)$ is a cochain complex.
-The product regular-cell structure has cellular complex $C^{\otimes p}$:
-on a product cell the boundary is
+1.1 Fix the finite cellular cochain model. By [F3] and [F4], $C=C_*(K;\mathbb F_p)$ is a nonnegative chain complex and $C^*=\operatorname{Hom}_{\mathbb F_p}(C,\mathbb F_p)$ is a cochain complex. The product regular-cell structure has cellular complex $C^{\otimes p}$: on a product cell the boundary is [given, F3, F4]
 
 $$d(x_1\otimes\cdots\otimes x_p)=\sum_{i=1}^p(-1)^{|x_1|+\cdots+|x_{i-1}|}x_1\otimes\cdots\otimes dx_i\otimes\cdots\otimes x_p.$$
 
@@ -112,20 +108,7 @@ $C_p=\langle T\rangle$ rotate the tensor factors with the Koszul sign. Write
 $H^*_{C_p}(W\times K^p;\mathbb F_p)$ for the cohomology of
 $\operatorname{Hom}_{\mathbb F_p[C_p]}(W\otimes C^{\otimes p},\mathbb F_p)$.
 
-1.2 Prove the equivariant carrier comparison used below. [given, F5]
-Suppose a group $\Gamma$ acts freely on the cells of a chain complex $E$, an
-augmentation-preserving map is already defined on a $\Gamma$-subcomplex
-spanned by a union of those free cell orbits, and
-each prescribed target carrier is augmented acyclic. Order a free orbit basis
-by dimension. AC first selects one cell in each orbit and then, once a map is
-defined below that orbit generator $e$, its boundary
-has already been sent to a cycle in the carrier of $e$; augmented acyclicity
-makes the set of permitted fillings nonempty. [F5] is used exactly here to
-choose one filling in every such nonempty set of orbit-by-orbit extension
-problems; equivariance defines the other translates. Applying the same
-construction to $I\otimes E$, relative to its two endpoint orbit-basis
-subcomplexes, gives a homotopy
-between any two carried extensions.
+1.2 Prove the equivariant carrier comparison used below. Suppose a group $\Gamma$ acts freely on the cells of a chain complex $E$, an augmentation-preserving map is already defined on a $\Gamma$-subcomplex spanned by a union of those free cell orbits, and each prescribed target carrier is augmented acyclic. Order a free orbit basis by dimension. AC first selects one cell in each orbit and then, once a map is defined below that orbit generator $e$, its boundary has already been sent to a cycle in the carrier of $e$; augmented acyclicity makes the set of permitted fillings nonempty. [F5] is used exactly here to choose one filling in every such nonempty set of orbit-by-orbit extension problems; equivariance defines the other translates. Applying the same construction to $I\otimes E$, relative to its two endpoint orbit-basis subcomplexes, gives a homotopy between any two carried extensions. [given, F5]
 
 Taking the whole target as carrier proves that any two free acyclic
 $\Gamma$-resolutions admit augmentation-preserving comparison maps, unique up
@@ -135,9 +118,7 @@ $0\otimes w\mapsto0^p\otimes w$ and
 $1\otimes w\mapsto1^p\otimes w$, gives an equivariant map $h$ joining those
 ends. This is the only use of AC in the construction.
 
-2.1 Construct the external class and compute its fiber. [step 1.1]
-Choose a cocycle $c:C\to\mathbb F_p[-q]$ representing $u$, and let
-$\varepsilon:W\to\mathbb F_p$ be the augmentation. Define
+2.1 Construct the external class and compute its fiber. Choose a cocycle $c:C\to\mathbb F_p[-q]$ representing $u$, and let $\varepsilon:W\to\mathbb F_p$ be the augmentation. Define [step 1.1]
 
 $$\mathcal P(c)(w\otimes x_1\otimes\cdots\otimes x_p)=\varepsilon(w)c(x_1)\cdots c(x_p).$$
 
@@ -149,12 +130,7 @@ fiber selected by an augmented zero-cell $e_0$ of $W$,
 $\varepsilon(e_0)=1$, so its restriction is exactly the cellular external
 cochain $c^{\otimes p}$ and represents $u\times\cdots\times u$.
 
-3.1 Prove independence of cocycle and resolution. [step 1.2, step 2.1]
-If $c'$ represents $u$, write $c'-c=\delta b$. The map
-$D:I\otimes C\to\mathbb F_p[-q]$ whose two endpoint restrictions are $c,c'$
-and whose interval-edge value is $b$ is a chain map; its chain-map identity
-is exactly $c'-c=bd$. Compose the equivariant map $h$ from step 1.2, the
-signed regrouping
+3.1 Prove independence of cocycle and resolution. If $c'$ represents $u$, write $c'-c=\delta b$. The map $D:I\otimes C\to\mathbb F_p[-q]$ whose two endpoint restrictions are $c,c'$ and whose interval-edge value is $b$ is a chain map; its chain-map identity is exactly $c'-c=bd$. Compose the equivariant map $h$ from step 1.2, the signed regrouping [step 1.2, step 2.1]
 
 $$I^p\otimes W\otimes C^{\otimes p}\longrightarrow W\otimes(I\otimes C)^{\otimes p},$$
 
@@ -169,12 +145,7 @@ coboundary. Comparisons in both directions have composites homotopic to the
 identities by the same uniqueness argument, so these maps are isomorphisms
 and the class is resolution-independent in the asserted sense.
 
-4.1 Prove naturality on finite regular complexes. [step 1.2, step 3.1]
-For a continuous $f:K\to L$, barycentrically subdivide the finite source and
-target until $f$ is carried cellwise by contractible stars. Step 1.2 extends
-the induced vertex map to a carried cellular chain approximation $f_\#$;
-any two such approximations are carried-homotopic. The product carrier gives
-$(f_\#)^{\otimes p}$, and the defining evaluation satisfies
+4.1 Prove naturality on finite regular complexes. For a continuous $f:K\to L$, barycentrically subdivide the finite source and target until $f$ is carried cellwise by contractible stars. Step 1.2 extends the induced vertex map to a carried cellular chain approximation $f_\#$; any two such approximations are carried-homotopic. The product carrier gives $(f_\#)^{\otimes p}$, and the defining evaluation satisfies [step 1.2, step 3.1]
 
 $$\mathcal P(c\circ f_\#)=\mathcal P(c)\circ(1_W\otimes f_\#^{\otimes p}).$$
 
@@ -183,10 +154,7 @@ uniqueness, so the induced cohomology map is independent of all subdivisions
 and approximations. The equality proves naturality, while step 3.1 makes it
 independent of the chosen cocycle.
 
-5.1 Obtain the unique diagonal expansion. [F1, step 1.1, step 4.1]
-On $W\times K$ the cyclic group acts only on $W$. Since $W_j$ is the free
-rank-one module on $e_j$, total-degree-$n$ equivariant cochains have the
-canonical finite decomposition
+5.1 Obtain the unique diagonal expansion. On $W\times K$ the cyclic group acts only on $W$. Since $W_j$ is the free rank-one module on $e_j$, total-degree-$n$ equivariant cochains have the canonical finite decomposition [F1, step 1.1, step 4.1]
 
 $$\operatorname{Hom}_{\mathbb F_p[C_p]}((W\otimes C)_n,\mathbb F_p)=\bigoplus_{j=0}^n w_j\otimes C^{n-j}.$$
 
@@ -207,14 +175,7 @@ after this approximation shows that its $w_j$ coordinate is exactly the
 cochain $z\mapsto c^{\otimes p}\Phi_C(e_j\otimes z)$. Step 4.1 and uniqueness
 of the fixed basis coordinates prove naturality of every $D_j$.
 
-6.1 Kill mixed terms and prove additivity. [F2, step 2.1, step 5.1]
-Let $c,d$ be degree-$q$ cocycles. Expanding
-$(c+d)^{\otimes p}-c^{\otimes p}-d^{\otimes p}$ leaves the
-$2^p-2$ mixed words in $c,d$. A mixed word fixed by a nonidentity rotation
-would have period properly dividing the prime $p$, hence would be constant;
-therefore every mixed word has a free $C_p$-orbit. Order binary words
-lexicographically and sum the least word in each orbit to obtain a cocycle
-$z$. This is a finite, prescribed selection, and
+6.1 Kill mixed terms and prove additivity. Let $c,d$ be degree-$q$ cocycles. Expanding $(c+d)^{\otimes p}-c^{\otimes p}-d^{\otimes p}$ leaves the $2^p-2$ mixed words in $c,d$. A mixed word fixed by a nonidentity rotation would have period properly dividing the prime $p$, hence would be constant; therefore every mixed word has a free $C_p$-orbit. Order binary words lexicographically and sum the least word in each orbit to obtain a cocycle $z$. This is a finite, prescribed selection, and [F2, step 2.1, step 5.1]
 
 $$\operatorname{Tr}_{1}^{C_p}(z)=(c+d)^{\otimes p}-c^{\otimes p}-d^{\otimes p}.$$
 
@@ -248,15 +209,4 @@ $p=0$. Hence diagonal pullback kills the transferred mixed class above.
 Step 5.1's unique coordinate decomposition now gives
 $D_j(u+v)=D_j(u)+D_j(v)$ for every $j$.
 
-7.1 Check degrees, endpoints, and choices. [F5, step 1.1, step 1.2, step 2.1, step 5.1, step 6.1]
-If $K$ is empty or its cellular complex is zero, every group and operation is
-zero. For a point and $q=0$, the only coordinate is
-$D_0(a)=a^p=a$ in $\mathbb F_p$; all positive $j$ vanish. The construction
-treats $p=2$ and odd primes in step 2.1, includes $j=0,pq$, and declares
-out-of-range $j$ zero. Zero classes use the zero cocycle and give zero by
-step 6.1. Degenerate singular simplices are inapplicable to this explicitly
-cellular finite-model lemma; no normalization quotient has been hidden, and
-the later singular extension must check them separately. The lexicographic
-mixed-word representatives are a finite explicit rule. AC from [F5] is used
-exactly in step 1.2 for the family of nonempty equivariant carrier-filling
-sets and nowhere else. ∎
+7.1 Check degrees, endpoints, and choices. If $K$ is empty or its cellular complex is zero, every group and operation is zero. For a point and $q=0$, the only coordinate is $D_0(a)=a^p=a$ in $\mathbb F_p$; all positive $j$ vanish. The construction treats $p=2$ and odd primes in step 2.1, includes $j=0,pq$, and declares out-of-range $j$ zero. Zero classes use the zero cocycle and give zero by step 6.1. Degenerate singular simplices are inapplicable to this explicitly cellular finite-model lemma; no normalization quotient has been hidden, and the later singular extension must check them separately. The lexicographic mixed-word representatives are a finite explicit rule. AC from [F5] is used exactly in step 1.2 for the family of nonempty equivariant carrier-filling sets and nowhere else. [F5, step 1.1, step 1.2, step 2.1, step 5.1, step 6.1] ∎

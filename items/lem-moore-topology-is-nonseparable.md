@@ -2,7 +2,7 @@
 id: lem-moore-topology-is-nonseparable
 kind: lemma
 title: Every uncountable Moore subspace is nonseparable
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-moore-l-space-topology
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

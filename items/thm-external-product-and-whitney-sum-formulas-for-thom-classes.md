@@ -2,12 +2,13 @@
 id: thm-external-product-and-whitney-sum-formulas-for-thom-classes
 kind: theorem
 title: External-product and Whitney-sum formulas for Thom classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-naturality-and-uniqueness-of-thom-classes, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring, def-relative-cup-product, prop-relative-cup-products-are-natural-and-compatible-with-connectors, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

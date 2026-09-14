@@ -133,10 +133,7 @@ Cartan and top values, expand the two-stage cyclic power coefficient by
 coefficient, apply the row--column symmetry and Lucas reduction, then descend
 from cofinally many degrees with the circle generator.
 
-1.1 Record the inherited elementary properties. [F1, F2, F7, F8, F17, A1]
-The degree formulas and negative-index convention follow from [F1].
-If $2i>q$, the cyclic index in [F1] is negative, so [F2] proves strict
-instability. At $i=0$, substitution of [F17] in [F1] gives
+1.1 Record the inherited elementary properties. The degree formulas and negative-index convention follow from [F1]. If $2i>q$, the cyclic index in [F1] is negative, so [F2] proves strict instability. At $i=0$, substitution of [F17] in [F1] gives [F1, F2, F7, F8, F17, A1]
 
 $$P^0(x)=(-1)^{mq(q+1)}(m!)^{-q}(m!)^qx=x.$$
 
@@ -145,10 +142,7 @@ sum of chosen lifts is a lift of their sum and its coboundary is the sum of
 their coboundaries, so [F8] makes the Bockstein additive; its naturality is
 [F7]. Thus every $\beta P^i$ is natural and additive as well.
 
-2.1 Prove the top-power axiom. [F1, F2, step 1.1]
-Finite inverse-pairing in $\mathbb F_p^\times$ gives Wilson's identity:
-every element other than $1,-1$ cancels with its distinct inverse, so
-$(p-1)!=-1$. Pairing $k$ with $p-k$, $1\leq k\leq m$, also gives
+2.1 Prove the top-power axiom. Finite inverse-pairing in $\mathbb F_p^\times$ gives Wilson's identity: every element other than $1,-1$ cancels with its distinct inverse, so $(p-1)!=-1$. Pairing $k$ with $p-k$, $1\leq k\leq m$, also gives [F1, F2, step 1.1]
 
 $$
 (p-1)!=(-1)^m(m!)^2,\qquad (m!)^2=(-1)^{m+1}.
@@ -164,12 +158,7 @@ $$
 Hence $P^{q/2}(x)=x^p$. The case $q=0=i$ agrees with $P^0=\mathrm{id}$
 because $a^p=a$ in $\mathbb F_p$.
 
-2.2 Normalize the external Cartan formula. [F1, F4, step 1.1]
-Let $x,y$ have degrees $r,s$. In the even cyclic coordinate
-$(r+s-2k)(p-1)$, [F4] leaves precisely the splits
-$(r-2i)(p-1)+(s-2j)(p-1)$ with $i+j=k$. Substitute the definition [F1]
-into [F4]'s external formula. Factorials cancel. The total sign exponent
-modulo two is
+2.2 Normalize the external Cartan formula. Let $x,y$ have degrees $r,s$. In the even cyclic coordinate $(r+s-2k)(p-1)$, [F4] leaves precisely the splits $(r-2i)(p-1)+(s-2j)(p-1)$ with $i+j=k$. Substitute the definition [F1] into [F4]'s external formula. Factorials cancel. The total sign exponent modulo two is [F1, F4, step 1.1]
 
 $$
 k+i+j+m(r^2+r+s^2+s+rs)+pmrs.
@@ -185,11 +174,7 @@ $$
 Pullback along the diagonal gives the asserted internal Cartan formula. Every
 sum is finite by instability.
 
-3.1 Calculate the operations on the cyclic coefficient algebra. [F6, F8, F9, step 1.1, step 2.1, step 2.2]
-By degree, instability, and the top-power axiom,
-$P^0v=v$, $P^iv=0$ for $i>0$, $P^0u=u$,
-$P^1u=u^p$, and $P^iu=0$ for $i>1$. Repeated Cartan expansion thus
-gives, for $r,j\geq0$,
+3.1 Calculate the operations on the cyclic coefficient algebra. By degree, instability, and the top-power axiom, $P^0v=v$, $P^iv=0$ for $i>0$, $P^0u=u$, $P^1u=u^p$, and $P^iu=0$ for $i>1$. Repeated Cartan expansion thus gives, for $r,j\geq0$, [F6, F8, F9, step 1.1, step 2.1, step 2.2]
 
 $$
 P^j(u^r)=\binom rj u^{r+j(p-1)},\qquad P^j(vu^r)=\binom rj vu^{r+j(p-1)}.
@@ -207,31 +192,7 @@ $$
 These are exactly the four even/odd coefficient actions used in the double
 power calculation, with a binomial declared zero outside $0\leq j\leq r$.
 
-3.2 Verify stability. [F7, F11, F12, F13, F14, F15, F16, step 1.1, step 2.2]
-Let $z$ generate $\widetilde H^1(S^1;\mathbb F_p)$. The cone-pair
-quotient comparison needs proof. For a based CW $X$, radially subdivide
-the one open cell containing the basepoint if needed, retaining the
-higher attaching maps; this finite refinement makes it a vertex without
-changing the based space. Each nonbasepoint $n$-cell produces an $(n+1)$-cell from
-its product with the open cone-height interval, with the height-zero
-cells forming $X$ and the height-one face and basepoint track
-collapsed to one vertex. Product characteristic disks have finite
-boundary-cell support, and their quotient map-out and weak-topology
-tests assemble a CW structure on $CX$ with $X$ a closed subcomplex.
-Its cellwise radial collar is an open neighborhood $V$ strongly
-deformation retracting onto $X$, with the characteristic-disk flows
-assembled by the CW weak topology. Since $V$ contains the entire
-fibre $X$ collapsed by $q_C:CX\to\Sigma X$, it is saturated, so
-$q_C(V)$ is open and retracts to the quotient vertex.
-The pair sequences and [F15] make $H^*(V,X;\mathbb F_p)$ and
-$H^*(q_C(V),\{*\};\mathbb F_p)$ vanish. The short exact cochain
-sequences for the corresponding triples, surjective by zero
-extension, replace $X$ by $V$ and the vertex by $q_C(V)$ in relative
-cohomology. By [F16], excise $X$ and the quotient vertex. The
-remaining pairs are homeomorphic under the quotient map, so
-$q_C^*:H^*(\Sigma X,\{*\};\mathbb F_p)\to H^*(CX,X;\mathbb F_p)$ is an
-isomorphism. The connector [F14] followed by its inverse is the
-standard cohomology suspension.
+3.2 Verify stability. Let $z$ generate $\widetilde H^1(S^1;\mathbb F_p)$. The cone-pair quotient comparison needs proof. For a based CW $X$, radially subdivide the one open cell containing the basepoint if needed, retaining the higher attaching maps; this finite refinement makes it a vertex without changing the based space. Each nonbasepoint $n$-cell produces an $(n+1)$-cell from its product with the open cone-height interval, with the height-zero cells forming $X$ and the height-one face and basepoint track collapsed to one vertex. Product characteristic disks have finite boundary-cell support, and their quotient map-out and weak-topology tests assemble a CW structure on $CX$ with $X$ a closed subcomplex. Its cellwise radial collar is an open neighborhood $V$ strongly deformation retracting onto $X$, with the characteristic-disk flows assembled by the CW weak topology. Since $V$ contains the entire fibre $X$ collapsed by $q_C:CX\to\Sigma X$, it is saturated, so $q_C(V)$ is open and retracts to the quotient vertex. The pair sequences and [F15] make $H^*(V,X;\mathbb F_p)$ and $H^*(q_C(V),\{*\};\mathbb F_p)$ vanish. The short exact cochain sequences for the corresponding triples, surjective by zero extension, replace $X$ by $V$ and the vertex by $q_C(V)$ in relative cohomology. By [F16], excise $X$ and the quotient vertex. The remaining pairs are homeomorphic under the quotient map, so $q_C^*:H^*(\Sigma X,\{*\};\mathbb F_p)\to H^*(CX,X;\mathbb F_p)$ is an isomorphism. The connector [F14] followed by its inverse is the standard cohomology suspension. [F7, F11, F12, F13, F14, F15, F16, step 1.1, step 2.2]
 
 Represent $x$ by a relative cocycle $a$ on $(X,\{x_0\})$, and let $v$
 be the interval endpoint $0$-cochain whose coboundary represents the
@@ -254,11 +215,7 @@ $P^i$ has even degree. Injectivity gives $P^i\sigma=\sigma P^i$.
 Thus $P^i$ is stable in the sense of [F12], and [F7] makes the composite
 $\beta P^i$ stable as well.
 
-4.1 Expand the normalized double power. [F1, F3, F5, F6, step 3.1]
-Put
-$\lambda(q)=(-1)^{m(q^2+q)/2}(m!)^{-q}$. The definition and [F3]'s
-positive-Bockstein identity rewrite the diagonal cyclic power of a degree
-$q$ class as
+4.1 Expand the normalized double power. Put $\lambda(q)=(-1)^{m(q^2+q)/2}(m!)^{-q}$. The definition and [F3]'s positive-Bockstein identity rewrite the diagonal cyclic power of a degree $q$ class as [F1, F3, F5, F6, step 3.1]
 
 $$
 \lambda(q)d^*\mathcal P(x)=\sum_i(-1)^i\bigl(w_{(q-2i)2m}\times P^ix-w_{(q-2i)2m-1}\times\beta P^ix\bigr).
@@ -280,8 +237,7 @@ relations, on even-degree inputs, to the binomial comparisons in the next
 steps. No coefficient comparison for odd $q$ is claimed here; a later circle-descent argument
 extends the resulting identities to odd degrees.
 
-5.1 Prove the first relation in cofinally many degrees. [F5, step 3.1, step 4.1]
-Fix $a<pb$ and choose $s$ with $p^s>a$. Set
+5.1 Prove the first relation in cofinally many degrees. Fix $a<pb$ and choose $s$ with $p^s>a$. Set [F5, step 3.1, step 4.1]
 
 $$
 Q=2(1+p+\cdots+p^{s-1})+2b.
@@ -314,11 +270,7 @@ The normalization and row--column sign in step 4.1 contribute
 $(-1)^{a+t}$. Hence every degree-$Q$ class on a finite regular complex
 satisfies the first displayed Adem relation.
 
-5.2 Prove the second relation in cofinally many degrees. [F5, step 3.1, step 4.1]
-Fix $a\leq pb$, choose $s$ with $p^s>a$, and now set
-$Q=2p^s+2b$. The even--odd and odd--even coefficient rows of step 4.1
-select the unique left-hand term $P^a\beta P^b$. On the transposed side
-their two coefficients are
+5.2 Prove the second relation in cofinally many degrees. Fix $a\leq pb$, choose $s$ with $p^s>a$, and now set $Q=2p^s+2b$. The even--odd and odd--even coefficient rows of step 4.1 select the unique left-hand term $P^a\beta P^b$. On the transposed side their two coefficients are [F5, step 3.1, step 4.1]
 
 $$
 \binom{(Q-2t)m}{a-pt}=\binom{(p-1)(p^s+b-t)}{a-pt}
@@ -345,14 +297,7 @@ through $t=\lfloor(a-1)/p\rfloor$. Tracking the normalized odd row gives
 the signs $(-1)^{a+t}$ and $(-1)^{a+t-1}$. Thus every degree-$Q$
 class on a finite regular complex satisfies the second displayed relation.
 
-6.1 Descend to every degree on finite regular complexes. [F7, F9, F11, step 2.2, step 5.1, step 5.2]
-Let $R$ be the residual of either relation and suppose it vanishes on
-degree-$r$ classes. For a degree-$(r-1)$ class $x$, form
-$x\times z$, with $z$ the circle generator. Cartan and instability give
-$P^j(x\times z)=P^jx\times z$. Moreover $\beta z=0$, since
-$H^2(S^1;\mathbb F_p)=0$, so the derivation rule [F9] gives
-$\beta P^j(x\times z)=\beta P^jx\times z$. Applying Cartan once again to
-every composite in $R$ yields
+6.1 Descend to every degree on finite regular complexes. Let $R$ be the residual of either relation and suppose it vanishes on degree-$r$ classes. For a degree-$(r-1)$ class $x$, form $x\times z$, with $z$ the circle generator. Cartan and instability give $P^j(x\times z)=P^jx\times z$. Moreover $\beta z=0$, since $H^2(S^1;\mathbb F_p)=0$, so the derivation rule [F9] gives $\beta P^j(x\times z)=\beta P^jx\times z$. Applying Cartan once again to every composite in $R$ yields [F7, F9, F11, step 2.2, step 5.1, step 5.2]
 
 $$
 R(x\times z)=R(x)\times z.
@@ -362,17 +307,9 @@ The left side is zero, while [F11] makes cross product with $z$ injective.
 Thus $R(x)=0$. The degrees $Q$ in steps 5.1 and 5.2 are unbounded as
 $s$ grows, so finite iteration descends to every nonnegative input degree.
 
-7.1 Pass the Adem relations to arbitrary spaces. [F10, A1, step 6.1]
-For fixed $p,a,b$, either residual is a natural additive map between fixed
-singular cohomology degrees by step 1.1. Step 6.1 makes it zero on every
-finite regular complex. The detector [F10] therefore makes it zero on every
-space. This proves both Adem relations globally.
+7.1 Pass the Adem relations to arbitrary spaces. For fixed $p,a,b$, either residual is a natural additive map between fixed singular cohomology degrees by step 1.1. Step 6.1 makes it zero on every finite regular complex. The detector [F10] therefore makes it zero on every space. This proves both Adem relations globally. [F10, A1, step 6.1]
 
-8.1 Every reduced power vanishes on the empty space, and the out-of-range index conventions cover the endpoints. [F1, F2, F7, F8, F10, F11, F12, A1, step 1.1, step 2.1, step 2.2, step 3.1, step 3.2, step 4.1, step 5.1, step 5.2, step 6.1, step 7.1]
-The empty space and zero class give zero throughout. On a point, step 1.1
-leaves $P^0=\mathrm{id}$ in degree zero and all positive operations zero;
-step 2.1 includes both zero and one. The top endpoint $2i=q$, the strict
-range $2i>q$, and negative operations are explicit.
+8.1 Every reduced power vanishes on the empty space, and the out-of-range index conventions cover the endpoints. The empty space and zero class give zero throughout. On a point, step 1.1 leaves $P^0=\mathrm{id}$ in degree zero and all positive operations zero; step 2.1 includes both zero and one. The top endpoint $2i=q$, the strict range $2i>q$, and negative operations are explicit. [F1, F2, F7, F8, F10, F11, F12, A1, step 1.1, step 2.1, step 2.2, step 3.1, step 3.2, step 4.1, step 5.1, step 5.2, step 6.1, step 7.1]
 
 For $a=0$, the first relation (when $b>0$) is $P^0P^b=P^bP^0$. In the
 second relation the first sum has only $t=0$, while the second is empty;

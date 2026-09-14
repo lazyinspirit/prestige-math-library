@@ -2,7 +2,7 @@
 id: thm-derived-algebra-of-a-solvable-linear-lie-algebra-is-nilpotent
 kind: theorem
 title: Derived algebra of a solvable linear Lie algebra is nilpotent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations, thm-engels-theorem]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

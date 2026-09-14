@@ -1,7 +1,7 @@
 ---
 page: semisimple-lie-algebras-cohomology-and-levi-theory
 title: Semisimple Lie Algebras, Cohomology, and Levi Theory
-status: draft
+status: published
 items:
   - def-simple-semisimple-and-reductive-lie-algebras
   - def-trace-form-of-a-finite-dimensional-representation

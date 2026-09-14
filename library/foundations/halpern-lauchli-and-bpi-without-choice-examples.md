@@ -1,7 +1,7 @@
 ---
 page: halpern-lauchli-and-bpi-without-choice-examples
 title: Halpern–Läuchli and BPI Without Choice — Examples
-status: draft
+status: published
 items: [ex-a-two-tree-level-product-and-dense-matrix, ex-common-height-cone-repair-in-the-complement-case, ex-halpern-lauchli-word-rearrangement-in-dimension-two, ex-prime-ideal-compactness-tree-for-a-finite-cofinite-algebra, fs-bpi-well-orders-every-set]
 examples: []
 ---

@@ -49,26 +49,16 @@ $dD_i+D_id=(1+T)D_{i-1}$, with $T$ interchanging the two tensor factors
 
 **Proof technique:** evaluate the chain identity.
 
-1.1 If $i<0$, every cup product in the asserted formula has negative index, so [F1] makes both sides zero. Hence assume $i\geq0$ and evaluate the left side on a chain $c$ of degree $p+q-i+1$. [given, F1]
-By the cochain-coboundary convention,
+1.1 If $i<0$, every cup product in the asserted formula has negative index, so [F1] makes both sides zero. Hence assume $i\geq0$ and evaluate the left side on a chain $c$ of degree $p+q-i+1$. By the cochain-coboundary convention, [given, F1]
 
 $$
 \delta(a\smile_i b)(c)=(a\otimes b)D_i(dc).
 $$
 
-2.1 Substitute the higher-diagonal recurrence. [F2, step 1.1]
-Over $\mathbb F_2$ it gives
+2.1 Substitute the higher-diagonal recurrence. Over $\mathbb F_2$ it gives [F2, step 1.1]
 
 $$
 (a\otimes b)D_i(dc)=(a\otimes b)dD_i(c)+(a\otimes b)(1+T)D_{i-1}(c).
 $$
 
-3.1 Expand the two terms. [F1, step 2.1]
-The tensor coboundary has no surviving signs over $\mathbb F_2$, so its first
-term is
-$(\delta a\smile_i b+a\smile_i\delta b)(c)$. Since
-$(a\otimes b)T=b\otimes a$, the second is
-$(a\smile_{i-1}b+b\smile_{i-1}a)(c)$. This proves the identity on every
-chain. The carrier property keeps every term relative when either input is
-relative. For $i=0$, both negative-index terms are zero and the formula reduces
-to the ordinary cup-product Leibniz identity. ∎
+3.1 Expand the two terms. The tensor coboundary has no surviving signs over $\mathbb F_2$, so its first term is $(\delta a\smile_i b+a\smile_i\delta b)(c)$. Since $(a\otimes b)T=b\otimes a$, the second is $(a\smile_{i-1}b+b\smile_{i-1}a)(c)$. This proves the identity on every chain. The carrier property keeps every term relative when either input is relative. For $i=0$, both negative-index terms are zero and the formula reduces to the ordinary cup-product Leibniz identity. [F1, step 2.1] ∎

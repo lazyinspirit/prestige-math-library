@@ -2,7 +2,7 @@
 id: fs-solovays-model-proves-an-inaccessible-exists
 kind: false-statement
 title: Solovay's model proves that an inaccessible cardinal exists
-status: draft
+status: published
 origin: pipeline
 deps: [thm-collapse-and-levy-collapse-effects, thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, thm-solovay-l-of-the-reals-satisfies-zf-and-dependent-choice, thm-solovay-model-regularity-relative-to-an-inaccessible]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direction-and-counterconstruction
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

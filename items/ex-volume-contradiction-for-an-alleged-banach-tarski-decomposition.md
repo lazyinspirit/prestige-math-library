@@ -2,7 +2,7 @@
 id: ex-volume-contradiction-for-an-alleged-banach-tarski-decomposition
 kind: example
 title: The volume contradiction for an alleged Banach–Tarski decomposition
-status: draft
+status: published
 origin: pipeline
 deps: [cor-solovay-model-has-no-banach-tarski-decomposition, lem-solovay-universal-measurability-transfers-to-euclidean-spaces, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps, thm-lebesgue-measure-of-a-box-of-every-kind, thm-solovay-inner-model-satisfies-dependent-choice, thm-choice-implies-dependent-implies-countable-choice]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

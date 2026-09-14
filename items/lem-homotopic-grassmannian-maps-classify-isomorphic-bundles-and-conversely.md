@@ -2,7 +2,7 @@
 id: lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely
 kind: lemma
 title: Homotopic Grassmannian maps classify isomorphic bundles and conversely
-status: draft
+status: published
 origin: pipeline
 deps: [thm-homotopy-invariance-of-vector-bundle-pullback, lem-a-bundle-embedding-produces-its-grassmannian-classifying-map, thm-stable-stiefel-space-is-contractible, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

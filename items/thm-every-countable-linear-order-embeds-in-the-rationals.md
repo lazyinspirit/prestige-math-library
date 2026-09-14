@@ -2,7 +2,7 @@
 id: thm-every-countable-linear-order-embeds-in-the-rationals
 kind: theorem
 title: "Every countable linear order embeds in the rationals"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partial-order, def-countable, def-injection-surjection-bijection, lem-countable-iff-surjection-from-n, thm-rationals-countable, thm-rat-ordered-field, thm-recursion, thm-induction-principle, thm-well-ordering-principle]
 proof_strategy: recursion
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

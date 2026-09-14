@@ -2,7 +2,7 @@
 id: fs-it-is-enough-that-a-chosen-basis-act-nilpotently-in-engels-theorem
 kind: false-statement
 title: A nilpotent acting basis suffices for Engel's theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-engels-theorem, def-nilpotent-linear-transformation-and-nil-representation]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-grothendieck-ring-structure-and-rank-map
 kind: definition
 title: Grothendieck ring structure and rank map
-status: draft
+status: published
 origin: pipeline
 deps: [def-complex-topological-k-zero-by-grothendieck-completion, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-singular-cohomology-ring]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

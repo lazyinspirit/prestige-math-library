@@ -2,7 +2,7 @@
 id: ex-deterministic-integral-construction-of-a-gaussian-process
 kind: example
 title: "A deterministic integral construction of a Gaussian process"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-gaussian-process, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, thm-continuous-implies-integrable, thm-darboux-equals-riemann, thm-continuous-on-a-rectangle-is-riemann-integrable, thm-multidimensional-darboux-equals-riemann, thm-riemann-fubini-on-product-rectangles, thm-covariance-bilinearity-and-symmetry, def-characteristic-function-of-a-real-random-variable, lem-characteristic-function-of-a-normal-law, thm-dominated-convergence, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-uniqueness-of-a-law-from-its-characteristic-function, def-standard-normal-and-normal-laws, thm-ftc-second-part, lem-derivative-of-a-power, thm-algebra-of-derivatives, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

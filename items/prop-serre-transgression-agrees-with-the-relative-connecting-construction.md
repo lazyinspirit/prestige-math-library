@@ -2,12 +2,13 @@
 id: prop-serre-transgression-agrees-with-the-relative-connecting-construction
 kind: proposition
 title: Serre transgression agrees with the relative connecting construction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-serre-edge-homomorphisms-and-transgression, def-serre-filtration-of-the-total-space-over-base-skeleta, def-r-cycles-and-r-boundaries-of-an-increasingly-filtered-complex, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, lem-the-filtered-differential-induces-d-r-on-the-r-page, thm-long-exact-sequence-of-a-pair-in-singular-homology, def-relative-homology-connecting-homomorphism-on-cycles, lem-spectral-sequence-subquotient-and-local-lifting-calculus]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

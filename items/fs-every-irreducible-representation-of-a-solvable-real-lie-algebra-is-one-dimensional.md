@@ -2,7 +2,7 @@
 id: fs-every-irreducible-representation-of-a-solvable-real-lie-algebra-is-one-dimensional
 kind: false-statement
 title: Every irreducible real representation of a solvable Lie algebra is one-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [cor-finite-dimensional-irreducible-representations-of-a-solvable-complex-lie-algebra-are-one-dimensional, def-derived-series-and-solvable-lie-algebra, def-representation-of-a-lie-algebra, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

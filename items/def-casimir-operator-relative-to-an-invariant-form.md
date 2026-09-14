@@ -2,7 +2,7 @@
 id: def-casimir-operator-relative-to-an-invariant-form
 kind: definition
 title: Casimir operator relative to an invariant form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-trace-form-of-a-finite-dimensional-representation, def-universal-enveloping-algebra, thm-poincare-birkhoff-witt]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

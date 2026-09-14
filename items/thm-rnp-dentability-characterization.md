@@ -2,7 +2,7 @@
 id: thm-rnp-dentability-characterization
 kind: theorem
 title: "RNP--dentability characterization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -54,18 +55,8 @@ bounded-variation Lebesgue vector measure without a Bochner density
 
 **Given:** A Banach space $X$ and AC.
 
-1.1 Prove the dentability-to-RNP implication. [given, A1, L2]
-If every nonempty bounded closed convex subset of $X$ is dentable, [L2] applies
-and gives RNP.
+1.1 Prove the dentability-to-RNP implication. If every nonempty bounded closed convex subset of $X$ is dentable, [L2] applies and gives RNP. [given, A1, L2]
 
-1.2 Prove the RNP-to-dentability implication. [given, A1, L1, L3]
-Assume $X$ has RNP. If a nonempty bounded closed convex set were nondentable,
-[L3] would give a finite-measure, absolutely continuous bounded-variation
-vector measure without a Bochner density, contradicting [L1]. Thus every such
-set is dentable.
+1.2 Prove the RNP-to-dentability implication. Assume $X$ has RNP. If a nonempty bounded closed convex set were nondentable, [L3] would give a finite-measure, absolutely continuous bounded-variation vector measure without a Bochner density, contradicting [L1]. Thus every such set is dentable. [given, A1, L1, L3]
 
-2.1 Combine the implications and close the degenerate case. [A1, step 1.1, step 1.2]
-Steps 1.1 and 1.2 prove the equivalence. For the zero Banach space the only
-nonempty bounded closed convex sets are singletons, which are dentable by the
-zero-functional slice, and its only vector measure has the zero density. All AC
-use is inherited exactly from [L2] and [L3]. [A1, step 1.1, step 1.2] ∎
+2.1 Combine the implications and close the degenerate case. [A1, step 1.1, step 1.2] Steps 1.1 and 1.2 prove the equivalence. For the zero Banach space the only nonempty bounded closed convex sets are singletons, which are dentable by the zero-functional slice, and its only vector measure has the zero density. All AC use is inherited exactly from [L2] and [L3]. [A1, step 1.1, step 1.2] ∎

@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-wiener-measure
 kind: theorem
 title: "Uniqueness of Wiener measure"
-status: draft
+status: published
 origin: pipeline
 deps: [def-wiener-measure-on-continuous-path-space, def-brownian-motion, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws, def-lambda-system, thm-continuity-from-below-for-measures, thm-dynkin-pi-lambda, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

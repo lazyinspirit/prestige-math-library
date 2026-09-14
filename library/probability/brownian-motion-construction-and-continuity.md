@@ -1,7 +1,7 @@
 ---
 page: brownian-motion-construction-and-continuity
 title: Brownian Motion Construction and Continuity
-status: draft
+status: published
 items:
   - def-gaussian-process
   - lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws

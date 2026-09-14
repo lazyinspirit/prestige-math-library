@@ -2,7 +2,7 @@
 id: thm-special-trees-are-exactly-rationally-special
 kind: theorem
 title: "Special trees are exactly rationally special"
-status: draft
+status: published
 origin: pipeline
 deps: [def-aronszajn-suslin-and-special-tree, def-partial-order, def-countable, lem-countable-iff-surjection-from-n, lem-subset-of-countable, thm-recursion, thm-induction-principle, thm-well-ordering-principle, thm-every-countable-linear-order-embeds-in-the-rationals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-p-ideals-pid-pseudointersection-number-and-s-spaces
 kind: definition
 title: "P-ideals, PID, the pseudointersection number, and S-spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable, def-cardinal, def-regular-and-t3-spaces, def-hausdorff-space, def-separable-space, def-compactness-variants, def-hereditary-property, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

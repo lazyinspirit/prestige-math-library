@@ -2,7 +2,7 @@
 id: def-set-theoretic-l-and-s-spaces
 kind: definition
 title: L-spaces, S-spaces, and strong S-spaces
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-regular-and-t3-spaces
@@ -13,6 +13,8 @@ deps:
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Moore, A solution to the L space problem, Section 7, printed p. 21"

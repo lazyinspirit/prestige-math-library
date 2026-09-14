@@ -2,7 +2,7 @@
 id: ex-first-cohomology-with-trivial-coefficients-is-the-dual-abelianization
 kind: example
 title: First cohomology with trivial coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [prop-first-lie-algebra-cohomology-is-derivations-modulo-inner-derivations, def-quotient-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -44,5 +45,7 @@ No finite-dimensionality assumption on $\mathfrak g$ is needed.
 **Proof technique:** direct.
 
 1.1 A linear map $\lambda:\mathfrak g\to k$ is a derivation precisely when $\lambda([x,y])=x\cdot\lambda(y)-y\cdot\lambda(x)=0$. Thus $Z^1(\mathfrak g,k)$ is exactly the space of linear forms vanishing on $[\mathfrak g,\mathfrak g]$. [L1, given, algebra]
+
 1.2 Every inner derivation into the trivial module has the form $x\mapsto x\cdot a=0$, so $B^1(\mathfrak g,k)=0$ and $H^1=Z^1$. [L1, algebra]
+
 2.1 Put $I=[\mathfrak g,\mathfrak g]$. If $\lambda$ is in the space from step 1.1, define $\bar\lambda(x+I)=\lambda(x)$. This is well-defined because $x+I=y+I$ implies $x-y\in I$ and hence $\lambda(x-y)=0$; it is plainly linear and satisfies $\lambda=\bar\lambda\circ q$. Conversely every linear form on $\mathfrak g/I$ pulls back along the linear map $q$ from [L2] to a form vanishing on $I$. These constructions are linear and inverse, proving the displayed natural isomorphism together with steps 1.1–1.2. If the abelianization is zero, both sides are zero; no basis or choice is used. [L2, step 1.1, step 1.2, algebra] ∎

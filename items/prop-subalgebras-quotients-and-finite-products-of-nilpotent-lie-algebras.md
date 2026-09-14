@@ -2,7 +2,7 @@
 id: prop-subalgebras-quotients-and-finite-products-of-nilpotent-lie-algebras
 kind: proposition
 title: Subalgebras, quotients, and finite products of nilpotent Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lower-central-series-and-nilpotent-lie-algebra, def-nilpotency-class-of-a-lie-algebra, def-quotient-lie-algebra, def-direct-product-and-direct-sum-of-lie-algebras]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-the-perfect-tree-splitting-of-a-new-real-name
 kind: example
 title: Perfect-tree splitting of a new-real name
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-perfect-tree-of-mutually-generic-name-interpretations, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: proper-forcing-countable-support-iterations-and-pfa-examples
 title: "Proper Forcing, Countable-Support Iterations, and PFA: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ccc-posets-are-proper-by-maximal-antichains

@@ -2,7 +2,7 @@
 id: lem-solovay-absorption-factorization-and-homogeneity
 kind: lemma
 title: Absorption, factorization, and homogeneous truth in the Solovay collapse
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-solovay-collapse-localizes-countable-ordinal-data
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: forcing-factorization
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

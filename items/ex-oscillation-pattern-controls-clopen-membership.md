@@ -2,7 +2,7 @@
 id: ex-oscillation-pattern-controls-clopen-membership
 kind: example
 title: An oscillation pattern controls clopen membership
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-moore-oscillation-colouring-pattern
@@ -14,6 +14,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

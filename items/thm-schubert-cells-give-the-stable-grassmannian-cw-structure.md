@@ -2,7 +2,7 @@
 id: thm-schubert-cells-give-the-stable-grassmannian-cw-structure
 kind: theorem
 title: Schubert cells give the stable Grassmannian CW structure
-status: draft
+status: published
 origin: pipeline
 deps: [def-schubert-cells-in-real-and-complex-grassmannians, def-cw-complex-with-closure-finiteness-and-weak-topology]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

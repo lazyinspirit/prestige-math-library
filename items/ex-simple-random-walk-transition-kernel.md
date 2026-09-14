@@ -2,7 +2,7 @@
 id: ex-simple-random-walk-transition-kernel
 kind: example
 title: "Simple random-walk transition kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-time-homogeneous-markov-chain-with-transition-kernel, def-discrete-generator-of-a-countable-state-transition-matrix, def-independent-random-elements, def-identically-distributed-and-iid-random-variables, thm-grouping-independent-sigma-algebras]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

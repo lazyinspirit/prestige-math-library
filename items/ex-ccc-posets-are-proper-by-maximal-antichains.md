@@ -2,7 +2,7 @@
 id: ex-ccc-posets-are-proper-by-maximal-antichains
 kind: example
 title: "Ccc posets are proper by maximal antichains"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ccc-and-countably-closed-forcings-are-proper]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

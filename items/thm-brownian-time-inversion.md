@@ -2,7 +2,7 @@
 id: thm-brownian-time-inversion
 kind: theorem
 title: "Brownian time inversion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-gaussian-process, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws, def-coordinate-maps-and-cylinder-sigma-algebra, lem-finite-coordinate-cylinders-form-a-pi-system, def-random-element-and-real-random-variable, lem-law-of-a-random-element-is-a-probability-measure, def-lambda-system, thm-continuity-from-below-for-measures, thm-dynkin-pi-lambda, thm-rationals-countable, lem-rat-embeds-dense, cor-archimedean-reciprocal, lem-probability-measure-basic-identities, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

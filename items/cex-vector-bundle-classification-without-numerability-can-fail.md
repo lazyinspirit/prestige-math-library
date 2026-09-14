@@ -2,7 +2,7 @@
 id: cex-vector-bundle-classification-without-numerability-can-fail
 kind: counterexample
 title: Vector-bundle classification can fail without numerability
-status: draft
+status: published
 origin: pipeline
 deps: [thm-numerable-vector-bundles-admit-bundle-metrics, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

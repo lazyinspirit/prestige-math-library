@@ -2,13 +2,14 @@
 id: def-whitney-sum-monoid-of-complex-vector-bundles
 kind: definition
 title: The Whitney-sum monoid of complex vector bundles
-status: draft
+status: published
 origin: pipeline
 deps: [def-real-and-complex-topological-vector-bundle, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-vector-bundle-map-section-subbundle-and-isomorphism]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

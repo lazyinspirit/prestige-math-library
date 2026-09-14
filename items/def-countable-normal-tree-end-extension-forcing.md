@@ -2,13 +2,14 @@
 id: def-countable-normal-tree-end-extension-forcing
 kind: definition
 title: "Countable normal-tree end-extension forcing"
-status: draft
+status: published
 origin: pipeline
 deps: [def-normal-splitting-set-theoretic-tree, def-forcing-preorder-compatibility-and-filter, def-countable, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

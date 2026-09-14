@@ -2,13 +2,15 @@
 id: lem-ordinal-definable-maximal-proper-ideal-in-the-basic-cohen-model
 kind: lemma
 title: A supported Boolean algebra has an ideal maximal in its supported-definability class
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-ideals-filters-and-primality, def-ordinal-definability-and-hod, lem-canonical-well-order-of-finite-definition-codes, thm-transfinite-recursion]
 proof_strategy: induction
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - {title: "Miroslav Repický, A proof of the independence of the Axiom of Choice from the Boolean Prime Ideal Theorem, maximal-ideal construction, p.545", url: "https://im.saske.sk/~repicky/-r30.pdf"}

@@ -2,7 +2,7 @@
 id: lem-suslin-tree-forcing-is-countably-distributive
 kind: lemma
 title: "Normal Suslin-tree forcing is countably distributive"
-status: draft
+status: published
 origin: pipeline
 deps: [def-kappa-closure-distributivity-and-chain-condition, def-dense-open-sets-and-model-generic-filters, def-normal-splitting-set-theoretic-tree, def-aronszajn-suslin-and-special-tree, lem-tree-predecessors-and-common-extensions, def-axiom-of-choice, thm-zorn, thm-countable-subsets-of-omega-one-are-bounded, cor-countable-choice-and-omega-one-cofinality, thm-closure-distributivity-and-no-short-sequences, thm-forcing-preserves-ordinals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

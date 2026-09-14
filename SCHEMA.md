@@ -183,7 +183,10 @@ unclosed contradiction, contrapositive, induction, or cases tags.
 The implementation is the app's `worker/src/precheck.ts`, loaded through
 [tools/precheck.mts](tools/precheck.mts).
 
-Use `$...$` and one-line `$$...$$` math. Avoid wikilinks inside math, nested
+Use `$...$` for inline math. For display-only KaTeX constructs such as
+`\tag` and the `CD` environment, put `$$` on its own line before and after
+the formula; remark-math treats one-line `$$...$$` in prose as inline math.
+Avoid wikilinks inside math, nested
 dollar delimiters, dollars in `\tag{}`, blank lines inside inline math, and
 unbalanced delimiters. `\(...\)` and `\[...\]` are not rendered as math.
 KaTeX must parse each expression. Fenced `tikz`/`tikzcd` diagrams belong

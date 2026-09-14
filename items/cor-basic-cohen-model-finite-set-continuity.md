@@ -2,7 +2,7 @@
 id: cor-basic-cohen-model-finite-set-continuity
 kind: corollary
 title: Finite parameter sets admit disjoint clopen supports
-status: draft
+status: published
 origin: pipeline
 deps: [lem-basic-cohen-model-schema-of-continuity, def-set-difference-and-symmetric-difference, def-boolean-ideals-filters-and-primality]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-numerable-vector-bundles-admit-bundle-metrics
 kind: theorem
 title: Numerable vector bundles admit bundle metrics
-status: draft
+status: published
 origin: pipeline
 deps: [def-real-and-complex-topological-vector-bundle, def-partition-of-unity-subordinate-to-a-cover, thm-subordinate-partitions-of-unity-exist, lem-ac-supplies-dependent-choice-for-vector-bundle-constructions, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

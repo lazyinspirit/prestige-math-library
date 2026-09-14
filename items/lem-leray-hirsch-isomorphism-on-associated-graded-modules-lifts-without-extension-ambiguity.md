@@ -2,12 +2,13 @@
 id: lem-leray-hirsch-isomorphism-on-associated-graded-modules-lifts-without-extension-ambiguity
 kind: lemma
 title: The Leray–Hirsch associated-graded isomorphism lifts without extension ambiguity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-cohomological-serre-spectral-sequence, thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, lem-finite-and-complete-filtered-isomorphism-lifting, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: ai-altered

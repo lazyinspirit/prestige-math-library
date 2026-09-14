@@ -2,7 +2,7 @@
 id: ex-regularity-excludes-the-classical-choice-pathologies
 kind: example
 title: How universal regularity excludes the classical Choice pathologies
-status: draft
+status: published
 origin: pipeline
 deps: [cor-solovay-model-has-no-vitali-or-bernstein-set, thm-solovay-model-has-no-hamel-basis-or-discontinuous-additive-function]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: cases
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

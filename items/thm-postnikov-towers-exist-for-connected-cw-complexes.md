@@ -56,7 +56,7 @@ in which $P_nX$ is a CW complex obtained from $X$ by attaching cells of dimensio
 
 3.1 Define $P_nX=\bigcup_{t>n}Z_t$ and let $p_n$ be the inclusion of $X$. Every added cell has dimension $t+1\geq n+2$. For $i\leq n$, all inclusions preserve $\pi_i$ by [F1]. For fixed $i>n$, Step 2.1 kills $\pi_i$ at stage $Z_i$, and later cells have dimension at least $i+2$, so [F1] prevents its reappearance. [F1, step 2.1]
 
-4.1 A sphere representative in the union has image in a finite subcomplex by [F3], hence in one $Z_t$; the same holds for a disk nullhomotopy. It follows in both the surjective and injective directions that $\pi_i(P_nX)$ is the sequential colimit of the stage groups. Step 3.1 thus gives
+4.1 A sphere representative in the union has image in a finite subcomplex by , hence in one $Z_t$; the same holds for a disk nullhomotopy. It follows in both the surjective and injective directions that $\pi_i(P_nX)$ is the sequential colimit of the stage groups. Step 3.1 thus gives [F3]
 
 $$ \pi_i(P_nX)\cong\pi_i(X)\ (i\leq n),\qquad \pi_i(P_nX)=0\ (i>n). $$
 

@@ -1,7 +1,7 @@
 ---
 page: prikry-forcing-and-gitiks-singular-cardinal-model
 title: "Prikry Forcing and Gitik's Singular-Cardinal Model"
-status: draft
+status: published
 items:
   - def-prikry-forcing-and-direct-extension
   - lem-normal-measure-rowbottom-homogeneity

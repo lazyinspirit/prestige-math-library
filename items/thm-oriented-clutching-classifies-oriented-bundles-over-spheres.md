@@ -2,7 +2,7 @@
 id: thm-oriented-clutching-classifies-oriented-bundles-over-spheres
 kind: theorem
 title: Oriented clutching classifies oriented bundles over spheres
-status: draft
+status: published
 origin: pipeline
 deps: [thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range, def-oriented-real-vector-bundle-and-oriented-frame-bundle, prop-orientation-is-equivalent-to-an-so-n-reduction]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

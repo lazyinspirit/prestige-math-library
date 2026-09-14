@@ -2,7 +2,7 @@
 id: thm-homotopy-invariance-of-vector-bundle-pullback
 kind: theorem
 title: Homotopy invariance of vector-bundle pullback
-status: draft
+status: published
 origin: pipeline
 deps: [def-pullback-vector-bundle-and-pullback-section, thm-subordinate-partitions-of-unity-exist, lem-ac-supplies-dependent-choice-for-vector-bundle-constructions, thm-principal-bundles-are-classified-by-maps-to-bg, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

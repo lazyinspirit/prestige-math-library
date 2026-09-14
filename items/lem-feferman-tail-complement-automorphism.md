@@ -2,7 +2,7 @@
 id: lem-feferman-tail-complement-automorphism
 kind: lemma
 title: The tail-complement automorphism fixes finitely supported names
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-tail-flip-definability-model, lem-symmetry-lemma-for-forcing-automorphisms]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

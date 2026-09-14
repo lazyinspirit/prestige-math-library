@@ -2,13 +2,15 @@
 id: lem-gaussian-even-moment-bound-for-brownian-increments
 kind: lemma
 title: "Gaussian even moments for Brownian increments"
-status: draft
+status: published
 origin: pipeline
 deps: [def-standard-normal-and-normal-laws, thm-change-of-variables-for-expectation, thm-integration-against-a-density, thm-monotone-convergence-for-the-integral, thm-integration-by-parts, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-exponential-definition-equivalence, thm-derivative-of-exponential, thm-chain-rule, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, Section 7.1"

@@ -2,7 +2,7 @@
 id: thm-enflo-separable-reflexive-banach-space-without-the-approximation-property
 kind: theorem
 title: "A separable reflexive Banach space without the approximation property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -62,12 +63,6 @@ with such a basis has BAP
 
 1.2 The logarithmic lower bound and [L2] show that $B$ has no BAP. [L1, L2]
 
-2.1 Rule out AP using the reflexive MAP theorem. [L3, step 1.2]
-If $B$ had AP, its reflexivity and [L3] would give MAP, hence BAP,
-contradicting step 1.2. Therefore $B$ has no AP.
+2.1 Rule out AP using the reflexive MAP theorem. If $B$ had AP, its reflexivity and [L3] would give MAP, hence BAP, contradicting step 1.2. Therefore $B$ has no AP. [L3, step 1.2]
 
-2.2 Rule out a Schauder basis and close the boundary cases. [A1, L1, L4, step 1.2]
-If $B$ had a Schauder basis, AC would supply DC and [L4] would give BAP,
-again contradicting step 1.2. Thus $B$ has no Schauder basis. The zero-space
-case is irrelevant because the constructed space has a nonempty independent
-generator; real scalars are part of [L1]. ∎
+3.1 Rule out a Schauder basis and close the boundary cases. If $B$ had a Schauder basis, AC would supply DC and [L4] would give BAP, again contradicting step 1.2. Thus $B$ has no Schauder basis. The zero-space case is irrelevant because the constructed space has a nonempty independent generator; real scalars are part of [L1]. [A1, L1, L4, step 1.2] ∎

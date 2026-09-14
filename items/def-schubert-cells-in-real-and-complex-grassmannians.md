@@ -2,13 +2,14 @@
 id: def-schubert-cells-in-real-and-complex-grassmannians
 kind: definition
 title: Schubert cells in real and complex Grassmannians
-status: draft
+status: published
 origin: pipeline
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

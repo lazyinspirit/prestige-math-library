@@ -2,7 +2,7 @@
 id: thm-dvoretzky-rogers
 kind: theorem
 title: "Dvoretzky--Rogers theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: construction
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -52,34 +53,23 @@ convergence in a Banach space
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Put $c_n=(8n^2)^{-1}$ for $n\ge1$. Since
-$\sum_{n\ge1}n^{-2}<2$, we have $\sum_nc_n<1/4$, while [given]
-$\sum_n\sqrt{c_n}=8^{-1/2}\sum_n1/n=\infty$. Put $N_1=1$ and, for
-$m\ge2$, recursively take $N_m$ to be the least integer greater than
-$N_{m-1}$ such that $\sum_{n\ge N_m}c_n<4^{-m}$. Thus
+1.1 Put $c_n=(8n^2)^{-1}$ for $n\ge1$. Since $\sum_{n\ge1}n^{-2}<2$, we have $\sum_nc_n<1/4$, while $\sum_n\sqrt{c_n}=8^{-1/2}\sum_n1/n=\infty$. Put $N_1=1$ and, for $m\ge2$, recursively take $N_m$ to be the least integer greater than $N_{m-1}$ such that $\sum_{n\ge N_m}c_n<4^{-m}$. Thus [given]
 
 $$\sum_m\left(\sum_{N_m\le n<N_{m+1}}c_n\right)^{1/2}<\infty.$$
 
 [explicit least-index recursion, scalar series]
 
-2.1 Let $r_m=N_{m+1}-N_m$. Infinite-dimensionality supplies a subspace of [given, A1, L1, step 1.1]
-dimension at least $r_m(r_m-1)$ (the cases $r_m\le1$ are chosen directly).
-Use [A1] exactly here to select, for all $m$, one family
-$(x_n)_{N_m\le n<N_{m+1}}$ given by [L1] with $d_n=c_n$. Then
-$\|x_n\|=1/(\sqrt8n)$ and every subset $F$ of the $m$th block satisfies
+2.1 Let $r_m=N_{m+1}-N_m$. Infinite-dimensionality supplies a subspace of dimension at least $r_m(r_m-1)$ (the cases $r_m\le1$ are chosen directly). Use [A1] exactly here to select, for all $m$, one family $(x_n)_{N_m\le n<N_{m+1}}$ given by [L1] with $d_n=c_n$. Then $\|x_n\|=1/(\sqrt8n)$ and every subset $F$ of the $m$th block satisfies [given, A1, L1, step 1.1]
 
 $$\left\|\sum_{n\in F}x_n\right\| \le\sqrt3\left(\sum_{n\in F}c_n\right)^{1/2}.$$
 
 [A1, L1, step 1.1]
 
-3.1 For any finite set $F$ contained in the tail beginning at $N_M$, split it [given, L2, step 2.1, step 1.1]
-by blocks and use the triangle inequality and step 2.1:
+3.1 For any finite set $F$ contained in the tail beginning at $N_M$, split it by blocks and use the triangle inequality and step 2.1: [given, L2, step 2.1, step 1.1]
 
 $$\left\|\sum_{n\in F}x_n\right\| \le\sqrt3\sum_{m\ge M} \left(\sum_{N_m\le n<N_{m+1}}c_n\right)^{1/2}.$$
 
 The right side tends to zero by step 1.1. Condition (3) of [L2] therefore holds,
 so $\sum_nx_n$ converges unconditionally. [L2, steps 1.1, 2.1]
 
-4.1 On the other hand, [given, step 2.1, step 3.1]
-$\sum_n\|x_n\|=8^{-1/2}\sum_n1/n=\infty$, so the same series is not absolutely
-convergent. [step 2.1, harmonic divergence] ∎
+4.1 On the other hand, [given, step 2.1, step 3.1] $\sum_n\|x_n\|=8^{-1/2}\sum_n1/n=\infty$, so the same series is not absolutely convergent. [step 2.1, algebra] ∎

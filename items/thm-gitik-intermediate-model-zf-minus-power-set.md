@@ -2,7 +2,7 @@
 id: thm-gitik-intermediate-model-zf-minus-power-set
 kind: theorem
 title: The intermediate extension satisfies ZF minus Power Set plus Collection
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-gitik-strongly-compact-filter-system-and-class-forcing
@@ -14,6 +14,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, Lemma 9 and Theorems 10–11, pages 10–12"

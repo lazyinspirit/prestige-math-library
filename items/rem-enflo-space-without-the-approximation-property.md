@@ -2,7 +2,7 @@
 id: rem-enflo-space-without-the-approximation-property
 kind: remark
 title: "Enflo's space without the approximation property"
-status: draft
+status: published
 origin: session
 proved_here: false
 provenance:
@@ -14,6 +14,11 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-14
+  sources_checked:
+    date: 2026-09-14
+    scope: citations
+    by: session-audit
   precheck: n/a
 sources:
   scraped: []

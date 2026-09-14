@@ -2,7 +2,7 @@
 id: ex-first-feferman-levy-collapse-layers
 kind: example
 title: The first Feferman–Levy collapse layers
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-levy-symmetric-collapse-system, def-feferman-levy-real-layers, lem-feferman-levy-real-layer-ground-cardinality-bound, lem-ground-aleph-n-is-countable-in-the-feferman-levy-model, lem-each-feferman-levy-real-layer-is-countable, thm-feferman-levy-reals-are-a-countable-union-of-countable-sets, thm-feferman-levy-reals-remain-uncountable]
 proof_strategy: contradiction
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

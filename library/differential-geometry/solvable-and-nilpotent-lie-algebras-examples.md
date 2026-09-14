@@ -1,7 +1,7 @@
 ---
 page: solvable-and-nilpotent-lie-algebras-examples
 title: Solvable and Nilpotent Lie Algebras — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-abelian-lie-algebras-are-nilpotent-of-class-one

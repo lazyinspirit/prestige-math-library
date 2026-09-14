@@ -2,7 +2,7 @@
 id: cex-time-inhomogeneous-chain-cannot-be-encoded-by-one-kernel-without-enlarging-state
 kind: counterexample
 title: "A time-inhomogeneous chain may require enlarged state"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-time-homogeneous-markov-chain-with-transition-kernel]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

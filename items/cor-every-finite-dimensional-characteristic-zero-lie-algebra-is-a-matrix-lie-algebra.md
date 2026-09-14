@@ -2,7 +2,7 @@
 id: cor-every-finite-dimensional-characteristic-zero-lie-algebra-is-a-matrix-lie-algebra
 kind: corollary
 title: Every finite-dimensional characteristic-zero Lie algebra is a matrix Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-ado-faithful-representation-with-nilpotent-nilradical-action, prop-representation-kernels-are-ideals-and-faithfulness-is-injectivity]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -44,4 +45,5 @@ $n\geq0$.
 **Proof technique:** identify the algebra with its image.
 
 1.1 Choose the representation $\rho:\mathfrak g\to\mathfrak{gl}(V)$ from [L1] and put $n=\dim V$. By [L2], $\rho$ is injective. [L1, L2]
+
 2.1 Since $\rho$ preserves brackets, it is an isomorphism from $\mathfrak g$ to the Lie subalgebra $\rho(\mathfrak g)\subseteq\mathfrak{gl}_n(k)$. If $\mathfrak g=0$, Ado allows $V=0$ and $n=0$; one may instead take the zero subalgebra of $\mathfrak{gl}_1(k)$ if positive matrix size is preferred. [step 1.1, algebra] ∎

@@ -2,7 +2,7 @@
 id: cex-serre-page-collapse-does-not-split-the-abutment
 kind: counterexample
 title: A stable Serre diagonal need not split its abutment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [cor-classifying-space-of-a-discrete-group-is-a-k-g-one, thm-mapping-path-factorization, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, prop-the-first-hurewicz-map-in-degree-one-is-abelianization, thm-homological-serre-spectral-sequence, prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion, def-axiom-of-choice]
@@ -10,6 +10,8 @@ proof_strategy: counterexample
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: Hatcher, Algebraic Topology, extension warning before Example 5.4

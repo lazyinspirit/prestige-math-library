@@ -2,12 +2,13 @@
 id: thm-thom-isomorphism-for-a-trivial-oriented-bundle
 kind: theorem
 title: Thom isomorphism for a trivial oriented bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [prop-thom-space-of-zero-and-trivial-bundles, def-thom-class-by-fiberwise-normalization, lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring, cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, def-relative-singular-cochain-complex, thm-cover-small-inclusion-is-a-chain-homotopy-equivalence, thm-five-lemma-for-modules, def-relative-cup-product, prop-relative-cup-products-are-natural-and-compatible-with-connectors, prop-cup-product-is-natural-unital-and-associative]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

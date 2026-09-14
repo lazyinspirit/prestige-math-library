@@ -2,7 +2,7 @@
 id: thm-rational-cohomology-of-eilenberg-maclane-spaces-in-one-generator
 kind: theorem
 title: Rational cohomology of Eilenberg–Mac Lane spaces in one generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-circle-and-path-loop-models-for-eilenberg-maclane-induction, thm-existence-and-homotopy-uniqueness-of-eilenberg-maclane-spaces, thm-absolute-hurewicz-theorem, thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, cor-homology-of-spheres, cor-contractible-nonempty-spaces-have-the-homology-of-a-point, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, thm-singular-chain-homotopy-formula, prop-cup-product-is-natural-unital-and-associative, def-axiom-of-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

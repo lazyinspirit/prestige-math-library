@@ -2,7 +2,7 @@
 id: thm-long-exact-sequence-in-lie-algebra-cohomology
 kind: theorem
 title: Long exact sequence in Lie algebra cohomology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lie-algebra-cohomology, thm-long-exact-sequence-in-cohomology, def-subrepresentation-quotient-representation-and-intertwiner]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -51,5 +52,7 @@ long exact sequence ([[thm-long-exact-sequence-in-cohomology]]).
 **Proof technique:** degreewise exactness followed by the abstract theorem.
 
 1.1 For each $n$, the space $\Lambda^n\mathfrak g$ is finite-dimensional. Applying $\operatorname{Hom}_k(\Lambda^n\mathfrak g,-)$ preserves injections and kernels. It also preserves the given surjection: lift the images of a finite basis and extend linearly. Thus the three CE cochain spaces form a short exact sequence in every degree, including $n<0$, where all are zero. [L1, algebra]
+
 1.2 Because the coefficient maps intertwine the action [L3], applying one before or after each of the two sums in the CE differential gives the same result. Hence the degreewise maps are cochain maps. [L1, L3]
+
 2.1 Apply [L2] to the short exact sequence from steps 1.1–1.2. This gives the displayed natural sequence with the connecting map raising degree by one. At $n=0$ it begins with the invariant subspaces; at degrees above $\dim\mathfrak g$ all terms vanish. The finite basis lift is a single finite construction and uses no choice principle. [L2, step 1.1, 1.2] ∎

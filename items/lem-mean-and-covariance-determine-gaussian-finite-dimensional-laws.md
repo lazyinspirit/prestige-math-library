@@ -2,7 +2,7 @@
 id: lem-mean-and-covariance-determine-gaussian-finite-dimensional-laws
 kind: lemma
 title: "Mean and covariance determine Gaussian finite-dimensional laws"
-status: draft
+status: published
 origin: pipeline
 deps: [def-gaussian-process, def-axiom-of-choice, lem-characteristic-function-of-a-multivariate-normal-law]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

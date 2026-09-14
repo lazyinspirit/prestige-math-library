@@ -2,7 +2,7 @@
 id: cex-modifying-a-process-at-each-time-can-destroy-path-continuity-on-an-uncountable-index-set
 kind: counterexample
 title: "Pointwise modification can destroy path continuity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-law-modification-and-indistinguishability-of-processes, def-probability-measure, thm-lebesgue-measure-is-a-complete-measure, thm-lebesgue-measure-of-a-box-of-every-kind, prop-countable-subsets-of-rn-are-lebesgue-null, thm-borel-sets-are-lebesgue-measurable, prop-indicator-function-is-measurable-iff-its-set-is-measurable, def-continuity-real, cor-interval-uncountable, def-countable-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

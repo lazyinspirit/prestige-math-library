@@ -2,7 +2,7 @@
 id: thm-lower-and-upper-central-series-characterize-nilpotence
 kind: theorem
 title: Lower and upper central series characterize nilpotence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lower-central-series-and-nilpotent-lie-algebra, def-upper-central-series-of-a-lie-algebra, def-quotient-lie-algebra]
@@ -11,6 +11,8 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Milne, Lie Algebras, Proposition 2.5"

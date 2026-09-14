@@ -2,7 +2,7 @@
 id: thm-blass-model-has-only-principal-ultrafilters
 kind: theorem
 title: Every ultrafilter on every set is principal in Blass's model
-status: draft
+status: published
 origin: pipeline
 deps: [def-blass-finite-modification-classes-and-parameter-hod-model, def-ultrafilter, thm-ultrafilter-characterisation, lem-feferman-tail-complement-automorphism, lem-forcing-truth-lemma, lem-forcing-monotonicity-density-and-decision, lem-symmetry-lemma-for-forcing-automorphisms, thm-hod-is-an-inner-model-containing-l, thm-constructibility-is-absolute-and-l-is-minimal, thm-small-forcing-does-not-create-measurable-cardinals, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

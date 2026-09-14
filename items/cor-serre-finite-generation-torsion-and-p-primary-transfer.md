@@ -2,12 +2,13 @@
 id: cor-serre-finite-generation-torsion-and-p-primary-transfer
 kind: corollary
 title: Finite-generation, torsion, and p-primary Serre transfer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-serre-class-fibration-transfer, def-serre-class-ring-ideal-and-mod-c-morphism, thm-homological-serre-spectral-sequence, thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class, thm-universal-coefficient-theorem-for-homology-over-a-pid, cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules, thm-tor-of-two-cyclic-abelian-groups, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

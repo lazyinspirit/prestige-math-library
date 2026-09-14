@@ -2,7 +2,7 @@
 id: lem-gitik-strong-compact-support-homogenization
 kind: lemma
 title: Strong compactness bounds symmetric decision patterns
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-gitik-strongly-compact-filter-system-and-class-forcing
@@ -16,6 +16,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, Lemmas 13, 15 and 16 and Theorem 17, pages 12–20"

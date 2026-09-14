@@ -2,7 +2,7 @@
 id: thm-brownian-scaling
 kind: theorem
 title: "Brownian scaling"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-gaussian-process, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-wiener-measure-on-continuous-path-space, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, lem-law-of-a-random-element-is-a-probability-measure, thm-uniqueness-of-wiener-measure, thm-of-square-roots, thm-reals-field, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

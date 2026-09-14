@@ -2,7 +2,7 @@
 id: cor-a-finite-dimensional-nilpotent-lie-algebra-has-a-codimension-one-ideal-containing-any-given-proper-subalgebra
 kind: corollary
 title: Codimension-one ideals in nilpotent Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [prop-a-nonzero-nilpotent-lie-algebra-has-nonzero-center, prop-subalgebras-quotients-and-finite-products-of-nilpotent-lie-algebras, def-quotient-lie-algebra, thm-rank-nullity]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

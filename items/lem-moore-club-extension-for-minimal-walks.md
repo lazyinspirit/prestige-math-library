@@ -2,7 +2,7 @@
 id: lem-moore-club-extension-for-minimal-walks
 kind: lemma
 title: "Moore's club extension lemma"
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-minimal-walk-weights-and-coherent-functions
@@ -15,6 +15,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Moore, A solution to the L space problem, Section 4, Lemma 4.2 and Facts 6–9, printed pp. 10–13"

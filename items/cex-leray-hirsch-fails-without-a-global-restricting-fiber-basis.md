@@ -2,12 +2,13 @@
 id: cex-leray-hirsch-fails-without-a-global-restricting-fiber-basis
 kind: counterexample
 title: Leray–Hirsch fails without a global restricting fiber basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-global-fiber-basis-trivializes-serre-monodromy, thm-wang-sequence-for-a-fibration-over-the-circle, prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps, cor-homology-of-spheres, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, def-axiom-of-choice]
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

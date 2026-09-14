@@ -1,7 +1,7 @@
 ---
 page: "leray-hirsch-thom-isomorphism-and-gysin-sequences-examples"
 title: "Leray–Hirsch, the Thom Isomorphism, and Gysin Sequences — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-leray-hirsch-for-a-trivial-product-bundle", "ex-thom-space-of-a-trivial-line-and-plane-bundle", "ex-mod-two-thom-class-of-the-mobius-line-bundle", "ex-thom-isomorphism-for-the-tautological-complex-line-over-cp-infinity", "cex-leray-hirsch-fails-without-a-global-restricting-fiber-basis", "cex-an-unoriented-real-bundle-has-no-integral-thom-class"]
 ---

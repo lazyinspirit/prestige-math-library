@@ -75,20 +75,7 @@ sets ([[def-axiom-of-choice]]).
 bases, use row--column symmetry, and perform the binary-digit calculation
 after a high-degree substitution.
 
-1.1 Expand the iterated class in both cyclic coordinates. [given, F1, F4, F5]
-First justify the truncation of the inner expansion. For $r>q$, the class
-$D_r(x)$ has degree $2q-r<q$. Restriction to the cellular $q$-skeleton is
-an isomorphism in that degree, and naturality in [F5] identifies the
-restriction with $D_r$ of the restricted class. Collapse the
-$(q-1)$-skeleton of the $q$-skeleton. The restricted $x$ is the pullback of
-a class on the resulting wedge of $q$-spheres, so additivity and naturality
-in [F5] reduce the calculation to one sphere. For $q<r<2q$ the target
-$H^{2q-r}(S^q;\mathbb F_2)$ is zero. For $r=2q$ and $q>0$, restriction to
-a point is an isomorphism in degree zero, while the positive-degree input
-restricts to zero and additivity gives $D_{2q}(0)=0$. When $q=0$, every
-$r>q$ is already outside the range $0\leq r\leq2q$; for $q>0$, every
-$r>2q$ is outside the same range. Hence
-$D_r(x)=0$ for all $r>q$.
+1.1 Expand the iterated class in both cyclic coordinates. First justify the truncation of the inner expansion. For $r>q$, the class $D_r(x)$ has degree $2q-r<q$. Restriction to the cellular $q$-skeleton is an isomorphism in that degree, and naturality in [F5] identifies the restriction with $D_r$ of the restricted class. Collapse the $(q-1)$-skeleton of the $q$-skeleton. The restricted $x$ is the pullback of a class on the resulting wedge of $q$-spheres, so additivity and naturality in [F5] reduce the calculation to one sphere. For $q<r<2q$ the target $H^{2q-r}(S^q;\mathbb F_2)$ is zero. For $r=2q$ and $q>0$, restriction to a point is an isomorphism in degree zero, while the positive-degree input restricts to zero and additivity gives $D_{2q}(0)=0$. When $q=0$, every $r>q$ is already outside the range $0\leq r\leq2q$; for $q>0$, every $r>2q$ is outside the same range. Hence $D_r(x)=0$ for all $r>q$. [given, F1, F4, F5]
 
 The first cyclic diagonal of a degree-$q$ class is
 
@@ -113,9 +100,7 @@ $j=q+i-\ell$. Substitution gives the first displayed formula in the
 statement. The outside-range conventions make this a finite equality for
 arbitrary integer $a,\ell$.
 
-2.1 Apply row--column transposition. [F2, step 1.1]
-At $p=2$, both signs in the transposition formula of [F2] equal one in
-$\mathbb F_2$. Thus
+2.1 Apply row--column transposition. At $p=2$, both signs in the transposition formula of [F2] equal one in $\mathbb F_2$. Thus [F2, step 1.1]
 
 $$D_{2q-a,\,2q-\ell}(x)=D_{2q-\ell,\,2q-a}(x).$$
 
@@ -124,10 +109,7 @@ its inner index $r$. The outer exponent remains
 $a+\ell-q-r$, while the basis coefficient becomes
 $\binom{q-r}{q+r-a}$. This is precisely the asserted two-sum identity.
 
-3.1 Isolate the left-hand summand after the high-degree substitution. [step 2.1]
-Assume now $0<a<2b$, choose $s$ with $2^s>a$, put
-$q=2^s-1+b$, and put $\ell=q+b$. On the left of step 2.1 the binomial
-coefficient is
+3.1 Isolate the left-hand summand after the high-degree substitution. Assume now $0<a<2b$, choose $s$ with $2^s>a$, put $q=2^s-1+b$, and put $\ell=q+b$. On the left of step 2.1 the binomial coefficient is [step 2.1]
 
 $$\binom{q-i}{q+i-\ell}=\binom{2^s-1+b-i}{i-b}.$$
 
@@ -152,8 +134,7 @@ For $i=b$, the coefficient is $\binom{2^s-1}{0}=1$, and the outer exponent
 is $a+\ell-q-b=a$. Hence the entire left side of step 2.1 is
 $Sq_{\mathrm{cyc}}^aSq_{\mathrm{cyc}}^b(x)$.
 
-4.1 Reduce every right-hand coefficient. [step 2.1, step 3.1]
-For the right side, complementing the lower index inside the upper one gives
+4.1 Reduce every right-hand coefficient. For the right side, complementing the lower index inside the upper one gives [step 2.1, step 3.1]
 
 $$\binom{q-r}{q+r-a}=\binom{q-r}{a-2r}.$$
 
@@ -170,15 +151,7 @@ The operation exponent on this summand is
 $a+\ell-q-r=a+b-r$. Substitution into the right side of step 2.1 yields
 exactly the finite sum in the statement.
 
-5.1 Check ranges, models, and choice. [F3, step 1.1, step 2.1, step 3.1, step 4.1]
-If $K$ is empty, its cellular complex is zero, or $x=0$, both sides are zero.
-For a point, the required positive degree
-$q=2^s-1+b$ has zero cohomology, so the identity is again zero. The strict
-hypotheses $0<a<2b$ and $2^s>a$ are used respectively to obtain $r<b$ and
-to keep the lower binary index below the added $2^s$ digit. The endpoints
-$r=0$ and $r=\lfloor a/2\rfloor$ are retained, including the case of a zero
-lower binomial index. Every negative or oversized binomial and every
-outside-range square was declared zero before the calculation.
+5.1 Check ranges, models, and choice. If $K$ is empty, its cellular complex is zero, or $x=0$, both sides are zero. For a point, the required positive degree $q=2^s-1+b$ has zero cohomology, so the identity is again zero. The strict hypotheses $0<a<2b$ and $2^s>a$ are used respectively to obtain $r<b$ and to keep the lower binary index below the added $2^s$ digit. The endpoints $r=0$ and $r=\lfloor a/2\rfloor$ are retained, including the case of a zero lower binomial index. Every negative or oversized binomial and every outside-range square was declared zero before the calculation. [F3, step 1.1, step 2.1, step 3.1, step 4.1]
 
 This is a finite regular cellular argument, so singular degeneracies are
 item-specifically inapplicable. Step 1.1 explicitly chooses a sufficiently

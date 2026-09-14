@@ -51,8 +51,7 @@ identities.
 
 **Given:** Based CGWH spaces $X,Y,Z$ as in the statement.
 
-1.1 **Put both triple smashes over one quotient.** Let [F1, F2, F4]
-$$ W=(X\times Y\times\{*_Z\})\cup (X\times\{*_Y\}\times Z)\cup (\{*_X\}\times Y\times Z). $$
+1.1 **Put both triple smashes over one quotient.** Let $$ W=(X\times Y\times\{*_Z\})\cup (X\times\{*_Y\}\times Z)\cup (\{*_X\}\times Y\times Z). $$ [F1, F2, F4]
 
 By [F1] and [F2], both $(X\wedge Y)\wedge Z$ and $X\wedge(Y\wedge Z)$ are canonically the kified quotient of $X\times_kY\times_kZ$ by $W$. The identity on triples therefore descends by [F4] to the displayed associator, and the same construction in reverse gives its continuous inverse. [F1, F2, F4]
 

@@ -83,9 +83,7 @@ in the interior of the relative subspace
 **Proof technique:** an explicit normalized cup-$i$ system and a cone-pair
 cochain calculation.
 
-1.1 First prove $Sq^0=\operatorname{id}$. [F1, F2]
-Use the standard face-formula system of Medina--Mardones, Definition 7 and
-Theorem 10 (printed pages 8--9). On an $m$-simplex $s$ it is
+1.1 First prove $Sq^0=\operatorname{id}$. Use the standard face-formula system of Medina--Mardones, Definition 7 and Theorem 10 (printed pages 8--9). On an $m$-simplex $s$ it is [F1, F2]
 
 $$
 D_i^{\mathrm{std}}(s)=\sum_{U}d_{U^0}s\otimes d_{U^1}s,
@@ -107,21 +105,11 @@ $(a\smile_n a)(s)=a(s)^2=a(s)$ in $\mathbb F_2$. By [F2] this cochain
 represents $Sq^0[a]$, and [F1] permits the computation with this normalized
 system. Hence $Sq^0x=x$.
 
-1.2 Instability and the top square follow at the two definition endpoints. [F2, F3]
-If $k>n$, [F2] declares $Sq^k x=0$. If $k=n$, its representing cochain is
-$a\smile_0a$, which is the ordinary cup product by [F3]. Therefore
-$Sq^n x=x\smile x$. The same argument uses the relative products when $x$ is
-relative.
+1.2 Instability and the top square follow at the two definition endpoints. If $k>n$, [F2] declares $Sq^k x=0$. If $k=n$, its representing cochain is $a\smile_0a$, which is the ordinary cup product by [F3]. Therefore $Sq^n x=x\smile x$. The same argument uses the relative products when $x$ is relative. [F2, F3]
 
-1.3 Represent the cone-pair connector without a choice. [F5, F6]
-Extend the cocycle $a$ from the cone base $X\subset CX$ to a cochain $b$ on
-$CX$ by setting it to zero on every singular simplex not lying in $X$. Then
-$c:=\delta b$ vanishes on chains in $X$ and so is a relative cocycle in
-$C^{n+1}(CX,X;\mathbb F_2)$. By [F5], $[c]=\partial[a]$. This extension is a
-specified function, not an application of AC.
+1.3 Represent the cone-pair connector without a choice. Extend the cocycle $a$ from the cone base $X\subset CX$ to a cochain $b$ on $CX$ by setting it to zero on every singular simplex not lying in $X$. Then $c:=\delta b$ vanishes on chains in $X$ and so is a relative cocycle in $C^{n+1}(CX,X;\mathbb F_2)$. By [F5], $[c]=\partial[a]$. This extension is a specified function, not an application of AC. [F5, F6]
 
-2.1 The connector commutes with every square. [F2, F3, F4, F5, step 1.3]
-For $0\leq k\leq n$, set $j=n-k$ and define
+2.1 The connector commutes with every square. For $0\leq k\leq n$, set $j=n-k$ and define [F2, F3, F4, F5, step 1.3]
 
 $$
 b':=b\smile_{j+1}\delta b+b\smile_jb.
@@ -147,24 +135,7 @@ by the ordinary mod-two Leibniz rule, the $i=0$ case of [F4]. Thus the top
 square of $[c]$ is also zero. For $k<0$ or $k>n+1$, both sides are zero by
 [F2]; negative cup indices in the preceding calculation are zero by [F3].
 
-3.1 The cone-pair connector is the reduced suspension after the quotient comparison. [F5, F6, F7, F8, F9, step 2.1]
-Take a based CW complex. If its basepoint lies inside a
-positive-dimensional open cell, radially subdivide that characteristic
-disk there and keep the higher attaching maps; this finite refinement
-makes it a vertex without changing the based space. For every nonbasepoint
-$n$-cell of $X$, its product with the open height interval in [F6] gives an
-$(n+1)$-cell of $CX$; the height-zero cells form the copy of $X$, while
-$X\times\{1\}$ and the basepoint track collapse to one vertex. The product
-characteristic disks supply the attaching maps, and each has finite
-boundary-cell support because its $X$-cell does. Their quotient map-out
-test and the CW weak topology give the cone its CW structure, with $X$ a
-closed subcomplex. The cellwise radial collar of this subcomplex gives an
-open neighborhood $V$ that strongly deformation retracts onto $X$:
-extend the collar and its radial flow over each characteristic disk, and
-assemble the compatible extensions using the CW weak topology. Since
-$X\subset V$ is the entire collapsed fibre of $q:CX\to\Sigma X$, $V$ is
-saturated; hence $q(V)$ is open and the flow descends to a retraction
-onto the quotient vertex.
+3.1 The cone-pair connector is the reduced suspension after the quotient comparison. Take a based CW complex. If its basepoint lies inside a positive-dimensional open cell, radially subdivide that characteristic disk there and keep the higher attaching maps; this finite refinement makes it a vertex without changing the based space. For every nonbasepoint $n$-cell of $X$, its product with the open height interval in [F6] gives an $(n+1)$-cell of $CX$; the height-zero cells form the copy of $X$, while $X\times\{1\}$ and the basepoint track collapse to one vertex. The product characteristic disks supply the attaching maps, and each has finite boundary-cell support because its $X$-cell does. Their quotient map-out test and the CW weak topology give the cone its CW structure, with $X$ a closed subcomplex. The cellwise radial collar of this subcomplex gives an open neighborhood $V$ that strongly deformation retracts onto $X$: extend the collar and its radial flow over each characteristic disk, and assemble the compatible extensions using the CW weak topology. Since $X\subset V$ is the entire collapsed fibre of $q:CX\to\Sigma X$, $V$ is saturated; hence $q(V)$ is open and the flow descends to a retraction onto the quotient vertex. [F5, F6, F7, F8, F9, step 2.1]
 
 The pair sequences and [F8] make $H^*(V,X;\mathbb F_2)$ and
 $H^*(q(V),\{*\};\mathbb F_2)$ zero. Restriction of cochains gives short exact

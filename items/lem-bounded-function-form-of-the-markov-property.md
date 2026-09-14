@@ -2,7 +2,7 @@
 id: lem-bounded-function-form-of-the-markov-property
 kind: lemma
 title: "Bounded-function form of the Markov property"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-time-homogeneous-markov-chain-with-transition-kernel, thm-measurability-of-integration-against-a-kernel, thm-monotone-class, thm-taking-out-what-is-known, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, lem-conditional-expectation-is-unique-almost-surely]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

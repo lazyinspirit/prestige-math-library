@@ -2,7 +2,7 @@
 id: ex-path-loop-serre-computation-of-cp-infinity
 kind: example
 title: Path-loop Serre computation of CP infinity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-finite-join-models-for-circle-and-two-point-groups, thm-milnor-join-model-is-a-contractible-free-g-space, prop-loop-space-of-bg-recovers-g-up-to-homotopy, lem-circle-and-path-loop-models-for-eilenberg-maclane-induction, thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, def-serre-edge-homomorphisms-and-transgression, cor-homology-of-spheres, cor-contractible-nonempty-spaces-have-the-homology-of-a-point, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, def-axiom-of-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-all-complex-vector-bundles-over-the-circle-are-trivial
 kind: example
 title: All complex vector bundles over the circle are trivial
-status: draft
+status: published
 origin: pipeline
 deps: [thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: cor-brownian-paths-are-locally-holder-of-every-order-below-one-half
 kind: corollary
 title: "Brownian paths are locally Holder below one half"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, thm-kolmogorov-continuity-criterion-one-parameter, lem-gaussian-even-moment-bound-for-brownian-increments, thm-rationals-countable, lem-rat-embeds-dense, thm-finite-and-countable-subadditivity-of-measures, cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal, thm-of-archimedean, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

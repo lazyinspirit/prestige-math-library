@@ -2,13 +2,14 @@
 id: def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles
 kind: definition
 title: Whitney sum, tensor, dual, Hom, and exterior-power bundles
-status: draft
+status: published
 origin: pipeline
 deps: [thm-vector-bundles-glued-from-transition-cocycles, prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

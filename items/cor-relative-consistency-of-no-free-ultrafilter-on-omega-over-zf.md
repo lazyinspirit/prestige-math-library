@@ -2,7 +2,7 @@
 id: cor-relative-consistency-of-no-free-ultrafilter-on-omega-over-zf
 kind: corollary
 title: Relative consistency of no free ultrafilter on omega over ZF
-status: draft
+status: published
 origin: pipeline
 deps: [lem-feferman-tail-flip-model-is-finitely-formalizable, thm-formal-consistency-of-zfc-plus-gch-from-zf]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

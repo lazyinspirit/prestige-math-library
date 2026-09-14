@@ -61,13 +61,7 @@ path-connected, semilocally simply connected base is its fundamental group
 
 **Proof technique:** direct.
 
-1.1 Compute the cellular differential, including $n=1$. [F1, F3, F5, F6]
-For $n=1$, the map
-$t\mapsto[\cos(\pi t):\sin(\pi t)]$ identifies
-$\mathbb R/\mathbb Z$ with $\mathbb {RP}^1$. Under [F3], the positive
-once-around loop is a generator $g$ of its infinite cyclic fundamental group.
-Choose the vertex lift at $0\in\mathbb R$ and the lifted open edge from $0$
-to $1$. Its boundary is
+1.1 Compute the cellular differential, including $n=1$. For $n=1$, the map $t\mapsto[\cos(\pi t):\sin(\pi t)]$ identifies $\mathbb R/\mathbb Z$ with $\mathbb {RP}^1$. Under [F3], the positive once-around loop is a generator $g$ of its infinite cyclic fundamental group. Choose the vertex lift at $0\in\mathbb R$ and the lifted open edge from $0$ to $1$. Its boundary is [F1, F3, F5, F6]
 
 $$\partial\widetilde e_1=g\widetilde v-\widetilde v.$$
 
@@ -93,12 +87,7 @@ overall sign.
 
 2.1 The resulting complex has one copy of $\mathbb Z$ in each degree. For $0<k<n$, an even $k$ has zero outgoing differential and incoming image $2\mathbb Z$, giving $\mathbb Z/2$; an odd $k$ has injective outgoing differential, giving zero. At degree zero, $d_1=2$ gives $\mathbb Z/2$. At the top there is no incoming differential, so the kernel is $\mathbb Z$ for even $n$ and zero for odd $n$. This proves the table. [step 1.1]
 
-3.1 Compare with the orientation system in both ranges. [F2, F4, step 1.1, step 2.1]
-When $n=1$, the displayed identification with $\mathbb R/\mathbb Z$ gives
-the projective line its usual circle orientation. Its orientation character
-is therefore trivial, whereas the positive generator acts by $-1$ on
-$\mathbb Z_{\mathrm{sgn}}$. Hence the sign system is not the orientation
-system, consistently with the zero top sign homology in step 2.1.
+3.1 Compare with the orientation system in both ranges. When $n=1$, the displayed identification with $\mathbb R/\mathbb Z$ gives the projective line its usual circle orientation. Its orientation character is therefore trivial, whereas the positive generator acts by $-1$ on $\mathbb Z_{\mathrm{sgn}}$. Hence the sign system is not the orientation system, consistently with the zero top sign homology in step 2.1. [F2, F4, step 1.1, step 2.1]
 
 For $n\ge2$, the deck transformation of the universal sphere cover is
 antipodal and has degree $(-1)^{n+1}$ by [F4]. It reverses local orientation

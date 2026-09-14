@@ -2,13 +2,14 @@
 id: def-external-product-in-complex-k-theory
 kind: definition
 title: External product in complex K-theory
-status: draft
+status: published
 origin: pipeline
 deps: [def-grothendieck-ring-structure-and-rank-map, prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant, thm-reduced-k-theory-exact-sequence-of-a-cofibration, def-smash-product-of-based-spaces, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

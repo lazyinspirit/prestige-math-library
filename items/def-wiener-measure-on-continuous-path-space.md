@@ -2,13 +2,15 @@
 id: def-wiener-measure-on-continuous-path-space
 kind: definition
 title: "Wiener measure on continuous path space"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-existence-of-continuous-brownian-motion, def-brownian-motion, def-uniform-on-compacts-metric-on-continuous-path-space, lem-continuous-path-space-is-polish, def-separable-space, def-random-element-and-real-random-variable, lem-law-of-a-random-element-is-a-probability-measure, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-rationals-countable, lem-rat-embeds-dense, thm-product-of-countable, lem-subset-of-countable, def-metric-topology, def-borel-sigma-algebra, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, Section 7.1"

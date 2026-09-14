@@ -2,7 +2,7 @@
 id: lem-moore-no-cross-injection
 kind: lemma
 title: The Moore colouring forbids cross-injections
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-moore-l-space-topology
@@ -13,6 +13,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: contradiction
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Moore, A solution to the L space problem, Section 7, Theorem 7.7 and proof, printed pp. 23–24"

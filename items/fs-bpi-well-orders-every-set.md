@@ -2,7 +2,7 @@
 id: fs-bpi-well-orders-every-set
 kind: false-statement
 title: BPI well-orders every set
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-basic-cohen-model-satisfies-bpi-and-fails-choice, cor-relative-consistency-of-bpi-without-choice-over-zf]
 proof_strategy: countermodel
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

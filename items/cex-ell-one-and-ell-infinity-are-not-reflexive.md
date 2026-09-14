@@ -2,7 +2,7 @@
 id: cex-ell-one-and-ell-infinity-are-not-reflexive
 kind: counterexample
 title: "Ell-one and ell-infinity are not reflexive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

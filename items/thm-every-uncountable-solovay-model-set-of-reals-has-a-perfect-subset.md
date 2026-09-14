@@ -2,7 +2,7 @@
 id: thm-every-uncountable-solovay-model-set-of-reals-has-a-perfect-subset
 kind: theorem
 title: Every uncountable Solovay-model set of reals has a perfect subset
-status: draft
+status: published
 origin: pipeline
 deps: [thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, lem-solovay-collapse-localizes-countable-ordinal-data, def-solovay-levy-collapse-setup, def-forcing-name-valuation-and-generic-extension, lem-solovay-absorption-factorization-and-homogeneity, lem-solovay-inner-model-is-closed-under-ambient-omega-sequences, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, lem-solovay-borel-code-and-regularity-absoluteness, lem-solovay-perfect-tree-of-mutually-generic-name-interpretations]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 proof_strategy: perfect-set-construction
 sources: {references: [{title: "Solovay 1970, Part III, Lemmas 1.6 and 2.11", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
+verification:
+  audited: 2026-09-14
 ---
 
 ## Statement

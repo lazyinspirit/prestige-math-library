@@ -2,7 +2,7 @@
 id: lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization
 kind: lemma
 title: Negative Laurent powers are cleared by Hopf-line stabilization
-status: draft
+status: published
 origin: pipeline
 deps: [lem-uniform-laurent-approximation-through-bundle-automorphisms, def-clutching-construction-for-bundles-over-a-suspension, def-external-product-in-complex-k-theory, thm-hopf-line-calculation-of-k-zero-of-the-two-sphere, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

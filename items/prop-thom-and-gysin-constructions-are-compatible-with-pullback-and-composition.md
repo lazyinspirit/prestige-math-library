@@ -2,12 +2,13 @@
 id: prop-thom-and-gysin-constructions-are-compatible-with-pullback-and-composition
 kind: proposition
 title: Thom and Gysin constructions respect pullback and composition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-naturality-and-uniqueness-of-thom-classes, thm-external-product-and-whitney-sum-formulas-for-thom-classes, def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

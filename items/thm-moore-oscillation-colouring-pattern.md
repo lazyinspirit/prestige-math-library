@@ -2,7 +2,7 @@
 id: thm-moore-oscillation-colouring-pattern
 kind: theorem
 title: The Moore colouring realizes finite binary patterns
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-moore-oscillation-block-lemma
@@ -14,6 +14,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Moore, A solution to the L space problem, Section 5, Theorem 5.3 and proof, printed pp. 15–16"

@@ -2,7 +2,7 @@
 id: lem-blass-ultrafilter-free-model-is-finitely-formalizable
 kind: lemma
 title: The Blass ultrafilter-free construction is finitely formalizable
-status: draft
+status: published
 origin: pipeline
 deps: [thm-blass-model-has-only-principal-ultrafilters, lem-forcing-transfer-for-finite-zfc-fragments, lem-finite-fragment-l-interpretation-with-gch, def-axiom-of-choice, lem-derivation-finite-support-and-concatenation]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

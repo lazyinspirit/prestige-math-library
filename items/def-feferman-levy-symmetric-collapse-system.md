@@ -2,13 +2,14 @@
 id: def-feferman-levy-symmetric-collapse-system
 kind: definition
 title: The Feferman–Levy symmetric collapse system
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-collapse-and-levy-collapse-forcings, def-symmetric-forcing-system-and-hereditarily-symmetric-names, def-forcing-name-automorphism-action, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

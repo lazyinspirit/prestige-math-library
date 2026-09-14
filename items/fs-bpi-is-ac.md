@@ -2,7 +2,7 @@
 id: fs-bpi-is-ac
 kind: false-statement
 title: BPI is equivalent to the Axiom of Choice
-status: draft
+status: published
 origin: pipeline
 deps: [cor-relative-consistency-of-bpi-without-choice-over-zf, thm-choice-implies-boolean-prime-ideal-principle, def-boolean-prime-ideal-principle, def-axiom-of-choice]
 proof_strategy: countermodel
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -1,7 +1,7 @@
 ---
 page: markov-kernels-and-markov-chains
 title: "Markov Kernels and Markov Chains"
-status: draft
+status: published
 items: [def-time-homogeneous-markov-chain-with-transition-kernel, lem-bounded-function-form-of-the-markov-property, def-conditional-independence-given-a-sigma-algebra, lem-conditional-independence-equivalences-and-preservation, lem-conditional-independence-splicing-over-a-standard-borel-variable, def-initial-distribution-of-a-markov-chain, def-iterated-transition-kernels, thm-chapman-kolmogorov-equations, thm-finite-dimensional-laws-of-a-markov-chain, thm-ionescu-tulcea-construction-of-a-markov-chain, cor-canonical-markov-chain-on-path-space, thm-markov-chain-law-is-determined-by-initial-law-and-kernel, def-shift-operator-and-future-coordinate-sigma-algebra, thm-markov-property-for-bounded-future-path-functionals, thm-markov-property-as-past-future-conditional-independence, thm-discrete-strong-markov-property, cor-post-hitting-chain-restarts-from-the-hit-state, def-killed-and-absorbed-transition-kernels, lem-killed-and-absorbed-kernels-are-probability-kernels, def-discrete-generator-of-a-countable-state-transition-matrix, thm-countable-state-martingale-problem-characterization, cor-bounded-harmonic-functions-yield-markov-chain-martingales]
 examples: []
 ---

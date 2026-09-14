@@ -2,7 +2,7 @@
 id: lem-formal-pfa-iteration-verification-compiler
 kind: lemma
 title: "Finite-fragment compiler for the PFA iteration"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-a-supercompact-cardinal-can-be-forced-to-give-pfa, lem-forcing-transfer-for-finite-zfc-fragments, thm-formal-consistency-transfer-by-forcing, lem-primitive-recursive-syntax-and-proof-checking, lem-certified-syntax-coding-operations-are-primitive-recursive, thm-primitive-recursive-numeralwise-representability]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Cummings, Iterated Forcing and Elementary Embeddings, Theorem 24.11"

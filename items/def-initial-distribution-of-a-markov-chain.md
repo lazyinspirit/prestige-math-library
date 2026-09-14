@@ -2,7 +2,7 @@
 id: def-initial-distribution-of-a-markov-chain
 kind: definition
 title: "Initial distribution of a Markov chain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-time-homogeneous-markov-chain-with-transition-kernel]
 proof_strategy: definition
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

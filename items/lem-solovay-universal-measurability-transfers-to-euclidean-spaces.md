@@ -2,7 +2,7 @@
 id: lem-solovay-universal-measurability-transfers-to-euclidean-spaces
 kind: lemma
 title: Universal real measurability transfers to finite-dimensional Euclidean spaces
-status: draft
+status: published
 origin: pipeline
 deps: [thm-every-solovay-model-set-of-reals-is-lebesgue-measurable, thm-solovay-inner-model-satisfies-dependent-choice, thm-choice-implies-dependent-implies-countable-choice, lem-dyadic-coding-coin-measure-and-lebesgue-transfer, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 proof_strategy: measure-preserving-coding
 sources: {references: [{title: "Solovay 1970, Part III §4", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

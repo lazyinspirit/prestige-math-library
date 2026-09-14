@@ -2,13 +2,15 @@
 id: lem-solovay-borel-code-and-regularity-absoluteness
 kind: lemma
 title: Borel-code, measure, category, and perfect-set absoluteness
-status: draft
+status: published
 origin: pipeline
 deps: [def-well-founded-borel-evaluation-codes, def-property-of-baire-for-subsets, def-nowhere-dense-meagre-and-residual-subsets, def-lebesgue-outer-measure, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-lebesgue-measure-is-a-complete-measure, def-perfect-set-r, thm-solovay-inner-model-satisfies-dependent-choice, thm-choice-implies-dependent-implies-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: well-founded-induction
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - {title: "Solovay 1970, Part II §1, especially Lemma 1.6", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}

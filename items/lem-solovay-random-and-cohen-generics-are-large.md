@@ -2,13 +2,15 @@
 id: lem-solovay-random-and-cohen-generics-are-large
 kind: lemma
 title: Random and Cohen generics over an intermediate model are conull and comeagre
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-collapse-localizes-countable-ordinal-data, lem-solovay-borel-code-and-regularity-absoluteness, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: countable-enumeration
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - {title: "Solovay 1970, Part III, Lemmas 1.1–1.2; Unger 2015, Claim 1", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}

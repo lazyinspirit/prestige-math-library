@@ -2,13 +2,14 @@
 id: def-real-and-complex-topological-vector-bundle
 kind: definition
 title: Real and complex topological vector bundles
-status: draft
+status: published
 origin: pipeline
 deps: [def-locally-trivial-fiber-bundle, def-invertible-matrix-and-general-linear-group]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations
 kind: corollary
 title: Simultaneous triangularization of solvable representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-lies-theorem, def-subrepresentation-quotient-representation-and-intertwiner, def-quotient-vector-space-and-canonical-projection]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: topological-vector-bundles-and-grassmannian-classification
 title: Topological Vector Bundles and Grassmannian Classification
-status: draft
+status: published
 items:
   - def-real-and-complex-topological-vector-bundle
   - lem-ac-supplies-dependent-choice-for-vector-bundle-constructions

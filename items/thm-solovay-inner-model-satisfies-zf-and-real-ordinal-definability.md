@@ -2,7 +2,7 @@
 id: thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability
 kind: theorem
 title: The Solovay inner model satisfies ZF and every real set has a real–ordinal definition
-status: draft
+status: published
 origin: pipeline
 deps: [def-solovay-hereditarily-ordinal-sequence-definable-model, lem-solovay-collapse-localizes-countable-ordinal-data, lem-solovay-absorption-factorization-and-homogeneity, def-solovay-levy-collapse-setup]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: inner-model-verification
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

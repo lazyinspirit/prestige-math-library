@@ -2,7 +2,7 @@
 id: ex-multidimensional-brownian-radial-second-moment
 kind: example
 title: "Radial second moment of multidimensional Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-d-dimensional-brownian-motion, def-continuous-time-filtration-and-all-pairs-martingale, def-euclidean-inner-product, lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric, lem-algebra-of-continuous-real-maps-on-a-space, thm-continuous-preimages-of-borel-sets-are-borel, thm-grouping-independent-sigma-algebras, lem-measurable-functions-preserve-independence, thm-dynkin-pi-lambda, lem-probability-measure-basic-identities, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-linearity-of-the-lebesgue-integral-on-l-one, cor-cauchy-schwarz-for-random-variables, lem-characteristic-function-of-a-normal-law, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

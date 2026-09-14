@@ -2,7 +2,7 @@
 id: thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians
 kind: theorem
 title: Real and complex vector bundles are classified by stable Grassmannians
-status: draft
+status: published
 origin: pipeline
 deps: [lem-a-bundle-embedding-produces-its-grassmannian-classifying-map, lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely, def-frame-bundle-and-associated-vector-bundle, thm-stable-stiefel-space-is-contractible, thm-principal-bundles-are-classified-by-maps-to-bg, thm-subordinate-partitions-of-unity-exist, lem-ac-supplies-dependent-choice-for-vector-bundle-constructions, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

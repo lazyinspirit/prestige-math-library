@@ -2,7 +2,7 @@
 id: thm-c0-fails-the-radon-nikodym-property
 kind: theorem
 title: "$c_0$ fails the Radon--Nikodym property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -58,40 +59,17 @@ closed convex set ([[thm-rnp-dentability-characterization]]).
 
 **Given:** AC and the closed unit ball $B$ of $c_0$.
 
-1.1 Fix an arbitrary slice and a point with positive margin. [given, L2, L3, choose]
-Let $S=S(B,f,\alpha)$ be any slice, and represent
-$f(x)=\sum_na_nx_n$ by [L2]. On $B$ one has
-$\sup\operatorname{Re}f=\|f\|$: the upper bound is the dual-norm inequality,
-and multiplying an almost norming vector by a scalar of modulus one makes its
-$f$-value real and nonnegative. By nonemptiness of the slice choose $x\in S$
-and put
-$\delta=\operatorname{Re}f(x)-(\|f\|-\alpha)>0$.
+1.1 Fix an arbitrary slice and a point with positive margin. Let $S=S(B,f,\alpha)$ be any slice, and represent $f(x)=\sum_na_nx_n$ by [L2]. On $B$ one has $\sup\operatorname{Re}f=\|f\|$: the upper bound is the dual-norm inequality, and multiplying an almost norming vector by a scalar of modulus one makes its $f$-value real and nonnegative. By nonemptiness of the slice choose $x\in S$ and put $\delta=\operatorname{Re}f(x)-(\|f\|-\alpha)>0$. [given, L2, L3, choose]
 
-2.1 Change one remote coordinate in both directions. [L1, L2, step 1.1, construct]
-Truncation convergence in [L2] gives $a_n\to0$, so choose $k$ with
-$2|a_k|<\delta$. Define $y,z$ by retaining all coordinates of $x$ except
-$y_k=1$ and $z_k=-1$. Both sequences still tend to zero and have supremum norm
-at most one, so $y,z\in B$. Moreover
+2.1 Change one remote coordinate in both directions. Truncation convergence in [L2] gives $a_n\to0$, so choose $k$ with $2|a_k|<\delta$. Define $y,z$ by retaining all coordinates of $x$ except $y_k=1$ and $z_k=-1$. Both sequences still tend to zero and have supremum norm at most one, so $y,z\in B$. Moreover [L1, L2, step 1.1, construct]
 
 $$\operatorname{Re}f(y)\geq\operatorname{Re}f(x)-|a_k|\,|1-x_k|>\|f\|-\alpha,$$
 
 and the same estimate with $|-1-x_k|\leq2$ puts $z$ in $S$. Thus
 $\|y-z\|_\infty=2$.
 
-3.1 Compute every slice diameter and obtain nondentability. [L1, L3, step 2.1]
-The triangle inequality bounds the diameter of $B$, and hence of $S$, by two;
-step 2.1 attains two. Therefore every slice of $B$ has diameter exactly two.
-In particular no slice has diameter below one, so $B$ is not dentable. The ball
-is nonempty, bounded, closed, and convex in the Banach space from [L1].
+3.1 Compute every slice diameter and obtain nondentability. The triangle inequality bounds the diameter of $B$, and hence of $S$, by two; step 2.1 attains two. Therefore every slice of $B$ has diameter exactly two. In particular no slice has diameter below one, so $B$ is not dentable. The ball is nonempty, bounded, closed, and convex in the Banach space from [L1]. [L1, L3, step 2.1]
 
-4.1 Apply the RNP--dentability characterization. [A1, L4, step 3.1]
-If $c_0$ had RNP, [L4] would make its closed unit ball dentable, contradicting
-step 3.1. Hence $c_0$ fails RNP over both scalar fields.
+4.1 Apply the RNP--dentability characterization. If $c_0$ had RNP, [L4] would make its closed unit ball dentable, contradicting step 3.1. Hence $c_0$ fails RNP over both scalar fields. [A1, L4, step 3.1]
 
-5.1 Record the zero-functional and endpoint cases. [A1, L2, L3, step 1.1, step 2.1, step 4.1]
-If $f=0$, the slice is all of $B$; take $x=0$ and any $k$, so the same
-$y=e_k$, $z=-e_k$ witness diameter two. For nonzero $f$, the strict slice
-margin $\delta$ ensures both perturbed points remain inside rather than merely
-on its boundary. A zero coefficient $a_k$ causes no difficulty. The complex
-proof uses the bilinear $c_0$--$\ell^1$ pairing and real parts exactly as in
-[L2]--[L3]; no conjugate is inserted. AC is used only through [L4]. [A1, L2, L3, step 2.1, step 4.1] ∎
+5.1 Record the zero-functional and endpoint cases. [A1, L2, L3, step 1.1, step 2.1, step 4.1] If $f=0$, the slice is all of $B$; take $x=0$ and any $k$, so the same $y=e_k$, $z=-e_k$ witness diameter two. For nonzero $f$, the strict slice margin $\delta$ ensures both perturbed points remain inside rather than merely on its boundary. A zero coefficient $a_k$ causes no difficulty. The complex proof uses the bilinear $c_0$--$\ell^1$ pairing and real parts exactly as in [L2]--[L3]; no conjugate is inserted. AC is used only through [L4]. [A1, L2, L3, step 2.1, step 4.1] ∎

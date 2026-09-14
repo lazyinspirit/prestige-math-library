@@ -2,7 +2,7 @@
 id: cor-short-exact-sequences-of-vector-bundles-split-over-the-base
 kind: corollary
 title: Short exact sequences of numerable vector bundles split
-status: draft
+status: published
 origin: pipeline
 deps: [def-vector-bundle-map-section-subbundle-and-isomorphism, thm-numerable-vector-bundles-admit-bundle-metrics]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

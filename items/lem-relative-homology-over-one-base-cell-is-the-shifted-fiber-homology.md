@@ -2,12 +2,13 @@
 id: lem-relative-homology-over-one-base-cell-is-the-shifted-fiber-homology
 kind: lemma
 title: Relative homology over one base cell is shifted fiber homology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-serre-filtration-of-the-total-space-over-base-skeleta, lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid, prop-pullbacks-of-fibrations-are-fibrations, prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace, lem-serre-fibration-replacement-preserves-fiber-homology-transport, thm-long-exact-sequence-of-a-pair-in-singular-homology, thm-excision-for-singular-homology, thm-singular-homology-satisfies-dimension-and-arbitrary-additivity, thm-cellular-chains-compute-homology-with-local-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-minimal-walk-weights-and-coherent-functions
 kind: definition
 title: Minimal-walk weights, labelled lower traces, and the functions e-beta
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-c-sequences-and-minimal-walk-traces-on-omega-one
@@ -13,6 +13,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

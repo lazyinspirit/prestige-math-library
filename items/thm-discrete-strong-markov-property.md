@@ -2,7 +2,7 @@
 id: thm-discrete-strong-markov-property
 kind: theorem
 title: "Discrete strong Markov property"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-markov-property-for-bounded-future-path-functionals, def-discrete-stopping-time, def-sigma-algebra-at-a-stopping-time, lem-stopping-time-sigma-algebra-is-a-sigma-algebra, lem-stopped-random-variable-is-measurable-at-the-stopping-time, thm-dominated-convergence]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

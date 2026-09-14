@@ -2,7 +2,7 @@
 id: thm-ionescu-tulcea-construction-of-a-markov-chain
 kind: theorem
 title: "Ionescu-Tulcea construction of a Markov chain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-measure-kernel-and-probability-kernel, thm-measurability-of-integration-against-a-kernel, thm-sections-of-product-measurable-functions-are-measurable, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined, def-premeasure-on-an-algebra, thm-caratheodory-extension-theorem, thm-monotone-class, thm-dynkin-pi-lambda, def-time-homogeneous-markov-chain-with-transition-kernel]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

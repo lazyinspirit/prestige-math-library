@@ -2,7 +2,7 @@
 id: thm-basic-cohen-model-satisfies-bpi-and-fails-choice
 kind: theorem
 title: The basic Cohen model satisfies BPI and fails Choice
-status: draft
+status: published
 origin: pipeline
 deps: [lem-basic-cohen-search-and-shift-prime-ideal-construction, def-basic-cohen-symmetric-system, thm-hereditarily-symmetric-interpretations-form-a-zf-model, cor-basic-cohen-model-fails-well-orderability-and-choice, def-boolean-prime-ideal-principle, def-axiom-of-choice]
 proof_strategy: composition
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

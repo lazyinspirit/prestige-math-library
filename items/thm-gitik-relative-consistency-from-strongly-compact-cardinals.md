@@ -2,7 +2,7 @@
 id: thm-gitik-relative-consistency-from-strongly-compact-cardinals
 kind: theorem
 title: Relative consistency from a proper class of strongly compact cardinals
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-finite-fragment-relative-consistency-transfer
@@ -20,6 +20,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, abstract, opening reduction and final theorem, pages 3–4 and 20"

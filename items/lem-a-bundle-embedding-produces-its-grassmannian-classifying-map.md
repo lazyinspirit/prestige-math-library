@@ -2,7 +2,7 @@
 id: lem-a-bundle-embedding-produces-its-grassmannian-classifying-map
 kind: lemma
 title: A bundle embedding produces its Grassmannian classifying map
-status: draft
+status: published
 origin: pipeline
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle, def-partition-of-unity-subordinate-to-a-cover, thm-finite-rank-complement-theorem-over-compact-hausdorff-bases, thm-principal-bundles-are-classified-by-maps-to-bg, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

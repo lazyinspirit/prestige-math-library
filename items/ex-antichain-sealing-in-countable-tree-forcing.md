@@ -2,7 +2,7 @@
 id: ex-antichain-sealing-in-countable-tree-forcing
 kind: example
 title: "Sealing a named maximal antichain"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countably-closed-forcing-adds-a-normal-suslin-tree, def-countable-normal-tree-end-extension-forcing, lem-countable-tree-antichain-sealing, thm-closure-distributivity-and-no-short-sequences, lem-forcing-monotonicity-density-and-decision, def-forcing-relation-for-atomic-formulas, thm-forcing-theorem, thm-countable-union-of-countable, thm-transfinite-recursion, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

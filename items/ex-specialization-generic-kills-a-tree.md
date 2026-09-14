@@ -2,7 +2,7 @@
 id: ex-specialization-generic-kills-a-tree
 kind: example
 title: "A specialization generic kills a tree"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-specializing-forcing-kills-a-suslin-tree, def-finite-aronszajn-specialization-poset, lem-specialization-dense-domains-and-union, def-aronszajn-suslin-and-special-tree, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

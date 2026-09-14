@@ -1,7 +1,7 @@
 ---
 page: schauder-bases-approximation-and-banach-space-pathologies-examples
 title: Schauder Bases Approximation and Banach Space Pathologies — Examples
-status: draft
+status: published
 items: []
 examples: [ex-standard-schauder-bases-of-c0-and-ell-p, cex-standard-unit-vectors-are-not-a-schauder-basis-of-ell-infinity, ex-the-summing-basis-of-c0-is-conditional, cex-reordering-a-conditional-basis-can-destroy-convergence, ex-banach-limit-revisited-as-a-charge, cex-ell-one-and-ell-infinity-are-not-reflexive, rem-subspaces-of-classical-spaces-can-fail-ap]
 ---

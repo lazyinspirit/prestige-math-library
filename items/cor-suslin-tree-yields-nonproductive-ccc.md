@@ -2,7 +2,7 @@
 id: cor-suslin-tree-yields-nonproductive-ccc
 kind: corollary
 title: "A Suslin tree yields nonproductive ccc"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-suslin-tree-normal-splitting-refinement, thm-splitting-suslin-tree-poset-square-not-ccc, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

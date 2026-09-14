@@ -2,7 +2,7 @@
 id: ex-wang-sequence-of-a-mapping-torus
 kind: example
 title: Wang sequence of a mapping torus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-wang-sequence-for-a-fibration-over-the-circle, def-fiber-transport-and-monodromy-action]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

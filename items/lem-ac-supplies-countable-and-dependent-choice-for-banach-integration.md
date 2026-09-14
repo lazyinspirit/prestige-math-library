@@ -2,7 +2,7 @@
 id: lem-ac-supplies-countable-and-dependent-choice-for-banach-integration
 kind: lemma
 title: AC supplies the countable and dependent choices used in Banach integration
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-countable-choice, def-dependent-choice, thm-recursion]
 justified_by: []
@@ -14,6 +14,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   scraped: []

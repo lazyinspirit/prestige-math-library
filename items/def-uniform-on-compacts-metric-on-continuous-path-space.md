@@ -2,7 +2,7 @@
 id: def-uniform-on-compacts-metric-on-continuous-path-space
 kind: definition
 title: "Uniform-on-compacts metric on continuous path space"
-status: draft
+status: published
 origin: pipeline
 deps: [def-topology-of-compact-convergence, def-metric-space, def-continuous-map-top, thm-geometric-series, lem-geometric-sequence-null, thm-extreme-value-metric, thm-heine-borel-rn, thm-of-archimedean]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

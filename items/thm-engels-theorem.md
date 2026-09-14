@@ -2,7 +2,7 @@
 id: thm-engels-theorem
 kind: theorem
 title: Engel's theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lower-central-series-and-nilpotent-lie-algebra, thm-engels-triangularization-theorem, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

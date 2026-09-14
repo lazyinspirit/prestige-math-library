@@ -2,7 +2,7 @@
 id: ex-hopf-line-bundle-over-the-two-sphere-by-clutching
 kind: example
 title: The Hopf line bundle over S² by clutching
-status: draft
+status: published
 origin: pipeline
 deps: [def-clutching-construction-for-bundles-over-a-suspension, ex-tautological-real-and-complex-lines-over-projective-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

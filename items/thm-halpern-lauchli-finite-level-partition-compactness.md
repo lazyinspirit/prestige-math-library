@@ -2,13 +2,14 @@
 id: thm-halpern-lauchli-finite-level-partition-compactness
 kind: theorem
 title: "Finite level-product partition theorem by the compactness tree"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-halpern-lauchli-dense-matrix-dichotomy, def-halpern-lauchli-finitistic-trees-density-and-matrices, thm-konig-finite-level-tree, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

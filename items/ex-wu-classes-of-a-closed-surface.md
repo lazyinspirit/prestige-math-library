@@ -125,11 +125,7 @@ primitives is chosen.
 the integral homology lift-and-divide cycle obtained from the twisted
 fundamental cycle.
 
-1.1 The edge signs form a cocycle. [F1, F2, A1, given]
-For a singular two-simplex, write $\epsilon_{ij}$ for the sign on its affine
-edge from vertex $i$ to vertex $j$. The $02$ edge is homotopic relative to
-its endpoints to the $01$ edge followed by the $12$ edge. Functoriality of
-orientation transport therefore gives
+1.1 The edge signs form a cocycle. For a singular two-simplex, write $\epsilon_{ij}$ for the sign on its affine edge from vertex $i$ to vertex $j$. The $02$ edge is homotopic relative to its endpoints to the $01$ edge followed by the $12$ edge. Functoriality of orientation transport therefore gives [F1, F2, A1, given]
 
 $$
 \epsilon_{02}=\epsilon_{01}+\epsilon_{12}\quad\text{in }\mathbb F_2.
@@ -140,9 +136,7 @@ $(\delta\epsilon)(012)=\epsilon_{12}-\epsilon_{02}+\epsilon_{01}=0$.
 Hence $\epsilon$ is a cocycle. A degenerate edge has identity transport and
 therefore sign zero, consistently with this calculation.
 
-2.1 The cohomology class does not depend on the generator family. [F1, step 1.1]
-Any other family has the form $e'_x=(-1)^{t(x)}e_x$ for a unique ordinary
-zero-cochain $t:M\to\mathbb F_2$. Its edge signs satisfy
+2.1 The cohomology class does not depend on the generator family. Any other family has the form $e'_x=(-1)^{t(x)}e_x$ for a unique ordinary zero-cochain $t:M\to\mathbb F_2$. Its edge signs satisfy [F1, step 1.1]
 
 $$
 \epsilon'(\sigma)=\epsilon(\sigma)+t(v_1)-t(v_0)=\epsilon(\sigma)+(\delta t)(\sigma).
@@ -150,10 +144,7 @@ $$
 
 Thus $[\epsilon']=[\epsilon]$, so $w_1(M)$ is well defined.
 
-3.1 The signed generator cochain has an even coboundary whose half reduces to $\epsilon$. [F1, F3, step 1.1, step 2.1]
-Define the local zero-cochain $c\in C^0(M;\mathcal O_M)$ by $c(x)=e_x$. Since
-$T_\sigma(e_{v_0})=(-1)^{\epsilon(\sigma)}e_{v_1}$, the formula in [F3]
-gives
+3.1 The signed generator cochain has an even coboundary whose half reduces to $\epsilon$. Define the local zero-cochain $c\in C^0(M;\mathcal O_M)$ by $c(x)=e_x$. Since $T_\sigma(e_{v_0})=(-1)^{\epsilon(\sigma)}e_{v_1}$, the formula in [F3] gives [F1, F3, step 1.1, step 2.1]
 
 $$
 (\delta c)(\sigma)=\bigl((-1)^{\epsilon(\sigma)}-1\bigr)e_{v_0}.
@@ -171,8 +162,7 @@ $r(ne)=n\bmod2$. The formula is independent of replacing $e$ by $-e$, and
 orientation transport changes a generator only by sign, so it commutes with
 transport. The displayed values of $b$ give $r(b)=\epsilon$.
 
-4.1 Cap the twisted fundamental cycle with the generator cochain. [F3, F4, F5, F6, step 3.1]
-There is a canonical local-coefficient pairing
+4.1 Cap the twisted fundamental cycle with the generator cochain. There is a canonical local-coefficient pairing [F3, F4, F5, F6, step 3.1]
 
 $$
 q:\mathcal O_M\otimes\mathcal O_M\longrightarrow\underline{\mathbb Z},\qquad q_x(ne,me)=nm,
@@ -199,9 +189,7 @@ $$
 
 Thus $Z$ is an integral lift of the mod-two fundamental cycle.
 
-5.1 The cap-boundary sign produces the correct lift-and-divide cycle. [F3, F5, step 3.1, step 4.1]
-Since $C$ is a cycle and $c$ has degree zero, the exact convention in [F5]
-gives
+5.1 The cap-boundary sign produces the correct lift-and-divide cycle. Since $C$ is a cycle and $c$ has degree zero, the exact convention in [F5] gives [F3, F5, step 3.1, step 4.1]
 
 $$
 \partial Z=c\cap_q\partial C-(\delta c)\cap_q C=-2(b\cap_q C).
@@ -216,12 +204,7 @@ $$
 \overline W=\epsilon\cap\overline C.
 $$
 
-6.1 The mod-four $Sq^1$ pairing is evaluation on $\overline W$. [F7, F8, step 4.1, step 5.1]
-Let $x\in H^1(M;\mathbb F_2)$, represent it by a cocycle $a$, and let
-$\widehat a$ be its canonical integer zero/one lift. There is a unique
-integer two-cochain $h$ such that $\delta\widehat a=2h$. It is a cocycle
-because integer cochains have no two-torsion. Reducing $\widehat a$ modulo
-four shows from [F7] that
+6.1 The mod-four $Sq^1$ pairing is evaluation on $\overline W$. Let $x\in H^1(M;\mathbb F_2)$, represent it by a cocycle $a$, and let $\widehat a$ be its canonical integer zero/one lift. There is a unique integer two-cochain $h$ such that $\delta\widehat a=2h$. It is a cocycle because integer cochains have no two-torsion. Reducing $\widehat a$ modulo four shows from [F7] that [F7, F8, step 4.1, step 5.1]
 
 $$
 Sq^1(x)=\bigl[h\bmod2\bigr].
@@ -240,11 +223,7 @@ $$
 \langle Sq^1(x),[M]_2\rangle=\langle x,[\overline W]\rangle.
 $$
 
-7.1 Cap-cup adjunction identifies the orientation class. [F5, step 3.1, step 4.1, step 5.1, step 6.1]
-For the cohomology-first cap convention, evaluating $a$ on
-$\epsilon\cap\overline C$ is exactly the Alexander--Whitney evaluation of
-$\epsilon\smile a$ on $\overline C$: $\epsilon$ reads the front edge and
-$a$ reads the retained back edge. Therefore
+7.1 Cap-cup adjunction identifies the orientation class. For the cohomology-first cap convention, evaluating $a$ on $\epsilon\cap\overline C$ is exactly the Alexander--Whitney evaluation of $\epsilon\smile a$ on $\overline C$: $\epsilon$ reads the front edge and $a$ reads the retained back edge. Therefore [F5, step 3.1, step 4.1, step 5.1, step 6.1]
 
 $$
 \begin{aligned}\langle Sq^1(x),[M]_2\rangle&=\langle x,w_1(M)\cap[M]_2\rangle\\&=\langle w_1(M)\smile x,[M]_2\rangle.\end{aligned}
@@ -255,25 +234,11 @@ $\langle x\smile x,[M]_2\rangle
 =\langle w_1(M)\smile x,[M]_2\rangle$; it was derived from the chain
 calculation, not assumed as Wu's formula.
 
-8.1 The degree-one Wu class is $w_1(M)$. [F10, step 7.1]
-The identity in step 7.1 holds for every
-$x\in H^1(M;\mathbb F_2)=H^{2-1}(M;\mathbb F_2)$. By the defining uniqueness
-of the degree-one Wu class in [F10], it follows that
-$v_1(M)=w_1(M)$.
+8.1 The degree-one Wu class is $w_1(M)$. The identity in step 7.1 holds for every $x\in H^1(M;\mathbb F_2)=H^{2-1}(M;\mathbb F_2)$. By the defining uniqueness of the degree-one Wu class in [F10], it follows that $v_1(M)=w_1(M)$. [F10, step 7.1]
 
-9.1 The remaining Wu classes have the asserted values. [F9, F10, step 8.1]
-For $i=0$, [F9] makes the defining functional
-$x\mapsto\langle Sq^0x,[M]_2\rangle$ equal to evaluation on the fundamental
-class, which is represented by the unit; uniqueness in [F10] gives
-$v_0(M)=1$. For $i=2$, the test classes in [F10] have degree zero, so [F9]
-gives $Sq^2x=0$ for all of them. The zero class represents this zero
-functional, and uniqueness gives $v_2(M)=0$. Indices $i>2$ are zero by
-the out-of-range convention in [F10]. Hence $v_i(M)=0$ for every $i>1$.
+9.1 The remaining Wu classes have the asserted values. For $i=0$, [F9] makes the defining functional $x\mapsto\langle Sq^0x,[M]_2\rangle$ equal to evaluation on the fundamental class, which is represented by the unit; uniqueness in [F10] gives $v_0(M)=1$. For $i=2$, the test classes in [F10] have degree zero, so [F9] gives $Sq^2x=0$ for all of them. The zero class represents this zero functional, and uniqueness gives $v_2(M)=0$. Indices $i>2$ are zero by the out-of-range convention in [F10]. Hence $v_i(M)=0$ for every $i>1$. [F9, F10, step 8.1]
 
-10.1 Vanishing of $w_1(M)$ is equivalent to orientability. [F1, F2, step 2.1, step 9.1]
-If $M$ is oriented, let $s_x$ be its continuous generator section. Write
-$s_x=(-1)^{t(x)}e_x$. Transport preserves $s$, so the generator-change
-calculation in step 2.1 gives $\epsilon=\delta t$ and hence $w_1(M)=0$.
+10.1 Vanishing of $w_1(M)$ is equivalent to orientability. If $M$ is oriented, let $s_x$ be its continuous generator section. Write $s_x=(-1)^{t(x)}e_x$. Transport preserves $s$, so the generator-change calculation in step 2.1 gives $\epsilon=\delta t$ and hence $w_1(M)=0$. [F1, F2, step 2.1, step 9.1]
 
 Conversely, if $w_1(M)=0$, choose an ordinary zero-cochain $t$ with
 $\epsilon=\delta t$ and set $e'_x=(-1)^{t(x)}e_x$. Step 2.1 shows that all
@@ -286,19 +251,7 @@ the ball. Hence $x\mapsto e'_x$ is locally continuous, and therefore is a
 global section of the orientation cover. By [F2], it orients $M$. Since
 $v_1=w_1$ by step 8.1, this proves the final biconditional.
 
-11.1 Boundary and choice cases are explicit. [F3, F4, F5, F7, F8, F10, A1, step 1.1, step 3.1, step 4.1, step 5.1, step 6.1, step 7.1, step 8.1, step 9.1, step 10.1]
-The hypothesis excludes the empty and disconnected cases and fixes dimension
-two; closed excludes manifold boundary. Zero classes $x$ are included in
-step 6.1. The degree endpoints $i=0,1,2$ and all out-of-range indices were
-handled in step 9.1. Degenerate simplices remain in the unnormalized singular
-complexes; their ordinary and local boundary formulas are the ones used
-above. The two divisions by $2$ are unique because the relevant integral
-cochain and chain groups are torsion-free. The zero/one lift of $a$, the
-reductions $r$, and the pairing $q$ are canonical. Apart from the one
-pointwise generator-family selection declared in [A1], only the single cycle
-representative $C$, the single primitive $t$ under the hypothesis
-$w_1=0$, and one chart at a time are chosen; these are ordinary existential
-instantiations, not further uses of AC. ∎
+11.1 Boundary and choice cases are explicit. The hypothesis excludes the empty and disconnected cases and fixes dimension two; closed excludes manifold boundary. Zero classes $x$ are included in step 6.1. The degree endpoints $i=0,1,2$ and all out-of-range indices were handled in step 9.1. Degenerate simplices remain in the unnormalized singular complexes; their ordinary and local boundary formulas are the ones used above. The two divisions by $2$ are unique because the relevant integral cochain and chain groups are torsion-free. The zero/one lift of $a$, the reductions $r$, and the pairing $q$ are canonical. Apart from the one pointwise generator-family selection declared in [A1], only the single cycle representative $C$, the single primitive $t$ under the hypothesis $w_1=0$, and one chart at a time are chosen; these are ordinary existential instantiations, not further uses of AC. [F3, F4, F5, F7, F8, F10, A1, step 1.1, step 3.1, step 4.1, step 5.1, step 6.1, step 7.1, step 8.1, step 9.1, step 10.1] ∎
 
 ## Remarks
 

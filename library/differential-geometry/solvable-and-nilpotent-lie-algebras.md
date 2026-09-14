@@ -1,7 +1,7 @@
 ---
 page: solvable-and-nilpotent-lie-algebras
 title: Solvable and Nilpotent Lie Algebras
-status: draft
+status: published
 items:
   - def-derived-series-and-solvable-lie-algebra
   - lem-derived-series-terms-are-characteristic-ideals

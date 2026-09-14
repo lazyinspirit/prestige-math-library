@@ -2,13 +2,14 @@
 id: def-brownian-motion
 kind: definition
 title: "Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

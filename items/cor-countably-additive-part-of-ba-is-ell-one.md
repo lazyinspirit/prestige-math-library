@@ -2,7 +2,7 @@
 id: cor-countably-additive-part-of-ba-is-ell-one
 kind: corollary
 title: "The countably additive part of ba is ell-one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

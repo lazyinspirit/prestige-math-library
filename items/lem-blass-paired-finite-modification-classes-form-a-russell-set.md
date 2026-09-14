@@ -2,7 +2,7 @@
 id: lem-blass-paired-finite-modification-classes-form-a-russell-set
 kind: lemma
 title: Blass's paired finite-modification classes form a Russell set
-status: draft
+status: published
 origin: pipeline
 deps: [def-blass-finite-modification-classes-and-parameter-hod-model, lem-feferman-tail-complement-automorphism, lem-symmetry-lemma-for-forcing-automorphisms, lem-forcing-truth-lemma]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

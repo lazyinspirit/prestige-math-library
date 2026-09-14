@@ -2,7 +2,7 @@
 id: cex-a-nilpotent-by-nilpotent-extension-that-is-not-nilpotent
 kind: counterexample
 title: A nilpotent-by-nilpotent extension need not be nilpotent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent, def-quotient-lie-algebra, ex-abelian-lie-algebras-are-nilpotent-of-class-one]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

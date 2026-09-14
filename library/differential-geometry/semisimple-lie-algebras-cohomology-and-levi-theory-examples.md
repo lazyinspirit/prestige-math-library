@@ -1,7 +1,7 @@
 ---
 page: semisimple-lie-algebras-cohomology-and-levi-theory-examples
 title: Semisimple Lie Algebras, Cohomology, and Levi Theory — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-killing-form-of-sl-two

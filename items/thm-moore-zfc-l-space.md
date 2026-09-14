@@ -2,7 +2,7 @@
 id: thm-moore-zfc-l-space
 kind: theorem
 title: A ZFC L-space
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-set-theoretic-l-and-s-spaces
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

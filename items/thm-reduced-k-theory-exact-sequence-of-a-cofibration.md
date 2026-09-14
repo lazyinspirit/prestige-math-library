@@ -2,7 +2,7 @@
 id: thm-reduced-k-theory-exact-sequence-of-a-cofibration
 kind: theorem
 title: Reduced K-theory exact sequence of a cofibration
-status: draft
+status: published
 origin: pipeline
 deps: [def-reduced-complex-k-theory, prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant, prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases, thm-finite-rank-complement-theorem-over-compact-hausdorff-bases, def-reduced-cone-suspension-and-cofiber-sequence, thm-tietze-extension-theorem, cor-compact-hausdorff-partitions-of-unity, lem-ac-supplies-dependent-choice-for-vector-bundle-constructions, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

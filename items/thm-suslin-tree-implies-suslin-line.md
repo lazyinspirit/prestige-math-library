@@ -2,7 +2,7 @@
 id: thm-suslin-tree-implies-suslin-line
 kind: theorem
 title: "A Suslin tree yields a Suslin line"
-status: draft
+status: published
 origin: pipeline
 deps: [def-suslin-line-order-interface, lem-suslin-tree-normal-splitting-refinement, lem-suslin-tree-branch-first-difference-order, lem-linear-order-completion-existence-uniqueness-and-density, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

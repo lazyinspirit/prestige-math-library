@@ -2,13 +2,14 @@
 id: def-complex-topological-k-zero-by-grothendieck-completion
 kind: definition
 title: Complex topological K⁰ by Grothendieck completion
-status: draft
+status: published
 origin: pipeline
 deps: [def-whitney-sum-monoid-of-complex-vector-bundles]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

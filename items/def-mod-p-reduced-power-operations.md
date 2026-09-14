@@ -77,9 +77,7 @@ coefficient supplier [F1] assumes it.
 **Proof technique:** check the grading and normalization directly from the
 cyclic coefficient formula.
 
-1.1 The formula is defined and has the stated degree. [given, F1, A1]
-None of $1,\ldots,m$ is zero in $\mathbb F_p$, so $m!$ and every
-$(m!)^q$ are units. If $j=(q-2i)(p-1)$, then
+1.1 The formula is defined and has the stated degree. None of $1,\ldots,m$ is zero in $\mathbb F_p$, so $m!$ and every $(m!)^q$ are units. If $j=(q-2i)(p-1)$, then [given, F1, A1]
 
 $$
 pq-j=pq-(q-2i)(p-1)=q+2i(p-1).
@@ -89,8 +87,7 @@ Thus the scalar multiple of $D_j(x)$ lies in the displayed target. Since
 $q(q+1)$ is even, the sign exponent is an integer. Naturality and
 additivity are inherited from [F1].
 
-2.1 The normalization gives $P^0=\mathrm{id}$. [F4, step 1.1]
-At $i=0$, [F4] gives
+2.1 The normalization gives $P^0=\mathrm{id}$. At $i=0$, [F4] gives [F4, step 1.1]
 
 $$
 P^0(x)=(-1)^{mq(q+1)/2}(m!)^{-q}(-1)^{mq(q+1)/2}(m!)^qx=x.
@@ -99,18 +96,9 @@ $$
 The two equal sign exponents add to an even integer, and the factorial
 factors cancel.
 
-2.2 The index conventions include negative operations and instability. [F1, step 1.1]
-For $i<0$, the operation is zero by definition; equivalently its cyclic
-index exceeds $(p-1)q$. If $i\geq0$ and $2i>q$, then
-$(q-2i)(p-1)<0$, so [F1] makes $P^i(x)=0$. At $2i=q$, the cyclic index
-is zero and the formula legitimately uses $D_0(x)=x^p$; it is not included
-in the vanishing range.
+2.2 The index conventions include negative operations and instability. For $i<0$, the operation is zero by definition; equivalently its cyclic index exceeds $(p-1)q$. If $i\geq0$ and $2i>q$, then $(q-2i)(p-1)<0$, so [F1] makes $P^i(x)=0$. At $2i=q$, the cyclic index is zero and the formula legitimately uses $D_0(x)=x^p$; it is not included in the vanishing range. [F1, step 1.1]
 
-3.1 The Bockstein composite and all boundary cases are well-defined. [F2, F3, A1, step 1.1, step 2.1, step 2.2]
-The specified cyclic short exact sequence and [F2] define the positive mod-$p$
-Bockstein, while [F3] makes the resulting cohomology operation independent of
-cochain choices. Hence its composite with $P^i$ has degree one more than
-$P^i$.
+3.1 The Bockstein composite and all boundary cases are well-defined. The specified cyclic short exact sequence and [F2] define the positive mod-$p$ Bockstein, while [F3] makes the resulting cohomology operation independent of cochain choices. Hence its composite with $P^i$ has degree one more than $P^i$. [F2, F3, A1, step 1.1, step 2.1, step 2.2]
 
 For the empty space and the zero class, both operations are zero. At $q=0$,
 step 2.1 gives $P^0=\mathrm{id}$, while every $i>0$ is in the strict

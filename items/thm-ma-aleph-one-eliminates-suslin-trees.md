@@ -2,7 +2,7 @@
 id: thm-ma-aleph-one-eliminates-suslin-trees
 kind: theorem
 title: "MA(aleph-one) eliminates Suslin trees"
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, def-finite-aronszajn-specialization-poset, thm-aronszajn-specialization-poset-ccc, lem-specialization-dense-domains-and-union, def-aronszajn-suslin-and-special-tree, thm-countable-union-of-countable, cor-cardinal-absorption, thm-schroder-bernstein, def-axiom-of-choice]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

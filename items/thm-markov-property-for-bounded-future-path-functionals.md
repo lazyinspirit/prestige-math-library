@@ -2,7 +2,7 @@
 id: thm-markov-property-for-bounded-future-path-functionals
 kind: theorem
 title: "Markov property for bounded future path functionals"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-shift-operator-and-future-coordinate-sigma-algebra, cor-canonical-markov-chain-on-path-space, lem-bounded-function-form-of-the-markov-property, thm-monotone-class, thm-dynkin-pi-lambda, thm-measurability-of-integration-against-a-kernel, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-dominated-convergence]
 proof_strategy: monotone-class
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

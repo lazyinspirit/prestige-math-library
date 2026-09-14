@@ -44,19 +44,11 @@ nonempty fibres ([[def-axiom-of-choice]]).
 
 **Proof technique:** direct cochain comparison.
 
-1.1 The cochain $a$ in [F1] is a cocycle. [given, F1]
-Indeed,
-$i_*(\delta a)=\delta(i_*a)=\delta^2b=0$; injectivity of $i_*$ gives
-$\delta a=0$.
+1.1 The cochain $a$ in [F1] is a cocycle. Indeed, $i_*(\delta a)=\delta(i_*a)=\delta^2b=0$; injectivity of $i_*$ gives $\delta a=0$. [given, F1]
 
-2.1 Changing only the lift changes $a$ by a coboundary. [F1, step 1.1]
-If $b'$ is another lift of $c$, then $q_*(b'-b)=0$. Exactness gives a unique
-$h\in C^n(X;A)$ with $b'-b=i_*h$. If $a'$ is defined from $b'$, then
-$i_*(a'-a)=\delta(b'-b)=i_*(\delta h)$, hence $a'-a=\delta h$.
+2.1 Changing only the lift changes $a$ by a coboundary. If $b'$ is another lift of $c$, then $q_*(b'-b)=0$. Exactness gives a unique $h\in C^n(X;A)$ with $b'-b=i_*h$. If $a'$ is defined from $b'$, then $i_*(a'-a)=\delta(b'-b)=i_*(\delta h)$, hence $a'-a=\delta h$. [F1, step 1.1]
 
-3.1 Changing the cocycle representative also changes $a$ by a coboundary. [F1, F2, step 2.1]
-Write $c'=c+\delta u$. Use the lifting choice of [F2] to take
-$v\in C^{n-1}(X;B)$ with $q_*v=u$. For an arbitrary lift $b'$ of $c'$,
+3.1 Changing the cocycle representative also changes $a$ by a coboundary. Write $c'=c+\delta u$. Use the lifting choice of [F2] to take $v\in C^{n-1}(X;B)$ with $q_*v=u$. For an arbitrary lift $b'$ of $c'$, [F1, F2, step 2.1]
 
 $$
 q_*(b'-b-\delta v)=c'-c-\delta u=0.

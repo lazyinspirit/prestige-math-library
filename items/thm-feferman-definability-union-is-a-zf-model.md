@@ -2,7 +2,7 @@
 id: thm-feferman-definability-union-is-a-zf-model
 kind: theorem
 title: The tail-flip hereditary-symmetric interpretation is a model of ZF
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-tail-flip-definability-model, thm-hereditarily-symmetric-interpretations-form-a-zf-model]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

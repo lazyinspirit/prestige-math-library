@@ -2,7 +2,7 @@
 id: fs-suslin-hypothesis-is-equivalent-to-continuum-hypothesis
 kind: false-statement
 title: "SH is not equivalent to CH"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-formal-consistency-of-ma-and-not-ch, cor-ma-and-not-ch-implies-suslin-hypothesis, lem-finite-fragment-l-interpretation-with-gch, thm-formal-consistency-of-zfc-plus-gch-from-zf, thm-constructible-inner-model-semantic-and-formal-schema, thm-v-equals-l-implies-diamond, prop-diamond-implies-continuum-hypothesis, cor-v-equals-l-gives-a-suslin-tree, thm-suslin-tree-implies-suslin-line, def-suslin-hypothesis-and-suslin-algebra, thm-formal-relative-consistency-from-verified-proof-reduction, def-arithmetic-provability-and-consistency, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

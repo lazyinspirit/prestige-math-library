@@ -2,7 +2,7 @@
 id: lem-nice-refinement-exists-and-is-not-lindelof
 kind: lemma
 title: Nice refinements exist and are regular but not Lindelof
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-ordered-fundamental-space-and-nice-refinement
@@ -18,6 +18,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Hart–Kunen, Ultra Strong S-Spaces, Lemmas 4.5, 4.8 and 4.12, printed pp. 96–100"

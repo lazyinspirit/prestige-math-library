@@ -2,12 +2,13 @@
 id: ex-thom-isomorphism-for-the-tautological-complex-line-over-cp-infinity
 kind: example
 title: Thom isomorphism for the tautological complex line over CP infinity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle, thm-milnor-join-model-is-a-contractible-free-g-space, def-r-oriented-vector-bundle-and-orientation-local-system, thm-thom-isomorphism-for-oriented-vector-bundles, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

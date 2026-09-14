@@ -2,7 +2,7 @@
 id: thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory
 kind: theorem
 title: Complex K-theory is a two-periodic generalized cohomology theory
-status: draft
+status: published
 origin: pipeline
 deps: [prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant, thm-reduced-k-theory-exact-sequence-of-a-cofibration, def-external-product-in-complex-k-theory, def-negative-degree-complex-k-groups, thm-complex-bott-periodicity, cor-complex-k-theory-of-spheres, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

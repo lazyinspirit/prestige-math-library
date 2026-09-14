@@ -2,7 +2,7 @@
 id: thm-moore-oscillation-block-lemma
 kind: theorem
 title: The oscillation block lemma
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-moore-club-extension-for-minimal-walks
@@ -17,6 +17,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Moore, A solution to the L space problem, Section 4, Lemma 4.1 and proof, printed pp. 10–14"

@@ -2,7 +2,7 @@
 id: ex-prikry-bounded-name-fusion
 kind: example
 title: A bounded-name direct-extension fusion
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-prikry-property
@@ -16,6 +16,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

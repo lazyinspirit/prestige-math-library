@@ -2,7 +2,7 @@
 id: lem-circle-and-path-loop-models-for-eilenberg-maclane-induction
 kind: lemma
 title: Circle and path-loop models for Eilenberg–Mac Lane induction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-mapping-path-factorization, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, thm-existence-and-homotopy-uniqueness-of-eilenberg-maclane-spaces, cor-real-line-is-universal-cover-of-circle, lem-covering-homotopies-lift-by-finite-local-strips, thm-fundamental-group-of-the-circle, cor-convex-subsets-of-rn-are-contractible, def-axiom-of-choice]
@@ -10,6 +10,8 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: Rolf Schön, Fibrations Over a CWh-Base

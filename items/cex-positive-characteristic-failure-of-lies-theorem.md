@@ -2,7 +2,7 @@
 id: cex-positive-characteristic-failure-of-lies-theorem
 kind: counterexample
 title: Positive-characteristic failure of Lie's theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-lies-theorem, def-derived-series-and-solvable-lie-algebra, def-representation-of-a-lie-algebra, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

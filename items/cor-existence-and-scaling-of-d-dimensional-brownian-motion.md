@@ -2,7 +2,7 @@
 id: cor-existence-and-scaling-of-d-dimensional-brownian-motion
 kind: corollary
 title: "Existence and scaling of $d$-dimensional Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-d-dimensional-brownian-motion, thm-existence-of-continuous-brownian-motion, def-wiener-measure-on-continuous-path-space, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, cor-countable-independent-copies-exist, lem-ac-supplies-sequential-choices-for-probability-constructions, thm-brownian-scaling, lem-measurable-functions-preserve-independence, def-coordinate-maps-and-cylinder-sigma-algebra, lem-finite-coordinate-cylinders-form-a-pi-system, lem-law-of-a-random-element-is-a-probability-measure, lem-finite-measure-uniqueness-on-a-pi-system, def-axiom-of-choice]
 proof_strategy: constructive
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

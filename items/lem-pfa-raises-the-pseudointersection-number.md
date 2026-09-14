@@ -2,7 +2,7 @@
 id: lem-pfa-raises-the-pseudointersection-number
 kind: lemma
 title: "PFA implies the pseudointersection number exceeds omega-one"
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-ideals-pid-pseudointersection-number-and-s-spaces, cor-pfa-implies-ma-aleph-one-and-suslin-hypothesis, def-martins-axiom, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

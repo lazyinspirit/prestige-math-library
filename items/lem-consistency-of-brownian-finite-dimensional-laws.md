@@ -2,7 +2,7 @@
 id: lem-consistency-of-brownian-finite-dimensional-laws
 kind: lemma
 title: "Consistency of Brownian finite-dimensional laws"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-positive-semidefiniteness-of-the-brownian-covariance-kernel, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

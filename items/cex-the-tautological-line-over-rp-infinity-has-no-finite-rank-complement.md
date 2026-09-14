@@ -2,7 +2,7 @@
 id: cex-the-tautological-line-over-rp-infinity-has-no-finite-rank-complement
 kind: counterexample
 title: The tautological line over RP∞ has no finite-rank complement
-status: draft
+status: published
 origin: pipeline
 deps: [ex-tautological-real-and-complex-lines-over-projective-space, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, thm-schubert-cells-give-the-stable-grassmannian-cw-structure, lem-real-projective-space-cellular-homology-and-pinch-map, thm-cellular-homology-computes-singular-homology, cor-homotopic-maps-induce-the-same-map-on-singular-homology, def-cw-complex-with-closure-finiteness-and-weak-topology, def-compactly-generated-conventions-for-based-homotopy, def-axiom-of-choice]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

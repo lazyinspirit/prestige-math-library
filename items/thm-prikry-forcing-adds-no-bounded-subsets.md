@@ -2,7 +2,7 @@
 id: thm-prikry-forcing-adds-no-bounded-subsets
 kind: theorem
 title: Prikry forcing adds no bounded subsets of kappa
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-prikry-property
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

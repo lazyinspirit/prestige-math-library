@@ -2,7 +2,7 @@
 id: lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments
 kind: lemma
 title: "Brownian covariance is equivalent to independent stationary normal increments"
-status: draft
+status: published
 origin: pipeline
 deps: [def-gaussian-process, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, lem-characteristic-function-of-a-normal-law, lem-characteristic-functions-under-affine-maps-and-independent-sums, thm-uniqueness-of-a-law-from-its-characteristic-function, thm-factorization-of-expectations-for-independent-variables, thm-rectangle-criterion-for-independent-random-elements, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

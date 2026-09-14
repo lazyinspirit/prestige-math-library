@@ -2,7 +2,7 @@
 id: ex-mobius-and-trivial-real-lines-over-the-circle
 kind: example
 title: The Möbius and trivial real lines over the circle
-status: draft
+status: published
 origin: pipeline
 deps: [thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: def-reduced-complex-k-theory
 kind: definition
 title: Reduced complex K-theory
-status: draft
+status: published
 origin: pipeline
 deps: [def-grothendieck-ring-structure-and-rank-map]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

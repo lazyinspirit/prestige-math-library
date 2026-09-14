@@ -2,7 +2,7 @@
 id: lem-nowhere-separable-suslin-line-nested-interval-tree
 kind: lemma
 title: "Nested intervals form a Suslin tree"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-suslin-line-nowhere-separable-quotient, def-set-theoretic-tree-and-levels, def-aronszajn-suslin-and-special-tree, def-axiom-of-choice, thm-transfinite-recursion, thm-countable-union-of-countable]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

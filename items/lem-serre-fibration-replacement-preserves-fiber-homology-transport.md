@@ -2,12 +2,13 @@
 id: lem-serre-fibration-replacement-preserves-fiber-homology-transport
 kind: lemma
 title: Serre-fibration replacement preserves fiber homology transport
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-hurewicz-and-serre-fibrations, thm-mapping-path-factorization, def-homotopy-fiber-of-a-map, prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace, lem-interval-exponential-law-and-quotient-homotopies, lem-a-weak-equivalence-of-cw-complexes-has-vanishing-relative-homotopy-groups, lem-relative-cubical-disk-model-and-compression, prop-relative-cw-inclusions-are-cofibrations, lem-finite-choice, lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex, def-relative-singular-homology, thm-singular-chain-homotopy-formula, thm-long-exact-sequence-of-a-pair-in-singular-homology, thm-quotient-universal-property, def-fiber-transport-and-monodromy-action, prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: ai-altered

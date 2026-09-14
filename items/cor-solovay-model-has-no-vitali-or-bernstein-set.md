@@ -2,7 +2,7 @@
 id: cor-solovay-model-has-no-vitali-or-bernstein-set
 kind: corollary
 title: The Solovay model has no Vitali or Bernstein set
-status: draft
+status: published
 origin: pipeline
 deps: [thm-every-solovay-model-set-of-reals-is-lebesgue-measurable, thm-every-uncountable-solovay-model-set-of-reals-has-a-perfect-subset, thm-solovay-inner-model-satisfies-dependent-choice, thm-choice-implies-dependent-implies-countable-choice, thm-countable-union-of-countable, thm-r-uncountable, def-vitali-set-on-the-unit-interval, def-bernstein-set-on-r, def-measure, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-finite-and-countable-subadditivity-of-measures, thm-lebesgue-measure-of-a-box-of-every-kind, thm-rationals-countable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

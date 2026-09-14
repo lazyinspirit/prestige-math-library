@@ -2,7 +2,7 @@
 id: def-laver-guided-proper-bookkeeping-iteration
 kind: definition
 title: "Laver-guided proper bookkeeping iteration"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-support-forcing-iteration, def-lc-laver-anticipation-function, thm-lc-laver-function-existence, def-cohen-collapse-and-levy-collapse-forcings, def-countable-model-generic-master-condition-and-proper-poset]
 justified_by: []
@@ -10,6 +10,8 @@ forward_refs: []
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Cummings, Iterated Forcing and Elementary Embeddings, proof of Theorem 24.11, pp.99-101"

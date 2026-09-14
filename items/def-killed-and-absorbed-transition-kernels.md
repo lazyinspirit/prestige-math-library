@@ -2,7 +2,7 @@
 id: def-killed-and-absorbed-transition-kernels
 kind: definition
 title: "Killed and absorbed transition kernels"
-status: draft
+status: published
 origin: pipeline
 deps: [def-measure-kernel-and-probability-kernel]
 proof_strategy: definition
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

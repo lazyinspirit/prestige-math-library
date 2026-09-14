@@ -2,7 +2,7 @@
 id: cor-feferman-model-refutes-bpi
 kind: corollary
 title: The tail-flip symmetric model refutes BPI
-status: draft
+status: published
 origin: pipeline
 deps: [cor-feferman-model-has-no-free-ultrafilter-on-omega, def-boolean-prime-ideal-principle, thm-bpi-equivalent-to-set-ultrafilter-lemma, def-ultrafilter]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

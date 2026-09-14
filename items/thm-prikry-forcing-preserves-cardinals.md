@@ -2,7 +2,7 @@
 id: thm-prikry-forcing-preserves-cardinals
 kind: theorem
 title: Prikry forcing preserves every cardinal
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-prikry-forcing-adds-no-bounded-subsets
@@ -21,6 +21,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

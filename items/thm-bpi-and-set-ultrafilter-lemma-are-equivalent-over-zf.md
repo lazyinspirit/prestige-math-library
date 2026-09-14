@@ -2,13 +2,14 @@
 id: thm-bpi-and-set-ultrafilter-lemma-are-equivalent-over-zf
 kind: theorem
 title: "BPI and the set ultrafilter lemma are equivalent over ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-prime-ideal-principle, def-boolean-ideals-filters-and-primality, def-ultrafilter, lem-finite-partial-prime-ideal-extension]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

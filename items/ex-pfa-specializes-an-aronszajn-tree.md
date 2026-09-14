@@ -2,7 +2,7 @@
 id: ex-pfa-specializes-an-aronszajn-tree
 kind: example
 title: "PFA specializes an Aronszajn tree"
-status: draft
+status: published
 origin: pipeline
 deps: [def-proper-forcing-axiom, thm-ccc-and-countably-closed-forcings-are-proper, thm-aronszajn-specialization-poset-ccc, lem-specialization-dense-domains-and-union, thm-hessenberg, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

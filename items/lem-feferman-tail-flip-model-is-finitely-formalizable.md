@@ -2,7 +2,7 @@
 id: lem-feferman-tail-flip-model-is-finitely-formalizable
 kind: lemma
 title: The tail-flip symmetric model is finitely formalizable
-status: draft
+status: published
 origin: pipeline
 deps: [thm-feferman-definability-union-is-a-zf-model, cor-feferman-model-has-no-free-ultrafilter-on-omega, cor-feferman-model-refutes-bpi, lem-forcing-transfer-for-finite-zfc-fragments, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

@@ -2,7 +2,7 @@
 id: cex-finite-bit-flips-cannot-defeat-a-free-ultrafilter
 kind: counterexample
 title: Finite bit flips cannot defeat a free ultrafilter
-status: draft
+status: published
 origin: pipeline
 deps: [def-ultrafilter, thm-ultrafilter-characterisation, def-set-difference-and-symmetric-difference]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

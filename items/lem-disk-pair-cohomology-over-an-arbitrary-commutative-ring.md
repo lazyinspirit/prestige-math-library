@@ -2,12 +2,13 @@
 id: lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring
 kind: lemma
 title: Disk-pair cohomology over an arbitrary commutative ring
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms, thm-mayer-vietoris-sequence-in-singular-cohomology, thm-long-exact-sequence-of-a-pair-in-singular-cohomology]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

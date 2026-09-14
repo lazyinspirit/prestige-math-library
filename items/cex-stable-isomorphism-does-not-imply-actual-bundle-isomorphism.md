@@ -2,7 +2,7 @@
 id: cex-stable-isomorphism-does-not-imply-actual-bundle-isomorphism
 kind: counterexample
 title: Stable isomorphism does not imply actual bundle isomorphism
-status: draft
+status: published
 origin: pipeline
 deps: [def-vector-bundle-map-section-subbundle-and-isomorphism, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, thm-no-nowhere-zero-tangent-vector-field-on-an-even-sphere]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

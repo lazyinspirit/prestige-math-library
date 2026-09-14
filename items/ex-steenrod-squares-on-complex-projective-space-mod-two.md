@@ -70,21 +70,15 @@ formula $Sq^k(xy)=\sum_{s+t=k}Sq^s(x)Sq^t(y)$.
 
 **Proof technique:** total Cartan and comparison of homogeneous degrees.
 
-1.1 The total square of the degree-two generator is $Sq(c)=c+c^2$. [F1, F2, F3]
-Normalization gives the degree-two term $Sq^0(c)=c$, and the top square gives
-the degree-four term $Sq^2(c)=c^2$. The intermediate class $Sq^1(c)$ lies in
-the zero group $H^3(\mathbb {CP}^{\infty};\mathbb F_2)$ from [F1], and
-instability removes every higher component.
+1.1 The total square of the degree-two generator is $Sq(c)=c+c^2$. Normalization gives the degree-two term $Sq^0(c)=c$, and the top square gives the degree-four term $Sq^2(c)=c^2$. The intermediate class $Sq^1(c)$ lies in the zero group $H^3(\mathbb {CP}^{\infty};\mathbb F_2)$ from [F1], and instability removes every higher component. [F1, F2, F3]
 
-2.1 The total square is multiplicative on powers of $c$. [F2, F4, step 1.1]
-Summing the finite Cartan identities and regrouping their finite terms gives
+2.1 The total square is multiplicative on powers of $c$. Summing the finite Cartan identities and regrouping their finite terms gives [F2, F4, step 1.1]
 
 $$Sq(xy)=\sum_k\sum_{s+t=k}Sq^s(x)Sq^t(y)=Sq(x)Sq(y).$$
 
 Starting with $Sq(1)=1$, finite induction yields $Sq(c^j)=Sq(c)^j$.
 
-3.1 Homogeneous components give both the even formula and odd vanishing. [F1, step 1.1, step 2.1]
-The binomial theorem gives
+3.1 Homogeneous components give both the even formula and odd vanishing. The binomial theorem gives [F1, step 1.1, step 2.1]
 
 $$Sq(c^j)=(c+c^2)^j=\sum_{q=0}^j\binom jq c^{j+q}.$$
 
@@ -93,9 +87,7 @@ therefore $\binom ji c^{j+i}$, and every component of degree $2j+r$ for odd
 $r$ is zero. When $i>j$, the relevant binomial coefficient is zero, agreeing
 with instability since $2i>2j$.
 
-4.1 Restriction gives the finite formulas and their truncation. [F1, F5, F6, step 3.1]
-For $i_n:\mathbb {CP}^n\hookrightarrow\mathbb {CP}^{\infty}$, naturality
-gives
+4.1 Restriction gives the finite formulas and their truncation. For $i_n:\mathbb {CP}^n\hookrightarrow\mathbb {CP}^{\infty}$, naturality gives [F1, F5, F6, step 3.1]
 
 $$Sq^s(c_n^j)=Sq^s(i_n^*c^j)=i_n^*Sq^s(c^j).$$
 
@@ -104,12 +96,4 @@ restricts to the two claimed formulas, and the relation $c_n^{n+1}=0$ makes
 the even right side zero when $j+i>n$. If $j>n$, the input and every displayed
 right side already vanish.
 
-5.1 The boundary and choice conventions are complete. [F1, F2, F3, F5, F6, A1, step 1.1, step 2.1, step 3.1, step 4.1]
-For $j=0$, only $Sq^0(1)=1$ survives. For $i=0$ the formula is
-$Sq^0(c^j)=c^j$; for $i=j$ it is the top square
-$Sq^{2j}(c^j)=c^{2j}$; and $i>j$ is zero. Odd indices include $r=1$ and
-are zero even before finite truncation. The point case $n=0$, the first
-truncated exponent $j+i=n+1$, zero inputs, and nonemptiness are explicit.
-Degenerate singular simplices are included in the natural operations [F5].
-AC is inherited only from [F1], while every sum and induction here is finite.
-No biconditional or converse is asserted. ∎
+5.1 The boundary and choice conventions are complete. For $j=0$, only $Sq^0(1)=1$ survives. For $i=0$ the formula is $Sq^0(c^j)=c^j$; for $i=j$ it is the top square $Sq^{2j}(c^j)=c^{2j}$; and $i>j$ is zero. Odd indices include $r=1$ and are zero even before finite truncation. The point case $n=0$, the first truncated exponent $j+i=n+1$, zero inputs, and nonemptiness are explicit. Degenerate singular simplices are included in the natural operations [F5]. AC is inherited only from [F1], while every sum and induction here is finite. No biconditional or converse is asserted. [F1, F2, F3, F5, F6, A1, step 1.1, step 2.1, step 3.1, step 4.1] ∎

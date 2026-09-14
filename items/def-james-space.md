@@ -2,7 +2,7 @@
 id: def-james-space
 kind: definition
 title: "James space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

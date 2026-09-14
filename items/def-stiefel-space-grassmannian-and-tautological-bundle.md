@@ -2,13 +2,14 @@
 id: def-stiefel-space-grassmannian-and-tautological-bundle
 kind: definition
 title: Stiefel spaces, Grassmannians, and tautological bundles
-status: draft
+status: published
 origin: pipeline
 deps: [def-frame-bundle-and-associated-vector-bundle, thm-vector-bundles-glued-from-transition-cocycles, def-cw-complex-with-closure-finiteness-and-weak-topology]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

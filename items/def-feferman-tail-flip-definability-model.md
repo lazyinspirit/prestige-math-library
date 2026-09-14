@@ -2,13 +2,14 @@
 id: def-feferman-tail-flip-definability-model
 kind: definition
 title: The tail-flip hereditary-symmetric model
-status: draft
+status: published
 origin: pipeline
 deps: [def-cohen-collapse-and-levy-collapse-forcings, def-symmetric-forcing-system-and-hereditarily-symmetric-names, def-set-difference-and-symmetric-difference, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

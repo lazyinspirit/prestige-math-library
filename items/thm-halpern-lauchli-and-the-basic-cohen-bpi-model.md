@@ -2,7 +2,7 @@
 id: thm-halpern-lauchli-and-the-basic-cohen-bpi-model
 kind: theorem
 title: The Halpern–Läuchli theorem and the basic Cohen BPI model
-status: draft
+status: published
 origin: pipeline
 deps: [thm-halpern-lauchli-dense-matrix-dichotomy, thm-basic-cohen-model-satisfies-bpi-and-fails-choice]
 proof_strategy: composition
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

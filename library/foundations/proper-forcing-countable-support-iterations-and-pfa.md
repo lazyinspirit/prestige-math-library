@@ -1,7 +1,7 @@
 ---
 page: proper-forcing-countable-support-iterations-and-pfa
 title: "Proper Forcing, Countable-Support Iterations, and PFA"
-status: draft
+status: published
 items:
   - def-countable-support-forcing-iteration
   - def-countable-model-generic-master-condition-and-proper-poset

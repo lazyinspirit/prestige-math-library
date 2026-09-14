@@ -2,7 +2,7 @@
 id: cor-formal-consistency-of-pfa-from-a-supercompact
 kind: corollary
 title: "Formal consistency of PFA from a supercompact"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-formal-pfa-iteration-verification-compiler, thm-formal-relative-consistency-from-verified-proof-reduction]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

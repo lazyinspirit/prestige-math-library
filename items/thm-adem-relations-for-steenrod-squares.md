@@ -88,9 +88,7 @@ natural map
 $H^r(-;\mathbb F_2)\to H^{r+a+b}(-;\mathbb F_2)$. All its sums are finite,
 and every operation appearing in it has a nonnegative index.
 
-1.2 Compute the circle class used for descent. [F2, F8]
-Regard $S^1$ as the boundary of a triangle, with vertices $v_0,v_1,v_2$ and
-edges $e_{01},e_{12},e_{02}$. Over $\mathbb F_2$ its cellular boundary is
+1.2 Compute the circle class used for descent. Regard $S^1$ as the boundary of a triangle, with vertices $v_0,v_1,v_2$ and edges $e_{01},e_{12},e_{02}$. Over $\mathbb F_2$ its cellular boundary is [F2, F8]
 
 $$
 \partial e_{ij}=v_i+v_j.
@@ -112,11 +110,7 @@ $\bar v\in H^1_{\mathrm{cell}}(S^1;\mathbb F_2)$. By [F2], there is a unique
 nonzero $v\in H^1_{\mathrm{sing}}(S^1;\mathbb F_2)$ with
 $\iota^*v=\bar v$, and $H^d(S^1;\mathbb F_2)=0$ for $d>1$.
 
-2.1 Establish the residual identity in unbounded finite degrees. [F1, F2, step 1.1]
-Fix $s$ with $2^s>a$, put $r_s=2^s-1+b$, let $K$ be a finite oriented
-regular cell complex, and let $u\in H^{r_s}_{\mathrm{sing}}(K;\mathbb F_2)$.
-Write $\iota^*$ for the isomorphism of [F2]. Applying it successively to each
-square in step 1.1 gives
+2.1 Establish the residual identity in unbounded finite degrees. Fix $s$ with $2^s>a$, put $r_s=2^s-1+b$, let $K$ be a finite oriented regular cell complex, and let $u\in H^{r_s}_{\mathrm{sing}}(K;\mathbb F_2)$. Write $\iota^*$ for the isomorphism of [F2]. Applying it successively to each square in step 1.1 gives [F1, F2, step 1.1]
 
 $$
 \iota^*R_{r_s}(u)=R^{\mathrm{cyc}}_{r_s}(\iota^*u).
@@ -126,9 +120,7 @@ The right side is zero by [F1]. Since $\iota^*$ is injective,
 $R_{r_s}(u)=0$. Thus $R_{r_s}=0$ on every finite regular complex for every
 $s$ with $2^s>a$.
 
-2.2 Show that square compositions preserve the circle factor. [F4, F5, step 1.2]
-For a finite regular complex $K$, a class $u\in H^d(K;\mathbb F_2)$, and
-$k\geq0$, external Cartan gives
+2.2 Show that square compositions preserve the circle factor. For a finite regular complex $K$, a class $u\in H^d(K;\mathbb F_2)$, and $k\geq0$, external Cartan gives [F4, F5, step 1.2]
 
 $$
 Sq^k(u\times v)=\sum_{i+j=k}Sq^i(u)\times Sq^j(v).
@@ -149,10 +141,7 @@ $$
 R_{d+1}(u\times v)=R_d(u)\times v.
 $$
 
-3.1 Descend the identity by one degree. [F7, step 1.2, step 2.2]
-Suppose $r\geq1$ and $R_r=0$ on every finite regular complex. The product of
-two finite regular cell complexes is finite regular, so for every such $K$
-and every $u\in H^{r-1}(K;\mathbb F_2)$,
+3.1 Descend the identity by one degree. Suppose $r\geq1$ and $R_r=0$ on every finite regular complex. The product of two finite regular cell complexes is finite regular, so for every such $K$ and every $u\in H^{r-1}(K;\mathbb F_2)$, [F7, step 1.2, step 2.2]
 
 $$
 0=R_r(u\times v)=R_{r-1}(u)\times v.
@@ -164,32 +153,11 @@ $R_{r-1}(u)\otimes v$. Tensoring an $\mathbb F_2$-vector space with the
 nonzero vector $v$ is injective on the first factor. Hence
 $R_{r-1}(u)=0$, proving the one-degree descent.
 
-4.1 Prove the finite-regular identity in every degree. [step 2.1, step 3.1]
-Given $q\geq0$, choose the least $s$ with both $2^s>a$ and
-$2^s-1+b\geq q$. Step 2.1 gives the identity in degree
-$r_s=2^s-1+b$. Apply step 3.1 exactly $r_s-q$ times. This proves
-$R_q=0$ on every finite regular complex. The construction works separately
-for each $q$ and uses no limit or simultaneous choice.
+4.1 Prove the finite-regular identity in every degree. Given $q\geq0$, choose the least $s$ with both $2^s>a$ and $2^s-1+b\geq q$. Step 2.1 gives the identity in degree $r_s=2^s-1+b$. Apply step 3.1 exactly $r_s-q$ times. This proves $R_q=0$ on every finite regular complex. The construction works separately for each $q$ and uses no limit or simultaneous choice. [step 2.1, step 3.1]
 
-5.1 Extend from finite regular complexes to every space. [F3, F6, step 1.1, step 4.1]
-For the fixed input degree $q$, step 1.1 and [F6] make $R_q$ a natural
-singular-cohomology operation, and step 4.1 makes it zero on every finite
-regular complex. The detection theorem [F3] therefore gives $R_q=0$ on
-every space. Expanding its definition is exactly the formula in the
-statement.
+5.1 Extend from finite regular complexes to every space. For the fixed input degree $q$, step 1.1 and [F6] make $R_q$ a natural singular-cohomology operation, and step 4.1 makes it zero on every finite regular complex. The detection theorem [F3] therefore gives $R_q=0$ on every space. Expanding its definition is exactly the formula in the statement. [F3, F6, step 1.1, step 4.1]
 
-6.1 Empty-space and zero-class inputs give zero, while both finite-sum endpoint indices remain included. [F1, F2, F3, F5, F6, F7, F9, step 1.1, step 1.2, step 2.1, step 2.2, step 3.1, step 4.1, step 5.1]
-The empty space and the zero class give zero on both sides by additivity. On
-a point, all positive-degree input groups vanish, while in degree zero the
-instability clauses in [F5] make every term zero because $a,b>0$. The
-endpoints $j=0$ and $j=\lfloor a/2\rfloor$ are retained. The strict
-inequality $a<2b$ makes every upper binomial index $b-j-1$ nonnegative;
-the stated convention handles every oversized lower index. The values
-$Sq^0=\operatorname{id}$ used at $j=0$ and on the circle are explicit, and
-all above-degree or negative-index squares have the conventions stated in
-[F5] and [F6]. Ordinary singular cohomology, including degenerate singular
-simplices, is used in [F2], [F3], and [F6], so no normalized-chain
-identification is hidden. The theorem is an equality, not a biconditional.
+6.1 Empty-space and zero-class inputs give zero, while both finite-sum endpoint indices remain included. The empty space and the zero class give zero on both sides by additivity. On a point, all positive-degree input groups vanish, while in degree zero the instability clauses in [F5] make every term zero because $a,b>0$. The endpoints $j=0$ and $j=\lfloor a/2\rfloor$ are retained. The strict inequality $a<2b$ makes every upper binomial index $b-j-1$ nonnegative; the stated convention handles every oversized lower index. The values $Sq^0=\operatorname{id}$ used at $j=0$ and on the circle are explicit, and all above-degree or negative-index squares have the conventions stated in [F5] and [F6]. Ordinary singular cohomology, including degenerate singular simplices, is used in [F2], [F3], and [F6], so no normalized-chain identification is hidden. The theorem is an equality, not a biconditional. [F1, F2, F3, F5, F6, F7, F9, step 1.1, step 1.2, step 2.1, step 2.2, step 3.1, step 4.1, step 5.1]
 
 AC from [F9] is used exactly through four suppliers: [F1]'s cyclic and wreath
 carrier comparisons and the field duality used to identify the cyclic basis

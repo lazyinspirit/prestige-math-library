@@ -2,7 +2,7 @@
 id: def-simple-dichotomy-for-omega-one-generated-ideals
 kind: definition
 title: The simple dichotomy for omega-one-generated ideals
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-cardinal
@@ -12,6 +12,8 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 proof_strategy: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Abraham, Three applications of ideal dichotomy, slides 2–4"

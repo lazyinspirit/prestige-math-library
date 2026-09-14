@@ -2,7 +2,7 @@
 id: lem-continuous-path-space-is-polish
 kind: lemma
 title: "Under countable choice, continuous path space is Polish"
-status: draft
+status: published
 origin: pipeline
 deps: [def-uniform-on-compacts-metric-on-continuous-path-space, thm-geometric-series, lem-geometric-sequence-null, thm-function-space-is-complete-for-a-complete-target, thm-uniform-limit-theorem, thm-heine-cantor-metric, thm-euclidean-space-complete, thm-heine-borel-rn, thm-rationals-countable, lem-rat-embeds-dense, thm-product-of-countable, thm-countable-union-of-countable, thm-of-archimedean, def-polish-space, def-countable-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

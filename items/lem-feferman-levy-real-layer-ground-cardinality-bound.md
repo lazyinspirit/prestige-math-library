@@ -2,7 +2,7 @@
 id: lem-feferman-levy-real-layer-ground-cardinality-bound
 kind: lemma
 title: Each real layer has a ground-model cardinal bound
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-levy-real-layers, lem-feferman-levy-fixed-boolean-values-come-from-initial-layers, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces
 kind: theorem
 title: "PID plus p greater than omega-one eliminates S-spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-p-ideals-pid-pseudointersection-number-and-s-spaces, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: literature-derived
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-feferman-levy-reals-are-a-countable-union-of-countable-sets
 kind: theorem
 title: The Feferman–Levy reals are a countable union of countable sets
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [lem-feferman-levy-bounded-layer-support, def-feferman-levy-real-layers, lem-each-feferman-levy-real-layer-is-countable, thm-hereditarily-symmetric-interpretations-form-a-zf-model]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

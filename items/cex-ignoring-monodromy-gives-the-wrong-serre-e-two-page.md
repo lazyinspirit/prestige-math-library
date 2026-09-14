@@ -2,7 +2,7 @@
 id: cex-ignoring-monodromy-gives-the-wrong-serre-e-two-page
 kind: counterexample
 title: Ignoring monodromy gives the wrong Serre E2 page
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [ex-wang-sequence-of-a-mapping-torus, lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients, thm-fundamental-group-of-the-circle, prop-the-first-hurewicz-map-in-degree-one-is-abelianization]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

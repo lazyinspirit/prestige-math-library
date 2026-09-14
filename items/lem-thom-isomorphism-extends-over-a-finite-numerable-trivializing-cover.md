@@ -2,12 +2,13 @@
 id: lem-thom-isomorphism-extends-over-a-finite-numerable-trivializing-cover
 kind: lemma
 title: Thom isomorphism extends over a finite numerable trivializing cover
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-thom-isomorphisms-glue-over-two-trivializing-opens]
 proof_strategy: induction
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: ai-altered

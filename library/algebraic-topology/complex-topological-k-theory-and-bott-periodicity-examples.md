@@ -1,7 +1,7 @@
 ---
 page: complex-topological-k-theory-and-bott-periodicity-examples
 title: Complex Topological K Theory and Bott Periodicity — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-k-theory-of-a-point-and-the-empty-space

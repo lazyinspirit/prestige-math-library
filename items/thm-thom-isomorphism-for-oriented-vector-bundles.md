@@ -2,12 +2,13 @@
 id: thm-thom-isomorphism-for-oriented-vector-bundles
 kind: theorem
 title: Thom isomorphism for oriented vector bundles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence, lem-thom-isomorphism-extends-over-a-finite-numerable-trivializing-cover, thm-numerable-vector-bundles-admit-bundle-metrics, def-r-oriented-vector-bundle-and-orientation-local-system, lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring, def-homology-and-cohomology-with-local-coefficients, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

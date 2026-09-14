@@ -2,12 +2,13 @@
 id: def-serre-class-ring-ideal-and-mod-c-morphism
 kind: definition
 title: Serre classes, Serre rings, ideals, and modulo-C morphisms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-snake-lemma-for-modules, def-tensor-product-of-modules-by-generators-and-relations]
 proof_strategy: definition
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -55,7 +56,9 @@ zero homomorphisms, and maps with zero source or target.
 
 For composable $A\xrightarrow{f}B\xrightarrow{g}C$, the standard kernel-cokernel
 sequence
-$$0\to\ker f\to\ker(gf)\to\ker g\to\operatorname{coker}f\to\operatorname{coker}(gf)\to\operatorname{coker}g\to0 \tag{1}$$
+$$
+0\to\ker f\to\ker(gf)\to\ker g\to\operatorname{coker}f\to\operatorname{coker}(gf)\to\operatorname{coker}g\to0 \tag{1}
+$$
 is exact by the element construction in
 [[thm-snake-lemma-for-modules]]. Subgroups, quotients, and extensions in (1)
 show that $\mathcal C$-isomorphisms are closed under composition and satisfy

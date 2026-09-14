@@ -2,7 +2,7 @@
 id: ex-first-difference-order-on-a-binary-branching-tree
 kind: example
 title: "First-difference order on a binary tree"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-suslin-tree-branch-first-difference-order]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

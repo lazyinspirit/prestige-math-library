@@ -2,13 +2,14 @@
 id: def-pullback-vector-bundle-and-pullback-section
 kind: definition
 title: Pullback vector bundles and sections
-status: draft
+status: published
 origin: pipeline
 deps: [def-real-and-complex-topological-vector-bundle, def-vector-bundle-map-section-subbundle-and-isomorphism, def-subspace-topology-top]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

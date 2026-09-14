@@ -74,22 +74,9 @@ product, and its pullback along the diagonal is the cup product
 **Proof technique:** evaluate Cartan coherence and pull back the external
 formula along the diagonal.
 
-1.1 Reduce to the normalized face-formula system. [F1, F3, F4, F5, F6]
-Because of [F3], compute all squares with the explicit system in
-Medina--Mardones, Definition 7 and Theorem 10 (printed pages 8--9). It has
-$D_r(s)=0$ when $r$ exceeds the dimension of the simplex $s$. By [F5], the
-external class $[a]\times[b]$ is represented by the Alexander--Whitney
-external cochain. Since shuffle induces the inverse cohomology isomorphism by
-[F6], it suffices to compare the two sides after precomposition with shuffle.
-If $k<0$, every square in the formula is zero by definition. If $k>p+q$, at
-least one of $i>p$ or $j>q$ holds in each summand, so [F1] makes both sides
-zero. Hence assume $0\leq k\leq p+q$ and put $\ell=p+q-k$.
+1.1 Reduce to the normalized face-formula system. Because of [F3], compute all squares with the explicit system in Medina--Mardones, Definition 7 and Theorem 10 (printed pages 8--9). It has $D_r(s)=0$ when $r$ exceeds the dimension of the simplex $s$. By [F5], the external class $[a]\times[b]$ is represented by the Alexander--Whitney external cochain. Since shuffle induces the inverse cohomology isomorphism by [F6], it suffices to compare the two sides after precomposition with shuffle. If $k<0$, every square in the formula is zero by definition. If $k>p+q$, at least one of $i>p$ or $j>q$ holds in each summand, so [F1] makes both sides zero. Hence assume $0\leq k\leq p+q$ and put $\ell=p+q-k$. [F1, F3, F4, F5, F6]
 
-2.1 Evaluate the coherent comparison. [F2, step 1.1]
-Pair the equation for $L_\ell-R_\ell$ in [F2] with
-$\lambda=a\otimes b\otimes a\otimes b$. Since $a,b$ are cocycles,
-$\lambda d=0$. Also $\lambda Q=\lambda$, so the two evaluations of
-$QH_{\ell-1}$ and $H_{\ell-1}$ cancel in characteristic two. Therefore
+2.1 Evaluate the coherent comparison. Pair the equation for $L_\ell-R_\ell$ in [F2] with $\lambda=a\otimes b\otimes a\otimes b$. Since $a,b$ are cocycles, $\lambda d=0$. Also $\lambda Q=\lambda$, so the two evaluations of $QH_{\ell-1}$ and $H_{\ell-1}$ cancel in characteristic two. Therefore [F2, step 1.1]
 
 $$
 \lambda L_\ell-\lambda R_\ell=\delta(\lambda H_\ell).
@@ -98,8 +85,7 @@ $$
 The left term is the shuffled cochain representing $Sq^k([a]\times[b])$;
 the right term is cohomologous to it.
 
-3.1 Identify every convolution term. [F4, step 2.1]
-For $r+s=\ell$, regrouping the four factors gives
+3.1 Identify every convolution term. For $r+s=\ell$, regrouping the four factors gives [F4, step 2.1]
 
 $$
 \lambda\,\tau(D_r\otimes T^rD_s)=(a\smile_r a)\otimes(b\smile_s b),
@@ -113,9 +99,7 @@ put $i=p-r$ and $j=q-s$. Then $i,j\geq0$, $i+j=k$, and [F4] identifies their
 classes as $Sq^i[a]$ and $Sq^j[b]$. Step 2.1 and the shuffle isomorphism prove
 the external Cartan formula.
 
-4.1 Pull back along the diagonal. [F5, F7, step 3.1]
-For two classes $x,y$ on $X$, [F5] gives
-$x\smile y=\Delta^*(x\times y)$. Naturality [F7] and step 3.1 give
+4.1 Pull back along the diagonal. For two classes $x,y$ on $X$, [F5] gives $x\smile y=\Delta^*(x\times y)$. Naturality [F7] and step 3.1 give [F5, F7, step 3.1]
 
 $$
 Sq^k(x\smile y)=\Delta^*Sq^k(x\times y)=\sum_{i+j=k}\Delta^*(Sq^ix\times Sq^jy)=\sum_{i+j=k}Sq^ix\smile Sq^jy.

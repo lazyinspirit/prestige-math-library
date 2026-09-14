@@ -2,7 +2,7 @@
 id: lem-suslin-line-nowhere-separable-quotient
 kind: lemma
 title: "Nowhere-separable quotient of a Suslin line"
-status: draft
+status: published
 origin: pipeline
 deps: [def-suslin-line-order-interface, lem-linear-order-completion-existence-uniqueness-and-density, thm-countable-union-of-countable, def-axiom-of-choice, thm-zorn]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

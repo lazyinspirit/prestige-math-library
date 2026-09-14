@@ -2,7 +2,7 @@
 id: thm-fundamental-product-theorem-for-complex-k-theory
 kind: theorem
 title: Fundamental product theorem for complex K-theory
-status: draft
+status: published
 origin: pipeline
 deps: [def-external-product-in-complex-k-theory, lem-normalized-clutching-data-for-bundles-over-x-times-s-two, lem-uniform-laurent-approximation-through-bundle-automorphisms, lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization, lem-polynomial-clutching-families-stabilize-to-linear-clutching, lem-linear-clutching-splits-into-eigenbundles, thm-hopf-line-calculation-of-k-zero-of-the-two-sphere, thm-homotopy-invariance-of-vector-bundle-pullback, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

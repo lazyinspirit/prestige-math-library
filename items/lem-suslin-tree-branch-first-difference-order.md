@@ -2,7 +2,7 @@
 id: lem-suslin-tree-branch-first-difference-order
 kind: lemma
 title: "The first-difference order on branches"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-suslin-tree-normal-splitting-refinement, lem-normal-set-theoretic-tree-sequence-representation, lem-tree-predecessors-and-common-extensions, thm-rationals-countable, lem-rat-embeds-dense, thm-countable-union-of-countable, def-axiom-of-choice, thm-zorn]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

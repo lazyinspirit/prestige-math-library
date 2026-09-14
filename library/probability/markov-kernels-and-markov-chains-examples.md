@@ -1,7 +1,7 @@
 ---
 page: markov-kernels-and-markov-chains-examples
 title: "Markov Kernels and Markov Chains — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-iid-sequences-as-markov-chains-with-state-independent-kernel, ex-deterministic-dynamical-system-as-a-markov-kernel, ex-simple-random-walk-transition-kernel, ex-absorbing-gamblers-ruin-chain, ex-gaussian-ar-one-chain, ex-random-mapping-representation-for-a-finite-transition-matrix, cex-identical-one-step-marginals-do-not-determine-a-markov-chain, cex-a-process-with-the-right-transition-probabilities-relative-to-its-natural-filtration-may-fail-for-a-larger-filtration, cex-time-inhomogeneous-chain-cannot-be-encoded-by-one-kernel-without-enlarging-state]
 ---

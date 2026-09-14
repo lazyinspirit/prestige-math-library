@@ -2,12 +2,13 @@
 id: thm-serre-class-fibration-transfer
 kind: theorem
 title: Serre-class transfer through a simply connected fibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class, thm-universal-coefficient-theorem-for-homology-over-a-pid, lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free, def-serre-class-ring-ideal-and-mod-c-morphism, prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion, def-serre-filtration-of-the-total-space-over-base-skeleta, lem-relative-homology-over-one-base-cell-is-the-shifted-fiber-homology, lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived
@@ -68,7 +69,7 @@ hypothesis in the freeness lemma cited in [F4].
 
 1.1 Under the trivial-action hypothesis, [F1] gives $E^2_{s,t}=H_s(B;H_t(F))$. If $0<t\leq N$, the coefficient group $M=H_t(F)$ lies in the ideal $\mathcal C$. Both the tensor and Tor terms in [F4] then lie in $\mathcal C$ even though the base homology groups need not. Extension closure gives $E^2_{s,t}\in\mathcal C$ for every $s$ and every such $t$. [A1, F1, F2, F4]
 
-1.2 For clause 2, take the basepoint as a zero-cell and filter the relative chain complex $C_*(E,F)$ by the images of $C_*(E_s,F)$, using the skeletal spaces in [F6]. The exact-couple construction applies to this quotient filtration. The cell calculation of [F6] is unchanged on every open cell not belonging to the distinguished subcomplex $*$, while the basepoint cell and its fiber are quotiented out. Its first page is therefore the relative cellular complex $C_s^{\mathrm{cell}}(B,*;H_t(F))$, and the first differential is its local-coefficient boundary. Since $B$ is simply connected, the system is constant, so $$E^2_{s,t}=H_s(B,*;H_t(F))\Longrightarrow H_{s+t}(E,F). \tag{1}$$ The convergence proof is the relative version of the finite-support argument: each relative cycle and each chosen boundary primitive is a finite singular chain, its projection meets a finite base subcomplex, and the first-quadrant differential bounds stabilize its class. Thus the induced filtration on each $H_i(E,F)$ is finite, exhaustive, and has the stable terms of (1) as its quotients. No absolute-to-relative comparison is being assumed. [F1, F6]
+1.2 For clause 2, take the basepoint as a zero-cell and filter the relative chain complex $C_*(E,F)$ by the images of $C_*(E_s,F)$, using the skeletal spaces in [F6]. The exact-couple construction applies to this quotient filtration. The cell calculation of [F6] is unchanged on every open cell not belonging to the distinguished subcomplex $*$, while the basepoint cell and its fiber are quotiented out. Its first page is therefore the relative cellular complex $C_s^{\mathrm{cell}}(B,*;H_t(F))$, and the first differential is its local-coefficient boundary. Since $B$ is simply connected, the system is constant, so $$E^2_{s,t}=H_s(B,*;H_t(F))\Longrightarrow H_{s+t}(E,F). \qquad\text{(1)}$$ The convergence proof is the relative version of the finite-support argument: each relative cycle and each chosen boundary primitive is a finite singular chain, its projection meets a finite base subcomplex, and the first-quadrant differential bounds stabilize its class. Thus the induced filtration on each $H_i(E,F)$ is finite, exhaustive, and has the stable terms of (1) as its quotients. No absolute-to-relative comparison is being assumed. [F1, F6]
 
 2.1 Fix $i\leq N$. Every stable filtration quotient of $H_i(E)$ except the bottom-row quotient has $t>0$ and hence lies in $\mathcal C$ by step 1.1 and [F3]. Their finite extension, the kernel of the base edge, lies in $\mathcal C$. The stable subgroup $E^\infty_{i,0}\subseteq E^2_{i,0}$ is obtained by successively taking kernels of the finitely many outgoing bottom-row differentials. Each target has fiber degree $r-1>0$ and total degree $i-1$, hence lies in $\mathcal C$; the image is a subquotient in $\mathcal C$. Successive short exact sequences show $E^2_{i,0}/E^\infty_{i,0}\in\mathcal C$. Since $F$ is path-connected, $E^2_{i,0}=H_i(B;\mathbb Z)$, and [F5] identifies the resulting edge with $p_*$. Its kernel and cokernel are in $\mathcal C$, proving clause 1. [F1, F2, F3, F5, step 1.1]
 

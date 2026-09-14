@@ -2,7 +2,7 @@
 id: lem-gitik-restriction-amalgamation-and-prikry-property
 kind: lemma
 title: Restriction, amalgamation, and the set-sized Prikry property
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-gitik-strongly-compact-filter-system-and-class-forcing
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

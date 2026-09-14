@@ -2,13 +2,14 @@
 id: def-feferman-levy-real-layers
 kind: definition
 title: The real layers of the Feferman–Levy model
-status: draft
+status: published
 origin: pipeline
 deps: [lem-feferman-levy-fixed-boolean-values-come-from-initial-layers]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

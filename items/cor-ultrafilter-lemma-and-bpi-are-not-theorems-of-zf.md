@@ -2,7 +2,7 @@
 id: cor-ultrafilter-lemma-and-bpi-are-not-theorems-of-zf
 kind: corollary
 title: The Ultrafilter Lemma and BPI are not theorems of ZF
-status: draft
+status: published
 origin: pipeline
 deps: [cor-relative-consistency-of-no-free-ultrafilter-on-omega-over-zf, thm-bpi-equivalent-to-set-ultrafilter-lemma]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

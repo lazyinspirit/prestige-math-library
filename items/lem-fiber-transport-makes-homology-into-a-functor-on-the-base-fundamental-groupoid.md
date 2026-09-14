@@ -2,12 +2,13 @@
 id: lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid
 kind: lemma
 title: Fiber transport is functorial on the base fundamental groupoid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-fiber-homology-local-system-of-a-serre-fibration, lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems, prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent, def-local-system-of-r-modules-and-its-pullback, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

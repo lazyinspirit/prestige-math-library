@@ -2,12 +2,13 @@
 id: def-thom-euler-class-of-an-oriented-vector-bundle
 kind: definition
 title: Thom-defined Euler class of an oriented vector bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-thom-diagonal-and-zero-section-collapse, thm-naturality-and-uniqueness-of-thom-classes, thm-naturality-of-the-singular-cohomology-pair-sequence, def-axiom-of-choice]
 proof_strategy: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

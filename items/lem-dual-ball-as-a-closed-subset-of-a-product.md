@@ -57,11 +57,7 @@ $X=\{0\}$.
 
 1.1 If $f\in B_{X^*}$, then $|f(x)|\leq\lVert x\rVert$, so $E(f)$ belongs to the displayed product; evaluations separate functionals, so $E$ is injective.  By the two initial-topology descriptions, the subspace topology pulled back by $E$ is exactly $\sigma(X^*,X)$ on the ball. [F1, F2, F3]
 
-1.2 Inside the product let $C$ be the set of all $z=(z_x)_{x\in X}$ satisfying
-
-$$z_{x+y}=z_x+z_y,\qquad z_{\lambda x}=\lambda z_x\quad(x,y\in X,\ \lambda\in\mathbb K).$$
-
-Each equality defines a closed set: it is the inverse image of $\{0\}$ under a continuous finite linear combination of coordinate projections.  Hence $C$, their intersection, is closed. [F2]
+1.2 Inside the product let $C$ be the set of all $z=(z_x)_{x\in X}$ satisfying $$z_{x+y}=z_x+z_y,\qquad z_{\lambda x}=\lambda z_x\quad(x,y\in X,\ \lambda\in\mathbb K).$$ Each equality defines a closed set: it is the inverse image of $\{0\}$ under a continuous finite linear combination of coordinate projections.  Hence $C$, their intersection, is closed. [F2]
 
 2.1 Every $E(f)$ lies in $C$.  Conversely, if $z\in C$, then $f_z(x)=z_x$ is linear and its coordinate bound gives $|f_z(x)|\leq\lVert x\rVert$ for every $x$.  Thus $f_z$ is bounded with $\lVert f_z\rVert\leq1$, so $z=E(f_z)$.  Consequently $E[B_{X^*}]=C$. [F3, step 1.2]
 

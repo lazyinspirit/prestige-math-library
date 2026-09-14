@@ -2,7 +2,7 @@
 id: fs-prikry-forcing-is-ccc
 kind: false-statement
 title: "False: Prikry forcing is ccc"
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-prikry-kappa-plus-chain-condition
@@ -14,6 +14,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

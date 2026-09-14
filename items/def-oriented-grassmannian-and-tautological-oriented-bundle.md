@@ -2,13 +2,14 @@
 id: def-oriented-grassmannian-and-tautological-oriented-bundle
 kind: definition
 title: Oriented Grassmannians and the tautological oriented bundle
-status: draft
+status: published
 origin: pipeline
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle, def-oriented-real-vector-bundle-and-oriented-frame-bundle]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

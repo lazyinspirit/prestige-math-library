@@ -2,7 +2,7 @@
 id: cor-countable-union-and-omega-one-regularity-fail-in-the-feferman-levy-model
 kind: corollary
 title: Countable-union and omega-one regularity principles fail
-status: draft
+status: published
 origin: pipeline
 deps: [thm-feferman-levy-reals-are-a-countable-union-of-countable-sets, thm-feferman-levy-reals-remain-uncountable, cor-feferman-levy-omega-one-has-countable-cofinality, cor-countable-choice-and-omega-one-cofinality, def-countable-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

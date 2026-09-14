@@ -2,12 +2,13 @@
 id: cex-an-unoriented-real-bundle-has-no-integral-thom-class
 kind: counterexample
 title: An unoriented real bundle has no integral Thom class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-r-oriented-vector-bundle-and-orientation-local-system, def-thom-class-by-fiberwise-normalization, def-relative-singular-cochain-complex, thm-singular-chain-homotopy-formula, lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring, thm-thom-isomorphism-for-oriented-vector-bundles, def-axiom-of-choice]
 proof_strategy: contradiction
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

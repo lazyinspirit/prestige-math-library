@@ -2,7 +2,7 @@
 id: cor-bounded-harmonic-functions-yield-markov-chain-martingales
 kind: corollary
 title: "Bounded harmonic functions yield Markov-chain martingales"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-countable-state-martingale-problem-characterization, def-discrete-generator-of-a-countable-state-transition-matrix]
 proof_strategy: specialization
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

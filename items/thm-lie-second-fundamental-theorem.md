@@ -2,7 +2,7 @@
 id: thm-lie-second-fundamental-theorem
 kind: theorem
 title: Lie's second fundamental theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-lie-subgroup-lie-subalgebra-correspondence, def-countable-choice, cor-connected-cover-of-a-simply-connected-space-is-trivial, def-simply-connected]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -51,5 +52,7 @@ is one-sheeted ([[cor-connected-cover-of-a-simply-connected-space-is-trivial]]).
 **Proof technique:** integrate the graph.
 
 1.1 The graph $\Gamma_\phi=\{(X,\phi X):X\in\operatorname{Lie}(G)\}$ is a Lie subalgebra of $\operatorname{Lie}(G\times H)$. By [L1] it integrates to a connected immersed subgroup $K\to G\times H$. Projection $p:K\to G$ has identity differential $(X,\phi X)\mapsto X$, an isomorphism, so it is a local diffeomorphism at the identity and therefore everywhere by translation. Its image is an open subgroup of connected $G$, hence all of $G$. [A1, L1, algebra]
+
 2.1 A surjective local-diffeomorphism homomorphism is a covering: choose an identity neighborhood on which it is a diffeomorphism and shrink it so that distinct kernel translates are disjoint; translating gives evenly covered neighborhoods. The Lie group $G$ is locally path-connected, so [L3], connectedness of $K$, and simple connectedness [L2] make this covering one-sheeted; hence $p$ is a Lie-group isomorphism. Define $F$ as the second projection composed with $p^{-1}$. Its graph is $K$, and its identity differential is $\phi$. [L2, L3, step 1.1, algebra]
+
 3.1 If $F_1,F_2:G\to H$ have differential $\phi$, their graphs are connected immersed subgroups of $G\times H$ with Lie algebra $\Gamma_\phi$. Uniqueness in [L1] makes the two immersed images equal; projection to $G$ then forces $F_1=F_2$. This also handles $G$ or $H$ zero-dimensional. Countable choice is used exactly through [L1]'s maximal-leaf construction; all other neighborhood selections are finite. [A1, L1, step 1.1, 2.1] ∎

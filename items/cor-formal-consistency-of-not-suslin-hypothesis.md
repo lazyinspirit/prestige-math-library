@@ -2,7 +2,7 @@
 id: cor-formal-consistency-of-not-suslin-hypothesis
 kind: corollary
 title: "Formal relative consistency of not SH"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-fragment-l-interpretation-with-gch, cor-v-equals-l-gives-a-suslin-tree, thm-suslin-tree-implies-suslin-line, thm-formal-relative-consistency-from-verified-proof-reduction, thm-constructible-inner-model-semantic-and-formal-schema, def-suslin-hypothesis-and-suslin-algebra, def-arithmetic-provability-and-consistency, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

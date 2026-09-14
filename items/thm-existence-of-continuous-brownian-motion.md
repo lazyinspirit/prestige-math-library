@@ -2,7 +2,7 @@
 id: thm-existence-of-continuous-brownian-motion
 kind: theorem
 title: "Existence of continuous Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-kolmogorov-construction-of-the-canonical-gaussian-process, lem-gaussian-even-moment-bound-for-brownian-increments, thm-kolmogorov-continuity-criterion-one-parameter, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-brownian-motion, thm-euclidean-space-complete, def-separable-space, thm-rationals-countable, lem-rat-embeds-dense, thm-finite-and-countable-subadditivity-of-measures, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

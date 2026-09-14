@@ -1,7 +1,7 @@
 ---
 page: complex-topological-k-theory-and-bott-periodicity
 title: Complex Topological K Theory and Bott Periodicity
-status: draft
+status: published
 items:
   - def-whitney-sum-monoid-of-complex-vector-bundles
   - def-complex-topological-k-zero-by-grothendieck-completion

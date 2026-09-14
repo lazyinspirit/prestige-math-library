@@ -2,7 +2,7 @@
 id: fs-ccc-and-proper-are-equivalent
 kind: false-statement
 title: "Ccc and proper are not equivalent"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ccc-and-countably-closed-forcings-are-proper, def-cohen-collapse-and-levy-collapse-forcings, def-poset-ccc-and-knaster-property, thm-countable-union-of-countable, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

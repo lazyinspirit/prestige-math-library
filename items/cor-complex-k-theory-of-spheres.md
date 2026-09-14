@@ -2,7 +2,7 @@
 id: cor-complex-k-theory-of-spheres
 kind: corollary
 title: Complex K-theory of spheres
-status: draft
+status: published
 origin: pipeline
 deps: [thm-complex-bott-periodicity, thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range, thm-hopf-line-calculation-of-k-zero-of-the-two-sphere, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

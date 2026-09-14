@@ -2,7 +2,7 @@
 id: lem-enflo-symmetry-averaging-and-block-assembly
 kind: lemma
 title: "Enflo's Walsh-block assembly"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   scraped: []
@@ -60,18 +61,15 @@ under Hahn--Banach, a closed subspace of a reflexive Banach space is reflexive
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Choose real numbers $1<b<\alpha<\gamma$ with [given]
-$\alpha<(2+\gamma)/(1+\gamma)$. Put
+1.1 Choose real numbers $1<b<\alpha<\gamma$ with $\alpha<(2+\gamma)/(1+\gamma)$. Put [given]
 
 $$n_m=\lfloor\alpha^m\rfloor,\qquad t_m=\binom{2n_m}{n_m-1},\qquad k_m=\lfloor t_m^\gamma\rfloor.$$
 
 After deleting finitely many initial indices, all are positive and strictly increasing. Let $K_m$ be the disjoint union of $k_m$ copies $K_{m,j}$ of $\mathbb Z_2^{2n_m}$, and let $B_1=(\bigoplus_m C(K_m))_2$. [explicit parameters]
 
-2.1 The dual-coordinate argument identifies [given, step 1.1]
-$B_1^*$ with $(\bigoplus_m C(K_m)^*)_2$: finite Hölder gives one inequality, and finite-dimensional compactness supplies norming vectors for each finite partial sum and hence the reverse. Applying the same argument to the bidual, and using finite-dimensional reflexivity of each $C(K_m)$, makes the canonical map onto. Thus $B_1$ is reflexive. It is separable because it is the completion of a countable union of finite-dimensional rational spans. [finite-dimensional duality, square-sum Hölder]
+2.1 The dual-coordinate argument identifies [given, step 1.1] $B_1^*$ with $(\bigoplus_m C(K_m)^*)_2$: finite Hölder gives one inequality, and finite-dimensional compactness supplies norming vectors for each finite partial sum and hence the reverse. Applying the same argument to the bidual, and using finite-dimensional reflexivity of each $C(K_m)$, makes the canonical map onto. Thus $B_1$ is reflexive. It is separable because it is the completion of a countable union of finite-dimensional rational spans. [algebra]
 
-3.1 In $C(K_m)\oplus C(K_{m+1})$ choose a set $M_m$ of $k_mt_m$ vectors so [given, step 2.1]
-that: (i) each vector has exactly one nonzero $K_{m,j}$ component, an element of $W^{n_m+1}$; (ii) its components in $K_{m+1,j}$ are zero or elements of $W^{n_{m+1}-1}$, and every such Walsh function occurs; and (iii) two distinct vectors never share the same nonzero component. Equivalently $M_m$ is partitioned into $M_{m,j}$ of size $t_m$ and is equipped with subsets $N_{m,j}\subseteq M_m$ of size $t_{m+1}$, with the $M_{m,j}$ pairwise disjoint and the $N_{m,j}$ linked to the next layer. No covering assertion is imposed: step 8.1 assigns $\sigma(e)=0$ to points outside their selected incidence region. [finite Walsh bases]
+3.1 In $C(K_m)\oplus C(K_{m+1})$ choose a set $M_m$ of $k_mt_m$ vectors so [given, step 2.1] that: (i) each vector has exactly one nonzero $K_{m,j}$ component, an element of $W^{n_m+1}$; (ii) its components in $K_{m+1,j}$ are zero or elements of $W^{n_{m+1}-1}$, and every such Walsh function occurs; and (iii) two distinct vectors never share the same nonzero component. Equivalently $M_m$ is partitioned into $M_{m,j}$ of size $t_m$ and is equipped with subsets $N_{m,j}\subseteq M_m$ of size $t_{m+1}$, with the $M_{m,j}$ pairwise disjoint and the $N_{m,j}$ linked to the next layer. No covering assertion is imposed; points outside the selected incidence region have multiplicity zero. [algebra]
 
 4.1 Require in addition the three incidence bounds [given, L4, A1, L3, step 3.1]
 
@@ -91,11 +89,7 @@ $$\left|\widetilde{\operatorname{Tr}}(M_m,T) -\frac1{k_{m+1}}\sum_{j=1}^{k_{m+1}
 
 Indeed the left side is the weighted sum of the diagonal coefficients $a(e)$, each bounded by $\|T\|$ via property A, and condition 6 is exactly the total weight error. [L4, step 4.1]
 
-6.1 Fix $j$ and put $E=[N_{m,j}\cup M_{m+1,j}]$. [given, L2, step 5.1]
-Delete from each finite expansion of $Te$ the terms outside this generator set,
-obtaining $T':E\to E$. The localized traces of $T$ and $T'$ on the two
-displayed sets agree, and $T'x=Tx$ on $K_{m+1,j}$. Restriction to that block
-identifies $E$ with the two Walsh layers in [L2]. Write
+6.1 Fix $j$ and put $E=[N_{m,j}\cup M_{m+1,j}]$. Delete from each finite expansion of $Te$ the terms outside this generator set, obtaining $T':E\to E$. The localized traces of $T$ and $T'$ on the two displayed sets agree, and $T'x=Tx$ on $K_{m+1,j}$. Restriction to that block identifies $E$ with the two Walsh layers in [L2]. Write [given, L2, step 5.1]
 
 $$\lVert\!\lvert x\rvert\!\rVert=\max_{p\in K_{m+1,j}}|x(p)|.$$
 
@@ -138,11 +132,7 @@ successive blocks of $t_{m+1}$ points as $N_{m,1},\ldots,N_{m,k_{m+1}}$.
 Each such block meets every $M_{m,i}=\{i\}\times\mathbb Z_{t_m}$ in at
 most one point, so condition 5 holds eventually. [explicit lexicographic construction]
 
-8.1 Put $A_m=\{1,\ldots,L_mt_{m+1}\}\times\mathbb Z_{t_m}$ and [given, step 7.1]
-$q_m=k_{m+1}/(L_mt_m)$. Every point of $A_m$ occurs once at each complete
-$\rho$-level, so its multiplicity $\sigma(e)$ among the selected blocks
-differs from $q_m$ by at most one; points outside $A_m$ have multiplicity
-zero. Since $|A_m|=L_mt_{m+1}t_m$,
+8.1 Put $A_m=\{1,\ldots,L_mt_{m+1}\}\times\mathbb Z_{t_m}$ and $q_m=k_{m+1}/(L_mt_m)$. Every point of $A_m$ occurs once at each complete $\rho$-level, so its multiplicity $\sigma(e)$ among the selected blocks differs from $q_m$ by at most one; points outside $A_m$ have multiplicity zero. Since $|A_m|=L_mt_{m+1}t_m$, [given, step 7.1]
 
 $$\sum_{e\in M_m}\left|\frac1{k_mt_m}-\frac{\sigma(e)}{k_{m+1}t_{m+1}}\right|\le \frac{2t_{m+1}}{k_m}+\frac{k_mt_m}{k_{m+1}t_{m+1}}.$$
 
@@ -151,11 +141,7 @@ $t_m^{\alpha-\gamma+o(1)}$ and
 $t_m^{(\gamma+1)(1-\alpha)+o(1)}$. Thus condition 6 holds after discarding
 finitely many indices. [step 1.1, balanced incidence count]
 
-8.2 Suppose two distinct selected blocks share a point represented both as [given, step 1.1, step 7.1]
-$(j,j\rho_1+k_1)$ and $(j,j\rho_2+k_2)$. The injectivity at a fixed
-$\rho$-level gives $\rho_1\ne\rho_2$, and
-$|\rho_1-\rho_2|\le\nu_m$. For any other common point whose first coordinate
-differs by $\mu$, congruence in $\mathbb Z_{t_m}$ gives
+8.2 Suppose two distinct selected blocks share a point represented both as $(j,j\rho_1+k_1)$ and $(j,j\rho_2+k_2)$. The injectivity at a fixed $\rho$-level gives $\rho_1\ne\rho_2$, and $|\rho_1-\rho_2|\le\nu_m$. For any other common point whose first coordinate differs by $\mu$, congruence in $\mathbb Z_{t_m}$ gives [given, step 1.1, step 7.1]
 
 $$t_m\mid \mu(\rho_1-\rho_2),\qquad \mu\ge\frac{t_m}{|\rho_1-\rho_2|}\ge\frac{t_m}{\nu_m}.$$
 
@@ -171,5 +157,4 @@ $1+t_{m+1}/n_{m+1}\le2t_{m+1}/n_{m+1}$ of them. This proves condition 4.
 Together with steps 7.1--8.1, all three incidence conditions hold after a
 finite reindexing. [step 1.1, finite arithmetic count, Stirling estimate]
 
-9.1 Finally [given, L1, step 6.1, step 8.2]
-$\log|M_m|=\log(k_mt_m)\sim(\gamma+1)(2\log2)n_m$. Therefore $|M_{m+1}|>|M_m|^b$ eventually and $5/n_{m+1}\le K/\log|M_m|$ for one constant $K$. Step 6.1 supplies the trace hypothesis, so [L1] gives the claimed logarithmic finite-rank lower bound. [L1, steps 1.1, 6.1, asymptotics] ∎
+9.1 Finally [given, L1, step 6.1, step 8.2] $\log|M_m|=\log(k_mt_m)\sim(\gamma+1)(2\log2)n_m$. Therefore $|M_{m+1}|>|M_m|^b$ eventually and $5/n_{m+1}\le K/\log|M_m|$ for one constant $K$. Step 6.1 supplies the trace hypothesis, so [L1] gives the claimed logarithmic finite-rank lower bound. [L1, step 1.1, 6.1, algebra] ∎

@@ -1,7 +1,7 @@
 ---
 page: suslin-trees-lines-algebras-and-independence
 title: "Suslin Trees, Lines, Algebras, and Independence"
-status: draft
+status: published
 items:
   - def-suslin-hypothesis-and-suslin-algebra
   - lem-suslin-tree-normal-splitting-refinement

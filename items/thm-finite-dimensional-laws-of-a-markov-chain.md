@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-laws-of-a-markov-chain
 kind: theorem
 title: "Finite-dimensional laws of a Markov chain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-initial-distribution-of-a-markov-chain, lem-bounded-function-form-of-the-markov-property, thm-chapman-kolmogorov-equations, thm-tower-property-of-conditional-expectation, thm-dynkin-pi-lambda]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

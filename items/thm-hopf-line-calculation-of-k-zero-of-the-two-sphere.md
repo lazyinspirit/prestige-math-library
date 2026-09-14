@@ -2,7 +2,7 @@
 id: thm-hopf-line-calculation-of-k-zero-of-the-two-sphere
 kind: theorem
 title: Hopf-line calculation of K⁰(S²)
-status: draft
+status: published
 origin: pipeline
 deps: [def-external-product-in-complex-k-theory, lem-determinant-classifies-loops-in-complex-general-linear-groups, thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range, def-stiefel-space-grassmannian-and-tautological-bundle, def-clutching-construction-for-bundles-over-a-suspension, prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: def-finitely-additive-charge-and-total-variation-on-the-power-set-of-n
 kind: definition
 title: "Finitely additive charges and total variation on the power set of N"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

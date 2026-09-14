@@ -2,7 +2,7 @@
 id: cor-feferman-levy-omega-one-has-countable-cofinality
 kind: corollary
 title: The Feferman–Levy omega one has countable cofinality
-status: draft
+status: published
 origin: pipeline
 deps: [thm-feferman-levy-omega-one-is-ground-aleph-omega, thm-cofinality-basics, thm-hereditarily-symmetric-interpretations-form-a-zf-model]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

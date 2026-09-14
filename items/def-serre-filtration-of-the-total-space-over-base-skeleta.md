@@ -2,12 +2,13 @@
 id: def-serre-filtration-of-the-total-space-over-base-skeleta
 kind: definition
 title: Serre filtration over the base skeleta
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-filtered-chain-complex, def-singular-cochain-complex-with-coefficients, def-cw-complex-with-closure-finiteness-and-weak-topology, lem-compact-cw-images-have-finite-cell-support-without-choice]
 proof_strategy: definition
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

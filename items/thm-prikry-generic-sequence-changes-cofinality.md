@@ -2,7 +2,7 @@
 id: thm-prikry-generic-sequence-changes-cofinality
 kind: theorem
 title: The Prikry generic sequence changes cofinality to omega
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-prikry-forcing-and-direct-extension
@@ -15,6 +15,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

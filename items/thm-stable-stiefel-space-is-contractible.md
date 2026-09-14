@@ -2,7 +2,7 @@
 id: thm-stable-stiefel-space-is-contractible
 kind: theorem
 title: Stable Stiefel space is contractible
-status: draft
+status: published
 origin: pipeline
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

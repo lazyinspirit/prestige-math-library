@@ -2,7 +2,7 @@
 id: thm-feferman-levy-omega-one-is-ground-aleph-omega
 kind: theorem
 title: The new omega one is the old aleph omega
-status: draft
+status: published
 origin: pipeline
 deps: [lem-ground-aleph-n-is-countable-in-the-feferman-levy-model, lem-feferman-levy-bounded-layer-support, lem-feferman-levy-fixed-boolean-values-come-from-initial-layers, thm-forcing-theorem, def-cofinality, def-axiom-of-choice]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

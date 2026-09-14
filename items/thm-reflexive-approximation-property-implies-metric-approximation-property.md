@@ -2,7 +2,7 @@
 id: thm-reflexive-approximation-property-implies-metric-approximation-property
 kind: theorem
 title: "Reflexive approximation property implies metric approximation property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: [Grothendieck reflexive AP theorem]
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   scraped: []
@@ -74,8 +75,7 @@ Assumption [A1] supplies Countable Choice by restriction to countable families.
 
 **Given:** AC and a reflexive Banach space $X$ with AP.
 
-1.1 Set up the tensor and operator norms. [given, L1, construct]
-For Banach spaces $E,F$ and $u=\sum_{j=1}^n e_j\otimes f_j$, put
+1.1 Set up the tensor and operator norms. For Banach spaces $E,F$ and $u=\sum_{j=1}^n e_j\otimes f_j$, put [given, L1, construct]
 
 $$\pi(u)=\inf\sum_j\|e_j\|\|f_j\|, \qquad \varepsilon(u)=\sup_{e^*\in B_{E^*},f^*\in B_{F^*}} \left|\sum_j e^*(e_j)f^*(f_j)\right|.$$
 
@@ -102,10 +102,7 @@ integral, with
 
 $$\|S\|_{I}\leq\|S\|_{PI}\leq\|S\|_N.$$
 
-1.2 Prove the vector-density fact for a reflexive range. [A1, L2, L3, L4, L5]
-We need the following local form of the Radon--Nikodym theorem: if $m$ is a
-countably additive $X$-valued measure of bounded variation and $m\ll\mu$ for
-a finite positive measure $\mu$, then
+1.2 Prove the vector-density fact for a reflexive range. We need the following local form of the Radon--Nikodym theorem: if $m$ is a countably additive $X$-valued measure of bounded variation and $m\ll\mu$ for a finite positive measure $\mu$, then [A1, L2, L3, L4, L5]
 
 $$m(A)=\int_A g\,d\mu$$
 
@@ -199,14 +196,7 @@ Bochner-measurable $h$. Scalar Radon--Nikodym under [L3] gives
 $|m|=w\mu$; then $g=wh$ is Bochner integrable and
 $m(A)=\int_Ag\,d\mu$. This proves the required density fact.
 
-1.3 Use the density fact to identify nuclear and Pietsch-integral maps into
-$X$. [step 1.1, step 1.2]
-Let $S:E\to X$ be Pietsch integral and choose
-$S=RIU$ as in step 1.1 with $\mu$ a probability measure. The vector measure
-$\nu(A)=R\mathbf1_A$ has variation at most $\|R\|\mu$ and is absolutely
-continuous with respect to $\mu$. By step 1.2 it has a Bochner density
-$g\in L^1(\mu;X)$, and equality first on simple functions and then by density
-gives
+2.1 Use the density fact to identify nuclear and Pietsch-integral maps into $X$. Let $S:E\to X$ be Pietsch integral and choose $S=RIU$ as in step 1.1 with $\mu$ a probability measure. The vector measure $\nu(A)=R\mathbf1_A$ has variation at most $\|R\|\mu$ and is absolutely continuous with respect to $\mu$. By step 1.2 it has a Bochner density $g\in L^1(\mu;X)$, and equality first on simple functions and then by density gives [step 1.1, step 1.2]
 
 $$Rf=\int fg\,d\mu\qquad(f\in L^1(\mu)).$$
 
@@ -222,8 +212,7 @@ general inequalities of step 1.1 yields, isometrically,
 
 $$\mathcal N(E,X)=\mathcal{PI}(E,X).$$
 
-2.1 Identify Pietsch-integral and integral maps into $X$. [L2, L3, step 1.1]
-An integral $S:E\to X$ has a factorization
+2.2 Identify Pietsch-integral and integral maps into $X$. An integral $S:E\to X$ has a factorization [L2, L3, step 1.1]
 
 $$J_XS=RIU:E\longrightarrow X^{**}$$
 
@@ -245,15 +234,13 @@ Since
 $J_X$ is onto and isometric, $J_X^{-1}R$ is a factorization of $S$ through
 $I:L^\infty\to L^1$ with the same norm. Hence
 $\|S\|_{PI}\leq\|S\|_I$; the reverse inequality is general. Combining this
-with step 1.3 gives
+with step 2.1 gives
 
 $$\mathcal N(E,X)=\mathcal{PI}(E,X)=\mathcal I(E,X)$$
 
 isometrically.
 
-2.2 Use AP to remove the projective-tensor kernel. [L1, step 1.1]
-Take $u\in X^*\widehat\otimes_\pi X$. After rescaling a nuclear
-representation we may write
+2.3 Use AP to remove the projective-tensor kernel. Take $u\in X^*\widehat\otimes_\pi X$. After rescaling a nuclear representation we may write [L1, step 1.1]
 
 $$u=\sum_{n\geq1}x_n^*\otimes x_n, \qquad \sum_n\|x_n^*\|<\infty, \qquad x_n\to0.$$
 
@@ -278,8 +265,7 @@ $$\sum_nx_n^*\otimes R_\alpha x_n =\sum_k S_u^*(y_k^*)\otimes y_k=0.$$
 Therefore $u=0$. The canonical quotient
 $X^*\widehat\otimes_\pi X\to\mathcal N(X,X)$ is injective, hence isometric.
 
-3.1 Prove the isometric tensor criterion. [step 1.1, step 2.1, step 2.2]
-Define
+3.1 Prove the isometric tensor criterion. Define [step 1.1, step 2.2, step 2.3]
 
 $$Q:X^*\widehat\otimes_\pi X \longrightarrow (X\widehat\otimes_\varepsilon X^*)^*$$
 
@@ -287,20 +273,17 @@ by
 
 $$Q\!\left(\sum_nx_n^*\otimes x_n\right) \!\left(\sum_jy_j\otimes y_j^*\right) =\sum_{n,j}x_n^*(y_j)y_j^*(x_n).$$
 
-By step 2.2 the domain is $\mathcal N(X,X)$ with its nuclear norm, and by
+By step 2.3 the domain is $\mathcal N(X,X)$ with its nuclear norm, and by
 the definition in step 1.1 the codomain is $\mathcal I(X,X^{**})$. Under
 these identifications $Q$ sends $S$ to $J_XS$. The two associated bilinear
 forms are literally equal,
 
 $$B_{J_XS}(x,x^*)=J_X(Sx)(x^*)=x^*(Sx)=B_S(x,x^*),$$
 
-so the integral norm is unchanged. Step 2.1 identifies the nuclear and
+so the integral norm is unchanged. Step 2.2 identifies the nuclear and
 integral norms on the domain. Hence $Q$ is an isometry.
 
-4.1 Derive finite-rank contractions from the criterion. [L2, L3, step 3.1]
-Let $\mathcal F_1$ be the convex balanced set of finite-rank operators on $X$
-of norm at most one. The isometry in step 3.1 says, for every
-$u\in X^*\widehat\otimes_\pi X$,
+4.1 Derive finite-rank contractions from the criterion. Let $\mathcal F_1$ be the convex balanced set of finite-rank operators on $X$ of norm at most one. The isometry in step 3.1 says, for every $u\in X^*\widehat\otimes_\pi X$, [L2, L3, step 3.1]
 
 $$\pi(u)=\sup_{T\in\mathcal F_1}|\operatorname{tr}(TS_u)|.$$
 
@@ -319,11 +302,7 @@ that $I_X$ is in the strong-operator closure of $\mathcal F_1$: there is a net
 $(T_\alpha)$ of finite-rank contractions with $T_\alpha x\to x$ for every
 $x\in X$.
 
-5.1 Upgrade pointwise convergence to MAP. [L1, step 4.1]
-Fix compact $K\subseteq X$ and $\varepsilon>0$. Choose a finite
-$\varepsilon/3$-net $x_1,\ldots,x_r$ in $K$ and then $\alpha$ so that
-$\|T_\alpha x_i-x_i\|<\varepsilon/3$ for all $i$. Since
-$\|T_\alpha\|\leq1$, any $x\in K$ and a corresponding $x_i$ satisfy
+5.1 Upgrade pointwise convergence to MAP. Fix compact $K\subseteq X$ and $\varepsilon>0$. Choose a finite $\varepsilon/3$-net $x_1,\ldots,x_r$ in $K$ and then $\alpha$ so that $\|T_\alpha x_i-x_i\|<\varepsilon/3$ for all $i$. Since $\|T_\alpha\|\leq1$, any $x\in K$ and a corresponding $x_i$ satisfy [L1, step 4.1]
 
 $$\|T_\alpha x-x\| \leq\|T_\alpha(x-x_i)\|+\|T_\alpha x_i-x_i\|+\|x_i-x\| <\varepsilon.$$
 

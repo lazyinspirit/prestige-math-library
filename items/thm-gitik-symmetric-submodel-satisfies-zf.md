@@ -2,7 +2,7 @@
 id: thm-gitik-symmetric-submodel-satisfies-zf
 kind: theorem
 title: Gitik's symmetric submodel satisfies ZF
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-gitik-intermediate-model-zf-minus-power-set
@@ -15,6 +15,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, Theorem 12, Lemmas 13–17 and the final theorem, pages 11–20"

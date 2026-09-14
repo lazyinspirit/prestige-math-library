@@ -2,7 +2,7 @@
 id: thm-suslin-tree-regular-open-algebra-is-suslin
 kind: theorem
 title: "A Suslin tree has a Suslin regular-open algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-suslin-hypothesis-and-suslin-algebra, lem-suslin-tree-forcing-is-countably-distributive, thm-forcing-preorders-have-regular-open-completions, thm-regular-open-sets-form-a-complete-boolean-algebra, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-markov-chain-law-is-determined-by-initial-law-and-kernel
 kind: theorem
 title: "A Markov-chain law is determined by its initial law and kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-finite-dimensional-laws-of-a-markov-chain, thm-a-process-law-on-cylinder-space-is-determined-by-finite-dimensional-distributions]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: fs-countable-unions-of-countable-sets-are-countable-in-zf
 kind: false-statement
 title: ZF proves that countable unions of countable sets are countable
-status: draft
+status: published
 origin: pipeline
 deps: [cor-relative-consistency-of-feferman-levy-choice-failures-over-zf, thm-r-uncountable]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

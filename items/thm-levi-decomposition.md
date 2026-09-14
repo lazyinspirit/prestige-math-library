@@ -2,7 +2,7 @@
 id: thm-levi-decomposition
 kind: theorem
 title: Levi decomposition theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-levi-subalgebra-and-levi-decomposition, thm-second-whitehead-lemma, thm-second-lie-algebra-cohomology-classifies-abelian-extensions, prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical, prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -57,6 +58,9 @@ extensions ([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]])
 **Proof technique:** induction on the derived length of the radical.
 
 1.1 If $\mathfrak r$ is abelian, including $\mathfrak r=0$, the exact sequence $0\to\mathfrak r\to\mathfrak g\to\mathfrak q\to0$ is an abelian extension for the induced adjoint $\mathfrak q$-action, so it defines a class in $H^2(\mathfrak q,\mathfrak r)$ under the bijection of [L5]. That class is zero by [L1]–[L2], and the zero class is exactly the split case by [L5]; hence the extension has a Lie section $\sigma:\mathfrak q\to\mathfrak g$. Its image $\mathfrak s$ is semisimple, intersects $\mathfrak r$ trivially, and complements it. This is the derived-length induction base. [L1, L2, L4, L5, base]
+
 2.1 Suppose $\mathfrak r$ is nonabelian and put $\mathfrak t=[\mathfrak r,\mathfrak r]$. This is a characteristic ideal of $\mathfrak r$ and hence an ideal of $\mathfrak g$. The radical of $\mathfrak g/\mathfrak t$ is $\mathfrak r/\mathfrak t$: it is solvable, and any larger solvable ideal would have a solvable inverse image by [L3], contradicting maximality of $\mathfrak r$. Since this radical is abelian, step 1.1 supplies a Levi factor $\overline{\mathfrak h}$ in $\mathfrak g/\mathfrak t$. [L3, step 1.1]
+
 3.1 Let $\mathfrak h$ be the inverse image of $\overline{\mathfrak h}$. Then $\mathfrak h/\mathfrak t\cong\mathfrak q$ is semisimple and $\operatorname{rad}(\mathfrak h)=\mathfrak t$: the inclusion $\mathfrak t\subseteq\operatorname{rad}(\mathfrak h)$ is clear, while every solvable ideal of $\mathfrak h$ maps to a solvable ideal of the semisimple quotient and hence lies in $\mathfrak t$. Since $\mathfrak t=\mathfrak r^{(1)}$ has smaller derived length, apply the induction hypothesis to $\mathfrak h$ to obtain a semisimple complement $\mathfrak s$ to $\mathfrak t$. [L1, L3, step 2.1, IH]
+
 4.1 Since $\mathfrak h=\mathfrak t\oplus\mathfrak s$ and $\mathfrak g=\mathfrak r+\mathfrak h$, we have $\mathfrak g=\mathfrak r+\mathfrak s$. Their intersection lies in $\mathfrak r\cap\mathfrak h=\mathfrak t$ and is zero, so $\mathfrak s$ is the required Levi factor by [L4]. The zero algebra is included, and all choices are finite-dimensional basis or subspace choices. [L4, step 1.1, step 3.1, discharge-induction: step 1.1] ∎

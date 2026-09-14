@@ -2,12 +2,13 @@
 id: thm-wang-sequence-for-a-fibration-over-the-circle
 kind: theorem
 title: Wang sequence for a fibration over the circle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients, def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence, thm-an-exact-couple-generates-a-spectral-sequence]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -30,7 +31,9 @@ vertex in the standard one-vertex, one-edge CW structure, and let $R$ be a
 commutative unital ring. Orient the edge and let
 $T_q:H_q(F;R)\to H_q(F;R)$ be transport around its positive loop. There is a
 natural long exact Wang sequence
-$$\cdots\longrightarrow H_q(F;R)\xrightarrow{1-T_q}H_q(F;R)\longrightarrow H_q(E;R)\longrightarrow H_{q-1}(F;R)\xrightarrow{1-T_{q-1}}H_{q-1}(F;R)\longrightarrow\cdots. \tag{1}$$
+$$
+\cdots\longrightarrow H_q(F;R)\xrightarrow{1-T_q}H_q(F;R)\longrightarrow H_q(E;R)\longrightarrow H_{q-1}(F;R)\xrightarrow{1-T_{q-1}}H_{q-1}(F;R)\longrightarrow\cdots. \tag{1}
+$$
 Reversing the cellular orientation replaces every $1-T_q$ by $T_q-1$ and
 gives the isomorphic exact sequence obtained by multiplying the adjacent
 maps by $-1$. The construction is natural for maps of fibrations over the
@@ -54,7 +57,7 @@ oriented circle that intertwine fiber transport. It uses no choice axiom.
 
 1.1 Fix $M_q=H_q(F;R)$. The cellular local chain complex of the oriented circle with coefficients in the transport system has one copy of $M_q$ in degrees one and zero. With the convention that the positive edge has initial incidence $+1$ and terminal incidence $-1$, [F2] makes its boundary $1-T_q$. Therefore $$E^2_{0,q}=\operatorname{coker}(1-T_q),\qquad E^2_{1,q}=\ker(1-T_q),$$ and $E^2_{a,q}=0$ for $a\notin\{0,1\}$. Reversing the edge interchanges its endpoint incidences and changes the differential to $T_q-1$. [F1, F2]
 
-2.1 Every Serre differential from page two onward changes the first coordinate by at least two, so the two-column support gives a zero source or target. Hence $E^2=E^\infty$. In total degree $q$, the finite filtration of [F1] and its edges in [F3] give the natural short exact sequence $$0\longrightarrow\operatorname{coker}(1-T_q)\longrightarrow H_q(E;R)\longrightarrow\ker(1-T_{q-1})\longrightarrow0. \tag{2}$$ The first map in (2) is the fiber-axis inclusion after quotienting by $1-T_q$; the second is the base-column quotient followed by the inclusion of the kernel. [F1, F3, F4, step 1.1]
+2.1 Every Serre differential from page two onward changes the first coordinate by at least two, so the two-column support gives a zero source or target. Hence $E^2=E^\infty$. In total degree $q$, the finite filtration of [F1] and its edges in [F3] give the natural short exact sequence $$0\longrightarrow\operatorname{coker}(1-T_q)\longrightarrow H_q(E;R)\longrightarrow\ker(1-T_{q-1})\longrightarrow0. \qquad\text{(2)}$$ The first map in (2) is the fiber-axis inclusion after quotienting by $1-T_q$; the second is the base-column quotient followed by the inclusion of the kernel. [F1, F3, F4, step 1.1]
 
 3.1 Compose the quotient $M_q\to\operatorname{coker}(1-T_q)$ with the first arrow of (2), and compose the second arrow of (2) with $\ker(1-T_{q-1})\hookrightarrow M_{q-1}$. The kernel and image definitions now give, in order, $$\ker(M_q\to H_q(E))=\operatorname{im}(1-T_q),$$ $$\operatorname{im}(M_q\to H_q(E))=\ker(H_q(E)\to M_{q-1}),$$ and $$\operatorname{im}(H_q(E)\to M_{q-1})=\ker(1-T_{q-1}).$$ Joining these identities for all $q$ proves exactness of (1). [step 2.1]
 

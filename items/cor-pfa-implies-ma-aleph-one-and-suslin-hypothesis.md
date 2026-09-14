@@ -2,7 +2,7 @@
 id: cor-pfa-implies-ma-aleph-one-and-suslin-hypothesis
 kind: corollary
 title: "PFA implies MA(aleph-one) and the Suslin Hypothesis"
-status: draft
+status: published
 origin: pipeline
 deps: [def-proper-forcing-axiom, thm-ccc-and-countably-closed-forcings-are-proper, thm-ma-aleph-one-eliminates-suslin-trees, thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

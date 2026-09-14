@@ -2,7 +2,7 @@
 id: prop-zero-th-lie-algebra-cohomology-is-invariants
 kind: proposition
 title: Zeroth Lie algebra cohomology is invariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-lie-algebra-cohomology, def-chevalley-eilenberg-differential]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -42,4 +43,5 @@ $$H^0(\mathfrak g,M)=M^{\mathfrak g}=\{m\in M:xm=0\text{ for every }x\in\mathfra
 **Proof technique:** compute in degree zero.
 
 1.1 By [L1], $m$ lies in the degree-zero kernel exactly when every $x$ kills it, so $\ker d^0=M^{\mathfrak g}$. [L1, given]
+
 2.1 The degree-minus-one cochain space is zero, hence $\operatorname{im}d^{-1}=0$. Substitution in [L2] proves the displayed equality. If $M=0$ both sides are zero; if $\mathfrak g=0$, the condition is vacuous and both sides are all of $M$. [L2, step 1.1] ∎

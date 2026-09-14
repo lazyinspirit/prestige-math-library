@@ -2,7 +2,7 @@
 id: thm-coordinate-functionals-of-a-schauder-basis-are-bounded
 kind: theorem
 title: "Coordinate functionals of a Schauder basis are bounded"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -55,12 +56,9 @@ their norms ([[def-partial-sum-projections-and-basis-constant]]).
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Apply [L2] to [L1]. The only choice use is [A1], through that bounded-inverse [given, L2, L1, A1]
-theorem. Thus $S^{-1}:X\to E$ is bounded. [A1, L1, L2]
+1.1 Apply [L2] to [L1]. The only choice use is [A1], through that bounded-inverse [given, L2, L1, A1] theorem. Thus $S^{-1}:X\to E$ is bounded. [A1, L1, L2]
 
-2.1 Truncation $Q_N:E\to E$, $(a_n)\mapsto(a_1,\ldots,a_N,0,\ldots)$, [given, L1, L3, step 1.1]
-satisfies $\|Q_Na\|_E\le\|a\|_E$, because every partial sum of $Q_Na$ is a
-partial sum of $a$. Since $P_N=SQ_NS^{-1}$ and $\|S\|\le1$,
+2.1 Truncation $Q_N:E\to E$, $(a_n)\mapsto(a_1,\ldots,a_N,0,\ldots)$, satisfies $\|Q_Na\|_E\le\|a\|_E$, because every partial sum of $Q_Na$ is a partial sum of $a$. Since $P_N=SQ_NS^{-1}$ and $\|S\|\le1$, [given, L1, L3, step 1.1]
 
 $$\|P_N\|\le\|S^{-1}\|$$
 

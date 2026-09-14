@@ -2,7 +2,7 @@
 id: lem-feferman-levy-fixed-boolean-values-come-from-initial-layers
 kind: lemma
 title: Fixed Boolean values come from initial collapse layers
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-levy-symmetric-collapse-system, lem-feferman-levy-bounded-layer-support, thm-forcing-preorders-have-regular-open-completions, lem-symmetry-lemma-for-forcing-automorphisms]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

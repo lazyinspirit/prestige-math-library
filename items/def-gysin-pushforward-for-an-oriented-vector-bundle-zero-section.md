@@ -2,12 +2,13 @@
 id: def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section
 kind: definition
 title: Gysin pushforward for an oriented zero section
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-thom-isomorphism-for-oriented-vector-bundles, def-thom-diagonal-and-zero-section-collapse, def-thom-euler-class-of-an-oriented-vector-bundle, prop-cup-product-is-natural-unital-and-associative, def-axiom-of-choice]
 proof_strategy: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

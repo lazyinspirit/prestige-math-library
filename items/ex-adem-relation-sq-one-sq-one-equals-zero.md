@@ -49,10 +49,7 @@ $Sq^1=\beta$ on every mod-two cohomology group without AC.
 
 **Proof technique:** compare the two cyclic Bocksteins on cochains and compose.
 
-1.1 Reduction modulo two satisfies $\beta=\rho\widetilde\beta$. [given, F1]
-Let $c$ be a mod-two cocycle representing a class $u$, and let
-$\widehat c$ be its integer zero/one lift. Since $\delta c=0$, every value of
-$\delta\widehat c$ is even, so there is a unique integer cochain $h$ with
+1.1 Reduction modulo two satisfies $\beta=\rho\widetilde\beta$. Let $c$ be a mod-two cocycle representing a class $u$, and let $\widehat c$ be its integer zero/one lift. Since $\delta c=0$, every value of $\delta\widehat c$ is even, so there is a unique integer cochain $h$ with [given, F1]
 
 $$\delta\widehat c=2h.$$
 
@@ -63,27 +60,14 @@ $c$ for the mod-two coefficient sequence, and its coboundary is
 $2(h\bmod2)$ in $\mathbb Z/4$. Hence
 $\beta(u)=[h\bmod2]=\rho\widetilde\beta(u)$.
 
-1.2 The integral Bockstein kills reduced integral classes: $\widetilde\beta\rho=0$. [F1]
-If $z$ is an integral cocycle, then $z$ itself is an integer lift of its
-mod-two reduction. Its coboundary is zero, so the lift/divide definition gives
-$\widetilde\beta(\rho[z])=0$.
+1.2 The integral Bockstein kills reduced integral classes: $\widetilde\beta\rho=0$. If $z$ is an integral cocycle, then $z$ itself is an integer lift of its mod-two reduction. Its coboundary is zero, so the lift/divide definition gives $\widetilde\beta(\rho[z])=0$. [F1]
 
-2.1 The mod-two Bockstein squares to zero. [step 1.1, step 1.2]
-For every mod-two class $u$,
+2.1 The mod-two Bockstein squares to zero. For every mod-two class $u$, [step 1.1, step 1.2]
 
 $$\beta^2(u)=\rho\widetilde\beta\,\rho\widetilde\beta(u)=0.$$
 
-3.1 Substitution of $Sq^1=\beta$ proves the claim. [F2, step 2.1]
-Apply [F2] first to $x$ and then to the class $\beta(x)$:
+3.1 Substitution of $Sq^1=\beta$ proves the claim. Apply [F2] first to $x$ and then to the class $\beta(x)$: [F2, step 2.1]
 
 $$Sq^1Sq^1(x)=\beta(\beta(x))=\beta^2(x)=0.$$
 
-4.1 The boundary and choice cases introduce no exceptions. [F1, F2, step 1.1, step 1.2, step 2.1, step 3.1]
-For the empty space, a zero class, or a point in degree zero, every displayed
-positive-degree output is zero. The first allowed degree $n=0$ is included,
-and there is no upper endpoint. Integer multiplication by two is injective
-even when a cochain group is zero, so the division argument is unique; ordinary
-singular cochains include degenerate simplices. Every lift used above is the
-specified residue lift or the already given cocycle $z$, so no choice
-principle is spent. The proof establishes an equality, not either direction of
-a biconditional. ∎
+4.1 The boundary and choice cases introduce no exceptions. For the empty space, a zero class, or a point in degree zero, every displayed positive-degree output is zero. The first allowed degree $n=0$ is included, and there is no upper endpoint. Integer multiplication by two is injective even when a cochain group is zero, so the division argument is unique; ordinary singular cochains include degenerate simplices. Every lift used above is the specified residue lift or the already given cocycle $z$, so no choice principle is spent. The proof establishes an equality, not either direction of a biconditional. [F1, F2, step 1.1, step 1.2, step 2.1, step 3.1] ∎

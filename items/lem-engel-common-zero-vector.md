@@ -2,7 +2,7 @@
 id: lem-engel-common-zero-vector
 kind: lemma
 title: Engel's common-zero-vector lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-nilpotent-linear-transformation-and-nil-representation, def-subrepresentation-quotient-representation-and-intertwiner, thm-rank-nullity]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

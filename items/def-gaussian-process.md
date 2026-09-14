@@ -2,12 +2,14 @@
 id: def-gaussian-process
 kind: definition
 title: "Gaussian process"
-status: draft
+status: published
 origin: pipeline
 deps: [def-stochastic-process-and-finite-dimensional-distributions, def-multivariate-normal-law, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Perla Sousi, Advanced Probability, Section 6.1"

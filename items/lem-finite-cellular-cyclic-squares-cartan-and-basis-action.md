@@ -127,33 +127,16 @@ are augmentation-preserving natural chain-homotopy inverses
 determine the zero-square scalar on spheres, and apply the resulting total
 square to the polynomial generator.
 
-1.1 Define the finite-cellular operations. [given, F1, F2, F9]
-The formula in the statement merely reindexes the unique coefficients from
-[F2]. Additivity and naturality of every $Sq_{\mathrm{cyc}}^i$ follow from
-those of $D_{q-i}$; the two outside-range clauses are definitions. All
-operations here remain on the finite oriented regular cellular model.
+1.1 Define the finite-cellular operations. The formula in the statement merely reindexes the unique coefficients from [F2]. Additivity and naturality of every $Sq_{\mathrm{cyc}}^i$ follow from those of $D_{q-i}$; the two outside-range clauses are definitions. All operations here remain on the finite oriented regular cellular model. [given, F1, F2, F9]
 
-1.2 Prove the external coefficient formula. [F2, F5, F7, F8]
-Let $x\in H^q_{\mathrm{cell}}(K;\mathbb F_2)$ and
-$y\in H^s_{\mathrm{cell}}(L;\mathbb F_2)$. Regrouping the four factors shows
-on pure tensors that the external square of $x\times y$ is the product of the
-external squares of $x$ and $y$. Compare the one cyclic resolution on the
-left with two cyclic resolutions on the right through the explicit
-equivariant diagonal of [F5] and [F8]. In characteristic two there is no
-Koszul sign. The two quotient-diagonal formulas contain exactly one term
-$e_a\otimes e_b$ for every $a+b=n$. After pulling back the space diagonals,
-uniqueness of the coordinates from [F2] therefore gives
+1.2 Prove the external coefficient formula. Let $x\in H^q_{\mathrm{cell}}(K;\mathbb F_2)$ and $y\in H^s_{\mathrm{cell}}(L;\mathbb F_2)$. Regrouping the four factors shows on pure tensors that the external square of $x\times y$ is the product of the external squares of $x$ and $y$. Compare the one cyclic resolution on the left with two cyclic resolutions on the right through the explicit equivariant diagonal of [F5] and [F8]. In characteristic two there is no Koszul sign. The two quotient-diagonal formulas contain exactly one term $e_a\otimes e_b$ for every $a+b=n$. After pulling back the space diagonals, uniqueness of the coordinates from [F2] therefore gives [F2, F5, F7, F8]
 
 $$D_n(x\times y)=\sum_{a+b=n}D_a(x)\times D_b(y).$$
 
 The sum is finite, and the pure-tensor equality also shows that no comparison
 or Künneth splitting choice is hidden in this formula.
 
-1.3 Reduce the coefficient $D_q$ and the unstable range to a sphere. [F1, F2, F9]
-Restriction from $K$ to its $q$-skeleton is injective in cellular degree $q$:
-if the restricted cocycle is the coboundary of a degree-$(q-1)$ cellular
-cochain, the same cochain gives that coboundary on all of $K$. Thus naturality
-in [F1] permits replacement of $K$ by its $q$-skeleton.
+1.3 Reduce the coefficient $D_q$ and the unstable range to a sphere. Restriction from $K$ to its $q$-skeleton is injective in cellular degree $q$: if the restricted cocycle is the coboundary of a degree-$(q-1)$ cellular cochain, the same cochain gives that coboundary on all of $K$. Thus naturality in [F1] permits replacement of $K$ by its $q$-skeleton. [F1, F2, F9]
 
 For a cellular cocycle $c$ on a $q$-dimensional complex, collapse the
 $(q-1)$-skeleton and map each oriented $q$-cell to $S^q$ by the standard map
@@ -170,19 +153,9 @@ is an isomorphism in degree zero, while naturality and additivity give
 $D_{2q}(0)=0$. For $n>2q$ the target degree is negative. When $q=0$, every
 $n>q$ already has negative target degree.
 
-2.1 Identify the top square. [F3, step 1.1]
-The zero resolution coordinate is detected by restriction to a chosen
-augmented zero-cell of $W$. By [F3] that restriction is $x\times x$.
-Pulling it back along the diagonal of $K$ gives
-$D_0(x)=x\smile x$. Since $Sq_{\mathrm{cyc}}^q=D_0$ by step 1.1, this proves
-the top-square identity.
+2.1 Identify the top square. The zero resolution coordinate is detected by restriction to a chosen augmented zero-cell of $W$. By [F3] that restriction is $x\times x$. Pulling it back along the diagonal of $K$ gives $D_0(x)=x\smile x$. Since $Sq_{\mathrm{cyc}}^q=D_0$ by step 1.1, this proves the top-square identity. [F3, step 1.1]
 
-3.1 Compute the scalar $a_q$. [F7, step 1.2, step 1.3, step 2.1]
-For $q=0$, step 2.1 gives $D_0(a)=a^2=a$, so $a_0=1$. For $q=1$, use the
-regular circle with vertices $A,B$, oriented edges $J_1,J_2$ having the same
-boundary, fundamental cycle $J_1-J_2$, and cocycle $u(J_1)=1,u(J_2)=0$.
-Over $\mathbb F_2$, prescribe the relevant component of the carried
-equivariant diagonal by
+3.1 Compute the scalar $a_q$. For $q=0$, step 2.1 gives $D_0(a)=a^2=a$, so $a_0=1$. For $q=1$, use the regular circle with vertices $A,B$, oriented edges $J_1,J_2$ having the same boundary, fundamental cycle $J_1-J_2$, and cocycle $u(J_1)=1,u(J_2)=0$. Over $\mathbb F_2$, prescribe the relevant component of the carried equivariant diagonal by [F7, step 1.2, step 1.3, step 2.1]
 
 $$\Phi\bigl(e_1\otimes(J_1-J_2)\bigr)=J_1\otimes J_1+J_2\otimes J_2.$$
 
@@ -204,11 +177,7 @@ $$a_q(u\times v)=D_q(u\times v)=D_{q-1}(u)\times D_1(v)=a_{q-1}a_1(u\times v).$$
 The displayed cross product is nonzero, so $a_q=a_{q-1}a_1=1$ by induction.
 Therefore $D_q(x)=x$, which is $Sq_{\mathrm{cyc}}^0x=x$.
 
-4.1 Convert the coefficient formula to Cartan. [step 1.1, step 1.2, step 1.3, step 2.1, step 3.1]
-Put $n=q+s-k$ in step 1.2 and set $i=q-a$, $j=s-b$. The vanishing from
-step 1.3 removes precisely the terms with $i<0$ or $j<0$, and the definition in
-step 1.1 removes those above the input degrees. The equation $a+b=q+s-k$ is
-equivalent to $i+j=k$, so
+4.1 Convert the coefficient formula to Cartan. Put $n=q+s-k$ in step 1.2 and set $i=q-a$, $j=s-b$. The vanishing from step 1.3 removes precisely the terms with $i<0$ or $j<0$, and the definition in step 1.1 removes those above the input degrees. The equation $a+b=q+s-k$ is equivalent to $i+j=k$, so [step 1.1, step 1.2, step 1.3, step 2.1, step 3.1]
 
 $$Sq_{\mathrm{cyc}}^k(x\times y)=\sum_{i+j=k}Sq_{\mathrm{cyc}}^i(x)\times Sq_{\mathrm{cyc}}^j(y).$$
 
@@ -216,12 +185,7 @@ Pulling this equality back along the diagonal
 $K\to K\times K$ gives the internal formula. Step 3.1 supplies the
 $k=0$ endpoint, and step 2.1 supplies the two top endpoints.
 
-5.1 Compute the cyclic-basis action on compatible finite regular projective models. [F1, F4, F10, F11, F12, F13, F14, F15, F16, step 1.3, step 2.1, step 3.1, step 4.1]
-First construct the regular models needed to apply step 4.1.
-For $N\ge0$, let $L_N$ be the boundary complex of the $(N+1)$-dimensional
-cross-polytope. Its vertices are $\{\pm e_0,\ldots,\pm e_N\}$, and its
-faces are exactly the subsets containing no antipodal pair. Radial projection
-realizes $L_N$ as $S^N$, equivariantly for the antipodal actions. Put
+5.1 Compute the cyclic-basis action on compatible finite regular projective models. First construct the regular models needed to apply step 4.1. For $N\ge0$, let $L_N$ be the boundary complex of the $(N+1)$-dimensional cross-polytope. Its vertices are $\{\pm e_0,\ldots,\pm e_N\}$, and its faces are exactly the subsets containing no antipodal pair. Radial projection realizes $L_N$ as $S^N$, equivariantly for the antipodal actions. Put [F1, F4, F10, F11, F12, F13, F14, F15, F16, step 1.3, step 2.1, step 3.1, step 4.1]
 
 $$Q_N=(\operatorname{sd}L_N)/(F\sim-F).$$
 
@@ -310,14 +274,7 @@ and naturality from step 1.1 make the answer independent of every larger
 $N$; the basis identification therefore permits the stable notation
 $Sq_{\mathrm{cyc}}^j(t^r)=\binom rj t^{r+j}$.
 
-6.1 The empty complex has zero cellular chains and all its cyclic-square coefficients vanish. [F1, F6, F14, step 1.1, step 1.3, step 2.1, step 3.1, step 4.1, step 5.1]
-For an empty complex, a zero cellular complex, or the zero class, all
-coordinates vanish. On a point only degree zero occurs, and
-$Sq_{\mathrm{cyc}}^0(a)=a^2=a$. Negative and above-degree square indices are
-zero by definition; the degree-zero, zero-square, and top-square endpoints
-were calculated above. The formulas include zero factors and the unit
-$t^0=t_N^0=1$. The model $Q_0$ is a point, while every basis computation
-chooses $N>r+j$, so no requested output lies above its finite model.
+6.1 The empty complex has zero cellular chains and all its cyclic-square coefficients vanish. For an empty complex, a zero cellular complex, or the zero class, all coordinates vanish. On a point only degree zero occurs, and $Sq_{\mathrm{cyc}}^0(a)=a^2=a$. Negative and above-degree square indices are zero by definition; the degree-zero, zero-square, and top-square endpoints were calculated above. The formulas include zero factors and the unit $t^0=t_N^0=1$. The model $Q_0$ is a point, while every basis computation chooses $N>r+j$, so no requested output lies above its finite model. [F1, F6, F14, step 1.1, step 1.3, step 2.1, step 3.1, step 4.1, step 5.1]
 
 The cyclic operation itself uses regular cellular chains and takes no
 normalization quotient. The ordinary singular comparison in step 5.1 uses

@@ -2,12 +2,14 @@
 id: thm-halpern-lauchli-dense-matrix-dichotomy
 kind: theorem
 title: "Halpern–Läuchli dense-matrix dichotomy"
-status: draft
+status: published
 origin: pipeline
 deps: [def-halpern-lauchli-finitistic-trees-density-and-matrices, lem-halpern-lauchli-word-calculus-rearrangement, lem-halpern-lauchli-rule-soundness-and-finite-thinning]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Halpern–Läuchli, A partition theorem (1966), Theorem 1 and proof, pp. 361–367"

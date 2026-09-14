@@ -1,7 +1,7 @@
 ---
 page: boolean-prime-ideal-theorem-in-the-basic-cohen-model
 title: Boolean Prime Ideal Theorem in the Basic Cohen Model
-status: draft
+status: published
 items: [lem-basic-cohen-model-schema-of-continuity, cor-basic-cohen-model-finite-set-continuity, lem-ordinal-definable-maximal-proper-ideal-in-the-basic-cohen-model, lem-basic-cohen-search-and-shift-prime-ideal-construction, thm-basic-cohen-model-satisfies-bpi-and-fails-choice, cor-relative-consistency-of-bpi-without-choice-over-zf]
 examples: []
 ---

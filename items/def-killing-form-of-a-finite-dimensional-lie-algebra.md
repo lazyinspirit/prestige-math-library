@@ -2,7 +2,7 @@
 id: def-killing-form-of-a-finite-dimensional-lie-algebra
 kind: definition
 title: Killing form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-trace-form-of-a-finite-dimensional-representation, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

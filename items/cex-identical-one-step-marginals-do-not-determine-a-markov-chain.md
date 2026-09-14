@@ -2,7 +2,7 @@
 id: cex-identical-one-step-marginals-do-not-determine-a-markov-chain
 kind: counterexample
 title: "Identical one-time marginals do not determine a Markov chain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-markov-chain-law-is-determined-by-initial-law-and-kernel, ex-iid-sequences-as-markov-chains-with-state-independent-kernel, ex-deterministic-dynamical-system-as-a-markov-kernel]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

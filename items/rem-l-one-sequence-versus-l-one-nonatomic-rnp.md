@@ -2,7 +2,7 @@
 id: rem-l-one-sequence-versus-l-one-nonatomic-rnp
 kind: remark
 title: "Sequence ell-one versus nonatomic L-one for the RNP"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   scraped: []
@@ -62,28 +63,8 @@ continuous dual $c_0^*$, and continuous duals are Banach
 
 **Given:** AC and either scalar field.
 
-1.1 Verify norm separability of the sequence space. [A1, L1]
-Over $\mathbb R$, let $D$ be the finite-support sequences with rational
-coordinates; over $\mathbb C$, use coordinates in $\mathbb Q+i\mathbb Q$.
-For each support length the coordinate choices form a finite product of
-countable sets, and the union over all lengths is countable by [L1]. Given
-$a\in\ell^1$ and $\varepsilon>0$, first choose a finite truncation within
-$\varepsilon/2$ in $\ell^1$, then approximate its finitely many coordinates
-so that the sum of coordinate errors is below $\varepsilon/2$. Thus $D$ is
-countable and dense, and $\ell^1$ is norm separable.
+1.1 Verify norm separability of the sequence space. Over $\mathbb R$, let $D$ be the finite-support sequences with rational coordinates; over $\mathbb C$, use coordinates in $\mathbb Q+i\mathbb Q$. For each support length the coordinate choices form a finite product of countable sets, and the union over all lengths is countable by [L1]. Given $a\in\ell^1$ and $\varepsilon>0$, first choose a finite truncation within $\varepsilon/2$ in $\ell^1$, then approximate its finitely many coordinates so that the sum of coordinate errors is below $\varepsilon/2$. Thus $D$ is countable and dense, and $\ell^1$ is norm separable. [A1, L1]
 
-2.1 Put the sequence-space side under the separable-dual theorem. [A1, L2, L3, step 1.1]
-By [L2], $\ell^1$ is isometrically the continuous dual $c_0^*$ and is Banach.
-Step 1.1 supplies norm separability, so [L3], under the assumed AC, gives RNP
-to $\ell^1$.
+2.1 Put the sequence-space side under the separable-dual theorem. By [L2], $\ell^1$ is isometrically the continuous dual $c_0^*$ and is Banach. Step 1.1 supplies norm separability, so [L3], under the assumed AC, gives RNP to $\ell^1$. [A1, L2, L3, step 1.1]
 
-3.1 Contrast the nonatomic function space and audit scope. [A1, L4, step 2.1]
-The theorem [L4] gives the opposite conclusion for the real and complex
-Lebesgue quotient spaces $L^1([0,1],\lambda)$. This is not a contradiction:
-$\ell^1$ consists of summable scalar sequences and is the separable dual
-$c_0^*$, whereas the second space is built over a nonatomic measure and has
-the explicit nondifferentiable indicator curve used in [L4]. The zero sequence
-and zero function occur in both spaces but do not determine a global geometric
-property. Both scalar fields are covered, and AC is propagated to [L3] and
-[L4], with Countable Choice used in the countability calculation of step 1.1.
-[given, A1, L1, L2, L3, L4, step 1.1, step 2.1] ∎
+3.1 Contrast the nonatomic function space and audit scope. [A1, L4, step 2.1] The theorem [L4] gives the opposite conclusion for the real and complex Lebesgue quotient spaces $L^1([0,1],\lambda)$. This is not a contradiction: $\ell^1$ consists of summable scalar sequences and is the separable dual $c_0^*$, whereas the second space is built over a nonatomic measure and has the explicit nondifferentiable indicator curve used in [L4]. The zero sequence and zero function occur in both spaces but do not determine a global geometric property. Both scalar fields are covered, and AC is propagated to [L3] and [L4], with Countable Choice used in the countability calculation of step 1.1. [given, A1, L1, L2, L3, L4, step 1.1, step 2.1] ∎

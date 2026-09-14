@@ -2,12 +2,13 @@
 id: lem-global-fiber-basis-trivializes-serre-monodromy
 kind: lemma
 title: A global fiber basis trivializes Serre monodromy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid, prop-singular-cohomology-is-contravariantly-functorial, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-oriented-real-vector-bundles-are-classified-by-bso
 kind: theorem
 title: Oriented real vector bundles are classified by BSO
-status: draft
+status: published
 origin: pipeline
 deps: [thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, prop-orientation-is-equivalent-to-an-so-n-reduction, def-oriented-grassmannian-and-tautological-oriented-bundle, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

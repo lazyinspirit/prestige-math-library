@@ -2,7 +2,7 @@
 id: ex-continuity-contradiction-for-a-supported-boolean-algebra
 kind: example
 title: The finite Boolean expansion contradiction in the supported-ideal proof
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-algebra-for-stone-duality, def-boolean-ideals-filters-and-primality]
 proof_strategy: induction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

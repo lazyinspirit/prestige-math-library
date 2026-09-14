@@ -2,7 +2,7 @@
 id: lem-normal-measure-rowbottom-homogeneity
 kind: lemma
 title: Finite-set homogeneity for a normal measure
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-lc-measurability-normal-measures-and-embeddings
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: induction
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

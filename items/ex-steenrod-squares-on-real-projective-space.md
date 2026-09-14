@@ -83,21 +83,16 @@ binomial calculation make no further choices.
 
 **Proof technique:** total Cartan followed by a finite binomial expansion.
 
-1.1 The total square of the degree-one generator is
-$Sq(a)=a+a^2$. [F2, F3]
-Indeed, $Sq^0(a)=a$, the top square is $Sq^1(a)=a^2$, and instability removes
-every higher component.
+1.1 The total square of the degree-one generator is $Sq(a)=a+a^2$. Indeed, $Sq^0(a)=a$, the top square is $Sq^1(a)=a^2$, and instability removes every higher component. [F2, F3]
 
-2.1 The total square is multiplicative on the powers of $a$. [F2, F4, step 1.1]
-All component sums are finite, so summing [F4] over $k$ gives
+2.1 The total square is multiplicative on the powers of $a$. All component sums are finite, so summing [F4] over $k$ gives [F2, F4, step 1.1]
 
 $$Sq(xy)=\sum_k\sum_{r+s=k}Sq^r(x)Sq^s(y)=Sq(x)Sq(y).$$
 
 Induction on the finite integer $j$, beginning with $Sq(1)=1$, therefore gives
 $Sq(a^j)=Sq(a)^j$.
 
-3.1 The infinite-dimensional formula follows by coefficient comparison. [F1, step 1.1, step 2.1]
-The ordinary binomial theorem over $\mathbb F_2$ gives
+3.1 The infinite-dimensional formula follows by coefficient comparison. The ordinary binomial theorem over $\mathbb F_2$ gives [F1, step 1.1, step 2.1]
 
 $$Sq(a^j)=(a+a^2)^j=\sum_{r=0}^j\binom jr a^{j+r}.$$
 
@@ -106,12 +101,7 @@ The component on the right is $\binom ji a^{j+i}$ when $0\leq i\leq j$,
 and is zero when $i>j$, which agrees with the usual zero convention for that
 binomial coefficient.
 
-4.1 Restriction gives exactly the truncated finite formula. [F1, F5, F6, F7, step 3.1]
-Reduction modulo two turns every boundary coefficient in [F5] into zero.
-Thus cellular comparison and field duality give one copy of $\mathbb F_2$ in
-cohomological degrees $0,\ldots,n$ and zero above degree $n$.  By [F1] and
-[F7], the restrictions $a_n^k=i_n^*(a^k)$ are nonzero for $0\leq k\leq n$.
-Consequently these powers form every nonzero graded piece and
+4.1 Restriction gives exactly the truncated finite formula. Reduction modulo two turns every boundary coefficient in [F5] into zero. Thus cellular comparison and field duality give one copy of $\mathbb F_2$ in cohomological degrees $0,\ldots,n$ and zero above degree $n$. By [F1] and [F7], the restrictions $a_n^k=i_n^*(a^k)$ are nonzero for $0\leq k\leq n$. Consequently these powers form every nonzero graded piece and [F1, F5, F6, F7, step 3.1]
 
 $$H^*(\mathbb {RP}^n;\mathbb F_2)=\mathbb F_2[a_n]/(a_n^{n+1}).$$
 
@@ -122,12 +112,4 @@ $$Sq^i(a_n^j)=Sq^i(i_n^*a^j)=i_n^*Sq^i(a^j)=\binom ji a_n^{j+i}.$$
 The quotient in [F5] makes this zero when $j+i>n$. If $j>n$, both sides are
 already zero: the input power vanishes, while $j+i>n$ for every $i\geq0$.
 
-5.1 The endpoint and choice conventions agree with the formulas. [F1, F2, F3, F5, F6, A1, step 1.1, step 2.1, step 3.1, step 4.1]
-For $j=0$, the formula says $Sq^0(1)=1$ and all positive squares of the unit
-vanish. For $i=0$ it says $Sq^0(a^j)=a^j$; for $i=j$ it is the top-square
-identity $Sq^j(a^j)=a^{2j}$; and for $i>j$ it is instability. The case $n=0$
-is the point: $a_0=0$ and only its zeroth power survives. Projective spaces
-are nonempty, zero classes map to zero, and degenerate singular simplices are
-already included in the natural operations of [F6]. AC is used only by the
-two ring suppliers [F1] and [F5]; every sum and induction here is finite. The
-formula is an equality, not either direction of a biconditional. ∎
+5.1 The endpoint and choice conventions agree with the formulas. For $j=0$, the formula says $Sq^0(1)=1$ and all positive squares of the unit vanish. For $i=0$ it says $Sq^0(a^j)=a^j$; for $i=j$ it is the top-square identity $Sq^j(a^j)=a^{2j}$; and for $i>j$ it is instability. The case $n=0$ is the point: $a_0=0$ and only its zeroth power survives. Projective spaces are nonempty, zero classes map to zero, and degenerate singular simplices are already included in the natural operations of [F6]. AC is used only by the two ring suppliers [F1] and [F5]; every sum and induction here is finite. The formula is an equality, not either direction of a biconditional. [F1, F2, F3, F5, F6, A1, step 1.1, step 2.1, step 3.1, step 4.1] ∎

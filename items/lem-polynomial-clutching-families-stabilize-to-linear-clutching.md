@@ -2,7 +2,7 @@
 id: lem-polynomial-clutching-families-stabilize-to-linear-clutching
 kind: lemma
 title: Polynomial clutching families stabilize to linear clutching
-status: draft
+status: published
 origin: pipeline
 deps: [def-clutching-construction-for-bundles-over-a-suspension, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, thm-vector-bundles-glued-from-transition-cocycles, thm-homotopy-invariance-of-vector-bundle-pullback, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,15 @@
 id: lem-solovay-homogeneous-truth-has-borel-representatives
 kind: lemma
 title: Homogeneous truth about a generic real has Borel representatives
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-absorption-factorization-and-homogeneity, thm-forcing-theorem, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: boolean-valued-forcing
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - {title: "Solovay 1970, Part II, Lemma 2.8 and Part III, Lemma 1.4", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}

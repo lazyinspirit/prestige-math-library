@@ -2,13 +2,14 @@
 id: def-clutching-construction-for-bundles-over-a-suspension
 kind: definition
 title: Clutching construction for bundles over a suspension
-status: draft
+status: published
 origin: pipeline
 deps: [thm-vector-bundles-glued-from-transition-cocycles, def-reduced-cone-suspension-and-cofiber-sequence]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

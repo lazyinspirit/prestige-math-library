@@ -2,7 +2,7 @@
 id: thm-feferman-levy-reals-remain-uncountable
 kind: theorem
 title: The Feferman–Levy reals remain uncountable
-status: draft
+status: published
 origin: pipeline
 deps: [thm-feferman-levy-reals-are-a-countable-union-of-countable-sets, thm-r-uncountable, thm-hereditarily-symmetric-interpretations-form-a-zf-model]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

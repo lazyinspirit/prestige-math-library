@@ -2,7 +2,7 @@
 id: thm-finite-rank-complement-theorem-over-compact-hausdorff-bases
 kind: theorem
 title: Finite-rank complement theorem over compact Hausdorff bases
-status: draft
+status: published
 origin: pipeline
 deps: [cor-compact-hausdorff-partitions-of-unity, lem-ac-supplies-dependent-choice-for-vector-bundle-constructions, def-vector-bundle-map-section-subbundle-and-isomorphism, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

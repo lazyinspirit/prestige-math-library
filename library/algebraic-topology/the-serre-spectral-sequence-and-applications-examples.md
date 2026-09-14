@@ -1,7 +1,7 @@
 ---
 page: "the-serre-spectral-sequence-and-applications-examples"
 title: "The Serre Spectral Sequence and Applications — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-path-loop-serre-computation-of-cp-infinity", "ex-serre-spectral-sequence-of-the-complex-hopf-fibration", "ex-serre-spectral-sequence-of-the-quaternionic-hopf-fibration", "ex-homology-of-the-loop-space-of-an-odd-sphere", "ex-wang-sequence-of-a-mapping-torus", "cex-serre-page-collapse-does-not-split-the-abutment", "cex-ignoring-monodromy-gives-the-wrong-serre-e-two-page"]
 ---

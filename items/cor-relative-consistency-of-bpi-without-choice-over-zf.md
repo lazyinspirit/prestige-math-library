@@ -2,7 +2,7 @@
 id: cor-relative-consistency-of-bpi-without-choice-over-zf
 kind: corollary
 title: Relative consistency of BPI without Choice over ZF
-status: draft
+status: published
 origin: pipeline
 deps: [thm-basic-cohen-model-satisfies-bpi-and-fails-choice, lem-basic-cohen-search-and-shift-prime-ideal-construction, lem-basic-cohen-symmetric-construction-is-uniformly-formalizable, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-arithmetic-provability-and-consistency]
 proof_strategy: finite-proof-reduction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-equivalence-between-simply-connected-real-lie-groups-and-finite-dimensional-real-lie-algebras
 kind: theorem
 title: Equivalence of simply connected Lie groups and real Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-lie-second-fundamental-theorem, thm-lie-third-fundamental-theorem, def-countable-choice]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -48,5 +49,7 @@ connected integration ([[thm-lie-third-fundamental-theorem]]).
 **Proof technique:** verify essential surjectivity and full faithfulness.
 
 1.1 By [L2], every object in the Lie-algebra category is isomorphic to the Lie algebra of an object in the group category. Thus the Lie functor is essentially surjective. [A1, L2]
+
 1.2 For connected simply connected $G$ and any target $H$ in the group category, [L1] says differentiation maps smooth homomorphisms $G\to H$ bijectively onto Lie-algebra homomorphisms $\operatorname{Lie}(G)\to\operatorname{Lie}(H)$. Existence is fullness and uniqueness is faithfulness. [A1, L1]
+
 2.1 Differentiation respects identities and composition by the chain rule, while uniqueness in [L1] shows that integration does too. Thus steps 1.1–1.2 give an equivalence. The one-point group and zero algebra correspond, so the zero-dimensional endpoint is included. Countable choice is inherited exactly through [L1] and [L2]. [A1, L1, L2, step 1.1, 1.2] ∎

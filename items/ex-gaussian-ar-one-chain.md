@@ -2,7 +2,7 @@
 id: ex-gaussian-ar-one-chain
 kind: example
 title: "Gaussian AR(1) chain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-bounded-function-form-of-the-markov-property, def-standard-normal-and-normal-laws, def-independent-random-elements, thm-grouping-independent-sigma-algebras, thm-measurability-of-integration-against-a-kernel, thm-dynkin-pi-lambda]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

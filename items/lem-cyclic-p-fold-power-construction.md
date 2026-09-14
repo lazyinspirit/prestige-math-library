@@ -124,16 +124,7 @@ simplices, compare it with the finite cellular construction, and perform the
 normalizer, transfer, circle, and product calculations coefficient by
 coefficient.
 
-1.1 Construct an equivariant singular diagonal. [F2, F3, F7, F8, A1]
-For the identity simplex $\iota_n:\Delta^n\to\Delta^n$, construct elements
-$\Phi(e_j\otimes\iota_n)\in C_*(\Delta^n;\mathbb F_p)^{\otimes p}$ by
-induction on $j+n$. The already defined boundary is a cycle because the
-cyclic-resolution differential squares to zero. The affine contraction of
-$\Delta^n$ to its first vertex, [F8], and the iterated chain equivalence [F7]
-make its augmented $p$fold tensor complex acyclic, so a filling exists.
-[A1] selects one filling for each nonempty extension problem. Define the
-other $C_p$-translates equivariantly, fix degree zero to be the iterated
-Alexander--Whitney diagonal, and put
+1.1 Construct an equivariant singular diagonal. For the identity simplex $\iota_n:\Delta^n\to\Delta^n$, construct elements $\Phi(e_j\otimes\iota_n)\in C_*(\Delta^n;\mathbb F_p)^{\otimes p}$ by induction on $j+n$. The already defined boundary is a cycle because the cyclic-resolution differential squares to zero. The affine contraction of $\Delta^n$ to its first vertex, [F8], and the iterated chain equivalence [F7] make its augmented $p$fold tensor complex acyclic, so a filling exists. [A1] selects one filling for each nonempty extension problem. Define the other $C_p$-translates equivariantly, fix degree zero to be the iterated Alexander--Whitney diagonal, and put [F2, F3, F7, F8, A1]
 
 $$
 \Phi_X(e_j\otimes\sigma):=(\sigma_\#)^{\otimes p}\Phi(e_j\otimes\iota_n)
@@ -145,8 +136,7 @@ The displayed formula makes it strictly natural in $X$, including when
 $\sigma$ is degenerate. The relative carrier comparison in [F2] shows that
 two systems so constructed are equivariantly chain-homotopic.
 
-2.1 Define the singular coefficients and prove well-definedness. [F2, F3, step 1.1]
-For a degree-$q$ cocycle $c$, define
+2.1 Define the singular coefficients and prove well-definedness. For a degree-$q$ cocycle $c$, define [F2, F3, step 1.1]
 
 $$
 D_j(c)(z):=c^{\otimes p}\Phi_X(e_j\otimes z).
@@ -164,29 +154,13 @@ extension of [F2], a cochain homotopy between the two $p$fold evaluations.
 Thus the class depends only on $x=[c]$. Strict naturality in step 1.1 proves
 naturality of $D_j$.
 
-3.1 Prove additivity and identify $D_0$. [F3, F4, F7, step 2.1]
-For cocycles $c,d$, the mixed words in
-$(c+d)^{\otimes p}-c^{\otimes p}-d^{\otimes p}$ form free $C_p$-orbits.
-Taking the lexicographically least word in each finite orbit writes their sum
-as $\operatorname{Tr}_1^{C_p}z$. The explicit contraction of $W$ after
-forgetting its action, together with [F7], makes restriction from equivariant
-to ordinary cohomology onto. Hence [F4]'s
-$\operatorname{Tr}\operatorname{Res}=p=0$ shows that diagonal pullback kills
-the mixed class. Uniqueness of the $[w_j]$ coordinates gives
-$D_j(x+y)=D_j(x)+D_j(y)$.
+3.1 Prove additivity and identify $D_0$. For cocycles $c,d$, the mixed words in $(c+d)^{\otimes p}-c^{\otimes p}-d^{\otimes p}$ form free $C_p$-orbits. Taking the lexicographically least word in each finite orbit writes their sum as $\operatorname{Tr}_1^{C_p}z$. The explicit contraction of $W$ after forgetting its action, together with [F7], makes restriction from equivariant to ordinary cohomology onto. Hence [F4]'s $\operatorname{Tr}\operatorname{Res}=p=0$ shows that diagonal pullback kills the mixed class. Uniqueness of the $[w_j]$ coordinates gives $D_j(x+y)=D_j(x)+D_j(y)$. [F3, F4, F7, step 2.1]
 
 At $j=0$, the fixed augmentation and the degree-zero diagonal in step 1.1
 give the iterated Alexander--Whitney representative for the ordinary cup
 power. Therefore $D_0(x)=x^p$.
 
-3.2 Compare with finite cellular coefficients. [F1, F2, F6, F7, F8, A1, step 1.1, step 2.1]
-For a finite regular $K$, barycentric subdivision of each closed cell defines
-a cell-carried chain map
-$\iota:C_*^{\mathrm{cell}}(K;\mathbb F_p)\to C_*^{\mathrm{sing}}(K;\mathbb F_p)$.
-By [F6] it is a homology isomorphism. Its mapping cone is acyclic; [A1]
-chooses complements to its boundary subspaces, whose inverse boundary maps
-contract the cone. Dualizing proves that $\iota^*$ is a cohomology
-isomorphism.
+3.2 Compare with finite cellular coefficients. For a finite regular $K$, barycentric subdivision of each closed cell defines a cell-carried chain map $\iota:C_*^{\mathrm{cell}}(K;\mathbb F_p)\to C_*^{\mathrm{sing}}(K;\mathbb F_p)$. By [F6] it is a homology isomorphism. Its mapping cone is acyclic; [A1] chooses complements to its boundary subspaces, whose inverse boundary maps contract the cone. Dualizing proves that $\iota^*$ is a cohomology isomorphism. [F1, F2, F6, F7, F8, A1, step 1.1, step 2.1]
 
 The cellular diagonal from [F1] followed by $\iota^{\otimes p}$ and the
 singular diagonal from step 1.1 preceded by $1\otimes\iota$ lie in the same
@@ -196,22 +170,9 @@ equivariant chain homotopy between the two maps. Evaluating it on
 $c^{\otimes p}$ proves that every singular $D_j$ corresponds to the finite
 cellular coefficient stated in [F1].
 
-4.1 Establish the sharp range on finite regular complexes. [F1, step 3.2]
-Restriction to the $q$-skeleton is injective on $H^q$ and an isomorphism in
-lower degrees by the cellular cochain complex. Collapse its $(q-1)$-skeleton
-and map each $q$-cell to $S^q$ with the integer degree representing the
-chosen coefficient of a cellular cocycle. This gives a map $K^q\to S^q$
-pulling the sphere generator back to the class. Naturality therefore reduces
-$D_j$ for $j>(p-1)q$ to a class in
-$H^{pq-j}(S^q;\mathbb F_p)$ below degree $q$. It is zero except possibly in
-degree zero. In that last case $j=pq$ and $q>0$; restriction to a point sends
-the sphere generator to zero, so additivity sends $D_{pq}$ to zero, while
-$H^0(S^q)\to H^0(*)$ is injective. Thus $D_j=0$ throughout the stated range.
+4.1 Establish the sharp range on finite regular complexes. Restriction to the $q$-skeleton is injective on $H^q$ and an isomorphism in lower degrees by the cellular cochain complex. Collapse its $(q-1)$-skeleton and map each $q$-cell to $S^q$ with the integer degree representing the chosen coefficient of a cellular cocycle. This gives a map $K^q\to S^q$ pulling the sphere generator back to the class. Naturality therefore reduces $D_j$ for $j>(p-1)q$ to a class in $H^{pq-j}(S^q;\mathbb F_p)$ below degree $q$. It is zero except possibly in degree zero. In that last case $j=pq$ and $q>0$; restriction to a point sends the sphere generator to zero, so additivity sends $D_{pq}$ to zero, while $H^0(S^q)\to H^0(*)$ is injective. Thus $D_j=0$ throughout the stated range. [F1, step 3.2]
 
-4.2 Apply the normalizer action at odd primes. [F3, F13, step 3.2]
-For $a\in\mathbb F_p^\times$, multiplication by $a$ permutes the $p$ tensor
-positions and conjugates $T$ to $T^a$. Its sign is computed from the
-Vandermonde product:
+4.2 Apply the normalizer action at odd primes. For $a\in\mathbb F_p^\times$, multiplication by $a$ permutes the $p$ tensor positions and conjugates $T$ to $T^a$. Its sign is computed from the Vandermonde product: [F3, F13, step 3.2]
 
 $$
 \operatorname{sgn}(i\mapsto ai)=a^{p(p-1)/2}=a^m\quad\text{in }\mathbb F_p.
@@ -226,26 +187,9 @@ $r\equiv mq\pmod{p-1}$ for $j=2r$, and
 $r+1\equiv mq\pmod{p-1}$ for $j=2r+1$. Separating even and odd $q$ gives
 exactly the four families in the Statement.
 
-4.3 Derive the external product formula. [F1, F3, F7, step 1.1, step 3.2]
-Take the tensor product of the two equivariant power cocycles and pull it
-back along the diagonal $C_p\to C_p\times C_p$. The shuffle moving $p$
-degree-$s$ factors past the degree-$r$ factors contributes
-$(-1)^{p(p-1)rs/2}$. The cyclic diagonal in [F3] gives every split with
-coefficient one when $p=2$; for odd $p$, its even coordinate has only the
-even--even splits, since the odd--odd coefficient $p(p-1)/2$ is zero in
-$\mathbb F_p$. Comparing the unique $w_k$ coordinates yields the two
-displayed external formulas. The carrier comparison in step 1.1 makes this
-chain calculation valid for arbitrary spaces, not only finite complexes.
+4.3 Derive the external product formula. Take the tensor product of the two equivariant power cocycles and pull it back along the diagonal $C_p\to C_p\times C_p$. The shuffle moving $p$ degree-$s$ factors past the degree-$r$ factors contributes $(-1)^{p(p-1)rs/2}$. The cyclic diagonal in [F3] gives every split with coefficient one when $p=2$; for odd $p$, its even coordinate has only the even--even splits, since the odd--odd coefficient $p(p-1)/2$ is zero in $\mathbb F_p$. Comparing the unique $w_k$ coordinates yields the two displayed external formulas. The carrier comparison in step 1.1 makes this chain calculation valid for arbitrary spaces, not only finite complexes. [F1, F3, F7, step 1.1, step 3.2]
 
-4.4 Relate adjacent coefficients by the positive Bockstein. [F3, F4, F10, F11, F12, F13, step 2.1, step 3.1]
-Lift $c$ by its canonical residues [F11]. Writing $\delta\widetilde c=p h$, the
-coboundary of $\widetilde c^{\otimes p}$ divided by $p$ is the cyclic sum of
-the $p$ words with one $h$ and $p-1$ copies of $c$. For odd $p$ this is a
-transfer, so step 3.1's transfer argument makes the Bockstein of the pulled
-back total class zero. By [F3] and [F10], our positive convention has
-$\beta w_{2r}=0$ and $\beta w_{2r-1}=w_{2r}$. Applying the signed derivation
-rule [F12] to $\sum_jw_j\times D_j(x)$ and comparing even and odd coordinates
-gives
+4.4 Relate adjacent coefficients by the positive Bockstein. Lift $c$ by its canonical residues [F11]. Writing $\delta\widetilde c=p h$, the coboundary of $\widetilde c^{\otimes p}$ divided by $p$ is the cyclic sum of the $p$ words with one $h$ and $p-1$ copies of $c$. For odd $p$ this is a transfer, so step 3.1's transfer argument makes the Bockstein of the pulled back total class zero. By [F3] and [F10], our positive convention has $\beta w_{2r}=0$ and $\beta w_{2r-1}=w_{2r}$. Applying the signed derivation rule [F12] to $\sum_jw_j\times D_j(x)$ and comparing even and odd coordinates gives [F3, F4, F10, F11, F12, F13, step 2.1, step 3.1]
 
 $$
 \beta D_{2r}+D_{2r-1}=0,\qquad \beta D_{2r-1}=0.
@@ -254,12 +198,7 @@ $$
 This explains the minus sign relative to sources using
 $\beta w_{2r-1}=-w_{2r}$.
 
-4.5 Compute the circle coefficient. [F1, F3, step 3.2]
-Give $S^1$ two oriented edges $J_1,J_2$ with common boundary and let the
-cocycle $z$ take values $1,0$ on them. Steenrod--Epstein's carried map is
-obtained recursively from the interval contraction. At resolution degree
-$p-1=2m$, its displayed finite sum has the single surviving multi-index
-$\alpha_i=\beta_i=0$ and hence
+4.5 Compute the circle coefficient. Give $S^1$ two oriented edges $J_1,J_2$ with common boundary and let the cocycle $z$ take values $1,0$ on them. Steenrod--Epstein's carried map is obtained recursively from the interval contraction. At resolution degree $p-1=2m$, its displayed finite sum has the single surviving multi-index $\alpha_i=\beta_i=0$ and hence [F1, F3, step 3.2]
 
 $$
 \Phi(e_{p-1}\otimes(J_1-J_2))=m!(J_1^p-J_2^p).
@@ -270,11 +209,7 @@ $(-1)^{p(p-1)/2}=(-1)^m$, while it vanishes on $J_2^p$. Therefore
 $D_{p-1}(z)=(-1)^m m!z$, so $a_1=(-1)^m m!$. For $p=2$ the same two-edge
 calculation has coefficient one.
 
-5.1 Compute every top coefficient. [F9, step 4.1, step 4.3, step 4.5]
-For $q\geq1$, let $u$ be the generator in degree $q-1$ on $S^{q-1}$ and let
-$z$ be the circle class. [F9] makes $u\times z$ nonzero. The sharp range
-already proved leaves only the two
-top factors in step 4.3, so
+5.1 Compute every top coefficient. For $q\geq1$, let $u$ be the generator in degree $q-1$ on $S^{q-1}$ and let $z$ be the circle class. [F9] makes $u\times z$ nonzero. The sharp range already proved leaves only the two top factors in step 4.3, so [F9, step 4.1, step 4.3, step 4.5]
 
 $$
 a_q=(-1)^{p(p-1)(q-1)/2}a_{q-1}a_1=(-1)^{mq}m!\,a_{q-1}.
@@ -284,12 +219,7 @@ Starting with $a_0=1$ gives
 $a_q=(-1)^{mq(q+1)/2}(m!)^q$. None of $1,\ldots,m$ is zero modulo $p$, so
 $a_q$ is a unit. At $p=2$ the same recurrence keeps $a_q=1$.
 
-6.1 Pass the finite identities to every space and check boundaries. [F5, A1, step 2.1, step 3.1, step 3.2, step 4.1, step 4.2, step 4.3, step 4.4, step 5.1]
-For fixed $p,q,j$, each residual in steps 4.1, 4.2, and 5.1 is a natural
-map between fixed singular cohomology degrees. It vanishes on finite regular
-complexes by steps 3.2--5.1, so [F5] makes it vanish on every space. The
-external and Bockstein formulas were already proved directly on singular
-cochains.
+6.1 Pass the finite identities to every space and check boundaries. For fixed $p,q,j$, each residual in steps 4.1, 4.2, and 5.1 is a natural map between fixed singular cohomology degrees. It vanishes on finite regular complexes by steps 3.2--5.1, so [F5] makes it vanish on every space. The external and Bockstein formulas were already proved directly on singular cochains. [F5, A1, step 2.1, step 3.1, step 3.2, step 4.1, step 4.2, step 4.3, step 4.4, step 5.1]
 
 For the empty space and the zero class every operation is zero. At $q=0$,
 $D_0(a)=a^p=a$ and every positive $D_j$ is outside the sharp range; on a

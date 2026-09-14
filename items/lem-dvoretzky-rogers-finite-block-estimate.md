@@ -2,7 +2,7 @@
 id: lem-dvoretzky-rogers-finite-block-estimate
 kind: lemma
 title: "The Dvoretzky--Rogers finite-block estimate"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: extremal
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -48,19 +49,11 @@ biorthogonal Auerbach basis ([[lem-finite-dimensional-auerbach-basis]]).
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 The case $r=2$ is direct: choose any unit $u$ and put [given, L1]
-$x_i=\sqrt{d_i}u$. The only nontrivial subset satisfies
-$\|x_1+x_2\|^2\le2(d_1+d_2)<3(d_1+d_2)$. [L1, scalar Cauchy--Schwarz]
+1.1 The case $r=2$ is direct: choose any unit $u$ and put [given, L1] $x_i=\sqrt{d_i}u$. The only nontrivial subset satisfies $\|x_1+x_2\|^2\le2(d_1+d_2)<3(d_1+d_2)$. [L1, algebra]
 
-2.1 Suppose $r\ge3$ and put $n=r(r-1)$. Choose an $n$-dimensional real [given, L1, step 1.1]
-subspace $W$ of $V$ (in the complex case, use the underlying real space).
-In Auerbach coordinates from [L1], compactness bounds the family of centered
-ellipsoids contained in the unit ball of $W$, so their determinants attain a
-maximum. After a linear change of coordinates, take that ellipsoid to be the
-Euclidean unit ball. [L1, finite-dimensional compactness, extremal ellipsoid]
+2.1 Suppose $r\ge3$ and put $n=r(r-1)$. Choose an $n$-dimensional real [given, L1, step 1.1] subspace $W$ of $V$ (in the complex case, use the underlying real space). In Auerbach coordinates from [L1], compactness bounds the family of centered ellipsoids contained in the unit ball of $W$, so their determinants attain a maximum. After a linear change of coordinates, take that ellipsoid to be the Euclidean unit ball. [L1, algebra]
 
-3.1 Dvoretzky--Rogers' contact-point induction gives boundary points [given, step 2.1]
-$A_p=(a_{p1},\ldots,a_{pp},0,\ldots,0)$, $1\le p\le r$, satisfying
+3.1 Dvoretzky--Rogers' contact-point induction gives boundary points $A_p=(a_{p1},\ldots,a_{pp},0,\ldots,0)$, $1\le p\le r$, satisfying [given, step 2.1]
 
 $$\sum_{j<p}a_{pj}^2\le\frac{p-1}{n},\qquad \sum_{j\le p}a_{pj}^2=1.$$
 
@@ -88,15 +81,11 @@ $p$-th of them zero without moving the earlier contact points. Since
 $|A_p|_2=1$, the last inequality is exactly
 $n\sum_{j<p}a_{pj}^2\le p-1$. [step 2.1, maximality, compact subsequence]
 
-4.1 The triangular form and scalar Cauchy--Schwarz now give, for real [given, step 3.1]
-$\lambda_1,\ldots,\lambda_r$,
+4.1 The triangular form and scalar Cauchy--Schwarz now give, for real $\lambda_1,\ldots,\lambda_r$, [given, step 3.1]
 
 $$\left|\sum_{p=1}^r\lambda_pA_p\right|_2^2 \le\left(2+\frac{r(r-1)}n\right) \sum_{p=1}^r\lambda_p^2 =3\sum_{p=1}^r\lambda_p^2.$$
 
 Because the maximal Euclidean ball lies in the norm unit ball, the same upper
 bound holds for the squared norm in $W$. [step 3.1, finite triangular sum]
 
-5.1 Put $x_i=\sqrt{d_i}A_i$ and in step 4.1 take [given, step 4.1]
-$\lambda_i=\sqrt{d_i}$ for $i\in A$ and $0$ otherwise. Each $A_i$ lies on the
-norm-unit boundary, so $\|x_i\|^2=d_i$, and the required subset inequality
-follows. The empty subset gives zero. [steps 2.1, 4.1] ∎
+5.1 Put $x_i=\sqrt{d_i}A_i$ and in step 4.1 take [given, step 4.1] $\lambda_i=\sqrt{d_i}$ for $i\in A$ and $0$ otherwise. Each $A_i$ lies on the norm-unit boundary, so $\|x_i\|^2=d_i$, and the required subset inequality follows. The empty subset gives zero. [step 2.1, 4.1] ∎

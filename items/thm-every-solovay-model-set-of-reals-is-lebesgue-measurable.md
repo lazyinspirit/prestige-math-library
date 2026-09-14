@@ -2,7 +2,7 @@
 id: thm-every-solovay-model-set-of-reals-is-lebesgue-measurable
 kind: theorem
 title: Every set of reals in the Solovay model is Lebesgue measurable
-status: draft
+status: published
 origin: pipeline
 deps: [thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, lem-solovay-collapse-localizes-countable-ordinal-data, lem-solovay-borel-code-and-regularity-absoluteness, lem-solovay-random-and-cohen-generics-are-large, lem-solovay-homogeneous-truth-has-borel-representatives]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 proof_strategy: borel-mod-null
 sources: {references: [{title: "Solovay 1970, Part III, Lemma 1.4 and Lemma 2.9", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
+verification:
+  audited: 2026-09-14
 ---
 
 ## Statement

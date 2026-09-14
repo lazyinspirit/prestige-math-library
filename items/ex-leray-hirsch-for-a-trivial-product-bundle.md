@@ -2,12 +2,13 @@
 id: ex-leray-hirsch-for-a-trivial-product-bundle
 kind: example
 title: Leray–Hirsch for a trivial product bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-leray-hirsch-module-isomorphism, thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

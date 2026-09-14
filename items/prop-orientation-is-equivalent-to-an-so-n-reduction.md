@@ -2,7 +2,7 @@
 id: prop-orientation-is-equivalent-to-an-so-n-reduction
 kind: proposition
 title: Orientation is equivalent to an SO(n)-reduction
-status: draft
+status: published
 origin: pipeline
 deps: [def-oriented-real-vector-bundle-and-oriented-frame-bundle]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

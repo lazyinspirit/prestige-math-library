@@ -2,7 +2,7 @@
 id: fs-l-space-and-s-space-existence-are-dual-zfc-theorems
 kind: false-statement
 title: "False: L-space and S-space existence are dual ZFC theorems"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-l-and-s-space-existence-is-asymmetric
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

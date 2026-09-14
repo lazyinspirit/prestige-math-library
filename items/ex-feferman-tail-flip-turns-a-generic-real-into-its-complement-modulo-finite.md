@@ -2,7 +2,7 @@
 id: ex-feferman-tail-flip-turns-a-generic-real-into-its-complement-modulo-finite
 kind: example
 title: A tail flip turns a generic real into its complement modulo finite
-status: draft
+status: published
 origin: pipeline
 deps: [lem-feferman-tail-complement-automorphism]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

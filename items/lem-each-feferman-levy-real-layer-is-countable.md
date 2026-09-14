@@ -2,7 +2,7 @@
 id: lem-each-feferman-levy-real-layer-is-countable
 kind: lemma
 title: Each Feferman–Levy real layer is countable
-status: draft
+status: published
 origin: pipeline
 deps: [lem-feferman-levy-real-layer-ground-cardinality-bound, lem-ground-aleph-n-is-countable-in-the-feferman-levy-model, lem-countable-iff-surjection-from-n]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -51,20 +51,11 @@ $\delta(\varphi\smile\psi)=\delta\varphi\smile\psi+
 
 **Proof technique:** residue-lift calculation.
 
-1.1 Choose the canonical lifts $\widetilde\varphi$ and
-$\widetilde\psi$ with values in $\mathbb Z/m^2$. [given, F1]
-Because $\varphi$ and $\psi$ are cocycles, there are uniquely determined
-$\mathbb Z/m$-cochains $\eta$ and $\mu$ such that
-$\delta\widetilde\varphi=m\eta$ and
-$\delta\widetilde\psi=m\mu$ in $\mathbb Z/m^2$.
+1.1 Choose the canonical lifts $\widetilde\varphi$ and $\widetilde\psi$ with values in $\mathbb Z/m^2$. Because $\varphi$ and $\psi$ are cocycles, there are uniquely determined $\mathbb Z/m$-cochains $\eta$ and $\mu$ such that $\delta\widetilde\varphi=m\eta$ and $\delta\widetilde\psi=m\mu$ in $\mathbb Z/m^2$. [given, F1]
 
-2.1 These cochains represent the two Bocksteins. [F1, step 1.1]
-By the defining lift-and-coboundary construction,
-$[\eta]=\beta(x)$ and $[\mu]=\beta(y)$.
+2.1 These cochains represent the two Bocksteins. By the defining lift-and-coboundary construction, $[\eta]=\beta(x)$ and $[\mu]=\beta(y)$. [F1, step 1.1]
 
-3.1 Compute the Bockstein of the product. [F2, step 1.1, step 2.1]
-The cochain $\widetilde\varphi\smile\widetilde\psi$ lifts
-$\varphi\smile\psi$, and [F2] gives
+3.1 Compute the Bockstein of the product. The cochain $\widetilde\varphi\smile\widetilde\psi$ lifts $\varphi\smile\psi$, and [F2] gives [F2, step 1.1, step 2.1]
 
 $$
 \delta(\widetilde\varphi\smile\widetilde\psi)=m\bigl(\eta\smile\psi+(-1)^p\varphi\smile\mu\bigr).
@@ -79,6 +70,4 @@ $m\delta h$, so division by the injective copy of $\mathbb Z/m$ changes the
 resulting cocycle by the coboundary $\delta h$. Thus this noncanonical lift
 computes the same Bockstein class as the canonical lift.
 
-4.1 Divide by the injective copy of $\mathbb Z/m$ and pass to cohomology. [F1, step 2.1, step 3.1]
-This yields the stated derivation identity. When $m=2$, $-1=1$ in the
-coefficient ring, so the parity sign is invisible. ∎
+4.1 Divide by the injective copy of $\mathbb Z/m$ and pass to cohomology. This yields the stated derivation identity. When $m=2$, $-1=1$ in the coefficient ring, so the parity sign is invisible. [F1, step 2.1, step 3.1] ∎

@@ -2,12 +2,13 @@
 id: thm-cohomological-serre-spectral-sequence
 kind: theorem
 title: Cohomological Serre spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-fiber-homology-local-system-of-a-serre-fibration, lem-relative-homology-over-one-base-cell-is-the-shifted-fiber-homology, thm-the-cohomological-filtered-complex-construction, thm-cellular-cochains-compute-cohomology-with-local-coefficients, def-axiom-of-choice, def-serre-filtration-of-the-total-space-over-base-skeleta, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-excision-for-singular-cohomology, def-relative-singular-cochain-complex, lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex, thm-cellular-approximation-for-maps-of-cw-pairs, prop-relative-cw-inclusions-are-cofibrations, prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace, thm-singular-chain-homotopy-formula, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, thm-long-exact-sequence-in-cohomology, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, def-strong-convergence-of-a-spectral-sequence, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

@@ -2,12 +2,13 @@
 id: def-thom-class-by-fiberwise-normalization
 kind: definition
 title: Thom class by fiberwise normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-r-oriented-vector-bundle-and-orientation-local-system, def-relative-singular-cochain-complex]
 proof_strategy: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

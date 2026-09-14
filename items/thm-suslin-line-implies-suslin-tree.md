@@ -2,7 +2,7 @@
 id: thm-suslin-line-implies-suslin-tree
 kind: theorem
 title: "A Suslin line yields a Suslin tree"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-suslin-line-nowhere-separable-quotient, lem-nowhere-separable-suslin-line-nested-interval-tree, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

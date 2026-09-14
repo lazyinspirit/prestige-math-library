@@ -2,7 +2,7 @@
 id: thm-specializing-forcing-kills-a-suslin-tree
 kind: theorem
 title: "Specializing forcing kills a Suslin tree"
-status: draft
+status: published
 origin: pipeline
 deps: [def-aronszajn-suslin-and-special-tree, def-finite-aronszajn-specialization-poset, thm-aronszajn-specialization-poset-ccc, lem-specialization-dense-domains-and-union, thm-chain-condition-preserves-cofinalities-and-cardinals, thm-countable-subsets-of-omega-one-are-bounded, thm-countable-union-of-countable, def-forcing-name-valuation-and-generic-extension, thm-check-name-evaluation-and-generic-reconstruction, lem-forcing-monotonicity-density-and-decision, thm-forcing-theorem, thm-generic-extensions-satisfy-zf-and-zfc, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

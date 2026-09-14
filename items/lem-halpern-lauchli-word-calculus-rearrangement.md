@@ -2,13 +2,14 @@
 id: lem-halpern-lauchli-word-calculus-rearrangement
 kind: lemma
 title: "Finite word-calculus rearrangement"
-status: draft
+status: published
 origin: pipeline
 deps: [def-halpern-lauchli-finite-word-calculus]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

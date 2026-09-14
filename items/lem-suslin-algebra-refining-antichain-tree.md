@@ -2,7 +2,7 @@
 id: lem-suslin-algebra-refining-antichain-tree
 kind: lemma
 title: "Refining antichains of a Suslin algebra form a tree"
-status: draft
+status: published
 origin: pipeline
 deps: [def-suslin-hypothesis-and-suslin-algebra, def-normal-splitting-set-theoretic-tree, def-aronszajn-suslin-and-special-tree, thm-transfinite-recursion, thm-countable-union-of-countable, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

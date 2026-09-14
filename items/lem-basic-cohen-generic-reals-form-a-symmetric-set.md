@@ -38,10 +38,6 @@ The coordinate action is $\pi\dot a_n=\dot a_{\pi n}$. Each $a_n$ has support $\
 
 1.2 Let $\dot e$ be the canonical graph $n\mapsto\dot a_n$. Given finite $E$, choose $n\notin E$ and $m\notin E\cup\{n\}$. Their transposition fixes $E$ but sends the graph value at $n$ from $\dot a_n$ to $\dot a_m$, so it does not fix $\dot e$. Thus no finite $E$ supports that name. [F1, F2]
 
-1.3 Now let $p\Vdash\dot f:\check\omega\to\dot A$ be onto and let the finite set $E$ support $\dot f$ and contain the first-coordinate support of $p$. Choose $n\notin E$. Since $p$ forces surjectivity, some $q\le p$ and $k\in\omega$ satisfy $q\Vdash\dot f(\check k)=\dot a_n$. Choose $m$ outside $E\cup\{n\}$ and outside the first-coordinate support of $q$, and let $\pi$ swap $n,m$. Then $\pi p=p$, $\pi\dot f=\dot f$, and F2 gives
-
-$$
-\pi q\Vdash\dot f(\check k)=\dot a_m.
-$$
+1.3 Now let $p\Vdash\dot f:\check\omega\to\dot A$ be onto and let the finite set $E$ support $\dot f$ and contain the first-coordinate support of $p$. Choose $n\notin E$. Since $p$ forces surjectivity, some $q\le p$ and $k\in\omega$ satisfy $q\Vdash\dot f(\check k)=\dot a_n$. Choose $m$ outside $E\cup\{n\}$ and outside the first-coordinate support of $q$, and let $\pi$ swap $n,m$. Then $\pi p=p$, $\pi\dot f=\dot f$, and F2 gives $$\pi q\Vdash\dot f(\check k)=\dot a_m.$$ [F1, F2]
 
 2.1 Because the $m$-coordinate is absent from $q$, $q$ and $\pi q$ agree on their common domain and have a common extension. That extension forces $\dot a_n=\dot a_m$, contrary to step 1.1. Therefore no HS name can enumerate $A$. [F1, F2, step 1.1, step 1.3] ∎

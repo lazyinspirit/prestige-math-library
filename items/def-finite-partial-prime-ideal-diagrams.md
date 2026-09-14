@@ -2,13 +2,14 @@
 id: def-finite-partial-prime-ideal-diagrams
 kind: definition
 title: "Finite partial prime-ideal diagrams"
-status: draft
+status: published
 origin: pipeline
 deps: [def-boolean-ideals-filters-and-primality]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

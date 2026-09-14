@@ -2,7 +2,7 @@
 id: thm-a-supercompact-cardinal-can-be-forced-to-give-pfa
 kind: theorem
 title: "A supercompact cardinal can be forced to give PFA"
-status: draft
+status: published
 origin: pipeline
 deps: [def-proper-forcing-axiom, def-laver-guided-proper-bookkeeping-iteration, lem-laver-guided-iteration-size-collapse-and-factorization, thm-lc-laver-function-existence, thm-generic-extensions-satisfy-zf-and-zfc, thm-forcing-theorem, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

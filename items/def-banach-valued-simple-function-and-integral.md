@@ -2,7 +2,7 @@
 id: def-banach-valued-simple-function-and-integral
 kind: definition
 title: "Banach-valued simple function and integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-14
   precheck: n/a
   judge:
     model: "gpt-5.6-terra"

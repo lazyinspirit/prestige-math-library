@@ -2,7 +2,7 @@
 id: ex-the-heisenberg-lie-algebra-is-two-step-nilpotent
 kind: example
 title: The Heisenberg Lie algebra is two-step nilpotent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-nilpotency-class-of-a-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

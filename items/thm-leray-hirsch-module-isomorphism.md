@@ -2,12 +2,13 @@
 id: thm-leray-hirsch-module-isomorphism
 kind: theorem
 title: Leray–Hirsch module isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-global-fiber-basis-trivializes-serre-monodromy, lem-leray-hirsch-isomorphism-on-associated-graded-modules-lifts-without-extension-ambiguity, thm-cohomological-serre-spectral-sequence, thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

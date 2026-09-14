@@ -2,12 +2,13 @@
 id: def-thom-diagonal-and-zero-section-collapse
 kind: definition
 title: Thom diagonal and zero-section collapse
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, def-vector-bundle-map-section-subbundle-and-isomorphism, thm-quotient-universal-property]
 proof_strategy: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

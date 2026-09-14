@@ -2,7 +2,7 @@
 id: thm-proper-forcing-preserves-stationary-subsets-of-omega-one
 kind: theorem
 title: "Proper forcing preserves stationary subsets of omega-one"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-proper-master-condition-characterizations, def-club-filter-and-nonstationary-ideal, thm-forcing-theorem, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Karagila, Forcing & Symmetric Extensions, Theorems 8.8-8.9 and complete proofs, printed pp. 39-40"

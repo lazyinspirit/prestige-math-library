@@ -2,12 +2,13 @@
 id: thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class
 kind: theorem
 title: First-quadrant spectral-sequence transfer modulo a Serre class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-serre-classes-are-stable-under-finite-filtrations, def-strong-convergence-of-a-spectral-sequence, thm-snake-lemma-for-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -36,7 +37,9 @@ morphism of such spectral sequences, compatible with a filtered abutment map
 $f_H:H\to H'$. Put
 $$T_R=\{(p,q):p,q\geq0,\ p+q\leq N\},\qquad R=N+2,$$
 and, recursively for $s=R-1,R-2,\ldots,2$, let
-$$T_s=T_{s+1}\cup\bigl(T_{s+1}+(s,1-s)\bigr)\cup\bigl(T_{s+1}+(-s,s-1)\bigr), \tag{1}$$
+$$
+T_s=T_{s+1}\cup\bigl(T_{s+1}+(s,1-s)\bigr)\cup\bigl(T_{s+1}+(-s,s-1)\bigr), \tag{1}
+$$
 discarding pairs outside the first quadrant. If every
 $f_2:E^2_{p,q}\to E'^2_{p,q}$ with $(p,q)\in T_2$ is a
 $\mathcal C$-isomorphism, then

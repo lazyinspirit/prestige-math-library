@@ -2,7 +2,7 @@
 id: lem-feferman-levy-symmetric-collapse-is-finitely-formalizable
 kind: lemma
 title: The Feferman–Levy collapse argument is finitely formalizable
-status: draft
+status: published
 origin: pipeline
 deps: [cor-countable-union-and-omega-one-regularity-fail-in-the-feferman-levy-model, lem-forcing-transfer-for-finite-zfc-fragments, thm-hereditarily-symmetric-interpretations-form-a-zf-model, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

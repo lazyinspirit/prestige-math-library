@@ -2,7 +2,7 @@
 id: cor-levi-factors-are-noncanonical-but-unique-up-to-inner-unipotent-conjugacy
 kind: corollary
 title: Levi factors are noncanonical but conjugate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-malcev-conjugacy-of-levi-subalgebras, def-semidirect-product-of-lie-algebras, def-radical-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -53,5 +54,7 @@ semisimplicity ([[thm-cartans-semisimplicity-criterion]]).
 **Proof technique:** unpack the definitions and theorem.
 
 1.1 Projection to $\mathfrak g/\operatorname{rad}(\mathfrak g)$ restricts to an injective map on a Levi factor because the intersection is zero, and to a surjective map because the two subspaces sum to $\mathfrak g$. It is a Lie homomorphism, so every Levi factor is isomorphic to the quotient. [algebra]
+
 2.1 By [L1], any two factors are related by the stated finite product. Each $\operatorname{ad}x$ is nilpotent in the proof of [L1], so its exponential is unipotent and is inner in the Lie-algebra sense. When the radical is zero, the sole factor is $\mathfrak g$ and the empty product suffices. [L1, step 1.1]
+
 3.1 To witness literal nonuniqueness, let $\mathfrak s=\mathfrak{sl}_2(k)$ act in the standard way on $V=k^2$ and put $\mathfrak g=\mathfrak s\ltimes V$. For the usual basis $h,e,f$ of $\mathfrak s$, direct calculation gives $K(h,h)=8$, $K(e,f)=K(f,e)=4$, and all other basis pairings zero; the Killing matrix has determinant $-128\ne0$, so [L4] makes $\mathfrak s$ semisimple. By [L2], $V$ is an abelian ideal and $\mathfrak g/V\cong\mathfrak s$. Hence [L3] gives $V\subseteq\operatorname{rad}(\mathfrak g)$, while the image of the radical in the semisimple quotient is a solvable ideal and is zero; thus the radical is exactly $V$ and $\mathfrak s_0=\mathfrak s\oplus0$ is a Levi factor. Take $v=(1,0)^T$ and $x=f$, so $xv=(0,1)^T\ne0$. Formula [L2] gives $(\operatorname{ad}_{(0,v)})^2=0$ and $\exp(\operatorname{ad}_{(0,v)})(x,0)=(x,-xv)\notin\mathfrak s_0$. Therefore $\mathfrak s_1=\exp(\operatorname{ad}_{(0,v)})(\mathfrak s_0)$ is a distinct Levi factor, proving the first sentence rather than merely referring to a later example. [L2, L3, L4, algebra] ∎

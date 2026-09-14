@@ -2,7 +2,7 @@
 id: lem-determinant-classifies-loops-in-complex-general-linear-groups
 kind: lemma
 title: Determinant classifies loops in complex general linear groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-invertible-matrix-and-general-linear-group, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, thm-higher-dimensional-spheres-are-simply-connected, cor-winding-number-classifies-loops-in-the-punctured-plane]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

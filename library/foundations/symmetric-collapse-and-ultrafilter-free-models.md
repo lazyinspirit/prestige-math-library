@@ -1,7 +1,7 @@
 ---
 page: symmetric-collapse-and-ultrafilter-free-models
 title: "Symmetric Collapse and Ultrafilter-Free Models"
-status: draft
+status: published
 items:
   - def-feferman-levy-symmetric-collapse-system
   - lem-feferman-levy-bounded-layer-support

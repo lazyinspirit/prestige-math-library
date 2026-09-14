@@ -81,9 +81,7 @@ chain-homotopy identity ([[thm-singular-chain-homotopy-formula]]).
 **Proof technique:** compare two equivariant chain maps in the same explicit
 fourfold acyclic carrier.
 
-1.1 Record the diagonal on the mod-two $C_2$ resolution. [given]
-Let $W$ have one free-orbit generator $e_i$ in every degree $i\geq0$, with
-$de_i=(1+T)e_{i-1}$ and $e_{-1}=0$. Define
+1.1 Record the diagonal on the mod-two $C_2$ resolution. Let $W$ have one free-orbit generator $e_i$ in every degree $i\geq0$, with $de_i=(1+T)e_{i-1}$ and $e_{-1}=0$. Define [given]
 
 $$
 \rho(e_i)=\sum_{r+s=i}e_r\otimes T^r e_s.
@@ -94,13 +92,7 @@ expanding $d\rho(e_i)$ makes every term with $r,s>0$ occur twice after the
 index shifts $(r,s)\mapsto(r-1,s)$ and $(r,s)\mapsto(r,s-1)$; the two endpoint
 terms that remain are exactly $\rho((1+T)e_{i-1})$. All sums are finite.
 
-1.2 Fix an explicit contraction of every common fourfold model carrier. [F4]
-For a standard simplex $\Delta^m$, let $P_m$ be the prism from its affine
-contraction to the first vertex. By [F4],
-$dP_m+P_md=1-j_mp_m$, where $p_m$ collapses to a point and $j_m$ includes
-that vertex. On the unnormalized point complex, whose degree-$n$ generator is
-$e_n$, put $a(e_n)=e_{n+1}$ for odd $n$ and $a(e_n)=0$ for even $n$. Directly,
-$da+ad=1-\eta\epsilon$. Hence
+1.2 Fix an explicit contraction of every common fourfold model carrier. For a standard simplex $\Delta^m$, let $P_m$ be the prism from its affine contraction to the first vertex. By [F4], $dP_m+P_md=1-j_mp_m$, where $p_m$ collapses to a point and $j_m$ includes that vertex. On the unnormalized point complex, whose degree-$n$ generator is $e_n$, put $a(e_n)=e_{n+1}$ for odd $n$ and $a(e_n)=0$ for even $n$. Directly, $da+ad=1-\eta\epsilon$. Hence [F4]
 
 $$
 h_m:=P_m+j_map_m
@@ -117,14 +109,7 @@ every augmentation-zero degree-zero cycle has the specified filling
 $h^{(4)}z$. Every displayed operator is a finite sum, so this family of
 contractions is fixed without AC.
 
-2.1 Assemble the two displayed families into equivariant maps. [F1, F3, F5, step 1.1]
-Define $\mathcal L(e_i\otimes z)=L_i(z)$. This is the composite obtained by
-shuffling $z$ to $X\times Y$, applying the equivariant higher diagonal there,
-and applying $A$ to its two outputs. Define $\mathcal R$ by first applying
-$\rho$, then applying the two higher-diagonal systems and finally regrouping
-with $\tau$. The factor $T^r$ in $R_i$ is precisely the twist in $\rho$.
-Naturality and the chain-map identities in [F1]--[F3], together with step 1.1,
-show that both are $C_2$-equivariant chain maps
+2.1 Assemble the two displayed families into equivariant maps. Define $\mathcal L(e_i\otimes z)=L_i(z)$. This is the composite obtained by shuffling $z$ to $X\times Y$, applying the equivariant higher diagonal there, and applying $A$ to its two outputs. Define $\mathcal R$ by first applying $\rho$, then applying the two higher-diagonal systems and finally regrouping with $\tau$. The factor $T^r$ in $R_i$ is precisely the twist in $\rho$. Naturality and the chain-map identities in [F1]--[F3], together with step 1.1, show that both are $C_2$-equivariant chain maps [F1, F3, F5, step 1.1]
 
 $$
 W\otimes(C\otimes E)\longrightarrow(C\otimes E)^{\otimes2},
@@ -132,10 +117,7 @@ $$
 
 where $C_2$ acts on the target by $Q$.
 
-3.1 Construct the coherent homotopy. [step 1.2, step 2.1]
-Induct first on $i$ and then on $p+q$. Suppose $H_{i-1}$ and the values of
-$H_i$ on lower-dimensional model generators are known. On the identity model
-generator $z_{p,q}$ form
+3.1 Construct the coherent homotopy. Induct first on $i$ and then on $p+q$. Suppose $H_{i-1}$ and the values of $H_i$ on lower-dimensional model generators are known. On the identity model generator $z_{p,q}$ form [step 1.2, step 2.1]
 
 $$
 \omega=(L_i-R_i)(z_{p,q})-H_i(dz_{p,q})-(1+Q)H_{i-1}(z_{p,q}).
@@ -155,11 +137,4 @@ $$
 The postcomposition formula proves naturality. The fixed contractions and the
 lexicographic recursion use no choice principle.
 
-4.1 The construction preserves the stated relative carriers. [F2, F3, F6, step 1.2, step 3.1]
-If $u$ lands in $B\subseteq X$, every occurrence of $u_\#$ in the two maps
-and in the model filling lands in $C_*(B)$; the other factor remains in $E$.
-The same argument applies when $v$ lands in $D\subseteq Y$. Linearity gives
-the assertions for their generated subcomplexes and for their sum. Empty
-factors give zero complexes; zero chains and $i=0$ are included by
-$H_{-1}=0$; one-point and degenerate singular simplices remain in the
-unnormalized model. Hence every boundary case obeys the same equation. ∎
+4.1 The construction preserves the stated relative carriers. If $u$ lands in $B\subseteq X$, every occurrence of $u_\#$ in the two maps and in the model filling lands in $C_*(B)$; the other factor remains in $E$. The same argument applies when $v$ lands in $D\subseteq Y$. Linearity gives the assertions for their generated subcomplexes and for their sum. Empty factors give zero complexes; zero chains and $i=0$ are included by $H_{-1}=0$; one-point and degenerate singular simplices remain in the unnormalized model. Hence every boundary case obeys the same equation. [F2, F3, F6, step 1.2, step 3.1] ∎

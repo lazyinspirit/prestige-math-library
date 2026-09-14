@@ -2,7 +2,7 @@
 id: lem-basic-cohen-search-and-shift-prime-ideal-construction
 kind: lemma
 title: Search-and-shift prime-ideal construction in the basic Cohen model
-status: draft
+status: published
 origin: pipeline
 deps: [def-basic-cohen-symmetric-system, thm-hereditarily-symmetric-interpretations-form-a-zf-model, lem-symmetry-lemma-for-forcing-automorphisms, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, def-finite-intersection-property, lem-fip-generates-filter, thm-bpi-equivalent-to-set-ultrafilter-lemma, thm-finite-ramsey-for-uniform-subsets, thm-general-cardinal-erdos-rado, def-axiom-of-choice]
 proof_strategy: search-and-shift
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

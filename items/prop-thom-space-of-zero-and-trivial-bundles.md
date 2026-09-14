@@ -2,12 +2,13 @@
 id: prop-thom-space-of-zero-and-trivial-bundles
 kind: proposition
 title: Thom spaces of zero and trivial bundles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

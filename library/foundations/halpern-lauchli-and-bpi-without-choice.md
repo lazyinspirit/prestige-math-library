@@ -1,7 +1,7 @@
 ---
 page: halpern-lauchli-and-bpi-without-choice
 title: Halpern–Läuchli and BPI Without Choice
-status: draft
+status: published
 items: [def-halpern-lauchli-finitistic-trees-density-and-matrices, def-halpern-lauchli-finite-word-calculus, lem-halpern-lauchli-word-calculus-rearrangement, lem-halpern-lauchli-rule-soundness-and-finite-thinning, thm-halpern-lauchli-dense-matrix-dichotomy, thm-halpern-lauchli-finite-level-partition-compactness, def-finite-partial-prime-ideal-diagrams, lem-finite-partial-prime-ideal-extension, lem-countable-boolean-algebra-prime-ideal-compactness-tree, thm-bpi-and-set-ultrafilter-lemma-are-equivalent-over-zf, thm-halpern-lauchli-and-the-basic-cohen-bpi-model, cor-relative-consistency-of-halpern-lauchli-bpi-without-choice, thm-strict-relative-placement-of-bpi-over-zf]
 examples: []
 ---

@@ -2,12 +2,13 @@
 id: lem-thom-isomorphisms-glue-over-two-trivializing-opens
 kind: lemma
 title: Thom isomorphisms glue over two trivializing opens
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-thom-isomorphism-for-a-trivial-oriented-bundle, thm-mayer-vietoris-sequence-in-singular-cohomology, def-relative-singular-cochain-complex, thm-cover-small-inclusion-is-a-chain-homotopy-equivalence, def-relative-cup-product, thm-cup-product-leibniz-identity, prop-relative-cup-products-are-natural-and-compatible-with-connectors, thm-five-lemma-for-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

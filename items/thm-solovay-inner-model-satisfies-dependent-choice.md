@@ -2,7 +2,7 @@
 id: thm-solovay-inner-model-satisfies-dependent-choice
 kind: theorem
 title: The Solovay inner model satisfies Dependent Choice
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-inner-model-is-closed-under-ambient-omega-sequences, def-serial-relation-dependent-choice-principle-over-zf, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: closure-transfer
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-solovay-collapse-localizes-countable-ordinal-data
 kind: lemma
 title: The Lévy collapse localizes countable ordinal data
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-solovay-levy-collapse-setup
@@ -18,6 +18,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: forcing-name-support
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Solovay 1970, Part I, Lemma 3.4 and Corollary 3.6"

@@ -2,7 +2,7 @@
 id: cor-ma-and-not-ch-implies-suslin-hypothesis
 kind: corollary
 title: "MA plus not CH implies SH"
-status: draft
+status: published
 origin: pipeline
 deps: [def-martins-axiom, rem-continuum-hypothesis, def-aleph-and-beth-hierarchies, lem-cardinality-of-a-well-orderable-set, lem-cardinal-arithmetic-basic-laws, thm-cardinal-power-set-and-cantor, thm-ma-aleph-one-eliminates-suslin-trees, thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

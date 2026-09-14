@@ -1,7 +1,7 @@
 ---
 page: minimal-walks-oscillation-and-l-and-s-spaces
 title: "Minimal Walks, Oscillation, and L- and S-Spaces"
-status: draft
+status: published
 items:
   - def-set-theoretic-l-and-s-spaces
   - def-c-sequences-and-minimal-walk-traces-on-omega-one

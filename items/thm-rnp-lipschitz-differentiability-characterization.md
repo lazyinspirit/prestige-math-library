@@ -2,7 +2,7 @@
 id: thm-rnp-lipschitz-differentiability-characterization
 kind: theorem
 title: "RNP and almost-everywhere differentiability of Lipschitz curves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -99,71 +100,26 @@ $L^1$ and integral convergence for strongly measurable Banach-valued functions
 
 **Given:** A Banach space $X$ and AC.
 
-1.1 Make the inherited choice assumptions explicit. [given, A1, L1]
-By [L1], [A1] supplies both Countable Choice and Dependent Choice. Countable
-Choice is used in [L2], [L5], and [L11]; both principles are hypotheses of the
-scalar FTC in [L9].
+1.1 Make the inherited choice assumptions explicit. By [L1], [A1] supplies both Countable Choice and Dependent Choice. Countable Choice is used in [L2], [L5], and [L11]; both principles are hypotheses of the scalar FTC in [L9]. [given, A1, L1]
 
-1.2 Associate a dominated vector measure to a Lipschitz curve. [given, L2, construct]
-Suppose first that $X$ has RNP, let $F:[0,1]\to X$ be $L$-Lipschitz, and put
-$G(t)=F(t)-F(0)$. Then $G(0)=0$ and [L2] gives a vector measure $\nu_G$ with
-$|\nu_G|\leq L\lambda$ and
-$\nu_G((a,b])=G(b)-G(a)$.
+1.2 Associate a dominated vector measure to a Lipschitz curve. Suppose first that $X$ has RNP, let $F:[0,1]\to X$ be $L$-Lipschitz, and put $G(t)=F(t)-F(0)$. Then $G(0)=0$ and [L2] gives a vector measure $\nu_G$ with $|\nu_G|\leq L\lambda$ and $\nu_G((a,b])=G(b)-G(a)$. [given, L2, construct]
 
-1.3 Reduce an arbitrary interval vector measure to bounded-density levels. [given, A1, L8, construct]
-For the converse direction, let $\nu$ be a bounded-variation vector measure on
-$[0,1]$ with $\nu\ll\lambda$. If $\lambda(E)=0$, every member of every finite
-partition of $E$ is null and has $\nu$-value zero, so $|\nu|(E)=0$. Thus
-$|\nu|\ll\lambda$. By [L8] and AC there is an integrable scalar density
-$g$ with $|\nu|(E)=\int_Eg\,d\lambda$. Positivity of $|\nu|$ makes $g\geq0$
-almost everywhere: applying the representation to
-$\{g\leq-1/m\}$ for each $m\geq1$ makes each such set null. Replace $g$ by
-zero on their null union. Put
-$A_n=\{n-1\leq g<n\}$ for $n\geq1$ and $Z=\{g=+\infty\}$. The $A_n$ are
-disjoint, $Z$ is null, and they cover $[0,1]\setminus Z$. Define
-$\nu_n(E)=\nu(E\cap A_n)$. Directly from finite partitions,
-$|\nu_n|(E)=|\nu|(E\cap A_n)\leq n\lambda(E)$.
+1.3 Reduce an arbitrary interval vector measure to bounded-density levels. For the converse direction, let $\nu$ be a bounded-variation vector measure on $[0,1]$ with $\nu\ll\lambda$. If $\lambda(E)=0$, every member of every finite partition of $E$ is null and has $\nu$-value zero, so $|\nu|(E)=0$. Thus $|\nu|\ll\lambda$. By [L8] and AC there is an integrable scalar density $g$ with $|\nu|(E)=\int_Eg\,d\lambda$. Positivity of $|\nu|$ makes $g\geq0$ almost everywhere: applying the representation to $\{g\leq-1/m\}$ for each $m\geq1$ makes each such set null. Replace $g$ by zero on their null union. Put $A_n=\{n-1\leq g<n\}$ for $n\geq1$ and $Z=\{g=+\infty\}$. The $A_n$ are disjoint, $Z$ is null, and they cover $[0,1]\setminus Z$. Define $\nu_n(E)=\nu(E\cap A_n)$. Directly from finite partitions, $|\nu_n|(E)=|\nu|(E\cap A_n)\leq n\lambda(E)$. [given, A1, L8, construct]
 
-2.1 Obtain a Bochner density in the RNP-to-differentiability direction. [A1, L3, step 1.1, step 1.2]
-The interval test [L3] applied to $\nu_G$ supplies a Bochner-integrable
-$f:[0,1]\to X$ with $\nu_G(E)=\int_Ef\,d\lambda$. Hence
-$G(b)-G(a)=\int_{(a,b]}f\,d\lambda$ for every $a<b$.
+2.1 Obtain a Bochner density in the RNP-to-differentiability direction. The interval test [L3] applied to $\nu_G$ supplies a Bochner-integrable $f:[0,1]\to X$ with $\nu_G(E)=\int_Ef\,d\lambda$. Hence $G(b)-G(a)=\int_{(a,b]}f\,d\lambda$ for every $a<b$. [A1, L3, step 1.1, step 1.2]
 
-2.2 Turn each bounded level measure into a Lipschitz curve. [L2, step 1.1, step 1.3]
-For each $n$, set $F_n(t)=\nu_n((0,t])$. The converse part of [L2] and the
-bound in step 1.3 show that $F_n(0)=0$ and that $F_n$ is $n$-Lipschitz.
+2.2 Turn each bounded level measure into a Lipschitz curve. For each $n$, set $F_n(t)=\nu_n((0,t])$. The converse part of [L2] and the bound in step 1.3 show that $F_n(0)=0$ and that $F_n$ is $n$-Lipschitz. [L2, step 1.1, step 1.3]
 
-3.1 Prepare a common set of vector Lebesgue points. [L4, L5, step 2.1, choose]
-Choose integrable simple $s_m$ with $\int\|f-s_m\|\to0$ as in [L4]. Passing
-to a subsequence if necessary, the scalar errors
-$e_m=\|f-s_m\|$ converge to zero almost everywhere: choose least indices with
-$L^1$ errors below $2^{-2m}$, and the sets where the corresponding pointwise
-error exceeds $2^{-m}$ have summable measures, so their tail unions decrease
-to a null set. Extend $e_m$ and the finitely many indicator functions of the
-level sets of $s_m$ by zero outside $[0,1]$. Apply [L5] to every one of this
-countable family and remove the union of their exceptional null sets. At each
-remaining interior point $t$, every $e_m$ differentiates by interval averages,
-$e_m(t)\to0$, and
+3.1 Prepare a common set of vector Lebesgue points. Choose integrable simple $s_m$ with $\int\|f-s_m\|\to0$ as in [L4]. Passing to a subsequence if necessary, the scalar errors $e_m=\|f-s_m\|$ converge to zero almost everywhere: choose least indices with $L^1$ errors below $2^{-2m}$, and the sets where the corresponding pointwise error exceeds $2^{-m}$ have summable measures, so their tail unions decrease to a null set. Extend $e_m$ and the finitely many indicator functions of the level sets of $s_m$ by zero outside $[0,1]$. Apply [L5] to every one of this countable family and remove the union of their exceptional null sets. At each remaining interior point $t$, every $e_m$ differentiates by interval averages, $e_m(t)\to0$, and [L4, L5, step 2.1, choose]
 
 $$\lim_{r\to0^+}\frac1{2r}\int_{t-r}^{t+r}\|s_m(u)-s_m(t)\|\,du=0$$
 
 for every $m$; the last equality follows by writing the finite-valued $s_m$ on
 its level sets and differentiating their indicators.
 
-3.2 Construct measurable derivative fields for the bounded level curves. [L4, step 2.2, construct]
-By the assumed differentiability property, for each $n$ there is a measurable
-null set $N_n$ off which $F_n'$ exists in norm. For $k\geq2$ put
-$q_{n,k}(t)=k(F_n(t+1/k)-F_n(t))$ when $t\leq1-1/k$, and put it equal to zero
-on the remaining interval. On the first piece $q_{n,k}$ is $2nk$-Lipschitz;
-a finite interval partition of sufficiently small mesh, together with the
-constant-zero last piece, therefore gives a measurable simple function within
-$1/k$ uniformly of $q_{n,k}$. These simple functions converge to $F_n'$ off
-$N_n$. Define $f_n=F_n'$ there and $f_n=0$ on $N_n$. This proves strong
-measurability in the sense of [L4]. Difference quotients give
-$\|f_n\|\leq n$ off $N_n$, so [L4] makes $f_n$ Bochner integrable.
+3.2 Construct measurable derivative fields for the bounded level curves. By the assumed differentiability property, for each $n$ there is a measurable null set $N_n$ off which $F_n'$ exists in norm. For $k\geq2$ put $q_{n,k}(t)=k(F_n(t+1/k)-F_n(t))$ when $t\leq1-1/k$, and put it equal to zero on the remaining interval. On the first piece $q_{n,k}$ is $2nk$-Lipschitz; a finite interval partition of sufficiently small mesh, together with the constant-zero last piece, therefore gives a measurable simple function within $1/k$ uniformly of $q_{n,k}$. These simple functions converge to $F_n'$ off $N_n$. Define $f_n=F_n'$ there and $f_n=0$ on $N_n$. This proves strong measurability in the sense of [L4]. Difference quotients give $\|f_n\|\leq n$ off $N_n$, so [L4] makes $f_n$ Bochner integrable. [L4, step 2.2, construct]
 
-4.1 Differentiate the indefinite Bochner integral in norm. [L5, step 2.1, step 3.1]
-At a point $t$ retained in step 3.1, for fixed $m$ the triangle inequality gives
+4.1 Differentiate the indefinite Bochner integral in norm. At a point $t$ retained in step 3.1, for fixed $m$ the triangle inequality gives [L5, step 2.1, step 3.1]
 
 $$\limsup_{r\to0^+}\frac1{2r}\int_{t-r}^{t+r}\|f(u)-f(t)\|\,du\leq2e_m(t).$$
 
@@ -176,12 +132,7 @@ $$\left\|\frac{F(t+h)-F(t)}h-f(t)\right\|\leq\frac1{|h|}\int_{\min(t,t+h)}^{\max
 which is at most twice the corresponding centred average and tends to zero.
 Thus $F'(t)=f(t)$ at almost every $t\in(0,1)$.
 
-4.2 Show that each derivative field represents its level measure. [L2, L6, L7, L9, L10, step 1.1, step 2.2, step 3.2]
-Fix $n$ and $x^*\in X^*$. The real-valued function $x^*F_n$ in the real
-case, and its real and imaginary parts in the complex case, are Lipschitz and
-hence absolutely continuous by [L9]. Their derivatives agree almost everywhere
-with the corresponding scalar parts of $x^*f_n$. The scalar FTC, whose choice
-hypotheses were supplied in step 1.1, and commutation in [L7] give
+4.2 Show that each derivative field represents its level measure. Fix $n$ and $x^*\in X^*$. The real-valued function $x^*F_n$ in the real case, and its real and imaginary parts in the complex case, are Lipschitz and hence absolutely continuous by [L9]. Their derivatives agree almost everywhere with the corresponding scalar parts of $x^*f_n$. The scalar FTC, whose choice hypotheses were supplied in step 1.1, and commutation in [L7] give [L2, L6, L7, L9, L10, step 1.1, step 2.2, step 3.2]
 
 $$x^*(F_n(b)-F_n(a))=x^*\!\left(\int_{(a,b]}f_n\,d\lambda\right).$$
 
@@ -192,32 +143,8 @@ $h_n=\mathbf1_{A_n}f_n$. Restricting simple approximants shows
 $\int_Eh_n=\int_{E\cap A_n}f_n=\nu_n(E)$, so $h_n$ is another density of
 $\nu_n$, now supported on $A_n$.
 
-5.1 Complete the forward implication, including its boundary cases. [step 1.2, step 2.1, step 4.1]
-Step 4.1 proves almost-everywhere norm differentiability of every Lipschitz
-curve when $X$ has RNP. Adding the constant $F(0)$ does not affect difference
-quotients. If $L=0$, the curve is constant and has derivative zero everywhere;
-the endpoints are excluded from the derivative assertion and have measure
-zero. The zero Banach space and the one-point interval cause no exception.
+5.1 Complete the forward implication, including its boundary cases. Step 4.1 proves almost-everywhere norm differentiability of every Lipschitz curve when $X$ has RNP. Adding the constant $F(0)$ does not affect difference quotients. If $L=0$, the curve is constant and has derivative zero everywhere; the endpoints are excluded from the derivative assertion and have measure zero. The zero Banach space and the one-point interval cause no exception. [step 1.2, step 2.1, step 4.1]
 
-5.2 Paste the bounded derivative fields into one density. [L4, L5, L11, step 1.1, step 1.3, step 4.2]
-Define $h(t)=h_n(t)$ on $A_n$ and $h=0$ on $Z$. The explicit simple
-approximants from step 3.2, multiplied by $\mathbf1_{A_n}$ and summed for
-$n\leq k$, form a simple sequence converging to $h$ off the countable union of
-the $N_n$ and $Z$; [L5] makes that union null. Hence $h$ is strongly
-measurable. Moreover
-$\|h\|\leq\sum_{n\geq1}n\mathbf1_{A_n}\leq g+1$, so [L4] makes $h$ Bochner
-integrable. Let $H_N=\sum_{n=1}^Nh_n$. Then $H_N\to h$ pointwise and
-$\|H_N\|\leq g+1$. Applying [L11] to $\mathbf1_EH_N$ for any measurable $E$
-gives $\int_EH_N\to\int_Eh$. Finite linearity follows by combining the simple
-approximations in [L4], so step 4.2 gives
-$\int_EH_N=\sum_{n=1}^N\nu(E\cap A_n)$. Norm countable additivity of $\nu$ and
-$\nu(E\cap Z)=0$ make the latter sums converge to $\nu(E)$. Thus $h$ is a
-Bochner density of $\nu$.
+5.2 Paste the bounded derivative fields into one density. Define $h(t)=h_n(t)$ on $A_n$ and $h=0$ on $Z$. The explicit simple approximants from step 3.2, multiplied by $\mathbf1_{A_n}$ and summed for $n\leq k$, form a simple sequence converging to $h$ off the countable union of the $N_n$ and $Z$; [L5] makes that union null. Hence $h$ is strongly measurable. Moreover $\|h\|\leq\sum_{n\geq1}n\mathbf1_{A_n}\leq g+1$, so [L4] makes $h$ Bochner integrable. Let $H_N=\sum_{n=1}^Nh_n$. Then $H_N\to h$ pointwise and $\|H_N\|\leq g+1$. Applying [L11] to $\mathbf1_EH_N$ for any measurable $E$ gives $\int_EH_N\to\int_Eh$. Finite linearity follows by combining the simple approximations in [L4], so step 4.2 gives $\int_EH_N=\sum_{n=1}^N\nu(E\cap A_n)$. Norm countable additivity of $\nu$ and $\nu(E\cap Z)=0$ make the latter sums converge to $\nu(E)$. Thus $h$ is a Bochner density of $\nu$. [L4, L5, L11, step 1.1, step 1.3, step 4.2]
 
-6.1 Conclude the equivalence and record the exact AC use. [A1, L3, step 5.1, step 5.2]
-Step 5.1 proves RNP implies almost-everywhere differentiability. Conversely,
-step 5.2 gives a density for every vector measure in the interval test [L3],
-so $X$ has RNP. AC is used by the scalar Radon--Nikodym theorem, the interval
-RNP test, and through step 1.1 for countable null-set, dominated-convergence,
-and scalar-FTC suppliers. Empty and zero measures give the zero density, and
-both directions of the equivalence have been proved. [A1, L3, step 5.1, step 5.2] ∎
+6.1 Conclude the equivalence and record the exact AC use. [A1, L3, step 5.1, step 5.2] Step 5.1 proves RNP implies almost-everywhere differentiability. Conversely, step 5.2 gives a density for every vector measure in the interval test [L3], so $X$ has RNP. AC is used by the scalar Radon--Nikodym theorem, the interval RNP test, and through step 1.1 for countable null-set, dominated-convergence, and scalar-FTC suppliers. Empty and zero measures give the zero density, and both directions of the equivalence have been proved. [A1, L3, step 5.1, step 5.2] ∎

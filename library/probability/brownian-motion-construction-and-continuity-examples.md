@@ -1,7 +1,7 @@
 ---
 page: brownian-motion-construction-and-continuity-examples
 title: Brownian Motion Construction and Continuity — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-brownian-finite-dimensional-density

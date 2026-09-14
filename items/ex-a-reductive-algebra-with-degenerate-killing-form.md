@@ -2,7 +2,7 @@
 id: ex-a-reductive-algebra-with-degenerate-killing-form
 kind: example
 title: A reductive algebra with degenerate Killing form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-equivalent-characterizations-of-reductive-lie-algebras, def-killing-form-of-a-finite-dimensional-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -42,4 +43,5 @@ $$\mathfrak{gl}_n=kI\oplus\mathfrak{sl}_n,\qquad K(I,X)=0\quad(X\in\mathfrak{gl}
 **Proof technique:** direct.
 
 1.1 Since $n$ is invertible in $k$, every matrix has the unique decomposition $$X=\frac{\operatorname{tr}X}{n}I+\left(X-\frac{\operatorname{tr}X}{n}I\right),$$ whose second term is traceless. Thus $\mathfrak{gl}_n=kI\oplus\mathfrak{sl}_n$. The first summand is the center and the second is semisimple for $n\geq2$; for $n=1$ it is zero, which is semisimple by convention. Hence [L1] makes $\mathfrak{gl}_n$ reductive for every $n\geq1$. [L1, given, algebra]
+
 2.1 Since $I$ is central, $\operatorname{ad}_I=0$. Therefore [L2] gives $K(I,X)=0$ for every $X$. The nonzero vector $I$ lies in the radical of the form, so it is degenerate; at $n=1$ it is identically zero. The calculation is finite and uses no choice. [L2, step 1.1, algebra] ∎

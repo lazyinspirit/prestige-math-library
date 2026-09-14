@@ -1,7 +1,7 @@
 ---
 page: suslin-trees-lines-algebras-and-independence-examples
 title: "Suslin Trees, Lines, Algebras, and Independence: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-first-difference-order-on-a-binary-branching-tree

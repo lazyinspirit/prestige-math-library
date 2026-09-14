@@ -2,13 +2,14 @@
 id: def-negative-degree-complex-k-groups
 kind: definition
 title: Negative-degree complex K-groups
-status: draft
+status: published
 origin: pipeline
 deps: [def-reduced-complex-k-theory, def-reduced-cone-suspension-and-cofiber-sequence, def-compactly-generated-based-space-and-well-pointed-object]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

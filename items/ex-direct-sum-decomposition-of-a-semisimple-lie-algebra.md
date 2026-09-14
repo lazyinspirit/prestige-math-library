@@ -2,7 +2,7 @@
 id: ex-direct-sum-decomposition-of-a-semisimple-lie-algebra
 kind: example
 title: Direct-sum decomposition of a semisimple Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [prop-ideals-and-quotients-of-semisimple-lie-algebras]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -38,5 +39,7 @@ Over a characteristic-zero field let $\mathfrak g=\mathfrak{sl}_2\oplus\mathfrak
 **Proof technique:** direct.
 
 1.1 The standard matrix-unit commutator argument shows that $\mathfrak{sl}_2$ and $\mathfrak{sl}_3$ are nonabelian simple in characteristic zero. Hence $\mathfrak{sl}_2\oplus0$ and $0\oplus\mathfrak{sl}_3$ are simple ideals whose direct sum is $\mathfrak g$. [given, algebra]
+
 2.1 Applying [L1], the complete ideal list is $$0,\quad\mathfrak{sl}_2\oplus0,\quad0\oplus\mathfrak{sl}_3,\quad\mathfrak g.$$ This includes the empty and full subcollections. [L1, step 1.1]
+
 3.1 For $x\in\mathfrak{sl}_2$ and $y\in\mathfrak{sl}_3$, the two adjoint maps $\operatorname{ad}_{(x,0)}$ and $\operatorname{ad}_{(0,y)}$ act on opposite blocks, so their product is zero. Restriction to a block is its own adjoint trace. Thus $K_{\mathfrak g}=K_{\mathfrak{sl}_2}\perp K_{\mathfrak{sl}_3}$. Everything is finite and choice-free. [step 1.1, algebra] ∎

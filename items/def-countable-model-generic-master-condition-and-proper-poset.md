@@ -2,7 +2,7 @@
 id: def-countable-model-generic-master-condition-and-proper-poset
 kind: definition
 title: "Master conditions and proper posets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-dense-open-sets-and-model-generic-filters, thm-countable-elementary-submodels-and-transitive-collapses, def-hereditary-size-and-h-kappa, def-club-filter-and-nonstationary-ideal]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: not-applicable
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

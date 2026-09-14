@@ -52,7 +52,7 @@ is a locally trivial principal $\operatorname{GL}_1(\mathbb R)$-bundle which is 
 
 1.1 The derivative of a change of one-dimensional chart is a continuous nonzero scalar, so the frame-coordinate changes take values in $\operatorname{GL}_1(\mathbb R)$ and act freely and transitively on each frame fiber. Thus [F2] gives the asserted locally trivial principal bundle. [F1, F2]
 
-1.2 Suppose for contradiction that it is numerable. Let $(U_i,\varphi_i)$ be the [F3] data. In the frame over $U_i$, declare the selected frame to have squared norm $1$; this defines a continuous positive quadratic form $g_i$ on $TL|_{U_i}$. Extend $\varphi_i g_i$ by zero away from $U_i$. Support containment makes the extension continuous, and local finiteness together with [F5] makes
+1.2 Suppose for contradiction that it is numerable. Let $(U_i,\varphi_i)$ be the data. In the frame over $U_i$, declare the selected frame to have squared norm $1$; this defines a continuous positive quadratic form $g_i$ on $TL|_{U_i}$. Extend $\varphi_i g_i$ by zero away from $U_i$. Support containment makes the extension continuous, and local finiteness together with [F5] makes [F3]
 
 $$ g=\sum_i\varphi_i g_i $$
 

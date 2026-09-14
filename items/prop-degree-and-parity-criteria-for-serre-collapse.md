@@ -2,12 +2,13 @@
 id: prop-degree-and-parity-criteria-for-serre-collapse
 kind: proposition
 title: Degree and parity criteria for Serre collapse
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, thm-cohomological-serre-spectral-sequence, prop-degree-reasons-force-stabilization-in-a-bounded-region, prop-a-spectral-sequence-supported-in-one-row-or-column-collapses, prop-collapse-does-not-in-general-split-the-abutment, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: ai-altered

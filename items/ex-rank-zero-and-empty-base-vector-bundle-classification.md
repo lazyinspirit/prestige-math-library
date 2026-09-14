@@ -2,7 +2,7 @@
 id: ex-rank-zero-and-empty-base-vector-bundle-classification
 kind: example
 title: Rank-zero and empty-base vector-bundle classification
-status: draft
+status: published
 origin: pipeline
 deps: [def-real-and-complex-topological-vector-bundle, def-stiefel-space-grassmannian-and-tautological-bundle]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

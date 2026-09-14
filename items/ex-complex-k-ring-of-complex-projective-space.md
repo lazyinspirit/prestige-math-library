@@ -2,7 +2,7 @@
 id: ex-complex-k-ring-of-complex-projective-space
 kind: example
 title: The complex K-ring of CPⁿ
-status: draft
+status: published
 origin: pipeline
 deps: [thm-reduced-k-theory-exact-sequence-of-a-cofibration, thm-complex-bott-periodicity, def-external-product-in-complex-k-theory, ex-complex-k-ring-of-the-two-sphere, ex-complex-k-theory-of-even-and-odd-spheres, thm-schubert-cells-give-the-stable-grassmannian-cw-structure, def-axiom-of-choice]
 proof_strategy: induction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

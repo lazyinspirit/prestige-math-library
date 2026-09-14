@@ -2,7 +2,7 @@
 id: lem-minimal-walk-functions-are-coherent-and-finite-to-one
 kind: lemma
 title: The minimal-walk functions are coherent and finite-to-one
-status: draft
+status: published
 origin: pipeline
 deps:
   - lem-minimal-walk-trace-concatenation-and-limit-control
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

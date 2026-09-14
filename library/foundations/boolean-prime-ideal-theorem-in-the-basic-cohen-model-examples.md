@@ -1,7 +1,7 @@
 ---
 page: boolean-prime-ideal-theorem-in-the-basic-cohen-model-examples
 title: Boolean Prime Ideal Theorem in the Basic Cohen Model — Examples
-status: draft
+status: published
 items: [ex-continuity-contradiction-for-a-supported-boolean-algebra, fs-bpi-is-ac]
 examples: []
 ---

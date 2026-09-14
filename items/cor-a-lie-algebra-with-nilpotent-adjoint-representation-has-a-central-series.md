@@ -2,7 +2,7 @@
 id: cor-a-lie-algebra-with-nilpotent-adjoint-representation-has-a-central-series
 kind: corollary
 title: Nilpotent adjoint action yields a central series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-engels-triangularization-theorem, thm-engels-theorem, def-upper-central-series-of-a-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

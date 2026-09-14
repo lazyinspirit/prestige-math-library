@@ -2,7 +2,7 @@
 id: def-gitik-finite-support-symmetric-submodel
 kind: definition
 title: Gitik's finite-support symmetric submodel
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-gitik-strongly-compact-filter-system-and-class-forcing
@@ -13,6 +13,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, Section 3 and Lemmas 5–6, pages 7–10"

@@ -2,12 +2,13 @@
 id: thm-homological-serre-spectral-sequence
 kind: theorem
 title: Homological Serre spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-serre-filtration-of-the-total-space-over-base-skeleta, lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients, def-r-cycles-and-r-boundaries-of-an-increasingly-filtered-complex, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, lem-the-filtered-differential-induces-d-r-on-the-r-page, thm-the-next-page-is-the-homology-of-the-current-page, def-homological-spectral-sequence, def-induced-filtration-on-homology, def-strong-convergence-of-a-spectral-sequence, prop-a-filtered-chain-map-induces-a-morphism-of-spectral-sequences, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, def-relative-singular-homology, lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex, thm-cellular-approximation-for-maps-of-cw-pairs, prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace, thm-singular-chain-homotopy-formula, def-simply-connected, thm-fundamental-group-laws]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

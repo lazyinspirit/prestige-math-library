@@ -52,8 +52,7 @@ every $k\in\mathbb Z$.
 
 **Given:** A strict map $f:E\to F$ and an integer $k$ as in the statement.
 
-1.1 **Construct the map of directed systems.** Functoriality of higher homotopy gives $(f_n)_*:\pi_{n+k}(E_n)\to\pi_{n+k}(F_n)$. Suspending a representative and using [F1] shows [F1, F2]
-$$ (f_{n+1})_*b_n^E=b_n^F(f_n)_*. $$
+1.1 **Construct the map of directed systems.** Functoriality of higher homotopy gives $(f_n)_*:\pi_{n+k}(E_n)\to\pi_{n+k}(F_n)$. Suspending a representative and using [F1] shows $$ (f_{n+1})_*b_n^E=b_n^F(f_n)_*. $$ [F1, F2]
 
 Thus the level maps form a natural transformation of the two sequential systems. [F1, F2]
 

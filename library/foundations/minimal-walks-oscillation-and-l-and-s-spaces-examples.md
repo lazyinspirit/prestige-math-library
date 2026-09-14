@@ -1,7 +1,7 @@
 ---
 page: minimal-walks-oscillation-and-l-and-s-spaces-examples
 title: "Minimal Walks, Oscillation, and L- and S-Spaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-a-finite-minimal-walk-and-its-lower-trace

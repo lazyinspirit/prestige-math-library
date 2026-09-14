@@ -2,7 +2,7 @@
 id: lem-solovay-perfect-tree-of-mutually-generic-name-interpretations
 kind: lemma
 title: A perfect tree of mutually generic name interpretations
-status: draft
+status: published
 origin: pipeline
 deps: [def-solovay-levy-collapse-setup, thm-collapse-and-levy-collapse-effects, lem-lc-inaccessible-size-and-rank-bounds, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,8 @@ provenance:
   proof: ai-altered
 proof_strategy: perfect-tree-fusion
 sources: {references: [{title: "Solovay 1970, Part III, Lemma 1.6", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
+verification:
+  audited: 2026-09-14
 ---
 
 ## Statement

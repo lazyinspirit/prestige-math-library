@@ -1,7 +1,7 @@
 ---
 page: prikry-forcing-and-gitiks-singular-cardinal-model-examples
 title: "Prikry Forcing and Gitik's Singular-Cardinal Model: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-prikry-stems-and-direct-extensions

@@ -2,7 +2,7 @@
 id: ex-covariance-of-overlapping-brownian-increments
 kind: example
 title: "Covariance of overlapping Brownian increments"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-moments-variance-and-covariance, thm-covariance-bilinearity-and-symmetry, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

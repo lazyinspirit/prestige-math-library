@@ -2,7 +2,7 @@
 id: thm-conditional-independence-of-suslin-hypothesis
 kind: theorem
 title: "Conditional independence of SH"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-formal-consistency-of-suslin-hypothesis, cor-formal-consistency-of-not-suslin-hypothesis, def-arithmetic-provability-and-consistency, def-suslin-hypothesis-and-suslin-algebra]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

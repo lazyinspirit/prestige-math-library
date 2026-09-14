@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-auerbach-basis
 kind: lemma
 title: "Finite-dimensional Auerbach bases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: extremal
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -50,15 +51,9 @@ compact ([[thm-heine-borel-rn]]).
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Fix a reference basis and use [L1] to identify $V^n$ with a finite real [given, L1, L2]
-coordinate space (of twice the dimension in the complex case). By [L2], the
-product of $n$ unit spheres is compact. The absolute determinant relative to
-the reference basis is continuous, so it attains a maximum there. The maximum
-is positive because the normalized reference basis is an admissible independent
-tuple. Let $(x_1,\ldots,x_n)$ maximize it. [L1, L2, choose maximum]
+1.1 Fix a reference basis and use [L1] to identify $V^n$ with a finite real [given, L1, L2] coordinate space (of twice the dimension in the complex case). By [L2], the product of $n$ unit spheres is compact. The absolute determinant relative to the reference basis is continuous, so it attains a maximum there. The maximum is positive because the normalized reference basis is an admissible independent tuple. Let $(x_1,\ldots,x_n)$ maximize it. [L1, L2, choose]
 
-2.1 The positive determinant makes $(x_i)$ a basis, and each $\|x_i\|=1$ by [given, step 1.1]
-construction. For any unit $y$ and fixed $i$, multilinearity gives
+2.1 The positive determinant makes $(x_i)$ a basis, and each $\|x_i\|=1$ by construction. For any unit $y$ and fixed $i$, multilinearity gives [given, step 1.1]
 
 $$|\det(x_1,\ldots,y,\ldots,x_n)| =|x_i^*(y)|\,|\det(x_1,\ldots,x_i,\ldots,x_n)|.$$
 
@@ -66,6 +61,4 @@ Maximality therefore gives $|x_i^*(y)|\le1$, so
 $\|x_i^*\|\le1$. Since $x_i^*(x_i)=1$ and $\|x_i\|=1$, the reverse inequality
 holds. [step 1.1, determinant multilinearity]
 
-3.1 The argument selects one maximizer from one nonempty compact set and does [given, step 2.1]
-not select bases for a family of spaces. Thus it uses no choice principle.
-[steps 1.1, 2.1] ∎
+3.1 The argument selects one maximizer from one nonempty compact set and does [given, step 2.1] not select bases for a family of spaces. Thus it uses no choice principle. [step 1.1, 2.1] ∎

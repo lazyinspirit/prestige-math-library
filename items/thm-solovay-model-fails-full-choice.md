@@ -2,7 +2,7 @@
 id: thm-solovay-model-fails-full-choice
 kind: theorem
 title: The Solovay model fails the full Axiom of Choice
-status: draft
+status: published
 origin: pipeline
 deps: [cor-solovay-model-has-no-vitali-or-bernstein-set, def-axiom-of-choice, thm-choice-bernstein-set-pathology]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: reductio
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-gitik-support-approximation-and-bounded-stage
 kind: lemma
 title: Finite-support symmetry and bounded-stage approximation
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-gitik-finite-support-symmetric-submodel
@@ -13,6 +13,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, Lemma 7, pages 9–10"

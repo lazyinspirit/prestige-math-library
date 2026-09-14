@@ -2,12 +2,13 @@
 id: lem-multiplicative-filtered-cochains-induce-products-on-all-spectral-sequence-pages
 kind: lemma
 title: Multiplicative filtered cochains induce products on every spectral-sequence page
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-r-cycles-and-r-boundaries-of-an-increasingly-filtered-complex, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, lem-the-filtered-differential-induces-d-r-on-the-r-page, lem-spectral-sequence-subquotient-and-local-lifting-calculus, thm-the-cohomological-filtered-complex-construction, thm-the-next-page-is-the-homology-of-the-current-page]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-basic-cohen-model-schema-of-continuity
 kind: lemma
 title: Schema of continuity in the basic Cohen model
-status: draft
+status: published
 origin: pipeline
 deps: [def-basic-cohen-symmetric-system, lem-basic-cohen-generic-reals-form-a-symmetric-set, def-ordinal-definability-and-hod, lem-forcing-monotonicity-density-and-decision, lem-symmetry-lemma-for-forcing-automorphisms, thm-forcing-theorem]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

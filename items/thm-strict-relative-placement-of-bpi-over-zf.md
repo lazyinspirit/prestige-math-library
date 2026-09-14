@@ -2,7 +2,7 @@
 id: thm-strict-relative-placement-of-bpi-over-zf
 kind: theorem
 title: Strict relative placement of BPI between ZF and Choice
-status: draft
+status: published
 origin: pipeline
 deps: [thm-bpi-and-set-ultrafilter-lemma-are-equivalent-over-zf, cor-relative-consistency-of-bpi-without-choice-over-zf, cor-relative-consistency-of-no-free-ultrafilter-on-omega-over-zf, def-finite-intersection-property, def-arithmetic-provability-and-consistency]
 proof_strategy: relative-independence
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

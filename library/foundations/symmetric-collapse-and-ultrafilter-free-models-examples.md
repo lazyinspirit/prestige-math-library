@@ -1,7 +1,7 @@
 ---
 page: symmetric-collapse-and-ultrafilter-free-models-examples
 title: "Symmetric Collapse and Ultrafilter-Free Models: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-first-feferman-levy-collapse-layers

@@ -82,7 +82,7 @@ $$ \theta_{n+1}(s)\in C^{n+1}(X,A;f^*\Pi_nF). $$
 
 4.1 Evaluate the cochain of Step 3.1 on the boundary of one relative $(n+2)$-cell. Pull everything back to its characteristic disk. Lifting its radial contraction identifies all boundary fiber groups, and the signed incidence sum is the boundary of the single lifted sphere datum on that disk. It is zero in $\pi_n(F)$ because a boundary is null in the relative homotopy exact sequence. Undoing the transports restores exactly the local-coefficient incidence formula. Hence $\delta\theta_{n+1}(s)=0$. [F2, F4, step 3.1]
 
-5.1 A different cellular contraction, whisker, or partial section gives a fiberwise prism. Applying the signed boundary calculation of Step 4.1 to that prism yields the identity recorded in [F5]:
+5.1 A different cellular contraction, whisker, or partial section gives a fiberwise prism. Applying the signed boundary calculation of Step 4.1 to that prism yields the identity recorded in : [F5]
 
 $$ \delta d(s_0,H,s_1)=\theta_{n+1}(s_0)-\theta_{n+1}(s_1). $$
 

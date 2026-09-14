@@ -2,7 +2,7 @@
 id: ex-serre-spectral-sequence-of-the-quaternionic-hopf-fibration
 kind: example
 title: Serre spectral sequence of the quaternionic Hopf fibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-locally-trivial-fiber-bundle, thm-numerable-fiber-bundles-are-hurewicz-fibrations, thm-cellular-homology-computes-singular-homology, cor-homology-of-spheres, thm-topological-universal-coefficient-short-exact-sequence-for-cohomology, thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, def-serre-edge-homomorphisms-and-transgression, def-axiom-of-choice]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

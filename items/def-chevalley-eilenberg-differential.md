@@ -2,7 +2,7 @@
 id: def-chevalley-eilenberg-differential
 kind: definition
 title: Chevalley–Eilenberg differential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-chevalley-eilenberg-cochains]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

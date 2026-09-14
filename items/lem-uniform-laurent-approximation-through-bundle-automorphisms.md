@@ -2,7 +2,7 @@
 id: lem-uniform-laurent-approximation-through-bundle-automorphisms
 kind: lemma
 title: Uniform Laurent approximation through bundle automorphisms
-status: draft
+status: published
 origin: pipeline
 deps: [lem-normalized-clutching-data-for-bundles-over-x-times-s-two, cor-compact-domain-maps-are-uniformly-continuous, thm-continuous-implies-integrable, cor-compact-hausdorff-partitions-of-unity, lem-ac-supplies-dependent-choice-for-vector-bundle-constructions, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

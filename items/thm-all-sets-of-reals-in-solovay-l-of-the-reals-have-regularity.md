@@ -2,13 +2,15 @@
 id: thm-all-sets-of-reals-in-solovay-l-of-the-reals-have-regularity
 kind: theorem
 title: All sets of reals in Solovay L(R) have LM, BP, and PSP
-status: draft
+status: published
 origin: pipeline
 deps: [thm-solovay-l-of-the-reals-satisfies-zf-and-dependent-choice, def-solovay-levy-collapse-setup, def-forcing-name-valuation-and-generic-extension, lem-solovay-collapse-localizes-countable-ordinal-data, lem-solovay-absorption-factorization-and-homogeneity, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, lem-solovay-borel-code-and-regularity-absoluteness, lem-solovay-random-and-cohen-generics-are-large, lem-solovay-homogeneous-truth-has-borel-representatives, lem-solovay-perfect-tree-of-mutually-generic-name-interpretations, def-vitali-set-on-the-unit-interval, def-bernstein-set-on-r, thm-choice-bernstein-set-pathology, thm-choice-implies-dependent-implies-countable-choice, thm-countable-union-of-countable, thm-r-uncountable, def-linear-basis, def-linear-combination-and-span, cor-a-measurable-subgroup-of-rn-of-positive-measure-is-rn, thm-steinhaus-difference-set-contains-a-ball, thm-cauchy-functional-equation-regularity, thm-finite-and-countable-subadditivity-of-measures, thm-lebesgue-measure-of-a-box-of-every-kind, thm-rationals-countable, lem-dyadic-coding-coin-measure-and-lebesgue-transfer, thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: homogeneous-regularity-transfer
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - {title: "Solovay 1970, Theorem 1 and Parts II–III", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}

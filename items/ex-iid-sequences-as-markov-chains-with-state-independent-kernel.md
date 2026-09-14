@@ -2,7 +2,7 @@
 id: ex-iid-sequences-as-markov-chains-with-state-independent-kernel
 kind: example
 title: "IID sequences as Markov chains with state-independent kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-bounded-function-form-of-the-markov-property, def-independent-random-elements, def-identically-distributed-and-iid-random-variables, thm-grouping-independent-sigma-algebras, thm-factorization-of-expectations-for-independent-variables]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

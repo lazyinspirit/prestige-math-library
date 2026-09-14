@@ -2,7 +2,7 @@
 id: ex-random-mapping-representation-for-a-finite-transition-matrix
 kind: example
 title: "Random-mapping representation for a finite transition matrix"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-bounded-function-form-of-the-markov-property, cor-canonical-markov-chain-on-path-space, def-independent-random-elements, def-identically-distributed-and-iid-random-variables, thm-grouping-independent-sigma-algebras]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

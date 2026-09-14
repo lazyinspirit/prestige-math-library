@@ -2,12 +2,14 @@
 id: def-halpern-lauchli-finite-word-calculus
 kind: definition
 title: "The finite word calculus for the Halpern–Läuchli argument"
-status: draft
+status: published
 origin: pipeline
 deps: [def-halpern-lauchli-finitistic-trees-density-and-matrices]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Halpern–Läuchli, A partition theorem (1966), §2, pp. 362–363"

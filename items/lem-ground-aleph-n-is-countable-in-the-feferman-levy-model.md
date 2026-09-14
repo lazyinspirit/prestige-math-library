@@ -2,7 +2,7 @@
 id: lem-ground-aleph-n-is-countable-in-the-feferman-levy-model
 kind: lemma
 title: Every finite ground aleph is countable in the Feferman–Levy model
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-levy-symmetric-collapse-system, thm-collapse-and-levy-collapse-effects, lem-forcing-monotonicity-density-and-decision]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

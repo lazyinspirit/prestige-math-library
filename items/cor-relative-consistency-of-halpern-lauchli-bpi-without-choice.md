@@ -2,7 +2,7 @@
 id: cor-relative-consistency-of-halpern-lauchli-bpi-without-choice
 kind: corollary
 title: Relative consistency of BPI without Choice together with Halpern–Läuchli
-status: draft
+status: published
 origin: pipeline
 deps: [thm-halpern-lauchli-dense-matrix-dichotomy, cor-relative-consistency-of-bpi-without-choice-over-zf, def-arithmetic-provability-and-consistency]
 proof_strategy: formal-consistency-transfer
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

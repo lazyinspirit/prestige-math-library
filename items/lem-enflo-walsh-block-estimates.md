@@ -2,7 +2,7 @@
 id: lem-enflo-walsh-block-estimates
 kind: lemma
 title: "Enflo's Walsh-block estimates and symmetry average"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   scraped: []
@@ -58,8 +59,7 @@ $$\left|\widetilde{\operatorname{Tr}}(W^{n-1},T) -\widetilde{\operatorname{Tr}}(
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Every $w\in W^m$ equals one at zero, and there are [given]
-$\binom{2n}{m}$ such products; the triangle inequality proves item 1. If $|a|=1$, exactly $\binom{2n-1}{m-1}$ summands change sign, so $F_m(a)=\binom{2n}{m}-2\binom{2n-1}{m-1} =(1-m/n)\binom{2n}{m}$. This proves item 2. [finite counting]
+1.1 Every $w\in W^m$ equals one at zero, and there are [given] $\binom{2n}{m}$ such products; the triangle inequality proves item 1. If $|a|=1$, exactly $\binom{2n-1}{m-1}$ summands change sign, so $F_m(a)=\binom{2n}{m}-2\binom{2n-1}{m-1} =(1-m/n)\binom{2n}{m}$. This proves item 2. [algebra]
 
 2.1 Multiplying the choices coordinatewise gives the generating identity [given, step 1.1]
 
@@ -105,8 +105,7 @@ complementation; $r=2$ and $r=2n-2$ follow from the endpoint estimate. For
 $n=1$, the only intermediate weight is $r=1$, already covered by item 2.
 This proves item 3 in every case. [step 2.1, coefficient integral, weighted Hölder, binomial arithmetic]
 
-4.1 Average $T$ over the finite group: [given, L1, step 3.1]
-$\widetilde T=|G|^{-1}\sum_{U\in G}U^{-1}TU$. Coordinate permutations and translations permute each Walsh layer up to signs, so [L1] gives $\widetilde{\operatorname{Tr}}(W^{n\pm1},\widetilde T) =\widetilde{\operatorname{Tr}}(W^{n\pm1},T)$, and the group average commutes with every element of $G$.
+4.1 Average $T$ over the finite group: $\widetilde T=|G|^{-1}\sum_{U\in G}U^{-1}TU$. Coordinate permutations and translations permute each Walsh layer up to signs, so [L1] gives $\widetilde{\operatorname{Tr}}(W^{n\pm1},\widetilde T) =\widetilde{\operatorname{Tr}}(W^{n\pm1},T)$, and the group average commutes with every element of $G$. [given, L1, step 3.1]
 
 Write the matrix of $\widetilde T$ in the Walsh basis. For two distinct Walsh
 characters $v,w$, choose a translation $U_t$ for which
@@ -125,9 +124,4 @@ $$|\widetilde{\operatorname{Tr}}(W^{n-1},T) -\widetilde{\operatorname{Tr}}(W^{n+
 
 [L1, finite group average, Walsh orthogonality]
 
-5.1 The average defining $\widetilde Tf$ implies that some $U\in G$ has [given, step 4.1]
-$\|TUf\|_\infty\ge\|\widetilde Tf\|_\infty$. Items 1, 3, and 4 give
-$\|f\|_\infty\le2/n$, while item 2 gives equality at every point of weight
-one. Hence $\|f\|_\infty=2/n>0$. Since $U$ is an isometry,
-$\|Uf\|_\infty=2/n$. Combining these facts with step 4.1 gives the displayed
-bound. [steps 3.1, 4.1, finite maximum] ∎
+5.1 The average defining $\widetilde Tf$ implies that some $U\in G$ has [given, step 4.1] $\|TUf\|_\infty\ge\|\widetilde Tf\|_\infty$. Items 1, 3, and 4 give $\|f\|_\infty\le2/n$, while item 2 gives equality at every point of weight one. Hence $\|f\|_\infty=2/n>0$. Since $U$ is an isometry, $\|Uf\|_\infty=2/n$. Combining these facts with step 4.1 gives the displayed bound. [step 3.1, 4.1, algebra] ∎

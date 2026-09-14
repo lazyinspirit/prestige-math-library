@@ -2,7 +2,7 @@
 id: lem-normalized-clutching-data-for-bundles-over-x-times-s-two
 kind: lemma
 title: Normalized clutching data for bundles over X×S²
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-rank-complement-theorem-over-compact-hausdorff-bases, thm-homotopy-invariance-of-vector-bundle-pullback, def-clutching-construction-for-bundles-over-a-suspension, thm-vector-bundles-glued-from-transition-cocycles, prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

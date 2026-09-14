@@ -2,12 +2,13 @@
 id: thm-naturality-of-the-homological-serre-spectral-sequence
 kind: theorem
 title: Naturality of the homological Serre spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, def-serre-filtration-of-the-total-space-over-base-skeleta, prop-a-filtered-chain-map-induces-a-morphism-of-spectral-sequences, prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism, def-r-cycles-and-r-boundaries-of-an-increasingly-filtered-complex, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, thm-singular-chain-homotopy-formula]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -26,7 +27,9 @@ sources:
 ## Statement
 
 Consider a strictly commutative square of Serre fibrations
-$$\begin{CD}E @>{u}>> E'\\ @V{p}VV @VV{p'}V\\ B @>{f}>> B'\end{CD}$$
+$$
+\begin{CD}E @>{u}>> E'\\ @V{p}VV @VV{p'}V\\ B @>{f}>> B'\end{CD}
+$$
 over path-connected CW complexes, where $f$ is cellular, and fix a commutative
 unital ring $R$. The map $u$ induces maps between the homological Serre spectral
 sequences which commute with every differential and every next-page

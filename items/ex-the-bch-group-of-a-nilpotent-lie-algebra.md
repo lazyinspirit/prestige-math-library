@@ -2,7 +2,7 @@
 id: ex-the-bch-group-of-a-nilpotent-lie-algebra
 kind: example
 title: The BCH group of a nilpotent Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-lie-third-fundamental-theorem, thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism, thm-baker-campbell-hausdorff]
@@ -12,6 +12,8 @@ axiom_base: ZF + AC_omega
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Knapp, Lie Groups Beyond an Introduction, nilpotent Lie groups"
@@ -44,6 +46,9 @@ the BCH polynomial, which terminates after finitely many bracket lengths
 **Proof technique:** global BCH coordinates.
 
 1.1 If $\mathfrak n$ has class $c$, every Lie monomial of bracket length greater than $c$ vanishes. Thus the BCH expression supplied globally by [L3] is a finite polynomial. Its universal identities give $\operatorname{BCH}(x,0)=x=\operatorname{BCH}(0,x)$ and $\operatorname{BCH}(x,-x)=0$. [L3, given, algebra]
+
 2.1 Let $N$ be the connected simply connected integration supplied by [L2]. By [L3], $\exp:\mathfrak n\to N$ is a diffeomorphism and the transported global product $x*y=\log(\exp x\exp y)$ is the truncated BCH polynomial; this agrees with the local formula in [L1]. Associativity, identity $0$, and inverse $-x$ follow from the laws of $N$. [L1, L2, L3, step 1.1]
+
 3.1 The underlying manifold is $\mathfrak n\cong\mathbb R^{\dim\mathfrak n}$, hence is connected and simply connected, including dimension zero. The antisymmetric part of the quadratic BCH term is $[x,y]$, so differentiating the commutator recovers the original bracket. [L1, step 2.1, algebra]
+
 4.1 In the Heisenberg algebra, $$(ae+bf+cz)*(a'e+b'f+c'z)=(a+a')e+(b+b')f+\left(c+c'+\frac12(ab'-ba')\right)z,$$ because brackets of length three vanish. This is a concrete nonabelian instance. The declared $\mathsf{AC}_\omega$ is exactly that inherited through [L2]–[L3]; the finite calculation adds no choice. [L2, L3, step 3.1, algebra] ∎

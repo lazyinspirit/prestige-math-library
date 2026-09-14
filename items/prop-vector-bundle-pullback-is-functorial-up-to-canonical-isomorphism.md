@@ -2,7 +2,7 @@
 id: prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism
 kind: proposition
 title: Vector-bundle pullback is canonically functorial
-status: draft
+status: published
 origin: pipeline
 deps: [def-pullback-vector-bundle-and-pullback-section]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,12 +2,13 @@
 id: def-fiber-homology-local-system-of-a-serre-fibration
 kind: definition
 title: Fiber homology local system of a Serre fibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [lem-serre-fibration-replacement-preserves-fiber-homology-transport, def-fundamental-groupoid-of-a-space, def-local-system-of-r-modules-and-its-pullback, lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems, prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-axiom-of-choice]
 proof_strategy: definition
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

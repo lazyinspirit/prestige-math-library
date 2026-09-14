@@ -2,12 +2,13 @@
 id: lem-serre-classes-are-stable-under-finite-filtrations
 kind: lemma
 title: Serre classes are stable under finite filtrations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-serre-class-ring-ideal-and-mod-c-morphism, thm-snake-lemma-for-modules]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: thm-vector-bundles-glued-from-transition-cocycles
 kind: theorem
 title: Vector bundles are glued from transition cocycles
-status: draft
+status: published
 origin: pipeline
 deps: [def-real-and-complex-topological-vector-bundle, thm-quotient-universal-property]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

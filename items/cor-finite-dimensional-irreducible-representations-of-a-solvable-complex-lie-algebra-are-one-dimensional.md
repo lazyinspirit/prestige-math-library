@@ -2,7 +2,7 @@
 id: cor-finite-dimensional-irreducible-representations-of-a-solvable-complex-lie-algebra-are-one-dimensional
 kind: corollary
 title: Irreducible representations of solvable complex Lie algebras are one-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-lies-theorem, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

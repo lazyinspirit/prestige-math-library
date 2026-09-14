@@ -2,7 +2,7 @@
 id: thm-kolmogorov-continuity-criterion-one-parameter
 kind: theorem
 title: "Kolmogorov continuity criterion in one parameter"
-status: draft
+status: published
 origin: pipeline
 deps: [def-complete-metric-space, def-separable-space, cor-markov-inequality-for-random-variables, thm-finite-and-countable-subadditivity-of-measures, thm-geometric-series, lem-geometric-sequence-null, thm-rationals-countable, lem-rat-embeds-dense, cor-first-borel-cantelli-lemma-for-events, def-law-modification-and-indistinguishability-of-processes, thm-dominated-convergence]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

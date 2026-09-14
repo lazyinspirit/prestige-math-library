@@ -2,7 +2,7 @@
 id: ex-the-euclidean-motion-lie-algebra-is-solvable-in-dimension-two
 kind: example
 title: The plane Euclidean-motion Lie algebra is solvable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-semidirect-product-of-lie-algebras, def-derived-series-and-solvable-lie-algebra, def-solvable-length-of-a-lie-algebra, def-lower-central-series-and-nilpotent-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

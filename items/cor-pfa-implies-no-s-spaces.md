@@ -2,7 +2,7 @@
 id: cor-pfa-implies-no-s-spaces
 kind: corollary
 title: "PFA implies that there are no S-spaces"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-pfa-implies-p-ideal-dichotomy, lem-pfa-raises-the-pseudointersection-number, thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-chapman-kolmogorov-equations
 kind: theorem
 title: "Chapman-Kolmogorov equations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-iterated-transition-kernels, lem-kernel-composition-is-well-defined-and-associative, lem-bounded-function-form-of-the-markov-property, thm-tower-property-of-conditional-expectation, thm-taking-out-what-is-known]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

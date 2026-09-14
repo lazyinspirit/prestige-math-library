@@ -2,7 +2,7 @@
 id: fs-omega-one-is-regular-in-zf
 kind: false-statement
 title: ZF proves that omega one is regular
-status: draft
+status: published
 origin: pipeline
 deps: [cor-relative-consistency-of-feferman-levy-choice-failures-over-zf, def-cofinality, thm-omega-one-is-the-least-uncountable-ordinal]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

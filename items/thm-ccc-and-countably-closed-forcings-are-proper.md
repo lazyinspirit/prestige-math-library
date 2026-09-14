@@ -2,7 +2,7 @@
 id: thm-ccc-and-countably-closed-forcings-are-proper
 kind: theorem
 title: "Ccc and countably closed forcings are proper"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-proper-master-condition-characterizations, def-poset-ccc-and-knaster-property, def-kappa-closure-distributivity-and-chain-condition, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

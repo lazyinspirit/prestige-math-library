@@ -2,7 +2,7 @@
 id: ex-radical-and-nilradical-of-the-affine-lie-algebra
 kind: example
 title: Radical and nilradical of the affine Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-radical-of-a-finite-dimensional-lie-algebra, def-nilradical-of-a-finite-dimensional-lie-algebra, ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

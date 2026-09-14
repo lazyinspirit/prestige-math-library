@@ -2,7 +2,7 @@
 id: ex-countable-support-fusion-at-a-limit-stage
 kind: example
 title: "Countable-support fusion at a limit"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-proper-iteration-master-condition, lem-proper-master-condition-characterizations, def-countable-support-forcing-iteration]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Jech, Set Theory, Proper Iteration Lemma 31.17 and complete proof, printed pp.605-606"

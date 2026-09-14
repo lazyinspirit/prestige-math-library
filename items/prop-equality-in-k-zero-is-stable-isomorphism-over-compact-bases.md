@@ -2,7 +2,7 @@
 id: prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases
 kind: proposition
 title: Equality in K⁰ is stable isomorphism over compact bases
-status: draft
+status: published
 origin: pipeline
 deps: [def-complex-topological-k-zero-by-grothendieck-completion, thm-finite-rank-complement-theorem-over-compact-hausdorff-bases, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

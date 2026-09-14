@@ -2,7 +2,7 @@
 id: ex-the-summing-basis-of-c0-is-conditional
 kind: example
 title: "The summing basis of c0 is conditional"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -47,17 +48,9 @@ convergent ([[def-unconditional-and-conditional-basis]]).
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 For $x=(x_k)_{k\ge0}\in c_0$ set $a_n=x_{n-1}-x_n$ for $n\ge1$. [given]
-The $k$th coordinate of $\sum_{n=1}^Na_ns_n$ is $x_k-x_N$ when
-$0\le k<N$ and zero otherwise.
-Hence the error has supremum at most
-$\max\{|x_N|,\sup_{k\ge N}|x_k|\}\to0$. Conversely the coordinate identities
-force $a_n=x_{n-1}-x_n$, so $(s_n)$ is a Schauder basis. [telescoping,
-$x_n\to0$]
+1.1 For $x=(x_k)_{k\ge0}\in c_0$ set $a_n=x_{n-1}-x_n$ for $n\ge1$. [given] The $k$th coordinate of $\sum_{n=1}^Na_ns_n$ is $x_k-x_N$ when $0\le k<N$ and zero otherwise. Hence the error has supremum at most $\max\{|x_N|,\sup_{k\ge N}|x_k|\}\to0$. Conversely the coordinate identities force $a_n=x_{n-1}-x_n$, so $(s_n)$ is a Schauder basis. [algebra]
 
-2.1 Take $x_k=(-1)^k/(k+1)$ for $k\ge0$. Then [given, L2, L1, step 1.1]
-$a_n=(-1)^{n-1}(1/n+1/(n+1))$. The subseries over the odd indices has first
-coordinate
+2.1 Take $x_k=(-1)^k/(k+1)$ for $k\ge0$. Then $a_n=(-1)^{n-1}(1/n+1/(n+1))$. The subseries over the odd indices has first coordinate [given, L2, L1, step 1.1]
 
 $$\sum_{n\ \mathrm{odd}}\left(\frac1n+\frac1{n+1}\right)=+\infty.$$
 

@@ -2,7 +2,7 @@
 id: prop-derivations-preserve-the-nilradical-in-characteristic-zero
 kind: proposition
 title: Derivations preserve the nilradical in characteristic zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero, def-nilpotency-class-of-a-lie-algebra, def-derivation-of-a-lie-algebra]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

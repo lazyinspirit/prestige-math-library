@@ -2,13 +2,14 @@
 id: lem-countable-boolean-algebra-prime-ideal-compactness-tree
 kind: lemma
 title: "The compactness tree yields a prime ideal for an enumerated Boolean algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-partial-prime-ideal-diagrams, lem-finite-partial-prime-ideal-extension]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

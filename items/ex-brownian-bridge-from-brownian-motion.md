@@ -2,7 +2,7 @@
 id: ex-brownian-bridge-from-brownian-motion
 kind: example
 title: "Brownian bridge from Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-gaussian-process, def-brownian-motion, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-covariance-bilinearity-and-symmetry, lem-algebra-of-continuous-real-maps-on-a-space, lem-probability-measure-basic-identities, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

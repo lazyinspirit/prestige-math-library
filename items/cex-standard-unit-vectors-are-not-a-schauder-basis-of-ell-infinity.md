@@ -2,7 +2,7 @@
 id: cex-standard-unit-vectors-are-not-a-schauder-basis-of-ell-infinity
 kind: counterexample
 title: "The standard unit vectors are not a Schauder basis of ell-infinity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

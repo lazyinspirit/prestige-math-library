@@ -2,7 +2,7 @@
 id: def-d-dimensional-brownian-motion
 kind: definition
 title: "$d$-dimensional Brownian motion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-brownian-motion, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, lem-characteristic-function-of-a-normal-law, lem-characteristic-functions-under-affine-maps-and-independent-sums, def-independent-random-elements, thm-rectangle-criterion-for-independent-random-elements, thm-grouping-independent-sigma-algebras, lem-measurable-functions-preserve-independence, def-coordinate-maps-and-cylinder-sigma-algebra, lem-finite-coordinate-cylinders-form-a-pi-system, thm-pi-system-criterion-for-independent-sigma-algebras, thm-componentwise-limits-and-continuity, lem-probability-measure-basic-identities, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-finite-support-iteration-kills-all-named-suslin-trees
 kind: theorem
 title: "Finite-support bookkeeping kills all named Suslin trees"
-status: draft
+status: published
 origin: pipeline
 deps: [def-omega-two-ma-bookkeeping-iteration, lem-bounded-stage-capture-in-finite-support-iterations, thm-finite-support-iterations-preserve-ccc, thm-specializing-forcing-kills-a-suslin-tree, thm-chain-condition-preserves-cofinalities-and-cardinals, def-aronszajn-suslin-and-special-tree, lem-iteration-restrictions-and-complete-embeddings, thm-forcing-equivalence-and-boolean-completion, thm-forcing-theorem, thm-generic-extensions-satisfy-zf-and-zfc, thm-regularity-of-the-alephs, cor-cardinal-absorption, thm-schroder-bernstein, thm-countable-union-of-countable, thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

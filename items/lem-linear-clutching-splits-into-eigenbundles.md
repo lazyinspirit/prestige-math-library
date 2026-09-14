@@ -2,7 +2,7 @@
 id: lem-linear-clutching-splits-into-eigenbundles
 kind: lemma
 title: Linear clutching splits into spectral subbundles
-status: draft
+status: published
 origin: pipeline
 deps: [lem-polynomial-clutching-families-stabilize-to-linear-clutching, def-clutching-construction-for-bundles-over-a-suspension, cor-winding-number-classifies-loops-in-the-punctured-plane, def-external-product-in-complex-k-theory, thm-hopf-line-calculation-of-k-zero-of-the-two-sphere, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

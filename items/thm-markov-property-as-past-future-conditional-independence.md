@@ -2,7 +2,7 @@
 id: thm-markov-property-as-past-future-conditional-independence
 kind: theorem
 title: "The Markov property is past-future conditional independence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-conditional-independence-equivalences-and-preservation, thm-markov-property-for-bounded-future-path-functionals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

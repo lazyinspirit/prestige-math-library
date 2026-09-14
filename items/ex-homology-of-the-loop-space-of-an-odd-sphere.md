@@ -2,7 +2,7 @@
 id: ex-homology-of-the-loop-space-of-an-odd-sphere
 kind: example
 title: Homology of the loop space of an odd sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-mapping-path-factorization, thm-higher-dimensional-spheres-are-simply-connected, thm-homological-serre-spectral-sequence, cor-homology-of-spheres, cor-contractible-nonempty-spaces-have-the-homology-of-a-point]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-small-forcing-does-not-create-measurable-cardinals
 kind: theorem
 title: Small forcing does not create measurable cardinals
-status: draft
+status: published
 origin: pipeline
 deps: [def-ultrafilter, thm-ultrafilter-characterisation, thm-forcing-theorem, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

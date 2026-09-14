@@ -2,7 +2,7 @@
 id: def-partial-sum-projections-and-basis-constant
 kind: definition
 title: "Partial-sum projections and basis constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ forward_refs: []
 aliases: []
 landmark: false
 verification:
+  audited: 2026-09-14
   precheck: n/a
 sources:
   scraped: []

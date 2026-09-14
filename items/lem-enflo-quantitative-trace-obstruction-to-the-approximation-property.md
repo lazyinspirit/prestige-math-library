@@ -2,7 +2,7 @@
 id: lem-enflo-quantitative-trace-obstruction-to-the-approximation-property
 kind: lemma
 title: "Enflo's quantitative localized-trace obstruction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

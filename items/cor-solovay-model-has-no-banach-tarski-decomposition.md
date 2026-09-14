@@ -2,7 +2,7 @@
 id: cor-solovay-model-has-no-banach-tarski-decomposition
 kind: corollary
 title: The Solovay model has no Banach–Tarski decomposition
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-universal-measurability-transfers-to-euclidean-spaces, thm-solovay-inner-model-satisfies-dependent-choice, thm-choice-implies-dependent-implies-countable-choice, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps, thm-lebesgue-measure-of-a-box-of-every-kind]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: volume-contradiction
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

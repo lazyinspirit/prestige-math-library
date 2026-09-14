@@ -2,7 +2,7 @@
 id: lem-proper-master-condition-characterizations
 kind: lemma
 title: "Master-condition characterizations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-model-generic-master-condition-and-proper-poset, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, thm-downward-lowenheim-skolem-with-parameters, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Karagila, Forcing & Symmetric Extensions, Proposition 8.4 and complete proof, printed pp. 38-39"

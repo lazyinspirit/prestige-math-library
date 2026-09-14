@@ -1,7 +1,7 @@
 ---
 page: "leray-hirsch-thom-isomorphism-and-gysin-sequences"
 title: "Leray–Hirsch, the Thom Isomorphism, and Gysin Sequences"
-status: draft
+status: published
 items: ["lem-global-fiber-basis-trivializes-serre-monodromy", "lem-leray-hirsch-isomorphism-on-associated-graded-modules-lifts-without-extension-ambiguity", "thm-leray-hirsch-module-isomorphism", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle", "prop-thom-space-of-zero-and-trivial-bundles", "lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring", "def-r-oriented-vector-bundle-and-orientation-local-system", "def-thom-class-by-fiberwise-normalization", "thm-thom-isomorphism-for-a-trivial-oriented-bundle", "lem-thom-isomorphisms-glue-over-two-trivializing-opens", "lem-thom-isomorphism-extends-over-a-finite-numerable-trivializing-cover", "lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence", "thm-thom-isomorphism-for-oriented-vector-bundles", "thm-naturality-and-uniqueness-of-thom-classes", "thm-external-product-and-whitney-sum-formulas-for-thom-classes", "def-thom-diagonal-and-zero-section-collapse", "def-thom-euler-class-of-an-oriented-vector-bundle", "def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "prop-thom-and-gysin-constructions-are-compatible-with-pullback-and-composition"]
 examples: []
 ---

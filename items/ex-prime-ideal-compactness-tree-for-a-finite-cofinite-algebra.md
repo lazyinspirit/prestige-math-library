@@ -2,7 +2,7 @@
 id: ex-prime-ideal-compactness-tree-for-a-finite-cofinite-algebra
 kind: example
 title: "A prime-ideal compactness tree for the finite–cofinite algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-partial-prime-ideal-diagrams, lem-countable-boolean-algebra-prime-ideal-compactness-tree]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

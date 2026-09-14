@@ -2,7 +2,7 @@
 id: cor-post-hitting-chain-restarts-from-the-hit-state
 kind: corollary
 title: "The post-hitting chain restarts from the hit state"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-discrete-strong-markov-property, cor-canonical-markov-chain-on-path-space]
 proof_strategy: specialization
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-gitik-strongly-compact-filter-system-and-class-forcing
 kind: definition
 title: Gitik's filter system and proper-class forcing
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-lc-fine-ultrafilters-strong-compactness-and-supercompactness
@@ -13,6 +13,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Schürz, Gitik's model, Sections 1–2, pages 2–9"

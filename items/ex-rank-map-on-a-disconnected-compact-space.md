@@ -2,7 +2,7 @@
 id: ex-rank-map-on-a-disconnected-compact-space
 kind: example
 title: The rank map on a disconnected compact space
-status: draft
+status: published
 origin: pipeline
 deps: [def-grothendieck-ring-structure-and-rank-map, def-whitney-sum-monoid-of-complex-vector-bundles]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

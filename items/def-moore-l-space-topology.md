@@ -2,7 +2,7 @@
 id: def-moore-l-space-topology
 kind: definition
 title: "Moore's clopen-generated topology"
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-moore-oscillation-colouring-pattern
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

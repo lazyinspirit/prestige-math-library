@@ -2,7 +2,7 @@
 id: cor-connected-nilpotent-lie-groups-are-discrete-central-quotients-of-bch-groups
 kind: corollary
 title: Connected nilpotent Lie groups are central quotients of BCH groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -46,4 +47,5 @@ exponential to the BCH group
 **Proof technique:** combine the two classifications.
 
 1.1 By [L1], $G\cong\widetilde G/\Gamma$ for a discrete central subgroup of its simply connected cover. The cover has the same nilpotent Lie algebra. [L1, given]
+
 2.1 By [L2], exponential coordinates identify $\widetilde G$ with the BCH group on $\mathfrak n$. Transporting $\Gamma$ through this isomorphism preserves discreteness and centrality and gives the asserted quotient. The trivial kernel and zero-dimensional group are included. The countable-choice use is exactly that already declared in [L1]–[L2]. [L1, L2, step 1.1] ∎

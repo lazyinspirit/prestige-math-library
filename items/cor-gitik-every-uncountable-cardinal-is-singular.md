@@ -2,7 +2,7 @@
 id: cor-gitik-every-uncountable-cardinal-is-singular
 kind: corollary
 title: Every uncountable cardinal is singular in Gitik's model
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-gitik-symmetric-submodel-satisfies-zf
@@ -15,6 +15,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

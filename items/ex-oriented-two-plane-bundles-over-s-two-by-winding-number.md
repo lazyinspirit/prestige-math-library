@@ -2,7 +2,7 @@
 id: ex-oriented-two-plane-bundles-over-s-two-by-winding-number
 kind: example
 title: Oriented two-plane bundles over the two-sphere by winding number
-status: draft
+status: published
 origin: pipeline
 deps: [thm-oriented-clutching-classifies-oriented-bundles-over-spheres, thm-fundamental-group-of-the-circle]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

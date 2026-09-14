@@ -2,12 +2,13 @@
 id: def-serre-edge-homomorphisms-and-transgression
 kind: definition
 title: Serre edge homomorphisms and transgression
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, lem-spectral-sequence-subquotient-and-local-lifting-calculus]
 proof_strategy: definition
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

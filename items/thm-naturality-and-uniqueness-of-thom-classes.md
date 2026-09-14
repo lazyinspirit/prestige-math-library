@@ -2,12 +2,13 @@
 id: thm-naturality-and-uniqueness-of-thom-classes
 kind: theorem
 title: Naturality and uniqueness of Thom classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-thom-isomorphism-for-oriented-vector-bundles, def-pullback-vector-bundle-and-pullback-section, def-disk-sphere-and-thom-space-of-a-metric-vector-bundle, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

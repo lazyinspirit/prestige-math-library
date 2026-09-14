@@ -2,12 +2,13 @@
 id: lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence
 kind: lemma
 title: General Thom isomorphism from the relative Serre spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-cohomological-serre-spectral-sequence, thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence, def-r-oriented-vector-bundle-and-orientation-local-system, def-thom-class-by-fiberwise-normalization, lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring, prop-relative-cup-products-are-natural-and-compatible-with-connectors, thm-numerable-fiber-bundles-are-hurewicz-fibrations, thm-numerable-vector-bundles-admit-bundle-metrics, def-pullback-vector-bundle-and-pullback-section, prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism, thm-homotopy-invariance-of-vector-bundle-pullback, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

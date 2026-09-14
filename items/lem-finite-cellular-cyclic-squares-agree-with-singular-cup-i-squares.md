@@ -92,35 +92,11 @@ inverses on ordinary unnormalized chains
 inside one acyclic carrier, then evaluate the resulting chain homotopy on a
 cocycle.
 
-1.1 Construct a chain comparison carried by closed cells. [given, F6]
-The first barycentric subdivision of a finite regular cell complex is a finite
-simplicial complex. For each $n$-cell $e$, let $s(e)$ be the mod-two sum of
-the oriented $n$-simplices subdividing its closed ball. The codimension-one
-faces internal to $\overline e$ occur twice and cancel, while the remaining
-faces occur with precisely the cellular incidence coefficients. Hence
-$s(de)=ds(e)$. Including these simplicial chains as singular chains defines
-$\iota$. Its value on $e$ is supported in $\overline e$, so it is cell-carried.
-The relative fundamental simplex in each pair
-$(K^n,K^{n-1})$ maps to the same relative fundamental class; thus the induced
-map is the standard cellular-to-singular comparison of [F6] and is an
-isomorphism on homology.
+1.1 Construct a chain comparison carried by closed cells. The first barycentric subdivision of a finite regular cell complex is a finite simplicial complex. For each $n$-cell $e$, let $s(e)$ be the mod-two sum of the oriented $n$-simplices subdividing its closed ball. The codimension-one faces internal to $\overline e$ occur twice and cancel, while the remaining faces occur with precisely the cellular incidence coefficients. Hence $s(de)=ds(e)$. Including these simplicial chains as singular chains defines $\iota$. Its value on $e$ is supported in $\overline e$, so it is cell-carried. The relative fundamental simplex in each pair $(K^n,K^{n-1})$ maps to the same relative fundamental class; thus the induced map is the standard cellular-to-singular comparison of [F6] and is an isomorphism on homology. [given, F6]
 
-1.2 Prove that the dual comparison is an isomorphism and locate its choice
-cost. [F9, step 1.1]
-Let $Q$ be the mapping cone of $\iota$. Step 1.1 says that $Q$ is acyclic.
-For every $n$, [F9] chooses a complement $L_n$ to
-$B_n(Q)=Z_n(Q)$ in $Q_n$. The differential restricts to an isomorphism
-$d:L_n\to B_{n-1}(Q)$. Define $h$ to be its inverse on $B_{n-1}(Q)$ and
-zero on $L_{n-1}$. On the decomposition $Q_n=B_n(Q)\oplus L_n$ one checks
-directly that $dh+hd=1_Q$. Dualizing this identity contracts
-$\operatorname{Hom}(Q,\mathbb F_2)$, which is the shifted mapping cone of
-$\iota^*$. Therefore $\iota^*$ is an isomorphism on cohomology. This use of
-AC is needed because the singular chain spaces and the family of complements
-need not be finite.
+2.1 Prove that the dual comparison is an isomorphism and locate its choice cost. Let $Q$ be the mapping cone of $\iota$. Step 1.1 says that $Q$ is acyclic. For every $n$, [F9] chooses a complement $L_n$ to $B_n(Q)=Z_n(Q)$ in $Q_n$. The differential restricts to an isomorphism $d:L_n\to B_{n-1}(Q)$. Define $h$ to be its inverse on $B_{n-1}(Q)$ and zero on $L_{n-1}$. On the decomposition $Q_n=B_n(Q)\oplus L_n$ one checks directly that $dh+hd=1_Q$. Dualizing this identity contracts $\operatorname{Hom}(Q,\mathbb F_2)$, which is the shifted mapping cone of $\iota^*$. Therefore $\iota^*$ is an isomorphism on cohomology. This use of AC is needed because the singular chain spaces and the family of complements need not be finite. [F9, step 1.1]
 
-2.1 Package both systems as equivariant carried chain maps. [F1, F4, F7, F8, step 1.1]
-Let $W$ be the standard free $\mathbb F_2[C_2]$-resolution with
-$de_r=(1+T)e_{r-1}$. By [F1], choose a cell-carried equivariant diagonal
+2.2 Package both systems as equivariant carried chain maps. Let $W$ be the standard free $\mathbb F_2[C_2]$-resolution with $de_r=(1+T)e_{r-1}$. By [F1], choose a cell-carried equivariant diagonal [F1, F4, F7, F8, step 1.1]
 
 $$\Phi_C:W\otimes C_*^{\mathrm{cell}}(K)\longrightarrow C_*^{\mathrm{cell}}(K)\otimes C_*^{\mathrm{cell}}(K).$$
 
@@ -139,10 +115,7 @@ tensor target up to augmentation-preserving chain homotopy with the singular
 chains of its square. Thus these targets form one equivariant
 augmented-acyclic carrier.
 
-3.1 Compare the two diagonals in that carrier. [F2, F9, step 2.1]
-Both maps in step 2.1 preserve the degree-zero augmentation and are carried by
-the same closed-cell diagonal carrier. The relative equivariant carrier
-comparison in [F2] supplies an equivariant chain homotopy $H$ with
+3.1 Compare the two diagonals in that carrier. Both maps in step 2.2 preserve the degree-zero augmentation and are carried by the same closed-cell diagonal carrier. The relative equivariant carrier comparison in [F2] supplies an equivariant chain homotopy $H$ with [F2, F9, step 2.2]
 
 $$\Phi_S(1\otimes\iota)-(\iota\otimes\iota)\Phi_C=dH+Hd.$$
 
@@ -150,10 +123,7 @@ Over $\mathbb F_2$ subtraction is addition. The AC expenditure in this step is
 exactly [F9]'s selection of one orbit representative and one filling in each
 nonempty carrier-extension problem, as already isolated in [F2].
 
-4.1 Evaluate the comparison and identify every square. [F1, F2, F3, F4, F5, step 1.2, step 3.1]
-Let $a$ be a singular degree-$q$ cocycle representing $y$, and put
-$c=a\iota$. For $0\leq i\leq q$, set $r=q-i$. By [F5], the pullback of the
-singular square is represented on a cellular chain $z$ by
+4.1 Evaluate the comparison and identify every square. Let $a$ be a singular degree-$q$ cocycle representing $y$, and put $c=a\iota$. For $0\leq i\leq q$, set $r=q-i$. By [F5], the pullback of the singular square is represented on a cellular chain $z$ by [F1, F2, F3, F4, F5, step 2.1, step 3.1]
 
 $$z\longmapsto(a\otimes a)\Phi_S(e_r\otimes\iota z).$$
 
@@ -170,16 +140,4 @@ differ by an ordinary cellular coboundary. Their cohomology classes are equal,
 which is the asserted formula. Coherent uniqueness in [F4] and the same
 carrier homotopy in [F2] prove independence of every stated comparison choice.
 
-5.1 Check ranges, degeneracies, and choices. [F3, F4, F5, F9, step 1.1, step 1.2, step 4.1]
-For the empty complex all chain groups vanish. The zero class is represented
-by the zero cocycle, and on a point the only nonzero assertion is
-$Sq^0=Sq_{\mathrm{cyc}}^0=\mathrm{id}$ in degree zero. The indices $i=0$
-and $i=q$ correspond respectively to $e_q$ and $e_0$; both occur in the
-evaluation step, while $i<0$ and $i>q$ are zero on both sides by [F3] and
-[F5]. Ordinary
-unnormalized singular chains are used throughout, and [F4] includes every
-degenerate singular simplex, so no normalization quotient is hidden.
-Barycentric subdivision and all sums within a fixed finite $K$ are finite.
-AC is used only for the set-indexed carrier fillings in step 3.1 and the
-vector-space complements in step 1.2. No arbitrary-space extension, converse,
-or Adem relation is used. ∎
+5.1 Check ranges, degeneracies, and choices. For the empty complex all chain groups vanish. The zero class is represented by the zero cocycle, and on a point the only nonzero assertion is $Sq^0=Sq_{\mathrm{cyc}}^0=\mathrm{id}$ in degree zero. The indices $i=0$ and $i=q$ correspond respectively to $e_q$ and $e_0$; both occur in the evaluation step, while $i<0$ and $i>q$ are zero on both sides by [F3] and [F5]. Ordinary unnormalized singular chains are used throughout, and [F4] includes every degenerate singular simplex, so no normalization quotient is hidden. Barycentric subdivision and all sums within a fixed finite $K$ are finite. AC is used only for the set-indexed carrier fillings in step 3.1 and the vector-space complements in step 2.1. No arbitrary-space extension, converse, or Adem relation is used. [F3, F4, F5, F9, step 1.1, step 2.1, step 4.1] ∎

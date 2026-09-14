@@ -2,7 +2,7 @@
 id: thm-countably-closed-forcing-adds-a-normal-suslin-tree
 kind: theorem
 title: "A countably closed forcing adds a normal Suslin tree"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-normal-tree-end-extension-forcing, lem-countable-tree-antichain-sealing, def-kappa-closure-distributivity-and-chain-condition, thm-closure-distributivity-and-no-short-sequences, cor-countable-choice-and-omega-one-cofinality, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, thm-transfinite-recursion, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, def-forcing-relation-for-atomic-formulas, thm-forcing-preserves-ordinals, thm-generic-extensions-satisfy-zf-and-zfc, thm-zorn, def-aronszajn-suslin-and-special-tree, lem-splitting-cofinal-branch-gives-antichain, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

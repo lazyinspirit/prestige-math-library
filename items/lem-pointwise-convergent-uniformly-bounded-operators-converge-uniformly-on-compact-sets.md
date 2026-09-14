@@ -2,7 +2,7 @@
 id: lem-pointwise-convergent-uniformly-bounded-operators-converge-uniformly-on-compact-sets
 kind: lemma
 title: "Uniformly bounded pointwise-convergent operators converge uniformly on compact sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -48,17 +49,11 @@ $T$ is bounded and $T_n\to T$ uniformly on every norm-compact subset of $X$.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Passing to limits in the linear identities for [L2] shows that $T$ is [given, L2, L1]
-linear. By [L1], $\|Tx\|=\lim_n\|T_nx\|\le M_0\|x\|$, so $T$ is bounded and
-$\|T\|\le M_0$. [L1, L2, pointwise limit]
+1.1 Passing to limits in the linear identities for [L2] shows that $T$ is [given, L2, L1] linear. By [L1], $\|Tx\|=\lim_n\|T_nx\|\le M_0\|x\|$, so $T$ is bounded and $\|T\|\le M_0$. [L1, L2, algebra]
 
-2.1 Put $M:=M_0+\|T\|$. If $M=0$, every $T_n$ and $T$ is zero and the result [given, step 1.1]
-is immediate. Suppose $M>0$, fix compact $C$ and $\varepsilon>0$, and choose a
-finite $\varepsilon/(3M)$-net $x_1,\ldots,x_r$ in $C$. [step 1.1, compactness]
+2.1 Put $M:=M_0+\|T\|$. If $M=0$, every $T_n$ and $T$ is zero and the result [given, step 1.1] is immediate. Suppose $M>0$, fix compact $C$ and $\varepsilon>0$, and choose a finite $\varepsilon/(3M)$-net $x_1,\ldots,x_r$ in $C$. [step 1.1, algebra]
 
-3.1 Pointwise convergence gives $n_0$ such that [given, L1, step 2.1]
-$\|(T_n-T)x_j\|<\varepsilon/3$ for all $j$ and $n\ge n_0$. For $x\in C$ choose
-$j$ with $\|x-x_j\|<\varepsilon/(3M)$. Then [L1] gives
+3.1 Pointwise convergence gives $n_0$ such that $\|(T_n-T)x_j\|<\varepsilon/3$ for all $j$ and $n\ge n_0$. For $x\in C$ choose $j$ with $\|x-x_j\|<\varepsilon/(3M)$. Then [L1] gives [given, L1, step 2.1]
 
 $$\|(T_n-T)x\|\le M\|x-x_j\|+\|(T_n-T)x_j\|<2\varepsilon/3<\varepsilon.$$
 

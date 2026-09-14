@@ -1,7 +1,7 @@
 ---
 page: "the-serre-spectral-sequence-and-applications"
 title: "The Serre Spectral Sequence and Applications"
-status: draft
+status: published
 items: ["lem-serre-fibration-replacement-preserves-fiber-homology-transport", "def-fiber-homology-local-system-of-a-serre-fibration", "lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid", "def-serre-filtration-of-the-total-space-over-base-skeleta", "lem-relative-homology-over-one-base-cell-is-the-shifted-fiber-homology", "lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients", "thm-homological-serre-spectral-sequence", "thm-naturality-of-the-homological-serre-spectral-sequence", "def-serre-edge-homomorphisms-and-transgression", "prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion", "prop-serre-transgression-agrees-with-the-relative-connecting-construction", "thm-cohomological-serre-spectral-sequence", "lem-multiplicative-filtered-cochains-induce-products-on-all-spectral-sequence-pages", "thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence", "prop-degree-and-parity-criteria-for-serre-collapse", "thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence", "thm-wang-sequence-for-a-fibration-over-the-circle", "def-serre-class-ring-ideal-and-mod-c-morphism", "lem-serre-classes-are-stable-under-finite-filtrations", "thm-first-quadrant-spectral-sequence-transfer-modulo-a-serre-class", "thm-serre-class-fibration-transfer", "cor-serre-finite-generation-torsion-and-p-primary-transfer", "thm-serre-finiteness-transfer-for-simply-connected-base-and-fiber", "lem-circle-and-path-loop-models-for-eilenberg-maclane-induction", "thm-rational-cohomology-of-eilenberg-maclane-spaces-in-one-generator"]
 examples: []
 ---

@@ -1,7 +1,7 @@
 ---
 page: topological-vector-bundles-and-grassmannian-classification-examples
 title: Topological Vector Bundles and Grassmannian Classification — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-mobius-and-trivial-real-lines-over-the-circle

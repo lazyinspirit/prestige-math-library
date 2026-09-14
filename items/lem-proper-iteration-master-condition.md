@@ -2,7 +2,7 @@
 id: lem-proper-iteration-master-condition
 kind: lemma
 title: "Proper iteration master-condition lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-support-forcing-iteration, lem-proper-master-condition-characterizations, thm-two-step-generic-factorization-and-ccc, thm-forcing-theorem, thm-transfinite-induction, thm-countable-union-of-countable, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: induction
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Jech, Set Theory, Lemmas 31.16-31.18 and complete Proper Iteration Lemma proof, printed pp. 605-606"

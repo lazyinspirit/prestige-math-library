@@ -2,12 +2,13 @@
 id: prop-serre-edge-maps-are-induced-by-projection-and-fiber-inclusion
 kind: proposition
 title: Serre edge maps come from projection and fiber inclusion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-serre-edge-homomorphisms-and-transgression, thm-naturality-of-the-homological-serre-spectral-sequence, lem-edge-homomorphisms-are-natural, def-homology-and-cohomology-with-local-coefficients, def-singular-and-cellular-chain-complexes-with-local-coefficients]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

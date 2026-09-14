@@ -2,7 +2,7 @@
 id: lem-ac-supplies-dependent-choice-for-vector-bundle-constructions
 kind: lemma
 title: AC supplies the dependent-choice instances used in vector-bundle constructions
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-dependent-choice, thm-recursion]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

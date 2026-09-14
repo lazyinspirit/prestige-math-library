@@ -2,7 +2,7 @@
 id: thm-countable-support-iterations-preserve-properness
 kind: theorem
 title: "Countable-support iterations preserve properness"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-proper-iteration-master-condition, def-countable-model-generic-master-condition-and-proper-poset, lem-proper-master-condition-characterizations, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Jech, Set Theory, Proper Iteration Lemma 31.17 and Theorem 31.15, printed pp. 604-606"

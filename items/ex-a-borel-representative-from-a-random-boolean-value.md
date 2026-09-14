@@ -2,7 +2,7 @@
 id: ex-a-borel-representative-from-a-random-boolean-value
 kind: example
 title: A Borel representative from a random Boolean value
-status: draft
+status: published
 origin: pipeline
 deps: [lem-solovay-homogeneous-truth-has-borel-representatives]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

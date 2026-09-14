@@ -2,7 +2,7 @@
 id: prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant
 kind: proposition
 title: K⁰ is contravariantly functorial and homotopy invariant
-status: draft
+status: published
 origin: pipeline
 deps: [def-complex-topological-k-zero-by-grothendieck-completion, def-grothendieck-ring-structure-and-rank-map, def-reduced-complex-k-theory, prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism, thm-homotopy-invariance-of-vector-bundle-pullback, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

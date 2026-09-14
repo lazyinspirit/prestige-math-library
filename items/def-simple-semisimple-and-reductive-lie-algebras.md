@@ -2,7 +2,7 @@
 id: def-simple-semisimple-and-reductive-lie-algebras
 kind: definition
 title: Simple, semisimple, and reductive Lie algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-semisimple-lie-algebra-by-vanishing-radical, def-reductive-lie-algebra-by-semisimple-derived-algebra-and-center, def-lie-subalgebra-ideal-and-center]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-gitik-intermediate-model-makes-every-set-countable
 kind: theorem
 title: Every set is countable in the intermediate extension
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-gitik-intermediate-model-zf-minus-power-set
@@ -20,6 +20,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

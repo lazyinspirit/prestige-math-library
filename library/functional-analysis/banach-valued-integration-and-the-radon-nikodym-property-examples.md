@@ -1,7 +1,7 @@
 ---
 page: banach-valued-integration-and-the-radon-nikodym-property-examples
 title: Banach Valued Integration and the Radon Nikodym Property — Examples
-status: draft
+status: published
 items: []
 examples: [ex-bochner-integral-of-a-countably-valued-function, cex-weakly-measurable-need-not-be-strongly-measurable, ex-vector-measure-induced-by-an-l-one-function, ex-hilbert-spaces-have-rnp, cex-c0-unit-ball-is-not-dentable, rem-l-one-sequence-versus-l-one-nonatomic-rnp, rem-rnp-is-not-the-scalar-radon-nikodym-theorem, ex-dunford-pettis-uniformly-integrable-and-concentrating-families]
 ---

@@ -2,7 +2,7 @@
 id: thm-lies-criterion-for-solvability-by-the-derived-algebra
 kind: theorem
 title: Solvability criterion via the derived algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero, prop-nilpotent-lie-algebras-are-solvable, prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-minimal-walk-trace-concatenation-and-limit-control
 kind: lemma
 title: Concatenation and limit control for minimal-walk traces
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-c-sequences-and-minimal-walk-traces-on-omega-one
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-a-finite-dimensional-solvable-lie-algebra-has-a-codimension-one-ideal-over-an-algebraically-closed-characteristic-zero-field
 kind: lemma
 title: Codimension-one ideal in a nonzero solvable Lie algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-derived-series-and-solvable-lie-algebra, def-quotient-lie-algebra, thm-rank-nullity]
@@ -12,6 +12,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

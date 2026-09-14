@@ -2,12 +2,13 @@
 id: ex-thom-space-of-a-trivial-line-and-plane-bundle
 kind: example
 title: Thom spaces of trivial line and plane bundles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [prop-thom-space-of-zero-and-trivial-bundles, thm-thom-isomorphism-for-a-trivial-oriented-bundle]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

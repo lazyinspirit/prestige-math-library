@@ -2,7 +2,7 @@
 id: lem-solovay-inner-model-is-closed-under-ambient-omega-sequences
 kind: lemma
 title: The Solovay inner model is closed under ambient omega-sequences
-status: draft
+status: published
 origin: pipeline
 deps: [thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: coding
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-ordered-fundamental-space-and-nice-refinement
 kind: definition
 title: Ordered fundamental spaces and nice refinements
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-set-theoretic-l-and-s-spaces
@@ -12,6 +12,8 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 proof_strategy: not-applicable
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Hart–Kunen, Ultra Strong S-Spaces, Definitions 4.1, 4.4, 4.7, and 4.10–4.11, printed pp. 95–100"

@@ -2,12 +2,13 @@
 id: thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle
 kind: theorem
 title: Gysin long exact sequence of an oriented sphere bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, prop-relative-cup-products-are-natural-and-compatible-with-connectors, def-serre-edge-homomorphisms-and-transgression, thm-cohomological-serre-spectral-sequence, thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: literature-derived

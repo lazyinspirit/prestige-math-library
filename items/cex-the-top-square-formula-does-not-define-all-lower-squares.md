@@ -80,14 +80,9 @@ choice.
 
 ## Counterexample
 
-1.1 By definition, the standard reduced cohomology suspension
-$\sigma:\widetilde H^q(Z;\mathbb F_2)\to
-\widetilde H^{q+1}(\Sigma Z;\mathbb F_2)$ is an isomorphism; [F3] fixes this
-same standard suspension in its stability formula. In particular
-$x=\sigma a$ is nonzero. [F3]
+1.1 By definition, the standard reduced cohomology suspension $\sigma:\widetilde H^q(Z;\mathbb F_2)\to \widetilde H^{q+1}(\Sigma Z;\mathbb F_2)$ is an isomorphism; [F3] fixes this same standard suspension in its stability formula. In particular $x=\sigma a$ is nonzero. [F3]
 
-2.1 The first square distinguishes the two classes. [F1, F2, F3, F4, F5, step 1.1]
-Stability and [F1] give
+2.1 The first square distinguishes the two classes. Stability and [F1] give [F1, F2, F3, F4, F5, step 1.1]
 
 $$Sq^1(x)=Sq^1(\sigma a)=\sigma Sq^1(a)=\sigma(a^2).$$
 
@@ -96,27 +91,13 @@ degree-two instance of the isomorphism in step 1.1 therefore makes
 $Sq^1(x)$ nonzero. On the other hand [F4]--[F5] give
 $H^3(S^2;\mathbb F_2)=0$, so $Sq^1(y)=0$.
 
-2.2 Both top squares vanish. [F2, F3, F4, F5, step 1.1]
-The degree-three projective group is zero by [F2], so the degree-three
-instance of the suspension isomorphism gives
-$\widetilde H^4(\Sigma\mathbb {RP}^2;\mathbb F_2)=0$. Thus [F3] gives
+2.2 Both top squares vanish. The degree-three projective group is zero by [F2], so the degree-three instance of the suspension isomorphism gives $\widetilde H^4(\Sigma\mathbb {RP}^2;\mathbb F_2)=0$. Thus [F3] gives [F2, F3, F4, F5, step 1.1]
 
 $$x^2=Sq^2(x)=0.$$
 
 Likewise [F4]--[F5] give $H^4(S^2;\mathbb F_2)=0$, whence
 $y^2=Sq^2(y)=0$.
 
-3.1 These computations refute determination by the top-square formula. [F3, step 2.1, step 2.2]
-The two nonzero degree-two classes have the same top-square value, namely
-zero, but different $Sq^1$ values. Therefore knowing only
-$Sq^{|z|}(z)=z^2$ cannot recover all lower squares.
+3.1 These computations refute determination by the top-square formula. The two nonzero degree-two classes have the same top-square value, namely zero, but different $Sq^1$ values. Therefore knowing only $Sq^{|z|}(z)=z^2$ cannot recover all lower squares. [F3, step 2.1, step 2.2]
 
-4.1 The boundary and choice cases do not hide an exception. [F1, F2, F3, F4, F5, A1, step 1.1, step 2.1, step 2.2, step 3.1]
-Both spaces and both displayed input classes are nonempty and nonzero; the
-unit and zero classes are not the witnesses. The degree endpoint is exactly
-$|x|=|y|=2$, so $Sq^1$ is genuinely lower and $Sq^2$ is genuinely top.
-The vanishing statements come from zero target groups, not from omitting
-degenerate singular simplices. AC is inherited exactly from the projective
-and field-duality computations [F1], [F2], and [F5]; suspension and all
-remaining calculations are choice-free. This is an explicit pair of
-witnesses, not either direction of a biconditional. ∎
+4.1 The boundary and choice cases do not hide an exception. Both spaces and both displayed input classes are nonempty and nonzero; the unit and zero classes are not the witnesses. The degree endpoint is exactly $|x|=|y|=2$, so $Sq^1$ is genuinely lower and $Sq^2$ is genuinely top. The vanishing statements come from zero target groups, not from omitting degenerate singular simplices. AC is inherited exactly from the projective and field-duality computations [F1], [F2], and [F5]; suspension and all remaining calculations are choice-free. This is an explicit pair of witnesses, not either direction of a biconditional. [F1, F2, F3, F4, F5, A1, step 1.1, step 2.1, step 2.2, step 3.1] ∎

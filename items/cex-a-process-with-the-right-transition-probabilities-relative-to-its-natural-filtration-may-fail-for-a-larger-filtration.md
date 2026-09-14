@@ -2,7 +2,7 @@
 id: cex-a-process-with-the-right-transition-probabilities-relative-to-its-natural-filtration-may-fail-for-a-larger-filtration
 kind: counterexample
 title: "The Markov property can fail for a larger filtration"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, ex-iid-sequences-as-markov-chains-with-state-independent-kernel, def-time-homogeneous-markov-chain-with-transition-kernel]
 proof_strategy: counterexample
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

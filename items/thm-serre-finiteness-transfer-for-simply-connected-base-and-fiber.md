@@ -2,12 +2,13 @@
 id: thm-serre-finiteness-transfer-for-simply-connected-base-and-fiber
 kind: theorem
 title: PID finite-generation transfer for simply connected base and fiber
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-18
 deps: [thm-homological-serre-spectral-sequence, thm-universal-coefficient-theorem-for-homology-over-a-pid, thm-invariant-factor-decomposition-over-a-pid, cor-principal-ideal-domains-are-noetherian, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, def-axiom-of-choice]
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
 provenance:
   statement: ai-altered

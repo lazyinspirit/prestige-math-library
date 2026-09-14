@@ -2,7 +2,7 @@
 id: cor-supercompact-consistency-of-no-s-spaces
 kind: corollary
 title: A supercompact gives the relative consistency of no S-spaces
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-pfa-implies-there-are-no-s-spaces
@@ -17,6 +17,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

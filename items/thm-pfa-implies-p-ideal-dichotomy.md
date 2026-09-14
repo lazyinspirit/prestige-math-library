@@ -2,7 +2,7 @@
 id: thm-pfa-implies-p-ideal-dichotomy
 kind: theorem
 title: "PFA implies the P-ideal dichotomy"
-status: draft
+status: published
 origin: pipeline
 deps: [def-proper-forcing-axiom, def-p-ideals-pid-pseudointersection-number-and-s-spaces, lem-proper-master-condition-characterizations, def-axiom-of-choice]
 justified_by: []
@@ -11,6 +11,8 @@ provenance:
   statement: literature-derived
   proof: literature-derived
 proof_strategy: direct
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Moore, The Proper Forcing Axiom: a tutorial, notes by Venturi, Sections 3.2, 4, and 5, pp.5-9"

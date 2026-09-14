@@ -2,7 +2,7 @@
 id: ex-baumgartner-club-shooting-is-proper
 kind: example
 title: "Baumgartner's finite-condition generic club forcing is proper"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-model-generic-master-condition-and-proper-poset, lem-proper-master-condition-characterizations, def-club-filter-and-nonstationary-ideal, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

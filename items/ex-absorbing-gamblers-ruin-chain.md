@@ -2,7 +2,7 @@
 id: ex-absorbing-gamblers-ruin-chain
 kind: example
 title: "Absorbing gambler's-ruin chain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-killed-and-absorbed-transition-kernels, lem-killed-and-absorbed-kernels-are-probability-kernels, cor-post-hitting-chain-restarts-from-the-hit-state]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

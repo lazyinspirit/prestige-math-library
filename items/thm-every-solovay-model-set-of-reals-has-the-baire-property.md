@@ -2,7 +2,7 @@
 id: thm-every-solovay-model-set-of-reals-has-the-baire-property
 kind: theorem
 title: Every set of reals in the Solovay model has the Baire property
-status: draft
+status: published
 origin: pipeline
 deps: [thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability, lem-solovay-collapse-localizes-countable-ordinal-data, lem-solovay-borel-code-and-regularity-absoluteness, lem-solovay-random-and-cohen-generics-are-large, lem-solovay-homogeneous-truth-has-borel-representatives, def-property-of-baire-for-subsets]
 provenance:
@@ -11,6 +11,7 @@ provenance:
 proof_strategy: borel-mod-meagre
 sources: {references: [{title: "Solovay 1970, Part III, Lemmas 1.5 and 2.10", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}]}
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-hilbert-spaces-are-reflexive-by-riesz-representation
 kind: theorem
 title: "Hilbert spaces are reflexive by Riesz representation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -65,32 +66,17 @@ $J_H:H\to H^{**}$ ([[def-reflexive-banach-space]]).
 **Given:** Countable Choice and a complete real or complex inner-product space
 $H$.
 
-1.1 Set up the Riesz representation problem. [given, L1, L2, L3]
-Let $\varphi\in H^*$. If $\varphi=0$, then
-$\varphi(x)=\langle x,0\rangle$ for every $x$. Suppose $\varphi\ne0$ and put
-$M=\{x\in H:\varphi(x)=1\}$. This is a nonempty closed affine set. The
-nonempty set of its norms is bounded below, so let
-$d=\inf_{x\in M}\|x\|$. Since
-$1=|\varphi(x)|\leq\|\varphi\|\|x\|$ on $M$, one has
-$d\geq1/\|\varphi\|>0$.
+1.1 Set up the Riesz representation problem. Let $\varphi\in H^*$. If $\varphi=0$, then $\varphi(x)=\langle x,0\rangle$ for every $x$. Suppose $\varphi\ne0$ and put $M=\{x\in H:\varphi(x)=1\}$. This is a nonempty closed affine set. The nonempty set of its norms is bounded below, so let $d=\inf_{x\in M}\|x\|$. Since $1=|\varphi(x)|\leq\|\varphi\|\|x\|$ on $M$, one has $d\geq1/\|\varphi\|>0$. [given, L1, L2, L3]
 
-2.1 Select and control a norm-minimizing sequence. [A1, L2, L3, step 1.1, choose]
-For every $n\geq1$, [L3] makes
-$M_n=\{x\in M:\|x\|<d+1/n\}$ nonempty. Use [A1] exactly here to select
-$y_n\in M_n$ for all $n$. Since $(y_n+y_m)/2\in M$, [L2] gives
+2.1 Select and control a norm-minimizing sequence. For every $n\geq1$, [L3] makes $M_n=\{x\in M:\|x\|<d+1/n\}$ nonempty. Use [A1] exactly here to select $y_n\in M_n$ for all $n$. Since $(y_n+y_m)/2\in M$, [L2] gives [A1, L2, L3, step 1.1, choose]
 
 $$\|y_n-y_m\|^2\leq2(d+1/n)^2+2(d+1/m)^2-4d^2.$$
 
 The right side tends to zero as $m,n\to\infty$, so $(y_n)$ is Cauchy.
 
-3.1 Obtain the unique minimum. [L4, step 1.1, step 2.1]
-Completeness gives $y_n\to y\in H$. Continuity of $\varphi$ gives
-$\varphi(y)=1$, so $y\in M$, while norm continuity gives $\|y\|=d$. Thus
-$y$ realizes the positive minimum of the norm on $M$.
+3.1 Obtain the unique minimum. Completeness gives $y_n\to y\in H$. Continuity of $\varphi$ gives $\varphi(y)=1$, so $y\in M$, while norm continuity gives $\|y\|=d$. Thus $y$ realizes the positive minimum of the norm on $M$. [L4, step 1.1, step 2.1]
 
-4.1 Derive Riesz representation with the linear-first convention. [L1, L2, step 3.1]
-If $z\in\ker\varphi$, then $y+t z\in M$ for every scalar $t$, and minimality
-gives
+4.1 Derive Riesz representation with the linear-first convention. If $z\in\ker\varphi$, then $y+t z\in M$ for every scalar $t$, and minimality gives [L1, L2, step 3.1]
 
 $$d^2\leq\|y+t z\|^2=d^2+2\operatorname{Re}\!\bigl(t\langle z,y\rangle\bigr)+|t|^2\|z\|^2.$$
 
@@ -108,10 +94,7 @@ evaluating the difference of two representing vectors at that same difference.
 Cauchy--Schwarz and the unit vector in the representing direction give
 $\|R\varphi\|=\|\varphi\|$.
 
-5.1 Put the transported Hilbert structure on the dual. [L1, L4, step 4.1, construct]
-Define $C:H\to H^*$ by $(Cx)(u)=\langle u,x\rangle$. Step 4.1 says that $C$
-is onto with inverse $R$, and [L1] shows that both are conjugate-linear in the
-complex case and linear in the real case. They are isometries. Define on $H^*$
+5.1 Put the transported Hilbert structure on the dual. Define $C:H\to H^*$ by $(Cx)(u)=\langle u,x\rangle$. Step 4.1 says that $C$ is onto with inverse $R$, and [L1] shows that both are conjugate-linear in the complex case and linear in the real case. They are isometries. Define on $H^*$ [L1, L4, step 4.1, construct]
 
 $$\langle\varphi,\psi\rangle_*:=\langle R\psi,R\varphi\rangle_H.$$
 
@@ -120,22 +103,10 @@ product linear in $\varphi$, conjugate-linear in $\psi$, and positive definite;
 its norm is the existing dual norm. By [L4], $H^*$ is complete for that norm,
 so it too is a Hilbert space.
 
-6.1 Identify every bidual functional with canonical evaluation. [L1, L5, step 4.1, step 5.1]
-Apply the representation proved in steps 1.1--4.1 to the Hilbert space $H^*$.
-For $\Phi\in H^{**}$ there is $w\in H^*$ with
-$\Phi(\varphi)=\langle\varphi,w\rangle_*$ for every $\varphi\in H^*$. Put
-$x=Rw\in H$. Since $\varphi(u)=\langle u,R\varphi\rangle_H$, the definition
-in step 5.1 gives
+6.1 Identify every bidual functional with canonical evaluation. Apply the representation proved in steps 1.1--4.1 to the Hilbert space $H^*$. For $\Phi\in H^{**}$ there is $w\in H^*$ with $\Phi(\varphi)=\langle\varphi,w\rangle_*$ for every $\varphi\in H^*$. Put $x=Rw\in H$. Since $\varphi(u)=\langle u,R\varphi\rangle_H$, the definition in step 5.1 gives [L1, L5, step 4.1, step 5.1]
 
 $$\Phi(\varphi)=\langle Rw,R\varphi\rangle_H=\langle x,R\varphi\rangle_H=\varphi(x)=(J_Hx)(\varphi).$$
 
 Thus $\Phi=J_Hx$, so $J_H$ is surjective.
 
-7.1 Conclude reflexivity and record all boundaries. [A1, L5, step 4.1, step 6.1]
-Surjectivity in step 6.1 is reflexivity by [L5]. If $H=\{0\}$, then both
-$H^*$ and $H^{**}$ are zero and the canonical map is onto. The zero functional
-was separated before division, while nonzero $\varphi$ gives $d>0$, so every
-quotient is defined. The real case has trivial conjugation; step 5.1 tracks both
-conjugations in the complex case. Countable Choice is used only to select the
-minimizing sequence in step 2.1 (and again when the same proved representation
-is applied to $H^*$), not for any basis or uncountable family. [A1, L5, step 4.1, step 6.1] ∎
+7.1 Conclude reflexivity and record all boundaries. [A1, L5, step 4.1, step 6.1] Surjectivity in step 6.1 is reflexivity by [L5]. If $H=\{0\}$, then both $H^*$ and $H^{**}$ are zero and the canonical map is onto. The zero functional was separated before division, while nonzero $\varphi$ gives $d>0$, so every quotient is defined. The real case has trivial conjugation; step 5.1 tracks both conjugations in the complex case. Countable Choice is used only to select the minimizing sequence in step 2.1 (and again when the same proved representation is applied to $H^*$), not for any basis or uncountable family. [A1, L5, step 4.1, step 6.1] ∎

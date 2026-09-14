@@ -2,7 +2,7 @@
 id: cor-formal-consistency-of-suslin-hypothesis
 kind: corollary
 title: "External relative consistency of the Suslin Hypothesis"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-formal-consistency-of-ma-and-not-ch, cor-ma-and-not-ch-implies-suslin-hypothesis, thm-formal-relative-consistency-from-verified-proof-reduction, def-arithmetic-provability-and-consistency]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

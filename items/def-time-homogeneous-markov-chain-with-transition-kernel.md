@@ -2,7 +2,7 @@
 id: def-time-homogeneous-markov-chain-with-transition-kernel
 kind: definition
 title: "Time-homogeneous Markov chain with transition kernel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, def-measure-kernel-and-probability-kernel, def-conditional-probability-given-a-sigma-algebra, def-filtration-and-filtered-probability-space, def-stochastic-process-and-finite-dimensional-distributions]
 proof_strategy: definition
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

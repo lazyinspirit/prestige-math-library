@@ -2,7 +2,7 @@
 id: ex-dunford-pettis-uniformly-integrable-and-concentrating-families
 kind: example
 title: "Dunford--Pettis: dominated and concentrating families"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 proof_strategy: counterexample
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"
@@ -74,24 +75,11 @@ bounded with uniformly absolutely continuous integrals
 **Given:** AC, the restricted Lebesgue interval, a nonnegative $g\in L^1$, a
 dominated family $K_g$, and the displayed spike sequence.
 
-1.1 Fix the finite quotient-space model. [given, A1, L1, L2]
-Let $\lambda_I(E)=\lambda(E\cap I)$ on the ambient Lebesgue sigma-algebra.
-By [L1] this is a finite measure with $\lambda_I(I)=1$. We use the quotient
-$L^1(\lambda_I)$ from [L2], so changes outside $I$ or on null endpoints do not
-change a class.
+1.1 Fix the finite quotient-space model. Let $\lambda_I(E)=\lambda(E\cap I)$ on the ambient Lebesgue sigma-algebra. By [L1] this is a finite measure with $\lambda_I(I)=1$. We use the quotient $L^1(\lambda_I)$ from [L2], so changes outside $I$ or on null endpoints do not change a class. [given, A1, L1, L2]
 
-2.1 Prove uniform integrability of the dominated family. [L2, L3, L4, step 1.1]
-For $f\in K_g$, domination gives
-$\lVert f\rVert_1\leq\int_Ig$, uniformly in $f$. Given $\varepsilon>0$, [L3]
-supplies $\delta>0$ such that $\lambda_I(E)<\delta$ implies
-$\int_Eg<\varepsilon$. Then
-$\int_E|f|\leq\int_Eg<\varepsilon$ for every $f\in K_g$. Thus the two
-conditions in [L4] hold, so $K_g$ is uniformly integrable and relatively
-weakly compact.
+2.1 Prove uniform integrability of the dominated family. For $f\in K_g$, domination gives $\lVert f\rVert_1\leq\int_Ig$, uniformly in $f$. Given $\varepsilon>0$, [L3] supplies $\delta>0$ such that $\lambda_I(E)<\delta$ implies $\int_Eg<\varepsilon$. Then $\int_E|f|\leq\int_Eg<\varepsilon$ for every $f\in K_g$. Thus the two conditions in [L4] hold, so $K_g$ is uniformly integrable and relatively weakly compact. [L2, L3, L4, step 1.1]
 
-2.2 Calculate the concentrating sequence. [L1, L2, step 1.1, construct]
-For every $n\geq1$, the nonnegative simple-integral formula and interval
-length give
+2.2 Calculate the concentrating sequence. For every $n\geq1$, the nonnegative simple-integral formula and interval length give [L1, L2, step 1.1, construct]
 
 $$\lVert f_n\rVert_1=n\lambda_I((0,1/n))=n\cdot\frac1n=1.$$
 
@@ -99,19 +87,6 @@ Hence $(f_n)$ is $L^1$ bounded. But for $E_n=(0,1/n)$ one has
 $\lambda_I(E_n)=1/n\to0$ while
 $\int_{E_n}|f_n|=1$.
 
-3.1 Fail uniform integrability and weak compactness. [A1, L4, step 2.2]
-Taking, for example, $\varepsilon=1/2$, step 2.2 shows that no single
-$\delta>0$ works for the uniform absolute-continuity condition: choose
-$n>1/\delta$. Therefore the family $\{f_n:n\geq1\}$ is not uniformly
-integrable. The reverse implication in [L4] then shows that it is not
-relatively weakly compact.
+3.1 Fail uniform integrability and weak compactness. Taking, for example, $\varepsilon=1/2$, step 2.2 shows that no single $\delta>0$ works for the uniform absolute-continuity condition: choose $n>1/\delta$. Therefore the family $\{f_n:n\geq1\}$ is not uniformly integrable. The reverse implication in [L4] then shows that it is not relatively weakly compact. [A1, L4, step 2.2]
 
-4.1 Audit the endpoints and degenerate families. [A1, L1, L2, L3, L4, step 1.1, step 2.1, step 2.2, step 3.1]
-If $K_g=\varnothing$, both conclusions in part 1 are vacuous. If $g=0$, every
-dominated $L^1$ class is zero, so the conclusion is the compact singleton
-case. Open, closed, or half-open spike intervals define the same class because
-their endpoint differences are null. The spikes are real and nonnegative;
-their obstruction is concentration on shrinking positive-measure sets, not
-unbounded $L^1$ norm. AC is used exactly through [L4] and to supply the
-Countable Choice in the Lebesgue model [L1]. [given, A1, L1, L2, L3, L4,
-step 1.1, step 2.1, step 2.2, step 3.1] ∎
+4.1 Audit the endpoints and degenerate families. [A1, L1, L2, L3, L4, step 1.1, step 2.1, step 2.2, step 3.1] If $K_g=\varnothing$, both conclusions in part 1 are vacuous. If $g=0$, every dominated $L^1$ class is zero, so the conclusion is the compact singleton case. Open, closed, or half-open spike intervals define the same class because their endpoint differences are null. The spikes are real and nonnegative; their obstruction is concentration on shrinking positive-measure sets, not unbounded $L^1$ norm. AC is used exactly through [L4] and to supply the Countable Choice in the Lebesgue model [L1]. [given, A1, L1, L2, L3, L4, step 1.1, step 2.1, step 2.2, step 3.1] ∎

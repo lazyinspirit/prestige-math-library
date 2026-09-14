@@ -2,13 +2,15 @@
 id: lem-suslin-tree-normal-splitting-refinement
 kind: lemma
 title: "Every Suslin tree has a normal splitting refinement"
-status: draft
+status: published
 origin: pipeline
 deps: [def-aronszajn-suslin-and-special-tree, def-normal-splitting-set-theoretic-tree, lem-tree-predecessors-and-common-extensions, thm-countable-union-of-countable, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - title: "Monk, Set theory following Jech, Lemma 9.12 and complete proof, printed pp. 65-68"

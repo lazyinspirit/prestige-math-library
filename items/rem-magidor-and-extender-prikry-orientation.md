@@ -2,7 +2,7 @@
 id: rem-magidor-and-extender-prikry-orientation
 kind: remark
 title: Magidor and extender Prikry forcing are orientation, not substitutes
-status: draft
+status: published
 origin: pipeline
 deps:
   - thm-prikry-forcing-preserves-cardinals
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

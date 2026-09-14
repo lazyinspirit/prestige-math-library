@@ -2,7 +2,7 @@
 id: ex-k-theory-of-a-point-and-the-empty-space
 kind: example
 title: K-theory of a point and the empty space
-status: draft
+status: published
 origin: pipeline
 deps: [def-complex-topological-k-zero-by-grothendieck-completion, def-reduced-complex-k-theory, thm-complex-bott-periodicity, cor-complex-k-theory-of-spheres, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

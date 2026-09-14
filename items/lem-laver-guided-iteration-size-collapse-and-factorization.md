@@ -2,7 +2,7 @@
 id: lem-laver-guided-iteration-size-collapse-and-factorization
 kind: lemma
 title: "Size, collapse, and factorization for the PFA iteration"
-status: draft
+status: published
 origin: pipeline
 deps: [def-laver-guided-proper-bookkeeping-iteration, thm-countable-support-iterations-preserve-properness, thm-proper-forcing-preserves-stationary-subsets-of-omega-one, thm-lc-supercompactness-closed-embedding-characterization, cor-lc-large-cardinal-implication-ledger, lem-lc-inaccessible-size-and-rank-bounds, lem-generalized-delta-system-for-small-supports, thm-chain-condition-preserves-cofinalities-and-cardinals, def-axiom-of-choice]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

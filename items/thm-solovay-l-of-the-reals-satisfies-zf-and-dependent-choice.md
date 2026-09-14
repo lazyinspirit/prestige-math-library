@@ -2,13 +2,15 @@
 id: thm-solovay-l-of-the-reals-satisfies-zf-and-dependent-choice
 kind: theorem
 title: Solovay L(R) satisfies ZF and Dependent Choice
-status: draft
+status: published
 origin: pipeline
 deps: [def-l-of-the-reals-in-the-solovay-collapse-extension, def-definable-subsets-of-a-membership-structure, lem-canonical-well-order-of-finite-definition-codes, def-serial-relation-dependent-choice-principle-over-zf, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: canonical-code-recursion
+verification:
+  audited: 2026-09-14
 sources:
   references:
     - {title: "Solovay 1970, Part III, Lemmas 2.4–2.7", url: "https://people.math.ethz.ch/~fdalio/ZKmodel.pdf"}

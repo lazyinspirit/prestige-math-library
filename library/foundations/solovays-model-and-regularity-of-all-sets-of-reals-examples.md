@@ -1,7 +1,7 @@
 ---
 page: solovays-model-and-regularity-of-all-sets-of-reals-examples
 title: "Solovay's Model and Regularity of All Sets of Reals — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-solovay-collapse-factorization-around-a-real-parameter, ex-a-borel-representative-from-a-random-boolean-value, ex-the-perfect-tree-splitting-of-a-new-real-name, ex-coding-countably-many-solovay-definition-parameters, ex-regularity-excludes-the-classical-choice-pathologies, ex-volume-contradiction-for-an-alleged-banach-tarski-decomposition, fs-solovays-model-proves-an-inaccessible-exists]
 ---

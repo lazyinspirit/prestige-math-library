@@ -2,7 +2,7 @@
 id: ex-solovay-collapse-factorization-around-a-real-parameter
 kind: example
 title: Factoring the Solovay collapse around a real parameter
-status: draft
+status: published
 origin: pipeline
 deps: [def-solovay-levy-collapse-setup, lem-solovay-absorption-factorization-and-homogeneity]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

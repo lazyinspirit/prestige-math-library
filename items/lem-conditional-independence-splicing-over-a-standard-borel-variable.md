@@ -2,7 +2,7 @@
 id: lem-conditional-independence-splicing-over-a-standard-borel-variable
 kind: lemma
 title: "Conditional-independence splice lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-conditional-independence-equivalences-and-preservation, thm-existence-of-regular-conditional-distributions-for-standard-borel-targets, lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable, thm-measurability-of-integration-against-a-kernel, thm-sections-of-product-measurable-functions-are-measurable, thm-monotone-convergence-for-the-integral, thm-dynkin-pi-lambda]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

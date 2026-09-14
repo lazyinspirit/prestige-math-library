@@ -65,12 +65,4 @@ $$\beta(x)=\beta Sq^0(x)=Sq^1(x).$$
 
 This is the claimed equality of operations.
 
-2.1 Both operations vanish on the empty space and zero class, and the canonical lifts use no choice. [F1, F2, F3, step 1.1]
-For the empty space or zero class, both sides vanish. On a point and, more
-generally, in degree zero, [F3] makes $Sq^1$ zero by instability, so step 1.1
-makes the Bockstein zero as well. The index $j=0$ is included explicitly in
-[F2], and no negative degree or converse assertion occurs. Ordinary
-unnormalized singular cochains, including degenerate simplices, are inherited
-from [F1] and [F2]. The only lift used in [F2] is the valuewise zero/one
-residue lift described in [F1], so the equality is choice-free and assumes no
-AC. ∎
+2.1 Both operations vanish on the empty space and zero class, and the canonical lifts use no choice. For the empty space or zero class, both sides vanish. On a point and, more generally, in degree zero, [F3] makes $Sq^1$ zero by instability, so step 1.1 makes the Bockstein zero as well. The index $j=0$ is included explicitly in [F2], and no negative degree or converse assertion occurs. Ordinary unnormalized singular cochains, including degenerate simplices, are inherited from [F1] and [F2]. The only lift used in [F2] is the valuewise zero/one residue lift described in [F1], so the equality is choice-free and assumes no AC. [F1, F2, F3, step 1.1] ∎

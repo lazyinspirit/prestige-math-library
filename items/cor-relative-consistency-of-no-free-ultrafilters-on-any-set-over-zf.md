@@ -2,7 +2,7 @@
 id: cor-relative-consistency-of-no-free-ultrafilters-on-any-set-over-zf
 kind: corollary
 title: Relative consistency of no free ultrafilters on any set over ZF
-status: draft
+status: published
 origin: pipeline
 deps: [lem-blass-ultrafilter-free-model-is-finitely-formalizable, thm-formal-consistency-of-zfc-plus-gch-from-zf]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

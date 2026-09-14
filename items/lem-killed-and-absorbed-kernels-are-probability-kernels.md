@@ -2,7 +2,7 @@
 id: lem-killed-and-absorbed-kernels-are-probability-kernels
 kind: lemma
 title: "Killed and absorbed kernels are probability kernels"
-status: draft
+status: published
 origin: pipeline
 deps: [def-killed-and-absorbed-transition-kernels, def-measure-kernel-and-probability-kernel]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

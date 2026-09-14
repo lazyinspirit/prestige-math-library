@@ -2,7 +2,7 @@
 id: ex-tautological-real-and-complex-lines-over-projective-space
 kind: example
 title: Tautological lines over projective spaces
-status: draft
+status: published
 origin: pipeline
 deps: [def-stiefel-space-grassmannian-and-tautological-bundle, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:

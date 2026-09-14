@@ -2,7 +2,7 @@
 id: ex-a-finite-minimal-walk-and-its-lower-trace
 kind: example
 title: A finite minimal walk and its lower trace
-status: draft
+status: published
 origin: pipeline
 deps:
   - def-c-sequences-and-minimal-walk-traces-on-omega-one
@@ -14,6 +14,7 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 verification:
+  audited: 2026-09-14
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

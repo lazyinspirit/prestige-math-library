@@ -2,7 +2,7 @@
 id: lem-feferman-levy-bounded-layer-support
 kind: lemma
 title: Hereditarily symmetric names have bounded layer support
-status: draft
+status: published
 origin: pipeline
 deps: [def-feferman-levy-symmetric-collapse-system, thm-forcing-equivalence-and-boolean-completion, lem-symmetry-lemma-for-forcing-automorphisms, thm-forcing-theorem]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-14
   precheck: pass
 sources:
   references:
