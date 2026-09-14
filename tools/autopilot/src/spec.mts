@@ -55,6 +55,38 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     }
     if (typeof s.units !== 'function') P(s.id, 'needs a `units(ctx)` function; a stage that owes nothing can never be incomplete');
     if (typeof s.plan !== 'function') P(s.id, 'needs a `plan(ctx, pending)` function');
+    for (const [name, value] of [['cohort', s.cohort], ['exclusiveCohort', s.exclusiveCohort],
+      ['unitPrerequisites', s.unitPrerequisites]] as const) {
+      if (value !== undefined && typeof value !== 'function') {
+        P(s.id, `\`${name}\` must be a function (ctx, unit) => units`);
+      }
+    }
+    if (typeof s.units === 'function' && typeof s.unitPrerequisites === 'function') {
+      try {
+        const units = s.units(ctx).map(String);
+        const owed = new Set(units);
+        const deps = new Map(units.map(unit => [unit,
+          [...new Set(s.unitPrerequisites!(ctx, unit).map(String))].sort()]));
+        for (const [unit, direct] of deps) {
+          const unknown = direct.filter(dep => !owed.has(dep));
+          if (unknown.length) P(s.id, `${unit} names unit prerequisite(s) not owed by the stage: ${unknown.join(', ')}`);
+        }
+        const visiting = new Set<string>(), visited = new Set<string>(), trail: string[] = [];
+        const visit = (unit: string): void => {
+          if (visited.has(unit)) return;
+          if (visiting.has(unit)) {
+            const start = trail.indexOf(unit);
+            throw new Error([...trail.slice(Math.max(0, start)), unit].join(' -> '));
+          }
+          visiting.add(unit); trail.push(unit);
+          for (const dependency of deps.get(unit) ?? []) if (owed.has(dependency)) visit(dependency);
+          trail.pop(); visiting.delete(unit); visited.add(unit);
+        };
+        for (const unit of units) visit(unit);
+      } catch (err: any) {
+        P(s.id, `unit prerequisite graph is invalid — ${err?.message ?? err}`);
+      }
+    }
   }
 
   // THE OVERLAP-GROUP RULE.
@@ -86,12 +118,6 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     if (typeof s.role !== 'string' || !s.role.trim()) {
       P(s.id, 'a pipelined stage must declare `role` — the dispatcher lane its plans use. Without it the '
         + 'group cannot bound that lane, and two overlapping stages will each fill it.');
-    }
-    if (s.cohort !== undefined && typeof s.cohort !== 'function') {
-      P(s.id, '`cohort` must be a function (ctx, unit) => units that must advance together');
-    }
-    if (s.exclusiveCohort !== undefined && typeof s.exclusiveCohort !== 'function') {
-      P(s.id, '`exclusiveCohort` must be a function (ctx, unit) => units sharing outputs');
     }
   }
 

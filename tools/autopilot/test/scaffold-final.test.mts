@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { loadStep3, scopeHash, itemHash, itemDecision, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
+import { recordStep1 } from '../../step1-decisions.mjs';
 import { stages, step3Plan, step3PairPlan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { writeAuditorBaseline, certifyAuditorItems, certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
@@ -104,6 +105,61 @@ test('Step 3 dispatches each pair and serializes authors sharing a batch', t => 
   const plan = author.plan(f.ctx, ['a'])[0];
   assert.equal(plan.brief, 'briefs/group-author.md');
   assert.match(readFileSync(join(f.root, plan.task), 'utf8'), /Read access: the entire library and all current-frontier A\/B pairs/);
+});
+
+test('Step 3 exposes cross-batch in-run prerequisites to the executor', t => {
+  const f = fixture(t);
+  const pair = (a: string, b: string, order: number, requires: string[]) => [
+    { id: a, kind: 'A', companion: b, order, category: 'topic', requires, items: [] },
+    { id: b, kind: 'B', companion: a, order: order + 0.1, category: 'topic', requires: [a], items: [] },
+  ];
+  const middle = pair('middle-a', 'middle-b', 3, ['a']);
+  const consumer = pair('consumer-a', 'consumer-b', 5, ['middle-a']);
+  // Put the consumer in the lexically earlier batch to prove manifest-file
+  // order cannot launch it ahead of its supplier chain.
+  f.put('demo-batch-2.pages.json', consumer);
+  f.put('demo-batch-3.pages.json', middle);
+  f.put('plan-spec.json', { pages: [...f.pages, ...middle, ...consumer] });
+  const scope: any = stages.find(s => s.id === '3a-scope');
+  const author: any = stages.find(s => s.id === '3b-author');
+  assert.deepEqual(author.units(f.ctx), ['a', 'middle-a', 'consumer-a']);
+  assert.equal(scope.unitPrerequisites, undefined, 'scope review remains parallel');
+  assert.deepEqual(author.unitPrerequisites(f.ctx, 'a'), []);
+  assert.deepEqual(author.unitPrerequisites(f.ctx, 'middle-a'), ['a']);
+  assert.deepEqual(author.unitPrerequisites(f.ctx, 'consumer-a'), ['middle-a']);
+  assert.deepEqual(scope.plan(f.ctx, scope.units(f.ctx)).map((p: any) => p.covers),
+    [['a'], ['middle-a'], ['consumer-a']], 'scope review remains parallel');
+  assert.deepEqual(author.exclusiveCohort(f.ctx, 'middle-a'), ['middle-a'],
+    'output exclusivity remains a separate same-batch relation');
+  assert.deepEqual(author.plan(f.ctx, author.units(f.ctx)).map((p: any) => p.covers),
+    [['a'], ['middle-a'], ['consumer-a']],
+    'the executor, which knows completion and active repairs, applies readiness');
+});
+
+test('Step 1 supplier batches owe populated-scaffold readiness artifacts', t => {
+  const f = fixture(t);
+  const scaffold: any = stages.find(s => s.id === '1-scaffold');
+  assert.deepEqual(scaffold.unitPrerequisites(f.ctx, '1'), []);
+  for (const [item, dependencies] of [
+    ['lem-a', ['lem-published']], ['thm-b', ['lem-a']], ['ex-c', ['thm-b']],
+  ] as const) recordStep1(f.root, {
+    run: 'demo', item, decision: 'ready', reason: 'Current fixture evidence', dependencies,
+  });
+  assert.deepEqual(scaffold.artifacts(f.ctx, '1').sort(), [
+    'research/demo-batch-1.coverage.json',
+    'research/demo-batch-1.pages.json',
+    'research/demo-step1-ex-c.json',
+    'research/demo-step1-lem-a.json',
+    'research/demo-step1-thm-b.json',
+  ]);
+  f.published('Changed supplier proof');
+  assert.ok(scaffold.artifacts(f.ctx, '1').includes(
+    'research/demo-batch-1.scaffold-incomplete'),
+  'an existing but stale readiness record must fail closed');
+  f.put('demo-batch-1.pages.json', f.pages.map((page: any) => ({ ...page, items: [] })));
+  assert.ok(scaffold.artifacts(f.ctx, '1').includes(
+    'research/demo-batch-1.scaffold-incomplete'),
+  'a pre-created empty manifest must fail closed even if its coverage file exists');
 });
 
 test('Step-3 auditor-created items bypass self-review but inherit the approved baseline scope', t => {

@@ -134,6 +134,9 @@ export interface Stage {
   /** Units sharing output files. Ready subsets may advance independently, but
    * no subset may dispatch while another member has a live writer here. */
   exclusiveCohort?: (ctx: Ctx, u: Unit) => Unit[];
+  /** Direct prerequisites owed by this same stage. A unit cannot dispatch
+   * until every transitive prerequisite is artifact-complete and stable. */
+  unitPrerequisites?: (ctx: Ctx, u: Unit) => Unit[];
   /** The units this stage owes. */
   units?: (ctx: Ctx) => Unit[];
   /** Which result files belong to this stage. Build it with `resultPattern`

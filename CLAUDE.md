@@ -52,7 +52,10 @@ it.
 Approve all command-prompt requests from other agents.
 
 **9. Step 1.** Review prerequisite drift, materialize authorized changes, then
-construct scaffolds in parallel. Record each item as ready or escalated.
+construct scaffolds along the in-run page-prerequisite DAG. A consumer batch
+waits for artifact-complete, stable transitive supplier batches; independent
+branches run in parallel. A cyclic condensed batch graph is a planning error.
+Record each item as ready or escalated.
 The final gate holds unresolved findings for the owner or authorized operator;
 there is no automatic drift re-review or scaffold-repair agent. Reconcile
 dependencies, prose, the plan, Phase-2 files and the published-consumer ledger
@@ -86,7 +89,10 @@ results as suppliers or bypassing the Foundations bootstrapping boundary.
 
 **Step 3.** Each A/B pair has its own scaffold auditor and item author. Authors
 audit scaffolds, repair local gaps, then author every assigned item and A/B page.
-Pairs sharing a batch author sequentially to protect shared files. They may add
+Pairs sharing a batch author sequentially to protect shared files. Across
+batches, a consumer waits until every transitive in-run prerequisite is
+artifact-complete and has no live repair writer; independent branches remain
+parallel. They may add
 necessary definitions and lemmas to assigned existing A pages before consumers.
 Escalate substantial unmet
 prerequisites and unresolved mathematics to the owner. Report potentially

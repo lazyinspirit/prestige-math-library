@@ -24,10 +24,13 @@ Executable tools and configuration determine current behavior.
 | `Handover-prompts/` | Historical instructions, not live state |
 | `.claude/` | Agent settings; local settings are ignored |
 
-Step 1 is drift review → scaffold construction → an owner-held final gate.
-Scaffolders record item readiness; unresolved findings do not trigger repair agents.
+Step 1 is drift review → dependency-safe scaffold construction → an owner-held
+final gate. A scaffold batch waits for artifact-complete in-run supplier batches;
+independent branches remain parallel. Scaffolders record item readiness;
+unresolved findings do not trigger repair agents.
 Step 3 assigns one scope reviewer and one scaffold auditor/item author per A/B pair.
-Authors sharing a batch run sequentially while other batches may run in parallel.
+Authors sharing a batch run sequentially. Across batches, consumers wait for
+artifact-complete transitive in-run prerequisites while independent branches run in parallel.
 They may supply local definitions/lemmas; substantial prerequisites and potential
 published defects go to the owner. Step 4 splices the plan and snapshots content.
 Step 5a reviews authored content; Step 5b reconciles dependencies and closes it.

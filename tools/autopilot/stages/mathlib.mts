@@ -26,6 +26,7 @@ import { loadAuditorCreatedCertifications } from '../../auditor-created-items.mj
 import { certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
+import { step1Decision } from '../../step1-decisions.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { loadStep7JudgeEvidence } from '../../step7-evidence.mjs';
 import { repairFingerprint } from './authored-repairs.mts';
@@ -59,6 +60,53 @@ export function batches(ctx: any): string[] {
     .map((f: any) => f.replace(`${ctx.run}-batch-`, '').replace('.pages.json', ''))
     .filter((n: any) => /^\d+$/.test(n))
     .sort((a: any, b: any) => Number(a) - Number(b));
+}
+
+/** Direct prerequisite batches induced by in-run page requirements. */
+function batchDependencies(ctx: any, unit: string): string[] {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const batchForPage = new Map<string, string>();
+  for (const page of snapshot.pages) batchForPage.set(page.id, String(page.batch));
+  const out = new Set<string>();
+  for (const page of snapshot.pages.filter((row: any) => String(row.batch) === String(unit))) {
+    for (const requirement of page.requires ?? []) {
+      const dependency = batchForPage.get(requirement);
+      if (dependency && dependency !== String(unit)) out.add(dependency);
+    }
+  }
+  return [...out].sort((a, b) => Number(a) - Number(b));
+}
+
+/** A scaffold supplier is releasable only after its populated manifest,
+ * coverage record, and every current item-readiness receipt exist. The item
+ * list is read dynamically because planning intentionally creates empty page
+ * shells before the Beta fills them. */
+function scaffoldArtifacts(ctx: any, unit: string): string[] {
+  const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
+  const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
+  let complete = true;
+  try {
+    const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
+    const snapshot = loadStep3(ctx.repo, ctx.run);
+    if (!Array.isArray(pages) || !pages.length) complete = false;
+    for (const page of Array.isArray(pages) ? pages : []) {
+      if (!Array.isArray(page?.items) || !page.items.length) complete = false;
+      for (const item of Array.isArray(page?.items) ? page.items : []) {
+        if (typeof item?.id === 'string' && item.id) {
+          out.push(`research/${ctx.run}-step1-${item.id}.json`);
+          if (!step1Decision(snapshot, item.id).closed) complete = false;
+        } else complete = false;
+      }
+    }
+  } catch {
+    complete = false;
+  }
+  // Planning creates empty page shells. A successful Beta receipt and coverage
+  // file must not make that initial shell look complete and release consumers.
+  // This sentinel is intentionally never authored; the normal stalemate/hold
+  // path then reports the malformed or empty scaffold for owner resolution.
+  if (!complete) out.push(`research/${ctx.run}-batch-${unit}.scaffold-incomplete`);
+  return [...new Set(out)];
 }
 
 /** Durable group-author output for one batch.
@@ -1583,7 +1631,17 @@ function legacyStep3(ctx: any): boolean {
 }
 
 function step3Pairs(ctx: any): string[] {
-  return batches(ctx).length ? [...loadStep3(ctx.repo, ctx.run).pairs.keys()] : [];
+  if (!batches(ctx).length) return [];
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  // Manifest packing is affinity-based, so neither batch number nor JSON
+  // insertion order is a dependency order. Start lower planned pages first;
+  // the executor's explicit unit DAG supplies the actual readiness rule, while
+  // this stable order makes simultaneously ready authoring deterministic.
+  return [...snapshot.pairs.keys()].sort((a, b) => {
+    const ao = Number(snapshot.pairs.get(a)?.[0]?.order ?? 0);
+    const bo = Number(snapshot.pairs.get(b)?.[0]?.order ?? 0);
+    return ao - bo || a.localeCompare(b);
+  });
 }
 
 function pairBatches(ctx: any, unit: string, snapshot = loadStep3(ctx.repo, ctx.run)): string[] {
@@ -1591,10 +1649,26 @@ function pairBatches(ctx: any, unit: string, snapshot = loadStep3(ctx.repo, ctx.
   return [...new Set<string>(pair.map((p: any) => String(p.batch)))];
 }
 
+/** Direct in-run A/B-pair prerequisites declared by either page of a pair. */
+function pairDependencies(snapshot: any, unit: string): string[] {
+  const pairForPage = new Map<string, string>();
+  for (const [id, pages] of snapshot.pairs) {
+    for (const page of pages as any[]) pairForPage.set(page.id, id);
+  }
+  const out = new Set<string>();
+  for (const page of snapshot.pairs.get(unit) ?? []) {
+    for (const requirement of page.requires ?? []) {
+      const dependency = pairForPage.get(requirement);
+      if (dependency && dependency !== unit) out.add(dependency);
+    }
+  }
+  return [...out].sort();
+}
+
 function pairAuthorCohort(ctx: any, unit: string): string[] {
   const snapshot = loadStep3(ctx.repo, ctx.run);
   const owned = new Set(pairBatches(ctx, unit, snapshot));
-  return [...snapshot.pairs.keys()].filter(id =>
+  return step3Pairs(ctx).filter(id =>
     pairBatches(ctx, id, snapshot).some(batch => owned.has(batch)));
 }
 
@@ -1727,6 +1801,8 @@ export const stages = [
       ? MODEL_PROFILE_NAMES.solHigh
       : undefined,
     units: (ctx: any) => batches(ctx),
+    unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
+    artifacts: (ctx: any, unit: string) => scaffoldArtifacts(ctx, unit),
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
     pattern: /^beta-(?:beta-)?batch-\d+\.result\.json$/,
@@ -1842,6 +1918,8 @@ export const stages = [
     modelProfile: SOL_XHIGH,
     role: 'alpha-high',
     units: ctx => legacyStep3(ctx) ? batches(ctx) : step3Pairs(ctx),
+    unitPrerequisites: (ctx, unit) => legacyStep3(ctx)
+      ? [] : pairDependencies(loadStep3(ctx.repo, ctx.run), unit),
     exclusiveCohort: (ctx, u) => legacyStep3(ctx) ? alphaCohort(ctx, u) : pairAuthorCohort(ctx, u),
     artifacts: (ctx, u) => legacyStep3(ctx) ? authorArtifacts(ctx, u) : pairAuthorArtifacts(ctx, u),
     pattern: ctx => resultPattern('alpha-high', legacyStep3(ctx)

@@ -225,6 +225,130 @@ test('partial reviewers sharing outputs serialize, including adopted writers', a
   }
 });
 
+test('same-stage dependencies filter before slot slicing and inspect transitive artifacts', async () => {
+  const fx = fixture();
+  const dependencies: any = {
+    consumer: ['middle'], blocked: ['supplier'], middle: ['supplier'], supplier: [], independent: [],
+  };
+  const stage: any = {
+    id: 'dag', label: 'dag',
+    // Deliberately put two blocked consumers before the ready work. A filter
+    // applied after `slice(0, slots)` would start nothing.
+    units: () => ['consumer', 'blocked', 'middle', 'supplier', 'independent'],
+    pattern: /^worker-/,
+    artifacts: (_ctx: any, unit: string) => `artifact-${unit}.json`,
+    unitPrerequisites: (_ctx: any, unit: string) => dependencies[unit],
+    concurrency: 2,
+    plan: (_ctx: any, pending: string[]) => pending.map(unit => ({
+      role: 'worker', label: `dag-${unit}`, job: 'authoring', covers: [unit],
+    })),
+    gatesWaived: 'The test assertions directly verify dependency readiness.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true });
+  cover(fx, 'worker', 'old-middle', ['middle']);
+  writeFileSync(join(fx.repo, 'artifact-middle.json'), '{}\n');
+
+  assert.equal(await ex.dispatchStage(stage, ex.ctx()), 'ok');
+  assert.deepEqual(inflightAt(ex, 'dag').map((row: any) => row.meta.covers),
+    [['supplier'], ['independent']]);
+});
+
+test('same-stage consumer waits for a missing artifact and a live or adopted supplier repair', async () => {
+  for (const mode of ['missing-artifact', 'live', 'adopted']) {
+    const fx = fixture();
+    const stage: any = {
+      id: 'dag', label: 'dag', units: () => ['consumer', 'supplier'], pattern: /^worker-/,
+      artifacts: (_ctx: any, unit: string) => `artifact-${unit}.json`,
+      unitPrerequisites: (_ctx: any, unit: string) => unit === 'consumer' ? ['supplier'] : [],
+      concurrency: 2,
+      plan: (_ctx: any, pending: string[]) => pending.map(unit => ({
+        role: 'worker', label: `${mode}-${unit}`, job: 'authoring', covers: [unit],
+      })),
+      gatesWaived: 'The test assertions directly verify dependency readiness.',
+    };
+    const ex = makeExecutor(fx, [stage], { hang: true });
+    cover(fx, 'worker', 'old-supplier', ['supplier']);
+    if (mode !== 'missing-artifact') writeFileSync(join(fx.repo, 'artifact-supplier.json'), '{}\n');
+    if (mode === 'live') ex.inflight.set('dag:repair', {
+      promise: new Promise(() => {}), startedAt: Date.now(),
+      meta: { stage: 'dag', role: 'worker', label: 'repair', covers: ['supplier'], attempt: 1 },
+    });
+    if (mode === 'adopted') {
+      ex.config.adoptCommand = "printf '%s\\n' '123 node dispatch --run testrun --role worker --label repair --covers supplier'";
+    }
+    await ex.dispatchStage(stage, ex.ctx());
+    assert.equal(inflightAt(ex, 'dag').some((row: any) => row.meta.covers.includes('consumer')), false, mode);
+  }
+});
+
+test('same-stage dependency cycles become a visible blocker with no dispatch', async () => {
+  const fx = fixture();
+  const stage: any = {
+    id: 'dag', label: 'dag', units: () => ['a', 'b'], pattern: /^worker-/,
+    unitPrerequisites: (_ctx: any, unit: string) => unit === 'a' ? ['b'] : ['a'],
+    plan: (_ctx: any, pending: string[]) => pending.map(unit => ({
+      role: 'worker', label: unit, job: 'authoring', covers: [unit],
+    })),
+    gatesWaived: 'The test assertions directly verify cycle rejection.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true });
+  assert.equal(await ex.dispatchStage(stage, ex.ctx()), 'blocked');
+  assert.equal(ex.inflight.size, 0);
+  assert.ok(ex.state.data.blockers.some((row: any) =>
+    row.key === 'unit-prerequisites:dag' && /a -> b -> a/.test(row.message)));
+});
+
+test('repair fan-out defers a consumer while launching its supplier', async () => {
+  const fx = fixture();
+  const stage: any = {
+    id: 'dag', label: 'dag', units: () => ['consumer', 'supplier'], pattern: /^worker-/,
+    artifacts: (_ctx: any, unit: string) => `artifact-${unit}.json`,
+    unitPrerequisites: (_ctx: any, unit: string) => unit === 'consumer' ? ['supplier'] : [],
+    plan: () => [], gatesWaived: 'The test assertions directly verify repair launch ordering.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true });
+  cover(fx, 'worker', 'old-supplier', ['supplier']);
+  cover(fx, 'worker', 'old-consumer', ['consumer']);
+  const plan = (unit: string) => ({ role: 'worker', label: `repair-${unit}`, job: 'authoring', covers: [unit] });
+  assert.equal(ex.startMany(stage, [plan('consumer'), plan('supplier')]), true);
+  assert.deepEqual(inflightAt(ex, 'dag').map((row: any) => row.meta.covers), [['supplier']]);
+});
+
+test('crossed prerequisite cohorts choose one ready repair instead of deadlocking', async () => {
+  const fx = fixture();
+  const dependencies: any = { sx: [], cx: ['sy'], sy: [], cy: ['sx'] };
+  const cohorts: any = { sx: ['sx', 'cx'], cx: ['sx', 'cx'], sy: ['sy', 'cy'], cy: ['sy', 'cy'] };
+  const stage: any = {
+    id: 'dag', label: 'dag', units: () => ['sx', 'cx', 'sy', 'cy'], pattern: /^worker-/,
+    artifacts: (_ctx: any, unit: string) => `artifact-${unit}.json`,
+    unitPrerequisites: (_ctx: any, unit: string) => dependencies[unit],
+    exclusiveCohort: (_ctx: any, unit: string) => cohorts[unit],
+    plan: () => [], gatesWaived: 'The test assertions directly verify crossed repair ordering.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true });
+  for (const unit of ['sx', 'sy']) {
+    cover(fx, 'worker', `old-${unit}`, [unit]);
+    writeFileSync(join(fx.repo, `artifact-${unit}.json`), '{}\n');
+  }
+  const plan = (unit: string) => ({ role: 'worker', label: `repair-${unit}`, job: 'authoring', covers: [unit] });
+  assert.equal(ex.startMany(stage, [plan('cx'), plan('cy')]), true);
+  assert.deepEqual(inflightAt(ex, 'dag').map((row: any) => row.meta.covers), [['cx']],
+    'the first consumer protects its supplier cohort and defers the crossed peer');
+});
+
+test('repair fan-out preserves exclusive cohorts for root units', async () => {
+  const fx = fixture();
+  const stage: any = {
+    id: 'dag', label: 'dag', units: () => ['a', 'b'], pattern: /^worker-/,
+    unitPrerequisites: () => [], exclusiveCohort: () => ['a', 'b'],
+    plan: () => [], gatesWaived: 'The test assertions directly verify repair output exclusivity.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true });
+  const plan = (unit: string) => ({ role: 'worker', label: `repair-${unit}`, job: 'authoring', covers: [unit] });
+  assert.equal(ex.startMany(stage, [plan('a'), plan('b')]), true);
+  assert.deepEqual(inflightAt(ex, 'dag').map((row: any) => row.meta.covers), [['a']]);
+});
+
 test('artifact recovery starts while a sibling author is still in flight', async () => {
   // A successful process receipt without its required artifact is abandoned
   // work once that unit's process has drained. It must not wait behind an

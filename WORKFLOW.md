@@ -67,8 +67,11 @@ LLM.
 
 ## Scaffold, audit and author
 
-Step 1 drift review/materialization precedes parallel scaffold construction.
-Every item needs a current ready/escalated record. The final gate holds unresolved
+Step 1 drift review/materialization precedes dependency-safe scaffold construction.
+A consumer batch waits for artifact-complete, stable transitive supplier batches;
+independent DAG branches remain parallel. A cyclic condensed batch graph is a
+planning error and blocks before dispatch. Every item needs a current
+ready/escalated record. The final gate holds unresolved
 findings for the owner/operator; it does not launch a scaffold repair loop.
 Preserve selected pairs and reconcile prose, plan, Phase-2 files and the consumer
 ledger before clearing affected prerequisites.
@@ -76,6 +79,10 @@ ledger before clearing affected prerequisites.
 Step 3a assigns one scope reviewer per A/B pair; insufficient scope remains owner-held.
 Step 3b assigns one scaffold auditor/item author per A/B pair. Authors sharing
 a batch run sequentially because manifests and proof contracts are shared.
+Across batches, the executor releases a consumer only after every transitive
+in-run prerequisite has successful coverage, all declared artifacts, and no
+live repair writer. This directed rule keeps independent branches parallel and
+prevents a later supplier write from invalidating a consumer receipt.
 They audit scaffolds and actual prerequisites, repair locally, then write
 every assigned item, example, counterexample, page and proof contract. They may
 insert necessary definitions/lemmas on assigned existing A pages before consumers.

@@ -11,7 +11,10 @@ operating contract and CLAUDE.md for agent instructions.
 - src/doctor.mts: command/task preflight.
 - src/state.mts and src/control.mts: durable state and controls.
 
-Step3 groups audit scaffolds, repair local gaps and author everything. The
+Step1 scaffold batches and Step3 pair authors declare their same-stage in-run
+prerequisites to the executor. Consumers wait for artifact-complete, stable
+transitive suppliers; independent branches retain parallelism. Step3 authors
+sharing a batch also serialize because their manifests are shared. The
 pre-author snapshot precedes them. Step4 still splices the plan and snapshots
 content. Step5a reviews authored arguments; Step5b reconciles and closes them.
 Step7 completes repairs and checks, runs one rejudge and one terminal

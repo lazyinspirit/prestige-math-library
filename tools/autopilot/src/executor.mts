@@ -432,6 +432,85 @@ export class Executor {
     });
   }
 
+  /** Apply a stage's own dependency DAG to candidate units.
+   *
+   * Every transitive supplier must have successful coverage, all declared
+   * artifacts, and no live (or about-to-start) writer. The last condition also
+   * includes an exclusive cohort because a sibling writing a shared manifest
+   * makes the supplier bytes unstable. Building and validating the whole graph
+   * here prevents a cycle from degrading into a silent no-work tick. */
+  unitReadiness(stage: Stage, ctx: Ctx, candidates: Unit[], active = new Set<Unit>(),
+    writes = new Set<Unit>(), cohortWrites = writes): { ready: Unit[]; problem: string | null } {
+    if (!stage.unitPrerequisites) return { ready: candidates, problem: null };
+    try {
+      const owed = (stage.units ? stage.units(ctx) : []).map(String);
+      const owedSet = new Set(owed);
+      const dependencies = new Map<string, string[]>();
+      for (const unit of owed) {
+        const direct = [...new Set((stage.unitPrerequisites(ctx, unit) ?? []).map(String))].sort();
+        const unknown = direct.filter(dep => !owedSet.has(dep));
+        if (unknown.length) {
+          return { ready: [], problem: `${unit} names prerequisite(s) not owed by this stage: ${unknown.join(', ')}` };
+        }
+        dependencies.set(unit, direct);
+      }
+
+      const visiting = new Set<string>(), visited = new Set<string>(), trail: string[] = [];
+      const transitive = new Map<string, Set<string>>();
+      const visit = (unit: string): string | null => {
+        if (visited.has(unit)) return null;
+        if (visiting.has(unit)) {
+          const start = trail.indexOf(unit);
+          return `unit prerequisite cycle: ${[...trail.slice(Math.max(0, start)), unit].join(' -> ')}`;
+        }
+        visiting.add(unit); trail.push(unit);
+        const closure = new Set<string>();
+        for (const dependency of dependencies.get(unit) ?? []) {
+          const problem = visit(dependency);
+          if (problem) return problem;
+          closure.add(dependency);
+          for (const ancestor of transitive.get(dependency) ?? []) closure.add(ancestor);
+        }
+        trail.pop(); visiting.delete(unit); visited.add(unit); transitive.set(unit, closure);
+        return null;
+      };
+      for (const unit of owed) {
+        const problem = visit(unit);
+        if (problem) return { ready: [], problem };
+      }
+
+      const done = this.unitsComplete(stage, ctx);
+      const activeUnits = new Set([...active].map(String));
+      const writeUnits = new Set([...writes].map(String));
+      const cohortWriteUnits = new Set([...cohortWrites].map(String));
+      const stable = (unit: string, candidate: string): boolean => done.has(unit)
+        && !activeUnits.has(unit)
+        && !writeUnits.has(unit)
+        // A supplier and its consumer may intentionally share one batch file.
+        // Ignore the candidate's own write while rejecting every other writer
+        // in that supplier's exclusive cohort.
+        && !(stage.exclusiveCohort?.(ctx, unit) ?? []).some(other => {
+          const id = String(other);
+          return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
+        });
+      return {
+        ready: candidates.filter(unit => {
+          const candidate = String(unit);
+          if (activeUnits.has(candidate)) return false;
+          if ((stage.exclusiveCohort?.(ctx, candidate) ?? [])
+            .some(other => {
+              const id = String(other);
+              return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
+            })) return false;
+          return [...(transitive.get(candidate) ?? [])].every(dep => stable(dep, candidate));
+        }),
+        problem: null,
+      };
+    } catch (error: any) {
+      return { ready: [], problem: `unit prerequisite evaluation threw: ${error?.message ?? error}` };
+    }
+  }
+
   snapshot(): Snapshot {
     const ctx = this.ctx();
     const { stage } = this.currentStage();
@@ -815,7 +894,35 @@ export class Executor {
       return false;
     }
     this.retirePlanPreflightBlockers(stage, plans);
-    for (const plan of plans) this.start(stage, plan, { preflighted: true });
+
+    // Repair hooks arrive here after their direct `start` calls have been
+    // collected. Regard the whole proposed fan-out as imminent writes and
+    // defer any consumer whose transitive suppliers are not stable. This also
+    // prevents a supplier repair and its consumer repair from launching in the
+    // same wave even if an old success receipt still exists for the supplier.
+    let readyPlans = plans;
+    if (stage.unitPrerequisites) {
+      const active = new Set<Unit>([...this.inflight.values()]
+        .filter((row: any) => row.meta.stage === stage.id)
+        .flatMap((row: any) => row.meta.covers.map(String)));
+      for (const unit of this.adoptedUnits(stage)) active.add(String(unit));
+      const writes = new Set<Unit>(plans.flatMap(plan => (plan.covers ?? []).map(String)));
+      const graph = this.unitReadiness(stage, this.ctx(), [], active, writes, new Set());
+      if (graph.problem) {
+        this.recordPlanPreflightBlocker(stage, plans[0], graph.problem);
+        return false;
+      }
+      const acceptedWrites = new Set<Unit>();
+      readyPlans = plans.filter(plan => {
+        const covered = (plan.covers ?? []).map(String);
+        const readiness = this.unitReadiness(stage, this.ctx(), covered, active, writes, acceptedWrites);
+        if (readiness.problem || (covered.length
+          && !covered.every(unit => readiness.ready.map(String).includes(unit)))) return false;
+        for (const unit of covered) acceptedWrites.add(unit);
+        return true;
+      });
+    }
+    for (const plan of readyPlans) this.start(stage, plan, { preflighted: true });
     return true;
   }
 
@@ -1198,8 +1305,18 @@ export class Executor {
           .filter((d: any) => d.meta.stage === s.id)
           .flatMap((d: any) => (d.meta.covers ?? []).map(String)));
         for (const unit of this.adoptedUnits(s)) active.add(String(unit));
-        const missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u)
+        let missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u)
           && !(s.exclusiveCohort?.(ctx, u) ?? []).some((other) => active.has(String(other))));
+        const readiness = this.unitReadiness(s, ctx, missing, active);
+        if (readiness.problem) {
+          const msg = `stage ${s.id}: invalid unit prerequisites — ${readiness.problem}`;
+          if (this.state.addBlocker(s.id, msg, `unit-prerequisites:${s.id}`)) {
+            this.reporter.notify('blocked', msg, { stage: s.id });
+          }
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
+        }
+        missing = readiness.ready;
         if (!missing.length) continue;
         const failure = { id: 'stage-stalemate', ok: false, units: missing,
           why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete and no longer running` };
@@ -1273,6 +1390,27 @@ export class Executor {
     }
     need = need.filter((u: any) => !runningUnits.has(u)
       && !(stage.exclusiveCohort?.(ctx, u) ?? []).some((other) => runningUnits.has(String(other))));
+
+    // Apply same-stage dependency readiness to the full pending list before
+    // slot slicing. Otherwise blocked units at the head can starve a ready
+    // supplier or an independent branch later in the list.
+    const prerequisiteReadiness = this.unitReadiness(stage, ctx, need, runningUnits);
+    if (prerequisiteReadiness.problem) {
+      const msg = `stage ${stage.id}: invalid unit prerequisites — ${prerequisiteReadiness.problem}`;
+      if (this.state.addBlocker(stage.id, msg, `unit-prerequisites:${stage.id}`)) {
+        this.reporter.notify('blocked', msg, { stage: stage.id });
+      }
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'blocked';
+    }
+    need = prerequisiteReadiness.ready;
+    const prerequisiteKey = `unit-prerequisites:${stage.id}`;
+    const beforePrerequisiteBlockers = this.state.data.blockers.length;
+    this.state.data.blockers = this.state.data.blockers.filter((row: any) => row.key !== prerequisiteKey);
+    if (this.state.data.blockers.length !== beforePrerequisiteBlockers) {
+      this.state.save();
+      this.reporter.notify('unblocked', `${stage.id}: unit prerequisite graph is valid`);
+    }
 
     // Retry policy: a unit whose lane failed gets `maxAttempts` tries, then
     // becomes a blocker. Unbounded retry of a deterministically failing lane
