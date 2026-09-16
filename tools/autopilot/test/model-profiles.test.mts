@@ -100,10 +100,10 @@ test('Step 5a readers and refuters use Sol high and the tool lanes stay model-fr
   }
 });
 
-test('Step 1 scaffolders use Sol high', () => {
+test('Step 1 scaffolders use DeepSeek Flash max', () => {
   const scaffoldStage = stage('1-scaffold');
   const scaffold = scaffoldStage.plan(ctx, ['1'])[0];
-  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.solHigh);
+  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.deepseekFlashMax);
   assert.equal(selected(scaffoldStage, {
     role: 'beta', job: 'scouting', label: 'source-scout-1-b1',
   }), undefined, 'source scouting is not a Step 1 scaffolding dispatch');

@@ -39,7 +39,8 @@ The dispatcher and item-judge prompt apply this rule to every role.
 
 | Assignment | Model / effort |
 |---|---|
-| Step 1 scaffolding; group Alpha | Sol / high |
+| Step 1 scaffolding | DeepSeek V4.1 Flash / max |
+| Step 1 drift review; group Alpha | Sol / high |
 | Step 3a pair scope and Step 3b pair authors | DeepSeek V4.1 Flash / max |
 | Step 5a readers and refuters | Sol / high |
 | Step 5a adjudicators | Sol / xhigh |
@@ -49,8 +50,9 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 7 adjudication | Sol / xhigh |
 | Step 7 final adjudication; Step 8 lead | Astra / medium |
 
-tools/models.mjs owns profiles; stages override role defaults. Rate limits do
-not authorize substitution. Group capacity is nine, batch capacity 27; the
+tools/models.mjs owns profiles; stages override role defaults. Substituting a
+model requires explicit owner authorization; the owner authorized DeepSeek
+V4.1 Flash / max for any lane the Codex provider cannot serve. Group capacity is nine, batch capacity 27; the
 global limit is in autopilot.config.json. The `alpha-high` lane permits twelve
 concurrent authors for an owner-directed three-lead/nine-helper partition;
 helpers write only their assigned pair files and leads integrate shared batch

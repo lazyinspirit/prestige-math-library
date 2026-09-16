@@ -1797,7 +1797,7 @@ export const stages = [
     id: '1-scaffold',
     label: 'Beta scaffolding',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
-      ? MODEL_PROFILE_NAMES.solHigh
+      ? DEEPSEEK_FLASH_MAX
       : undefined,
     units: (ctx: any) => batches(ctx),
     unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
