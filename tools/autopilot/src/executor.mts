@@ -299,6 +299,15 @@ export class Executor {
     if (this.state.data.stages[stage.id]?.skipped) {
       return { done: true, unitsDone: true, gatesPassed: true, why: 'skipped by owner', missing: [], mode: 'skip' };
     }
+    // A STAMPED STAGE IS NOT RE-DERIVED. `doneAt` is the durable record that
+    // this stage's coverage, artifacts and gates were checked and passed;
+    // re-deriving it re-walks every artifact predicate the stage paid for once,
+    // and `currentStage()` walks every finished stage before the live one on
+    // each tick. On a 27-pair run that re-ran Step 1's per-item readiness
+    // hashing — minutes of CPU per tick — to learn what the stamp already says.
+    if (this.state.data.stages[stage.id]?.doneAt) {
+      return { done: true, unitsDone: true, gatesPassed: true, why: 'stamped complete', missing: [], mode: 'coverage' };
+    }
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
     const units = stageComplete(ctx.dispatchDir, stagePattern(stage, ctx), owed, {
       coversMap: ctx.coversMap,
@@ -385,6 +394,10 @@ export class Executor {
   unitsComplete(stage: Stage, ctx: Ctx = this.ctx()): Set<Unit> {
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
     if (this.state.data.stages[stage.id]?.skipped) return new Set(owed);
+    // Same durable answer `stageStatus` takes: a stamped stage's units were
+    // complete when it was stamped, and re-walking them re-pays their readiness
+    // hashing for a result already recorded.
+    if (this.state.data.stages[stage.id]?.doneAt) return new Set(owed);
     const cov = covered(ctx.dispatchDir, stagePattern(stage, ctx), ctx.coversMap);
     // A stage running in the legacy COUNT mode declares no coverage at all, so
     // there is no per-unit answer to give. Fall back to the only thing that mode
