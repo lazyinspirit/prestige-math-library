@@ -436,8 +436,10 @@ Status snapshots tolerate transient parse failures in future-stage artifacts
 while an earlier worker is replacing them; the owning stage's gates still
 reject any malformed artifact that remains when the stage closes.
 
-The command also supports plan, start, pause, resume, retry, stop and report.
-pause stops new dispatches, not active work. resume clears pause but does not
+The command also supports plan, start, pause, pause-at, resume, retry, stop and
+report. pause stops new dispatches, not active work; pause-at with a stage names
+a durable stop that fires once that stage is stamped complete, before the next
+stage dispatches anything. resume clears pause but does not
 start a dead controller. retry re-arms unfinished work after intervention without
 erasing completed coverage or lifetime judge limits; it does not turn a gate
 failure into an automatic repair wave. stop exits the controller

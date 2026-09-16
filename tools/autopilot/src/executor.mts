@@ -1071,6 +1071,17 @@ export class Executor {
       case 'report':
         this.reporter.report(this.snapshot(), { force: true });
         break;
+      case 'pause-at': {
+        const id = cmd.stage;
+        if (!id || !this.stages.some((s: any) => s.id === id)) {
+          this.reporter.notify('control-error', `pause-at: unknown stage ${JSON.stringify(id)}`);
+          break;
+        }
+        this.state.data.pauseAfter = id;
+        this.state.save();
+        this.reporter.notify('pause-armed', `owner armed a pause for the end of ${id}`);
+        break;
+      }
       case 'skip': {
         const id = cmd.stage;
         if (!id || !this.stages.some((s: any) => s.id === id)) {
@@ -1187,6 +1198,18 @@ export class Executor {
 
     const ctx = this.ctx();
     const { stage } = this.currentStage();
+
+    // OWNER-ARMED PAUSE (owner, 2026-09-17). Fires before anything is
+    // dispatched for the stage that follows the armed one, so "pause after
+    // Step 3" cannot race the next fan-out. The marker clears itself; a later
+    // `resume` continues past the boundary.
+    const pauseAfter = this.state.data.pauseAfter;
+    if (pauseAfter && this.state.data.stages[pauseAfter]?.doneAt) {
+      this.state.data.pauseAfter = null;
+      this.state.paused = true;
+      this.state.save();
+      this.reporter.notify('paused', `armed pause fired — ${pauseAfter} is stamped complete; resume to continue`);
+    }
 
     // A COMPLETED STAGE CANNOT HAVE A LIVE BLOCKER. Neither can a recovered
     // dispatch unit: in an overlap group batch 3 can be repaired while batch 6

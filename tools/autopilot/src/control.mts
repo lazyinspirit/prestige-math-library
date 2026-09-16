@@ -17,6 +17,7 @@
 //
 //   echo '{"command":"pause"}'                    > .autopilot/control.json
 //   echo '{"command":"resume"}'                   > .autopilot/control.json
+//   echo '{"command":"pause-at","stage":"3b-author"}' > .autopilot/control.json
 //   echo '{"command":"skip","stage":"6-judge"}'   > .autopilot/control.json
 //   echo '{"command":"retry","unit":"3"}'         > .autopilot/control.json
 //   echo '{"command":"stop"}'                     > .autopilot/control.json
@@ -26,7 +27,7 @@ import { readFileSync, writeFileSync, existsSync, unlinkSync, mkdirSync } from '
 import type { Control, ControlCommand } from './types.mts';
 import { dirname, join } from 'node:path';
 
-export const COMMANDS = new Set(['pause', 'resume', 'skip', 'retry', 'stop', 'report']);
+export const COMMANDS = new Set(['pause', 'resume', 'skip', 'retry', 'stop', 'report', 'pause-at']);
 
 export function controlPath(dir: string): string { return join(dir, 'control.json'); }
 

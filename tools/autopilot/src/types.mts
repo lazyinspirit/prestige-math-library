@@ -314,6 +314,10 @@ export interface StateData {
   blockers: Blocker[];
   lastReportAt: string | null;
   paused: boolean;
+  /** Owner-armed stop: pause once this stage is stamped complete, before any
+   *  dispatch for the stage that follows. Cleared when it fires, so a later
+   *  `resume` continues past the boundary. */
+  pauseAfter?: string | null;
   /** PER-(GATE, ITEM) REPAIR ACCOUNTING (owner, 2026-08-25).
    *
    *  Key is `<gateId>\u0000<itemId>`, or `<gateId>\u0000*` for a gate whose
@@ -381,5 +385,5 @@ export interface Adapter {
     opts?: { signal?: AbortSignal; timeoutMs?: number; killGraceMs?: number }) => Promise<InvokeResult>;
 }
 
-export type ControlCommand = 'pause' | 'resume' | 'skip' | 'retry' | 'stop' | 'report';
+export type ControlCommand = 'pause' | 'resume' | 'skip' | 'retry' | 'stop' | 'report' | 'pause-at';
 export interface Control { command: ControlCommand | null; stage?: string; unit?: string; error?: string; }

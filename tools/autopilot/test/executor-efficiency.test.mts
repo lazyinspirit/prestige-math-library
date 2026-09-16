@@ -410,3 +410,24 @@ test('a tick that throws is recorded as a blocker and the loop keeps running', a
   assert.ok(ex.state.data.blockers.some((b: any) => /Duplicate item def-x/.test(b.message)));
   assert.ok(notifications.some((n) => n.kind === 'tick-error'));
 });
+
+test('a pause-at marker stops the run at the named stage boundary', async () => {
+  const fx = fixture();
+  const stages = ['first', 'second'].map((id) => ({
+    id, label: id, units: () => ['1'], pattern: new RegExp(`^tool-${id}\\.result\\.json$`),
+    plan: () => [{ role: 'tool', label: id, job: 'bookkeeping-mechanical', covers: ['1'], argv: ['true'] }],
+    gates: () => [loggingGate(fx, id)],
+  }));
+  const { ex, notifications } = makeExecutor(fx, stages);
+  cover(fx, 'tool', 'first', ['1']);
+  writeFileSync(join(fx.repo, '.autopilot', 'control.json'),
+    JSON.stringify({ command: 'pause-at', stage: 'first' }));
+  await ex.tick();
+  assert.ok(ex.state.data.stages.first.doneAt, 'the armed stage cleared first');
+  assert.equal(ex.state.data.pauseAfter, 'first', 'the marker survives until it fires');
+  await ex.tick();
+  assert.equal(ex.state.paused, true, 'the run paused at the boundary');
+  assert.equal(ex.state.data.pauseAfter, null);
+  assert.ok(notifications.some((n) => n.kind === 'pause-armed'));
+  assert.deepEqual(gateRuns(fx), ['first'], 'the stage after the boundary never started');
+});
