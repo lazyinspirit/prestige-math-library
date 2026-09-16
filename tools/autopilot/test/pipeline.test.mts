@@ -700,14 +700,14 @@ test('a cohort that is not a function is refused', () => {
 // The shipped table: which stages overlap is an owner decision, so assert it
 // ---------------------------------------------------------------------------
 
-test('group authoring and direct review are whole-frontier barriers', async () => {
+test('only the Step-5a reader pipeline overlaps; every other stage is a barrier', async () => {
   const mod = await import('../stages/mathlib.mts');
   const byPipeline = new Map<string, string[]>();
   for (const s of mod.stages as any[]) {
     if (!s.pipeline) continue;
     byPipeline.set(s.pipeline, [...(byPipeline.get(s.pipeline) ?? []), s.id]);
   }
-  assert.deepEqual([...byPipeline], []);
+  assert.deepEqual([...byPipeline], [['read', ['5a-read', '5a-split', '5a-refute', '5a-collect']]]);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
@@ -718,7 +718,7 @@ test('the do-not-relax stages are still barriers', async () => {
   // once. `1-scaffold` and `2-assign` are here for a different reason: see the
   // cohort test below.
   const mod = await import('../stages/mathlib.mts');
-  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-baseline',
+  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-prepare', '5a-adjudicate', '5a-baseline',
     '5b-cross', '5b-close', '6-judge', '7-baseline', '7-adjudicate', '7-rejudge',
     '8-scope', '8-scope-render', '8-scope-freeze', '8-changes-judge', '8-close', '8-changes-stamp', '8-receipt', '9-contract-close', '9-snapshot-v2',
     '9-pathway-sync-v2', '9-pathway-seed-v2', '9-pathway-author-v2',
@@ -753,7 +753,7 @@ test('no pipeline group starts before the batch assignment it depends on', async
   }
 });
 
-test("authoring and direct adjudication precede the impact snapshot", async () => {
+test("authoring, independent review and adjudication precede the impact snapshot", async () => {
   // `5a-baseline` is the `--to` endpoint of the 5b blast-radius diff, so it must
   // photograph text that already passed the group's gates. Stage order is what
   // guarantees it: no member of a group is done until the join is green, and the
@@ -764,9 +764,9 @@ test("authoring and direct adjudication precede the impact snapshot", async () =
   assert.equal(mod.stages[author + 1].id, '4-splice');
   assert.equal(mod.stages[author + 2].id, '4-baseline');
   assert.equal(mod.stages[author + 3].id, '5a-prepare');
-  assert.ok(ids.indexOf('5a-baseline') > ids.indexOf('5a-adjudicate'));
-
-  assert.equal(mod.stages[author + 4].id, '5a-adjudicate');
+  assert.deepEqual(ids.slice(ids.indexOf('5a-prepare'), ids.indexOf('5a-baseline') + 1),
+    ['5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect',
+      '5a-adjudicate', '5a-baseline']);
   assert.equal(mod.stages[ids.indexOf('5a-adjudicate') + 1].id, '5a-baseline',
     'the final snapshot immediately follows gated independent adjudication');
 });

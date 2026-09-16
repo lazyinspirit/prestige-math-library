@@ -12,7 +12,7 @@ mathlib.step5.mts are authoritative. There is no LLM orchestrator.
 | 2 — assign | 2-assign | Disjoint, item-load-balanced groups, each owning at most three existing batches |
 | 3 — audit and author | 3a-scope, 3-baseline, 3b-author | Scope decisions, pre-author snapshot, complete authored items/pages/contracts and current item decisions |
 | 4 — materialize | 4-splice, 4-baseline | Mechanical plan splice and post-author snapshot |
-| 5a — review | 5a-prepare, 5a-adjudicate, 5a-baseline | Direct group review and frozen post-review evidence |
+| 5a — review | 5a-prepare, 5a-read, 5a-split, 5a-refute, 5a-collect, 5a-adjudicate, 5a-baseline | Independent reader/refuter pass, routed group adjudication and frozen post-review evidence |
 | 5b — reconcile and close | 5b-edges, 5b-cross, 5b-close | Cross-group dependency audit, impact accounting and closure receipt |
 | 6 — judge | 6-scope, 6-judge | Frozen item judgments and group reader digests |
 | 7 — repair | 7-baseline, 7-scope, 7-adjudicate, 7-preflight, 7-rejudge, 7-freeze | Repairs/checks, one rejudge, one final adjudication, then Step 8 |
@@ -41,7 +41,9 @@ The dispatcher and item-judge prompt apply this rule to every role.
 |---|---|
 | Step 1 scaffolding; group Alpha | Sol / high |
 | Step 3a pair scope and Step 3b pair authors | Sol / xhigh |
-| Step 5a/5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
+| Step 5a readers and refuters | Sol / high |
+| Step 5a adjudicators | Sol / xhigh |
+| Step 5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
 | Assignment; ordinary Step 8 work | Terra / high |
 | Item judges | Terra / xhigh |
 | Step 7 adjudication | Sol / xhigh |
@@ -171,15 +173,22 @@ mixing or the completed-measure argument.
 
 ## Review, sources and impact
 
-Step 5a reviews actual authored mathematics directly, not scaffolds again.
-Accept sound content, repair locally with fully authored suppliers, or escalate
-substantial gaps. Every original baseline item/page needs a direct decision. A genuine
-post-baseline supplier created and fully authored by the Step-5 auditor receives
-a hash-bound item/manifest/contract certificate after the successful dispatch
-and does not require a self-review decision. High-risk and every static content,
-dependency, source and contract gate remain mandatory. Step 5b reconciles
-cross-batch dependencies, changed consumers, exact hashes, coverage, sources
-and ledger.
+Step 5a starts with one independent reader per batch on another batch's files.
+Readers may repair in-flight items and assigned A-page prose; defects they
+cannot edit become routed findings. A mechanical split then partitions each
+batch into touched and untouched work, and read-only refuters verify every
+untouched carrier, every HIGH/CRITICAL item and every page carrier from the
+current files, with exact opened/not_opened coverage. Group Alphas adjudicate
+the routed obligations only: touched carriers, page carriers, reader findings
+and refuter findings. An untouched, unflagged item owes no adjudication
+decision and proceeds to the gate. Every HIGH/CRITICAL item needs a current
+risk review from the adjudicator's own read. A genuine post-baseline supplier
+created and fully authored by the Step-5 adjudicator receives a hash-bound
+item/manifest/contract certificate after the successful dispatch and does not
+require a self-review decision. The complete gate battery runs at
+5a-adjudicate; a failing gate is an owner hold, never an agent repair round.
+Step 5b reconciles cross-batch dependencies, changed consumers, exact hashes,
+coverage, sources and ledger.
 
 Step-5/7/8 auditor-created certificates bind the item, manifest entry and owning
 contract. Initial certification requires a successful auditor/adjudicator author
@@ -235,8 +244,8 @@ V2 carrier evidence.
 
 Author provenance recognizes only the exact stage-specific emitted label families:
 Step 3's hashed group-author labels for existing runs and pair-author labels for
-new runs; Step 5's group, lead, gate-batch and scoped
-gate/edge repairs; Step 7's adjudication, guard, preflight, cross-group, closure,
+new runs; Step 5's group and lead dispatches (historical runs may also carry
+gate-batch and scoped gate/edge repair labels); Step 7's adjudication, guard, preflight, cross-group, closure,
 repair and final-adjudicator queues; and Step 8's lead, changed/carried/close,
 impact and receipts repairs. Roles must match the corresponding emitter.
 Generic substring labels, other stages, malformed counters and reversed dispatch

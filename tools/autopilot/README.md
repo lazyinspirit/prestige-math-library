@@ -4,7 +4,7 @@ A deterministic TypeScript engine. Read the repository's WORKFLOW.md for its
 operating contract and CLAUDE.md for agent instructions.
 
 - stages/mathlib.mts: Steps1–4 and6–9, gates and scoped recovery.
-- stages/mathlib.step5.mts: direct group review, cross-group audit and closure.
+- stages/mathlib.step5.mts: independent reader/refuter pass, routed group adjudication, cross-group audit and closure.
 - src/executor.mts: barriers, dispatch/adoption, owner escalation and hot reload.
 - src/spec.mts: stage validation.
 - src/coverage.mts: successful result and artifact accounting.
@@ -43,9 +43,10 @@ and owner coordination. The verified checkpoint procedure in WORKFLOW.md preserv
 original evidence, creates no model-success receipts, and runs current gates
 before fresh cross-group closure and judgment.
 
-The active model boundary is stage-owned: Step 1 scaffolding uses Sol high and
-both Step 3 audit/author phases use Sol xhigh;
-Steps 5a/5b, Step 6 group readers, and Step 9 agent closure use DeepSeek V4.1
-Flash max. DeepSeek dispatches require the repository's single-tool live web
-bridge. It prefers Tavily and falls back to Firecrawl when Tavily is not
-configured. Deterministic tool plans remain model-free.
+The active model boundary is stage-owned: Step 1 scaffolding, Step 5a readers
+and Step 5a refuters use Sol high; both Step 3 audit/author phases and Step 5a
+adjudication use Sol xhigh; Step 5b, Step 6 group readers and Step 9 agent
+closure use DeepSeek V4.1 Flash max. DeepSeek dispatches require the
+repository's single-tool live web bridge. It prefers Tavily and falls back to
+Firecrawl when Tavily is not configured. Deterministic tool plans remain
+model-free.

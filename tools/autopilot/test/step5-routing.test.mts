@@ -1,5 +1,5 @@
-// Direct Step 5 and historical reader/refuter evidence: decisions,
-// ledger ownership, and legacy-run cutover safety.
+// The Step-5 reader pipeline, routed decisions, ledger ownership and
+// legacy-run cutover safety.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -9,9 +9,9 @@ import { join } from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 
 import { step5Stages } from '../stages/mathlib.step5.mts';
+import { holdStep5 } from '../stages/step5-hold.mts';
 import { Executor } from '../src/executor.mts';
 import { itemHashGuard } from '../../item-hash.mjs';
-import { writeAuditorCreatedBaseline, certifyAuditorCreatedItems } from '../../auditor-created-items.mjs';
 
 const REPO = join(import.meta.dirname, '..', '..', '..');
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
@@ -28,27 +28,21 @@ const deps = {
   alphaCohort: (_ctx: any, unit: string) => ['1', '2'].includes(String(unit)) ? ['1', '2'] : ['3'],
   resultPattern: (role: string, label: string) => new RegExp(`^${role}-(?:${role}-)?(?:${label})\\.result\\.json$`),
   touchesPath: (ctx: any) => `research/${ctx.run}-touches.json`,
-  MECHANICAL_REPAIRS: { 'splice-verify': true },
-  mechanicalRepair: async () => ({ outcome: 'clean' }),
-  isEdgeDecision: async () => false,
-  dispatchEdgeAdjudication: () => {},
 };
 const stages = step5Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step5-ctx-')), dispatchDir: '/tmp/none' };
 
-test('5a and 5b initial and repair Alpha dispatches use DeepSeek V4.1 Flash max', async () => {
+test('5a adjudication uses Sol xhigh while the 5b lead keeps DeepSeek V4.1 Flash max', async () => {
   const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
   const stage = byId('5a-adjudicate');
-  for (const label of ['5a-a', 'gate-batch-1-a']) {
-    assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication', label }), MODEL_PROFILE_NAMES.deepseekFlashMax);
-  }
+  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.solXHigh);
   assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
   assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
   assert.equal(byId('5b-cross').modelProfile({ role: 'tool' }), undefined);
 });
 
-test('5a escalation or sub-100% repair confidence holds any failed gate without dispatch', async () => {
+test('an escalated or sub-100% Step 5a verdict fails its gate and the stage only holds', async () => {
   const root = mkdtempSync(join(tmpdir(), 'step5-owner-'));
   try {
     mkdirSync(join(root, 'research'));
@@ -58,11 +52,6 @@ test('5a escalation or sub-100% repair confidence holds any failed gate without 
       { verdict: 'amended_repair', repair_confidence: 0.99, evidence: 'Uncertain hypothesis' },
     ]) {
       writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [{ obligation: 'reader:1:x', id: 'x', ...decision }] }));
-      const outcome = await byId('5a-adjudicate').onGateFailure({
-        ctx: { repo: root, run: 'r' }, failure: { id: 'risk-report' },
-        executor: { launch: () => assert.fail('owner hold must not dispatch') },
-      });
-      assert.match(outcome.owner.reason, /reader:1:x/);
       const result = spawnSync(process.execPath, [join(REPO, 'tools/step5-scope.mjs'), 'check-escalations', '--root', root, '--run', 'r'], { encoding: 'utf8' });
       assert.equal(result.status, 1);
       assert.match(result.stderr, /owner decision required/);
@@ -70,86 +59,52 @@ test('5a escalation or sub-100% repair confidence holds any failed gate without 
     writeFileSync(path, JSON.stringify({ decisions: [{ verdict: 'amended_repair', repair_confidence: 1 }] }));
     const clean = spawnSync(process.execPath, [join(REPO, 'tools/step5-scope.mjs'), 'check-escalations', '--root', root, '--run', 'r'], { encoding: 'utf8' });
     assert.equal(clean.status, 0, clean.stderr);
-    const gates = byId('5a-adjudicate').gates({ run: 'r' });
+    const stage = byId('5a-adjudicate');
+    const gates = stage.gates({ run: 'r' });
     assert.equal(gates[0].id, 'step5-owner-escalations');
+    assert.equal(stage.onGateFailure, undefined, 'a failed Step-5 gate is owner-held, never repair-dispatched');
+    assert.equal(stage.onHold, holdStep5);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('Step 5 has only direct group review and unchanged closure stages', async () => {
+test('Step 5a is prepare, the reader pipeline and adjudication; 5b closure is unchanged', async () => {
   const active = await import('../stages/mathlib.mts');
   const ids = active.stages.map((stage: any) => stage.id);
   assert.deepEqual(ids.slice(ids.indexOf('5a-prepare'), ids.indexOf('5b-close') + 1),
-    ['5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close']);
+    ['5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect', '5a-adjudicate',
+      '5a-baseline', '5b-edges', '5b-cross', '5b-close']);
   assert.equal(ids.some((id: string) => id.startsWith('review-')), false);
   assert.equal(active.stages.find((s: any) => s.id === '3b-author').pipeline, undefined);
+  assert.deepEqual(stages.filter((s: any) => s.pipeline).map((s: any) => [s.id, s.pipeline]),
+    [['5a-read', 'read'], ['5a-split', 'read'], ['5a-refute', 'read'], ['5a-collect', 'read']]);
+  for (const stage of stages.filter((s: any) => s.pipeline))
+    assert.equal(typeof stage.role, 'string', `${stage.id} declares the lane it pipes to`);
   assert.equal(byId('5a-adjudicate').pipeline, undefined);
   assert.deepEqual(byId('5a-adjudicate').cohort({}, '1'), ['1', '2']);
   const ctx = { ...ordinaryCtx, run: 'r' };
-  assert.equal(byId('5a-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-5a-direct.md');
+  assert.equal(byId('5a-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-5a-adjudicate.md');
   assert.equal(byId('5b-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-5b-edges.md');
   assert.deepEqual(byId('5a-prepare').plan(ctx)[0].argv,
     ['node', 'tools/step5-prepare.mjs', '--run', 'r']);
+  assert.deepEqual(byId('5a-prepare').artifacts(ctx),
+    ['research/r-step5-hash-1-pre.json', 'research/r-step5-hash-2-pre.json', 'research/r-step5-hash-3-pre.json']);
   assert.ok(byId('5a-adjudicate').gates(ctx).some((g: any) => g.id === 'step5-auditor-created-certifications'));
   assert.ok(byId('5a-adjudicate').gates(ctx).some((g: any) => g.id === 'step5-routing-adjudicate'));
   assert.ok(byId('5b-cross').gates(ctx).some((g: any) => g.id === 'step5-routing-final'));
+  assert.equal(byId('5a-adjudicate').onGateFailure, undefined);
+  assert.equal(byId('5a-adjudicate').onHold, holdStep5);
 });
 
-test('gate repair dispatch embeds the canonical protocol in its generated task', async () => {
-  for (const edge of [false, true]) {
-    const root = mkdtempSync(join(tmpdir(), 'step5-gate-task-'));
-    try {
-      mkdirSync(join(root, 'research'), { recursive: true });
-      mkdirSync(join(root, 'briefs', 'tasks'), { recursive: true });
-      for (const name of ['alpha-step5-gate.md', 'alpha-step5-edge.md', 'alpha-5b-edges.md']) {
-        execFileSync('cp', [join(REPO, 'briefs', 'tasks', name), join(root, 'briefs', 'tasks', name)]);
-      }
-      let dispatched: any;
-      const edgeStages = step5Stages({ ...deps, isEdgeDecision: async () => edge }) as any[];
-      const stage = edgeStages.find((entry) => entry.id === '5b-cross');
-      await stage.onGateFailure({
-        ctx: { run: 'r', repo: root }, stage, round: 1,
-        failure: { id: 'proof-contract', why: 'broken proof', output: 'ERROR [thm-example]: gap', liveItems: ['thm-example'] },
-        executor: { start(_stage: any, plan: any) { dispatched = plan; } },
-      });
-      assert.equal(typeof dispatched.task, 'string');
-      const generated = readFileSync(join(root, dispatched.task), 'utf8');
-      assert.match(generated, /## Canonical repair protocol/);
-      assert.match(generated, /# Step 5 gate repair/);
-      assert.match(generated, /# Step 5b — cross-batch audit and closure/);
-      assert.equal(generated.includes('# Step 5 undeclared-prerequisite repair'), edge);
-    } finally { rmSync(root, { recursive: true, force: true }); }
+test('no Step 5 stage carries a repair hook, budget or fingerprint', () => {
+  for (const id of ['5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect',
+    '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close']) {
+    assert.equal(byId(id).onGateFailure, undefined, `${id} must not launch a repair`);
+    assert.equal(byId(id).maxFixRounds, undefined, `${id} must not bound repair rounds`);
+    assert.equal(byId(id).perItemFixBudget, undefined, `${id} must not charge repair budgets`);
+    assert.equal(byId(id).repairFingerprint, undefined, `${id} must not rearm on a fingerprint`);
   }
-});
-
-test('a Step 5 stalemate repair claims its artifact-incomplete units', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'step5-stalemate-'));
-  try {
-    mkdirSync(join(root, 'research'), { recursive: true });
-    mkdirSync(join(root, 'briefs', 'tasks'), { recursive: true });
-    writeFileSync(join(root, 'briefs', 'tasks', 'alpha-step5-gate.md'),
-      readFileSync(join(REPO, 'briefs', 'tasks', 'alpha-step5-gate.md')));
-    let dispatched: any;
-    const stage = byId('5a-adjudicate');
-    await stage.onGateFailure({
-      ctx: { run: 'r', repo: root }, stage, round: 1,
-      failure: {
-        id: 'stage-stalemate',
-        why: 'unit(s) 8, 9, 10 covered but artifact-incomplete and no longer running',
-        units: ['8', '9', '10'],
-      },
-      executor: { start(_stage: any, plan: any) { dispatched = plan; } },
-    });
-    assert.deepEqual(dispatched.covers, ['8', '9', '10'],
-      'the live repair must suppress duplicate stalemate retries for the same units');
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test('adjudicating stages budget three tries per named item', () => {
-  for (const id of ['5a-adjudicate', '5b-cross']) {
-    assert.equal(byId(id).perItemFixBudget, 3);
-    assert.equal(byId(id).maxFixRounds, undefined);
-    assert.equal(typeof byId(id).onGateFailure, 'function');
-  }
+  assert.equal(byId('5a-adjudicate').onHold, holdStep5);
+  assert.equal(byId('5b-cross').onHold, holdStep5);
 });
 
 
@@ -189,28 +144,6 @@ test('legacy validate-plan and impact diagnostics keep per-subject repair budget
     'thm-compactness-bridge', 'topology-bridge']);
 });
 
-test('Step 5a retry usage cannot consume Step 5b subject allowances', () => {
-  const state: any = {
-    data: { gateAttempts: {}, stages: {}, blockers: [] },
-    save() {},
-    addBlocker() { return true; },
-  };
-  const executor = new Executor({
-    config: { run: 'r', repo: ordinaryCtx.repo, stateDir: '.autopilot', dispatchDir: '/tmp/none', argv: ['true'] } as any,
-    stages: [], state, adapter: {} as any,
-    reporter: { notify() {}, event() {}, report() {} },
-  });
-  const failure: any = { id: 'precheck', output: 'ERROR proof [thm-example-subject]: broken' };
-  for (let i = 0; i < 3; i += 1) {
-    assert.deepEqual((executor as any).chargeItems({ id: '5a-adjudicate' }, failure, 3).live,
-      ['thm-example-subject']);
-  }
-  assert.deepEqual((executor as any).chargeItems({ id: '5a-adjudicate' }, failure, 3).spent,
-    ['thm-example-subject']);
-  assert.deepEqual((executor as any).chargeItems({ id: '5b-cross' }, failure, 3).live,
-    ['thm-example-subject']);
-});
-
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'step5-'));
   mkdirSync(join(root, 'research'), { recursive: true });
@@ -247,6 +180,24 @@ function prepareSplit(fx: ReturnType<typeof fixture>) {
   // typed subcommands must retain the old hash-then-split, fail-fast order.
   fx.run('post-reader', '--run', 'r', '--batch', '1');
 }
+
+test('5a-prepare freezes every batch pre-hash and the auditor baseline once', () => {
+  const fx = fixture();
+  try {
+    // The author check is a dispatch-time tool; this test owns the prepare
+    // contract, so a stub stands in for a passing check.
+    writeFileSync(join(fx.root, 'tools', 'tsx-run.mjs'), 'process.exit(0);\n');
+    execFileSync(process.execPath,
+      [join(REPO, 'tools', 'step5-prepare.mjs'), '--run', 'r', '--root', fx.root],
+      { cwd: fx.root, encoding: 'utf8' });
+    const pre = JSON.parse(readFileSync(join(fx.root, 'research', 'r-step5-hash-1-pre.json'), 'utf8'));
+    assert.equal(pre.label, 'pre');
+    assert.deepEqual([...pre.manifest].sort(), [...fx.ids].sort());
+    assert.ok(existsSync(join(fx.root, 'research', 'r-step5-auditor-baseline.json')));
+    assert.equal(existsSync(join(fx.root, 'research', 'r-step5-scope-1.json')), false,
+      'prepare freezes the baseline; the read pipeline writes the routed scope');
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
 
 test('split isolates each batch and includes touched high-risk items in refuter scope', () => {
   const fx = fixture();
@@ -729,150 +680,110 @@ test('a missing pre-reader hash blocks split instead of guessing', () => {
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-test('batch-local preparation leaves unrelated unfinished manifests untouched', () => {
+test('5a owes a decision for touched and page carriers and none for an untouched item', () => {
+  // The adjudicator's obligations are exactly touched, page, reader and
+  // flagged. An untouched, unflagged item proceeds to the gate, so inventing a
+  // decision for it is an error rather than harmless extra evidence.
   const fx = fixture();
   try {
-    writeFileSync(join(fx.root, 'research', 'r-batch-2.pages.json'), JSON.stringify({ pages: [{
-      id: 'unfinished', path: 'library/test/unfinished.md', items: [{ id: 'thm-unwritten', deps: [] }],
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+    writeFileSync(join(fx.root, 'items', 'thm-touched-high-risk.md'),
+      readFileSync(join(fx.root, 'items', 'thm-touched-high-risk.md'), 'utf8') + '\nReader repair.\n');
+    writeFileSync(join(fx.root, 'library', 'test', 'p.md'),
+      '---\npage: p\ntitle: P\n---\n\nCorrected first summary.\n\nSecond summary.\n');
+    fx.run('post-reader', '--run', 'r', '--batch', '1');
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research', 'r-step5-scope-1.json'), 'utf8'));
+    assert.deepEqual(scope.touched, ['thm-touched-high-risk']);
+    assert.deepEqual(scope.pages_touched, ['p']);
+    assert.ok(!scope.touched.includes('lem-ordinary-item'), 'an untouched item owes nothing');
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: scope.refuter_scope, not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), [
+      { defect_id: 'r-D1', run: 'r', subject: 'thm-touched-high-risk', caught_at_stage: '5a-adjudicate', severity: 'fatal', disposition: 'fixed' },
+      { defect_id: 'r-D2', run: 'r', subject: 'p', caught_at_stage: '5a-adjudicate', severity: 'nonfatal', disposition: 'fixed' },
+    ].map((row) => JSON.stringify(row)).join('\n') + '\n');
+    const path = join(fx.root, 'research', 'r-alpha-a-5a-decisions.json');
+    const owed = [
+      { obligation: 'touched:1:thm-touched-high-risk', id: 'thm-touched-high-risk', route: 'touched',
+        verdict: 'accepted_repair', defect_ids: ['r-D1'], evidence: 'The reader repair is exact on the current carrier.' },
+      { obligation: 'page:1:p', id: 'p', route: 'page',
+        verdict: 'accepted_repair', defect_ids: ['r-D2'], evidence: 'The corrected summary matches the authored items.' },
+    ];
+    writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: owed }));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [...owed, {
+      obligation: 'touched:1:lem-ordinary-item', id: 'lem-ordinary-item', route: 'touched',
+      verdict: 'accepted_repair', defect_ids: ['r-D1'], evidence: 'Not owed: untouched and unflagged.',
     }] }));
-    fx.run('prepare-direct', '--run', 'r', '--batch', '1');
-    assert.equal(existsSync(join(fx.root, 'research', 'r-step5-scope-1.json')), true);
-    assert.equal(existsSync(join(fx.root, 'research', 'r-step5-scope-2.json')), false);
-    assert.equal(existsSync(join(fx.root, 'research', 'r-step5-hash-2-pre-5a.json')), false);
-    assert.match(fx.attempt('prepare-direct', '--run', 'r', '--batch', '999').stderr, /Unknown batch/);
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-extra/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-test('direct review closes without reader/refuter artifacts and requires every decision', () => {
-  const fx = fixture();
-  try {
-    rmSync(join(fx.root, 'research', 'r-reader-findings-1.json'));
-    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
-    fx.run('prepare-direct', '--run', 'r');
-    const path = join(fx.root, 'research', 'r-alpha-a-5a-decisions.json');
-    const decisions = [...fx.ids, 'p'].map((id) => ({
-      obligation: `authored:1:${id}`, id, route: id === 'p' ? 'page' : 'item',
-      verdict: 'accepted', evidence: 'Read the authored argument and checked each inference.', defect_ids: [],
-    }));
-    writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions }));
-    fx.run('stamp', '--run', 'r');
-    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
-    const before = readFileSync(join(fx.root, 'research', 'r-step5-hash-1-pre-5a.json'), 'utf8');
-    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post-5a');
-    fx.run('check', '--run', 'r', '--phase', 'final');
-    fx.run('prepare-direct', '--run', 'r');
-    assert.equal(readFileSync(join(fx.root, 'research', 'r-step5-hash-1-pre-5a.json'), 'utf8'), before);
-    const doc = JSON.parse(readFileSync(path, 'utf8'));
-    doc.decisions.pop();
-    writeFileSync(path, JSON.stringify(doc));
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-missing/);
-    doc.decisions = decisions.map((d) => ({ ...d, verdict: 'escalated', evidence: 'Substantial missing supplier cannot be authored locally.' }));
-    writeFileSync(path, JSON.stringify(doc));
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /owner-escalation/);
-  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+test('the reader pipeline stages declare their frozen prompts, schemas and artifacts', () => {
+  const ctx = { ...ordinaryCtx, run: 'r' };
+  const reader = byId('5a-read');
+  const readerPlan = reader.plan(ctx, ['1'])[0];
+  assert.equal(readerPlan.role, 'reader');
+  assert.equal(readerPlan.brief, 'briefs/reader.md');
+  assert.equal(readerPlan.task, 'briefs/tasks/alpha-5a-reader.md');
+  assert.equal(readerPlan.outputSchema, 'briefs/schemas/reader-findings.json');
+  assert.equal(readerPlan.resultArtifact, 'research/r-reader-findings-1.json');
+  assert.equal(readerPlan.timeout, 14400);
+  assert.equal(reader.labelFor('1'), 'reader-1');
+  assert.ok(reader.pattern.test('reader-reader-1.result.json'), 'the dispatcher prefixes the role');
+  assert.ok(!reader.pattern.test('reader-1.result.json'));
+  assert.deepEqual(reader.artifacts(ctx, '1'),
+    ['research/r-reader-1.md', 'research/r-reader-findings-1.json']);
+
+  const refuter = byId('5a-refute');
+  const refuterPlan = refuter.plan(ctx, ['1'])[0];
+  assert.equal(refuterPlan.role, 'refuter');
+  assert.equal(refuterPlan.brief, 'briefs/refuter.md');
+  assert.equal(refuterPlan.task, 'briefs/tasks/alpha-5a-refuter.md');
+  assert.equal(refuterPlan.outputSchema, 'briefs/schemas/refute-report.json');
+  assert.equal(refuterPlan.resultArtifact, 'research/r-refute-1.json');
+  assert.equal(refuterPlan.timeout, 10800);
+  assert.equal(refuter.labelFor('1'), 'refute-1');
+  assert.ok(refuter.pattern.test('refuter-refute-1.result.json'));
+  assert.deepEqual(refuter.artifacts(ctx, '1'), 'research/r-refute-1.json');
+
+  for (const [id, label, argv] of [
+    ['5a-split', 'split-1', ['node', 'tools/step5-scope.mjs', 'post-reader', '--run', 'r', '--batch', '1']],
+    ['5a-collect', 'collect-1', ['node', 'tools/step5-scope.mjs', 'collect', '--run', 'r', '--batch', '1']],
+  ] as const) {
+    const stage = byId(id);
+    const plan = stage.plan(ctx, ['1'])[0];
+    assert.equal(plan.role, 'tool');
+    assert.equal(plan.label, label);
+    assert.deepEqual(plan.argv, argv);
+    assert.equal(plan.timeout, 600);
+    assert.equal(stage.pipeline, 'read');
+  }
 });
 
-test('direct review includes local lemmas and rejects stale or unaccounted repairs', () => {
-  const fx = fixture();
-  try {
-    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
-    fx.run('prepare-direct', '--run', 'r');
-    const manifest = join(fx.root, 'research', 'r-batch-1.pages.json');
-    const pages = JSON.parse(readFileSync(manifest, 'utf8'));
-    pages[0].items.push('lem-local-supplier');
-    writeFileSync(manifest, JSON.stringify(pages));
-    writeFileSync(join(fx.root, 'items', 'lem-local-supplier.md'), 'A fully authored local lemma.');
-    const path = join(fx.root, 'research', 'r-alpha-a-5a-decisions.json');
-    const doc = { version: 1, run: 'r', group: 'a', decisions: [...fx.ids, 'p'].map((id) => ({
-      obligation: `authored:1:${id}`, id, route: id === 'p' ? 'page' : 'item',
-      verdict: 'accepted', evidence: 'Checked written proof.', defect_ids: [] as string[],
-    })) };
-    writeFileSync(path, JSON.stringify(doc));
-    fx.run('stamp', '--run', 'r');
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /lem-local-supplier.*did not decide/);
-    doc.decisions.push({ obligation: 'authored:1:lem-local-supplier', id: 'lem-local-supplier',
-      route: 'item', verdict: 'accepted', evidence: 'Proved local supplier independently of its consumer.', defect_ids: [] });
-    writeFileSync(path, JSON.stringify(doc));
-    fx.run('stamp', '--run', 'r');
-    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
-    writeFileSync(join(fx.root, 'items', 'lem-local-supplier.md'), 'Changed after review.');
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-stale/);
-    doc.decisions[0].verdict = 'repaired';
-    writeFileSync(path, JSON.stringify(doc));
-    fx.run('stamp', '--run', 'r');
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /repair-confidence|decision-ledger-refs/);
-  } finally { rmSync(fx.root, { recursive: true, force: true }); }
-});
-
-test('direct Step-5 closure uses full current certification without demanding a supplier self-verdict', () => {
-  const fx = fixture();
-  try {
-    writeFileSync(join(fx.root, 'research/defect-ledger.jsonl'), '');
-    writeAuditorCreatedBaseline(fx.root, 'r', 5);
-    fx.run('prepare-direct', '--run', 'r');
-    const manifestPath = join(fx.root, 'research/r-batch-1.pages.json');
-    const pages = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    pages[0].items.push('lem-local-supplier');
-    writeFileSync(manifestPath, JSON.stringify(pages));
-    writeFileSync(join(fx.root, 'items/lem-local-supplier.md'), 'A fully authored local lemma.');
-    const decisionPath = join(fx.root, 'research/r-alpha-a-5a-decisions.json');
-    writeFileSync(decisionPath, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [...fx.ids, 'p'].map(id => ({
-      obligation: `authored:1:${id}`, id, route: id === 'p' ? 'page' : 'item',
-      verdict: 'accepted', evidence: 'Read every original argument.', defect_ids: [],
-    })) }));
-    fx.run('stamp', '--run', 'r');
-    mkdirSync(join(fx.root, 'research/r-dispatch'));
-    writeFileSync(join(fx.root, 'research/r-dispatch/author.result.json'), JSON.stringify({
-      run: 'r', role: 'alpha', label: '5a-a', covers: ['1'], ok: true,
-      started_at: '2000-01-01T00:00:00Z', ended_at: '2100-01-01T00:00:00Z',
-    }));
-    certifyAuditorCreatedItems(fx.root, 'r', 5);
-    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
-    const contractsPath = join(fx.root, 'research/r-batch-1.proof-contracts.json');
-    const contracts = JSON.parse(readFileSync(contractsPath, 'utf8'));
-    contracts.contracts['lem-local-supplier'] = { risk: 'high' };
-    writeFileSync(contractsPath, JSON.stringify(contracts));
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr,
-      /stale Step 5 auditor-created certification carriers/);
-    certifyAuditorCreatedItems(fx.root, 'r', 5);
-    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
-    const decisions = JSON.parse(readFileSync(decisionPath, 'utf8'));
-    assert.ok(!decisions.decisions.some((row: any) => row.id === 'lem-local-supplier'));
-    decisions.decisions.shift(); writeFileSync(decisionPath, JSON.stringify(decisions));
-    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-missing/);
-  } finally { rmSync(fx.root, { recursive: true, force: true }); }
-});
-
-test('direct preparation refuses to overwrite historical Step 5 evidence', () => {
-  const fx = fixture();
-  try {
-    prepareSplit(fx);
-    const path = join(fx.root, 'research', 'r-step5-scope-1.json');
-    const before = readFileSync(path, 'utf8');
-    assert.match(fx.attempt('prepare-direct', '--run', 'r').stderr, /requires owner migration/);
-    assert.equal(readFileSync(path, 'utf8'), before);
-  } finally { rmSync(fx.root, { recursive: true, force: true }); }
-});
-
-test('5b content gates route exclusively foreign diagnostics to the actual author', async () => {
+test('5b content gates hold for the owner instead of racing a peer author', async () => {
   const root = mkdtempSync(join(tmpdir(), 'step5-peer-author-'));
   try {
     mkdirSync(join(root, 'research'));
-    writeFileSync(join(root, 'research/r-batch-1.pages.json'), JSON.stringify([
-      { id: 'owned-page', items: [{ id: 'thm-owned' }] },
-    ]));
     const stage = byId('5b-cross');
+    assert.equal(stage.onGateFailure, undefined,
+      'a failing 5b gate is owner-held, never repair-dispatched');
     for (const [id, output] of [
       ['precheck', 'REPAIR items/thm-foreign.md: canonical labels'],
       ['rendercheck', 'ERROR [thm-foreign]: malformed display'],
       ['depcheck', '1 WARNING(s):\n [orphan] items/thm-owned.md\n1 ERROR(s):\n [bad] items/thm-foreign.md'],
     ]) {
-      const outcome = await stage.onGateFailure({ ctx: { repo: root, run: 'r' }, stage, round: 1,
-        failure: { id, output, liveItems: ['*'] },
-        executor: { start() { assert.fail('a 5b worker must not race the peer author'); } } });
-      assert.match(outcome.owner.reason, /thm-foreign/);
-      assert.doesNotMatch(outcome.owner.reason, /thm-owned/);
+      const outcome = await stage.onHold({ ctx: { repo: root, run: 'r' }, stage,
+        failure: { id, output, liveItems: ['*'] } });
+      assert.match(outcome.owner.reason, /r-step5-blockers\.json/);
     }
+    const report = JSON.parse(readFileSync(join(root, 'research/r-step5-blockers.json'), 'utf8'));
+    assert.match(report.failures.at(-1).output, /thm-foreign/,
+      'the owner sees the foreign carrier in the held gate output');
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 

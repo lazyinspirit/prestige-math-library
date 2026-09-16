@@ -1,16 +1,18 @@
 // A repair dispatch is a dispatch: same input resolution, same identity rules.
-// Step-3 owner holds and decision recovery are covered by scaffold-final.test.mts.
+// Step-3 owner holds are covered by scaffold-final.test.mts and the Step-5
+// owner hold by step5-hold.test.mts.
 //
-// WHY. The 5a-adjudicate repair loop's first live firing burned all three rounds
-// without launching a single agent: hook-started dispatches bypass the plan
-// loop where brief/task candidate arrays were resolved, so dispatch.mjs
-// received a comma-joined ARRAY as --task and died on its usage check —
-// twelve failed dispatches, then repair-exhausted, on a gate failure whose
-// receipt was correct and specific. And the hook dispatched one anonymous
-// lane per insufficient PAGE — same prompt, covers [], no identity — so two
-// pages in one batch meant two writers on one batch's files. These tests pin
-// the fixes: resolution lives on start()'s path, and the hook dispatches one
-// lane per owning BATCH with the batch as its cover.
+// WHY. The Step-5a repair loop (deleted in the 2026-09-16 rebuild) burned all
+// three rounds of its first live firing without launching a single agent:
+// hook-started dispatches bypass the plan loop where brief/task candidate
+// arrays were resolved, so dispatch.mjs received a comma-joined ARRAY as
+// --task and died on its usage check — twelve failed dispatches, then
+// repair-exhausted, on a gate failure whose receipt was correct and specific.
+// And the hook dispatched one anonymous lane per insufficient PAGE — same
+// prompt, covers [], no identity — so two pages in one batch meant two writers
+// on one batch's files. These tests pin the fixes wherever a hook survives:
+// resolution lives on start()'s path, and a hook dispatches one lane per
+// owning BATCH with the batch as its cover.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync, utimesSync } from 'node:fs';
@@ -102,7 +104,7 @@ test('resolveInput picks the first existing candidate, else names the last', () 
 test('a hook-started dispatch with no existing input becomes a blocker, not a spawn', () => {
   const repo = fixtureRepo();
   const ex = executorAt(repo);
-  const s3: any = stages.find((s: any) => s.id === '5a-adjudicate');
+  const s3: any = stages.find((s: any) => s.id === '7-adjudicate');
   ex.start(s3, {
     role: 'beta', label: 'scaffold-fix-1-b9', job: 'scaffolding', covers: ['9'],
     brief: 'research/demo-absent-brief.md',
@@ -533,7 +535,7 @@ test('a prompt file carrying an identity placeholder blocks before any spawn', (
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-poisoned.task.md'), 'the grammar example says (order <n>)\n');
   const ex = executorAt(repo);
-  const s3: any = stages.find((s: any) => s.id === '5a-adjudicate');
+  const s3: any = stages.find((s: any) => s.id === '7-adjudicate');
   ex.start(s3, {
     role: 'beta', label: 'scaffold-fix-1-b4', job: 'scaffolding', covers: ['4'],
     brief: 'research/demo-generic.task.md',
@@ -544,21 +546,6 @@ test('a prompt file carrying an identity placeholder blocks before any spawn', (
   assert.ok(ex.state.data.blockers.some((b: any) => b.message.includes('<n>') && b.message.includes('demo-poisoned')),
     'the blocker names the token and the file');
   rmSync(repo, { recursive: true, force: true });
-});
-
-test('contract detector and structural failures reach one complete repair assignment', async () => {
-  const repo = fixtureRepo();
-  try {
-    const stage: any = stages.find((s: any) => s.id === '5a-adjudicate');
-    const started: any[] = [];
-    await stage.onGateFailure({ ctx: { run: 'demo', repo }, stage, round: 1,
-      executor: { start: (_s: any, plan: any) => started.push(plan) },
-      failure: { id: 'boundary-audit', advisory: [{ id: 'citation-fidelity' }, { id: 'proof-contract' }] } });
-    assert.equal(started.length, 1);
-    assert.equal(started[0].job, 'adjudication');
-    const evidence = JSON.parse(readFileSync(join(repo, 'research/demo-5a-adjudicate-gate-batch-1.json'), 'utf8'));
-    assert.deepEqual(evidence.failures.map((entry: any) => entry.id), ['boundary-audit', 'citation-fidelity', 'proof-contract']);
-  } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
 test('boundary-audit respects an Alpha-upheld row and reports it', () => {
@@ -778,107 +765,6 @@ test('the splice-verify repair updates per batch, because --update needs --batch
   }
   assert.deepEqual(cmds.map((c) => c[c.indexOf('--batch') + 1]), ['1', '4']);
   rmSync(repo, { recursive: true, force: true });
-});
-
-// The review stage enumerated three gate ids and fell through for everything else, so a
-// failure that HAS a mechanical repair burned rounds dispatching nothing.
-test('step 5a includes unresolved mechanical residue in the repair envelope', async () => {
-  const repo = fixtureRepo();
-  writeFileSync(join(repo, 'research', 'demo-batch-1.pages.json'), '[]');
-  const s5: any = stages.find((s: any) => s.id === '5a-adjudicate');
-  // splice-verify has a table entry: it must be repaired, never dispatched to
-  // the contract-audit Alpha, which is for candidate detector reads.
-  const mechanicalPlans: any[] = [];
-  await s5.onGateFailure({
-    ctx: { run: 'demo', repo },
-    executor: { start: (_s: any, p: any) => mechanicalPlans.push(p) },
-    stage: s5, round: 1,
-    failure: { id: 'splice-verify', why: '' },
-  });
-  assert.equal(mechanicalPlans.length, 1);
-  assert.match(readFileSync(join(repo, 'research/demo-5a-adjudicate-gate-batch-1.json'), 'utf8'), /Mechanical residue/);
-  // and a detector failure still routes to the Alpha
-  const started: any[] = [];
-  await s5.onGateFailure({
-    ctx: { run: 'demo', repo },
-    executor: { start: (_s: any, p: any) => started.push(p) },
-    stage: s5, round: 1,
-    failure: { id: 'citation-fidelity', why: '' },
-  });
-  assert.equal(started.length, 1);
-  assert.match(readFileSync(join(repo, started[0].task), 'utf8'), /boundary\/citation candidates/);
-  rmSync(repo, { recursive: true, force: true });
-});
-
-// An edge decision reaches the same lane wherever it surfaces. A 5a Alpha
-// repairing an item under its step-5 licence can introduce a dependency its
-// page does not declare, long after the splice — frontier-16 did, once, at
-// step 3, and it fell through for want of a route.
-test('step 5a routes an undeclared-prereq to the edge-adjudication lane', async () => {
-  const repo = fixtureRepo();
-  writeFileSync(join(repo, 'research', 'demo-alpha-step4.task.md'), 'adjudicate\n');
-  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
-    pages: [
-      { order: 0.5, id: 'dep-page', kind: 'A', requires: [], items: [{ id: 'def-t' }] },
-      { order: 1, id: 'low-page', kind: 'A', requires: [], items: [{ id: 'def-a', deps: ['def-t'] }] },
-    ],
-  }, null, 2));
-  const started: any[] = [];
-  const s5: any = stages.find((s: any) => s.id === '5a-adjudicate');
-  await s5.onGateFailure({
-    ctx: { run: 'demo', repo },
-    executor: { start: (_s: any, p: any) => started.push(p) },
-    stage: s5, round: 1,
-    failure: { id: 'validate-plan', why: 'FAIL' },
-  });
-  assert.equal(started.length, 1, 'the edge must reach a lane, not fall through');
-  assert.equal(started[0].job, 'adjudication');
-  assert.match(readFileSync(join(repo, started[0].task), 'utf8'), /alpha-step5-edge\.md/);
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('step 5a routes a validate-plan failure of another class to gate adjudication', async () => {
-  // BEHAVIOUR CHANGED 2026-08-24, deliberately. This asserted that a
-  // non-edge validate-plan failure reached the BLOCKER path untouched, which is
-  // what the old three-id allow-list did with every unnamed gate. frontier-18
-  // produced three blockers of that shape in one run — depcheck, rendercheck and
-  // content-policy-items — all adjudicable from disk. A gate failure is a
-  // finding; it now goes to an Alpha, whose task is explicit that narrowing a
-  // detector to clear a run is never its call.
-  const repo = fixtureRepo();
-  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
-    pages: [{ order: 1, id: 'solo', kind: 'A', requires: [], items: [{ id: 'def-a' }] }],
-  }, null, 2));
-  const s5: any = stages.find((s: any) => s.id === '5a-adjudicate');
-  const started: any[] = [];
-  await s5.onGateFailure({
-    ctx: { run: 'demo', repo },
-    executor: { start: (_s: any, d: any) => started.push(d) },
-    stage: s5, round: 1,
-    failure: { id: 'validate-plan', why: 'FAIL' },
-  });
-  assert.equal(started.length, 1, 'an unrouted gate failure must reach an Alpha, not a bare return');
-  assert.equal(started[0].role, 'alpha');
-  assert.equal(started[0].job, 'adjudication');
-  assert.equal(started[0].label, 'gate-batch-1-all');
-  assert.match(readFileSync(join(repo, 'research/demo-5a-adjudicate-gate-batch-1.json'), 'utf8'), /validate-plan/);
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('an unknown gate id still reaches an Alpha — the route is a default, not a list', () => {
-  // The property that matters: no enumeration of "failures worth routing",
-  // because such a list is always one entry short of the next incident.
-  const s5: any = stages.find((s: any) => s.id === '5a-adjudicate');
-  const started: any[] = [];
-  return s5.onGateFailure({
-    ctx: { run: 'demo', repo: fixtureRepo() },
-    executor: { start: (_s: any, d: any) => started.push(d) },
-    stage: s5, round: 2,
-    failure: { id: 'some-gate-invented-next-year', why: 'FAIL' },
-  }).then(() => {
-    assert.equal(started.length, 1);
-    assert.equal(started[0].label, 'gate-batch-2-all');
-  });
 });
 
 // SPAWN STAGGER (owner, 2026-08-24). Caps say how many agents may run; the

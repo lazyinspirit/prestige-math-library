@@ -62,7 +62,7 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3 auditors and authors use Sol xhigh while Step 5 and Step 6 readers use DeepSeek Flash max', () => {
+test('Step 3 authors and Step 5a adjudicators use Sol xhigh while Step 5b and Step 6 readers use DeepSeek Flash max', () => {
   const authorStage = stage('3b-author');
   const author = { role: 'alpha-high', job: 'authoring' };
   assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.solXHigh);
@@ -72,7 +72,7 @@ test('Step 3 auditors and authors use Sol xhigh while Step 5 and Step 6 readers 
   assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.solXHigh);
 
   const adjudicate = stage('5a-adjudicate');
-  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solXHigh);
   const cross = stage('5b-cross');
   assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
@@ -83,6 +83,20 @@ test('Step 3 auditors and authors use Sol xhigh while Step 5 and Step 6 readers 
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
     'the judge tool is not a Step-6 reader agent');
+});
+
+test('Step 5a readers and refuters use Sol high and the tool lanes stay model-free', () => {
+  for (const [id, role] of [['5a-read', 'reader'], ['5a-refute', 'refuter']] as const) {
+    const st = stage(id);
+    const plan = st.plan(ctx, ['1'])[0];
+    assert.equal(plan.role, role);
+    assert.equal(selected(st, plan), MODEL_PROFILE_NAMES.solHigh);
+    assert.equal(selected(st, { role: 'tool' }), undefined, `${id} keeps its tool lane model-free`);
+  }
+  for (const id of ['5a-prepare', '5a-split', '5a-collect', '5a-baseline', '5b-edges', '5b-close']) {
+    const st = stage(id);
+    assert.equal(selected(st, st.plan(ctx, ['1'])[0]), undefined, `${id} is a deterministic tool stage`);
+  }
 });
 
 test('Step 1 scaffolders use Sol high', () => {

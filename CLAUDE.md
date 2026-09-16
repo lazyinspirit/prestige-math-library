@@ -104,15 +104,19 @@ Record complete authored arguments/contracts before closing item decisions.
 Step 4 retains mechanical plan splicing and its post-author snapshot; take the
 pre-author baseline before Step 3 authors start.
 
-**Step 5.** Use direct group adjudication of authored items/pages in 5a, then
-cross-group reconciliation and closure in 5b. Do not repeat Step 3's scaffold
-audit. Be impartial,
-state uncertainty honestly, and read authoritative sources for unfamiliar
-mathematics. Accept sound content or repair locally, fully authoring necessary
-definitions and lemmas in assigned existing A pages. Escalate substantial unmet
-prerequisites that cannot be supplied locally; never accept unresolved mathematics.
-Record every published defect in the canonical ledger. Preserve cross-group
-dependency, impact and exact-hash closure checks.
+**Step 5.** Step 5a runs one independent reader per batch on another batch's
+files, then a read-only refuter pass over every untouched carrier, every
+HIGH/CRITICAL item and every page carrier, then group adjudication of the
+routed obligations (touched, page, reader, refuter); Step 5b reconciles
+cross-group dependencies and closes. Do not repeat Step 3's scaffold audit. Be
+impartial, state uncertainty honestly, and read authoritative sources for
+unfamiliar mathematics. Accept sound content or repair locally, fully authoring
+necessary definitions and lemmas in assigned existing A pages. Escalate
+substantial unmet prerequisites that cannot be supplied locally; never accept
+unresolved mathematics. Record every published defect in the canonical ledger.
+Preserve cross-group dependency, impact and exact-hash closure checks. Every 5a
+and 5b gate failure is an owner hold: the owner repairs the rejected items and
+recertifies what the repair invalidates, then retries the same gate.
 
 **Step 7.** Repair and reconcile all assigned findings before rejudging.
 The engine runs one rejudge, then one terminal final-adjudication pass. No

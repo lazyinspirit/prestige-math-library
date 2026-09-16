@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Compute and close Step 5 routing from disk.
-// Version 3 reviews authored content directly; version 2 validates historical evidence.
+// Version 2 is the active route: the reader/refuter pass, its exact coverage
+// and the obligations group Alpha adjudicates. Version 3 is read-only support
+// for imported or historical direct-review evidence; nothing writes it.
 //
-// Historical version-2 routes only:
 //   changed by reader                 -> group Alpha
 //   untouched, flagged by refuter     -> group Alpha
 //   untouched, no refuter finding     -> final gates
@@ -30,7 +31,7 @@ const ROOT = resolve(option('root', join(dirname(fileURLToPath(import.meta.url))
 const R = (...parts) => join(ROOT, ...parts);
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const run = option('run');
-if (!run) fail('usage: step5-scope.mjs prepare-direct|hash|stamp|post-5a|check --run <run> [--batch N] [--label pre-5a|post-5a] [--phase adjudicate|final]');
+if (!run) fail('usage: step5-scope.mjs hash|post-reader|split|collect|post-5a|stamp|check --run <run> [--batch N] [--label pre|post|pre-5a|post-5a] [--phase adjudicate|final]');
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const hashPath = (batch, label) => R('research', `${run}-step5-hash-${batch}-${label}.json`);
@@ -421,38 +422,6 @@ if (command === 'post-5a') {
   process.exit(0);
 }
 
-
-if (command === 'prepare-direct') {
-  const assignment = groups();
-  const manifests = manifestItems();
-  if (!Object.keys(manifests).length) fail('step5-scope: no batches to prepare', 1);
-  const selected = option('batch') ? [String(option('batch'))] : Object.keys(manifests);
-  for (const batch of selected) {
-    if (!Object.hasOwn(manifests, batch)) fail(`Unknown batch ${batch}`, 1);
-  }
-  // Never convert a run whose independent review has already started.
-  for (const batch of selected) {
-    if (assignment.rows.filter((group) => group.covers.includes(batch)).length !== 1) {
-      fail(`batch ${batch} needs exactly one Alpha owner`, 1);
-    }
-    if (existsSync(scopePath(batch))) {
-      const scope = readJson(scopePath(batch), 'existing Step 5 scope');
-      if (scope.version !== 3) fail('Existing legacy Step 5 evidence requires owner migration; refusing to overwrite it', 1);
-    }
-  }
-  for (const batch of selected) {
-    if (existsSync(scopePath(batch))) continue; // frozen baseline survives retries
-    runChecked(selfCommand('hash', '--batch', batch, '--label', 'pre-5a'), 'authored baseline');
-    const baseline = readJson(hashPath(batch, 'pre-5a'), 'authored baseline');
-    writeFileSync(scopePath(batch), JSON.stringify({
-      version: 3, run, batch, group: assignment.byBatch[batch],
-      baseline_sha256: sha256(readFileSync(hashPath(batch, 'pre-5a'))),
-      items: baseline.manifest, pages: baseline.page_manifest,
-    }, null, 2) + '\n');
-  }
-  console.log('step5-scope: direct group review prepared');
-  process.exit(0);
-}
 
 // Current manifests include ad-hoc definitions/lemmas. Final checks instead use
 // the sealed post-5a inventory: later 5b changes belong to the unchanged edge audit.

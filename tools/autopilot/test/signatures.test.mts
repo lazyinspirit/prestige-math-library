@@ -76,7 +76,12 @@ test('newly generated tasks cover every current stage, including the composed re
       { cwd: REPO, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stdout + result.stderr);
   }
-  assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-5a-direct.task.md`)));
+  for (const name of ['alpha-5a-reader', 'alpha-5a-refuter', 'alpha-5a-adjudicate']) {
+    assert.ok(existsSync(join(REPO, 'research', `${run}-${name}.task.md`)),
+      `${name} is a current Step-5a dispatch prompt`);
+  }
+  assert.equal(existsSync(join(REPO, 'research', `${run}-alpha-5a-direct.task.md`)), false,
+    'direct group review was replaced, so its prompt must not be regenerated');
   assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-step7.task.md`)));
   const betaTask = readFileSync(join(REPO, 'research', `${run}-beta-1.task.md`), 'utf8');
   assert.match(betaTask, new RegExp(`research/${run}-owner-authoring-direction\\.md`));

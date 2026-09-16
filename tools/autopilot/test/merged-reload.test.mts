@@ -10,6 +10,7 @@ test('continuation reload observes canonical and Step-5 edits in the same proces
   try {
     const entry = join(root, 'mathlib.merged.mts');
     copyFileSync(new URL('../stages/mathlib.merged.mts', import.meta.url), entry);
+    copyFileSync(new URL('../stages/step5-hold.mts', import.meta.url), join(root, 'step5-hold.mts'));
     const writeCanonical = (label: string) => writeFileSync(join(root, 'mathlib.mts'), `
       import { readFileSync } from 'node:fs';
       export const authoredContentGates = () => [];

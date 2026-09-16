@@ -35,7 +35,8 @@ Authors sharing a batch run sequentially. Across batches, consumers wait for
 artifact-complete transitive in-run prerequisites while independent branches run in parallel.
 They may supply local definitions/lemmas; substantial prerequisites and potential
 published defects go to the owner. Step 4 splices the plan and snapshots content.
-Step 5a reviews authored content; Step 5b reconciles dependencies and closes it.
+Step 5a runs independent reviewers, read-only refuters and routed group
+adjudication; Step 5b reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when unsure.
 Step 7 is repairs/checks → one rejudge → one final adjudication → Step 8.
 Unresolved terminal findings stop the run; no post-final repair loop exists.

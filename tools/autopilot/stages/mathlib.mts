@@ -2084,8 +2084,6 @@ export const stages = [
   ...step5Stages({
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
-    MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision,
-    dispatchSourceScouts,
   }),
 
   // The group partition, rendered BEFORE the sweep so the step-6 readers have

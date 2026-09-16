@@ -12,17 +12,21 @@ import { recordStep3 } from '../../step3-decisions.mjs';
 const repo = fileURLToPath(new URL('../../..', import.meta.url));
 const stage = (id: string): any => stages.find(s => s.id === id);
 
-test('author, splice, review, cross-closure and judgment are ordered barriers', () => {
+test('author, splice, the reader pipeline, cross-closure and judgment keep their order', () => {
   const ids = stages.map(s => s.id);
   assert.equal(new Set(ids).size, ids.length);
   assert.ok(ids.every(id => /^[1-9][ab]?-/.test(id)));
   assert.deepEqual(ids.slice(ids.indexOf('3a-scope'), ids.indexOf('6-judge') + 1), [
     '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
-    '5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross',
-    '5b-close', '6-scope', '6-judge',
+    '5a-prepare', '5a-read', '5a-split', '5a-refute', '5a-collect',
+    '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close',
+    '6-scope', '6-judge',
   ]);
   assert.ok(ids.includes('7-rejudge') && ids.includes('8-receipt') && ids.includes('9-close-v2'));
-  for (const s of stages.filter(s => /^[3456]/.test(s.id))) assert.equal(s.pipeline, undefined);
+  // Only the reader pipeline overlaps; everything else in Steps 3-6 is a barrier.
+  const pipelined = new Set(['5a-read', '5a-split', '5a-refute', '5a-collect']);
+  for (const s of stages.filter(s => /^[3456]/.test(s.id) && !pipelined.has(s.id)))
+    assert.equal(s.pipeline, undefined, `${s.id} must be a whole-frontier barrier`);
   const ctx = { repo, run: 'test' };
   assert.equal(stage('3-baseline').plan(ctx)[0].argv.at(-1), 'pre-author');
   assert.equal(stage('4-baseline').plan(ctx)[0].argv.at(-1), 'post-author');

@@ -1,11 +1,11 @@
-// Step 5: direct group review of authored content, cross-group audit, closure.
+// Step 5: independent readers, read-only refuters, routed group adjudication,
+// cross-group audit and closure.
 
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { repairGateBatch, repairFingerprint, foreignGateSubjects } from './authored-repairs.mts';
-import { step5Escalations } from '../../step5-escalations.mjs';
+import { holdStep5 } from './step5-hold.mts';
 
+const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
+const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
@@ -13,9 +13,10 @@ export function step5Stages(d: any) {
   const {
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
-    MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision,
-    dispatchSourceScouts,
   } = d;
+
+  /** One batch per lane: a reader or refuter never shares a lane with a sibling. */
+  const solo = (_ctx: any, unit: string) => [String(unit)];
 
   const routingGate = (ctx: any, phase: 'adjudicate' | 'final') =>
     gate(`step5-routing-${phase}`,
@@ -27,184 +28,115 @@ export function step5Stages(d: any) {
   const auditorCreatedGate = (ctx: any) => gate('step5-auditor-created-certifications',
     ['node', 'tools/auditor-created-items.mjs', 'certify', '--run', ctx.run, '--step', '5']);
 
-  /** Give each repair lane the exact current failure. Event order is not a
-   * task contract: advisory events may be newer, and exhausted item ids remain
-   * in the raw gate output. This generated file is the lane's authority. */
-  const writeGateTask = (args: any, phase: '5a' | '5b', edge: boolean, lane = '') => {
-    const safeGate = String(args.failure.id).replace(/[^a-z0-9-]+/gi, '-');
-    const safeLane = String(lane).replace(/[^a-z0-9-]+/gi, '-');
-    const relative = `research/${args.ctx.run}-${args.stage.id}-${safeGate}-repair-${args.round}${safeLane ? `-${safeLane}` : ''}.task.md`;
-    const live = (args.failure.liveItems ?? []).map(String);
-    const exhausted = (args.failure.exhaustedItems ?? []).map(String);
-    const advisory = (args.failure.advisory ?? []).map((failure: any) => ({
-      stage: failure.stage, gate: failure.id, why: failure.why,
-    }));
-    const rawGateOutput = String(args.failure.output ?? '');
-    const gateOutputLimit = 120_000;
-    const gateOutput = rawGateOutput.length <= gateOutputLimit
-      ? rawGateOutput
-      : [
-          rawGateOutput.slice(0, gateOutputLimit / 2),
-          '',
-          `[autopilot truncated ${rawGateOutput.length - gateOutputLimit} characters from the middle of this gate output; reproduce the primary gate on the current tree for the complete diagnostics]`,
-          '',
-          rawGateOutput.slice(-gateOutputLimit / 2),
-        ].join('\n');
-    const canonical = [
-      readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-step5-gate.md'), 'utf8').trim(),
-      edge ? readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-step5-edge.md'), 'utf8').trim() : '',
-      phase === '5b' ? readFileSync(join(args.ctx.repo, 'briefs/tasks/alpha-5b-edges.md'), 'utf8').trim() : '',
-    ].filter(Boolean).join('\n\n');
-    const lines = [
-      `# Step 5${phase.slice(1)} repair — ${args.failure.id}`,
-      '',
-      `This file is the authority for repair cycle ${args.round}.`,
-      `Primary gate: \`${args.failure.id}\``,
-      `Reason: ${String(args.failure.why ?? 'See gate output below.')}`,
-      `Owning Alpha group: ${args.repairGroup ? `\`${args.repairGroup}\`` : '(repository-scoped or mixed)'}`,
-      `Live item ids: ${live.length ? live.map((id: string) => `\`${id}\``).join(', ') : '(none named; repository-scoped)'}`,
-      `Exhausted item ids — do not repair or re-review: ${exhausted.length ? exhausted.map((id: string) => `\`${id}\``).join(', ') : '(none)'}`,
-      '',
-      'Repair only the live ids. Reproduce the primary gate from the current tree.',
-      'Advisory failures are context only; they receive their own gate budget if they become primary.',
-      edge ? 'This is an undeclared-prerequisite edge decision; follow the Step 5 edge task.' : '',
-      '',
-      '## Primary gate output',
-      '',
-      '```text',
-      gateOutput,
-      '```',
-      '',
-      '## Advisory failures',
-      '',
-      '```json',
-      JSON.stringify(advisory, null, 2),
-      '```',
-      '',
-      '## Canonical repair protocol',
-      '',
-      canonical,
-      '',
-    ];
-    writeFileSync(join(args.ctx.repo, relative), `${lines.join('\n')}\n`);
-    return relative;
-  };
-
-  const dispatchGateRepair = async (args: any, phase: '5a' | '5b', residue = '') => {
-    if (residue) args.failure = { ...args.failure,
-      output: `${args.failure.output ?? ''}\n\nMECHANICAL RESIDUE:\n${residue}` };
-
-    // `risk-report --require-reviewed` is level-scoped but its remediation is
-    // group-owned. One global repair lane serialises four disjoint Alpha scopes
-    // and creates a competing writer for every group's report and decisions.
-    // Partition the complete live set through the per-batch contracts and the
-    // existing Alpha assignment, then launch one lane per owning group. The
-    // stage/role cap already bounds this fan-out at eight.
-    const live = (args.failure.liveItems ?? []).map(String);
-    if (phase === '5a' && args.failure.id === 'risk-report' && live.length) {
-      const batchOf = new Map<string, string>();
-      for (const batch of batches(args.ctx)) {
-        const path = join(args.ctx.repo, 'research', `${args.ctx.run}-batch-${batch}.proof-contracts.json`);
-        let document: any = {};
-        try { document = JSON.parse(readFileSync(path, 'utf8')); } catch { /* gate output remains authoritative */ }
-        for (const id of Object.keys(document?.contracts ?? {})) batchOf.set(id, String(batch));
-      }
-      const groupOf = new Map<string, string>();
-      for (const group of alphaGroups(args.ctx)) {
-        for (const batch of group.covers.map(String)) groupOf.set(batch, String(group.label));
-      }
-      const byGroup = new Map<string, string[]>();
-      for (const id of live) {
-        const group = groupOf.get(batchOf.get(id) ?? '') ?? 'unowned';
-        if (!byGroup.has(group)) byGroup.set(group, []);
-        byGroup.get(group)!.push(id);
-      }
-      for (const [group, ids] of byGroup) {
-        const idSet = new Set(ids);
-        const scopedOutput = String(args.failure.output ?? '').split(/\r?\n/)
-          .filter((line) => line.startsWith('risk-report:')
-            || [...idSet].some((id) => line.includes(`[${id}]`)))
-          .join('\n');
-        const scopedArgs = {
-          ...args,
-          repairGroup: group === 'unowned' ? null : group,
-          failure: {
-            ...args.failure,
-            why: `${ids.length} high/critical item(s) in Alpha group ${group} lack complete risk_review records`,
-            output: scopedOutput,
-            liveItems: ids,
-            exhaustedItems: (args.failure.exhaustedItems ?? []).map(String)
-              .filter((id: string) => idSet.has(id)),
-          },
-        };
-        const dynamicTask = writeGateTask(scopedArgs, phase, false, group);
-        args.executor.start(args.stage, {
-          role: 'alpha', label: `${phase}-gate-risk-report-${args.round}-${group}`,
-          job: 'adjudication', covers: [], brief: 'briefs/alpha-step5.md', task: dynamicTask,
-          timeout: 3600,
-        });
-      }
-      return;
-    }
-
-    const edge = await isEdgeDecision(args);
-    const dynamicTask = writeGateTask(args, phase, edge);
-    // A stalemate repair owns the artifact-incomplete units while it runs.
-    // Without this claim, the next executor tick sees the same units as
-    // abandoned, launches another Alpha, and spends the entire retry budget
-    // concurrently before the first repair can land its artifact.
-    const covers = args.failure.id === 'stage-stalemate'
-      ? (args.failure.units ?? []).map(String)
-      : [];
-    args.executor.start(args.stage, {
-      role: 'alpha', label: `${phase}-${edge ? 'edge' : 'gate'}-${String(args.failure.id).replace(/[^a-z0-9-]+/gi, '-')}-${args.round}`,
-      job: 'adjudication', covers, brief: 'briefs/alpha-step5.md', task: dynamicTask,
-      timeout: phase === '5b' ? 7200 : 3600,
-    });
-  };
-
-  const handleGateFailure = async (args: any, phase: '5a' | '5b') => {
-    // `stage-stalemate` is missing Step 5 output, not the similarly named
-    // Step 4 splice refusal. Resume Alpha instead of running the Step 4 tool.
-    const failures = [args.failure, ...(args.failure.advisory ?? [])];
-    const primaryMechanical = args.failure.id !== 'stage-stalemate'
-      && Boolean(MECHANICAL_REPAIRS?.[args.failure.id]);
-    const hasMechanical = failures.some((failure: any) => failure.id !== 'stage-stalemate'
-      && MECHANICAL_REPAIRS?.[failure.id]);
-    if (hasMechanical) {
-      const result = await mechanicalRepair({ ...args, excludeGateIds: ['stage-stalemate'] });
-      if (result.outcome === 'outage') return { outage: { reason: result.reason } };
-      const scouted = result.outcome === 'residual'
-        && dispatchSourceScouts?.({ ...args, stderr: result.stderr });
-      if (primaryMechanical && (result.outcome === 'clean' || scouted)) return;
-      if (primaryMechanical) {
-        await dispatchGateRepair(args, phase, result.stderr ?? '');
-        return;
-      }
-    }
-    await dispatchGateRepair(args, phase);
-  };
-
   return [
     {
       id: '5a-prepare',
-      label: 'freeze authored content for direct group review',
+      label: 'freeze authored content and the auditor baseline (mechanical)',
       units: () => ['all'],
       pattern: resultPattern('tool', 'prepare-5a'),
-      artifacts: (ctx: any) => batches(ctx).flatMap((batch: string) => [
-          `research/${ctx.run}-step5-hash-${batch}-pre-5a.json`,
-          `research/${ctx.run}-step5-scope-${batch}.json`])
-        .concat(`research/${ctx.run}-step5-auditor-baseline.json`),
+      artifacts: (ctx: any) => batches(ctx).map((batch: string) =>
+        `research/${ctx.run}-step5-hash-${batch}-pre.json`),
       concurrency: 1,
-      plan: (ctx: any) => [{ role: 'tool', label: 'prepare-5a', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step5-prepare.mjs', '--run', ctx.run], timeout: 600 }],
-      gatesWaived: 'Runs after Step 3 gates pass; freezes the complete authored inventory without reader or refuter artifacts.',
+      maxAttempts: 1,
+      plan: (ctx: any) => [{
+        role: 'tool', label: 'prepare-5a', job: 'bookkeeping-mechanical', covers: ['all'],
+        argv: ['node', 'tools/step5-prepare.mjs', '--run', ctx.run], timeout: 3600,
+      }],
+      gatesWaived: 'The tool fails fast: a missing batch manifest, a failing per-batch author check, '
+        + 'or an auditor baseline that would move exits nonzero before any reader starts.',
+    },
+    {
+      id: '5a-read',
+      label: 'independent readers over authored content',
+      modelProfile: (plan: any) => plan.role === 'reader' ? SOL_HIGH : undefined,
+      pipeline: 'read',
+      role: 'reader',
+      units: batches,
+      pattern: resultPattern('reader', 'reader-\\d+'),
+      labelFor: (unit: string) => `reader-${unit}`,
+      artifacts: (ctx: any, unit: string) => [
+        `research/${ctx.run}-reader-${unit}.md`,
+        `research/${ctx.run}-reader-findings-${unit}.json`,
+      ],
+      concurrency: 27,
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
+        role: 'reader', label: `reader-${unit}`, job: 'audit', covers: [unit],
+        brief: 'briefs/reader.md',
+        task: 'briefs/tasks/alpha-5a-reader.md',
+        outputSchema: 'briefs/schemas/reader-findings.json',
+        resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
+        timeout: 14400,
+      })),
+      gatesWaived: 'Readers may repair in-flight assigned items; the split, refuter coverage and the full '
+        + '5a-adjudicate battery are what check their work before Step 5b opens.',
+    },
+    {
+      id: '5a-split',
+      label: 'compute reader changes and routing obligations (mechanical)',
+      pipeline: 'read',
+      role: 'tool',
+      units: batches,
+      pattern: resultPattern('tool', 'split-\\d+'),
+      labelFor: (unit: string) => `split-${unit}`,
+      artifacts: (ctx: any, unit: string) => `research/${ctx.run}-step5-scope-${unit}.json`,
+      concurrency: 27,
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
+        role: 'tool', label: `split-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
+        argv: ['node', 'tools/step5-scope.mjs', 'post-reader', '--run', ctx.run,
+          '--batch', String(unit)],
+        timeout: 600,
+      })),
+      gatesWaived: 'Split refuses a post-reader hash that does not match the current manifest, '
+        + 'a removed item or page, and malformed reader findings; its successful result is the scope refuters read.',
+    },
+    {
+      id: '5a-refute',
+      label: 'read-only refuters over untouched, high-risk and page carriers',
+      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL_HIGH : undefined,
+      pipeline: 'read',
+      role: 'refuter',
+      units: batches,
+      pattern: resultPattern('refuter', 'refute-\\d+'),
+      labelFor: (unit: string) => `refute-${unit}`,
+      artifacts: (ctx: any, unit: string) => `research/${ctx.run}-refute-${unit}.json`,
+      concurrency: 27,
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
+        role: 'refuter', label: `refute-${unit}`, job: 'refutation', covers: [unit],
+        brief: 'briefs/refuter.md',
+        task: 'briefs/tasks/alpha-5a-refuter.md',
+        outputSchema: 'briefs/schemas/refute-report.json',
+        resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
+        timeout: 10800,
+      })),
+      gatesWaived: 'The read-only report is schema-constrained at dispatch; the following mechanical collect '
+        + 'verifies that opened and not_opened exactly partition the computed refuter scope.',
+    },
+    {
+      id: '5a-collect',
+      label: 'validate refuter coverage and route obligations (mechanical)',
+      pipeline: 'read',
+      role: 'tool',
+      units: batches,
+      pattern: resultPattern('tool', 'collect-\\d+'),
+      labelFor: (unit: string) => `collect-${unit}`,
+      artifacts: (ctx: any, unit: string) => `research/${ctx.run}-step5-scope-${unit}.json`,
+      concurrency: 27,
+      cohort: solo,
+      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
+        role: 'tool', label: `collect-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
+        argv: ['node', 'tools/step5-scope.mjs', 'collect', '--run', ctx.run, '--batch', String(unit)],
+        timeout: 600,
+      })),
+      gatesWaived: 'Collect exits nonzero unless not_opened is empty and opened exactly equals the computed '
+        + 'refuter scope; its successful result routes every obligation this batch owes.',
     },
     {
       id: '5a-adjudicate',
-      label: 'group Alpha review of authored items and pages',
-      role: 'alpha',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? DEEPSEEK_FLASH_MAX : undefined,
+      label: 'group Alpha adjudication of reader repairs, refuter findings and pages',
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_XHIGH : undefined,
       units: batches,
       pattern: resultPattern('alpha', '5a-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {
@@ -220,7 +152,7 @@ export function step5Stages(d: any) {
         .map((group: any) => ({
           role: 'alpha', label: `5a-${group.label}`, job: 'adjudication', covers: group.covers,
           brief: 'briefs/alpha-step5.md',
-          task: 'briefs/tasks/alpha-5a-direct.md',
+          task: 'briefs/tasks/alpha-5a-adjudicate.md',
           timeout: 14400,
         })),
       gates: (ctx: any) => [
@@ -229,16 +161,7 @@ export function step5Stages(d: any) {
         ...repoWide(ctx).filter((candidate: any) => candidate.id !== 'splice-verify'),
         ...contractGates(ctx, { reviewed: true }), decisionStampGate(ctx), routingGate(ctx, 'adjudicate'),
       ],
-      perItemFixBudget: 3,
-      batchRepairs: true,
-      repairFingerprint,
-      onGateFailure: (args: any) => {
-        const holds = step5Escalations(args.ctx.repo, args.ctx.run);
-        if (holds.length) return { owner: { reason: holds.join('\n') } };
-        return args.failure.id === 'stage-stalemate'
-          ? handleGateFailure(args, '5a')
-          : repairGateBatch(args, { alphaGroups, MECHANICAL_REPAIRS, mechanicalRepair });
-      },
+      onHold: holdStep5,
     },
     {
       id: '5a-baseline',
@@ -301,16 +224,7 @@ export function step5Stages(d: any) {
           liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
         }),
       ],
-      perItemFixBudget: 3,
-      onGateFailure: (args: any) => {
-        // Content diagnostics on peer drafts belong to their active authors.
-        // Impact receipts remain lead-Alpha work even for foreign consumers.
-        if (['precheck', 'depcheck', 'rendercheck'].includes(args.failure.id)) {
-          const foreign = foreignGateSubjects(args.ctx, [args.failure], alphaGroups(args.ctx));
-          if (foreign) return { owner: { reason: `Gate failures name only carriers outside this run: ${foreign.join(', ')}. Route repairs to their actual owners before retrying.` } };
-        }
-        return handleGateFailure(args, '5b');
-      },
+      onHold: holdStep5,
     },
     {
       id: '5b-close',
