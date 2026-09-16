@@ -1443,8 +1443,23 @@ export class Executor {
         this.reporter.notify('adopted', `unit(s) ${news.join(', ')} are already covered by a live external dispatch; not starting a second`);
       }
     }
-    need = need.filter((u: any) => !runningUnits.has(u)
-      && !(stage.exclusiveCohort?.(ctx, u) ?? []).some((other) => runningUnits.has(String(other))));
+    // `exclusiveCohort` is stage-table code reading the run's manifests. A
+    // defect it exposes there — two batches minting one item id, a manifest
+    // half-written by a live author — must surface as an owner blocker, not as
+    // an unhandled throw that ends the engine in the middle of an authoring
+    // wave. On 2026-09-16 exactly that killed the controller mid-Step-3b.
+    try {
+      need = need.filter((u: any) => !runningUnits.has(u)
+        && !(stage.exclusiveCohort?.(ctx, u) ?? []).some((other) => runningUnits.has(String(other))));
+    } catch (error: any) {
+      const msg = `stage ${stage.id}: reading the exclusive cohort failed — ${error?.message ?? error}`;
+      if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+        this.state.addBlocker(stage.id, msg);
+        this.reporter.notify('blocked', msg, { stage: stage.id });
+      }
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'blocked';
+    }
 
     // Apply same-stage dependency readiness to the full pending list before
     // slot slicing. Otherwise blocked units at the head can starve a ready
@@ -2020,7 +2035,23 @@ export class Executor {
     for (;;) {
       if (this.signal?.aborted) return 'aborted';
       const version = this.stateVersion;
-      const r = await this.tick();
+      // A DATA DEFECT MUST NOT END THE RUN. Manifests are written by live agent
+      // processes, so a tick can meet a truncated file, a transient duplicate
+      // item id minted by two authors at once, or any other malformed input.
+      // Those are owner-visible blockers: record one and keep the loop alive,
+      // so a repaired input plus `retry` resumes the same run. Letting the
+      // exception escape ended a 49-hour build on 2026-09-16.
+      let r;
+      try {
+        r = await this.tick();
+      } catch (error: any) {
+        const msg = `engine tick threw — ${error?.message ?? error}`;
+        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+          this.state.addBlocker(this.state.data.stage ?? '(engine)', msg);
+        }
+        this.reporter.notify('tick-error', msg);
+        r = 'blocked';
+      }
       if (r === 'done' || r === 'stopped') return r;
       if (r === 'blocked') {
         // A blocker is not the end of the run. The first live takeover blocked

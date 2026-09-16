@@ -382,3 +382,31 @@ export const stages = [{
   assert.equal(ex.stages[0].label, 'edited dependency');
   assert.ok(notifications.some((n) => n.kind === 'stages-reloaded'));
 });
+
+// 2026-09-16: two Step-3b authors minted the same item id in different batch
+// manifests. loadStep3 threw out of exclusiveCohort, through dispatchStage,
+// out of run(), and ended a 49-hour build. A data defect is a blocker.
+test('an exclusiveCohort that throws blocks the stage instead of ending the run', async () => {
+  const fx = fixture();
+  const stages = [{
+    id: 's1', label: 'only', units: () => ['1'], pattern: /^worker-/, concurrency: 1,
+    plan: () => [{ role: 'worker', label: 'one', job: 'bookkeeping-mechanical', covers: ['1'], argv: ['true'] }],
+    exclusiveCohort: () => { throw new Error('Duplicate item def-dependent-multiple-choice-finite-level-tree'); },
+    gates: () => [loggingGate(fx, 's1')],
+  }];
+  const { ex } = makeExecutor(fx, stages);
+  assert.equal(await ex.tick(), 'blocked');
+  assert.ok(ex.state.data.blockers.some((b: any) => /exclusive cohort failed/.test(b.message)),
+    'the manifest defect is named in a blocker');
+});
+
+test('a tick that throws is recorded as a blocker and the loop keeps running', async () => {
+  const fx = fixture();
+  const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'never')]));
+  let calls = 0;
+  ex.tick = async () => { calls += 1; throw new Error('Duplicate item def-x'); };
+  assert.equal(await ex.run({ pollMs: 1, maxTicks: 3 }), 'working');
+  assert.ok(calls >= 2, 'the controller survived the throw');
+  assert.ok(ex.state.data.blockers.some((b: any) => /Duplicate item def-x/.test(b.message)));
+  assert.ok(notifications.some((n) => n.kind === 'tick-error'));
+});
