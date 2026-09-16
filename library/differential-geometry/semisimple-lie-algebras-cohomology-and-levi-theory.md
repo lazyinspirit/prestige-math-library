@@ -49,7 +49,8 @@ items:
   - fs-second-cohomology-classifies-all-nonabelian-extensions
   - fs-levi-subalgebras-are-literally-unique
   - fs-isomorphic-lie-algebras-determine-isomorphic-connected-lie-groups
-examples: []
+examples: [ex-classical-simple-lie-algebras-and-their-killing-forms,
+           ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups]
 ---
 
 Invariant trace forms connect representation theory to structure theory.

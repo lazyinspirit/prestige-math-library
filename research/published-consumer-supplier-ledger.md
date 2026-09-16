@@ -8,6 +8,29 @@ Current classifications: U-P 1365, U-C 0, A-R 190, A-P 331. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Published example home updates for b-leaf legality — 2026-09-17
+
+Three in-run drafts of `phase-2-remaining-27` depended on published examples
+whose only home was an examples (B) page, which `depcheck` rejects as
+`b-leaf-content` because B pages must be leaves. The dependencies are
+load-bearing in each case, so the repair is a home update to the companion A
+page (multi-home is legal; A pages may carry an `examples:` list), not a
+weakening of the drafts.
+
+- `library/differential-geometry/lie-subgroups-actions-and-homogeneous-spaces.md`
+  now homes `ex-su-two-to-so-three-as-a-covering-homomorphism`, legalising the
+  dependency of `cex-zero-euler-class-does-not-in-general-imply-a-nowhere-zero-section`
+  (its nontrivial class in π₃(SO(3)) comes from that covering).
+- `library/differential-geometry/semisimple-lie-algebras-cohomology-and-levi-theory.md`
+  now homes `ex-classical-simple-lie-algebras-and-their-killing-forms` and
+  `ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups`,
+  legalising the dependencies of `prop-classical-types-correspond-to-sl-so-and-sp`,
+  `fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras` and
+  `fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic`.
+- Item text, statements and proofs are unchanged. `node tools/depcheck.mjs`
+  reports no cycles, all references resolving, no draft items on published
+  pages, and no remaining `b-leaf-content` error.
+
 ## Shelah inaccessible remark: superseded "not proved here" scope — 2026-09-16
 
 The Step-3a scope review of run `phase-2-remaining-27` (pair

@@ -57,7 +57,7 @@ items:
   - fs-g-mod-h-is-a-quotient-lie-group-for-every-closed-subgroup-h
   - fs-a-free-action-always-has-a-manifold-orbit-space
   - fs-the-exp-tx-fundamental-field-convention-is-a-bracket-homomorphism-for-left-actions
-examples: []
+examples: [ex-su-two-to-so-three-as-a-covering-homomorphism]
 ---
 
 Lie subgroups carry an intrinsic manifold topology that need not be the
