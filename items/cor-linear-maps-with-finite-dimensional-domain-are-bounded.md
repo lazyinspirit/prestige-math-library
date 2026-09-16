@@ -38,17 +38,13 @@ bounded linear operator in the sense of [[def-bounded-linear-operator]].
 
 ## Facts & Assumptions
 
-**Given:** Normed spaces $X$ and $Y$, a linear map $S:X\to Y$, and an ordered
-basis $e:n\to X$.
+**Given:** Normed spaces $X$ and $Y$, a linear map $S:X\to Y$, and an ordered basis $e:n\to X$.
 
-[L1] The basis map $T:\mathbb K^n\to X$ is a topological isomorphism
-([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] The basis map $T:\mathbb K^n\to X$ is a topological isomorphism ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] A bounded linear operator is a linear map satisfying one global norm bound
-([[def-bounded-linear-operator]]).
+[L2] A bounded linear operator is a linear map satisfying one global norm bound ([[def-bounded-linear-operator]]).
 
-[L3] Linearity means $S(au+bv)=aS(u)+bS(v)$
-([[def-linear-map]]).
+[L3] Linearity means $S(au+bv)=aS(u)+bS(v)$ ([[def-linear-map]]).
 
 ## Proof
 

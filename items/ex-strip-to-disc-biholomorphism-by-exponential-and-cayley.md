@@ -42,13 +42,9 @@ is a biholomorphism from $S$ onto the unit disc $\mathbb D$.
 
 **Given:** The strip $S$ and the map $\Phi$ above.
 
-[F1] The exponential is holomorphic on $\mathbb C$, and in particular on $S$
-([[thm-principal-exponential-biholomorphism-from-principal-strip]]).
+[F1] The exponential is holomorphic on $\mathbb C$, and in particular on $S$ ([[thm-principal-exponential-biholomorphism-from-principal-strip]]).
 
-[F2] The upper half-plane is the domain
-$$\mathbb H=\{\,w\in\mathbb C:\operatorname{Im}w>0\,\},$$
-and Möbius maps with real coefficients give its automorphisms
-([[thm-upper-half-plane-automorphisms-are-real-mobius-maps]]).
+[F2] The upper half-plane is the domain $$\mathbb H=\{\,w\in\mathbb C:\operatorname{Im}w>0\,\},$$ and Möbius maps with real coefficients give its automorphisms ([[thm-upper-half-plane-automorphisms-are-real-mobius-maps]]).
 
 ## Verification
 

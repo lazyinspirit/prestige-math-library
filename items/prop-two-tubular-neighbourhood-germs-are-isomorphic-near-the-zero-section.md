@@ -35,16 +35,11 @@ zero section.
 
 ## Facts & Assumptions
 
-**Given:** Two tubular neighbourhood charts $\Phi_1:\Omega_1\to M$ and
-$\Phi_2:\Omega_2\to M$ for the same closed embedded submanifold $S\subseteq M$.
+**Given:** Two tubular neighbourhood charts $\Phi_1:\Omega_1\to M$ and $\Phi_2:\Omega_2\to M$ for the same closed embedded submanifold $S\subseteq M$.
 
-[F1] A tubular neighbourhood chart is a diffeomorphism from an open
-normal-bundle neighbourhood of the zero section onto an ambient open
-neighbourhood of $S$
-([[def-tubular-neighbourhood-of-an-embedded-submanifold]]).
+[F1] A tubular neighbourhood chart is a diffeomorphism from an open normal-bundle neighbourhood of the zero section onto an ambient open neighbourhood of $S$ ([[def-tubular-neighbourhood-of-an-embedded-submanifold]]).
 
-[L1] Tubular neighbourhoods exist in smooth ambient manifolds
-([[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]]).
+[L1] Tubular neighbourhoods exist in smooth ambient manifolds ([[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]]).
 
 ## Proof
 **Proof technique:** direct.

@@ -30,15 +30,11 @@ of the chosen $B$-cochain lift of $c$ and of the cocycle representing $[c]$.
 
 ## Facts & Assumptions
 
-**Given:** A short exact sequence $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$
-and a cocycle $c\in C^n(X;C)$.
+**Given:** A short exact sequence $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ and a cocycle $c\in C^n(X;C)$.
 
-[F1] The Bockstein construction chooses $b$ with $q_*b=c$, uniquely solves
-$i_*a=\delta b$, and proposes $\beta[c]=[a]$
-([[def-bockstein-connecting-operation]]).
+[F1] The Bockstein construction chooses $b$ with $q_*b=c$, uniquely solves $i_*a=\delta b$, and proposes $\beta[c]=[a]$ ([[def-bockstein-connecting-operation]]).
 
-[F2] AC supplies a simultaneous choice from any set-indexed family of
-nonempty fibres ([[def-axiom-of-choice]]).
+[F2] AC supplies a simultaneous choice from any set-indexed family of nonempty fibres ([[def-axiom-of-choice]]).
 
 ## Proof
 
@@ -50,11 +46,8 @@ nonempty fibres ([[def-axiom-of-choice]]).
 
 3.1 Changing the cocycle representative also changes $a$ by a coboundary. Write $c'=c+\delta u$. Use the lifting choice of [F2] to take $v\in C^{n-1}(X;B)$ with $q_*v=u$. For an arbitrary lift $b'$ of $c'$, [F1, F2, step 2.1]
 
-$$
-q_*(b'-b-\delta v)=c'-c-\delta u=0.
-$$
+$$ q_*(b'-b-\delta v)=c'-c-\delta u=0. $$
 
-Thus $b'=b+\delta v+i_*h$ for some $h\in C^n(X;A)$. Applying $\delta$
-and using $\delta^2v=0$ gives $a'=a+\delta h$.
+Thus $b'=b+\delta v+i_*h$ for some $h\in C^n(X;A)$. Applying $\delta$ and using $\delta^2v=0$ gives $a'=a+\delta h$.
 
 4.1 Steps 2.1 and 3.1 show that $[a']=[a]$ for either permitted change, so $\beta[c]$ is well defined. [step 2.1, step 3.1] ∎

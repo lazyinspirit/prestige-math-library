@@ -33,22 +33,15 @@ Every equivalence between abelian categories is exact.
 
 ## Facts & Assumptions
 
-**Given:** An equivalence $F:\mathcal A\to\mathcal B$ between abelian
-categories.
+**Given:** An equivalence $F:\mathcal A\to\mathcal B$ between abelian categories.
 
-[L1] Equivalences preserve all limits and colimits that exist
-([[prop-equivalences-preserve-reflect-and-create-limits-and-colimits]]).
+[L1] Equivalences preserve all limits and colimits that exist ([[prop-equivalences-preserve-reflect-and-create-limits-and-colimits]]).
 
-[L2] Abelian categories are additive
-([[def-abelian-category]]).
+[L2] Abelian categories are additive ([[def-abelian-category]]).
 
-[L3] A functor between additive categories is additive exactly when it
-preserves finite biproducts
-([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
+[L3] A functor between additive categories is additive exactly when it preserves finite biproducts ([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
 
-[L4] Exact means additive, left exact, and right exact
-([[def-left-exact-and-right-exact-functor]],
-[[def-exact-functor-between-abelian-categories]]).
+[L4] Exact means additive, left exact, and right exact ([[def-left-exact-and-right-exact-functor]], [[def-exact-functor-between-abelian-categories]]).
 
 ## Proof
 

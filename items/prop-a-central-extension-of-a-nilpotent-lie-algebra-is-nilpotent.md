@@ -32,18 +32,13 @@ nilpotent of class at most $c+1$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ and a central ideal
-$\mathfrak i\subseteq Z(\mathfrak g)$ whose quotient has class $c$.
+**Given:** A Lie algebra $\mathfrak g$ and a central ideal $\mathfrak i\subseteq Z(\mathfrak g)$ whose quotient has class $c$.
 
-[L1] The lower central series has
-$\gamma_{r+1}=[\mathfrak g,\gamma_r]$
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] The lower central series has $\gamma_{r+1}=[\mathfrak g,\gamma_r]$ ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] The quotient map $\pi:\mathfrak g\to\mathfrak g/\mathfrak i$ is a
-surjective Lie homomorphism ([[def-quotient-lie-algebra]]).
+[L2] The quotient map $\pi:\mathfrak g\to\mathfrak g/\mathfrak i$ is a surjective Lie homomorphism ([[def-quotient-lie-algebra]]).
 
-[L3] Centrality means $[\mathfrak g,\mathfrak i]=0$
-([[def-lie-subalgebra-ideal-and-center]]).
+[L3] Centrality means $[\mathfrak g,\mathfrak i]=0$ ([[def-lie-subalgebra-ideal-and-center]]).
 
 ## Proof
 

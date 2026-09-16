@@ -37,21 +37,15 @@ is a bijection. This includes the empty finite limit.
 
 **Given:** The categories and diagram in the statement.
 
-[F1] Filteredness combines finitely many objects at a common later stage and
-coequalizes finitely many parallel arrows
-([[def-filtered-category-and-filtered-colimit]]).
+[F1] Filteredness combines finitely many objects at a common later stage and coequalizes finitely many parallel arrows ([[def-filtered-category-and-filtered-colimit]]).
 
-[L1] Equality of two elements in a filtered Set-colimit occurs at one common
-later stage ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
+[L1] Equality of two elements in a filtered Set-colimit occurs at one common later stage ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
 
-[L2] Set-limits are compatible tuples and Set-colimits are tagged quotients
-([[thm-set-has-all-small-limits]], [[thm-set-has-all-small-colimits]]).
+[L2] Set-limits are compatible tuples and Set-colimits are tagged quotients ([[thm-set-has-all-small-limits]], [[thm-set-has-all-small-colimits]]).
 
-[L3] Finite limits can be tested using finite products and equalizers
-([[thm-finite-limit-and-colimit-criteria]]).
+[L3] Finite limits can be tested using finite products and equalizers ([[thm-finite-limit-and-colimit-criteria]]).
 
-[L4] A canonical comparison is invertible exactly when the limit is preserved
-([[lem-canonical-comparison-characterises-limit-preservation]]).
+[L4] A canonical comparison is invertible exactly when the limit is preserved ([[lem-canonical-comparison-characterises-limit-preservation]]).
 
 ## Proof
 

@@ -95,18 +95,8 @@ well posed, which is the next item, so it is proved here first.
 
 ## Remarks
 
-- **Where the deletion map earns its keep.** The usual textbook proof says "move
-  the term $a_n$ to the end and delete it", and leaves the resulting map on the
-  shorter index range unexamined. That map is $d^{n}_{j}$ composed with $\pi$,
-  and checking that it really is a bijection of $n$ onto $n$ is the only place
-  where anything can go wrong; step 1.1 writes it down and verifies it in both
-  directions.
+- **Where the deletion map earns its keep.** The usual textbook proof says "move the term $a_n$ to the end and delete it", and leaves the resulting map on the shorter index range unexamined. That map is $d^{n}_{j}$ composed with $\pi$, and checking that it really is a bijection of $n$ onto $n$ is the only place where anything can go wrong; step 1.1 writes it down and verifies it in both directions.
 
-- **One proof, four statements.** Only associativity, commutativity, the identity
-  and the two recursion clauses are used, so the argument is indifferent to which
-  of the four operations is meant. The same observation is what later licenses
-  the identical statement in an arbitrary monoid, where it belongs; nothing here
-  needs that generality.
+- **One proof, four statements.** Only associativity, commutativity, the identity and the two recursion clauses are used, so the argument is indifferent to which of the four operations is meant. The same observation is what later licenses the identical statement in an arbitrary monoid, where it belongs; nothing here needs that generality.
 
-- **No choice is used.** The index $j = \pi^{-1}(n)$ is determined, not selected,
-  because $\pi$ is a bijection.
+- **No choice is used.** The index $j = \pi^{-1}(n)$ is determined, not selected, because $\pi$ is a bijection.

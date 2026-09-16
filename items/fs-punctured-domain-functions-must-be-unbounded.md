@@ -34,12 +34,9 @@ $0\in\mathbb C^m$, then $f$ must be unbounded near $0$.
 
 ## Facts & Assumptions
 
-**Given:** The bounded coordinate function $f(z)=z_1$ on
-$\Delta_1^m\setminus\{0\}$ with $m\ge2$.
+**Given:** The bounded coordinate function $f(z)=z_1$ on $\Delta_1^m\setminus\{0\}$ with $m\ge2$.
 
-[L1] A holomorphic function on a punctured several-variable domain extends
-holomorphically across the missing point
-([[thm-removability-of-a-puncture-in-several-complex-variables]]).
+[L1] A holomorphic function on a punctured several-variable domain extends holomorphically across the missing point ([[thm-removability-of-a-puncture-in-several-complex-variables]]).
 
 ## Refutation
 

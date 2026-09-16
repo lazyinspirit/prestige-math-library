@@ -40,5 +40,4 @@ $q=2$.
 1.1 For every $j\ge1$, $\lambda_{j+1}=2^{j+1}=2\lambda_j$. [given, algebra]
 
 2.1 Thus $\lambda_{j+1}\ge2\lambda_j$ with one fixed ratio $2>1$, exactly [step 1.1]
-as required by [[def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series]].
-[step 1.1] ∎
+as required by [[def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series]]. [step 1.1] ∎

@@ -43,12 +43,9 @@ is the identity map.
 
 **Given:** The diagram above in $\mathbf{Ab}$.
 
-[L1] Abelian groups form an abelian category
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] Abelian groups form an abelian category ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] The connecting morphism exists, and the snake sequence is exact
-([[thm-the-connecting-morphism-exists-and-is-unique]],
-[[thm-snake-lemma-in-an-abelian-category]]).
+[L2] The connecting morphism exists, and the snake sequence is exact ([[thm-the-connecting-morphism-exists-and-is-unique]], [[thm-snake-lemma-in-an-abelian-category]]).
 
 ## Verification
 

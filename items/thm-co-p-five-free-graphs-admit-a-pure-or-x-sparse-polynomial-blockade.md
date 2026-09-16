@@ -38,20 +38,11 @@ an integer $k\in[2,x^{-1}]$ and either
 
 ## Facts & Assumptions
 
-**Given:** After the exponent $d$ is chosen below, a parameter
-$x\in(0,2^{-d})$ and a $\overline{P_5}$-free graph $G$ with
-$|V(G)|\ge x^{-d}$.
+**Given:** After the exponent $d$ is chosen below, a parameter $x\in(0,2^{-d})$ and a $\overline{P_5}$-free graph $G$ with $|V(G)|\ge x^{-d}$.
 
-[L1] Lemma 5.5 of the cited source supplies an exponent
-$D\ge40$ such that, under its convention allowing a real blockade-length
-threshold, there is some $r\in[2,x^{-1}]$ and a pure or $x$-sparse
-$(r,|V(G)|/r^D)$-blockade whenever $x\in(0,2^{-D})$ and
-$|V(G)|\ge x^{-D}$.
+[L1] Lemma 5.5 of the cited source supplies an exponent $D\ge40$ such that, under its convention allowing a real blockade-length threshold, there is some $r\in[2,x^{-1}]$ and a pure or $x$-sparse $(r,|V(G)|/r^D)$-blockade whenever $x\in(0,2^{-D})$ and $|V(G)|\ge x^{-D}$.
 
-[F2] In this library, the first parameter $\ell$ of an $(\ell,w)$-blockade
-may be any real number at least $1$; its integral actual length must be at
-least $\ell$ (equivalently, at least $\lceil\ell\rceil$)
-([[def-blockade-length-and-width]]).
+[F2] In this library, the first parameter $\ell$ of an $(\ell,w)$-blockade may be any real number at least $1$; its integral actual length must be at least $\ell$ (equivalently, at least $\lceil\ell\rceil$) ([[def-blockade-length-and-width]]).
 
 ## Proof
 

@@ -32,11 +32,9 @@ homomorphisms is a subgroup of $Z^1(G,A)$.
 
 **Given:** A group $G$ acting on an abelian group $A$.
 
-[L1] Crossed homomorphisms with abelian coefficients form an abelian group
-([[lem-crossed-homomorphisms-with-abelian-coefficients-form-an-abelian-group]]).
+[L1] Crossed homomorphisms with abelian coefficients form an abelian group ([[lem-crossed-homomorphisms-with-abelian-coefficients-form-an-abelian-group]]).
 
-[L2] Principal crossed homomorphisms are the maps $g\mapsto g\cdot a-a$
-([[def-principal-crossed-homomorphism-for-abelian-coefficients]]).
+[L2] Principal crossed homomorphisms are the maps $g\mapsto g\cdot a-a$ ([[def-principal-crossed-homomorphism-for-abelian-coefficients]]).
 
 ## Proof
 

@@ -35,12 +35,9 @@ $$\frac{d\nu_a}{d\mu}\in L^1(\mu)\qquad\Longleftrightarrow\qquad \nu_a\text{ is 
 
 [L3] For an absolutely continuous finite signed or finite complex measure, the total variation has density $|d\nu_a/d\mu|$. ([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]])
 
-[L4] For a finite signed measure,
-$|\nu_a|(X)=\nu_a^+(X)+\nu_a^-(X)$
-([[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]]).
+[L4] For a finite signed measure, $|\nu_a|(X)=\nu_a^+(X)+\nu_a^-(X)$ ([[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]]).
 
-[L5] Total variation is the supremum of absolute-value sums over measurable
-partitions ([[def-total-variation-of-a-signed-or-complex-measure]]).
+[L5] Total variation is the supremum of absolute-value sums over measurable partitions ([[def-total-variation-of-a-signed-or-complex-measure]]).
 
 ## Proof
 

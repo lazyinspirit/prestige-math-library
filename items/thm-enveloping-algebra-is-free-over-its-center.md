@@ -31,9 +31,7 @@ For a complex semisimple Lie algebra $\mathfrak g$, the enveloping algebra $U(\m
 
 **Given:** A complex semisimple Lie algebra $\mathfrak g$ and the PBW filtration on $U(\mathfrak g)$.
 
-[F1] Kostant's harmonic decomposition gives a graded subspace
-$H\subseteq S(\mathfrak g)$ for which multiplication is an isomorphism
-$H\otimes S(\mathfrak g)^{\mathfrak g}\xrightarrow{\sim}S(\mathfrak g)$.
+[F1] Kostant's harmonic decomposition gives a graded subspace $H\subseteq S(\mathfrak g)$ for which multiplication is an isomorphism $H\otimes S(\mathfrak g)^{\mathfrak g}\xrightarrow{\sim}S(\mathfrak g)$.
 
 ## Proof
 

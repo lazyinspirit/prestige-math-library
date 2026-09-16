@@ -38,9 +38,7 @@ $d(A+B)=dA+dB$, $d(AB)=dA\,B+A\,dB$, and $d(A^\ast)=(dA)^\ast$.
 
 **Given:** Compatible matrices and perturbation directions.
 
-[F1] Real Fr\'echet differentiability means
-$F(A+H)=F(A)+DF(A)[H]+o(\|H\|_F)$
-([[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]).
+[F1] Real Fr\'echet differentiability means $F(A+H)=F(A)+DF(A)[H]+o(\|H\|_F)$ ([[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]).
 
 ## Proof
 **Proof technique:** direct.

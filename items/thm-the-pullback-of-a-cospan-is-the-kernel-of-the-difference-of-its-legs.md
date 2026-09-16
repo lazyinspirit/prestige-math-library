@@ -43,18 +43,13 @@ $i_B\circ s-i_C\circ t:A\to B\oplus C$.
 
 **Given:** An abelian category and a cospan $A\xrightarrow{f}C\xleftarrow{g}B$.
 
-[L1] Abelian categories have finite limits and finite colimits
-([[thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits]]).
+[L1] Abelian categories have finite limits and finite colimits ([[thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits]]).
 
-[L2] On a biproduct the injections and projections satisfy the standard
-identity-sum relations
-([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
+[L2] On a biproduct the injections and projections satisfy the standard identity-sum relations ([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
 
-[L3] In a preadditive category, equalizers are kernels of differences
-([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]]).
+[L3] In a preadditive category, equalizers are kernels of differences ([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]]).
 
-[L4] An abelian category is additive and therefore preadditive
-([[def-abelian-category]]).
+[L4] An abelian category is additive and therefore preadditive ([[def-abelian-category]]).
 
 ## Proof
 

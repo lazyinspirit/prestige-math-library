@@ -46,31 +46,23 @@ $$\operatorname{div}\left(\operatorname{Ric}-\frac12Sg\right)=0.$$
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-scalar-curvature]], [[lem-ricci-curvature-is-symmetric-and-basis-independent]], and [[thm-algebraic-symmetries-of-the-riemann-tensor]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] The covariant differential second Bianchi identity is the cyclic sum of
-$\nabla\operatorname{Rm}$. [[thm-differential-second-bianchi-identity]].
+[F1] The covariant differential second Bianchi identity is the cyclic sum of $\nabla\operatorname{Rm}$. [[thm-differential-second-bianchi-identity]].
 
-[F2] Scalar curvature is the metric trace of Ricci.
-[[def-scalar-curvature]].
+[F2] Scalar curvature is the metric trace of Ricci. [[def-scalar-curvature]].
 
-[F3] Ricci curvature is symmetric and has the orthonormal contraction
-formula. [[lem-ricci-curvature-is-symmetric-and-basis-independent]].
+[F3] Ricci curvature is symmetric and has the orthonormal contraction formula. [[lem-ricci-curvature-is-symmetric-and-basis-independent]].
 
-[F4] Induced connections commute with permutations and contractions.
-[[prop-induced-connections-commute-with-contraction-and-permutation]].
+[F4] Induced connections commute with permutations and contractions. [[prop-induced-connections-commute-with-contraction-and-permutation]].
 
-[F5] Tensor contraction is basis independent.
-[[lem-contraction-is-independent-of-the-basis-formula]].
+[F5] Tensor contraction is basis independent. [[lem-contraction-is-independent-of-the-basis-formula]].
 
-[F6] The Riemann tensor is skew in both pairs.
-[[thm-algebraic-symmetries-of-the-riemann-tensor]].
+[F6] The Riemann tensor is skew in both pairs. [[thm-algebraic-symmetries-of-the-riemann-tensor]].
 
-[F7] The Levi–Civita connection preserves the metric.
-[[def-levi-civita-connection]].
+[F7] The Levi–Civita connection preserves the metric. [[def-levi-civita-connection]].
 
 ## Proof
 
-**Given:** $\mathrm{AC}_\omega$, a point $p$, a vector $X\in T_pM$, and one orthonormal basis
-$(e_1,\ldots,e_n)$ of $T_pM$.
+**Given:** $\mathrm{AC}_\omega$, a point $p$, a vector $X\in T_pM$, and one orthonormal basis $(e_1,\ldots,e_n)$ of $T_pM$.
 
 1.1 The displayed definition of $\operatorname{div}T$ is a contraction of $\nabla T$, so [F5] makes it independent of the orthonormal basis. By [F3]–[F4], at $p$ one has $(\nabla_Y\operatorname{Ric})(U,V)=\sum_a(\nabla_Y\operatorname{Rm})(e_a,U,V,e_a)$. Contracting once more and using [F2] and [F4] gives $dS(X)=\sum_{a,i}(\nabla_X\operatorname{Rm})(e_a,e_i,e_i,e_a)$. [A1, F2, F3, F4, F5]
 

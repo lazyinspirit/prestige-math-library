@@ -33,14 +33,11 @@ In a preadditive category, an object is initial if and only if it is terminal.
 
 ## Facts & Assumptions
 
-**Given:** A preadditive category $\mathcal C$ and an object $Z$ of
-$\mathcal C$.
+**Given:** A preadditive category $\mathcal C$ and an object $Z$ of $\mathcal C$.
 
-[L1] In a preadditive category every hom-set is an abelian group and
-composition is bilinear ([[def-preadditive-category]]).
+[L1] In a preadditive category every hom-set is an abelian group and composition is bilinear ([[def-preadditive-category]]).
 
-[L2] An initial object has a unique map out of it, and a terminal object has a
-unique map into it ([[def-initial-terminal-and-zero-object]]).
+[L2] An initial object has a unique map out of it, and a terminal object has a unique map into it ([[def-initial-terminal-and-zero-object]]).
 
 ## Proof
 

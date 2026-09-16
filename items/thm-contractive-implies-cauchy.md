@@ -126,30 +126,10 @@ indexes from $0$ ([[def-sequence]]), so the hypothesis is stated.
 
 ## Remarks
 
-- **The bound is computable before the limit is known.** Claim 3 needs only
-  $c$ and the single number $|x_2 - x_1|$, so it is an a priori estimate of the
-  error of the $k$-th term: this is what makes contractive iteration a numerical
-  method and not merely an existence theorem.
-  [[ex-contractive-sequence-fixed-point]] carries out the arithmetic on a
-  concrete iteration.
+- **The bound is computable before the limit is known.** Claim 3 needs only $c$ and the single number $|x_2 - x_1|$, so it is an a priori estimate of the error of the $k$-th term: this is what makes contractive iteration a numerical method and not merely an existence theorem. [[ex-contractive-sequence-fixed-point]] carries out the arithmetic on a concrete iteration.
 
-- **Where completeness is spent.** Only in step 10.1, through
-  [[thm-cauchy-criterion-via-lub]]. Claims 1 and 3 are inequalities that hold in
-  any ordered field once the limit exists; it is the existence of the limit that
-  needs the least-upper-bound property, and the theorem is exactly the shape in
-  which the Cauchy criterion is usually applied, namely to prove convergence
-  without exhibiting the limit.
+- **Where completeness is spent.** Only in step 10.1, through [[thm-cauchy-criterion-via-lub]]. Claims 1 and 3 are inequalities that hold in any ordered field once the limit exists; it is the existence of the limit that needs the least-upper-bound property, and the theorem is exactly the shape in which the Cauchy criterion is usually applied, namely to prove convergence without exhibiting the limit.
 
-- **A smaller constant is a better theorem.** Any $c' \in [c, 1)$ is also a
-  contraction constant ([[def-contractive-sequence]]), and the bound degrades as
-  $c'$ grows, tending to uselessness as $c' \to 1$. That degeneration is not an
-  artefact: for gaps that merely shrink, with no uniform $c < 1$, the conclusion
-  fails outright ([[cex-strictly-decreasing-gaps-no-limit]]).
+- **A smaller constant is a better theorem.** Any $c' \in [c, 1)$ is also a contraction constant ([[def-contractive-sequence]]), and the bound degrades as $c'$ grows, tending to uselessness as $c' \to 1$. That degeneration is not an artefact: for gaps that merely shrink, with no uniform $c < 1$, the conclusion fails outright ([[cex-strictly-decreasing-gaps-no-limit]]).
 
-- **On the index range.** Claims 1 and 3 both start at $k = 1$, and both are
-  genuinely false at $k = 0$, on the single witness given in the statement: there
-  $|x_1 - x_0| = 1$ while $c^{-1}|x_2 - x_1| = 0$, so claim 1 fails at $k = 0$
-  for the same reason claim 3 does. Nothing at all is asserted about the step
-  from $x_0$ to $x_1$, and nothing can be: the contractive hypothesis constrains
-  every gap by its predecessor, and the first gap has no predecessor to be
-  constrained by.
+- **On the index range.** Claims 1 and 3 both start at $k = 1$, and both are genuinely false at $k = 0$, on the single witness given in the statement: there $|x_1 - x_0| = 1$ while $c^{-1}|x_2 - x_1| = 0$, so claim 1 fails at $k = 0$ for the same reason claim 3 does. Nothing at all is asserted about the step from $x_0$ to $x_1$, and nothing can be: the contractive hypothesis constrains every gap by its predecessor, and the first gap has no predecessor to be constrained by.

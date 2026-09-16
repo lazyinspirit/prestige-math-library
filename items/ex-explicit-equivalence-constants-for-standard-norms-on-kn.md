@@ -42,15 +42,11 @@ with explicit constants on these three standard coordinate norms.
 
 ## Facts & Assumptions
 
-**Given:** A field $\mathbb K\in\{\mathbb R,\mathbb C\}$, an integer $n\ge1$,
-and a vector $x\in\mathbb K^n$.
+**Given:** A field $\mathbb K\in\{\mathbb R,\mathbb C\}$, an integer $n\ge1$, and a vector $x\in\mathbb K^n$.
 
-[L1] On $\mathbb R^n$, the displayed $\ell^1$, Euclidean, and max formulas are
-the standard norms of [[def-p-norms-on-rn]], and every norm on $\mathbb R^n$ is
-equivalent to every other ([[thm-all-norms-on-rn-are-equivalent]]).
+[L1] On $\mathbb R^n$, the displayed $\ell^1$, Euclidean, and max formulas are the standard norms of [[def-p-norms-on-rn]], and every norm on $\mathbb R^n$ is equivalent to every other ([[thm-all-norms-on-rn-are-equivalent]]).
 
-[L2] On finite-dimensional complex spaces every two norms are equivalent
-([[thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent]]).
+[L2] On finite-dimensional complex spaces every two norms are equivalent ([[thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent]]).
 
 ## Verification
 
@@ -64,5 +60,4 @@ equivalent to every other ([[thm-all-norms-on-rn-are-equivalent]]).
 
 ## Remarks
 
-- The constants are sharp in the standard basis: $x=(1,\dots,1)$ makes
-  $\|x\|_1=n\|x\|_\infty$ and $\|x\|_1=\sqrt n\,\|x\|_2$.
+- The constants are sharp in the standard basis: $x=(1,\dots,1)$ makes $\|x\|_1=n\|x\|_\infty$ and $\|x\|_1=\sqrt n\,\|x\|_2$.

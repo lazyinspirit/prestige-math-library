@@ -37,15 +37,11 @@ some space $X$ whose induced map on global sections is not surjective.
 
 **Given:** A topological space $X$.
 
-[F1] Global sections are sections over the whole space:
-$\Gamma(X,\mathcal F)=\mathcal F(X)$
-([[def-section-restriction-and-global-section]]).
+[F1] Global sections are sections over the whole space: $\Gamma(X,\mathcal F)=\mathcal F(X)$ ([[def-section-restriction-and-global-section]]).
 
-[L1] Kernel sheaves are computed objectwise
-([[def-kernel-cokernel-image-sheaves]]).
+[L1] Kernel sheaves are computed objectwise ([[def-kernel-cokernel-image-sheaves]]).
 
-[L2] Exactness of sheaves means image equals kernel at each interior term
-([[def-exact-sequence-sheaves]]).
+[L2] Exactness of sheaves means image equals kernel at each interior term ([[def-exact-sequence-sheaves]]).
 
 ## Proof
 

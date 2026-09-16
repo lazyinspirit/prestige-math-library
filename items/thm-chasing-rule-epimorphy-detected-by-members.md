@@ -40,15 +40,11 @@ equivalent:
 
 **Given:** A morphism $g:B \to C$.
 
-[L1] Members modulo equivalence correspond exactly to subobjects
-([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
+[L1] Members modulo equivalence correspond exactly to subobjects ([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
 
-[L3] The image is the least subobject through which a morphism factors
-([[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
+[L3] The image is the least subobject through which a morphism factors ([[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
 
-[L4] Pullbacks exist, and pullbacks of epimorphisms are epimorphisms
-([[def-pullbacks-and-pushouts]],
-[[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
+[L4] Pullbacks exist, and pullbacks of epimorphisms are epimorphisms ([[def-pullbacks-and-pushouts]], [[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
 
 ## Proof
 

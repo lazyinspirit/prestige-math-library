@@ -44,12 +44,9 @@ so $\varphi_a$ is an automorphism of the disc.
 
 **Given:** A point $a\in\mathbb D$.
 
-[F1] The unit disc is $\mathbb D=\{z\in\mathbb C:|z|<1\}$, and the Blaschke
-factor is $\varphi_a(z)=(a-z)/(1-\overline a\,z)$ with denominator nonzero on
-$\mathbb D$ ([[def-unit-disc-upper-half-plane-and-blaschke-factor]]).
+[F1] The unit disc is $\mathbb D=\{z\in\mathbb C:|z|<1\}$, and the Blaschke factor is $\varphi_a(z)=(a-z)/(1-\overline a\,z)$ with denominator nonzero on $\mathbb D$ ([[def-unit-disc-upper-half-plane-and-blaschke-factor]]).
 
-[F2] A map between complex domains is biholomorphic exactly when it is bijective,
-holomorphic, and has holomorphic inverse ([[def-biholomorphic-map]]).
+[F2] A map between complex domains is biholomorphic exactly when it is bijective, holomorphic, and has holomorphic inverse ([[def-biholomorphic-map]]).
 
 ## Proof
 

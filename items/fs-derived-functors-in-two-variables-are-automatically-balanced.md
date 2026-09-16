@@ -25,18 +25,11 @@ Whenever a bifunctor can be derived in each variable, the two derived
 constructions are automatically balanced.
 ## Facts & Assumptions
 
-**Given:** The Axiom of Dependent Choice, a field $k$, the ring
-$R=k[\varepsilon]/(\varepsilon^2)$, the abelian categories
-$\mathcal A=\mathbf{Vect}_k^{\mathrm{fd}}$ and
-$\mathcal C=R\text{-}\mathbf{Mod}^{\mathrm{fd}}$, and the bifunctor
-$$B(A,C):=A^*\otimes_k\operatorname{Hom}_R(k,C)$$ to
-$\mathbf{Vect}_k^{\mathrm{fd}}$.
+**Given:** The Axiom of Dependent Choice, a field $k$, the ring $R=k[\varepsilon]/(\varepsilon^2)$, the abelian categories $\mathcal A=\mathbf{Vect}_k^{\mathrm{fd}}$ and $\mathcal C=R\text{-}\mathbf{Mod}^{\mathrm{fd}}$, and the bifunctor $$B(A,C):=A^*\otimes_k\operatorname{Hom}_R(k,C)$$ to $\mathbf{Vect}_k^{\mathrm{fd}}$.
 
 [L1] With supplied projective and injective data, one may derive an additive bifunctor in either variable and thereby obtain two candidate constructions ([[prop-a-bifunctor-can-be-derived-in-either-variable-when-the-relevant-resolution-data-are-supplied]]).
 
-[L2] A balanced derived bifunctor relative to the supplied data requires extra
-natural isomorphisms, natural in both variables and normalized by the
-degree-zero identifications ([[def-balanced-derived-bifunctor]]).
+[L2] A balanced derived bifunctor relative to the supplied data requires extra natural isomorphisms, natural in both variables and normalized by the degree-zero identifications ([[def-balanced-derived-bifunctor]]).
 
 ## Refutation
 

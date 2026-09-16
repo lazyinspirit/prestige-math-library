@@ -35,18 +35,13 @@ $(i,k)$ is exactly $m_{ik}$.
 
 ## Facts & Assumptions
 
-**Given:** An integer $n\ge 1$, a field $F$, a matrix $A\in M_n(F)$, unpivoted Gaussian elimination
-with no zero pivot, the elimination matrices $E_k$, and the final
-upper-triangular matrix $U=E_{n-2}\cdots E_0A$, where $U=A$ when $n=1$.
+**Given:** An integer $n\ge 1$, a field $F$, a matrix $A\in M_n(F)$, unpivoted Gaussian elimination with no zero pivot, the elimination matrices $E_k$, and the final upper-triangular matrix $U=E_{n-2}\cdots E_0A$, where $U=A$ when $n=1$.
 
-[L1] A normalised LU factorisation is $A=LU$ with $L$ unit lower triangular and
-$U$ upper triangular ([[def-normalised-lu-factorisation]]).
+[L1] A normalised LU factorisation is $A=LU$ with $L$ unit lower triangular and $U$ upper triangular ([[def-normalised-lu-factorisation]]).
 
-[L2] An invertible leading block yields block LU through the Schur complement
-([[thm-block-lu-factorisation-via-an-invertible-leading-block]]).
+[L2] An invertible leading block yields block LU through the Schur complement ([[thm-block-lu-factorisation-via-an-invertible-leading-block]]).
 
-[L3] Matrix multiplication uses the usual product convention
-([[def-matrix-product-and-identity-matrix]]).
+[L3] Matrix multiplication uses the usual product convention ([[def-matrix-product-and-identity-matrix]]).
 
 ## Proof
 

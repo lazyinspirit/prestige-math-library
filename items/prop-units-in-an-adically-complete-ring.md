@@ -38,11 +38,9 @@ Consequently, every element of $I$ lies in the Jacobson radical of $R$.
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, an ideal $I \subseteq R$, and an
-$I$-adically complete ring element $u=1-a$ with $a \in I$.
+**Given:** A commutative ring $R$, an ideal $I \subseteq R$, and an $I$-adically complete ring element $u=1-a$ with $a \in I$.
 
-[L1] The completion map $R \to \varprojlim R/I^n$ is an isomorphism because $R$
-is $I$-adically complete ([[def-separated-and-complete-filtered-module]], [[def-adic-completion-of-a-module]]).
+[L1] The completion map $R \to \varprojlim R/I^n$ is an isomorphism because $R$ is $I$-adically complete ([[def-separated-and-complete-filtered-module]], [[def-adic-completion-of-a-module]]).
 
 ## Proof
 

@@ -32,12 +32,9 @@ for every member $x$ of $A$, then $f = g$.
 
 **Given:** The memberwise equality claim of the statement.
 
-[L1] The only general member test for equality of morphisms is the zero-arrow
-criterion
-([[thm-chasing-rule-a-zero-arrow-is-detected-by-members]]).
+[L1] The only general member test for equality of morphisms is the zero-arrow criterion ([[thm-chasing-rule-a-zero-arrow-is-detected-by-members]]).
 
-[L2] There are distinct morphisms that agree on every member
-([[cex-two-morphisms-agreeing-on-every-member-need-not-be-equal]]).
+[L2] There are distinct morphisms that agree on every member ([[cex-two-morphisms-agreeing-on-every-member-need-not-be-equal]]).
 
 ## Refutation
 

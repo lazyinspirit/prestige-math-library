@@ -42,14 +42,11 @@ charts built from $dx^1,\dots,dx^n$ form a smooth atlas.
 
 [L2] Cotangent coordinate changes are smooth and use the inverse transpose Jacobian ([[lem-cotangent-coordinate-changes-use-the-inverse-transpose-jacobian]]).
 
-[L3] Assuming $\mathrm{AC}_\omega$, a second-countable space is Lindelof
-([[thm-second-countable-implies-lindelof]]).
+[L3] Assuming $\mathrm{AC}_\omega$, a second-countable space is Lindelof ([[thm-second-countable-implies-lindelof]]).
 
-[A1] The axiom $\mathrm{AC}_\omega$ is countable choice
-([[def-countable-choice]]).
+[A1] The axiom $\mathrm{AC}_\omega$ is countable choice ([[def-countable-choice]]).
 
-[F2] A smooth manifold is Hausdorff and second countable
-([[def-smooth-manifold]]).
+[F2] A smooth manifold is Hausdorff and second countable ([[def-smooth-manifold]]).
 
 ## Proof
 

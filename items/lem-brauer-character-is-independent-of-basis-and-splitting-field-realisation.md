@@ -30,15 +30,11 @@ identify the same prime-to-$p$ roots of unity by the residue-field isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional $kG$-module $V$ and a $p$-regular element
-$g\in G$.
+**Given:** A finite-dimensional $kG$-module $V$ and a $p$-regular element $g\in G$.
 
-[F1] The Brauer character of $V$ at $g$ is the sum of the Teichmuller lifts of
-the eigenvalues of the action of $g$ on $V$
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F1] The Brauer character of $V$ at $g$ is the sum of the Teichmuller lifts of the eigenvalues of the action of $g$ on $V$ ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
-[L1] Teichmuller lifts are unique and multiplicative
-([[lem-teichmuller-lift-is-multiplicative-and-unique]]).
+[L1] Teichmuller lifts are unique and multiplicative ([[lem-teichmuller-lift-is-multiplicative-and-unique]]).
 
 ## Proof
 

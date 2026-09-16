@@ -126,18 +126,8 @@ order ([[ex-circle-as-r-mod-z]]).
 
 ## Remarks
 
-- **Why the two-dimensional pasting is needed at all.** A shorter route would be
-  to say that $q \times q$ is a quotient map because each factor is, but "a
-  product of quotient maps is a quotient map" is false in general and is not
-  available here ([[rem-constructions-this-page-stops-short-of]]). What rescues
-  the argument is that $q$ is *open*, so $Q$ is open outright by step 2.3, and
-  openness does pass to products.
+- **Why the two-dimensional pasting is needed at all.** A shorter route would be to say that $q \times q$ is a quotient map because each factor is, but "a product of quotient maps is a quotient map" is false in general and is not available here ([[rem-constructions-this-page-stops-short-of]]). What rescues the argument is that $q$ is *open*, so $Q$ is open outright by step 2.3, and openness does pass to products.
 
-- **The corners are where the gluing is genuinely four-fold.** The relation
-  identifies $(0,0)$, $(1,0)$, $(0,1)$ and $(1,1)$ with one another, so the torus
-  has a single point coming from the four corners of the square. Step 2.4 is
-  exactly the check that the four local descriptions of $F$ agree there.
+- **The corners are where the gluing is genuinely four-fold.** The relation identifies $(0,0)$, $(1,0)$, $(0,1)$ and $(1,1)$ with one another, so the torus has a single point coming from the four corners of the square. Step 2.4 is exactly the check that the four local descriptions of $F$ agree there.
 
-- **The same technique with only one pair of edges glued gives the cylinder**, and
-  with one pair glued after a flip gives the Mobius band; both are worked in the
-  next item, which reuses the argument of steps 2.2 to 4.1 in one variable.
+- **The same technique with only one pair of edges glued gives the cylinder**, and with one pair glued after a flip gives the Mobius band; both are worked in the next item, which reuses the argument of steps 2.2 to 4.1 in one variable.

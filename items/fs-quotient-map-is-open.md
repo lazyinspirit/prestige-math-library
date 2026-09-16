@@ -86,20 +86,8 @@ quotient map by construction, and $q[(-1,\ 1/2)]$ is not open.
 
 ## Remarks
 
-- **The obstruction is saturation, and it is the general one.** A quotient map is
-  open exactly when the saturation of every open set is open
-  ([[def-quotient-topology]]), and collapsing a set with nonempty interior
-  destroys that: an open set that meets $B$ without containing it acquires the
-  whole of $B$ in its saturation, and $B$ has boundary points.
+- **The obstruction is saturation, and it is the general one.** A quotient map is open exactly when the saturation of every open set is open ([[def-quotient-topology]]), and collapsing a set with nonempty interior destroys that: an open set that meets $B$ without containing it acquires the whole of $B$ in its saturation, and $B$ has boundary points.
 
-- **Closedness fails independently.** The map above happens to be closed, since
-  the saturation of a closed set $F$ is $F$ or $F \cup B$, both closed; so this
-  witness separates "quotient map" from "open map" only. A quotient map that is
-  neither open nor closed needs a different construction, and one is worked on the
-  companion page as [[cex-quotient-map-neither-open-nor-closed]].
+- **Closedness fails independently.** The map above happens to be closed, since the saturation of a closed set $F$ is $F$ or $F \cup B$, both closed; so this witness separates "quotient map" from "open map" only. A quotient map that is neither open nor closed needs a different construction, and one is worked on the companion page as [[cex-quotient-map-neither-open-nor-closed]].
 
-- **Why the converse direction is nevertheless useful.** Most quotients that are
-  identified with a known space in practice are open quotient maps, because their
-  equivalence relation comes from translating by the elements of a group, and
-  translation is a homeomorphism; both the circle and the torus on the companion
-  page are of that kind.
+- **Why the converse direction is nevertheless useful.** Most quotients that are identified with a known space in practice are open quotient maps, because their equivalence relation comes from translating by the elements of a group, and translation is a homeomorphism; both the circle and the torus on the companion page are of that kind.

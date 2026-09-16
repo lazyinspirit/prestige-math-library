@@ -43,9 +43,7 @@ sectional-curvature interface.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, integers $n\ge0$, a real number $r>0$, and, when
-$n\ge2$, a point $x\in S^n_r$ and a tangent two-plane
-$\sigma\subseteq T_xS^n_r$.
+**Given:** Countable choice, integers $n\ge0$, a real number $r>0$, and, when $n\ge2$, a point $x\in S^n_r$ and a tangent two-plane $\sigma\subseteq T_xS^n_r$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 

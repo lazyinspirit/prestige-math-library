@@ -41,29 +41,19 @@ projections and geodesic existence.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and the boundaryless embedded Riemannian
-submanifold.
+**Given:** Countable choice and the boundaryless embedded Riemannian submanifold.
 
-[F1] Total geodesicity means $\mathrm{II}=0$.
-[[def-totally-geodesic-submanifold]].
+[F1] Total geodesicity means $\mathrm{II}=0$. [[def-totally-geodesic-submanifold]].
 
-[F2] The Gauss decomposition is
-$\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$.
-[[def-induced-connection-and-second-fundamental-form]].
+[F2] The Gauss decomposition is $\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F3] The induced connection is the intrinsic Levi–Civita connection.
-[[thm-the-induced-connection-is-levi-civita]].
+[F3] The induced connection is the intrinsic Levi–Civita connection. [[thm-the-induced-connection-is-levi-civita]].
 
-[F4] The second fundamental form is symmetric and bilinear.
-[[lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor]].
+[F4] The second fundamental form is symmetric and bilinear. [[lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor]].
 
-[F5] A geodesic is characterized by vanishing covariant acceleration, with
-the derivative along a curve defined by the pullback connection.
-[[def-geodesic-of-an-affine-connection]],
-[[def-covariant-derivative-along-a-curve]].
+[F5] A geodesic is characterized by vanishing covariant acceleration, with the derivative along a curve defined by the pullback connection. [[def-geodesic-of-an-affine-connection]], [[def-covariant-derivative-along-a-curve]].
 
-[F6] Under $\mathrm{AC}_\omega$, every supplied initial tangent vector has a
-unique local intrinsic geodesic. [[thm-existence-uniqueness-and-smooth-dependence-of-geodesics]].
+[F6] Under $\mathrm{AC}_\omega$, every supplied initial tangent vector has a unique local intrinsic geodesic. [[thm-existence-uniqueness-and-smooth-dependence-of-geodesics]].
 
 ## Proof
 

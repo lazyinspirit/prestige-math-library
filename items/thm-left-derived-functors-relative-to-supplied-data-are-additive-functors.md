@@ -37,29 +37,19 @@ define an additive functor on the domain of $P$.
 
 **Given:** An integer $n$.
 
-[L1] Left derived maps preserve identities
-([[prop-left-derived-maps-preserve-identities]]).
+[L1] Left derived maps preserve identities ([[prop-left-derived-maps-preserve-identities]]).
 
-[L2] Left derived maps preserve composition
-([[prop-left-derived-maps-preserve-composition]]).
+[L2] Left derived maps preserve composition ([[prop-left-derived-maps-preserve-composition]]).
 
-[L3] The category of complexes in an additive category is additive, so
-comparison lifts can be added degreewise
-([[thm-the-category-of-complexes-in-an-additive-category-is-additive]]).
+[L3] The category of complexes in an additive category is additive, so comparison lifts can be added degreewise ([[thm-the-category-of-complexes-in-an-additive-category-is-additive]]).
 
-[L4] Two comparison lifts of the same morphism are chain-homotopic
-([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
+[L4] Two comparison lifts of the same morphism are chain-homotopic ([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
 
-[L5] Applying $F$ degreewise preserves chain maps, and homology is an additive
-functor on complexes
-([[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]],
-[[thm-homology-is-an-additive-functor]]).
+[L5] Applying $F$ degreewise preserves chain maps, and homology is an additive functor on complexes ([[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]], [[thm-homology-is-an-additive-functor]]).
 
-[L6] Chain-homotopic maps induce the same map on homology
-([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
+[L6] Chain-homotopic maps induce the same map on homology ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
 
-[L7] An additive functor is a functor that is additive on each hom-group
-([[def-additive-functor]]).
+[L7] An additive functor is a functor that is additive on each hom-group ([[def-additive-functor]]).
 
 ## Proof
 

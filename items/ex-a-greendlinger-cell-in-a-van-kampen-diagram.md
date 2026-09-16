@@ -33,12 +33,9 @@ boundary.
 
 ## Facts & Assumptions
 
-**Given:** A one-face van Kampen diagram whose unique face is labelled by a
-relator $r$.
+**Given:** A one-face van Kampen diagram whose unique face is labelled by a relator $r$.
 
-[L1] Greendlinger's conclusion asks for a face contributing more than half of
-its boundary to the outer boundary
-([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
+[L1] Greendlinger's conclusion asks for a face contributing more than half of its boundary to the outer boundary ([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
 
 ## Verification
 

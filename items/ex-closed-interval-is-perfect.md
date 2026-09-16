@@ -75,20 +75,8 @@ do the counting.
 
 ## Remarks
 
-- **Nondegeneracy is exactly what is needed.** For $a = b$ the set $[a,a] =
-  \{a\}$ is closed, its single point is isolated, and it is finite; the argument
-  of step 1.2 breaks precisely there, since neither $x < b$ nor $x > a$ holds.
-  This matches the hypothesis $a < b$ of [[cor-interval-uncountable]].
+- **Nondegeneracy is exactly what is needed.** For $a = b$ the set $[a,a] = \{a\}$ is closed, its single point is isolated, and it is finite; the argument of step 1.2 breaks precisely there, since neither $x < b$ nor $x > a$ holds. This matches the hypothesis $a < b$ of [[cor-interval-uncountable]].
 
-- **The open interval supplies only half of the definition.** The computation of
-  step 1.2 applies verbatim inside $(a,b)$ and shows it has no isolated points,
-  but $(a,b)$ is not closed, so it is not perfect. Perfectness needs both halves,
-  which is why the example is stated for the closed interval.
+- **The open interval supplies only half of the definition.** The computation of step 1.2 applies verbatim inside $(a,b)$ and shows it has no isolated points, but $(a,b)$ is not closed, so it is not perfect. Perfectness needs both halves, which is why the example is stated for the closed interval.
 
-- **Two proofs of one fact, sharing one ingredient.** Both routes spend the
-  completeness of $\mathbb{R}$ exactly once, [[cor-interval-uncountable]] as a
-  supremum and [[thm-perfect-set-uncountable-r]] through
-  [[thm-nested-interval-property]]. They differ in everything else: the first
-  trisects a given interval against a given enumeration, the second selects
-  rational-endpoint intervals by least index. Neither is a corollary of the
-  other.
+- **Two proofs of one fact, sharing one ingredient.** Both routes spend the completeness of $\mathbb{R}$ exactly once, [[cor-interval-uncountable]] as a supremum and [[thm-perfect-set-uncountable-r]] through [[thm-nested-interval-property]]. They differ in everything else: the first trisects a given interval against a given enumeration, the second selects rational-endpoint intervals by least index. Neither is a corollary of the other.

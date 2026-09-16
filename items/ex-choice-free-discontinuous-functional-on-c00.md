@@ -40,14 +40,11 @@ finite. The map $f$ is linear but unbounded, hence discontinuous.
 
 ## Facts & Assumptions
 
-**Given:** The space $c_{00}$ with its supremum norm and the standard unit
-vectors $e_n$.
+**Given:** The space $c_{00}$ with its supremum norm and the standard unit vectors $e_n$.
 
-[L1] Linearity means preserving scalar combinations
-([[def-linear-map]]).
+[L1] Linearity means preserving scalar combinations ([[def-linear-map]]).
 
-[L2] A normed space is a vector space equipped with a norm
-([[def-norm-and-normed-space]]).
+[L2] A normed space is a vector space equipped with a norm ([[def-norm-and-normed-space]]).
 
 ## Verification
 
@@ -61,5 +58,4 @@ vectors $e_n$.
 
 ## Remarks
 
-- This is the explicit incomplete-space witness promised by the companion
-  remark. No choice principle is used anywhere in the construction.
+- This is the explicit incomplete-space witness promised by the companion remark. No choice principle is used anywhere in the construction.

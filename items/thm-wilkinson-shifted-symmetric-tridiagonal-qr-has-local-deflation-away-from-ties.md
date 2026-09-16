@@ -35,15 +35,11 @@ is again a real symmetric tridiagonal matrix.
 
 ## Facts & Assumptions
 
-**Given:** A real symmetric tridiagonal matrix $T$, away from the Wilkinson tie
-case, and the real orthogonal QR factorisation $T-\mu I=QR$ built from standard
-adjacent-row Givens eliminations with the corresponding Wilkinson shift $\mu$.
+**Given:** A real symmetric tridiagonal matrix $T$, away from the Wilkinson tie case, and the real orthogonal QR factorisation $T-\mu I=QR$ built from standard adjacent-row Givens eliminations with the corresponding Wilkinson shift $\mu$.
 
 [L1] Away from a Wilkinson tie, the trailing $2\times2$ block determines a unique Wilkinson shift ([[def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift]]).
 
-[L2] A shifted QR factorisation built from standard adjacent-row Givens
-eliminations preserves upper Hessenberg form
-([[prop-shifted-qr-preserves-upper-hessenberg-form]]).
+[L2] A shifted QR factorisation built from standard adjacent-row Givens eliminations preserves upper Hessenberg form ([[prop-shifted-qr-preserves-upper-hessenberg-form]]).
 
 ## Proof
 

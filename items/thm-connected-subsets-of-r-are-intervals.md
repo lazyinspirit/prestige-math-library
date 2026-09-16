@@ -97,23 +97,8 @@ phrase "is an interval" is to be read as "is order-convex" throughout this page.
 
 ## Remarks
 
-- **Where completeness is spent.** Only in step 2.2, which produces
-  $\sup(A \cap [p,q])$; no other step uses the least-upper-bound property, and
-  the rest is the order, ordered-field arithmetic and the definition of
-  separation. The obstruction over an incomplete ordered field is traceable to
-  the failure of that supremum to exist, and it is visible in
-  [[cex-rationals-in-an-interval-are-disconnected]]: the set
-  $\mathbb{Q} \cap [0,2]$ contains all the rationals between its endpoints and is
-  nevertheless disconnected as a subset of $\mathbb{R}$, split at an irrational
-  point that $\mathbb{Q}$ does not see.
+- **Where completeness is spent.** Only in step 2.2, which produces $\sup(A \cap [p,q])$; no other step uses the least-upper-bound property, and the rest is the order, ordered-field arithmetic and the definition of separation. The obstruction over an incomplete ordered field is traceable to the failure of that supremum to exist, and it is visible in [[cex-rationals-in-an-interval-are-disconnected]]: the set $\mathbb{Q} \cap [0,2]$ contains all the rationals between its endpoints and is nevertheless disconnected as a subset of $\mathbb{R}$, split at an irrational point that $\mathbb{Q}$ does not see.
 
-- **The two directions are of different characters.** "Not order-convex implies
-  disconnected" is a construction, step 1.1, and needs nothing beyond the order.
-  "Order-convex implies connected" is where the work sits, and the supremum
-  $c$ produced in step 2.2 is the point at which the two pieces would have to
-  meet; the contradiction is that it is adherent to both.
+- **The two directions are of different characters.** "Not order-convex implies disconnected" is a construction, step 1.1, and needs nothing beyond the order. "Order-convex implies connected" is where the work sits, and the supremum $c$ produced in step 2.2 is the point at which the two pieces would have to meet; the contradiction is that it is adherent to both.
 
-- **The theorem is about subsets of $\mathbb{R}$ and its statement is written in
-  order vocabulary**, so it cannot even be stated where no order is present;
-  [[rem-r-native-topology-scope]] collects the results on this page with that
-  feature.
+- **The theorem is about subsets of $\mathbb{R}$ and its statement is written in order vocabulary**, so it cannot even be stated where no order is present; [[rem-r-native-topology-scope]] collects the results on this page with that feature.

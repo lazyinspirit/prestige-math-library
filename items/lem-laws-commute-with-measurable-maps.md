@@ -35,14 +35,11 @@ $$\mathbb P_{g\circ X}(B)=\mathbb P_X(g^{-1}(B)).$$
 
 **Given:** A random element $X$ and a measurable map $g$ as in the Statement.
 
-[L1] Composition of measurable maps is measurable
-([[thm-composition-with-borel-functions-preserves-measurability]]).
+[L1] Composition of measurable maps is measurable ([[thm-composition-with-borel-functions-preserves-measurability]]).
 
-[L2] The law of a random element is defined by pullback of measurable target
-sets ([[def-law-or-distribution-of-a-random-element]]).
+[L2] The law of a random element is defined by pullback of measurable target sets ([[def-law-or-distribution-of-a-random-element]]).
 
-[L3] The law of any random element is a probability measure
-([[lem-law-of-a-random-element-is-a-probability-measure]]).
+[L3] The law of any random element is a probability measure ([[lem-law-of-a-random-element-is-a-probability-measure]]).
 
 ## Proof
 

@@ -34,14 +34,11 @@ $$\left|\sum_{1\le n\le x}\chi(n)\right|\le q.$$
 
 ## Facts & Assumptions
 
-**Given:** A nonprincipal Dirichlet character $\chi$ modulo $q$ and a real
-$x\ge1$.
+**Given:** A nonprincipal Dirichlet character $\chi$ modulo $q$ and a real $x\ge1$.
 
-[L1] Dirichlet characters are periodic modulo $q$
-([[lem-dirichlet-character-extension-well-defined]]).
+[L1] Dirichlet characters are periodic modulo $q$ ([[lem-dirichlet-character-extension-well-defined]]).
 
-[L2] The sum of $\chi$ over any complete residue system modulo $q$ is $0$
-([[lem-nonprincipal-dirichlet-character-complete-sum]]).
+[L2] The sum of $\chi$ over any complete residue system modulo $q$ is $0$ ([[lem-nonprincipal-dirichlet-character-complete-sum]]).
 
 ## Proof
 

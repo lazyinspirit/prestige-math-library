@@ -27,8 +27,7 @@ Every monoidal category is rigid.
 
 **Given:** The monoidal category of all vector spaces over a field.
 
-[L1] That category is a counterexample to universal rigidity
-([[cex-not-every-monoidal-category-is-rigid]]).
+[L1] That category is a counterexample to universal rigidity ([[cex-not-every-monoidal-category-is-rigid]]).
 
 ## Refutation
 

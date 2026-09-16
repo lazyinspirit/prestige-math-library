@@ -31,16 +31,11 @@ for every $n$.
 
 ## Facts & Assumptions
 
-**Given:** A chain map $f:C_\bullet\to D_\bullet$, an integer $n$, and an
-element $(y,x)\in D_n\oplus C_{n-1}$.
+**Given:** A chain map $f:C_\bullet\to D_\bullet$, an integer $n$, and an element $(y,x)\in D_n\oplus C_{n-1}$.
 
-[L1] The cone differential is
-$$d_n^{\operatorname{Cone}(f)}(y,x)=(d_n^D(y)+f_{n-1}(x),-d_{n-1}^C(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L1] The cone differential is $$d_n^{\operatorname{Cone}(f)}(y,x)=(d_n^D(y)+f_{n-1}(x),-d_{n-1}^C(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
-[L2] A chain map satisfies
-$$d_{n-1}^D f_{n-1}=f_{n-2}d_{n-1}^C$$
-([[def-chain-map]]).
+[L2] A chain map satisfies $$d_{n-1}^D f_{n-1}=f_{n-2}d_{n-1}^C$$ ([[def-chain-map]]).
 
 ## Proof
 

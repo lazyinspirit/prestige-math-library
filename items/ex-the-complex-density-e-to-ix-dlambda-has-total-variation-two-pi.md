@@ -31,8 +31,7 @@ $$|\nu|([0,2\pi])=\int_0^{2\pi}|e^{ix}|\,dx=2\pi.$$
 
 **Given:** The density $h(x)=e^{ix}$ on $[0,2\pi]$.
 
-[L1] A complex $L^1$ density $h$ defines a complex measure with
-$|\nu|(E)=\int_E |h|\,d\mu$. ([[thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]])
+[L1] A complex $L^1$ density $h$ defines a complex measure with $|\nu|(E)=\int_E |h|\,d\mu$. ([[thm-complex-l-one-densities-define-complex-measures-with-prescribed-total-variation]])
 
 [A1] One has $|e^{ix}|=1$ for every real $x$.
 
@@ -41,8 +40,7 @@ $|\nu|(E)=\int_E |h|\,d\mu$. ([[thm-complex-l-one-densities-define-complex-measu
 **Proof technique:** direct.
 
 1.1 The function $h(x)=e^{ix}$ is bounded on the finite interval $[0,2\pi]$, [L1, A1]
-so it lies in $L^1(\lambda)$. Therefore [L1] makes
-$\nu(E)=\int_E e^{ix}\,d\lambda$ a complex measure.
+so it lies in $L^1(\lambda)$. Therefore [L1] makes $\nu(E)=\int_E e^{ix}\,d\lambda$ a complex measure.
 
 2.1 Applying [L1] and then [A1] on the whole interval gives [L1, A1, step 1.1] ∎
 $$|\nu|([0,2\pi])=\int_0^{2\pi}|e^{ix}|\,dx=\int_0^{2\pi}1\,dx=2\pi.$$

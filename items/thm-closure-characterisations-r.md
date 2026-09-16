@@ -93,22 +93,8 @@ that carry work.
 
 ## Remarks
 
-- **Which claim does the work in practice.** Claim 1 is the one used almost
-  everywhere below: to show a point lies in $\overline{A}$ one exhibits, for each
-  $\varepsilon > 0$, a point of $A$ within $\varepsilon$ of it. Claim 2 is what
-  separates the two ways a point can be adherent, by membership or by
-  accumulation, and it is what makes the notion of an isolated point visible.
+- **Which claim does the work in practice.** Claim 1 is the one used almost everywhere below: to show a point lies in $\overline{A}$ one exhibits, for each $\varepsilon > 0$, a point of $A$ within $\varepsilon$ of it. Claim 2 is what separates the two ways a point can be adherent, by membership or by accumulation, and it is what makes the notion of an isolated point visible.
 
-- **No special property of $\mathbb{R}$ is used.** The argument uses the
-  definitions of open, closed, neighbourhood and closure, and the order enters
-  only through the nesting property of neighbourhoods; neither the
-  least-upper-bound property nor the Archimedean property appears at any step.
-  The results of this page that do use them are flagged in
-  [[rem-r-native-topology-scope]].
+- **No special property of $\mathbb{R}$ is used.** The argument uses the definitions of open, closed, neighbourhood and closure, and the order enters only through the nesting property of neighbourhoods; neither the least-upper-bound property nor the Archimedean property appears at any step. The results of this page that do use them are flagged in [[rem-r-native-topology-scope]].
 
-- **The sequential form is a separate theorem and costs more.** Replacing
-  "every neighbourhood meets $A$" by "some sequence in $A$ converges to $x$" is
-  [[lem-sequential-characterisation-of-closure-r]], and the passage from the
-  first to the second spends the axiom of countable choice, since it selects one
-  point of $A$ from each of infinitely many neighbourhoods. The characterisation
-  proved above is choice free.
+- **The sequential form is a separate theorem and costs more.** Replacing "every neighbourhood meets $A$" by "some sequence in $A$ converges to $x$" is [[lem-sequential-characterisation-of-closure-r]], and the passage from the first to the second spends the axiom of countable choice, since it selects one point of $A$ from each of infinitely many neighbourhoods. The characterisation proved above is choice free.

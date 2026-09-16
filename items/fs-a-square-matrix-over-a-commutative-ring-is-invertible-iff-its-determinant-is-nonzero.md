@@ -35,20 +35,13 @@ $\det(A)\neq0$.
 
 **Given:** The claimed equivalence over arbitrary commutative rings.
 
-[F1] A ring in the published convention may be the zero ring
-([[def-ring]]).
+[F1] A ring in the published convention may be the zero ring ([[def-ring]]).
 
-[F2] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]) and its only
-units are $1$ and $-1$ ([[lem-units-of-z]]).
+[F2] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]) and its only units are $1$ and $-1$ ([[lem-units-of-z]]).
 
-[F3] For a positive-sized square matrix $A=(a_{ij})$ over a commutative ring,
-$\det(A)=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
-\prod_{i<n}a_{\sigma(i),i}$
-([[def-determinant-of-a-square-matrix]]).
+[F3] For a positive-sized square matrix $A=(a_{ij})$ over a commutative ring, $\det(A)=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma) \prod_{i<n}a_{\sigma(i),i}$ ([[def-determinant-of-a-square-matrix]]).
 
-[L1] The correct general criterion is: a positive-sized square matrix over a
-commutative ring is invertible if and only if its determinant is a unit
-([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
+[L1] The correct general criterion is: a positive-sized square matrix over a commutative ring is invertible if and only if its determinant is a unit ([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
 
 ## Refutation
 

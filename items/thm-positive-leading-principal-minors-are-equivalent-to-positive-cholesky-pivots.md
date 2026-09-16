@@ -43,20 +43,15 @@ Cholesky pivots.
 
 **Given:** A real symmetric matrix $A\in M_n(\mathbb R)$.
 
-[L1] A matrix has a Cholesky factorisation with positive diagonal exactly when
-it is Hermitian positive definite ([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).
+[L1] A matrix has a Cholesky factorisation with positive diagonal exactly when it is Hermitian positive definite ([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).
 
-[L2] A real symmetric matrix is positive definite exactly when all of its
-leading principal minors are positive
-([[thm-sylvesters-criterion-for-positive-definiteness]]).
+[L2] A real symmetric matrix is positive definite exactly when all of its leading principal minors are positive ([[thm-sylvesters-criterion-for-positive-definiteness]]).
 
-[L3] The determinant of a triangular matrix is the product of its diagonal
-entries ([[thm-determinant-of-a-triangular-matrix]]).
+[L3] The determinant of a triangular matrix is the product of its diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
 
 ## Proof
 
-**Proof technique:** compare Sylvester's criterion with the determinant formula
-for leading Cholesky blocks.
+**Proof technique:** compare Sylvester's criterion with the determinant formula for leading Cholesky blocks.
 
 1.1 By [L1] and [L2], condition 1 is equivalent to positive definiteness, and positive definiteness is equivalent to existence of a Cholesky factorisation with positive diagonal. Hence conditions 1 and 2 are equivalent. [L1, L2]
 

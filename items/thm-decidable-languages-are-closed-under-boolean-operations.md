@@ -38,9 +38,7 @@ intersection, difference, and symmetric difference are decidable.
 
 [L2] By [[def-language-boolean-operations]], complements and differences are taken inside the fixed ambient $\Sigma^*$.
 
-[A1] The set identities
-$$ L\setminus K=L\cap K^c,\qquad L\triangle K=(L\setminus K)\cup(K\setminus L) $$
-hold for all subsets of one set.
+[A1] The set identities $$ L\setminus K=L\cap K^c,\qquad L\triangle K=(L\setminus K)\cup(K\setminus L) $$ hold for all subsets of one set.
 
 ## Proof
 

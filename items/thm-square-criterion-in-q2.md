@@ -39,11 +39,9 @@ in $\mathbb Q_2$ if and only if $n$ is even and $u \equiv 1 \pmod 8$.
 
 **Given:** $x = 2^n u$ with odd $u \in \mathbb Z_2^\times$.
 
-[L1] $\mathbb Z_2$ is the valuation ring of $\mathbb Q_2$
-([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_2$ is the valuation ring of $\mathbb Q_2$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
 
-[L2] Newton's criterion holds in $\mathbb Q_2$
-([[thm-p-adic-newton-criterion]]).
+[L2] Newton's criterion holds in $\mathbb Q_2$ ([[thm-p-adic-newton-criterion]]).
 
 ## Proof
 

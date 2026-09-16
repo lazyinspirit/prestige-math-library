@@ -36,24 +36,17 @@ $M[G]\models\operatorname{cf}(\kappa)=\omega$.
 
 ## Facts & Assumptions
 
-**Given:** $M,U,\kappa,\mathbb P_U,G$ as in the statement. Conditions are
-ordered stronger-below.
+**Given:** $M,U,\kappa,\mathbb P_U,G$ as in the statement. Conditions are ordered stronger-below.
 
-[F1] [[def-prikry-forcing-and-direct-extension]]: A condition has a finite
-strictly increasing stem, extensions end-extend stems, and new entries come
-from the old measure-one upper part.
+[F1] [[def-prikry-forcing-and-direct-extension]]: A condition has a finite strictly increasing stem, extensions end-extend stems, and new entries come from the old measure-one upper part.
 
-[F2] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal
-measure is a nonprincipal $\kappa$-complete ultrafilter on $\kappa$.
+[F2] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal measure is a nonprincipal $\kappa$-complete ultrafilter on $\kappa$.
 
-[F3] [[def-dense-open-sets-and-model-generic-filters]]: An $M$-generic filter
-meets every dense subset of the forcing which belongs to $M$.
+[F3] [[def-dense-open-sets-and-model-generic-filters]]: An $M$-generic filter meets every dense subset of the forcing which belongs to $M$.
 
-[F4] [[thm-forcing-theorem]]: The forcing theorem supplies the truth lemma for
-every $M$-generic filter.
+[F4] [[thm-forcing-theorem]]: The forcing theorem supplies the truth lemma for every $M$-generic filter.
 
-[F5] [[def-cofinality]]: $\operatorname{cf}(\kappa)$ is the least ordinal
-length of a map into $\kappa$ with cofinal range.
+[F5] [[def-cofinality]]: $\operatorname{cf}(\kappa)$ is the least ordinal length of a map into $\kappa$ with cofinal range.
 
 ## Proof
 

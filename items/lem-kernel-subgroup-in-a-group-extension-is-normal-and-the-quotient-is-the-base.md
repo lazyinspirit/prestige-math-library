@@ -36,14 +36,11 @@ quotient $E/i(N)$ is canonically isomorphic to $Q$.
 
 **Given:** The displayed short exact sequence of groups.
 
-[L1] In a short exact sequence, the image of the first map equals the kernel of
-the second ([[def-split-extension-of-groups]]).
+[L1] In a short exact sequence, the image of the first map equals the kernel of the second ([[def-split-extension-of-groups]]).
 
-[L2] The kernel of a group homomorphism is a normal subgroup of its domain
-([[thm-image-subgroup-and-kernel-normal]]).
+[L2] The kernel of a group homomorphism is a normal subgroup of its domain ([[thm-image-subgroup-and-kernel-normal]]).
 
-[L3] The first isomorphism theorem identifies the quotient by the kernel with
-the image ([[thm-first-isomorphism-theorem-groups]]).
+[L3] The first isomorphism theorem identifies the quotient by the kernel with the image ([[thm-first-isomorphism-theorem-groups]]).
 
 ## Proof
 

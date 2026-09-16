@@ -71,14 +71,6 @@ above the level $0$ corresponds to staying weakly above the diagonal $y=x$.
 
 ## Remarks
 
-- **Why this is a lemma and not a convention.** The page uses the rectangular
-  picture for the binomial count and the diagonal picture for heights, levels and
-  reflections. The sources use one or the other and state no correspondence, so a
-  page using both must prove they agree once. Every later statement that moves
-  between the pictures cites this lemma and does not restate it.
+- **Why this is a lemma and not a convention.** The page uses the rectangular picture for the binomial count and the diagonal picture for heights, levels and reflections. The sources use one or the other and state no correspondence, so a page using both must prove they agree once. Every later statement that moves between the pictures cites this lemma and does not restate it.
 
-- **What the correspondence does not do.** It matches the two step sets and the
-  two positions, and nothing else. The number of steps is preserved and the two
-  endpoints determine each other, but a level in one picture is a diagonal line
-  in the other, which is why the level statements below are made in the diagonal
-  picture only.
+- **What the correspondence does not do.** It matches the two step sets and the two positions, and nothing else. The number of steps is preserved and the two endpoints determine each other, but a level in one picture is a diagonal line in the other, which is why the level statements below are made in the diagonal picture only.

@@ -32,9 +32,7 @@ the single point $(0,0)$, not a one-torus.
 
 **Given:** The standard symplectic plane and the displayed Hamiltonian.
 
-[F1] In one degree of freedom, complete integrability requires one integral
-whose differential is independent on a dense regular locus.
-[[def-completely-integrable-hamiltonian-system]].
+[F1] In one degree of freedom, complete integrability requires one integral whose differential is independent on a dense regular locus. [[def-completely-integrable-hamiltonian-system]].
 
 ## Verification
 

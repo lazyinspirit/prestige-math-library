@@ -33,12 +33,9 @@ $$\widehat M^{\,I} \cong \widehat M^{\,J}.$$
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, an $R$-module $M$, ideals $I,J \subseteq R$,
-and integers $c,d>0$ with $I^c \subseteq J$ and $J^d \subseteq I$.
+**Given:** A commutative ring $R$, an $R$-module $M$, ideals $I,J \subseteq R$, and integers $c,d>0$ with $I^c \subseteq J$ and $J^d \subseteq I$.
 
-[L1] The $I$-adic and $J$-adic completions are the inverse limits of the
-quotient towers $(M/I^nM)$ and $(M/J^mM)$
-([[def-adic-completion-of-a-module]]).
+[L1] The $I$-adic and $J$-adic completions are the inverse limits of the quotient towers $(M/I^nM)$ and $(M/J^mM)$ ([[def-adic-completion-of-a-module]]).
 
 [L2] A compatible family of quotient maps induces a unique map into the corresponding inverse limit ([[thm-universal-property-of-an-inverse-limit-of-modules]]).
 

@@ -35,15 +35,11 @@ Both $P_5$ and $\overline{P_5}$ have the Erdős-Hajnal property.
 
 **Given:** The graph $P_5$.
 
-[L1] The graph $P_5$ has the polynomial Rödl property
-([[thm-the-five-vertex-path-has-the-polynomial-rodl-property]]).
+[L1] The graph $P_5$ has the polynomial Rödl property ([[thm-the-five-vertex-path-has-the-polynomial-rodl-property]]).
 
-[L2] Every finite family with the polynomial Rödl property has the
-Erdős-Hajnal property
-([[cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family]]).
+[L2] Every finite family with the polynomial Rödl property has the Erdős-Hajnal property ([[cor-polynomial-rodl-implies-erdos-hajnal-for-a-finite-family]]).
 
-[F1] The polynomial Rödl property and the Erdős-Hajnal property are both
-invariant under complementation of the forbidden graph.
+[F1] The polynomial Rödl property and the Erdős-Hajnal property are both invariant under complementation of the forbidden graph.
 
 ## Proof
 

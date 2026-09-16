@@ -37,16 +37,11 @@ $$bb'\notin E(G),\qquad vb\in E(G),\qquad vb'\notin E(G).$$
 
 ## Facts & Assumptions
 
-**Given:** A finite graph $G$, an anticonnected set $A\subseteq V(G)$, and a
-vertex $v\in V(G)\setminus A$ that is mixed on $A$.
+**Given:** A finite graph $G$, an anticonnected set $A\subseteq V(G)$, and a vertex $v\in V(G)\setminus A$ that is mixed on $A$.
 
-[L1] A set is anticonnected exactly when the induced subgraph on that set is
-connected in the complement graph
-([[def-anticonnected-graph-and-anticonnected-component]]).
+[L1] A set is anticonnected exactly when the induced subgraph on that set is connected in the complement graph ([[def-anticonnected-graph-and-anticonnected-component]]).
 
-[L2] Because $v$ is mixed on $A$, it has at least one neighbour and at least one
-nonneighbour in $A$
-([[def-edges-between-sets-and-pure-mixed-pairs]]).
+[L2] Because $v$ is mixed on $A$, it has at least one neighbour and at least one nonneighbour in $A$ ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 
 ## Proof
 

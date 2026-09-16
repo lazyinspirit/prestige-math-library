@@ -39,17 +39,13 @@ and right exchanged.
 
 ## Facts & Assumptions
 
-**Given:** A rigid monoidal category, morphisms $a:X\to X^{\vee\vee}$ and
-$b:Y\to Y^{\vee\vee}$, and when needed an additive structure.
+**Given:** A rigid monoidal category, morphisms $a:X\to X^{\vee\vee}$ and $b:Y\to Y^{\vee\vee}$, and when needed an additive structure.
 
-[F1] EGNO Proposition 4.7.3 proves exactly the four displayed properties, with
-the additive clause explicitly restricted to additive categories.
+[F1] EGNO Proposition 4.7.3 proves exactly the four displayed properties, with the additive clause explicitly restricted to additive categories.
 
-[L1] The duality functor is contravariant and antimonoidal
-([[thm-left-duality-is-a-contravariant-antimonoidal-functor]]).
+[L1] The duality functor is contravariant and antimonoidal ([[thm-left-duality-is-a-contravariant-antimonoidal-functor]]).
 
-[L2] The traces are the ones from
-[[def-the-categorical-trace-of-a-morphism-into-the-double-dual]].
+[L2] The traces are the ones from [[def-the-categorical-trace-of-a-morphism-into-the-double-dual]].
 
 ## Proof
 

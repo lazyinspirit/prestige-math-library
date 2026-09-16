@@ -33,17 +33,13 @@ equivalent word does not change the resulting subgroup presentation.
 
 ## Facts & Assumptions
 
-**Given:** A Reidemeister-Schreier presentation with Schreier system
-$\mathcal T$, and two freely equivalent relator words $r,r'$.
+**Given:** A Reidemeister-Schreier presentation with Schreier system $\mathcal T$, and two freely equivalent relator words $r,r'$.
 
-[L1] The normal closure of a set is the smallest normal subgroup containing it
-([[def-normal-closure]]).
+[L1] The normal closure of a set is the smallest normal subgroup containing it ([[def-normal-closure]]).
 
-[L2] Schreier rewriting is unchanged by free reduction
-([[lem-schreier-rewriting-is-invariant-under-free-reduction]]).
+[L2] Schreier rewriting is unchanged by free reduction ([[lem-schreier-rewriting-is-invariant-under-free-reduction]]).
 
-[L3] The subgroup presentation is obtained from the rewritten conjugates
-$\tau(trt^{-1})$ ([[thm-reidemeister-schreier-presentation]]).
+[L3] The subgroup presentation is obtained from the rewritten conjugates $\tau(trt^{-1})$ ([[thm-reidemeister-schreier-presentation]]).
 
 ## Proof
 

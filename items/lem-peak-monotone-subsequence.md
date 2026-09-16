@@ -108,24 +108,8 @@ points that are not put in shadow by anything to their right.
 
 ## Remarks
 
-- **The two cases are a negation pair, so no completeness is used to split them.**
-  Either peaks occur beyond every index, or they stop; nothing about $\mathbb{R}$
-  enters the dichotomy. The only properties of the reals used anywhere above are
-  trichotomy of the order, in step 3.2, and nothing else. In particular this
-  lemma holds verbatim in any linearly ordered set, and it is
-  [[cor-monotone-converges-iff-bounded]], not this lemma, that consumes the
-  least-upper-bound property inside [[thm-bolzano-weierstrass]].
+- **The two cases are a negation pair, so no completeness is used to split them.** Either peaks occur beyond every index, or they stop; nothing about $\mathbb{R}$ enters the dichotomy. The only properties of the reals used anywhere above are trichotomy of the order, in step 3.2, and nothing else. In particular this lemma holds verbatim in any linearly ordered set, and it is [[cor-monotone-converges-iff-bounded]], not this lemma, that consumes the least-upper-bound property inside [[thm-bolzano-weierstrass]].
 
-- **Which kind of monotone subsequence is produced depends on the case, and the
-  statement deliberately does not say which.** Case (i) gives a nonincreasing
-  subsequence and case (ii) a strictly increasing one. A sequence may satisfy
-  case (i) with no increasing subsequence at all, for instance a constant
-  sequence, so nothing stronger than "monotone" can be claimed uniformly.
+- **Which kind of monotone subsequence is produced depends on the case, and the statement deliberately does not say which.** Case (i) gives a nonincreasing subsequence and case (ii) a strictly increasing one. A sequence may satisfy case (i) with no increasing subsequence at all, for instance a constant sequence, so nothing stronger than "monotone" can be claimed uniformly.
 
-- **Choice is not used.** Both recursions choose a *least* element, supplied by
-  the well-ordering principle ([[thm-well-ordering-principle]]), so the functions
-  $f$ and $h$ are defined outright rather than selected, and
-  [[thm-recursion]] then produces the index map. This is why the lemma, and with
-  it Bolzano-Weierstrass in $\mathbb{R}$, needs no form of the axiom of choice,
-  in contrast with the usual argument for sequential compactness in a general
-  metric space.
+- **Choice is not used.** Both recursions choose a *least* element, supplied by the well-ordering principle ([[thm-well-ordering-principle]]), so the functions $f$ and $h$ are defined outright rather than selected, and [[thm-recursion]] then produces the index map. This is why the lemma, and with it Bolzano-Weierstrass in $\mathbb{R}$, needs no form of the axiom of choice, in contrast with the usual argument for sequential compactness in a general metric space.

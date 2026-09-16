@@ -36,13 +36,7 @@ Let $(X_n)$ and $(Y_n)$ be real random variables on one probability space, and l
 
 1.1 For real $U_n,V_n$ on a common probability space, if $U_n\Rightarrow U$ and $|V_n-U_n|\to0$ in probability, then $V_n\Rightarrow U$. Indeed, for every $\delta>0$, with $p_n=\mathbb P(|V_n-U_n|>\delta)$, $$F_{U_n}(t-\delta)-p_n\le F_{V_n}(t) \le F_{U_n}(t+\delta)+p_n.$$ At a continuity point $t$ of $F_U$, take $\delta\downarrow0$ through values for which both $t-\delta$ and $t+\delta$ are continuity points. These values exist because a CDF has at most countably many jumps (for each positive integer $k$, there are at most $k$ jumps larger than $1/k$). First let $n\to\infty$ for each such $\delta$, then let $\delta\downarrow0$; [L1] and [L2] give the assertion. [L1, L2]
 
-1.2 The CDF definition [L1] gives both affine operations needed below.
-First, $X_n+a\Rightarrow X+a$ because
-$F_{X_n+a}(t)=F_{X_n}(t-a)$. It also gives
-$aX_n\Rightarrow aX$ for every constant $a$: for $a>0$ use
-$F_{aX_n}(t)=F_{X_n}(t/a)$; for $a<0$, use $F_{aX_n}(t)=1-F_{X_n}((t/a)-)$ and squeeze the left limit between $F_{X_n}(t/a-\delta)$ and $F_{X_n}(t/a)$, taking $\delta\downarrow0$ through continuity points $t/a-\delta$; and for
-$a=0$ the claim is immediate. At continuity points of the transformed limit
-CDF, the corresponding point of $F_X$ is a continuity point. [L1]
+1.2 The CDF definition [L1] gives both affine operations needed below. First, $X_n+a\Rightarrow X+a$ because $F_{X_n+a}(t)=F_{X_n}(t-a)$. It also gives $aX_n\Rightarrow aX$ for every constant $a$: for $a>0$ use $F_{aX_n}(t)=F_{X_n}(t/a)$; for $a<0$, use $F_{aX_n}(t)=1-F_{X_n}((t/a)-)$ and squeeze the left limit between $F_{X_n}(t/a-\delta)$ and $F_{X_n}(t/a)$, taking $\delta\downarrow0$ through continuity points $t/a-\delta$; and for $a=0$ the claim is immediate. At continuity points of the transformed limit CDF, the corresponding point of $F_X$ is a continuity point. [L1]
 
 1.3 The sequence $(X_n)$ is bounded in probability: CDF convergence [L1] at two continuity points outside a sufficiently large interval makes $\limsup_n\mathbb P(|X_n|>M)$ arbitrarily small. Therefore $$\mathbb P(|X_n(Y_n-c)|>\varepsilon) \le\mathbb P(|X_n|>M)+\mathbb P(|Y_n-c|>\varepsilon/M)$$ shows $X_n(Y_n-c)\to0$ in probability. If $c\ne0$, on $|Y_n-c|<|c|/2$, $$\left|Q_n-X_n/c\right| \le\frac{2}{|c|^2}|X_n||Y_n-c|,$$ and the exceptional event $\{|Y_n-c|\ge|c|/2\}$ contains $\{Y_n=0\}$ and has probability at most $\mathbb P(|Y_n-c|>|c|/4)\to0$; the same boundedness argument gives $Q_n-X_n/c\to0$ in probability. [L1, L2]
 

@@ -33,9 +33,7 @@ is the $p$-chain.
 
 ## Facts & Assumptions
 
-**Given:** Choice, the finite ordered state space, transition matrix, and, for
-the chain assertion, the $S$-valued random element and fresh uniforms in the
-statement.
+**Given:** Choice, the finite ordered state space, transition matrix, and, for the chain assertion, the $S$-valued random element and fresh uniforms in the statement.
 
 [F1] Disjoint blocks of an independent family generate independent sigma-algebras. ([[thm-grouping-independent-sigma-algebras]])
 

@@ -40,11 +40,7 @@ if it is a quadratic irrational.
 
 [F2] If $\alpha$ is quadratic irrational, then only finitely many complete quotients occur in its continued-fraction algorithm ([[lem-quadratic-irrational-complete-quotients-are-finite-state]]).
 
-[F3] The continued-fraction algorithm is deterministic: each digit $a_n$ is
-the unique integer with $a_n\le\alpha_n<a_n+1$, and whenever
-$\alpha_n\ne a_n$ the next complete quotient is
-$\alpha_{n+1}=1/(\alpha_n-a_n)$
-([[def-continued-fraction-complete-quotients]]).
+[F3] The continued-fraction algorithm is deterministic: each digit $a_n$ is the unique integer with $a_n\le\alpha_n<a_n+1$, and whenever $\alpha_n\ne a_n$ the next complete quotient is $\alpha_{n+1}=1/(\alpha_n-a_n)$ ([[def-continued-fraction-complete-quotients]]).
 
 ## Proof
 

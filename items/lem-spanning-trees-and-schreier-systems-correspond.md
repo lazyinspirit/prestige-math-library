@@ -37,11 +37,9 @@ root $H$.
 
 **Given:** A free group $F(X)$, a subgroup $H\le F(X)$, and its Schreier graph.
 
-[L1] Reduced words and initial segments are the ones from
-[[def-schreier-transversal-and-schreier-system]].
+[L1] Reduced words and initial segments are the ones from [[def-schreier-transversal-and-schreier-system]].
 
-[L2] The Schreier graph is connected, and from each vertex there is exactly one
-outgoing edge for each basis letter ([[lem-schreier-coset-graph-is-connected-and-deterministic]]).
+[L2] The Schreier graph is connected, and from each vertex there is exactly one outgoing edge for each basis letter ([[lem-schreier-coset-graph-is-connected-and-deterministic]]).
 
 ## Proof
 

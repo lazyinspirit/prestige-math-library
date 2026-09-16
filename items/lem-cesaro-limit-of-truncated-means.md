@@ -27,34 +27,18 @@ For identically distributed integrable real $(X_n)$, with $Y_k=X_k\mathbf1_{\{|X
 
 ## Facts & Assumptions
 
-[F1] [[thm-change-of-variables-for-expectation]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, let
-$\mathbb P_X$ be its law, and let $g:(S,\Sigma)\to\mathbb R$ or
-$g:(S,\Sigma)\to\mathbb C$ be measurable.
+[F1] [[thm-change-of-variables-for-expectation]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, let $\mathbb P_X$ be its law, and let $g:(S,\Sigma)\to\mathbb R$ or $g:(S,\Sigma)\to\mathbb C$ be measurable.
 
-1. If $g\ge0$, then
-   $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
-2. If $g(X)$ is integrable, then $g$ is integrable with respect to
-   $\mathbb P_X$ and the same formula holds:
-   $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
+1. If $g\ge0$, then $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
+2. If $g(X)$ is integrable, then $g$ is integrable with respect to $\mathbb P_X$ and the same formula holds: $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
 
-[F2] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that
-$f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single
-nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then
-$f\in L^1(\mu)$,
-$$\int|f_n-f|\,d\mu\longrightarrow0,$$
-and hence
-$$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
+[F2] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then $f\in L^1(\mu)$, $$\int|f_n-f|\,d\mu\longrightarrow0,$$ and hence $$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
 
-[F3] [[thm-cesaro-mean-theorem]]: Let $(x_k)$ be a sequence of reals that converges (def-sequence,
-def-real-limit), and let $(\sigma_n)$ be its sequence of Cesaro means
-(def-cesaro-mean). Then $(\sigma_n)$ converges as well, and
+[F3] [[thm-cesaro-mean-theorem]]: Let $(x_k)$ be a sequence of reals that converges (def-sequence, def-real-limit), and let $(\sigma_n)$ be its sequence of Cesaro means (def-cesaro-mean). Then $(\sigma_n)$ converges as well, and
 
 $$\lim_n \sigma_n \;=\; \lim_k x_k .$$
 
-Both limits are asserted to exist: the right-hand one by hypothesis, the
-left-hand one as part of the conclusion. Equivalently: a convergent sequence is
-$(C,1)$-summable, to its own limit. The notation is licensed by uniqueness of
-limits of real sequences (lem-limit-unique).
+Both limits are asserted to exist: the right-hand one by hypothesis, the left-hand one as part of the conclusion. Equivalently: a convergent sequence is $(C,1)$-summable, to its own limit. The notation is licensed by uniqueness of limits of real sequences (lem-limit-unique).
 
 The converse is false (fs-cesaro-converse).
 

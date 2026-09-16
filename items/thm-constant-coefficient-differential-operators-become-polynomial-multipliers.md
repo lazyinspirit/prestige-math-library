@@ -36,12 +36,9 @@ in $\mathcal S'(\mathbb R^n)$.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]], a finite polynomial $P$,
-and $u\in\mathcal S'(\mathbb R^n)$.
+**Given:** [[def-countable-choice|Countable Choice]], a finite polynomial $P$, and $u\in\mathcal S'(\mathbb R^n)$.
 
-[F1] For every multi-index $\alpha$,
-$\mathcal F(\partial^\alpha u)=(2\pi i\xi)^\alpha\mathcal Fu$
-([[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]).
+[F1] For every multi-index $\alpha$, $\mathcal F(\partial^\alpha u)=(2\pi i\xi)^\alpha\mathcal Fu$ ([[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]).
 
 ## Proof
 

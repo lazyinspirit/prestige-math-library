@@ -43,15 +43,11 @@ an equality between complex bundles in $K^0$.
 
 **Given:** the unit sphere $S^2\subset\mathbb R^3$.
 
-[F1] Bundle isomorphisms are fiberwise-linear isomorphisms over the identity,
-and a section is nowhere zero when it avoids each zero vector
-([[def-vector-bundle-map-section-subbundle-and-isomorphism]]).
+[F1] Bundle isomorphisms are fiberwise-linear isomorphisms over the identity, and a section is nowhere zero when it avoids each zero vector ([[def-vector-bundle-map-section-subbundle-and-isomorphism]]).
 
-[F2] Whitney sum has fiber the direct sum of the two bundle fibers
-([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F2] Whitney sum has fiber the direct sum of the two bundle fibers ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
-[F3] The even sphere $S^2$ has no continuous nowhere-zero tangent vector field
-([[thm-no-nowhere-zero-tangent-vector-field-on-an-even-sphere]]).
+[F3] The even sphere $S^2$ has no continuous nowhere-zero tangent vector field ([[thm-no-nowhere-zero-tangent-vector-field-on-an-even-sphere]]).
 
 ## Counterexample
 

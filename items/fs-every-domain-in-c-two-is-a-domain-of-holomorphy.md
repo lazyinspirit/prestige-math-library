@@ -33,11 +33,9 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** Real numbers $0<r,s<1$ and the Hartogs figure domain
-$\Omega:=H(r,s)$.
+**Given:** Real numbers $0<r,s<1$ and the Hartogs figure domain $\Omega:=H(r,s)$.
 
-[L1] A domain that contains a Hartogs figure but not its hull is not a domain
-of holomorphy ([[cor-hartogs-figure-obstruction-to-domain-of-holomorphy]]).
+[L1] A domain that contains a Hartogs figure but not its hull is not a domain of holomorphy ([[cor-hartogs-figure-obstruction-to-domain-of-holomorphy]]).
 
 ## Refutation
 

@@ -35,8 +35,7 @@ tooth is adjacent to a foreign block.
 
 ## Facts & Assumptions
 
-**Given:** Two blocks $B_1=\{b_1\}$ and $B_2=\{b_2\}$, and two teeth $a_1,a_2$
-with edges $a_1b_1$, $a_1b_2$, and $a_2b_2$.
+**Given:** Two blocks $B_1=\{b_1\}$ and $B_2=\{b_2\}$, and two teeth $a_1,a_2$ with edges $a_1b_1$, $a_1b_2$, and $a_2b_2$.
 
 ## Proof
 

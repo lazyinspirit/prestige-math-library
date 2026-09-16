@@ -37,14 +37,11 @@ the alternating sum of the three oriented edges of the standard triangle.
 
 ## Facts & Assumptions
 
-**Given:** The identity singular simplices $\iota_1:\Delta^1\to\Delta^1$ and
-$\iota_2:\Delta^2\to\Delta^2$.
+**Given:** The identity singular simplices $\iota_1:\Delta^1\to\Delta^1$ and $\iota_2:\Delta^2\to\Delta^2$.
 
-[L1] The affine face maps $\delta_i$ insert a zero in the $i$th slot
-([[def-standard-topological-simplex-and-its-affine-face-maps]]).
+[L1] The affine face maps $\delta_i$ insert a zero in the $i$th slot ([[def-standard-topological-simplex-and-its-affine-face-maps]]).
 
-[L2] The singular boundary is the alternating sum of the face restrictions
-([[def-singular-boundary-operator]]).
+[L2] The singular boundary is the alternating sum of the face restrictions ([[def-singular-boundary-operator]]).
 
 ## Verification
 

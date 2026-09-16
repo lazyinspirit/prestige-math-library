@@ -39,12 +39,9 @@ is a smooth embedding.
 
 **Given:** A compact smooth $n$-manifold $M$.
 
-[L1] For every point of a smooth manifold there is a chart bump supported in a
-prescribed chart and equal to $1$ on a smaller neighbourhood
-([[lem-chart-bump-at-a-point-with-prescribed-support]]).
+[L1] For every point of a smooth manifold there is a chart bump supported in a prescribed chart and equal to $1$ on a smaller neighbourhood ([[lem-chart-bump-at-a-point-with-prescribed-support]]).
 
-[L2] An injective immersion from a compact manifold is an embedding
-([[cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding]]).
+[L2] An injective immersion from a compact manifold is an embedding ([[cor-an-injective-immersion-from-a-compact-manifold-is-an-embedding]]).
 
 ## Proof
 **Proof technique:** direct.

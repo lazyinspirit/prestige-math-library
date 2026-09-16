@@ -40,9 +40,7 @@ hard spectral filter and Tikhonov regularisation is a smooth spectral filter.
 
 ## Facts & Assumptions
 
-**Given:** A scalar field $\mathbb F\in\{\mathbb R,\mathbb C\}$, a singular
-value decomposition $A=U\Sigma V^*$, a right-hand side $b\in\mathbb F^m$, a
-threshold $\tau\ge0$, and a parameter $\lambda>0$.
+**Given:** A scalar field $\mathbb F\in\{\mathbb R,\mathbb C\}$, a singular value decomposition $A=U\Sigma V^*$, a right-hand side $b\in\mathbb F^m$, a threshold $\tau\ge0$, and a parameter $\lambda>0$.
 
 [L1] The truncated pseudoinverse replaces retained singular values by their reciprocals and discards the rest ([[def-truncated-singular-value-pseudoinverse-at-a-declared-threshold]]).
 

@@ -94,25 +94,8 @@ supplies one point beyond each natural bound.
 
 ## Remarks
 
-- **The equivalence is proved, not defined, and it is proved through the order.**
-  Both directions pass through [[thm-heine-borel-characterisation-r]], whose
-  backward half needs the completeness of $\mathbb{R}$, and the forward
-  direction adds [[thm-bolzano-weierstrass]], whose proof spends completeness
-  again. Nothing here transfers to a setting where those are unavailable; see
-  [[rem-r-native-topology-scope]].
+- **The equivalence is proved, not defined, and it is proved through the order.** Both directions pass through [[thm-heine-borel-characterisation-r]], whose backward half needs the completeness of $\mathbb{R}$, and the forward direction adds [[thm-bolzano-weierstrass]], whose proof spends completeness again. Nothing here transfers to a setting where those are unavailable; see [[rem-r-native-topology-scope]].
 
-- **Where the choices are spent, and whether they can be avoided.** Step 2.3
-  selects one point of $K$ outside $[-k,k]$ for each $k$, and
-  [[lem-sequential-characterisation-of-closure-r]] selects one point of $K$ in
-  each shrinking neighbourhood. Both are countably many independent selections
-  from subsets of $\mathbb{R}$, for which this library has no canonical rule, so
-  [[def-countable-choice]] is invoked rather than worked around. The forward
-  implication, step 2.1, makes no such selection: the subsequence comes from
-  [[thm-bolzano-weierstrass]] as a single object.
+- **Where the choices are spent, and whether they can be avoided.** Step 2.3 selects one point of $K$ outside $[-k,k]$ for each $k$, and [[lem-sequential-characterisation-of-closure-r]] selects one point of $K$ in each shrinking neighbourhood. Both are countably many independent selections from subsets of $\mathbb{R}$, for which this library has no canonical rule, so [[def-countable-choice]] is invoked rather than worked around. The forward implication, step 2.1, makes no such selection: the subsequence comes from [[thm-bolzano-weierstrass]] as a single object.
 
-- **Sequential compactness is the form used in analysis; compactness is the form
-  that is stated without sequences.** The extraction of a convergent subsequence
-  is what proofs about continuous functions on $[a,b]$ actually use, while the
-  covering definition mentions no sequence and no limit. This theorem is what
-  lets a reader move between them for subsets of $\mathbb{R}$, and it is proved
-  only there.
+- **Sequential compactness is the form used in analysis; compactness is the form that is stated without sequences.** The extraction of a convergent subsequence is what proofs about continuous functions on $[a,b]$ actually use, while the covering definition mentions no sequence and no limit. This theorem is what lets a reader move between them for subsets of $\mathbb{R}$, and it is proved only there.

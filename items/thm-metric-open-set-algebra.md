@@ -91,16 +91,6 @@ closure properties that the word *topology* names.
 
 ## Remarks
 
-- **Finiteness in claim 3 is essential and is exactly what step 2.1 uses.** An
-  infinite family of positive radii need have no positive lower bound, and the
-  minimum of an infinite set of reals need not exist at all
-  ([[lem-finite-set-has-max]] is stated for finite sets for that reason). The
-  intersection of the balls $B(x,1/n)$ over all $n \ge 1$ is a standard example
-  of an intersection of open sets that need not be open.
-- **The empty intersection is not covered and does not need to be.** Claim 3 is
-  stated for $n \ge 1$; the conventional value of an empty intersection is $X$,
-  which is open anyway ([[def-metric-topology]]).
-- **Claim 4 is not the statement that $\bar B(x,r)$ is the closure of
-  $B(x,r)$**, which is false in general
-  ([[fs-closed-ball-is-the-closure-of-the-open-ball]]). All that is proved here
-  is that the closed ball is a closed set.
+- **Finiteness in claim 3 is essential and is exactly what step 2.1 uses.** An infinite family of positive radii need have no positive lower bound, and the minimum of an infinite set of reals need not exist at all ([[lem-finite-set-has-max]] is stated for finite sets for that reason). The intersection of the balls $B(x,1/n)$ over all $n \ge 1$ is a standard example of an intersection of open sets that need not be open.
+- **The empty intersection is not covered and does not need to be.** Claim 3 is stated for $n \ge 1$; the conventional value of an empty intersection is $X$, which is open anyway ([[def-metric-topology]]).
+- **Claim 4 is not the statement that $\bar B(x,r)$ is the closure of $B(x,r)$**, which is false in general ([[fs-closed-ball-is-the-closure-of-the-open-ball]]). All that is proved here is that the closed ball is a closed set.

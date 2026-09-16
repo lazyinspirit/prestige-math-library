@@ -45,54 +45,27 @@ $$\lim_{h\to0}\left\|\frac{F(t+h)-F(t)}h-F'(t)\right\|=0.$$
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] In ZF, AC implies Dependent Choice and Countable Choice
-([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
+[L1] In ZF, AC implies Dependent Choice and Countable Choice ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
-[L2] Under Countable Choice, based Lipschitz curves correspond to interval
-vector measures dominated in variation by Lebesgue measure
-([[lem-lipschitz-curves-and-dominated-interval-vector-measures]]).
+[L2] Under Countable Choice, based Lipschitz curves correspond to interval vector measures dominated in variation by Lebesgue measure ([[lem-lipschitz-curves-and-dominated-interval-vector-measures]]).
 
-[L3] Under AC, RNP is equivalent to the Bochner-density property for
-bounded-variation vector measures on the Lebesgue interval
-([[lem-rnp-may-be-tested-on-the-lebesgue-interval]]).
+[L3] Under AC, RNP is equivalent to the Bochner-density property for bounded-variation vector measures on the Lebesgue interval ([[lem-rnp-may-be-tested-on-the-lebesgue-interval]]).
 
-[L4] Bochner integrability is $L^1$ approximation by integrable simple
-functions ([[def-bochner-integrable-function]]), and for strongly measurable
-functions it is equivalent to integrability of the norm
-([[thm-bochner-integrability-criterion]],
-[[def-strongly-measurable-banach-valued-function]]).
+[L4] Bochner integrability is $L^1$ approximation by integrable simple functions ([[def-bochner-integrable-function]]), and for strongly measurable functions it is equivalent to integrability of the norm ([[thm-bochner-integrability-criterion]], [[def-strongly-measurable-banach-valued-function]]).
 
-[L5] Scalar $L^1_{\mathrm{loc}}$ functions are recovered almost everywhere by
-small interval averages, and countable unions of Lebesgue-null sets are null
-under Countable Choice
-([[thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]],
-[[thm-countable-union-of-null-is-null]]).
+[L5] Scalar $L^1_{\mathrm{loc}}$ functions are recovered almost everywhere by small interval averages, and countable unions of Lebesgue-null sets are null under Countable Choice ([[thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]], [[thm-countable-union-of-null-is-null]]).
 
-[L6] A Bochner density induces a vector measure whose variation is the
-integral of its norm
-([[lem-bochner-density-defines-an-absolutely-continuous-vector-measure]]).
+[L6] A Bochner density induces a vector measure whose variation is the integral of its norm ([[lem-bochner-density-defines-an-absolutely-continuous-vector-measure]]).
 
-[L7] Bounded linear maps commute with Bochner integration
-([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
+[L7] Bounded linear maps commute with Bochner integration ([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
 
-[L8] The variation of a bounded-variation vector measure is a finite positive
-measure ([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]),
-and under AC a finite absolutely continuous scalar measure has an integrable
-Radon--Nikodym density
-([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
+[L8] The variation of a bounded-variation vector measure is a finite positive measure ([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]), and under AC a finite absolutely continuous scalar measure has an integrable Radon--Nikodym density ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
 
-[L9] Real Lipschitz functions are absolutely continuous, and under Countable
-Choice and Dependent Choice the scalar FTC recovers an absolutely continuous
-function from its derivative
-([[thm-c1-lipschitz-ac-bv-hierarchy]],
-[[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
+[L9] Real Lipschitz functions are absolutely continuous, and under Countable Choice and Dependent Choice the scalar FTC recovers an absolutely continuous function from its derivative ([[thm-c1-lipschitz-ac-bv-hierarchy]], [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
 
-[L10] The continuous dual separates distinct vectors
-([[cor-dual-separates-points]]).
+[L10] The continuous dual separates distinct vectors ([[cor-dual-separates-points]]).
 
-[L11] Under Countable Choice, dominated pointwise convergence implies
-$L^1$ and integral convergence for strongly measurable Banach-valued functions
-([[thm-bochner-dominated-convergence]]).
+[L11] Under Countable Choice, dominated pointwise convergence implies $L^1$ and integral convergence for strongly measurable Banach-valued functions ([[thm-bochner-dominated-convergence]]).
 
 ## Proof
 
@@ -114,8 +87,7 @@ $L^1$ and integral convergence for strongly measurable Banach-valued functions
 
 $$\lim_{r\to0^+}\frac1{2r}\int_{t-r}^{t+r}\|s_m(u)-s_m(t)\|\,du=0$$
 
-for every $m$; the last equality follows by writing the finite-valued $s_m$ on
-its level sets and differentiating their indicators.
+for every $m$; the last equality follows by writing the finite-valued $s_m$ on its level sets and differentiating their indicators.
 
 3.2 Construct measurable derivative fields for the bounded level curves. By the assumed differentiability property, for each $n$ there is a measurable null set $N_n$ off which $F_n'$ exists in norm. For $k\geq2$ put $q_{n,k}(t)=k(F_n(t+1/k)-F_n(t))$ when $t\leq1-1/k$, and put it equal to zero on the remaining interval. On the first piece $q_{n,k}$ is $2nk$-Lipschitz; a finite interval partition of sufficiently small mesh, together with the constant-zero last piece, therefore gives a measurable simple function within $1/k$ uniformly of $q_{n,k}$. These simple functions converge to $F_n'$ off $N_n$. Define $f_n=F_n'$ there and $f_n=0$ on $N_n$. This proves strong measurability in the sense of [L4]. Difference quotients give $\|f_n\|\leq n$ off $N_n$, so [L4] makes $f_n$ Bochner integrable. [L4, step 2.2, construct]
 
@@ -123,25 +95,17 @@ its level sets and differentiating their indicators.
 
 $$\limsup_{r\to0^+}\frac1{2r}\int_{t-r}^{t+r}\|f(u)-f(t)\|\,du\leq2e_m(t).$$
 
-Indeed the three terms are the average of $e_m(u)$, the average of
-$\|s_m(u)-s_m(t)\|$, and $e_m(t)$. Letting $m\to\infty$ makes the right side
-zero. For nonzero $h$ small enough that $t+h\in[0,1]$, step 2.1 now yields
+Indeed the three terms are the average of $e_m(u)$, the average of $\|s_m(u)-s_m(t)\|$, and $e_m(t)$. Letting $m\to\infty$ makes the right side zero. For nonzero $h$ small enough that $t+h\in[0,1]$, step 2.1 now yields
 
 $$\left\|\frac{F(t+h)-F(t)}h-f(t)\right\|\leq\frac1{|h|}\int_{\min(t,t+h)}^{\max(t,t+h)}\|f(u)-f(t)\|\,du,$$
 
-which is at most twice the corresponding centred average and tends to zero.
-Thus $F'(t)=f(t)$ at almost every $t\in(0,1)$.
+which is at most twice the corresponding centred average and tends to zero. Thus $F'(t)=f(t)$ at almost every $t\in(0,1)$.
 
 4.2 Show that each derivative field represents its level measure. Fix $n$ and $x^*\in X^*$. The real-valued function $x^*F_n$ in the real case, and its real and imaginary parts in the complex case, are Lipschitz and hence absolutely continuous by [L9]. Their derivatives agree almost everywhere with the corresponding scalar parts of $x^*f_n$. The scalar FTC, whose choice hypotheses were supplied in step 1.1, and commutation in [L7] give [L2, L6, L7, L9, L10, step 1.1, step 2.2, step 3.2]
 
 $$x^*(F_n(b)-F_n(a))=x^*\!\left(\int_{(a,b]}f_n\,d\lambda\right).$$
 
-By [L10], $\nu_n((a,b])=\int_{(a,b]}f_n\,d\lambda$. The measure induced by
-$f_n$ has variation at most $n\lambda$ by [L6], so uniqueness in [L2] makes it
-equal to $\nu_n$ on every Lebesgue set. Finally put
-$h_n=\mathbf1_{A_n}f_n$. Restricting simple approximants shows
-$\int_Eh_n=\int_{E\cap A_n}f_n=\nu_n(E)$, so $h_n$ is another density of
-$\nu_n$, now supported on $A_n$.
+By [L10], $\nu_n((a,b])=\int_{(a,b]}f_n\,d\lambda$. The measure induced by $f_n$ has variation at most $n\lambda$ by [L6], so uniqueness in [L2] makes it equal to $\nu_n$ on every Lebesgue set. Finally put $h_n=\mathbf1_{A_n}f_n$. Restricting simple approximants shows $\int_Eh_n=\int_{E\cap A_n}f_n=\nu_n(E)$, so $h_n$ is another density of $\nu_n$, now supported on $A_n$.
 
 5.1 Complete the forward implication, including its boundary cases. Step 4.1 proves almost-everywhere norm differentiability of every Lipschitz curve when $X$ has RNP. Adding the constant $F(0)$ does not affect difference quotients. If $L=0$, the curve is constant and has derivative zero everywhere; the endpoints are excluded from the derivative assertion and have measure zero. The zero Banach space and the one-point interval cause no exception. [step 1.2, step 2.1, step 4.1]
 

@@ -38,21 +38,15 @@ So the single power family produces both inclusion failures on $\mathbb R$.
 
 **Given:** Real numbers $a>0$ and $p>0$.
 
-[L1] Membership in $\mathcal L^p$ means finiteness of $\int |f|^p\,d\mu$
-([[def-calligraphic-l-p-on-a-measure-space]]).
+[L1] Membership in $\mathcal L^p$ means finiteness of $\int |f|^p\,d\mu$ ([[def-calligraphic-l-p-on-a-measure-space]]).
 
-[L2] Positive-base power functions have the usual antiderivatives away from the
-logarithmic endpoint, and $\int dx/x=\log x$
-([[thm-real-power-continuity-and-derivatives]],
-[[thm-logarithm-derivative-and-integral]]).
+[L2] Positive-base power functions have the usual antiderivatives away from the logarithmic endpoint, and $\int dx/x=\log x$ ([[thm-real-power-continuity-and-derivatives]], [[thm-logarithm-derivative-and-integral]]).
 
-[L3] The comparison tests for improper integrals are available
-([[thm-comparison-test-for-improper-integrals]]).
+[L3] The comparison tests for improper integrals are available ([[thm-comparison-test-for-improper-integrals]]).
 
 ## Verification
 
-**Proof technique:** Integrate $x^{-ap}$ on $(0,1)$ and on $(1,\infty)$ using
-the real-power antiderivative and compare the two thresholds $ap<1$ and $ap>1$.
+**Proof technique:** Integrate $x^{-ap}$ on $(0,1)$ and on $(1,\infty)$ using the real-power antiderivative and compare the two thresholds $ap<1$ and $ap>1$.
 
 1.1 Because $|f_0|^p=x^{-ap}\chi_{(0,1)}$ and $|f_\infty|^p=x^{-ap}\chi_{(1,\infty)}$, [L1] reduces both claims to the improper integrals of $x^{-ap}$. [L1, given]
 

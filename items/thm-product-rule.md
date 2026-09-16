@@ -109,20 +109,8 @@ product is $1$. Both sides are computed, not stipulated.
 
 ## Remarks
 
-- **No arithmetic is needed for clause 1.** Slicing $A \times B$ over $B$ and
-  applying the sum rule replaces the usual bijection
-  $(p,q) \mapsto p\lvert B\rvert + q$, which would have to be proved bijective by
-  division with remainder. Division with remainder lives later in the reading
-  order, so the slicing argument is not merely shorter here, it is the one
-  available.
+- **No arithmetic is needed for clause 1.** Slicing $A \times B$ over $B$ and applying the sum rule replaces the usual bijection $(p,q) \mapsto p\lvert B\rvert + q$, which would have to be proved bijective by division with remainder. Division with remainder lives later in the reading order, so the slicing argument is not merely shorter here, it is the one available.
 
-- **The empty cases are computed.** With $A = \varnothing$ and $B$ arbitrary,
-  clause 1 reads $\lvert\varnothing\rvert = 0 \cdot \lvert B\rvert = 0$, which is
-  right because $\varnothing \times B = \varnothing$. With $m = 0$, clause 2 reads
-  $1 = 1$. Neither is a convention.
+- **The empty cases are computed.** With $A = \varnothing$ and $B$ arbitrary, clause 1 reads $\lvert\varnothing\rvert = 0 \cdot \lvert B\rvert = 0$, which is right because $\varnothing \times B = \varnothing$. With $m = 0$, clause 2 reads $1 = 1$. Neither is a convention.
 
-- **The infinite analogue of clause 1 fails in the shape a reader expects.** A
-  product of two infinite sets need not be strictly larger than either factor:
-  $\mathbb{N}\times\mathbb{N} \approx \mathbb{N}$ ([[thm-n-cross-n-countable]]).
-  The companion page records that as a false statement, with finiteness located
-  as the hypothesis that fails.
+- **The infinite analogue of clause 1 fails in the shape a reader expects.** A product of two infinite sets need not be strictly larger than either factor: $\mathbb{N}\times\mathbb{N} \approx \mathbb{N}$ ([[thm-n-cross-n-countable]]). The companion page records that as a false statement, with finiteness located as the hypothesis that fails.

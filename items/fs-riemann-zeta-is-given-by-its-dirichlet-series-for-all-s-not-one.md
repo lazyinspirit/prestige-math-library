@@ -27,12 +27,9 @@ every complex $s\ne1$.
 
 **Given:** The two concrete failures of that claim.
 
-[L1] At $s=1/2$, the eta series represents the continued zeta value while the
-Dirichlet series diverges
-([[cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges]]).
+[L1] At $s=1/2$, the eta series represents the continued zeta value while the Dirichlet series diverges ([[cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges]]).
 
-[L2] At $s=1$, the defining Dirichlet series is the divergent harmonic series
-([[cex-the-harmonic-series-shows-the-defining-series-diverges-at-one]]).
+[L2] At $s=1$, the defining Dirichlet series is the divergent harmonic series ([[cex-the-harmonic-series-shows-the-defining-series-diverges-at-one]]).
 
 ## Refutation
 

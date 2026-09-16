@@ -54,18 +54,13 @@ $$u(\gamma(\eta),\tau(\eta))=g(\eta)\quad(\eta\in V).$$
 
 [L2] Characteristics depend $C^1$ on their initial position and satisfy the linearized variational equation ([[lem-transport-characteristics-depend-c-one-on-initial-position]]).
 
-[L3] A scalar linear ODE with continuous coefficients has a unique solution
-given by its integrating-factor formula
-([[thm-first-order-linear-ode-integrating-factor]]).
+[L3] A scalar linear ODE with continuous coefficients has a unique solution given by its integrating-factor formula ([[thm-first-order-linear-ode-integrating-factor]]).
 
 [L4] A $C^1$ map with invertible derivative at a point has a local $C^1$ inverse ([[thm-euclidean-inverse-function-theorem]]).
 
-[L5] The chain rule computes the derivative of a $C^1$ function along a
-$C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
+[L5] The chain rule computes the derivative of a $C^1$ function along a $C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
 
-[L6] ODE solutions on one common compact interval depend jointly and
-continuously on their initial data and parameters
-([[thm-continuous-dependence-of-odes-on-initial-data-and-parameters]]).
+[L6] ODE solutions on one common compact interval depend jointly and continuously on their initial data and parameters ([[thm-continuous-dependence-of-odes-on-initial-data-and-parameters]]).
 
 ## Proof
 

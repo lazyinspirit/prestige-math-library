@@ -38,16 +38,11 @@ $$F(u,y)=H(y)+\varepsilon (u')^2.$$
 
 ## Facts & Assumptions
 
-**Given:** The open set $U$, the smooth function $F$, and the derivative
-hypotheses in the statement.
+**Given:** The open set $U$, the smooth function $F$, and the derivative hypotheses in the statement.
 
-[L1] The Euclidean implicit function theorem solves one scalar equation for one
-variable as a smooth function of the remaining parameters when the relevant
-partial derivative is invertible
-([[thm-euclidean-implicit-function-theorem]]).
+[L1] The Euclidean implicit function theorem solves one scalar equation for one variable as a smooth function of the remaining parameters when the relevant partial derivative is invertible ([[thm-euclidean-implicit-function-theorem]]).
 
-[L2] A Euclidean map with invertible derivative at a point is a local
-diffeomorphism there ([[thm-euclidean-inverse-function-theorem]]).
+[L2] A Euclidean map with invertible derivative at a point is a local diffeomorphism there ([[thm-euclidean-inverse-function-theorem]]).
 
 ## Proof
 

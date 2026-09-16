@@ -38,9 +38,7 @@ It is Morse but not excellent.
 
 **Given:** The torus function $f([x],[y])=\cos(2\pi x)+\cos(2\pi y)$.
 
-[F1] Morse, excellent, nondegenerate, and index are defined on the A page
-([[def-morse-function-and-excellent-morse-function]],
-[[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F1] Morse, excellent, nondegenerate, and index are defined on the A page ([[def-morse-function-and-excellent-morse-function]], [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
 ## Verification
 

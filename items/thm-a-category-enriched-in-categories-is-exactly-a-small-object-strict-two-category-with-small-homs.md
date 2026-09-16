@@ -35,20 +35,13 @@ strict 2-category with a set of objects and small hom-categories.
 
 ## Facts & Assumptions
 
-**Given:** A $\mathbf{Cat}$-enriched category or, conversely, a strict
-2-category with a set of objects and small hom-categories.
+**Given:** A $\mathbf{Cat}$-enriched category or, conversely, a strict 2-category with a set of objects and small hom-categories.
 
-[L1] A $\mathcal V$-category consists of a set of objects, hom-objects in the
-base, enriched composition morphisms, and enriched identities
-([[def-enriched-category]]).
+[L1] A $\mathcal V$-category consists of a set of objects, hom-objects in the base, enriched composition morphisms, and enriched identities ([[def-enriched-category]]).
 
-[L2] A strict 2-category consists of objects, hom-categories, identity
-1-morphisms, and horizontally composable functors that are strictly
-associative and unital ([[def-strict-two-category]]).
+[L2] A strict 2-category consists of objects, hom-categories, identity 1-morphisms, and horizontally composable functors that are strictly associative and unital ([[def-strict-two-category]]).
 
-[L3] The category $\mathbf{Cat}$ of small categories is cartesian closed, hence
-in particular cartesian monoidal on small categories
-([[thm-the-category-of-small-categories-is-cartesian-closed]]).
+[L3] The category $\mathbf{Cat}$ of small categories is cartesian closed, hence in particular cartesian monoidal on small categories ([[thm-the-category-of-small-categories-is-cartesian-closed]]).
 
 ## Proof
 

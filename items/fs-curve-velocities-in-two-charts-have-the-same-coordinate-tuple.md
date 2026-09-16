@@ -36,11 +36,7 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** On the first quadrant $Q:=\{(x,y):x>0,\ y>0\}$, the curve
-$$\gamma(t)=(1+t,1)$$
-through $(1,1)$ for $t$ near $0$, together with the Cartesian chart and the
-polar chart
-$$\psi(x,y)=\bigl(\sqrt{x^2+y^2},\arctan(y/x)\bigr).$$
+**Given:** On the first quadrant $Q:=\{(x,y):x>0,\ y>0\}$, the curve $$\gamma(t)=(1+t,1)$$ through $(1,1)$ for $t$ near $0$, together with the Cartesian chart and the polar chart $$\psi(x,y)=\bigl(\sqrt{x^2+y^2},\arctan(y/x)\bigr).$$
 
 [L1] Tangent coordinates change by the Jacobian of the coordinate transition ([[thm-change-of-coordinate-formula-for-tangent-bases]]).
 

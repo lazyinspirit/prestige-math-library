@@ -33,8 +33,7 @@ Thus the probability that a majority vote is wrong decays like $O(1/k)$.
 
 ## Facts & Assumptions
 
-**Given:** an integer $k\ge 1$ and independent Bernoulli variables
-$X_1,\dots,X_k$ with $\mathbb P(X_i=1)\ge 2/3$.
+**Given:** an integer $k\ge 1$ and independent Bernoulli variables $X_1,\dots,X_k$ with $\mathbb P(X_i=1)\ge 2/3$.
 
 [L1] Expectation is linear over finite sums ([[thm-linearity-of-expectation]]).
 

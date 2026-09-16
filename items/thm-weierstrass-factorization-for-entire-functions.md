@@ -44,23 +44,15 @@ where the product is $1$ when $N=0$.
 
 **Given:** A nonzero entire function $f$.
 
-[F1] The zero at $0$ has finite order $m$, and locally one can factor off
-$(z-a)^m$ from a holomorphic function according to its zero multiplicity
-([[thm-zero-order-factorization-holomorphic-function]]).
+[F1] The zero at $0$ has finite order $m$, and locally one can factor off $(z-a)^m$ from a holomorphic function according to its zero multiplicity ([[thm-zero-order-factorization-holomorphic-function]]).
 
-[F2] The Weierstrass product theorem constructs an entire product with any
-prescribed discrete zero divisor on $\mathbb C$
-([[thm-weierstrass-product-theorem-on-the-complex-plane]]).
+[F2] The Weierstrass product theorem constructs an entire product with any prescribed discrete zero divisor on $\mathbb C$ ([[thm-weierstrass-product-theorem-on-the-complex-plane]]).
 
-[F3] The plane $\mathbb C$ is star-shaped and therefore homologically simply
-connected ([[prop-star-shaped-plane-domains-are-homologically-simply-connected]]).
+[F3] The plane $\mathbb C$ is star-shaped and therefore homologically simply connected ([[prop-star-shaped-plane-domains-are-homologically-simply-connected]]).
 
-[F4] A nowhere-zero holomorphic function on a homologically simply connected
-domain has a holomorphic logarithm
-([[thm-holomorphic-logarithms-homologically-simply-connected-domains]]).
+[F4] A nowhere-zero holomorphic function on a homologically simply connected domain has a holomorphic logarithm ([[thm-holomorphic-logarithms-homologically-simply-connected-domains]]).
 
-[F5] The elementary factor $E_0(w)=1-w$ has its unique zero at $w=1$.
-([[def-weierstrass-elementary-factor]])
+[F5] The elementary factor $E_0(w)=1-w$ has its unique zero at $w=1$. ([[def-weierstrass-elementary-factor]])
 
 ## Proof
 

@@ -30,9 +30,7 @@ $$ \delta^*(q,\varepsilon)=q,\qquad \delta^*(q,ua)=\delta(\delta^*(q,u),a). $$
 
 **Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$.
 
-[L1] By [[def-extended-dfa-transition-function]], an extended transition
-function for $D$ is exactly a function $\delta^*:Q\times\Sigma^*\to Q$
-satisfying the two displayed clauses for $\varepsilon$ and $ua$.
+[L1] By [[def-extended-dfa-transition-function]], an extended transition function for $D$ is exactly a function $\delta^*:Q\times\Sigma^*\to Q$ satisfying the two displayed clauses for $\varepsilon$ and $ua$.
 
 ## Proof
 

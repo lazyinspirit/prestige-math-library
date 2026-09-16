@@ -35,9 +35,7 @@ Every additive category with all kernels and cokernels is abelian.
 
 **Given:** A field $k$.
 
-[L1] An abelian category is in particular additive and requires the canonical
-coimage-to-image map to be an isomorphism
-([[def-additive-category]], [[def-abelian-category]]).
+[L1] An abelian category is in particular additive and requires the canonical coimage-to-image map to be an isomorphism ([[def-additive-category]], [[def-abelian-category]]).
 
 ## Counterexample
 

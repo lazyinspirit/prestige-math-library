@@ -38,9 +38,7 @@ $C'(1/6)$ convention.
 
 **Given:** The relator set $R=\{abcdef,aghijk\}$.
 
-[L1] The page's convention is strict: $C'(1/6)$ demands $|p|<|r|/6$ for every
-piece $p$ in every relator $r$
-([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
+[L1] The page's convention is strict: $C'(1/6)$ demands $|p|<|r|/6$ for every piece $p$ in every relator $r$ ([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
 
 ## Counterexample
 

@@ -33,25 +33,17 @@ Every finite graph $H$ with $|V(H)|\le 5$ has the Erdős-Hajnal property.
 
 **Given:** A finite graph $H$ with $|V(H)|\le 5$.
 
-[L1] Every graph on at most four vertices has the Erdős-Hajnal property
-([[thm-every-graph-on-at-most-four-vertices-has-the-erdos-hajnal-property]]).
+[L1] Every graph on at most four vertices has the Erdős-Hajnal property ([[thm-every-graph-on-at-most-four-vertices-has-the-erdos-hajnal-property]]).
 
-[L2] The bull, $C_5$, $P_5$, and $\overline{P_5}$ have the Erdős-Hajnal property
-([[cor-the-bull-graph-has-the-erdos-hajnal-property]], [[cor-the-five-cycle-has-the-erdos-hajnal-property]], [[cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property]]).
+[L2] The bull, $C_5$, $P_5$, and $\overline{P_5}$ have the Erdős-Hajnal property ([[cor-the-bull-graph-has-the-erdos-hajnal-property]], [[cor-the-five-cycle-has-the-erdos-hajnal-property]], [[cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property]]).
 
-[L3] The prime five-vertex graphs are exactly the bull, $C_5$, $P_5$, and
-$\overline{P_5}$
-([[lem-the-prime-five-vertex-graphs-are-exactly-the-bull-five-cycle-five-vertex-path-and-its-complement]]).
+[L3] The prime five-vertex graphs are exactly the bull, $C_5$, $P_5$, and $\overline{P_5}$ ([[lem-the-prime-five-vertex-graphs-are-exactly-the-bull-five-cycle-five-vertex-path-and-its-complement]]).
 
-[L4] A finite graph with at least two vertices is prime exactly when it is not a
-nontrivial substitution
-([[thm-prime-graphs-are-the-graphs-that-are-not-substitutions]]).
+[L4] A finite graph with at least two vertices is prime exactly when it is not a nontrivial substitution ([[thm-prime-graphs-are-the-graphs-that-are-not-substitutions]]).
 
-[L5] Substitution preserves the Erdős-Hajnal property
-([[thm-substitution-preserves-the-erdos-hajnal-property]]).
+[L5] Substitution preserves the Erdős-Hajnal property ([[thm-substitution-preserves-the-erdos-hajnal-property]]).
 
-[F1] If $H\cong H_1[v\to H_2]$ and $|V(H)|=5$ with $|V(H_1)|,|V(H_2)|\ge 2$,
-then $|V(H_1)|+|V(H_2)|-1=5$, so each factor has at most four vertices.
+[F1] If $H\cong H_1[v\to H_2]$ and $|V(H)|=5$ with $|V(H_1)|,|V(H_2)|\ge 2$, then $|V(H_1)|+|V(H_2)|-1=5$, so each factor has at most four vertices.
 
 ## Proof
 

@@ -27,22 +27,13 @@ For Borel probabilities $\mu_n,\mu$ on a metric space S, the following are equiv
 
 ## Facts & Assumptions
 
-[F1] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be
-nonempty and let $x, y \in X$. Then
+[F1] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be nonempty and let $x, y \in X$. Then
 
 $$|d(x,A) - d(y,A)| \le d(x,y),$$
 
-with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter).
-Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$
-between $u$ and $v$: it is **$1$-Lipschitz**.
+with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter). Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$ between $u$ and $v$: it is **$1$-Lipschitz**.
 
-[F2] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that
-$f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single
-nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then
-$f\in L^1(\mu)$,
-$$\int|f_n-f|\,d\mu\longrightarrow0,$$
-and hence
-$$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
+[F2] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then $f\in L^1(\mu)$, $$\int|f_n-f|\,d\mu\longrightarrow0,$$ and hence $$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
 
 ## Proof
 

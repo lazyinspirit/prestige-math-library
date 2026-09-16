@@ -28,9 +28,7 @@ Convergence in probability need not imply $L^p$ convergence, for $1\le p<\infty$
 
 ## Facts & Assumptions
 
-**Given:** $1\le p<\infty$, events $E_n$ with
-$\mathbb P(E_n)=1/(n+1)$, and $X_n=(n+1)^{1/p}\mathbf1_{E_n}$ for
-$n\in\mathbb N$.
+**Given:** $1\le p<\infty$, events $E_n$ with $\mathbb P(E_n)=1/(n+1)$, and $X_n=(n+1)^{1/p}\mathbf1_{E_n}$ for $n\in\mathbb N$.
 
 [L1] Convergence in probability is fixed-threshold tail convergence ([[def-convergence-in-probability]]).
 
@@ -41,9 +39,7 @@ $n\in\mathbb N$.
 **Proof technique:** direct.
 
 1.1 For fixed $\varepsilon>0$, $X_n$ is nonzero only on $E_n$, hence [L1]
-$\mathbb P(|X_n|>\varepsilon)\le1/(n+1)\to0$. Thus $X_n\to0$ in
-probability by [L1]. [L1]
+$\mathbb P(|X_n|>\varepsilon)\le1/(n+1)\to0$. Thus $X_n\to0$ in probability by [L1]. [L1]
 
 2.1 Nevertheless, [step 1.1, L2]
-$\mathbb E|X_n|^p=(n+1)\mathbb P(E_n)=1$ for all $n$. By [L2], $X_n$ does
-not converge to zero in $L^p$. [step 1.1, L2] ∎
+$\mathbb E|X_n|^p=(n+1)\mathbb P(E_n)=1$ for all $n$. By [L2], $X_n$ does not converge to zero in $L^p$. [step 1.1, L2] ∎

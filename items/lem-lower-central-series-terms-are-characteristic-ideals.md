@@ -31,15 +31,11 @@ term $\gamma_r(\mathfrak g)$ is a characteristic ideal.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$, an automorphism
-$f:\mathfrak g\to\mathfrak g$, and an integer $r\geq1$.
+**Given:** A Lie algebra $\mathfrak g$, an automorphism $f:\mathfrak g\to\mathfrak g$, and an integer $r\geq1$.
 
-[L1] The lower central series has $\gamma_1(\mathfrak g)=\mathfrak g$ and
-$\gamma_{j+1}(\mathfrak g)=[\mathfrak g,\gamma_j(\mathfrak g)]$; every term is
-an ideal ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] The lower central series has $\gamma_1(\mathfrak g)=\mathfrak g$ and $\gamma_{j+1}(\mathfrak g)=[\mathfrak g,\gamma_j(\mathfrak g)]$; every term is an ideal ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] A Lie-algebra homomorphism is linear and preserves brackets
-([[def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]]).
+[L2] A Lie-algebra homomorphism is linear and preserves brackets ([[def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]]).
 
 ## Proof
 

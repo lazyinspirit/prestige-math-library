@@ -38,11 +38,9 @@ that vanishes on $j(D)$.
 
 **Given:** A chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] The mapping-cylinder factorization provides $p$, $j$, and a homotopy
-$H$ with $dH+Hd=1-jp$ ([[thm-the-mapping-cylinder-factors-a-chain-map]]).
+[L1] The mapping-cylinder factorization provides $p$, $j$, and a homotopy $H$ with $dH+Hd=1-jp$ ([[thm-the-mapping-cylinder-factors-a-chain-map]]).
 
-[L2] A chain homotopy is the datum witnessing such an identity
-([[def-chain-homotopy]]).
+[L2] A chain homotopy is the datum witnessing such an identity ([[def-chain-homotopy]]).
 
 ## Proof
 

@@ -85,24 +85,8 @@ neither.
 
 ## Remarks
 
-- **Intersections behave, unions do not.** An intersection of linear subspaces is
-  always a linear subspace ([[lem-intersection-of-linear-subspaces]]), which is
-  what makes $\operatorname{span}(S)$ definable as the smallest linear subspace
-  containing $S$ ([[def-linear-combination-and-span]]). On the union side there is
-  no corresponding construction, and the repair is to take the **sum** rather than
-  the union: $U + W$ is a linear subspace, and it is exactly
-  $\operatorname{span}(U \cup W)$ ([[lem-sum-is-span-of-union]]).
+- **Intersections behave, unions do not.** An intersection of linear subspaces is always a linear subspace ([[lem-intersection-of-linear-subspaces]]), which is what makes $\operatorname{span}(S)$ definable as the smallest linear subspace containing $S$ ([[def-linear-combination-and-span]]). On the union side there is no corresponding construction, and the repair is to take the **sum** rather than the union: $U + W$ is a linear subspace, and it is exactly $\operatorname{span}(U \cup W)$ ([[lem-sum-is-span-of-union]]).
 
-- **The exact condition.** For linear subspaces $U, W$ of a vector space $V$, the
-  union $U \cup W$ is a linear subspace **if and only if** $U \subseteq W$ or
-  $W \subseteq U$. One direction is immediate, the union then being the larger of
-  the two. For the other, suppose neither inclusion holds and choose
-  $u \in U \setminus W$ and $w \in W \setminus U$. If $u + w$ were in $U$ then
-  $w = (u + w) + (-u) \in U$, and if $u + w$ were in $W$ then
-  $u = (u + w) + (-w) \in W$; both contradict the choice, since a linear subspace
-  is closed under addition and under additive inverses. So
-  $u + w \notin U \cup W$ and the union is not closed under addition.
+- **The exact condition.** For linear subspaces $U, W$ of a vector space $V$, the union $U \cup W$ is a linear subspace **if and only if** $U \subseteq W$ or $W \subseteq U$. One direction is immediate, the union then being the larger of the two. For the other, suppose neither inclusion holds and choose $u \in U \setminus W$ and $w \in W \setminus U$. If $u + w$ were in $U$ then $w = (u + w) + (-u) \in U$, and if $u + w$ were in $W$ then $u = (u + w) + (-w) \in W$; both contradict the choice, since a linear subspace is closed under addition and under additive inverses. So $u + w \notin U \cup W$ and the union is not closed under addition.
 
-- **The witness above is an instance of that criterion**, since neither of $U$ and
-  $W$ contains the other: $e_0 \in U$ has coordinate $1_F \ne 0_F$ at index $0$
-  and so is not of the form $(0_F, \lambda)$, and symmetrically for $e_1$.
+- **The witness above is an instance of that criterion**, since neither of $U$ and $W$ contains the other: $e_0 \in U$ has coordinate $1_F \ne 0_F$ at index $0$ and so is not of the form $(0_F, \lambda)$, and symmetrically for $e_1$.

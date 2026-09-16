@@ -34,11 +34,9 @@ group is residually finite.
 
 **Given:** An abstract group $G$.
 
-[L1] The kernel of the canonical map $\iota_G:G\to\widehat G$ is the finite
-residual $R_f(G)$ ([[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]]).
+[L1] The kernel of the canonical map $\iota_G:G\to\widehat G$ is the finite residual $R_f(G)$ ([[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]]).
 
-[F1] Residual finiteness means $R_f(G)=\{1\}$
-([[def-finite-residual-and-residually-finite-group]]).
+[F1] Residual finiteness means $R_f(G)=\{1\}$ ([[def-finite-residual-and-residually-finite-group]]).
 
 ## Proof
 

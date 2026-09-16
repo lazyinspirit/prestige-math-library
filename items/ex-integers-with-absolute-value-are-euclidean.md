@@ -33,27 +33,19 @@ preimage in $\mathbb N$.
 
 **Given:** Integers $a,b\in\mathbb Z$ with $b\ne0$.
 
-[L1] The integers form a commutative ring
-([[thm-int-comm-ring]]).
+[L1] The integers form a commutative ring ([[thm-int-comm-ring]]).
 
-[L2] The canonical embedding $\mathbb N\to\mathbb Z$ is injective, preserves
-addition, multiplication and order, and has the nonnegative integers as its
-image; in particular it makes $1\ne0$ ([[lem-nat-embeds-int]]).
+[L2] The canonical embedding $\mathbb N\to\mathbb Z$ is injective, preserves addition, multiplication and order, and has the nonnegative integers as its image; in particular it makes $1\ne0$ ([[lem-nat-embeds-int]]).
 
-[L3] The product of two nonzero integers is nonzero
-([[lem-int-cancellation]]).
+[L3] The product of two nonzero integers is nonzero ([[lem-int-cancellation]]).
 
-[L4] A commutative ring with $1\ne0$ and no zero divisors is an integral domain
-([[def-zero-divisor-and-integral-domain]]).
+[L4] A commutative ring with $1\ne0$ and no zero divisors is an integral domain ([[def-zero-divisor-and-integral-domain]]).
 
-[L5] For $b\ne0$, there are $q,r\in\mathbb Z$ with $a=qb+r$ and $0\le r<|b|$
-([[cor-division-algorithm-nonzero-divisor]]).
+[L5] For $b\ne0$, there are $q,r\in\mathbb Z$ with $a=qb+r$ and $0\le r<|b|$ ([[cor-division-algorithm-nonzero-divisor]]).
 
-[L6] Integer absolute values are nonnegative, vanish exactly at zero, and satisfy $|r|=r$ for $r\ge0$
-([[lem-int-abs-properties]], [[def-int-abs]]).
+[L6] Integer absolute values are nonnegative, vanish exactly at zero, and satisfy $|r|=r$ for $r\ge0$ ([[lem-int-abs-properties]], [[def-int-abs]]).
 
-[L7] A Euclidean domain is an integral domain equipped with a natural-valued function satisfying the stated division alternative
-([[def-euclidean-domain]]).
+[L7] A Euclidean domain is an integral domain equipped with a natural-valued function satisfying the stated division alternative ([[def-euclidean-domain]]).
 
 ## Verification
 

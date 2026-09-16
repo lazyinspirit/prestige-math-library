@@ -29,13 +29,9 @@ $\mu_F((a,b])=F(b)-F(a)$ for increasing right-continuous $F$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, an increasing right-continuous
-$F$, and its Lebesgue--Stieltjes measure $\mu_F$.
+**Given:** The Axiom of Countable Choice, an increasing right-continuous $F$, and its Lebesgue--Stieltjes measure $\mu_F$.
 
-[L1] Under the stated choice hypothesis, $\mu_F$ is a Borel measure finite
-on compact sets and regular on $\mathbb R$.
-([[thm-existence-of-the-lebesgue-stieltjes-measure]],
-[[thm-lebesgue-stieltjes-measures-are-regular-on-r]])
+[L1] Under the stated choice hypothesis, $\mu_F$ is a Borel measure finite on compact sets and regular on $\mathbb R$. ([[thm-existence-of-the-lebesgue-stieltjes-measure]], [[thm-lebesgue-stieltjes-measures-are-regular-on-r]])
 
 ## Proof
 

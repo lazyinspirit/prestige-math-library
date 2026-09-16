@@ -34,35 +34,19 @@ essential to this metamathematical refutation.
 
 ## Facts & Assumptions
 
-**Given:** External $\operatorname{Con}(\mathrm{ZF})$ and the fixed sentence
-presentations used by F1, F5 and F6.
+**Given:** External $\operatorname{Con}(\mathrm{ZF})$ and the fixed sentence presentations used by F1, F5 and F6.
 
-[F1] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] gives
-$\operatorname{Con}(\mathrm{ZF})\to
-\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$, hence in particular
-$\operatorname{Con}(\mathrm{ZF})\to\operatorname{Con}(\mathrm{ZFC})$.
+[F1] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] gives $\operatorname{Con}(\mathrm{ZF})\to \operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$, hence in particular $\operatorname{Con}(\mathrm{ZF})\to\operatorname{Con}(\mathrm{ZFC})$.
 
-[F2] [[lem-finite-support-constructibility-absoluteness]] supplies one fixed
-finite fragment $K_L\subseteq\mathrm{ZF}$ such that transitive $K_L$-models
-with the same ordinals have the same internal $L$, contained in the smaller
-model.
+[F2] [[lem-finite-support-constructibility-absoluteness]] supplies one fixed finite fragment $K_L\subseteq\mathrm{ZF}$ such that transitive $K_L$-models with the same ordinals have the same internal $L$, contained in the smaller model.
 
-[F3] [[prop-atomless-generics-are-not-ground-model-elements]] says that an
-atomless generic filter is not an element of its transitive ground model.
+[F3] [[prop-atomless-generics-are-not-ground-model-elements]] says that an atomless generic filter is not an element of its transitive ground model.
 
-[F4] [[thm-forcing-preserves-ordinals]] says that a generic extension and its
-transitive ground model have exactly the same ordinals.
+[F4] [[thm-forcing-preserves-ordinals]] says that a generic extension and its transitive ground model have exactly the same ordinals.
 
-[F5] [[lem-forcing-transfer-for-finite-zfc-fragments]] supplies, for each
-external finite target fragment and its finite formal forcing verification, a
-finite source fragment and ZFC proofs of source-model existence and conversion
-to a model of the target fragment. It asserts no uniform arithmetic proof
-constructor.
+[F5] [[lem-forcing-transfer-for-finite-zfc-fragments]] supplies, for each external finite target fragment and its finite formal forcing verification, a finite source fragment and ZFC proofs of source-model existence and conversion to a model of the target fragment. It asserts no uniform arithmetic proof constructor.
 
-[F6] [[thm-finite-fragment-relative-consistency-transfer]] converts those two
-ZFC proofs for every external finite fragment of an explicitly countable
-theory $U$ into the external implication
-$\operatorname{Con}(\mathrm{ZFC})\to\operatorname{Con}(U)$.
+[F6] [[thm-finite-fragment-relative-consistency-transfer]] converts those two ZFC proofs for every external finite fragment of an explicitly countable theory $U$ into the external implication $\operatorname{Con}(\mathrm{ZFC})\to\operatorname{Con}(U)$.
 
 ## Refutation
 

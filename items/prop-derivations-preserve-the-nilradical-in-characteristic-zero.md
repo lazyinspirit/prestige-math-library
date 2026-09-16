@@ -33,19 +33,13 @@ $$D(\operatorname{nilrad}(\mathfrak g))\subseteq\operatorname{nilrad}(\mathfrak 
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional Lie algebra $\mathfrak g$ over a
-characteristic-zero field and a derivation $D$ of $\mathfrak g$.
+**Given:** A finite-dimensional Lie algebra $\mathfrak g$ over a characteristic-zero field and a derivation $D$ of $\mathfrak g$.
 
-[L1] The nilradical $I=\operatorname{nilrad}(\mathfrak g)$ exists and is the
-largest nilpotent ideal
-([[thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero]]).
+[L1] The nilradical $I=\operatorname{nilrad}(\mathfrak g)$ exists and is the largest nilpotent ideal ([[thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero]]).
 
-[L2] A nonzero nilpotent Lie algebra has a finite nilpotency class $c$, meaning
-that its lower-central powers satisfy $I^{c+1}=0$ and $I^c\neq0$
-([[def-nilpotency-class-of-a-lie-algebra]]).
+[L2] A nonzero nilpotent Lie algebra has a finite nilpotency class $c$, meaning that its lower-central powers satisfy $I^{c+1}=0$ and $I^c\neq0$ ([[def-nilpotency-class-of-a-lie-algebra]]).
 
-[L3] A derivation satisfies $D([x,y])=[D(x),y]+[x,D(y)]$
-([[def-derivation-of-a-lie-algebra]]).
+[L3] A derivation satisfies $D([x,y])=[D(x),y]+[x,D(y)]$ ([[def-derivation-of-a-lie-algebra]]).
 
 ## Proof
 

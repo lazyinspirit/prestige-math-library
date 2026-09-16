@@ -70,8 +70,4 @@ tubular neighbourhood in $\mathbb R^m$.
 
 ## Remarks
 
-The radius is smooth, not merely continuous. No completeness, compactness, or
-positive-dimensional hypothesis on $S$ is imposed. Once the normal-bundle
-manifold data and the particular smooth radius constructed in the cited lemma
-are supplied, the remaining tube and inverse construction requires no further
-choice.
+The radius is smooth, not merely continuous. No completeness, compactness, or positive-dimensional hypothesis on $S$ is imposed. Once the normal-bundle manifold data and the particular smooth radius constructed in the cited lemma are supplied, the remaining tube and inverse construction requires no further choice.

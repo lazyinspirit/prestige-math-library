@@ -35,12 +35,9 @@ is the canonical epimorphism-monomorphism factorization of $f$.
 
 **Given:** An abelian category and a morphism $f:A\to B$.
 
-[L1] The first isomorphism theorem gives a canonical isomorphism
-$A/\ker(f)\cong\operatorname{im}(f)$
-([[thm-first-isomorphism-theorem-in-an-abelian-category]]).
+[L1] The first isomorphism theorem gives a canonical isomorphism $A/\ker(f)\cong\operatorname{im}(f)$ ([[thm-first-isomorphism-theorem-in-an-abelian-category]]).
 
-[L2] Epic-monic factorizations exist and are unique up to unique isomorphism
-([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
+[L2] Epic-monic factorizations exist and are unique up to unique isomorphism ([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
 
 ## Proof
 

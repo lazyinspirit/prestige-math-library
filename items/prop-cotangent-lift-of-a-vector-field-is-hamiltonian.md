@@ -33,14 +33,11 @@ $$H_Y(q,p)=p(Y_q).$$
 
 ## Facts & Assumptions
 
-**Given:** The cotangent lift convention and the canonical form
-$\omega_{\mathrm{can}}=-d\lambda$.
+**Given:** The cotangent lift convention and the canonical form $\omega_{\mathrm{can}}=-d\lambda$.
 
-[F1] Cotangent lifts preserve $\lambda$ and the canonical symplectic form.
-[[prop-cotangent-lifts-are-symplectomorphisms]].
+[F1] Cotangent lifts preserve $\lambda$ and the canonical symplectic form. [[prop-cotangent-lifts-are-symplectomorphisms]].
 
-[F2] The library Hamiltonian equation is $\iota_X\omega=dH$.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F2] The library Hamiltonian equation is $\iota_X\omega=dH$. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

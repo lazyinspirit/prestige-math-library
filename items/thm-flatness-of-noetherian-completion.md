@@ -38,17 +38,13 @@ makes $\widehat R$ into a flat $R$-module.
 
 **Given:** A Noetherian commutative ring $R$ and an ideal $I \subseteq R$.
 
-[L1] For a Noetherian ring, completion identifies finite modules with extension
-of scalars, and it carries ideal multiples to the corresponding multiples after
-tensoring ([[thm-completion-as-extension-of-scalars]], [[cor-completion-commutes-with-finite-quotients-and-submodules]]).
+[L1] For a Noetherian ring, completion identifies finite modules with extension of scalars, and it carries ideal multiples to the corresponding multiples after tensoring ([[thm-completion-as-extension-of-scalars]], [[cor-completion-commutes-with-finite-quotients-and-submodules]]).
 
-[L2] An $R$-module is flat exactly when $J \otimes_R M \to M$ is injective for
-every ideal $J \subseteq R$ ([[thm-flatness-criteria-by-injections-and-ideals]]).
+[L2] An $R$-module is flat exactly when $J \otimes_R M \to M$ is injective for every ideal $J \subseteq R$ ([[thm-flatness-criteria-by-injections-and-ideals]]).
 
 [L3] Completion is exact on short exact sequences of finite modules over a Noetherian commutative ring ([[thm-completion-is-exact-on-finite-modules]]).
 
-[L4] Every ideal of a Noetherian commutative ring is finitely generated
-([[thm-noetherian-ring-ideal-characterisations]]).
+[L4] Every ideal of a Noetherian commutative ring is finitely generated ([[thm-noetherian-ring-ideal-characterisations]]).
 
 ## Proof
 

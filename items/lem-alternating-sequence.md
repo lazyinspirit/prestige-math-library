@@ -106,25 +106,8 @@ each of them is what this lemma exists to prevent.
 
 ## Remarks
 
-- **Why the recursion rather than $(-1)^k$.** Written as a power, every one of the
-  four claims would have to be unwound into the two recursion equations before it
-  could be proved; written as a recursion, each is a two-line induction. The
-  identification with $(-1)^k$ is available ([[def-integer-power]]) and is used
-  nowhere.
+- **Why the recursion rather than $(-1)^k$.** Written as a power, every one of the four claims would have to be unwound into the two recursion equations before it could be proved; written as a recursion, each is a two-line induction. The identification with $(-1)^k$ is available ([[def-integer-power]]) and is used nowhere.
 
-- **The parity statement is genuinely proved, not assumed.** Claim 2 is where the
-  work is: the covering half is the interleaved induction of step 1.6, which
-  tracks $n$ and $\sigma(n)$ together because neither alone is preserved by the
-  successor, and the disjointness half is settled by the *sequence*, since
-  $s$ takes the value $1$ on one range and $-1$ on the other and $1 \ne -1$.
-  Using the sequence to separate the two ranges is shorter than any direct parity
-  argument and needs no arithmetic on $\mathbb{N}$ beyond the successor.
+- **The parity statement is genuinely proved, not assumed.** Claim 2 is where the work is: the covering half is the interleaved induction of step 1.6, which tracks $n$ and $\sigma(n)$ together because neither alone is preserved by the successor, and the disjointness half is settled by the *sequence*, since $s$ takes the value $1$ on one range and $-1$ on the other and $1 \ne -1$. Using the sequence to separate the two ranges is shorter than any direct parity argument and needs no arithmetic on $\mathbb{N}$ beyond the successor.
 
-- **What consumes this lemma.** [[fs-convergent-subsequence-implies-bounded]]
-  interleaves a constant sequence with an unbounded one along $e$ and $o$;
-  [[ex-two-subsequential-limits]] multiplies $s$ by a null perturbation to get a
-  sequence with exactly two subsequential limits; and
-  [[cex-unbounded-with-convergent-subsequence]] is the witness for the first of
-  those. The same sequence, built inline, refutes
-  [[fs-bounded-implies-convergent]] on the previous page; that item predates this
-  lemma and is left as it stands.
+- **What consumes this lemma.** [[fs-convergent-subsequence-implies-bounded]] interleaves a constant sequence with an unbounded one along $e$ and $o$; [[ex-two-subsequential-limits]] multiplies $s$ by a null perturbation to get a sequence with exactly two subsequential limits; and [[cex-unbounded-with-convergent-subsequence]] is the witness for the first of those. The same sequence, built inline, refutes [[fs-bounded-implies-convergent]] on the previous page; that item predates this lemma and is left as it stands.

@@ -38,9 +38,7 @@ zero-free there.
 
 **Given:** The factors $f_n(z)=1+z/2^n$ for $n\ge1$.
 
-[F1] A normally convergent holomorphic product defines a holomorphic function,
-and after finitely many factors the tail contributes no zeros on a fixed compact
-set ([[thm-normal-convergence-of-holomorphic-products]]).
+[F1] A normally convergent holomorphic product defines a holomorphic function, and after finitely many factors the tail contributes no zeros on a fixed compact set ([[thm-normal-convergence-of-holomorphic-products]]).
 
 ## Verification
 

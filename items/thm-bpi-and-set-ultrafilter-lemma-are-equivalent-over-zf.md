@@ -31,20 +31,15 @@ ultrafilter on that set.
 
 ## Facts & Assumptions
 
-**Given:** ZF.  Each implication assumes only the principle named in its
-antecedent.
+**Given:** ZF.  Each implication assumes only the principle named in its antecedent.
 
-[F1] BPI and the set UFL, including the nontrivial-algebra and proper-filter
-conventions, are the two principles in the preceding definition.
-[[def-boolean-prime-ideal-principle]]
+[F1] BPI and the set UFL, including the nontrivial-algebra and proper-filter conventions, are the two principles in the preceding definition. [[def-boolean-prime-ideal-principle]]
 
-[F2] Prime ideals are proper, and Boolean ideals and filters have the stated
-closure conventions. [[def-boolean-ideals-filters-and-primality]]
+[F2] Prime ideals are proper, and Boolean ideals and filters have the stated closure conventions. [[def-boolean-ideals-filters-and-primality]]
 
 [F3] An ultrafilter is a maximal proper set filter. [[def-ultrafilter]]
 
-[F4] Every homomorphism on a finite Boolean subalgebra extends across any
-prescribed finite set in ZF. [[lem-finite-partial-prime-ideal-extension]]
+[F4] Every homomorphism on a finite Boolean subalgebra extends across any prescribed finite set in ZF. [[lem-finite-partial-prime-ideal-extension]]
 
 ## Proof
 

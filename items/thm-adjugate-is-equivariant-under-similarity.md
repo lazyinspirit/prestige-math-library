@@ -40,22 +40,15 @@ $$\operatorname{adj}(P^{-1}AP) =P^{-1}\operatorname{adj}(A)P.$$
 
 **Given:** $R,n,A,P$ as in the statement, and $C:=P^{-1}AP$.
 
-[F1] Similarity over a commutative ring means $C=P^{-1}AP$ for an invertible
-$P$ ([[def-invertible-matrix-and-similarity-over-a-commutative-ring]]).
+[F1] Similarity over a commutative ring means $C=P^{-1}AP$ for an invertible $P$ ([[def-invertible-matrix-and-similarity-over-a-commutative-ring]]).
 
-[L1] Similar matrices have equal determinants
-([[cor-determinant-is-invariant-under-similarity]]).
+[L1] Similar matrices have equal determinants ([[cor-determinant-is-invariant-under-similarity]]).
 
-[L2] For columns $u,v$,
-$\det(B+uv^{\mathsf T})
-=\det(B)+v^{\mathsf T}\operatorname{adj}(B)u$
-([[lem-determinant-rank-one-update-over-a-commutative-ring]]).
+[L2] For columns $u,v$, $\det(B+uv^{\mathsf T}) =\det(B)+v^{\mathsf T}\operatorname{adj}(B)u$ ([[lem-determinant-rank-one-update-over-a-commutative-ring]]).
 
-[F2] Matrix products and transposes are given by their entry formulas
-([[def-ring-matrix-product-identity-and-transpose]]).
+[F2] Matrix products and transposes are given by their entry formulas ([[def-ring-matrix-product-identity-and-transpose]]).
 
-[L3] Matrix multiplication is associative and distributive, and transpose
-reverses products ([[thm-ring-matrix-arithmetic-laws]]).
+[L3] Matrix multiplication is associative and distributive, and transpose reverses products ([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 

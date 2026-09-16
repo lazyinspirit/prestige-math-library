@@ -39,40 +39,27 @@ not an arbitrary antichain of the starting condition.
 
 ## Facts & Assumptions
 
-**Given:** $p_0$, $\dot A$, and $r_0\leq p_0$ as above. Work in ZFC and use the
-stronger-is-smaller convention.
+**Given:** $p_0$, $\dot A$, and $r_0\leq p_0$ as above. Work in ZFC and use the stronger-is-smaller convention.
 
-[F1] The tree forcing is countably closed and forces its canonical union name
-to be a normal splitting Suslin tree. [[thm-countably-closed-forcing-adds-a-normal-suslin-tree]]
+[F1] The tree forcing is countably closed and forces its canonical union name to be a normal splitting Suslin tree. [[thm-countably-closed-forcing-adds-a-normal-suslin-tree]]
 
-[F2] A stronger end extension leaves every old level and predecessor relation
-literally unchanged and adds only higher levels. [[def-countable-normal-tree-end-extension-forcing]]
+[F2] A stronger end extension leaves every old level and predecessor relation literally unchanged and adds only higher levels. [[def-countable-normal-tree-end-extension-forcing]]
 
-[F3] A maximal antichain in a countable normal tree of nonzero countable limit
-height can be sealed by a countable top level whose every node extends that
-antichain. [[lem-countable-tree-antichain-sealing]]
+[F3] A maximal antichain in a countable normal tree of nonzero countable limit height can be sealed by a countable top level whose every node extends that antichain. [[lem-countable-tree-antichain-sealing]]
 
-[F4] Countably closed forcing adds no new countable sequences of ground-model
-elements. [[thm-closure-distributivity-and-no-short-sequences]]
+[F4] Countably closed forcing adds no new countable sequences of ground-model elements. [[thm-closure-distributivity-and-no-short-sequences]]
 
-[F5] Forcing decisions are dense and persist to stronger conditions.
-[[lem-forcing-monotonicity-density-and-decision]]
+[F5] Forcing decisions are dense and persist to stronger conditions. [[lem-forcing-monotonicity-density-and-decision]]
 
-[F6] Atomic membership in a name is witnessed densely by a coefficient of that
-name below the current condition. [[def-forcing-relation-for-atomic-formulas]]
+[F6] Atomic membership in a name is witnessed densely by a coefficient of that name below the current condition. [[def-forcing-relation-for-atomic-formulas]]
 
-[F7] The forcing theorem supplies the definable forcing relation and truth
-lemma without asserting that a generic over the universe exists.
-[[thm-forcing-theorem]]
+[F7] The forcing theorem supplies the definable forcing relation and truth lemma without asserting that a generic over the universe exists. [[thm-forcing-theorem]]
 
-[F8] Under countable choice, a countable union of countable sets is countable.
-[[thm-countable-union-of-countable]]
+[F8] Under countable choice, a countable union of countable sets is countable. [[thm-countable-union-of-countable]]
 
-[F9] Transfinite recursion constructs the two indexed descending systems from
-their specified earlier-stage rules. [[thm-transfinite-recursion]]
+[F9] Transfinite recursion constructs the two indexed descending systems from their specified earlier-stage rules. [[thm-transfinite-recursion]]
 
-[A1] AC supplies the simultaneous enumerations and choices of deciding
-extensions used in the fusion. [[def-axiom-of-choice]]
+[A1] AC supplies the simultaneous enumerations and choices of deciding extensions used in the fusion. [[def-axiom-of-choice]]
 
 ## Verification
 
@@ -90,10 +77,5 @@ extensions used in the fusion. [[def-axiom-of-choice]]
 
 ## Remarks
 
-- Sealing a preselected maximal antichain of one condition would not by itself
-  decide a name whose value may include later generic nodes. The fusion first
-  extracts the correct ground antichain from persistent decisions about that
-  name.
-- The outer omega-loop is essential: decision conditions can add nodes not in
-  the tree enumerated at the start of the current round. The next round
-  enumerates those nodes before the final union is sealed.
+- Sealing a preselected maximal antichain of one condition would not by itself decide a name whose value may include later generic nodes. The fusion first extracts the correct ground antichain from persistent decisions about that name.
+- The outer omega-loop is essential: decision conditions can add nodes not in the tree enumerated at the start of the current round. The next round enumerates those nodes before the final union is sealed.

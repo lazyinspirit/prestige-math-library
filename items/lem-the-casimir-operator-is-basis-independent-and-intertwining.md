@@ -34,17 +34,11 @@ $\mathfrak g$-module is a $\mathfrak g$-intertwiner.
 
 **Given:** The data in the Casimir definition.
 
-[L1] The element is the image of the dual-basis tensor under multiplication
-in $U(\mathfrak g)$
-([[def-casimir-operator-relative-to-an-invariant-form]]).
+[L1] The element is the image of the dual-basis tensor under multiplication in $U(\mathfrak g)$ ([[def-casimir-operator-relative-to-an-invariant-form]]).
 
-[L2] Invariance means
-$B([z,x],y)+B(x,[z,y])=0$
-([[prop-trace-forms-are-symmetric-and-invariant]]).
+[L2] Invariance means $B([z,x],y)+B(x,[z,y])=0$ ([[prop-trace-forms-are-symmetric-and-invariant]]).
 
-[L3] A representation extends uniquely to an algebra homomorphism from the
-universal enveloping algebra
-([[thm-universal-property-of-the-universal-enveloping-algebra]]).
+[L3] A representation extends uniquely to an algebra homomorphism from the universal enveloping algebra ([[thm-universal-property-of-the-universal-enveloping-algebra]]).
 
 ## Proof
 

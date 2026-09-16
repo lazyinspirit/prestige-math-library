@@ -31,11 +31,9 @@ Every smooth vector bundle admits a smooth bundle metric.
 
 **Given:** A smooth vector bundle $E\to M$.
 
-[L1] The base manifold admits smooth partitions of unity subordinate to open
-covers ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
+[L1] The base manifold admits smooth partitions of unity subordinate to open covers ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
 
-[L2] Local frames are equivalent to local trivializations
-([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
+[L2] Local frames are equivalent to local trivializations ([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
 
 ## Proof
 

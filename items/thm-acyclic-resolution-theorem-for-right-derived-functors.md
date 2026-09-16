@@ -44,21 +44,13 @@ $$R_I^nF(A)\xrightarrow{\ \sim\ }H^n(F(J^\bullet_{\mathrm{del}})).$$
 
 [L2] The zero-th right derived functor of a left exact functor recovers the functor ([[thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor]]).
 
-[L3] Change of supplied injective resolution data produces natural
-isomorphisms of right derived functors
-([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
+[L3] Change of supplied injective resolution data produces natural isomorphisms of right derived functors ([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
 
-[L4] Passing to the opposite abelian category and applying the projective
-horseshoe lemma produces injective resolutions of a short exact sequence in a
-degreewise split short exact sequence of cochain complexes
-([[thm-the-opposite-of-an-abelian-category-is-abelian]],
-[[thm-horseshoe-lemma-for-projective-resolutions]]).
+[L4] Passing to the opposite abelian category and applying the projective horseshoe lemma produces injective resolutions of a short exact sequence in a degreewise split short exact sequence of cochain complexes ([[thm-the-opposite-of-an-abelian-category-is-abelian]], [[thm-horseshoe-lemma-for-projective-resolutions]]).
 
 [L5] A short exact sequence of cochain complexes yields a long exact sequence in cohomology ([[thm-long-exact-sequence-in-cohomology]]).
 
-[L6] An additive functor preserves finite biproducts
-([[thm-an-additive-functor-preserves-finite-biproducts]]), and therefore
-preserves split short exact sequences.
+[L6] An additive functor preserves finite biproducts ([[thm-an-additive-functor-preserves-finite-biproducts]]), and therefore preserves split short exact sequences.
 
 ## Proof
 

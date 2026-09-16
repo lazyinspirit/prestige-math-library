@@ -34,17 +34,13 @@ $A,B,C\in\mathcal D$ and every $n\in\mathbb Z$,
 $$L_n^PF(vu)=L_n^PF(v)\circ L_n^PF(u).$$
 ## Facts & Assumptions
 
-**Given:** Composable morphisms $A\xrightarrow{u}B\xrightarrow{v}C$ with
-$A,B,C\in\mathcal D$ and an integer $n$.
+**Given:** Composable morphisms $A\xrightarrow{u}B\xrightarrow{v}C$ with $A,B,C\in\mathcal D$ and an integer $n$.
 
-[L1] Each derived map is induced from a comparison lift on the supplied
-resolutions ([[def-left-derived-map-relative-to-resolution-data]]).
+[L1] Each derived map is induced from a comparison lift on the supplied resolutions ([[def-left-derived-map-relative-to-resolution-data]]).
 
-[L2] A comparison lift of a composite is homotopic to the composite of
-comparison lifts ([[prop-comparison-maps-respect-composition-up-to-homotopy]]).
+[L2] A comparison lift of a composite is homotopic to the composite of comparison lifts ([[prop-comparison-maps-respect-composition-up-to-homotopy]]).
 
-[L3] Chain-homotopic maps induce the same homology map
-([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
+[L3] Chain-homotopic maps induce the same homology map ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
 
 [L4] Homology respects composition ([[prop-homology-respects-identities-and-composition]]).
 

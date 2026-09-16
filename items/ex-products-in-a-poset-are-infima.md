@@ -33,14 +33,11 @@ while the identity of its codomain is a coequalizer.
 
 **Given:** A poset $P$ regarded as a category.
 
-[F1] An arrow $x\to y$ means $x\le y$, and at most one such arrow exists
-([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[F1] An arrow $x\to y$ means $x\le y$, and at most one such arrow exists ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
 
-[F2] Products and coproducts represent cones and cocones over discrete
-families ([[def-products-and-coproducts]]).
+[F2] Products and coproducts represent cones and cocones over discrete families ([[def-products-and-coproducts]]).
 
-[F3] Equalizers and coequalizers have their parallel-pair universal properties
-([[def-equalizers-and-coequalizers]]).
+[F3] Equalizers and coequalizers have their parallel-pair universal properties ([[def-equalizers-and-coequalizers]]).
 
 ## Verification
 

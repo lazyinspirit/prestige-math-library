@@ -50,8 +50,7 @@ converge simultaneously and, when convergent, are equal. At several singular end
 **Proof technique:** direct.
 
 1.1 On each compact source truncation $[u,v]\subset I$, [L1] gives [L1]
-$$\int_{\phi([u,v])}f=\int_u^v(f\circ\phi)|\phi'|,$$
-with the endpoint order adjusted when $\phi$ decreases.
+$$\int_{\phi([u,v])}f=\int_u^v(f\circ\phi)|\phi'|,$$ with the endpoint order adjusted when $\phi$ decreases.
 
 2.1 By [L2], the two sides form the same family of values as the corresponding truncation approaches a singular end. Since they are equal term by term by step 1.1, the epsilon condition in [L3] holds for one family exactly when it holds for the other, with the same limit. [step 1.1, L2, L3]
 

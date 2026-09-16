@@ -46,11 +46,9 @@ $|\sigma(n)|$, namely $8|\sigma(n)|^3$.
 
 **Given:** The encodings $\sigma$ and $\tau$ defined above.
 
-[L1] Two encodings are polynomially related when each code length is bounded by
-a polynomial in the other, by [[def-instance-size-under-an-encoding]].
+[L1] Two encodings are polynomially related when each code length is bounded by a polynomial in the other, by [[def-instance-size-under-an-encoding]].
 
-[L2] Polynomially related encodings preserve polynomial size bounds, by
-[[prop-polynomially-related-encodings-preserve-polynomial-size]].
+[L2] Polynomially related encodings preserve polynomial size bounds, by [[prop-polynomially-related-encodings-preserve-polynomial-size]].
 
 ## Verification
 

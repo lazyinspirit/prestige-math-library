@@ -73,20 +73,8 @@ rather than by a gap of positive length.
 
 ## Remarks
 
-- **The count is the number of components, not the number of points.** There are
-  three components here, while each of them is an uncountable set
-  ([[lem-q-and-irrationals-dense-r]]). The at most countable family of
-  [[thm-open-subsets-of-r-structure]] is a family of intervals, and a finite
-  family is one instance of it.
+- **The count is the number of components, not the number of points.** There are three components here, while each of them is an uncountable set ([[lem-q-and-irrationals-dense-r]]). The at most countable family of [[thm-open-subsets-of-r-structure]] is a family of intervals, and a finite family is one instance of it.
 
-- **What keeps two components apart may be a single missing point.** $A$ and $B$
-  are kept apart by $0 \notin U$ alone, and no gap of positive length is
-  required, although $B$ and $C$ happen to have one. This is why the components
-  are defined by an equivalence relation on $U$ and not by measuring distances
-  between the pieces.
+- **What keeps two components apart may be a single missing point.** $A$ and $B$ are kept apart by $0 \notin U$ alone, and no gap of positive length is required, although $B$ and $C$ happen to have one. This is why the components are defined by an equivalence relation on $U$ and not by measuring distances between the pieces.
 
-- **Reading the decomposition off the formula is legitimate here only because
-  the three pieces were checked to be the classes.** A presentation of an open
-  set as a union of open intervals is not automatically its decomposition into
-  components: $(0,2) = (0,1) \cup (0,2)$ writes an open set as a union of open
-  intervals that are neither disjoint nor components.
+- **Reading the decomposition off the formula is legitimate here only because the three pieces were checked to be the classes.** A presentation of an open set as a union of open intervals is not automatically its decomposition into components: $(0,2) = (0,1) \cup (0,2)$ writes an open set as a union of open intervals that are neither disjoint nor components.

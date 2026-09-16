@@ -36,14 +36,11 @@ defines a smooth section of $E$.
 
 ## Facts & Assumptions
 
-**Given:** Smooth sections $\sigma_i$, smooth functions $f_i$, and a locally
-finite family of supports $\operatorname{supp}(f_i\sigma_i)$.
+**Given:** Smooth sections $\sigma_i$, smooth functions $f_i$, and a locally finite family of supports $\operatorname{supp}(f_i\sigma_i)$.
 
-[L1] A section is smooth exactly when its local frame components are smooth
-([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
+[L1] A section is smooth exactly when its local frame components are smooth ([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
 
-[L2] A locally finite sum of smooth scalar functions is smooth
-([[thm-a-locally-finite-sum-of-smooth-functions-is-smooth]]).
+[L2] A locally finite sum of smooth scalar functions is smooth ([[thm-a-locally-finite-sum-of-smooth-functions-is-smooth]]).
 
 ## Proof
 

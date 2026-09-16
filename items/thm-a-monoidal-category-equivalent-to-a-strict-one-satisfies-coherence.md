@@ -34,8 +34,7 @@ the same source and target are equal.
 
 ## Facts & Assumptions
 
-**Given:** A monoidal equivalence $F:\mathcal C\to\mathcal D$ with
-$\mathcal D$ strict monoidal.
+**Given:** A monoidal equivalence $F:\mathcal C\to\mathcal D$ with $\mathcal D$ strict monoidal.
 
 [L1] Canonical morphisms are the natural transformations built from identities, associators, unitors, their inverses, tensoring with identities, and composition ([[def-canonical-morphism-between-parenthesised-words]]).
 

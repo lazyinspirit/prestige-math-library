@@ -38,16 +38,11 @@ if and only if every nonempty bounded closed convex subset of $X$ is dentable.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] RNP is the density property for absolutely continuous bounded-variation
-vector measures ([[def-radon-nikodym-property]]).
+[L1] RNP is the density property for absolutely continuous bounded-variation vector measures ([[def-radon-nikodym-property]]).
 
-[L2] Under AC, dentability of every nonempty bounded closed convex set supplies
-all required vector-measure densities
-([[lem-dentable-average-ranges-give-vector-measure-densities]]).
+[L2] Under AC, dentability of every nonempty bounded closed convex set supplies all required vector-measure densities ([[lem-dentable-average-ranges-give-vector-measure-densities]]).
 
-[L3] Under AC, any nondentable such set supplies an absolutely continuous
-bounded-variation Lebesgue vector measure without a Bochner density
-([[lem-nondentability-produces-a-vector-measure-without-density]]).
+[L3] Under AC, any nondentable such set supplies an absolutely continuous bounded-variation Lebesgue vector measure without a Bochner density ([[lem-nondentability-produces-a-vector-measure-without-density]]).
 
 ## Proof
 

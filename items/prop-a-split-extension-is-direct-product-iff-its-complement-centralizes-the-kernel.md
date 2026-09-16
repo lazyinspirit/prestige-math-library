@@ -33,11 +33,9 @@ element of $C$ commutes with every element of $i(N)$.
 
 **Given:** The displayed split extension and a complement $C\le E$.
 
-[L1] The complement $C$ induces an action of $Q$ on $N$ by conjugation
-([[lem-a-complement-induces-the-conjugation-action-on-the-kernel]]).
+[L1] The complement $C$ induces an action of $Q$ on $N$ by conjugation ([[lem-a-complement-induces-the-conjugation-action-on-the-kernel]]).
 
-[L2] In a semidirect product, the internal decomposition is direct exactly when
-the action is trivial ([[prop-semidirect-product-is-direct-iff-action-is-trivial]]).
+[L2] In a semidirect product, the internal decomposition is direct exactly when the action is trivial ([[prop-semidirect-product-is-direct-iff-action-is-trivial]]).
 
 ## Proof
 

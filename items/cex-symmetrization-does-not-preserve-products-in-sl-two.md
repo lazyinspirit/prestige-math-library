@@ -29,12 +29,9 @@ PBW symmetrization preserves products in $\mathfrak{sl}_2$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathfrak{sl}_2$ over a characteristic-zero field, with
-$[h,e]=2e$.
+**Given:** $\mathfrak{sl}_2$ over a characteristic-zero field, with $[h,e]=2e$.
 
-[L1] Symmetrization satisfies
-$\operatorname{sym}(eh)=\tfrac12(eh+he)$ and is a vector-space isomorphism
-([[thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero]]).
+[L1] Symmetrization satisfies $\operatorname{sym}(eh)=\tfrac12(eh+he)$ and is a vector-space isomorphism ([[thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero]]).
 
 ## Counterexample
 

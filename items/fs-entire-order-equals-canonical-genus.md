@@ -30,12 +30,9 @@ The order of an entire function always equals its canonical genus.
 
 **Given:** The zero-free entire function $f(z)=e^z$.
 
-[F1] Weierstrass factorization represents a zero-free entire function as a pure
-exponential factor, so its canonical product part has genus $0$
-([[thm-weierstrass-factorization-for-entire-functions]]).
+[F1] Weierstrass factorization represents a zero-free entire function as a pure exponential factor, so its canonical product part has genus $0$ ([[thm-weierstrass-factorization-for-entire-functions]]).
 
-[F2] The order of an entire function is defined from the growth of $M_f(r)$
-([[def-order-of-an-entire-function]]).
+[F2] The order of an entire function is defined from the growth of $M_f(r)$ ([[def-order-of-an-entire-function]]).
 
 ## Refutation
 

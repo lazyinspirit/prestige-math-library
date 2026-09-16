@@ -27,49 +27,24 @@ For identically distributed integrable real $(X_n)$ and $Y_n=X_n\mathbf1_{\{|X_n
 
 ## Facts & Assumptions
 
-[F1] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space.
-Then
-$$\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$$
-$$\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$$
-Moreover, covariance is symmetric and bilinear on finite linear combinations.
-On finite full-power-set probability spaces these formulas reduce to the
-published finite identities.
+[F1] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space. Then $$\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$$ $$\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$$ Moreover, covariance is symmetric and bilinear on finite linear combinations. On finite full-power-set probability spaces these formulas reduce to the published finite identities.
 
-[F2] [[thm-change-of-variables-for-expectation]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, let
-$\mathbb P_X$ be its law, and let $g:(S,\Sigma)\to\mathbb R$ or
-$g:(S,\Sigma)\to\mathbb C$ be measurable.
+[F2] [[thm-change-of-variables-for-expectation]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, let $\mathbb P_X$ be its law, and let $g:(S,\Sigma)\to\mathbb R$ or $g:(S,\Sigma)\to\mathbb C$ be measurable.
 
-1. If $g\ge0$, then
-   $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
-2. If $g(X)$ is integrable, then $g$ is integrable with respect to
-   $\mathbb P_X$ and the same formula holds:
-   $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
+1. If $g\ge0$, then $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
+2. If $g(X)$ is integrable, then $g$ is integrable with respect to $\mathbb P_X$ and the same formula holds: $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
 
-[F3] [[lem-integer-part]]: Identify $\mathbb{Z}$ with its canonical copy inside $\mathbb{R}$, along the
-embeddings $\mathbb{N} \to \mathbb{Z} \to \mathbb{Q} \to \mathbb{R}$
-(lem-nat-embeds-int, lem-int-embeds-rat, lem-rat-embeds-dense,
-def-integers). Then for every real $x$ there is **exactly one** integer $m$
-with
+[F3] [[lem-integer-part]]: Identify $\mathbb{Z}$ with its canonical copy inside $\mathbb{R}$, along the embeddings $\mathbb{N} \to \mathbb{Z} \to \mathbb{Q} \to \mathbb{R}$ (lem-nat-embeds-int, lem-int-embeds-rat, lem-rat-embeds-dense, def-integers). Then for every real $x$ there is **exactly one** integer $m$ with
 
 $$m \;\le\; x \;<\; m + 1 .$$
 
-It is written $\lfloor x \rfloor$ and called the **integer part**, or **floor**,
-of $x$.
+It is written $\lfloor x \rfloor$ and called the **integer part**, or **floor**, of $x$.
 
-**Two independent ingredients are needed and neither may be dropped.** Existence
-is the Archimedean property (thm-of-archimedean) together with the
-well-ordering of $\mathbb{N}$ (thm-well-ordering-principle): the first says
-that $x$ is caught between two integers at all, the second picks the *least*
-integer above $x$. Uniqueness is the discreteness of $\mathbb{Z}$: no integer
-lies strictly between $m$ and $m+1$.
+**Two independent ingredients are needed and neither may be dropped.** Existence is the Archimedean property (thm-of-archimedean) together with the well-ordering of $\mathbb{N}$ (thm-well-ordering-principle): the first says that $x$ is caught between two integers at all, the second picks the *least* integer above $x$. Uniqueness is the discreteness of $\mathbb{Z}$: no integer lies strictly between $m$ and $m+1$.
 
-This lemma is stated once here and reused. It is what turns "the nearest integer
-to $x$" from a picture into an object, and the companion page's oscillator
-$\psi(x) = \inf_{n \in \mathbb{Z}} |x - n|$ is computed from it in one line.
+This lemma is stated once here and reused. It is what turns "the nearest integer to $x$" from a picture into an object, and the companion page's oscillator $\psi(x) = \inf_{n \in \mathbb{Z}} |x - n|$ is computed from it in one line.
 
-[F4] [[thm-monotone-convergence-for-the-integral]]: Let $0\le f_1\le f_2\le\cdots$ be measurable and suppose $f_n(x)\uparrow f(x)$
-for every $x$. Then
-$$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
+[F4] [[thm-monotone-convergence-for-the-integral]]: Let $0\le f_1\le f_2\le\cdots$ be measurable and suppose $f_n(x)\uparrow f(x)$ for every $x$. Then $$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
 
 ## Proof
 

@@ -30,23 +30,13 @@ transitive set model of ZF.
 
 ## Facts & Assumptions
 
-**Given:** The certified theories, contradiction sentence and PA
-representations fixed in the preceding lemma and in F2.
+**Given:** The certified theories, contradiction sentence and PA representations fixed in the preceding lemma and in F2.
 
-[F1] [[lem-finite-fragment-l-interpretation-with-gch]] supplies a total
-primitive-recursive translation of certified
-$\mathrm{ZFC}+\mathrm{GCH}$ derivations to ZF derivations, together with the
-PA proof of checker acceptance at the literal guarded $L$-translation of the
-input conclusion. It does not itself supply the final contradiction block.
+[F1] [[lem-finite-fragment-l-interpretation-with-gch]] supplies a total primitive-recursive translation of certified $\mathrm{ZFC}+\mathrm{GCH}$ derivations to ZF derivations, together with the PA proof of checker acceptance at the literal guarded $L$-translation of the input conclusion. It does not itself supply the final contradiction block.
 
-[F2] [[thm-formal-relative-consistency-from-verified-proof-reduction]] turns a
-base-verified total map from target refutations to source refutations into the
-corresponding formal consistency implication.
+[F2] [[thm-formal-relative-consistency-from-verified-proof-reduction]] turns a base-verified total map from target refutations to source refutations into the corresponding formal consistency implication.
 
-[F3] [[lem-hilbert-propositional-and-equality-rules]] supplies Boolean
-reasoning, quantified double-negation replacement and explosion in the fixed
-calculus. Equality reflexivity is an axiom of that calculus, not a stated
-conclusion of F3 ([[def-set-coded-formal-derivation]]).
+[F3] [[lem-hilbert-propositional-and-equality-rules]] supplies Boolean reasoning, quantified double-negation replacement and explosion in the fixed calculus. Equality reflexivity is an axiom of that calculus, not a stated conclusion of F3 ([[def-set-coded-formal-derivation]]).
 
 ## Proof
 

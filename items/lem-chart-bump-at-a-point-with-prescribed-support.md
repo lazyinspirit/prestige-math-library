@@ -43,10 +43,7 @@ Let $M$ be a smooth manifold, let $p\in M$, and let $W\subseteq M$ be open with 
 
 [L1] Compact sets inside Euclidean open sets admit smooth bumps with prescribed support ([[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]]).
 
-[L2] Smooth maps that agree on overlaps paste to a smooth global map, and
-composites of smooth maps are smooth
-([[lem-smooth-maps-paste-over-an-open-cover]],
-[[prop-identity-maps-and-composites-of-smooth-maps-are-smooth]]).
+[L2] Smooth maps that agree on overlaps paste to a smooth global map, and composites of smooth maps are smooth ([[lem-smooth-maps-paste-over-an-open-cover]], [[prop-identity-maps-and-composites-of-smooth-maps-are-smooth]]).
 
 [L3] Closed bounded subsets of $\mathbb R^n$, $n\ge1$, are compact ([[thm-heine-borel-rn]]); metric and topological compactness agree ([[thm-compactness-agrees-with-metric-compactness]]).
 

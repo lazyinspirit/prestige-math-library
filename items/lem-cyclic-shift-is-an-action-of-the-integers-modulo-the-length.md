@@ -81,12 +81,6 @@ over $X$, with the shifts $\sigma^{j}$ of
 
 ## Remarks
 
-- **Why the acting group is $\mathbb{Z}/m$ and not $\mathbb{Z}$.** Both act, and
-  the $\mathbb{Z}$-action factors through $\mathbb{Z}/m$ by clause 2. Taking the
-  finite group is what makes the orbit and stabiliser counts below available, and
-  it is the only reason the reduction is recorded.
+- **Why the acting group is $\mathbb{Z}/m$ and not $\mathbb{Z}$.** Both act, and the $\mathbb{Z}$-action factors through $\mathbb{Z}/m$ by clause 2. Taking the finite group is what makes the orbit and stabiliser counts below available, and it is the only reason the reduction is recorded.
 
-- **Clause 3 is what confines the action to a level set.** The shift preserves the
-  number of positions carrying each letter, so it acts on the words with a
-  prescribed letter count and on the words of a prescribed weight. The cycle
-  lemma is a statement about one such orbit.
+- **Clause 3 is what confines the action to a level set.** The shift preserves the number of positions carrying each letter, so it acts on the words with a prescribed letter count and on the words of a prescribed weight. The cycle lemma is a statement about one such orbit.

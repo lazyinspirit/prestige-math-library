@@ -33,15 +33,11 @@ space $V$ by $x\cdot v=0$, the **trivial representation**.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ over $k$ and an arbitrary vector space
-$V$ over $k$.
+**Given:** A Lie algebra $\mathfrak g$ over $k$ and an arbitrary vector space $V$ over $k$.
 
-[L1] A representation requires
-$[\rho(x),\rho(y)]=\rho([x,y])$
-([[def-representation-of-a-lie-algebra]]).
+[L1] A representation requires $[\rho(x),\rho(y)]=\rho([x,y])$ ([[def-representation-of-a-lie-algebra]]).
 
-[L2] The adjoint map is a Lie-algebra homomorphism
-([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
+[L2] The adjoint map is a Lie-algebra homomorphism ([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
 
 ## Verification
 

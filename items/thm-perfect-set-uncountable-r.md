@@ -111,41 +111,10 @@ no choice principle is used anywhere.
 
 ## Remarks
 
-- **Which hypothesis does what.** Closedness of $P$ is used exactly once, at the
-  step that puts the limit point $x$ back into $P$; without it the construction
-  still produces a point, but that point may lie outside $P$ and the
-  contradiction evaporates. Having no isolated points is used exactly once, in
-  the refinement claim, to produce a second point of $P$ inside a neighbourhood,
-  which is what allows the excluded point $f(k)$ to be dodged. Nonemptiness is
-  used to seed the recursion, and it cannot be dropped: $\varnothing$ is perfect
-  and countable ([[def-perfect-set-r]]).
+- **Which hypothesis does what.** Closedness of $P$ is used exactly once, at the step that puts the limit point $x$ back into $P$; without it the construction still produces a point, but that point may lie outside $P$ and the contradiction evaporates. Having no isolated points is used exactly once, in the refinement claim, to produce a second point of $P$ inside a neighbourhood, which is what allows the excluded point $f(k)$ to be dodged. Nonemptiness is used to seed the recursion, and it cannot be dropped: $\varnothing$ is perfect and countable ([[def-perfect-set-r]]).
 
-- **Why rational endpoints.** They are what make the construction canonical.
-  The requirement "some good rational-endpoint interval inside $(p,q)$ misses
-  $f(k)$ and is short" is a property of a pair of natural numbers, so it can be
-  minimised by [[thm-well-ordering-principle]]; the same requirement stated for
-  arbitrary real endpoints comes with no canonical least witness, and picking one
-  would be a choice made afresh at every stage. This is the same device that
-  keeps
-  [[lem-subset-of-countable]] and [[lem-countable-iff-surjection-from-n]] choice
-  free, transplanted from subsets of $\mathbb{N}$ to intervals.
+- **Why rational endpoints.** They are what make the construction canonical. The requirement "some good rational-endpoint interval inside $(p,q)$ misses $f(k)$ and is short" is a property of a pair of natural numbers, so it can be minimised by [[thm-well-ordering-principle]]; the same requirement stated for arbitrary real endpoints comes with no canonical least witness, and picking one would be a choice made afresh at every stage. This is the same device that keeps [[lem-subset-of-countable]] and [[lem-countable-iff-surjection-from-n]] choice free, transplanted from subsets of $\mathbb{N}$ to intervals.
 
-- **The shrinking condition is $\ell_{k+1} < 1/(k+1)$ and not $1/k$.** Sequences
-  and recursions here are indexed from $0$ ([[def-sequence]]), so the bound
-  available at stage $k$ has to be positive at $k = 0$; $1/k$ is undefined
-  there. The consequence, $\ell_j < 1/j$ for $j \ge 1$, is what step 6.1 uses,
-  and it says nothing about $\ell_0$, which is not needed.
+- **The shrinking condition is $\ell_{k+1} < 1/(k+1)$ and not $1/k$.** Sequences and recursions here are indexed from $0$ ([[def-sequence]]), so the bound available at stage $k$ has to be positive at $k = 0$; $1/k$ is undefined there. The consequence, $\ell_j < 1/j$ for $j \ge 1$, is what step 6.1 uses, and it says nothing about $\ell_0$, which is not needed.
 
-- **The result is sharp in both directions.** A nondegenerate closed interval is
-  perfect and uncountable ([[ex-closed-interval-is-perfect]]), and deleting the
-  no-isolated-points clause loses the conclusion: a closed set with an isolated
-  point need not be perfect
-  ([[cex-closed-set-with-an-isolated-point-is-not-perfect]]) and may be
-  countable, as $\{\, 1/k : k \ge 1 \,\} \cup \{0\}$ is
-  ([[ex-reciprocals-with-zero-are-compact]]). Applied to a
-  nondegenerate closed interval, which [[ex-closed-interval-is-perfect]] shows
-  to be perfect, the theorem reproves the uncountability of intervals
-  ([[cor-interval-uncountable]]) by a different route; the two proofs share
-  nothing but the completeness of $\mathbb{R}$, which
-  [[cor-interval-uncountable]] spends as a supremum and the argument above
-  spends through [[thm-nested-interval-property]].
+- **The result is sharp in both directions.** A nondegenerate closed interval is perfect and uncountable ([[ex-closed-interval-is-perfect]]), and deleting the no-isolated-points clause loses the conclusion: a closed set with an isolated point need not be perfect ([[cex-closed-set-with-an-isolated-point-is-not-perfect]]) and may be countable, as $\{\, 1/k : k \ge 1 \,\} \cup \{0\}$ is ([[ex-reciprocals-with-zero-are-compact]]). Applied to a nondegenerate closed interval, which [[ex-closed-interval-is-perfect]] shows to be perfect, the theorem reproves the uncountability of intervals ([[cor-interval-uncountable]]) by a different route; the two proofs share nothing but the completeness of $\mathbb{R}$, which [[cor-interval-uncountable]] spends as a supremum and the argument above spends through [[thm-nested-interval-property]].

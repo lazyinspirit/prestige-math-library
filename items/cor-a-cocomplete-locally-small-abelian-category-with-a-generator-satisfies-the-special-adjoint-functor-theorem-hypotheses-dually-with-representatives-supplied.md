@@ -46,26 +46,17 @@ remain hypotheses on the particular functor to which that theorem is applied.
 
 ## Facts & Assumptions
 
-**Given:** A cocomplete locally small abelian category $\mathcal A$ with a
-generator $G$.
+**Given:** A cocomplete locally small abelian category $\mathcal A$ with a generator $G$.
 
-[L1] Such a category is well-powered
-([[thm-a-locally-small-abelian-category-with-a-generator-is-well-powered]]).
+[L1] Such a category is well-powered ([[thm-a-locally-small-abelian-category-with-a-generator-is-well-powered]]).
 
-[L2] The supplied-well-powering branch of objectwise SAFT requires a complete
-locally small domain with a supplied small coseparating set and a supplied
-well-powering; the target must be locally small and the functor must preserve
-all small limits. ([[thm-special-adjoint-functor-theorem-objectwise-form]])
+[L2] The supplied-well-powering branch of objectwise SAFT requires a complete locally small domain with a supplied small coseparating set and a supplied well-powering; the target must be locally small and the functor must preserve all small limits. ([[thm-special-adjoint-functor-theorem-objectwise-form]])
 
-[L3] In an abelian category, subobjects and quotient objects correspond by
-kernel and cokernel
-([[thm-kernel-and-cokernel-are-mutually-inverse-order-anti-isomorphisms-between-subobjects-and-quotient-objects]]).
+[L3] In an abelian category, subobjects and quotient objects correspond by kernel and cokernel ([[thm-kernel-and-cokernel-are-mutually-inverse-order-anti-isomorphisms-between-subobjects-and-quotient-objects]]).
 
-[L4] A generator is a separating object
-([[def-generator-and-cogenerator-of-a-category]]).
+[L4] A generator is a separating object ([[def-generator-and-cogenerator-of-a-category]]).
 
-[L5] The opposite of an abelian category is abelian.
-([[thm-the-opposite-of-an-abelian-category-is-abelian]])
+[L5] The opposite of an abelian category is abelian. ([[thm-the-opposite-of-an-abelian-category-is-abelian]])
 
 ## Proof
 

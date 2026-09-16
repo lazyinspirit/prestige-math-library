@@ -48,7 +48,6 @@ subharmonic on $\Omega$.
 2.1 Fix a zero $a$ of $f$, and let $m=\operatorname{ord}_a(f)$. By [L2], on a small disc about $a$ one has $f(z)=(z-a)^m g(z)$ with $g(a)\ne0$. Shrinking if necessary, $g$ has no zeros there, so step 1.1 makes $\log|g|$ harmonic and hence subharmonic on that disc. [L2, step 1.1]
 
 3.1 On the punctured disc around $a$, [step 2.1, algebra]
-$$u(z)=m\log|z-a|+\log|g(z)|.$$
-The function $\log|z-a|$ is harmonic on the punctured disc, and at the center $a$ its value is $-\infty$ while every circle average is finite; hence it is subharmonic there. Therefore the right-hand side is subharmonic on the whole disc, agreeing with $u$ away from $a$ and with $u(a)=-\infty$ at the center. [step 2.1, algebra]
+$$u(z)=m\log|z-a|+\log|g(z)|.$$ The function $\log|z-a|$ is harmonic on the punctured disc, and at the center $a$ its value is $-\infty$ while every circle average is finite; hence it is subharmonic there. Therefore the right-hand side is subharmonic on the whole disc, agreeing with $u$ away from $a$ and with $u(a)=-\infty$ at the center. [step 2.1, algebra]
 
 4.1 Every point of $\Omega$ lies either on a zero-free disc covered by step 1.1 or on a zero-containing disc covered by step 3.1. So $u$ is subharmonic throughout $\Omega$. [step 1.1, step 3.1] ∎

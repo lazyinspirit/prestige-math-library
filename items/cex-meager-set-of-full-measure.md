@@ -89,25 +89,10 @@ rationals ([[lem-rat-embeds-dense]]).
 
 ## Remarks
 
-- **Both pieces are as small as their notion allows, and they are complementary.**
-  $G$ is null and residual; $\mathbb{R} \setminus G$ is meager and its complement
-  is null. So no implication holds between "meager" and "null" in either
-  direction, and neither can be strengthened to a statement about the complement.
-  This is the standard duality between measure and category, and $G$ is the
-  standard witness for it.
+- **Both pieces are as small as their notion allows, and they are complementary.** $G$ is null and residual; $\mathbb{R} \setminus G$ is meager and its complement is null. So no implication holds between "meager" and "null" in either direction, and neither can be strengthened to a statement about the complement. This is the standard duality between measure and category, and $G$ is the standard witness for it.
 
-- **$G$ contains all the irrationals that are well approximable by rationals.**
-  Membership in $U_n$ says that some rational $e(k)$ lies within
-  $2^{-k-n-2}$ of the point, so $G$ is a set of points approximable by rationals
-  at every accuracy of that shape. Nothing on this page needs that reading; it is
-  recorded because it is what makes the example natural rather than contrived.
+- **$G$ contains all the irrationals that are well approximable by rationals.** Membership in $U_n$ says that some rational $e(k)$ lies within $2^{-k-n-2}$ of the point, so $G$ is a set of points approximable by rationals at every accuracy of that shape. Nothing on this page needs that reading; it is recorded because it is what makes the example natural rather than contrived.
 
-- **Baire is used only once, and only for nonemptiness.** Steps 2.1 and 2.2 are
-  independent of [[thm-baire-category-r]]; it enters in step 3.1 to rule out
-  $G = \varnothing$, which would make the decomposition vacuous. That is also the
-  precise sense in which the example needs the completeness of $\mathbb{R}$.
+- **Baire is used only once, and only for nonemptiness.** Steps 2.1 and 2.2 are independent of [[thm-baire-category-r]]; it enters in step 3.1 to rule out $G = \varnothing$, which would make the decomposition vacuous. That is also the precise sense in which the example needs the completeness of $\mathbb{R}$.
 
-- **The individual $U_n$ are open, dense and of small total cover length**, which
-  is [[ex-q-covered-by-intervals-of-small-total-length]] with
-  $\varepsilon = 2^{-n}$; the example is that construction iterated and
-  intersected.
+- **The individual $U_n$ are open, dense and of small total cover length**, which is [[ex-q-covered-by-intervals-of-small-total-length]] with $\varepsilon = 2^{-n}$; the example is that construction iterated and intersected.

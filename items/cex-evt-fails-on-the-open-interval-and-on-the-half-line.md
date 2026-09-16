@@ -99,16 +99,4 @@ This item is the worked witness for
 
 - **The domains are exactly the two minimal ways to fail compactness.** By [[thm-heine-borel-characterisation-r]] a subset of $\mathbb{R}$ fails compactness by failing closedness or by failing boundedness; $E_1$ fails only the first, $E_2$ only the second, and each already kills the theorem.
 
-- **The same two domains admit failures of uniform continuity**, with different
-  witnesses: on $(0,1)$ use $1/x$
-  ([[cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval]]), and on
-  the displayed half-line $[0,\infty)$ use $x^2$. For any $\delta>0$, choose a
-  positive integer $n>1/\delta$ by [L4]. Both $n$ and $n+1/n$ lie in the
-  half-line, their distance is $1/n<\delta$, and their squares differ by
-  $2+1/n^2>2$. Thus $\varepsilon=2$ defeats every proposed radius, exactly as
-  in [[cex-x-squared-is-not-uniformly-continuous-on-r]]. This does not assert
-  failure on every unbounded closed set: on $\mathbb Z$, $\delta=1$ forces
-  two points at distance less than $\delta$ to coincide, so every function is
-  uniformly continuous. The identity witnesses used above are themselves
-  uniformly continuous on both displayed domains, since their output
-  distance equals their input distance.
+- **The same two domains admit failures of uniform continuity**, with different witnesses: on $(0,1)$ use $1/x$ ([[cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval]]), and on the displayed half-line $[0,\infty)$ use $x^2$. For any $\delta>0$, choose a positive integer $n>1/\delta$ by [L4]. Both $n$ and $n+1/n$ lie in the half-line, their distance is $1/n<\delta$, and their squares differ by $2+1/n^2>2$. Thus $\varepsilon=2$ defeats every proposed radius, exactly as in [[cex-x-squared-is-not-uniformly-continuous-on-r]]. This does not assert failure on every unbounded closed set: on $\mathbb Z$, $\delta=1$ forces two points at distance less than $\delta$ to coincide, so every function is uniformly continuous. The identity witnesses used above are themselves uniformly continuous on both displayed domains, since their output distance equals their input distance.

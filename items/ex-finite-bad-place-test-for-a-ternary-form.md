@@ -35,9 +35,7 @@ the only primes that can require an explicit local check are $2,3,5$.
 
 ## Facts & Assumptions
 
-**Given:** The ternary Hilbert-symbol criterion and the almost-all-primes
-isotropy theorem ([[cor-ternary-isotropy-via-hilbert-symbol]],
-[[thm-local-isotropy-at-almost-all-primes]]).
+**Given:** The ternary Hilbert-symbol criterion and the almost-all-primes isotropy theorem ([[cor-ternary-isotropy-via-hilbert-symbol]], [[thm-local-isotropy-at-almost-all-primes]]).
 
 ## Verification
 

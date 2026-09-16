@@ -41,9 +41,7 @@ The direct first-order expansion of $(A+tH)^{-1}$ has the same linear term.
 
 **Given:** The displayed matrices $A$ and $H$.
 
-[L1] On the invertible locus,
-$D\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$
-([[thm-derivative-of-matrix-inversion]]).
+[L1] On the invertible locus, $D\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$ ([[thm-derivative-of-matrix-inversion]]).
 
 ## Verification
 **Proof technique:** direct.

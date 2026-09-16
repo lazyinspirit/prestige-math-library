@@ -38,14 +38,11 @@ $F:G\to H$ with $dF_e=\phi$.
 
 [A1] Countable choice is [[def-countable-choice]].
 
-[L1] Under [A1], a Lie subalgebra integrates to a unique connected immersed
-Lie subgroup ([[thm-lie-subgroup-lie-subalgebra-correspondence]]).
+[L1] Under [A1], a Lie subalgebra integrates to a unique connected immersed Lie subgroup ([[thm-lie-subgroup-lie-subalgebra-correspondence]]).
 
-[L2] The domain $G$ is simply connected in the sense of
-[[def-simply-connected]].
+[L2] The domain $G$ is simply connected in the sense of [[def-simply-connected]].
 
-[L3] A connected covering of a locally path-connected simply connected space
-is one-sheeted ([[cor-connected-cover-of-a-simply-connected-space-is-trivial]]).
+[L3] A connected covering of a locally path-connected simply connected space is one-sheeted ([[cor-connected-cover-of-a-simply-connected-space-is-trivial]]).
 
 ## Proof
 

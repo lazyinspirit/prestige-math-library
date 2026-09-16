@@ -34,13 +34,9 @@ $S(\mathfrak g)\to U(\mathfrak g)$ is an isomorphism.
 
 **Given:** An abelian Lie algebra $\mathfrak g$ over $k$.
 
-[L1] $U(\mathfrak g)$ is the quotient of $T(\mathfrak g)$ by relators
-$x\otimes y-y\otimes x-[x,y]$
-([[def-universal-enveloping-algebra]]).
+[L1] $U(\mathfrak g)$ is the quotient of $T(\mathfrak g)$ by relators $x\otimes y-y\otimes x-[x,y]$ ([[def-universal-enveloping-algebra]]).
 
-[L2] $S(\mathfrak g)$ is the quotient by relators
-$x\otimes y-y\otimes x$
-([[def-symmetric-algebra-of-a-vector-space]]).
+[L2] $S(\mathfrak g)$ is the quotient by relators $x\otimes y-y\otimes x$ ([[def-symmetric-algebra-of-a-vector-space]]).
 
 ## Proof
 

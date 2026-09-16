@@ -30,12 +30,9 @@ $$\mathcal F\delta_0=1,\qquad \mathcal F1=\delta_0.$$
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]] and the fixed bilinear
-Fourier convention.
+**Given:** [[def-countable-choice|Countable Choice]] and the fixed bilinear Fourier convention.
 
-[F1] The elementary-transform theorem gives the formulas for delta and the
-constant distribution
-([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
+[F1] The elementary-transform theorem gives the formulas for delta and the constant distribution ([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
 
 ## Verification
 

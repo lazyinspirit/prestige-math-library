@@ -35,22 +35,15 @@ $\lambda_m \times \lambda_n$.
 
 [L1] On Borel sets, $\lambda_m \times \lambda_n$ agrees with $\lambda_{m+n}$. ([[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]])
 
-[L2] Assuming countable choice, the full Lebesgue sigma-algebra is the
-completion of the Borel Lebesgue measure.
-([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]])
+[L2] Assuming countable choice, the full Lebesgue sigma-algebra is the completion of the Borel Lebesgue measure. ([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]])
 
-[L3] For sigma-finite factors, the product measure is the unique measure on the
-product sigma-algebra with the rectangle formula.
-([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
+[L3] For sigma-finite factors, the product measure is the unique measure on the product sigma-algebra with the rectangle formula. ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
 
-[L4] Assuming countable choice, Euclidean Lebesgue measure is sigma-finite.
-([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
+[L4] Assuming countable choice, Euclidean Lebesgue measure is sigma-finite. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
 
-[L5] Assuming countable choice, Euclidean Lebesgue measure is complete.
-([[thm-lebesgue-measure-is-a-complete-measure]])
+[L5] Assuming countable choice, Euclidean Lebesgue measure is complete. ([[thm-lebesgue-measure-is-a-complete-measure]])
 
-[L6] The completed product measure is the completion of the product measure.
-([[def-completed-product-measure]])
+[L6] The completed product measure is the completion of the product measure. ([[def-completed-product-measure]])
 
 ## Proof
 

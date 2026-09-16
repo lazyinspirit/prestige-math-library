@@ -84,15 +84,6 @@ property, of which (NIP) as defined is a special case.
 
 ## Remarks
 
-- **Where the lengths would be used.** They are not used at all above. Their
-  role is to force the intersection to be a *single* point: if the lengths tend
-  to $0$ and $c, c'$ both lie in every $I_k$ then $|c - c'| \le b_k - a_k$ for
-  every $k$, so $|c - c'|$ is below every positive element of $F$ and therefore
-  $0$. Uniqueness is not part of (NIP) as defined in
-  [[def-completeness-properties]] and is not needed anywhere on this page.
+- **Where the lengths would be used.** They are not used at all above. Their role is to force the intersection to be a *single* point: if the lengths tend to $0$ and $c, c'$ both lie in every $I_k$ then $|c - c'| \le b_k - a_k$ for every $k$, so $|c - c'|$ is below every positive element of $F$ and therefore $0$. Uniqueness is not part of (NIP) as defined in [[def-completeness-properties]] and is not needed anywhere on this page.
 
-- **The converse of claim 1 fails, and that is the point of two items later on
-  this page.** [[fs-nested-intervals-implies-lub]] shows that (NIP) does not
-  imply (LUB), and [[fs-cauchy-complete-implies-lub]] shows the same for (CC);
-  in both the witness is a non-Archimedean field, so neither carries the
-  Archimedean property that (LUB) carries here.
+- **The converse of claim 1 fails, and that is the point of two items later on this page.** [[fs-nested-intervals-implies-lub]] shows that (NIP) does not imply (LUB), and [[fs-cauchy-complete-implies-lub]] shows the same for (CC); in both the witness is a non-Archimedean field, so neither carries the Archimedean property that (LUB) carries here.

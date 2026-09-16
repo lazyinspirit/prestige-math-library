@@ -31,8 +31,7 @@ The kernel of a smooth bundle map is always a smooth vector subbundle.
 
 **Given:** The displayed claim.
 
-[L1] The kernel conclusion holds only under a constant-rank hypothesis
-([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
+[L1] The kernel conclusion holds only under a constant-rank hypothesis ([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
 
 ## Counterexample
 

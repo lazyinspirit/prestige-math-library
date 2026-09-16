@@ -38,11 +38,9 @@ is holomorphically convex.
 
 **Given:** The bidisc $\mathbb D^2$.
 
-[L1] Polydiscs are convex
-([[def-balls-and-polydiscs-in-complex-euclidean-space]]).
+[L1] Polydiscs are convex ([[def-balls-and-polydiscs-in-complex-euclidean-space]]).
 
-[L2] Every convex domain is holomorphically convex
-([[thm-convex-domains-are-holomorphically-convex]]).
+[L2] Every convex domain is holomorphically convex ([[thm-convex-domains-are-holomorphically-convex]]).
 
 ## Verification
 

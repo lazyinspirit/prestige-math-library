@@ -30,15 +30,11 @@ surface of a complete analytic function. Then $p$ is a local biholomorphism.
 
 ## Facts & Assumptions
 
-**Given:** The projection $p([f]_z)=z$ on the germ surface
-$\mathcal R(\xi_0,\Omega)$.
+**Given:** The projection $p([f]_z)=z$ on the germ surface $\mathcal R(\xi_0,\Omega)$.
 
-[L1] The germ neighborhoods form a holomorphic atlas, and on each basis element
-$N(f,U)$ the chart $\phi_{f,U}([f]_z)=z$ is a homeomorphism onto $U$
-([[lem-germ-neighborhoods-form-a-riemann-surface-basis]]).
+[L1] The germ neighborhoods form a holomorphic atlas, and on each basis element $N(f,U)$ the chart $\phi_{f,U}([f]_z)=z$ is a homeomorphism onto $U$ ([[lem-germ-neighborhoods-form-a-riemann-surface-basis]]).
 
-[L2] A map is locally biholomorphic when every point has neighbourhoods on which
-the map restricts to a biholomorphism ([[def-biholomorphic-map]]).
+[L2] A map is locally biholomorphic when every point has neighbourhoods on which the map restricts to a biholomorphism ([[def-biholomorphic-map]]).
 
 ## Proof
 

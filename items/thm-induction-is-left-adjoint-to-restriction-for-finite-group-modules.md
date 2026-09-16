@@ -37,18 +37,13 @@ $$ \operatorname{Hom}_G(\operatorname{Ind}_H^G W,V) \cong \operatorname{Hom}_H(W
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, a finite group $G$, a subgroup $H\le G$, an
-$R$-linear $H$-module $W$, and an $R$-linear $G$-module $V$.
+**Given:** A commutative ring $R$, a finite group $G$, a subgroup $H\le G$, an $R$-linear $H$-module $W$, and an $R$-linear $G$-module $V$.
 
-[F1] The induced module consists of the functions $f:G\to W$ satisfying
-$f(gh)=h^{-1}\cdot f(g)$, with $G$ acting by $(x\cdot f)(g)=f(x^{-1}g)$
-([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
+[F1] The induced module consists of the functions $f:G\to W$ satisfying $f(gh)=h^{-1}\cdot f(g)$, with $G$ acting by $(x\cdot f)(g)=f(x^{-1}g)$ ([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
 
-[F2] For modules, $\operatorname{Hom}$ is an abelian group under pointwise
-addition, with maps induced by composition ([[def-hom-groups-and-induced-hom-maps]]).
+[F2] For modules, $\operatorname{Hom}$ is an abelian group under pointwise addition, with maps induced by composition ([[def-hom-groups-and-induced-hom-maps]]).
 
-[F3] $G$-equivariant maps are exactly the $R[G]$-module maps, and likewise for
-$H$ ([[thm-group-actions-and-group-ring-modules-correspond]]).
+[F3] $G$-equivariant maps are exactly the $R[G]$-module maps, and likewise for $H$ ([[thm-group-actions-and-group-ring-modules-correspond]]).
 
 ## Proof
 

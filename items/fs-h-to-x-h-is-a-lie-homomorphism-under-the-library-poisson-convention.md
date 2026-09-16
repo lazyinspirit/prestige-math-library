@@ -31,8 +31,7 @@ Under the library convention, $H\mapsto X_H$ is a Lie homomorphism.
 
 **Given:** The library conventions for Hamiltonian fields and Poisson brackets.
 
-[F1] The actual identity is $[X_F,X_G]=-X_{\{F,G\}}$.
-[[thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism]].
+[F1] The actual identity is $[X_F,X_G]=-X_{\{F,G\}}$. [[thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism]].
 
 ## Refutation
 

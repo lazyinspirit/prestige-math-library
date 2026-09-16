@@ -29,8 +29,7 @@ $H_n(X,A;G)\cong\widetilde H_n(X/A;G)$ for every $n$.
 
 ## Facts & Assumptions
 
-**Given:** A nonempty closed subspace $A\subseteq X$ and an open neighborhood
-$V$ that deformation retracts onto $A$ through a homotopy fixing $A$.
+**Given:** A nonempty closed subspace $A\subseteq X$ and an open neighborhood $V$ that deformation retracts onto $A$ through a homotopy fixing $A$.
 
 ## Proof
 

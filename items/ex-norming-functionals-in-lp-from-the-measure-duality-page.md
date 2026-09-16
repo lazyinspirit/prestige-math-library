@@ -33,16 +33,11 @@ value concretely by pairing against the usual $L^q$ extremizer.
 
 ## Facts & Assumptions
 
-**Given:** A measure space $(X,\mathcal{A},\mu)$, an exponent
-$1 \le p < \infty$ with conjugate exponent $q$, and a nonzero element
-$f \in L^p(\mu)$ in one of the ranges covered by the $L^p-L^q$ duality page.
+**Given:** A measure space $(X,\mathcal{A},\mu)$, an exponent $1 \le p < \infty$ with conjugate exponent $q$, and a nonzero element $f \in L^p(\mu)$ in one of the ranges covered by the $L^p-L^q$ duality page.
 
-[L1] Every nonzero vector has a norming functional
-([[thm-dual-norms-every-vector]]).
+[L1] Every nonzero vector has a norming functional ([[thm-dual-norms-every-vector]]).
 
-[L2] In the same $L^p-L^q$ ranges, the $L^p$ norm is the supremum of pairings
-against unit $L^q$ functions
-([[cor-l-p-norm-recovery-by-unit-l-q-pairings]]).
+[L2] In the same $L^p-L^q$ ranges, the $L^p$ norm is the supremum of pairings against unit $L^q$ functions ([[cor-l-p-norm-recovery-by-unit-l-q-pairings]]).
 
 ## Verification
 

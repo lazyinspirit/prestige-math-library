@@ -62,9 +62,6 @@ the power being the natural-number exponentiation of [[def-nat-power]].
 
 ## Remarks
 
-- **What the lemma is for.** Every count on this page is obtained by counting
-  words and transporting the answer along this bijection, so the correspondence
-  is proved once here and cited rather than re-established.
+- **What the lemma is for.** Every count on this page is obtained by counting words and transporting the answer along this bijection, so the correspondence is proved once here and cited rather than re-established.
 
-- **The start point is fixed throughout.** The map $\Phi$ forgets $P$, and a step
-  word alone therefore determines a path only after a start point has been named.
+- **The start point is fixed throughout.** The map $\Phi$ forgets $P$, and a step word alone therefore determines a path only after a start point has been named.

@@ -34,29 +34,15 @@ and $R$-linear maps has all small limits and all small colimits.
 
 **Given:** A fixed ring $R$.
 
-[L1] Small products and equalizers characterize completeness, and small
-coproducts and coequalizers characterize cocompleteness
-([[cor-completeness-and-cocompleteness-criteria]]).
+[L1] Small products and equalizers characterize completeness, and small coproducts and coequalizers characterize cocompleteness ([[cor-completeness-and-cocompleteness-criteria]]).
 
-[F1] Left modules and their homomorphisms form $R\text{-}\mathbf{Mod}$ and obey
-the module and linearity axioms
-([[prop-modules-and-homomorphisms-form-category-rmod]],
-[[def-left-and-right-modules]],
-[[def-module-homomorphism-kernel-image-and-cokernel]]).
+[F1] Left modules and their homomorphisms form $R\text{-}\mathbf{Mod}$ and obey the module and linearity axioms ([[prop-modules-and-homomorphisms-form-category-rmod]], [[def-left-and-right-modules]], [[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[F2] Submodules are closed under addition, inverses, and scalar multiplication
-([[def-submodule]]).
+[F2] Submodules are closed under addition, inverses, and scalar multiplication ([[def-submodule]]).
 
-[F3] A subset $B\subseteq M$ is a **basis** when every element of $M$ has a
-unique expression as a finite $R$-linear combination of elements of $B$, and a
-module possessing a basis is **free**
-([[def-generated-cyclic-finitely-generated-and-free-modules]]). This supplies
-the definition only; the free module on a set and its extension property are
-constructed in step 1.4 below.
+[F3] A subset $B\subseteq M$ is a **basis** when every element of $M$ has a unique expression as a finite $R$-linear combination of elements of $B$, and a module possessing a basis is **free** ([[def-generated-cyclic-finitely-generated-and-free-modules]]). This supplies the definition only; the free module on a set and its extension property are constructed in step 1.4 below.
 
-[F4] Quotients by submodules are modules, and a linear map factors uniquely
-through the quotient precisely when it kills that submodule
-([[def-quotient-module]], [[thm-quotient-module-universal-property]]).
+[F4] Quotients by submodules are modules, and a linear map factors uniquely through the quotient precisely when it kills that submodule ([[def-quotient-module]], [[thm-quotient-module-universal-property]]).
 
 ## Proof
 

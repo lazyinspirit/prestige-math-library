@@ -32,14 +32,11 @@ solvable ideal: the sum of all its solvable ideals.
 
 ## Facts & Assumptions
 
-**Given:** Ideals $\mathfrak i,\mathfrak j$ of a Lie algebra $\mathfrak g$;
-for the final assertion, $\mathfrak g$ is finite-dimensional.
+**Given:** Ideals $\mathfrak i,\mathfrak j$ of a Lie algebra $\mathfrak g$; for the final assertion, $\mathfrak g$ is finite-dimensional.
 
-[L1] The radical is intended to be the unique largest solvable ideal
-([[def-radical-of-a-finite-dimensional-lie-algebra]]).
+[L1] The radical is intended to be the unique largest solvable ideal ([[def-radical-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] Quotients and extensions of solvable Lie algebras are solvable
-([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
+[L2] Quotients and extensions of solvable Lie algebras are solvable ([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
 
 ## Proof
 

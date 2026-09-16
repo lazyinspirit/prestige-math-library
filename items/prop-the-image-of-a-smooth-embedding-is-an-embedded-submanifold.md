@@ -33,14 +33,11 @@ $m$-submanifold, and the corestriction $F:M\to F(M)$ is a diffeomorphism.
 
 **Given:** A smooth embedding $F:M^m\to N^n$.
 
-[F1] A smooth embedding is an injective immersion and a homeomorphism onto its
-image with the subspace topology ([[def-smooth-embedding]]).
+[F1] A smooth embedding is an injective immersion and a homeomorphism onto its image with the subspace topology ([[def-smooth-embedding]]).
 
-[F2] Embedded submanifolds are described by slice charts
-([[def-embedded-submanifold-and-slice-chart]]).
+[F2] Embedded submanifolds are described by slice charts ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L1] Near any point, an immersion has coordinates of the form $u\mapsto(u,0)$
-([[cor-local-normal-form-for-immersions]]).
+[L1] Near any point, an immersion has coordinates of the form $u\mapsto(u,0)$ ([[cor-local-normal-form-for-immersions]]).
 
 ## Proof
 **Proof technique:** direct.

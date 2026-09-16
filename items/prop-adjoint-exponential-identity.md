@@ -46,28 +46,17 @@ the supplied exponential and $d\operatorname{Ad}=\operatorname{ad}$ results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-Lie algebra $\mathfrak g$, and $X\in\mathfrak g$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with Lie algebra $\mathfrak g$, and $X\in\mathfrak g$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] The adjoint map is a smooth representation, so
-$\operatorname{Ad}_{gh}=\operatorname{Ad}_g\operatorname{Ad}_h$ and
-$\operatorname{Ad}_e=I$.
-[[prop-adjoint-is-a-smooth-lie-group-representation]].
+[F2] The adjoint map is a smooth representation, so $\operatorname{Ad}_{gh}=\operatorname{Ad}_g\operatorname{Ad}_h$ and $\operatorname{Ad}_e=I$. [[prop-adjoint-is-a-smooth-lie-group-representation]].
 
-[F3] The unique one-parameter subgroup with initial velocity $X$ is the curve
-$t\mapsto\exp_G(tX)$.
-[[thm-one-parameter-subgroups-are-exactly-exponentials]].
-[[prop-exponential-scales-one-parameter-subgroups]].
+[F3] The unique one-parameter subgroup with initial velocity $X$ is the curve $t\mapsto\exp_G(tX)$. [[thm-one-parameter-subgroups-are-exactly-exponentials]]. [[prop-exponential-scales-one-parameter-subgroups]].
 
-[F4] Under $T_I\operatorname{GL}(\mathfrak g)=\operatorname{End}(\mathfrak g)$,
-$d(\operatorname{Ad})_eX=\operatorname{ad}_X$.
-[[thm-the-differential-of-adjoint-is-ad]].
+[F4] Under $T_I\operatorname{GL}(\mathfrak g)=\operatorname{End}(\mathfrak g)$, $d(\operatorname{Ad})_eX=\operatorname{ad}_X$. [[thm-the-differential-of-adjoint-is-ad]].
 
-[F5] A linear matrix initial-value problem on a compact interval has a unique
-solution on the whole interval.
-[[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
+[F5] A linear matrix initial-value problem on a compact interval has a unique solution on the whole interval. [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
 
 ## Proof
 

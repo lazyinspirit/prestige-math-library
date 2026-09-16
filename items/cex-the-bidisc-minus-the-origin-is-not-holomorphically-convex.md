@@ -39,15 +39,9 @@ is holomorphically convex.
 
 **Given:** The punctured bidisc $\Omega$.
 
-[L1] A holomorphic function on a punctured several-variable domain extends
-across the missing point
-([[thm-removability-of-a-puncture-in-several-complex-variables]]).
+[L1] A holomorphic function on a punctured several-variable domain extends across the missing point ([[thm-removability-of-a-puncture-in-several-complex-variables]]).
 
-[L2] A domain of holomorphy admits no common larger overlap extending every
-holomorphic function, and for domains in $\mathbb C^m$ that condition is
-equivalent to holomorphic convexity
-([[def-holomorphic-extension-and-domain-of-holomorphy]],
-[[thm-cartan-thullen-theorem]]).
+[L2] A domain of holomorphy admits no common larger overlap extending every holomorphic function, and for domains in $\mathbb C^m$ that condition is equivalent to holomorphic convexity ([[def-holomorphic-extension-and-domain-of-holomorphy]], [[thm-cartan-thullen-theorem]]).
 
 ## Counterexample
 

@@ -84,25 +84,10 @@ are equivalent.
 
 ## Remarks
 
-- **Condition (c) is the one used in practice.** Checking uniqueness of every
-  decomposition is checking a single one: that of $0_V$. The reduction is the
-  content of the implication from (c) to (b), and it works because the difference
-  of two admissible decompositions of the same vector is an admissible
-  decomposition of $0_V$.
+- **Condition (c) is the one used in practice.** Checking uniqueness of every decomposition is checking a single one: that of $0_V$. The reduction is the content of the implication from (c) to (b), and it works because the difference of two admissible decompositions of the same vector is an admissible decomposition of $0_V$.
 
-- **This is what makes (D2) the right condition.** If the definition of a direct
-  sum had asked only for pairwise trivial intersections, the equivalence above
-  would fail for $n \ge 3$: the companion examples page exhibits three linear
-  subspaces of a plane whose pairwise intersections are trivial, whose sum is
-  everything, and for which some vector has two different decompositions. So the
-  equivalence proved here is not available for the pairwise notion, and (D2) is
-  exactly the strengthening that restores it.
+- **This is what makes (D2) the right condition.** If the definition of a direct sum had asked only for pairwise trivial intersections, the equivalence above would fail for $n \ge 3$: the companion examples page exhibits three linear subspaces of a plane whose pairwise intersections are trivial, whose sum is everything, and for which some vector has two different decompositions. So the equivalence proved here is not available for the pairwise notion, and (D2) is exactly the strengthening that restores it.
 
-- **The two-summand case reads as usual.** For $n = 2$, condition (a) says
-  $U + W = V$ and $U \cap W = \{0_V\}$ ([[def-internal-direct-sum]]), and the
-  lemma says that this holds exactly when every $v \in V$ is $u + w$ with $u \in U$
-  and $w \in W$ in exactly one way.
+- **The two-summand case reads as usual.** For $n = 2$, condition (a) says $U + W = V$ and $U \cap W = \{0_V\}$ ([[def-internal-direct-sum]]), and the lemma says that this holds exactly when every $v \in V$ is $u + w$ with $u \in U$ and $w \in W$ in exactly one way.
 
-- **No finiteness of $V$ and no dimension anywhere.** The family of summands is
-  finite because the sum $\sum_{i<n} U_i$ is defined through a finite sum of
-  vectors; $V$ itself is arbitrary, and nothing above counts anything.
+- **No finiteness of $V$ and no dimension anywhere.** The family of summands is finite because the sum $\sum_{i<n} U_i$ is defined through a finite sum of vectors; $V$ itself is arbitrary, and nothing above counts anything.

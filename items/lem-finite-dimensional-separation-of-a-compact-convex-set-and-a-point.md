@@ -42,12 +42,9 @@ $$\operatorname{Re}L(z)\le\beta<\operatorname{Re}L(p)\qquad(z\in K).$$
 
 ## Facts & Assumptions
 
-**Given:** A nonempty compact convex set $K\subseteq\mathbb C^m$ and a point
-$p\notin K$.
+**Given:** A nonempty compact convex set $K\subseteq\mathbb C^m$ and a point $p\notin K$.
 
-[L1] A point outside a nonempty closed convex subset of Euclidean space admits
-a strict real-linear separating hyperplane
-([[thm-strict-separation-of-a-point-from-a-closed-convex-set]]).
+[L1] A point outside a nonempty closed convex subset of Euclidean space admits a strict real-linear separating hyperplane ([[thm-strict-separation-of-a-point-from-a-closed-convex-set]]).
 
 ## Proof
 

@@ -72,14 +72,6 @@ division with remainder.
 
 ## Remarks
 
-- **This is the whole content of the Euclidean algorithm**; everything else in
-  [[thm-euclidean-algorithm]] is bookkeeping about termination. Each division
-  replaces a pair by a strictly smaller one without changing the set of common
-  divisors, so the invariant is not merely the value $\gcd$ but the set $D$
-  itself.
+- **This is the whole content of the Euclidean algorithm**; everything else in [[thm-euclidean-algorithm]] is bookkeeping about termination. Each division replaces a pair by a strictly smaller one without changing the set of common divisors, so the invariant is not merely the value $\gcd$ but the set $D$ itself.
 
-- **The absence of a constraint on $r$ matters.** Applying the lemma with
-  $q = 1$ and no inequality is exactly what identifies
-  $\gcd(F_{n+2}, F_{n+1})$ with $\gcd(F_{n+1}, F_n)$ for consecutive Fibonacci
-  numbers, where $F_{n+2} = F_{n+1} + F_n$ is given by the recursion and not by a
-  division.
+- **The absence of a constraint on $r$ matters.** Applying the lemma with $q = 1$ and no inequality is exactly what identifies $\gcd(F_{n+2}, F_{n+1})$ with $\gcd(F_{n+1}, F_n)$ for consecutive Fibonacci numbers, where $F_{n+2} = F_{n+1} + F_n$ is given by the recursion and not by a division.

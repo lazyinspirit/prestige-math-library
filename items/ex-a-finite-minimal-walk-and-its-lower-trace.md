@@ -46,16 +46,11 @@ $L(\omega,\omega+2)=\{0\}<\{4\}=L(5,\omega)$.
 
 ## Facts & Assumptions
 
-**Given:** Extend the displayed fragment to the normalized locally finite
-$C$-sequence fixed on the companion page.
+**Given:** Extend the displayed fragment to the normalized locally finite $C$-sequence fixed on the companion page.
 
-[F1] [[def-c-sequences-and-minimal-walk-traces-on-omega-one]] chooses at each
-stage the least member of $C_\zeta$ at or above the target, excludes the final
-target from the upper trace, and records lower traces by running maxima of
-$C_\zeta\cap\alpha$.
+[F1] [[def-c-sequences-and-minimal-walk-traces-on-omega-one]] chooses at each stage the least member of $C_\zeta$ at or above the target, excludes the final target from the upper trace, and records lower traces by running maxima of $C_\zeta\cap\alpha$.
 
-[F2] [[lem-minimal-walk-trace-concatenation-and-limit-control]] gives trace
-concatenation when $L(\beta,\gamma)<L(\alpha,\beta)$.
+[F2] [[lem-minimal-walk-trace-concatenation-and-limit-control]] gives trace concatenation when $L(\beta,\gamma)<L(\alpha,\beta)$.
 
 ## Verification
 

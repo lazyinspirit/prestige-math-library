@@ -31,8 +31,7 @@ well-defined.
 
 ## Facts & Assumptions
 
-**Given:** $A\equiv_TA'$, $B\equiv_TB'$, and the preorder laws of
-[[lem-turing-reducibility-is-a-preorder]].
+**Given:** $A\equiv_TA'$, $B\equiv_TB'$, and the preorder laws of [[lem-turing-reducibility-is-a-preorder]].
 
 ## Proof
 

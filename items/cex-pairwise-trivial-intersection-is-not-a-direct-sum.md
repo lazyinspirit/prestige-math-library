@@ -92,20 +92,8 @@ is made about their dimension, nor about how many such sets $F^{2}$ contains.
 
 ## Remarks
 
-- **This is why (D2) is stated as it is.** For two summands, (D2) and the pairwise
-  condition coincide ([[def-internal-direct-sum]]); from three summands on they
-  part company, and the example above is the smallest separation, living in a
-  plane over any field whatever. Over the reals it is the familiar picture of
-  three distinct lines through the origin in the plane, no two of which meet
-  anywhere but the origin.
+- **This is why (D2) is stated as it is.** For two summands, (D2) and the pairwise condition coincide ([[def-internal-direct-sum]]); from three summands on they part company, and the example above is the smallest separation, living in a plane over any field whatever. Over the reals it is the familiar picture of three distinct lines through the origin in the plane, no two of which meet anywhere but the origin.
 
-- **The failure is exactly one of uniqueness, not of existence.** Every vector of
-  $F^{2}$ does decompose, as step 2.2 shows; what fails is that some vector
-  decomposes in more than one way. That is why
-  [[lem-direct-sum-criterion]] states unique decomposition, and not mere
-  existence, as the equivalent of a direct sum.
+- **The failure is exactly one of uniqueness, not of existence.** Every vector of $F^{2}$ does decompose, as step 2.2 shows; what fails is that some vector decomposes in more than one way. That is why [[lem-direct-sum-criterion]] states unique decomposition, and not mere existence, as the equivalent of a direct sum.
 
-- **Any third line through the origin does the same job.** Nothing above is
-  special to $d = e_0 + e_1$ beyond its having both coordinates nonzero; the
-  argument only needs a vector lying in neither $U_0$ nor $U_1$, and $d$ is the
-  simplest such vector to write down over an arbitrary field.
+- **Any third line through the origin does the same job.** Nothing above is special to $d = e_0 + e_1$ beyond its having both coordinates nonzero; the argument only needs a vector lying in neither $U_0$ nor $U_1$, and $d$ is the simplest such vector to write down over an arbitrary field.

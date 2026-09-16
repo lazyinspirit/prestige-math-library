@@ -37,15 +37,11 @@ Euclidean space is a manifold.
 
 ## Facts & Assumptions
 
-**Given:** The library convention for manifolds, the long line $\mathbb L$,
-and the Axiom of Countable Choice $\mathrm{AC}_\omega$.
+**Given:** The library convention for manifolds, the long line $\mathbb L$, and the Axiom of Countable Choice $\mathrm{AC}_\omega$.
 
 [F1] A topological manifold must be Hausdorff, second countable, and locally Euclidean ([[def-topological-manifold-without-boundary]]).
 
-[F2] The closed long ray $R=\omega_1\times[0,1)$ is built from blocks
-$\{\alpha\}\times[0,1)$ ordered like intervals and has no greatest element.
-The long line $\mathbb L$ is a reversed open copy of $R$ followed by a closed
-copy, with the order topology ([[def-the-long-line]]).
+[F2] The closed long ray $R=\omega_1\times[0,1)$ is built from blocks $\{\alpha\}\times[0,1)$ ordered like intervals and has no greatest element. The long line $\mathbb L$ is a reversed open copy of $R$ followed by a closed copy, with the order topology ([[def-the-long-line]]).
 
 [L1] Assuming $\mathrm{AC}_\omega$, every second-countable space is separable ([[thm-second-countable-implies-separable]]).
 

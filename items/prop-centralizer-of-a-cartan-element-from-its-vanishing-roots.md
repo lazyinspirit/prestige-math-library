@@ -38,9 +38,7 @@ $$C_{\mathfrak g}(h)=\mathfrak h\oplus \bigoplus_{\alpha(h)=0} \mathfrak g_\alph
 
 ## Facts & Assumptions
 
-**Given:** A complex semisimple Lie algebra $\mathfrak g$, an element
-$h\in \mathfrak h$ in a Cartan subalgebra, and the root-space decomposition of
-$\mathfrak g$ relative to $\mathfrak h$.
+**Given:** A complex semisimple Lie algebra $\mathfrak g$, an element $h\in \mathfrak h$ in a Cartan subalgebra, and the root-space decomposition of $\mathfrak g$ relative to $\mathfrak h$.
 
 ## Proof
 

@@ -30,14 +30,11 @@ one may omit a sink transition and still regard the picture as specifying a DFA.
 
 ## Facts & Assumptions
 
-**Given:** The alphabet $\Sigma=\{0,1\}$ and a one-state picture with state
-$q$, start state $q$, and only one drawn edge, a loop $q\xrightarrow{0}q$.
+**Given:** The alphabet $\Sigma=\{0,1\}$ and a one-state picture with state $q$, start state $q$, and only one drawn edge, a loop $q\xrightarrow{0}q$.
 
-[A1] The statement refuted is: omitting a sink transition from a DFA diagram
-does not affect whether the diagram defines a total DFA.
+[A1] The statement refuted is: omitting a sink transition from a DFA diagram does not affect whether the diagram defines a total DFA.
 
-[L1] A DFA requires a total transition function
-$\delta:Q\times\Sigma\to Q$, by [[def-deterministic-finite-automaton]].
+[L1] A DFA requires a total transition function $\delta:Q\times\Sigma\to Q$, by [[def-deterministic-finite-automaton]].
 
 ## Refutation
 

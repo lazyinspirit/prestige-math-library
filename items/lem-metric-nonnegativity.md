@@ -83,15 +83,5 @@ statement on this page needs to assume it separately.
 
 ## Remarks
 
-- **What each claim uses.** Claim 1 is the familiar two-line argument
-  $0 = p(x,x) \le p(x,y) + p(y,x) = 2p(x,y)$ followed by the observation that a
-  negative real added to itself stays negative. Claim 2 does not need that second
-  half at all: the strong triangle inequality delivers $0 \le p(x,y)$ in one
-  step, because the maximum of a real number with itself is that number.
-- **Symmetry is used in both claims and cannot be dropped.** Without (M2) the
-  instantiation of step 1.1 only gives $0 \le p(x,y) + p(y,x)$, which leaves the
-  possibility that one of the two values is negative and the other larger and
-  positive. Dropping (M2) instead of weakening (M1) gives the notion usually
-  called a quasimetric, which this library does not treat; for it the argument
-  above is unavailable, so nonnegativity is not redundant there and is imposed
-  as part of the definition ([[rem-metric-axiom-conventions]]).
+- **What each claim uses.** Claim 1 is the familiar two-line argument $0 = p(x,x) \le p(x,y) + p(y,x) = 2p(x,y)$ followed by the observation that a negative real added to itself stays negative. Claim 2 does not need that second half at all: the strong triangle inequality delivers $0 \le p(x,y)$ in one step, because the maximum of a real number with itself is that number.
+- **Symmetry is used in both claims and cannot be dropped.** Without (M2) the instantiation of step 1.1 only gives $0 \le p(x,y) + p(y,x)$, which leaves the possibility that one of the two values is negative and the other larger and positive. Dropping (M2) instead of weakening (M1) gives the notion usually called a quasimetric, which this library does not treat; for it the argument above is unavailable, so nonnegativity is not redundant there and is imposed as part of the definition ([[rem-metric-axiom-conventions]]).

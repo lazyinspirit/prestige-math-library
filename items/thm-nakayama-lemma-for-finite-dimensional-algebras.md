@@ -35,11 +35,9 @@ be a finite-dimensional left $A$-module.
 
 **Given:** A finite-dimensional algebra $A$ with Jacobson radical $J$ and a finite-dimensional left $A$-module $M$.
 
-[L1] The module radical equals $JM$
-([[thm-module-radical-is-jacobson-radical-times-the-module]]).
+[L1] The module radical equals $JM$ ([[thm-module-radical-is-jacobson-radical-times-the-module]]).
 
-[L2] The algebra radical $J$ is nilpotent
-([[thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple]]).
+[L2] The algebra radical $J$ is nilpotent ([[thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple]]).
 
 ## Proof
 

@@ -36,12 +36,9 @@ space exists; equivalently, there are no S-spaces.
 
 [F1] PFA implies PID. [[thm-pfa-implies-p-ideal-dichotomy]]
 
-[F2] PFA implies $\mathfrak p>\omega_1$.
-[[lem-pfa-raises-the-pseudointersection-number]]
+[F2] PFA implies $\mathfrak p>\omega_1$. [[lem-pfa-raises-the-pseudointersection-number]]
 
-[F3] PID together with $\mathfrak p>\omega_1$ makes every regular Hausdorff
-hereditarily separable space hereditarily Lindel&ouml;f, excluding S-spaces.
-[[thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces]]
+[F3] PID together with $\mathfrak p>\omega_1$ makes every regular Hausdorff hereditarily separable space hereditarily Lindel&ouml;f, excluding S-spaces. [[thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces]]
 
 ## Proof
 

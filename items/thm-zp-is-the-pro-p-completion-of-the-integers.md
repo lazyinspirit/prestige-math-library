@@ -31,14 +31,11 @@ $\iota:\mathbb Z\to\mathbb Z_p$.
 
 **Given:** The additive group $\mathbb Z$.
 
-[F1] The pro-$p$ completion is the inverse limit over normal subgroups with
-finite $p$-group quotients ([[def-pro-p-completion-of-an-abstract-group]]).
+[F1] The pro-$p$ completion is the inverse limit over normal subgroups with finite $p$-group quotients ([[def-pro-p-completion-of-an-abstract-group]]).
 
-[L1] The canonical map into $\mathbb Z_p$ is $m\mapsto(m\bmod p^n)_n$
-([[def-canonical-map-from-the-integers-to-zp]]).
+[L1] The canonical map into $\mathbb Z_p$ is $m\mapsto(m\bmod p^n)_n$ ([[def-canonical-map-from-the-integers-to-zp]]).
 
-[L2] Compatible tuples satisfy the inverse-limit universal property
-([[thm-concrete-inverse-limit-universal-property-in-groups]]).
+[L2] Compatible tuples satisfy the inverse-limit universal property ([[thm-concrete-inverse-limit-universal-property-in-groups]]).
 
 ## Proof
 

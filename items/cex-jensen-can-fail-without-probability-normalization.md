@@ -43,5 +43,4 @@ $$\int f\,d\#=2,\qquad \int\varphi(f)\,d\#=2.$$
 
 
 2.1 Hence [step 1.1, L1] ∎
-$$\varphi\!\left(\int f\,d\#\right)=4>2=\int\varphi(f)\,d\#.$$
-So Jensen fails on this infinite measure space, exactly as warned by [L1].
+$$\varphi\!\left(\int f\,d\#\right)=4>2=\int\varphi(f)\,d\#.$$ So Jensen fails on this infinite measure space, exactly as warned by [L1].

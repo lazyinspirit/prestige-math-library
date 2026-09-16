@@ -32,13 +32,9 @@ right exact functor preserves epimorphisms.
 
 **Given:** A functor between abelian categories.
 
-[L1] One-sided exactness is characterized by the corresponding short exact
-sequence test
-([[thm-one-sided-and-two-sided-exactness-by-short-exact-sequences]]).
+[L1] One-sided exactness is characterized by the corresponding short exact sequence test ([[thm-one-sided-and-two-sided-exactness-by-short-exact-sequences]]).
 
-[L2] In an abelian category, monomorphisms are exactly the zero-kernel maps and
-epimorphisms are exactly the zero-cokernel maps
-([[cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]]).
+[L2] In an abelian category, monomorphisms are exactly the zero-kernel maps and epimorphisms are exactly the zero-cokernel maps ([[cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]]).
 
 ## Proof
 

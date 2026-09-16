@@ -32,11 +32,9 @@ $\mathcal C^{\mathrm{op}}$ is preadditive.
 
 **Given:** A preadditive category $\mathcal C$.
 
-[L1] The opposite category has the same objects and the same hom-sets, with
-composition reversed ([[def-opposite-category]]).
+[L1] The opposite category has the same objects and the same hom-sets, with composition reversed ([[def-opposite-category]]).
 
-[L2] In a preadditive category every hom-set is an abelian group and
-composition is bilinear ([[def-preadditive-category]]).
+[L2] In a preadditive category every hom-set is an abelian group and composition is bilinear ([[def-preadditive-category]]).
 
 ## Proof
 

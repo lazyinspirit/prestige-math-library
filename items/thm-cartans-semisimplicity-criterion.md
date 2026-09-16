@@ -31,17 +31,13 @@ semisimple if and only if its Killing form is nondegenerate.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional characteristic-zero Lie algebra
-$\mathfrak g$ with Killing form $K$.
+**Given:** A finite-dimensional characteristic-zero Lie algebra $\mathfrak g$ with Killing form $K$.
 
-[L1] The radical of an invariant form is an ideal
-([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
+[L1] The radical of an invariant form is an ideal ([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
 
-[L2] Cartan's solvability criterion detects solvability from the relevant
-trace pairing ([[thm-cartans-solvability-criterion]]).
+[L2] Cartan's solvability criterion detects solvability from the relevant trace pairing ([[thm-cartans-solvability-criterion]]).
 
-[L3] Semisimple means that the solvable radical is zero
-([[def-simple-semisimple-and-reductive-lie-algebras]]).
+[L3] Semisimple means that the solvable radical is zero ([[def-simple-semisimple-and-reductive-lie-algebras]]).
 
 ## Proof
 

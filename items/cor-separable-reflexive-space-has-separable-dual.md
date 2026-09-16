@@ -33,19 +33,13 @@ and norm separable, then its continuous dual $X^*$ is norm separable.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, HB, and a real or complex separable reflexive
-Banach space $X$.
+**Given:** $\mathrm{AC}_\omega$, HB, and a real or complex separable reflexive Banach space $X$.
 
-[F1] A space is separable precisely when it has an at most countable dense
-subset ([[def-separable-space]]).
+[F1] A space is separable precisely when it has an at most countable dense subset ([[def-separable-space]]).
 
-[F2] Reflexivity says that the canonical map
-$J_X:X\to X^{**}$ is a surjective isometric embedding
-([[def-reflexive-banach-space]]).
+[F2] Reflexivity says that the canonical map $J_X:X\to X^{**}$ is a surjective isometric embedding ([[def-reflexive-banach-space]]).
 
-[F3] Under $\mathrm{AC}_\omega$ and HB, a real or complex normed space whose
-continuous dual is norm separable is itself norm separable
-([[thm-separable-dual-implies-separable-primal]]).
+[F3] Under $\mathrm{AC}_\omega$ and HB, a real or complex normed space whose continuous dual is norm separable is itself norm separable ([[thm-separable-dual-implies-separable-primal]]).
 
 ## Proof
 
@@ -59,8 +53,4 @@ continuous dual is norm separable is itself norm separable
 
 ## Source notes
 
-Brezis proves the same implication by identifying $X$ with $X^{**}$ and
-applying the separable-dual theorem to $X^*$.  Reflexivity is essential:
-Brezis's Remark 19 records $L^1$ as separable with nonseparable dual
-$L^\infty$; that warning is source context and is not used as a supplier in the
-proof above.
+Brezis proves the same implication by identifying $X$ with $X^{**}$ and applying the separable-dual theorem to $X^*$.  Reflexivity is essential: Brezis's Remark 19 records $L^1$ as separable with nonseparable dual $L^\infty$; that warning is source context and is not used as a supplier in the proof above.

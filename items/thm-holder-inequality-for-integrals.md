@@ -64,13 +64,10 @@ In every case the right-hand side is finite, so $fg$ is integrable.
 1.1 Assume first $1<p,q<\infty$, and put $A:=\|f\|_p$ and $B:=\|g\|_q$. If $A=0$ or $B=0$, then the corresponding power integral is $0$, so the corresponding function vanishes almost everywhere and $\int|fg|\,d\mu=0$. Thus only the case $A,B>0$ remains. [L2, L3, given]
 
 1.2 For the endpoint pair $(p,q)=(1,\infty)$, let $M:=\|g\|_\infty$. Then [L2, L4, L6, given]
-$$\int |fg|\,d\mu\le M\int |f|\,d\mu=\|g\|_\infty\|f\|_1.$$
-Indeed, [L4] gives a measurable null set $N$ with $|g|\le M$ on $X\setminus N$, so $|fg|\le M|f|$ almost everywhere.
+$$\int |fg|\,d\mu\le M\int |f|\,d\mu=\|g\|_\infty\|f\|_1.$$ Indeed, [L4] gives a measurable null set $N$ with $|g|\le M$ on $X\setminus N$, so $|fg|\le M|f|$ almost everywhere.
 
 2.1 In the remaining strict-exponent case, Young's inequality applied pointwise to $u=|f|/A$ and $v=|g|/B$ gives [step 1.1, L1, L2, L5, L6, L7, algebra]
-$$\frac{|f||g|}{AB}\le\frac{|f|^p}{pA^p}+\frac{|g|^q}{qB^q}.$$
-Integrating and using additivity, monotonicity, homogeneity, and the definitions of $A$ and $B$ yields
-$$\int |fg|\,d\mu\le\frac{B}{pA^{p-1}}\int |f|^p\,d\mu+\frac{A}{qB^{q-1}}\int |g|^q\,d\mu=\frac{AB}{p}+\frac{AB}{q}=AB.$$
+$$\frac{|f||g|}{AB}\le\frac{|f|^p}{pA^p}+\frac{|g|^q}{qB^q}.$$ Integrating and using additivity, monotonicity, homogeneity, and the definitions of $A$ and $B$ yields $$\int |fg|\,d\mu\le\frac{B}{pA^{p-1}}\int |f|^p\,d\mu+\frac{A}{qB^{q-1}}\int |g|^q\,d\mu=\frac{AB}{p}+\frac{AB}{q}=AB.$$
 
 2.2 The case $(p,q)=(\infty,1)$ is identical after exchanging $f$ and $g$. [step 1.2, given]
 $$\int |fg|\,d\mu\le\|f\|_\infty\|g\|_1.$$

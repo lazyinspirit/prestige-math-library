@@ -35,25 +35,15 @@ premeasure on the cylinder algebra.
 
 [F1] The finite-coordinate product law is a probability measure and has the rectangle formula. ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
 
-[F2] For product-measurable $A$ in two sigma-finite factors, each section is
-measurable, its section-measure function is measurable, and the product mass is
-the integral of that function. ([[prop-sigma-finite-section-measure-functions-are-measurable]],
-[[def-product-measure-on-sigma-finite-spaces]])
+[F2] For product-measurable $A$ in two sigma-finite factors, each section is measurable, its section-measure function is measurable, and the product mass is the integral of that function. ([[prop-sigma-finite-section-measure-functions-are-measurable]], [[def-product-measure-on-sigma-finite-spaces]])
 
-[F3] A decreasing sequence of measurable sets with finite first measure has
-measure converging to that of its intersection.
-([[thm-continuity-from-above-for-measures]])
+[F3] A decreasing sequence of measurable sets with finite first measure has measure converging to that of its intersection. ([[thm-continuity-from-above-for-measures]])
 
-[F4] Countable choice supplies a point of the product of the nonempty coordinate
-spaces. ([[def-countable-choice]])
+[F4] Countable choice supplies a point of the product of the nonempty coordinate spaces. ([[def-countable-choice]])
 
-[F5] On a nonempty product, consistent finite-dimensional laws define a
-well-defined finitely additive cylinder law.
-([[lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined]])
+[F5] On a nonempty product, consistent finite-dimensional laws define a well-defined finitely additive cylinder law. ([[lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined]])
 
-[F6] Dependent choice licenses a recursively constructed sequence when the
-admissible next coordinate depends on the prefix already chosen.
-([[def-dependent-choice]])
+[F6] Dependent choice licenses a recursively constructed sequence when the admissible next coordinate depends on the prefix already chosen. ([[def-dependent-choice]])
 
 ## Proof
 

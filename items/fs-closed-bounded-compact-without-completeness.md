@@ -99,28 +99,10 @@ below $2$.
 
 ## Remarks
 
-- **What the false claim gets wrong.** [[thm-heine-borel-characterisation-r]]
-  has two halves of very different strengths. The half that a compact set is
-  closed and bounded ([[lem-compact-implies-closed-and-bounded-r]]) uses no
-  completeness at all, only the Archimedean property and the existence of maxima
-  of finite sets. The converse half is
-  the one that rests on completeness, through [[thm-heine-borel-r]] and the
-  nested interval property, and it is exactly the half refuted above.
+- **What the false claim gets wrong.** [[thm-heine-borel-characterisation-r]] has two halves of very different strengths. The half that a compact set is closed and bounded ([[lem-compact-implies-closed-and-bounded-r]]) uses no completeness at all, only the Archimedean property and the existence of maxima of finite sets. The converse half is the one that rests on completeness, through [[thm-heine-borel-r]] and the nested interval property, and it is exactly the half refuted above.
 
-- **Where the missing point is.** The cover of step 2.1 creeps up on a bound that
-  $\mathbb{Q}$ does not contain. In $\mathbb{R}$ that bound exists, namely
-  $\sqrt 2$ ([[thm-of-square-roots]]), and it is not rational
-  ([[fs-sqrt2-rational]]); the set $S$ is thus closed in $\mathbb{Q}$ precisely
-  because the point that would have to be adjoined to close it is absent from
-  $\mathbb{Q}$. Read inside $\mathbb{R}$, the same set of numbers is bounded and
-  not closed, and it is not compact there either.
+- **Where the missing point is.** The cover of step 2.1 creeps up on a bound that $\mathbb{Q}$ does not contain. In $\mathbb{R}$ that bound exists, namely $\sqrt 2$ ([[thm-of-square-roots]]), and it is not rational ([[fs-sqrt2-rational]]); the set $S$ is thus closed in $\mathbb{Q}$ precisely because the point that would have to be adjoined to close it is absent from $\mathbb{Q}$. Read inside $\mathbb{R}$, the same set of numbers is bounded and not closed, and it is not compact there either.
 
-- **This is a statement about ordered fields, and it is refuted in that
-  generality.** One counterexample field suffices to refute a claim about every
-  ordered field, and $\mathbb{Q}$ is the smallest one available here. Nothing
-  above uses any ordered-field lemma outside its stated generality: [L2], [L4]
-  and [L5] are all proved for an arbitrary ordered field, and the results of this
-  page that are stated for $\mathbb{R}$ only are not applied to $\mathbb{Q}$.
+- **This is a statement about ordered fields, and it is refuted in that generality.** One counterexample field suffices to refute a claim about every ordered field, and $\mathbb{Q}$ is the smallest one available here. Nothing above uses any ordered-field lemma outside its stated generality: [L2], [L4] and [L5] are all proved for an arbitrary ordered field, and the results of this page that are stated for $\mathbb{R}$ only are not applied to $\mathbb{Q}$.
 
-- **The named witness** is [[cex-closed-bounded-in-q-not-compact]]; the
-  refutation is carried out here.
+- **The named witness** is [[cex-closed-bounded-in-q-not-compact]]; the refutation is carried out here.

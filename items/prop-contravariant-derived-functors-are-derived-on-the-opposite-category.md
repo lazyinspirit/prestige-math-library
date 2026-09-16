@@ -36,21 +36,15 @@ $$R_{P^{\mathrm{op}}}^nG(A)=H^n\!\bigl(G(P(A)_{\mathrm{del}})\bigr).$$
 Thus contravariant derived functors are computed on the opposite category.
 ## Facts & Assumptions
 
-**Given:** A contravariant additive functor $G$, a supplied projective datum
-$P$ on $\mathcal D$, and an object $A\in\mathcal D$.
+**Given:** A contravariant additive functor $G$, a supplied projective datum $P$ on $\mathcal D$, and an object $A\in\mathcal D$.
 
-[L1] A contravariant functor on $\mathcal A$ is a covariant functor on
-$\mathcal A^{\mathrm{op}}$ ([[def-functor-and-contravariant-functor]], [[def-opposite-category]]).
+[L1] A contravariant functor on $\mathcal A$ is a covariant functor on $\mathcal A^{\mathrm{op}}$ ([[def-functor-and-contravariant-functor]], [[def-opposite-category]]).
 
-[L2] If $\mathcal A$ is abelian then $\mathcal A^{\mathrm{op}}$ is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L2] If $\mathcal A$ is abelian then $\mathcal A^{\mathrm{op}}$ is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L3] Projective objects are defined by lifting against epimorphisms, while
-injective objects are defined dually by extension across monomorphisms
-([[def-projective-object]], [[def-injective-object]]).
+[L3] Projective objects are defined by lifting against epimorphisms, while injective objects are defined dually by extension across monomorphisms ([[def-projective-object]], [[def-injective-object]]).
 
-[L4] Right derived objects are defined from supplied injective resolution data
-([[def-right-derived-object-relative-to-injective-resolution-data]]).
+[L4] Right derived objects are defined from supplied injective resolution data ([[def-right-derived-object-relative-to-injective-resolution-data]]).
 
 ## Proof
 

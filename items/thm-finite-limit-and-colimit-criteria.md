@@ -44,21 +44,15 @@ coequalizers, an initial object, and pushouts.
 
 **Given:** A category $\mathcal C$.
 
-[F1] Empty limits are terminal objects, and empty colimits are initial objects
-([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
+[F1] Empty limits are terminal objects, and empty colimits are initial objects ([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
 
-[F2] Products, equalizers, pullbacks, and their duals have their stated
-universal properties ([[def-products-and-coproducts]],
-[[def-equalizers-and-coequalizers]], [[def-pullbacks-and-pushouts]]).
+[F2] Products, equalizers, pullbacks, and their duals have their stated universal properties ([[def-products-and-coproducts]], [[def-equalizers-and-coequalizers]], [[def-pullbacks-and-pushouts]]).
 
-[L1] A limit is constructed from products over the objects and arrows of its
-index category and an equalizer ([[thm-small-limits-from-products-and-equalizers]]).
+[L1] A limit is constructed from products over the objects and arrows of its index category and an equalizer ([[thm-small-limits-from-products-and-equalizers]]).
 
-[L2] The dual coproduct-coequalizer construction gives colimits
-([[thm-small-colimits-from-coproducts-and-coequalizers]]).
+[L2] The dual coproduct-coequalizer construction gives colimits ([[thm-small-colimits-from-coproducts-and-coequalizers]]).
 
-[L3] Formal duality reverses every hypothesis and conclusion
-([[prop-limit-colimit-duality]]).
+[L3] Formal duality reverses every hypothesis and conclusion ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

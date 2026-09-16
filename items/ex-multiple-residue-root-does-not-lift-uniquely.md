@@ -35,9 +35,7 @@ not lift uniquely.
 
 **Given:** The polynomial $f(T)=T^2-1$ over $\mathbf Z_2$.
 
-[L1] Simple roots lift uniquely in Henselian local rings; the derivative
-hypothesis is therefore the load-bearing condition
-([[cor-factor-hensel-implies-simple-root-hensel]]).
+[L1] Simple roots lift uniquely in Henselian local rings; the derivative hypothesis is therefore the load-bearing condition ([[cor-factor-hensel-implies-simple-root-hensel]]).
 
 ## Verification
 

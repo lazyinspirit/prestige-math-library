@@ -68,13 +68,6 @@ irrationals are, and only one of the two sets is $G_\delta$
 
 ## Remarks
 
-- **Where the work actually is.** Nothing in this corollary is hard; all of it
-  was done earlier. The $G_\delta$ theorem is [[thm-discontinuity-set-is-f-sigma]],
-  which rests on the oscillation, and the failure of $\mathbb{Q}$ to be
-  $G_\delta$ is [[cor-q-is-meager-and-not-g-delta]], which is where the Baire
-  category theorem is spent. The corollary is the place where those two meet.
+- **Where the work actually is.** Nothing in this corollary is hard; all of it was done earlier. The $G_\delta$ theorem is [[thm-discontinuity-set-is-f-sigma]], which rests on the oscillation, and the failure of $\mathbb{Q}$ to be $G_\delta$ is [[cor-q-is-meager-and-not-g-delta]], which is where the Baire category theorem is spent. The corollary is the place where those two meet.
 
-- **A weaker statement is true and much cheaper, and is not what is proved
-  here.** That no *monotone* function is continuous exactly at the rationals
-  follows from [[thm-froda]] alone, since the irrationals are uncountable. The
-  statement above is about all functions and needs category.
+- **A weaker statement is true and much cheaper, and is not what is proved here.** That no *monotone* function is continuous exactly at the rationals follows from [[thm-froda]] alone, since the irrationals are uncountable. The statement above is about all functions and needs category.

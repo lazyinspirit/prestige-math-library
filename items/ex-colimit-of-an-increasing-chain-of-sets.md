@@ -32,11 +32,9 @@ $\mathbf{Set}$ is $X=\bigcup_{n\ge0}X_n$ with the inclusion maps.
 
 **Given:** The increasing chain of sets.
 
-[F1] A colimit cocone admits a unique map to every other cocone
-([[def-limit-and-colimit-of-a-diagram]]).
+[F1] A colimit cocone admits a unique map to every other cocone ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L1] A Set-colimit is a quotient of the tagged union by the identifications
-induced by diagram arrows ([[thm-set-has-all-small-colimits]]).
+[L1] A Set-colimit is a quotient of the tagged union by the identifications induced by diagram arrows ([[thm-set-has-all-small-colimits]]).
 
 ## Verification
 

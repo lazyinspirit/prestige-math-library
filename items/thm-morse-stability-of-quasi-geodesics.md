@@ -39,9 +39,7 @@ at most $R$.
 
 [A2] If two subsets each lie in the $R$-neighborhood of the same geodesic segment, then their Hausdorff distance is at most $2R$.
 
-[L1] Thin quadrilaterals provide the local geometric mechanism behind that
-bound
-([[lem-thin-quadrilaterals-in-a-hyperbolic-space]]).
+[L1] Thin quadrilaterals provide the local geometric mechanism behind that bound ([[lem-thin-quadrilaterals-in-a-hyperbolic-space]]).
 
 ## Proof
 

@@ -97,16 +97,6 @@ because $d(x,A)$ is defined only for nonempty $A$
 
 ## Remarks
 
-- **Claim 1 is where the infimum does the work.** Reading it right to left,
-  $d(x,A) = 0$ says that $A$ has points arbitrarily close to $x$ without saying
-  that any of them is $x$; reading it left to right, adherence says the same
-  thing in the language of balls. The equivalence is exactly the epsilon
-  characterisation of the infimum ([[lem-inf-epsilon]]) with the lower bound $0$.
-- **The distance function is $1$-Lipschitz** ([[lem-distance-to-set-is-lipschitz]]),
-  so claim 1 exhibits $\overline{A}$ as the zero set of a function that does not
-  increase distances. That is not used above and is recorded only as
-  orientation.
-- **Claim 3 is the form that transfers to general topology**, where no metric is
-  available and the closure is defined outright as the intersection of all
-  closed supersets. Claim 1 is the specifically metric statement, and claim 2
-  sits between them.
+- **Claim 1 is where the infimum does the work.** Reading it right to left, $d(x,A) = 0$ says that $A$ has points arbitrarily close to $x$ without saying that any of them is $x$; reading it left to right, adherence says the same thing in the language of balls. The equivalence is exactly the epsilon characterisation of the infimum ([[lem-inf-epsilon]]) with the lower bound $0$.
+- **The distance function is $1$-Lipschitz** ([[lem-distance-to-set-is-lipschitz]]), so claim 1 exhibits $\overline{A}$ as the zero set of a function that does not increase distances. That is not used above and is recorded only as orientation.
+- **Claim 3 is the form that transfers to general topology**, where no metric is available and the closure is defined outright as the intersection of all closed supersets. Claim 1 is the specifically metric statement, and claim 2 sits between them.

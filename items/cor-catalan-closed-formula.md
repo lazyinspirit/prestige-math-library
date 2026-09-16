@@ -57,15 +57,6 @@ $$(n+1)\,C_n=\binom{2n}{n}.$$
 
 ## Remarks
 
-- **The quotient form.** The identity is an identity of natural numbers. Reading
-  each natural number as its canonical natural in $\mathbb{R}$
-  ([[def-canonical-natural]]) and dividing by the nonzero real $n+1$ turns it into
-  the familiar $C_n=\frac{1}{n+1}\binom{2n}{n}$. The multiplicative form is the
-  one proved, and it is the form in which no division and no embedding is needed;
-  it also says at once that $n+1$ divides the central binomial coefficient, which
-  the quotient form presupposes.
+- **The quotient form.** The identity is an identity of natural numbers. Reading each natural number as its canonical natural in $\mathbb{R}$ ([[def-canonical-natural]]) and dividing by the nonzero real $n+1$ turns it into the familiar $C_n=\frac{1}{n+1}\binom{2n}{n}$. The multiplicative form is the one proved, and it is the form in which no division and no embedding is needed; it also says at once that $n+1$ divides the central binomial coefficient, which the quotient form presupposes.
 
-- **What the proof actually uses.** Only the reflection identity and factorial
-  bookkeeping. The Catalan number is never manipulated as a formula: it enters as
-  the count it was defined to be and leaves as a factor of a binomial
-  coefficient.
+- **What the proof actually uses.** Only the reflection identity and factorial bookkeeping. The Catalan number is never manipulated as a formula: it enters as the count it was defined to be and leaves as a factor of a binomial coefficient.

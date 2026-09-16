@@ -37,13 +37,7 @@ same languages and compute the same partial functions on binary strings.
 
 [L1] Stay-put moves may be eliminated without changing accepted languages or computed partial functions, by [[thm-stay-put-moves-can-be-eliminated]].
 
-[F1] Extend the clauses of [[def-language-recognized-and-decided]] and
-[[def-partial-function-computed-by-a-machine]] to the two-way convention. Input
-occupies cells $0,1,\ldots$ and all negative cells are initially blank. A
-halting two-way configuration outputs a word $u$ exactly when $u$ occupies
-cells $0,\ldots,|u|-1$ and every other cell in $mathbb Z$ is blank. Thus a
-nonblank negative cell prevents the configuration from outputting an ordinary
-word.
+[F1] Extend the clauses of [[def-language-recognized-and-decided]] and [[def-partial-function-computed-by-a-machine]] to the two-way convention. Input occupies cells $0,1,\ldots$ and all negative cells are initially blank. A halting two-way configuration outputs a word $u$ exactly when $u$ occupies cells $0,\ldots,|u|-1$ and every other cell in $mathbb Z$ is blank. Thus a nonblank negative cell prevents the configuration from outputting an ordinary word.
 
 ## Proof
 

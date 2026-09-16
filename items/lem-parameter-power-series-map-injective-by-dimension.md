@@ -38,9 +38,7 @@ is injective.
 
 ## Facts & Assumptions
 
-**Given:** A complete equicharacteristic Noetherian local domain $(A,\mathfrak m)$
-of dimension $d$, a coefficient field $k$, a system of parameters
-$x_1,\ldots,x_d$, and the Axiom of Dependent Choice.
+**Given:** A complete equicharacteristic Noetherian local domain $(A,\mathfrak m)$ of dimension $d$, a coefficient field $k$, a system of parameters $x_1,\ldots,x_d$, and the Axiom of Dependent Choice.
 
 [L1] The map $\phi$ makes $A$ finite over its image ([[lem-parameter-power-series-subring-makes-ring-finite]]).
 

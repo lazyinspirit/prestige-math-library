@@ -37,13 +37,9 @@ permutation and isomorphism.
 
 **Given:** Two composition series of the same object $A$.
 
-[L1] A composition series is a finite strict subobject chain with simple
-successive quotients
-([[def-composition-series-and-composition-factors-of-an-object]],
-[[def-simple-object]]).
+[L1] A composition series is a finite strict subobject chain with simple successive quotients ([[def-composition-series-and-composition-factors-of-an-object]], [[def-simple-object]]).
 
-[L2] Any two finite subobject chains admit equivalent refinements
-([[thm-schreier-refinement-theorem-in-an-abelian-category]]).
+[L2] Any two finite subobject chains admit equivalent refinements ([[thm-schreier-refinement-theorem-in-an-abelian-category]]).
 
 ## Proof
 

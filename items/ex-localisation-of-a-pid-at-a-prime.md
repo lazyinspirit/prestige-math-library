@@ -35,19 +35,15 @@ ring with uniformiser $\pi/1$.
 
 **Given:** A principal ideal domain $R$ and a nonzero prime ideal $\mathfrak p=(\pi)$.
 
-[F1] In a PID every ideal is principal, and the ring is a domain
-([[def-principal-ideal-domain]]).
+[F1] In a PID every ideal is principal, and the ring is a domain ([[def-principal-ideal-domain]]).
 
 [F2] A prime ideal is proper ([[def-prime-and-maximal-ideals]]).
 
-[F3] Localisation at $\mathfrak p$ means inverting the complement
-$R\setminus\mathfrak p$ ([[def-localisation-at-a-prime-ideal]]).
+[F3] Localisation at $\mathfrak p$ means inverting the complement $R\setminus\mathfrak p$ ([[def-localisation-at-a-prime-ideal]]).
 
-[L1] Every principal ideal domain is Noetherian
-([[cor-principal-ideal-domains-are-noetherian]]).
+[L1] Every principal ideal domain is Noetherian ([[cor-principal-ideal-domains-are-noetherian]]).
 
-[L2] A nonfield domain is a DVR exactly when it is a local PID with nonzero
-maximal ideal ([[thm-equivalent-characterisations-of-a-dvr]]).
+[L2] A nonfield domain is a DVR exactly when it is a local PID with nonzero maximal ideal ([[thm-equivalent-characterisations-of-a-dvr]]).
 
 ## Verification
 

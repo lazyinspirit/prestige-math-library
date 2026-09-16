@@ -32,26 +32,17 @@ limits and all small colimits.
 
 ## Facts & Assumptions
 
-**Given:** A set-indexed family of groups or a parallel pair of group
-homomorphisms.
+**Given:** A set-indexed family of groups or a parallel pair of group homomorphisms.
 
-[L1] A category is complete exactly when it has all small products and
-equalizers, and cocomplete exactly when it has all small coproducts and
-coequalizers ([[cor-completeness-and-cocompleteness-criteria]]).
+[L1] A category is complete exactly when it has all small products and equalizers, and cocomplete exactly when it has all small coproducts and coequalizers ([[cor-completeness-and-cocompleteness-criteria]]).
 
-[F1] Groups and homomorphisms form $\mathbf{Grp}$, and homomorphisms preserve
-the group operation and identity
-([[prop-groups-and-homomorphisms-form-category-grp]],
-[[def-group-homomorphism]]).
+[F1] Groups and homomorphisms form $\mathbf{Grp}$, and homomorphisms preserve the group operation and identity ([[prop-groups-and-homomorphisms-form-category-grp]], [[def-group-homomorphism]]).
 
-[F2] The free group on a set has the unique homomorphic extension property
-([[def-free-group]]).
+[F2] The free group on a set has the unique homomorphic extension property ([[def-free-group]]).
 
-[F3] The normal closure is the least normal subgroup containing a subset
-([[def-normal-closure]]).
+[F3] The normal closure is the least normal subgroup containing a subset ([[def-normal-closure]]).
 
-[L2] A homomorphism out of $G/N$ exists uniquely precisely when the original
-homomorphism kills $N$ ([[thm-quotient-group-universal-property]]).
+[L2] A homomorphism out of $G/N$ exists uniquely precisely when the original homomorphism kills $N$ ([[thm-quotient-group-universal-property]]).
 
 ## Proof
 

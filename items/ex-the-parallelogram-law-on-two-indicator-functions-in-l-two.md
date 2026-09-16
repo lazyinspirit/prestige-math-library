@@ -37,17 +37,14 @@ $$\|f+g\|_2^2+\|f-g\|_2^2=2\|f\|_2^2+2\|g\|_2^2=2.$$
 
 **Given:** The two indicator functions $f$ and $g$ above.
 
-[L1] The $L^2$ parallelogram law has already been proved
-([[thm-parallelogram-law-in-l-two]]).
+[L1] The $L^2$ parallelogram law has already been proved ([[thm-parallelogram-law-in-l-two]]).
 
 ## Verification
 
-**Proof technique:** Evaluate all four $L^2$ norms on a pair of simple
-indicator functions and compare the two sides directly.
+**Proof technique:** Evaluate all four $L^2$ norms on a pair of simple indicator functions and compare the two sides directly.
 
 1.1 Since $f$ and $g$ are disjoint indicators of sets of measure $1/2$, [given, algebra]
 $$\|f\|_2^2=\|g\|_2^2=\frac12,\qquad \|f+g\|_2^2=1,\qquad \|f-g\|_2^2=1.$$
 
 2.1 Therefore [L1, step 1.1]
-$$\|f+g\|_2^2+\|f-g\|_2^2=1+1=2=2\cdot\frac12+2\cdot\frac12=2\|f\|_2^2+2\|g\|_2^2,$$
-exactly as [L1] predicts. ∎
+$$\|f+g\|_2^2+\|f-g\|_2^2=1+1=2=2\cdot\frac12+2\cdot\frac12=2\|f\|_2^2+2\|g\|_2^2,$$ exactly as [L1] predicts. ∎

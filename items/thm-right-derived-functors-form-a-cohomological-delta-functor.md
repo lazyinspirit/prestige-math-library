@@ -34,39 +34,21 @@ admit connecting maps that make them into a cohomological delta functor on
 $\mathcal A$, and $R_I^0F$ is naturally isomorphic to $F$.
 ## Facts & Assumptions
 
-**Given:** A short exact sequence $0\to A'\to A\to A''\to0$ in $\mathcal A$ and
-an integer $n\geq 0$.
+**Given:** A short exact sequence $0\to A'\to A\to A''\to0$ in $\mathcal A$ and an integer $n\geq 0$.
 
-[L1] Each $R_I^nF$ is an additive functor
-([[thm-right-derived-functors-relative-to-supplied-data-are-additive-functors]]).
+[L1] Each $R_I^nF$ is an additive functor ([[thm-right-derived-functors-relative-to-supplied-data-are-additive-functors]]).
 
-[L2] The injective horseshoe is obtained by dualizing the projective horseshoe;
-the latter fits into a degreewise split short exact sequence of augmented
-complexes. Consequently the injective horseshoe also carries the dual
-degreewise split short exact sequence of cochain complexes
-([[thm-horseshoe-lemma-for-injective-resolutions]],
-[[thm-horseshoe-lemma-for-projective-resolutions]]).
+[L2] The injective horseshoe is obtained by dualizing the projective horseshoe; the latter fits into a degreewise split short exact sequence of augmented complexes. Consequently the injective horseshoe also carries the dual degreewise split short exact sequence of cochain complexes ([[thm-horseshoe-lemma-for-injective-resolutions]], [[thm-horseshoe-lemma-for-projective-resolutions]]).
 
-[L3] Applying $F$ to a short exact sequence of injective resolution complexes
-produces a long exact sequence in cohomology, natural under morphisms of such
-sequences
-([[thm-long-exact-sequence-in-cohomology]],
-[[thm-naturality-of-the-cohomology-connecting-morphism]]).
+[L3] Applying $F$ to a short exact sequence of injective resolution complexes produces a long exact sequence in cohomology, natural under morphisms of such sequences ([[thm-long-exact-sequence-in-cohomology]], [[thm-naturality-of-the-cohomology-connecting-morphism]]).
 
-[L4] Replacing the supplied injective resolution datum at one object changes
-the derived functor only by natural isomorphism
-([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
+[L4] Replacing the supplied injective resolution datum at one object changes the derived functor only by natural isomorphism ([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
 
-[L5] The zeroth right derived functor of a left exact functor recovers the
-original functor
-([[thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor]]).
+[L5] The zeroth right derived functor of a left exact functor recovers the original functor ([[thm-zero-th-right-derived-functor-of-a-left-exact-functor-recovers-the-functor]]).
 
-[L6] A cohomological delta functor is exactly the data listed in
-[[def-cohomological-delta-functor]].
+[L6] A cohomological delta functor is exactly the data listed in [[def-cohomological-delta-functor]].
 
-[L7] Different injective comparison extensions of the same object morphism
-induce the same maps on cohomology
-([[lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]]).
+[L7] Different injective comparison extensions of the same object morphism induce the same maps on cohomology ([[lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]]).
 
 ## Proof
 

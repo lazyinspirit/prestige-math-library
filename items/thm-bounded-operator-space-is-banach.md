@@ -33,17 +33,13 @@ then $\mathcal B(X,Y)$ is Banach for the operator norm.
 
 ## Facts & Assumptions
 
-**Given:** A Banach space $Y$ and an operator-norm Cauchy sequence
-$(T_n)$ in $\mathcal B(X,Y)$.
+**Given:** A Banach space $Y$ and an operator-norm Cauchy sequence $(T_n)$ in $\mathcal B(X,Y)$.
 
 [L1] A Banach space is complete for its norm metric ([[def-banach-space]]).
 
-[L2] For a bounded operator, the operator norm is the unit-ball supremum and
-satisfies $\|Tx\| \le \|T\|\,\|x\|$ for every $x$
-([[def-operator-norm]]).
+[L2] For a bounded operator, the operator norm is the unit-ball supremum and satisfies $\|Tx\| \le \|T\|\,\|x\|$ for every $x$ ([[def-operator-norm]]).
 
-[L3] $\mathcal B(X,Y)$ is the vector space of bounded linear operators
-([[def-space-of-bounded-linear-operators]]).
+[L3] $\mathcal B(X,Y)$ is the vector space of bounded linear operators ([[def-space-of-bounded-linear-operators]]).
 
 ## Proof
 

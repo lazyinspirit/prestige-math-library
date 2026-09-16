@@ -81,18 +81,8 @@ limit because the other keeps interrupting.
 
 ## Remarks
 
-- **The two values are exactly the subsequential limits.** By
-  [[thm-limsup-is-greatest-subsequential-limit]] and
-  [[cor-liminf-is-least-subsequential-limit]] the numbers $1$ and $-1$ are the
-  greatest and least elements of $\overline{\operatorname{SL}}(s)$, and since
-  every term is $1$ or $-1$ no other value can be a subsequential limit, so
-  $\operatorname{SL}(s) = \{-1, 1\}$ exactly.
+- **The two values are exactly the subsequential limits.** By [[thm-limsup-is-greatest-subsequential-limit]] and [[cor-liminf-is-least-subsequential-limit]] the numbers $1$ and $-1$ are the greatest and least elements of $\overline{\operatorname{SL}}(s)$, and since every term is $1$ or $-1$ no other value can be a subsequential limit, so $\operatorname{SL}(s) = \{-1, 1\}$ exactly.
 
-- **Contrast with [[ex-two-subsequential-limits]].** There the same two
-  subsequential limits arise for a sequence none of whose terms equals either of
-  them. The limit superior and limit inferior do not care: they are determined by
-  the tails, not by whether the values are attained.
+- **Contrast with [[ex-two-subsequential-limits]].** There the same two subsequential limits arise for a sequence none of whose terms equals either of them. The limit superior and limit inferior do not care: they are determined by the tails, not by whether the values are attained.
 
-- **This sequence is the standard witness for strictness throughout the page.**
-  It drives [[fs-limsup-additive]] and [[cex-limsup-subadditivity-strict]], and,
-  after an affine change, [[cex-limsup-product-strict]].
+- **This sequence is the standard witness for strictness throughout the page.** It drives [[fs-limsup-additive]] and [[cex-limsup-subadditivity-strict]], and, after an affine change, [[cex-limsup-product-strict]].

@@ -34,20 +34,13 @@ dimensional, every intertwining endomorphism is scalar.
 
 ## Facts & Assumptions
 
-**Given:** Irreducible representations of one Lie algebra $\mathfrak g$ over
-$k$.
+**Given:** Irreducible representations of one Lie algebra $\mathfrak g$ over $k$.
 
-[L1] Lie representations and their intertwiners are respectively unital
-$U(\mathfrak g)$-modules and module maps
-([[thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra]]).
+[L1] Lie representations and their intertwiners are respectively unital $U(\mathfrak g)$-modules and module maps ([[thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra]]).
 
-[L2] Schur's lemma for modules makes a nonzero map between simple modules an
-isomorphism and the endomorphism ring of a simple module a division ring
-([[thm-schurs-lemma-for-modules]]).
+[L2] Schur's lemma for modules makes a nonzero map between simple modules an isomorphism and the endomorphism ring of a simple module a division ring ([[thm-schurs-lemma-for-modules]]).
 
-[L3] A linear operator on a positive finite-dimensional vector space over an
-algebraically closed field has an eigenvalue
-([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]).
+[L3] A linear operator on a positive finite-dimensional vector space over an algebraically closed field has an eigenvalue ([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]).
 
 ## Proof
 

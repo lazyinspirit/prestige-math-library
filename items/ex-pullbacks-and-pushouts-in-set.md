@@ -35,15 +35,11 @@ $b(w)$ for every $w$.
 
 **Given:** The displayed cospan and span of sets.
 
-[F1] Pullbacks and pushouts have their compatible-pair universal properties
-([[def-pullbacks-and-pushouts]]).
+[F1] Pullbacks and pushouts have their compatible-pair universal properties ([[def-pullbacks-and-pushouts]]).
 
-[F2] Morphisms in $\mathbf{Set}$ are functions
-([[prop-sets-and-functions-form-category-set]]).
+[F2] Morphisms in $\mathbf{Set}$ are functions ([[prop-sets-and-functions-form-category-set]]).
 
-[F3] Equivalence relations are reflexive, symmetric, and transitive, and maps
-constant on classes factor uniquely through the quotient
-([[def-equivalence-relation]], [[thm-universal-property-of-the-quotient]]).
+[F3] Equivalence relations are reflexive, symmetric, and transitive, and maps constant on classes factor uniquely through the quotient ([[def-equivalence-relation]], [[thm-universal-property-of-the-quotient]]).
 
 ## Verification
 

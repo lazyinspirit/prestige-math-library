@@ -38,9 +38,7 @@ So each nonzero base point has exactly the two lifts $w$ and $-w$.
 
 **Given:** The $n$th-root surface theorem with $n=2$.
 
-[L1] The $n$th-root surface is biholomorphic to $\mathbb C^\times$, and the
-projection becomes $w \mapsto w^n$
-([[thm-riemann-surface-of-an-nth-root]]).
+[L1] The $n$th-root surface is biholomorphic to $\mathbb C^\times$, and the projection becomes $w \mapsto w^n$ ([[thm-riemann-surface-of-an-nth-root]]).
 
 ## Verification
 

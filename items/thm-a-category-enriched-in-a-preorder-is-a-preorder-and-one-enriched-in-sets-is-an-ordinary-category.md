@@ -39,14 +39,11 @@ then a $\mathbf{Set}$-enriched category is exactly a small ordinary category.
 
 **Given:** A $\mathcal V$-category $\mathcal A$.
 
-[L1] A preorder is a reflexive and transitive relation on a set
-([[def-preorder]]).
+[L1] A preorder is a reflexive and transitive relation on a set ([[def-preorder]]).
 
-[L2] A category has objects, morphisms, identities, and associative
-composition ([[def-category]]).
+[L2] A category has objects, morphisms, identities, and associative composition ([[def-category]]).
 
-[L3] A $\mathcal V$-category has hom-objects, enriched composition, and
-enriched identities ([[def-enriched-category]]).
+[L3] A $\mathcal V$-category has hom-objects, enriched composition, and enriched identities ([[def-enriched-category]]).
 
 ## Proof
 

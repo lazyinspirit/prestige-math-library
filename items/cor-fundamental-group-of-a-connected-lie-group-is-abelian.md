@@ -32,8 +32,7 @@ $\pi_1(G,e)$ is abelian.
 
 **Given:** A connected Lie group $G$ with identity $e$.
 
-[F1] The fundamental group of any topological group is abelian.
-[[thm-fundamental-group-of-a-topological-group-is-abelian]].
+[F1] The fundamental group of any topological group is abelian. [[thm-fundamental-group-of-a-topological-group-is-abelian]].
 
 ## Proof
 

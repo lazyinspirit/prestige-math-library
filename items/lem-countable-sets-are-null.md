@@ -74,24 +74,10 @@ and everything after that is a formula in $k$.
 
 ## Remarks
 
-- **Indexing.** Sequences here start at $k = 0$, and the first interval has
-  length $\varepsilon \cdot 2^{-1}$, not $\varepsilon$. The total is
-  $\varepsilon \cdot 2^{-1} \sum_{k \ge 0} 2^{-k} = \varepsilon$ exactly, so the
-  cover is as tight as the definition allows and nothing is wasted at the first
-  index.
+- **Indexing.** Sequences here start at $k = 0$, and the first interval has length $\varepsilon \cdot 2^{-1}$, not $\varepsilon$. The total is $\varepsilon \cdot 2^{-1} \sum_{k \ge 0} 2^{-k} = \varepsilon$ exactly, so the cover is as tight as the definition allows and nothing is wasted at the first index.
 
-- **Repetitions are harmless.** A surjection $s$ may repeat values, and a finite
-  set is covered by infinitely many intervals, most of them redundant. This is
-  why the listing form of countability ([[lem-countable-iff-surjection-from-n]])
-  is the convenient one: no injectivity and no case split between the finite and
-  the countably infinite case is needed.
+- **Repetitions are harmless.** A surjection $s$ may repeat values, and a finite set is covered by infinitely many intervals, most of them redundant. This is why the listing form of countability ([[lem-countable-iff-surjection-from-n]]) is the convenient one: no injectivity and no case split between the finite and the countably infinite case is needed.
 
-- **The converse fails badly.** The Cantor set is uncountable and null
-  ([[thm-cantor-set-properties]]), so "null" is very far from "countable"; and
-  the Smith-Volterra-Cantor set is uncountable and not null
-  ([[thm-fat-cantor-set-has-positive-measure]]), so cardinality decides nothing
-  either way.
+- **The converse fails badly.** The Cantor set is uncountable and null ([[thm-cantor-set-properties]]), so "null" is very far from "countable"; and the Smith-Volterra-Cantor set is uncountable and not null ([[thm-fat-cantor-set-has-positive-measure]]), so cardinality decides nothing either way.
 
-- **Density decides nothing either.** $\mathbb{Q}$ is countable, hence null, and
-  is dense in $\mathbb{R}$ ([[cex-dense-set-of-measure-zero]]); a null set may
-  therefore meet every interval.
+- **Density decides nothing either.** $\mathbb{Q}$ is countable, hence null, and is dense in $\mathbb{R}$ ([[cex-dense-set-of-measure-zero]]); a null set may therefore meet every interval.

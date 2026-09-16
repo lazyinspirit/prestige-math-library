@@ -36,10 +36,7 @@ metric.
 
 **Given:** The displayed claim.
 
-[L1] The quotient normal bundle is intrinsic, but the orthogonal normal bundle is
-obtained only after choosing an ambient metric
-([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]],
-[[prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle]]).
+[L1] The quotient normal bundle is intrinsic, but the orthogonal normal bundle is obtained only after choosing an ambient metric ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]], [[prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle]]).
 
 ## Refutation
 

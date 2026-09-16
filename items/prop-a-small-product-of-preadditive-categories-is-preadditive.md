@@ -32,17 +32,13 @@ preadditive.
 
 ## Facts & Assumptions
 
-**Given:** A set $I$ and a family $(\mathcal C_i)_{i\in I}$ of preadditive
-categories.
+**Given:** A set $I$ and a family $(\mathcal C_i)_{i\in I}$ of preadditive categories.
 
-[L1] A preadditive category has abelian-group hom-sets and bilinear
-composition ([[def-preadditive-category]]).
+[L1] A preadditive category has abelian-group hom-sets and bilinear composition ([[def-preadditive-category]]).
 
-[L2] Product categories compose and take identities componentwise
-([[def-product-category]]).
+[L2] Product categories compose and take identities componentwise ([[def-product-category]]).
 
-[L3] The phrase "small product" means the indexing family is set-sized
-([[def-small-locally-small-and-large-category]]).
+[L3] The phrase "small product" means the indexing family is set-sized ([[def-small-locally-small-and-large-category]]).
 
 ## Proof
 

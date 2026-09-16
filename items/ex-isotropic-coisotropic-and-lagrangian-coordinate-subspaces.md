@@ -30,13 +30,9 @@ coordinate subspaces realize each of the four subspace types.
 
 ## Facts & Assumptions
 
-**Given:** $\omega(e_i,f_j)=\delta_{ij}$,
-$\omega(f_j,e_i)=-\delta_{ij}$, and the pairings among two $e$-vectors or
-among two $f$-vectors are zero.
+**Given:** $\omega(e_i,f_j)=\delta_{ij}$, $\omega(f_j,e_i)=-\delta_{ij}$, and the pairings among two $e$-vectors or among two $f$-vectors are zero.
 
-[F1] The four types are determined by $W$, $W^\omega$, their inclusion, and
-their intersection.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]].
+[F1] The four types are determined by $W$, $W^\omega$, their inclusion, and their intersection. [[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]].
 
 ## Verification
 

@@ -40,11 +40,7 @@ The function $x\mapsto e^{-x}$ on $[0,\infty)$ is Lebesgue integrable.
 **Proof technique:** direct.
 
 1.1 Let $f_n:=e^{-x}\chi_{[0,n]}$. Then $f_n\uparrow f$. For each $k\ge0$ and [L1, L2, construct]
-$x\in[k,k+1]$, one has $e^{-x}\le e^{-k}$, so
-$$\int_{[k,k+1]}f_n\,d\lambda\le e^{-k}\lambda([k,k+1])=e^{-k}$$
-by [L2].
+$x\in[k,k+1]$, one has $e^{-x}\le e^{-k}$, so $$\int_{[k,k+1]}f_n\,d\lambda\le e^{-k}\lambda([k,k+1])=e^{-k}$$ by [L2].
 
 2.1 Additivity [L4] therefore gives [step 1.1, L1, L3, L4] ∎
-$$\int f_n\,d\lambda\le\sum_{k<n}e^{-k},$$
-and the right-hand side is bounded independently of $n$ by [L3]. Passing to
-the limit with [L1] shows $\int_0^\infty e^{-x}\,d\lambda<+\infty$.
+$$\int f_n\,d\lambda\le\sum_{k<n}e^{-k},$$ and the right-hand side is bounded independently of $n$ by [L3]. Passing to the limit with [L1] shows $\int_0^\infty e^{-x}\,d\lambda<+\infty$.

@@ -106,20 +106,8 @@ So the descent terminates, and the last nonzero remainder is $\gcd(a,b)$.
 
 ## Remarks
 
-- **Termination is not an extra appeal to well-ordering about $\mathbb{Z}$.** It
-  is the clause $0 \le r < v$ of [[thm-division-algorithm-in-z]], which makes the
-  second coordinates a strictly decreasing sequence of nonnegative integers;
-  well-ordering is then applied to their preimages in $\mathbb{N}$, where it is
-  available.
+- **Termination is not an extra appeal to well-ordering about $\mathbb{Z}$.** It is the clause $0 \le r < v$ of [[thm-division-algorithm-in-z]], which makes the second coordinates a strictly decreasing sequence of nonnegative integers; well-ordering is then applied to their preimages in $\mathbb{N}$, where it is available.
 
-- **The theorem is stated for $b > 0$ only**, matching
-  [[thm-division-algorithm-in-z]]. For $b < 0$ one may run the descent from
-  $(a,|b|)$ instead: $\gcd(a,b) = \gcd(a,|b|)$ by [[lem-gcd-basic-values]], so
-  nothing is lost. That reduction is recorded here rather than built into the
-  statement, so that the recursion above uses the published division algorithm
-  exactly as stated.
+- **The theorem is stated for $b > 0$ only**, matching [[thm-division-algorithm-in-z]]. For $b < 0$ one may run the descent from $(a,|b|)$ instead: $\gcd(a,b) = \gcd(a,|b|)$ by [[lem-gcd-basic-values]], so nothing is lost. That reduction is recorded here rather than built into the statement, so that the recursion above uses the published division algorithm exactly as stated.
 
-- **No claim is made about how many divisions the descent takes.** The count
-  depends on the pair; the companion page works out one family where it is
-  exactly known ([[ex-euclidean-algorithm-on-consecutive-fibonacci-numbers]]),
-  and no worst-case bound over all inputs is proved anywhere here.
+- **No claim is made about how many divisions the descent takes.** The count depends on the pair; the companion page works out one family where it is exactly known ([[ex-euclidean-algorithm-on-consecutive-fibonacci-numbers]]), and no worst-case bound over all inputs is proved anywhere here.

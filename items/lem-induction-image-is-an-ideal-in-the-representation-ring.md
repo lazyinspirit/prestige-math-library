@@ -34,17 +34,11 @@ $I_{\mathrm{cyc}}(G)\subseteq R(G)$ is an ideal of the character ring $R(G)$.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, an element $x\in I_{\mathrm{cyc}}(G)$, and an
-element $\psi\in R(G)$.
+**Given:** A finite group $G$, an element $x\in I_{\mathrm{cyc}}(G)$, and an element $\psi\in R(G)$.
 
-[F1] By definition, $I_{\mathrm{cyc}}(G)$ consists of finite sums
-$\sum_i\operatorname{Ind}_{C_i}^G(\theta_i)$ with each $C_i\le G$ cyclic and
-each $\theta_i\in R(C_i)$ ([[def-cyclic-induction-subgroup]]).
+[F1] By definition, $I_{\mathrm{cyc}}(G)$ consists of finite sums $\sum_i\operatorname{Ind}_{C_i}^G(\theta_i)$ with each $C_i\le G$ cyclic and each $\theta_i\in R(C_i)$ ([[def-cyclic-induction-subgroup]]).
 
-[F2] Induction and restriction satisfy the projection formula:
-$\operatorname{Ind}_H^G(\chi\,\operatorname{Res}_H^G\psi)=
-(\operatorname{Ind}_H^G\chi)\psi$
-([[prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]]).
+[F2] Induction and restriction satisfy the projection formula: $\operatorname{Ind}_H^G(\chi\,\operatorname{Res}_H^G\psi)= (\operatorname{Ind}_H^G\chi)\psi$ ([[prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]]).
 
 ## Proof
 

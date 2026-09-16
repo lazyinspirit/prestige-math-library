@@ -33,14 +33,11 @@ one place $w$, then $q$ is isotropic over $Q_w$ as well.
 
 ## Facts & Assumptions
 
-**Given:** A nondegenerate ternary form $q=aX^2+bY^2+cZ^2$ over $\mathbb Q$ and
-a place $w$.
+**Given:** A nondegenerate ternary form $q=aX^2+bY^2+cZ^2$ over $\mathbb Q$ and a place $w$.
 
-[L1] The local isotropy criterion is $q\text{ isotropic over }Q_v \iff (-ac,-bc)_v=1$
-([[cor-ternary-isotropy-via-hilbert-symbol]]).
+[L1] The local isotropy criterion is $q\text{ isotropic over }Q_v \iff (-ac,-bc)_v=1$ ([[cor-ternary-isotropy-via-hilbert-symbol]]).
 
-[L2] The global reciprocity law is $\prod_v(x,y)_v=1$
-([[thm-hilbert-reciprocity-over-the-rationals]]).
+[L2] The global reciprocity law is $\prod_v(x,y)_v=1$ ([[thm-hilbert-reciprocity-over-the-rationals]]).
 
 ## Proof
 

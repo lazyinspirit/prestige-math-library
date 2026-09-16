@@ -32,8 +32,7 @@ combinations preserve either class.
 
 ## Facts & Assumptions
 
-**Given:** finitely many $\Sigma_n^0$ formulas, or finitely many $\Pi_n^0$
-formulas.
+**Given:** finitely many $\Sigma_n^0$ formulas, or finitely many $\Pi_n^0$ formulas.
 
 ## Proof
 

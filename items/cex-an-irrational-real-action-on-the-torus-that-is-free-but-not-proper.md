@@ -30,23 +30,15 @@ proper and has a Hausdorff orbit quotient.
 
 ## Facts & Assumptions
 
-**Given:** An irrational number $\alpha$ and
-$\mathbb T^2=S^1\times S^1$ with its usual smooth structure.
+**Given:** An irrational number $\alpha$ and $\mathbb T^2=S^1\times S^1$ with its usual smooth structure.
 
-[F1] A left action is free when all stabilizers are trivial, and it is proper
-when $(t,x)\mapsto(t\cdot x,x)$ has compact inverse images of compact sets.
-[[def-free-and-proper-lie-group-actions]].
+[F1] A left action is free when all stabilizers are trivial, and it is proper when $(t,x)\mapsto(t\cdot x,x)$ has compact inverse images of compact sets. [[def-free-and-proper-lie-group-actions]].
 
-[F2] For irrational $\alpha$, the displayed action is smooth and free and all
-its orbits are dense. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
+[F2] For irrational $\alpha$, the displayed action is smooth and free and all its orbits are dense. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
 
-[F3] The wrap-metric circle $\mathbb T=[0,1)$ is compact, and finite products
-of compact spaces are compact.
-[[lem-unit-interval-circle-is-a-nonempty-compact-metric-space]],
-[[thm-finite-products-of-compact-spaces]].
+[F3] The wrap-metric circle $\mathbb T=[0,1)$ is compact, and finite products of compact spaces are compact. [[lem-unit-interval-circle-is-a-nonempty-compact-metric-space]], [[thm-finite-products-of-compact-spaces]].
 
-[F4] Continuous images of compact spaces are compact.
-[[thm-compactness-under-continuous-maps]].
+[F4] Continuous images of compact spaces are compact. [[thm-compactness-under-continuous-maps]].
 
 ## Counterexample
 

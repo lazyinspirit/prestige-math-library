@@ -33,14 +33,11 @@ $\mathbf{Ab}(\mathbb Z/2,-)$.
 
 ## Facts & Assumptions
 
-**Given:** The sequence $\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2$ in
-$\mathbf{Ab}$.
+**Given:** The sequence $\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2$ in $\mathbf{Ab}$.
 
-[L1] In a preadditive category, hom-functors take values in abelian groups
-([[thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]]).
+[L1] In a preadditive category, hom-functors take values in abelian groups ([[thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]]).
 
-[L2] For modules, postcomposition gives the induced maps on Hom groups
-([[def-hom-groups-and-induced-hom-maps]]).
+[L2] For modules, postcomposition gives the induced maps on Hom groups ([[def-hom-groups-and-induced-hom-maps]]).
 
 ## Counterexample
 

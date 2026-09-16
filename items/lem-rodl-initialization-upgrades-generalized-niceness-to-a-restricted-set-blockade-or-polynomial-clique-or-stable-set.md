@@ -40,24 +40,15 @@ one of the following holds:
 
 ## Facts & Assumptions
 
-**Given:** A generalized nice, leaf-reducible, wonderful finite family
-$\mathcal F$, a parameter $x\in(0,\tfrac12)$, and an
-$\overline{\mathcal F}$-free graph $G$.
+**Given:** A generalized nice, leaf-reducible, wonderful finite family $\mathcal F$, a parameter $x\in(0,\tfrac12)$, and an $\overline{\mathcal F}$-free graph $G$.
 
-[L1] There exist constants $c\in(0,\tfrac12)$, $a_1\ge 1$, and $a_2>0$ such
-that every $c^2$-restricted $\overline{\mathcal F}$-free graph satisfies the
-three-outcome conclusion with parameter $x$ whenever $x<c^2$
-([[lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade]]).
+[L1] There exist constants $c\in(0,\tfrac12)$, $a_1\ge 1$, and $a_2>0$ such that every $c^2$-restricted $\overline{\mathcal F}$-free graph satisfies the three-outcome conclusion with parameter $x$ whenever $x<c^2$ ([[lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade]]).
 
-[L2] For every graph $H$ and every $\xi\in(0,\tfrac12)$, every nonempty
-$H$-free graph has a $\xi$-restricted induced subgraph of size at least
-$\delta|G|$ for some constant $\delta>0$ depending only on $H$ and $\xi$
-([[cor-rodl-every-h-free-graph-has-a-linear-restricted-set]]).
+[L2] For every graph $H$ and every $\xi\in(0,\tfrac12)$, every nonempty $H$-free graph has a $\xi$-restricted induced subgraph of size at least $\delta|G|$ for some constant $\delta>0$ depending only on $H$ and $\xi$ ([[cor-rodl-every-h-free-graph-has-a-linear-restricted-set]]).
 
 ## Proof
 
-**Proof technique:** use Rödl at the fixed scale $\xi=c^2$, then apply the
-constant-scale theorem unless $x$ is already above that scale.
+**Proof technique:** use Rödl at the fixed scale $\xi=c^2$, then apply the constant-scale theorem unless $x$ is already above that scale.
 
 
 1.1 Let $c\in(0,\tfrac12)$, $a_1\ge 1$, and $a_2>0$ be the constants supplied by [L1], and set $\xi:=c^2$. Choose $\delta>0$ from [L2] for the forbidden family $\overline{\mathcal F}$ and the parameter $\xi$. [L1, L2, choose]

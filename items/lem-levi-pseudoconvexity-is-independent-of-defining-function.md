@@ -39,12 +39,9 @@ pseudoconvexity is independent of the defining function.
 
 ## Facts & Assumptions
 
-**Given:** A boundary point $p\in\partial\Omega$ and two $C^2$ defining
-functions $\rho$ and $\widetilde\rho$ near $p$.
+**Given:** A boundary point $p\in\partial\Omega$ and two $C^2$ defining functions $\rho$ and $\widetilde\rho$ near $p$.
 
-[L1] Levi pseudoconvexity is stated in terms of the Levi form on complex
-tangent vectors of a defining function
-([[def-levi-pseudoconvex-domain]]).
+[L1] Levi pseudoconvexity is stated in terms of the Levi form on complex tangent vectors of a defining function ([[def-levi-pseudoconvex-domain]]).
 
 ## Proof
 

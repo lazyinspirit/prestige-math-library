@@ -32,21 +32,14 @@ In ambient ZF, ordinalhood is absolute between transitive membership domains con
 
 [F2] [[def-ordinal]]: A set $\alpha$ is an **ordinal** when both of the following hold.
 
-1. $\alpha$ is a **transitive set**: every element of $\alpha$ is also a subset
-   of $\alpha$, that is $x \in \alpha \Rightarrow x \subseteq \alpha$.
-2. The membership relation restricted to $\alpha$, namely
-   $\{(x, y) \in \alpha \times \alpha : x \in y\}$, is a **strict well-order**
-   of $\alpha$ (def-well-order): it is irreflexive, transitive as a
-   relation, trichotomous on $\alpha$, and every nonempty subset of $\alpha$ has
-   an $\in$-least element.
+1. $\alpha$ is a **transitive set**: every element of $\alpha$ is also a subset of $\alpha$, that is $x \in \alpha \Rightarrow x \subseteq \alpha$.
+2. The membership relation restricted to $\alpha$, namely $\{(x, y) \in \alpha \times \alpha : x \in y\}$, is a **strict well-order** of $\alpha$ (def-well-order): it is irreflexive, transitive as a relation, trichotomous on $\alpha$, and every nonempty subset of $\alpha$ has an $\in$-least element.
 
 Ordinals are written with lowercase Greek letters, and for ordinals we set
 
 $$\alpha < \beta :\iff \alpha \in \beta, \qquad \alpha \le \beta :\iff (\alpha \in \beta \text{ or } \alpha = \beta).$$
 
-Write $0 := \emptyset$, which is an ordinal because both clauses hold vacuously,
-and write $\alpha^{+} := \alpha \cup \{\alpha\}$ for the **successor** of
-$\alpha$.
+Write $0 := \emptyset$, which is an ordinal because both clauses hold vacuously, and write $\alpha^{+} := \alpha \cup \{\alpha\}$ for the **successor** of $\alpha$.
 
 [F3] [[lem-bounded-definitions-of-basic-set-operations]]: The graphs of empty set, subset, unordered pair, singleton, union, intersection (with $\bigcap\varnothing=\varnothing$), difference, Kuratowski ordered pair, Cartesian product, relation domain/range, functionhood, evaluation and injection have $\Delta_0$ definitions. Thus their values agree between transitive membership structures whenever the input and output sets are in the smaller domain. This is graph agreement, not an assertion that an arbitrary transitive domain is closed under these operations.
 

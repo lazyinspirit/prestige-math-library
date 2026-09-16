@@ -34,9 +34,7 @@ boundary.
 
 **Given:** The factorial-gap counterexample.
 
-[L1] The factorial-gap series is holomorphic on the unit disc and has no
-analytic continuation through any boundary point
-([[cex-the-factorial-gap-series-has-the-unit-circle-as-a-natural-boundary]]).
+[L1] The factorial-gap series is holomorphic on the unit disc and has no analytic continuation through any boundary point ([[cex-the-factorial-gap-series-has-the-unit-circle-as-a-natural-boundary]]).
 
 ## Refutation
 

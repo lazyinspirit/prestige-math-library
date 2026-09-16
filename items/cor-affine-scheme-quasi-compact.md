@@ -25,8 +25,7 @@ Every affine scheme is quasi-compact.
 
 **Given:** An affine scheme $X$.
 
-[F1] Every distinguished open of an affine spectrum is quasi-compact
-([[lem-basic-opens-quasi-compact]]).
+[F1] Every distinguished open of an affine spectrum is quasi-compact ([[lem-basic-opens-quasi-compact]]).
 
 ## Proof
 

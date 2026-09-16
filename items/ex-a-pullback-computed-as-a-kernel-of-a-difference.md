@@ -35,12 +35,9 @@ which is the kernel of $(f,-g):M\oplus N\to P$.
 
 **Given:** Module maps $f:M\to P$ and $g:N\to P$.
 
-[L1] Pullbacks in an abelian category are kernels of the corresponding
-difference maps
-([[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]]).
+[L1] Pullbacks in an abelian category are kernels of the corresponding difference maps ([[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]]).
 
-[L2] Modules and their homomorphisms form a category
-([[prop-modules-and-homomorphisms-form-category-rmod]]).
+[L2] Modules and their homomorphisms form a category ([[prop-modules-and-homomorphisms-form-category-rmod]]).
 
 ## Verification
 

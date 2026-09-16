@@ -34,12 +34,9 @@ is an embedded one-dimensional submanifold of $\mathbb R^2$.
 
 **Given:** The smooth function $f:\mathbb R\to\mathbb R$, $f(x)=\sin x$.
 
-[L1] The graph of a smooth map $F:M\to N$ is an embedded submanifold of
-$M\times N$ of dimension $\dim M$
-([[prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold]]).
+[L1] The graph of a smooth map $F:M\to N$ is an embedded submanifold of $M\times N$ of dimension $\dim M$ ([[prop-the-graph-of-a-smooth-map-is-an-embedded-submanifold]]).
 
-[L2] Sine and cosine are differentiable with derivatives cosine and negative
-sine, respectively ([[thm-sine-and-cosine-derivatives]]).
+[L2] Sine and cosine are differentiable with derivatives cosine and negative sine, respectively ([[thm-sine-and-cosine-derivatives]]).
 
 ## Verification
 **Proof technique:** direct.

@@ -42,32 +42,19 @@ and the current exponential and adjoint-exponential suppliers.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and
-an ideal $\mathfrak h\subseteq\mathfrak g=\operatorname{Lie}(G)$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and an ideal $\mathfrak h\subseteq\mathfrak g=\operatorname{Lie}(G)$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] There is a unique connected immersed subgroup $H\to G$ integrating
-$\mathfrak h$. [[thm-lie-subgroup-lie-subalgebra-correspondence]].
+[F1] There is a unique connected immersed subgroup $H\to G$ integrating $\mathfrak h$. [[thm-lie-subgroup-lie-subalgebra-correspondence]].
 
-[F2] Ideal stability means
-$\operatorname{ad}_X(\mathfrak h)=[X,\mathfrak h]\subseteq\mathfrak h$ for
-every $X\in\mathfrak g$. [[def-lie-subalgebra-and-ideal]],
-[[thm-the-differential-of-adjoint-is-ad]].
+[F2] Ideal stability means $\operatorname{ad}_X(\mathfrak h)=[X,\mathfrak h]\subseteq\mathfrak h$ for every $X\in\mathfrak g$. [[def-lie-subalgebra-and-ideal]], [[thm-the-differential-of-adjoint-is-ad]].
 
-[F3] The adjoint map is a representation and
-$\operatorname{Ad}_{\exp X}=e^{\operatorname{ad}_X}$.
-[[prop-adjoint-is-a-smooth-lie-group-representation]],
-[[prop-adjoint-exponential-identity]].
+[F3] The adjoint map is a representation and $\operatorname{Ad}_{\exp X}=e^{\operatorname{ad}_X}$. [[prop-adjoint-is-a-smooth-lie-group-representation]], [[prop-adjoint-exponential-identity]].
 
-[F4] Linear initial-value problems have unique solutions, and $\exp_G$ maps
-some neighborhood of $0$ diffeomorphically onto an identity neighborhood.
-[[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]],
-[[cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]].
+[F4] Linear initial-value problems have unique solutions, and $\exp_G$ maps some neighborhood of $0$ diffeomorphically onto an identity neighborhood. [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]], [[cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]].
 
-[F5] Conjugation satisfies
-$\operatorname{Ad}_g=d(C_g)_e$.
-[[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
+[F5] Conjugation satisfies $\operatorname{Ad}_g=d(C_g)_e$. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
 
 ## Proof
 

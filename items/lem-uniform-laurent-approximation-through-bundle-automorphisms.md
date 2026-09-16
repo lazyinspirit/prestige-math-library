@@ -38,28 +38,19 @@ joined by a normalized Laurent-polynomial homotopy.
 
 ## Facts & Assumptions
 
-**Given:** AC, compact Hausdorff $X$, a finite-rank complex bundle $E\to X$,
-and normalized $f$ as in the statement.
+**Given:** AC, compact Hausdorff $X$, a finite-rank complex bundle $E\to X$, and normalized $f$ as in the statement.
 
-[F1] The normalization and clutching conventions are those of
-[[lem-normalized-clutching-data-for-bundles-over-x-times-s-two]].
+[F1] The normalization and clutching conventions are those of [[lem-normalized-clutching-data-for-bundles-over-x-times-s-two]].
 
-[F2] A continuous map from a nonempty compact Hausdorff space to a uniform
-space is uniformly continuous
-([[cor-compact-domain-maps-are-uniformly-continuous]]).
+[F2] A continuous map from a nonempty compact Hausdorff space to a uniform space is uniformly continuous ([[cor-compact-domain-maps-are-uniformly-continuous]]).
 
-[F3] Continuous real functions on a compact interval are Riemann integrable
-([[thm-continuous-implies-integrable]]); complex matrix entries are integrated
-by real and imaginary parts.
+[F3] Continuous real functions on a compact interval are Riemann integrable ([[thm-continuous-implies-integrable]]); complex matrix entries are integrated by real and imaginary parts.
 
-[F4] Under AC and DC, finite subordinate partitions exist on compact Hausdorff
-spaces ([[cor-compact-hausdorff-partitions-of-unity]]).
+[F4] Under AC and DC, finite subordinate partitions exist on compact Hausdorff spaces ([[cor-compact-hausdorff-partitions-of-unity]]).
 
-[F5] AC supplies the DC required by [F4]
-([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
+[F5] AC supplies the DC required by [F4] ([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
 
-[A1] AC is spent through [F5] in the cited partition result; the integrability
-supplier [F3] is used with its published hypotheses as stated.
+[A1] AC is spent through [F5] in the cited partition result; the integrability supplier [F3] is used with its published hypotheses as stated.
 
 ## Proof
 

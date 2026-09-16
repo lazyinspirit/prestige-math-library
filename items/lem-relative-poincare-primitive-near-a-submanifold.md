@@ -35,16 +35,11 @@ $\beta_p$ vanishes along $S$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the closed embedding, and the family in the
-statement.
+**Given:** $\mathrm{AC}_\omega$, the closed embedding, and the family in the statement.
 
-[F1] Under $\mathrm{AC}_\omega$, a closed embedded submanifold has a tubular
-neighbourhood. [[def-countable-choice]],
-[[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]].
+[F1] Under $\mathrm{AC}_\omega$, a closed embedded submanifold has a tubular neighbourhood. [[def-countable-choice]], [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]].
 
-[F2] A smooth homotopy has an operator $K$ with
-$H_1^*-H_0^*=dK+Kd$.
-[[thm-de-rham-homotopy-formula-for-a-smooth-homotopy]].
+[F2] A smooth homotopy has an operator $K$ with $H_1^*-H_0^*=dK+Kd$. [[thm-de-rham-homotopy-formula-for-a-smooth-homotopy]].
 
 ## Proof
 

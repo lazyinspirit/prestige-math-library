@@ -36,11 +36,9 @@ $$\sum_{r\in R}\chi(r)=0.$$
 
 **Given:** A nonprincipal Dirichlet character $\chi$ modulo $q$.
 
-[L1] The principal character is $1$ on integers coprime to $q$ and $0$
-otherwise ([[def-principal-dirichlet-character]]).
+[L1] The principal character is $1$ on integers coprime to $q$ and $0$ otherwise ([[def-principal-dirichlet-character]]).
 
-[L2] If $(a,q)=1$, then $\chi(a)$ is a root of unity and hence may differ from
-$1$ only as a nonzero scalar ([[lem-dirichlet-character-values]]).
+[L2] If $(a,q)=1$, then $\chi(a)$ is a root of unity and hence may differ from $1$ only as a nonzero scalar ([[lem-dirichlet-character-values]]).
 
 ## Proof
 

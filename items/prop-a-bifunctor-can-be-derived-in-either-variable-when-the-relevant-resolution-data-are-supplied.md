@@ -43,20 +43,13 @@ These are the two candidate one-variable derived constructions. No equality
 between them is asserted here.
 ## Facts & Assumptions
 
-**Given:** Abelian categories $\mathcal A,\mathcal C,\mathcal D$, the displayed
-bifunctor $B$, and the supplied data $P$ on $\mathcal D_A$ and $I$ on
-$\mathcal D_C$.
+**Given:** Abelian categories $\mathcal A,\mathcal C,\mathcal D$, the displayed bifunctor $B$, and the supplied data $P$ on $\mathcal D_A$ and $I$ on $\mathcal D_C$.
 
-[L1] Right derived objects are defined for covariant functors from supplied
-injective resolution data
-([[def-right-derived-object-relative-to-injective-resolution-data]]).
+[L1] Right derived objects are defined for covariant functors from supplied injective resolution data ([[def-right-derived-object-relative-to-injective-resolution-data]]).
 
-[L2] Left derived objects are defined for covariant functors from supplied
-projective resolution data
-([[def-left-derived-object-relative-to-projective-resolution-data]]).
+[L2] Left derived objects are defined for covariant functors from supplied projective resolution data ([[def-left-derived-object-relative-to-projective-resolution-data]]).
 
-[L3] Contravariant functors are derived on the opposite category
-([[prop-contravariant-derived-functors-are-derived-on-the-opposite-category]]).
+[L3] Contravariant functors are derived on the opposite category ([[prop-contravariant-derived-functors-are-derived-on-the-opposite-category]]).
 
 ## Proof
 

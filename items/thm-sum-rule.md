@@ -132,16 +132,8 @@ the companion page carries that false statement with its smallest witness.
 
 ## Remarks
 
-- **Why the splice map is built once.** The same bijection
-  $p + q \to A \cup B$ proves clause 1 and, used as an enumeration, proves the
-  two-block case of clause 3. Building it twice, once for cardinalities and once
-  for sums, would be two chances to get the index arithmetic wrong.
+- **Why the splice map is built once.** The same bijection $p + q \to A \cup B$ proves clause 1 and, used as an enumeration, proves the two-block case of clause 3. Building it twice, once for cardinalities and once for sums, would be two chances to get the index arithmetic wrong.
 
-- **The subtraction in the splice is legitimate.** Writing $h(k) = g(k - p)$ for
-  $k \ge p$ means: the unique $j$ with $p + j = k$, which exists by the definition
-  of $\le$ and is unique by cancellation. No negative number is formed anywhere.
+- **The subtraction in the splice is legitimate.** Writing $h(k) = g(k - p)$ for $k \ge p$ means: the unique $j$ with $p + j = k$, which exists by the definition of $\le$ and is unique by cancellation. No negative number is formed anywhere.
 
-- **Clause 3 is what the multinomial theorem needs.** Its outer sum is indexed by
-  the set of weak compositions of $n$ into $m$ parts, and the induction on $m$
-  partitions that index set by the value of the last part. Without clause 3 that
-  step could not be taken.
+- **Clause 3 is what the multinomial theorem needs.** Its outer sum is indexed by the set of weak compositions of $n$ into $m$ parts, and the induction on $m$ partitions that index set by the value of the last part. Without clause 3 that step could not be taken.

@@ -31,15 +31,11 @@ The statement "an NFA accepts a word only if every branch accepts" is false.
 
 ## Facts & Assumptions
 
-**Given:** The NFA and input word $abb$ from
-[[fs-an-nfa-accepts-only-if-every-branch-accepts]].
+**Given:** The NFA and input word $abb$ from [[fs-an-nfa-accepts-only-if-every-branch-accepts]].
 
-[A1] The statement refuted is: an NFA accepts a word only if every branch
-accepts.
+[A1] The statement refuted is: an NFA accepts a word only if every branch accepts.
 
-[L1] The false statement's refutation already exhibits one accepting branch and
-one rejecting branch on the same input, by
-[[fs-an-nfa-accepts-only-if-every-branch-accepts]].
+[L1] The false statement's refutation already exhibits one accepting branch and one rejecting branch on the same input, by [[fs-an-nfa-accepts-only-if-every-branch-accepts]].
 
 ## Counterexample
 

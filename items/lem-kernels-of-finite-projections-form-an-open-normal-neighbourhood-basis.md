@@ -29,17 +29,11 @@ basis at the identity.
 
 ## Facts & Assumptions
 
-**Given:** A profinite group written as $L=\varprojlim G_i$ with coordinate
-maps $\pi_i:L\to G_i$.
+**Given:** A profinite group written as $L=\varprojlim G_i$ with coordinate maps $\pi_i:L\to G_i$.
 
-[L1] Each $\pi_i$ is a coordinate projection from the inverse limit
-([[def-coordinate-projections-from-an-inverse-limit]]).
+[L1] Each $\pi_i$ is a coordinate projection from the inverse limit ([[def-coordinate-projections-from-an-inverse-limit]]).
 
-[F1] Open sets in $L$ come from cylinders in the product topology, and a
-profinite group is such an inverse limit
-([[def-inverse-limit-topology-for-finite-discrete-groups]],
-[[def-profinite-group-by-inverse-limit]], [[def-normal-subgroup]],
-[[def-quotient-group]]).
+[F1] Open sets in $L$ come from cylinders in the product topology, and a profinite group is such an inverse limit ([[def-inverse-limit-topology-for-finite-discrete-groups]], [[def-profinite-group-by-inverse-limit]], [[def-normal-subgroup]], [[def-quotient-group]]).
 
 ## Proof
 

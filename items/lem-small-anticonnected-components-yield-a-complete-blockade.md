@@ -38,11 +38,9 @@ $n/(2k)$.
 
 ## Facts & Assumptions
 
-**Given:** A graph $G$ on $n$ vertices and an integer $k\ge 2$ such that every
-anticonnected component of $G$ has size less than $n/k$.
+**Given:** A graph $G$ on $n$ vertices and an integer $k\ge 2$ such that every anticonnected component of $G$ has size less than $n/k$.
 
-[L1] Distinct anticonnected components are complete to one another
-([[lem-components-are-anticomplete-and-anticomponents-complete]]).
+[L1] Distinct anticonnected components are complete to one another ([[lem-components-are-anticomplete-and-anticomponents-complete]]).
 
 ## Proof
 

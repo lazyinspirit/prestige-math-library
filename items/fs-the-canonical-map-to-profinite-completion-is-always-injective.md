@@ -29,9 +29,7 @@ The canonical map to the profinite completion is always injective.
 
 **Given:** A group $G$ that is not residually finite.
 
-[L1] The canonical map is injective exactly when the group is residually finite
-([[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]],
-[[def-finite-residual-and-residually-finite-group]]).
+[L1] The canonical map is injective exactly when the group is residually finite ([[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]], [[def-finite-residual-and-residually-finite-group]]).
 
 ## Refutation
 

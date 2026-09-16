@@ -32,13 +32,9 @@ regular value even though $f^{-1}(0)=\varnothing$.
 
 **Given:** The map $f(x)=e^x$.
 
-[F1] The definition of regular value allows the fibre to be empty
-([[def-regular-and-critical-points-and-values]]).
+[F1] The definition of regular value allows the fibre to be empty ([[def-regular-and-critical-points-and-values]]).
 
-[L1] The derivative of $e^x$ is $e^x$
-([[thm-derivative-of-exponential]]), and the exponential maps $\mathbb R$
-bijectively onto $(0,\infty)$
-([[cor-exponential-is-a-bijection-onto-positive-reals]]).
+[L1] The derivative of $e^x$ is $e^x$ ([[thm-derivative-of-exponential]]), and the exponential maps $\mathbb R$ bijectively onto $(0,\infty)$ ([[cor-exponential-is-a-bijection-onto-positive-reals]]).
 
 ## Verification
 **Proof technique:** direct.

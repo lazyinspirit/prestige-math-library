@@ -68,12 +68,6 @@ witness is as small as a witness can be.
 
 ## Remarks
 
-- **What the general correction is.** Adding the counts and then subtracting the
-  count of the overlap is the two-set case of inclusion and exclusion. That
-  principle is the next page of this track and is not available here, so no
-  formula for the general case is stated: what is established above is only that
-  the identity as displayed is false, and where its hypothesis went.
+- **What the general correction is.** Adding the counts and then subtracting the count of the overlap is the two-set case of inclusion and exclusion. That principle is the next page of this track and is not available here, so no formula for the general case is stated: what is established above is only that the identity as displayed is false, and where its hypothesis went.
 
-- **The same failure at the level of a family** is exhibited concretely in
-  [[cex-a-count-that-double-counts]], where twelve subsets are counted as
-  sixteen.
+- **The same failure at the level of a family** is exhibited concretely in [[cex-a-count-that-double-counts]], where twelve subsets are counted as sixteen.

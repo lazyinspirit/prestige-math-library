@@ -35,18 +35,13 @@ ambient abelian category.
 
 **Given:** A chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] The canonical maps are $j_n(y)=(y,0)$ and $q_n(y,x)=x$
-([[def-canonical-inclusion-and-projection-for-a-mapping-cone]]).
+[L1] The canonical maps are $j_n(y)=(y,0)$ and $q_n(y,x)=x$ ([[def-canonical-inclusion-and-projection-for-a-mapping-cone]]).
 
-[L2] A short exact sequence of complexes is degreewise exact
-([[def-short-exact-sequence-of-complexes]]).
+[L2] A short exact sequence of complexes is degreewise exact ([[def-short-exact-sequence-of-complexes]]).
 
-[L3] Finite biproducts of complexes are computed degreewise
-([[prop-finite-biproducts-of-complexes-are-computed-degreewise]]).
+[L3] Finite biproducts of complexes are computed degreewise ([[prop-finite-biproducts-of-complexes-are-computed-degreewise]]).
 
-[L4] A split short exact sequence in an abelian category is one with a one-sided
-section or retraction exhibiting the middle object as a biproduct
-([[def-split-short-exact-sequence-in-an-abelian-category]]).
+[L4] A split short exact sequence in an abelian category is one with a one-sided section or retraction exhibiting the middle object as a biproduct ([[def-split-short-exact-sequence-in-an-abelian-category]]).
 
 ## Proof
 

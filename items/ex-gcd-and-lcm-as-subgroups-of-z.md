@@ -85,13 +85,6 @@ $\iota(k)$, the embedding of [[lem-nat-embeds-int]].
 
 ## Remarks
 
-- **The example is the seam in miniature.** On the left of each identity is a
-  construction in the group $(\mathbb{Z},+)$ — a sum of subgroups, an
-  intersection of subgroups — and on the right is a number computed by
-  arithmetic. [[thm-gcd-generates-the-subgroup]] is what makes the two sides the
-  same object.
+- **The example is the seam in miniature.** On the left of each identity is a construction in the group $(\mathbb{Z},+)$ — a sum of subgroups, an intersection of subgroups — and on the right is a number computed by arithmetic. [[thm-gcd-generates-the-subgroup]] is what makes the two sides the same object.
 
-- **$36 = 12 \cdot 3 = 18 \cdot 2$**, so $36$ is visibly a common multiple; what
-  is not visible without the theorem is that *every* common multiple is a
-  multiple of it, which is why $12\mathbb{Z} \cap 18\mathbb{Z}$ is exactly
-  $36\mathbb{Z}$ and not merely contains it.
+- **$36 = 12 \cdot 3 = 18 \cdot 2$**, so $36$ is visibly a common multiple; what is not visible without the theorem is that *every* common multiple is a multiple of it, which is why $12\mathbb{Z} \cap 18\mathbb{Z}$ is exactly $36\mathbb{Z}$ and not merely contains it.

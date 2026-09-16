@@ -37,8 +37,7 @@ $z_0\in\Omega$. Then the extremal family $\mathcal F(\Omega,z_0)$ is nonempty.
 
 [L2] For each $a\in\mathbb D$, the Blaschke factor $\varphi_a$ is a biholomorphic self-map of $\mathbb D$ ([[thm-blaschke-factor-is-a-disc-automorphism]]).
 
-[L3] A nonconstant holomorphic map on a domain has open image
-([[thm-open-mapping-theorem-holomorphic-functions]]).
+[L3] A nonconstant holomorphic map on a domain has open image ([[thm-open-mapping-theorem-holomorphic-functions]]).
 
 ## Proof
 

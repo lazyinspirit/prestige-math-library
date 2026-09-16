@@ -96,24 +96,10 @@ three scales, and it is obtained from two of them by the product rule.
 
 ## Remarks
 
-- **The two bounds quoted in steps 1.1 and 1.2 are the useful part in practice.**
-  They convert the qualitative statement into a rate: $n^{1/n}$ is within
-  $2/n^{1/2}$ of $1$, and $a^{1/n}$ within $(a-1)/n$ of $1$ when $a \ge 1$. The
-  second rate is faster, and the difference is real: in $n^{1/n}$ the base itself
-  grows with the index.
+- **The two bounds quoted in steps 1.1 and 1.2 are the useful part in practice.** They convert the qualitative statement into a rate: $n^{1/n}$ is within $2/n^{1/2}$ of $1$, and $a^{1/n}$ within $(a-1)/n$ of $1$ when $a \ge 1$. The second rate is faster, and the difference is real: in $n^{1/n}$ the base itself grows with the index.
 
-- **Why $\alpha$ is rational and $p$ is real.** The exponent $\alpha$ must be
-  rational because rational powers are all this library has; the base $1+p$ may be
-  any real $> 1$ because it is raised only to *integer* powers. The asymmetry is a
-  fact about what has been constructed, not about the mathematics, and it
-  disappears once real exponents are available.
+- **Why $\alpha$ is rational and $p$ is real.** The exponent $\alpha$ must be rational because rational powers are all this library has; the base $1+p$ may be any real $> 1$ because it is raised only to *integer* powers. The asymmetry is a fact about what has been constructed, not about the mathematics, and it disappears once real exponents are available.
 
-- **The composite in step 2.1 is the one usually quoted as "factorials beat
-  polynomials".** It is not proved directly anywhere on this page: it is the
-  product of two of the four standard limits, and the product rule
-  ([[thm-algebra-of-limits]]) is what assembles it.
+- **The composite in step 2.1 is the one usually quoted as "factorials beat polynomials".** It is not proved directly anywhere on this page: it is the product of two of the four standard limits, and the product rule ([[thm-algebra-of-limits]]) is what assembles it.
 
-- **Nothing here uses $\limsup$.** All four are ordinary limits, and the page's
-  machinery is needed only to *prove* them, not to state them; the connection to
-  the rest of the page is that [[thm-ratio-root-inequality]] is the tool that
-  makes several of them routine once one of them is known.
+- **Nothing here uses $\limsup$.** All four are ordinary limits, and the page's machinery is needed only to *prove* them, not to state them; the connection to the rest of the page is that [[thm-ratio-root-inequality]] is the tool that makes several of them routine once one of them is known.

@@ -37,8 +37,7 @@ $$ \{x\in\mathbb R^{n+1}:1/2<\|x\|<3/2\}. $$
 
 ## Facts & Assumptions
 
-**Given:** The unit sphere $S^n\subseteq\mathbb R^{n+1}$ with the Euclidean
-metric.
+**Given:** The unit sphere $S^n\subseteq\mathbb R^{n+1}$ with the Euclidean metric.
 
 ## Verification
 **Proof technique:** direct.

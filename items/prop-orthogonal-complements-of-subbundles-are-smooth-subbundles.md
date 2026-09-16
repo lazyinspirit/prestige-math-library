@@ -34,13 +34,11 @@ form a smooth vector subbundle $S^\perp\subseteq E$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth vector bundle $E\to M$, a smooth subbundle $S\subseteq E$,
-and a smooth bundle metric on $E$.
+**Given:** A smooth vector bundle $E\to M$, a smooth subbundle $S\subseteq E$, and a smooth bundle metric on $E$.
 
 [L1] Locally, $S$ is spanned by part of a frame of $E$ ([[def-vector-subbundle]]).
 
-[L2] Gram-Schmidt orthonormalisation depends smoothly on a smooth frame
-([[thm-gram-schmidt-orthonormalisation]]).
+[L2] Gram-Schmidt orthonormalisation depends smoothly on a smooth frame ([[thm-gram-schmidt-orthonormalisation]]).
 
 ## Proof
 

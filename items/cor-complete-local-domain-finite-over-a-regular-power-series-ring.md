@@ -36,14 +36,11 @@ whose image is a regular complete local subring over which $A$ is module-finite.
 
 **Given:** A complete equicharacteristic Noetherian local domain $(A,\mathfrak m)$ of dimension $d$ and the Axiom of Choice.
 
-[L1] The parameter power-series map makes $A$ finite over its image
-([[lem-parameter-power-series-subring-makes-ring-finite]]).
+[L1] The parameter power-series map makes $A$ finite over its image ([[lem-parameter-power-series-subring-makes-ring-finite]]).
 
-[L2] The same map is injective
-([[lem-parameter-power-series-map-injective-by-dimension]]).
+[L2] The same map is injective ([[lem-parameter-power-series-map-injective-by-dimension]]).
 
-[L3] A system of parameters is the $d$-tuple that determines the relevant map
-([[def-system-of-parameters-and-parameter-ideal]]).
+[L3] A system of parameters is the $d$-tuple that determines the relevant map ([[def-system-of-parameters-and-parameter-ideal]]).
 
 ## Proof
 

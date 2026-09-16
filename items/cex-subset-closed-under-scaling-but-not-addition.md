@@ -92,17 +92,8 @@ implies the other.
 
 ## Remarks
 
-- **The witness works over every field**, including $F$ with two elements: the
-  argument uses only $1_F \ne 0_F$, and never counts the elements of $F$ or the
-  linear subspaces of $F^{2}$. No claim is made here about how many subsets of
-  $F^{2}$ of this kind there are.
+- **The witness works over every field**, including $F$ with two elements: the argument uses only $1_F \ne 0_F$, and never counts the elements of $F$ or the linear subspaces of $F^{2}$. No claim is made here about how many subsets of $F^{2}$ of this kind there are.
 
-- **The union of two linear subspaces is the general phenomenon.** $A$ is a union
-  of two linear subspaces, neither of which contains the other, and such a union
-  is never a linear subspace; that is recorded separately as
-  [[fs-union-of-two-subspaces-is-a-subspace]], of which this item is the concrete
-  instance closed under scalar multiplication.
+- **The union of two linear subspaces is the general phenomenon.** $A$ is a union of two linear subspaces, neither of which contains the other, and such a union is never a linear subspace; that is recorded separately as [[fs-union-of-two-subspaces-is-a-subspace]], of which this item is the concrete instance closed under scalar multiplication.
 
-- **"Axis" is informal here**, as "line" is elsewhere on this page: it names the
-  set $\operatorname{span}\{e_j\}$ and carries no claim about dimension, which is
-  not available at this point in the library.
+- **"Axis" is informal here**, as "line" is elsewhere on this page: it names the set $\operatorname{span}\{e_j\}$ and carries no claim about dimension, which is not available at this point in the library.

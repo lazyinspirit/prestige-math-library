@@ -39,13 +39,9 @@ convergent.
 
 [A1] Countable Choice holds ([[def-countable-choice]]).
 
-[L1] Each sufficiently high-dimensional finite block admits vectors with
-prescribed squared norms and the uniform subset-sum estimate
-([[lem-dvoretzky-rogers-finite-block-estimate]]).
+[L1] Each sufficiently high-dimensional finite block admits vectors with prescribed squared norms and the uniform subset-sum estimate ([[lem-dvoretzky-rogers-finite-block-estimate]]).
 
-[L2] Uniform smallness of all finite tails is equivalent to unconditional
-convergence in a Banach space
-([[thm-unconditional-convergence-equivalences]]).
+[L2] Uniform smallness of all finite tails is equivalent to unconditional convergence in a Banach space ([[thm-unconditional-convergence-equivalences]]).
 
 ## Proof
 
@@ -69,7 +65,6 @@ $$\left\|\sum_{n\in F}x_n\right\| \le\sqrt3\left(\sum_{n\in F}c_n\right)^{1/2}.$
 
 $$\left\|\sum_{n\in F}x_n\right\| \le\sqrt3\sum_{m\ge M} \left(\sum_{N_m\le n<N_{m+1}}c_n\right)^{1/2}.$$
 
-The right side tends to zero by step 1.1. Condition (3) of [L2] therefore holds,
-so $\sum_nx_n$ converges unconditionally. [L2, steps 1.1, 2.1]
+The right side tends to zero by step 1.1. Condition (3) of [L2] therefore holds, so $\sum_nx_n$ converges unconditionally. [L2, steps 1.1, 2.1]
 
 4.1 On the other hand, [given, step 2.1, step 3.1] $\sum_n\|x_n\|=8^{-1/2}\sum_n1/n=\infty$, so the same series is not absolutely convergent. [step 2.1, algebra] ∎

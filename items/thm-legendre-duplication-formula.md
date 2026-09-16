@@ -38,9 +38,7 @@ $$\Gamma(z)\Gamma\!\left(z+\frac12\right)=2^{1-2z}\sqrt{\pi}\,\Gamma(2z).$$
 
 **Given:** Gauss's multiplication formula.
 
-[L1] For $m=2$,
-$\Gamma(z)\Gamma(z+1/2)=(2\pi)^{1/2}2^{1/2-2z}\Gamma(2z)$
-([[thm-gauss-multiplication-formula]]).
+[L1] For $m=2$, $\Gamma(z)\Gamma(z+1/2)=(2\pi)^{1/2}2^{1/2-2z}\Gamma(2z)$ ([[thm-gauss-multiplication-formula]]).
 
 ## Proof
 

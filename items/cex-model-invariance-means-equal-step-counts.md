@@ -34,13 +34,9 @@ step count is exactly three times the nonhalting-step count of $M$.
 
 **Given:** The scanning machine $M$ described above.
 
-[L1] Every multitape time-$T$ computation on inputs of length $n$ has a
-single-tape simulation in $O((n+T(n))^2)$ time, by
-[[thm-multitape-to-single-tape-time-simulation]]. This is an upper bound for a
-simulation construction, not a quadratic lower bound.
+[L1] Every multitape time-$T$ computation on inputs of length $n$ has a single-tape simulation in $O((n+T(n))^2)$ time, by [[thm-multitape-to-single-tape-time-simulation]]. This is an upper bound for a simulation construction, not a quadratic lower bound.
 
-[L2] A deterministic one-tape machine is the $k=1$ case of the deterministic
-multitape model ([[def-multitape-and-nondeterministic-machines]]).
+[L2] A deterministic one-tape machine is the $k=1$ case of the deterministic multitape model ([[def-multitape-and-nondeterministic-machines]]).
 
 ## Counterexample
 

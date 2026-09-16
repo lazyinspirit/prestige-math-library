@@ -46,22 +46,17 @@ structures.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, and
-$g\in G$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, and $g\in G$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Left and right translations are $L_g(h)=gh$ and $R_g(h)=hg$, and both
-are smooth. [[def-left-and-right-translations-on-a-lie-group]].
+[F2] Left and right translations are $L_g(h)=gh$ and $R_g(h)=hg$, and both are smooth. [[def-left-and-right-translations-on-a-lie-group]].
 
-[F3] Assuming $\mathrm{AC}_\omega$, the global differential of a smooth map
-is smooth between the canonical smooth tangent bundles. [[thm-the-global-differential-of-a-smooth-map-is-smooth]].
+[F3] Assuming $\mathrm{AC}_\omega$, the global differential of a smooth map is smooth between the canonical smooth tangent bundles. [[thm-the-global-differential-of-a-smooth-map-is-smooth]].
 
-[F4] The differential of a diffeomorphism is a linear isomorphism on every
-tangent space. [[cor-the-differential-of-a-diffeomorphism-is-an-isomorphism]].
+[F4] The differential of a diffeomorphism is a linear isomorphism on every tangent space. [[cor-the-differential-of-a-diffeomorphism-is-an-isomorphism]].
 
-[F5] A fibrewise bijective smooth bundle map over a diffeomorphism is a
-vector-bundle isomorphism. [[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]].
+[F5] A fibrewise bijective smooth bundle map over a diffeomorphism is a vector-bundle isomorphism. [[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]].
 
 ## Proof
 

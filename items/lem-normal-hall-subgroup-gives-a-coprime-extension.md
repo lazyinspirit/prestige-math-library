@@ -34,11 +34,9 @@ is a group extension with $\gcd(|N|,|G/N|)=1$.
 
 [L1] A Hall $\pi$-subgroup has order coprime to its index ([[def-hall-pi-subgroup]]).
 
-[L2] For a finite group, the order of a quotient is the index of the kernel
-([[cor-order-of-a-quotient-group]]).
+[L2] For a finite group, the order of a quotient is the index of the kernel ([[cor-order-of-a-quotient-group]]).
 
-[L3] For a finite group and a subgroup, the group order is subgroup order times
-index ([[thm-lagrange]]).
+[L3] For a finite group and a subgroup, the group order is subgroup order times index ([[thm-lagrange]]).
 
 ## Proof
 

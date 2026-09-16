@@ -69,16 +69,6 @@ $\mathbb{Q}\llbracket x\rrbracket$.
 
 ## Remarks
 
-- **What makes this a different route and not a rearrangement.** The two earlier
-  derivations count a set twice: once directly and once after a reflection or after
-  a group action. This one never counts anything. It turns the recurrence into an
-  algebraic equation, solves that equation inside
-  $\mathbb{Q}\llbracket x\rrbracket$, and reads a single coefficient off the
-  solution. The only combinatorial input is the recurrence itself.
+- **What makes this a different route and not a rearrangement.** The two earlier derivations count a set twice: once directly and once after a reflection or after a group action. This one never counts anything. It turns the recurrence into an algebraic equation, solves that equation inside $\mathbb{Q}\llbracket x\rrbracket$, and reads a single coefficient off the solution. The only combinatorial input is the recurrence itself.
 
-- **Where the three derivations meet.** All three end at the same identity in
-  $\mathbb{N}$, and the cycle-lemma derivation ends at
-  $(2n+1)C_n=\binom{2n+1}{n}$, whose consistency with this one is proved where it
-  is stated. Agreement of the answers is not evidence that the routes are the
-  same; each spends a different hypothesis, and the remark on routes at the end of
-  this page records which.
+- **Where the three derivations meet.** All three end at the same identity in $\mathbb{N}$, and the cycle-lemma derivation ends at $(2n+1)C_n=\binom{2n+1}{n}$, whose consistency with this one is proved where it is stated. Agreement of the answers is not evidence that the routes are the same; each spends a different hypothesis, and the remark on routes at the end of this page records which.

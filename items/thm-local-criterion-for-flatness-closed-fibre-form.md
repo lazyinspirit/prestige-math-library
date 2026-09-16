@@ -41,14 +41,9 @@ Then $M$ is flat over $R$.
 
 ## Facts & Assumptions
 
-**Given:** A local map of Noetherian local rings $R\to S$ with maximal ideal
-$\mathfrak m$, and a finite $S$-module $M$ that is finitely generated as an
-$R$-module and satisfies the two hypotheses.
+**Given:** A local map of Noetherian local rings $R\to S$ with maximal ideal $\mathfrak m$, and a finite $S$-module $M$ that is finitely generated as an $R$-module and satisfies the two hypotheses.
 
-[L1] The ideal-form local criterion applies once one knows that $M/\mathfrak mM$
-is flat over $R/\mathfrak m$ and that
-$$ \mathfrak m\otimes_R M\to M $$
-is injective ([[thm-local-criterion-for-flatness-ideal-form]]).
+[L1] The ideal-form local criterion applies once one knows that $M/\mathfrak mM$ is flat over $R/\mathfrak m$ and that $$ \mathfrak m\otimes_R M\to M $$ is injective ([[thm-local-criterion-for-flatness-ideal-form]]).
 
 ## Proof
 

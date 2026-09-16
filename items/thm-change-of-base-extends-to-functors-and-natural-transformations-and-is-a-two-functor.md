@@ -37,16 +37,11 @@ $F_*:\mathcal V\text{-}\mathbf{Cat}\to\mathcal W\text{-}\mathbf{Cat}$.
 
 **Given:** Locally small monoidal categories $\mathcal V,\mathcal W$ and a lax monoidal functor $F:\mathcal V\to\mathcal W$.
 
-[L1] Change of base sends each $\mathcal V$-category $\mathcal A$ to the
-$\mathcal W$-category $F_*\mathcal A$ with the same objects and hom-objects
-obtained by applying $F$ ([[thm-a-lax-monoidal-functor-induces-a-change-of-base-on-enriched-categories]]).
+[L1] Change of base sends each $\mathcal V$-category $\mathcal A$ to the $\mathcal W$-category $F_*\mathcal A$ with the same objects and hom-objects obtained by applying $F$ ([[thm-a-lax-monoidal-functor-induces-a-change-of-base-on-enriched-categories]]).
 
-[L2] An enriched functor is a hom-object map compatible with enriched
-composition and identities ([[def-enriched-functor]]).
+[L2] An enriched functor is a hom-object map compatible with enriched composition and identities ([[def-enriched-functor]]).
 
-[L3] An enriched natural transformation is a family of unit-to-hom morphisms
-satisfying the enriched naturality law
-([[def-enriched-natural-transformation]]).
+[L3] An enriched natural transformation is a family of unit-to-hom morphisms satisfying the enriched naturality law ([[def-enriched-natural-transformation]]).
 
 ## Proof
 

@@ -36,8 +36,7 @@ $x \mapsto \sum_{q_n \le x}2^{-n}$.
 
 ## Facts & Assumptions
 
-**Given:** An enumeration $(q_n)$ without repetitions of
-$\mathbb{Q} \cap (0,1]$ and the function $F:[0,1]\to\mathbb R$ above.
+**Given:** An enumeration $(q_n)$ without repetitions of $\mathbb{Q} \cap (0,1]$ and the function $F:[0,1]\to\mathbb R$ above.
 
 [A1] The symbols are those of the statement.
 

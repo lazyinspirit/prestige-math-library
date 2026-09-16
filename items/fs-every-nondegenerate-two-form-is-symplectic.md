@@ -31,8 +31,7 @@ Every nondegenerate two-form is symplectic.
 
 **Given:** The proposed universal claim.
 
-[F1] A symplectic form must be both nondegenerate and closed.
-[[def-symplectic-form-and-symplectic-manifold]].
+[F1] A symplectic form must be both nondegenerate and closed. [[def-symplectic-form-and-symplectic-manifold]].
 
 ## Refutation
 

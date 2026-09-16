@@ -37,12 +37,9 @@ $\{(1,g):g\in G\}$.
 
 **Given:** An action of $G$ on a group $M$.
 
-[L1] A graph subset is a complement exactly when its defining map is a crossed
-homomorphism ([[lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism]]).
+[L1] A graph subset is a complement exactly when its defining map is a crossed homomorphism ([[lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism]]).
 
-[L2] Nonabelian first cohomology is the orbit set of crossed homomorphisms
-under the action $(a*z)(g)=a z(g)(g\cdot a)^{-1}$
-([[def-first-nonabelian-cohomology-as-a-pointed-set]]).
+[L2] Nonabelian first cohomology is the orbit set of crossed homomorphisms under the action $(a*z)(g)=a z(g)(g\cdot a)^{-1}$ ([[def-first-nonabelian-cohomology-as-a-pointed-set]]).
 
 ## Proof
 

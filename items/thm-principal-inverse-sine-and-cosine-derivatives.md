@@ -33,29 +33,17 @@ $$(\arcsin y)'=\frac{1}{\sqrt{1-y^2}},\qquad(\arccos y)'=-\frac{1}{\sqrt{1-y^2}}
 
 **Given:** A real number $y$ with $-1<y<1$.
 
-[L1] Principal inverse sine and cosine are the inverses of the indicated restricted functions
-([[def-principal-inverse-sine-and-cosine]]).
+[L1] Principal inverse sine and cosine are the inverses of the indicated restricted functions ([[def-principal-inverse-sine-and-cosine]]).
 
-[L2] Sine and cosine are differentiable, hence continuous, with derivatives
-$\cos$ and $-\sin$ ([[thm-sine-and-cosine-derivatives]],
-[[cor-differentiable-implies-continuous]]).
+[L2] Sine and cosine are differentiable, hence continuous, with derivatives $\cos$ and $-\sin$ ([[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]]).
 
-[L3] Sine is strictly increasing on $[-\pi/2,\pi/2]$ and strictly decreasing
-on $[\pi/2,3\pi/2]$, while cosine is strictly decreasing on $[0,\pi]$;
-the special values are $\sin0=\sin\pi=0$ and $\cos(\pi/2)=0$, and cosine is
-even ([[thm-sine-cosine-signs-monotonicity-and-ranges]],
-[[thm-quarter-turn-values-and-shift-formulas]],
-[[cor-trigonometric-parity-and-pythagorean-identity]]).
+[L3] Sine is strictly increasing on $[-\pi/2,\pi/2]$ and strictly decreasing on $[\pi/2,3\pi/2]$, while cosine is strictly decreasing on $[0,\pi]$; the special values are $\sin0=\sin\pi=0$ and $\cos(\pi/2)=0$, and cosine is even ([[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-quarter-turn-values-and-shift-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]]).
 
-[L4] $\sin^2t+\cos^2t=1$ for every $t$
-([[cor-trigonometric-parity-and-pythagorean-identity]]).
+[L4] $\sin^2t+\cos^2t=1$ for every $t$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
 
-[L5] Every nonnegative real has a unique nonnegative square root
-([[thm-of-square-roots]]).
+[L5] Every nonnegative real has a unique nonnegative square root ([[thm-of-square-roots]]).
 
-[L6] The inverse of a continuous injective function on a nondegenerate interval has derivative
-the reciprocal of the original derivative wherever that derivative is nonzero
-([[thm-derivative-of-an-inverse]]).
+[L6] The inverse of a continuous injective function on a nondegenerate interval has derivative the reciprocal of the original derivative wherever that derivative is nonzero ([[thm-derivative-of-an-inverse]]).
 
 ## Proof
 

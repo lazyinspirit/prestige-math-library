@@ -39,12 +39,9 @@ If $\lambda=0$ or $\lambda=n$, this local level set is just the point $p$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $f:M\to\mathbb R$ and a nondegenerate critical
-point $p$ of index $\lambda$.
+**Given:** A smooth function $f:M\to\mathbb R$ and a nondegenerate critical point $p$ of index $\lambda$.
 
-[L1] In Morse coordinates,
-$$f-f(p)=-\sum_{i=1}^{\lambda}(x^i)^2+\sum_{i=\lambda+1}^{n}(x^i)^2.$$
-([[thm-morse-lemma]])
+[L1] In Morse coordinates, $$f-f(p)=-\sum_{i=1}^{\lambda}(x^i)^2+\sum_{i=\lambda+1}^{n}(x^i)^2.$$ ([[thm-morse-lemma]])
 
 ## Proof
 

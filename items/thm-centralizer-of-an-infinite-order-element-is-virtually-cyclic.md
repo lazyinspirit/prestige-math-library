@@ -36,15 +36,11 @@ contains a cyclic subgroup of finite index.
 
 **Given:** A hyperbolic group $G$ and an infinite-order element $g \in G$.
 
-[A1] There is $L\ge0$ such that every geodesic segment from $1$ to $g^n$
-lies in the $L$-neighborhood of the powers of $g$.
+[A1] There is $L\ge0$ such that every geodesic segment from $1$ to $g^n$ lies in the $L$-neighborhood of the powers of $g$.
 
-[A2] A geodesic quadrilateral in a $\delta$-hyperbolic Cayley graph is
-$2\delta$-thin, and every metric ball in a locally finite Cayley graph is
-finite.
+[A2] A geodesic quadrilateral in a $\delta$-hyperbolic Cayley graph is $2\delta$-thin, and every metric ball in a locally finite Cayley graph is finite.
 
-[L1] Infinite-order elements are undistorted
-([[thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted]]).
+[L1] Infinite-order elements are undistorted ([[thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted]]).
 
 ## Proof
 

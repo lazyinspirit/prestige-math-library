@@ -38,30 +38,19 @@ $a\mapsto\pi^*a\smile u_\xi$ for the normalized Thom class.
 
 **Given:** AC and the numerable oriented bundle.
 
-[F0] [[thm-numerable-vector-bundles-admit-bundle-metrics]] supplies a metric
-under AC.
+[F0] [[thm-numerable-vector-bundles-admit-bundle-metrics]] supplies a metric under AC.
 
-[F1] [[thm-numerable-fiber-bundles-are-hurewicz-fibrations]] makes the disk
-and sphere bundles fibrations to which the Serre skeletal construction applies.
+[F1] [[thm-numerable-fiber-bundles-are-hurewicz-fibrations]] makes the disk and sphere bundles fibrations to which the Serre skeletal construction applies.
 
-[F2] [[thm-cohomological-serre-spectral-sequence]] gives the absolute
-skeletal cochain construction, local-coefficient $E_2$ identification, and
-strong convergence; [[thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence]]
-identifies its products.
+[F2] [[thm-cohomological-serre-spectral-sequence]] gives the absolute skeletal cochain construction, local-coefficient $E_2$ identification, and strong convergence; [[thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence]] identifies its products.
 
-[F3] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] and
-[[def-r-oriented-vector-bundle-and-orientation-local-system]] calculate the
-relative fiber row and identify its monodromy with the orientation system.
+[F3] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] and [[def-r-oriented-vector-bundle-and-orientation-local-system]] calculate the relative fiber row and identify its monodromy with the orientation system.
 
-[F4] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]
-identifies the relative filtered product and its edge action.
+[F4] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] identifies the relative filtered product and its edge action.
 
 [F5] [[def-thom-class-by-fiberwise-normalization]] defines normalization.
 
-[F6] [[def-pullback-vector-bundle-and-pullback-section]],
-[[prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]], and
-[[thm-homotopy-invariance-of-vector-bundle-pullback]] transport bundles and
-their disk/sphere pairs along homotopy equivalences.
+[F6] [[def-pullback-vector-bundle-and-pullback-section]], [[prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]], and [[thm-homotopy-invariance-of-vector-bundle-pullback]] transport bundles and their disk/sphere pairs along homotopy equivalences.
 
 [A1] [[def-axiom-of-choice]] is used in [F2] and [F6].
 

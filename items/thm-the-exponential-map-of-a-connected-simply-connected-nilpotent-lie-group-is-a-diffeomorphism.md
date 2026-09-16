@@ -38,17 +38,13 @@ bracket lengths.
 
 [A1] Countable choice is [[def-countable-choice]].
 
-[L1] Nilpotence means sufficiently long iterated brackets vanish
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] Nilpotence means sufficiently long iterated brackets vanish ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] Locally, exponential coordinates multiply by the BCH series; its
-published proof assumes [A1] ([[thm-baker-campbell-hausdorff]]).
+[L2] Locally, exponential coordinates multiply by the BCH series; its published proof assumes [A1] ([[thm-baker-campbell-hausdorff]]).
 
-[L3] Lie II integrates maps from connected simply connected groups uniquely
-([[thm-lie-second-fundamental-theorem]]).
+[L3] Lie II integrates maps from connected simply connected groups uniquely ([[thm-lie-second-fundamental-theorem]]).
 
-[L4] The exponential is defined through one-parameter subgroups under [A1]
-([[def-exponential-map-of-a-lie-group]]).
+[L4] The exponential is defined through one-parameter subgroups under [A1] ([[def-exponential-map-of-a-lie-group]]).
 
 ## Proof
 

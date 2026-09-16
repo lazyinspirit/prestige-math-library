@@ -87,15 +87,6 @@ $1/\alpha$, and $d$ is unbounded on the real line.
 
 ## Remarks
 
-- **Only the lower Lipschitz bound fails.** The upper one holds with $\beta = 1$,
-  since $\rho \le d$ always; it is the requirement that $\rho$ dominate a
-  positive multiple of $d$ that a bounded metric can never meet against an
-  unbounded one.
-- **The same pair also shows boundedness is not topological**
-  ([[fs-boundedness-is-a-topological-property]],
-  [[cex-boundedness-is-not-topological]]), which is no accident: Lipschitz
-  equivalence is exactly the level of the hierarchy that preserves boundedness,
-  and this is the pair that sits just below it.
-- **Every metric space furnishes such a pair unless it is already bounded**, by
-  [[lem-bounded-remetrisation]]; the real line is chosen only because its
-  unboundedness is already recorded ([[lem-real-line-is-a-metric-space]]).
+- **Only the lower Lipschitz bound fails.** The upper one holds with $\beta = 1$, since $\rho \le d$ always; it is the requirement that $\rho$ dominate a positive multiple of $d$ that a bounded metric can never meet against an unbounded one.
+- **The same pair also shows boundedness is not topological** ([[fs-boundedness-is-a-topological-property]], [[cex-boundedness-is-not-topological]]), which is no accident: Lipschitz equivalence is exactly the level of the hierarchy that preserves boundedness, and this is the pair that sits just below it.
+- **Every metric space furnishes such a pair unless it is already bounded**, by [[lem-bounded-remetrisation]]; the real line is chosen only because its unboundedness is already recorded ([[lem-real-line-is-a-metric-space]]).

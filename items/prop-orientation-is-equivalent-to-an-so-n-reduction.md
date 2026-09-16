@@ -37,9 +37,7 @@ Orientation-preserving isometries preserve these reductions.
 
 **Given:** A rank-$n$ real bundle $\xi\to X$ with a bundle metric.
 
-[F1] Orientations, positive frames, principal frame bundles, and reductions of
-structure group have the conventions of
-[[def-oriented-real-vector-bundle-and-oriented-frame-bundle]].
+[F1] Orientations, positive frames, principal frame bundles, and reductions of structure group have the conventions of [[def-oriented-real-vector-bundle-and-oriented-frame-bundle]].
 
 ## Proof
 

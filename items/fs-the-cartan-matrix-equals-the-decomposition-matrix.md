@@ -34,8 +34,7 @@ matrix.
 
 **Given:** The decomposition matrix $D$ and the Cartan matrix $C$.
 
-[L1] The Cartan matrix satisfies $C=D^{\mathsf T}D$
-([[thm-cartan-matrix-is-d-transpose-d]]).
+[L1] The Cartan matrix satisfies $C=D^{\mathsf T}D$ ([[thm-cartan-matrix-is-d-transpose-d]]).
 
 ## Refutation
 

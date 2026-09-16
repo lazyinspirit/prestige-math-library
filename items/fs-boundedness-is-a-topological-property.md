@@ -72,16 +72,6 @@ as soon as one unbounded metric space exists the claim collapses.
 
 ## Remarks
 
-- **What is true instead.** Boundedness is preserved by Lipschitz equivalence,
-  since $d' \le \beta d$ turns a ball for $d$ into a ball for $d'$
-  ([[def-equivalent-metrics]]). It is the two weaker equivalences that lose it,
-  and the witness above sits precisely in the gap between Lipschitz equivalence
-  and uniform equivalence ([[thm-metric-equivalence-hierarchy]]).
-- **The diameter is even less topological than boundedness.** Rescaling a metric
-  by a positive constant is a Lipschitz equivalence and multiplies every
-  diameter by that constant, so no numerical value of the diameter is determined
-  even by the Lipschitz class.
-- **This is why "bounded" is never used as a topological adjective in this
-  library.** The bounded subsets of $(X,d)$ are defined from $d$
-  ([[def-metric-bounded-diameter]]), and every statement about them names the
-  metric.
+- **What is true instead.** Boundedness is preserved by Lipschitz equivalence, since $d' \le \beta d$ turns a ball for $d$ into a ball for $d'$ ([[def-equivalent-metrics]]). It is the two weaker equivalences that lose it, and the witness above sits precisely in the gap between Lipschitz equivalence and uniform equivalence ([[thm-metric-equivalence-hierarchy]]).
+- **The diameter is even less topological than boundedness.** Rescaling a metric by a positive constant is a Lipschitz equivalence and multiplies every diameter by that constant, so no numerical value of the diameter is determined even by the Lipschitz class.
+- **This is why "bounded" is never used as a topological adjective in this library.** The bounded subsets of $(X,d)$ are defined from $d$ ([[def-metric-bounded-diameter]]), and every statement about them names the metric.

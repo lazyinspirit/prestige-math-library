@@ -33,9 +33,7 @@ algebra has class zero under the library convention.
 
 **Given:** An abelian Lie algebra $\mathfrak a$ over a field $k$.
 
-[L1] Nilpotency class is the least $c\geq0$ for which
-$\gamma_{c+1}=0$, with the zero algebra assigned class zero
-([[def-nilpotency-class-of-a-lie-algebra]]).
+[L1] Nilpotency class is the least $c\geq0$ for which $\gamma_{c+1}=0$, with the zero algebra assigned class zero ([[def-nilpotency-class-of-a-lie-algebra]]).
 
 ## Verification
 

@@ -46,15 +46,11 @@ complex linear functional is uniquely determined by its real part.
 
 ## Facts & Assumptions
 
-**Given:** A complex vector space $X$, a complex linear functional
-$f:X \to \mathbb{C}$, and a real linear functional $u$ on the underlying real
-vector space.
+**Given:** A complex vector space $X$, a complex linear functional $f:X \to \mathbb{C}$, and a real linear functional $u$ on the underlying real vector space.
 
-[L1] A linear functional is additive and homogeneous over the relevant scalar
-field ([[def-algebraic-dual-and-linear-functional]]).
+[L1] A linear functional is additive and homogeneous over the relevant scalar field ([[def-algebraic-dual-and-linear-functional]]).
 
-[L2] On this page, complex vector-space language is read by the scalar
-convention recorded in [[rem-real-and-complex-normed-space-convention]].
+[L2] On this page, complex vector-space language is read by the scalar convention recorded in [[rem-real-and-complex-normed-space-convention]].
 
 ## Proof
 

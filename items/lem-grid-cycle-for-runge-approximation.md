@@ -46,20 +46,13 @@ Then there is a complex chain $\Gamma$ with polygonal trace such that
 
 **Given:** A compact set $K$ contained in an open set $U\subseteq\mathbb C$.
 
-[L1] A compact subset of an open Euclidean set has a compact Jordan
-neighbourhood inside that open set, and it may be taken to be a finite union of
-closed grid rectangles
-([[lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set]]).
+[L1] A compact subset of an open Euclidean set has a compact Jordan neighbourhood inside that open set, and it may be taken to be a finite union of closed grid rectangles ([[lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set]]).
 
-[L2] The winding number of a closed contour is its continuous-argument
-increment divided by $2\pi$
-([[cor-winding-number-is-the-normalized-argument-increment]]).
+[L2] The winding number of a closed contour is its continuous-argument increment divided by $2\pi$ ([[cor-winding-number-is-the-normalized-argument-increment]]).
 
-[L3] Chain integrals and indices are additive, and reversing an oriented edge
-negates its contribution ([[thm-winding-number-chain-laws]]).
+[L3] Chain integrals and indices are additive, and reversing an oriented edge negates its contribution ([[thm-winding-number-chain-laws]]).
 
-[L4] The index of a cycle is locally constant off its trace
-([[cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace]]).
+[L4] The index of a cycle is locally constant off its trace ([[cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace]]).
 
 ## Proof
 

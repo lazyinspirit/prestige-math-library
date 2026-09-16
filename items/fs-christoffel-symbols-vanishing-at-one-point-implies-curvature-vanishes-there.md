@@ -43,38 +43,15 @@ coordinate curvature formula retains first derivatives of those symbols.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures]] and [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Under countable choice, a supplied ordered orthonormal tangent basis gives
-normal coordinates, and at their centre $p$ one has
-$\partial_i|_p=e_i$, $g_{ij}(p)=\delta_{ij}$, and
-$\Gamma^k{}_{ij}(p)=0$.
-[[def-countable-choice]],
-[[thm-existence-of-normal-neighborhoods]],
-[[def-normal-neighborhood-and-normal-coordinate-chart]],
-[[prop-properties-of-normal-coordinates-at-the-center]].
+[F1] Under countable choice, a supplied ordered orthonormal tangent basis gives normal coordinates, and at their centre $p$ one has $\partial_i|_p=e_i$, $g_{ij}(p)=\delta_{ij}$, and $\Gamma^k{}_{ij}(p)=0$. [[def-countable-choice]], [[thm-existence-of-normal-neighborhoods]], [[def-normal-neighborhood-and-normal-coordinate-chart]], [[prop-properties-of-normal-coordinates-at-the-center]].
 
-[F2] In the convention
-$R(\partial_i,\partial_j)\partial_k=R^\ell{}_{kij}\partial_\ell$,
-the coordinate curvature formula is
-$$R^\ell{}_{kij}=\partial_i\Gamma^\ell{}_{jk}-\partial_j\Gamma^\ell{}_{ik}+\Gamma^m{}_{jk}\Gamma^\ell{}_{im}-\Gamma^m{}_{ik}\Gamma^\ell{}_{jm}.$$
-[[prop-coordinate-formula-for-the-curvature-tensor]].
+[F2] In the convention $R(\partial_i,\partial_j)\partial_k=R^\ell{}_{kij}\partial_\ell$, the coordinate curvature formula is $$R^\ell{}_{kij}=\partial_i\Gamma^\ell{}_{jk}-\partial_j\Gamma^\ell{}_{ik}+\Gamma^m{}_{jk}\Gamma^\ell{}_{im}-\Gamma^m{}_{ik}\Gamma^\ell{}_{jm}.$$ [[prop-coordinate-formula-for-the-curvature-tensor]].
 
-[F3] A nonempty regular level set is an embedded submanifold, and its tangent
-space is the kernel of the defining differential.
-[[thm-a-regular-level-set-is-an-embedded-submanifold]],
-[[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
+[F3] A nonempty regular level set is an embedded submanifold, and its tangent space is the kernel of the defining differential. [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
-[F4] For a Euclidean hypersurface, the shape operator is
-$S_\nu X=-(\overline\nabla_X\nu)^\top$; its eigenvectors are principal
-directions; and the sectional curvature of the plane spanned by supplied
-orthonormal principal directions is the product of their principal
-curvatures.
-[[def-shape-operator]],
-[[def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface]],
-[[prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures]].
+[F4] For a Euclidean hypersurface, the shape operator is $S_\nu X=-(\overline\nabla_X\nu)^\top$; its eigenvectors are principal directions; and the sectional curvature of the plane spanned by supplied orthonormal principal directions is the product of their principal curvatures. [[def-shape-operator]], [[def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface]], [[prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures]].
 
-[F5] For an orthonormal pair $(X,Y)$,
-$K(\operatorname{span}\{X,Y\})=\operatorname{Rm}(X,Y,Y,X)$.
-[[def-sectional-curvature]].
+[F5] For an orthonormal pair $(X,Y)$, $K(\operatorname{span}\{X,Y\})=\operatorname{Rm}(X,Y,Y,X)$. [[def-sectional-curvature]].
 
 ## Refutation
 

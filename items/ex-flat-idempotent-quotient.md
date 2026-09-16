@@ -35,8 +35,7 @@ is a flat $R$-module.
 
 **Given:** A product ring $R=A\times B$ and the ideal $I=A\times0$.
 
-[L1] Quotients by idempotent-generated ideals are flat
-([[cor-flat-quotients-and-idempotent-ideals]]).
+[L1] Quotients by idempotent-generated ideals are flat ([[cor-flat-quotients-and-idempotent-ideals]]).
 
 ## Verification
 

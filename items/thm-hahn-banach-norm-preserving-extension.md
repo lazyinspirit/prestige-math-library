@@ -37,21 +37,15 @@ $\|F\|=\|f_0\|$.
 
 ## Facts & Assumptions
 
-**Given:** A real normed space $X$, a linear subspace $M \subseteq X$, and a
-bounded real linear functional $f_0:M \to \mathbb{R}$.
+**Given:** A real normed space $X$, a linear subspace $M \subseteq X$, and a bounded real linear functional $f_0:M \to \mathbb{R}$.
 
-[L1] A dominated real linear functional extends to the whole real vector space
-([[thm-hahn-banach-dominated-extension]]).
+[L1] A dominated real linear functional extends to the whole real vector space ([[thm-hahn-banach-dominated-extension]]).
 
-[L2] A bounded linear operator has some constant $C \ge 0$ with
-$\|Tx\| \le C\|x\|$ for every $x$ ([[def-bounded-linear-operator]]).
+[L2] A bounded linear operator has some constant $C \ge 0$ with $\|Tx\| \le C\|x\|$ for every $x$ ([[def-bounded-linear-operator]]).
 
-[L3] The operator norm is the least such bound:
-$$\|T\|=\inf\{C \ge 0:\|Tx\| \le C\|x\| \text{ for all } x\}$$
-([[def-operator-norm]]).
+[L3] The operator norm is the least such bound: $$\|T\|=\inf\{C \ge 0:\|Tx\| \le C\|x\| \text{ for all } x\}$$ ([[def-operator-norm]]).
 
-[L4] A normed subspace carries the restricted norm from the ambient space
-([[def-normed-subspace]]).
+[L4] A normed subspace carries the restricted norm from the ambient space ([[def-normed-subspace]]).
 
 ## Proof
 

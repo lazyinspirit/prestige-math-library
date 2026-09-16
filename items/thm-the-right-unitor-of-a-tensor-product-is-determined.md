@@ -38,8 +38,7 @@ for all objects $X,Y$.
 
 [L1] The monoidal-category axioms are the pentagon and triangle from [[def-monoidal-category]].
 
-[F1] Proposition 2.2.4 of EGNO proves that, under those axioms and with the same associator orientation as this page, the right unitor satisfies
-$$\rho_{X\otimes Y}\circ\alpha_{X,Y,\mathbf 1}=1_X\otimes\rho_Y.$$
+[F1] Proposition 2.2.4 of EGNO proves that, under those axioms and with the same associator orientation as this page, the right unitor satisfies $$\rho_{X\otimes Y}\circ\alpha_{X,Y,\mathbf 1}=1_X\otimes\rho_Y.$$
 
 ## Proof
 

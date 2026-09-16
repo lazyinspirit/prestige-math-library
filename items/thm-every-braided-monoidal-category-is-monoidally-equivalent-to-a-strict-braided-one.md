@@ -42,9 +42,7 @@ braided monoidal functor.
 
 [L3] A braided monoidal functor is a strong monoidal functor whose tensor constraint intertwines the two braidings ([[def-braided-monoidal-functor]]).
 
-[F1] The braided strictification theorem in the cited monoidal-category source
-states that Mac Lane's strictification carries a unique transported braiding
-for which the strictification equivalence is braided monoidal.
+[F1] The braided strictification theorem in the cited monoidal-category source states that Mac Lane's strictification carries a unique transported braiding for which the strictification equivalence is braided monoidal.
 
 ## Proof
 

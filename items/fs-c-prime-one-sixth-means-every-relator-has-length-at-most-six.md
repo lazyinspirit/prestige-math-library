@@ -36,12 +36,9 @@ $6$.
 
 ## Facts & Assumptions
 
-**Given:** The one-relator presentation $\langle x_1,\dots,x_7 \mid
-x_1x_2x_3x_4x_5x_6x_7\rangle$.
+**Given:** The one-relator presentation $\langle x_1,\dots,x_7 \mid x_1x_2x_3x_4x_5x_6x_7\rangle$.
 
-[L1] $C'(1/6)$ bounds the length of pieces as a fraction of the relator length,
-not the relator length itself
-([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
+[L1] $C'(1/6)$ bounds the length of pieces as a fraction of the relator length, not the relator length itself ([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
 
 ## Refutation
 

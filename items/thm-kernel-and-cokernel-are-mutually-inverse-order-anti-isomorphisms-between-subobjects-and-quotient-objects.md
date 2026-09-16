@@ -35,18 +35,11 @@ the quotient objects of $A$.
 
 **Given:** An object $A$ in an abelian category.
 
-[L1] Subobjects and quotient objects are mutual-factorization classes with the
-opposite order conventions
-([[def-subobject-and-quotient-object]],
-[[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
+[L1] Subobjects and quotient objects are mutual-factorization classes with the opposite order conventions ([[def-subobject-and-quotient-object]], [[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
 
-[L2] Mutual factorization is the correct representative-independent equality
-relation on subobjects and quotient objects
-([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
+[L2] Mutual factorization is the correct representative-independent equality relation on subobjects and quotient objects ([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
 
-[L3] Every monomorphism is the kernel of its cokernel, and dually every
-epimorphism is the cokernel of its kernel
-([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+[L3] Every monomorphism is the kernel of its cokernel, and dually every epimorphism is the cokernel of its kernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
 
 ## Proof
 

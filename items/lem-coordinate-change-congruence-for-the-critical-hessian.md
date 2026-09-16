@@ -38,12 +38,9 @@ In particular the two Hessian matrices are congruent.
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $f:M\to\mathbb R$, a critical point $p$, and two
-charts $x$ and $y$ around $p$.
+**Given:** A smooth function $f:M\to\mathbb R$, a critical point $p$, and two charts $x$ and $y$ around $p$.
 
-[F1] The critical-point Hessian is defined from the second partial derivatives
-of a coordinate representative at the critical point
-([[def-hessian-of-a-function-at-a-critical-point]]).
+[F1] The critical-point Hessian is defined from the second partial derivatives of a coordinate representative at the critical point ([[def-hessian-of-a-function-at-a-critical-point]]).
 
 ## Proof
 

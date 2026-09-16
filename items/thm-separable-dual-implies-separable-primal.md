@@ -33,28 +33,15 @@ normed space $X$ is norm separable, then $X$ is norm separable.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, HB, a real or complex normed space $X$, and
-the hypothesis that $X^*$ is separable in its norm topology.
+**Given:** $\mathrm{AC}_\omega$, HB, a real or complex normed space $X$, and the hypothesis that $X^*$ is separable in its norm topology.
 
-[F1] Separability means that an at most countable dense subset exists, and a
-nonempty at most countable set is the image of a sequence
-([[def-separable-space]], [[lem-countable-iff-surjection-from-n]]).
+[F1] Separability means that an at most countable dense subset exists, and a nonempty at most countable set is the image of a sequence ([[def-separable-space]], [[lem-countable-iff-surjection-from-n]]).
 
-[F2] The dual norm is
-$\|f\|=\sup_{\|x\|\le1}|f(x)|$
-([[def-dual-space-of-a-normed-space]]).
+[F2] The dual norm is $\|f\|=\sup_{\|x\|\le1}|f(x)|$ ([[def-dual-space-of-a-normed-space]]).
 
-[F3] Under HB, a point outside a nonempty closed convex set can be uniformly
-strictly separated from it by a nonzero continuous scalar-linear functional
-([[thm-relative-hahn-banach-geometric-separation]],
-[[def-hahn-banach-extension-principle-relative]]).
+[F3] Under HB, a point outside a nonempty closed convex set can be uniformly strictly separated from it by a nonzero continuous scalar-linear functional ([[thm-relative-hahn-banach-geometric-separation]], [[def-hahn-banach-extension-principle-relative]]).
 
-[F4] The rationals are countable and dense in the reals.  Products of two
-at most countable sets are at most countable, and under
-$\mathrm{AC}_\omega$ a countable union of at most countable sets is at most
-countable ([[thm-rationals-countable]], [[lem-rat-embeds-dense]],
-[[thm-product-of-countable]], [[thm-countable-union-of-countable]],
-[[def-countable-choice]]).
+[F4] The rationals are countable and dense in the reals.  Products of two at most countable sets are at most countable, and under $\mathrm{AC}_\omega$ a countable union of at most countable sets is at most countable ([[thm-rationals-countable]], [[lem-rat-embeds-dense]], [[thm-product-of-countable]], [[thm-countable-union-of-countable]], [[def-countable-choice]]).
 
 ## Proof
 
@@ -76,7 +63,4 @@ countable ([[thm-rationals-countable]], [[lem-rat-embeds-dense]],
 
 ## Source notes
 
-Brezis proves the real Banach-space case by the same almost-norming sequence
-and annihilator argument.  The proof above observes that completeness is not
-used, handles $X=\{0\}$, makes the countability and choice steps explicit, and
-uses Gaussian-rational coefficients to cover complex normed spaces.
+Brezis proves the real Banach-space case by the same almost-norming sequence and annihilator argument.  The proof above observes that completeness is not used, handles $X=\{0\}$, makes the countability and choice steps explicit, and uses Gaussian-rational coefficients to cover complex normed spaces.

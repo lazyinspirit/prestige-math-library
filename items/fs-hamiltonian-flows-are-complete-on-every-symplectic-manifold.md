@@ -31,11 +31,9 @@ All Hamiltonian flows are complete.
 
 **Given:** The proposed universal claim.
 
-[F1] Preservation of $\omega$ is asserted only wherever the local Hamiltonian
-flow exists. [[thm-hamiltonian-flows-preserve-the-symplectic-form]].
+[F1] Preservation of $\omega$ is asserted only wherever the local Hamiltonian flow exists. [[thm-hamiltonian-flows-preserve-the-symplectic-form]].
 
-[F2] The convention $\iota_{X_H}\omega=dH$ defines the Hamiltonian field.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F2] The convention $\iota_{X_H}\omega=dH$ defines the Hamiltonian field. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Refutation
 

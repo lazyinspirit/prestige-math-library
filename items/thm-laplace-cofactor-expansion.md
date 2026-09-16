@@ -38,17 +38,11 @@ $$\det(A)=\sum_{k=0}^{n-1}a_{ik}C_{ik}(A) \quad\text{and}\quad \det(A)=\sum_{k=0
 
 **Given:** $R,n,A,i,j$ as in the statement.
 
-[F1] $C_{ik}(A)=(-1)^{i+k}\det(A^{(i,k)})$, with the determinant of the
-$0\times0$ minor defined to be $1$
-([[def-matrix-minors-cofactors-and-adjugate]]).
+[F1] $C_{ik}(A)=(-1)^{i+k}\det(A^{(i,k)})$, with the determinant of the $0\times0$ minor defined to be $1$ ([[def-matrix-minors-cofactors-and-adjugate]]).
 
-[L1] For $n\geq1$, the determinant is the Leibniz sum over permutations
-([[def-determinant-of-a-square-matrix]]), and it is alternating,
-column-multilinear, and normalized
-([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
+[L1] For $n\geq1$, the determinant is the Leibniz sum over permutations ([[def-determinant-of-a-square-matrix]]), and it is alternating, column-multilinear, and normalized ([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
 
-[L2] $\det(A^{\mathsf T})=\det(A)$
-([[thm-determinant-of-transpose]]).
+[L2] $\det(A^{\mathsf T})=\det(A)$ ([[thm-determinant-of-transpose]]).
 
 ## Proof
 

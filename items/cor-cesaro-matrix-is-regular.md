@@ -88,21 +88,8 @@ characterisation rather than from a direct estimate.
 
 ## Remarks
 
-- **Which condition is doing what.** For the Cesaro matrix the row sums and the
-  row absolute sums are not merely convergent and bounded, they are constantly
-  $1$; the whole content is that the columns are null, that is, that each single
-  term contributes a weight $1/(n+1)$ which fades away. That is the precise
-  sense in which averaging forgets any finite head, and it is why
-  [[fs-cesaro-converse]] is false: forgetting the head is not the same as
-  recovering the sequence.
+- **Which condition is doing what.** For the Cesaro matrix the row sums and the row absolute sums are not merely convergent and bounded, they are constantly $1$; the whole content is that the columns are null, that is, that each single term contributes a weight $1/(n+1)$ which fades away. That is the precise sense in which averaging forgets any finite head, and it is why [[fs-cesaro-converse]] is false: forgetting the head is not the same as recovering the sequence.
 
-- **Two proofs, two costs.** [[thm-cesaro-mean-theorem]] is proved directly by a
-  head-and-tail estimate, with no machinery at all;
-  [[thm-silverman-toeplitz]] proves the same estimate once for every weighting
-  and then reads the Cesaro case off three trivial verifications. Both are kept,
-  because the direct proof is what a reader should see first and the general one
-  is what generalises.
+- **Two proofs, two costs.** [[thm-cesaro-mean-theorem]] is proved directly by a head-and-tail estimate, with no machinery at all; [[thm-silverman-toeplitz]] proves the same estimate once for every weighting and then reads the Cesaro case off three trivial verifications. Both are kept, because the direct proof is what a reader should see first and the general one is what generalises.
 
-- **A weighting with unbounded row absolute sums need not be regular**, and the
-  Cesaro matrix is as far from that as possible, its rows being nonnegative and
-  summing to $1$. See [[cex-irregular-summability-matrix]] for the contrast.
+- **A weighting with unbounded row absolute sums need not be regular**, and the Cesaro matrix is as far from that as possible, its rows being nonnegative and summing to $1$. See [[cex-irregular-summability-matrix]] for the contrast.

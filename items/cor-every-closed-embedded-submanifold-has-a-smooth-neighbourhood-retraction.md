@@ -31,10 +31,7 @@ an open neighbourhood in $M$ that retracts smoothly onto $S$.
 
 **Given:** A closed smooth embedded submanifold $i:S\hookrightarrow M$.
 
-[L1] The ambient manifold tubular neighbourhood theorem provides a
-diffeomorphism $\Phi:\Omega\to U$ from a normal-bundle neighbourhood of the
-zero section onto an open neighbourhood $U$ of $S$
-([[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]]).
+[L1] The ambient manifold tubular neighbourhood theorem provides a diffeomorphism $\Phi:\Omega\to U$ from a normal-bundle neighbourhood of the zero section onto an open neighbourhood $U$ of $S$ ([[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]]).
 
 ## Proof
 **Proof technique:** direct.

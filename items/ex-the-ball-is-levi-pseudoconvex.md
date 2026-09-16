@@ -40,15 +40,11 @@ is Levi pseudoconvex.
 
 ## Facts & Assumptions
 
-**Given:** The defining function $\rho(z)=|z_1|^2+\cdots+|z_m|^2-1$ of the unit
-ball.
+**Given:** The defining function $\rho(z)=|z_1|^2+\cdots+|z_m|^2-1$ of the unit ball.
 
-[L1] Levi pseudoconvexity is tested by the Levi form of a defining function on
-complex tangent vectors ([[def-levi-pseudoconvex-domain]]).
+[L1] Levi pseudoconvexity is tested by the Levi form of a defining function on complex tangent vectors ([[def-levi-pseudoconvex-domain]]).
 
-[L2] The Levi form is
-$$\mathcal L_\rho(z;v)=\sum_{j,k} \frac{\partial^2\rho}{\partial z_j\partial\overline z_k}(z)\,v_j\overline{v_k}$$
-([[def-levi-form-and-strict-plurisubharmonicity]]).
+[L2] The Levi form is $$\mathcal L_\rho(z;v)=\sum_{j,k} \frac{\partial^2\rho}{\partial z_j\partial\overline z_k}(z)\,v_j\overline{v_k}$$ ([[def-levi-form-and-strict-plurisubharmonicity]]).
 
 ## Verification
 

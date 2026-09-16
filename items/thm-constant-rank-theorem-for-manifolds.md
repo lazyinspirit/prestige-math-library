@@ -44,18 +44,13 @@ in $\mathbb R^{n-r}$.
 
 [L1] Differentials satisfy the chain rule ([[thm-chain-rule-for-differentials-of-smooth-maps]]).
 
-[L2] A nonzero rank minor supplies an explicit local source-coordinate map
-$\Phi$ that is a $C^k$ diffeomorphism; the identity handles rank zero
-([[lem-constant-rank-source-coordinate-map-is-locally-invertible]]).
+[L2] A nonzero rank minor supplies an explicit local source-coordinate map $\Phi$ that is a $C^k$ diffeomorphism; the identity handles rank zero ([[lem-constant-rank-source-coordinate-map-is-locally-invertible]]).
 
 [L3] Chart maps are smooth diffeomorphisms onto open Euclidean sets ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 
-[L4] A local inverse of a smooth Euclidean map with invertible differential is
-smooth ([[thm-higher-regularity-of-local-inverses]]).
+[L4] A local inverse of a smooth Euclidean map with invertible differential is smooth ([[thm-higher-regularity-of-local-inverses]]).
 
-[L5] In the source rank coordinates $y=\Phi(x)$, after shrinking to a product
-neighbourhood the map has the form $g(u,v)=(u,h(u))$
-([[lem-constant-rank-tail-components-ignore-kernel-coordinates]]).
+[L5] In the source rank coordinates $y=\Phi(x)$, after shrinking to a product neighbourhood the map has the form $g(u,v)=(u,h(u))$ ([[lem-constant-rank-tail-components-ignore-kernel-coordinates]]).
 
 ## Proof
 **Proof technique:** direct.

@@ -36,8 +36,7 @@ following are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** The stated category and resolution data, an object $M$, and
-$n\in\mathbb N_0$.
+**Given:** The stated category and resolution data, an object $M$, and $n\in\mathbb N_0$.
 
 [L1] For $r\ge1$, projective dimension at most $r$ is equivalent to projectivity of the $r$th syzygy ([[thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective]]).
 

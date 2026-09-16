@@ -36,12 +36,9 @@ the cohomological Künneth module isomorphism.
 
 **Given:** The spaces, PID and finite homogeneous basis above.
 
-[F1] [[thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses]]
-gives $H^*(B\times F;R)\cong H^*(B;R)\otimes_RH^*(F;R)$ by external product,
-under AC and the stated finite-free fiber homology hypothesis.
+[F1] [[thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses]] gives $H^*(B\times F;R)\cong H^*(B;R)\otimes_RH^*(F;R)$ by external product, under AC and the stated finite-free fiber homology hypothesis.
 
-[F2] [[thm-leray-hirsch-module-isomorphism]] gives the module isomorphism from
-a supplied global restricting fiber basis.
+[F2] [[thm-leray-hirsch-module-isomorphism]] gives the module isomorphism from a supplied global restricting fiber basis.
 
 [A1] [[def-axiom-of-choice]] is used exactly through [F1]–[F2].
 

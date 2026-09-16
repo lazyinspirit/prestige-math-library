@@ -33,14 +33,11 @@ $$0_Rm=0_M,\qquad r0_M=0_M,\qquad (-r)m=-(rm),\qquad r(-m)=-(rm).$$
 
 **Given:** A left $R$-module $M$, $r\in R$, and $m\in M$.
 
-[L1] The module action distributes over both addition operations, and $(M,+,0_M)$
-is an abelian group ([[def-left-and-right-modules]]).
+[L1] The module action distributes over both addition operations, and $(M,+,0_M)$ is an abelian group ([[def-left-and-right-modules]]).
 
-[L2] The additive structure $(R,+,0_R)$ is an abelian group, so
-$r+(-r)=0_R$ ([[def-ring]]).
+[L2] The additive structure $(R,+,0_R)$ is an abelian group, so $r+(-r)=0_R$ ([[def-ring]]).
 
-[L3] Cancellation holds in every group, hence in the additive groups of $R$
-and $M$ ([[lem-group-cancellation]]).
+[L3] Cancellation holds in every group, hence in the additive groups of $R$ and $M$ ([[lem-group-cancellation]]).
 
 ## Proof
 

@@ -37,8 +37,7 @@ At $z=1/2$, the reflection formula reads $\Gamma(1/2)^2=\pi$.
 
 **Given:** The reflection formula and the value of Gamma at one half.
 
-[L1] $\Gamma(z)\Gamma(1-z)=\pi/\sin(\pi z)$
-([[thm-euler-reflection-formula]]).
+[L1] $\Gamma(z)\Gamma(1-z)=\pi/\sin(\pi z)$ ([[thm-euler-reflection-formula]]).
 
 [L2] $\Gamma(1/2)=\sqrt{\pi}$ ([[cor-gamma-one-half-value]]).
 

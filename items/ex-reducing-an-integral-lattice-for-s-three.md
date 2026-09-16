@@ -41,16 +41,11 @@ reduction modulo the maximal ideal $\mathfrak m=(1-\zeta_3)$ is reducible.
 
 ## Facts & Assumptions
 
-**Given:** A primitive cube root $\zeta_3$, the local cyclotomic field
-$K=\mathbb Q_3(\zeta_3)$ with valuation ring
-$\mathcal O=\mathbb Z_3[\zeta_3]$, and the standard permutation lattice
-$L\subseteq\mathcal O^3$ above.
+**Given:** A primitive cube root $\zeta_3$, the local cyclotomic field $K=\mathbb Q_3(\zeta_3)$ with valuation ring $\mathcal O=\mathbb Z_3[\zeta_3]$, and the standard permutation lattice $L\subseteq\mathcal O^3$ above.
 
-[F1] Reduction modulo the maximal ideal sends an $\mathcal O G$-lattice to a
-$kG$-module ([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
+[F1] Reduction modulo the maximal ideal sends an $\mathcal O G$-lattice to a $kG$-module ([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
 
-[L1] That reduced module is finite-dimensional over the residue field
-([[lem-reduction-of-an-og-lattice-is-a-finite-dimensional-kg-module]]).
+[L1] That reduced module is finite-dimensional over the residue field ([[lem-reduction-of-an-og-lattice-is-a-finite-dimensional-kg-module]]).
 
 ## Verification
 

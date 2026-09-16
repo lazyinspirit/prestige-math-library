@@ -34,19 +34,11 @@ is a Lie-algebra homomorphism.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a smooth left action of a Lie group $G$ on
-$M$. Write $X_M$ for the library's minus-sign fundamental field and
-$\widehat X_M$ for the plus-sign field in the false claim.
+**Given:** $\mathrm{AC}_\omega$ and a smooth left action of a Lie group $G$ on $M$. Write $X_M$ for the library's minus-sign fundamental field and $\widehat X_M$ for the plus-sign field in the false claim.
 
-[A1] The standing definition is $X_M(p)=\left.\frac d{dt}\right|_0
-\exp(-tX)\cdot p$, and its field assignment is a Lie-algebra homomorphism.
-[[def-countable-choice]], [[def-fundamental-vector-field-of-a-left-action]],
-[[thm-fundamental-vector-fields-form-a-lie-algebra-homomorphism]].
+[A1] The standing definition is $X_M(p)=\left.\frac d{dt}\right|_0 \exp(-tX)\cdot p$, and its field assignment is a Lie-algebra homomorphism. [[def-countable-choice]], [[def-fundamental-vector-field-of-a-left-action]], [[thm-fundamental-vector-fields-form-a-lie-algebra-homomorphism]].
 
-[F1] A Lie group has smooth multiplication and inversion, and $E_{ij}$ denotes
-the matrix with its single nonzero entry $1$ in position $(i,j)$.
-[[def-lie-group]], [[def-matrix-units]].  The determinant is the usual finite
-polynomial. [[def-determinant-of-a-square-matrix]].
+[F1] A Lie group has smooth multiplication and inversion, and $E_{ij}$ denotes the matrix with its single nonzero entry $1$ in position $(i,j)$. [[def-lie-group]], [[def-matrix-units]].  The determinant is the usual finite polynomial. [[def-determinant-of-a-square-matrix]].
 
 ## Refutation
 

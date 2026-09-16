@@ -49,9 +49,7 @@ form a terminal compatible cone.
 
 **Given:** An inverse system $(M_n,\varphi_n)$ of $R$-modules and an $R$-module $N$.
 
-[L1] The inverse limit is the compatible-element submodule of the product
-$$\varprojlim M_n = \left\{(x_n) \in \prod M_n : \varphi_n(x_n)=x_{n-1}\text{ for }n \ge 2\right\}$$
-with projections to the coordinates ([[def-inverse-system-and-inverse-limit-of-modules]]).
+[L1] The inverse limit is the compatible-element submodule of the product $$\varprojlim M_n = \left\{(x_n) \in \prod M_n : \varphi_n(x_n)=x_{n-1}\text{ for }n \ge 2\right\}$$ with projections to the coordinates ([[def-inverse-system-and-inverse-limit-of-modules]]).
 
 ## Proof
 

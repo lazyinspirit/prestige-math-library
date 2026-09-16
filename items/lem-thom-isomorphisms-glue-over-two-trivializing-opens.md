@@ -29,45 +29,23 @@ Thom class on $U\cup V$, and cup product with it is an isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** The ordered two-open cover and the compatible local Thom data in the
-statement.
+**Given:** The ordered two-open cover and the compatible local Thom data in the statement.
 
-[F1] [[thm-thom-isomorphism-for-a-trivial-oriented-bundle]] supplies the local
-isomorphisms when the three restrictions are trivial; the proof below uses
-only the isomorphisms stipulated in the statement.
+[F1] [[thm-thom-isomorphism-for-a-trivial-oriented-bundle]] supplies the local isomorphisms when the three restrictions are trivial; the proof below uses only the isomorphisms stipulated in the statement.
 
-[F2] [[thm-mayer-vietoris-sequence-in-singular-cohomology]] gives the base
-two-open sequence with its difference convention.
+[F2] [[thm-mayer-vietoris-sequence-in-singular-cohomology]] gives the base two-open sequence with its difference convention.
 
-[F3] [[def-relative-singular-cochain-complex]] and
-[[thm-cover-small-inclusion-is-a-chain-homotopy-equivalence]] give the same
-small-chain construction for the disk/sphere pair.
+[F3] [[def-relative-singular-cochain-complex]] and [[thm-cover-small-inclusion-is-a-chain-homotopy-equivalence]] give the same small-chain construction for the disk/sphere pair.
 
-[F4] [[def-relative-cup-product]] gives the small-chain relative cup product,
-and [[thm-cup-product-leibniz-identity]] gives its cochain Leibniz rule.
-[[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]
-then gives naturality and the pair-connector identities.
+[F4] [[def-relative-cup-product]] gives the small-chain relative cup product, and [[thm-cup-product-leibniz-identity]] gives its cochain Leibniz rule. [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] then gives naturality and the pair-connector identities.
 
-[F5] [[thm-five-lemma-for-modules]] turns an isomorphism on four neighboring
-terms of an exact ladder into one on the middle term.
+[F5] [[thm-five-lemma-for-modules]] turns an isomorphism on four neighboring terms of an exact ladder into one on the middle term.
 
 ## Proof
 
 **Proof technique:** relative Mayer–Vietoris and the five lemma.
 
-1.1 Put $D_T=D(\xi)|_T$ and $S_T=S(\xi)|_T$. Let
-$C_*^{\mathcal U}(D_{U\cup V},S_{U\cup V})$ be the quotient of
-$C_*(D_U)+C_*(D_V)$ by its sphere subcomplex. The small-chain subdivision
-of [F3] makes its inclusion in the ordinary relative chain complex a
-chain-homotopy equivalence. There is a degreewise split exact chain sequence
-$$0\to C_*(D_W,S_W)\to C_*(D_U,S_U)\oplus C_*(D_V,S_V)\to C_*^{\mathcal U}(D_{U\cup V},S_{U\cup V})\to0,$$
-where the last map is addition and the first is the signed pair of
-inclusions. Dualizing this split sequence gives a termwise exact cochain
-sequence whose first term is the small relative cochain complex and whose
-other maps are restriction and restriction-difference. Transporting its
-cohomology through the small-chain equivalence gives the ordinary relative
-Mayer–Vietoris sequence. The usual kernel/image chase in [F2] fixes its
-connecting map and signs. [F2, F3]
+1.1 Put $D_T=D(\xi)|_T$ and $S_T=S(\xi)|_T$. Let $C_*^{\mathcal U}(D_{U\cup V},S_{U\cup V})$ be the quotient of $C_*(D_U)+C_*(D_V)$ by its sphere subcomplex. The small-chain subdivision of [F3] makes its inclusion in the ordinary relative chain complex a chain-homotopy equivalence. There is a degreewise split exact chain sequence $$0\to C_*(D_W,S_W)\to C_*(D_U,S_U)\oplus C_*(D_V,S_V)\to C_*^{\mathcal U}(D_{U\cup V},S_{U\cup V})\to0,$$ where the last map is addition and the first is the signed pair of inclusions. Dualizing this split sequence gives a termwise exact cochain sequence whose first term is the small relative cochain complex and whose other maps are restriction and restriction-difference. Transporting its cohomology through the small-chain equivalence gives the ordinary relative Mayer–Vietoris sequence. The usual kernel/image chase in [F2] fixes its connecting map and signs. [F2, F3]
 
 2.1 Compatibility says $(u_U,u_V)$ lies in the kernel of the relative difference map.  Exactness in step 1.1 supplies $u\in H^n(D_{U\cup V},S_{U\cup V};R)$ restricting to both local classes.  Each fiber lies in at least one open set, so these restrictions show that $u$ is normalized. [F1, step 1.1]
 

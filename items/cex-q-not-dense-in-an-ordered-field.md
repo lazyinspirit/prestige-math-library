@@ -76,21 +76,8 @@ is exactly the failure that the Archimedean hypothesis rules out.
 
 ## Remarks
 
-- **What density really needs.** Given $0 < x < y$ in an Archimedean field one
-  finds $n$ with $1/n < y - x$ and then a multiple of $1/n$ in the gap; the
-  Archimedean property is used precisely to make the mesh $1/n$ finer than the
-  gap. In $\mathbb{R}(t)$ the gap $1/t - 0$ is smaller than every $1/n$, so no
-  mesh built from rationals is ever fine enough.
+- **What density really needs.** Given $0 < x < y$ in an Archimedean field one finds $n$ with $1/n < y - x$ and then a multiple of $1/n$ in the gap; the Archimedean property is used precisely to make the mesh $1/n$ finer than the gap. In $\mathbb{R}(t)$ the gap $1/t - 0$ is smaller than every $1/n$, so no mesh built from rationals is ever fine enough.
 
-- **An element like $1/t$ is called an infinitesimal**: positive, and below
-  every positive rational. A non-Archimedean ordered field always has one, since
-  if $x$ exceeds every canonical natural then $1/x$ is below every $1/n$
-  ([[lem-of-inverse-positive]]). So the failure of density is not special to
-  this field; it happens in every non-Archimedean ordered field, including
-  $\mathbb{R}((t^{-1}))$.
+- **An element like $1/t$ is called an infinitesimal**: positive, and below every positive rational. A non-Archimedean ordered field always has one, since if $x$ exceeds every canonical natural then $1/x$ is below every $1/n$ ([[lem-of-inverse-positive]]). So the failure of density is not special to this field; it happens in every non-Archimedean ordered field, including $\mathbb{R}((t^{-1}))$.
 
-- **Density is not the same as completeness.** $\mathbb{Q}$ is dense in itself
-  and in $\mathbb{R}$, and $\mathbb{Q}$ is not complete. What this counterexample
-  shows is only that density of $\mathbb{Q}$ needs the Archimedean property,
-  which is also the hypothesis missing from
-  [[fs-nested-intervals-implies-lub]] and [[fs-cauchy-complete-implies-lub]].
+- **Density is not the same as completeness.** $\mathbb{Q}$ is dense in itself and in $\mathbb{R}$, and $\mathbb{Q}$ is not complete. What this counterexample shows is only that density of $\mathbb{Q}$ needs the Archimedean property, which is also the hypothesis missing from [[fs-nested-intervals-implies-lub]] and [[fs-cauchy-complete-implies-lub]].

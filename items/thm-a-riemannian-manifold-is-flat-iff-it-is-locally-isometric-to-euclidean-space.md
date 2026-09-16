@@ -37,26 +37,19 @@ Riemannian-isometric to an open subset of Euclidean $\mathbb R^n$.
 
 ## Facts & Assumptions
 
-[F1] A flat finite-rank connection admits a local frame of parallel sections.
-[[thm-a-flat-connection-admits-local-parallel-frames]].
+[F1] A flat finite-rank connection admits a local frame of parallel sections. [[thm-a-flat-connection-admits-local-parallel-frames]].
 
-[F2] The four-tensor is $\operatorname{Rm}(X,Y,Z,T)=g(R(X,Y)Z,T)$.
-[[def-riemann-curvature-four-tensor]].
+[F2] The four-tensor is $\operatorname{Rm}(X,Y,Z,T)=g(R(X,Y)Z,T)$. [[def-riemann-curvature-four-tensor]].
 
-[F3] The Levi–Civita connection is torsion free and metric compatible.
-[[def-levi-civita-connection]].
+[F3] The Levi–Civita connection is torsion free and metric compatible. [[def-levi-civita-connection]].
 
-[F4] A commuting pointwise-independent frame is a coordinate frame locally.
-[[lem-commuting-independent-vector-fields-give-a-coordinate-system]].
+[F4] A commuting pointwise-independent frame is a coordinate frame locally. [[lem-commuting-independent-vector-fields-give-a-coordinate-system]].
 
-[F5] A Riemannian local isometry is a local diffeomorphism pulling back the
-target metric to the source metric. [[def-riemannian-isometry-and-local-isometry]].
+[F5] A Riemannian local isometry is a local diffeomorphism pulling back the target metric to the source metric. [[def-riemannian-isometry-and-local-isometry]].
 
-[F6] Gram–Schmidt orthonormalizes any supplied finite independent list by a
-finite recursion. [[thm-gram-schmidt-orthonormalisation]].
+[F6] Gram–Schmidt orthonormalizes any supplied finite independent list by a finite recursion. [[thm-gram-schmidt-orthonormalisation]].
 
-[F7] A smooth function with zero differential is constant on each connected
-component. [[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]].
+[F7] A smooth function with zero differential is constant on each connected component. [[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]].
 
 ## Proof
 

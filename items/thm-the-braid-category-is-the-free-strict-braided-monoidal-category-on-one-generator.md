@@ -45,9 +45,7 @@ is the free strict braided monoidal category on one generator.
 
 **Proof technique:** direct.
 
-1.1 Define $F_X(n):=X^{\otimes n}$ on objects, with $F_X(0):=\mathbf 1$. For each generator $\sigma_i\in B_n$, define $F_X(\sigma_i)$ to be the morphism
-$$1_X^{\otimes(i-1)}\otimes c_{X,X}\otimes1_X^{\otimes(n-i-1)}:X^{\otimes n}\to X^{\otimes n},$$
-where the braiding acts only on the $i$th and $(i+1)$st tensor factors. [given, L2, construct]
+1.1 Define $F_X(n):=X^{\otimes n}$ on objects, with $F_X(0):=\mathbf 1$. For each generator $\sigma_i\in B_n$, define $F_X(\sigma_i)$ to be the morphism $$1_X^{\otimes(i-1)}\otimes c_{X,X}\otimes1_X^{\otimes(n-i-1)}:X^{\otimes n}\to X^{\otimes n},$$ where the braiding acts only on the $i$th and $(i+1)$st tensor factors. [given, L2, construct]
 
 2.1 By [L3], the neighboring generators from step 1.1 satisfy the braid relation. Local braidings on disjoint tensor factors commute because in a strict monoidal category they act on separate coordinates. Therefore the Artin relations of $B_n$ hold, and [L4] extends the assignment of step 1.1 uniquely to a homomorphism $B_n\to\operatorname{Aut}(X^{\otimes n})$ for every $n$. [L3, L4, step 1.1, algebra]
 

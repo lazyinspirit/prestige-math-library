@@ -37,8 +37,7 @@ is a domain of holomorphy.
 
 **Given:** The half-space $H=\{\operatorname{Re}z_1>0\}$.
 
-[L1] Every convex domain is a domain of holomorphy
-([[cor-convex-domains-are-domains-of-holomorphy]]).
+[L1] Every convex domain is a domain of holomorphy ([[cor-convex-domains-are-domains-of-holomorphy]]).
 
 ## Verification
 

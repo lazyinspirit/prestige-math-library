@@ -74,19 +74,8 @@ recorded here as the named counterexample.
 
 ## Remarks
 
-- **The two failures are at different points and are independent.** Openness
-  fails only at $0$, since every $x$ with $0 < x < 1$ has a neighbourhood inside
-  $E$; closedness fails only at $1$, since every point outside $E$ other than
-  $1$ has a neighbourhood outside $E$. Repairing either failure separately gives
-  a set that is open or closed but not both: $(0,1)$ is open, $[0,1]$ is closed.
+- **The two failures are at different points and are independent.** Openness fails only at $0$, since every $x$ with $0 < x < 1$ has a neighbourhood inside $E$; closedness fails only at $1$, since every point outside $E$ other than $1$ has a neighbourhood outside $E$. Repairing either failure separately gives a set that is open or closed but not both: $(0,1)$ is open, $[0,1]$ is closed.
 
-- **Nothing about the true results is contradicted.**
-  [[thm-open-set-algebra-r]] says which combinations of open sets are open and
-  which combinations of closed sets are closed; it says nothing about arbitrary
-  sets, and "closed" was never the negation of "open"
-  ([[def-open-and-closed-in-r]]).
+- **Nothing about the true results is contradicted.** [[thm-open-set-algebra-r]] says which combinations of open sets are open and which combinations of closed sets are closed; it says nothing about arbitrary sets, and "closed" was never the negation of "open" ([[def-open-and-closed-in-r]]).
 
-- **The mirror witness.** $(0,1]$ is neither open nor closed for the same two
-  reasons with the roles of the endpoints exchanged, and $\mathbb{Q}$ is a
-  subset that is neither open nor closed with no endpoints at all
-  ([[ex-closure-interior-boundary-of-q]]).
+- **The mirror witness.** $(0,1]$ is neither open nor closed for the same two reasons with the roles of the endpoints exchanged, and $\mathbb{Q}$ is a subset that is neither open nor closed with no endpoints at all ([[ex-closure-interior-boundary-of-q]]).

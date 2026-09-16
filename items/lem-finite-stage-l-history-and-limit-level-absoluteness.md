@@ -60,44 +60,23 @@ satisfy Infinity.
 
 ## Facts & Assumptions
 
-**Given:** Ambient ZF. Finite words use the published membership syntax;
-assignments are finite graphs of Kuratowski pairs. All assertions about weak
-transitive sets explicitly require the displayed finite certificates rather
-than internal ZF.
+**Given:** Ambient ZF. Finite words use the published membership syntax; assignments are finite graphs of Kuratowski pairs. All assertions about weak transitive sets explicitly require the displayed finite certificates rather than internal ZF.
 
-[F1] [[def-set-coded-terms-and-formulas]] and
-[[lem-unique-parsing-of-set-coded-syntax]] supply the fixed finite-word syntax,
-unique parsing, and shorter-child relation.
+[F1] [[def-set-coded-terms-and-formulas]] and [[lem-unique-parsing-of-set-coded-syntax]] supply the fixed finite-word syntax, unique parsing, and shorter-child relation.
 
-[F2] [[thm-structural-recursion-on-set-coded-syntax]] and
-[[thm-set-structure-satisfaction-recursion]] supply external recursion on a
-finite formula and its ordinary set-structure satisfaction relation.
+[F2] [[thm-structural-recursion-on-set-coded-syntax]] and [[thm-set-structure-satisfaction-recursion]] supply external recursion on a finite formula and its ordinary set-structure satisfaction relation.
 
-[F3] [[thm-relativization-and-set-satisfaction]] identifies a fixed formula's
-truth over a set with its guarded ambient relativization.
+[F3] [[thm-relativization-and-set-satisfaction]] identifies a fixed formula's truth over a set with its guarded ambient relativization.
 
-[F4] [[def-definable-subsets-of-a-membership-structure]] defines
-$\operatorname{Def}(A)$ from formula/allowed-arity codes and finite parameter
-tuples, with the separate clause
-$\operatorname{Def}(\varnothing)=\{\varnothing\}$.
+[F4] [[def-definable-subsets-of-a-membership-structure]] defines $\operatorname{Def}(A)$ from formula/allowed-arity codes and finite parameter tuples, with the separate clause $\operatorname{Def}(\varnothing)=\{\varnothing\}$.
 
-[F5] [[def-constructible-hierarchy-and-constructible-rank]] and
-[[prop-constructible-levels-transitivity-ordinals-and-rank]] give the Def
-recursion, transitivity, continuity, nesting, and ordinal contents of the
-levels.
+[F5] [[def-constructible-hierarchy-and-constructible-rank]] and [[prop-constructible-levels-transitivity-ordinals-and-rank]] give the Def recursion, transitivity, continuity, nesting, and ordinal contents of the levels.
 
-[F6] [[lem-canonical-well-order-of-finite-definition-codes]] orders codes first
-by their numerical formula/arity code and then lexicographically among tuples
-of that fixed arity, including its designated empty-carrier code.
+[F6] [[lem-canonical-well-order-of-finite-definition-codes]] orders codes first by their numerical formula/arity code and then lexicographically among tuples of that fixed arity, including its designated empty-carrier code.
 
-[F7] [[thm-canonical-definable-global-well-order-of-l]] defines the published
-canonical order by the unique coherent recursion that retains the old order,
-puts old members before new ones, orders new members by their least fixed
-formula/arity definition codes, and takes unions at nonzero limits.
+[F7] [[thm-canonical-definable-global-well-order-of-l]] defines the published canonical order by the unique coherent recursion that retains the old order, puts old members before new ones, orders new members by their least fixed formula/arity definition codes, and takes unions at nonzero limits.
 
-[F8] [[thm-transfinite-recursion]] supplies the external unique hierarchy and
-augmented-order histories; no recursion is performed internally in a weak
-level.
+[F8] [[thm-transfinite-recursion]] supplies the external unique hierarchy and augmented-order histories; no recursion is performed internally in a weak level.
 
 ## Proof
 

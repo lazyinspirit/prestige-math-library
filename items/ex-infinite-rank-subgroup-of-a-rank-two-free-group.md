@@ -31,8 +31,7 @@ the kernel of the exponent-sum map $\phi(a)=1$, $\phi(b)=0$.
 
 **Given:** The kernel $H=\ker\phi\le F(a,b)$ of the exponent-sum map.
 
-[L1] Nielsen-Schreier makes the nontrivial Schreier generators of a Schreier
-system into a free basis ([[thm-nielsen-schreier-with-an-explicit-basis]]).
+[L1] Nielsen-Schreier makes the nontrivial Schreier generators of a Schreier system into a free basis ([[thm-nielsen-schreier-with-an-explicit-basis]]).
 
 ## Verification
 

@@ -135,25 +135,10 @@ place to cite instead of five inline reconstructions.
 
 ## Remarks
 
-- **Nothing above uses the Archimedean property, and nothing above uses
-  completeness.** The five claims hold in every ordered field, including
-  $\mathbb{R}(t)$ and $\mathbb{R}((t^{-1}))$. That is what makes them safe to
-  use on both sides of every implication proved on this page.
+- **Nothing above uses the Archimedean property, and nothing above uses completeness.** The five claims hold in every ordered field, including $\mathbb{R}(t)$ and $\mathbb{R}((t^{-1}))$. That is what makes them safe to use on both sides of every implication proved on this page.
 
-- **Claim 2 is genuinely non-strict.** From $x_k < y_k$ at every index one gets
-  only $L \le M$: the sequences $x_k = 0$ and $y_k = \varepsilon/(k+1)$ in an
-  Archimedean $F$ have $x_k < y_k$ and equal limits. The real-number version of
-  this warning is recorded at [[lem-limit-preserves-order]].
+- **Claim 2 is genuinely non-strict.** From $x_k < y_k$ at every index one gets only $L \le M$: the sequences $x_k = 0$ and $y_k = \varepsilon/(k+1)$ in an Archimedean $F$ have $x_k < y_k$ and equal limits. The real-number version of this warning is recorded at [[lem-limit-preserves-order]].
 
-- **There is deliberately no arithmetic clause here.** Nothing above lets one
-  add, multiply or divide two limits in a general ordered field, and no item in
-  this library does: [[thm-algebra-of-limits]] is stated for sequences of reals,
-  and by the rule recalled above it may not be cited for a general $F$. No proof
-  on this page needs such a clause; every abstract argument here works with the
-  defining $\varepsilon$ and $N$ directly, or with clauses 1 to 5.
+- **There is deliberately no arithmetic clause here.** Nothing above lets one add, multiply or divide two limits in a general ordered field, and no item in this library does: [[thm-algebra-of-limits]] is stated for sequences of reals, and by the rule recalled above it may not be cited for a general $F$. No proof on this page needs such a clause; every abstract argument here works with the defining $\varepsilon$ and $N$ directly, or with clauses 1 to 5.
 
-- **Claim 4 avoids any appeal to a maximum of a finite set.** The library's
-  finite-maximum lemma [[lem-finite-set-has-max]] is stated for $\mathbb{R}$,
-  so it is unavailable here for the same reason the other four real-valued
-  lemmas are; step 1.6 replaces it by an induction that uses nothing but
-  totality of the order of $F$.
+- **Claim 4 avoids any appeal to a maximum of a finite set.** The library's finite-maximum lemma [[lem-finite-set-has-max]] is stated for $\mathbb{R}$, so it is unavailable here for the same reason the other four real-valued lemmas are; step 1.6 replaces it by an induction that uses nothing but totality of the order of $F$.

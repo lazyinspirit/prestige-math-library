@@ -42,12 +42,9 @@ if $f_1,f_2,f_4,f_5$ are isomorphisms, then $f_3$ is an isomorphism.
 
 **Given:** The commutative exact-row diagram in the statement.
 
-[L1] The sharp five lemma makes the middle map monic under one set of
-hypotheses and epic under the complementary one
-([[thm-sharp-five-lemma-in-an-abelian-category]]).
+[L1] The sharp five lemma makes the middle map monic under one set of hypotheses and epic under the complementary one ([[thm-sharp-five-lemma-in-an-abelian-category]]).
 
-[L2] In an abelian category, a morphism that is both monic and epic is an
-isomorphism ([[thm-an-abelian-category-is-balanced]]).
+[L2] In an abelian category, a morphism that is both monic and epic is an isomorphism ([[thm-an-abelian-category-is-balanced]]).
 
 ## Proof
 

@@ -45,15 +45,11 @@ $E\oplus\varepsilon^N\cong F\oplus\varepsilon^N$ for some $N$.
 
 ## Facts & Assumptions
 
-**Given:** AC, a compact Hausdorff space $X$, and finite-rank complex bundles
-$E,F,E',F'$ over $X$.
+**Given:** AC, a compact Hausdorff space $X$, and finite-rank complex bundles $E,F,E',F'$ over $X$.
 
-[F1] Equality in the Grothendieck group is the common-summand relation
-([[def-complex-topological-k-zero-by-grothendieck-completion]]).
+[F1] Equality in the Grothendieck group is the common-summand relation ([[def-complex-topological-k-zero-by-grothendieck-completion]]).
 
-[F2] Under AC, every finite-rank bundle over a compact Hausdorff base has a
-finite-rank complement in a trivial bundle
-([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]]).
+[F2] Under AC, every finite-rank bundle over a compact Hausdorff base has a finite-rank complement in a trivial bundle ([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]]).
 
 [A1] AC is used only through [F2] to obtain the complement.
 

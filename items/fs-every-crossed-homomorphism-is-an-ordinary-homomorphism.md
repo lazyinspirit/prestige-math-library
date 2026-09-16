@@ -31,8 +31,7 @@ Every crossed homomorphism is an ordinary homomorphism.
 
 **Given:** The nontrivial element $t$ of $C_2$ acting on $\mathbb Z$ by $t\cdot n=-n$.
 
-[L1] A crossed homomorphism satisfies $z(gh)=z(g)+g\cdot z(h)$ for abelian
-coefficients ([[def-crossed-homomorphism-for-a-g-group]]).
+[L1] A crossed homomorphism satisfies $z(gh)=z(g)+g\cdot z(h)$ for abelian coefficients ([[def-crossed-homomorphism-for-a-g-group]]).
 
 ## Refutation
 

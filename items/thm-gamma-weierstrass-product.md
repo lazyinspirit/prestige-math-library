@@ -46,15 +46,11 @@ with locally uniform convergence on $\mathbb C$.
 
 [L2] Harmonic numbers satisfy $H_n=\log n+\gamma+o(1)$ ([[thm-euler-mascheroni-constant-and-harmonic-asymptotic]]).
 
-[L3] On the right half-plane, Gamma is given by Euler's integral
-([[def-euler-gamma-function]]).
+[L3] On the right half-plane, Gamma is given by Euler's integral ([[def-euler-gamma-function]]).
 
-[L4] Gamma is meromorphic on $\mathbb C$ with simple poles exactly at the
-nonpositive integers ([[thm-gamma-meromorphic-continuation]]).
+[L4] Gamma is meromorphic on $\mathbb C$ with simple poles exactly at the nonpositive integers ([[thm-gamma-meromorphic-continuation]]).
 
-[L5] A holomorphic function that vanishes on a set with an accumulation point
-in its domain vanishes identically
-([[thm-identity-theorem-holomorphic-functions]]).
+[L5] A holomorphic function that vanishes on a set with an accumulation point in its domain vanishes identically ([[thm-identity-theorem-holomorphic-functions]]).
 
 ## Proof
 

@@ -36,9 +36,7 @@ $$ L(D_N)=L(N). $$
 
 **Given:** An NFA $N$ and its subset-construction DFA $D_N$.
 
-[L1] The finite-run transition and its word recursion are supplied by [[def-nfa-acceptance-and-recognized-language]]. Put $E(S)=\widehat\delta(S,\varepsilon)$ and define
-$D_N=(\mathcal P(Q),\Sigma,\mu,E(\{q_0\}),G),\qquad \mu(S,a)=E\!\left(\bigcup_{q\in S}\delta(q,a)\right),\qquad G=\{S\subseteq Q:S\cap F\ne\varnothing\}.$
-The state set is finite by [[cor-cardinality-of-the-power-set]], contains the indicated start state, and every transition is a uniquely defined subset of $Q$. Thus this is a total DFA as in [[def-deterministic-finite-automaton]], including the empty subset as a state. Its extended transition $\mu^*$ exists by [[thm-existence-and-uniqueness-of-extended-dfa-transition]].
+[L1] The finite-run transition and its word recursion are supplied by [[def-nfa-acceptance-and-recognized-language]]. Put $E(S)=\widehat\delta(S,\varepsilon)$ and define $D_N=(\mathcal P(Q),\Sigma,\mu,E(\{q_0\}),G),\qquad \mu(S,a)=E\!\left(\bigcup_{q\in S}\delta(q,a)\right),\qquad G=\{S\subseteq Q:S\cap F\ne\varnothing\}.$ The state set is finite by [[cor-cardinality-of-the-power-set]], contains the indicated start state, and every transition is a uniquely defined subset of $Q$. Thus this is a total DFA as in [[def-deterministic-finite-automaton]], including the empty subset as a state. Its extended transition $\mu^*$ exists by [[thm-existence-and-uniqueness-of-extended-dfa-transition]].
 
 [L2] By [[def-dfa-acceptance-and-recognized-language]], $D_N$ accepts $w$ exactly when its reached DFA state is accepting.
 

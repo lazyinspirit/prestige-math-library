@@ -52,25 +52,17 @@ blocks.
 
 ## Facts & Assumptions
 
-**Given:** The graph $G$, the blockade $\mathcal B$, the subset $I$, the
-auxiliary graph $J$, and the homogeneous set $R\subseteq I$ from the Statement.
+**Given:** The graph $G$, the blockade $\mathcal B$, the subset $I$, the auxiliary graph $J$, and the homogeneous set $R\subseteq I$ from the Statement.
 
-[L1] A set is $y^4$-restricted exactly when it is $y^4$-sparse or
-$y^4$-dense
-([[def-c-sparse-and-c-restricted-vertex-set]]).
+[L1] A set is $y^4$-restricted exactly when it is $y^4$-sparse or $y^4$-dense ([[def-c-sparse-and-c-restricted-vertex-set]]).
 
-[L2] If $B_i$ is $y^a$-sparse to $B_j$, then each vertex of $B_i$ has at most
-$y^a|B_j|$ neighbours in $B_j$
-([[def-directional-and-weak-sparsity-between-vertex-sets]]).
+[L2] If $B_i$ is $y^a$-sparse to $B_j$, then each vertex of $B_i$ has at most $y^a|B_j|$ neighbours in $B_j$ ([[def-directional-and-weak-sparsity-between-vertex-sets]]).
 
-[L3] If $B_i$ is complete to $B_j$, then every vertex of $B_i$ is adjacent to
-every vertex of $B_j$
-([[def-edges-between-sets-and-pure-mixed-pairs]]).
+[L3] If $B_i$ is complete to $B_j$, then every vertex of $B_i$ is adjacent to every vertex of $B_j$ ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 
 ## Proof
 
-**Proof technique:** estimate the internal and external neighbour counts in the
-union of the selected equal-size blocks.
+**Proof technique:** estimate the internal and external neighbour counts in the union of the selected equal-size blocks.
 
 1.1 Let $m$ be the common block size. Since $|I|\ge y\ell$, $\ell\ge y^{-a}$, and $r\ge |I|^c$, we have $r^{-1}\le |I|^{-c}\le (y\ell)^{-c}\le y^{c(a-1)}\le y^5$. [given, algebra]
 

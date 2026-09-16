@@ -34,15 +34,11 @@ $$
 
 ## Facts & Assumptions
 
-**Given:** An open inclusion $j:U\hookrightarrow X$, a sheaf $\mathcal F$ on
-$U$, and an open set $V \subseteq X$.
+**Given:** An open inclusion $j:U\hookrightarrow X$, a sheaf $\mathcal F$ on $U$, and an open set $V \subseteq X$.
 
-[F1] Direct image is computed by preimage opens:
-$(j_*\mathcal F)(V)=\mathcal F(j^{-1}(V))$
-([[def-direct-image-sheaf]]).
+[F1] Direct image is computed by preimage opens: $(j_*\mathcal F)(V)=\mathcal F(j^{-1}(V))$ ([[def-direct-image-sheaf]]).
 
-[F2] Restriction to an open subspace is inverse image along the inclusion
-([[def-restriction-sheaf-open-subspace]]).
+[F2] Restriction to an open subspace is inverse image along the inclusion ([[def-restriction-sheaf-open-subspace]]).
 
 ## Verification
 

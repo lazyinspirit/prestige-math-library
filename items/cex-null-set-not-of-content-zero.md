@@ -74,18 +74,8 @@ makes it work.
 
 ## Remarks
 
-- **Boundedness is not what is missing.** $E$ is bounded, and its failure is as
-  large as it can be: no finite cover does better than the trivial cover of
-  $[0,1]$ by itself. What $E$ lacks is closedness, and hence compactness; adding
-  it repairs the implication completely ([[thm-compact-null-is-content-zero]]).
+- **Boundedness is not what is missing.** $E$ is bounded, and its failure is as large as it can be: no finite cover does better than the trivial cover of $[0,1]$ by itself. What $E$ lacks is closedness, and hence compactness; adding it repairs the implication completely ([[thm-compact-null-is-content-zero]]).
 
-- **The closure is the whole obstruction.** Content zero is insensitive to
-  passing to the closure, since a finite union of closed intervals is closed,
-  whereas measure zero is not: $E$ is null and $\overline{E} = [0,1]$ is not
-  ([[lem-nondegenerate-interval-is-not-null]]). That single asymmetry is the
-  entire difference between the two notions.
+- **The closure is the whole obstruction.** Content zero is insensitive to passing to the closure, since a finite union of closed intervals is closed, whereas measure zero is not: $E$ is null and $\overline{E} = [0,1]$ is not ([[lem-nondegenerate-interval-is-not-null]]). That single asymmetry is the entire difference between the two notions.
 
-- **Compare the compact case.** The Cantor set is uncountable and null, and being
-  compact it also has content zero ([[thm-cantor-set-properties]]). So the failure
-  here is not about cardinality: a much larger null set can have content zero,
-  and a countable one need not.
+- **Compare the compact case.** The Cantor set is uncountable and null, and being compact it also has content zero ([[thm-cantor-set-properties]]). So the failure here is not about cardinality: a much larger null set can have content zero, and a countable one need not.

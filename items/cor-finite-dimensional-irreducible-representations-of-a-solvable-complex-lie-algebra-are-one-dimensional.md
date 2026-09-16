@@ -31,15 +31,11 @@ finite-dimensional solvable complex Lie algebra is one-dimensional.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional solvable complex Lie algebra $\mathfrak g$ and
-a nonzero finite-dimensional irreducible $\mathfrak g$-module $V$.
+**Given:** A finite-dimensional solvable complex Lie algebra $\mathfrak g$ and a nonzero finite-dimensional irreducible $\mathfrak g$-module $V$.
 
-[L1] Lie's theorem gives a common eigenvector under these hypotheses
-([[thm-lies-theorem]]).
+[L1] Lie's theorem gives a common eigenvector under these hypotheses ([[thm-lies-theorem]]).
 
-[L2] An irreducible nonzero representation has no invariant subspaces other
-than $0$ and the whole space
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L2] An irreducible nonzero representation has no invariant subspaces other than $0$ and the whole space ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Proof
 

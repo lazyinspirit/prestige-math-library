@@ -34,15 +34,11 @@ as Lie algebras via $x+\ker f\mapsto f(x)$.
 
 ## Facts & Assumptions
 
-**Given:** A homomorphism $f:\mathfrak g\to\mathfrak h$ of Lie algebras over
-the same field.
+**Given:** A homomorphism $f:\mathfrak g\to\mathfrak h$ of Lie algebras over the same field.
 
-[L1] Such an $f$ is linear and preserves brackets
-([[def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]]).
+[L1] Such an $f$ is linear and preserves brackets ([[def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]]).
 
-[L2] The underlying linear map induces the vector-space isomorphism
-$\mathfrak g/\ker f\to\operatorname{im}f$, $x+\ker f\mapsto f(x)$
-([[thm-first-isomorphism-theorem-modules]]).
+[L2] The underlying linear map induces the vector-space isomorphism $\mathfrak g/\ker f\to\operatorname{im}f$, $x+\ker f\mapsto f(x)$ ([[thm-first-isomorphism-theorem-modules]]).
 
 [L3] Quotient brackets by ideals are those of [[def-quotient-lie-algebra]].
 

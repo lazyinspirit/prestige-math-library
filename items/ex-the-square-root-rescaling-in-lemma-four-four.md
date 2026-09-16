@@ -40,8 +40,7 @@ and assume $|F|\ge |G|$.
 
 **Given:** The numerical choices in the Example.
 
-[A1] The sample values satisfy the numerical relation $d=58c_4$. They are not
-asserted to be the existential constants supplied by the source lemma.
+[A1] The sample values satisfy the numerical relation $d=58c_4$. They are not asserted to be the existential constants supplied by the source lemma.
 
 ## Verification
 

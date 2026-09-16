@@ -36,9 +36,7 @@ algebra.
 
 ## Facts & Assumptions
 
-**Given:** A nondecreasing right-continuous function
-$F : \mathbb{R} \to \mathbb{R}$ and the set function $\mu_{0,F}$ defined from
-finite disjoint unions of h-intervals.
+**Given:** A nondecreasing right-continuous function $F : \mathbb{R} \to \mathbb{R}$ and the set function $\mu_{0,F}$ defined from finite disjoint unions of h-intervals.
 
 [L1] For every disjoint presentation $E = \bigcup_{i=1}^m I_i$ in the half-open interval algebra, the proposed value is $\mu_{0,F}(E) = \sum_{i=1}^m \mu_{0,F}(I_i)$. ([[def-lebesgue-stieltjes-interval-set-function]])
 

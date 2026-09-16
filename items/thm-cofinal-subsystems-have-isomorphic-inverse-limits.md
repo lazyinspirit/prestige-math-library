@@ -31,15 +31,11 @@ A cofinal subsystem has the same inverse limit, up to canonical isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** An inverse system indexed by $I$ and a cofinal directed subset
-$J\subseteq I$.
+**Given:** An inverse system indexed by $I$ and a cofinal directed subset $J\subseteq I$.
 
-[L1] A cofinal subsystem meets every ambient index eventually
-([[def-cofinal-subsystem]]).
+[L1] A cofinal subsystem meets every ambient index eventually ([[def-cofinal-subsystem]]).
 
-[F1] The inverse limit is the compatible-tuples construction and satisfies its
-universal property ([[def-compatible-tuple-inverse-limit-of-groups]],
-[[thm-concrete-inverse-limit-universal-property-in-groups]]).
+[F1] The inverse limit is the compatible-tuples construction and satisfies its universal property ([[def-compatible-tuple-inverse-limit-of-groups]], [[thm-concrete-inverse-limit-universal-property-in-groups]]).
 
 ## Proof
 

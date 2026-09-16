@@ -92,24 +92,8 @@ and every orbit converges to it.
 
 ## Remarks
 
-- **The starting value is genuinely arbitrary.** Nothing in the verification uses
-  anything about $a$, and the limit does not depend on it. What does depend on it
-  is the error bound, through $|x_2 - x_1|$, which for this recursion equals
-  $|a - 1/2| \cdot 2/9$.
+- **The starting value is genuinely arbitrary.** Nothing in the verification uses anything about $a$, and the limit does not depend on it. What does depend on it is the error bound, through $|x_2 - x_1|$, which for this recursion equals $|a - 1/2| \cdot 2/9$.
 
-- **Contractivity is exact here, not an estimate.** Step 1.2 gives equality,
-  $|x_{k+2} - x_{k+1}| = \tfrac13|x_{k+1} - x_k|$, so for every starting value
-  $a \ne 1/2$ the constant $c = 1/3$ is the smallest admissible one; for
-  $a = 1/2$ the sequence is constant, every gap is $0$, and every
-  $c \in (0,1)$ is admissible ([[def-contractive-sequence]]). The error bound of
-  [[thm-contractive-implies-cauchy]] is as sharp as that theorem can make it.
-  Contrast [[cex-strictly-decreasing-gaps-no-limit]], where the ratio of
-  consecutive gaps tends to $1$ and no admissible constant exists at all.
+- **Contractivity is exact here, not an estimate.** Step 1.2 gives equality, $|x_{k+2} - x_{k+1}| = \tfrac13|x_{k+1} - x_k|$, so for every starting value $a \ne 1/2$ the constant $c = 1/3$ is the smallest admissible one; for $a = 1/2$ the sequence is constant, every gap is $0$, and every $c \in (0,1)$ is admissible ([[def-contractive-sequence]]). The error bound of [[thm-contractive-implies-cauchy]] is as sharp as that theorem can make it. Contrast [[cex-strictly-decreasing-gaps-no-limit]], where the ratio of consecutive gaps tends to $1$ and no admissible constant exists at all.
 
-- **Why a fixed point is forced.** The limit satisfies the recursion equation
-  because a sequence and its shift have the same limit ([[lem-limit-of-tail]]) and
-  the algebra of limits transports the right-hand side. This is the same move as
-  in [[ex-babylonian-sqrt-two]] and [[ex-recursive-sqrt-two-plus-x]]; the
-  difference is that here convergence comes from contractivity rather than from
-  monotonicity, and no monotonicity is available, since for $a > 1/2$ the sequence
-  decreases and for $a < 1/2$ it increases while for $a = 1/2$ it is constant.
+- **Why a fixed point is forced.** The limit satisfies the recursion equation because a sequence and its shift have the same limit ([[lem-limit-of-tail]]) and the algebra of limits transports the right-hand side. This is the same move as in [[ex-babylonian-sqrt-two]] and [[ex-recursive-sqrt-two-plus-x]]; the difference is that here convergence comes from contractivity rather than from monotonicity, and no monotonicity is available, since for $a > 1/2$ the sequence decreases and for $a < 1/2$ it increases while for $a = 1/2$ it is constant.

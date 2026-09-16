@@ -32,15 +32,11 @@ by its left translations $\lambda_g:x\mapsto gx$.
 
 **Given:** A group $G$ with identity $e$.
 
-[L1] A left action of $G$ on a set gives a homomorphism into its symmetric group
-([[thm-group-actions-correspond-to-homomorphisms]], [[def-group-action]]).
+[L1] A left action of $G$ on a set gives a homomorphism into its symmetric group ([[thm-group-actions-correspond-to-homomorphisms]], [[def-group-action]]).
 
-[L2] The image of a group homomorphism is a subgroup, and a homomorphism is
-injective exactly when its kernel is trivial
-([[thm-image-subgroup-and-kernel-normal]], [[thm-group-homomorphism-injective-iff-trivial-kernel]]).
+[L2] The image of a group homomorphism is a subgroup, and a homomorphism is injective exactly when its kernel is trivial ([[thm-image-subgroup-and-kernel-normal]], [[thm-group-homomorphism-injective-iff-trivial-kernel]]).
 
-[L3] A bijective group homomorphism is an isomorphism
-([[def-group-isomorphism-and-automorphism]]).
+[L3] A bijective group homomorphism is an isomorphism ([[def-group-isomorphism-and-automorphism]]).
 
 ## Proof
 

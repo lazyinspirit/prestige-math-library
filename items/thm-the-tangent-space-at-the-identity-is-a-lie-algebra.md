@@ -40,30 +40,21 @@ invariant-field and smooth-vector-field results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and an $n$-dimensional real Lie group $G$ with
-identity $e$.
+**Given:** $\mathrm{AC}_\omega$ and an $n$-dimensional real Lie group $G$ with identity $e$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] A Lie group here is a finite-dimensional real smooth manifold.
-[[def-lie-group]].
+[F2] A Lie group here is a finite-dimensional real smooth manifold. [[def-lie-group]].
 
-[F3] The tangent space of an $n$-manifold is an $n$-dimensional real vector
-space. [[cor-the-tangent-space-of-an-n-manifold-has-dimension-n]].
+[F3] The tangent space of an $n$-manifold is an $n$-dimensional real vector space. [[cor-the-tangent-space-of-an-n-manifold-has-dimension-n]].
 
-[F4] The tangent bracket is $[u,v]_G=[u^L,v^L]_e$, and
-$[u^L,v^L]=[u,v]_G^L$.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F4] The tangent bracket is $[u,v]_G=[u^L,v^L]_e$, and $[u^L,v^L]=[u,v]_G^L$. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F5] A finite-dimensional Lie algebra has a bilinear alternating bracket
-satisfying Jacobi. [[def-finite-dimensional-lie-algebra]].
+[F5] A finite-dimensional Lie algebra has a bilinear alternating bracket satisfying Jacobi. [[def-finite-dimensional-lie-algebra]].
 
-[F6] Evaluation at $e$ is a linear isomorphism from left-invariant smooth
-fields to $T_eG$.
-[[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F6] Evaluation at $e$ is a linear isomorphism from left-invariant smooth fields to $T_eG$. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
-[F7] Smooth vector fields have a bilinear alternating bracket satisfying
-Jacobi. [[thm-vector-fields-form-a-lie-algebra]].
+[F7] Smooth vector fields have a bilinear alternating bracket satisfying Jacobi. [[thm-vector-fields-form-a-lie-algebra]].
 
 ## Proof
 

@@ -34,13 +34,9 @@ $$\mathbb P(X\ge a)\le\frac{\mathbb E[X]}{a}.$$
 
 **Given:** A nonnegative random variable $X$ and a real number $a>0$.
 
-[L1] Expectation is integration against the probability measure
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
+[L1] Expectation is integration against the probability measure ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 
-[L2] The integral Markov inequality states
-$$\mu(\{f\ge t\})\le t^{-1}\int f\,d\mu$$
-for nonnegative measurable $f$ and $t>0$
-([[thm-chebyshev-markov-inequality-for-the-integral]]).
+[L2] The integral Markov inequality states $$\mu(\{f\ge t\})\le t^{-1}\int f\,d\mu$$ for nonnegative measurable $f$ and $t>0$ ([[thm-chebyshev-markov-inequality-for-the-integral]]).
 
 ## Proof
 

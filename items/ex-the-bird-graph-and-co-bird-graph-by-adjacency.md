@@ -36,14 +36,9 @@ to a horn, and co-Bird is its complement.
 
 **Given:** The labelled vertices $x_1,x_2,x_3,y,z,w$.
 
-[L1] The Bird graph consists of the bull on
-$\{x_1,x_2,x_3,y,z\}$ together with the extra edge $yw$, and co-Bird is its
-complement
-([[def-bird-graph-and-co-bird-graph]], [[def-graph-isomorphism-and-complement]]).
+[L1] The Bird graph consists of the bull on $\{x_1,x_2,x_3,y,z\}$ together with the extra edge $yw$, and co-Bird is its complement ([[def-bird-graph-and-co-bird-graph]], [[def-graph-isomorphism-and-complement]]).
 
-[L2] In the bull, the triangle is $x_1x_2x_3$, the horn vertices are $y,z$, and
-$y$ is adjacent only to $x_1$ while $z$ is adjacent only to $x_2$
-([[def-bull-graph]]).
+[L2] In the bull, the triangle is $x_1x_2x_3$, the horn vertices are $y,z$, and $y$ is adjacent only to $x_1$ while $z$ is adjacent only to $x_2$ ([[def-bull-graph]]).
 
 ## Verification
 

@@ -35,25 +35,17 @@ $[0,\infty)$. We call it the **uniform-on-compacts metric**.
 
 **Given:** Continuous paths $f,g,h\in C$.
 
-[F1] The compact-convergence topology has basic neighborhoods requiring
-uniform closeness on one compact set. [[def-topology-of-compact-convergence]]
+[F1] The compact-convergence topology has basic neighborhoods requiring uniform closeness on one compact set. [[def-topology-of-compact-convergence]]
 
-[F2] A metric is symmetric, separates points, and satisfies the triangle
-inequality. [[def-metric-space]]
+[F2] A metric is symmetric, separates points, and satisfies the triangle inequality. [[def-metric-space]]
 
-[F3] Closed bounded real intervals are compact, and a continuous real function
-on a nonempty compact metric space attains a finite maximum.
-[[thm-heine-borel-rn]] [[thm-extreme-value-metric]]
+[F3] Closed bounded real intervals are compact, and a continuous real function on a nonempty compact metric space attains a finite maximum. [[thm-heine-borel-rn]] [[thm-extreme-value-metric]]
 
-[F4] The geometric series satisfies $\sum_{n=1}^{\infty}2^{-n}=1$, and its
-tail $2^{-N}$ tends to zero. [[thm-geometric-series]]
-[[lem-geometric-sequence-null]]
+[F4] The geometric series satisfies $\sum_{n=1}^{\infty}2^{-n}=1$, and its tail $2^{-N}$ tends to zero. [[thm-geometric-series]] [[lem-geometric-sequence-null]]
 
-[F5] Every real bound is exceeded by an integer.
-[[thm-of-archimedean]]
+[F5] Every real bound is exceeded by an integer. [[thm-of-archimedean]]
 
-[F6] The paths under discussion are continuous maps.
-[[def-continuous-map-top]]
+[F6] The paths under discussion are continuous maps. [[def-continuous-map-top]]
 
 ## Verification
 
@@ -73,6 +65,4 @@ tail $2^{-N}$ tends to zero. [[thm-geometric-series]]
 
 ## Source notes
 
-The bounded weighted-sum metric is the standard metrization of local uniform
-convergence. The verification records both neighborhood containments, including
-the empty compact set and the geometric tail.
+The bounded weighted-sum metric is the standard metrization of local uniform convergence. The verification records both neighborhood containments, including the empty compact set and the geometric tail.

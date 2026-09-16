@@ -36,13 +36,9 @@ the CG condition number from $100$ into $1$.
 
 ## Facts & Assumptions
 
-**Given:** The displayed Hermitian positive-definite system and diagonal
-preconditioner.
+**Given:** The displayed Hermitian positive-definite system and diagonal preconditioner.
 
-[L1] Symmetric positive-definite preconditioning preserves the Hermitian
-positive-definite CG problem and replaces the bound by the one for the
-transformed operator
-([[thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem]]).
+[L1] Symmetric positive-definite preconditioning preserves the Hermitian positive-definite CG problem and replaces the bound by the one for the transformed operator ([[thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem]]).
 
 ## Verification
 **Proof technique:** direct calculation.

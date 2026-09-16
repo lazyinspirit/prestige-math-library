@@ -83,15 +83,8 @@ $n \in \mathbb{N}$.
 
 ## Remarks
 
-- **This is a count of unordered pairs, stated purely as a count.** No geometric
-  or relational vocabulary appears, because none is available at this point in
-  the reading order. Later pages will want exactly this quantity, and they may
-  cite it from here.
+- **This is a count of unordered pairs, stated purely as a count.** No geometric or relational vocabulary appears, because none is available at this point in the reading order. Later pages will want exactly this quantity, and they may cite it from here.
 
-- **Both small cases are checked.** At $n = 0$ and $n = 1$ there are no
-  two-element subsets and both sides are $0$; the truncated difference is what
-  makes the right-hand side come out $0$ rather than undefined at $n = 0$.
+- **Both small cases are checked.** At $n = 0$ and $n = 1$ there are no two-element subsets and both sides are $0$; the truncated difference is what makes the right-hand side come out $0$ rather than undefined at $n = 0$.
 
-- **The real form is not the definition.** $\iota(n)(\iota(n)-1)/2$ is a real
-  number that happens to be the canonical natural of a count; the identity in
-  $\mathbb{N}$ is the primary statement and the division is a convenience.
+- **The real form is not the definition.** $\iota(n)(\iota(n)-1)/2$ is a real number that happens to be the canonical natural of a count; the identity in $\mathbb{N}$ is the primary statement and the division is a convenience.

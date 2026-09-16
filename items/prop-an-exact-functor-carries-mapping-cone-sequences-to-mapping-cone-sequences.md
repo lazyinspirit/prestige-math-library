@@ -39,18 +39,13 @@ mapping-cone sequence of $f$ to the mapping-cone sequence of $F(f)$.
 
 **Given:** An exact functor $F:\mathcal A\to\mathcal B$ and a chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] Exact functors are additive
-([[thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive]]).
+[L1] Exact functors are additive ([[thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive]]).
 
-[L2] Additive functors apply degreewise to complexes and chain maps
-([[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]]).
+[L2] Additive functors apply degreewise to complexes and chain maps ([[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]]).
 
-[L3] The cone differential is
-$$d(y,x)=(d^D(y)+f(x),-d^C(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L3] The cone differential is $$d(y,x)=(d^D(y)+f(x),-d^C(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
-[L4] The canonical inclusion and projection are the obvious coordinate maps
-([[def-canonical-inclusion-and-projection-for-a-mapping-cone]]).
+[L4] The canonical inclusion and projection are the obvious coordinate maps ([[def-canonical-inclusion-and-projection-for-a-mapping-cone]]).
 
 ## Proof
 

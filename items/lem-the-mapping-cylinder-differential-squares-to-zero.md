@@ -35,16 +35,11 @@ for every $n$.
 
 ## Facts & Assumptions
 
-**Given:** A chain map $f:C_\bullet\to D_\bullet$, an integer $n$, and an
-element $(x,y,z)\in C_n\oplus D_n\oplus C_{n-1}$.
+**Given:** A chain map $f:C_\bullet\to D_\bullet$, an integer $n$, and an element $(x,y,z)\in C_n\oplus D_n\oplus C_{n-1}$.
 
-[L1] The cylinder differential is
-$$d_n^{\operatorname{Cyl}(f)}(x,y,z)=(d_n^C(x)+z,d_n^D(y)-f_{n-1}(z),-d_{n-1}^C(z))$$
-([[def-mapping-cylinder-of-a-chain-map]]).
+[L1] The cylinder differential is $$d_n^{\operatorname{Cyl}(f)}(x,y,z)=(d_n^C(x)+z,d_n^D(y)-f_{n-1}(z),-d_{n-1}^C(z))$$ ([[def-mapping-cylinder-of-a-chain-map]]).
 
-[L2] A chain map satisfies
-$$d_{n-1}^Df_{n-1}=f_{n-2}d_{n-1}^C$$
-([[def-chain-map]]).
+[L2] A chain map satisfies $$d_{n-1}^Df_{n-1}=f_{n-2}d_{n-1}^C$$ ([[def-chain-map]]).
 
 ## Proof
 

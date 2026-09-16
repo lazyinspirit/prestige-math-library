@@ -37,17 +37,13 @@ module action. The zero class corresponds exactly to split extensions.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional $\mathfrak g$, a fixed module $M$, and
-extension equivalences that are the identity on $M$ and $\mathfrak g$.
+**Given:** A finite-dimensional $\mathfrak g$, a fixed module $M$, and extension equivalences that are the identity on $M$ and $\mathfrak g$.
 
-[L1] The degree-two CE cocycle and coboundary formulas are those of
-[[def-chevalley-eilenberg-differential]].
+[L1] The degree-two CE cocycle and coboundary formulas are those of [[def-chevalley-eilenberg-differential]].
 
-[L2] Their quotient is $H^2(\mathfrak g,M)$
-([[def-lie-algebra-cohomology]]).
+[L2] Their quotient is $H^2(\mathfrak g,M)$ ([[def-lie-algebra-cohomology]]).
 
-[L3] The zero cocycle gives the semidirect-product bracket
-([[def-semidirect-product-of-lie-algebras]]).
+[L3] The zero cocycle gives the semidirect-product bracket ([[def-semidirect-product-of-lie-algebras]]).
 
 ## Proof
 

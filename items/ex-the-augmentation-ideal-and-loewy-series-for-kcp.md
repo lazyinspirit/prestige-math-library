@@ -38,11 +38,9 @@ $$ kC_p\supset (x)\supset (x^2)\supset\cdots\supset (x^{p-1})\supset (x^p)=0. $$
 
 **Given:** The cyclic group $C_p=\langle g\rangle$ and a field $k$ of characteristic $p$.
 
-[F1] The head and Loewy series are the quotient by the radical and its iterated powers
-([[def-module-radical-socle-head-and-loewy-series]]).
+[F1] The head and Loewy series are the quotient by the radical and its iterated powers ([[def-module-radical-socle-head-and-loewy-series]]).
 
-[L1] Over every field of characteristic $p$, the group algebra $kC_p$ is local
-([[thm-kg-is-local-iff-g-is-a-p-group]]).
+[L1] Over every field of characteristic $p$, the group algebra $kC_p$ is local ([[thm-kg-is-local-iff-g-is-a-p-group]]).
 
 ## Verification
 

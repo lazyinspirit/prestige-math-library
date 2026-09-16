@@ -36,16 +36,11 @@ For the empty base and for the rank-zero bundle one may take $N=0$.
 
 **Given:** AC, a compact Hausdorff $X$, and a rank-$n$ bundle $E\to X$.
 
-[F1] Under AC and DC, every open cover of a compact Hausdorff space admits a
-finite subordinate partition of unity
-([[cor-compact-hausdorff-partitions-of-unity]]).
+[F1] Under AC and DC, every open cover of a compact Hausdorff space admits a finite subordinate partition of unity ([[cor-compact-hausdorff-partitions-of-unity]]).
 
-[F2] A locally coordinatewise fixed-dimensional family is a subbundle
-([[def-vector-bundle-map-section-subbundle-and-isomorphism]]).
+[F2] A locally coordinatewise fixed-dimensional family is a subbundle ([[def-vector-bundle-map-section-subbundle-and-isomorphism]]).
 
-[A1] AC is the stated principle and implies DC
-([[def-axiom-of-choice]],
-[[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
+[A1] AC is the stated principle and implies DC ([[def-axiom-of-choice]], [[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
 
 ## Proof
 

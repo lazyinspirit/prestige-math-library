@@ -81,13 +81,6 @@ values $1,2,\dots,m$ is realised by exactly one $j$ in $\{0,\dots,m-1\}$.
 
 ## Remarks
 
-- **This is not the cycle lemma.** The cycle lemma counts the shifts all of whose
-  partial sums are positive, and for weight $1$ that is exactly one shift. This
-  lemma sorts **every** shift, by how many of its partial sums fail to rise above
-  the starting value, and finds that the $m$ shifts realise the $m$ possible counts
-  once each. The shift with count $1$ is the one the cycle lemma singles out.
+- **This is not the cycle lemma.** The cycle lemma counts the shifts all of whose partial sums are positive, and for weight $1$ that is exactly one shift. This lemma sorts **every** shift, by how many of its partial sums fail to rise above the starting value, and finds that the $m$ shifts realise the $m$ possible counts once each. The shift with count $1$ is the one the cycle lemma singles out.
 
-- **Why an integer key and not a rational one.** The source perturbs $S_a$ by
-  $i/m$ to break ties; multiplying through by $m$ gives $T(i)=m\,S_a(i)-i$, which
-  does the same work without leaving $\mathbb{Z}$. The tie-breaking is exactly the
-  injectivity of step 1.2.
+- **Why an integer key and not a rational one.** The source perturbs $S_a$ by $i/m$ to break ties; multiplying through by $m$ gives $T(i)=m\,S_a(i)-i$, which does the same work without leaving $\mathbb{Z}$. The tie-breaking is exactly the injectivity of step 1.2.

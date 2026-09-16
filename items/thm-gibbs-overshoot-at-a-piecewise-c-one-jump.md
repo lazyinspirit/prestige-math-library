@@ -48,11 +48,9 @@ $$J\left(\frac{\operatorname{Si}(\pi)}{\pi}-\frac12\right)\approx 0.08949\,J.$$
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, a one-periodic real-valued piecewise $C^1$ function
-$f$, a jump point $x_0$, and the jump size $J=f(x_0+)-f(x_0-)$.
+**Given:** Countable Choice, a one-periodic real-valued piecewise $C^1$ function $f$, a jump point $x_0$, and the jump size $J=f(x_0+)-f(x_0-)$.
 
-[F1] In the $2\pi$-periodic normalization, Theorem 1.42 of Plonka--Potts--Steidl--Tasche states that if $g$ is piecewise continuously differentiable, $y_0$ is a jump point, and $g(y_0)$ is reset to the midpoint of its one-sided limits, then
-$$S_Ng\!\left(y_0+\frac{2\pi}{2N+1}\right)\longrightarrow g(y_0+)+\left(\frac{\operatorname{Si}(\pi)}{\pi}-\frac12\right)\bigl(g(y_0+)-g(y_0-)\bigr).$$
+[F1] In the $2\pi$-periodic normalization, Theorem 1.42 of Plonka--Potts--Steidl--Tasche states that if $g$ is piecewise continuously differentiable, $y_0$ is a jump point, and $g(y_0)$ is reset to the midpoint of its one-sided limits, then $$S_Ng\!\left(y_0+\frac{2\pi}{2N+1}\right)\longrightarrow g(y_0+)+\left(\frac{\operatorname{Si}(\pi)}{\pi}-\frac12\right)\bigl(g(y_0+)-g(y_0-)\bigr).$$
 
 ## Proof
 

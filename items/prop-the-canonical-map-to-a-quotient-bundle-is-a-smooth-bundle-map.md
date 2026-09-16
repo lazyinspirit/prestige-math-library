@@ -37,8 +37,7 @@ kernel is $S$.
 
 **Given:** A smooth vector bundle $E\to M$ and a smooth subbundle $S\subseteq E$.
 
-[L1] The quotient $E/S\to M$ is a smooth vector bundle
-([[thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle]]).
+[L1] The quotient $E/S\to M$ is a smooth vector bundle ([[thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle]]).
 
 ## Proof
 

@@ -35,19 +35,13 @@ $H$-equivariantly diffeomorphic to $U\times H$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and
-a closed subgroup $H$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and a closed subgroup $H$.
 
-[A1] The principal-bundle candidate, including the right-action convention,
-is fixed. [[def-countable-choice]], [[def-principal-h-bundle-g-to-g-mod-h]].
+[A1] The principal-bundle candidate, including the right-action convention, is fixed. [[def-countable-choice]], [[def-principal-h-bundle-g-to-g-mod-h]].
 
-[F1] The quotient map is a surjective submersion, and the closed subgroup
-$H$ has its embedded Lie-subgroup structure.
-[[thm-quotient-manifold-by-a-closed-lie-subgroup]].
-[[thm-cartans-closed-subgroup-theorem]].
+[F1] The quotient map is a surjective submersion, and the closed subgroup $H$ has its embedded Lie-subgroup structure. [[thm-quotient-manifold-by-a-closed-lie-subgroup]]. [[thm-cartans-closed-subgroup-theorem]].
 
-[F2] A submersion admits a smooth local section near each point in its image.
-[[thm-constant-rank-theorem-for-manifolds]].
+[F2] A submersion admits a smooth local section near each point in its image. [[thm-constant-rank-theorem-for-manifolds]].
 
 ## Proof
 

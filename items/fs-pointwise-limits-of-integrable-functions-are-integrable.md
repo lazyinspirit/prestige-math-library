@@ -37,10 +37,7 @@ integrable.
 **Proof technique:** direct.
 
 1.1 On $(\mathbb N,\mathcal P(\mathbb N),\#)$, let [L1, L2, given, construct]
-$$f_n:=\chi_{\{0,\dots,n\}}.$$
-Each $f_n$ is integrable because it has finite support, and $f_n(k)\to1$ for
-every $k\in\mathbb N$.
+$$f_n:=\chi_{\{0,\dots,n\}}.$$ Each $f_n$ is integrable because it has finite support, and $f_n(k)\to1$ for every $k\in\mathbb N$.
 
 2.1 The pointwise limit is the constant function $1$, whose counting-measure [step 1.1, L1, L2, algebra] ∎
-integral is $+\infty$, so it is not integrable by [L2]. Therefore the Statement
-is false.
+integral is $+\infty$, so it is not integrable by [L2]. Therefore the Statement is false.

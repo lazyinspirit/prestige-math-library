@@ -38,21 +38,15 @@ field, the following are equivalent:
 
 **Given:** Such a Lie algebra $\mathfrak g$.
 
-[L1] The quotient by the radical is semisimple
-([[prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical]]).
+[L1] The quotient by the radical is semisimple ([[prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical]]).
 
-[L2] Weyl's theorem completely reduces finite-dimensional modules for a
-semisimple algebra ([[thm-weyls-complete-reducibility-theorem]]).
+[L2] Weyl's theorem completely reduces finite-dimensional modules for a semisimple algebra ([[thm-weyls-complete-reducibility-theorem]]).
 
-[L3] Ideals and quotients of semisimple algebras are semisimple
-([[prop-ideals-and-quotients-of-semisimple-lie-algebras]]).
+[L3] Ideals and quotients of semisimple algebras are semisimple ([[prop-ideals-and-quotients-of-semisimple-lie-algebras]]).
 
-[L4] Semisimple algebras are perfect and centerless
-([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
+[L4] Semisimple algebras are perfect and centerless ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 
-[L5] A completely reducible representation is a direct sum of irreducible
-subrepresentations
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L5] A completely reducible representation is a direct sum of irreducible subrepresentations ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Proof
 

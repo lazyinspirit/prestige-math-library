@@ -35,22 +35,15 @@ The graph $H_0$ has the Erdős-Hajnal property.
 
 **Given:** The graph $H_0$.
 
-[L1] Every graph on at most three vertices has the Erdős-Hajnal property
-([[cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property]]).
+[L1] Every graph on at most three vertices has the Erdős-Hajnal property ([[cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property]]).
 
-[L2] The graph $C_5$ has the Erdős-Hajnal property
-([[cor-the-five-cycle-has-the-erdos-hajnal-property]]).
+[L2] The graph $C_5$ has the Erdős-Hajnal property ([[cor-the-five-cycle-has-the-erdos-hajnal-property]]).
 
-[L3] Substitution of graphs is defined by replacing one vertex of a graph by a
-second graph and inheriting the original adjacency pattern
-([[def-substitution-of-a-graph-for-a-vertex]]).
+[L3] Substitution of graphs is defined by replacing one vertex of a graph by a second graph and inheriting the original adjacency pattern ([[def-substitution-of-a-graph-for-a-vertex]]).
 
-[L4] Substitution preserves the Erdős-Hajnal property
-([[thm-substitution-preserves-the-erdos-hajnal-property]]).
+[L4] Substitution preserves the Erdős-Hajnal property ([[thm-substitution-preserves-the-erdos-hajnal-property]]).
 
-[F1] If $K_2$ has vertices $u,v$ and one substitutes $C_5$ for $v$, then the
-new graph consists of the $C_5$ rim together with the remaining vertex $u$
-adjacent to every rim vertex. This is exactly the five-wheel $H_0$.
+[F1] If $K_2$ has vertices $u,v$ and one substitutes $C_5$ for $v$, then the new graph consists of the $C_5$ rim together with the remaining vertex $u$ adjacent to every rim vertex. This is exactly the five-wheel $H_0$.
 
 ## Proof
 

@@ -43,8 +43,7 @@ exactly the full solution set of $Ax=b$.
 
 [L2] $A^+A$ is the orthogonal projection onto $\operatorname{im}A^*$ ([[thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces]]).
 
-[L3] $\operatorname{im}A^*=(\ker A)^\perp$
-([[thm-adjoint-kernel-and-range-orthogonality]]).
+[L3] $\operatorname{im}A^*=(\ker A)^\perp$ ([[thm-adjoint-kernel-and-range-orthogonality]]).
 
 ## Proof
 

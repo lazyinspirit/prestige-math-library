@@ -31,17 +31,13 @@ transitive.
 
 ## Facts & Assumptions
 
-**Given:** An abelian category and members $x:X \to A$, $y:Y \to A$, and
-$z:Z \to A$ with $x \equiv y$ and $y \equiv z$.
+**Given:** An abelian category and members $x:X \to A$, $y:Y \to A$, and $z:Z \to A$ with $x \equiv y$ and $y \equiv z$.
 
-[L1] The relation $x \equiv y$ is witnessed by epimorphisms from one common
-domain as in [[def-equivalence-of-members]].
+[L1] The relation $x \equiv y$ is witnessed by epimorphisms from one common domain as in [[def-equivalence-of-members]].
 
-[L2] Pullbacks exist in an abelian category
-([[def-pullbacks-and-pushouts]]).
+[L2] Pullbacks exist in an abelian category ([[def-pullbacks-and-pushouts]]).
 
-[L3] The pullback of an epimorphism is an epimorphism
-([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
+[L3] The pullback of an epimorphism is an epimorphism ([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
 
 ## Proof
 

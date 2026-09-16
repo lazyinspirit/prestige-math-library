@@ -28,12 +28,9 @@ $M/\mathfrak mM$, then any lifts $x_1,\ldots,x_r\in M$ form an $R$-basis of $M$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian local ring $(R,\mathfrak m)$, a finite flat $R$-module
-$M$, a basis $\bar x_1,\ldots,\bar x_r$ of $M/\mathfrak mM$, and lifts
-$x_1,\ldots,x_r\in M$.
+**Given:** A Noetherian local ring $(R,\mathfrak m)$, a finite flat $R$-module $M$, a basis $\bar x_1,\ldots,\bar x_r$ of $M/\mathfrak mM$, and lifts $x_1,\ldots,x_r\in M$.
 
-[L1] A finite flat module over a Noetherian local ring is free
-([[thm-finite-flat-modules-over-local-rings-are-free]]).
+[L1] A finite flat module over a Noetherian local ring is free ([[thm-finite-flat-modules-over-local-rings-are-free]]).
 
 ## Verification
 

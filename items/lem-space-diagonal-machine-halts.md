@@ -45,8 +45,7 @@ on raw symbols of a variable-alphabet machine.
 
 ## Facts & Assumptions
 
-**Given:** the function $s$, its fixed constructor, and the capped universal
-simulator from [[lem-space-bounded-universal-simulation]].
+**Given:** the function $s$, its fixed constructor, and the capped universal simulator from [[lem-space-bounded-universal-simulation]].
 
 ## Proof
 

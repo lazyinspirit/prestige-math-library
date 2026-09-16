@@ -40,21 +40,13 @@ result is choice-free.
 
 **Given:** an integer $n\geq1$ and based loops at the identity.
 
-[F1] Invertible complex matrices form $\operatorname{GL}_n(\mathbb C)$
-([[def-invertible-matrix-and-general-linear-group]]). Equip
-$M_n(\mathbb C)\cong\mathbb C^{n^2}$ with its Euclidean topology and
-$\operatorname{GL}_n(\mathbb C)$ with the subspace topology. The determinant
-is a polynomial in the matrix entries and hence is continuous.
+[F1] Invertible complex matrices form $\operatorname{GL}_n(\mathbb C)$ ([[def-invertible-matrix-and-general-linear-group]]). Equip $M_n(\mathbb C)\cong\mathbb C^{n^2}$ with its Euclidean topology and $\operatorname{GL}_n(\mathbb C)$ with the subspace topology. The determinant is a polynomial in the matrix entries and hence is continuous.
 
-[F2] A fibration has the pointed long exact sequence of homotopy groups
-([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
+[F2] A fibration has the pointed long exact sequence of homotopy groups ([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
 
-[F3] Spheres $S^m$ are simply connected for $m\geq2$
-([[thm-higher-dimensional-spheres-are-simply-connected]]).
+[F3] Spheres $S^m$ are simply connected for $m\geq2$ ([[thm-higher-dimensional-spheres-are-simply-connected]]).
 
-[F4] Winding number identifies
-$\pi_1(\mathbb C^\times,1)$ with $\mathbb Z$
-([[cor-winding-number-classifies-loops-in-the-punctured-plane]]).
+[F4] Winding number identifies $\pi_1(\mathbb C^\times,1)$ with $\mathbb Z$ ([[cor-winding-number-classifies-loops-in-the-punctured-plane]]).
 
 ## Proof
 

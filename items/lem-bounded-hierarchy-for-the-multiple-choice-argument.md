@@ -32,17 +32,11 @@ $A\subseteq V_\theta$.
 
 **Given:** A set $A$.
 
-[F1] The cumulative hierarchy consists of set-sized, transitive, increasing
-stages ([[def-cumulative-hierarchy-stages]],
-[[prop-cumulative-hierarchy-transitivity-and-growth]]).
+[F1] The cumulative hierarchy consists of set-sized, transitive, increasing stages ([[def-cumulative-hierarchy-stages]], [[prop-cumulative-hierarchy-transitivity-and-growth]]).
 
-[F2] Foundation implies that every set belongs to some cumulative-hierarchy
-stage ([[thm-foundation-equivalent-to-hierarchy-exhaustion]]).
+[F2] Foundation implies that every set belongs to some cumulative-hierarchy stage ([[thm-foundation-equivalent-to-hierarchy-exhaustion]]).
 
-[F3] $\omega$ is a limit ordinal, and for every ordinal $\beta$ the ordinal
-$\beta+\omega$ is a limit ordinal with $\beta\leq\beta+\omega$
-([[lem-omega-least-limit-ordinal]], [[def-ordinal-addition]],
-[[thm-ordinal-arithmetic-monotonicity]]).
+[F3] $\omega$ is a limit ordinal, and for every ordinal $\beta$ the ordinal $\beta+\omega$ is a limit ordinal with $\beta\leq\beta+\omega$ ([[lem-omega-least-limit-ordinal]], [[def-ordinal-addition]], [[thm-ordinal-arithmetic-monotonicity]]).
 
 ## Proof
 

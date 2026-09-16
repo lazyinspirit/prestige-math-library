@@ -29,8 +29,7 @@ $Y\not\le_{tt}X$.
 
 ## Facts & Assumptions
 
-**Given:** the non-computable domination of $0'$ and the characterization of
-truth-table reducibility.
+**Given:** the non-computable domination of $0'$ and the characterization of truth-table reducibility.
 
 ## Proof
 

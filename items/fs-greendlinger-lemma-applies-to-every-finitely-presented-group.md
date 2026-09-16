@@ -35,14 +35,11 @@ Greendlinger's lemma holds for every finite presentation.
 
 ## Facts & Assumptions
 
-**Given:** The presentation $\langle a,b \mid aba^{-1}b^{-1}\rangle$ of
-$\mathbb Z^2$.
+**Given:** The presentation $\langle a,b \mid aba^{-1}b^{-1}\rangle$ of $\mathbb Z^2$.
 
-[L1] Greendlinger's conclusion on this page is proved only for reduced
-$C'(1/6)$ diagrams ([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
+[L1] Greendlinger's conclusion on this page is proved only for reduced $C'(1/6)$ diagrams ([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
 
-[F1] A group presentation is the quotient by the normal closure of its defining
-relators ([[def-group-presentation]]).
+[F1] A group presentation is the quotient by the normal closure of its defining relators ([[def-group-presentation]]).
 
 ## Refutation
 

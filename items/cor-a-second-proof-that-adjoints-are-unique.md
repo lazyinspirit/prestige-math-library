@@ -35,14 +35,11 @@ structures. The corresponding statement for right adjoints is also true.
 
 ## Facts & Assumptions
 
-**Given:** Endofunctors $L_1,L_2,F:\mathcal C\to\mathcal C$ and adjunctions
-$L_1\dashv F$ and $L_2\dashv F$.
+**Given:** Endofunctors $L_1,L_2,F:\mathcal C\to\mathcal C$ and adjunctions $L_1\dashv F$ and $L_2\dashv F$.
 
-[L1] An adjunction to $F$ is the same thing as a dual object of $F$ in the
-composition monoidal category ([[thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor]]).
+[L1] An adjunction to $F$ is the same thing as a dual object of $F$ in the composition monoidal category ([[thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor]]).
 
-[L2] Duals of a fixed object are unique up to a unique compatible isomorphism
-([[thm-duals-are-unique-up-to-a-unique-compatible-isomorphism]]).
+[L2] Duals of a fixed object are unique up to a unique compatible isomorphism ([[thm-duals-are-unique-up-to-a-unique-compatible-isomorphism]]).
 
 ## Proof
 

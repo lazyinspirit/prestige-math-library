@@ -32,18 +32,13 @@ categories. Then $F$ is left exact if and only if it preserves kernels.
 
 **Given:** An additive functor $F:\mathcal C\to\mathcal D$.
 
-[L1] Additive categories are preadditive with finite biproducts
-([[def-additive-category]]).
+[L1] Additive categories are preadditive with finite biproducts ([[def-additive-category]]).
 
-[L2] In a preadditive category, equalizers are kernels of differences
-([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]]).
+[L2] In a preadditive category, equalizers are kernels of differences ([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]]).
 
-[L3] An additive functor preserves finite biproducts, hence finite products
-([[thm-an-additive-functor-preserves-finite-biproducts]]).
+[L3] An additive functor preserves finite biproducts, hence finite products ([[thm-an-additive-functor-preserves-finite-biproducts]]).
 
-[L4] A functor preserves finite limits exactly when it preserves finite products
-and equalizers
-([[thm-finite-limit-and-colimit-criteria]]).
+[L4] A functor preserves finite limits exactly when it preserves finite products and equalizers ([[thm-finite-limit-and-colimit-criteria]]).
 
 ## Proof
 

@@ -45,12 +45,9 @@ multiplicity.
 
 ## Facts & Assumptions
 
-**Given:** A holomorphic function $f$ on a neighbourhood of
-$\overline{D(a,r)}$, a holomorphic function $g$ on the same neighbourhood, and
-$|g-f|<|f|$ on $|z-a|=r$.
+**Given:** A holomorphic function $f$ on a neighbourhood of $\overline{D(a,r)}$, a holomorphic function $g$ on the same neighbourhood, and $|g-f|<|f|$ on $|z-a|=r$.
 
-[L1] Rouché's theorem gives equal zero counts inside a closed contour when the
-strict boundary inequality holds ([[thm-rouche-theorem]]).
+[L1] Rouché's theorem gives equal zero counts inside a closed contour when the strict boundary inequality holds ([[thm-rouche-theorem]]).
 
 ## Proof
 

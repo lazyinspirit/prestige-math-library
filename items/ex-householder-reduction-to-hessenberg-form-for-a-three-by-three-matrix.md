@@ -41,9 +41,7 @@ which is upper Hessenberg.
 
 **Given:** The matrix $A$ and reflector $Q$ in the statement.
 
-[L1] Every real or complex square matrix can be reduced to Hessenberg form by a
-sequence of Householder similarities
-([[thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form]]).
+[L1] Every real or complex square matrix can be reduced to Hessenberg form by a sequence of Householder similarities ([[thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form]]).
 
 ## Verification
 

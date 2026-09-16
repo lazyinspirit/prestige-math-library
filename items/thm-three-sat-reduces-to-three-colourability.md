@@ -31,8 +31,7 @@ $3$-COLORABILITY.
 
 ## Facts & Assumptions
 
-**Given:** A $3$-CNF formula
-$$ \varphi=\bigwedge_{j=1}^m (\ell_{j1}\lor \ell_{j2}\lor \ell_{j3}). $$
+**Given:** A $3$-CNF formula $$ \varphi=\bigwedge_{j=1}^m (\ell_{j1}\lor \ell_{j2}\lor \ell_{j3}). $$
 
 Here a literal is a Boolean variable or its negation, and each clause is a disjunction of exactly three literal occurrences, with repetitions permitted. The formula is satisfied when every clause has a true literal; the empty conjunction is true. Use explicit variable-name and clause-list encodings, rejecting malformed strings. The predicate $NAE$ means that its listed Boolean values are not all equal.
 

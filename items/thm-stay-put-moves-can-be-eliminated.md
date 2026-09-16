@@ -38,10 +38,7 @@ diverge, and output behavior as $M$.
 
 [L1] A deterministic $k$-tape Turing machine has $k$ right-infinite tapes, $k$ head positions, and one simultaneous move on each tape at each step, by [[def-multitape-and-nondeterministic-machines]].
 
-[F1] For either $k$-tape variant, extend the clauses of
-[[def-language-recognized-and-decided]] and
-[[def-partial-function-computed-by-a-machine]] using the machine's accept,
-reject, and divergence behavior and taking its first tape as the output tape.
+[F1] For either $k$-tape variant, extend the clauses of [[def-language-recognized-and-decided]] and [[def-partial-function-computed-by-a-machine]] using the machine's accept, reject, and divergence behavior and taking its first tape as the output tape.
 
 ## Proof
 

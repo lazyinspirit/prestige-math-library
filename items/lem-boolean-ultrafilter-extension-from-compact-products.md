@@ -1,0 +1,61 @@
+---
+id: lem-boolean-ultrafilter-extension-from-compact-products
+kind: lemma
+title: Boolean ultrafilter extension
+status: draft
+origin: pipeline
+pipeline_run: phase-2-remaining-27
+deps: [def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality, thm-zorn, def-axiom-of-choice]
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "Marcus Tressl, Stone Duality for Boolean Algebras — Proposition 2.2.10 and Corollary 2.2.11, pp. 7–8"
+      url: "https://personalpages.manchester.ac.uk/staff/marcus.tressl/papers/StoneDualityBooleanAlgebras.pdf"
+---
+
+## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $B$ be a Boolean
+algebra ([[def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality]]).
+Then:
+
+1. every proper filter $F \subseteq B$ is contained in a Boolean ultrafilter;
+2. ultrafilters separate elements: if $a \ne b$ in $B$, there is an ultrafilter
+   containing exactly one of $a$ and $b$.
+
+The proof deliberately records the repository's AC/Zorn implementation; it does
+not claim that the ultrafilter lemma for Boolean algebras is weaker than AC, and
+no such claim is used anywhere below.
+
+## Facts & Assumptions
+
+**Given:** An assumed Axiom of Choice, a Boolean algebra $B$, and a proper filter $F \subseteq B$.
+
+[L1] Boolean algebras, proper filters and ultrafilters are as defined in [[def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality]]: a proper filter contains $1$, omits $0$, is closed under $\wedge$ and upward closed; an ultrafilter is a maximal proper filter; the complement dichotomy characterises ultrafilters.
+
+[L2] Under the Axiom of Choice, a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]], [[def-axiom-of-choice]]).
+
+    [L3] In a Boolean algebra the symmetric difference $a \triangle b := (a\wedge\neg b)\vee(b\wedge\neg a)$ satisfies $a \triangle b \ne 0$ for $a \ne b$, and $c \wedge a \wedge b = 0$ for $c := a\triangle b$; both are consequences of the complement and distributive laws. [algebra]
+    
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The poset $\mathcal P$ of proper filters of $B$ containing $F$, ordered by inclusion, is nonempty because $F \in \mathcal P$. Every nonempty chain $\{F_i\}$ in $\mathcal P$ has an upper bound: the union $G := \bigcup_i F_i$ is a filter (it contains $1$; it omits $0$ since $0$ in the union would put $0$ in some $F_i$; it is closed under $\wedge$ because two elements lie in a common $F_i$ by directedness of a chain, and it is upward closed because each $F_i$ is), and $G$ contains $F$. [L1, algebra]
+
+1.2 By [L2], applied under the standing Axiom of Choice, $\mathcal P$ has a maximal element $U$, a proper filter containing $F$ that is maximal among proper filters, hence an ultrafilter by [L1]; this proves claim 1. [1.1, L1, L2]
+
+1.3 If $U$ is an ultrafilter and $a \in B$, then exactly one of $a \in U$, $\neg a \in U$ holds, by the complement dichotomy of [L1]. [L1]
+
+2.1 For $a \ne b$ the symmetric difference $c := a\triangle b$ has $c \ne 0$ by [L3], so the principal filter $F_c := \{d : d \ge c\}$ is proper ($0 \not\ge c$); by [step 1.2] it is contained in an ultrafilter $\mathcal U$, which therefore contains $c$. [step 1.2, L1, L3]
+
+3.1 If $a \in \mathcal U$ then $c \wedge a = a \wedge \neg b \in \mathcal U$, while $b \notin \mathcal U$, since $b \in \mathcal U$ would give $a \wedge b \in \mathcal U$ and then $0 = c \wedge a \wedge b \in \mathcal U$; symmetrically, if $a \notin \mathcal U$ then by [step 1.3] $\neg a \in \mathcal U$ and the same computation with the roles exchanged gives $b \in \mathcal U$. Hence $\mathcal U$ contains exactly one of $a,b$, proving claim 2. [step 1.3, step 2.1, L3, algebra] ∎
+
+## Remarks
+
+- **Zorn is applied to filters, not to chains in the algebra.** The upper bound of a chain is its union, and properness of the union is exactly the point where the filter axioms are used.
+- **Separation is what makes $b \mapsto [b]$ injective** in the representation theorem [[thm-stone-representation-for-boolean-algebras]].

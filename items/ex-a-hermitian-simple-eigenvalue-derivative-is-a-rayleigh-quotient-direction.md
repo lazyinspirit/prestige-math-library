@@ -35,8 +35,7 @@ $$\lambda'(0)=x^\ast A'(0)x=e_1^\ast \begin{pmatrix}2&1\\1&0\end{pmatrix}e_1=2.$
 
 **Given:** The Hermitian family $A(t)$ above.
 
-[L1] For a Hermitian simple eigenvalue, the derivative simplifies to
-$x^\ast A' x$ ([[cor-hermitian-simple-eigenpair-derivative-simplifications]]).
+[L1] For a Hermitian simple eigenvalue, the derivative simplifies to $x^\ast A' x$ ([[cor-hermitian-simple-eigenpair-derivative-simplifications]]).
 
 ## Verification
 **Proof technique:** direct.

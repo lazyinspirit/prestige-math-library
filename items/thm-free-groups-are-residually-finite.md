@@ -33,14 +33,9 @@ Free groups are residually finite.
 
 **Given:** A free group $F(X)$ and a nonidentity element $g\in F(X)$.
 
-[F1] The finite residual is trivial exactly when every nonidentity element is
-omitted by some finite-index normal subgroup
-([[def-finite-residual-and-residually-finite-group]]).
+[F1] The finite residual is trivial exactly when every nonidentity element is omitted by some finite-index normal subgroup ([[def-finite-residual-and-residually-finite-group]]).
 
-[L1] Every nontrivial element of a free group is conjugate to a cyclically
-reduced word, and cyclic reduction preserves triviality
-([[lem-cyclic-reduction-normal-form]], [[def-cyclically-reduced-word]],
-[[thm-reduced-words-form-the-free-group]], [[thm-free-groups-unique-up-to-unique-isomorphism]]).
+[L1] Every nontrivial element of a free group is conjugate to a cyclically reduced word, and cyclic reduction preserves triviality ([[lem-cyclic-reduction-normal-form]], [[def-cyclically-reduced-word]], [[thm-reduced-words-form-the-free-group]], [[thm-free-groups-unique-up-to-unique-isomorphism]]).
 
 ## Proof
 

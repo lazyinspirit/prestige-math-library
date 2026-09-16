@@ -35,18 +35,9 @@ matrix.
 
 **Given:** The CG recurrence and the GMRES affine-Krylov residual minimizer.
 
-[F1] To test the proposed extension outside the Hermitian positive-definite
-domain, define the attempted algebraic updates
-$$\alpha_k=\frac{r_k^Tr_k}{p_k^TAp_k},\qquad x_{k+1}=x_k+\alpha_kp_k,\qquad r_{k+1}=r_k-\alpha_kAp_k,\qquad p_{k+1}=r_{k+1}+\beta_kp_k$$
-with $p_0=r_0$ and
-$\beta_k=(r_{k+1}^Tr_{k+1})/(r_k^Tr_k)$. These repeat the formulas used by CG
-on its legitimate domain
-([[def-conjugate-gradient-recurrence]]); they are not claimed to constitute a
-run under that definition for nonsymmetric $A$.
+[F1] To test the proposed extension outside the Hermitian positive-definite domain, define the attempted algebraic updates $$\alpha_k=\frac{r_k^Tr_k}{p_k^TAp_k},\qquad x_{k+1}=x_k+\alpha_kp_k,\qquad r_{k+1}=r_k-\alpha_kAp_k,\qquad p_{k+1}=r_{k+1}+\beta_kp_k$$ with $p_0=r_0$ and $\beta_k=(r_{k+1}^Tr_{k+1})/(r_k^Tr_k)$. These repeat the formulas used by CG on its legitimate domain ([[def-conjugate-gradient-recurrence]]); they are not claimed to constitute a run under that definition for nonsymmetric $A$.
 
-[L1] GMRES is the residual minimizer over an affine Krylov space for a general
-matrix
-([[def-gmres-iterate]]).
+[L1] GMRES is the residual minimizer over an affine Krylov space for a general matrix ([[def-gmres-iterate]]).
 
 ## Counterexample
 **Proof technique:** direct calculation.

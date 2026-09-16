@@ -40,12 +40,9 @@ equivalent:
 
 **Given:** Random elements $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$.
 
-[L1] A family of random elements is independent exactly when the sigma-algebras
-$\sigma(X_i)$ are independent. ([[def-independent-random-elements]])
+[L1] A family of random elements is independent exactly when the sigma-algebras $\sigma(X_i)$ are independent. ([[def-independent-random-elements]])
 
-[L2] Independent pi-systems containing the whole space generate independent
-sigma-algebras.
-([[thm-pi-system-criterion-for-independent-sigma-algebras]])
+[L2] Independent pi-systems containing the whole space generate independent sigma-algebras. ([[thm-pi-system-criterion-for-independent-sigma-algebras]])
 
 ## Proof
 

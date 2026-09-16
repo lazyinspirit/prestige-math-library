@@ -35,15 +35,11 @@ $$\|x\|=\sup\{|f(x)|:f \in X^*,\ \|f\| \le 1\}.$$
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector
-$x \in X$.
+**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector $x \in X$.
 
-[L1] The dual norm on $X^*$ is the operator norm, so
-$|f(x)| \le \|f\|\,\|x\|$ for every $f \in X^*$
-([[def-dual-space-of-a-normed-space]]).
+[L1] The dual norm on $X^*$ is the operator norm, so $|f(x)| \le \|f\|\,\|x\|$ for every $f \in X^*$ ([[def-dual-space-of-a-normed-space]]).
 
-[L2] Every nonzero vector admits a norming functional
-([[thm-dual-norms-every-vector]]).
+[L2] Every nonzero vector admits a norming functional ([[thm-dual-norms-every-vector]]).
 
 ## Proof
 

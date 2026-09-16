@@ -33,15 +33,11 @@ The full subcategory of torsion-free abelian groups is an abelian category.
 
 ## Facts & Assumptions
 
-**Given:** The full subcategory $\mathbf{Ab}_{\mathrm{tf}}$ of torsion-free
-abelian groups.
+**Given:** The full subcategory $\mathbf{Ab}_{\mathrm{tf}}$ of torsion-free abelian groups.
 
-[L1] Torsion-free abelian groups form a full subcategory of $\mathbf{Ab}$
-([[thm-torsion-free-abelian-groups-are-reflective-in-abelian-groups]],
-[[prop-abelian-groups-are-z-modules]]).
+[L1] Torsion-free abelian groups form a full subcategory of $\mathbf{Ab}$ ([[thm-torsion-free-abelian-groups-are-reflective-in-abelian-groups]], [[prop-abelian-groups-are-z-modules]]).
 
-[L2] Abelian categories are balanced
-([[thm-an-abelian-category-is-balanced]]).
+[L2] Abelian categories are balanced ([[thm-an-abelian-category-is-balanced]]).
 
 ## Counterexample
 

@@ -37,11 +37,7 @@ Every countable language is decidable.
 
 [L4] By [[def-effective-encoding-of-turing-machines]], a coded machine has input alphabet $\Sigma_s=\{1,\dots,s\}$, so every coded machine with $s\ge 1$ can read every unary word $1^n$ as a legal input.
 
-[F1] Any deterministic one-tape decider over the unary alphabet can be put in
-the normalized coded form by relabelling its finite state and tape alphabets,
-adding unreachable designated states if necessary, and filling any omitted
-transition entries with a rejecting transition. This preserves its behavior on
-unary inputs.
+[F1] Any deterministic one-tape decider over the unary alphabet can be put in the normalized coded form by relabelling its finite state and tape alphabets, adding unreachable designated states if necessary, and filling any omitted transition entries with a rejecting transition. This preserves its behavior on unary inputs.
 
 ## Refutation
 

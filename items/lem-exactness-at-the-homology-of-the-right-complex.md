@@ -35,9 +35,7 @@ $$\operatorname{im}(H_n(B)\to H_n(C))=\ker(\partial_n:H_n(C)\to H_{n-1}(A)).$$
 
 **Given:** A short exact sequence $0\to A_\bullet\to B_\bullet\to C_\bullet\to0$ of complexes and an integer $n$.
 
-[L1] Applying the weaker snake lemma to the quotient-kernel diagram in degree $n$ gives an exact segment
-$$H_n(B)\to H_n(C)\xrightarrow{\partial_n}H_{n-1}(A)$$
-under the canonical kernel and cokernel identifications ([[lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes]], [[thm-snake-lemma-under-the-weaker-stacks-hypotheses]], [[def-connecting-morphism-in-homology]]).
+[L1] Applying the weaker snake lemma to the quotient-kernel diagram in degree $n$ gives an exact segment $$H_n(B)\to H_n(C)\xrightarrow{\partial_n}H_{n-1}(A)$$ under the canonical kernel and cokernel identifications ([[lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes]], [[thm-snake-lemma-under-the-weaker-stacks-hypotheses]], [[def-connecting-morphism-in-homology]]).
 
 ## Proof
 

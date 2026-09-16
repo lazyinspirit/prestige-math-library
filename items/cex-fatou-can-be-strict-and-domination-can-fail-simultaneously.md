@@ -26,8 +26,7 @@ lemma is an equality and dominated convergence is automatic.
 
 ## Facts & Assumptions
 
-**Given:** The spike sequence
-$f_n:=(n+1)\chi_{(0,1/(n+1))}$ on $(0,1)$.
+**Given:** The spike sequence $f_n:=(n+1)\chi_{(0,1/(n+1))}$ on $(0,1)$.
 
 [L1] Fatou's lemma is only a one-sided inequality ([[thm-fatou-lemma]]).
 

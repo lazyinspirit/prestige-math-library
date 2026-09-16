@@ -35,8 +35,7 @@ A smooth rank-$r$ vector bundle is trivial if and only if it has a global frame.
 
 **Given:** A smooth rank-$r$ vector bundle $E\to M$.
 
-[L1] Local frames and local trivializations are equivalent data on any open set
-([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
+[L1] Local frames and local trivializations are equivalent data on any open set ([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
 
 ## Proof
 

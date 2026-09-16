@@ -40,15 +40,11 @@ is exact.
 
 ## Facts & Assumptions
 
-**Given:** A short exact sequence of inverse systems
-$0 \to A_n \xrightarrow{f_n} B_n \xrightarrow{g_n} C_n \to 0$ with $(A_n)$
-Mittag-Leffler.
+**Given:** A short exact sequence of inverse systems $0 \to A_n \xrightarrow{f_n} B_n \xrightarrow{g_n} C_n \to 0$ with $(A_n)$ Mittag-Leffler.
 
 [L1] Inverse limits are left exact ([[thm-inverse-limits-are-left-exact]]).
 
-[L2] The Mittag-Leffler condition means that for each fixed stage $m$, the
-images of the transition maps into $A_m$ eventually stabilize
-([[def-mittag-leffler-inverse-system]]).
+[L2] The Mittag-Leffler condition means that for each fixed stage $m$, the images of the transition maps into $A_m$ eventually stabilize ([[def-mittag-leffler-inverse-system]]).
 
 ## Proof
 

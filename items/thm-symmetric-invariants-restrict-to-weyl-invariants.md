@@ -41,9 +41,7 @@ $$S(\mathfrak g)^{\mathfrak g} \xrightarrow{\sim} S(\mathfrak h)^W.$$
 
 ## Facts & Assumptions
 
-**Given:** A complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra
-$\mathfrak h$, its Weyl group $W$, and the restriction map
-$\operatorname{res}\colon S(\mathfrak g)^{\mathfrak g}\to S(\mathfrak h)^W$.
+**Given:** A complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, its Weyl group $W$, and the restriction map $\operatorname{res}\colon S(\mathfrak g)^{\mathfrak g}\to S(\mathfrak h)^W$.
 
 ## Proof
 

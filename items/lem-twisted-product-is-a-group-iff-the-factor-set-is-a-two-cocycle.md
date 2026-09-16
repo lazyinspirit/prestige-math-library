@@ -36,14 +36,11 @@ on $M\times G$, the following are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** A function $f:G\times G\to M$ and the twisted multiplication on
-$M\times G$.
+**Given:** A function $f:G\times G\to M$ and the twisted multiplication on $M\times G$.
 
-[F1] Normalized two-cocycles satisfy the cocycle and normalization equations
-([[def-normalized-two-cocycle-and-two-coboundary]]).
+[F1] Normalized two-cocycles satisfy the cocycle and normalization equations ([[def-normalized-two-cocycle-and-two-coboundary]]).
 
-[F2] The twisted product uses the displayed multiplication
-([[def-twisted-product-extension-from-a-two-cocycle]]).
+[F2] The twisted product uses the displayed multiplication ([[def-twisted-product-extension-from-a-two-cocycle]]).
 
 ## Proof
 

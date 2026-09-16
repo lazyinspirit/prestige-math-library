@@ -38,24 +38,17 @@ $$S(p)=2\sum_{1\leq i<j\leq n}K\bigl(\operatorname{span}(e_i,e_j)\bigr).$$
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-scalar-curvature]], [[lem-ricci-curvature-is-symmetric-and-basis-independent]], [[def-sectional-curvature]], and [[thm-algebraic-symmetries-of-the-riemann-tensor]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Scalar curvature is the orthonormal trace
-$S(p)=\sum_j\operatorname{Ric}_p(e_j,e_j)$. [[def-scalar-curvature]].
+[F1] Scalar curvature is the orthonormal trace $S(p)=\sum_j\operatorname{Ric}_p(e_j,e_j)$. [[def-scalar-curvature]].
 
-[F4] In an orthonormal basis,
-$\operatorname{Ric}_p(X,Y)=\sum_i\operatorname{Rm}_p(e_i,X,Y,e_i)$.
-[[lem-ricci-curvature-is-symmetric-and-basis-independent]].
+[F4] In an orthonormal basis, $\operatorname{Ric}_p(X,Y)=\sum_i\operatorname{Rm}_p(e_i,X,Y,e_i)$. [[lem-ricci-curvature-is-symmetric-and-basis-independent]].
 
-[F2] For an orthonormal pair $(e_i,e_j)$,
-$K(\operatorname{span}(e_i,e_j))=\operatorname{Rm}(e_i,e_j,e_j,e_i)$.
-[[def-sectional-curvature]].
+[F2] For an orthonormal pair $(e_i,e_j)$, $K(\operatorname{span}(e_i,e_j))=\operatorname{Rm}(e_i,e_j,e_j,e_i)$. [[def-sectional-curvature]].
 
-[F3] The Riemann tensor is skew in its first pair and invariant under
-interchange of its two pairs. [[thm-algebraic-symmetries-of-the-riemann-tensor]].
+[F3] The Riemann tensor is skew in its first pair and invariant under interchange of its two pairs. [[thm-algebraic-symmetries-of-the-riemann-tensor]].
 
 ## Proof
 
-**Given:** $\mathrm{AC}_\omega$, a point $p$ and an orthonormal basis $(e_1,\ldots,e_n)$ of
-$T_pM$.
+**Given:** $\mathrm{AC}_\omega$, a point $p$ and an orthonormal basis $(e_1,\ldots,e_n)$ of $T_pM$.
 
 1.1 Substituting the Ricci contraction [F4] into the scalar trace [F1] gives $S(p)=\sum_{i,j}\operatorname{Rm}(e_i,e_j,e_j,e_i)$. The terms with $i=j$ vanish by first-pair skewness in [F3]. [A1, F1, F3, F4]
 

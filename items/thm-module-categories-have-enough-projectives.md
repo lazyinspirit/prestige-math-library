@@ -32,15 +32,11 @@ $R\text{-}\mathbf{Mod}$ has enough projectives.
 
 **Given:** A ring $R$.
 
-[L1] Every left $R$-module is a quotient of a free left $R$-module
-([[cor-every-module-is-a-quotient-of-a-free-module]]).
+[L1] Every left $R$-module is a quotient of a free left $R$-module ([[cor-every-module-is-a-quotient-of-a-free-module]]).
 
-[L2] Under the Axiom of Choice, free modules are projective
-([[thm-projective-module-characterizations]]).
+[L2] Under the Axiom of Choice, free modules are projective ([[thm-projective-module-characterizations]]).
 
-[L3] Having enough projectives means admitting a projective epimorphism onto
-every object
-([[def-a-category-with-enough-projectives-and-with-enough-injectives]]).
+[L3] Having enough projectives means admitting a projective epimorphism onto every object ([[def-a-category-with-enough-projectives-and-with-enough-injectives]]).
 
 ## Proof
 

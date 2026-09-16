@@ -35,9 +35,7 @@ $$\delta_j\circ\delta_i=\delta_i\circ\delta_{j-1}:\Delta^{n-2}\to\Delta^n.$$
 
 **Given:** An integer $n\geq 2$ and indices $0\leq i<j\leq n$.
 
-[L1] For $n\geq 1$, the face map $\delta_k:\Delta^{n-1}\to\Delta^n$ inserts a
-zero in the $k$th coordinate
-([[def-standard-topological-simplex-and-its-affine-face-maps]]).
+[L1] For $n\geq 1$, the face map $\delta_k:\Delta^{n-1}\to\Delta^n$ inserts a zero in the $k$th coordinate ([[def-standard-topological-simplex-and-its-affine-face-maps]]).
 
 ## Proof
 

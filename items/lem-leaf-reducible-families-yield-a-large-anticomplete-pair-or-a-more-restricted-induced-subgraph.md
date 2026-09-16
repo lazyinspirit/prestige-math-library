@@ -41,24 +41,15 @@ vertices.
 
 ## Facts & Assumptions
 
-**Given:** A leaf-reducible finite family $\mathcal F$, parameters $y\in(0,\tfrac12)$
-and $b>1$, and a $y$-sparse $\mathcal F$-free graph $G$.
+**Given:** A leaf-reducible finite family $\mathcal F$, parameters $y\in(0,\tfrac12)$ and $b>1$, and a $y$-sparse $\mathcal F$-free graph $G$.
 
-[L1] Because $\mathcal F$ is leaf-reducible, there exist $H\in\mathcal F$ and a
-leaf $v\in V(H)$ such that
-$$\mathcal F':=\{H\setminus\{v\}\}\cup(\mathcal F\setminus\{H\})$$
-has the Erdős-Hajnal property
-([[def-leaf-reducible-finite-family]]).
+[L1] Because $\mathcal F$ is leaf-reducible, there exist $H\in\mathcal F$ and a leaf $v\in V(H)$ such that $$\mathcal F':=\{H\setminus\{v\}\}\cup(\mathcal F\setminus\{H\})$$ has the Erdős-Hajnal property ([[def-leaf-reducible-finite-family]]).
 
-[L2] For a finite family, the Erdős-Hajnal property, the polynomial Rödl
-property, and virality are equivalent
-([[thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
+[L2] For a finite family, the Erdős-Hajnal property, the polynomial Rödl property, and virality are equivalent ([[thm-finite-family-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
 
-[L3] Deleting a leaf from each of two forbidden graphs preserves virality
-([[thm-leaf-deletion-preserves-virality-of-a-finite-family]]).
+[L3] Deleting a leaf from each of two forbidden graphs preserves virality ([[thm-leaf-deletion-preserves-virality-of-a-finite-family]]).
 
-[L4] A graph is $\mathcal F$-free when it contains no induced copy of any member
-of $\mathcal F$ ([[def-h-free-and-family-free-graph]]).
+[L4] A graph is $\mathcal F$-free when it contains no induced copy of any member of $\mathcal F$ ([[def-h-free-and-family-free-graph]]).
 
 ## Proof
 

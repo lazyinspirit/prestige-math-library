@@ -39,18 +39,13 @@ subtractions, hence $O(n^2)$ scalar operations.
 
 ## Facts & Assumptions
 
-**Given:** A field $F$, a natural number $n\ge 1$, a vector $b\in F^n$, and a
-triangular matrix $T\in M_n(F)$ with nonzero diagonal; when $T=L$ it is lower
-triangular, and when $T=U$ it is upper triangular.
+**Given:** A field $F$, a natural number $n\ge 1$, a vector $b\in F^n$, and a triangular matrix $T\in M_n(F)$ with nonzero diagonal; when $T=L$ it is lower triangular, and when $T=U$ it is upper triangular.
 
-[L1] Forward substitution defines $x_i$ from the earlier coordinates by
-$$x_i=\ell_{ii}^{-1}\left(b_i-\sum_{j<i}\ell_{ij}x_j\right),$$and backward substitution defines $x_i$ from the later coordinates by$$x_i=u_{ii}^{-1}\left(b_i-\sum_{j>i}u_{ij}x_j\right)$$
-([[def-forward-and-back-substitution-for-triangular-systems]]).
+[L1] Forward substitution defines $x_i$ from the earlier coordinates by $$x_i=\ell_{ii}^{-1}\left(b_i-\sum_{j<i}\ell_{ij}x_j\right),$$and backward substitution defines $x_i$ from the later coordinates by$$x_i=u_{ii}^{-1}\left(b_i-\sum_{j>i}u_{ij}x_j\right)$$ ([[def-forward-and-back-substitution-for-triangular-systems]]).
 
 ## Proof
 
-**Proof technique:** induction on the row index, then reverse induction for the
-upper-triangular case.
+**Proof technique:** induction on the row index, then reverse induction for the upper-triangular case.
 
 1.1 Forward substitution. For $i=0$, [L1] gives $x_0=b_0/\ell_{00}$, so the first row equation is satisfied. Assume the first $i$ rows are satisfied. Then the $(i+1)$-st row of a lower-triangular system is $\sum_{j\le i+1}\ell_{i+1,j}x_j=b_{i+1}$, and solving for $x_{i+1}$ gives exactly the recursion in [L1]. Because $\ell_{i+1,i+1}\ne 0$, this value is forced and is unique. Induction proves that the forward recursion solves $Lx=b$ and that no other vector can differ in any coordinate. [L1, induction]
 

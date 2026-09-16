@@ -36,8 +36,7 @@ because $f(0)=1$ and the only zero inside the disc is $a_1=1$.
 
 **Given:** The polynomial $f(z)=1-z$ and a radius $R>1$.
 
-[F1] Jensen's formula expresses the boundary mean of $\log|f|$ in terms of
-$f(0)$ and the interior zeros ([[thm-jensen-formula-on-a-disc]]).
+[F1] Jensen's formula expresses the boundary mean of $\log|f|$ in terms of $f(0)$ and the interior zeros ([[thm-jensen-formula-on-a-disc]]).
 
 ## Verification
 

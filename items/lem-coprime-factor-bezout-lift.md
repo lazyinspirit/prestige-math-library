@@ -35,13 +35,9 @@ $$ag+bh \equiv 1 \pmod I.$$
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $A$, an ideal $I$, residue polynomials
-$g_0,h_0 \in (A/I)[T]$ with $(g_0,h_0)=(1)$, and lifts $g,h \in A[T]$.
+**Given:** A commutative ring $A$, an ideal $I$, residue polynomials $g_0,h_0 \in (A/I)[T]$ with $(g_0,h_0)=(1)$, and lifts $g,h \in A[T]$.
 
-[L1] The quotient ring $A/I$ and the polynomial ring over a commutative ring
-are again commutative rings, so Bezout identities and coefficientwise lifting
-make sense in $(A/I)[T]$ and $A[T]$
-([[def-quotient-ring]], [[def-polynomial-ring-over-a-commutative-ring]]).
+[L1] The quotient ring $A/I$ and the polynomial ring over a commutative ring are again commutative rings, so Bezout identities and coefficientwise lifting make sense in $(A/I)[T]$ and $A[T]$ ([[def-quotient-ring]], [[def-polynomial-ring-over-a-commutative-ring]]).
 
 ## Proof
 

@@ -36,34 +36,23 @@ through the supplied smooth invariant-field and tangent-bracket results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, finite-dimensional real Lie groups $G,H$,
-and a Lie-group homomorphism $F:G\to H$.
+**Given:** $\mathrm{AC}_\omega$, finite-dimensional real Lie groups $G,H$, and a Lie-group homomorphism $F:G\to H$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] A Lie-algebra homomorphism is a linear map preserving brackets.
-[[def-lie-algebra-homomorphism]].
+[F2] A Lie-algebra homomorphism is a linear map preserving brackets. [[def-lie-algebra-homomorphism]].
 
-[F3] The map $F$ is smooth, preserves identities, and satisfies
-$F(gh)=F(g)F(h)$.
-[[def-lie-group-homomorphism-isomorphism-and-automorphism]].
+[F3] The map $F$ is smooth, preserves identities, and satisfies $F(gh)=F(g)F(h)$. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
 
-[F4] Pairs of related smooth vector fields have related brackets.
-[[prop-related-vector-fields-have-related-lie-brackets]].
+[F4] Pairs of related smooth vector fields have related brackets. [[prop-related-vector-fields-have-related-lie-brackets]].
 
-[F5] Assuming $\mathrm{AC}_\omega$, each tangent vector has a unique
-left-invariant smooth extension $X^L_g=d(L_g)_eX$.
-[[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F5] Assuming $\mathrm{AC}_\omega$, each tangent vector has a unique left-invariant smooth extension $X^L_g=d(L_g)_eX$. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
-[F6] The tangent bracket is characterized by
-$[X^L,Y^L]=[X,Y]_{\mathfrak g}^L$, and similarly for $\mathfrak h$.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F6] The tangent bracket is characterized by $[X^L,Y^L]=[X,Y]_{\mathfrak g}^L$, and similarly for $\mathfrak h$. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F7] The differential of a smooth map at a point is linear.
-[[lem-the-differential-sends-derivations-to-derivations-and-is-linear]].
+[F7] The differential of a smooth map at a point is linear. [[lem-the-differential-sends-derivations-to-derivations-and-is-linear]].
 
-[F8] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F8] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

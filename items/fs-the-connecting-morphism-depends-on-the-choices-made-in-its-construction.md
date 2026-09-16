@@ -36,11 +36,9 @@ its construction.
 
 **Given:** The arrow-theoretic construction of the connecting morphism.
 
-[L1] The connecting morphism exists and is unique
-([[thm-the-connecting-morphism-exists-and-is-unique]]).
+[L1] The connecting morphism exists and is unique ([[thm-the-connecting-morphism-exists-and-is-unique]]).
 
-[L2] Consequently, no choice-independence argument remains to be proved
-([[rem-the-connecting-morphism-depends-on-no-choices]]).
+[L2] Consequently, no choice-independence argument remains to be proved ([[rem-the-connecting-morphism-depends-on-no-choices]]).
 
 ## Refutation
 

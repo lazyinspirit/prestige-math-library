@@ -41,14 +41,11 @@ $$|V(G)|\leq \kappa(G).$$
 
 **Given:** A perfect graph $G$.
 
-[L1] Perfect graphs satisfy $\chi(G)=\omega(G)$
-([[def-perfect-graph]]).
+[L1] Perfect graphs satisfy $\chi(G)=\omega(G)$ ([[def-perfect-graph]]).
 
-[L2] Every finite graph satisfies $|V(G)|\leq\chi(G)\alpha(G)$
-([[thm-clique-independence-chromatic-bounds]]).
+[L2] Every finite graph satisfies $|V(G)|\leq\chi(G)\alpha(G)$ ([[thm-clique-independence-chromatic-bounds]]).
 
-[L3] By definition, $\kappa(G)=\alpha(G)\omega(G)$
-([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
+[L3] By definition, $\kappa(G)=\alpha(G)\omega(G)$ ([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
 
 ## Proof
 

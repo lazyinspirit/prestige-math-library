@@ -37,30 +37,17 @@ and $(1,B_1)$ are respectively $B_0$- and $B_1$-subsections.
 
 ## Facts & Assumptions
 
-**Given:** AC, $S_3$, $p=2$, the transposition, and the splitting system in
-the Example.
+**Given:** AC, $S_3$, $p=2$, the transposition, and the splitting system in the Example.
 
-[F1] A $p$-section is determined by the conjugacy class of the unique
-$p$-part ([[def-p-section-of-a-p-element]]).
+[F1] A $p$-section is determined by the conjugacy class of the unique $p$-part ([[def-p-section-of-a-p-element]]).
 
-[F2] A $B$-subsection uses local-to-global block induction
-([[def-brauer-subsection]]).
+[F2] A $B$-subsection uses local-to-global block induction ([[def-brauer-subsection]]).
 
-[F3] The Brauer map is coefficient projection to a centralizer, and its
-maximal nonzero supports are the defect groups
-([[def-brauer-homomorphism-for-a-p-subgroup]] and
-[[thm-defect-groups-are-maximal-brauer-support]]). The principal block has
-Sylow defect ([[prop-principal-block-has-sylow-defect]]).
+[F3] The Brauer map is coefficient projection to a centralizer, and its maximal nonzero supports are the defect groups ([[def-brauer-homomorphism-for-a-p-subgroup]] and [[thm-defect-groups-are-maximal-brauer-support]]). The principal block has Sylow defect ([[prop-principal-block-has-sylow-defect]]).
 
-[F4] For a fixed $p$-subgroup $D$, Brauer's First Main Theorem gives a
-bijection, by block induction, between the blocks of $kN_G(D)$ having defect
-group $D$ and the blocks of $kG$ having defect group $D$
-([[thm-brauer-first-main-theorem]]).
+[F4] For a fixed $p$-subgroup $D$, Brauer's First Main Theorem gives a bijection, by block induction, between the blocks of $kN_G(D)$ having defect group $D$ and the blocks of $kG$ having defect group $D$ ([[thm-brauer-first-main-theorem]]).
 
-[F5] A central $p$-subgroup lies in each local defect group
-([[lem-central-p-subgroups-lie-in-every-block-defect-group]]). AC is available
-([[def-axiom-of-choice]]) and is used through the AC-stated subsection and
-published block contracts; the calculations below are finite.
+[F5] A central $p$-subgroup lies in each local defect group ([[lem-central-p-subgroups-lie-in-every-block-defect-group]]). AC is available ([[def-axiom-of-choice]]) and is used through the AC-stated subsection and published block contracts; the calculations below are finite.
 
 ## Verification
 

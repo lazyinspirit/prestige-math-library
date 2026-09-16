@@ -45,33 +45,19 @@ In particular, $d^1_{\chi,\varphi}=d_{\chi,\varphi}$.
 
 ## Facts & Assumptions
 
-**Given:** The splitting system, $\chi$, $u$, and $H=C_G(u)$ in the
-Statement.
+**Given:** The splitting system, $\chi$, $u$, and $H=C_G(u)$ in the Statement.
 
-[F1] [[def-generalized-decomposition-numbers]] defines the displayed finite
-sum, including the scalar $\lambda_{u,\zeta}$.
+[F1] [[def-generalized-decomposition-numbers]] defines the displayed finite sum, including the scalar $\lambda_{u,\zeta}$.
 
-[F2] Maschke's theorem gives complete reducibility over the characteristic-$0$
-field $K$
-([[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]]).
+[F2] Maschke's theorem gives complete reducibility over the characteristic-$0$ field $K$ ([[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]]).
 
-[F3] Schur's lemma makes a central group element an endomorphism of every
-irreducible constituent
-([[cor-schurs-lemma-for-irreducible-representations]]); the scalar conclusion
-here is supplied by the splitting-field clause recorded in F1.
+[F3] Schur's lemma makes a central group element an endomorphism of every irreducible constituent ([[cor-schurs-lemma-for-irreducible-representations]]); the scalar conclusion here is supplied by the splitting-field clause recorded in F1.
 
-[F4] On $p$-regular elements, an ordinary irreducible character is the sum of
-irreducible Brauer characters with its ordinary decomposition numbers
-([[def-decomposition-numbers-and-decomposition-matrix]]).
+[F4] On $p$-regular elements, an ordinary irreducible character is the sum of irreducible Brauer characters with its ordinary decomposition numbers ([[def-decomposition-numbers-and-decomposition-matrix]]).
 
-[F5] A Brauer-character value is an element of $K$ obtained as a sum of
-Teichmüller lifts of prime-to-$p$ roots of unity
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F5] A Brauer-character value is an element of $K$ obtained as a sum of Teichmüller lifts of prime-to-$p$ roots of unity ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
-[F6] Under the standard complex realization of those prime-to-$p$ roots,
-irreducible Brauer characters form a basis of the complex class functions on
-the $p$-regular elements
-([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
+[F6] Under the standard complex realization of those prime-to-$p$ roots, irreducible Brauer characters form a basis of the complex class functions on the $p$-regular elements ([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
 
 ## Proof
 

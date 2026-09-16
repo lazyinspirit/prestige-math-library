@@ -88,24 +88,8 @@ asserts that the implication reverses, and it does not.
 
 ## Remarks
 
-- **What survives the refutation.** The implication *continuous $\Rightarrow$
-  intermediate value property* is true and is
-  [[cor-continuous-image-of-an-interval-is-an-interval]]. So is the partial
-  converse for monotone functions: a function satisfying
-  $f(x) \le f(y)$ whenever $x \le y$, whose image is order-convex, is continuous
-  ([[lem-monotone-with-interval-image-is-continuous]]). The witness above is
-  therefore necessarily non-monotone, and it is: it rises and falls infinitely
-  often in every neighbourhood of $0$.
+- **What survives the refutation.** The implication *continuous $\Rightarrow$ intermediate value property* is true and is [[cor-continuous-image-of-an-interval-is-an-interval]]. So is the partial converse for monotone functions: a function satisfying $f(x) \le f(y)$ whenever $x \le y$, whose image is order-convex, is continuous ([[lem-monotone-with-interval-image-is-continuous]]). The witness above is therefore necessarily non-monotone, and it is: it rises and falls infinitely often in every neighbourhood of $0$.
 
-- **The witness fails continuity at exactly one point.** That is all a refutation
-  needs, and it is all that is claimed: nothing above says that the failure
-  cannot be worse. Functions with the intermediate value property that are
-  continuous at no point at all do exist, the standard one being Conway's
-  base-13 function; it is not constructed at this point in the reading order,
-  and no statement here depends on it.
+- **The witness fails continuity at exactly one point.** That is all a refutation needs, and it is all that is claimed: nothing above says that the failure cannot be worse. Functions with the intermediate value property that are continuous at no point at all do exist, the standard one being Conway's base-13 function; it is not constructed at this point in the reading order, and no statement here depends on it.
 
-- **Nothing above defines the derivative, and Darboux's theorem is not used.**
-  The classical source of non-continuous functions with the intermediate value
-  property is the class of derivatives, which have the property by Darboux's
-  theorem; no notion of derivative is available at this point in the reading
-  order, and the witness here is built by hand instead.
+- **Nothing above defines the derivative, and Darboux's theorem is not used.** The classical source of non-continuous functions with the intermediate value property is the class of derivatives, which have the property by Darboux's theorem; no notion of derivative is available at this point in the reading order, and the witness here is built by hand instead.

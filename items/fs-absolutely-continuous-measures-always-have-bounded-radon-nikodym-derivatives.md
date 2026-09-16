@@ -27,14 +27,9 @@ sources:
 
 **Given:** The measure $\nu(E)=\int_Ex^{-1/2}\chi_{(0,1]}(x)\,d\lambda(x)$.
 
-[L1] A nonnegative measurable density defines a positive measure; when that
-measure is absolutely continuous with respect to a sigma-finite base and
-satisfies the common finite-exhaustion hypothesis, a density recovering all
-measurable-set values represents its Radon--Nikodym derivative
-([[def-measure-with-density]], [[def-radon-nikodym-derivative]]).
+[L1] A nonnegative measurable density defines a positive measure; when that measure is absolutely continuous with respect to a sigma-finite base and satisfies the common finite-exhaustion hypothesis, a density recovering all measurable-set values represents its Radon--Nikodym derivative ([[def-measure-with-density]], [[def-radon-nikodym-derivative]]).
 
-[L2] The integral over a null set vanishes
-([[cor-integral-over-a-null-set-vanishes]]).
+[L2] The integral over a null set vanishes ([[cor-integral-over-a-null-set-vanishes]]).
 
 ## Refutation
 

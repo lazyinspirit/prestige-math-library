@@ -44,9 +44,7 @@ different presentations is not asserted to be a literal identity.
 
 ## Facts & Assumptions
 
-**Given:** the stated resolution data and [[def-dependent-choice]]. The
-balance maps are supplied by
-[[thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic]].
+**Given:** the stated resolution data and [[def-dependent-choice]]. The balance maps are supplied by [[thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic]].
 
 ## Proof
 
@@ -60,7 +58,4 @@ balance maps are supplied by
 
 ## Remarks
 
-DC supplies arbitrary comparisons and their homotopies. The equations are
-choice-free when these data are explicitly supplied. This proof does not
-use a uniqueness theorem for arbitrary morphisms of delta functors merely
-because they agree in degree zero.
+DC supplies arbitrary comparisons and their homotopies. The equations are choice-free when these data are explicitly supplied. This proof does not use a uniqueness theorem for arbitrary morphisms of delta functors merely because they agree in degree zero.

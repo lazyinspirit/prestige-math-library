@@ -120,21 +120,8 @@ readings of "$[0,1]^{\mathbb{N}}$" agree.
 
 ## Remarks
 
-- **The weights do two opposite jobs at once.** Making the $k$-th weight small
-  ensures that the coordinates beyond a chosen index contribute at most $2^{-N}$
-  in total, which is what step 3.2 needs; keeping every weight strictly positive
-  ensures that a single coordinate cannot be far apart without $d$ noticing,
-  which is what step 4.2 needs. A weight sequence that failed either condition
-  would fail to metrise the product topology.
+- **The weights do two opposite jobs at once.** Making the $k$-th weight small ensures that the coordinates beyond a chosen index contribute at most $2^{-N}$ in total, which is what step 3.2 needs; keeping every weight strictly positive ensures that a single coordinate cannot be far apart without $d$ noticing, which is what step 4.2 needs. A weight sequence that failed either condition would fail to metrise the product topology.
 
-- **Nothing here generalises for free.** The argument uses that the index set is
-  $\mathbb{N}$, through the convergent series of weights, and that each factor is
-  bounded, through $|x_k - y_k| \le 1$. Neither restriction is removable by this
-  method, and no general theorem about metrizability of products is claimed on
-  these pages ([[rem-constructions-this-page-stops-short-of]]).
+- **Nothing here generalises for free.** The argument uses that the index set is $\mathbb{N}$, through the convergent series of weights, and that each factor is bounded, through $|x_k - y_k| \le 1$. Neither restriction is removable by this method, and no general theorem about metrizability of products is claimed on these pages ([[rem-constructions-this-page-stops-short-of]]).
 
-- **The Hilbert cube is a product of subspaces, and that is unambiguous.** Claim 1
-  of [[thm-product-of-subspaces-and-closures]] identifies the product of the
-  subspaces $[0,1] \subseteq \mathbb{R}$ with the subspace $\prod_k [0,1]$ of
-  $\mathbb{R}^{\mathbb{N}}$, so the metric above may equally be read as a metric
-  on that subspace.
+- **The Hilbert cube is a product of subspaces, and that is unambiguous.** Claim 1 of [[thm-product-of-subspaces-and-closures]] identifies the product of the subspaces $[0,1] \subseteq \mathbb{R}$ with the subspace $\prod_k [0,1]$ of $\mathbb{R}^{\mathbb{N}}$, so the metric above may equally be read as a metric on that subspace.

@@ -35,15 +35,11 @@ monoidal category $\mathbf{Vect}_k$.
 
 **Given:** A finite-dimensional $k$-vector space $V$.
 
-[L1] The category $\mathbf{Vect}_k$ is monoidal under $\otimes_k$
-([[thm-modules-over-a-commutative-ring-form-a-monoidal-category]]).
+[L1] The category $\mathbf{Vect}_k$ is monoidal under $\otimes_k$ ([[thm-modules-over-a-commutative-ring-form-a-monoidal-category]]).
 
-[L2] If $(v_1,\dots,v_n)$ is a basis of $V$, then the dual family
-$(v_1^*,\dots,v_n^*)$ is a basis of $V^*$ and satisfies
-$v_i^*(v_j)=\delta_{ij}$ ([[thm-dual-family-is-a-basis-in-finite-dimension]]).
+[L2] If $(v_1,\dots,v_n)$ is a basis of $V$, then the dual family $(v_1^*,\dots,v_n^*)$ is a basis of $V^*$ and satisfies $v_i^*(v_j)=\delta_{ij}$ ([[thm-dual-family-is-a-basis-in-finite-dimension]]).
 
-[L3] Finite-dimensional means that $V$ has such a finite basis
-([[def-dimension]]).
+[L3] Finite-dimensional means that $V$ has such a finite basis ([[def-dimension]]).
 
 ## Proof
 

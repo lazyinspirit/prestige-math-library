@@ -31,12 +31,9 @@ abelian-group operation on its members modulo equivalence.
 
 **Given:** The group-law claim of the statement.
 
-[L1] The subtraction surrogate gives only an existence statement for a witness
-$z$, not a binary operation on all member classes
-([[thm-chasing-rule-the-subtraction-surrogate]]).
+[L1] The subtraction surrogate gives only an existence statement for a witness $z$, not a binary operation on all member classes ([[thm-chasing-rule-the-subtraction-surrogate]]).
 
-[L2] There is an explicit object whose members do not support such a group law
-([[cex-the-members-of-an-object-do-not-form-a-group]]).
+[L2] There is an explicit object whose members do not support such a group law ([[cex-the-members-of-an-object-do-not-form-a-group]]).
 
 ## Refutation
 

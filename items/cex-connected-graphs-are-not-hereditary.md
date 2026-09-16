@@ -51,22 +51,8 @@ The class of connected finite graphs is hereditary.
 
 ## Remarks
 
-```tikz
-\begin{tikzpicture}[
-  vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\small},
-  edge/.style={draw=blue!70!black,line width=1.2pt},
-  caption/.style={font=\small,align=center}
-]
-\node[vertex] (v0) at (0,0) {$v_0$};
-\node[vertex] (v1) at (1.5,0) {$v_1$};
-\node[vertex] (v2) at (3,0) {$v_2$};
-\draw[edge] (v0)--(v1)--(v2);
-\node[caption] at (1.5,-.75) {$P_3$ is connected};
+```tikz \begin{tikzpicture}[ vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\small}, edge/.style={draw=blue!70!black,line width=1.2pt}, caption/.style={font=\small,align=center} ] \node[vertex] (v0) at (0,0) {$v_0$}; \node[vertex] (v1) at (1.5,0) {$v_1$}; \node[vertex] (v2) at (3,0) {$v_2$}; \draw[edge] (v0)--(v1)--(v2); \node[caption] at (1.5,-.75) {$P_3$ is connected};
 
 \draw[->,line width=.9pt] (3.55,0)--node[above,font=\scriptsize] {induce on $\{v_0,v_2\}$} (5.25,0);
 
-\node[vertex] (w0) at (5.8,0) {$v_0$};
-\node[vertex] (w2) at (7.3,0) {$v_2$};
-\node[caption] at (6.55,-.75) {$\overline K_2$ is disconnected};
-\end{tikzpicture}
-```
+\node[vertex] (w0) at (5.8,0) {$v_0$}; \node[vertex] (w2) at (7.3,0) {$v_2$}; \node[caption] at (6.55,-.75) {$\overline K_2$ is disconnected}; \end{tikzpicture} ```

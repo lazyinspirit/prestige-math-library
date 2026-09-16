@@ -55,13 +55,6 @@ For every $n\in\mathbb{N}$ the integer $n+1$ divides $\binom{2n}{n}$
 
 ## Remarks
 
-- **The quotient is exhibited as a count, and that is the whole proof.** No
-  arithmetic property of $\binom{2n}{n}$ is used: the divisibility holds because a
-  set of Dyck paths was counted and the count turned out to be the quotient. An
-  argument from prime factorisations would have to be made separately for every
-  prime dividing $n+1$, and would give no combinatorial meaning to the quotient.
+- **The quotient is exhibited as a count, and that is the whole proof.** No arithmetic property of $\binom{2n}{n}$ is used: the divisibility holds because a set of Dyck paths was counted and the count turned out to be the quotient. An argument from prime factorisations would have to be made separately for every prime dividing $n+1$, and would give no combinatorial meaning to the quotient.
 
-- **What is not claimed.** Nothing here says $n+1$ is the largest such divisor,
-  or that $\binom{2n}{n}$ has any other divisibility property. The statement is
-  the single divisibility, for every $n$, with $n=0$ included: there $1$ divides
-  $1$.
+- **What is not claimed.** Nothing here says $n+1$ is the largest such divisor, or that $\binom{2n}{n}$ has any other divisibility property. The statement is the single divisibility, for every $n$, with $n=0$ included: there $1$ divides $1$.

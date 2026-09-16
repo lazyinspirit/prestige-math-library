@@ -27,8 +27,7 @@ Under the measure of [[thm-countable-product-of-probability-spaces]], the coordi
 
 ## Facts & Assumptions
 
-**Given:** The canonical countable product probability space and finitely many
-distinct indices $n_1,\ldots,n_k$.
+**Given:** The canonical countable product probability space and finitely many distinct indices $n_1,\ldots,n_k$.
 
 [F1] The product measure has every prescribed finite product marginal. ([[thm-countable-product-of-probability-spaces]])
 
@@ -37,7 +36,6 @@ distinct indices $n_1,\ldots,n_k$.
 ## Proof
 
 1.1 For $A_j\in\mathcal E_{n_j}$ and the distinct indices fixed above, [F1]
-gives $\mathbb P(\bigcap_j\{X_{n_j}\in A_j\})=\prod_j\mu_{n_j}(A_j)$;
-taking one coordinate gives the asserted law. [F1]
+gives $\mathbb P(\bigcap_j\{X_{n_j}\in A_j\})=\prod_j\mu_{n_j}(A_j)$; taking one coordinate gives the asserted law. [F1]
 
 2.1 The right side is $\prod_j\mathbb P(X_{n_j}\in A_j)$, which is exactly [F2]. Since the finite family was arbitrary, all coordinates are independent. [F2] ∎

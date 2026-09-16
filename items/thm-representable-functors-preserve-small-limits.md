@@ -32,24 +32,17 @@ $\mathbf{Set}$.
 
 ## Facts & Assumptions
 
-**Given:** A small $D:\mathcal J\to\mathcal C$, a limit
-$(L,\lambda)$, and a representation $R\cong\mathcal C(X,-)$.
+**Given:** A small $D:\mathcal J\to\mathcal C$, a limit $(L,\lambda)$, and a representation $R\cong\mathcal C(X,-)$.
 
-[F1] Covariant and contravariant hom-assignments have their stated actions on
-morphisms and are functors ([[def-hom-functors-and-hom-bifunctor]],
-[[thm-hom-assignments-are-functors]]).
+[F1] Covariant and contravariant hom-assignments have their stated actions on morphisms and are functors ([[def-hom-functors-and-hom-bifunctor]], [[thm-hom-assignments-are-functors]]).
 
-[F2] A covariantly representable functor is naturally isomorphic to
-$\mathcal C(X,-)$ ([[def-presheaf-representable-functor-and-representation]]).
+[F2] A covariantly representable functor is naturally isomorphic to $\mathcal C(X,-)$ ([[def-presheaf-representable-functor-and-representation]]).
 
-[F3] A limit represents compatible cones by unique arrows
-([[def-limit-and-colimit-of-a-diagram]]).
+[F3] A limit represents compatible cones by unique arrows ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L1] Every small set-valued diagram has a compatible-tuple limit
-([[thm-set-has-all-small-limits]]).
+[L1] Every small set-valued diagram has a compatible-tuple limit ([[thm-set-has-all-small-limits]]).
 
-[L2] Yoneda's bijection and its inverse are natural in both variables
-([[thm-yoneda-lemma-is-natural-in-both-variables]]).
+[L2] Yoneda's bijection and its inverse are natural in both variables ([[thm-yoneda-lemma-is-natural-in-both-variables]]).
 
 ## Proof
 

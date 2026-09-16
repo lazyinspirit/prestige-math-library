@@ -32,16 +32,11 @@ Every domain of holomorphy in $\mathbb C^m$ is convex.
 
 ## Facts & Assumptions
 
-**Given:** The domain
-$$U=\mathbb C^2\setminus\{(z_1,z_2): z_1z_2=1\}.$$
+**Given:** The domain $$U=\mathbb C^2\setminus\{(z_1,z_2): z_1z_2=1\}.$$
 
-[L1] A domain of holomorphy is characterized by the failure of every common
-simultaneous extension pair
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L1] A domain of holomorphy is characterized by the failure of every common simultaneous extension pair ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
-[L2] A holomorphic function on a connected open set is determined by its values
-on any nonempty open subset
-([[thm-identity-theorem-in-several-complex-variables]]).
+[L2] A holomorphic function on a connected open set is determined by its values on any nonempty open subset ([[thm-identity-theorem-in-several-complex-variables]]).
 
 ## Counterexample
 

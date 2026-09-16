@@ -45,30 +45,15 @@ $$\kappa(G)\geq |V(G)|^\tau.$$
 
 **Given:** A nonempty $C_5$-free graph $G$.
 
-[L1] For every graph $H$ and every real $\epsilon>0$, there exists
-$\delta>0$ such that every nonempty $H$-free graph contains a linearly large
-induced subgraph whose graph or complement has maximum degree at most
-$\epsilon\delta|V(G)|$
-([[cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree]]).
+[L1] For every graph $H$ and every real $\epsilon>0$, there exists $\delta>0$ such that every nonempty $H$-free graph contains a linearly large induced subgraph whose graph or complement has maximum degree at most $\epsilon\delta|V(G)|$ ([[cor-an-h-free-graph-has-a-linearly-large-induced-subgraph-whose-graph-or-complement-has-bounded-maximum-degree]]).
 
-[L2] For every $\delta,\epsilon>0$ with $\epsilon<1/20$, there exists
-$\tau_0>0$ such that every $\tau$-critical graph with
-$0<\tau\leq \tau_0$ and every linearly large induced subgraph of maximum degree
-at most $\epsilon\delta|V(G)|$ contains a rooted stable-tooth comb with at
-least $1/(400\epsilon)$ teeth and block size at least
-$\delta|V(G)|/(400\epsilon t^2)$
-([[thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb]]).
+[L2] For every $\delta,\epsilon>0$ with $\epsilon<1/20$, there exists $\tau_0>0$ such that every $\tau$-critical graph with $0<\tau\leq \tau_0$ and every linearly large induced subgraph of maximum degree at most $\epsilon\delta|V(G)|$ contains a rooted stable-tooth comb with at least $1/(400\epsilon)$ teeth and block size at least $\delta|V(G)|/(400\epsilon t^2)$ ([[thm-a-tau-critical-graph-with-a-large-low-degree-induced-subgraph-has-a-rooted-stable-tooth-comb]]).
 
-[L3] A cross-edge between two different blocks of a rooted stable-tooth comb
-creates an induced copy of $C_5$
-([[lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle]]).
+[L3] A cross-edge between two different blocks of a rooted stable-tooth comb creates an induced copy of $C_5$ ([[lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle]]).
 
-[L4] A minimal $C_5$-free counterexample to a bound of the form
-$\kappa(G)\geq |V(G)|^\tau$ is $\tau$-critical
-([[prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical]]).
+[L4] A minimal $C_5$-free counterexample to a bound of the form $\kappa(G)\geq |V(G)|^\tau$ is $\tau$-critical ([[prop-a-minimal-counterexample-to-a-kappa-bound-is-tau-critical]]).
 
-[L5] For every graph $H$, $\kappa(H)=\alpha(H)\omega(H)$
-([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
+[L5] For every graph $H$, $\kappa(H)=\alpha(H)\omega(H)$ ([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
 
 ## Proof
 

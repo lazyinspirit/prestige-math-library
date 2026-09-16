@@ -40,8 +40,7 @@ $(\omega_1,\widetilde{\mathcal T})$ is hereditarily separable.
 
 ## Facts & Assumptions
 
-**Given:** ZFC, CH, a second-countable ordered fundamental space
-$(\omega_1,\mathcal T)$, and a nice refinement satisfying $(\star)$.
+**Given:** ZFC, CH, a second-countable ordered fundamental space $(\omega_1,\mathcal T)$, and a nice refinement satisfying $(\star)$.
 
 [F1] [[def-ordered-fundamental-space-and-nice-refinement]] defines the intermediate topologies $\mathring{\mathcal T}_\alpha$, standard Vietoris neighbourhoods, the model chain, and $(\star_\alpha)$.
 

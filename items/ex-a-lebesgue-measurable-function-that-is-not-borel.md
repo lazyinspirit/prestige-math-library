@@ -26,14 +26,11 @@ measurable.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice and a Lebesgue measurable set
-$E \subseteq \mathbb{R}$ that is not Borel.
+**Given:** The Axiom of Choice and a Lebesgue measurable set $E \subseteq \mathbb{R}$ that is not Borel.
 
-[L1] Assuming the Axiom of Choice, such a set exists.
-([[cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel]])
+[L1] Assuming the Axiom of Choice, such a set exists. ([[cor-there-is-a-lebesgue-measurable-subset-of-r-that-is-not-borel]])
 
-[L2] The indicator of a measurable set is measurable.
-([[prop-indicator-function-is-measurable-iff-its-set-is-measurable]])
+[L2] The indicator of a measurable set is measurable. ([[prop-indicator-function-is-measurable-iff-its-set-is-measurable]])
 
 ## Verification
 
@@ -46,5 +43,4 @@ Lebesgue measurable. [L1, L2]
 
 $$f^{-1}((1/2,\infty)) = E,$$
 
-and $E$ is not Borel by [L1]. So $f$ is not Borel measurable. [step 1.1, L1]
-∎
+and $E$ is not Borel by [L1]. So $f$ is not Borel measurable. [step 1.1, L1] ∎

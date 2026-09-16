@@ -28,9 +28,7 @@ $$ \int_V f(y)\,d\lambda_n(y) = \int_U f(T(x))\,|\det DT(x)|\,d\lambda_n(x). $$
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, open sets
-$U,V \subseteq \mathbb R^n$, a $C^1$ diffeomorphism $T : U \to V$, and a
-nonnegative Lebesgue measurable function $f : V \to [0,\infty]$.
+**Given:** The Axiom of Countable Choice, open sets $U,V \subseteq \mathbb R^n$, a $C^1$ diffeomorphism $T : U \to V$, and a nonnegative Lebesgue measurable function $f : V \to [0,\infty]$.
 
 [L1] The formula already holds for continuous compactly supported integrands. ([[lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands]])
 
@@ -38,11 +36,7 @@ nonnegative Lebesgue measurable function $f : V \to [0,\infty]$.
 
 [L3] Every nonnegative measurable function admits increasing simple approximations. ([[thm-nonnegative-measurable-functions-admit-increasing-simple-approximations]])
 
-[L4] Assuming countable choice, Lebesgue measurable sets are Borel up to null
-sets, and $T$ preserves both null sets and Lebesgue measurability.
-([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]],
-[[lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets]],
-[[lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets]])
+[L4] Assuming countable choice, Lebesgue measurable sets are Borel up to null sets, and $T$ preserves both null sets and Lebesgue measurability. ([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]], [[lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets]], [[lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets]])
 
 [A1] The class of Borel sets $E \subseteq V$ for which $$ \lambda_n(E)=\int_U \mathbf 1_E(T(x))\,|\det DT(x)|\,d\lambda_n(x) $$ is a monotone class containing the open rectangles of $V$.
 

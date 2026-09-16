@@ -101,29 +101,10 @@ The shift changes nothing: convergence and monotonicity read the same under it
 
 ## Remarks
 
-- **The identification of the limit is the interesting half.** Monotone
-  convergence produces $L$ but says only that it is the infimum of the range,
-  which is not a usable description. Passing to the limit in the recursion turns
-  the description into an equation, $L = (L + 2/L)/2$, and that equation has
-  exactly one nonnegative solution. The step that makes this legitimate is
-  [[lem-limit-of-tail]]: the shifted sequence $(g_{j+1})$ has the same limit as
-  $(g_j)$, so the two sides of the recursion may be compared in the limit.
+- **The identification of the limit is the interesting half.** Monotone convergence produces $L$ but says only that it is the infimum of the range, which is not a usable description. Passing to the limit in the recursion turns the description into an equation, $L = (L + 2/L)/2$, and that equation has exactly one nonnegative solution. The step that makes this legitimate is [[lem-limit-of-tail]]: the shifted sequence $(g_{j+1})$ has the same limit as $(g_j)$, so the two sides of the recursion may be compared in the limit.
 
-- **The hypothesis $L \ne 0$ is not free.** The quotient case of
-  [[thm-algebra-of-limits]] requires it, and it is supplied by step 4.1, not
-  assumed. Had the sequence been allowed to approach $0$ the argument would break
-  exactly there, and this is the usual place where a proof of this example is
-  incomplete.
+- **The hypothesis $L \ne 0$ is not free.** The quotient case of [[thm-algebra-of-limits]] requires it, and it is supplied by step 4.1, not assumed. Had the sequence been allowed to approach $0$ the argument would break exactly there, and this is the usual place where a proof of this example is incomplete.
 
-- **Convergence is very fast, though nothing above uses that.** The identity in
-  step 1.2 also gives
-  $g_{j+1} - \sqrt 2 = (g_j - \sqrt 2)^2/(2 g_j)$, so the error is squared at
-  each step: the iteration is Newton's method applied to $u^2 - 2$. The
-  contractive estimate of [[thm-contractive-implies-cauchy]] would give only
-  geometric decay, so it is a weaker tool here, and the monotone route is both
-  shorter and sharper.
+- **Convergence is very fast, though nothing above uses that.** The identity in step 1.2 also gives $g_{j+1} - \sqrt 2 = (g_j - \sqrt 2)^2/(2 g_j)$, so the error is squared at each step: the iteration is Newton's method applied to $u^2 - 2$. The contractive estimate of [[thm-contractive-implies-cauchy]] would give only geometric decay, so it is a weaker tool here, and the monotone route is both shorter and sharper.
 
-- **Nothing in the argument is special to $2$.** The same proof with $2$ replaced
-  by any $a > 0$, starting from any $x_1 > 0$ with $x_1^2 > a$, converges to
-  $\sqrt a$. The starting value $2$ is chosen because $2^2 = 4 > 2$ makes the
-  base case of step 1.2 immediate.
+- **Nothing in the argument is special to $2$.** The same proof with $2$ replaced by any $a > 0$, starting from any $x_1 > 0$ with $x_1^2 > a$, converges to $\sqrt a$. The starting value $2$ is chosen because $2^2 = 4 > 2$ makes the base case of step 1.2 immediate.

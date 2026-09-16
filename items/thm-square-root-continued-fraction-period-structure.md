@@ -43,9 +43,7 @@ $$P_\ell=a_0,\qquad Q_\ell=1.$$
 
 **Given:** A positive nonsquare integer $D$, the continued-fraction digits $a_n$ of $\sqrt D$, and the state variables $P_n,Q_n$.
 
-[F1] The complete quotients satisfy
-$$\alpha_n=\frac{\sqrt D+P_n}{Q_n},\qquad P_{n+1}=a_nQ_n-P_n,\qquad Q_{n+1}=\frac{D-P_{n+1}^2}{Q_n},$$
-with $P_0=0$, $Q_0=1$, each $Q_n>0$, and each $Q_n\mid D-P_n^2$ ([[lem-square-root-continued-fraction-state-recurrence]]).
+[F1] The complete quotients satisfy $$\alpha_n=\frac{\sqrt D+P_n}{Q_n},\qquad P_{n+1}=a_nQ_n-P_n,\qquad Q_{n+1}=\frac{D-P_{n+1}^2}{Q_n},$$ with $P_0=0$, $Q_0=1$, each $Q_n>0$, and each $Q_n\mid D-P_n^2$ ([[lem-square-root-continued-fraction-state-recurrence]]).
 
 ## Proof
 

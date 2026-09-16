@@ -41,9 +41,7 @@ $e^w \in \mathbb C^\times$.
 
 **Given:** The biholomorphism $\Lambda:\mathcal R_{\log}\to\mathbb C$.
 
-[L1] The logarithm surface is biholomorphic to $\mathbb C$, and its projection
-corresponds to $\exp$
-([[thm-riemann-surface-of-the-logarithm]]).
+[L1] The logarithm surface is biholomorphic to $\mathbb C$, and its projection corresponds to $\exp$ ([[thm-riemann-surface-of-the-logarithm]]).
 
 ## Verification
 

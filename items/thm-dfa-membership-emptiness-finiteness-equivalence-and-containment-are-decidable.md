@@ -32,8 +32,7 @@ The five decision problems named in
 
 ## Facts & Assumptions
 
-**Given:** The DFA decision problems of
-[[def-regular-language-decision-problems]].
+**Given:** The DFA decision problems of [[def-regular-language-decision-problems]].
 
 [L1] By [[def-dfa-acceptance-and-recognized-language]], a DFA accepts a word exactly when the run on that word ends in an accepting state.
 

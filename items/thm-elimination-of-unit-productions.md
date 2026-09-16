@@ -31,12 +31,9 @@ that $L(H)=L(G)$ and $H$ has no unit productions.
 
 **Given:** A context-free grammar $G$.
 
-[L1] By [[thm-elimination-of-epsilon-productions]], we may first replace $G$ by
-an equivalent grammar whose only possible $\varepsilon$-production is a special
-start-symbol rule.
+[L1] By [[thm-elimination-of-epsilon-productions]], we may first replace $G$ by an equivalent grammar whose only possible $\varepsilon$-production is a special start-symbol rule.
 
-[L2] The generated language is defined by derivability from the start symbol, by
-[[def-language-generated-by-a-cfg]].
+[L2] The generated language is defined by derivability from the start symbol, by [[def-language-generated-by-a-cfg]].
 
 ## Proof
 

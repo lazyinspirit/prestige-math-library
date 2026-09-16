@@ -36,15 +36,11 @@ Consequently the Killing form has all three properties.
 
 ## Facts & Assumptions
 
-**Given:** A representation $\rho:\mathfrak g\to\mathfrak{gl}(V)$ with
-$V$ finite-dimensional and elements $x,y,z\in\mathfrak g$.
+**Given:** A representation $\rho:\mathfrak g\to\mathfrak{gl}(V)$ with $V$ finite-dimensional and elements $x,y,z\in\mathfrak g$.
 
-[L1] The trace form is $B_\rho(x,y)=\operatorname{tr}(\rho(x)\rho(y))$
-([[def-trace-form-of-a-finite-dimensional-representation]]).
+[L1] The trace form is $B_\rho(x,y)=\operatorname{tr}(\rho(x)\rho(y))$ ([[def-trace-form-of-a-finite-dimensional-representation]]).
 
-[L2] Finite-dimensional endomorphisms satisfy
-$\operatorname{tr}(AB)=\operatorname{tr}(BA)$
-([[thm-trace-of-ab-equals-trace-of-ba]]).
+[L2] Finite-dimensional endomorphisms satisfy $\operatorname{tr}(AB)=\operatorname{tr}(BA)$ ([[thm-trace-of-ab-equals-trace-of-ba]]).
 
 ## Proof
 

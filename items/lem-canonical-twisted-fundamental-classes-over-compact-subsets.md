@@ -44,34 +44,17 @@ with these prescribed local images at all interior points. Its pair boundary is 
 
 [F1] [[prop-the-manifold-orientation-system-is-a-local-system]] makes $\mathcal O_M^R$ a rank-one local system. On a coordinate ball, choosing a generator trivializes both the ordinary local top-homology factor and the coefficient stalk.
 
-[F2] [[def-singular-and-cellular-chain-complexes-with-local-coefficients]] and
-[[def-homology-and-cohomology-with-local-coefficients]] define support-relative
-groups from finite local chains. [[thm-excision-and-mayer-vietoris-with-local-coefficients]]
-supplies the local small-chain comparison and excision, while
-[[lem-relative-homology-mayer-vietoris-for-closed-supports]] supplies the exact
-quotient-complex pattern adapted explicitly in step 1.2.
+[F2] [[def-singular-and-cellular-chain-complexes-with-local-coefficients]] and [[def-homology-and-cohomology-with-local-coefficients]] define support-relative groups from finite local chains. [[thm-excision-and-mayer-vietoris-with-local-coefficients]] supplies the local small-chain comparison and excision, while [[lem-relative-homology-mayer-vietoris-for-closed-supports]] supplies the exact quotient-complex pattern adapted explicitly in step 1.2.
 
-[F3] [[thm-pair-long-exact-sequences-with-local-coefficients]] supplies natural
-pair sequences, and
-[[prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism]]
-supplies homotopy invariance with the displayed coefficient identifications.
+[F3] [[thm-pair-long-exact-sequences-with-local-coefficients]] supplies natural pair sequences, and [[prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism]] supplies homotopy invariance with the displayed coefficient identifications.
 
-[F4] [[thm-local-homology-detects-interior-points-boundary-points-and-dimension]]
-computes the ordinary point-local groups. [[thm-heine-borel-rn]],
-[[thm-compact-subset-of-a-hausdorff-space-is-closed]], and
-[[thm-path-connected-implies-connected]] supply the compactness, closedness,
-and connected-ball facts used below.
+[F4] [[thm-local-homology-detects-interior-points-boundary-points-and-dimension]] computes the ordinary point-local groups. [[thm-heine-borel-rn]], [[thm-compact-subset-of-a-hausdorff-space-is-closed]], and [[thm-path-connected-implies-connected]] supply the compactness, closedness, and connected-ball facts used below.
 
-[F5] [[def-connected-component-and-quasicomponent]] identifies a component as
-the largest connected subset through a point.
+[F5] [[def-connected-component-and-quasicomponent]] identifies a component as the largest connected subset through a point.
 
-[F6] [[def-orientation-local-system-on-a-manifold-with-boundary]] extends the
-interior system across a collar and fixes the outward-normal-first boundary
-identification.
+[F6] [[def-orientation-local-system-on-a-manifold-with-boundary]] extends the interior system across a collar and fixes the outward-normal-first boundary identification.
 
-[F7] [[thm-topological-collaring-for-manifold-boundaries]] gives collar cores
-and homotopy equivalences; [[thm-five-lemma-for-a-morphism-of-long-exact-sequences]]
-compares their pair groups.
+[F7] [[thm-topological-collaring-for-manifold-boundaries]] gives collar cores and homotopy equivalences; [[thm-five-lemma-for-a-morphism-of-long-exact-sequences]] compares their pair groups.
 
 ## Proof
 

@@ -26,27 +26,21 @@ for $f$ or a pole; in particular, $a$ is not an essential singularity.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice and a holomorphic map $f$ on
-$0<|z-a|<R$ omitting two distinct finite values.
+**Given:** The Axiom of Choice and a holomorphic map $f$ on $0<|z-a|<R$ omitting two distinct finite values.
 
-[A1] The Axiom of Choice is available for the subsequence selection below
-([[def-axiom-of-choice]]).
+[A1] The Axiom of Choice is available for the subsequence selection below ([[def-axiom-of-choice]]).
 
-[L1] Assuming the Axiom of Choice, holomorphic families omitting $0$ and $1$
-are chordally normal ([[thm-montel-caratheodory-theorem]]).
+[L1] Assuming the Axiom of Choice, holomorphic families omitting $0$ and $1$ are chordally normal ([[thm-montel-caratheodory-theorem]]).
 
 [L2] A chordal limit of holomorphic functions is holomorphic or identically $\infty$ ([[thm-chordal-limit-theorem-for-meromorphic-functions]]).
 
 [L3] Boundary maximum modulus propagates a boundary bound to a bounded annulus ([[thm-boundary-maximum-modulus-principle]]).
 
-[L4] A bounded punctured-disc holomorphic function has a removable singularity
-([[thm-removable-singularity-characterizations]]).
+[L4] A bounded punctured-disc holomorphic function has a removable singularity ([[thm-removable-singularity-characterizations]]).
 
 [L5] Every isolated singularity is removable, a pole, or essential ([[thm-isolated-singularity-trichotomy]]).
 
-[L6] A punctured-disc holomorphic function has a pole exactly when its
-reciprocal extends holomorphically across the centre and vanishes there
-([[thm-pole-characterizations]]).
+[L6] A punctured-disc holomorphic function has a pole exactly when its reciprocal extends holomorphically across the centre and vanishes there ([[thm-pole-characterizations]]).
 
 ## Proof
 

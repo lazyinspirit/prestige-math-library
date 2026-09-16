@@ -76,21 +76,8 @@ is false for sequences in general.
 
 ## Remarks
 
-- **The limit is named, not merely asserted to exist.** In the nondecreasing case
-  it is $\sup S$ and in the nonincreasing case $\inf S$, by
-  [[thm-monotone-convergence]]. The equivalence is stated without the value only
-  because the value depends on which of the two cases holds.
+- **The limit is named, not merely asserted to exist.** In the nondecreasing case it is $\sup S$ and in the nonincreasing case $\inf S$, by [[thm-monotone-convergence]]. The equivalence is stated without the value only because the value depends on which of the two cases holds.
 
-- **This is the form in which the result is used.** Bolzano-Weierstrass
-  ([[thm-bolzano-weierstrass]]) extracts a monotone subsequence of a bounded
-  sequence and then needs exactly this corollary, since what is available about
-  the subsequence is boundedness, inherited from the sequence, and not a bound on
-  a particular side.
+- **This is the form in which the result is used.** Bolzano-Weierstrass ([[thm-bolzano-weierstrass]]) extracts a monotone subsequence of a bounded sequence and then needs exactly this corollary, since what is available about the subsequence is boundedness, inherited from the sequence, and not a bound on a particular side.
 
-- **Monotonicity cannot be dropped.** Without it the converse direction fails,
-  by [[fs-bounded-implies-convergent]]. The forward direction is not in the same
-  position: it holds for every sequence, monotone or not, so there is no
-  hypothesis to drop from it. What monotonicity adds there is sharpness rather
-  than validity, and the sharpened form is recorded by
-  [[lem-monotone-unbounded-diverges]]: an unbounded nondecreasing sequence does
-  not merely fail to converge, it diverges to $+\infty$.
+- **Monotonicity cannot be dropped.** Without it the converse direction fails, by [[fs-bounded-implies-convergent]]. The forward direction is not in the same position: it holds for every sequence, monotone or not, so there is no hypothesis to drop from it. What monotonicity adds there is sharpness rather than validity, and the sharpened form is recorded by [[lem-monotone-unbounded-diverges]]: an unbounded nondecreasing sequence does not merely fail to converge, it diverges to $+\infty$.

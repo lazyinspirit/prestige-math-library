@@ -29,11 +29,9 @@ Pullback pasting and pullback cancellation hold in every abelian category.
 
 ## Facts & Assumptions
 
-**Given:** A diagram of two adjacent commutative squares in an abelian
-category.
+**Given:** A diagram of two adjacent commutative squares in an abelian category.
 
-[L1] Pullback and pushout pasting hold in every category in which the relevant
-squares exist ([[thm-pullback-and-pushout-pasting]]).
+[L1] Pullback and pushout pasting hold in every category in which the relevant squares exist ([[thm-pullback-and-pushout-pasting]]).
 
 ## Proof
 

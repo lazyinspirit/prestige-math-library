@@ -36,14 +36,11 @@ The standard contact rank-$2$ distribution on $\mathbb R^3$ is integrable.
 
 ## Facts & Assumptions
 
-**Given:** Let
-$$X_1 := \partial_x + y\partial_z,\qquad X_2 := \partial_y,$$
-and let $\mathcal D := \operatorname{span}(X_1,X_2)$.
+**Given:** Let $$X_1 := \partial_x + y\partial_z,\qquad X_2 := \partial_y,$$ and let $\mathcal D := \operatorname{span}(X_1,X_2)$.
 
 [A1] This is the kernel of the $1$-form $\alpha = dz - y\,dx$.
 
-[L1] Every integrable smooth distribution is involutive
-([[prop-integrable-distributions-are-involutive]]).
+[L1] Every integrable smooth distribution is involutive ([[prop-integrable-distributions-are-involutive]]).
 
 ## Counterexample
 
@@ -53,12 +50,9 @@ and let $\mathcal D := \operatorname{span}(X_1,X_2)$.
 they define a smooth rank-$2$ distribution on $\mathbb R^3$. [given]
 
 1.2 Their bracket is [given]
-$$[X_1,X_2] = -\partial_z,$$
-which is not a linear combination of $X_1$ and $X_2$. Therefore the
-distribution is not involutive, even on this global frame. [given, algebra]
+$$[X_1,X_2] = -\partial_z,$$ which is not a linear combination of $X_1$ and $X_2$. Therefore the distribution is not involutive, even on this global frame. [given, algebra]
 
 1.3 By [L1], an integrable distribution would have to be involutive. Hence this standard [L1]
-contact distribution is a counterexample to the claim that it is integrable.
-[L1]
+contact distribution is a counterexample to the claim that it is integrable. [L1]
 
 2.1 Therefore the displayed statement is refuted. [given] ∎ [given]

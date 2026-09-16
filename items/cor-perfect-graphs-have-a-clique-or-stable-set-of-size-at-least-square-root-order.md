@@ -39,14 +39,9 @@ set of size at least $\sqrt n$.
 
 **Given:** A perfect graph $G$ on $n$ vertices.
 
-[L1] Perfect graphs satisfy $|V(G)|\leq\kappa(G)$
-([[thm-perfect-graphs-satisfy-kappa-at-least-their-order]]).
+[L1] Perfect graphs satisfy $|V(G)|\leq\kappa(G)$ ([[thm-perfect-graphs-satisfy-kappa-at-least-their-order]]).
 
-[L2] $\kappa(G)=\alpha(G)\omega(G)$ and
-$\operatorname{hom}(G)=\max\{\alpha(G),\omega(G)\}$
-([[def-kappa-of-a-graph]],
-[[def-homogeneous-set-and-homogeneous-number]],
-[[def-clique-stable-set-and-numbers]]).
+[L2] $\kappa(G)=\alpha(G)\omega(G)$ and $\operatorname{hom}(G)=\max\{\alpha(G),\omega(G)\}$ ([[def-kappa-of-a-graph]], [[def-homogeneous-set-and-homogeneous-number]], [[def-clique-stable-set-and-numbers]]).
 
 ## Proof
 

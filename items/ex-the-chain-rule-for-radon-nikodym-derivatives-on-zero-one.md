@@ -31,17 +31,11 @@ $$\frac{d\nu}{d\lambda}=\frac{d\nu}{d\mu}\frac{d\mu}{d\lambda}\qquad\lambda\text
 
 **Given:** The measures $\mu=2\lambda$ and $\nu(E)=\int_E2x\,\chi_{[0,1]}(x)\,d\lambda(x)$.
 
-[L1] For an absolutely continuous signed measure and a sigma-finite positive
-base satisfying a common finite exhaustion, a Radon--Nikodym derivative is any
-representative whose measurable-set integrals recover the measure
-([[def-radon-nikodym-derivative]]).
+[L1] For an absolutely continuous signed measure and a sigma-finite positive base satisfying a common finite exhaustion, a Radon--Nikodym derivative is any representative whose measurable-set integrals recover the measure ([[def-radon-nikodym-derivative]]).
 
-[L3] Integrals over null sets vanish
-([[cor-integral-over-a-null-set-vanishes]]).
+[L3] Integrals over null sets vanish ([[cor-integral-over-a-null-set-vanishes]]).
 
-[L2] Under the sigma-finiteness, common finite-exhaustion, and
-$\nu\ll\mu\ll\lambda$ hypotheses, Radon--Nikodym derivatives satisfy the chain
-rule ([[thm-chain-rule-for-radon-nikodym-derivatives]]).
+[L2] Under the sigma-finiteness, common finite-exhaustion, and $\nu\ll\mu\ll\lambda$ hypotheses, Radon--Nikodym derivatives satisfy the chain rule ([[thm-chain-rule-for-radon-nikodym-derivatives]]).
 
 ## Verification
 

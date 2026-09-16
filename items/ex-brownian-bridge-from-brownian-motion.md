@@ -68,8 +68,4 @@ standard Brownian bridge from $0$ to $0$ over $[0,1]$.
 
 ## Source notes
 
-Yoshida, Exercise 6.1.10, printed p. 180, defines a Brownian bridge from
-$a$ to $b$ over duration $s$ as
-$B_t-(t/s)B_s+(1-t/s)a+(t/s)b$. Durrett, Section 8.4, printed pp. 412--413,
-specializes this to $B_t-tB_1$ and computes the covariance $s(1-t)$ for
-$s<t$. The proof above supplies all finite-dimensional and endpoint details.
+Yoshida, Exercise 6.1.10, printed p. 180, defines a Brownian bridge from $a$ to $b$ over duration $s$ as $B_t-(t/s)B_s+(1-t/s)a+(t/s)b$. Durrett, Section 8.4, printed pp. 412--413, specializes this to $B_t-tB_1$ and computes the covariance $s(1-t)$ for $s<t$. The proof above supplies all finite-dimensional and endpoint details.

@@ -70,12 +70,6 @@ Let $a, b, c \in \mathbb{Z}$.
 
 ## Remarks
 
-- **No primality is used.** Claim 1 is exactly the statement usually met as
-  Euclid's lemma with $a$ prime; what the proof needs is coprimality of $a$ with
-  $b$, and primality of $a$ enters only later, as a way of *guaranteeing* that
-  coprimality. This is why the lemma is homed here rather than with the primes.
+- **No primality is used.** Claim 1 is exactly the statement usually met as Euclid's lemma with $a$ prime; what the proof needs is coprimality of $a$ with $b$, and primality of $a$ enters only later, as a way of *guaranteeing* that coprimality. This is why the lemma is homed here rather than with the primes.
 
-- **Coprimality is essential in both claims.** Without it, $6 \mid 4 \cdot 9$
-  while $6$ divides neither factor
-  ([[cex-divides-a-product-without-dividing-a-factor]]); and $2 \mid 4$,
-  $4 \mid 4$ but $2 \cdot 4 = 8 \nmid 4$.
+- **Coprimality is essential in both claims.** Without it, $6 \mid 4 \cdot 9$ while $6$ divides neither factor ([[cex-divides-a-product-without-dividing-a-factor]]); and $2 \mid 4$, $4 \mid 4$ but $2 \cdot 4 = 8 \nmid 4$.

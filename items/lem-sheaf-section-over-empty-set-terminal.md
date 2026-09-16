@@ -31,8 +31,7 @@ $\mathcal F(\varnothing)$ is a singleton.
 
 **Given:** A sheaf $\mathcal F$ on $X$.
 
-[L1] A sheaf satisfies locality and gluing for every open cover, including the
-empty cover of $\varnothing$ ([[def-sheaf-on-topological-space]]).
+[L1] A sheaf satisfies locality and gluing for every open cover, including the empty cover of $\varnothing$ ([[def-sheaf-on-topological-space]]).
 
 ## Proof
 

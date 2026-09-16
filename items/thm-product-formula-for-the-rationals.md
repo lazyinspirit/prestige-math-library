@@ -33,12 +33,9 @@ finitely many factors are equal to $1$.
 
 **Given:** A nonzero rational number $x$.
 
-[L1] The finite places of $\mathbb Q$ are represented by the normalized
-$p$-adic absolute values ([[def-place-of-the-rationals]],
-[[def-p-adic-absolute-value-on-the-rationals]]).
+[L1] The finite places of $\mathbb Q$ are represented by the normalized $p$-adic absolute values ([[def-place-of-the-rationals]], [[def-p-adic-absolute-value-on-the-rationals]]).
 
-[L2] A nonzero rational has a finite prime factorization in lowest terms
-([[thm-canonical-prime-factorisation]]).
+[L2] A nonzero rational has a finite prime factorization in lowest terms ([[thm-canonical-prime-factorisation]]).
 
 ## Proof
 

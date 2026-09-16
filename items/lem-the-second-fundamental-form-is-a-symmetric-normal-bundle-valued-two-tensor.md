@@ -38,18 +38,13 @@ $\mathrm{II}\in\Gamma(S^2T^*M\otimes\nu M)$.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, an embedded Riemannian submanifold, and tangent
-fields $X,Y$.
+**Given:** Countable choice, an embedded Riemannian submanifold, and tangent fields $X,Y$.
 
-[F1] The second fundamental form is the normal projection
-$\mathrm{II}(X,Y)=(\overline\nabla_XY)^\perp$ of a well-defined smooth field
-along $M$. [[def-induced-connection-and-second-fundamental-form]].
+[F1] The second fundamental form is the normal projection $\mathrm{II}(X,Y)=(\overline\nabla_XY)^\perp$ of a well-defined smooth field along $M$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F2] Covariant differentiation is function-linear in its direction and obeys
-the section Leibniz rule. [[prop-connection-laws-in-directional-form]].
+[F2] Covariant differentiation is function-linear in its direction and obeys the section Leibniz rule. [[prop-connection-laws-in-directional-form]].
 
-[F3] The induced connection is torsion free and equals the Levi–Civita
-connection of the induced metric. [[thm-the-induced-connection-is-levi-civita]].
+[F3] The induced connection is torsion free and equals the Levi–Civita connection of the induced metric. [[thm-the-induced-connection-is-levi-civita]].
 
 ## Proof
 

@@ -40,27 +40,17 @@ theorem's construction of a countable leaf atlas and its countable unions.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, and a Lie
-subalgebra $\mathfrak h\subseteq\mathfrak g=\operatorname{Lie}(G)$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, and a Lie subalgebra $\mathfrak h\subseteq\mathfrak g=\operatorname{Lie}(G)$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] The distribution $\mathcal D_g=d(L_g)_e\mathfrak h$ is involutive, and
-the Frobenius theorem therefore makes it integrable.
-[[lem-a-lie-subalgebra-distribution-is-involutive]].
-[[thm-frobenius-local-coordinate-theorem]].
+[F1] The distribution $\mathcal D_g=d(L_g)_e\mathfrak h$ is involutive, and the Frobenius theorem therefore makes it integrable. [[lem-a-lie-subalgebra-distribution-is-involutive]]. [[thm-frobenius-local-coordinate-theorem]].
 
-[F2] Every point of an integrable distribution lies on a unique maximal
-connected integral manifold, and every connected integral immersion through
-that point factors uniquely and smoothly through it.
-[[thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds]].
+[F2] Every point of an integrable distribution lies on a unique maximal connected integral manifold, and every connected integral immersion through that point factors uniquely and smoothly through it. [[thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds]].
 
-[F3] Under left translation, $\mathcal D_g=d(L_g)_e\mathfrak h$ satisfies
-$d(L_a)_g\mathcal D_g=\mathcal D_{ag}$.
-[[def-left-translated-distribution-associated-to-a-lie-subalgebra]].
+[F3] Under left translation, $\mathcal D_g=d(L_g)_e\mathfrak h$ satisfies $d(L_a)_g\mathcal D_g=\mathcal D_{ag}$. [[def-left-translated-distribution-associated-to-a-lie-subalgebra]].
 
-[F4] A smooth map with invertible differential at a point is a local
-diffeomorphism there. [[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F4] A smooth map with invertible differential at a point is a local diffeomorphism there. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
 ## Proof
 

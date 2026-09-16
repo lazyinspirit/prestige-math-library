@@ -83,11 +83,5 @@ $Z := f[X] \subseteq Y$ with its subspace metric $d_Z$. Then:
 
 ## Remarks
 
-- **Only the image carries the right topology.** Claim 4 compares the topology of
-  $X$ with the SUBSPACE topology of $f[X]$, not with the topology of $Y$. The
-  image of an open set is in general not open in $Y$: the inclusion of $[0,1]$
-  into $\mathbb{R}$ is an isometric embedding, and $[0,1]$ is open in itself but
-  not in $\mathbb{R}$ ([[lem-real-line-is-a-metric-space]]).
-- **This is what licenses treating a subset of a metric space as a space in its
-  own right**, and it is used on the companion page whenever a subset of
-  $\mathbb{R}$ is called a metric space.
+- **Only the image carries the right topology.** Claim 4 compares the topology of $X$ with the SUBSPACE topology of $f[X]$, not with the topology of $Y$. The image of an open set is in general not open in $Y$: the inclusion of $[0,1]$ into $\mathbb{R}$ is an isometric embedding, and $[0,1]$ is open in itself but not in $\mathbb{R}$ ([[lem-real-line-is-a-metric-space]]).
+- **This is what licenses treating a subset of a metric space as a space in its own right**, and it is used on the companion page whenever a subset of $\mathbb{R}$ is called a metric space.

@@ -38,11 +38,9 @@ The corresponding statement for right duals is also true.
 
 ## Facts & Assumptions
 
-**Given:** Two left duals $(X_1^\vee,\operatorname{ev}_1,\operatorname{coev}_1)$
-and $(X_2^\vee,\operatorname{ev}_2,\operatorname{coev}_2)$ of $X$.
+**Given:** Two left duals $(X_1^\vee,\operatorname{ev}_1,\operatorname{coev}_1)$ and $(X_2^\vee,\operatorname{ev}_2,\operatorname{coev}_2)$ of $X$.
 
-[L1] Each pair satisfies the left-dual zig-zag identities
-([[def-left-dual-and-right-dual-object]], [[def-the-zig-zag-identities]]).
+[L1] Each pair satisfies the left-dual zig-zag identities ([[def-left-dual-and-right-dual-object]], [[def-the-zig-zag-identities]]).
 
 ## Proof
 

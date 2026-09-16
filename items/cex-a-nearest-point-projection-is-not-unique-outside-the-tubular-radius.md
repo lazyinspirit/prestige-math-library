@@ -31,12 +31,9 @@ everywhere in the ambient space.
 
 ## Facts & Assumptions
 
-**Given:** The unit circle $S^1\subseteq\mathbb R^2$ and the center point
-$0\in\mathbb R^2$.
+**Given:** The unit circle $S^1\subseteq\mathbb R^2$ and the center point $0\in\mathbb R^2$.
 
-[L1] Nearest-point projection agrees with the tubular retraction only after one
-shrinks to a sufficiently small tube
-([[prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking]]).
+[L1] Nearest-point projection agrees with the tubular retraction only after one shrinks to a sufficiently small tube ([[prop-nearest-point-projection-is-the-tubular-retraction-after-shrinking]]).
 
 ## Counterexample
 **Proof technique:** direct.

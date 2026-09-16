@@ -32,11 +32,9 @@ preserves the Liouville volume form $\Omega=\omega^n/n!$.
 
 **Given:** A Hamiltonian vector field and its local flow $\phi_t$.
 
-[F1] The symplectic volume is $\Omega=\omega^n/n!$.
-[[cor-symplectic-manifolds-have-a-canonical-orientation-and-volume-form]].
+[F1] The symplectic volume is $\Omega=\omega^n/n!$. [[cor-symplectic-manifolds-have-a-canonical-orientation-and-volume-form]].
 
-[F2] Hamiltonian local flows satisfy $\phi_t^*\omega=\omega$.
-[[thm-hamiltonian-flows-preserve-the-symplectic-form]].
+[F2] Hamiltonian local flows satisfy $\phi_t^*\omega=\omega$. [[thm-hamiltonian-flows-preserve-the-symplectic-form]].
 
 ## Proof
 

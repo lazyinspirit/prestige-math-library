@@ -36,18 +36,13 @@ $$E'(y)=E(y)\quad(y\in\mathbb R),\qquad E(0)=1.$$
 
 **Given:** $y\in\mathbb R$.
 
-[F1] $E=L^{-1}$, $L(E(y))=y$, and $E(L(x))=x$
-([[def-integral-exponential]]).
+[F1] $E=L^{-1}$, $L(E(y))=y$, and $E(L(x))=x$ ([[def-integral-exponential]]).
 
-[L1] $L'(x)=1/x$ for $x>0$, and $L(1)=0$
-([[thm-integral-logarithm-derivative-and-normalisation]]).
+[L1] $L'(x)=1/x$ for $x>0$, and $L(1)=0$ ([[thm-integral-logarithm-derivative-and-normalisation]]).
 
-[L2] If a continuous injective function on a nondegenerate interval has a
-nonzero derivative at $c$, then its inverse is differentiable at $f(c)$ with
-derivative $1/f'(c)$ ([[thm-derivative-of-an-inverse]]).
+[L2] If a continuous injective function on a nondegenerate interval has a nonzero derivative at $c$, then its inverse is differentiable at $f(c)$ with derivative $1/f'(c)$ ([[thm-derivative-of-an-inverse]]).
 
-[L3] A differentiable function is continuous
-([[cor-differentiable-implies-continuous]]).
+[L3] A differentiable function is continuous ([[cor-differentiable-implies-continuous]]).
 
 ## Proof
 

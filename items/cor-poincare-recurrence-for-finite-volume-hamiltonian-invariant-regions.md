@@ -35,12 +35,9 @@ integers $n$.
 
 **Given:** The invariant finite-volume region and time map in the statement.
 
-[F1] Hamiltonian time maps preserve symplectic volume.
-[[thm-liouville-volume-preservation]].
+[F1] Hamiltonian time maps preserve symplectic volume. [[thm-liouville-volume-preservation]].
 
-[F2] In a finite measure-preserving system, almost every point of each
-measurable set returns infinitely often.
-[[thm-poincare-recurrence-for-finite-measure-preserving-systems]].
+[F2] In a finite measure-preserving system, almost every point of each measurable set returns infinitely often. [[thm-poincare-recurrence-for-finite-measure-preserving-systems]].
 
 ## Proof
 

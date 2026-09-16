@@ -35,21 +35,15 @@ transformations is abelian.
 
 ## Facts & Assumptions
 
-**Given:** A small preadditive category $\mathcal C$ and an abelian category
-$\mathcal A$.
+**Given:** A small preadditive category $\mathcal C$ and an abelian category $\mathcal A$.
 
-[L1] Additive functors and natural transformations form a preadditive category
-([[prop-additive-functors-and-natural-transformations-form-a-preadditive-category]]).
+[L1] Additive functors and natural transformations form a preadditive category ([[prop-additive-functors-and-natural-transformations-form-a-preadditive-category]]).
 
-[L2] The smallness of $\mathcal C$ makes the relevant functor categories locally
-small ([[prop-size-of-functor-categories]]).
+[L2] The smallness of $\mathcal C$ makes the relevant functor categories locally small ([[prop-size-of-functor-categories]]).
 
-[L3] Limits and colimits in functor categories are computed pointwise
-([[thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]]).
+[L3] Limits and colimits in functor categories are computed pointwise ([[thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]]).
 
-[L4] Abelian categories are additive and have pointwise kernels, cokernels, and
-coimage-image isomorphisms
-([[def-abelian-category]]).
+[L4] Abelian categories are additive and have pointwise kernels, cokernels, and coimage-image isomorphisms ([[def-abelian-category]]).
 
 ## Proof
 

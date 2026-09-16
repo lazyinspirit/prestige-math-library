@@ -97,30 +97,10 @@ named counterexample on the companion page.
 
 ## Remarks
 
-- **The three situations are not decoration.** The middle one is the analytic
-  content and the outer two are genuinely different arguments: the first is
-  vacuous because $+\infty$ bounds everything, and the third is a statement about
-  divergence to $-\infty$ that has to be proved, since a sum of two sequences each
-  running off to $-\infty$, or one running off with the other merely bounded
-  above, is not covered by any algebra of limits
-  ([[def-divergence-to-infinity]] forbids that).
+- **The three situations are not decoration.** The middle one is the analytic content and the outer two are genuinely different arguments: the first is vacuous because $+\infty$ bounds everything, and the third is a statement about divergence to $-\infty$ that has to be proved, since a sum of two sequences each running off to $-\infty$, or one running off with the other merely bounded above, is not covered by any algebra of limits ([[def-divergence-to-infinity]] forbids that).
 
-- **Why the real supremum of a sumset is not used.** The natural one-line route,
-  $s_n(x+y) \le s_n(x) + s_n(y)$ followed by a passage to the infimum, needs the
-  first inequality in $\overline{\mathbb{R}}$ and then still needs an $\varepsilon$
-  argument to compare $\inf_n\big(s_n(x) + s_n(y)\big)$ with
-  $\Lambda + M$. The identity $\sup(S+T) = \sup S + \sup T$ of [[lem-sup-sum]]
-  does not apply, since it requires both sets to be nonempty subsets of
-  $\mathbb{R}$ bounded above, and a tail range of an unbounded sequence is not.
-  The $\varepsilon$ argument is therefore made directly, once.
+- **Why the real supremum of a sumset is not used.** The natural one-line route, $s_n(x+y) \le s_n(x) + s_n(y)$ followed by a passage to the infimum, needs the first inequality in $\overline{\mathbb{R}}$ and then still needs an $\varepsilon$ argument to compare $\inf_n\big(s_n(x) + s_n(y)\big)$ with $\Lambda + M$. The identity $\sup(S+T) = \sup S + \sup T$ of [[lem-sup-sum]] does not apply, since it requires both sets to be nonempty subsets of $\mathbb{R}$ bounded above, and a tail range of an unbounded sequence is not. The $\varepsilon$ argument is therefore made directly, once.
 
-- **Both halves of the $\varepsilon$ split are reciprocals of natural numbers, not halvings in
-  $\mathbb{R}$.** Choosing $m$ with $1/m < \delta$ and then working with
-  $1/(2m)$ keeps every quantity a reciprocal of a canonical natural, so the only
-  field facts used are that positives are invertible and that inequalities add.
+- **Both halves of the $\varepsilon$ split are reciprocals of natural numbers, not halvings in $\mathbb{R}$.** Choosing $m$ with $1/m < \delta$ and then working with $1/(2m)$ keeps every quantity a reciprocal of a canonical natural, so the only field facts used are that positives are invertible and that inequalities add.
 
-- **Equality is the exception.** Without a hypothesis on one of the two
-  sequences the gap can be as large as the whole oscillation, as
-  [[cex-limsup-subadditivity-strict]] shows. It is standard, and neither needed
-  nor proved on this page, that the inequality becomes an equality as soon as one
-  of the two sequences converges to a real limit.
+- **Equality is the exception.** Without a hypothesis on one of the two sequences the gap can be as large as the whole oscillation, as [[cex-limsup-subadditivity-strict]] shows. It is standard, and neither needed nor proved on this page, that the inequality becomes an equality as soon as one of the two sequences converges to a real limit.

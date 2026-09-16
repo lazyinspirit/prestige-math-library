@@ -31,11 +31,9 @@ Assume $\mathrm{AC}_\omega$. The tangent bundle of $S^1$ is a trivial line bundl
 
 **Given:** The axiom $\mathrm{AC}_\omega$ and the circle $S^1\subseteq\mathbb R^2$.
 
-[L1] The tangent bundle of the circle is a smooth rank-one vector bundle
-([[ex-the-tangent-and-cotangent-bundles-as-vector-bundles]]).
+[L1] The tangent bundle of the circle is a smooth rank-one vector bundle ([[ex-the-tangent-and-cotangent-bundles-as-vector-bundles]]).
 
-[L2] A smooth vector bundle is trivial exactly when it has a global frame
-([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
+[L2] A smooth vector bundle is trivial exactly when it has a global frame ([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
 
 ## Verification
 

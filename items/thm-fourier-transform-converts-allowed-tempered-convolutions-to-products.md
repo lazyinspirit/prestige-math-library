@@ -45,30 +45,19 @@ distributions occurs.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]], $u\in\mathcal S'$,
-$\varphi\in\mathcal S$, and, for the last formula, compactly supported $v$.
+**Given:** [[def-countable-choice|Countable Choice]], $u\in\mathcal S'$, $\varphi\in\mathcal S$, and, for the last formula, compactly supported $v$.
 
-[F1] The convolution $u*\varphi$ is a regular tempered distribution
-([[thm-tempered-convolution-is-smooth-with-polynomial-growth]]).
+[F1] The convolution $u*\varphi$ is a regular tempered distribution ([[thm-tempered-convolution-is-smooth-with-polynomial-growth]]).
 
-[F2] Schwartz multipliers act on $\mathcal S'$, and $\mathcal Fv$ is a smooth
-polynomially bounded multiplier
-([[lem-smooth-polynomially-bounded-multipliers-on-schwartz-space]],
-[[thm-fourier-transform-of-a-compactly-supported-distribution-is-a-smooth-polynomially-bounded-multiplier]]).
+[F2] Schwartz multipliers act on $\mathcal S'$, and $\mathcal Fv$ is a smooth polynomially bounded multiplier ([[lem-smooth-polynomially-bounded-multipliers-on-schwartz-space]], [[thm-fourier-transform-of-a-compactly-supported-distribution-is-a-smooth-polynomially-bounded-multiplier]]).
 
-[F3] Seminorm-dominated Schwartz integrals commute with tempered pairings
-([[lem-schwartz-parameter-pairing-and-integral-interchange]]).
+[F3] Seminorm-dominated Schwartz integrals commute with tempered pairings ([[lem-schwartz-parameter-pairing-and-integral-interchange]]).
 
-[F4] Compact-distribution convolution preserves $\mathcal S'$ and agrees with
-the support-conditioned distribution convolution
-([[lem-compact-distribution-convolution-preserves-schwartz-and-tempered-spaces]]).
+[F4] Compact-distribution convolution preserves $\mathcal S'$ and agrees with the support-conditioned distribution convolution ([[lem-compact-distribution-convolution-preserves-schwartz-and-tempered-spaces]]).
 
-[F5] Fourier transformation or inversion is available on $\mathcal S'$, with
-$\mathcal F^2=R$ ([[thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions]]).
+[F5] Fourier transformation or inversion is available on $\mathcal S'$, with $\mathcal F^2=R$ ([[thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions]]).
 
-[F6] Products and convolutions of two Schwartz functions satisfy the same
-$2\pi$-normalized transform laws
-([[cor-schwartz-convolution-and-product-transform-laws]]).
+[F6] Products and convolutions of two Schwartz functions satisfy the same $2\pi$-normalized transform laws ([[cor-schwartz-convolution-and-product-transform-laws]]).
 
 ## Proof
 
@@ -84,31 +73,20 @@ $$\langle\mathcal F(u*\varphi),\psi\rangle =\left\langle u_y, \int\varphi(x-y)\w
 
 $$\mathcal F(\widehat\varphi\,\psi)(y).$$
 
-Indeed, inserting $\widehat\psi(x)=\int\psi(\xi)e^{-2\pi ix\cdot\xi}d\xi$
-and translating $x-y$ produces
-$\widehat\varphi(\xi)e^{-2\pi iy\cdot\xi}$.  Hence step 1.1 equals
-$\langle\mathcal Fu,\widehat\varphi\,\psi\rangle$, which is
-$\langle(\mathcal Fu)(\mathcal F\varphi),\psi\rangle$. [F2, F3, F6,
-step 1.1]
+Indeed, inserting $\widehat\psi(x)=\int\psi(\xi)e^{-2\pi ix\cdot\xi}d\xi$ and translating $x-y$ produces $\widehat\varphi(\xi)e^{-2\pi iy\cdot\xi}$.  Hence step 1.1 equals $\langle\mathcal Fu,\widehat\varphi\,\psi\rangle$, which is $\langle(\mathcal Fu)(\mathcal F\varphi),\psi\rangle$. [F2, F3, F6, step 1.1]
 
 1.3 Put $V=\mathcal Fv$.  Evaluate the compact-factor convolution on an arbitrary $\psi\in\mathcal S$. [F4]
 
 $$\langle\mathcal F(u*v),\psi\rangle =\left\langle u_x,\left\langle v_y, \widehat\psi(x+y)\right\rangle\right\rangle.$$
 
-The compact support of $v$ and [F3] permit its pairing to cross the rapidly
-convergent Fourier integral, giving
+The compact support of $v$ and [F3] permit its pairing to cross the rapidly convergent Fourier integral, giving
 
 $$\left\langle v_y,\widehat\psi(x+y)\right\rangle =\int V(\xi)\psi(\xi)e^{-2\pi ix\cdot\xi}\,d\xi =\mathcal F(V\psi)(x).$$
 
-Thus the outer pairing is
-$\langle\mathcal Fu,V\psi\rangle=
-\langle(\mathcal Fu)(\mathcal Fv),\psi\rangle$. [F2, F3, F4]
+Thus the outer pairing is $\langle\mathcal Fu,V\psi\rangle= \langle(\mathcal Fu)(\mathcal Fv),\psi\rangle$. [F2, F3, F4]
 
 2.1 Apply the first identity to $\mathcal Fu$ and the Schwartz function $\mathcal F\varphi$, then use Fourier squaring. [F5, step 1.2]
 
 $$\mathcal F((\mathcal Fu)*(\mathcal F\varphi)) =(\mathcal F^2u)(\mathcal F^2\varphi) =(Ru)(R\varphi)=R(\varphi u).$$
 
-Since $\mathcal F^{-1}R=\mathcal F$, inversion gives
-$(\mathcal Fu)*(\mathcal F\varphi)=\mathcal F(\varphi u)$.
-Zero factors are included.  Countable Choice is used only through the
-published Fourier/Lebesgue suppliers. [F5, step 1.2] ∎
+Since $\mathcal F^{-1}R=\mathcal F$, inversion gives $(\mathcal Fu)*(\mathcal F\varphi)=\mathcal F(\varphi u)$. Zero factors are included.  Countable Choice is used only through the published Fourier/Lebesgue suppliers. [F5, step 1.2] ∎

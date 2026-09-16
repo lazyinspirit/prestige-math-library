@@ -39,25 +39,17 @@ isomorphisms $K^q(X)\cong K^{q-2}(X)$ for all $q\in\mathbb Z$.
 
 ## Facts & Assumptions
 
-**Given:** AC, a based finite CW complex $X$, and
-$\beta=[\gamma]-1\in\widetilde K^0(S^2)$.
+**Given:** AC, a based finite CW complex $X$, and $\beta=[\gamma]-1\in\widetilde K^0(S^2)$.
 
-[F1] The product theorem gives the unique decomposition
-$K^0(X\times S^2)=K^0(X)\oplus K^0(X)\beta$
-([[thm-fundamental-product-theorem-for-complex-k-theory]]).
+[F1] The product theorem gives the unique decomposition $K^0(X\times S^2)=K^0(X)\oplus K^0(X)\beta$ ([[thm-fundamental-product-theorem-for-complex-k-theory]]).
 
-[F2] Reduced external product is the unique class on the smash product whose
-pullback is the unreduced product
-([[def-external-product-in-complex-k-theory]]).
+[F2] Reduced external product is the unique class on the smash product whose pullback is the unreduced product ([[def-external-product-in-complex-k-theory]]).
 
-[F3] Negative groups are reduced groups of iterated suspensions
-([[def-negative-degree-complex-k-groups]]).
+[F3] Negative groups are reduced groups of iterated suspensions ([[def-negative-degree-complex-k-groups]]).
 
-[F4] The reduced cofibration sequence is natural and exact at every suspended
-stage ([[thm-reduced-k-theory-exact-sequence-of-a-cofibration]]).
+[F4] The reduced cofibration sequence is natural and exact at every suspended stage ([[thm-reduced-k-theory-exact-sequence-of-a-cofibration]]).
 
-[A1] AC is used through the product theorem and the reduced external-product
-and exactness suppliers [F1], [F2], and [F4].
+[A1] AC is used through the product theorem and the reduced external-product and exactness suppliers [F1], [F2], and [F4].
 
 ## Proof
 

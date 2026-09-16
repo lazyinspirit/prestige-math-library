@@ -30,12 +30,9 @@ ordered block by block, then the decomposition matrix becomes block diagonal.
 
 **Given:** The decomposition matrix $D=(d_{\chi\varphi})$.
 
-[F1] The entry $d_{\chi\varphi}$ records the multiplicity of the simple
-$kG$-module $S_\varphi$ in the reduction of a stable lattice affording $\chi$
-([[def-decomposition-numbers-and-decomposition-matrix]]).
+[F1] The entry $d_{\chi\varphi}$ records the multiplicity of the simple $kG$-module $S_\varphi$ in the reduction of a stable lattice affording $\chi$ ([[def-decomposition-numbers-and-decomposition-matrix]]).
 
-[L1] Ordinary irreducibles and Brauer irreducibles each belong to unique blocks
-([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
+[L1] Ordinary irreducibles and Brauer irreducibles each belong to unique blocks ([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
 
 ## Proof
 

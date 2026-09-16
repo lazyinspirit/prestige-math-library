@@ -34,12 +34,9 @@ complete as of 2026.
 
 **Given:** Use the official AMS Number 10 record cited above, as checked on 2026-08-14.
 
-[L1] The 2025 Oberwolfach report, organized in part by GLS collaborator Inna
-Capdeboscq, describes the GLS project as ongoing and nearing completion.
+[L1] The 2025 Oberwolfach report, organized in part by GLS collaborator Inna Capdeboscq, describes the GLS project as ongoing and nearing completion.
 
-[L2] The current AMS catalog describes Number 10 as the tenth volume in a
-series whose aim is to provide a complete proof and says that Number 10
-completes only the bicharacteristic-type identification begun in Number 9.
+[L2] The current AMS catalog describes Number 10 as the tenth volume in a series whose aim is to provide a complete proof and says that Number 10 completes only the bicharacteristic-type identification begun in Number 9.
 
 ## Refutation
 

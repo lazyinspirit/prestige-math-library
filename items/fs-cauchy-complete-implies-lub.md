@@ -79,21 +79,8 @@ Archimedean property.
 
 ## Remarks
 
-- **Where the thresholds are read is what makes this possible.** Cauchyness in
-  $K$ is tested against every positive element of $K$, including the
-  infinitesimals ([[def-sequences-in-an-ordered-field]]), so the condition is
-  much stronger in $K$ than the same words read with rational thresholds. It is
-  strong enough that only sequences whose coefficients freeze can satisfy it,
-  and those all converge. Meanwhile the canonical naturals, which are what (LUB)
-  fails on, are not Cauchy at all, so (CC) never gets a chance to see them.
+- **Where the thresholds are read is what makes this possible.** Cauchyness in $K$ is tested against every positive element of $K$, including the infinitesimals ([[def-sequences-in-an-ordered-field]]), so the condition is much stronger in $K$ than the same words read with rational thresholds. It is strong enough that only sequences whose coefficients freeze can satisfy it, and those all converge. Meanwhile the canonical naturals, which are what (LUB) fails on, are not Cauchy at all, so (CC) never gets a chance to see them.
 
-- **The three properties $K$ has and the three it lacks.** It has (CC) and (NIP)
-  in the shrinking form ([[cor-laurent-nested-intervals]]) and it is an ordered
-  field; it lacks (LUB), and hence also (BW) and (MCT), each of which would force
-  it to be Archimedean ([[lem-bw-implies-archimedean]],
-  [[lem-mct-implies-archimedean]]).
+- **The three properties $K$ has and the three it lacks.** It has (CC) and (NIP) in the shrinking form ([[cor-laurent-nested-intervals]]) and it is an ordered field; it lacks (LUB), and hence also (BW) and (MCT), each of which would force it to be Archimedean ([[lem-bw-implies-archimedean]], [[lem-mct-implies-archimedean]]).
 
-- **A reader who wants a single sentence:** Cauchy completeness says the field
-  has no holes that a sequence can point at; the least-upper-bound property says
-  it has no holes at all. In a non-Archimedean field a sequence indexed by
-  $\mathbb{N}$ is too short to point at the holes.
+- **A reader who wants a single sentence:** Cauchy completeness says the field has no holes that a sequence can point at; the least-upper-bound property says it has no holes at all. In a non-Archimedean field a sequence indexed by $\mathbb{N}$ is too short to point at the holes.

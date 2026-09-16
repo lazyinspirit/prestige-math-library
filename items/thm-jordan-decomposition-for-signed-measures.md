@@ -45,14 +45,11 @@ two supplied mutually singular positive decompositions also requires no AC.
 
 **Given:** A signed measure $\nu$ on $(X,\mathcal A)$ ([[def-signed-measure]]). Assume AC for the general existence assertion ([[def-axiom-of-choice]]); for the conditional assertion a Hahn partition is supplied.
 
-[L1] Under AC, Hahn decomposition gives measurable sets $P,N$ with $P\sqcup N=X$, $P$
-positive, and $N$ negative, unique up to null sets. ([[thm-hahn-decomposition-for-signed-measures]])
+[L1] Under AC, Hahn decomposition gives measurable sets $P,N$ with $P\sqcup N=X$, $P$ positive, and $N$ negative, unique up to null sets. ([[thm-hahn-decomposition-for-signed-measures]])
 
-[L2] Mutual singularity means that the two set functions vanish on measurable
-subsets of complementary measurable pieces. ([[def-mutually-singular-measures]])
+[L2] Mutual singularity means that the two set functions vanish on measurable subsets of complementary measurable pieces. ([[def-mutually-singular-measures]])
 
-[L3] A measure is a nonnegative countably additive set function on a
-sigma-algebra. ([[def-measure]])
+[L3] A measure is a nonnegative countably additive set function on a sigma-algebra. ([[def-measure]])
 
 ## Proof
 

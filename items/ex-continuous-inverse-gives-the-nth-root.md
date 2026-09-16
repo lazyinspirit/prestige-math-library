@@ -81,19 +81,8 @@ $\varepsilon$-$\delta$ estimate.
 
 ## Remarks
 
-- **Why $n \ge 1$.** At $n = 0$ the map $x \mapsto x^{0}$ is constantly $1$
-  ([[def-integer-power]]), so it is neither injective nor surjective onto
-  $[0,\infty)$, and no inverse exists. Every claim above is stated for
-  $n \ge 1$ and the hypothesis is used in step 1.2.
+- **Why $n \ge 1$.** At $n = 0$ the map $x \mapsto x^{0}$ is constantly $1$ ([[def-integer-power]]), so it is neither injective nor surjective onto $[0,\infty)$, and no inverse exists. Every claim above is stated for $n \ge 1$ and the hypothesis is used in step 1.2.
 
-- **Why the domain is $[0,\infty)$ and not $\mathbb{R}$.** For even $n$ the map
-  $x \mapsto x^{n}$ is not injective on $\mathbb{R}$, since $(-x)^{n} = x^{n}$,
-  so the continuous inverse theorem does not apply there; restricting to the
-  nonnegative reals is what makes it injective, and it is also where
-  [[thm-nth-roots-exist]] provides the roots.
+- **Why the domain is $[0,\infty)$ and not $\mathbb{R}$.** For even $n$ the map $x \mapsto x^{n}$ is not injective on $\mathbb{R}$, since $(-x)^{n} = x^{n}$, so the continuous inverse theorem does not apply there; restricting to the nonnegative reals is what makes it injective, and it is also where [[thm-nth-roots-exist]] provides the roots.
 
-- **What is gained over the root theorem alone.** [[thm-nth-roots-exist]]
-  produces the number $a^{1/n}$ for each $a$ separately and says nothing about
-  how it varies with $a$. Claim 4 is the statement that $a \mapsto a^{1/n}$ is a
-  continuous increasing function, and it comes from the structure of the
-  situation rather than from any estimate on roots.
+- **What is gained over the root theorem alone.** [[thm-nth-roots-exist]] produces the number $a^{1/n}$ for each $a$ separately and says nothing about how it varies with $a$. Claim 4 is the statement that $a \mapsto a^{1/n}$ is a continuous increasing function, and it comes from the structure of the situation rather than from any estimate on roots.

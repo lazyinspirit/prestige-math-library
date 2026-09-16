@@ -35,8 +35,7 @@ down exactly after the first step: the next residual is zero.
 
 **Given:** The diagonal matrix $A$ and start vector $b=e_1$.
 
-[L1] Exact Arnoldi breakdown at the next step is equivalent to invariance of
-the current Krylov space ([[prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance]]).
+[L1] Exact Arnoldi breakdown at the next step is equivalent to invariance of the current Krylov space ([[prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance]]).
 
 ## Verification
 **Proof technique:** direct.

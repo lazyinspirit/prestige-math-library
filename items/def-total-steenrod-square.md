@@ -44,19 +44,13 @@ It is generally not degree-preserving.
 
 ## Facts & Assumptions
 
-**Given:** A space $X$ and a finite-support element of
-$H^*(X;\mathbb F_2)$.
+**Given:** A space $X$ and a finite-support element of $H^*(X;\mathbb F_2)$.
 
-[F1] Every square is additive and natural
-([[thm-steenrod-squares-are-well-defined-and-natural]]).
+[F1] Every square is additive and natural ([[thm-steenrod-squares-are-well-defined-and-natural]]).
 
-[F2] Squares vanish above the degree of their input and $Sq^0$ is the
-identity
-([[prop-steenrod-square-normalization-instability-and-top-square]]).
+[F2] Squares vanish above the degree of their input and $Sq^0$ is the identity ([[prop-steenrod-square-normalization-instability-and-top-square]]).
 
-[F3] Squares satisfy the internal Cartan formula, with only finitely many
-nonzero terms
-([[thm-cartan-formula-for-steenrod-squares]]).
+[F3] Squares satisfy the internal Cartan formula, with only finitely many nonzero terms ([[thm-cartan-formula-for-steenrod-squares]]).
 
 ## Verification
 
@@ -68,8 +62,7 @@ nonzero terms
 
 $$Sq(x\smile y)=\sum_kSq^k(x\smile y)=\sum_{i,j}Sq^i(x)\smile Sq^j(y)=Sq(x)\smile Sq(y).$$
 
-Distributivity and the finite homogeneous support in step 1.1 extend this to
-arbitrary total classes.
+Distributivity and the finite homogeneous support in step 1.1 extend this to arbitrary total classes.
 
 2.2 It preserves the unit. The unit $1\in H^0(X;\mathbb F_2)$ satisfies $Sq^0(1)=1$, and every $Sq^i(1)$ with $i>0$ vanishes by instability. Hence $Sq(1)=1$. [F2, step 1.1]
 

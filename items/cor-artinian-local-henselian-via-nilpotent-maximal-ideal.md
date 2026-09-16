@@ -32,14 +32,11 @@ Every Artinian local ring is Henselian.
 
 ## Facts & Assumptions
 
-**Given:** A commutative Artinian local ring $(A,\mathfrak m)$ and the Axiom of
-Choice.
+**Given:** A commutative Artinian local ring $(A,\mathfrak m)$ and the Axiom of Choice.
 
-[L1] In an Artinian local ring, the maximal ideal is nilpotent
-([[thm-artinian-local-ring-has-nilpotent-maximal-ideal]]).
+[L1] In an Artinian local ring, the maximal ideal is nilpotent ([[thm-artinian-local-ring-has-nilpotent-maximal-ideal]]).
 
-[L2] A nilpotent ideal contained in the Jacobson radical gives a Henselian pair
-([[cor-nilpotent-ideal-pair-is-henselian]]).
+[L2] A nilpotent ideal contained in the Jacobson radical gives a Henselian pair ([[cor-nilpotent-ideal-pair-is-henselian]]).
 
 ## Proof
 

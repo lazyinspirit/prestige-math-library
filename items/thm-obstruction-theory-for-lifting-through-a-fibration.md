@@ -44,19 +44,11 @@ If $\pi_i(F)=0$ for $i<n$, the lift through $X^n\cup A$ exists whenever the lowe
 
 [F3] For one relative $(n+1)$-cell, the lifted attaching sphere determines an element of the transported $\pi_n(F)$, and it is zero exactly when the section extends across that disk.
 
-[F4] In ordinary primary obstruction theory the signed cellular incidence
-calculation gives $\delta\theta=0$
-([[thm-the-primary-obstruction-cochain-is-a-cocycle]]).
+[F4] In ordinary primary obstruction theory the signed cellular incidence calculation gives $\delta\theta=0$ ([[thm-the-primary-obstruction-cochain-is-a-cocycle]]).
 
-[F5] The ordinary prism calculation gives
-$\delta d=\theta(s_0)-\theta(s_1)$
-([[thm-the-primary-obstruction-class-is-independent-of-cellular-choices]]).
+[F5] The ordinary prism calculation gives $\delta d=\theta(s_0)-\theta(s_1)$ ([[thm-the-primary-obstruction-class-is-independent-of-cellular-choices]]).
 
-[F6] The ordinary realization theorem changes an $n$-stage map on each
-relative $n$-cell, keeping the prior skeleton fixed, by inserting prescribed
-sphere representatives; it expressly does not claim a homotopy on the
-$n$-skeleton
-([[thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton]]).
+[F6] The ordinary realization theorem changes an $n$-stage map on each relative $n$-cell, keeping the prior skeleton fixed, by inserting prescribed sphere representatives; it expressly does not claim a homotopy on the $n$-skeleton ([[thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton]]).
 
 [A1] AC is used only for simultaneous representatives and lift extensions over arbitrary cell families ([[def-axiom-of-choice]]).
 

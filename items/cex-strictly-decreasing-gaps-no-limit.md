@@ -95,25 +95,8 @@ $g_{j+1} = g_j + 1/g_j$, and $x_k := g_{k-1}$ for $k \ge 1$ ([[def-sequence]]).
 
 ## Remarks
 
-- **The gaps are not merely decreasing, they are null.** Since $d_j = 1/g_j$ and
-  $g_j \to +\infty$, for any real $\varepsilon > 0$ the terms eventually exceed
-  $1/\varepsilon$, so $0 < d_j < \varepsilon$ eventually
-  ([[lem-of-inverse-positive]]). So this sequence is also a witness for
-  [[fs-consecutive-differences-null-implies-cauchy]], alongside $\sqrt k$; the
-  two are close relatives, since $(g_j)^2 \ge 1 + 2j$ says $g_j$ grows at least
-  like $\sqrt{2j}$.
+- **The gaps are not merely decreasing, they are null.** Since $d_j = 1/g_j$ and $g_j \to +\infty$, for any real $\varepsilon > 0$ the terms eventually exceed $1/\varepsilon$, so $0 < d_j < \varepsilon$ eventually ([[lem-of-inverse-positive]]). So this sequence is also a witness for [[fs-consecutive-differences-null-implies-cauchy]], alongside $\sqrt k$; the two are close relatives, since $(g_j)^2 \ge 1 + 2j$ says $g_j$ grows at least like $\sqrt{2j}$.
 
-- **What the uniform constant is really asking for.** The ratio of consecutive
-  gaps here is $d_{j+1}/d_j = g_j/g_{j+1}$, which is below $1$ at every index and
-  approaches $1$ as $j$ grows. A contraction constant would have to sit strictly
-  between all of those ratios and $1$, and there is no room: the supremum of the
-  ratios is $1$ itself. This is the precise sense in which
-  [[def-contractive-sequence]] asks for more than "each gap smaller than the
-  last".
+- **What the uniform constant is really asking for.** The ratio of consecutive gaps here is $d_{j+1}/d_j = g_j/g_{j+1}$, which is below $1$ at every index and approaches $1$ as $j$ grows. A contraction constant would have to sit strictly between all of those ratios and $1$, and there is no room: the supremum of the ratios is $1$ itself. This is the precise sense in which [[def-contractive-sequence]] asks for more than "each gap smaller than the last".
 
-- **The comparison with a genuine contraction.** In
-  [[ex-contractive-sequence-fixed-point]] the ratio is exactly $1/3$ at every
-  index, so the constant exists and is optimal, and the error bound of
-  [[thm-contractive-implies-cauchy]] applies. The difference between the two
-  examples is not the speed at which the gaps shrink at any given index but
-  whether the shrinking is uniform.
+- **The comparison with a genuine contraction.** In [[ex-contractive-sequence-fixed-point]] the ratio is exactly $1/3$ at every index, so the constant exists and is optimal, and the error bound of [[thm-contractive-implies-cauchy]] applies. The difference between the two examples is not the speed at which the gaps shrink at any given index but whether the shrinking is uniform.

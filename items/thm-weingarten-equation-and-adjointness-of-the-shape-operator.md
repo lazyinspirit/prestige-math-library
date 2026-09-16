@@ -45,26 +45,17 @@ hypothesis is inherited exactly through the smooth normal-bundle projections.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the embedded Riemannian submanifold, tangent
-fields $X,Y$, and a normal field $\nu$.
+**Given:** Countable choice, the embedded Riemannian submanifold, tangent fields $X,Y$, and a normal field $\nu$.
 
-[F1] The shape operator is
-$S_\nu X=-(\overline\nabla_X\nu)^\top$.
-[[def-shape-operator]].
+[F1] The shape operator is $S_\nu X=-(\overline\nabla_X\nu)^\top$. [[def-shape-operator]].
 
-[F2] The normal connection is
-$\nabla^\perp_X\nu=(\overline\nabla_X\nu)^\perp$.
-[[def-normal-connection]].
+[F2] The normal connection is $\nabla^\perp_X\nu=(\overline\nabla_X\nu)^\perp$. [[def-normal-connection]].
 
-[F3] The Gauss decomposition is
-$\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$.
-[[def-induced-connection-and-second-fundamental-form]].
+[F3] The Gauss decomposition is $\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F4] The ambient Levi–Civita connection is compatible with $\overline g$.
-[[def-levi-civita-connection]].
+[F4] The ambient Levi–Civita connection is compatible with $\overline g$. [[def-levi-civita-connection]].
 
-[F5] The second fundamental form is symmetric.
-[[lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor]].
+[F5] The second fundamental form is symmetric. [[lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor]].
 
 ## Proof
 

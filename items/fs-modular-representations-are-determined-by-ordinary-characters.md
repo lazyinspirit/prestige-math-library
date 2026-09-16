@@ -34,8 +34,7 @@ character data must be isomorphic.
 
 **Given:** The cyclic group $C_p$ over a field $k$ of characteristic $p$.
 
-[L1] Equality of Brauer characters determines only the semisimplification
-([[thm-brauer-nesbitt-module-determination]]).
+[L1] Equality of Brauer characters determines only the semisimplification ([[thm-brauer-nesbitt-module-determination]]).
 
 ## Refutation
 

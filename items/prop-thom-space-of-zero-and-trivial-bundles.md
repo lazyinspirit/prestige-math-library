@@ -33,12 +33,9 @@ $(B\times D^n,B\times S^{n-1})$.
 
 ## Facts & Assumptions
 
-**Given:** A space $B$, the zero bundle, and the product bundle with its
-standard Euclidean metric.
+**Given:** A space $B$, the zero bundle, and the product bundle with its standard Euclidean metric.
 
-[F1] [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]] defines the
-disk, sphere, and based quotient, including the empty-sphere convention in
-rank zero.
+[F1] [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]] defines the disk, sphere, and based quotient, including the empty-sphere convention in rank zero.
 
 ## Proof
 

@@ -40,26 +40,15 @@ $\mathcal S'$ in both dual topologies.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]], a compactly supported
-distribution $v$, and a cutoff $\chi$ as in the statement.
+**Given:** [[def-countable-choice|Countable Choice]], a compactly supported distribution $v$, and a cutoff $\chi$ as in the statement.
 
-[F1] The extension $\widetilde v$ is tempered and its pairing with a smooth
-function is computed using any cutoff equal to one near the support
-([[thm-compactly-supported-distributions-are-tempered]],
-[[lem-compactly-supported-distributions-extend-to-smooth-functions]]).
+[F1] The extension $\widetilde v$ is tempered and its pairing with a smooth function is computed using any cutoff equal to one near the support ([[thm-compactly-supported-distributions-are-tempered]], [[lem-compactly-supported-distributions-extend-to-smooth-functions]]).
 
-[F2] Compactly supported distribution pairings with smooth parameter families
-differentiate in the parameter
-([[lem-distribution-pairing-with-smooth-parameter-families]]).
+[F2] Compactly supported distribution pairings with smooth parameter families differentiate in the parameter ([[lem-distribution-pairing-with-smooth-parameter-families]]).
 
-[F3] The Fourier transform is defined by bilinear transposition
-([[def-fourier-transform-of-a-tempered-distribution]]), and the local Schwartz
-integral lemma permits a seminorm-dominated integral to cross a tempered
-pairing ([[lem-schwartz-parameter-pairing-and-integral-interchange]]).
+[F3] The Fourier transform is defined by bilinear transposition ([[def-fourier-transform-of-a-tempered-distribution]]), and the local Schwartz integral lemma permits a seminorm-dominated integral to cross a tempered pairing ([[lem-schwartz-parameter-pairing-and-integral-interchange]]).
 
-[F4] A smooth function whose derivatives grow polynomially is a continuous
-Schwartz multiplier, as is its transpose
-([[lem-smooth-polynomially-bounded-multipliers-on-schwartz-space]]).
+[F4] A smooth function whose derivatives grow polynomially is a continuous Schwartz multiplier, as is its transpose ([[lem-smooth-polynomially-bounded-multipliers-on-schwartz-space]]).
 
 ## Proof
 
@@ -71,11 +60,7 @@ Schwartz multiplier, as is its transpose
 
 $$\partial_\xi^\alpha V(\xi) =\left\langle v_x,\chi(x)(-2\pi ix)^\alpha e^{-2\pi ix\cdot\xi}\right\rangle.$$
 
-On one fixed compact containing $\operatorname{supp}\chi$, the finite-order
-estimate for $v$ differentiates the displayed test in $x$ only finitely many
-times.  Each resulting term is bounded by a constant times
-$(1+|\xi|)^m$.  Hence $V$ is smooth and every derivative has the claimed
-polynomial bound. [F1, F2, algebra]
+On one fixed compact containing $\operatorname{supp}\chi$, the finite-order estimate for $v$ differentiates the displayed test in $x$ only finitely many times.  Each resulting term is bounded by a constant times $(1+|\xi|)^m$.  Hence $V$ is smooth and every derivative has the claimed polynomial bound. [F1, F2, algebra]
 
 1.3 Let $\varphi\in\mathcal S$ and set $H(\xi,x)=\chi(x)e^{-2\pi ix\cdot\xi}\varphi(\xi)$.  As an $x$-Schwartz family, $H(\xi,\cdot)$ is continuous in $\xi$, and every $x$-Schwartz seminorm has an integrable majorant $C(1+|\xi|)^q|\varphi(\xi)|$.  Thus [F3] applies. [F3]
 

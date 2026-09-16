@@ -36,19 +36,13 @@ has nilpotent kernel and quotient, but $\mathfrak a$ is not nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** The displayed affine Lie algebra over a field $k$, with the first
-map the inclusion and the second the quotient map.
+**Given:** The displayed affine Lie algebra over a field $k$, with the first map the inclusion and the second the quotient map.
 
-[L1] Its lower central series satisfies $\gamma_r(\mathfrak a)=ky\neq0$ for
-every $r\geq2$
-([[ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent]]).
+[L1] Its lower central series satisfies $\gamma_r(\mathfrak a)=ky\neq0$ for every $r\geq2$ ([[ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent]]).
 
-[L2] The quotient bracket is
-$[u+I,v+I]=[u,v]+I$ for an ideal $I$
-([[def-quotient-lie-algebra]]).
+[L2] The quotient bracket is $[u+I,v+I]=[u,v]+I$ for an ideal $I$ ([[def-quotient-lie-algebra]]).
 
-[L3] Every nonzero abelian Lie algebra is nilpotent of class one
-([[ex-abelian-lie-algebras-are-nilpotent-of-class-one]]).
+[L3] Every nonzero abelian Lie algebra is nilpotent of class one ([[ex-abelian-lie-algebras-are-nilpotent-of-class-one]]).
 
 ## Refutation
 

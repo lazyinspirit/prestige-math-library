@@ -31,11 +31,9 @@ maximal-ideal topology, then $A$ is Henselian.
 
 ## Facts & Assumptions
 
-**Given:** A local ring $(A,\mathfrak m)$ complete and separated for the
-$\mathfrak m$-adic topology.
+**Given:** A local ring $(A,\mathfrak m)$ complete and separated for the $\mathfrak m$-adic topology.
 
-[L1] Every complete separated adic pair is Henselian
-([[cor-complete-separated-adic-pair-henselian]]).
+[L1] Every complete separated adic pair is Henselian ([[cor-complete-separated-adic-pair-henselian]]).
 
 ## Proof
 

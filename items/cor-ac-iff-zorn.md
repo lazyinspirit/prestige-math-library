@@ -65,12 +65,5 @@ Over ZF, the Axiom of Choice ([[def-axiom-of-choice]]) and Zorn's lemma
 ## Remarks
 
 - This is the item later pages cite when they want to use either form without re-arguing the passage between them. The ultrafilter lemma ([[thm-ultrafilter-lemma]]) uses the Zorn form; results about products of nonempty sets use the choice-function form.
-- Equivalence is over **ZF**, and it is a genuine two-way implication proved
-  here. It does not by itself decide whether either equivalent statement is a
-  theorem of ZF.
-- Because the two are equivalent, a theorem proved with Zorn's lemma costs **at
-  most** the Axiom of Choice. The equivalence gives an upper bound on the proof,
-  not a lower bound on the theorem. [[thm-ultrafilter-lemma]] is the standing
-  example: the proof supplied here routes through Zorn, while
-  [[rem-choice-strengths]] deliberately makes no unproved claim about the least
-  choice principle sufficient for the statement.
+- Equivalence is over **ZF**, and it is a genuine two-way implication proved here. It does not by itself decide whether either equivalent statement is a theorem of ZF.
+- Because the two are equivalent, a theorem proved with Zorn's lemma costs **at most** the Axiom of Choice. The equivalence gives an upper bound on the proof, not a lower bound on the theorem. [[thm-ultrafilter-lemma]] is the standing example: the proof supplied here routes through Zorn, while [[rem-choice-strengths]] deliberately makes no unproved claim about the least choice principle sufficient for the statement.

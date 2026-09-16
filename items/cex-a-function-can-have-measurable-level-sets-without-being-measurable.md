@@ -25,14 +25,9 @@ $f$ measurable.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, the Lebesgue measurable space
-$([0,1],\mathcal L(\mathbb R)|_{[0,1]})$, a Vitali set
-$V \subseteq [0,1]$, and the function $f:[0,1]\to\mathbb R$ defined by
-$f(x)=x$ for $x \notin V$, $f(x)=x+2$ for $x \in V$.
+**Given:** The Axiom of Choice, the Lebesgue measurable space $([0,1],\mathcal L(\mathbb R)|_{[0,1]})$, a Vitali set $V \subseteq [0,1]$, and the function $f:[0,1]\to\mathbb R$ defined by $f(x)=x$ for $x \notin V$, $f(x)=x+2$ for $x \in V$.
 
-[L1] Assuming the Axiom of Choice, Vitali sets exist and are not Lebesgue measurable.
-([[thm-vitali-sets-exist-under-choice-on-r-over-q]],
-[[thm-a-vitali-set-is-not-lebesgue-measurable]])
+[L1] Assuming the Axiom of Choice, Vitali sets exist and are not Lebesgue measurable. ([[thm-vitali-sets-exist-under-choice-on-r-over-q]], [[thm-a-vitali-set-is-not-lebesgue-measurable]])
 
 ## Counterexample
 

@@ -32,11 +32,9 @@ closed embedded zero-dimensional Lie subgroup.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$, and a subgroup
-$\Gamma\le G$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$, and a subgroup $\Gamma\le G$.
 
-[A1] Countable choice and the closed subgroup theorem are available.
-[[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
+[A1] Countable choice and the closed subgroup theorem are available. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
 
 ## Proof
 

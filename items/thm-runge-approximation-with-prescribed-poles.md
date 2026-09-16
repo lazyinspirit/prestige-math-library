@@ -40,20 +40,13 @@ $$\sup_{z\in K}|f(z)-r(z)|<\varepsilon.$$
 
 ## Facts & Assumptions
 
-**Given:** A compact set $K$, a holomorphic function $f$ on a neighbourhood of
-$K$, a Runge pole set $P$, and a tolerance $\varepsilon>0$.
+**Given:** A compact set $K$, a holomorphic function $f$ on a neighbourhood of $K$, a Runge pole set $P$, and a tolerance $\varepsilon>0$.
 
-[L1] The Cauchy integral over a suitable enclosing cycle can be approximated
-uniformly on $K$ by rational functions with poles on that cycle
-([[lem-cauchy-riemann-sums-give-rational-approximation]]).
+[L1] The Cauchy integral over a suitable enclosing cycle can be approximated uniformly on $K$ by rational functions with poles on that cycle ([[lem-cauchy-riemann-sums-give-rational-approximation]]).
 
-[L2] A Runge pole set meets every complementary component of
-$\widehat{\mathbb C}\setminus K$
-([[def-rational-approximation-with-a-runge-pole-set]]).
+[L2] A Runge pole set meets every complementary component of $\widehat{\mathbb C}\setminus K$ ([[def-rational-approximation-with-a-runge-pole-set]]).
 
-[L3] A simple pole may be pushed through one complementary component to any
-chosen representative in that component, or to $\infty$ in the unbounded case
-([[lem-runge-pole-pushing-lemma]]).
+[L3] A simple pole may be pushed through one complementary component to any chosen representative in that component, or to $\infty$ in the unbounded case ([[lem-runge-pole-pushing-lemma]]).
 
 ## Proof
 

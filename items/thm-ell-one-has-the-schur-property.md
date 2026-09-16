@@ -34,17 +34,11 @@ $\ell^1$ norm.
 
 [F1] The Schur property is the implication from weak convergence to norm convergence, equivalently the same implication for weakly null sequences ([[def-schur-property]]).  Weak convergence is convergence under every bounded scalar-linear functional ([[def-weak-convergence-of-nets-and-sequences]]).
 
-[F2] By the definitions of $\ell^\infty$ and $\ell^1$
-([[def-c-zero-and-ell-infinity]], [[lem-finite-truncations-are-dense-in-c0-and-ell-one]]),
-for either scalar field, if $b\in\ell^\infty(\mathbb K)$ and
-$c\in\ell^1(\mathbb K)$, then
+[F2] By the definitions of $\ell^\infty$ and $\ell^1$ ([[def-c-zero-and-ell-infinity]], [[lem-finite-truncations-are-dense-in-c0-and-ell-one]]), for either scalar field, if $b\in\ell^\infty(\mathbb K)$ and $c\in\ell^1(\mathbb K)$, then
 
 $$\sum_k|c_kb_k|\le\|b\|_\infty\|c\|_1.$$
 
-Thus the absolutely convergent series $h_b(c)=\sum_kc_kb_k$ defines a bounded
-scalar-linear functional, with no conjugation in the complex pairing.
-Coordinate evaluation is the special case $b=e_k$
-([[def-c-zero-and-ell-infinity]], [[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
+Thus the absolutely convergent series $h_b(c)=\sum_kc_kb_k$ defines a bounded scalar-linear functional, with no conjugation in the complex pairing. Coordinate evaluation is the special case $b=e_k$ ([[def-c-zero-and-ell-infinity]], [[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
 [F3] If $c\in\ell^1(\mathbb K)$ and $P_Nc$ retains coordinates $0,\ldots,N$, then $\sum_{k>N}|c_k|=\|c-P_Nc\|_1\to0$ ([[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
@@ -52,10 +46,7 @@ Coordinate evaluation is the special case $b=e_k$
 
 [F5] A strictly increasing index map satisfies $n_j\ge j$ ([[lem-index-map-grows]]).
 
-[F6] Real and complex scalar Cauchy sequences converge
-([[thm-reals-cauchy-complete]], [[thm-complex-plane-is-complete]]), and a
-nonnegative real series converges exactly when its partial sums are bounded
-above ([[thm-nonnegative-series-bounded-partial-sums]]).
+[F6] Real and complex scalar Cauchy sequences converge ([[thm-reals-cauchy-complete]], [[thm-complex-plane-is-complete]]), and a nonnegative real series converges exactly when its partial sums are bounded above ([[thm-nonnegative-series-bounded-partial-sums]]).
 
 ## Proof
 

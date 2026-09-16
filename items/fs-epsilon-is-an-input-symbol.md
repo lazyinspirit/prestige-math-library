@@ -34,9 +34,7 @@ more input symbol in the alphabet.
 
 [A1] The statement refuted is: $\varepsilon$ is an input symbol of the machine.
 
-[L1] By [[def-nfa-with-epsilon-moves]], the alphabet is $\Sigma$, while
-$\varepsilon$ appears only in the transition domain $\Sigma\cup\{\varepsilon\}$
-to denote a move that consumes no input symbol.
+[L1] By [[def-nfa-with-epsilon-moves]], the alphabet is $\Sigma$, while $\varepsilon$ appears only in the transition domain $\Sigma\cup\{\varepsilon\}$ to denote a move that consumes no input symbol.
 
 ## Refutation
 

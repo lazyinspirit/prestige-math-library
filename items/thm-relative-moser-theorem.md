@@ -37,15 +37,11 @@ $\phi|_S=\operatorname{id}_S$ and $\phi^*\omega_1=\omega_0$.
 
 **Given:** $\mathrm{AC}_\omega$ and all data and hypotheses in the statement.
 
-[F1] A closed family vanishing as tensors on $S$ has a relative primitive
-vanishing as a tensor on $S$.
-[[lem-relative-poincare-primitive-near-a-submanifold]].
+[F1] A closed family vanishing as tensors on $S$ has a relative primitive vanishing as a tensor on $S$. [[lem-relative-poincare-primitive-near-a-submanifold]].
 
-[F2] The Moser equation makes the evolving pullback constant.
-[[lem-moser-pullback-differentiation-equation]].
+[F2] The Moser equation makes the evolving pullback constant. [[lem-moser-pullback-differentiation-equation]].
 
-[F3] Smooth time-dependent fields have unique local evolutions.
-[[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]].
+[F3] Smooth time-dependent fields have unique local evolutions. [[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]].
 
 ## Proof
 

@@ -34,9 +34,7 @@ relation.
 
 **Given:** The boundary construction on this page.
 
-[L1] The quotient by asymptoticity is justified only after proving that
-asymptoticity is an equivalence relation
-([[lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]]).
+[L1] The quotient by asymptoticity is justified only after proving that asymptoticity is an equivalence relation ([[lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]]).
 
 ## Refutation
 

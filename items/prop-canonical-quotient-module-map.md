@@ -36,19 +36,13 @@ submodule is the kernel of a module homomorphism.
 
 **Given:** A left $R$-module $M$ and a submodule $N\le M$.
 
-[L1] The quotient action is a well-defined module action
-([[thm-quotient-module-laws]]).
+[L1] The quotient action is a well-defined module action ([[thm-quotient-module-laws]]).
 
-[L2] The canonical projection of the underlying additive groups is a
-surjective group homomorphism ([[prop-canonical-quotient-map]]).
+[L2] The canonical projection of the underlying additive groups is a surjective group homomorphism ([[prop-canonical-quotient-map]]).
 
-[L3] A module homomorphism preserves addition and scalar multiplication, and
-its kernel is the inverse image of zero
-([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L3] A module homomorphism preserves addition and scalar multiplication, and its kernel is the inverse image of zero ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[L4] The additive group of a submodule is closed under inverses, and the coset
-criterion consequently gives $m+N=N$ if and only if $m\in N$
-([[def-submodule]], [[lem-coset-membership-and-equality]]).
+[L4] The additive group of a submodule is closed under inverses, and the coset criterion consequently gives $m+N=N$ if and only if $m\in N$ ([[def-submodule]], [[lem-coset-membership-and-equality]]).
 
 ## Proof
 

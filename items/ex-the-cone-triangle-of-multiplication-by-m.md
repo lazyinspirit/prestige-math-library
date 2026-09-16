@@ -34,12 +34,9 @@ $$S^0(\mathbb Z)\xrightarrow mS^0(\mathbb Z)\to[\mathbb Z\xrightarrow m\mathbb Z
 
 **Given:** The displayed data.
 
-[F1] The mapping cone has its stated degreewise direct-sum and differential
-formulas ([[def-mapping-cone-of-a-chain-map]]).
+[F1] The mapping cone has its stated degreewise direct-sum and differential formulas ([[def-mapping-cone-of-a-chain-map]]).
 
-[F2] Passing a chain-level cone triangle to the homotopy category gives its
-standard cone triangle
-([[def-standard-cone-triangle-in-the-homotopy-category]]).
+[F2] Passing a chain-level cone triangle to the homotopy category gives its standard cone triangle ([[def-standard-cone-triangle-in-the-homotopy-category]]).
 
 ## Verification
 

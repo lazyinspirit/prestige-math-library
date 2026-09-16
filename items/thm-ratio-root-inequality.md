@@ -122,30 +122,10 @@ the companion page.
 
 ## Remarks
 
-- **The mechanism is that a ratio bound integrates to a geometric bound.** If the
-  ratios are eventually below $c$ then the terms are eventually below a constant
-  times $c^n$, and taking $n$-th roots turns the constant into $C^{1/n}$, which
-  tends to $1$ by [[lem-nth-root-of-constant-tends-to-one]]. That single lemma is
-  what makes the constant disappear, and it is the only analytic input; everything
-  else is the comparison lemma [[lem-limsup-monotone-comparison]] and order
-  bookkeeping.
+- **The mechanism is that a ratio bound integrates to a geometric bound.** If the ratios are eventually below $c$ then the terms are eventually below a constant times $c^n$, and taking $n$-th roots turns the constant into $C^{1/n}$, which tends to $1$ by [[lem-nth-root-of-constant-tends-to-one]]. That single lemma is what makes the constant disappear, and it is the only analytic input; everything else is the comparison lemma [[lem-limsup-monotone-comparison]] and order bookkeeping.
 
-- **All four quantities can be different, and the two outer inequalities can both
-  be strict.** [[ex-strict-ratio-root-chain]] gives a positive sequence with
-  chain $0 < 1/3 < 1/2 < +\infty$, so no two of the four coincide, and
-  [[ex-ratio-fails-root-succeeds]] is the standard witness in which the roots
-  converge while the ratios oscillate across $1$.
+- **All four quantities can be different, and the two outer inequalities can both be strict.** [[ex-strict-ratio-root-chain]] gives a positive sequence with chain $0 < 1/3 < 1/2 < +\infty$, so no two of the four coincide, and [[ex-ratio-fails-root-succeeds]] is the standard witness in which the roots converge while the ratios oscillate across $1$.
 
-- **The chain also explains the practical rule.** When
-  $\limsup_k q_k < 1$ the chain forces $\limsup_k r_k < 1$, so any conclusion
-  drawn from the roots is available from the ratios; but
-  $\limsup_k r_k < 1$ can hold with $\limsup_k q_k > 1$, and then only the root
-  side is usable. This is the sense in which the root criterion is the stronger
-  of the two.
+- **The chain also explains the practical rule.** When $\limsup_k q_k < 1$ the chain forces $\limsup_k r_k < 1$, so any conclusion drawn from the roots is available from the ratios; but $\limsup_k r_k < 1$ can hold with $\limsup_k q_k > 1$, and then only the root side is usable. This is the sense in which the root criterion is the stronger of the two.
 
-- **The hypothesis $a_k > 0$ is needed at every index, not merely eventually.**
-  The ratios must be defined, which needs $a_k \ne 0$, and the roots must be
-  defined, which needs $a_{k+1} \ge 0$; positivity also lets the ratio
-  inequalities be cleared of denominators. A sequence positive only from some
-  index on can be handled by passing to that tail, which changes none of the four
-  quantities.
+- **The hypothesis $a_k > 0$ is needed at every index, not merely eventually.** The ratios must be defined, which needs $a_k \ne 0$, and the roots must be defined, which needs $a_{k+1} \ge 0$; positivity also lets the ratio inequalities be cleared of denominators. A sequence positive only from some index on can be handled by passing to that tail, which changes none of the four quantities.

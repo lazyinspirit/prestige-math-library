@@ -36,17 +36,13 @@ $$T_xM/T_x(G\cdot x)\xrightarrow{\ \cong\ }T_{[x]}(M/G).$$
 
 ## Facts & Assumptions
 
-**Given:** A smooth free proper action of $G$ on $M$, its quotient map
-$q:M\to M/G$, and $x\in M$.
+**Given:** A smooth free proper action of $G$ on $M$, its quotient map $q:M\to M/G$, and $x\in M$.
 
-[F1] The quotient map is a smooth surjective submersion.
-[[thm-free-proper-action-quotient-manifold]].
+[F1] The quotient map is a smooth surjective submersion. [[thm-free-proper-action-quotient-manifold]].
 
-[F2] A slice gives product coordinates $G\times S\to G\cdot S$ around $x$.
-[[lem-local-slice-for-a-free-proper-action]].
+[F2] A slice gives product coordinates $G\times S\to G\cdot S$ around $x$. [[lem-local-slice-for-a-free-proper-action]].
 
-[F3] A linear map vanishing on a subspace factors uniquely through the vector
-space quotient. [[thm-quotient-module-universal-property]].
+[F3] A linear map vanishing on a subspace factors uniquely through the vector space quotient. [[thm-quotient-module-universal-property]].
 
 ## Proof
 

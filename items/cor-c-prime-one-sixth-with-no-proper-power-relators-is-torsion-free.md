@@ -32,11 +32,9 @@ group.
 
 ## Facts & Assumptions
 
-**Given:** A $C'(1/6)$ presentation in which no defining relator is a proper
-power.
+**Given:** A $C'(1/6)$ presentation in which no defining relator is a proper power.
 
-[L1] Every torsion element is conjugate to a power of a root of a defining
-relator ([[thm-torsion-theorem-for-c-prime-one-sixth-groups]]).
+[L1] Every torsion element is conjugate to a power of a root of a defining relator ([[thm-torsion-theorem-for-c-prime-one-sixth-groups]]).
 
 [F1] Group powers are the powers from [[def-group-power]].
 

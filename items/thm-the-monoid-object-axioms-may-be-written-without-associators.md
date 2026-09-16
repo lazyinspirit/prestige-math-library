@@ -39,8 +39,7 @@ without displaying associators or unitors.
 
 **Given:** A monoid object $(M,\mu,\eta)$ in a monoidal category $\mathcal C$.
 
-[L1] A monoid object is defined by the associativity equation
-$\mu\circ(\mu\otimes1_M)=\mu\circ(1_M\otimes\mu)\circ\alpha_{M,M,M}$ and the two unit equations with $\lambda_M$ and $\rho_M$ ([[def-monoid-object-and-comonoid-object-in-a-monoidal-category]]).
+[L1] A monoid object is defined by the associativity equation $\mu\circ(\mu\otimes1_M)=\mu\circ(1_M\otimes\mu)\circ\alpha_{M,M,M}$ and the two unit equations with $\lambda_M$ and $\rho_M$ ([[def-monoid-object-and-comonoid-object-in-a-monoidal-category]]).
 
 [L2] The category $\mathcal C$ is monoidally equivalent to a strict monoidal category ([[thm-mac-lane-strictification]]).
 

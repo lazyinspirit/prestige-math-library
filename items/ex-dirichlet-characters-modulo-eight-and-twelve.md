@@ -30,9 +30,7 @@ character tables.
 
 ## Facts & Assumptions
 
-**Given:** The definition of Dirichlet characters and of the principal
-character ([[def-dirichlet-character-modulo-q]],
-[[def-principal-dirichlet-character]]).
+**Given:** The definition of Dirichlet characters and of the principal character ([[def-dirichlet-character-modulo-q]], [[def-principal-dirichlet-character]]).
 
 ## Verification
 

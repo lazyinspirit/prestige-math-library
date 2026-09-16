@@ -25,14 +25,11 @@ $\operatorname{Spec}A$.
 
 ## Facts & Assumptions
 
-**Given:** An algebraically closed field $k$ and a reduced finite-type
-$k$-algebra $A$.
+**Given:** An algebraically closed field $k$ and a reduced finite-type $k$-algebra $A$.
 
-[F1] Every maximal ideal of an affine $k$-algebra is the kernel of a
-$k$-algebra map to $k$ ([[cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field]]).
+[F1] Every maximal ideal of an affine $k$-algebra is the kernel of a $k$-algebra map to $k$ ([[cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field]]).
 
-[F2] Closed points of an affine scheme are its maximal ideals
-([[def-closed-point-scheme]]).
+[F2] Closed points of an affine scheme are its maximal ideals ([[def-closed-point-scheme]]).
 
 ## Proof
 

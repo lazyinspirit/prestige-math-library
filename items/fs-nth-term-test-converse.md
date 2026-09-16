@@ -79,7 +79,4 @@ series of this sequence is exactly $\sum_{k \ge 1} 1/k$.
 
 - **The failure is not marginal.** The harmonic series has terms tending to $0$ and partial sums diverging to $+\infty$, so no weakening of the false claim to "the partial sums are bounded" would rescue it either. The rate at which the terms tend to $0$ is what decides convergence, and the term test reads no rate at all.
 
-- **The other tests use rate information that the term test ignores.** The
-  $p$-series theorem distinguishes $1/k$ from $1/k^2$. The basic root and
-  ratio tests do not: for both sequences their relevant limit is the boundary
-  value $1$, so those two tests are inconclusive.
+- **The other tests use rate information that the term test ignores.** The $p$-series theorem distinguishes $1/k$ from $1/k^2$. The basic root and ratio tests do not: for both sequences their relevant limit is the boundary value $1$, so those two tests are inconclusive.

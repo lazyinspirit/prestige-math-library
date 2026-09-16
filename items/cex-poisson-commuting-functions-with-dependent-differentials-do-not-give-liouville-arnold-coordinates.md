@@ -31,12 +31,9 @@ everywhere, so they do not yield Liouville–Arnold coordinates.
 
 ## Facts & Assumptions
 
-**Given:** The standard form
-$dq^1\wedge dp_1+dq^2\wedge dp_2$.
+**Given:** The standard form $dq^1\wedge dp_1+dq^2\wedge dp_2$.
 
-[F1] Complete integrability requires both involution and independence of
-$dF_1,\ldots,dF_n$ on a dense open subset; that subset is the regular locus.
-[[def-completely-integrable-hamiltonian-system]].
+[F1] Complete integrability requires both involution and independence of $dF_1,\ldots,dF_n$ on a dense open subset; that subset is the regular locus. [[def-completely-integrable-hamiltonian-system]].
 
 ## Verification
 

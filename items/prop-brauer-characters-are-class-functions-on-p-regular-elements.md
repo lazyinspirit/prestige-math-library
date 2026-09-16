@@ -32,15 +32,11 @@ $\varphi_V$ is constant on $p$-regular conjugacy classes.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional $kG$-module $V$ and $p$-regular elements
-$x,y\in G$ with $y=gxg^{-1}$.
+**Given:** A finite-dimensional $kG$-module $V$ and $p$-regular elements $x,y\in G$ with $y=gxg^{-1}$.
 
-[F1] The Brauer character at a $p$-regular element is computed from the
-eigenvalues of the action matrix
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F1] The Brauer character at a $p$-regular element is computed from the eigenvalues of the action matrix ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
-[L1] That value is independent of the chosen basis
-([[lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation]]).
+[L1] That value is independent of the chosen basis ([[lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation]]).
 
 ## Proof
 

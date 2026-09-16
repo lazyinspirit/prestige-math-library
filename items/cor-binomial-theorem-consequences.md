@@ -82,18 +82,8 @@ statement.
 
 ## Remarks
 
-- **Two proofs of the same identity, deliberately.** The counting proof is a
-  statement about natural numbers and uses no embedding at all, while the
-  analytic proof goes through $\mathbb{R}$ and comes back by the injectivity of
-  $\iota$. Recording both is what makes the agreement of the two
-  readings visible rather than assumed.
+- **Two proofs of the same identity, deliberately.** The counting proof is a statement about natural numbers and uses no embedding at all, while the analytic proof goes through $\mathbb{R}$ and comes back by the injectivity of $\iota$. Recording both is what makes the agreement of the two readings visible rather than assumed.
 
-- **Where the hypothesis of clause 2 is spent.** In $0^{n} = 0$, and nowhere
-  else. The convention $0^{0} = 1$ is not a defect here: it is what makes the
-  binomial theorem hold at $n = 0$, and the price is that the alternating sum
-  identity acquires a hypothesis. Both facts are consequences of the same
-  convention.
+- **Where the hypothesis of clause 2 is spent.** In $0^{n} = 0$, and nowhere else. The convention $0^{0} = 1$ is not a defect here: it is what makes the binomial theorem hold at $n = 0$, and the price is that the alternating sum identity acquires a hypothesis. Both facts are consequences of the same convention.
 
-- **The alternating sum is stated in $\mathbb{R}$** because $(-1)^{k}$ is not a
-  natural number. The unsigned row sum, by contrast, is an identity between
-  counts and is stated in $\mathbb{N}$.
+- **The alternating sum is stated in $\mathbb{R}$** because $(-1)^{k}$ is not a natural number. The unsigned row sum, by contrast, is an identity between counts and is stated in $\mathbb{N}$.

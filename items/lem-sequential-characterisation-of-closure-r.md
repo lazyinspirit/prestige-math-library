@@ -94,22 +94,8 @@ explicitly at step 2.2 and nowhere else.
 
 ## Remarks
 
-- **Where the choice is spent, and why it cannot be avoided here.** Step 2.2 is
-  the only appeal to [[def-countable-choice]]. A canonical selection would
-  require a rule picking a distinguished element of an arbitrary nonempty subset
-  of $\mathbb{R}$, and $\mathbb{R}$ carries no well-ordering that this library
-  has constructed, so this library has no such rule to offer. Contrast
-  [[lem-subset-of-countable]] and [[lem-countable-iff-surjection-from-n]], where
-  the selection is from subsets of $\mathbb{N}$ and the least element is
-  canonical.
+- **Where the choice is spent, and why it cannot be avoided here.** Step 2.2 is the only appeal to [[def-countable-choice]]. A canonical selection would require a rule picking a distinguished element of an arbitrary nonempty subset of $\mathbb{R}$, and $\mathbb{R}$ carries no well-ordering that this library has constructed, so this library has no such rule to offer. Contrast [[lem-subset-of-countable]] and [[lem-countable-iff-surjection-from-n]], where the selection is from subsets of $\mathbb{N}$ and the least element is canonical.
 
-- **The choice is genuinely confined to one direction.** Step 2.1 selects a
-  single rational $q$ and a single index $K$ for one $\varepsilon$ at a time, and
-  finitely many selections need no choice principle. So "the limit of a
-  convergent sequence in a closed set lies in the set" is a theorem of ZF, and
-  only the production of a sequence out of a point of the closure is not.
+- **The choice is genuinely confined to one direction.** Step 2.1 selects a single rational $q$ and a single index $K$ for one $\varepsilon$ at a time, and finitely many selections need no choice principle. So "the limit of a convergent sequence in a closed set lies in the set" is a theorem of ZF, and only the production of a sequence out of a point of the closure is not.
 
-- **The indices start at $0$.** Since $\mathbb{N}$ contains $0$
-  ([[def-sequence]]), the shrinking radii are $1/(k+1)$ and not $1/k$; the
-  latter is undefined at $k = 0$. The threshold in step 3.1 is $K = n - 1$ for
-  the same reason, and $n \ge 1$ is exactly what makes $K$ a natural number.
+- **The indices start at $0$.** Since $\mathbb{N}$ contains $0$ ([[def-sequence]]), the shrinking radii are $1/(k+1)$ and not $1/k$; the latter is undefined at $k = 0$. The threshold in step 3.1 is $K = n - 1$ for the same reason, and $n \ge 1$ is exactly what makes $K$ a natural number.

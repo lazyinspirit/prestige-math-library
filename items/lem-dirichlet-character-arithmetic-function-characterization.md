@@ -39,13 +39,9 @@ $q$ if and only if all of the following hold:
 
 **Given:** A positive integer $q$ and a function $\chi:\mathbb Z\to\mathbb C$.
 
-[L1] Every Dirichlet character modulo $q$ is extended by zero from a
-homomorphism on $(\mathbb Z/q\mathbb Z)^\times$
-([[def-dirichlet-character-modulo-q]]).
+[L1] Every Dirichlet character modulo $q$ is extended by zero from a homomorphism on $(\mathbb Z/q\mathbb Z)^\times$ ([[def-dirichlet-character-modulo-q]]).
 
-[L2] That extension is representative-independent, $q$-periodic, and vanishes
-exactly on the nonunits modulo $q$
-([[lem-dirichlet-character-extension-well-defined]]).
+[L2] That extension is representative-independent, $q$-periodic, and vanishes exactly on the nonunits modulo $q$ ([[lem-dirichlet-character-extension-well-defined]]).
 
 ## Proof
 

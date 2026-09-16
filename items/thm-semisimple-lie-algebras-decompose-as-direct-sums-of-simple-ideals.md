@@ -31,17 +31,13 @@ field is a finite direct sum of simple ideals.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional semisimple characteristic-zero Lie algebra
-$\mathfrak g$.
+**Given:** A finite-dimensional semisimple characteristic-zero Lie algebra $\mathfrak g$.
 
-[L1] Its Killing form $K$ is nondegenerate
-([[thm-cartans-semisimplicity-criterion]]).
+[L1] Its Killing form $K$ is nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
 
-[L2] Orthogonal complements of ideals under $K$ are ideals
-([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
+[L2] Orthogonal complements of ideals under $K$ are ideals ([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
 
-[L3] Simple means nonabelian with no nontrivial ideals, and semisimple means
-zero radical ([[def-simple-semisimple-and-reductive-lie-algebras]]).
+[L3] Simple means nonabelian with no nontrivial ideals, and semisimple means zero radical ([[def-simple-semisimple-and-reductive-lie-algebras]]).
 
 ## Proof
 

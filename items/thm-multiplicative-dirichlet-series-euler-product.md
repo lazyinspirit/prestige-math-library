@@ -40,17 +40,13 @@ where the infinite product is the limit of the finite prime products.
 
 ## Facts & Assumptions
 
-**Given:** A multiplicative arithmetic function $f$ and a complex number $s$
-with $\Re s \ge \sigma$.
+**Given:** A multiplicative arithmetic function $f$ and a complex number $s$ with $\Re s \ge \sigma$.
 
-[L1] Multiplicative functions satisfy $f(mn)=f(m)f(n)$ for coprime $m,n$
-([[def-multiplicative-arithmetic-function]]).
+[L1] Multiplicative functions satisfy $f(mn)=f(m)f(n)$ for coprime $m,n$ ([[def-multiplicative-arithmetic-function]]).
 
-[L2] Every positive integer has a unique prime factorization
-([[thm-fundamental-theorem-of-arithmetic]]).
+[L2] Every positive integer has a unique prime factorization ([[thm-fundamental-theorem-of-arithmetic]]).
 
-[L3] Products of absolutely convergent Dirichlet series multiply by convolution
-([[thm-dirichlet-series-multiplication-convolution]]).
+[L3] Products of absolutely convergent Dirichlet series multiply by convolution ([[thm-dirichlet-series-multiplication-convolution]]).
 
 ## Proof
 

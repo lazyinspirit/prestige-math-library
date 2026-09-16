@@ -41,29 +41,21 @@ $$\operatorname{Rm}=\frac{S}{4}(g\odot g).$$
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-kulkarni-nomizu-product-trace-free-ricci-and-weyl-curvature]], [[thm-algebraic-symmetries-of-the-riemann-tensor]], [[lem-ricci-curvature-is-symmetric-and-basis-independent]], and [[def-scalar-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] The Kulkarni–Nomizu product, $\operatorname{Ric}_0$, and $W$ use the
-displayed sign and coefficient conventions. [[def-kulkarni-nomizu-product-trace-free-ricci-and-weyl-curvature]].
+[F1] The Kulkarni–Nomizu product, $\operatorname{Ric}_0$, and $W$ use the displayed sign and coefficient conventions. [[def-kulkarni-nomizu-product-trace-free-ricci-and-weyl-curvature]].
 
-[F2] The Riemann tensor has the algebraic curvature symmetries, including
-pair interchange and Bianchi. [[thm-algebraic-symmetries-of-the-riemann-tensor]].
+[F2] The Riemann tensor has the algebraic curvature symmetries, including pair interchange and Bianchi. [[thm-algebraic-symmetries-of-the-riemann-tensor]].
 
-[F3] A dual-basis contraction is basis independent.
-[[lem-contraction-is-independent-of-the-basis-formula]].
+[F3] A dual-basis contraction is basis independent. [[lem-contraction-is-independent-of-the-basis-formula]].
 
-[F4] The Ricci tensor is the contraction
-$c(\operatorname{Rm})(X,Y)=\sum_i\operatorname{Rm}(e_i,X,Y,e_i)$ in an
-orthonormal basis. [[lem-ricci-curvature-is-symmetric-and-basis-independent]].
+[F4] The Ricci tensor is the contraction $c(\operatorname{Rm})(X,Y)=\sum_i\operatorname{Rm}(e_i,X,Y,e_i)$ in an orthonormal basis. [[lem-ricci-curvature-is-symmetric-and-basis-independent]].
 
-[F5] Scalar curvature is the metric trace of Ricci.
-[[def-scalar-curvature]].
+[F5] Scalar curvature is the metric trace of Ricci. [[def-scalar-curvature]].
 
-[F6] Every finite-dimensional real inner-product space has an orthonormal
-basis. [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]].
+[F6] Every finite-dimensional real inner-product space has an orthonormal basis. [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]].
 
 ## Proof
 
-**Given:** $\mathrm{AC}_\omega$, a tangent inner-product space $(T_pM,g_p)$ of dimension $n$ and
-the tensors in the statement.
+**Given:** $\mathrm{AC}_\omega$, a tangent inner-product space $(T_pM,g_p)$ of dimension $n$ and the tensors in the statement.
 
 1.1 Directly exchanging the four inputs in [F1]'s formula shows that $h\odot g$ has both pair skews, pair interchange, and the cyclic Bianchi identity whenever $h$ is symmetric. Hence it is an algebraic curvature tensor. For such a tensor $F$, define its Ricci contraction by $c(F)(X,Y)=\sum_iF(e_i,X,Y,e_i)$ in an orthonormal basis; [F3] makes this intrinsic. [A1, F1, F2, F3, algebra]
 

@@ -38,28 +38,15 @@ the Radon--Nikodym property.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] AC implies Countable Choice and proves the real dominated Hahn--Banach
-principle; the complex norm-preserving extension theorem supplies the complex
-instances
-([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]],
-[[thm-hahn-banach-dominated-extension]],
-[[thm-complex-hahn-banach-norm-preserving-extension]]).
+[L1] AC implies Countable Choice and proves the real dominated Hahn--Banach principle; the complex norm-preserving extension theorem supplies the complex instances ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[thm-hahn-banach-dominated-extension]], [[thm-complex-hahn-banach-norm-preserving-extension]]).
 
-[L2] Under relative Hahn--Banach, closed subspaces of reflexive Banach spaces
-are reflexive ([[thm-closed-subspaces-of-reflexive-spaces-are-reflexive]]) and
-the canonical map into the bidual is an isometry
-([[cor-relative-hahn-banach-bidual-isometry]]).
+[L2] Under relative Hahn--Banach, closed subspaces of reflexive Banach spaces are reflexive ([[thm-closed-subspaces-of-reflexive-spaces-are-reflexive]]) and the canonical map into the bidual is an isometry ([[cor-relative-hahn-banach-bidual-isometry]]).
 
-[L3] Under AC, a norm-separable dual Banach space has RNP
-([[thm-separable-dual-spaces-have-rnp]]), and RNP is invariant under Banach
-space isomorphism ([[lem-rnp-is-invariant-under-banach-space-isomorphism]]).
+[L3] Under AC, a norm-separable dual Banach space has RNP ([[thm-separable-dual-spaces-have-rnp]]), and RNP is invariant under Banach space isomorphism ([[lem-rnp-is-invariant-under-banach-space-isomorphism]]).
 
-[L4] Under AC, a Banach space has RNP exactly when all its closed separable
-subspaces have RNP ([[lem-rnp-is-separably-determined]]).
+[L4] Under AC, a Banach space has RNP exactly when all its closed separable subspaces have RNP ([[lem-rnp-is-separably-determined]]).
 
-[L5] Reflexivity is surjectivity of the canonical evaluation map
-([[def-reflexive-banach-space]]), while separability means the existence of an
-at most countable norm-dense subset ([[def-separable-space]]).
+[L5] Reflexivity is surjectivity of the canonical evaluation map ([[def-reflexive-banach-space]]), while separability means the existence of an at most countable norm-dense subset ([[def-separable-space]]).
 
 ## Proof
 

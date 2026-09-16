@@ -28,27 +28,15 @@ short exact sequence splits naturally in $G$ and $A$.
 
 ## Facts & Assumptions
 
-**Given:** Fix $A=C_2$ with trivial action and $V=C_2\times C_2$, written as
-$\mathbb F_2^2$. Write $p_G:H^2(G;A)\to\operatorname{Hom}(M(G),A)$ for the
-universal-coefficient map.
+**Given:** Fix $A=C_2$ with trivial action and $V=C_2\times C_2$, written as $\mathbb F_2^2$. Write $p_G:H^2(G;A)\to\operatorname{Hom}(M(G),A)$ for the universal-coefficient map.
 
-[L1] The degree-two universal-coefficient sequence is natural and admits a
-splitting after choices ([[thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]]).
+[L1] The degree-two universal-coefficient sequence is natural and admits a splitting after choices ([[thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]]).
 
-[L2] A cyclic group has zero Schur multiplier
-([[prop-schur-multiplier-of-a-cyclic-group-is-trivial]]).
+[L2] A cyclic group has zero Schur multiplier ([[prop-schur-multiplier-of-a-cyclic-group-is-trivial]]).
 
-[L3] For an abelian group $B$, $M(B)\cong\bigwedge^2B$
-([[thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square]]), and
-alternating bilinear maps factor through its exterior square
-([[lem-exterior-square-has-the-alternating-universal-property]]).
+[L3] For an abelian group $B$, $M(B)\cong\bigwedge^2B$ ([[thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square]]), and alternating bilinear maps factor through its exterior square ([[lem-exterior-square-has-the-alternating-universal-property]]).
 
-[L4] Classes in $H^2(G;A)$ naturally classify central extensions of $G$ by
-$A$ when the action is trivial
-([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
-Under this classification, restriction to a subgroup pulls back the extension,
-and zero represents a split extension: restricting a factor set gives the
-pullback factor set, and a homomorphic section has zero factor set.
+[L4] Classes in $H^2(G;A)$ naturally classify central extensions of $G$ by $A$ when the action is trivial ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]). Under this classification, restriction to a subgroup pulls back the extension, and zero represents a split extension: restricting a factor set gives the pullback factor set, and a homomorphic section has zero factor set.
 
 ## Refutation
 

@@ -37,11 +37,7 @@ so the error in direction is exactly of order $4^{-k}=|\lambda_2/\lambda_1|^k$.
 
 **Given:** The diagonal matrix $A$ and starting vector $x_0$ in the statement.
 
-[L1] For an $n\times n$ diagonalisable matrix with $n\ge2$, a simple strictly
-dominant eigenvalue, and a start vector having nonzero component in its
-eigendirection, power iteration converges projectively at the dominant
-eigenvalue ratio
-([[thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue]]).
+[L1] For an $n\times n$ diagonalisable matrix with $n\ge2$, a simple strictly dominant eigenvalue, and a start vector having nonzero component in its eigendirection, power iteration converges projectively at the dominant eigenvalue ratio ([[thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue]]).
 
 ## Verification
 

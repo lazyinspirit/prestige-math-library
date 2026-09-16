@@ -31,15 +31,11 @@ These representations form an abelian category.
 
 ## Facts & Assumptions
 
-**Given:** The free preadditive category on the quiver $1\to2$ and the target
-category $\mathbf{Ab}$.
+**Given:** The free preadditive category on the quiver $1\to2$ and the target category $\mathbf{Ab}$.
 
-[L1] Abelian groups form an abelian category
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] Abelian groups form an abelian category ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] Additive functors from a small preadditive category to an abelian category
-form an abelian category
-([[thm-additive-functors-from-a-small-preadditive-category-to-an-abelian-category-form-an-abelian-category]]).
+[L2] Additive functors from a small preadditive category to an abelian category form an abelian category ([[thm-additive-functors-from-a-small-preadditive-category-to-an-abelian-category-form-an-abelian-category]]).
 
 ## Verification
 

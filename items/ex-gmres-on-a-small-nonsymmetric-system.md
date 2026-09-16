@@ -48,9 +48,7 @@ $$x_1=\frac12 e_2.$$
 
 **Given:** The system $Ax=b$ with the displayed $A,b,x_0$.
 
-[L1] Arnoldi reduces GMRES to the least-squares problem
-$\min_y \|\beta e_1-\bar H_my\|_2$
-([[thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem]]).
+[L1] Arnoldi reduces GMRES to the least-squares problem $\min_y \|\beta e_1-\bar H_my\|_2$ ([[thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem]]).
 
 ## Verification
 **Proof technique:** direct.

@@ -28,21 +28,15 @@ $J$ is nilpotent, and the quotient algebra $A/J$ is semisimple.
 
 **Given:** A finite-dimensional algebra $A$ and its Jacobson radical $J=J(A)$.
 
-[F1] The Jacobson radical is the intersection of the maximal left ideals
-([[def-jacobson-radical-of-a-finite-dimensional-algebra]]).
+[F1] The Jacobson radical is the intersection of the maximal left ideals ([[def-jacobson-radical-of-a-finite-dimensional-algebra]]).
 
-[L1] A finite-dimensional module has a composition series and hence finite
-length ([[thm-composition-series-iff-noetherian-and-artinian]]).
+[L1] A finite-dimensional module has a composition series and hence finite length ([[thm-composition-series-iff-noetherian-and-artinian]]).
 
-[L2] Every nonzero finitely generated module has a maximal proper submodule
-([[thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules]]).
+[L2] Every nonzero finitely generated module has a maximal proper submodule ([[thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules]]).
 
-[L3] A simple module is a nonzero module with no proper nonzero submodule
-([[def-simple-module]]).
+[L3] A simple module is a nonzero module with no proper nonzero submodule ([[def-simple-module]]).
 
-[L4] A unital ring is semisimple when its left regular module is semisimple
-([[def-semisimple-ring]]), and for such a ring every module is semisimple
-([[thm-equivalent-characterizations-of-semisimple-rings]]).
+[L4] A unital ring is semisimple when its left regular module is semisimple ([[def-semisimple-ring]]), and for such a ring every module is semisimple ([[thm-equivalent-characterizations-of-semisimple-rings]]).
 
 ## Proof
 

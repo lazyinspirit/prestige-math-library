@@ -27,14 +27,11 @@ common law $\nu$.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, dependent choice, and a probability space
-$(S,\Sigma,\nu)$, repeated at every index $n\in\mathbb N$.
+**Given:** Countable choice, dependent choice, and a probability space $(S,\Sigma,\nu)$, repeated at every index $n\in\mathbb N$.
 
-[F1] The stated choice principles give the canonical countable product
-probability. ([[thm-countable-product-of-probability-spaces]])
+[F1] The stated choice principles give the canonical countable product probability. ([[thm-countable-product-of-probability-spaces]])
 
-[F2] Its coordinate maps are independent copies with the prescribed law.
-([[cor-coordinate-random-elements-on-a-countable-product-are-independent]])
+[F2] Its coordinate maps are independent copies with the prescribed law. ([[cor-coordinate-random-elements-on-a-countable-product-are-independent]])
 
 ## Verification
 

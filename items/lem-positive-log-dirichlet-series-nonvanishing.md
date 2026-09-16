@@ -37,9 +37,7 @@ $\operatorname{Re}s=1$.
 
 **Given:** A function $F$ with the stated properties.
 
-[L1] A Dirichlet series with nonnegative coefficients and finite abscissa of
-convergence is singular at its abscissa of convergence
-([[thm-landau-dirichlet-series]]).
+[L1] A Dirichlet series with nonnegative coefficients and finite abscissa of convergence is singular at its abscissa of convergence ([[thm-landau-dirichlet-series]]).
 
 ## Proof
 

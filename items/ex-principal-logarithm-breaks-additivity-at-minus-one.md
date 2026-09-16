@@ -48,13 +48,9 @@ logarithms do not satisfy a global product-to-sum law across the negative axis.
 
 ## Facts & Assumptions
 
-**Given:** The principal logarithm conventions of
-[[rem-holomorphic-logarithm-and-principal-power-dictionary]].
+**Given:** The principal logarithm conventions of [[rem-holomorphic-logarithm-and-principal-power-dictionary]].
 
-[F1] The pointwise principal logarithm is defined by
-$$\operatorname{Log}z=\log r+i\theta,\qquad z=r(\cos \theta+i\sin\theta),\quad -\pi<\theta\le\pi,$$
-and on the negative real axis one has $\operatorname{Log}(-1)=i\pi$
-([[rem-holomorphic-logarithm-and-principal-power-dictionary]]).
+[F1] The pointwise principal logarithm is defined by $$\operatorname{Log}z=\log r+i\theta,\qquad z=r(\cos \theta+i\sin\theta),\quad -\pi<\theta\le\pi,$$ and on the negative real axis one has $\operatorname{Log}(-1)=i\pi$ ([[rem-holomorphic-logarithm-and-principal-power-dictionary]]).
 
 ## Verification
 

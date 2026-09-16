@@ -107,20 +107,8 @@ sixth clause.
 
 ## Remarks
 
-- **The pathology is entirely a consequence of the two facts in claim 1.** The
-  proof uses nothing about $f$ except that it is additive and not linear; every
-  other property is read off [[thm-cauchy-functional-equation-regularity]] by
-  contraposition. A single such function therefore witnesses the failure of all
-  six regularity conditions at once.
+- **The pathology is entirely a consequence of the two facts in claim 1.** The proof uses nothing about $f$ except that it is additive and not linear; every other property is read off [[thm-cauchy-functional-equation-regularity]] by contraposition. A single such function therefore witnesses the failure of all six regularity conditions at once.
 
-- **What the level sets look like.** They are the cosets of the
-  $\mathbb{Q}$-subspace $W = \ker f$, one for each rational value, and each is
-  dense. So $\mathbb{R}$ is partitioned into countably many dense sets, on each
-  of which $f$ is constant. The companion function of
-  [[ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous]] is built by
-  relabelling those values.
+- **What the level sets look like.** They are the cosets of the $\mathbb{Q}$-subspace $W = \ker f$, one for each rational value, and each is dense. So $\mathbb{R}$ is partitioned into countably many dense sets, on each of which $f$ is constant. The companion function of [[ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous]] is built by relabelling those values.
 
-- **No measurability claim is made.** The classical statement that a Hamel
-  coefficient map is not Lebesgue measurable is not asserted here: this library
-  develops no measure as it stands, so the statement is not expressible, and
-  nothing above depends on it.
+- **No measurability claim is made.** The classical statement that a Hamel coefficient map is not Lebesgue measurable is not asserted here: this library develops no measure as it stands, so the statement is not expressible, and nothing above depends on it.

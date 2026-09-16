@@ -34,12 +34,9 @@ is global on that fibre.
 
 **Given:** A completely integrable system and its Hamiltonian vector fields.
 
-[F1] Zero Poisson brackets make the local Hamiltonian flows commute.
-[[thm-hamiltonian-flows-commute-iff-their-hamiltonians-poisson-commute-up-to-locally-constant-bracket]],
-[[thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute]].
+[F1] Zero Poisson brackets make the local Hamiltonian flows commute. [[thm-hamiltonian-flows-commute-iff-their-hamiltonians-poisson-commute-up-to-locally-constant-bracket]], [[thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute]].
 
-[F2] On a regular fibre the fields are tangent and span its tangent spaces.
-[[prop-regular-common-level-sets-are-lagrangian-submanifolds]].
+[F2] On a regular fibre the fields are tangent and span its tangent spaces. [[prop-regular-common-level-sets-are-lagrangian-submanifolds]].
 
 ## Proof
 

@@ -32,23 +32,17 @@ isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and a finite-dimensional real Lie algebra
-$\mathfrak g$.
+**Given:** Countable choice and a finite-dimensional real Lie algebra $\mathfrak g$.
 
 [A1] Countable choice is [[def-countable-choice]].
 
-[L1] Ado embeds $\mathfrak g$ into a finite-dimensional matrix Lie algebra
-([[cor-every-finite-dimensional-characteristic-zero-lie-algebra-is-a-matrix-lie-algebra]]).
+[L1] Ado embeds $\mathfrak g$ into a finite-dimensional matrix Lie algebra ([[cor-every-finite-dimensional-characteristic-zero-lie-algebra-is-a-matrix-lie-algebra]]).
 
-[L2] Under [A1], a matrix Lie subalgebra integrates to a connected immersed
-Lie subgroup ([[thm-lie-subgroup-lie-subalgebra-correspondence]]).
+[L2] Under [A1], a matrix Lie subalgebra integrates to a connected immersed Lie subgroup ([[thm-lie-subgroup-lie-subalgebra-correspondence]]).
 
-[L3] Every connected Lie group has a simply connected covering Lie group
-([[thm-universal-covering-lie-group]]).
+[L3] Every connected Lie group has a simply connected covering Lie group ([[thm-universal-covering-lie-group]]).
 
-[L4] A homomorphism from the Lie algebra of a connected simply connected real
-Lie group to that of any real Lie group integrates uniquely
-([[thm-lie-second-fundamental-theorem]]).
+[L4] A homomorphism from the Lie algebra of a connected simply connected real Lie group to that of any real Lie group integrates uniquely ([[thm-lie-second-fundamental-theorem]]).
 
 ## Proof
 

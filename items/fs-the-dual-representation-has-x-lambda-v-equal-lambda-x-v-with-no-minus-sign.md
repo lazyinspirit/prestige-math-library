@@ -31,11 +31,9 @@ The dual action is $(x\lambda)(v)=\lambda(xv)$, with no minus sign.
 
 ## Facts & Assumptions
 
-**Given:** The proposed plus-sign formula on the algebraic dual of a
-representation.
+**Given:** The proposed plus-sign formula on the algebraic dual of a representation.
 
-[L1] The valid dual formula has a minus sign
-([[prop-direct-sum-dual-hom-and-tensor-representations]]).
+[L1] The valid dual formula has a minus sign ([[prop-direct-sum-dual-hom-and-tensor-representations]]).
 
 ## Refutation
 

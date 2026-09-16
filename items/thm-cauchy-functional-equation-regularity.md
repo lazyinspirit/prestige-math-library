@@ -121,22 +121,8 @@ this page.
 
 ## Remarks
 
-- **Every clause reduces to one lemma.** The engine is
-  [[lem-additive-bounded-above-on-an-interval-is-linear]]; five of the six
-  conditions are shown to imply its hypothesis, and the sixth is proved
-  separately because a non-dense graph gives no bound on $f$ anywhere. The
-  economy is deliberate: proving each clause from scratch would repeat the same
-  translation-and-scaling argument five times.
+- **Every clause reduces to one lemma.** The engine is [[lem-additive-bounded-above-on-an-interval-is-linear]]; five of the six conditions are shown to imply its hypothesis, and the sixth is proved separately because a non-dense graph gives no bound on $f$ anywhere. The economy is deliberate: proving each clause from scratch would repeat the same translation-and-scaling argument five times.
 
-- **The list is not a list of equivalent conditions.** Each of the six implies
-  linearity, and linearity implies all six, so over the additive functions they
-  are indeed equivalent; but the theorem as stated is six implications in one
-  direction, and that is what the proof establishes.
+- **The list is not a list of equivalent conditions.** Each of the six implies linearity, and linearity implies all six, so over the additive functions they are indeed equivalent; but the theorem as stated is six implications in one direction, and that is what the proof establishes.
 
-- **None of the six is dispensable in the sense that additivity alone suffices.**
-  There is an additive $f$ satisfying none of them
-  ([[fs-additive-implies-linear]]), and by the theorem it is unbounded above and
-  below on every nondegenerate interval, monotone on none, continuous at no
-  point, of constant sign on no nondegenerate interval, and has dense graph. The
-  construction costs the Axiom of Choice, and the companion page records what it
-  looks like.
+- **None of the six is dispensable in the sense that additivity alone suffices.** There is an additive $f$ satisfying none of them ([[fs-additive-implies-linear]]), and by the theorem it is unbounded above and below on every nondegenerate interval, monotone on none, continuous at no point, of constant sign on no nondegenerate interval, and has dense graph. The construction costs the Axiom of Choice, and the companion page records what it looks like.

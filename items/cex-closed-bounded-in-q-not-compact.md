@@ -78,27 +78,8 @@ work.
 
 ## Remarks
 
-- **What is closed in $\mathbb{Q}$ is not closed in $\mathbb{R}$.** Read inside
-  $\mathbb{R}$, the same collection of numbers is bounded and fails to be
-  closed: the real $\sqrt 2$, which exists by [[thm-of-square-roots]] and is not
-  rational by [[fs-sqrt2-rational]], is adherent to it and absent from it. The
-  set is closed in $\mathbb{Q}$
-  precisely because the point that would have to be adjoined to close it does
-  not lie in $\mathbb{Q}$. Closedness is a statement about a set inside an
-  ambient field, not about the set alone.
+- **What is closed in $\mathbb{Q}$ is not closed in $\mathbb{R}$.** Read inside $\mathbb{R}$, the same collection of numbers is bounded and fails to be closed: the real $\sqrt 2$, which exists by [[thm-of-square-roots]] and is not rational by [[fs-sqrt2-rational]], is adherent to it and absent from it. The set is closed in $\mathbb{Q}$ precisely because the point that would have to be adjoined to close it does not lie in $\mathbb{Q}$. Closedness is a statement about a set inside an ambient field, not about the set alone.
 
-- **Only one half of Heine-Borel fails here.** That a compact set is closed and
-  bounded ([[lem-compact-implies-closed-and-bounded-r]]) uses no completeness at
-  all, only the Archimedean property and the existence of maxima of finite sets;
-  the converse
-  ([[thm-heine-borel-r]] and [[thm-heine-borel-characterisation-r]]) is the half
-  that spends completeness, and it is the half refuted here.
+- **Only one half of Heine-Borel fails here.** That a compact set is closed and bounded ([[lem-compact-implies-closed-and-bounded-r]]) uses no completeness at all, only the Archimedean property and the existence of maxima of finite sets; the converse ([[thm-heine-borel-r]] and [[thm-heine-borel-characterisation-r]]) is the half that spends completeness, and it is the half refuted here.
 
-- **Why this witness rather than $\mathbb{Q} \cap [0,1]$.** Both work: a set with
-  rational endpoints is also closed and bounded in $\mathbb{Q}$ and also fails to
-  be compact there, but its non-compactness has to be produced by splitting it
-  at some irrational chosen for the purpose. In $S$ the irrational is already
-  built in, and the same fact, the irrationality of $\sqrt 2$
-  ([[fs-sqrt2-rational]]), delivers both closedness in $\mathbb{Q}$ and the
-  absence of a finite subcover. The witness therefore runs on exactly the
-  mechanism of the false statement it refutes.
+- **Why this witness rather than $\mathbb{Q} \cap [0,1]$.** Both work: a set with rational endpoints is also closed and bounded in $\mathbb{Q}$ and also fails to be compact there, but its non-compactness has to be produced by splitting it at some irrational chosen for the purpose. In $S$ the irrational is already built in, and the same fact, the irrationality of $\sqrt 2$ ([[fs-sqrt2-rational]]), delivers both closedness in $\mathbb{Q}$ and the absence of a finite subcover. The witness therefore runs on exactly the mechanism of the false statement it refutes.

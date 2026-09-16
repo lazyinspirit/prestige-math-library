@@ -51,9 +51,7 @@ $\mathcal L=\underline R$.
 
 [F4] [[lem-manifold-exhaustion-passes-local-duality-to-the-colimit]] supplies, under [[def-axiom-of-choice]], a countable exhaustion by finite unions of relatively compact coordinate balls. Its geometric construction is independent of coefficients.
 
-[F5] [[thm-poincare-duality-for-oriented-topological-manifolds]] is the
-constant-system oriented comparison to be recovered when
-$\mathcal L=\underline R$.
+[F5] [[thm-poincare-duality-for-oriented-topological-manifolds]] is the constant-system oriented comparison to be recovered when $\mathcal L=\underline R$.
 
 [F6] [[thm-cellular-cochains-compute-cohomology-with-local-coefficients]] computes the disk-boundary support pair, and [[prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism]] gives contraction invariance with its transport comparison.
 

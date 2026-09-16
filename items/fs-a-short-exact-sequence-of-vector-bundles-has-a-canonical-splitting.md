@@ -35,8 +35,7 @@ Every short exact sequence of smooth vector bundles has a canonical splitting.
 
 **Given:** The displayed claim.
 
-[L1] Every short exact sequence of smooth vector bundles admits some smooth
-splitting ([[cor-every-short-exact-sequence-of-smooth-vector-bundles-splits]]).
+[L1] Every short exact sequence of smooth vector bundles admits some smooth splitting ([[cor-every-short-exact-sequence-of-smooth-vector-bundles-splits]]).
 
 ## Refutation
 

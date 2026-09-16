@@ -39,25 +39,15 @@ $$\delta_\Omega(\widehat K_\Omega)=\delta_\Omega(K).$$
 
 ## Facts & Assumptions
 
-**Given:** A compact set $K\Subset\Omega$, where $\Omega$ is a domain of
-holomorphy.
+**Given:** A compact set $K\Subset\Omega$, where $\Omega$ is a domain of holomorphy.
 
-[L1] A domain of holomorphy is one for which no fixed larger overlap admits
-extensions of every holomorphic function
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L1] A domain of holomorphy is one for which no fixed larger overlap admits extensions of every holomorphic function ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
-[L2] For $0<r<\delta_\Omega(K)$, the derivatives of every holomorphic function
-on $\Omega$ satisfy uniform Cauchy bounds on $\widehat K_\Omega$
-([[lem-cauchy-estimates-propagate-to-holomorphic-hulls]]).
+[L2] For $0<r<\delta_\Omega(K)$, the derivatives of every holomorphic function on $\Omega$ satisfy uniform Cauchy bounds on $\widehat K_\Omega$ ([[lem-cauchy-estimates-propagate-to-holomorphic-hulls]]).
 
-[L3] A holomorphic function has a power-series expansion on a polydisc, and a
-convergent several-variable power series defines a holomorphic function on its
-polydisc of convergence
-([[thm-power-series-expansion-in-several-complex-variables]],
-[[thm-power-series-define-holomorphic-functions-in-several-variables]]).
+[L3] A holomorphic function has a power-series expansion on a polydisc, and a convergent several-variable power series defines a holomorphic function on its polydisc of convergence ([[thm-power-series-expansion-in-several-complex-variables]], [[thm-power-series-define-holomorphic-functions-in-several-variables]]).
 
-[L4] The hull contains the original compact set
-([[def-holomorphically-convex-hull-and-domain]]).
+[L4] The hull contains the original compact set ([[def-holomorphically-convex-hull-and-domain]]).
 
 ## Proof
 

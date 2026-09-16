@@ -40,52 +40,33 @@ claimed equivalence.
 
 ## Facts & Assumptions
 
-**Given:** external $\operatorname{Con}(\mathrm{ZFC})$ and the fixed proof
-predicates and contradiction sentence. All theory extensions use the same
-literal CH and SH formulas.
+**Given:** external $\operatorname{Con}(\mathrm{ZFC})$ and the fixed proof predicates and contradiction sentence. All theory extensions use the same literal CH and SH formulas.
 
-[F1] Externally, consistency of ZFC implies consistency of
-ZFC+MA+$\neg$CH, without a claim of a PA-verified uniform reduction.
-[[cor-formal-consistency-of-ma-and-not-ch]]
+[F1] Externally, consistency of ZFC implies consistency of ZFC+MA+$\neg$CH, without a claim of a PA-verified uniform reduction. [[cor-formal-consistency-of-ma-and-not-ch]]
 
-[F2] ZFC proves that MA+$\neg$CH implies SH.
-[[cor-ma-and-not-ch-implies-suslin-hypothesis]]
+[F2] ZFC proves that MA+$\neg$CH implies SH. [[cor-ma-and-not-ch-implies-suslin-hypothesis]]
 
-[F3] The $L$-interpretation dispatcher translates ZFC+GCH proofs to ZF by a
-primitive-recursive map whose totality and checker acceptance PA verifies.
-[[lem-finite-fragment-l-interpretation-with-gch]]
+[F3] The $L$-interpretation dispatcher translates ZFC+GCH proofs to ZF by a primitive-recursive map whose totality and checker acceptance PA verifies. [[lem-finite-fragment-l-interpretation-with-gch]]
 
-[F4] ZF has fixed proofs that $L$ satisfies every selected ZFC+$V=L$ axiom.
-[[thm-constructible-inner-model-semantic-and-formal-schema]]
+[F4] ZF has fixed proofs that $L$ satisfies every selected ZFC+$V=L$ axiom. [[thm-constructible-inner-model-semantic-and-formal-schema]]
 
-[F5] ZF proves that $V=L$ implies diamond on $\omega_1$.
-[[thm-v-equals-l-implies-diamond]]
+[F5] ZF proves that $V=L$ implies diamond on $\omega_1$. [[thm-v-equals-l-implies-diamond]]
 
 [F6] In ZFC, diamond implies CH. [[prop-diamond-implies-continuum-hypothesis]]
 
-[F7] ZF proves that $V=L$ yields a normal splitting Suslin tree.
-[[cor-v-equals-l-gives-a-suslin-tree]]
+[F7] ZF proves that $V=L$ yields a normal splitting Suslin tree. [[cor-v-equals-l-gives-a-suslin-tree]]
 
-[F8] In ZFC, a Suslin tree yields a strong-convention Suslin line.
-[[thm-suslin-tree-implies-suslin-line]]
+[F8] In ZFC, a Suslin tree yields a strong-convention Suslin line. [[thm-suslin-tree-implies-suslin-line]]
 
-[F9] SH says that no such Suslin line exists, so a supplied line witnesses its
-literal negation. [[def-suslin-hypothesis-and-suslin-algebra]]
+[F9] SH says that no such Suslin line exists, so a supplied line witnesses its literal negation. [[def-suslin-hypothesis-and-suslin-algebra]]
 
-[F10] A base-verified total map from target refutations to source refutations
-yields the corresponding formal consistency implication.
-[[thm-formal-relative-consistency-from-verified-proof-reduction]]
+[F10] A base-verified total map from target refutations to source refutations yields the corresponding formal consistency implication. [[thm-formal-relative-consistency-from-verified-proof-reduction]]
 
-[F11] External consistency means that no actual certified finite refutation of
-the fixed contradiction exists. [[def-arithmetic-provability-and-consistency]]
+[F11] External consistency means that no actual certified finite refutation of the fixed contradiction exists. [[def-arithmetic-provability-and-consistency]]
 
-[F12] The verified $L$ proof transformation includes the fixed terminal block
-that converts a relativized contradiction into the selected ZF contradiction.
-[[thm-formal-consistency-of-zfc-plus-gch-from-zf]]
+[F12] The verified $L$ proof transformation includes the fixed terminal block that converts a relativized contradiction into the selected ZF contradiction. [[thm-formal-consistency-of-zfc-plus-gch-from-zf]]
 
-[A1] Choice is available in the ZFC object theories and internally in $L$;
-the metatheoretic finite proof splices make no family choice.
-[[def-axiom-of-choice]]
+[A1] Choice is available in the ZFC object theories and internally in $L$; the metatheoretic finite proof splices make no family choice. [[def-axiom-of-choice]]
 
 ## Counterexample
 
@@ -101,8 +82,5 @@ the metatheoretic finite proof splices make no family choice.
 
 ## Remarks
 
-- The MA branch supplies SH with CH false; the constructible branch supplies CH
-  with SH false. Neither branch claims that its axiom pattern holds in the
-  ambient universe.
-- The combined $L$ dispatcher is essential. Con(ZFC+CH) and
-  Con(ZFC+$\neg$SH) separately would not imply consistency of their union.
+- The MA branch supplies SH with CH false; the constructible branch supplies CH with SH false. Neither branch claims that its axiom pattern holds in the ambient universe.
+- The combined $L$ dispatcher is essential. Con(ZFC+CH) and Con(ZFC+$\neg$SH) separately would not imply consistency of their union.

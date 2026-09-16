@@ -77,31 +77,12 @@ complete ordered field, however it was obtained.
 
 ## Remarks
 
-- **The three steps are exactly the three lemmas, and each is sharp.** A Cauchy
-  sequence is bounded ([[lem-cauchy-sequence-bounded]]); a bounded sequence has a
-  convergent subsequence ([[thm-bolzano-weierstrass]]); a Cauchy sequence with a
-  convergent subsequence converges ([[lem-cauchy-with-convergent-subsequence]]).
-  Dropping the Cauchy hypothesis at the last step breaks the chain, since a
-  bounded sequence need not converge ([[fs-bounded-implies-convergent]]).
+- **The three steps are exactly the three lemmas, and each is sharp.** A Cauchy sequence is bounded ([[lem-cauchy-sequence-bounded]]); a bounded sequence has a convergent subsequence ([[thm-bolzano-weierstrass]]); a Cauchy sequence with a convergent subsequence converges ([[lem-cauchy-with-convergent-subsequence]]). Dropping the Cauchy hypothesis at the last step breaks the chain, since a bounded sequence need not converge ([[fs-bounded-implies-convergent]]).
 
-- **Where completeness enters.** Only in the middle step, and there only through
-  [[cor-monotone-converges-iff-bounded]] inside the proof of
-  Bolzano-Weierstrass. The first and third steps hold in any ordered field. That
-  localisation is the reason for the page order.
+- **Where completeness enters.** Only in the middle step, and there only through [[cor-monotone-converges-iff-bounded]] inside the proof of Bolzano-Weierstrass. The first and third steps hold in any ordered field. That localisation is the reason for the page order.
 
-- **The converse needs an extra hypothesis.** Cauchy completeness alone does not
-  imply the least-upper-bound property; it does so together with the Archimedean
-  property, and there are Cauchy complete non-Archimedean ordered fields that are
-  not Dedekind complete. This library does not prove that here; the equivalences
-  between the forms of completeness are the subject of a later page, and
-  [[rem-completeness-routes]] states precisely what is and is not established
-  now.
+- **The converse needs an extra hypothesis.** Cauchy completeness alone does not imply the least-upper-bound property; it does so together with the Archimedean property, and there are Cauchy complete non-Archimedean ordered fields that are not Dedekind complete. This library does not prove that here; the equivalences between the forms of completeness are the subject of a later page, and [[rem-completeness-routes]] states precisely what is and is not established now.
 
-- **The name.** "Cauchy criterion" is the useful reading: the theorem lets one
-  prove convergence without producing the limit, which is what makes it the
-  standard tool for series and for uniform convergence later on.
+- **The name.** "Cauchy criterion" is the useful reading: the theorem lets one prove convergence without producing the limit, which is what makes it the standard tool for series and for uniform convergence later on.
 
-- The construction-side proof of the same sentence is
-  [[thm-reals-cauchy-complete]], and [[rem-completeness-routes]] sets out why
-  this library keeps both. Neither proof uses the other, and nothing above
-  depends on that item.
+- The construction-side proof of the same sentence is [[thm-reals-cauchy-complete]], and [[rem-completeness-routes]] sets out why this library keeps both. Neither proof uses the other, and nothing above depends on that item.

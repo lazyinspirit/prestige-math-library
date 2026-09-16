@@ -28,14 +28,11 @@ $N+\operatorname{rad}(M)=M$, then $N=M$.
 
 **Given:** A finite-length module $M$ and a submodule $N\le M$ with $N+\operatorname{rad}(M)=M$.
 
-[F1] The module radical is the intersection of the maximal submodules, and the
-head is $M/\operatorname{rad}(M)$ ([[def-module-radical-socle-head-and-loewy-series]]).
+[F1] The module radical is the intersection of the maximal submodules, and the head is $M/\operatorname{rad}(M)$ ([[def-module-radical-socle-head-and-loewy-series]]).
 
-[L1] Finite length means a composition series exists
-([[def-composition-series-and-length-of-a-module]]).
+[L1] Finite length means a composition series exists ([[def-composition-series-and-length-of-a-module]]).
 
-[L2] Every nonzero finitely generated module has a maximal proper submodule
-([[thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules]]).
+[L2] Every nonzero finitely generated module has a maximal proper submodule ([[thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules]]).
 
 ## Proof
 

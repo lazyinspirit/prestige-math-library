@@ -37,14 +37,11 @@ isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** A morphism of short exact sequences whose outer vertical maps are
-isomorphisms.
+**Given:** A morphism of short exact sequences whose outer vertical maps are isomorphisms.
 
-[L1] The short five lemma makes the middle map both monic and epic
-([[thm-short-five-lemma-in-an-abelian-category]]).
+[L1] The short five lemma makes the middle map both monic and epic ([[thm-short-five-lemma-in-an-abelian-category]]).
 
-[L2] Every morphism that is both monic and epic in an abelian category is an
-isomorphism ([[thm-an-abelian-category-is-balanced]]).
+[L2] Every morphism that is both monic and epic in an abelian category is an isomorphism ([[thm-an-abelian-category-is-balanced]]).
 
 ## Proof
 

@@ -26,24 +26,19 @@ satisfies $\nu(F)\in\mathbb R$.
 
 ## Facts & Assumptions
 
-**Given:** A signed measure $\nu$, a measurable set $E$ with finite value
-$\nu(E)$, and a measurable subset $F\subseteq E$.
+**Given:** A signed measure $\nu$, a measurable set $E$ with finite value $\nu(E)$, and a measurable subset $F\subseteq E$.
 
-[L1] A signed measure takes at most one infinite sign and is additive on
-disjoint measurable unions. ([[def-signed-measure]])
+[L1] A signed measure takes at most one infinite sign and is additive on disjoint measurable unions. ([[def-signed-measure]])
 
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 The sets $F$ and $E\setminus F$ are disjoint and have union $E$, so [L1]
-gives
-$$\nu(E)=\nu(F)+\nu(E\setminus F).$$
+gives $$\nu(E)=\nu(F)+\nu(E\setminus F).$$
 
 2.1 If $\nu(F)=+\infty$, then the at-most-one-infinite-sign clause in [L1] [L1, step 1.1]
-forces $\nu(E\setminus F)\neq-\infty$, so the right side of step 1.1 is
-$+\infty$, contradicting the finiteness of $\nu(E)$. The same argument with the
-signs reversed rules out $\nu(F)=-\infty$. Therefore $\nu(F)\in\mathbb R$.
+forces $\nu(E\setminus F)\neq-\infty$, so the right side of step 1.1 is $+\infty$, contradicting the finiteness of $\nu(E)$. The same argument with the signs reversed rules out $\nu(F)=-\infty$. Therefore $\nu(F)\in\mathbb R$.
 
 3.1 The subset $F$ was arbitrary, so every measurable subset of $E$ has finite [step 2.1] ∎
 signed measure.

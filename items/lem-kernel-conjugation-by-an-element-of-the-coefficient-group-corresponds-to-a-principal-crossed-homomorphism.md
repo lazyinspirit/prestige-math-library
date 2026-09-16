@@ -37,15 +37,11 @@ $(-a,1)$ in $A\rtimes G$.
 
 **Given:** An action of $G$ on an abelian group $A$, a crossed homomorphism $z:G\to A$, and an element $a\in A$.
 
-[L1] The principal crossed homomorphism attached to $a$ is $g\mapsto g\cdot a-a$
-([[def-principal-crossed-homomorphism-for-abelian-coefficients]]).
+[L1] The principal crossed homomorphism attached to $a$ is $g\mapsto g\cdot a-a$ ([[def-principal-crossed-homomorphism-for-abelian-coefficients]]).
 
-[L2] The graph subgroup of a map is $\Gamma_z=\{(z(g),g):g\in G\}$
-([[def-graph-subgroup-in-a-semidirect-product]]).
+[L2] The graph subgroup of a map is $\Gamma_z=\{(z(g),g):g\in G\}$ ([[def-graph-subgroup-in-a-semidirect-product]]).
 
-[L3] The semidirect-product multiplication is
-$$(x,g)(y,h)=(x+g\cdot y,gh)$$
-for abelian coefficients ([[thm-external-semidirect-product-is-a-group]]).
+[L3] The semidirect-product multiplication is $$(x,g)(y,h)=(x+g\cdot y,gh)$$ for abelian coefficients ([[thm-external-semidirect-product-is-a-group]]).
 
 ## Proof
 

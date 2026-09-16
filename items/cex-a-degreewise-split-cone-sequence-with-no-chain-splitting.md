@@ -28,11 +28,9 @@ Every degreewise split cone sequence splits as a sequence of complexes.
 
 **Given:** The cone sequence attached to $\times2:\mathbb Z[0]\to\mathbb Z[0]$.
 
-[L1] Every cone sequence is degreewise split short exact
-([[thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact]]).
+[L1] Every cone sequence is degreewise split short exact ([[thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact]]).
 
-[L2] Homology of a shift is shifted homology
-([[prop-homology-of-a-shift-is-shifted-homology]]).
+[L2] Homology of a shift is shifted homology ([[prop-homology-of-a-shift-is-shifted-homology]]).
 
 ## Counterexample
 

@@ -38,10 +38,7 @@ $n=0,1$, the trivial group has the empty presentation.
 
 **Given:** The symmetric group $S_n$ and the adjacent transpositions $\tau_i=(i\ i+1)$.
 
-[L1] The group $S_n$ is defined on $n=\{0,\ldots,n-1\}$; conjugating by the
-order-preserving bijection $k\mapsto k+1$ identifies it with the conventional
-symmetric group on $\{1,\ldots,n\}$ and transports adjacent transpositions
-([[def-finite-symmetric-group-and-permutation-notation]]).
+[L1] The group $S_n$ is defined on $n=\{0,\ldots,n-1\}$; conjugating by the order-preserving bijection $k\mapsto k+1$ identifies it with the conventional symmetric group on $\{1,\ldots,n\}$ and transports adjacent transpositions ([[def-finite-symmetric-group-and-permutation-notation]]).
 
 [F1] Muger states in Section 4 that the symmetric groups have the presentation $$S_n=\langle \sigma_1,\ldots,\sigma_{n-1}\mid \sigma_i^2=1,\ \sigma_i\sigma_{i+1}\sigma_i=\sigma_{i+1}\sigma_i\sigma_{i+1},\ \sigma_i\sigma_j=\sigma_j\sigma_i\ (|i-j|>1)\rangle.$$
 

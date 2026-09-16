@@ -36,12 +36,9 @@ extending $u$.
 
 **Given:** A morphism $u:A\to B$ with $A,B\in\mathcal D$.
 
-[L1] The datum $I$ supplies specific injective resolutions
-$A\to I^\bullet(A)$ and $B\to I^\bullet(B)$
-([[def-supplied-injective-resolution-datum]]).
+[L1] The datum $I$ supplies specific injective resolutions $A\to I^\bullet(A)$ and $B\to I^\bullet(B)$ ([[def-supplied-injective-resolution-datum]]).
 
-[L2] Assuming Dependent Choice, injective comparison maps exist for morphisms
-between chosen injective resolutions ([[thm-injective-comparison-map-exists]]).
+[L2] Assuming Dependent Choice, injective comparison maps exist for morphisms between chosen injective resolutions ([[thm-injective-comparison-map-exists]]).
 
 ## Proof
 

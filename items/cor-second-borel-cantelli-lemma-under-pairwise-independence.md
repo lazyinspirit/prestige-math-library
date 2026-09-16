@@ -27,15 +27,11 @@ $$\mathbb P(A_n\ \mathrm{i.o.})=1.$$
 
 ## Facts & Assumptions
 
-**Given:** Pairwise independent events $(A_n)_{n\in\mathbb N}$ with
-$\sum_{n=0}^\infty \mathbb P(A_n)=+\infty$.
+**Given:** Pairwise independent events $(A_n)_{n\in\mathbb N}$ with $\sum_{n=0}^\infty \mathbb P(A_n)=+\infty$.
 
-[L1] The frequency law gives
-$$\frac{\sum_{k=0}^n\mathbf 1_{A_k}}{\sum_{k=0}^n\mathbb P(A_k)}\to1$$
-almost surely. ([[thm-pairwise-independent-borel-cantelli-frequency-law]])
+[L1] The frequency law gives $$\frac{\sum_{k=0}^n\mathbf 1_{A_k}}{\sum_{k=0}^n\mathbb P(A_k)}\to1$$ almost surely. ([[thm-pairwise-independent-borel-cantelli-frequency-law]])
 
-[L2] The event $\{A_n\ \mathrm{i.o.}\}$ is the event that infinitely many of the
-$A_n$ occur. ([[def-limsup-and-infinitely-often-event]])
+[L2] The event $\{A_n\ \mathrm{i.o.}\}$ is the event that infinitely many of the $A_n$ occur. ([[def-limsup-and-infinitely-often-event]])
 
 ## Proof
 

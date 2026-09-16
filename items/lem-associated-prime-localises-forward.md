@@ -40,9 +40,7 @@ $$ S^{-1}\mathfrak p \in \operatorname{Ass}_{S^{-1}R}(S^{-1}M). $$
 
 [L2] Injective module maps remain injective after localisation ([[lem-localisation-preserves-injectivity]]).
 
-[L3] Localisation commutes with quotient modules, so
-$S^{-1}(R/\mathfrak p)\cong (S^{-1}R)/(S^{-1}\mathfrak p)$
-([[thm-localisation-of-modules-commutes-with-quotients-and-sums]]).
+[L3] Localisation commutes with quotient modules, so $S^{-1}(R/\mathfrak p)\cong (S^{-1}R)/(S^{-1}\mathfrak p)$ ([[thm-localisation-of-modules-commutes-with-quotients-and-sums]]).
 
 [L4] If $\mathfrak p \cap S=\varnothing$, then $S^{-1}\mathfrak p$ is a prime ideal of $S^{-1}R$ ([[thm-prime-spectrum-of-a-localisation-bijection]]).
 

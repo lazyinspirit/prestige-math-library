@@ -33,15 +33,11 @@ $$\omega=\sum_{i=1}^n dq^i\wedge dp_i.$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a symplectic manifold $(M,\omega)$, and
-$p\in M$.
+**Given:** $\mathrm{AC}_\omega$, a symplectic manifold $(M,\omega)$, and $p\in M$.
 
-[F1] A nondegenerate alternating form has a symplectic basis.
-[[thm-alternating-forms-have-a-symplectic-normal-form]].
+[F1] A nondegenerate alternating form has a symplectic basis. [[thm-alternating-forms-have-a-symplectic-normal-form]].
 
-[F2] Symplectic forms that agree as tensors along a closed embedded
-submanifold and have a locally symplectic interpolation are related by a local
-symplectomorphism fixed there. [[thm-relative-moser-theorem]].
+[F2] Symplectic forms that agree as tensors along a closed embedded submanifold and have a locally symplectic interpolation are related by a local symplectomorphism fixed there. [[thm-relative-moser-theorem]].
 
 ## Proof
 

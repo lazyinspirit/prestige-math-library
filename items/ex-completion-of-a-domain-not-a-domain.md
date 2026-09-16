@@ -34,11 +34,9 @@ is not a domain.
 
 **Given:** A field $k$ with $\operatorname{char}(k)\ne 2$.
 
-[L1] Quotients and localizations of Noetherian rings are Noetherian
-([[thm-noetherian-ring-quotients-and-localisations]]).
+[L1] Quotients and localizations of Noetherian rings are Noetherian ([[thm-noetherian-ring-quotients-and-localisations]]).
 
-[L2] Completion of a Noetherian ring is Noetherian
-([[thm-noetherianity-of-adic-completion]]).
+[L2] Completion of a Noetherian ring is Noetherian ([[thm-noetherianity-of-adic-completion]]).
 
 ## Verification
 

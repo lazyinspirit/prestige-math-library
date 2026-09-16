@@ -33,15 +33,9 @@ space.
 
 **Given:** Integrable random variables $X,Y$.
 
-[L1] Expectation is the Lebesgue integral against the probability measure
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
+[L1] Expectation is the Lebesgue integral against the probability measure ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 
-[L2] The Lebesgue integral is linear on $L^1$, the nonnegative integral is
-monotone, and the modulus of an integral is bounded by the integral of the
-modulus
-([[thm-linearity-of-the-lebesgue-integral-on-l-one]],
-[[prop-order-and-scalar-rules-for-the-nonnegative-integral]],
-[[thm-integral-triangle-inequality]]).
+[L2] The Lebesgue integral is linear on $L^1$, the nonnegative integral is monotone, and the modulus of an integral is bounded by the integral of the modulus ([[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]], [[thm-integral-triangle-inequality]]).
 
 ## Proof
 

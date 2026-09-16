@@ -33,12 +33,9 @@ conjugate $uv$ of a relator in $R^{\pm 1}$.
 
 **Given:** A hyperbolic group $G$.
 
-[A1] There is an integer $L\ge1$, depending only on the hyperbolicity
-constant, such that an $L$-local geodesic is a uniform quasi-geodesic and no
-nonempty closed path is an $L$-local geodesic.
+[A1] There is an integer $L\ge1$, depending only on the hyperbolicity constant, such that an $L$-local geodesic is a uniform quasi-geodesic and no nonempty closed path is an $L$-local geodesic.
 
-[A2] For a fixed finite generating set, there are only finitely many words of
-length at most $2L$.
+[A2] For a fixed finite generating set, there are only finitely many words of length at most $2L$.
 
 ## Proof
 

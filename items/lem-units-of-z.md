@@ -88,16 +88,6 @@ $u = -1$.
 
 ## Remarks
 
-- **Why this is proved here and not cited.** The published example
-  [[ex-integers-under-addition]] records the same fact,
-  $\mathbb{Z}^{\times} = \{1,-1\}$, but it lives on an examples page, and pages of
-  that kind are leaves in the library's reading order: nothing later may depend
-  on them. The statement is therefore re-established here, on a spine, so that
-  later pages have a citable home for it. The two agree; neither rests on the
-  other.
+- **Why this is proved here and not cited.** The published example [[ex-integers-under-addition]] records the same fact, $\mathbb{Z}^{\times} = \{1,-1\}$, but it lives on an examples page, and pages of that kind are leaves in the library's reading order: nothing later may depend on them. The statement is therefore re-established here, on a spine, so that later pages have a citable home for it. The two agree; neither rests on the other.
 
-- **The proof is an application of the divisor bound, not a computation.** What
-  makes $\{1,-1\}$ the whole answer is that $u \mid 1$ forces $|u| \le 1$
-  ([[lem-divisor-bound]]) while $u \ne 0$ forces $|u| \ge 1$ (discreteness), and
-  antisymmetry closes the gap. Nothing about the decimal shape of an integer is
-  used.
+- **The proof is an application of the divisor bound, not a computation.** What makes $\{1,-1\}$ the whole answer is that $u \mid 1$ forces $|u| \le 1$ ([[lem-divisor-bound]]) while $u \ne 0$ forces $|u| \ge 1$ (discreteness), and antisymmetry closes the gap. Nothing about the decimal shape of an integer is used.

@@ -33,15 +33,11 @@ representations of $H$.
 
 ## Facts & Assumptions
 
-**Given:** The subgroup $A_3\le S_3$ and the nontrivial linear character
-$\theta$ of $A_3$.
+**Given:** The subgroup $A_3\le S_3$ and the nontrivial linear character $\theta$ of $A_3$.
 
-[F1] Inducing $\theta$ to $S_3$ gives the irreducible degree-two character
-$\chi_2$ ([[ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character]]).
+[F1] Inducing $\theta$ to $S_3$ gives the irreducible degree-two character $\chi_2$ ([[ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character]]).
 
-[F2] Restricting that degree-two character back to $A_3$ gives
-$\theta+\overline\theta$
-([[ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters]]).
+[F2] Restricting that degree-two character back to $A_3$ gives $\theta+\overline\theta$ ([[ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters]]).
 
 ## Refutation
 

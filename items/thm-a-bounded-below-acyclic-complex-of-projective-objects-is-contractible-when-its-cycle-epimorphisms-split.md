@@ -47,10 +47,7 @@ contractible.
 
 [L4] The split-exact criterion of the previous lemma yields contractibility ([[lem-a-degreewise-split-exact-complex-with-compatible-splittings-is-contractible]]).
 
-[L5] The stated proof uses the chosen sections. Projectivity of the terms
-$C_n$ alone does not provide sections of $C_n\twoheadrightarrow Z_{n-1}(C)$;
-the lifting property in [[def-projective-object]] would provide such a section
-if the target $Z_{n-1}(C)$ were projective.
+[L5] The stated proof uses the chosen sections. Projectivity of the terms $C_n$ alone does not provide sections of $C_n\twoheadrightarrow Z_{n-1}(C)$; the lifting property in [[def-projective-object]] would provide such a section if the target $Z_{n-1}(C)$ were projective.
 
 ## Proof
 

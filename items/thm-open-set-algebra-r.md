@@ -91,22 +91,8 @@ a convention about the empty intersection.
 
 ## Remarks
 
-- **Completeness plays no part.** Nothing above uses the least-upper-bound
-  property, or even the Archimedean property: the only facts about $\mathbb{R}$
-  the proof touches are the definition of a neighbourhood, its monotonicity in
-  the radius, and the comparison of two positive radii. What needs completeness
-  is not the algebra of open sets but the theorems about compactness that come
-  later.
+- **Completeness plays no part.** Nothing above uses the least-upper-bound property, or even the Archimedean property: the only facts about $\mathbb{R}$ the proof touches are the definition of a neighbourhood, its monotonicity in the radius, and the comparison of two positive radii. What needs completeness is not the algebra of open sets but the theorems about compactness that come later.
 
-- **Why finiteness cannot be dropped in claim 2.** The minimum taken in step 2.1
-  is a minimum of finitely many positive radii, and it is positive precisely
-  because it is one of them ([[lem-finite-set-has-max]]). An infinite family of
-  positive radii has an infimum that may be $0$, and then no positive $\delta$
-  survives. That is exactly what happens for the shrinking intervals of
-  [[fs-arbitrary-intersection-of-open-is-open]], whose named witness is
-  [[cex-intersection-of-shrinking-intervals-not-open]].
+- **Why finiteness cannot be dropped in claim 2.** The minimum taken in step 2.1 is a minimum of finitely many positive radii, and it is positive precisely because it is one of them ([[lem-finite-set-has-max]]). An infinite family of positive radii has an infimum that may be $0$, and then no positive $\delta$ survives. That is exactly what happens for the shrinking intervals of [[fs-arbitrary-intersection-of-open-is-open]], whose named witness is [[cex-intersection-of-shrinking-intervals-not-open]].
 
-- **The four claims are a rewriting of two.** Claims 3 and 4 are claims 1 and 2
-  read through complementation, and closedness is *defined* by complementation
-  ([[def-open-and-closed-in-r]]), so no separate argument about closed sets is
-  possible or needed.
+- **The four claims are a rewriting of two.** Claims 3 and 4 are claims 1 and 2 read through complementation, and closedness is *defined* by complementation ([[def-open-and-closed-in-r]]), so no separate argument about closed sets is possible or needed.

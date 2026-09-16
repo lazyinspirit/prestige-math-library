@@ -28,8 +28,7 @@ $$\zeta(-2)=0.$$
 
 **Given:** The trivial-zero theorem.
 
-[L1] For every integer $m\ge1$, $\zeta(-2m)=0$
-([[thm-trivial-zeros-and-critical-strip]]).
+[L1] For every integer $m\ge1$, $\zeta(-2m)=0$ ([[thm-trivial-zeros-and-critical-strip]]).
 
 ## Verification
 

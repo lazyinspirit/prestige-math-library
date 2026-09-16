@@ -32,12 +32,9 @@ distance of geodesics with the same endpoints.
 
 **Given:** In the Euclidean plane, for each $n \ge 1$, the broken path from $(0,0)$ to $(0,n)$ to $(n,n)$ to $(n,0)$.
 
-[L1] Morse stability holds in hyperbolic spaces
-([[thm-morse-stability-of-quasi-geodesics]]).
+[L1] Morse stability holds in hyperbolic spaces ([[thm-morse-stability-of-quasi-geodesics]]).
 
-[A1] Each broken path above is a uniform quasi-geodesic in $\mathbb R^2$, while
-its midpoint on the top horizontal segment is distance $n$ from the straight
-geodesic segment joining $(0,0)$ to $(n,0)$.
+[A1] Each broken path above is a uniform quasi-geodesic in $\mathbb R^2$, while its midpoint on the top horizontal segment is distance $n$ from the straight geodesic segment joining $(0,0)$ to $(n,0)$.
 
 ## Refutation
 

@@ -35,8 +35,7 @@ the unknown $2$-adic local value is forced by the values at the other places.
 
 ## Facts & Assumptions
 
-**Given:** The one-place principle for ternary forms
-([[cor-ternary-hilbert-one-place-principle]]).
+**Given:** The one-place principle for ternary forms ([[cor-ternary-hilbert-one-place-principle]]).
 
 ## Verification
 

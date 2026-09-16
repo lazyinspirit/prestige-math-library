@@ -35,20 +35,13 @@ $i$-coordinates to the $j$-coordinates is $\rho(g_{ji})$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth right principal $H$-bundle $\pi:P\to M$, a
-finite-dimensional real vector space $V$, and a smooth representation
-$\rho:H\to GL(V)$.
+**Given:** A smooth right principal $H$-bundle $\pi:P\to M$, a finite-dimensional real vector space $V$, and a smooth representation $\rho:H\to GL(V)$.
 
-[F1] The associated quotient, its diagonal action, relation, and projection
-are fixed. [[def-associated-bundle-to-a-principal-bundle-and-representation]].
+[F1] The associated quotient, its diagonal action, relation, and projection are fixed. [[def-associated-bundle-to-a-principal-bundle-and-representation]].
 
-[F2] Smooth vector-bundle charts have smooth linear transition functions, and
-smooth local trivializations are diffeomorphisms over the base.
-[[def-vector-bundle-chart-and-transition-function]],
-[[def-smooth-fibre-bundle-and-local-trivialization]].
+[F2] Smooth vector-bundle charts have smooth linear transition functions, and smooth local trivializations are diffeomorphisms over the base. [[def-vector-bundle-chart-and-transition-function]], [[def-smooth-fibre-bundle-and-local-trivialization]].
 
-[F3] A supplied countable smooth cocycle constructs a vector bundle.
-[[thm-vector-bundle-construction-from-a-smooth-cocycle]].
+[F3] A supplied countable smooth cocycle constructs a vector bundle. [[thm-vector-bundle-construction-from-a-smooth-cocycle]].
 
 ## Proof
 

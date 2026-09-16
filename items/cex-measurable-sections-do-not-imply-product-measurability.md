@@ -41,11 +41,7 @@ $$E:=\{(x,y)\in X \times X : y<x\}.$$
 
 **Given:** The set $E \subseteq X \times X$ above.
 
-[L1] A sigma-algebra is closed under complements and countable unions
-([[def-sigma-algebra]]), and under countable choice a countable union of
-countable sets is countable ([[def-countable-choice]],
-[[thm-countable-union-of-countable]]). Hence the countable-cocountable family
-on an uncountable set is a sigma-algebra.
+[L1] A sigma-algebra is closed under complements and countable unions ([[def-sigma-algebra]]), and under countable choice a countable union of countable sets is countable ([[def-countable-choice]], [[thm-countable-union-of-countable]]). Hence the countable-cocountable family on an uncountable set is a sigma-algebra.
 
 [L2] For sigma-finite measures, the two iterated section-measure integrals of a product-measurable set agree. ([[thm-iterated-section-measures-agree-on-product-measurable-sets]])
 

@@ -31,14 +31,11 @@ has $|\nu|(E)=|\nu(E)|$.
 
 ## Facts & Assumptions
 
-**Given:** The signed measure $\nu=\delta_1-\delta_{-1}$ on the discrete
-measurable space $(E,\mathcal P(E))$, where $E=\{-1,1\}$.
+**Given:** The signed measure $\nu=\delta_1-\delta_{-1}$ on the discrete measurable space $(E,\mathcal P(E))$, where $E=\{-1,1\}$.
 
-[L1] The Dirac set function at a point is the indicator-valued measurable set
-function. ([[def-dirac-measure]])
+[L1] The Dirac set function at a point is the indicator-valued measurable set function. ([[def-dirac-measure]])
 
-[L2] Total variation is the supremum of countable partition sums of
-$|\nu(E_n)|$. ([[def-total-variation-of-a-signed-or-complex-measure]])
+[L2] Total variation is the supremum of countable partition sums of $|\nu(E_n)|$. ([[def-total-variation-of-a-signed-or-complex-measure]])
 
 ## Counterexample
 
@@ -48,6 +45,4 @@ $|\nu(E_n)|$. ([[def-total-variation-of-a-signed-or-complex-measure]])
 $|\nu(E)|=0$.
 
 2.1 The two singletons $\{1\}$ and $\{-1\}$ form a measurable partition of [L1, L2, step 1.1] ∎
-$E$, and [L1] gives
-$$|\nu(\{1\})|+|\nu(\{-1\})|=1+1=2.$$
-Therefore [L2] yields $|\nu|(E)\ge2>0=|\nu(E)|$, refuting the claim.
+$E$, and [L1] gives $$|\nu(\{1\})|+|\nu(\{-1\})|=1+1=2.$$ Therefore [L2] yields $|\nu|(E)\ge2>0=|\nu(E)|$, refuting the claim.

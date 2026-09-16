@@ -34,18 +34,13 @@ has image $A_0$ such that $A$ is a finite $A_0$-module.
 
 ## Facts & Assumptions
 
-**Given:** A complete equicharacteristic Noetherian local domain $(A,\mathfrak m)$
-of dimension $d$, a coefficient field $k \subseteq A$, a system of parameters
-$x_1,\ldots,x_d$, and the Axiom of Dependent Choice.
+**Given:** A complete equicharacteristic Noetherian local domain $(A,\mathfrak m)$ of dimension $d$, a coefficient field $k \subseteq A$, a system of parameters $x_1,\ldots,x_d$, and the Axiom of Dependent Choice.
 
-[L1] A system of parameters generates an $\mathfrak m$-primary ideal
-([[def-system-of-parameters-and-parameter-ideal]], [[lem-parameter-ideal-equivalent-m-primary]]).
+[L1] A system of parameters generates an $\mathfrak m$-primary ideal ([[def-system-of-parameters-and-parameter-ideal]], [[lem-parameter-ideal-equivalent-m-primary]]).
 
-[L2] The continuous map from the formal power-series ring exists
-([[lem-formal-power-series-evaluation-unique-continuous-map]]).
+[L2] The continuous map from the formal power-series ring exists ([[lem-formal-power-series-evaluation-unique-continuous-map]]).
 
-[L3] Complete Nakayama lifts generators modulo an ideal to actual generators
-([[thm-complete-nakayama-lemma]]).
+[L3] Complete Nakayama lifts generators modulo an ideal to actual generators ([[thm-complete-nakayama-lemma]]).
 
 ## Proof
 

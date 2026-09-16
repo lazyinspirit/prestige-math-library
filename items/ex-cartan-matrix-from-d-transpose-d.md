@@ -39,12 +39,9 @@ $$C=D^{\mathsf T}D=\begin{pmatrix}2&0\\0&1\end{pmatrix}.$$
 
 **Given:** The characteristic-$2$ decomposition matrix of $S_3$.
 
-[L1] The Cartan matrix is $D^{\mathsf T}D$
-([[thm-cartan-matrix-is-d-transpose-d]]).
+[L1] The Cartan matrix is $D^{\mathsf T}D$ ([[thm-cartan-matrix-is-d-transpose-d]]).
 
-[L2] The decomposition matrix of $S_3$ in characteristic $2$ is the displayed
-matrix
-([[ex-decomposition-matrix-of-s-three-in-characteristic-two]]).
+[L2] The decomposition matrix of $S_3$ in characteristic $2$ is the displayed matrix ([[ex-decomposition-matrix-of-s-three-in-characteristic-two]]).
 
 ## Verification
 

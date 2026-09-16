@@ -33,11 +33,9 @@ usual absolute value and to $0$ in $\mathbb Q_p$.
 
 **Given:** A prime $p$.
 
-[L1] $|p|_p = p^{-1}$ by definition of the $p$-adic absolute value
-([[def-p-adic-absolute-value-on-the-rationals]]).
+[L1] $|p|_p = p^{-1}$ by definition of the $p$-adic absolute value ([[def-p-adic-absolute-value-on-the-rationals]]).
 
-[L2] $\mathbb Q_p$ is the completion field for this metric
-([[def-field-of-p-adic-numbers]]).
+[L2] $\mathbb Q_p$ is the completion field for this metric ([[def-field-of-p-adic-numbers]]).
 
 ## Verification
 

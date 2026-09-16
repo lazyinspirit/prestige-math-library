@@ -35,17 +35,11 @@ the unique probability law on the singleton empty tuple.
 
 **Given:** AC and a finite list of nonnegative times.
 
-[F1] The matrix with entries $\min(t_i,t_j)$ is symmetric positive
-semidefinite, including for repeated and zero times.
-[[lem-positive-semidefiniteness-of-the-brownian-covariance-kernel]]
+[F1] The matrix with entries $\min(t_i,t_j)$ is symmetric positive semidefinite, including for repeated and zero times. [[lem-positive-semidefiniteness-of-the-brownian-covariance-kernel]]
 
-[F2] Assume AC. Every finite-dimensional symmetric positive semidefinite
-covariance matrix defines a centered, possibly singular multivariate normal
-law. [[def-multivariate-normal-law]]
+[F2] Assume AC. Every finite-dimensional symmetric positive semidefinite covariance matrix defines a centered, possibly singular multivariate normal law. [[def-multivariate-normal-law]]
 
-[F3] Assume AC. The characteristic function of $N_n(0,\Sigma)$ is
-$u\mapsto\exp(-u^T\Sigma u/2)$ and uniquely determines its law, including
-singular $\Sigma$. [[lem-characteristic-function-of-a-multivariate-normal-law]]
+[F3] Assume AC. The characteristic function of $N_n(0,\Sigma)$ is $u\mapsto\exp(-u^T\Sigma u/2)$ and uniquely determines its law, including singular $\Sigma$. [[lem-characteristic-function-of-a-multivariate-normal-law]]
 
 ## Proof
 
@@ -59,8 +53,4 @@ singular $\Sigma$. [[lem-characteristic-function-of-a-multivariate-normal-law]]
 
 ## Source notes
 
-Durrett, Section 7.1 (printed pp. 355–356), constructs the centered Gaussian
-finite-dimensional laws with covariance $\min(s,t)$ and invokes Kolmogorov
-extension. The calculation above records the full selection-map consistency
-needed before that invocation and does not assume nonsingularity or distinct
-times.
+Durrett, Section 7.1 (printed pp. 355–356), constructs the centered Gaussian finite-dimensional laws with covariance $\min(s,t)$ and invokes Kolmogorov extension. The calculation above records the full selection-map consistency needed before that invocation and does not assume nonsingularity or distinct times.

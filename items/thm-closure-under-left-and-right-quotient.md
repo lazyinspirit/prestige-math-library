@@ -29,9 +29,7 @@ are regular.
 
 ## Facts & Assumptions
 
-**Given:** Regular languages $L,K\subseteq\Sigma^*$, together with DFA's
-$D_L=(Q_L,\Sigma,\delta_L,q_L,F_L)$ and
-$D_K=(Q_K,\Sigma,\delta_K,q_K,F_K)$ recognizing them.
+**Given:** Regular languages $L,K\subseteq\Sigma^*$, together with DFA's $D_L=(Q_L,\Sigma,\delta_L,q_L,F_L)$ and $D_K=(Q_K,\Sigma,\delta_K,q_K,F_K)$ recognizing them.
 
 [L1] By [[def-dfa-acceptance-and-recognized-language]], a word is in the language of a DFA exactly when its run from the start state finishes in an accepting state.
 

@@ -39,8 +39,7 @@ $$ Q=\{m \in M : m/1 \in S^{-1}Q\}. $$
 
 [L1] For the quotient $N=M/Q$, every $a \notin \mathfrak p$ acts injectively on $N$ ([[thm-primary-submodule-characterisations]]).
 
-[L2] Localisation commutes with quotient modules, so
-$S^{-1}(M/Q)\cong (S^{-1}M)/(S^{-1}Q)$ ([[thm-localisation-of-modules-commutes-with-quotients-and-sums]]).
+[L2] Localisation commutes with quotient modules, so $S^{-1}(M/Q)\cong (S^{-1}M)/(S^{-1}Q)$ ([[thm-localisation-of-modules-commutes-with-quotients-and-sums]]).
 
 ## Proof
 

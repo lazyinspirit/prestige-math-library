@@ -35,11 +35,9 @@ is freely equivalent to the reduced word $x$.
 
 **Given:** Distinct letters $x,y$ in an alphabet $X$.
 
-[L1] An elementary cancellation deletes adjacent pairs $zz^{-1}$ and $z^{-1}z$, and a word is reduced exactly when no such pair occurs
-([[def-alphabet-words-and-reduction]]).
+[L1] An elementary cancellation deletes adjacent pairs $zz^{-1}$ and $z^{-1}z$, and a word is reduced exactly when no such pair occurs ([[def-alphabet-words-and-reduction]]).
 
-[L2] Freely equivalent words are connected by finitely many elementary cancellations and reverse insertions
-([[def-alphabet-words-and-reduction]]).
+[L2] Freely equivalent words are connected by finitely many elementary cancellations and reverse insertions ([[def-alphabet-words-and-reduction]]).
 
 ## Verification
 

@@ -34,11 +34,9 @@ subobject lattice is distributive, unlike the $M_3$ witness on the A page.
 
 **Given:** The cyclic group $C_{12}$.
 
-[L1] Subobjects of an abelian-category object form a lattice
-([[thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice]]).
+[L1] Subobjects of an abelian-category object form a lattice ([[thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice]]).
 
-[L2] Such lattices are modular
-([[thm-the-subobject-lattice-of-an-abelian-category-is-modular]]).
+[L2] Such lattices are modular ([[thm-the-subobject-lattice-of-an-abelian-category-is-modular]]).
 
 ## Verification
 

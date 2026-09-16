@@ -40,19 +40,11 @@ $\omega$ and every $n$-tuple.
 
 **Given:** $V,F,n,T$ and $\omega$ as in the statement.
 
-[L1] For any ordered basis $\mathcal B$, every alternating $n$-linear form
-satisfies
-$\eta(v_0,\ldots,v_{n-1})=\eta(\mathcal B)
-\det M_{\mathcal B}(v_0,\ldots,v_{n-1})$
-([[lem-alternating-top-forms-are-determined-by-one-ordered-basis]]).
+[L1] For any ordered basis $\mathcal B$, every alternating $n$-linear form satisfies $\eta(v_0,\ldots,v_{n-1})=\eta(\mathcal B) \det M_{\mathcal B}(v_0,\ldots,v_{n-1})$ ([[lem-alternating-top-forms-are-determined-by-one-ordered-basis]]).
 
-[F1] In an ordered basis $\mathcal B$,
-$\det(T)=\det([T]_{\mathcal B})$
-([[def-determinant-of-a-linear-operator]]).
+[F1] In an ordered basis $\mathcal B$, $\det(T)=\det([T]_{\mathcal B})$ ([[def-determinant-of-a-linear-operator]]).
 
-[L2] The matrix determinant is alternating, multilinear in the columns, and
-$\det(I_n)=1$
-([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
+[L2] The matrix determinant is alternating, multilinear in the columns, and $\det(I_n)=1$ ([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
 
 ## Proof
 

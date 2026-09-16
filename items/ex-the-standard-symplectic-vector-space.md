@@ -32,8 +32,7 @@ the form $\omega_0=\sum_i dq^i\wedge dp_i$ is symplectic.
 
 **Given:** The displayed vector space and alternating form.
 
-[F1] Nondegeneracy means that $v\mapsto\iota_v\omega_0$ has zero kernel.
-[[def-symplectic-vector-space]].
+[F1] Nondegeneracy means that $v\mapsto\iota_v\omega_0$ has zero kernel. [[def-symplectic-vector-space]].
 
 ## Verification
 

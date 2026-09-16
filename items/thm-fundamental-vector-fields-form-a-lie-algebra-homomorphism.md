@@ -42,30 +42,17 @@ Thus $X\mapsto X_M$ is a Lie-algebra homomorphism.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a smooth left action of a
-finite-dimensional real Lie group $G$ on a smooth manifold $M$, and
-$X,Y\in\mathfrak g$.
+**Given:** $\mathrm{AC}_\omega$, a smooth left action of a finite-dimensional real Lie group $G$ on a smooth manifold $M$, and $X,Y\in\mathfrak g$.
 
-[A1] The fundamental-field convention uses $\exp(-tX)$ and gives smooth
-vector fields. [[def-countable-choice]],
-[[def-fundamental-vector-field-of-a-left-action]].
+[A1] The fundamental-field convention uses $\exp(-tX)$ and gives smooth vector fields. [[def-countable-choice]], [[def-fundamental-vector-field-of-a-left-action]].
 
-[F1] Pushforward by a diffeomorphism transports a smooth vector field by its
-differential. [[def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism]].
+[F1] Pushforward by a diffeomorphism transports a smooth vector field by its differential. [[def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism]].
 
-[F2] The inverse-time-flow definition of the Lie derivative satisfies
-$\mathcal L_UV=[U,V]$.
-[[def-lie-derivative-of-a-vector-field]],
-[[thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket]].
+[F2] The inverse-time-flow definition of the Lie derivative satisfies $\mathcal L_UV=[U,V]$. [[def-lie-derivative-of-a-vector-field]], [[thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket]].
 
-[F3] The identity differential of the group adjoint representation is
-$\operatorname{ad}$, so
-$\left.\frac d{dt}\right|_0\operatorname{Ad}_{\exp(tX)}Y=[X,Y]$.
-[[thm-the-differential-of-adjoint-is-ad]].
+[F3] The identity differential of the group adjoint representation is $\operatorname{ad}$, so $\left.\frac d{dt}\right|_0\operatorname{Ad}_{\exp(tX)}Y=[X,Y]$. [[thm-the-differential-of-adjoint-is-ad]].
 
-[F4] Conjugation intertwines the exponential map:
-$g\exp_G(Z)g^{-1}=\exp_G(\operatorname{Ad}_gZ)$ for every $g\in G$ and
-$Z\in\mathfrak g$. [[prop-adjoint-intertwines-the-exponential-map]].
+[F4] Conjugation intertwines the exponential map: $g\exp_G(Z)g^{-1}=\exp_G(\operatorname{Ad}_gZ)$ for every $g\in G$ and $Z\in\mathfrak g$. [[prop-adjoint-intertwines-the-exponential-map]].
 
 ## Proof
 

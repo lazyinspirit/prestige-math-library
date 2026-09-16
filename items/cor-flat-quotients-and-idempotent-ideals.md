@@ -35,17 +35,13 @@ Let $R$ be a commutative ring and $I\subseteq R$ an ideal.
 
 **Given:** A commutative ring $R$ and an ideal $I\subseteq R$.
 
-[L1] Flatness is equivalent to injectivity of $J\otimes_R M\to M$ for every
-ideal $J$ ([[thm-flatness-criteria-by-injections-and-ideals]]).
+[L1] Flatness is equivalent to injectivity of $J\otimes_R M\to M$ for every ideal $J$ ([[thm-flatness-criteria-by-injections-and-ideals]]).
 
-[L2] For every $R$-module $M$, there is a natural isomorphism
-$M\otimes_R(R/I)\cong M/IM$ ([[cor-tensor-product-with-a-quotient-ring]]).
+[L2] For every $R$-module $M$, there is a natural isomorphism $M\otimes_R(R/I)\cong M/IM$ ([[cor-tensor-product-with-a-quotient-ring]]).
 
-[L3] A direct summand of a flat module is flat
-([[thm-direct-sums-and-direct-summands-preserve-flatness]]).
+[L3] A direct summand of a flat module is flat ([[thm-direct-sums-and-direct-summands-preserve-flatness]]).
 
-[L4] If a finite module $N$ satisfies $IN=N$, then $(1-e)N=0$ for some $e\in I$
-([[lem-determinant-trick-for-nakayama]]).
+[L4] If a finite module $N$ satisfies $IN=N$, then $(1-e)N=0$ for some $e\in I$ ([[lem-determinant-trick-for-nakayama]]).
 
 ## Proof
 

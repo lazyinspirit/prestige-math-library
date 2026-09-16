@@ -37,9 +37,6 @@ is subharmonic on $\Omega$.
 **Proof technique:** direct.
 
 1.1 Put $u=\log|f|$. By [L1], for every closed disc $\overline{D(a,r)}\subseteq\Omega$, [L1, algebra]
-$$u(a)\le\frac1{2\pi}\int_0^{2\pi}u(a+re^{it})\,dt.$$
-Exponentiating and using Jensen's inequality for the convex increasing map $x\mapsto e^{px}$ gives
-$$|f(a)|^p=e^{pu(a)}\le\frac1{2\pi}\int_0^{2\pi}e^{pu(a+re^{it})}\,dt=\frac1{2\pi}\int_0^{2\pi}|f(a+re^{it})|^p\,dt.$$
-[L1, algebra]
+$$u(a)\le\frac1{2\pi}\int_0^{2\pi}u(a+re^{it})\,dt.$$ Exponentiating and using Jensen's inequality for the convex increasing map $x\mapsto e^{px}$ gives $$|f(a)|^p=e^{pu(a)}\le\frac1{2\pi}\int_0^{2\pi}e^{pu(a+re^{it})}\,dt=\frac1{2\pi}\int_0^{2\pi}|f(a+re^{it})|^p\,dt.$$ [L1, algebra]
 
 2.1 The function $|f|^p$ is continuous, hence upper semicontinuous, and is not identically zero on a connected component because $f$ is not identically zero there. Step 1.1 is exactly the submean inequality, so $|f|^p$ is subharmonic. [step 1.1, given] ∎

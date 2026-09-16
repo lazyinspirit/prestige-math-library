@@ -25,11 +25,9 @@ $$ \operatorname{Spec}(A\times B)\cong\operatorname{Spec}A\sqcup\operatorname{Sp
 
 ## Facts & Assumptions
 
-**Given:** Commutative rings $A,B$ and the idempotents $e=(1,0)$,
-$e'=(0,1)$ in $A\times B$.
+**Given:** Commutative rings $A,B$ and the idempotents $e=(1,0)$, $e'=(0,1)$ in $A\times B$.
 
-[F1] A ring map induces a contraction map on prime spectra
-([[def-morphism-affine-schemes-from-ring-map]]).
+[F1] A ring map induces a contraction map on prime spectra ([[def-morphism-affine-schemes-from-ring-map]]).
 
 ## Verification
 

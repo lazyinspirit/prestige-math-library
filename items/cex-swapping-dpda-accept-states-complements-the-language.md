@@ -32,15 +32,11 @@ complements its language" is false.
 
 ## Facts & Assumptions
 
-**Given:** The one-state $\varepsilon$-loop DPDA from
-[[fs-swapping-dpda-accept-states-complements-the-language]].
+**Given:** The one-state $\varepsilon$-loop DPDA from [[fs-swapping-dpda-accept-states-complements-the-language]].
 
-[A1] The statement refuted is: swapping the accepting states of a DPDA
-automatically complements its language.
+[A1] The statement refuted is: swapping the accepting states of a DPDA automatically complements its language.
 
-[L1] The cited false statement already shows that the original looping DPDA and
-its state-swapped variant both recognize the empty language, by
-[[fs-swapping-dpda-accept-states-complements-the-language]].
+[L1] The cited false statement already shows that the original looping DPDA and its state-swapped variant both recognize the empty language, by [[fs-swapping-dpda-accept-states-complements-the-language]].
 
 ## Counterexample
 

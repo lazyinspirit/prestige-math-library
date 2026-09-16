@@ -30,8 +30,7 @@ yes-instance.
 
 ## Facts & Assumptions
 
-**Given:** A source language $A$ having at least one no-instance and a target
-language $B$ having at least one yes-instance $y_B$.
+**Given:** A source language $A$ having at least one no-instance and a target language $B$ having at least one yes-instance $y_B$.
 
 [L1] A gadget reduction is not complete until both directions of correctness have been proved, by [[def-reduction-gadget-and-interface-invariant]].
 

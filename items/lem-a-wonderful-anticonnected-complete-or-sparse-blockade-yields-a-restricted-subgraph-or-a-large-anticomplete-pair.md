@@ -49,26 +49,17 @@ Then one of the following holds:
 
 ## Facts & Assumptions
 
-**Given:** The wonderful family $\mathcal F$, its witness exponent $a$, the
-parameter $y$, the $y$-sparse graph $G$, and the blockade
-$\mathcal B=(B_1,\ldots,B_\ell)$ satisfying hypotheses 1-5.
+**Given:** The wonderful family $\mathcal F$, its witness exponent $a$, the parameter $y$, the $y$-sparse graph $G$, and the blockade $\mathcal B=(B_1,\ldots,B_\ell)$ satisfying hypotheses 1-5.
 
-[L1] The definition of wonderfulness applied to $\mathcal B$ yields either a
-$y^4$-restricted induced subgraph of size at least $w$, or an index
-$i\in[\ell]$ such that at most $y|G|$ vertices in
-$V(G)\setminus V(\mathcal B)$ have between $1$ and $|B_i|/2-1$ neighbours in
-$B_i$ ([[def-wonderful-finite-family]]).
+[L1] The definition of wonderfulness applied to $\mathcal B$ yields either a $y^4$-restricted induced subgraph of size at least $w$, or an index $i\in[\ell]$ such that at most $y|G|$ vertices in $V(G)\setminus V(\mathcal B)$ have between $1$ and $|B_i|/2-1$ neighbours in $B_i$ ([[def-wonderful-finite-family]]).
 
-[L2] A $y$-sparse graph has maximum degree at most $y|G|$ on its full vertex
-set ([[def-c-sparse-and-c-restricted-vertex-set]]).
+[L2] A $y$-sparse graph has maximum degree at most $y|G|$ on its full vertex set ([[def-c-sparse-and-c-restricted-vertex-set]]).
 
-[L3] A pair is anticomplete exactly when it has no cross-edges
-([[def-edges-between-sets-and-pure-mixed-pairs]]).
+[L3] A pair is anticomplete exactly when it has no cross-edges ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 
 ## Proof
 
-**Proof technique:** apply wonderfulness and then count the outside vertices
-that still see a chosen block.
+**Proof technique:** apply wonderfulness and then count the outside vertices that still see a chosen block.
 
 1.1 Apply [L1] to the blockade $\mathcal B$. If it yields a $y^4$-restricted induced subgraph on at least $w$ vertices, then outcome 1 of the present lemma holds immediately. [L1, given]
 

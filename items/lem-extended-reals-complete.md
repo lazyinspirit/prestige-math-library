@@ -125,29 +125,10 @@ exactly where the two coincide.
 
 ## Remarks
 
-- **What makes this work is that $\overline{\mathbb{R}}$ has a top and a bottom.**
-  The three defining clauses of the order ([[def-extended-reals]]) put $+\infty$
-  above everything and $-\infty$ below everything, and every case above is settled
-  by one of those two facts or by the least-upper-bound property of $\mathbb{R}$
-  applied to the real part. Nothing else about $\overline{\mathbb{R}}$ is used,
-  and in particular no arithmetic is used at all.
+- **What makes this work is that $\overline{\mathbb{R}}$ has a top and a bottom.** The three defining clauses of the order ([[def-extended-reals]]) put $+\infty$ above everything and $-\infty$ below everything, and every case above is settled by one of those two facts or by the least-upper-bound property of $\mathbb{R}$ applied to the real part. Nothing else about $\overline{\mathbb{R}}$ is used, and in particular no arithmetic is used at all.
 
-- **The two exceptional cases of [[fs-every-set-has-sup]] are not repaired, they
-  are relocated.** That false statement records that in $\mathbb{R}$ a set may
-  fail to have a supremum, and it stays true; the discipline of
-  [[rem-sup-conventions]], which refuses to write $\sup S = +\infty$ inside
-  $\mathbb{R}$, also stays in force. What is proved here is a statement about a
-  different ordered set.
+- **The two exceptional cases of [[fs-every-set-has-sup]] are not repaired, they are relocated.** That false statement records that in $\mathbb{R}$ a set may fail to have a supremum, and it stays true; the discipline of [[rem-sup-conventions]], which refuses to write $\sup S = +\infty$ inside $\mathbb{R}$, also stays in force. What is proved here is a statement about a different ordered set.
 
-- **The empty set is not an exception here, and that is the point of the
-  ambient set.** In $\mathbb{R}$ the empty set has no supremum, because every
-  real is an upper bound and there is no least one.
-  In $\overline{\mathbb{R}}$ every element is still an upper bound of $\emptyset$,
-  but now there *is* a least one, namely $-\infty$. The two statements are about
-  different ordered sets and neither contradicts the other.
+- **The empty set is not an exception here, and that is the point of the ambient set.** In $\mathbb{R}$ the empty set has no supremum, because every real is an upper bound and there is no least one. In $\overline{\mathbb{R}}$ every element is still an upper bound of $\emptyset$, but now there *is* a least one, namely $-\infty$. The two statements are about different ordered sets and neither contradicts the other.
 
-- **Where this is consumed.** [[def-limsup-liminf]] needs the supremum of a tail
-  range of an arbitrary real sequence, which may be unbounded, and then the
-  infimum of the resulting family, which may contain $+\infty$; both are supplied
-  here and by nothing earlier in the library. Fourteen items on this page depend
-  on it, and five more on the companion page of examples.
+- **Where this is consumed.** [[def-limsup-liminf]] needs the supremum of a tail range of an arbitrary real sequence, which may be unbounded, and then the infimum of the resulting family, which may contain $+\infty$; both are supplied here and by nothing earlier in the library. Fourteen items on this page depend on it, and five more on the companion page of examples.

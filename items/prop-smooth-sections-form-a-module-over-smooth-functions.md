@@ -32,11 +32,9 @@ module over $C^\infty(M)$ under pointwise addition and scalar multiplication.
 
 **Given:** A smooth vector bundle $E\to M$.
 
-[L1] A section is smooth exactly when its local frame components are smooth
-([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
+[L1] A section is smooth exactly when its local frame components are smooth ([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
 
-[L2] Sums and products of smooth scalar functions are smooth
-([[thm-algebra-of-total-derivatives]]).
+[L2] Sums and products of smooth scalar functions are smooth ([[thm-algebra-of-total-derivatives]]).
 
 ## Proof
 

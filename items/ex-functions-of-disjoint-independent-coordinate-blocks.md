@@ -34,17 +34,13 @@ of functions built from disjoint coordinate blocks.
 
 ## Facts & Assumptions
 
-**Given:** Independent random elements $X_0,X_1,X_2,X_3$ and measurable maps
-$f$ and $g$ as in the Example.
+**Given:** Independent random elements $X_0,X_1,X_2,X_3$ and measurable maps $f$ and $g$ as in the Example.
 
-[L1] Disjoint groups of an independent sigma-algebra family remain independent.
-([[thm-grouping-independent-sigma-algebras]])
+[L1] Disjoint groups of an independent sigma-algebra family remain independent. ([[thm-grouping-independent-sigma-algebras]])
 
-[L2] Measurable coordinatewise functions preserve independence.
-([[lem-measurable-functions-preserve-independence]])
+[L2] Measurable coordinatewise functions preserve independence. ([[lem-measurable-functions-preserve-independence]])
 
-[L3] Independence of random elements is defined through independence of their
-generated sigma-algebras. ([[def-independent-random-elements]])
+[L3] Independence of random elements is defined through independence of their generated sigma-algebras. ([[def-independent-random-elements]])
 
 ## Verification
 

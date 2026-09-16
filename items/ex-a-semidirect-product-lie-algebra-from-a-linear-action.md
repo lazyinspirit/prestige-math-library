@@ -37,9 +37,7 @@ $V$ an abelian ideal.
 
 **Given:** A Lie-algebra representation $\rho$ on a vector space $V$.
 
-[L1] The semidirect construction uses a Lie map into derivations
-([[def-semidirect-product-of-lie-algebras]]), and its bracket satisfies Jacobi
-([[lem-semidirect-product-bracket-satisfies-jacobi]]).
+[L1] The semidirect construction uses a Lie map into derivations ([[def-semidirect-product-of-lie-algebras]]), and its bracket satisfies Jacobi ([[lem-semidirect-product-bracket-satisfies-jacobi]]).
 
 ## Verification
 

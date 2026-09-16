@@ -46,20 +46,13 @@ with multiplicity.
 
 ## Facts & Assumptions
 
-**Given:** An open set $\Omega$, a closed complex contour $\gamma$ that is
-null-homologous in $\Omega$, and holomorphic functions $f,g$ on $\Omega$
-satisfying $|f-g|<|g|$ on $\gamma^\ast$.
+**Given:** An open set $\Omega$, a closed complex contour $\gamma$ that is null-homologous in $\Omega$, and holomorphic functions $f,g$ on $\Omega$ satisfying $|f-g|<|g|$ on $\gamma^\ast$.
 
-[L1] For a closed contour on which a meromorphic function does not vanish, the
-integral of $f'/f$ is the winding number of the image contour about $0$
-([[thm-argument-principle-as-image-winding-number]]).
+[L1] For a closed contour on which a meromorphic function does not vanish, the integral of $f'/f$ is the winding number of the image contour about $0$ ([[thm-argument-principle-as-image-winding-number]]).
 
-[L2] The argument principle at $w=0$ counts zeros of a holomorphic function with
-multiplicity and no pole term ([[cor-argument-principle-counts-preimages]]).
+[L2] The argument principle at $w=0$ counts zeros of a holomorphic function with multiplicity and no pole term ([[cor-argument-principle-counts-preimages]]).
 
-[L3] If $\varphi(\zeta,t)$ is continuous in $(\zeta,t)$ and holomorphic in the
-complex parameter $t$, then $\int_\gamma \varphi(\zeta,t)\,d\zeta$ is
-holomorphic in $t$ ([[thm-contour-parameter-integrals-are-holomorphic]]).
+[L3] If $\varphi(\zeta,t)$ is continuous in $(\zeta,t)$ and holomorphic in the complex parameter $t$, then $\int_\gamma \varphi(\zeta,t)\,d\zeta$ is holomorphic in $t$ ([[thm-contour-parameter-integrals-are-holomorphic]]).
 
 [L4] A winding number is an integer ([[thm-winding-number-is-integer]]).
 

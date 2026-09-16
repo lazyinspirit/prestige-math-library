@@ -37,8 +37,7 @@ defining the quotient arbitrarily where the approximating denominator is zero.
 
 **Given:** A continuous $f:\mathbb R^d\to\mathbb R^k$ and the displayed norm-tail convergence of $Z_n$ to $Z$.
 
-[L1] The displayed hypothesis directly says that every fixed-distance bad
-event for $Z_n-Z$ has probability tending to zero.
+[L1] The displayed hypothesis directly says that every fixed-distance bad event for $Z_n-Z$ has probability tending to zero.
 
 [L2] Coordinatewise probability convergence gives probability convergence of pairs ([[lem-pairing-preserves-convergence-in-probability]]).
 

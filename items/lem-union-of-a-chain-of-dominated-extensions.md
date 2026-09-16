@@ -47,14 +47,11 @@ $f:M \to \mathbb{R}$, then $G$ also extends $f$.
 
 ## Facts & Assumptions
 
-**Given:** A real vector space $X$, a sublinear functional $p:X \to \mathbb{R}$,
-and a nonempty chain $\mathcal{C}$ of dominated linear functionals ordered by extension.
+**Given:** A real vector space $X$, a sublinear functional $p:X \to \mathbb{R}$, and a nonempty chain $\mathcal{C}$ of dominated linear functionals ordered by extension.
 
-[L1] A linear functional is additive and homogeneous over the scalar field
-([[def-algebraic-dual-and-linear-functional]]).
+[L1] A linear functional is additive and homogeneous over the scalar field ([[def-algebraic-dual-and-linear-functional]]).
 
-[L2] A chain is a subset in which any two elements are comparable
-([[def-chain]]).
+[L2] A chain is a subset in which any two elements are comparable ([[def-chain]]).
 
 ## Proof
 

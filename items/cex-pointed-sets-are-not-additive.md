@@ -33,8 +33,7 @@ Take $A=B=\{0,1\}$ with basepoint $0$.
 
 **Given:** The pointed sets $A=B=\{0,1\}$ with basepoint $0$.
 
-[A1] In $\mathbf{Set}_*$, the wedge $A\vee B$ has three points and the product
-$A\times B$ has four points.
+[A1] In $\mathbf{Set}_*$, the wedge $A\vee B$ has three points and the product $A\times B$ has four points.
 
 ## Counterexample
 

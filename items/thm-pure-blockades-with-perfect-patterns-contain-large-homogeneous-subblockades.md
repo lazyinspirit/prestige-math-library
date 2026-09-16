@@ -37,24 +37,15 @@ at least $\sqrt t$ and of width at least the width of $\mathcal B$.
 
 ## Facts & Assumptions
 
-**Given:** A pure blockade $\mathcal B=(B_1,\dots,B_t)$ with perfect pattern
-graph $P(\mathcal B)$.
+**Given:** A pure blockade $\mathcal B=(B_1,\dots,B_t)$ with perfect pattern graph $P(\mathcal B)$.
 
-[L1] In the pattern graph, two indices are adjacent exactly when the
-corresponding two blocks are complete to one another
-([[def-pattern-graph-of-a-pure-blockade]]).
+[L1] In the pattern graph, two indices are adjacent exactly when the corresponding two blocks are complete to one another ([[def-pattern-graph-of-a-pure-blockade]]).
 
-[L2] Every perfect graph on $t$ vertices has a clique or stable set of size at
-least $\sqrt t$
-([[cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order]]).
+[L2] Every perfect graph on $t$ vertices has a clique or stable set of size at least $\sqrt t$ ([[cor-perfect-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order]]).
 
-[L3] A complete subblockade is one whose block pairs are all complete, and an
-anticomplete subblockade is defined similarly
-([[def-complete-anticomplete-pure-and-x-sparse-blockades]]).
+[L3] A complete subblockade is one whose block pairs are all complete, and an anticomplete subblockade is defined similarly ([[def-complete-anticomplete-pure-and-x-sparse-blockades]]).
 
-[L4] The width of a blockade is the minimum size of one of its blocks, so
-discarding blocks cannot decrease the width bound inherited from the remaining
-blocks ([[def-blockade-length-and-width]]).
+[L4] The width of a blockade is the minimum size of one of its blocks, so discarding blocks cannot decrease the width bound inherited from the remaining blocks ([[def-blockade-length-and-width]]).
 
 ## Proof
 

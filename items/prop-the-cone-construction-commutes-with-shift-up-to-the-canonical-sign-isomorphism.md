@@ -32,15 +32,11 @@ $$\sigma_f:\operatorname{Cone}(f[1])\xrightarrow{\sim}\operatorname{Cone}(f)[1].
 
 **Given:** A chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] The shift satisfies $C[1]_n=C_{n-1}$ and $d^{C[1]}=-d^C$
-([[def-shift-of-a-chain-complex]]).
+[L1] The shift satisfies $C[1]_n=C_{n-1}$ and $d^{C[1]}=-d^C$ ([[def-shift-of-a-chain-complex]]).
 
-[L2] The shifted map satisfies $f[1]_n=f_{n-1}$
-([[def-shift-of-a-chain-map-and-chain-homotopy]]).
+[L2] The shifted map satisfies $f[1]_n=f_{n-1}$ ([[def-shift-of-a-chain-map-and-chain-homotopy]]).
 
-[L3] The cone differential is
-$$d(y,x)=(d(y)+f(x),-d(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L3] The cone differential is $$d(y,x)=(d(y)+f(x),-d(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
 ## Proof
 

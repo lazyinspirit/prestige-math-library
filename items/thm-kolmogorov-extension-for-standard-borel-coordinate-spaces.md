@@ -34,14 +34,7 @@ Assume the Axiom of Choice. For any set $I$, standard-Borel coordinate spaces $(
 
 [F1] Consistency gives a well-defined finitely additive cylinder law. ([[lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined]])
 
-[F2] After one Polish presentation is fixed on every coordinate, each finite
-product has the corresponding product Polish presentation; coordinate
-restrictions between such products are continuous. Its probability measures
-admit compact inner approximations, and compact metric spaces are sequentially
-compact. ([[def-standard-borel-space]],
-[[lem-finite-products-of-standard-borel-spaces-are-standard-borel]],
-[[thm-borel-probability-measures-on-polish-spaces-are-inner-regular]],
-[[thm-compact-implies-the-other-compactness-forms]])
+[F2] After one Polish presentation is fixed on every coordinate, each finite product has the corresponding product Polish presentation; coordinate restrictions between such products are continuous. Its probability measures admit compact inner approximations, and compact metric spaces are sequentially compact. ([[def-standard-borel-space]], [[lem-finite-products-of-standard-borel-spaces-are-standard-borel]], [[thm-borel-probability-measures-on-polish-spaces-are-inner-regular]], [[thm-compact-implies-the-other-compactness-forms]])
 
 [F3] AC supplies both countable choice and values in every nonempty family of otherwise unconstrained coordinate spaces. ([[def-axiom-of-choice]], [[def-countable-choice]])
 

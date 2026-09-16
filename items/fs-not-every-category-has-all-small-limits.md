@@ -31,11 +31,9 @@ Every category has all small limits.
 
 **Given:** The category of nonempty sets and all functions.
 
-[F1] A category is complete when every small diagram in it has a limit
-([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] A category is complete when every small diagram in it has a limit ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
-[F2] An equalizer of $f,g:X\rightrightarrows Y$ must receive every map on which
-$f$ and $g$ agree ([[def-equalizers-and-coequalizers]]).
+[F2] An equalizer of $f,g:X\rightrightarrows Y$ must receive every map on which $f$ and $g$ agree ([[def-equalizers-and-coequalizers]]).
 
 ## Refutation
 

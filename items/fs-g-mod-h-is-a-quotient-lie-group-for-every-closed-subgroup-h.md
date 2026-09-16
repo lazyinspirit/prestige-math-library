@@ -35,21 +35,15 @@ map $q:G\to G/H$ a homomorphism.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $G=S_3$ with its discrete zero-dimensional
-Lie-group structure, and $H=\{e,(12)\}$ with its discrete subgroup structure.
+**Given:** $\mathrm{AC}_\omega$, $G=S_3$ with its discrete zero-dimensional Lie-group structure, and $H=\{e,(12)\}$ with its discrete subgroup structure.
 
-[A1] Under $\mathrm{AC}_\omega$, a closed subgroup gives a smooth homogeneous
-space $G/H$. [[def-countable-choice]],
-[[thm-quotient-manifold-by-a-closed-lie-subgroup]].
+[A1] Under $\mathrm{AC}_\omega$, a closed subgroup gives a smooth homogeneous space $G/H$. [[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
 
-[F1] A closed normal subgroup does give a quotient Lie group; normality is the
-extra hypothesis in the quotient-group theorem.
-[[thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group]].
+[F1] A closed normal subgroup does give a quotient Lie group; normality is the extra hypothesis in the quotient-group theorem. [[thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group]].
 
 ## Refutation
 
-**Proof technique:** contradiction from the kernel of the proposed quotient
-homomorphism.
+**Proof technique:** contradiction from the kernel of the proposed quotient homomorphism.
 
 1.1 Every finite discrete group is a zero-dimensional Lie group: singleton charts take values in $\mathbb R^0$, and every map between discrete manifolds is smooth. Thus $G$ is a Lie group and its subgroup $H$ is closed. By [A1], the three-element left-coset space $G/H$ has its quotient smooth-manifold structure. [given, A1, algebra]
 

@@ -33,14 +33,11 @@ In particular, $XY$ is integrable.
 
 ## Facts & Assumptions
 
-**Given:** Real random variables $X,Y$ and conjugate exponents $p,q$ as in the
-Statement.
+**Given:** Real random variables $X,Y$ and conjugate exponents $p,q$ as in the Statement.
 
-[L1] Expectation is integration against the probability measure
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
+[L1] Expectation is integration against the probability measure ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 
-[L2] Holder's integral inequality, including the endpoint cases, holds on every
-measure space ([[thm-holder-inequality-for-integrals]]).
+[L2] Holder's integral inequality, including the endpoint cases, holds on every measure space ([[thm-holder-inequality-for-integrals]]).
 
 ## Proof
 

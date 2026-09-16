@@ -78,27 +78,10 @@ not be bounded.
 
 ## Remarks
 
-- **The proof is two citations, and that is the point of the page order.** All
-  the work sits in [[lem-peak-monotone-subsequence]], which needs nothing about
-  $\mathbb{R}$ beyond trichotomy, and in [[cor-monotone-converges-iff-bounded]],
-  which is where the least-upper-bound property is actually spent. Splitting the
-  argument this way isolates the use of completeness in a single place instead of
-  burying it in a bisection.
+- **The proof is two citations, and that is the point of the page order.** All the work sits in [[lem-peak-monotone-subsequence]], which needs nothing about $\mathbb{R}$ beyond trichotomy, and in [[cor-monotone-converges-iff-bounded]], which is where the least-upper-bound property is actually spent. Splitting the argument this way isolates the use of completeness in a single place instead of burying it in a bisection.
 
-- **Bisection is the other standard proof and is not used here.** Halving the
-  interval $[-M, M]$ repeatedly and keeping a half containing infinitely many
-  terms produces a nested sequence of intervals whose lengths tend to $0$, and
-  [[thm-nested-interval-property]] then yields the limit. That route is
-  available in this library, since the nested interval property is proved on this
-  page, but it needs an extra argument to choose the terms and to see that the
-  chosen indices increase, whereas the monotone-subsequence route needs neither.
+- **Bisection is the other standard proof and is not used here.** Halving the interval $[-M, M]$ repeatedly and keeping a half containing infinitely many terms produces a nested sequence of intervals whose lengths tend to $0$, and [[thm-nested-interval-property]] then yields the limit. That route is available in this library, since the nested interval property is proved on this page, but it needs an extra argument to choose the terms and to see that the chosen indices increase, whereas the monotone-subsequence route needs neither.
 
-- **The limit is not determined by the theorem.** A bounded sequence may have
-  many subsequential limits, and the theorem asserts only that there is at least
-  one. Which subsequential limits exist, and that there is a largest and a
-  smallest, is the subject of the $\limsup$ page.
+- **The limit is not determined by the theorem.** A bounded sequence may have many subsequential limits, and the theorem asserts only that there is at least one. Which subsequential limits exist, and that there is a largest and a smallest, is the subject of the $\limsup$ page.
 
-- **Boundedness is sufficient but not necessary.** The converse fails, by
-  [[fs-convergent-subsequence-implies-bounded]] and its witness
-  [[cex-unbounded-with-convergent-subsequence]]: a wildly unbounded sequence can
-  still have a constant, hence convergent, subsequence.
+- **Boundedness is sufficient but not necessary.** The converse fails, by [[fs-convergent-subsequence-implies-bounded]] and its witness [[cex-unbounded-with-convergent-subsequence]]: a wildly unbounded sequence can still have a constant, hence convergent, subsequence.

@@ -33,8 +33,7 @@ where the transition maps are reduction modulo divisibility.
 
 **Given:** The additive group $\mathbb Z$.
 
-[L1] The profinite completion is the inverse limit over all finite-index normal
-subgroups ([[def-profinite-completion-of-an-abstract-group]]).
+[L1] The profinite completion is the inverse limit over all finite-index normal subgroups ([[def-profinite-completion-of-an-abstract-group]]).
 
 ## Verification
 

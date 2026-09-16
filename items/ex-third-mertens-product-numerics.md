@@ -39,12 +39,9 @@ $$\begin{array}{c|c|c} x & \prod_{p\le x}(1-1/p) & e^{-\gamma}/\log x \\ \hline 
 
 **Given:** The cutoffs $x=10,30,100$.
 
-[L1] The third Mertens theorem gives
-$$\prod_{p\le x}\left(1-\frac1p\right) =\frac{e^{-\gamma}}{\log x}\left(1+O(1/\log x)\right)$$
-([[thm-third-mertens-theorem-for-primes]]).
+[L1] The third Mertens theorem gives $$\prod_{p\le x}\left(1-\frac1p\right) =\frac{e^{-\gamma}}{\log x}\left(1+O(1/\log x)\right)$$ ([[thm-third-mertens-theorem-for-primes]]).
 
-[L2] The constant $\gamma$ is the Euler-Mascheroni constant
-([[def-euler-mascheroni-constant]]).
+[L2] The constant $\gamma$ is the Euler-Mascheroni constant ([[def-euler-mascheroni-constant]]).
 
 ## Verification
 

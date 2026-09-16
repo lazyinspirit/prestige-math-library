@@ -32,11 +32,9 @@ such that $\phi(X_i)=x_i$ for every $i$.
 
 ## Facts & Assumptions
 
-**Given:** A complete local ring $(A,\mathfrak m)$, a ring map $k \to A$, and
-elements $x_1,\ldots,x_n \in \mathfrak m$.
+**Given:** A complete local ring $(A,\mathfrak m)$, a ring map $k \to A$, and elements $x_1,\ldots,x_n \in \mathfrak m$.
 
-[L1] Degreewise substitution converges for every formal series
-([[lem-formal-power-series-evaluation-converges]]).
+[L1] Degreewise substitution converges for every formal series ([[lem-formal-power-series-evaluation-converges]]).
 
 ## Proof
 

@@ -38,15 +38,11 @@ as $R$-linear $G$-modules.
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, a finite group $G$, subgroups $K\le H\le G$,
-and an $R$-linear $K$-module $W$.
+**Given:** A commutative ring $R$, a finite group $G$, subgroups $K\le H\le G$, and an $R$-linear $K$-module $W$.
 
-[F1] For a subgroup $L\le M$, the induced module $\operatorname{Ind}_L^M$ is the
-space of functions $f:M\to W$ satisfying $f(ml)=l^{-1}\cdot f(m)$, with the
-left action by translation ([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
+[F1] For a subgroup $L\le M$, the induced module $\operatorname{Ind}_L^M$ is the space of functions $f:M\to W$ satisfying $f(ml)=l^{-1}\cdot f(m)$, with the left action by translation ([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
 
-[F2] The notation $K\le H\le G$ means that $K$, $H$, and $G$ are subgroup
-related in the stated order ([[def-subgroup]]).
+[F2] The notation $K\le H\le G$ means that $K$, $H$, and $G$ are subgroup related in the stated order ([[def-subgroup]]).
 
 ## Proof
 

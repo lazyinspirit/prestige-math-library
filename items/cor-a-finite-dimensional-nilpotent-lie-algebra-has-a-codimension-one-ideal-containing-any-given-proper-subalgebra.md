@@ -32,20 +32,15 @@ $\mathfrak g$ of codimension one.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional nilpotent Lie algebra $\mathfrak g$ and a
-proper subalgebra $\mathfrak h<\mathfrak g$.
+**Given:** A finite-dimensional nilpotent Lie algebra $\mathfrak g$ and a proper subalgebra $\mathfrak h<\mathfrak g$.
 
-[L1] A nonzero nilpotent Lie algebra has nonzero center
-([[prop-a-nonzero-nilpotent-lie-algebra-has-nonzero-center]]).
+[L1] A nonzero nilpotent Lie algebra has nonzero center ([[prop-a-nonzero-nilpotent-lie-algebra-has-nonzero-center]]).
 
-[L2] Quotients of nilpotent Lie algebras are nilpotent
-([[prop-subalgebras-quotients-and-finite-products-of-nilpotent-lie-algebras]]).
+[L2] Quotients of nilpotent Lie algebras are nilpotent ([[prop-subalgebras-quotients-and-finite-products-of-nilpotent-lie-algebras]]).
 
-[L3] A quotient by an ideal has a canonical surjective Lie homomorphism
-([[def-quotient-lie-algebra]]).
+[L3] A quotient by an ideal has a canonical surjective Lie homomorphism ([[def-quotient-lie-algebra]]).
 
-[L4] Rank-nullity computes the codimension of an inverse image under a
-surjective finite-dimensional linear map ([[thm-rank-nullity]]).
+[L4] Rank-nullity computes the codimension of an inverse image under a surjective finite-dimensional linear map ([[thm-rank-nullity]]).
 
 ## Proof
 

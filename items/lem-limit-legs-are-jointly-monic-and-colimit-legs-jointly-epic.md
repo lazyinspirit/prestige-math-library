@@ -32,17 +32,13 @@ $r\rho_j=s\rho_j$ for every $j$, then $r=s$.
 
 ## Facts & Assumptions
 
-**Given:** A limiting cone $(L,\lambda)$ and morphisms $r,s:X\to L$ with equal
-composites through every leg.
+**Given:** A limiting cone $(L,\lambda)$ and morphisms $r,s:X\to L$ with equal composites through every leg.
 
-[F1] A limiting cone admits exactly one cone morphism from each cone
-([[def-limit-and-colimit-of-a-diagram]]).
+[F1] A limiting cone admits exactly one cone morphism from each cone ([[def-limit-and-colimit-of-a-diagram]]).
 
-[F2] Monomorphisms and epimorphisms are defined by left and right cancellation,
-respectively ([[def-monomorphism-and-epimorphism]]).
+[F2] Monomorphisms and epimorphisms are defined by left and right cancellation, respectively ([[def-monomorphism-and-epimorphism]]).
 
-[L1] The formal dual of a limiting cone is a colimiting cocone
-([[prop-limit-colimit-duality]]).
+[L1] The formal dual of a limiting cone is a colimiting cocone ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

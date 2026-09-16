@@ -51,18 +51,13 @@ In particular, $\mu_k\to\lambda_1$ and $r_k\to0$.
 
 [L3] The power iteration is the normalised recurrence $x_{k+1}=Ax_k/\|Ax_k\|_2$, with Rayleigh estimates from the same iterates ([[def-power-iteration]]).
 
-[L4] A real self-adjoint or complex Hermitian matrix has an orthonormal
-eigenbasis and is therefore diagonalisable
-([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]],
-[[thm-complex-spectral-theorem-for-normal-endomorphisms]]).
+[L4] A real self-adjoint or complex Hermitian matrix has an orthonormal eigenbasis and is therefore diagonalisable ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], [[thm-complex-spectral-theorem-for-normal-endomorphisms]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $\rho:=|\lambda_2/\lambda_1|<1$. By [L4], the Hermitian matrix is diagonalisable, so [L1] applies. After choosing phases $\alpha_k$ of modulus one, one has $$\|\alpha_kx_k-q_1\|_2=O(\rho^k).$$ Write
-$$\alpha_kx_k=c_kq_1+z_k$$ with $z_k\perp q_1$. Then
-$|c_k-1|+\|z_k\|_2=O(\rho^k)$. [L1, L4, algebra]
+1.1 Let $\rho:=|\lambda_2/\lambda_1|<1$. By [L4], the Hermitian matrix is diagonalisable, so [L1] applies. After choosing phases $\alpha_k$ of modulus one, one has $$\|\alpha_kx_k-q_1\|_2=O(\rho^k).$$ Write $$\alpha_kx_k=c_kq_1+z_k$$ with $z_k\perp q_1$. Then $|c_k-1|+\|z_k\|_2=O(\rho^k)$. [L1, L4, algebra]
 
 2.1 By [L2], the orthogonal complement $q_1^\perp$ is $A$-invariant. Since $x_k$ is unit and $\mu_k=\langle A(\alpha_kx_k),\alpha_kx_k\rangle$, the cross terms vanish: $$\mu_k=|c_k|^2\lambda_1+\langle Az_k,z_k\rangle.$$ Using $|c_k|^2+\|z_k\|_2^2=1$, this becomes $$\mu_k-\lambda_1=\langle Az_k,z_k\rangle-\lambda_1\|z_k\|_2^2.$$ Therefore $$|\mu_k-\lambda_1|\le(\|A\|_2+|\lambda_1|)\|z_k\|_2^2=O(\rho^{2k}).$$ [L2, step 1.1, algebra]
 

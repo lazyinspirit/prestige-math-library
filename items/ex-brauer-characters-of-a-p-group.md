@@ -35,15 +35,11 @@ the unique irreducible Brauer character is the trivial character.
 
 **Given:** A finite $p$-group $P$.
 
-[F1] Brauer characters are defined on the $p$-regular elements
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F1] Brauer characters are defined on the $p$-regular elements ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
-[L1] Irreducible Brauer characters form a basis of class functions on $P^0$
-([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
+[L1] Irreducible Brauer characters form a basis of class functions on $P^0$ ([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
 
-[L2] A finite $p$-group has only the trivial simple module in characteristic
-$p$
-([[cor-a-finite-p-group-has-only-the-trivial-simple-module-in-characteristic-p]]).
+[L2] A finite $p$-group has only the trivial simple module in characteristic $p$ ([[cor-a-finite-p-group-has-only-the-trivial-simple-module-in-characteristic-p]]).
 
 ## Verification
 

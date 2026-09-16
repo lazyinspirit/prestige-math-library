@@ -39,11 +39,9 @@ and itself is the simplest concrete member chase for the short five lemma.
 
 **Given:** The identity ladder on the displayed short exact sequence.
 
-[L1] Abelian groups form an abelian category
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] Abelian groups form an abelian category ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] The short five lemma holds in every abelian category
-([[thm-short-five-lemma-in-an-abelian-category]]).
+[L2] The short five lemma holds in every abelian category ([[thm-short-five-lemma-in-an-abelian-category]]).
 
 ## Verification
 

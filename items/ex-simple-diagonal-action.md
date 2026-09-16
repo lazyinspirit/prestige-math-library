@@ -36,12 +36,9 @@ is the basic diagonal-type example.
 
 **Given:** A nonabelian finite simple group $T$ and the coset action of $T \times T$ on $(T \times T)/\Delta(T)$.
 
-[A1] In this action the socle is $T \times T$, and the diagonal subgroup
-identifies the two factors in the stabilizer.
+[A1] In this action the socle is $T \times T$, and the diagonal subgroup identifies the two factors in the stabilizer.
 
-[L1] The diagonal branch of the O'Nan-Scott dictionary is one of the five
-primitive socle types
-([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
+[L1] The diagonal branch of the O'Nan-Scott dictionary is one of the five primitive socle types ([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
 
 ## Verification
 

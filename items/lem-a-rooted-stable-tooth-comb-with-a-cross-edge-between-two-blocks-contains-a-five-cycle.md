@@ -37,19 +37,11 @@ $\{v,a_i,b_i,b_j,a_j\}$ is isomorphic to $C_5$.
 
 ## Facts & Assumptions
 
-**Given:** A rooted stable-tooth comb
-$\bigl(v,\ ((a_i,B_i):1\leq i\leq t)\bigr)$ in a finite graph $G$, indices
-$i<j$, and adjacent vertices $b_i\in B_i$, $b_j\in B_j$.
+**Given:** A rooted stable-tooth comb $\bigl(v,\ ((a_i,B_i):1\leq i\leq t)\bigr)$ in a finite graph $G$, indices $i<j$, and adjacent vertices $b_i\in B_i$, $b_j\in B_j$.
 
-[L1] In a rooted stable-tooth comb, each tooth is adjacent to every vertex of
-its own block, anticomplete to every other block, the teeth form a stable set,
-and the root is adjacent to all teeth and anticomplete to every block
-([[def-rooted-stable-tooth-comb]]).
+[L1] In a rooted stable-tooth comb, each tooth is adjacent to every vertex of its own block, anticomplete to every other block, the teeth form a stable set, and the root is adjacent to all teeth and anticomplete to every block ([[def-rooted-stable-tooth-comb]]).
 
-[L2] An induced copy of $C_5$ is a five-vertex set whose induced subgraph is
-isomorphic to the cycle graph on five vertices
-([[def-induced-embedding-and-induced-copy]],
-[[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L2] An induced copy of $C_5$ is a five-vertex set whose induced subgraph is isomorphic to the cycle graph on five vertices ([[def-induced-embedding-and-induced-copy]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Proof
 

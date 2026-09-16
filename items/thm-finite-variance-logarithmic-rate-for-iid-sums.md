@@ -29,23 +29,15 @@ If IID real variables have mean $\mu$ and finite variance v, then for every $\va
 
 ## Facts & Assumptions
 
-[F1] [[thm-natural-logarithm-laws]]: The function $\log:(0,\infty)\to\mathbb R$ is continuous and strictly increasing, is onto $\mathbb R$, and satisfies, for $x,y>0$,
-$$\log(xy)=\log x+\log y,\qquad \log(x/y)=\log x-\log y,\qquad \log(1/x)=-\log x.$$
-Also $\log 1=0$.
+[F1] [[thm-natural-logarithm-laws]]: The function $\log:(0,\infty)\to\mathbb R$ is continuous and strictly increasing, is onto $\mathbb R$, and satisfies, for $x,y>0$, $$\log(xy)=\log x+\log y,\qquad \log(x/y)=\log x-\log y,\qquad \log(1/x)=-\log x.$$ Also $\log 1=0$.
 
-[F2] [[thm-real-power-continuity-and-derivatives]]: For $a>0$, the function $x\mapsto a^x$ is continuous on $\mathbb R$ and
-$$(a^x)'=a^x\log a.$$
-For $\alpha\in\mathbb R$, the function $x\mapsto x^\alpha$ is continuous and differentiable on $(0,\infty)$, with
-$$(x^\alpha)'=\alpha x^{\alpha-1}.$$
+[F2] [[thm-real-power-continuity-and-derivatives]]: For $a>0$, the function $x\mapsto a^x$ is continuous on $\mathbb R$ and $$(a^x)'=a^x\log a.$$ For $\alpha\in\mathbb R$, the function $x\mapsto x^\alpha$ is continuous and differentiable on $(0,\infty)$, with $$(x^\alpha)'=\alpha x^{\alpha-1}.$$
 
-[F3] [[thm-real-power-laws]]: For $a,b>0$ and $r,s\in\mathbb R$,
-$$a^{r+s}=a^ra^s,\qquad (ab)^r=a^rb^r,\qquad (a/b)^r=a^r/b^r,\qquad (a^r)^s=a^{rs}.$$
+[F3] [[thm-real-power-laws]]: For $a,b>0$ and $r,s\in\mathbb R$, $$a^{r+s}=a^ra^s,\qquad (ab)^r=a^rb^r,\qquad (a/b)^r=a^r/b^r,\qquad (a^r)^s=a^{rs}.$$
 
-[F4] [[thm-p-series-real-exponents]]: For every real $p$,
-$$\sum_{k\ge1}\frac1{k^p}\text{ converges}\quad\Longleftrightarrow\quad p>1.$$
+[F4] [[thm-p-series-real-exponents]]: For every real $p$, $$\sum_{k\ge1}\frac1{k^p}\text{ converges}\quad\Longleftrightarrow\quad p>1.$$
 
-[F5] [[thm-direct-comparison-test]]: Let $(a_k)$ and $(b_k)$ be sequences of reals and suppose there is
-$K \in \mathbb{N}$ with
+[F5] [[thm-direct-comparison-test]]: Let $(a_k)$ and $(b_k)$ be sequences of reals and suppose there is $K \in \mathbb{N}$ with
 
 $$0 \;\le\; a_k \;\le\; b_k \qquad \text{for all } k \ge K .$$
 
@@ -54,19 +46,11 @@ Then:
 1. if $\sum b_k$ converges then $\sum a_k$ converges (def-series);
 2. if $\sum a_k$ diverges then $\sum b_k$ diverges.
 
-The same statement holds verbatim for series with a general starting index $m$,
-applied to the shifted sequences of def-series.
+The same statement holds verbatim for series with a general starting index $m$, applied to the shifted sequences of def-series.
 
-The hypothesis is on the terms from some index on, not on all of them: finitely
-many terms of either sequence may violate it, or be negative, without affecting
-the conclusion. What may not be dropped is nonnegativity of $(a_k)$ from that
-index on.
+The hypothesis is on the terms from some index on, not on all of them: finitely many terms of either sequence may violate it, or be negative, without affecting the conclusion. What may not be dropped is nonnegativity of $(a_k)$ from that index on.
 
-[F6] [[thm-kolmogorov-strong-law-under-summable-normalized-variances]]: Let $(X_n)_{n\ge1}$ be independent square-integrable real random variables. Let $0<b_n$ be deterministic and nondecreasing with $b_n\to\infty$. If
-$$\sum_{n\ge1}\frac{\operatorname{Var}(X_n)}{b_n^2}<\infty,$$
-then
-$$\frac1{b_n}\sum_{k=1}^n(X_k-\mathbb EX_k)\longrightarrow0\quad\text{almost surely}.$$
-In particular, for IID centered square-integrable variables and any $\varepsilon>0$, $S_n/[\sqrt n(\log n)^{1/2+\varepsilon}]\to0$ almost surely (the displayed normalization is used for $n\ge2$).
+[F6] [[thm-kolmogorov-strong-law-under-summable-normalized-variances]]: Let $(X_n)_{n\ge1}$ be independent square-integrable real random variables. Let $0<b_n$ be deterministic and nondecreasing with $b_n\to\infty$. If $$\sum_{n\ge1}\frac{\operatorname{Var}(X_n)}{b_n^2}<\infty,$$ then $$\frac1{b_n}\sum_{k=1}^n(X_k-\mathbb EX_k)\longrightarrow0\quad\text{almost surely}.$$ In particular, for IID centered square-integrable variables and any $\varepsilon>0$, $S_n/[\sqrt n(\log n)^{1/2+\varepsilon}]\to0$ almost surely (the displayed normalization is used for $n\ge2$).
 
 ## Proof
 

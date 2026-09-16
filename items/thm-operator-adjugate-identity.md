@@ -38,22 +38,15 @@ $$T\circ\operatorname{adj}(T) =\operatorname{adj}(T)\circ T =\det(T)I_V.$$
 
 **Given:** $T,V$ as in the statement and an ordered basis $\mathcal B$.
 
-[F1] $[\operatorname{adj}(T)]_{\mathcal B}
-=\operatorname{adj}([T]_{\mathcal B})$
-([[def-adjugate-of-a-linear-operator]]).
+[F1] $[\operatorname{adj}(T)]_{\mathcal B} =\operatorname{adj}([T]_{\mathcal B})$ ([[def-adjugate-of-a-linear-operator]]).
 
-[L1] For a positive-sized square matrix $A$,
-$A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I$
-([[thm-adjugate-identity-over-a-commutative-ring]]).
+[L1] For a positive-sized square matrix $A$, $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I$ ([[thm-adjugate-identity-over-a-commutative-ring]]).
 
-[L2] The matrix of a composite is the product of the representing matrices
-([[thm-matrix-of-a-composite-is-the-product]]).
+[L2] The matrix of a composite is the product of the representing matrices ([[thm-matrix-of-a-composite-is-the-product]]).
 
-[L3] $\det(T)=\det([T]_{\mathcal B})$
-([[thm-operator-determinant-is-basis-independent]]).
+[L3] $\det(T)=\det([T]_{\mathcal B})$ ([[thm-operator-determinant-is-basis-independent]]).
 
-[L4] The matrix-representation map is injective
-([[thm-matrix-representation-is-a-vector-space-isomorphism]]).
+[L4] The matrix-representation map is injective ([[thm-matrix-representation-is-a-vector-space-isomorphism]]).
 
 ## Proof
 

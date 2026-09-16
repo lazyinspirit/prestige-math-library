@@ -101,20 +101,8 @@ the ring element $m\,1$.
 
 ## Remarks
 
-- **Nothing here is a new recursion.** The multiples $ma$ are the integer powers
-  of [[def-group-power]] applied to the additive group of $R$ and nothing else,
-  so claims 1 and the law $n(ma) = (nm)a$ are quoted from
-  [[lem-group-power-laws]] rather than reproved. What is genuinely new is claim
-  3, which is the only place the multiplicative structure enters, and it is
-  exactly the point at which distributivity is used.
+- **Nothing here is a new recursion.** The multiples $ma$ are the integer powers of [[def-group-power]] applied to the additive group of $R$ and nothing else, so claims 1 and the law $n(ma) = (nm)a$ are quoted from [[lem-group-power-laws]] rather than reproved. What is genuinely new is claim 3, which is the only place the multiplicative structure enters, and it is exactly the point at which distributivity is used.
 
-- **Why claim 5 is worth stating separately.** It converts a statement about
-  repeated addition into a statement about a single ring product, and that is
-  what makes the characteristic of a ring ([[def-ring-characteristic]]) a
-  statement about the element $m\,1$ rather than about $a$ for every $a$ at
-  once; [[lem-characteristic-and-additive-order]] uses it in exactly that way.
+- **Why claim 5 is worth stating separately.** It converts a statement about repeated addition into a statement about a single ring product, and that is what makes the characteristic of a ring ([[def-ring-characteristic]]) a statement about the element $m\,1$ rather than about $a$ for every $a$ at once; [[lem-characteristic-and-additive-order]] uses it in exactly that way.
 
-- The proof needs the order on $\mathbb{Z}$ only to know that every integer is
-  either the image of a natural number or the negative of one. That is the same
-  case split [[def-group-power]] performs when it defines $g^{x}$, and it is
-  performed on the sign of the integer rather than on a representative of it.
+- The proof needs the order on $\mathbb{Z}$ only to know that every integer is either the image of a natural number or the negative of one. That is the same case split [[def-group-power]] performs when it defines $g^{x}$, and it is performed on the sign of the integer rather than on a representative of it.

@@ -50,23 +50,13 @@ Thus the convergence to the eigendirection is local and cubic.
 
 [L1] Hermitian means $A^*=A$, so $A$ is normal ([[def-self-adjoint-and-normal-endomorphism]]).
 
-[L2] A self-adjoint real operator and a normal complex operator have
-orthonormal eigenbases
-([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]],
-[[thm-complex-spectral-theorem-for-normal-endomorphisms]]).
+[L2] A self-adjoint real operator and a normal complex operator have orthonormal eigenbases ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], [[thm-complex-spectral-theorem-for-normal-endomorphisms]]).
 
 [L3] Rayleigh-quotient iteration uses the current Rayleigh quotient as the shift ([[def-rayleigh-quotient-iteration]]).
 
-[L4] Orthogonal projection onto a one-dimensional subspace gives the nearest
-point on that subspace; for a unit vector $q$ it is
-$P_{\mathbb Fq}x=\langle x,q\rangle q$
-([[prop-orthogonal-projection-formula-and-linearity]],
-[[thm-orthogonal-projection-is-the-unique-nearest-point]]).
+[L4] Orthogonal projection onto a one-dimensional subspace gives the nearest point on that subspace; for a unit vector $q$ it is $P_{\mathbb Fq}x=\langle x,q\rangle q$ ([[prop-orthogonal-projection-formula-and-linearity]], [[thm-orthogonal-projection-is-the-unique-nearest-point]]).
 
-[L5] The induced operator norm and Cauchy--Schwarz imply
-$|\langle Az,z\rangle|\le \|A\|_2\|z\|_2^2$
-([[def-operator-norm-on-a-finite-dimensional-inner-product-space]],
-[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
+[L5] The induced operator norm and Cauchy--Schwarz imply $|\langle Az,z\rangle|\le \|A\|_2\|z\|_2^2$ ([[def-operator-norm-on-a-finite-dimensional-inner-product-space]], [[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
 
 ## Proof
 

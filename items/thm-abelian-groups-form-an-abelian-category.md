@@ -34,21 +34,13 @@ category.
 
 **Given:** The category $\mathbf{Ab}$ of abelian groups.
 
-[L1] Abelian groups and $\mathbb Z$-modules have the same objects and
-morphisms ([[prop-abelian-groups-are-z-modules]]).
+[L1] Abelian groups and $\mathbb Z$-modules have the same objects and morphisms ([[prop-abelian-groups-are-z-modules]]).
 
-[L2] For every ring $R$, the category $R\text{-}\mathbf{Mod}$ is complete and
-cocomplete
-([[prop-modules-and-homomorphisms-form-category-rmod]],
-[[thm-rmod-is-complete-and-cocomplete]]).
+[L2] For every ring $R$, the category $R\text{-}\mathbf{Mod}$ is complete and cocomplete ([[prop-modules-and-homomorphisms-form-category-rmod]], [[thm-rmod-is-complete-and-cocomplete]]).
 
-[L3] For a module homomorphism, the kernel, image, and cokernel are the usual
-submodule and quotient constructions
-([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L3] For a module homomorphism, the kernel, image, and cokernel are the usual submodule and quotient constructions ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[L4] The first isomorphism theorem for modules identifies $M/\ker f$ with
-$\operatorname{im}(f)$
-([[thm-first-isomorphism-theorem-modules]]).
+[L4] The first isomorphism theorem for modules identifies $M/\ker f$ with $\operatorname{im}(f)$ ([[thm-first-isomorphism-theorem-modules]]).
 
 ## Proof
 

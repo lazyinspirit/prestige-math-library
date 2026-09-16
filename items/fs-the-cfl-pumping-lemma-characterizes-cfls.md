@@ -32,18 +32,13 @@ ordinary Bar-Hillel pumping condition.
 
 ## Facts & Assumptions
 
-**Given:** Put $K:=\{a^n b^n c^n:n\geq0\}$, let $s$ be a new symbol, and set
-$$ L:=sK\cup\{s^r q:r\ne1,\ q\in\{a,b,c\}^*\}. $$
+**Given:** Put $K:=\{a^n b^n c^n:n\geq0\}$, let $s$ be a new symbol, and set $$ L:=sK\cup\{s^r q:r\ne1,\ q\in\{a,b,c\}^*\}. $$
 
 [A1] The statement refuted is: a language is context-free exactly when it satisfies the ordinary Bar-Hillel pumping condition.
 
-[L2] The proof of [[thm-cfls-are-not-closed-under-intersection]] establishes
-that $K=\{a^n b^n c^n:n\geq0\}$ is not context free.
+[L2] The proof of [[thm-cfls-are-not-closed-under-intersection]] establishes that $K=\{a^n b^n c^n:n\geq0\}$ is not context free.
 
-[L3] PDA's recognize exactly the context-free languages
-([[thm-pdas-recognize-exactly-the-cfls]]), and context-free languages are
-closed under homomorphic image
-([[thm-cfl-closure-under-union-concatenation-star-and-homomorphism]]).
+[L3] PDA's recognize exactly the context-free languages ([[thm-pdas-recognize-exactly-the-cfls]]), and context-free languages are closed under homomorphic image ([[thm-cfl-closure-under-union-concatenation-star-and-homomorphism]]).
 
 ## Refutation
 

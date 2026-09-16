@@ -104,19 +104,6 @@ $u^{n}$ vanishes below $0$.
 
 ## Remarks
 
-- **Where support-boundedness is really used.** Twice, and in different ways.
-  It makes each coefficient of a product a finite sum, which is what lets
-  $(u^{n})(k)$ be spoken of at all; and it is what has to be re-established for
-  the constructed inverse, which is why $g$ was *defined* to vanish at every
-  negative index rather than found to. The verification that this definition is
-  consistent with $(1_K - u)g = 1_K$ is [step 7.1], and it is exactly the point
-  at which an infinite geometric series would have had to be summed.
+- **Where support-boundedness is really used.** Twice, and in different ways. It makes each coefficient of a product a finite sum, which is what lets $(u^{n})(k)$ be spoken of at all; and it is what has to be re-established for the constructed inverse, which is why $g$ was *defined* to vanish at every negative index rather than found to. The verification that this definition is consistent with $(1_K - u)g = 1_K$ is [step 7.1], and it is exactly the point at which an infinite geometric series would have had to be summed.
 
-- **The normalisation is forced, and that is why the recipe is explicit.**
-  Suppose $f = \iota(c')t^{-p'}(1_K - w)$ with $c' \ne 0$ and $w$ vanishing at
-  every index $\le 0$. Evaluating as in [step 2.1] gives
-  $f(k) = c'(1_K - w)(k - p')$, which is $0$ for $k < p'$ and equals $c'$ at
-  $k = p'$; so $p' = v(f)$ and $c' = \operatorname{lc}(f)$, and then
-  $w(j) = -c'^{-1}f(p'+j)$ for $j \ge 1$. The factorisation used in the proof is
-  therefore the only one of its shape, and the formula for the inverse is a
-  recipe rather than a choice.
+- **The normalisation is forced, and that is why the recipe is explicit.** Suppose $f = \iota(c')t^{-p'}(1_K - w)$ with $c' \ne 0$ and $w$ vanishing at every index $\le 0$. Evaluating as in [step 2.1] gives $f(k) = c'(1_K - w)(k - p')$, which is $0$ for $k < p'$ and equals $c'$ at $k = p'$; so $p' = v(f)$ and $c' = \operatorname{lc}(f)$, and then $w(j) = -c'^{-1}f(p'+j)$ for $j \ge 1$. The factorisation used in the proof is therefore the only one of its shape, and the formula for the inverse is a recipe rather than a choice.

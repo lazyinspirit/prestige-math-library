@@ -92,16 +92,6 @@ does hold in general is proved in
 
 ## Remarks
 
-- **Nothing pathological is used.** $X$ is an unremarkable bounded subset of the
-  real line and the metric is the one inherited from $\mathbb{R}$; the only
-  feature exploited is that $X$ has a gap, so that the point $1$ of the closed
-  ball cannot be approached from inside $B_X(0,1)$.
-- **A starker version lives in the discrete metric** ([[ex-discrete-metric]]) on
-  a set with at least two points, where $\overline{B(p,1)} = \{p\}$ while
-  $\bar B(p,1)$ is the entire space; the two witnesses refute the claim in the
-  same way, at different scales.
-- **The equality does hold in $\mathbb{R}^n$ with any of $d_1$, $d_2$,
-  $d_\infty$**, which is where the false intuition comes from. This library does
-  not prove it, and neither [[lem-metrics-on-rn]] nor [[ex-p-metrics-on-rn]]
-  contains it; the usual argument runs along the segment from the centre to the
-  point in question, and no such segment need exist in a general metric space.
+- **Nothing pathological is used.** $X$ is an unremarkable bounded subset of the real line and the metric is the one inherited from $\mathbb{R}$; the only feature exploited is that $X$ has a gap, so that the point $1$ of the closed ball cannot be approached from inside $B_X(0,1)$.
+- **A starker version lives in the discrete metric** ([[ex-discrete-metric]]) on a set with at least two points, where $\overline{B(p,1)} = \{p\}$ while $\bar B(p,1)$ is the entire space; the two witnesses refute the claim in the same way, at different scales.
+- **The equality does hold in $\mathbb{R}^n$ with any of $d_1$, $d_2$, $d_\infty$**, which is where the false intuition comes from. This library does not prove it, and neither [[lem-metrics-on-rn]] nor [[ex-p-metrics-on-rn]] contains it; the usual argument runs along the segment from the centre to the point in question, and no such segment need exist in a general metric space.

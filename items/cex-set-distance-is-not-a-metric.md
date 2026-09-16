@@ -106,21 +106,6 @@ individual $b \in B$, so the infimum over pairs is not attained anywhere.
 
 ## Remarks
 
-- **What survives.** The set-to-set distance is symmetric and vanishes on
-  $A = A$, and on singletons it reduces to the metric. It satisfies no useful
-  triangle inequality either: in $\mathbb{R}$ the sets $A = \{0\}$,
-  $B = \{0, 10\}$, $C = \{10\}$ have $d(A,B) = d(B,C) = 0$ while
-  $d(A,C) = 10$, so $d(A,C) \le d(A,B) + d(B,C)$ fails. The construction that
-  does give a metric on a family of sets is the Hausdorff distance, which is
-  taken up on a later page and not defined here.
-- **Where the intuition breaks.** For a nonempty $A$, the function
-  $x \mapsto d(x,A)$ vanishes exactly on $\overline{A}$
-  ([[thm-metric-closure-characterisation]]), so a point at distance $0$ from a
-  closed set does lie in it. The set-to-set distance takes an infimum over a
-  second variable as well, and an infimum of a family of positive numbers can be
-  $0$; step 4.1 is exactly the record of that.
-- **The two sets approach each other only along their tails.** The point
-  $n + 1/n$ of $B$ sits at distance exactly $1/n$ from the integer $n$; those
-  distances are all positive, and by step 3.2 their infimum is $0$. That is the
-  whole mechanism: the distance is driven to $0$ by pairs with $n$ arbitrarily
-  large, never by any single pair.
+- **What survives.** The set-to-set distance is symmetric and vanishes on $A = A$, and on singletons it reduces to the metric. It satisfies no useful triangle inequality either: in $\mathbb{R}$ the sets $A = \{0\}$, $B = \{0, 10\}$, $C = \{10\}$ have $d(A,B) = d(B,C) = 0$ while $d(A,C) = 10$, so $d(A,C) \le d(A,B) + d(B,C)$ fails. The construction that does give a metric on a family of sets is the Hausdorff distance, which is taken up on a later page and not defined here.
+- **Where the intuition breaks.** For a nonempty $A$, the function $x \mapsto d(x,A)$ vanishes exactly on $\overline{A}$ ([[thm-metric-closure-characterisation]]), so a point at distance $0$ from a closed set does lie in it. The set-to-set distance takes an infimum over a second variable as well, and an infimum of a family of positive numbers can be $0$; step 4.1 is exactly the record of that.
+- **The two sets approach each other only along their tails.** The point $n + 1/n$ of $B$ sits at distance exactly $1/n$ from the integer $n$; those distances are all positive, and by step 3.2 their infimum is $0$. That is the whole mechanism: the distance is driven to $0$ by pairs with $n$ arbitrarily large, never by any single pair.

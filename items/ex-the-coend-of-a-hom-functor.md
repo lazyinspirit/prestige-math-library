@@ -80,10 +80,4 @@ a group is the set of conjugacy classes.
 
 On the walking arrow the coend is larger than the end, which is a one-element set: nothing is identified, because the identification would have to be indexed by an element of an empty hom-set. This is the same emptiness that makes the convention for which category computes a coend worth stating carefully.
 
-The monoid clause is where the temptation to overstate lies. "Conjugacy class"
-is the right name only when every element has an inverse. For a general monoid
-the quotient is still defined by the same generators, but the monoid supplies
-no conjugation action whose orbits are those classes; calling them conjugacy
-classes would assert more than the computation gives. Abstractly, as for every
-equivalence relation, some subgroup of a symmetric group can be chosen to have
-the classes as its orbits.
+The monoid clause is where the temptation to overstate lies. "Conjugacy class" is the right name only when every element has an inverse. For a general monoid the quotient is still defined by the same generators, but the monoid supplies no conjugation action whose orbits are those classes; calling them conjugacy classes would assert more than the computation gives. Abstractly, as for every equivalence relation, some subgroup of a symmetric group can be chosen to have the classes as its orbits.

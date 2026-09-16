@@ -34,14 +34,11 @@ biproducts.
 
 ## Facts & Assumptions
 
-**Given:** The full subcategory $\mathcal C$ of $\mathbf{Ab}$ on the two
-objects $0$ and $\mathbb Z$.
+**Given:** The full subcategory $\mathcal C$ of $\mathbf{Ab}$ on the two objects $0$ and $\mathbb Z$.
 
-[L1] A preadditive category has abelian-group hom-sets
-([[def-preadditive-category]]).
+[L1] A preadditive category has abelian-group hom-sets ([[def-preadditive-category]]).
 
-[L2] In a preadditive category, initial and terminal objects coincide
-([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
+[L2] In a preadditive category, initial and terminal objects coincide ([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
 
 ## Refutation
 

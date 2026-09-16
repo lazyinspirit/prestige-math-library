@@ -36,13 +36,9 @@ Consequently every nilpotent Lie algebra is solvable.
 
 **Given:** A Lie algebra $\mathfrak g$.
 
-[L1] The derived series satisfies
-$\mathfrak g^{(r+1)}=[\mathfrak g^{(r)},\mathfrak g^{(r)}]$
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] The derived series satisfies $\mathfrak g^{(r+1)}=[\mathfrak g^{(r)},\mathfrak g^{(r)}]$ ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] The lower central series satisfies
-$\gamma_{q+1}=[\mathfrak g,\gamma_q]$, and nilpotence means that a lower term
-vanishes ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L2] The lower central series satisfies $\gamma_{q+1}=[\mathfrak g,\gamma_q]$, and nilpotence means that a lower term vanishes ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
 ## Proof
 

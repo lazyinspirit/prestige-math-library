@@ -35,11 +35,9 @@ and choose vertices $v_i\in B_i$ for $i=1,2,3,4$.
 
 ## Facts & Assumptions
 
-**Given:** The complete blockade $\mathcal B$ and the chosen vertices
-$v_i\in B_i$.
+**Given:** The complete blockade $\mathcal B$ and the chosen vertices $v_i\in B_i$.
 
-[L1] Distinct blocks of a complete blockade are pairwise complete
-([[def-complete-anticomplete-pure-and-x-sparse-blockades]]).
+[L1] Distinct blocks of a complete blockade are pairwise complete ([[def-complete-anticomplete-pure-and-x-sparse-blockades]]).
 
 ## Verification
 

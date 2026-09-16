@@ -32,12 +32,9 @@ definition of $U(\mathfrak g)$ as a quotient.
 
 **Given:** The claim that quotient formation alone proves injectivity.
 
-[L1] The definition makes the canonical map the composite
-$\mathfrak g\hookrightarrow T(\mathfrak g)\twoheadrightarrow T(\mathfrak g)/I$
-([[def-universal-enveloping-algebra]]).
+[L1] The definition makes the canonical map the composite $\mathfrak g\hookrightarrow T(\mathfrak g)\twoheadrightarrow T(\mathfrak g)/I$ ([[def-universal-enveloping-algebra]]).
 
-[L2] Its injectivity is a PBW corollary
-([[cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]]).
+[L2] Its injectivity is a PBW corollary ([[cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]]).
 
 ## Refutation
 

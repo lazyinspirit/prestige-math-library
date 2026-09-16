@@ -38,15 +38,11 @@ $\begin{pmatrix}2&0\\1&3\end{pmatrix}$. Both determinants are $6$.
 
 [F1] $\mathbb R$ is a field ([[thm-reals-field]]).
 
-[L1] If $P=P_{\mathcal E\leftarrow\mathcal B}$, then
-$[T]_{\mathcal B}=P^{-1}[T]_{\mathcal E}P$
-([[thm-two-sided-change-of-basis-formula]]).
+[L1] If $P=P_{\mathcal E\leftarrow\mathcal B}$, then $[T]_{\mathcal B}=P^{-1}[T]_{\mathcal E}P$ ([[thm-two-sided-change-of-basis-formula]]).
 
-[F2] The $2\times2$ determinant is the two-term Leibniz sum
-([[def-determinant-of-a-square-matrix]]).
+[F2] The $2\times2$ determinant is the two-term Leibniz sum ([[def-determinant-of-a-square-matrix]]).
 
-[L2] The operator determinant is independent of the ordered basis
-([[thm-operator-determinant-is-basis-independent]]).
+[L2] The operator determinant is independent of the ordered basis ([[thm-operator-determinant-is-basis-independent]]).
 
 ## Verification
 

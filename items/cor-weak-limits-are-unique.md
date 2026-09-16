@@ -29,10 +29,7 @@ Bounded continuous real tests determine Borel probability measures on any metric
 
 [F1] [[thm-portmanteau-theorem]]: For Borel probabilities $\mu_n,\mu$ on a metric space S, the following are equivalent: (i) $\mu_n\Rightarrow\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\limsup_n\mu_n(F)\le\mu(F)$ for every closed F; (iv) $\liminf_n\mu_n(G)\ge\mu(G)$ for every open G; (v) $\mu_n(A)\to\mu(A)$ for every Borel A with $\mu(\partial A)=0$.
 
-[F2] [[thm-dynkin-pi-lambda]]: Let $\mathcal P$ be a $\pi$-system on $X$. Then
-$\lambda_X(\mathcal P)=\sigma_X(\mathcal P)$. Consequently, if $\mathcal D$ is
-any lambda-system on $X$ with $\mathcal P\subseteq\mathcal D$, then
-$\sigma_X(\mathcal P)\subseteq\mathcal D$.
+[F2] [[thm-dynkin-pi-lambda]]: Let $\mathcal P$ be a $\pi$-system on $X$. Then $\lambda_X(\mathcal P)=\sigma_X(\mathcal P)$. Consequently, if $\mathcal D$ is any lambda-system on $X$ with $\mathcal P\subseteq\mathcal D$, then $\sigma_X(\mathcal P)\subseteq\mathcal D$.
 
 ## Proof
 

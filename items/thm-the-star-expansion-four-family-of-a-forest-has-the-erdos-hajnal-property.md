@@ -50,9 +50,7 @@ has the Erdős-Hajnal property.
 
 **Given:** A forest $F$.
 
-[L1] Theorems 6.1 and 6.8 of the cited primary source prove exactly the
-displayed four-family result, with the critical exponent chosen after all
-blockade-length and width parameters.
+[L1] Theorems 6.1 and 6.8 of the cited primary source prove exactly the displayed four-family result, with the critical exponent chosen after all blockade-length and width parameters.
 
 ## Proof
 

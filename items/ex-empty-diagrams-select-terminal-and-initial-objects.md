@@ -32,15 +32,11 @@ $\varnothing$. In $\mathbf{Grp}$ both are the trivial group.
 
 **Given:** The empty diagrams in $\mathbf{Set}$ and $\mathbf{Grp}$.
 
-[L1] Empty-diagram limits are terminal objects and empty-diagram colimits are
-initial objects
-([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
+[L1] Empty-diagram limits are terminal objects and empty-diagram colimits are initial objects ([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
 
-[F1] Sets and functions form $\mathbf{Set}$
-([[prop-sets-and-functions-form-category-set]]).
+[F1] Sets and functions form $\mathbf{Set}$ ([[prop-sets-and-functions-form-category-set]]).
 
-[F2] Groups and homomorphisms form $\mathbf{Grp}$
-([[prop-groups-and-homomorphisms-form-category-grp]]).
+[F2] Groups and homomorphisms form $\mathbf{Grp}$ ([[prop-groups-and-homomorphisms-form-category-grp]]).
 
 ## Verification
 

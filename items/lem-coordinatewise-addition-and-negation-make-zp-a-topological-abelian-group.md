@@ -34,9 +34,7 @@ inverse-limit topology, $\mathbb Z_p$ is a topological abelian group.
 
 **Given:** Two elements $x=(x_n)$ and $y=(y_n)$ of $\mathbb Z_p$.
 
-[F1] An element of $\mathbb Z_p$ is a compatible tuple
-$(x_n)_{n\ge1}\in\prod_n\mathbb Z/p^n\mathbb Z$ with
-$x_{n+1}\bmod p^n=x_n$ for every $n$ ([[def-p-adic-integers-as-compatible-residue-classes]]).
+[F1] An element of $\mathbb Z_p$ is a compatible tuple $(x_n)_{n\ge1}\in\prod_n\mathbb Z/p^n\mathbb Z$ with $x_{n+1}\bmod p^n=x_n$ for every $n$ ([[def-p-adic-integers-as-compatible-residue-classes]]).
 
 ## Proof
 

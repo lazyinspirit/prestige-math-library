@@ -38,73 +38,33 @@ that the cluster point or the representing point belongs to $A$.
 
 **Given:** the three stated principles, $X$, and $A$ as in the statement.
 
-[F1] Relative weak countable compactness means that every sequence in the set
-has a cluster point in the ambient weak space, with "cluster" requiring every
-neighborhood to contain arbitrarily late terms
-([[def-relative-weak-compactness-and-three-sequential-notions]]).
+[F1] Relative weak countable compactness means that every sequence in the set has a cluster point in the ambient weak space, with "cluster" requiring every neighborhood to contain arbitrarily late terms ([[def-relative-weak-compactness-and-three-sequential-notions]]).
 
-[F2] The weak and weak-star topologies are the initial topologies of their
-evaluation maps; basic weak-star neighborhoods impose only finitely many
-evaluation inequalities ([[def-weak-topology-on-a-normed-space]],
-[[def-weak-star-topology]], [[lem-basic-weak-star-neighborhoods]]).
+[F2] The weak and weak-star topologies are the initial topologies of their evaluation maps; basic weak-star neighborhoods impose only finitely many evaluation inequalities ([[def-weak-topology-on-a-normed-space]], [[def-weak-star-topology]], [[lem-basic-weak-star-neighborhoods]]).
 
-[F3] Assuming the ultrafilter lemma, the dual unit ball is weak-star compact
-([[thm-banach-alaoglu]]), and arbitrary products of compact Hausdorff spaces
-are compact ([[thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma]]).
+[F3] Assuming the ultrafilter lemma, the dual unit ball is weak-star compact ([[thm-banach-alaoglu]]), and arbitrary products of compact Hausdorff spaces are compact ([[thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma]]).
 
-[F4] Under HB the canonical map $J_X:X\to X^{**}$ is an isometry, for both
-scalar fields ([[cor-relative-hahn-banach-bidual-isometry]]).  HB is the named
-relative dominated-extension principle
-([[def-hahn-banach-extension-principle-relative]]).
+[F4] Under HB the canonical map $J_X:X\to X^{**}$ is an isometry, for both scalar fields ([[cor-relative-hahn-banach-bidual-isometry]]).  HB is the named relative dominated-extension principle ([[def-hahn-banach-extension-principle-relative]]).
 
-[F5] Assuming DC, a pointwise bounded family of bounded operators on a Banach
-space is uniformly norm bounded ([[thm-uniform-boundedness-principle]]).  If
-the target is Banach, the bounded-operator space is Banach
-([[thm-bounded-operator-space-is-banach]]).
+[F5] Assuming DC, a pointwise bounded family of bounded operators on a Banach space is uniformly norm bounded ([[thm-uniform-boundedness-principle]]).  If the target is Banach, the bounded-operator space is Banach ([[thm-bounded-operator-space-is-banach]]).
 
-[F6] DC supplies a sequence following any entire relation from a specified
-initial state ([[def-dependent-choice]]).
+[F6] DC supplies a sequence following any entire relation from a specified initial state ([[def-dependent-choice]]).
 
-[F7] A compact Hausdorff space is regular, and regularity permits
-$y\in U$ open to be shrunk to open $V$ with
-$y\in V\subseteq\overline V\subseteq U$
-([[thm-a-compact-hausdorff-space-is-regular-and-normal]],
-[[lem-regularity-via-closed-neighbourhoods]]).
+[F7] A compact Hausdorff space is regular, and regularity permits $y\in U$ open to be shrunk to open $V$ with $y\in V\subseteq\overline V\subseteq U$ ([[thm-a-compact-hausdorff-space-is-regular-and-normal]], [[lem-regularity-via-closed-neighbourhoods]]).
 
-[F8] Closed subspaces of compact spaces are compact; in a compact space every
-family of closed sets with the finite-intersection property has nonempty
-intersection; and closure is characterized by meeting every neighborhood
-([[thm-closed-subspace-of-a-compact-space-is-compact]],
-[[thm-compact-iff-fip]], [[thm-closure-characterisation-top]]).
+[F8] Closed subspaces of compact spaces are compact; in a compact space every family of closed sets with the finite-intersection property has nonempty intersection; and closure is characterized by meeting every neighborhood ([[thm-closed-subspace-of-a-compact-space-is-compact]], [[thm-compact-iff-fip]], [[thm-closure-characterisation-top]]).
 
-[F9] Real intervals and complex Euclidean disks are compact by finite-dimensional
-Heine–Borel ([[thm-heine-borel-rn]]).
+[F9] Real intervals and complex Euclidean disks are compact by finite-dimensional Heine–Borel ([[thm-heine-borel-rn]]).
 
-[F10] On the scalar field put
-$\rho(s,t)=\min\{1,|s-t|\}$.  This bounded metric induces the usual scalar
-topology, since its balls of radius less than $1$ are the usual balls.  It is
-complete: a $\rho$-Cauchy sequence is Cauchy for the usual metric by testing
-tolerances below $1$, and its usual scalar limit is also its $\rho$-limit.
-The standard weighted metric on a countable product of complete metrics
-bounded by $1$ therefore applies to copies of $(\mathbb K,\rho)$ and induces
-the product topology; metric spaces are Hausdorff
-([[lem-standard-complete-metric-on-a-countable-product]],
-[[thm-reals-cauchy-complete]], [[thm-complex-plane-is-complete]],
-[[thm-metric-hausdorff-separation]], [[def-product-topology]]).
+[F10] On the scalar field put $\rho(s,t)=\min\{1,|s-t|\}$.  This bounded metric induces the usual scalar topology, since its balls of radius less than $1$ are the usual balls.  It is complete: a $\rho$-Cauchy sequence is Cauchy for the usual metric by testing tolerances below $1$, and its usual scalar limit is also its $\rho$-limit. The standard weighted metric on a countable product of complete metrics bounded by $1$ therefore applies to copies of $(\mathbb K,\rho)$ and induces the product topology; metric spaces are Hausdorff ([[lem-standard-complete-metric-on-a-countable-product]], [[thm-reals-cauchy-complete]], [[thm-complex-plane-is-complete]], [[thm-metric-hausdorff-separation]], [[def-product-topology]]).
 
-[F11] A continuous bijection from a compact space to a Hausdorff space is a
-homeomorphism ([[thm-compactness-under-continuous-maps]], claim 3).
+[F11] A continuous bijection from a compact space to a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]], claim 3).
 
-[F12] A nonempty at-most-countable set can be enumerated by a sequence, finite
-Cartesian products of countable sets are countable, the natural numbers are
-cofinal in the reals, and $1/n$ is eventually smaller than every positive real
-([[lem-countable-iff-surjection-from-n]], [[thm-product-of-countable]],
-[[thm-of-archimedean]], [[cor-archimedean-reciprocal]]).
+[F12] A nonempty at-most-countable set can be enumerated by a sequence, finite Cartesian products of countable sets are countable, the natural numbers are cofinal in the reals, and $1/n$ is eventually smaller than every positive real ([[lem-countable-iff-surjection-from-n]], [[thm-product-of-countable]], [[thm-of-archimedean]], [[cor-archimedean-reciprocal]]).
 
 ## Proof
 
-**Proof technique:** the Grothendieck pointwise-compactness argument, with each
-countable selection implemented by DC.
+**Proof technique:** the Grothendieck pointwise-compactness argument, with each countable selection implemented by DC.
 
 1.1 If $A=\varnothing$, it is norm bounded and $J_X(A)=\varnothing$ has empty weak-star closure, so both conclusions hold.  Hence assume $A\ne\varnothing$. [given]
 
@@ -160,11 +120,4 @@ countable selection implemented by DC.
 
 ## Source notes
 
-Haase's Lemma E.1 and Theorems E.2, E.3 and E.14, printed pp. 345–347 and
-354–355, supply the complete compact-cluster, metrization, countable-reduction,
-and pointwise-closure arguments.  The proof above changes Haase's phrase
-"take $g_x$" to a cover indexed by every available function and uses DC only
-to choose countably many finite subcovers; this avoids an unrecorded choice over
-all tuples.  It also supplies the dual-completeness premise needed by UBP and
-uses closed tail closures, rather than a metric compactness theorem, to obtain
-cluster points in the possibly nonmetrizable space $K$.
+Haase's Lemma E.1 and Theorems E.2, E.3 and E.14, printed pp. 345–347 and 354–355, supply the complete compact-cluster, metrization, countable-reduction, and pointwise-closure arguments.  The proof above changes Haase's phrase "take $g_x$" to a cover indexed by every available function and uses DC only to choose countably many finite subcovers; this avoids an unrecorded choice over all tuples.  It also supplies the dual-completeness premise needed by UBP and uses closed tail closures, rather than a metric compactness theorem, to obtain cluster points in the possibly nonmetrizable space $K$.

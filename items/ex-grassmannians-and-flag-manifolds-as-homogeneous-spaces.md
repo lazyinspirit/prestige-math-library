@@ -46,13 +46,9 @@ as smooth homogeneous spaces.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the standard inner products on
-$\mathbb R^n$ and $\mathbb C^n$, and the indicated Grassmannians and flag
-manifolds with their standard smooth structures.
+**Given:** $\mathrm{AC}_\omega$, the standard inner products on $\mathbb R^n$ and $\mathbb C^n$, and the indicated Grassmannians and flag manifolds with their standard smooth structures.
 
-[A1] A smooth transitive action of a Lie group identifies the manifold with
-the quotient by the stabilizer. [[def-countable-choice]],
-[[cor-transitive-smooth-actions-identify-m-with-g-mod-h]].
+[A1] A smooth transitive action of a Lie group identifies the manifold with the quotient by the stabilizer. [[def-countable-choice]], [[cor-transitive-smooth-actions-identify-m-with-g-mod-h]].
 
 ## Verification
 

@@ -32,8 +32,7 @@ homomorphism $z:G\to M$ is determined by the single value $z(t)$.
 
 **Given:** A cyclic group $G=\langle t\rangle$ acting on a group $M$, and a crossed homomorphism $z:G\to M$.
 
-[L1] Crossed homomorphisms satisfy $z(gh)=z(g)(g\cdot z(h))$
-([[def-crossed-homomorphism-for-a-g-group]]).
+[L1] Crossed homomorphisms satisfy $z(gh)=z(g)(g\cdot z(h))$ ([[def-crossed-homomorphism-for-a-g-group]]).
 
 ## Verification
 

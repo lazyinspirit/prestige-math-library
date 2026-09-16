@@ -40,11 +40,9 @@ are equivalent:
 
 **Given:** A commutative ring $R$ and a flat $R$-module $M$.
 
-[L1] Faithful flatness means that tensoring with $M$ reflects exactness
-([[def-flat-and-faithfully-flat-modules-and-ring-maps]]).
+[L1] Faithful flatness means that tensoring with $M$ reflects exactness ([[def-flat-and-faithfully-flat-modules-and-ring-maps]]).
 
-[L2] Flatness preserves injections, hence tensoring a monomorphism with $M$
-remains injective ([[thm-flatness-criteria-by-injections-and-ideals]]).
+[L2] Flatness preserves injections, hence tensoring a monomorphism with $M$ remains injective ([[thm-flatness-criteria-by-injections-and-ideals]]).
 
 ## Proof
 

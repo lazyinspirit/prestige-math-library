@@ -48,17 +48,11 @@ weakly sparse pair becomes directionally $0$-sparse after thinning.
 
 ## Facts & Assumptions
 
-**Given:** The graph $G$ and the four blocks $A_1,A_2,A_3,A_4$ described in the
-example.
+**Given:** The graph $G$ and the four blocks $A_1,A_2,A_3,A_4$ described in the example.
 
-[L1] A blockade is an ordered sequence of pairwise disjoint nonempty vertex
-sets, and its width is the minimum block size
-([[def-blockade-length-and-width]]).
+[L1] A blockade is an ordered sequence of pairwise disjoint nonempty vertex sets, and its width is the minimum block size ([[def-blockade-length-and-width]]).
 
-[L2] A weakly $c$-sparse pair $(X,Y)$ satisfies
-$e_G(X,Y)\le c|X||Y|$, while directional sparsity bounds the neighbours of each
-single vertex into the opposite set
-([[def-directional-and-weak-sparsity-between-vertex-sets]]).
+[L2] A weakly $c$-sparse pair $(X,Y)$ satisfies $e_G(X,Y)\le c|X||Y|$, while directional sparsity bounds the neighbours of each single vertex into the opposite set ([[def-directional-and-weak-sparsity-between-vertex-sets]]).
 
 ## Verification
 

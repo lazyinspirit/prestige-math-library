@@ -38,23 +38,15 @@ suffice.
 
 ## Facts & Assumptions
 
-**Given:** AC, a rank-$n$ bundle $E\to X$, and the data in the applicable
-clause of the statement.
+**Given:** AC, a rank-$n$ bundle $E\to X$, and the data in the applicable clause of the statement.
 
-[F1] The tautological bundle over the Grassmannian has fiber $W$ over the
-plane $W$ ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
+[F1] The tautological bundle over the Grassmannian has fiber $W$ over the plane $W$ ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
-[F2] A numeration is support-subordinate and locally finite
-([[def-partition-of-unity-subordinate-to-a-cover]]).
+[F2] A numeration is support-subordinate and locally finite ([[def-partition-of-unity-subordinate-to-a-cover]]).
 
-[F3] Steps 1.1–2.1 of
-[[thm-principal-bundles-are-classified-by-maps-to-bg]] countabilize an
-arbitrary indexed numeration under AC, producing countably many disjoint-union
-chart domains and a subordinate partition.
+[F3] Steps 1.1–2.1 of [[thm-principal-bundles-are-classified-by-maps-to-bg]] countabilize an arbitrary indexed numeration under AC, producing countably many disjoint-union chart domains and a subordinate partition.
 
-[F4] Under AC, a finite-rank bundle over a compact Hausdorff base is a direct
-summand of a finite trivial bundle
-([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]]).
+[F4] Under AC, a finite-rank bundle over a compact Hausdorff base is a direct summand of a finite trivial bundle ([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]]).
 
 [A1] AC has the meaning fixed in [[def-axiom-of-choice]].
 

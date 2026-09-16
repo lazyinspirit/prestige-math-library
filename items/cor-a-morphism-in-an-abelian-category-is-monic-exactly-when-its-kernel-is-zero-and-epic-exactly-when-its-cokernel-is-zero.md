@@ -34,16 +34,11 @@ For a morphism $f$ in an abelian category:
 
 **Given:** An abelian category and a morphism $f$ in it.
 
-[L1] An abelian category is additive, hence preadditive and equipped with a
-zero object ([[def-abelian-category]]).
+[L1] An abelian category is additive, hence preadditive and equipped with a zero object ([[def-abelian-category]]).
 
-[L2] In a preadditive category with a zero object, a morphism is monic exactly
-when its kernel is zero
-([[thm-in-a-preadditive-category-with-a-zero-object-a-morphism-is-monic-exactly-when-its-kernel-is-zero]]).
+[L2] In a preadditive category with a zero object, a morphism is monic exactly when its kernel is zero ([[thm-in-a-preadditive-category-with-a-zero-object-a-morphism-is-monic-exactly-when-its-kernel-is-zero]]).
 
-[L3] In a preadditive category with a zero object, a morphism is epic exactly
-when its cokernel is zero
-([[cor-in-a-preadditive-category-with-a-zero-object-a-morphism-is-epic-exactly-when-its-cokernel-is-zero]]).
+[L3] In a preadditive category with a zero object, a morphism is epic exactly when its cokernel is zero ([[cor-in-a-preadditive-category-with-a-zero-object-a-morphism-is-epic-exactly-when-its-cokernel-is-zero]]).
 
 ## Proof
 

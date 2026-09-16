@@ -35,21 +35,15 @@ $$G\cong\langle X\mid\ker\pi\rangle.$$
 
 **Given:** A group $G$ and its underlying set $X$.
 
-[L1] The reduced-word construction supplies a free group on $X$, and its
-universal property extends every function $X\to G$ uniquely to a group
-homomorphism ([[thm-reduced-words-form-the-free-group]], [[def-free-group]]).
+[L1] The reduced-word construction supplies a free group on $X$, and its universal property extends every function $X\to G$ uniquely to a group homomorphism ([[thm-reduced-words-form-the-free-group]], [[def-free-group]]).
 
-[L2] The kernel of a group homomorphism is a normal subgroup
-([[thm-image-subgroup-and-kernel-normal]]).
+[L2] The kernel of a group homomorphism is a normal subgroup ([[thm-image-subgroup-and-kernel-normal]]).
 
-[L3] The normal closure of a set is the smallest normal subgroup containing it
-([[def-normal-closure]]).
+[L3] The normal closure of a set is the smallest normal subgroup containing it ([[def-normal-closure]]).
 
-[L4] The presentation $\langle X\mid R\rangle$ is the quotient of $F(X)$ by the normal closure of $R$
-([[def-group-presentation]]).
+[L4] The presentation $\langle X\mid R\rangle$ is the quotient of $F(X)$ by the normal closure of $R$ ([[def-group-presentation]]).
 
-[L5] A homomorphism induces an isomorphism from its quotient by the kernel onto its image
-([[thm-first-isomorphism-theorem-groups]]).
+[L5] A homomorphism induces an isomorphism from its quotient by the kernel onto its image ([[thm-first-isomorphism-theorem-groups]]).
 
 ## Proof
 

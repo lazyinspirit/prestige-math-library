@@ -32,8 +32,7 @@ A centerless finite-dimensional Lie algebra is semisimple.
 
 **Given:** A characteristic-zero field and the displayed affine algebra.
 
-[L1] Semisimplicity means vanishing solvable radical
-([[def-simple-semisimple-and-reductive-lie-algebras]]).
+[L1] Semisimplicity means vanishing solvable radical ([[def-simple-semisimple-and-reductive-lie-algebras]]).
 
 ## Counterexample
 

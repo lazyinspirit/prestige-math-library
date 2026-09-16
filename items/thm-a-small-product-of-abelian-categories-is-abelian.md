@@ -34,15 +34,11 @@ empty product category is abelian.
 
 ## Facts & Assumptions
 
-**Given:** A set-indexed family $(\mathcal A_i)_{i\in I}$ of abelian
-categories.
+**Given:** A set-indexed family $(\mathcal A_i)_{i\in I}$ of abelian categories.
 
-[L1] A small product of preadditive categories is preadditive
-([[prop-a-small-product-of-preadditive-categories-is-preadditive]]).
+[L1] A small product of preadditive categories is preadditive ([[prop-a-small-product-of-preadditive-categories-is-preadditive]]).
 
-[L2] Abelian categories are additive and compute kernels, cokernels, and
-coimage-image comparison maps internally
-([[def-abelian-category]]).
+[L2] Abelian categories are additive and compute kernels, cokernels, and coimage-image comparison maps internally ([[def-abelian-category]]).
 
 ## Proof
 

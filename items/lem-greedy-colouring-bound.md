@@ -43,15 +43,11 @@ a proper colouring with colours in $\Delta(G)+1$.
 
 [L2] Every vertex has at most $\Delta(G)$ neighbours ([[def-graph-adjacency-incidence-neighbourhood-and-degree]]).
 
-[L3] If $m<n$ are natural numbers, there is no injection from $n$ into $m$
-([[lem-pigeonhole]], claim 2).
+[L3] If $m<n$ are natural numbers, there is no injection from $n$ into $m$ ([[lem-pigeonhole]], claim 2).
 
-[L4] Every nonempty subset of the natural numbers has a least element
-([[thm-well-ordering-principle]]).
+[L4] Every nonempty subset of the natural numbers has a least element ([[thm-well-ordering-principle]]).
 
-[L5] A subset of the natural numbers containing $0$ and closed under successor
-is all of the natural numbers; and exactly one of $i<n$, $i=n$, $n<i$ holds
-([[thm-induction-principle]], [[lem-nat-trichotomy]]).
+[L5] A subset of the natural numbers containing $0$ and closed under successor is all of the natural numbers; and exactly one of $i<n$, $i=n$, $n<i$ holds ([[thm-induction-principle]], [[lem-nat-trichotomy]]).
 
 ## Proof
 

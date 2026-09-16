@@ -47,11 +47,9 @@ up to the nonzero factor $4$.
 
 **Given:** The constant-coefficient hyperbolic operator $u_{xx}-u_{yy}$.
 
-[L1] Constant-coefficient hyperbolic principal parts admit canonical linear
-coordinates ([[thm-two-variable-constant-coefficient-canonical-principal-forms]]).
+[L1] Constant-coefficient hyperbolic principal parts admit canonical linear coordinates ([[thm-two-variable-constant-coefficient-canonical-principal-forms]]).
 
-[L2] Characteristic directions are coordinate invariant and are determined by
-the characteristic families ([[thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant]]).
+[L2] Characteristic directions are coordinate invariant and are determined by the characteristic families ([[thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant]]).
 
 ## Verification
 

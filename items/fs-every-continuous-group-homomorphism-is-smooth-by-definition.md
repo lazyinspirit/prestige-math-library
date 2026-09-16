@@ -35,8 +35,7 @@ definition**.
 
 **Given:** The library definition of a Lie-group homomorphism.
 
-[F1] A Lie-group homomorphism is required to be both a group homomorphism and a
-smooth map. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
+[F1] A Lie-group homomorphism is required to be both a group homomorphism and a smooth map. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
 
 ## Refutation
 

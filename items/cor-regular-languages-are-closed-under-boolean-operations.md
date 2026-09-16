@@ -29,14 +29,11 @@ regular.
 
 **Given:** Regular languages $L,K\subseteq\Sigma^*$.
 
-[L1] Regular languages are exactly the languages recognized by DFA's, by
-[[def-regular-language-by-dfa-recognition]].
+[L1] Regular languages are exactly the languages recognized by DFA's, by [[def-regular-language-by-dfa-recognition]].
 
-[L2] The product construction gives DFA's for union and intersection, by
-[[thm-product-dfa-for-union-and-intersection]].
+[L2] The product construction gives DFA's for union and intersection, by [[thm-product-dfa-for-union-and-intersection]].
 
-[L3] Complementing the accepting states complements the recognized language, by
-[[thm-complementing-accept-states-complements-the-language]].
+[L3] Complementing the accepting states complements the recognized language, by [[thm-complementing-accept-states-complements-the-language]].
 
 ## Proof
 

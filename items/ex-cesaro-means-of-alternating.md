@@ -83,19 +83,8 @@ Cesaro limit of its partial sums rather than of its terms.
 
 ## Remarks
 
-- **The means converge but are not monotone**, and they are not even eventually
-  of one shape: they alternate between $0$ and a positive value shrinking like
-  $1/(n+1)$. Convergence of a Cesaro transform therefore carries no monotonicity
-  information, which is another way of seeing that the transform loses the
-  oscillation rather than damping it.
+- **The means converge but are not monotone**, and they are not even eventually of one shape: they alternate between $0$ and a positive value shrinking like $1/(n+1)$. Convergence of a Cesaro transform therefore carries no monotonicity information, which is another way of seeing that the transform loses the oscillation rather than damping it.
 
-- **Where the $1/2$ comes from.** The classical assertion "$1 - 1 + 1 - 1 +
-  \dots = 1/2$" is about the *partial sums* $S_m$, which are $0, 1, 0, 1,
-  \dots$; their Cesaro means tend to $1/2$. This library has no theory of series
-  yet, so nothing above asserts it; the sequence averaged here is $(s_k)$
-  itself, whose means tend to $0$.
+- **Where the $1/2$ comes from.** The classical assertion "$1 - 1 + 1 - 1 + \dots = 1/2$" is about the *partial sums* $S_m$, which are $0, 1, 0, 1, \dots$; their Cesaro means tend to $1/2$. This library has no theory of series yet, so nothing above asserts it; the sequence averaged here is $(s_k)$ itself, whose means tend to $0$.
 
-- **This is not a failure of the Cesaro matrix.** That matrix is regular
-  ([[cor-cesaro-matrix-is-regular]]): it never changes a limit that exists. What
-  it does here is assign a value where no limit exists, which is exactly what a
-  summability method is for.
+- **This is not a failure of the Cesaro matrix.** That matrix is regular ([[cor-cesaro-matrix-is-regular]]): it never changes a limit that exists. What it does here is assign a value where no limit exists, which is exactly what a summability method is for.

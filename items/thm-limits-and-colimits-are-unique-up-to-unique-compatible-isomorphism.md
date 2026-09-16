@@ -34,14 +34,11 @@ commutes with every cocone leg.
 
 **Given:** Two limiting cones $(L,\lambda)$ and $(L',\lambda')$ over $D$.
 
-[F1] A limit is a terminal cone: every cone has a unique morphism to it, and a
-colimit is an initial cocone ([[def-limit-and-colimit-of-a-diagram]]).
+[F1] A limit is a terminal cone: every cone has a unique morphism to it, and a colimit is an initial cocone ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L1] Any two terminal objects are uniquely isomorphic, as are any two initial
-objects ([[thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism]]).
+[L1] Any two terminal objects are uniquely isomorphic, as are any two initial objects ([[thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism]]).
 
-[L2] An isomorphism has a two-sided inverse
-([[def-isomorphism-groupoid-and-connected-category]]).
+[L2] An isomorphism has a two-sided inverse ([[def-isomorphism-groupoid-and-connected-category]]).
 
 ## Proof
 

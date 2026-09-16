@@ -30,11 +30,9 @@ quotient copy of $G$ in $A\rtimes G$.
 
 ## Facts & Assumptions
 
-**Given:** The inversion action of $C_2=\langle t\rangle$ on the additive group
-$A=\mathbb Z$.
+**Given:** The inversion action of $C_2=\langle t\rangle$ on the additive group $A=\mathbb Z$.
 
-[L1] First cohomology classifies complements up to conjugacy by the kernel copy
-of $A$ ([[thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]]).
+[L1] First cohomology classifies complements up to conjugacy by the kernel copy of $A$ ([[thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]]).
 
 ## Refutation
 

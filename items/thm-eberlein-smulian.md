@@ -37,58 +37,31 @@ topology $\sigma(X,X^*)$ and the ambient space $X$.
 
 ## Facts & Assumptions
 
-**Given:** the ultrafilter lemma, DC, HB, a real or complex Banach space $X$,
-and $A\subseteq X$.
+**Given:** the ultrafilter lemma, DC, HB, a real or complex Banach space $X$, and $A\subseteq X$.
 
-[F1] Relative weak compactness means compactness of the weak closure; relative
-weak sequential compactness gives a weakly convergent subsequence with ambient
-limit; relative weak countable compactness gives an ambient weak cluster point
-with arbitrarily late terms in every neighborhood
-([[def-relative-weak-compactness-and-three-sequential-notions]]).
+[F1] Relative weak compactness means compactness of the weak closure; relative weak sequential compactness gives a weakly convergent subsequence with ambient limit; relative weak countable compactness gives an ambient weak cluster point with arbitrarily late terms in every neighborhood ([[def-relative-weak-compactness-and-three-sequential-notions]]).
 
-[F2] Under HB, the closed scalar span of one sequence in $X$ is a separable
-Banach subspace, is weakly closed in $X$, and its intrinsic weak topology is
-the relative ambient weak topology
-([[lem-eberlein-smulian-separable-reduction]]).
+[F2] Under HB, the closed scalar span of one sequence in $X$ is a separable Banach subspace, is weakly closed in $X$, and its intrinsic weak topology is the relative ambient weak topology ([[lem-eberlein-smulian-separable-reduction]]).
 
-[F3] Assuming $\mathrm{AC}_\omega$ and HB, every weakly compact subset of a
-separable normed space is weakly metrizable
-([[lem-eberlein-smulian-metrization-on-the-relevant-dual-ball]]).
+[F3] Assuming $\mathrm{AC}_\omega$ and HB, every weakly compact subset of a separable normed space is weakly metrizable ([[lem-eberlein-smulian-metrization-on-the-relevant-dual-ball]]).
 
-[F4] DC gives a chain through every entire relation from a prescribed initial
-state, whereas $\mathrm{AC}_\omega$ is a choice function for each supplied
-sequence of nonempty sets ([[def-dependent-choice]],
-[[def-countable-choice]]).
+[F4] DC gives a chain through every entire relation from a prescribed initial state, whereas $\mathrm{AC}_\omega$ is a choice function for each supplied sequence of nonempty sets ([[def-dependent-choice]], [[def-countable-choice]]).
 
-[F5] In a metric space, compactness implies sequential compactness without any
-choice principle, by least-index recursion
-([[thm-compact-implies-the-other-compactness-forms]], claims 1 and 3).
+[F5] In a metric space, compactness implies sequential compactness without any choice principle, by least-index recursion ([[thm-compact-implies-the-other-compactness-forms]], claims 1 and 3).
 
-[F6] Under the ultrafilter lemma, DC and HB, a relatively weakly countably
-compact $A$ is norm bounded and satisfies
-$\overline{J_X(A)}^{\,w^*}\subseteq J_X(X)$
-([[lem-eberlein-smulian-countable-compactness-closes-in-the-bidual]]).
+[F6] Under the ultrafilter lemma, DC and HB, a relatively weakly countably compact $A$ is norm bounded and satisfies $\overline{J_X(A)}^{\,w^*}\subseteq J_X(X)$ ([[lem-eberlein-smulian-countable-compactness-closes-in-the-bidual]]).
 
-[F7] Under the ultrafilter lemma, the closed unit ball of the dual of any
-normed space is weak-star compact ([[thm-banach-alaoglu]]).
+[F7] Under the ultrafilter lemma, the closed unit ball of the dual of any normed space is weak-star compact ([[thm-banach-alaoglu]]).
 
-[F8] The weak and weak-star topologies are initial for their scalar
-evaluations, and under HB the canonical map $J_X:X\to X^{**}$ is scalar-linear
-and isometric ([[def-weak-topology-on-a-normed-space]],
-[[def-weak-star-topology]], [[cor-relative-hahn-banach-bidual-isometry]]).
+[F8] The weak and weak-star topologies are initial for their scalar evaluations, and under HB the canonical map $J_X:X\to X^{**}$ is scalar-linear and isometric ([[def-weak-topology-on-a-normed-space]], [[def-weak-star-topology]], [[cor-relative-hahn-banach-bidual-isometry]]).
 
-[F9] A closed subset of a compact space is compact, and continuous images of
-compact spaces are compact ([[thm-closed-subspace-of-a-compact-space-is-compact]],
-[[thm-compactness-under-continuous-maps]], claim 1).
+[F9] A closed subset of a compact space is compact, and continuous images of compact spaces are compact ([[thm-closed-subspace-of-a-compact-space-is-compact]], [[thm-compactness-under-continuous-maps]], claim 1).
 
-[F10] Strictly increasing natural-number indices satisfy $n_k\ge k$
-([[lem-index-map-grows]]), and HB is the named dominated-extension principle
-([[def-hahn-banach-extension-principle-relative]]).
+[F10] Strictly increasing natural-number indices satisfy $n_k\ge k$ ([[lem-index-map-grows]]), and HB is the named dominated-extension principle ([[def-hahn-banach-extension-principle-relative]]).
 
 ## Proof
 
-**Proof technique:** prove the cycle compact $\Rightarrow$ sequential
-$\Rightarrow$ countable $\Rightarrow$ compact.
+**Proof technique:** prove the cycle compact $\Rightarrow$ sequential $\Rightarrow$ countable $\Rightarrow$ compact.
 
 1.1 We first derive the exact choice fragment needed by [F3], rather than citing the unproved remark that DC implies $\mathrm{AC}_\omega$.  Given any sequence $(E_n)_{n\in\mathbb N}$ of nonempty sets, let $S$ be the set of all finite histories $s$ with domain $n$ for some $n$ and $s(k)\in E_k$ for $k<n$.  The empty history belongs to $S$.  Relate $s$ to $t$ when $t$ extends $s$ by exactly one value from $E_{\operatorname{dom}s}$.  The relation is entire because that next set is nonempty.  DC from the empty history gives a chain $(s_n)$ with $s_n$ of length $n$ and $s_{n+1}$ extending $s_n$; its union is a function $f$ on $\mathbb N$ with $f(n)\in E_n$.  Thus the assumed DC proves the instance of $\mathrm{AC}_\omega$ required below. [F4, construct]
 
@@ -116,10 +89,4 @@ $\Rightarrow$ countable $\Rightarrow$ compact.
 
 ## Source notes
 
-Haase's Theorem E.17, printed pp. 355–356, gives the canonical embedding into
-$C_p(B_{X^*})$ and the compact/sequential equivalence; Theorems E.2–E.3 and
-E.14 on printed pp. 345–347 and 354–355 supply its complete pointwise-
-compactness route.  The local lemma [F6] contains that argument with BPI, DC
-and HB exposed.  The proof here additionally derives DC $\Rightarrow$
-$\mathrm{AC}_\omega$ from finite histories before using [F3], rather than
-consuming the unproved bibliographic remark in the choice definitions.
+Haase's Theorem E.17, printed pp. 355–356, gives the canonical embedding into $C_p(B_{X^*})$ and the compact/sequential equivalence; Theorems E.2–E.3 and E.14 on printed pp. 345–347 and 354–355 supply its complete pointwise- compactness route.  The local lemma [F6] contains that argument with BPI, DC and HB exposed.  The proof here additionally derives DC $\Rightarrow$ $\mathrm{AC}_\omega$ from finite histories before using [F3], rather than consuming the unproved bibliographic remark in the choice definitions.

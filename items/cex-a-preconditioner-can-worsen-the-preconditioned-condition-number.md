@@ -33,16 +33,11 @@ improves the condition number that governs CG.
 
 ## Facts & Assumptions
 
-**Given:** The residual-and-error maps for preconditioning and the symmetric
-positive-definite CG transform.
+**Given:** The residual-and-error maps for preconditioning and the symmetric positive-definite CG transform.
 
-[F1] Symmetric preconditioning replaces $A$ by the transformed operator
-$C^{-1}AC^{-*}$
-([[prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps]]).
+[F1] Symmetric preconditioning replaces $A$ by the transformed operator $C^{-1}AC^{-*}$ ([[prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps]]).
 
-[L1] The CG bound is governed by the spectral condition number of the
-transformed operator
-([[thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem]]).
+[L1] The CG bound is governed by the spectral condition number of the transformed operator ([[thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem]]).
 
 ## Counterexample
 **Proof technique:** direct calculation.

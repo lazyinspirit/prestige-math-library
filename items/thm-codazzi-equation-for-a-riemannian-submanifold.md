@@ -41,24 +41,17 @@ normal projection constructions.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, an embedded Riemannian submanifold, and tangent
-fields $X,Y,Z$.
+**Given:** Countable choice, an embedded Riemannian submanifold, and tangent fields $X,Y,Z$.
 
-[F1] The Gauss decomposition is
-$\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$.
-[[def-induced-connection-and-second-fundamental-form]].
+[F1] The Gauss decomposition is $\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F2] The normal component of the ambient derivative of a normal field is
-$\nabla^\perp$. [[def-normal-connection]].
+[F2] The normal component of the ambient derivative of a normal field is $\nabla^\perp$. [[def-normal-connection]].
 
-[F3] The second fundamental form is a smooth normal-valued two-tensor.
-[[lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor]].
+[F3] The second fundamental form is a smooth normal-valued two-tensor. [[lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor]].
 
-[F4] The induced connection is torsion free.
-[[thm-the-induced-connection-is-levi-civita]].
+[F4] The induced connection is torsion free. [[thm-the-induced-connection-is-levi-civita]].
 
-[F5] Curvature is the bracket-corrected commutator with the sign used in the
-Statement. [[def-curvature-of-an-affine-connection]].
+[F5] Curvature is the bracket-corrected commutator with the sign used in the Statement. [[def-curvature-of-an-affine-connection]].
 
 ## Proof
 

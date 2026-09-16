@@ -34,9 +34,7 @@ $$\sup_{x\in\mathbb R}|\sigma_Nf(x)-f(x)|\longrightarrow0 \qquad (N\to\infty).$$
 
 **Given:** A one-periodic continuous function $f:\mathbb R\to\mathbb C$.
 
-[L1] The Cesaro means satisfy $\sigma_Nf=f*F_N$, so
-$$\sigma_Nf(x)=\int_0^1f(x-t)F_N(t)\,dt$$
-for every $x$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
+[L1] The Cesaro means satisfy $\sigma_Nf=f*F_N$, so $$\sigma_Nf(x)=\int_0^1f(x-t)F_N(t)\,dt$$ for every $x$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
 
 [L2] The Fejer kernels are nonnegative, have integral $1$, and their mass on $[\delta,1-\delta]$ tends to $0$ for every $\delta\in(0,1/2]$ ([[lem-fejer-kernel-is-a-positive-approximate-identity]]).
 

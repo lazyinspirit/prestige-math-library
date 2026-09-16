@@ -50,7 +50,6 @@ $$x^2 + y^2 + z = c.$$
 submersion everywhere. [given]
 
 1.2 The kernel distribution is therefore integrable, and its maximal connected [given]
-integral manifolds are the connected components of the level sets of $F$.
-Each level set here is a connected paraboloid. [given]
+integral manifolds are the connected components of the level sets of $F$. Each level set here is a connected paraboloid. [given]
 
 2.1 Thus $\ker dF$ is an explicit integrable distribution. [given] ∎ [given]

@@ -30,9 +30,7 @@ subgroup of it.
 
 **Given:** A group $G$ and an abelian $G$-module $M$.
 
-[F1] Normalized two-cocycles and two-coboundaries are defined by the displayed
-equations in
-[[def-normalized-two-cocycle-and-two-coboundary]].
+[F1] Normalized two-cocycles and two-coboundaries are defined by the displayed equations in [[def-normalized-two-cocycle-and-two-coboundary]].
 
 ## Proof
 

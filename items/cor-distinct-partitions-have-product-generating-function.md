@@ -37,9 +37,7 @@ $$\sum_{n \ge 0} p_{\mathrm{dist}}(n)x^n = \prod_{m \ge 1}(1+x^m).$$
 
 **Given:** one abstract object $u_m$ of size $m$ for each integer $m \ge 1$.
 
-[F1] The empty partition has distinct parts, and a nonempty partition into
-distinct parts chooses each positive part size at most once
-([[def-partition-counting-functions-and-restricted-families]]).
+[F1] The empty partition has distinct parts, and a nonempty partition into distinct parts chooses each positive part size at most once ([[def-partition-counting-functions-and-restricted-families]]).
 
 [L1] If a combinatorial class has one object of each positive size $m$ in a permitted layer, then its powerset construction contributes the factor $(1+x^m)$ at size $m$ ([[thm-powerset-product-formula]]).
 

@@ -36,18 +36,13 @@ of $B$ and $C$ in the subobject order of $A$.
 
 ## Facts & Assumptions
 
-**Given:** Monomorphisms $b:B\rightarrowtail A$ and $c:C\rightarrowtail A$
-representing the two subobjects.
+**Given:** Monomorphisms $b:B\rightarrowtail A$ and $c:C\rightarrowtail A$ representing the two subobjects.
 
-[L1] The join $B\vee C$ is the image of the induced map
-$[b,c]:B\oplus C\to A$
-([[def-the-join-of-subobjects-in-an-abelian-category]]).
+[L1] The join $B\vee C$ is the image of the induced map $[b,c]:B\oplus C\to A$ ([[def-the-join-of-subobjects-in-an-abelian-category]]).
 
-[L2] The image of a morphism is the least subobject through which that morphism
-factors ([[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
+[L2] The image of a morphism is the least subobject through which that morphism factors ([[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
 
-[L3] A subobject inequality is exactly factorization of representatives
-([[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
+[L3] A subobject inequality is exactly factorization of representatives ([[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
 
 ## Proof
 

@@ -44,18 +44,13 @@ $$\|f+M\|=\frac{1}{2}\operatorname{osc}(f).$$
 
 ## Facts & Assumptions
 
-**Given:** A nonempty compact metric space $K$, a real-valued continuous
-function $f$ on $K$, and the constant-function subspace $M$.
+**Given:** A nonempty compact metric space $K$, a real-valued continuous function $f$ on $K$, and the constant-function subspace $M$.
 
-[L1] The quotient seminorm is
-$\|f+M\|=\inf_{c \in \mathbb R}\|f-c\|_\infty$
-([[def-quotient-seminorm]]).
+[L1] The quotient seminorm is $\|f+M\|=\inf_{c \in \mathbb R}\|f-c\|_\infty$ ([[def-quotient-seminorm]]).
 
-[L2] A continuous real-valued function on a nonempty compact metric space
-attains its maximum and minimum ([[thm-extreme-value-metric]]).
+[L2] A continuous real-valued function on a nonempty compact metric space attains its maximum and minimum ([[thm-extreme-value-metric]]).
 
-[L3] The quotient seminorm is a norm when the subspace is closed
-([[thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]]).
+[L3] The quotient seminorm is a norm when the subspace is closed ([[thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]]).
 
 ## Verification
 

@@ -35,8 +35,7 @@ again an epimorphism.
 
 **Given:** An epimorphism in an abelian category and any pullback of it.
 
-[L1] The pullback of an epimorphism is an epimorphism
-([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
+[L1] The pullback of an epimorphism is an epimorphism ([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
 
 ## Proof
 

@@ -38,8 +38,7 @@ has exactly one zero in the unit disc.
 
 **Given:** The polynomial $p(z)=z^5+3z+1$ and the unit circle $|z|=1$.
 
-[L1] Rouché's theorem preserves the zero count when the strict boundary
-inequality holds ([[thm-rouche-theorem]]).
+[L1] Rouché's theorem preserves the zero count when the strict boundary inequality holds ([[thm-rouche-theorem]]).
 
 ## Verification
 

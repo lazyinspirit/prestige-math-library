@@ -37,13 +37,9 @@ $$H^1(G,A)\cong H^1_{\mathrm{inh}}(G,A).$$
 
 **Given:** A group $G$ acting on an abelian group $A$.
 
-[L1] The crossed-homomorphism model is $H^1(G,A)=Z^1(G,A)/B^1(G,A)$
-([[def-first-cohomology-via-crossed-homomorphisms]]).
+[L1] The crossed-homomorphism model is $H^1(G,A)=Z^1(G,A)/B^1(G,A)$ ([[def-first-cohomology-via-crossed-homomorphisms]]).
 
-[L2] The inhomogeneous degree-one model is $\ker d^1/\operatorname{im} d^0$
-with
-$$d^1(f)(g,h)=f(g)+g\cdot f(h)-f(gh),\qquad d^0(a)(g)=g\cdot a-a$$
-([[def-first-group-cohomology-via-inhomogeneous-one-cocycles]]).
+[L2] The inhomogeneous degree-one model is $\ker d^1/\operatorname{im} d^0$ with $$d^1(f)(g,h)=f(g)+g\cdot f(h)-f(gh),\qquad d^0(a)(g)=g\cdot a-a$$ ([[def-first-group-cohomology-via-inhomogeneous-one-cocycles]]).
 
 ## Proof
 

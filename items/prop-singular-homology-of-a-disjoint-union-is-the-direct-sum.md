@@ -32,14 +32,11 @@ $$H_n^{\mathrm{sing}}(X;G)\cong\bigoplus_{\alpha\in A}H_n^{\mathrm{sing}}(X_\alp
 
 ## Facts & Assumptions
 
-**Given:** A disjoint union $X=\bigsqcup_{\alpha\in A}X_\alpha$, an abelian
-group $G$, and an integer $n\geq 0$.
+**Given:** A disjoint union $X=\bigsqcup_{\alpha\in A}X_\alpha$, an abelian group $G$, and an integer $n\geq 0$.
 
-[L1] Singular homology is computed from the singular chain complex
-([[def-singular-chain-complex-and-singular-homology]]).
+[L1] Singular homology is computed from the singular chain complex ([[def-singular-chain-complex-and-singular-homology]]).
 
-[L2] In the disjoint-union topology, each summand $X_\alpha$ is an open and
-closed subspace of $X$ ([[def-disjoint-union-topology]]).
+[L2] In the disjoint-union topology, each summand $X_\alpha$ is an open and closed subspace of $X$ ([[def-disjoint-union-topology]]).
 
 ## Proof
 

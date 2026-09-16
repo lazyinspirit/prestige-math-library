@@ -37,8 +37,7 @@ but they determine distinct classes in $H^2(C_2\times C_2,C_2)$.
 
 **Given:** The dihedral group $D_8$ and the quaternion group $Q_8$.
 
-[L1] Central extensions are classified by $H^2$ with trivial action
-([[cor-central-extensions-are-classified-by-h-two-with-trivial-action]]).
+[L1] Central extensions are classified by $H^2$ with trivial action ([[cor-central-extensions-are-classified-by-h-two-with-trivial-action]]).
 
 ## Verification
 

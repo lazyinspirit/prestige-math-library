@@ -37,31 +37,19 @@ finite CW pairs; no positive-degree or desuspension groups are asserted here.
 
 ## Facts & Assumptions
 
-**Given:** AC and a closed based cofibration $i:A\hookrightarrow X$ as in the
-statement; write $q:X\to X/A$.
+**Given:** AC and a closed based cofibration $i:A\hookrightarrow X$ as in the statement; write $q:X\to X/A$.
 
-[F1] Reduced $K^0$ is the kernel of basepoint restriction
-([[def-reduced-complex-k-theory]]) and is contravariantly homotopy invariant
-([[prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant]]).
+[F1] Reduced $K^0$ is the kernel of basepoint restriction ([[def-reduced-complex-k-theory]]) and is contravariantly homotopy invariant ([[prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant]]).
 
-[F2] The reduced mapping-cone sequence and its reflection signs are fixed in
-[[def-reduced-cone-suspension-and-cofiber-sequence]].
+[F2] The reduced mapping-cone sequence and its reflection signs are fixed in [[def-reduced-cone-suspension-and-cofiber-sequence]].
 
-[F3] Equality in $K^0$ is equivalent, under AC, to actual isomorphism after a
-common trivial stabilization
-([[prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases]]), and a
-finite-rank bundle over a compact Hausdorff base has a finite complement
-([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]]).
+[F3] Equality in $K^0$ is equivalent, under AC, to actual isomorphism after a common trivial stabilization ([[prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases]]), and a finite-rank bundle over a compact Hausdorff base has a finite complement ([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]]).
 
-[F4] Under DC, bounded real coordinate functions on a closed subset of a
-normal space extend ([[thm-tietze-extension-theorem]]).
+[F4] Under DC, bounded real coordinate functions on a closed subset of a normal space extend ([[thm-tietze-extension-theorem]]).
 
-[F5] Under AC and DC, a compact Hausdorff open cover has a finite subordinate
-partition of unity ([[cor-compact-hausdorff-partitions-of-unity]]).
+[F5] Under AC and DC, a compact Hausdorff open cover has a finite subordinate partition of unity ([[cor-compact-hausdorff-partitions-of-unity]]).
 
-[F6] AC supplies every prescribed dependent-choice sequence needed in [F4]
-and [F5]
-([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
+[F6] AC supplies every prescribed dependent-choice sequence needed in [F4] and [F5] ([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
 
 [A1] AC is used in [F3] and, through [F6], in [F4] and [F5].
 

@@ -33,14 +33,11 @@ is a split extension of $C_4$ by $C_2$.
 
 ## Facts & Assumptions
 
-**Given:** The library convention in which $D_n$ is the dihedral group of
-order $2n$, and the standard presentation of $D_4$.
+**Given:** The library convention in which $D_n$ is the dihedral group of order $2n$, and the standard presentation of $D_4$.
 
-[L1] The dihedral group of order eight is the semidirect product $C_4\rtimes C_2$
-with inversion action ([[cor-dihedral-groups-as-semidirect-products]]).
+[L1] The dihedral group of order eight is the semidirect product $C_4\rtimes C_2$ with inversion action ([[cor-dihedral-groups-as-semidirect-products]]).
 
-[L2] A complement to the kernel is equivalent to a split extension
-([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
+[L2] A complement to the kernel is equivalent to a split extension ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
 
 ## Verification
 

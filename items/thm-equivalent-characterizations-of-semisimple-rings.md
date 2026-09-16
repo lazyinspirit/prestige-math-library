@@ -52,10 +52,7 @@ Assuming the Axiom of Choice, for a unital ring $R$ the following are equivalent
 
 [L8] Assuming the Axiom of Choice, a module is semisimple if and only if every submodule has a complementary submodule. ([[thm-equivalent-characterizations-of-semisimple-modules]]).
 
-[L9] Assume [[def-axiom-of-choice]]. Its actual use here is the AC-qualified
-semisimple complement and submodule/quotient results [L8] and [L2], whose
-proofs use Zorn's lemma. The canonical free cover [L3] and the
-splitting/projectivity equivalence in clauses 1–2 of [L7] are choice-free.
+[L9] Assume [[def-axiom-of-choice]]. Its actual use here is the AC-qualified semisimple complement and submodule/quotient results [L8] and [L2], whose proofs use Zorn's lemma. The canonical free cover [L3] and the splitting/projectivity equivalence in clauses 1–2 of [L7] are choice-free.
 
 ## Proof
 
@@ -69,6 +66,4 @@ splitting/projectivity equivalence in clauses 1–2 of [L7] are choice-free.
 
 ## Remarks
 
-These are left-module characterizations. Applying them to right modules
-requires a separately justified opposite-ring or left/right semisimplicity
-interface; injectivity is not an additional conclusion of this statement.
+These are left-module characterizations. Applying them to right modules requires a separately justified opposite-ring or left/right semisimplicity interface; injectivity is not an additional conclusion of this statement.

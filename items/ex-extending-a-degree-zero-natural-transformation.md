@@ -40,21 +40,13 @@ and this map is independent of the chosen effacement and compatible with the
 connecting morphisms.
 ## Facts & Assumptions
 
-**Given:** A degree-zero natural transformation $u_0:S_0\Rightarrow T_0$ and a
-chosen effacement of one object $A$.
+**Given:** A degree-zero natural transformation $u_0:S_0\Rightarrow T_0$ and a chosen effacement of one object $A$.
 
-[L1] One dimension shift defines the next-degree component from the chosen
-effacement
-([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]]).
+[L1] One dimension shift defines the next-degree component from the chosen effacement ([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]]).
 
-[L2] The resulting component is independent of the effacing morphism and
-commutes with connecting maps
-([[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]],
-[[lem-the-effacement-extension-commutes-with-connecting-morphisms]]).
+[L2] The resulting component is independent of the effacing morphism and commutes with connecting maps ([[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]], [[lem-the-effacement-extension-commutes-with-connecting-morphisms]]).
 
-[L3] Derived-functor universality is built from exactly this extension
-mechanism
-([[thm-derived-functors-are-universal-delta-functors]]).
+[L3] Derived-functor universality is built from exactly this extension mechanism ([[thm-derived-functors-are-universal-delta-functors]]).
 
 ## Verification
 

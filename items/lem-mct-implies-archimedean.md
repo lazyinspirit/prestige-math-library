@@ -79,20 +79,8 @@ five properties into those that do and those that do not.
 
 ## Remarks
 
-- **Why this item exists.** Without it, the natural reading of the equivalence
-  theorem would attach an Archimedean hypothesis to (MCT) as well, and
-  [[rem-where-the-archimedean-hypothesis-is-needed]] would answer its own
-  question wrongly. With it the answer is clean: (LUB), (BW) and (MCT) each
-  imply the Archimedean property, while (NIP) and (CC) do not
-  ([[fs-nested-intervals-implies-lub]], [[fs-cauchy-complete-implies-lub]]).
+- **Why this item exists.** Without it, the natural reading of the equivalence theorem would attach an Archimedean hypothesis to (MCT) as well, and [[rem-where-the-archimedean-hypothesis-is-needed]] would answer its own question wrongly. With it the answer is clean: (LUB), (BW) and (MCT) each imply the Archimedean property, while (NIP) and (CC) do not ([[fs-nested-intervals-implies-lub]], [[fs-cauchy-complete-implies-lub]]).
 
-- **The witness is the same sequence as in [[lem-bw-implies-archimedean]]**, the
-  canonical naturals, but the two arguments use different failures of it. There
-  the sequence is bounded and has no convergent subsequence; here it is
-  nondecreasing and bounded above and has no limit. Neither argument implies the
-  other, because neither (BW) nor (MCT) is assumed in the other's proof.
+- **The witness is the same sequence as in [[lem-bw-implies-archimedean]]**, the canonical naturals, but the two arguments use different failures of it. There the sequence is bounded and has no convergent subsequence; here it is nondecreasing and bounded above and has no limit. Neither argument implies the other, because neither (BW) nor (MCT) is assumed in the other's proof.
 
-- The gap of exactly $1_F$ between consecutive terms is what does the work, and
-  it is available in every ordered field: $1_F > 0$ by
-  [[cor-of-one-positive]], and no smallness of $1_F$ relative to $x$ is
-  possible, since the Cauchy condition is tested at the threshold $1_F$ itself.
+- The gap of exactly $1_F$ between consecutive terms is what does the work, and it is available in every ordered field: $1_F > 0$ by [[cor-of-one-positive]], and no smallness of $1_F$ relative to $x$ is possible, since the Cauchy condition is tested at the threshold $1_F$ itself.

@@ -35,11 +35,9 @@ five-cycle.
 
 ## Facts & Assumptions
 
-**Given:** The star-expansion of $P_4$ with root $v$, teeth $a_1,a_2$, and path
-vertices $b_1,b_2$.
+**Given:** The star-expansion of $P_4$ with root $v$, teeth $a_1,a_2$, and path vertices $b_1,b_2$.
 
-[L1] The only edges using the new vertices are $va_i$ and $a_ib_i$
-([[def-star-expansion-of-a-graph]]).
+[L1] The only edges using the new vertices are $va_i$ and $a_ib_i$ ([[def-star-expansion-of-a-graph]]).
 
 ## Verification
 

@@ -44,9 +44,7 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** Reals $a\le b$, the nondecreasing function
-$F : [a,b] \to \mathbb{R}$, the jump function $J_F$, and the remainder
-$C_F = F-J_F$.
+**Given:** Reals $a\le b$, the nondecreasing function $F : [a,b] \to \mathbb{R}$, the jump function $J_F$, and the remainder $C_F = F-J_F$.
 
 [A1] The symbols are those of the statement.
 

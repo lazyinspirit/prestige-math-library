@@ -35,14 +35,11 @@ the standard circular cylinder, is an embedded submanifold of $\mathbb R^3$.
 
 **Given:** The projection $\pi$ and the function $g(u,v)=u^2+v^2$.
 
-[L1] The preimage of an embedded submanifold under a submersion is an embedded
-submanifold ([[thm-preimage-theorem-for-submanifolds-under-submersions]]).
+[L1] The preimage of an embedded submanifold under a submersion is an embedded submanifold ([[thm-preimage-theorem-for-submanifolds-under-submersions]]).
 
-[L2] A nonempty regular level set is an embedded submanifold
-([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
+[L2] A nonempty regular level set is an embedded submanifold ([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
 
-[L3] The derivative of a square is $2u$, and derivative algebra handles sums
-([[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]]).
+[L3] The derivative of a square is $2u$, and derivative algebra handles sums ([[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]]).
 
 ## Verification
 **Proof technique:** direct.

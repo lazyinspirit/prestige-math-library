@@ -35,18 +35,11 @@ $G$ is $\tau$-critical.
 
 ## Facts & Assumptions
 
-**Given:** A family $\mathcal H$ of finite graphs, a real $\tau>0$, and an
-$\mathcal H$-free graph $G$ that is minimal by order among those satisfying
-$\kappa(G)<|V(G)|^\tau$.
+**Given:** A family $\mathcal H$ of finite graphs, a real $\tau>0$, and an $\mathcal H$-free graph $G$ that is minimal by order among those satisfying $\kappa(G)<|V(G)|^\tau$.
 
-[L1] A graph is $\tau$-critical exactly when it satisfies the strict inequality
-$\kappa(G)<|V(G)|^\tau$ and every proper induced subgraph $H$ satisfies
-$\kappa(H)\geq |V(H)|^\tau$ ([[def-tau-critical-graph]]).
+[L1] A graph is $\tau$-critical exactly when it satisfies the strict inequality $\kappa(G)<|V(G)|^\tau$ and every proper induced subgraph $H$ satisfies $\kappa(H)\geq |V(H)|^\tau$ ([[def-tau-critical-graph]]).
 
-[L2] Every induced subgraph of an $\mathcal H$-free graph is again
-$\mathcal H$-free
-([[def-h-free-and-family-free-graph]],
-[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
+[L2] Every induced subgraph of an $\mathcal H$-free graph is again $\mathcal H$-free ([[def-h-free-and-family-free-graph]], [[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
 
 ## Proof
 

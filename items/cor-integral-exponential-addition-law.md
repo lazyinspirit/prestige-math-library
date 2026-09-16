@@ -33,11 +33,9 @@ $$E(a+b)=E(a)E(b).$$
 
 **Given:** $a,b\in\mathbb R$.
 
-[F1] $E=L^{-1}$, so $L(E(y))=y$, and $L$ is injective
-([[def-integral-exponential]]).
+[F1] $E=L^{-1}$, so $L(E(y))=y$, and $L$ is injective ([[def-integral-exponential]]).
 
-[L1] $L(xy)=L(x)+L(y)$ for positive $x,y$
-([[thm-integral-logarithm-product-law]]).
+[L1] $L(xy)=L(x)+L(y)$ for positive $x,y$ ([[thm-integral-logarithm-product-law]]).
 
 ## Proof
 

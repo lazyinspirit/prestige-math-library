@@ -43,16 +43,11 @@ between residue fields.
 
 ## Facts & Assumptions
 
-**Given:** A morphism of locally ringed spaces
-$(f,f^\sharp):(X,\mathcal O_X)\to(Y,\mathcal O_Y)$ and a point $x\in X$.
+**Given:** A morphism of locally ringed spaces $(f,f^\sharp):(X,\mathcal O_X)\to(Y,\mathcal O_Y)$ and a point $x\in X$.
 
-[F1] A local ring has a unique maximal ideal, and its residue field is the
-quotient by that ideal ([[def-local-ring]]).
+[F1] A local ring has a unique maximal ideal, and its residue field is the quotient by that ideal ([[def-local-ring]]).
 
-[F2] In a morphism of locally ringed spaces, the stalk map
-$f^\sharp_x:\mathcal O_{Y,f(x)}\to\mathcal O_{X,x}$ sends the maximal ideal of
-the source into the maximal ideal of the target
-([[def-morphism-locally-ringed-spaces]]).
+[F2] In a morphism of locally ringed spaces, the stalk map $f^\sharp_x:\mathcal O_{Y,f(x)}\to\mathcal O_{X,x}$ sends the maximal ideal of the source into the maximal ideal of the target ([[def-morphism-locally-ringed-spaces]]).
 
 ## Proof
 

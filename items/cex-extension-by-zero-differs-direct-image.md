@@ -31,16 +31,11 @@ groups $\mathcal F$ on $U$, one has $j_!\mathcal F=j_*\mathcal F$.
 
 ## Facts & Assumptions
 
-**Given:** The open immersion
-$j:U=(-1,0)\cup(0,1)\hookrightarrow X=(-1,1)$ and the constant sheaf
-$\underline{\mathbb Z}$ on $U$.
+**Given:** The open immersion $j:U=(-1,0)\cup(0,1)\hookrightarrow X=(-1,1)$ and the constant sheaf $\underline{\mathbb Z}$ on $U$.
 
-[F1] For an open immersion, direct image is computed by intersection:
-$(j_*\underline{\mathbb Z})(V)=\underline{\mathbb Z}(V\cap U)$
-([[ex-direct-image-open-immersion]]).
+[F1] For an open immersion, direct image is computed by intersection: $(j_*\underline{\mathbb Z})(V)=\underline{\mathbb Z}(V\cap U)$ ([[ex-direct-image-open-immersion]]).
 
-[F2] Extension by zero consists of sections whose support is closed in the test
-open ([[def-extension-by-zero-abelian-sheaf]]).
+[F2] Extension by zero consists of sections whose support is closed in the test open ([[def-extension-by-zero-abelian-sheaf]]).
 
 ## Counterexample
 

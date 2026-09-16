@@ -37,13 +37,9 @@ on every overlap where the expressions are defined.
 
 ## Facts & Assumptions
 
-**Given:** Three vector bundle charts $(U_\alpha,\Phi_\alpha)$,
-$(U_\beta,\Phi_\beta)$, and $(U_\gamma,\Phi_\gamma)$ on one rank-$r$ bundle.
+**Given:** Three vector bundle charts $(U_\alpha,\Phi_\alpha)$, $(U_\beta,\Phi_\beta)$, and $(U_\gamma,\Phi_\gamma)$ on one rank-$r$ bundle.
 
-[L1] In a vector bundle chart overlap,
-$\Phi_\beta\circ\Phi_\alpha^{-1}(p,v)=(p,g_{\beta\alpha}(p)v)$ with
-$g_{\beta\alpha}(p)\in GL(r,\mathbb R)$
-([[def-vector-bundle-chart-and-transition-function]]).
+[L1] In a vector bundle chart overlap, $\Phi_\beta\circ\Phi_\alpha^{-1}(p,v)=(p,g_{\beta\alpha}(p)v)$ with $g_{\beta\alpha}(p)\in GL(r,\mathbb R)$ ([[def-vector-bundle-chart-and-transition-function]]).
 
 ## Proof
 

@@ -30,24 +30,17 @@ $G$. Then $\chi(1)$ divides $[G:Z(G)]$.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, an irreducible complex character $\chi$ of $G$,
-and an irreducible complex representation $V$ of $G$ affording $\chi$.
+**Given:** A finite group $G$, an irreducible complex character $\chi$ of $G$, and an irreducible complex representation $V$ of $G$ affording $\chi$.
 
-[F1] An irreducible complex character has self-inner-product $1$
-([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
+[F1] An irreducible complex character has self-inner-product $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
 
-[F2] The class-function inner product is
-$\langle \varphi,\psi\rangle=\frac1{|G|}\sum_{g\in G}\varphi(g)\overline{\psi(g)}$
-([[def-standard-inner-product-on-complex-class-functions]]).
+[F2] The class-function inner product is $\langle \varphi,\psi\rangle=\frac1{|G|}\sum_{g\in G}\varphi(g)\overline{\psi(g)}$ ([[def-standard-inner-product-on-complex-class-functions]]).
 
-[F3] A central class sum acts on an irreducible representation by a scalar
-([[prop-class-sums-act-by-central-character-scalars]]).
+[F3] A central class sum acts on an irreducible representation by a scalar ([[prop-class-sums-act-by-central-character-scalars]]).
 
-[F4] The degree of an irreducible complex character divides the order of the
-group ([[thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order]]).
+[F4] The degree of an irreducible complex character divides the order of the group ([[thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order]]).
 
-[F5] The center is $Z(G)=\{z\in G:zg=gz\text{ for every }g\in G\}$
-([[def-center-of-a-group]]).
+[F5] The center is $Z(G)=\{z\in G:zg=gz\text{ for every }g\in G\}$ ([[def-center-of-a-group]]).
 
 ## Proof
 

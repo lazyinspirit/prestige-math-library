@@ -35,44 +35,25 @@ $x\in\operatorname{nilrad}(\mathfrak g)$.
 
 **Given:** Such a Lie algebra $\mathfrak g$.
 
-[L1] PBW identifies the associated graded enveloping algebra with a
-finite-variable polynomial algebra after a finite basis is fixed
-([[thm-poincare-birkhoff-witt]]).
+[L1] PBW identifies the associated graded enveloping algebra with a finite-variable polynomial algebra after a finite basis is fixed ([[thm-poincare-birkhoff-witt]]).
 
-[L2] The canonical map $\mathfrak h\to U(\mathfrak h)$ is injective
-([[cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]]).
+[L2] The canonical map $\mathfrak h\to U(\mathfrak h)$ is injective ([[cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]]).
 
-[L3] The Hilbert basis theorem makes finite-variable polynomial algebras
-Noetherian ([[thm-hilbert-basis-theorem]]).
+[L3] The Hilbert basis theorem makes finite-variable polynomial algebras Noetherian ([[thm-hilbert-basis-theorem]]).
 
-[L4] Every finite-dimensional solvable action over an algebraically closed
-characteristic-zero field admits a complete invariant flag and hence a common
-upper-triangular basis
-([[cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations]]).
+[L4] Every finite-dimensional solvable action over an algebraically closed characteristic-zero field admits a complete invariant flag and hence a common upper-triangular basis ([[cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations]]).
 
-[L5] For every finite-dimensional characteristic-zero Lie algebra
-$\mathfrak a$, one has
-$[\mathfrak a,\operatorname{rad}(\mathfrak a)]\subseteq
-\operatorname{nilrad}(\mathfrak a)$
-([[thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical]]).
+[L5] For every finite-dimensional characteristic-zero Lie algebra $\mathfrak a$, one has $[\mathfrak a,\operatorname{rad}(\mathfrak a)]\subseteq \operatorname{nilrad}(\mathfrak a)$ ([[thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical]]).
 
-[L6] A Levi decomposition writes $\mathfrak g=\mathfrak r\rtimes\mathfrak s$
-([[thm-levi-decomposition]]).
+[L6] A Levi decomposition writes $\mathfrak g=\mathfrak r\rtimes\mathfrak s$ ([[thm-levi-decomposition]]).
 
-[L7] The derived algebra of a finite-dimensional solvable
-characteristic-zero algebra lies in its nilradical
-([[cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero]]).
+[L7] The derived algebra of a finite-dimensional solvable characteristic-zero algebra lies in its nilradical ([[cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero]]).
 
-[L8] A finite-dimensional nilpotent algebra has a codimension-one ideal
-containing any prescribed proper subalgebra
-([[cor-a-finite-dimensional-nilpotent-lie-algebra-has-a-codimension-one-ideal-containing-any-given-proper-subalgebra]]).
+[L8] A finite-dimensional nilpotent algebra has a codimension-one ideal containing any prescribed proper subalgebra ([[cor-a-finite-dimensional-nilpotent-lie-algebra-has-a-codimension-one-ideal-containing-any-given-proper-subalgebra]]).
 
-[L9] Derivations preserve the nilradical
-([[prop-derivations-preserve-the-nilradical-in-characteristic-zero]]).
+[L9] Derivations preserve the nilradical ([[prop-derivations-preserve-the-nilradical-in-characteristic-zero]]).
 
-[L10] Every finite-dimensional semisimple Lie algebra over a
-characteristic-zero field is centerless
-([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
+[L10] Every finite-dimensional semisimple Lie algebra over a characteristic-zero field is centerless ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 
 ## Proof
 

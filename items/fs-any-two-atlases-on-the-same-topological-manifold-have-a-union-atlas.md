@@ -52,8 +52,7 @@ Their only cross-transition maps are
 
 $$\psi\circ\operatorname{id}^{-1}(x)=x^3,\qquad \operatorname{id}\circ\psi^{-1}(x)=x^{1/3}.$$
 
-The first is smooth on $\mathbb R$, while the second is not $C^1$ at $0$.
-[given]
+The first is smooth on $\mathbb R$, while the second is not $C^1$ at $0$. [given]
 
 2.1 Since one of the two required transition maps fails to be smooth, [F2] shows that the chart in $\mathcal A$ is not smoothly compatible with the chart in $\mathcal B$. Hence $\mathcal A\cup\mathcal B$ is not pairwise compatible and therefore is not a smooth atlas by [F1]. [F1, F2, step 1.1]
 

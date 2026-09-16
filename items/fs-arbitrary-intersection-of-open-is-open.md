@@ -75,26 +75,10 @@ refutation below shows that the word cannot be deleted.
 
 ## Remarks
 
-- **Exactly one word is deleted, and it is load bearing.**
-  [[thm-open-set-algebra-r]] proves that a finite intersection of open sets is
-  open, and the proof takes the minimum of finitely many positive radii. That
-  minimum is positive because it is one of the radii. An infinite family need
-  supply no such minimum, and the family here supplies none: the radii at the
-  point $0$ are the numbers $1/k$, which have no positive lower bound, precisely
-  by [[cor-archimedean-reciprocal]].
+- **Exactly one word is deleted, and it is load bearing.** [[thm-open-set-algebra-r]] proves that a finite intersection of open sets is open, and the proof takes the minimum of finitely many positive radii. That minimum is positive because it is one of the radii. An infinite family need supply no such minimum, and the family here supplies none: the radii at the point $0$ are the numbers $1/k$, which have no positive lower bound, precisely by [[cor-archimedean-reciprocal]].
 
-- **The failure is Archimedean, not merely set-theoretic.** In a non-Archimedean
-  ordered field a positive infinitesimal lies in every $(-1/k, 1/k)$, so the
-  intersection there is strictly larger than $\{0\}$ and the computation of the
-  intersection above is false there. What makes the claim fail over $\mathbb{R}$
-  is that the reciprocals of the naturals really do get below every positive
-  real.
+- **The failure is Archimedean, not merely set-theoretic.** In a non-Archimedean ordered field a positive infinitesimal lies in every $(-1/k, 1/k)$, so the intersection there is strictly larger than $\{0\}$ and the computation of the intersection above is false there. What makes the claim fail over $\mathbb{R}$ is that the reciprocals of the naturals really do get below every positive real.
 
-- **The named witness** is [[cex-intersection-of-shrinking-intervals-not-open]],
-  which records the same family as a counterexample; the refutation itself is
-  carried out here.
+- **The named witness** is [[cex-intersection-of-shrinking-intervals-not-open]], which records the same family as a counterexample; the refutation itself is carried out here.
 
-- **The dual statement fails too**, by complementation
-  ([[thm-open-set-algebra-r]]): an arbitrary union of closed sets need not be
-  closed, and $\mathbb{R} \setminus \{0\}$, the union of the closed sets
-  $\mathbb{R} \setminus U_k$, is the witness.
+- **The dual statement fails too**, by complementation ([[thm-open-set-algebra-r]]): an arbitrary union of closed sets need not be closed, and $\mathbb{R} \setminus \{0\}$, the union of the closed sets $\mathbb{R} \setminus U_k$, is the witness.

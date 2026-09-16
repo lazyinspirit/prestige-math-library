@@ -38,12 +38,9 @@ In the O'Nan-Scott language, $G$ is of affine type.
 
 **Given:** A finite faithful primitive group $G \le \operatorname{Sym}(\Omega)$ with unique abelian minimal normal subgroup $V$.
 
-[L1] Every nontrivial abelian normal subgroup of a faithful primitive action is regular
-([[cor-abelian-normal-subgroups-of-faithful-primitive-actions-are-regular]]).
+[L1] Every nontrivial abelian normal subgroup of a faithful primitive action is regular ([[cor-abelian-normal-subgroups-of-faithful-primitive-actions-are-regular]]).
 
-[L2] Every minimal normal subgroup of a finite group is characteristically
-simple
-([[lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple]]).
+[L2] Every minimal normal subgroup of a finite group is characteristically simple ([[lem-minimal-normal-subgroups-of-finite-groups-are-characteristically-simple]]).
 
 [A1] A finite abelian characteristically simple group is elementary abelian.
 

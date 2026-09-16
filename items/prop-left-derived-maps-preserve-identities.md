@@ -35,15 +35,11 @@ $$L_n^PF(1_A)=1_{L_n^PF(A)}.$$
 
 **Given:** An object $A\in\mathcal D$ and an integer $n$.
 
-[L1] The map $L_n^PF(1_A)$ is defined from any comparison lift of the identity
-on the chosen resolution of $A$
-([[def-left-derived-map-relative-to-resolution-data]]).
+[L1] The map $L_n^PF(1_A)$ is defined from any comparison lift of the identity on the chosen resolution of $A$ ([[def-left-derived-map-relative-to-resolution-data]]).
 
-[L2] Any comparison map lifting $1_A$ is homotopic to the identity chain map
-([[prop-comparison-of-the-identity-is-homotopic-to-the-identity]]).
+[L2] Any comparison map lifting $1_A$ is homotopic to the identity chain map ([[prop-comparison-of-the-identity-is-homotopic-to-the-identity]]).
 
-[L3] Homology sends the identity chain map to the identity and respects
-composition ([[prop-homology-respects-identities-and-composition]]).
+[L3] Homology sends the identity chain map to the identity and respects composition ([[prop-homology-respects-identities-and-composition]]).
 
 ## Proof
 

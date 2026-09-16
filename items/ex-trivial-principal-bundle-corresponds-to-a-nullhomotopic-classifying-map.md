@@ -34,17 +34,13 @@ nullhomotopic.
 
 ## Facts & Assumptions
 
-[F1] Assuming AC, for $G$ well-pointed of CW type and $X$ CGWH, pullback
-along homotopic maps gives isomorphic numerable principal bundles, and
-pullback gives a bijection from $[X,BG]$ to their isomorphism classes
-([[thm-principal-bundles-are-classified-by-maps-to-bg]]).
+[F1] Assuming AC, for $G$ well-pointed of CW type and $X$ CGWH, pullback along homotopic maps gives isomorphic numerable principal bundles, and pullback gives a bijection from $[X,BG]$ to their isomorphism classes ([[thm-principal-bundles-are-classified-by-maps-to-bg]]).
 
 [F2] The fiber of $EG\to BG$ over $b_0$ is the right $G$-torsor $\{e_0g:g\in G\}$ ([[def-milnor-infinite-join-model-of-eg]]).
 
 ## Verification
 
-**Given:** AC, $G$ and $X$ as in the Claim, and the constant map
-$c:X\to BG$ with value $b_0$.
+**Given:** AC, $G$ and $X$ as in the Claim, and the constant map $c:X\to BG$ with value $b_0$.
 
 1.1 The constant pullback has total space [F2]
 

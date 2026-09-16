@@ -68,22 +68,13 @@ $\mathbb C^m$ is locally bounded.
 
 [L6] For a holomorphic one-variable function that is not identically zero on the connected component under consideration, the logarithm of the modulus is subharmonic ([[thm-log-modulus-of-a-holomorphic-function-is-subharmonic]]), and subharmonic means upper semicontinuous together with the disc submean inequality ([[def-plane-subharmonic-function]]).
 
-[L7] Fatou's lemma controls the liminf of integrals of nonnegative measurable
-functions ([[thm-fatou-lemma]]), and monotone convergence controls increasing
-nonnegative boundary approximations
-([[thm-monotone-convergence-for-the-integral]]).
+[L7] Fatou's lemma controls the liminf of integrals of nonnegative measurable functions ([[thm-fatou-lemma]]), and monotone convergence controls increasing nonnegative boundary approximations ([[thm-monotone-convergence-for-the-integral]]).
 
 [L8] A locally uniform limit of holomorphic functions is holomorphic ([[thm-locally-uniform-limit-of-holomorphic-functions-in-several-variables]]).
 
 [L9] A holomorphic function on a connected open set is determined by its values on any nonempty open subset ([[thm-identity-theorem-in-several-complex-variables]]).
 
-[L10] Subharmonic functions satisfy harmonic comparison on discs; continuous
-circle data have harmonic Poisson extensions; and upper-semicontinuous circle
-data are Borel and bounded above
-([[thm-harmonic-majorant-characterization-of-plane-subharmonicity]],
-[[def-poisson-integral-on-the-disc]],
-[[thm-poisson-integral-solves-the-disc-dirichlet-problem]],
-[[lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined]]).
+[L10] Subharmonic functions satisfy harmonic comparison on discs; continuous circle data have harmonic Poisson extensions; and upper-semicontinuous circle data are Borel and bounded above ([[thm-harmonic-majorant-characterization-of-plane-subharmonicity]], [[def-poisson-integral-on-the-disc]], [[thm-poisson-integral-solves-the-disc-dirichlet-problem]], [[lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined]]).
 
 ## Proof
 
@@ -97,8 +88,7 @@ data are Borel and bounded above
 
 1.4 **Box claim.** If a closed real box $K=I_1\times\cdots\times I_d\subseteq\mathbb R^d$ is covered by countably many closed sets $F_n$, then some $F_n$ contains a smaller closed real box with nondegenerate sides. We prove this by induction on $d$. For $d=1$ it is [L2]. Assume the claim in dimension $d-1$. Write $K=I\times K'$. Enumerate the closed subboxes of $K'$ with rational endpoints in the coordinates of $K'$ as $Q_1,Q_2,\dots$. For each pair $(n,j)$ let $$ E_{n,j}:=\{x\in I : \{x\}\times Q_j\subseteq F_n\}. $$ Each $E_{n,j}$ is closed. Fix $x\in I$. The sections $F_n(x):=\{y\in K' : (x,y)\in F_n\}$ are closed and cover $K'$, so the induction hypothesis in dimension $d-1$ gives some $n$ such that $F_n(x)$ contains a smaller closed box; shrinking slightly if needed, that box contains a rational-endpoint subbox $Q_j$. Hence $x\in E_{n,j}$. So the countable family $E_{n,j}$ covers $I$, and [L2] gives one pair $(n,j)$ for which $E_{n,j}$ contains a nondegenerate closed subinterval $J$. Then $J\times Q_j\subseteq F_n$, proving the claim. [L2, induction, construct]
 
-1.5 Whenever $0\le d<1<\eta$, one can choose radii
-$d<s<r_1<1<r_2<\eta$. [construct]
+1.5 Whenever $0\le d<1<\eta$, one can choose radii $d<s<r_1<1<r_2<\eta$. [construct]
 
 2.1 For each positive integer $B$, define $$ \Omega_B:=\Bigl\{z'\in\overline\Delta_1^{m-1} : |f(z',w)|\le B \text{ for every } |w|\le1\Bigr\}. $$ For fixed $w$ with $|w|\le1$, the induction hypothesis applied to $z'\mapsto f(z',w)$ makes that function holomorphic, hence continuous, on $\Delta_2^{m-1}$. Therefore each set $\{z': |f(z',w)|\le B\}$ is closed, and so every $\Omega_B$ is closed. Also $\bigcup_{B\ge1}\Omega_B=\overline\Delta_1^{m-1}$, because for fixed $z'$ the slice $w\mapsto f(z',w)$ is holomorphic on $\Delta_2$ and therefore bounded on $|w|\le1$. [L1, step 1.2, ih]
 

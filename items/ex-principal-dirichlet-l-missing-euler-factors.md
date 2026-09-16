@@ -30,8 +30,7 @@ removing exactly the Euler factors at the primes dividing the modulus.
 
 ## Facts & Assumptions
 
-**Given:** The principal factorization theorem
-([[thm-principal-dirichlet-l-factorization]]).
+**Given:** The principal factorization theorem ([[thm-principal-dirichlet-l-factorization]]).
 
 ## Verification
 

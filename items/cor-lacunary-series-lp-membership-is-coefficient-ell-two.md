@@ -42,14 +42,10 @@ Completeness above one is supplied by
 **Proof technique:** apply the finite estimate to tails and use completeness.
 
 1.1 If $(a_j)\in\ell^2$, its coefficient tails tend to zero. The finite [given, algebra]
-estimate applied to differences of partial sums therefore makes them Cauchy
-in $L^p$ for $p\ge1$, and Cauchy in $d_p$ for $0<p<1$ (raise the displayed
-finite estimate to the power $p$). [given, algebra]
+estimate applied to differences of partial sums therefore makes them Cauchy in $L^p$ for $p\ge1$, and Cauchy in $d_p$ for $0<p<1$ (raise the displayed finite estimate to the power $p$). [given, algebra]
 
 2.1 The relevant cited completeness theorem gives a limit in the respective [step 1.1]
 space, so the partial sums converge. [step 1.1]
 
 3.1 Conversely, convergence makes the partial sums Cauchy. The lower finite [step 1.1, step 2.1, algebra]
-estimate applied to every difference of two partial sums forces the
-corresponding coefficient tail to tend to zero in $\ell^2$. Thus
-$(a_j)\in\ell^2$, proving both implications. [step 1.1, step 2.1, algebra] ∎
+estimate applied to every difference of two partial sums forces the corresponding coefficient tail to tend to zero in $\ell^2$. Thus $(a_j)\in\ell^2$, proving both implications. [step 1.1, step 2.1, algebra] ∎

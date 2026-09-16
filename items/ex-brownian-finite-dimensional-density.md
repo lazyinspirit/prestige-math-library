@@ -45,16 +45,11 @@ $$p(x_1,\ldots,x_n)=\prod_{j=1}^n\frac{1}{\sqrt{2\pi(t_j-t_{j-1})}}\exp\!\left(-
 
 [F5] Tonelli holds for nonnegative product-measurable functions, and finite products of one-dimensional Lebesgue measure agree with Euclidean Lebesgue measure on Borel sets. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]].
 
-[F6] The declared supplier
-`lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness`
-gives: assuming countable choice, a $C^1$ diffeomorphism $T:U\to V$ satisfies
-$\int_Vf=\int_U(f\circ T)|\det DT|$ for every nonnegative Borel $f$.
+[F6] The declared supplier `lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness` gives: assuming countable choice, a $C^1$ diffeomorphism $T:U\to V$ satisfies $\int_Vf=\int_U(f\circ T)|\det DT|$ for every nonnegative Borel $f$.
 
 [F7] Continuous partial derivatives give the total derivative, whose matrix is the Jacobian, and a triangular matrix has determinant equal to the product of its diagonal entries. [[thm-continuous-partial-derivatives-imply-total-differentiability]], [[thm-determinant-of-a-triangular-matrix]].
 
-[F8] The declared supplier
-`thm-choice-implies-dependent-implies-countable-choice` gives that AC implies
-countable choice, and [[def-axiom-of-choice]] fixes the ambient assumption.
+[F8] The declared supplier `thm-choice-implies-dependent-implies-countable-choice` gives that AC implies countable choice, and [[def-axiom-of-choice]] fixes the ambient assumption.
 
 ## Verification
 
@@ -72,20 +67,8 @@ countable choice, and [[def-axiom-of-choice]] fixes the ambient assumption.
 
 ## Remarks
 
-- The suppliers of [F6] and [F8] are homed on
-  `euclidean-surface-measure-divergence-and-green-identities` (order 458.0021)
-  and `weak-choice-principles-and-sierpinskis-theorem` (order 665), while this
-  examples page has order 288.132. Step-5b resolution moved those citations from
-  item-level `forward_refs` to `deps`, since both suppliers are published and
-  load bearing, and [F6] and [F8] name them by ID rather than linking because
-  their A pages sit the other way along the reading order. The batch-2 manifest
-  whitelists both pages under this page's `forwardRefs`, so the page-level
-  dependency is declared as well; rehoming this example to either of those
-  subjects would be an owner-only reading-order change.
+- The suppliers of [F6] and [F8] are homed on `euclidean-surface-measure-divergence-and-green-identities` (order 458.0021) and `weak-choice-principles-and-sierpinskis-theorem` (order 665), while this examples page has order 288.132. Step-5b resolution moved those citations from item-level `forward_refs` to `deps`, since both suppliers are published and load bearing, and [F6] and [F8] name them by ID rather than linking because their A pages sit the other way along the reading order. The batch-2 manifest whitelists both pages under this page's `forwardRefs`, so the page-level dependency is declared as well; rehoming this example to either of those subjects would be an owner-only reading-order change.
 
 ## Source notes
 
-Sousi, Section 6.1 (printed p. 51), supplies the Brownian independent-increment
-structure. The density and the triangular change-of-variables calculation are
-derived explicitly above from the library's normal-density, product-measure,
-and Borel change-of-variables results.
+Sousi, Section 6.1 (printed p. 51), supplies the Brownian independent-increment structure. The density and the triangular change-of-variables calculation are derived explicitly above from the library's normal-density, product-measure, and Borel change-of-variables results.

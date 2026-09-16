@@ -33,12 +33,9 @@ $$\{F,G\}=\sum_i\left(\frac{\partial F}{\partial q^i}\frac{\partial G}{\partial 
 
 **Given:** Smooth functions $F,G$ in a canonical cotangent chart.
 
-[F1] Hamilton's equations give
-$X_G=\sum_i(G_{p_i}\partial_{q^i}-G_{q^i}\partial_{p_i})$.
-[[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
+[F1] Hamilton's equations give $X_G=\sum_i(G_{p_i}\partial_{q^i}-G_{q^i}\partial_{p_i})$. [[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
 
-[F2] $\{F,G\}=X_G(F)$.
-[[def-poisson-bracket-on-a-symplectic-manifold]].
+[F2] $\{F,G\}=X_G(F)$. [[def-poisson-bracket-on-a-symplectic-manifold]].
 
 ## Proof
 

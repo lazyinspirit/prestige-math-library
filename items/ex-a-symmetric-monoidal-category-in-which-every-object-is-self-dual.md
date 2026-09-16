@@ -32,14 +32,11 @@ has the property that every object is isomorphic to its dual.
 
 **Given:** A finite-dimensional vector space $V$.
 
-[L1] The dual object $V^*$ exists in the category
-([[thm-finite-dimensional-vector-spaces-are-rigid]]).
+[L1] The dual object $V^*$ exists in the category ([[thm-finite-dimensional-vector-spaces-are-rigid]]).
 
-[L2] $\dim(V^*)=\dim(V)$
-([[thm-dual-family-is-a-basis-in-finite-dimension]]).
+[L2] $\dim(V^*)=\dim(V)$ ([[thm-dual-family-is-a-basis-in-finite-dimension]]).
 
-[L3] Equal finite dimensions imply isomorphism
-([[cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension]]).
+[L3] Equal finite dimensions imply isomorphism ([[cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension]]).
 
 ## Verification
 

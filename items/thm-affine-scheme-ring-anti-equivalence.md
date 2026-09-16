@@ -31,9 +31,7 @@ from commutative rings to affine schemes, with quasi-inverse global sections.
 
 [F1] Global sections of an affine spectrum recover its ring ([[thm-global-sections-affine-scheme]]).
 
-[F2] A ring map gives a morphism of affine spectra
-([[def-morphism-affine-schemes-from-ring-map]]), and its stalk maps are local
-([[lem-spectrum-map-stalk-homomorphisms-local]]).
+[F2] A ring map gives a morphism of affine spectra ([[def-morphism-affine-schemes-from-ring-map]]), and its stalk maps are local ([[lem-spectrum-map-stalk-homomorphisms-local]]).
 
 ## Proof
 

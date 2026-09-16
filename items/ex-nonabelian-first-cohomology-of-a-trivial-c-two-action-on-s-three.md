@@ -32,11 +32,9 @@ $H^1_{\mathrm{nab}}(C_2,S_3)$ has exactly two elements.
 
 **Given:** The trivial action of $C_2$ on $S_3$ ([[def-symmetric-group]]).
 
-[L1] Nonabelian first cohomology is the orbit set of crossed homomorphisms under
-coefficient-group conjugation ([[def-first-nonabelian-cohomology-as-a-pointed-set]]).
+[L1] Nonabelian first cohomology is the orbit set of crossed homomorphisms under coefficient-group conjugation ([[def-first-nonabelian-cohomology-as-a-pointed-set]]).
 
-[L2] It classifies complements as a pointed set
-([[thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set]]).
+[L2] It classifies complements as a pointed set ([[thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set]]).
 
 ## Verification
 

@@ -30,13 +30,9 @@ The set $A$ is exactly the set of atoms of $\mu$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and a finite Borel measure $\mu$ on
-$\mathbb{R}$.
+**Given:** The Axiom of Countable Choice and a finite Borel measure $\mu$ on $\mathbb{R}$.
 
-[L1] Assuming Countable Choice, finite-on-compacts Borel measures correspond
-to increasing right-continuous distribution functions, and the resulting
-Lebesgue-Stieltjes measure is the original measure.
-([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]])
+[L1] Assuming Countable Choice, finite-on-compacts Borel measures correspond to increasing right-continuous distribution functions, and the resulting Lebesgue-Stieltjes measure is the original measure. ([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]])
 
 [L2] For a Lebesgue-Stieltjes measure, atoms are exactly positive jumps, and there are at most countably many of them. ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
 

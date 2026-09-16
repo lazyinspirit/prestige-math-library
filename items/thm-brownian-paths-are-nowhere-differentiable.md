@@ -1,0 +1,62 @@
+---
+id: thm-brownian-paths-are-nowhere-differentiable
+kind: theorem
+title: "Brownian paths are nowhere differentiable"
+status: draft
+origin: pipeline
+deps: [def-brownian-motion, def-derivative, def-one-sided-derivatives-of-real-functions, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-first-borel-cantelli-lemma-for-events, lem-rat-embeds-dense, def-axiom-of-choice]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Rick Durrett, Probability: Theory and Examples, fifth edition, Theorem 7.1.6"
+      url: "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+    - title: "Perla Sousi, Advanced Probability, Theorem 6.41"
+      url: "http://www.statslab.cam.ac.uk/~ps422/mynotes.pdf"
+---
+
+## Statement
+
+Let $B$ be a standard Brownian motion [[def-brownian-motion]]. Almost surely,
+the path $t\mapsto B_t(\omega)$ has no finite two-sided derivative at any
+$t>0$, and no finite right derivative $B'_+(0)$ at $t=0$. The assertion is uniform over
+the possible times: it is not the statement that the path fails to be
+differentiable at any single prescribed time.
+
+## Facts & Assumptions
+
+**Given:** AC, a standard Brownian motion $B$, and an integer $C\ge1$ together with rationals $0\le a<b$.
+
+[F1] The increments of $B$ over disjoint time intervals are independent with laws $N(0,h)$ for interval length $h$, and one probability-one event carries all continuous paths. [[def-brownian-motion]]
+
+[F2] If a real function $f$ has a finite two-sided derivative $f'(s)$ at an interior point $s$, or a finite right derivative $f'_+(s)$ at a left endpoint, or a finite left derivative $f'_-(s)$ at a right endpoint, then with $\varepsilon=1$ in [[def-derivative]] and [[def-one-sided-derivatives-of-real-functions]] there is $\delta>0$ such that $|f(t)-f(s)-L(t-s)|\le|t-s|$ for the relevant $t$ with $0<|t-s|<\delta$, where $L$ is the corresponding derivative; in particular $|f(t)-f(s)|\le(|L|+1)|t-s|$ there. [[def-derivative]] [[def-one-sided-derivatives-of-real-functions]]
+
+[F3] $Z\sim N(0,1)$ has the strictly positive density $\varphi(x)=e^{-x^2/2}/\sqrt{2\pi}$; consequently $P(|Z|\le y)\le y$ for every $0<y\le1$. [[def-standard-normal-and-normal-laws]] [[lem-normal-density-has-total-mass-one]]
+
+[F4] If events $G_n$ satisfy $\sum_nP(G_n)<\infty$, then almost surely only finitely many $G_n$ occur, that is, $P(\limsup_nG_n)=0$. [[cor-first-borel-cantelli-lemma-for-events]]
+
+[F5] The rationals are dense in $\mathbb R$: every point of $[0,\infty)$ lies in a nondegenerate interval with rational endpoints. [[lem-rat-embeds-dense]]
+
+[F6] AC is the ambient assumption of the Brownian and normal-law interfaces. [[def-axiom-of-choice]]
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Suppose the continuous path $f:=B(\omega)$ has a finite two-sided derivative at some $s\in(a,b)$, or a finite right derivative at $s=a$, or a finite left derivative at $s=b$, with absolute value at most $C$; fix the appropriate one-sided interval of validity and use [F2] with that side to obtain $\delta>0$ such that $|f(t)-f(s)|\le(C+1)|t-s|$ for every $t\in[a,b]$ on that side of $s$ with $0<|t-s|<\delta$. [given, F2]
+
+2.1 Fix $n\ge4$ with $(b-a)/n<\delta/4$, write $h:=(b-a)/n$ and $t_k:=a+kh$, and let $k_0$ be the integer with $a+k_0h\le s<a+(k_0+1)h$ and $0\le k_0\le n-1$; if $k_0+3\le n$ take the block of increments over $[t_{k_0},t_{k_0+1}]$, $[t_{k_0+1},t_{k_0+2}]$, $[t_{k_0+2},t_{k_0+3}]$, and otherwise take the block over $[t_{n-3},t_{n-2}]$, $[t_{n-2},t_{n-1}]$, $[t_{n-1},t_n]$; in either case all six endpoints of the block lie in $[a,b]$, on the side of $s$ allowed in step 1.1 for the endpoint cases, and within distance $4h<\delta$ of $s$, so each of the three increments $f(t_{k+i})-f(t_{k+i-1})$ has absolute value at most $2(C+1)\cdot4h=8(C+1)h=:D/n$ with $D:=8(C+1)(b-a)$. [step 1.1, given]
+
+3.1 Define $G_n:=\{\omega:\ \text{some block of three consecutive increments }B_{t_{k+i}}-B_{t_{k+i-1}}\ (k=0,\dots,n-3,\ i=1,2,3)\ \text{has all three absolute values}\le D/n\}$, where $h=(b-a)/n$; the increments of one block are independent with laws $N(0,h)$ by [F1], so by [F3] and independence $P(\text{a fixed block lies in }G_n)\le y_n^3$ with $y_n:=D/\sqrt{(b-a)n}=8(C+1)\sqrt{(b-a)/n}\le1$ for $n$ large, whence $P(G_n)\le n\,y_n^3=8^3(C+1)^3(b-a)^{3/2}n^{-1/2}$ and $\sum_nP(G_n)<\infty$. [given, F1, F3, step 2.1]
+
+4.1 By [F4] and step 3.1, almost surely $G_n$ fails for all sufficiently large $n$; by step 2.1 this means that almost surely the path has no finite derivative with absolute value at most $C$ at any point of $[a,b]$ (two-sided on $(a,b)$, right at $a$, left at $b$). [step 2.1, step 3.1, F4]
+
+5.1 Taking the union over the countably many pairs of rationals $a<b$ with $[a,b]\cap[0,\infty)\ne\emptyset$ and over integers $C\ge1$, and using [F5] to see that every $s\ge0$ lies in some nondegenerate rational interval, we obtain: almost surely no time $s\ge0$ has a finite two-sided derivative (for $s>0$) or finite right derivative (for $s=0$). [step 4.1, F5]
+
+6.1 The boundary cases are covered by the block choices of step 2.1: $s=0$ uses the right-handed block beginning at $a$, $s=b$ the left-handed block ending at $b$, and interior times either the forward or the backward block, all of which stay inside $[a,b]$; small $n$ and the degenerate case $n<4$ are irrelevant because the almost-sure statement is a limiting one over $n\to\infty$; rounding the derivative bound up to an integer $C$ loses nothing, and the finite-difference ratio of [F2] is the definition-level form of [[def-derivative]]; AC enters only through [F6]. [step 2.1, step 4.1, F2, F6, given] ∎
+
+## Source notes
+
+This is the Dvoretsky-Erdős-Kakutani mesh argument as in Durrett, Theorem 7.1.6 and its proof: differentiability at a single time forces three consecutive increments of every sufficiently fine uniform mesh to be small, an event whose probability is bounded by a summable multiple of $n^{-1/2}$ after a union over the $O(n)$ possible blocks. A fixed-time argument would only produce an uncountable intersection of null events; the mesh argument converts this into one countable Borel-Cantelli statement. The constants above are the explicit ones from the argument: $8(C+1)$ for the block increment and $8^3(C+1)^3(b-a)^{3/2}$ for the tail bound.

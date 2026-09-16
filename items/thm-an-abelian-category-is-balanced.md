@@ -32,23 +32,15 @@ isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** An abelian category and a morphism $f:A\to B$ that is both monic and
-epic.
+**Given:** An abelian category and a morphism $f:A\to B$ that is both monic and epic.
 
-[L1] The kernel of a monomorphism is zero, and the cokernel of an epimorphism
-is zero
-([[prop-the-kernel-of-a-monomorphism-is-zero-and-the-cokernel-of-an-epimorphism-is-zero]]).
+[L1] The kernel of a monomorphism is zero, and the cokernel of an epimorphism is zero ([[prop-the-kernel-of-a-monomorphism-is-zero-and-the-cokernel-of-an-epimorphism-is-zero]]).
 
-[L2] The cokernel of $0\to A$ is $A$, and the kernel of $B\to0$ is $B$
-([[prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism]]).
+[L2] The cokernel of $0\to A$ is $A$, and the kernel of $B\to0$ is $B$ ([[prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism]]).
 
-[L3] Every morphism has a canonical factorization
-$A\to\operatorname{coim}(f)\to\operatorname{im}(f)\to B$
-([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
+[L3] Every morphism has a canonical factorization $A\to\operatorname{coim}(f)\to\operatorname{im}(f)\to B$ ([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
 
-[L4] In an abelian category the canonical map
-$\operatorname{coim}(f)\to\operatorname{im}(f)$ is an isomorphism
-([[def-abelian-category]]).
+[L4] In an abelian category the canonical map $\operatorname{coim}(f)\to\operatorname{im}(f)$ is an isomorphism ([[def-abelian-category]]).
 
 ## Proof
 

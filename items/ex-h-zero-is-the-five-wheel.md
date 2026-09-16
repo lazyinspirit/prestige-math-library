@@ -35,9 +35,7 @@ The graph $H_0$ is the five-wheel.
 
 **Given:** The graph $H_0$ on vertices $w,v_1,v_2,v_3,v_4,v_5$.
 
-[L1] In $H_0$, the vertex $w$ is adjacent to each $v_i$, and
-$v_1v_2v_3v_4v_5v_1$ is a five-cycle
-([[def-h-zero-through-h-five]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L1] In $H_0$, the vertex $w$ is adjacent to each $v_i$, and $v_1v_2v_3v_4v_5v_1$ is a five-cycle ([[def-h-zero-through-h-five]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Verification
 

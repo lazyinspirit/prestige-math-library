@@ -95,31 +95,10 @@ arbitrarily late.
 
 ## Remarks
 
-- **The two halves are not interchangeable.** "Eventually below $L + \varepsilon$"
-  says $L$ is not exceeded in the long run; "frequently above $L - \varepsilon$"
-  says $L$ is approached again and again. Weakening the first to *frequently*
-  would make the condition hold for $L = \liminf$ as well, and strengthening the
-  second to *eventually* would force convergence, which is exactly the extra
-  content of [[thm-convergence-iff-limsup-equals-liminf]].
+- **The two halves are not interchangeable.** "Eventually below $L + \varepsilon$" says $L$ is not exceeded in the long run; "frequently above $L - \varepsilon$" says $L$ is approached again and again. Weakening the first to *frequently* would make the condition hold for $L = \liminf$ as well, and strengthening the second to *eventually* would force convergence, which is exactly the extra content of [[thm-convergence-iff-limsup-equals-liminf]].
 
-- **Real $\varepsilon$ is used throughout, and no rational test is involved.**
-  Neither condition is a convergence statement, so [[def-real-limit]] and its
-  quantification over rational $\varepsilon$ do not enter. Where a convergence
-  hypothesis has to be fed into this lemma, as in
-  [[thm-convergence-iff-limsup-equals-liminf]], the passage between rational and
-  real $\varepsilon$ is made there, by the sanctioned remark of [[def-sequence]].
+- **Real $\varepsilon$ is used throughout, and no rational test is involved.** Neither condition is a convergence statement, so [[def-real-limit]] and its quantification over rational $\varepsilon$ do not enter. Where a convergence hypothesis has to be fed into this lemma, as in [[thm-convergence-iff-limsup-equals-liminf]], the passage between rational and real $\varepsilon$ is made there, by the sanctioned remark of [[def-sequence]].
 
-- **Why the epsilon lemmas for the real supremum are not cited.**
-  [[lem-sup-epsilon]] and [[lem-inf-epsilon]] characterise the *real* supremum and
-  infimum of a nonempty set bounded on the relevant side. Here $s_n$ may be
-  $+\infty$ and the family $\{s_n\}$ may be unbounded below in $\mathbb{R}$, so
-  neither lemma applies to the sets actually in play; the corresponding steps
-  above are made directly from the least-upper-bound and greatest-lower-bound
-  properties in $\overline{\mathbb{R}}$ ([[lem-extended-reals-complete]]), which
-  need no hypothesis.
+- **Why the epsilon lemmas for the real supremum are not cited.** [[lem-sup-epsilon]] and [[lem-inf-epsilon]] characterise the *real* supremum and infimum of a nonempty set bounded on the relevant side. Here $s_n$ may be $+\infty$ and the family $\{s_n\}$ may be unbounded below in $\mathbb{R}$, so neither lemma applies to the sets actually in play; the corresponding steps above are made directly from the least-upper-bound and greatest-lower-bound properties in $\overline{\mathbb{R}}$ ([[lem-extended-reals-complete]]), which need no hypothesis.
 
-- **The Archimedean property is what closes the converse.** Steps 2.3 and 2.4
-  give $L - \varepsilon \le \Lambda \le L + \varepsilon$ for every positive real
-  $\varepsilon$, and passing from that to $\Lambda = L$ needs a positive real
-  strictly below any prescribed positive gap; [[cor-archimedean-reciprocal]]
-  supplies $1/m$.
+- **The Archimedean property is what closes the converse.** Steps 2.3 and 2.4 give $L - \varepsilon \le \Lambda \le L + \varepsilon$ for every positive real $\varepsilon$, and passing from that to $\Lambda = L$ needs a positive real strictly below any prescribed positive gap; [[cor-archimedean-reciprocal]] supplies $1/m$.

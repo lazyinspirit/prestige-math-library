@@ -44,16 +44,11 @@ $\exp:\mathbb C\to\mathbb C^\times$.
 
 **Given:** The logarithm germ surface $\mathcal R_{\log}$ and its projection $p$.
 
-[L1] On the principal strip $P=\{w:-\pi<\operatorname{Im}w<\pi\}$, the
-exponential is a biholomorphism onto the slit plane
-$S=\mathbb C\setminus(-\infty,0]$, with inverse the principal logarithm
-([[thm-principal-exponential-biholomorphism-from-principal-strip]]).
+[L1] On the principal strip $P=\{w:-\pi<\operatorname{Im}w<\pi\}$, the exponential is a biholomorphism onto the slit plane $S=\mathbb C\setminus(-\infty,0]$, with inverse the principal logarithm ([[thm-principal-exponential-biholomorphism-from-principal-strip]]).
 
-[L2] $\exp u=\exp v$ exactly when $u-v\in2\pi i\mathbb Z$
-([[thm-kernel-and-fibres-of-complex-exponential]]).
+[L2] $\exp u=\exp v$ exactly when $u-v\in2\pi i\mathbb Z$ ([[thm-kernel-and-fibres-of-complex-exponential]]).
 
-[L3] The germ projection on a complete analytic function is a local
-biholomorphism ([[thm-germ-projection-is-a-local-biholomorphism]]).
+[L3] The germ projection on a complete analytic function is a local biholomorphism ([[thm-germ-projection-is-a-local-biholomorphism]]).
 
 ## Proof
 

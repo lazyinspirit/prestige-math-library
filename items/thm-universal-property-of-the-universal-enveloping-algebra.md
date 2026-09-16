@@ -34,17 +34,13 @@ $\overline f:U(\mathfrak g)\to A$ satisfying $\overline f\iota_{\mathfrak g}=f$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie-algebra map $f:\mathfrak g\to A_{\mathrm{Lie}}$ into a unital
-associative $k$-algebra.
+**Given:** A Lie-algebra map $f:\mathfrak g\to A_{\mathrm{Lie}}$ into a unital associative $k$-algebra.
 
-[L1] A linear map from $\mathfrak g$ extends uniquely to an algebra map from
-$T(\mathfrak g)$ ([[thm-universal-property-of-the-tensor-algebra]]).
+[L1] A linear map from $\mathfrak g$ extends uniquely to an algebra map from $T(\mathfrak g)$ ([[thm-universal-property-of-the-tensor-algebra]]).
 
-[L2] A map killing an ideal factors uniquely through the quotient
-([[thm-quotient-ring-universal-property]]).
+[L2] A map killing an ideal factors uniquely through the quotient ([[thm-quotient-ring-universal-property]]).
 
-[L3] The defining relators and canonical map are those of
-[[def-universal-enveloping-algebra]].
+[L3] The defining relators and canonical map are those of [[def-universal-enveloping-algebra]].
 
 ## Proof
 

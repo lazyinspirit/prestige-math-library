@@ -47,26 +47,19 @@ Then the following are equivalent.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$ and
-its closed unit ball $\overline B_X$.
+**Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$ and its closed unit ball $\overline B_X$.
 
-[L1] A chosen ordered basis yields a topological isomorphism with a coordinate
-space ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] A chosen ordered basis yields a topological isomorphism with a coordinate space ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] Riesz's lemma gives a unit vector at distance $>\alpha$ from every proper
-closed subspace ([[lem-riesz-lemma]]).
+[L2] Riesz's lemma gives a unit vector at distance $>\alpha$ from every proper closed subspace ([[lem-riesz-lemma]]).
 
-[L3] Finite-dimensional normed subspaces are closed
-([[cor-finite-dimensional-subspaces-are-closed]]).
+[L3] Finite-dimensional normed subspaces are closed ([[cor-finite-dimensional-subspaces-are-closed]]).
 
-[L4] Compact metric spaces are totally bounded
-([[thm-compact-implies-complete-and-totally-bounded]]).
+[L4] Compact metric spaces are totally bounded ([[thm-compact-implies-complete-and-totally-bounded]]).
 
-[L5] Closed and bounded subsets of $\mathbb R^m$ are compact for $m\ge1$
-([[thm-heine-borel-rn]]).
+[L5] Closed and bounded subsets of $\mathbb R^m$ are compact for $m\ge1$ ([[thm-heine-borel-rn]]).
 
-[L6] $\mathbb C$ is the real coordinate plane
-([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L6] $\mathbb C$ is the real coordinate plane ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
 ## Proof
 
@@ -88,5 +81,4 @@ closed subspace ([[lem-riesz-lemma]]).
 
 ## Remarks
 
-- The reverse implication is choice free: compactness gives one finite net, and
-  one application of Riesz's lemma is enough.
+- The reverse implication is choice free: compactness gives one finite net, and one application of Riesz's lemma is enough.

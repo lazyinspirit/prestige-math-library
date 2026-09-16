@@ -42,15 +42,9 @@ to the identity through the same Gram-normalized injective linear paths.
 
 **Given:** $\mathbb F\in\{\mathbb R,\mathbb C\}$ and fixed $n\geq0$.
 
-[F1] Stable Stiefel space is the weak direct limit of its finite stages, whose
-points are orthonormal $n$-frames
-([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
+[F1] Stable Stiefel space is the weak direct limit of its finite stages, whose points are orthonormal $n$-frames ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
-[F2] Franklin and Thomas, *Topology Proceedings* 2 (1977), printed pp.111 and
-113, define a $k_\omega$-decomposition as an increasing compact-Hausdorff
-exhaustion with the weak topology and state in Property 4 that products of two
-such decompositions have the weak topology of the stagewise products. In
-particular, product with the compact interval is tested on finite stages.
+[F2] Franklin and Thomas, *Topology Proceedings* 2 (1977), printed pp.111 and 113, define a $k_\omega$-decomposition as an increasing compact-Hausdorff exhaustion with the weak topology and state in Property 4 that products of two such decompositions have the weak topology of the stagewise products. In particular, product with the compact interval is tested on finite stages.
 
 ## Proof
 

@@ -34,15 +34,11 @@ $\mathfrak g$ for every $x\in\mathfrak g$.
 
 **Given:** A finite-dimensional Lie algebra $\mathfrak g$.
 
-[L1] Nilpotence is termination of the lower central series
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] Nilpotence is termination of the lower central series ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] A nil finite-dimensional representation has a flag lowered by every
-represented operator ([[thm-engels-triangularization-theorem]]).
+[L2] A nil finite-dimensional representation has a flag lowered by every represented operator ([[thm-engels-triangularization-theorem]]).
 
-[L3] Inner derivations form the adjoint representation, with
-$\operatorname{ad}_x(y)=[x,y]$
-([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
+[L3] Inner derivations form the adjoint representation, with $\operatorname{ad}_x(y)=[x,y]$ ([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
 
 ## Proof
 

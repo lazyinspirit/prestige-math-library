@@ -34,9 +34,7 @@ isomorphic.
 
 **Given:** The groups $G=\mathbb Z$ and $H=\mathbb Z\oplus\mathbb Q$.
 
-[L1] The profinite completion is built from all finite quotients of the group
-([[def-profinite-completion-of-an-abstract-group]],
-[[thm-profinite-completion-is-functorial]]).
+[L1] The profinite completion is built from all finite quotients of the group ([[def-profinite-completion-of-an-abstract-group]], [[thm-profinite-completion-is-functorial]]).
 
 ## Refutation
 

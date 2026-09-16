@@ -43,25 +43,17 @@ matrix multiplication.
 
 ## Facts & Assumptions
 
-**Given:** The displayed trivial bundle, fixed matrices $A,B$, coordinates,
-and standard global frame.
+**Given:** The displayed trivial bundle, fixed matrices $A,B$, coordinates, and standard global frame.
 
-[F1] A connection is a real-linear operator on sections satisfying
-$\nabla(fs)=df\otimes s+f\nabla s$. [[def-connection-on-a-smooth-vector-bundle]].
+[F1] A connection is a real-linear operator on sections satisfying $\nabla(fs)=df\otimes s+f\nabla s$. [[def-connection-on-a-smooth-vector-bundle]].
 
-[F2] In a frame with connection matrix $\omega$, the curvature matrix is
-$\Omega=d\omega+\omega\wedge\omega$, with
-$(\omega\wedge\omega)^i{}_j=\sum_k\omega^i{}_k\wedge\omega^k{}_j$ in that
-order. [[thm-curvature-two-form-structure-equation]].
+[F2] In a frame with connection matrix $\omega$, the curvature matrix is $\Omega=d\omega+\omega\wedge\omega$, with $(\omega\wedge\omega)^i{}_j=\sum_k\omega^i{}_k\wedge\omega^k{}_j$ in that order. [[thm-curvature-two-form-structure-equation]].
 
-[F3] If a form is written in coordinate wedges, its exterior derivative is
-obtained by differentiating the scalar coefficients. [[thm-local-coordinate-formula-for-the-exterior-derivative]].
+[F3] If a form is written in coordinate wedges, its exterior derivative is obtained by differentiating the scalar coefficients. [[thm-local-coordinate-formula-for-the-exterior-derivative]].
 
-[F4] The wedge product is the pointwise alternating product of forms.
-[[def-wedge-product-of-differential-forms]].
+[F4] The wedge product is the pointwise alternating product of forms. [[def-wedge-product-of-differential-forms]].
 
-[F5] Matrix multiplication uses the ordered entry formula
-$(CD)_{ij}=\sum_k C_{ik}D_{kj}$. [[def-matrix-product-and-identity-matrix]].
+[F5] Matrix multiplication uses the ordered entry formula $(CD)_{ij}=\sum_k C_{ik}D_{kj}$. [[def-matrix-product-and-identity-matrix]].
 
 ## Proof
 

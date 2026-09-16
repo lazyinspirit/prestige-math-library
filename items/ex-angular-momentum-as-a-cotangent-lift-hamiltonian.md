@@ -35,8 +35,7 @@ $$H_a(q,p)=a\cdot(q\times p).$$
 
 **Given:** Euclidean dot and cross products identify covectors with vectors.
 
-[F1] The cotangent lift of $Y$ has Hamiltonian $H_Y(q,p)=p(Y_q)$ under the
-library convention. [[prop-cotangent-lift-of-a-vector-field-is-hamiltonian]].
+[F1] The cotangent lift of $Y$ has Hamiltonian $H_Y(q,p)=p(Y_q)$ under the library convention. [[prop-cotangent-lift-of-a-vector-field-is-hamiltonian]].
 
 ## Verification
 

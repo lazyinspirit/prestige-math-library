@@ -32,40 +32,25 @@ bracket, invariant-field, and exponential results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-identity $e$ and Lie algebra $\mathfrak g$, and $X,Y\in\mathfrak g$ with
-$[X,Y]_G=0$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with identity $e$ and Lie algebra $\mathfrak g$, and $X,Y\in\mathfrak g$ with $[X,Y]_G=0$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Lie-group multiplication $m:G\times G\to G$ is smooth.
-[[def-lie-group]].
+[F2] Lie-group multiplication $m:G\times G\to G$ is smooth. [[def-lie-group]].
 
-[F3] The tangent bracket satisfies $[X^L,Y^L]=[X,Y]_G^L$.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F3] The tangent bracket satisfies $[X^L,Y^L]=[X,Y]_G^L$. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F4] Two smooth vector fields have commuting local flows if and only if their
-bracket vanishes.
-[[thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute]].
+[F4] Two smooth vector fields have commuting local flows if and only if their bracket vanishes. [[thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute]].
 
-[F5] The one-parameter subgroup $\gamma_X$ is the global identity integral
-curve of $X^L$.
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
+[F5] The one-parameter subgroup $\gamma_X$ is the global identity integral curve of $X^L$. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
 
-[F6] The scaling and additive-parameter identities are
-$\gamma_X(t)=\exp_G(tX)$ and
-$\exp_G((s+t)X)=\exp_G(sX)\exp_G(tX)$.
-[[prop-exponential-scales-one-parameter-subgroups]].
+[F6] The scaling and additive-parameter identities are $\gamma_X(t)=\exp_G(tX)$ and $\exp_G((s+t)X)=\exp_G(sX)\exp_G(tX)$. [[prop-exponential-scales-one-parameter-subgroups]].
 
-[F7] A one-parameter subgroup is a smooth homomorphism
-$(\mathbb R,+)\to G$. [[def-one-parameter-subgroup-of-a-lie-group]].
+[F7] A one-parameter subgroup is a smooth homomorphism $(\mathbb R,+)\to G$. [[def-one-parameter-subgroup-of-a-lie-group]].
 
-[F8] A one-parameter subgroup with initial velocity $Z$ is exactly the curve
-$t\mapsto\exp_G(tZ)$.
-[[thm-one-parameter-subgroups-are-exactly-exponentials]].
+[F8] A one-parameter subgroup with initial velocity $Z$ is exactly the curve $t\mapsto\exp_G(tZ)$. [[thm-one-parameter-subgroups-are-exactly-exponentials]].
 
-[F9] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F9] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

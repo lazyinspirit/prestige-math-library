@@ -34,14 +34,11 @@ product topology.
 
 **Given:** The profinite completion $\widehat{\mathbb Z}$ and the family $(\mathbb Z_p)_p$.
 
-[L1] For each prime $p$, the inverse limit of the $p$-power quotients of
-$\mathbb Z$ is $\mathbb Z_p$ ([[thm-zp-is-the-pro-p-completion-of-the-integers]]).
+[L1] For each prime $p$, the inverse limit of the $p$-power quotients of $\mathbb Z$ is $\mathbb Z_p$ ([[thm-zp-is-the-pro-p-completion-of-the-integers]]).
 
-[F1] The external direct product is formed componentwise
-([[def-external-direct-product-of-groups]]).
+[F1] The external direct product is formed componentwise ([[def-external-direct-product-of-groups]]).
 
-[L2] Compatible tuples satisfy the inverse-limit universal property
-([[thm-concrete-inverse-limit-universal-property-in-groups]]).
+[L2] Compatible tuples satisfy the inverse-limit universal property ([[thm-concrete-inverse-limit-universal-property-in-groups]]).
 
 ## Proof
 

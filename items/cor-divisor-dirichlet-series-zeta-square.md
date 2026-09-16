@@ -32,12 +32,9 @@ where $\zeta(s)=\sum_{n \ge 1} n^{-s}$.
 
 **Given:** A complex number $s$ with $\Re s>1$.
 
-[L1] The divisor-counting function satisfies $\tau=\mathbf 1*\mathbf 1$
-([[prop-divisor-functions-under-dirichlet-convolution]],
-[[def-divisor-counting-function]]).
+[L1] The divisor-counting function satisfies $\tau=\mathbf 1*\mathbf 1$ ([[prop-divisor-functions-under-dirichlet-convolution]], [[def-divisor-counting-function]]).
 
-[L2] Products of absolutely convergent Dirichlet series multiply by Dirichlet
-convolution ([[thm-dirichlet-series-multiplication-convolution]]).
+[L2] Products of absolutely convergent Dirichlet series multiply by Dirichlet convolution ([[thm-dirichlet-series-multiplication-convolution]]).
 
 ## Proof
 

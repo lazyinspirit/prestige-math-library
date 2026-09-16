@@ -31,8 +31,7 @@ a nonconstant invariant function.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, Lebesgue probability on the circle,
-$T=R_{1/2}$, and $f=\mathbf1_{[0,1/4)}$.
+**Given:** Countable choice, Lebesgue probability on the circle, $T=R_{1/2}$, and $f=\mathbf1_{[0,1/4)}$.
 
 [F1] The half-rotation preserves Lebesgue probability ([[prop-circle-rotations-preserve-lebesgue-measure]]).
 

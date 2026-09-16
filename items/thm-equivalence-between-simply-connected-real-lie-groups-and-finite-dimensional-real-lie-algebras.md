@@ -36,13 +36,9 @@ categories.
 
 [A1] Countable choice is [[def-countable-choice]].
 
-[L1] If $G$ is connected and simply connected, every Lie-algebra homomorphism
-$\operatorname{Lie}(G)\to\operatorname{Lie}(H)$ to the Lie algebra of a real
-Lie group $H$ integrates uniquely to a Lie-group homomorphism $G\to H$
-([[thm-lie-second-fundamental-theorem]]).
+[L1] If $G$ is connected and simply connected, every Lie-algebra homomorphism $\operatorname{Lie}(G)\to\operatorname{Lie}(H)$ to the Lie algebra of a real Lie group $H$ integrates uniquely to a Lie-group homomorphism $G\to H$ ([[thm-lie-second-fundamental-theorem]]).
 
-[L2] Every finite-dimensional real Lie algebra has a connected simply
-connected integration ([[thm-lie-third-fundamental-theorem]]).
+[L2] Every finite-dimensional real Lie algebra has a connected simply connected integration ([[thm-lie-third-fundamental-theorem]]).
 
 ## Proof
 

@@ -34,8 +34,7 @@ $$-1 = (p-1) + (p-1)p + (p-1)p^2 + \cdots.$$
 
 **Given:** A prime $p$.
 
-[L1] Every $p$-adic number has a unique digit expansion
-([[thm-p-adic-digit-expansion]]).
+[L1] Every $p$-adic number has a unique digit expansion ([[thm-p-adic-digit-expansion]]).
 
 ## Verification
 

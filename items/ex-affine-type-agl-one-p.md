@@ -29,12 +29,9 @@ $\mathbb F_p$ is of affine type.
 
 **Given:** The semidirect product action $(b,a)\cdot x=ax+b$ of $\operatorname{AGL}(1,p)$ on $\mathbb F_p$.
 
-[L1] A faithful primitive group with a unique abelian minimal normal subgroup is
-of affine type
-([[prop-unique-abelian-minimal-normal-subgroup-gives-affine-type]]).
+[L1] A faithful primitive group with a unique abelian minimal normal subgroup is of affine type ([[prop-unique-abelian-minimal-normal-subgroup-gives-affine-type]]).
 
-[A1] The translation subgroup $\mathbb F_p \times \{1\}$ is normal, abelian,
-and regular on $\mathbb F_p$.
+[A1] The translation subgroup $\mathbb F_p \times \{1\}$ is normal, abelian, and regular on $\mathbb F_p$.
 
 ## Verification
 

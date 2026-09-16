@@ -34,12 +34,9 @@ to be transitive.
 
 **Given:** A nonabelian finite simple group $T$ and the action of $(T \times T) \rtimes C_2$ on the disjoint union of two copies of $T$, where $T \times T$ acts by left regular action on each copy and $C_2$ swaps the two copies.
 
-[A1] This action is transitive because the swapping involution exchanges the two
-blocks, but it is imprimitive because the two copies of $T$ form a nontrivial
-block system.
+[A1] This action is transitive because the swapping involution exchanges the two blocks, but it is imprimitive because the two copies of $T$ form a nontrivial block system.
 
-[A2] The subgroup $T \times T$ is a minimal normal subgroup of the full
-semidirect product, and it preserves each block setwise.
+[A2] The subgroup $T \times T$ is a minimal normal subgroup of the full semidirect product, and it preserves each block setwise.
 
 ## Counterexample
 

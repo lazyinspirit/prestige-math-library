@@ -42,19 +42,13 @@ $T:X\to Y$ be linear. Then the following are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** Normed spaces $X$ and $Y$, a linear map $T:X\to Y$, a real
-$\varepsilon > 0$, and a vector $x_0 \in X$.
+**Given:** Normed spaces $X$ and $Y$, a linear map $T:X\to Y$, a real $\varepsilon > 0$, and a vector $x_0 \in X$.
 
-[L1] A bounded linear operator has a constant $C \ge 0$ with
-$\|Tx\| \le C\|x\|$ for every $x \in X$
-([[def-bounded-linear-operator]]).
+[L1] A bounded linear operator has a constant $C \ge 0$ with $\|Tx\| \le C\|x\|$ for every $x \in X$ ([[def-bounded-linear-operator]]).
 
-[L2] A map is Lipschitz when one constant controls all distances, and every
-Lipschitz map between metric spaces is continuous ([[def-lipschitz-holder-contraction]],
-[[thm-metric-regularity-hierarchy]]).
+[L2] A map is Lipschitz when one constant controls all distances, and every Lipschitz map between metric spaces is continuous ([[def-lipschitz-holder-contraction]], [[thm-metric-regularity-hierarchy]]).
 
-[L3] Continuity at a point in a metric space is the $\varepsilon$-$\delta$
-condition of [[def-metric-continuity]].
+[L3] Continuity at a point in a metric space is the $\varepsilon$-$\delta$ condition of [[def-metric-continuity]].
 
 ## Proof
 

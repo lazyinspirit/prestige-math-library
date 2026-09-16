@@ -39,17 +39,13 @@ coordinate sets lie in the terminal levels $T_i(n)$.
 
 **Given:** Positive $d,q$, the finitistic trees, and AC.
 
-[F1] Finite truncations, domination, and $(h,1)$-matrices have the conventions
-of the local definition. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
+[F1] Finite truncations, domination, and $(h,1)$-matrices have the conventions of the local definition. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
 
-[F2] Every subset of the full product satisfies the dense-matrix dichotomy in
-ZF. [[thm-halpern-lauchli-dense-matrix-dichotomy]]
+[F2] Every subset of the full product satisfies the dense-matrix dichotomy in ZF. [[thm-halpern-lauchli-dense-matrix-dichotomy]]
 
-[F3] In ZFC, every height-$\omega$ tree with finite levels has an infinite
-branch. [[thm-konig-finite-level-tree]]
+[F3] In ZFC, every height-$\omega$ tree with finite levels has an infinite branch. [[thm-konig-finite-level-tree]]
 
-[A1] AC is assumed, and is used to invoke F3 for the bad-coloring tree.
-[[def-axiom-of-choice]]
+[A1] AC is assumed, and is used to invoke F3 for the bad-coloring tree. [[def-axiom-of-choice]]
 
 ## Proof
 

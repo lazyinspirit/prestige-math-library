@@ -38,15 +38,11 @@ $$\nu(E)=\int_E h\,d\mu\qquad(E\in\mathcal A).$$
 
 [L2] Absolute continuity means vanishing on every measurable reference-null set. Thus $\nu\ll\mu$ implies both real and imaginary parts vanish there too. ([[def-absolutely-continuous-with-respect-to-a-positive-measure]])
 
-[L3] A signed measure satisfying a common finite exhaustion with $\mu$ and
-absolutely continuous with respect to $\mu$ has an almost-everywhere unique
-density; if its total variation is finite, the density is integrable
-([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
+[L3] A signed measure satisfying a common finite exhaustion with $\mu$ and absolutely continuous with respect to $\mu$ has an almost-everywhere unique density; if its total variation is finite, the density is integrable ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
 
 [L4] A complex function is integrable exactly when its real and imaginary parts are integrable, using $|u|,|v|\le|u+iv|\le|u|+|v|$. ([[def-integrable-real-and-complex-functions-and-their-integrals]])
 
-[L5] A complex measure has finite total variation
-([[thm-total-variation-of-a-complex-measure-is-finite]]).
+[L5] A complex measure has finite total variation ([[thm-total-variation-of-a-complex-measure-is-finite]]).
 
 [L6] AC supplies the hypotheses of the signed RN existence theorem and its underlying Hahn/Jordan selections. ([[def-axiom-of-choice]])
 

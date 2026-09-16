@@ -35,17 +35,13 @@ contradiction; the infinite tail-complement flip is essential.
 
 ## Facts & Assumptions
 
-**Given:** A free ultrafilter $U$ on $\omega$ and subsets
-$X,Y\subseteq\omega$ with finite symmetric difference.
+**Given:** A free ultrafilter $U$ on $\omega$ and subsets $X,Y\subseteq\omega$ with finite symmetric difference.
 
-[F1] [[def-ultrafilter]] defines freeness as failure to be principal at every
-point and includes the proper-filter intersection and upward-closure laws.
+[F1] [[def-ultrafilter]] defines freeness as failure to be principal at every point and includes the proper-filter intersection and upward-closure laws.
 
-[F2] [[thm-ultrafilter-characterisation]] says an ultrafilter contains
-exactly one member of every complementary pair.
+[F2] [[thm-ultrafilter-characterisation]] says an ultrafilter contains exactly one member of every complementary pair.
 
-[F3] [[def-set-difference-and-symmetric-difference]] defines
-$X\mathbin\triangle Y$ as the set of points at which membership differs.
+[F3] [[def-set-difference-and-symmetric-difference]] defines $X\mathbin\triangle Y$ as the set of points at which membership differs.
 
 ## Proof
 

@@ -40,14 +40,9 @@ Then $\{P_4^\star,\overline{P_4^\star}\}$ has the Erdős-Hajnal property.
 
 **Given:** The four-vertex path $P_4$.
 
-[L1] For every forest $F$, the four graphs
-$F^\star,(\overline F)^\star,\overline{F^\star},\overline{(\overline F)^\star}$
-have the Erdős-Hajnal property as a family
-([[thm-the-star-expansion-four-family-of-a-forest-has-the-erdos-hajnal-property]]).
+[L1] For every forest $F$, the four graphs $F^\star,(\overline F)^\star,\overline{F^\star},\overline{(\overline F)^\star}$ have the Erdős-Hajnal property as a family ([[thm-the-star-expansion-four-family-of-a-forest-has-the-erdos-hajnal-property]]).
 
-[F1] The path $P_4$ is self-complementary: if its vertices in order are
-$1,2,3,4$, then the bijection $1\mapsto 2$, $2\mapsto 4$, $3\mapsto 1$,
-$4\mapsto 3$ identifies $P_4$ with $\overline{P_4}$. 
+[F1] The path $P_4$ is self-complementary: if its vertices in order are $1,2,3,4$, then the bijection $1\mapsto 2$, $2\mapsto 4$, $3\mapsto 1$, $4\mapsto 3$ identifies $P_4$ with $\overline{P_4}$.
 
 ## Proof
 

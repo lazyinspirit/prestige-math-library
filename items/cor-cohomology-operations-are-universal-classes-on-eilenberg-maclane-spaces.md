@@ -48,11 +48,7 @@ A stable operation indexed over all integers in the earlier definition necessari
 
 [F1] Every $x\in\widetilde H^n(X;A)$ has a based classifying map $f:X\to K(A,n)$ with $x=f^*\iota_n$, unique up to based homotopy ([[thm-eilenberg-maclane-spaces-represent-singular-cohomology]]).
 
-[F2] Singular cohomology pullback is contravariantly functorial
-([[prop-singular-cohomology-is-contravariantly-functorial]]).
-For a based homotopy $H:f\simeq g$, the singular-chain prism satisfies
-$g_\#-f_\#=\partial P_H+P_H\partial$ in every nonnegative degree
-([[thm-singular-chain-homotopy-formula]]).
+[F2] Singular cohomology pullback is contravariantly functorial ([[prop-singular-cohomology-is-contravariantly-functorial]]). For a based homotopy $H:f\simeq g$, the singular-chain prism satisfies $g_\#-f_\#=\partial P_H+P_H\partial$ in every nonnegative degree ([[thm-singular-chain-homotopy-formula]]).
 
 [F3] Full stability means commutation with reduced cohomology suspension in every integer source degree, including zero ([[def-stable-natural-cohomology-operation]]). Its positive-degree part is the condition characterized here.
 
@@ -60,8 +56,7 @@ $g_\#-f_\#=\partial P_H+P_H\partial$ in every nonnegative degree
 
 ## Proof
 
-**Given:** $A,B,n,r$, the category of based CW complexes whose basepoints are
-vertices, and [A1].
+**Given:** $A,B,n,r$, the category of based CW complexes whose basepoints are vertices, and [A1].
 
 1.1 If $\Theta$ is natural, set $u=\Theta_{K(A,n)}(\iota_n)$. For $x=f^*\iota_n$ as in [F1], naturality forces [F1, F2]
 

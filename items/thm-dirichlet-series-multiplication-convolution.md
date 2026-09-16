@@ -33,15 +33,11 @@ where $f*g$ is the Dirichlet convolution of [[def-dirichlet-convolution]].
 
 ## Facts & Assumptions
 
-**Given:** Arithmetic functions $f,g$ and a point $s$ where both Dirichlet
-series converge absolutely.
+**Given:** Arithmetic functions $f,g$ and a point $s$ where both Dirichlet series converge absolutely.
 
-[L1] Dirichlet convolution is
-$$(f*g)(n) = \sum_{d \mid n} f(d)g(n/d)$$
-([[def-dirichlet-convolution]]).
+[L1] Dirichlet convolution is $$(f*g)(n) = \sum_{d \mid n} f(d)g(n/d)$$ ([[def-dirichlet-convolution]]).
 
-[L2] A Dirichlet series is a series $\sum a_n n^{-s}$ over positive integers
-([[def-dirichlet-series]]).
+[L2] A Dirichlet series is a series $\sum a_n n^{-s}$ over positive integers ([[def-dirichlet-series]]).
 
 ## Proof
 

@@ -43,14 +43,11 @@ of an epimorphism is an epimorphism.
 
 **Given:** The displayed pullback and a monomorphism $m$.
 
-[F1] The pullback legs satisfy $fp=mq$ and have the stated universal property
-([[def-pullbacks-and-pushouts]]).
+[F1] The pullback legs satisfy $fp=mq$ and have the stated universal property ([[def-pullbacks-and-pushouts]]).
 
-[L1] Pullback legs are jointly monic
-([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
+[L1] Pullback legs are jointly monic ([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
 
-[F2] A monomorphism cancels on the left and an epimorphism cancels on the right
-([[def-monomorphism-and-epimorphism]]).
+[F2] A monomorphism cancels on the left and an epimorphism cancels on the right ([[def-monomorphism-and-epimorphism]]).
 
 [L2] Pullbacks dualize to pushouts ([[prop-limit-colimit-duality]]).
 

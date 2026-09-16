@@ -35,11 +35,9 @@ class and the class of transpositions.
 
 **Given:** The symmetric group $S_3$.
 
-[F1] An element is $p$-regular exactly when $p$ does not divide its order
-([[def-p-regular-and-p-singular-elements]]).
+[F1] An element is $p$-regular exactly when $p$ does not divide its order ([[def-p-regular-and-p-singular-elements]]).
 
-[L1] Brauer characters are constant on $p$-regular conjugacy classes
-([[prop-brauer-characters-are-class-functions-on-p-regular-elements]]).
+[L1] Brauer characters are constant on $p$-regular conjugacy classes ([[prop-brauer-characters-are-class-functions-on-p-regular-elements]]).
 
 ## Verification
 

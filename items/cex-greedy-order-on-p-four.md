@@ -41,9 +41,7 @@ $\chi(P_4)=2$.
 
 [L2] The greedy rule assigns the least colour absent from the earlier neighbours ([[lem-greedy-colouring-bound]]).
 
-[L3] A proper colouring assigns different colours to adjacent vertices, and the
-chromatic number is the least number of colours in a proper colouring
-([[def-proper-vertex-colouring-and-chromatic-number]]).
+[L3] A proper colouring assigns different colours to adjacent vertices, and the chromatic number is the least number of colours in a proper colouring ([[def-proper-vertex-colouring-and-chromatic-number]]).
 
 ## Verification
 

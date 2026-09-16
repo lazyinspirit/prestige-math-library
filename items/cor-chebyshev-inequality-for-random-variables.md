@@ -31,14 +31,11 @@ $$\mathbb P(|X-\mathbb E[X]|\ge a)\le\frac{\operatorname{Var}(X)}{a^2}.$$
 
 ## Facts & Assumptions
 
-**Given:** A square-integrable real random variable $X$ and a real number
-$a>0$.
+**Given:** A square-integrable real random variable $X$ and a real number $a>0$.
 
-[L1] Variance is the expectation of the squared centered variable
-([[def-moments-variance-and-covariance]]).
+[L1] Variance is the expectation of the squared centered variable ([[def-moments-variance-and-covariance]]).
 
-[L2] Markov's inequality applies to every nonnegative random variable
-([[cor-markov-inequality-for-random-variables]]).
+[L2] Markov's inequality applies to every nonnegative random variable ([[cor-markov-inequality-for-random-variables]]).
 
 ## Proof
 

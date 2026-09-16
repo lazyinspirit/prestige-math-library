@@ -40,12 +40,9 @@ is again part of a biproduct diagram with complementary maps $F(r)$ and $F(j)$.
 
 **Given:** An additive functor $F$ and a split biproduct diagram in its source.
 
-[L1] An additive functor preserves finite biproducts
-([[thm-an-additive-functor-preserves-finite-biproducts]]).
+[L1] An additive functor preserves finite biproducts ([[thm-an-additive-functor-preserves-finite-biproducts]]).
 
-[L2] On a biproduct, the injection-projection maps satisfy the identity-sum
-relation
-([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
+[L2] On a biproduct, the injection-projection maps satisfy the identity-sum relation ([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
 
 ## Proof
 

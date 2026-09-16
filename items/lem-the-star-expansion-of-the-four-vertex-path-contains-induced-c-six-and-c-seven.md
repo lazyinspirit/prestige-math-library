@@ -35,11 +35,9 @@ $b_1-b_2-b_3-b_4$. Then $P_4^\star$ contains induced copies of $C_6$ and $C_7$.
 
 ## Facts & Assumptions
 
-**Given:** The star-expansion $P_4^\star$ with root $v$, teeth
-$a_1,a_2,a_3,a_4$, and path vertices $b_1,b_2,b_3,b_4$.
+**Given:** The star-expansion $P_4^\star$ with root $v$, teeth $a_1,a_2,a_3,a_4$, and path vertices $b_1,b_2,b_3,b_4$.
 
-[L1] In a star-expansion, the only new edges are $va_i$ and $a_ib_i$
-([[def-star-expansion-of-a-graph]]).
+[L1] In a star-expansion, the only new edges are $va_i$ and $a_ib_i$ ([[def-star-expansion-of-a-graph]]).
 
 ## Proof
 

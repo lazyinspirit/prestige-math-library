@@ -33,13 +33,11 @@ $$\omega_{\mathrm{can}}=\sum_{i=1}^n dq^i\wedge dp_i.$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a smooth $n$-manifold $Q$, and the
-tautological form on $T^*Q$.
+**Given:** $\mathrm{AC}_\omega$, a smooth $n$-manifold $Q$, and the tautological form on $T^*Q$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] In cotangent coordinates, $\lambda=\sum_i p_i\,dq^i$.
-[[lem-the-tautological-one-form-is-intrinsic-and-smooth]].
+[F1] In cotangent coordinates, $\lambda=\sum_i p_i\,dq^i$. [[lem-the-tautological-one-form-is-intrinsic-and-smooth]].
 
 ## Proof
 

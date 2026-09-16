@@ -32,8 +32,7 @@ $U$ containing no subgroup other than $\{e\}$.
 
 **Given:** A finite-dimensional Lie group $G$ with identity $e$.
 
-[F1] A smooth map in charts is differentiable, and its differential is the
-linear first-order part. [[def-differential-of-a-smooth-map]].
+[F1] A smooth map in charts is differentiable, and its differential is the linear first-order part. [[def-differential-of-a-smooth-map]].
 
 ## Proof
 

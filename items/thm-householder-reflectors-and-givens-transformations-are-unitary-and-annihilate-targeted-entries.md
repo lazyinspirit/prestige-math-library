@@ -36,16 +36,11 @@ Let $\mathbb F=\mathbb R$ or $\mathbb C$.
 
 ## Facts & Assumptions
 
-**Given:** A field $\mathbb F=\mathbb R$ or $\mathbb C$, a unit vector $v$, a
-nonzero vector $z\in\mathbb F^m$, and a pair $(a,b)\in\mathbb F^2$ with not
-both entries zero.
+**Given:** A field $\mathbb F=\mathbb R$ or $\mathbb C$, a unit vector $v$, a nonzero vector $z\in\mathbb F^m$, and a pair $(a,b)\in\mathbb F^2$ with not both entries zero.
 
-[L1] Householder reflectors and Givens transformations are defined in
-[[def-householder-reflector]] and
-[[def-real-and-complex-givens-transformations]].
+[L1] Householder reflectors and Givens transformations are defined in [[def-householder-reflector]] and [[def-real-and-complex-givens-transformations]].
 
-[L2] An orthogonal or unitary operator is an invertible linear isometry
-([[def-linear-isometry-and-orthogonal-or-unitary-operator]]).
+[L2] An orthogonal or unitary operator is an invertible linear isometry ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]).
 
 ## Proof
 

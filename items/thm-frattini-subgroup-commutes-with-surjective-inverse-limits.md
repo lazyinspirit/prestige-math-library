@@ -36,14 +36,11 @@ $$\Phi(G)=\{x\in G:\pi_i(x)\in\Phi(G_i)\text{ for every }i\}\cong \varprojlim_i 
 
 **Given:** A surjective inverse system of finite $p$-groups with inverse limit $G$.
 
-[F1] The Frattini subgroup is the intersection of maximal proper closed
-subgroups ([[def-frattini-subgroup-of-a-profinite-group]]).
+[F1] The Frattini subgroup is the intersection of maximal proper closed subgroups ([[def-frattini-subgroup-of-a-profinite-group]]).
 
-[L1] In a profinite group, maximal proper closed subgroups are open
-([[lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open]]).
+[L1] In a profinite group, maximal proper closed subgroups are open ([[lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open]]).
 
-[L2] The inverse limit has coordinate projections $\pi_i$
-([[def-coordinate-projections-from-an-inverse-limit]]).
+[L2] The inverse limit has coordinate projections $\pi_i$ ([[def-coordinate-projections-from-an-inverse-limit]]).
 
 ## Proof
 

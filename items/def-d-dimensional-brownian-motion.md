@@ -48,48 +48,21 @@ are independent random elements.
 
 ## Facts & Assumptions
 
-**Given:** AC, a finite integer $d\ge1$, and an $\mathbb R^d$-valued process
-$B=(B_t)_{t\ge0}$.
+**Given:** AC, a finite integer $d\ge1$, and an $\mathbb R^d$-valued process $B=(B_t)_{t\ge0}$.
 
-[F1] Standard one-dimensional Brownian motion starts at zero, has independent
-normal increments on every finite increasing time list, and has one common
-probability-one continuity event. [[def-brownian-motion]]
+[F1] Standard one-dimensional Brownian motion starts at zero, has independent normal increments on every finite increasing time list, and has one common probability-one continuity event. [[def-brownian-motion]]
 
-[F2] Under AC, $N_d(m,\Sigma)$ exists for every positive semidefinite
-$\Sigma$, is realized as $m+\Sigma^{1/2}Z$ with independent standard-normal
-coordinates, and is determined by the characteristic function
-$\exp(iu\cdot m-u^T\Sigma u/2)$, including when $\Sigma$ is singular.
-[[def-multivariate-normal-law]]
-[[lem-characteristic-function-of-a-multivariate-normal-law]]
+[F2] Under AC, $N_d(m,\Sigma)$ exists for every positive semidefinite $\Sigma$, is realized as $m+\Sigma^{1/2}Z$ with independent standard-normal coordinates, and is determined by the characteristic function $\exp(iu\cdot m-u^T\Sigma u/2)$, including when $\Sigma$ is singular. [[def-multivariate-normal-law]] [[lem-characteristic-function-of-a-multivariate-normal-law]]
 
-[F3] Scalar normal characteristic functions and characteristic functions of
-finite independent sums have their usual formulas.
-[[lem-characteristic-function-of-a-normal-law]]
-[[lem-characteristic-functions-under-affine-maps-and-independent-sums]]
+[F3] Scalar normal characteristic functions and characteristic functions of finite independent sums have their usual formulas. [[lem-characteristic-function-of-a-normal-law]] [[lem-characteristic-functions-under-affine-maps-and-independent-sums]]
 
-[F4] Independence of random elements is characterized by finite rectangle
-probabilities. Disjoint groups of an independent sigma-algebra family remain
-independent, and measurable coordinatewise functions preserve independence.
-[[def-independent-random-elements]]
-[[thm-rectangle-criterion-for-independent-random-elements]]
-[[thm-grouping-independent-sigma-algebras]]
-[[lem-measurable-functions-preserve-independence]]
+[F4] Independence of random elements is characterized by finite rectangle probabilities. Disjoint groups of an independent sigma-algebra family remain independent, and measurable coordinatewise functions preserve independence. [[def-independent-random-elements]] [[thm-rectangle-criterion-for-independent-random-elements]] [[thm-grouping-independent-sigma-algebras]] [[lem-measurable-functions-preserve-independence]]
 
-[F5] Finite-coordinate cylinders generate the cylinder sigma-algebra and form
-a pi-system; independent pi-systems containing the whole space generate
-independent sigma-algebras.
-[[def-coordinate-maps-and-cylinder-sigma-algebra]]
-[[lem-finite-coordinate-cylinders-form-a-pi-system]]
-[[thm-pi-system-criterion-for-independent-sigma-algebras]]
+[F5] Finite-coordinate cylinders generate the cylinder sigma-algebra and form a pi-system; independent pi-systems containing the whole space generate independent sigma-algebras. [[def-coordinate-maps-and-cylinder-sigma-algebra]] [[lem-finite-coordinate-cylinders-form-a-pi-system]] [[thm-pi-system-criterion-for-independent-sigma-algebras]]
 
-[F6] Continuity of a map into finite-dimensional Euclidean space is equivalent
-to continuity of all its coordinates. A finite intersection of
-probability-one events has probability one.
-[[thm-componentwise-limits-and-continuity]]
-[[lem-probability-measure-basic-identities]]
+[F6] Continuity of a map into finite-dimensional Euclidean space is equivalent to continuity of all its coordinates. A finite intersection of probability-one events has probability one. [[thm-componentwise-limits-and-continuity]] [[lem-probability-measure-basic-identities]]
 
-[F7] AC supplies the normal-law and Brownian interfaces used above.
-[[def-axiom-of-choice]]
+[F7] AC supplies the normal-law and Brownian interfaces used above. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -117,10 +90,4 @@ probability-one events has probability one.
 
 ## Source notes
 
-Yoshida Definition 6.1.1 gives the vector-increment definition, Lemma 6.1.3
-identifies diagonal multivariate-normal increments with the scalar-coordinate
-increment family, and Proposition 6.1.4 states the coordinate-process
-equivalence. The proof above supplies the cylinder-sigma-algebra promotion
-needed for the word “independent” to apply to whole coordinate processes.
-Sousi Section 6.2 constructs the vector process from independent scalar
-Brownian motions.
+Yoshida Definition 6.1.1 gives the vector-increment definition, Lemma 6.1.3 identifies diagonal multivariate-normal increments with the scalar-coordinate increment family, and Proposition 6.1.4 states the coordinate-process equivalence. The proof above supplies the cylinder-sigma-algebra promotion needed for the word “independent” to apply to whole coordinate processes. Sousi Section 6.2 constructs the vector process from independent scalar Brownian motions.

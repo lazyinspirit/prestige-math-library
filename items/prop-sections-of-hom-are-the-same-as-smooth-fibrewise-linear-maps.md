@@ -37,12 +37,9 @@ $E\to F$ over $\operatorname{id}_M$.
 
 **Given:** Smooth vector bundles $E,F\to M$.
 
-[L1] In local frames, a smooth bundle map over the identity is equivalent to a
-smooth matrix of coefficients
-([[prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices]]).
+[L1] In local frames, a smooth bundle map over the identity is equivalent to a smooth matrix of coefficients ([[prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices]]).
 
-[L2] The Hom bundle is built from the same local matrices
-([[thm-dual-and-hom-transition-functions-define-smooth-bundles]]).
+[L2] The Hom bundle is built from the same local matrices ([[thm-dual-and-hom-transition-functions-define-smooth-bundles]]).
 
 ## Proof
 

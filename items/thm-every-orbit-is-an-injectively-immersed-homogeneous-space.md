@@ -41,21 +41,15 @@ immersed homogeneous-space structure. The immersion need not be an embedding.
 
 **Given:** A smooth left action of $G$ on $M$ and a point $x\in M$.
 
-[F1] The stabilizer is a closed embedded Lie subgroup.
-[[thm-stabilizers-are-closed-embedded-lie-subgroups]].
+[F1] The stabilizer is a closed embedded Lie subgroup. [[thm-stabilizers-are-closed-embedded-lie-subgroups]].
 
-[F2] For a closed subgroup, $G/G_x$ is a smooth homogeneous manifold and the
-quotient map is a submersion. [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
+[F2] For a closed subgroup, $G/G_x$ is a smooth homogeneous manifold and the quotient map is a submersion. [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
 
-[F3] The kernel of the orbit-map differential at the identity is $T_eG_x$,
-and its tangent image is the infinitesimal orbit.
-[[prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra]].
+[F3] The kernel of the orbit-map differential at the identity is $T_eG_x$, and its tangent image is the infinitesimal orbit. [[prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra]].
 
-[F4] Constant-rank normal forms describe immersed images locally.
-[[thm-constant-rank-theorem-for-manifolds]].
+[F4] Constant-rank normal forms describe immersed images locally. [[thm-constant-rank-theorem-for-manifolds]].
 
-[F5] The preceding closed-subgroup and quotient results carry countable
-choice. [[def-countable-choice]].
+[F5] The preceding closed-subgroup and quotient results carry countable choice. [[def-countable-choice]].
 
 ## Proof
 

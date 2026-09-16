@@ -45,22 +45,15 @@ equation on $U$.
 
 ## Facts & Assumptions
 
-**Given:** A $C^1$ transport field $a$, continuous coefficients $c,f$, a
-classical transport solution, and a unique flow-consistent characteristic
-through each $(x,t)\in U$ whose whole segment to time $0$ remains in $U$.
+**Given:** A $C^1$ transport field $a$, continuous coefficients $c,f$, a classical transport solution, and a unique flow-consistent characteristic through each $(x,t)\in U$ whose whole segment to time $0$ remains in $U$.
 
-[L1] The chain rule computes the derivative of a $C^1$ function along a
-$C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
+[L1] The chain rule computes the derivative of a $C^1$ function along a $C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
 
-[L2] Along a characteristic, the PDE becomes the scalar linear ODE
-$v'+cv=f$ ([[lem-transport-equation-along-a-characteristic]]).
+[L2] Along a characteristic, the PDE becomes the scalar linear ODE $v'+cv=f$ ([[lem-transport-equation-along-a-characteristic]]).
 
-[L3] A scalar first-order linear ODE is solved by the integrating-factor
-formula ([[thm-first-order-linear-ode-integrating-factor]]).
+[L3] A scalar first-order linear ODE is solved by the integrating-factor formula ([[thm-first-order-linear-ode-integrating-factor]]).
 
-[L4] A characteristic satisfies $X'(s)=a(X(s),s)$, and uniqueness makes the
-characteristic family a single-valued flow
-([[def-linear-transport-equation-and-its-characteristic-flow]]).
+[L4] A characteristic satisfies $X'(s)=a(X(s),s)$, and uniqueness makes the characteristic family a single-valued flow ([[def-linear-transport-equation-and-its-characteristic-flow]]).
 
 ## Proof
 

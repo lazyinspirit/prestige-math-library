@@ -31,12 +31,9 @@ Cholesky factorisations with positive diagonal.
 
 ## Facts & Assumptions
 
-**Given:** The matrices
-$$A=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad B=\begin{pmatrix}1&0\\0&0\end{pmatrix}.$$
+**Given:** The matrices $$A=\begin{pmatrix}1&0\\0&-1\end{pmatrix},\qquad B=\begin{pmatrix}1&0\\0&0\end{pmatrix}.$$
 
-[L1] A matrix admits a Cholesky factorisation with positive diagonal exactly
-when it is Hermitian positive definite
-([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).
+[L1] A matrix admits a Cholesky factorisation with positive diagonal exactly when it is Hermitian positive definite ([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).
 
 ## Counterexample
 

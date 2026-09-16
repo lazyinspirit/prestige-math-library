@@ -28,16 +28,11 @@ hyperbolic.
 
 **Given:** A free abelian group $A$ of rank $n \ge 2$.
 
-[L1] Hyperbolicity of a finitely generated group is independent of the chosen
-finite generating set
-([[thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]]).
+[L1] Hyperbolicity of a finitely generated group is independent of the chosen finite generating set ([[thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]]).
 
-[L2] Hyperbolic spaces have uniformly thin geodesic quadrilaterals
-([[lem-thin-quadrilaterals-in-a-hyperbolic-space]]).
+[L2] Hyperbolic spaces have uniformly thin geodesic quadrilaterals ([[lem-thin-quadrilaterals-in-a-hyperbolic-space]]).
 
-[A1] With the standard basis of $\mathbb Z^n$, the Cayley graph contains
-geodesic rectangles of arbitrarily large width inside the first two coordinate
-directions.
+[A1] With the standard basis of $\mathbb Z^n$, the Cayley graph contains geodesic rectangles of arbitrarily large width inside the first two coordinate directions.
 
 ## Proof
 

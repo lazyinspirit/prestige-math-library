@@ -43,24 +43,20 @@ kernel row is itself short exact.
 
 **Given:** In $\mathbf{Ab}$, the commutative diagram above.
 
-[L1] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] For such a diagram, the kernel row is exact at its first two nodes
-([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
+[L2] For such a diagram, the kernel row is exact at its first two nodes ([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
 
-## Counterexample
+
+
+## Proof
 
 **Proof technique:** direct.
 
 1.1 Each row is short exact, and the vertical maps make a morphism of short exact sequences in the abelian category $\mathbf{Ab}$ by [L1]. [L1, given, algebra]
 
-1.2 The kernels of the three vertical maps are
-$$\ker(\times 2)=0,\qquad \ker(\times 2)=0,\qquad \ker(0)=\mathbb Z/2.$$
-So the kernel row is
-$$0 \to 0 \to 0 \to \mathbb Z/2.$$
-By [L2], it is exact at the first two nodes. [L2, step 1.1, algebra]
+2.1 The kernels of the three vertical maps are $$\ker(\times 2)=0,\qquad \ker(\times 2)=0,\qquad \ker(0)=\mathbb Z/2.$$ So the kernel row is $$0 \to 0 \to 0 \to \mathbb Z/2.$$ By [L2], it is exact at the first two nodes. [L2, step 1.1, algebra]
 
-2.1 The last map in that row is the zero map $0 \to \mathbb Z/2$, hence not epic. Therefore the kernel row is not short exact. [step 1.2, algebra]
+3.1 The last map in that row is the zero map $0 \to \mathbb Z/2$, hence not epic. Therefore the kernel row is not short exact. [step 2.1, algebra]
 
-3.1 This refutes the statement. [step 2.1] ∎
+4.1 This refutes the statement. [step 3.1] ∎

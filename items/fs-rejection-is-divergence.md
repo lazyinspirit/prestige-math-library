@@ -27,22 +27,13 @@ diverges on that input.
 
 ## Facts & Assumptions
 
-**Given:** The machine with states
-$q_0,q_{\mathrm{acc}},q_{\mathrm{rej}}$, input alphabet $\{1\}$, tape alphabet
-$\{1,\sqcup\}$, and transition rule
-$$ \delta(q_0,1)=(q_{\mathrm{rej}},1,R). $$
-Take input word $w=1$.
+**Given:** The machine with states $q_0,q_{\mathrm{acc}},q_{\mathrm{rej}}$, input alphabet $\{1\}$, tape alphabet $\{1,\sqcup\}$, and transition rule $$ \delta(q_0,1)=(q_{\mathrm{rej}},1,R). $$ Take input word $w=1$.
 
-[A1] The statement refuted is: rejection on an input means divergence on that
-input.
+[A1] The statement refuted is: rejection on an input means divergence on that input.
 
-[L1] A halting computation history may end in a rejecting configuration, and
-divergence means that no halting computation history exists, by
-[[def-halting-computation-and-divergence]].
+[L1] A halting computation history may end in a rejecting configuration, and divergence means that no halting computation history exists, by [[def-halting-computation-and-divergence]].
 
-[L2] A configuration is rejecting exactly when its state is the designated
-reject state $q_{\mathrm{rej}}$, by
-[[def-initial-accepting-and-rejecting-configurations]].
+[L2] A configuration is rejecting exactly when its state is the designated reject state $q_{\mathrm{rej}}$, by [[def-initial-accepting-and-rejecting-configurations]].
 
 ## Refutation
 

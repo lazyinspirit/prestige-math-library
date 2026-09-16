@@ -31,12 +31,9 @@ $U(\mathfrak g)$ is commutative for every Lie algebra $\mathfrak g$.
 
 **Given:** The asserted universal commutativity.
 
-[L1] In $U(\mathfrak g)$, the commutator of canonical images is the image of
-the Lie bracket
-([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
+[L1] In $U(\mathfrak g)$, the commutator of canonical images is the image of the Lie bracket ([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
 
-[L2] PBW makes the canonical map injective when a basis is supplied
-([[cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]]).
+[L2] PBW makes the canonical map injective when a basis is supplied ([[cor-the-canonical-map-from-a-lie-algebra-to-its-enveloping-algebra-is-injective]]).
 
 ## Refutation
 

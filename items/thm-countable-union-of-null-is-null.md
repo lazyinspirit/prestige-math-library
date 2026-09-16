@@ -87,29 +87,10 @@ estimate are formulas.
 
 ## Remarks
 
-- **Why the slack is geometric.** The $n$-th set is covered to within
-  $\varepsilon \cdot 2^{-n-1}$ and the budgets sum to $\varepsilon$, exactly as in
-  [[lem-countable-sets-are-null]], of which this theorem is the abstract form:
-  applying it to the singletons $\{x_n\}$ of a listing recovers that lemma, at
-  the cost of an appeal to $\mathrm{AC}_\omega$ that the direct proof avoids.
-  The expenditure is the same one, and made for the same reason, as in
-  [[thm-countable-union-of-countable]].
+- **Why the slack is geometric.** The $n$-th set is covered to within $\varepsilon \cdot 2^{-n-1}$ and the budgets sum to $\varepsilon$, exactly as in [[lem-countable-sets-are-null]], of which this theorem is the abstract form: applying it to the singletons $\{x_n\}$ of a listing recovers that lemma, at the cost of an appeal to $\mathrm{AC}_\omega$ that the direct proof avoids. The expenditure is the same one, and made for the same reason, as in [[thm-countable-union-of-countable]].
 
-- **No rearrangement theorem is used, and none is available here.** The estimate
-  is made on finite partial sums only, and every finite partial sum of the
-  doubly-indexed family is compared with a sum over a finite rectangle, which is a
-  finite rearrangement. The theory of rearranging infinite series is not in the
-  reading order at this point, and the proof is arranged so as not to need it.
+- **No rearrangement theorem is used, and none is available here.** The estimate is made on finite partial sums only, and every finite partial sum of the doubly-indexed family is compared with a sum over a finite rectangle, which is a finite rearrangement. The theory of rearranging infinite series is not in the reading order at this point, and the proof is arranged so as not to need it.
 
-- **The bound is on the total length, not on the number of intervals.** The
-  combined cover is countable even when each $A_n$ is covered by infinitely many
-  intervals, which is exactly what [[thm-n-cross-n-countable]] supplies. Nothing
-  analogous holds for content zero: a countable union of sets of content zero
-  need not have content zero, since $\mathbb{Q} \cap [0,1]$ is such a union
-  ([[cex-null-set-not-of-content-zero]]).
+- **The bound is on the total length, not on the number of intervals.** The combined cover is countable even when each $A_n$ is covered by infinitely many intervals, which is exactly what [[thm-n-cross-n-countable]] supplies. Nothing analogous holds for content zero: a countable union of sets of content zero need not have content zero, since $\mathbb{Q} \cap [0,1]$ is such a union ([[cex-null-set-not-of-content-zero]]).
 
-- **This is where the two smallness notions of the page separate cleanly.** A
-  countable union of null sets is null, whereas a countable union of nowhere
-  dense sets is meager and, by [[thm-baire-category-r]], never all of
-  $\mathbb{R}$; and yet $\mathbb{R}$ is the union of a meager set and a null set
-  ([[cex-meager-set-of-full-measure]]).
+- **This is where the two smallness notions of the page separate cleanly.** A countable union of null sets is null, whereas a countable union of nowhere dense sets is meager and, by [[thm-baire-category-r]], never all of $\mathbb{R}$; and yet $\mathbb{R}$ is the union of a meager set and a null set ([[cex-meager-set-of-full-measure]]).

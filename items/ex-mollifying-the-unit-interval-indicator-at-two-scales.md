@@ -45,19 +45,13 @@ or values between zero and one.
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, a unit-mass smooth bump $\varphi$ supported in
-$[-1,1]$, and $f=\mathbf{1}_{[0,1]}$.
+**Given:** Countable Choice, a unit-mass smooth bump $\varphi$ supported in $[-1,1]$, and $f=\mathbf{1}_{[0,1]}$.
 
-[L1] Mollifier families are approximate identities
-([[prop-mollifier-families-are-l-one-approximate-identities]]).
+[L1] Mollifier families are approximate identities ([[prop-mollifier-families-are-l-one-approximate-identities]]).
 
-[L2] Convolution with a mollifier is smooth
-([[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]]).
+[L2] Convolution with a mollifier is smooth ([[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]]).
 
-[L3] Linear change of variables and translation invariance give the affine
-one-dimensional substitution used below
-([[thm-linear-change-of-variables-for-lebesgue-measure]],
-[[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).
+[L3] Linear change of variables and translation invariance give the affine one-dimensional substitution used below ([[thm-linear-change-of-variables-for-lebesgue-measure]], [[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).
 
 ## Verification
 

@@ -31,22 +31,15 @@ finite-dimensional solvable real Lie algebra is one-dimensional.
 
 ## Facts & Assumptions
 
-**Given:** The one-dimensional abelian real Lie algebra
-$\mathfrak a=\mathbb Rt$ and $V=\mathbb R^2$.
+**Given:** The one-dimensional abelian real Lie algebra $\mathfrak a=\mathbb Rt$ and $V=\mathbb R^2$.
 
-[L1] The one-dimensional conclusion is proved over $\mathbb C$, under the
-complex form of Lie's theorem
-([[cor-finite-dimensional-irreducible-representations-of-a-solvable-complex-lie-algebra-are-one-dimensional]]).
+[L1] The one-dimensional conclusion is proved over $\mathbb C$, under the complex form of Lie's theorem ([[cor-finite-dimensional-irreducible-representations-of-a-solvable-complex-lie-algebra-are-one-dimensional]]).
 
-[L2] Solvability is termination of the derived series
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L2] Solvability is termination of the derived series ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L3] A Lie-algebra representation is a bracket-preserving linear map into the
-endomorphism algebra ([[def-representation-of-a-lie-algebra]]).
+[L3] A Lie-algebra representation is a bracket-preserving linear map into the endomorphism algebra ([[def-representation-of-a-lie-algebra]]).
 
-[L4] A nonzero Lie-algebra representation is irreducible when it has no stable
-subspace other than zero and the whole module
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L4] A nonzero Lie-algebra representation is irreducible when it has no stable subspace other than zero and the whole module ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Refutation
 

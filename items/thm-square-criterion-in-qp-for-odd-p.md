@@ -36,11 +36,9 @@ $\mathbb F_p^\times$ is a square.
 
 **Given:** An odd prime $p$ and $x = p^n u$ with $u \in \mathbb Z_p^\times$.
 
-[L1] $\mathbb Z_p$ is the valuation ring of $\mathbb Q_p$
-([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_p$ is the valuation ring of $\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
 
-[L2] Simple roots lift uniquely in $\mathbb Z_p$
-([[cor-p-adic-simple-root-lifting]]).
+[L2] Simple roots lift uniquely in $\mathbb Z_p$ ([[cor-p-adic-simple-root-lifting]]).
 
 ## Proof
 

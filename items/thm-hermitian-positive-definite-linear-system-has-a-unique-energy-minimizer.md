@@ -39,21 +39,13 @@ In particular, $x_*$ is the unique minimizer of $\phi$.
 
 ## Facts & Assumptions
 
-**Given:** A Hermitian positive-definite matrix $A\in M_n(\mathbb C)$, a vector
-$b\in\mathbb C^n$, and the quadratic energy $\phi(x)$.
+**Given:** A Hermitian positive-definite matrix $A\in M_n(\mathbb C)$, a vector $b\in\mathbb C^n$, and the quadratic energy $\phi(x)$.
 
-[F1] The quadratic energy is
-$$\phi(x)=\tfrac12\langle Ax,x\rangle-\operatorname{Re}\langle b,x\rangle$$
-([[def-quadratic-energy-of-a-hermitian-positive-definite-linear-system]]).
+[F1] The quadratic energy is $$\phi(x)=\tfrac12\langle Ax,x\rangle-\operatorname{Re}\langle b,x\rangle$$ ([[def-quadratic-energy-of-a-hermitian-positive-definite-linear-system]]).
 
-[L1] The energy norm is defined by
-$$\|u\|_A^2=\langle Au,u\rangle$$
-for Hermitian positive-definite $A$
-([[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]).
+[L1] The energy norm is defined by $$\|u\|_A^2=\langle Au,u\rangle$$ for Hermitian positive-definite $A$ ([[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]).
 
-[L2] A matrix is Hermitian positive definite if and only if it has a Cholesky
-factorization $A=LL^*$ with positive diagonal, and that factor is unique
-([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).
+[L2] A matrix is Hermitian positive definite if and only if it has a Cholesky factorization $A=LL^*$ with positive diagonal, and that factor is unique ([[thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique]]).
 
 ## Proof
 **Proof technique:** direct.

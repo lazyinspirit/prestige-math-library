@@ -33,11 +33,9 @@ the canonical **symplectic orientation** of $M$.
 
 **Given:** A symplectic $2n$-manifold $(M,\omega)$.
 
-[F1] Nondegeneracy makes $\omega^n$ nowhere zero.
-[[thm-nondegeneracy-is-equivalent-to-a-nonvanishing-top-wedge]].
+[F1] Nondegeneracy makes $\omega^n$ nowhere zero. [[thm-nondegeneracy-is-equivalent-to-a-nonvanishing-top-wedge]].
 
-[F2] An orientation is a smooth choice of ray in the determinant line.
-[[def-oriented-smooth-manifold-and-oriented-chart]].
+[F2] An orientation is a smooth choice of ray in the determinant line. [[def-oriented-smooth-manifold-and-oriented-chart]].
 
 ## Proof
 

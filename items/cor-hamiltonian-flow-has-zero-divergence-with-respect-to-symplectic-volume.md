@@ -32,12 +32,9 @@ symplectic volume $\Omega=\omega^n/n!$.
 
 **Given:** A Hamiltonian vector field on a symplectic manifold.
 
-[F1] Its local flow preserves $\Omega$.
-[[thm-liouville-volume-preservation]].
+[F1] Its local flow preserves $\Omega$. [[thm-liouville-volume-preservation]].
 
-[F2] Divergence relative to $\Omega$ is defined by
-$\mathcal L_X\Omega=(\operatorname{div}_\Omega X)\Omega$.
-[[def-divergence-relative-to-a-volume-form]].
+[F2] Divergence relative to $\Omega$ is defined by $\mathcal L_X\Omega=(\operatorname{div}_\Omega X)\Omega$. [[def-divergence-relative-to-a-volume-form]].
 
 ## Proof
 

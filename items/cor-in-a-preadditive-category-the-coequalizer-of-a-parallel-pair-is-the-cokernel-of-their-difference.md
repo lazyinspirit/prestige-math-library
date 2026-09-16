@@ -30,14 +30,11 @@ coequalizer of $f$ and $g$ is exactly a cokernel of $f-g$, and conversely.
 
 ## Facts & Assumptions
 
-**Given:** Parallel morphisms $f,g:A\rightrightarrows B$ in a preadditive
-category.
+**Given:** Parallel morphisms $f,g:A\rightrightarrows B$ in a preadditive category.
 
-[L1] In a preadditive category, equalizers are kernels of differences
-([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]]).
+[L1] In a preadditive category, equalizers are kernels of differences ([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]]).
 
-[L2] The opposite of a preadditive category is preadditive
-([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
+[L2] The opposite of a preadditive category is preadditive ([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
 
 ## Proof
 

@@ -36,33 +36,17 @@ in $\mathcal S'(\mathbb R)$ for the negative-sign $2\pi$ normalization.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]] and
-$\varphi\in\mathcal S(\mathbb R)$.
+**Given:** [[def-countable-choice|Countable Choice]] and $\varphi\in\mathcal S(\mathbb R)$.
 
-[F1] A finite Schwartz-seminorm estimate characterizes tempered
-distributions, while its restriction gives the local finite-order condition
-on compact tests
-([[thm-finite-seminorm-bound-characterizes-tempered-distributions]],
-[[thm-local-finite-order-characterization-of-distributions]]).
+[F1] A finite Schwartz-seminorm estimate characterizes tempered distributions, while its restriction gives the local finite-order condition on compact tests ([[thm-finite-seminorm-bound-characterizes-tempered-distributions]], [[thm-local-finite-order-characterization-of-distributions]]).
 
-[F2] Multiplication by $x$ and Fourier multiplication/differentiation have the
-published distributional meanings and exact constants
-([[def-multiplication-of-a-distribution-by-a-smooth-function]],
-[[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]).
+[F2] Multiplication by $x$ and Fourier multiplication/differentiation have the published distributional meanings and exact constants ([[def-multiplication-of-a-distribution-by-a-smooth-function]], [[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]).
 
-[F3] The transforms of $1$ and $\delta_0$ are known with the $2\pi$
-normalization
-([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
+[F3] The transforms of $1$ and $\delta_0$ are known with the $2\pi$ normalization ([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
 
-[F4] Restriction $\mathcal S'\to\mathcal D'$ is injective, and a distribution
-with zero derivative on connected $\mathbb R$ is constant
-([[thm-tempered-distributions-embed-continuously-in-distributions]],
-[[thm-a-distribution-with-zero-derivatives-on-a-connected-open-set-is-constant]]).
+[F4] Restriction $\mathcal S'\to\mathcal D'$ is injective, and a distribution with zero derivative on connected $\mathbb R$ is constant ([[thm-tempered-distributions-embed-continuously-in-distributions]], [[thm-a-distribution-with-zero-derivatives-on-a-connected-open-set-is-constant]]).
 
-[F5] Complex integration by parts on decaying lines and the integral triangle
-inequality are available
-([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]],
-[[thm-integral-triangle-inequality]]).
+[F5] Complex integration by parts on decaying lines and the integral triangle inequality are available ([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]], [[thm-integral-triangle-inequality]]).
 
 ## Verification
 
@@ -76,9 +60,7 @@ Both integrals are absolute.  The mean-value estimate and Schwartz decay give
 
 $$\left|\left\langle\operatorname{pv}\frac1x,\varphi\right\rangle\right| \leq2p_{0,1}(\varphi)+p_{2,0}(\varphi),$$
 
-because $\int_{|x|\geq1}|x|^{-3}dx=1$.  Thus the limit exists, [F1] proves
-temperateness, and the same estimate restricts to a finite-order
-$\mathcal D'$ functional. [F1, F5]
+because $\int_{|x|\geq1}|x|^{-3}dx=1$.  Thus the limit exists, [F1] proves temperateness, and the same estimate restricts to a finite-order $\mathcal D'$ functional. [F1, F5]
 
 2.1 Test multiplication by the smooth coordinate function $x$. [F2, step 1.1]
 

@@ -27,11 +27,9 @@ Every compact Hausdorff topological group is profinite.
 
 ## Facts & Assumptions
 
-**Given:** The circle group $S^1=\{z\in\mathbb C:|z|=1\}$ under complex
-multiplication.
+**Given:** The circle group $S^1=\{z\in\mathbb C:|z|=1\}$ under complex multiplication.
 
-[L1] A topological group is profinite only if it is compact, Hausdorff, and
-totally disconnected ([[thm-topological-characterisation-of-profinite-groups]]).
+[L1] A topological group is profinite only if it is compact, Hausdorff, and totally disconnected ([[thm-topological-characterisation-of-profinite-groups]]).
 
 ## Refutation
 

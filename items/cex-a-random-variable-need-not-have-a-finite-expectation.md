@@ -30,17 +30,11 @@ Every real random variable has a finite expectation.
 
 ## Facts & Assumptions
 
-**Given:** The set $\Omega=\mathbb N_{\ge1}$ with its power-set sigma-algebra,
-the weights $p_n=1/(n(n+1))$, and the coordinate map $X(n)=n$.
+**Given:** The set $\Omega=\mathbb N_{\ge1}$ with its power-set sigma-algebra, the weights $p_n=1/(n(n+1))$, and the coordinate map $X(n)=n$.
 
-[L1] Expectation of a nonnegative random variable is allowed to take the value
-$+\infty$ ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
+[L1] Expectation of a nonnegative random variable is allowed to take the value $+\infty$ ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 
-[L2] The integral of a nonnegative simple function is its weighted level-set
-sum, and monotone convergence passes increasing nonnegative limits through the
-integral ([[def-integral-of-a-nonnegative-simple-function]],
-[[prop-the-nonnegative-integral-agrees-with-the-simple-integral]],
-[[thm-monotone-convergence-for-the-integral]]).
+[L2] The integral of a nonnegative simple function is its weighted level-set sum, and monotone convergence passes increasing nonnegative limits through the integral ([[def-integral-of-a-nonnegative-simple-function]], [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[thm-monotone-convergence-for-the-integral]]).
 
 ## Counterexample
 

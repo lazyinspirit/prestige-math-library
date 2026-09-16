@@ -45,9 +45,7 @@ either complete or weakly $\epsilon^d$-sparse.
 
 **Given:** The hypotheses in the statement.
 
-[L1] Theorem 6.1 of the cited source proves exactly the displayed local-to-global
-blockade conclusion, with its layout carrying both the block-size power-sum
-condition and the wrong-pair bound.
+[L1] Theorem 6.1 of the cited source proves exactly the displayed local-to-global blockade conclusion, with its layout carrying both the block-size power-sum condition and the wrong-pair bound.
 
 ## Proof
 

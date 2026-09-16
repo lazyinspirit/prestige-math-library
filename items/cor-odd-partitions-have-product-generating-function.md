@@ -37,9 +37,7 @@ $$\sum_{n \ge 0} p_{\mathrm{odd}}(n)x^n = \prod_{m \ge 1}(1-x^{2m-1})^{-1}.$$
 
 **Given:** one abstract object $v_m$ of size $2m-1$ for each integer $m \ge 1$.
 
-[F1] The empty partition has odd parts, and a nonempty partition into odd parts
-may use each odd part size with arbitrary multiplicity and uses no even part
-size ([[def-partition-counting-functions-and-restricted-families]]).
+[F1] The empty partition has odd parts, and a nonempty partition into odd parts may use each odd part size with arbitrary multiplicity and uses no even part size ([[def-partition-counting-functions-and-restricted-families]]).
 
 [L1] If a combinatorial class has one object in each permitted positive size, its multiset construction contributes the geometric factor $(1-x^d)^{-1}$ for each allowed size $d$ ([[thm-multiset-product-formula]]).
 

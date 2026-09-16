@@ -35,8 +35,7 @@ $M\to N$ that are transverse to $Z$ are dense in the strong smooth topology.
 
 **Given:** Smooth manifolds $M,N$ and a closed embedded submanifold $Z\subseteq N$.
 
-[L1] Every strong neighbourhood of a smooth map contains a transverse map
-([[thm-strong-whitney-approximation-by-transverse-maps]]).
+[L1] Every strong neighbourhood of a smooth map contains a transverse map ([[thm-strong-whitney-approximation-by-transverse-maps]]).
 
 ## Proof
 **Proof technique:** direct.

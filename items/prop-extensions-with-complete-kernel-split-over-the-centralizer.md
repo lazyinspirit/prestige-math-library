@@ -32,17 +32,13 @@ product of $i(N)$ and $C_E(i(N))$. In particular, the extension splits.
 
 **Given:** The displayed extension, with $N$ complete.
 
-[L1] A complete group has trivial center and trivial outer automorphism group
-([[def-complete-group]]).
+[L1] A complete group has trivial center and trivial outer automorphism group ([[def-complete-group]]).
 
-[L2] Every extension determines a homomorphism $Q\to\operatorname{Out}(N)$
-([[lem-an-extension-induces-a-well-defined-outer-action-on-the-kernel]]).
+[L2] Every extension determines a homomorphism $Q\to\operatorname{Out}(N)$ ([[lem-an-extension-induces-a-well-defined-outer-action-on-the-kernel]]).
 
-[L3] The centralizer $C_E(i(N))$ consists of the elements of $E$ commuting with
-every element of $i(N)$ ([[def-centralizer-of-a-subgroup]]).
+[L3] The centralizer $C_E(i(N))$ consists of the elements of $E$ commuting with every element of $i(N)$ ([[def-centralizer-of-a-subgroup]]).
 
-[L4] In an extension, a complement to the kernel is equivalent to a split
-section ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
+[L4] In an extension, a complement to the kernel is equivalent to a split section ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
 
 ## Proof
 

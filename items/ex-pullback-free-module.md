@@ -40,15 +40,11 @@ $$
 
 ## Facts & Assumptions
 
-**Given:** A morphism of ringed spaces
-$(f,f^\sharp):(X,\mathcal O_X)\to(Y,\mathcal O_Y)$ and an integer $n\ge0$.
+**Given:** A morphism of ringed spaces $(f,f^\sharp):(X,\mathcal O_X)\to(Y,\mathcal O_Y)$ and an integer $n\ge0$.
 
-[F1] Pullback is defined by
-$f^*\mathcal G=\mathcal O_X\otimes_{f^{-1}\mathcal O_Y}f^{-1}\mathcal G$
-([[def-pullback-module-ringed-spaces]]).
+[F1] Pullback is defined by $f^*\mathcal G=\mathcal O_X\otimes_{f^{-1}\mathcal O_Y}f^{-1}\mathcal G$ ([[def-pullback-module-ringed-spaces]]).
 
-[L1] Pullback is a left adjoint and therefore preserves finite coproducts
-([[thm-pullback-pushforward-module-adjunction]]).
+[L1] Pullback is a left adjoint and therefore preserves finite coproducts ([[thm-pullback-pushforward-module-adjunction]]).
 
 ## Verification
 

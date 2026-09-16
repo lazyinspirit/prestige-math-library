@@ -87,29 +87,12 @@ family is $(0, 1/n)$ for $n \ge 1$.
 
 ## Remarks
 
-- **Which hypothesis of [[thm-nested-interval-property]] is being violated.**
-  Only closedness. The intervals here are nonempty and bounded, and the family is
-  nested, so the true theorem does not apply, and the refutation shows that no
-  weakening of it to open intervals is available.
+- **Which hypothesis of [[thm-nested-interval-property]] is being violated.** Only closedness. The intervals here are nonempty and bounded, and the family is nested, so the true theorem does not apply, and the refutation shows that no weakening of it to open intervals is available.
 
-- **What goes wrong in the proof of the true theorem.** With $J_k = (a_k, b_k)$
-  the endpoint sequences still converge, to $a = \sup a_k$ and $b = \inf b_k$,
-  and the intersection is still an interval with those endpoints; but for open
-  intervals it is $[a, b]$ intersected with the open conditions, and here
-  $a = 0 = b$ while $0 \notin J_k$ for any $k$. The candidate point exists as a
-  real number and simply fails to lie in the sets. Closedness is exactly the
-  hypothesis that puts the endpoint into each interval.
+- **What goes wrong in the proof of the true theorem.** With $J_k = (a_k, b_k)$ the endpoint sequences still converge, to $a = \sup a_k$ and $b = \inf b_k$, and the intersection is still an interval with those endpoints; but for open intervals it is $[a, b]$ intersected with the open conditions, and here $a = 0 = b$ while $0 \notin J_k$ for any $k$. The candidate point exists as a real number and simply fails to lie in the sets. Closedness is exactly the hypothesis that puts the endpoint into each interval.
 
-- **The Archimedean property is what makes the intersection empty.** In a
-  non-Archimedean ordered field the same family has a nonempty intersection,
-  since a positive infinitesimal lies below every $1/n$. So the counterexample is
-  a statement about $\mathbb{R}$, and it is [[cor-archimedean-reciprocal]] that
-  supplies it.
+- **The Archimedean property is what makes the intersection empty.** In a non-Archimedean ordered field the same family has a nonempty intersection, since a positive infinitesimal lies below every $1/n$. So the counterexample is a statement about $\mathbb{R}$, and it is [[cor-archimedean-reciprocal]] that supplies it.
 
-- **A closely related true statement.** The intersection of the *closures*
-  $[0, 1/(k+1)]$ is $\{0\}$ ([[ex-nested-intervals-single-point]]), which is the
-  same computation with the endpoint included, and it is exactly what the true
-  theorem predicts once the lengths are seen to tend to $0$.
+- **A closely related true statement.** The intersection of the *closures* $[0, 1/(k+1)]$ is $\{0\}$ ([[ex-nested-intervals-single-point]]), which is the same computation with the endpoint included, and it is exactly what the true theorem predicts once the lengths are seen to tend to $0$.
 
-- The witness is recorded as the named counterexample
-  [[cex-nested-open-intervals-empty]].
+- The witness is recorded as the named counterexample [[cex-nested-open-intervals-empty]].

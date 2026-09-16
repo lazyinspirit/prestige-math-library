@@ -47,11 +47,9 @@ not Lebesgue measurable.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and a Vitali set
-$V \subseteq [0,1]$ ([[def-vitali-set-on-the-unit-interval]]).
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]) and a Vitali set $V \subseteq [0,1]$ ([[def-vitali-set-on-the-unit-interval]]).
 
-[L1] Each rational-difference equivalence class in $[0,1]$ meets $V$ in
-exactly one point ([[def-vitali-set-on-the-unit-interval]]).
+[L1] Each rational-difference equivalence class in $[0,1]$ meets $V$ in exactly one point ([[def-vitali-set-on-the-unit-interval]]).
 
 [L2] Assuming countable choice, Lebesgue outer measure, Lebesgue measurability and Lebesgue measure are unchanged by translation ([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).
 
@@ -63,9 +61,7 @@ exactly one point ([[def-vitali-set-on-the-unit-interval]]).
 
 [L6] For every real $M$ there is a natural number $n \ge 1$ with $M < n$ ([[thm-of-archimedean]]).
 
-[L7] Under countable choice ([[def-countable-choice]]), Lebesgue measure is
-a measure on the Lebesgue sigma-algebra
-([[thm-lebesgue-measure-is-a-complete-measure]]).
+[L7] Under countable choice ([[def-countable-choice]]), Lebesgue measure is a measure on the Lebesgue sigma-algebra ([[thm-lebesgue-measure-is-a-complete-measure]]).
 
 ## Proof
 
@@ -83,6 +79,4 @@ a measure on the Lebesgue sigma-algebra
 
 ## Remarks
 
-- The selector is given, not constructed in this theorem. Here AC is used
-  only to supply the countable choice required by the measure construction.
-  Obtaining a Vitali set in the first place is a separate existence theorem.
+- The selector is given, not constructed in this theorem. Here AC is used only to supply the countable choice required by the measure construction. Obtaining a Vitali set in the first place is a separate existence theorem.

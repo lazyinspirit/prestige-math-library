@@ -31,11 +31,9 @@ $R$-module. Then $M$ is finite projective.
 
 **Given:** A Noetherian commutative ring $R$ and a finite flat $R$-module $M$.
 
-[L1] A finite flat module over a Noetherian local ring is free
-([[thm-finite-flat-modules-over-local-rings-are-free]]).
+[L1] A finite flat module over a Noetherian local ring is free ([[thm-finite-flat-modules-over-local-rings-are-free]]).
 
-[L2] Over a Noetherian ring, finite modules are finitely presented
-([[thm-finite-generation-and-finite-presentation-over-a-noetherian-ring]]).
+[L2] Over a Noetherian ring, finite modules are finitely presented ([[thm-finite-generation-and-finite-presentation-over-a-noetherian-ring]]).
 
 [L3] Flat modules satisfy the equational criterion for every finite family of relations ([[thm-equational-criterion-for-flatness]]).
 

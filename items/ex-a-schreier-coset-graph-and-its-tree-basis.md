@@ -43,14 +43,11 @@ $$a^2,\ b^2,\ ab^2a^{-1},\ abab^{-1},\ bab^{-1}a^{-1}.$$
 
 **Given:** The subgroup $H$ above.
 
-[L1] The Schreier graph records cosets and labeled generator edges
-([[def-labeled-schreier-coset-graph]]).
+[L1] The Schreier graph records cosets and labeled generator edges ([[def-labeled-schreier-coset-graph]]).
 
-[L2] Rooted spanning trees correspond to Schreier systems
-([[lem-spanning-trees-and-schreier-systems-correspond]]).
+[L2] Rooted spanning trees correspond to Schreier systems ([[lem-spanning-trees-and-schreier-systems-correspond]]).
 
-[L3] The nontrivial Schreier generators of such a tree form a free basis
-([[thm-nielsen-schreier-with-an-explicit-basis]]).
+[L3] The nontrivial Schreier generators of such a tree form a free basis ([[thm-nielsen-schreier-with-an-explicit-basis]]).
 
 ## Verification
 

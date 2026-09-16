@@ -40,16 +40,11 @@ constant function and cannot in general be replaced by one integer.
 
 ## Facts & Assumptions
 
-**Given:** the stated compact Hausdorff space and clopen decomposition with
-both pieces nonempty.
+**Given:** the stated compact Hausdorff space and clopen decomposition with both pieces nonempty.
 
-[F1] The rank homomorphism sends a bundle to its integer-valued fiber-dimension
-function, viewed in $H^0$, and respects virtual differences
-([[def-grothendieck-ring-structure-and-rank-map]]).
+[F1] The rank homomorphism sends a bundle to its integer-valued fiber-dimension function, viewed in $H^0$, and respects virtual differences ([[def-grothendieck-ring-structure-and-rank-map]]).
 
-[F2] Bundles of locally constant finite rank, including rank zero, are admitted
-componentwise in the Whitney-sum monoid
-([[def-whitney-sum-monoid-of-complex-vector-bundles]]).
+[F2] Bundles of locally constant finite rank, including rank zero, are admitted componentwise in the Whitney-sum monoid ([[def-whitney-sum-monoid-of-complex-vector-bundles]]).
 
 ## Verification
 

@@ -32,8 +32,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** Three singleton blocks $B_1=\{1\}$, $B_2=\{2\}$, $B_3=\{3\}$ with
-edges $12$ and $23$ but not $13$.
+**Given:** Three singleton blocks $B_1=\{1\}$, $B_2=\{2\}$, $B_3=\{3\}$ with edges $12$ and $23$ but not $13$.
 
 ## Proof
 

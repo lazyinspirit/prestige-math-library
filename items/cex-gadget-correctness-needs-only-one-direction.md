@@ -32,8 +32,7 @@ yes-instance.
 
 ## Facts & Assumptions
 
-**Given:** The constant map sending every $3$-CNF formula to the CLIQUE
-instance $(K_1,1)$.
+**Given:** The constant map sending every $3$-CNF formula to the CLIQUE instance $(K_1,1)$.
 
 [F1] The graph $K_1$ has one vertex, so $(K_1,1)$ is a yes-instance of CLIQUE, by [[def-clique-independent-set-and-vertex-cover-problems]].
 

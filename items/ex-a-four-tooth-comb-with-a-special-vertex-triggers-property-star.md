@@ -42,11 +42,7 @@ for each $i$.
 
 [L1] The item [[def-comb-in-a-graph]] characterizes an $(\ell,w)$-comb by the blockade conditions and the adjacency pattern of the teeth.
 
-[L2] If a finite family $\mathcal F$ has property $(*)$ and $G$ is
-$\overline{\mathcal F}$-free, then an $(\ell,w)$-comb with $\ell,w\ge4$
-together with a vertex outside the comb that is complete to the blocks and
-anticomplete to the teeth is the antecedent of the three-outcome implication
-in [[def-property-star-for-a-finite-family]].
+[L2] If a finite family $\mathcal F$ has property $(*)$ and $G$ is $\overline{\mathcal F}$-free, then an $(\ell,w)$-comb with $\ell,w\ge4$ together with a vertex outside the comb that is complete to the blocks and anticomplete to the teeth is the antecedent of the three-outcome implication in [[def-property-star-for-a-finite-family]].
 
 ## Verification
 

@@ -39,28 +39,17 @@ neighborhood of $x$, and $gS\cap S\ne\varnothing$ implies $g=e$.
 
 **Given:** A smooth free proper left action of $G$ on $M$ and a point $x\in M$.
 
-[F1] Properness means that the action-graph map
-$\Theta(g,y)=(g\cdot y,y)$ has compact inverse images of compact subsets.
-[[def-free-and-proper-lie-group-actions]].
+[F1] Properness means that the action-graph map $\Theta(g,y)=(g\cdot y,y)$ has compact inverse images of compact subsets. [[def-free-and-proper-lie-group-actions]].
 
-[F2] The constant-rank theorem gives local normal forms for constant-rank
-maps, and a smooth map with invertible differential is locally a
-diffeomorphism. [[thm-constant-rank-theorem-for-manifolds]],
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F2] The constant-rank theorem gives local normal forms for constant-rank maps, and a smooth map with invertible differential is locally a diffeomorphism. [[thm-constant-rank-theorem-for-manifolds]], [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
-[F3] A finite-dimensional linear subspace has a complement.
-[[cor-a-linear-subspace-has-a-complement]].
+[F3] A finite-dimensional linear subspace has a complement. [[cor-a-linear-subspace-has-a-complement]].
 
-[F4] Manifolds are locally compact; continuous images of compact sets are
-compact; closed subsets of compact spaces are compact.
-[[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]],
-[[thm-compactness-under-continuous-maps]],
-[[thm-closed-subspace-of-a-compact-space-is-compact]].
+[F4] Manifolds are locally compact; continuous images of compact sets are compact; closed subsets of compact spaces are compact. [[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]], [[thm-compactness-under-continuous-maps]], [[thm-closed-subspace-of-a-compact-space-is-compact]].
 
 ## Proof
 
-**Proof technique:** construct a transverse submanifold and use properness to
-exclude returns.
+**Proof technique:** construct a transverse submanifold and use properness to exclude returns.
 
 1.1 Let $\Phi_x:G\to M$ be the orbit map. From $\Phi_x\circ L_g=(y\mapsto g\cdot y)\circ\Phi_x$ and the fact that both outside maps are diffeomorphisms, $\Phi_x$ has constant rank. Its fibre over $x$ is the stabilizer $G_x=\{e\}$ by freeness. If $d(\Phi_x)_e$ had a nonzero kernel, the constant-rank normal form [F2] would make the local fibre through $e$ positive-dimensional, contradicting that it is a singleton. Thus $d(\Phi_x)_e$ is injective. [given, F2, algebra]
 

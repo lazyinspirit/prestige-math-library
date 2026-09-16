@@ -33,12 +33,9 @@ So in this case one may take the Artin-Rees number to be $c=m$.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, an integer $m\ge0$, the ring $R=k[x]$, the ideal
-$I=(x)$, the module $M=R$, and the submodule $N=(x^m)$.
+**Given:** A field $k$, an integer $m\ge0$, the ring $R=k[x]$, the ideal $I=(x)$, the module $M=R$, and the submodule $N=(x^m)$.
 
-[L1] Artin-Rees gives some constant $c$ with
-$$ I^nM\cap N=I^{n-c}(I^cM\cap N) $$
-for all $n\ge c$ ([[thm-artin-rees-lemma]]).
+[L1] Artin-Rees gives some constant $c$ with $$ I^nM\cap N=I^{n-c}(I^cM\cap N) $$ for all $n\ge c$ ([[thm-artin-rees-lemma]]).
 
 ## Verification
 

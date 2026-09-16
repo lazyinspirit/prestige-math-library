@@ -48,31 +48,21 @@ where $\delta$ is the connecting morphism of
 
 **Given:** The snake-data diagram in the statement.
 
-[L1] The connecting morphism exists and is unique
-([[thm-the-connecting-morphism-exists-and-is-unique]]).
+[L1] The connecting morphism exists and is unique ([[thm-the-connecting-morphism-exists-and-is-unique]]).
 
-[L2] The kernel row is exact at its first two nodes, and the cokernel row is
-exact at its last two nodes
-([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
+[L2] The kernel row is exact at its first two nodes, and the cokernel row is exact at its last two nodes ([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
 
-[L3] The subtraction surrogate produces a member mapping to zero from two
-members with the same image ([[thm-chasing-rule-the-subtraction-surrogate]]).
+[L3] The subtraction surrogate produces a member mapping to zero from two members with the same image ([[thm-chasing-rule-the-subtraction-surrogate]]).
 
-[L4] Exactness at a node is equivalent to the member-lifting condition
-([[thm-chasing-rule-exactness-detected-by-members]]).
+[L4] Exactness at a node is equivalent to the member-lifting condition ([[thm-chasing-rule-exactness-detected-by-members]]).
 
-[L5] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L5] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L2], the induced kernel row
-$$0 \to \ker(f) \to \ker(g) \to \ker(h)$$
-is exact at $\ker(f)$ and at $\ker(g)$, while the induced cokernel row
-$$\operatorname{coker}(g) \to \operatorname{coker}(h) \to 0$$
-is exact at $\operatorname{coker}(g)$ and at $\operatorname{coker}(h)$. Thus only exactness at $\ker(h)$ and at $\operatorname{coker}(f)$ remains. [L2, given]
+1.1 By [L2], the induced kernel row $$0 \to \ker(f) \to \ker(g) \to \ker(h)$$ is exact at $\ker(f)$ and at $\ker(g)$, while the induced cokernel row $$\operatorname{coker}(g) \to \operatorname{coker}(h) \to 0$$ is exact at $\operatorname{coker}(g)$ and at $\operatorname{coker}(h)$. Thus only exactness at $\ker(h)$ and at $\operatorname{coker}(f)$ remains. [L2, given]
 
 2.1 Let $k_h:K \to C$ be a kernel of $h$, let $q_f:A' \to Q$ be a cokernel of $f$, and use [L1] to form the pullback object $P$, the map $\pi:P \to K$, the map $\pi':P \to B$, and the connecting morphism $\delta:K \to Q$ with $$\iota \delta \pi = \iota' g \pi'.$$ The proof of [L1] gives that $\pi$ is epic. [L1, step 1.1, construct]
 

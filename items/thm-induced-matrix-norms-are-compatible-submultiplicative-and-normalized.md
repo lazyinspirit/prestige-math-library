@@ -41,21 +41,13 @@ induced $p$-norms of [[def-induced-matrix-p-norm]].
 
 ## Facts & Assumptions
 
-**Given:** A rational $p\ge 1$, natural numbers $m,n,q$, matrices
-$A\in M_{m\times n}(\mathbb{R})$, $B\in M_{n\times q}(\mathbb{R})$, and vectors
-$x\in\mathbb{R}^{n}$.
+**Given:** A rational $p\ge 1$, natural numbers $m,n,q$, matrices $A\in M_{m\times n}(\mathbb{R})$, $B\in M_{n\times q}(\mathbb{R})$, and vectors $x\in\mathbb{R}^{n}$.
 
-[L1] $\lVert\cdot\rVert_p$ is a norm on $\mathbb{R}^{n}$ and on
-$\mathbb{R}^{m}$: in particular $\lVert 0\rVert_p=0$ and
-$\lVert\lambda y\rVert_p=|\lambda|\lVert y\rVert_p$ ([[lem-p-norms-are-norms-and-induce-the-published-metrics]]).
+[L1] $\lVert\cdot\rVert_p$ is a norm on $\mathbb{R}^{n}$ and on $\mathbb{R}^{m}$: in particular $\lVert 0\rVert_p=0$ and $\lVert\lambda y\rVert_p=|\lambda|\lVert y\rVert_p$ ([[lem-p-norms-are-norms-and-induce-the-published-metrics]]).
 
-[L2] The induced norm is
-$\lVert A\rVert_p=\sup\{\lVert Ay\rVert_p:\lVert y\rVert_p\le 1\}$
-([[def-induced-matrix-p-norm]]).
+[L2] The induced norm is $\lVert A\rVert_p=\sup\{\lVert Ay\rVert_p:\lVert y\rVert_p\le 1\}$ ([[def-induced-matrix-p-norm]]).
 
-[L3] Matrix multiplication is associative, so $(AB)x=A(Bx)$; it is also
-unital, so $I_nx=x$ for $n\ge 1$ ([[thm-matrix-multiplication-laws]],
-[[def-matrix-product-and-identity-matrix]]).
+[L3] Matrix multiplication is associative, so $(AB)x=A(Bx)$; it is also unital, so $I_nx=x$ for $n\ge 1$ ([[thm-matrix-multiplication-laws]], [[def-matrix-product-and-identity-matrix]]).
 
 ## Proof
 

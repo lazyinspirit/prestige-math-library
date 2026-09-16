@@ -32,10 +32,7 @@ Moser isotopy.
 
 **Given:** The proposed universal claim.
 
-[F1] Compact Moser stability requires compact $M$; its noncompact replacement
-requires primitives with one common compact support.
-[[thm-moser-stability-theorem]],
-[[thm-compact-support-moser-stability-on-a-noncompact-manifold]].
+[F1] Compact Moser stability requires compact $M$; its noncompact replacement requires primitives with one common compact support. [[thm-moser-stability-theorem]], [[thm-compact-support-moser-stability-on-a-noncompact-manifold]].
 
 ## Refutation
 

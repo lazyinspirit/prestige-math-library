@@ -49,28 +49,17 @@ equivalent to its interpretation in one fixed $P_\theta$.
 
 ## Facts & Assumptions
 
-**Given:** The definable class forcing $P_3$, its complete regular initial
-segments, a ground-definable global well-order, and a class-generic $G$ as in
-the statement.
+**Given:** The definable class forcing $P_3$, its complete regular initial segments, a ground-definable global well-order, and a class-generic $G$ as in the statement.
 
-[F1] [[lem-gitik-restriction-amalgamation-and-prikry-property]]: Every regular
-$P_\theta$ is a complete set subforcing of $P_3$, every set name is bounded in
-one such restriction, and $M[G]$ is the union of the $M[G_\theta]$.
+[F1] [[lem-gitik-restriction-amalgamation-and-prikry-property]]: Every regular $P_\theta$ is a complete set subforcing of $P_3$, every set name is bounded in one such restriction, and $M[G]$ is the union of the $M[G_\theta]$.
 
-[F2] [[def-forcing-relation-for-formulas]]: Negation and existential forcing
-are expressed by absence of a stronger forcing condition and by a dense set of
-name witnesses.
+[F2] [[def-forcing-relation-for-formulas]]: Negation and existential forcing are expressed by absence of a stronger forcing condition and by a dense set of name witnesses.
 
-[F3] [[thm-forcing-theorem]]: For each set forcing $P_\theta$, forcing is
-definable and satisfies the truth lemma.
+[F3] [[thm-forcing-theorem]]: For each set forcing $P_\theta$, forcing is definable and satisfies the truth lemma.
 
-[F4] [[def-gitik-strongly-compact-filter-system-and-class-forcing]]: $P_3$,
-its order, its set restrictions and the ground global well-order are definable
-classes.
+[F4] [[def-gitik-strongly-compact-filter-system-and-class-forcing]]: $P_3$, its order, its set restrictions and the ground global well-order are definable classes.
 
-[F5] [[def-axiom-of-choice]]: The ground model satisfies AC. The argument below
-uses the given global well-order when a canonical ground witness is desired;
-it does not assert AC in a later symmetric submodel.
+[F5] [[def-axiom-of-choice]]: The ground model satisfies AC. The argument below uses the given global well-order when a canonical ground witness is desired; it does not assert AC in a later symmetric submodel.
 
 ## Proof
 

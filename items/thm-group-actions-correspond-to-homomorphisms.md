@@ -34,14 +34,11 @@ $g$ to the permutation $x\mapsto g\cdot x$.
 
 **Given:** A group $G$ with identity $e$ and a set $X$.
 
-[L1] A left action satisfies $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$
-([[def-group-action]]).
+[L1] A left action satisfies $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$ ([[def-group-action]]).
 
-[L2] $\operatorname{Sym}(X)$ is the group of bijections $X\to X$ under
-composition ([[def-symmetric-group]], [[lem-symmetric-group-is-a-group]]).
+[L2] $\operatorname{Sym}(X)$ is the group of bijections $X\to X$ under composition ([[def-symmetric-group]], [[lem-symmetric-group-is-a-group]]).
 
-[L3] A group homomorphism preserves multiplication and sends the identity to the
-identity ([[def-group-homomorphism]], [[lem-group-homomorphism-basic-properties]]).
+[L3] A group homomorphism preserves multiplication and sends the identity to the identity ([[def-group-homomorphism]], [[lem-group-homomorphism-basic-properties]]).
 
 ## Proof
 

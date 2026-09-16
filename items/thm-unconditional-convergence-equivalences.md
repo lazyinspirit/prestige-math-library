@@ -48,8 +48,7 @@ In (1) and (2) the limit is the fixed-order sum.
 
 [L1] Every Cauchy sequence in a Banach space converges ([[def-banach-space]]).
 
-[L2] Unconditional convergence means convergence of every permutation to the
-same sum ([[def-unconditional-convergence-of-a-banach-space-series]]).
+[L2] Unconditional convergence means convergence of every permutation to the same sum ([[def-unconditional-convergence-of-a-banach-space-series]]).
 
 ## Proof
 
@@ -71,8 +70,6 @@ same sum ([[def-unconditional-convergence-of-a-banach-space-series]]).
 
 $$\left\|\sum_{n\in F}\lambda_nx_n\right\|\le4M \sup_{A\subseteq F}\left\|\sum_{n\in A}x_n\right\|.$$
 
-(The factor is $2M$ over the reals.) Condition (3) and [L1] now prove (5).
-Taking $\lambda_n$ to be the indicator of an infinite subset shows that (5)
-implies (4). [L1, (3), finite convexity]
+(The factor is $2M$ over the reals.) Condition (3) and [L1] now prove (5). Taking $\lambda_n$ to be the indicator of an infinite subset shows that (5) implies (4). [L1, (3), finite convexity]
 
 7.1 Steps 2.1--6.1 give both directions among all five conditions. The [given, step 4.1, step 6.1] common-sum identification is the conclusion of step 4.1. [step 2.1, 3.1, 4.1, 5.1, 6.1] ∎

@@ -85,11 +85,6 @@ For all $a, b \in \mathbb{Z}$, with $\gcd$ as in [[def-common-divisor-and-gcd]]:
 
 ## Remarks
 
-- **Claim 2 is what lets every later argument assume the arguments are
-  nonnegative**, and claim 1 lets it assume they are in either order. Both are
-  used without comment below.
+- **Claim 2 is what lets every later argument assume the arguments are nonnegative**, and claim 1 lets it assume they are in either order. Both are used without comment below.
 
-- **Every clause is checked at the boundary.** Claim 3 covers $a = 0$, where it
-  returns the convention $\gcd(0,0) = 0$ rather than contradicting it; claim 4
-  holds at $a = 0$, giving $\gcd(0,1) = 1$; and claim 5 holds at $a = 0$, giving
-  $\gcd(0,0) = 0$. There is no pair at which a clause above is silent.
+- **Every clause is checked at the boundary.** Claim 3 covers $a = 0$, where it returns the convention $\gcd(0,0) = 0$ rather than contradicting it; claim 4 holds at $a = 0$, giving $\gcd(0,1) = 1$; and claim 5 holds at $a = 0$, giving $\gcd(0,0) = 0$. There is no pair at which a clause above is silent.

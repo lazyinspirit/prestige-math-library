@@ -30,33 +30,21 @@ subspace, then the quotient Banach space $X/Y$ is reflexive.
 
 ## Facts & Assumptions
 
-**Given:** HB, $\mathrm{AC}_\omega$, a real or complex reflexive Banach space
-$X$, and a closed scalar-linear subspace $Y\subseteq X$.
+**Given:** HB, $\mathrm{AC}_\omega$, a real or complex reflexive Banach space $X$, and a closed scalar-linear subspace $Y\subseteq X$.
 
-[F1] Reflexivity means that the canonical map $J_X:X\to X^{**}$ is
-surjective, so every $x^{**}\in X^{**}$ is evaluation at a vector of $X$
-([[def-reflexive-banach-space]]).
+[F1] Reflexivity means that the canonical map $J_X:X\to X^{**}$ is surjective, so every $x^{**}\in X^{**}$ is evaluation at a vector of $X$ ([[def-reflexive-banach-space]]).
 
-[F2] For the quotient map $q:X\to X/Y$, pullback is a scalar-linear isometric
-bijection $Q:(X/Y)^*\to Y^\perp$, $Qh=h\circ q$
-([[thm-dual-of-a-quotient-is-the-annihilator]]).
+[F2] For the quotient map $q:X\to X/Y$, pullback is a scalar-linear isometric bijection $Q:(X/Y)^*\to Y^\perp$, $Qh=h\circ q$ ([[thm-dual-of-a-quotient-is-the-annihilator]]).
 
-[F3] Under HB, every bounded scalar-linear functional on an arbitrary linear
-subspace of a real or complex normed space extends to the whole space without
-increasing its norm ([[thm-relative-hahn-banach-norm-preserving-extension]]).
+[F3] Under HB, every bounded scalar-linear functional on an arbitrary linear subspace of a real or complex normed space extends to the whole space without increasing its norm ([[thm-relative-hahn-banach-norm-preserving-extension]]).
 
-[F4] Assuming $\mathrm{AC}_\omega$, the quotient of a Banach space by a
-closed linear subspace is Banach for the quotient norm
-([[thm-quotient-of-banach-by-closed-subspace-is-banach]]).
+[F4] Assuming $\mathrm{AC}_\omega$, the quotient of a Banach space by a closed linear subspace is Banach for the quotient norm ([[thm-quotient-of-banach-by-closed-subspace-is-banach]]).
 
-[F5] HB is the real dominated-extension principle over ZF, while
-$\mathrm{AC}_\omega$ chooses from each supplied sequence of nonempty sets
-([[def-hahn-banach-extension-principle-relative]], [[def-countable-choice]]).
+[F5] HB is the real dominated-extension principle over ZF, while $\mathrm{AC}_\omega$ chooses from each supplied sequence of nonempty sets ([[def-hahn-banach-extension-principle-relative]], [[def-countable-choice]]).
 
 ## Proof
 
-**Proof technique:** extend a quotient-bidual functional and represent the
-extension in the reflexive ambient space.
+**Proof technique:** extend a quotient-bidual functional and represent the extension in the reflexive ambient space.
 
 1.1 Put $Z=X/Y$ and write $q:X\to Z$ for the quotient map.  By [F4], under the assumed $\mathrm{AC}_\omega$ the normed quotient $Z$ is Banach.  This includes $Y=X$, when $Z=\{0\}$, and $Y=\{0\}$, when the quotient norm is the original norm. [F4, F5, given]
 
@@ -72,9 +60,4 @@ extension in the reflexive ambient space.
 
 ## Source notes
 
-Bühler–Salamon, Theorem 2.71(ii), printed pp. 91–92, gives the complete
-annihilator-extension computation.  The proof above keeps its exact algebra
-but states the repository's weak-choice costs: the selected quotient-
-completeness theorem requires $\mathrm{AC}_\omega$, while the extension from
-$Y^\perp$ to $X^*$ requires HB.  It does not claim that the quotient map sends
-the ambient closed unit ball onto the quotient closed unit ball.
+Bühler–Salamon, Theorem 2.71(ii), printed pp. 91–92, gives the complete annihilator-extension computation.  The proof above keeps its exact algebra but states the repository's weak-choice costs: the selected quotient- completeness theorem requires $\mathrm{AC}_\omega$, while the extension from $Y^\perp$ to $X^*$ requires HB.  It does not claim that the quotient map sends the ambient closed unit ball onto the quotient closed unit ball.

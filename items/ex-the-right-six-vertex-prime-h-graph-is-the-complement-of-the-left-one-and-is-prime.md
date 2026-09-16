@@ -38,20 +38,15 @@ $\{ac,ae,af,bf,cd,ce,cf,df\}$.
 
 ## Facts & Assumptions
 
-**Given:** The left and right six-vertex prime $\mathcal H$-graphs on the common
-label set $\{a,b,c,d,e,f\}$.
+**Given:** The left and right six-vertex prime $\mathcal H$-graphs on the common label set $\{a,b,c,d,e,f\}$.
 
-[L1] The right graph is defined as the complement of the left graph
-([[def-right-six-vertex-prime-h-graph]], [[def-left-six-vertex-prime-h-graph]], [[def-graph-isomorphism-and-complement]]).
+[L1] The right graph is defined as the complement of the left graph ([[def-right-six-vertex-prime-h-graph]], [[def-left-six-vertex-prime-h-graph]], [[def-graph-isomorphism-and-complement]]).
 
-[L2] The left six-vertex prime $\mathcal H$-graph is prime
-([[ex-the-left-six-vertex-prime-h-graph-is-prime-and-leaf-deletes-to-the-bull]]).
+[L2] The left six-vertex prime $\mathcal H$-graph is prime ([[ex-the-left-six-vertex-prime-h-graph-is-prime-and-leaf-deletes-to-the-bull]]).
 
-[L3] A graph is prime exactly when it has no nontrivial module
-([[def-prime-graph]], [[def-module-of-a-graph]]).
+[L3] A graph is prime exactly when it has no nontrivial module ([[def-prime-graph]], [[def-module-of-a-graph]]).
 
-[F1] A vertex set is a module of a graph if and only if it is a module of the
-complement, because outside vertices swap complete and anticomplete behaviour.
+[F1] A vertex set is a module of a graph if and only if it is a module of the complement, because outside vertices swap complete and anticomplete behaviour.
 
 ## Verification
 
@@ -65,10 +60,4 @@ complement, because outside vertices swap complete and anticomplete behaviour.
 
 ## Remarks
 
-For comparison with Nguyen–Scott–Seymour Figure 1, label the right drawing's
-top row $A,B,C$ and bottom row $D,E,F$. The bijection
-$$a\mapsto D,\quad b\mapsto F,\quad c\mapsto B,\quad d\mapsto C,\quad e\mapsto A,\quad f\mapsto E$$
-sends the eight edges above to $BD,AD,DE,EF,BC,AB,BE,CE$, exactly the
-edges of that drawing. The former labels and complement-of-net interpretation
-are superseded; the complement argument now applies to the corrected
-seven-edge left graph.
+For comparison with Nguyen–Scott–Seymour Figure 1, label the right drawing's top row $A,B,C$ and bottom row $D,E,F$. The bijection $$a\mapsto D,\quad b\mapsto F,\quad c\mapsto B,\quad d\mapsto C,\quad e\mapsto A,\quad f\mapsto E$$ sends the eight edges above to $BD,AD,DE,EF,BC,AB,BE,CE$, exactly the edges of that drawing. The former labels and complement-of-net interpretation are superseded; the complement argument now applies to the corrected seven-edge left graph.

@@ -36,19 +36,13 @@ $$\mathcal L_u(a;v)\ge0\qquad\text{for every }a\in\Omega\text{ and every }v\in\m
 
 ## Facts & Assumptions
 
-**Given:** An open set $\Omega\subseteq\mathbb C^m$ and a function
-$u\in C^2(\Omega,\mathbb R)$.
+**Given:** An open set $\Omega\subseteq\mathbb C^m$ and a function $u\in C^2(\Omega,\mathbb R)$.
 
-[L1] Plurisubharmonicity is defined by subharmonicity of the restriction to
-every affine complex line ([[def-plurisubharmonic-function]]).
+[L1] Plurisubharmonicity is defined by subharmonicity of the restriction to every affine complex line ([[def-plurisubharmonic-function]]).
 
-[L2] The Levi form is the Hermitian form built from the mixed
-$z_j\overline z_k$ second derivatives
-([[def-levi-form-and-strict-plurisubharmonicity]]).
+[L2] The Levi form is the Hermitian form built from the mixed $z_j\overline z_k$ second derivatives ([[def-levi-form-and-strict-plurisubharmonicity]]).
 
-[L3] A $C^2$ real-valued function of one complex variable is subharmonic exactly
-when its Laplacian is nonnegative
-([[thm-c-two-characterization-of-plane-subharmonicity]]).
+[L3] A $C^2$ real-valued function of one complex variable is subharmonic exactly when its Laplacian is nonnegative ([[thm-c-two-characterization-of-plane-subharmonicity]]).
 
 ## Proof
 

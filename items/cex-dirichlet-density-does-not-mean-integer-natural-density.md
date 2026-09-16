@@ -30,11 +30,7 @@ density inside all positive integers.
 
 ## Facts & Assumptions
 
-**Given:** The definitions of natural and Dirichlet density, the residue-class
-density theorem, and Chebyshev's upper bound for the prime-counting function
-([[def-natural-and-dirichlet-density]],
-[[thm-primes-residue-class-dirichlet-density]],
-[[thm-chebyshev-prime-counting-bounds]]).
+**Given:** The definitions of natural and Dirichlet density, the residue-class density theorem, and Chebyshev's upper bound for the prime-counting function ([[def-natural-and-dirichlet-density]], [[thm-primes-residue-class-dirichlet-density]], [[thm-chebyshev-prime-counting-bounds]]).
 
 ## Counterexample
 

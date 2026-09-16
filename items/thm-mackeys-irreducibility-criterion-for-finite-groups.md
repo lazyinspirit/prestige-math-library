@@ -34,20 +34,13 @@ $$ \Bigl\langle \operatorname{Res}_{H\cap sHs^{-1}}^H\chi, \operatorname{Res}_{H
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a subgroup $H\le G$, an irreducible complex
-character $\chi$ of $H$, and representatives $S$ for $H\backslash G/H$ with
-$1\in S$.
+**Given:** A finite group $G$, a subgroup $H\le G$, an irreducible complex character $\chi$ of $H$, and representatives $S$ for $H\backslash G/H$ with $1\in S$.
 
-[F1] A complex character is irreducible if and only if its self-inner-product
-is $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
+[F1] A complex character is irreducible if and only if its self-inner-product is $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
 
-[F2] Frobenius reciprocity gives
-$\langle \operatorname{Ind}_H^G\chi,\psi\rangle_G=\langle \chi,\operatorname{Res}_H^G\psi\rangle_H$
-([[cor-frobenius-reciprocity-for-complex-characters]]).
+[F2] Frobenius reciprocity gives $\langle \operatorname{Ind}_H^G\chi,\psi\rangle_G=\langle \chi,\operatorname{Res}_H^G\psi\rangle_H$ ([[cor-frobenius-reciprocity-for-complex-characters]]).
 
-[F3] Mackey's formula expands $\operatorname{Res}_H^G\operatorname{Ind}_H^G\chi$
-as a sum over the double cosets in $H\backslash G/H$
-([[thm-mackey-double-coset-formula-for-restricting-an-induced-character]]).
+[F3] Mackey's formula expands $\operatorname{Res}_H^G\operatorname{Ind}_H^G\chi$ as a sum over the double cosets in $H\backslash G/H$ ([[thm-mackey-double-coset-formula-for-restricting-an-induced-character]]).
 
 ## Proof
 

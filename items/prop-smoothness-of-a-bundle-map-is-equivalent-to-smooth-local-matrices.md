@@ -37,14 +37,11 @@ for every $p\in U$.
 
 ## Facts & Assumptions
 
-**Given:** A fibrewise linear map $\Phi:E\to F$ over a smooth map $f:M\to N$ and
-local frames on $U$ and $V$ as above.
+**Given:** A fibrewise linear map $\Phi:E\to F$ over a smooth map $f:M\to N$ and local frames on $U$ and $V$ as above.
 
-[L1] Local frames are equivalent to local trivializations
-([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
+[L1] Local frames are equivalent to local trivializations ([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
 
-[L2] A section is smooth exactly when its local components are smooth
-([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
+[L2] A section is smooth exactly when its local components are smooth ([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
 
 ## Proof
 

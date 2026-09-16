@@ -35,33 +35,19 @@ The ultrafilter lemma is not assumed.
 
 ## Facts & Assumptions
 
-**Given:** HB, $\mathrm{AC}_\omega$, and a real or complex uniformly convex
-Banach space $X$, with canonical map $J_X:X\to X^{**}$.
+**Given:** HB, $\mathrm{AC}_\omega$, and a real or complex uniformly convex Banach space $X$, with canonical map $J_X:X\to X^{**}$.
 
-[F1] For every $\eta\in(0,2]$, uniform convexity supplies $\delta>0$ such
-that unit-ball vectors separated by at least $\eta$ have midpoint norm at most
-$1-\delta$ ([[def-uniformly-convex-banach-space]]).
+[F1] For every $\eta\in(0,2]$, uniform convexity supplies $\delta>0$ such that unit-ball vectors separated by at least $\eta$ have midpoint norm at most $1-\delta$ ([[def-uniformly-convex-banach-space]]).
 
-[F2] Under HB, if $U\in B_{X^{**}}$, a finite list
-$f_1,\ldots,f_m\in X^*$ and $\tau>0$ are fixed, some $x\in B_X$ satisfies
-$|f_i(x)-U(f_i)|<\tau$ for every $i$
-([[cor-goldstine-finite-data-approximation]], equivalently
-[[thm-goldstine]]).
+[F2] Under HB, if $U\in B_{X^{**}}$, a finite list $f_1,\ldots,f_m\in X^*$ and $\tau>0$ are fixed, some $x\in B_X$ satisfies $|f_i(x)-U(f_i)|<\tau$ for every $i$ ([[cor-goldstine-finite-data-approximation]], equivalently [[thm-goldstine]]).
 
-[F3] The norm on a real or complex dual space is
-$\|F\|=\sup_{\|f\|\le1}|F(f)|$ ([[def-dual-space-of-a-normed-space]]).
+[F3] The norm on a real or complex dual space is $\|F\|=\sup_{\|f\|\le1}|F(f)|$ ([[def-dual-space-of-a-normed-space]]).
 
-[F4] Under HB, $J_X$ is scalar-linear and isometric
-([[cor-relative-hahn-banach-bidual-isometry]]); HB is the explicitly named
-relative dominated-extension principle
-([[def-hahn-banach-extension-principle-relative]]).
+[F4] Under HB, $J_X$ is scalar-linear and isometric ([[cor-relative-hahn-banach-bidual-isometry]]); HB is the explicitly named relative dominated-extension principle ([[def-hahn-banach-extension-principle-relative]]).
 
-[F5] Under $\mathrm{AC}_\omega$, a complete normed subspace of a normed space
-is closed ([[lem-complete-subspace-is-closed]]); Countable Choice is the
-countable-family selection principle ([[def-countable-choice]]).
+[F5] Under $\mathrm{AC}_\omega$, a complete normed subspace of a normed space is closed ([[lem-complete-subspace-is-closed]]); Countable Choice is the countable-family selection principle ([[def-countable-choice]]).
 
-[F6] A Banach space is reflexive exactly when its canonical map onto the
-bidual is surjective ([[def-reflexive-banach-space]]).
+[F6] A Banach space is reflexive exactly when its canonical map onto the bidual is surjective ([[def-reflexive-banach-space]]).
 
 ## Proof
 

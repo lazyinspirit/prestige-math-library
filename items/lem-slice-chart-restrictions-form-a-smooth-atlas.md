@@ -36,14 +36,11 @@ smoothly compatible and generate exactly the subspace topology on $S$.
 
 **Given:** An embedded $k$-submanifold $S\subseteq M^m$.
 
-[F1] In a slice chart, $S$ is cut out by the coordinate slice
-$\mathbb R^k\times\{0\}$ ([[def-embedded-submanifold-and-slice-chart]]).
+[F1] In a slice chart, $S$ is cut out by the coordinate slice $\mathbb R^k\times\{0\}$ ([[def-embedded-submanifold-and-slice-chart]]).
 
-[F2] The topology on $S$ is the subspace topology inherited from $M$
-([[def-subspace-topology-top]]).
+[F2] The topology on $S$ is the subspace topology inherited from $M$ ([[def-subspace-topology-top]]).
 
-[L1] Chart maps are homeomorphisms onto open Euclidean sets
-([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
+[L1] Chart maps are homeomorphisms onto open Euclidean sets ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 
 ## Proof
 **Proof technique:** direct.

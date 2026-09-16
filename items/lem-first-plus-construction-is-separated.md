@@ -37,18 +37,13 @@ $\eta:\mathcal F\to\mathcal F^+$ be the canonical map of
 
 ## Facts & Assumptions
 
-**Given:** A presheaf $\mathcal F$ on $X$ and its plus construction
-$\eta:\mathcal F\to\mathcal F^+$.
+**Given:** A presheaf $\mathcal F$ on $X$ and its plus construction $\eta:\mathcal F\to\mathcal F^+$.
 
-[F1] A section of $\mathcal F^+(U)$ is an equivalence class of germ-compatible
-local presentations over $U$, and $\eta_U(s)$ is represented by the
-single-chart presentation $(U,s)$ ([[def-presheaf-plus-construction]]).
+[F1] A section of $\mathcal F^+(U)$ is an equivalence class of germ-compatible local presentations over $U$, and $\eta_U(s)$ is represented by the single-chart presentation $(U,s)$ ([[def-presheaf-plus-construction]]).
 
-[F2] A separated presheaf is one in which equality of sections can be checked on
-an open cover ([[def-separated-presheaf]]).
+[F2] A separated presheaf is one in which equality of sections can be checked on an open cover ([[def-separated-presheaf]]).
 
-[L1] Equality in a filtered colimit of sets is eventual at some smaller common
-stage ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
+[L1] Equality in a filtered colimit of sets is eventual at some smaller common stage ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
 
 ## Proof
 

@@ -36,9 +36,7 @@ is not compact.
 
 **Given:** A normed space $X$ with no ordered basis of finite length.
 
-[L1] The closed unit ball is compact if and only if the space admits an ordered
-basis of finite length
-([[thm-closed-unit-ball-compact-iff-finite-dimensional]]).
+[L1] The closed unit ball is compact if and only if the space admits an ordered basis of finite length ([[thm-closed-unit-ball-compact-iff-finite-dimensional]]).
 
 ## Proof
 

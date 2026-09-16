@@ -34,8 +34,7 @@ vector field.
 
 **Given:** Smooth functions $H,K$ and the Hamiltonian convention.
 
-[F1] A Hamiltonian for $X$ satisfies $dH=\iota_X\omega$.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F1] A Hamiltonian for $X$ satisfies $dH=\iota_X\omega$. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

@@ -27,15 +27,11 @@ The fundamental group of a closed hyperbolic surface is a hyperbolic group.
 
 **Given:** A closed hyperbolic surface $\Sigma$ and its fundamental group $\pi_1(\Sigma)$.
 
-[L1] The hyperbolic plane is hyperbolic
-([[ex-the-hyperbolic-plane-is-hyperbolic]]).
+[L1] The hyperbolic plane is hyperbolic ([[ex-the-hyperbolic-plane-is-hyperbolic]]).
 
-[L2] The Švarc-Milnor lemma transfers geometric actions on proper geodesic
-spaces to quasi-isometries with finitely generated groups
-([[thm-svarc-milnor-lemma]]).
+[L2] The Švarc-Milnor lemma transfers geometric actions on proper geodesic spaces to quasi-isometries with finitely generated groups ([[thm-svarc-milnor-lemma]]).
 
-[L3] Hyperbolicity is invariant under quasi-isometry
-([[thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces]]).
+[L3] Hyperbolicity is invariant under quasi-isometry ([[thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces]]).
 
 ## Verification
 

@@ -35,41 +35,23 @@ $$\operatorname{pr}_X^*a+\operatorname{pr}_X^*b\,\operatorname{pr}_{S^2}^*\beta,
 
 ## Facts & Assumptions
 
-**Given:** AC, compact Hausdorff $X$, the Hopf line $\gamma$ clutched by $z$,
-and $\beta=[\gamma]-1$.
+**Given:** AC, compact Hausdorff $X$, the Hopf line $\gamma$ clutched by $z$, and $\beta=[\gamma]-1$.
 
-[F1] External product is a natural ring map
-([[def-external-product-in-complex-k-theory]]).
+[F1] External product is a natural ring map ([[def-external-product-in-complex-k-theory]]).
 
-[F2] Every stabilized bundle on $X\times S^2$ has normalized data $[E,f]$,
-unique up to normalized clutching homotopy
-([[lem-normalized-clutching-data-for-bundles-over-x-times-s-two]]).
+[F2] Every stabilized bundle on $X\times S^2$ has normalized data $[E,f]$, unique up to normalized clutching homotopy ([[lem-normalized-clutching-data-for-bundles-over-x-times-s-two]]).
 
-[F3] A normalized clutching map and a normalized homotopy admit Laurent
-approximations, including a Laurent-polynomial homotopy relative to chosen
-endpoints
-([[lem-uniform-laurent-approximation-through-bundle-automorphisms]]).
+[F3] A normalized clutching map and a normalized homotopy admit Laurent approximations, including a Laurent-polynomial homotopy relative to chosen endpoints ([[lem-uniform-laurent-approximation-through-bundle-automorphisms]]).
 
-[F4] Negative powers are cleared by tensoring with $\gamma^m$
-([[lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization]]).
+[F4] Negative powers are cleared by tensoring with $\gamma^m$ ([[lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization]]).
 
-[F5] If $q$ has degree at most $n$, its block linearization $L_nq$ satisfies
-$[E,q]\oplus[nE,I]\cong[(n+1)E,L_nq]$
-([[lem-polynomial-clutching-families-stabilize-to-linear-clutching]]), and the
-linear family has an additive spectral splitting into its outside and inside
-bundles $M_+$ and $M_-$
-([[lem-linear-clutching-splits-into-eigenbundles]]).
+[F5] If $q$ has degree at most $n$, its block linearization $L_nq$ satisfies $[E,q]\oplus[nE,I]\cong[(n+1)E,L_nq]$ ([[lem-polynomial-clutching-families-stabilize-to-linear-clutching]]), and the linear family has an additive spectral splitting into its outside and inside bundles $M_+$ and $M_-$ ([[lem-linear-clutching-splits-into-eigenbundles]]).
 
-[F6] $K^0(S^2)=\mathbb Z\{1,\beta\}$, $\beta^2=0$, and
-$\gamma=1+\beta$
-([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
+[F6] $K^0(S^2)=\mathbb Z\{1,\beta\}$, $\beta^2=0$, and $\gamma=1+\beta$ ([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
 
-[F7] Under AC, the restrictions of a bundle over $X\times I$ to its two
-endpoints are isomorphic
-([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
+[F7] Under AC, the restrictions of a bundle over $X\times I$ to its two endpoints are isomorphic ([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
 
-[A1] AC is propagated through [F1]–[F7]; in particular it licenses their
-stable-complement, homotopy-invariance, partition, and reduced-product uses.
+[A1] AC is propagated through [F1]–[F7]; in particular it licenses their stable-complement, homotopy-invariance, partition, and reduced-product uses.
 
 ## Proof
 

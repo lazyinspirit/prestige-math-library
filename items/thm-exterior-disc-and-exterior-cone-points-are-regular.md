@@ -36,9 +36,7 @@ $\zeta\in\partial\Omega$.
 
 [L1] A boundary point is regular exactly when it admits a barrier ([[thm-barrier-characterization-of-regular-boundary-points]]).
 
-[L2] A negative local subharmonic peak with a strictly negative bound on a
-smaller seam globalizes to a barrier
-([[lem-local-subharmonic-peak-function-globalizes]]).
+[L2] A negative local subharmonic peak with a strictly negative bound on a smaller seam globalizes to a barrier ([[lem-local-subharmonic-peak-function-globalizes]]).
 
 ## Proof
 

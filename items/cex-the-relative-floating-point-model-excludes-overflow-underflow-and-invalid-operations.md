@@ -36,14 +36,9 @@ system, including overflow, underflow, and invalid operations.
 
 ## Facts & Assumptions
 
-**Given:** The IEEE-754 binary64 system, whose unit roundoff is $u=2^{-53}$,
-largest normal magnitude $N_{\max}=(2-2^{-52})2^{1023}$, smallest normal
-magnitude $N_{\min}=2^{-1022}$, and smallest positive subnormal $2^{-1074}$.
+**Given:** The IEEE-754 binary64 system, whose unit roundoff is $u=2^{-53}$, largest normal magnitude $N_{\max}=(2-2^{-52})2^{1023}$, smallest normal magnitude $N_{\min}=2^{-1022}$, and smallest positive subnormal $2^{-1074}$.
 
-[L1] The standard relative model applies only to operations whose exact result
-is a real number in the normal range, and its exclusions are overflow,
-underflow, and invalid operations
-([[def-standard-relative-floating-point-model-and-unit-roundoff]]).
+[L1] The standard relative model applies only to operations whose exact result is a real number in the normal range, and its exclusions are overflow, underflow, and invalid operations ([[def-standard-relative-floating-point-model-and-unit-roundoff]]).
 
 ## Counterexample
 

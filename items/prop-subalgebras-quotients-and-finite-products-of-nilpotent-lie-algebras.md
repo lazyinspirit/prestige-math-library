@@ -33,21 +33,15 @@ algebra and has class $0$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$, a subalgebra $\mathfrak h$, an ideal
-$\mathfrak i$, and a finite family $(\mathfrak g_j)_{j\in J}$ of nilpotent Lie
-algebras.
+**Given:** A Lie algebra $\mathfrak g$, a subalgebra $\mathfrak h$, an ideal $\mathfrak i$, and a finite family $(\mathfrak g_j)_{j\in J}$ of nilpotent Lie algebras.
 
-[L1] Nilpotence is termination of the lower central series
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] Nilpotence is termination of the lower central series ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] Nilpotency class is the least $c$ with $\gamma_{c+1}=0$, and the zero
-algebra has class zero ([[def-nilpotency-class-of-a-lie-algebra]]).
+[L2] Nilpotency class is the least $c$ with $\gamma_{c+1}=0$, and the zero algebra has class zero ([[def-nilpotency-class-of-a-lie-algebra]]).
 
-[L3] The quotient map is a surjective Lie homomorphism
-([[def-quotient-lie-algebra]]).
+[L3] The quotient map is a surjective Lie homomorphism ([[def-quotient-lie-algebra]]).
 
-[L4] Direct products have componentwise brackets, and an empty product is the
-zero Lie algebra ([[def-direct-product-and-direct-sum-of-lie-algebras]]).
+[L4] Direct products have componentwise brackets, and an empty product is the zero Lie algebra ([[def-direct-product-and-direct-sum-of-lie-algebras]]).
 
 ## Proof
 

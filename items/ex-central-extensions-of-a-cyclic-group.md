@@ -37,11 +37,9 @@ Hence the extension classes are parametrized by $A/nA$.
 
 ## Facts & Assumptions
 
-**Given:** A cyclic quotient $C_n=\langle x\rangle$ and a trivial-action
-abelian kernel $A$.
+**Given:** A cyclic quotient $C_n=\langle x\rangle$ and a trivial-action abelian kernel $A$.
 
-[L1] Central extensions are classified by $H^2(C_n,A)$
-([[cor-central-extensions-are-classified-by-h-two-with-trivial-action]]).
+[L1] Central extensions are classified by $H^2(C_n,A)$ ([[cor-central-extensions-are-classified-by-h-two-with-trivial-action]]).
 
 ## Verification
 

@@ -33,12 +33,9 @@ Every additive category with all kernels and cokernels is abelian.
 
 ## Facts & Assumptions
 
-**Given:** The filtered-vector-space category from
-[[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]].
+**Given:** The filtered-vector-space category from [[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]].
 
-[L1] The filtered-vector-space example is additive and has all kernels and
-cokernels, but it is not abelian
-([[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]]).
+[L1] The filtered-vector-space example is additive and has all kernels and cokernels, but it is not abelian ([[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]]).
 
 ## Refutation
 

@@ -31,18 +31,13 @@ $F$ preserves it. The dual assertion holds for created colimits.
 
 ## Facts & Assumptions
 
-**Given:** A functor $F$ creating $\mathcal J$-limits and a diagram $D$ such
-that $FD$ has a limit.
+**Given:** A functor $F$ creating $\mathcal J$-limits and a diagram $D$ such that $FD$ has a limit.
 
-[F1] Creation lifts a target limiting cone, up to a cone isomorphism, to a
-limiting source cone and includes reflection
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F1] Creation lifts a target limiting cone, up to a cone isomorphism, to a limiting source cone and includes reflection ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
-[L1] Preservation of a chosen limit is equivalent to invertibility of its
-canonical comparison ([[lem-canonical-comparison-characterises-limit-preservation]]).
+[L1] Preservation of a chosen limit is equivalent to invertibility of its canonical comparison ([[lem-canonical-comparison-characterises-limit-preservation]]).
 
-[L2] Creation and preservation of colimits are dual to their limit forms
-([[prop-limit-colimit-duality]]).
+[L2] Creation and preservation of colimits are dual to their limit forms ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

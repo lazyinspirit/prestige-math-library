@@ -36,18 +36,13 @@ then $f$ has only finitely many critical points.
 
 **Given:** A compact smooth manifold $M$ and a Morse function $f:M\to\mathbb R$.
 
-[F1] Every critical point of a Morse function is nondegenerate
-([[def-morse-function-and-excellent-morse-function]]).
+[F1] Every critical point of a Morse function is nondegenerate ([[def-morse-function-and-excellent-morse-function]]).
 
-[L1] Every nondegenerate critical point is isolated
-([[lem-nondegenerate-critical-points-are-isolated]]).
+[L1] Every nondegenerate critical point is isolated ([[lem-nondegenerate-critical-points-are-isolated]]).
 
-[L2] Compactness means that every open cover has a finite subcover
-([[def-compact-space]]).
+[L2] Compactness means that every open cover has a finite subcover ([[def-compact-space]]).
 
-[L3] The vanishing of $df$ in a chart is equivalent to the vanishing of all
-coordinate partial derivatives
-([[thm-coordinate-formula-for-the-differential-of-a-function]]).
+[L3] The vanishing of $df$ in a chart is equivalent to the vanishing of all coordinate partial derivatives ([[thm-coordinate-formula-for-the-differential-of-a-function]]).
 
 ## Proof
 

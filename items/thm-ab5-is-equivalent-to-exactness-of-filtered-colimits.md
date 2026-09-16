@@ -49,9 +49,7 @@ is exact.
 
 [L4] The meet of two subobjects is represented by their pullback, and the image of a morphism is the least subobject through which that morphism factors ([[thm-the-meet-of-subobjects-is-their-pullback]], [[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
 
-[L5] Weibel, Appendix A.4.6, states for a cocomplete abelian category that
-exactness of filtered colimits is equivalent to the directed-subobject identity
-$$\left(\bigvee_i B_i\right)\wedge C=\bigvee_i(B_i\wedge C).$$
+[L5] Weibel, Appendix A.4.6, states for a cocomplete abelian category that exactness of filtered colimits is equivalent to the directed-subobject identity $$\left(\bigvee_i B_i\right)\wedge C=\bigvee_i(B_i\wedge C).$$
 
 ## Proof
 

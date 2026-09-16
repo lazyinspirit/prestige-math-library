@@ -82,14 +82,6 @@ between $u$ and $v$: it is **$1$-Lipschitz**.
 
 ## Remarks
 
-- **Where the nonemptiness is used.** Twice, and both times essentially: it is
-  what makes $d(x,A)$ and $d(y,A)$ exist at all
-  ([[def-metric-bounded-diameter]]), and it is what makes $E(x)$ and $E(y)$
-  nonempty so that "greatest lower bound" has content. For $A = \emptyset$ the
-  statement has no meaning in this library, since $\inf \emptyset$ is undefined.
-- **The point case is [[lem-metric-reverse-triangle]]**: taking $A = \{z\}$ gives
-  $E(u) = \{d(u,z)\}$, whose infimum is $d(u,z)$, and the conclusion becomes
-  $|d(x,z) - d(y,z)| \le d(x,y)$.
-- The constant $1$ is best possible in general: on $\mathbb{R}$ with
-  $A = \{0\}$ the function is $u \mapsto |u|$, and $\big||x| - |y|\big| = |x-y|$
-  whenever $x$ and $y$ have the same sign.
+- **Where the nonemptiness is used.** Twice, and both times essentially: it is what makes $d(x,A)$ and $d(y,A)$ exist at all ([[def-metric-bounded-diameter]]), and it is what makes $E(x)$ and $E(y)$ nonempty so that "greatest lower bound" has content. For $A = \emptyset$ the statement has no meaning in this library, since $\inf \emptyset$ is undefined.
+- **The point case is [[lem-metric-reverse-triangle]]**: taking $A = \{z\}$ gives $E(u) = \{d(u,z)\}$, whose infimum is $d(u,z)$, and the conclusion becomes $|d(x,z) - d(y,z)| \le d(x,y)$.
+- The constant $1$ is best possible in general: on $\mathbb{R}$ with $A = \{0\}$ the function is $u \mapsto |u|$, and $\big||x| - |y|\big| = |x-y|$ whenever $x$ and $y$ have the same sign.

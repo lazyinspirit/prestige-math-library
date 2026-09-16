@@ -39,8 +39,7 @@ $$\operatorname{Ext}^{q}(\Omega M,N)\cong\operatorname{Ext}^{q+1}(M,N).$$
 
 **Given:** The displayed first stage and the remaining projective resolution $\cdots\to P_2\to P_1\to P_0\to M\to0$.
 
-[L1] A short exact sequence in the first variable gives the long exact Ext
-sequence ([[thm-long-exact-ext-sequence-in-the-first-variable]]).
+[L1] A short exact sequence in the first variable gives the long exact Ext sequence ([[thm-long-exact-ext-sequence-in-the-first-variable]]).
 
 ## Proof
 

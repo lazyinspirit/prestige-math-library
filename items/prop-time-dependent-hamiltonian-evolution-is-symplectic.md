@@ -33,12 +33,9 @@ is defined: $\Phi_{t,s}^*\omega=\omega$.
 
 **Given:** A time-dependent Hamiltonian and its local evolution.
 
-[F1] $\iota_{X_{H_t}}\omega=dH_t$.
-[[def-time-dependent-hamiltonian-vector-field-and-flow]].
+[F1] $\iota_{X_{H_t}}\omega=dH_t$. [[def-time-dependent-hamiltonian-vector-field-and-flow]].
 
-[F2] Along a time-dependent evolution,
-$\partial_t\Phi_{t,s}^*\omega=\Phi_{t,s}^*(\mathcal L_{X_{H_t}}\omega)$.
-[[thm-differentiation-of-a-pulled-back-form-along-a-time-dependent-flow]].
+[F2] Along a time-dependent evolution, $\partial_t\Phi_{t,s}^*\omega=\Phi_{t,s}^*(\mathcal L_{X_{H_t}}\omega)$. [[thm-differentiation-of-a-pulled-back-form-along-a-time-dependent-flow]].
 
 ## Proof
 

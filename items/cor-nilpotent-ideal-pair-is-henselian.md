@@ -33,8 +33,7 @@ Then $(A,I)$ is a Henselian pair.
 
 **Given:** A commutative ring $A$ and a nilpotent ideal $I \subseteq J(A)$.
 
-[L1] Every complete separated adic pair is Henselian
-([[cor-complete-separated-adic-pair-henselian]]).
+[L1] Every complete separated adic pair is Henselian ([[cor-complete-separated-adic-pair-henselian]]).
 
 ## Proof
 

@@ -35,12 +35,7 @@ is an isomorphism when $n>k+1$ and is a surjection when $n=k+1$.
 
 [F1] Every based map $S^j\to S^n$ with $0\leq j<n$ is based nullhomotopic, including the path-connectedness assertion at $j=0$ ([[thm-lower-dimensional-sphere-maps-are-based-nullhomotopic]]). With the standard two-cell CW structure, $S^n$ is therefore $(n-1)$-connected for $n\geq1$.
 
-[F2] For $n\geq1$, Freudenthal says that suspension
-$\pi_i(X)\to\pi_{i+1}(\Sigma X)$ is an isomorphism for
-$1\leq i<2n-1$ and a surjection for $i=2n-1$ when $X$ is an
-$(n-1)$-connected based CW complex. In degree zero it instead gives a
-bijection of the two singleton pointed sets
-([[thm-freudenthal-suspension-theorem]]).
+[F2] For $n\geq1$, Freudenthal says that suspension $\pi_i(X)\to\pi_{i+1}(\Sigma X)$ is an isomorphism for $1\leq i<2n-1$ and a surjection for $i=2n-1$ when $X$ is an $(n-1)$-connected based CW complex. In degree zero it instead gives a bijection of the two singleton pointed sets ([[thm-freudenthal-suspension-theorem]]).
 
 [F3] The stable-stem definition uses the reduced-suspension bonding map determined by $S^1\wedge S^n\cong S^{n+1}$ ([[def-stable-stem-of-the-sphere]]).
 

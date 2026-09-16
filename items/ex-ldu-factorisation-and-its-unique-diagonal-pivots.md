@@ -39,11 +39,9 @@ and the diagonal pivots $2,3$ are uniquely determined.
 
 **Given:** The displayed matrix $A$ and candidate LDU factors.
 
-[L1] An LDU factorisation has the displayed unit-lower, diagonal, and unit-upper
-shape ([[def-ldu-factorisation]]).
+[L1] An LDU factorisation has the displayed unit-lower, diagonal, and unit-upper shape ([[def-ldu-factorisation]]).
 
-[L2] LDU factorisations with nonzero diagonal pivots are unique
-([[thm-normalised-lu-and-ldu-factorisations-are-unique]]).
+[L2] LDU factorisations with nonzero diagonal pivots are unique ([[thm-normalised-lu-and-ldu-factorisations-are-unique]]).
 
 ## Verification
 

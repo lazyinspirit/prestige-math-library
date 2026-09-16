@@ -39,27 +39,17 @@ All assertions hold in ZF.
 
 ## Facts & Assumptions
 
-**Given:** A compactly supported distribution $v$, a Schwartz function
-$\varphi$, and a tempered distribution $u$ ([[def-tempered-distribution]]).
+**Given:** A compactly supported distribution $v$, a Schwartz function $\varphi$, and a tempered distribution $u$ ([[def-tempered-distribution]]).
 
-[F1] Compactly supported distributions act continuously on all smooth
-functions and obey a fixed compact finite-order estimate
-([[lem-compactly-supported-distributions-extend-to-smooth-functions]]).
+[F1] Compactly supported distributions act continuously on all smooth functions and obey a fixed compact finite-order estimate ([[lem-compactly-supported-distributions-extend-to-smooth-functions]]).
 
-[F2] The Schwartz seminorms/topology are those of
-[[def-schwartz-space-and-its-seminorms]] and
-[[def-schwartz-topology-and-convergence]].
+[F2] The Schwartz seminorms/topology are those of [[def-schwartz-space-and-its-seminorms]] and [[def-schwartz-topology-and-convergence]].
 
-[F3] The smooth-parameter clause for compact distribution pairings holds in
-ZF ([[lem-distribution-pairing-with-smooth-parameter-families]]).
+[F3] The smooth-parameter clause for compact distribution pairings holds in ZF ([[lem-distribution-pairing-with-smooth-parameter-families]]).
 
-[F4] Distribution convolution with one compactly supported factor is
-well-defined by the addition-map pairing and is commutative
-([[def-convolution-of-distributions-when-one-has-compact-support]],
-[[lem-convolution-of-distributions-is-well-defined-under-the-support-hypothesis]]).
+[F4] Distribution convolution with one compactly supported factor is well-defined by the addition-map pairing and is commutative ([[def-convolution-of-distributions-when-one-has-compact-support]], [[lem-convolution-of-distributions-is-well-defined-under-the-support-hypothesis]]).
 
-[F5] Restriction embeds $\mathcal S'$ into $\mathcal D'$
-([[thm-tempered-distributions-embed-continuously-in-distributions]]).
+[F5] Restriction embeds $\mathcal S'$ into $\mathcal D'$ ([[thm-tempered-distributions-embed-continuously-in-distributions]]).
 
 ## Proof
 
@@ -69,8 +59,7 @@ well-defined by the addition-map pairing and is commutative
 
 $$p_{\alpha\beta}(C_v\varphi) \leq C_{v,K,\alpha,\beta} \max_{|\gamma|\leq m,\ |\delta|\leq|\alpha|} p_{\delta,\,\beta+\gamma}(\varphi).$$
 
-Only finitely many terms occur because $y$ stays in $K$. [F1, F2, F3,
-algebra]
+Only finitely many terms occur because $y$ stays in $K$. [F1, F2, F3, algebra]
 
 2.1 The estimates in step 1.1 show that $C_v\varphi$ is Schwartz and that $C_v$ is continuous.  Replacing $y$ by $-y$ proves the same statement for $T_v\psi(x)=\langle v_y,\psi(x+y)\rangle$; equivalently $T_v=C_{\check v}$ for the reflected compact distribution $\check v$. [F2, step 1.1]
 
@@ -80,7 +69,4 @@ algebra]
 
 $$\langle u*v,\psi\rangle =\langle \rho(u)\otimes v,(x,y)\mapsto\psi(x+y)\rangle$$
 
-with the cutoff interpretation prescribed there.  This proves agreement after
-the embedding [F5].  The cases $u=0$, $v=0$, or empty support give zero.  Only
-the ZF smooth-parameter clause of [F3] was used; no integral-interchange clause
-or choice axiom entered. [F3, F4, F5, step 3.1] ∎
+with the cutoff interpretation prescribed there.  This proves agreement after the embedding [F5].  The cases $u=0$, $v=0$, or empty support give zero.  Only the ZF smooth-parameter clause of [F3] was used; no integral-interchange clause or choice axiom entered. [F3, F4, F5, step 3.1] ∎

@@ -33,11 +33,9 @@ $$\forall a_1\forall a_2\exists x_1\exists x_2 \vdash_2 \exists A_1\exists A_2\f
 
 **Given:** Dimension $d=2$ and the endpoint words above.
 
-[F1] The preceding definition gives all legal Rule 1, Rule 2, and Rule 3
-moves in $L_2$. [[def-halpern-lauchli-finite-word-calculus]]
+[F1] The preceding definition gives all legal Rule 1, Rule 2, and Rule 3 moves in $L_2$. [[def-halpern-lauchli-finite-word-calculus]]
 
-[F2] The general endpoint rearrangement holds for every positive dimension.
-[[lem-halpern-lauchli-word-calculus-rearrangement]]
+[F2] The general endpoint rearrangement holds for every positive dimension. [[lem-halpern-lauchli-word-calculus-rearrangement]]
 
 ## Verification
 

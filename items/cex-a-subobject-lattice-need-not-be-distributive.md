@@ -35,11 +35,9 @@ Every subobject lattice of an object in an abelian category is distributive.
 
 **Given:** The abelian group $A=(\mathbb Z/2)\oplus(\mathbb Z/2)$.
 
-[L1] Subobject lattices in an abelian category are modular
-([[thm-the-subobject-lattice-of-an-abelian-category-is-modular]]).
+[L1] Subobject lattices in an abelian category are modular ([[thm-the-subobject-lattice-of-an-abelian-category-is-modular]]).
 
-[L2] A lattice is distributive when meet distributes over join
-([[def-lattice-distributive-lattice-and-order-ideal]]).
+[L2] A lattice is distributive when meet distributes over join ([[def-lattice-distributive-lattice-and-order-ideal]]).
 
 ## Counterexample
 

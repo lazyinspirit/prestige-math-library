@@ -31,8 +31,7 @@ $$ N_1=NAE(x,y,s), \qquad N_2=NAE(\neg s,z,w). $$
 
 ## Facts & Assumptions
 
-**Given:** The satisfying assignment $x=1$, $y=0$, $z=0$, together with $w=0$
-and $s=0$.
+**Given:** The satisfying assignment $x=1$, $y=0$, $z=0$, together with $w=0$ and $s=0$.
 
 [F1] A proper three-colouring uses the colours $0,1,2$ and forbids equal colours on adjacent vertices, by [[def-three-colourability]].
 

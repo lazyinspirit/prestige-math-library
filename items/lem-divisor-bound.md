@@ -75,14 +75,6 @@ $d \le |a|$.
 
 ## Remarks
 
-- **There is no excluded case at $d = 0$.** The hypothesis is $a \ne 0$, and the
-  conclusion *derives* $d \ne 0$ rather than assuming it: $0 \mid a$ forces
-  $a = 0$ ([[def-divides-in-z]]), so a zero divisor simply cannot occur under
-  this hypothesis. The statement is therefore not vacuous anywhere, and it is
-  not silently excluding a case.
+- **There is no excluded case at $d = 0$.** The hypothesis is $a \ne 0$, and the conclusion *derives* $d \ne 0$ rather than assuming it: $0 \mid a$ forces $a = 0$ ([[def-divides-in-z]]), so a zero divisor simply cannot occur under this hypothesis. The statement is therefore not vacuous anywhere, and it is not silently excluding a case.
 
-- **The hypothesis $a \ne 0$ cannot be dropped.** Every integer divides $0$, so
-  the divisors of $0$ are all of $\mathbb{Z}$ and are bounded neither above nor
-  below. This is exactly why the greatest common divisor of $(0,0)$ has to be
-  fixed by a convention rather than by a maximum
-  ([[def-common-divisor-and-gcd]]).
+- **The hypothesis $a \ne 0$ cannot be dropped.** Every integer divides $0$, so the divisors of $0$ are all of $\mathbb{Z}$ and are bounded neither above nor below. This is exactly why the greatest common divisor of $(0,0)$ has to be fixed by a convention rather than by a maximum ([[def-common-divisor-and-gcd]]).

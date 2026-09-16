@@ -49,13 +49,9 @@ is an embedded $3$-dimensional submanifold of $\mathbb R^4$.
 **Proof technique:** direct.
 
 1.1 If $F(x,y)=G(u,v)$, then both differentials are the row matrix [L1, given, algebra]
-$\begin{bmatrix}1&0\end{bmatrix}$, so
-$$ dF_{(x,y)}(T_{(x,y)}\mathbb R^2)+dG_{(u,v)}(T_{(u,v)}\mathbb R^2)=\mathbb R. $$
-Therefore [L1] gives $F\pitchfork G$. [L1, given, algebra]
+$\begin{bmatrix}1&0\end{bmatrix}$, so $$ dF_{(x,y)}(T_{(x,y)}\mathbb R^2)+dG_{(u,v)}(T_{(u,v)}\mathbb R^2)=\mathbb R. $$ Therefore [L1] gives $F\pitchfork G$. [L1, given, algebra]
 
 2.1 By [L2], the fibre product is an embedded submanifold of $\mathbb R^4$. [L2, step 1.1, algebra]
-Its
-defining equation $x=u$ cuts the ambient dimension down by one, so it is
-$3$-dimensional. [L2, step 1.1, algebra]
+Its defining equation $x=u$ cuts the ambient dimension down by one, so it is $3$-dimensional. [L2, step 1.1, algebra]
 
 3.1 Thus the coincidence set of two coordinate projections is a concrete fibre product of submersions. [step 2.1] ∎

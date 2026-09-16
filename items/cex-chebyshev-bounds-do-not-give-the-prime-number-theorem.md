@@ -39,8 +39,7 @@ $$ f(x)\sim\frac{x}{\log x}. $$
 
 ## Facts & Assumptions
 
-**Given:** The refuted implication and the Chebyshev bound shape from
-[[thm-chebyshev-prime-counting-bounds]].
+**Given:** The refuted implication and the Chebyshev bound shape from [[thm-chebyshev-prime-counting-bounds]].
 
 [L1] For $x>e$, one has $\log x>1>0$, so the quotient $x/\log x$ is defined.
 

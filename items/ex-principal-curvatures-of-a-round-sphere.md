@@ -41,8 +41,7 @@ inherited exactly from the general shape-operator construction.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, an integer $n\geq1$, a radius $r>0$, the
-standard Euclidean metric, and the displayed outward normal field.
+**Given:** $\mathrm{AC}_\omega$, an integer $n\geq1$, a radius $r>0$, the standard Euclidean metric, and the displayed outward normal field.
 
 [F1] Countable choice permits a choice from every sequence of nonempty sets. [[def-countable-choice]].
 

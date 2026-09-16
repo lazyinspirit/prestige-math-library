@@ -35,11 +35,9 @@ Every smooth vector subbundle $S\subseteq E$ has a smooth complement in $E$.
 
 **Given:** A smooth vector subbundle $S\subseteq E$.
 
-[L1] The bundle $E$ admits a smooth bundle metric
-([[thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]]).
+[L1] The bundle $E$ admits a smooth bundle metric ([[thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]]).
 
-[L2] Orthogonal complements of subbundles are smooth subbundles
-([[prop-orthogonal-complements-of-subbundles-are-smooth-subbundles]]).
+[L2] Orthogonal complements of subbundles are smooth subbundles ([[prop-orthogonal-complements-of-subbundles-are-smooth-subbundles]]).
 
 ## Proof
 

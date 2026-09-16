@@ -36,8 +36,7 @@ $$B_{n+1}=\sum_{k=0}^{n}\binom{n}{k}B_k.$$
 
 ## Facts & Assumptions
 
-**Given:** A partition of $[n+1]$, counted by
-[[def-stirling-second-kind-and-bell-number]].
+**Given:** A partition of $[n+1]$, counted by [[def-stirling-second-kind-and-bell-number]].
 
 ## Proof
 

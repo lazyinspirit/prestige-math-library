@@ -102,14 +102,6 @@ the separate identity $(n+1)\binom{2n+1}{n}=(2n+1)\binom{2n}{n}$ proved below.
 
 ## Remarks
 
-- **This is a different route, not a rearrangement.** The reflection derivation
-  matches paths that touch a level with paths from a reflected starting point; this
-  one lets a cyclic group act on words and counts orbits. The two share only the
-  definition of $C_n$ as a count of Dyck paths, and each yields a closed form the
-  other does not produce directly: $(2n+1)C_n=\binom{2n+1}{n}$ here and
-  $(n+1)C_n=\binom{2n}{n}$ there.
+- **This is a different route, not a rearrangement.** The reflection derivation matches paths that touch a level with paths from a reflected starting point; this one lets a cyclic group act on words and counts orbits. The two share only the definition of $C_n$ as a count of Dyck paths, and each yields a closed form the other does not produce directly: $(2n+1)C_n=\binom{2n+1}{n}$ here and $(n+1)C_n=\binom{2n}{n}$ there.
 
-- **Where the coprimality is spent.** Every word in $W$ has weight $1$, and $1$ is
-  coprime to every modulus, so no orbit is short and no word is counted twice.
-  Without that the orbit count would not be $\lvert W\rvert$ divided by the length,
-  and the argument would give an inequality rather than an identity.
+- **Where the coprimality is spent.** Every word in $W$ has weight $1$, and $1$ is coprime to every modulus, so no orbit is short and no word is counted twice. Without that the orbit count would not be $\lvert W\rvert$ divided by the length, and the argument would give an inequality rather than an identity.

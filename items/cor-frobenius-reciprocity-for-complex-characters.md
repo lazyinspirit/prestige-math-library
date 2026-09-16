@@ -32,21 +32,13 @@ $$\langle \operatorname{Ind}_H^G\chi,\psi\rangle_G = \langle \chi,\operatorname{
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a subgroup $H\le G$, a finite-dimensional
-complex representation $W$ of $H$ with character $\chi$, and a
-finite-dimensional complex representation $V$ of $G$ with character $\psi$.
+**Given:** A finite group $G$, a subgroup $H\le G$, a finite-dimensional complex representation $W$ of $H$ with character $\chi$, and a finite-dimensional complex representation $V$ of $G$ with character $\psi$.
 
-[F1] The inner product of two complex characters equals the dimension of the
-intertwiner space between the corresponding representations
-([[thm-character-inner-product-computes-intertwiner-dimension]]).
+[F1] The inner product of two complex characters equals the dimension of the intertwiner space between the corresponding representations ([[thm-character-inner-product-computes-intertwiner-dimension]]).
 
-[F2] Induction is left adjoint to restriction:
-$\operatorname{Hom}_G(\operatorname{Ind}_H^G W,V)\cong
-\operatorname{Hom}_H(W,\operatorname{Res}_H^G V)$
-([[thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]]).
+[F2] Induction is left adjoint to restriction: $\operatorname{Hom}_G(\operatorname{Ind}_H^G W,V)\cong \operatorname{Hom}_H(W,\operatorname{Res}_H^G V)$ ([[thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]]).
 
-[F3] The character $\operatorname{Ind}_H^G\chi$ is the character of
-$\operatorname{Ind}_H^G W$ ([[def-induced-character-of-a-complex-representation]]).
+[F3] The character $\operatorname{Ind}_H^G\chi$ is the character of $\operatorname{Ind}_H^G W$ ([[def-induced-character-of-a-complex-representation]]).
 
 ## Proof
 

@@ -38,18 +38,13 @@ $$ \dim_k\operatorname{Ind}_H^G W=[G:H]\dim_k W. $$
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, a finite group $G$, a subgroup $H\le G$, and a
-finite-dimensional representation $W$ of $H$ over $k$.
+**Given:** A field $k$, a finite group $G$, a subgroup $H\le G$, and a finite-dimensional representation $W$ of $H$ over $k$.
 
-[F1] A left transversal identifies $\operatorname{Ind}_H^G W$ with a direct sum
-of one copy of $W$ for each left coset of $H$ in $G$
-([[prop-induced-module-decomposes-over-a-left-transversal]]).
+[F1] A left transversal identifies $\operatorname{Ind}_H^G W$ with a direct sum of one copy of $W$ for each left coset of $H$ in $G$ ([[prop-induced-module-decomposes-over-a-left-transversal]]).
 
-[F2] The dimension of a finite-dimensional vector space is the cardinality of
-any finite basis ([[def-dimension]]).
+[F2] The dimension of a finite-dimensional vector space is the cardinality of any finite basis ([[def-dimension]]).
 
-[F3] A finite-dimensional representation is a finite-dimensional vector space
-with a linear group action ([[def-finite-dimensional-representation-of-a-group-over-a-field]]).
+[F3] A finite-dimensional representation is a finite-dimensional vector space with a linear group action ([[def-finite-dimensional-representation-of-a-group-over-a-field]]).
 
 ## Proof
 

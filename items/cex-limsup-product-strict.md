@@ -66,18 +66,8 @@ $$\limsup_{k}(x_k y_k) = \Big(\limsup_{k} x_k\Big)\Big(\limsup_{k} y_k\Big).$$
 
 ## Remarks
 
-- **The two sequences vanish at complementary indices.** Wherever $x_k$ attains
-  its maximum $2$, its partner $y_k$ is $0$, so the product is $0$ everywhere and
-  the two limit superiors are attained along disjoint sets of indices. This is the
-  multiplicative form of the phase mismatch behind
-  [[cex-limsup-subadditivity-strict]].
+- **The two sequences vanish at complementary indices.** Wherever $x_k$ attains its maximum $2$, its partner $y_k$ is $0$, so the product is $0$ everywhere and the two limit superiors are attained along disjoint sets of indices. This is the multiplicative form of the phase mismatch behind [[cex-limsup-subadditivity-strict]].
 
-- **Nonnegativity and boundedness are satisfied, so the failure is not
-  degenerate.** Both hypotheses of [[thm-limsup-submultiplicative]] hold, and the
-  right-hand side is an honest product of real numbers; the inequality simply
-  cannot be reversed.
+- **Nonnegativity and boundedness are satisfied, so the failure is not degenerate.** Both hypotheses of [[thm-limsup-submultiplicative]] hold, and the right-hand side is an honest product of real numbers; the inequality simply cannot be reversed.
 
-- **The gap can be made total.** Here the product sequence is identically zero
-  while the bound is $4$, so no fraction of the bound is achieved. Equality does
-  hold when one of the two sequences converges, for the same reason as in the
-  additive case.
+- **The gap can be made total.** Here the product sequence is identically zero while the bound is $4$, so no fraction of the bound is achieved. Equality does hold when one of the two sequences converges, for the same reason as in the additive case.

@@ -35,25 +35,17 @@ but not by that path-connected-sphere Serre comparison.
 
 ## Facts & Assumptions
 
-**Given:** AC, the oriented metric bundle, its disk projection $\pi$, sphere
-projection $p$, and normalized Thom class.
+**Given:** AC, the oriented metric bundle, its disk projection $\pi$, sphere projection $p$, and normalized Thom class.
 
-[F1] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] gives the
-natural sequence of $(D(\xi),S(\xi))$.
+[F1] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] gives the natural sequence of $(D(\xi),S(\xi))$.
 
-[F2] [[def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section]]
-identifies relative groups by Thom and the relative-to-absolute map by cup
-with $e_{\rm Th}$ after radial retraction.
+[F2] [[def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section]] identifies relative groups by Thom and the relative-to-absolute map by cup with $e_{\rm Th}$ after radial retraction.
 
-[F3] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]
-fixes the product and connector signs.
+[F3] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] fixes the product and connector signs.
 
-[F4] [[def-serre-edge-homomorphisms-and-transgression]] and
-[[thm-cohomological-serre-spectral-sequence]] define the cohomological
-transgression through filtered cochain extensions.
+[F4] [[def-serre-edge-homomorphisms-and-transgression]] and [[thm-cohomological-serre-spectral-sequence]] define the cohomological transgression through filtered cochain extensions.
 
-[F5] [[thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence]] gives
-the two-row Serre Gysin sequence for a path-connected cohomology sphere.
+[F5] [[thm-gysin-sequence-from-a-sphere-fiber-serre-spectral-sequence]] gives the two-row Serre Gysin sequence for a path-connected cohomology sphere.
 
 [A1] [[def-axiom-of-choice]] is used through [F2], [F4], and [F5].
 

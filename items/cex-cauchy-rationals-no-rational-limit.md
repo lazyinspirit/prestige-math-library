@@ -92,23 +92,8 @@ never behaves this way.
 
 ## Remarks
 
-- **The limit exists; it is merely not rational.** That is the entire content of
-  the counterexample and the reason the construction of $\mathbb{R}$ is worth
-  doing. The sequence is Cauchy in $\mathbb{Q}$, so $\mathbb{Q}$ "should" have a
-  limit for it, and the point at which it converges lies outside $\mathbb{Q}$.
+- **The limit exists; it is merely not rational.** That is the entire content of the counterexample and the reason the construction of $\mathbb{R}$ is worth doing. The sequence is Cauchy in $\mathbb{Q}$, so $\mathbb{Q}$ "should" have a limit for it, and the point at which it converges lies outside $\mathbb{Q}$.
 
-- **Decimal truncation is a convenience, not the mechanism.** Any sequence of
-  rationals converging to any irrational does the same job, for instance the
-  Babylonian iterates of [[ex-babylonian-sqrt-two]] started at $2$, which are all
-  rational and converge to $\sqrt 2$. Truncated decimals are chosen because the
-  two-sided estimate $s_n \le \sqrt 2 < s_n + 10^{-n}$ is immediate from the
-  definition of $k_n$ and turns into convergence with one application of the
-  squeeze theorem.
+- **Decimal truncation is a convenience, not the mechanism.** Any sequence of rationals converging to any irrational does the same job, for instance the Babylonian iterates of [[ex-babylonian-sqrt-two]] started at $2$, which are all rational and converge to $\sqrt 2$. Truncated decimals are chosen because the two-sided estimate $s_n \le \sqrt 2 < s_n + 10^{-n}$ is immediate from the definition of $k_n$ and turns into convergence with one application of the squeeze theorem.
 
-- **Note which completeness is which.** [[fs-rationals-complete]] refutes Cauchy
-  completeness of $\mathbb{Q}$. $\mathbb{Q}$ also fails the least-upper-bound
-  property, on the same underlying fact that $\sqrt 2 \notin \mathbb{Q}$, and the
-  two failures are not the same statement: Cauchy completeness and Dedekind
-  completeness differ in general, and coincide only in the presence of the
-  Archimedean property. [[rem-completeness-routes]] records where this library
-  stands on that.
+- **Note which completeness is which.** [[fs-rationals-complete]] refutes Cauchy completeness of $\mathbb{Q}$. $\mathbb{Q}$ also fails the least-upper-bound property, on the same underlying fact that $\sqrt 2 \notin \mathbb{Q}$, and the two failures are not the same statement: Cauchy completeness and Dedekind completeness differ in general, and coincide only in the presence of the Archimedean property. [[rem-completeness-routes]] records where this library stands on that.

@@ -38,15 +38,11 @@ affine Krylov space $x_0+K_m(A,r_0)$.
 
 ## Facts & Assumptions
 
-**Given:** The Arnoldi parametrization from the GMRES reduction theorem and a
-vector $y_m$ minimizing $\|\beta e_1-\bar H_my\|_2$.
+**Given:** The Arnoldi parametrization from the GMRES reduction theorem and a vector $y_m$ minimizing $\|\beta e_1-\bar H_my\|_2$.
 
-[F1] A GMRES iterate is, by definition, a residual minimizer over
-$x_0+K_m(A,r_0)$ ([[def-gmres-iterate]]).
+[F1] A GMRES iterate is, by definition, a residual minimizer over $x_0+K_m(A,r_0)$ ([[def-gmres-iterate]]).
 
-[L1] Arnoldi identifies the residual norm on $x_0+K_m(A,r_0)$ with the small
-least-squares norm $\|\beta e_1-\bar H_my\|_2$
-([[thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem]]).
+[L1] Arnoldi identifies the residual norm on $x_0+K_m(A,r_0)$ with the small least-squares norm $\|\beta e_1-\bar H_my\|_2$ ([[thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem]]).
 
 ## Proof
 **Proof technique:** direct.

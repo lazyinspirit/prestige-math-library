@@ -52,8 +52,7 @@ data $\varphi$.
 1.1 By [L1], the source datum $\varphi\circ F|_{\partial\Omega}$ has a unique continuous harmonic solution $u$ on $\overline\Omega$. Define $v=u\circ F^{-1}$ on $\Omega'$. Since $F^{-1}$ is holomorphic on $\Omega'$, [L2] makes $v$ harmonic on $\Omega'$. [L1, L2, given]
 
 2.1 The homeomorphic extension of $F$ to the closures shows that $F^{-1}$ extends continuously from $\overline{\Omega'}$ to $\overline\Omega$. Therefore $v$ extends continuously to $\overline{\Omega'}$, and for $\xi\in\partial\Omega'$ one has [step 1.1, given]
-$$v(\xi)=u(F^{-1}(\xi))=(\varphi\circ F)(F^{-1}(\xi))=\varphi(\xi).$$
-This identifies the transported boundary values. [step 1.1, given]
+$$v(\xi)=u(F^{-1}(\xi))=(\varphi\circ F)(F^{-1}(\xi))=\varphi(\xi).$$ This identifies the transported boundary values. [step 1.1, given]
 
 3.1 Let $w$ be any other continuous harmonic function on $\overline{\Omega'}$ with boundary data $\varphi$. Then $w\circ F$ is continuous on $\overline\Omega$, harmonic on $\Omega$ by [L2], and has boundary values $\varphi\circ F$ on $\partial\Omega$. By [L3], one has $w\circ F=u$ on $\overline\Omega$, hence $w=v$ on $\overline{\Omega'}$. [L2, L3, step 2.1]
 

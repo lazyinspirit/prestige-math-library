@@ -38,14 +38,11 @@ limits.
 
 **Given:** A base $\mathcal V$ as in the statement and a $\mathcal V$-category $\mathcal B$.
 
-[L1] Cotensors are the one-object enriched weighted limits
-([[def-cotensor-and-tensor]]).
+[L1] Cotensors are the one-object enriched weighted limits ([[def-cotensor-and-tensor]]).
 
-[L2] Conical enriched limits are the constant-unit weighted enriched limits
-([[def-conical-limit-in-an-enriched-category]]).
+[L2] Conical enriched limits are the constant-unit weighted enriched limits ([[def-conical-limit-in-an-enriched-category]]).
 
-[L3] Enriched weighted limits are the general notion of enriched limit
-([[def-enriched-weighted-limit]]).
+[L3] Enriched weighted limits are the general notion of enriched limit ([[def-enriched-weighted-limit]]).
 
 ## Proof
 

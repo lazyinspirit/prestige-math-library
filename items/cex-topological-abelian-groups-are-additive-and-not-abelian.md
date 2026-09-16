@@ -33,15 +33,11 @@ The category of topological abelian groups is abelian.
 
 ## Facts & Assumptions
 
-**Given:** The category $\mathbf{TAb}$ of topological abelian groups and
-continuous homomorphisms.
+**Given:** The category $\mathbf{TAb}$ of topological abelian groups and continuous homomorphisms.
 
-[L1] A topological group is a group with continuous multiplication and inverse
-([[def-topological-group]]).
+[L1] A topological group is a group with continuous multiplication and inverse ([[def-topological-group]]).
 
-[L2] An abelian category is in particular additive, and it requires the
-canonical coimage-to-image map to be an isomorphism
-([[def-additive-category]], [[def-abelian-category]]).
+[L2] An abelian category is in particular additive, and it requires the canonical coimage-to-image map to be an isomorphism ([[def-additive-category]], [[def-abelian-category]]).
 
 ## Counterexample
 

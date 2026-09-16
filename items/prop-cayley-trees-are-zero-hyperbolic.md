@@ -32,8 +32,7 @@ with respect to a free basis is $0$-hyperbolic.
 
 **Given:** A tree $T$ with its path metric.
 
-[L1] The Cayley graph of a free group with respect to a free basis is a tree
-([[thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree]]).
+[L1] The Cayley graph of a free group with respect to a free basis is a tree ([[thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree]]).
 
 [A1] In a tree, any two vertices are joined by a unique geodesic segment.
 

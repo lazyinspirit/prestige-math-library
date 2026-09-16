@@ -54,9 +54,4 @@ over $F$.
 
 ## Remarks
 
-Wiese, Corollary 2.5.10, p.40, discusses the general realizability obstruction;
-the proof above establishes this witness directly and does not consume a later
-Schur-index theorem. If “Schur index” is expressed as the minimum degree of
-a realization field over the character field, the same example also has index
-two: its character field is $\mathbb Q$, degree one is excluded above, and
-$\mathbb Q(i)$ is an explicit degree-two realization field.
+Wiese, Corollary 2.5.10, p.40, discusses the general realizability obstruction; the proof above establishes this witness directly and does not consume a later Schur-index theorem. If “Schur index” is expressed as the minimum degree of a realization field over the character field, the same example also has index two: its character field is $\mathbb Q$, degree one is excluded above, and $\mathbb Q(i)$ is an explicit degree-two realization field.

@@ -37,14 +37,11 @@ morphisms are the zero elements of the hom-groups.
 
 **Given:** A preadditive category $\mathcal C$ with a zero object $0$.
 
-[L1] A zero object supplies a unique compatible system of zero morphisms
-([[prop-zero-object-induces-zero-morphisms]]).
+[L1] A zero object supplies a unique compatible system of zero morphisms ([[prop-zero-object-induces-zero-morphisms]]).
 
-[L2] In a preadditive category with a zero object, that system agrees with the
-hom-group identities ([[prop-the-zero-morphism-of-a-preadditive-category-is-the-neutral-element-of-its-hom-group]]).
+[L2] In a preadditive category with a zero object, that system agrees with the hom-group identities ([[prop-the-zero-morphism-of-a-preadditive-category-is-the-neutral-element-of-its-hom-group]]).
 
-[L3] In a preadditive category, initial and terminal coincide
-([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
+[L3] In a preadditive category, initial and terminal coincide ([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
 
 ## Proof
 

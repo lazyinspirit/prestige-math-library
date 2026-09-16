@@ -39,8 +39,7 @@ $n=1$, its sectional-curvature domain is empty. Apart from the stated inherited 
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a real number $r>0$, an integer $n\ge1$, and the global coordinates
-on $U^n$; when $n\ge2$, also a point and a tangent two-plane there.
+**Given:** $\mathrm{AC}_\omega$, a real number $r>0$, an integer $n\ge1$, and the global coordinates on $U^n$; when $n\ge2$, also a point and a tangent two-plane there.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 

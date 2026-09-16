@@ -33,12 +33,9 @@ triangle $\operatorname{Cone}(m)\to\operatorname{Cone}(nm)\to\operatorname{Cone}
 
 **Given:** The displayed data.
 
-[F1] The three-cone calculation supplies the comparison maps $\alpha$ and
-$\beta$ ([[lem-the-three-cone-calculation-for-a-composite-chain-map]]).
+[F1] The three-cone calculation supplies the comparison maps $\alpha$ and $\beta$ ([[lem-the-three-cone-calculation-for-a-composite-chain-map]]).
 
-[F2] The octahedral axiom supplies a signed distinguished triangle joining the
-three cone objects
-([[prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf]]).
+[F2] The octahedral axiom supplies a signed distinguished triangle joining the three cone objects ([[prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf]]).
 
 ## Verification
 

@@ -35,11 +35,9 @@ at the identity.
 
 **Given:** The finite discrete Lie group $G=\mathbb Z/2\mathbb Z$.
 
-[F1] A smooth group homomorphism is a Lie-group homomorphism.
-[[def-lie-group-homomorphism-isomorphism-and-automorphism]].
+[F1] A smooth group homomorphism is a Lie-group homomorphism. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
 
-[F2] A discrete finite group is a zero-dimensional Lie group: every map between
-discrete charts is smooth. [[def-lie-group]].
+[F2] A discrete finite group is a zero-dimensional Lie group: every map between discrete charts is smooth. [[def-lie-group]].
 
 ## Refutation
 

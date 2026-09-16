@@ -45,14 +45,11 @@ inequality at some $a\in\mathbb D$, then $f$ is an automorphism of $\mathbb D$.
 
 **Given:** A holomorphic self-map $f:\mathbb D\to\mathbb D$ and points $a,z\in\mathbb D$.
 
-[F1] Every Blaschke factor $\varphi_c$ is an automorphism of $\mathbb D$
-([[thm-blaschke-factor-is-a-disc-automorphism]]).
+[F1] Every Blaschke factor $\varphi_c$ is an automorphism of $\mathbb D$ ([[thm-blaschke-factor-is-a-disc-automorphism]]).
 
-[F2] A disc self-map fixing $0$ satisfies Schwarz's lemma, with equality only
-for rotations ([[thm-unit-disc-schwarz-lemma-with-rigidity]]).
+[F2] A disc self-map fixing $0$ satisfies Schwarz's lemma, with equality only for rotations ([[thm-unit-disc-schwarz-lemma-with-rigidity]]).
 
-[F3] Holomorphic compositions satisfy the chain rule
-([[thm-chain-rule-for-complex-derivatives]]).
+[F3] Holomorphic compositions satisfy the chain rule ([[thm-chain-rule-for-complex-derivatives]]).
 
 ## Proof
 

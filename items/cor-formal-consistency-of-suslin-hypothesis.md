@@ -38,27 +38,15 @@ transitive model of full ZFC from consistency.
 
 ## Facts & Assumptions
 
-**Given:** the fixed arithmetizations of ZFC, ZFC+MA+$\neg$CH, and ZFC+SH,
-with their certified finite proof checkers and the fixed contradiction
-sentence.
+**Given:** the fixed arithmetizations of ZFC, ZFC+MA+$\neg$CH, and ZFC+SH, with their certified finite proof checkers and the fixed contradiction sentence.
 
-[F1] Externally, consistency of ZFC implies consistency of
-ZFC+MA+$\neg$CH by a fixed-finite-fragment model argument; its supplier
-explicitly does not claim a PA-verified uniform proof-code reduction.
-[[cor-formal-consistency-of-ma-and-not-ch]]
+[F1] Externally, consistency of ZFC implies consistency of ZFC+MA+$\neg$CH by a fixed-finite-fragment model argument; its supplier explicitly does not claim a PA-verified uniform proof-code reduction. [[cor-formal-consistency-of-ma-and-not-ch]]
 
-[F2] ZFC+MA+$\neg$CH has a fixed finite derivation of SH.
-[[cor-ma-and-not-ch-implies-suslin-hypothesis]]
+[F2] ZFC+MA+$\neg$CH has a fixed finite derivation of SH. [[cor-ma-and-not-ch-implies-suslin-hypothesis]]
 
-[F3] A formal implication inside an arithmetic base requires that base to
-verify a total map carrying every certified target refutation to a certified
-source refutation; external finite-fragment assemblies alone do not provide
-that conclusion.
-[[thm-formal-relative-consistency-from-verified-proof-reduction]]
+[F3] A formal implication inside an arithmetic base requires that base to verify a total map carrying every certified target refutation to a certified source refutation; external finite-fragment assemblies alone do not provide that conclusion. [[thm-formal-relative-consistency-from-verified-proof-reduction]]
 
-[F4] $\operatorname{Con}(T)$ abbreviates absence of a certified proof of the
-fixed contradiction for the chosen effective theory $T$.
-[[def-arithmetic-provability-and-consistency]]
+[F4] $\operatorname{Con}(T)$ abbreviates absence of a certified proof of the fixed contradiction for the chosen effective theory $T$. [[def-arithmetic-provability-and-consistency]]
 
 ## Proof
 
@@ -74,7 +62,5 @@ fixed contradiction for the chosen effective theory $T$.
 
 ## Remarks
 
-- The stronger MA theory is used only as an intermediate proof system. The
-  conclusion retains SH but does not retain MA or $\neg$CH.
-- The argument concerns standard certified finite proofs. It does not replace
-  the fixed proof predicate by an informal notion of derivability.
+- The stronger MA theory is used only as an intermediate proof system. The conclusion retains SH but does not retain MA or $\neg$CH.
+- The argument concerns standard certified finite proofs. It does not replace the fixed proof predicate by an informal notion of derivability.

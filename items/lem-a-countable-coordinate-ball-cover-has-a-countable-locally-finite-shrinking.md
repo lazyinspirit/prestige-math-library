@@ -38,9 +38,7 @@ Let $(U_n)_{n\ge 1}$ be a countable cover of a smooth manifold $M$ by coordinate
 
 **Given:** A countable cover $(U_n)_{n\ge 1}$ of $M$ by coordinate balls with compact closures.
 
-[L1] Coordinate balls form a basis of the underlying topological manifold, and
-the basis balls supplied there have compact closures
-([[lem-coordinate-balls-form-a-basis-of-a-topological-manifold]]).
+[L1] Coordinate balls form a basis of the underlying topological manifold, and the basis balls supplied there have compact closures ([[lem-coordinate-balls-form-a-basis-of-a-topological-manifold]]).
 
 [L2] In a regular space, if $x\in U$ with $U$ open, then there is an open set $V$ with $x\in V\subseteq \overline V\subseteq U$ ([[lem-regularity-via-closed-neighbourhoods]]).
 

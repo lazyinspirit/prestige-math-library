@@ -33,14 +33,11 @@ No independence hypothesis is needed.
 
 ## Facts & Assumptions
 
-**Given:** Events $(A_n)_{n\in\mathbb N}$ with
-$\sum_{n=0}^\infty \mathbb P(A_n)<+\infty$.
+**Given:** Events $(A_n)_{n\in\mathbb N}$ with $\sum_{n=0}^\infty \mathbb P(A_n)<+\infty$.
 
-[L1] The infinitely-often event is the set limsup.
-([[def-limsup-and-infinitely-often-event]])
+[L1] The infinitely-often event is the set limsup. ([[def-limsup-and-infinitely-often-event]])
 
-[L2] If the sum of the measures is finite, then the measure of the set limsup is
-zero. ([[thm-first-borel-cantelli]])
+[L2] If the sum of the measures is finite, then the measure of the set limsup is zero. ([[thm-first-borel-cantelli]])
 
 ## Proof
 

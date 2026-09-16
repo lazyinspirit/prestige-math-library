@@ -37,22 +37,15 @@ isomorphism, not a literal equality independent of those paths.
 
 **Given:** $X,x,R$ as in the statement and the Axiom of Choice.
 
-[F1] [[def-local-system-of-r-modules-and-its-pullback]] defines transports,
-coefficient morphisms, and the displayed left monodromy convention.
+[F1] [[def-local-system-of-r-modules-and-its-pullback]] defines transports, coefficient morphisms, and the displayed left monodromy convention.
 
-[F2] [[prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group]] identifies the published loop group with the categorical
-vertex group by reversal.
+[F2] [[prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group]] identifies the published loop group with the categorical vertex group by reversal.
 
-[F3] [[thm-group-actions-and-group-ring-modules-correspond]] identifies
-$R$-linear left actions of a group with left modules over its group ring,
-including equivariant maps.
+[F3] [[thm-group-actions-and-group-ring-modules-correspond]] identifies $R$-linear left actions of a group with left modules over its group ring, including equivariant maps.
 
-[F4] [[def-axiom-of-choice]] permits a simultaneous selection from the
-nonempty sets of paths from $x$ to the other points of $X$.
+[F4] [[def-axiom-of-choice]] permits a simultaneous selection from the nonempty sets of paths from $x$ to the other points of $X$.
 
-[F5] [[def-cw-complex-with-closure-finiteness-and-weak-topology]] supplies
-characteristic disks whose images are the closed cells and the weak-topology
-test against every closed cell.
+[F5] [[def-cw-complex-with-closure-finiteness-and-weak-topology]] supplies characteristic disks whose images are the closed cells and the weak-topology test against every closed cell.
 
 ## Proof
 

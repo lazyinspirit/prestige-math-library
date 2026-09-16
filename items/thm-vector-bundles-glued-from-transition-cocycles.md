@@ -40,12 +40,9 @@ Every rank-$n$ bundle is recovered from the cocycle of any linear atlas.
 
 **Given:** The cover and cocycle in the statement.
 
-[F1] A vector bundle is locally a product by fiberwise-linear charts, and its
-transition order is $g_{ki}=g_{kj}g_{ji}$
-([[def-real-and-complex-topological-vector-bundle]]).
+[F1] A vector bundle is locally a product by fiberwise-linear charts, and its transition order is $g_{ki}=g_{kj}g_{ji}$ ([[def-real-and-complex-topological-vector-bundle]]).
 
-[F2] A map out of a quotient is continuous exactly when its composite with
-the quotient map is continuous ([[thm-quotient-universal-property]]).
+[F2] A map out of a quotient is continuous exactly when its composite with the quotient map is continuous ([[thm-quotient-universal-property]]).
 
 ## Proof
 

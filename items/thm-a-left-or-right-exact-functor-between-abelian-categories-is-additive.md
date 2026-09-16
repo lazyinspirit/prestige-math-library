@@ -36,16 +36,11 @@ is left exact or right exact, then $F$ is additive.
 
 **Given:** A functor $F:\mathcal A\to\mathcal B$ between abelian categories.
 
-[L1] Left exact means preserving finite limits, and right exact means
-preserving finite colimits
-([[def-left-exact-and-right-exact-functor]]).
+[L1] Left exact means preserving finite limits, and right exact means preserving finite colimits ([[def-left-exact-and-right-exact-functor]]).
 
-[L2] Abelian categories are additive
-([[def-abelian-category]]).
+[L2] Abelian categories are additive ([[def-abelian-category]]).
 
-[L3] A functor between additive categories is additive exactly when it
-preserves finite biproducts
-([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
+[L3] A functor between additive categories is additive exactly when it preserves finite biproducts ([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
 
 ## Proof
 

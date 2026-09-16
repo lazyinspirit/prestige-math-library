@@ -27,11 +27,9 @@ The additive group of $\mathbb Z_p$ is cyclic as an abstract group.
 
 **Given:** The additive group of $\mathbb Z_p$.
 
-[L1] The element $1$ topologically generates $\mathbb Z_p$, but the additive
-group is not abstractly cyclic ([[prop-zp-is-topologically-generated-by-one]]).
+[L1] The element $1$ topologically generates $\mathbb Z_p$, but the additive group is not abstractly cyclic ([[prop-zp-is-topologically-generated-by-one]]).
 
-[L2] The additive group of $\mathbb Z_p$ is torsion-free
-([[prop-additive-group-of-zp-is-torsion-free]]).
+[L2] The additive group of $\mathbb Z_p$ is torsion-free ([[prop-additive-group-of-zp-is-torsion-free]]).
 
 ## Refutation
 

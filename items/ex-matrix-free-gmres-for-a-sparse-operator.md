@@ -43,12 +43,9 @@ $v\mapsto T(v)$, without ever storing the full tridiagonal matrix of $T$.
 
 **Given:** The operator $T$ above and the start vector $b=e_1$.
 
-[F1] In the matrix-free model, Krylov methods need only operator applications,
-vector updates, inner products, and norms
-([[def-matrix-free-access-model-for-krylov-methods]]).
+[F1] In the matrix-free model, Krylov methods need only operator applications, vector updates, inner products, and norms ([[def-matrix-free-access-model-for-krylov-methods]]).
 
-[F2] Restarted GMRES is built from ordinary GMRES cycles on such Krylov spaces
-([[def-restarted-gmres-m]]).
+[F2] Restarted GMRES is built from ordinary GMRES cycles on such Krylov spaces ([[def-restarted-gmres-m]]).
 
 ## Verification
 **Proof technique:** direct.

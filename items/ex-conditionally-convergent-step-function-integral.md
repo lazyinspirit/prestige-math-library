@@ -51,8 +51,7 @@ Then $\int_0^\infty f$ converges conditionally, and its value is the sum of the 
 **Proof technique:** computation.
 
 1.1 Every compact interval meets only finitely many jumps, so [L3] makes $f$ properly integrable there. At a positive integer $N$, [L1, L3]
-$$\int_0^Nf=\sum_{k=0}^{N-1}\frac{(-1)^k}{k+1},$$
-which converges as $N\to\infty$ by [L1].
+$$\int_0^Nf=\sum_{k=0}^{N-1}\frac{(-1)^k}{k+1},$$ which converges as $N\to\infty$ by [L1].
 
 1.2 If $N\le R<N+1$, the remaining integral from $N$ to $R$ has absolute value at most $1/(N+1)$. Hence arbitrary real truncations have the same limit as the integer truncations. [given]
 

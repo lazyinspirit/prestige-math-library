@@ -36,22 +36,13 @@ Every operation and equality is in $\mathcal S'(\mathbb R^n)$.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]],
-$u\in\mathcal S'(\mathbb R^n)$, and a multi-index $\alpha$.
+**Given:** [[def-countable-choice|Countable Choice]], $u\in\mathcal S'(\mathbb R^n)$, and a multi-index $\alpha$.
 
-[F1] Derivatives and polynomial products on $\mathcal S'$ use the bilinear
-transpose conventions
-([[thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions]]).
+[F1] Derivatives and polynomial products on $\mathcal S'$ use the bilinear transpose conventions ([[thm-differentiation-and-polynomial-multiplication-preserve-tempered-distributions]]).
 
-[F2] The distributional Fourier transform is the bilinear transpose of the
-Schwartz transform ([[def-fourier-transform-of-a-tempered-distribution]]).
+[F2] The distributional Fourier transform is the bilinear transpose of the Schwartz transform ([[def-fourier-transform-of-a-tempered-distribution]]).
 
-[F3] On Schwartz tests,
-$\mathcal F(\partial_j\varphi)=2\pi i\xi_j\mathcal F\varphi$ and
-$\partial_j\mathcal F\varphi=\mathcal F(-2\pi ix_j\varphi)$
-([[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]]), and all
-test operations involved are continuous
-([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]]).
+[F3] On Schwartz tests, $\mathcal F(\partial_j\varphi)=2\pi i\xi_j\mathcal F\varphi$ and $\partial_j\mathcal F\varphi=\mathcal F(-2\pi ix_j\varphi)$ ([[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]]), and all test operations involved are continuous ([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]]).
 
 ## Proof
 
@@ -61,8 +52,7 @@ test operations involved are continuous
 
 $$\begin{aligned} \langle\mathcal F(\partial_j u),\varphi\rangle &=-\langle u,\partial_j(\mathcal F\varphi)\rangle\\ &=2\pi i\langle u,\mathcal F(\xi_j\varphi)\rangle =\langle2\pi i\xi_j\mathcal Fu,\varphi\rangle. \end{aligned}$$
 
-The first minus sign is the distributional derivative sign; the second
-identity is the second formula in [F3]. [F1, F2, F3]
+The first minus sign is the distributional derivative sign; the second identity is the second formula in [F3]. [F1, F2, F3]
 
 1.2 The first formula in [F3] gives $x_j\mathcal F\varphi=(2\pi i)^{-1}\mathcal F(\partial_j\varphi)$, so transposition yields the second calculation. [F1, F2, F3]
 

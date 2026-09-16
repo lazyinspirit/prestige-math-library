@@ -32,16 +32,11 @@ reversing an integral orientation replaces its Thom class by $-u_\xi$.
 
 ## Facts & Assumptions
 
-**Given:** A bundle $\xi\to B$ in the scope of the general Thom theorem, a map
-$f:B'\to B$ whose pullback remains in that scope, and supplied compatible
-orientations.
+**Given:** A bundle $\xi\to B$ in the scope of the general Thom theorem, a map $f:B'\to B$ whose pullback remains in that scope, and supplied compatible orientations.
 
-[F1] [[thm-thom-isomorphism-for-oriented-vector-bundles]] gives existence,
-the Thom isomorphism, and uniqueness under AC.
+[F1] [[thm-thom-isomorphism-for-oriented-vector-bundles]] gives existence, the Thom isomorphism, and uniqueness under AC.
 
-[F2] [[def-pullback-vector-bundle-and-pullback-section]] gives the canonical
-bundle map $f^*\xi\to\xi$.  The disk and sphere subspaces for a supplied
-metric are defined in [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]].
+[F2] [[def-pullback-vector-bundle-and-pullback-section]] gives the canonical bundle map $f^*\xi\to\xi$.  The disk and sphere subspaces for a supplied metric are defined in [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]].
 
 [A1] [[def-axiom-of-choice]] is used only through [F1].
 

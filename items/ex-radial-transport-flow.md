@@ -36,11 +36,9 @@ with arbitrary $C^1$ data $g$ on the unit sphere.
 
 ## Facts & Assumptions
 
-**Given:** The stationary equation $x\cdot\nabla u=u$ on
-$\mathbb R^n\setminus\{0\}$.
+**Given:** The stationary equation $x\cdot\nabla u=u$ on $\mathbb R^n\setminus\{0\}$.
 
-[L1] Along a characteristic, a transport equation reduces to the scalar ODE
-from the transport lemma ([[lem-transport-equation-along-a-characteristic]]).
+[L1] Along a characteristic, a transport equation reduces to the scalar ODE from the transport lemma ([[lem-transport-equation-along-a-characteristic]]).
 
 ## Verification
 

@@ -30,21 +30,15 @@ subcategory and the ambient category.
 
 ## Facts & Assumptions
 
-**Given:** The poset $P=\{0,q,m,a,b\}$ with
-$0<q<m<a$, $0<q<m<b$, and $a,b$ incomparable, and its full subposet
-$Q=\{0,q,a,b\}$.
+**Given:** The poset $P=\{0,q,m,a,b\}$ with $0<q<m<a$, $0<q<m<b$, and $a,b$ incomparable, and its full subposet $Q=\{0,q,a,b\}$.
 
-[F1] Products represent common lower bounds universally
-([[def-products-and-coproducts]]).
+[F1] Products represent common lower bounds universally ([[def-products-and-coproducts]]).
 
-[F2] A full functor is surjective on every hom-set map
-([[def-full-faithful-and-essentially-surjective-functor]]).
+[F2] A full functor is surjective on every hom-set map ([[def-full-faithful-and-essentially-surjective-functor]]).
 
-[F3] Posets form categories with an arrow exactly for an order relation
-([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[F3] Posets form categories with an arrow exactly for an order relation ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
 
-[L1] Preservation is detected by the canonical comparison to the ambient
-chosen limit ([[lem-canonical-comparison-characterises-limit-preservation]]).
+[L1] Preservation is detected by the canonical comparison to the ambient chosen limit ([[lem-canonical-comparison-characterises-limit-preservation]]).
 
 ## Counterexample
 

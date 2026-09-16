@@ -117,25 +117,8 @@ constructions, and only the cylinder is identified with a space built earlier.
 
 ## Remarks
 
-- **The two constructions differ in one sign and in nothing else.** They use the
-  same square, the same two edges and the same kind of relation; the Mobius band
-  glues the left edge to the right edge after reversing it. Claim 1 is proved for
-  both. Claim 2 is not: it identifies the cylinder with
-  $(\mathbb{R}/\mathbb{Z}) \times [0,1]$, and no analogous description of the
-  Mobius band is attempted here. Separating the two spaces would need an invariant,
-  and none is claimed here.
+- **The two constructions differ in one sign and in nothing else.** They use the same square, the same two edges and the same kind of relation; the Mobius band glues the left edge to the right edge after reversing it. Claim 1 is proved for both. Claim 2 is not: it identifies the cylinder with $(\mathbb{R}/\mathbb{Z}) \times [0,1]$, and no analogous description of the Mobius band is attempted here. Separating the two spaces would need an invariant, and none is claimed here.
 
-- **Why closedness rather than openness.** Neither projection is open. Take
-  $U := \{\, (s,t) \in S : s < 1/2 \,\}$, which is open in $S$; its saturation is
-  $U \cup (\{1\} \times [0,1])$, and that is not open in $S$, because every
-  neighbourhood in $S$ of the point $(1,1/2)$ contains points $(s,1/2)$ with
-  $1/2 < s < 1$, which lie in neither piece. So $P_{\mathrm{c}}[U]$ is not open,
-  and the same computation applies to $P_{\mathrm{m}}$; this is the failure
-  recorded in [[fs-quotient-map-is-open]]. Closedness holds instead because the
-  two edges are closed and the gluing map between them is a homeomorphism, which
-  is what step 2.1 uses.
+- **Why closedness rather than openness.** Neither projection is open. Take $U := \{\, (s,t) \in S : s < 1/2 \,\}$, which is open in $S$; its saturation is $U \cup (\{1\} \times [0,1])$, and that is not open in $S$, because every neighbourhood in $S$ of the point $(1,1/2)$ contains points $(s,1/2)$ with $1/2 < s < 1$, which lie in neither piece. So $P_{\mathrm{c}}[U]$ is not open, and the same computation applies to $P_{\mathrm{m}}$; this is the failure recorded in [[fs-quotient-map-is-open]]. Closedness holds instead because the two edges are closed and the gluing map between them is a homeomorphism, which is what step 2.1 uses.
 
-- **The cylinder is a product and the Mobius band is not built as one.** Claim 2
-  writes $M_{\mathrm{c}}$ as $T \times [0,1]$; no analogous description is
-  attempted for $M_{\mathrm{m}}$, and none is available at this point in the
-  reading order.
+- **The cylinder is a product and the Mobius band is not built as one.** Claim 2 writes $M_{\mathrm{c}}$ as $T \times [0,1]$; no analogous description is attempted for $M_{\mathrm{m}}$, and none is available at this point in the reading order.

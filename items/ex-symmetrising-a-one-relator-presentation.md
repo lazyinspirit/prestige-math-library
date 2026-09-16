@@ -40,8 +40,7 @@ $$ \{abc,bca,cab,c^{-1}b^{-1}a^{-1},b^{-1}a^{-1}c^{-1},a^{-1}c^{-1}b^{-1}\}. $$
 
 **Given:** The cyclically reduced relator $r=abc$.
 
-[L1] Symmetrisation adds all cyclic conjugates of $r$ and of $r^{-1}$
-([[def-symmetrisation-of-a-relator-set]]).
+[L1] Symmetrisation adds all cyclic conjugates of $r$ and of $r^{-1}$ ([[def-symmetrisation-of-a-relator-set]]).
 
 ## Verification
 

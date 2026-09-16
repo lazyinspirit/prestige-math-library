@@ -42,11 +42,7 @@ $$\int \liminf_{n\to\infty}f_n\,d\mu\le\liminf_{n\to\infty}\int f_n\,d\mu.$$
 **Proof technique:** direct.
 
 1.1 For each $n$, define [L1, given, construct]
-$$g_n:=\inf_{k\ge n}f_k.$$
-Then each $g_n$ is measurable by [L1], one has $g_n\le g_{n+1}$ and
-$g_n\uparrow\liminf_n f_n$ pointwise. Also $g_n\le f_n$ for every $n$.
+$$g_n:=\inf_{k\ge n}f_k.$$ Then each $g_n$ is measurable by [L1], one has $g_n\le g_{n+1}$ and $g_n\uparrow\liminf_n f_n$ pointwise. Also $g_n\le f_n$ for every $n$.
 
 2.1 By [L2], [step 1.1, L2, L3] ∎
-$$\int \liminf_n f_n\,d\mu=\lim_n\int g_n\,d\mu.$$
-Since $g_n\le f_n$, [L3] gives $\int g_n\,d\mu\le\int f_n\,d\mu$ for every $n$.
-Taking the limit in $n$ yields the claimed inequality.
+$$\int \liminf_n f_n\,d\mu=\lim_n\int g_n\,d\mu.$$ Since $g_n\le f_n$, [L3] gives $\int g_n\,d\mu\le\int f_n\,d\mu$ for every $n$. Taking the limit in $n$ yields the claimed inequality.

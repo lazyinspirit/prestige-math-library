@@ -87,19 +87,6 @@ countable.
 
 ## Remarks
 
-- **The jump at a rational $r$ is at least $1/2^{\,k+1}$, where $k$ is the index
-  with $e(k) = r$.** That lower bound is what the construction of
-  [[thm-monotone-with-prescribed-discontinuity-set]] establishes, and it is what
-  makes $r$ a discontinuity; the total mass available is
-  $\sum_{k \ge 0} 1/2^{\,k+1} = 1$, which is why $f$ stays inside $[0,1]$. A
-  different enumeration gives a different function with the same discontinuity
-  set.
+- **The jump at a rational $r$ is at least $1/2^{\,k+1}$, where $k$ is the index with $e(k) = r$.** That lower bound is what the construction of [[thm-monotone-with-prescribed-discontinuity-set]] establishes, and it is what makes $r$ a discontinuity; the total mass available is $\sum_{k \ge 0} 1/2^{\,k+1} = 1$, which is why $f$ stays inside $[0,1]$. A different enumeration gives a different function with the same discontinuity set.
 
-- **Continuity at every irrational is not an accident of this construction.**
-  The complement of a countable set is where a monotone function built this way
-  must be continuous, and [[thm-froda]] says the same thing in general: the
-  discontinuities of a monotone function can never fill an uncountable set. The
-  companion statement in the other direction, that no function whatever is
-  continuous exactly at the rationals
-  ([[cor-no-function-is-continuous-exactly-on-q]]), shows that the roles of
-  $\mathbb{Q}$ and its complement cannot be exchanged here.
+- **Continuity at every irrational is not an accident of this construction.** The complement of a countable set is where a monotone function built this way must be continuous, and [[thm-froda]] says the same thing in general: the discontinuities of a monotone function can never fill an uncountable set. The companion statement in the other direction, that no function whatever is continuous exactly at the rationals ([[cor-no-function-is-continuous-exactly-on-q]]), shows that the roles of $\mathbb{Q}$ and its complement cannot be exchanged here.

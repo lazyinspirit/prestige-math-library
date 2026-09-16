@@ -38,19 +38,13 @@ nullity, index, and coindex of $p$ are intrinsic.
 
 **Given:** A smooth function $f:M\to\mathbb R$ and a critical point $p$.
 
-[F1] Hessian matrices in two charts are congruent
-([[lem-coordinate-change-congruence-for-the-critical-hessian]]).
+[F1] Hessian matrices in two charts are congruent ([[lem-coordinate-change-congruence-for-the-critical-hessian]]).
 
-[F2] Nullity, index, and coindex are defined from the Hessian as kernel
-dimension and maximal negative- and positive-definite dimensions
-([[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F2] Nullity, index, and coindex are defined from the Hessian as kernel dimension and maximal negative- and positive-definite dimensions ([[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
-[L1] Congruent real symmetric matrices have the same inertia data
-([[thm-sylvesters-law-of-inertia]]).
+[L1] Congruent real symmetric matrices have the same inertia data ([[thm-sylvesters-law-of-inertia]]).
 
-[L2] The inertia counts are exactly the numbers of positive, negative, and zero
-entries in a diagonal normal form
-([[def-definiteness-inertia-and-signature-data-over-the-reals]]).
+[L2] The inertia counts are exactly the numbers of positive, negative, and zero entries in a diagonal normal form ([[def-definiteness-inertia-and-signature-data-over-the-reals]]).
 
 ## Proof
 

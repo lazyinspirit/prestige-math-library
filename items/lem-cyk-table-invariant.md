@@ -28,8 +28,7 @@ $$ A\in T[i,\ell]\quad\text{if and only if}\quad A\Rightarrow_G^* a_i\cdots a_{i
 
 ## Facts & Assumptions
 
-**Given:** A CNF grammar $G$, a nonempty word $w=a_1\cdots a_n$, and its CYK
-table.
+**Given:** A CNF grammar $G$, a nonempty word $w=a_1\cdots a_n$, and its CYK table.
 
 [L1] By [[def-cyk-table-and-span-variable]], the cells $T[i,\ell]$ are defined by terminal productions for $\ell=1$ and by binary productions $A\to BC$ together with a split point for $\ell\ge 2$.
 

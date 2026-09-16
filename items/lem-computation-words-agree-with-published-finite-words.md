@@ -33,14 +33,9 @@ finite words over $\Sigma$ already used in the published item.
 
 **Given:** A finite alphabet $\Sigma$.
 
-[L1] On this page, a word of length $n$ over $\Sigma$ is a function $n\to\Sigma$,
-the empty word is the unique word of length $0$, and concatenation is the
-offset construction of [[def-computation-alphabet-and-word-convention]].
+[L1] On this page, a word of length $n$ over $\Sigma$ is a function $n\to\Sigma$, the empty word is the unique word of length $0$, and concatenation is the offset construction of [[def-computation-alphabet-and-word-convention]].
 
-[L2] The published item [[def-finite-words-factor-avoidance-and-prefix-states]]
-defines a word of length $n$ over $\Sigma$ as a function $n\to\Sigma$, names
-the unique length-zero word $\varepsilon$, and writes concatenation of words as
-$uv$.
+[L2] The published item [[def-finite-words-factor-avoidance-and-prefix-states]] defines a word of length $n$ over $\Sigma$ as a function $n\to\Sigma$, names the unique length-zero word $\varepsilon$, and writes concatenation of words as $uv$.
 
 ## Proof
 

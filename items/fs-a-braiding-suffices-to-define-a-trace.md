@@ -26,15 +26,11 @@ categorical trace.
 
 ## Facts & Assumptions
 
-**Given:** The symmetric monoidal category $\mathbf{Vect}_k$ of all vector
-spaces and its infinite-dimensional object $k[x]$.
+**Given:** The symmetric monoidal category $\mathbf{Vect}_k$ of all vector spaces and its infinite-dimensional object $k[x]$.
 
-[L1] The trace formulas require evaluation and coevaluation maps
-([[rem-what-is-needed-before-a-trace-can-be-written]]).
+[L1] The trace formulas require evaluation and coevaluation maps ([[rem-what-is-needed-before-a-trace-can-be-written]]).
 
-[L2] The symmetric monoidal category of all vector spaces has an
-infinite-dimensional object with no categorical dual
-([[cex-not-every-monoidal-category-is-rigid]]).
+[L2] The symmetric monoidal category of all vector spaces has an infinite-dimensional object with no categorical dual ([[cex-not-every-monoidal-category-is-rigid]]).
 
 ## Refutation
 

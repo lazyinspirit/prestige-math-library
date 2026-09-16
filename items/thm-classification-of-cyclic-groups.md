@@ -34,19 +34,13 @@ If $G=\langle g\rangle$ is cyclic, then exactly one of the following applies:
 
 **Given:** A group $G$ and an element $g\in G$ with $G=\langle g\rangle$.
 
-[L1] A cyclic subgroup is precisely the set of all integer powers of its generator
-([[lem-cyclic-subgroup-is-the-set-of-powers]]).
+[L1] A cyclic subgroup is precisely the set of all integer powers of its generator ([[lem-cyclic-subgroup-is-the-set-of-powers]]).
 
-[L2] For finite order $n$, $g^k=e$ exactly when $n\mid k$, while for infinite
-order no nonzero integer power of $g$ is the identity
-([[lem-order-characterisation]]).
+[L2] For finite order $n$, $g^k=e$ exactly when $n\mid k$, while for infinite order no nonzero integer power of $g$ is the identity ([[lem-order-characterisation]]).
 
-[L3] Integer powers satisfy $g^{r+s}=g^rg^s$ and
-$g^{-s}=(g^s)^{-1}$; a bijective group homomorphism is a group isomorphism
-([[lem-group-power-laws]], [[def-group-isomorphism-and-automorphism]]).
+[L3] Integer powers satisfy $g^{r+s}=g^rg^s$ and $g^{-s}=(g^s)^{-1}$; a bijective group homomorphism is a group isomorphism ([[lem-group-power-laws]], [[def-group-isomorphism-and-automorphism]]).
 
-[L4] The additive quotient group $(\mathbb Z,+)/n\mathbb Z$ is the group $(\mathbb Z/n,+)$
-([[prop-integers-modulo-n-as-a-quotient-group]]).
+[L4] The additive quotient group $(\mathbb Z,+)/n\mathbb Z$ is the group $(\mathbb Z/n,+)$ ([[prop-integers-modulo-n-as-a-quotient-group]]).
 
 ## Proof
 

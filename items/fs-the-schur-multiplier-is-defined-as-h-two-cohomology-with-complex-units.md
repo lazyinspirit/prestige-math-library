@@ -32,10 +32,7 @@ $H^2(G;\mathbb C^\times)$.
 
 **Given:** Use the convention in [[def-schur-multiplier-of-a-group]].
 
-[L1] The universal-coefficient sequence in
-[[thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]]
-identifies $H^2(G;A)$ with $\operatorname{Hom}(M(G),A)$ whenever
-$\operatorname{Ext}^1_{\mathbb Z}(G_{\mathrm{ab}},A)=0$.
+[L1] The universal-coefficient sequence in [[thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two]] identifies $H^2(G;A)$ with $\operatorname{Hom}(M(G),A)$ whenever $\operatorname{Ext}^1_{\mathbb Z}(G_{\mathrm{ab}},A)=0$.
 
 ## Refutation
 

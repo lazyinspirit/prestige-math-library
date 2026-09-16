@@ -83,15 +83,6 @@ with the nested interval property and with Cauchy completeness, which do
 
 ## Remarks
 
-- **The witness sequence is the obstruction itself.** In a non-Archimedean field
-  the canonical naturals are bounded, so they form a bounded sequence; and no
-  subsequence of them can converge, because consecutive terms of any
-  subsequence stay at distance at least $1_F$. That is the whole argument, and
-  it shows that (BW) fails in every non-Archimedean ordered field, for instance
-  in $\mathbb{R}(t)$ ([[cex-ordered-field-not-archimedean]]) and in
-  $\mathbb{R}((t^{-1}))$ ([[lem-laurent-non-archimedean]]).
+- **The witness sequence is the obstruction itself.** In a non-Archimedean field the canonical naturals are bounded, so they form a bounded sequence; and no subsequence of them can converge, because consecutive terms of any subsequence stay at distance at least $1_F$. That is the whole argument, and it shows that (BW) fails in every non-Archimedean ordered field, for instance in $\mathbb{R}(t)$ ([[cex-ordered-field-not-archimedean]]) and in $\mathbb{R}((t^{-1}))$ ([[lem-laurent-non-archimedean]]).
 
-- Note which direction is being used: the sequence is bounded and has no
-  convergent subsequence, so (BW) is contradicted. Nothing here says that
-  $(y_k)$ fails to be Cauchy for some other reason; it is Cauchy along no
-  subsequence at all.
+- Note which direction is being used: the sequence is bounded and has no convergent subsequence, so (BW) is contradicted. Nothing here says that $(y_k)$ fails to be Cauchy for some other reason; it is Cauchy along no subsequence at all.

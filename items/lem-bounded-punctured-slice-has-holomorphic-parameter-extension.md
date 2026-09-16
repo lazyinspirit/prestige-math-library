@@ -46,23 +46,15 @@ $F(z')$ at $w=0$.
 
 ## Facts & Assumptions
 
-**Given:** A holomorphic function $f$ on
-$U\times\{0<|w|<R\}$, bounded on $U\times\{0<|w|<\eta\}$ for some
-$0<\eta<R$.
+**Given:** A holomorphic function $f$ on $U\times\{0<|w|<R\}$, bounded on $U\times\{0<|w|<\eta\}$ for some $0<\eta<R$.
 
-[L1] A punctured-disc holomorphic function extends across the centre exactly
-when it is bounded near that centre
-([[thm-removable-singularity-characterizations]]).
+[L1] A punctured-disc holomorphic function extends across the centre exactly when it is bounded near that centre ([[thm-removable-singularity-characterizations]]).
 
-[L2] A contour integral of a jointly continuous integrand that is holomorphic in
-the parameter variable defines a holomorphic function of that parameter
-([[thm-contour-parameter-integrals-are-holomorphic]]).
+[L2] A contour integral of a jointly continuous integrand that is holomorphic in the parameter variable defines a holomorphic function of that parameter ([[thm-contour-parameter-integrals-are-holomorphic]]).
 
-[L3] The one-variable Cauchy integral formula recovers a holomorphic function on
-a disc from a circle inside it ([[thm-cauchy-integral-formula-circle]]).
+[L3] The one-variable Cauchy integral formula recovers a holomorphic function on a disc from a circle inside it ([[thm-cauchy-integral-formula-circle]]).
 
-[L4] A separately holomorphic function that is locally bounded is jointly
-holomorphic ([[thm-locally-bounded-separate-holomorphy]]).
+[L4] A separately holomorphic function that is locally bounded is jointly holomorphic ([[thm-locally-bounded-separate-holomorphy]]).
 
 ## Proof
 

@@ -30,13 +30,9 @@ are equivalent in the sense of [[def-equivalent-field-absolute-values]].
 
 ## Facts & Assumptions
 
-**Given:** A field $F$ and nontrivial absolute values $|\cdot|_1$ and
-$|\cdot|_2$ on $F$.
+**Given:** A field $F$ and nontrivial absolute values $|\cdot|_1$ and $|\cdot|_2$ on $F$.
 
-[L1] Absolute values are multiplicative and have their open unit balls
-available, and equivalence means equality up to a positive power
-([[def-multiplicative-absolute-value-on-a-field]],
-[[def-equivalent-field-absolute-values]]).
+[L1] Absolute values are multiplicative and have their open unit balls available, and equivalence means equality up to a positive power ([[def-multiplicative-absolute-value-on-a-field]], [[def-equivalent-field-absolute-values]]).
 
 ## Proof
 

@@ -37,16 +37,11 @@ In the cohomological case, two morphisms $u,v:S\to T$ are equal as soon as
 $u^0=v^0$.
 ## Facts & Assumptions
 
-**Given:** Two morphisms between universal delta functors with the same
-degree-zero component.
+**Given:** Two morphisms between universal delta functors with the same degree-zero component.
 
-[L1] Universality says that a degree-zero map has at most one extension to a
-morphism of delta functors
-([[def-universal-delta-functor]]).
+[L1] Universality says that a degree-zero map has at most one extension to a morphism of delta functors ([[def-universal-delta-functor]]).
 
-[L2] Morphisms of delta functors are exactly the degreewise compatible maps
-([[def-morphism-of-homological-delta-functors]],
-[[def-morphism-of-cohomological-delta-functors]]).
+[L2] Morphisms of delta functors are exactly the degreewise compatible maps ([[def-morphism-of-homological-delta-functors]], [[def-morphism-of-cohomological-delta-functors]]).
 
 ## Proof
 

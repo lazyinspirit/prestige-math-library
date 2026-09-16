@@ -26,15 +26,11 @@ generates is inherently ambiguous.
 
 ## Facts & Assumptions
 
-**Given:** The grammar
-$$ E\to E+E\mid E*E\mid(E)\mid a\mid b. $$
+**Given:** The grammar $$ E\to E+E\mid E*E\mid(E)\mid a\mid b. $$
 
-[A1] The statement refuted is: every ambiguous context-free grammar generates an
-inherently ambiguous language.
+[A1] The statement refuted is: every ambiguous context-free grammar generates an inherently ambiguous language.
 
-[L1] A context-free language is inherently ambiguous when every context-free
-grammar generating it is ambiguous, by
-[[def-ambiguity-and-inherent-ambiguity]].
+[L1] A context-free language is inherently ambiguous when every context-free grammar generating it is ambiguous, by [[def-ambiguity-and-inherent-ambiguity]].
 
 ## Refutation
 

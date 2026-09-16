@@ -40,19 +40,13 @@ $$A/\ker(f)\;\cong\;\operatorname{im}(f).$$
 
 **Given:** An abelian category and a morphism $f:A\to B$.
 
-[L1] The quotient by a subobject is the cokernel of a representing monomorphism
-([[def-the-quotient-of-an-object-by-a-subobject]],
-[[thm-the-quotient-is-independent-of-the-representing-monomorphism]]).
+[L1] The quotient by a subobject is the cokernel of a representing monomorphism ([[def-the-quotient-of-an-object-by-a-subobject]], [[thm-the-quotient-is-independent-of-the-representing-monomorphism]]).
 
-[L2] The coimage is the cokernel of the kernel, and the image is the kernel of
-the cokernel
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L2] The coimage is the cokernel of the kernel, and the image is the kernel of the cokernel ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
-[L3] The canonical morphism $\operatorname{coim}(f)\to\operatorname{im}(f)$
-exists ([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
+[L3] The canonical morphism $\operatorname{coim}(f)\to\operatorname{im}(f)$ exists ([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
 
-[L4] In an abelian category that canonical morphism is an isomorphism
-([[def-abelian-category]]).
+[L4] In an abelian category that canonical morphism is an isomorphism ([[def-abelian-category]]).
 
 ## Proof
 

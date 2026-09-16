@@ -31,11 +31,9 @@ A Lagrangian submanifold of a symplectic $2n$-manifold has dimension $n$.
 
 **Given:** A Lagrangian embedded submanifold $L$ of $(M^{2n},\omega)$.
 
-[F1] Each $T_pL$ is a Lagrangian subspace of $T_pM$.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F1] Each $T_pL$ is a Lagrangian subspace of $T_pM$. [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
-[F2] A Lagrangian subspace of a $2n$-dimensional symplectic space has
-dimension $n$. [[thm-equivalent-characterizations-of-lagrangian-subspaces]].
+[F2] A Lagrangian subspace of a $2n$-dimensional symplectic space has dimension $n$. [[thm-equivalent-characterizations-of-lagrangian-subspaces]].
 
 ## Proof
 

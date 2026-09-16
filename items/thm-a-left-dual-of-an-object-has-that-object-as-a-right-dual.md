@@ -33,12 +33,9 @@ dual of ${}^\vee X$.
 
 ## Facts & Assumptions
 
-**Given:** A left dual $(X^\vee,\operatorname{ev}_X,\operatorname{coev}_X)$ of
-$X$.
+**Given:** A left dual $(X^\vee,\operatorname{ev}_X,\operatorname{coev}_X)$ of $X$.
 
-[L1] A right dual of $X^\vee$ requires maps $X^\vee\otimes X\to\mathbf 1$ and
-$\mathbf 1\to X\otimes X^\vee$ satisfying the mirror zig-zag identities
-([[def-left-dual-and-right-dual-object]], [[def-the-zig-zag-identities]]).
+[L1] A right dual of $X^\vee$ requires maps $X^\vee\otimes X\to\mathbf 1$ and $\mathbf 1\to X\otimes X^\vee$ satisfying the mirror zig-zag identities ([[def-left-dual-and-right-dual-object]], [[def-the-zig-zag-identities]]).
 
 ## Proof
 

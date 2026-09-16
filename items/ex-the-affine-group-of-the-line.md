@@ -39,16 +39,11 @@ $H=E_{00}$ and $X=E_{01}$ with $[H,X]=X$.
 
 **Given:** Coordinates $(a,b)\in\mathbb R_{>0}\times\mathbb R$.
 
-[F1] The tangent Lie bracket is the value at the identity of the commutator
-of the corresponding left-invariant fields.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
-[[def-lie-bracket-of-smooth-vector-fields]].
+[F1] The tangent Lie bracket is the value at the identity of the commutator of the corresponding left-invariant fields. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]]. [[def-lie-bracket-of-smooth-vector-fields]].
 
-[F2] Matrix units have the standard product rule.
-[[def-matrix-units]].
+[F2] Matrix units have the standard product rule. [[def-matrix-units]].
 
-[F3] Countable choice is inherited through [F1].
-[[def-countable-choice]].
+[F3] Countable choice is inherited through [F1]. [[def-countable-choice]].
 
 ## Verification
 

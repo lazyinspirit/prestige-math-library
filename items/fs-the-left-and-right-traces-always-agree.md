@@ -29,11 +29,9 @@ The left and right traces always agree.
 
 ## Facts & Assumptions
 
-**Given:** The tensor category of finite-dimensional $\mathbb Z$-graded vector
-spaces and a scalar $q\in k^\times$ with $q\neq\pm1$.
+**Given:** The tensor category of finite-dimensional $\mathbb Z$-graded vector spaces and a scalar $q\in k^\times$ with $q\neq\pm1$.
 
-[L1] In spherical categories the left and right traces agree
-([[thm-in-a-spherical-category-the-left-and-right-traces-agree]]).
+[L1] In spherical categories the left and right traces agree ([[thm-in-a-spherical-category-the-left-and-right-traces-agree]]).
 
 ## Refutation
 

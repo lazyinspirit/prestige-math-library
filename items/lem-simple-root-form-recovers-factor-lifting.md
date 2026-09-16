@@ -35,9 +35,7 @@ $f(a)=0$. Then $(A,\mathfrak m)$ has the coprime monic factor-lifting property.
 
 ## Facts & Assumptions
 
-**Given:** A local ring $(A,\mathfrak m)$ in which, for every monic
-$f\in A[T]$, every simple root of $\overline f\in k[T]$ lifts uniquely to a
-root of $f$ in $A$.
+**Given:** A local ring $(A,\mathfrak m)$ in which, for every monic $f\in A[T]$, every simple root of $\overline f\in k[T]$ lifts uniquely to a root of $f$ in $A$.
 
 [L1] Stacks, Section 10.153, Lemma 10.153.3 identifies the simple-root lifting condition for a local ring with the coprime monic factor-lifting property.
 

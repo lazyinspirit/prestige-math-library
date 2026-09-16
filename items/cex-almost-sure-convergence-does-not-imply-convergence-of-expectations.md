@@ -28,8 +28,7 @@ Almost-sure convergence alone need not imply convergence of expectations.
 
 ## Facts & Assumptions
 
-**Given:** Lebesgue probability space $(0,1)$ and
-$X_n=(n+1)\mathbf1_{(0,1/(n+1))}$ for $n\in\mathbb N$.
+**Given:** Lebesgue probability space $(0,1)$ and $X_n=(n+1)\mathbf1_{(0,1/(n+1))}$ for $n\in\mathbb N$.
 
 [L1] Almost-sure convergence is pointwise convergence off a null set ([[def-almost-sure-convergence-of-random-variables]]).
 
@@ -43,5 +42,4 @@ $X_n=(n+1)\mathbf1_{(0,1/(n+1))}$ for $n\in\mathbb N$.
 Hence $X_n\to0$ almost surely by [L1]. [L1]
 
 2.1 Yet [L2] gives [step 1.1, L2]
-$\mathbb E X_n=\int_0^{1/(n+1)}(n+1)\,dx=1$ for every $n$, whereas
-$\mathbb E0=0$. Thus the expectations do not converge. [step 1.1, L2] ∎
+$\mathbb E X_n=\int_0^{1/(n+1)}(n+1)\,dx=1$ for every $n$, whereas $\mathbb E0=0$. Thus the expectations do not converge. [step 1.1, L2] ∎

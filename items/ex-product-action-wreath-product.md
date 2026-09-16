@@ -33,12 +33,9 @@ O'Nan--Scott product-action type.
 
 **Given:** The standard product action of $S_5 \wr S_2$ on $\{1,2,3,4,5\}^2$.
 
-[L1] Under the standard hypotheses, product-action wreath products are
-primitive
-([[lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses]]).
+[L1] Under the standard hypotheses, product-action wreath products are primitive ([[lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses]]).
 
-[L2] Product action is one of the five coarse O'Nan-Scott types
-([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
+[L2] Product action is one of the five coarse O'Nan-Scott types ([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
 
 ## Verification
 

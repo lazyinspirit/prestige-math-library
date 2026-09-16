@@ -31,17 +31,13 @@ conversely.
 
 ## Facts & Assumptions
 
-**Given:** Parallel morphisms $f,g:A\rightrightarrows B$ in a preadditive
-category.
+**Given:** Parallel morphisms $f,g:A\rightrightarrows B$ in a preadditive category.
 
-[L1] In a preadditive category each hom-set is an abelian group and composition
-is bilinear ([[def-preadditive-category]]).
+[L1] In a preadditive category each hom-set is an abelian group and composition is bilinear ([[def-preadditive-category]]).
 
-[L2] An equalizer of $f$ and $g$ is a universal morphism $e:E\to A$ with
-$fe=ge$ ([[def-equalizers-and-coequalizers]]).
+[L2] An equalizer of $f$ and $g$ is a universal morphism $e:E\to A$ with $fe=ge$ ([[def-equalizers-and-coequalizers]]).
 
-[L3] A kernel of a morphism $h$ is an equalizer of $h$ and the zero morphism
-([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
+[L3] A kernel of a morphism $h$ is an equalizer of $h$ and the zero morphism ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
 
 ## Proof
 

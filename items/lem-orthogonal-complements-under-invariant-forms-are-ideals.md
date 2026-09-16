@@ -36,13 +36,9 @@ ideal.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$, an ideal $\mathfrak i$, and a
-symmetric bilinear form satisfying
-$B([z,u],v)+B(u,[z,v])=0$.
+**Given:** A Lie algebra $\mathfrak g$, an ideal $\mathfrak i$, and a symmetric bilinear form satisfying $B([z,u],v)+B(u,[z,v])=0$.
 
-[L1] An ideal is a linear subspace $\mathfrak i$ with
-$[\mathfrak g,\mathfrak i]\subseteq\mathfrak i$
-([[def-lie-subalgebra-ideal-and-center]]).
+[L1] An ideal is a linear subspace $\mathfrak i$ with $[\mathfrak g,\mathfrak i]\subseteq\mathfrak i$ ([[def-lie-subalgebra-ideal-and-center]]).
 
 ## Proof
 

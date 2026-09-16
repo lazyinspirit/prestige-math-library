@@ -44,48 +44,31 @@ $$
 
 **Given:** The closed $n$-manifold $M$ and an integer $k$.
 
-[F1] Every manifold has a canonical $\mathbb F_2$-orientation, and a compact
-manifold has finitely many components
-([[prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise]]).
+[F1] Every manifold has a canonical $\mathbb F_2$-orientation, and a compact manifold has finitely many components ([[prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise]]).
 
-[F2] Assuming AC, the mod-two cup pairing of a closed oriented manifold is
-perfect in both variables
-([[cor-poincare-duality-gives-a-nonsingular-cup-pairing]]).
+[F2] Assuming AC, the mod-two cup pairing of a closed oriented manifold is perfect in both variables ([[cor-poincare-duality-gives-a-nonsingular-cup-pairing]]).
 
-[F3] Each $Sq^k$ is an additive cohomology operation
-([[thm-steenrod-squares-are-well-defined-and-natural]]).
+[F3] Each $Sq^k$ is an additive cohomology operation ([[thm-steenrod-squares-are-well-defined-and-natural]]).
 
-[F4] On $H^d(-;\mathbb F_2)$, $Sq^0$ is the identity and $Sq^k$ is zero for
-$k>d$
-([[prop-steenrod-square-normalization-instability-and-top-square]]).
+[F4] On $H^d(-;\mathbb F_2)$, $Sq^0$ is the identity and $Sq^k$ is zero for $k>d$ ([[prop-steenrod-square-normalization-instability-and-top-square]]).
 
-[A1] [[def-axiom-of-choice]] is assumed exactly because [F2] assumes it; no
-new family of choices is made here.
+[A1] [[def-axiom-of-choice]] is assumed exactly because [F2] assumes it; no new family of choices is made here.
 
 ## Verification
 
-**Proof technique:** represent the Steenrod-square functional by the perfect
-Poincaré cup pairing.
+**Proof technique:** represent the Steenrod-square functional by the perfect Poincaré cup pairing.
 
 1.1 Fix $0\leq k\leq n$. The canonical orientation supplies $[M]_2$. Since $Sq^k$ is additive, the map [F1, F3]
 
-$$
-L_k\colon H^{n-k}(M;\mathbb F_2)\longrightarrow\mathbb F_2,\qquad L_k(x)=\langle Sq^k(x),[M]_2\rangle
-$$
+$$ L_k\colon H^{n-k}(M;\mathbb F_2)\longrightarrow\mathbb F_2,\qquad L_k(x)=\langle Sq^k(x),[M]_2\rangle $$
 
-is an $\mathbb F_2$-linear functional. This remains true componentwise: the
-fundamental class is the finite sum of the component classes and evaluation
-is additive.
+is an $\mathbb F_2$-linear functional. This remains true componentwise: the fundamental class is the finite sum of the component classes and evaluation is additive.
 
 1.2 The first adjoint of the cup pairing is an isomorphism. In the present degrees it is [F2, A1]
 
-$$
-H^k(M;\mathbb F_2)\xrightarrow{\ \cong\ }\operatorname{Hom}_{\mathbb F_2}\bigl(H^{n-k}(M;\mathbb F_2),\mathbb F_2\bigr),\quad a\longmapsto\bigl(x\longmapsto\langle a\smile x,[M]_2\rangle\bigr).
-$$
+$$ H^k(M;\mathbb F_2)\xrightarrow{\ \cong\ }\operatorname{Hom}_{\mathbb F_2}\bigl(H^{n-k}(M;\mathbb F_2),\mathbb F_2\bigr),\quad a\longmapsto\bigl(x\longmapsto\langle a\smile x,[M]_2\rangle\bigr). $$
 
-Consequently $L_k$ has exactly one preimage. Defining that preimage to be
-$v_k(M)$ proves both existence and uniqueness in the displayed definition.
-AC is used only through the already proved perfectness assertion [F2].
+Consequently $L_k$ has exactly one preimage. Defining that preimage to be $v_k(M)$ proves both existence and uniqueness in the displayed definition. AC is used only through the already proved perfectness assertion [F2].
 
 2.1 The normalization and high-degree components are determined. For $k=0$, [F4] gives $L_0(x)=\langle x,[M]_2\rangle$. The unit $1\in H^0(M;\mathbb F_2)$ represents this functional, so uniqueness gives $v_0(M)=1$. If $2k>n$, every $x\in H^{n-k}$ has degree $n-k<k$; instability in [F4] makes $Sq^k(x)=0$. Thus $L_k=0$, and injectivity of the adjoint gives $v_k(M)=0$. This includes $k=n>0$. [F2, F4, step 1.2]
 

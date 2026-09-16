@@ -38,8 +38,7 @@ Here $\beta\le\alpha$ is coordinatewise and $\binom\alpha\beta=\prod_i\binom{\al
 **Given:** $a,u,\alpha$ as in the statement.
 
 1.1 Fix $i$ and a test $\varphi$. The ordinary product rule gives $a\partial_i\varphi=\partial_i(a\varphi)-(\partial_i a)\varphi$: subtract the product at a point from the product at its coordinate increment, insert the mixed product, divide by the increment and pass to the limit. Therefore [given, F1, F2, algebra]
-$$\langle\partial_i(au),\varphi\rangle=-\langle u,a\partial_i\varphi\rangle=\langle\partial_i u,a\varphi\rangle+\langle u,(\partial_i a)\varphi\rangle.$$
-By F2 this is the first-order formula. [given, F1, F2, algebra]
+$$\langle\partial_i(au),\varphi\rangle=-\langle u,a\partial_i\varphi\rangle=\langle\partial_i u,a\varphi\rangle+\langle u,(\partial_i a)\varphi\rangle.$$ By F2 this is the first-order formula. [given, F1, F2, algebra]
 
 2.1 From F1, evaluating two consecutive derivative operations on a test gives the sign $(-1)^{|\gamma|+1}$ times $u(\partial^\gamma\partial_i\varphi)$. Commutation of the smooth test partials identifies this with $(\partial^{\gamma+e_i}u)(\varphi)$. Hence $\partial_i\partial^\gamma u=\partial^{\gamma+e_i}u$. The asserted formula for $\alpha=0$ is $au=au$. [step 1.1, F1]
 

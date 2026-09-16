@@ -27,11 +27,9 @@ computations.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional vector space $V$ with basis $(v_i)$ and dual
-basis $(v_i^*)$.
+**Given:** A finite-dimensional vector space $V$ with basis $(v_i)$ and dual basis $(v_i^*)$.
 
-[L1] The standard duality data on $V$ and $V^*$ exist
-([[thm-finite-dimensional-vector-spaces-are-rigid]]).
+[L1] The standard duality data on $V$ and $V^*$ exist ([[thm-finite-dimensional-vector-spaces-are-rigid]]).
 
 ## Verification
 

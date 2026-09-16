@@ -32,14 +32,11 @@ $$x_\ast\in K_\nu(A,b).$$
 
 ## Facts & Assumptions
 
-**Given:** An invertible matrix $A$, a vector $b$, its grade $\nu=\nu(A,b)$,
-and the exact solution $x_\ast=A^{-1}b$.
+**Given:** An invertible matrix $A$, a vector $b$, its grade $\nu=\nu(A,b)$, and the exact solution $x_\ast=A^{-1}b$.
 
-[F1] The relative minimal polynomial $q_{A,b}$ is monic of degree $\nu$ and
-satisfies $q_{A,b}(A)b=0$ ([[def-grade-and-relative-minimal-polynomial-of-a-start-vector]]).
+[F1] The relative minimal polynomial $q_{A,b}$ is monic of degree $\nu$ and satisfies $q_{A,b}(A)b=0$ ([[def-grade-and-relative-minimal-polynomial-of-a-start-vector]]).
 
-[L1] For every $m\ge \nu$, one has $K_m(A,b)=K_\nu(A,b)$
-([[thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise]]).
+[L1] For every $m\ge \nu$, one has $K_m(A,b)=K_\nu(A,b)$ ([[thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise]]).
 
 ## Proof
 **Proof technique:** direct.

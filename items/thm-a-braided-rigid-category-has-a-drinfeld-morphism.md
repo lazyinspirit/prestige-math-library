@@ -57,9 +57,7 @@ monoidality obstruction.
 
 [L1] A braiding is natural in both variables and satisfies the hexagon identities ([[def-braiding]]).
 
-[L2] With chosen left duals, the double-dual assignment is a monoidal
-endofunctor, with comparison maps $d_{X,Y}$ of the displayed type
-([[thm-the-double-dual-is-a-monoidal-functor]]).
+[L2] With chosen left duals, the double-dual assignment is a monoidal endofunctor, with comparison maps $d_{X,Y}$ of the displayed type ([[thm-the-double-dual-is-a-monoidal-functor]]).
 
 ## Proof
 

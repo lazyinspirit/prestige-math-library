@@ -38,6 +38,4 @@ The Lebesgue integral is linear on all measurable real-valued functions.
 1.1 The sum $f+g$ is the zero function, so its integral is $0$. [given]
 
 2.1 But $f$ has integral $+\infty$, while $g$ would have to contribute [step 1.1, L1, algebra] ∎
-$-\infty$ for any linear identity to hold. Thus
-$$\int(f+g)\,d\lambda=0\ne+\infty+(-\infty),$$
-so the Statement is false and [L1] cannot be widened beyond $L^1$.
+$-\infty$ for any linear identity to hold. Thus $$\int(f+g)\,d\lambda=0\ne+\infty+(-\infty),$$ so the Statement is false and [L1] cannot be widened beyond $L^1$.

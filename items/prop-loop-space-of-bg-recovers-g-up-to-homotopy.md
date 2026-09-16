@@ -64,11 +64,6 @@ the chosen lifting function is asserted.
 
 $$ \delta_*:\pi_k(\Omega BG)\cong\pi_{k+1}(BG)\longrightarrow\pi_k(G) $$
 
-an isomorphism for every $k\geq1$, while the component segment makes
-$\delta_*:\pi_0(\Omega BG)\to\pi_0(G)$ a bijection. Repeating the translated-lift
-comparison of Step 2.1 after rebasing at a representative loop gives the same
-isomorphisms at every basepoint. Thus $\delta$ is a weak homotopy equivalence.
-By [F5], $\varepsilon=\operatorname{inv}\circ\delta$ is one as well.
-[F1, F3, F5, step 2.1]
+an isomorphism for every $k\geq1$, while the component segment makes $\delta_*:\pi_0(\Omega BG)\to\pi_0(G)$ a bijection. Repeating the translated-lift comparison of Step 2.1 after rebasing at a representative loop gives the same isomorphisms at every basepoint. Thus $\delta$ is a weak homotopy equivalence. By [F5], $\varepsilon=\operatorname{inv}\circ\delta$ is one as well. [F1, F3, F5, step 2.1]
 
 4.1 If both spaces have CW type, choose based CW models under [A1]. The induced comparison of models is weak by Step 3.1, so [F4] supplies a based homotopy inverse; transporting it through the model equivalences makes $\delta$ a based homotopy equivalence. Composing with inversion gives the same conclusion for $\varepsilon$. Besides the lifting-function use in Step 1.1, AC is spent here exactly through [F4]. Without those CW-type hypotheses, only the proved weak equivalences are asserted. $\square$ [A1, F4, F5, step 3.1]

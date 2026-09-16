@@ -26,12 +26,9 @@ Every invertible square matrix has an unpivoted unit-lower LU factorisation.
 
 ## Facts & Assumptions
 
-**Given:** The matrix
-$$A=\begin{pmatrix}0&1\\1&0\end{pmatrix}.$$
+**Given:** The matrix $$A=\begin{pmatrix}0&1\\1&0\end{pmatrix}.$$
 
-[L1] A square matrix has an unpivoted unit-lower LU factorisation with nonzero
-pivots exactly when every leading principal minor is nonzero
-([[thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero]]).
+[L1] A square matrix has an unpivoted unit-lower LU factorisation with nonzero pivots exactly when every leading principal minor is nonzero ([[thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero]]).
 
 ## Counterexample
 

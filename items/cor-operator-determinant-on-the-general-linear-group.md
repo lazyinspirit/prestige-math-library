@@ -40,17 +40,13 @@ $\det(T^{-1})=\det(T)^{-1}$.
 
 **Given:** $V,F$, and invertible operators on $V$.
 
-[L1] $\det(S\circ T)=\det(S)\det(T)$
-([[thm-operator-determinant-is-multiplicative]]).
+[L1] $\det(S\circ T)=\det(S)\det(T)$ ([[thm-operator-determinant-is-multiplicative]]).
 
-[L2] An operator is invertible exactly when its determinant is nonzero
-([[thm-operator-invertible-iff-determinant-nonzero]]).
+[L2] An operator is invertible exactly when its determinant is nonzero ([[thm-operator-invertible-iff-determinant-nonzero]]).
 
-[F1] An invertible linear map has a two-sided inverse
-([[def-linear-isomorphism-and-invertible-linear-map]]).
+[F1] An invertible linear map has a two-sided inverse ([[def-linear-isomorphism-and-invertible-linear-map]]).
 
-[L3] The units of a commutative ring form a group
-([[lem-ring-units-form-a-group]]).
+[L3] The units of a commutative ring form a group ([[lem-ring-units-form-a-group]]).
 
 ## Proof
 

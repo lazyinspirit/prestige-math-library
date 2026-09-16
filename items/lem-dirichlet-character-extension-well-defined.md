@@ -34,12 +34,9 @@ $(n,q)>1$.
 
 ## Facts & Assumptions
 
-**Given:** A modulus $q\ge1$ and a Dirichlet character $\chi$ modulo $q$ in the
-sense of [[def-dirichlet-character-modulo-q]].
+**Given:** A modulus $q\ge1$ and a Dirichlet character $\chi$ modulo $q$ in the sense of [[def-dirichlet-character-modulo-q]].
 
-[L1] A Dirichlet character modulo $q$ is a homomorphism
-$\bar\chi:(\mathbb Z/q\mathbb Z)^\times\to\mathbb C^\times$, extended by zero on
-nonunits ([[def-dirichlet-character-modulo-q]]).
+[L1] A Dirichlet character modulo $q$ is a homomorphism $\bar\chi:(\mathbb Z/q\mathbb Z)^\times\to\mathbb C^\times$, extended by zero on nonunits ([[def-dirichlet-character-modulo-q]]).
 
 ## Proof
 

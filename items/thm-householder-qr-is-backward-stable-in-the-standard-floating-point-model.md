@@ -43,21 +43,15 @@ Frobenius perturbation is $O(u)$.
 
 ## Facts & Assumptions
 
-**Given:** A matrix $A\in M_{m\times n}(\mathbb R)$ with $m\ge n$, unit
-roundoff $u$ with $mu<1$, and computed orthogonal Householder reflectors
-$\widehat H_k$ satisfying the local-step identities and bounds in the
-statement.
+**Given:** A matrix $A\in M_{m\times n}(\mathbb R)$ with $m\ge n$, unit roundoff $u$ with $mu<1$, and computed orthogonal Householder reflectors $\widehat H_k$ satisfying the local-step identities and bounds in the statement.
 
 [L1] Successive Householder reflectors produce QR by applying orthogonal transformations to shrinking trailing blocks ([[thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts]]).
 
-[L2] The quantity $\gamma_m=mu/(1-mu)$ is the standard accumulated relative
-error factor when $mu<1$
-([[lem-product-of-one-plus-deltas-gives-theta-n]]).
+[L2] The quantity $\gamma_m=mu/(1-mu)$ is the standard accumulated relative error factor when $mu<1$ ([[lem-product-of-one-plus-deltas-gives-theta-n]]).
 
 [L3] Frobenius norm is invariant under left and right orthogonal multiplication ([[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]]).
 
-[A1] For each $k$, the computed local step satisfies
-$$\widehat H_k(A^{(k)}+E_k)=A^{(k+1)},\qquad \|E_k\|_F\le 3\gamma_m\|A^{(k)}\|_F.$$
+[A1] For each $k$, the computed local step satisfies $$\widehat H_k(A^{(k)}+E_k)=A^{(k+1)},\qquad \|E_k\|_F\le 3\gamma_m\|A^{(k)}\|_F.$$
 
 ## Proof
 

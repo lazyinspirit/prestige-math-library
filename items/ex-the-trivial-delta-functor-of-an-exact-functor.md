@@ -42,8 +42,7 @@ with zero connecting maps is universal.
 
 **Given:** An exact functor $F$ between abelian categories.
 
-[L1] An exact base functor has precisely these trivial universal delta functors
-([[prop-an-exact-base-functor-has-the-trivial-universal-delta-functor]]).
+[L1] An exact base functor has precisely these trivial universal delta functors ([[prop-an-exact-base-functor-has-the-trivial-universal-delta-functor]]).
 
 ## Verification
 

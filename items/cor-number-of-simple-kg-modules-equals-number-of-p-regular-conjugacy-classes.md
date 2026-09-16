@@ -34,12 +34,9 @@ $p$-regular conjugacy classes of $G$.
 
 **Given:** A finite group $G$ over a splitting field $k$ of characteristic $p$.
 
-[L1] The irreducible Brauer characters form a basis of the class functions on
-$G^0$
-([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
+[L1] The irreducible Brauer characters form a basis of the class functions on $G^0$ ([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
 
-[A1] A class function on $G^0$ is determined by its values on the $p$-regular
-conjugacy classes, so the indicator functions of those classes form a basis.
+[A1] A class function on $G^0$ is determined by its values on the $p$-regular conjugacy classes, so the indicator functions of those classes form a basis.
 
 ## Proof
 

@@ -34,10 +34,7 @@ always gives the same terminal germ.
 
 **Given:** The logarithm loop example.
 
-[L1] Starting from the principal logarithm germ at $1$, one loop once around the
-origin ends at the germ of $\operatorname{Log}+2\pi i$ rather than at the
-initial germ
-([[ex-logarithm-continuation-around-the-unit-circle-shifts-by-two-pi-i]]).
+[L1] Starting from the principal logarithm germ at $1$, one loop once around the origin ends at the germ of $\operatorname{Log}+2\pi i$ rather than at the initial germ ([[ex-logarithm-continuation-around-the-unit-circle-shifts-by-two-pi-i]]).
 
 ## Refutation
 

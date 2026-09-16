@@ -43,37 +43,23 @@ tangent-bundle trivialization and one-parameter-subgroup results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a finite-dimensional real Lie group $G$
-with identity $e$ and Lie algebra $\mathfrak g=T_eG$.
+**Given:** $\mathrm{AC}_\omega$ and a finite-dimensional real Lie group $G$ with identity $e$ and Lie algebra $\mathfrak g=T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] The exponential map is the total map
-$\exp_G(Y)=\gamma_Y(1)$. [[def-exponential-map-of-a-lie-group]].
+[F2] The exponential map is the total map $\exp_G(Y)=\gamma_Y(1)$. [[def-exponential-map-of-a-lie-group]].
 
-[F3] Assuming $\mathrm{AC}_\omega$, the map
-$(g,Y)\mapsto d(L_g)_eY$ is a smooth vector-bundle trivialization
-$G\times\mathfrak g\to TG$.
-[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]].
+[F3] Assuming $\mathrm{AC}_\omega$, the map $(g,Y)\mapsto d(L_g)_eY$ is a smooth vector-bundle trivialization $G\times\mathfrak g\to TG$. [[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]].
 
-[F4] Assuming $\mathrm{AC}_\omega$, every $Y\in\mathfrak g$ determines a
-unique global one-parameter subgroup $\gamma_Y$, and
-$\gamma_Y'(t)=d(L_{\gamma_Y(t)})_eY$.
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
+[F4] Assuming $\mathrm{AC}_\omega$, every $Y\in\mathfrak g$ determines a unique global one-parameter subgroup $\gamma_Y$, and $\gamma_Y'(t)=d(L_{\gamma_Y(t)})_eY$. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
 
-[F5] The maximal flow of a smooth vector field has open domain, is smooth on
-that domain, and is uniquely determined by its maximal integral curves.
-[[thm-fundamental-theorem-on-flows]].
+[F5] The maximal flow of a smooth vector field has open domain, is smooth on that domain, and is uniquely determined by its maximal integral curves. [[thm-fundamental-theorem-on-flows]].
 
-[F6] The scaling identity is
-$\gamma_Y(a)=\exp_G(aY)$ for all $a\in\mathbb R$.
-[[prop-exponential-scales-one-parameter-subgroups]].
+[F6] The scaling identity is $\gamma_Y(a)=\exp_G(aY)$ for all $a\in\mathbb R$. [[prop-exponential-scales-one-parameter-subgroups]].
 
-[F7] Every one-parameter subgroup satisfies $\gamma(0)=e$.
-[[def-one-parameter-subgroup-of-a-lie-group]].
+[F7] Every one-parameter subgroup satisfies $\gamma(0)=e$. [[def-one-parameter-subgroup-of-a-lie-group]].
 
-[F8] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F8] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

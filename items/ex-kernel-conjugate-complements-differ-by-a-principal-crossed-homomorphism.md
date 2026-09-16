@@ -34,12 +34,9 @@ $$z_a(g)=z(g)+g\cdot a-a\qquad(g\in C_2).$$
 
 **Given:** An action of $C_2$ on an abelian group $A$, a crossed homomorphism $z$, and an element $a\in A$.
 
-[L1] Conjugating by a kernel element changes the crossed homomorphism by a
-principal one
-([[lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism]]).
+[L1] Conjugating by a kernel element changes the crossed homomorphism by a principal one ([[lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism]]).
 
-[L2] First cohomology identifies kernel-conjugacy classes of complements
-([[thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]]).
+[L2] First cohomology identifies kernel-conjugacy classes of complements ([[thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]]).
 
 ## Verification
 

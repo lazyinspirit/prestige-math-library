@@ -35,14 +35,11 @@ $-1$ on the other.
 
 ## Facts & Assumptions
 
-**Given:** The two-arc cover $U_0=S^1\setminus\{(-1,0)\}$ and
-$U_1=S^1\setminus\{(1,0)\}$ of the circle.
+**Given:** The two-arc cover $U_0=S^1\setminus\{(-1,0)\}$ and $U_1=S^1\setminus\{(1,0)\}$ of the circle.
 
-[L1] A smooth cocycle on a countable cover constructs a smooth vector bundle
-([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
+[L1] A smooth cocycle on a countable cover constructs a smooth vector bundle ([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
 
-[L2] The claim that every vector bundle is globally trivial is false
-([[fs-every-vector-bundle-is-globally-trivial]]).
+[L2] The claim that every vector bundle is globally trivial is false ([[fs-every-vector-bundle-is-globally-trivial]]).
 
 ## Verification
 

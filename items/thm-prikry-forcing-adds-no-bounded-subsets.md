@@ -35,23 +35,15 @@ $\kappa$.
 
 ## Facts & Assumptions
 
-**Given:** The forcing-theorem setting over a transitive ZFC ground model, a
-normal measure on $\kappa$, and $\gamma,\dot x,p$ as in the statement.
+**Given:** The forcing-theorem setting over a transitive ZFC ground model, a normal measure on $\kappa$, and $\gamma,\dot x,p$ as in the statement.
 
-[F1] [[thm-prikry-property]]: Every sentence and condition have a direct
-extension deciding that sentence.
+[F1] [[thm-prikry-property]]: Every sentence and condition have a direct extension deciding that sentence.
 
-[F2] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal
-measure is $\kappa$-complete, so fewer than $\kappa$ measure-one upper parts
-have measure-one intersection.
+[F2] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal measure is $\kappa$-complete, so fewer than $\kappa$ measure-one upper parts have measure-one intersection.
 
-[F3] [[thm-forcing-theorem]]: Under generic existence through every condition,
-forcing is equivalent to truth in every generic extension containing that
-condition.
+[F3] [[thm-forcing-theorem]]: Under generic existence through every condition, forcing is equivalent to truth in every generic extension containing that condition.
 
-[F4] [[def-axiom-of-choice]]: Every family of nonempty sets has a choice
-function; it is used to fix a selector for the nonempty sets of direct deciding
-extensions.
+[F4] [[def-axiom-of-choice]]: Every family of nonempty sets has a choice function; it is used to fix a selector for the nonempty sets of direct deciding extensions.
 
 ## Proof
 

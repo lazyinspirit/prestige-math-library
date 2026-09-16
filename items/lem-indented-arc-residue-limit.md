@@ -42,13 +42,9 @@ $+i\pi\,\operatorname{Res}(f,a)$.
 
 ## Facts & Assumptions
 
-**Given:** A simple pole of $f$ at $a$ and the oriented arc
-$\gamma_\varepsilon(t)=a+\varepsilon e^{i((1-t)\alpha+t\beta)}$.
+**Given:** A simple pole of $f$ at $a$ and the oriented arc $\gamma_\varepsilon(t)=a+\varepsilon e^{i((1-t)\alpha+t\beta)}$.
 
-[L1] At a simple pole, the Laurent principal part is
-$c_{-1}/(z-a)$, where $c_{-1}=\operatorname{Res}(f,a)$; hence
-$f(z)=c_{-1}/(z-a)+h(z)$ with $h$ holomorphic near $a$
-([[def-simple-pole]], [[def-residue-isolated-singularity]]).
+[L1] At a simple pole, the Laurent principal part is $c_{-1}/(z-a)$, where $c_{-1}=\operatorname{Res}(f,a)$; hence $f(z)=c_{-1}/(z-a)+h(z)$ with $h$ holomorphic near $a$ ([[def-simple-pole]], [[def-residue-isolated-singularity]]).
 
 ## Proof
 

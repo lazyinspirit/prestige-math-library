@@ -32,14 +32,11 @@ transition matrices are $A\mapsto h_{\beta\alpha}Ag_{\beta\alpha}^{-1}$.
 
 ## Facts & Assumptions
 
-**Given:** Smooth vector bundles $E\to M$ and $F\to M$ with local transition
-matrices $g_{\beta\alpha}$ and $h_{\beta\alpha}$.
+**Given:** Smooth vector bundles $E\to M$ and $F\to M$ with local transition matrices $g_{\beta\alpha}$ and $h_{\beta\alpha}$.
 
-[L1] Vector bundle chart changes are fibrewise linear and smooth
-([[def-vector-bundle-chart-and-transition-function]]).
+[L1] Vector bundle chart changes are fibrewise linear and smooth ([[def-vector-bundle-chart-and-transition-function]]).
 
-[L2] The matrix of the transpose linear map is the transpose matrix
-([[thm-matrix-of-transpose-is-the-transposed-matrix]]).
+[L2] The matrix of the transpose linear map is the transpose matrix ([[thm-matrix-of-transpose-is-the-transposed-matrix]]).
 
 ## Proof
 

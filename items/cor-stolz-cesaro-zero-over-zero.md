@@ -88,21 +88,8 @@ of limits of real sequences ([[lem-limit-unique]]).
 
 ## Remarks
 
-- **This is a companion of [[thm-stolz-cesaro]] rather than a formal consequence
-  of it**, and the `cor-` prefix should be read that way. The two statements
-  share hypotheses of the same shape and the same telescoping device, but
-  neither is obtained by substituting data into the other: there the fixed head
-  $a_K - Lb_K$ is washed out because $b_n$ grows without bound, here the head is
-  removed by letting the *far* end of the telescope go to $0$. Nothing in the
-  proof above cites the theorem.
+- **This is a companion of [[thm-stolz-cesaro]] rather than a formal consequence of it**, and the `cor-` prefix should be read that way. The two statements share hypotheses of the same shape and the same telescoping device, but neither is obtained by substituting data into the other: there the fixed head $a_K - Lb_K$ is washed out because $b_n$ grows without bound, here the head is removed by letting the *far* end of the telescope go to $0$. Nothing in the proof above cites the theorem.
 
-- **Where the limit is taken matters.** In step 3.1 the index $m$ is frozen and
-  $n$ runs; the estimate of step 2.1 is uniform in $n$ for that fixed $m$, which
-  is why the passage to the limit is legitimate. Taking both indices to
-  infinity at once would prove nothing.
+- **Where the limit is taken matters.** In step 3.1 the index $m$ is frozen and $n$ runs; the estimate of step 2.1 is uniform in $n$ for that fixed $m$, which is why the passage to the limit is legitimate. Taking both indices to infinity at once would prove nothing.
 
-- **The conclusion is non-strict at the level of $\varepsilon/2$** and is turned
-  into the strict inequality demanded by the definition of a limit only at the
-  last division, where $\varepsilon/2 < \varepsilon$. That is the usual price of passing
-  an inequality to a limit ([[lem-limit-preserves-order]]): strictness is not
-  preserved, so it has to be recovered by halving.
+- **The conclusion is non-strict at the level of $\varepsilon/2$** and is turned into the strict inequality demanded by the definition of a limit only at the last division, where $\varepsilon/2 < \varepsilon$. That is the usual price of passing an inequality to a limit ([[lem-limit-preserves-order]]): strictness is not preserved, so it has to be recovered by halving.

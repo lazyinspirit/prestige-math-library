@@ -33,26 +33,17 @@ the sense of [[def-free-and-proper-lie-group-actions]].
 
 ## Facts & Assumptions
 
-**Given:** A compact Lie group $G$, a Hausdorff locally compact manifold $M$,
-and a continuous action $G\times M\to M$.
+**Given:** A compact Lie group $G$, a Hausdorff locally compact manifold $M$, and a continuous action $G\times M\to M$.
 
-[F1] The action is proper exactly when
-$\Theta:G\times M\to M\times M$, $\Theta(g,x)=(g\cdot x,x)$, has compact
-inverse images of compact subsets. [[def-free-and-proper-lie-group-actions]].
+[F1] The action is proper exactly when $\Theta:G\times M\to M\times M$, $\Theta(g,x)=(g\cdot x,x)$, has compact inverse images of compact subsets. [[def-free-and-proper-lie-group-actions]].
 
-[F2] The continuous image of a compact subset is compact.
-[[thm-compactness-under-continuous-maps]].
+[F2] The continuous image of a compact subset is compact. [[thm-compactness-under-continuous-maps]].
 
-[F3] Finite products of compact spaces are compact.
-[[thm-finite-products-of-compact-spaces]].
+[F3] Finite products of compact spaces are compact. [[thm-finite-products-of-compact-spaces]].
 
-[F4] A compact subset of a Hausdorff space is closed, and a closed subset of a
-compact space is compact.
-[[thm-compact-subset-of-a-hausdorff-space-is-closed]],
-[[thm-closed-subspace-of-a-compact-space-is-compact]].
+[F4] A compact subset of a Hausdorff space is closed, and a closed subset of a compact space is compact. [[thm-compact-subset-of-a-hausdorff-space-is-closed]], [[thm-closed-subspace-of-a-compact-space-is-compact]].
 
-[F5] A finite product of Hausdorff spaces is Hausdorff.
-[[lem-products-preserve-t0-t1-and-hausdorff]].
+[F5] A finite product of Hausdorff spaces is Hausdorff. [[lem-products-preserve-t0-t1-and-hausdorff]].
 
 ## Proof
 

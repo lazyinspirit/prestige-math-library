@@ -31,19 +31,13 @@ $\omega_\chi(\widehat C)$ is an algebraic integer.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, an irreducible complex character $\chi$ of $G$,
-and a conjugacy class $C$ of $G$.
+**Given:** A finite group $G$, an irreducible complex character $\chi$ of $G$, and a conjugacy class $C$ of $G$.
 
-[F1] The class sum $\widehat C$ acts on the irreducible representation
-affording $\chi$ as the scalar $\omega_\chi(\widehat C)$
-([[prop-class-sums-act-by-central-character-scalars]]).
+[F1] The class sum $\widehat C$ acts on the irreducible representation affording $\chi$ as the scalar $\omega_\chi(\widehat C)$ ([[prop-class-sums-act-by-central-character-scalars]]).
 
-[F2] An element is integral over $\mathbb Z$ exactly when it lies in a faithful
-module that is finitely generated over $\mathbb Z$
-([[thm-integrality-and-finite-module-equivalences]]).
+[F2] An element is integral over $\mathbb Z$ exactly when it lies in a faithful module that is finitely generated over $\mathbb Z$ ([[thm-integrality-and-finite-module-equivalences]]).
 
-[F3] Integral elements over a nonzero base ring form a subring
-([[cor-integral-elements-form-a-subring]]).
+[F3] Integral elements over a nonzero base ring form a subring ([[cor-integral-elements-form-a-subring]]).
 
 ## Proof
 

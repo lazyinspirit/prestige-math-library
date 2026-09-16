@@ -39,18 +39,13 @@ and zero has only one preimage.
 
 **Given:** No hypotheses beyond those quantified in the statement.
 
-[L1] A $C^1$ map on an open Euclidean domain with an invertible derivative has
-a local $C^1$ inverse ([[thm-euclidean-inverse-function-theorem]]).
+[L1] A $C^1$ map on an open Euclidean domain with an invertible derivative has a local $C^1$ inverse ([[thm-euclidean-inverse-function-theorem]]).
 
 [L2] Invertibility means the existence of a two-sided linear inverse ([[def-invertible-euclidean-linear-map]]).
 
 [L3] Nonnegative reals have unique nonnegative square roots ([[thm-of-square-roots]]).
 
-[L4] Direct difference quotients give the two coordinate partial-derivative
-rows $(2x,-2y)$ and $(2y,2x)$; these affine entries are continuous. Thus the
-continuous-partials theorem gives the displayed total derivative, and $S$ is
-$C^1$ ([[thm-continuous-partial-derivatives-imply-total-differentiability]],
-[[def-c-one-map-and-local-inverse]]).
+[L4] Direct difference quotients give the two coordinate partial-derivative rows $(2x,-2y)$ and $(2y,2x)$; these affine entries are continuous. Thus the continuous-partials theorem gives the displayed total derivative, and $S$ is $C^1$ ([[thm-continuous-partial-derivatives-imply-total-differentiability]], [[def-c-one-map-and-local-inverse]]).
 
 [L5] A metric space is open in itself ([[def-metric-topology]]).
 

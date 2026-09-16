@@ -40,27 +40,17 @@ $c$.
 
 **Given:** The Axiom of Choice ([[def-axiom-of-choice]]).
 
-[L1] Under choice, $\mathbb R$ has a Hamel basis over $\mathbb Q$; a chosen
-basis element has an additive coefficient map
-$g:\mathbb R\to\mathbb R$, and there is a nonzero complementary vector on
-which that coefficient map vanishes ([[lem-hamel-basis-exists]]).
+[L1] Under choice, $\mathbb R$ has a Hamel basis over $\mathbb Q$; a chosen basis element has an additive coefficient map $g:\mathbb R\to\mathbb R$, and there is a nonzero complementary vector on which that coefficient map vanishes ([[lem-hamel-basis-exists]]).
 
-[L2] An additive real function that is continuous at one point is scalar
-multiplication ([[thm-cauchy-functional-equation-regularity]]).
+[L2] An additive real function that is continuous at one point is scalar multiplication ([[thm-cauchy-functional-equation-regularity]]).
 
-[L3] $\exp(s+t)=\exp(s)\exp(t)$
-([[thm-exponential-addition-formula]]).
+[L3] $\exp(s+t)=\exp(s)\exp(t)$ ([[thm-exponential-addition-formula]]).
 
-[L4] Exponential is continuous and strictly increasing
-([[thm-exponential-is-strictly-increasing]]) and is a bijection from
-$\mathbb R$ onto $(0,\infty)$
-([[cor-exponential-is-a-bijection-onto-positive-reals]]).
+[L4] Exponential is continuous and strictly increasing ([[thm-exponential-is-strictly-increasing]]) and is a bijection from $\mathbb R$ onto $(0,\infty)$ ([[cor-exponential-is-a-bijection-onto-positive-reals]]).
 
-[L5] A composite of continuous functions is continuous
-([[thm-composition-of-continuous-functions]]).
+[L5] A composite of continuous functions is continuous ([[thm-composition-of-continuous-functions]]).
 
-[F1] $\log$ is the inverse of $\exp$
-([[def-natural-logarithm]]).
+[F1] $\log$ is the inverse of $\exp$ ([[def-natural-logarithm]]).
 
 ## Counterexample
 

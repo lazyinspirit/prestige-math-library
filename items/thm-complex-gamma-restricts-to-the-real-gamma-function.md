@@ -44,14 +44,11 @@ function.
 
 **Given:** A real number $x>0$.
 
-[L1] The real Gamma function is defined by the same Euler integral for $x>0$
-([[def-real-gamma-function-by-the-euler-integral]]).
+[L1] The real Gamma function is defined by the same Euler integral for $x>0$ ([[def-real-gamma-function-by-the-euler-integral]]).
 
-[L2] That real Euler integral converges exactly for $x>0$
-([[thm-real-gamma-euler-integral-convergence]]).
+[L2] That real Euler integral converges exactly for $x>0$ ([[thm-real-gamma-euler-integral-convergence]]).
 
-[L3] The complex Gamma function is defined by the same integral on
-$\operatorname{Re}z>0$ ([[def-euler-gamma-function]]).
+[L3] The complex Gamma function is defined by the same integral on $\operatorname{Re}z>0$ ([[def-euler-gamma-function]]).
 
 ## Proof
 

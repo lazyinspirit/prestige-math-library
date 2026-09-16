@@ -36,13 +36,9 @@ $$\sum_{n\ge1}\frac1{n^2}=\frac{\pi^2}{6}.$$
 
 **Given:** The product formula for $\sin(\pi z)$.
 
-[F1] The Weierstrass product for sine is
-$$\frac{\sin(\pi z)}{\pi z}=\prod_{n\ge1}\left(1-\frac{z^2}{n^2}\right)$$
-([[thm-sine-has-its-weierstrass-product]]).
+[F1] The Weierstrass product for sine is $$\frac{\sin(\pi z)}{\pi z}=\prod_{n\ge1}\left(1-\frac{z^2}{n^2}\right)$$ ([[thm-sine-has-its-weierstrass-product]]).
 
-[F2] The complex sine power series gives
-$$\frac{\sin(\pi z)}{\pi z}=1-\frac{\pi^2z^2}{6}+O(z^4)$$
-near $z=0$ ([[thm-complex-trigonometric-and-hyperbolic-power-series]]).
+[F2] The complex sine power series gives $$\frac{\sin(\pi z)}{\pi z}=1-\frac{\pi^2z^2}{6}+O(z^4)$$ near $z=0$ ([[thm-complex-trigonometric-and-hyperbolic-power-series]]).
 
 ## Verification
 

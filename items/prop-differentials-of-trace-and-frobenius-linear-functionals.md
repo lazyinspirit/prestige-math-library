@@ -47,8 +47,7 @@ Thus the Frobenius gradient of $\Phi_B$ is $B$.
 
 **Given:** A matrix $A$, a perturbation direction $H$, and a fixed matrix $B$.
 
-[F1] Real Fr\'echet differentiability identifies the first-order linear term in
-$F(A+H)-F(A)$ ([[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]).
+[F1] Real Fr\'echet differentiability identifies the first-order linear term in $F(A+H)-F(A)$ ([[def-real-frechet-derivative-on-real-and-complex-matrix-spaces]]).
 
 ## Proof
 **Proof technique:** direct.

@@ -37,8 +37,7 @@ each equipped with a linear order.
 
 ## Facts & Assumptions
 
-**Given:** The rising and falling factorials of
-[[def-rising-factorial]] and [[def-factorial-and-falling-factorial]].
+**Given:** The rising and falling factorials of [[def-rising-factorial]] and [[def-factorial-and-falling-factorial]].
 
 ## Proof
 

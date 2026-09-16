@@ -97,9 +97,7 @@ both functions of the data and involve no selection.
 
 1.3 For $x,y \in \mathbb{R}^n$ and $i<n$ one has $|y_i - x_i| \le d_\infty(x,y) \le d_2(x,y)$. [F2, F3]
 
-1.4 If $\mu_0(A) < +\infty$ then every nonempty box of a disjoint presentation of $A$ has all parameters real, since an infinite parameter would make its volume, and hence the sum, equal to $+\infty$. Put
-$$M:=1+\sum_{\substack{j<q\\ B_j\ne\varnothing}}\sum_{i<n}\bigl(|a^j_i|+|b^j_i|\bigr),$$
-and $M:=1$ when every box is empty. Then $M$ is a real number and every endpoint of every nonempty box has modulus at most $M$. Every point of a nonempty box therefore has every coordinate bounded by $M$, hence has Euclidean norm at most $nM$; thus every box lies in the ball about the origin of radius $1+nM$. Therefore $A$ is bounded and so is every subset of $A$. [L1, L2, L3, F2, F8, F10]
+1.4 If $\mu_0(A) < +\infty$ then every nonempty box of a disjoint presentation of $A$ has all parameters real, since an infinite parameter would make its volume, and hence the sum, equal to $+\infty$. Put $$M:=1+\sum_{\substack{j<q\\ B_j\ne\varnothing}}\sum_{i<n}\bigl(|a^j_i|+|b^j_i|\bigr),$$ and $M:=1$ when every box is empty. Then $M$ is a real number and every endpoint of every nonempty box has modulus at most $M$. Every point of a nonempty box therefore has every coordinate bounded by $M$, hence has Euclidean norm at most $nM$; thus every box lies in the ball about the origin of radius $1+nM$. Therefore $A$ is bounded and so is every subset of $A$. [L1, L2, L3, F2, F8, F10]
 
 2.1 For claim 1, taking $s = 0$ gives $A \subseteq A^{+\delta}$; and if $x \in A$ and $d_2(x,y) < \delta$ then $s := y-x$ satisfies $|s_i| \le d_2(x,y) < \delta$ for every $i<n$ by step 1.3, so $y = x+s \in A+s \subseteq A^{+\delta}$, whence the ball $B(x,\delta)$ of $(\mathbb{R}^n,d_2)$ lies in $A^{+\delta}$ and $x$ is an interior point of it. [step 1.2, step 1.3, F1, F4]
 

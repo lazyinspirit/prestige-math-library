@@ -31,17 +31,13 @@ $2x+y=5$, $x-y=1$ over $\mathbb Q$ as $(x,y)=(2,1)$.
 
 ## Facts & Assumptions
 
-**Given:** $A=\begin{pmatrix}2&1\\1&-1\end{pmatrix}$ and
-$b=\begin{pmatrix}5\\1\end{pmatrix}$.
+**Given:** $A=\begin{pmatrix}2&1\\1&-1\end{pmatrix}$ and $b=\begin{pmatrix}5\\1\end{pmatrix}$.
 
 [F1] $\mathbb Q$ is a field ([[thm-rat-field]]).
 
-[F2] A $2\times2$ determinant is its two-term Leibniz sum
-([[def-determinant-of-a-square-matrix]]).
+[F2] A $2\times2$ determinant is its two-term Leibniz sum ([[def-determinant-of-a-square-matrix]]).
 
-[L1] Over a field, a nonzero determinant gives the unique solution
-$x_j=\det(A_j(b))/\det(A)$
-([[cor-cramers-rule-over-a-field]]).
+[L1] Over a field, a nonzero determinant gives the unique solution $x_j=\det(A_j(b))/\det(A)$ ([[cor-cramers-rule-over-a-field]]).
 
 ## Verification
 

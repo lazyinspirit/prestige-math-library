@@ -40,15 +40,11 @@ fibres are exactly the left cosets of $\ker F$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a smooth Lie-group homomorphism
-$F:G\to H$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth Lie-group homomorphism $F:G\to H$.
 
-[F1] The kernel is a closed embedded normal Lie subgroup.
-[[def-countable-choice]],
-[[thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup]].
+[F1] The kernel is a closed embedded normal Lie subgroup. [[def-countable-choice]], [[thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup]].
 
-[F2] The image has a unique immersed structure for which the corestriction is
-a surjective submersion. [[thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup]].
+[F2] The image has a unique immersed structure for which the corestriction is a surjective submersion. [[thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup]].
 
 ## Proof
 

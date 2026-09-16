@@ -33,10 +33,7 @@ An inverse limit of groups can be empty.
 
 **Given:** An inverse system of groups.
 
-[L1] The inverse limit is the set of compatible tuples, and compatible tuples
-form a subgroup of the product group
-([[def-compatible-tuple-inverse-limit-of-groups]],
-[[lem-compatible-tuples-form-a-subgroup]]).
+[L1] The inverse limit is the set of compatible tuples, and compatible tuples form a subgroup of the product group ([[def-compatible-tuple-inverse-limit-of-groups]], [[lem-compatible-tuples-form-a-subgroup]]).
 
 ## Refutation
 

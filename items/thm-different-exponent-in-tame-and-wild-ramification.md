@@ -29,9 +29,7 @@ $v_{\mathfrak P}(\mathfrak D_K)\ge e(\mathfrak P/p)$.
 
 ## Facts & Assumptions
 
-[L1] Lemma 4.12 and the proof of Theorem 4.13 in the cited source give the
-trace criterion for divisibility by powers of $\mathfrak P$ and apply it to
-the filtration of $\mathcal O_K/\mathfrak P^e$.
+[L1] Lemma 4.12 and the proof of Theorem 4.13 in the cited source give the trace criterion for divisibility by powers of $\mathfrak P$ and apply it to the filtration of $\mathcal O_K/\mathfrak P^e$.
 
 ## Proof
 

@@ -39,11 +39,9 @@ $$\int_1^x\frac{dt}{t}=1.$$
 
 [L1] $E=\exp$ ([[thm-integral-exponential-agrees-with-exponential]]).
 
-[L2] $L$ is strictly increasing on $(0,\infty)$
-([[cor-integral-logarithm-is-strictly-increasing]]).
+[L2] $L$ is strictly increasing on $(0,\infty)$ ([[cor-integral-logarithm-is-strictly-increasing]]).
 
-[F2] $E=L^{-1}$, so $L(E(y))=y$
-([[def-integral-exponential]]).
+[F2] $E=L^{-1}$, so $L(E(y))=y$ ([[def-integral-exponential]]).
 
 ## Proof
 

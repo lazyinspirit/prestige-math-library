@@ -35,20 +35,11 @@ $$T_pN=\operatorname{span}\{X_{F_1}(p),\ldots,X_{F_n}(p)\}.$$
 
 **Given:** A completely integrable system and a nonempty regular fibre.
 
-[F1] At a regular value, $N$ is an embedded codimension-$n$ submanifold and
-$T_pN=\ker dF_p$.
-[[thm-a-regular-level-set-is-an-embedded-submanifold]],
-[[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
+[F1] At a regular value, $N$ is an embedded codimension-$n$ submanifold and $T_pN=\ker dF_p$. [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
-[F2] The functions pairwise Poisson commute, and the $dF_i$ are independent
-on the dense open regular locus.
-[[def-completely-integrable-hamiltonian-system]].
+[F2] The functions pairwise Poisson commute, and the $dF_i$ are independent on the dense open regular locus. [[def-completely-integrable-hamiltonian-system]].
 
-[F3] In a $2n$-dimensional symplectic vector space an isotropic $n$-plane is
-Lagrangian, and a submanifold is Lagrangian exactly when its tangent spaces
-are Lagrangian subspaces.
-[[thm-equivalent-characterizations-of-lagrangian-subspaces]],
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F3] In a $2n$-dimensional symplectic vector space an isotropic $n$-plane is Lagrangian, and a submanifold is Lagrangian exactly when its tangent spaces are Lagrangian subspaces. [[thm-equivalent-characterizations-of-lagrangian-subspaces]], [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
 ## Proof
 

@@ -34,11 +34,9 @@ columns.
 
 ## Facts & Assumptions
 
-**Given:** A commutative $3 \times 3$ diagram with short exact columns and
-middle row short exact.
+**Given:** A commutative $3 \times 3$ diagram with short exact columns and middle row short exact.
 
-[L1] The snake lemma supplies the exact six-term sequence for a morphism of
-short exact sequences ([[thm-snake-lemma-in-an-abelian-category]]).
+[L1] The snake lemma supplies the exact six-term sequence for a morphism of short exact sequences ([[thm-snake-lemma-in-an-abelian-category]]).
 
 ## Proof
 

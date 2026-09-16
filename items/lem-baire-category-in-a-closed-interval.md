@@ -76,17 +76,6 @@ complements of the $F_n$.
 
 ## Remarks
 
-- **Why the statement is about $[a,b]$ and not about $\mathbb{R}$.**
-  [[thm-baire-category-r]] says that $\mathbb{R}$ is not a countable union of
-  nowhere dense sets. What is needed for Baire's theorem on functions of the
-  first class ([[thm-baire-one-continuity-points]]) is the same statement
-  *localised* to a closed bounded interval, and the localisation is not formal:
-  a closed set may be nowhere dense in $\mathbb{R}$ and yet fill an interval, so
-  the conclusion has to be stated as "contains a nondegenerate closed
-  subinterval" rather than "has nonempty interior in $\mathbb{R}$". The two are
-  in fact the same condition here, which is what step 2.1 uses.
+- **Why the statement is about $[a,b]$ and not about $\mathbb{R}$.** [[thm-baire-category-r]] says that $\mathbb{R}$ is not a countable union of nowhere dense sets. What is needed for Baire's theorem on functions of the first class ([[thm-baire-one-continuity-points]]) is the same statement *localised* to a closed bounded interval, and the localisation is not formal: a closed set may be nowhere dense in $\mathbb{R}$ and yet fill an interval, so the conclusion has to be stated as "contains a nondegenerate closed subinterval" rather than "has nonempty interior in $\mathbb{R}$". The two are in fact the same condition here, which is what step 2.1 uses.
 
-- **The hypothesis $a < b$ is not decoration.** For $a = b$ the set $[a,b]$ is a
-  single point, it is covered by the constant sequence $F_n = \{a\}$, and no
-  $F_n$ contains a nondegenerate closed interval; the conclusion fails, and the
-  proof breaks at step 3.1, where $(a,b)$ is empty.
+- **The hypothesis $a < b$ is not decoration.** For $a = b$ the set $[a,b]$ is a single point, it is covered by the constant sequence $F_n = \{a\}$, and no $F_n$ contains a nondegenerate closed interval; the conclusion fails, and the proof breaks at step 3.1, where $(a,b)$ is empty.

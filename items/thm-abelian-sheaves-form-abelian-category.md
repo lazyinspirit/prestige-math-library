@@ -34,24 +34,17 @@ Let $X$ be a topological space.
 
 ## Facts & Assumptions
 
-**Given:** A topological space $X$, and for the second assertion a ringed space
-$(X,\mathcal O_X)$.
+**Given:** A topological space $X$, and for the second assertion a ringed space $(X,\mathcal O_X)$.
 
-[F1] An abelian category is an additive category in which every morphism has a
-kernel and a cokernel and every coimage-to-image comparison is an isomorphism
-([[def-abelian-category]]).
+[F1] An abelian category is an additive category in which every morphism has a kernel and a cokernel and every coimage-to-image comparison is an isomorphism ([[def-abelian-category]]).
 
-[F2] Kernel sheaves are computed objectwise, while cokernel and image sheaves
-are sheafifications of the corresponding objectwise presheaves
-([[def-kernel-cokernel-image-sheaves]]).
+[F2] Kernel sheaves are computed objectwise, while cokernel and image sheaves are sheafifications of the corresponding objectwise presheaves ([[def-kernel-cokernel-image-sheaves]]).
 
-[L1] For every ring $R$, the category $R\text{-}\mathbf{Mod}$ is abelian
-([[thm-modules-over-a-ring-form-an-abelian-category]]).
+[L1] For every ring $R$, the category $R\text{-}\mathbf{Mod}$ is abelian ([[thm-modules-over-a-ring-form-an-abelian-category]]).
 
 [L2] Sheafification preserves stalks ([[thm-sheafification-preserves-stalks]]).
 
-[L3] A morphism of sheaves is an isomorphism exactly when it is an isomorphism
-on every stalk ([[thm-sheaf-morphism-isomorphism-stalkwise]]).
+[L3] A morphism of sheaves is an isomorphism exactly when it is an isomorphism on every stalk ([[thm-sheaf-morphism-isomorphism-stalkwise]]).
 
 ## Proof
 

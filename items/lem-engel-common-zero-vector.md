@@ -33,19 +33,13 @@ $v\in V$ such that $xv=0$ for every $x\in\mathfrak g$.
 
 ## Facts & Assumptions
 
-**Given:** A nonzero finite-dimensional vector space $V$ and a Lie subalgebra
-$\mathfrak g\subseteq\mathfrak{gl}(V)$ whose inclusion representation is nil.
+**Given:** A nonzero finite-dimensional vector space $V$ and a Lie subalgebra $\mathfrak g\subseteq\mathfrak{gl}(V)$ whose inclusion representation is nil.
 
-[L1] A nil representation is one in which every represented element is a
-nilpotent endomorphism
-([[def-nilpotent-linear-transformation-and-nil-representation]]).
+[L1] A nil representation is one in which every represented element is a nilpotent endomorphism ([[def-nilpotent-linear-transformation-and-nil-representation]]).
 
-[L2] An invariant subspace carries a restricted representation and its
-quotient carries the induced representation
-([[def-subrepresentation-quotient-representation-and-intertwiner]]).
+[L2] An invariant subspace carries a restricted representation and its quotient carries the induced representation ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
 
-[L3] Rank-nullity applies to finite-dimensional endomorphisms
-([[thm-rank-nullity]]).
+[L3] Rank-nullity applies to finite-dimensional endomorphisms ([[thm-rank-nullity]]).
 
 ## Proof
 

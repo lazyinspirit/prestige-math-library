@@ -41,23 +41,15 @@ $$0\to F(P'_{\bullet,\mathrm{del}})\to F(H_{\bullet,\mathrm{del}})\to F(P''_{\bu
 is a short exact sequence of complexes in $\mathcal B$.
 ## Facts & Assumptions
 
-**Given:** A horseshoe short exact sequence of projective resolutions over
-$0\to A'\to A\to A''\to0$.
+**Given:** A horseshoe short exact sequence of projective resolutions over $0\to A'\to A\to A''\to0$.
 
-[L1] A right exact functor is additive
-([[thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive]]).
+[L1] A right exact functor is additive ([[thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive]]).
 
-[L2] The horseshoe lemma produces a degreewise split short exact sequence of
-projective resolutions
-([[thm-horseshoe-lemma-for-projective-resolutions]]).
+[L2] The horseshoe lemma produces a degreewise split short exact sequence of projective resolutions ([[thm-horseshoe-lemma-for-projective-resolutions]]).
 
-[L3] Additive functors apply degreewise to complexes and chain maps
-([[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]]).
+[L3] Additive functors apply degreewise to complexes and chain maps ([[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]]).
 
-[L4] Exactness of a sequence of complexes is equivalent to exactness in each
-degree, and that is the definition of a short exact sequence of complexes
-([[cor-a-sequence-of-chain-maps-is-exact-exactly-when-it-is-exact-degreewise]],
-[[def-short-exact-sequence-of-complexes]]).
+[L4] Exactness of a sequence of complexes is equivalent to exactness in each degree, and that is the definition of a short exact sequence of complexes ([[cor-a-sequence-of-chain-maps-is-exact-exactly-when-it-is-exact-degreewise]], [[def-short-exact-sequence-of-complexes]]).
 
 ## Proof
 

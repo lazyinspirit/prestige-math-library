@@ -32,12 +32,9 @@ matrix trace there.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$ of characteristic $p$ and the $2$-dimensional $kC_p$
-module on which a generator $u$ acts by the unipotent matrix
-$\bigl(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\bigr)$.
+**Given:** A field $k$ of characteristic $p$ and the $2$-dimensional $kC_p$ module on which a generator $u$ acts by the unipotent matrix $\bigl(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\bigr)$.
 
-[F1] A Brauer character is defined only on the $p$-regular elements of $G$
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F1] A Brauer character is defined only on the $p$-regular elements of $G$ ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
 ## Refutation
 

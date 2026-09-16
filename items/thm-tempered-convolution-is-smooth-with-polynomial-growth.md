@@ -38,18 +38,13 @@ $\mathcal S'(\mathbb R^n)$.
 
 ## Facts & Assumptions
 
-**Given:** $u\in\mathcal S'$ and $\varphi\in\mathcal S$, with convolution as
-in [[def-convolution-of-a-tempered-distribution-with-a-schwartz-function]].
+**Given:** $u\in\mathcal S'$ and $\varphi\in\mathcal S$, with convolution as in [[def-convolution-of-a-tempered-distribution-with-a-schwartz-function]].
 
-[F1] There are $C,N,M$ giving a finite rectangular seminorm estimate for $u$
-([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
+[F1] There are $C,N,M$ giving a finite rectangular seminorm estimate for $u$ ([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
 
-[F2] Translation, reflection, and differentiation are continuous on Schwartz
-space
-([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]]).
+[F2] Translation, reflection, and differentiation are continuous on Schwartz space ([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]]).
 
-[F3] Smooth pointwise-polynomial-growth functions define regular tempered
-distributions ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
+[F3] Smooth pointwise-polynomial-growth functions define regular tempered distributions ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
 
 ## Proof
 
@@ -65,14 +60,12 @@ $$\partial^\gamma(u*\varphi)(x) =\langle u_y,\partial^\gamma\varphi(x-y)\rangle.
 
 $$\langle\partial^\gamma u_y,\varphi(x-y)\rangle =(-1)^{|\gamma|}\langle u_y,\partial_y^\gamma\varphi(x-y)\rangle =\langle u_y,\partial^\gamma\varphi(x-y)\rangle.$$
 
-Together with step 1.1 this proves both derivative identities, including
-$\gamma=0$. [F2, step 1.1]
+Together with step 1.1 this proves both derivative identities, including $\gamma=0$. [F2, step 1.1]
 
 2.1 Apply [F1] to the translated test in step 1.1.  Write $z=x-y$ and expand $y^\alpha=(x-z)^\alpha$. [F1, step 1.1, algebra]
 
 $$\sup_y|y^\alpha\partial_y^\beta \partial^\gamma\varphi(x-y)| \leq C_{\varphi,N,M,\gamma}(1+|x|)^N.$$
 
-Hence $|\partial^\gamma(u*\varphi)(x)|\leq
-C_\gamma(1+|x|)^N$. [F1, algebra]
+Hence $|\partial^\gamma(u*\varphi)(x)|\leq C_\gamma(1+|x|)^N$. [F1, algebra]
 
 3.1 Step 1.1 gives smoothness, and step 2.1 gives pointwise polynomial growth for every derivative.  In particular the function is locally integrable and [F3] makes its regular distribution tempered.  If $u=0$ or $\varphi=0$, all formulas reduce to zero.  No parameter integral or choice axiom is used. [F3, step 1.1, step 2.1] ∎

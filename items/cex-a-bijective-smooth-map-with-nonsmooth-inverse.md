@@ -38,12 +38,9 @@ Every bijective smooth map is a diffeomorphism.
 
 **Given:** The bijection $F:\mathbb R\to\mathbb R$, $F(x)=x^3$.
 
-[L1] The A-page false statement already proves that $F$ is smooth and bijective
-but that $F^{-1}(y)=y^{1/3}$ is not smooth
-([[fs-a-bijective-smooth-map-is-a-diffeomorphism]]).
+[L1] The A-page false statement already proves that $F$ is smooth and bijective but that $F^{-1}(y)=y^{1/3}$ is not smooth ([[fs-a-bijective-smooth-map-is-a-diffeomorphism]]).
 
-[F1] A diffeomorphism is a bijective smooth map with smooth inverse
-([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]).
+[F1] A diffeomorphism is a bijective smooth map with smooth inverse ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]).
 
 ## Counterexample
 

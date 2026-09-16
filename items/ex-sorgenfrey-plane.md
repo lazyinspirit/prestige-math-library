@@ -99,20 +99,8 @@ since it lives on an examples page.
 
 ## Remarks
 
-- **The half-open basis is reintroduced here rather than imported.** The
-  Sorgenfrey line is worked out in full at level 8, in
-  [[ex-sorgenfrey-line]], including its first countability and the fact that its
-  sequences converge only from the right. That item lives on an examples page and
-  so may not be a dependency of anything; the verification above repeats only the
-  part needed here, directly from [[thm-basis-criterion]].
+- **The half-open basis is reintroduced here rather than imported.** The Sorgenfrey line is worked out in full at level 8, in [[ex-sorgenfrey-line]], including its first countability and the fact that its sequences converge only from the right. That item lives on an examples page and so may not be a dependency of anything; the verification above repeats only the part needed here, directly from [[thm-basis-criterion]].
 
-- **The plane is genuinely finer than the Euclidean plane.** Every open rectangle
-  $(a,b)\times(c,d)$ is open in $S \times S$ by step 3.1 and [A2], while
-  $[0,1)\times[0,1)$ is open in $S \times S$ and is not open in $\mathbb{R}^2$,
-  since no Euclidean ball around $(0,0)$ lies inside it. Nothing above depends on
-  that comparison, and it is recorded here for orientation.
+- **The plane is genuinely finer than the Euclidean plane.** Every open rectangle $(a,b)\times(c,d)$ is open in $S \times S$ by step 3.1 and [A2], while $[0,1)\times[0,1)$ is open in $S \times S$ and is not open in $\mathbb{R}^2$, since no Euclidean ball around $(0,0)$ lies inside it. Nothing above depends on that comparison, and it is recorded here for orientation.
 
-- **What makes this example worth having is its subspace**, not the plane itself.
-  The next item exhibits an uncountable discrete subspace of $S \times S$, which
-  by claim 3 shows that "has a countable dense subset" is not a hereditary
-  property.
+- **What makes this example worth having is its subspace**, not the plane itself. The next item exhibits an uncountable discrete subspace of $S \times S$, which by claim 3 shows that "has a countable dense subset" is not a hereditary property.

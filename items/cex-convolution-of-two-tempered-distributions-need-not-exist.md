@@ -33,12 +33,9 @@ distributions $1$ and $1$ do not have an ordinary convolution.
 
 **Given:** $n\ge1$.
 
-[F1] A function of polynomial growth defines a tempered distribution
-([[thm-polynomial-growth-functions-define-tempered-distributions]]).
+[F1] A function of polynomial growth defines a tempered distribution ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
 
-[F2] Convolution is canonically defined when one distribution has compact
-support; the constants in this example have no compact support
-([[def-convolution-of-distributions-when-one-has-compact-support]]).
+[F2] Convolution is canonically defined when one distribution has compact support; the constants in this example have no compact support ([[def-convolution-of-distributions-when-one-has-compact-support]]).
 
 ## Counterexample
 
@@ -54,8 +51,6 @@ For the cube $Q_R=[-R,R]^n$, translation in the inner integral gives
 
 $$\int_{Q_R}\int_{\mathbb R^n}\psi(x+y)\,dy\,dx=|Q_R|c=(2R)^nc.$$
 
-The quantities on the right tend to $+\infty$.  Equivalently,
-$\psi(x+y)$ is not compactly supported on $\mathbb R^{2n}$: every nonempty
-addition fiber has infinite volume. [given, algebra]
+The quantities on the right tend to $+\infty$.  Equivalently, $\psi(x+y)$ is not compactly supported on $\mathbb R^{2n}$: every nonempty addition fiber has infinite volume. [given, algebra]
 
 2.1 Hence the ordinary integral construction does not produce a finite pairing even on this one nonnegative test function, and $1*1$ is undefined as an ordinary distributional convolution.  This does not say that no separately chosen regularization can assign an object to the pair; such an assignment is additional structure, not the ordinary convolution supplied by [F2]. [F2, step 1.2] ∎

@@ -34,17 +34,11 @@ $$\mathbb E[X]=\frac12,\qquad \mathbb E[X^2]=\frac13,\qquad \int_0^\infty \mathb
 
 ## Facts & Assumptions
 
-**Given:** The identity random variable $X(\omega)=\omega$ on $[0,1]$ with
-uniform probability.
+**Given:** The identity random variable $X(\omega)=\omega$ on $[0,1]$ with uniform probability.
 
-[L1] The cumulative distribution function is $F_X(x)=\mathbb P(X\le x)$
-([[def-cumulative-distribution-function-of-a-random-variable]]).
+[L1] The cumulative distribution function is $F_X(x)=\mathbb P(X\le x)$ ([[def-cumulative-distribution-function-of-a-random-variable]]).
 
-[L2] Expectation is integration against the probability measure, and for a
-nonnegative random variable the layer-cake formula computes it from the tail
-probabilities
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]],
-[[cor-layer-cake-formulas-for-random-variables]]).
+[L2] Expectation is integration against the probability measure, and for a nonnegative random variable the layer-cake formula computes it from the tail probabilities ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]], [[cor-layer-cake-formulas-for-random-variables]]).
 
 ## Verification
 

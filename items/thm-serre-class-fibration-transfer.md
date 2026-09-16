@@ -48,8 +48,7 @@ remain necessary. No claim is made outside the displayed ranges.
 
 **Given:** AC, the fibration and base/fiber hypotheses, the indicated Serre ideal or ring, and the displayed finite range.
 
-[A1] [[def-axiom-of-choice]] is assumed solely to discharge the explicit AC
-hypothesis in the freeness lemma cited in [F4].
+[A1] [[def-axiom-of-choice]] is assumed solely to discharge the explicit AC hypothesis in the freeness lemma cited in [F4].
 
 [F1] [[thm-homological-serre-spectral-sequence]] gives the natural choice-free sequence $E^2_{s,t}=H_s(B;\mathcal H_t)$, its finite strong convergence, and constant coefficients when the transport action is trivial.
 

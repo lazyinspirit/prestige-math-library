@@ -77,25 +77,10 @@ that computation is [[ex-nested-intervals-single-point]].
 
 ## Remarks
 
-- **Exactly one hypothesis of [[thm-nested-interval-property]] is missing.** The
-  intervals here are nonempty, bounded and nested; they are not closed. The true
-  theorem is therefore not contradicted, and the counterexample shows that its
-  closedness hypothesis cannot be dropped.
+- **Exactly one hypothesis of [[thm-nested-interval-property]] is missing.** The intervals here are nonempty, bounded and nested; they are not closed. The true theorem is therefore not contradicted, and the counterexample shows that its closedness hypothesis cannot be dropped.
 
-- **The candidate point exists and is excluded by a hair.** With
-  $J_j = (a_j, b_j)$ one still has $a_j \to 0$ and $b_j \to 0$, and the only
-  possible common point is $0$; but $0 \notin J_j$ for any $j$, because the left
-  endpoint is excluded. Closedness is precisely the hypothesis that puts the
-  limiting endpoint into each set. Compare
-  [[ex-nested-intervals-single-point]], where it is present and the intersection
-  is $\{0\}$.
+- **The candidate point exists and is excluded by a hair.** With $J_j = (a_j, b_j)$ one still has $a_j \to 0$ and $b_j \to 0$, and the only possible common point is $0$; but $0 \notin J_j$ for any $j$, because the left endpoint is excluded. Closedness is precisely the hypothesis that puts the limiting endpoint into each set. Compare [[ex-nested-intervals-single-point]], where it is present and the intersection is $\{0\}$.
 
-- **The Archimedean property is doing the work in step 3.1.** In a
-  non-Archimedean ordered field a positive infinitesimal lies in every
-  $(0, 1/n)$, and the intersection is nonempty. So this is a counterexample about
-  $\mathbb{R}$, supplied by [[cor-archimedean-reciprocal]], and not a formal
-  consequence of openness alone.
+- **The Archimedean property is doing the work in step 3.1.** In a non-Archimedean ordered field a positive infinitesimal lies in every $(0, 1/n)$, and the intersection is nonempty. So this is a counterexample about $\mathbb{R}$, supplied by [[cor-archimedean-reciprocal]], and not a formal consequence of openness alone.
 
-- **Boundedness is a separate hypothesis and fails separately.**
-  [[cex-nested-unbounded-closed-empty]] keeps closedness and drops boundedness,
-  with the same empty intersection, so neither hypothesis implies the other.
+- **Boundedness is a separate hypothesis and fails separately.** [[cex-nested-unbounded-closed-empty]] keeps closedness and drops boundedness, with the same empty intersection, so neither hypothesis implies the other.

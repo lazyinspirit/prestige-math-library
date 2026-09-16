@@ -36,12 +36,9 @@ lifting $u$.
 
 **Given:** A morphism $u:A\to B$ with $A,B\in\mathcal D$.
 
-[L1] The datum $P$ supplies specific projective resolutions
-$P_\bullet(A)\to A$ and $P_\bullet(B)\to B$
-([[def-supplied-projective-resolution-datum]]).
+[L1] The datum $P$ supplies specific projective resolutions $P_\bullet(A)\to A$ and $P_\bullet(B)\to B$ ([[def-supplied-projective-resolution-datum]]).
 
-[L2] Assuming Dependent Choice, projective comparison maps exist for any
-morphism between resolved objects ([[thm-projective-comparison-map-exists]]).
+[L2] Assuming Dependent Choice, projective comparison maps exist for any morphism between resolved objects ([[thm-projective-comparison-map-exists]]).
 
 ## Proof
 

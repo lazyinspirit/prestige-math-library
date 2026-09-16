@@ -30,8 +30,7 @@ basis $(v_i^*)$, is a categorical dual of $V$.
 
 **Given:** A finite-dimensional vector space $V$.
 
-[L1] Finite-dimensional vector spaces are rigid with dual object $V^*$
-([[thm-finite-dimensional-vector-spaces-are-rigid]]).
+[L1] Finite-dimensional vector spaces are rigid with dual object $V^*$ ([[thm-finite-dimensional-vector-spaces-are-rigid]]).
 
 ## Verification
 

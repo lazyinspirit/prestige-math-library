@@ -34,18 +34,14 @@ $$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$
 
 **Given:** Constants $a,b>0$, an exponent $1<p<\infty$, and its conjugate $q$.
 
-[L1] Equality in Holder holds when $|f|^p$ and $|g|^q$ are proportional almost
-everywhere ([[thm-equality-case-in-holder-inequality]]).
+[L1] Equality in Holder holds when $|f|^p$ and $|g|^q$ are proportional almost everywhere ([[thm-equality-case-in-holder-inequality]]).
 
 ## Verification
 
-**Proof technique:** Choose nonnegative functions with $|f|^p$ and $|g|^q$
-proportional almost everywhere and invoke the equality theorem.
+**Proof technique:** Choose nonnegative functions with $|f|^p$ and $|g|^q$ proportional almost everywhere and invoke the equality theorem.
 
 1.1 The functions satisfy [given]
-$$|f|^p=a^p\chi_{[0,1]},\qquad |g|^q=b^q\chi_{[0,1]},$$
-so $|f|^p=(a^p/b^q)|g|^q$ almost everywhere.
+$$|f|^p=a^p\chi_{[0,1]},\qquad |g|^q=b^q\chi_{[0,1]},$$ so $|f|^p=(a^p/b^q)|g|^q$ almost everywhere.
 
 2.1 Applying [L1] gives equality in Holder: [L1, step 1.1]
-$$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$
-∎
+$$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$ ∎

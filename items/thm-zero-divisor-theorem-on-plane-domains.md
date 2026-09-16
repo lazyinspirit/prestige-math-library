@@ -40,20 +40,13 @@ $a\in A$ has order exactly $m(a)$ and which has no other zeros.
 
 **Given:** A plane domain $\Omega$ and a discrete effective divisor $\sum_{a\in A}m(a)[a]$ on $\Omega$.
 
-[L1] The elementary factor $E_p(w)$ has its only zero at $w=1$
-([[def-weierstrass-elementary-factor]]).
+[L1] The elementary factor $E_p(w)$ has its only zero at $w=1$ ([[def-weierstrass-elementary-factor]]).
 
-[L2] If $|w|\le1$, then $|1-E_p(w)|\le|w|^{p+1}$
-([[lem-unit-disc-estimate-for-weierstrass-elementary-factors]]).
+[L2] If $|w|\le1$, then $|1-E_p(w)|\le|w|^{p+1}$ ([[lem-unit-disc-estimate-for-weierstrass-elementary-factors]]).
 
-[L3] A normally convergent product of holomorphic factors is holomorphic and
-has exactly the zeros contributed by its factors
-([[thm-normal-convergence-of-holomorphic-products]]).
+[L3] A normally convergent product of holomorphic factors is holomorphic and has exactly the zeros contributed by its factors ([[thm-normal-convergence-of-holomorphic-products]]).
 
-[L4] If $m\ge0$ and $(a_n)$ is a discrete sequence of nonzero complex
-numbers, then a product $z^m\prod_nE_{p_n}(z/a_n)$ is entire and has exactly
-the order-$m$ zero at $0$ and the listed nonzero zeros with multiplicity
-([[thm-weierstrass-product-theorem-on-the-complex-plane]]).
+[L4] If $m\ge0$ and $(a_n)$ is a discrete sequence of nonzero complex numbers, then a product $z^m\prod_nE_{p_n}(z/a_n)$ is entire and has exactly the order-$m$ zero at $0$ and the listed nonzero zeros with multiplicity ([[thm-weierstrass-product-theorem-on-the-complex-plane]]).
 
 ## Proof
 

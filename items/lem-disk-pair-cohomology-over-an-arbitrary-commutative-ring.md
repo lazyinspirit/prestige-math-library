@@ -33,15 +33,11 @@ multiplication by a unit.  The calculation is choice-free.
 
 **Given:** A commutative ring $R$ and $n\geq0$.
 
-[F1] [[cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms]]
-gives choice-free homotopy invariance, dimension, exactness, excision, and
-finite additivity for singular cohomology.
+[F1] [[cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms]] gives choice-free homotopy invariance, dimension, exactness, excision, and finite additivity for singular cohomology.
 
-[F2] [[thm-mayer-vietoris-sequence-in-singular-cohomology]] gives the natural
-two-open Mayer–Vietoris sequence.
+[F2] [[thm-mayer-vietoris-sequence-in-singular-cohomology]] gives the natural two-open Mayer–Vietoris sequence.
 
-[F3] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] gives the
-natural disk/sphere pair sequence.
+[F3] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] gives the natural disk/sphere pair sequence.
 
 ## Proof
 

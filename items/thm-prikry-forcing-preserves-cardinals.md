@@ -39,36 +39,23 @@ cardinal while changing $\operatorname{cf}(\kappa)$ to $\omega$.
 
 ## Facts & Assumptions
 
-**Given:** The forcing-theorem setting over a transitive ZFC ground model $M$,
-a normal measure on $\kappa$, and a generic extension $M[G]$.
+**Given:** The forcing-theorem setting over a transitive ZFC ground model $M$, a normal measure on $\kappa$, and a generic extension $M[G]$.
 
-[F1] [[thm-prikry-forcing-adds-no-bounded-subsets]]: Every subset of an ordinal
-below $\kappa$ appearing in the extension is already in the ground model.
+[F1] [[thm-prikry-forcing-adds-no-bounded-subsets]]: Every subset of an ordinal below $\kappa$ appearing in the extension is already in the ground model.
 
-[F2] [[lem-prikry-kappa-plus-chain-condition]]: Prikry forcing is
-$\kappa^+$-cc.
+[F2] [[lem-prikry-kappa-plus-chain-condition]]: Prikry forcing is $\kappa^+$-cc.
 
-[F3] [[lem-lc-complete-measures-small-fibres-and-inaccessibility]]: A measurable
-$\kappa$ is inaccessible, hence in particular an uncountable regular limit
-cardinal.
+[F3] [[lem-lc-complete-measures-small-fibres-and-inaccessibility]]: A measurable $\kappa$ is inaccessible, hence in particular an uncountable regular limit cardinal.
 
-[F4] [[thm-chain-condition-preserves-cofinalities-and-cardinals]]: A
-$\theta$-cc forcing for regular $\theta$ preserves all ground cardinals at
-least $\theta$.
+[F4] [[thm-chain-condition-preserves-cofinalities-and-cardinals]]: A $\theta$-cc forcing for regular $\theta$ preserves all ground cardinals at least $\theta$.
 
-[F5] [[thm-every-infinite-cardinal-is-an-aleph]] and
-[[thm-regularity-of-the-alephs]]: Under Choice, every infinite cardinal is an
-aleph and every successor aleph is regular.
+[F5] [[thm-every-infinite-cardinal-is-an-aleph]] and [[thm-regularity-of-the-alephs]]: Under Choice, every infinite cardinal is an aleph and every successor aleph is regular.
 
-[F6] [[cor-cardinal-absorption]]: Products of nonzero infinite cardinals with
-cardinals no larger than them are absorbed by the larger cardinal.
+[F6] [[cor-cardinal-absorption]]: Products of nonzero infinite cardinals with cardinals no larger than them are absorbed by the larger cardinal.
 
-[F7] [[def-cardinal]] and [[def-aleph-and-beth-hierarchies]]: Cardinals are
-initial ordinals, and $\lambda^+$ denotes the least cardinal strictly above
-$\lambda$.
+[F7] [[def-cardinal]] and [[def-aleph-and-beth-hierarchies]]: Cardinals are initial ordinals, and $\lambda^+$ denotes the least cardinal strictly above $\lambda$.
 
-[F8] [[thm-prikry-generic-sequence-changes-cofinality]]: The generic stem union
-is an omega-sequence cofinal in $\kappa$.
+[F8] [[thm-prikry-generic-sequence-changes-cofinality]]: The generic stem union is an omega-sequence cofinal in $\kappa$.
 
 ## Proof
 

@@ -27,8 +27,7 @@ only if it is limit computable.
 
 **Given:** a set $A\subseteq\mathbb N$.
 
-[L1] A halting oracle computation has a finite query witness
-([[lem-oracle-computation-has-a-finite-query-witness]]).
+[L1] A halting oracle computation has a finite query witness ([[lem-oracle-computation-has-a-finite-query-witness]]).
 
 ## Proof
 

@@ -41,32 +41,17 @@ $\overline{\mathcal F}$-free graph $G$, at least one of the following holds:
 
 ## Facts & Assumptions
 
-**Given:** A finite family $\mathcal F$ with property $(*)$ and leaf-reducible,
-an $x\in(0,c^{10}]$, and a $c^{10}$-restricted $\overline{\mathcal F}$-free
-graph $G$.
+**Given:** A finite family $\mathcal F$ with property $(*)$ and leaf-reducible, an $x\in(0,c^{10}]$, and a $c^{10}$-restricted $\overline{\mathcal F}$-free graph $G$.
 
-[L1] The previous claim says that, under the failure of outcomes 2-4, every
-$y^{10/3}$-restricted induced subgraph of sufficiently large relative size has
-a deeper $y^{11/3}$-restricted induced subgraph
-([[lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph]]).
+[L1] The previous claim says that, under the failure of outcomes 2-4, every $y^{10/3}$-restricted induced subgraph of sufficiently large relative size has a deeper $y^{11/3}$-restricted induced subgraph ([[lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph]]).
 
-[L2] If a graph has a $c^{10}$-restricted induced subgraph of size at least
-$(c^{10})^{3(c_4+2)}|G|$ and every $\lambda$-restricted induced subgraph of
-size at least $\lambda^{3(c_4+2)}|G|$ contains a
-$\lambda^{11/10}$-restricted induced subgraph of size at least
-$\lambda^{3(c_4+2)/10}$ times as many vertices, then the graph has an
-$x^{10/3}$-restricted induced subgraph with at least
-$x^{11(c_4+2)}|G|$ vertices
-([[lem-iterated-restricted-sparsification-reaches-the-target-scale]]).
+[L2] If a graph has a $c^{10}$-restricted induced subgraph of size at least $(c^{10})^{3(c_4+2)}|G|$ and every $\lambda$-restricted induced subgraph of size at least $\lambda^{3(c_4+2)}|G|$ contains a $\lambda^{11/10}$-restricted induced subgraph of size at least $\lambda^{3(c_4+2)/10}$ times as many vertices, then the graph has an $x^{10/3}$-restricted induced subgraph with at least $x^{11(c_4+2)}|G|$ vertices ([[lem-iterated-restricted-sparsification-reaches-the-target-scale]]).
 
-[L3] If a set is $x^{10/3}$-restricted, then it is $x$-restricted
-([[def-c-sparse-and-c-restricted-vertex-set]]).
+[L3] If a set is $x^{10/3}$-restricted, then it is $x$-restricted ([[def-c-sparse-and-c-restricted-vertex-set]]).
 
 ## Proof
 
-**Proof technique:** if outcomes 2-4 fail, verify the hypotheses of the
-iterative restricted-sparsification lemma with
-$b_1=\tfrac{11}{10}$, $b_2=3(c_4+2)$, and $b_3=\tfrac{3(c_4+2)}{10}$.
+**Proof technique:** if outcomes 2-4 fail, verify the hypotheses of the iterative restricted-sparsification lemma with $b_1=\tfrac{11}{10}$, $b_2=3(c_4+2)$, and $b_3=\tfrac{3(c_4+2)}{10}$.
 
 
 1.1 Let $c_1,c_2,c_3>0$, $c_4,c_5\ge 4$, and $c:=2^{-4c_5}$ be the constants from [[lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph]], and set $$ b_1:=11/10,\qquad b_2:=3(c_4+2),\qquad b_3:=3(c_4+2)/10. $$ [L1, choose]

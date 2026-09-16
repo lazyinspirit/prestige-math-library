@@ -33,13 +33,11 @@ trivially on $S$.
 
 **Given:** A finite group $G$, a normal $p$-subgroup $N\trianglelefteq G$, and a simple $kG$-module $S$.
 
-[L1] For every characteristic-$p$ field, the group algebra of a finite
-$p$-group is local ([[thm-kg-is-local-iff-g-is-a-p-group]]).
+[L1] For every characteristic-$p$ field, the group algebra of a finite $p$-group is local ([[thm-kg-is-local-iff-g-is-a-p-group]]).
 
 [F1] A simple module has no proper nonzero submodule ([[def-simple-module]]).
 
-[L2] Finite-dimensional modules have finite length
-([[thm-composition-series-iff-noetherian-and-artinian]]).
+[L2] Finite-dimensional modules have finite length ([[thm-composition-series-iff-noetherian-and-artinian]]).
 
 ## Proof
 

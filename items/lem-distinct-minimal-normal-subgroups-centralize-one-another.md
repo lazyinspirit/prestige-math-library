@@ -29,12 +29,9 @@ Equivalently, $[M,N]=1$.
 
 **Given:** A finite group $G$ and distinct minimal normal subgroups $M,N \trianglelefteq G$.
 
-[L1] Using the convention of
-[[def-commutator-and-commutator-subgroup]], put
-$$[M,N]:=\langle [m,n]=mnm^{-1}n^{-1}:m\in M,\ n\in N\rangle.$$
+[L1] Using the convention of [[def-commutator-and-commutator-subgroup]], put $$[M,N]:=\langle [m,n]=mnm^{-1}n^{-1}:m\in M,\ n\in N\rangle.$$
 
-[A1] Because $M$ and $N$ are normal in $G$, the subgroup $[M,N]$ is normal in
-$G$ and is contained in both $M$ and $N$.
+[A1] Because $M$ and $N$ are normal in $G$, the subgroup $[M,N]$ is normal in $G$ and is contained in both $M$ and $N$.
 
 ## Proof
 

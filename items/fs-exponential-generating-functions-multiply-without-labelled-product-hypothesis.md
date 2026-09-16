@@ -34,8 +34,7 @@ the product of the EGFs of $\mathcal{A}$ and $\mathcal{B}$.
 
 ## Facts & Assumptions
 
-**Given:** The labelled product rule of
-[[thm-labelled-symbolic-method-rules-for-exponential-generating-functions]].
+**Given:** The labelled product rule of [[thm-labelled-symbolic-method-rules-for-exponential-generating-functions]].
 
 ## Proof
 

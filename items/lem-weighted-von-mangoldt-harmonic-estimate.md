@@ -39,21 +39,11 @@ $$ \sum_{n\le x}\frac{\Lambda(n)}{n}=\log x+O(1). $$
 
 **Given:** A real number $x\ge2$.
 
-[L1] The von Mangoldt divisor identity is
-$$ \log m=\sum_{\substack{d\mid m\\ d>0}}\Lambda(d) $$
-for every integer $m\ge1$ ([[thm-von-mangoldt-divisor-sum-identity]],
-[[def-von-mangoldt-function]]).
+[L1] The von Mangoldt divisor identity is $$ \log m=\sum_{\substack{d\mid m\\ d>0}}\Lambda(d) $$ for every integer $m\ge1$ ([[thm-von-mangoldt-divisor-sum-identity]], [[def-von-mangoldt-function]]).
 
-[L2] The summatory logarithm satisfies
-$$ \sum_{m\le x}\log m=x\log x-x+O(\log x) $$
-([[lem-summatory-logarithm-asymptotic]]).
+[L2] The summatory logarithm satisfies $$ \sum_{m\le x}\log m=x\log x-x+O(\log x) $$ ([[lem-summatory-logarithm-asymptotic]]).
 
-[L3] The prime-power expansion of $\psi$ together with the comparison lemma and
-Chebyshev's theta bounds imply
-$$ \sum_{d\le x}\Lambda(d)=\psi(x)=O(x) $$
-([[def-chebyshev-psi-function]], [[lem-chebyshev-psi-prime-power-expansion]],
-[[lem-chebyshev-functions-prime-power-comparison]],
-[[thm-chebyshev-theta-linear-bounds]]).
+[L3] The prime-power expansion of $\psi$ together with the comparison lemma and Chebyshev's theta bounds imply $$ \sum_{d\le x}\Lambda(d)=\psi(x)=O(x) $$ ([[def-chebyshev-psi-function]], [[lem-chebyshev-psi-prime-power-expansion]], [[lem-chebyshev-functions-prime-power-comparison]], [[thm-chebyshev-theta-linear-bounds]]).
 
 ## Proof
 

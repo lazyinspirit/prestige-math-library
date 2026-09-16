@@ -34,8 +34,7 @@ subcategory.
 
 ## Facts & Assumptions
 
-**Given:** The full subcategory $\mathcal A\subseteq\mathbf{Set}$ whose only
-object is a fixed singleton $1$.
+**Given:** The full subcategory $\mathcal A\subseteq\mathbf{Set}$ whose only object is a fixed singleton $1$.
 
 [L1] A full subcategory is reflective when its inclusion has a left adjoint ([[def-reflective-subcategory-and-reflector]]).
 

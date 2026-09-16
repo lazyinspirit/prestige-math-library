@@ -40,15 +40,11 @@ Bochner density.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] RNP requires the density property on every finite measure space
-([[def-radon-nikodym-property]]).
+[L1] RNP requires the density property on every finite measure space ([[def-radon-nikodym-property]]).
 
-[L2] Under AC, failure of RNP is equivalent to the presence of a nondentable
-bounded closed convex set ([[thm-rnp-dentability-characterization]]).
+[L2] Under AC, failure of RNP is equivalent to the presence of a nondentable bounded closed convex set ([[thm-rnp-dentability-characterization]]).
 
-[L3] Such nondentability yields an absolutely continuous bounded-variation
-Lebesgue interval vector measure without a Bochner density
-([[lem-nondentability-produces-a-vector-measure-without-density]]).
+[L3] Such nondentability yields an absolutely continuous bounded-variation Lebesgue interval vector measure without a Bochner density ([[lem-nondentability-produces-a-vector-measure-without-density]]).
 
 ## Proof
 

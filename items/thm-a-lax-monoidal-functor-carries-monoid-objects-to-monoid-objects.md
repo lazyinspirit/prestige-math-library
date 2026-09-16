@@ -35,8 +35,7 @@ $$\mathbf 1'\xrightarrow{F_0}F(\mathbf 1)\xrightarrow{F(\eta)}F(M).$$
 
 ## Facts & Assumptions
 
-**Given:** A lax monoidal functor $F:\mathcal C\to\mathcal D$ and a monoid
-object $(M,\mu,\eta)$ in $\mathcal C$.
+**Given:** A lax monoidal functor $F:\mathcal C\to\mathcal D$ and a monoid object $(M,\mu,\eta)$ in $\mathcal C$.
 
 [L1] A lax monoidal functor has structure maps $F_2$ and $F_0$ satisfying associativity and unit compatibility ([[def-lax-strong-and-strict-monoidal-functor]]).
 

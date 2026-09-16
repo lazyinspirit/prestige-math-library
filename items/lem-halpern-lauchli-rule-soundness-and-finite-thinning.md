@@ -39,14 +39,11 @@ a pointwise interpretation with the same density parameter.
 
 ## Facts & Assumptions
 
-**Given:** The displayed $d,T_i,Q$, words $W,W'\in L_d$, and a derivation
-$W\vdash_dW'$.
+**Given:** The displayed $d,T_i,Q$, words $W,W'\in L_d$, and a derivation $W\vdash_dW'$.
 
-[F1] The preceding definition supplies domination, finite levels, no terminal
-nodes, and $(h,k)$-density. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
+[F1] The preceding definition supplies domination, finite levels, no terminal nodes, and $(h,k)$-density. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
 
-[F2] The only generating steps of $\vdash_d$ are the three stated rule
-classes. [[def-halpern-lauchli-finite-word-calculus]]
+[F2] The only generating steps of $\vdash_d$ are the three stated rule classes. [[def-halpern-lauchli-finite-word-calculus]]
 
 ## Proof
 

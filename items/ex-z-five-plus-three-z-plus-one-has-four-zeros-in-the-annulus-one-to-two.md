@@ -32,8 +32,7 @@ The polynomial $z^5+3z+1$ has exactly four zeros in the annulus $1<|z|<2$.
 
 **Given:** The polynomial $p(z)=z^5+3z+1$.
 
-[L1] Rouché's theorem preserves the zero count on a circle
-([[thm-rouche-theorem]]).
+[L1] Rouché's theorem preserves the zero count on a circle ([[thm-rouche-theorem]]).
 
 ## Verification
 

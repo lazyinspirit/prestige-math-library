@@ -82,16 +82,6 @@ $\varepsilon = 1, 1/2, 1/3, \dots$ is the discontinuity set
 
 ## Remarks
 
-- **Where the extended reals are used, and where they are not.** The definition
-  of $\omega_f$ needs them, because $f$ may be unbounded near $c$ and the
-  supremum may then be $+\infty$; the proof needs only the order relations, and
-  the two directions never compare an infinite value with a real except through
-  the inequality $0 \le \omega_f(c) \le \varepsilon$, which already forces
-  $\omega_f(c)$ to be real.
+- **Where the extended reals are used, and where they are not.** The definition of $\omega_f$ needs them, because $f$ may be unbounded near $c$ and the supremum may then be $+\infty$; the proof needs only the order relations, and the two directions never compare an infinite value with a real except through the inequality $0 \le \omega_f(c) \le \varepsilon$, which already forces $\omega_f(c)$ to be real.
 
-- **The oscillation measures how badly continuity fails, not merely whether it
-  does.** The theorem uses only whether $\omega_f(c)$ vanishes, but the number
-  itself carries more: the oscillation of Thomae's function at a point $c$ is
-  proved below to be exactly $t(c)$
-  ([[thm-dirichlet-and-thomae-continuity-sets]]), so it is $1/q$ at a rational
-  with least denominator $q$ and $0$ at every irrational.
+- **The oscillation measures how badly continuity fails, not merely whether it does.** The theorem uses only whether $\omega_f(c)$ vanishes, but the number itself carries more: the oscillation of Thomae's function at a point $c$ is proved below to be exactly $t(c)$ ([[thm-dirichlet-and-thomae-continuity-sets]]), so it is $1/q$ at a rational with least denominator $q$ and $0$ at every irrational.

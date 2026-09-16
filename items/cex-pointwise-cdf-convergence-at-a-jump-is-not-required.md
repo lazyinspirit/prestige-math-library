@@ -25,12 +25,9 @@ Weak convergence does not require CDF convergence at a jump of the limiting CDF.
 
 [F1] [[def-weak-convergence-of-borel-probability-measures]]: For Borel probability measures $\mu_n,\mu$ on a metric space S, write $\mu_n\Rightarrow\mu$ if $\int f\,d\mu_n\to\int f\,d\mu$ for every bounded continuous real function f on S. Continuity is def-metric-continuity. Such f is Borel measurable (inverse images of open sets are open) and $\int|f|\,d\mu\le\|f\|_\infty\mu(S)<\infty$, so the integrals are finite in def-integrable-real-and-complex-functions-and-their-integrals. No completeness or coupling is required.
 
-[F2] [[def-cumulative-distribution-function-of-a-random-variable]]: Let $X$ be a real random variable. Its **cumulative distribution function** is
-the function
-$$F_X:\mathbb R\to[0,1],\qquad F_X(x):=\mathbb P(X\le x)=\mathbb P_X((-\infty,x]).$$
+[F2] [[def-cumulative-distribution-function-of-a-random-variable]]: Let $X$ be a real random variable. Its **cumulative distribution function** is the function $$F_X:\mathbb R\to[0,1],\qquad F_X(x):=\mathbb P(X\le x)=\mathbb P_X((-\infty,x]).$$
 
-The second expression is the same quantity written in terms of the law
-def-law-or-distribution-of-a-random-element of $X$.
+The second expression is the same quantity written in terms of the law def-law-or-distribution-of-a-random-element of $X$.
 
 ## Counterexample
 

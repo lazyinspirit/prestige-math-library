@@ -40,12 +40,9 @@ defines an action of $Q$ on $N$ by automorphisms.
 
 **Given:** The displayed split extension and a complement $C\le E$ to $i(N)$.
 
-[L1] In a split extension, a complement to the kernel is equivalent to a
-semidirect-product model, and the quotient map restricts to an isomorphism from
-the complement onto the quotient ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
+[L1] In a split extension, a complement to the kernel is equivalent to a semidirect-product model, and the quotient map restricts to an isomorphism from the complement onto the quotient ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
 
-[L2] Conjugation by a group element is an automorphism of the group
-([[thm-conjugation-is-an-automorphism]]).
+[L2] Conjugation by a group element is an automorphism of the group ([[thm-conjugation-is-an-automorphism]]).
 
 ## Proof
 

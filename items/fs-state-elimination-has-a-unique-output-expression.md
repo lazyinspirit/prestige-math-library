@@ -30,9 +30,7 @@ unique final regular expression.
 
 ## Facts & Assumptions
 
-**Given:** The GNFA with start state $s$, accept state $t$, interior states
-$p,q$, labels $\lambda(s,p)=a$, $\lambda(p,t)=b$, $\lambda(s,q)=a$,
-$\lambda(q,t)=c$, and every other label equal to $\varnothing$.
+**Given:** The GNFA with start state $s$, accept state $t$, interior states $p,q$, labels $\lambda(s,p)=a$, $\lambda(p,t)=b$, $\lambda(s,q)=a$, $\lambda(q,t)=c$, and every other label equal to $\varnothing$.
 
 [A1] The statement refuted is: once a GNFA is fixed, state elimination always produces one unique final regular expression.
 

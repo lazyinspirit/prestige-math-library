@@ -44,10 +44,7 @@ as $|z|\to\infty$.
 
 [L2] Harmonic numbers satisfy $H_n=\log n+\gamma+o(1)$ ([[thm-euler-mascheroni-constant-and-harmonic-asymptotic]]).
 
-[L3] The real Stirling formula gives
-$$\log (N-1)!=\left(N-\frac12\right)\log N-N+\frac12\log(2\pi)+o(1)$$
-as $N\to\infty$ through the positive integers
-([[thm-real-stirling-formula]]).
+[L3] The real Stirling formula gives $$\log (N-1)!=\left(N-\frac12\right)\log N-N+\frac12\log(2\pi)+o(1)$$ as $N\to\infty$ through the positive integers ([[thm-real-stirling-formula]]).
 
 ## Proof
 

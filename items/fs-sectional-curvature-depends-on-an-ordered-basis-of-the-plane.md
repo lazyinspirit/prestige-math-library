@@ -37,15 +37,11 @@ In fact it depends only on the unoriented two-plane.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Riemannian manifold, a point $p$, a tangent two-plane
-$\sigma\subseteq T_pM$, and two supplied ordered bases $(X,Y)$ and
-$(X',Y')$ of $\sigma$.
+**Given:** $\mathrm{AC}_\omega$, a Riemannian manifold, a point $p$, a tangent two-plane $\sigma\subseteq T_pM$, and two supplied ordered bases $(X,Y)$ and $(X',Y')$ of $\sigma$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[lem-sectional-curvature-is-independent-of-the-basis-of-the-plane]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] If $(X,Y)$ and $(X',Y')$ are two ordered bases of the same tangent
-two-plane, their sectional-curvature quotients are equal.
-[[lem-sectional-curvature-is-independent-of-the-basis-of-the-plane]].
+[F1] If $(X,Y)$ and $(X',Y')$ are two ordered bases of the same tangent two-plane, their sectional-curvature quotients are equal. [[lem-sectional-curvature-is-independent-of-the-basis-of-the-plane]].
 
 ## Refutation
 

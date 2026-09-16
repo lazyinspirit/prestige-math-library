@@ -38,11 +38,9 @@ Every convex domain in $\mathbb C^m$ is a domain of holomorphy.
 
 **Given:** A convex domain $\Omega\subseteq\mathbb C^m$.
 
-[L1] Convex domains are holomorphically convex
-([[thm-convex-domains-are-holomorphically-convex]]).
+[L1] Convex domains are holomorphically convex ([[thm-convex-domains-are-holomorphically-convex]]).
 
-[L2] For domains in $\mathbb C^m$, holomorphic convexity is equivalent to being
-a domain of holomorphy ([[thm-cartan-thullen-theorem]]).
+[L2] For domains in $\mathbb C^m$, holomorphic convexity is equivalent to being a domain of holomorphy ([[thm-cartan-thullen-theorem]]).
 
 ## Proof
 

@@ -32,14 +32,11 @@ $F$-vector space of dimension at least $3$. Then $q$ is isotropic.
 
 ## Facts & Assumptions
 
-**Given:** A finite field $F$ of odd order and a quadratic form $q$ on an
-$n$-dimensional $F$-vector space with $n\ge3$.
+**Given:** A finite field $F$ of odd order and a quadratic form $q$ on an $n$-dimensional $F$-vector space with $n\ge3$.
 
-[L1] Over characteristic not $2$, a quadratic form diagonalizes
-([[cor-quadratic-forms-diagonalize-in-characteristic-not-two]]).
+[L1] Over characteristic not $2$, a quadratic form diagonalizes ([[cor-quadratic-forms-diagonalize-in-characteristic-not-two]]).
 
-[L2] The multiplicative group of a finite field is cyclic
-([[thm-multiplicative-group-of-a-finite-field-is-cyclic]]).
+[L2] The multiplicative group of a finite field is cyclic ([[thm-multiplicative-group-of-a-finite-field-is-cyclic]]).
 
 [L3] A finite field has finite order ([[def-finite-field-and-its-order]]); in the present statement that order is assumed odd.
 

@@ -34,15 +34,11 @@ smallest possible orders.
 
 ## Facts & Assumptions
 
-**Given:** The Hilbert matrices
-$H_2=\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}$ and
-$H_3=\begin{pmatrix}1&1/2&1/3\\1/2&1/3&1/4\\1/3&1/4&1/5\end{pmatrix}$.
+**Given:** The Hilbert matrices $H_2=\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}$ and $H_3=\begin{pmatrix}1&1/2&1/3\\1/2&1/3&1/4\\1/3&1/4&1/5\end{pmatrix}$.
 
-[L1] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$
-([[def-condition-number-of-a-nonsingular-linear-system]]).
+[L1] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$ ([[def-condition-number-of-a-nonsingular-linear-system]]).
 
-[L2] The induced $\infty$-norm is the maximum row sum
-([[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]]).
+[L2] The induced $\infty$-norm is the maximum row sum ([[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]]).
 
 ## Verification
 

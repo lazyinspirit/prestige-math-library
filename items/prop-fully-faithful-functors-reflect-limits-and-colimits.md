@@ -30,17 +30,13 @@ smallness restriction on the diagram for which the relevant cone is defined.
 
 ## Facts & Assumptions
 
-**Given:** A fully faithful functor $F:\mathcal C\to\mathcal D$, a diagram
-$D:\mathcal J\to\mathcal C$, and a cone $\lambda$ whose image is limiting.
+**Given:** A fully faithful functor $F:\mathcal C\to\mathcal D$, a diagram $D:\mathcal J\to\mathcal C$, and a cone $\lambda$ whose image is limiting.
 
-[F1] Reflection means that a source cone is limiting whenever its image is
-limiting ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F1] Reflection means that a source cone is limiting whenever its image is limiting ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
-[F2] Full faithfulness means every hom-map is bijective
-([[def-full-faithful-and-essentially-surjective-functor]]).
+[F2] Full faithfulness means every hom-map is bijective ([[def-full-faithful-and-essentially-surjective-functor]]).
 
-[L1] Colimit reflection is the formal dual of limit reflection
-([[prop-limit-colimit-duality]]).
+[L1] Colimit reflection is the formal dual of limit reflection ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

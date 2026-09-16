@@ -41,12 +41,9 @@ $$\prod_{k=0}^{m-1}\Gamma\!\left(z+\frac{k}{m}\right)=(2\pi)^{(m-1)/2}m^{1/2-mz}
 
 **Given:** An integer $m\ge1$ and a complex number $z$ off the poles.
 
-[L1] Euler's limit formula holds for Gamma
-([[thm-euler-limit-formula-for-gamma]]).
+[L1] Euler's limit formula holds for Gamma ([[thm-euler-limit-formula-for-gamma]]).
 
-[L2] Real Stirling gives
-$n!\sim\sqrt{2\pi n}\,(n/e)^n$ as $n\to\infty$
-([[thm-real-stirling-formula]]).
+[L2] Real Stirling gives $n!\sim\sqrt{2\pi n}\,(n/e)^n$ as $n\to\infty$ ([[thm-real-stirling-formula]]).
 
 ## Proof
 

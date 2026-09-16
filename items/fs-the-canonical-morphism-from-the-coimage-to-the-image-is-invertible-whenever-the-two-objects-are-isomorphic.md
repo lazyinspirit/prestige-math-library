@@ -30,18 +30,13 @@ canonical map from the coimage to the image is automatically an isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** The torsion-free abelian-group subcategory and the morphism
-$2:\mathbb Z\to\mathbb Z$.
+**Given:** The torsion-free abelian-group subcategory and the morphism $2:\mathbb Z\to\mathbb Z$.
 
-[L1] The torsion-free abelian-group subcategory is not abelian
-([[cex-torsion-free-abelian-groups-do-not-form-an-abelian-category]]).
+[L1] The torsion-free abelian-group subcategory is not abelian ([[cex-torsion-free-abelian-groups-do-not-form-an-abelian-category]]).
 
-[L2] Every morphism with kernels and cokernels has a canonical map from its
-coimage to its image
-([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
+[L2] Every morphism with kernels and cokernels has a canonical map from its coimage to its image ([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
 
-[L3] The cokernel of $0\to A$ is $A$, and dually the kernel of $A\to0$ is $A$
-([[prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism]]).
+[L3] The cokernel of $0\to A$ is $A$, and dually the kernel of $A\to0$ is $A$ ([[prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism]]).
 
 ## Refutation
 

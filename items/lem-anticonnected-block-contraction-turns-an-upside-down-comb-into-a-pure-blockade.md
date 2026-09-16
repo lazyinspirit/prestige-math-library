@@ -46,28 +46,19 @@ $G[B]$ contains a pure $(k,|B|/k^{10})$-blockade.
 
 ## Facts & Assumptions
 
-**Given:** The graph $G$, the integer $k$, the set $B$, the displayed comb,
-and the vertex $v$ satisfying the hypotheses above.
+**Given:** The graph $G$, the integer $k$, the set $B$, the displayed comb, and the vertex $v$ satisfying the hypotheses above.
 
-[F1] In the displayed comb, $a_i$ is complete to $B_i$ and anticomplete to
-$B_j$ for $i\ne j$, while the blocks are pairwise disjoint and satisfy
-$|B_i|\ge |B|/k^8$ ([[def-comb-in-a-graph]]).
+[F1] In the displayed comb, $a_i$ is complete to $B_i$ and anticomplete to $B_j$ for $i\ne j$, while the blocks are pairwise disjoint and satisfy $|B_i|\ge |B|/k^8$ ([[def-comb-in-a-graph]]).
 
-[F2] A set $D$ is an anticonnected component of $G[X]$ precisely when it is
-the vertex set of a connected component of $\overline{G[X]}$
-([[def-anticonnected-graph-and-anticonnected-component]]).
+[F2] A set $D$ is an anticonnected component of $G[X]$ precisely when it is the vertex set of a connected component of $\overline{G[X]}$ ([[def-anticonnected-graph-and-anticonnected-component]]).
 
-[L1] Distinct anticonnected components of a graph are complete to one another
-([[lem-components-are-anticomplete-and-anticomponents-complete]]).
+[L1] Distinct anticonnected components of a graph are complete to one another ([[lem-components-are-anticomplete-and-anticomponents-complete]]).
 
-[F3] A blockade is pure when every pair of distinct blocks is either complete
-or anticomplete ([[def-complete-anticomplete-pure-and-x-sparse-blockades]]).
+[F3] A blockade is pure when every pair of distinct blocks is either complete or anticomplete ([[def-complete-anticomplete-pure-and-x-sparse-blockades]]).
 
-[F4] The graph $P_5$ has five vertices and four consecutive edges
-([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[F4] The graph $P_5$ has five vertices and four consecutive edges ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
-[F5] Complementation exchanges edges and nonedges
-([[def-graph-isomorphism-and-complement]]).
+[F5] Complementation exchanges edges and nonedges ([[def-graph-isomorphism-and-complement]]).
 
 ## Proof
 

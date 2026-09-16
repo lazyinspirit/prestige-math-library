@@ -56,19 +56,11 @@ The correction term is the sum of the usual positive half-residues.
 
 **Given:** A rational function $R$ with a two-degree denominator gap and only simple real poles, all indented above the real axis.
 
-[L1] At a finite singularity, a principal value uses equal left and right
-deletions, while on the real line it uses the symmetric truncation $[-T,T]$;
-neither assertion implies separate improper convergence
-([[def-cauchy-principal-value]],
-[[rem-cauchy-principal-value-dictionary]]).
+[L1] At a finite singularity, a principal value uses equal left and right deletions, while on the real line it uses the symmetric truncation $[-T,T]$; neither assertion implies separate improper convergence ([[def-cauchy-principal-value]], [[rem-cauchy-principal-value-dictionary]]).
 
-[L2] For an admissible cycle, the residue theorem gives its contour integral as
-$2\pi i$ times the index-weighted sum of the enclosed residues
-([[thm-residue-theorem-null-homologous-cycle]]).
+[L2] For an admissible cycle, the residue theorem gives its contour integral as $2\pi i$ times the index-weighted sum of the enclosed residues ([[thm-residue-theorem-null-homologous-cycle]]).
 
-[L3] If the large upper semicircle meets no pole and
-$\sup_{|z|=T,\,\Im z\ge0}|zR(z)|\to0$, then its integral tends to $0$
-([[lem-large-semicircle-vanishing]]).
+[L3] If the large upper semicircle meets no pole and $\sup_{|z|=T,\,\Im z\ge0}|zR(z)|\to0$, then its integral tends to $0$ ([[lem-large-semicircle-vanishing]]).
 
 [L4] An upper indentation contributes $-i\pi\operatorname{Res}(R,a)$ in the limit ([[lem-indented-arc-residue-limit]]).
 
@@ -80,10 +72,6 @@ $\sup_{|z|=T,\,\Im z\ge0}|zR(z)|\to0$, then its integral tends to $0$
 
 2.1 The contour pieces have their asserted limits as $T\to\infty$ and every $\varepsilon_j\downarrow0$. [given, step 1.1, L1, L3, L4, algebra]
 
-Indeed, the straight pieces sum to $I(T,\boldsymbol\varepsilon)$ from the
-statement. The degree gap gives $R(z)=O(|z|^{-2})$, so the large semicircle
-eventually meets no pole and satisfies the hypothesis of [L3]. Thus its
-integral tends to $0$. Finally, [L4] makes the $j$th upper indentation tend to
-$-i\pi\operatorname{Res}(R,a_j)$. [given, step 1.1, L1, L3, L4, algebra]
+Indeed, the straight pieces sum to $I(T,\boldsymbol\varepsilon)$ from the statement. The degree gap gives $R(z)=O(|z|^{-2})$, so the large semicircle eventually meets no pole and satisfies the hypothesis of [L3]. Thus its integral tends to $0$. Finally, [L4] makes the $j$th upper indentation tend to $-i\pi\operatorname{Res}(R,a_j)$. [given, step 1.1, L1, L3, L4, algebra]
 
 3.1 The residue theorem and step 2.1 give $\operatorname{PV}\!\int_{-\infty}^{\infty}R(x)\,dx-i\pi\sum_j\operatorname{Res}(R,a_j)=2\pi i\sum_{\Im a>0}\operatorname{Res}(R,a).$ Hence the joint limit exists, and moving the indentation term to the right proves the formula. [step 1.1, step 2.1, L2] ∎

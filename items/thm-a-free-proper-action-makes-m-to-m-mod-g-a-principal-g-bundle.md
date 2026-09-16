@@ -36,17 +36,11 @@ the orbit projection $q:M\to M/G$ is a smooth right principal $G$-bundle.
 
 **Given:** A smooth free proper left action of $G$ on $M$.
 
-[F1] The quotient is a smooth manifold and $q$ is a smooth surjective
-submersion. [[thm-free-proper-action-quotient-manifold]].
+[F1] The quotient is a smooth manifold and $q$ is a smooth surjective submersion. [[thm-free-proper-action-quotient-manifold]].
 
-[F2] Every point has a slice $S$ such that
-$A:G\times S\to G\cdot S$, $(g,s)\mapsto g\cdot s$, is a diffeomorphism.
-[[lem-local-slice-for-a-free-proper-action]].
+[F2] Every point has a slice $S$ such that $A:G\times S\to G\cdot S$, $(g,s)\mapsto g\cdot s$, is a diffeomorphism. [[lem-local-slice-for-a-free-proper-action]].
 
-[F3] A principal bundle has equivariant local product charts, with ordinary
-right multiplication on the group coordinate.
-[[def-principal-g-bundle-and-associated-fiber-bundle]],
-[[def-smooth-fibre-bundle-and-local-trivialization]].
+[F3] A principal bundle has equivariant local product charts, with ordinary right multiplication on the group coordinate. [[def-principal-g-bundle-and-associated-fiber-bundle]], [[def-smooth-fibre-bundle-and-local-trivialization]].
 
 ## Proof
 

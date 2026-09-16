@@ -32,9 +32,7 @@ $\dim E=n+r$.
 
 **Given:** A rank-$r$ smooth vector bundle $\pi:E\to M$ with $\dim M=n$.
 
-[L1] Every point of $E$ lies in a vector bundle chart identified with
-$U\times\mathbb R^r$ over an open set $U\subseteq M$
-([[def-vector-bundle-chart-and-transition-function]]).
+[L1] Every point of $E$ lies in a vector bundle chart identified with $U\times\mathbb R^r$ over an open set $U\subseteq M$ ([[def-vector-bundle-chart-and-transition-function]]).
 
 ## Proof
 

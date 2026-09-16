@@ -35,14 +35,11 @@ If the empty family has a biproduct, then that object is a zero object.
 
 **Given:** An empty biproduct object $0$.
 
-[L1] A biproduct is simultaneously a coproduct and a product
-([[def-biproduct]]).
+[L1] A biproduct is simultaneously a coproduct and a product ([[def-biproduct]]).
 
-[L2] The empty coproduct is initial and the empty product is terminal
-([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
+[L2] The empty coproduct is initial and the empty product is terminal ([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
 
-[L3] A zero object is an object that is both initial and terminal
-([[def-initial-terminal-and-zero-object]]).
+[L3] A zero object is an object that is both initial and terminal ([[def-initial-terminal-and-zero-object]]).
 
 ## Proof
 

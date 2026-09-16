@@ -35,19 +35,11 @@ $M_n(\mathbb R)\cong\mathbb R^{n^2}$.
 
 **Given:** The determinant map $\det:M_n(\mathbb R)\to\mathbb R$.
 
-[L1] A nonempty regular level set of a map into an $n$-manifold is an embedded
-submanifold of codimension $n$
-([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
+[L1] A nonempty regular level set of a map into an $n$-manifold is an embedded submanifold of codimension $n$ ([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
 
-[F1] The determinant is multiplicative, and an invertible matrix has inverse
-given by the adjugate formula
-([[def-determinant-of-a-square-matrix]], [[thm-determinant-multiplicative]],
-[[cor-inverse-matrix-by-adjugate]]).
+[F1] The determinant is multiplicative, and an invertible matrix has inverse given by the adjugate formula ([[def-determinant-of-a-square-matrix]], [[thm-determinant-multiplicative]], [[cor-inverse-matrix-by-adjugate]]).
 
-[L2] Euclidean differentials are computed by one-variable directional
-derivatives and the usual derivative algebra
-([[thm-total-derivative-computes-directional-and-partial-derivatives]],
-[[thm-algebra-of-derivatives]]).
+[L2] Euclidean differentials are computed by one-variable directional derivatives and the usual derivative algebra ([[thm-total-derivative-computes-directional-and-partial-derivatives]], [[thm-algebra-of-derivatives]]).
 
 ## Verification
 **Proof technique:** direct.

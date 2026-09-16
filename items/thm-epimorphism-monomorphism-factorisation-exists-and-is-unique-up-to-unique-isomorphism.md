@@ -43,20 +43,15 @@ $$m'=m_fu^{-1},\qquad u\circ e_f=e'.$$
 
 **Given:** An abelian category and a morphism $f:A\to B$.
 
-[L1] The canonical coimage-to-image map exists
-([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
+[L1] The canonical coimage-to-image map exists ([[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
 
-[L2] The coimage projection is epic and the image inclusion is monic
-([[prop-the-coimage-projection-is-epic-and-the-image-inclusion-is-monic]]).
+[L2] The coimage projection is epic and the image inclusion is monic ([[prop-the-coimage-projection-is-epic-and-the-image-inclusion-is-monic]]).
 
-[L3] In an abelian category the canonical coimage-to-image map is an
-isomorphism ([[def-abelian-category]]).
+[L3] In an abelian category the canonical coimage-to-image map is an isomorphism ([[def-abelian-category]]).
 
-[L4] Abelian categories are balanced
-([[thm-an-abelian-category-is-balanced]]).
+[L4] Abelian categories are balanced ([[thm-an-abelian-category-is-balanced]]).
 
-[L5] Every monomorphism is the kernel of its cokernel
-([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+[L5] Every monomorphism is the kernel of its cokernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
 
 ## Proof
 

@@ -32,19 +32,15 @@ $$r\,[a]_n:=[ra]_n.$$
 
 ## Facts & Assumptions
 
-**Given:** An integer $n\ge1$, a scalar $r\in\mathbb Z$, and residue classes
-$[a]_n,[b]_n\in\mathbb Z/n$.
+**Given:** An integer $n\ge1$, a scalar $r\in\mathbb Z$, and residue classes $[a]_n,[b]_n\in\mathbb Z/n$.
 
-[L1] Addition and multiplication of residue classes are representative-independent
-([[def-addition-and-multiplication-modulo-n]]).
+[L1] Addition and multiplication of residue classes are representative-independent ([[def-addition-and-multiplication-modulo-n]]).
 
 [L2] The integers form a commutative ring ([[thm-int-comm-ring]]).
 
-[L3] The additive residue classes form an abelian group
-([[thm-integers-modulo-n-basic-algebra]]).
+[L3] The additive residue classes form an abelian group ([[thm-integers-modulo-n-basic-algebra]]).
 
-[L4] A left module is an abelian group with a unital distributive associative
-scalar action ([[def-left-and-right-modules]]).
+[L4] A left module is an abelian group with a unital distributive associative scalar action ([[def-left-and-right-modules]]).
 
 ## Verification
 

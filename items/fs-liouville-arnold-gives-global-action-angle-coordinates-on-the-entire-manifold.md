@@ -39,12 +39,9 @@ phase space of every completely integrable system.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[thm-liouville-arnold-action-angle-theorem]] and [[prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Liouville–Arnold is a local theorem near a compact connected regular
-fibre and assumes a regular locally proper fibration.
-[[thm-liouville-arnold-action-angle-theorem]].
+[F1] Liouville–Arnold is a local theorem near a compact connected regular fibre and assumes a regular locally proper fibration. [[thm-liouville-arnold-action-angle-theorem]].
 
-[F2] Nontrivial period-lattice monodromy forbids global action–angle
-coordinates. [[prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates]].
+[F2] Nontrivial period-lattice monodromy forbids global action–angle coordinates. [[prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates]].
 
 ## Refutation
 

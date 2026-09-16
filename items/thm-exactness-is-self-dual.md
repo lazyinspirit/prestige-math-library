@@ -41,17 +41,11 @@ is exact at $B$ in $\mathcal A^{\mathrm{op}}$.
 
 ## Facts & Assumptions
 
-**Given:** A composable pair $A \xrightarrow{f} B \xrightarrow{g} C$ in an
-abelian category $\mathcal A$.
+**Given:** A composable pair $A \xrightarrow{f} B \xrightarrow{g} C$ in an abelian category $\mathcal A$.
 
-[L1] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L1] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L2] Exactness at $B$ means either
-$[\operatorname{im}(f)] = [\ker(g)]$ or, equivalently,
-$[\operatorname{coker}(f)] = [\operatorname{coim}(g)]$
-([[def-exactness-at-a-node]],
-[[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L2] Exactness at $B$ means either $[\operatorname{im}(f)] = [\ker(g)]$ or, equivalently, $[\operatorname{coker}(f)] = [\operatorname{coim}(g)]$ ([[def-exactness-at-a-node]], [[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
 ## Proof
 

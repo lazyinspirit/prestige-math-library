@@ -41,21 +41,13 @@ holomorphic. Then $f$ is Runge-approximable on $\Omega$ with poles in $P$.
 
 ## Facts & Assumptions
 
-**Given:** A plane domain $\Omega$, a pole set $P$ meeting every component of
-$\widehat{\mathbb C}\setminus\Omega$, and a holomorphic function $f$ on
-$\Omega$.
+**Given:** A plane domain $\Omega$, a pole set $P$ meeting every component of $\widehat{\mathbb C}\setminus\Omega$, and a holomorphic function $f$ on $\Omega$.
 
-[L1] Every compact set inside an open Euclidean set has a compact Jordan
-neighbourhood still inside that open set
-([[lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set]]).
+[L1] Every compact set inside an open Euclidean set has a compact Jordan neighbourhood still inside that open set ([[lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set]]).
 
-[L2] Runge approximation on one compact set holds once the pole set meets every
-component of its complement
-([[thm-runge-approximation-with-prescribed-poles]]).
+[L2] Runge approximation on one compact set holds once the pole set meets every component of its complement ([[thm-runge-approximation-with-prescribed-poles]]).
 
-[L3] Local-uniform approximation on a plane domain means uniform approximation
-on each compact set in an exhaustion
-([[def-runge-approximation-on-a-plane-domain]]).
+[L3] Local-uniform approximation on a plane domain means uniform approximation on each compact set in an exhaustion ([[def-runge-approximation-on-a-plane-domain]]).
 
 ## Proof
 

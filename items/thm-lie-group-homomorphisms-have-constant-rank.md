@@ -39,11 +39,9 @@ connectedness assumption on either group.
 
 **Given:** A smooth Lie-group homomorphism $F:G\to H$ and $g\in G$.
 
-[F1] Left translations are diffeomorphisms, so their differentials are
-linear isomorphisms. [[def-left-and-right-translations-on-a-lie-group]].
+[F1] Left translations are diffeomorphisms, so their differentials are linear isomorphisms. [[def-left-and-right-translations-on-a-lie-group]].
 
-[F2] Differentials satisfy the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F2] Differentials satisfy the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

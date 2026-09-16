@@ -36,14 +36,11 @@ sends a simple module $S$ to its projective cover.
 
 **Given:** A finite-dimensional algebra $A$.
 
-[L1] Every finite-dimensional module has a projective cover, unique up to
-isomorphism over the target ([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
+[L1] Every finite-dimensional module has a projective cover, unique up to isomorphism over the target ([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
 
-[F1] The head of a module is the quotient by its radical
-([[def-module-radical-socle-head-and-loewy-series]]).
+[F1] The head of a module is the quotient by its radical ([[def-module-radical-socle-head-and-loewy-series]]).
 
-[L2] The radical of a finite-length module is superfluous
-([[lem-radical-of-a-finite-length-module-is-superfluous]]).
+[L2] The radical of a finite-length module is superfluous ([[lem-radical-of-a-finite-length-module-is-superfluous]]).
 
 ## Proof
 

@@ -87,7 +87,4 @@ $$P=AB,\qquad A\cap B=Z(P),\qquad [A,B]=Z(P).$$
 
 ## Remarks
 
-The two subgroups are built from a chosen decomposition and are not canonical;
-another decomposition may yield the same pair or a different one. What the
-statement fixes is that a factorisation of this shape exists, with both factors
-as large as an abelian subgroup can be.
+The two subgroups are built from a chosen decomposition and are not canonical; another decomposition may yield the same pair or a different one. What the statement fixes is that a factorisation of this shape exists, with both factors as large as an abelian subgroup can be.

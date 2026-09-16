@@ -33,14 +33,9 @@ The graph $P_5$ has the polynomial Rödl property.
 
 **Given:** The graph $P_5$.
 
-[L1] There exists $a\ge 1$ such that every $\overline{P_5}$-free graph either
-has an $x$-restricted induced subgraph of size at least $x^a|V(G)|$ or has a
-complete or anticomplete $(k,|V(G)|/k^a)$-blockade for some $k\in[2,x^{-1}]$
-([[thm-co-p-five-free-graphs-yield-a-polynomial-restricted-set-or-a-complete-or-anticomplete-blockade]]).
+[L1] There exists $a\ge 1$ such that every $\overline{P_5}$-free graph either has an $x$-restricted induced subgraph of size at least $x^a|V(G)|$ or has a complete or anticomplete $(k,|V(G)|/k^a)$-blockade for some $k\in[2,x^{-1}]$ ([[thm-co-p-five-free-graphs-yield-a-polynomial-restricted-set-or-a-complete-or-anticomplete-blockade]]).
 
-[L2] The blockade alternative alone already forces an $x$-restricted induced
-subgraph of size at least $x^{3a}|V(G)|$
-([[thm-complete-or-anticomplete-blockade-hypotheses-force-restricted-induced-subgraphs]]).
+[L2] The blockade alternative alone already forces an $x$-restricted induced subgraph of size at least $x^{3a}|V(G)|$ ([[thm-complete-or-anticomplete-blockade-hypotheses-force-restricted-induced-subgraphs]]).
 
 ## Proof
 

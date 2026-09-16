@@ -36,8 +36,7 @@ There is a positive continuous $f:[0,\infty)\to\mathbb R$ for which $\int_0^\inf
 
 ## Facts & Assumptions
 
-**Given:** For each positive integer $k$, put $h_k=2^{-k-2}/k$ and let $s_k$ be the symmetric triangular function supported on $[k-h_k,k+h_k]$, zero at the endpoints, and of height $k$ at its center. Define
-$$f(x)=\frac1{(1+x)^2}+\sum_{k=1}^\infty s_k(x).$$
+**Given:** For each positive integer $k$, put $h_k=2^{-k-2}/k$ and let $s_k$ be the symmetric triangular function supported on $[k-h_k,k+h_k]$, zero at the endpoints, and of height $k$ at its center. Define $$f(x)=\frac1{(1+x)^2}+\sum_{k=1}^\infty s_k(x).$$
 
 [L1] The supports of the $s_k$ are pairwise disjoint, and every compact interval meets only finitely many of them.
 

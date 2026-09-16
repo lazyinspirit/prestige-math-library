@@ -27,12 +27,9 @@ Every finite language over an alphabet $\Sigma$ is regular.
 
 **Given:** A finite language $L\subseteq\Sigma^*$.
 
-[L1] A language over $\Sigma$ is regular exactly when it is recognized by some
-DFA over $\Sigma$, by [[def-regular-language-by-dfa-recognition]].
+[L1] A language over $\Sigma$ is regular exactly when it is recognized by some DFA over $\Sigma$, by [[def-regular-language-by-dfa-recognition]].
 
-[F1] Let $P$ be the set consisting of $\varepsilon$ together with every prefix
-of every word in $L$. Because $L$ is finite and each word has only finitely many
-prefixes, the set $P$ is finite.
+[F1] Let $P$ be the set consisting of $\varepsilon$ together with every prefix of every word in $L$. Because $L$ is finite and each word has only finitely many prefixes, the set $P$ is finite.
 
 ## Proof
 

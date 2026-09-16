@@ -42,22 +42,13 @@ $$g f = 0 \qquad\text{and}\qquad q k = 0.$$
 
 ## Facts & Assumptions
 
-**Given:** The composable pair $A \xrightarrow{f} B \xrightarrow{g} C$, a
-kernel $k:K \to B$ of $g$, and a cokernel $q:B \to Q$ of $f$.
+**Given:** The composable pair $A \xrightarrow{f} B \xrightarrow{g} C$, a kernel $k:K \to B$ of $g$, and a cokernel $q:B \to Q$ of $f$.
 
-[L1] Exactness at $B$ means $[\operatorname{im}(f)] = [\ker(g)]$, equivalently
-$[\operatorname{coker}(f)] = [\operatorname{coim}(g)]$
-([[def-exactness-at-a-node]],
-[[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L1] Exactness at $B$ means $[\operatorname{im}(f)] = [\ker(g)]$, equivalently $[\operatorname{coker}(f)] = [\operatorname{coim}(g)]$ ([[def-exactness-at-a-node]], [[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
-[L2] For the image factorization $f = m e$, one has $[\!m\!]\le[\!k\!]$ if and
-only if $g f = 0$, and $[\!k\!]\le[\!m\!]$ if and only if every morphism killed
-by $g$ factors through $m$
-([[thm-the-subobject-inequalities-underlying-exactness]]).
+[L2] For the image factorization $f = m e$, one has $[\!m\!]\le[\!k\!]$ if and only if $g f = 0$, and $[\!k\!]\le[\!m\!]$ if and only if every morphism killed by $g$ factors through $m$ ([[thm-the-subobject-inequalities-underlying-exactness]]).
 
-[L3] Kernels and cokernels are characterized by the usual vanishing and
-universal factorization properties
-([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
+[L3] Kernels and cokernels are characterized by the usual vanishing and universal factorization properties ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
 
 ## Proof
 

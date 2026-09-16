@@ -39,14 +39,11 @@ $$T\left(\int_Ef\,d\mu\right)=\int_E Tf\,d\mu.$$
 
 ## Facts & Assumptions
 
-[L1] A bounded linear operator satisfies $\|Tx\|\leq C\|x\|$ for some finite
-$C$ ([[def-bounded-linear-operator]]).
+[L1] A bounded linear operator satisfies $\|Tx\|\leq C\|x\|$ for some finite $C$ ([[def-bounded-linear-operator]]).
 
-[L2] A Bochner integral is the norm limit of integrals of an $L^1$-approximating
-simple sequence ([[def-bochner-integrable-function]]).
+[L2] A Bochner integral is the norm limit of integrals of an $L^1$-approximating simple sequence ([[def-bochner-integrable-function]]).
 
-[L3] The Banach-valued simple integral is linear and representation-independent
-([[lem-banach-valued-simple-integral-is-well-defined]]).
+[L3] The Banach-valued simple integral is linear and representation-independent ([[lem-banach-valued-simple-integral-is-well-defined]]).
 
 ## Proof
 

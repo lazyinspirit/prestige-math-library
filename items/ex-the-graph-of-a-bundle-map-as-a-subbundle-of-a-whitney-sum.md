@@ -40,11 +40,9 @@ is a smooth vector subbundle of the Whitney sum.
 
 **Given:** A smooth bundle map $\Phi:E\to F$ over one base $M$.
 
-[L1] The Whitney sum $E\oplus F$ is a smooth vector bundle
-([[thm-whitney-sums-are-smooth-vector-bundles]]).
+[L1] The Whitney sum $E\oplus F$ is a smooth vector bundle ([[thm-whitney-sums-are-smooth-vector-bundles]]).
 
-[L2] Constant-rank images of bundle maps over one base are smooth subbundles
-([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
+[L2] Constant-rank images of bundle maps over one base are smooth subbundles ([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
 
 ## Verification
 

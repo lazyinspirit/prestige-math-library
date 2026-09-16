@@ -85,13 +85,6 @@ requires the set to be **bounded above**, and $\mathbb{Z}$ is not.
 
 ## Remarks
 
-- **The failure is only at $(0,0)$.** For every other pair one of the two
-  arguments is nonzero, and then the common divisors are bounded above by its
-  absolute value ([[lem-divisor-bound]]), so [[lem-int-bounded-above-has-greatest]]
-  applies and the maximum exists.
+- **The failure is only at $(0,0)$.** For every other pair one of the two arguments is nonzero, and then the common divisors are bounded above by its absolute value ([[lem-divisor-bound]]), so [[lem-int-bounded-above-has-greatest]] applies and the maximum exists.
 
-- **The convention is not a patch over an inconvenience but over an absence.**
-  There is no integer that could serve as "the greatest common divisor of $0$ and
-  $0$" in the order of $\mathbb{Z}$, so a value has to be supplied; that it is
-  $0$ is forced by the identities $\gcd$ is required to satisfy
-  ([[ex-gcd-with-zero]]).
+- **The convention is not a patch over an inconvenience but over an absence.** There is no integer that could serve as "the greatest common divisor of $0$ and $0$" in the order of $\mathbb{Z}$, so a value has to be supplied; that it is $0$ is forced by the identities $\gcd$ is required to satisfy ([[ex-gcd-with-zero]]).

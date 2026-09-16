@@ -32,8 +32,7 @@ With the usual restriction of functions, this is a sheaf of sets on $X$.
 
 **Given:** An open cover $U=\bigcup_{i\in I}U_i$ of an open set $U$.
 
-[L1] A sheaf is exactly a presheaf with locality and unique gluing on every
-open cover ([[def-sheaf-on-topological-space]]).
+[L1] A sheaf is exactly a presheaf with locality and unique gluing on every open cover ([[def-sheaf-on-topological-space]]).
 
 ## Verification
 

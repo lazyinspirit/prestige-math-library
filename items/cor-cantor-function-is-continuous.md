@@ -73,14 +73,6 @@ continuity is deduced.
 
 ## Remarks
 
-- **[[thm-cantor-function-properties]] deliberately claims nothing about
-  continuity, and says so**, for want of a definition of continuity at that
-  point in the reading order. The present corollary supplies it, using nothing
-  about $c$ beyond claims 2 and 3 of that theorem.
+- **[[thm-cantor-function-properties]] deliberately claims nothing about continuity, and says so**, for want of a definition of continuity at that point in the reading order. The present corollary supplies it, using nothing about $c$ beyond claims 2 and 3 of that theorem.
 
-- **The Cantor function is not strictly monotone.** It is constant on every
-  interval removed in the construction of the Cantor set
-  ([[thm-cantor-function-properties]], claim 4), so it is nondecreasing but not
-  increasing, and in particular it is not injective. The continuous inverse
-  theorem ([[thm-continuous-inverse]]) therefore does not apply to it, and
-  nothing here suggests otherwise.
+- **The Cantor function is not strictly monotone.** It is constant on every interval removed in the construction of the Cantor set ([[thm-cantor-function-properties]], claim 4), so it is nondecreasing but not increasing, and in particular it is not injective. The continuous inverse theorem ([[thm-continuous-inverse]]) therefore does not apply to it, and nothing here suggests otherwise.

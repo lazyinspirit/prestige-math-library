@@ -40,12 +40,9 @@ $$k\llbracket X_1,\ldots,X_e\rrbracket \twoheadrightarrow A.$$
 
 **Given:** A complete equicharacteristic Noetherian local ring $(A,\mathfrak m)$ and the Axiom of Choice.
 
-[L1] The ring $A$ contains a coefficient field mapping isomorphically to its
-residue field ([[cor-equicharacteristic-complete-local-ring-has-coefficient-field]]).
+[L1] The ring $A$ contains a coefficient field mapping isomorphically to its residue field ([[cor-equicharacteristic-complete-local-ring-has-coefficient-field]]).
 
-[L2] Once the coefficient field and lifts of a basis of $\mathfrak m/\mathfrak m^2$
-are chosen, the associated formal-series map is surjective
-([[lem-cohen-presentation-surjective-by-completeness]]).
+[L2] Once the coefficient field and lifts of a basis of $\mathfrak m/\mathfrak m^2$ are chosen, the associated formal-series map is surjective ([[lem-cohen-presentation-surjective-by-completeness]]).
 
 ## Proof
 

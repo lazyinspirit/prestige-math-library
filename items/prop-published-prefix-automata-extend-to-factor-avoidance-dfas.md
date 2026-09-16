@@ -32,20 +32,13 @@ language of words over $\Sigma$ that avoid every factor in $B$.
 
 ## Facts & Assumptions
 
-**Given:** A finite alphabet $\Sigma$ and a finite nonempty set $B$ of nonempty
-words over $\Sigma$.
+**Given:** A finite alphabet $\Sigma$ and a finite nonempty set $B$ of nonempty words over $\Sigma$.
 
-[L1] The set $S_B$ consists of the words that avoid $B$ and are proper prefixes
-of words in $B$; it is finite, and $\varepsilon\in S_B$, by
-[[def-finite-words-factor-avoidance-and-prefix-states]].
+[L1] The set $S_B$ consists of the words that avoid $B$ and are proper prefixes of words in $B$; it is finite, and $\varepsilon\in S_B$, by [[def-finite-words-factor-avoidance-and-prefix-states]].
 
-[L2] In the published prefix automaton, if $sa$ still avoids $B$ then the edge
-labelled $a$ from $s$ goes to the longest suffix of $sa$ that lies in $S_B$;
-if $sa$ contains a forbidden factor, the letter $a$ is rejected, by
-[[def-prefix-automaton-for-a-finite-forbidden-factor-set]].
+[L2] In the published prefix automaton, if $sa$ still avoids $B$ then the edge labelled $a$ from $s$ goes to the longest suffix of $sa$ that lies in $S_B$; if $sa$ contains a forbidden factor, the letter $a$ is rejected, by [[def-prefix-automaton-for-a-finite-forbidden-factor-set]].
 
-[L3] A word is accepted by a DFA exactly when the final state lies in the
-accepting set, by [[def-dfa-acceptance-and-recognized-language]].
+[L3] A word is accepted by a DFA exactly when the final state lies in the accepting set, by [[def-dfa-acceptance-and-recognized-language]].
 
 ## Proof
 

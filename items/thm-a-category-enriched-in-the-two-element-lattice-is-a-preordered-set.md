@@ -37,11 +37,9 @@ category is exactly a preordered set.
 
 **Given:** A $\mathbf 2$-enriched category $\mathcal A$ or a preorder $(P,\le)$.
 
-[L1] A preorder is a reflexive and transitive relation on a set
-([[def-preorder]]).
+[L1] A preorder is a reflexive and transitive relation on a set ([[def-preorder]]).
 
-[L2] A $\mathcal V$-category has a set of objects, hom-objects, enriched
-composition, and enriched identities ([[def-enriched-category]]).
+[L2] A $\mathcal V$-category has a set of objects, hom-objects, enriched composition, and enriched identities ([[def-enriched-category]]).
 
 ## Proof
 

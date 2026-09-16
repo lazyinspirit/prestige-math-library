@@ -36,16 +36,11 @@ in the modular Grothendieck group $R_k(G)$.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional $KG$-module $V$ and two $G$-stable
-$\mathcal O G$-lattices $L,L'\subseteq V$.
+**Given:** A finite-dimensional $KG$-module $V$ and two $G$-stable $\mathcal O G$-lattices $L,L'\subseteq V$.
 
-[F1] The decomposition map is defined by taking the class of the reduction of a
-stable lattice
-([[def-decomposition-map-from-ordinary-to-modular-grothendieck-groups]]).
+[F1] The decomposition map is defined by taking the class of the reduction of a stable lattice ([[def-decomposition-map-from-ordinary-to-modular-grothendieck-groups]]).
 
-[A1] Because $L$ and $L'$ are full lattices in the same $K$-space, some
-integer $r\ge0$ satisfies $\pi^rL\subseteq L'\subseteq\pi^{-r}L$, where $\pi$
-is a uniformizer of $\mathcal O$.
+[A1] Because $L$ and $L'$ are full lattices in the same $K$-space, some integer $r\ge0$ satisfies $\pi^rL\subseteq L'\subseteq\pi^{-r}L$, where $\pi$ is a uniformizer of $\mathcal O$.
 
 ## Proof
 

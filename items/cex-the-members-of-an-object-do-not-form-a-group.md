@@ -30,15 +30,11 @@ group under the ambient addition of arrows.
 
 ## Facts & Assumptions
 
-**Given:** The abelian category $\mathbf{Ab}$ and the identity member
-$1_{\mathbb Z}:\mathbb Z \to \mathbb Z$.
+**Given:** The abelian category $\mathbf{Ab}$ and the identity member $1_{\mathbb Z}:\mathbb Z \to \mathbb Z$.
 
-[L1] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] Every member has a negative, and equivalence to zero is literal equality
-to the zero morphism
-([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
+[L2] Every member has a negative, and equivalence to zero is literal equality to the zero morphism ([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
 
 ## Counterexample
 

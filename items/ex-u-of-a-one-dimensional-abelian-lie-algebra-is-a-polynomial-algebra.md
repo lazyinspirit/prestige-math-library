@@ -34,8 +34,7 @@ $U(\mathfrak g)\cong k[t]$, with $\iota_{\mathfrak g}(x)$ corresponding to $t$.
 
 **Given:** The abelian Lie algebra $\mathfrak g=kx$.
 
-[L1] The enveloping algebra of an abelian Lie algebra is its symmetric algebra
-([[prop-enveloping-algebra-of-an-abelian-lie-algebra-is-its-symmetric-algebra]]).
+[L1] The enveloping algebra of an abelian Lie algebra is its symmetric algebra ([[prop-enveloping-algebra-of-an-abelian-lie-algebra-is-its-symmetric-algebra]]).
 
 ## Verification
 

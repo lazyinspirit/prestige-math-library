@@ -29,8 +29,7 @@ for at most $c f(|w|)$ steps, with inner clock expiry interpreted as rejection.
 
 ## Facts & Assumptions
 
-**Given:** the stated $f,g$ and fixed halting constructors for their binary
-values. Use the padded pair encoding of [[lem-effective-enumeration-of-clocked-machines]].
+**Given:** the stated $f,g$ and fixed halting constructors for their binary values. Use the padded pair encoding of [[lem-effective-enumeration-of-clocked-machines]].
 
 ## Proof
 

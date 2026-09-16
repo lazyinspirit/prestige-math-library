@@ -32,18 +32,13 @@ $\mathfrak g'=[\mathfrak g,\mathfrak g]$ is nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional Lie algebra $\mathfrak g$ over a
-characteristic-zero field.
+**Given:** A finite-dimensional Lie algebra $\mathfrak g$ over a characteristic-zero field.
 
-[L1] The derived algebra of a solvable finite-dimensional characteristic-zero
-Lie algebra is nilpotent
-([[cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero]]).
+[L1] The derived algebra of a solvable finite-dimensional characteristic-zero Lie algebra is nilpotent ([[cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero]]).
 
-[L2] Every nilpotent Lie algebra is solvable
-([[prop-nilpotent-lie-algebras-are-solvable]]).
+[L2] Every nilpotent Lie algebra is solvable ([[prop-nilpotent-lie-algebras-are-solvable]]).
 
-[L3] A Lie algebra with a solvable ideal and solvable quotient is solvable
-([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
+[L3] A Lie algebra with a solvable ideal and solvable quotient is solvable ([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
 
 ## Proof
 

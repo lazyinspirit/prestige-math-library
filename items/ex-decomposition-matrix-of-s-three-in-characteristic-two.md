@@ -32,18 +32,13 @@ $$\begin{pmatrix}1&0\\1&0\\0&1\end{pmatrix}.$$
 
 ## Facts & Assumptions
 
-**Given:** The ordinary trivial, sign, and standard characters of $S_3$ in
-characteristic $2$.
+**Given:** The ordinary trivial, sign, and standard characters of $S_3$ in characteristic $2$.
 
-[F1] The decomposition matrix is defined by the expansions of the restricted
-ordinary characters in the irreducible Brauer basis
-([[def-decomposition-numbers-and-decomposition-matrix]]).
+[F1] The decomposition matrix is defined by the expansions of the restricted ordinary characters in the irreducible Brauer basis ([[def-decomposition-numbers-and-decomposition-matrix]]).
 
-[F2] The decomposition map records those modular reductions
-([[def-decomposition-map-from-ordinary-to-modular-grothendieck-groups]]).
+[F2] The decomposition map records those modular reductions ([[def-decomposition-map-from-ordinary-to-modular-grothendieck-groups]]).
 
-[L1] The $2$-regular classes of $S_3$ are represented by $1$ and $(123)$
-([[ex-p-regular-classes-of-s-three]]).
+[L1] The $2$-regular classes of $S_3$ are represented by $1$ and $(123)$ ([[ex-p-regular-classes-of-s-three]]).
 
 ## Verification
 

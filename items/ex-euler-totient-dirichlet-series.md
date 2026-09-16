@@ -31,11 +31,9 @@ $$\sum_{k \ge 0} \varphi(p^k)p^{-ks} = \frac{1-p^{-s}}{1-p^{1-s}}.$$
 
 **Given:** A prime $p$ and $\Re s>2$.
 
-[L1] The Dirichlet series of $\varphi$ is $\zeta(s-1)/\zeta(s)$
-([[cor-euler-totient-dirichlet-series]]).
+[L1] The Dirichlet series of $\varphi$ is $\zeta(s-1)/\zeta(s)$ ([[cor-euler-totient-dirichlet-series]]).
 
-[L2] $\varphi(p^k)=p^k-p^{k-1}$ for $k \ge 1$
-([[thm-totient-of-a-prime-power]]).
+[L2] $\varphi(p^k)=p^k-p^{k-1}$ for $k \ge 1$ ([[thm-totient-of-a-prime-power]]).
 
 ## Verification
 

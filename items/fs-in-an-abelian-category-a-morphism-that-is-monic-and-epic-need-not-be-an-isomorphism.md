@@ -36,8 +36,7 @@ isomorphism.
 
 **Given:** An abelian category.
 
-[L1] Abelian categories are balanced
-([[thm-an-abelian-category-is-balanced]]).
+[L1] Abelian categories are balanced ([[thm-an-abelian-category-is-balanced]]).
 
 ## Refutation
 

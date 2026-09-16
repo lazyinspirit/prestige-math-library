@@ -34,18 +34,13 @@ abelian group $F(*)$, and every left $R$-module arises in this way.
 
 ## Facts & Assumptions
 
-**Given:** A ring $R$, its one-object preadditive category with object $*$, and
-an additive functor $F:R\to\mathbf{Ab}$ or a left $R$-module $M$.
+**Given:** A ring $R$, its one-object preadditive category with object $*$, and an additive functor $F:R\to\mathbf{Ab}$ or a left $R$-module $M$.
 
-[L1] A ring may be read as a one-object preadditive category whose
-endomorphisms compose by ring multiplication
-([[thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring]]).
+[L1] A ring may be read as a one-object preadditive category whose endomorphisms compose by ring multiplication ([[thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring]]).
 
-[L2] A left $R$-module is an abelian group with an action satisfying the four
-module axioms ([[def-left-and-right-modules]]).
+[L2] A left $R$-module is an abelian group with an action satisfying the four module axioms ([[def-left-and-right-modules]]).
 
-[L3] A module homomorphism preserves the additive group law and the scalar
-action ([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L3] A module homomorphism preserves the additive group law and the scalar action ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
 ## Proof
 

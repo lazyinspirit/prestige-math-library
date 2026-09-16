@@ -36,8 +36,7 @@ $$ \varphi\in 3\text{-}SAT \iff (G_\varphi,m)\in CLIQUE. $$
 
 ## Facts & Assumptions
 
-**Given:** A $3$-CNF formula
-$$ \varphi=C_1\land\cdots\land C_m, \qquad C_j=(\ell_{j1}\lor \ell_{j2}\lor \ell_{j3}). $$
+**Given:** A $3$-CNF formula $$ \varphi=C_1\land\cdots\land C_m, \qquad C_j=(\ell_{j1}\lor \ell_{j2}\lor \ell_{j3}). $$
 
 Here a literal is a Boolean variable or its negation, a clause is the disjunction of its three listed literal occurrences, and the formula is their conjunction. Repeated occurrences are allowed; the empty conjunction is true. The language $3$-SAT consists of well-formed encodings of such formulas admitting a satisfying truth assignment; malformed encodings are not members. Variable names and clause lists are explicitly encoded, so syntax and literal comparison can be checked in polynomial time.
 
@@ -46,6 +45,8 @@ Here a literal is a Boolean variable or its negation, a clause is the disjunctio
 [L2] A gadget reduction is correct only after the construction cost and both directions of the witness translation are proved, by [[def-reduction-gadget-and-interface-invariant]].
 
 [F1] A CLIQUE instance asks for $k$ pairwise adjacent vertices in a finite simple graph, by [[def-clique-independent-set-and-vertex-cover-problems]].
+
+
 
 ## Proof
 
@@ -59,6 +60,4 @@ Here a literal is a Boolean variable or its negation, a clause is the disjunctio
 
 2.2 Assume conversely that $G_\varphi$ has a clique $K$ of size $m$. By step 1.2, no two vertices from the same clause are adjacent, so $K$ contains exactly one vertex from each clause. Again by step 1.2, the literals represented by those vertices are pairwise noncomplementary. Assign truth values so that every chosen literal is true, and extend arbitrarily to variables not yet assigned. Then each clause contains its chosen true literal, so $\varphi$ is satisfiable. [F1, step 1.2, construct]
 
-2.3 The graph $G_\varphi$ has $3m$ vertices and at most $9m^2$ candidate edges, so the map in step 1.2 is computable in polynomial time. Steps 2.1 and 2.2 prove
-$$ \varphi\in 3\text{-}SAT \iff (G_\varphi,m)\in CLIQUE. $$
-By [L1] and [L2], this is a polynomial-time many-one reduction. [L1, L2, step 1.2, step 2.1, step 2.2] ∎
+3.1 The graph $G_\varphi$ has $3m$ vertices and at most $9m^2$ candidate edges, so the map in step 1.2 is computable in polynomial time. Steps 2.1 and 2.2 prove $$ \varphi\in 3\text{-}SAT \iff (G_\varphi,m)\in CLIQUE. $$ By [L1] and [L2], this is a polynomial-time many-one reduction. [L1, L2, step 1.2, step 2.1, step 2.2] ∎

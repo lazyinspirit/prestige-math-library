@@ -35,22 +35,13 @@ stability does not remove ill conditioning.
 
 ## Facts & Assumptions
 
-**Given:** An arithmetic model with unit roundoff $u\in(0,1)$, the parameter
-$\varepsilon=u$, the matrix
-$A=\operatorname{diag}(1,\varepsilon)$, the vector $b=(1,\varepsilon)$, the
-exact solution $x=(1,1)$, and an algorithm on the singleton input class
-$\mathcal I=\{(A,b)\}$ that returns $\widehat x=(1,0)$.
+**Given:** An arithmetic model with unit roundoff $u\in(0,1)$, the parameter $\varepsilon=u$, the matrix $A=\operatorname{diag}(1,\varepsilon)$, the vector $b=(1,\varepsilon)$, the exact solution $x=(1,1)$, and an algorithm on the singleton input class $\mathcal I=\{(A,b)\}$ that returns $\widehat x=(1,0)$.
 
-[L1] The normwise backward error is
-$\eta_2(\widehat x)=\lVert r\rVert_2/(\lVert A\rVert_2\lVert\widehat x\rVert_2+\lVert b\rVert_2)$
-for $r=b-A\widehat x$ ([[prop-explicit-formulas-for-normwise-and-componentwise-backward-error]]).
+[L1] The normwise backward error is $\eta_2(\widehat x)=\lVert r\rVert_2/(\lVert A\rVert_2\lVert\widehat x\rVert_2+\lVert b\rVert_2)$ for $r=b-A\widehat x$ ([[prop-explicit-formulas-for-normwise-and-componentwise-backward-error]]).
 
-[L2] Along admissible perturbations tending to zero, relative forward error is
-at most $(\kappa_{\mathrm{rel}}+o(1))$ times relative backward error
-([[thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order]]).
+[L2] Along admissible perturbations tending to zero, relative forward error is at most $(\kappa_{\mathrm{rel}}+o(1))$ times relative backward error ([[thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order]]).
 
-[A1] For the fixed linear map $f(b)=A^{-1}b$, one has
-$f(b+h)-f(b)=A^{-1}h$ by linearity.
+[A1] For the fixed linear map $f(b)=A^{-1}b$, one has $f(b+h)-f(b)=A^{-1}h$ by linearity.
 
 ## Verification
 

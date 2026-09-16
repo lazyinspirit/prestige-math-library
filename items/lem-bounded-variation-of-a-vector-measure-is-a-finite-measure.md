@@ -41,19 +41,15 @@ for every measurable $E$.
 
 ## Facts & Assumptions
 
-[L1] Vector-measure variation is the supremum of norm sums over finite
-measurable partitions, and bounded variation means finite total variation
-([[def-banach-valued-vector-measure-and-variation]]).
+[L1] Vector-measure variation is the supremum of norm sums over finite measurable partitions, and bounded variation means finite total variation ([[def-banach-valued-vector-measure-and-variation]]).
 
-[L2] A bounded functional satisfies $|x^*(x)|\leq\|x^*\|\|x\|$
-([[def-dual-space-of-a-normed-space]]).
+[L2] A bounded functional satisfies $|x^*(x)|\leq\|x^*\|\|x\|$ ([[def-dual-space-of-a-normed-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** A bounded-variation vector measure $\nu$ and a bounded functional
-$x^*$.
+**Given:** A bounded-variation vector measure $\nu$ and a bounded functional $x^*$.
 
 1.1 Prove finite additivity of variation. For disjoint $A,B$, joining finite partitions of $A$ and $B$ shows $|\nu|(A)+|\nu|(B)\leq|\nu|(A\cup B)$ (use partitions within $\varepsilon$ of each supremum). Conversely, intersect any finite partition of $A\cup B$ with $A$ and $B$; finite additivity of $\nu$ and the triangle inequality show that its norm sum is at most $|\nu|(A)+|\nu|(B)$. Taking the supremum gives equality. [given, L1]
 

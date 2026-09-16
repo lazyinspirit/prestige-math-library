@@ -36,16 +36,11 @@ sigma-finite.
 
 [L1] Counting measure is a measure with $c(\{x\})=1$ for each point. ([[def-counting-measure]], [[prop-counting-measure-is-a-measure]])
 
-[L2] A nonnegative density representation would satisfy
-$\lambda(E)=\int_Ef\,dc$ on every measurable set
-([[def-measure-with-density]]).
+[L2] A nonnegative density representation would satisfy $\lambda(E)=\int_Ef\,dc$ on every measurable set ([[def-measure-with-density]]).
 
 [L3] The interval $[0,1]$ is uncountable ([[cor-interval-uncountable]]).
 
-[L4] Lebesgue measure is the Lebesgue--Stieltjes measure of the identity, and
-that measure assigns $(a,b]$ the increment $b-a$
-([[cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity]],
-[[thm-existence-of-the-lebesgue-stieltjes-measure]]).
+[L4] Lebesgue measure is the Lebesgue--Stieltjes measure of the identity, and that measure assigns $(a,b]$ the increment $b-a$ ([[cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity]], [[thm-existence-of-the-lebesgue-stieltjes-measure]]).
 
 ## Refutation
 

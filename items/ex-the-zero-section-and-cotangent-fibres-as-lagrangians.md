@@ -32,15 +32,9 @@ zero section and every cotangent fibre $T_q^*Q$ are Lagrangian.
 
 **Given:** A smooth $n$-manifold $Q$ and its canonical cotangent form.
 
-[F1] In cotangent coordinates,
-$\omega_{\mathrm{can}}=\sum_i dq^i\wedge dp_i$.
-[[thm-the-canonical-cotangent-two-form-is-symplectic]].
+[F1] In cotangent coordinates, $\omega_{\mathrm{can}}=\sum_i dq^i\wedge dp_i$. [[thm-the-canonical-cotangent-two-form-is-symplectic]].
 
-[F2] In a $2n$-dimensional symplectic vector space a subspace is Lagrangian
-exactly when it is isotropic and of dimension $n$, and a submanifold is
-Lagrangian exactly when its tangent spaces are Lagrangian subspaces.
-[[thm-equivalent-characterizations-of-lagrangian-subspaces]],
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F2] In a $2n$-dimensional symplectic vector space a subspace is Lagrangian exactly when it is isotropic and of dimension $n$, and a submanifold is Lagrangian exactly when its tangent spaces are Lagrangian subspaces. [[thm-equivalent-characterizations-of-lagrangian-subspaces]], [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
 ## Verification
 

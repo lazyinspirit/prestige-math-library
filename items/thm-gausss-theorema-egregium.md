@@ -44,31 +44,21 @@ projection constructions and the supplied sectional-curvature interface.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the Euclidean surface, a point $p$, and a supplied
-local unit normal $\nu$.
+**Given:** Countable choice, the Euclidean surface, a point $p$, and a supplied local unit normal $\nu$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] The Gauss equation expresses intrinsic curvature as ambient curvature
-plus the two ordered quadratic `II` terms.
-[[thm-gauss-equation-for-a-riemannian-submanifold]].
+[F1] The Gauss equation expresses intrinsic curvature as ambient curvature plus the two ordered quadratic `II` terms. [[thm-gauss-equation-for-a-riemannian-submanifold]].
 
-[F2] The shape operator satisfies
-$g(S_\nu X,Y)=\langle\mathrm{II}(X,Y),\nu\rangle$ and is self-adjoint.
-[[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
+[F2] The shape operator satisfies $g(S_\nu X,Y)=\langle\mathrm{II}(X,Y),\nu\rangle$ and is self-adjoint. [[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
 
-[F3] Euclidean space is locally isometric to itself and hence flat.
-[[thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space]].
+[F3] Euclidean space is locally isometric to itself and hence flat. [[thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space]].
 
-[F4] For an orthonormal tangent pair $(e_1,e_2)$,
-$K(T_pM)=\operatorname{Rm}^M(e_1,e_2,e_2,e_1)$.
-[[def-sectional-curvature]].
+[F4] For an orthonormal tangent pair $(e_1,e_2)$, $K(T_pM)=\operatorname{Rm}^M(e_1,e_2,e_2,e_1)$. [[def-sectional-curvature]].
 
-[F5] The determinant of an endomorphism is basis independent.
-[[def-determinant-of-a-linear-operator]].
+[F5] The determinant of an endomorphism is basis independent. [[def-determinant-of-a-linear-operator]].
 
-[F6] The induced metric determines a unique Levi–Civita connection.
-[[thm-fundamental-theorem-of-riemannian-geometry]].
+[F6] The induced metric determines a unique Levi–Civita connection. [[thm-fundamental-theorem-of-riemannian-geometry]].
 
 ## Proof
 

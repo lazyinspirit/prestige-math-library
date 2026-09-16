@@ -29,12 +29,9 @@ into the error, giving the usual large-height local formula.
 
 ## Facts & Assumptions
 
-[L1] For $T\ge0$, the number of nontrivial zeros with ordinates in $[T,T+1]$
-is $O(\log(T+2))$, counted with multiplicity
-([[cor-zeta-zero-count-unit-interval]]).
+[L1] For $T\ge0$, the number of nontrivial zeros with ordinates in $[T,T+1]$ is $O(\log(T+2))$, counted with multiplicity ([[cor-zeta-zero-count-unit-interval]]).
 
-[L2] Nontrivial zeros occur in conjugate pairs
-([[thm-trivial-zeros-and-critical-strip]]).
+[L2] Nontrivial zeros occur in conjugate pairs ([[thm-trivial-zeros-and-critical-strip]]).
 
 ## Proof
 

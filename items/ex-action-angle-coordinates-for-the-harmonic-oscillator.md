@@ -38,9 +38,7 @@ coordinates.
 
 **Given:** The standard form $dq\wedge dp$ and positive frequency $\Omega$.
 
-[F1] Period-one action–angle coordinates satisfy
-$\omega=d\theta\wedge dI$.
-[[def-action-and-angle-coordinates]].
+[F1] Period-one action–angle coordinates satisfy $\omega=d\theta\wedge dI$. [[def-action-and-angle-coordinates]].
 
 ## Verification
 

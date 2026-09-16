@@ -36,8 +36,7 @@ $$S(n,k)=\frac{1}{k!}\sum_{i=0}^{k}(-1)^i\binom{k}{i}(k-i)^n.$$
 
 ## Facts & Assumptions
 
-**Given:** The surjection-counting formula of [[thm-the-number-of-surjections]]
-and the second-kind definition of [[def-stirling-second-kind-and-bell-number]].
+**Given:** The surjection-counting formula of [[thm-the-number-of-surjections]] and the second-kind definition of [[def-stirling-second-kind-and-bell-number]].
 
 ## Proof
 

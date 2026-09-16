@@ -71,20 +71,8 @@ once, and their boundary is everything.
 
 ## Remarks
 
-- **The same computation applies verbatim to the irrationals.** $X$ is dense
-  by [L2] and its complement $\mathbb{Q}_{\mathbb{R}}$ is dense too, so
-  $\overline{X} = \mathbb{R}$, $X^{\circ} = \varnothing$ and
-  $\partial X = \mathbb{R}$. Two complementary sets can therefore both have
-  boundary everything, which is what the density of each of them forces.
+- **The same computation applies verbatim to the irrationals.** $X$ is dense by [L2] and its complement $\mathbb{Q}_{\mathbb{R}}$ is dense too, so $\overline{X} = \mathbb{R}$, $X^{\circ} = \varnothing$ and $\partial X = \mathbb{R}$. Two complementary sets can therefore both have boundary everything, which is what the density of each of them forces.
 
-- **Empty interior is not smallness in any counting sense.** $X$ has empty
-  interior and is uncountable ([[cor-irrationals-uncountable]]), while
-  $\mathbb{Q}_{\mathbb{R}}$ has empty interior and is countable
-  ([[thm-rationals-countable]]). The interior measures whether the set contains
-  an interval, and nothing else.
+- **Empty interior is not smallness in any counting sense.** $X$ has empty interior and is uncountable ([[cor-irrationals-uncountable]]), while $\mathbb{Q}_{\mathbb{R}}$ has empty interior and is countable ([[thm-rationals-countable]]). The interior measures whether the set contains an interval, and nothing else.
 
-- **Where the density of the irrationals comes from.** It is proved in
-  [[lem-q-and-irrationals-dense-r]] by counting: an interval is uncountable and
-  the rationals are not, so an interval cannot consist of rationals alone. No
-  explicit irrational is needed for this computation, though one is available
-  ([[thm-of-square-roots]], [[fs-sqrt2-rational]]).
+- **Where the density of the irrationals comes from.** It is proved in [[lem-q-and-irrationals-dense-r]] by counting: an interval is uncountable and the rationals are not, so an interval cannot consist of rationals alone. No explicit irrational is needed for this computation, though one is available ([[thm-of-square-roots]], [[fs-sqrt2-rational]]).

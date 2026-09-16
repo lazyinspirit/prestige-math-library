@@ -29,12 +29,9 @@ $\mathbb Q_p$.
 
 **Given:** The ring $\mathbb Z_p \subseteq \mathbb Q_p$.
 
-[L1] $\mathbb Z_p$ sits inside $\mathbb Q_p$ and every element of $\mathbb Z_p$
-has a unique digit expansion ([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]],
-[[cor-zp-is-the-valuation-ring-of-qp]], [[thm-p-adic-digit-expansion]]).
+[L1] $\mathbb Z_p$ sits inside $\mathbb Q_p$ and every element of $\mathbb Z_p$ has a unique digit expansion ([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]], [[cor-zp-is-the-valuation-ring-of-qp]], [[thm-p-adic-digit-expansion]]).
 
-[L2] Being integral over $\mathbb Z$ means satisfying a monic polynomial with
-integer coefficients ([[def-integral-element-and-algebraic-integer]]).
+[L2] Being integral over $\mathbb Z$ means satisfying a monic polynomial with integer coefficients ([[def-integral-element-and-algebraic-integer]]).
 
 ## Counterexample
 

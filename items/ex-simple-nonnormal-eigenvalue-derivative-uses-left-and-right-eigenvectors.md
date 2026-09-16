@@ -38,9 +38,7 @@ whereas the Hermitian-style expression $x^\ast Hx$ would give $0$.
 
 **Given:** The matrices $A$ and $H$ above.
 
-[L1] For a simple eigenvalue normalized by $y^\ast x=1$, the derivative is
-$D\lambda(A)[H]=y^\ast Hx$
-([[thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x]]).
+[L1] For a simple eigenvalue normalized by $y^\ast x=1$, the derivative is $D\lambda(A)[H]=y^\ast Hx$ ([[thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x]]).
 
 ## Verification
 **Proof technique:** direct.

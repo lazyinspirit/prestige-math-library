@@ -33,15 +33,11 @@ into an associative unital ring over which $V$ is a module.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ and a vector space $V$ over the same
-field $k$.
+**Given:** A Lie algebra $\mathfrak g$ and a vector space $V$ over the same field $k$.
 
-[L1] A representation is a linear map
-$\rho:\mathfrak g\to\operatorname{End}_k(V)$ preserving the Lie bracket
-([[def-representation-of-a-lie-algebra]]).
+[L1] A representation is a linear map $\rho:\mathfrak g\to\operatorname{End}_k(V)$ preserving the Lie bracket ([[def-representation-of-a-lie-algebra]]).
 
-[L2] A left module over a ring requires an associative multiplication and a
-unit action as in [[def-left-and-right-modules]].
+[L2] A left module over a ring requires an associative multiplication and a unit action as in [[def-left-and-right-modules]].
 
 ## Proof
 

@@ -32,11 +32,9 @@ homomorphism.
 
 **Given:** The quotient map $\pi:C_4\to C_2$ written additively, and the set section $s([0])=[0]$, $s([1])=[1]$.
 
-[L1] A split extension requires a homomorphic section, not merely a set section
-([[def-split-extension-of-groups]]).
+[L1] A split extension requires a homomorphic section, not merely a set section ([[def-split-extension-of-groups]]).
 
-[L2] A group homomorphism must preserve addition in cyclic additive notation
-([[def-group-homomorphism]]).
+[L2] A group homomorphism must preserve addition in cyclic additive notation ([[def-group-homomorphism]]).
 
 ## Refutation
 

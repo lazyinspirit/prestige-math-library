@@ -34,12 +34,9 @@ Moser isotopy.
 
 **Given:** The surface and two forms in the statement.
 
-[F1] Integration is an isomorphism on top compactly supported de Rham
-cohomology of a connected oriented boundaryless manifold.
-[[thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology]].
+[F1] Integration is an isomorphism on top compactly supported de Rham cohomology of a connected oriented boundaryless manifold. [[thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology]].
 
-[F2] A cohomologous symplectic path on compact $M$ is trivialized by an
-isotopy. [[thm-moser-stability-theorem]].
+[F2] A cohomologous symplectic path on compact $M$ is trivialized by an isotopy. [[thm-moser-stability-theorem]].
 
 ## Verification
 

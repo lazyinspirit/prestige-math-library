@@ -39,18 +39,13 @@ The path $P_5$ is perfect but not a cograph.
 
 **Given:** The path $P_5$ on vertices $0,1,2,3,4$.
 
-[L1] A graph is perfect when every induced subgraph $H$ satisfies
-$\chi(H)=\omega(H)$ ([[def-perfect-graph]]).
+[L1] A graph is perfect when every induced subgraph $H$ satisfies $\chi(H)=\omega(H)$ ([[def-perfect-graph]]).
 
-[L2] The path $P_5$ has edges exactly $01,12,23,34$, so its first four
-vertices induce $P_4$
-([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L2] The path $P_5$ has edges exactly $01,12,23,34$, so its first four vertices induce $P_4$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
-[L3] A graph is a cograph if and only if it is $P_4$-free
-([[thm-cographs-are-exactly-the-p-four-free-graphs]]).
+[L3] A graph is a cograph if and only if it is $P_4$-free ([[thm-cographs-are-exactly-the-p-four-free-graphs]]).
 
-[F1] Every induced subgraph of a path is a disjoint union of shorter paths,
-obtained by deleting vertices and keeping the remaining consecutive segments.
+[F1] Every induced subgraph of a path is a disjoint union of shorter paths, obtained by deleting vertices and keeping the remaining consecutive segments.
 
 ## Verification
 

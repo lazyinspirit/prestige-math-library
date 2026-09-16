@@ -27,18 +27,11 @@ every computation branch on that input halts.
 
 ## Facts & Assumptions
 
-**Given:** A nondeterministic machine with states
-$q_0,q_{\mathrm{acc}},q_{\mathrm{rej}},q_L$, input alphabet $\{1\}$, tape
-alphabet $\{1,\sqcup\}$, and allowed transitions
-$$ \Delta(q_0,1)=\{(q_{\mathrm{acc}},1,R),(q_L,1,L)\},\qquad \Delta(q_L,1)=\{(q_L,1,L)\}. $$
-Take input word $w=1$.
+**Given:** A nondeterministic machine with states $q_0,q_{\mathrm{acc}},q_{\mathrm{rej}},q_L$, input alphabet $\{1\}$, tape alphabet $\{1,\sqcup\}$, and allowed transitions $$ \Delta(q_0,1)=\{(q_{\mathrm{acc}},1,R),(q_L,1,L)\},\qquad \Delta(q_L,1)=\{(q_L,1,L)\}. $$ Take input word $w=1$.
 
-[A1] The statement refuted is: nondeterministic acceptance requires every
-branch on the input to halt.
+[A1] The statement refuted is: nondeterministic acceptance requires every branch on the input to halt.
 
-[L1] A nondeterministic machine accepts an input when there exists an accepting
-computation on that input, by
-[[def-nondeterministic-accepting-computation]].
+[L1] A nondeterministic machine accepts an input when there exists an accepting computation on that input, by [[def-nondeterministic-accepting-computation]].
 
 ## Refutation
 

@@ -30,12 +30,9 @@ base along the lax monoidal functor $\mathcal V(\mathbf 1,-):\mathcal V\to\mathb
 
 **Given:** The change-of-base and underlying-category constructions.
 
-[L1] Lax monoidal change of base extends to a 2-functor on enriched categories
-([[thm-change-of-base-extends-to-functors-and-natural-transformations-and-is-a-two-functor]]).
+[L1] Lax monoidal change of base extends to a 2-functor on enriched categories ([[thm-change-of-base-extends-to-functors-and-natural-transformations-and-is-a-two-functor]]).
 
-[L2] The underlying-category construction sends each hom-object to the set of
-global elements $\mathcal V(\mathbf 1,-)$
-([[thm-the-underlying-category-construction-is-a-two-functor]]).
+[L2] The underlying-category construction sends each hom-object to the set of global elements $\mathcal V(\mathbf 1,-)$ ([[thm-the-underlying-category-construction-is-a-two-functor]]).
 
 ## Proof
 

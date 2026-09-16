@@ -69,20 +69,8 @@ vacuously and is not a linear subspace, since it does not contain $0_V$.
 
 ## Remarks
 
-- **The order of the two verifications matters.** Closure under scalar
-  multiplication is deduced *after* $0_V$ is known to lie in $W$, because it is
-  obtained by applying the test to the pair $u$, $0_V$. Running the argument in
-  the other order would use $0_V \in W$ before it had been established.
+- **The order of the two verifications matters.** Closure under scalar multiplication is deduced *after* $0_V$ is known to lie in $W$, because it is obtained by applying the test to the pair $u$, $0_V$. Running the argument in the other order would use $0_V \in W$ before it had been established.
 
-- **One test, three conditions.** The single condition is exactly as strong as the
-  three of [[def-linear-subspace]], and it is the form used in practice: to check
-  that a set is a linear subspace one shows it is nonempty and closes under a
-  single mixed expression. It is the linear analogue of the one-step subgroup test
-  $gh^{-1} \in H$ ([[lem-subgroup-criterion]]), and, exactly as there, the
-  nonemptiness hypothesis is what rules out the empty set.
+- **One test, three conditions.** The single condition is exactly as strong as the three of [[def-linear-subspace]], and it is the form used in practice: to check that a set is a linear subspace one shows it is nonempty and closes under a single mixed expression. It is the linear analogue of the one-step subgroup test $gh^{-1} \in H$ ([[lem-subgroup-criterion]]), and, exactly as there, the nonemptiness hypothesis is what rules out the empty set.
 
-- **Neither closure condition implies the other**, so a test combining them is not
-  extravagant. A subset of a vector space can be closed under addition and not
-  under scalar multiplication, and another can be closed under scalar
-  multiplication and not under addition; the companion examples page records a
-  witness of each kind.
+- **Neither closure condition implies the other**, so a test combining them is not extravagant. A subset of a vector space can be closed under addition and not under scalar multiplication, and another can be closed under scalar multiplication and not under addition; the companion examples page records a witness of each kind.

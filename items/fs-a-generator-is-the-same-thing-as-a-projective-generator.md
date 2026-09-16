@@ -35,11 +35,9 @@ A generator is the same thing as a projective generator.
 
 **Given:** The abelian group $G=\mathbb Z\oplus\mathbb Z/p$ for a prime $p$.
 
-[L1] Generators are defined by separation of morphisms
-([[def-generator-and-cogenerator-of-a-category]]).
+[L1] Generators are defined by separation of morphisms ([[def-generator-and-cogenerator-of-a-category]]).
 
-[L2] Direct summands of projectives are projective
-([[thm-a-direct-summand-of-a-projective-is-projective]]).
+[L2] Direct summands of projectives are projective ([[thm-a-direct-summand-of-a-projective-is-projective]]).
 
 [L3] Projective objects are the lifting objects of [[def-projective-object]].
 

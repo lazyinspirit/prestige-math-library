@@ -34,8 +34,7 @@ $\varepsilon$-moves.
 
 ## Facts & Assumptions
 
-**Given:** The displayed machine with start state $q_0$ and accepting state
-$q_3$.
+**Given:** The displayed machine with start state $q_0$ and accepting state $q_3$.
 
 [L1] By [[thm-regular-expression-to-epsilon-nfa]], a regular expression has an equivalent epsilon-NFA.
 

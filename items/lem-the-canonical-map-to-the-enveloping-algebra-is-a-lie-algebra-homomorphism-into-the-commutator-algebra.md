@@ -36,11 +36,9 @@ Lie-algebra homomorphism into the commutator Lie algebra.
 
 ## Facts & Assumptions
 
-**Given:** The quotient presentation of $U(\mathfrak g)$ and canonical linear
-map $\iota_{\mathfrak g}$ from [[def-universal-enveloping-algebra]].
+**Given:** The quotient presentation of $U(\mathfrak g)$ and canonical linear map $\iota_{\mathfrak g}$ from [[def-universal-enveloping-algebra]].
 
-[L1] Every generator $x\otimes y-y\otimes x-[x,y]$ of the defining ideal has
-zero image in the quotient.
+[L1] Every generator $x\otimes y-y\otimes x-[x,y]$ of the defining ideal has zero image in the quotient.
 
 ## Proof
 

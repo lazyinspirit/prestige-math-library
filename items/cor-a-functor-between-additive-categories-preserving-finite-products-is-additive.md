@@ -34,15 +34,11 @@ additive.
 
 ## Facts & Assumptions
 
-**Given:** A functor $F:\mathcal C\to\mathcal D$ between additive categories
-that preserves finite products.
+**Given:** A functor $F:\mathcal C\to\mathcal D$ between additive categories that preserves finite products.
 
-[L1] In an additive category, finite products are finite biproducts
-([[thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct]]).
+[L1] In an additive category, finite products are finite biproducts ([[thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct]]).
 
-[L2] A functor between additive categories is additive exactly when it preserves
-finite biproducts
-([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
+[L2] A functor between additive categories is additive exactly when it preserves finite biproducts ([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
 
 ## Proof
 

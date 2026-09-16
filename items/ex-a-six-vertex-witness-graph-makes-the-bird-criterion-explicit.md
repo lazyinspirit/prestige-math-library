@@ -40,16 +40,11 @@ moreover $H^+-v_3$ and $H^--v_6$ are both co-Bird.
 
 **Given:** The graph $H$ above, with distinguished vertices $v_1$ and $v_2$.
 
-[L1] Every graph on at most five vertices has the Erdős-Hajnal property
-([[thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property]]).
+[L1] Every graph on at most five vertices has the Erdős-Hajnal property ([[thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property]]).
 
-[L2] Substitution preserves the Erdős-Hajnal property
-([[thm-substitution-preserves-the-erdos-hajnal-property]]).
+[L2] Substitution preserves the Erdős-Hajnal property ([[thm-substitution-preserves-the-erdos-hajnal-property]]).
 
-[L3] The graph $H^+$ adds a new vertex adjacent to the two distinguished
-vertices, while $H^-$ does the same after deleting the distinguished edge if it
-is present; co-Bird is the complement of Bird
-([[def-h-plus-and-h-minus-for-two-special-vertices]], [[def-bird-graph-and-co-bird-graph]]).
+[L3] The graph $H^+$ adds a new vertex adjacent to the two distinguished vertices, while $H^-$ does the same after deleting the distinguished edge if it is present; co-Bird is the complement of Bird ([[def-h-plus-and-h-minus-for-two-special-vertices]], [[def-bird-graph-and-co-bird-graph]]).
 
 ## Verification
 

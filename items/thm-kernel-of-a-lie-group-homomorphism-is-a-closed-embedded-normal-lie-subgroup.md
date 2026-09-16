@@ -36,17 +36,11 @@ $$\operatorname{Lie}(K)=\ker(dF_e).$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a smooth Lie-group homomorphism
-$F:G\to H$.
+**Given:** $\mathrm{AC}_\omega$ and a smooth Lie-group homomorphism $F:G\to H$.
 
-[A1] Closed subgroups have unique embedded Lie-subgroup structures under
-countable choice. [[def-countable-choice]],
-[[thm-cartans-closed-subgroup-theorem]].
+[A1] Closed subgroups have unique embedded Lie-subgroup structures under countable choice. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
 
-[F1] Lie-group homomorphisms have constant rank, and the constant-rank theorem
-gives the local form $(u,v)\mapsto(u,0)$.
-[[thm-lie-group-homomorphisms-have-constant-rank]],
-[[thm-constant-rank-theorem-for-manifolds]].
+[F1] Lie-group homomorphisms have constant rank, and the constant-rank theorem gives the local form $(u,v)\mapsto(u,0)$. [[thm-lie-group-homomorphisms-have-constant-rank]], [[thm-constant-rank-theorem-for-manifolds]].
 
 ## Proof
 

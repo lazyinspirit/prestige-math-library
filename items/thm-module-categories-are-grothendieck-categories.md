@@ -34,18 +34,13 @@ a Grothendieck category.
 
 **Given:** A ring $R$.
 
-[L1] The category $R\text{-}\mathbf{Mod}$ is complete and cocomplete
-([[thm-rmod-is-complete-and-cocomplete]]).
+[L1] The category $R\text{-}\mathbf{Mod}$ is complete and cocomplete ([[thm-rmod-is-complete-and-cocomplete]]).
 
-[L2] In an AB3 category, an object is a generator exactly when the canonical
-coproduct map from its copies onto every object is epic
-([[thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree]]).
+[L2] In an AB3 category, an object is a generator exactly when the canonical coproduct map from its copies onto every object is epic ([[thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree]]).
 
-[L3] Equality in filtered colimits of sets is eventually witnessed at one common
-stage ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
+[L3] Equality in filtered colimits of sets is eventually witnessed at one common stage ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
 
-[F1] For a left $R$-module $M$, every module map $R\to M$ is determined by the
-image of $1$, and every element $m\in M$ defines such a map by $r\mapsto rm$.
+[F1] For a left $R$-module $M$, every module map $R\to M$ is determined by the image of $1$, and every element $m\in M$ defines such a map by $r\mapsto rm$.
 
 ## Proof
 

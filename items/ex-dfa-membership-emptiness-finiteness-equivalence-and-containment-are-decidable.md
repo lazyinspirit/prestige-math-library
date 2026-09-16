@@ -33,8 +33,7 @@ the two-state DFA that accepts exactly the words ending in $1$.
 
 ## Facts & Assumptions
 
-**Given:** The DFA's $D_{\mathrm{even}}$ and $D_{\mathrm{end1}}$ just
-described.
+**Given:** The DFA's $D_{\mathrm{even}}$ and $D_{\mathrm{end1}}$ just described.
 
 [L1] By [[thm-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable]], DFA membership, emptiness, finiteness, equivalence, and containment each have a decision procedure.
 

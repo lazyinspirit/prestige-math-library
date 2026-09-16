@@ -36,11 +36,9 @@ field or a discrete valuation ring.
 
 [F1] A ring is Noetherian by the definition fixed earlier ([[def-noetherian-ring]]).
 
-[L1] In a valuation ring the ideals are linearly ordered and every finitely
-generated ideal is principal ([[thm-valuation-ring-characterisations]]).
+[L1] In a valuation ring the ideals are linearly ordered and every finitely generated ideal is principal ([[thm-valuation-ring-characterisations]]).
 
-[L2] For a nonfield domain, being a Noetherian valuation ring is equivalent to
-being a DVR ([[thm-equivalent-characterisations-of-a-dvr]]).
+[L2] For a nonfield domain, being a Noetherian valuation ring is equivalent to being a DVR ([[thm-equivalent-characterisations-of-a-dvr]]).
 
 ## Proof
 

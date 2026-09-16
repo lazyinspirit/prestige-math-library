@@ -38,12 +38,9 @@ $b_1b_2$. Then the five vertices $v,a_1,b_1,b_2,a_2$ induce a copy of $C_5$.
 
 ## Facts & Assumptions
 
-**Given:** The graph obtained from
-[[ex-a-rooted-stable-tooth-comb-with-two-teeth]] by adding the edge $b_1b_2$.
+**Given:** The graph obtained from [[ex-a-rooted-stable-tooth-comb-with-two-teeth]] by adding the edge $b_1b_2$.
 
-[L1] In any rooted stable-tooth comb, a cross-edge between two different blocks
-forces an induced $C_5$
-([[lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle]]).
+[L1] In any rooted stable-tooth comb, a cross-edge between two different blocks forces an induced $C_5$ ([[lem-a-rooted-stable-tooth-comb-with-a-cross-edge-between-two-blocks-contains-a-five-cycle]]).
 
 ## Verification
 

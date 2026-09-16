@@ -90,22 +90,8 @@ now has to move the two new points, and it does: $-(+\infty) = -\infty$.
 
 ## Remarks
 
-- **Claim 1 needs no hypothesis, and that is the whole gain over $\mathbb{R}$.**
-  The corresponding real statement, $\inf S = -\sup(-S)$
-  ([[thm-infimum-property]]), carries the hypotheses that $S$ be nonempty and
-  bounded below, because otherwise neither side denotes anything. Here both sides
-  always denote, so the identity is unconditional and can be applied to the family
-  $\{i_n\}$ without first checking that it is bounded, which for an unbounded
-  sequence it is not.
+- **Claim 1 needs no hypothesis, and that is the whole gain over $\mathbb{R}$.** The corresponding real statement, $\inf S = -\sup(-S)$ ([[thm-infimum-property]]), carries the hypotheses that $S$ be nonempty and bounded below, because otherwise neither side denotes anything. Here both sides always denote, so the identity is unconditional and can be applied to the family $\{i_n\}$ without first checking that it is bounded, which for an unbounded sequence it is not.
 
-- **The reflection is an order anti-isomorphism, not merely a bijection.** What
-  step 2.1 uses is that $a \mapsto -a$ is a bijection *and* reverses the order,
-  both recorded in [[def-extended-reals]]. A bijection alone would not exchange
-  bounds, and an order-reversing map that is not injective would not carry least
-  upper bounds to greatest lower bounds.
+- **The reflection is an order anti-isomorphism, not merely a bijection.** What step 2.1 uses is that $a \mapsto -a$ is a bijection *and* reverses the order, both recorded in [[def-extended-reals]]. A bijection alone would not exchange bounds, and an order-reversing map that is not injective would not carry least upper bounds to greatest lower bounds.
 
-- **Consequences on this page.** [[cor-liminf-is-least-subsequential-limit]] is
-  [[thm-limsup-is-greatest-subsequential-limit]] read through this lemma, the
-  $\liminf$ half of [[thm-limsup-subadditive]] is its $\limsup$ half read the same
-  way, and the $-\infty$ case of
-  [[thm-convergence-iff-limsup-equals-liminf]] is its $+\infty$ case.
+- **Consequences on this page.** [[cor-liminf-is-least-subsequential-limit]] is [[thm-limsup-is-greatest-subsequential-limit]] read through this lemma, the $\liminf$ half of [[thm-limsup-subadditive]] is its $\limsup$ half read the same way, and the $-\infty$ case of [[thm-convergence-iff-limsup-equals-liminf]] is its $+\infty$ case.

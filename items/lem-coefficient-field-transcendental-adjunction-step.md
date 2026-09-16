@@ -29,16 +29,11 @@ $K' \subseteq A$ whose residue image contains $\overline u$.
 
 ## Facts & Assumptions
 
-**Given:** A local ring $(A,\mathfrak m)$, a residue-injective subfield
-$K \subseteq A$, and a residue element $\overline u$ transcendental over
-$\rho(K)$.
+**Given:** A local ring $(A,\mathfrak m)$, a residue-injective subfield $K \subseteq A$, and a residue element $\overline u$ transcendental over $\rho(K)$.
 
-[L1] A coefficient-field argument enlarges a residue-injective subfield by
-adjoining new residue elements when injectivity is preserved
-([[lem-maximal-residue-injective-subfield]]).
+[L1] A coefficient-field argument enlarges a residue-injective subfield by adjoining new residue elements when injectivity is preserved ([[lem-maximal-residue-injective-subfield]]).
 
-[L2] The residue image of a subfield is a field inside the residue field
-([[def-equicharacteristic-local-ring-and-coefficient-field]]).
+[L2] The residue image of a subfield is a field inside the residue field ([[def-equicharacteristic-local-ring-and-coefficient-field]]).
 
 ## Proof
 

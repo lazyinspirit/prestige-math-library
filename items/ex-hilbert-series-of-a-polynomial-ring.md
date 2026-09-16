@@ -43,11 +43,9 @@ so the Hilbert polynomial of $A$ is the constant polynomial $2$.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the standard grading on $k[x,y]$, and the quotient
-$A=k[x,y]/(y^2)$.
+**Given:** A field $k$, the standard grading on $k[x,y]$, and the quotient $A=k[x,y]/(y^2)$.
 
-[L1] Finite graded modules over standard graded algebras have rational Hilbert
-series and eventual polynomial growth ([[thm-hilbert-serre-theorem]]).
+[L1] Finite graded modules over standard graded algebras have rational Hilbert series and eventual polynomial growth ([[thm-hilbert-serre-theorem]]).
 
 ## Verification
 

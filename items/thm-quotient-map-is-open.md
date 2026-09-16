@@ -41,17 +41,13 @@ In particular, $q$ is an open map.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$, a closed linear subspace $M \le X$, a vector
-$x_0 \in X$, a real $r>0$, and a coset $\xi \in X/M$.
+**Given:** A normed space $X$, a closed linear subspace $M \le X$, a vector $x_0 \in X$, a real $r>0$, and a coset $\xi \in X/M$.
 
-[L1] The quotient map is $q(x)=x+M$, and addition of cosets is inherited from
-the vector-space quotient ([[def-quotient-vector-space-coset-notation]]).
+[L1] The quotient map is $q(x)=x+M$, and addition of cosets is inherited from the vector-space quotient ([[def-quotient-vector-space-coset-notation]]).
 
-[L2] The quotient norm is
-$\|x+M\|_{X/M} = \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
+[L2] The quotient norm is $\|x+M\|_{X/M} = \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
 
-[L3] Because $M$ is closed, the quotient seminorm is an honest norm on $X/M$
-([[thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]]).
+[L3] Because $M$ is closed, the quotient seminorm is an honest norm on $X/M$ ([[thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]]).
 
 ## Proof
 

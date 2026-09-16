@@ -41,22 +41,13 @@ the constant loop $c_{x_0}$, and $[\alpha]^{-1}=[\bar\alpha]$.
 
 [L1] The loop-class set, concatenation order, constant loop and reversed loop are those of [[def-based-loops-and-fundamental-group]].
 
-[L2] Affine real coordinate maps are continuous, and finitely many continuous
-pieces agreeing on closed seams paste; hence the piecewise-affine
-reparametrisations used below are continuous. Reversal and constant paths are
-continuous ([[thm-algebra-of-continuous-functions]],
-[[lem-continuity-is-local-and-pastes]], [[def-path-connected]]).
+[L2] Affine real coordinate maps are continuous, and finitely many continuous pieces agreeing on closed seams paste; hence the piecewise-affine reparametrisations used below are continuous. Reversal and constant paths are continuous ([[thm-algebra-of-continuous-functions]], [[lem-continuity-is-local-and-pastes]], [[def-path-connected]]).
 
 [L3] A path homotopy is a continuous map $I\times I\to X$ that fixes both path endpoints throughout the homotopy ([[def-homotopy-relative-and-path-homotopy]]).
 
-[L4] Maps into products are continuous exactly when their components are
-continuous, and composites of continuous maps are continuous
-([[thm-product-universal-property]],
-[[lem-continuity-is-local-and-pastes]], claim 1).
+[L4] Maps into products are continuous exactly when their components are continuous, and composites of continuous maps are continuous ([[thm-product-universal-property]], [[lem-continuity-is-local-and-pastes]], claim 1).
 
-[L5] For continuous maps into the convex line $\mathbb R$, the straight-line
-formula is a continuous homotopy
-([[lem-straight-line-homotopies-are-continuous]]).
+[L5] For continuous maps into the convex line $\mathbb R$, the straight-line formula is a continuous homotopy ([[lem-straight-line-homotopies-are-continuous]]).
 
 [L6] Continuous maps defined on finitely many closed sets and agreeing on overlaps paste to a continuous map ([[lem-continuity-is-local-and-pastes]], claim 3).
 

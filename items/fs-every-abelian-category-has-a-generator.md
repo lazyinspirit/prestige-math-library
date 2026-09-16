@@ -31,11 +31,9 @@ Every abelian category has a generator.
 
 **Given:** The abelian category $\mathbf{FinAb}$ of finite abelian groups.
 
-[L1] A generator must separate distinct morphisms by precomposition
-([[def-generator-and-cogenerator-of-a-category]]).
+[L1] A generator must separate distinct morphisms by precomposition ([[def-generator-and-cogenerator-of-a-category]]).
 
-[L2] An abelian category is a category with the usual additive exact structure
-([[def-abelian-category]]).
+[L2] An abelian category is a category with the usual additive exact structure ([[def-abelian-category]]).
 
 ## Refutation
 

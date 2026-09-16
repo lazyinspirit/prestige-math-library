@@ -38,11 +38,9 @@ Then the local ring $A_{\mathfrak m}$ is not a discrete valuation ring.
 
 **Given:** A field $k$, the cusp ring $A=k[t^2,t^3]$, and the prime ideal $\mathfrak m=(t^2,t^3)$.
 
-[F1] Localisation at a prime ideal means inverting the complement of that prime
-([[def-localisation-at-a-prime-ideal]]).
+[F1] Localisation at a prime ideal means inverting the complement of that prime ([[def-localisation-at-a-prime-ideal]]).
 
-[L1] A nonfield domain is a DVR exactly when it is a one-dimensional Noetherian
-local integrally closed domain ([[thm-equivalent-characterisations-of-a-dvr]]).
+[L1] A nonfield domain is a DVR exactly when it is a one-dimensional Noetherian local integrally closed domain ([[thm-equivalent-characterisations-of-a-dvr]]).
 
 ## Verification
 

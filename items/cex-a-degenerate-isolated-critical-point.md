@@ -35,10 +35,7 @@ An isolated critical point of a smooth function must be nondegenerate.
 
 **Given:** The smooth function $f:\mathbb R\to\mathbb R$, $f(x)=x^4$.
 
-[F1] Critical points are the points where the differential vanishes, and the
-critical-point Hessian is the second derivative in the standard coordinate
-([[def-critical-point-and-critical-value-of-a-smooth-function]],
-[[def-hessian-of-a-function-at-a-critical-point]]).
+[F1] Critical points are the points where the differential vanishes, and the critical-point Hessian is the second derivative in the standard coordinate ([[def-critical-point-and-critical-value-of-a-smooth-function]], [[def-hessian-of-a-function-at-a-critical-point]]).
 
 ## Counterexample
 

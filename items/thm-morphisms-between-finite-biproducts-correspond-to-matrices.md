@@ -35,18 +35,13 @@ is an isomorphism of abelian groups.
 
 ## Facts & Assumptions
 
-**Given:** An additive category with finite biproducts $A=\bigoplus_iA_i$ and
-$B=\bigoplus_jB_j$.
+**Given:** An additive category with finite biproducts $A=\bigoplus_iA_i$ and $B=\bigoplus_jB_j$.
 
-[L1] An additive category is preadditive, so hom-sets are abelian groups with
-finite sums ([[def-additive-category]]).
+[L1] An additive category is preadditive, so hom-sets are abelian groups with finite sums ([[def-additive-category]]).
 
-[L2] On a biproduct, the identity is the sum of injection-projection terms
-([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
+[L2] On a biproduct, the identity is the sum of injection-projection terms ([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
 
-[L3] Finite biproducts are canonically associative and commutative, so the
-bracketing of the finite sums does not matter
-([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]]).
+[L3] Finite biproducts are canonically associative and commutative, so the bracketing of the finite sums does not matter ([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]]).
 
 ## Proof
 

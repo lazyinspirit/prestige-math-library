@@ -37,19 +37,13 @@ Levi–Civita connection of the induced metric $g=\overline g|_{TM}$.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the embedded Riemannian submanifold, and the
-ambient Levi–Civita connection $\overline\nabla$.
+**Given:** Countable choice, the embedded Riemannian submanifold, and the ambient Levi–Civita connection $\overline\nabla$.
 
-[F1] The ambient derivative along $M$ is well defined and
-$\nabla^M_XY=(\overline\nabla_XY)^\top$.
-[[def-induced-connection-and-second-fundamental-form]].
+[F1] The ambient derivative along $M$ is well defined and $\nabla^M_XY=(\overline\nabla_XY)^\top$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F2] The ambient Levi–Civita connection is an affine connection that is
-torsion free and compatible with $\overline g$.
-[[def-levi-civita-connection]].
+[F2] The ambient Levi–Civita connection is an affine connection that is torsion free and compatible with $\overline g$. [[def-levi-civita-connection]].
 
-[F3] A supplied smooth Riemannian metric has exactly one Levi–Civita
-connection, with no additional choice. [[thm-fundamental-theorem-of-riemannian-geometry]].
+[F3] A supplied smooth Riemannian metric has exactly one Levi–Civita connection, with no additional choice. [[thm-fundamental-theorem-of-riemannian-geometry]].
 
 ## Proof
 

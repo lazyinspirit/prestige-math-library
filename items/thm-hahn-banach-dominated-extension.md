@@ -37,19 +37,13 @@ $F:X \to \mathbb{R}$ such that $F|_M=f$ and $F(x) \le p(x)$ for every $x \in X$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a real vector space $X$, a linear subspace $M \subseteq X$, a
-sublinear functional $p:X \to \mathbb{R}$, and a linear functional
-$f:M \to \mathbb{R}$ with $f \le p$ on $M$.
+**Given:** The Axiom of Choice, a real vector space $X$, a linear subspace $M \subseteq X$, a sublinear functional $p:X \to \mathbb{R}$, and a linear functional $f:M \to \mathbb{R}$ with $f \le p$ on $M$.
 
-[L1] The one-step extension problem over $M+\mathbb{R}x_0$ has a nonempty
-interval of admissible values for $F(x_0)$
-([[lem-hahn-banach-one-step-extension]]).
+[L1] The one-step extension problem over $M+\mathbb{R}x_0$ has a nonempty interval of admissible values for $F(x_0)$ ([[lem-hahn-banach-one-step-extension]]).
 
-[L2] The union of a chain of dominated extensions is again a well-defined
-dominated extension ([[lem-union-of-a-chain-of-dominated-extensions]]).
+[L2] The union of a chain of dominated extensions is again a well-defined dominated extension ([[lem-union-of-a-chain-of-dominated-extensions]]).
 
-[L3] Assuming the Axiom of Choice, a nonempty poset in which every chain has an
-upper bound has a maximal element ([[thm-zorn]]).
+[L3] Assuming the Axiom of Choice, a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
 
 ## Proof
 

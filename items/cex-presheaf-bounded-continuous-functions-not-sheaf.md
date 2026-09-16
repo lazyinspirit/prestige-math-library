@@ -32,11 +32,9 @@ with the usual restriction maps is a sheaf on $\mathbb R$.
 
 **Given:** The presheaf $C^0_b(-,\mathbb R)$ on $\mathbb R$.
 
-[F1] Restriction of a bounded continuous function is again bounded and
-continuous, so this is a presheaf ([[def-presheaf-on-topological-space]]).
+[F1] Restriction of a bounded continuous function is again bounded and continuous, so this is a presheaf ([[def-presheaf-on-topological-space]]).
 
-[L1] A sheaf must glue every compatible local family to a global section
-([[def-sheaf-on-topological-space]]).
+[L1] A sheaf must glue every compatible local family to a global section ([[def-sheaf-on-topological-space]]).
 
 ## Counterexample
 

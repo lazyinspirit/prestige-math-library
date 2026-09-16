@@ -31,14 +31,11 @@ the unit disc $\mathbb D$ are pairwise non-biholomorphic.
 
 **Given:** The three domains $\widehat{\mathbb C}$, $\mathbb C$, and $\mathbb D$.
 
-[F1] A conformal equivalence is a biholomorphism between domains
-([[def-conformal-equivalence-and-automorphism-group]]).
+[F1] A conformal equivalence is a biholomorphism between domains ([[def-conformal-equivalence-and-automorphism-group]]).
 
-[F2] The continuous image of a compact space is compact
-([[thm-continuous-image-of-a-compact-space-is-compact]]).
+[F2] The continuous image of a compact space is compact ([[thm-continuous-image-of-a-compact-space-is-compact]]).
 
-[F3] Every bounded entire function is constant
-([[thm-liouville-bounded-entire-function]]).
+[F3] Every bounded entire function is constant ([[thm-liouville-bounded-entire-function]]).
 
 ## Proof
 

@@ -30,19 +30,13 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The smooth map $\gamma:\mathbb R\to\mathbb R^2$,
-$\gamma(t)=(\sin t,\sin 2t)$.
+**Given:** The smooth map $\gamma:\mathbb R\to\mathbb R^2$, $\gamma(t)=(\sin t,\sin 2t)$.
 
-[F1] Embedded submanifolds are locally modeled on coordinate slices, hence on a
-one-manifold they cannot have a self-crossing neighbourhood
-([[def-embedded-submanifold-and-slice-chart]]).
+[F1] Embedded submanifolds are locally modeled on coordinate slices, hence on a one-manifold they cannot have a self-crossing neighbourhood ([[def-embedded-submanifold-and-slice-chart]]).
 
-[F2] An immersed submanifold need only come from an injective immersion on its
-own manifold ([[def-immersed-submanifold]]).
+[F2] An immersed submanifold need only come from an injective immersion on its own manifold ([[def-immersed-submanifold]]).
 
-[L1] $(\sin t)'=\cos t$ ([[thm-sine-and-cosine-derivatives]]), and the chain
-rule gives $(\sin 2t)'=2\cos 2t$
-([[thm-chain-rule-for-total-derivatives]]).
+[L1] $(\sin t)'=\cos t$ ([[thm-sine-and-cosine-derivatives]]), and the chain rule gives $(\sin 2t)'=2\cos 2t$ ([[thm-chain-rule-for-total-derivatives]]).
 
 ## Refutation
 **Proof technique:** direct.

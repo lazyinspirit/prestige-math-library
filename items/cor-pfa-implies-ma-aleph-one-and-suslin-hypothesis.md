@@ -32,20 +32,15 @@ holds.
 
 **Given:** PFA.
 
-[F1] PFA supplies a filter meeting any family of at most $\omega_1$ dense sets
-in a proper forcing. [[def-proper-forcing-axiom]]
+[F1] PFA supplies a filter meeting any family of at most $\omega_1$ dense sets in a proper forcing. [[def-proper-forcing-axiom]]
 
 [F2] Every ccc forcing is proper. [[thm-ccc-and-countably-closed-forcings-are-proper]]
 
-[F3] $\mathrm{MA}(\aleph_1)$ rules out Suslin trees.
-[[thm-ma-aleph-one-eliminates-suslin-trees]]
+[F3] $\mathrm{MA}(\aleph_1)$ rules out Suslin trees. [[thm-ma-aleph-one-eliminates-suslin-trees]]
 
-[F4] A Suslin line exists exactly when a Suslin tree exists; consequently SH
-is equivalent to nonexistence of a Suslin tree.
-[[thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras]]
+[F4] A Suslin line exists exactly when a Suslin tree exists; consequently SH is equivalent to nonexistence of a Suslin tree. [[thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras]]
 
-[A1] The supplier theorems work in ZFC and propagate their stated uses of AC.
-[[def-axiom-of-choice]]
+[A1] The supplier theorems work in ZFC and propagate their stated uses of AC. [[def-axiom-of-choice]]
 
 ## Proof
 

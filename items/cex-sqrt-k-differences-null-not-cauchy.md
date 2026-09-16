@@ -86,20 +86,8 @@ and adds the sharper statement that $\sqrt k$ diverges to $+\infty$
 
 ## Remarks
 
-- **The gaps are null and their sums are not.** The differences are about
-  $1/(2\sqrt k)$, so they tend to $0$; but they telescope, and
-  $x_m - x_k = \sqrt m - \sqrt k$ is as large as one likes for $m$ large. The
-  Cauchy condition constrains $|x_m - x_k|$ for *all* large pairs, and no
-  hypothesis about consecutive pairs alone can deliver that.
+- **The gaps are null and their sums are not.** The differences are about $1/(2\sqrt k)$, so they tend to $0$; but they telescope, and $x_m - x_k = \sqrt m - \sqrt k$ is as large as one likes for $m$ large. The Cauchy condition constrains $|x_m - x_k|$ for *all* large pairs, and no hypothesis about consecutive pairs alone can deliver that.
 
-- **What the correct hypothesis looks like.** Geometric decay of the gaps, with a
-  single ratio $c < 1$ at every index, does suffice
-  ([[def-contractive-sequence]], [[thm-contractive-implies-cauchy]]), because
-  then the telescoped sums are dominated by a convergent geometric bound. Merely
-  shrinking gaps are not enough either, which is
-  [[cex-strictly-decreasing-gaps-no-limit]].
+- **What the correct hypothesis looks like.** Geometric decay of the gaps, with a single ratio $c < 1$ at every index, does suffice ([[def-contractive-sequence]], [[thm-contractive-implies-cauchy]]), because then the telescoped sums are dominated by a convergent geometric bound. Merely shrinking gaps are not enough either, which is [[cex-strictly-decreasing-gaps-no-limit]].
 
-- **The same sequence separates two notions that are easy to confuse.** Its gaps
-  are null, so it is "eventually almost constant" in a naive reading; it is
-  nevertheless unbounded and divergent to $+\infty$. Nothing about the local
-  behaviour of a sequence controls its global behaviour.
+- **The same sequence separates two notions that are easy to confuse.** Its gaps are null, so it is "eventually almost constant" in a naive reading; it is nevertheless unbounded and divergent to $+\infty$. Nothing about the local behaviour of a sequence controls its global behaviour.

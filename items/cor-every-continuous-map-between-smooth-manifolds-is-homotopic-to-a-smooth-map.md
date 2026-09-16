@@ -34,8 +34,7 @@ Every continuous map between smooth manifolds is homotopic to a smooth map.
 
 **Given:** A continuous map between smooth manifolds.
 
-[L1] Every continuous manifold-valued map admits a smooth approximation that is
-homotopic to it ([[thm-whitney-approximation-for-manifold-valued-maps]]).
+[L1] Every continuous manifold-valued map admits a smooth approximation that is homotopic to it ([[thm-whitney-approximation-for-manifold-valued-maps]]).
 
 ## Proof
 **Proof technique:** direct.

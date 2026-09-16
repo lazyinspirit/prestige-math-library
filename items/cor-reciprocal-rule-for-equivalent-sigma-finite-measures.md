@@ -33,11 +33,7 @@ and therefore also $\mu$-almost everywhere.
 
 **Given:** AC and sigma-finite positive measures $\mu$ and $\nu$ with $\mu\ll\nu\ll\mu$.
 
-[L1] Under AC and one exhaustion finite for the outer and intermediate positive
-measures and the variation of the inner measure, the chain rule gives
-$d\eta/d\lambda=(d\eta/d\kappa)(d\kappa/d\lambda)$ almost everywhere along
-$\eta\ll\kappa\ll\lambda$
-([[thm-chain-rule-for-radon-nikodym-derivatives]]).
+[L1] Under AC and one exhaustion finite for the outer and intermediate positive measures and the variation of the inner measure, the chain rule gives $d\eta/d\lambda=(d\eta/d\kappa)(d\kappa/d\lambda)$ almost everywhere along $\eta\ll\kappa\ll\lambda$ ([[thm-chain-rule-for-radon-nikodym-derivatives]]).
 
 [L2] The constant function $1$ represents $d\mu/d\mu$ because $\mu(E)=\int_E1\,d\mu$ for every measurable set, and the representing density is unique up to almost-everywhere equality. ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]])
 

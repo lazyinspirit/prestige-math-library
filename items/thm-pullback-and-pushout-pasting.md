@@ -41,11 +41,9 @@ cancellation laws for pushouts.
 
 **Given:** The displayed commutative diagram.
 
-[F1] A pullback supplies a unique factor for each compatible pair
-([[def-pullbacks-and-pushouts]]).
+[F1] A pullback supplies a unique factor for each compatible pair ([[def-pullbacks-and-pushouts]]).
 
-[L1] Pullbacks and pushouts are exact formal duals
-([[prop-limit-colimit-duality]]).
+[L1] Pullbacks and pushouts are exact formal duals ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

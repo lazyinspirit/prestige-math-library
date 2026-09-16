@@ -34,12 +34,9 @@ its codomain, then $g \circ f$ is measurable.
 
 ## Facts & Assumptions
 
-**Given:** Measurable spaces $(X,\mathcal{A})$, $(Y,\mathcal{B})$,
-$(Z,\mathcal{C})$, a measurable map $f : X \to Y$, and a measurable map
-$g : Y \to Z$.
+**Given:** Measurable spaces $(X,\mathcal{A})$, $(Y,\mathcal{B})$, $(Z,\mathcal{C})$, a measurable map $f : X \to Y$, and a measurable map $g : Y \to Z$.
 
-[L1] Measurability means that preimages of measurable sets are measurable.
-([[def-measurable-function-between-measurable-spaces]])
+[L1] Measurability means that preimages of measurable sets are measurable. ([[def-measurable-function-between-measurable-spaces]])
 
 ## Proof
 

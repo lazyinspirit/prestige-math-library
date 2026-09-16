@@ -42,9 +42,7 @@ $$\sum_{n\geq0}B_n\frac{x^n}{n!}=\exp(e^x-1).$$
 
 ## Facts & Assumptions
 
-**Given:** The second-kind definition of
-[[def-stirling-second-kind-and-bell-number]] and the labelled symbolic rules of
-[[thm-labelled-symbolic-method-rules-for-exponential-generating-functions]].
+**Given:** The second-kind definition of [[def-stirling-second-kind-and-bell-number]] and the labelled symbolic rules of [[thm-labelled-symbolic-method-rules-for-exponential-generating-functions]].
 
 ## Proof
 

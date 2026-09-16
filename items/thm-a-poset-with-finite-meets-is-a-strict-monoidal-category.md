@@ -28,8 +28,7 @@ $x\otimes y:=x\wedge y$ and unit object $\top$.
 
 ## Facts & Assumptions
 
-**Given:** A poset $P$ with top element $\top$ and binary meet operation
-$\wedge$.
+**Given:** A poset $P$ with top element $\top$ and binary meet operation $\wedge$.
 
 [L1] A lattice supplies binary meets, written $\wedge$ ([[def-lattice-distributive-lattice-and-order-ideal]]).
 

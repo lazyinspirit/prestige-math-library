@@ -40,8 +40,7 @@ arguments.
 
 **Given:** A place $w$ of $\mathbb Q$ and nonzero elements $a,b,u,v\in Q_w$.
 
-[L1] By definition, $(c,d)_w=1$ exactly when $cx^2+dy^2=1$ is solvable over
-$Q_w$ ([[def-hilbert-symbol-over-a-rational-completion]]).
+[L1] By definition, $(c,d)_w=1$ exactly when $cx^2+dy^2=1$ is solvable over $Q_w$ ([[def-hilbert-symbol-over-a-rational-completion]]).
 
 ## Proof
 

@@ -28,12 +28,9 @@ has planar Lebesgue measure $1/3$.
 
 **Given:** The function $f(x)=x^2$ on $[0,1]$.
 
-[L1] The region under a nonnegative measurable function has product measure
-equal to its integral.
-([[thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral]])
+[L1] The region under a nonnegative measurable function has product measure equal to its integral. ([[thm-region-under-a-nonnegative-measurable-function-has-product-measure-equal-to-its-integral]])
 
-[L2] The fundamental theorem of calculus evaluates $\int_0^1 x^2\,dx$.
-([[thm-ftc-second-part]])
+[L2] The fundamental theorem of calculus evaluates $\int_0^1 x^2\,dx$. ([[thm-ftc-second-part]])
 
 ## Verification
 
@@ -43,5 +40,4 @@ equal to its integral.
 $$\lambda_2(R)=\int_0^1 x^2\,dx.$$
 
 2.1 Since $(x^3/3)'=x^2$, [L2] gives [L2, step 1.1]
-$$\lambda_2(R)=\int_0^1 x^2\,dx=\frac13.$$
-∎
+$$\lambda_2(R)=\int_0^1 x^2\,dx=\frac13.$$ ∎

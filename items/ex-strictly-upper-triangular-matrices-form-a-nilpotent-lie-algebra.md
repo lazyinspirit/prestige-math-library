@@ -33,12 +33,9 @@ $n\times n$ matrices is nilpotent of class $n-1$.
 
 **Given:** A field $k$, an integer $n\geq2$, and the matrix units $E_{ij}$.
 
-[L1] The lower central series satisfies
-$\gamma_{r+1}=[\mathfrak n_n,\gamma_r]$
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] The lower central series satisfies $\gamma_{r+1}=[\mathfrak n_n,\gamma_r]$ ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] Class $c$ means $\gamma_c\neq0$ and $\gamma_{c+1}=0$ for a nonzero
-nilpotent algebra ([[def-nilpotency-class-of-a-lie-algebra]]).
+[L2] Class $c$ means $\gamma_c\neq0$ and $\gamma_{c+1}=0$ for a nonzero nilpotent algebra ([[def-nilpotency-class-of-a-lie-algebra]]).
 
 ## Verification
 

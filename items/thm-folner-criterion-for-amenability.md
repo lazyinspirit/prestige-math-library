@@ -45,9 +45,7 @@ proving the reverse implication by contradiction.
 
 [L3] One may replace symmetric differences by one-sided boundaries up to a fixed factor ([[lem-equivalent-folner-boundary-formulations]]).
 
-[L4] Hall's theorem gives a matching saturating the finite left part of a
-finite bipartite graph exactly when every subset of that left part has enough
-neighbours ([[thm-hall-marriage-finite-bipartite]]).
+[L4] Hall's theorem gives a matching saturating the finite left part of a finite bipartite graph exactly when every subset of that left part has enough neighbours ([[thm-hall-marriage-finite-bipartite]]).
 
 ## Proof
 

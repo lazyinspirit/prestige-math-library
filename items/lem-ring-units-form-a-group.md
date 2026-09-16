@@ -77,19 +77,8 @@ $uv = 1 = vu$. Write $R^{\times}$ for the set of units. Then:
 
 ## Remarks
 
-- **Nothing is reproved here.** The group structure comes from
-  [[lem-monoid-units-form-a-group]], which was proved for an arbitrary monoid;
-  all this item does is name the monoid ($(R,\cdot,1)$, which exists by axiom
-  (R2) of [[def-ring]]) and record the one ring-specific fact, claim 3, which
-  needs $0 \cdot v = 0$ and so is not a monoid statement.
+- **Nothing is reproved here.** The group structure comes from [[lem-monoid-units-form-a-group]], which was proved for an arbitrary monoid; all this item does is name the monoid ($(R,\cdot,1)$, which exists by axiom (R2) of [[def-ring]]) and record the one ring-specific fact, claim 3, which needs $0 \cdot v = 0$ and so is not a monoid statement.
 
-- **Claim 3 is the reason $1 \ne 0$ appears as a hypothesis elsewhere.** In the
-  one-element ring every element, $0$ included, is a unit, so "every nonzero
-  element is a unit" is vacuously true there. [[def-division-ring]] therefore
-  requires $1 \ne 0$ separately, and so does
-  [[def-zero-divisor-and-integral-domain]].
+- **Claim 3 is the reason $1 \ne 0$ appears as a hypothesis elsewhere.** In the one-element ring every element, $0$ included, is a unit, so "every nonzero element is a unit" is vacuously true there. [[def-division-ring]] therefore requires $1 \ne 0$ separately, and so does [[def-zero-divisor-and-integral-domain]].
 
-- $R^{\times}$ is written multiplicatively and is in general not all of
-  $R \setminus \{0\}$: in $\mathbb{Z}$ it is $\{1,-1\}$, as the companion page
-  records. The rings in which it *is* all of $R \setminus \{0\}$ are exactly the
-  division rings.
+- $R^{\times}$ is written multiplicatively and is in general not all of $R \setminus \{0\}$: in $\mathbb{Z}$ it is $\{1,-1\}$, as the companion page records. The rings in which it *is* all of $R \setminus \{0\}$ are exactly the division rings.

@@ -99,11 +99,7 @@ treatment.
 
 ## Remarks
 
-- **Dictionary.** The space defined here is the same space as the published
-  [[ex-sorgenfrey-line]]; that item is homed on an examples page, whose items may
-  not be cited from outside their own A/B pair, which is why the space is
-  re-minted here rather than cited. Nothing above depends on the published
-  treatment.
+- **Dictionary.** The space defined here is the same space as the published [[ex-sorgenfrey-line]]; that item is homed on an examples page, whose items may not be cited from outside their own A/B pair, which is why the space is re-minted here rather than cited. Nothing above depends on the published treatment.
 
 **What fails in the product.** Lindel&ouml;fness of $\mathbb{R}_\ell$ rests on the rationals being dense and at most countable, so that a cover can be thinned to countably many rational-endpoint intervals plus countably many exceptional points. In the square each point $(x,-x)$ of the antidiagonal has a basic box around it meeting the antidiagonal in that point alone, and there are uncountably many such points; no countability of the rationals helps, because those boxes are pairwise distinct and each of them isolates one antidiagonal point, so an at most countable subfamily of the cover they generate can reach only at most countably many of them.
 

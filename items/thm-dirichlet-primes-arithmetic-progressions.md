@@ -34,9 +34,7 @@ $p\equiv a\pmod q$.
 
 **Given:** A modulus $q\ge1$ and a reduced residue class $a$ modulo $q$.
 
-[L1] The reciprocal-prime sum in this progression satisfies
-$\sum_{p\le x,\ p\equiv a(q)}1/p=\varphi(q)^{-1}\log\log x+O_q(1)$
-([[thm-mertens-primes-arithmetic-progressions]]).
+[L1] The reciprocal-prime sum in this progression satisfies $\sum_{p\le x,\ p\equiv a(q)}1/p=\varphi(q)^{-1}\log\log x+O_q(1)$ ([[thm-mertens-primes-arithmetic-progressions]]).
 
 ## Proof
 

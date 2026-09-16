@@ -33,8 +33,7 @@ all small colimits.
 
 ## Facts & Assumptions
 
-**Given:** The inclusion $I:\mathcal A\hookrightarrow\mathbf{Set}$ of the full
-subcategory whose only object is a fixed singleton $1$.
+**Given:** The inclusion $I:\mathcal A\hookrightarrow\mathbf{Set}$ of the full subcategory whose only object is a fixed singleton $1$.
 
 [L1] A full subcategory is reflective when its inclusion has a left adjoint ([[def-reflective-subcategory-and-reflector]]).
 

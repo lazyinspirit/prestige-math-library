@@ -44,16 +44,11 @@ $2,3,4,5,7,8,9,11,13,16,17,19,23,25,27,29$.
 
 **Given:** The cutoffs $x=10,20,30$.
 
-[L1] $\pi(x)$ counts primes, $\theta(x)$ sums $\log p$ over primes, and
-$\psi(x)$ sums $\Lambda(n)$ over integers $n\le x$
-([[def-prime-counting-function]], [[def-chebyshev-theta-function]],
-[[def-chebyshev-psi-function]]).
+[L1] $\pi(x)$ counts primes, $\theta(x)$ sums $\log p$ over primes, and $\psi(x)$ sums $\Lambda(n)$ over integers $n\le x$ ([[def-prime-counting-function]], [[def-chebyshev-theta-function]], [[def-chebyshev-psi-function]]).
 
-[L2] The function $\psi$ is the sum of $\log p$ over prime powers $p^k\le x$
-([[lem-chebyshev-psi-prime-power-expansion]]).
+[L2] The function $\psi$ is the sum of $\log p$ over prime powers $p^k\le x$ ([[lem-chebyshev-psi-prime-power-expansion]]).
 
-[L3] The difference $\psi(x)-\theta(x)$ is carried entirely by prime powers
-$p^k$ with $k\ge2$ ([[lem-chebyshev-functions-prime-power-comparison]]).
+[L3] The difference $\psi(x)-\theta(x)$ is carried entirely by prime powers $p^k$ with $k\ge2$ ([[lem-chebyshev-functions-prime-power-comparison]]).
 
 ## Verification
 

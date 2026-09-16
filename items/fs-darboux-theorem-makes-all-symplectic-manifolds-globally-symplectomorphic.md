@@ -30,11 +30,9 @@ symplectomorphic.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and the proposed consequence of Darboux's
-theorem.
+**Given:** $\mathrm{AC}_\omega$ and the proposed consequence of Darboux's theorem.
 
-[F1] Darboux's theorem supplies coordinates only on a neighbourhood of each
-chosen point. [[thm-darboux-theorem]].
+[F1] Darboux's theorem supplies coordinates only on a neighbourhood of each chosen point. [[thm-darboux-theorem]].
 
 ## Refutation
 

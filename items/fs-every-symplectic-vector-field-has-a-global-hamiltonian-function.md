@@ -31,8 +31,7 @@ Every symplectic vector field has a global Hamiltonian function.
 
 **Given:** The proposed universal claim.
 
-[F1] The obstruction quotient is $H^1_{\mathrm{dR}}(M)$.
-[[thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]].
+[F1] The obstruction quotient is $H^1_{\mathrm{dR}}(M)$. [[thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]].
 
 ## Refutation
 

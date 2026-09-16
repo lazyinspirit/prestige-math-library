@@ -29,11 +29,9 @@ $$H^1(C_2,C_3)=0.$$
 
 **Given:** The trivial action of $C_2$ on $C_3$.
 
-[L1] For a trivial action, $H^1(G,A)\cong\operatorname{Hom}(G,A)$
-([[cor-first-cohomology-for-a-trivial-action-is-hom]]).
+[L1] For a trivial action, $H^1(G,A)\cong\operatorname{Hom}(G,A)$ ([[cor-first-cohomology-for-a-trivial-action-is-hom]]).
 
-[L2] A group of order $3$ is cyclic, and every nonidentity element has order
-$3$ ([[thm-classification-of-cyclic-groups]]).
+[L2] A group of order $3$ is cyclic, and every nonidentity element has order $3$ ([[thm-classification-of-cyclic-groups]]).
 
 ## Verification
 

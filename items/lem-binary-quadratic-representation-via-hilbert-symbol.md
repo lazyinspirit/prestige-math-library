@@ -40,8 +40,7 @@ $$
 
 [L1] The Hilbert symbol satisfies $(c,d)_v=1$ exactly when $cX^2+dY^2=1$ is soluble over $Q_v$ ([[def-hilbert-symbol-over-a-rational-completion]]).
 
-[L2] The symbol depends only on square classes
-([[thm-hilbert-symbol-is-symmetric-bilinear-and-nondegenerate]]).
+[L2] The symbol depends only on square classes ([[thm-hilbert-symbol-is-symmetric-bilinear-and-nondegenerate]]).
 
 ## Proof
 

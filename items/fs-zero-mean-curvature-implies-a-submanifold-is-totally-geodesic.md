@@ -36,31 +36,15 @@ fundamental form, so nonzero trace-free extrinsic curvature can remain.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and the open parameter domain
-$U=(-\pi,\pi)\times\mathbb R$.
+**Given:** Countable choice and the open parameter domain $U=(-\pi,\pi)\times\mathbb R$.
 
-[F1] For a positive-dimensional immersion, the averaged mean-curvature vector
-is $\mathbf H=\frac1m\operatorname{tr}_g\mathrm{II}$.
-[[def-mean-curvature-vector]].
+[F1] For a positive-dimensional immersion, the averaged mean-curvature vector is $\mathbf H=\frac1m\operatorname{tr}_g\mathrm{II}$. [[def-mean-curvature-vector]].
 
-[F2] An embedded Riemannian submanifold is totally geodesic exactly when its
-normal-valued second fundamental form vanishes identically.
-[[def-totally-geodesic-submanifold]].
+[F2] An embedded Riemannian submanifold is totally geodesic exactly when its normal-valued second fundamental form vanishes identically. [[def-totally-geodesic-submanifold]].
 
-[F3] The second fundamental form is the normal component of the ambient
-covariant derivative, and the Euclidean Levi–Civita symbols vanish in
-Cartesian coordinates.
-[[def-induced-connection-and-second-fundamental-form]],
-[[prop-christoffel-formula-for-the-levi-civita-connection]].
+[F3] The second fundamental form is the normal component of the ambient covariant derivative, and the Euclidean Levi–Civita symbols vanish in Cartesian coordinates. [[def-induced-connection-and-second-fundamental-form]], [[prop-christoffel-formula-for-the-levi-civita-connection]].
 
-[F4] The derivatives and identities
-$(\cosh v)'=\sinh v$, $(\sinh v)'=\cosh v$,
-$\cosh^2v-\sinh^2v=1$,
-$(\sin u)'=\cos u$, $(\cos u)'=-\sin u$, and
-$\sin^2u+\cos^2u=1$ hold.
-[[thm-hyperbolic-identities-and-derivatives]],
-[[thm-sine-and-cosine-derivatives]],
-[[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]].
+[F4] The derivatives and identities $(\cosh v)'=\sinh v$, $(\sinh v)'=\cosh v$, $\cosh^2v-\sinh^2v=1$, $(\sin u)'=\cos u$, $(\cos u)'=-\sin u$, and $\sin^2u+\cos^2u=1$ hold. [[thm-hyperbolic-identities-and-derivatives]], [[thm-sine-and-cosine-derivatives]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]].
 
 ## Refutation
 

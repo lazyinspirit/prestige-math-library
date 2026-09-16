@@ -36,14 +36,11 @@ $\mathcal C^{\mathrm{op}}$. The dual assertion exchanges colimits and limits.
 
 **Given:** A diagram $D:\mathcal J\to\mathcal C$.
 
-[F1] Limits are terminal cones and colimits are initial cocones
-([[def-limit-and-colimit-of-a-diagram]]).
+[F1] Limits are terminal cones and colimits are initial cocones ([[def-limit-and-colimit-of-a-diagram]]).
 
-[F2] The opposite category has the same objects and reverses all morphisms and
-composites ([[def-opposite-category]]).
+[F2] The opposite category has the same objects and reverses all morphisms and composites ([[def-opposite-category]]).
 
-[L1] A formally dual theorem follows by reversing every morphism and the order
-of every composite ([[thm-category-theoretic-duality-principle]]).
+[L1] A formally dual theorem follows by reversing every morphism and the order of every composite ([[thm-category-theoretic-duality-principle]]).
 
 ## Proof
 

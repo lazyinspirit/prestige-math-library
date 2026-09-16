@@ -32,17 +32,11 @@ $$\mathbb E[X]=1.$$
 
 ## Facts & Assumptions
 
-**Given:** The weights $2^{-(n+1)}$ on $\mathbb N$ and the coordinate map
-$X(n)=n$.
+**Given:** The weights $2^{-(n+1)}$ on $\mathbb N$ and the coordinate map $X(n)=n$.
 
-[L1] A probability measure has total mass $1$, the law of a random element is
-its pushforward measure, and change of variables computes expectation from the
-law ([[def-probability-measure]],
-[[def-law-or-distribution-of-a-random-element]],
-[[thm-change-of-variables-for-expectation]]).
+[L1] A probability measure has total mass $1$, the law of a random element is its pushforward measure, and change of variables computes expectation from the law ([[def-probability-measure]], [[def-law-or-distribution-of-a-random-element]], [[thm-change-of-variables-for-expectation]]).
 
-[L2] A real random variable is a measurable map into $\mathbb R$
-([[def-random-element-and-real-random-variable]]).
+[L2] A real random variable is a measurable map into $\mathbb R$ ([[def-random-element-and-real-random-variable]]).
 
 ## Verification
 

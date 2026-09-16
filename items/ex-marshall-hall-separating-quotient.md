@@ -32,11 +32,9 @@ contains $H$ as a free factor and omits $w$.
 
 ## Facts & Assumptions
 
-**Given:** The subgroup $H=\langle b,a^2\rangle$ of $F(a,b)$ and the element
-$w=a$.
+**Given:** The subgroup $H=\langle b,a^2\rangle$ of $F(a,b)$ and the element $w=a$.
 
-[L1] Every finitely generated subgroup of a finite-rank free group is a free
-factor of some finite-index subgroup ([[thm-marshall-hall-free-factor-theorem]]).
+[L1] Every finitely generated subgroup of a finite-rank free group is a free factor of some finite-index subgroup ([[thm-marshall-hall-free-factor-theorem]]).
 
 ## Verification
 

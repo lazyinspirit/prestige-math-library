@@ -1,0 +1,63 @@
+---
+id: rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel
+kind: remark
+title: Surjectivity alone does not give a Banach submanifold without a split kernel
+status: draft
+origin: pipeline
+pipeline_run: phase-2-remaining-27
+deps: [thm-regular-value-theorem-for-banach-manifolds, thm-bounded-right-inverse-iff-kernel-is-complemented, cor-finite-dimensional-subspaces-are-complemented, def-dependent-choice, def-axiom-of-choice, def-complemented-subspace, cor-finite-codimensional-subspaces-are-complemented, def-fredholm-operator-cokernel-and-index]
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "Alberto Abbondandolo and Pietro Majer, Lectures on the Morse Complex — §2.11 (regular values as onto with complemented kernel)"
+      url: "https://people.dm.unipi.it/abbondandolo/preprints/montreal.pdf"
+---
+
+## Remarks
+
+The regular value theorem of this page
+([[thm-regular-value-theorem-for-banach-manifolds]]) assumes that at every point
+of the level set the derivative is surjective **with complemented kernel**
+([[def-complemented-subspace]]). For general Banach spaces the second clause is
+not a consequence of the first, and it cannot be dropped:
+
+- **Equivalent formulation.** Assume the Axiom of Dependent Choice
+  ([[def-dependent-choice]]). For a surjective bounded linear operator
+  $L : X \to Y$ between Banach spaces, $\ker L$ is complemented in $X$ if and
+  only if $L$ admits a bounded right inverse
+  ([[thm-bounded-right-inverse-iff-kernel-is-complemented]]). Thus the
+  hypothesis of the regular value theorem is exactly the requirement that the
+  derivative admit a bounded right inverse along the level set.
+
+- **Why surjectivity by itself is not enough, and where the failure is seen.**
+  The open mapping theorem makes $L$ open, so it is onto and has continuous
+  right-inverse *as a map into $X$* only with the help of a complement; without
+  one, the level sets of the linear map need not be affine copies of a closed
+  complemented subspace, and the split chart demanded by
+  [[def-split-banach-submanifold]] cannot exist. The companion page carries the
+  standard witness: $c_0$ is a closed subspace of $\ell^\infty$ that is not
+  complemented in it, so it is not a split submanifold of the Banach space
+  $\ell^\infty$. A read-only list of the underlying non-complementation theorem
+  is available on the page, and the companion counterexample derives the
+  submanifold conclusion from it.
+
+- **Automatic cases, and the ones that matter below.** A closed subspace that is
+  finite dimensional or of finite codimension is automatically complemented
+  ([[cor-finite-dimensional-subspaces-are-complemented]],
+  [[cor-finite-codimensional-subspaces-are-complemented]]). In particular, if
+  $L$ is a Fredholm operator ([[def-fredholm-operator-cokernel-and-index]]) or
+  if its target is finite dimensional, then surjectivity of $L$ implies that
+  $\ker L$ is complemented, so the extra clause of the theorem is automatic in
+  those cases. This is why the Fredholm-and-transversality results of this page
+  can print the complemented-kernel hypothesis once and use it everywhere
+  without further case distinctions, while the abstract theorem states it
+  outright.
+
+- **Bookkeeping.** The equivalence in the first bullet is a Dependent Choice
+  theorem, and the regular value theorem is proved under the Axiom of Choice
+  ([[def-axiom-of-choice]]), which supplies DC. The counterexample on the
+  companion page uses only the Axiom of Countable Choice, since the
+  non-complementation it appeals to is proved at that strength.

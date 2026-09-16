@@ -32,20 +32,13 @@ Properness cannot be omitted from the quotient-manifold theorem.
 
 ## Facts & Assumptions
 
-**Given:** An irrational number $\alpha$ and the corresponding smooth left
-action of $\mathbb R$ on $\mathbb T^2$.
+**Given:** An irrational number $\alpha$ and the corresponding smooth left action of $\mathbb R$ on $\mathbb T^2$.
 
-[F1] That action is free, every orbit is dense, and its identity orbit is the
-image of an injective immersion.
-[[lem-irrational-torus-flow-is-free-with-dense-orbits]].
+[F1] That action is free, every orbit is dense, and its identity orbit is the image of an injective immersion. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
 
-[F2] A topological manifold in the library convention is Hausdorff.
-[[def-topological-manifold-without-boundary]].
+[F2] A topological manifold in the library convention is Hausdorff. [[def-topological-manifold-without-boundary]].
 
-[F3] A free **proper** smooth action does have a smooth manifold quotient;
-thus the sufficient theorem uses both hypotheses.
-[[def-free-and-proper-lie-group-actions]],
-[[thm-free-proper-action-quotient-manifold]].
+[F3] A free **proper** smooth action does have a smooth manifold quotient; thus the sufficient theorem uses both hypotheses. [[def-free-and-proper-lie-group-actions]], [[thm-free-proper-action-quotient-manifold]].
 
 ## Refutation
 

@@ -88,19 +88,9 @@ Let $q : X \to Y$ be a quotient map ([[def-quotient-topology]]). Then:
 
 ## Remarks
 
-- **Claim 2 is how every quotient space in this library is identified.** To
-  produce a continuous map out of an identification space one never works with
-  equivalence classes directly: one writes a continuous map on the original
-  space, checks that it does not distinguish identified points, and quotes claim
-  2. Both examples of gluing on the companion page are exactly this move.
+- **Claim 2 is how every quotient space in this library is identified.** To produce a continuous map out of an identification space one never works with equivalence classes directly: one writes a continuous map on the original space, checks that it does not distinguish identified points, and quotes claim
+2. Both examples of gluing on the companion page are exactly this move.
 
-- **Uniqueness in claim 2 uses only surjectivity, and continuity of $\bar f$ uses
-  only claim 1.** Neither uses a choice principle: step 1.3 picks a preimage for
-  a *single* $y$ inside a proof of an equation, which is an instance of
-  existential instantiation and not a selection over an index set.
+- **Uniqueness in claim 2 uses only surjectivity, and continuity of $\bar f$ uses only claim 1.** Neither uses a choice principle: step 1.3 picks a preimage for a *single* $y$ inside a proof of an equation, which is an instance of existential instantiation and not a selection over an index set.
 
-- **Claim 3 has no analogue for open maps or for closed maps in the direction one
-  wants here.** A composite of quotient maps is a quotient map, and that is what
-  makes iterated identifications well behaved; whether a *product* of quotient
-  maps is a quotient map is a different question, and it is not settled at this
-  point in the reading order (see [[rem-constructions-this-page-stops-short-of]]).
+- **Claim 3 has no analogue for open maps or for closed maps in the direction one wants here.** A composite of quotient maps is a quotient map, and that is what makes iterated identifications well behaved; whether a *product* of quotient maps is a quotient map is a different question, and it is not settled at this point in the reading order (see [[rem-constructions-this-page-stops-short-of]]).

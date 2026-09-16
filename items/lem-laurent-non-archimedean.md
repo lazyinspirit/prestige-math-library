@@ -82,21 +82,6 @@ $\mathbb{Z}$ when it is used as an index. Then:
 
 ## Remarks
 
-- **Why clause 3 is the pivotal one.** The valuation takes its values in
-  $\mathbb{Z}$, which has countable cofinality, and clause 3 is the translation
-  of that fact into the order of $K$: a *countable* family, the monomials
-  $t^{-k}$ with $k \in \mathbb{N}$, already gets below every positive element.
-  This is what makes the sequential Cauchy condition in $K$ testable against
-  countably many thresholds, and it is the reason a sequence indexed by
-  $\mathbb{N}$ suffices to reach a limit in [[thm-laurent-cauchy-complete]].
-  Nothing like it would hold if the exponents were allowed to range over a
-  group of uncountable cofinality.
+- **Why clause 3 is the pivotal one.** The valuation takes its values in $\mathbb{Z}$, which has countable cofinality, and clause 3 is the translation of that fact into the order of $K$: a *countable* family, the monomials $t^{-k}$ with $k \in \mathbb{N}$, already gets below every positive element. This is what makes the sequential Cauchy condition in $K$ testable against countably many thresholds, and it is the reason a sequence indexed by $\mathbb{N}$ suffices to reach a limit in [[thm-laurent-cauchy-complete]]. Nothing like it would hold if the exponents were allowed to range over a group of uncountable cofinality.
 
-- **Non-Archimedean here is a statement about $t$, not about the constants.**
-  The canonical naturals of $K$ are the constant series
-  $n \cdot 1_K = \iota(n \cdot 1_{\mathbb{R}})$ (clause 3 of
-  [[thm-laurent-ordered-field]]), all of valuation $0$, and what bounds them
-  above is $t$, of valuation $-1$. The computation in step 1.2 uses nothing
-  about $t$ beyond that: every *positive* element of negative valuation exceeds
-  every canonical natural, because a strict inequality between valuations
-  decides the comparison outright, whatever the coefficients are.
+- **Non-Archimedean here is a statement about $t$, not about the constants.** The canonical naturals of $K$ are the constant series $n \cdot 1_K = \iota(n \cdot 1_{\mathbb{R}})$ (clause 3 of [[thm-laurent-ordered-field]]), all of valuation $0$, and what bounds them above is $t$, of valuation $-1$. The computation in step 1.2 uses nothing about $t$ beyond that: every *positive* element of negative valuation exceeds every canonical natural, because a strict inequality between valuations decides the comparison outright, whatever the coefficients are.

@@ -39,13 +39,11 @@ $$ e_I(M)=e_I(M')+e_I(M''). $$
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian local ring $(R,\mathfrak m)$, an ideal of definition
-$I$, and a short exact sequence $0\to M'\to M\to M''\to0$ of finite modules.
+**Given:** A Noetherian local ring $(R,\mathfrak m)$, an ideal of definition $I$, and a short exact sequence $0\to M'\to M\to M''\to0$ of finite modules.
 
 [L1] Artin-Rees gives an exact eventual formula for the filtration induced on the submodule $M'$ ([[thm-artin-rees-lemma]]).
 
-[L2] Length is additive on short exact sequences
-([[cor-length-is-additive-in-short-exact-sequences]]).
+[L2] Length is additive on short exact sequences ([[cor-length-is-additive-in-short-exact-sequences]]).
 
 ## Proof
 

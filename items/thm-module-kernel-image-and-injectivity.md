@@ -34,21 +34,13 @@ $$f\text{ is injective}\quad\Longleftrightarrow\quad\ker f=\{0_M\}.$$
 
 **Given:** A homomorphism $f:M\to N$ of left $R$-modules.
 
-[L1] A module homomorphism preserves addition and scalar multiplication, and
-the displayed definitions give its kernel and image
-([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L1] A module homomorphism preserves addition and scalar multiplication, and the displayed definitions give its kernel and image ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[L2] A nonempty subset of a module is a submodule exactly when it is closed
-under $ru+v$ ([[lem-submodule-criterion-sums-and-intersections]]).
+[L2] A nonempty subset of a module is a submodule exactly when it is closed under $ru+v$ ([[lem-submodule-criterion-sums-and-intersections]]).
 
-[L3] The additive underlying function of a module homomorphism is a group
-homomorphism and therefore sends $0_M$ to $0_N$; moreover $r0_N=0_N$
-([[def-module-homomorphism-kernel-image-and-cokernel]],
-[[lem-group-homomorphism-basic-properties]],
-[[lem-module-elementary-consequences]]).
+[L3] The additive underlying function of a module homomorphism is a group homomorphism and therefore sends $0_M$ to $0_N$; moreover $r0_N=0_N$ ([[def-module-homomorphism-kernel-image-and-cokernel]], [[lem-group-homomorphism-basic-properties]], [[lem-module-elementary-consequences]]).
 
-[L4] A group homomorphism is injective exactly when its kernel is trivial
-([[thm-group-homomorphism-injective-iff-trivial-kernel]]).
+[L4] A group homomorphism is injective exactly when its kernel is trivial ([[thm-group-homomorphism-injective-iff-trivial-kernel]]).
 
 ## Proof
 

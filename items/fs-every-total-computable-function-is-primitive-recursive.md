@@ -33,8 +33,7 @@ $\mathbb N$ is primitive recursive.
 
 **Given:** The false claim above.
 
-[A1] Every total computable function on a finite power of $\mathbb N$ is
-primitive recursive.
+[A1] Every total computable function on a finite power of $\mathbb N$ is primitive recursive.
 
 [L1] The Ackermann function is total computable but not primitive recursive, by [[prop-ackermann-is-total-computable-but-not-primitive-recursive]].
 

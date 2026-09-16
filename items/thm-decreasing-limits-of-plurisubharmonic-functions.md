@@ -35,16 +35,11 @@ a connected component of $\Omega$, or $u$ is plurisubharmonic on $\Omega$.
 
 ## Facts & Assumptions
 
-**Given:** A decreasing sequence $(u_n)$ of plurisubharmonic functions on a
-domain $\Omega\subseteq\mathbb C^m$.
+**Given:** A decreasing sequence $(u_n)$ of plurisubharmonic functions on a domain $\Omega\subseteq\mathbb C^m$.
 
-[L1] Plurisubharmonicity is the affine-line subharmonicity test together with
-upper semicontinuity and the componentwise nontriviality condition
-([[def-plurisubharmonic-function]]).
+[L1] Plurisubharmonicity is the affine-line subharmonicity test together with upper semicontinuity and the componentwise nontriviality condition ([[def-plurisubharmonic-function]]).
 
-[L2] A decreasing limit of subharmonic functions is subharmonic or identically
-$-\infty$ on the connected component
-([[thm-decreasing-limit-theorem-for-plane-subharmonic-functions]]).
+[L2] A decreasing limit of subharmonic functions is subharmonic or identically $-\infty$ on the connected component ([[thm-decreasing-limit-theorem-for-plane-subharmonic-functions]]).
 
 ## Proof
 

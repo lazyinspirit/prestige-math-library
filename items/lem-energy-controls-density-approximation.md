@@ -43,9 +43,7 @@ $$|d(Q_x,Q_y)-d(P_x,P_y)|>\epsilon.$$
 
 1.1 Choose an ordered vertex pair $(x,y)$ uniformly and set $Z_P=d(P_x,P_y)$ and $Z_Q=d(Q_x,Q_y)$. On each coarse pair, double-counting gives $\mathbb E(Z_Q\mid P_x,P_y)=Z_P$. [given, L1, algebra]
 
-2.1 Expanding the square and using the conditional identity in step 1.1 gives
-$$\mathbb E((Z_Q-Z_P)^2)=\mathbb E(Z_Q^2)-\mathbb E(Z_P^2)=q(\mathcal Q)-q(\mathcal P)\le\epsilon^3.$$
-[step 1.1, L1, algebra]
+2.1 Expanding the square and using the conditional identity in step 1.1 gives $$\mathbb E((Z_Q-Z_P)^2)=\mathbb E(Z_Q^2)-\mathbb E(Z_P^2)=q(\mathcal Q)-q(\mathcal P)\le\epsilon^3.$$ [step 1.1, L1, algebra]
 
 3.1 Apply [L2] to $(Z_Q-Z_P)^2$ with threshold $\epsilon^2$. The probability that $|Z_Q-Z_P|>\epsilon$ is at most $\epsilon^3/\epsilon^2=\epsilon$. [step 2.1, L2, algebra]
 

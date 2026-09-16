@@ -33,13 +33,11 @@ real-valued functions makes $(X,\mathcal C_X^0)$ into a locally ringed space.
 
 **Given:** A topological space $X$.
 
-[F1] A ringed space is a space equipped with a sheaf of rings
-([[def-ringed-space]]).
+[F1] A ringed space is a space equipped with a sheaf of rings ([[def-ringed-space]]).
 
 [F2] Stalks are germs of neighbourhood sections ([[def-stalk-of-presheaf]]).
 
-[L1] A locally ringed space is a ringed space whose stalks are local rings
-([[def-locally-ringed-space]], [[def-local-ring]]).
+[L1] A locally ringed space is a ringed space whose stalks are local rings ([[def-locally-ringed-space]], [[def-local-ring]]).
 
 ## Verification
 

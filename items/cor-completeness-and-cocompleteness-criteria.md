@@ -33,14 +33,11 @@ it has all small coproducts and all coequalizers.
 
 **Given:** A category $\mathcal C$.
 
-[L1] Existing object-indexed products and equalizers construct the limit of
-every small diagram ([[thm-small-limits-from-products-and-equalizers]]).
+[L1] Existing object-indexed products and equalizers construct the limit of every small diagram ([[thm-small-limits-from-products-and-equalizers]]).
 
-[L2] Existing object-indexed coproducts and coequalizers construct the colimit
-of every small diagram ([[thm-small-colimits-from-coproducts-and-coequalizers]]).
+[L2] Existing object-indexed coproducts and coequalizers construct the colimit of every small diagram ([[thm-small-colimits-from-coproducts-and-coequalizers]]).
 
-[F1] Complete means having all small limits and cocomplete means having all
-small colimits ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] Complete means having all small limits and cocomplete means having all small colimits ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
 ## Proof
 

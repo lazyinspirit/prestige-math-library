@@ -33,33 +33,21 @@ subsequence that converges weakly to a point of $X$.
 
 ## Facts & Assumptions
 
-**Given:** the ultrafilter lemma, DC, HB, and a real or complex Banach space
-$X$.
+**Given:** the ultrafilter lemma, DC, HB, and a real or complex Banach space $X$.
 
-[F1] Under the ultrafilter lemma and HB, $X$ is reflexive if and only if its
-closed unit ball $B_X$ is weakly compact
-([[thm-reflexive-iff-unit-ball-weakly-compact]]).
+[F1] Under the ultrafilter lemma and HB, $X$ is reflexive if and only if its closed unit ball $B_X$ is weakly compact ([[thm-reflexive-iff-unit-ball-weakly-compact]]).
 
-[F2] Under the ultrafilter lemma, DC and HB, relative weak compactness,
-relative weak sequential compactness and relative weak countable compactness
-are equivalent ([[thm-eberlein-smulian]]).
+[F2] Under the ultrafilter lemma, DC and HB, relative weak compactness, relative weak sequential compactness and relative weak countable compactness are equivalent ([[thm-eberlein-smulian]]).
 
-[F3] Under HB, every nonzero vector has a norm-one scalar-linear functional
-taking that vector to its norm ([[cor-relative-hahn-banach-dual-norming]]).
+[F3] Under HB, every nonzero vector has a norm-one scalar-linear functional taking that vector to its norm ([[cor-relative-hahn-banach-dual-norming]]).
 
-[F4] The weak topology is initial for all members of $X^*$, so every such
-functional and fixed scalar multiplication are weakly continuous
-([[def-weak-topology-on-a-normed-space]]).
+[F4] The weak topology is initial for all members of $X^*$, so every such functional and fixed scalar multiplication are weakly continuous ([[def-weak-topology-on-a-normed-space]]).
 
-[F5] The ultrafilter lemma is the statement that every filter on a set is
-contained in an ultrafilter; DC is the entire-relation chain principle, and HB
-is the real dominated-extension principle over ZF ([[def-dependent-choice]],
-[[def-hahn-banach-extension-principle-relative]]).
+[F5] The ultrafilter lemma is the statement that every filter on a set is contained in an ultrafilter; DC is the entire-relation chain principle, and HB is the real dominated-extension principle over ZF ([[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]).
 
 ## Proof
 
-**Proof technique:** apply Eberlein–Šmulian to the weakly closed unit ball and
-rescale.
+**Proof technique:** apply Eberlein–Šmulian to the weakly closed unit ball and rescale.
 
 1.1 The norm-closed unit ball $B_X$ is weakly closed under HB.  Indeed, if $x\notin B_X$, then $\|x\|>1$ and [F3] gives $f\in X^*$ with $\|f\|=1$ and $f(x)=\|x\|$.  The weakly open set $\{y:|f(y)|>1\}$ contains $x$ and misses $B_X$, since $|f(y)|\le\|y\|\le1$ there.  Thus every exterior point has a weak neighborhood in the complement.  This also covers $X=\{0\}$, when there is no exterior point. [F3, F4]
 
@@ -77,18 +65,8 @@ rescale.
 
 ## Remarks
 
-- The ultrafilter lemma, DC and HB are hypotheses of this corollary, not
-  results consumed from its proof: the statement above names each of them in
-  full. The library states the ultrafilter lemma, and proves it from AC, as
-  [[thm-ultrafilter-lemma]], and records its proved choice cost in
-  [[rem-choice-strengths]]; this corollary assumes the lemma and inherits no
-  part of that AC-based proof.
+- The ultrafilter lemma, DC and HB are hypotheses of this corollary, not results consumed from its proof: the statement above names each of them in full. The library states the ultrafilter lemma, and proves it from AC, as [[thm-ultrafilter-lemma]], and records its proved choice cost in [[rem-choice-strengths]]; this corollary assumes the lemma and inherits no part of that AC-based proof.
 
 ## Source notes
 
-Teschl's Theorem 4.30, printed pp. 127–128, proves the forward bounded-
-sequence conclusion for reflexive spaces.  Haase's Theorem E.17, printed
-pp. 355–356, supplies the compact/sequential equivalence used in both
-directions.  The converse here also uses the already-authored compact-unit-ball
-characterization and proves the ball's weak closedness explicitly, so relative
-compactness is not silently replaced by compactness.
+Teschl's Theorem 4.30, printed pp. 127–128, proves the forward bounded- sequence conclusion for reflexive spaces.  Haase's Theorem E.17, printed pp. 355–356, supplies the compact/sequential equivalence used in both directions.  The converse here also uses the already-authored compact-unit-ball characterization and proves the ball's weak closedness explicitly, so relative compactness is not silently replaced by compactness.

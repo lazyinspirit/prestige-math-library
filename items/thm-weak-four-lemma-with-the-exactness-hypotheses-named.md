@@ -49,11 +49,7 @@ already follow from exactness at the four middle nodes that are actually used:
 
 [L3] Exactness at a node is equivalent to the member-lifting condition ([[thm-chasing-rule-exactness-detected-by-members]]).
 
-[L4] The common-refinement construction for member equivalence puts finitely
-many witness equalities on one epic domain, where hom-set subtraction is
-defined
-([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]],
-[[def-abelian-category]]).
+[L4] The common-refinement construction for member equivalence puts finitely many witness equalities on one epic domain, where hom-set subtraction is defined ([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]], [[def-abelian-category]]).
 
 ## Proof
 

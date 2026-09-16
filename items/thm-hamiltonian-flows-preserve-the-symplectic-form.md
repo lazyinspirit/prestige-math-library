@@ -33,12 +33,9 @@ completeness assertion is made.
 
 **Given:** A Hamiltonian vector field and its local flow.
 
-[F1] A Hamiltonian field is symplectic, so $\mathcal L_{X_H}\omega=0$.
-[[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
+[F1] A Hamiltonian field is symplectic, so $\mathcal L_{X_H}\omega=0$. [[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
 
-[F2] A tensor is invariant under a local flow exactly when its Lie derivative
-along the generator vanishes.
-[[prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes]].
+[F2] A tensor is invariant under a local flow exactly when its Lie derivative along the generator vanishes. [[prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes]].
 
 ## Proof
 

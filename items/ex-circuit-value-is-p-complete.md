@@ -31,8 +31,7 @@ For $x=01$, the values are $g_1=g_2=1$.
 
 [L1] Every fixed polynomial-time machine has a polynomial-size logspace-uniform circuit family deciding its acceptance ([[lem-polynomial-time-computations-have-logspace-uniform-circuits]]).
 
-[L2] Circuit Value is P-complete under logspace many-one reductions
-([[thm-circuit-value-is-p-complete]]).
+[L2] Circuit Value is P-complete under logspace many-one reductions ([[thm-circuit-value-is-p-complete]]).
 
 ## Verification
 

@@ -98,18 +98,8 @@ order, and the three claims above say in full what it would abbreviate.
 
 ## Remarks
 
-- **The rectangle in step 1.1 is chosen with both corners at the point.** Any
-  basic rectangle $[x,b) \times [-x,d)$ with $b > x$ and $d > -x$ would do, and
-  the computation is the same: the first factor forces $t \ge x$ and the second
-  forces $t \le x$. It is the half-openness on the *left* in both coordinates,
-  together with the reversal of the sign in the second, that isolates the point.
+- **The rectangle in step 1.1 is chosen with both corners at the point.** Any basic rectangle $[x,b) \times [-x,d)$ with $b > x$ and $d > -x$ would do, and the computation is the same: the first factor forces $t \ge x$ and the second forces $t \le x$. It is the half-openness on the *left* in both coordinates, together with the reversal of the sign in the second, that isolates the point.
 
-- **The property is open-hereditary, and that is the sharp statement.** By claim 4
-  of [[thm-subspace-closure-and-interior]] a dense subset of a space traces to a
-  dense subset of every *open* subspace, so "has a countable dense subset" passes
-  to open subspaces. The antidiagonal is not open in $S \times S$, and the failure
-  above shows that the hypothesis in that claim cannot be dropped.
+- **The property is open-hereditary, and that is the sharp statement.** By claim 4 of [[thm-subspace-closure-and-interior]] a dense subset of a space traces to a dense subset of every *open* subspace, so "has a countable dense subset" passes to open subspaces. The antidiagonal is not open in $S \times S$, and the failure above shows that the hypothesis in that claim cannot be dropped.
 
-- **Nothing here needs a choice principle.** The surjection $L \to \mathbb{R}$ is
-  written down, the rectangles are written down, and the only nonconstructive
-  ingredient is [[thm-r-uncountable]], whose own proof is choice free.
+- **Nothing here needs a choice principle.** The surjection $L \to \mathbb{R}$ is written down, the rectangles are written down, and the only nonconstructive ingredient is [[thm-r-uncountable]], whose own proof is choice free.

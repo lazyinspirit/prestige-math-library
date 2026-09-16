@@ -29,15 +29,11 @@ unions $A\cup C$ and $B\cup C$ are also independent.
 
 ## Facts & Assumptions
 
-**Given:** The uniform four-point space $\Omega=\{00,01,10,11\}$ and the events
-$$A:=\{00,01\},\qquad B:=\{00,10\},\qquad C:=\{00,11\}.$$
+**Given:** The uniform four-point space $\Omega=\{00,01,10,11\}$ and the events $$A:=\{00,01\},\qquad B:=\{00,10\},\qquad C:=\{00,11\}.$$
 
-[L1] In a uniform finite space, event probability is cardinality divided by the
-total number of outcomes. ([[def-uniform-finite-probability-space]])
+[L1] In a uniform finite space, event probability is cardinality divided by the total number of outcomes. ([[def-uniform-finite-probability-space]])
 
-[L2] Two events are independent exactly when
-$\mathbb P(E\cap F)=\mathbb P(E)\mathbb P(F)$.
-([[def-pairwise-and-mutual-independence-of-events]])
+[L2] Two events are independent exactly when $\mathbb P(E\cap F)=\mathbb P(E)\mathbb P(F)$. ([[def-pairwise-and-mutual-independence-of-events]])
 
 ## Counterexample
 

@@ -43,23 +43,15 @@ of $G$ on $\mathfrak g$. No choice principle is required.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional real Lie group $G$ with identity $e$ and Lie
-algebra $\mathfrak g=T_eG$.
+**Given:** A finite-dimensional real Lie group $G$ with identity $e$ and Lie algebra $\mathfrak g=T_eG$.
 
-[F1] Conjugation is $C_g(h)=ghg^{-1}$, and
-$\operatorname{Ad}_g=d(C_g)_e$ is an invertible linear endomorphism of
-$\mathfrak g$; the target $\operatorname{GL}(\mathfrak g)$ has its standard
-basis-independent smooth structure.
-[[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
+[F1] Conjugation is $C_g(h)=ghg^{-1}$, and $\operatorname{Ad}_g=d(C_g)_e$ is an invertible linear endomorphism of $\mathfrak g$; the target $\operatorname{GL}(\mathfrak g)$ has its standard basis-independent smooth structure. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
 
 [F2] Multiplication and inversion in $G$ are smooth. [[def-lie-group]].
 
-[F3] Differentials of smooth maps satisfy the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F3] Differentials of smooth maps satisfy the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
-[F4] A finite-dimensional representation is a group homomorphism into the
-group of invertible linear maps of its representation space.
-[[def-finite-dimensional-representation-of-a-group-over-a-field]].
+[F4] A finite-dimensional representation is a group homomorphism into the group of invertible linear maps of its representation space. [[def-finite-dimensional-representation-of-a-group-over-a-field]].
 
 ## Proof
 

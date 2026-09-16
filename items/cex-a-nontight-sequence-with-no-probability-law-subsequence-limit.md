@@ -27,18 +27,11 @@ The laws $\mu_n=\delta_n$ on the real line form a nontight sequence with no subs
 
 ## Facts & Assumptions
 
-[F1] [[thm-compact-subset-is-closed-and-bounded]]: Let $(X,d)$ be a metric space (def-metric-space) and let $K \subseteq X$ be a
-compact subset (def-metric-compactness). Then $K$ is closed in $X$
-(def-metric-topology) and bounded (def-metric-bounded-diameter).
+[F1] [[thm-compact-subset-is-closed-and-bounded]]: Let $(X,d)$ be a metric space (def-metric-space) and let $K \subseteq X$ be a compact subset (def-metric-compactness). Then $K$ is closed in $X$ (def-metric-topology) and bounded (def-metric-bounded-diameter).
 
-No choice principle is used: both covers below are given by a rule, and the
-indexed form of lem-compactness-is-intrinsic returns indices rather than
-sets.
+No choice principle is used: both covers below are given by a rule, and the indexed form of lem-compactness-is-intrinsic returns indices rather than sets.
 
-**The converse is false in general.** A closed and bounded subset of an arbitrary
-metric space need not be compact
-(fs-closed-and-bounded-implies-compact-in-every-metric-space); it is exactly
-in $\mathbb{R}^n$ that the converse holds (thm-heine-borel-rn).
+**The converse is false in general.** A closed and bounded subset of an arbitrary metric space need not be compact (fs-closed-and-bounded-implies-compact-in-every-metric-space); it is exactly in $\mathbb{R}^n$ that the converse holds (thm-heine-borel-rn).
 
 [F2] [[def-tight-family-of-probability-measures]]: A family $\mathcal A$ of Borel probabilities on a metric space S is **tight** if, for every $\varepsilon>0$, there is a compact $K\subseteq S$ such that $\mu(S\setminus K)<\varepsilon$ for every $\mu\in\mathcal A$. One K must work for the whole family. Compactness is def-metric-compactness. The empty family is tight, witnessed by the empty compact set.
 

@@ -38,23 +38,15 @@ induced copy of $P_4$.
 
 **Given:** A prime graph $G$ with $|V(G)|\geq 4$.
 
-[L1] A prime graph has no nontrivial module
-([[def-prime-graph]], [[def-module-of-a-graph]]).
+[L1] A prime graph has no nontrivial module ([[def-prime-graph]], [[def-module-of-a-graph]]).
 
-[L2] A graph is a cograph if and only if it is $P_4$-free
-([[thm-cographs-are-exactly-the-p-four-free-graphs]]).
+[L2] A graph is a cograph if and only if it is $P_4$-free ([[thm-cographs-are-exactly-the-p-four-free-graphs]]).
 
-[L3] Every nontrivial cograph is disconnected or has disconnected complement
-([[thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement]]).
+[L3] Every nontrivial cograph is disconnected or has disconnected complement ([[thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement]]).
 
-[L4] Every union of connected components is a module, and so is every union of
-anticomponents
-([[lem-unions-of-components-and-of-anticomponents-are-modules]]).
+[L4] Every union of connected components is a module, and so is every union of anticomponents ([[lem-unions-of-components-and-of-anticomponents-are-modules]]).
 
-[F1] If a partition of a set with at least four elements has at least two
-nonempty parts, then some proper union of its parts has cardinality between
-$2$ and $|V(G)|-1$: either one part already has at least two elements, or else
-all parts are singletons and the union of two of them does.
+[F1] If a partition of a set with at least four elements has at least two nonempty parts, then some proper union of its parts has cardinality between $2$ and $|V(G)|-1$: either one part already has at least two elements, or else all parts are singletons and the union of two of them does.
 
 ## Proof
 

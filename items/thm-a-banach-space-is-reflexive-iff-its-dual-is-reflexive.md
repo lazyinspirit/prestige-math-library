@@ -32,25 +32,15 @@ reflexive.
 
 **Given:** HB, $\mathrm{AC}_\omega$, and a real or complex Banach space $X$.
 
-[F1] A Banach space is reflexive exactly when its canonical map into its
-bidual is surjective; surjectivity means that every member of the bidual is
-evaluation at a vector ([[def-reflexive-banach-space]]).
+[F1] A Banach space is reflexive exactly when its canonical map into its bidual is surjective; surjectivity means that every member of the bidual is evaluation at a vector ([[def-reflexive-banach-space]]).
 
-[F2] Under HB the canonical map $J_E:E\to E^{**}$ of every real or complex
-normed space is scalar-linear and isometric, hence injective
-([[cor-relative-hahn-banach-bidual-isometry]]).
+[F2] Under HB the canonical map $J_E:E\to E^{**}$ of every real or complex normed space is scalar-linear and isometric, hence injective ([[cor-relative-hahn-banach-bidual-isometry]]).
 
-[F3] Assuming $\mathrm{AC}_\omega$, a norm-complete subspace of a normed space
-is closed ([[lem-complete-subspace-is-closed]]).
+[F3] Assuming $\mathrm{AC}_\omega$, a norm-complete subspace of a normed space is closed ([[lem-complete-subspace-is-closed]]).
 
-[F4] Under HB, a point outside a nonempty closed convex subset of a real or
-complex normed space is strictly separated from it by a nonzero bounded
-scalar-linear functional; the inequalities use its real part
-([[thm-relative-hahn-banach-geometric-separation]], part (ii)).
+[F4] Under HB, a point outside a nonempty closed convex subset of a real or complex normed space is strictly separated from it by a nonzero bounded scalar-linear functional; the inequalities use its real part ([[thm-relative-hahn-banach-geometric-separation]], part (ii)).
 
-[F5] HB is the real dominated-extension principle over ZF, and
-$\mathrm{AC}_\omega$ is choice for each supplied sequence of nonempty sets
-([[def-hahn-banach-extension-principle-relative]], [[def-countable-choice]]).
+[F5] HB is the real dominated-extension principle over ZF, and $\mathrm{AC}_\omega$ is choice for each supplied sequence of nonempty sets ([[def-hahn-banach-extension-principle-relative]], [[def-countable-choice]]).
 
 ## Proof
 
@@ -74,10 +64,4 @@ $\mathrm{AC}_\omega$ is choice for each supplied sequence of nonempty sets
 
 ## Source notes
 
-Bühler–Salamon, Theorem 2.71(i), printed pp. 89–90, supplies the complete
-canonical-map and annihilator argument.  The proof above replaces the source's
-ordinary-choice background by the repository's exact local bookkeeping:
-$\mathrm{AC}_\omega$ is stated because the selected complete-subspace-closed
-supplier assumes it, while HB is stated separately for bidual isometry and
-geometric separation.  The complex branch is supplied by the real-part and
-$iW$ calculation in step 3.1.
+Bühler–Salamon, Theorem 2.71(i), printed pp. 89–90, supplies the complete canonical-map and annihilator argument.  The proof above replaces the source's ordinary-choice background by the repository's exact local bookkeeping: $\mathrm{AC}_\omega$ is stated because the selected complete-subspace-closed supplier assumes it, while HB is stated separately for bidual isometry and geometric separation.  The complex branch is supplied by the real-part and $iW$ calculation in step 3.1.

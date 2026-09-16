@@ -31,22 +31,17 @@ $d\alpha=0$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a smooth $n$-manifold $Q$, and
-$\alpha\in\Omega^1(Q)$.
+**Given:** $\mathrm{AC}_\omega$, a smooth $n$-manifold $Q$, and $\alpha\in\Omega^1(Q)$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] The canonical form on $T^*Q$ is $\omega_{\mathrm{can}}=-d\lambda$.
-[[thm-the-canonical-cotangent-two-form-is-symplectic]].
+[F1] The canonical form on $T^*Q$ is $\omega_{\mathrm{can}}=-d\lambda$. [[thm-the-canonical-cotangent-two-form-is-symplectic]].
 
-[F2] A submanifold is Lagrangian when its tangent spaces are Lagrangian.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F2] A submanifold is Lagrangian when its tangent spaces are Lagrangian. [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
-[F3] An isotropic half-dimensional subspace is Lagrangian.
-[[thm-equivalent-characterizations-of-lagrangian-subspaces]].
+[F3] An isotropic half-dimensional subspace is Lagrangian. [[thm-equivalent-characterizations-of-lagrangian-subspaces]].
 
-[F4] Exterior differentiation commutes with pullback.
-[[thm-the-exterior-derivative-commutes-with-pullback]].
+[F4] Exterior differentiation commutes with pullback. [[thm-the-exterior-derivative-commutes-with-pullback]].
 
 ## Proof
 

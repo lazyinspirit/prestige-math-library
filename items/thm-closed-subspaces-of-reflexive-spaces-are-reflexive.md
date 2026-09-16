@@ -65,6 +65,4 @@ is reflexive.
 
 ## Remarks
 
-Closedness of $Y$ has two distinct jobs: it makes $Y$ complete, and it permits
-separation of a hypothetical representing vector outside $Y$.  No assertion is
-made for a nonclosed subspace.
+Closedness of $Y$ has two distinct jobs: it makes $Y$ complete, and it permits separation of a hypothetical representing vector outside $Y$.  No assertion is made for a nonclosed subspace.

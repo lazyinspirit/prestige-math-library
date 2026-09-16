@@ -40,13 +40,9 @@ every finite dimension.
 
 **Given:** $T,V,\mathcal B,\mathcal C$ as in the statement.
 
-[F1] The proposed value of $\det(T)$ in positive dimension is the determinant
-of a representing matrix, while in dimension zero it is $1$
-([[def-determinant-of-a-linear-operator]]).
+[F1] The proposed value of $\det(T)$ in positive dimension is the determinant of a representing matrix, while in dimension zero it is $1$ ([[def-determinant-of-a-linear-operator]]).
 
-[L1] In positive dimension the representing-matrix determinant is the unique
-scalar by which $T$ scales every alternating top-degree form
-([[thm-operator-determinant-scales-every-alternating-top-form]]).
+[L1] In positive dimension the representing-matrix determinant is the unique scalar by which $T$ scales every alternating top-degree form ([[thm-operator-determinant-scales-every-alternating-top-form]]).
 
 ## Proof
 

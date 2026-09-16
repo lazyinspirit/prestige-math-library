@@ -38,15 +38,11 @@ $$\Gamma(1/2)=\sqrt{\pi}.$$
 
 **Given:** The reflection formula and the real Gamma value.
 
-[L1] On the positive real axis, complex Gamma agrees with the real Gamma
-([[thm-complex-gamma-restricts-to-the-real-gamma-function]]).
+[L1] On the positive real axis, complex Gamma agrees with the real Gamma ([[thm-complex-gamma-restricts-to-the-real-gamma-function]]).
 
-[L2] The real Gamma function satisfies $\Gamma(1/2)=\sqrt{\pi}$
-([[cor-real-gamma-one-half-is-root-pi]]).
+[L2] The real Gamma function satisfies $\Gamma(1/2)=\sqrt{\pi}$ ([[cor-real-gamma-one-half-is-root-pi]]).
 
-[L3] The reflection formula gives
-$\Gamma(z)\Gamma(1-z)=\pi/\sin(\pi z)$
-([[thm-euler-reflection-formula]]).
+[L3] The reflection formula gives $\Gamma(z)\Gamma(1-z)=\pi/\sin(\pi z)$ ([[thm-euler-reflection-formula]]).
 
 ## Proof
 

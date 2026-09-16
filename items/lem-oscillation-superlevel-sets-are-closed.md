@@ -87,18 +87,6 @@ the value $\sup \varnothing = -\infty$ when $A \cap N_\rho(y) = \varnothing$
 
 ## Remarks
 
-- **Why the strict inequality is on the open side.** The set $U$ is defined by a
-  strict inequality and an existential quantifier over $\rho$, which is what
-  makes it open; its complement is then closed, and the superlevel set
-  $\{\omega_f \ge \varepsilon\}$ is what remains of it inside $A$. Defining
-  $E_\varepsilon$ with a strict inequality instead, as
-  $\{\omega_f > \varepsilon\}$, would not give a closed set in general, and the
-  exhaustion of [[thm-discontinuity-set-is-f-sigma]] is arranged so that only the
-  non-strict form is ever needed.
+- **Why the strict inequality is on the open side.** The set $U$ is defined by a strict inequality and an existential quantifier over $\rho$, which is what makes it open; its complement is then closed, and the superlevel set $\{\omega_f \ge \varepsilon\}$ is what remains of it inside $A$. Defining $E_\varepsilon$ with a strict inequality instead, as $\{\omega_f > \varepsilon\}$, would not give a closed set in general, and the exhaustion of [[thm-discontinuity-set-is-f-sigma]] is arranged so that only the non-strict form is ever needed.
 
-- **The relative form is the honest one.** For general $A$ the set
-  $E_\varepsilon$ is a subset of $A$ and there is no reason for it to be closed
-  in $\mathbb{R}$: taking $A = (0,1)$ and $f$ the restriction of a function with
-  oscillation $\ge \varepsilon$ everywhere gives $E_\varepsilon = (0,1)$, which
-  is not closed. What is always true is the displayed identity
-  $E_\varepsilon = A \cap G$, and that is what the theorems downstream use.
+- **The relative form is the honest one.** For general $A$ the set $E_\varepsilon$ is a subset of $A$ and there is no reason for it to be closed in $\mathbb{R}$: taking $A = (0,1)$ and $f$ the restriction of a function with oscillation $\ge \varepsilon$ everywhere gives $E_\varepsilon = (0,1)$, which is not closed. What is always true is the displayed identity $E_\varepsilon = A \cap G$, and that is what the theorems downstream use.

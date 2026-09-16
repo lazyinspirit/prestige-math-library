@@ -52,7 +52,6 @@ Then $\zeta$ is regular for $\Omega$.
 **Proof technique:** direct.
 
 1.1 Choose a smaller neighbourhood $W\Subset U$ of $\zeta$. The compact seam $(\overline{\Omega\cap W})\cap\partial W$ is a compact subset of $(\overline{\Omega\cap U})\setminus\{\zeta\}$, so hypothesis 3 gives [given, choose]
-$$\sup_{\eta\in(\overline{\Omega\cap W})\cap\partial W}q^\partial(\eta)<0.$$
-Thus $q$ is already a local strict peak function on $\Omega\cap W$. [given, choose]
+$$\sup_{\eta\in(\overline{\Omega\cap W})\cap\partial W}q^\partial(\eta)<0.$$ Thus $q$ is already a local strict peak function on $\Omega\cap W$. [given, choose]
 
 2.1 Applying [L1] to the restricted data on $W$ yields a global barrier at $\zeta$. Then [L2] shows that $\zeta$ is regular. [L1, L2, step 1.1] ∎

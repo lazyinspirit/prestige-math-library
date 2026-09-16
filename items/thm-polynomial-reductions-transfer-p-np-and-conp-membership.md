@@ -31,8 +31,7 @@ Let $A,B\subseteq\{0,1\}^*$ and suppose that $A\le_p B$.
 
 ## Facts & Assumptions
 
-**Given:** Binary languages $A,B\subseteq\{0,1\}^*$ and a fixed total
-polynomial-time map $f$ witnessing $A\le_p B$.
+**Given:** Binary languages $A,B\subseteq\{0,1\}^*$ and a fixed total polynomial-time map $f$ witnessing $A\le_p B$.
 
 [L1] A polynomial-time many-one reduction is a total polynomial-time membership-preserving map, by [[def-polynomial-time-many-one-reduction]].
 

@@ -28,16 +28,11 @@ The statement "rejection is divergence" is false.
 
 ## Facts & Assumptions
 
-**Given:** The machine and input from [[fs-rejection-is-divergence]]: states
-$q_0,q_{\mathrm{acc}},q_{\mathrm{rej}}$, tape rule
-$$ \delta(q_0,1)=(q_{\mathrm{rej}},1,R), $$
-and input word $w=1$.
+**Given:** The machine and input from [[fs-rejection-is-divergence]]: states $q_0,q_{\mathrm{acc}},q_{\mathrm{rej}}$, tape rule $$ \delta(q_0,1)=(q_{\mathrm{rej}},1,R), $$ and input word $w=1$.
 
-[A1] The statement refuted is: rejecting an input means diverging on that
-input.
+[A1] The statement refuted is: rejecting an input means diverging on that input.
 
-[L1] A configuration is rejecting exactly when its state is
-$q_{\mathrm{rej}}$, by [[def-initial-accepting-and-rejecting-configurations]].
+[L1] A configuration is rejecting exactly when its state is $q_{\mathrm{rej}}$, by [[def-initial-accepting-and-rejecting-configurations]].
 
 ## Counterexample
 

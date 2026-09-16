@@ -33,12 +33,9 @@ $n\ge N$.
 
 ## Facts & Assumptions
 
-**Given:** Real random variables $X_n$ and positive thresholds $a_n$ with
-$\sum_{n=0}^\infty \mathbb P(|X_n|>a_n)<+\infty$.
+**Given:** Real random variables $X_n$ and positive thresholds $a_n$ with $\sum_{n=0}^\infty \mathbb P(|X_n|>a_n)<+\infty$.
 
-[L1] If the probabilities of events are summable, then the corresponding events
-occur infinitely often with probability $0$.
-([[cor-first-borel-cantelli-lemma-for-events]])
+[L1] If the probabilities of events are summable, then the corresponding events occur infinitely often with probability $0$. ([[cor-first-borel-cantelli-lemma-for-events]])
 
 ## Verification
 

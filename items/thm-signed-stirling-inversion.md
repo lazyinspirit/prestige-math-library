@@ -39,10 +39,7 @@ $$b_n=\sum_{k=0}^{n}S(n,k)a_k\quad\Longleftrightarrow\quad a_n=\sum_{k=0}^{n}s(n
 
 ## Facts & Assumptions
 
-**Given:** The second-kind expansion of
-[[thm-powers-expand-in-the-falling-factorial-basis]] and the first-kind
-expansion of
-[[thm-signless-first-kind-recurrence-and-rising-factorial-expansion]].
+**Given:** The second-kind expansion of [[thm-powers-expand-in-the-falling-factorial-basis]] and the first-kind expansion of [[thm-signless-first-kind-recurrence-and-rising-factorial-expansion]].
 
 ## Proof
 

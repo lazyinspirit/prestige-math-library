@@ -35,16 +35,11 @@ and this product is nonzero on $\operatorname{Re}s>1$.
 
 ## Facts & Assumptions
 
-**Given:** A Dirichlet character $\chi$ and a complex number $s$ with
-$\operatorname{Re}s>1$.
+**Given:** A Dirichlet character $\chi$ and a complex number $s$ with $\operatorname{Re}s>1$.
 
-[L1] The Dirichlet $L$-function is $\sum_{n\ge1}\chi(n)n^{-s}$
-([[def-dirichlet-l-function]]).
+[L1] The Dirichlet $L$-function is $\sum_{n\ge1}\chi(n)n^{-s}$ ([[def-dirichlet-l-function]]).
 
-[L2] A completely multiplicative arithmetic function has the geometric Euler
-product $\sum_{n\ge1}f(n)n^{-s}=\prod_p(1-f(p)p^{-s})^{-1}$ at points of
-absolute convergence
-([[cor-completely-multiplicative-dirichlet-series-euler-product]]).
+[L2] A completely multiplicative arithmetic function has the geometric Euler product $\sum_{n\ge1}f(n)n^{-s}=\prod_p(1-f(p)p^{-s})^{-1}$ at points of absolute convergence ([[cor-completely-multiplicative-dirichlet-series-euler-product]]).
 
 ## Proof
 

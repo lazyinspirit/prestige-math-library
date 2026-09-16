@@ -35,19 +35,13 @@ together with the usual connecting morphisms of homology, is a homological
 delta functor.
 ## Facts & Assumptions
 
-**Given:** An abelian category $\mathcal A$ and its abelian category of
-nonnegatively graded chain complexes.
+**Given:** An abelian category $\mathcal A$ and its abelian category of nonnegatively graded chain complexes.
 
-[L1] This page's concrete homology family is the candidate homological delta
-functor
-([[def-homological-delta-functor-carried-by-homology-of-complexes]]).
+[L1] This page's concrete homology family is the candidate homological delta functor ([[def-homological-delta-functor-carried-by-homology-of-complexes]]).
 
-[L2] Homology of complexes satisfies the exactness and naturality axioms
-([[prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws]]).
+[L2] Homology of complexes satisfies the exactness and naturality axioms ([[prop-homology-of-complexes-satisfies-the-delta-functor-naturality-and-exactness-laws]]).
 
-[L3] A homological delta functor is exactly such a family of additive functors
-with natural connecting maps
-([[def-homological-delta-functor]]).
+[L3] A homological delta functor is exactly such a family of additive functors with natural connecting maps ([[def-homological-delta-functor]]).
 
 ## Verification
 

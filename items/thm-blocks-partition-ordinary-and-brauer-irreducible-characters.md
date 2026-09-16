@@ -30,12 +30,9 @@ lies in exactly one block.
 
 **Given:** The primitive central idempotents of the modular system of $G$.
 
-[F1] A block is the direct-product summand cut out by a primitive central
-idempotent
-([[def-p-blocks-by-primitive-central-idempotents]]).
+[F1] A block is the direct-product summand cut out by a primitive central idempotent ([[def-p-blocks-by-primitive-central-idempotents]]).
 
-[L1] Irreducible Brauer characters are attached to simple modules
-([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
+[L1] Irreducible Brauer characters are attached to simple modules ([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
 
 ## Proof
 

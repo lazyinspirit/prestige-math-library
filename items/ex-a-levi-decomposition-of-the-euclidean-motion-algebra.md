@@ -34,12 +34,9 @@ where translations form the radical and rotations form a Levi factor.
 
 ## Facts & Assumptions
 
-**Given:** The standard action of $\mathfrak{so}(3)$ on $\mathbb R^3$ and
-the resulting semidirect-product bracket.
+**Given:** The standard action of $\mathfrak{so}(3)$ on $\mathbb R^3$ and the resulting semidirect-product bracket.
 
-[L1] A Levi decomposition is a vector-space semidirect sum of the radical
-and a semisimple subalgebra
-([[def-levi-subalgebra-and-levi-decomposition]]).
+[L1] A Levi decomposition is a vector-space semidirect sum of the radical and a semisimple subalgebra ([[def-levi-subalgebra-and-levi-decomposition]]).
 
 ## Verification
 

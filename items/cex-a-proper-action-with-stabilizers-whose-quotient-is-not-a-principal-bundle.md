@@ -32,14 +32,11 @@ projection a principal bundle for that action.
 
 **Given:** The standard rotation action of $SO(2)$ on $\mathbb R^2$.
 
-[F1] Every continuous action of a compact Lie group on a manifold is proper.
-[[prop-compact-lie-group-actions-are-proper]].
+[F1] Every continuous action of a compact Lie group on a manifold is proper. [[prop-compact-lie-group-actions-are-proper]].
 
-[F2] Freeness means that every stabilizer is trivial.
-[[def-free-and-proper-lie-group-actions]].
+[F2] Freeness means that every stabilizer is trivial. [[def-free-and-proper-lie-group-actions]].
 
-[F3] The group action in a principal bundle is free and transitive on every
-fibre. [[def-principal-g-bundle-and-associated-fiber-bundle]].
+[F3] The group action in a principal bundle is free and transitive on every fibre. [[def-principal-g-bundle-and-associated-fiber-bundle]].
 
 ## Counterexample
 

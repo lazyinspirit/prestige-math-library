@@ -33,23 +33,19 @@ $$ (f*f)(x)= \begin{cases} 0,& x \le 0,\\ x,& 0 \le x \le 1,\\ 2-x,& 1 \le x \le
 
 **Given:** The indicator $f=\mathbf{1}_{[0,1]}$.
 
-[L1] $L^1$ convolution exists almost everywhere
-([[thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]]).
+[L1] $L^1$ convolution exists almost everywhere ([[thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]]).
 
-[L2] The support of a convolution lies in the closure of the support sumset
-([[thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset]]).
+[L2] The support of a convolution lies in the closure of the support sumset ([[thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 For fixed $x$, the integrand is $1$ exactly when [L1, given, algebra]
-$y \in [0,1] \cap [x-1,x]$. Therefore $(f*f)(x)$ is the length of that overlap
-interval. [L1, given, algebra]
+$y \in [0,1] \cap [x-1,x]$. Therefore $(f*f)(x)$ is the length of that overlap interval. [L1, given, algebra]
 
 2.1 If $0 \le x \le 1$, the overlap is $[0,x]$, so $(f*f)(x)=x$. If [step 1.1, algebra]
-$1 \le x \le 2$, the overlap is $[x-1,1]$, so $(f*f)(x)=2-x$. For
-$x \le 0$ or $x \ge 2$, there is no overlap, so $(f*f)(x)=0$. [step 1.1, algebra]
+$1 \le x \le 2$, the overlap is $[x-1,1]$, so $(f*f)(x)=2-x$. For $x \le 0$ or $x \ge 2$, there is no overlap, so $(f*f)(x)=0$. [step 1.1, algebra]
 
 3.1 Since $\operatorname{supp}(f)=[0,1]$, [L2] predicts support inside [L2, step 2.1]
 $[0,1]+[0,1]=[0,2]$, exactly as the explicit computation shows. [L2, step 2.1] ∎

@@ -51,9 +51,7 @@ Define $G(\lambda)$ to contain the part $2^jm$ once for every pair $(m,j)$ with 
 
 $$\sum_{j \ge 0}\varepsilon_{m,j}2^jm=m c_m,$$
 
-the parts with odd core $m$ have the same total $m c_m$ before and after the
-replacement. Summing over the odd cores shows that the total sum of the parts
-of $G(\lambda)$ is still $n$. [F1, construct, algebra]
+the parts with odd core $m$ have the same total $m c_m$ before and after the replacement. Summing over the odd cores shows that the total sum of the parts of $G(\lambda)$ is still $n$. [F1, construct, algebra]
 
 1.2 Conversely, let $\mu$ be a partition of $n$ into distinct parts. Write each part uniquely as $2^ju$ with $u$ odd, and replace it by $2^j$ copies of the odd part $u$. The resulting partition $H(\mu)$ has only odd parts and still sums to $n$. [F1, construct]
 

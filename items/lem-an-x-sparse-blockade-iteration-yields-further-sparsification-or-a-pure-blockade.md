@@ -42,11 +42,9 @@ still has linear size, then either:
 
 ## Facts & Assumptions
 
-**Given:** A sparse $\overline{P_5}$-free graph $G$ and a maximal $x$-sparse
-blockade $\mathcal B=(B_0,\dots,B_n)$ with large last block $B_n$.
+**Given:** A sparse $\overline{P_5}$-free graph $G$ and a maximal $x$-sparse blockade $\mathcal B=(B_0,\dots,B_n)$ with large last block $B_n$.
 
-[L1] Lemma 5.3 of the cited source proves the stated maximal-blockade
-alternative with explicit constants, sizes, and exponents.
+[L1] Lemma 5.3 of the cited source proves the stated maximal-blockade alternative with explicit constants, sizes, and exponents.
 
 ## Proof
 

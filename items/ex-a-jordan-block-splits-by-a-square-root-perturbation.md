@@ -34,8 +34,7 @@ $\pm\sqrt{\varepsilon}$.
 
 **Given:** The perturbed Jordan block above.
 
-[L1] A defective Jordan block can split at square-root scale
-([[cex-a-defective-jordan-block-produces-square-root-eigenvalue-splitting]]).
+[L1] A defective Jordan block can split at square-root scale ([[cex-a-defective-jordan-block-produces-square-root-eigenvalue-splitting]]).
 
 ## Verification
 **Proof technique:** direct.

@@ -34,14 +34,11 @@ $A/\mathfrak m$ lifts uniquely to a root over $A$.
 
 **Given:** A local ring $(A,\mathfrak m)$.
 
-[L1] Henselian factor lifting implies unique simple-root lifting
-([[cor-factor-hensel-implies-simple-root-hensel]]).
+[L1] Henselian factor lifting implies unique simple-root lifting ([[cor-factor-hensel-implies-simple-root-hensel]]).
 
-[L2] Unique simple-root lifting recovers the coprime factor-lifting property
-([[lem-simple-root-form-recovers-factor-lifting]]).
+[L2] Unique simple-root lifting recovers the coprime factor-lifting property ([[lem-simple-root-form-recovers-factor-lifting]]).
 
-[L3] A Henselian local ring is precisely a local ring whose maximal-ideal pair
-is Henselian ([[def-henselian-pair-and-henselian-local-ring]]).
+[L3] A Henselian local ring is precisely a local ring whose maximal-ideal pair is Henselian ([[def-henselian-pair-and-henselian-local-ring]]).
 
 ## Proof
 

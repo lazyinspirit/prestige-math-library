@@ -33,33 +33,23 @@ $N$ has a complement in $G$.
 
 **Given:** A finite group $G$ and a normal Hall subgroup $N\trianglelefteq G$.
 
-[L1] A normal Hall subgroup gives an extension
-$1\to N\to G\to G/N\to1$ with $\gcd(|N|,|G/N|)=1$
-([[lem-normal-hall-subgroup-gives-a-coprime-extension]]).
+[L1] A normal Hall subgroup gives an extension $1\to N\to G\to G/N\to1$ with $\gcd(|N|,|G/N|)=1$ ([[lem-normal-hall-subgroup-gives-a-coprime-extension]]).
 
-[L2] In a group extension, a complement to the kernel is equivalent to a split
-section ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
+[L2] In a group extension, a complement to the kernel is equivalent to a split section ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
 
-[L3] Cauchy's theorem produces an element of order $p$ whenever a prime $p$
-divides the order of a finite group ([[thm-cauchys-theorem-for-finite-groups]]).
+[L3] Cauchy's theorem produces an element of order $p$ whenever a prime $p$ divides the order of a finite group ([[thm-cauchys-theorem-for-finite-groups]]).
 
-[L4] Sylow $p$-subgroups exist in finite groups, and any two Sylow
-$p$-subgroups are conjugate ([[thm-sylow-first-theorem]],
-[[thm-sylow-second-theorem]]).
+[L4] Sylow $p$-subgroups exist in finite groups, and any two Sylow $p$-subgroups are conjugate ([[thm-sylow-first-theorem]], [[thm-sylow-second-theorem]]).
 
-[L5] Every nontrivial finite $p$-group has nontrivial center
-([[thm-nontrivial-center-of-a-finite-p-group]]).
+[L5] Every nontrivial finite $p$-group has nontrivial center ([[thm-nontrivial-center-of-a-finite-p-group]]).
 
-[L6] A characteristic subgroup of a normal subgroup is normal in the ambient
-group ([[lem-characteristic-subgroup-of-a-normal-subgroup-is-normal]]).
+[L6] A characteristic subgroup of a normal subgroup is normal in the ambient group ([[lem-characteristic-subgroup-of-a-normal-subgroup-is-normal]]).
 
-[L7] Conjugation by a group element is an automorphism
-([[thm-conjugation-is-an-automorphism]]).
+[L7] Conjugation by a group element is an automorphism ([[thm-conjugation-is-an-automorphism]]).
 
 ## Proof
 
-**Proof technique:** induction on $|G|$, followed in the minimal case by
-coprime cocycle averaging.
+**Proof technique:** induction on $|G|$, followed in the minimal case by coprime cocycle averaging.
 
 1.1 We argue by induction on $|G|$. If $N=1$, then $G$ is a complement to $N$. If $N=G$, then $G/N=1$, so the trivial subgroup is a complement. Assume from now on that $1<N<G$ and that the statement holds for all smaller finite groups. [given, L1, induction, base]
 

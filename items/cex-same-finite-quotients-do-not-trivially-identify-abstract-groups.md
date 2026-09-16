@@ -34,9 +34,7 @@ isomorphic as abstract groups.
 
 **Given:** The groups $G=\mathbb Z$ and $H=\mathbb Z\oplus\mathbb Q$.
 
-[L1] The profinite completion depends only on the system of finite quotients
-([[def-profinite-completion-of-an-abstract-group]],
-[[thm-profinite-completion-is-functorial]]).
+[L1] The profinite completion depends only on the system of finite quotients ([[def-profinite-completion-of-an-abstract-group]], [[thm-profinite-completion-is-functorial]]).
 
 ## Counterexample
 

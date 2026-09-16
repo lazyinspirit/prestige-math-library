@@ -33,14 +33,11 @@ $\mathbb P_X$ is a probability measure on $(S,\Sigma)$.
 
 **Given:** A random element $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$.
 
-[L1] The law is defined by $\mathbb P_X(B)=\mathbb P(X^{-1}(B))$
-([[def-law-or-distribution-of-a-random-element]]).
+[L1] The law is defined by $\mathbb P_X(B)=\mathbb P(X^{-1}(B))$ ([[def-law-or-distribution-of-a-random-element]]).
 
-[L2] A random element is measurable, so measurable target sets have measurable
-preimages ([[def-random-element-and-real-random-variable]]).
+[L2] A random element is measurable, so measurable target sets have measurable preimages ([[def-random-element-and-real-random-variable]]).
 
-[L3] A probability measure is a measure with total mass $1$
-([[def-probability-measure]]).
+[L3] A probability measure is a measure with total mass $1$ ([[def-probability-measure]]).
 
 ## Proof
 

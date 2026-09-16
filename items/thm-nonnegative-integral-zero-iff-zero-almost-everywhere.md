@@ -42,17 +42,11 @@ $$\int f\,d\mu=0 \qquad\Longleftrightarrow\qquad f=0 \text{ almost everywhere.}$
 **Proof technique:** direct.
 
 1.1 Assume $\int f\,d\mu=0$. For $n\ge1$ let $E_n:=\{f\ge1/n\}$. Then[L1, L2, given, algebra]
-$(1/n)\chi_{E_n}\le f$, so [L1] gives
-$$\frac1n\,\mu(E_n)=\int (1/n)\chi_{E_n}\,d\mu\le\int f\,d\mu=0.$$
-Hence $\mu(E_n)=0$ for every $n$. Since $\{f>0\}=\bigcup_nE_n$, the
-exceptional set where $f\ne0$ is null, so $f=0$ almost everywhere by [L2].
+$(1/n)\chi_{E_n}\le f$, so [L1] gives $$\frac1n\,\mu(E_n)=\int (1/n)\chi_{E_n}\,d\mu\le\int f\,d\mu=0.$$ Hence $\mu(E_n)=0$ for every $n$. Since $\{f>0\}=\bigcup_nE_n$, the exceptional set where $f\ne0$ is null, so $f=0$ almost everywhere by [L2].
 
 
 1.2 Assume $f=0$ almost everywhere, and let $N$ be a measurable null set[L2, L3, given]
-containing $\{f>0\}$. If $s=\sum_j c_j\chi_{E_j}$ is a simple minorant of $f$,
-then every set $E_j$ with $c_j>0$ lies inside $\{f>0\}\subseteq N$, so
-$\mu(E_j)=0$; the remaining coefficients are $0$. Therefore $\int s\,d\mu=0$.
-Taking the supremum over all simple minorants in [L3] gives $\int f\,d\mu=0$.
+containing $\{f>0\}$. If $s=\sum_j c_j\chi_{E_j}$ is a simple minorant of $f$, then every set $E_j$ with $c_j>0$ lies inside $\{f>0\}\subseteq N$, so $\mu(E_j)=0$; the remaining coefficients are $0$. Therefore $\int s\,d\mu=0$. Taking the supremum over all simple minorants in [L3] gives $\int f\,d\mu=0$.
 
 
 2.1 Step 1.1 proves the forward implication and step 1.2 proves the reverse [step 1.1, step 1.2] ∎

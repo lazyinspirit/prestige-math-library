@@ -36,15 +36,11 @@ is exact.
 
 **Given:** A ring $R$ and a multiplicative subset $S$.
 
-[L1] Module categories are abelian
-([[thm-modules-over-a-ring-form-an-abelian-category]]).
+[L1] Module categories are abelian ([[thm-modules-over-a-ring-form-an-abelian-category]]).
 
-[L2] Localization of modules preserves short exact sequences
-([[thm-localisation-of-modules-is-exact]]).
+[L2] Localization of modules preserves short exact sequences ([[thm-localisation-of-modules-is-exact]]).
 
-[L3] Exact functors between abelian categories are defined by additivity plus
-left and right exactness
-([[def-exact-functor-between-abelian-categories]]).
+[L3] Exact functors between abelian categories are defined by additivity plus left and right exactness ([[def-exact-functor-between-abelian-categories]]).
 
 ## Verification
 

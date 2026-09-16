@@ -40,20 +40,15 @@ $$\|x_n-x_m\|>\alpha \qquad \text{for all } n\ne m.$$
 
 ## Facts & Assumptions
 
-**Given:** Dependent Choice, a normed space $X$ that is not the span of any
-finite list, and a real $\alpha$ with $0<\alpha<1$.
+**Given:** Dependent Choice, a normed space $X$ that is not the span of any finite list, and a real $\alpha$ with $0<\alpha<1$.
 
-[L1] Dependent Choice produces an $\mathbb N$-indexed chain for an entire
-relation on a nonempty set ([[def-dependent-choice]]).
+[L1] Dependent Choice produces an $\mathbb N$-indexed chain for an entire relation on a nonempty set ([[def-dependent-choice]]).
 
-[L2] If a subspace admits an ordered basis of finite length, then it is closed
-([[cor-finite-dimensional-subspaces-are-closed]]).
+[L2] If a subspace admits an ordered basis of finite length, then it is closed ([[cor-finite-dimensional-subspaces-are-closed]]).
 
-[L3] Riesz's lemma gives a unit vector at distance $>\alpha$ from every proper
-closed subspace ([[lem-riesz-lemma]]).
+[L3] Riesz's lemma gives a unit vector at distance $>\alpha$ from every proper closed subspace ([[lem-riesz-lemma]]).
 
-[L4] The span of a subset is the set of its finite linear combinations
-([[def-linear-combination-and-span]]).
+[L4] The span of a subset is the set of its finite linear combinations ([[def-linear-combination-and-span]]).
 
 ## Proof
 
@@ -69,5 +64,4 @@ closed subspace ([[lem-riesz-lemma]]).
 
 ## Remarks
 
-- This lemma is the optional DC witness from the design. The compactness results
-  on the page do not need it.
+- This lemma is the optional DC witness from the design. The compactness results on the page do not need it.

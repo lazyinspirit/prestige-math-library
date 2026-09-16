@@ -43,12 +43,9 @@ one class.
 
 **Given:** $q\geq1$, $n\geq0$, and $\mathbb F=\mathbb R$ or $\mathbb C$.
 
-[F1] The two-hemisphere clutching convention and its transition relation are
-fixed in [[def-clutching-construction-for-bundles-over-a-suspension]].
+[F1] The two-hemisphere clutching convention and its transition relation are fixed in [[def-clutching-construction-for-bundles-over-a-suspension]].
 
-[F2] A fibration gives the exact sequence of homotopy groups, including the
-pointed low-degree terms
-([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
+[F2] A fibration gives the exact sequence of homotopy groups, including the pointed low-degree terms ([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
 
 ## Proof
 

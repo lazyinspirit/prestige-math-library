@@ -76,21 +76,8 @@ total lengths, never about a number attached to $S$ itself.
 
 ## Remarks
 
-- **What the numbers do and do not say.** "Total length of the removed
-  intervals" is a sum of lengths of an explicit family, and "no cover below
-  $1/2$" is a statement about all covers. Neither says that $S$ *has measure*
-  $1/2$: that would require an outer measure, which is not defined at this point
-  in the reading order. The pair of statements is nevertheless the exact content
-  of the classical assertion.
+- **What the numbers do and do not say.** "Total length of the removed intervals" is a sum of lengths of an explicit family, and "no cover below $1/2$" is a statement about all covers. Neither says that $S$ *has measure* $1/2$: that would require an outer measure, which is not defined at this point in the reading order. The pair of statements is nevertheless the exact content of the classical assertion.
 
-- **Why $4^{-n}$ and not $3^{-n}$.** For the middle-thirds construction the
-  removed length at stage $n$ is $2^{n}3^{-n-1}$, and
-  $\sum_n 2^{n}3^{-n-1} = 3^{-1} \cdot 3 = 1$, so everything is removed in the
-  sense of total length and the Cantor set is null
-  ([[thm-cantor-set-properties]]). Here the removed pieces shrink faster than
-  they multiply and only half the length goes.
+- **Why $4^{-n}$ and not $3^{-n}$.** For the middle-thirds construction the removed length at stage $n$ is $2^{n}3^{-n-1}$, and $\sum_n 2^{n}3^{-n-1} = 3^{-1} \cdot 3 = 1$, so everything is removed in the sense of total length and the Cantor set is null ([[thm-cantor-set-properties]]). Here the removed pieces shrink faster than they multiply and only half the length goes.
 
-- **The bound $1/2$ is sharp in one direction only.** The removed intervals
-  together with a cover of $S$ must reach total length $1$, so a cover of $S$
-  cannot do better than $1/2$; whether total length exactly $1/2$ is approached by
-  covers of $S$ is a question about outer measure and is not asked here.
+- **The bound $1/2$ is sharp in one direction only.** The removed intervals together with a cover of $S$ must reach total length $1$, so a cover of $S$ cannot do better than $1/2$; whether total length exactly $1/2$ is approached by covers of $S$ is a question about outer measure and is not asked here.

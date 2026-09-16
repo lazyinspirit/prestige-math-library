@@ -35,12 +35,9 @@ distinct points are all more than $1/2$ apart.
 
 ## Facts & Assumptions
 
-**Given:** Dependent Choice and a normed space $X$ that is not the span of any
-finite list.
+**Given:** Dependent Choice and a normed space $X$ that is not the span of any finite list.
 
-[L1] Under these hypotheses, for every $0<\alpha<1$ there is a sequence of unit
-vectors $(x_n)$ with $\|x_n-x_m\|>\alpha$ for $n\ne m$
-([[lem-dependent-choice-riesz-separated-unit-sequence]]).
+[L1] Under these hypotheses, for every $0<\alpha<1$ there is a sequence of unit vectors $(x_n)$ with $\|x_n-x_m\|>\alpha$ for $n\ne m$ ([[lem-dependent-choice-riesz-separated-unit-sequence]]).
 
 ## Verification
 

@@ -121,19 +121,8 @@ except through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].
 
 ## Remarks
 
-- **The two claims are not one claim in disguise.** For $|r| > 1$ the sequence
-  $(r^k)$ itself has no limiting behaviour to record when $r$ is negative: its
-  terms alternate in sign and grow, so it neither converges nor diverges to
-  $+\infty$ nor to $-\infty$. Stating claim 2 for $|r|^k$ is what makes it true
-  as written.
+- **The two claims are not one claim in disguise.** For $|r| > 1$ the sequence $(r^k)$ itself has no limiting behaviour to record when $r$ is negative: its terms alternate in sign and grow, so it neither converges nor diverges to $+\infty$ nor to $-\infty$. Stating claim 2 for $|r|^k$ is what makes it true as written.
 
-- **The boundary $|r| = 1$ is excluded and is genuinely different.** For $r = 1$
-  the sequence is constant $1$; for $r = -1$ it is the alternating sequence
-  ([[lem-alternating-sequence]]), which is bounded and divergent
-  ([[fs-bounded-implies-convergent]]). So neither claim extends to $|r| = 1$, and
-  the two cases at the boundary do not even agree with each other.
+- **The boundary $|r| = 1$ is excluded and is genuinely different.** For $r = 1$ the sequence is constant $1$; for $r = -1$ it is the alternating sequence ([[lem-alternating-sequence]]), which is bounded and divergent ([[fs-bounded-implies-convergent]]). So neither claim extends to $|r| = 1$, and the two cases at the boundary do not even agree with each other.
 
-- **Where this is used.** Claim 1 supplies the null sequence $c^{k}$ that makes a
-  contractive sequence Cauchy ([[thm-contractive-implies-cauchy]]) and the null
-  sequence $(1/10)^n$ that identifies the limit of the decimal truncations of
-  $\sqrt 2$ ([[cex-cauchy-rationals-no-rational-limit]]).
+- **Where this is used.** Claim 1 supplies the null sequence $c^{k}$ that makes a contractive sequence Cauchy ([[thm-contractive-implies-cauchy]]) and the null sequence $(1/10)^n$ that identifies the limit of the decimal truncations of $\sqrt 2$ ([[cex-cauchy-rationals-no-rational-limit]]).

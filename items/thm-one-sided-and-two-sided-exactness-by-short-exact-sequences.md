@@ -46,21 +46,15 @@ Let $F:\mathcal A\to\mathcal B$ be a functor between abelian categories.
 
 **Given:** A functor $F:\mathcal A\to\mathcal B$ between abelian categories.
 
-[L1] Left exactness or right exactness already forces additivity
-([[thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive]]).
+[L1] Left exactness or right exactness already forces additivity ([[thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive]]).
 
-[L2] A functor between additive categories is additive exactly when it
-preserves finite biproducts
-([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
+[L2] A functor between additive categories is additive exactly when it preserves finite biproducts ([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
 
-[L3] An additive functor is left exact exactly when it preserves kernels
-([[thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels]]).
+[L3] An additive functor is left exact exactly when it preserves kernels ([[thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels]]).
 
-[L4] Abelian categories remain abelian after passing to the opposite
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L4] Abelian categories remain abelian after passing to the opposite ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L5] In an abelian category every monomorphism is the kernel of its cokernel
-([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+[L5] In an abelian category every monomorphism is the kernel of its cokernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
 
 ## Proof
 

@@ -110,22 +110,10 @@ The notation is licensed by uniqueness of limits of real sequences
 
 ## Remarks
 
-- **This is a discrete l'Hopital rule**, and the shape of the proof says why:
-  the increments of $a$ are compared with the increments of $b$, the comparison
-  is summed by telescoping, and the fixed head $a_K - Lb_K$ is washed out by the
-  divergence of $b_n$. The head is exactly the constant of integration.
+- **This is a discrete l'Hopital rule**, and the shape of the proof says why: the increments of $a$ are compared with the increments of $b$, the comparison is summed by telescoping, and the fixed head $a_K - Lb_K$ is washed out by the divergence of $b_n$. The head is exactly the constant of integration.
 
-- **Strict increase is used twice**, once so that $b_{k+1}-b_k \ne 0$ and the
-  quotients $d_k$ exist, and once so that $b_n - b_K > 0$ and the sum estimate
-  keeps its sign. Unboundedness is used twice as well, once to reach positive
-  $b_k$ and once to kill the head.
+- **Strict increase is used twice**, once so that $b_{k+1}-b_k \ne 0$ and the quotients $d_k$ exist, and once so that $b_n - b_K > 0$ and the sum estimate keeps its sign. Unboundedness is used twice as well, once to reach positive $b_k$ and once to kill the head.
 
-- **There is no converse**, not even under the same hypotheses:
-  [[cex-stolz-cesaro-converse-fails]] exhibits $a_k$ and $b_k$ for which
-  $a_k/b_k$ converges while $(d_k)$ oscillates between two values.
+- **There is no converse**, not even under the same hypotheses: [[cex-stolz-cesaro-converse-fails]] exhibits $a_k$ and $b_k$ for which $a_k/b_k$ converges while $(d_k)$ oscillates between two values.
 
-- **The Cesaro mean theorem is the special case** $a_n = \sum_{k=0}^{n} x_k$,
-  $b_n = n+1$: then $d_n = x_{n+1}$, and the conclusion reads
-  $\sigma_n \to \lim_k x_k$. That deduction is not carried out here, because
-  [[thm-cesaro-mean-theorem]] is proved directly and earlier; the observation is
-  recorded so the reader can see the two results are one.
+- **The Cesaro mean theorem is the special case** $a_n = \sum_{k=0}^{n} x_k$, $b_n = n+1$: then $d_n = x_{n+1}$, and the conclusion reads $\sigma_n \to \lim_k x_k$. That deduction is not carried out here, because [[thm-cesaro-mean-theorem]] is proved directly and earlier; the observation is recorded so the reader can see the two results are one.

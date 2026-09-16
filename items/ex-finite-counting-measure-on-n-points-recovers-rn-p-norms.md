@@ -42,24 +42,16 @@ itself remains valid for every real $p>0$.
 
 **Given:** An integer $n\ge1$, the finite set $X=\{0,\dots,n-1\}$, and a function $f(k)=x_k$.
 
-[L1] $\ell^p$ is the counting-measure version of $L^p$
-([[rem-ell-p-is-l-p-of-counting-measure]]).
+[L1] $\ell^p$ is the counting-measure version of $L^p$ ([[rem-ell-p-is-l-p-of-counting-measure]]).
 
-[L2] For rational $p\ge1$, [[def-p-norms-on-rn]] defines the finite-dimensional
-$p$-norms by the same finite-sum formula, and for $n\ge1$ it defines the same
-maximum norm.
+[L2] For rational $p\ge1$, [[def-p-norms-on-rn]] defines the finite-dimensional $p$-norms by the same finite-sum formula, and for $n\ge1$ it defines the same maximum norm.
 
 ## Verification
 
-**Proof technique:** Unwind the counting-measure integral on a finite set and
-compare it term by term with the published $p$-norms on $\mathbb R^n$.
+**Proof technique:** Unwind the counting-measure integral on a finite set and compare it term by term with the published $p$-norms on $\mathbb R^n$.
 
 1.1 Extending $(x_0,\dots,x_{n-1})$ by zeros outside $\{0,\dots,n-1\}$ turns it [L1, given]
-into a sequence in the setting of [L1]. The resulting $\ell^p$ and
-$L^\infty$ formulas are exactly the two displayed expressions.
+into a sequence in the setting of [L1]. The resulting $\ell^p$ and $L^\infty$ formulas are exactly the two displayed expressions.
 
 2.1 In the ranges stated in [L2], those expressions are exactly the published [step 1.1, L2]
-norms on $\mathbb R^n$. For other real $p>0$, step 1.1 still gives the displayed
-$L^p$ functional, without claiming that the earlier finite-dimensional page
-called it a norm.
-∎
+norms on $\mathbb R^n$. For other real $p>0$, step 1.1 still gives the displayed $L^p$ functional, without claiming that the earlier finite-dimensional page called it a norm. ∎

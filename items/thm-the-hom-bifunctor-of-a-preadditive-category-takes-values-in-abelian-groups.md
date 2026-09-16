@@ -38,14 +38,11 @@ $\mathbf{Ab}$.
 
 **Given:** A preadditive category $\mathcal C$ and objects $A,B$.
 
-[L1] The hom-assignment is a bifunctor to $\mathbf{Set}$
-([[thm-hom-assignment-is-a-bifunctor]]).
+[L1] The hom-assignment is a bifunctor to $\mathbf{Set}$ ([[thm-hom-assignment-is-a-bifunctor]]).
 
-[L2] The covariant, contravariant, and bifunctorial hom-assignments have the
-displayed actions on morphisms ([[def-hom-functors-and-hom-bifunctor]]).
+[L2] The covariant, contravariant, and bifunctorial hom-assignments have the displayed actions on morphisms ([[def-hom-functors-and-hom-bifunctor]]).
 
-[L3] In a preadditive category, hom-sets are abelian groups and composition is
-bilinear ([[def-preadditive-category]]).
+[L3] In a preadditive category, hom-sets are abelian groups and composition is bilinear ([[def-preadditive-category]]).
 
 ## Proof
 

@@ -35,18 +35,13 @@ $$\|\Pi_Nx\|_J\le\|x\|_J,\qquad \|x-\Pi_Nx\|_J\le\|x\|_J,\qquad \|x-\Pi_Nx\|_J\l
 
 ## Facts & Assumptions
 
-[L0] James coordinate $n\ge1$ is the underlying $c_0$ coordinate $n-1$, and
-$e_n$ is supported at that coordinate ([[def-james-space]]).
+[L0] James coordinate $n\ge1$ is the underlying $c_0$ coordinate $n-1$, and $e_n$ is supported at that coordinate ([[def-james-space]]).
 
-[L1] The James formula is a norm, dominates the supremum norm, and satisfies
-$\|x\|_J\le\sqrt2\|x\|_2$ on $\ell^2$
-([[lem-james-formula-defines-a-norm]]).
+[L1] The James formula is a norm, dominates the supremum norm, and satisfies $\|x\|_J\le\sqrt2\|x\|_2$ on $\ell^2$ ([[lem-james-formula-defines-a-norm]]).
 
-[L2] Real $c_0$ is complete for the supremum norm
-([[lem-real-and-complex-c-zero-are-banach]]).
+[L2] Real $c_0$ is complete for the supremum norm ([[lem-real-and-complex-c-zero-are-banach]]).
 
-[L3] A Schauder basis requires existence and uniqueness of the norm-convergent
-coordinate expansion ([[def-schauder-basis-and-coordinate-functionals]]).
+[L3] A Schauder basis requires existence and uniqueness of the norm-convergent coordinate expansion ([[def-schauder-basis-and-coordinate-functionals]]).
 
 ## Proof
 
@@ -60,18 +55,13 @@ coordinate expansion ([[def-schauder-basis-and-coordinate-functionals]]).
 
 $$r_p(x)^2=\frac12\left(|x_{p_1}|^2+ \sum_{j<k}|x_{p_j}-x_{p_{j+1}}|^2+|x_{p_k}|^2\right)$$
 
-(with $r_{(p_1)}(x)=|x_{p_1}|$), and $R(x)=\sup_pr_p(x)$. Direct expansion
-gives $\|x\|_J\le\sqrt2R(x)$. Appending an index $m\to\infty$ to $p$ and
-using $x_m\to0$ gives $r_p(x)\le\|x\|_J$. Hence
-$2^{-1/2}\|x\|_J\le R(x)\le\|x\|_J$. [L1, endpoint expansion]
+(with $r_{(p_1)}(x)=|x_{p_1}|$), and $R(x)=\sup_pr_p(x)$. Direct expansion gives $\|x\|_J\le\sqrt2R(x)$. Appending an index $m\to\infty$ to $p$ and using $x_m\to0$ gives $r_p(x)\le\|x\|_J$. Hence $2^{-1/2}\|x\|_J\le R(x)\le\|x\|_J$. [L1, endpoint expansion]
 
 3.1 Finite-support sequences are dense. Indeed, for nonzero $x$ and $\varepsilon>0$, choose $\delta>0$ with $4\delta R(x)<\varepsilon^2$. Choose a tuple $p$ with $r_p(x)>R(x)-\delta$, append a sufficiently remote final index $N=p_k$ so this remains true, and ensure $\sup_{i\ge N}|x_i|<\delta$. Put $\xi=\Pi_Nx$. For any tuple $q$ meeting the tail, delete its indices at most $N$ and call the remaining tuple $q'$. Concatenating $p$ and $q'$ in the definition of $R(x)$ gives [given, step 2.1]
 
 $$R(x)^2>(R(x)-\delta)^2-\delta^2+r_{q'}(x)^2, \qquad r_{q'}(x)^2<2\delta R(x).$$
 
-Thus $R(x-\xi)^2<2\delta R(x)$, and step 2.1 gives
-$\|x-\xi\|_J^2<4\delta R(x)<\varepsilon^2$. The zero vector is already
-finite support. [step 2.1, finite concatenation, $x\in c_0$]
+Thus $R(x-\xi)^2<2\delta R(x)$, and step 2.1 gives $\|x-\xi\|_J^2<4\delta R(x)<\varepsilon^2$. The zero vector is already finite support. [step 2.1, finite concatenation, $x\in c_0$]
 
 4.1 Fix a tuple $q$. If it lies wholly before or after $N$, the two [given, step 2.1, step 3.1] contractive estimates for $\Pi_Nx$ and $x-\Pi_Nx$ are immediate. If it crosses $N$, delete respectively the tail or the head. Expanding the one new jump to zero shows that the resulting $q$-variation equals an auxiliary endpoint variation $r_{q'}(x)$, hence is at most $R(x)\le\|x\|_J$ by step 2.1. Taking suprema proves both contractive inequalities. [step 2.1, algebra]
 

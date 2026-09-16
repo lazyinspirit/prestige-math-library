@@ -34,21 +34,15 @@ $F:G\to H$ between finite-dimensional real Lie groups is smooth.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a continuous group homomorphism
-$F:G\to H$ between finite-dimensional real Lie groups.
+**Given:** $\mathrm{AC}_\omega$ and a continuous group homomorphism $F:G\to H$ between finite-dimensional real Lie groups.
 
-[A1] Closed subgroups have embedded Lie-group structures under countable
-choice. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
+[A1] Closed subgroups have embedded Lie-group structures under countable choice. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
 
-[F1] Homeomorphic nonempty manifolds have equal intrinsic dimension.
-[[thm-local-homology-detects-interior-points-boundary-points-and-dimension]].
+[F1] Homeomorphic nonempty manifolds have equal intrinsic dimension. [[thm-local-homology-detects-interior-points-boundary-points-and-dimension]].
 
-[F2] A smooth map with invertible differential is locally a diffeomorphism.
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F2] A smooth map with invertible differential is locally a diffeomorphism. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
-[F3] For a smooth Lie-group homomorphism $P$,
-$P(\exp X)=\exp(dP_eX)$.
-[[prop-exponential-map-is-natural-for-lie-group-homomorphisms]].
+[F3] For a smooth Lie-group homomorphism $P$, $P(\exp X)=\exp(dP_eX)$. [[prop-exponential-map-is-natural-for-lie-group-homomorphisms]].
 
 ## Proof
 

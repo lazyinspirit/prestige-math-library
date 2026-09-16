@@ -35,9 +35,7 @@ Every subobject lattice in an abelian category is distributive.
 
 **Given:** The object $(\mathbb Z/2)\oplus(\mathbb Z/2)$ in $\mathbf{Ab}$.
 
-[L1] The subobject lattice of this object is a concrete modular but
-non-distributive diamond
-([[cex-a-subobject-lattice-need-not-be-distributive]]).
+[L1] The subobject lattice of this object is a concrete modular but non-distributive diamond ([[cex-a-subobject-lattice-need-not-be-distributive]]).
 
 ## Refutation
 

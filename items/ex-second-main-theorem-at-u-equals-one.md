@@ -39,19 +39,13 @@ which is precisely block diagonality of the ordinary decomposition matrix.
 
 **Given:** AC and the modular system and characters in the Example.
 
-[F1] The explicit generalized-decomposition formula is
-[[def-generalized-decomposition-numbers]].
+[F1] The explicit generalized-decomposition formula is [[def-generalized-decomposition-numbers]].
 
-[F2] For $u=1$, the subsection convention uses block induction from $G$ to
-itself ([[def-brauer-subsection]]).
+[F2] For $u=1$, the subsection convention uses block induction from $G$ to itself ([[def-brauer-subsection]]).
 
-[F3] Brauer's Second Main Theorem gives generalized-decomposition support
-([[thm-brauer-second-main-theorem]]), under the algebraically closed
-residue-field and AC hypotheses ([[def-algebraically-closed-field]] and
-[[def-axiom-of-choice]]).
+[F3] Brauer's Second Main Theorem gives generalized-decomposition support ([[thm-brauer-second-main-theorem]]), under the algebraically closed residue-field and AC hypotheses ([[def-algebraically-closed-field]] and [[def-axiom-of-choice]]).
 
-[F4] Ordinary decomposition matrices are independently known to be block
-diagonal ([[prop-decomposition-matrix-is-block-diagonal-after-block-ordering]]).
+[F4] Ordinary decomposition matrices are independently known to be block diagonal ([[prop-decomposition-matrix-is-block-diagonal-after-block-ordering]]).
 
 ## Verification
 

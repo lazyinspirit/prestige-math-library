@@ -28,12 +28,9 @@ first cohomology agree automatically, so no separate comparison is needed.
 
 **Given:** The two degree-one definitions of first cohomology.
 
-[L1] The inhomogeneous model uses the explicit differential
-$d^1(f)(g,h)=f(g)+g\cdot f(h)-f(gh)$
-([[def-first-group-cohomology-via-inhomogeneous-one-cocycles]]).
+[L1] The inhomogeneous model uses the explicit differential $d^1(f)(g,h)=f(g)+g\cdot f(h)-f(gh)$ ([[def-first-group-cohomology-via-inhomogeneous-one-cocycles]]).
 
-[L2] Their agreement is a theorem proved by explicit identification
-([[thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]]).
+[L2] Their agreement is a theorem proved by explicit identification ([[thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]]).
 
 ## Refutation
 

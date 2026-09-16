@@ -26,18 +26,13 @@ transition graph.
 
 ## Facts & Assumptions
 
-**Given:** The one-state DFA $D=(\{q\},\{0,1\},\delta,q,\{q\})$ with
-$\delta(q,0)=q$ and $\delta(q,1)=q$.
+**Given:** The one-state DFA $D=(\{q\},\{0,1\},\delta,q,\{q\})$ with $\delta(q,0)=q$ and $\delta(q,1)=q$.
 
-[A1] The statement refuted is: complementing a DFA means complementing the
-transition graph.
+[A1] The statement refuted is: complementing a DFA means complementing the transition graph.
 
-[L1] The correct complement construction keeps the same transition function and
-replaces the accepting set $F$ by $Q\setminus F$, by
-[[thm-complementing-accept-states-complements-the-language]].
+[L1] The correct complement construction keeps the same transition function and replaces the accepting set $F$ by $Q\setminus F$, by [[thm-complementing-accept-states-complements-the-language]].
 
-[L2] A DFA must have exactly one outgoing transition for each input letter from
-each state, by [[def-deterministic-finite-automaton]].
+[L2] A DFA must have exactly one outgoing transition for each input letter from each state, by [[def-deterministic-finite-automaton]].
 
 ## Refutation
 

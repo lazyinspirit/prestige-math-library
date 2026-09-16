@@ -79,20 +79,8 @@ maps, and no second notion of homomorphism of fields is introduced.
 
 ## Remarks
 
-- **This is one of the page's bridges to the published vocabulary.** Together
-  with [[lem-field-is-a-commutative-ring]] and
-  [[lem-commutative-division-ring-is-a-field]], it means that everything proved
-  on this page about rings, subrings and ring homomorphisms applies to the
-  library's fields with no translation, and that a reader meeting
-  [[def-field-homomorphism]] and [[def-ring-homomorphism]] is meeting one notion
-  twice, not two notions.
+- **This is one of the page's bridges to the published vocabulary.** Together with [[lem-field-is-a-commutative-ring]] and [[lem-commutative-division-ring-is-a-field]], it means that everything proved on this page about rings, subrings and ring homomorphisms applies to the library's fields with no translation, and that a reader meeting [[def-field-homomorphism]] and [[def-ring-homomorphism]] is meeting one notion twice, not two notions.
 
-- **The injectivity proof here uses no ideals.** The Remarks of
-  [[def-field-homomorphism]] sketch the standard kernel-is-an-ideal argument;
-  ideals are not defined on this page, and the argument above needs only an
-  inverse and $0 \cdot x = 0$.
+- **The injectivity proof here uses no ideals.** The Remarks of [[def-field-homomorphism]] sketch the standard kernel-is-an-ideal argument; ideals are not defined on this page, and the argument above needs only an inverse and $0 \cdot x = 0$.
 
-- **Injectivity really does need $1_G \ne 0_G$**, that is, it needs the target
-  to be a field rather than an arbitrary ring. The zero map from a field to the
-  one-element ring satisfies (RH1), (RH2) and (RH3) there, since $1 = 0$ in that
-  ring, and it is not injective.
+- **Injectivity really does need $1_G \ne 0_G$**, that is, it needs the target to be a field rather than an arbitrary ring. The zero map from a field to the one-element ring satisfies (RH1), (RH2) and (RH3) there, since $1 = 0$ in that ring, and it is not injective.

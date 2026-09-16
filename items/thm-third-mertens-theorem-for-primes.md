@@ -47,24 +47,13 @@ where $\gamma$ is the Euler-Mascheroni constant of
 
 **Given:** A real number $x\ge2$.
 
-[L1] MIT Problem Set 9, Problem 2(c)--(f), and Tao's displayed equations (25),
-(34), and the computation immediately before Theorem 26 prove the exact
-prime-power-weight estimate
-$$\sum_{2\le n\le x}\frac{\Lambda(n)}{n\log n}=\log\log x+\gamma+O(1/\log x).$$
-These are the first and third sources listed above.
+[L1] MIT Problem Set 9, Problem 2(c)--(f), and Tao's displayed equations (25), (34), and the computation immediately before Theorem 26 prove the exact prime-power-weight estimate $$\sum_{2\le n\le x}\frac{\Lambda(n)}{n\log n}=\log\log x+\gamma+O(1/\log x).$$ These are the first and third sources listed above.
 
-[L2] If $n=p^k$ is a prime power, then
-$$\frac{\Lambda(n)}{n\log n}=\frac1{kp^k}$$
-([[def-von-mangoldt-function]], [[thm-natural-logarithm-laws]]).
+[L2] If $n=p^k$ is a prime power, then $$\frac{\Lambda(n)}{n\log n}=\frac1{kp^k}$$ ([[def-von-mangoldt-function]], [[thm-natural-logarithm-laws]]).
 
-[L3] For $|u|<1$,
-$$-\log(1-u)=\sum_{k\ge1}\frac{u^k}{k}$$
-([[thm-log-one-plus-x-power-series]]).
+[L3] For $|u|<1$, $$-\log(1-u)=\sum_{k\ge1}\frac{u^k}{k}$$ ([[thm-log-one-plus-x-power-series]]).
 
-[L4] The logarithm laws and the reciprocal-Gamma product identify the same
-$\gamma$ as the Euler-Mascheroni constant
-([[thm-natural-logarithm-laws]], [[thm-gamma-weierstrass-product]],
-[[def-euler-mascheroni-constant]]).
+[L4] The logarithm laws and the reciprocal-Gamma product identify the same $\gamma$ as the Euler-Mascheroni constant ([[thm-natural-logarithm-laws]], [[thm-gamma-weierstrass-product]], [[def-euler-mascheroni-constant]]).
 
 ## Proof
 

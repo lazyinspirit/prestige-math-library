@@ -40,19 +40,13 @@ classes on the source.
 
 ## Facts & Assumptions
 
-**Given:** The commutative unital ring, fibration, finite homogeneous family,
-and basis hypothesis in the statement.
+**Given:** The commutative unital ring, fibration, finite homogeneous family, and basis hypothesis in the statement.
 
-[F1] [[lem-global-fiber-basis-trivializes-serre-monodromy]] identifies the
-fiber-cohomology system as constant in the displayed basis.
+[F1] [[lem-global-fiber-basis-trivializes-serre-monodromy]] identifies the fiber-cohomology system as constant in the displayed basis.
 
-[F2] [[lem-leray-hirsch-isomorphism-on-associated-graded-modules-lifts-without-extension-ambiguity]]
-lifts the associated-graded basis isomorphism for this actual map $\Phi$.
+[F2] [[lem-leray-hirsch-isomorphism-on-associated-graded-modules-lifts-without-extension-ambiguity]] lifts the associated-graded basis isomorphism for this actual map $\Phi$.
 
-[F3] [[thm-cohomological-serre-spectral-sequence]] identifies the $E_2$ page
-and the edge classes, while
-[[thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence]]
-identifies cup products and their pagewise products.
+[F3] [[thm-cohomological-serre-spectral-sequence]] identifies the $E_2$ page and the edge classes, while [[thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence]] identifies cup products and their pagewise products.
 
 [A1] [[def-axiom-of-choice]] is assumed exactly as in [F1]–[F2].
 

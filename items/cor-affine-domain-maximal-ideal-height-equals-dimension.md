@@ -43,9 +43,7 @@ $$ \operatorname{ht}(\mathfrak m)=\dim A. $$
 
 [L1] The residue field $A/\mathfrak m$ is a finite extension of $k$ ([[lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite]]).
 
-[L2] In an affine domain,
-$$ \operatorname{ht}(\mathfrak m)+\dim(A/\mathfrak m)=\dim A $$
-([[cor-height-plus-quotient-dimension-affine-domain]]).
+[L2] In an affine domain, $$ \operatorname{ht}(\mathfrak m)+\dim(A/\mathfrak m)=\dim A $$ ([[cor-height-plus-quotient-dimension-affine-domain]]).
 
 ## Proof
 

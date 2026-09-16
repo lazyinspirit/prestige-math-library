@@ -36,9 +36,7 @@ $H(q,p)=\frac12g_q^{-1}(p,p)+V(q)$.
 
 **Given:** The displayed natural Lagrangian.
 
-[F1] The general natural-mechanical calculation gives hyperregularity,
-the Legendre map, and the kinetic-plus-potential Hamiltonian.
-[[prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian]].
+[F1] The general natural-mechanical calculation gives hyperregularity, the Legendre map, and the kinetic-plus-potential Hamiltonian. [[prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian]].
 
 ## Verification
 

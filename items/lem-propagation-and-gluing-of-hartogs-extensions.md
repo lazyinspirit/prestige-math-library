@@ -49,10 +49,7 @@ function on $G\cup U_1\cup\cdots\cup U_N$.
 
 **Given:** A connected open set $G$, open sets $U_1,\dots,U_N$, and the local extension property stated above.
 
-[L1] The local-extension hypothesis here explicitly requires agreement on the
-whole set $U_j\cap G$, which is stronger than agreement on one open overlap in
-the general extension convention
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L1] The local-extension hypothesis here explicitly requires agreement on the whole set $U_j\cap G$, which is stronger than agreement on one open overlap in the general extension convention ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
 [L2] Coordinate shell neighborhoods are one class of open sets with the stated local extension property ([[lem-local-hartogs-extension-across-polydisc-shells]]).
 

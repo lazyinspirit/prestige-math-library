@@ -46,8 +46,7 @@ the following hold:
 
 **Given:** The commutative exact-row diagram in the statement.
 
-[L1] The four lemma gives the monic and epic conclusions on any four-column
-window with exact rows ([[thm-four-lemma-in-an-abelian-category]]).
+[L1] The four lemma gives the monic and epic conclusions on any four-column window with exact rows ([[thm-four-lemma-in-an-abelian-category]]).
 
 ## Proof
 

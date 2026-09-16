@@ -36,11 +36,9 @@ matching the first Möbius values.
 
 **Given:** The reciprocal-zeta identity on $\Re s>1$.
 
-[L1] The Möbius Dirichlet series is $1/\zeta(s)$
-([[cor-mobius-dirichlet-series-reciprocal-zeta]]).
+[L1] The Möbius Dirichlet series is $1/\zeta(s)$ ([[cor-mobius-dirichlet-series-reciprocal-zeta]]).
 
-[L2] Dirichlet-series multiplication is convolution
-([[thm-dirichlet-series-multiplication-convolution]]).
+[L2] Dirichlet-series multiplication is convolution ([[thm-dirichlet-series-multiplication-convolution]]).
 
 ## Verification
 

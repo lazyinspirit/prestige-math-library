@@ -35,23 +35,17 @@ is the unique one of minimum Euclidean norm.
 
 ## Facts & Assumptions
 
-**Given:** A scalar field $\mathbb F\in\{\mathbb R,\mathbb C\}$, a matrix
-$A\in M_{m\times n}(\mathbb F)$, and a right-hand side $b\in\mathbb F^m$.
+**Given:** A scalar field $\mathbb F\in\{\mathbb R,\mathbb C\}$, a matrix $A\in M_{m\times n}(\mathbb F)$, and a right-hand side $b\in\mathbb F^m$.
 
 [L1] $AA^+$ is the orthogonal projection onto $\operatorname{im}A$ ([[thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces]]).
 
-[L2] $\operatorname{im}A^+=\operatorname{im}A^*$
-([[cor-moore-penrose-image-and-kernel-identities]]).
+[L2] $\operatorname{im}A^+=\operatorname{im}A^*$ ([[cor-moore-penrose-image-and-kernel-identities]]).
 
-[L3] Least-squares minimisers are exactly the solutions of
-$A^*(Ax-b)=0$, and any two minimisers differ by an element of $\ker A$
-([[thm-least-squares-solutions-and-normal-equation]]).
+[L3] Least-squares minimisers are exactly the solutions of $A^*(Ax-b)=0$, and any two minimisers differ by an element of $\ker A$ ([[thm-least-squares-solutions-and-normal-equation]]).
 
-[L4] $\ker A^*=(\operatorname{im}A)^\perp$
-([[thm-adjoint-kernel-and-range-orthogonality]]).
+[L4] $\ker A^*=(\operatorname{im}A)^\perp$ ([[thm-adjoint-kernel-and-range-orthogonality]]).
 
-[L5] $\operatorname{im}A^*=(\ker A)^\perp$
-([[thm-adjoint-kernel-and-range-orthogonality]]).
+[L5] $\operatorname{im}A^*=(\ker A)^\perp$ ([[thm-adjoint-kernel-and-range-orthogonality]]).
 
 ## Proof
 
@@ -59,8 +53,7 @@ $A^*(Ax-b)=0$, and any two minimisers differ by an element of $\ker A$
 
 1.1 By [L1], $AA^+b$ is the orthogonal projection of $b$ onto $\operatorname{im}A$. Therefore the residual $b-AA^+b$ lies in $(\operatorname{im}A)^\perp=\ker A^*$ by [L4], so $A^*(AA^+b-b)=0$ and [L3] shows that $A^+b$ is a least-squares minimiser. [L1, L3, L4]
 
-1.2 By [L2] and [L5], $A^+b\in\operatorname{im}A^+=\operatorname{im}A^*=(\ker A)^\perp$. Thus
-$A^+b$ is orthogonal to every vector in $\ker A$. [L2, L5, algebra]
+1.2 By [L2] and [L5], $A^+b\in\operatorname{im}A^+=\operatorname{im}A^*=(\ker A)^\perp$. Thus $A^+b$ is orthogonal to every vector in $\ker A$. [L2, L5, algebra]
 
 2.1 Let $x$ be any least-squares minimiser. By [L3], $x-A^+b\in\ker A$, so $x=A^+b+z$ for some $z\in\ker A$. Step 1.2 then gives $$ \|x\|_2^2=\|A^+b\|_2^2+\|z\|_2^2\ge \|A^+b\|_2^2. $$ [L3, step 1.2, algebra]
 

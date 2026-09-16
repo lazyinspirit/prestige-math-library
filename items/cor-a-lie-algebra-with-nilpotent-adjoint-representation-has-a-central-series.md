@@ -36,18 +36,13 @@ the upper central series reaches $\mathfrak g$.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional Lie algebra $\mathfrak g$ for which every
-$\operatorname{ad}_x$ is nilpotent.
+**Given:** A finite-dimensional Lie algebra $\mathfrak g$ for which every $\operatorname{ad}_x$ is nilpotent.
 
-[L1] Engel triangularization gives a flag lowered by a nil representation
-([[thm-engels-triangularization-theorem]]).
+[L1] Engel triangularization gives a flag lowered by a nil representation ([[thm-engels-triangularization-theorem]]).
 
-[L2] Engel's theorem identifies the hypothesis with nilpotence of
-$\mathfrak g$ ([[thm-engels-theorem]]).
+[L2] Engel's theorem identifies the hypothesis with nilpotence of $\mathfrak g$ ([[thm-engels-theorem]]).
 
-[L3] The upper central series has $Z_0=0$, and
-$[\mathfrak g,B]\subseteq Z_r$ implies $B\subseteq Z_{r+1}$
-([[def-upper-central-series-of-a-lie-algebra]]).
+[L3] The upper central series has $Z_0=0$, and $[\mathfrak g,B]\subseteq Z_r$ implies $B\subseteq Z_{r+1}$ ([[def-upper-central-series-of-a-lie-algebra]]).
 
 ## Proof
 

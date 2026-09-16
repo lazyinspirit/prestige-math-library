@@ -35,18 +35,13 @@ subgroup of $G$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a smooth left action of $G$ on a Hausdorff
-smooth manifold $M$, and $x\in M$.
+**Given:** $\mathrm{AC}_\omega$, a smooth left action of $G$ on a Hausdorff smooth manifold $M$, and $x\in M$.
 
-[A1] The stabilizer is a subgroup and the orbit map $\Phi_x(g)=g\cdot x$ is
-smooth. [[def-orbit-stabilizer-and-orbit-map-of-a-smooth-action]].
+[A1] The stabilizer is a subgroup and the orbit map $\Phi_x(g)=g\cdot x$ is smooth. [[def-orbit-stabilizer-and-orbit-map-of-a-smooth-action]].
 
-[A2] A closed subgroup has its unique embedded Lie-subgroup structure under
-countable choice. [[def-countable-choice]],
-[[thm-cartans-closed-subgroup-theorem]].
+[A2] A closed subgroup has its unique embedded Lie-subgroup structure under countable choice. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
 
-[F1] The manifold convention is Hausdorff, so singletons are closed.
-[[def-topological-manifold-without-boundary]].
+[F1] The manifold convention is Hausdorff, so singletons are closed. [[def-topological-manifold-without-boundary]].
 
 ## Proof
 

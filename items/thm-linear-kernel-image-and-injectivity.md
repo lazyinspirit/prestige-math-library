@@ -32,17 +32,13 @@ linear subspaces. Moreover, $T$ is injective if and only if $\ker T=\{0_V\}$.
 
 **Given:** A linear map $T:V\to W$ of vector spaces over a field $F$.
 
-[L1] The kernel and image have the displayed set descriptions
-([[def-kernel-and-image-of-a-linear-map]]).
+[L1] The kernel and image have the displayed set descriptions ([[def-kernel-and-image-of-a-linear-map]]).
 
-[L2] A nonempty subset is a linear subspace exactly when it is closed under
-$\lambda u+v$ ([[lem-linear-subspace-criterion]]).
+[L2] A nonempty subset is a linear subspace exactly when it is closed under $\lambda u+v$ ([[lem-linear-subspace-criterion]]).
 
-[L3] A linear map carries $au+v$ to $aT(u)+T(v)$, preserves zero, and
-preserves subtraction ([[def-linear-map]], [[lem-linear-map-elementary-properties]]).
+[L3] A linear map carries $au+v$ to $aT(u)+T(v)$, preserves zero, and preserves subtraction ([[def-linear-map]], [[lem-linear-map-elementary-properties]]).
 
-[L4] A function is injective when equal outputs have equal inputs
-([[def-injection-surjection-bijection]]).
+[L4] A function is injective when equal outputs have equal inputs ([[def-injection-surjection-bijection]]).
 
 ## Proof
 

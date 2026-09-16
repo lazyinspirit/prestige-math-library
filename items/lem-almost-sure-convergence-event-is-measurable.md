@@ -41,5 +41,4 @@ $\{\omega:X_n(\omega)\to X(\omega)\}$ is an event.
 $$\bigcap_{r\in\mathbb Q_{>0}}\ \bigcup_{N=0}^\infty\ \bigcap_{n\ge N}\{|X_n-X|<r\}.$$ [L1]
 
 2.1 Each set in the display is measurable because $X_n-X$ is a real random. [step 1.1]
-variable; countable unions and intersections preserve measurability. Thus the
-displayed set, and hence the convergence event, is measurable. [step 1.1] ∎
+variable; countable unions and intersections preserve measurability. Thus the displayed set, and hence the convergence event, is measurable. [step 1.1] ∎

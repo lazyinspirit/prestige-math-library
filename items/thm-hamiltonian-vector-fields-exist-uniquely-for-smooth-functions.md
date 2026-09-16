@@ -32,9 +32,7 @@ a unique smooth vector field $X_H$ satisfying $\iota_{X_H}\omega=dH$.
 
 **Given:** A smooth function $H$ on $(M,\omega)$.
 
-[F1] The defining equation for $X_H$ is
-$\omega^\flat(X_H)=dH$.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F1] The defining equation for $X_H$ is $\omega^\flat(X_H)=dH$. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

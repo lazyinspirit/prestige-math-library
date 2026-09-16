@@ -105,21 +105,10 @@ and it is recorded as a named example on the companion page.
 
 ## Remarks
 
-- **The witness is named on the companion page** as
-  [[ex-ratio-fails-root-succeeds]], which quotes the four values computed here.
+- **The witness is named on the companion page** as [[ex-ratio-fails-root-succeeds]], which quotes the four values computed here.
 
-- **This is the standard witness that the root criterion is strictly stronger.**
-  The ratios oscillate between $1/8$ and $2$, so a criterion reading only
-  $\limsup_k q_k = 2 > 1$ learns nothing about whether $a_k \to 0$; the roots
-  converge to $1/2 < 1$, which settles it. The same sequence reappears wherever
-  the ratio and root tests are compared.
+- **This is the standard witness that the root criterion is strictly stronger.** The ratios oscillate between $1/8$ and $2$, so a criterion reading only $\limsup_k q_k = 2 > 1$ learns nothing about whether $a_k \to 0$; the roots converge to $1/2 < 1$, which settles it. The same sequence reappears wherever the ratio and root tests are compared.
 
-- **Why the roots are so much better behaved.** Taking an $n$-th root divides the
-  exponent by $n$, so the bounded perturbation $(-1)^k$ in the exponent of
-  $2^{-k+(-1)^k}$ contributes $2^{\pm 1/(k+1)}$, which tends to $1$. The ratio, by
-  contrast, differences the exponent, and a bounded oscillation does not shrink
-  under differencing.
+- **Why the roots are so much better behaved.** Taking an $n$-th root divides the exponent by $n$, so the bounded perturbation $(-1)^k$ in the exponent of $2^{-k+(-1)^k}$ contributes $2^{\pm 1/(k+1)}$, which tends to $1$. The ratio, by contrast, differences the exponent, and a bounded oscillation does not shrink under differencing.
 
-- **Both outer inequalities of [[thm-ratio-root-inequality]] are strict here, but
-  the middle one is not.** A witness making all three strict at once is
-  [[ex-strict-ratio-root-chain]].
+- **Both outer inequalities of [[thm-ratio-root-inequality]] are strict here, but the middle one is not.** A witness making all three strict at once is [[ex-strict-ratio-root-chain]].

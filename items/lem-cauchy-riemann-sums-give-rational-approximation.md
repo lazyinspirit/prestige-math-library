@@ -41,20 +41,13 @@ $$\sup_{z\in K}|f(z)-r(z)|<\varepsilon.$$
 
 ## Facts & Assumptions
 
-**Given:** A compact set $K$, an open neighbourhood $U$ of $K$, a holomorphic
-function $f:U\to\mathbb C$, and a tolerance $\varepsilon>0$.
+**Given:** A compact set $K$, an open neighbourhood $U$ of $K$, a holomorphic function $f:U\to\mathbb C$, and a tolerance $\varepsilon>0$.
 
-[L1] There is a polygonal cycle $\Gamma$ with $\Gamma^\ast\subseteq U\setminus K$
-and $n(\Gamma,z)=1$ for every $z\in K$
-([[lem-grid-cycle-for-runge-approximation]]).
+[L1] There is a polygonal cycle $\Gamma$ with $\Gamma^\ast\subseteq U\setminus K$ and $n(\Gamma,z)=1$ for every $z\in K$ ([[lem-grid-cycle-for-runge-approximation]]).
 
-[L2] A cycle null-homologous in an open set satisfies the global Cauchy formula
-there ([[thm-global-cauchy-integral-formula-homology]],
-[[def-null-homologous-and-homologous-complex-cycles]]).
+[L2] A cycle null-homologous in an open set satisfies the global Cauchy formula there ([[thm-global-cauchy-integral-formula-homology]], [[def-null-homologous-and-homologous-complex-cycles]]).
 
-[L3] A continuous map on a compact metric space is uniformly continuous, and the
-continuous image of a compact space is compact
-([[thm-heine-cantor-metric]], [[thm-continuous-image-of-a-compact-space-is-compact]]).
+[L3] A continuous map on a compact metric space is uniformly continuous, and the continuous image of a compact space is compact ([[thm-heine-cantor-metric]], [[thm-continuous-image-of-a-compact-space-is-compact]]).
 
 ## Proof
 

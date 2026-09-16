@@ -43,29 +43,19 @@ the unchanged ground tree is special and not Suslin in $M[G]$.
 
 **Given:** $M,T,P(T),G$ as in the Statement. AC holds in $M$ and in $M[G]$.
 
-[F1] Finite-specialization forcing of the ground Suslin tree is ccc, preserves
-all ground cardinals and cofinalities, and internally forces the ground tree to
-be special and non-Suslin. [[thm-specializing-forcing-kills-a-suslin-tree]]
+[F1] Finite-specialization forcing of the ground Suslin tree is ccc, preserves all ground cardinals and cofinalities, and internally forces the ground tree to be special and non-Suslin. [[thm-specializing-forcing-kills-a-suslin-tree]]
 
-[F2] Its conditions are finite natural-valued maps that give unequal labels to
-distinct comparable nodes; stronger conditions extend graphs and the empty
-function is greatest. [[def-finite-aronszajn-specialization-poset]]
+[F2] Its conditions are finite natural-valued maps that give unequal labels to distinct comparable nodes; stronger conditions extend graphs and the empty function is greatest. [[def-finite-aronszajn-specialization-poset]]
 
-[F3] Each $D_t$ is dense, and the union of a nonempty directed family meeting
-all $D_t$ is a total specializing map. [[lem-specialization-dense-domains-and-union]]
+[F3] Each $D_t$ is dense, and the union of a nonempty directed family meeting all $D_t$ is a total specializing map. [[lem-specialization-dense-domains-and-union]]
 
-[F4] A Suslin tree has height $\omega_1$ and countable levels, and a total map
-separating comparable nodes witnesses specialness.
-[[def-aronszajn-suslin-and-special-tree]]
+[F4] A Suslin tree has height $\omega_1$ and countable levels, and a total map separating comparable nodes witnesses specialness. [[def-aronszajn-suslin-and-special-tree]]
 
-[F5] Under countable choice, a countable union of countable sets is countable.
-[[thm-countable-union-of-countable]]
+[F5] Under countable choice, a countable union of countable sets is countable. [[thm-countable-union-of-countable]]
 
-[F6] Under countable choice, no at most countable subset of $\omega_1$ is
-cofinal in $\omega_1$. [[thm-countable-subsets-of-omega-one-are-bounded]]
+[F6] Under countable choice, no at most countable subset of $\omega_1$ is cofinal in $\omega_1$. [[thm-countable-subsets-of-omega-one-are-bounded]]
 
-[A1] AC is available in the ground and is inherited by the supplied ZFC
-generic extension. [[def-axiom-of-choice]]
+[A1] AC is available in the ground and is inherited by the supplied ZFC generic extension. [[def-axiom-of-choice]]
 
 ## Verification
 
@@ -83,9 +73,5 @@ generic extension. [[def-axiom-of-choice]]
 
 ## Remarks
 
-- Preservation of $\omega_1$ alone does not identify an uncountable fiber.
-  The countable-union theorem and the cofinal height map supply the required
-  contradiction.
-- A total natural-valued specialization cannot create a cofinal branch: its
-  restriction to such a branch would inject a cofinal height set into
-  $\omega$.
+- Preservation of $\omega_1$ alone does not identify an uncountable fiber. The countable-union theorem and the cofinal height map supply the required contradiction.
+- A total natural-valued specialization cannot create a cofinal branch: its restriction to such a branch would inject a cofinal height set into $\omega$.

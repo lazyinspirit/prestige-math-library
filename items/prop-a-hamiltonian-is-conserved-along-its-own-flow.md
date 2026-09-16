@@ -31,8 +31,7 @@ $H$ is constant along every integral curve of $X_H$.
 
 **Given:** A Hamiltonian $H$ and an integral curve $\gamma$ of $X_H$.
 
-[F1] The convention is $dH=\iota_{X_H}\omega$.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F1] The convention is $dH=\iota_{X_H}\omega$. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

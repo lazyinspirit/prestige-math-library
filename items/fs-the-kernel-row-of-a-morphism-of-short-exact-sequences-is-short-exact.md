@@ -35,11 +35,9 @@ kernel row is short exact.
 
 **Given:** The universal short-exactness claim of the statement.
 
-[L1] The general positive theorem gives exactness only at the first two nodes
-([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
+[L1] The general positive theorem gives exactness only at the first two nodes ([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
 
-[L2] The multiplication-by-two diagram gives a failure of short exactness
-([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
+[L2] The multiplication-by-two diagram gives a failure of short exactness ([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
 
 ## Refutation
 

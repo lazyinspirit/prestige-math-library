@@ -47,8 +47,7 @@ $$(\nabla_X\operatorname{Rm})(Y,Z,U,V)+(\nabla_Y\operatorname{Rm})(Z,X,U,V)+(\na
 
 [F3] Induced tensor connections commute with fixed permutations and contractions. [[prop-induced-connections-commute-with-contraction-and-permutation]].
 
-[F4] Torsion freeness of the Levi–Civita connection gives
-$[A,B]=\nabla_AB-\nabla_BA$. [[def-levi-civita-connection]].
+[F4] Torsion freeness of the Levi–Civita connection gives $[A,B]=\nabla_AB-\nabla_BA$. [[def-levi-civita-connection]].
 
 ## Proof
 

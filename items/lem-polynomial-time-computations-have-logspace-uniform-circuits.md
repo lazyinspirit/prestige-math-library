@@ -29,9 +29,7 @@ $x\in\{0,1\}^n$.
 
 **Given:** a fixed deterministic multitape machine $M$ and a fixed integer $k\ge1$ such that $B(n)=(n+2)^k+k$ bounds its running time on every input of length $n$.
 
-[L2] Logspace uniformity requires logspace procedures for the indexed
-circuit's size, gate types, predecessor queries, and designated output
-([[def-logspace-uniform-circuit-family]]).
+[L2] Logspace uniformity requires logspace procedures for the indexed circuit's size, gate types, predecessor queries, and designated output ([[def-logspace-uniform-circuit-family]]).
 
 ## Proof
 

@@ -26,8 +26,7 @@ empty affine scheme has global ring $0$.
 
 **Given:** The zero ring $0$, in which $0=1$.
 
-[F1] Global functions on an affine spectrum recover its defining ring
-([[thm-global-sections-affine-scheme]]).
+[F1] Global functions on an affine spectrum recover its defining ring ([[thm-global-sections-affine-scheme]]).
 
 ## Verification
 

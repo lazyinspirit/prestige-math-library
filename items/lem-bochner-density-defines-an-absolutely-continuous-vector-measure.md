@@ -43,14 +43,7 @@ for every measurable $E$.
 
 [L3] For an integrable scalar function, its indefinite integral is countably additive ([[prop-indefinite-integral-of-an-integrable-function-is-countably-additive]]).
 
-[L4] A Bochner-integrable function has integrable scalar norm and one defining
-$L^1$ simple approximation
-([[thm-bochner-integrability-criterion]], [[def-bochner-integrable-function]]). If
-$s=\sum_jx_j\mathbf1_{A_j}$ is integrable simple, then
-$\int_Es=\sum_j\mu(E\cap A_j)x_j$
-([[def-banach-valued-simple-function-and-integral]]), and this integral is
-representation-independent and linear
-([[lem-banach-valued-simple-integral-is-well-defined]]).
+[L4] A Bochner-integrable function has integrable scalar norm and one defining $L^1$ simple approximation ([[thm-bochner-integrability-criterion]], [[def-bochner-integrable-function]]). If $s=\sum_jx_j\mathbf1_{A_j}$ is integrable simple, then $\int_Es=\sum_j\mu(E\cap A_j)x_j$ ([[def-banach-valued-simple-function-and-integral]]), and this integral is representation-independent and linear ([[lem-banach-valued-simple-integral-is-well-defined]]).
 
 [L5] Bounded variation makes variation a finite measure ([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]).
 

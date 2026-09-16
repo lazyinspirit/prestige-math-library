@@ -33,11 +33,9 @@ $\omega(e_i,f_j)=\delta_{ij}$ and all $e$--$e$ and $f$--$f$ pairings vanish.
 
 **Given:** A symplectic vector space $(V,\omega)$.
 
-[F1] Symplectic means that the radical of $\omega$ is zero.
-[[def-symplectic-vector-space]].
+[F1] Symplectic means that the radical of $\omega$ is zero. [[def-symplectic-vector-space]].
 
-[F2] An alternating form has a basis of symplectic pairs followed by a basis
-of its radical. [[thm-alternating-forms-have-a-symplectic-normal-form]].
+[F2] An alternating form has a basis of symplectic pairs followed by a basis of its radical. [[thm-alternating-forms-have-a-symplectic-normal-form]].
 
 ## Proof
 

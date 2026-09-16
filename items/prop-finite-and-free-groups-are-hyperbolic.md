@@ -31,11 +31,9 @@ Every finite group and every finitely generated free group is hyperbolic.
 
 **Given:** Either a finite group $G$ with a finite generating set $S$, or a finitely generated free group $F(X)$ with free basis $X$.
 
-[L1] Cayley trees are $0$-hyperbolic
-([[prop-cayley-trees-are-zero-hyperbolic]]).
+[L1] Cayley trees are $0$-hyperbolic ([[prop-cayley-trees-are-zero-hyperbolic]]).
 
-[L2] The Cayley graph of a free group with respect to a free basis is a tree
-([[thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree]]).
+[L2] The Cayley graph of a free group with respect to a free basis is a tree ([[thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree]]).
 
 ## Proof
 

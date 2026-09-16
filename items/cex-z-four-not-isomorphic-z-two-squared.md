@@ -33,17 +33,11 @@ whereas every nonidentity element of the second has order $2$.
 
 **Given:** The additive quotient groups $\mathbb Z/4$ and $\mathbb Z/2$.
 
-[L1] The residue classes modulo $n$ form the quotient group of the additive
-integers ([[prop-integers-modulo-n-as-a-quotient-group]]).
+[L1] The residue classes modulo $n$ form the quotient group of the additive integers ([[prop-integers-modulo-n-as-a-quotient-group]]).
 
-[L2] In a direct product, a pair with finite component orders $m,n$ has order the
-unique positive natural whose canonical integer image is
-$\operatorname{lcm}(\iota(m),\iota(n))$
-([[thm-order-of-element-in-direct-product]]).
+[L2] In a direct product, a pair with finite component orders $m,n$ has order the unique positive natural whose canonical integer image is $\operatorname{lcm}(\iota(m),\iota(n))$ ([[thm-order-of-element-in-direct-product]]).
 
-[L3] A group isomorphism is a bijective homomorphism, and a homomorphism
-preserves powers ([[def-group-isomorphism-and-automorphism]],
-[[lem-group-homomorphism-basic-properties]]).
+[L3] A group isomorphism is a bijective homomorphism, and a homomorphism preserves powers ([[def-group-isomorphism-and-automorphism]], [[lem-group-homomorphism-basic-properties]]).
 
 ## Refutation
 

@@ -105,28 +105,10 @@ individual intervals is vacuously fatal.
 
 ## Remarks
 
-- **No Archimedean input is needed.** The lengths are handled entirely by the
-  algebra of limits and the uniqueness of limits: $\ell_k$ always converges, to
-  $b - a$, and the two directions of claim 2 are then the two directions of
-  "$b - a = 0$". A proof that instead argues "if $b - a > 0$ then some $\ell_k$
-  is smaller" does need the Archimedean property
-  ([[cor-archimedean-reciprocal]]), and it is avoidable, so it is avoided.
+- **No Archimedean input is needed.** The lengths are handled entirely by the algebra of limits and the uniqueness of limits: $\ell_k$ always converges, to $b - a$, and the two directions of claim 2 are then the two directions of "$b - a = 0$". A proof that instead argues "if $b - a > 0$ then some $\ell_k$ is smaller" does need the Archimedean property ([[cor-archimedean-reciprocal]]), and it is avoidable, so it is avoided.
 
-- **Nestedness gives more than it is usually stated to give.** The intersection
-  is not merely nonempty; it is the closed interval $[a,b]$, and $a$ and $b$ are
-  the limits of the endpoint sequences. The single-point case is exactly the case
-  in which those two limits agree, and that is what makes the nested interval
-  property usable as a *construction* of a real number, as in
-  [[ex-nested-intervals-single-point]].
+- **Nestedness gives more than it is usually stated to give.** The intersection is not merely nonempty; it is the closed interval $[a,b]$, and $a$ and $b$ are the limits of the endpoint sequences. The single-point case is exactly the case in which those two limits agree, and that is what makes the nested interval property usable as a *construction* of a real number, as in [[ex-nested-intervals-single-point]].
 
-- **This is one of the standard equivalents of completeness.** Nested intervals
-  together with the Archimedean property imply the least-upper-bound property, so
-  the implication proved here is not reversible for free: it is half of an
-  equivalence whose other half needs the Archimedean hypothesis separately.
-  [[rem-completeness-routes]] records where this library stands on those routes.
+- **This is one of the standard equivalents of completeness.** Nested intervals together with the Archimedean property imply the least-upper-bound property, so the implication proved here is not reversible for free: it is half of an equivalence whose other half needs the Archimedean hypothesis separately. [[rem-completeness-routes]] records where this library stands on those routes.
 
-- **The witnesses for the two deleted hypotheses** are
-  [[cex-nested-open-intervals-empty]], which keeps boundedness and drops
-  closedness, and [[cex-nested-unbounded-closed-empty]], which keeps closedness
-  and drops boundedness. Neither is used above; each shows that the corresponding
-  hypothesis cannot be removed.
+- **The witnesses for the two deleted hypotheses** are [[cex-nested-open-intervals-empty]], which keeps boundedness and drops closedness, and [[cex-nested-unbounded-closed-empty]], which keeps closedness and drops boundedness. Neither is used above; each shows that the corresponding hypothesis cannot be removed.

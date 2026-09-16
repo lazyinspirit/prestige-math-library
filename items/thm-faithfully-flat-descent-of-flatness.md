@@ -36,14 +36,11 @@ flat over $S$.
 
 **Given:** A faithfully flat map $R\to S$ and an $R$-module $N$.
 
-[L1] Extension of scalars along a flat ring map preserves flatness
-([[prop-extension-of-scalars-preserves-flat-modules]]).
+[L1] Extension of scalars along a flat ring map preserves flatness ([[prop-extension-of-scalars-preserves-flat-modules]]).
 
-[L2] Flatness is transitive under change of rings
-([[prop-transitivity-of-flatness-under-change-of-rings]]).
+[L2] Flatness is transitive under change of rings ([[prop-transitivity-of-flatness-under-change-of-rings]]).
 
-[L3] Faithful flatness means exactness is reflected after tensoring with $S$
-([[def-flat-and-faithfully-flat-modules-and-ring-maps]], [[thm-faithfully-flat-ring-map-characterisations]]).
+[L3] Faithful flatness means exactness is reflected after tensoring with $S$ ([[def-flat-and-faithfully-flat-modules-and-ring-maps]], [[thm-faithfully-flat-ring-map-characterisations]]).
 
 ## Proof
 

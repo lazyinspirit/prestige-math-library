@@ -112,20 +112,8 @@ Then:
 
 ## Remarks
 
-- **The name.** As a set, $L$ is $\mathbb{R}$ with the point $0$ doubled: every
-  class other than the two origins has a unique representative $(x,i)$ with
-  $x \ne 0$ and is determined by $x$ alone. Each origin has neighbourhoods that
-  look like intervals around $0$, and any two such intervals overlap away from
-  $0$, which is exactly step 3.3.
+- **The name.** As a set, $L$ is $\mathbb{R}$ with the point $0$ doubled: every class other than the two origins has a unique representative $(x,i)$ with $x \ne 0$ and is determined by $x$ alone. Each origin has neighbourhoods that look like intervals around $0$, and any two such intervals overlap away from $0$, which is exactly step 3.3.
 
-- **The metric of claim 1 is the standard truncation trick.** Truncating at $1$
-  keeps the two copies at distance $2$ from each other while leaving the topology
-  of each copy untouched, since only balls of radius at most $1$ matter for the
-  topology (step 2.1). Any bounded metric equivalent to the usual one on each
-  copy would do.
+- **The metric of claim 1 is the standard truncation trick.** Truncating at $1$ keeps the two copies at distance $2$ from each other while leaving the topology of each copy untouched, since only balls of radius at most $1$ matter for the topology (step 2.1). Any bounded metric equivalent to the usual one on each copy would do.
 
-- **Strengthening the source's separation and countability properties does not
-  help here.** $S$ is metrizable, hence Hausdorff and first countable, and $q$ is
-  an *open* quotient map; none of that is enough. What would be needed is a condition on the
-  relation itself, and no such condition is stated at this point in the reading
-  order ([[rem-constructions-this-page-stops-short-of]]).
+- **Strengthening the source's separation and countability properties does not help here.** $S$ is metrizable, hence Hausdorff and first countable, and $q$ is an *open* quotient map; none of that is enough. What would be needed is a condition on the relation itself, and no such condition is stated at this point in the reading order ([[rem-constructions-this-page-stops-short-of]]).

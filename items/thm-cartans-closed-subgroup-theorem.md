@@ -40,38 +40,21 @@ the local transverse contradiction. No connectedness assumption is made.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and
-a subgroup $H\le G$ that is closed in $G$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and a subgroup $H\le G$ that is closed in $G$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] The exponential restricts to a diffeomorphism from a neighborhood of
-$0\in\mathfrak g$ onto an identity neighborhood in $G$.
-[[cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]].
+[F1] The exponential restricts to a diffeomorphism from a neighborhood of $0\in\mathfrak g$ onto an identity neighborhood in $G$. [[cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]].
 
-[F2] Locally,
-$\log(\exp X\exp Y)=\operatorname{BCH}(X,Y)$; the BCH series has linear term
-$X+Y$ and its terms of degree at least two converge uniformly on smaller
-balls. [[thm-baker-campbell-hausdorff]],
-[[def-baker-campbell-hausdorff-series]],
-[[lem-local-convergence-of-the-baker-campbell-hausdorff-series]].
+[F2] Locally, $\log(\exp X\exp Y)=\operatorname{BCH}(X,Y)$; the BCH series has linear term $X+Y$ and its terms of degree at least two converge uniformly on smaller balls. [[thm-baker-campbell-hausdorff]], [[def-baker-campbell-hausdorff-series]], [[lem-local-convergence-of-the-baker-campbell-hausdorff-series]].
 
-[F3] Along a fixed line,
-$(\exp Z)^n=\exp(nZ)$ for every integer $n$.
-[[prop-exponential-scales-one-parameter-subgroups]].
+[F3] Along a fixed line, $(\exp Z)^n=\exp(nZ)$ for every integer $n$. [[prop-exponential-scales-one-parameter-subgroups]].
 
-[F4] A finite-dimensional subspace has a linear complement, and a smooth map
-with invertible differential has a smooth local inverse.
-[[lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice]],
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F4] A finite-dimensional subspace has a linear complement, and a smooth map with invertible differential has a smooth local inverse. [[lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice]], [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
-[F5] A bounded sequence in a finite-dimensional real coordinate space has a
-convergent subsequence. [[cor-bolzano-weierstrass-in-rn]].
+[F5] A bounded sequence in a finite-dimensional real coordinate space has a convergent subsequence. [[cor-bolzano-weierstrass-in-rn]].
 
-[F6] Slice charts define embedded submanifolds, and the tangent algebra of an
-immersed Lie subgroup is a Lie subalgebra.
-[[def-embedded-submanifold-and-slice-chart]],
-[[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]].
+[F6] Slice charts define embedded submanifolds, and the tangent algebra of an immersed Lie subgroup is a Lie subalgebra. [[def-embedded-submanifold-and-slice-chart]], [[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]].
 
 ## Proof
 

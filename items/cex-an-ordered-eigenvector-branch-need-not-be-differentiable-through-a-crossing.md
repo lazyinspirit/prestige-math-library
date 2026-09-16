@@ -36,11 +36,9 @@ $t<0$.
 
 ## Facts & Assumptions
 
-**Given:** The symmetric family
-$A(t)=\begin{pmatrix}t&0\\0&-t\end{pmatrix}$.
+**Given:** The symmetric family $A(t)=\begin{pmatrix}t&0\\0&-t\end{pmatrix}$.
 
-[L1] Simple eigenpair branches exist locally only while the eigenvalue stays
-simple ([[thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing]]).
+[L1] Simple eigenpair branches exist locally only while the eigenvalue stays simple ([[thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing]]).
 
 ## Counterexample
 **Proof technique:** direct.

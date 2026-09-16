@@ -31,14 +31,9 @@ norm-preserving Hahn-Banach extension to the whole space is unique.
 
 ## Facts & Assumptions
 
-**Given:** The diagonal subspace
-$M=\operatorname{span}\{(1,1)\} \subseteq (\mathbb{R}^2,\|\cdot\|_\infty)$ and
-the functional $f_0(t,t)=t$ on $M$.
+**Given:** The diagonal subspace $M=\operatorname{span}\{(1,1)\} \subseteq (\mathbb{R}^2,\|\cdot\|_\infty)$ and the functional $f_0(t,t)=t$ on $M$.
 
-[L1] For every $c \in [-1,1]$, the functional
-$$F_c(a,b)=\frac{1+c}{2}a+\frac{1-c}{2}b$$
-is a norm-preserving extension of $f_0$
-([[ex-many-extensions-from-a-codimension-one-subspace]]).
+[L1] For every $c \in [-1,1]$, the functional $$F_c(a,b)=\frac{1+c}{2}a+\frac{1-c}{2}b$$ is a norm-preserving extension of $f_0$ ([[ex-many-extensions-from-a-codimension-one-subspace]]).
 
 ## Counterexample
 

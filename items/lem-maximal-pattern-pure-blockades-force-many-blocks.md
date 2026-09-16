@@ -39,8 +39,7 @@ Then $q\geq\epsilon^{-2}$.
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses of the statement and a maximal blockade
-$(A_1,\dots,A_q)$.
+**Given:** The hypotheses of the statement and a maximal blockade $(A_1,\dots,A_q)$.
 
 ## Proof
 

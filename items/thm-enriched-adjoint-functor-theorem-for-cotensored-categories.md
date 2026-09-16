@@ -42,14 +42,11 @@ with coherent natural isomorphisms $F(X\otimes A)\cong X\otimes F(A)$.
 
 ## Facts & Assumptions
 
-**Given:** Tensored and cotensored $\mathcal V$-categories and an ordinary
-adjunction on their underlying categories.
+**Given:** Tensored and cotensored $\mathcal V$-categories and an ordinary adjunction on their underlying categories.
 
-[L1] An enriched adjunction is an isomorphism of enriched hom-objects natural
-in both variables ([[def-enriched-adjunction]]).
+[L1] An enriched adjunction is an isomorphism of enriched hom-objects natural in both variables ([[def-enriched-adjunction]]).
 
-[L2] Cotensors are represented by the enriched hom-objects against base objects
-([[def-cotensor-and-tensor]]).
+[L2] Cotensors are represented by the enriched hom-objects against base objects ([[def-cotensor-and-tensor]]).
 
 ## Proof
 

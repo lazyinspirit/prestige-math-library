@@ -29,11 +29,7 @@ If $(A,B)$ is mixed and $(B,C)$ is mixed, then $(A,C)$ must also be mixed.
 
 ## Facts & Assumptions
 
-**Given:** Three disjoint vertex sets
-$$A=\{a_1,a_2\},\qquad B=\{b_1,b_2\},\qquad C=\{c_1,c_2\},$$
-with cross-edges
-$$a_1b_1,\ a_2b_2,\ b_1c_1,\ b_2c_2,$$
-and no other cross-edges between these sets.
+**Given:** Three disjoint vertex sets $$A=\{a_1,a_2\},\qquad B=\{b_1,b_2\},\qquad C=\{c_1,c_2\},$$ with cross-edges $$a_1b_1,\ a_2b_2,\ b_1c_1,\ b_2c_2,$$ and no other cross-edges between these sets.
 
 [L1] A pair is mixed when it is neither complete nor anticomplete ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 

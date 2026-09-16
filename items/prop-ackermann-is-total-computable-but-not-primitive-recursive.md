@@ -38,12 +38,7 @@ Then $A$ is a total computable function, but $A$ is not primitive recursive.
 
 [L2] A machine computes a partial function when it halts with the required output on every input in the domain and diverges off the domain, by [[def-partial-function-computed-by-a-machine]].
 
-[F1] For each fixed $m$, the unary function $A_m(n):=A(m,n)$ is strictly
-increasing in $n$, and $A_{m+1}$ is obtained by iterating $A_m$ a growing
-number of times. Consequently, for fixed $c$ and $r$, some sufficiently high
-row $A_d$ with $d>c$ eventually dominates the shifted row
-$n\mapsto A_c(n+r)$, and passing to a sufficiently higher row absorbs any
-fixed finite composition or an $n$-fold iteration of lower rows.
+[F1] For each fixed $m$, the unary function $A_m(n):=A(m,n)$ is strictly increasing in $n$, and $A_{m+1}$ is obtained by iterating $A_m$ a growing number of times. Consequently, for fixed $c$ and $r$, some sufficiently high row $A_d$ with $d>c$ eventually dominates the shifted row $n\mapsto A_c(n+r)$, and passing to a sufficiently higher row absorbs any fixed finite composition or an $n$-fold iteration of lower rows.
 
 ## Proof
 

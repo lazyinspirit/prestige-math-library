@@ -87,13 +87,6 @@ about $k=0$: at $k=0$ the value is $1$.
 
 ## Remarks
 
-- **The index $k=0$ is genuinely outside the formula.** The quotient
-  $-\frac{2}{k}\binom{2k-2}{k-1}$ has no value at $k=0$, and the coefficient there
-  is $1$, not $0$. Stating the formula with its range is not pedantry: the closed
-  form of the Catalan generating function takes coefficients at positive indices
-  only, and a statement covering $k=0$ would be false.
+- **The index $k=0$ is genuinely outside the formula.** The quotient $-\frac{2}{k}\binom{2k-2}{k-1}$ has no value at $k=0$, and the coefficient there is $1$, not $0$. Stating the formula with its range is not pedantry: the closed form of the Catalan generating function takes coefficients at positive indices only, and a statement covering $k=0$ would be false.
 
-- **Where the uniqueness clause is used.** [L3] identifies the binomial power
-  $(1-4x)^{1/2}$ as *the* series in $1+x\mathbb{Q}\llbracket x\rrbracket$ squaring
-  to $1-4x$, which is what lets a series produced by an entirely different
-  computation be recognised as this one. No branch is chosen and no limit is taken.
+- **Where the uniqueness clause is used.** [L3] identifies the binomial power $(1-4x)^{1/2}$ as *the* series in $1+x\mathbb{Q}\llbracket x\rrbracket$ squaring to $1-4x$, which is what lets a series produced by an entirely different computation be recognised as this one. No branch is chosen and no limit is taken.

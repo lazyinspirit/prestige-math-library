@@ -33,25 +33,19 @@ $$\overline f\circ q_M=q_N\circ f.$$
 
 ## Facts & Assumptions
 
-**Given:** The two free proper $G$-manifolds, their quotient maps, and a smooth
-equivariant map $f:M\to N$.
+**Given:** The two free proper $G$-manifolds, their quotient maps, and a smooth equivariant map $f:M\to N$.
 
-[F1] Equivariance means $f(g\cdot x)=g\cdot f(x)$.
-[[def-equivariant-map-and-equivariant-vector-bundle]].
+[F1] Equivariance means $f(g\cdot x)=g\cdot f(x)$. [[def-equivariant-map-and-equivariant-vector-bundle]].
 
-[F2] The quotient maps are smooth surjective submersions.
-[[thm-free-proper-action-quotient-manifold]].
+[F2] The quotient maps are smooth surjective submersions. [[thm-free-proper-action-quotient-manifold]].
 
-[F3] A continuous map constant on quotient fibres factors uniquely and
-continuously through the quotient. [[thm-quotient-universal-property]].
+[F3] A continuous map constant on quotient fibres factors uniquely and continuously through the quotient. [[thm-quotient-universal-property]].
 
-[F4] A smooth submersion has local projection form and smooth local sections.
-[[thm-constant-rank-theorem-for-manifolds]].
+[F4] A smooth submersion has local projection form and smooth local sections. [[thm-constant-rank-theorem-for-manifolds]].
 
 ## Proof
 
-**Proof technique:** quotient universality followed by local submersion
-sections.
+**Proof technique:** quotient universality followed by local submersion sections.
 
 1.1 If $q_M(x)=q_M(y)$, then $y=g\cdot x$ for some $g\in G$. By [F1], $f(y)=g\cdot f(x)$, so $q_N(f(y))=q_N(f(x))$. Thus the smooth map $q_N\circ f$ is constant on the fibres of $q_M$. [F1, given]
 

@@ -36,8 +36,7 @@ blocks is finite as well.
 
 ## Facts & Assumptions
 
-**Given:** A natural number $n$ and a partition $\mathcal{P}$ of $[n]$ in the
-sense of [[def-set-partition-and-block]].
+**Given:** A natural number $n$ and a partition $\mathcal{P}$ of $[n]$ in the sense of [[def-set-partition-and-block]].
 
 ## Proof
 

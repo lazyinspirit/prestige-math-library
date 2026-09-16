@@ -34,9 +34,7 @@ $1\le p\le q\le\infty$.
 
 [L1] A probability measure has total mass $1$ ([[def-probability-measure]]).
 
-[L2] On a finite measure space, $L^q$ includes into $L^p$ with factor
-$\mu(\Omega)^{1/p-1/q}$ for finite $q$, and $L^\infty$ includes into $L^p$ with
-factor $\mu(\Omega)^{1/p}$ ([[thm-finite-measure-l-r-includes-into-l-p-for-p-less-r]]).
+[L2] On a finite measure space, $L^q$ includes into $L^p$ with factor $\mu(\Omega)^{1/p-1/q}$ for finite $q$, and $L^\infty$ includes into $L^p$ with factor $\mu(\Omega)^{1/p}$ ([[thm-finite-measure-l-r-includes-into-l-p-for-p-less-r]]).
 
 ## Proof
 

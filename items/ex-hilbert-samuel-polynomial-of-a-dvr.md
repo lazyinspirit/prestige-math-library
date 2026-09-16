@@ -38,12 +38,9 @@ $$ e_{(\pi)}(V)=1. $$
 
 **Given:** A discrete valuation ring $V$ with maximal ideal $(\pi)$.
 
-[L1] The quotient $V/(\pi^{n+1})$ has length $n+1$ for every $n\ge0$
-([[thm-dvr-ideal-and-module-length]]).
+[L1] The quotient $V/(\pi^{n+1})$ has length $n+1$ for every $n\ge0$ ([[thm-dvr-ideal-and-module-length]]).
 
-[L2] The Hilbert-Samuel polynomial exists and multiplicity is its factorial
-scaled leading coefficient
-([[thm-existence-of-hilbert-samuel-polynomial]], [[def-hilbert-samuel-multiplicity]]).
+[L2] The Hilbert-Samuel polynomial exists and multiplicity is its factorial scaled leading coefficient ([[thm-existence-of-hilbert-samuel-polynomial]], [[def-hilbert-samuel-multiplicity]]).
 
 ## Verification
 

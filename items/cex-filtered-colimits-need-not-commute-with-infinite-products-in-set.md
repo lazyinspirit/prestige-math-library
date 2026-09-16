@@ -30,19 +30,13 @@ products.
 
 ## Facts & Assumptions
 
-**Given:** Positive integers $i,j$ and sets $M_{i,j}=\{1,\ldots,i\}$, with
-inclusions as $i$ increases.
+**Given:** Positive integers $i,j$ and sets $M_{i,j}=\{1,\ldots,i\}$, with inclusions as $i$ increases.
 
-[F1] A category is filtered when it is nonempty, every two objects have a
-common target, and every parallel pair is equalized at a later stage
-([[def-filtered-category-and-filtered-colimit]]).
+[F1] A category is filtered when it is nonempty, every two objects have a common target, and every parallel pair is equalized at a later stage ([[def-filtered-category-and-filtered-colimit]]).
 
-[L1] Filtered colimits commute with finite, not asserted infinite, limits in
-$\mathbf{Set}$
-([[thm-filtered-colimits-commute-with-finite-limits-in-set]]).
+[L1] Filtered colimits commute with finite, not asserted infinite, limits in $\mathbf{Set}$ ([[thm-filtered-colimits-commute-with-finite-limits-in-set]]).
 
-[F2] Products in a category represent families of coordinate maps
-([[def-products-and-coproducts]]).
+[F2] Products in a category represent families of coordinate maps ([[def-products-and-coproducts]]).
 
 ## Counterexample
 

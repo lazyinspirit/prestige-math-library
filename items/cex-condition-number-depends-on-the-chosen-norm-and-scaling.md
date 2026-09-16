@@ -30,17 +30,11 @@ rescaling the equations leaves it unchanged.
 
 ## Facts & Assumptions
 
-**Given:** The matrix
-$A=\begin{pmatrix}1&2&0\\0&3&1\\0&0&4\end{pmatrix}$, the diagonal matrix
-$D=\operatorname{diag}(10,1,1)$, and the equivalent systems $Ax=b$ and
-$(DA)x=Db$.
+**Given:** The matrix $A=\begin{pmatrix}1&2&0\\0&3&1\\0&0&4\end{pmatrix}$, the diagonal matrix $D=\operatorname{diag}(10,1,1)$, and the equivalent systems $Ax=b$ and $(DA)x=Db$.
 
-[L1] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$
-([[def-condition-number-of-a-nonsingular-linear-system]]).
+[L1] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$ ([[def-condition-number-of-a-nonsingular-linear-system]]).
 
-[L2] The induced $1$-norm is the maximum column sum and the induced
-$\infty$-norm the maximum row sum
-([[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]]).
+[L2] The induced $1$-norm is the maximum column sum and the induced $\infty$-norm the maximum row sum ([[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]]).
 
 ## Counterexample
 

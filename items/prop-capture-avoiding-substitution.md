@@ -35,9 +35,7 @@ Canonicity refers to the specified coding and traversal, not to literal invarian
 
 [F1] If $z\ne y$ is absent from $\operatorname{Var}(\psi)$, then $z$ is free for $y$ in $\psi$, and $\exists y\psi$ and $\exists z(\psi[z/y])$ have the same truth in every structure and assignment. Here raw substitution replaces only occurrences free in $\psi$, hence only those bound by the displayed outer binder. A least fresh variable exists outside any specified finite set of variables. ([[lem-fresh-bound-variable-renaming]])
 
-[F2] If $t$ is free for $x$ in $\psi$, then for every structure $\mathcal M$ and assignment $s$,
-$$\mathcal M,s\models\psi[t/x]\iff\mathcal M,s[x:=\llbracket t\rrbracket_s]\models\psi.$$
-([[lem-formula-substitution-satisfaction]])
+[F2] If $t$ is free for $x$ in $\psi$, then for every structure $\mathcal M$ and assignment $s$, $$\mathcal M,s\models\psi[t/x]\iff\mathcal M,s[x:=\llbracket t\rrbracket_s]\models\psi.$$ ([[lem-formula-substitution-satisfaction]])
 
 ## Proof
 

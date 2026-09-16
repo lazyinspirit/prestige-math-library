@@ -38,17 +38,13 @@ $f:U\to\mathbb C$ be separately holomorphic. Then $f$ is holomorphic on $U$.
 
 ## Facts & Assumptions
 
-**Given:** An open set $U\subseteq\mathbb C^m$ and a separately holomorphic
-function $f:U\to\mathbb C$.
+**Given:** An open set $U\subseteq\mathbb C^m$ and a separately holomorphic function $f:U\to\mathbb C$.
 
-[L1] Separate holomorphy means one-variable holomorphy on every coordinate slice
-([[def-separately-holomorphic-function]]).
+[L1] Separate holomorphy means one-variable holomorphy on every coordinate slice ([[def-separately-holomorphic-function]]).
 
-[L2] A separately holomorphic function is locally bounded on every smaller
-polydisc ([[lem-local-boundedness-of-separately-holomorphic-functions]]).
+[L2] A separately holomorphic function is locally bounded on every smaller polydisc ([[lem-local-boundedness-of-separately-holomorphic-functions]]).
 
-[L3] A separately holomorphic function that is locally bounded is jointly
-holomorphic ([[thm-locally-bounded-separate-holomorphy]]).
+[L3] A separately holomorphic function that is locally bounded is jointly holomorphic ([[thm-locally-bounded-separate-holomorphy]]).
 
 ## Proof
 

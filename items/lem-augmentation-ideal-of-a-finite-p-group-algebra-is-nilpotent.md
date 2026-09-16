@@ -28,17 +28,13 @@ Then the augmentation ideal $I_P\subseteq k[P]$ is nilpotent.
 
 **Given:** A finite $p$-group $P$, a field $k$ of characteristic $p$, and the augmentation ideal $I_P\subseteq k[P]$.
 
-[F1] The augmentation ideal is the kernel of the augmentation map
-([[def-augmentation-map-and-augmentation-ideal-of-a-group-ring]]).
+[F1] The augmentation ideal is the kernel of the augmentation map ([[def-augmentation-map-and-augmentation-ideal-of-a-group-ring]]).
 
-[L1] The basis elements $[g]$ multiply as $[g][h]=[gh]$ in $k[P]$
-([[thm-group-ring-is-a-unital-algebra-with-basis-g]]).
+[L1] The basis elements $[g]$ multiply as $[g][h]=[gh]$ in $k[P]$ ([[thm-group-ring-is-a-unital-algebra-with-basis-g]]).
 
-[L2] The algebra $k[P]$ has dimension $|P|$
-([[cor-dimension-of-a-finite-group-algebra]]).
+[L2] The algebra $k[P]$ has dimension $|P|$ ([[cor-dimension-of-a-finite-group-algebra]]).
 
-[L3] Every nontrivial finite $p$-group has a nontrivial central element of
-order $p$ ([[thm-nontrivial-center-of-a-finite-p-group]]).
+[L3] Every nontrivial finite $p$-group has a nontrivial central element of order $p$ ([[thm-nontrivial-center-of-a-finite-p-group]]).
 
 ## Proof
 

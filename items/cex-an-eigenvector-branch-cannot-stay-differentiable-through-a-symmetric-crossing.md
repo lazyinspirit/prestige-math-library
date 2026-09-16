@@ -39,11 +39,9 @@ from $\operatorname{span}\{e_2\}$ to $\operatorname{span}\{e_1\}$ at $t=0$.
 
 ## Facts & Assumptions
 
-**Given:** The symmetric crossing family
-$A(t)=\begin{pmatrix}t&0\\0&-t\end{pmatrix}$.
+**Given:** The symmetric crossing family $A(t)=\begin{pmatrix}t&0\\0&-t\end{pmatrix}$.
 
-[L1] An ordered eigenvector branch need not be differentiable through a
-crossing ([[cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing]]).
+[L1] An ordered eigenvector branch need not be differentiable through a crossing ([[cex-an-ordered-eigenvector-branch-need-not-be-differentiable-through-a-crossing]]).
 
 ## Counterexample
 **Proof technique:** direct.

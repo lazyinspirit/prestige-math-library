@@ -31,10 +31,7 @@ $$\frac{d\nu}{d\lambda}=2x\,\chi_{[0,1]}(x)\qquad\lambda\text{-almost everywhere
 
 [L2] Integrating against a density recovers the product integral. ([[thm-integration-against-a-density]])
 
-[L3] For a sigma-finite positive base and a signed measure satisfying the
-common finite-exhaustion hypothesis, the Radon--Nikodym derivative is the
-almost-everywhere class of a function whose measurable-set integrals recover
-the measure ([[def-radon-nikodym-derivative]]).
+[L3] For a sigma-finite positive base and a signed measure satisfying the common finite-exhaustion hypothesis, the Radon--Nikodym derivative is the almost-everywhere class of a function whose measurable-set integrals recover the measure ([[def-radon-nikodym-derivative]]).
 
 ## Verification
 

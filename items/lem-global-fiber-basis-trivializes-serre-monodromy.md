@@ -30,18 +30,13 @@ classes as its basis.
 
 ## Facts & Assumptions
 
-**Given:** The fibration, commutative coefficient ring, and supplied finite
-family in the statement.
+**Given:** The fibration, commutative coefficient ring, and supplied finite family in the statement.
 
-[F1] [[lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid]]
-gives the cohomological path-transport local system under AC, including
-naturality for maps of fibers.
+[F1] [[lem-fiber-transport-makes-homology-into-a-functor-on-the-base-fundamental-groupoid]] gives the cohomological path-transport local system under AC, including naturality for maps of fibers.
 
-[F2] [[prop-singular-cohomology-is-contravariantly-functorial]] gives
-contravariant restriction and its composition law.
+[F2] [[prop-singular-cohomology-is-contravariantly-functorial]] gives contravariant restriction and its composition law.
 
-[A1] [[def-axiom-of-choice]] is assumed only for the strict-fiber
-cohomological comparison used by [F1].
+[A1] [[def-axiom-of-choice]] is assumed only for the strict-fiber cohomological comparison used by [F1].
 
 ## Proof
 

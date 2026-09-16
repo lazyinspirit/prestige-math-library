@@ -40,23 +40,15 @@ arbitrary convex set is asserted.
 
 ## Facts & Assumptions
 
-**Given:** DC, HB, and the real or complex Banach spaces and positive
-approximation tolerances occurring in the statement.
+**Given:** DC, HB, and the real or complex Banach spaces and positive approximation tolerances occurring in the statement.
 
-[F1] Under DC and HB, for a nonempty closed bounded convex set $C$ in a real
-Banach space, every $f\in X^*$ and $\varepsilon>0$ admit $v\in C$ and
-$g\in X^*$ with $\|g-f\|<\varepsilon$ and $g(c)\le g(v)$ for every $c\in C$
-([[lem-bishop-phelps-support-cone-construction]],
-[[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]).
+[F1] Under DC and HB, for a nonempty closed bounded convex set $C$ in a real Banach space, every $f\in X^*$ and $\varepsilon>0$ admit $v\in C$ and $g\in X^*$ with $\|g-f\|<\varepsilon$ and $g(c)\le g(v)$ for every $c\in C$ ([[lem-bishop-phelps-support-cone-construction]], [[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]]).
 
-[F2] For a real or complex normed space, the dual norm is
-$\|f\|=\sup_{x\in B_X}|f(x)|$
-([[def-dual-space-of-a-normed-space]]).
+[F2] For a real or complex normed space, the dual norm is $\|f\|=\sup_{x\in B_X}|f(x)|$ ([[def-dual-space-of-a-normed-space]]).
 
 ## Proof
 
-**Proof technique:** quantitative approximation followed by unit-ball
-symmetry and complexification.
+**Proof technique:** quantitative approximation followed by unit-ball symmetry and complexification.
 
 1.1 Let $X$ be real, let $C$ be as in claim 1, and fix $f\in X^*$ and $\varepsilon>0$.  By [F1] there are $v\in C$ and $g\in X^*$ such that $\|g-f\|<\varepsilon$ and $g(c)\le g(v)$ for every $c\in C$.  Thus $g(v)=\sup_Cg$, and arbitrary $f$ and $\varepsilon$ prove the asserted norm density. [given, F1]
 
@@ -70,8 +62,4 @@ symmetry and complexification.
 
 ## Source notes
 
-Loewen–Wang Proposition 5.1(i) derives density of convex subgradients from
-Ekeland's variational principle, and Theorem 5.2 states the real Bishop–Phelps
-theorem for nonempty closed bounded convex sets.  The complex unit-ball clause
-is proved locally by the explicit real-dual/complex-dual correspondence; the
-source is not cited for a general complex convex-set theorem.
+Loewen–Wang Proposition 5.1(i) derives density of convex subgradients from Ekeland's variational principle, and Theorem 5.2 states the real Bishop–Phelps theorem for nonempty closed bounded convex sets.  The complex unit-ball clause is proved locally by the explicit real-dual/complex-dual correspondence; the source is not cited for a general complex convex-set theorem.

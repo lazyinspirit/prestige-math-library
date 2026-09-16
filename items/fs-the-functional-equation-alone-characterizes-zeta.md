@@ -28,11 +28,9 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The modified function
-$$F(s):=e^{(s-1/2)^2}\zeta(s).$$
+**Given:** The modified function $$F(s):=e^{(s-1/2)^2}\zeta(s).$$
 
-[L1] Zeta satisfies the classical functional equation
-([[thm-riemann-zeta-functional-equation]]).
+[L1] Zeta satisfies the classical functional equation ([[thm-riemann-zeta-functional-equation]]).
 
 ## Refutation
 

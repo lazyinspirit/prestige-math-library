@@ -31,16 +31,11 @@ pipeline_run: frontier-30
 > and needs no proof.
 ## Facts & Assumptions
 
-**Given:** Two choices of horseshoe resolution for the same short exact
-sequence.
+**Given:** Two choices of horseshoe resolution for the same short exact sequence.
 
-[L1] Item 9 defines the left derived connecting map from a chosen horseshoe
-resolution and comparison isomorphisms
-([[def-connecting-map-for-left-derived-functors]]).
+[L1] Item 9 defines the left derived connecting map from a chosen horseshoe resolution and comparison isomorphisms ([[def-connecting-map-for-left-derived-functors]]).
 
-[L2] Item 10 is the statement that different horseshoe choices give the same
-map
-([[lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts]]).
+[L2] Item 10 is the statement that different horseshoe choices give the same map ([[lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts]]).
 
 ## Refutation
 

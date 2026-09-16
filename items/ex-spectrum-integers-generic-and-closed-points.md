@@ -25,11 +25,9 @@ primes $p$. The point $(0)$ is generic, while each $(p)$ is closed.
 
 **Given:** The ring of integers $\mathbb Z$.
 
-[F1] $\mathbb Z/p\mathbb Z$ is a field when $p$ is a rational prime
-([[thm-z-mod-p-is-a-field]]).
+[F1] $\mathbb Z/p\mathbb Z$ is a field when $p$ is a rational prime ([[thm-z-mod-p-is-a-field]]).
 
-[F2] A quotient is a domain exactly when the defining ideal is prime
-([[thm-quotient-is-domain-iff-ideal-prime]]).
+[F2] A quotient is a domain exactly when the defining ideal is prime ([[thm-quotient-is-domain-iff-ideal-prime]]).
 
 ## Verification
 

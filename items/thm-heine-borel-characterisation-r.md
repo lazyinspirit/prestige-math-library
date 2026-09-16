@@ -82,20 +82,8 @@ remarks below record where it fails without completeness.
 
 ## Remarks
 
-- **A closed subset of a compact set is compact.** If $C \subseteq K$ with $K$
-  compact and $C$ closed, then $C$ is bounded, being a subset of a bounded set,
-  and closed by hypothesis, so it is compact by the theorem. The corresponding
-  statement for arbitrary subsets is false: $(0,1) \subseteq [0,1]$ is bounded
-  and not compact ([[cex-unbounded-closed-set-not-compact]]).
+- **A closed subset of a compact set is compact.** If $C \subseteq K$ with $K$ compact and $C$ closed, then $C$ is bounded, being a subset of a bounded set, and closed by hypothesis, so it is compact by the theorem. The corresponding statement for arbitrary subsets is false: $(0,1) \subseteq [0,1]$ is bounded and not compact ([[cex-unbounded-closed-set-not-compact]]).
 
-- **Both hypotheses are needed and neither implies the other.**
-  [[cex-unbounded-closed-set-not-compact]] exhibits a closed set that is not
-  bounded and a bounded set that is not closed, and neither is compact.
+- **Both hypotheses are needed and neither implies the other.** [[cex-unbounded-closed-set-not-compact]] exhibits a closed set that is not bounded and a bounded set that is not closed, and neither is compact.
 
-- **What the theorem is not.** It characterises compactness *for subsets of
-  $\mathbb{R}$*. The two halves are of very different strengths: the forward
-  half is elementary and general, while the backward half rests on the
-  completeness of $\mathbb{R}$ and fails over $\mathbb{Q}$
-  ([[fs-closed-bounded-compact-without-completeness]], witnessed by
-  [[cex-closed-bounded-in-q-not-compact]]). Nothing here licenses "closed and
-  bounded implies compact" in any other setting.
+- **What the theorem is not.** It characterises compactness *for subsets of $\mathbb{R}$*. The two halves are of very different strengths: the forward half is elementary and general, while the backward half rests on the completeness of $\mathbb{R}$ and fails over $\mathbb{Q}$ ([[fs-closed-bounded-compact-without-completeness]], witnessed by [[cex-closed-bounded-in-q-not-compact]]). Nothing here licenses "closed and bounded implies compact" in any other setting.

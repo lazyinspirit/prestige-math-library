@@ -92,20 +92,8 @@ product topology, although $(0,1)$ is open in $\mathbb{R}$.
 
 ## Remarks
 
-- **The correct statement, and why the finiteness is there.** The basic open sets
-  of a product are the finite intersections of the sets $\pi_i^{-1}[U]$, and each
-  of those constrains one coordinate only; a finite intersection therefore
-  constrains finitely many coordinates. Constraining all of them at once, as $C$
-  does, is a box, and a box need not be a union of such finite intersections.
+- **The correct statement, and why the finiteness is there.** The basic open sets of a product are the finite intersections of the sets $\pi_i^{-1}[U]$, and each of those constrains one coordinate only; a finite intersection therefore constrains finitely many coordinates. Constraining all of them at once, as $C$ does, is a box, and a box need not be a union of such finite intersections.
 
-- **Nothing is wrong with $\prod_k (0,1)$ as a set or as a space.** It is a
-  perfectly good subspace of $\mathbb{R}^{\mathbb{N}}$, and by claim 1 of
-  [[thm-product-of-subspaces-and-closures]] its subspace topology is the product
-  of the subspace topologies of the factors. What fails is only that it is not an
-  *open* subset of the ambient product.
+- **Nothing is wrong with $\prod_k (0,1)$ as a set or as a space.** It is a perfectly good subspace of $\mathbb{R}^{\mathbb{N}}$, and by claim 1 of [[thm-product-of-subspaces-and-closures]] its subspace topology is the product of the subspace topologies of the factors. What fails is only that it is not an *open* subset of the ambient product.
 
-- **The same computation with shrinking intervals gives the sharper failure.**
-  Replacing $(0,1)$ by $(-1/(k+1),\ 1/(k+1))$ produces a box whose only
-  product-interior point would have to have all but finitely many coordinates
-  unrestricted, and that box separates the two topologies outright; that is the
-  false statement immediately before this one.
+- **The same computation with shrinking intervals gives the sharper failure.** Replacing $(0,1)$ by $(-1/(k+1),\ 1/(k+1))$ produces a box whose only product-interior point would have to have all but finitely many coordinates unrestricted, and that box separates the two topologies outright; that is the false statement immediately before this one.

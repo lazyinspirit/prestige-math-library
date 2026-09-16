@@ -36,12 +36,9 @@ $$A^{-1}=\det(A)^{-1}\operatorname{adj}(A).$$
 
 **Given:** $R,n,A$ as in the statement.
 
-[L1] The adjugate identity is
-$A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I_n$
-([[thm-adjugate-identity-over-a-commutative-ring]]).
+[L1] The adjugate identity is $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I_n$ ([[thm-adjugate-identity-over-a-commutative-ring]]).
 
-[L2] A positive-sized square matrix whose determinant is a unit is invertible
-([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
+[L2] A positive-sized square matrix whose determinant is a unit is invertible ([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
 
 [L3] A two-sided inverse in a monoid is unique ([[lem-inverse-unique]]).
 

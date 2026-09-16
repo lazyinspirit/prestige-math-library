@@ -43,14 +43,11 @@ $$\begin{pmatrix}1&4\\0&-1\end{pmatrix}\begin{pmatrix}2&-1\\3&0\end{pmatrix}=\be
 
 ## Facts & Assumptions
 
-**Given:** The biproduct $\mathbb Z\oplus\mathbb Z$ in $\mathbf{Ab}$ and the
-two displayed homomorphisms $f$ and $g$.
+**Given:** The biproduct $\mathbb Z\oplus\mathbb Z$ in $\mathbf{Ab}$ and the two displayed homomorphisms $f$ and $g$.
 
-[L1] Morphisms between finite biproducts correspond to matrices of their
-component maps ([[thm-morphisms-between-finite-biproducts-correspond-to-matrices]]).
+[L1] Morphisms between finite biproducts correspond to matrices of their component maps ([[thm-morphisms-between-finite-biproducts-correspond-to-matrices]]).
 
-[L2] Composition of such morphisms is matrix multiplication
-([[thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]]).
+[L2] Composition of such morphisms is matrix multiplication ([[thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]]).
 
 ## Verification
 

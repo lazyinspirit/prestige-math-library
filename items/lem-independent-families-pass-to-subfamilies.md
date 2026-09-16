@@ -30,12 +30,9 @@ $(\mathcal C_j)_{j\in J}$ is independent.
 
 ## Facts & Assumptions
 
-**Given:** An independent family $(\mathcal C_i)_{i\in I}$ and a subset
-$J\subseteq I$.
+**Given:** An independent family $(\mathcal C_i)_{i\in I}$ and a subset $J\subseteq I$.
 
-[L1] Independence means that every finite choice of distinct indices and one
-event from each chosen class satisfies the product formula
-([[def-independent-families-of-event-classes]]).
+[L1] Independence means that every finite choice of distinct indices and one event from each chosen class satisfies the product formula ([[def-independent-families-of-event-classes]]).
 
 ## Proof
 

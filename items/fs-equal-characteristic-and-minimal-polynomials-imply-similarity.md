@@ -32,8 +32,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** For any $\lambda\in F$,
-$$A=J_2(\lambda)\oplus J_2(\lambda),\qquad B=J_2(\lambda)\oplus J_1(\lambda)\oplus J_1(\lambda).$$
+**Given:** For any $\lambda\in F$, $$A=J_2(\lambda)\oplus J_2(\lambda),\qquad B=J_2(\lambda)\oplus J_1(\lambda)\oplus J_1(\lambda).$$
 
 [L1] Jordan block sizes give the characteristic polynomial by total size and the minimal polynomial by largest size ([[cor-jordan-block-data-controls-eigenspaces-and-polynomials]]).
 

@@ -41,12 +41,9 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** The two grammars for $L_1$ and $L_2$, and the alphabet map with
-$h(a)=0$ and $h(b)=1$.
+**Given:** The two grammars for $L_1$ and $L_2$, and the alphabet map with $h(a)=0$ and $h(b)=1$.
 
-[L1] Context-free languages are closed under union, concatenation, Kleene star,
-and homomorphism, by
-[[thm-cfl-closure-under-union-concatenation-star-and-homomorphism]].
+[L1] Context-free languages are closed under union, concatenation, Kleene star, and homomorphism, by [[thm-cfl-closure-under-union-concatenation-star-and-homomorphism]].
 
 ## Verification
 

@@ -38,9 +38,7 @@ $$x_\lambda=(A^*A+\lambda I)^{-1}A^*b.$$
 
 ## Facts & Assumptions
 
-**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$, a vector
-$b\in\mathbb F^m$, and a real parameter $\lambda>0$, where
-$\mathbb F\in\{\mathbb R,\mathbb C\}$.
+**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$, a vector $b\in\mathbb F^m$, and a real parameter $\lambda>0$, where $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
 [L1] The regularised objective is $J_\lambda(x)=\|Ax-b\|_2^2+\lambda\|x\|_2^2$ ([[def-tikhonov-regularised-least-squares]]).
 

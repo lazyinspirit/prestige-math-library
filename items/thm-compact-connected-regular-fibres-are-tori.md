@@ -37,8 +37,7 @@ $T^n=\mathbb R^n/\mathbb Z^n$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] $N\cong\mathbb R^n/\Gamma$ for a full lattice $\Gamma$.
-[[lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice]].
+[F1] $N\cong\mathbb R^n/\Gamma$ for a full lattice $\Gamma$. [[lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice]].
 
 ## Proof
 

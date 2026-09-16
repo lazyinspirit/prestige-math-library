@@ -41,8 +41,7 @@ with projection to the first factor.
 
 ## Facts & Assumptions
 
-**Given:** The standard affine cover $U_i=\{[x]:x_i\neq0\}$ of $\mathbb{RP}^n$
-with its usual affine coordinates.
+**Given:** The standard affine cover $U_i=\{[x]:x_i\neq0\}$ of $\mathbb{RP}^n$ with its usual affine coordinates.
 
 [L1] A smooth cocycle on a countable cover constructs a smooth vector bundle ([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
 

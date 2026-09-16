@@ -46,9 +46,7 @@ $f_d$ are homotopic on the $n$-skeleton.
 
 [F1] Difference cochains satisfy $\delta d(f_0,H,f_1)=\theta(f_0)-\theta(f_1)$ ([[thm-the-primary-obstruction-class-is-independent-of-cellular-choices]]).
 
-[F2] The difference value on an oriented $n$-cell is the signed homotopy class
-of the map on the boundary of its prism
-([[def-difference-cochain-between-two-cellular-extensions]]).
+[F2] The difference value on an oriented $n$-cell is the signed homotopy class of the map on the boundary of its prism ([[def-difference-cochain-between-two-cellular-extensions]]).
 
 [F3] On one attached cell, a zero attaching-sphere class is equivalent to extension over its disk ([[lem-extending-a-map-over-one-cell-is-equivalent-to-nullhomotoping-its-attaching-sphere]]); compatible cell maps glue by the CW pushout.
 

@@ -35,16 +35,11 @@ $$\ell(A)=\ell(B)+\ell(A/B).$$
 
 **Given:** A subobject $B\le A$.
 
-[L1] Finite length means admitting a composition series, and length is the
-common number of factors in such a series
-([[def-object-of-finite-length]]).
+[L1] Finite length means admitting a composition series, and length is the common number of factors in such a series ([[def-object-of-finite-length]]).
 
-[L2] Jordan-Hölder makes the factor count independent of the chosen
-composition series ([[thm-jordan-holder-theorem-in-an-abelian-category]]).
+[L2] Jordan-Hölder makes the factor count independent of the chosen composition series ([[thm-jordan-holder-theorem-in-an-abelian-category]]).
 
-[L3] The second isomorphism theorem identifies the factors that arise from
-pulling a chain across a quotient or intersecting with a subobject
-([[thm-second-isomorphism-theorem-in-an-abelian-category]]).
+[L3] The second isomorphism theorem identifies the factors that arise from pulling a chain across a quotient or intersecting with a subobject ([[thm-second-isomorphism-theorem-in-an-abelian-category]]).
 
 ## Proof
 

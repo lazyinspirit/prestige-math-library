@@ -44,15 +44,11 @@ $\mathcal V$-category $\mathcal B$.
 
 ## Facts & Assumptions
 
-**Given:** A small ordinary category $\mathcal L$ and a set-object
-$\mathcal V$-category $\mathcal B$.
+**Given:** A small ordinary category $\mathcal L$ and a set-object $\mathcal V$-category $\mathcal B$.
 
-[L1] The underlying ordinary category $\mathcal B_0$ has hom-sets
-$\mathcal V(\mathbf 1,\mathcal B(X,Y))$
-([[def-the-underlying-ordinary-category-of-an-enriched-category]]).
+[L1] The underlying ordinary category $\mathcal B_0$ has hom-sets $\mathcal V(\mathbf 1,\mathcal B(X,Y))$ ([[def-the-underlying-ordinary-category-of-an-enriched-category]]).
 
-[L2] A $\mathcal V$-category and a $\mathcal V$-functor are determined by their
-hom-objects and structure maps ([[def-enriched-category]], [[def-enriched-functor]]).
+[L2] A $\mathcal V$-category and a $\mathcal V$-functor are determined by their hom-objects and structure maps ([[def-enriched-category]], [[def-enriched-functor]]).
 
 ## Proof
 

@@ -38,9 +38,7 @@ bidual $J^{**}$, although its canonical embedding is not onto.
 
 [A1] Countable Choice holds ([[def-countable-choice]]).
 
-[L1] Under Countable Choice, $J^{**}$ is the max-of-cyclic-and-endpoint
-variation sequence space, and every element is a constant plus an element of
-$J$ ([[lem-james-space-dual-and-bidual-identification]]).
+[L1] Under Countable Choice, $J^{**}$ is the max-of-cyclic-and-endpoint variation sequence space, and every element is a constant plus an element of $J$ ([[lem-james-space-dual-and-bidual-identification]]).
 
 ## Proof
 
@@ -52,9 +50,7 @@ $J$ ([[lem-james-space-dual-and-bidual-identification]]).
 
 $$q_p(Tx)=q_{(p_1+1,\ldots,p_k+1)}(x),\qquad r_p(Tx)=q_{(1,p_1+1,\ldots,p_k+1)}(x).$$
 
-Every tuple for $x$ either contains $1$ or, after shifting down, has one of
-these two forms. Therefore [L1] gives $\|Tx\|_{J^{**}}=\|x\|_J$; in
-particular $T$ is injective. [A1, L1, direct calculation]
+Every tuple for $x$ either contains $1$ or, after shifting down, has one of these two forms. Therefore [L1] gives $\|Tx\|_{J^{**}}=\|x\|_J$; in particular $T$ is injective. [A1, L1, direct calculation]
 
 2.1 Let $z\in J^{**}$ and set $\lambda=\lim_{n\to\infty}z_n$, supplied by [given, L1, step 1.1] [L1]. Define $x_1=-\lambda$ and $x_{n+1}=z_n-\lambda$ for $n\ge1$. Then $x_n\to0$, the identities in step 1.1 read backwards show $\|x\|_J=\|z\|_{J^{**}}<\infty$, and $Tx=z$. Thus $T$ is surjective and is a linear isometry. [L1, step 1.1]
 

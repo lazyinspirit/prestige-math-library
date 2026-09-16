@@ -40,22 +40,15 @@ For a functor between additive categories, the following are equivalent:
 
 **Given:** A functor $F:\mathcal C\to\mathcal D$ between additive categories.
 
-[L1] Additive functors preserve finite biproducts
-([[thm-an-additive-functor-preserves-finite-biproducts]]).
+[L1] Additive functors preserve finite biproducts ([[thm-an-additive-functor-preserves-finite-biproducts]]).
 
-[L2] Additive categories are preadditive with finite biproducts
-([[def-additive-category]]).
+[L2] Additive categories are preadditive with finite biproducts ([[def-additive-category]]).
 
-[L3] In a preadditive category, finite products are automatically biproducts
-([[thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct]]).
+[L3] In a preadditive category, finite products are automatically biproducts ([[thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct]]).
 
-[L4] In an additive category, the preadditive hom-group law is a bilinear
-commutative-monoid enrichment compatible with the finite biproduct diagrams.
-Indeed, product uniqueness gives
-$\langle f,g\rangle=i_1f+i_2g$, and bilinearity then gives
-$\nabla\langle f,g\rangle=f+g$. By uniqueness this is the canonical biproduct
-addition
-([[thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique]]).
+[L4] In an additive category, the preadditive hom-group law is a bilinear commutative-monoid enrichment compatible with the finite biproduct diagrams. Indeed, product uniqueness gives $\langle f,g\rangle=i_1f+i_2g$, and bilinearity then gives $\nabla\langle f,g\rangle=f+g$. By uniqueness this is the canonical biproduct addition ([[thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique]]).
+
+
 
 ## Proof
 
@@ -65,10 +58,6 @@ addition
 
 1.2 Assume $F$ preserves finite biproducts. In an additive category, for parallel morphisms $f,g:A\to B$, the pairing into $B\oplus B$ is the unique morphism $\langle f,g\rangle$ with projections $f$ and $g$, and the codiagonal is the unique morphism $\nabla_B:B\oplus B\to B$ with both composites equal to $1_B$. Since $F$ preserves the relevant biproducts, it preserves those pairings and codiagonals. [L2, L3]
 
-1.3 By [L4], the hom-group addition in an additive category is the canonical
-biproduct addition. [L2, L4, step 1.2]
-$f+g=\nabla_B\langle f,g\rangle$. Step 1.2 therefore gives
-$F(f+g)=F(\nabla_B)F(\langle f,g\rangle)=\nabla_{FB}\langle Ff,Fg\rangle=Ff+Fg$.
-So $F$ is additive. [L2, L4, step 1.2]
+2.1 By [L4], the hom-group addition in an additive category is the canonical biproduct addition. [L2, L4, step 1.2] $f+g=\nabla_B\langle f,g\rangle$. Step 1.2 therefore gives $F(f+g)=F(\nabla_B)F(\langle f,g\rangle)=\nabla_{FB}\langle Ff,Fg\rangle=Ff+Fg$. So $F$ is additive. [L2, L4, step 1.2]
 
-2.1 Steps 1.1 and 1.3 prove the equivalence. [step 1.1, step 1.3] ∎
+3.1 Steps 1.1 and 2.1 prove the equivalence. [step 1.1, step 2.1] ∎

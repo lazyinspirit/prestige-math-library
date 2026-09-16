@@ -33,14 +33,11 @@ Then the resulting grammar generates the same language as the original grammar.
 
 ## Facts & Assumptions
 
-**Given:** The original grammar and the rewritten grammar related by the
-displayed immediate-left-recursion elimination step.
+**Given:** The original grammar and the rewritten grammar related by the displayed immediate-left-recursion elimination step.
 
-[L1] Leftmost derivations always rewrite the leftmost remaining variable, by
-[[def-leftmost-and-rightmost-derivation]].
+[L1] Leftmost derivations always rewrite the leftmost remaining variable, by [[def-leftmost-and-rightmost-derivation]].
 
-[L2] The language of a grammar is determined by the terminal words derivable
-from its start symbol, by [[def-language-generated-by-a-cfg]].
+[L2] The language of a grammar is determined by the terminal words derivable from its start symbol, by [[def-language-generated-by-a-cfg]].
 
 ## Proof
 

@@ -30,12 +30,9 @@ subrepresentation.
 
 ## Facts & Assumptions
 
-**Given:** The standard two-dimensional $\mathfrak{sl}_2$-module over a
-characteristic-zero field, with basis $v_+,v_-$ satisfying
-$ev_+=0$ and $fv_+=v_-$.
+**Given:** The standard two-dimensional $\mathfrak{sl}_2$-module over a characteristic-zero field, with basis $v_+,v_-$ satisfying $ev_+=0$ and $fv_+=v_-$.
 
-[L1] A subrepresentation must be stable under every element of the Lie algebra
-([[def-subrepresentation-quotient-representation-and-intertwiner]]).
+[L1] A subrepresentation must be stable under every element of the Lie algebra ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
 
 ## Counterexample
 

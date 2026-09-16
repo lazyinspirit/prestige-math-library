@@ -45,8 +45,7 @@ exactly from the general submanifold constructions.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $a>0$, the displayed immersion, and the
-standard Euclidean metric.
+**Given:** $\mathrm{AC}_\omega$, $a>0$, the displayed immersion, and the standard Euclidean metric.
 
 [F1] Countable choice permits a choice from every sequence of nonempty sets, and a pullback metric is Riemannian exactly for an immersion. [[def-countable-choice]], [[prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions]].
 
@@ -60,24 +59,21 @@ standard Euclidean metric.
 
 [F6] The Christoffel formula and connection Leibniz rule compute Euclidean ambient derivatives in Cartesian coordinates. [[prop-christoffel-formula-for-the-levi-civita-connection]], [[prop-connection-laws-in-directional-form]].
 
-[F7] A nonempty regular level set is an embedded submanifold.
-[[thm-a-regular-level-set-is-an-embedded-submanifold]].
+[F7] A nonempty regular level set is an embedded submanifold. [[thm-a-regular-level-set-is-an-embedded-submanifold]].
 
-## Verification
+
+
+## Proof
 
 **Proof technique:** direct first- and second-form calculation.
 
 1.1 Put $t=v/a$, $c=\cosh t$, and $s=\sinh t$. Then $X_u=(-ac\sin u,ac\cos u,0)$ and $X_v=(s\cos u,s\sin u,1)$, so the first fundamental coefficients are $E=\langle X_u,X_u\rangle=a^2c^2$, $F=\langle X_u,X_v\rangle=0$, and $G=\langle X_v,X_v\rangle=s^2+1=c^2$. Since $a,c>0$, these vectors are independent; [F1] therefore gives the induced Riemannian metric. [F1, given, algebra]
 
-1.2 The image of $X$ is the level set
-$$C_a=\{(x,y,z):x^2+y^2-a^2\cosh^2(z/a)=0\}.$$
-On this level set $(x,y)\ne(0,0)$, so the differential of the defining function is nonzero; [F7] makes $C_a$ an embedded surface. The map $X:S^1\times\mathbb R\to C_a$ is bijective, with smooth inverse
-$$ (x,y,z)\longmapsto\left(\frac{(x,y)}{a\cosh(z/a)},z\right)\in S^1\times\mathbb R.$$
-Thus $X$ is an embedding and the submanifold interfaces below apply to its image. [F7, step 1.1, algebra]
+2.1 The image of $X$ is the level set $$C_a=\{(x,y,z):x^2+y^2-a^2\cosh^2(z/a)=0\}.$$ On this level set $(x,y)\ne(0,0)$, so the differential of the defining function is nonzero; [F7] makes $C_a$ an embedded surface. The map $X:S^1\times\mathbb R\to C_a$ is bijective, with smooth inverse $$ (x,y,z)\longmapsto\left(\frac{(x,y)}{a\cosh(z/a)},z\right)\in S^1\times\mathbb R.$$ Thus $X$ is an embedding and the submanifold interfaces below apply to its image. [F7, step 1.1, algebra]
 
-2.1 Their cross product is $X_u\times X_v=ac(\cos u,\sin u,-s)$ and has norm $ac^2$. Hence $N=c^{-1}(\cos u,\sin u,-s)$ is a smooth unit normal for the displayed orientation. [step 1.1, algebra]
+2.2 Their cross product is $X_u\times X_v=ac(\cos u,\sin u,-s)$ and has norm $ac^2$. Hence $N=c^{-1}(\cos u,\sin u,-s)$ is a smooth unit normal for the displayed orientation. [step 1.1, algebra]
 
-3.1 The second derivatives are $X_{uu}=(-ac\cos u,-ac\sin u,0)$, $X_{uv}=(-s\sin u,s\cos u,0)$, and $X_{vv}=(c\cos u/a,c\sin u/a,0)$. The Cartesian Euclidean symbols vanish by [F6], so the scalar second fundamental coefficients obtained from [F2] are $h_{uu}=\langle X_{uu},N\rangle=-a$, $h_{uv}=0$, and $h_{vv}=1/a$. [F2, F6, step 2.1, algebra]
+3.1 The second derivatives are $X_{uu}=(-ac\cos u,-ac\sin u,0)$, $X_{uv}=(-s\sin u,s\cos u,0)$, and $X_{vv}=(c\cos u/a,c\sin u/a,0)$. The Cartesian Euclidean symbols vanish by [F6], so the scalar second fundamental coefficients obtained from [F2] are $h_{uu}=\langle X_{uu},N\rangle=-a$, $h_{uv}=0$, and $h_{vv}=1/a$. [F2, F6, step 2.2, algebra]
 
 4.1 Because both $(g_{ij})=\operatorname{diag}(a^2c^2,c^2)$ and $(h_{ij})=\operatorname{diag}(-a,1/a)$ are diagonal, the orthonormal fields $e_u=X_u/(ac)$ and $e_v=X_v/c$ are principal directions. The identity in [F2] gives $g(S_Ne_u,e_u)=-1/(ac^2)$, $g(S_Ne_v,e_v)=1/(ac^2)$, and the mixed entries zero; hence [F3] gives exactly the two displayed principal curvatures. [F2, F3, step 1.1, step 3.1, algebra]
 
@@ -85,4 +81,4 @@ Thus $X$ is an embedding and the submanifold interfaces below apply to its image
 
 6.1 Because $a>0$ and $c=\cosh(v/a)>0$, $\kappa_u$ and $\kappa_v$ are nonzero at every point. In particular, $\mathrm{II}(e_u,e_u)=\kappa_uN\ne0$, so $\mathrm{II}$ is not the zero tensor; [F5] says the catenoid is not totally geodesic. [F5, step 4.1, step 5.1, algebra]
 
-7.1 The domain and embedded image from step 1.2 are nonempty fixed two-manifolds, so zero- and one-dimensional cases are inapplicable. The condition $a>0$ excludes the collapsed scale and steps 1.1–2.1 prove nondegeneracy; $\cosh t$ never vanishes. Neither factor has a boundary endpoint. The displayed normal and principal frame are explicit. The only choice assumption is the stated $\mathrm{AC}_\omega$ inherited through [F2]–[F5], and the finite coordinate calculation adds none. Reversing $N$ reverses both principal curvatures but leaves both zero-mean conclusions and $\mathrm{II}\ne0$ unchanged. No biconditional is asserted. [F1, F2, F3, F4, F5, F6, F7, step 1.1, step 1.2, step 2.1, step 3.1, step 4.1, step 5.1, step 6.1] ∎
+7.1 The domain and embedded image from step 2.1 are nonempty fixed two-manifolds, so zero- and one-dimensional cases are inapplicable. The condition $a>0$ excludes the collapsed scale and steps 1.1–2.1 prove nondegeneracy; $\cosh t$ never vanishes. Neither factor has a boundary endpoint. The displayed normal and principal frame are explicit. The only choice assumption is the stated $\mathrm{AC}_\omega$ inherited through [F2]–[F5], and the finite coordinate calculation adds none. Reversing $N$ reverses both principal curvatures but leaves both zero-mean conclusions and $\mathrm{II}\ne0$ unchanged. No biconditional is asserted. [F1, F2, F3, F4, F5, F6, F7, step 1.1, step 2.1, step 2.2, step 3.1, step 4.1, step 5.1, step 6.1] ∎

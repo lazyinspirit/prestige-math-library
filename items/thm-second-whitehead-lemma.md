@@ -34,28 +34,19 @@ $H^2(\mathfrak g,M)=0$.
 
 **Given:** Such $\mathfrak g$ and $M$.
 
-[L1] Weyl decomposes $M$ as a finite direct sum of simple modules
-([[thm-weyls-complete-reducibility-theorem]]).
+[L1] Weyl decomposes $M$ as a finite direct sum of simple modules ([[thm-weyls-complete-reducibility-theorem]]).
 
-[L2] The Casimir is central and acts as an intertwiner
-([[lem-the-casimir-operator-is-basis-independent-and-intertwining]]).
+[L2] The Casimir is central and acts as an intertwiner ([[lem-the-casimir-operator-is-basis-independent-and-intertwining]]).
 
-[L3] $H^2$ classifies abelian extensions, including the split zero class
-([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]]).
+[L3] $H^2$ classifies abelian extensions, including the split zero class ([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]]).
 
-[L4] Every ideal of a semisimple algebra has a complementary ideal
-([[prop-ideals-and-quotients-of-semisimple-lie-algebras]]).
+[L4] Every ideal of a semisimple algebra has a complementary ideal ([[prop-ideals-and-quotients-of-semisimple-lie-algebras]]).
 
-[L5] The trace-form version of Cartan's criterion makes an algebra
-solvable when the required pairings vanish
-([[thm-cartans-solvability-criterion]]).
+[L5] The trace-form version of Cartan's criterion makes an algebra solvable when the required pairings vanish ([[thm-cartans-solvability-criterion]]).
 
-[L6] The radical of an invariant trace form is an ideal
-([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
+[L6] The radical of an invariant trace form is an ideal ([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
 
-[L7] A nondegenerate invariant form and trace-dual bases define the Casimir
-operator
-([[def-casimir-operator-relative-to-an-invariant-form]]).
+[L7] A nondegenerate invariant form and trace-dual bases define the Casimir operator ([[def-casimir-operator-relative-to-an-invariant-form]]).
 
 ## Proof
 

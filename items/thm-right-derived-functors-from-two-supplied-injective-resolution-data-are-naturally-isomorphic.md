@@ -31,26 +31,15 @@ isomorphic.
 
 **Given:** A morphism $u:A\to B$ and an integer $n$.
 
-[L1] The two constructions define additive functors
-([[thm-right-derived-functors-relative-to-supplied-data-are-additive-functors]]).
+[L1] The two constructions define additive functors ([[thm-right-derived-functors-relative-to-supplied-data-are-additive-functors]]).
 
-[L2] The chosen injective resolutions of a fixed object are homotopy equivalent
-under that object
-([[thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object]]).
+[L2] The chosen injective resolutions of a fixed object are homotopy equivalent under that object ([[thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object]]).
 
-[L3] Two injective comparison maps extending the same morphism are
-cochain-homotopic
-([[thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]]).
+[L3] Two injective comparison maps extending the same morphism are cochain-homotopic ([[thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]]).
 
-[L4] A cochain complex is read as a reindexed chain complex, and chain-homotopy
-invariance together with homology's compatibility with composition survives
-that reindexing
-([[def-cochain-complex-in-an-abelian-category]],
-[[thm-chain-homotopic-maps-induce-the-same-map-on-homology]],
-[[prop-homology-respects-identities-and-composition]]).
+[L4] A cochain complex is read as a reindexed chain complex, and chain-homotopy invariance together with homology's compatibility with composition survives that reindexing ([[def-cochain-complex-in-an-abelian-category]], [[thm-chain-homotopic-maps-induce-the-same-map-on-homology]], [[prop-homology-respects-identities-and-composition]]).
 
-[L5] Comparison extensions exist for morphisms on the supplied injective data
-([[lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions]]).
+[L5] Comparison extensions exist for morphisms on the supplied injective data ([[lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions]]).
 
 ## Proof
 

@@ -33,13 +33,9 @@ Consequently $\{p_j,q^i\}=-\delta^i_j$.
 
 ## Facts & Assumptions
 
-**Given:** The library convention
-$\{F,G\}=\sum_k(F_{q^k}G_{p_k}-F_{p_k}G_{q^k})$.
+**Given:** The library convention $\{F,G\}=\sum_k(F_{q^k}G_{p_k}-F_{p_k}G_{q^k})$.
 
-[F1] That coordinate formula follows from
-$\omega_{\mathrm{can}}=\sum_kdq^k\wedge dp_k$ and
-$\iota_{X_H}\omega=dH$.
-[[prop-coordinate-formula-for-the-poisson-bracket]].
+[F1] That coordinate formula follows from $\omega_{\mathrm{can}}=\sum_kdq^k\wedge dp_k$ and $\iota_{X_H}\omega=dH$. [[prop-coordinate-formula-for-the-poisson-bracket]].
 
 ## Verification
 

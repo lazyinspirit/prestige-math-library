@@ -47,27 +47,17 @@ is exactly $1/\kappa_2(A)$.
 
 ## Facts & Assumptions
 
-**Given:** An invertible real matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with
-$n\ge 1$, its singular values $\sigma_1\ge\cdots\ge\sigma_n>0$, and a matrix
-$E\in M_n(\mathbb{R})$.
+**Given:** An invertible real matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge 1$, its singular values $\sigma_1\ge\cdots\ge\sigma_n>0$, and a matrix $E\in M_n(\mathbb{R})$.
 
-[L1] There is a singular value decomposition $A=U\Sigma V^{\mathsf T}$ with
-orthogonal $U,V$ and diagonal $\Sigma$ of the singular values
-([[thm-singular-value-decomposition]]).
+[L1] There is a singular value decomposition $A=U\Sigma V^{\mathsf T}$ with orthogonal $U,V$ and diagonal $\Sigma$ of the singular values ([[thm-singular-value-decomposition]]).
 
-[L2] The operator norm equals the largest singular value, attained at a
-right-singular vector ([[thm-operator-norm-is-the-largest-singular-value]]).
+[L2] The operator norm equals the largest singular value, attained at a right-singular vector ([[thm-operator-norm-is-the-largest-singular-value]]).
 
-[L3] The rank of a matrix is the number of its positive singular values
-([[cor-rank-equals-number-of-nonzero-singular-values]]).
+[L3] The rank of a matrix is the number of its positive singular values ([[cor-rank-equals-number-of-nonzero-singular-values]]).
 
-[L4] A square matrix is invertible exactly when it has rank $n$
-([[thm-invertible-matrix-theorem]]).
+[L4] A square matrix is invertible exactly when it has rank $n$ ([[thm-invertible-matrix-theorem]]).
 
-[L5] Unitary invariance and the singular-value formulas of
-[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]]:
-for orthogonal $Q,Z$ the matrices $QAZ$ and $A$ have the same singular values,
-and $\lVert A\rVert_2=\sigma_1$.
+[L5] Unitary invariance and the singular-value formulas of [[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]]: for orthogonal $Q,Z$ the matrices $QAZ$ and $A$ have the same singular values, and $\lVert A\rVert_2=\sigma_1$.
 
 ## Proof
 

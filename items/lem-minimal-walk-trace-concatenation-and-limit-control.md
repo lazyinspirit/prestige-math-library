@@ -47,12 +47,9 @@ $\min L(\xi,\beta)\to\alpha$ when $\alpha<\beta$.
 
 ## Facts & Assumptions
 
-**Given:** The fixed normalized $C$-sequence and the trace conventions in the
-statement.
+**Given:** The fixed normalized $C$-sequence and the trace conventions in the statement.
 
-[F1] [[def-c-sequences-and-minimal-walk-traces-on-omega-one]] defines the walk
-by least points of $C_\zeta$ at or above the target, and defines the lower trace
-by the successive running maxima of the finite sets $C_\zeta\cap\alpha$.
+[F1] [[def-c-sequences-and-minimal-walk-traces-on-omega-one]] defines the walk by least points of $C_\zeta$ at or above the target, and defines the lower trace by the successive running maxima of the finite sets $C_\zeta\cap\alpha$.
 
 ## Proof
 

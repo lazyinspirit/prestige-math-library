@@ -44,9 +44,4 @@ This is a local shell length ledger. It does not assert a globally labelled $C'(
 
 ## Diagram
 
-```tikz
-\begin{tikzpicture}
-\draw[very thick] (0,0) -- node[above] {exterior: 10} (4,0);
-\draw (4,0) -- node[right] {3} (3,-2) -- node[below] {3} (1,-2) -- node[left] {3} (0,0);
-\end{tikzpicture}
-```
+```tikz \begin{tikzpicture} \draw[very thick] (0,0) -- node[above] {exterior: 10} (4,0); \draw (4,0) -- node[right] {3} (3,-2) -- node[below] {3} (1,-2) -- node[left] {3} (0,0); \end{tikzpicture} ```

@@ -32,13 +32,9 @@ isomorphism between them commuting with their inclusions into $G$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and connected immersed Lie subgroups
-$i_1:H_1\to G$ and $i_2:H_2\to G$ with the same tangent image
-$\mathfrak h\subseteq\operatorname{Lie}(G)$.
+**Given:** $\mathrm{AC}_\omega$ and connected immersed Lie subgroups $i_1:H_1\to G$ and $i_2:H_2\to G$ with the same tangent image $\mathfrak h\subseteq\operatorname{Lie}(G)$.
 
-[F1] A Lie subalgebra integrates to a connected immersed subgroup uniquely up
-to the unique isomorphism over $G$.
-[[thm-lie-subgroup-lie-subalgebra-correspondence]].
+[F1] A Lie subalgebra integrates to a connected immersed subgroup uniquely up to the unique isomorphism over $G$. [[thm-lie-subgroup-lie-subalgebra-correspondence]].
 
 ## Proof
 

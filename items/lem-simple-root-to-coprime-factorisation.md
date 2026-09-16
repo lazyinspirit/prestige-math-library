@@ -30,12 +30,9 @@ and the factors $T-\overline a$ and $\overline h$ are coprime.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, a polynomial $\overline f \in k[T]$, and a simple root
-$\overline a$ of $\overline f$.
+**Given:** A field $k$, a polynomial $\overline f \in k[T]$, and a simple root $\overline a$ of $\overline f$.
 
-[L1] Polynomial division by a monic linear polynomial is valid over any
-commutative ring, in particular over a field
-([[def-polynomial-ring-over-a-commutative-ring]]).
+[L1] Polynomial division by a monic linear polynomial is valid over any commutative ring, in particular over a field ([[def-polynomial-ring-over-a-commutative-ring]]).
 
 ## Proof
 

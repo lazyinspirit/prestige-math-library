@@ -31,11 +31,9 @@ integers and whose principal part at each integer $n$ is $(z-n)^{-2}$.
 
 ## Facts & Assumptions
 
-**Given:** The discrete set $\mathbb Z$ and the prescribed principal parts
-$p_n(z)=(z-n)^{-2}$.
+**Given:** The discrete set $\mathbb Z$ and the prescribed principal parts $p_n(z)=(z-n)^{-2}$.
 
-[L1] Mittag-Leffler on the plane realizes every discrete family of prescribed
-principal parts ([[thm-mittag-leffler-theorem-on-the-plane]]).
+[L1] Mittag-Leffler on the plane realizes every discrete family of prescribed principal parts ([[thm-mittag-leffler-theorem-on-the-plane]]).
 
 ## Verification
 

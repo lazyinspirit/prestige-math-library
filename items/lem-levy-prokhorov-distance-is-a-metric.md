@@ -29,23 +29,17 @@ The closed-set definition of $\pi$ is a metric on Borel probabilities on any met
 
 [F1] [[def-levy-prokhorov-metric]]: For Borel probabilities $\mu$,$\nu$ on a metric space S, put $F^{[\varepsilon]}=\{x:d(x,F)\le\varepsilon\}$ for nonempty closed F, and $\varnothing^{[\varepsilon]}=\varnothing$. Define $\pi(\mu,\nu)$ as the infimum of $\varepsilon$>0 such that, for every closed F, both $\mu(F)\le\nu(F^{[\varepsilon]})+\varepsilon$ and $\nu(F)\le\mu(F^{[\varepsilon]})+\varepsilon$. The admissible set contains every $\varepsilon$>=1 and is bounded below by zero, so its real infimum exists by thm-infimum-property. Enlargements are closed because distance to a nonempty set is continuous. The metric assertion is proved in the following lemma.
 
-[F2] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be
-nonempty and let $x, y \in X$. Then
+[F2] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be nonempty and let $x, y \in X$. Then
 
 $$|d(x,A) - d(y,A)| \le d(x,y),$$
 
-with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter).
-Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$
-between $u$ and $v$: it is **$1$-Lipschitz**.
+with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter). Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$ between $u$ and $v$: it is **$1$-Lipschitz**.
 
 [F3] [[thm-continuity-from-above-for-measures]]: Let $(E_n)_{n\in\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\mu$. If $\mu(E_{n_0})<+\infty$ for some $n_0$, then
 
 $$\mu\left(\bigcap_{n\in\mathbb N}E_n\right)=\inf_{n\in\mathbb N}\mu(E_n).$$
 
-[F4] [[thm-dynkin-pi-lambda]]: Let $\mathcal P$ be a $\pi$-system on $X$. Then
-$\lambda_X(\mathcal P)=\sigma_X(\mathcal P)$. Consequently, if $\mathcal D$ is
-any lambda-system on $X$ with $\mathcal P\subseteq\mathcal D$, then
-$\sigma_X(\mathcal P)\subseteq\mathcal D$.
+[F4] [[thm-dynkin-pi-lambda]]: Let $\mathcal P$ be a $\pi$-system on $X$. Then $\lambda_X(\mathcal P)=\sigma_X(\mathcal P)$. Consequently, if $\mathcal D$ is any lambda-system on $X$ with $\mathcal P\subseteq\mathcal D$, then $\sigma_X(\mathcal P)\subseteq\mathcal D$.
 
 ## Proof
 

@@ -48,15 +48,11 @@ and the integral counts the preimages of $w$ with multiplicity.
 
 ## Facts & Assumptions
 
-**Given:** A meromorphic function $f$ on an open set $\Omega$, an admissible
-cycle $\Gamma$, and a complex number $w$ with $f(z)\ne w$ on $\Gamma^\ast$.
+**Given:** A meromorphic function $f$ on an open set $\Omega$, an admissible cycle $\Gamma$, and a complex number $w$ with $f(z)\ne w$ on $\Gamma^\ast$.
 
-[L1] The argument principle applied to a meromorphic function $g$ gives
-$$\frac{1}{2\pi i}\int_\Gamma \frac{g'(z)}{g(z)}\,dz=Z(g,\Gamma)-P(g,\Gamma)$$
-([[thm-argument-principle-null-homologous-cycle]]).
+[L1] The argument principle applied to a meromorphic function $g$ gives $$\frac{1}{2\pi i}\int_\Gamma \frac{g'(z)}{g(z)}\,dz=Z(g,\Gamma)-P(g,\Gamma)$$ ([[thm-argument-principle-null-homologous-cycle]]).
 
-[L2] Derivatives ignore constants, so $(f-w)'=f'$
-([[thm-algebra-of-complex-derivatives]]).
+[L2] Derivatives ignore constants, so $(f-w)'=f'$ ([[thm-algebra-of-complex-derivatives]]).
 
 ## Proof
 

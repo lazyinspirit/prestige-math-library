@@ -35,17 +35,13 @@ $$\cdots\to H^n(\mathfrak g,M')\to H^n(\mathfrak g,M)\to H^n(\mathfrak g,M'')\to
 
 ## Facts & Assumptions
 
-**Given:** The stated short exact coefficient sequence and finite-dimensional
-$\mathfrak g$.
+**Given:** The stated short exact coefficient sequence and finite-dimensional $\mathfrak g$.
 
-[L1] CE cochains and cohomology are as in
-[[def-lie-algebra-cohomology]].
+[L1] CE cochains and cohomology are as in [[def-lie-algebra-cohomology]].
 
-[L2] A short exact sequence of cochain complexes has a natural cohomology
-long exact sequence ([[thm-long-exact-sequence-in-cohomology]]).
+[L2] A short exact sequence of cochain complexes has a natural cohomology long exact sequence ([[thm-long-exact-sequence-in-cohomology]]).
 
-[L3] The coefficient maps are intertwiners
-([[def-subrepresentation-quotient-representation-and-intertwiner]]).
+[L3] The coefficient maps are intertwiners ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
 
 ## Proof
 

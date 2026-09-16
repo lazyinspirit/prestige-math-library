@@ -36,35 +36,21 @@ Every leaf of a regular foliation is an embedded submanifold.
 
 ## Facts & Assumptions
 
-**Given:** An irrational $\alpha$ and, on the standard torus
-$\mathbb T^2=\mathbb R^2/\mathbb Z^2$, the constant distribution $\mathcal D$
-spanned by the image of $(1,\alpha)$.
+**Given:** An irrational $\alpha$ and, on the standard torus $\mathbb T^2=\mathbb R^2/\mathbb Z^2$, the constant distribution $\mathcal D$ spanned by the image of $(1,\alpha)$.
 
-[L1] The quotient $\mathbb R^2/\mathbb Z^2$ is the two-torus, with the product
-topology and its standard product smooth structure
-([[def-two-dimensional-torus]],
-[[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
+[L1] The quotient $\mathbb R^2/\mathbb Z^2$ is the two-torus, with the product topology and its standard product smooth structure ([[def-two-dimensional-torus]], [[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
 
-[L2] An integrable rank-one distribution determines a regular foliation whose
-leaves are its maximal connected integral manifolds
-([[thm-regular-foliations-and-integrable-distributions-correspond]]).
+[L2] An integrable rank-one distribution determines a regular foliation whose leaves are its maximal connected integral manifolds ([[thm-regular-foliations-and-integrable-distributions-correspond]]).
 
-[L3] For an integrable distribution, the leaf through a point is its
-tangent-curve reachability class and carries the unique maximal connected
-integral-manifold structure
-([[def-leaf-equivalence-relation-of-an-integrable-distribution]],
-[[thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds]]).
+[L3] For an integrable distribution, the leaf through a point is its tangent-curve reachability class and carries the unique maximal connected integral-manifold structure ([[def-leaf-equivalence-relation-of-an-integrable-distribution]], [[thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds]]).
 
-[L4] Every real number has an integer part $\lfloor x\rfloor$ satisfying
-$\lfloor x\rfloor\le x<\lfloor x\rfloor+1$ ([[lem-integer-part]]).
+[L4] Every real number has an integer part $\lfloor x\rfloor$ satisfying $\lfloor x\rfloor\le x<\lfloor x\rfloor+1$ ([[lem-integer-part]]).
 
 [L5] The real numbers are Archimedean ([[thm-of-archimedean]]).
 
-[L6] Among $N+1$ objects placed in $N$ classes, two lie in the same class
-([[lem-pigeonhole]]).
+[L6] Among $N+1$ objects placed in $N$ classes, two lie in the same class ([[lem-pigeonhole]]).
 
-[L7] A one-dimensional embedded submanifold of a two-manifold is locally an
-ambient coordinate line ([[def-embedded-submanifold-and-slice-chart]]).
+[L7] A one-dimensional embedded submanifold of a two-manifold is locally an ambient coordinate line ([[def-embedded-submanifold-and-slice-chart]]).
 
 ## Refutation
 

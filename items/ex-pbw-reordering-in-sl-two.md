@@ -38,8 +38,7 @@ basis of $U(\mathfrak{sl}_2)$.
 
 **Given:** The displayed Lie algebra and supplied order $f<h<e$.
 
-[L1] PBW supplies the ordered-monomial basis
-([[thm-poincare-birkhoff-witt]]).
+[L1] PBW supplies the ordered-monomial basis ([[thm-poincare-birkhoff-witt]]).
 
 ## Verification
 

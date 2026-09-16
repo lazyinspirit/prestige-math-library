@@ -36,8 +36,7 @@ Then $ke_1$ is invariant but has no invariant complement.
 
 **Given:** The displayed nilpotent action on a two-dimensional vector space.
 
-[L1] Stable subspaces and complete reducibility are those of
-[[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]].
+[L1] Stable subspaces and complete reducibility are those of [[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]].
 
 ## Verification
 

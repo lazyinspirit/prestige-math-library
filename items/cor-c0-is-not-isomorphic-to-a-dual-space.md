@@ -37,27 +37,15 @@ normed space.
 
 ## Facts & Assumptions
 
-[A1] The Axiom of Choice holds ([[def-axiom-of-choice]]), hence so does
-Countable Choice ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
+[A1] The Axiom of Choice holds ([[def-axiom-of-choice]]), hence so does Countable Choice ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
-[L1] The finite truncations of every $c_0$ sequence converge in the supremum
-norm ([[def-c-zero-and-ell-infinity]],
-[[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
+[L1] The finite truncations of every $c_0$ sequence converge in the supremum norm ([[def-c-zero-and-ell-infinity]], [[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
-[L2] Rational finite spans are countable under Countable Choice
-([[lem-countable-iff-surjection-from-n]], [[thm-rationals-countable]],
-[[thm-product-of-countable]], [[thm-countable-union-of-countable]]), the
-rationals are dense in the reals ([[lem-q-and-irrationals-dense-r]]), and a
-space with a countable dense subset is separable ([[def-separable-space]]).
+[L2] Rational finite spans are countable under Countable Choice ([[lem-countable-iff-surjection-from-n]], [[thm-rationals-countable]], [[thm-product-of-countable]], [[thm-countable-union-of-countable]]), the rationals are dense in the reals ([[lem-q-and-irrationals-dense-r]]), and a space with a countable dense subset is separable ([[def-separable-space]]).
 
-[L3] A topological isomorphism is a bounded linear bijection with bounded
-inverse, and RNP is invariant under such isomorphisms between Banach spaces
-([[def-topological-isomorphism-of-normed-spaces]],
-[[lem-rnp-is-invariant-under-banach-space-isomorphism]]).
+[L3] A topological isomorphism is a bounded linear bijection with bounded inverse, and RNP is invariant under such isomorphisms between Banach spaces ([[def-topological-isomorphism-of-normed-spaces]], [[lem-rnp-is-invariant-under-banach-space-isomorphism]]).
 
-[L4] Under AC every norm-separable dual space has RNP
-([[thm-separable-dual-spaces-have-rnp]]), whereas $c_0$ fails RNP
-([[thm-c0-fails-the-radon-nikodym-property]]).
+[L4] Under AC every norm-separable dual space has RNP ([[thm-separable-dual-spaces-have-rnp]]), whereas $c_0$ fails RNP ([[thm-c0-fails-the-radon-nikodym-property]]).
 
 ## Proof
 

@@ -37,9 +37,7 @@ encoding constants may depend on $M$'s alphabet and tape count.
 
 ## Facts & Assumptions
 
-**Given:** the encoded pair and supplied binary cap, stored in charged work
-space; use either the fixed-$M$ visited-cell cap or the encoded-storage cap
-as specified above.
+**Given:** the encoded pair and supplied binary cap, stored in charged work space; use either the fixed-$M$ visited-cell cap or the encoded-storage cap as specified above.
 
 ## Proof
 

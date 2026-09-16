@@ -51,11 +51,7 @@ $$ x_\lambda =\sum_{\sigma_i>0}\frac{\sigma_i}{\sigma_i^2+\lambda}\,\langle b,u_
 
 **Proof technique:** direct.
 
-1.1 In the same SVD coordinates as [L1], define $B:=V\Sigma^+U^*$ by reciprocating each positive singular value and leaving the
-zero block fixed. Direct diagonal multiplication verifies all four Penrose
-equations, so uniqueness in [L3] gives $B=A^+$. Consequently
-$$ A^+b=\sum_{\sigma_i>0}\frac{1}{\sigma_i}\,\langle b,u_i\rangle v_i. $$
-[L1, L3, algebra]
+1.1 In the same SVD coordinates as [L1], define $B:=V\Sigma^+U^*$ by reciprocating each positive singular value and leaving the zero block fixed. Direct diagonal multiplication verifies all four Penrose equations, so uniqueness in [L3] gives $B=A^+$. Consequently $$ A^+b=\sum_{\sigma_i>0}\frac{1}{\sigma_i}\,\langle b,u_i\rangle v_i. $$ [L1, L3, algebra]
 
 2.1 Step 1.1 and [L1] show that the coefficient of $v_i$ in $x_\lambda-A^+b$ is $$ \left(\frac{\sigma_i}{\sigma_i^2+\lambda}-\frac{1}{\sigma_i}\right) \langle b,u_i\rangle =-\frac{\lambda}{\sigma_i(\sigma_i^2+\lambda)}\langle b,u_i\rangle $$ for each nonzero singular value, while the zero-singular-value coefficients are $0$ in both vectors. [L1, step 1.1, algebra]
 

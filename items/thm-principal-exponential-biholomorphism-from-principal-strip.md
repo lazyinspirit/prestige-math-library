@@ -38,14 +38,11 @@ is a biholomorphism, and its inverse is the principal logarithm.
 
 **Given:** The principal strip $P$ and slit plane $S$ above.
 
-[F1] The principal logarithm is a biholomorphism $\operatorname{Log}:S\to P$
-([[thm-principal-logarithm-biholomorphism-to-the-principal-strip]]).
+[F1] The principal logarithm is a biholomorphism $\operatorname{Log}:S\to P$ ([[thm-principal-logarithm-biholomorphism-to-the-principal-strip]]).
 
-[F2] The complex exponential is entire
-([[thm-complex-exponential-is-entire-with-derivative-itself]]).
+[F2] The complex exponential is entire ([[thm-complex-exponential-is-entire-with-derivative-itself]]).
 
-[F3] A map is biholomorphic when it is bijective, holomorphic, and has
-holomorphic inverse ([[def-biholomorphic-map]]).
+[F3] A map is biholomorphic when it is bijective, holomorphic, and has holomorphic inverse ([[def-biholomorphic-map]]).
 
 ## Proof
 

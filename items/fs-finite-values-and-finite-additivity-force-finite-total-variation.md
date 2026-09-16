@@ -35,8 +35,7 @@ total variation.
 
 [A2] The points $u_n=(2\pi n+\pi/2)^{-1/2}$ and $v_n=(2\pi n+3\pi/2)^{-1/2}$ satisfy $|g(u_n)-g(v_n)|=u_n+v_n$, and $\sum_n(u_n+v_n)$ diverges.
 
-[A3] For a finitely additive real-valued set function on an algebra, define
-$$|\phi|(E):=\sup\left\{\sum_{j=1}^m|\phi(E_j)|:E=\bigsqcup_{j=1}^mE_j,\ E_j\in\mathcal A\right\}.$$
+[A3] For a finitely additive real-valued set function on an algebra, define $$|\phi|(E):=\sup\left\{\sum_{j=1}^m|\phi(E_j)|:E=\bigsqcup_{j=1}^mE_j,\ E_j\in\mathcal A\right\}.$$
 
 ## Refutation
 

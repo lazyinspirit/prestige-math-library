@@ -31,11 +31,9 @@ Dehn reduction is just free reduction under another name.
 
 ## Facts & Assumptions
 
-**Given:** The one-relator presentation $\langle x_1,\dots,x_7 \mid
-x_1x_2x_3x_4x_5x_6x_7\rangle$.
+**Given:** The one-relator presentation $\langle x_1,\dots,x_7 \mid x_1x_2x_3x_4x_5x_6x_7\rangle$.
 
-[L1] A Dehn move replaces a relator subword longer than half the relator by the
-inverse complementary arc ([[def-dehn-reduced-word-and-dehn-presentation]]).
+[L1] A Dehn move replaces a relator subword longer than half the relator by the inverse complementary arc ([[def-dehn-reduced-word-and-dehn-presentation]]).
 
 ## Refutation
 

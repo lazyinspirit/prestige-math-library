@@ -23,8 +23,7 @@ uniquely determined function.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the zero measure on
-$(\mathbb R,\mathcal B(\mathbb R))$, and the Cantor set $C$.
+**Given:** Countable choice, the zero measure on $(\mathbb R,\mathcal B(\mathbb R))$, and the Cantor set $C$.
 
 [L1] The Cantor set is Lebesgue measurable and Lebesgue null. ([[cor-cantor-set-is-an-uncountable-lebesgue-null-set]])
 

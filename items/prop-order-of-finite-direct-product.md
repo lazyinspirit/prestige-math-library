@@ -32,14 +32,11 @@ and has order $|G\times H|=|G|\,|H|$.
 
 **Given:** Finite groups $G,H$.
 
-[L1] The direct product has underlying set $G\times H$ and is a group
-([[thm-external-direct-product-is-a-group]]).
+[L1] The direct product has underlying set $G\times H$ and is a group ([[thm-external-direct-product-is-a-group]]).
 
-[L2] The order of a finite group is the cardinality of its underlying set
-([[def-order-in-a-group]]).
+[L2] The order of a finite group is the cardinality of its underlying set ([[def-order-in-a-group]]).
 
-[L3] The Cartesian product of finite sets has cardinality the product of their
-cardinalities ([[thm-product-rule]]).
+[L3] The Cartesian product of finite sets has cardinality the product of their cardinalities ([[thm-product-rule]]).
 
 ## Proof
 

@@ -32,18 +32,11 @@ use the general Adem theorem and assumes no form of choice.
 
 ## Facts & Assumptions
 
-**Given:** A space $X$, an integer $n\geq0$, and
-$x\in H^n(X;\mathbb F_2)$.
+**Given:** A space $X$, an integer $n\geq0$, and $x\in H^n(X;\mathbb F_2)$.
 
-[F1] [[def-bockstein-connecting-operation]] defines the integral Bockstein
-$\widetilde\beta$ from
-$0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb F_2\to0$ and the mod-two
-Bockstein $\beta$ from
-$0\to\mathbb F_2\xrightarrow{2}\mathbb Z/4\to\mathbb F_2\to0$; zero/one
-residue lifts make both constructions choice-free.
+[F1] [[def-bockstein-connecting-operation]] defines the integral Bockstein $\widetilde\beta$ from $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb F_2\to0$ and the mod-two Bockstein $\beta$ from $0\to\mathbb F_2\xrightarrow{2}\mathbb Z/4\to\mathbb F_2\to0$; zero/one residue lifts make both constructions choice-free.
 
-[F2] [[prop-first-steenrod-square-is-the-mod-two-bockstein]] gives
-$Sq^1=\beta$ on every mod-two cohomology group without AC.
+[F2] [[prop-first-steenrod-square-is-the-mod-two-bockstein]] gives $Sq^1=\beta$ on every mod-two cohomology group without AC.
 
 ## Verification
 
@@ -53,12 +46,7 @@ $Sq^1=\beta$ on every mod-two cohomology group without AC.
 
 $$\delta\widehat c=2h.$$
 
-Also $\delta h=0$, because $2\delta h=\delta^2\widehat c=0$ and integer
-cochains are torsion-free. Thus
-$\widetilde\beta(u)=[h]$. Reducing $\widehat c$ modulo four gives a lift of
-$c$ for the mod-two coefficient sequence, and its coboundary is
-$2(h\bmod2)$ in $\mathbb Z/4$. Hence
-$\beta(u)=[h\bmod2]=\rho\widetilde\beta(u)$.
+Also $\delta h=0$, because $2\delta h=\delta^2\widehat c=0$ and integer cochains are torsion-free. Thus $\widetilde\beta(u)=[h]$. Reducing $\widehat c$ modulo four gives a lift of $c$ for the mod-two coefficient sequence, and its coboundary is $2(h\bmod2)$ in $\mathbb Z/4$. Hence $\beta(u)=[h\bmod2]=\rho\widetilde\beta(u)$.
 
 1.2 The integral Bockstein kills reduced integral classes: $\widetilde\beta\rho=0$. If $z$ is an integral cocycle, then $z$ itself is an integer lift of its mod-two reduction. Its coboundary is zero, so the lift/divide definition gives $\widetilde\beta(\rho[z])=0$. [F1]
 

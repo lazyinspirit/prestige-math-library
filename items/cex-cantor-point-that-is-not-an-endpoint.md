@@ -76,19 +76,8 @@ $\delta > 0$, so no such $v$ exists on either side.
 
 ## Remarks
 
-- **The digits diagnose it.** By the argument of
-  [[thm-cantor-function-properties]] the two endpoints of a gap have digit
-  sequences that are eventually $2$ and eventually $0$ respectively; the digits of
-  $1/4$ alternate for ever, so it can be neither. The proof above avoids that
-  route and exhibits the approximating points directly, which is what makes it
-  self-contained.
+- **The digits diagnose it.** By the argument of [[thm-cantor-function-properties]] the two endpoints of a gap have digit sequences that are eventually $2$ and eventually $0$ respectively; the digits of $1/4$ alternate for ever, so it can be neither. The proof above avoids that route and exhibits the approximating points directly, which is what makes it self-contained.
 
-- **How many such points there are.** The eventually constant sequences form an
-  at most countable set, while $C$ is uncountable
-  ([[thm-cantor-set-properties]]); so the endpoints are a vanishing part of $C$
-  and the refuted claim fails not marginally but completely.
+- **How many such points there are.** The eventually constant sequences form an at most countable set, while $C$ is uncountable ([[thm-cantor-set-properties]]); so the endpoints are a vanishing part of $C$ and the refuted claim fails not marginally but completely.
 
-- **$1/4$ is also where the Cantor function takes the value $1/3$**
-  ([[ex-cantor-function-values]]), and it is the one value in that example whose
-  computation needs the whole infinite digit sequence rather than a finite
-  initial segment.
+- **$1/4$ is also where the Cantor function takes the value $1/3$** ([[ex-cantor-function-values]]), and it is the one value in that example whose computation needs the whole infinite digit sequence rather than a finite initial segment.

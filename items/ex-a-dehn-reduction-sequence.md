@@ -41,10 +41,7 @@ reduces to the empty word by two successive Dehn moves.
 
 **Given:** The presentation and the word $w$ displayed above.
 
-[L1] A relator subword longer than half the relator may be replaced by the
-inverse complementary arc, and this shortens the word
-([[def-dehn-reduced-word-and-dehn-presentation]],
-[[lem-dehn-replacement-strictly-shortens-a-word]]).
+[L1] A relator subword longer than half the relator may be replaced by the inverse complementary arc, and this shortens the word ([[def-dehn-reduced-word-and-dehn-presentation]], [[lem-dehn-replacement-strictly-shortens-a-word]]).
 
 ## Verification
 

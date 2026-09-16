@@ -34,13 +34,9 @@ over $\Sigma$ recognizing $L_1\cup L_2$.
 
 **Given:** Two DFA's $D_1$ and $D_2$ over the same alphabet $\Sigma$.
 
-[L1] A word is accepted by a DFA exactly when the extended transition from the
-start state lands in an accepting state, by
-[[def-dfa-acceptance-and-recognized-language]].
+[L1] A word is accepted by a DFA exactly when the extended transition from the start state lands in an accepting state, by [[def-dfa-acceptance-and-recognized-language]].
 
-[L2] For languages over a fixed alphabet, union and intersection are the
-set-theoretic operations $L\cup K$ and $L\cap K$, by
-[[def-language-boolean-operations]].
+[L2] For languages over a fixed alphabet, union and intersection are the set-theoretic operations $L\cup K$ and $L\cap K$, by [[def-language-boolean-operations]].
 
 ## Proof
 

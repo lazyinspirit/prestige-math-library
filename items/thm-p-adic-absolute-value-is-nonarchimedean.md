@@ -36,13 +36,9 @@ So $|\cdot|_p$ is a nonarchimedean absolute value on $\mathbb Q$.
 
 **Given:** A prime $p$ and rational numbers $x,y$.
 
-[L1] On $\mathbb Q^\times$, the valuation $v_p$ is well defined, additive under
-multiplication, and satisfies
-$v_p(x+y) \ge \min\{v_p(x),v_p(y)\}$ whenever $x,y,x+y$ are nonzero
-([[lem-p-adic-valuation-on-q]]).
+[L1] On $\mathbb Q^\times$, the valuation $v_p$ is well defined, additive under multiplication, and satisfies $v_p(x+y) \ge \min\{v_p(x),v_p(y)\}$ whenever $x,y,x+y$ are nonzero ([[lem-p-adic-valuation-on-q]]).
 
-[L2] The $p$-adic absolute value is defined by $|x|_p = p^{-v_p(x)}$ for
-nonzero $x$, with $|0|_p = 0$ ([[def-p-adic-absolute-value-on-the-rationals]]).
+[L2] The $p$-adic absolute value is defined by $|x|_p = p^{-v_p(x)}$ for nonzero $x$, with $|0|_p = 0$ ([[def-p-adic-absolute-value-on-the-rationals]]).
 
 ## Proof
 

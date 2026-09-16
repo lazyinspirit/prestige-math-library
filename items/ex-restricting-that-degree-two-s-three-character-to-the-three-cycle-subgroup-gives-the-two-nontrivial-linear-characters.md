@@ -32,16 +32,11 @@ the sum of the two nontrivial linear characters of $A_3$.
 
 ## Facts & Assumptions
 
-**Given:** The degree-two character $\chi_2=(2,0,-1)$ of $S_3$ from the
-previous example, and the two nontrivial linear characters $\theta$ and
-$\overline\theta$ of $A_3$.
+**Given:** The degree-two character $\chi_2=(2,0,-1)$ of $S_3$ from the previous example, and the two nontrivial linear characters $\theta$ and $\overline\theta$ of $A_3$.
 
-[F1] The previous example identifies $\chi_2$ with the induced character
-$\operatorname{Ind}_{A_3}^{S_3}\theta$
-([[ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character]]).
+[F1] The previous example identifies $\chi_2$ with the induced character $\operatorname{Ind}_{A_3}^{S_3}\theta$ ([[ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character]]).
 
-[F2] Frobenius reciprocity identifies multiplicities before and after induction
-([[cor-frobenius-reciprocity-for-complex-characters]]).
+[F2] Frobenius reciprocity identifies multiplicities before and after induction ([[cor-frobenius-reciprocity-for-complex-characters]]).
 
 ## Verification
 

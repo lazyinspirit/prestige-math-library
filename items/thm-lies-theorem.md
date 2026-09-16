@@ -34,23 +34,15 @@ $yw=\chi(y)w$ for every $y\in\mathfrak g$.
 
 ## Facts & Assumptions
 
-**Given:** The algebraically closed characteristic-zero field $k$, a
-finite-dimensional solvable $k$-Lie algebra $\mathfrak g$, and a nonzero
-finite-dimensional representation on $V$.
+**Given:** The algebraically closed characteristic-zero field $k$, a finite-dimensional solvable $k$-Lie algebra $\mathfrak g$, and a nonzero finite-dimensional representation on $V$.
 
-[L1] A nonzero finite-dimensional solvable Lie algebra has a codimension-one
-ideal ([[lem-a-finite-dimensional-solvable-lie-algebra-has-a-codimension-one-ideal-over-an-algebraically-closed-characteristic-zero-field]]).
+[L1] A nonzero finite-dimensional solvable Lie algebra has a codimension-one ideal ([[lem-a-finite-dimensional-solvable-lie-algebra-has-a-codimension-one-ideal-over-an-algebraically-closed-characteristic-zero-field]]).
 
-[L2] A representation is linear and satisfies
-$[x,h]v=x(hv)-h(xv)$ ([[def-representation-of-a-lie-algebra]]).
+[L2] A representation is linear and satisfies $[x,h]v=x(hv)-h(xv)$ ([[def-representation-of-a-lie-algebra]]).
 
-[L3] Every endomorphism of a nonzero finite-dimensional vector space over an
-algebraically closed field has an eigenvalue
-([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]).
+[L3] Every endomorphism of a nonzero finite-dimensional vector space over an algebraically closed field has an eigenvalue ([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]).
 
-[L4] For finite-dimensional endomorphisms,
-$\operatorname{tr}(AB)=\operatorname{tr}(BA)$
-([[thm-trace-of-ab-equals-trace-of-ba]]).
+[L4] For finite-dimensional endomorphisms, $\operatorname{tr}(AB)=\operatorname{tr}(BA)$ ([[thm-trace-of-ab-equals-trace-of-ba]]).
 
 ## Proof
 

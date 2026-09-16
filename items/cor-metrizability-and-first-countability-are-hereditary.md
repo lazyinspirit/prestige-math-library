@@ -99,19 +99,8 @@ topology with the metric topology of the subspace metric is discharged inside
 
 ## Remarks
 
-- **No choice principle is spent.** The metric $d_S$ is a restriction, and the
-  neighbourhood base $\mathcal{B}^S_x$ is the image of a given family under an
-  explicit map, so the enumeration of step 3.1 is produced from a given
-  enumeration rather than selected. The only selections in the proof are the
-  single metric of step 1.1 and the single family of step 1.2, each of which
-  exists by hypothesis for the one space under consideration.
+- **No choice principle is spent.** The metric $d_S$ is a restriction, and the neighbourhood base $\mathcal{B}^S_x$ is the image of a given family under an explicit map, so the enumeration of step 3.1 is produced from a given enumeration rather than selected. The only selections in the proof are the single metric of step 1.1 and the single family of step 1.2, each of which exists by hypothesis for the one space under consideration.
 
-- **Neither converse holds, and neither is claimed.** A subspace of a
-  non-metrizable space may perfectly well be metrizable, every one-point subspace
-  being so; heredity is a statement in one direction only.
+- **Neither converse holds, and neither is claimed.** A subspace of a non-metrizable space may perfectly well be metrizable, every one-point subspace being so; heredity is a statement in one direction only.
 
-- **The metric is not canonical, and the topology is.** Claim 1 produces *a*
-  metric on $S$, the restriction of the one chosen on $X$; a different metric on
-  $X$ inducing the same topology restricts to a different metric on $S$ inducing
-  the same subspace topology ([[def-metrizable-space]]). What is hereditary is
-  the existence of a metric, which is a property of the topology alone.
+- **The metric is not canonical, and the topology is.** Claim 1 produces *a* metric on $S$, the restriction of the one chosen on $X$; a different metric on $X$ inducing the same topology restricts to a different metric on $S$ inducing the same subspace topology ([[def-metrizable-space]]). What is hereditary is the existence of a metric, which is a property of the topology alone.

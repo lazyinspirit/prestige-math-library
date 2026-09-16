@@ -32,8 +32,7 @@ Then the only simple $kP$-module is the trivial module $k$.
 
 **Given:** A finite $p$-group $P$ and a splitting field $k$ of characteristic $p$.
 
-[L1] The group algebra $kP$ is local
-([[thm-kg-is-local-iff-g-is-a-p-group]]).
+[L1] The group algebra $kP$ is local ([[thm-kg-is-local-iff-g-is-a-p-group]]).
 
 ## Proof
 

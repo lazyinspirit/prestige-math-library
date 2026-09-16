@@ -43,20 +43,13 @@ Let $G$ be a finite group, and let $x\in R_{\mathbb Q}(G)$ in the sense of
 
 **Given:** A finite group $G$ and an element $x\in R_{\mathbb Q}(G)$.
 
-[F1] The cyclic induction subgroup $I_{\mathrm{cyc}}(G)$ is an ideal of $R(G)$
-([[lem-induction-image-is-an-ideal-in-the-representation-ring]]).
+[F1] The cyclic induction subgroup $I_{\mathrm{cyc}}(G)$ is an ideal of $R(G)$ ([[lem-induction-image-is-an-ideal-in-the-representation-ring]]).
 
-[F2] The trivial character satisfies an Artin relation
-$|G|1_G=\sum_i a_i\operatorname{Ind}_{C_i}^G1_{C_i}$ with $C_i\le G$ cyclic and
-$a_i\in\mathbb Z$ ([[lem-artin-cyclic-permutation-relation]]).
+[F2] The trivial character satisfies an Artin relation $|G|1_G=\sum_i a_i\operatorname{Ind}_{C_i}^G1_{C_i}$ with $C_i\le G$ cyclic and $a_i\in\mathbb Z$ ([[lem-artin-cyclic-permutation-relation]]).
 
-[F3] The projection formula says
-$\bigl(\operatorname{Ind}_H^G\chi\bigr)\psi=
-\operatorname{Ind}_H^G(\chi\,\operatorname{Res}_H^G\psi)$
-([[prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]]).
+[F3] The projection formula says $\bigl(\operatorname{Ind}_H^G\chi\bigr)\psi= \operatorname{Ind}_H^G(\chi\,\operatorname{Res}_H^G\psi)$ ([[prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]]).
 
-[A1] If a finite-dimensional representation is defined over $\mathbb Q$, then
-its restriction to a subgroup is again defined over $\mathbb Q$.
+[A1] If a finite-dimensional representation is defined over $\mathbb Q$, then its restriction to a subgroup is again defined over $\mathbb Q$.
 
 ## Proof
 

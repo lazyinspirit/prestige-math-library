@@ -29,22 +29,17 @@ either $\alpha=0$ or $\zeta_1=\cdots=\zeta_n$.
 
 ## Facts & Assumptions
 
-**Given:** Roots of unity $\zeta_1,\dots,\zeta_n$ and their average
-$\alpha=(\zeta_1+\cdots+\zeta_n)/n$, with $\alpha$ an algebraic integer.
+**Given:** Roots of unity $\zeta_1,\dots,\zeta_n$ and their average $\alpha=(\zeta_1+\cdots+\zeta_n)/n$, with $\alpha$ an algebraic integer.
 
-[F1] A rational algebraic integer is an integer
-([[cor-rational-algebraic-integers-are-integers]]).
+[F1] A rational algebraic integer is an integer ([[cor-rational-algebraic-integers-are-integers]]).
 
-[F2] The modulus $|z|$ is the usual complex absolute value
-([[def-complex-conjugate-real-imaginary-part-and-modulus]]).
+[F2] The modulus $|z|$ is the usual complex absolute value ([[def-complex-conjugate-real-imaginary-part-and-modulus]]).
 
-[F3] An algebraic integer is a complex number integral over $\mathbb Z$
-([[def-integral-element-and-algebraic-integer]]).
+[F3] An algebraic integer is a complex number integral over $\mathbb Z$ ([[def-integral-element-and-algebraic-integer]]).
 
 [A1] Every algebraic conjugate of a root of unity is again a root of unity.
 
-[A2] The average of complex numbers of modulus $1$ has modulus at most $1$, with
-equality only when all of them are equal.
+[A2] The average of complex numbers of modulus $1$ has modulus at most $1$, with equality only when all of them are equal.
 
 ## Proof
 

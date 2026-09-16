@@ -39,14 +39,11 @@ $1_{C_1}=\operatorname{Ind}_{C_1}^{C_1}1_{C_1}$.
 
 ## Facts & Assumptions
 
-**Given:** A cyclic group $C_n=\langle g\rangle$ and an element
-$x\in R_{\mathbb Q}(C_n)$.
+**Given:** A cyclic group $C_n=\langle g\rangle$ and an element $x\in R_{\mathbb Q}(C_n)$.
 
-[F1] Every rational character is a rational linear combination of characters
-induced from cyclic subgroups ([[thm-artin-induction-for-rational-characters]]).
+[F1] Every rational character is a rational linear combination of characters induced from cyclic subgroups ([[thm-artin-induction-for-rational-characters]]).
 
-[F2] The notation $\langle g\rangle=C_n$ means that $g$ generates the whole
-group ([[def-generated-subgroup]]).
+[F2] The notation $\langle g\rangle=C_n$ means that $g$ generates the whole group ([[def-generated-subgroup]]).
 
 ## Verification
 

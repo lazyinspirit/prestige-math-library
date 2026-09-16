@@ -36,8 +36,7 @@ finite generating set $S$ of $G$.
 
 [A1] In a hyperbolic group, the orbit map $n \mapsto g^n$ is a quasi-isometric embedding of $\mathbb Z$ into the Cayley graph whenever $g$ has infinite order.
 
-[L1] Morse stability controls quasi-geodesics in hyperbolic spaces
-([[thm-morse-stability-of-quasi-geodesics]]).
+[L1] Morse stability controls quasi-geodesics in hyperbolic spaces ([[thm-morse-stability-of-quasi-geodesics]]).
 
 ## Proof
 

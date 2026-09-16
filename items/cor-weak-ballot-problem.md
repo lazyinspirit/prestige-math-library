@@ -69,13 +69,6 @@ $$(p+1)\,N = (p-q+1)\binom{p+q}{q}.$$
 
 ## Remarks
 
-- **Why the extra up-step and not a reflection.** The weak condition $h\ge0$ is
-  not of the form treated by the reflection principle, whose hypothesis is a
-  strict inequality against a level with both endpoints strictly above it.
-  Prepending one up-step turns the weak condition at every index into the strict
-  condition from the index $1$ onwards, and the strict count is already proved.
+- **Why the extra up-step and not a reflection.** The weak condition $h\ge0$ is not of the form treated by the reflection principle, whose hypothesis is a strict inequality against a level with both endpoints strictly above it. Prepending one up-step turns the weak condition at every index into the strict condition from the index $1$ onwards, and the strict count is already proved.
 
-- **The case $p=q$.** Here $p-q+1=1$, and the identity says that $p+1$ times the
-  number of never-behind orderings is the central binomial coefficient. That is
-  the shape the Catalan numbers take on this page, and it is why the weak form is
-  stated separately rather than left as an exercise on the strict one.
+- **The case $p=q$.** Here $p-q+1=1$, and the identity says that $p+1$ times the number of never-behind orderings is the central binomial coefficient. That is the shape the Catalan numbers take on this page, and it is why the weak form is stated separately rather than left as an exercise on the strict one.

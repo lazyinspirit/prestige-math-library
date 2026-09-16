@@ -45,21 +45,13 @@ If $F$ is left exact and the source category has enough injectives, then the
 right derived delta functor $(R_I^nF)$ is universal.
 ## Facts & Assumptions
 
-**Given:** The stated exactness and enough-projectives or enough-injectives
-hypotheses.
+**Given:** The stated exactness and enough-projectives or enough-injectives hypotheses.
 
-[L1] Left and right derived functors carry homological and cohomological delta
-functor structures
-([[thm-left-derived-functors-form-a-homological-delta-functor]],
-[[thm-right-derived-functors-form-a-cohomological-delta-functor]]).
+[L1] Left and right derived functors carry homological and cohomological delta functor structures ([[thm-left-derived-functors-form-a-homological-delta-functor]], [[thm-right-derived-functors-form-a-cohomological-delta-functor]]).
 
-[L2] Their positive degrees are effaceable by projectives or injectives
-([[prop-positive-left-derived-functors-are-effaceable-by-projectives]],
-[[prop-positive-right-derived-functors-are-effaceable-by-injectives]]).
+[L2] Their positive degrees are effaceable by projectives or injectives ([[prop-positive-left-derived-functors-are-effaceable-by-projectives]], [[prop-positive-right-derived-functors-are-effaceable-by-injectives]]).
 
-[L3] Effaceable homological or cohomological delta functors are universal
-([[thm-effaceable-homological-delta-functors-are-universal]],
-[[thm-effaceable-cohomological-delta-functors-are-universal]]).
+[L3] Effaceable homological or cohomological delta functors are universal ([[thm-effaceable-homological-delta-functors-are-universal]], [[thm-effaceable-cohomological-delta-functors-are-universal]]).
 
 ## Proof
 

@@ -34,8 +34,7 @@ pipeline_run: frontier-30
 
 [L1] Extension from degree zero is the extra property called universality ([[def-universal-delta-functor]]).
 
-[L2] A homological delta functor consists of additive functors, exact long
-sequences, and natural connecting maps ([[def-homological-delta-functor]]).
+[L2] A homological delta functor consists of additive functors, exact long sequences, and natural connecting maps ([[def-homological-delta-functor]]).
 
 ## Refutation
 

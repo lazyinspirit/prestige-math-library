@@ -87,14 +87,6 @@ value at a strict right minimum to be exactly $M$ rather than merely at most $M$
 
 ## Remarks
 
-- **Why the hypothesis $a_i\le1$ cannot be dropped.** It is used exactly once, in
-  step 3.1, to force $S_a(j_M)=M$: without it the greatest element of $T_M$ can
-  have a value strictly below $M$, several values of $M$ then share one strict
-  right minimum, and the succession structure of clause 2 fails. A word with a
-  letter $2$ shows this at once, and it is the reason the cycle lemma is stated
-  for words whose letters are at most $1$.
+- **Why the hypothesis $a_i\le1$ cannot be dropped.** It is used exactly once, in step 3.1, to force $S_a(j_M)=M$: without it the greatest element of $T_M$ can have a value strictly below $M$, several values of $M$ then share one strict right minimum, and the succession structure of clause 2 fails. A word with a letter $2$ shows this at once, and it is the reason the cycle lemma is stated for words whose letters are at most $1$.
 
-- **Why the hypothesis $\lVert a\rVert\ge1$ cannot be dropped.** It is what makes
-  $S_a$ take arbitrarily large values to the right of any index and arbitrarily
-  small ones to the left, which is what makes every $T_M$ nonempty and bounded
-  above. With weight $0$ the function is periodic and $R$ is empty.
+- **Why the hypothesis $\lVert a\rVert\ge1$ cannot be dropped.** It is what makes $S_a$ take arbitrarily large values to the right of any index and arbitrarily small ones to the left, which is what makes every $T_M$ nonempty and bounded above. With weight $0$ the function is periodic and $R$ is empty.

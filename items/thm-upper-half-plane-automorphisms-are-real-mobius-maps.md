@@ -37,17 +37,13 @@ for real numbers $a,b,c,d$ with $ad-bc>0$.
 
 **Given:** The upper half-plane $\mathbb H=\{z\in\mathbb C:\operatorname{Im}z>0\}$.
 
-[F1] Automorphisms are biholomorphic self-maps in the sense of
-[[def-conformal-equivalence-and-automorphism-group]].
+[F1] Automorphisms are biholomorphic self-maps in the sense of [[def-conformal-equivalence-and-automorphism-group]].
 
-[F2] Every disc automorphism is a rotated Blaschke factor
-([[thm-disc-automorphisms-are-rotated-blaschke-factors]]).
+[F2] Every disc automorphism is a rotated Blaschke factor ([[thm-disc-automorphisms-are-rotated-blaschke-factors]]).
 
-[F3] Every Möbius transformation is a biholomorphism of the Riemann sphere
-([[thm-mobius-transformations-biholomorphic-sphere]]).
+[F3] Every Möbius transformation is a biholomorphism of the Riemann sphere ([[thm-mobius-transformations-biholomorphic-sphere]]).
 
-[F4] A Möbius transformation has the form $(az+b)/(cz+d)$ with $ad-bc\ne0$
-([[def-mobius-transformation]]).
+[F4] A Möbius transformation has the form $(az+b)/(cz+d)$ with $ad-bc\ne0$ ([[def-mobius-transformation]]).
 
 ## Proof
 

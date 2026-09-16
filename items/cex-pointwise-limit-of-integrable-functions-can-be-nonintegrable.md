@@ -27,8 +27,7 @@ Every pointwise limit of integrable functions is integrable.
 
 ## Facts & Assumptions
 
-**Given:** Counting measure on $\mathbb N$ and the functions
-$f_n=\chi_{\{0,\dots,n\}}$.
+**Given:** Counting measure on $\mathbb N$ and the functions $f_n=\chi_{\{0,\dots,n\}}$.
 
 [L1] Counting measure is a measure on $\mathbb N$ ([[def-counting-measure]], [[prop-counting-measure-is-a-measure]]).
 
@@ -42,5 +41,4 @@ $f_n=\chi_{\{0,\dots,n\}}$.
 $(\mathbb N,\mathcal P(\mathbb N),\#)$.
 
 2.1 For every $k\in\mathbb N$, one has $f_n(k)\to1$. The pointwise limit is the [step 1.1, L1, L2, algebra] ∎
-constant function $1$, whose integral under counting measure is $+\infty$, so it
-is not integrable by [L2]. Thus the Statement is false.
+constant function $1$, whose integral under counting measure is $+\infty$, so it is not integrable by [L2]. Thus the Statement is false.

@@ -28,11 +28,9 @@ Then the associated Lebesgue-Stieltjes measure is the Dirac mass at $0$.
 
 ## Facts & Assumptions
 
-**Given:** The step function $F$ displayed above and its Lebesgue-Stieltjes
-measure $\mu_F$.
+**Given:** The step function $F$ displayed above and its Lebesgue-Stieltjes measure $\mu_F$.
 
-[L1] Lebesgue-Stieltjes singleton masses are jumps, and half-open interval
-values are increments. ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
+[L1] Lebesgue-Stieltjes singleton masses are jumps, and half-open interval values are increments. ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
 
 ## Verification
 

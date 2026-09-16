@@ -29,8 +29,7 @@ SUBSET SUM polynomial-time many-one reduces to PARTITION.
 
 ## Facts & Assumptions
 
-**Given:** A SUBSET SUM instance $(a_1,\ldots,a_n;k)$ and the total
-$$ A:=a_1+\cdots+a_n. $$
+**Given:** A SUBSET SUM instance $(a_1,\ldots,a_n;k)$ and the total $$ A:=a_1+\cdots+a_n. $$
 
 [L1] A polynomial-time many-one reduction is a total polynomial-time function preserving membership in both directions, by [[def-polynomial-time-many-one-reduction]].
 

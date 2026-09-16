@@ -33,12 +33,9 @@ Every finite $C'(1/6)$ presentation has solvable word problem.
 
 **Given:** A finite presentation satisfying $C'(1/6)$.
 
-[L1] Greendlinger's lemma provides, for every nonempty freely reduced null word,
-a relator subword longer than half of a defining relator
-([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
+[L1] Greendlinger's lemma provides, for every nonempty freely reduced null word, a relator subword longer than half of a defining relator ([[thm-greendlinger-lemma-for-c-prime-one-sixth-presentations]]).
 
-[L2] Every finite Dehn presentation has a terminating decision procedure for the
-word problem ([[thm-dehn-algorithm-solves-the-word-problem]]).
+[L2] Every finite Dehn presentation has a terminating decision procedure for the word problem ([[thm-dehn-algorithm-solves-the-word-problem]]).
 
 ## Proof
 

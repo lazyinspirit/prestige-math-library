@@ -34,11 +34,9 @@ lemma is exactly the published module four lemma.
 
 **Given:** A commutative exact-row four-term diagram of modules.
 
-[L1] The categorical four lemma applies in any abelian category
-([[thm-four-lemma-in-an-abelian-category]]).
+[L1] The categorical four lemma applies in any abelian category ([[thm-four-lemma-in-an-abelian-category]]).
 
-[L2] The module four lemma is already published
-([[lem-four-lemma-for-modules]]).
+[L2] The module four lemma is already published ([[lem-four-lemma-for-modules]]).
 
 ## Verification
 

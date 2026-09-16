@@ -38,10 +38,7 @@ $$\{b_1b_2,b_2b_3,b_3b_4\}\cup\{a_ib_i:1\le i\le 4\}\cup\{va_i:1\le i\le 4\}.$$
 
 **Given:** The path $P_4=b_1-b_2-b_3-b_4$.
 
-[L1] The star-expansion adds a tooth $a_i$ adjacent to its matched vertex $b_i$
-and to the root $v$, with no other edges incident with $a_i$; the root is
-adjacent only to the teeth
-([[def-star-expansion-of-a-graph]]).
+[L1] The star-expansion adds a tooth $a_i$ adjacent to its matched vertex $b_i$ and to the root $v$, with no other edges incident with $a_i$; the root is adjacent only to the teeth ([[def-star-expansion-of-a-graph]]).
 
 ## Verification
 

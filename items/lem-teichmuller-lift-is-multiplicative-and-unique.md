@@ -36,12 +36,9 @@ whenever $\lambda,\mu\in k^\times$ have order prime to $p$.
 
 ## Facts & Assumptions
 
-**Given:** A splitting $p$-modular system $(K,\mathcal O,k)$ and
-$\lambda,\mu\in k^\times$ of order prime to $p$.
+**Given:** A splitting $p$-modular system $(K,\mathcal O,k)$ and $\lambda,\mu\in k^\times$ of order prime to $p$.
 
-[F1] The Teichmuller lift of such an element is, by definition, the unique
-prime-to-$p$ root of unity in $\mathcal O^\times$ reducing to it
-([[def-teichmuller-lift-in-a-splitting-p-modular-system]]).
+[F1] The Teichmuller lift of such an element is, by definition, the unique prime-to-$p$ root of unity in $\mathcal O^\times$ reducing to it ([[def-teichmuller-lift-in-a-splitting-p-modular-system]]).
 
 ## Proof
 

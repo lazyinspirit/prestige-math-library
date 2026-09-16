@@ -38,15 +38,11 @@ plurisubharmonic on $\Omega$.
 
 ## Facts & Assumptions
 
-**Given:** A holomorphic function $f$ on a domain $\Omega\subseteq\mathbb C^m$,
-not identically zero on any connected component.
+**Given:** A holomorphic function $f$ on a domain $\Omega\subseteq\mathbb C^m$, not identically zero on any connected component.
 
-[L1] Plurisubharmonicity is tested on affine complex lines
-([[def-plurisubharmonic-function]]).
+[L1] Plurisubharmonicity is tested on affine complex lines ([[def-plurisubharmonic-function]]).
 
-[L2] For a one-variable holomorphic function, the logarithm of the modulus is
-subharmonic with the value $-\infty$ at its zeros
-([[thm-log-modulus-of-a-holomorphic-function-is-subharmonic]]).
+[L2] For a one-variable holomorphic function, the logarithm of the modulus is subharmonic with the value $-\infty$ at its zeros ([[thm-log-modulus-of-a-holomorphic-function-is-subharmonic]]).
 
 ## Proof
 

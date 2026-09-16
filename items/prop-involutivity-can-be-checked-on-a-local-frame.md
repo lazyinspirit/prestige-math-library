@@ -47,15 +47,10 @@ $$ [X_i,X_j] \in \Gamma(\mathcal D|_U) \qquad \text{for all } i,j. $$
 **Proof technique:** direct.
 
 1.1 If $\mathcal D$ is involutive, then every bracket of tangent vector fields [given]
-is tangent, so in particular every bracket $[X_i,X_j]$ is tangent on $U$.
-[given]
+is tangent, so in particular every bracket $[X_i,X_j]$ is tangent on $U$. [given]
 
 1.2 Conversely, assume all frame brackets are tangent on $U$. Any tangent [given]
-fields on $U$ have the form $X = \sum_i f_iX_i$ and $Y = \sum_j g_jX_j$ with
-smooth coefficients. Expanding $[X,Y]$ with the Leibniz rule expresses the
-bracket as a sum of terms involving the tangent fields $[X_i,X_j]$ and the
-frame fields $X_i$, hence again as a tangent field. [given, algebra]
+fields on $U$ have the form $X = \sum_i f_iX_i$ and $Y = \sum_j g_jX_j$ with smooth coefficients. Expanding $[X,Y]$ with the Leibniz rule expresses the bracket as a sum of terms involving the tangent fields $[X_i,X_j]$ and the frame fields $X_i$, hence again as a tangent field. [given, algebra]
 
 1.3 Since this holds on a neighborhood of every point, $\mathcal D$ is [given]
-involutive exactly when one may check bracket closure on a local frame.
-[given] ∎
+involutive exactly when one may check bracket closure on a local frame. [given] ∎

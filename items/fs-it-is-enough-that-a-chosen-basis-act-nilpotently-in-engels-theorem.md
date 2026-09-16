@@ -31,16 +31,11 @@ to the members of one vector-space basis are nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field $k$ and
-$\mathfrak g=\mathfrak{sl}_2(k)$ with its standard basis $e,f,h$ satisfying
-$[h,e]=2e$, $[h,f]=-2f$, and $[e,f]=h$.
+**Given:** A characteristic-zero field $k$ and $\mathfrak g=\mathfrak{sl}_2(k)$ with its standard basis $e,f,h$ satisfying $[h,e]=2e$, $[h,f]=-2f$, and $[e,f]=h$.
 
-[L1] Engel's theorem requires $\operatorname{ad}_x$ to be nilpotent for every
-$x\in\mathfrak g$, not merely for chosen basis elements
-([[thm-engels-theorem]]).
+[L1] Engel's theorem requires $\operatorname{ad}_x$ to be nilpotent for every $x\in\mathfrak g$, not merely for chosen basis elements ([[thm-engels-theorem]]).
 
-[L2] A representation is nil only when every represented operator is
-nilpotent ([[def-nilpotent-linear-transformation-and-nil-representation]]).
+[L2] A representation is nil only when every represented operator is nilpotent ([[def-nilpotent-linear-transformation-and-nil-representation]]).
 
 ## Refutation
 

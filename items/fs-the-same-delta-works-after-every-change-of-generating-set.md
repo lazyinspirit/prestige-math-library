@@ -29,9 +29,7 @@ generating set.
 
 **Given:** The free group $F_2=\langle a,b \rangle$ and, for each integer $n \ge 2$, the generating set $S_n=\{a,b,a^n b^n\}$.
 
-[L1] Hyperbolicity is independent of the generating set, but only up to
-quasi-isometry
-([[thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]]).
+[L1] Hyperbolicity is independent of the generating set, but only up to quasi-isometry ([[thm-hyperbolic-group-definition-is-independent-of-finite-generating-set]]).
 
 [A1] In the Cayley graph of $(F_2,S_n)$, the vertices $1$, $a^n$, and $a^n b^n$ form a geodesic triangle with side lengths $n$, $n$, and $1$.
 

@@ -32,12 +32,9 @@ that is already a direct product.
 
 **Given:** The external direct product $V=C_2\times C_2$.
 
-[L1] The direct-product criterion says a split extension is direct exactly when
-the complement centralizes the kernel
-([[prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel]]).
+[L1] The direct-product criterion says a split extension is direct exactly when the complement centralizes the kernel ([[prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel]]).
 
-[L2] The external direct product has coordinatewise multiplication
-([[def-external-direct-product-of-groups]], [[thm-external-direct-product-is-a-group]]).
+[L2] The external direct product has coordinatewise multiplication ([[def-external-direct-product-of-groups]], [[thm-external-direct-product-is-a-group]]).
 
 ## Verification
 

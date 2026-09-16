@@ -37,9 +37,7 @@ Let $f:A \to B$ be a morphism.
 
 **Given:** A morphism $f:A \to B$ and members $x:X \to A$, $y:Y \to A$.
 
-[L1] Member equivalence means equality after precomposition by one common pair
-of epimorphisms
-([[def-equivalence-of-members]]).
+[L1] Member equivalence means equality after precomposition by one common pair of epimorphisms ([[def-equivalence-of-members]]).
 
 ## Proof
 

@@ -30,11 +30,9 @@ kernel $N$.
 
 **Given:** A nonabelian kernel $N$.
 
-[L1] The theorem on this page classifies extensions only for abelian kernels
-([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L1] The theorem on this page classifies extensions only for abelian kernels ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
-[L2] For nonabelian kernels the obstruction moves to $H^3$
-([[rem-nonabelian-extension-obstruction-in-h-three]]).
+[L2] For nonabelian kernels the obstruction moves to $H^3$ ([[rem-nonabelian-extension-obstruction-in-h-three]]).
 
 ## Refutation
 

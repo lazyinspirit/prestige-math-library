@@ -28,14 +28,11 @@ the ambient product.
 
 ## Facts & Assumptions
 
-**Given:** An inverse system of finite discrete groups and its inverse limit
-$L$ with the subspace topology.
+**Given:** An inverse system of finite discrete groups and its inverse limit $L$ with the subspace topology.
 
-[L1] The compatible tuples form a subgroup of the ambient product group
-([[lem-compatible-tuples-form-a-subgroup]]).
+[L1] The compatible tuples form a subgroup of the ambient product group ([[lem-compatible-tuples-form-a-subgroup]]).
 
-[F1] A topological group is a group with continuous multiplication and inverse
-([[def-topological-group]]).
+[F1] A topological group is a group with continuous multiplication and inverse ([[def-topological-group]]).
 
 ## Proof
 

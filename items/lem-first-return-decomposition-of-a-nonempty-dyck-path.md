@@ -73,14 +73,6 @@ positive index at which the height of $\Theta(i,P,Q)$ is $0$.
 
 ## Remarks
 
-- **Why the first return and not the last.** The decomposition is forced by
-  reading the path from the left: the first step is up, and the index at which the
-  height first comes back to $0$ is the only place the path can be cut so that the
-  inner block is a Dyck path after a shift and the outer remainder is one
-  outright. Cutting at the last return also gives a decomposition, of a different
-  shape, and the two must not be mixed.
+- **Why the first return and not the last.** The decomposition is forced by reading the path from the left: the first step is up, and the index at which the height first comes back to $0$ is the only place the path can be cut so that the inner block is a Dyck path after a shift and the outer remainder is one outright. Cutting at the last return also gives a decomposition, of a different shape, and the two must not be mixed.
 
-- **Three later theorems on this page are this lemma applied elsewhere.** The
-  Motzkin and Schröder equations and the recursion for binary trees are the same
-  first-return argument run over a different step set or a different recursive
-  family, and each states the analogue rather than reusing this statement.
+- **Three later theorems on this page are this lemma applied elsewhere.** The Motzkin and Schröder equations and the recursion for binary trees are the same first-return argument run over a different step set or a different recursive family, and each states the analogue rather than reusing this statement.

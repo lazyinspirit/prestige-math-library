@@ -50,15 +50,7 @@ following total functions are primitive recursive:
 
 **Proof technique:** direct.
 
-1.1 By bounded search on quotients and remainders, one can primitive-recursively
-recover the binary length of a positive integer and each individual bit of its
-canonical binary numeral. Using [L2], a bounded scan first reads the sentinel
-and unary header, obtaining a candidate $k$. It then parses exactly $k$
-self-delimiting blocks, checks that each payload is a canonical binary numeral,
-and verifies that the final block ends at the end of the numeral. Only if all
-these checks succeed does it return $k$; otherwise it returns $0$. All scan
-bounds are at most the binary length of $s$, so this full validity test and the
-total function $\operatorname{len}$ are primitive recursive by [L1]. [L1, L2, given, construct]
+1.1 By bounded search on quotients and remainders, one can primitive-recursively recover the binary length of a positive integer and each individual bit of its canonical binary numeral. Using [L2], a bounded scan first reads the sentinel and unary header, obtaining a candidate $k$. It then parses exactly $k$ self-delimiting blocks, checks that each payload is a canonical binary numeral, and verifies that the final block ends at the end of the numeral. Only if all these checks succeed does it return $k$; otherwise it returns $0$. All scan bounds are at most the binary length of $s$, so this full validity test and the total function $\operatorname{len}$ are primitive recursive by [L1]. [L1, L2, given, construct]
 
 2.1 Once $\operatorname{len}(s)=k$ is known, the start and end of the $i$th block $c(\operatorname{bin}(a_i))$ are found by another bounded scan through the same binary numeral: each block begins with a run of $1$'s whose length is the bit-length of $a_i$, followed by one delimiter $0$, followed by exactly that many payload bits. The integer represented by that payload is then recovered by a bounded primitive-recursive evaluation of binary place values. [L1, L2, step 1.1, construct]
 

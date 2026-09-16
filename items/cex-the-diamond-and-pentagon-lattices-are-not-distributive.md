@@ -45,29 +45,6 @@ Every finite lattice is distributive.
 
 ## Remarks
 
-```tikz
-\begin{tikzpicture}[
-  every node/.style={font=\small},
-  elt/.style={draw,circle,minimum size=8mm,inner sep=1pt,fill=white}
-]
-\node[font=\normalsize] at (-2.8,3.35) {$M_3$};
-\node[elt] (m0) at (-2.8,0) {$0$};
-\node[elt] (ma) at (-4,1.45) {$a$};
-\node[elt] (mb) at (-2.8,1.45) {$b$};
-\node[elt] (mc) at (-1.6,1.45) {$c$};
-\node[elt] (m1) at (-2.8,2.9) {$1$};
-\draw[gray!75]
-  (m0)--(ma) (m0)--(mb) (m0)--(mc)
-  (ma)--(m1) (mb)--(m1) (mc)--(m1);
+```tikz \begin{tikzpicture}[ every node/.style={font=\small}, elt/.style={draw,circle,minimum size=8mm,inner sep=1pt,fill=white} ] \node[font=\normalsize] at (-2.8,3.35) {$M_3$}; \node[elt] (m0) at (-2.8,0) {$0$}; \node[elt] (ma) at (-4,1.45) {$a$}; \node[elt] (mb) at (-2.8,1.45) {$b$}; \node[elt] (mc) at (-1.6,1.45) {$c$}; \node[elt] (m1) at (-2.8,2.9) {$1$}; \draw[gray!75] (m0)--(ma) (m0)--(mb) (m0)--(mc) (ma)--(m1) (mb)--(m1) (mc)--(m1);
 
-\node[font=\normalsize] at (2.8,3.35) {$N_5$};
-\node[elt] (n0) at (2.2,0) {$0$};
-\node[elt] (na) at (1.5,.95) {$a$};
-\node[elt] (nb) at (1.5,2.05) {$b$};
-\node[elt] (nc) at (4.1,1.45) {$c$};
-\node[elt] (n1) at (2.2,2.9) {$1$};
-\draw[gray!75]
-  (n0)--(na)--(nb)--(n1)
-  (n0)--(nc)--(n1);
-\end{tikzpicture}
-```
+\node[font=\normalsize] at (2.8,3.35) {$N_5$}; \node[elt] (n0) at (2.2,0) {$0$}; \node[elt] (na) at (1.5,.95) {$a$}; \node[elt] (nb) at (1.5,2.05) {$b$}; \node[elt] (nc) at (4.1,1.45) {$c$}; \node[elt] (n1) at (2.2,2.9) {$1$}; \draw[gray!75] (n0)--(na)--(nb)--(n1) (n0)--(nc)--(n1); \end{tikzpicture} ```

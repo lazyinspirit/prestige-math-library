@@ -31,16 +31,11 @@ is the set of all elements whose adjoint endomorphisms are nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field $k$ and
-$\mathfrak g=\mathfrak{sl}_2(k)$ with basis $e,f,h$ and relations
-$[h,e]=2e$, $[h,f]=-2f$, and $[e,f]=h$.
+**Given:** A characteristic-zero field $k$ and $\mathfrak g=\mathfrak{sl}_2(k)$ with basis $e,f,h$ and relations $[h,e]=2e$, $[h,f]=-2f$, and $[e,f]=h$.
 
-[L1] The nilradical is a nilpotent ideal and therefore a linear subspace
-([[def-nilradical-of-a-finite-dimensional-lie-algebra]]).
+[L1] The nilradical is a nilpotent ideal and therefore a linear subspace ([[def-nilradical-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] Engel's theorem concerns nilpotence of every adjoint operator in a Lie
-algebra, not an assertion that the ad-nilpotent elements of an arbitrary Lie
-algebra form a subspace ([[thm-engels-theorem]]).
+[L2] Engel's theorem concerns nilpotence of every adjoint operator in a Lie algebra, not an assertion that the ad-nilpotent elements of an arbitrary Lie algebra form a subspace ([[thm-engels-theorem]]).
 
 ## Refutation
 

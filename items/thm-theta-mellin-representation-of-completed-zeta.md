@@ -30,20 +30,13 @@ $$\pi^{-s/2}\Gamma(s/2)\zeta(s)=\frac12\int_0^\infty (\theta(t)-1)t^{s/2-1}\,dt.
 
 **Given:** A complex number $s$ with $\operatorname{Re}s>1$.
 
-[L1] On $\operatorname{Re}s>1$,
-$$\zeta(s)=\sum_{n\ge1}n^{-s}$$
-([[def-riemann-zeta-function]]).
+[L1] On $\operatorname{Re}s>1$, $$\zeta(s)=\sum_{n\ge1}n^{-s}$$ ([[def-riemann-zeta-function]]).
 
-[L2] For $t>0$,
-$$\theta(t)-1=2\sum_{n\ge1}e^{-\pi n^2 t}$$
-([[def-jacobi-theta-function]]).
+[L2] For $t>0$, $$\theta(t)-1=2\sum_{n\ge1}e^{-\pi n^2 t}$$ ([[def-jacobi-theta-function]]).
 
-[L3] On $\operatorname{Re}z>0$,
-$$\Gamma(z)=\int_0^\infty e^{-u}u^{z-1}\,du$$
-([[def-euler-gamma-function]]).
+[L3] On $\operatorname{Re}z>0$, $$\Gamma(z)=\int_0^\infty e^{-u}u^{z-1}\,du$$ ([[def-euler-gamma-function]]).
 
-[L4] Tonelli's theorem permits swapping a nonnegative sum and integral on a
-sigma-finite product ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
+[L4] Tonelli's theorem permits swapping a nonnegative sum and integral on a sigma-finite product ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
 
 ## Proof
 

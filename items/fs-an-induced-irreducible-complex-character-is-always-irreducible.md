@@ -32,12 +32,9 @@ $H\le G$, then $\operatorname{Ind}_H^G\varphi$ is irreducible.
 
 ## Facts & Assumptions
 
-**Given:** The subgroup $H=\langle(12)\rangle\le S_3$ and its trivial character
-$\mathbf 1_H$.
+**Given:** The subgroup $H=\langle(12)\rangle\le S_3$ and its trivial character $\mathbf 1_H$.
 
-[F1] The induced character $\operatorname{Ind}_H^{S_3}\mathbf 1_H$ equals
-$1+\chi_2$, where $\chi_2$ is irreducible of degree $2$
-([[ex-inducing-the-trivial-character-of-a-subgroup-of-order-two-in-s-three-gives-one-plus-an-irreducible-degree-two-character]]).
+[F1] The induced character $\operatorname{Ind}_H^{S_3}\mathbf 1_H$ equals $1+\chi_2$, where $\chi_2$ is irreducible of degree $2$ ([[ex-inducing-the-trivial-character-of-a-subgroup-of-order-two-in-s-three-gives-one-plus-an-irreducible-degree-two-character]]).
 
 ## Refutation
 

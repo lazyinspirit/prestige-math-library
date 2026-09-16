@@ -90,22 +90,8 @@ carried out with the displayed description.
 
 ## Remarks
 
-- **The two failures are of opposite kinds.** $\mathbb{Z}$ has all its limit
-  points, of which it has none, and escapes to infinity; $(0,1)$ stays inside a
-  bounded region and loses its two endpoints. Compactness rules out both, and
-  [[thm-heine-borel-characterisation-r]] says these are the only two ways to
-  fail for a subset of $\mathbb{R}$.
+- **The two failures are of opposite kinds.** $\mathbb{Z}$ has all its limit points, of which it has none, and escapes to infinity; $(0,1)$ stays inside a bounded region and loses its two endpoints. Compactness rules out both, and [[thm-heine-borel-characterisation-r]] says these are the only two ways to fail for a subset of $\mathbb{R}$.
 
-- **An explicit cover for each.** For $\mathbb{Z}$ the intervals $(-n,n)$ with
-  $n \ge 1$ cover $\mathbb{R}$ and any finite subfamily has union $(-N,N)$, which
-  omits the element $N \cdot 1_{\mathbb{R}}$ of $\mathbb{Z}$. For $(0,1)$ the
-  cover $\{(1/k,1)\}$ of
-  [[cex-open-cover-of-unit-interval-no-finite-subcover]] does the same job.
-  Neither cover is needed above, since [[thm-heine-borel-characterisation-r]]
-  already converts the failure of a hypothesis into the failure of compactness.
+- **An explicit cover for each.** For $\mathbb{Z}$ the intervals $(-n,n)$ with $n \ge 1$ cover $\mathbb{R}$ and any finite subfamily has union $(-N,N)$, which omits the element $N \cdot 1_{\mathbb{R}}$ of $\mathbb{Z}$. For $(0,1)$ the cover $\{(1/k,1)\}$ of [[cex-open-cover-of-unit-interval-no-finite-subcover]] does the same job. Neither cover is needed above, since [[thm-heine-borel-characterisation-r]] already converts the failure of a hypothesis into the failure of compactness.
 
-- **$\mathbb{Z}$ is closed and has no limit points at all**, which is what the
-  separation computation really shows: its points are uniformly apart. A set of
-  that kind is closed for free, and it is the standard example of a closed set
-  that is as far from perfect as possible, every one of its points being
-  isolated ([[def-perfect-set-r]]).
+- **$\mathbb{Z}$ is closed and has no limit points at all**, which is what the separation computation really shows: its points are uniformly apart. A set of that kind is closed for free, and it is the standard example of a closed set that is as far from perfect as possible, every one of its points being isolated ([[def-perfect-set-r]]).

@@ -40,9 +40,7 @@ $$\sum_{n\geq0}c(n,k)\frac{x^n}{n!}=\frac{1}{k!}\left(\log\frac{1}{1-x}\right)^k
 
 ## Facts & Assumptions
 
-**Given:** The second-kind and first-kind definitions and the labelled symbolic
-rules of
-[[thm-labelled-symbolic-method-rules-for-exponential-generating-functions]].
+**Given:** The second-kind and first-kind definitions and the labelled symbolic rules of [[thm-labelled-symbolic-method-rules-for-exponential-generating-functions]].
 
 ## Proof
 

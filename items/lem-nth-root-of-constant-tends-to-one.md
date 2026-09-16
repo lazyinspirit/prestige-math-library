@@ -99,20 +99,8 @@ reindexed by $n = k+1$.
 
 ## Remarks
 
-- **Bernoulli is doing the whole job in the case $a > 1$.** The inequality
-  $(1+t)^n \ge 1 + nt$ converts the exact identity $\big(a^{1/n}\big)^n = a$ into
-  the linear bound $t \le (a-1)/n$ on the excess $t = a^{1/n} - 1$, and that bound
-  is what tends to $0$. No estimate on $a^{1/n}$ itself is needed beyond
-  $a^{1/n} > 1$.
+- **Bernoulli is doing the whole job in the case $a > 1$.** The inequality $(1+t)^n \ge 1 + nt$ converts the exact identity $\big(a^{1/n}\big)^n = a$ into the linear bound $t \le (a-1)/n$ on the excess $t = a^{1/n} - 1$, and that bound is what tends to $0$. No estimate on $a^{1/n}$ itself is needed beyond $a^{1/n} > 1$.
 
-- **The case $0 < a < 1$ is not symmetric to the case $a > 1$ and is not proved
-  again.** It is transported by the reciprocal, using
-  $a^{1/n} (1/a)^{1/n} = 1$ ([[lem-rational-power-laws]]) and the reciprocal rule
-  of [[thm-algebra-of-limits]]. The hypothesis of that rule, that the limit be
-  nonzero and every term nonzero, is met because roots of positive reals are
-  positive.
+- **The case $0 < a < 1$ is not symmetric to the case $a > 1$ and is not proved again.** It is transported by the reciprocal, using $a^{1/n} (1/a)^{1/n} = 1$ ([[lem-rational-power-laws]]) and the reciprocal rule of [[thm-algebra-of-limits]]. The hypothesis of that rule, that the limit be nonzero and every term nonzero, is met because roots of positive reals are positive.
 
-- **The rate is different from the one in [[lem-nth-root-of-n-tends-to-one]].**
-  Here the excess is $O(1/n)$ with a constant depending on $a$; there the base
-  itself grows with $n$ and the excess is only $O(1/n^{1/2})$. The two lemmas are
-  therefore not instances of one another in either direction.
+- **The rate is different from the one in [[lem-nth-root-of-n-tends-to-one]].** Here the excess is $O(1/n)$ with a constant depending on $a$; there the base itself grows with $n$ and the excess is only $O(1/n^{1/2})$. The two lemmas are therefore not instances of one another in either direction.

@@ -31,16 +31,11 @@ $$\gamma_{c+1}(\mathfrak g)=0\qquad\Longleftrightarrow\qquad Z_c(\mathfrak g)=\m
 
 **Given:** A Lie algebra $\mathfrak g$ and an integer $c\geq0$.
 
-[L1] The lower central series satisfies $\gamma_1=\mathfrak g$ and
-$\gamma_{r+1}=[\mathfrak g,\gamma_r]$
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] The lower central series satisfies $\gamma_1=\mathfrak g$ and $\gamma_{r+1}=[\mathfrak g,\gamma_r]$ ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] The upper central series satisfies $Z_0=0$ and
-$x\in Z_{r+1}$ exactly when $[\mathfrak g,x]\subseteq Z_r$
-([[def-upper-central-series-of-a-lie-algebra]]).
+[L2] The upper central series satisfies $Z_0=0$ and $x\in Z_{r+1}$ exactly when $[\mathfrak g,x]\subseteq Z_r$ ([[def-upper-central-series-of-a-lie-algebra]]).
 
-[L3] The quotient-center formulation of $Z_{r+1}/Z_r$ uses the quotient Lie
-bracket ([[def-quotient-lie-algebra]]).
+[L3] The quotient-center formulation of $Z_{r+1}/Z_r$ uses the quotient Lie bracket ([[def-quotient-lie-algebra]]).
 
 ## Proof
 

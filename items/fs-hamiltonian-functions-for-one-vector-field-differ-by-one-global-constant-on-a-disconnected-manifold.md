@@ -32,9 +32,7 @@ when the manifold is disconnected.
 
 **Given:** The proposed claim.
 
-[F1] Such Hamiltonians differ only by a locally constant function, which may
-take different values on different components.
-[[prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function]].
+[F1] Such Hamiltonians differ only by a locally constant function, which may take different values on different components. [[prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function]].
 
 ## Refutation
 

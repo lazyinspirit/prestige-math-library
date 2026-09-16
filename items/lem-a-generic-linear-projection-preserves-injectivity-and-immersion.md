@@ -37,17 +37,11 @@ makes $P_u\circ f$ an injective immersion is dense in $S^{N-1}$.
 
 **Given:** A smooth embedding $f:M^n\to\mathbb R^N$ with $N>2n+1$.
 
-[F1] The secant-direction map $\sigma_f$ is defined on
-$(M\times M)\setminus\Delta_M$, and the tangent-direction map $\tau_f$ is
-defined on $TM\setminus0_M$
-([[def-secant-and-tangent-direction-maps-of-an-euclidean-embedding]]).
+[F1] The secant-direction map $\sigma_f$ is defined on $(M\times M)\setminus\Delta_M$, and the tangent-direction map $\tau_f$ is defined on $TM\setminus0_M$ ([[def-secant-and-tangent-direction-maps-of-an-euclidean-embedding]]).
 
-[L1] The image of a $C^1$ manifold of dimension strictly smaller than the
-target-manifold dimension is a null set
-([[prop-the-image-of-a-lower-dimensional-c1-manifold-is-null]]).
+[L1] The image of a $C^1$ manifold of dimension strictly smaller than the target-manifold dimension is a null set ([[prop-the-image-of-a-lower-dimensional-c1-manifold-is-null]]).
 
-[L2] A null subset of a positive-dimensional manifold has dense complement
-([[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
+[L2] A null subset of a positive-dimensional manifold has dense complement ([[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
 
 ## Proof
 **Proof technique:** direct.

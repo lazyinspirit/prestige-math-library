@@ -26,27 +26,19 @@ $L^2(\mathbb{R})$.
 
 ## Facts & Assumptions
 
-**Given:** The one-dimensional function
-$$ f(x)=g(x):=(1+|x|)^{-3/4}. $$
+**Given:** The one-dimensional function $$ f(x)=g(x):=(1+|x|)^{-3/4}. $$
 
-[L1] Young's inequality controls only the exponents satisfying
-$1/r = 1/p + 1/q - 1$ ([[thm-young-convolution-inequality]]).
+[L1] Young's inequality controls only the exponents satisfying $1/r = 1/p + 1/q - 1$ ([[thm-young-convolution-inequality]]).
 
 ## Counterexample
 
 **Proof technique:** direct.
 
 1.1 Since [L1, given, algebra]
-$$ \int_{\mathbb{R}} (1+|x|)^{-3/2}\,dx < \infty, $$
-the functions $f$ and $g$ lie in $L^2(\mathbb{R})$. [L1, given, algebra]
+$$ \int_{\mathbb{R}} (1+|x|)^{-3/2}\,dx < \infty, $$ the functions $f$ and $g$ lie in $L^2(\mathbb{R})$. [L1, given, algebra]
 
 2.1 For $x > 2$, [step 1.1, algebra]
-$$ (f*g)(x) = \int_{\mathbb{R}} (1+|x-y|)^{-3/4}(1+|y|)^{-3/4}\,dy \ge \int_1^{x-1} x^{-3/4}x^{-3/4}\,dy = \frac{x-2}{x^{3/2}}. $$
-So for large $x$,
-$$ (f*g)(x) \ge c\,x^{-1/2} $$
-for some $c>0$. [step 1.1, algebra]
+$$ (f*g)(x) = \int_{\mathbb{R}} (1+|x-y|)^{-3/4}(1+|y|)^{-3/4}\,dy \ge \int_1^{x-1} x^{-3/4}x^{-3/4}\,dy = \frac{x-2}{x^{3/2}}. $$ So for large $x$, $$ (f*g)(x) \ge c\,x^{-1/2} $$ for some $c>0$. [step 1.1, algebra]
 
 3.1 But [L1, step 2.1]
-$$ \int_2^\infty x^{-1}\,dx = \infty, $$
-so the lower bound from step 2.1 shows $f*g \notin L^2(\mathbb{R})$. Hence the
-statement refuted above is false. [L1, step 2.1] ∎
+$$ \int_2^\infty x^{-1}\,dx = \infty, $$ so the lower bound from step 2.1 shows $f*g \notin L^2(\mathbb{R})$. Hence the statement refuted above is false. [L1, step 2.1] ∎

@@ -32,18 +32,13 @@ The exponential map is globally injective on every connected Lie group.
 
 ## Facts & Assumptions
 
-**Given:** The additive quotient $G=\mathbb R/\mathbb Z$ with its standard
-one-dimensional quotient charts.
+**Given:** The additive quotient $G=\mathbb R/\mathbb Z$ with its standard one-dimensional quotient charts.
 
-[F1] A Lie-group exponential evaluates the one-parameter subgroup with the
-specified initial velocity at time one.
-[[def-exponential-map-of-a-lie-group]].
+[F1] A Lie-group exponential evaluates the one-parameter subgroup with the specified initial velocity at time one. [[def-exponential-map-of-a-lie-group]].
 
-[F2] A Lie group has smooth multiplication and inversion.
-[[def-lie-group]].
+[F2] A Lie group has smooth multiplication and inversion. [[def-lie-group]].
 
-[F3] A continuous image of a connected space is connected.
-[[thm-continuous-image-of-a-connected-space]].
+[F3] A continuous image of a connected space is connected. [[thm-continuous-image-of-a-connected-space]].
 
 ## Refutation
 

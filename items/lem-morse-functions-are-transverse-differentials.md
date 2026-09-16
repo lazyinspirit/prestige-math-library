@@ -35,23 +35,11 @@ is transverse to the zero section of the cotangent bundle.
 
 **Given:** A smooth manifold $M$ and a smooth function $f:M\to\mathbb R$.
 
-[F1] At a critical point $p$, the Hessian $\operatorname{Hess}_p(f)$ is the
-intrinsic symmetric bilinear form defined from the second coordinate
-derivatives, and $p$ is nondegenerate exactly when that bilinear form has zero
-nullity ([[def-hessian-of-a-function-at-a-critical-point]],
-[[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F1] At a critical point $p$, the Hessian $\operatorname{Hess}_p(f)$ is the intrinsic symmetric bilinear form defined from the second coordinate derivatives, and $p$ is nondegenerate exactly when that bilinear form has zero nullity ([[def-hessian-of-a-function-at-a-critical-point]], [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
-[L1] A smooth map is transverse to an embedded submanifold exactly when its
-differential plus the target tangent space spans the ambient tangent space, and
-the zero section is an embedded submanifold of $T^*M$
-([[def-a-smooth-map-transverse-to-an-embedded-submanifold]],
-[[prop-the-zero-section-is-a-smooth-embedding]]).
+[L1] A smooth map is transverse to an embedded submanifold exactly when its differential plus the target tangent space spans the ambient tangent space, and the zero section is an embedded submanifold of $T^*M$ ([[def-a-smooth-map-transverse-to-an-embedded-submanifold]], [[prop-the-zero-section-is-a-smooth-embedding]]).
 
-[A1] In local coordinates $x=(x^1,\dots,x^n)$ near $p$, if
-$g=f\circ x^{-1}$ and $a=x(p)$, then the cotangent-bundle coordinates identify
-$df$ with $x\mapsto (x,\partial_1 g(x),\dots,\partial_n g(x))$, and the induced
-map on the fibre quotient along the zero section is multiplication by the
-Hessian matrix $\left(\partial_i\partial_j g(a)\right)$.
+[A1] In local coordinates $x=(x^1,\dots,x^n)$ near $p$, if $g=f\circ x^{-1}$ and $a=x(p)$, then the cotangent-bundle coordinates identify $df$ with $x\mapsto (x,\partial_1 g(x),\dots,\partial_n g(x))$, and the induced map on the fibre quotient along the zero section is multiplication by the Hessian matrix $\left(\partial_i\partial_j g(a)\right)$.
 
 ## Proof
 

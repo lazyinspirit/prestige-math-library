@@ -32,22 +32,13 @@ morphism of delta functors, the one-step extension may be chosen to preserve
 that compatibility in the next degree as well.
 ## Facts & Assumptions
 
-**Given:** A short exact sequence and lower-degree components already
-compatible with its connecting maps.
+**Given:** A short exact sequence and lower-degree components already compatible with its connecting maps.
 
-[L1] Item 19 defines the next-degree components from chosen effacements and
-proves naturality when the chosen effacement sequences fit into a ladder
-([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]]).
+[L1] Item 19 defines the next-degree components from chosen effacements and proves naturality when the chosen effacement sequences fit into a ladder ([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]]).
 
-[L2] Item 20 makes those next-degree components independent of which effacing
-morphisms are used
-([[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]]).
+[L2] Item 20 makes those next-degree components independent of which effacing morphisms are used ([[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]]).
 
-[L3] The dimension-shift lemmas give the monicity or epicity used to define
-the one-step components from the connecting morphisms of the chosen
-effacement sequences
-([[lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]],
-[[lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]]).
+[L3] The dimension-shift lemmas give the monicity or epicity used to define the one-step components from the connecting morphisms of the chosen effacement sequences ([[lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]], [[lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]]).
 
 ## Proof
 

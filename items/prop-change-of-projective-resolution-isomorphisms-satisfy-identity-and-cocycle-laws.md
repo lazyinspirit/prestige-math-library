@@ -35,19 +35,11 @@ by any comparison map $S_\bullet(A)\to T_\bullet(A)$ lifting $1_A$. Then:
 
 **Given:** An object $A$ in the common domain and an integer $n$.
 
-[L1] A comparison map between two supplied projective resolutions of $A$
-induces the isomorphism $\theta_{S,T}(A)$, and these objectwise isomorphisms are
-natural in $A$
-([[lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects]],
-[[lem-the-change-of-projective-resolution-isomorphisms-are-natural]]).
+[L1] A comparison map between two supplied projective resolutions of $A$ induces the isomorphism $\theta_{S,T}(A)$, and these objectwise isomorphisms are natural in $A$ ([[lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects]], [[lem-the-change-of-projective-resolution-isomorphisms-are-natural]]).
 
-[L2] Two projective comparison maps lifting the same morphism are
-chain-homotopic
-([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
+[L2] Two projective comparison maps lifting the same morphism are chain-homotopic ([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
 
-[L3] Chain-homotopic maps induce the same homology map, and homology respects
-composition ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]],
-[[prop-homology-respects-identities-and-composition]]).
+[L3] Chain-homotopic maps induce the same homology map, and homology respects composition ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]], [[prop-homology-respects-identities-and-composition]]).
 
 ## Proof
 

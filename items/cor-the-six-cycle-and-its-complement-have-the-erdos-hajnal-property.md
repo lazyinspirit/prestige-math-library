@@ -40,15 +40,11 @@ The pair $\{C_6,\overline{C_6}\}$ has the Erdős-Hajnal property.
 
 **Given:** The cycle $C_6$.
 
-[L1] The pair $\{P_4^\star,\overline{P_4^\star}\}$ has the Erdős-Hajnal
-property
-([[cor-the-star-expansion-of-the-four-vertex-path-and-its-complement-have-the-erdos-hajnal-property]]).
+[L1] The pair $\{P_4^\star,\overline{P_4^\star}\}$ has the Erdős-Hajnal property ([[cor-the-star-expansion-of-the-four-vertex-path-and-its-complement-have-the-erdos-hajnal-property]]).
 
-[L2] The star-expansion $P_4^\star$ contains an induced $C_6$
-([[lem-the-star-expansion-of-the-four-vertex-path-contains-induced-c-six-and-c-seven]]).
+[L2] The star-expansion $P_4^\star$ contains an induced $C_6$ ([[lem-the-star-expansion-of-the-four-vertex-path-contains-induced-c-six-and-c-seven]]).
 
-[L3] The Erdős-Hajnal property passes to hereditary subclasses
-([[prop-erdos-hajnal-property-passes-to-hereditary-subclasses]]).
+[L3] The Erdős-Hajnal property passes to hereditary subclasses ([[prop-erdos-hajnal-property-passes-to-hereditary-subclasses]]).
 
 ## Proof
 

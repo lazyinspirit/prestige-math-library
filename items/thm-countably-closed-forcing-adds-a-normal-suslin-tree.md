@@ -40,64 +40,41 @@ assert that a generic filter over the universe exists.
 
 ## Facts & Assumptions
 
-**Given:** ZFC and the forcing $P=\mathbb P_{\mathrm{ST}}$. Write
-$p=(\alpha_p,T_p)$.
+**Given:** ZFC and the forcing $P=\mathbb P_{\mathrm{ST}}$. Write $p=(\alpha_p,T_p)$.
 
-[F1] Conditions have countable successor height, fixed sequence coding, normal
-$\omega$-splitting trees, and literal end extension; $1_P=(0,\{\varnothing\})$
-is a condition. [[def-countable-normal-tree-end-extension-forcing]]
+[F1] Conditions have countable successor height, fixed sequence coding, normal $\omega$-splitting trees, and literal end extension; $1_P=(0,\{\varnothing\})$ is a condition. [[def-countable-normal-tree-end-extension-forcing]]
 
-[F2] A maximal antichain in a countable normal splitting tree of nonzero
-countable limit height can be sealed by a countable new top level, with every
-new top extending that antichain. [[lem-countable-tree-antichain-sealing]]
+[F2] A maximal antichain in a countable normal splitting tree of nonzero countable limit height can be sealed by a countable new top level, with every new top extending that antichain. [[lem-countable-tree-antichain-sealing]]
 
-[F3] Countably closed means that every descending sequence of length below
-$\aleph_1$ has a lower bound. [[def-kappa-closure-distributivity-and-chain-condition]]
+[F3] Countably closed means that every descending sequence of length below $\aleph_1$ has a lower bound. [[def-kappa-closure-distributivity-and-chain-condition]]
 
-[F4] An $\aleph_1$-closed forcing adds no countable sequences of ground-model
-elements and preserves ground-model cardinals and cofinalities at most
-$\aleph_1$. [[thm-closure-distributivity-and-no-short-sequences]]
+[F4] An $\aleph_1$-closed forcing adds no countable sequences of ground-model elements and preserves ground-model cardinals and cofinalities at most $\aleph_1$. [[thm-closure-distributivity-and-no-short-sequences]]
 
-[F5] Under countable choice, $\operatorname{cf}(\omega_1)=\omega_1$.
-[[cor-countable-choice-and-omega-one-cofinality]]
+[F5] Under countable choice, $\operatorname{cf}(\omega_1)=\omega_1$. [[cor-countable-choice-and-omega-one-cofinality]]
 
-[F6] Under countable choice, countable unions of countable sets are countable,
-including the countable fusion unions used below.
-[[thm-countable-union-of-countable]]
+[F6] Under countable choice, countable unions of countable sets are countable, including the countable fusion unions used below. [[thm-countable-union-of-countable]]
 
-[F7] Transfinite recursion constructs a sequence from a specified stage rule.
-[[thm-transfinite-recursion]]
+[F7] Transfinite recursion constructs a sequence from a specified stage rule. [[thm-transfinite-recursion]]
 
-[F8] The forcing theorem gives the internal forcing relation and truth lemma,
-without asserting generic existence. [[thm-forcing-theorem]]
+[F8] The forcing theorem gives the internal forcing relation and truth lemma, without asserting generic existence. [[thm-forcing-theorem]]
 
-[F9] Forcing is persistent to stronger conditions, is closed under dense truth,
-and has dense deciding extensions. [[lem-forcing-monotonicity-density-and-decision]]
+[F9] Forcing is persistent to stronger conditions, is closed under dense truth, and has dense deciding extensions. [[lem-forcing-monotonicity-density-and-decision]]
 
-[F10] Atomic membership forcing is a density condition on coefficients of the
-right-hand name. [[def-forcing-relation-for-atomic-formulas]]
+[F10] Atomic membership forcing is a density condition on coefficients of the right-hand name. [[def-forcing-relation-for-atomic-formulas]]
 
 [F11] Forcing preserves ordinals as sets. [[thm-forcing-preserves-ordinals]]
 
-[F12] A generic extension of a transitive ZFC ground is again a transitive ZFC
-model. [[thm-generic-extensions-satisfy-zf-and-zfc]]
+[F12] A generic extension of a transitive ZFC ground is again a transitive ZFC model. [[thm-generic-extensions-satisfy-zf-and-zfc]]
 
-[F13] Under AC, every antichain extends to a maximal antichain by Zorn's lemma.
-[[thm-zorn]]
+[F13] Under AC, every antichain extends to a maximal antichain by Zorn's lemma. [[thm-zorn]]
 
-[F14] A Suslin tree has height $\omega_1$, countable levels, no cofinal branch,
-and no uncountable antichain. [[def-aronszajn-suslin-and-special-tree]]
+[F14] A Suslin tree has height $\omega_1$, countable levels, no cofinal branch, and no uncountable antichain. [[def-aronszajn-suslin-and-special-tree]]
 
-[F15] In ZFC, a cofinal branch through a splitting $\omega_1$-tree produces an
-antichain of cardinality $\aleph_1$.
-[[lem-splitting-cofinal-branch-gives-antichain]]
+[F15] In ZFC, a cofinal branch through a splitting $\omega_1$-tree produces an antichain of cardinality $\aleph_1$. [[lem-splitting-cofinal-branch-gives-antichain]]
 
-[F16] Under countable choice, a countable subset of $\omega_1$ is bounded below
-$\omega_1$. [[thm-countable-subsets-of-omega-one-are-bounded]]
+[F16] Under countable choice, a countable subset of $\omega_1$ is bounded below $\omega_1$. [[thm-countable-subsets-of-omega-one-are-bounded]]
 
-[A1] AC supplies countable unions, simultaneous enumerations, recursive
-extension choices, Zorn's lemma, and the choice used by F15.
-[[def-axiom-of-choice]]
+[A1] AC supplies countable unions, simultaneous enumerations, recursive extension choices, Zorn's lemma, and the choice used by F15. [[def-axiom-of-choice]]
 
 ## Proof
 

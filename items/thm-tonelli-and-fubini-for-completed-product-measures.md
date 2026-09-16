@@ -37,14 +37,9 @@ $$\int f\,d\overline{\mu \times \nu} = \int_X \left(\int_Y f_x\,d\overline{\nu}\
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, two sigma-finite measure spaces, their
-completed product $\overline{\mu \times \nu}$, and either a nonnegative
-$\overline{\mu \times \nu}$-measurable function $f$ or an integrable function
-$f \in L^1(\overline{\mu \times \nu})$.
+**Given:** The Axiom of Countable Choice, two sigma-finite measure spaces, their completed product $\overline{\mu \times \nu}$, and either a nonnegative $\overline{\mu \times \nu}$-measurable function $f$ or an integrable function $f \in L^1(\overline{\mu \times \nu})$.
 
-[L1] Assuming countable choice, a function measurable for a completion is
-almost everywhere equal to one measurable for the original sigma-algebra.
-([[thm-completion-measurable-functions-have-base-measurable-representatives]])
+[L1] Assuming countable choice, a function measurable for a completion is almost everywhere equal to one measurable for the original sigma-algebra. ([[thm-completion-measurable-functions-have-base-measurable-representatives]])
 
 [L2] Tonelli and Fubini hold on the uncompleted product sigma-algebra. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]])
 

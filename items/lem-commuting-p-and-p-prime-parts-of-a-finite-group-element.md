@@ -36,11 +36,9 @@ of the two parts commutes with conjugation.
 
 ## Facts & Assumptions
 
-**Given:** The finite group, prime, element, and factorization of its order in
-the Statement.
+**Given:** The finite group, prime, element, and factorization of its order in the Statement.
 
-[F1] A $p$-regular element has order prime to $p$
-([[def-p-regular-and-p-singular-elements]]).
+[F1] A $p$-regular element has order prime to $p$ ([[def-p-regular-and-p-singular-elements]]).
 
 [F2] Coprime integers satisfy Bezout's identity ([[thm-bezout-identity]]).
 

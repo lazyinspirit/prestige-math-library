@@ -35,8 +35,7 @@ hyperbolicity "means" containing a hyperbolic-plane subgroup.
 
 **Given:** A nonabelian finitely generated free group $F_2$.
 
-[L1] Free groups are hyperbolic
-([[prop-finite-and-free-groups-are-hyperbolic]]).
+[L1] Free groups are hyperbolic ([[prop-finite-and-free-groups-are-hyperbolic]]).
 
 [A1] Every finitely generated group is countable, whereas the hyperbolic plane $\mathbb H^2$ is uncountable.
 

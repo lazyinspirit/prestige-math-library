@@ -37,39 +37,23 @@ classified by this statement.
 
 ## Facts & Assumptions
 
-**Given:** AC, a CGWH space $X$, $n\geq0$, and
-$\mathbb F\in\{\mathbb R,\mathbb C\}$.
+**Given:** AC, a CGWH space $X$, $n\geq0$, and $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
-[F1] Under AC every numerable rank-$n$ bundle has a countable
-$\mathbb F^\infty$ embedding whose image-plane map pulls the tautological
-bundle back to the original bundle
-([[lem-a-bundle-embedding-produces-its-grassmannian-classifying-map]]).
+[F1] Under AC every numerable rank-$n$ bundle has a countable $\mathbb F^\infty$ embedding whose image-plane map pulls the tautological bundle back to the original bundle ([[lem-a-bundle-embedding-produces-its-grassmannian-classifying-map]]).
 
-[F2] Under AC, homotopic Grassmannian maps have isomorphic pullbacks, and
-isomorphic pullbacks have homotopic classifying maps
-([[lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely]]).
+[F2] Under AC, homotopic Grassmannian maps have isomorphic pullbacks, and isomorphic pullbacks have homotopic classifying maps ([[lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely]]).
 
-[F3] Vector bundles and their frame bundles determine one another by the
-associated standard representation, compatibly with pullback and numerations
-([[def-frame-bundle-and-associated-vector-bundle]]).
+[F3] Vector bundles and their frame bundles determine one another by the associated standard representation, compatibly with pullback and numerations ([[def-frame-bundle-and-associated-vector-bundle]]).
 
-[F4] Under AC, numerable principal bundles over CGWH bases are classified by
-the Milnor $BG$ model; its proof includes arbitrary-numeration
-countabilization ([[thm-principal-bundles-are-classified-by-maps-to-bg]]).
+[F4] Under AC, numerable principal bundles over CGWH bases are classified by the Milnor $BG$ model; its proof includes arbitrary-numeration countabilization ([[thm-principal-bundles-are-classified-by-maps-to-bg]]).
 
-[F5] The stable Stiefel total space is contractible
-([[thm-stable-stiefel-space-is-contractible]]).
+[F5] The stable Stiefel total space is contractible ([[thm-stable-stiefel-space-is-contractible]]).
 
-[F6] Hatcher, Appendix Proposition 1.19, proves that a weak direct limit of an
-increasing sequence of compact Hausdorff spaces is paracompact. Each finite
-real or complex Grassmannian is compact Hausdorff, so the stable
-Grassmannian is paracompact.
+[F6] Hatcher, Appendix Proposition 1.19, proves that a weak direct limit of an increasing sequence of compact Hausdorff spaces is paracompact. Each finite real or complex Grassmannian is compact Hausdorff, so the stable Grassmannian is paracompact.
 
-[F7] Under AC and DC a paracompact Hausdorff chart cover has a subordinate
-locally finite partition ([[thm-subordinate-partitions-of-unity-exist]]).
+[F7] Under AC and DC a paracompact Hausdorff chart cover has a subordinate locally finite partition ([[thm-subordinate-partitions-of-unity-exist]]).
 
-[A1] AC has the meaning fixed in [[def-axiom-of-choice]] and implies DC
-([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
+[A1] AC has the meaning fixed in [[def-axiom-of-choice]] and implies DC ([[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
 
 ## Proof
 

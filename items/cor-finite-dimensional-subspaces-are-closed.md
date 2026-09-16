@@ -41,35 +41,21 @@ without a choice axiom; the ambient space need not be complete.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $V$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$,
-a normed subspace $W\subseteq V$, and an ordered basis $(b_j)_{j<n}$ of $W$.
+**Given:** A normed space $V$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$, a normed subspace $W\subseteq V$, and an ordered basis $(b_j)_{j<n}$ of $W$.
 
-[L1] Such a normed space is Banach
-([[cor-finite-dimensional-normed-spaces-are-banach]]).
+[L1] Such a normed space is Banach ([[cor-finite-dimensional-normed-spaces-are-banach]]).
 
-[L2] An ordered basis is an independent finite list spanning its space; the
-empty list spans exactly the zero subspace ([[def-linear-basis]]).
+[L2] An ordered basis is an independent finite list spanning its space; the empty list spans exactly the zero subspace ([[def-linear-basis]]).
 
-[L3] The restricted norm on a normed subspace is the ambient one
-([[def-normed-subspace]]).
+[L3] The restricted norm on a normed subspace is the ambient one ([[def-normed-subspace]]).
 
-[L4] Fix an enumeration $q:\mathbb N\to\mathbb Q$ and a bijection
-$p:\mathbb N^2\to\mathbb N$
-([[thm-rationals-countable]], [[thm-n-cross-n-countable]]). Rational numbers,
-identified with their real images, approximate every real number
-([[lem-q-and-irrationals-dense-r]], clause 1).
+[L4] Fix an enumeration $q:\mathbb N\to\mathbb Q$ and a bijection $p:\mathbb N^2\to\mathbb N$ ([[thm-rationals-countable]], [[thm-n-cross-n-countable]]). Rational numbers, identified with their real images, approximate every real number ([[lem-q-and-irrationals-dense-r]], clause 1).
 
-[L5] A supplied total self-map and a starting value determine a sequence by
-recursion ([[thm-recursion]]); every nonempty subset of $\mathbb N$ has a
-least element ([[thm-well-ordering-principle]]).
+[L5] A supplied total self-map and a starting value determine a sequence by recursion ([[thm-recursion]]); every nonempty subset of $\mathbb N$ has a least element ([[thm-well-ordering-principle]]).
 
-[L6] For every $\varepsilon>0$ some integer $k\ge1$ satisfies
-$1/k<\varepsilon$ ([[cor-archimedean-reciprocal]]).
+[L6] For every $\varepsilon>0$ some integer $k\ge1$ satisfies $1/k<\varepsilon$ ([[cor-archimedean-reciprocal]]).
 
-[L7] Restricting a complex normed space to real scalars leaves its metric
-unchanged ([[rem-real-and-complex-normed-space-convention]]). Every complex
-number has a unique real-imaginary decomposition with the usual coordinate
-arithmetic ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L7] Restricting a complex normed space to real scalars leaves its metric unchanged ([[rem-real-and-complex-normed-space-convention]]). Every complex number has a unique real-imaginary decomposition with the usual coordinate arithmetic ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
 ## Proof
 

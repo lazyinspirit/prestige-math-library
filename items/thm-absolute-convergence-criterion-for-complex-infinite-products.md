@@ -40,17 +40,11 @@ converges and has nonzero value.
 
 **Given:** A complex sequence $(a_n)$.
 
-[F1] Absolute convergence of $\prod(1+a_n)$ means convergence of the real
-product $\prod(1+|a_n|)$
-([[rem-complex-infinite-product-dictionary]]).
+[F1] Absolute convergence of $\prod(1+a_n)$ means convergence of the real product $\prod(1+|a_n|)$ ([[rem-complex-infinite-product-dictionary]]).
 
-[F2] For nonnegative reals $(p_n)$, the product $\prod(1+p_n)$ converges if and
-only if the series $\sum p_n$ converges; also, when $\sum p_n$ converges, every
-tail with sufficiently small sum has bounded partial products
-([[thm-infinite-product-criterion]]).
+[F2] For nonnegative reals $(p_n)$, the product $\prod(1+p_n)$ converges if and only if the series $\sum p_n$ converges; also, when $\sum p_n$ converges, every tail with sufficiently small sum has bounded partial products ([[thm-infinite-product-criterion]]).
 
-[F3] An infinite product converges when some tail has nonzero factors and a
-nonzero tail-product limit ([[def-infinite-product]]).
+[F3] An infinite product converges when some tail has nonzero factors and a nonzero tail-product limit ([[def-infinite-product]]).
 
 ## Proof
 

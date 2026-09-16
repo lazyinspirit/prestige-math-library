@@ -36,14 +36,11 @@ $f$ is nowhere zero on $\Omega$.
 
 ## Facts & Assumptions
 
-**Given:** A complex domain $\Omega$, holomorphic nowhere-zero functions $f_n$ on
-$\Omega$, and locally uniform convergence $f_n\to f$.
+**Given:** A complex domain $\Omega$, holomorphic nowhere-zero functions $f_n$ on $\Omega$, and locally uniform convergence $f_n\to f$.
 
-[L1] Locally uniform limits of holomorphic functions are holomorphic
-([[thm-weierstrass-convergence-holomorphic-functions]]).
+[L1] Locally uniform limits of holomorphic functions are holomorphic ([[thm-weierstrass-convergence-holomorphic-functions]]).
 
-[L2] Near an isolated zero of the limit, sufficiently late approximants have the
-same total zero multiplicity ([[thm-continuity-of-zeros-locally-uniform-convergence]]).
+[L2] Near an isolated zero of the limit, sufficiently late approximants have the same total zero multiplicity ([[thm-continuity-of-zeros-locally-uniform-convergence]]).
 
 ## Proof
 

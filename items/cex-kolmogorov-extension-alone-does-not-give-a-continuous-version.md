@@ -30,44 +30,21 @@ process has a continuous modification.
 
 ## Facts & Assumptions
 
-**Given:** AC and the canonical fair-bit coordinate process
-$X=(X_t)_{t\in[0,1]}$ constructed below.
+**Given:** AC and the canonical fair-bit coordinate process $X=(X_t)_{t\in[0,1]}$ constructed below.
 
-[F1] Under AC, a consistent family of finite-dimensional laws on
-standard-Borel coordinate spaces has a unique extension on the cylinder
-sigma-algebra, and the canonical coordinate process realizes those laws.
-Independence of random elements means independence of their generated
-sigma-algebras. [[thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]]
-[[cor-canonical-process-realizes-consistent-finite-dimensional-laws]]
-[[def-independent-random-elements]]
+[F1] Under AC, a consistent family of finite-dimensional laws on standard-Borel coordinate spaces has a unique extension on the cylinder sigma-algebra, and the canonical coordinate process realizes those laws. Independence of random elements means independence of their generated sigma-algebras. [[thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]] [[cor-canonical-process-realizes-consistent-finite-dimensional-laws]] [[def-independent-random-elements]]
 
-[F2] Pairwise independent events whose probability sum diverges occur
-infinitely often with probability one. A finite mutually independent family
-remains independent after taking a subfamily or complementing any of its
-events. [[cor-second-borel-cantelli-lemma-under-pairwise-independence]]
-[[lem-mutual-independence-under-subfamilies-and-complements]]
+[F2] Pairwise independent events whose probability sum diverges occur infinitely often with probability one. A finite mutually independent family remains independent after taking a subfamily or complementing any of its events. [[cor-second-borel-cantelli-lemma-under-pairwise-independence]] [[lem-mutual-independence-under-subfamilies-and-complements]]
 
-[F3] Countable subadditivity and the complement identity imply that a
-countable intersection of probability-one events has probability one; finite
-intersections are a special case. [[lem-probability-measure-basic-identities]]
+[F3] Countable subadditivity and the complement identity imply that a countable intersection of probability-one events has probability one; finite intersections are a special case. [[lem-probability-measure-basic-identities]]
 
-[F4] A modification agrees with the original process almost surely at each
-fixed time, but its exceptional null event may depend on time.
-[[def-law-modification-and-indistinguishability-of-processes]]
+[F4] A modification agrees with the original process almost surely at each fixed time, but its exceptional null event may depend on time. [[def-law-modification-and-indistinguishability-of-processes]]
 
-[F5] Continuity at a point sends every convergent sequence in the domain to a
-sequence converging to the function value; this forward direction is
-choice-free. Real absolute value satisfies the triangle inequality.
-[[thm-sequential-criterion-for-continuity]] [[lem-of-triangle-inequality]]
+[F5] Continuity at a point sends every convergent sequence in the domain to a sequence converging to the function value; this forward direction is choice-free. Real absolute value satisfies the triangle inequality. [[thm-sequential-criterion-for-continuity]] [[lem-of-triangle-inequality]]
 
-[F6] In the real ordered field, reciprocals of positive integers tend to zero:
-given $\varepsilon>0$, the reciprocal Archimedean property supplies a threshold,
-and inversion reverses the order on positive elements.
-[[cor-archimedean-reciprocal]] [[lem-of-inverse-positive]]
+[F6] In the real ordered field, reciprocals of positive integers tend to zero: given $\varepsilon>0$, the reciprocal Archimedean property supplies a threshold, and inversion reverses the order on positive elements. [[cor-archimedean-reciprocal]] [[lem-of-inverse-positive]]
 
-[F7] AC is used by the arbitrary-index Kolmogorov construction in [F1]. No
-additional choices are made in the deterministic sequence or the
-probability-one intersections below. [[def-axiom-of-choice]]
+[F7] AC is used by the arbitrary-index Kolmogorov construction in [F1]. No additional choices are made in the deterministic sequence or the probability-one intersections below. [[def-axiom-of-choice]]
 
 ## Counterexample
 
@@ -87,10 +64,4 @@ probability-one intersections below. [[def-axiom-of-choice]]
 
 ## Source notes
 
-Durrett, Section 7.1, Theorem 7.1.1 and the discussion immediately following
-it, printed p. 356, constructs the canonical process from consistent
-finite-dimensional laws and emphasizes that this construction alone does not
-supply measurable continuous paths; a separate rational-time continuity
-argument is then required. The independent-bit witness and the
-Borel--Cantelli proof that even a continuous modification is impossible are
-derived in full above.
+Durrett, Section 7.1, Theorem 7.1.1 and the discussion immediately following it, printed p. 356, constructs the canonical process from consistent finite-dimensional laws and emphasizes that this construction alone does not supply measurable continuous paths; a separate rational-time continuity argument is then required. The independent-bit witness and the Borel--Cantelli proof that even a continuous modification is impossible are derived in full above.

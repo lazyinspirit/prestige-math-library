@@ -32,13 +32,9 @@ remains irreducible over $k$.
 
 ## Facts & Assumptions
 
-**Given:** A primitive cube root $\zeta_3$, the local cyclotomic triple
-$$(K,\mathcal O,k)=(\mathbb Q_3(\zeta_3),\mathbb Z_3[\zeta_3],\mathbb F_3),$$
-and the standard $\mathcal O S_3$-lattice
-$$L=\{(a,b,c)\in\mathcal O^3:a+b+c=0\}.$$
+**Given:** A primitive cube root $\zeta_3$, the local cyclotomic triple $$(K,\mathcal O,k)=(\mathbb Q_3(\zeta_3),\mathbb Z_3[\zeta_3],\mathbb F_3),$$ and the standard $\mathcal O S_3$-lattice $$L=\{(a,b,c)\in\mathcal O^3:a+b+c=0\}.$$
 
-[F1] Reduction modulo the maximal ideal produces a $kG$-module
-([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
+[F1] Reduction modulo the maximal ideal produces a $kG$-module ([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
 
 ## Refutation
 

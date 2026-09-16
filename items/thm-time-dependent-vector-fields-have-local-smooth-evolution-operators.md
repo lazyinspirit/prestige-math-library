@@ -38,8 +38,7 @@ $\dot\gamma(t)=X_t(\gamma(t))$ with $\Psi_{s,s}(q)=q$.
 
 ## Facts & Assumptions
 
-**Given:** An open interval $I\subseteq\mathbb R$, a smooth time-dependent
-vector field $X_t$ over $I$, and a base point $(s,p)\in I\times M$.
+**Given:** An open interval $I\subseteq\mathbb R$, a smooth time-dependent vector field $X_t$ over $I$, and a base point $(s,p)\in I\times M$.
 
 [L1] Chart maps identify manifold neighbourhoods with Euclidean open sets ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 

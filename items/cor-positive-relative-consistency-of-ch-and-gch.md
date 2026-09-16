@@ -33,12 +33,9 @@ statements.
 
 ## Facts & Assumptions
 
-**Given:** The fixed effective presentations used by the preceding theorem;
-CH is the $\aleph_0$ instance of its selected GCH sentence.
+**Given:** The fixed effective presentations used by the preceding theorem; CH is the $\aleph_0$ instance of its selected GCH sentence.
 
-[F1] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] proves in PA that
-$\operatorname{Con}(\mathrm{ZF})$ implies
-$\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$.
+[F1] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] proves in PA that $\operatorname{Con}(\mathrm{ZF})$ implies $\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$.
 
 ## Proof
 

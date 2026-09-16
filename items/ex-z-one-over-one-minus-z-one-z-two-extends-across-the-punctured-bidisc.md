@@ -41,12 +41,9 @@ formula.
 
 ## Facts & Assumptions
 
-**Given:** The punctured bidisc and the function
-$f(z_1,z_2)=z_1/(1-z_1z_2)$.
+**Given:** The punctured bidisc and the function $f(z_1,z_2)=z_1/(1-z_1z_2)$.
 
-[L1] In complex dimension at least two, a holomorphic function on a punctured
-domain extends uniquely across the puncture
-([[thm-removability-of-a-puncture-in-several-complex-variables]]).
+[L1] In complex dimension at least two, a holomorphic function on a punctured domain extends uniquely across the puncture ([[thm-removability-of-a-puncture-in-several-complex-variables]]).
 
 ## Verification
 

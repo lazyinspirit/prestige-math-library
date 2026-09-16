@@ -29,22 +29,15 @@ Every functor that preserves monomorphisms preserves pullbacks.
 
 ## Facts & Assumptions
 
-**Given:** The diamond poset $P=\{0,a,b,1\}$ with
-$0<a<1$, $0<b<1$, and $a,b$ incomparable; and the two-element chain
-$Q=\{0<1\}$.
+**Given:** The diamond poset $P=\{0,a,b,1\}$ with $0<a<1$, $0<b<1$, and $a,b$ incomparable; and the two-element chain $Q=\{0<1\}$.
 
-[F1] Pullbacks have the compatible-pair universal property
-([[def-pullbacks-and-pushouts]]).
+[F1] Pullbacks have the compatible-pair universal property ([[def-pullbacks-and-pushouts]]).
 
-[L1] A functor preserves a chosen limit exactly when its canonical comparison
-is an isomorphism ([[lem-canonical-comparison-characterises-limit-preservation]]).
+[L1] A functor preserves a chosen limit exactly when its canonical comparison is an isomorphism ([[lem-canonical-comparison-characterises-limit-preservation]]).
 
-[F2] Monomorphisms cancel on the left
-([[def-monomorphism-and-epimorphism]]).
+[F2] Monomorphisms cancel on the left ([[def-monomorphism-and-epimorphism]]).
 
-[F3] A poset is a category with at most one arrow between any two objects, and
-monotone maps are functors
-([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[F3] A poset is a category with at most one arrow between any two objects, and monotone maps are functors ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
 
 ## Counterexample
 

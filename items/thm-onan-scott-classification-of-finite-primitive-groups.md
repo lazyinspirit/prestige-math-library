@@ -38,9 +38,7 @@ product action, or twisted wreath.
 
 [A2] The finite O'Nan-Scott analysis organizes exactly those socle patterns into the five coarse families used on this page.
 
-[L1] The local items on this page define those five types and explain their
-socle data
-([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
+[L1] The local items on this page define those five types and explain their socle data ([[def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types]]).
 
 ## Proof
 

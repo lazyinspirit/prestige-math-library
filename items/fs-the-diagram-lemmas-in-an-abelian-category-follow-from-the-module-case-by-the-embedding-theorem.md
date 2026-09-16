@@ -39,8 +39,7 @@ simply by reducing to the already-published module case via Freyd-Mitchell.
 
 **Given:** The embedding-theorem route just described.
 
-[L1] The connecting morphism is constructed intrinsically on this page
-([[thm-the-connecting-morphism-exists-and-is-unique]]).
+[L1] The connecting morphism is constructed intrinsically on this page ([[thm-the-connecting-morphism-exists-and-is-unique]]).
 
 ## Refutation
 

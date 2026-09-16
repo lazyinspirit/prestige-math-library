@@ -34,12 +34,9 @@ define isomorphic smooth vector bundles.
 
 ## Facts & Assumptions
 
-**Given:** Two smooth cocycles $(g_{\beta\alpha})$ and $(g'_{\beta\alpha})$ on the
-same cover, together with a gauge family $(h_\alpha)$ satisfying the displayed
-relation.
+**Given:** Two smooth cocycles $(g_{\beta\alpha})$ and $(g'_{\beta\alpha})$ on the same cover, together with a gauge family $(h_\alpha)$ satisfying the displayed relation.
 
-[L1] A smooth cocycle on a countable cover determines a smooth vector bundle by
-the quotient construction ([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
+[L1] A smooth cocycle on a countable cover determines a smooth vector bundle by the quotient construction ([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
 
 ## Proof
 

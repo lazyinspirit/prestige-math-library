@@ -41,22 +41,15 @@ $$\dim_F V=\dim_F(\ker T)+\dim_F(\operatorname{im}T).$$
 
 **Given:** A linear map $T:V\to W$ with $V$ finite-dimensional over $F$.
 
-[L1] Nullity and rank are the dimensions of the kernel and image
-([[def-rank-and-nullity]]).
+[L1] Nullity and rank are the dimensions of the kernel and image ([[def-rank-and-nullity]]).
 
-[L2] There are finite bases $K$ of $\ker T$ and $B$ of $V$ with $K\subseteq B$;
-for $C=B\setminus K$, the set $C$ is finite, $T[C]$ is a basis of
-$\operatorname{im}T$, and $T|_C:C\to T[C]$ is bijective
-([[lem-kernel-basis-extension-gives-image-basis]]).
+[L2] There are finite bases $K$ of $\ker T$ and $B$ of $V$ with $K\subseteq B$; for $C=B\setminus K$, the set $C$ is finite, $T[C]$ is a basis of $\operatorname{im}T$, and $T|_C:C\to T[C]$ is bijective ([[lem-kernel-basis-extension-gives-image-basis]]).
 
-[L3] The dimension of a finite-dimensional vector space is the number of
-elements in any finite basis ([[def-dimension]]).
+[L3] The dimension of a finite-dimensional vector space is the number of elements in any finite basis ([[def-dimension]]).
 
-[L4] If two finite sets are disjoint, the cardinality of their union is the
-sum of their cardinalities ([[thm-sum-rule]], clause 1).
+[L4] If two finite sets are disjoint, the cardinality of their union is the sum of their cardinalities ([[thm-sum-rule]], clause 1).
 
-[L5] A bijection between finite sets transports their cardinality
-([[def-finite-cardinality]], consequence (c)).
+[L5] A bijection between finite sets transports their cardinality ([[def-finite-cardinality]], consequence (c)).
 
 ## Proof
 
@@ -70,8 +63,5 @@ sum of their cardinalities ([[thm-sum-rule]], clause 1).
 
 ## Remarks
 
-- If $V=\{0_V\}$, all three dimensions are zero and the formula reads
-  $0=0+0$; no positive-dimension hypothesis is hidden.
-- No finite-dimensionality assumption is made on $W$. The image is
-  finite-dimensional for the reason isolated in
-  [[lem-kernel-basis-extension-gives-image-basis]].
+- If $V=\{0_V\}$, all three dimensions are zero and the formula reads $0=0+0$; no positive-dimension hypothesis is hidden.
+- No finite-dimensionality assumption is made on $W$. The image is finite-dimensional for the reason isolated in [[lem-kernel-basis-extension-gives-image-basis]].

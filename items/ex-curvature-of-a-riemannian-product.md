@@ -47,21 +47,15 @@ curvature zero. Apart from the stated inherited $\mathrm{AC}_\omega$, the calcul
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, two Riemannian manifolds with their product smooth structure and
-product metric; where a mixed plane is discussed, supplied nonzero tangent
-vectors $u$ and $v$ in the respective factors.
+**Given:** $\mathrm{AC}_\omega$, two Riemannian manifolds with their product smooth structure and product metric; where a mixed plane is discussed, supplied nonzero tangent vectors $u$ and $v$ in the respective factors.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Products have the canonical product smooth structure whose charts are
-products of factor charts.
-[[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]].
+[F1] Products have the canonical product smooth structure whose charts are products of factor charts. [[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]].
 
 [F2] Tangent spaces split canonically as $T_{(p,q)}(M\times N)\cong T_pM\oplus T_qN$. [[thm-canonical-tangent-and-cotangent-splittings-for-products]].
 
-[F3] A covariant two-tensor is a Riemannian metric when its matrices in smooth
-charts have smooth entries and are symmetric positive definite.
-[[prop-coordinate-criterion-for-a-riemannian-metric]].
+[F3] A covariant two-tensor is a Riemannian metric when its matrices in smooth charts have smooth entries and are symmetric positive definite. [[prop-coordinate-criterion-for-a-riemannian-metric]].
 
 [F4] The product metric has a unique Levi–Civita connection, whose symbols are given by the metric Christoffel formula; directional connections satisfy function-linearity and the differentiated-field Leibniz rule. [[thm-fundamental-theorem-of-riemannian-geometry]], [[prop-christoffel-formula-for-the-levi-civita-connection]], [[prop-connection-laws-in-directional-form]].
 

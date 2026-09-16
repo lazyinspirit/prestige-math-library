@@ -39,8 +39,7 @@ for all objects $X,Y$.
 
 [L1] The monoidal-category axioms are the pentagon and triangle from [[def-monoidal-category]].
 
-[F1] Proposition 2.2.4 of EGNO proves that, under those axioms and with the same associator orientation as this page, the left unitor satisfies
-$$\lambda_{X\otimes Y}=(\lambda_X\otimes1_Y)\circ\alpha_{\mathbf 1,X,Y}.$$
+[F1] Proposition 2.2.4 of EGNO proves that, under those axioms and with the same associator orientation as this page, the left unitor satisfies $$\lambda_{X\otimes Y}=(\lambda_X\otimes1_Y)\circ\alpha_{\mathbf 1,X,Y}.$$
 
 ## Proof
 

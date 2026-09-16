@@ -41,8 +41,7 @@ $A_t^+=\operatorname{diag}(1,t^{-1})$ does not converge.
 
 **Given:** The family $A_t=\operatorname{diag}(1,t)$ for $t\neq0$.
 
-[L1] Every finite real or complex matrix has a unique Moore--Penrose
-pseudoinverse ([[thm-moore-penrose-pseudoinverse-exists-and-is-unique]]).
+[L1] Every finite real or complex matrix has a unique Moore--Penrose pseudoinverse ([[thm-moore-penrose-pseudoinverse-exists-and-is-unique]]).
 
 ## Counterexample
 

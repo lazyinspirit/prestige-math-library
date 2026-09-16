@@ -43,16 +43,11 @@ their coproduct and hence their biproduct.
 
 ## Facts & Assumptions
 
-**Given:** A semiadditive category and a biproduct or product diagram for
-$A,B$.
+**Given:** A semiadditive category and a biproduct or product diagram for $A,B$.
 
-[L1] Biproduct data are characterized by the product and coproduct universal
-properties plus the zero equations
-([[thm-biproduct-data-characterisation-without-addition]]).
+[L1] Biproduct data are characterized by the product and coproduct universal properties plus the zero equations ([[thm-biproduct-data-characterisation-without-addition]]).
 
-[L2] A semiadditive category has a commutative-monoid law on hom-sets with
-bilinear composition
-([[thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids]]).
+[L2] A semiadditive category has a commutative-monoid law on hom-sets with bilinear composition ([[thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids]]).
 
 ## Proof
 

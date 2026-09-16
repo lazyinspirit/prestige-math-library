@@ -38,21 +38,15 @@ the one-parameter subgroups $\gamma_X$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-Lie algebra $\mathfrak g$, and a smooth curve $\gamma:\mathbb R\to G$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with Lie algebra $\mathfrak g$, and a smooth curve $\gamma:\mathbb R\to G$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] The scaling identity is $\gamma_X(t)=\exp_G(tX)$.
-[[prop-exponential-scales-one-parameter-subgroups]].
+[F2] The scaling identity is $\gamma_X(t)=\exp_G(tX)$. [[prop-exponential-scales-one-parameter-subgroups]].
 
-[F3] A one-parameter subgroup is a smooth homomorphism
-$(\mathbb R,+)\to G$. [[def-one-parameter-subgroup-of-a-lie-group]].
+[F3] A one-parameter subgroup is a smooth homomorphism $(\mathbb R,+)\to G$. [[def-one-parameter-subgroup-of-a-lie-group]].
 
-[F4] Assuming $\mathrm{AC}_\omega$, every $X\in\mathfrak g$ determines a
-unique one-parameter subgroup $\gamma_X$ with $\gamma_X'(0)=X$, and any
-one-parameter subgroup having initial velocity $X$ is this curve.
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
+[F4] Assuming $\mathrm{AC}_\omega$, every $X\in\mathfrak g$ determines a unique one-parameter subgroup $\gamma_X$ with $\gamma_X'(0)=X$, and any one-parameter subgroup having initial velocity $X$ is this curve. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
 
 ## Proof
 

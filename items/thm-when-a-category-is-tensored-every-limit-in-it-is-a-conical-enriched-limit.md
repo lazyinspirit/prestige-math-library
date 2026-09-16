@@ -35,16 +35,11 @@ limit.
 
 ## Facts & Assumptions
 
-**Given:** A base $\mathcal V$ as in the statement, a tensored
-$\mathcal V$-category $\mathcal B$, a small ordinary diagram, and its limit
-cone in $\mathcal B_0$.
+**Given:** A base $\mathcal V$ as in the statement, a tensored $\mathcal V$-category $\mathcal B$, a small ordinary diagram, and its limit cone in $\mathcal B_0$.
 
-[L1] Tensors represent enriched hom-objects against the base:
-$\mathcal B(X\otimes C,B)\cong[X,\mathcal B(C,B)]$
-([[def-cotensor-and-tensor]]).
+[L1] Tensors represent enriched hom-objects against the base: $\mathcal B(X\otimes C,B)\cong[X,\mathcal B(C,B)]$ ([[def-cotensor-and-tensor]]).
 
-[L2] Conical enriched limits are the constant-unit weighted enriched limits
-([[def-conical-limit-in-an-enriched-category]]).
+[L2] Conical enriched limits are the constant-unit weighted enriched limits ([[def-conical-limit-in-an-enriched-category]]).
 
 ## Proof
 

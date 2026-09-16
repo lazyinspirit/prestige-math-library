@@ -43,12 +43,7 @@ $$h=\chi_P-\chi_N\qquad|\nu|\text{-almost everywhere.}$$
 
 [L3] A nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere. ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]])
 
-[L4] In the signed case, a Hahn decomposition $X=P\sqcup N$ exists, and on
-its positive and negative pieces the Jordan and total-variation formulas give
-$\nu=|\nu|$ and $\nu=-|\nu|$, respectively
-([[thm-hahn-decomposition-for-signed-measures]],
-[[thm-jordan-decomposition-for-signed-measures]],
-[[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]]).
+[L4] In the signed case, a Hahn decomposition $X=P\sqcup N$ exists, and on its positive and negative pieces the Jordan and total-variation formulas give $\nu=|\nu|$ and $\nu=-|\nu|$, respectively ([[thm-hahn-decomposition-for-signed-measures]], [[thm-jordan-decomposition-for-signed-measures]], [[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]]).
 
 [L5] Total variation is a positive measure, finite for complex measures and for finite signed measures by their finite Hahn/Jordan masses. AC covers its partition selections and the RN/Hahn constructions. ([[thm-total-variation-is-a-measure]], [[thm-total-variation-of-a-complex-measure-is-finite]], [[def-axiom-of-choice]])
 

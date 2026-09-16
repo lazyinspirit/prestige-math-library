@@ -37,37 +37,21 @@ vanishes.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the Euclidean inner-product space $V=\mathbb R^4$ with its ordered
-orthonormal basis $(e_1,e_2,e_3,e_4)$.
+**Given:** $\mathrm{AC}_\omega$, the Euclidean inner-product space $V=\mathbb R^4$ with its ordered orthonormal basis $(e_1,e_2,e_3,e_4)$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three]], [[thm-algebraic-symmetries-of-the-riemann-tensor]], and [[def-scalar-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] A Riemann curvature tensor has the two pair skews, pair interchange, and
-cyclic Bianchi symmetry.
-[[thm-algebraic-symmetries-of-the-riemann-tensor]].
+[F1] A Riemann curvature tensor has the two pair skews, pair interchange, and cyclic Bianchi symmetry. [[thm-algebraic-symmetries-of-the-riemann-tensor]].
 
-[F2] In dimension at least three, the Ricci decomposition is unique, and its
-Weyl summand has zero Ricci contraction.
-[[prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three]].
+[F2] In dimension at least three, the Ricci decomposition is unique, and its Weyl summand has zero Ricci contraction. [[prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three]].
 
-[F3] In an orthonormal basis,
-$\operatorname{Ric}(X,Y)=\sum_i\operatorname{Rm}(e_i,X,Y,e_i)$, and scalar
-curvature is the trace of Ricci.
-[[def-ricci-curvature]], [[def-scalar-curvature]].
+[F3] In an orthonormal basis, $\operatorname{Ric}(X,Y)=\sum_i\operatorname{Rm}(e_i,X,Y,e_i)$, and scalar curvature is the trace of Ricci. [[def-ricci-curvature]], [[def-scalar-curvature]].
 
-[F4] Increasing wedges of a basis form a basis of its exterior square.
-[[thm-increasing-basis-wedges-form-a-basis]].
+[F4] Increasing wedges of a basis form a basis of its exterior square. [[thm-increasing-basis-wedges-form-a-basis]].
 
-[F5] A smooth symmetric positive-definite coordinate matrix defines a
-Riemannian metric, and its four-tensor lowers the coordinate curvature output
-with the metric.
-[[prop-coordinate-criterion-for-a-riemannian-metric]],
-[[def-riemann-curvature-four-tensor]].
+[F5] A smooth symmetric positive-definite coordinate matrix defines a Riemannian metric, and its four-tensor lowers the coordinate curvature output with the metric. [[prop-coordinate-criterion-for-a-riemannian-metric]], [[def-riemann-curvature-four-tensor]].
 
-[F6] The Levi–Civita Christoffel symbols and the curvature coefficients obey
-their displayed coordinate formulas.
-[[prop-christoffel-formula-for-the-levi-civita-connection]],
-[[prop-coordinate-formula-for-the-curvature-tensor]].
+[F6] The Levi–Civita Christoffel symbols and the curvature coefficients obey their displayed coordinate formulas. [[prop-christoffel-formula-for-the-levi-civita-connection]], [[prop-coordinate-formula-for-the-curvature-tensor]].
 
 ## Refutation
 

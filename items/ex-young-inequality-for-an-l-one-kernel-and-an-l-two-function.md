@@ -33,8 +33,7 @@ $$ \|f*g\|_2 = \left(\int_0^1 x^2\,dx + \int_1^2 (2-x)^2\,dx\right)^{1/2} = \sqr
 
 **Given:** The indicator $f=g=\mathbf{1}_{[0,1]}$.
 
-[L1] Young's inequality holds
-([[thm-young-convolution-inequality]]).
+[L1] Young's inequality holds ([[thm-young-convolution-inequality]]).
 
 ## Verification
 

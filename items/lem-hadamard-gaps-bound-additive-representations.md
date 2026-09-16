@@ -42,14 +42,7 @@ forces the two index multisets to be equal.
 **Proof technique:** compare the largest unmatched frequency.
 
 1.1 Suppose the multisets differ, cancel their common entries, and let [given, algebra]
-$\lambda_s$ be the largest remaining frequency. It occurs on only one side.
-If the other side has a remaining term, its index is at most $s-r$ because
-all indices lie in one residue class; in particular $s-r\ge1$, and every
-such frequency is at most
-$\lambda_{s-r}<\lambda_s/m$. If the other side has no remaining term, the
-two sums are already unequal. [given, algebra]
+$\lambda_s$ be the largest remaining frequency. It occurs on only one side. If the other side has a remaining term, its index is at most $s-r$ because all indices lie in one residue class; in particular $s-r\ge1$, and every such frequency is at most $\lambda_{s-r}<\lambda_s/m$. If the other side has no remaining term, the two sums are already unequal. [given, algebra]
 
 2.1 That other side has at most $m$ remaining terms, so its sum is strictly [step 1.1, algebra]
-less than $m\lambda_s/m=\lambda_s$, whereas its opposing side is at least
-$\lambda_s$. This contradicts the equality. Hence nothing remains after
-cancellation, which is exactly equality of multisets. [step 1.1, algebra] ∎
+less than $m\lambda_s/m=\lambda_s$, whereas its opposing side is at least $\lambda_s$. This contradicts the equality. Hence nothing remains after cancellation, which is exactly equality of multisets. [step 1.1, algebra] ∎

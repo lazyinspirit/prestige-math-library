@@ -33,15 +33,11 @@ a colimiting cocone exactly when it is initial in $\mathcal C$.
 
 **Given:** The empty diagram $D:\varnothing\to\mathcal C$.
 
-[F1] A limit is a terminal cone and a colimit is an initial cocone
-([[def-limit-and-colimit-of-a-diagram]]).
+[F1] A limit is a terminal cone and a colimit is an initial cocone ([[def-limit-and-colimit-of-a-diagram]]).
 
-[F2] An object is terminal when every object has exactly one morphism to it,
-and initial when it has exactly one morphism to every object
-([[def-initial-terminal-and-zero-object]]).
+[F2] An object is terminal when every object has exactly one morphism to it, and initial when it has exactly one morphism to every object ([[def-initial-terminal-and-zero-object]]).
 
-[L1] Limits in a category are colimits of the dual diagram in the opposite
-category ([[prop-limit-colimit-duality]]).
+[L1] Limits in a category are colimits of the dual diagram in the opposite category ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

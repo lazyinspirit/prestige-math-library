@@ -37,8 +37,7 @@ closed set where the original map was already fixed.
 
 **Given:** The zero map $f:\mathbb R\to\mathbb R$ and the closed set $A:=\{0\}$.
 
-[L1] Relative Whitney approximation is the theorem that guarantees preservation
-near the closed set ([[thm-relative-whitney-approximation-for-euclidean-valued-maps]]).
+[L1] Relative Whitney approximation is the theorem that guarantees preservation near the closed set ([[thm-relative-whitney-approximation-for-euclidean-valued-maps]]).
 
 ## Counterexample
 **Proof technique:** direct.

@@ -29,11 +29,9 @@ assume that $j$ is quasi-compact.
 
 **Given:** An integral scheme $X$ and a dense open immersion $j:U\hookrightarrow X$.
 
-[F1] Every nonempty affine open of an integral scheme is the spectrum of a
-domain [[def-integral-scheme]].
+[F1] Every nonempty affine open of an integral scheme is the spectrum of a domain [[def-integral-scheme]].
 
-[F2] The scheme-theoretic image, when it exists, is the smallest closed
-subscheme through which the morphism factors [[def-scheme-theoretic-image]].
+[F2] The scheme-theoretic image, when it exists, is the smallest closed subscheme through which the morphism factors [[def-scheme-theoretic-image]].
 
 ## Verification
 

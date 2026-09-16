@@ -37,14 +37,11 @@ represent the elliptic, parabolic, and hyperbolic cases respectively.
 
 ## Facts & Assumptions
 
-**Given:** The principal parts of Laplace, heat, and one-space-dimensional wave
-operators.
+**Given:** The principal parts of Laplace, heat, and one-space-dimensional wave operators.
 
-[L1] Elliptic, hyperbolic, and parabolic type are read from the principal
-symbol definitions ([[def-elliptic-hyperbolic-and-parabolic-principal-symbols]]).
+[L1] Elliptic, hyperbolic, and parabolic type are read from the principal symbol definitions ([[def-elliptic-hyperbolic-and-parabolic-principal-symbols]]).
 
-[L2] In two variables, the discriminant is $B^2-AC$
-([[def-two-variable-second-order-discriminant]]).
+[L2] In two variables, the discriminant is $B^2-AC$ ([[def-two-variable-second-order-discriminant]]).
 
 ## Verification
 

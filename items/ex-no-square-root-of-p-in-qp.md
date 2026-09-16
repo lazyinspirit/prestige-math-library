@@ -32,9 +32,7 @@ For every prime $p$, the element $p$ is not a square in $\mathbb Q_p$.
 
 **Given:** A prime $p$.
 
-[L1] The odd-prime and $2$-adic square criteria describe exactly which elements
-are squares ([[thm-square-criterion-in-qp-for-odd-p]],
-[[thm-square-criterion-in-q2]]).
+[L1] The odd-prime and $2$-adic square criteria describe exactly which elements are squares ([[thm-square-criterion-in-qp-for-odd-p]], [[thm-square-criterion-in-q2]]).
 
 ## Verification
 

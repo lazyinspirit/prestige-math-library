@@ -40,8 +40,7 @@ for smooth functions $f:M\to\mathbb R$.
 
 **Given:** The trivial line bundle $\operatorname{pr}_1:M\times\mathbb R\to M$.
 
-[L1] A smooth section is a smooth map whose composition with the bundle
-projection is the identity ([[def-smooth-section-local-section-and-support]]).
+[L1] A smooth section is a smooth map whose composition with the bundle projection is the identity ([[def-smooth-section-local-section-and-support]]).
 
 ## Verification
 

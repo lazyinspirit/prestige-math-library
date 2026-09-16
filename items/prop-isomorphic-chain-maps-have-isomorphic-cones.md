@@ -34,14 +34,11 @@ chain complexes.
 
 **Given:** A commuting square as displayed in the statement.
 
-[L1] The cone differential is
-$$d(y,x)=(d^D(y)+f(x),-d^C(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L1] The cone differential is $$d(y,x)=(d^D(y)+f(x),-d^C(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
 [L2] A chain map commutes with differentials ([[def-chain-map]]).
 
-[L3] Identities and composites of chain maps are chain maps
-([[prop-identities-and-composites-of-chain-maps-are-chain-maps]]).
+[L3] Identities and composites of chain maps are chain maps ([[prop-identities-and-composites-of-chain-maps-are-chain-maps]]).
 
 ## Proof
 

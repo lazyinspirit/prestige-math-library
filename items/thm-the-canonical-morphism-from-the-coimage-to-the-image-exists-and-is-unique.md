@@ -38,17 +38,13 @@ $$i_f\circ\overline f\circ q_f=f.$$
 
 ## Facts & Assumptions
 
-**Given:** A morphism $f:A\to B$, its coimage projection $q_f$, and its image
-inclusion $i_f$.
+**Given:** A morphism $f:A\to B$, its coimage projection $q_f$, and its image inclusion $i_f$.
 
-[L1] The morphism $f$ factors uniquely through its coimage
-([[thm-a-morphism-factors-uniquely-through-its-coimage]]).
+[L1] The morphism $f$ factors uniquely through its coimage ([[thm-a-morphism-factors-uniquely-through-its-coimage]]).
 
-[L2] The morphism $f$ factors uniquely through its image
-([[thm-a-morphism-factors-uniquely-through-its-image]]).
+[L2] The morphism $f$ factors uniquely through its image ([[thm-a-morphism-factors-uniquely-through-its-image]]).
 
-[L3] Every coequalizer is epic
-([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
+[L3] Every coequalizer is epic ([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
 
 ## Proof
 

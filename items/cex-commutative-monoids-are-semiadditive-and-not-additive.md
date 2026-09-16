@@ -34,16 +34,11 @@ It is only semiadditive.
 
 **Given:** The category $\mathbf{CMon}$ and the monoid $\mathbb N$.
 
-[L1] A semiadditive category has finite biproducts
-([[def-semiadditive-category]]).
+[L1] A semiadditive category has finite biproducts ([[def-semiadditive-category]]).
 
-[L2] A semiadditive category is preadditive exactly when every morphism has an
-additive inverse
-([[thm-a-semiadditive-category-is-preadditive-exactly-when-every-morphism-has-an-additive-inverse]]).
+[L2] A semiadditive category is preadditive exactly when every morphism has an additive inverse ([[thm-a-semiadditive-category-is-preadditive-exactly-when-every-morphism-has-an-additive-inverse]]).
 
-[L3] There is a zero-kernel, non-monic morphism in a merely semiadditive
-category
-([[cex-a-zero-kernel-does-not-force-monicity-in-a-merely-semiadditive-category]]).
+[L3] There is a zero-kernel, non-monic morphism in a merely semiadditive category ([[cex-a-zero-kernel-does-not-force-monicity-in-a-merely-semiadditive-category]]).
 
 ## Counterexample
 

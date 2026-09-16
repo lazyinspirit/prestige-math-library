@@ -35,11 +35,9 @@ $$H_k^{\mathrm{sing}}(\mathbb R^n\setminus\{0\};G)\cong H_k^{\mathrm{sing}}(S^{n
 
 **Given:** An integer $n\geq 1$ and an abelian group $G$.
 
-[L1] $\mathbb R^n\setminus\{0\}$ deformation retracts onto $S^{n-1}$
-([[thm-punctured-rn-deformation-retracts-onto-the-sphere]]).
+[L1] $\mathbb R^n\setminus\{0\}$ deformation retracts onto $S^{n-1}$ ([[thm-punctured-rn-deformation-retracts-onto-the-sphere]]).
 
-[L2] A deformation retract inclusion induces an isomorphism on singular
-homology ([[prop-singular-homology-is-invariant-under-deformation-retracts]]).
+[L2] A deformation retract inclusion induces an isomorphism on singular homology ([[prop-singular-homology-is-invariant-under-deformation-retracts]]).
 
 ## Verification
 

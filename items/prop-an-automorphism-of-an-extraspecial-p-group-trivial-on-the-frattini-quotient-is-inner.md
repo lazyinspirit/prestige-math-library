@@ -76,9 +76,4 @@ the Frattini quotient is inner.
 
 ## Remarks
 
-The equality is forced by two counts that happen to agree, and each uses the
-extraspecial hypothesis: the upper bound uses $\Phi(P)=Z(P)$ of order $p$
-together with the generator rank $2n$, and the lower bound uses
-$\lvert P/Z(P)\rvert=p^{2n}$. For a general finite $p$-group the kernel can be
-larger than the inner automorphism group; equality is not asserted or excluded
-without additional hypotheses.
+The equality is forced by two counts that happen to agree, and each uses the extraspecial hypothesis: the upper bound uses $\Phi(P)=Z(P)$ of order $p$ together with the generator rank $2n$, and the lower bound uses $\lvert P/Z(P)\rvert=p^{2n}$. For a general finite $p$-group the kernel can be larger than the inner automorphism group; equality is not asserted or excluded without additional hypotheses.

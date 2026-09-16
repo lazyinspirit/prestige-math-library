@@ -25,9 +25,7 @@ by itself, yields pointwise convergence of the same sequence.
 
 ## Facts & Assumptions
 
-**Given:** Full choice, Lebesgue probability on $[0,1)$, and the half-open
-dyadic intervals $I_{q,k}=[k2^{-q},(k+1)2^{-q})$ for $q\geq0$ and
-$0\leq k<2^q$.
+**Given:** Full choice, Lebesgue probability on $[0,1)$, and the half-open dyadic intervals $I_{q,k}=[k2^{-q},(k+1)2^{-q})$ for $q\geq0$ and $0\leq k<2^q$.
 
 [F1] Von Neumann gives $L^2$ convergence of ergodic averages ([[thm-von-neumann-mean-ergodic-theorem-in-l-two]]).
 

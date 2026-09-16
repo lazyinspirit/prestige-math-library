@@ -39,8 +39,7 @@ $$\prod_{p\le x}\left(1-\frac1p\right) =\frac{e^{-\gamma}}{\log x}\left(1+O(1/\l
 
 **Given:** The finite Euler prime products.
 
-[L1] Mertens' third theorem gives the displayed asymptotic
-([[thm-third-mertens-theorem-for-primes]]).
+[L1] Mertens' third theorem gives the displayed asymptotic ([[thm-third-mertens-theorem-for-primes]]).
 
 ## Proof
 

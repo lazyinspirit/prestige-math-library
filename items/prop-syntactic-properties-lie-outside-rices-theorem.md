@@ -33,8 +33,7 @@ theorem does not apply to them.
 
 ## Facts & Assumptions
 
-**Given:** The machine-description properties "has at most ten states" and
-"has an unreachable state."
+**Given:** The machine-description properties "has at most ten states" and "has an unreachable state."
 
 [L1] An extensional property must assign the same truth value to any two machines with the same recognized language, by [[def-index-set-and-extensional-machine-property]].
 

@@ -36,12 +36,9 @@ same truth value in the substructure and in the larger structure.
 
 [F1] [[thm-hessenberg]]: The square of an infinite well-ordered cardinal has that same cardinality.
 
-[F2] [[thm-structural-recursion-on-set-coded-syntax]]: Recursive definitions and
-induction are valid on the locally coded term and formula sets.
+[F2] [[thm-structural-recursion-on-set-coded-syntax]]: Recursive definitions and induction are valid on the locally coded term and formula sets.
 
-[F3] [[thm-set-structure-satisfaction-recursion]]: Satisfaction for a set-sized
-structure exists as a set and obeys the usual atomic, Boolean, and existential
-clauses.
+[F3] [[thm-set-structure-satisfaction-recursion]]: Satisfaction for a set-sized structure exists as a set and obeys the usual atomic, Boolean, and existential clauses.
 
 [F4] [[thm-recursion]]: Finite closure stages can be iterated on the natural numbers.
 

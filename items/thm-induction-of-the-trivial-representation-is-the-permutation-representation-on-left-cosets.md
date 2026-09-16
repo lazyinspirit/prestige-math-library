@@ -35,16 +35,11 @@ left coset set $G/H$.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a subgroup $H\le G$, and the trivial complex
-representation $\mathbf 1_H$ of $H$.
+**Given:** A finite group $G$, a subgroup $H\le G$, and the trivial complex representation $\mathbf 1_H$ of $H$.
 
-[F1] The induced module consists of the functions $f:G\to\mathbb C$ satisfying
-$f(gh)=h^{-1}\cdot f(g)$, with $G$ acting by $(x\cdot f)(g)=f(x^{-1}g)$
-([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
+[F1] The induced module consists of the functions $f:G\to\mathbb C$ satisfying $f(gh)=h^{-1}\cdot f(g)$, with $G$ acting by $(x\cdot f)(g)=f(x^{-1}g)$ ([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
 
-[F2] The left cosets of $H$ are the subsets $gH$, and the permutation
-representation on a finite $G$-set has basis vectors indexed by that set
-([[def-coset]], [[def-trivial-regular-and-permutation-representations]]).
+[F2] The left cosets of $H$ are the subsets $gH$, and the permutation representation on a finite $G$-set has basis vectors indexed by that set ([[def-coset]], [[def-trivial-regular-and-permutation-representations]]).
 
 ## Proof
 

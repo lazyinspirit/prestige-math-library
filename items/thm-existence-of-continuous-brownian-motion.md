@@ -34,33 +34,21 @@ exists.
 
 **Given:** The Axiom of Choice.
 
-[F1] Under AC, the consistent Brownian Gaussian finite-dimensional laws define
-a canonical coordinate process $X$ with mean zero and covariance $\min(s,t)$.
-[[thm-kolmogorov-construction-of-the-canonical-gaussian-process]]
+[F1] Under AC, the consistent Brownian Gaussian finite-dimensional laws define a canonical coordinate process $X$ with mean zero and covariance $\min(s,t)$. [[thm-kolmogorov-construction-of-the-canonical-gaussian-process]]
 
-[F2] A normal increment of variance $|t-s|$ has fourth moment
-$3|t-s|^2$. [[lem-gaussian-even-moment-bound-for-brownian-increments]]
+[F2] A normal increment of variance $|t-s|$ has fourth moment $3|t-s|^2$. [[lem-gaussian-even-moment-bound-for-brownian-increments]]
 
-[F3] The one-parameter continuity criterion turns the corresponding moment
-bound into a continuous modification. It uses no choice once its constants are
-supplied. [[thm-kolmogorov-continuity-criterion-one-parameter]]
+[F3] The one-parameter continuity criterion turns the corresponding moment bound into a continuous modification. It uses no choice once its constants are supplied. [[thm-kolmogorov-continuity-criterion-one-parameter]]
 
-[F4] For a real process starting at zero, centered Gaussian covariance
-$\min(s,t)$ is equivalent to independent stationary normal increments.
-[[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]]
+[F4] For a real process starting at zero, centered Gaussian covariance $\min(s,t)$ is equivalent to independent stationary normal increments. [[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]]
 
-[F5] Brownian motion consists of the initial condition, those increments, and
-one probability-one continuity event. [[def-brownian-motion]]
+[F5] Brownian motion consists of the initial condition, those increments, and one probability-one continuity event. [[def-brownian-motion]]
 
-[F6] The real line is complete; its embedded rationals are countable and dense,
-so it is separable. [[thm-euclidean-space-complete]] [[def-separable-space]]
-[[thm-rationals-countable]] [[lem-rat-embeds-dense]]
+[F6] The real line is complete; its embedded rationals are countable and dense, so it is separable. [[thm-euclidean-space-complete]] [[def-separable-space]] [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
 
-[F7] A finite union of null events is null.
-[[thm-finite-and-countable-subadditivity-of-measures]]
+[F7] A finite union of null events is null. [[thm-finite-and-countable-subadditivity-of-measures]]
 
-[F8] AC is available for the Gaussian-law and Kolmogorov-extension suppliers.
-[[def-axiom-of-choice]]
+[F8] AC is available for the Gaussian-law and Kolmogorov-extension suppliers. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -76,7 +64,4 @@ so it is separable. [[thm-euclidean-space-complete]] [[def-separable-space]]
 
 ## Source notes
 
-Durrett, printed pp. 355–358, constructs the canonical Gaussian process and
-then repairs its paths by the continuity theorem. Sousi, Section 6.2, follows
-the same route. Step 3.1 records the finite-union argument needed to preserve
-finite-dimensional laws under modification.
+Durrett, printed pp. 355–358, constructs the canonical Gaussian process and then repairs its paths by the continuity theorem. Sousi, Section 6.2, follows the same route. Step 3.1 records the finite-union argument needed to preserve finite-dimensional laws under modification.

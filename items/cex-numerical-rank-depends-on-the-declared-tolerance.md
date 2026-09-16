@@ -33,13 +33,9 @@ not depend on the declared tolerance.
 
 ## Facts & Assumptions
 
-**Given:** The diagonal matrix $A=\operatorname{diag}(1,1/2,0)$ with singular
-values $\sigma_1=1$, $\sigma_2=1/2$, $\sigma_3=0$, and the two tolerances
-$\tau_1=3/4$ and $\tau_2=1/4$.
+**Given:** The diagonal matrix $A=\operatorname{diag}(1,1/2,0)$ with singular values $\sigma_1=1$, $\sigma_2=1/2$, $\sigma_3=0$, and the two tolerances $\tau_1=3/4$ and $\tau_2=1/4$.
 
-[L1] In the spectral norm,
-$\operatorname{rank}_{\tau}(A)=\#\{j:\sigma_j>\tau\}$
-([[prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold]]).
+[L1] In the spectral norm, $\operatorname{rank}_{\tau}(A)=\#\{j:\sigma_j>\tau\}$ ([[prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold]]).
 
 ## Counterexample
 

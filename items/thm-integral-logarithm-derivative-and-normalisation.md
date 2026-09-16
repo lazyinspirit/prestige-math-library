@@ -36,20 +36,13 @@ and $L(1)=0$.
 
 **Given:** $x>0$ and $L$ as defined.
 
-[F1] $L(z)=\int_1^z dt/t$ for $z>0$
-([[def-integral-logarithm]]).
+[F1] $L(z)=\int_1^z dt/t$ for $z>0$ ([[def-integral-logarithm]]).
 
-[L1] If an integrand is Riemann integrable on a compact interval and continuous
-at $c$, then its integral function with fixed lower endpoint has derivative
-equal to the integrand at $c$
-([[thm-ftc-first-part]]).
+[L1] If an integrand is Riemann integrable on a compact interval and continuous at $c$, then its integral function with fixed lower endpoint has derivative equal to the integrand at $c$ ([[thm-ftc-first-part]]).
 
-[L2] Oriented integrals satisfy
-$\int_u^v f+\int_v^w f=\int_u^w f$
-([[thm-additivity-over-subintervals]]).
+[L2] Oriented integrals satisfy $\int_u^v f+\int_v^w f=\int_u^w f$ ([[thm-additivity-over-subintervals]]).
 
-[F2] An oriented integral reverses sign when its endpoints are reversed and
-is $0$ when the endpoints agree ([[def-oriented-integral]]).
+[F2] An oriented integral reverses sign when its endpoints are reversed and is $0$ when the endpoints agree ([[def-oriented-integral]]).
 
 ## Proof
 

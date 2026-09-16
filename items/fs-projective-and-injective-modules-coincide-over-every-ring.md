@@ -27,8 +27,7 @@ Projective and injective modules coincide over every ring.
 
 **Given:** The finite group algebra setting of the preceding corollary.
 
-[L1] Projective and injective coincide here only for finite-dimensional modules
-over the symmetric group algebra $k[G]$ ([[cor-finitely-generated-projective-kg-modules-are-injective-and-conversely]]).
+[L1] Projective and injective coincide here only for finite-dimensional modules over the symmetric group algebra $k[G]$ ([[cor-finitely-generated-projective-kg-modules-are-injective-and-conversely]]).
 
 ## Refutation
 

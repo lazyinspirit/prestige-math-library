@@ -43,20 +43,15 @@ generators form a free basis of $H$.
 
 **Given:** A free group $F(X)$ and a subgroup $H\le F(X)$.
 
-[L1] The Axiom of Choice says every family of nonempty sets has a choice
-function ([[def-axiom-of-choice]]).
+[L1] The Axiom of Choice says every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
 
-[L2] Countable Choice is the corresponding statement for countable families of
-nonempty sets ([[def-countable-choice]]).
+[L2] Countable Choice is the corresponding statement for countable families of nonempty sets ([[def-countable-choice]]).
 
-[L3] The nontrivial Schreier generators attached to a tree Schreier system are
-freely independent ([[lem-tree-schreier-generators-are-freely-independent]]).
+[L3] The nontrivial Schreier generators attached to a tree Schreier system are freely independent ([[lem-tree-schreier-generators-are-freely-independent]]).
 
-[L4] The nontrivial Schreier generators generate the subgroup
-([[thm-schreier-generating-lemma]]).
+[L4] The nontrivial Schreier generators generate the subgroup ([[thm-schreier-generating-lemma]]).
 
-[L5] A subset is a free basis exactly when it freely generates the group in the
-sense of [[def-free-basis]].
+[L5] A subset is a free basis exactly when it freely generates the group in the sense of [[def-free-basis]].
 
 ## Proof
 

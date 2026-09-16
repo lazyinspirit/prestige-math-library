@@ -32,12 +32,9 @@ subgroup.
 
 **Given:** The embedded copy of $\mathbb Z$ inside $\mathbb Z_p$.
 
-[L1] The image of $\mathbb Z$ in $\mathbb Z_p$ is dense
-([[thm-the-integers-map-injectively-and-densely-into-zp]]).
+[L1] The image of $\mathbb Z$ in $\mathbb Z_p$ is dense ([[thm-the-integers-map-injectively-and-densely-into-zp]]).
 
-[L2] The additive group of $\mathbb Z_p$ is not abstractly cyclic, even though
-the closure of $\mathbb Z\cdot1$ is all of $\mathbb Z_p$
-([[prop-zp-is-topologically-generated-by-one]]).
+[L2] The additive group of $\mathbb Z_p$ is not abstractly cyclic, even though the closure of $\mathbb Z\cdot1$ is all of $\mathbb Z_p$ ([[prop-zp-is-topologically-generated-by-one]]).
 
 ## Counterexample
 

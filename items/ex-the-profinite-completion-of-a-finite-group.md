@@ -29,11 +29,9 @@ A finite group is canonically isomorphic to its profinite completion.
 
 **Given:** A finite group $G$.
 
-[L1] The profinite completion is initial among continuous homomorphisms from $G$
-into profinite groups ([[thm-universal-property-of-profinite-completion]]).
+[L1] The profinite completion is initial among continuous homomorphisms from $G$ into profinite groups ([[thm-universal-property-of-profinite-completion]]).
 
-[L2] The canonical map is injective exactly when the group is residually finite,
-and its image is dense ([[cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite]], [[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]]).
+[L2] The canonical map is injective exactly when the group is residually finite, and its image is dense ([[cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite]], [[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]]).
 
 ## Verification
 

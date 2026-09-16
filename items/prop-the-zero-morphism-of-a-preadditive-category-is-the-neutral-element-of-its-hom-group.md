@@ -35,17 +35,13 @@ identity of the abelian group $\mathcal C(A,B)$.
 
 ## Facts & Assumptions
 
-**Given:** A zero object $0$ in a preadditive category $\mathcal C$ and objects
-$A,B$.
+**Given:** A zero object $0$ in a preadditive category $\mathcal C$ and objects $A,B$.
 
-[L1] A zero object supplies a unique compatible system of zero morphisms
-([[prop-zero-object-induces-zero-morphisms]]).
+[L1] A zero object supplies a unique compatible system of zero morphisms ([[prop-zero-object-induces-zero-morphisms]]).
 
-[L2] In a preadditive category, an initial object is terminal and conversely
-([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
+[L2] In a preadditive category, an initial object is terminal and conversely ([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
 
-[L3] Every hom-set in a preadditive category is an abelian group and
-composition is bilinear ([[def-preadditive-category]]).
+[L3] Every hom-set in a preadditive category is an abelian group and composition is bilinear ([[def-preadditive-category]]).
 
 ## Proof
 

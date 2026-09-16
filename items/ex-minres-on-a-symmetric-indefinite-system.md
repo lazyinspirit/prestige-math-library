@@ -34,9 +34,7 @@ minimizer in the one-dimensional affine Krylov space.
 
 **Given:** The displayed Hermitian indefinite system.
 
-[L1] For Hermitian matrices, including indefinite ones, MINRES minimizes the
-Euclidean residual over $x_0+K_m(A,r_0)$
-([[thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space]]).
+[L1] For Hermitian matrices, including indefinite ones, MINRES minimizes the Euclidean residual over $x_0+K_m(A,r_0)$ ([[thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space]]).
 
 ## Verification
 **Proof technique:** direct calculation.

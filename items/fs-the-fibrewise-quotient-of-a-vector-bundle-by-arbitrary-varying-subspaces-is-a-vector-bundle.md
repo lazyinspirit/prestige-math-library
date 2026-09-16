@@ -36,10 +36,7 @@ always a smooth vector bundle.
 
 **Given:** The displayed claim.
 
-[L1] A quotient bundle theorem requires a smooth vector subbundle, in particular
-constant fibre dimension and smooth local frames
-([[thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle]],
-[[def-vector-subbundle]]).
+[L1] A quotient bundle theorem requires a smooth vector subbundle, in particular constant fibre dimension and smooth local frames ([[thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle]], [[def-vector-subbundle]]).
 
 ## Refutation
 

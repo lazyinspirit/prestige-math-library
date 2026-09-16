@@ -25,19 +25,13 @@ The dimension of an object is independent of the pivotal structure.
 
 ## Facts & Assumptions
 
-**Given:** The tensor category of finite-dimensional $\mathbb Z$-graded vector
-spaces, a field element $q\in k^\times$ with $q\ne\pm1$, and the degree-one line
-$X=k[1]$.
+**Given:** The tensor category of finite-dimensional $\mathbb Z$-graded vector spaces, a field element $q\in k^\times$ with $q\ne\pm1$, and the degree-one line $X=k[1]$.
 
-[L1] Pivotal structures vary by monoidal automorphisms of the identity
-([[rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity]]).
+[L1] Pivotal structures vary by monoidal automorphisms of the identity ([[rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity]]).
 
-[L2] $\dim_a(X)$ is defined as the trace of the chosen pivotal comparison
-([[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]).
+[L2] $\dim_a(X)$ is defined as the trace of the chosen pivotal comparison ([[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]).
 
-[L3] On graded vector spaces, multiplying the canonical double-dual map by
-$q^n$ in degree $n$ gives a pivotal structure whose dimension on $k[1]$ is
-$q$ ([[fs-the-left-and-right-traces-always-agree]]).
+[L3] On graded vector spaces, multiplying the canonical double-dual map by $q^n$ in degree $n$ gives a pivotal structure whose dimension on $k[1]$ is $q$ ([[fs-the-left-and-right-traces-always-agree]]).
 
 ## Refutation
 

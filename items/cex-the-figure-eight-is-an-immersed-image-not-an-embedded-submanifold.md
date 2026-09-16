@@ -34,9 +34,7 @@ Every immersed image is an embedded submanifold.
 
 [F1] The displayed claim is the false statement under discussion ([[fs-the-image-of-every-immersion-is-an-embedded-submanifold]]).
 
-[L1] $(\sin t)'=\cos t$ ([[thm-sine-and-cosine-derivatives]]), and the chain
-rule gives $(\sin 2t)'=2\cos 2t$
-([[thm-chain-rule-for-total-derivatives]]).
+[L1] $(\sin t)'=\cos t$ ([[thm-sine-and-cosine-derivatives]]), and the chain rule gives $(\sin 2t)'=2\cos 2t$ ([[thm-chain-rule-for-total-derivatives]]).
 
 ## Counterexample
 **Proof technique:** direct.

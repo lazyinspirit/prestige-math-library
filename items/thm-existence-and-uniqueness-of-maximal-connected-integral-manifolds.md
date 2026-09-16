@@ -53,50 +53,31 @@ let $L_p$ be the $\sim_{\mathcal D}$-equivalence class of a point $p$. Then:
 
 ## Facts & Assumptions
 
-**Given:** An integrable rank-$k$ distribution $\mathcal D$ and a point
-$p \in M$.
+**Given:** An integrable rank-$k$ distribution $\mathcal D$ and a point $p \in M$.
 
-[A1] Let $L_p$ be the reachability class of $p$ under tangent piecewise smooth
-curves.
+[A1] Let $L_p$ be the reachability class of $p$ under tangent piecewise smooth curves.
 
-[L1] An integrable distribution has a flat coordinate chart around every
-point ([[thm-frobenius-local-coordinate-theorem]]).
+[L1] An integrable distribution has a flat coordinate chart around every point ([[thm-frobenius-local-coordinate-theorem]]).
 
-[L2] Plaques from two flat charts through the same point have compatible germs
-([[lem-overlapping-plaques-through-a-point-have-compatible-germs]]).
+[L2] Plaques from two flat charts through the same point have compatible germs ([[lem-overlapping-plaques-through-a-point-have-compatible-germs]]).
 
-[L3] Each connected component of the inverse image of a flat-chart domain
-under an integral immersion maps into one plaque
-([[lem-integral-manifolds-are-locally-contained-in-plaques]]).
+[L3] Each connected component of the inverse image of a flat-chart domain under an integral immersion maps into one plaque ([[lem-integral-manifolds-are-locally-contained-in-plaques]]).
 
-[L4] A map between equal-dimensional Euclidean open sets with invertible
-derivative is a local diffeomorphism
-([[thm-euclidean-inverse-function-theorem]]).
+[L4] A map between equal-dimensional Euclidean open sets with invertible derivative is a local diffeomorphism ([[thm-euclidean-inverse-function-theorem]]).
 
-[A2] The standing $\mathrm{AC}_\omega$ assumption for smooth distributions is
-available ([[def-countable-choice]]).
+[A2] The standing $\mathrm{AC}_\omega$ assumption for smooth distributions is available ([[def-countable-choice]]).
 
-[L5] A manifold is Hausdorff and second countable
-([[def-topological-manifold-without-boundary]]).
+[L5] A manifold is Hausdorff and second countable ([[def-topological-manifold-without-boundary]]).
 
-[L6] Under $\mathrm{AC}_\omega$, every second-countable space is Lindelof
-([[thm-second-countable-implies-lindelof]]).
+[L6] Under $\mathrm{AC}_\omega$, every second-countable space is Lindelof ([[thm-second-countable-implies-lindelof]]).
 
-[L7] The connected components of a topological manifold are open and form an
-at most countable family
-([[prop-components-of-a-topological-manifold-are-open-and-at-most-countable]]).
+[L7] The connected components of a topological manifold are open and form an at most countable family ([[prop-components-of-a-topological-manifold-are-open-and-at-most-countable]]).
 
-[L8] Under $\mathrm{AC}_\omega$, a countable union of at most countable sets is
-at most countable ([[thm-countable-union-of-countable]]).
+[L8] Under $\mathrm{AC}_\omega$, a countable union of at most countable sets is at most countable ([[thm-countable-union-of-countable]]).
 
-[L9] A connected locally path-connected space is path connected
-([[thm-connected-and-locally-path-connected-implies-path-connected]]); in
-particular, each plaque is path connected in its Euclidean slice coordinates
-([[def-plaque-of-a-flat-chart]]).
+[L9] A connected locally path-connected space is path connected ([[thm-connected-and-locally-path-connected-implies-path-connected]]); in particular, each plaque is path connected in its Euclidean slice coordinates ([[def-plaque-of-a-flat-chart]]).
 
-[L10] A smooth real-valued function with zero differential is constant on each
-connected component
-([[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]]).
+[L10] A smooth real-valued function with zero differential is constant on each connected component ([[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]]).
 
 ## Proof
 

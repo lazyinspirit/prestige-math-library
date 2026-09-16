@@ -36,15 +36,11 @@ $$\det(S\circ T)=\det(S)\det(T).$$
 
 **Given:** $S,T,V$ as in the statement.
 
-[L1] On a positive-dimensional space, an operator scales every alternating
-top-degree form by its determinant, and that scalar is unique
-([[thm-operator-determinant-scales-every-alternating-top-form]]).
+[L1] On a positive-dimensional space, an operator scales every alternating top-degree form by its determinant, and that scalar is unique ([[thm-operator-determinant-scales-every-alternating-top-form]]).
 
-[L2] The determinant is basis independent
-([[thm-operator-determinant-is-basis-independent]]).
+[L2] The determinant is basis independent ([[thm-operator-determinant-is-basis-independent]]).
 
-[F1] In dimension zero, the operator determinant is defined to be $1$
-([[def-determinant-of-a-linear-operator]]).
+[F1] In dimension zero, the operator determinant is defined to be $1$ ([[def-determinant-of-a-linear-operator]]).
 
 ## Proof
 

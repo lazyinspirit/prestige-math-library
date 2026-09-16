@@ -33,15 +33,11 @@ $\widehat c$ in $\mathcal O H$.
 
 ## Facts & Assumptions
 
-**Given:** The splitting system, its maximal ideal $\mathfrak m$, and the
-finite group $H$.
+**Given:** The splitting system, its maximal ideal $\mathfrak m$, and the finite group $H$.
 
-[F1] In a splitting $p$-modular system, $\mathcal O$ is a complete discrete
-valuation ring and $k=\mathcal O/\mathfrak m$
-([[def-splitting-p-modular-system-for-a-finite-group]]).
+[F1] In a splitting $p$-modular system, $\mathcal O$ is a complete discrete valuation ring and $k=\mathcal O/\mathfrak m$ ([[def-splitting-p-modular-system-for-a-finite-group]]).
 
-[F2] Blocks are the primitive central idempotents of the relevant group
-algebra ([[def-p-blocks-by-primitive-central-idempotents]]).
+[F2] Blocks are the primitive central idempotents of the relevant group algebra ([[def-p-blocks-by-primitive-central-idempotents]]).
 
 ## Proof
 

@@ -84,25 +84,8 @@ adds the computation of its subsequential limit set.
 
 ## Remarks
 
-- **A one-point subsequential limit set does not imply convergence.** By step 3.1
-  the set is $\{1\}$, yet the sequence is unbounded and hence divergent. What is
-  true is the converse implication: a convergent sequence has exactly one
-  subsequential limit ([[def-subsequential-limit]]). So the subsequential limit
-  set being a single point is necessary and not sufficient for convergence, and
-  the missing hypothesis is boundedness.
+- **A one-point subsequential limit set does not imply convergence.** By step 3.1 the set is $\{1\}$, yet the sequence is unbounded and hence divergent. What is true is the converse implication: a convergent sequence has exactly one subsequential limit ([[def-subsequential-limit]]). So the subsequential limit set being a single point is necessary and not sufficient for convergence, and the missing hypothesis is boundedness.
 
-- **The interleaving is what makes the example work, and it needs the partition.**
-  Defining $(y_n)$ by cases on whether $n$ is even or odd is legitimate only
-  because every natural number is exactly one of the two
-  ([[lem-alternating-sequence]]). That is the same fact that makes the two
-  subsequences between them exhaust the sequence.
+- **The interleaving is what makes the example work, and it needs the partition.** Defining $(y_n)$ by cases on whether $n$ is even or odd is legitimate only because every natural number is exactly one of the two ([[lem-alternating-sequence]]). That is the same fact that makes the two subsequences between them exhaust the sequence.
 
-- **Compare the bounded case.** With the unbounded branch replaced by a second
-  constant $c \ne 1$, the same interleaving is bounded and divergent, its two
-  subsequential limits being $1$ and $c$. Bolzano-Weierstrass applies there and
-  produces one of the two; here it does not apply at all, and the conclusion
-  nevertheless happens to hold, which is exactly why the converse is not a
-  theorem. A different bounded sequence with two subsequential limits is worked
-  out in full at [[ex-two-subsequential-limits]], which reaches its two limits by
-  an alternating sign carrying a null perturbation rather than by interleaving
-  constants, so that neither limit is a value of the sequence.
+- **Compare the bounded case.** With the unbounded branch replaced by a second constant $c \ne 1$, the same interleaving is bounded and divergent, its two subsequential limits being $1$ and $c$. Bolzano-Weierstrass applies there and produces one of the two; here it does not apply at all, and the conclusion nevertheless happens to hold, which is exactly why the converse is not a theorem. A different bounded sequence with two subsequential limits is worked out in full at [[ex-two-subsequential-limits]], which reaches its two limits by an alternating sign carrying a null perturbation rather than by interleaving constants, so that neither limit is a value of the sequence.

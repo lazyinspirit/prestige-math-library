@@ -26,22 +26,16 @@ If $X_n\to X$ almost surely, then $X_n\to X$ in probability.
 
 **Given:** $X_n\to X$ almost surely.
 
-[L1] Real random variables are measurable, so differences, absolute values,
-threshold events, and their indicators are measurable
-([[def-random-element-and-real-random-variable]]).
+[L1] Real random variables are measurable, so differences, absolute values, threshold events, and their indicators are measurable ([[def-random-element-and-real-random-variable]]).
 
-[L2] Dominated convergence sends an almost-everywhere convergent integrable
-sequence with one integrable majorant to convergence of integrals
-([[thm-dominated-convergence]]).
+[L2] Dominated convergence sends an almost-everywhere convergent integrable sequence with one integrable majorant to convergence of integrals ([[thm-dominated-convergence]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Fix $\varepsilon>0$ and set $I_n=\mathbf1_{\{|X_n-X|>\varepsilon\}}$. [given, L1]
-By [L1] these are measurable; the hypothesis gives $I_n\to0$ almost surely,
-and $0\le I_n\le1$. [given, L1]
+By [L1] these are measurable; the hypothesis gives $I_n\to0$ almost surely, and $0\le I_n\le1$. [given, L1]
 
 2.1 Apply [L2] to the indicators from step 1.1 with majorant $1$. [step 1.1, L2]
-$\mathbb P(|X_n-X|>\varepsilon)=\mathbb E I_n\to0$, which is the required
-probability convergence. [step 1.1, L2] ∎
+$\mathbb P(|X_n-X|>\varepsilon)=\mathbb E I_n\to0$, which is the required probability convergence. [step 1.1, L2] ∎

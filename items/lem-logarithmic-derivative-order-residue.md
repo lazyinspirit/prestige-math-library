@@ -46,18 +46,11 @@ In either case $f'/f$ has a simple pole at $a$.
 
 **Given:** A meromorphic function $f$ on a neighbourhood of $a$.
 
-[L1] A holomorphic function has a zero of order $m$ at $a$ exactly when it
-factors locally as $(z-a)^m h(z)$ with $h$ holomorphic and $h(a)\ne0$
-([[thm-zero-order-factorization-holomorphic-function]]).
+[L1] A holomorphic function has a zero of order $m$ at $a$ exactly when it factors locally as $(z-a)^m h(z)$ with $h$ holomorphic and $h(a)\ne0$ ([[thm-zero-order-factorization-holomorphic-function]]).
 
-[L2] A pole of order $m$ is exactly a point where $1/f$ extends holomorphically
-across $a$ and has a zero of order $m$ there
-([[thm-pole-characterizations]]).
+[L2] A pole of order $m$ is exactly a point where $1/f$ extends holomorphically across $a$ and has a zero of order $m$ there ([[thm-pole-characterizations]]).
 
-[L3] Holomorphic quotients and products obey the usual derivative rules, and a
-holomorphic function is continuous
-([[thm-algebra-of-complex-derivatives]],
-[[cor-complex-differentiability-implies-continuity]]).
+[L3] Holomorphic quotients and products obey the usual derivative rules, and a holomorphic function is continuous ([[thm-algebra-of-complex-derivatives]], [[cor-complex-differentiability-implies-continuity]]).
 
 ## Proof
 

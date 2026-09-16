@@ -40,9 +40,7 @@ multiplication.
 
 **Given:** A connected plane domain $\Omega$.
 
-[L1] Every meromorphic function on $\Omega$ is a quotient $g/h$ of holomorphic
-functions with $h\not\equiv0$
-([[cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients]]).
+[L1] Every meromorphic function on $\Omega$ is a quotient $g/h$ of holomorphic functions with $h\not\equiv0$ ([[cor-meromorphic-functions-on-a-plane-domain-are-holomorphic-quotients]]).
 
 ## Proof
 

@@ -35,18 +35,13 @@ cokernels.
 
 ## Facts & Assumptions
 
-**Given:** An additive functor $F:\mathcal A\to\mathcal B$ between abelian
-categories.
+**Given:** An additive functor $F:\mathcal A\to\mathcal B$ between abelian categories.
 
-[L1] An additive functor between additive categories is left exact exactly when
-it preserves kernels
-([[thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels]]).
+[L1] An additive functor between additive categories is left exact exactly when it preserves kernels ([[thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels]]).
 
-[L2] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L2] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L3] Exact means additive, left exact, and right exact
-([[def-exact-functor-between-abelian-categories]]).
+[L3] Exact means additive, left exact, and right exact ([[def-exact-functor-between-abelian-categories]]).
 
 ## Proof
 

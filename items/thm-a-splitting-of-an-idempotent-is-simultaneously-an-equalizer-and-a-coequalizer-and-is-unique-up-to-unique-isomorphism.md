@@ -41,14 +41,11 @@ $e$ are joined by a unique isomorphism commuting with both legs.
 
 **Given:** An idempotent $e:A\to A$ and a splitting $A\xrightarrow{p}B\xrightarrow{i}A$.
 
-[L1] A split idempotent satisfies $ip=e$ and $pi=1_B$
-([[def-idempotent-and-split-idempotent]]).
+[L1] A split idempotent satisfies $ip=e$ and $pi=1_B$ ([[def-idempotent-and-split-idempotent]]).
 
-[L2] Equalizers and coequalizers have their universal properties
-([[def-equalizers-and-coequalizers]]).
+[L2] Equalizers and coequalizers have their universal properties ([[def-equalizers-and-coequalizers]]).
 
-[L3] An isomorphism is a morphism with a two-sided inverse
-([[def-isomorphism-groupoid-and-connected-category]]).
+[L3] An isomorphism is a morphism with a two-sided inverse ([[def-isomorphism-groupoid-and-connected-category]]).
 
 ## Proof
 

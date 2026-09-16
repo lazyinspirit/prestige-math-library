@@ -29,11 +29,9 @@ is a quasi-isomorphism because its cone is contractible, hence acyclic.
 
 **Given:** A chain complex $C_\bullet$.
 
-[L1] The cone of an identity map is contractible
-([[ex-the-cone-of-zero-and-of-the-identity]]).
+[L1] The cone of an identity map is contractible ([[ex-the-cone-of-zero-and-of-the-identity]]).
 
-[L2] A chain map is a quasi-isomorphism exactly when its cone is acyclic
-([[thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic]]).
+[L2] A chain map is a quasi-isomorphism exactly when its cone is acyclic ([[thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic]]).
 
 ## Verification
 

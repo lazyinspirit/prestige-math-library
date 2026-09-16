@@ -27,8 +27,7 @@ Every tree is $0$-hyperbolic.
 
 **Given:** A tree $T$.
 
-[L1] Cayley trees are $0$-hyperbolic
-([[prop-cayley-trees-are-zero-hyperbolic]]).
+[L1] Cayley trees are $0$-hyperbolic ([[prop-cayley-trees-are-zero-hyperbolic]]).
 
 ## Verification
 

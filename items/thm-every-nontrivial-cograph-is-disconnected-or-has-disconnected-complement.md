@@ -36,17 +36,11 @@ $\overline G$ is disconnected.
 
 **Given:** A cograph $G$ with $|V(G)|\geq 2$.
 
-[L1] Every nontrivial cograph is obtained from two nonempty smaller cographs by
-one final disjoint-union step or one final complete-connection step
-([[def-cograph-by-singletons-disjoint-union-and-complete-connection]]).
+[L1] Every nontrivial cograph is obtained from two nonempty smaller cographs by one final disjoint-union step or one final complete-connection step ([[def-cograph-by-singletons-disjoint-union-and-complete-connection]]).
 
-[L2] The disjoint union of two nonempty graphs is disconnected
-([[def-connected-graph-and-connected-component]]).
+[L2] The disjoint union of two nonempty graphs is disconnected ([[def-connected-graph-and-connected-component]]).
 
-[L3] If $G_1$ and $G_2$ are vertex-disjoint, then the complement of
-$G_1\nabla G_2$ is the disjoint union of $\overline{G_1}$ and $\overline{G_2}$
-([[def-complete-connection-of-two-disjoint-graphs]],
-[[def-graph-isomorphism-and-complement]]).
+[L3] If $G_1$ and $G_2$ are vertex-disjoint, then the complement of $G_1\nabla G_2$ is the disjoint union of $\overline{G_1}$ and $\overline{G_2}$ ([[def-complete-connection-of-two-disjoint-graphs]], [[def-graph-isomorphism-and-complement]]).
 
 ## Proof
 

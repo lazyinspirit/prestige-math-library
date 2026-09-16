@@ -40,21 +40,13 @@ $A$-conjugate.
 
 ## Facts & Assumptions
 
-**Given:** A Hermitian positive-definite system $Ax=b$ and an exact-arithmetic
-CG run.
+**Given:** A Hermitian positive-definite system $Ax=b$ and an exact-arithmetic CG run.
 
-[F1] CG uses the recurrence
-$$x_{k+1}=x_k+\alpha_kp_k,\qquad r_{k+1}=r_k-\alpha_kAp_k,\qquad p_{k+1}=r_{k+1}+\beta_kp_k$$
-with
-$$\alpha_k=\frac{\langle r_k,r_k\rangle}{\langle Ap_k,p_k\rangle},\qquad \beta_k=\frac{\langle r_{k+1},r_{k+1}\rangle}{\langle r_k,r_k\rangle}$$
-([[def-conjugate-gradient-recurrence]]).
+[F1] CG uses the recurrence $$x_{k+1}=x_k+\alpha_kp_k,\qquad r_{k+1}=r_k-\alpha_kAp_k,\qquad p_{k+1}=r_{k+1}+\beta_kp_k$$ with $$\alpha_k=\frac{\langle r_k,r_k\rangle}{\langle Ap_k,p_k\rangle},\qquad \beta_k=\frac{\langle r_{k+1},r_{k+1}\rangle}{\langle r_k,r_k\rangle}$$ ([[def-conjugate-gradient-recurrence]]).
 
-[L1] If $r_k\ne0$, then $p_k^*Ap_k>0$
-([[prop-conjugate-gradient-denominators-are-positive-before-convergence]]).
+[L1] If $r_k\ne0$, then $p_k^*Ap_k>0$ ([[prop-conjugate-gradient-denominators-are-positive-before-convergence]]).
 
-[L2] The energy inner product is
-$$\langle u,v\rangle_A=\langle Au,v\rangle$$
-([[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]).
+[L2] The energy inner product is $$\langle u,v\rangle_A=\langle Au,v\rangle$$ ([[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]).
 
 ## Proof
 **Proof technique:** induction on the later index.

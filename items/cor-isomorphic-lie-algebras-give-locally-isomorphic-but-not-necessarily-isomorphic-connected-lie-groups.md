@@ -33,14 +33,11 @@ simply connected integration.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and connected groups $G_1,G_2$ with isomorphic
-Lie algebras.
+**Given:** Countable choice and connected groups $G_1,G_2$ with isomorphic Lie algebras.
 
-[L1] Their simply connected integrations are isomorphic
-([[thm-equivalence-between-simply-connected-real-lie-groups-and-finite-dimensional-real-lie-algebras]]).
+[L1] Their simply connected integrations are isomorphic ([[thm-equivalence-between-simply-connected-real-lie-groups-and-finite-dimensional-real-lie-algebras]]).
 
-[L2] Each connected group is a discrete central quotient of that integration
-([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
+[L2] Each connected group is a discrete central quotient of that integration ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
 
 ## Proof
 

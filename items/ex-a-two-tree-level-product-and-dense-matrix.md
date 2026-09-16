@@ -34,8 +34,7 @@ product, and a dense matrix can be seen explicitly and are not the same notion.
 
 **Given:** The two full binary trees in the example.
 
-[F1] The local definition distinguishes common-level products, full products,
-and coordinatewise $(h,k)$-matrices. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
+[F1] The local definition distinguishes common-level products, full products, and coordinatewise $(h,k)$-matrices. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
 
 ## Verification
 

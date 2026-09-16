@@ -61,12 +61,6 @@ $\mathcal{D}_n$ has at least one and at most $2^{2n}$ elements.
 
 ## Remarks
 
-- **What this lemma is for.** It is the well-definedness obligation behind the
-  Catalan numbers: $\lvert\mathcal{D}_n\rvert$ is a natural number only because
-  $\mathcal{D}_n$ is finite, and the cardinality notation is defined for finite
-  sets alone.
+- **What this lemma is for.** It is the well-definedness obligation behind the Catalan numbers: $\lvert\mathcal{D}_n\rvert$ is a natural number only because $\mathcal{D}_n$ is finite, and the cardinality notation is defined for finite sets alone.
 
-- **The bound $2^{2n}$ is not the point.** It is the crude count of all words of
-  length $2n$ over a two-letter alphabet, recorded because it is what makes the
-  set finite; the exact count is the subject of the theorems below and is far
-  smaller.
+- **The bound $2^{2n}$ is not the point.** It is the crude count of all words of length $2n$ over a two-letter alphabet, recorded because it is what makes the set finite; the exact count is the subject of the theorems below and is far smaller.

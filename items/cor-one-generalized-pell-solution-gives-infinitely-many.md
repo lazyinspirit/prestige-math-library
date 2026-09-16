@@ -35,11 +35,9 @@ has one integral solution, then it has infinitely many integral solutions.
 
 **Given:** A nonzero solution $\alpha=x+y\sqrt D$ of $N_D(\alpha)=N$ and the fundamental Pell solution $\varepsilon_D>1$.
 
-[F1] The Pell norm is multiplicative
-([[lem-pell-norm-multiplication]]).
+[F1] The Pell norm is multiplicative ([[lem-pell-norm-multiplication]]).
 
-[F2] The fundamental Pell solution satisfies $\varepsilon_D>1$
-([[def-fundamental-pell-solution]]).
+[F2] The fundamental Pell solution satisfies $\varepsilon_D>1$ ([[def-fundamental-pell-solution]]).
 
 ## Proof
 

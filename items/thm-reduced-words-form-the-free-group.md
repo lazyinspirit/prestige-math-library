@@ -34,17 +34,13 @@ the free group on $X$.
 
 **Given:** A set $X$, its formal inverse alphabet, and a group $G$ with a function $u:X\to G$.
 
-[L1] Words, elementary cancellations, reduced words, and free equivalence are as in the reduced-word definition
-([[def-alphabet-words-and-reduction]]).
+[L1] Words, elementary cancellations, reduced words, and free equivalence are as in the reduced-word definition ([[def-alphabet-words-and-reduction]]).
 
-[L2] Induction proves a property of every finite word once it is proved for the empty word and preserved when one letter is appended
-([[thm-induction-principle]]).
+[L2] Induction proves a property of every finite word once it is proved for the empty word and preserved when one letter is appended ([[thm-induction-principle]]).
 
-[L3] A group has an associative operation with an identity and two-sided inverses, and a homomorphism preserves products
-([[def-group]], [[def-group-homomorphism]]).
+[L3] A group has an associative operation with an identity and two-sided inverses, and a homomorphism preserves products ([[def-group]], [[def-group-homomorphism]]).
 
-[L4] The free-group universal property is the extension-and-uniqueness condition in the definition of a free group
-([[def-free-group]]).
+[L4] The free-group universal property is the extension-and-uniqueness condition in the definition of a free group ([[def-free-group]]).
 
 ## Proof
 

@@ -40,13 +40,9 @@ The finiteness of the middle index set is part of the statement.
 
 ## Facts & Assumptions
 
-**Given:** Morphisms $f$ and $g$ between finite biproducts in an additive
-category, with matrix entries
-$f_{ji}$ and $g_{kj}$.
+**Given:** Morphisms $f$ and $g$ between finite biproducts in an additive category, with matrix entries $f_{ji}$ and $g_{kj}$.
 
-[L1] A morphism between finite biproducts is reconstructed from its matrix by a
-finite sum of injection-entry-projection terms
-([[thm-morphisms-between-finite-biproducts-correspond-to-matrices]]).
+[L1] A morphism between finite biproducts is reconstructed from its matrix by a finite sum of injection-entry-projection terms ([[thm-morphisms-between-finite-biproducts-correspond-to-matrices]]).
 
 ## Proof
 

@@ -38,22 +38,15 @@ $$x_j=\frac{\det(A_j(b))}{\det(A)}\qquad(0\leq j<n).$$
 
 **Given:** $F,n,A,b$ as in the statement.
 
-[F1] A field is a commutative ring, and every nonzero field element is a unit
-([[lem-field-is-a-commutative-ring]]).
+[F1] A field is a commutative ring, and every nonzero field element is a unit ([[lem-field-is-a-commutative-ring]]).
 
-[L1] Over a commutative ring, a unit determinant gives the unique Cramer
-solution $x_j=\det(A)^{-1}\det(A_j(b))$
-([[thm-cramers-rule-over-a-commutative-ring]]).
+[L1] Over a commutative ring, a unit determinant gives the unique Cramer solution $x_j=\det(A)^{-1}\det(A_j(b))$ ([[thm-cramers-rule-over-a-commutative-ring]]).
 
-[L2] A square matrix over a field is invertible exactly when its kernel is
-zero ([[thm-invertible-matrix-theorem]]).
+[L2] A square matrix over a field is invertible exactly when its kernel is zero ([[thm-invertible-matrix-theorem]]).
 
-[L3] A positive-sized square matrix over a commutative ring is invertible
-exactly when its determinant is a unit
-([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
+[L3] A positive-sized square matrix over a commutative ring is invertible exactly when its determinant is a unit ([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
 
-[L4] Matrix multiplication distributes over column addition
-([[thm-ring-matrix-arithmetic-laws]]).
+[L4] Matrix multiplication distributes over column addition ([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 

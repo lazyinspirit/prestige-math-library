@@ -30,15 +30,11 @@ the categorical trace of $J_V\circ T:V\to V^{**}$ is the ordinary trace of $T$.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional vector space $V$ and a linear endomorphism
-$T:V\to V$.
+**Given:** A finite-dimensional vector space $V$ and a linear endomorphism $T:V\to V$.
 
-[L1] The map $J_V:V\to V^{**}$ is the canonical comparison
-([[def-canonical-map-to-the-double-dual]]).
+[L1] The map $J_V:V\to V^{**}$ is the canonical comparison ([[def-canonical-map-to-the-double-dual]]).
 
-[L2] The ordinary trace of $T$ is defined basis-independently by
-[[def-trace-of-an-endomorphism]], and the categorical trace applies to
-$J_V\circ T$ by [[def-the-categorical-trace-of-a-morphism-into-the-double-dual]].
+[L2] The ordinary trace of $T$ is defined basis-independently by [[def-trace-of-an-endomorphism]], and the categorical trace applies to $J_V\circ T$ by [[def-the-categorical-trace-of-a-morphism-into-the-double-dual]].
 
 ## Verification
 

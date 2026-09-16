@@ -32,18 +32,11 @@ line bundle.
 
 ## Facts & Assumptions
 
-**Given:** The right action $z\cdot\varepsilon=z\varepsilon$ of
-$H=\{\pm1\}$ on $S^1$, and the representation
-$\rho(\varepsilon)t=\varepsilon t$ on $\mathbb R$.
+**Given:** The right action $z\cdot\varepsilon=z\varepsilon$ of $H=\{\pm1\}$ on $S^1$, and the representation $\rho(\varepsilon)t=\varepsilon t$ on $\mathbb R$.
 
-[F1] A principal bundle is locally equivariantly a product with its structure
-group. [[def-principal-g-bundle-and-associated-fiber-bundle]].
+[F1] A principal bundle is locally equivariantly a product with its structure group. [[def-principal-g-bundle-and-associated-fiber-bundle]].
 
-[F2] For a right principal bundle and a left representation, the associated
-relation is $[ph,v]=[p,\rho(h)v]$, and the quotient has its canonical smooth
-vector-bundle structure.
-[[def-associated-bundle-to-a-principal-bundle-and-representation]],
-[[thm-associated-vector-bundle-is-well-defined]].
+[F2] For a right principal bundle and a left representation, the associated relation is $[ph,v]=[p,\rho(h)v]$, and the quotient has its canonical smooth vector-bundle structure. [[def-associated-bundle-to-a-principal-bundle-and-representation]], [[thm-associated-vector-bundle-is-well-defined]].
 
 ## Verification
 

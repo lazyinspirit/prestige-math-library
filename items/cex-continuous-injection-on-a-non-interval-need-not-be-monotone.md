@@ -86,17 +86,6 @@ $0, 3 \in A$ and $3/2 \notin A$.
 
 ## Remarks
 
-- **The inverse is still continuous here, and that is a coincidence of this
-  example.** $f$ is a bijection onto $[0,1] \cup [2,3]$ and its inverse is the
-  same kind of piecewise map, continuous by the same argument. So this example
-  does not refute the continuity of the inverse; what it refutes is monotonicity,
-  and [[thm-continuous-inverse]] derives continuity of the inverse **from**
-  monotonicity, so on a domain that is not order-convex that route is
-  unavailable even when the conclusion happens to hold.
+- **The inverse is still continuous here, and that is a coincidence of this example.** $f$ is a bijection onto $[0,1] \cup [2,3]$ and its inverse is the same kind of piecewise map, continuous by the same argument. So this example does not refute the continuity of the inverse; what it refutes is monotonicity, and [[thm-continuous-inverse]] derives continuity of the inverse **from** monotonicity, so on a domain that is not order-convex that route is unavailable even when the conclusion happens to hold.
 
-- **Two pieces are enough, and the gap does the work.** The values on $[0,1]$ and
-  on $[2,3]$ never interfere, because the two images are disjoint; injectivity is
-  therefore free and the two pieces may be oriented oppositely. On an
-  order-convex domain the intermediate value theorem forbids exactly that, which
-  is the content of steps 1.2 to 4.1 of
-  [[thm-continuous-injection-on-an-interval-is-strictly-monotone]].
+- **Two pieces are enough, and the gap does the work.** The values on $[0,1]$ and on $[2,3]$ never interfere, because the two images are disjoint; injectivity is therefore free and the two pieces may be oriented oppositely. On an order-convex domain the intermediate value theorem forbids exactly that, which is the content of steps 1.2 to 4.1 of [[thm-continuous-injection-on-an-interval-is-strictly-monotone]].

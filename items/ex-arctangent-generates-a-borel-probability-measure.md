@@ -33,16 +33,11 @@ and $\mu_F$ is a probability measure.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, the function
-$F(x)=\arctan(x)/\pi + 1/2$, and its Lebesgue-Stieltjes
-measure $\mu_F$.
+**Given:** The Axiom of Countable Choice, the function $F(x)=\arctan(x)/\pi + 1/2$, and its Lebesgue-Stieltjes measure $\mu_F$.
 
-[L1] Assuming Countable Choice, every increasing right-continuous function defines a
-Lebesgue-Stieltjes measure, with half-open interval values given by increments.
-([[thm-existence-of-the-lebesgue-stieltjes-measure]])
+[L1] Assuming Countable Choice, every increasing right-continuous function defines a Lebesgue-Stieltjes measure, with half-open interval values given by increments. ([[thm-existence-of-the-lebesgue-stieltjes-measure]])
 
-[L2] Measures are continuous from below along increasing sets.
-([[thm-continuity-from-below-for-measures]])
+[L2] Measures are continuous from below along increasing sets. ([[thm-continuity-from-below-for-measures]])
 
 ## Verification
 
@@ -56,6 +51,4 @@ $$\mu_F((a,b]) = F(b)-F(a) = \frac{\arctan(b)-\arctan(a)}{\pi}.$$
 
 $$\mu_F((-n-1,n+1]) = F(n+1)-F(-n-1) = \frac{2\arctan(n+1)}{\pi}.$$
 
-Because $\arctan(n+1) \to \pi/2$, [L2] gives
-$\mu_F(\mathbb{R})=\lim_n 2\arctan(n+1)/\pi = 1$. So $\mu_F$ is a probability
-measure. [step 1.1, L2] ∎
+Because $\arctan(n+1) \to \pi/2$, [L2] gives $\mu_F(\mathbb{R})=\lim_n 2\arctan(n+1)/\pi = 1$. So $\mu_F$ is a probability measure. [step 1.1, L2] ∎

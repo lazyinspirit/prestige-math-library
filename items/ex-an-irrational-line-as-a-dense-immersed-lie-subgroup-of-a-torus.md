@@ -39,24 +39,17 @@ image is dense, proper, nonclosed, and nonembedded in $\mathbb T^2$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, an irrational real number $\alpha$, and the
-displayed winding homomorphism $i$.
+**Given:** $\mathrm{AC}_\omega$, an irrational real number $\alpha$, and the displayed winding homomorphism $i$.
 
-[A1] The winding map is an injective immersion and homomorphism, and its image
-is dense. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
+[A1] The winding map is an injective immersion and homomorphism, and its image is dense. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
 
-[A2] The homomorphism-image theorem equips its image with the unique intrinsic
-immersed-subgroup structure for which the corestriction is a submersion.
-[[def-countable-choice]],
-[[thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup]].
+[A2] The homomorphism-image theorem equips its image with the unique intrinsic immersed-subgroup structure for which the corestriction is a submersion. [[def-countable-choice]], [[thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup]].
 
-[F1] Embeddedness means that this intrinsic topology agrees with the ambient
-subspace topology. [[def-immersed-embedded-and-closed-lie-subgroup]].
+[F1] Embeddedness means that this intrinsic topology agrees with the ambient subspace topology. [[def-immersed-embedded-and-closed-lie-subgroup]].
 
 ## Verification
 
-**Proof technique:** calculate the image and compare its intrinsic and ambient
-topologies.
+**Proof technique:** calculate the image and compare its intrinsic and ambient topologies.
 
 1.1 By [A1], $i$ is an injective immersed homomorphism with dense image. Since its kernel is trivial, the canonical image structure in [A2] is transported from the one-dimensional source $\mathbb R$. [A1, A2]
 

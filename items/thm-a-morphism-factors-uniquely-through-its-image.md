@@ -34,11 +34,9 @@ $$i\circ\widehat f=f.$$
 
 ## Facts & Assumptions
 
-**Given:** A morphism $f:A\to B$, a cokernel $c:B\to C$ of $f$, and a kernel
-$i:\operatorname{im}(f)\to B$ of $c$.
+**Given:** A morphism $f:A\to B$, a cokernel $c:B\to C$ of $f$, and a kernel $i:\operatorname{im}(f)\to B$ of $c$.
 
-[L1] The image of $f$ is the kernel of a cokernel of $f$
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L1] The image of $f$ is the kernel of a cokernel of $f$ ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
 ## Proof
 

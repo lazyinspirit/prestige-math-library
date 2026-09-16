@@ -70,10 +70,5 @@ where $|\cdot|$ is the absolute value of $\mathbb{R}$ ([[def-abs-value]]).
 
 ## Remarks
 
-- **Read with $z$ fixed, this says the function $u \mapsto d(u,z)$ does not
-  increase distances**: its values at $x$ and at $y$ differ by at most $d(x,y)$.
-  That is the model for [[lem-distance-to-set-is-lipschitz]], which proves the
-  same estimate with the point $z$ replaced by a nonempty set.
-- The inequality specialises, on $\mathbb{R}$ with $d(u,v) = |u-v|$
-  ([[lem-real-line-is-a-metric-space]]), to the familiar
-  $\big||x - z| - |y - z|\big| \le |x - y|$.
+- **Read with $z$ fixed, this says the function $u \mapsto d(u,z)$ does not increase distances**: its values at $x$ and at $y$ differ by at most $d(x,y)$. That is the model for [[lem-distance-to-set-is-lipschitz]], which proves the same estimate with the point $z$ replaced by a nonempty set.
+- The inequality specialises, on $\mathbb{R}$ with $d(u,v) = |u-v|$ ([[lem-real-line-is-a-metric-space]]), to the familiar $\big||x - z| - |y - z|\big| \le |x - y|$.

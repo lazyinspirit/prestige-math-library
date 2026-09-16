@@ -38,27 +38,19 @@ for every $k\in\mathbb Z$.
 
 **Given:** AC and finite based CW complexes and pairs.
 
-[F1] $K^0$ is contravariantly functorial and homotopy invariant
-([[prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant]]).
+[F1] $K^0$ is contravariantly functorial and homotopy invariant ([[prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant]]).
 
-[F2] Every reduced cofibration gives a natural exact sequence at all iterated
-mapping-cone stages
-([[thm-reduced-k-theory-exact-sequence-of-a-cofibration]]).
+[F2] Every reduced cofibration gives a natural exact sequence at all iterated mapping-cone stages ([[thm-reduced-k-theory-exact-sequence-of-a-cofibration]]).
 
-[F3] Negative absolute, reduced, and relative groups are defined by iterated
-suspension ([[def-negative-degree-complex-k-groups]]).
+[F3] Negative absolute, reduced, and relative groups are defined by iterated suspension ([[def-negative-degree-complex-k-groups]]).
 
-[F4] Bott multiplication extends these groups naturally and uniquely to all
-integer degrees with period two ([[thm-complex-bott-periodicity]]).
+[F4] Bott multiplication extends these groups naturally and uniquely to all integer degrees with period two ([[thm-complex-bott-periodicity]]).
 
-[F5] Reduced external product descends to smash products
-([[def-external-product-in-complex-k-theory]]).
+[F5] Reduced external product descends to smash products ([[def-external-product-in-complex-k-theory]]).
 
-[F6] The reduced sphere groups have the even/odd parity calculation
-([[cor-complex-k-theory-of-spheres]]).
+[F6] The reduced sphere groups have the even/odd parity calculation ([[cor-complex-k-theory-of-spheres]]).
 
-[A1] AC is propagated from [F1], [F2], [F4], [F5], and [F6], including their
-bundle-homotopy, exactness, and reduced-product uses.
+[A1] AC is propagated from [F1], [F2], [F4], [F5], and [F6], including their bundle-homotopy, exactness, and reduced-product uses.
 
 ## Proof
 

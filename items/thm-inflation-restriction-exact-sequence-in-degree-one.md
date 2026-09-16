@@ -35,12 +35,9 @@ is exact.
 
 **Given:** A normal subgroup $N\trianglelefteq G$ and an abelian $G$-group $A$.
 
-[L1] Restriction and inflation in degree one are given by the explicit cocycle
-formulas of
-[[def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology]].
+[L1] Restriction and inflation in degree one are given by the explicit cocycle formulas of [[def-restriction-inflation-and-the-quotient-conjugation-action-on-first-cohomology]].
 
-[L2] The crossed-homomorphism model agrees with the inhomogeneous degree-one
-model ([[thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]]).
+[L2] The crossed-homomorphism model agrees with the inhomogeneous degree-one model ([[thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]]).
 
 ## Proof
 

@@ -83,21 +83,8 @@ property 2 as displayed, obtained from
 
 ## Remarks
 
-- **The two properties pull in opposite directions and both hold.** Perfectness
-  says $C$ is nowhere sparse *within itself*: every neighbourhood of a point of
-  $C$ contains infinitely many points of $C$. Property 2 says $C$ is nowhere
-  thick *in $\mathbb{R}$*: it contains no segment. The Cantor set is the standard
-  demonstration that these are independent, and it is also why "perfect" cannot
-  be paraphrased as "contains an interval".
+- **The two properties pull in opposite directions and both hold.** Perfectness says $C$ is nowhere sparse *within itself*: every neighbourhood of a point of $C$ contains infinitely many points of $C$. Property 2 says $C$ is nowhere thick *in $\mathbb{R}$*: it contains no segment. The Cantor set is the standard demonstration that these are independent, and it is also why "perfect" cannot be paraphrased as "contains an interval".
 
-- **Uncountability follows from the first property alone.** Every nonempty
-  perfect subset of $\mathbb{R}$ is uncountable
-  ([[thm-perfect-set-uncountable-r]]), so property 1 already forces $C$ to have
-  more than countably many points, with no reference to digits. The digit route
-  gives the same conclusion and more, an explicit bijection with
-  $\{0,1\}^{\mathbb{N}}$ ([[thm-cantor-set-ternary-description]]).
+- **Uncountability follows from the first property alone.** Every nonempty perfect subset of $\mathbb{R}$ is uncountable ([[thm-perfect-set-uncountable-r]]), so property 1 already forces $C$ to have more than countably many points, with no reference to digits. The digit route gives the same conclusion and more, an explicit bijection with $\{0,1\}^{\mathbb{N}}$ ([[thm-cantor-set-ternary-description]]).
 
-- **The same pair of properties holds for the fat Cantor set**
-  ([[thm-fat-cantor-set-has-positive-measure]]), which is also compact, perfect
-  and nowhere dense. What differs there is only the measure, so neither property
-  above has anything to do with total length.
+- **The same pair of properties holds for the fat Cantor set** ([[thm-fat-cantor-set-has-positive-measure]]), which is also compact, perfect and nowhere dense. What differs there is only the measure, so neither property above has anything to do with total length.

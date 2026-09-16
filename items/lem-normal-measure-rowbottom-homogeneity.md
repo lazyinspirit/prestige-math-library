@@ -35,21 +35,13 @@ every $c_n$ is constant on $[A]^n$.
 
 ## Facts & Assumptions
 
-**Given:** ZFC, a normal measure $U$ on the uncountable cardinal $\kappa$, and
-the displayed family of colourings. We replace each codomain by the actual
-range and identify it with some ordinal $\lambda_n<\kappa$.
+**Given:** ZFC, a normal measure $U$ on the uncountable cardinal $\kappa$, and the displayed family of colourings. We replace each codomain by the actual range and identify it with some ordinal $\lambda_n<\kappa$.
 
-[F1] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal measure
-is a nonprincipal $\kappa$-complete ultrafilter; in particular it is closed
-under intersections of fewer than $\kappa$ measure-one sets.
+[F1] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal measure is a nonprincipal $\kappa$-complete ultrafilter; in particular it is closed under intersections of fewer than $\kappa$ measure-one sets.
 
-[F2] [[thm-lc-measurability-normal-measures-and-embeddings]]: A normal measure
-is closed under diagonal intersections of $\kappa$-sequences of measure-one
-sets.
+[F2] [[thm-lc-measurability-normal-measures-and-embeddings]]: A normal measure is closed under diagonal intersections of $\kappa$-sequences of measure-one sets.
 
-[F3] [[def-axiom-of-choice]]: Every family of nonempty sets has a choice
-function; this is used for the simultaneous choices of homogeneous sets in the
-induction and for the sequence indexed by $n<\omega$.
+[F3] [[def-axiom-of-choice]]: Every family of nonempty sets has a choice function; this is used for the simultaneous choices of homogeneous sets in the induction and for the sequence indexed by $n<\omega$.
 
 ## Proof
 

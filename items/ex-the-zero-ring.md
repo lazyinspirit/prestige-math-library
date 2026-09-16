@@ -80,25 +80,8 @@ $0_Z := z$ and $1_Z := z$. Then:
 
 ## Remarks
 
-- **This is the item that makes $1 \ne 0$ a visible hypothesis.**
-  [[def-zero-divisor-and-integral-domain]], [[def-division-ring]] and
-  [[def-field]] each carry that clause, and the zero ring is what each of them
-  excludes. It satisfies every other clause of the first two: it is a commutative
-  ring, it has no zero divisors, and every nonzero element of it is vacuously a
-  unit. For [[def-field]] the clause $0 \ne 1$ is not the only one that fails,
-  and this is worth saying rather than glossing: axiom (M) there asks that
-  $F \setminus \{0\}$ be an abelian group with identity $1$, and in the zero ring
-  that set is empty, so it has no identity at all. The two failures are the same
-  phenomenon, since $1 = 0$ is exactly what empties $F \setminus \{0\}$.
+- **This is the item that makes $1 \ne 0$ a visible hypothesis.** [[def-zero-divisor-and-integral-domain]], [[def-division-ring]] and [[def-field]] each carry that clause, and the zero ring is what each of them excludes. It satisfies every other clause of the first two: it is a commutative ring, it has no zero divisors, and every nonzero element of it is vacuously a unit. For [[def-field]] the clause $0 \ne 1$ is not the only one that fails, and this is worth saying rather than glossing: axiom (M) there asks that $F \setminus \{0\}$ be an abelian group with identity $1$, and in the zero ring that set is empty, so it has no identity at all. The two failures are the same phenomenon, since $1 = 0$ is exactly what empties $F \setminus \{0\}$.
 
-- **Characteristic $1$ occurs exactly here.** By claim 2 a ring has $1 = 0$ only
-  if it is the zero ring, and by [[def-ring-characteristic]] the characteristic
-  is $1$ exactly when $1 \cdot 1_R = 1_R = 0_R$. So the zero ring is the only
-  ring of characteristic $1$, and every other ring has characteristic $0$ or a
-  characteristic that is at least $2$.
+- **Characteristic $1$ occurs exactly here.** By claim 2 a ring has $1 = 0$ only if it is the zero ring, and by [[def-ring-characteristic]] the characteristic is $1$ exactly when $1 \cdot 1_R = 1_R = 0_R$. So the zero ring is the only ring of characteristic $1$, and every other ring has characteristic $0$ or a characteristic that is at least $2$.
 
-- **The zero ring is not excluded from being a ring.** [[def-ring]] does not
-  require $1 \ne 0$, deliberately. The ring of all functions from the empty set
-  into a ring has exactly one element, the empty function
-  ([[def-ring-of-functions]]), so it is the zero ring; requiring $1 \ne 0$ in the
-  definition of a ring would make that construction partial.
+- **The zero ring is not excluded from being a ring.** [[def-ring]] does not require $1 \ne 0$, deliberately. The ring of all functions from the empty set into a ring has exactly one element, the empty function ([[def-ring-of-functions]]), so it is the zero ring; requiring $1 \ne 0$ in the definition of a ring would make that construction partial.

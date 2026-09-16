@@ -34,9 +34,7 @@ irreducible complex character of $G$.
 
 **Given:** The cyclic group $C_4$.
 
-[F1] In $C_4$, the divisor $2$ of $|C_4|=4$ is not an irreducible character
-degree
-([[ex-c-four-shows-divisibility-of-irreducible-degrees-by-the-group-order-is-not-an-equivalence]]).
+[F1] In $C_4$, the divisor $2$ of $|C_4|=4$ is not an irreducible character degree ([[ex-c-four-shows-divisibility-of-irreducible-degrees-by-the-group-order-is-not-an-equivalence]]).
 
 ## Refutation
 

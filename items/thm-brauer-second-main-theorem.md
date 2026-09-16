@@ -39,33 +39,19 @@ $$ \chi(uv)= \sum_{\substack{c\text{ a block of }kH\\c^G=B}} \ \sum_{\varphi\in\
 
 ## Facts & Assumptions
 
-**Given:** AC and the modular system, block, character, $p$-element, local
-block, and Brauer character in the Statement.
+**Given:** AC and the modular system, block, character, $p$-element, local block, and Brauer character in the Statement.
 
-[F1] Generalized decomposition numbers give the unique full expansion of
-$v\mapsto\chi(uv)$ on the $p$-regular elements of $H$
-([[thm-generalized-decomposition-numbers-exist-and-are-unique]]).
+[F1] Generalized decomposition numbers give the unique full expansion of $v\mapsto\chi(uv)$ on the $p$-regular elements of $H$ ([[thm-generalized-decomposition-numbers-exist-and-are-unique]]).
 
-[F2] The induced local block $c^G$ is defined by the subsection convention
-([[def-brauer-subsection]]).
+[F2] The induced local block $c^G$ is defined by the subsection convention ([[def-brauer-subsection]]).
 
-[F3] If $c^G\ne B$, the lifted $c$-component $\chi_c$ of the restricted
-character vanishes at every $uv$ under the algebraically closed residue-field
-hypothesis ([[lem-local-block-projection-controls-generalized-decomposition-support]]
-and [[def-algebraically-closed-field]]).
+[F3] If $c^G\ne B$, the lifted $c$-component $\chi_c$ of the restricted character vanishes at every $uv$ under the algebraically closed residue-field hypothesis ([[lem-local-block-projection-controls-generalized-decomposition-support]] and [[def-algebraically-closed-field]]).
 
-[F4] Ordinary and Brauer irreducibles lie in unique blocks, and ordinary
-decomposition numbers between distinct blocks are zero
-([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]] and
-[[prop-decomposition-matrix-is-block-diagonal-after-block-ordering]]).
+[F4] Ordinary and Brauer irreducibles lie in unique blocks, and ordinary decomposition numbers between distinct blocks are zero ([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]] and [[prop-decomposition-matrix-is-block-diagonal-after-block-ordering]]).
 
-[F5] The irreducible Brauer characters of $H$ are linearly independent on
-its $p$-regular elements
-([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
+[F5] The irreducible Brauer characters of $H$ are linearly independent on its $p$-regular elements ([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
 
-[F6] AC is available ([[def-axiom-of-choice]]) and is used through the
-AC-stated subsection and local-projection suppliers F2–F3. The basis
-partition and all sums below are finite.
+[F6] AC is available ([[def-axiom-of-choice]]) and is used through the AC-stated subsection and local-projection suppliers F2–F3. The basis partition and all sums below are finite.
 
 ## Proof
 

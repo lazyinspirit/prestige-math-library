@@ -34,9 +34,7 @@ $M\times G$.
 
 **Given:** The inversion action of $C_2$ on $\mathbb Z$.
 
-[L1] The zero class corresponds to split extensions, equivalently semidirect
-products for the fixed action
-([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
+[L1] The zero class corresponds to split extensions, equivalently semidirect products for the fixed action ([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
 
 ## Refutation
 

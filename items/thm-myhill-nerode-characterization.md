@@ -30,9 +30,7 @@ Nerode equivalence relation $\equiv_L$ has finite index.
 
 **Given:** A language $L\subseteq\Sigma^*$ over an alphabet $\Sigma$.
 
-[L1] By [[def-regular-language-by-dfa-recognition]], a language is regular
-exactly when some DFA recognizes it; acceptance and the recognized language
-are those of [[def-dfa-acceptance-and-recognized-language]].
+[L1] By [[def-regular-language-by-dfa-recognition]], a language is regular exactly when some DFA recognizes it; acceptance and the recognized language are those of [[def-dfa-acceptance-and-recognized-language]].
 
 [L2] By [[lem-dfa-states-refine-nerode-classes]], if a DFA recognizes $L$ then distinct Nerode classes of $L$ must reach distinct reachable states of that DFA.
 

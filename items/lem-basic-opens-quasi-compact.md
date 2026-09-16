@@ -26,11 +26,9 @@ $D(f)\subseteq\operatorname{Spec}A$ is quasi-compact.
 
 **Given:** The Axiom of Choice, a commutative ring $A$, and $f\in A$.
 
-[F1] $D(f)$ is homeomorphic to $\operatorname{Spec}(A_f)$
-([[lem-spectrum-localization-open-immersion]]).
+[F1] $D(f)$ is homeomorphic to $\operatorname{Spec}(A_f)$ ([[lem-spectrum-localization-open-immersion]]).
 
-[F2] Assuming the Axiom of Choice, the prime spectrum of every commutative ring is compact
-([[thm-prime-spectrum-is-compact]]).
+[F2] Assuming the Axiom of Choice, the prime spectrum of every commutative ring is compact ([[thm-prime-spectrum-is-compact]]).
 
 ## Proof
 

@@ -35,28 +35,21 @@ This includes finite and empty linear orders. No choice principle is used.
 
 ## Facts & Assumptions
 
-**Given:** An at most countable set $L$ carrying a linear order $\le_L$; write
-$<_L$ for its associated strict order.
+**Given:** An at most countable set $L$ carrying a linear order $\le_L$; write $<_L$ for its associated strict order.
 
-[F1] A linear order is a partial order in which every pair is comparable, and
-$x<y$ means $x\le y$ and $x\ne y$. [[def-partial-order]]
+[F1] A linear order is a partial order in which every pair is comparable, and $x<y$ means $x\le y$ and $x\ne y$. [[def-partial-order]]
 
-[F2] A nonempty set is at most countable if and only if it is the range of a
-surjection from $\mathbb N$. [[def-countable]],
-[[lem-countable-iff-surjection-from-n]]
+[F2] A nonempty set is at most countable if and only if it is the range of a surjection from $\mathbb N$. [[def-countable]], [[lem-countable-iff-surjection-from-n]]
 
-[F3] There is a bijection $\rho:\mathbb N\to\mathbb Q$.
-[[thm-rationals-countable]], [[def-injection-surjection-bijection]]
+[F3] There is a bijection $\rho:\mathbb N\to\mathbb Q$. [[thm-rationals-countable]], [[def-injection-surjection-bijection]]
 
-[F4] The rationals form a totally ordered field. In particular, if $a<b$ then
-$a<(a+b)/2<b$, and $a-1<a<a+1$. [[thm-rat-ordered-field]]
+[F4] The rationals form a totally ordered field. In particular, if $a<b$ then $a<(a+b)/2<b$, and $a-1<a<a+1$. [[thm-rat-ordered-field]]
 
 [F5] Recursion holds on $\mathbb N$. [[thm-recursion]]
 
 [F6] Induction holds on $\mathbb N$. [[thm-induction-principle]]
 
-[F7] Every nonempty subset of $\mathbb N$ has a least element.
-[[thm-well-ordering-principle]]
+[F7] Every nonempty subset of $\mathbb N$ has a least element. [[thm-well-ordering-principle]]
 
 ## Proof
 
@@ -74,10 +67,5 @@ $a<(a+b)/2<b$, and $a-1<a<a+1$. [[thm-rat-ordered-field]]
 
 ## Remarks
 
-- Allowing repetitions in $e$ is essential for the library's convention: a
-  nonempty finite set is at most countable and has a surjection from
-  $\mathbb N$, but need not be bijective with it. The “already placed” branch
-  in step 2.1 handles repetitions.
-- Monk's proof chooses a rational in each finite gap. Taking the least index in
-  a fixed enumeration of $\mathbb Q$ implements that instruction without a
-  countable choice function.
+- Allowing repetitions in $e$ is essential for the library's convention: a nonempty finite set is at most countable and has a surjection from $\mathbb N$, but need not be bijective with it. The “already placed” branch in step 2.1 handles repetitions.
+- Monk's proof chooses a rational in each finite gap. Taking the least index in a fixed enumeration of $\mathbb Q$ implements that instruction without a countable choice function.

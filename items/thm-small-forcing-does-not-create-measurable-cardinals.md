@@ -33,27 +33,17 @@ seed $\kappa$.
 
 ## Facts & Assumptions
 
-**Given:** The ground model $V$, forcing $P$, generic $G$, and cardinal
-$\kappa$ in the statement. ZFC, including Choice, is assumed in both the
-ground and its forcing extension.
+**Given:** The ground model $V$, forcing $P$, generic $G$, and cardinal $\kappa$ in the statement. ZFC, including Choice, is assumed in both the ground and its forcing extension.
 
-[F1] [[def-ultrafilter]] and [[thm-ultrafilter-characterisation]] give the
-properness, complement-decision, finite-intersection, upward-closure,
-principality, and nonprincipality laws. In this item, $\kappa$-complete means
-closed under intersections indexed by every ordinal below $\kappa$, including
-the empty intersection.
+[F1] [[def-ultrafilter]] and [[thm-ultrafilter-characterisation]] give the properness, complement-decision, finite-intersection, upward-closure, principality, and nonprincipality laws. In this item, $\kappa$-complete means closed under intersections indexed by every ordinal below $\kappa$, including the empty intersection.
 
-[F2] [[thm-forcing-theorem]] supplies the definable forcing relation, truth
-lemma, and persistence used in the restriction argument.
+[F2] [[thm-forcing-theorem]] supplies the definable forcing relation, truth lemma, and persistence used in the restriction argument.
 
-[F3] [[def-axiom-of-choice]] supplies the cardinal comparisons, enumerations,
-elementary submodels, and ultrapowers used below.
+[F3] [[def-axiom-of-choice]] supplies the cardinal comparisons, enumerations, elementary submodels, and ultrapowers used below.
 
 ## Proof
 
-**Proof technique:** the no-new-measurables half of the Lévy--Solovay
-theorem, proved through the small-forcing case of the gap-forcing restriction
-argument.
+**Proof technique:** the no-new-measurables half of the Lévy--Solovay theorem, proved through the small-forcing case of the gap-forcing restriction argument.
 
 1.1 The trivial-forcing case is immediate, so suppose $P$ is nontrivial and replace it by an isomorphic forcing on an ordinal of size $\mu=|P|^V$. A measure on $\kappa$ is uniform: if $A$ in the measure had size $\lambda<\kappa$, intersecting the complements of its $\lambda$ singletons would both retain $A$ and make the intersection empty. Uniformity and $\kappa$-completeness make $\kappa$ regular, since the bounded pieces of a cofinal partition of length below $\kappa$ would all be measure-small. They also make $\kappa$ a strong limit: if $\kappa\le 2^\lambda$ for $\lambda<\kappa$, choose $\kappa$ distinct binary subsets of $\lambda$; for every coordinate take the bit occurring on a measure-one set and intersect these fewer than $\kappa$ sets. The intersection has at most one member, contradicting uniformity. Thus $\kappa$ is strongly inaccessible in $V[G]$. Forcing of size $\mu$ is $\mu^+$-cc and preserves cardinals at and above $\mu^+$, so $\kappa$ is also a ground cardinal. Choose a regular ground cardinal $\delta$ with $$ \mu<\delta<\delta^+<\kappa. $$ [F1, F3]
 

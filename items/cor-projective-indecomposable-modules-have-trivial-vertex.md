@@ -33,18 +33,13 @@ the trivial subgroup $1$.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a field $k$ of characteristic $p$, and an
-indecomposable finite-dimensional projective $kG$-module $P$.
+**Given:** A finite group $G$, a field $k$ of characteristic $p$, and an indecomposable finite-dimensional projective $kG$-module $P$.
 
-[F1] Vertices are minimal $p$-subgroups for relative projectivity
-([[def-vertex-and-source-of-an-indecomposable-module]]).
+[F1] Vertices are minimal $p$-subgroups for relative projectivity ([[def-vertex-and-source-of-an-indecomposable-module]]).
 
-[L1] Vertices exist for indecomposable modules
-([[thm-green-vertex-source-existence-and-conjugacy]]).
+[L1] Vertices exist for indecomposable modules ([[thm-green-vertex-source-existence-and-conjugacy]]).
 
-[L2] Induction from the trivial subgroup preserves projectives, and projectives
-are direct summands of free modules
-([[prop-restriction-and-induction-preserve-projectives]], [[thm-projective-module-characterizations]]).
+[L2] Induction from the trivial subgroup preserves projectives, and projectives are direct summands of free modules ([[prop-restriction-and-induction-preserve-projectives]], [[thm-projective-module-characterizations]]).
 
 ## Proof
 

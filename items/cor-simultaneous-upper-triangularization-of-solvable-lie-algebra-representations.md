@@ -33,17 +33,13 @@ there is a basis in which every representing matrix is upper triangular.
 
 ## Facts & Assumptions
 
-**Given:** A representation of $\mathfrak g$ on $V$ under Lie's theorem
-hypotheses.
+**Given:** A representation of $\mathfrak g$ on $V$ under Lie's theorem hypotheses.
 
-[L1] Every nonzero finite-dimensional module under these hypotheses has a
-common eigenvector ([[thm-lies-theorem]]).
+[L1] Every nonzero finite-dimensional module under these hypotheses has a common eigenvector ([[thm-lies-theorem]]).
 
-[L2] Invariant subspaces and their quotients carry the restricted and induced
-representations ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
+[L2] Invariant subspaces and their quotients carry the restricted and induced representations ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
 
-[L3] The canonical vector-space quotient projection is linear and surjective
-([[def-quotient-vector-space-and-canonical-projection]]).
+[L3] The canonical vector-space quotient projection is linear and surjective ([[def-quotient-vector-space-and-canonical-projection]]).
 
 ## Proof
 

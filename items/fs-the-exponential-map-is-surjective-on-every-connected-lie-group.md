@@ -33,26 +33,17 @@ connected Lie group.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $G=\operatorname{GL}_2^+(\mathbb R)$ and
-$A=\operatorname{diag}(-2,-1/2)$.
+**Given:** $\mathrm{AC}_\omega$, $G=\operatorname{GL}_2^+(\mathbb R)$ and $A=\operatorname{diag}(-2,-1/2)$.
 
-[F1] The Lie-group exponential is defined from its invariant integral curve.
-[[def-exponential-map-of-a-lie-group]].
+[F1] The Lie-group exponential is defined from its invariant integral curve. [[def-exponential-map-of-a-lie-group]].
 
-[F2] Matrix products, identity, and determinant have their standard formulas.
-[[def-matrix-product-and-identity-matrix]].
-[[def-determinant-of-a-square-matrix]].
+[F2] Matrix products, identity, and determinant have their standard formulas. [[def-matrix-product-and-identity-matrix]]. [[def-determinant-of-a-square-matrix]].
 
-[F3] Linear matrix ODEs have unique compact-interval solutions, and the scalar
-exponential series converges absolutely.
-[[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
-[[lem-exponential-series-has-infinite-radius]].
+[F3] Linear matrix ODEs have unique compact-interval solutions, and the scalar exponential series converges absolutely. [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]]. [[lem-exponential-series-has-infinite-radius]].
 
-[F4] Every invertible real matrix has a polar decomposition into an orthogonal
-factor and a positive-definite factor. [[thm-polar-decomposition]].
+[F4] Every invertible real matrix has a polar decomposition into an orthogonal factor and a positive-definite factor. [[thm-polar-decomposition]].
 
-[F5] $\mathrm{AC}_\omega$ is countable choice; it is required by the
-exponential-map interface [F1]. [[def-countable-choice]].
+[F5] $\mathrm{AC}_\omega$ is countable choice; it is required by the exponential-map interface [F1]. [[def-countable-choice]].
 
 ## Refutation
 

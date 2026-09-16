@@ -34,25 +34,15 @@ $$|G|x\in R(G).$$
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$ and an element $x\in R_{\mathbb Q}(G)$ whose
-restriction to every cyclic subgroup lies in the integral character ring of that
-subgroup.
+**Given:** A finite group $G$ and an element $x\in R_{\mathbb Q}(G)$ whose restriction to every cyclic subgroup lies in the integral character ring of that subgroup.
 
-[F1] There is an Artin relation
-$|G|1_G=\sum_i a_i\operatorname{Ind}_{C_i}^G1_{C_i}$ with $C_i\le G$ cyclic and
-$a_i\in\mathbb Z$ ([[lem-artin-cyclic-permutation-relation]]).
+[F1] There is an Artin relation $|G|1_G=\sum_i a_i\operatorname{Ind}_{C_i}^G1_{C_i}$ with $C_i\le G$ cyclic and $a_i\in\mathbb Z$ ([[lem-artin-cyclic-permutation-relation]]).
 
-[F2] Induction and restriction satisfy the projection formula:
-$\bigl(\operatorname{Ind}_H^G\chi\bigr)\psi=
-\operatorname{Ind}_H^G(\chi\,\operatorname{Res}_H^G\psi)$
-([[prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]]).
+[F2] Induction and restriction satisfy the projection formula: $\bigl(\operatorname{Ind}_H^G\chi\bigr)\psi= \operatorname{Ind}_H^G(\chi\,\operatorname{Res}_H^G\psi)$ ([[prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings]]).
 
-[F3] The integral character ring $R(G)$ is closed under integral linear
-combinations ([[def-virtual-character-and-character-ring-of-a-finite-group]]).
+[F3] The integral character ring $R(G)$ is closed under integral linear combinations ([[def-virtual-character-and-character-ring-of-a-finite-group]]).
 
-[A1] If $\theta$ is an honest complex character of a subgroup $C\le G$, then
-$\operatorname{Ind}_C^G\theta$ is an honest complex character of $G$; hence
-induction sends $R(C)$ into $R(G)$ by $\mathbb Z$-linearity.
+[A1] If $\theta$ is an honest complex character of a subgroup $C\le G$, then $\operatorname{Ind}_C^G\theta$ is an honest complex character of $G$; hence induction sends $R(C)$ into $R(G)$ by $\mathbb Z$-linearity.
 
 ## Proof
 

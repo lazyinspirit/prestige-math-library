@@ -60,8 +60,7 @@ $$\frac{s^2(3t-s)}6.$$
 
 [F9] The fundamental theorem, the derivative power rule, and derivative algebra evaluate the compact polynomial integrals used below. [[thm-ftc-second-part]], [[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]].
 
-[F10] AC is used through the Brownian, deterministic-integration, normal-law,
-and characteristic-function uniqueness suppliers. [[def-axiom-of-choice]].
+[F10] AC is used through the Brownian, deterministic-integration, normal-law, and characteristic-function uniqueness suppliers. [[def-axiom-of-choice]].
 
 ## Verification
 
@@ -83,8 +82,4 @@ and characteristic-function uniqueness suppliers. [[def-axiom-of-choice]].
 
 ## Source notes
 
-Yoshida, Section 6.1, Lemma 6.1.3 and equation (6.5), printed
-pp. 174--175, supplies the Gaussian finite-combination and Brownian covariance
-inputs; Section 6.3 supplies Brownian path regularity context. The zero repair,
-Riemann-sum characteristic-function passage, double-integral covariance, and
-polynomial evaluation are derived in full above.
+Yoshida, Section 6.1, Lemma 6.1.3 and equation (6.5), printed pp. 174--175, supplies the Gaussian finite-combination and Brownian covariance inputs; Section 6.3 supplies Brownian path regularity context. The zero repair, Riemann-sum characteristic-function passage, double-integral covariance, and polynomial evaluation are derived in full above.

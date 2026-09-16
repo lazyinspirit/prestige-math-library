@@ -41,18 +41,11 @@ $\mathbb H=\{w\in\mathbb C:\operatorname{Im}w>0\}$.
 
 **Given:** The upper half-strip $S$ above.
 
-[F1] The exponential is a biholomorphism from the principal strip
-$P=\{u\in\mathbb C:-\pi<\operatorname{Im}u<\pi\}$ onto the slit plane
-$\mathbb C\setminus\{x\in\mathbb R:x\le0\}$, with inverse the principal
-logarithm ([[thm-principal-exponential-biholomorphism-from-principal-strip]]).
+[F1] The exponential is a biholomorphism from the principal strip $P=\{u\in\mathbb C:-\pi<\operatorname{Im}u<\pi\}$ onto the slit plane $\mathbb C\setminus\{x\in\mathbb R:x\le0\}$, with inverse the principal logarithm ([[thm-principal-exponential-biholomorphism-from-principal-strip]]).
 
-[F2] The Joukowski map $J(\eta)=\frac12(\eta+\eta^{-1})$ is a biholomorphism
-from $\{|\eta|>1\}$ onto $\mathbb C\setminus[-1,1]$
-([[thm-joukowski-biholomorphism-outside-unit-disc]]).
+[F2] The Joukowski map $J(\eta)=\frac12(\eta+\eta^{-1})$ is a biholomorphism from $\{|\eta|>1\}$ onto $\mathbb C\setminus[-1,1]$ ([[thm-joukowski-biholomorphism-outside-unit-disc]]).
 
-[F3] Complex sine is defined by
-$$\sin z=\frac{\exp(iz)-\exp(-iz)}{2i}$$
-([[def-complex-trigonometric-and-hyperbolic-functions]]).
+[F3] Complex sine is defined by $$\sin z=\frac{\exp(iz)-\exp(-iz)}{2i}$$ ([[def-complex-trigonometric-and-hyperbolic-functions]]).
 
 ## Proof
 

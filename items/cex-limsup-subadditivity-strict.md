@@ -63,18 +63,8 @@ refuted as [[fs-limsup-additive]]; this item is the named witness.
 
 ## Remarks
 
-- **The gap is as large as the oscillation.** Each sequence oscillates between
-  $-1$ and $1$, and the two oscillations are exactly out of phase, so the sum
-  never sees either peak. Replacing $y$ by a sequence in phase with $x$, for
-  instance $y = x$, restores equality; the failure is a statement about the
-  relative phase, not about the sizes involved.
+- **The gap is as large as the oscillation.** Each sequence oscillates between $-1$ and $1$, and the two oscillations are exactly out of phase, so the sum never sees either peak. Replacing $y$ by a sequence in phase with $x$, for instance $y = x$, restores equality; the failure is a statement about the relative phase, not about the sizes involved.
 
-- **Both hypotheses of [[thm-limsup-subadditive]] hold here.** The two limit
-  superiors are real, so their sum is defined, and no boundedness is needed for
-  that theorem at all. The counterexample therefore refutes the equality on the
-  theorem's own terms, not by exploiting a degenerate case.
+- **Both hypotheses of [[thm-limsup-subadditive]] hold here.** The two limit superiors are real, so their sum is defined, and no boundedness is needed for that theorem at all. The counterexample therefore refutes the equality on the theorem's own terms, not by exploiting a degenerate case.
 
-- **The dual statement fails in the dual way.** For the same pair,
-  $\liminf_k x_k = \liminf_k y_k = -1$ while $\liminf_k(x_k + y_k) = 0$, so the
-  $\liminf$ inequality $\liminf_k(x_k+y_k) \ge \liminf_k x_k + \liminf_k y_k$ of
-  [[thm-limsup-subadditive]] is also strict here, reading $0 \ge -2$.
+- **The dual statement fails in the dual way.** For the same pair, $\liminf_k x_k = \liminf_k y_k = -1$ while $\liminf_k(x_k + y_k) = 0$, so the $\liminf$ inequality $\liminf_k(x_k+y_k) \ge \liminf_k x_k + \liminf_k y_k$ of [[thm-limsup-subadditive]] is also strict here, reading $0 \ge -2$.

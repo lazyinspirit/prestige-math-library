@@ -46,20 +46,11 @@ special case, but it does not prove that an arbitrary Banach space has RNP.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] Under AC, the scalar Radon--Nikodym theorem gives a measurable real
-density to an absolutely continuous signed measure under its stated common
-finite-exhaustion hypotheses; finite total variation makes that density
-integrable
-([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
+[L1] Under AC, the scalar Radon--Nikodym theorem gives a measurable real density to an absolutely continuous signed measure under its stated common finite-exhaustion hypotheses; finite total variation makes that density integrable ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]).
 
-[L2] For a scalar measure represented by $f$, total variation is represented
-by $|f|$
-([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]]).
+[L2] For a scalar measure represented by $f$, total variation is represented by $|f|$ ([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]]).
 
-[L3] RNP quantifies over Banach-valued norm-countably additive measures of
-bounded variation and asks for Bochner densities on every measurable set
-([[def-radon-nikodym-property]],
-[[def-banach-valued-vector-measure-and-variation]]).
+[L3] RNP quantifies over Banach-valued norm-countably additive measures of bounded variation and asks for Bochner densities on every measurable set ([[def-radon-nikodym-property]], [[def-banach-valued-vector-measure-and-variation]]).
 
 ## Proof
 

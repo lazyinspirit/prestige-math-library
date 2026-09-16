@@ -35,12 +35,9 @@ Every object of an abelian category has a composition series.
 
 **Given:** The abelian group $\mathbb Z$.
 
-[L1] A composition series is a finite strict chain with simple successive
-quotients
-([[def-composition-series-and-composition-factors-of-an-object]]).
+[L1] A composition series is a finite strict chain with simple successive quotients ([[def-composition-series-and-composition-factors-of-an-object]]).
 
-[L2] Finite-length objects are exactly those admitting composition series
-([[def-object-of-finite-length]]).
+[L2] Finite-length objects are exactly those admitting composition series ([[def-object-of-finite-length]]).
 
 ## Refutation
 

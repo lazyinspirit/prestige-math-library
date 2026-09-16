@@ -33,14 +33,11 @@ $$H_n^{\mathrm{sing}}(i_\#):H_n^{\mathrm{sing}}(A;G)\to H_n^{\mathrm{sing}}(X;G)
 
 ## Facts & Assumptions
 
-**Given:** A deformation retract inclusion $i:A\hookrightarrow X$, an abelian
-group $G$, and an integer $n\geq 0$.
+**Given:** A deformation retract inclusion $i:A\hookrightarrow X$, an abelian group $G$, and an integer $n\geq 0$.
 
-[L1] A deformation retract inclusion is a homotopy equivalence
-([[thm-a-deformation-retract-is-a-homotopy-equivalence]]).
+[L1] A deformation retract inclusion is a homotopy equivalence ([[thm-a-deformation-retract-is-a-homotopy-equivalence]]).
 
-[L2] Homotopy equivalences induce isomorphisms on singular homology
-([[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]]).
+[L2] Homotopy equivalences induce isomorphisms on singular homology ([[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]]).
 
 ## Proof
 

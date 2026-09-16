@@ -37,14 +37,11 @@ with $g,h$ monic and $\overline g=g_0$, $\overline h=h_0$.
 
 ## Facts & Assumptions
 
-**Given:** A Henselian pair $(A,I)$, a monic polynomial $f \in A[T]$, and a
-coprime monic residue factorization $\overline f=g_0h_0$.
+**Given:** A Henselian pair $(A,I)$, a monic polynomial $f \in A[T]$, and a coprime monic residue factorization $\overline f=g_0h_0$.
 
-[L1] In a Henselian pair, such lifted factorisations are part of the defining
-lifting property ([[def-henselian-pair-and-henselian-local-ring]]).
+[L1] In a Henselian pair, such lifted factorisations are part of the defining lifting property ([[def-henselian-pair-and-henselian-local-ring]]).
 
-[L2] Any two lifts of the same coprime residue factorization agree modulo
-every power of the ideal ([[lem-hensel-factor-lift-uniqueness-induction]]).
+[L2] Any two lifts of the same coprime residue factorization agree modulo every power of the ideal ([[lem-hensel-factor-lift-uniqueness-induction]]).
 
 ## Proof
 

@@ -43,23 +43,15 @@ in an abelian category, the following are equivalent:
 
 **Given:** The composable pair $A \xrightarrow{f} B \xrightarrow{g} C$.
 
-[L1] Exactness at $B$ is the equality
-$[\operatorname{im}(f)] = [\ker(g)]$
-([[def-exactness-at-a-node]]).
+[L1] Exactness at $B$ is the equality $[\operatorname{im}(f)] = [\ker(g)]$ ([[def-exactness-at-a-node]]).
 
-[L2] The subobject inequalities underlying exactness are exactly the two
-factorization statements for morphisms killed by $g$
-([[thm-the-subobject-inequalities-underlying-exactness]]).
+[L2] The subobject inequalities underlying exactness are exactly the two factorization statements for morphisms killed by $g$ ([[thm-the-subobject-inequalities-underlying-exactness]]).
 
-[L3] Members modulo equivalence correspond to subobjects
-([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
+[L3] Members modulo equivalence correspond to subobjects ([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
 
-[L4] Pullbacks of epimorphisms are epimorphisms
-([[def-pullbacks-and-pushouts]],
-[[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
+[L4] Pullbacks of epimorphisms are epimorphisms ([[def-pullbacks-and-pushouts]], [[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
 
-[L5] Every morphism admits an image factorization
-([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
+[L5] Every morphism admits an image factorization ([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
 
 ## Proof
 

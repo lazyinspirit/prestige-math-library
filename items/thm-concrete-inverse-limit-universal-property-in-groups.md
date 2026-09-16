@@ -28,17 +28,11 @@ property in the category of groups.
 
 ## Facts & Assumptions
 
-**Given:** An inverse system $((G_i),\varphi_{ij})$ and a group $H$ with a cone
-of homomorphisms $f_i:H\to G_i$ satisfying $\varphi_{ij}\circ f_j=f_i$ for all
-$i\le j$.
+**Given:** An inverse system $((G_i),\varphi_{ij})$ and a group $H$ with a cone of homomorphisms $f_i:H\to G_i$ satisfying $\varphi_{ij}\circ f_j=f_i$ for all $i\le j$.
 
-[L1] The inverse limit consists exactly of the compatible tuples, and
-$\pi_i((g_j))=g_i$ for the coordinate projections
-([[def-compatible-tuple-inverse-limit-of-groups]],
-[[def-coordinate-projections-from-an-inverse-limit]]).
+[L1] The inverse limit consists exactly of the compatible tuples, and $\pi_i((g_j))=g_i$ for the coordinate projections ([[def-compatible-tuple-inverse-limit-of-groups]], [[def-coordinate-projections-from-an-inverse-limit]]).
 
-[F1] Group homomorphisms preserve products and identities
-([[def-group-homomorphism]]).
+[F1] Group homomorphisms preserve products and identities ([[def-group-homomorphism]]).
 
 ## Proof
 

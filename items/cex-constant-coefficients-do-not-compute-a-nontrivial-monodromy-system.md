@@ -31,8 +31,7 @@ The rank-one integral local system on $S^1$ with monodromy $-1$ has $H_1=0$ and 
 
 **Given:** The two integral local systems on $S^1$, with monodromy $T=-1$ and $T=1$.
 
-[F1] [[thm-cellular-chains-compute-homology-with-local-coefficients]] computes
-local homology from the lifted cellular incidence matrix.
+[F1] [[thm-cellular-chains-compute-homology-with-local-coefficients]] computes local homology from the lifted cellular incidence matrix.
 
 ## Proof
 

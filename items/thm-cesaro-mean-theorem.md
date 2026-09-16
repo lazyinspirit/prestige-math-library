@@ -84,18 +84,8 @@ The converse is false ([[fs-cesaro-converse]]).
 
 ## Remarks
 
-- **The shape of the argument is the shape of every regularity proof.** The
-  terms split into a fixed head, whose contribution is a constant divided by
-  $n+1$ and therefore eventually negligible, and a tail, all of whose terms are
-  already within $\varepsilon/2$ of $L$ and whose weights sum to at most $1$.
-  [[thm-silverman-toeplitz]] is exactly this argument carried out for an
-  arbitrary weighting, and [[cor-cesaro-matrix-is-regular]] recovers the theorem
-  above from it.
+- **The shape of the argument is the shape of every regularity proof.** The terms split into a fixed head, whose contribution is a constant divided by $n+1$ and therefore eventually negligible, and a tail, all of whose terms are already within $\varepsilon/2$ of $L$ and whose weights sum to at most $1$. [[thm-silverman-toeplitz]] is exactly this argument carried out for an arbitrary weighting, and [[cor-cesaro-matrix-is-regular]] recovers the theorem above from it.
 
-- **The bound $C+1$ rather than $C$** in the second estimate is there only so
-  that the divisor is positive when $C = 0$, which happens whenever the first
-  $K$ terms already equal $L$.
+- **The bound $C+1$ rather than $C$** in the second estimate is there only so that the divisor is positive when $C = 0$, which happens whenever the first $K$ terms already equal $L$.
 
-- **Nothing here needs boundedness of $(x_k)$** as a separate hypothesis: it
-  follows from convergence, and in any case only the fixed head
-  $x_0, \dots, x_{K-1}$ is estimated crudely, and it is finite.
+- **Nothing here needs boundedness of $(x_k)$** as a separate hypothesis: it follows from convergence, and in any case only the fixed head $x_0, \dots, x_{K-1}$ is estimated crudely, and it is finite.

@@ -33,9 +33,7 @@ values must equal Gamma.
 
 **Given:** The perturbed function $F(z)=\Gamma(z)e^{\sin(2\pi z)}$.
 
-[L1] The false-statement refutation already proves that $F$ satisfies the Gamma
-recurrence and the Gamma factorial values, but is not equal to Gamma
-([[fs-gamma-recurrence-and-factorial-values-do-not-characterize-gamma]]).
+[L1] The false-statement refutation already proves that $F$ satisfies the Gamma recurrence and the Gamma factorial values, but is not equal to Gamma ([[fs-gamma-recurrence-and-factorial-values-do-not-characterize-gamma]]).
 
 ## Counterexample
 

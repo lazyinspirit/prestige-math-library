@@ -29,11 +29,9 @@ $N$ act regularly on $\Omega$.
 
 **Given:** A finite faithful primitive action of $G$ on $\Omega$ and distinct minimal normal subgroups $M,N \trianglelefteq G$.
 
-[L1] Distinct minimal normal subgroups centralize one another
-([[lem-distinct-minimal-normal-subgroups-centralize-one-another]]).
+[L1] Distinct minimal normal subgroups centralize one another ([[lem-distinct-minimal-normal-subgroups-centralize-one-another]]).
 
-[L2] Every minimal normal subgroup of a finite faithful primitive group is transitive
-([[thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive]]).
+[L2] Every minimal normal subgroup of a finite faithful primitive group is transitive ([[thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive]]).
 
 ## Proof
 

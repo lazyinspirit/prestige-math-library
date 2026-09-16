@@ -42,14 +42,11 @@ bundle charts form a smooth atlas.
 
 [L1] Tangent-bundle chart transitions are smooth with smooth inverses ([[lem-tangent-bundle-chart-transitions-are-smooth-with-smooth-inverses]]).
 
-[L2] Assuming $\mathrm{AC}_\omega$, a second-countable space is Lindelof
-([[thm-second-countable-implies-lindelof]]).
+[L2] Assuming $\mathrm{AC}_\omega$, a second-countable space is Lindelof ([[thm-second-countable-implies-lindelof]]).
 
-[A1] The axiom $\mathrm{AC}_\omega$ is countable choice
-([[def-countable-choice]]).
+[A1] The axiom $\mathrm{AC}_\omega$ is countable choice ([[def-countable-choice]]).
 
-[F3] A smooth manifold is Hausdorff and second countable
-([[def-smooth-manifold]]).
+[F3] A smooth manifold is Hausdorff and second countable ([[def-smooth-manifold]]).
 
 ## Proof
 

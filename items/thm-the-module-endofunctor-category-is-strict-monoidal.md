@@ -32,8 +32,7 @@ under composition of endofunctors.
 
 ## Facts & Assumptions
 
-**Given:** The category $\mathcal C'$ of right-module endofunctors on a
-monoidal category $\mathcal C$.
+**Given:** The category $\mathcal C'$ of right-module endofunctors on a monoidal category $\mathcal C$.
 
 [L1] An object of $\mathcal C'$ is a pair $(F,c)$ with a coherent natural isomorphism $c_{X,Y}:F(X)\otimes Y\to F(X\otimes Y)$, and a morphism is a natural transformation compatible with those structure maps ([[def-the-category-of-right-module-endofunctors]]).
 
@@ -49,5 +48,4 @@ monoidal category $\mathcal C$.
 
 2.1 Composition of endofunctors is literally associative and unital, so $((F\otimes G)\otimes H)=FGH=F\otimes(G\otimes H)$ and $\mathbf I\otimes F=F=F\otimes\mathbf I$ as equalities of objects. The induced structure maps agree term by term from the definition in step 1.1, so the associator and unitors are identities. [step 1.1, step 1.2, algebra]
 
-3.1 Step 2.1 verifies the strictness clause of [L2], so $\mathcal C'$ is
-strict monoidal under composition. [L2, step 2.1] ∎
+3.1 Step 2.1 verifies the strictness clause of [L2], so $\mathcal C'$ is strict monoidal under composition. [L2, step 2.1] ∎

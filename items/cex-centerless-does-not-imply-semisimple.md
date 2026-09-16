@@ -32,15 +32,11 @@ It therefore refutes [[fs-centerless-implies-semisimple]].
 
 ## Facts & Assumptions
 
-**Given:** The displayed nonabelian Lie algebra over a
-characteristic-zero field.
+**Given:** The displayed nonabelian Lie algebra over a characteristic-zero field.
 
-[L1] The derived series defines solvability
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] The derived series defines solvability ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] A finite-dimensional Lie algebra is semisimple when its solvable
-radical is zero
-([[def-semisimple-lie-algebra-by-vanishing-radical]]).
+[L2] A finite-dimensional Lie algebra is semisimple when its solvable radical is zero ([[def-semisimple-lie-algebra-by-vanishing-radical]]).
 
 ## Refutation
 

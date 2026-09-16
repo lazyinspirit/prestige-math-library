@@ -32,11 +32,9 @@ $$\overline\omega([u],[v])=\omega(u,v).$$
 
 ## Facts & Assumptions
 
-**Given:** A symplectic vector space $(V,\omega)$ and a coisotropic subspace
-$W$.
+**Given:** A symplectic vector space $(V,\omega)$ and a coisotropic subspace $W$.
 
-[F1] Coisotropic means $W^\omega\subseteq W$.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]].
+[F1] Coisotropic means $W^\omega\subseteq W$. [[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]].
 
 ## Proof
 

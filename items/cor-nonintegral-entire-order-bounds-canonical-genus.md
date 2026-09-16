@@ -38,9 +38,7 @@ $(a_n)$ is at most $\lfloor\rho\rfloor$.
 
 **Given:** A nonzero entire function $f$ of finite nonintegral order $\rho$ and its nonzero zero sequence $(a_n)$.
 
-[F1] Hadamard factorization writes $f$ as an exponential of a polynomial times
-the genus-$\lfloor\rho\rfloor$ canonical product over its nonzero zeros
-([[thm-hadamard-factorization-for-finite-order-entire-functions]]).
+[F1] Hadamard factorization writes $f$ as an exponential of a polynomial times the genus-$\lfloor\rho\rfloor$ canonical product over its nonzero zeros ([[thm-hadamard-factorization-for-finite-order-entire-functions]]).
 
 ## Proof
 

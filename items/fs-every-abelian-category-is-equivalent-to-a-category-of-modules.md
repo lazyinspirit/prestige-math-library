@@ -29,14 +29,11 @@ Every abelian category is equivalent to a category of modules.
 
 ## Facts & Assumptions
 
-**Given:** A field $F$ and the full subcategory $\mathbf{FinVect}_F$ of
-finite-dimensional $F$-vector spaces.
+**Given:** A field $F$ and the full subcategory $\mathbf{FinVect}_F$ of finite-dimensional $F$-vector spaces.
 
-[L1] Module categories are abelian
-([[thm-modules-over-a-ring-form-an-abelian-category]]).
+[L1] Module categories are abelian ([[thm-modules-over-a-ring-form-an-abelian-category]]).
 
-[L2] Every module category has all small coproducts
-([[thm-rmod-is-complete-and-cocomplete]]).
+[L2] Every module category has all small coproducts ([[thm-rmod-is-complete-and-cocomplete]]).
 
 ## Refutation
 

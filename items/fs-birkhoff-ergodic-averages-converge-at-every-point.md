@@ -29,8 +29,7 @@ $A_nf$ converges at every point.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the doubling map $D_2$ on Lebesgue probability
-$[0,1)$, and $f=\mathbf1_{[0,1/2)}$.
+**Given:** Countable choice, the doubling map $D_2$ on Lebesgue probability $[0,1)$, and $f=\mathbf1_{[0,1/2)}$.
 
 [F1] Under canonical binary coding, $f(D_2^kx)$ equals $1$ exactly when digit $k+1$ is zero ([[lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints]]).
 

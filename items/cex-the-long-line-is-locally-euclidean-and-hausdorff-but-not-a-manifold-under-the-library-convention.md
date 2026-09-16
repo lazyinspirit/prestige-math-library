@@ -36,16 +36,11 @@ Every Hausdorff locally Euclidean space is a manifold.
 
 ## Facts & Assumptions
 
-**Given:** The long line $\mathbb L$ and the Axiom of Countable Choice
-$\mathrm{AC}_\omega$.
+**Given:** The long line $\mathbb L$ and the Axiom of Countable Choice $\mathrm{AC}_\omega$.
 
-[L1] The A-page refutation already proves that $\mathbb L$ is Hausdorff and locally
-Euclidean but not second countable, hence not a manifold under the library
-convention ([[fs-every-hausdorff-locally-euclidean-space-is-a-manifold]]).
+[L1] The A-page refutation already proves that $\mathbb L$ is Hausdorff and locally Euclidean but not second countable, hence not a manifold under the library convention ([[fs-every-hausdorff-locally-euclidean-space-is-a-manifold]]).
 
-[F1] The long-ray construction and its order topology are those of
-[[def-the-long-line]], and its order-theoretic connectedness properties are
-recorded in [[thm-the-long-line-is-a-connected-linear-continuum]].
+[F1] The long-ray construction and its order topology are those of [[def-the-long-line]], and its order-theoretic connectedness properties are recorded in [[thm-the-long-line-is-a-connected-linear-continuum]].
 
 ## Counterexample
 

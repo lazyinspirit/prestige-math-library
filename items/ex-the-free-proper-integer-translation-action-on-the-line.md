@@ -41,24 +41,13 @@ $$p:\mathbb R\longrightarrow S^1,\qquad p(x)=e^{2\pi i x}.$$
 
 ## Facts & Assumptions
 
-**Given:** The discrete Lie group $\mathbb Z$, the usual smooth line
-$\mathbb R$, and the displayed translation action.
+**Given:** The discrete Lie group $\mathbb Z$, the usual smooth line $\mathbb R$, and the displayed translation action.
 
-[F1] Any countable discrete group is a zero-dimensional Lie group.
-[[def-lie-group]].
+[F1] Any countable discrete group is a zero-dimensional Lie group. [[def-lie-group]].
 
-[F2] Continuous images of compact sets are compact; compact subsets of metric
-spaces are closed and bounded; finite products of compact spaces and closed
-subspaces of compact spaces are compact.
-[[thm-compactness-under-continuous-maps]],
-[[thm-compact-subset-is-closed-and-bounded]],
-[[thm-finite-products-of-compact-spaces]],
-[[thm-closed-subspace-of-a-compact-space-is-compact]].
+[F2] Continuous images of compact sets are compact; compact subsets of metric spaces are closed and bounded; finite products of compact spaces and closed subspaces of compact spaces are compact. [[thm-compactness-under-continuous-maps]], [[thm-compact-subset-is-closed-and-bounded]], [[thm-finite-products-of-compact-spaces]], [[thm-closed-subspace-of-a-compact-space-is-compact]].
 
-[F3] A smooth free proper left action makes its orbit projection, for the
-equivalent right action $x\cdot n=(-n)\cdot x=x-n$, a principal bundle.
-[[def-free-and-proper-lie-group-actions]],
-[[thm-a-free-proper-action-makes-m-to-m-mod-g-a-principal-g-bundle]].
+[F3] A smooth free proper left action makes its orbit projection, for the equivalent right action $x\cdot n=(-n)\cdot x=x-n$, a principal bundle. [[def-free-and-proper-lie-group-actions]], [[thm-a-free-proper-action-makes-m-to-m-mod-g-a-principal-g-bundle]].
 
 ## Verification
 

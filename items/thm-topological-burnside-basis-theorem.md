@@ -31,14 +31,11 @@ abelian quotient $G/\Phi(G)$ over $\mathbb F_p$.
 
 **Given:** A finitely generated pro-$p$ group $G$ and a subset $S\subseteq G$.
 
-[L1] For such a group, $\Phi(G)=\overline{[G,G]G^p}$
-([[thm-frattini-formula-for-finitely-generated-pro-p-groups]]).
+[L1] For such a group, $\Phi(G)=\overline{[G,G]G^p}$ ([[thm-frattini-formula-for-finitely-generated-pro-p-groups]]).
 
-[L2] In a finite $p$-group, a subset generates exactly when its image in the
-Frattini quotient spans that quotient ([[thm-burnside-basis-theorem]]).
+[L2] In a finite $p$-group, a subset generates exactly when its image in the Frattini quotient spans that quotient ([[thm-burnside-basis-theorem]]).
 
-[L3] For a finite group, generation is detected modulo the Frattini subgroup
-([[cor-generation-is-detected-modulo-the-frattini-subgroup]]).
+[L3] For a finite group, generation is detected modulo the Frattini subgroup ([[cor-generation-is-detected-modulo-the-frattini-subgroup]]).
 
 ## Proof
 

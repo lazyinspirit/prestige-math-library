@@ -32,10 +32,7 @@ Every map that preserves angle magnitudes is conformal.
 
 **Given:** The map $c:\mathbb C\to\mathbb C$, $c(z)=\overline z$.
 
-[F1] This page's conformal convention is orientation-preserving: biholomorphisms
-preserve both angle magnitude and orientation, while complex conjugation is the
-standard orientation-reversing exclusion
-([[rem-biholomorphisms-are-conformal-with-holomorphic-inverse]]).
+[F1] This page's conformal convention is orientation-preserving: biholomorphisms preserve both angle magnitude and orientation, while complex conjugation is the standard orientation-reversing exclusion ([[rem-biholomorphisms-are-conformal-with-holomorphic-inverse]]).
 
 ## Counterexample
 

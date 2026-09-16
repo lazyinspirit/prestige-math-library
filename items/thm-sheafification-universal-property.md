@@ -38,17 +38,13 @@ $$\varphi=\overline\varphi\circ\eta_{\mathcal F}.$$
 
 ## Facts & Assumptions
 
-**Given:** A presheaf $\mathcal F$, a sheaf $\mathcal G$, and a morphism
-$\varphi:\mathcal F\to\mathcal G$.
+**Given:** A presheaf $\mathcal F$, a sheaf $\mathcal G$, and a morphism $\varphi:\mathcal F\to\mathcal G$.
 
-[F1] Sheafification is the double plus construction with unit
-$\eta_{\mathcal F}:\mathcal F\to a\mathcal F$ ([[def-sheafification]]).
+[F1] Sheafification is the double plus construction with unit $\eta_{\mathcal F}:\mathcal F\to a\mathcal F$ ([[def-sheafification]]).
 
-[L1] The first plus construction is separated
-([[lem-first-plus-construction-is-separated]]).
+[L1] The first plus construction is separated ([[lem-first-plus-construction-is-separated]]).
 
-[L2] The second plus construction is a sheaf
-([[lem-second-plus-construction-is-sheaf]]).
+[L2] The second plus construction is a sheaf ([[lem-second-plus-construction-is-sheaf]]).
 
 ## Proof
 

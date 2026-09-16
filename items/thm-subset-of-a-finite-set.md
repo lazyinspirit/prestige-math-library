@@ -104,17 +104,8 @@ false statement recorded on this page's companion.
 
 ## Remarks
 
-- **Where finiteness is spent.** Only in $(\ast)$, and there only through the base
-  case $0 = \varnothing$ and the fact that removing the top point of $\sigma(n)$
-  leaves $n$. Clause 4 then follows formally, which is why the failure of clause 4
-  for $\mathbb{N}$ is a failure of finiteness and of nothing else.
+- **Where finiteness is spent.** Only in $(\ast)$, and there only through the base case $0 = \varnothing$ and the fact that removing the top point of $\sigma(n)$ leaves $n$. Clause 4 then follows formally, which is why the failure of clause 4 for $\mathbb{N}$ is a failure of finiteness and of nothing else.
 
-- **The surjective half needs no choice.** The obvious argument, "pick a preimage
-  of each $b$", would need a choice function on the fibres. Transporting the
-  fibres into $\mathbb{N}$ and taking least elements replaces the choice by a
-  determination, which is what [[thm-well-ordering-principle]] is for.
+- **The surjective half needs no choice.** The obvious argument, "pick a preimage of each $b$", would need a choice function on the fibres. Transporting the fibres into $\mathbb{N}$ and taking least elements replaces the choice by a determination, which is what [[thm-well-ordering-principle]] is for.
 
-- **Clause 2 is not the pigeonhole principle restated.** [[lem-pigeonhole]] is
-  about injections between natural numbers, and it is what makes
-  [[def-finite-cardinality]] well posed in the first place; clause 2 compares the
-  cardinalities of a set and a subset, and is proved here by induction directly.
+- **Clause 2 is not the pigeonhole principle restated.** [[lem-pigeonhole]] is about injections between natural numbers, and it is what makes [[def-finite-cardinality]] well posed in the first place; clause 2 compares the cardinalities of a set and a subset, and is proved here by induction directly.

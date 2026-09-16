@@ -30,8 +30,7 @@ Every subgroup of a finitely generated free group is finitely generated.
 
 **Given:** The false claim above.
 
-[L1] For a Schreier system, the nontrivial Schreier generators form a free basis
-of the subgroup ([[thm-nielsen-schreier-with-an-explicit-basis]]).
+[L1] For a Schreier system, the nontrivial Schreier generators form a free basis of the subgroup ([[thm-nielsen-schreier-with-an-explicit-basis]]).
 
 ## Refutation
 

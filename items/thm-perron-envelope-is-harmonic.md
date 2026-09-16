@@ -52,7 +52,6 @@ envelope $H_\varphi$ is harmonic on $\Omega$.
 3.1 Put $w_n=\max(v_1,\dots,v_n)$. By [L3], each $w_n$ lies in the Perron family, and $w_n(z_n)>H_\varphi(z_0)-1/n$. Let $h_n=P_Dw_n$. By [L2], each $h_n$ is harmonic on $D$, belongs to the Perron family, majorizes $w_n$, and the sequence $(h_n)$ is increasing because the sequence $(w_n)$ is increasing. Step [L1] also gives $h_n\le M$ on $D$. [L1, L2, L3, step 2.1]
 
 4.1 The sequence $(h_n)$ is increasing and bounded above at every point by $M$, so [L4] yields a harmonic limit $h$ on $D$. Since each $h_n$ belongs to the Perron family, one has $h_n\le U_\varphi\le H_\varphi$, hence $h\le H_\varphi$ on $D$. On the other hand, [step 3.1, L4]
-$$H_\varphi(z_0)-\frac1n<h_n(z_n)\le h(z_n)\le H_\varphi(z_n).$$
-Letting $n\to\infty$ and using continuity of $h$ and upper semicontinuity of $H_\varphi$ gives $h(z_0)=H_\varphi(z_0)$. [step 3.1, L4]
+$$H_\varphi(z_0)-\frac1n<h_n(z_n)\le h(z_n)\le H_\varphi(z_n).$$ Letting $n\to\infty$ and using continuity of $h$ and upper semicontinuity of $H_\varphi$ gives $h(z_0)=H_\varphi(z_0)$. [step 3.1, L4]
 
 5.1 The function $H_\varphi-h$ is subharmonic on $D$: both $h$ and $-h$ are harmonic and therefore subharmonic, and [L3] handles sums with positive coefficients. Step 4.1 shows $H_\varphi-h\le0$ on $D$ and vanishes at the interior point $z_0$, so [L6] forces $H_\varphi-h$ to be constant $0$ on $D$. Hence $H_\varphi=h$ on $D$, and therefore $H_\varphi$ is harmonic near $z_0$. Since $z_0$ was arbitrary, $H_\varphi$ is harmonic on $\Omega$. [L3, L6, step 1.1, step 4.1] ∎

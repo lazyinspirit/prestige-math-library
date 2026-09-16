@@ -43,8 +43,7 @@ $$ r(x)=\frac{x}{\|x\|}. $$
 
 ## Facts & Assumptions
 
-**Given:** The unit circle $S^1\subseteq\mathbb R^2$ with its Euclidean normal
-bundle.
+**Given:** The unit circle $S^1\subseteq\mathbb R^2$ with its Euclidean normal bundle.
 
 ## Verification
 **Proof technique:** direct.

@@ -43,9 +43,7 @@ $$\mu(E)<\delta\qquad\Longrightarrow\qquad\int_E|f|\,d\mu<\varepsilon.$$
 **Proof technique:** direct.
 
 1.1 Choose $n$ so large that [L1, L4, choose]
-$$\int\bigl(|f|-|f|\wedge n\bigr)\,d\mu<\varepsilon/2,$$
-which is possible by [L1] and [L4]. Put $\delta:=\varepsilon/(2n+1)$.
+$$\int\bigl(|f|-|f|\wedge n\bigr)\,d\mu<\varepsilon/2,$$ which is possible by [L1] and [L4]. Put $\delta:=\varepsilon/(2n+1)$.
 
 2.1 If $\mu(E)<\delta$, then [step 1.1, L2, L3, algebra] ∎
-$$\int_E|f|\,d\mu\le\int_E(|f|\wedge n)\,d\mu+\int\bigl(|f|-|f|\wedge n\bigr)\,d\mu \le n\mu(E)+\varepsilon/2<\varepsilon,$$
-using [L2] and [L3] for the first term.
+$$\int_E|f|\,d\mu\le\int_E(|f|\wedge n)\,d\mu+\int\bigl(|f|-|f|\wedge n\bigr)\,d\mu \le n\mu(E)+\varepsilon/2<\varepsilon,$$ using [L2] and [L3] for the first term.

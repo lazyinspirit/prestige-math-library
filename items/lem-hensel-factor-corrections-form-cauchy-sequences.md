@@ -33,11 +33,9 @@ $I$-adic topology on $A$.
 
 ## Facts & Assumptions
 
-**Given:** Successive lifts $(g_r,h_r)$ with differences in $I^r[T]$ at stage
-$r$.
+**Given:** Successive lifts $(g_r,h_r)$ with differences in $I^r[T]$ at stage $r$.
 
-[L1] One Hensel correction step changes each factor by a polynomial whose
-coefficients lie in the current ideal power ([[lem-hensel-factor-correction-one-stage]]).
+[L1] One Hensel correction step changes each factor by a polynomial whose coefficients lie in the current ideal power ([[lem-hensel-factor-correction-one-stage]]).
 
 ## Proof
 

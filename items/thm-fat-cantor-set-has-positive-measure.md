@@ -109,26 +109,8 @@ of every interval cover of $S$.
 
 ## Remarks
 
-- **Nowhere dense and null are independent.** $S$ is nowhere dense and not null;
-  $\mathbb{Q}$ is null and not nowhere dense ([[lem-countable-sets-are-null]],
-  [[lem-q-and-irrationals-dense-r]]). The two false statements recording this are
-  [[fs-nowhere-dense-implies-measure-zero]] and
-  [[fs-measure-zero-implies-nowhere-dense]], with witnesses
-  [[cex-nowhere-dense-with-positive-measure]] and
-  [[cex-dense-set-of-measure-zero]].
+- **Nowhere dense and null are independent.** $S$ is nowhere dense and not null; $\mathbb{Q}$ is null and not nowhere dense ([[lem-countable-sets-are-null]], [[lem-q-and-irrationals-dense-r]]). The two false statements recording this are [[fs-nowhere-dense-implies-measure-zero]] and [[fs-measure-zero-implies-nowhere-dense]], with witnesses [[cex-nowhere-dense-with-positive-measure]] and [[cex-dense-set-of-measure-zero]].
 
-- **Where the construction differs from the Cantor set, and where it does not.**
-  Steps 1.2, 1.3, 1.4, 2.2 and 3.1 use only that the pieces shrink to $0$ in
-  length, double in number and stay separated, which the middle-thirds
-  construction also satisfies; so $S$ and $C$ are indistinguishable at that level.
-  The difference is entirely in step 2.1: the removed length at stage $n$ is
-  $4^{-1}2^{-n}$ here and $2^{n}3^{-n-1}$ there, and only the first is summable to
-  less than $1$. The removed lengths are added up in
-  [[ex-fat-cantor-measure-computed]], where they total exactly $2^{-1}$.
+- **Where the construction differs from the Cantor set, and where it does not.** Steps 1.2, 1.3, 1.4, 2.2 and 3.1 use only that the pieces shrink to $0$ in length, double in number and stay separated, which the middle-thirds construction also satisfies; so $S$ and $C$ are indistinguishable at that level. The difference is entirely in step 2.1: the removed length at stage $n$ is $4^{-1}2^{-n}$ here and $2^{n}3^{-n-1}$ there, and only the first is summable to less than $1$. The removed lengths are added up in [[ex-fat-cantor-measure-computed]], where they total exactly $2^{-1}$.
 
-- **Compactness is not what is used against nullity.** The proof of claim 4 never
-  extracts a finite subcover: it combines the given countable cover of $S$ with
-  the countably many removed pieces and appeals to
-  [[lem-nondegenerate-interval-is-not-null]], whose own proof is where the
-  compactness of $[0,1]$ is spent. Passing through
-  [[thm-compact-null-is-content-zero]] would work too and would be longer.
+- **Compactness is not what is used against nullity.** The proof of claim 4 never extracts a finite subcover: it combines the given countable cover of $S$ with the countably many removed pieces and appeals to [[lem-nondegenerate-interval-is-not-null]], whose own proof is where the compactness of $[0,1]$ is spent. Passing through [[thm-compact-null-is-content-zero]] would work too and would be longer.

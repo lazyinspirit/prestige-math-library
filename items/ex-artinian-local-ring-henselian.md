@@ -32,14 +32,11 @@ Then $A$ is a local Artinian ring, hence Henselian.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, an integer $n \ge 1$, and the quotient ring
-$A=k[x]/(x^n)$.
+**Given:** A field $k$, an integer $n \ge 1$, and the quotient ring $A=k[x]/(x^n)$.
 
-[L1] Polynomial rings and quotient rings are the ambient objects in which this
-example lives ([[def-polynomial-ring-over-a-commutative-ring]], [[def-quotient-ring]]).
+[L1] Polynomial rings and quotient rings are the ambient objects in which this example lives ([[def-polynomial-ring-over-a-commutative-ring]], [[def-quotient-ring]]).
 
-[L2] Artinian local rings are Henselian
-([[cor-artinian-local-henselian-via-nilpotent-maximal-ideal]]).
+[L2] Artinian local rings are Henselian ([[cor-artinian-local-henselian-via-nilpotent-maximal-ideal]]).
 
 ## Verification
 

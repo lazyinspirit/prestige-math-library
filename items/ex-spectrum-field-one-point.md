@@ -26,11 +26,9 @@ ring, residue field, and ring of global functions are all canonically $k$.
 
 **Given:** A field $k$.
 
-[F1] The stalk at a prime $\mathfrak p$ of an affine spectrum is $A_{\mathfrak p}$
-([[thm-stalk-structure-sheaf-prime-localization]]).
+[F1] The stalk at a prime $\mathfrak p$ of an affine spectrum is $A_{\mathfrak p}$ ([[thm-stalk-structure-sheaf-prime-localization]]).
 
-[F2] Global functions on $\operatorname{Spec}A$ recover $A$
-([[thm-global-sections-affine-scheme]]).
+[F2] Global functions on $\operatorname{Spec}A$ recover $A$ ([[thm-global-sections-affine-scheme]]).
 
 ## Verification
 

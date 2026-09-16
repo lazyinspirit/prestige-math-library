@@ -34,14 +34,11 @@ three classes elliptic, parabolic, or hyperbolic.
 
 ## Facts & Assumptions
 
-**Given:** The Tricomi operator and the fourth-order biharmonic operator
-$\Delta^2$.
+**Given:** The Tricomi operator and the fourth-order biharmonic operator $\Delta^2$.
 
-[L1] The Tricomi equation changes type across $y=0$
-([[ex-tricomi-equation-changes-type]]).
+[L1] The Tricomi equation changes type across $y=0$ ([[ex-tricomi-equation-changes-type]]).
 
-[L2] The threefold classification on this page is only for scalar real
-second-order principal symbols ([[rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy]]).
+[L2] The threefold classification on this page is only for scalar real second-order principal symbols ([[rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy]]).
 
 ## Counterexample
 

@@ -40,16 +40,11 @@ $$ e_{\mathfrak m}(R)=2. $$
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the cusp local ring $R$ above, and its maximal ideal
-$\mathfrak m$.
+**Given:** A field $k$, the cusp local ring $R$ above, and its maximal ideal $\mathfrak m$.
 
-[L1] The associated graded ring packages the quotients
-$\mathfrak m^n/\mathfrak m^{n+1}$, and the Hilbert-Samuel function is their
-cumulative length
-([[def-associated-graded-ring-and-module]], [[thm-existence-of-hilbert-samuel-polynomial]]).
+[L1] The associated graded ring packages the quotients $\mathfrak m^n/\mathfrak m^{n+1}$, and the Hilbert-Samuel function is their cumulative length ([[def-associated-graded-ring-and-module]], [[thm-existence-of-hilbert-samuel-polynomial]]).
 
-[L2] Hilbert-Samuel multiplicity is the leading coefficient scaled by the
-factorial ([[def-hilbert-samuel-multiplicity]]).
+[L2] Hilbert-Samuel multiplicity is the leading coefficient scaled by the factorial ([[def-hilbert-samuel-multiplicity]]).
 
 ## Verification
 

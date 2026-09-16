@@ -33,23 +33,13 @@ union is perfect.
 
 ## Facts & Assumptions
 
-**Given:** Perfect graphs $G=(V_G,E_G)$ and $H=(V_H,E_H)$ with
-$V_G\cap V_H=\varnothing$.
+**Given:** Perfect graphs $G=(V_G,E_G)$ and $H=(V_H,E_H)$ with $V_G\cap V_H=\varnothing$.
 
-[L1] A graph is perfect exactly when every induced subgraph has equal clique
-number and chromatic number ([[def-perfect-graph]]).
+[L1] A graph is perfect exactly when every induced subgraph has equal clique number and chromatic number ([[def-perfect-graph]]).
 
-[L2] If $X\subseteq V_G\cup V_H$ and $X_G:=X\cap V_G$, $X_H:=X\cap V_H$, then
-the induced subgraph of the disjoint union on $X$ is the disjoint union of
-$G[X_G]$ and $H[X_H]$
-([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
+[L2] If $X\subseteq V_G\cup V_H$ and $X_G:=X\cap V_G$, $X_H:=X\cap V_H$, then the induced subgraph of the disjoint union on $X$ is the disjoint union of $G[X_G]$ and $H[X_H]$ ([[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
 
-[L3] In a disjoint union, every clique lies in one side, while optimal
-colourings of the two sides may reuse the same palette; therefore
-$\omega(G\sqcup H)=\max\{\omega(G),\omega(H)\}$ and
-$\chi(G\sqcup H)=\max\{\chi(G),\chi(H)\}$
-([[def-clique-stable-set-and-numbers]],
-[[def-proper-vertex-colouring-and-chromatic-number]]).
+[L3] In a disjoint union, every clique lies in one side, while optimal colourings of the two sides may reuse the same palette; therefore $\omega(G\sqcup H)=\max\{\omega(G),\omega(H)\}$ and $\chi(G\sqcup H)=\max\{\chi(G),\chi(H)\}$ ([[def-clique-stable-set-and-numbers]], [[def-proper-vertex-colouring-and-chromatic-number]]).
 
 ## Proof
 

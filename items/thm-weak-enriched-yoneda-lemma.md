@@ -42,24 +42,15 @@ of $FK$.
 
 ## Facts & Assumptions
 
-**Given:** A symmetric monoidal right-closed locally small base $\mathcal V$, a
-$\mathcal V$-category $\mathcal A$, an object $K$ of $\mathcal A$, and a
-$\mathcal V$-functor $F:\mathcal A\to\mathcal V$.
+**Given:** A symmetric monoidal right-closed locally small base $\mathcal V$, a $\mathcal V$-category $\mathcal A$, an object $K$ of $\mathcal A$, and a $\mathcal V$-functor $F:\mathcal A\to\mathcal V$.
 
-[L1] The representable enriched functor $\mathcal A(K,-)$ has value
-$\mathcal A(K,A)$ at $A$, and its structure maps are induced from enriched
-composition ([[def-representable-enriched-functor]]).
+[L1] The representable enriched functor $\mathcal A(K,-)$ has value $\mathcal A(K,A)$ at $A$, and its structure maps are induced from enriched composition ([[def-representable-enriched-functor]]).
 
-[L2] A $\mathcal V$-natural transformation may be checked by the compact square
-form of enriched naturality
-([[def-enriched-natural-transformation]], [[thm-the-compact-square-form-of-enriched-naturality]]).
+[L2] A $\mathcal V$-natural transformation may be checked by the compact square form of enriched naturality ([[def-enriched-natural-transformation]], [[thm-the-compact-square-form-of-enriched-naturality]]).
 
-[L3] Right closedness supplies internal homs and evaluation morphisms
-([[def-the-internal-hom-and-its-evaluation-morphism]]).
+[L3] Right closedness supplies internal homs and evaluation morphisms ([[def-the-internal-hom-and-its-evaluation-morphism]]).
 
-[L4] Global elements of an internal hom are ordinary morphisms:
-$\mathcal V(\mathbf 1,[X,Y])\cong\mathcal V(X,Y)$
-([[thm-the-unit-is-an-internal-hom-unit]]).
+[L4] Global elements of an internal hom are ordinary morphisms: $\mathcal V(\mathbf 1,[X,Y])\cong\mathcal V(X,Y)$ ([[thm-the-unit-is-an-internal-hom-unit]]).
 
 ## Proof
 

@@ -65,6 +65,4 @@ $\mathbb Q[C_3]e\cong E$.
 
 ## Remarks
 
-This is the quadratic cyclotomic specialization of Zheng, Example 3.8.2,
-p.133, and Wiese, Corollary 2.2.12, p.30. Matrices, eigenvectors and the
-rational block identification are computed above.
+This is the quadratic cyclotomic specialization of Zheng, Example 3.8.2, p.133, and Wiese, Corollary 2.2.12, p.30. Matrices, eigenvectors and the rational block identification are computed above.

@@ -36,11 +36,9 @@ the middle one are monomorphisms.
 
 **Given:** The five-term exact diagram.
 
-[L1] The sharp five lemma splits the proof into one monic half and one epic half
-([[thm-sharp-five-lemma-in-an-abelian-category]]).
+[L1] The sharp five lemma splits the proof into one monic half and one epic half ([[thm-sharp-five-lemma-in-an-abelian-category]]).
 
-[L2] The two adjacent comparison maps are used once as monomorphisms and once as
-epimorphisms ([[rem-why-the-five-lemma-asks-for-isomorphisms-in-the-middle]]).
+[L2] The two adjacent comparison maps are used once as monomorphisms and once as epimorphisms ([[rem-why-the-five-lemma-asks-for-isomorphisms-in-the-middle]]).
 
 ## Refutation
 

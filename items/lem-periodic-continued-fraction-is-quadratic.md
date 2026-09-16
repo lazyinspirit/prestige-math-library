@@ -42,8 +42,7 @@ quadratic irrational.
 
 [F4] Consecutive convergents satisfy $$p_nq_{n-1}-p_{n-1}q_n=(-1)^{n-1}.$$ ([[lem-continued-fraction-determinant-identity]]).
 
-[F5] The finite convergents of an infinite regular continued fraction converge
-to its value ([[thm-convergence-of-infinite-regular-continued-fractions]]).
+[F5] The finite convergents of an infinite regular continued fraction converge to its value ([[thm-convergence-of-infinite-regular-continued-fractions]]).
 
 ## Proof
 

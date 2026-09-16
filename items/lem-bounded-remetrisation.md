@@ -104,22 +104,7 @@ topology**, so boundedness cannot be read off the topology alone.
 
 ## Remarks
 
-- **Two constructions rather than one, on purpose.** $\min\{d,1\}$ is the shorter
-  argument and is the one used by the counterexamples on the companion page;
-  $d/(1+d)$ is strictly less than $1$ everywhere and is strictly increasing in
-  $d$, which makes it the better behaved of the two when the value of the metric
-  is to be compared, and it is the form that generalises to countable products.
-- **Neither is Lipschitz equivalent to $d$ when $d$ is unbounded.** A Lipschitz
-  bound $\alpha d \le d'$ with $\alpha > 0$ would force $d \le \alpha^{-1}$
-  everywhere, which fails as soon as $d$ takes arbitrarily large values; the real
-  line is the witness ([[cex-uniformly-not-lipschitz-equivalent]]).
-- **Boundedness is therefore not a topological property**, which is recorded as
-  [[fs-boundedness-is-a-topological-property]] with the real line as witness.
-- **The bound $\operatorname{diam}(X) \le 1$ need not be an equality, and the
-  two constructions differ on when it is.** For a one-point space both new
-  metrics are identically $0$. For $d' = \min\{d,1\}$ the bound is attained as
-  soon as $d$ takes some value $\ge 1$, since then $d'$ takes the value $1$
-  itself, and the companion page computes one such case. For
-  $d'' = d/(1+d)$ the value $1$ is never taken at all, by claim 2, so on a space
-  where $d$ is bounded the diameter in $d''$ is strictly below $1$: for instance
-  on a two-point space with $d = 1$ the new distance is $1/2$.
+- **Two constructions rather than one, on purpose.** $\min\{d,1\}$ is the shorter argument and is the one used by the counterexamples on the companion page; $d/(1+d)$ is strictly less than $1$ everywhere and is strictly increasing in $d$, which makes it the better behaved of the two when the value of the metric is to be compared, and it is the form that generalises to countable products.
+- **Neither is Lipschitz equivalent to $d$ when $d$ is unbounded.** A Lipschitz bound $\alpha d \le d'$ with $\alpha > 0$ would force $d \le \alpha^{-1}$ everywhere, which fails as soon as $d$ takes arbitrarily large values; the real line is the witness ([[cex-uniformly-not-lipschitz-equivalent]]).
+- **Boundedness is therefore not a topological property**, which is recorded as [[fs-boundedness-is-a-topological-property]] with the real line as witness.
+- **The bound $\operatorname{diam}(X) \le 1$ need not be an equality, and the two constructions differ on when it is.** For a one-point space both new metrics are identically $0$. For $d' = \min\{d,1\}$ the bound is attained as soon as $d$ takes some value $\ge 1$, since then $d'$ takes the value $1$ itself, and the companion page computes one such case. For $d'' = d/(1+d)$ the value $1$ is never taken at all, by claim 2, so on a space where $d$ is bounded the diameter in $d''$ is strictly below $1$: for instance on a two-point space with $d = 1$ the new distance is $1/2$.

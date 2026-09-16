@@ -35,11 +35,9 @@ $$\begin{array}{c|c|c|c|c} x & \sum_{p\le x}\frac{\log p}{p} & \log x & \sum_{p\
 
 **Given:** The cutoffs $x=10,30,100$.
 
-[L1] The first Mertens theorem controls $\sum_{p\le x}(\log p)/p$ by $\log x$
-([[thm-first-mertens-theorem-for-primes]]).
+[L1] The first Mertens theorem controls $\sum_{p\le x}(\log p)/p$ by $\log x$ ([[thm-first-mertens-theorem-for-primes]]).
 
-[L2] The second Mertens theorem controls $\sum_{p\le x}1/p$ by $\log\log x$
-([[thm-second-mertens-theorem-for-primes]]).
+[L2] The second Mertens theorem controls $\sum_{p\le x}1/p$ by $\log\log x$ ([[thm-second-mertens-theorem-for-primes]]).
 
 ## Verification
 

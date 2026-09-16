@@ -40,12 +40,9 @@ So $\operatorname{coker}(0\to A)\cong A$ and $\ker(A\to0)\cong A$.
 
 **Given:** A zero object $0$ and an object $A$.
 
-[L1] There is a unique morphism $0\to A$ and a unique morphism $A\to0$
-([[def-initial-terminal-and-zero-object]]).
+[L1] There is a unique morphism $0\to A$ and a unique morphism $A\to0$ ([[def-initial-terminal-and-zero-object]]).
 
-[L2] A cokernel of $u$ is a morphism $q$ with $qu=0$ through which every
-morphism annihilating $u$ factors uniquely, and a kernel is dual
-([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
+[L2] A cokernel of $u$ is a morphism $q$ with $qu=0$ through which every morphism annihilating $u$ factors uniquely, and a kernel is dual ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
 
 ## Proof
 

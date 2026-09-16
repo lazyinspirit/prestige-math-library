@@ -38,14 +38,11 @@ commutative monoid structure for which composition is bilinear.
 
 **Given:** A category $\mathcal C$ with finite biproducts and objects $A,B,C$.
 
-[L1] Biproducts can be recognized from products, coproducts, and the zero
-equations without using any pre-existing addition
-([[thm-biproduct-data-characterisation-without-addition]]).
+[L1] Biproducts can be recognized from products, coproducts, and the zero equations without using any pre-existing addition ([[thm-biproduct-data-characterisation-without-addition]]).
 
 [L2] The empty biproduct is a zero object ([[prop-the-empty-biproduct-is-a-zero-object]]).
 
-[L3] Finite biproducts are associative, commutative, and unital up to canonical
-isomorphism ([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]]).
+[L3] Finite biproducts are associative, commutative, and unital up to canonical isomorphism ([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]]).
 
 ## Proof
 

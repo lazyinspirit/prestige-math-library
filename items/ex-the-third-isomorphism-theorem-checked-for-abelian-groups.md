@@ -33,12 +33,9 @@ categorical third isomorphism theorem specialized to $\mathbf{Ab}$.
 
 **Given:** Subgroups $C\le B\le A$ of an abelian group.
 
-[L1] The categorical third isomorphism theorem holds in every abelian category
-([[thm-third-isomorphism-theorem-in-an-abelian-category]]).
+[L1] The categorical third isomorphism theorem holds in every abelian category ([[thm-third-isomorphism-theorem-in-an-abelian-category]]).
 
-[L2] The ordinary third isomorphism theorem holds for modules, hence for
-abelian groups
-([[thm-third-isomorphism-theorem-modules]]).
+[L2] The ordinary third isomorphism theorem holds for modules, hence for abelian groups ([[thm-third-isomorphism-theorem-modules]]).
 
 ## Verification
 

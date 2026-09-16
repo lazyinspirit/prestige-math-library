@@ -33,25 +33,17 @@ $\mathfrak s\cong\mathfrak g/\operatorname{rad}(\mathfrak g)$.
 
 ## Facts & Assumptions
 
-**Given:** Such a Lie algebra, its radical $\mathfrak r$, and
-$\mathfrak q=\mathfrak g/\mathfrak r$.
+**Given:** Such a Lie algebra, its radical $\mathfrak r$, and $\mathfrak q=\mathfrak g/\mathfrak r$.
 
-[L1] The quotient $\mathfrak q$ is semisimple
-([[prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical]]).
+[L1] The quotient $\mathfrak q$ is semisimple ([[prop-the-radical-is-characteristic-and-the-radical-quotient-has-zero-radical]]).
 
-[L2] Its second cohomology with every finite-dimensional module vanishes
-([[thm-second-whitehead-lemma]]).
+[L2] Its second cohomology with every finite-dimensional module vanishes ([[thm-second-whitehead-lemma]]).
 
-[L3] Extensions of solvable algebras are solvable
-([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
+[L3] Extensions of solvable algebras are solvable ([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
 
-[L4] A complement to the radical with the stated properties is a Levi
-subalgebra ([[def-levi-subalgebra-and-levi-decomposition]]).
+[L4] A complement to the radical with the stated properties is a Levi subalgebra ([[def-levi-subalgebra-and-levi-decomposition]]).
 
-[L5] The second cohomology of a finite-dimensional algebra with coefficients
-in a finite-dimensional module is naturally in bijection with equivalence
-classes of abelian extensions, and the zero class is exactly the split
-extensions ([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]]).
+[L5] The second cohomology of a finite-dimensional algebra with coefficients in a finite-dimensional module is naturally in bijection with equivalence classes of abelian extensions, and the zero class is exactly the split extensions ([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]]).
 
 ## Proof
 

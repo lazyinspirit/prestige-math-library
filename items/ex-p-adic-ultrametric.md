@@ -150,23 +150,6 @@ they hold in every ultrametric space.
 
 ## Remarks
 
-- **Where parity is spent, and where it is not.** The partition of $\mathbb{N}$
-  into the two ranges of [[lem-alternating-sequence]] is used exactly twice: in
-  step 2.1, to know that a natural is even or odd, and through it in step 3.1 for
-  the integers. Uniqueness of the valuation (step 3.2) uses only that no integer
-  is both even and odd, which step 2.2 derives from the discreteness of
-  $\mathbb{Z}$ rather than from the partition.
-- **What an ultrametric costs and what it buys.** Claims 2 and 3 are formal
-  consequences of (M3') and hold in every ultrametric space
-  ([[def-metric-space]]); they are recorded here because they are the two facts
-  that make ultrametric geometry look unlike the real line, where a triangle need
-  not be isosceles and a ball has exactly one centre.
-- **The general $p$-adic absolute value, and what this item does instead.** Its
-  well-definedness needs the primality of $p$ in the form of Euclid's lemma,
-  that $p$ dividing a product divides one of the factors. That is
-  [[thm-euclids-lemma]], and the resulting valuation on $\mathbb{Q}^{\times}$ is
-  [[lem-p-adic-valuation-on-q]], both on the primes page and both available
-  here. This item deliberately does not use them: at $p = 2$ the statement doing
-  the same work is that a product of odd integers is odd, proved in step 1.3
-  above by a one-line ring computation, so the whole development below is
-  self-contained from parity.
+- **Where parity is spent, and where it is not.** The partition of $\mathbb{N}$ into the two ranges of [[lem-alternating-sequence]] is used exactly twice: in step 2.1, to know that a natural is even or odd, and through it in step 3.1 for the integers. Uniqueness of the valuation (step 3.2) uses only that no integer is both even and odd, which step 2.2 derives from the discreteness of $\mathbb{Z}$ rather than from the partition.
+- **What an ultrametric costs and what it buys.** Claims 2 and 3 are formal consequences of (M3') and hold in every ultrametric space ([[def-metric-space]]); they are recorded here because they are the two facts that make ultrametric geometry look unlike the real line, where a triangle need not be isosceles and a ball has exactly one centre.
+- **The general $p$-adic absolute value, and what this item does instead.** Its well-definedness needs the primality of $p$ in the form of Euclid's lemma, that $p$ dividing a product divides one of the factors. That is [[thm-euclids-lemma]], and the resulting valuation on $\mathbb{Q}^{\times}$ is [[lem-p-adic-valuation-on-q]], both on the primes page and both available here. This item deliberately does not use them: at $p = 2$ the statement doing the same work is that a product of odd integers is odd, proved in step 1.3 above by a one-line ring computation, so the whole development below is self-contained from parity.

@@ -38,26 +38,18 @@ $$\alpha = \frac{\alpha_{n+1}p_n + p_{n-1}}{\alpha_{n+1}q_n + q_{n-1}}.$$
 
 ## Facts & Assumptions
 
-**Given:** A real number $\alpha$, its complete quotients $\alpha_n$, and its
-continued-fraction digits $a_n$.
+**Given:** A real number $\alpha$, its complete quotients $\alpha_n$, and its continued-fraction digits $a_n$.
 
-[F1] The complete quotients satisfy
-$\alpha_n = a_n + 1/\alpha_{n+1}$ whenever $\alpha_{n+1}$ is defined.
-([[def-continued-fraction-complete-quotients]]).
+[F1] The complete quotients satisfy $\alpha_n = a_n + 1/\alpha_{n+1}$ whenever $\alpha_{n+1}$ is defined. ([[def-continued-fraction-complete-quotients]]).
 
-[F2] For every $t>0$,
-$$[a_0; a_1,\ldots,a_n,t] = \frac{t p_n + p_{n-1}}{t q_n + q_{n-1}}.$$
-([[lem-continued-fraction-convergent-recurrence]]).
+[F2] For every $t>0$, $$[a_0; a_1,\ldots,a_n,t] = \frac{t p_n + p_{n-1}}{t q_n + q_{n-1}}.$$ ([[lem-continued-fraction-convergent-recurrence]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Repeatedly substituting the identities of [F1] yields. [given, F1, algebra]
-$$\alpha = [a_0; a_1,\ldots,a_n,\alpha_{n+1}]$$
-whenever $\alpha_{n+1}$ is defined. [given, F1, algebra]
+$$\alpha = [a_0; a_1,\ldots,a_n,\alpha_{n+1}]$$ whenever $\alpha_{n+1}$ is defined. [given, F1, algebra]
 
 2.1 Since every complete quotient after the first is $>1$, in particular $\alpha_{n+1}>0$. [step 1.1, F1, F2]
-So step 1.1 and [F2] give
-$$\alpha = \frac{\alpha_{n+1}p_n + p_{n-1}}{\alpha_{n+1}q_n + q_{n-1}}.$$
-[step 1.1, F1, F2] ∎
+So step 1.1 and [F2] give $$\alpha = \frac{\alpha_{n+1}p_n + p_{n-1}}{\alpha_{n+1}q_n + q_{n-1}}.$$ [step 1.1, F1, F2] ∎

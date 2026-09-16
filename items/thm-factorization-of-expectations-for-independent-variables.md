@@ -34,28 +34,19 @@ measurable for each $i<n$.
 
 ## Facts & Assumptions
 
-**Given:** Independent real random variables $X_0,\dots,X_{n-1}$ and Borel
-measurable functions $g_i:\mathbb R\to\mathbb R$.
+**Given:** Independent real random variables $X_0,\dots,X_{n-1}$ and Borel measurable functions $g_i:\mathbb R\to\mathbb R$.
 
-[L1] Measurable coordinatewise functions preserve independence.
-([[lem-measurable-functions-preserve-independence]])
+[L1] Measurable coordinatewise functions preserve independence. ([[lem-measurable-functions-preserve-independence]])
 
-[L2] Independent random elements have product joint law.
-([[thm-independent-random-elements-have-product-joint-law]])
+[L2] Independent random elements have product joint law. ([[thm-independent-random-elements-have-product-joint-law]])
 
-[L3] Expectation is integration against the law after a measurable change of
-variables. ([[thm-change-of-variables-for-expectation]])
+[L3] Expectation is integration against the law after a measurable change of variables. ([[thm-change-of-variables-for-expectation]])
 
-[L4] Tonelli evaluates nonnegative product-measurable integrands on a
-sigma-finite product space. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]])
+[L4] Tonelli evaluates nonnegative product-measurable integrands on a sigma-finite product space. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]])
 
-[L5] Fubini evaluates absolutely integrable product-measurable integrands on a
-sigma-finite product space. ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]])
+[L5] Fubini evaluates absolutely integrable product-measurable integrands on a sigma-finite product space. ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]])
 
-[L6] On a product measurable space, coordinate projections are measurable, and
-finite sums and products of measurable real-valued functions remain measurable.
-([[def-product-sigma-algebra-and-finite-product-sigma-algebras]],
-[[thm-arithmetic-and-lattice-operations-preserve-measurability]])
+[L6] On a product measurable space, coordinate projections are measurable, and finite sums and products of measurable real-valued functions remain measurable. ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]], [[thm-arithmetic-and-lattice-operations-preserve-measurability]])
 
 ## Proof
 

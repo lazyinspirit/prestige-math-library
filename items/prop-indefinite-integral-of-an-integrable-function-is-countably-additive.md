@@ -42,13 +42,7 @@ the notation $\int_A f\,d\mu$ for integrable real or complex $f$.
 **Proof technique:** direct.
 
 1.1 For real-valued $f$, write $f=f^+-f^-$. Then [L1, L2, L3]
-$$\nu_f=\nu_{f^+}-\nu_{f^-},$$
-and both $\nu_{f^+}$ and $\nu_{f^-}$ are measures by [L1]. Because
-$f\in L^1(\mu)$, the total masses of those measures are finite, so subtracting
-their countably additive values on a disjoint family is legitimate and gives
-countable additivity of $\nu_f$.
+$$\nu_f=\nu_{f^+}-\nu_{f^-},$$ and both $\nu_{f^+}$ and $\nu_{f^-}$ are measures by [L1]. Because $f\in L^1(\mu)$, the total masses of those measures are finite, so subtracting their countably additive values on a disjoint family is legitimate and gives countable additivity of $\nu_f$.
 
 2.1 For complex-valued $f=u+iv$, one has [step 1.1, L2, L3] ∎
-$$\nu_f=\nu_u+i\nu_v,$$
-and step 1.1 applies to the real-valued functions $u$ and $v$. Therefore
-$\nu_f$ is countably additive as well.
+$$\nu_f=\nu_u+i\nu_v,$$ and step 1.1 applies to the real-valued functions $u$ and $v$. Therefore $\nu_f$ is countably additive as well.

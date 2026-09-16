@@ -43,24 +43,15 @@ For a domain $\Omega\subseteq\mathbb C^m$, the following are equivalent.
 
 **Given:** A domain $\Omega\subseteq\mathbb C^m$.
 
-[L1] On a domain of holomorphy, compact hulls preserve the boundary-radius
-function exactly
-([[thm-cartan-thullen-boundary-radius-theorem]]).
+[L1] On a domain of holomorphy, compact hulls preserve the boundary-radius function exactly ([[thm-cartan-thullen-boundary-radius-theorem]]).
 
-[L2] Hulls contain the original compact set, are closed in $\Omega$, and are
-coordinate-bounded for compact inputs
-([[lem-basic-properties-of-the-holomorphic-hull]],
-[[def-holomorphically-convex-hull-and-domain]]).
+[L2] Hulls contain the original compact set, are closed in $\Omega$, and are coordinate-bounded for compact inputs ([[lem-basic-properties-of-the-holomorphic-hull]], [[def-holomorphically-convex-hull-and-domain]]).
 
-[L3] A domain of holomorphy is defined by the failure of every common
-simultaneous extension pair
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L3] A domain of holomorphy is defined by the failure of every common simultaneous extension pair ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
-[L4] Every open connected subset of Euclidean space is polygonally connected
-([[thm-open-connected-subsets-of-rn-are-polygonally-connected]]).
+[L4] Every open connected subset of Euclidean space is polygonally connected ([[thm-open-connected-subsets-of-rn-are-polygonally-connected]]).
 
-[L5] Holomorphic functions on a connected domain that agree on a nonempty open
-set agree everywhere ([[thm-identity-theorem-in-several-complex-variables]]).
+[L5] Holomorphic functions on a connected domain that agree on a nonempty open set agree everywhere ([[thm-identity-theorem-in-several-complex-variables]]).
 
 ## Proof
 

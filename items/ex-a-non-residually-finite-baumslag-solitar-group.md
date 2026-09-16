@@ -38,11 +38,9 @@ injective.
 
 ## Facts & Assumptions
 
-**Given:** The classical theorem of Meskin that $\operatorname{BS}(m,n)$ is
-residually finite exactly when $|m|=|n|$ or $|m|=1$ or $|n|=1$.
+**Given:** The classical theorem of Meskin that $\operatorname{BS}(m,n)$ is residually finite exactly when $|m|=|n|$ or $|m|=1$ or $|n|=1$.
 
-[L1] The canonical map is injective exactly when the group is residually finite
-([[cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite]]).
+[L1] The canonical map is injective exactly when the group is residually finite ([[cor-the-canonical-map-is-injective-iff-the-group-is-residually-finite]]).
 
 ## Verification
 

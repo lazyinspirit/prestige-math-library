@@ -51,9 +51,7 @@ $$K \subseteq E \subseteq U,\qquad \mu_F(U \setminus E) < \varepsilon,\qquad \mu
 
 1.1 Every bounded half-open interval is regular. Let $I = (a,b]$. [L1, L4, choose]
 
-Choose $\eta > 0$ so small that
-$F((b+\eta)^-) - F(b) < \varepsilon$; then the open interval
-$U := (a,b+\eta)$ contains $I$ and [L1] gives
+Choose $\eta > 0$ so small that $F((b+\eta)^-) - F(b) < \varepsilon$; then the open interval $U := (a,b+\eta)$ contains $I$ and [L1] gives
 
 $$\mu_F(U \setminus I)=\mu_F((b,b+\eta))<\varepsilon.$$
 

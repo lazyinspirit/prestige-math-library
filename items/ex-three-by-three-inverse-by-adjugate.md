@@ -41,15 +41,11 @@ $$A^{-1}=\frac13 \begin{pmatrix}1&-2&2\\1&1&-1\\-1&2&1\end{pmatrix}.$$
 
 [F1] $\mathbb Q$ is a field ([[thm-rat-field]]).
 
-[F2] The cofactor matrix is $(C_{ij})$ and the adjugate is its transpose
-([[def-matrix-minors-cofactors-and-adjugate]]).
+[F2] The cofactor matrix is $(C_{ij})$ and the adjugate is its transpose ([[def-matrix-minors-cofactors-and-adjugate]]).
 
-[L1] $A\operatorname{adj}(A)=\det(A)I$
-([[thm-adjugate-identity-over-a-commutative-ring]]).
+[L1] $A\operatorname{adj}(A)=\det(A)I$ ([[thm-adjugate-identity-over-a-commutative-ring]]).
 
-[L2] If $\det(A)$ is a unit, then
-$A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$
-([[cor-inverse-matrix-by-adjugate]]).
+[L2] If $\det(A)$ is a unit, then $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$ ([[cor-inverse-matrix-by-adjugate]]).
 
 ## Verification
 

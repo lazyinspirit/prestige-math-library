@@ -31,11 +31,9 @@ The opposite category $\mathbf{Ab}^{\mathrm{op}}$ satisfies AB5.
 
 **Given:** The abelian category $\mathbf{Ab}$.
 
-[L1] The category $\mathbf{Ab}$ does not satisfy AB5*
-([[cex-abelian-groups-do-not-satisfy-ab5-star]]).
+[L1] The category $\mathbf{Ab}$ does not satisfy AB5* ([[cex-abelian-groups-do-not-satisfy-ab5-star]]).
 
-[L2] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L2] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
 ## Counterexample
 

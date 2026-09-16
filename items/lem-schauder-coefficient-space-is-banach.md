@@ -46,11 +46,9 @@ is a bounded linear bijection with $\|S\|\le1$.
 
 ## Facts & Assumptions
 
-[L1] Every finite ordered basis has continuous coordinate maps
-([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] Every finite ordered basis has continuous coordinate maps ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] Every $x\in X$ has a unique norm-convergent expansion in $(e_n)$
-([[def-schauder-basis-and-coordinate-functionals]]).
+[L2] Every $x\in X$ has a unique norm-convergent expansion in $(e_n)$ ([[def-schauder-basis-and-coordinate-functionals]]).
 
 ## Proof
 

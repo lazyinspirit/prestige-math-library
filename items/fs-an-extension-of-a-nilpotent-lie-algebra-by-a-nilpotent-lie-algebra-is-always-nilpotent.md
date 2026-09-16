@@ -31,14 +31,11 @@ ambient Lie algebra is nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$ and the two-dimensional Lie algebra
-$\mathfrak a=kx\oplus ky$ with $[x,y]=y$.
+**Given:** A field $k$ and the two-dimensional Lie algebra $\mathfrak a=kx\oplus ky$ with $[x,y]=y$.
 
-[L1] Nilpotence is termination of the lower central series
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] Nilpotence is termination of the lower central series ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] The bracket in a quotient by an ideal is computed on coset
-representatives ([[def-quotient-lie-algebra]]).
+[L2] The bracket in a quotient by an ideal is computed on coset representatives ([[def-quotient-lie-algebra]]).
 
 ## Refutation
 

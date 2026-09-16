@@ -38,16 +38,11 @@ $M=\bigoplus_{n\in\mathbb Z}M_n$ be a finite graded $S$-module. Then:
 
 ## Facts & Assumptions
 
-**Given:** An Artinian ring $A$, a standard graded $A$-algebra
-$S=A[x_1,\ldots,x_r]/J$ with $\deg x_i=1$, and a finite graded $S$-module
-$M=\bigoplus M_n$.
+**Given:** An Artinian ring $A$, a standard graded $A$-algebra $S=A[x_1,\ldots,x_r]/J$ with $\deg x_i=1$, and a finite graded $S$-module $M=\bigoplus M_n$.
 
-[L1] A twist satisfies $M(-1)_n=M_{n-1}$, hence
-$$ \operatorname{HS}_{M(-1)}(t)=t\operatorname{HS}_M(t) $$
-([[def-graded-ring-and-graded-module]], [[def-hilbert-function-and-hilbert-series]]).
+[L1] A twist satisfies $M(-1)_n=M_{n-1}$, hence $$ \operatorname{HS}_{M(-1)}(t)=t\operatorname{HS}_M(t) $$ ([[def-graded-ring-and-graded-module]], [[def-hilbert-function-and-hilbert-series]]).
 
-[L2] Length is additive in short exact sequences of finite-length modules
-([[cor-length-is-additive-in-short-exact-sequences]]).
+[L2] Length is additive in short exact sequences of finite-length modules ([[cor-length-is-additive-in-short-exact-sequences]]).
 
 ## Proof
 

@@ -41,8 +41,7 @@ explicit.
 
 **Given:** The displayed values of $\epsilon$, $d$, $c_4'$, and $x$.
 
-[A1] Since $\epsilon=\tfrac14<\tfrac12$, the powers of $\epsilon$ decrease as
-their exponents increase.
+[A1] Since $\epsilon=\tfrac14<\tfrac12$, the powers of $\epsilon$ decrease as their exponents increase.
 
 ## Verification
 

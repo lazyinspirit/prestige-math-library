@@ -91,14 +91,6 @@ hypothesis.
 
 ## Remarks
 
-- **The induction is on $\mathbb{N}$ and everything else is algebra.** Only
-  claim 3 needs induction; claims 4 and 5 are obtained from it by the two field
-  operations, and claims 1 and 2 are two substitutions into the equation. The
-  base case is $n = 0$, where $\iota(0) = 0$ and the identity reads $f(0) = 0$;
-  it is a genuine case and not a convention, since $\mathbb{N}$ contains $0$.
+- **The induction is on $\mathbb{N}$ and everything else is algebra.** Only claim 3 needs induction; claims 4 and 5 are obtained from it by the two field operations, and claims 1 and 2 are two substitutions into the equation. The base case is $n = 0$, where $\iota(0) = 0$ and the identity reads $f(0) = 0$; it is a genuine case and not a convention, since $\mathbb{N}$ contains $0$.
 
-- **This is the whole of the algebraic theory.** Every regularity theorem about
-  Cauchy's equation ([[thm-cauchy-functional-equation-regularity]]) works by
-  combining claim 5 with density of $\mathbb{Q}$ in $\mathbb{R}$: the value of
-  $f$ is pinned on a dense set, and a regularity hypothesis is what forbids the
-  values off that set from being arbitrary.
+- **This is the whole of the algebraic theory.** Every regularity theorem about Cauchy's equation ([[thm-cauchy-functional-equation-regularity]]) works by combining claim 5 with density of $\mathbb{Q}$ in $\mathbb{R}$: the value of $f$ is pinned on a dense set, and a regularity hypothesis is what forbids the values off that set from being arbitrary.

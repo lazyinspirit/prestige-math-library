@@ -36,13 +36,9 @@ $R/I$-module, then $m_1,\dots,m_r$ generate $M$ as an $R$-module.
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, an ideal $I \subseteq R$, an $R$-module $M$
-with $R$ $I$-adically complete and $M$ $I$-adically separated, and elements
-$m_1,\dots,m_r \in M$ whose classes generate $M/IM$.
+**Given:** A commutative ring $R$, an ideal $I \subseteq R$, an $R$-module $M$ with $R$ $I$-adically complete and $M$ $I$-adically separated, and elements $m_1,\dots,m_r \in M$ whose classes generate $M/IM$.
 
-[L1] An $I$-adically complete module is identified with the inverse limit of its
-quotients, and separated means $\bigcap_{n \ge 0} I^nM=0$
-([[def-separated-and-complete-filtered-module]]).
+[L1] An $I$-adically complete module is identified with the inverse limit of its quotients, and separated means $\bigcap_{n \ge 0} I^nM=0$ ([[def-separated-and-complete-filtered-module]]).
 
 ## Proof
 

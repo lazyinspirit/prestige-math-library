@@ -34,14 +34,11 @@ are equivalent.
 
 **Given:** A compact Hausdorff space $X$.
 
-[L1] In a compact Hausdorff space, quasicomponents and connected components
-coincide ([[thm-quasicomponents-equal-components-in-a-compact-hausdorff-space]]).
+[L1] In a compact Hausdorff space, quasicomponents and connected components coincide ([[thm-quasicomponents-equal-components-in-a-compact-hausdorff-space]]).
 
-[F1] The notions of compactness and Hausdorffness are those of
-[[def-compact-space]] and [[def-hausdorff-space]].
+[F1] The notions of compactness and Hausdorffness are those of [[def-compact-space]] and [[def-hausdorff-space]].
 
-[L2] Total disconnectedness and total separatedness are the two notions fixed in
-[[def-totally-disconnected-and-totally-separated-spaces]].
+[L2] Total disconnectedness and total separatedness are the two notions fixed in [[def-totally-disconnected-and-totally-separated-spaces]].
 
 ## Proof
 

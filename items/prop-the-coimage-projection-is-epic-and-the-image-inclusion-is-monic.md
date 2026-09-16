@@ -35,14 +35,11 @@ $i_f:\operatorname{im}(f)\to B$ is monic.
 
 ## Facts & Assumptions
 
-**Given:** A morphism $f:A\to B$ with coimage projection $q_f$ and image
-inclusion $i_f$.
+**Given:** A morphism $f:A\to B$ with coimage projection $q_f$ and image inclusion $i_f$.
 
-[L1] The coimage is defined as a cokernel and the image as a kernel
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L1] The coimage is defined as a cokernel and the image as a kernel ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
-[L2] Every coequalizer is epic and every equalizer is monic
-([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
+[L2] Every coequalizer is epic and every equalizer is monic ([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
 
 ## Proof
 

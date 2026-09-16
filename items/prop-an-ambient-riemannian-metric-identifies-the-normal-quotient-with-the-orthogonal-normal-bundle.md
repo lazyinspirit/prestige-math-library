@@ -51,17 +51,13 @@ identifies the quotient normal bundle with its $g$-orthogonal realization.
 
 [L9] A smooth subbundle is locally spanned by part of a smooth ambient frame ([[def-vector-subbundle]]).
 
-[F0] A smooth bundle metric is a fibrewise inner product whose pairing of any
-two smooth local sections is smooth ([[def-smooth-bundle-metric]]).
+[F0] A smooth bundle metric is a fibrewise inner product whose pairing of any two smooth local sections is smooth ([[def-smooth-bundle-metric]]).
 
-[L1] The orthogonal complement of a smooth subbundle is a smooth subbundle
-([[prop-orthogonal-complements-of-subbundles-are-smooth-subbundles]]).
+[L1] The orthogonal complement of a smooth subbundle is a smooth subbundle ([[prop-orthogonal-complements-of-subbundles-are-smooth-subbundles]]).
 
-[L2] The quotient map $TM|_S\to\nu(S)$ is a smooth bundle map
-([[prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map]]).
+[L2] The quotient map $TM|_S\to\nu(S)$ is a smooth bundle map ([[prop-the-canonical-map-to-a-quotient-bundle-is-a-smooth-bundle-map]]).
 
-[L3] A fibrewise bijective smooth bundle map over the identity is a bundle
-isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]]).
+[L3] A fibrewise bijective smooth bundle map over the identity is a bundle isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]]).
 
 ## Proof
 

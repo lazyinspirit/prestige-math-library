@@ -44,69 +44,29 @@ $$\sup_{f\in K}\|f\|_1<\infty,\qquad \forall\varepsilon>0\ \exists\delta>0\ \for
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] AC supplies Dependent Choice and Countable Choice, the ultrafilter lemma,
-and the real Hahn--Banach principle
-([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]],
-[[thm-ultrafilter-lemma]], [[def-hahn-banach-extension-principle-relative]],
-[[thm-hahn-banach-dominated-extension]]).
+[L1] AC supplies Dependent Choice and Countable Choice, the ultrafilter lemma, and the real Hahn--Banach principle ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[thm-ultrafilter-lemma]], [[def-hahn-banach-extension-principle-relative]], [[thm-hahn-banach-dominated-extension]]).
 
-[L2] Real $L^1(\mu)$ is the almost-everywhere quotient with its integral norm
-and is complete under Countable Choice, hence is Banach
-([[def-l-p-space-as-a-quotient-by-null-functions]],
-[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]],
-[[thm-riesz-fischer-completeness-of-l-p]], [[def-banach-space]]).
+[L2] Real $L^1(\mu)$ is the almost-everywhere quotient with its integral norm and is complete under Countable Choice, hence is Banach ([[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], [[thm-riesz-fischer-completeness-of-l-p]], [[def-banach-space]]).
 
-[L3] On a finite measure space, uniform integrability is exactly $L^1$
-boundedness plus the displayed uniform absolute continuity
-([[thm-uniform-integrability-equivalent-to-l-one-boundedness-and-uniform-absolute-continuity-on-finite-measure-spaces]]).
+[L3] On a finite measure space, uniform integrability is exactly $L^1$ boundedness plus the displayed uniform absolute continuity ([[thm-uniform-integrability-equivalent-to-l-one-boundedness-and-uniform-absolute-continuity-on-finite-measure-spaces]]).
 
-[L4] Under the principles supplied by [L1], Eberlein--Smulian identifies
-relative weak compactness with relative weak sequential compactness, and every
-weakly convergent sequence is norm bounded
-([[def-relative-weak-compactness-and-three-sequential-notions]],
-[[thm-eberlein-smulian]],
-[[thm-weakly-convergent-sequences-are-norm-bounded]],
-[[lem-index-map-grows]]).
+[L4] Under the principles supplied by [L1], Eberlein--Smulian identifies relative weak compactness with relative weak sequential compactness, and every weakly convergent sequence is norm bounded ([[def-relative-weak-compactness-and-three-sequential-notions]], [[thm-eberlein-smulian]], [[thm-weakly-convergent-sequences-are-norm-bounded]], [[lem-index-map-grows]]).
 
-[L5] An individual integrable function has absolutely continuous integral,
-and under DC a nonempty complete metric space is a Baire space
-([[thm-absolute-continuity-of-the-integral]],
-[[thm-baire-category-for-complete-metric-spaces]]).
+[L5] An individual integrable function has absolutely continuous integral, and under DC a nonempty complete metric space is a Baire space ([[thm-absolute-continuity-of-the-integral]], [[thm-baire-category-for-complete-metric-spaces]]).
 
-[L6] Under Countable Choice, real $L^2(\mu)$ is reflexive. Under the
-ultrafilter lemma and HB, its closed ball is weakly compact
-([[thm-reflexivity-of-lp-for-one-less-p-less-infinity]],
-[[thm-reflexive-iff-unit-ball-weakly-compact]]).
+[L6] Under Countable Choice, real $L^2(\mu)$ is reflexive. Under the ultrafilter lemma and HB, its closed ball is weakly compact ([[thm-reflexivity-of-lp-for-one-less-p-less-infinity]], [[thm-reflexive-iff-unit-ball-weakly-compact]]).
 
-[L7] Holder's inequality gives the bounded inclusion $L^2\hookrightarrow L^1$
-on a finite measure space. Since a finite measure is sigma-finite, every member
-of $(L^1)^*$ is integration against a member of $L^\infty$
-([[thm-holder-inequality-for-integrals]],
-[[thm-sigma-finite-duality-for-bounded-functionals-on-l-p]]).
+[L7] Holder's inequality gives the bounded inclusion $L^2\hookrightarrow L^1$ on a finite measure space. Since a finite measure is sigma-finite, every member of $(L^1)^*$ is integration against a member of $L^\infty$ ([[thm-holder-inequality-for-integrals]], [[thm-sigma-finite-duality-for-bounded-functionals-on-l-p]]).
 
-[L8] Under HB the canonical map $J_E:E\to E^{**}$ is linear and isometric.
-The weak and weak-star topologies are their evaluation initial topologies, and
-weak-star addition and scalar multiplication are continuous; weak-star space
-is Hausdorff
-([[cor-relative-hahn-banach-bidual-isometry]],
-[[def-weak-topology-on-a-normed-space]], [[def-weak-star-topology]],
-[[lem-basic-weak-star-neighborhoods]]).
+[L8] Under HB the canonical map $J_E:E\to E^{**}$ is linear and isometric. The weak and weak-star topologies are their evaluation initial topologies, and weak-star addition and scalar multiplication are continuous; weak-star space is Hausdorff ([[cor-relative-hahn-banach-bidual-isometry]], [[def-weak-topology-on-a-normed-space]], [[def-weak-star-topology]], [[lem-basic-weak-star-neighborhoods]]).
 
-[L9] Under the ultrafilter lemma, bidual balls are weak-star compact. Closed
-subsets and continuous images of compact spaces are compact, finite products
-of compact spaces are compact, and compact subsets of Hausdorff spaces are
-closed ([[thm-banach-alaoglu]],
-[[thm-closed-subspace-of-a-compact-space-is-compact]],
-[[thm-compactness-under-continuous-maps]],
-[[thm-finite-products-of-compact-spaces]],
-[[thm-compact-subset-of-a-hausdorff-space-is-closed]]).
+[L9] Under the ultrafilter lemma, bidual balls are weak-star compact. Closed subsets and continuous images of compact spaces are compact, finite products of compact spaces are compact, and compact subsets of Hausdorff spaces are closed ([[thm-banach-alaoglu]], [[thm-closed-subspace-of-a-compact-space-is-compact]], [[thm-compactness-under-continuous-maps]], [[thm-finite-products-of-compact-spaces]], [[thm-compact-subset-of-a-hausdorff-space-is-closed]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** AC, a finite measure space, $E=L^1(\mu;\mathbb R)$, and
-$K\subseteq E$.
+**Given:** AC, a finite measure space, $E=L^1(\mu;\mathbb R)$, and $K\subseteq E$.
 
 1.1 Expose every choice principle used below. By [L1], AC supplies Countable Choice for [L2] and [L6], DC for Baire and Eberlein--Smulian, the ultrafilter lemma for Alaoglu and the compactness forms in [L4], [L6], and [L9], and HB for [L4], [L6], and [L8]. No additional choice principle will be left implicit. [given, A1, L1]
 
@@ -122,25 +82,13 @@ For $\eta>0$ define
 
 $$\mathcal X_m=\left\{[\mathbf1_A]\in\mathcal X:\left|\int_Ag_n\,d\mu\right|\leq\eta\ \text{for every }n\geq m\right\}.$$
 
-Each $\mathcal X_m$ is closed. Indeed, $L^1$ convergence of indicators means
-$\mu(A_j\mathbin\triangle A)\to0$, and [L5] applied to the fixed $g_n$ gives
-$\int_{A_j\mathbin\triangle A}|g_n|\to0$ for every $n$. Also
-$\bigcup_m\mathcal X_m=\mathcal X$, because
-$h\mapsto\int_Ah$ is a bounded functional by the endpoint Holder inequality
-in [L7], and hence weak nullity gives $\int_Ag_n\to0$ for each fixed $A$.
+Each $\mathcal X_m$ is closed. Indeed, $L^1$ convergence of indicators means $\mu(A_j\mathbin\triangle A)\to0$, and [L5] applied to the fixed $g_n$ gives $\int_{A_j\mathbin\triangle A}|g_n|\to0$ for every $n$. Also $\bigcup_m\mathcal X_m=\mathcal X$, because $h\mapsto\int_Ah$ is a bounded functional by the endpoint Holder inequality in [L7], and hence weak nullity gives $\int_Ag_n\to0$ for each fixed $A$.
 
 2.3 Uniform integrability gives weakly compact truncation approximants. For the reverse implication assume $K$ is uniformly integrable and fix $\varepsilon>0$. By [L3] choose $M>0$ so that $\int_{\{|f|>M\}}|f|<\varepsilon$ for all $f\in K$. The truncation $T_Mf=\max(-M,\min(f,M))$ is well defined on classes, measurable, and [L3, L6, L7, step 1.1, step 1.2, step 1.3, construct]
 
 $$\|f-T_Mf\|_1\leq\int_{\{|f|>M\}}|f|\,d\mu<\varepsilon.$$
 
-Every $T_Mf$ belongs to $L^2$ and has $L^2$ norm at most
-$R=M\sqrt{\mu(S)}$. By [L6], $R B_{L^2}$ is weakly compact. The inclusion
-$I:L^2\to E$ satisfies $\|Ih\|_1\leq\sqrt{\mu(S)}\|h\|_2$ by [L7] and is
-weak-to-weak continuous: if $\Lambda\in E^*$, [L7] writes
-$\Lambda(h)=\int hg$ for some $g\in L^\infty$; finiteness of $\mu$ puts
-$g\in L^2$, so this is an $L^2$-continuous functional. Therefore
-$C_\varepsilon=I(RB_{L^2})$ is weakly compact and
-$K\subseteq C_\varepsilon+\varepsilon B_E$.
+Every $T_Mf$ belongs to $L^2$ and has $L^2$ norm at most $R=M\sqrt{\mu(S)}$. By [L6], $R B_{L^2}$ is weakly compact. The inclusion $I:L^2\to E$ satisfies $\|Ih\|_1\leq\sqrt{\mu(S)}\|h\|_2$ by [L7] and is weak-to-weak continuous: if $\Lambda\in E^*$, [L7] writes $\Lambda(h)=\int hg$ for some $g\in L^\infty$; finiteness of $\mu$ puts $g\in L^2$, so this is an $L^2$-continuous functional. Therefore $C_\varepsilon=I(RB_{L^2})$ is weakly compact and $K\subseteq C_\varepsilon+\varepsilon B_E$.
 
 3.1 Apply Baire to obtain one uniform tail neighborhood. The Baire theorem applied to the complete nonempty space $\mathcal X$ and its closed cover $(\mathcal X_m)$ gives $N$, an indicator $[\mathbf1_{A_0}]$, and $\rho>0$ such that every indicator whose $L^1$ distance from $[\mathbf1_{A_0}]$ is below $\rho$ belongs to $\mathcal X_N$. [L5, step 1.1, step 2.2]
 
@@ -150,30 +98,19 @@ $K\subseteq C_\varepsilon+\varepsilon B_E$.
 
 $$\left|\int_Ag_n\right|=\left|\int_{B_1}g_n-\int_{B_2}g_n\right|\leq2\eta.$$
 
-Apply this to $A\cap\{g_n\geq0\}$ and $A\cap\{g_n<0\}$. Their measures are
-below $\rho$, and the two signed integrals have absolute value at most
-$2\eta$, whence $\int_A|g_n|\leq4\eta=\varepsilon/2$ for $n\geq N$.
-For the finitely many $n<N$, [L5] supplies a common positive $\delta\leq\rho$
-for which every corresponding integral is below $\varepsilon$. Thus
-$\mu(A)<\delta$ implies $\int_A|g_n|<\varepsilon$ for every $n$: every weakly
-null sequence has uniformly absolutely continuous integrals.
+Apply this to $A\cap\{g_n\geq0\}$ and $A\cap\{g_n<0\}$. Their measures are below $\rho$, and the two signed integrals have absolute value at most $2\eta$, whence $\int_A|g_n|\leq4\eta=\varepsilon/2$ for $n\geq N$. For the finitely many $n<N$, [L5] supplies a common positive $\delta\leq\rho$ for which every corresponding integral is below $\varepsilon$. Thus $\mu(A)<\delta$ implies $\int_A|g_n|<\varepsilon$ for every $n$: every weakly null sequence has uniformly absolutely continuous integrals.
 
 4.2 Trap the bidual closure in compact neighborhoods of the canonical image. For each $\varepsilon>0$, the set $J_E(C_\varepsilon)$ is weak-star compact, because $C_\varepsilon$ is weakly compact and $J_E$ is weak-to-weak-star continuous. The product $J_E(C_\varepsilon)\times\varepsilon B_{E^{**}}$ is compact by [L9], and weak-star addition is continuous by [L8]. Hence [L8, L9, step 1.2, step 2.3, step 3.2]
 
 $$S_\varepsilon:=J_E(C_\varepsilon)+\varepsilon B_{E^{**}}$$
 
-is weak-star compact and therefore weak-star closed in the Hausdorff weak-star
-space. Step 2.3 gives $J_E(K)\subseteq S_\varepsilon$, so its weak-star
-closure satisfies $G\subseteq S_\varepsilon$ for every $\varepsilon>0$.
+is weak-star compact and therefore weak-star closed in the Hausdorff weak-star space. Step 2.3 gives $J_E(K)\subseteq S_\varepsilon$, so its weak-star closure satisfies $G\subseteq S_\varepsilon$ for every $\varepsilon>0$.
 
 5.1 Every weakly convergent sequence is uniformly integrable. If $f_n\rightharpoonup f$, then $g_n=f_n-f$ is weakly null. Step 4.1 gives uniform absolute continuity of $(g_n)$, and [L4] gives norm boundedness. The individual function $f$ has absolutely continuous integral by [L5], so $\int_A|f_n|\leq\int_A|g_n|+\int_A|f|$ makes $(f_n)$ uniformly absolutely continuous as well. It is norm bounded by the triangle inequality. Thus [L3] makes the entire sequence $(f_n)$ uniformly integrable, including its finite initial segment. [L3, L4, L5, step 1.1, step 4.1]
 
 5.2 Show that the compact bidual closure actually lies in $J_E(E)$. First $J_E(E)$ is norm closed. Indeed, if $y$ is in its norm closure, AC chooses $x_n\in E$ with $\|y-J_Ex_n\|<1/(n+1)$. Isometry makes $(x_n)$ Cauchy; completeness of $E$ gives $x_n\to x$, and then $J_Ex_n\to J_Ex=y$. [A1, L2, L8, step 1.1, step 4.2, choose]
 
-Now let $z\in G$. From $G\subseteq S_{1/(n+1)}$, AC chooses
-$c_n\in J_E(C_{1/(n+1)})\subseteq J_E(E)$ with
-$\|z-c_n\|\leq1/(n+1)$. Hence $z$ belongs to the norm closure of $J_E(E)$,
-which is $J_E(E)$. Therefore $G\subseteq J_E(E)$.
+Now let $z\in G$. From $G\subseteq S_{1/(n+1)}$, AC chooses $c_n\in J_E(C_{1/(n+1)})\subseteq J_E(E)$ with $\|z-c_n\|\leq1/(n+1)$. Hence $z$ belongs to the norm closure of $J_E(E)$, which is $J_E(E)$. Therefore $G\subseteq J_E(E)$.
 
 6.1 Complete the relatively-weakly-compact-to-UI implication. Assume $K$ is relatively weakly compact. If its integrals were not uniformly absolutely continuous, AC would supply $\varepsilon_0>0$, $f_n\in K$, and $A_n\in\mathcal A$ with $\mu(A_n)<1/(n+1)$ but $\int_{A_n}|f_n|\geq\varepsilon_0$. By [L4], a subsequence $f_{n_j}$ converges weakly. Step 5.1 makes that subsequence uniformly integrable and hence uniformly absolutely continuous by [L3]. But $n_j\geq j$ makes $\mu(A_{n_j})\to0$, contradicting the displayed lower bound. Thus $K$ is uniformly absolutely continuous; step 2.1 supplies norm boundedness, so [L3] makes $K$ uniformly integrable. [A1, L3, L4, step 1.1, step 2.1, step 5.1, choose]
 

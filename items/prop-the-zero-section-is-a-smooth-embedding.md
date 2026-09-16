@@ -32,11 +32,9 @@ $0_M:M\to E$, $p\mapsto 0_p$, is a smooth embedding.
 
 **Given:** A smooth vector bundle $\pi:E\to M$.
 
-[L1] In a vector bundle chart, the bundle is identified over the identity with
-$U\times\mathbb R^r$ ([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]).
+[L1] In a vector bundle chart, the bundle is identified over the identity with $U\times\mathbb R^r$ ([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]).
 
-[L2] A smooth embedding is an injective immersion which is a homeomorphism onto
-its image with the subspace topology ([[def-smooth-embedding]]).
+[L2] A smooth embedding is an injective immersion which is a homeomorphism onto its image with the subspace topology ([[def-smooth-embedding]]).
 
 ## Proof
 

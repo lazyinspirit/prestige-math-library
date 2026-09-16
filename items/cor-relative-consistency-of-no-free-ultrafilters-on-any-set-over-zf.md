@@ -29,18 +29,11 @@ ultrafilter on every set is principal.
 
 ## Facts & Assumptions
 
-**Given:** $\operatorname{Con}(\mathrm{ZF})$ for the fixed formal theories.
-This is a syntactic consistency hypothesis, not a set-model or transitive-model
-hypothesis.
+**Given:** $\operatorname{Con}(\mathrm{ZF})$ for the fixed formal theories. This is a syntactic consistency hypothesis, not a set-model or transitive-model hypothesis.
 
-[F1] [[lem-blass-ultrafilter-free-model-is-finitely-formalizable]] proves for
-every externally fixed finite target fragment that a suitable finite ZFC
-source proves the existence of a set model of that fragment.
+[F1] [[lem-blass-ultrafilter-free-model-is-finitely-formalizable]] proves for every externally fixed finite target fragment that a suitable finite ZFC source proves the existence of a set model of that fragment.
 
-[F2] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] proves
-$\operatorname{Con}(\mathrm{ZF})\to
-\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ by a verified proof
-translation and does not assume a transitive set model.
+[F2] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] proves $\operatorname{Con}(\mathrm{ZF})\to \operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ by a verified proof translation and does not assume a transitive set model.
 
 ## Proof
 

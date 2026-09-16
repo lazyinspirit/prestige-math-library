@@ -31,12 +31,9 @@ with nonabelian kernel.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field and the split extension displayed
-below.
+**Given:** A characteristic-zero field and the split extension displayed below.
 
-[L1] The $H^2$ classification theorem applies to extensions with abelian
-kernel, regarded as a module
-([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]]).
+[L1] The $H^2$ classification theorem applies to extensions with abelian kernel, regarded as a module ([[thm-second-lie-algebra-cohomology-classifies-abelian-extensions]]).
 
 ## Counterexample
 

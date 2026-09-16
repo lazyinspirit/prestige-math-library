@@ -42,8 +42,7 @@ Let $\Omega\subseteq\mathbb C$ be a complex domain.
 
 [L2] The defining submean inequality for subharmonicity is linear in the function being averaged ([[def-plane-subharmonic-function]]).
 
-[L3] A subharmonic function is finite almost everywhere
-([[thm-plane-subharmonic-functions-are-locally-integrable]]).
+[L3] A subharmonic function is finite almost everywhere ([[thm-plane-subharmonic-functions-are-locally-integrable]]).
 
 ## Proof
 

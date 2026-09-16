@@ -32,14 +32,11 @@ $$\dot q^i=\frac{\partial H}{\partial p_i},\qquad \dot p_i=-\frac{\partial H}{\p
 
 ## Facts & Assumptions
 
-**Given:** The cotangent convention
-$\omega=\sum_i dq^i\wedge dp_i$ and $\iota_{X_H}\omega=dH$.
+**Given:** The cotangent convention $\omega=\sum_i dq^i\wedge dp_i$ and $\iota_{X_H}\omega=dH$.
 
-[F1] The canonical cotangent form has the displayed coordinate expression.
-[[thm-the-canonical-cotangent-two-form-is-symplectic]].
+[F1] The canonical cotangent form has the displayed coordinate expression. [[thm-the-canonical-cotangent-two-form-is-symplectic]].
 
-[F2] The Hamiltonian vector field satisfies $\iota_{X_H}\omega=dH$.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F2] The Hamiltonian vector field satisfies $\iota_{X_H}\omega=dH$. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

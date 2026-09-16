@@ -45,15 +45,11 @@ In particular, $A_rf(x)\to f(x)$ for almost every $x$.
 
 **Given:** The Axiom of Countable Choice and a one-periodic function $f$ with $f|_{[0,1]}\in L^1([0,1])$.
 
-[L1] The Abel means satisfy $A_rf=f*P_r$, so
-$$A_rf(x)=\int_0^1 f(x-t)P_r(t)\,dt$$
-for every $x$ and every $0\le r<1$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
+[L1] The Abel means satisfy $A_rf=f*P_r$, so $$A_rf(x)=\int_0^1 f(x-t)P_r(t)\,dt$$ for every $x$ and every $0\le r<1$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
 
 [L2] The Poisson kernels are nonnegative, have integral $1$, and their mass on $[\delta,1-\delta]$ tends to $0$ as $r\uparrow1$ ([[lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity]]).
 
-[L3] At a Lebesgue point,
-$$\lim_{h\to0^+}\frac1{2h}\int_{-h}^h |f(x-t)-f(x)|\,dt=0$$
-([[def-lebesgue-point-and-lebesgue-set]]).
+[L3] At a Lebesgue point, $$\lim_{h\to0^+}\frac1{2h}\int_{-h}^h |f(x-t)-f(x)|\,dt=0$$ ([[def-lebesgue-point-and-lebesgue-set]]).
 
 [L4] Assuming the Axiom of Countable Choice, almost every point is a Lebesgue point ([[thm-almost-every-point-is-a-lebesgue-point]]).
 

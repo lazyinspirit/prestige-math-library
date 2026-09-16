@@ -27,8 +27,7 @@ First cohomology classifies all subgroups of a semidirect product.
 
 **Given:** The semidirect product $A\rtimes G$.
 
-[L1] First cohomology classifies complements to the kernel up to kernel
-conjugacy ([[thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]]).
+[L1] First cohomology classifies complements to the kernel up to kernel conjugacy ([[thm-first-cohomology-classifies-complements-up-to-kernel-conjugacy]]).
 
 ## Refutation
 

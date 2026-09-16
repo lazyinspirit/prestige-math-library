@@ -40,34 +40,23 @@ choice alone.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice ([[def-axiom-of-choice]]). Write $\lambda$
-for Lebesgue measure on $\mathcal L(\mathbb R)$.
+**Given:** The Axiom of Choice ([[def-axiom-of-choice]]). Write $\lambda$ for Lebesgue measure on $\mathcal L(\mathbb R)$.
 
 [L1] Every section of a product-measurable set is measurable. ([[thm-sections-of-product-measurable-sets-are-measurable]])
 
-[L2] Assuming countable choice, Lebesgue measure is sigma-finite.
-([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
+[L2] Assuming countable choice, Lebesgue measure is sigma-finite. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
 
-[L3] For sigma-finite factors, the product measure satisfies the rectangle
-formula. ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
+[L3] For sigma-finite factors, the product measure satisfies the rectangle formula. ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
 
-[L4] Assuming countable choice, the intervals $\{0\}=[0,0]$ and $[0,1]$
-are Lebesgue measurable with measures $0$ and $1$ respectively.
-([[thm-lebesgue-measure-of-a-box-of-every-kind]])
+[L4] Assuming countable choice, the intervals $\{0\}=[0,0]$ and $[0,1]$ are Lebesgue measurable with measures $0$ and $1$ respectively. ([[thm-lebesgue-measure-of-a-box-of-every-kind]])
 
-[L5] Assuming countable choice, Euclidean Lebesgue measure is complete.
-([[thm-lebesgue-measure-is-a-complete-measure]])
+[L5] Assuming countable choice, Euclidean Lebesgue measure is complete. ([[thm-lebesgue-measure-is-a-complete-measure]])
 
-[L6] Under AC a Vitali set on $[0,1]$ exists
-([[thm-vitali-sets-exist-under-choice-on-r-over-q]],
-[[def-vitali-set-on-the-unit-interval]]), and every such set is non-Lebesgue-measurable
-([[thm-a-vitali-set-is-not-lebesgue-measurable]]).
+[L6] Under AC a Vitali set on $[0,1]$ exists ([[thm-vitali-sets-exist-under-choice-on-r-over-q]], [[def-vitali-set-on-the-unit-interval]]), and every such set is non-Lebesgue-measurable ([[thm-a-vitali-set-is-not-lebesgue-measurable]]).
 
-[L7] Completeness means that every subset of a measurable null set is
-measurable ([[def-complete-measure-space]]).
+[L7] Completeness means that every subset of a measurable null set is measurable ([[def-complete-measure-space]]).
 
-[L8] Countable choice asks for a choice function on every sequence of
-nonempty sets ([[def-countable-choice]]).
+[L8] Countable choice asks for a choice function on every sequence of nonempty sets ([[def-countable-choice]]).
 
 ## Verification
 

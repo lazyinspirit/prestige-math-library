@@ -34,17 +34,11 @@ Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space.
 
 **Given:** A probability space and a random variable $X$ in the relevant clause.
 
-[L1] Expectation is integration against $\mathbb P$, and $X=X^+-X^-$ with
-$|X|=X^++X^-$ for real $X$
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]],
-[[def-positive-and-negative-parts-of-a-function]]).
+[L1] Expectation is integration against $\mathbb P$, and $X=X^+-X^-$ with $|X|=X^++X^-$ for real $X$ ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]], [[def-positive-and-negative-parts-of-a-function]]).
 
-[L2] The layer-cake formula with $p=1$ gives
-$$\int |f|\,d\mu=\int_0^\infty \mu(\{|f|>t\})\,dt$$
-for measurable $f$ ([[thm-layer-cake-formula-for-l-p-powers]]).
+[L2] The layer-cake formula with $p=1$ gives $$\int |f|\,d\mu=\int_0^\infty \mu(\{|f|>t\})\,dt$$ for measurable $f$ ([[thm-layer-cake-formula-for-l-p-powers]]).
 
-[L3] The Lebesgue integral is linear on $L^1$
-([[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
+[L3] The Lebesgue integral is linear on $L^1$ ([[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
 
 ## Proof
 

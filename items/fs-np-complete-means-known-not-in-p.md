@@ -40,9 +40,7 @@ $P$.
 
 [L2] If an NP-complete language lies in $P$, then $P=NP$, by [[prop-an-np-complete-language-in-p-implies-p-equals-np]].
 
-[F1] The question whether $P=NP$ remains unsolved; the Clay Mathematics
-Institute lists [P versus NP](https://www.claymath.org/millennium/p-vs-np/)
-as an unsolved Millennium Prize Problem.
+[F1] The question whether $P=NP$ remains unsolved; the Clay Mathematics Institute lists [P versus NP](https://www.claymath.org/millennium/p-vs-np/) as an unsolved Millennium Prize Problem.
 
 ## Refutation
 

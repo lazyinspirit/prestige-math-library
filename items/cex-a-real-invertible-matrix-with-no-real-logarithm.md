@@ -41,17 +41,13 @@ surjective even when the group is connected.
 
 **Given:** The displayed real matrix $A$.
 
-[F1] $\operatorname{GL}_2(\mathbb R)$ is a matrix Lie group with tangent
-algebra $M_2(\mathbb R)$. [[ex-general-and-special-linear-lie-groups]].
+[F1] $\operatorname{GL}_2(\mathbb R)$ is a matrix Lie group with tangent algebra $M_2(\mathbb R)$. [[ex-general-and-special-linear-lie-groups]].
 
-[F2] Its Lie exponential is the ordinary matrix exponential.
-[[ex-matrix-exponential-as-the-lie-group-exponential]].
+[F2] Its Lie exponential is the ordinary matrix exponential. [[ex-matrix-exponential-as-the-lie-group-exponential]].
 
-[F3] Determinant is given by the finite Leibniz formula.
-[[def-determinant-of-a-square-matrix]].
+[F3] Determinant is given by the finite Leibniz formula. [[def-determinant-of-a-square-matrix]].
 
-[F4] Countable choice is inherited through [F1] and [F2].
-[[def-countable-choice]].
+[F4] Countable choice is inherited through [F1] and [F2]. [[def-countable-choice]].
 
 ## Refutation
 

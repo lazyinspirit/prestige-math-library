@@ -70,6 +70,4 @@ algebra multiplication and units when $V$ is an $F$-algebra.
 
 ## Remarks
 
-The local trace-dual formula refines the evaluation-matrix proof in Zheng,
-Theorem 3.8.1, pp.132–133. Its injectivity argument uses finite lists, so no
-choice of an infinite invariant basis is needed.
+The local trace-dual formula refines the evaluation-matrix proof in Zheng, Theorem 3.8.1, pp.132–133. Its injectivity argument uses finite lists, so no choice of an infinite invariant basis is needed.

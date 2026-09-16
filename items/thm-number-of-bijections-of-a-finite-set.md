@@ -75,19 +75,8 @@ $\lvert X\rvert \ne \lvert Y\rvert$ then $\operatorname{Bij}(X,Y) = \varnothing$
 
 ## Remarks
 
-- **No group vocabulary is used or needed.** $\operatorname{Bij}(A)$ is written
-  here as a **set** of bijections. Composition makes it a group, and that
-  structure, together with the name *symmetric group*, is introduced in
-  [[def-symmetric-group]] later in the reading order; the pointer is orientation
-  only and nothing above rests on it. The count $n!$ proved here is what a later
-  page needs in order to say that the symmetric group on $n$ letters has $n!$
-  elements.
+- **No group vocabulary is used or needed.** $\operatorname{Bij}(A)$ is written here as a **set** of bijections. Composition makes it a group, and that structure, together with the name *symmetric group*, is introduced in [[def-symmetric-group]] later in the reading order; the pointer is orientation only and nothing above rests on it. The count $n!$ proved here is what a later page needs in order to say that the symmetric group on $n$ letters has $n!$ elements.
 
-- **Why this is on the main page and not among the examples.** Later pages
-  consume this count, and an examples page is a leaf that nothing else may
-  depend on.
+- **Why this is on the main page and not among the examples.** Later pages consume this count, and an examples page is a leaf that nothing else may depend on.
 
-- **The two-set form costs one line and is used immediately.** The closed formula
-  for $\binom{n}{k}$ counts the bijections between an initial segment and an
-  arbitrary $k$-element subset, which is exactly $\operatorname{Bij}(X,Y)$ with
-  $X \ne Y$.
+- **The two-set form costs one line and is used immediately.** The closed formula for $\binom{n}{k}$ counts the bijections between an initial segment and an arbitrary $k$-element subset, which is exactly $\operatorname{Bij}(X,Y)$ with $X \ne Y$.

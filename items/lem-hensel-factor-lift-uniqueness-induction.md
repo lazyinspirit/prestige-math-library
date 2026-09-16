@@ -37,11 +37,9 @@ for every $r \ge 1$.
 
 ## Facts & Assumptions
 
-**Given:** Two monic lifts $f=gh=g'h'$ of the same coprime residue
-factorization.
+**Given:** Two monic lifts $f=gh=g'h'$ of the same coprime residue factorization.
 
-[L1] Coprime residue factors admit a lifted Bezout identity modulo $I$
-([[lem-coprime-factor-bezout-lift]]).
+[L1] Coprime residue factors admit a lifted Bezout identity modulo $I$ ([[lem-coprime-factor-bezout-lift]]).
 
 ## Proof
 

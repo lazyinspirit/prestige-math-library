@@ -36,8 +36,7 @@ $$R_I^n\mathcal A(X,-)(J)=0\qquad(n>0).$$
 This is the basic right-derived pattern that later becomes Ext.
 ## Facts & Assumptions
 
-**Given:** The Axiom of Dependent Choice, an object $X$, supplied injective
-resolution data $I$, and an injective object $J\in\mathcal D$.
+**Given:** The Axiom of Dependent Choice, an object $X$, supplied injective resolution data $I$, and an injective object $J\in\mathcal D$.
 
 [L1] Hom is left exact in each variable, so $\mathcal A(X,-)$ is left exact ([[thm-hom-is-left-exact-in-each-variable]]).
 

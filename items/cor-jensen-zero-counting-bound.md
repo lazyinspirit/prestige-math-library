@@ -34,10 +34,7 @@ $$n(r)\log\frac{R}{r}\le\frac{1}{2\pi}\int_0^{2\pi}\log|f(Re^{it})|\,dt-\log|f(0
 
 **Given:** A holomorphic function $f$ on a neighbourhood of the closed disc $\{|z|\le R\}$ with $f(0)\ne0$, and a radius $0<r<R$.
 
-[F1] Jensen's formula gives
-$$\log|f(0)|=\frac{1}{2\pi}\int_0^{2\pi}\log|f(Re^{it})|\,dt-\sum_{k=1}^{N}\log\frac{R}{|a_k|}$$
-for the zeros $a_k$ of $f$ in $|z|<R$
-([[thm-jensen-formula-on-a-disc]]).
+[F1] Jensen's formula gives $$\log|f(0)|=\frac{1}{2\pi}\int_0^{2\pi}\log|f(Re^{it})|\,dt-\sum_{k=1}^{N}\log\frac{R}{|a_k|}$$ for the zeros $a_k$ of $f$ in $|z|<R$ ([[thm-jensen-formula-on-a-disc]]).
 
 ## Proof
 

@@ -39,16 +39,11 @@ Radon--Nikodym property.
 
 ## Facts & Assumptions
 
-[A1] The Axiom of Choice holds and implies the Axiom of Countable Choice
-([[def-axiom-of-choice]],
-[[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
+[A1] The Axiom of Choice holds and implies the Axiom of Countable Choice ([[def-axiom-of-choice]], [[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
-[L1] Under Countable Choice, every complete real or complex inner-product
-space is reflexive
-([[thm-hilbert-spaces-are-reflexive-by-riesz-representation]]).
+[L1] Under Countable Choice, every complete real or complex inner-product space is reflexive ([[thm-hilbert-spaces-are-reflexive-by-riesz-representation]]).
 
-[L2] Under AC, every real or complex reflexive Banach space has the
-Radon--Nikodym property ([[thm-reflexive-spaces-have-rnp]]).
+[L2] Under AC, every real or complex reflexive Banach space has the Radon--Nikodym property ([[thm-reflexive-spaces-have-rnp]]).
 
 ## Verification
 

@@ -37,11 +37,9 @@ contain the blockade required by that theorem.
 
 ## Facts & Assumptions
 
-**Given:** The maximal layout and counterexample hypotheses in the proof of
-Theorem 6.1 of the cited source.
+**Given:** The maximal layout and counterexample hypotheses in the proof of Theorem 6.1 of the cited source.
 
-[L1] Claim 6.1.1 of the cited source proves that a chosen layout with at least
-$\epsilon^{-1}$ blocks already satisfies the target blockade conclusion.
+[L1] Claim 6.1.1 of the cited source proves that a chosen layout with at least $\epsilon^{-1}$ blocks already satisfies the target blockade conclusion.
 
 ## Proof
 

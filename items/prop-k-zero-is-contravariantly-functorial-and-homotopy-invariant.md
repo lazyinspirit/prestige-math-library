@@ -41,19 +41,13 @@ then $f^*$ restricts to $\widetilde K^0(Y)\to\widetilde K^0(X)$.
 
 **Given:** AC and continuous maps between compact Hausdorff spaces.
 
-[F1] Pullback bundles have canonical identity and composite comparisons
-([[prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]]).
+[F1] Pullback bundles have canonical identity and composite comparisons ([[prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]]).
 
-[F2] Under AC, homotopic maps pull a vector bundle back to isomorphic endpoint
-bundles ([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
+[F2] Under AC, homotopic maps pull a vector bundle back to isomorphic endpoint bundles ([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
 
-[F3] Grothendieck completion is universal for monoid maps
-([[def-complex-topological-k-zero-by-grothendieck-completion]]), and tensor
-product defines the ring structure
-([[def-grothendieck-ring-structure-and-rank-map]]).
+[F3] Grothendieck completion is universal for monoid maps ([[def-complex-topological-k-zero-by-grothendieck-completion]]), and tensor product defines the ring structure ([[def-grothendieck-ring-structure-and-rank-map]]).
 
-[F4] Reduced $K^0$ is the kernel of restriction to the basepoint
-([[def-reduced-complex-k-theory]]).
+[F4] Reduced $K^0$ is the kernel of restriction to the basepoint ([[def-reduced-complex-k-theory]]).
 
 [A1] AC is used only through the endpoint-isomorphism theorem [F2].
 

@@ -37,22 +37,15 @@ Every domain of holomorphy in $\mathbb C^m$ is Hartogs pseudoconvex.
 
 **Given:** A domain of holomorphy $\Omega\subseteq\mathbb C^m$.
 
-[L1] Domains of holomorphy satisfy the continuity principle for continuous
-families of analytic discs
-([[thm-continuity-principle-for-domains-of-holomorphy]]).
+[L1] Domains of holomorphy satisfy the continuity principle for continuous families of analytic discs ([[thm-continuity-principle-for-domains-of-holomorphy]]).
 
-[L2] Hartogs pseudoconvexity means that $-\log\delta_\Omega$ is
-plurisubharmonic ([[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]]).
+[L2] Hartogs pseudoconvexity means that $-\log\delta_\Omega$ is plurisubharmonic ([[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]]).
 
-[L3] The boundary-radius function is the sup-norm distance to the complement,
-so it is continuous on a proper domain ([[def-polydisc-boundary-radius]]).
+[L3] The boundary-radius function is the sup-norm distance to the complement, so it is continuous on a proper domain ([[def-polydisc-boundary-radius]]).
 
-[L4] Every unital point-separating self-adjoint complex function algebra on a
-compact Hausdorff space is uniformly dense
-([[thm-complex-stone-weierstrass-self-adjoint]]).
+[L4] Every unital point-separating self-adjoint complex function algebra on a compact Hausdorff space is uniformly dense ([[thm-complex-stone-weierstrass-self-adjoint]]).
 
-[L5] Plane subharmonicity is the upper-semicontinuous disc-submean condition
-([[def-plane-subharmonic-function]]).
+[L5] Plane subharmonicity is the upper-semicontinuous disc-submean condition ([[def-plane-subharmonic-function]]).
 
 ## Proof
 

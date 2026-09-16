@@ -36,11 +36,7 @@ set is still forced to be discrete.
 
 **Given:** The smooth function $f:\mathbb R^2\to\mathbb R$, $f(x,y)=x^2$.
 
-[F1] Critical points are the zeros of the differential, the Hessian is computed
-at a critical point, and degeneracy means the Hessian has nontrivial kernel
-([[def-critical-point-and-critical-value-of-a-smooth-function]],
-[[def-hessian-of-a-function-at-a-critical-point]],
-[[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F1] Critical points are the zeros of the differential, the Hessian is computed at a critical point, and degeneracy means the Hessian has nontrivial kernel ([[def-critical-point-and-critical-value-of-a-smooth-function]], [[def-hessian-of-a-function-at-a-critical-point]], [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
 ## Counterexample
 

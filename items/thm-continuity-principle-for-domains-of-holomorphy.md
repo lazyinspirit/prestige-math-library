@@ -43,18 +43,13 @@ $$\Phi_t(\overline{\mathbb D})\subseteq\Omega\qquad(t\in[0,1]).$$
 
 ## Facts & Assumptions
 
-**Given:** A domain of holomorphy $\Omega$ and a continuous family of analytic
-discs $\Phi$ satisfying the boundary and initial-disc hypotheses.
+**Given:** A domain of holomorphy $\Omega$ and a continuous family of analytic discs $\Phi$ satisfying the boundary and initial-disc hypotheses.
 
-[L1] The family and its boundary hypotheses are those of
-[[def-continuous-family-of-analytic-discs]].
+[L1] The family and its boundary hypotheses are those of [[def-continuous-family-of-analytic-discs]].
 
-[L2] A domain of holomorphy is holomorphically convex, so the holomorphic hull
-of a compact subset is compactly contained in the domain
-([[thm-cartan-thullen-theorem]]).
+[L2] A domain of holomorphy is holomorphically convex, so the holomorphic hull of a compact subset is compactly contained in the domain ([[thm-cartan-thullen-theorem]]).
 
-[L3] A function holomorphic on a disc and continuous on its closure is bounded
-there by its boundary maximum ([[thm-boundary-maximum-modulus-principle]]).
+[L3] A function holomorphic on a disc and continuous on its closure is bounded there by its boundary maximum ([[thm-boundary-maximum-modulus-principle]]).
 
 ## Proof
 

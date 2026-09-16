@@ -35,15 +35,11 @@ $\chi(n)=0$.
 
 **Given:** A Dirichlet character $\chi$ modulo $q$ and an integer $n$.
 
-[L1] A Dirichlet character modulo $q$ is a homomorphism on
-$(\mathbb Z/q\mathbb Z)^\times$, extended by zero on nonunits
-([[def-dirichlet-character-modulo-q]]).
+[L1] A Dirichlet character modulo $q$ is a homomorphism on $(\mathbb Z/q\mathbb Z)^\times$, extended by zero on nonunits ([[def-dirichlet-character-modulo-q]]).
 
-[L2] The extension vanishes exactly when $(n,q)>1$
-([[lem-dirichlet-character-extension-well-defined]]).
+[L2] The extension vanishes exactly when $(n,q)>1$ ([[lem-dirichlet-character-extension-well-defined]]).
 
-[A1] The finite group $(\mathbb Z/q\mathbb Z)^\times$ has finite order, so every
-element of it has finite order.
+[A1] The finite group $(\mathbb Z/q\mathbb Z)^\times$ has finite order, so every element of it has finite order.
 
 ## Proof
 

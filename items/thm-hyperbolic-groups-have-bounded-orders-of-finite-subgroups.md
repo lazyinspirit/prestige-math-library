@@ -33,8 +33,7 @@ $|F| \le B_S$.
 
 [A2] Only finitely many group elements can act faithfully on a fixed finite ball in the Cayley graph, so a uniform orbit-diameter bound yields a uniform order bound.
 
-[L1] Morse stability is one of the geometric tools used in the standard proof
-([[thm-morse-stability-of-quasi-geodesics]]).
+[L1] Morse stability is one of the geometric tools used in the standard proof ([[thm-morse-stability-of-quasi-geodesics]]).
 
 ## Proof
 

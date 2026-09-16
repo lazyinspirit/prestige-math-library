@@ -75,18 +75,8 @@ closedness.
 
 ## Remarks
 
-- **The two failures are independent and happen at different points.** Openness
-  fails only at $0$: every $x$ with $0 < x < 1$ does have a neighbourhood inside
-  $E$. Closedness fails only at $1$: every $x$ outside $E$ other than $1$ does
-  have a neighbourhood outside $E$. So the set is one point short of open and one
-  point short of closed, and the two repairs move the endpoint in opposite
-  directions, as the next remark records.
+- **The two failures are independent and happen at different points.** Openness fails only at $0$: every $x$ with $0 < x < 1$ does have a neighbourhood inside $E$. Closedness fails only at $1$: every $x$ outside $E$ other than $1$ does have a neighbourhood outside $E$. So the set is one point short of open and one point short of closed, and the two repairs move the endpoint in opposite directions, as the next remark records.
 
-- **The four possibilities all occur.** $\mathbb{R}$ and $\varnothing$ are both
-  open and closed, $(0,1)$ is open and not closed, $[0,1]$ is closed and not
-  open, and $[0,1)$ is neither ([[def-open-and-closed-in-r]]). "Open" and
-  "closed" are two independent properties, not two values of one property.
+- **The four possibilities all occur.** $\mathbb{R}$ and $\varnothing$ are both open and closed, $(0,1)$ is open and not closed, $[0,1]$ is closed and not open, and $[0,1)$ is neither ([[def-open-and-closed-in-r]]). "Open" and "closed" are two independent properties, not two values of one property.
 
-- **The named witness** is
-  [[cex-half-open-interval-neither-open-nor-closed]]; the refutation itself is
-  carried out here.
+- **The named witness** is [[cex-half-open-interval-neither-open-nor-closed]]; the refutation itself is carried out here.

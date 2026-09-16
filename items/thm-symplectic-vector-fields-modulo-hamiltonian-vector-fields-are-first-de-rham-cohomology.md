@@ -33,11 +33,9 @@ $$\mathfrak X_{\mathrm{symp}}(M)/\mathfrak X_{\mathrm{ham}}(M)\cong H^1_{\mathrm
 
 **Given:** A symplectic manifold $(M,\omega)$.
 
-[F1] Symplectic fields correspond under $\omega^\flat$ to closed one-forms.
-[[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
+[F1] Symplectic fields correspond under $\omega^\flat$ to closed one-forms. [[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
 
-[F2] Hamiltonian fields correspond under the same map to exact one-forms.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F2] Hamiltonian fields correspond under the same map to exact one-forms. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

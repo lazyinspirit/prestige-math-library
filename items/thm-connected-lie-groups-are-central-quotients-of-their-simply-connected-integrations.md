@@ -37,16 +37,11 @@ such quotient has the same Lie algebra as $\widetilde G$.
 
 [A1] Countable choice is [[def-countable-choice]].
 
-[L1] There is a covering homomorphism
-$p:\widetilde G\to G$ with $\widetilde G$ connected and simply connected
-([[thm-universal-covering-lie-group]]).
+[L1] There is a covering homomorphism $p:\widetilde G\to G$ with $\widetilde G$ connected and simply connected ([[thm-universal-covering-lie-group]]).
 
-[L2] A covering homomorphism is a surjective homomorphism and a covering map
-([[def-covering-homomorphism-of-lie-groups]]).
+[L2] A covering homomorphism is a surjective homomorphism and a covering map ([[def-covering-homomorphism-of-lie-groups]]).
 
-[L3] Under [A1], discrete subgroups are closed embedded zero-dimensional Lie
-subgroups
-([[cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups]]).
+[L3] Under [A1], discrete subgroups are closed embedded zero-dimensional Lie subgroups ([[cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups]]).
 
 ## Proof
 

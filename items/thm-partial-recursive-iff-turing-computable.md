@@ -40,13 +40,9 @@ recursive if and only if $f$ is Turing computable under those encodings.
 
 [L2] Partial recursive functions are closed under composition and unbounded minimization and contain the primitive recursive functions, by [[def-mu-minimization-and-partial-recursive-function]].
 
-[L3] Every partial recursive function has a normal-form expression
-$f(x)=U(\mu s\,\tau_T(e,x,s))$ for some code $e$, by
-[[thm-kleene-normal-form]].
+[L3] Every partial recursive function has a normal-form expression $f(x)=U(\mu s\,\tau_T(e,x,s))$ for some code $e$, by [[thm-kleene-normal-form]].
 
-[L5] The predicate $T$, its primitive-recursive numeric zero-test $\tau_T$,
-and the function $U$ encode halting computation histories and their outputs
-arithmetically, by [[def-kleene-t-predicate-and-output-function]].
+[L5] The predicate $T$, its primitive-recursive numeric zero-test $\tau_T$, and the function $U$ encode halting computation histories and their outputs arithmetically, by [[def-kleene-t-predicate-and-output-function]].
 
 ## Proof
 

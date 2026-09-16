@@ -36,8 +36,7 @@ converge to $x$ in the inverse-limit topology on $\mathbb Z_p$.
 
 **Given:** An element $x\in\mathbb Z_p$ with compatible digit truncations $(s_n\bmod p^r)_r$.
 
-[L1] The inverse-limit topology is the $p$-adic metric topology
-([[thm-inverse-limit-topology-equals-the-p-adic-metric-topology]]).
+[L1] The inverse-limit topology is the $p$-adic metric topology ([[thm-inverse-limit-topology-equals-the-p-adic-metric-topology]]).
 
 ## Verification
 

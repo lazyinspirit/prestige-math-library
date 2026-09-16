@@ -42,12 +42,9 @@ $a$ and $a^{-1}$, so this relator set satisfies $C'(1/6)$.
 
 **Given:** The two relators $r_1=abcdefg$ and $r_2=ahijklmn$.
 
-[L1] Pieces are common initial segments of distinct symmetrised occurrences
-([[def-piece-in-a-symmetrised-presentation]]).
+[L1] Pieces are common initial segments of distinct symmetrised occurrences ([[def-piece-in-a-symmetrised-presentation]]).
 
-[L2] $C'(1/6)$ requires every piece to have length less than one sixth of the
-relator containing it
-([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
+[L2] $C'(1/6)$ requires every piece to have length less than one sixth of the relator containing it ([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
 
 ## Verification
 

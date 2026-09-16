@@ -49,24 +49,15 @@ possibly disconnected open set $\Omega$ is understood componentwise.
 
 ## Facts & Assumptions
 
-**Given:** An open set $\Omega$, a meromorphic function $f$ on $\Omega$ that is
-not identically zero on any connected component, and an admissible cycle
-$\Gamma$ in $\Omega$ such that $f$ has no zero on $\Gamma^\ast$.
+**Given:** An open set $\Omega$, a meromorphic function $f$ on $\Omega$ that is not identically zero on any connected component, and an admissible cycle $\Gamma$ in $\Omega$ such that $f$ has no zero on $\Gamma^\ast$.
 
-[L1] Away from the zeros and poles of $f$, the logarithmic derivative $f'/f$ is
-holomorphic ([[def-logarithmic-derivative-meromorphic-function]]).
+[L1] Away from the zeros and poles of $f$, the logarithmic derivative $f'/f$ is holomorphic ([[def-logarithmic-derivative-meromorphic-function]]).
 
-[L2] At a zero of order $m$, the logarithmic derivative has residue $m$, and at
-a pole of order $m$ it has residue $-m$
-([[lem-logarithmic-derivative-order-residue]]).
+[L2] At a zero of order $m$, the logarithmic derivative has residue $m$, and at a pole of order $m$ it has residue $-m$ ([[lem-logarithmic-derivative-order-residue]]).
 
-[L3] A meromorphic function admissible for a cycle has only finitely many poles
-with nonzero index ([[lem-finiteness-support-residue-sum]]).
+[L3] A meromorphic function admissible for a cycle has only finitely many poles with nonzero index ([[lem-finiteness-support-residue-sum]]).
 
-[L4] The residue theorem for an admissible null-homologous cycle reads
-$$\int_\Gamma g(z)\,dz=2\pi i\sum_c n(\Gamma,c)\operatorname{Res}(g,c)$$
-with only finitely many nonzero terms
-([[thm-residue-theorem-null-homologous-cycle]]).
+[L4] The residue theorem for an admissible null-homologous cycle reads $$\int_\Gamma g(z)\,dz=2\pi i\sum_c n(\Gamma,c)\operatorname{Res}(g,c)$$ with only finitely many nonzero terms ([[thm-residue-theorem-null-homologous-cycle]]).
 
 ## Proof
 

@@ -40,31 +40,19 @@ $K^0(\mathbb{CP}^0)=\mathbb Z$.
 
 **Given:** an integer $n\geq0$ and AC.
 
-[F1] Reduced complex $K$-theory gives the long exact sequence of a finite CW
-pair ([[thm-reduced-k-theory-exact-sequence-of-a-cofibration]]).
+[F1] Reduced complex $K$-theory gives the long exact sequence of a finite CW pair ([[thm-reduced-k-theory-exact-sequence-of-a-cofibration]]).
 
-[F2] Bott multiplication identifies the iterated reduced product of the
-$S^2$ generator with a generator on $S^{2r}$
-([[thm-complex-bott-periodicity]]).
+[F2] Bott multiplication identifies the iterated reduced product of the $S^2$ generator with a generator on $S^{2r}$ ([[thm-complex-bott-periodicity]]).
 
-[F3] For based well-pointed compact spaces, reduced external products descend
-uniquely to a bilinear map $\widetilde K^0(U)\otimes\widetilde K^0(V)\to
-\widetilde K^0(U\wedge V)$
-([[def-external-product-in-complex-k-theory]]).
+[F3] For based well-pointed compact spaces, reduced external products descend uniquely to a bilinear map $\widetilde K^0(U)\otimes\widetilde K^0(V)\to \widetilde K^0(U\wedge V)$ ([[def-external-product-in-complex-k-theory]]).
 
-[F4] For the fixed clutching convention, $x$ on
-$\mathbb{CP}^1=S^2$ is the Bott generator
-([[ex-complex-k-ring-of-the-two-sphere]]).
+[F4] For the fixed clutching convention, $x$ on $\mathbb{CP}^1=S^2$ is the Bott generator ([[ex-complex-k-ring-of-the-two-sphere]]).
 
-[F5] Even and odd sphere groups have the parity stated in
-[[ex-complex-k-theory-of-even-and-odd-spheres]].
+[F5] Even and odd sphere groups have the parity stated in [[ex-complex-k-theory-of-even-and-odd-spheres]].
 
-[F6] Since $\mathbb{CP}^r=\operatorname{Gr}_1(\mathbb C^{r+1})$, its Schubert
-filtration has one cell in each dimension $0,2,\ldots,2r$
-([[thm-schubert-cells-give-the-stable-grassmannian-cw-structure]]).
+[F6] Since $\mathbb{CP}^r=\operatorname{Gr}_1(\mathbb C^{r+1})$, its Schubert filtration has one cell in each dimension $0,2,\ldots,2r$ ([[thm-schubert-cells-give-the-stable-grassmannian-cw-structure]]).
 
-[A1] AC is used through [F1]–[F5]; the finite cover and ring induction add no
-new choice.
+[A1] AC is used through [F1]–[F5]; the finite cover and ring induction add no new choice.
 
 ## Verification
 

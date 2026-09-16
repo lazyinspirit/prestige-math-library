@@ -29,13 +29,9 @@ The abelian category $\mathbf{Ab}$ satisfies AB5*.
 
 ## Facts & Assumptions
 
-**Given:** The abelian group $A=\prod_{n\ge1}\mathbb Z$, the tail subgroups
-$T_n=\{(a_k):a_1=\cdots=a_n=0\}$, and the direct sum
-$B=\bigoplus_{n\ge1}\mathbb Z\le A$.
+**Given:** The abelian group $A=\prod_{n\ge1}\mathbb Z$, the tail subgroups $T_n=\{(a_k):a_1=\cdots=a_n=0\}$, and the direct sum $B=\bigoplus_{n\ge1}\mathbb Z\le A$.
 
-[L1] AB5* is the decreasing-family identity
-$\left(\bigwedge_i B_i\right)\vee C=\bigwedge_i(B_i\vee C)$
-([[def-the-axioms-ab5-and-ab5-star]]).
+[L1] AB5* is the decreasing-family identity $\left(\bigwedge_i B_i\right)\vee C=\bigwedge_i(B_i\vee C)$ ([[def-the-axioms-ab5-and-ab5-star]]).
 
 ## Counterexample
 

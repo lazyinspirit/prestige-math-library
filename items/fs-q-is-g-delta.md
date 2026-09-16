@@ -70,22 +70,8 @@ set, and the obstruction is the Baire category theorem.
 
 ## Remarks
 
-- **What is true about $\mathbb{Q}$.** It is $F_\sigma$, meager, of measure zero,
-  dense, and countable. What fails is only the $G_\delta$ property, and its
-  failure is a genuine theorem about $\mathbb{R}$, resting on completeness through
-  [[thm-nested-interval-property]] inside [[thm-baire-category-r]]. Inside
-  $\mathbb{Q}$ itself the corresponding claim is true and trivial, $\mathbb{Q}$
-  being the whole space there.
+- **What is true about $\mathbb{Q}$.** It is $F_\sigma$, meager, of measure zero, dense, and countable. What fails is only the $G_\delta$ property, and its failure is a genuine theorem about $\mathbb{R}$, resting on completeness through [[thm-nested-interval-property]] inside [[thm-baire-category-r]]. Inside $\mathbb{Q}$ itself the corresponding claim is true and trivial, $\mathbb{Q}$ being the whole space there.
 
-- **The dual false statement is not recorded separately**, because it is the same
-  statement: the irrationals fail to be $F_\sigma$ exactly because
-  $\mathbb{Q}_{\mathbb{R}}$ fails to be $G_\delta$
-  ([[def-f-sigma-g-delta]]). The witness is
-  [[cex-irrationals-are-not-f-sigma]].
+- **The dual false statement is not recorded separately**, because it is the same statement: the irrationals fail to be $F_\sigma$ exactly because $\mathbb{Q}_{\mathbb{R}}$ fails to be $G_\delta$ ([[def-f-sigma-g-delta]]). The witness is [[cex-irrationals-are-not-f-sigma]].
 
-- **Context, not a result of this library.** In classical analysis the set of
-  points at which a real function is continuous is always $G_\delta$, and it is
-  the false statement above that then rules out a function continuous at every
-  rational and at no irrational. That classical result is not proved here, and
-  continuity is not available at this point in the reading order; the connection
-  is recorded as orientation and nothing on this page depends on it.
+- **Context, not a result of this library.** In classical analysis the set of points at which a real function is continuous is always $G_\delta$, and it is the false statement above that then rules out a function continuous at every rational and at no irrational. That classical result is not proved here, and continuity is not available at this point in the reading order; the connection is recorded as orientation and nothing on this page depends on it.

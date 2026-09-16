@@ -41,8 +41,7 @@ $$ \Psi_{t,s}(x)=x+\int_s^t a(r)\,dr. $$
 
 ## Facts & Assumptions
 
-**Given:** An open interval $I\subseteq\mathbb R$, a smooth function
-$a:I\to\mathbb R$, and the field $X_t=a(t)\,d/dx$ on $\mathbb R$.
+**Given:** An open interval $I\subseteq\mathbb R$, a smooth function $a:I\to\mathbb R$, and the field $X_t=a(t)\,d/dx$ on $\mathbb R$.
 
 [L1] Time-dependent vector fields admit local smooth evolution operators ([[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]]).
 

@@ -38,15 +38,11 @@ additive functors are exactly unital ring homomorphisms.
 
 **Given:** A preadditive category with one object $*$, or a ring $R$.
 
-[L1] In a preadditive category every hom-set is an abelian group and
-composition is bilinear ([[def-preadditive-category]]).
+[L1] In a preadditive category every hom-set is an abelian group and composition is bilinear ([[def-preadditive-category]]).
 
-[L2] A ring is an abelian group under addition, a monoid under multiplication,
-and a ring homomorphism preserves addition, multiplication, and $1$
-([[def-ring]], [[def-ring-homomorphism]]).
+[L2] A ring is an abelian group under addition, a monoid under multiplication, and a ring homomorphism preserves addition, multiplication, and $1$ ([[def-ring]], [[def-ring-homomorphism]]).
 
-[F1] A functor preserves identities and composition
-([[def-functor-and-contravariant-functor]]).
+[F1] A functor preserves identities and composition ([[def-functor-and-contravariant-functor]]).
 
 ## Proof
 

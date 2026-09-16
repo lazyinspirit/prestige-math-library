@@ -34,9 +34,7 @@ much sharper CG bound than the spread spectrum of $A_{\mathrm{sp}}$.
 
 **Given:** The two displayed Hermitian positive-definite matrices.
 
-[L1] The CG error bound is
-$$\|e_m\|_A\le 2\left(\frac{\sqrt{\kappa_2(A)}-1}{\sqrt{\kappa_2(A)}+1}\right)^m\|e_0\|_A$$
-([[thm-conjugate-gradient-chebyshev-bound-in-the-a-norm]]).
+[L1] The CG error bound is $$\|e_m\|_A\le 2\left(\frac{\sqrt{\kappa_2(A)}-1}{\sqrt{\kappa_2(A)}+1}\right)^m\|e_0\|_A$$ ([[thm-conjugate-gradient-chebyshev-bound-in-the-a-norm]]).
 
 ## Verification
 **Proof technique:** direct calculation.

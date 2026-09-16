@@ -45,18 +45,10 @@ $$\varphi\!\left(\int f\,d\mathbb P\right)\le\int\varphi(f)\,d\mathbb P.$$
 **Proof technique:** direct.
 
 1.1 Put $m:=\int f\,d\mathbb P$. If $m$ lies in the interior of $I$, apply [L3]
-to obtain a supporting line
-$$\ell(x)=\varphi(m)+a(x-m)$$
-with $\ell(x)\le\varphi(x)$ on $I$. Integrating and using [L1] and [L2] gives
-$$\int\varphi(f)\,d\mathbb P\ge\int\ell(f)\,d\mathbb P =\varphi(m)+a\left(\int f\,d\mathbb P-m\int1\,d\mathbb P\right)=\varphi(m).$$
-[L1, L2, L3, given, algebra]
+to obtain a supporting line $$\ell(x)=\varphi(m)+a(x-m)$$ with $\ell(x)\le\varphi(x)$ on $I$. Integrating and using [L1] and [L2] gives $$\int\varphi(f)\,d\mathbb P\ge\int\ell(f)\,d\mathbb P =\varphi(m)+a\left(\int f\,d\mathbb P-m\int1\,d\mathbb P\right)=\varphi(m).$$ [L1, L2, L3, given, algebra]
 
 1.2 Suppose instead that $m$ is an endpoint of $I$, say the left endpoint. Then [L1, L2, L4, given]
-$f-m\ge0$ almost everywhere and
-$$\int(f-m)\,d\mathbb P=\int f\,d\mathbb P-m\int1\,d\mathbb P=0$$
-by [L1] and [L2]. Therefore $f=m$ almost everywhere by [L4], so
-$$\int\varphi(f)\,d\mathbb P=\varphi(m)=\varphi\!\left(\int f\,d\mathbb P\right).$$
-The right-endpoint case is identical.
+$f-m\ge0$ almost everywhere and $$\int(f-m)\,d\mathbb P=\int f\,d\mathbb P-m\int1\,d\mathbb P=0$$ by [L1] and [L2]. Therefore $f=m$ almost everywhere by [L4], so $$\int\varphi(f)\,d\mathbb P=\varphi(m)=\varphi\!\left(\int f\,d\mathbb P\right).$$ The right-endpoint case is identical.
 
 2.1 Steps 1.1 and 1.2 cover the interior and endpoint cases, so Jensen's [step 1.1, step 1.2] ∎
 inequality holds on the whole interval $I$.

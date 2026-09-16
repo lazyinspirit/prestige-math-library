@@ -33,11 +33,9 @@ Let $R$ be a commutative ring.
 
 **Given:** A commutative ring $R$.
 
-[L1] A module is flat exactly when tensoring with it preserves exact sequences
-([[def-flat-and-faithfully-flat-modules-and-ring-maps]]).
+[L1] A module is flat exactly when tensoring with it preserves exact sequences ([[def-flat-and-faithfully-flat-modules-and-ring-maps]]).
 
-[L2] Tensor product commutes with arbitrary direct sums
-([[thm-tensor-products-commute-with-arbitrary-direct-sums]]).
+[L2] Tensor product commutes with arbitrary direct sums ([[thm-tensor-products-commute-with-arbitrary-direct-sums]]).
 
 ## Proof
 

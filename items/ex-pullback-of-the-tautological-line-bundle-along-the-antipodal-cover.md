@@ -36,11 +36,9 @@ tautological line bundle $q^*\gamma^1\to S^n$ is trivial.
 
 **Given:** The antipodal quotient map $q:S^n\to\mathbb{RP}^n$.
 
-[L1] The tautological bundle $\gamma^1\to\mathbb{RP}^n$ is the line of scalar
-multiples of the represented vector ([[ex-the-tautological-line-bundle-over-real-projective-space]]).
+[L1] The tautological bundle $\gamma^1\to\mathbb{RP}^n$ is the line of scalar multiples of the represented vector ([[ex-the-tautological-line-bundle-over-real-projective-space]]).
 
-[L2] A rank-one vector bundle is trivial once it has a nowhere-zero global
-frame ([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
+[L2] A rank-one vector bundle is trivial once it has a nowhere-zero global frame ([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
 
 ## Verification
 

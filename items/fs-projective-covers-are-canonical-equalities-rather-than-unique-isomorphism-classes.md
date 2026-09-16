@@ -32,8 +32,7 @@ not merely a unique isomorphism class over the target.
 
 **Given:** A finite-dimensional module over a finite-dimensional algebra.
 
-[L1] Projective covers are unique up to isomorphism over the target
-([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
+[L1] Projective covers are unique up to isomorphism over the target ([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
 
 ## Refutation
 

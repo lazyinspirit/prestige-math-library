@@ -37,19 +37,9 @@ measure gives an $L^\infty$ endpoint counterexample.
 
 [F1] Under $\mathrm{AC}_\omega$, real and complex $L^p$ over an arbitrary measure space are reflexive for $1<p<\infty$ ([[def-countable-choice]], [[thm-reflexivity-of-lp-for-one-less-p-less-infinity]]).
 
-[F2] On counting measure on $\mathbb N$, real $L^p$ is exactly real $\ell^p$
-with the same norm.  For complex functions, the complex $L^p$ definition uses
-the same integral of the real nonnegative modulus $|f|^p$; applying the
-counting-measure identity to that modulus gives
-$\|f\|_p^p=\sum_k|f(k)|^p$.  Since counting measure has no nonempty null set,
-its a.e. quotient is equality everywhere, so complex $L^p$ is isometrically
-complex $\ell^p$ as well
-([[rem-ell-p-is-l-p-of-counting-measure]],
-[[def-complex-lp-and-euclidean-test-function-conventions]]).
+[F2] On counting measure on $\mathbb N$, real $L^p$ is exactly real $\ell^p$ with the same norm.  For complex functions, the complex $L^p$ definition uses the same integral of the real nonnegative modulus $|f|^p$; applying the counting-measure identity to that modulus gives $\|f\|_p^p=\sum_k|f(k)|^p$.  Since counting measure has no nonempty null set, its a.e. quotient is equality everywhere, so complex $L^p$ is isometrically complex $\ell^p$ as well ([[rem-ell-p-is-l-p-of-counting-measure]], [[def-complex-lp-and-euclidean-test-function-conventions]]).
 
-[F3] Under the ultrafilter lemma, DC, and relative HB, neither real nor complex
-$\ell^1$ is reflexive ([[def-dependent-choice]],
-[[def-hahn-banach-extension-principle-relative]], [[cor-ell-one-is-not-reflexive]]).
+[F3] Under the ultrafilter lemma, DC, and relative HB, neither real nor complex $\ell^1$ is reflexive ([[def-dependent-choice]], [[def-hahn-banach-extension-principle-relative]], [[cor-ell-one-is-not-reflexive]]).
 
 [F4] Real and complex $c_0$ are Banach without choice ([[lem-real-and-complex-c-zero-are-banach]]).  A Banach space is reflexive exactly when its canonical evaluation map $J_X:X\to X^{**}$ is onto ([[def-reflexive-banach-space]]).  The bilinear sequence-pairing identifications give $c_0(\mathbb K)^*=\ell^1(\mathbb K)$; the real dual of $\ell^1$ is $\ell^\infty$ by counting-measure duality, and the complex dual is $\ell^\infty(\mathbb C)$ by the complex sequence theorem ([[thm-dual-of-c0-is-ell-one]], [[cor-ell-p-duality-by-counting-measure]], [[thm-complex-dual-of-ell-one-is-ell-infinity]]).  A sequence lies in $c_0$ exactly when it tends to zero, while $\ell^\infty$ contains every bounded sequence ([[def-c-zero-and-ell-infinity]]).
 
@@ -75,11 +65,7 @@ For counting measure, no nonempty subset is null, so the essential-supremum norm
 
 ## Remarks
 
-- The ultrafilter lemma is a hypothesis of the $\ell^1$ endpoint clause, not a
-  result consumed from its proof: the clause above states the assumption in
-  full. The library states the ultrafilter lemma, and proves it from AC, as
-  [[thm-ultrafilter-lemma]]; this example assumes the lemma and inherits no
-  part of that AC-based proof.
+- The ultrafilter lemma is a hypothesis of the $\ell^1$ endpoint clause, not a result consumed from its proof: the clause above states the assumption in full. The library states the ultrafilter lemma, and proves it from AC, as [[thm-ultrafilter-lemma]]; this example assumes the lemma and inherits no part of that AC-based proof.
 
 ## Source notes
 

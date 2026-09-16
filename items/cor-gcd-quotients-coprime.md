@@ -76,10 +76,6 @@ that is, $a/d$ and $b/d$ are coprime ([[def-coprime]]).
 
 ## Remarks
 
-- **The hypothesis $d \ne 0$ is not a restriction in disguise.** It fails only at
-  $(a,b) = (0,0)$, where $a/d$ and $b/d$ are not defined at all, since division
-  by $0$ determines nothing.
+- **The hypothesis $d \ne 0$ is not a restriction in disguise.** It fails only at $(a,b) = (0,0)$, where $a/d$ and $b/d$ are not defined at all, since division by $0$ determines nothing.
 
-- **This is the standard "reduce a fraction to lowest terms" statement**, proved
-  without any fractions: $a/d$ is defined as the unique integer solving
-  $a = d \cdot x$, and lives in $\mathbb{Z}$ throughout.
+- **This is the standard "reduce a fraction to lowest terms" statement**, proved without any fractions: $a/d$ is defined as the unique integer solving $a = d \cdot x$, and lives in $\mathbb{Z}$ throughout.

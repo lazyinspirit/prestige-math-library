@@ -37,17 +37,13 @@ $$\|f\|=1 \qquad \text{and} \qquad f(x)=\|x\|.$$
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector
-$x \in X$ with $x \ne 0$.
+**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and a vector $x \in X$ with $x \ne 0$.
 
-[L1] The dual space $X^*$ is the space of bounded linear functionals on $X$
-([[def-dual-space-of-a-normed-space]]).
+[L1] The dual space $X^*$ is the space of bounded linear functionals on $X$ ([[def-dual-space-of-a-normed-space]]).
 
-[L2] In the real case, a bounded linear functional extends with the same norm
-([[thm-hahn-banach-norm-preserving-extension]]).
+[L2] In the real case, a bounded linear functional extends with the same norm ([[thm-hahn-banach-norm-preserving-extension]]).
 
-[L3] In the complex case, a bounded linear functional extends with the same norm
-([[thm-complex-hahn-banach-norm-preserving-extension]]).
+[L3] In the complex case, a bounded linear functional extends with the same norm ([[thm-complex-hahn-banach-norm-preserving-extension]]).
 
 ## Proof
 

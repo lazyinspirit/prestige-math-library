@@ -52,6 +52,4 @@ $p$-group is defined without choosing a generator of its centre.
 
 ## Remarks
 
-At $p=2$ the centre has a unique nonidentity element and hence a unique
-generator, so there is no choice to make. The refuted claim is restricted to
-odd $p$, where the centre has more than one generator.
+At $p=2$ the centre has a unique nonidentity element and hence a unique generator, so there is no choice to make. The refuted claim is restricted to odd $p$, where the centre has more than one generator.

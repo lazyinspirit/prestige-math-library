@@ -34,14 +34,11 @@ including the empty monomial $1$, form a basis of $S(V)$.
 
 ## Facts & Assumptions
 
-**Given:** A vector space $V$ with a specified basis $B$ and a specified total
-order on $B$.
+**Given:** A vector space $V$ with a specified basis $B$ and a specified total order on $B$.
 
-[L1] Every vector has a unique finite expansion in $B$
-([[def-linear-basis]]).
+[L1] Every vector has a unique finite expansion in $B$ ([[def-linear-basis]]).
 
-[L2] Linear maps $V\to A$ into commutative unital algebras extend uniquely to
-$S(V)$ ([[thm-universal-property-of-the-symmetric-algebra]]).
+[L2] Linear maps $V\to A$ into commutative unital algebras extend uniquely to $S(V)$ ([[thm-universal-property-of-the-symmetric-algebra]]).
 
 ## Proof
 

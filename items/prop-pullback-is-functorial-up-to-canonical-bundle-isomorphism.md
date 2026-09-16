@@ -32,12 +32,9 @@ $$\operatorname{id}_M^*E\cong E, \qquad (f\circ g)^*E\cong g^*(f^*E).$$
 
 ## Facts & Assumptions
 
-**Given:** A smooth vector bundle $E\to M$ and smooth maps $g:P\to N$ and
-$f:N\to M$.
+**Given:** A smooth vector bundle $E\to M$ and smooth maps $g:P\to N$ and $f:N\to M$.
 
-[L1] The pullback bundle is the fibre-product set with its smooth bundle
-structure ([[def-pullback-vector-bundle-as-a-fibre-product]],
-[[thm-the-pullback-fibre-product-is-a-smooth-vector-bundle]]).
+[L1] The pullback bundle is the fibre-product set with its smooth bundle structure ([[def-pullback-vector-bundle-as-a-fibre-product]], [[thm-the-pullback-fibre-product-is-a-smooth-vector-bundle]]).
 
 ## Proof
 

@@ -32,11 +32,9 @@ Hence $k[G]$ is a symmetric Frobenius algebra.
 
 **Given:** A finite group $G$ and a field $k$.
 
-[F1] The group algebra has basis $\{[g]:g\in G\}$
-([[def-group-ring]]).
+[F1] The group algebra has basis $\{[g]:g\in G\}$ ([[def-group-ring]]).
 
-[L1] Its dimension is $|G|$, so this basis is finite
-([[cor-dimension-of-a-finite-group-algebra]]).
+[L1] Its dimension is $|G|$, so this basis is finite ([[cor-dimension-of-a-finite-group-algebra]]).
 
 ## Proof
 

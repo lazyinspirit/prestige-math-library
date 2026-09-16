@@ -33,14 +33,11 @@ $(g_i\circ X_i)_{i\in I}$ is independent.
 
 ## Facts & Assumptions
 
-**Given:** Independent random elements $X_i$ and measurable maps $g_i$ as in
-the Statement.
+**Given:** Independent random elements $X_i$ and measurable maps $g_i$ as in the Statement.
 
-[L1] Measurable outer maps preserve measurability under composition.
-([[thm-composition-with-borel-functions-preserves-measurability]])
+[L1] Measurable outer maps preserve measurability under composition. ([[thm-composition-with-borel-functions-preserves-measurability]])
 
-[L2] Independence of random elements is equivalent to the rectangle criterion.
-([[thm-rectangle-criterion-for-independent-random-elements]])
+[L2] Independence of random elements is equivalent to the rectangle criterion. ([[thm-rectangle-criterion-for-independent-random-elements]])
 
 ## Proof
 

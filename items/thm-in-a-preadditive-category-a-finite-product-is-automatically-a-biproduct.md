@@ -35,14 +35,11 @@ coproducts, and all finite biproducts are equivalent conditions.
 
 **Given:** A preadditive category $\mathcal C$ with a finite product.
 
-[L1] In a preadditive category hom-sets are abelian groups and composition is
-bilinear ([[def-preadditive-category]]).
+[L1] In a preadditive category hom-sets are abelian groups and composition is bilinear ([[def-preadditive-category]]).
 
-[L2] In a preadditive category, an object is initial exactly when it is
-terminal ([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
+[L2] In a preadditive category, an object is initial exactly when it is terminal ([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
 
-[L3] The opposite of a preadditive category is preadditive
-([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
+[L3] The opposite of a preadditive category is preadditive ([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
 
 ## Proof
 

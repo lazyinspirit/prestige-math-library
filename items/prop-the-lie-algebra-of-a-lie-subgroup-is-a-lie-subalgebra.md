@@ -38,22 +38,15 @@ $di_e(T_eH)$ of $\operatorname{Lie}(G)$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and
-a Lie subgroup $i:H\to G$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and a Lie subgroup $i:H\to G$.
 
-[F1] A Lie-subgroup inclusion is an injective immersion and a smooth Lie-group
-homomorphism. [[def-immersed-embedded-and-closed-lie-subgroup]].
+[F1] A Lie-subgroup inclusion is an injective immersion and a smooth Lie-group homomorphism. [[def-immersed-embedded-and-closed-lie-subgroup]].
 
-[F2] The differential of an immersion is injective at every point.
-[[def-immersed-embedded-and-closed-lie-subgroup]].
+[F2] The differential of an immersion is injective at every point. [[def-immersed-embedded-and-closed-lie-subgroup]].
 
-[F3] Under $\mathrm{AC}_\omega$, the identity differential of a smooth
-Lie-group homomorphism is linear and bracket preserving.
-[[def-countable-choice]],
-[[thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism]].
+[F3] Under $\mathrm{AC}_\omega$, the identity differential of a smooth Lie-group homomorphism is linear and bracket preserving. [[def-countable-choice]], [[thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism]].
 
-[F4] A Lie subalgebra is a linear subspace closed under the ambient bracket.
-[[def-lie-subalgebra-and-ideal]].
+[F4] A Lie subalgebra is a linear subspace closed under the ambient bracket. [[def-lie-subalgebra-and-ideal]].
 
 ## Proof
 

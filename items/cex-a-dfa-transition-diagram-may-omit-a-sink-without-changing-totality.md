@@ -32,14 +32,11 @@ totality" is false.
 
 ## Facts & Assumptions
 
-**Given:** The alphabet $\Sigma=\{0,1\}$ and the one-state picture with only the
-loop $q\xrightarrow{0}q$.
+**Given:** The alphabet $\Sigma=\{0,1\}$ and the one-state picture with only the loop $q\xrightarrow{0}q$.
 
-[A1] The statement refuted is: omitting a sink transition does not affect
-whether the diagram defines a DFA.
+[A1] The statement refuted is: omitting a sink transition does not affect whether the diagram defines a DFA.
 
-[L1] A DFA requires a total transition function on $Q\times\Sigma$, by
-[[def-deterministic-finite-automaton]].
+[L1] A DFA requires a total transition function on $Q\times\Sigma$, by [[def-deterministic-finite-automaton]].
 
 ## Counterexample
 

@@ -43,15 +43,11 @@ For an object $I$ of an abelian category, the following are equivalent:
 
 **Given:** An object $I$ in an abelian category.
 
-[L1] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L1] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L2] Projective objects are characterized by exactness of Hom and by splitting
-of epimorphisms onto them
-([[thm-projective-object-characterisations]]).
+[L2] Projective objects are characterized by exactness of Hom and by splitting of epimorphisms onto them ([[thm-projective-object-characterisations]]).
 
-[L3] Injectivity is the dual lifting property
-([[def-injective-object]]).
+[L3] Injectivity is the dual lifting property ([[def-injective-object]]).
 
 ## Proof
 

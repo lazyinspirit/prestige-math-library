@@ -36,16 +36,11 @@ Let $f:X\to Y$ be a continuous map.
 
 **Given:** A continuous map $f:X\to Y$.
 
-[F1] The direct image is defined by
-$(f_*\mathcal F)(V)=\mathcal F(f^{-1}(V))$
-([[def-direct-image-sheaf]]).
+[F1] The direct image is defined by $(f_*\mathcal F)(V)=\mathcal F(f^{-1}(V))$ ([[def-direct-image-sheaf]]).
 
-[L1] A sheaf is exactly a presheaf whose compatible local sections glue
-uniquely on every open cover ([[def-sheaf-on-topological-space]]).
+[L1] A sheaf is exactly a presheaf whose compatible local sections glue uniquely on every open cover ([[def-sheaf-on-topological-space]]).
 
-[L2] A sheaf of groups, rings, or modules is a set-valued sheaf together with
-objectwise algebraic operations preserved by restriction
-([[def-presheaf-of-groups-rings-modules]]).
+[L2] A sheaf of groups, rings, or modules is a set-valued sheaf together with objectwise algebraic operations preserved by restriction ([[def-presheaf-of-groups-rings-modules]]).
 
 ## Proof
 

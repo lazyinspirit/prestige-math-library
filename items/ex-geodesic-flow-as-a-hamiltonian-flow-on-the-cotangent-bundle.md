@@ -38,16 +38,11 @@ $(q(t),\dot q(t))$ of affinely parametrized geodesics.
 
 **Given:** A smooth Riemannian metric $g$.
 
-[F1] The metric has a unique Levi–Civita connection.
-[[thm-fundamental-theorem-of-riemannian-geometry]].
+[F1] The metric has a unique Levi–Civita connection. [[thm-fundamental-theorem-of-riemannian-geometry]].
 
-[F2] The natural Lagrangian with zero potential has Legendre map $g^\flat$
-and the displayed Hamiltonian.
-[[prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian]].
+[F2] The natural Lagrangian with zero potential has Legendre map $g^\flat$ and the displayed Hamiltonian. [[prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian]].
 
-[F3] Under the stated choice assumption, the Legendre map bijects
-Euler–Lagrange and Hamiltonian trajectories.
-[[thm-equivalence-of-euler-lagrange-and-hamilton-equations-for-hyperregular-lagrangians]].
+[F3] Under the stated choice assumption, the Legendre map bijects Euler–Lagrange and Hamiltonian trajectories. [[thm-equivalence-of-euler-lagrange-and-hamilton-equations-for-hyperregular-lagrangians]].
 
 ## Verification
 

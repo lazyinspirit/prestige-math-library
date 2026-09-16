@@ -36,14 +36,11 @@ This is the AB5 lattice identity in a concrete module calculation.
 
 ## Facts & Assumptions
 
-**Given:** The subgroup chain $(B_n)$ and the fixed subgroup $C$ displayed in
-the statement.
+**Given:** The subgroup chain $(B_n)$ and the fixed subgroup $C$ displayed in the statement.
 
-[L1] AB5 is the directed-join distributivity law for subobjects
-([[def-the-axioms-ab5-and-ab5-star]]).
+[L1] AB5 is the directed-join distributivity law for subobjects ([[def-the-axioms-ab5-and-ab5-star]]).
 
-[L2] Module categories are Grothendieck, hence satisfy AB5
-([[thm-module-categories-are-grothendieck-categories]]).
+[L2] Module categories are Grothendieck, hence satisfy AB5 ([[thm-module-categories-are-grothendieck-categories]]).
 
 ## Verification
 

@@ -38,25 +38,17 @@ Erdős-Hajnal property.
 
 **Given:** The left and right six-vertex prime $\mathcal H$-graphs.
 
-[L1] The bull graph has the Erdős-Hajnal property
-([[cor-the-bull-graph-has-the-erdos-hajnal-property]]).
+[L1] The bull graph has the Erdős-Hajnal property ([[cor-the-bull-graph-has-the-erdos-hajnal-property]]).
 
-[L2] For a single graph, the Erdős-Hajnal property is equivalent to virality
-([[cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
+[L2] For a single graph, the Erdős-Hajnal property is equivalent to virality ([[cor-single-graph-erdos-hajnal-polynomial-rodl-and-viral-equivalence]]).
 
-[L3] Deleting a leaf from each of two forbidden graphs preserves virality
-([[thm-leaf-deletion-preserves-virality-of-a-finite-family]]).
+[L3] Deleting a leaf from each of two forbidden graphs preserves virality ([[thm-leaf-deletion-preserves-virality-of-a-finite-family]]).
 
-[L4] A graph and its complement have the same Erdős-Hajnal constants
-([[prop-erdos-hajnal-property-is-complement-invariant]]).
+[L4] A graph and its complement have the same Erdős-Hajnal constants ([[prop-erdos-hajnal-property-is-complement-invariant]]).
 
-[F1] In the left six-vertex prime $\mathcal H$-graph, deleting $\ell_1$ or
-$\ell_2$ leaves a bull: after deleting $\ell_1$, the triangle is
-$t_1t_2t_3$ with leaves $\ell_2,\ell_3$, and after deleting $\ell_2$, the same
-triangle has leaves $\ell_1,\ell_3$.
+[F1] In the left six-vertex prime $\mathcal H$-graph, deleting $\ell_1$ or $\ell_2$ leaves a bull: after deleting $\ell_1$, the triangle is $t_1t_2t_3$ with leaves $\ell_2,\ell_3$, and after deleting $\ell_2$, the same triangle has leaves $\ell_1,\ell_3$.
 
-[F2] The right six-vertex prime $\mathcal H$-graph is the complement of the
-left one by definition.
+[F2] The right six-vertex prime $\mathcal H$-graph is the complement of the left one by definition.
 
 ## Proof
 

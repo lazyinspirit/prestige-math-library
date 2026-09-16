@@ -36,9 +36,7 @@ $\sigma_i/(\sigma_i^2+\lambda)$.
 
 ## Facts & Assumptions
 
-**Given:** A scalar field $\mathbb F\in\{\mathbb R,\mathbb C\}$, a singular
-value decomposition $A=U\Sigma V^*$, a right-hand side $b\in\mathbb F^m$,
-and a parameter $\lambda>0$.
+**Given:** A scalar field $\mathbb F\in\{\mathbb R,\mathbb C\}$, a singular value decomposition $A=U\Sigma V^*$, a right-hand side $b\in\mathbb F^m$, and a parameter $\lambda>0$.
 
 [L1] $A$ admits a singular value decomposition with left singular vectors $u_i$ and right singular vectors $v_i$ ([[thm-singular-value-decomposition]]).
 

@@ -32,11 +32,9 @@ uniquely to an idempotent of $A$.
 
 ## Facts & Assumptions
 
-**Given:** A local ring $(A,\mathfrak m)$ in which every simple residue root of
-a monic polynomial lifts uniquely.
+**Given:** A local ring $(A,\mathfrak m)$ in which every simple residue root of a monic polynomial lifts uniquely.
 
-[L1] In a Henselian local ring, factor lifting implies unique lifting of simple
-residue roots ([[cor-factor-hensel-implies-simple-root-hensel]]).
+[L1] In a Henselian local ring, factor lifting implies unique lifting of simple residue roots ([[cor-factor-hensel-implies-simple-root-hensel]]).
 
 ## Proof
 

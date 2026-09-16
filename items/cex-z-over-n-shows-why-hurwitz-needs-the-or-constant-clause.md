@@ -39,8 +39,7 @@ still injective, with no exception.
 
 **Given:** The sequence $f_n(z)=z/(n+1)$ on $\mathbb C$.
 
-[L1] The correct theorem says that such a limit is injective or constant
-([[thm-hurwitz-injective-limit]]).
+[L1] The correct theorem says that such a limit is injective or constant ([[thm-hurwitz-injective-limit]]).
 
 ## Counterexample
 

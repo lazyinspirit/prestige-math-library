@@ -32,8 +32,7 @@ A bare abelian coefficient group determines a unital coefficient multiplication,
 
 ## Counterexample
 
-**Given:** The additive group $G=\mathbb Z^2$. For $x=(a,b)$ and $y=(c,d)$ consider
-$$x\cdot y=(ac,bd),\qquad x*y=(ac,ad+bc).$$
+**Given:** The additive group $G=\mathbb Z^2$. For $x=(a,b)$ and $y=(c,d)$ consider $$x\cdot y=(ac,bd),\qquad x*y=(ac,ad+bc).$$
 
 1.1 Both operations are bilinear and commutative. The first is associative coordinatewise and has unit $(1,1)$. For the second, if $z=(e,f)$, both $(x*y)*z$ and $x*(y*z)$ equal $(ace,acf+ade+bce)$; its unit is $(1,0)$. Thus these define commutative unital rings on the same additive group. They are respectively $\mathbb Z\times\mathbb Z$ and $\mathbb Z[\epsilon]/(\epsilon^2)$, with $(a,b)$ corresponding to $a+b\epsilon$ in the latter. [given, algebra]
 

@@ -39,47 +39,31 @@ unique metric on each of its two subsets gives the same conclusion.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, HB, a separable real or complex normed space
-$Y$, and a weakly compact subset $K$.
+**Given:** $\mathrm{AC}_\omega$, HB, a separable real or complex normed space $Y$, and a weakly compact subset $K$.
 
-[F1] Separability means existence of an at most countable dense subset, and
-each nonempty at most countable set is the image of a surjection from
-$\mathbb N$ ([[def-separable-space]],
-[[lem-countable-iff-surjection-from-n]]).
+[F1] Separability means existence of an at most countable dense subset, and each nonempty at most countable set is the image of a surjection from $\mathbb N$ ([[def-separable-space]], [[lem-countable-iff-surjection-from-n]]).
 
-[F2] Under HB, every nonzero vector has a norm-one functional taking that
-vector to its norm, in both scalar fields
-([[cor-relative-hahn-banach-dual-norming]]).
+[F2] Under HB, every nonzero vector has a norm-one functional taking that vector to its norm, in both scalar fields ([[cor-relative-hahn-banach-dual-norming]]).
 
-[F3] $\mathrm{AC}_\omega$ supplies a choice function for every sequence of
-nonempty sets ([[def-countable-choice]]).
+[F3] $\mathrm{AC}_\omega$ supplies a choice function for every sequence of nonempty sets ([[def-countable-choice]]).
 
-[F4] The weak topology is initial for the members of $Y^*$
-([[def-weak-topology-on-a-normed-space]]).
+[F4] The weak topology is initial for the members of $Y^*$ ([[def-weak-topology-on-a-normed-space]]).
 
-[F5] The real and complex scalar fields are complete for their usual metrics
-([[thm-reals-cauchy-complete]], [[thm-complex-plane-is-complete]]).
+[F5] The real and complex scalar fields are complete for their usual metrics ([[thm-reals-cauchy-complete]], [[thm-complex-plane-is-complete]]).
 
-[F6] The standard weighted sum of bounded complete coordinate metrics is a
-complete metric inducing the countable product topology
-([[lem-standard-complete-metric-on-a-countable-product]]).
+[F6] The standard weighted sum of bounded complete coordinate metrics is a complete metric inducing the countable product topology ([[lem-standard-complete-metric-on-a-countable-product]]).
 
-[F7] Every metric space is Hausdorff
-([[thm-metric-hausdorff-separation]]).
+[F7] Every metric space is Hausdorff ([[thm-metric-hausdorff-separation]]).
 
-[F8] A continuous bijection from a compact space to a Hausdorff space is a
-homeomorphism ([[thm-compactness-under-continuous-maps]], claim 3).
+[F8] A continuous bijection from a compact space to a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]], claim 3).
 
-[F9] HB is the named real dominated-extension principle
-([[def-hahn-banach-extension-principle-relative]]).
+[F9] HB is the named real dominated-extension principle ([[def-hahn-banach-extension-principle-relative]]).
 
-[F10] The product topology is initial for the coordinate projections
-([[def-product-topology]]).
+[F10] The product topology is initial for the coordinate projections ([[def-product-topology]]).
 
 ## Proof
 
-**Proof technique:** a countable norming family and a compact-to-Hausdorff
-identification.
+**Proof technique:** a countable norming family and a compact-to-Hausdorff identification.
 
 1.1 If $Y=\{0\}$, then $K$ is either empty or the singleton $\{0\}$. In either case the zero function $d_K:K\times K\to\mathbb R$ is the unique metric and induces the only topology on $K$, which is its relative weak topology. Hence suppose below that $Y\ne\{0\}$. [given, F4]
 
@@ -101,9 +85,4 @@ identification.
 
 ## Source notes
 
-Haase, Theorem E.2, printed pp. 346–347, proves the corresponding compact
-countable-evaluation metrization pattern for a separable compact subset of a
-pointwise function space.  Here the HB norming family supplies the separating
-evaluations, and compact-to-Hausdorff identifies the resulting product topology
-with the weak topology on $K$.  No part of the unavailable Whitley paper is
-used.
+Haase, Theorem E.2, printed pp. 346–347, proves the corresponding compact countable-evaluation metrization pattern for a separable compact subset of a pointwise function space.  Here the HB norming family supplies the separating evaluations, and compact-to-Hausdorff identifies the resulting product topology with the weak topology on $K$.  No part of the unavailable Whitley paper is used.

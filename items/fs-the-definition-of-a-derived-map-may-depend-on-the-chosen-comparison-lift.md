@@ -31,22 +31,15 @@ The definition of a derived map may depend on which comparison lift or
 comparison extension is chosen.
 ## Facts & Assumptions
 
-**Given:** The Axiom of Dependent Choice and a morphism between objects with
-supplied resolutions.
+**Given:** The Axiom of Dependent Choice and a morphism between objects with supplied resolutions.
 
-[L1] Left derived maps are defined from comparison lifts
-([[def-left-derived-map-relative-to-resolution-data]]).
+[L1] Left derived maps are defined from comparison lifts ([[def-left-derived-map-relative-to-resolution-data]]).
 
-[L2] Right derived maps are defined from comparison extensions
-([[def-right-derived-map-relative-to-resolution-data]]).
+[L2] Right derived maps are defined from comparison extensions ([[def-right-derived-map-relative-to-resolution-data]]).
 
-[L3] The induced homology map is independent of the chosen projective
-comparison lift
-([[lem-the-induced-homology-map-is-independent-of-the-comparison-lift]]).
+[L3] The induced homology map is independent of the chosen projective comparison lift ([[lem-the-induced-homology-map-is-independent-of-the-comparison-lift]]).
 
-[L4] The induced cohomology map is independent of the chosen injective
-comparison extension
-([[lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]]).
+[L4] The induced cohomology map is independent of the chosen injective comparison extension ([[lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]]).
 
 ## Refutation
 

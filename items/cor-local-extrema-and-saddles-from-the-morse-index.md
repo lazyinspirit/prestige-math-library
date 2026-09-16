@@ -40,12 +40,9 @@ When $n=0$, the first two clauses coincide.
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $f:M\to\mathbb R$ and a nondegenerate critical
-point $p$ of index $\lambda$.
+**Given:** A smooth function $f:M\to\mathbb R$ and a nondegenerate critical point $p$ of index $\lambda$.
 
-[L1] Morse coordinates put $f-f(p)$ into the signed quadratic normal form with
-exactly $\lambda$ negative squares
-([[thm-morse-lemma]]).
+[L1] Morse coordinates put $f-f(p)$ into the signed quadratic normal form with exactly $\lambda$ negative squares ([[thm-morse-lemma]]).
 
 ## Proof
 

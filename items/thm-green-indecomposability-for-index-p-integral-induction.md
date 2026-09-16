@@ -32,18 +32,13 @@ $\operatorname{Ind}_N^H L$ is an indecomposable $\mathcal O H$-lattice.
 
 ## Facts & Assumptions
 
-**Given:** The modular system, algebraically closed residue field, groups, and
-lattice in the Statement.
+**Given:** The modular system, algebraically closed residue field, groups, and lattice in the Statement.
 
-[F1] Indecomposable group lattices have local endomorphism rings, and finite
-direct sums satisfy Krull--Schmidt
-([[thm-krull-schmidt-for-og-lattices]]).
+[F1] Indecomposable group lattices have local endomorphism rings, and finite direct sums satisfy Krull--Schmidt ([[thm-krull-schmidt-for-og-lattices]]).
 
-[F2] Induction here is induction of finite-free integral lattices as in
-[[def-relative-projectivity-and-vertices-for-og-lattices]].
+[F2] Induction here is induction of finite-free integral lattices as in [[def-relative-projectivity-and-vertices-for-og-lattices]].
 
-[F3] Algebraic closedness means every nonconstant polynomial over $k$ has a
-root ([[def-algebraically-closed-field]]).
+[F3] Algebraic closedness means every nonconstant polynomial over $k$ has a root ([[def-algebraically-closed-field]]).
 
 ## Proof
 

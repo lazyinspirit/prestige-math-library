@@ -28,9 +28,7 @@ pipeline_run: frontier-28
 > epimorphism in the degree-zero horseshoe step is unique.
 ## Facts & Assumptions
 
-**Given:** The split short exact sequence
-$$0\longrightarrow\mathbb Z\xrightarrow{x\mapsto(x,0)}\mathbb Z\oplus\mathbb Z\xrightarrow{(x,y)\mapsto y}\mathbb Z\longrightarrow0,$$
-with each end object resolved by its length-zero identity resolution.
+**Given:** The split short exact sequence $$0\longrightarrow\mathbb Z\xrightarrow{x\mapsto(x,0)}\mathbb Z\oplus\mathbb Z\xrightarrow{(x,y)\mapsto y}\mathbb Z\longrightarrow0,$$ with each end object resolved by its length-zero identity resolution.
 
 [L1] The degree-zero horseshoe construction chooses a lift of the right augmentation through the middle epimorphism ([[lem-degree-zero-horseshoe-lift]]).
 ## Refutation

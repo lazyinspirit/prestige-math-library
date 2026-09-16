@@ -103,18 +103,8 @@ See the Remarks of [[thm-binomial-theorem]].
 
 ## Remarks
 
-- **The index set of the outer sum has to be finite, and it is.** It is
-  $\mathcal{W}(n,m)$, which [[def-multinomial-coefficient]] shows finite by
-  injecting it into the set of functions $m \to \sigma(n)$. Without that the
-  outer sum would not be defined, which is the reason
-  [[def-sum-over-a-finite-index-set]] exists.
+- **The index set of the outer sum has to be finite, and it is.** It is $\mathcal{W}(n,m)$, which [[def-multinomial-coefficient]] shows finite by injecting it into the set of functions $m \to \sigma(n)$. Without that the outer sum would not be defined, which is the reason [[def-sum-over-a-finite-index-set]] exists.
 
-- **The small cases are computed, not waved at.** At $m = 0$ the left-hand side
-  is $0^{n}$ and the right-hand side is an empty sum or a single term, and the
-  two match only because $0^{0} = 1$. At $m = 1$ the only tuple is $k = (n)$, the
-  coefficient is $\binom{n}{n} = 1$ by clause 1, and the identity reads
-  $x_0^{\,n} = x_0^{\,n}$.
+- **The small cases are computed, not waved at.** At $m = 0$ the left-hand side is $0^{n}$ and the right-hand side is an empty sum or a single term, and the two match only because $0^{0} = 1$. At $m = 1$ the only tuple is $k = (n)$, the coefficient is $\binom{n}{n} = 1$ by clause 1, and the identity reads $x_0^{\,n} = x_0^{\,n}$.
 
-- **Clause 1 is again an identity between natural numbers**, so integrality of
-  $n!/\prod k_i!$ is free; the quotient form is a consequence obtained through
-  $\iota$, exactly as for the binomial coefficient.
+- **Clause 1 is again an identity between natural numbers**, so integrality of $n!/\prod k_i!$ is free; the quotient form is a consequence obtained through $\iota$, exactly as for the binomial coefficient.

@@ -34,11 +34,9 @@ published module snake lemma.
 
 **Given:** Snake data in the category of modules.
 
-[L1] The categorical snake lemma holds in every abelian category
-([[thm-snake-lemma-in-an-abelian-category]]).
+[L1] The categorical snake lemma holds in every abelian category ([[thm-snake-lemma-in-an-abelian-category]]).
 
-[L2] The module snake lemma is already on disk
-([[thm-snake-lemma-for-modules]]).
+[L2] The module snake lemma is already on disk ([[thm-snake-lemma-for-modules]]).
 
 ## Verification
 

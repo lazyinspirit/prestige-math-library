@@ -37,11 +37,9 @@ $q h = 0$ factors through $i$ after the trivial epic cover $1_W:W \to W$.
 
 **Given:** The displayed short exact sequence in $\mathbf{Ab}$.
 
-[L1] The covering criterion is equivalent to exactness
-([[thm-the-covering-criterion-for-exactness]]).
+[L1] The covering criterion is equivalent to exactness ([[thm-the-covering-criterion-for-exactness]]).
 
-[L2] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L2] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
 ## Verification
 

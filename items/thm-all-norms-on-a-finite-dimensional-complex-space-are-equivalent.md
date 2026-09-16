@@ -37,16 +37,11 @@ $\|\cdot\|_a$ and $\|\cdot\|_b$ are equivalent in the sense of
 
 ## Facts & Assumptions
 
-**Given:** A complex vector space $X$ with two norms $\|\cdot\|_a$ and
-$\|\cdot\|_b$, and an ordered basis $e:n\to X$.
+**Given:** A complex vector space $X$ with two norms $\|\cdot\|_a$ and $\|\cdot\|_b$, and an ordered basis $e:n\to X$.
 
-[L1] For either norm on $X$, the basis map from $\mathbb C^n$ with the
-coordinate $\ell^1$ norm is a topological isomorphism
-([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] For either norm on $X$, the basis map from $\mathbb C^n$ with the coordinate $\ell^1$ norm is a topological isomorphism ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] Equivalent norms are exactly those satisfying
-$c\|x\|_a\le\|x\|_b\le C\|x\|_a$ for some $c,C>0$
-([[def-equivalent-norms]]).
+[L2] Equivalent norms are exactly those satisfying $c\|x\|_a\le\|x\|_b\le C\|x\|_a$ for some $c,C>0$ ([[def-equivalent-norms]]).
 
 ## Proof
 
@@ -62,8 +57,5 @@ $c\|x\|_a\le\|x\|_b\le C\|x\|_a$ for some $c,C>0$
 
 ## Remarks
 
-- The proof does not need a separate norm-comparison theorem on $\mathbb C^n$:
-  one coordinate isomorphism for each norm already supplies the comparison.
-- The published theorem [[thm-all-norms-on-rn-are-equivalent]] remains the real
-  base case on which [[thm-coordinate-map-for-a-finite-dimensional-normed-space]]
-  rests.
+- The proof does not need a separate norm-comparison theorem on $\mathbb C^n$: one coordinate isomorphism for each norm already supplies the comparison.
+- The published theorem [[thm-all-norms-on-rn-are-equivalent]] remains the real base case on which [[thm-coordinate-map-for-a-finite-dimensional-normed-space]] rests.

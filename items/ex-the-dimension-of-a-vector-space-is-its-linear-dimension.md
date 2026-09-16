@@ -29,14 +29,11 @@ dimension in $k$.
 
 **Given:** A field $k$ and a finite-dimensional $k$-vector space $V$.
 
-[L1] Categorical dimension is the trace of the chosen pivotal comparison
-([[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]).
+[L1] Categorical dimension is the trace of the chosen pivotal comparison ([[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]).
 
-[L2] The ordinary linear dimension is the size of a basis
-([[def-dimension]]).
+[L2] The ordinary linear dimension is the size of a basis ([[def-dimension]]).
 
-[L3] Finite-dimensional $k$-vector spaces are rigid with the usual duality
-([[thm-finite-dimensional-vector-spaces-are-rigid]]).
+[L3] Finite-dimensional $k$-vector spaces are rigid with the usual duality ([[thm-finite-dimensional-vector-spaces-are-rigid]]).
 
 ## Verification
 

@@ -35,11 +35,9 @@ module five lemma.
 
 **Given:** A commutative five-term diagram with exact rows in $R\text{-}\mathbf{Mod}$.
 
-[L1] The categorical five lemma holds in any abelian category
-([[thm-five-lemma-in-an-abelian-category]]).
+[L1] The categorical five lemma holds in any abelian category ([[thm-five-lemma-in-an-abelian-category]]).
 
-[L2] The module case is already published under the expected name
-([[thm-five-lemma-for-modules]]).
+[L2] The module case is already published under the expected name ([[thm-five-lemma-for-modules]]).
 
 ## Verification
 

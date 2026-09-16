@@ -37,17 +37,13 @@ $$dq_g\circ d(L_g)_e=d(L_g^{G/H})_{eH}\circ dq_e.$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, a
-closed subgroup $H$, and the quotient map $q:G\to G/H$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, a closed subgroup $H$, and the quotient map $q:G\to G/H$.
 
-[A1] The quotient manifold exists and $q$ is a surjective submersion.
-[[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
+[A1] The quotient manifold exists and $q$ is a surjective submersion. [[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
 
-[F1] A surjective linear map factors through the quotient by its kernel.
-[[thm-quotient-module-universal-property]].
+[F1] A surjective linear map factors through the quotient by its kernel. [[thm-quotient-module-universal-property]].
 
-[F2] The tangent space of a regular fibre is the kernel of the differential.
-[[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
+[F2] The tangent space of a regular fibre is the kernel of the differential. [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
 ## Proof
 

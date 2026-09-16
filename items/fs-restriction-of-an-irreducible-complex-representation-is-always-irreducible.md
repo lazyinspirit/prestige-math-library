@@ -28,11 +28,9 @@ restriction to every subgroup is irreducible.
 
 ## Facts & Assumptions
 
-**Given:** The irreducible degree-two character $\chi_2$ of $S_3$ and the
-subgroup $A_3\le S_3$.
+**Given:** The irreducible degree-two character $\chi_2$ of $S_3$ and the subgroup $A_3\le S_3$.
 
-[F1] The restriction of $\chi_2$ to $A_3$ is $\theta+\overline\theta$
-([[ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters]]).
+[F1] The restriction of $\chi_2$ to $A_3$ is $\theta+\overline\theta$ ([[ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters]]).
 
 ## Refutation
 

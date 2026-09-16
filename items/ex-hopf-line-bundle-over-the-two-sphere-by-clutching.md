@@ -36,15 +36,11 @@ $\gamma^*$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathbb CP^1$, split into the two affine closed disks along
-$|z|=1$.
+**Given:** $\mathbb CP^1$, split into the two affine closed disks along $|z|=1$.
 
-[F1] The clutching relation sends a plus-chart coefficient $v$ to the
-minus-chart coefficient $g(z)v$; swapping charts inverts $g$
-([[def-clutching-construction-for-bundles-over-a-suspension]]).
+[F1] The clutching relation sends a plus-chart coefficient $v$ to the minus-chart coefficient $g(z)v$; swapping charts inverts $g$ ([[def-clutching-construction-for-bundles-over-a-suspension]]).
 
-[F2] The tautological line has fiber the represented line in $\mathbb C^2$
-([[ex-tautological-real-and-complex-lines-over-projective-space]]).
+[F2] The tautological line has fiber the represented line in $\mathbb C^2$ ([[ex-tautological-real-and-complex-lines-over-projective-space]]).
 
 ## Verification
 

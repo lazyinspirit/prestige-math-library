@@ -87,12 +87,6 @@ $\iota(k)$, the embedding of [[lem-nat-embeds-int]].
 
 ## Remarks
 
-- **This is the gap that primality closes.** When $d$ is prime its only positive
-  divisors are $1$ and itself, so $\gcd(d,a) = 1$ for every $a$ that $d$ does not
-  divide, and the refuted claim becomes true. Primes are not defined on this
-  page, and the statement above is not repaired here; it is recorded so that the
-  coprimality hypothesis of [[lem-coprime-divides-product]] is visibly doing
-  work rather than decorating the statement.
+- **This is the gap that primality closes.** When $d$ is prime its only positive divisors are $1$ and itself, so $\gcd(d,a) = 1$ for every $a$ that $d$ does not divide, and the refuted claim becomes true. Primes are not defined on this page, and the statement above is not repaired here; it is recorded so that the coprimality hypothesis of [[lem-coprime-divides-product]] is visibly doing work rather than decorating the statement.
 
-- **The witness is minimal in spirit, not proved minimal.** No claim is made that
-  $(6,4,9)$ is the smallest such triple.
+- **The witness is minimal in spirit, not proved minimal.** No claim is made that $(6,4,9)$ is the smallest such triple.

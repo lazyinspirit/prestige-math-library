@@ -34,8 +34,7 @@ $G\times G\to M$.
 
 **Given:** The direct-product extension $0\to\mathbb Z\to\mathbb Z\times C_2\to C_2\to0$ with trivial action.
 
-[L1] Changing the section changes the factor set by a coboundary
-([[lem-changing-the-section-changes-the-factor-set-by-a-coboundary]]).
+[L1] Changing the section changes the factor set by a coboundary ([[lem-changing-the-section-changes-the-factor-set-by-a-coboundary]]).
 
 ## Refutation
 

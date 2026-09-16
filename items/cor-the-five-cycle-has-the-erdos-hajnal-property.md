@@ -39,13 +39,9 @@ The graph $C_5$ has the Erdős-Hajnal property.
 
 **Given:** The graph $C_5$.
 
-[L1] There exists $\tau>0$ such that every nonempty $C_5$-free graph $G$
-satisfies $\kappa(G)\geq |V(G)|^\tau$
-([[thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound]]).
+[L1] There exists $\tau>0$ such that every nonempty $C_5$-free graph $G$ satisfies $\kappa(G)\geq |V(G)|^\tau$ ([[thm-c-five-free-graphs-satisfy-a-polynomial-kappa-bound]]).
 
-[L2] For a finite family of graphs, the existence of a positive-power
-$\kappa$-bound is equivalent to the Erdős-Hajnal property
-([[thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations]]).
+[L2] For a finite family of graphs, the existence of a positive-power $\kappa$-bound is equivalent to the Erdős-Hajnal property ([[thm-the-erdos-hajnal-property-is-equivalent-to-the-cograph-perfect-and-kappa-formulations]]).
 
 ## Proof
 

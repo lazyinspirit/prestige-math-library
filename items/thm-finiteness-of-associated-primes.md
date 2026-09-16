@@ -34,9 +34,7 @@ left $R$-module. Then $\operatorname{Ass}_R(M)$ is a finite set.
 
 **Given:** A Noetherian commutative ring $R$ and a finitely generated left $R$-module $M$.
 
-[L1] The module $M$ admits a prime filtration
-$0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$
-([[thm-prime-filtration-of-a-finite-module]]).
+[L1] The module $M$ admits a prime filtration $0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
 
 [L2] In a short exact sequence, associated primes of the middle term are contained in the union of those of the outer terms ([[thm-associated-primes-in-a-short-exact-sequence]]).
 

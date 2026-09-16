@@ -33,8 +33,7 @@ $\mathbb Z_7$.
 
 **Given:** The polynomial $f(X)=X^2-2$ over $\mathbb Z_7$.
 
-[L1] Simple roots lift uniquely, and Newton iteration computes the lifted root
-([[cor-p-adic-simple-root-lifting]], [[thm-p-adic-newton-criterion]]).
+[L1] Simple roots lift uniquely, and Newton iteration computes the lifted root ([[cor-p-adic-simple-root-lifting]], [[thm-p-adic-newton-criterion]]).
 
 ## Verification
 

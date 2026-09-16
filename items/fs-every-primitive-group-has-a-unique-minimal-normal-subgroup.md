@@ -28,11 +28,9 @@ normal subgroup.
 
 **Given:** A nonabelian finite simple group $T$ and the action of $T \times T$ on the right cosets of the diagonal subgroup $\Delta(T)=\{(t,t):t \in T\}$.
 
-[L1] Any two distinct minimal normal subgroups of a finite faithful primitive group are regular
-([[lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]]).
+[L1] Any two distinct minimal normal subgroups of a finite faithful primitive group are regular ([[lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]]).
 
-[L2] A finite primitive group has at most two minimal normal subgroups
-([[cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups]]).
+[L2] A finite primitive group has at most two minimal normal subgroups ([[cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups]]).
 
 ## Refutation
 

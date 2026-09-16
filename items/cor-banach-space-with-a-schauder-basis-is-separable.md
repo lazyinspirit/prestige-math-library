@@ -35,8 +35,7 @@ Every real or complex Banach space with a Schauder basis is separable.
 
 ## Facts & Assumptions
 
-[L1] Every vector has norm-convergent finite partial sums in the basis
-([[def-schauder-basis-and-coordinate-functionals]]).
+[L1] Every vector has norm-convergent finite partial sums in the basis ([[def-schauder-basis-and-coordinate-functionals]]).
 
 ## Proof
 
@@ -45,13 +44,7 @@ Every real or complex Banach space with a Schauder basis is separable.
 **Given:** The objects and hypotheses in the Statement.
 
 1.1 In the real case let $D$ consist of all finite linear combinations of the [given]
-basis vectors with rational coefficients. In the complex case use coefficients
-in $\mathbb Q+i\mathbb Q$. This is a countable union of countable finite
-products and hence is countable. [definition]
+basis vectors with rational coefficients. In the complex case use coefficients in $\mathbb Q+i\mathbb Q$. This is a countable union of countable finite products and hence is countable. [definition]
 
 2.1 Given $x$, first use [L1] to choose a basis partial sum within [given, L1, step 1.1]
-$\varepsilon/2$ of $x$. Approximate its finitely many scalar coefficients by
-rational, respectively Gaussian-rational, scalars closely enough that the
-resulting finite combination changes by less than $\varepsilon/2$. It belongs
-to $D$ and is within $\varepsilon$ of $x$. Thus $D$ is dense. [L1, step 1.1,
-finite approximation] ∎
+$\varepsilon/2$ of $x$. Approximate its finitely many scalar coefficients by rational, respectively Gaussian-rational, scalars closely enough that the resulting finite combination changes by less than $\varepsilon/2$. It belongs to $D$ and is within $\varepsilon$ of $x$. Thus $D$ is dense. [L1, step 1.1, finite approximation] ∎

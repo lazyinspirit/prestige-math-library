@@ -33,12 +33,9 @@ $$[f]+[f]=[0].$$
 
 **Given:** $G=M=C_2$ with trivial action and the cocycle $f(t,t)=1$.
 
-[F1] The Baer sum is the extension-side operation
-([[def-baer-sum-of-abelian-kernel-extensions]]).
+[F1] The Baer sum is the extension-side operation ([[def-baer-sum-of-abelian-kernel-extensions]]).
 
-[L1] Under the classification bijection, Baer sum agrees with addition in
-$H^2$
-([[thm-baer-sum-agrees-with-addition-in-h-two]]).
+[L1] Under the classification bijection, Baer sum agrees with addition in $H^2$ ([[thm-baer-sum-agrees-with-addition-in-h-two]]).
 
 ## Verification
 

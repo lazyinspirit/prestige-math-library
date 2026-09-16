@@ -40,27 +40,17 @@ together with the connecting maps of
 functor on $\mathcal A$. Moreover $L_0^PF$ is naturally isomorphic to $F$.
 ## Facts & Assumptions
 
-**Given:** A short exact sequence $0\to A'\to A\to A''\to0$ in $\mathcal A$ and
-an integer $n>0$.
+**Given:** A short exact sequence $0\to A'\to A\to A''\to0$ in $\mathcal A$ and an integer $n>0$.
 
-[L1] Each $L_n^PF$ is an additive functor
-([[thm-left-derived-functors-relative-to-supplied-data-are-additive-functors]]).
+[L1] Each $L_n^PF$ is an additive functor ([[thm-left-derived-functors-relative-to-supplied-data-are-additive-functors]]).
 
-[L2] Item 9 supplies connecting maps from a chosen horseshoe construction, and
-item 10 makes them independent of that choice
-([[def-connecting-map-for-left-derived-functors]],
-[[lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts]]).
+[L2] Item 9 supplies connecting maps from a chosen horseshoe construction, and item 10 makes them independent of that choice ([[def-connecting-map-for-left-derived-functors]], [[lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts]]).
 
-[L3] The long exact homology sequence of a short exact sequence of complexes is
-natural
-([[cor-the-long-exact-homology-sequence-is-natural]]).
+[L3] The long exact homology sequence of a short exact sequence of complexes is natural ([[cor-the-long-exact-homology-sequence-is-natural]]).
 
-[L4] The zeroth left derived functor of a right exact functor recovers the
-original functor
-([[thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]]).
+[L4] The zeroth left derived functor of a right exact functor recovers the original functor ([[thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]]).
 
-[L5] A homological delta functor is exactly the data listed in
-[[def-homological-delta-functor]].
+[L5] A homological delta functor is exactly the data listed in [[def-homological-delta-functor]].
 
 ## Proof
 

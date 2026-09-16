@@ -60,6 +60,4 @@ $\operatorname{Gal}(F/\mathbb Q)$ is abelian.
 
 ## Remarks
 
-- **This is the proved half of the Kronecker–Weber picture on this page.** Every
-  subfield of a rational cyclotomic field is abelian over $\mathbb Q$; the
-  converse is recorded separately as [[rem-kronecker-weber]].
+- **This is the proved half of the Kronecker–Weber picture on this page.** Every subfield of a rational cyclotomic field is abelian over $\mathbb Q$; the converse is recorded separately as [[rem-kronecker-weber]].

@@ -34,18 +34,13 @@ embedded Lie subgroup.
 
 ## Facts & Assumptions
 
-**Given:** An irrational $\alpha\in\mathbb R$ and the winding homomorphism
-$i:\mathbb R\to\mathbb T^2$ below.
+**Given:** An irrational $\alpha\in\mathbb R$ and the winding homomorphism $i:\mathbb R\to\mathbb T^2$ below.
 
-[F1] The irrational winding is an injective immersion and homomorphism with
-dense image. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
+[F1] The irrational winding is an injective immersion and homomorphism with dense image. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
 
-[F2] An immersed subgroup carries an intrinsic topology; an embedded subgroup
-has the ambient subspace topology.
-[[def-immersed-embedded-and-closed-lie-subgroup]].
+[F2] An immersed subgroup carries an intrinsic topology; an embedded subgroup has the ambient subspace topology. [[def-immersed-embedded-and-closed-lie-subgroup]].
 
-[F3] Under $\mathrm{AC}_\omega$, every homomorphism image has its canonical
-immersed structure. [[thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup]].
+[F3] Under $\mathrm{AC}_\omega$, every homomorphism image has its canonical immersed structure. [[thm-image-of-a-lie-group-homomorphism-is-an-immersed-lie-subgroup]].
 
 ## Refutation
 

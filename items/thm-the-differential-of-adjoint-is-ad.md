@@ -48,46 +48,25 @@ interfaces.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-identity $e$, Lie algebra $\mathfrak g=T_eG$, and $X,Y\in\mathfrak g$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with identity $e$, Lie algebra $\mathfrak g=T_eG$, and $X,Y\in\mathfrak g$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] The adjoint map is smooth and satisfies
-$\operatorname{Ad}_g=d(C_g)_e$.
-[[prop-adjoint-is-a-smooth-lie-group-representation]],
-[[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
+[F2] The adjoint map is smooth and satisfies $\operatorname{Ad}_g=d(C_g)_e$. [[prop-adjoint-is-a-smooth-lie-group-representation]], [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
 
-[F3] Left and right translations are $L_g(h)=gh$ and $R_g(h)=hg$; the
-left-invariant extension is $Y^L_h=d(L_h)_eY$.
-[[def-left-and-right-translations-on-a-lie-group]],
-[[def-left-and-right-invariant-vector-fields]],
-[[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F3] Left and right translations are $L_g(h)=gh$ and $R_g(h)=hg$; the left-invariant extension is $Y^L_h=d(L_h)_eY$. [[def-left-and-right-translations-on-a-lie-group]], [[def-left-and-right-invariant-vector-fields]], [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
-[F4] The tangent bracket is characterized by
-$[X^L,Y^L]=[X,Y]_G^L$.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F4] The tangent bracket is characterized by $[X^L,Y^L]=[X,Y]_G^L$. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F5] The curve $t\mapsto\exp(tX)$ is the one-parameter subgroup and the
-integral curve of $X^L$ through $e$.
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
+[F5] The curve $t\mapsto\exp(tX)$ is the one-parameter subgroup and the integral curve of $X^L$ through $e$. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
 
-[F6] For the flow $\Phi_t$ of a field $Z$,
-$\mathcal L_ZW=\left.\frac d{dt}\right|_0(\Phi_{-t})_*W$, and
-$\mathcal L_ZW=[Z,W]$.
-[[def-lie-derivative-of-a-vector-field]],
-[[thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket]].
+[F6] For the flow $\Phi_t$ of a field $Z$, $\mathcal L_ZW=\left.\frac d{dt}\right|_0(\Phi_{-t})_*W$, and $\mathcal L_ZW=[Z,W]$. [[def-lie-derivative-of-a-vector-field]], [[thm-lie-derivative-of-a-vector-field-equals-the-lie-bracket]].
 
-[F7] Diffeomorphism pushforward is defined by its differential on field
-values. [[def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism]].
+[F7] Diffeomorphism pushforward is defined by its differential on field values. [[def-pushforward-and-pullback-of-a-vector-field-by-a-diffeomorphism]].
 
-[F8] Differentials obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F8] Differentials obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
-[F9] The adjoint Lie-algebra representation satisfies
-$\operatorname{ad}_X(Y)=[X,Y]$ and
-$[\operatorname{ad}_X,\operatorname{ad}_Y]=\operatorname{ad}_{[X,Y]}$.
-[[def-adjoint-representation-of-a-lie-algebra]].
+[F9] The adjoint Lie-algebra representation satisfies $\operatorname{ad}_X(Y)=[X,Y]$ and $[\operatorname{ad}_X,\operatorname{ad}_Y]=\operatorname{ad}_{[X,Y]}$. [[def-adjoint-representation-of-a-lie-algebra]].
 
 ## Proof
 

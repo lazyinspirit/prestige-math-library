@@ -35,17 +35,11 @@ whose unique value is $a$.
 
 ## Facts & Assumptions
 
-**Given:** An alphabet map $h:\Sigma\to\Delta^*$, its induced map
-$\widehat h:\Sigma^*\to\Delta^*$, and a map $g:\Sigma^*\to\Delta^*$ preserving
-concatenation and satisfying $g(\langle a\rangle)=h(a)$ for every $a\in\Sigma$.
+**Given:** An alphabet map $h:\Sigma\to\Delta^*$, its induced map $\widehat h:\Sigma^*\to\Delta^*$, and a map $g:\Sigma^*\to\Delta^*$ preserving concatenation and satisfying $g(\langle a\rangle)=h(a)$ for every $a\in\Sigma$.
 
-[L1] The induced map is defined by $\widehat h(\varepsilon)=\varepsilon$ and
-$\widehat h(a_0\cdots a_{n-1})=h(a_0)\cdots h(a_{n-1})$ by
-[[def-alphabet-homomorphism-and-induced-word-map]].
+[L1] The induced map is defined by $\widehat h(\varepsilon)=\varepsilon$ and $\widehat h(a_0\cdots a_{n-1})=h(a_0)\cdots h(a_{n-1})$ by [[def-alphabet-homomorphism-and-induced-word-map]].
 
-[L2] Word concatenation is formed by writing the letters of the first word
-followed by those of the second, by
-[[def-computation-alphabet-and-word-convention]].
+[L2] Word concatenation is formed by writing the letters of the first word followed by those of the second, by [[def-computation-alphabet-and-word-convention]].
 
 ## Proof
 

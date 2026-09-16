@@ -36,20 +36,15 @@ quotient group, makes $M/N$ a left $R$-module.
 
 **Given:** A left $R$-module $M$ and a submodule $N\le M$.
 
-[L1] Additive cosets satisfy $m+N=m'+N$ exactly when $m'-m\in N$
-([[lem-coset-membership-and-equality]]).
+[L1] Additive cosets satisfy $m+N=m'+N$ exactly when $m'-m\in N$ ([[lem-coset-membership-and-equality]]).
 
-[L2] A submodule is closed under scalar multiplication and is an additive
-subgroup ([[def-submodule]]).
+[L2] A submodule is closed under scalar multiplication and is an additive subgroup ([[def-submodule]]).
 
-[L3] The additive cosets form a quotient group with the inherited addition
-([[thm-quotient-group-laws]]).
+[L3] The additive cosets form a quotient group with the inherited addition ([[thm-quotient-group-laws]]).
 
-[L4] The module axioms give distributivity, associativity of scalar action, and
-$1_Rm=m$ ([[def-left-and-right-modules]]).
+[L4] The module axioms give distributivity, associativity of scalar action, and $1_Rm=m$ ([[def-left-and-right-modules]]).
 
-[L5] Scalar multiplication preserves additive negatives
-([[lem-module-elementary-consequences]]).
+[L5] Scalar multiplication preserves additive negatives ([[lem-module-elementary-consequences]]).
 
 ## Proof
 

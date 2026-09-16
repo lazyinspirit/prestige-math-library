@@ -44,14 +44,11 @@ Then $\nu_f$ is a measure on $(X,\mathcal A)$.
 **Proof technique:** direct.
 
 1.1 One has $\nu_f(\varnothing)=0$. If $(A_n)$ is a pairwise disjoint sequence,[L1, L2, given]
-put $B_n:=\bigcup_{k<n}A_k$. Then $\chi_{B_n}\uparrow\chi_{\bigcup_kA_k}$, so
-$f\chi_{B_n}\uparrow f\chi_{\bigcup_kA_k}$ and [L2] gives
-$$\nu_f\!\left(\bigcup_kA_k\right)=\lim_n\nu_f(B_n).$$
+put $B_n:=\bigcup_{k<n}A_k$. Then $\chi_{B_n}\uparrow\chi_{\bigcup_kA_k}$, so $f\chi_{B_n}\uparrow f\chi_{\bigcup_kA_k}$ and [L2] gives $$\nu_f\!\left(\bigcup_kA_k\right)=\lim_n\nu_f(B_n).$$
 
 
 2.1 Because the sets $A_k$ are disjoint, repeated use of [L3] gives [step 1.1, L3, algebra]
-$$\nu_f(B_n)=\sum_{k<n}\nu_f(A_k).$$
-Substituting this into step 1.1 proves countable additivity.
+$$\nu_f(B_n)=\sum_{k<n}\nu_f(A_k).$$ Substituting this into step 1.1 proves countable additivity.
 
 3.1 Steps 1.1 and 2.1 verify the two conditions in [L4], so $\nu_f$ is a [step 1.1, step 2.1, L4] ∎
 measure.

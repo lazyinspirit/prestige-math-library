@@ -36,26 +36,15 @@ coordinate process is Brownian motion.
 
 **Given:** The Axiom of Choice and the Brownian Gaussian finite-dimensional laws.
 
-[F1] The centered Gaussian laws with covariance $\min(t_i,t_j)$ are
-well-defined and consistent under finite coordinate restriction.
-[[lem-consistency-of-brownian-finite-dimensional-laws]]
+[F1] The centered Gaussian laws with covariance $\min(t_i,t_j)$ are well-defined and consistent under finite coordinate restriction. [[lem-consistency-of-brownian-finite-dimensional-laws]]
 
-[F2] Assume AC. A consistent family on arbitrary standard-Borel coordinate
-spaces has a unique extension to the cylinder sigma-algebra.
-[[thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]]
+[F2] Assume AC. A consistent family on arbitrary standard-Borel coordinate spaces has a unique extension to the cylinder sigma-algebra. [[thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]]
 
-[F3] Under that extension measure, the coordinate process realizes precisely
-the prescribed finite-dimensional distributions.
-[[cor-canonical-process-realizes-consistent-finite-dimensional-laws]]
+[F3] Under that extension measure, the coordinate process realizes precisely the prescribed finite-dimensional distributions. [[cor-canonical-process-realizes-consistent-finite-dimensional-laws]]
 
-[F4] A process is Gaussian exactly when every finite evaluation vector has a
-possibly singular multivariate normal law. [[def-gaussian-process]]
+[F4] A process is Gaussian exactly when every finite evaluation vector has a possibly singular multivariate normal law. [[def-gaussian-process]]
 
-[F5] A standard Borel structure may be presented by a Polish topology; the
-usual real metric is complete, and the embedded rationals form a countable
-dense subset. [[def-standard-borel-space]] [[def-polish-space]]
-[[thm-euclidean-space-complete]] [[thm-rationals-countable]]
-[[lem-rat-embeds-dense]]
+[F5] A standard Borel structure may be presented by a Polish topology; the usual real metric is complete, and the embedded rationals form a countable dense subset. [[def-standard-borel-space]] [[def-polish-space]] [[thm-euclidean-space-complete]] [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
 
 ## Proof
 
@@ -71,7 +60,4 @@ dense subset. [[def-standard-borel-space]] [[def-polish-space]]
 
 ## Source notes
 
-Durrett, Section 7.1, Theorem 7.1.1 and the discussion immediately after it
-(printed pp. 355–356), separates the finite-dimensional Kolmogorov construction
-from the subsequent continuity theorem. Sousi, Section 6.2, makes the same
-separation before Theorem 6.4.
+Durrett, Section 7.1, Theorem 7.1.1 and the discussion immediately after it (printed pp. 355–356), separates the finite-dimensional Kolmogorov construction from the subsequent continuity theorem. Sousi, Section 6.2, makes the same separation before Theorem 6.4.

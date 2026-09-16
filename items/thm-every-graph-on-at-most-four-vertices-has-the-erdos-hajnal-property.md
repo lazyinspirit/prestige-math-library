@@ -33,27 +33,19 @@ Every finite graph $H$ with $|V(H)|\le 4$ has the Erdős-Hajnal property.
 
 **Given:** A finite graph $H$ with $|V(H)|\le 4$.
 
-[L1] Every graph on at most three vertices has the Erdős-Hajnal property
-([[cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property]]).
+[L1] Every graph on at most three vertices has the Erdős-Hajnal property ([[cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property]]).
 
-[L2] The graph $P_4$ has the Erdős-Hajnal property
-([[cor-the-four-vertex-path-has-the-erdos-hajnal-property]]).
+[L2] The graph $P_4$ has the Erdős-Hajnal property ([[cor-the-four-vertex-path-has-the-erdos-hajnal-property]]).
 
-[L3] Every prime graph on at least four vertices contains an induced $P_4$
-([[thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four]]).
+[L3] Every prime graph on at least four vertices contains an induced $P_4$ ([[thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four]]).
 
-[L4] A finite graph with at least two vertices is prime exactly when it is not a
-nontrivial substitution
-([[thm-prime-graphs-are-the-graphs-that-are-not-substitutions]]).
+[L4] A finite graph with at least two vertices is prime exactly when it is not a nontrivial substitution ([[thm-prime-graphs-are-the-graphs-that-are-not-substitutions]]).
 
-[L5] Substitution preserves the Erdős-Hajnal property
-([[thm-substitution-preserves-the-erdos-hajnal-property]]).
+[L5] Substitution preserves the Erdős-Hajnal property ([[thm-substitution-preserves-the-erdos-hajnal-property]]).
 
-[F1] If $|V(H)|=4$ and $H$ contains an induced $P_4$, then that induced copy
-uses all four vertices, so $H\cong P_4$.
+[F1] If $|V(H)|=4$ and $H$ contains an induced $P_4$, then that induced copy uses all four vertices, so $H\cong P_4$.
 
-[F2] If $H\cong H_1[v\to H_2]$ and $|V(H)|=4$ with $|V(H_1)|,|V(H_2)|\ge 2$,
-then $|V(H_1)|+|V(H_2)|-1=4$, so each factor has at most three vertices.
+[F2] If $H\cong H_1[v\to H_2]$ and $|V(H)|=4$ with $|V(H_1)|,|V(H_2)|\ge 2$, then $|V(H_1)|+|V(H_2)|-1=4$, so each factor has at most three vertices.
 
 ## Proof
 

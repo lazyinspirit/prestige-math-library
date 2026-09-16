@@ -34,32 +34,21 @@ a norm in general in the sense of [[def-norm-and-normed-space]].
 
 **Given:** A real exponent $0<p<1$.
 
-[L1] Real powers are defined for positive bases and obey the exponent laws; for
-fixed base $2>1$, the map $x\mapsto 2^x$ is strictly increasing
-([[def-real-power]], [[thm-real-power-laws]],
-[[thm-exponential-is-strictly-increasing]]).
+[L1] Real powers are defined for positive bases and obey the exponent laws; for fixed base $2>1$, the map $x\mapsto 2^x$ is strictly increasing ([[def-real-power]], [[thm-real-power-laws]], [[thm-exponential-is-strictly-increasing]]).
 
-[L2] A norm must satisfy the triangle inequality
-([[def-norm-and-normed-space]]).
+[L2] A norm must satisfy the triangle inequality ([[def-norm-and-normed-space]]).
 
-[L3] Counting measure on a two-point set is a measure
-([[def-counting-measure]], [[prop-counting-measure-is-a-measure]]).
+[L3] Counting measure on a two-point set is a measure ([[def-counting-measure]], [[prop-counting-measure-is-a-measure]]).
 
 ## Proof
 
-**Proof technique:** Use two disjoint equal-mass indicators, so the triangle
-inequality becomes the scalar inequality $2^{1/p}\le2$, which fails because
-$1/p>1$.
+**Proof technique:** Use two disjoint equal-mass indicators, so the triangle inequality becomes the scalar inequality $2^{1/p}\le2$, which fails because $1/p>1$.
 
 1.1 Work on the two-point counting space $\{0,1\}$ from [L3]. Let [L3, given]
-$e_0:=\chi_{\{0\}}$ and $e_1:=\chi_{\{1\}}$. Then
-$$\|e_0\|_p=\|e_1\|_p=1,\qquad \|e_0+e_1\|_p=(1+1)^{1/p}=2^{1/p}.$$
+$e_0:=\chi_{\{0\}}$ and $e_1:=\chi_{\{1\}}$. Then $$\|e_0\|_p=\|e_1\|_p=1,\qquad \|e_0+e_1\|_p=(1+1)^{1/p}=2^{1/p}.$$
 
 2.1 Because $0<p<1$, one has $1/p>1$. Strict monotonicity in [L1] therefore [L1, step 1.1]
-gives
-$$2^{1/p}>2^1=2.$$
-So
-$$\|e_0+e_1\|_p>\|e_0\|_p+\|e_1\|_p.$$
+gives $$2^{1/p}>2^1=2.$$ So $$\|e_0+e_1\|_p>\|e_0\|_p+\|e_1\|_p.$$
 
 3.1 The triangle inequality from [L2] fails on this concrete measure space, so [L2, step 2.1]
 the $p$-functional is not a norm in general for $0<p<1$. ∎

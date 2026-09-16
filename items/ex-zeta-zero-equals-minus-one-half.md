@@ -32,12 +32,9 @@ $$\zeta(0)=-\frac12.$$
 
 **Given:** The classical functional equation and the pole at $1$.
 
-[L1] Zeta satisfies
-$$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$
-([[thm-riemann-zeta-functional-equation]]).
+[L1] Zeta satisfies $$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$ ([[thm-riemann-zeta-functional-equation]]).
 
-[L2] Zeta has a simple residue-one pole at $1$
-([[thm-riemann-zeta-meromorphic-continuation]]).
+[L2] Zeta has a simple residue-one pole at $1$ ([[thm-riemann-zeta-meromorphic-continuation]]).
 
 ## Verification
 

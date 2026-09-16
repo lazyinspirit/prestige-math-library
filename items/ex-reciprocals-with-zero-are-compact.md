@@ -85,20 +85,8 @@ it turns a non-closed bounded set into a compact one.
 
 ## Remarks
 
-- **$B$ is bounded and not compact, and it fails to be closed by a single
-  point.** Adjoining $0$ is what the verification above shows to be enough:
-  $A = B \cup \{0\}$ is closed. The same computation, run at a point $x \notin A$
-  lying between two consecutive reciprocals, is the one that isolates each
-  $1/k$ from the rest of $B$.
+- **$B$ is bounded and not compact, and it fails to be closed by a single point.** Adjoining $0$ is what the verification above shows to be enough: $A = B \cup \{0\}$ is closed. The same computation, run at a point $x \notin A$ lying between two consecutive reciprocals, is the one that isolates each $1/k$ from the rest of $B$.
 
-- **$A$ is compact and has an isolated point.** Every $1/k$ is isolated in $A$,
-  so $A$ is not perfect ([[def-perfect-set-r]]); compactness and perfectness are
-  independent properties, and this is a compact set that is countable, which is
-  possible exactly because it is not perfect
-  ([[thm-perfect-set-uncountable-r]]).
+- **$A$ is compact and has an isolated point.** Every $1/k$ is isolated in $A$, so $A$ is not perfect ([[def-perfect-set-r]]); compactness and perfectness are independent properties, and this is a compact set that is countable, which is possible exactly because it is not perfect ([[thm-perfect-set-uncountable-r]]).
 
-- **The index range matters.** The set is indexed from $k = 1$; $1/0$ does not
-  exist. Since $\mathbb{N}$ contains $0$ ([[def-sequence]]), a set written
-  $\{1/k : k \in \mathbb{N}\}$ without a restriction would be ill formed, and the
-  same care is needed at the threshold $K = n-1$ used in the convergence
-  arguments on the parent page.
+- **The index range matters.** The set is indexed from $k = 1$; $1/0$ does not exist. Since $\mathbb{N}$ contains $0$ ([[def-sequence]]), a set written $\{1/k : k \in \mathbb{N}\}$ without a restriction would be ill formed, and the same care is needed at the threshold $K = n-1$ used in the convergence arguments on the parent page.

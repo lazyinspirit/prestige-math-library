@@ -92,18 +92,8 @@ alongside it.
 
 ## Remarks
 
-- **What "computed" means here.** The coefficients are produced by a recursion
-  over $\mathbb{N}$ whose every step is an application of the division algorithm
-  and four ring operations; nothing in the argument appeals to the existence of a
-  least element of a set. That is the difference from
-  [[thm-bezout-identity]], where the coefficients come from a well-ordering
-  argument and the proof gives no way to find them.
+- **What "computed" means here.** The coefficients are produced by a recursion over $\mathbb{N}$ whose every step is an application of the division algorithm and four ring operations; nothing in the argument appeals to the existence of a least element of a set. That is the difference from [[thm-bezout-identity]], where the coefficients come from a well-ordering argument and the proof gives no way to find them.
 
-- **The Bézout pair produced is not the only one.** The companion page records
-  the full family of solutions and a second pair for the same equation
-  ([[ex-bezout-coefficients-not-unique]]).
+- **The Bézout pair produced is not the only one.** The companion page records the full family of solutions and a second pair for the same equation ([[ex-bezout-coefficients-not-unique]]).
 
-- **Only the first four coordinates of $S$ are needed for the conclusion**; the
-  last two are carried because the recursion for $(x,y)$ reads off the previous
-  values of $(u,v)$, which is what makes the whole thing a single application of
-  the recursion theorem instead of a mutual recursion.
+- **Only the first four coordinates of $S$ are needed for the conclusion**; the last two are carried because the recursion for $(x,y)$ reads off the previous values of $(u,v)$, which is what makes the whole thing a single application of the recursion theorem instead of a mutual recursion.

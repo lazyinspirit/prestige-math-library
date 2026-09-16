@@ -48,38 +48,21 @@ real $x$, while $\psi(x)>0$ whenever $x\ne0$.
 
 **Given:** The function $\psi$ displayed above.
 
-[C1] Let
-$$\phi(u)=\begin{cases} e^{-1/u},&u>0,\\ 0,&u\le0, \end{cases}\qquad q(x)=x^2,$$
-so that $\psi=\phi\circ q$.
+[C1] Let $$\phi(u)=\begin{cases} e^{-1/u},&u>0,\\ 0,&u\le0, \end{cases}\qquad q(x)=x^2,$$ so that $\psi=\phi\circ q$.
 
-[L1] The function $\phi$ belongs to $C^\infty(\mathbb R)$,
-$\phi^{(j)}(0)=0$ for every $j\ge0$, and $\phi(u)>0$ for $u>0$
-([[ex-flat-exponential-function]]).
+[L1] The function $\phi$ belongs to $C^\infty(\mathbb R)$, $\phi^{(j)}(0)=0$ for every $j\ge0$, and $\phi(u)>0$ for $u>0$ ([[ex-flat-exponential-function]]).
 
-[L2] If $g$ is differentiable at $x$ and $h$ is differentiable at $g(x)$,
-then $(h\circ g)'(x)=h'(g(x))g'(x)$ ([[thm-chain-rule]]).
+[L2] If $g$ is differentiable at $x$ and $h$ is differentiable at $g(x)$, then $(h\circ g)'(x)=h'(g(x))g'(x)$ ([[thm-chain-rule]]).
 
-[L3] Sums and products of differentiable functions are differentiable, with
-the sum and product rules ([[thm-algebra-of-derivatives]]).
+[L3] Sums and products of differentiable functions are differentiable, with the sum and product rules ([[thm-algebra-of-derivatives]]).
 
-[L4] The Maclaurin series of a smooth function $f$ is
-$\sum_{n\ge0}f^{(n)}(0)x^n/n!$; its definition alone asserts neither
-convergence nor equality with $f$ ([[def-taylor-and-maclaurin-series]]).
+[L4] The Maclaurin series of a smooth function $f$ is $\sum_{n\ge0}f^{(n)}(0)x^n/n!$; its definition alone asserts neither convergence nor equality with $f$ ([[def-taylor-and-maclaurin-series]]).
 
-[L5] For a natural $n\ge1$ the function $x\mapsto x^n$ is differentiable at
-every real with derivative $nx^{n-1}$, and for $n=0$ it is the constant $1$,
-with derivative $0$; consequently every polynomial function is differentiable
-at every real, with the derivative computed term by term
-([[lem-derivative-of-a-power]]).
+[L5] For a natural $n\ge1$ the function $x\mapsto x^n$ is differentiable at every real with derivative $nx^{n-1}$, and for $n=0$ it is the constant $1$, with derivative $0$; consequently every polynomial function is differentiable at every real, with the derivative computed term by term ([[lem-derivative-of-a-power]]).
 
-[L6] A function differentiable at a limit point $c$ of its domain is continuous
-at $c$; hence a function differentiable on a set is continuous at every point
-of that set ([[cor-differentiable-implies-continuous]]).
+[L6] A function differentiable at a limit point $c$ of its domain is continuous at $c$; hence a function differentiable on a set is continuous at every point of that set ([[cor-differentiable-implies-continuous]]).
 
-[L7] A function is of class $C^k$ on an interval when $f^{(j)}$ exists there
-for every $j\le k$ and each such $f^{(j)}$ is continuous there, and it is
-smooth, or $C^\infty$, when it is $C^k$ for every $k\in\mathbb N$
-([[def-higher-derivatives-and-smoothness]]).
+[L7] A function is of class $C^k$ on an interval when $f^{(j)}$ exists there for every $j\le k$ and each such $f^{(j)}$ is continuous there, and it is smooth, or $C^\infty$, when it is $C^k$ for every $k\in\mathbb N$ ([[def-higher-derivatives-and-smoothness]]).
 
 ## Proof
 

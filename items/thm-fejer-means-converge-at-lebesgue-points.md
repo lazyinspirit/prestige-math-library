@@ -43,9 +43,7 @@ In particular, $\sigma_Nf(x)\to f(x)$ for almost every $x$.
 
 [L2] The Fejer kernels are nonnegative, have integral $1$, and obey the square formula and tail estimate from [[lem-fejer-kernel-is-a-positive-approximate-identity]].
 
-[L3] At a Lebesgue point,
-$$\lim_{r\to0^+}\frac1{2r}\int_{-r}^r |f(x-t)-f(x)|\,dt=0$$
-in the one-dimensional case of [[def-lebesgue-point-and-lebesgue-set]].
+[L3] At a Lebesgue point, $$\lim_{r\to0^+}\frac1{2r}\int_{-r}^r |f(x-t)-f(x)|\,dt=0$$ in the one-dimensional case of [[def-lebesgue-point-and-lebesgue-set]].
 
 [L4] Assuming the Axiom of Countable Choice, almost every point is a Lebesgue point ([[thm-almost-every-point-is-a-lebesgue-point]]).
 

@@ -41,22 +41,15 @@ $A_0\cap A_1\cap A_2\cap A_3$.
 
 ## Facts & Assumptions
 
-**Given:** The forcing-theorem setting over a transitive ZFC ground, with
-$U,\kappa,\gamma,p,\dot x$ as above.
+**Given:** The forcing-theorem setting over a transitive ZFC ground, with $U,\kappa,\gamma,p,\dot x$ as above.
 
-[F1] [[thm-prikry-property]]: Every membership sentence has a deciding direct
-extension, so the next decision can be made without changing $s$.
+[F1] [[thm-prikry-property]]: Every membership sentence has a deciding direct extension, so the next decision can be made without changing $s$.
 
-[F2] [[thm-prikry-forcing-adds-no-bounded-subsets]]: A name forced to be a
-subset of $\gamma<\kappa$ is decided by a direct extension to equal a
-ground-model subset of $\gamma$.
+[F2] [[thm-prikry-forcing-adds-no-bounded-subsets]]: A name forced to be a subset of $\gamma<\kappa$ is decided by a direct extension to equal a ground-model subset of $\gamma$.
 
-[F3] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: The normal
-measure $U$ is $\kappa$-complete, so the intersection of fewer than $\kappa$
-members of $U$ remains in $U$.
+[F3] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: The normal measure $U$ is $\kappa$-complete, so the intersection of fewer than $\kappa$ members of $U$ remains in $U$.
 
-[F4] [[def-axiom-of-choice]]: In the ZFC ground, a selector may be fixed for
-the nonempty sets of direct deciding extensions.
+[F4] [[def-axiom-of-choice]]: In the ZFC ground, a selector may be fixed for the nonempty sets of direct deciding extensions.
 
 ## Verification
 

@@ -37,11 +37,9 @@ is a composition series, so $\ell_V(V/(\pi^n))=n$.
 
 **Given:** A discrete valuation ring $V$, a uniformiser $\pi$, and an integer $n\ge1$.
 
-[F1] A uniformiser generates the maximal ideal of a DVR
-([[def-uniformising-parameter]]).
+[F1] A uniformiser generates the maximal ideal of a DVR ([[def-uniformising-parameter]]).
 
-[L1] In a DVR one has $\ell_V(V/(\pi^n))=n$
-([[thm-dvr-ideal-and-module-length]]).
+[L1] In a DVR one has $\ell_V(V/(\pi^n))=n$ ([[thm-dvr-ideal-and-module-length]]).
 
 ## Verification
 

@@ -41,15 +41,11 @@ $\alpha\in\operatorname{End}_{kH}(M)$.
 
 **Given:** A subgroup $H\le G$, a $kG$-module $M$, and a left transversal $T$ for $G/H$.
 
-[F1] Relative $H$-projectivity means being a direct summand of an induced
-module ([[def-relative-projectivity]]).
+[F1] Relative $H$-projectivity means being a direct summand of an induced module ([[def-relative-projectivity]]).
 
-[L1] Induction is left adjoint to restriction
-([[thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]]).
+[L1] Induction is left adjoint to restriction ([[thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]]).
 
-[L2] Evaluation on a left transversal identifies an induced module with a
-finite direct sum of copies of the source module
-([[prop-induced-module-decomposes-over-a-left-transversal]]).
+[L2] Evaluation on a left transversal identifies an induced module with a finite direct sum of copies of the source module ([[prop-induced-module-decomposes-over-a-left-transversal]]).
 
 ## Proof
 

@@ -36,12 +36,9 @@ for every $n\ge c$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, an ideal $I\subset R$, a finite
-$R$-module $M$, and a submodule $N\subseteq M$.
+**Given:** A Noetherian commutative ring $R$, an ideal $I\subset R$, a finite $R$-module $M$, and a submodule $N\subseteq M$.
 
-[L1] For the $I$-adic filtration on $M$ and any induced filtration on a finite
-submodule, Rees-module finiteness is equivalent to eventual stability, and the
-Rees algebra is Noetherian ([[lem-rees-module-finiteness-and-stable-filtrations]]).
+[L1] For the $I$-adic filtration on $M$ and any induced filtration on a finite submodule, Rees-module finiteness is equivalent to eventual stability, and the Rees algebra is Noetherian ([[lem-rees-module-finiteness-and-stable-filtrations]]).
 
 [L2] A finite module over a Noetherian ring is Noetherian, so each submodule of it is finite ([[thm-finite-generation-and-finite-presentation-over-a-noetherian-ring]]).
 

@@ -41,13 +41,9 @@ where $s$ is a new symbol. The language $L$ is a counterexample.
 
 [L1] By [[fs-the-cfl-pumping-lemma-characterizes-cfls]], the refuted claim is that satisfying the ordinary pumping condition is equivalent to being context-free.
 
-[L2] The proof of [[thm-cfls-are-not-closed-under-intersection]] establishes
-that $K$ is not context free.
+[L2] The proof of [[thm-cfls-are-not-closed-under-intersection]] establishes that $K$ is not context free.
 
-[L3] PDA's recognize exactly the context-free languages
-([[thm-pdas-recognize-exactly-the-cfls]]), and context-free languages are
-closed under homomorphic image
-([[thm-cfl-closure-under-union-concatenation-star-and-homomorphism]]).
+[L3] PDA's recognize exactly the context-free languages ([[thm-pdas-recognize-exactly-the-cfls]]), and context-free languages are closed under homomorphic image ([[thm-cfl-closure-under-union-concatenation-star-and-homomorphism]]).
 
 ## Counterexample
 

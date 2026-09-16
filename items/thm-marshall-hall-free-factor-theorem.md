@@ -33,11 +33,9 @@ $H\le F$ is a free factor of some finite-index subgroup $K\le F$.
 
 ## Facts & Assumptions
 
-**Given:** A finite-rank free group $F$ and a finitely generated subgroup
-$H\le F$.
+**Given:** A finite-rank free group $F$ and a finitely generated subgroup $H\le F$.
 
-[L3] Free groups on disjoint bases freely multiply to the free group on their
-union ([[thm-free-product-of-free-groups-on-disjoint-bases]]).
+[L3] Free groups on disjoint bases freely multiply to the free group on their union ([[thm-free-product-of-free-groups-on-disjoint-bases]]).
 
 ## Proof
 

@@ -32,26 +32,19 @@ functor category. The dual statement holds pointwise for chosen colimits.
 
 ## Facts & Assumptions
 
-**Given:** The two small categories, the diagram $D$, and a chosen limiting
-cone $(L(a),\lambda^a_j)$ at every $a\in\mathcal A$.
+**Given:** The two small categories, the diagram $D$, and a chosen limiting cone $(L(a),\lambda^a_j)$ at every $a\in\mathcal A$.
 
-[F1] The functor category has functors as objects and natural transformations
-as morphisms; the small-source hypotheses ensure the stated size control
-([[def-functor-category]], [[prop-size-of-functor-categories]]).
+[F1] The functor category has functors as objects and natural transformations as morphisms; the small-source hypotheses ensure the stated size control ([[def-functor-category]], [[prop-size-of-functor-categories]]).
 
-[F2] A limit is characterized by existence and uniqueness of cone factors
-([[def-limit-and-colimit-of-a-diagram]]).
+[F2] A limit is characterized by existence and uniqueness of cone factors ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L1] Chosen limits act functorially on natural transformations
-([[thm-chosen-limits-and-colimits-assemble-into-functors]]).
+[L1] Chosen limits act functorially on natural transformations ([[thm-chosen-limits-and-colimits-assemble-into-functors]]).
 
-[L2] Limit legs are jointly monic
-([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
+[L2] Limit legs are jointly monic ([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
 
 [L3] Colimits are the formal dual ([[prop-limit-colimit-duality]]).
 
-[F3] Choice selects an element from every set in a family of nonempty sets
-([[def-axiom-of-choice]]).
+[F3] Choice selects an element from every set in a family of nonempty sets ([[def-axiom-of-choice]]).
 
 ## Proof
 

@@ -26,11 +26,9 @@ The defining series of zeta still converges at $s=1$.
 
 **Given:** The defining Dirichlet series.
 
-[L1] On $\operatorname{Re}s>1$, zeta is defined by $\sum_{n\ge1}n^{-s}$
-([[def-riemann-zeta-function]]).
+[L1] On $\operatorname{Re}s>1$, zeta is defined by $\sum_{n\ge1}n^{-s}$ ([[def-riemann-zeta-function]]).
 
-[L2] The series $\sum_{n\ge1}1/n$ diverges because $p=1$ is the threshold case
-([[thm-p-series-rational]]).
+[L2] The series $\sum_{n\ge1}1/n$ diverges because $p=1$ is the threshold case ([[thm-p-series-rational]]).
 
 ## Counterexample
 

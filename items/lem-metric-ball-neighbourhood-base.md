@@ -92,15 +92,6 @@ countable**.
 
 ## Remarks
 
-- **The family can be finite, and that is not a defect.** In a discrete metric
-  space $1/n \le 1$ for every $n \ge 1$, so every $\beta_n$ is the single point
-  $\{x\}$ and $\mathcal{B}_x$ is a one-element family. "At most countable" in
-  this library includes finite ([[def-countable]]), which is exactly why claim 1
-  is stated in that form and not as "countably infinite".
-- **Only the reciprocal form of the Archimedean property is used**, in step 1.2,
-  and it is the form recorded as [[cor-archimedean-reciprocal]] precisely so that
-  the inversion never has to be redone inside a proof.
-- **This is what makes sequences sufficient in metric spaces.** First
-  countability is the hypothesis under which closure can be described by
-  sequences rather than by nets, and it is used in exactly that way by
-  [[thm-metric-sequential-closure]].
+- **The family can be finite, and that is not a defect.** In a discrete metric space $1/n \le 1$ for every $n \ge 1$, so every $\beta_n$ is the single point $\{x\}$ and $\mathcal{B}_x$ is a one-element family. "At most countable" in this library includes finite ([[def-countable]]), which is exactly why claim 1 is stated in that form and not as "countably infinite".
+- **Only the reciprocal form of the Archimedean property is used**, in step 1.2, and it is the form recorded as [[cor-archimedean-reciprocal]] precisely so that the inversion never has to be redone inside a proof.
+- **This is what makes sequences sufficient in metric spaces.** First countability is the hypothesis under which closure can be described by sequences rather than by nets, and it is used in exactly that way by [[thm-metric-sequential-closure]].

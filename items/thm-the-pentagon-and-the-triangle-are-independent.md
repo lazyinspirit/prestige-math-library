@@ -31,9 +31,7 @@ Neither the pentagon axiom nor the triangle axiom follows from the other.
 
 ## Facts & Assumptions
 
-**Given:** The one-object category $\mathcal Z$ with
-$\operatorname{End}_{\mathcal Z}(*)=\mathbb Z$, composition $m\circ n=m+n$, and
-tensor on morphisms $m\otimes n=m+n$.
+**Given:** The one-object category $\mathcal Z$ with $\operatorname{End}_{\mathcal Z}(*)=\mathbb Z$, composition $m\circ n=m+n$, and tensor on morphisms $m\otimes n=m+n$.
 
 [L1] A monoidal category consists of a bifunctor, a unit object, natural isomorphisms $\alpha,\lambda,\rho$, and exactly the pentagon and triangle equations from [[def-monoidal-category]].
 

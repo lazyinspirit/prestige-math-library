@@ -27,8 +27,7 @@ isomorphism.
 
 **Given:** A morphism $u:\operatorname{Spec}B\to\operatorname{Spec}A$.
 
-[F1] Affine spectra and commutative rings are contravariantly equivalent
-([[thm-affine-scheme-ring-anti-equivalence]]).
+[F1] Affine spectra and commutative rings are contravariantly equivalent ([[thm-affine-scheme-ring-anti-equivalence]]).
 
 ## Proof
 

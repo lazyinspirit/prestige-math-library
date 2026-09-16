@@ -37,19 +37,13 @@ The union of two domains of holomorphy is always a domain of holomorphy.
 
 ## Facts & Assumptions
 
-**Given:** The domains
-$$U_1=\mathbb C^2\setminus\{z_1=0\},\qquad U_2=\mathbb C^2\setminus\{z_2=0\}.$$
+**Given:** The domains $$U_1=\mathbb C^2\setminus\{z_1=0\},\qquad U_2=\mathbb C^2\setminus\{z_2=0\}.$$
 
-[L1] A domain of holomorphy is characterized by the impossibility of extending
-every holomorphic function across one common larger neighborhood
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L1] A domain of holomorphy is characterized by the impossibility of extending every holomorphic function across one common larger neighborhood ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
-[L2] A holomorphic identity on a nonempty open subset propagates across a
-connected domain ([[thm-identity-theorem-in-several-complex-variables]]).
+[L2] A holomorphic identity on a nonempty open subset propagates across a connected domain ([[thm-identity-theorem-in-several-complex-variables]]).
 
-[L3] In complex dimension at least two, a holomorphic function on a punctured
-domain extends across the missing point
-([[thm-removability-of-a-puncture-in-several-complex-variables]]).
+[L3] In complex dimension at least two, a holomorphic function on a punctured domain extends across the missing point ([[thm-removability-of-a-puncture-in-several-complex-variables]]).
 
 ## Refutation
 

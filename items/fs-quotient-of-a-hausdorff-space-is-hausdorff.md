@@ -95,21 +95,8 @@ Then $S$ is Hausdorff and $L$ is not: the two classes $q(0,0)$ and $q(0,1)$, the
 
 ## Remarks
 
-- **The source is not merely Hausdorff but metrizable**, so strengthening the
-  separation and countability properties of the source is not by itself what
-  rescues the claim; what decides the matter is the relation being collapsed. A metric inducing the topology of $S$ is exhibited on the companion
-  page, where the same witness is worked as [[cex-line-with-two-origins]], and
-  the quotient map there is shown to be open as well.
+- **The source is not merely Hausdorff but metrizable**, so strengthening the separation and countability properties of the source is not by itself what rescues the claim; what decides the matter is the relation being collapsed. A metric inducing the topology of $S$ is exhibited on the companion page, where the same witness is worked as [[cex-line-with-two-origins]], and the quotient map there is shown to be open as well.
 
-- **The identification is as mild as it can be.** Exactly one pair of points is
-  left unidentified, and every other pair is glued; the failure is caused by two
-  points that are not identified and yet have no disjoint saturated open
-  neighbourhoods, since every neighbourhood of either origin contains a punctured
-  interval that the other's neighbourhoods also contain.
+- **The identification is as mild as it can be.** Exactly one pair of points is left unidentified, and every other pair is glued; the failure is caused by two points that are not identified and yet have no disjoint saturated open neighbourhoods, since every neighbourhood of either origin contains a punctured interval that the other's neighbourhoods also contain.
 
-- **What does survive is one direction of separation for the source.** Nothing
-  above says that a quotient of a Hausdorff space is badly behaved in general,
-  and nothing here asserts which extra hypothesis on $q$ or on the relation
-  restores the Hausdorff condition; that question belongs with the separation
-  axioms, which are not available at this point in the reading order
-  ([[rem-constructions-this-page-stops-short-of]]).
+- **What does survive is one direction of separation for the source.** Nothing above says that a quotient of a Hausdorff space is badly behaved in general, and nothing here asserts which extra hypothesis on $q$ or on the relation restores the Hausdorff condition; that question belongs with the separation axioms, which are not available at this point in the reading order ([[rem-constructions-this-page-stops-short-of]]).

@@ -43,16 +43,11 @@ for cyclic subgroups $C_i\le G$ and integers $a_i$.
 
 **Given:** A finite group $G$ and an element $g\in G$.
 
-[F1] For every finite cyclic subgroup $C\le G$, the generator-indicator class
-function $\eta_C$ on $C$ is an integral linear combination of characters
-$\operatorname{Ind}_D^C1_D$ with $D\le C$ cyclic
-([[lem-cyclic-generator-class-functions-by-moebius-inversion]]).
+[F1] For every finite cyclic subgroup $C\le G$, the generator-indicator class function $\eta_C$ on $C$ is an integral linear combination of characters $\operatorname{Ind}_D^C1_D$ with $D\le C$ cyclic ([[lem-cyclic-generator-class-functions-by-moebius-inversion]]).
 
-[F2] Frobenius' formula computes induced character values
-([[thm-frobenius-formula-for-induced-characters]]).
+[F2] Frobenius' formula computes induced character values ([[thm-frobenius-formula-for-induced-characters]]).
 
-[F3] Induction is transitive along subgroup chains
-([[thm-transitivity-of-induction-for-finite-groups]]).
+[F3] Induction is transitive along subgroup chains ([[thm-transitivity-of-induction-for-finite-groups]]).
 
 ## Proof
 

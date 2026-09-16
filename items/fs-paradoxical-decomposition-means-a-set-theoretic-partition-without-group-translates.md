@@ -35,8 +35,7 @@ group.
 
 **Given:** The false claim above.
 
-[L1] A paradoxical decomposition includes specified translating group elements
-and translated copies covering the whole group ([[def-paradoxical-decomposition-of-a-group]]).
+[L1] A paradoxical decomposition includes specified translating group elements and translated copies covering the whole group ([[def-paradoxical-decomposition-of-a-group]]).
 
 ## Refutation
 

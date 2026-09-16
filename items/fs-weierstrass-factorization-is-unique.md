@@ -30,9 +30,7 @@ Weierstrass factorization is unique.
 
 **Given:** The constant entire function $1$.
 
-[F1] Weierstrass factorization writes an entire function as an exponential
-factor times a product carrying the zeros
-([[thm-weierstrass-factorization-for-entire-functions]]).
+[F1] Weierstrass factorization writes an entire function as an exponential factor times a product carrying the zeros ([[thm-weierstrass-factorization-for-entire-functions]]).
 
 ## Refutation
 

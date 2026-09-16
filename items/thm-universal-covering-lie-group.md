@@ -38,37 +38,23 @@ basepoint-preserving Lie-group isomorphism **over $G$**.
 
 **Given:** A connected Lie group $G$ with identity $e$.
 
-[F1] Every nonempty path-connected, locally path-connected, semilocally
-simply connected space has a universal cover. [[thm-universal-cover-existence]].
+[F1] Every nonempty path-connected, locally path-connected, semilocally simply connected space has a universal cover. [[thm-universal-cover-existence]].
 
-[F2] Based universal covers of a path-connected locally path-connected base
-are uniquely isomorphic over that base.
-[[thm-universal-cover-uniqueness-and-dominating-property]].
+[F2] Based universal covers of a path-connected locally path-connected base are uniquely isomorphic over that base. [[thm-universal-cover-uniqueness-and-dominating-property]].
 
-[F3] A connected covering of a connected Lie group has a unique lifted Lie
-group structure after an identity point over $e$ is fixed.
-[[thm-a-connected-covering-space-of-a-connected-lie-group-carries-a-unique-lifted-lie-group-structure]].
+[F3] A connected covering of a connected Lie group has a unique lifted Lie group structure after an identity point over $e$ is fixed. [[thm-a-connected-covering-space-of-a-connected-lie-group-carries-a-unique-lifted-lie-group-structure]].
 
-[F4] Manifolds are locally path connected, and connected locally
-path-connected spaces are path connected.
-[[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]],
-[[thm-connected-and-locally-path-connected-implies-path-connected]].
+[F4] Manifolds are locally path connected, and connected locally path-connected spaces are path connected. [[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]], [[thm-connected-and-locally-path-connected-implies-path-connected]].
 
-[F5] Semilocal simple connectivity asks for a neighborhood whose inclusion
-induces the trivial map on fundamental groups.
-[[def-semilocally-simply-connected-space]].
+[F5] Semilocal simple connectivity asks for a neighborhood whose inclusion induces the trivial map on fundamental groups. [[def-semilocally-simply-connected-space]].
 
-[F6] Finite products of connected spaces are connected.
-[[thm-product-of-connected-spaces]].
+[F6] Finite products of connected spaces are connected. [[thm-product-of-connected-spaces]].
 
-[F7] Two lifts through the same covering from a connected domain are equal
-when they agree at one point.
-[[thm-uniqueness-of-lifts-from-a-connected-space]].
+[F7] Two lifts through the same covering from a connected domain are equal when they agree at one point. [[thm-uniqueness-of-lifts-from-a-connected-space]].
 
 ## Proof
 
-**Proof technique:** take the topological universal cover and lift the group
-operations.
+**Proof technique:** take the topological universal cover and lift the group operations.
 
 1.1 The space underlying $G$ is nonempty. It is locally path connected by [F4] and path connected because it is connected. It is semilocally simply connected: for each $g\in G$, choose a coordinate ball $U$ about $g$; after shrinking within a chart, $U$ is contractible, so every loop in $U$ is nullhomotopic in $G$ and the inclusion-induced homomorphism is trivial as in [F5]. [given, F4, F5]
 

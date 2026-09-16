@@ -27,20 +27,15 @@ splitting.
 
 ## Facts & Assumptions
 
-**Given:** The chain map $\times2:\mathbb Z[0]\to\mathbb Z[0]$ between stalk
-complexes concentrated in degree $0$.
+**Given:** The chain map $\times2:\mathbb Z[0]\to\mathbb Z[0]$ between stalk complexes concentrated in degree $0$.
 
-[A1] The statement refuted is: the degreewise splitting of the canonical cone
-sequence is automatically a chain splitting.
+[A1] The statement refuted is: the degreewise splitting of the canonical cone sequence is automatically a chain splitting.
 
-[L1] The canonical cone sequence is degreewise split short exact
-([[thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact]]).
+[L1] The canonical cone sequence is degreewise split short exact ([[thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact]]).
 
-[L2] The cone of the zero map is the direct sum with a shift
-([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
+[L2] The cone of the zero map is the direct sum with a shift ([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
 
-[L3] Homology of a shift is shifted homology
-([[prop-homology-of-a-shift-is-shifted-homology]]).
+[L3] Homology of a shift is shifted homology ([[prop-homology-of-a-shift-is-shifted-homology]]).
 
 ## Refutation
 

@@ -29,23 +29,13 @@ Assume AC. Every sequence of Borel probability laws on a compact metric K has a 
 
 [F1] [[lem-countable-uniformly-dense-tests-on-a-compact-metric-space]]: Assume AC. For a compact metric K, $C(K;\mathbb R)$ has a countable uniformly dense subset in the supremum norm.
 
-[F2] [[thm-bolzano-weierstrass]]: Every bounded sequence of reals has a convergent subsequence: if $(x_k)$ is a
-sequence of reals and there is $M \in \mathbb{R}$ with $|x_k| \le M$ for every
-$k \in \mathbb{N}$ (def-sequence), then there is a strictly increasing
-$n : \mathbb{N} \to \mathbb{N}$ and a real $L$ with $x_{n_j} \to L$.
+[F2] [[thm-bolzano-weierstrass]]: Every bounded sequence of reals has a convergent subsequence: if $(x_k)$ is a sequence of reals and there is $M \in \mathbb{R}$ with $|x_k| \le M$ for every $k \in \mathbb{N}$ (def-sequence), then there is a strictly increasing $n : \mathbb{N} \to \mathbb{N}$ and a real $L$ with $x_{n_j} \to L$.
 
-Equivalently: the subsequential limit set of a bounded sequence is nonempty
-(def-subsequential-limit).
+Equivalently: the subsequential limit set of a bounded sequence is nonempty (def-subsequential-limit).
 
-The theorem is the exact repair of the false claim that a bounded sequence
-converges. A bounded
-sequence need not converge, and the alternating sequence is the standing witness;
-what boundedness does force is that *some* subsequence converges. The converse of
-the theorem is false, and badly so: a sequence with a convergent subsequence need
-not be bounded.
+The theorem is the exact repair of the false claim that a bounded sequence converges. A bounded sequence need not converge, and the alternating sequence is the standing witness; what boundedness does force is that *some* subsequence converges. The converse of the theorem is false, and badly so: a sequence with a convergent subsequence need not be bounded.
 
-[F3] [[thm-rmk-positive-functional-is-integration-against-its-representing-measure]]: Let $X$ be LCH and let $\Lambda:C_c(X;\mathbb R)\to\mathbb R$ be positive. The Radon measure $\mu$ constructed above satisfies
-$$\Lambda(f)=\int_X f\,d\mu\qquad(f\in C_c(X;\mathbb R)).$$
+[F3] [[thm-rmk-positive-functional-is-integration-against-its-representing-measure]]: Let $X$ be LCH and let $\Lambda:C_c(X;\mathbb R)\to\mathbb R$ be positive. The Radon measure $\mu$ constructed above satisfies $$\Lambda(f)=\int_X f\,d\mu\qquad(f\in C_c(X;\mathbb R)).$$
 
 ## Proof
 

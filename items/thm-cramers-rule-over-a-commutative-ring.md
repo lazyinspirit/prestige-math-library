@@ -44,25 +44,17 @@ $$x_j=\det(A)^{-1}\det(A_j(b)).$$
 
 ## Facts & Assumptions
 
-**Given:** $R,n,A,b,j$ as in the statement, and a solution $x$ when the first
-claim is used.
+**Given:** $R,n,A,b,j$ as in the statement, and a solution $x$ when the first claim is used.
 
-[L1] The determinant is alternating and multilinear in columns
-([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
+[L1] The determinant is alternating and multilinear in columns ([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
 
-[L2] Laplace expansion along a column computes the determinant as the sum of
-its entries times their cofactors ([[thm-laplace-cofactor-expansion]]).
+[L2] Laplace expansion along a column computes the determinant as the sum of its entries times their cofactors ([[thm-laplace-cofactor-expansion]]).
 
-[L3] If $\det(A)$ is a unit, then $A$ is invertible
-([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]) and
-$A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$
-([[cor-inverse-matrix-by-adjugate]]).
+[L3] If $\det(A)$ is a unit, then $A$ is invertible ([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]) and $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$ ([[cor-inverse-matrix-by-adjugate]]).
 
-[F1] Matrix multiplication obeys the entry formula
-([[def-ring-matrix-product-identity-and-transpose]]).
+[F1] Matrix multiplication obeys the entry formula ([[def-ring-matrix-product-identity-and-transpose]]).
 
-[L4] Matrix multiplication is associative and distributive
-([[thm-ring-matrix-arithmetic-laws]]).
+[L4] Matrix multiplication is associative and distributive ([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 

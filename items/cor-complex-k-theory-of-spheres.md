@@ -42,18 +42,13 @@ $q-n$ is odd.
 
 **Given:** AC, based spheres, and the Hopf Bott class $\beta$.
 
-[F1] Multiplication by $\beta$ is the natural twofold-suspension isomorphism
-in every degree ([[thm-complex-bott-periodicity]]).
+[F1] Multiplication by $\beta$ is the natural twofold-suspension isomorphism in every degree ([[thm-complex-bott-periodicity]]).
 
-[F2] Complex bundles on $S^1$ are classified by clutching data on $S^0$ and
-$\operatorname{GL}_n(\mathbb C)$ is path-connected in the complex case
-([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
+[F2] Complex bundles on $S^1$ are classified by clutching data on $S^0$ and $\operatorname{GL}_n(\mathbb C)$ is path-connected in the complex case ([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
 
-[F3] $\widetilde K^0(S^2)=\mathbb Z\beta$
-([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
+[F3] $\widetilde K^0(S^2)=\mathbb Z\beta$ ([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
 
-[A1] AC is propagated from [F1] and [F3]; the $S^0$ and $S^1$ base
-calculations themselves are finite and choice-free.
+[A1] AC is propagated from [F1] and [F3]; the $S^0$ and $S^1$ base calculations themselves are finite and choice-free.
 
 ## Proof
 

@@ -31,11 +31,9 @@ $$\dot I_i=0,\qquad \dot\theta_i=\frac{\partial h}{\partial I_i},\qquad \theta(t
 
 ## Facts & Assumptions
 
-**Given:** Action–angle coordinates near an invariant Liouville torus and a
-Hamiltonian $H=h(I)$.
+**Given:** Action–angle coordinates near an invariant Liouville torus and a Hamiltonian $H=h(I)$.
 
-[F1] The convention $\iota_{X_H}\omega=dH$ defines the Hamiltonian vector
-field. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
+[F1] The convention $\iota_{X_H}\omega=dH$ defines the Hamiltonian vector field. [[def-hamiltonian-vector-field-and-hamiltonian-function]].
 
 ## Proof
 

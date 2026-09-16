@@ -36,14 +36,11 @@ exact.
 
 ## Facts & Assumptions
 
-**Given:** In $\mathbf{Ab}$, the short exact sequence
-$$0 \to \mathbb Z \xrightarrow{\times 2} \mathbb Z \to \mathbb Z/2 \to 0.$$
+**Given:** In $\mathbf{Ab}$, the short exact sequence $$0 \to \mathbb Z \xrightarrow{\times 2} \mathbb Z \to \mathbb Z/2 \to 0.$$
 
-[L1] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] Hom is left exact, but no right exactness was asserted
-([[thm-hom-is-left-exact-in-each-variable]]).
+[L2] Hom is left exact, but no right exactness was asserted ([[thm-hom-is-left-exact-in-each-variable]]).
 
 ## Counterexample
 

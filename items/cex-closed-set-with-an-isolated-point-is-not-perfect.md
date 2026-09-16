@@ -70,19 +70,8 @@ fails while the first holds.
 
 ## Remarks
 
-- **Only the second clause fails, and by one point.** Every point of $[1,2]$ is
-  a limit point of $E$, by the computation in
-  [[ex-closed-interval-is-perfect]]; the single point $0$ is what stops $E$ from
-  being perfect. Deleting it leaves $[1,2]$, which is perfect.
+- **Only the second clause fails, and by one point.** Every point of $[1,2]$ is a limit point of $E$, by the computation in [[ex-closed-interval-is-perfect]]; the single point $0$ is what stops $E$ from being perfect. Deleting it leaves $[1,2]$, which is perfect.
 
-- **Countability is the visible consequence.** A nonempty perfect set is
-  uncountable ([[thm-perfect-set-uncountable-r]]). $E$ is uncountable too, since
-  it contains $[1,2]$, so this example does not separate the two notions by
-  size; what it shows is that closedness alone does not give perfectness. A
-  countable closed set with isolated points is
-  $\{\, 1/k : k \ge 1 \,\} \cup \{0\}$ ([[ex-reciprocals-with-zero-are-compact]]),
-  and it is likewise not perfect.
+- **Countability is the visible consequence.** A nonempty perfect set is uncountable ([[thm-perfect-set-uncountable-r]]). $E$ is uncountable too, since it contains $[1,2]$, so this example does not separate the two notions by size; what it shows is that closedness alone does not give perfectness. A countable closed set with isolated points is $\{\, 1/k : k \ge 1 \,\} \cup \{0\}$ ([[ex-reciprocals-with-zero-are-compact]]), and it is likewise not perfect.
 
-- **The empty set is the degenerate case on the other side.** It is closed and
-  has no isolated points, hence is perfect, and it is countable; that is why
-  [[thm-perfect-set-uncountable-r]] assumes its perfect set is nonempty.
+- **The empty set is the degenerate case on the other side.** It is closed and has no isolated points, hence is perfect, and it is countable; that is why [[thm-perfect-set-uncountable-r]] assumes its perfect set is nonempty.

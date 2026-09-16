@@ -32,9 +32,7 @@ finite-dimensional $kG$-module.
 
 **Given:** A splitting $p$-modular system $(K,\mathcal O,k)$ for a finite group $G$ and an $\mathcal O G$-lattice $L$.
 
-[F1] An $\mathcal O G$-lattice is finite free over $\mathcal O$, and its
-reduction modulo $\mathfrak m$ is $L/\mathfrak mL\cong k\otimes_{\mathcal O}L$
-with induced $G$-action ([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
+[F1] An $\mathcal O G$-lattice is finite free over $\mathcal O$, and its reduction modulo $\mathfrak m$ is $L/\mathfrak mL\cong k\otimes_{\mathcal O}L$ with induced $G$-action ([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
 
 ## Proof
 

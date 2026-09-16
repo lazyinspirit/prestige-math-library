@@ -36,12 +36,9 @@ residue map to $A/\mathfrak m$ is injective.
 
 **Given:** An equicharacteristic local ring $(A,\mathfrak m)$ and the Axiom of Choice.
 
-[L1] The residue field's prime field embeds in $A$, so the family of
-residue-injective subfields is nonempty
-([[lem-equicharacteristic-prime-field-lifts]]).
+[L1] The residue field's prime field embeds in $A$, so the family of residue-injective subfields is nonempty ([[lem-equicharacteristic-prime-field-lifts]]).
 
-[L2] Assuming the Axiom of Choice, every nonempty poset in which every chain
-has an upper bound has a maximal element ([[thm-zorn]]).
+[L2] Assuming the Axiom of Choice, every nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
 
 ## Proof
 

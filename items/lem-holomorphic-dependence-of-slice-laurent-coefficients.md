@@ -39,19 +39,13 @@ $$f(z,w)=\sum_{n\in\mathbb Z} a_n(w) z^n \qquad (r<|z|<1).$$
 
 ## Facts & Assumptions
 
-**Given:** Real numbers $0<r<s<1$ are not assumed; only $0<r,s<1$, a function
-$f\in\mathcal O(H(r,s))$, and a radius $\rho$ with $r<\rho<1$.
+**Given:** Real numbers $0<r<s<1$ are not assumed; only $0<r,s<1$, a function $f\in\mathcal O(H(r,s))$, and a radius $\rho$ with $r<\rho<1$.
 
-[L1] The Hartogs figure contains every point $(\zeta,w)$ with $|\zeta|=\rho$ and
-$|w|<1$ ([[def-hartogs-figure-and-polydisc-hull]]).
+[L1] The Hartogs figure contains every point $(\zeta,w)$ with $|\zeta|=\rho$ and $|w|<1$ ([[def-hartogs-figure-and-polydisc-hull]]).
 
-[L2] A contour integral of a jointly continuous integrand that is holomorphic in
-the parameter variable defines a holomorphic function of that parameter
-([[thm-contour-parameter-integrals-are-holomorphic]]).
+[L2] A contour integral of a jointly continuous integrand that is holomorphic in the parameter variable defines a holomorphic function of that parameter ([[thm-contour-parameter-integrals-are-holomorphic]]).
 
-[L3] The Laurent coefficients of a one-variable holomorphic function on an
-annulus are given by the contour integral formula, and those coefficients are
-unique ([[thm-laurent-coefficient-formula-and-uniqueness]]).
+[L3] The Laurent coefficients of a one-variable holomorphic function on an annulus are given by the contour integral formula, and those coefficients are unique ([[thm-laurent-coefficient-formula-and-uniqueness]]).
 
 ## Proof
 

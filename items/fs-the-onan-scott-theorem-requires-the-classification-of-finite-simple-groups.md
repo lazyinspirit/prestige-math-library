@@ -32,12 +32,9 @@ finite simple groups.
 
 **Given:** The structural O'Nan-Scott theorem and its later applications.
 
-[L1] The O'Nan-Scott theorem gives a structural classification of finite
-primitive groups of degree at least $2$
-([[thm-onan-scott-classification-of-finite-primitive-groups]]).
+[L1] The O'Nan-Scott theorem gives a structural classification of finite primitive groups of degree at least $2$ ([[thm-onan-scott-classification-of-finite-primitive-groups]]).
 
-[A1] The classification of finite simple groups enters later refinements rather
-than the structural reduction itself.
+[A1] The classification of finite simple groups enters later refinements rather than the structural reduction itself.
 
 ## Refutation
 

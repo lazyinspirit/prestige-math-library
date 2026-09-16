@@ -28,8 +28,7 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The zero signed measure $\nu\equiv0$ on the discrete measurable
-space $(X,\mathcal P(X))$, where $X=\{0,1\}$.
+**Given:** The zero signed measure $\nu\equiv0$ on the discrete measurable space $(X,\mathcal P(X))$, where $X=\{0,1\}$.
 
 [L1] Hahn decompositions are unique only up to null sets. ([[thm-hahn-decomposition-for-signed-measures]])
 
@@ -38,9 +37,7 @@ space $(X,\mathcal P(X))$, where $X=\{0,1\}$.
 **Proof technique:** direct.
 
 1.1 Every measurable subset of $X$ is both positive and negative for the zero [L1]
-measure, so both
-$$\varnothing\sqcup X\qquad\text{and}\qquad \{0\}\sqcup\{1\}$$
-are Hahn decompositions.
+measure, so both $$\varnothing\sqcup X\qquad\text{and}\qquad \{0\}\sqcup\{1\}$$ are Hahn decompositions.
 
 2.1 These decompositions are different, so exact uniqueness fails. This is [L1, step 1.1] ∎
 compatible with [L1] because the differing set is null.

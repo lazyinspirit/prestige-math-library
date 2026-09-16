@@ -36,22 +36,15 @@ canonical pairs.
 
 **Given:** Blass's Cohen extension and parameter-HOD model $N$.
 
-[F1] [[lem-blass-paired-finite-modification-classes-form-a-russell-set]]
-proves that the values $f(k)$ are pairwise disjoint two-element sets and that
-no infinite subfamily has a choice function.
+[F1] [[lem-blass-paired-finite-modification-classes-form-a-russell-set]] proves that the values $f(k)$ are pairwise disjoint two-element sets and that no infinite subfamily has a choice function.
 
-[F2] [[def-blass-finite-modification-classes-and-parameter-hod-model]] says
-each member of $N$ is hereditarily uniquely definable from $f$, ordinals, and
-finitely many reals from the displayed reservoir $S$.
+[F2] [[def-blass-finite-modification-classes-and-parameter-hod-model]] says each member of $N$ is hereditarily uniquely definable from $f$, ordinals, and finitely many reals from the displayed reservoir $S$.
 
-[F3] [[lem-feferman-tail-complement-automorphism]] supplies the
-finite-condition unused-tail flip at a specified fresh Cohen coordinate.
+[F3] [[lem-feferman-tail-complement-automorphism]] supplies the finite-condition unused-tail flip at a specified fresh Cohen coordinate.
 
-[F4] [[lem-forcing-truth-lemma]] supplies a condition in the actual generic
-forcing a true unique-definition and value assertion.
+[F4] [[lem-forcing-truth-lemma]] supplies a condition in the actual generic forcing a true unique-definition and value assertion.
 
-[F5] [[lem-symmetry-lemma-for-forcing-automorphisms]] transports that forced
-assertion through the tail flip.
+[F5] [[lem-symmetry-lemma-for-forcing-automorphisms]] transports that forced assertion through the tail flip.
 
 ## Proof
 

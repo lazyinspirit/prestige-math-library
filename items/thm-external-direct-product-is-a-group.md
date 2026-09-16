@@ -38,14 +38,11 @@ homomorphisms.
 
 **Given:** Groups $G,H$ with identities $e_G,e_H$.
 
-[L1] $G\times H$ has the componentwise operation
-$(g,h)(g',h')=(gg',hh')$ ([[def-external-direct-product-of-groups]]).
+[L1] $G\times H$ has the componentwise operation $(g,h)(g',h')=(gg',hh')$ ([[def-external-direct-product-of-groups]]).
 
-[L2] A group operation is associative, has a two-sided identity, and gives every
-element a two-sided inverse ([[def-group]]).
+[L2] A group operation is associative, has a two-sided identity, and gives every element a two-sided inverse ([[def-group]]).
 
-[L3] A map between groups is a group homomorphism exactly when it preserves products
-([[def-group-homomorphism]]).
+[L3] A map between groups is a group homomorphism exactly when it preserves products ([[def-group-homomorphism]]).
 
 ## Proof
 

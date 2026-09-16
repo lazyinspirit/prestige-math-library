@@ -75,13 +75,6 @@ $\{1, -1\}$.
 
 ## Remarks
 
-- **The criterion is the practical form of coprimality.** Verifying
-  $\gcd(a,b) = 1$ from the definition means examining all common divisors;
-  exhibiting one pair $(x,y)$ with $ax + by = 1$ settles it in a line, and the
-  extended Euclidean algorithm produces such a pair
-  ([[cor-extended-euclidean-bezout-coefficients]]).
+- **The criterion is the practical form of coprimality.** Verifying $\gcd(a,b) = 1$ from the definition means examining all common divisors; exhibiting one pair $(x,y)$ with $ax + by = 1$ settles it in a line, and the extended Euclidean algorithm produces such a pair ([[cor-extended-euclidean-bezout-coefficients]]).
 
-- **The analogous statement with $1$ replaced by a general $c$ is false**, and
-  the correct version is that $ax + by = c$ is solvable exactly when
-  $\gcd(a,b) \mid c$; that is worked out on the companion page
-  ([[ex-linear-diophantine-equation-solvability]]).
+- **The analogous statement with $1$ replaced by a general $c$ is false**, and the correct version is that $ax + by = c$ is solvable exactly when $\gcd(a,b) \mid c$; that is worked out on the companion page ([[ex-linear-diophantine-equation-solvability]]).

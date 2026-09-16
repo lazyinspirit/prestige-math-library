@@ -38,18 +38,13 @@ Lie-algebra bracket.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group, and the
-local logarithm and BCH neighborhood below.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group, and the local logarithm and BCH neighborhood below.
 
-[F1] On a sufficiently small neighborhood,
-$\log_G(\exp_GX\exp_GY)=\operatorname{BCH}(X,Y)$.
-[[thm-baker-campbell-hausdorff]].
+[F1] On a sufficiently small neighborhood, $\log_G(\exp_GX\exp_GY)=\operatorname{BCH}(X,Y)$. [[thm-baker-campbell-hausdorff]].
 
-[F2] The local logarithm is inverse to the exponential on its stated domain.
-[[def-local-logarithm-on-a-lie-group]].
+[F2] The local logarithm is inverse to the exponential on its stated domain. [[def-local-logarithm-on-a-lie-group]].
 
-[F3] Countable choice is the assumption inherited by both suppliers.
-[[def-countable-choice]].
+[F3] Countable choice is the assumption inherited by both suppliers. [[def-countable-choice]].
 
 ## Proof
 

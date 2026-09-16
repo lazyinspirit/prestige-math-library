@@ -65,9 +65,7 @@ $$\left|\widetilde{\operatorname{Tr}}(W^{n-1},T) -\widetilde{\operatorname{Tr}}(
 
 $$\sum_{m=0}^{2n}z^mF_m(a)=(1-z)^{|a|}(1+z)^{2n-|a|}.$$
 
-If $b$ is the coordinatewise complement of $a$, then each Walsh monomial of
-degree $m$ changes by $(-1)^m$, which proves item 4. The same generating
-polynomial also satisfies
+If $b$ is the coordinatewise complement of $a$, then each Walsh monomial of degree $m$ changes by $(-1)^m$, which proves item 4. The same generating polynomial also satisfies
 
 $$z^{2n}P_a(1/z)=(-1)^{|a|}P_a(z),\qquad P_a(z):=(1-z)^{|a|}(1+z)^{2n-|a|}.$$
 
@@ -81,40 +79,23 @@ and in particular $F_{n+1}(a)=(-1)^{|a|}F_{n-1}(a)$. [finite product, coefficien
 
 $$F_m(a)=\frac{2^{2n}}{2\pi} \int_{-\pi}^{\pi}(-i)^r e^{i(n-m)\theta} \sin^r(\theta/2)\cos^{2n-r}(\theta/2)\,d\theta.$$
 
-The reciprocal identity in step 2.1 gives
-$|F_{n-1}(a)|=|F_{n+1}(a)|$. Taking absolute values in the integral gives
+The reciprocal identity in step 2.1 gives $|F_{n-1}(a)|=|F_{n+1}(a)|$. Taking absolute values in the integral gives
 
 $$|F_{n\pm1}(a)|\le {2^{2n}\over\pi}I_r,\qquad I_r:=\int_0^\pi \sin^r(\theta/2)\cos^{2n-r}(\theta/2)\,d\theta.$$
 
-Here $I_2=I_{2n-2}$ by the substitution $\theta\mapsto\pi-\theta$.
-When $n\ge3$ and $2<r<2n-2$, put
-$\lambda=(2n-2-r)/(2n-4)$. The integrand defining $I_r$ is
+Here $I_2=I_{2n-2}$ by the substitution $\theta\mapsto\pi-\theta$. When $n\ge3$ and $2<r<2n-2$, put $\lambda=(2n-2-r)/(2n-4)$. The integrand defining $I_r$ is
 
 $$\bigl(\sin^2(\theta/2)\cos^{2n-2}(\theta/2)\bigr)^\lambda \bigl(\sin^{2n-2}(\theta/2)\cos^2(\theta/2)\bigr)^{1-\lambda},$$
 
-so weighted Hölder gives
-$I_r\le I_2^\lambda I_{2n-2}^{1-\lambda}=I_2$.
-For a vector $e$ of weight two, the endpoint calculation in the same Cauchy
-formula gives $(2^{2n}/\pi)I_2=|F_n(e)|$, and direct coefficient comparison
-gives
+so weighted Hölder gives $I_r\le I_2^\lambda I_{2n-2}^{1-\lambda}=I_2$. For a vector $e$ of weight two, the endpoint calculation in the same Cauchy formula gives $(2^{2n}/\pi)I_2=|F_n(e)|$, and direct coefficient comparison gives
 
 $$|F_n(e)|=\left|\binom{2n-2}{n}-2\binom{2n-2}{n-1}+\binom{2n-2}{n-2}\right|={1\over 2n-1}\binom{2n}{n}\le {1\over n}\binom{2n}{n-1}$$
 
-for $n\ge2$. The weights $r=1$ and $r=2n-1$ follow from item 2 and
-complementation; $r=2$ and $r=2n-2$ follow from the endpoint estimate. For
-$n=1$, the only intermediate weight is $r=1$, already covered by item 2.
-This proves item 3 in every case. [step 2.1, coefficient integral, weighted Hölder, binomial arithmetic]
+for $n\ge2$. The weights $r=1$ and $r=2n-1$ follow from item 2 and complementation; $r=2$ and $r=2n-2$ follow from the endpoint estimate. For $n=1$, the only intermediate weight is $r=1$, already covered by item 2. This proves item 3 in every case. [step 2.1, coefficient integral, weighted Hölder, binomial arithmetic]
 
 4.1 Average $T$ over the finite group: $\widetilde T=|G|^{-1}\sum_{U\in G}U^{-1}TU$. Coordinate permutations and translations permute each Walsh layer up to signs, so [L1] gives $\widetilde{\operatorname{Tr}}(W^{n\pm1},\widetilde T) =\widetilde{\operatorname{Tr}}(W^{n\pm1},T)$, and the group average commutes with every element of $G$. [given, L1, step 3.1]
 
-Write the matrix of $\widetilde T$ in the Walsh basis. For two distinct Walsh
-characters $v,w$, choose a translation $U_t$ for which
-$U_tv=v(t)v$ and $U_tw=w(t)w$ have opposite signs. Commutation with $U_t$
-forces the $(v,w)$ matrix coefficient of $\widetilde T$ to be its own
-negative, hence to vanish. Thus $\widetilde T$ is diagonal in the Walsh
-basis. Coordinate permutations act transitively on each $W^{n\pm1}$, so its
-diagonal coefficients have constant values $\lambda_-$ on $W^{n-1}$ and
-$\lambda_+$ on $W^{n+1}$. Consequently
+Write the matrix of $\widetilde T$ in the Walsh basis. For two distinct Walsh characters $v,w$, choose a translation $U_t$ for which $U_tv=v(t)v$ and $U_tw=w(t)w$ have opposite signs. Commutation with $U_t$ forces the $(v,w)$ matrix coefficient of $\widetilde T$ to be its own negative, hence to vanish. Thus $\widetilde T$ is diagonal in the Walsh basis. Coordinate permutations act transitively on each $W^{n\pm1}$, so its diagonal coefficients have constant values $\lambda_-$ on $W^{n-1}$ and $\lambda_+$ on $W^{n+1}$. Consequently
 
 $$\widetilde Tf=\lambda_-{F_{n-1}\over\|F_{n-1}\|_\infty}-\lambda_+{F_{n+1}\over\|F_{n+1}\|_\infty},$$
 

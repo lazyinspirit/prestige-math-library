@@ -37,20 +37,13 @@ $$\bigl(\nabla^2f\bigr)_p=\operatorname{Hess}_p(f).$$
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $f:M\to\mathbb R$, a critical point $p$, a
-Riemannian metric $g$, and its Levi-Civita connection $\nabla$.
+**Given:** A smooth function $f:M\to\mathbb R$, a critical point $p$, a Riemannian metric $g$, and its Levi-Civita connection $\nabla$.
 
-[F1] The intrinsic critical-point Hessian is the bilinear form represented in a
-chart by the second partial derivatives of the coordinate representative
-([[def-hessian-of-a-function-at-a-critical-point]]).
+[F1] The intrinsic critical-point Hessian is the bilinear form represented in a chart by the second partial derivatives of the coordinate representative ([[def-hessian-of-a-function-at-a-critical-point]]).
 
-[F2] The covariant Hessian satisfies
-$$\bigl(\nabla^2f\bigr)_{ij} =\frac{\partial^2(f\circ x^{-1})}{\partial x^i\partial x^j} -\sum_k\Gamma^k_{ij}\frac{\partial(f\circ x^{-1})}{\partial x^k}$$
-in any chart ([[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]).
+[F2] The covariant Hessian satisfies $$\bigl(\nabla^2f\bigr)_{ij} =\frac{\partial^2(f\circ x^{-1})}{\partial x^i\partial x^j} -\sum_k\Gamma^k_{ij}\frac{\partial(f\circ x^{-1})}{\partial x^k}$$ in any chart ([[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]).
 
-[L1] In a chart $x=(x^1,\dots,x^n)$ around $p$,
-$$df_p=\sum_i\frac{\partial(f\circ x^{-1})}{\partial x^i}(x(p))\,dx^i_p.$$
-([[thm-coordinate-formula-for-the-differential-of-a-function]])
+[L1] In a chart $x=(x^1,\dots,x^n)$ around $p$, $$df_p=\sum_i\frac{\partial(f\circ x^{-1})}{\partial x^i}(x(p))\,dx^i_p.$$ ([[thm-coordinate-formula-for-the-differential-of-a-function]])
 
 ## Proof
 

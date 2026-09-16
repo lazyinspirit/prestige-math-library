@@ -33,8 +33,7 @@ is an $(\mathcal F_n)$-martingale (the empty sum at $n=0$ is zero).
 
 ## Facts & Assumptions
 
-**Given:** Choice, countable $S$, $p$, $L$, and the adapted $S$-valued process
-$X$.
+**Given:** Choice, countable $S$, $p$, $L$, and the adapted $S$-valued process $X$.
 
 [F1] For bounded $f$, $Lf=Pf-f$ and $|Lf|\le2\lVert f\rVert_\infty$. ([[def-discrete-generator-of-a-countable-state-transition-matrix]])
 

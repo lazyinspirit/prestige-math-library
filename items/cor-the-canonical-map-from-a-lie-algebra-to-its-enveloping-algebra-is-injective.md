@@ -33,11 +33,9 @@ degree-one basis vector vanishes in the enveloping algebra.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ with a specified basis and any specified
-total order on that basis.
+**Given:** A Lie algebra $\mathfrak g$ with a specified basis and any specified total order on that basis.
 
-[L1] Length-one ordered PBW monomials are part of a basis of
-$U(\mathfrak g)$ ([[thm-poincare-birkhoff-witt]]).
+[L1] Length-one ordered PBW monomials are part of a basis of $U(\mathfrak g)$ ([[thm-poincare-birkhoff-witt]]).
 
 ## Proof
 

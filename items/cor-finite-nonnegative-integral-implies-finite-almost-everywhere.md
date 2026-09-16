@@ -39,12 +39,8 @@ $f(x)<+\infty$ for almost every $x$.
 **Proof technique:** direct.
 
 1.1 Let $F:=\{f=+\infty\}$. Then $F\subseteq\{f\ge n\}$ for every $n\ge1$, so[L1, given]
-$$n\chi_F\le f.$$
-By [L1],
-$$n\,\mu(F)=\int n\chi_F\,d\mu\le\int f\,d\mu<+\infty.$$
+$$n\chi_F\le f.$$ By [L1], $$n\,\mu(F)=\int n\chi_F\,d\mu\le\int f\,d\mu<+\infty.$$
 
 
 2.1 If $\mu(F)>0$, the inequality in step 1.1 would fail for large $n$. [step 1.1, L2] ∎
-Therefore $\mu(F)=0$, so the indicator $\chi_F$ has integral $0$ and hence
-vanishes almost everywhere by [L2]. Equivalently, $f<+\infty$ almost
-everywhere.
+Therefore $\mu(F)=0$, so the indicator $\chi_F$ has integral $0$ and hence vanishes almost everywhere by [L2]. Equivalently, $f<+\infty$ almost everywhere.

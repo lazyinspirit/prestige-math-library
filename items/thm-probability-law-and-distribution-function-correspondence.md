@@ -42,24 +42,13 @@ Assume the Axiom of Countable Choice.
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, a real random variable $X$, its law $\mathbb P_X$,
-and a function $F$ as in part 2.
+**Given:** Countable Choice, a real random variable $X$, its law $\mathbb P_X$, and a function $F$ as in part 2.
 
-[L1] The law $\mathbb P_X$ is a probability measure on
-$(\mathbb R,\mathcal B(\mathbb R))$
-([[def-law-or-distribution-of-a-random-element]],
-[[lem-law-of-a-random-element-is-a-probability-measure]]).
+[L1] The law $\mathbb P_X$ is a probability measure on $(\mathbb R,\mathcal B(\mathbb R))$ ([[def-law-or-distribution-of-a-random-element]], [[lem-law-of-a-random-element-is-a-probability-measure]]).
 
-[L2] For measures, monotonicity, set-difference subtraction, continuity from
-below, and continuity from above are available
-([[prop-measure-monotonicity]], [[prop-measure-of-a-set-difference]],
-[[thm-continuity-from-below-for-measures]],
-[[thm-continuity-from-above-for-measures]]).
+[L2] For measures, monotonicity, set-difference subtraction, continuity from below, and continuity from above are available ([[prop-measure-monotonicity]], [[prop-measure-of-a-set-difference]], [[thm-continuity-from-below-for-measures]], [[thm-continuity-from-above-for-measures]]).
 
-[L3] Assuming Countable Choice, finite-on-compacts Borel measures on
-$\mathbb R$ correspond to nondecreasing right-continuous functions modulo
-constants, and the interval increments determine the measure
-([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]]).
+[L3] Assuming Countable Choice, finite-on-compacts Borel measures on $\mathbb R$ correspond to nondecreasing right-continuous functions modulo constants, and the interval increments determine the measure ([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]]).
 
 ## Proof
 

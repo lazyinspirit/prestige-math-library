@@ -29,14 +29,11 @@ Let $X_n$ and $Y_n$ be Borel-measurable random elements with values in a metric 
 
 $$\mu\left(\bigcap_{n\in\mathbb N}E_n\right)=\inf_{n\in\mathbb N}\mu(E_n).$$
 
-[F3] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be
-nonempty and let $x, y \in X$. Then
+[F3] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be nonempty and let $x, y \in X$. Then
 
 $$|d(x,A) - d(y,A)| \le d(x,y),$$
 
-with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter).
-Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$
-between $u$ and $v$: it is **$1$-Lipschitz**.
+with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter). Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$ between $u$ and $v$: it is **$1$-Lipschitz**.
 
 ## Proof
 

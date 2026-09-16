@@ -34,15 +34,11 @@ $\Lambda^n(V)$ for every $n\geq0$ and over every field.
 
 **Given:** A Lie-algebra representation $V$ and an integer $n\geq0$.
 
-[L1] Iterating the tensor-product construction gives the diagonal action
-$x(v_1\otimes\cdots\otimes v_n)=\sum_i v_1\otimes\cdots\otimes xv_i\otimes\cdots\otimes v_n$
-([[prop-direct-sum-dual-hom-and-tensor-representations]]).
+[L1] Iterating the tensor-product construction gives the diagonal action $x(v_1\otimes\cdots\otimes v_n)=\sum_i v_1\otimes\cdots\otimes xv_i\otimes\cdots\otimes v_n$ ([[prop-direct-sum-dual-hom-and-tensor-representations]]).
 
-[L2] The two quotient relation subspaces are those in
-[[def-symmetric-and-exterior-powers-over-an-arbitrary-field]].
+[L2] The two quotient relation subspaces are those in [[def-symmetric-and-exterior-powers-over-an-arbitrary-field]].
 
-[L3] A linear map killing a quotient relation subspace factors uniquely
-through the quotient ([[thm-quotient-module-universal-property]]).
+[L3] A linear map killing a quotient relation subspace factors uniquely through the quotient ([[thm-quotient-module-universal-property]]).
 
 ## Proof
 

@@ -36,15 +36,11 @@ $$F(0_{A,B})=0_{FA,FB}.$$
 
 ## Facts & Assumptions
 
-**Given:** An additive functor $F:\mathcal C\to\mathcal D$ and objects
-$A,B\in\mathcal C$.
+**Given:** An additive functor $F:\mathcal C\to\mathcal D$ and objects $A,B\in\mathcal C$.
 
-[L1] In a preadditive category each hom-set is an abelian group, so each
-$\mathcal D(FA,FB)$ has a zero element $0_{FA,FB}$
-([[def-preadditive-category]]).
+[L1] In a preadditive category each hom-set is an abelian group, so each $\mathcal D(FA,FB)$ has a zero element $0_{FA,FB}$ ([[def-preadditive-category]]).
 
-[L2] An additive functor induces a homomorphism on each hom-group
-([[def-additive-functor]]).
+[L2] An additive functor induces a homomorphism on each hom-group ([[def-additive-functor]]).
 
 ## Proof
 

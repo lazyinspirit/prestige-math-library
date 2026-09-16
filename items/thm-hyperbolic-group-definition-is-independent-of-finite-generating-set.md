@@ -29,12 +29,9 @@ generating set.
 
 **Given:** A finitely generated group $G$ and two finite generating sets $S,T$.
 
-[L1] Two finite generating sets of a group give bilipschitz equivalent word
-metrics
-([[thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics]]).
+[L1] Two finite generating sets of a group give bilipschitz equivalent word metrics ([[thm-two-finite-generating-sets-of-a-group-give-bilipschitz-equivalent-word-metrics]]).
 
-[L2] Hyperbolicity is a quasi-isometry invariant of geodesic spaces
-([[thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces]]).
+[L2] Hyperbolicity is a quasi-isometry invariant of geodesic spaces ([[thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces]]).
 
 ## Proof
 

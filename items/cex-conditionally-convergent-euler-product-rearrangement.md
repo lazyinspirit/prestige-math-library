@@ -30,9 +30,7 @@ boundary or beyond.
 
 **Given:** The Dirichlet series $\zeta(s)=\sum_{n \ge 1} n^{-s}$.
 
-[L1] The Euler-product theorem is stated only on a half-plane of absolute
-convergence ([[thm-multiplicative-dirichlet-series-euler-product]],
-[[thm-dirichlet-series-absolute-half-plane-holomorphy]]).
+[L1] The Euler-product theorem is stated only on a half-plane of absolute convergence ([[thm-multiplicative-dirichlet-series-euler-product]], [[thm-dirichlet-series-absolute-half-plane-holomorphy]]).
 
 ## Counterexample
 

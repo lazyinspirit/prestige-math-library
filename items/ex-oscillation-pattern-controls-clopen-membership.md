@@ -51,17 +51,11 @@ case are all its entries), nor of an arbitrary matrix when $l>1$.
 
 ## Facts & Assumptions
 
-**Given:** The colouring and topology fixed on the companion page; ordinal
-multiplication and addition have their usual meanings.
+**Given:** The colouring and topology fixed on the companion page; ordinal multiplication and addition have their usual meanings.
 
-[F1] [[thm-moore-oscillation-colouring-pattern]] realizes
-$o^*(a(i),b(\pi(i)))=\chi(i)$ and hence
-$c(a(i),b(\pi(i)))=1-\chi(i)$ for positive finite $k,l$ and uncountable
-pairwise-disjoint block families.
+[F1] [[thm-moore-oscillation-colouring-pattern]] realizes $o^*(a(i),b(\pi(i)))=\chi(i)$ and hence $c(a(i),b(\pi(i)))=1-\chi(i)$ for positive finite $k,l$ and uncountable pairwise-disjoint block families.
 
-[F2] [[def-moore-l-space-topology]] defines
-$W_\alpha=\{\alpha\}\cup\{\beta>\alpha:c(\alpha,\beta)=1\}$ and makes every
-finite Boolean combination of the $W_\alpha$ clopen.
+[F2] [[def-moore-l-space-topology]] defines $W_\alpha=\{\alpha\}\cup\{\beta>\alpha:c(\alpha,\beta)=1\}$ and makes every finite Boolean combination of the $W_\alpha$ clopen.
 
 ## Verification
 

@@ -38,28 +38,19 @@ $1-2^{1-s}$ because both sides are already holomorphic there.
 
 **Given:** A compact set $K\subseteq\{s\in\mathbb C:\operatorname{Re}s>0\}$.
 
-[L1] The zeta series $\sum n^{-s}$ defines $\zeta(s)$ on $\operatorname{Re}s>1$
-([[def-riemann-zeta-function]]).
+[L1] The zeta series $\sum n^{-s}$ defines $\zeta(s)$ on $\operatorname{Re}s>1$ ([[def-riemann-zeta-function]]).
 
-[L2] The fractional-part formula extends $\zeta$ meromorphically to
-$\operatorname{Re}s>0$ with only a simple pole at $1$
-([[thm-riemann-zeta-continuation-to-the-right-half-plane]]).
+[L2] The fractional-part formula extends $\zeta$ meromorphically to $\operatorname{Re}s>0$ with only a simple pole at $1$ ([[thm-riemann-zeta-continuation-to-the-right-half-plane]]).
 
-[L3] The complex Weierstrass M-test gives locally uniform convergence from a
-summable majorant ([[thm-weierstrass-m-test-for-complex-function-series]]).
+[L3] The complex Weierstrass M-test gives locally uniform convergence from a summable majorant ([[thm-weierstrass-m-test-for-complex-function-series]]).
 
-[L4] The real logarithm is defined on $(0,\infty)$ and the complex exponential
-defines $x^{-s}=\exp(-s\log x)$ for $x>0$
-([[def-natural-logarithm]], [[def-complex-exponential]]).
+[L4] The real logarithm is defined on $(0,\infty)$ and the complex exponential defines $x^{-s}=\exp(-s\log x)$ for $x>0$ ([[def-natural-logarithm]], [[def-complex-exponential]]).
 
-[L5] For rational $p>1$, the series $\sum_{n\ge1}n^{-p}$ converges
-([[thm-p-series-rational]]).
+[L5] For rational $p>1$, the series $\sum_{n\ge1}n^{-p}$ converges ([[thm-p-series-rational]]).
 
-[A1] For fixed $s$, the derivative of $x\mapsto x^{-s}=\exp(-s\log x)$ on
-$(0,\infty)$ is $-s x^{-s-1}$.
+[A1] For fixed $s$, the derivative of $x\mapsto x^{-s}=\exp(-s\log x)$ on $(0,\infty)$ is $-s x^{-s-1}$.
 
-[A2] Two holomorphic functions on a connected domain that agree on a nonempty
-open subset agree everywhere on that domain.
+[A2] Two holomorphic functions on a connected domain that agree on a nonempty open subset agree everywhere on that domain.
 
 ## Proof
 

@@ -37,8 +37,7 @@ phase curve is the ellipse $p^2/(2mE)+m\Omega^2q^2/(2E)=1$.
 
 **Given:** Positive $m,\Omega$ and canonical coordinates on $T^*\mathbb R$.
 
-[F1] Hamilton's equations hold under the stated choice assumption.
-[[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
+[F1] Hamilton's equations hold under the stated choice assumption. [[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
 
 ## Verification
 

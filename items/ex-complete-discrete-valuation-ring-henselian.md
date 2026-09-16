@@ -29,14 +29,11 @@ discrete valuation ring and hence Henselian.
 
 **Given:** A field $k$ and the ring $k\llbracket t\rrbracket$.
 
-[L1] The ring $k\llbracket t\rrbracket$ is a local domain with unique maximal ideal
-$tk\llbracket t\rrbracket$ ([[cor-formal-series-over-a-field-is-a-local-domain]]).
+[L1] The ring $k\llbracket t\rrbracket$ is a local domain with unique maximal ideal $tk\llbracket t\rrbracket$ ([[cor-formal-series-over-a-field-is-a-local-domain]]).
 
-[L2] A local domain of this form is a discrete valuation ring
-([[thm-equivalent-characterisations-of-a-dvr]]).
+[L2] A local domain of this form is a discrete valuation ring ([[thm-equivalent-characterisations-of-a-dvr]]).
 
-[L3] Every complete local ring is Henselian
-([[cor-complete-local-rings-are-henselian]]).
+[L3] Every complete local ring is Henselian ([[cor-complete-local-rings-are-henselian]]).
 
 ## Verification
 

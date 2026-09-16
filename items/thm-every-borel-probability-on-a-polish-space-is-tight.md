@@ -47,24 +47,11 @@ $$\mu\left(\bigcup_{k<m}E_k\right)\le\sum_{k<m}\mu(E_k),$$
 
 including $m=0$, where both sides are $0$.
 
-[F5] [[thm-complete-and-totally-bounded-implies-compact]]: **Assume the Axiom of Countable Choice** (def-countable-choice). Let $(X,d)$
-be a metric space (def-metric-space) that is complete
-(def-complete-metric-space) and totally bounded (def-totally-bounded).
-Then $(X,d)$ is compact (def-metric-compactness).
+[F5] [[thm-complete-and-totally-bounded-implies-compact]]: **Assume the Axiom of Countable Choice** (def-countable-choice). Let $(X,d)$ be a metric space (def-metric-space) that is complete (def-complete-metric-space) and totally bounded (def-totally-bounded). Then $(X,d)$ is compact (def-metric-compactness).
 
-**Where the axiom is spent, and why the weaker principle suffices.**
-$\mathrm{AC}_\omega$ is used exactly once, at step 3.1, to fix one finite
-$1/(n+1)$-net **together with a listing of it** for every $n \in \mathbb{N}$ at
-once. The family of sets being chosen from is written down before any selection
-is made and does not depend on the earlier selections, which is precisely the
-situation countable choice covers and dependent choice
-(def-dependent-choice) is not needed for. Everything after step 3.1 is
-canonical: at each stage the construction takes the **least** admissible index in
-the listing already fixed.
+**Where the axiom is spent, and why the weaker principle suffices.** $\mathrm{AC}_\omega$ is used exactly once, at step 3.1, to fix one finite $1/(n+1)$-net **together with a listing of it** for every $n \in \mathbb{N}$ at once. The family of sets being chosen from is written down before any selection is made and does not depend on the earlier selections, which is precisely the situation countable choice covers and dependent choice (def-dependent-choice) is not needed for. Everything after step 3.1 is canonical: at each stage the construction takes the **least** admissible index in the listing already fixed.
 
-As always on this page, the claim is an upper bound on the cost of the proof
-given here, not an assertion that $\mathrm{AC}_\omega$ is necessary for the
-theorem.
+As always on this page, the claim is an upper bound on the cost of the proof given here, not an assertion that $\mathrm{AC}_\omega$ is necessary for the theorem.
 
 ## Proof
 

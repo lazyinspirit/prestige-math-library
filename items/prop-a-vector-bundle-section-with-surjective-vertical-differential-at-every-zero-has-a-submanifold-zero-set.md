@@ -36,12 +36,9 @@ embedded submanifold of codimension $r$.
 
 **Given:** A smooth section $s:M\to E$ of a smooth rank-$r$ vector bundle.
 
-[L1] In a local frame, smoothness of a section is equivalent to smoothness of its
-component map to $\mathbb R^r$
-([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
+[L1] In a local frame, smoothness of a section is equivalent to smoothness of its component map to $\mathbb R^r$ ([[prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components]]).
 
-[L2] A regular level set is an embedded submanifold
-([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
+[L2] A regular level set is an embedded submanifold ([[thm-a-regular-level-set-is-an-embedded-submanifold]]).
 
 ## Proof
 

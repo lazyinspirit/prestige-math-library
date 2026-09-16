@@ -33,12 +33,9 @@ point.
 
 **Given:** A vector field $X$ on a symplectic manifold.
 
-[F1] $X$ is symplectic exactly when $\iota_X\omega$ is closed.
-[[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
+[F1] $X$ is symplectic exactly when $\iota_X\omega$ is closed. [[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
 
-[F2] On a star-shaped open subset of Euclidean space, every closed $C^1$
-coefficient field is the gradient of a potential.
-[[thm-poincare-lemma-for-star-shaped-domains]].
+[F2] On a star-shaped open subset of Euclidean space, every closed $C^1$ coefficient field is the gradient of a potential. [[thm-poincare-lemma-for-star-shaped-domains]].
 
 ## Proof
 

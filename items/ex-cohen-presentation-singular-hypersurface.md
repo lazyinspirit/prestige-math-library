@@ -31,9 +31,7 @@ a formal power-series ring; it is the standard cusp hypersurface.
 
 **Given:** A field $k$ and the quotient ring $A=k\llbracket x,y\rrbracket/(y^2-x^3)$.
 
-[L1] Complete equicharacteristic Noetherian local rings are quotients of formal
-power-series rings over their residue fields
-([[cor-equicharacteristic-complete-local-power-series-quotient]]).
+[L1] Complete equicharacteristic Noetherian local rings are quotients of formal power-series rings over their residue fields ([[cor-equicharacteristic-complete-local-power-series-quotient]]).
 
 ## Verification
 

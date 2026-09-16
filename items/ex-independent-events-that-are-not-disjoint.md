@@ -33,12 +33,9 @@ $A\cap B=\{00\}$.
 
 **Given:** The uniform four-point space and the events $A,B$ displayed above.
 
-[L1] In a uniform finite space, event probability is cardinality divided by the
-total number of outcomes. ([[def-uniform-finite-probability-space]])
+[L1] In a uniform finite space, event probability is cardinality divided by the total number of outcomes. ([[def-uniform-finite-probability-space]])
 
-[L2] Two events are independent exactly when
-$\mathbb P(A\cap B)=\mathbb P(A)\mathbb P(B)$.
-([[def-pairwise-and-mutual-independence-of-events]])
+[L2] Two events are independent exactly when $\mathbb P(A\cap B)=\mathbb P(A)\mathbb P(B)$. ([[def-pairwise-and-mutual-independence-of-events]])
 
 ## Verification
 

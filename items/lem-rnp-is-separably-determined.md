@@ -38,19 +38,13 @@ closed separable subspace of $X$ has RNP.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] RNP is the bounded-variation vector-measure density property
-([[def-radon-nikodym-property]]).
+[L1] RNP is the bounded-variation vector-measure density property ([[def-radon-nikodym-property]]).
 
-[L2] Under AC, RNP is equivalent to dentability of every nonempty bounded
-closed convex set ([[thm-rnp-dentability-characterization]]).
+[L2] Under AC, RNP is equivalent to dentability of every nonempty bounded closed convex set ([[thm-rnp-dentability-characterization]]).
 
-[L3] Under AC, nondentability supplies a density-free Lebesgue vector measure
-whose range lies in a closed separable subspace
-([[lem-nondentability-produces-a-vector-measure-without-density]]).
+[L3] Under AC, nondentability supplies a density-free Lebesgue vector measure whose range lies in a closed separable subspace ([[lem-nondentability-produces-a-vector-measure-without-density]]).
 
-[L4] A bounded linear inclusion preserves Bochner integrability and commutes
-with integration
-([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
+[L4] A bounded linear inclusion preserves Bochner integrability and commutes with integration ([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
 
 ## Proof
 

@@ -39,22 +39,13 @@ canonically as Lie algebras.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$, and a closed normal subgroup
-$N\trianglelefteq G$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$, and a closed normal subgroup $N\trianglelefteq G$.
 
-[A1] The quotient manifold exists, $q$ is a surjective submersion, and
-$T_{eN}(G/N)\cong\mathfrak g/\mathfrak n$ linearly.
-[[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]],
-[[prop-tangent-space-of-a-homogeneous-quotient]].
+[A1] The quotient manifold exists, $q$ is a surjective submersion, and $T_{eN}(G/N)\cong\mathfrak g/\mathfrak n$ linearly. [[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]], [[prop-tangent-space-of-a-homogeneous-quotient]].
 
-[F1] Maps constant on quotient fibres descend uniquely.
-[[thm-quotient-universal-property]].
+[F1] Maps constant on quotient fibres descend uniquely. [[thm-quotient-universal-property]].
 
-[F2] The differential of a smooth Lie-group homomorphism preserves brackets
-([[thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism]]).
-Moreover,
-$d(\operatorname{Ad})_e=\operatorname{ad}$.
-[[thm-the-differential-of-adjoint-is-ad]].
+[F2] The differential of a smooth Lie-group homomorphism preserves brackets ([[thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism]]). Moreover, $d(\operatorname{Ad})_e=\operatorname{ad}$. [[thm-the-differential-of-adjoint-is-ad]].
 
 ## Proof
 

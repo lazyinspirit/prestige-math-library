@@ -33,15 +33,11 @@ $$H^k(S^1;\mathbb F_2)\cong H^{k+1}(D(\mu),S(\mu);\mathbb F_2).$$
 
 ## Facts & Assumptions
 
-**Given:** The model
-$\mu=([0,1]\times\mathbb R)/((0,t)\sim(1,-t))\to S^1$.
+**Given:** The model $\mu=([0,1]\times\mathbb R)/((0,t)\sim(1,-t))\to S^1$.
 
-[F1] [[def-r-oriented-vector-bundle-and-orientation-local-system]] defines
-orientation by the monodromy action on the top disk-pair cohomology and gives
-the canonical mod-two orientation.
+[F1] [[def-r-oriented-vector-bundle-and-orientation-local-system]] defines orientation by the monodromy action on the top disk-pair cohomology and gives the canonical mod-two orientation.
 
-[F2] [[thm-thom-isomorphism-for-oriented-vector-bundles]] gives the normalized
-class and degree shift under AC.
+[F2] [[thm-thom-isomorphism-for-oriented-vector-bundles]] gives the normalized class and degree shift under AC.
 
 [A1] [[def-axiom-of-choice]] is used only through [F2].
 

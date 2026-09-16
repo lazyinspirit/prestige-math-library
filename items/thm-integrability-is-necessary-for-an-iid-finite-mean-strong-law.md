@@ -27,10 +27,7 @@ If IID real $(X_n)$ have $S_n/n$ converging almost surely to a finite, possibly 
 
 ## Facts & Assumptions
 
-[F1] [[cor-second-borel-cantelli-lemma-under-pairwise-independence]]: Let $(A_n)_{n\in\mathbb N}$ be pairwise independent events with
-$$\sum_{n=0}^\infty \mathbb P(A_n)=+\infty.$$
-Then
-$$\mathbb P(A_n\ \mathrm{i.o.})=1.$$
+[F1] [[cor-second-borel-cantelli-lemma-under-pairwise-independence]]: Let $(A_n)_{n\in\mathbb N}$ be pairwise independent events with $$\sum_{n=0}^\infty \mathbb P(A_n)=+\infty.$$ Then $$\mathbb P(A_n\ \mathrm{i.o.})=1.$$
 
 [F2] [[lem-tail-sum-integrability-equivalence]]: For a measurable $X:\Omega\to[0,\infty]$ on a probability space, $\sum_{n\ge1}\mathbb P(X>n)\le\mathbb EX\le1+\sum_{n\ge1}\mathbb P(X>n)$. Thus $\mathbb EX<\infty$ if and only if the tail series is finite.
 

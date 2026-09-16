@@ -32,8 +32,7 @@ $X\mapsto X^{\vee\vee}$ is a monoidal endofunctor.
 
 **Given:** Chosen left duals on a left rigid monoidal category.
 
-[L1] Left duality is a contravariant antimonoidal functor
-([[thm-left-duality-is-a-contravariant-antimonoidal-functor]]).
+[L1] Left duality is a contravariant antimonoidal functor ([[thm-left-duality-is-a-contravariant-antimonoidal-functor]]).
 
 ## Proof
 

@@ -30,18 +30,13 @@ finite limits.
 
 ## Facts & Assumptions
 
-**Given:** The terminal category $\mathbf1$ and the functor
-$F:\mathbf1\to\mathbf{Set}$ sending its sole object to $\varnothing$.
+**Given:** The terminal category $\mathbf1$ and the functor $F:\mathbf1\to\mathbf{Set}$ sending its sole object to $\varnothing$.
 
-[L1] Finite-limit criteria require nullary product data, equivalently a
-terminal object, in addition to binary products and equalizers
-([[thm-finite-limit-and-colimit-criteria]]).
+[L1] Finite-limit criteria require nullary product data, equivalently a terminal object, in addition to binary products and equalizers ([[thm-finite-limit-and-colimit-criteria]]).
 
-[F1] Continuous means preserving all small limits
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F1] Continuous means preserving all small limits ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
-[F2] Morphisms of $\mathbf{Set}$ are functions
-([[prop-sets-and-functions-form-category-set]]).
+[F2] Morphisms of $\mathbf{Set}$ are functions ([[prop-sets-and-functions-form-category-set]]).
 
 ## Refutation
 

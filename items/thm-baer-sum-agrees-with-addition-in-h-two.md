@@ -30,14 +30,11 @@ the Baer sum of extensions corresponds to addition of cohomology classes.
 
 **Given:** Two extension classes of $G$ by the abelian $G$-module $M$.
 
-[L1] $H^2(G,M)$ classifies the extension classes
-([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L1] $H^2(G,M)$ classifies the extension classes ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
-[F1] The Baer sum is defined on extension classes
-([[def-baer-sum-of-abelian-kernel-extensions]]).
+[F1] The Baer sum is defined on extension classes ([[def-baer-sum-of-abelian-kernel-extensions]]).
 
-[L2] That operation is independent of the chosen representatives
-([[lem-baer-sum-is-independent-of-extension-representatives]]).
+[L2] That operation is independent of the chosen representatives ([[lem-baer-sum-is-independent-of-extension-representatives]]).
 
 ## Proof
 

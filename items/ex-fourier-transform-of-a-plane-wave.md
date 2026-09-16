@@ -35,10 +35,7 @@ in $\mathcal S'(\mathbb R^n)$.
 
 **Given:** [[def-countable-choice|Countable Choice]] and $b\in\mathbb R^n$.
 
-[F1] The elementary-transform theorem gives
-$\mathcal F\delta_a=e^{-2\pi ia\cdot\xi}$ and
-$\mathcal F(e^{2\pi ib\cdot x})=\delta_b$
-([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
+[F1] The elementary-transform theorem gives $\mathcal F\delta_a=e^{-2\pi ia\cdot\xi}$ and $\mathcal F(e^{2\pi ib\cdot x})=\delta_b$ ([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
 
 ## Verification
 

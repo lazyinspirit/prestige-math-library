@@ -34,11 +34,9 @@ Each vertex appears exactly twice with opposite signs.
 
 **Given:** The identity singular $2$-simplex $\iota_2:\Delta^2\to\Delta^2$.
 
-[L1] The boundary of $\iota_2$ is the alternating sum of its three oriented
-edges ([[ex-boundaries-of-the-standard-one-and-two-simplices]]).
+[L1] The boundary of $\iota_2$ is the alternating sum of its three oriented edges ([[ex-boundaries-of-the-standard-one-and-two-simplices]]).
 
-[L2] Singular boundaries square to zero
-([[thm-the-singular-boundary-squares-to-zero]]).
+[L2] Singular boundaries square to zero ([[thm-the-singular-boundary-squares-to-zero]]).
 
 ## Verification
 

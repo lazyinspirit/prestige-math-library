@@ -38,21 +38,13 @@ $N_G\models\operatorname{cf}(\lambda)=\omega$ for every such $\lambda$.
 
 **Given:** The completed Gitik symmetric model $N_G$.
 
-[F1] [[thm-gitik-symmetric-submodel-satisfies-zf]]: $N_G$ is a transitive ZF
-model containing the ground model.
+[F1] [[thm-gitik-symmetric-submodel-satisfies-zf]]: $N_G$ is a transitive ZF model containing the ground model.
 
-[F2] [[def-gitik-strongly-compact-filter-system-and-class-forcing]]: At every
-regular coordinate $\delta$, trunks have finite one-to-one $\delta$-sections,
-support extension is available, and successors are selected from uniform
-filters on $\delta$.
+[F2] [[def-gitik-strongly-compact-filter-system-and-class-forcing]]: At every regular coordinate $\delta$, trunks have finite one-to-one $\delta$-sections, support extension is available, and successors are selected from uniform filters on $\delta$.
 
-[F3] [[def-gitik-finite-support-symmetric-submodel]]: A name fixed by the
-pointwise stabilizer of one coordinate and having HS subnames belongs to
-$N_G$.
+[F3] [[def-gitik-finite-support-symmetric-submodel]]: A name fixed by the pointwise stabilizer of one coordinate and having HS subnames belongs to $N_G$.
 
-[F4] [[def-cofinality]] and [[thm-cofinality-basics]]: The ground cofinality of
-a limit ordinal is an infinite regular cardinal and has a strictly increasing
-cofinal witness; no finite subset is cofinal in a limit ordinal.
+[F4] [[def-cofinality]] and [[thm-cofinality-basics]]: The ground cofinality of a limit ordinal is an infinite regular cardinal and has a strictly increasing cofinal witness; no finite subset is cofinal in a limit ordinal.
 
 ## Proof
 

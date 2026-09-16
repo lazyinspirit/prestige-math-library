@@ -36,15 +36,11 @@ and this pairing is nondegenerate.
 
 **Given:** A place $v$ of $\mathbb Q$.
 
-[L1] The symbol depends only on square classes
-([[lem-hilbert-symbol-depends-only-on-square-classes]]).
+[L1] The symbol depends only on square classes ([[lem-hilbert-symbol-depends-only-on-square-classes]]).
 
-[L2] The explicit formulas are known at the real place, the odd prime places,
-and the $2$-adic place ([[thm-real-hilbert-symbol-formula]],
-[[thm-odd-p-hilbert-symbol-formula]], [[thm-two-adic-hilbert-symbol-formula]]).
+[L2] The explicit formulas are known at the real place, the odd prime places, and the $2$-adic place ([[thm-real-hilbert-symbol-formula]], [[thm-odd-p-hilbert-symbol-formula]], [[thm-two-adic-hilbert-symbol-formula]]).
 
-[L3] The norm criterion is one of the equivalent definitions
-([[lem-equivalent-definitions-of-the-hilbert-symbol]]).
+[L3] The norm criterion is one of the equivalent definitions ([[lem-equivalent-definitions-of-the-hilbert-symbol]]).
 
 ## Proof
 

@@ -48,21 +48,13 @@ type $(r,s)$ tensors on $T_pM$.
 **Proof technique:** direct.
 
 1.1 On a chart domain $U$, the coordinate bases $\partial/\partial x^i$ and [F1, given, construct]
-$dx^i$ identify each fibre in [F1] with the fixed finite-dimensional vector
-space
-$$ \operatorname{Mult}\bigl(((\mathbb R^m)^*)^r\times(\mathbb R^m)^s,\mathbb R\bigr) $$
-of type $(r,s)$ tensors on $\mathbb R^m$. This gives local trivializations
-$$ T^r_sM|_U\cong U\times \operatorname{Mult}\bigl(((\mathbb R^m)^*)^r\times(\mathbb R^m)^s,\mathbb R\bigr). $$
-[F1, given, construct]
+$dx^i$ identify each fibre in [F1] with the fixed finite-dimensional vector space $$ \operatorname{Mult}\bigl(((\mathbb R^m)^*)^r\times(\mathbb R^m)^s,\mathbb R\bigr) $$ of type $(r,s)$ tensors on $\mathbb R^m$. This gives local trivializations $$ T^r_sM|_U\cong U\times \operatorname{Mult}\bigl(((\mathbb R^m)^*)^r\times(\mathbb R^m)^s,\mathbb R\bigr). $$ [F1, given, construct]
 
 2.1 On an overlap, [L1] shows that each contravariant slot picks up one inverse [L1, step 1.1, algebra]
-Jacobian factor and each covariant slot picks up one Jacobian factor. Hence the
-tensor-coordinate change map is fibrewise linear, smooth in the base point, and
-satisfies the cocycle law because Jacobians and inverse Jacobians do. [L1, step 1.1, algebra]
+Jacobian factor and each covariant slot picks up one Jacobian factor. Hence the tensor-coordinate change map is fibrewise linear, smooth in the base point, and satisfies the cocycle law because Jacobians and inverse Jacobians do. [L1, step 1.1, algebra]
 
 3.1 Therefore [L2] applies to these local transition maps and produces a smooth [F1, L2, step 2.1]
-vector bundle. By construction its fibre over $p$ is the tensor space from
-[F1]. [F1, L2, step 2.1]
+vector bundle. By construction its fibre over $p$ is the tensor space from [F1]. [F1, L2, step 2.1]
 
 4.1 Thus the tensor transition laws define the smooth tensor bundle $T^r_sM$. [step 3.1]
 [step 3.1] ∎

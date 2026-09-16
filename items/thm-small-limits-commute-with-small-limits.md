@@ -33,21 +33,15 @@ $$\lim_j\lim_kD(j,k)\cong \lim_{(j,k)}D(j,k)\cong \lim_k\lim_jD(j,k).$$
 
 ## Facts & Assumptions
 
-**Given:** Small $\mathcal J,\mathcal K$, the diagram $D$, and the limits in
-the statement.
+**Given:** Small $\mathcal J,\mathcal K$, the diagram $D$, and the limits in the statement.
 
-[F1] A limit represents cones by unique arrows
-([[def-limit-and-colimit-of-a-diagram]]).
+[F1] A limit represents cones by unique arrows ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L1] Two limits of one diagram have a unique compatible isomorphism
-([[thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism]]).
+[L1] Two limits of one diagram have a unique compatible isomorphism ([[thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism]]).
 
-[F2] The product category has objects $(j,k)$ and componentwise morphisms
-([[def-product-category]]).
+[F2] The product category has objects $(j,k)$ and componentwise morphisms ([[def-product-category]]).
 
-[F3] The cardinality of a small category is the cardinality of its morphism
-set, and a small diagram is one with a small indexing category
-([[def-cardinality-of-a-small-category-and-kappa-small-diagram]]).
+[F3] The cardinality of a small category is the cardinality of its morphism set, and a small diagram is one with a small indexing category ([[def-cardinality-of-a-small-category-and-kappa-small-diagram]]).
 
 ## Proof
 

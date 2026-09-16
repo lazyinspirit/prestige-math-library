@@ -73,13 +73,6 @@ $-d \mid -a$ are equivalent.
 
 ## Remarks
 
-- **Linearity is the workhorse of the whole page.** Every later argument that a
-  common divisor of $a$ and $b$ divides some combination of them — Bézout's
-  identity, the Euclidean step, the coprimality criterion — is clause 3 applied
-  once.
+- **Linearity is the workhorse of the whole page.** Every later argument that a common divisor of $a$ and $b$ divides some combination of them — Bézout's identity, the Euclidean step, the coprimality criterion — is clause 3 applied once.
 
-- **Divisibility ignores signs, and that is why $\gcd$ can be normalised.**
-  Clause 5 says the divisors of $a$ and of $-a$ are the same set, so
-  $d \mid a$ holds exactly when $d \mid |a|$, whichever of the two values $|a|$
-  takes ([[def-int-abs]]). That is the observation behind
-  $\gcd(a,b) = \gcd(|a|,|b|)$ in [[lem-gcd-basic-values]].
+- **Divisibility ignores signs, and that is why $\gcd$ can be normalised.** Clause 5 says the divisors of $a$ and of $-a$ are the same set, so $d \mid a$ holds exactly when $d \mid |a|$, whichever of the two values $|a|$ takes ([[def-int-abs]]). That is the observation behind $\gcd(a,b) = \gcd(|a|,|b|)$ in [[lem-gcd-basic-values]].

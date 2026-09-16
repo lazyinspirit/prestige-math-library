@@ -26,10 +26,7 @@ $$\mathcal L(\mathbb R^m)\otimes\mathcal L(\mathbb R^n) = \mathcal L(\mathbb R^{
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, Lebesgue measure $\lambda$ on
-$\mathbb R$, a non-Lebesgue-measurable set $N \subseteq \mathbb R$, the set
-$E:=\{0\}\times N \subseteq \mathbb R^2$, and the line
-$Z:=\{0\}\times\mathbb R$.
+**Given:** The Axiom of Countable Choice, Lebesgue measure $\lambda$ on $\mathbb R$, a non-Lebesgue-measurable set $N \subseteq \mathbb R$, the set $E:=\{0\}\times N \subseteq \mathbb R^2$, and the line $Z:=\{0\}\times\mathbb R$.
 
 [L1] The Euclidean Lebesgue measure is the completion of the product measure. ([[thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures]])
 

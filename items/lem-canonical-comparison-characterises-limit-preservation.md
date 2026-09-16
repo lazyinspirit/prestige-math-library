@@ -37,11 +37,9 @@ colimit is preserved.
 
 **Given:** The two chosen limiting cones in the statement.
 
-[F1] Preservation means that the image of the source limiting cone is limiting
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F1] Preservation means that the image of the source limiting cone is limiting ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
-[L1] Two limits of one diagram have a unique compatible isomorphism
-([[thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism]]).
+[L1] Two limits of one diagram have a unique compatible isomorphism ([[thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism]]).
 
 [L2] Limits and colimits are formal duals ([[prop-limit-colimit-duality]]).
 

@@ -134,21 +134,8 @@ proved by hand instead.
 
 ## Remarks
 
-- **The two estimates say that $\Phi$ almost preserves distance.** Agreement of
-  the first $n$ coordinates forces the images to be within $3^{-n}$, and the
-  first disagreement at index $m$ forces them to be at least $3^{-(m+1)}$ apart.
-  Together they say that the cylinder $Z(b,n)$ and the trace on $C$ of an interval
-  of length about $3^{-n}$ around $\Phi(b)$ determine each other, which is exactly
-  what makes $\Phi$ a homeomorphism.
+- **The two estimates say that $\Phi$ almost preserves distance.** Agreement of the first $n$ coordinates forces the images to be within $3^{-n}$, and the first disagreement at index $m$ forces them to be at least $3^{-(m+1)}$ apart. Together they say that the cylinder $Z(b,n)$ and the trace on $C$ of an interval of length about $3^{-n}$ around $\Phi(b)$ determine each other, which is exactly what makes $\Phi$ a homeomorphism.
 
-- **Why openness has to be proved and not quoted.** For a continuous bijection,
-  openness is equivalent to being a homeomorphism ([[lem-homeomorphism-criteria]])
-  and is not automatic; the standard shortcut uses compactness of the source and
-  the Hausdorff condition on the target, and compactness is later in the reading
-  order. Steps 4.3 and 5.1 replace it with a direct computation.
+- **Why openness has to be proved and not quoted.** For a continuous bijection, openness is equivalent to being a homeomorphism ([[lem-homeomorphism-criteria]]) and is not automatic; the standard shortcut uses compactness of the source and the Hausdorff condition on the target, and compactness is later in the reading order. Steps 4.3 and 5.1 replace it with a direct computation.
 
-- **The coordinates are the digits, and the digits are not the point.** A real
-  number in $C$ has exactly one ternary expansion with digits in $\{0,2\}$, which
-  is what makes $\Phi$ injective; the ambiguity of ternary expansions in general,
-  such as two expansions of $1/3$, does not arise inside $C$ because the
-  alternative expansion uses the digit $1$.
+- **The coordinates are the digits, and the digits are not the point.** A real number in $C$ has exactly one ternary expansion with digits in $\{0,2\}$, which is what makes $\Phi$ injective; the ambiguity of ternary expansions in general, such as two expansions of $1/3$, does not arise inside $C$ because the alternative expansion uses the digit $1$.

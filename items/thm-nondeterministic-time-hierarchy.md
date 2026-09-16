@@ -27,9 +27,7 @@ $$ \mathrm{NTIME}(f(n))\subsetneq\mathrm{NTIME}(g(n)). $$
 
 ## Facts & Assumptions
 
-**Given:** the displayed hypotheses, with constructibility and all-branch
-$O(t)$ time classes as in [[def-time-and-space-constructible-function]] and
-[[def-dtime-ntime-dspace-and-nspace]].
+**Given:** the displayed hypotheses, with constructibility and all-branch $O(t)$ time classes as in [[def-time-and-space-constructible-function]] and [[def-dtime-ntime-dspace-and-nspace]].
 
 ## Proof
 

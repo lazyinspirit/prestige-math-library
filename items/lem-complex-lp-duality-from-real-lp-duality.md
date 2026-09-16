@@ -66,6 +66,4 @@ $\lVert\Lambda\rVert=\lVert h\rVert_q$.
 
 ## Remarks
 
-The absence of a conjugate in the displayed pairing is deliberate.  It is why
-the phase test contains $\overline h$: multiplication then gives the
-nonnegative real function $|h|^q$.
+The absence of a conjugate in the displayed pairing is deliberate.  It is why the phase test contains $\overline h$: multiplication then gives the nonnegative real function $|h|^q$.

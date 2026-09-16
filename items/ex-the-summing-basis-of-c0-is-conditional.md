@@ -36,11 +36,9 @@ $(s_n)$ is a conditional Schauder basis of real or complex $c_0$.
 
 ## Facts & Assumptions
 
-[L1] A basis is conditional when some basis expansion is not unconditionally
-convergent ([[def-unconditional-and-conditional-basis]]).
+[L1] A basis is conditional when some basis expansion is not unconditionally convergent ([[def-unconditional-and-conditional-basis]]).
 
-[L2] Unconditional convergence implies convergence of every subseries
-([[thm-unconditional-convergence-equivalences]]).
+[L2] Unconditional convergence implies convergence of every subseries ([[thm-unconditional-convergence-equivalences]]).
 
 ## Verification
 
@@ -54,6 +52,4 @@ convergent ([[def-unconditional-and-conditional-basis]]).
 
 $$\sum_{n\ \mathrm{odd}}\left(\frac1n+\frac1{n+1}\right)=+\infty.$$
 
-It therefore does not converge in $c_0$. By [L2] the basis expansion of this
-$x$ is not unconditional, and [L1] makes the basis conditional. [L1, L2,
-explicit witness] ∎
+It therefore does not converge in $c_0$. By [L2] the basis expansion of this $x$ is not unconditional, and [L1] makes the basis conditional. [L1, L2, explicit witness] ∎

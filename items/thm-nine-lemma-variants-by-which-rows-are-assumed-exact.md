@@ -48,14 +48,7 @@ In the $3 \times 3$ short-exact-column diagram of the nine lemma:
 
 [L2] In a short exact sequence, the left map is monic, the right map is epic, and the middle node is exact ([[thm-degenerate-exactness-criteria]]).
 
-[L3] Monicity, epicity, and exactness can be checked by member cancellation and
-member lifting. Equivalent members have representatives on a common epic
-domain, where hom-set subtraction is defined
-([[thm-chasing-rule-monicity-by-member-cancellation]],
-[[thm-chasing-rule-epimorphy-detected-by-members]],
-[[thm-chasing-rule-exactness-detected-by-members]],
-[[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]],
-[[def-abelian-category]]).
+[L3] Monicity, epicity, and exactness can be checked by member cancellation and member lifting. Equivalent members have representatives on a common epic domain, where hom-set subtraction is defined ([[thm-chasing-rule-monicity-by-member-cancellation]], [[thm-chasing-rule-epimorphy-detected-by-members]], [[thm-chasing-rule-exactness-detected-by-members]], [[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]], [[def-abelian-category]]).
 
 ## Proof
 

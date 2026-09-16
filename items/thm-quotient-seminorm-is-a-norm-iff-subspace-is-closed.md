@@ -39,19 +39,13 @@ norm if and only if $M$ is closed in $X$.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$, a linear subspace $M \le X$, and a vector
-$x \in X$.
+**Given:** A normed space $X$, a linear subspace $M \le X$, and a vector $x \in X$.
 
-[L1] The quotient seminorm is
-$\|x+M\|_{X/M} = \operatorname{dist}(x,M)$
-([[def-quotient-seminorm]]).
+[L1] The quotient seminorm is $\|x+M\|_{X/M} = \operatorname{dist}(x,M)$ ([[def-quotient-seminorm]]).
 
-[L2] A linear subspace contains $0$, so $M$ is nonempty
-([[def-linear-subspace]]).
+[L2] A linear subspace contains $0$, so $M$ is nonempty ([[def-linear-subspace]]).
 
-[L3] For a nonempty subset $A$ of a metric space, the closure of $A$ is exactly
-$\{u : \operatorname{dist}(u,A)=0\}$, and a set is closed exactly when it equals
-its closure ([[thm-metric-closure-characterisation]]).
+[L3] For a nonempty subset $A$ of a metric space, the closure of $A$ is exactly $\{u : \operatorname{dist}(u,A)=0\}$, and a set is closed exactly when it equals its closure ([[thm-metric-closure-characterisation]]).
 
 ## Proof
 

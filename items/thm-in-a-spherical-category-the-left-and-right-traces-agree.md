@@ -33,15 +33,11 @@ $$\operatorname{Tr}_L(a_Xx)=\operatorname{Tr}_R(xa_X^{-1}).$$
 
 ## Facts & Assumptions
 
-**Given:** A spherical tensor category $(\mathcal C,a)$, an object $X$, and an
-endomorphism $x:X\to X$.
+**Given:** A spherical tensor category $(\mathcal C,a)$, an object $X$, and an endomorphism $x:X\to X$.
 
-[F1] EGNO Theorem 4.7.15 proves exactly the displayed identity for spherical
-tensor categories.
+[F1] EGNO Theorem 4.7.15 proves exactly the displayed identity for spherical tensor categories.
 
-[L1] The left and right traces used in the statement are the ones defined in
-[[def-the-categorical-trace-of-a-morphism-into-the-double-dual]], and
-$a_X:X\to X^{\vee\vee}$ is the pivotal comparison from [[def-pivotal-structure]].
+[L1] The left and right traces used in the statement are the ones defined in [[def-the-categorical-trace-of-a-morphism-into-the-double-dual]], and $a_X:X\to X^{\vee\vee}$ is the pivotal comparison from [[def-pivotal-structure]].
 
 ## Proof
 

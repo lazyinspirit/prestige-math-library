@@ -44,9 +44,7 @@ $(r,1)\times[0,1)$.
 
 **Given:** Real numbers $0<r,s<1$.
 
-[L1] The Hartogs figure and its bidisc hull are defined by the displayed modulus
-conditions in the two coordinates
-([[def-hartogs-figure-and-polydisc-hull]]).
+[L1] The Hartogs figure and its bidisc hull are defined by the displayed modulus conditions in the two coordinates ([[def-hartogs-figure-and-polydisc-hull]]).
 
 ## Verification
 

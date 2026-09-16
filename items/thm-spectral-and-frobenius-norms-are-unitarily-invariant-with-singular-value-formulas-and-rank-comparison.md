@@ -45,25 +45,17 @@ $A$, where $r=\operatorname{rank}A$; write $\sigma_1=0$ when $r=0$.
 
 ## Facts & Assumptions
 
-**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$ over $\mathbb F=\mathbb R$ or
-$\mathbb C$, with singular values $\sigma_1\ge\cdots\ge\sigma_r>0$.
+**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$ over $\mathbb F=\mathbb R$ or $\mathbb C$, with singular values $\sigma_1\ge\cdots\ge\sigma_r>0$.
 
-[L1] There is a singular value decomposition $A=U\Sigma V^{*}$ with $U,V$
-unitary (orthogonal over $\mathbb R$) and $\Sigma$ the diagonal matrix of the
-singular values ([[thm-singular-value-decomposition]]).
+[L1] There is a singular value decomposition $A=U\Sigma V^{*}$ with $U,V$ unitary (orthogonal over $\mathbb R$) and $\Sigma$ the diagonal matrix of the singular values ([[thm-singular-value-decomposition]]).
 
-[L2] The operator norm of a map between finite-dimensional real or complex
-inner product spaces equals its largest singular value
-([[thm-operator-norm-is-the-largest-singular-value]]).
+[L2] The operator norm of a map between finite-dimensional real or complex inner product spaces equals its largest singular value ([[thm-operator-norm-is-the-largest-singular-value]]).
 
-[L3] The rank of a linear map is the number of its positive singular values
-([[cor-rank-equals-number-of-nonzero-singular-values]]).
+[L3] The rank of a linear map is the number of its positive singular values ([[cor-rank-equals-number-of-nonzero-singular-values]]).
 
-[L4] A unitary (orthogonal) operator preserves norms: $\lVert Qv\rVert=\lVert v\rVert$
-for every vector $v$ ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]).
+[L4] A unitary (orthogonal) operator preserves norms: $\lVert Qv\rVert=\lVert v\rVert$ for every vector $v$ ([[def-linear-isometry-and-orthogonal-or-unitary-operator]]).
 
-[L5] Compositions and adjoints of unitary operators are unitary
-([[cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus]]).
+[L5] Compositions and adjoints of unitary operators are unitary ([[cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus]]).
 
 ## Proof
 

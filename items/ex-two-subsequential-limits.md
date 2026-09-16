@@ -104,25 +104,10 @@ $k = j+1$. The verification uses $(u_j)$.
 
 ## Remarks
 
-- **Where Bolzano-Weierstrass sits.** [[thm-bolzano-weierstrass]] guarantees that
-  a bounded sequence has *at least one* subsequential limit; this example computes
-  the whole set and finds two. Nothing above uses the theorem, since the two
-  subsequential limits are exhibited directly, and that is the honest order of
-  business: an existence theorem is not needed once a witness is in hand.
+- **Where Bolzano-Weierstrass sits.** [[thm-bolzano-weierstrass]] guarantees that a bounded sequence has *at least one* subsequential limit; this example computes the whole set and finds two. Nothing above uses the theorem, since the two subsequential limits are exhibited directly, and that is the honest order of business: an existence theorem is not needed once a witness is in hand.
 
-- **The perturbation is what makes the example more than the alternating
-  sequence.** With $p_j$ replaced by the constant $1$ the sequence is
-  $\pm 1$ alternating and each subsequential limit is attained infinitely often.
-  Here $|x_k| > 1$ at every index, so neither subsequential limit is ever a value
-  of the sequence. Subsequential limits are limits, not values.
+- **The perturbation is what makes the example more than the alternating sequence.** With $p_j$ replaced by the constant $1$ the sequence is $\pm 1$ alternating and each subsequential limit is attained infinitely often. Here $|x_k| > 1$ at every index, so neither subsequential limit is ever a value of the sequence. Subsequential limits are limits, not values.
 
-- **The converse direction is where the partition earns its keep.** Step 4.1 rules
-  out every other candidate by taking absolute values, which collapses the sign
-  and leaves the single null perturbation to handle. The alternative, splitting an
-  arbitrary subsequence according to how many of its indices are even, needs the
-  disjointness half of [[lem-alternating-sequence]] and is longer.
+- **The converse direction is where the partition earns its keep.** Step 4.1 rules out every other candidate by taking absolute values, which collapses the sign and leaves the single null perturbation to handle. The alternative, splitting an arbitrary subsequence according to how many of its indices are even, needs the disjointness half of [[lem-alternating-sequence]] and is longer.
 
-- **This is the standard example of a bounded divergent sequence with a
-  computable $\limsup$ and $\liminf$**, namely $1$ and $-1$. Those notions are
-  developed on the next page of the track, and this item is written so that it can
-  be cited there without change.
+- **This is the standard example of a bounded divergent sequence with a computable $\limsup$ and $\liminf$**, namely $1$ and $-1$. Those notions are developed on the next page of the track, and this item is written so that it can be cited there without change.

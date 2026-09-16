@@ -32,8 +32,7 @@ Every direct product of two infinite finitely generated groups is hyperbolic.
 
 **Given:** The direct product $\mathbb Z \times \mathbb Z$.
 
-[L1] Free abelian groups of rank at least two are not hyperbolic
-([[prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]]).
+[L1] Free abelian groups of rank at least two are not hyperbolic ([[prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]]).
 
 ## Counterexample
 

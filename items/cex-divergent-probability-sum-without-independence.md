@@ -31,14 +31,11 @@ $$\mathbb P(A_n\ \mathrm{i.o.})=1.$$
 
 ## Facts & Assumptions
 
-**Given:** An event $A$ with $0<\mathbb P(A)<1$, and define $A_n:=A$ for every
-$n\in\mathbb N$.
+**Given:** An event $A$ with $0<\mathbb P(A)<1$, and define $A_n:=A$ for every $n\in\mathbb N$.
 
-[L1] The event $A_n\ \mathrm{i.o.}$ is the event that infinitely many of the
-$A_n$ occur. ([[def-limsup-and-infinitely-often-event]])
+[L1] The event $A_n\ \mathrm{i.o.}$ is the event that infinitely many of the $A_n$ occur. ([[def-limsup-and-infinitely-often-event]])
 
-[L2] Probability measures respect complements and monotone set identities.
-([[lem-probability-measure-basic-identities]])
+[L2] Probability measures respect complements and monotone set identities. ([[lem-probability-measure-basic-identities]])
 
 ## Counterexample
 

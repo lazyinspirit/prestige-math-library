@@ -96,20 +96,8 @@ injections $\kappa_j$ ([[def-disjoint-union-topology]]). Then:
 
 ## Remarks
 
-- **The coproduct is where "define a map piecewise" becomes a theorem.** Claim 1
-  says that specifying a continuous map on each summand separately, with no
-  compatibility condition whatever, specifies a continuous map on the union. The
-  absence of a compatibility condition is exactly what the disjointness buys; the
-  pasting lemma ([[lem-continuity-is-local-and-pastes]]) is the corresponding
-  statement for covers that do overlap, and it needs the pieces to agree.
+- **The coproduct is where "define a map piecewise" becomes a theorem.** Claim 1 says that specifying a continuous map on each summand separately, with no compatibility condition whatever, specifies a continuous map on the union. The absence of a compatibility condition is exactly what the disjointness buys; the pasting lemma ([[lem-continuity-is-local-and-pastes]]) is the corresponding statement for covers that do overlap, and it needs the pieces to agree.
 
-- **Being open *and* closed is unusual, and it is what separates the summands.**
-  A continuous map out of $S$ can be constant on one summand and wild on
-  another, so no summand is topologically attached to any other. This is the
-  reason the disjoint union appears in the construction of an adjunction space:
-  the gluing is put in afterwards, by a quotient, and the coproduct contributes
-  no gluing of its own.
+- **Being open *and* closed is unusual, and it is what separates the summands.** A continuous map out of $S$ can be constant on one summand and wild on another, so no summand is topologically attached to any other. This is the reason the disjoint union appears in the construction of an adjunction space: the gluing is put in afterwards, by a quotient, and the coproduct contributes no gluing of its own.
 
-- **Nothing here needs the index set to be small.** Claims 1 to 3 hold for an
-  arbitrary index set and no choice principle is used, the maps in every step
-  being given by explicit formulas.
+- **Nothing here needs the index set to be small.** Claims 1 to 3 hold for an arbitrary index set and no choice principle is used, the maps in every step being given by explicit formulas.

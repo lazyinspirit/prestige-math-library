@@ -36,15 +36,11 @@ $$f_{s'}=f_s+\delta u.$$
 
 **Given:** Two normalized sections $s,s':G\to E$ of the same extension.
 
-[F1] Two-coboundaries have the form
-$(\delta u)(g,h)=g\cdot u(h)-u(gh)+u(g)$
-([[def-normalized-two-cocycle-and-two-coboundary]]).
+[F1] Two-coboundaries have the form $(\delta u)(g,h)=g\cdot u(h)-u(gh)+u(g)$ ([[def-normalized-two-cocycle-and-two-coboundary]]).
 
-[F2] Factor sets are defined by the section formula
-([[def-normalized-set-theoretic-section-and-factor-set]]).
+[F2] Factor sets are defined by the section formula ([[def-normalized-set-theoretic-section-and-factor-set]]).
 
-[L1] Each factor set is a normalized two-cocycle
-([[lem-factor-set-of-a-section-is-a-normalized-two-cocycle]]).
+[L1] Each factor set is a normalized two-cocycle ([[lem-factor-set-of-a-section-is-a-normalized-two-cocycle]]).
 
 ## Proof
 

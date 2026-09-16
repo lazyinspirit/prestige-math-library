@@ -39,12 +39,9 @@ equivariantly and diffeomorphically for $n\ge1$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $n\ge1$, and the natural actions on real and
-complex lines.
+**Given:** $\mathrm{AC}_\omega$, $n\ge1$, and the natural actions on real and complex lines.
 
-[A1] A transitive smooth action identifies the manifold with the quotient by
-a stabilizer. [[def-countable-choice]],
-[[cor-transitive-smooth-actions-identify-m-with-g-mod-h]].
+[A1] A transitive smooth action identifies the manifold with the quotient by a stabilizer. [[def-countable-choice]], [[cor-transitive-smooth-actions-identify-m-with-g-mod-h]].
 
 ## Verification
 

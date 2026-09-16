@@ -40,8 +40,7 @@ is an explicit coordinate-bump embedding of $S^1$ into $\mathbb R^4$.
 
 ## Facts & Assumptions
 
-**Given:** The two-chart cover of $S^1$ and the chosen bump functions
-$\phi_\pm$.
+**Given:** The two-chart cover of $S^1$ and the chosen bump functions $\phi_\pm$.
 
 ## Verification
 **Proof technique:** direct.

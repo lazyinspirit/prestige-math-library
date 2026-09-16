@@ -33,12 +33,9 @@ where $\kappa_2(V)=\|V\|_2\|V^{-1}\|_2$.
 
 ## Facts & Assumptions
 
-**Given:** A diagonalization $A=V\Lambda V^{-1}$ and an $m$th GMRES residual
-$r_m$.
+**Given:** A diagonalization $A=V\Lambda V^{-1}$ and an $m$th GMRES residual $r_m$.
 
-[L1] One has $r_m=p_m(A)r_0$ for some polynomial $p_m$ with $\deg p_m\le m$ and
-$p_m(0)=1$, and GMRES chooses such a polynomial minimizing the residual norm
-([[prop-gmres-residuals-are-polynomials-in-a-applied-to-the-initial-residual]]).
+[L1] One has $r_m=p_m(A)r_0$ for some polynomial $p_m$ with $\deg p_m\le m$ and $p_m(0)=1$, and GMRES chooses such a polynomial minimizing the residual norm ([[prop-gmres-residuals-are-polynomials-in-a-applied-to-the-initial-residual]]).
 
 ## Proof
 **Proof technique:** direct.

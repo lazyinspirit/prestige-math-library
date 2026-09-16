@@ -33,11 +33,9 @@ proper ideal. Then $A/J$ is a Henselian local ring.
 
 ## Facts & Assumptions
 
-**Given:** A Henselian local ring $(A,\mathfrak m)$ and a proper ideal
-$J \subsetneq A$.
+**Given:** A Henselian local ring $(A,\mathfrak m)$ and a proper ideal $J \subsetneq A$.
 
-[L1] Quotient pairs inherit the coprime monic factor-lifting property
-([[lem-henselian-quotient-factor-lift]]).
+[L1] Quotient pairs inherit the coprime monic factor-lifting property ([[lem-henselian-quotient-factor-lift]]).
 
 ## Proof
 

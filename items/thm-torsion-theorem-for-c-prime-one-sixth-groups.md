@@ -41,9 +41,7 @@ defining relator.
 
 [F1] Powers in a group are written multiplicatively as in [[def-group-power]].
 
-[F2] Theorem 5.6 of the cited Williams source is the classical torsion theorem
-for symmetrised $C'(1/6)$ presentations: every nontrivial element of finite
-order is conjugate to a power of a root of some defining relator.
+[F2] Theorem 5.6 of the cited Williams source is the classical torsion theorem for symmetrised $C'(1/6)$ presentations: every nontrivial element of finite order is conjugate to a power of a root of some defining relator.
 
 ## Proof
 

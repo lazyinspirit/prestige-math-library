@@ -26,11 +26,9 @@ the sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, natural numbers $n,m\ge1$, and a continuous function
-$f : \mathbb{R}^n \to \mathbb{R}^m$.
+**Given:** The Axiom of Countable Choice, natural numbers $n,m\ge1$, and a continuous function $f : \mathbb{R}^n \to \mathbb{R}^m$.
 
-[L1] A continuous map has Borel preimages of Borel sets.
-([[thm-continuous-preimages-of-borel-sets-are-borel]])
+[L1] A continuous map has Borel preimages of Borel sets. ([[thm-continuous-preimages-of-borel-sets-are-borel]])
 
 ## Proof
 

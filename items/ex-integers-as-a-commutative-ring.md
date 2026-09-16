@@ -83,16 +83,8 @@ be applied to $\mathbb{Z}$ without translation.
 
 ## Remarks
 
-- **The multiplicative axiom matches on the nose.** [[thm-int-ordered-ring]]
-  proves the *strict* statement "$0 < x$ and $0 < y$ imply $0 < xy$", which is
-  exactly axiom (OR2) of [[def-ordered-ring]] as that definition states it. That
-  is why the step establishing claim 2 above is a citation and not an argument, and it is the reason
-  [[def-ordered-ring]] adopts the strict form.
+- **The multiplicative axiom matches on the nose.** [[thm-int-ordered-ring]] proves the *strict* statement "$0 < x$ and $0 < y$ imply $0 < xy$", which is exactly axiom (OR2) of [[def-ordered-ring]] as that definition states it. That is why the step establishing claim 2 above is a citation and not an argument, and it is the reason [[def-ordered-ring]] adopts the strict form.
 
-- **$\mathbb{Z}$ is not a field**, and it is an integral domain; both are
-  recorded separately in [[ex-integers-are-an-integral-domain-not-a-field]], for
-  which this item supplies the ring structure.
+- **$\mathbb{Z}$ is not a field**, and it is an integral domain; both are recorded separately in [[ex-integers-are-an-integral-domain-not-a-field]], for which this item supplies the ring structure.
 
-- **A later page that needs "$\mathbb{Z}$ is a ring" on its own spine must
-  re-derive it there rather than cite this item**, since examples pages are
-  leaves in the reading order. The derivation is the three lines above.
+- **A later page that needs "$\mathbb{Z}$ is a ring" on its own spine must re-derive it there rather than cite this item**, since examples pages are leaves in the reading order. The derivation is the three lines above.

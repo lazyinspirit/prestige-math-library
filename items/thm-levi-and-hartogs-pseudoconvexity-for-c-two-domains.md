@@ -39,17 +39,13 @@ is Hartogs pseudoconvex, then $\Omega$ is Levi pseudoconvex.
 
 **Given:** A domain $\Omega\subseteq\mathbb C^m$ with $C^2$ boundary.
 
-[L1] A Hartogs pseudoconvex domain admits a continuous plurisubharmonic
-exhaustion ([[thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity]],
-[[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]]).
+[L1] A Hartogs pseudoconvex domain admits a continuous plurisubharmonic exhaustion ([[thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity]], [[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]]).
 
-[L2] The restriction of a plurisubharmonic function to an affine complex line
-is subharmonic or identically $-\infty$ ([[def-plurisubharmonic-function]]).
+[L2] The restriction of a plurisubharmonic function to an affine complex line is subharmonic or identically $-\infty$ ([[def-plurisubharmonic-function]]).
 
 [L3] Levi pseudoconvexity is the tangential Levi-form condition and is independent of the chosen defining function ([[def-levi-pseudoconvex-domain]], [[lem-levi-pseudoconvexity-is-independent-of-defining-function]]).
 
-[L4] A plane subharmonic function cannot exceed its finite boundary maximum on
-a disc unless it is constant ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
+[L4] A plane subharmonic function cannot exceed its finite boundary maximum on a disc unless it is constant ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
 
 ## Proof
 

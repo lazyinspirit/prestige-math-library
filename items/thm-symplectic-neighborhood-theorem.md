@@ -32,24 +32,15 @@ bundles.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and the closed submanifolds, map, and normal
-bundle isomorphism in the statement.
+**Given:** $\mathrm{AC}_\omega$ and the closed submanifolds, map, and normal bundle isomorphism in the statement.
 
-[F1] The symplectic normal gives the splitting
-$TM_j|_{S_j}=TS_j\oplus N^{\omega_j}S_j$.
-[[def-symplectic-normal-bundle-of-a-symplectic-submanifold]].
+[F1] The symplectic normal gives the splitting $TM_j|_{S_j}=TS_j\oplus N^{\omega_j}S_j$. [[def-symplectic-normal-bundle-of-a-symplectic-submanifold]].
 
-[F2] Under $\mathrm{AC}_\omega$, closed embedded submanifolds have tubular
-neighbourhoods. [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]].
+[F2] Under $\mathrm{AC}_\omega$, closed embedded submanifolds have tubular neighbourhoods. [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]].
 
-[F3] A closed form vanishing as a tensor along a closed submanifold has a
-relative primitive whose first jet vanishes there.
-[[lem-relative-poincare-primitive-near-a-submanifold]].
+[F3] A closed form vanishing as a tensor along a closed submanifold has a relative primitive whose first jet vanishes there. [[lem-relative-poincare-primitive-near-a-submanifold]].
 
-[F4] The Moser equation makes the evolving pullback constant, and smooth
-time-dependent fields have unique local smooth evolutions.
-[[lem-moser-pullback-differentiation-equation]],
-[[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]].
+[F4] The Moser equation makes the evolving pullback constant, and smooth time-dependent fields have unique local smooth evolutions. [[lem-moser-pullback-differentiation-equation]], [[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]].
 
 ## Proof
 

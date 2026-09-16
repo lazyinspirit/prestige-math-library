@@ -34,11 +34,9 @@ $Z(\mathfrak g)=0$ and $[\mathfrak g,\mathfrak g]=\mathfrak g$.
 
 **Given:** Such a Lie algebra $\mathfrak g$.
 
-[L1] Its Killing form is nondegenerate
-([[thm-cartans-semisimplicity-criterion]]).
+[L1] Its Killing form is nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
 
-[L2] The Killing form is the trace form of the adjoint representation
-([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
+[L2] The Killing form is the trace form of the adjoint representation ([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
 
 ## Proof
 

@@ -38,15 +38,11 @@ $$\|K_o(x)-K_o(y)\|_\infty=d(x,y)\qquad (x,y\in M).$$
 
 ## Facts & Assumptions
 
-**Given:** A nonempty metric space $(M,d)$, a basepoint $o\in M$, and the map
-$K_o:M\to C_b(M)$.
+**Given:** A nonempty metric space $(M,d)$, a basepoint $o\in M$, and the map $K_o:M\to C_b(M)$.
 
-[L1] For each $x\in M$,
-$K_o(x)(z)=d(x,z)-d(o,z)$ defines a bounded continuous function on $M$
-([[def-kuratowski-distance-map]]).
+[L1] For each $x\in M$, $K_o(x)(z)=d(x,z)-d(o,z)$ defines a bounded continuous function on $M$ ([[def-kuratowski-distance-map]]).
 
-[L2] An isometric embedding preserves all distances
-([[def-isometry-and-metric-embedding]]).
+[L2] An isometric embedding preserves all distances ([[def-isometry-and-metric-embedding]]).
 
 ## Proof
 
@@ -60,6 +56,4 @@ $K_o(x)(z)=d(x,z)-d(o,z)$ defines a bounded continuous function on $M$
 
 ## Remarks
 
-- The proof is two lines long once the target is chosen correctly. The real work
-  is the based definition, which keeps the functions bounded on unbounded
-  metric spaces.
+- The proof is two lines long once the target is chosen correctly. The real work is the based definition, which keeps the functions bounded on unbounded metric spaces.

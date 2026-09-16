@@ -29,8 +29,7 @@ $\mathrm{NWORKSPACE}(s(n))=\mathrm{coNWORKSPACE}(s(n))$.
 
 ## Facts & Assumptions
 
-**Given:** a fixed nondeterministic decider $M$ for $A\in\mathrm{NWORKSPACE}(s)$,
-where $s$ has the stated constructibility and logarithmic floor.
+**Given:** a fixed nondeterministic decider $M$ for $A\in\mathrm{NWORKSPACE}(s)$, where $s$ has the stated constructibility and logarithmic floor.
 
 [L2] The inductive-counting algorithm certifies nonreachability in an $N$-vertex digraph using $O(\log N)$ work space and a polynomial-length read-once certificate ([[lem-nonreachability-has-an-inductive-counting-certificate]]).
 

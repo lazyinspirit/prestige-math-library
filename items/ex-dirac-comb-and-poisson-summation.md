@@ -37,17 +37,11 @@ $$\sum_{k\in\mathbb Z^n}e^{-\pi t|k|^2} =t^{-n/2}\sum_{k\in\mathbb Z^n}e^{-\pi|k
 
 **Given:** [[def-countable-choice|Countable Choice]], $n\geq1$, and $t>0$.
 
-[F1] The unit-lattice comb is Fourier invariant
-([[thm-unit-lattice-dirac-comb-is-fourier-invariant-in-tempered-distributions]]).
+[F1] The unit-lattice comb is Fourier invariant ([[thm-unit-lattice-dirac-comb-is-fourier-invariant-in-tempered-distributions]]).
 
-[F2] The $2\pi$-normalized Gaussian formula is
-$\widehat g_t(\xi)=t^{-n/2}e^{-\pi|\xi|^2/t}$
-([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
+[F2] The $2\pi$-normalized Gaussian formula is $\widehat g_t(\xi)=t^{-n/2}e^{-\pi|\xi|^2/t}$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
 
-[F3] The defining lattice sum for the comb converges absolutely on every
-Schwartz test ([[def-dirac-comb]]), and the Fourier transform sends Schwartz
-tests to Schwartz tests
-([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]).
+[F3] The defining lattice sum for the comb converges absolutely on every Schwartz test ([[def-dirac-comb]]), and the Fourier transform sends Schwartz tests to Schwartz tests ([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]).
 
 ## Verification
 
@@ -57,8 +51,7 @@ tests to Schwartz tests
 
 $$\sum_k\widehat\varphi(k) =\langle\operatorname{III},\widehat\varphi\rangle =\langle\mathcal F\operatorname{III},\varphi\rangle =\langle\operatorname{III},\varphi\rangle =\sum_k\varphi(k).$$
 
-This is Poisson summation at the origin, with no rearrangement of a
-conditionally convergent series. [F1, F3]
+This is Poisson summation at the origin, with no rearrangement of a conditionally convergent series. [F1, F3]
 
 1.2 Conversely, suppose the displayed lattice-sum identity holds for every $\varphi\in\mathcal S$. [F3, def. equality in tempered distributions]
 
@@ -66,7 +59,6 @@ Then [F3] and the definition of the distributional Fourier transform give
 
 $$\langle\mathcal F\operatorname{III},\varphi\rangle=\langle\operatorname{III},\widehat\varphi\rangle=\langle\operatorname{III},\varphi\rangle.$$
 
-Thus $\mathcal F\operatorname{III}=\operatorname{III}$ in $\mathcal S'$, which
-proves the asserted equivalence. [F3, def. equality in tempered distributions]
+Thus $\mathcal F\operatorname{III}=\operatorname{III}$ in $\mathcal S'$, which proves the asserted equivalence. [F3, def. equality in tempered distributions]
 
 2.1 Apply step 1.1 to $g_t$ and substitute [F2].  The left and right lattice sums become exactly the two sides of the theta transformation.  At $t=1$ the Gaussian is itself Fourier invariant; as $t$ varies, the formula exchanges $t$ and $1/t$ with the dimension factor $t^{-n/2}$.  Countable Choice is used only through [F1]–[F3]. [F2, step 1.1] ∎

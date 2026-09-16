@@ -31,8 +31,7 @@ A symplectic manifold can have odd dimension.
 
 **Given:** A symplectic manifold $(M,\omega)$.
 
-[F1] Every finite-dimensional symplectic vector space has even dimension.
-[[prop-symplectic-vector-spaces-have-even-dimension]].
+[F1] Every finite-dimensional symplectic vector space has even dimension. [[prop-symplectic-vector-spaces-have-even-dimension]].
 
 ## Refutation
 

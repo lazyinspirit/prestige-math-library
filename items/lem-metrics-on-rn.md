@@ -120,16 +120,6 @@ statement about $d_\infty$ in this library.
 
 ## Remarks
 
-- **$\mathbb{R}^n$ is defined ZFC-natively here**, as the set of functions from
-  the von Neumann natural $n$ to $\mathbb{R}$, precisely so that its coordinates
-  are indexed by $k < n$ and the finite-sum machinery of [[def-finite-sum]],
-  [[thm-minkowski-finite]] and [[thm-cauchy-schwarz-finite]], all of which sum
-  over $k < n$, applies without any reindexing.
-- **No rational power appears anywhere above.** The triangle inequality for
-  $d_2$ is obtained from Cauchy-Schwarz and the existence of square roots, not
-  from Minkowski at $p = 2$, so this lemma does not depend on the theory of
-  rational exponents. Minkowski is used only at $p = 1$, where its statement is
-  the termwise sum of the two-term triangle inequality.
-- **The three metrics are Lipschitz equivalent, with explicit constants,** and
-  in particular have the same topology; that computation is on the companion
-  page and is not needed here.
+- **$\mathbb{R}^n$ is defined ZFC-natively here**, as the set of functions from the von Neumann natural $n$ to $\mathbb{R}$, precisely so that its coordinates are indexed by $k < n$ and the finite-sum machinery of [[def-finite-sum]], [[thm-minkowski-finite]] and [[thm-cauchy-schwarz-finite]], all of which sum over $k < n$, applies without any reindexing.
+- **No rational power appears anywhere above.** The triangle inequality for $d_2$ is obtained from Cauchy-Schwarz and the existence of square roots, not from Minkowski at $p = 2$, so this lemma does not depend on the theory of rational exponents. Minkowski is used only at $p = 1$, where its statement is the termwise sum of the two-term triangle inequality.
+- **The three metrics are Lipschitz equivalent, with explicit constants,** and in particular have the same topology; that computation is on the companion page and is not needed here.

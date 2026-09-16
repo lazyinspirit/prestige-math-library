@@ -26,17 +26,13 @@ Mapping cone defines a functor on the homotopy category with no extra choices.
 
 ## Facts & Assumptions
 
-**Given:** The zero map $0:C_\bullet\to D_\bullet$, where $C_\bullet$ is the
-stalk complex $\mathbb Z[0]$ and $D_\bullet$ is the stalk complex $\mathbb Z[1]$.
+**Given:** The zero map $0:C_\bullet\to D_\bullet$, where $C_\bullet$ is the stalk complex $\mathbb Z[0]$ and $D_\bullet$ is the stalk complex $\mathbb Z[1]$.
 
-[A1] The statement refuted is: mapping cone defines a functor on the homotopy
-category with no extra choices.
+[A1] The statement refuted is: mapping cone defines a functor on the homotopy category with no extra choices.
 
-[L1] Chain homotopies of maps can alter the induced upper-triangular cone map
-([[def-chain-homotopy]]).
+[L1] Chain homotopies of maps can alter the induced upper-triangular cone map ([[def-chain-homotopy]]).
 
-[L2] Strict functoriality is proved only on the arrow category of chain maps
-([[prop-mapping-cone-is-functorial-on-the-arrow-category-of-complexes]]).
+[L2] Strict functoriality is proved only on the arrow category of chain maps ([[prop-mapping-cone-is-functorial-on-the-arrow-category-of-complexes]]).
 
 ## Refutation
 

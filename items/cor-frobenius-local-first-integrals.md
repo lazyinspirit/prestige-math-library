@@ -41,8 +41,7 @@ $\mathcal D$.
 
 ## Facts & Assumptions
 
-**Given:** An involutive rank-$k$ distribution $\mathcal D$ and a point
-$p \in M$.
+**Given:** An involutive rank-$k$ distribution $\mathcal D$ and a point $p \in M$.
 
 [A1] Choose Frobenius coordinates around $p$.
 
@@ -51,14 +50,10 @@ $p \in M$.
 **Proof technique:** direct.
 
 1.1 In Frobenius coordinates $(x^1,\dots,x^n)$, the distribution is spanned by [given]
-$\partial_{x^1},\dots,\partial_{x^k}$. Define
-$$F(x^1,\dots,x^n) := (x^{k+1},\dots,x^n).$$
-Its differential has rank $n-k$, so $F$ is a submersion. [given, construct]
+$\partial_{x^1},\dots,\partial_{x^k}$. Define $$F(x^1,\dots,x^n) := (x^{k+1},\dots,x^n).$$ Its differential has rank $n-k$, so $F$ is a submersion. [given, construct]
 
 1.2 A tangent vector lies in $\ker dF$ exactly when its last $n-k$ coordinate [given]
-components vanish, so precisely when it is a linear combination of
-$\partial_{x^1},\dots,\partial_{x^k}$. Hence $\ker dF = \mathcal D$.
-[given, algebra]
+components vanish, so precisely when it is a linear combination of $\partial_{x^1},\dots,\partial_{x^k}$. Hence $\ker dF = \mathcal D$. [given, algebra]
 
 1.3 Therefore every involutive distribution is locally the common kernel of [given]
 $n-k$ smooth first integrals. [given] ∎

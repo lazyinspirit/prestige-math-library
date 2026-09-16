@@ -35,14 +35,11 @@ such that every quotient $G/N$ is a finite $p$-group.
 
 **Given:** A topological group $G$.
 
-[F1] A pro-$p$ group is, by definition, a topological group isomorphic to an
-inverse limit of finite $p$-groups ([[def-pro-p-group]]).
+[F1] A pro-$p$ group is, by definition, a topological group isomorphic to an inverse limit of finite $p$-groups ([[def-pro-p-group]]).
 
-[L1] A profinite group is a topological group isomorphic to an inverse limit of
-finite discrete groups ([[def-profinite-group-by-inverse-limit]]).
+[L1] A profinite group is a topological group isomorphic to an inverse limit of finite discrete groups ([[def-profinite-group-by-inverse-limit]]).
 
-[L2] In an inverse-limit presentation by finite groups, the coordinate kernels
-form an open normal neighbourhood basis ([[lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis]]).
+[L2] In an inverse-limit presentation by finite groups, the coordinate kernels form an open normal neighbourhood basis ([[lem-kernels-of-finite-projections-form-an-open-normal-neighbourhood-basis]]).
 
 ## Proof
 

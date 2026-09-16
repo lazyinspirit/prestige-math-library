@@ -44,12 +44,9 @@ is an isomorphism.
 
 **Given:** The displayed cartesian square.
 
-[L1] The square is a pullback
-([[thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact]]).
+[L1] The square is a pullback ([[thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact]]).
 
-[L2] In a pullback square, the induced map on the kernels of the parallel legs
-is an isomorphism
-([[thm-in-a-pullback-square-the-induced-morphism-on-the-kernels-of-the-parallel-legs-is-an-isomorphism]]).
+[L2] In a pullback square, the induced map on the kernels of the parallel legs is an isomorphism ([[thm-in-a-pullback-square-the-induced-morphism-on-the-kernels-of-the-parallel-legs-is-an-isomorphism]]).
 
 ## Proof
 

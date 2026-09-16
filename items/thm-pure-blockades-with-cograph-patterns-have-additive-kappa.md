@@ -40,25 +40,17 @@ $$ \kappa(G[V(\mathcal B)])\geq \sum_{i=1}^{t}\kappa(G[B_i]). $$
 
 ## Facts & Assumptions
 
-**Given:** A pure blockade $\mathcal B=(B_1,\dots,B_t)$ in a graph $G$, with
-pattern graph $P$ a cograph.
+**Given:** A pure blockade $\mathcal B=(B_1,\dots,B_t)$ in a graph $G$, with pattern graph $P$ a cograph.
 
-[L1] Every induced subgraph of a cograph is a cograph
-([[lem-induced-subgraphs-of-cographs-are-cographs]]).
+[L1] Every induced subgraph of a cograph is a cograph ([[lem-induced-subgraphs-of-cographs-are-cographs]]).
 
-[L2] Every nontrivial cograph is disconnected or has disconnected complement
-([[thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement]]).
+[L2] Every nontrivial cograph is disconnected or has disconnected complement ([[thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement]]).
 
-[L3] Distinct connected components are anticomplete, and distinct
-anticomponents are complete
-([[lem-components-are-anticomplete-and-anticomponents-complete]]).
+[L3] Distinct connected components are anticomplete, and distinct anticomponents are complete ([[lem-components-are-anticomplete-and-anticomponents-complete]]).
 
-[L4] In the pattern graph, two indices are adjacent exactly when the
-corresponding two blocks are complete
-([[def-pattern-graph-of-a-pure-blockade]]).
+[L4] In the pattern graph, two indices are adjacent exactly when the corresponding two blocks are complete ([[def-pattern-graph-of-a-pure-blockade]]).
 
-[L5] $\kappa(X)=\alpha(X)\omega(X)$ for every induced subgraph $X$
-([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
+[L5] $\kappa(X)=\alpha(X)\omega(X)$ for every induced subgraph $X$ ([[def-kappa-of-a-graph]], [[def-clique-stable-set-and-numbers]]).
 
 ## Proof
 

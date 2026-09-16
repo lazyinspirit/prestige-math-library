@@ -101,29 +101,10 @@ order.
 
 ## Remarks
 
-- **The gap $(\tfrac13,\tfrac23)$ worked out.** $\tfrac13 = \Phi(0,2,2,2,\dots)$
-  and $\tfrac23 = \Phi(2,0,0,0,\dots)$, both in $C$, and
-  $C \subseteq C_1 = [0,\tfrac13] \cup [\tfrac23,1]$ ([[def-cantor-set]]) shows
-  $(\tfrac13,\tfrac23) \cap C = \varnothing$. Step 2.2 gives
-  $\gamma(\tfrac13) = \gamma(\tfrac23) = \tfrac12$, so $c \equiv \tfrac12$ on
-  $[\tfrac13, \tfrac23]$; this and three further values are computed in
-  [[ex-cantor-function-values]].
+- **The gap $(\tfrac13,\tfrac23)$ worked out.** $\tfrac13 = \Phi(0,2,2,2,\dots)$ and $\tfrac23 = \Phi(2,0,0,0,\dots)$, both in $C$, and $C \subseteq C_1 = [0,\tfrac13] \cup [\tfrac23,1]$ ([[def-cantor-set]]) shows $(\tfrac13,\tfrac23) \cap C = \varnothing$. Step 2.2 gives $\gamma(\tfrac13) = \gamma(\tfrac23) = \tfrac12$, so $c \equiv \tfrac12$ on $[\tfrac13, \tfrac23]$; this and three further values are computed in [[ex-cantor-function-values]].
 
-- **Where each hypothesis is used.** Step 1.1 is the only place the ternary
-  comparison is made, and everything else rests on it: monotonicity of $c$ comes
-  from monotonicity of the set $A_x$, and the constancy across gaps comes from
-  step 2.2, which is a statement about digit sequences and not about the topology
-  of $C$.
+- **Where each hypothesis is used.** Step 1.1 is the only place the ternary comparison is made, and everything else rests on it: monotonicity of $c$ comes from monotonicity of the set $A_x$, and the constancy across gaps comes from step 2.2, which is a statement about digit sequences and not about the topology of $C$.
 
-- **What is deliberately absent.** Continuity, differentiability and any
-  statement about the derivative of $c$ are outside the vocabulary available at
-  this point in the reading order and none of them is asserted anywhere above.
-  What is proved is that $c$ climbs from $0$ to $1$, never decreases, misses no
-  value of $[0,1]$, and is locally constant off a set of measure zero
-  ([[thm-cantor-set-properties]]). That combination is already the paradoxical
-  content of the example.
+- **What is deliberately absent.** Continuity, differentiability and any statement about the derivative of $c$ are outside the vocabulary available at this point in the reading order and none of them is asserted anywhere above. What is proved is that $c$ climbs from $0$ to $1$, never decreases, misses no value of $[0,1]$, and is locally constant off a set of measure zero ([[thm-cantor-set-properties]]). That combination is already the paradoxical content of the example.
 
-- **Surjectivity is a binary expansion theorem in disguise.** Step 3.2 constructs
-  the binary digits of an arbitrary $s \in [0,1]$ by the same canonical recursion
-  that [[thm-cantor-set-ternary-description]] uses for ternary digits, so no
-  general expansion theorem is presupposed and no choice is made.
+- **Surjectivity is a binary expansion theorem in disguise.** Step 3.2 constructs the binary digits of an arbitrary $s \in [0,1]$ by the same canonical recursion that [[thm-cantor-set-ternary-description]] uses for ternary digits, so no general expansion theorem is presupposed and no choice is made.

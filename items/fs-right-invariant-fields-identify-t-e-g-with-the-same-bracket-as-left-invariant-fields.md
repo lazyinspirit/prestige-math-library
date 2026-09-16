@@ -35,14 +35,11 @@ ordinary left-invariant fields.
 
 **Given:** $\mathrm{AC}_\omega$ and the upper-unitriangular $3$-by-$3$ group.
 
-[F1] Right-invariant extensions carry the negative of the tangent bracket.
-[[prop-right-invariant-fields-carry-the-opposite-lie-bracket]].
+[F1] Right-invariant extensions carry the negative of the tangent bracket. [[prop-right-invariant-fields-carry-the-opposite-lie-bracket]].
 
-[F2] Matrix units obey $E_{ij}E_{kl}=\delta_{jk}E_{il}$.
-[[def-matrix-units]].
+[F2] Matrix units obey $E_{ij}E_{kl}=\delta_{jk}E_{il}$. [[def-matrix-units]].
 
-[F3] Countable choice is the exact assumption inherited from [F1].
-[[def-countable-choice]].
+[F3] Countable choice is the exact assumption inherited from [F1]. [[def-countable-choice]].
 
 ## Refutation
 

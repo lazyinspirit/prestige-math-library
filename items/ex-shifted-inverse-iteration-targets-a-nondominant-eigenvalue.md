@@ -38,10 +38,7 @@ eigenvalue $1$, because that eigenvalue is nearest to the shift.
 
 **Given:** The diagonal matrix $A$, the shift $\mu=0.8$, and the start vector $x_0$.
 
-[L1] For a diagonalisable matrix, a shift outside the spectrum, a uniquely
-nearest simple eigenvalue, and a start vector with nonzero component in its
-eigendirection, shifted inverse iteration converges to that eigendirection
-([[thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift]]).
+[L1] For a diagonalisable matrix, a shift outside the spectrum, a uniquely nearest simple eigenvalue, and a start vector with nonzero component in its eigendirection, shifted inverse iteration converges to that eigendirection ([[thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift]]).
 
 ## Verification
 

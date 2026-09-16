@@ -32,12 +32,9 @@ all small limits.
 
 **Given:** The underlying-set functor $U$.
 
-[L1] $\mathbf{Top}$ is complete, and $U$ preserves every small limit and
-colimit
-([[thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both]]).
+[L1] $\mathbf{Top}$ is complete, and $U$ preserves every small limit and colimit ([[thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both]]).
 
-[F1] Preservation means the image of every limiting cone is limiting
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F1] Preservation means the image of every limiting cone is limiting ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
 ## Refutation
 

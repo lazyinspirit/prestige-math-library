@@ -44,23 +44,16 @@ $$37\cdot3-11\cdot10=1.$$
 
 **Given:** The integers $37$ and $11$.
 
-[F1] For a rational number, the continued-fraction algorithm terminates and its
-digits are exactly the Euclidean quotient digits
-([[thm-rational-continued-fraction-termination]]).
+[F1] For a rational number, the continued-fraction algorithm terminates and its digits are exactly the Euclidean quotient digits ([[thm-rational-continued-fraction-termination]]).
 
-[F2] Bezout's identity characterizes $\gcd(a,b)$ as an integer linear
-combination of $a$ and $b$ ([[thm-bezout-identity]]).
+[F2] Bezout's identity characterizes $\gcd(a,b)$ as an integer linear combination of $a$ and $b$ ([[thm-bezout-identity]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 The Euclidean quotient digits are $3,2,1,3$, so [F1] gives. [F1, given, algebra]
-$$\frac{37}{11}=[3;2,1,3].$$
-Its convergents are
-$$3,\qquad 3+\frac12=\frac72,\qquad 3+\frac{1}{2+\frac11}=\frac{10}{3},\qquad 3+\frac{1}{2+\frac{1}{1+\frac13}}=\frac{37}{11}.$$ [F1, given, algebra]
+$$\frac{37}{11}=[3;2,1,3].$$ Its convergents are $$3,\qquad 3+\frac12=\frac72,\qquad 3+\frac{1}{2+\frac11}=\frac{10}{3},\qquad 3+\frac{1}{2+\frac{1}{1+\frac13}}=\frac{37}{11}.$$ [F1, given, algebra]
 
 2.1 The penultimate convergent is $10/3$, and. [F2, step 1.1, algebra]
-$$37\cdot3-11\cdot10=111-110=1.$$
-So $1$ is an explicit integer linear combination of $37$ and $11$, which is
-exactly the Bezout identity for $\gcd(37,11)=1$ in the sense of [F2]. [F2, step 1.1, algebra] ∎
+$$37\cdot3-11\cdot10=111-110=1.$$ So $1$ is an explicit integer linear combination of $37$ and $11$, which is exactly the Bezout identity for $\gcd(37,11)=1$ in the sense of [F2]. [F2, step 1.1, algebra] ∎

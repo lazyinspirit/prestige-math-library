@@ -30,8 +30,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** A skeleton of $\mathbf{Set}$ containing an infinite set $D$ with
-$D\cong D\times D$.
+**Given:** A skeleton of $\mathbf{Set}$ containing an infinite set $D$ with $D\cong D\times D$.
 
 [L1] A strict monoidal category makes associativity and unit equalities literal and all constraints identities ([[def-strict-monoidal-category]]).
 

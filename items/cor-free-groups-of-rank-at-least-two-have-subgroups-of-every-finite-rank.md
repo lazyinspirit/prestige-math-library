@@ -33,14 +33,11 @@ there is a subgroup of $F$ of rank $m$.
 
 **Given:** A free group $F$ of rank at least $2$.
 
-[L1] A free basis is the generating subset appearing in the universal property
-of a free group ([[def-free-basis]]).
+[L1] A free basis is the generating subset appearing in the universal property of a free group ([[def-free-basis]]).
 
-[L2] Finite rank means cardinality of a finite free basis
-([[def-rank-of-a-finite-rank-free-group]]).
+[L2] Finite rank means cardinality of a finite free basis ([[def-rank-of-a-finite-rank-free-group]]).
 
-[L3] A subgroup of index $d$ in a rank-two free group has rank $1+d$
-([[thm-schreier-index-rank-formula]]).
+[L3] A subgroup of index $d$ in a rank-two free group has rank $1+d$ ([[thm-schreier-index-rank-formula]]).
 
 ## Proof
 

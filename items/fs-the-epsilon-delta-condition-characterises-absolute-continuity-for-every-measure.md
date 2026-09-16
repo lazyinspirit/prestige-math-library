@@ -31,11 +31,7 @@ sources:
 
 **Given:** The measure $\nu(E)=\int_Ex^{-1}\chi_{(0,1)}(x)\,d\lambda(x)$.
 
-[L1] This nonnegative density defines a measure
-([[def-measure-with-density]]), and the integral over every Lebesgue-null set
-vanishes ([[cor-integral-over-a-null-set-vanishes]]), so the measure is
-absolutely continuous with respect to Lebesgue measure by
-[[def-absolutely-continuous-with-respect-to-a-positive-measure]].
+[L1] This nonnegative density defines a measure ([[def-measure-with-density]]), and the integral over every Lebesgue-null set vanishes ([[cor-integral-over-a-null-set-vanishes]]), so the measure is absolutely continuous with respect to Lebesgue measure by [[def-absolutely-continuous-with-respect-to-a-positive-measure]].
 
 [L2] The valid theorem requires finiteness. ([[thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures]])
 

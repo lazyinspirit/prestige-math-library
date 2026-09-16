@@ -33,18 +33,13 @@ natural in $A$.
 
 **Given:** An object $A\in\mathcal D$.
 
-[L1] The chosen projective resolution of $A$ is an exact augmented complex
-$$\cdots\to P_1(A)\to P_0(A)\to A\to0$$
-([[def-projective-resolution-in-an-abelian-category]]).
+[L1] The chosen projective resolution of $A$ is an exact augmented complex $$\cdots\to P_1(A)\to P_0(A)\to A\to0$$ ([[def-projective-resolution-in-an-abelian-category]]).
 
-[L2] The zeroth homology of the deleted complex is the cokernel of the boundary
-map into degree $0$ ([[def-homology-object-of-a-chain-complex]]).
+[L2] The zeroth homology of the deleted complex is the cokernel of the boundary map into degree $0$ ([[def-homology-object-of-a-chain-complex]]).
 
-[L3] Right exactness means that $F$ preserves the cokernel appearing at the end
-of the displayed augmented resolution ([[def-left-exact-and-right-exact-functor]]).
+[L3] Right exactness means that $F$ preserves the cokernel appearing at the end of the displayed augmented resolution ([[def-left-exact-and-right-exact-functor]]).
 
-[L4] The assignments $A\mapsto L_0^PF(A)$ are already functorial
-([[thm-left-derived-functors-relative-to-supplied-data-are-additive-functors]]).
+[L4] The assignments $A\mapsto L_0^PF(A)$ are already functorial ([[thm-left-derived-functors-relative-to-supplied-data-are-additive-functors]]).
 
 ## Proof
 

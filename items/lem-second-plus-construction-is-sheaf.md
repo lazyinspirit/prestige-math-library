@@ -33,14 +33,11 @@ construction $\mathcal F^{++}=(\mathcal F^+)^+$ is a sheaf.
 
 **Given:** A presheaf $\mathcal F$ on $X$.
 
-[F1] The plus construction records germ-compatible local presentations and
-single-chart classes ([[def-presheaf-plus-construction]]).
+[F1] The plus construction records germ-compatible local presentations and single-chart classes ([[def-presheaf-plus-construction]]).
 
-[L1] The first plus construction $\mathcal F^+$ is separated
-([[lem-first-plus-construction-is-separated]]).
+[L1] The first plus construction $\mathcal F^+$ is separated ([[lem-first-plus-construction-is-separated]]).
 
-[F2] A sheaf is exactly a presheaf satisfying locality and unique gluing on
-every open cover ([[def-sheaf-on-topological-space]]).
+[F2] A sheaf is exactly a presheaf satisfying locality and unique gluing on every open cover ([[def-sheaf-on-topological-space]]).
 
 ## Proof
 

@@ -36,14 +36,11 @@ is a continuous strictly increasing bijection.
 
 **Given:** $L$ on $(0,\infty)$ and a target $r\in\mathbb R$.
 
-[L1] $L$ is continuous and strictly increasing on $(0,\infty)$
-([[cor-integral-logarithm-is-strictly-increasing]]).
+[L1] $L$ is continuous and strictly increasing on $(0,\infty)$ ([[cor-integral-logarithm-is-strictly-increasing]]).
 
-[L2] For every real $r$, there are positive $a,b$ with
-$L(a)<r<L(b)$ ([[thm-integral-logarithm-is-unbounded]]).
+[L2] For every real $r$, there are positive $a,b$ with $L(a)<r<L(b)$ ([[thm-integral-logarithm-is-unbounded]]).
 
-[L3] A continuous real function on $[a,b]$ takes every value between its
-endpoint values ([[thm-intermediate-value]]).
+[L3] A continuous real function on $[a,b]$ takes every value between its endpoint values ([[thm-intermediate-value]]).
 
 ## Proof
 

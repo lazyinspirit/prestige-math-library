@@ -29,11 +29,9 @@ principle is required.
 
 ## Facts & Assumptions
 
-**Given:** An $R$-oriented metric bundle and a supplied finite trivializing
-cover $(U_1,\ldots,U_m)$; the enumeration witnesses finiteness.
+**Given:** An $R$-oriented metric bundle and a supplied finite trivializing cover $(U_1,\ldots,U_m)$; the enumeration witnesses finiteness.
 
-[F1] [[lem-thom-isomorphisms-glue-over-two-trivializing-opens]] glues two
-compatible normalized Thom isomorphisms and proves uniqueness.
+[F1] [[lem-thom-isomorphisms-glue-over-two-trivializing-opens]] glues two compatible normalized Thom isomorphisms and proves uniqueness.
 
 ## Proof
 

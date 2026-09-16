@@ -69,11 +69,6 @@ statement acquires a counterexample at its very first index.
 
 ## Remarks
 
-- **The convention $0^{0} = 1$ is not the culprit.** It is what makes the
-  binomial theorem itself true at $n = 0$ and at $x = 0$, with no exceptional
-  case; the price is that one of its corollaries carries a hypothesis. Changing
-  the convention would move the exception, not remove it.
+- **The convention $0^{0} = 1$ is not the culprit.** It is what makes the binomial theorem itself true at $n = 0$ and at $x = 0$, with no exceptional case; the price is that one of its corollaries carries a hypothesis. Changing the convention would move the exception, not remove it.
 
-- **The concrete picture.** In [[ex-pascals-triangle-to-row-six]] the alternating
-  sums of rows $1$ to $6$ are all $0$ and the alternating sum of row $0$ is $1$.
-  A reader who computes from row $1$ onwards sees only the true pattern.
+- **The concrete picture.** In [[ex-pascals-triangle-to-row-six]] the alternating sums of rows $1$ to $6$ are all $0$ and the alternating sum of row $0$ is $1$. A reader who computes from row $1$ onwards sees only the true pattern.

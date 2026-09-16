@@ -69,14 +69,6 @@ what makes it work; the refutation is carried out in full in
 
 ## Remarks
 
-- **What makes it work is a change of proportion, not of shape.** The
-  middle-thirds construction removes a fixed *fraction* of each piece and loses
-  total length $1$; this one removes a fixed *length* $4^{-n-1}$ at stage $n$ and
-  loses only $2^{-1}$ ([[ex-fat-cantor-measure-computed]]). Topologically the two
-  sets are indistinguishable at the level of the properties proved here: both are
-  compact, perfect and nowhere dense ([[thm-cantor-set-properties]]).
+- **What makes it work is a change of proportion, not of shape.** The middle-thirds construction removes a fixed *fraction* of each piece and loses total length $1$; this one removes a fixed *length* $4^{-n-1}$ at stage $n$ and loses only $2^{-1}$ ([[ex-fat-cantor-measure-computed]]). Topologically the two sets are indistinguishable at the level of the properties proved here: both are compact, perfect and nowhere dense ([[thm-cantor-set-properties]]).
 
-- **The complementary witness.** For the reverse implication the witness is
-  $\mathbb{Q}$, which is null and not nowhere dense
-  ([[cex-dense-set-of-measure-zero]]). The two counterexamples together show the
-  two smallness notions are independent.
+- **The complementary witness.** For the reverse implication the witness is $\mathbb{Q}$, which is null and not nowhere dense ([[cex-dense-set-of-measure-zero]]). The two counterexamples together show the two smallness notions are independent.

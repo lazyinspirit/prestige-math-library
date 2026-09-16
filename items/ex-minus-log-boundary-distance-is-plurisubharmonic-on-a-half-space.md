@@ -42,11 +42,9 @@ and this function is plurisubharmonic on $H$.
 
 **Given:** The half-space $H=\{\operatorname{Re}z_1>0\}$.
 
-[L1] Hartogs pseudoconvexity is defined through the function $-\log\delta_H$
-([[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]]).
+[L1] Hartogs pseudoconvexity is defined through the function $-\log\delta_H$ ([[def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity]]).
 
-[L2] A $C^2$ function is plurisubharmonic exactly when its Levi form is
-semipositive ([[thm-c-two-levi-criterion-for-plurisubharmonicity]]).
+[L2] A $C^2$ function is plurisubharmonic exactly when its Levi form is semipositive ([[thm-c-two-levi-criterion-for-plurisubharmonicity]]).
 
 ## Verification
 

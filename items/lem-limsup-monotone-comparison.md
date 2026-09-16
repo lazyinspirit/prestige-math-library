@@ -70,19 +70,8 @@ boundedness or convergence hypothesis is placed on either sequence.
 
 ## Remarks
 
-- **"Eventually" is enough, and the proof shows why.** Only tails with $n \ge K$
-  are compared directly; the finitely many earlier tail bounds are absorbed by
-  monotonicity of the tail bounds ([[lem-limsup-exists]]), which lets $s_K(y)$
-  stand in for every earlier $s_n(y)$. No appeal to [[lem-limit-of-tail]] is
-  needed, since neither quantity is defined as a limit.
+- **"Eventually" is enough, and the proof shows why.** Only tails with $n \ge K$ are compared directly; the finitely many earlier tail bounds are absorbed by monotonicity of the tail bounds ([[lem-limsup-exists]]), which lets $s_K(y)$ stand in for every earlier $s_n(y)$. No appeal to [[lem-limit-of-tail]] is needed, since neither quantity is defined as a limit.
 
-- **The comparison does not become strict.** From $x_k < y_k$ for every $k$ one
-  gets only $\limsup_k x_k \le \limsup_k y_k$; the sequences $x_k = 0$ and
-  $y_k = 1/(k+1)$ have equal limits and hence equal limit superiors. This is the
-  same phenomenon as for limits ([[lem-limit-preserves-order]]).
+- **The comparison does not become strict.** From $x_k < y_k$ for every $k$ one gets only $\limsup_k x_k \le \limsup_k y_k$; the sequences $x_k = 0$ and $y_k = 1/(k+1)$ have equal limits and hence equal limit superiors. This is the same phenomenon as for limits ([[lem-limit-preserves-order]]).
 
-- **Both conclusions have the same direction.** It is the *inner* operation that
-  differs between $\limsup$ and $\liminf$, and both a supremum and an infimum are
-  monotone in the set, so a pointwise inequality pushes both quantities the same
-  way. What fails to be monotone is the *gap* between them: nothing here compares
-  $\limsup_k x_k$ with $\liminf_k y_k$.
+- **Both conclusions have the same direction.** It is the *inner* operation that differs between $\limsup$ and $\liminf$, and both a supremum and an infimum are monotone in the set, so a pointwise inequality pushes both quantities the same way. What fails to be monotone is the *gap* between them: nothing here compares $\limsup_k x_k$ with $\liminf_k y_k$.

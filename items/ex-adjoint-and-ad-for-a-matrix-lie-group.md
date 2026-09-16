@@ -38,18 +38,13 @@ $$\operatorname{Ad}_gX=gXg^{-1},\qquad \operatorname{ad}_XY=XY-YX.$$
 
 **Given:** $g\in G$ and $X,Y\in\mathfrak g$.
 
-[F1] $\operatorname{Ad}_g$ is the differential at the identity of
-$C_g(h)=ghg^{-1}$. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
+[F1] $\operatorname{Ad}_g$ is the differential at the identity of $C_g(h)=ghg^{-1}$. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
 
-[F2] The group differential satisfies
-$d(\operatorname{Ad})_I(X)=\operatorname{ad}_X$.
-[[thm-the-differential-of-adjoint-is-ad]].
+[F2] The group differential satisfies $d(\operatorname{Ad})_I(X)=\operatorname{ad}_X$. [[thm-the-differential-of-adjoint-is-ad]].
 
-[F3] For a matrix Lie group, $\exp_G(tX)=e^{tX}$.
-[[ex-matrix-exponential-as-the-lie-group-exponential]].
+[F3] For a matrix Lie group, $\exp_G(tX)=e^{tX}$. [[ex-matrix-exponential-as-the-lie-group-exponential]].
 
-[F4] The choice assumption used by [F2] and [F3] is countable choice.
-[[def-countable-choice]].
+[F4] The choice assumption used by [F2] and [F3] is countable choice. [[def-countable-choice]].
 
 ## Verification
 

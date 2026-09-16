@@ -34,8 +34,7 @@ that still cannot be a domain of holomorphy.
 
 **Given:** The domain $\Omega=\{(z_1,z_2)\in\mathbb C^2 : z_1\ne0\}$.
 
-[L1] A domain of holomorphy is tested by whether every holomorphic function
-extends through one fixed larger overlap ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L1] A domain of holomorphy is tested by whether every holomorphic function extends through one fixed larger overlap ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
 ## Counterexample
 

@@ -41,55 +41,27 @@ $\operatorname{co}$ means finite convex hull.
 
 ## Facts & Assumptions
 
-**Given:** the ultrafilter lemma, DC, HB, a nonreflexive real Banach space
-$X$, and $\theta\in(0,1)$.
+**Given:** the ultrafilter lemma, DC, HB, a nonreflexive real Banach space $X$, and $\theta\in(0,1)$.
 
-[F1] Under the ultrafilter lemma, DC and HB, a Banach space is reflexive if
-and only if every norm-bounded sequence has a weakly convergent subsequence
-([[cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence]]).
-Its proof combines the weak compact unit-ball criterion
-([[thm-reflexive-iff-unit-ball-weakly-compact]]) with Eberlein–Šmulian
-([[thm-eberlein-smulian]]), whose compactness branch uses compact-Hausdorff
-Tychonoff under the ultrafilter lemma
-([[thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma]]).
+[F1] Under the ultrafilter lemma, DC and HB, a Banach space is reflexive if and only if every norm-bounded sequence has a weakly convergent subsequence ([[cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence]]). Its proof combines the weak compact unit-ball criterion ([[thm-reflexive-iff-unit-ball-weakly-compact]]) with Eberlein–Šmulian ([[thm-eberlein-smulian]]), whose compactness branch uses compact-Hausdorff Tychonoff under the ultrafilter lemma ([[thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma]]).
 
-[F2] Under HB, the norm-closed scalar span of a sequence in a Banach space is
-a separable Banach subspace, is weakly closed, and has intrinsic weak topology
-equal to its relative ambient weak topology
-([[lem-eberlein-smulian-separable-reduction]]).
+[F2] Under HB, the norm-closed scalar span of a sequence in a Banach space is a separable Banach subspace, is weakly closed, and has intrinsic weak topology equal to its relative ambient weak topology ([[lem-eberlein-smulian-separable-reduction]]).
 
-[F3] Reflexivity is surjectivity of the canonical map, and under HB that map
-is a scalar-linear isometry
-([[def-reflexive-banach-space]],
-[[cor-relative-hahn-banach-bidual-isometry]]).
+[F3] Reflexivity is surjectivity of the canonical map, and under HB that map is a scalar-linear isometry ([[def-reflexive-banach-space]], [[cor-relative-hahn-banach-bidual-isometry]]).
 
-[F4] DC is the entire-relation chain principle.  Countable Choice
-$\mathrm{AC}_\omega$ selects from a supplied sequence of nonempty sets
-([[def-dependent-choice]], [[def-countable-choice]]).
+[F4] DC is the entire-relation chain principle.  Countable Choice $\mathrm{AC}_\omega$ selects from a supplied sequence of nonempty sets ([[def-dependent-choice]], [[def-countable-choice]]).
 
-[F5] Under $\mathrm{AC}_\omega$, a complete normed subspace of a normed space
-is closed ([[lem-complete-subspace-is-closed]]).
+[F5] Under $\mathrm{AC}_\omega$, a complete normed subspace of a normed space is closed ([[lem-complete-subspace-is-closed]]).
 
-[F6] A nonempty at most countable set admits a surjection from $\mathbb N$;
-separability means having an at most countable dense subset
-([[lem-countable-iff-surjection-from-n]], [[def-separable-space]]).
+[F6] A nonempty at most countable set admits a surjection from $\mathbb N$; separability means having an at most countable dense subset ([[lem-countable-iff-surjection-from-n]], [[def-separable-space]]).
 
-[F7] Under HB, a bounded linear functional on any real linear subspace has an
-ambient extension of the same norm
-([[thm-relative-hahn-banach-norm-preserving-extension]]), derived from the
-relative dominated-extension principle
-([[thm-relative-hahn-banach-dominated-extension]],
-[[def-hahn-banach-extension-principle-relative]]).
+[F7] Under HB, a bounded linear functional on any real linear subspace has an ambient extension of the same norm ([[thm-relative-hahn-banach-norm-preserving-extension]]), derived from the relative dominated-extension principle ([[thm-relative-hahn-banach-dominated-extension]], [[def-hahn-banach-extension-principle-relative]]).
 
-[F8] The dual norm is the supremum over the closed unit ball, and annihilators
-use the notation $M^\perp=\{f:f(M)=0\}$
-([[def-dual-space-of-a-normed-space]],
-[[def-annihilator-and-preannihilator]]).
+[F8] The dual norm is the supremum over the closed unit ball, and annihilators use the notation $M^\perp=\{f:f(M)=0\}$ ([[def-dual-space-of-a-normed-space]], [[def-annihilator-and-preannihilator]]).
 
 ## Proof
 
-**Proof technique:** separable reduction followed by finite annihilator
-duality and countable Hahn–Banach selection.
+**Proof technique:** separable reduction followed by finite annihilator duality and countable Hahn–Banach selection.
 
 1.1 We first derive the exact Countable Choice instance used below.  For a sequence $(E_n)$ of nonempty sets, let $S$ consist of all finite histories $s$ with $s(j)\in E_j$ for $j<\operatorname{dom}s$, starting with the empty history, and relate $s$ to every one-term extension by a member of $E_{\operatorname{dom}s}$.  This relation is entire.  DC gives a chain of successively extended histories, whose union chooses one element of every $E_n$.  Thus the assumed DC supplies every application of $\mathrm{AC}_\omega$ below; we do not use the unproved bibliographic remark “DC implies $\mathrm{AC}_\omega$” as a theorem. [F4, construct]
 
@@ -117,9 +89,4 @@ duality and countable Hahn–Banach selection.
 
 ## Source notes
 
-Megginson's Theorem 1.13.11(a)→(b), printed pp. 125–126, supplies the
-separable finite-test bidual construction.  Theorem 1.13.14(a)→(b), printed
-p. 132, first reduces an arbitrary nonreflexive real Banach space to a
-separable closed nonreflexive subspace and then extends the resulting
-functionals to the ambient space.  The proof above expands the finite
-annihilator identity and records every choice principle used.
+Megginson's Theorem 1.13.11(a)→(b), printed pp. 125–126, supplies the separable finite-test bidual construction.  Theorem 1.13.14(a)→(b), printed p. 132, first reduces an arbitrary nonreflexive real Banach space to a separable closed nonreflexive subspace and then extends the resulting functionals to the ambient space.  The proof above expands the finite annihilator identity and records every choice principle used.

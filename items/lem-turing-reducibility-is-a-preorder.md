@@ -29,8 +29,7 @@ $A\le_TB\le_TC$ implies $A\le_TC$.
 
 ## Facts & Assumptions
 
-**Given:** sets $A,B,C\subseteq\mathbb N$ and, in the second assertion,
-oracle deciders witnessing $A\le_TB$ and $B\le_TC$.
+**Given:** sets $A,B,C\subseteq\mathbb N$ and, in the second assertion, oracle deciders witnessing $A\le_TB$ and $B\le_TC$.
 
 ## Proof
 

@@ -46,8 +46,7 @@ space.
 
 **Given:** The three-point metric space $M=\{o,a,b\}$ above.
 
-[L1] The based Kuratowski map preserves all distances
-([[thm-kuratowski-distance-map-is-an-isometry]]).
+[L1] The based Kuratowski map preserves all distances ([[thm-kuratowski-distance-map-is-an-isometry]]).
 
 ## Verification
 

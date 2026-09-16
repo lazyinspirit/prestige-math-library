@@ -35,21 +35,13 @@ endpoint isomorphism is asserted.
 
 **Given:** AC, $X,H,E$ as in the statement, and $\xi=H^*E\to X\times I$.
 
-[F1] Pullback charts make $\xi$ a vector bundle, and its endpoint
-restrictions are $f_0^*E$ and $f_1^*E$
-([[def-pullback-vector-bundle-and-pullback-section]]).
+[F1] Pullback charts make $\xi$ a vector bundle, and its endpoint restrictions are $f_0^*E$ and $f_1^*E$ ([[def-pullback-vector-bundle-and-pullback-section]]).
 
-[F2] Under AC and DC a paracompact Hausdorff open cover admits a subordinate
-locally finite partition ([[thm-subordinate-partitions-of-unity-exist]]).
+[F2] Under AC and DC a paracompact Hausdorff open cover admits a subordinate locally finite partition ([[thm-subordinate-partitions-of-unity-exist]]).
 
-[F3] The countabilization in the proof of
-[[thm-principal-bundles-are-classified-by-maps-to-bg]] turns an arbitrary
-numeration into a countable partition $(\lambda_m)$ such that each cozero
-set is a disjoint union of open pieces subordinate to the original cover.
+[F3] The countabilization in the proof of [[thm-principal-bundles-are-classified-by-maps-to-bg]] turns an arbitrary numeration into a countable partition $(\lambda_m)$ such that each cozero set is a disjoint union of open pieces subordinate to the original cover.
 
-[A1] AC is the stated principle and implies DC
-([[def-axiom-of-choice]],
-[[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
+[A1] AC is the stated principle and implies DC ([[def-axiom-of-choice]], [[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
 
 ## Proof
 

@@ -40,21 +40,15 @@ and moreover $\|\overline T\| = \|T\|$.
 
 ## Facts & Assumptions
 
-**Given:** A closed linear subspace $M \le X$, the quotient map $q:X\to X/M$,
-and a bounded linear operator $T:X\to Y$ with $M \subseteq \ker T$.
+**Given:** A closed linear subspace $M \le X$, the quotient map $q:X\to X/M$, and a bounded linear operator $T:X\to Y$ with $M \subseteq \ker T$.
 
-[L1] The algebraic quotient universal property gives a unique linear map
-$\overline T:X/M\to Y$ with $\overline T(qx)=Tx$
-([[thm-quotient-vector-space-universal-property]]).
+[L1] The algebraic quotient universal property gives a unique linear map $\overline T:X/M\to Y$ with $\overline T(qx)=Tx$ ([[thm-quotient-vector-space-universal-property]]).
 
-[L2] The quotient norm is
-$\|x+M\|_{X/M} = \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
+[L2] The quotient norm is $\|x+M\|_{X/M} = \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
 
-[L3] A bounded operator has a concrete bound, and $q(x)=x+M$
-([[def-bounded-linear-operator]], [[def-quotient-vector-space-coset-notation]]).
+[L3] A bounded operator has a concrete bound, and $q(x)=x+M$ ([[def-bounded-linear-operator]], [[def-quotient-vector-space-coset-notation]]).
 
-[L4] The quotient map sends the open unit ball of $X$ onto a set containing the
-open unit ball of $X/M$ ([[thm-quotient-map-is-open]]).
+[L4] The quotient map sends the open unit ball of $X$ onto a set containing the open unit ball of $X/M$ ([[thm-quotient-map-is-open]]).
 
 ## Proof
 

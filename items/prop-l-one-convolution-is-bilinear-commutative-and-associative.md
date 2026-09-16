@@ -27,15 +27,11 @@ Convolution on $L^1(\mathbb{R}^n)$ is bilinear, commutative, and associative.
 
 ## Facts & Assumptions
 
-**Given:** Functions in $L^1(\mathbb{R}^n)$ for which the displayed algebra laws
-are to be checked.
+**Given:** Functions in $L^1(\mathbb{R}^n)$ for which the displayed algebra laws are to be checked.
 
-[L1] $L^1$ convolution exists almost everywhere and obeys the $L^1$ bound
-([[thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]]).
+[L1] $L^1$ convolution exists almost everywhere and obeys the $L^1$ bound ([[thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]]).
 
-[L2] Tonelli and Fubini justify rearranging absolutely integrable iterated
-integrals ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]],
-[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
+[L2] Tonelli and Fubini justify rearranging absolutely integrable iterated integrals ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
 
 [L3] Convolution is the integral from [[def-convolution-of-two-functions-on-rn]].
 
@@ -47,11 +43,7 @@ integrals ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]],
 guarantees absolute convergence for almost every $x$. [L1, L3, given, algebra]
 
 1.2 For commutativity, fix $x$ where convolution is defined and change [L1, L2, L3, algebra]
-variables $u := x-y$:
-$$ (f*g)(x) = \int f(x-y)g(y)\,dy = \int g(x-u)f(u)\,du = (g*f)(x). $$
-Associativity is similar: [L2] applies to
-$|f(x-y-z)g(z)h(y)|$, so one may reorder the three integrations and obtain
-$((f*g)*h)(x)=(f*(g*h))(x)$ almost everywhere. [L1, L2, L3, algebra]
+variables $u := x-y$: $$ (f*g)(x) = \int f(x-y)g(y)\,dy = \int g(x-u)f(u)\,du = (g*f)(x). $$ Associativity is similar: [L2] applies to $|f(x-y-z)g(z)h(y)|$, so one may reorder the three integrations and obtain $((f*g)*h)(x)=(f*(g*h))(x)$ almost everywhere. [L1, L2, L3, algebra]
 
 2.1 Therefore convolution is bilinear, commutative, and associative on [step 1.1, step 1.2]
 $L^1(\mathbb{R}^n)$. [step 1.1, step 1.2] ∎

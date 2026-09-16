@@ -38,8 +38,7 @@ $m$-dimensional submanifold of $N$, and $F|_U$ is still an immersion.
 
 **Given:** A smooth immersion $F:M^m\to N^n$ and a point $p\in M$.
 
-[L1] Near $p$, suitable coordinates identify $F$ with the coordinate inclusion
-$u\mapsto(u,0)$ ([[cor-local-normal-form-for-immersions]]).
+[L1] Near $p$, suitable coordinates identify $F$ with the coordinate inclusion $u\mapsto(u,0)$ ([[cor-local-normal-form-for-immersions]]).
 
 ## Proof
 **Proof technique:** direct.

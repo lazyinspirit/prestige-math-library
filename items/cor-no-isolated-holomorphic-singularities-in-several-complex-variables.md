@@ -32,12 +32,9 @@ $a$.
 
 ## Facts & Assumptions
 
-**Given:** A domain $\Omega\subseteq\mathbb C^m$ with $m\ge2$, a point
-$a\in\Omega$, and a holomorphic function on $\Omega\setminus\{a\}$.
+**Given:** A domain $\Omega\subseteq\mathbb C^m$ with $m\ge2$, a point $a\in\Omega$, and a holomorphic function on $\Omega\setminus\{a\}$.
 
-[L1] In complex dimension at least two, a holomorphic function on a punctured
-domain extends uniquely across the puncture
-([[thm-removability-of-a-puncture-in-several-complex-variables]]).
+[L1] In complex dimension at least two, a holomorphic function on a punctured domain extends uniquely across the puncture ([[thm-removability-of-a-puncture-in-several-complex-variables]]).
 
 ## Proof
 

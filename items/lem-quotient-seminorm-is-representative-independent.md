@@ -39,14 +39,11 @@ Therefore the quotient seminorm of [[def-quotient-seminorm]] is well defined.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$, a linear subspace $M \le X$, and representatives
-$x,x' \in X$ with $x+M = x'+M$.
+**Given:** A normed space $X$, a linear subspace $M \le X$, and representatives $x,x' \in X$ with $x+M = x'+M$.
 
-[L1] The quotient seminorm is defined by
-$\|x+M\|_{X/M} := \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
+[L1] The quotient seminorm is defined by $\|x+M\|_{X/M} := \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
 
-[L2] Two cosets are equal exactly when their representatives differ by an
-element of $M$ ([[prop-quotient-vector-space-operations-and-projection]]).
+[L2] Two cosets are equal exactly when their representatives differ by an element of $M$ ([[prop-quotient-vector-space-operations-and-projection]]).
 
 ## Proof
 

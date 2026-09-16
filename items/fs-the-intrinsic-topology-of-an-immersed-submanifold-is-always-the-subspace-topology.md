@@ -29,20 +29,13 @@ its image in the ambient manifold.
 
 ## Facts & Assumptions
 
-**Given:** The same componentwise inclusion $F:M\to\mathbb R^2$ from the
-countable family of concentric circles used above.
+**Given:** The same componentwise inclusion $F:M\to\mathbb R^2$ from the countable family of concentric circles used above.
 
-[F1] An immersed submanifold is a manifold with an injective immersion into the
-ambient manifold; its intrinsic topology is not defined to be the subspace
-topology ([[def-immersed-submanifold]]).
+[F1] An immersed submanifold is a manifold with an injective immersion into the ambient manifold; its intrinsic topology is not defined to be the subspace topology ([[def-immersed-submanifold]]).
 
-[F2] Embedded submanifolds, by contrast, do use the subspace topology
-([[def-embedded-submanifold-and-slice-chart]]).
+[F2] Embedded submanifolds, by contrast, do use the subspace topology ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L1] The disjoint-union source is a smooth manifold and each circle is smooth
-([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]],
-[[thm-a-regular-level-set-is-an-embedded-submanifold]], [[lem-derivative-of-a-power]],
-[[thm-algebra-of-derivatives]]).
+[L1] The disjoint-union source is a smooth manifold and each circle is smooth ([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]], [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]]).
 
 ## Refutation
 **Proof technique:** direct.

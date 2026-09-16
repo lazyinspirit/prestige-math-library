@@ -34,20 +34,15 @@ $\rho$ is a nontrivial zero, then so are $1-\rho$ and $\overline{\rho}$.
 
 **Given:** The classical functional equation.
 
-[L1] Zeta satisfies
-$$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$
-([[thm-riemann-zeta-functional-equation]]).
+[L1] Zeta satisfies $$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$ ([[thm-riemann-zeta-functional-equation]]).
 
-[L2] Zeta has no zeros on $\operatorname{Re}s\ge1$
-([[thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane]]).
+[L2] Zeta has no zeros on $\operatorname{Re}s\ge1$ ([[thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane]]).
 
-[L3] Gamma extends meromorphically to $\mathbb C$ with poles only at the
-nonpositive integers ([[thm-gamma-meromorphic-continuation]]).
+[L3] Gamma extends meromorphically to $\mathbb C$ with poles only at the nonpositive integers ([[thm-gamma-meromorphic-continuation]]).
 
 [L4] Gamma has no zeros ([[cor-gamma-function-has-no-zeros]]).
 
-[L5] On $\operatorname{Re}s>1$, zeta is given by the Dirichlet series
-$\sum_{n\ge1}n^{-s}$ ([[def-riemann-zeta-function]]).
+[L5] On $\operatorname{Re}s>1$, zeta is given by the Dirichlet series $\sum_{n\ge1}n^{-s}$ ([[def-riemann-zeta-function]]).
 
 ## Proof
 

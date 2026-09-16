@@ -34,13 +34,9 @@ diagram equals its minimal algebraic relator area.
 
 **Given:** A finite presentation and a word $w$ representing the identity.
 
-[L1] Van Kampen diagrams exist exactly for null words in the presented group
-([[thm-van-kampen-lemma]]).
+[L1] Van Kampen diagrams exist exactly for null words in the presented group ([[thm-van-kampen-lemma]]).
 
-[F1] Algebraic relator area is the minimum number of conjugates of defining
-relators needed to express the word, when such a minimum exists
-([[def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation]],
-[[lem-minimal-algebraic-relator-area-exists]]).
+[F1] Algebraic relator area is the minimum number of conjugates of defining relators needed to express the word, when such a minimum exists ([[def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation]], [[lem-minimal-algebraic-relator-area-exists]]).
 
 ## Proof
 

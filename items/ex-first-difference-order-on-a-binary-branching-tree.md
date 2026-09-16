@@ -38,16 +38,11 @@ construction.
 
 ## Facts & Assumptions
 
-**Given:** the explicit finite tree $2^{\leq3}$; coordinates are numbered
-$0,1,2$ from the root, and binary successors have their usual order.
+**Given:** the explicit finite tree $2^{\leq3}$; coordinates are numbered $0,1,2$ from the root, and binary successors have their usual order.
 
-[F1] In the Suslin-tree construction, maximal branches are compared at their
-least differing coordinate after every immediate-successor set is ordered
-densely and without endpoints. [[lem-suslin-tree-branch-first-difference-order]]
+[F1] In the Suslin-tree construction, maximal branches are compared at their least differing coordinate after every immediate-successor set is ordered densely and without endpoints. [[lem-suslin-tree-branch-first-difference-order]]
 
-[F2] The general construction obtains a ccc dense order without endpoints and
-uses splitting above arbitrary countable height bounds to prove that no
-nonempty open interval is separable. [[lem-suslin-tree-branch-first-difference-order]]
+[F2] The general construction obtains a ccc dense order without endpoints and uses splitting above arbitrary countable height bounds to prove that no nonempty open interval is separable. [[lem-suslin-tree-branch-first-difference-order]]
 
 ## Verification
 
@@ -55,15 +50,7 @@ nonempty open interval is separable. [[lem-suslin-tree-branch-first-difference-o
 
 1.2 The first-difference coordinates of consecutive branches are explicit:
 
-| consecutive pair | first difference | comparison at that coordinate |
-|---|---:|---|
-| $000,001$ | $2$ | $0<1$ |
-| $001,010$ | $1$ | $0<1$ |
-| $010,011$ | $2$ | $0<1$ |
-| $011,100$ | $0$ | $0<1$ |
-| $100,101$ | $2$ | $0<1$ |
-| $101,110$ | $1$ | $0<1$ |
-| $110,111$ | $2$ | $0<1$ |
+| consecutive pair | first difference | comparison at that coordinate | |---|---:|---| | $000,001$ | $2$ | $0<1$ | | $001,010$ | $1$ | $0<1$ | | $010,011$ | $2$ | $0<1$ | | $011,100$ | $0$ | $0<1$ | | $100,101$ | $2$ | $0<1$ | | $101,110$ | $1$ | $0<1$ | | $110,111$ | $2$ | $0<1$ |
 
 For nonconsecutive words the same minimum-coordinate formula applies; for example $d(001,111)=0$ and $d(100,111)=1$. Thus the table and formula determine every pairwise comparison, not only the adjacent ones. [step 1.1, construct]
 
@@ -75,8 +62,5 @@ For nonconsecutive words the same minimum-coordinate formula applies; for exampl
 
 ## Remarks
 
-- Finite ccc is not evidence for the Suslin-tree extraction argument: there is
-  no uncountable family here to test.
-- A finite-height tree with densely ordered infinite successor sets could have
-  a dense endpoint-free branch order. The calculation shows that bounded
-  height and binary local branching are distinct obstructions.
+- Finite ccc is not evidence for the Suslin-tree extraction argument: there is no uncountable family here to test.
+- A finite-height tree with densely ordered infinite successor sets could have a dense endpoint-free branch order. The calculation shows that bounded height and binary local branching are distinct obstructions.

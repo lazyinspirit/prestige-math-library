@@ -41,14 +41,11 @@ functions.
 
 **Given:** A meromorphic function $f$ on a plane domain $\Omega$.
 
-[L1] A meromorphic function is holomorphic away from a discrete pole set
-([[def-meromorphic-function-complex-domain]]).
+[L1] A meromorphic function is holomorphic away from a discrete pole set ([[def-meromorphic-function-complex-domain]]).
 
-[L2] Every discrete effective divisor on a plane domain is the zero divisor of a
-holomorphic function ([[thm-zero-divisor-theorem-on-plane-domains]]).
+[L2] Every discrete effective divisor on a plane domain is the zero divisor of a holomorphic function ([[thm-zero-divisor-theorem-on-plane-domains]]).
 
-[L3] A locally bounded punctured singularity is removable
-([[thm-removable-singularity-characterizations]]).
+[L3] A locally bounded punctured singularity is removable ([[thm-removable-singularity-characterizations]]).
 
 ## Proof
 

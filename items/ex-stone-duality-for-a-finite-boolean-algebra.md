@@ -1,0 +1,52 @@
+---
+id: ex-stone-duality-for-a-finite-boolean-algebra
+kind: example
+title: Stone duality for a finite Boolean algebra
+status: draft
+origin: pipeline
+pipeline_run: phase-2-remaining-27
+deps: [def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality, def-stone-space-and-clopen-algebra]
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "Marcus Tressl, Stone Duality for Boolean Algebras — Theorem 2.3.4, pp. 9–10, and Theorem 3.1.5, pp. 11–12; the finite computation is supplied locally"
+      url: "https://personalpages.manchester.ac.uk/staff/marcus.tressl/papers/StoneDualityBooleanAlgebras.pdf"
+---
+
+## Example
+
+For the power-set algebra $B = \mathcal P(\{1,2,3\})$ the ultrafilter space
+$\operatorname{Ult}(B)$ has exactly three points, the principal ultrafilters
+$\uparrow\{1\}, \uparrow\{2\}, \uparrow\{3\}$, with the discrete topology; the
+map $S \mapsto [S]$ is the identity identification of $\mathcal P(\{1,2,3\})$
+with $\operatorname{Clop}(\operatorname{Ult}(B))$ under the correspondence
+$i \leftrightarrow \uparrow\{i\}$. More generally, every finite Boolean algebra
+$B$ is isomorphic to the power set of its finite set of atoms, and its Stone
+space is the finite discrete space on those atoms; no choice principle is used.
+
+## Facts & Assumptions
+
+**Given:** The Boolean algebra $B = \mathcal P(\{1,2,3\})$ and its ultrafilter space ([[def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality]], [[def-stone-space-and-clopen-algebra]]).
+
+[L1] In a Boolean algebra a proper filter is an ultrafilter exactly when it decides every element: for each $b$, exactly one of $b$, $\neg b$ lies in it; the principal filter $\uparrow\!\{i\} = \{S : i \in S\}$ is an ultrafilter of $\mathcal P(\{1,2,3\})$ ([[def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality]]).
+
+[L2] An atom of a Boolean algebra $B$ is a minimal nonzero element; a finite Boolean algebra has atoms, and every element is the join of the atoms below it. [algebra]
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 Every ultrafilter $U$ of $\mathcal P(\{1,2,3\})$ is principal: the join $\{1\}\cup\{2\}\cup\{3\} = \{1,2,3\}$ belongs to $U$, so one of the singletons belongs to $U$ by the dichotomy [L1], and then $U = \uparrow\!\{i\}$ for that $i$; conversely each $\uparrow\!\{i\}$ is an ultrafilter by [L1]. [L1, algebra]
+
+1.2 Consequently $\operatorname{Ult}(B) = \{\uparrow\!\{1\}, \uparrow\!\{2\}, \uparrow\!\{3\}\}$ has three points, and the basic open sets $[S] = \{U : S \in U\}$ are in bijection with the subsets $S \subseteq \{1,2,3\}$ through $S \leftrightarrow \{i : i \in S\}$; in particular every subset of the three-point space is basic open, so the topology is discrete and $\operatorname{Clop}(\operatorname{Ult}(B)) = \mathcal P(\operatorname{Ult}(B))$ has eight elements, matching $|B| = 8$. [1.1, algebra]
+
+2.1 For a general finite Boolean algebra: by [L2] the atoms $a$ of $B$ satisfy $a \wedge a' = 0$ for distinct atoms, every $b \in B$ is the join of the atoms below it, and the map $b \mapsto \{a \text{ atom} : a \le b\}$ is a bijection onto the power set of the atom set preserving joins, meets and complements; hence $B \cong \mathcal P(\mathrm{Atoms}(B))$ and, by [step 1.1] applied with the finite atom set in place of $\{1,2,3\}$, the ultrafilters are the principal ones at the atoms, so the Stone space of $B$ is the finite discrete space on the atoms. [1.1, L2, algebra] ∎
+
+## Remarks
+
+- **Finiteness makes choice unnecessary**: the atoms are found by descending chains in a finite poset, and no extension of filters is needed because every ultrafilter is principal.
+- **The example is the degenerate case of [[thm-stone-duality]]** in which the Stone space is finite and the functors are the identity identifications on finite power sets.

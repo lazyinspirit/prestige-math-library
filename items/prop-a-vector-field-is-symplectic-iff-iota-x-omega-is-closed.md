@@ -32,12 +32,9 @@ $\iota_X\omega$ is closed.
 
 **Given:** A vector field $X$ on a symplectic manifold $(M,\omega)$.
 
-[F1] Symplectic means $\mathcal L_X\omega=0$.
-[[def-symplectic-vector-field]].
+[F1] Symplectic means $\mathcal L_X\omega=0$. [[def-symplectic-vector-field]].
 
-[F2] Cartan's formula is
-$\mathcal L_X\omega=d(\iota_X\omega)+\iota_Xd\omega$.
-[[thm-cartans-magic-formula]].
+[F2] Cartan's formula is $\mathcal L_X\omega=d(\iota_X\omega)+\iota_Xd\omega$. [[thm-cartans-magic-formula]].
 
 ## Proof
 

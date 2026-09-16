@@ -33,17 +33,13 @@ $$\operatorname{rad}(\mathfrak a)=\mathfrak a,\qquad \operatorname{nilrad}(\math
 
 ## Facts & Assumptions
 
-**Given:** The displayed two-dimensional Lie algebra over a
-characteristic-zero field.
+**Given:** The displayed two-dimensional Lie algebra over a characteristic-zero field.
 
-[L1] The radical is the largest solvable ideal
-([[def-radical-of-a-finite-dimensional-lie-algebra]]).
+[L1] The radical is the largest solvable ideal ([[def-radical-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] The nilradical is the largest nilpotent ideal in characteristic zero
-([[def-nilradical-of-a-finite-dimensional-lie-algebra]]).
+[L2] The nilradical is the largest nilpotent ideal in characteristic zero ([[def-nilradical-of-a-finite-dimensional-lie-algebra]]).
 
-[L3] The affine algebra is solvable and not nilpotent
-([[ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent]]).
+[L3] The affine algebra is solvable and not nilpotent ([[ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent]]).
 
 ## Verification
 

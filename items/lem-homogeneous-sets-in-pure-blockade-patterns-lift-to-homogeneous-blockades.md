@@ -35,8 +35,7 @@ an anticomplete $(|S|,s)$-blockade.
 
 ## Facts & Assumptions
 
-**Given:** A pure blockade $(A_1,\ldots,A_t)$ of width at least $s$ and a
-nonempty clique or stable set $S$ in its pattern graph.
+**Given:** A pure blockade $(A_1,\ldots,A_t)$ of width at least $s$ and a nonempty clique or stable set $S$ in its pattern graph.
 
 [F1] Pattern vertices $i,j$ are adjacent exactly when $A_i$ is complete to $A_j$; the blockade's purity makes the pattern well defined ([[def-pattern-graph-of-a-pure-blockade]]).
 

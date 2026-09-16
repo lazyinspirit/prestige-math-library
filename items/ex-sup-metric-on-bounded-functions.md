@@ -99,15 +99,6 @@ The index shift in $1/(k+1)$ is forced: $\mathbb{N}$ contains $0$
 
 ## Remarks
 
-- **Why the constants matter.** The isometric copy of $\mathbb{R}$ inside
-  $\mathcal{B}(S)$ shows that $(\mathcal{B}(S), d_\infty)$ is unbounded whenever
-  $S \ne \emptyset$, since $\mathbb{R}$ is
-  ([[lem-real-line-is-a-metric-space]], [[lem-isometry-is-an-embedding]]).
-- **With $S = \mathbb{N}$ this is the space usually written $\ell^\infty$**, the
-  bounded real sequences with the supremum metric. Its completeness and its
-  separability are questions for later pages and are not touched here.
-- **Attainment is a genuinely different question from existence.** The supremum
-  exists because the set is nonempty and bounded above
-  ([[def-complete-ordered-field]]); whether it lies in the set is exactly the
-  question of whether the sup is a maximum, and claim 2 answers it negatively
-  for a specific pair.
+- **Why the constants matter.** The isometric copy of $\mathbb{R}$ inside $\mathcal{B}(S)$ shows that $(\mathcal{B}(S), d_\infty)$ is unbounded whenever $S \ne \emptyset$, since $\mathbb{R}$ is ([[lem-real-line-is-a-metric-space]], [[lem-isometry-is-an-embedding]]).
+- **With $S = \mathbb{N}$ this is the space usually written $\ell^\infty$**, the bounded real sequences with the supremum metric. Its completeness and its separability are questions for later pages and are not touched here.
+- **Attainment is a genuinely different question from existence.** The supremum exists because the set is nonempty and bounded above ([[def-complete-ordered-field]]); whether it lies in the set is exactly the question of whether the sup is a maximum, and claim 2 answers it negatively for a specific pair.

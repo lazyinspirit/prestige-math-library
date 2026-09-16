@@ -34,14 +34,11 @@ inverse, and the resulting valued field is complete.
 
 **Given:** A prime $p$ and $\mathbb Q_p$ as the completion of $(\mathbb Q,d_p)$.
 
-[L1] Every metric space has a completion built from equivalence classes of
-Cauchy sequences, and that completion is complete
-([[thm-metric-completion-exists]]).
+[L1] Every metric space has a completion built from equivalence classes of Cauchy sequences, and that completion is complete ([[thm-metric-completion-exists]]).
 
 [L2] The rational $p$-adic absolute value is multiplicative and nonarchimedean ([[thm-p-adic-absolute-value-is-nonarchimedean]]).
 
-[L3] $\mathbb Q_p$ is the Cauchy-sequence completion of $(\mathbb Q,d_p)$
-selected in [[def-field-of-p-adic-numbers]].
+[L3] $\mathbb Q_p$ is the Cauchy-sequence completion of $(\mathbb Q,d_p)$ selected in [[def-field-of-p-adic-numbers]].
 
 ## Proof
 

@@ -38,18 +38,13 @@ naturality.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$,
-$g\in G$, and $X\in\mathfrak g=T_eG$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, $g\in G$, and $X\in\mathfrak g=T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Conjugation $C_g(h)=ghg^{-1}$ is a Lie-group automorphism and
-$d(C_g)_e=\operatorname{Ad}_g$.
-[[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
+[F2] Conjugation $C_g(h)=ghg^{-1}$ is a Lie-group automorphism and $d(C_g)_e=\operatorname{Ad}_g$. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
 
-[F3] Every Lie-group homomorphism $F$ satisfies
-$F(\exp X)=\exp(dF_eX)$, assuming $\mathrm{AC}_\omega$.
-[[prop-exponential-map-is-natural-for-lie-group-homomorphisms]].
+[F3] Every Lie-group homomorphism $F$ satisfies $F(\exp X)=\exp(dF_eX)$, assuming $\mathrm{AC}_\omega$. [[prop-exponential-map-is-natural-for-lie-group-homomorphisms]].
 
 ## Proof
 

@@ -31,10 +31,7 @@ $X$ and closed subschemes of $X$.
 
 **Given:** A scheme $X$.
 
-[F1] For a ring $A$, closed immersions into $\operatorname{Spec}A$ are
-precisely quotient-spectrum morphisms $\operatorname{Spec}(A/I)\to
-\operatorname{Spec}A$ for ideals $I\subseteq A$, up to unique isomorphism
-over $\operatorname{Spec}A$ [[thm-affine-closed-immersions-quotient-rings]].
+[F1] For a ring $A$, closed immersions into $\operatorname{Spec}A$ are precisely quotient-spectrum morphisms $\operatorname{Spec}(A/I)\to \operatorname{Spec}A$ for ideals $I\subseteq A$, up to unique isomorphism over $\operatorname{Spec}A$ [[thm-affine-closed-immersions-quotient-rings]].
 
 ## Proof
 

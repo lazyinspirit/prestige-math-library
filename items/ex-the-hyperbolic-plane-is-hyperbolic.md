@@ -31,12 +31,9 @@ The hyperbolic plane $\mathbb H^2$ is a hyperbolic geodesic metric space.
 
 **Given:** The standard geodesic metric on $\mathbb H^2$.
 
-[A1] Classical hyperbolic geometry gives a uniform slimness constant for
-geodesic triangles in $\mathbb H^2$.
+[A1] Classical hyperbolic geometry gives a uniform slimness constant for geodesic triangles in $\mathbb H^2$.
 
-[L1] A geodesic metric space is hyperbolic exactly when all geodesic triangles
-are $\delta$-slim for some $\delta \ge 0$
-([[def-delta-slim-geodesic-triangle-and-hyperbolic-space]]).
+[L1] A geodesic metric space is hyperbolic exactly when all geodesic triangles are $\delta$-slim for some $\delta \ge 0$ ([[def-delta-slim-geodesic-triangle-and-hyperbolic-space]]).
 
 ## Verification
 

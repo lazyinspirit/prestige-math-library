@@ -65,8 +65,4 @@ is defined.
 
 ## Remarks
 
-Centrality is used twice. It makes the inverse-coordinate rule
-$z\mapsto(z,\alpha(z)^{-1})$ multiplicative, so that $N$ is a subgroup, and it
-then makes that subgroup central and hence normal. For merely isomorphic
-subgroups the displayed antidiagonal need be neither a subgroup nor a normal
-subset, so the quotient construction does not apply.
+Centrality is used twice. It makes the inverse-coordinate rule $z\mapsto(z,\alpha(z)^{-1})$ multiplicative, so that $N$ is a subgroup, and it then makes that subgroup central and hence normal. For merely isomorphic subgroups the displayed antidiagonal need be neither a subgroup nor a normal subset, so the quotient construction does not apply.

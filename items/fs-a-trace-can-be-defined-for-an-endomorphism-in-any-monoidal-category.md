@@ -31,12 +31,9 @@ A trace can be defined for an endomorphism in any monoidal category.
 
 **Given:** A monoidal category and an endomorphism $x:X\to X$.
 
-[L1] The trace ladder states that rigidity is needed to define categorical trace
-at all ([[rem-what-is-needed-before-a-trace-can-be-written]]).
+[L1] The trace ladder states that rigidity is needed to define categorical trace at all ([[rem-what-is-needed-before-a-trace-can-be-written]]).
 
-[L2] A pivotal structure is the extra comparison
-$a_X:X\to X^{\vee\vee}$ needed to turn an endomorphism into a traceable morphism
-([[def-pivotal-structure]]).
+[L2] A pivotal structure is the extra comparison $a_X:X\to X^{\vee\vee}$ needed to turn an endomorphism into a traceable morphism ([[def-pivotal-structure]]).
 
 ## Refutation
 

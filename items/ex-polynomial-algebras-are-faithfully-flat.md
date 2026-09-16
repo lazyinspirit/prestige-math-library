@@ -39,8 +39,7 @@ $I\subsetneq R$ is the proper ideal $IR[x]$.
 
 [L1] Free modules are flat ([[cor-free-modules-are-projective-and-flat]]).
 
-[L2] A flat ring map is faithfully flat exactly when proper ideals remain proper
-([[thm-faithfully-flat-ring-map-characterisations]]).
+[L2] A flat ring map is faithfully flat exactly when proper ideals remain proper ([[thm-faithfully-flat-ring-map-characterisations]]).
 
 ## Verification
 

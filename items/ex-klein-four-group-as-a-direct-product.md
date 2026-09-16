@@ -36,18 +36,11 @@ has order $2$, so $V_4$ is not cyclic.
 
 **Given:** The residue-class additive group $\mathbb Z/2$.
 
-[L1] Division with remainder is available in the integers, and congruence
-classes modulo $2$ are the quotient group with its stated addition and identity
-class $0$ ([[thm-division-algorithm-in-z]],
-[[prop-integers-modulo-n-as-a-quotient-group]],
-[[thm-integers-modulo-n-basic-algebra]],
-[[def-addition-and-multiplication-modulo-n]]).
+[L1] Division with remainder is available in the integers, and congruence classes modulo $2$ are the quotient group with its stated addition and identity class $0$ ([[thm-division-algorithm-in-z]], [[prop-integers-modulo-n-as-a-quotient-group]], [[thm-integers-modulo-n-basic-algebra]], [[def-addition-and-multiplication-modulo-n]]).
 
-[L2] The external direct product of two groups is a group with componentwise
-operation ([[thm-external-direct-product-is-a-group]]).
+[L2] The external direct product of two groups is a group with componentwise operation ([[thm-external-direct-product-is-a-group]]).
 
-[L3] If an element has finite order, then the cyclic subgroup it generates has
-that many elements ([[lem-order-characterisation]]).
+[L3] If an element has finite order, then the cyclic subgroup it generates has that many elements ([[lem-order-characterisation]]).
 
 ## Verification
 

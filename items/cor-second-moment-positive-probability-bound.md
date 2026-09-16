@@ -30,14 +30,11 @@ Let $X$ be a nonnegative square-integrable real random variable.
 
 **Given:** A nonnegative square-integrable real random variable $X$.
 
-[L1] The expectation of an indicator is the probability of its event
-([[cor-expectation-of-an-indicator-is-probability]]).
+[L1] The expectation of an indicator is the probability of its event ([[cor-expectation-of-an-indicator-is-probability]]).
 
-[L2] Cauchy-Schwarz holds for square-integrable random variables
-([[cor-cauchy-schwarz-for-random-variables]]).
+[L2] Cauchy-Schwarz holds for square-integrable random variables ([[cor-cauchy-schwarz-for-random-variables]]).
 
-[L3] Square-integrability means that the second moment $\mathbb E[X^2]$ is
-finite ([[def-moments-variance-and-covariance]]).
+[L3] Square-integrability means that the second moment $\mathbb E[X^2]$ is finite ([[def-moments-variance-and-covariance]]).
 
 ## Proof
 

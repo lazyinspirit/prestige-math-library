@@ -31,20 +31,13 @@ a theorem of ZF.
 
 ## Facts & Assumptions
 
-**Given:** $\operatorname{Con}(\mathrm{ZF})$. The conclusion is conditional
-syntactic nonprovability, not the assertion of a transitive model from bare
-consistency.
+**Given:** $\operatorname{Con}(\mathrm{ZF})$. The conclusion is conditional syntactic nonprovability, not the assertion of a transitive model from bare consistency.
 
-[F1] [[cor-relative-consistency-of-feferman-levy-choice-failures-over-zf]]
-proves consistency of ZF with
-$\operatorname{cf}(\omega_1)=\omega$.
+[F1] [[cor-relative-consistency-of-feferman-levy-choice-failures-over-zf]] proves consistency of ZF with $\operatorname{cf}(\omega_1)=\omega$.
 
-[F2] [[def-cofinality]] defines an infinite cardinal $\kappa$ to be regular
-exactly when $\operatorname{cf}(\kappa)=\kappa$.
+[F2] [[def-cofinality]] defines an infinite cardinal $\kappa$ to be regular exactly when $\operatorname{cf}(\kappa)=\kappa$.
 
-[F3] [[thm-omega-one-is-the-least-uncountable-ordinal]] proves in ZF that
-$\omega_1$ is uncountable while $\omega$ is countable, so
-$\omega\ne\omega_1$.
+[F3] [[thm-omega-one-is-the-least-uncountable-ordinal]] proves in ZF that $\omega_1$ is uncountable while $\omega$ is countable, so $\omega\ne\omega_1$.
 
 ## Proof
 

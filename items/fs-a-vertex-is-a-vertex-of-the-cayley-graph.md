@@ -32,8 +32,7 @@ graph.
 
 **Given:** An indecomposable $kG$-module.
 
-[F1] A vertex is a minimal $p$-subgroup for relative projectivity
-([[def-vertex-and-source-of-an-indecomposable-module]]).
+[F1] A vertex is a minimal $p$-subgroup for relative projectivity ([[def-vertex-and-source-of-an-indecomposable-module]]).
 
 ## Refutation
 

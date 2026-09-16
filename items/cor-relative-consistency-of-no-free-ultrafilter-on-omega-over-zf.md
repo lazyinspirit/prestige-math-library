@@ -26,12 +26,9 @@ ultrafilter on $\omega$ is principal and with $\neg\mathrm{BPI}$.
 
 **Given:** $\operatorname{Con}(\mathrm{ZF})$ for the fixed formal theories.
 
-[F1] [[lem-feferman-tail-flip-model-is-finitely-formalizable]] proves that
-ZFC+GCH proves a set model of every externally fixed finite fragment of the
-displayed target theory.
+[F1] [[lem-feferman-tail-flip-model-is-finitely-formalizable]] proves that ZFC+GCH proves a set model of every externally fixed finite fragment of the displayed target theory.
 
-[F2] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] transfers the given
-consistency hypothesis to $\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$.
+[F2] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] transfers the given consistency hypothesis to $\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$.
 
 ## Proof
 

@@ -87,26 +87,10 @@ and a witness is recorded on the companion page.
 
 ## Remarks
 
-- **The estimate is the product of two one-sided estimates, and that is why
-  nonnegativity is needed.** Step 3.1 multiplies $x_k \le \Lambda + \varepsilon$
-  by $y_k \le M + \varepsilon$, which is legitimate only when all four quantities
-  are $\ge 0$ ([[prop-of-multiply-inequalities]]). For sequences of mixed sign the
-  same two estimates say nothing about the product; the correct general statement
-  in that setting involves absolute values and is not needed on this page.
+- **The estimate is the product of two one-sided estimates, and that is why nonnegativity is needed.** Step 3.1 multiplies $x_k \le \Lambda + \varepsilon$ by $y_k \le M + \varepsilon$, which is legitimate only when all four quantities are $\ge 0$ ([[prop-of-multiply-inequalities]]). For sequences of mixed sign the same two estimates say nothing about the product; the correct general statement in that setting involves absolute values and is not needed on this page.
 
-- **The error term is linear in $\varepsilon$ with a fixed coefficient.**
-  Expanding gives $\varepsilon(\Lambda + M + \varepsilon)$, and restricting to
-  $\varepsilon < 1$ replaces the varying coefficient by the constant
-  $C = \Lambda + M + 1$, after which one choice of $\varepsilon$ makes the whole
-  error smaller than the prescribed $\delta$. Both restrictions on $\varepsilon$
-  are met at once by taking the larger of two Archimedean choices.
+- **The error term is linear in $\varepsilon$ with a fixed coefficient.** Expanding gives $\varepsilon(\Lambda + M + \varepsilon)$, and restricting to $\varepsilon < 1$ replaces the varying coefficient by the constant $C = \Lambda + M + 1$, after which one choice of $\varepsilon$ makes the whole error smaller than the prescribed $\delta$. Both restrictions on $\varepsilon$ are met at once by taking the larger of two Archimedean choices.
 
-- **The inequality is strict for some bounded nonnegative pairs**, and
-  [[cex-limsup-product-strict]] on the companion page is the witness: there the
-  product sequence is identically $0$ while the right-hand side is $4$.
+- **The inequality is strict for some bounded nonnegative pairs**, and [[cex-limsup-product-strict]] on the companion page is the witness: there the product sequence is identically $0$ while the right-hand side is $4$.
 
-- **The bounded hypothesis is not merely for convenience.** Without it $\Lambda$
-  could be $+\infty$ and $M$ could be $0$, and then the right-hand side is not an
-  element of $\overline{\mathbb{R}}$ at all ([[def-extended-reals]]); the
-  behaviour of the products in that situation really is unconstrained, as
-  [[cex-zero-times-infinity-indeterminate]] shows.
+- **The bounded hypothesis is not merely for convenience.** Without it $\Lambda$ could be $+\infty$ and $M$ could be $0$, and then the right-hand side is not an element of $\overline{\mathbb{R}}$ at all ([[def-extended-reals]]); the behaviour of the products in that situation really is unconstrained, as [[cex-zero-times-infinity-indeterminate]] shows.

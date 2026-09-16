@@ -30,16 +30,11 @@ then the fibre product $f^*E$ is a smooth rank-$r$ vector bundle over $N$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth rank-$r$ vector bundle $\pi:E\to M$ and a smooth map
-$f:N\to M$.
+**Given:** A smooth rank-$r$ vector bundle $\pi:E\to M$ and a smooth map $f:N\to M$.
 
-[L1] A vector bundle chart on $E$ over $U\subseteq M$ is a diffeomorphism
-$E|_U\cong U\times\mathbb R^r$ with transition functions of the form
-$(p,v)\mapsto(p,g_{\beta\alpha}(p)v)$
-([[def-vector-bundle-chart-and-transition-function]]).
+[L1] A vector bundle chart on $E$ over $U\subseteq M$ is a diffeomorphism $E|_U\cong U\times\mathbb R^r$ with transition functions of the form $(p,v)\mapsto(p,g_{\beta\alpha}(p)v)$ ([[def-vector-bundle-chart-and-transition-function]]).
 
-[L2] The restriction $E|_U$ is the same total space over the smaller open base
-([[def-restriction-of-a-vector-bundle]]).
+[L2] The restriction $E|_U$ is the same total space over the smaller open base ([[def-restriction-of-a-vector-bundle]]).
 
 ## Proof
 

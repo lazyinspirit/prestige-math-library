@@ -33,17 +33,11 @@ trajectories $(q,\dot q)$ with Hamiltonian trajectories $(q,p)$ of $H$.
 
 **Given:** A hyperregular $L$ and its associated $H$.
 
-[F1] Euler–Lagrange equations are
-$\frac d{dt}L_{v^i}=L_{q^i}$.
-[[thm-euler-lagrange-equations]].
+[F1] Euler–Lagrange equations are $\frac d{dt}L_{v^i}=L_{q^i}$. [[thm-euler-lagrange-equations]].
 
-[F2] With $p=L_v$ and inverse $v(q,p)$,
-$H(q,p)=p_iv^i-L(q,v)$.
-[[def-energy-and-hamiltonian-of-a-hyperregular-lagrangian]].
+[F2] With $p=L_v$ and inverse $v(q,p)$, $H(q,p)=p_iv^i-L(q,v)$. [[def-energy-and-hamiltonian-of-a-hyperregular-lagrangian]].
 
-[F3] Hamilton's equations are $\dot q^i=H_{p_i}$ and
-$\dot p_i=-H_{q^i}$.
-[[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
+[F3] Hamilton's equations are $\dot q^i=H_{p_i}$ and $\dot p_i=-H_{q^i}$. [[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
 
 ## Proof
 

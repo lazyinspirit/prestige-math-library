@@ -38,12 +38,9 @@ $$\frac{F'(z)}{F(z)}=\sum_{n\ge0}\frac{f_n'(z)}{f_n(z)}\qquad(z\in K).$$
 
 **Given:** A normally convergent product $\prod f_n$ on $\Omega$ with limit $F$.
 
-[F1] A normally convergent product has a holomorphic limit, and on each compact
-set only finitely many factors contribute zeros
-([[thm-normal-convergence-of-holomorphic-products]]).
+[F1] A normally convergent product has a holomorphic limit, and on each compact set only finitely many factors contribute zeros ([[thm-normal-convergence-of-holomorphic-products]]).
 
-[F2] Locally uniform convergence of holomorphic functions carries locally
-uniform derivative convergence ([[thm-weierstrass-convergence-holomorphic-functions]]).
+[F2] Locally uniform convergence of holomorphic functions carries locally uniform derivative convergence ([[thm-weierstrass-convergence-holomorphic-functions]]).
 
 ## Proof
 

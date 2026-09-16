@@ -31,8 +31,7 @@ a real symmetric tridiagonal matrix.
 
 ## Facts & Assumptions
 
-**Given:** A square matrix $A$ over $\mathbb R$ or $\mathbb C$, and in the
-second claim a real symmetric matrix $A=A^T$.
+**Given:** A square matrix $A$ over $\mathbb R$ or $\mathbb C$, and in the second claim a real symmetric matrix $A=A^T$.
 
 [L1] Householder reflectors are unitary and can annihilate any chosen tail below a leading entry ([[thm-householder-reflectors-and-givens-transformations-are-unitary-and-annihilate-targeted-entries]]).
 

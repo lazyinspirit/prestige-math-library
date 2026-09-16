@@ -37,17 +37,11 @@ Every finitely generated nilpotent group has polynomial growth.
 
 **Given:** A finitely generated nilpotent group $G$.
 
-[L1] For every finite generating set $S$, the proved Bass–Guivarc'h bound gives
-$\beta_{G,S}(n)\le C_S n^{D(G)}$ for all integers $n\ge1$, where $C_S>0$
-([[thm-bass-guivarch-growth-degree-formula-with-proof]]). Here
-$D(G)=\sum_i i r_i$ is a nonnegative integer, including $D(G)=0$ for finite
-groups ([[def-bass-guivarch-dimension]]).
+[L1] For every finite generating set $S$, the proved Bass–Guivarc'h bound gives $\beta_{G,S}(n)\le C_S n^{D(G)}$ for all integers $n\ge1$, where $C_S>0$ ([[thm-bass-guivarch-growth-degree-formula-with-proof]]). Here $D(G)=\sum_i i r_i$ is a nonnegative integer, including $D(G)=0$ for finite groups ([[def-bass-guivarch-dimension]]).
 
 [L2] Polynomial growth means that $\beta_G \preccurlyeq n^d$ for some integer $d \ge 0$ ([[def-polynomial-subexponential-exponential-and-intermediate-growth]]).
 
-[F1] The comparison $f\preccurlyeq g$ means that some integer $C\ge1$
-satisfies $f(n)\le Cg(Cn+C)+C$ for every $n\ge0$
-([[def-growth-comparison-and-growth-type]]).
+[F1] The comparison $f\preccurlyeq g$ means that some integer $C\ge1$ satisfies $f(n)\le Cg(Cn+C)+C$ for every $n\ge0$ ([[def-growth-comparison-and-growth-type]]).
 
 ## Proof
 

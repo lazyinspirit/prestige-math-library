@@ -41,26 +41,17 @@ By linearity, the last identity determines the transform of every polynomial.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]], $a,b\in\mathbb R^n$, and
-a multi-index $\alpha$.
+**Given:** [[def-countable-choice|Countable Choice]], $a,b\in\mathbb R^n$, and a multi-index $\alpha$.
 
-[F1] Dirac distributions and their derivatives have the bilinear evaluation
-convention ([[def-dirac-delta-and-its-derivatives]]) and compactly supported
-distributions are tempered
-([[thm-compactly-supported-distributions-are-tempered]]).
+[F1] Dirac distributions and their derivatives have the bilinear evaluation convention ([[def-dirac-delta-and-its-derivatives]]) and compactly supported distributions are tempered ([[thm-compactly-supported-distributions-are-tempered]]).
 
-[F2] Constants, plane waves, and polynomials are regular tempered
-distributions ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
+[F2] Constants, plane waves, and polynomials are regular tempered distributions ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
 
-[F3] On $\mathcal S'$, $\mathcal F^2=R$ and $\mathcal F$ is injective
-([[thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions]]).
+[F3] On $\mathcal S'$, $\mathcal F^2=R$ and $\mathcal F$ is injective ([[thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions]]).
 
-[F4] Fourier differentiation and multiplication have the precise $2\pi$
-constants and signs
-([[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]).
+[F4] Fourier differentiation and multiplication have the precise $2\pi$ constants and signs ([[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]).
 
-[F5] The published translation/modulation laws use the same negative-sign
-normalization ([[thm-fourier-translation-modulation-dilation-and-reflection-laws]]).
+[F5] The published translation/modulation laws use the same negative-sign normalization ([[thm-fourier-translation-modulation-dilation-and-reflection-laws]]).
 
 ## Proof
 
@@ -70,8 +61,7 @@ normalization ([[thm-fourier-translation-modulation-dilation-and-reflection-laws
 
 $$\langle\mathcal F\delta_a,\varphi\rangle =\widehat\varphi(a) =\int e^{-2\pi ia\cdot\xi}\varphi(\xi)\,d\xi.$$
 
-Thus $\mathcal F\delta_a$ is the displayed plane wave; at $a=0$ this gives
-$\mathcal F\delta_0=1$.  The sign agrees with [F5]. [F1, F2, F5]
+Thus $\mathcal F\delta_a$ is the displayed plane wave; at $a=0$ this gives $\mathcal F\delta_0=1$.  The sign agrees with [F5]. [F1, F2, F5]
 
 2.1 Apply $\mathcal F$ to $\mathcal F\delta_0=1$.  Since $R\delta_0=\delta_0$, [F3] gives $\mathcal F1=\delta_0$.  Similarly step 1.1 with $a=-b$ gives $\mathcal F\delta_{-b}=e^{2\pi ib\cdot x}$, so applying $\mathcal F$ once more gives $\mathcal F(e^{2\pi ib\cdot x})=R\delta_{-b}=\delta_b$. [F3, step 1.1]
 

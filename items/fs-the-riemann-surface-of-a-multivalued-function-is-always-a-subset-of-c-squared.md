@@ -36,13 +36,9 @@ definition and without further work, a subset of $\mathbb C^2$.
 
 **Given:** The abstract germ-space definition and the logarithm-surface model.
 
-[L1] A Riemann surface of a complete analytic function is defined abstractly as a
-germ space equipped with basis sets $N(f,U)$ and a projection to the base domain
-([[def-riemann-surface-of-a-complete-analytic-function]]).
+[L1] A Riemann surface of a complete analytic function is defined abstractly as a germ space equipped with basis sets $N(f,U)$ and a projection to the base domain ([[def-riemann-surface-of-a-complete-analytic-function]]).
 
-[L2] The logarithm surface admits a convenient helicoid model only after one
-chooses an additional realization
-([[ex-helicoid-model-of-the-logarithm-surface]]).
+[L2] The logarithm surface admits a convenient helicoid model only after one chooses an additional realization ([[ex-helicoid-model-of-the-logarithm-surface]]).
 
 ## Refutation
 

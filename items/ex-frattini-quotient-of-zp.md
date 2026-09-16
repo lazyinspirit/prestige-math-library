@@ -29,8 +29,7 @@ $$\Phi(\mathbb Z_p)=p\mathbb Z_p\qquad\text{and}\qquad \mathbb Z_p/\Phi(\mathbb 
 
 **Given:** The additive pro-$p$ group $\mathbb Z_p$.
 
-[L1] For a finitely generated pro-$p$ group, the Frattini subgroup is
-$\overline{[G,G]G^p}$ ([[thm-frattini-formula-for-finitely-generated-pro-p-groups]]).
+[L1] For a finitely generated pro-$p$ group, the Frattini subgroup is $\overline{[G,G]G^p}$ ([[thm-frattini-formula-for-finitely-generated-pro-p-groups]]).
 
 ## Verification
 

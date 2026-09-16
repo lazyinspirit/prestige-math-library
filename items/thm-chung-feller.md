@@ -115,21 +115,8 @@ $$\lvert\mathcal{F}_{n,k}\rvert = C_n$$
 
 ## Remarks
 
-- **This is not a corollary of the cycle lemma as that lemma is stated here.** The
-  cycle lemma counts the cyclic shifts all of whose partial sums are positive, and
-  for weight $1$ that is exactly one shift; Chung–Feller needs every shift sorted
-  by how many of its partial sums fail to rise, which is the strictly finer
-  statement
-  [[lem-shifts-of-a-weight-one-word-realise-each-count-of-nonpositive-partial-sums-once]].
+- **This is not a corollary of the cycle lemma as that lemma is stated here.** The cycle lemma counts the cyclic shifts all of whose partial sums are positive, and for weight $1$ that is exactly one shift; Chung–Feller needs every shift sorted by how many of its partial sums fail to rise, which is the strictly finer statement [[lem-shifts-of-a-weight-one-word-realise-each-count-of-nonpositive-partial-sums-once]].
 
-- **Where the blocking is spent.** The word $b$ records only the jumps of $S_a$
-  between consecutive positions carrying the entry $1$. That is what turns a
-  statement about the $n+1$ shifts of $a$ beginning with $1$ into a statement about
-  all $n+1$ shifts of a word of length $n+1$, which is the form the transversal
-  lemma is stated in.
+- **Where the blocking is spent.** The word $b$ records only the jumps of $S_a$ between consecutive positions carrying the entry $1$. That is what turns a statement about the $n+1$ shifts of $a$ beginning with $1$ into a statement about all $n+1$ shifts of a word of length $n+1$, which is the form the transversal lemma is stated in.
 
-- **Why the steps split evenly below the axis.** The pairing of step 2.1 matches
-  each descent to level $c\le-1$ with the next ascent from $c$, and it is a
-  bijection only because the path ends at height $0$: with a free right endpoint a
-  descent below the axis need never be undone, and the count of steps below the
-  axis would not be even.
+- **Why the steps split evenly below the axis.** The pairing of step 2.1 matches each descent to level $c\le-1$ with the next ascent from $c$, and it is a bijection only because the path ends at height $0$: with a free right endpoint a descent below the axis need never be undone, and the count of steps below the axis would not be even.

@@ -39,14 +39,11 @@ finite-dimensional. The zero-dimensional case is included.
 
 [A1] Countable Choice holds ([[def-countable-choice]]).
 
-[L1] Every infinite-dimensional Banach space has an unconditional nonabsolute
-series under Countable Choice ([[thm-dvoretzky-rogers]]).
+[L1] Every infinite-dimensional Banach space has an unconditional nonabsolute series under Countable Choice ([[thm-dvoretzky-rogers]]).
 
-[L2] Finite-dimensional coordinate maps and their inverses are continuous
-([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L2] Finite-dimensional coordinate maps and their inverses are continuous ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L3] Unconditional convergence is equivalent to convergence under every
-bounded scalar multiplier ([[thm-unconditional-convergence-equivalences]]).
+[L3] Unconditional convergence is equivalent to convergence under every bounded scalar multiplier ([[thm-unconditional-convergence-equivalences]]).
 
 ## Proof
 
@@ -55,19 +52,10 @@ bounded scalar multiplier ([[thm-unconditional-convergence-equivalences]]).
 **Given:** The objects and hypotheses in the Statement.
 
 1.1 Suppose $X$ has finite positive dimension with basis $e_1,\ldots,e_d$, [given, L3, L2]
-and write $x_n=\sum_ja_{j,n}e_j$. If $\sum_nx_n$ is unconditional, then for
-each $j$ choose the bounded phases
-$\lambda_n=\overline{a_{j,n}}/|a_{j,n}|$ when $a_{j,n}\ne0$ and zero otherwise.
-By [L3], $\sum_n\lambda_nx_n$ converges; applying the continuous $j$th
-coordinate from [L2] shows $\sum_n|a_{j,n}|<\infty$. [L2, L3, finite phases]
+and write $x_n=\sum_ja_{j,n}e_j$. If $\sum_nx_n$ is unconditional, then for each $j$ choose the bounded phases $\lambda_n=\overline{a_{j,n}}/|a_{j,n}|$ when $a_{j,n}\ne0$ and zero otherwise. By [L3], $\sum_n\lambda_nx_n$ converges; applying the continuous $j$th coordinate from [L2] shows $\sum_n|a_{j,n}|<\infty$. [L2, L3, finite phases]
 
 2.1 The triangle inequality gives [given, step 1.1]
-$\|x_n\|\le\sum_j|a_{j,n}|\|e_j\|$. Summing and using step 1.1 over the
-finite set of coordinates proves $\sum_n\|x_n\|<\infty$. If $X=\{0\}$ the
-claim is immediate. Thus finite dimension implies universal agreement.
-[step 1.1, finite sum]
+$\|x_n\|\le\sum_j|a_{j,n}|\|e_j\|$. Summing and using step 1.1 over the finite set of coordinates proves $\sum_n\|x_n\|<\infty$. If $X=\{0\}$ the claim is immediate. Thus finite dimension implies universal agreement. [step 1.1, finite sum]
 
 3.1 Conversely, if $X$ is infinite-dimensional, [A1] and [L1] supply an [given, A1, L1, step 2.1]
-unconditionally convergent series that is not absolutely convergent. Universal
-agreement therefore fails. This proves the reverse implication and the
-equivalence. [A1, L1] ∎
+unconditionally convergent series that is not absolutely convergent. Universal agreement therefore fails. This proves the reverse implication and the equivalence. [A1, L1] ∎

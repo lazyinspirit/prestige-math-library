@@ -33,12 +33,9 @@ $$ \widehat R^{\,\mathfrak m} \cong \prod_{i=1}^t \widehat{R_{\mathfrak m_i}}. $
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, an integer $t\ge1$, pairwise
-distinct maximal ideals $\mathfrak m_1,\dots,\mathfrak m_t$, and
-$\mathfrak m=\bigcap_i \mathfrak m_i$.
+**Given:** A Noetherian commutative ring $R$, an integer $t\ge1$, pairwise distinct maximal ideals $\mathfrak m_1,\dots,\mathfrak m_t$, and $\mathfrak m=\bigcap_i \mathfrak m_i$.
 
-[L1] Completion is the inverse limit of the residue rings modulo the powers of
-the defining ideal ([[def-adic-completion-of-a-module]]).
+[L1] Completion is the inverse limit of the residue rings modulo the powers of the defining ideal ([[def-adic-completion-of-a-module]]).
 
 [L2] Pairwise comaximal ideals give a product decomposition modulo their intersection ([[thm-chinese-remainder-theorem-for-comaximal-ideals]]).
 

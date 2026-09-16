@@ -35,14 +35,11 @@ is not surjective. So completion is not exact without a finiteness hypothesis.
 
 ## Facts & Assumptions
 
-**Given:** A prime integer $p$, the module $M=\bigoplus_{n \ge 1}\mathbb Z e_n$,
-and the map $f(e_n)=p^n e_n$.
+**Given:** A prime integer $p$, the module $M=\bigoplus_{n \ge 1}\mathbb Z e_n$, and the map $f(e_n)=p^n e_n$.
 
-[L1] The $(p)$-adic completion of a module is the inverse limit of the quotients
-$M/p^rM$ ([[def-adic-completion-of-a-module]]).
+[L1] The $(p)$-adic completion of a module is the inverse limit of the quotients $M/p^rM$ ([[def-adic-completion-of-a-module]]).
 
-[L2] Exactness of completion on finite modules is a genuinely finite statement
-([[thm-completion-is-exact-on-finite-modules]]).
+[L2] Exactness of completion on finite modules is a genuinely finite statement ([[thm-completion-is-exact-on-finite-modules]]).
 
 ## Verification
 

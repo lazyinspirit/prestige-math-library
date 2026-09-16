@@ -34,13 +34,9 @@ is primitive.
 
 **Given:** A primitive nonregular action of $H$ on $\Delta$, a transitive action of $K$ on $\{1,\dots,\ell\}$ with $\ell \ge 2$, and the induced product action of $H \wr K$ on $\Delta^\ell$.
 
-[A1] In the standard product action, the base group $H^\ell$ acts coordinatewise
-and the top group $K$ permutes the coordinates transitively.
+[A1] In the standard product action, the base group $H^\ell$ acts coordinatewise and the top group $K$ permutes the coordinates transitively.
 
-[A2] In a faithful primitive nonregular action, distinct points have distinct
-stabilizers.  Indeed, equality of point stabilizers is an invariant
-equivalence relation; primitivity makes its classes singletons unless every
-stabilizer is trivial, which is the regular case.
+[A2] In a faithful primitive nonregular action, distinct points have distinct stabilizers.  Indeed, equality of point stabilizers is an invariant equivalence relation; primitivity makes its classes singletons unless every stabilizer is trivial, which is the regular case.
 
 ## Proof
 

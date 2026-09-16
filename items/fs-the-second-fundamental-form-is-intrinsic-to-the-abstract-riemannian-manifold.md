@@ -40,17 +40,13 @@ forms.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and the flat strip
-$U=\mathbb R\times(0,\pi)$ with coordinates $(x,y)$.
+**Given:** Countable choice and the flat strip $U=\mathbb R\times(0,\pi)$ with coordinates $(x,y)$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-induced-connection-and-second-fundamental-form]]; after that supplied interface is fixed, the explicit calculation makes no additional countable-family choice.
 
-[F1] For an embedded Riemannian submanifold,
-$\mathrm{II}(X,Y)=(\overline\nabla_XY)^\perp$.
-[[def-induced-connection-and-second-fundamental-form]].
+[F1] For an embedded Riemannian submanifold, $\mathrm{II}(X,Y)=(\overline\nabla_XY)^\perp$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F2] The Levi–Civita symbols of the Euclidean identity metric vanish.
-[[prop-christoffel-formula-for-the-levi-civita-connection]].
+[F2] The Levi–Civita symbols of the Euclidean identity metric vanish. [[prop-christoffel-formula-for-the-levi-civita-connection]].
 
 ## Refutation
 

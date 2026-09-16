@@ -37,17 +37,13 @@ When these conditions hold, the factor $L$ is unique.
 
 **Given:** A matrix $A\in M_n(\mathbb C)$.
 
-[L1] Hermitian positive-definite matrices and Cholesky factorisations with
-positive diagonal are defined in
-[[def-cholesky-factorisation-with-positive-diagonal]].
+[L1] Hermitian positive-definite matrices and Cholesky factorisations with positive diagonal are defined in [[def-cholesky-factorisation-with-positive-diagonal]].
 
-[L2] The determinant of a triangular matrix is the product of its diagonal
-entries ([[thm-determinant-of-a-triangular-matrix]]).
+[L2] The determinant of a triangular matrix is the product of its diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
 
 [L3] Determinants are multiplicative ([[thm-determinant-multiplicative]]).
 
-[L4] Matrix multiplication uses the convention of
-[[def-matrix-product-and-identity-matrix]].
+[L4] Matrix multiplication uses the convention of [[def-matrix-product-and-identity-matrix]].
 
 ## Proof
 

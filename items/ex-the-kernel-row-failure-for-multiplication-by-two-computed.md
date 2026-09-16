@@ -39,12 +39,9 @@ snake connecting map.
 
 **Given:** The multiplication-by-two diagram of the cited counterexample.
 
-[L1] That diagram lives in the abelian category $\mathbf{Ab}$
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] That diagram lives in the abelian category $\mathbf{Ab}$ ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] The cited counterexample computes the kernel row and shows it is not short
-exact
-([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
+[L2] The cited counterexample computes the kernel row and shows it is not short exact ([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
 
 ## Verification
 

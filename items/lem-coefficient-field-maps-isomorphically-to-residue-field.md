@@ -35,9 +35,7 @@ $$K \xrightarrow{\sim} k.$$
 
 **Given:** A local ring $(A,\mathfrak m)$ and a coefficient field $K \subseteq A$.
 
-[L1] A coefficient field is defined to be a subfield on which the residue map
-is an isomorphism onto the residue field
-([[def-equicharacteristic-local-ring-and-coefficient-field]]).
+[L1] A coefficient field is defined to be a subfield on which the residue map is an isomorphism onto the residue field ([[def-equicharacteristic-local-ring-and-coefficient-field]]).
 
 ## Proof
 

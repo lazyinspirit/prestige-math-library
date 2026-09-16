@@ -29,14 +29,11 @@ projective modules to projective modules.
 
 **Given:** A subgroup $H\le G$ and a field $k$.
 
-[F1] Projective modules are characterized by lifting and by being direct
-summands of free modules ([[def-projective-module]], [[thm-projective-module-characterizations]]).
+[F1] Projective modules are characterized by lifting and by being direct summands of free modules ([[def-projective-module]], [[thm-projective-module-characterizations]]).
 
-[L1] Induction is left adjoint to restriction
-([[thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]]).
+[L1] Induction is left adjoint to restriction ([[thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules]]).
 
-[L2] A left transversal identifies $\operatorname{Ind}_H^G W$ with a finite
-direct sum of copies of $W$ ([[prop-induced-module-decomposes-over-a-left-transversal]]).
+[L2] A left transversal identifies $\operatorname{Ind}_H^G W$ with a finite direct sum of copies of $W$ ([[prop-induced-module-decomposes-over-a-left-transversal]]).
 
 ## Proof
 

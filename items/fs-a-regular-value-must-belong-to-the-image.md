@@ -31,13 +31,9 @@ sources:
 
 **Given:** The map $f:\mathbb R\to\mathbb R$, $f(x)=e^x$.
 
-[F1] A value is regular when every point of its fibre is regular, and the empty
-fibre is allowed ([[def-regular-and-critical-points-and-values]]).
+[F1] A value is regular when every point of its fibre is regular, and the empty fibre is allowed ([[def-regular-and-critical-points-and-values]]).
 
-[L1] The derivative of $e^x$ is $e^x$
-([[thm-derivative-of-exponential]]), and the exponential maps $\mathbb R$
-bijectively onto $(0,\infty)$
-([[cor-exponential-is-a-bijection-onto-positive-reals]]).
+[L1] The derivative of $e^x$ is $e^x$ ([[thm-derivative-of-exponential]]), and the exponential maps $\mathbb R$ bijectively onto $(0,\infty)$ ([[cor-exponential-is-a-bijection-onto-positive-reals]]).
 
 ## Refutation
 **Proof technique:** direct.

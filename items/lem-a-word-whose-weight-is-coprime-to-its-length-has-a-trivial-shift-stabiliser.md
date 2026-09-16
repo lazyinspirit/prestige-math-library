@@ -81,14 +81,6 @@ Then, for the action of $\mathbb{Z}/m$ on words of length $m$ by cyclic shifts
 
 ## Remarks
 
-- **The hypothesis is exactly what the Catalan application supplies.** There the
-  word has weight $1$, and $\gcd(1,m)=1$ for every $m$, so the orbit of every such
-  word has full size and the count of orbits is the count of words divided by $m$.
-  Without a coprimality hypothesis a word can repeat: the word $1,-1,1,-1$ has
-  weight $0$ and is fixed by the shift by two positions.
+- **The hypothesis is exactly what the Catalan application supplies.** There the word has weight $1$, and $\gcd(1,m)=1$ for every $m$, so the orbit of every such word has full size and the count of orbits is the count of words divided by $m$. Without a coprimality hypothesis a word can repeat: the word $1,-1,1,-1$ has weight $0$ and is fixed by the shift by two positions.
 
-- **No orbit-stabiliser theorem is used.** The orbit size is obtained from the
-  injectivity of $[j]_m\mapsto[j]_m\cdot a$, which is what a trivial stabiliser
-  says directly; invoking the coset bijection would then require counting the
-  cosets of the trivial subgroup, which is the same computation one step further
-  away.
+- **No orbit-stabiliser theorem is used.** The orbit size is obtained from the injectivity of $[j]_m\mapsto[j]_m\cdot a$, which is what a trivial stabiliser says directly; invoking the coset bijection would then require counting the cosets of the trivial subgroup, which is the same computation one step further away.

@@ -45,19 +45,13 @@ condition number $\kappa_p(A)$.
 
 ## Facts & Assumptions
 
-**Given:** An invertible matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge1$,
-$b\ne 0$, $x=A^{-1}b$, $\widehat x\in\mathbb{R}^{n}$, $r=b-A\widehat x$ and
-$e=x-\widehat x$.
+**Given:** An invertible matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge1$, $b\ne 0$, $x=A^{-1}b$, $\widehat x\in\mathbb{R}^{n}$, $r=b-A\widehat x$ and $e=x-\widehat x$.
 
-[L1] $A^{-1}A=I_n$ ([[def-invertible-matrix-and-general-linear-group]]), and
-matrix multiplication distributes over addition, so $A(x-\widehat x)=Ax-A\widehat x$
-([[thm-matrix-multiplication-laws]]).
+[L1] $A^{-1}A=I_n$ ([[def-invertible-matrix-and-general-linear-group]]), and matrix multiplication distributes over addition, so $A(x-\widehat x)=Ax-A\widehat x$ ([[thm-matrix-multiplication-laws]]).
 
-[L2] Compatibility: $\lVert My\rVert_p\le\lVert M\rVert_p\lVert y\rVert_p$
-([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]]).
+[L2] Compatibility: $\lVert My\rVert_p\le\lVert M\rVert_p\lVert y\rVert_p$ ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]]).
 
-[L3] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$
-([[def-condition-number-of-a-nonsingular-linear-system]]).
+[L3] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$ ([[def-condition-number-of-a-nonsingular-linear-system]]).
 
 ## Proof
 

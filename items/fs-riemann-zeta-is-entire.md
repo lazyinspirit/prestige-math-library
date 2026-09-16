@@ -30,8 +30,7 @@ sources:
 
 **Given:** The global continuation theorem for zeta.
 
-[L1] Zeta is meromorphic on $\mathbb C$ and has a simple pole at $1$
-([[thm-riemann-zeta-meromorphic-continuation]]).
+[L1] Zeta is meromorphic on $\mathbb C$ and has a simple pole at $1$ ([[thm-riemann-zeta-meromorphic-continuation]]).
 
 ## Refutation
 

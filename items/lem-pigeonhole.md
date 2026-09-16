@@ -127,13 +127,6 @@ ordinals, cardinals, or any later material.
 
 - **No choice is used.** Every map built above is defined by an explicit rule: the transposition is given by three cases, and the only element selected anywhere is a single $j \in n \setminus A$ in step 5.3, a single choice from a nonempty set, which needs no choice principle.
 
-- **Claim 5 and the two notions of infinity.** A set is *Dedekind-infinite*
-  when it is equinumerous with a proper subset of itself. Claim 5 says no
-  natural number is, and transporting along a bijection extends this to every
-  finite set: Dedekind-infinite implies infinite in ZF. The successor map
-  $\sigma : \mathbb{N} \to \mathbb{N} \setminus \{0\}$ shows $\mathbb{N}$
-  itself is Dedekind-infinite, so the restriction to natural numbers in claim 5
-  is essential. The converse requires later choice and model-theoretic analysis
-  and is not used here.
+- **Claim 5 and the two notions of infinity.** A set is *Dedekind-infinite* when it is equinumerous with a proper subset of itself. Claim 5 says no natural number is, and transporting along a bijection extends this to every finite set: Dedekind-infinite implies infinite in ZF. The successor map $\sigma : \mathbb{N} \to \mathbb{N} \setminus \{0\}$ shows $\mathbb{N}$ itself is Dedekind-infinite, so the restriction to natural numbers in claim 5 is essential. The converse requires later choice and model-theoretic analysis and is not used here.
 
 - **Relation to the ordinals page.** [[def-cardinal]] calls an ordinal $\kappa$ a cardinal when no $\alpha \in \kappa$ satisfies $\alpha \approx \kappa$. Claim 3 makes every natural number a cardinal and claim 4 makes $\omega$ one, which is what licenses the traditional $\aleph_0 = \omega$. That page comes much later in the library; the pointer here is orientation only, and nothing above rests on it.

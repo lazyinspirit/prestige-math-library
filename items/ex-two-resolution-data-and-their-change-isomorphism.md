@@ -37,8 +37,7 @@ $$L_n^PF(A)\xrightarrow{\sim}L_n^QF(A)\qquad\text{and}\qquad R_I^nF(A)\xrightarr
 natural in $A$.
 ## Facts & Assumptions
 
-**Given:** The Axiom of Dependent Choice, the supplied data $P,Q,I,J$, the
-additive functor $F$, an object $A\in\mathcal D$, and an integer $n$.
+**Given:** The Axiom of Dependent Choice, the supplied data $P,Q,I,J$, the additive functor $F$, an object $A\in\mathcal D$, and an integer $n$.
 
 [L1] Two supplied projective resolution data define naturally isomorphic left derived functors ([[thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]]).
 

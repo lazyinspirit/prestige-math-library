@@ -38,22 +38,13 @@ is a $G$-equivariant diffeomorphism.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a transitive smooth left action of $G$ on
-$M$, and $x\in M$.
+**Given:** $\mathrm{AC}_\omega$, a transitive smooth left action of $G$ on $M$, and $x\in M$.
 
-[A1] The induced map $f:G/G_x\to M$ is a smooth equivariant injective
-immersion; transitivity makes it bijective.
-[[def-countable-choice]],
-[[thm-every-orbit-is-an-injectively-immersed-homogeneous-space]],
-[[thm-quotient-manifold-by-a-closed-lie-subgroup]].
+[A1] The induced map $f:G/G_x\to M$ is a smooth equivariant injective immersion; transitivity makes it bijective. [[def-countable-choice]], [[thm-every-orbit-is-an-injectively-immersed-homogeneous-space]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
 
-[F1] Critical values of a smooth map are null, and a null set cannot be all of
-a positive-dimensional manifold.
-[[thm-morse-sard-for-smooth-manifolds]],
-[[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]].
+[F1] Critical values of a smooth map are null, and a null set cannot be all of a positive-dimensional manifold. [[thm-morse-sard-for-smooth-manifolds]], [[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]].
 
-[F2] An invertible differential gives a local diffeomorphism.
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F2] An invertible differential gives a local diffeomorphism. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
 ## Proof
 

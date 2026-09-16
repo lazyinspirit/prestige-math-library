@@ -39,8 +39,7 @@ For a connected pair, it is the equivariant-Hom complex on cellular chains after
 
 [F5] [[thm-excision-and-mayer-vietoris-with-local-coefficients]] proves local-coefficient cohomological excision and cochain Mayer--Vietoris by a simplexwise small-chain homotopy equivalence, valid for arbitrary coefficient fibers.
 
-[A1] [[def-axiom-of-choice]] permits the simultaneous choice of a primitive
-in every nonempty componentwise primitive set.
+[A1] [[def-axiom-of-choice]] permits the simultaneous choice of a primitive in every nonempty componentwise primitive set.
 
 ## Proof
 

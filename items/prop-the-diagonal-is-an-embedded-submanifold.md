@@ -38,14 +38,11 @@ is an embedded submanifold of dimension $\dim M$.
 
 **Given:** A smooth manifold $M$.
 
-[F1] Embedded submanifolds are characterized by slice charts
-([[def-embedded-submanifold-and-slice-chart]]).
+[F1] Embedded submanifolds are characterized by slice charts ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L1] $M\times M$ has the canonical product smooth structure
-([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
+[L1] $M\times M$ has the canonical product smooth structure ([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
 
-[L2] Chart maps are diffeomorphisms onto open Euclidean sets
-([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
+[L2] Chart maps are diffeomorphisms onto open Euclidean sets ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 
 ## Proof
 **Proof technique:** direct.

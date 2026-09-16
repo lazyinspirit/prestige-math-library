@@ -36,12 +36,9 @@ Then $D$ is linear but not bounded for the supremum norm.
 
 ## Facts & Assumptions
 
-**Given:** The differentiation operator $D$ on $P[0,1]$ and the polynomials
-$p_n(x):=x^n$.
+**Given:** The differentiation operator $D$ on $P[0,1]$ and the polynomials $p_n(x):=x^n$.
 
-[L1] A bounded linear operator requires one constant $C$ such that
-$\|Dp\|_\infty \le C\|p\|_\infty$ for every polynomial $p$
-([[def-bounded-linear-operator]]).
+[L1] A bounded linear operator requires one constant $C$ such that $\|Dp\|_\infty \le C\|p\|_\infty$ for every polynomial $p$ ([[def-bounded-linear-operator]]).
 
 ## Verification
 

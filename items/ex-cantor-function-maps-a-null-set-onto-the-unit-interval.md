@@ -76,22 +76,8 @@ preserved by continuous images.**
 
 ## Remarks
 
-- **Nothing here contradicts any theorem about null sets.** Measure zero is
-  preserved by countable unions ([[thm-countable-union-of-null-is-null]]) and by
-  passing to subsets, both of which are statements about covers. What this
-  example shows is that it is **not** preserved by continuous images, and that
-  is not a gap in any theorem above: no result in this library asserts that a
-  continuous image of a null set is null.
+- **Nothing here contradicts any theorem about null sets.** Measure zero is preserved by countable unions ([[thm-countable-union-of-null-is-null]]) and by passing to subsets, both of which are statements about covers. What this example shows is that it is **not** preserved by continuous images, and that is not a gap in any theorem above: no result in this library asserts that a continuous image of a null set is null.
 
-- **The image is as large as it could possibly be.** $c$ takes values in $[0,1]$
-  ([[thm-cantor-function-properties]]), so $c[C] \subseteq [0,1]$ always; claim 2
-  says the inclusion is an equality. So $C$, which is null and nowhere dense
-  ([[thm-cantor-set-properties]]), surjects onto an interval of length $1$;
-  that $C$ is uncountable is proved independently as claim 4 of
-  [[thm-cantor-set-properties]].
+- **The image is as large as it could possibly be.** $c$ takes values in $[0,1]$ ([[thm-cantor-function-properties]]), so $c[C] \subseteq [0,1]$ always; claim 2 says the inclusion is an equality. So $C$, which is null and nowhere dense ([[thm-cantor-set-properties]]), surjects onto an interval of length $1$; that $C$ is uncountable is proved independently as claim 4 of [[thm-cantor-set-properties]].
 
-- **Where the increase happens.** The remark
-  [[rem-cantor-function-increases-only-on-a-null-set]] records the complementary
-  fact: $c$ is locally constant off $C$, so all of its climb from $0$ to $1$
-  takes place on the null set $C$, and this example says that the climb is
-  complete.
+- **Where the increase happens.** The remark [[rem-cantor-function-increases-only-on-a-null-set]] records the complementary fact: $c$ is locally constant off $C$, so all of its climb from $0$ to $1$ takes place on the null set $C$, and this example says that the climb is complete.

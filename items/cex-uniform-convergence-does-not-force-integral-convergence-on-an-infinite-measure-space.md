@@ -26,8 +26,7 @@ integrals.
 
 ## Facts & Assumptions
 
-**Given:** The functions
-$f_n:=(n+1)^{-1}\chi_{[0,n+1]}$ on $\mathbb R$.
+**Given:** The functions $f_n:=(n+1)^{-1}\chi_{[0,n+1]}$ on $\mathbb R$.
 
 [L1] Bounded convergence is a finite-measure-space theorem ([[cor-bounded-convergence-on-a-finite-measure-space]]).
 

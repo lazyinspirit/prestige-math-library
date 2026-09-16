@@ -45,15 +45,10 @@ manifolds are the connected components of the level sets of $F$.
 **Proof technique:** direct.
 
 1.1 Because $F$ is a submersion, $q$ is a regular value and the level set [given]
-$F^{-1}(q)$ is an embedded submanifold. Its tangent space at each point is the
-kernel of the differential of $F$. Therefore each connected component of
-$F^{-1}(q)$ is an integral manifold of $\ker dF$. [given]
+$F^{-1}(q)$ is an embedded submanifold. Its tangent space at each point is the kernel of the differential of $F$. Therefore each connected component of $F^{-1}(q)$ is an integral manifold of $\ker dF$. [given]
 
 1.2 Repeating the same argument at every point of $M$ shows that each point [given]
-lies on such a connected component, so $\ker dF$ is integrable. Since an
-integral manifold of $\ker dF$ stays inside one level set of $F$, the maximal
-connected integral manifolds are exactly the connected components of the fibres.
-[given]
+lies on such a connected component, so $\ker dF$ is integrable. Since an integral manifold of $\ker dF$ stays inside one level set of $F$, the maximal connected integral manifolds are exactly the connected components of the fibres. [given]
 
 1.3 Hence the kernel of a submersion is integrable with leaves equal to fibre [given]
 components. [given] ∎

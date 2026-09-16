@@ -84,17 +84,8 @@ not. That is the concrete form of the dominance recorded in
 
 ## Remarks
 
-- **Where the numbers come from.** The exponent $-k + (-1)^k$ changes by
-  $-1 + (-1)^{k+1} - (-1)^k = -1 \mp 2$ from one index to the next, giving ratios
-  $2^{-3} = 1/8$ and $2^{1} = 2$; the root divides the exponent by the index, so
-  the bounded oscillation contributes $2^{\pm 1/(k+1)} \to 1$ and only the linear
-  part $-k$ survives, giving $2^{-1} = 1/2$. The full computation is in
-  [[fs-ratio-and-root-limits-always-agree]].
+- **Where the numbers come from.** The exponent $-k + (-1)^k$ changes by $-1 + (-1)^{k+1} - (-1)^k = -1 \mp 2$ from one index to the next, giving ratios $2^{-3} = 1/8$ and $2^{1} = 2$; the root divides the exponent by the index, so the bounded oscillation contributes $2^{\pm 1/(k+1)} \to 1$ and only the linear part $-k$ survives, giving $2^{-1} = 1/2$. The full computation is in [[fs-ratio-and-root-limits-always-agree]].
 
-- **The same sequence reappears for series.** With these $a_k$ the series
-  $\sum_k a_k$ converges, and the root criterion sees it while the ratio criterion
-  does not. That use belongs to the series page and is not made here.
+- **The same sequence reappears for series.** With these $a_k$ the series $\sum_k a_k$ converges, and the root criterion sees it while the ratio criterion does not. That use belongs to the series page and is not made here.
 
-- **Strictness of the middle inequality needs a different witness.** Here
-  $\liminf_k r_k = \limsup_k r_k$, since the roots converge. A sequence making all
-  three inequalities of the chain strict is [[ex-strict-ratio-root-chain]].
+- **Strictness of the middle inequality needs a different witness.** Here $\liminf_k r_k = \limsup_k r_k$, since the roots converge. A sequence making all three inequalities of the chain strict is [[ex-strict-ratio-root-chain]].

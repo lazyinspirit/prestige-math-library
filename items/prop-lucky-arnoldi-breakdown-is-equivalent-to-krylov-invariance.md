@@ -30,13 +30,9 @@ current Krylov space $K_m(A,b)$ is $A$-invariant.
 
 ## Facts & Assumptions
 
-**Given:** An integer $m\ge1$ and an Arnoldi run through step $m$ with basis vectors
-$v_1,\dots,v_m$.
+**Given:** An integer $m\ge1$ and an Arnoldi run through step $m$ with basis vectors $v_1,\dots,v_m$.
 
-[L1] Before breakdown, Arnoldi produces an orthonormal basis of $K_m(A,b)$ and
-the relations
-$Av_j\in\operatorname{span}\{v_1,\dots,v_{j+1}\}$ for $1\le j\le m$
-([[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]).
+[L1] Before breakdown, Arnoldi produces an orthonormal basis of $K_m(A,b)$ and the relations $Av_j\in\operatorname{span}\{v_1,\dots,v_{j+1}\}$ for $1\le j\le m$ ([[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]).
 
 ## Proof
 **Proof technique:** direct.

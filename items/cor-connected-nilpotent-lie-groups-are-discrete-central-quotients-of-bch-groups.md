@@ -32,15 +32,11 @@ subgroup.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice and a connected group $G$ with nilpotent Lie
-algebra $\mathfrak n$.
+**Given:** Countable choice and a connected group $G$ with nilpotent Lie algebra $\mathfrak n$.
 
-[L1] The simply connected cover of $G$ is quotiented by a discrete central
-kernel ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
+[L1] The simply connected cover of $G$ is quotiented by a discrete central kernel ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
 
-[L2] A simply connected nilpotent integration is isomorphic through its
-exponential to the BCH group
-([[thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism]]).
+[L2] A simply connected nilpotent integration is isomorphic through its exponential to the BCH group ([[thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism]]).
 
 ## Proof
 

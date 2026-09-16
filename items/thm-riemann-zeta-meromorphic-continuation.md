@@ -35,28 +35,19 @@ $s=1$, of residue $1$.
 
 **Given:** The completed function $\Lambda(s)=\pi^{-s/2}\Gamma(s/2)\zeta(s)$ on $\operatorname{Re}s>1$.
 
-[L1] On $\operatorname{Re}s>0$, zeta already has the fractional-part formula and
-only a simple residue-one pole at $1$
-([[thm-riemann-zeta-continuation-to-the-right-half-plane]]).
+[L1] On $\operatorname{Re}s>0$, zeta already has the fractional-part formula and only a simple residue-one pole at $1$ ([[thm-riemann-zeta-continuation-to-the-right-half-plane]]).
 
-[L2] The theta transformation is
-$$\theta(t)=t^{-1/2}\theta(1/t)\qquad(t>0)$$
-([[thm-jacobi-theta-transformation]]).
+[L2] The theta transformation is $$\theta(t)=t^{-1/2}\theta(1/t)\qquad(t>0)$$ ([[thm-jacobi-theta-transformation]]).
 
-[L3] On $\operatorname{Re}s>1$,
-$$\Lambda(s)=\frac12\int_0^\infty(\theta(t)-1)t^{s/2-1}\,dt$$
-([[thm-theta-mellin-representation-of-completed-zeta]]).
+[L3] On $\operatorname{Re}s>1$, $$\Lambda(s)=\frac12\int_0^\infty(\theta(t)-1)t^{s/2-1}\,dt$$ ([[thm-theta-mellin-representation-of-completed-zeta]]).
 
-[L4] The symbol $\Lambda(s)$ denotes $\pi^{-s/2}\Gamma(s/2)\zeta(s)$
-([[def-completed-riemann-zeta-function]]).
+[L4] The symbol $\Lambda(s)$ denotes $\pi^{-s/2}\Gamma(s/2)\zeta(s)$ ([[def-completed-riemann-zeta-function]]).
 
-[L5] Gamma extends meromorphically to $\mathbb C$ and has simple poles at the
-nonpositive integers ([[thm-gamma-meromorphic-continuation]]).
+[L5] Gamma extends meromorphically to $\mathbb C$ and has simple poles at the nonpositive integers ([[thm-gamma-meromorphic-continuation]]).
 
 [L6] Gamma has no zeros on $\mathbb C$ ([[cor-gamma-function-has-no-zeros]]).
 
-[A1] Two meromorphic functions on a connected domain that agree on a nonempty
-open subset agree everywhere on that domain.
+[A1] Two meromorphic functions on a connected domain that agree on a nonempty open subset agree everywhere on that domain.
 
 ## Proof
 

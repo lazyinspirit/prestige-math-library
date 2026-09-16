@@ -60,7 +60,4 @@ the Catalan number ([[def-catalan-number]]).
 
 ## Remarks
 
-- **The content is in the theorem above, not here.** Once the grammar and the
-  prefix condition are known to describe the same words, the count is a transport
-  along a bijection of alphabets. What makes the corollary worth stating is that it
-  is the first of the three Catalan families whose members are not paths.
+- **The content is in the theorem above, not here.** Once the grammar and the prefix condition are known to describe the same words, the count is a transport along a bijection of alphabets. What makes the corollary worth stating is that it is the first of the three Catalan families whose members are not paths.

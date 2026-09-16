@@ -38,11 +38,9 @@ for every time $t$ in the interval of existence.
 
 ## Facts & Assumptions
 
-**Given:** A global $C^1$ flow $\Phi_t$ for the homogeneous transport equation
-and the representation $u(\cdot,t)=u_0\circ\Phi_t^{-1}$.
+**Given:** A global $C^1$ flow $\Phi_t$ for the homogeneous transport equation and the representation $u(\cdot,t)=u_0\circ\Phi_t^{-1}$.
 
-[L1] Homogeneous linear transport is represented by the inverse
-characteristic flow ([[thm-homogeneous-linear-transport-by-the-flow]]).
+[L1] Homogeneous linear transport is represented by the inverse characteristic flow ([[thm-homogeneous-linear-transport-by-the-flow]]).
 
 ## Proof
 

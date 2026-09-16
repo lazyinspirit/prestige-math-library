@@ -38,9 +38,7 @@ the induced morphism from $\ker(\beta)$ to $\ker(f)$ is an isomorphism.
 
 **Given:** The displayed pullback square in an abelian category.
 
-[L1] Abelian categories have pullbacks, and the square above is one
-([[def-abelian-category]],
-[[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]]).
+[L1] Abelian categories have pullbacks, and the square above is one ([[def-abelian-category]], [[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]]).
 
 ## Proof
 

@@ -34,14 +34,9 @@ proof obtained from the other by interchanging separability and Lindelöfness.
 
 ## Facts & Assumptions
 
-**Given:** The theories in the cited result are interpreted as separate
-branches.  For the metamathematical nonprovability clause, assume
-$\operatorname{Con}(\mathrm{ZFC}+\text{there is a supercompact cardinal})$.
+**Given:** The theories in the cited result are interpreted as separate branches.  For the metamathematical nonprovability clause, assume $\operatorname{Con}(\mathrm{ZFC}+\text{there is a supercompact cardinal})$.
 
-[F1] [[thm-l-and-s-space-existence-is-asymmetric]] proves that ZFC constructs
-an L-space, ZFC+CH constructs a strong S-space, ZFC+PFA proves that no S-space
-exists, and under the displayed source-consistency assumption S-space
-existence is not a theorem of ZFC.
+[F1] [[thm-l-and-s-space-existence-is-asymmetric]] proves that ZFC constructs an L-space, ZFC+CH constructs a strong S-space, ZFC+PFA proves that no S-space exists, and under the displayed source-consistency assumption S-space existence is not a theorem of ZFC.
 
 ## Refutation
 

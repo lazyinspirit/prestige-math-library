@@ -36,8 +36,7 @@ $$\operatorname{Res}(\Gamma,-2)=\frac12.$$
 
 **Given:** The pole-residue formula for Gamma.
 
-[L1] $\operatorname{Res}(\Gamma,-n)=(-1)^n/n!$ for every integer $n\ge0$
-([[thm-gamma-meromorphic-continuation]]).
+[L1] $\operatorname{Res}(\Gamma,-n)=(-1)^n/n!$ for every integer $n\ge0$ ([[thm-gamma-meromorphic-continuation]]).
 
 ## Verification
 

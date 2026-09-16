@@ -24,21 +24,13 @@ pipeline_run: frontier-29
 Every additive functor $F$ has $L_0F$ naturally isomorphic to $F$.
 ## Facts & Assumptions
 
-**Given:** The additive functor
-$F(M)=\operatorname{Hom}_{\mathbb Z}(\mathbb Z/2\mathbb Z,M)$ on abelian
-groups, and supplied projective resolution data $P$ on a class containing
-$\mathbb Z/2\mathbb Z$ that assigns it the standard resolution below.
+**Given:** The additive functor $F(M)=\operatorname{Hom}_{\mathbb Z}(\mathbb Z/2\mathbb Z,M)$ on abelian groups, and supplied projective resolution data $P$ on a class containing $\mathbb Z/2\mathbb Z$ that assigns it the standard resolution below.
 
-[L1] If $F$ is right exact, the zero-th left derived functor recovers $F$
-naturally
-([[thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]]).
+[L1] If $F$ is right exact, the zero-th left derived functor recovers $F$ naturally ([[thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]]).
 
-[L2] Left derived objects are computed from the homology of an applied deleted
-projective resolution
-([[def-left-derived-object-relative-to-projective-resolution-data]]).
+[L2] Left derived objects are computed from the homology of an applied deleted projective resolution ([[def-left-derived-object-relative-to-projective-resolution-data]]).
 
-[L3] Additivity means preservation of sums on hom-groups
-([[def-additive-functor]]).
+[L3] Additivity means preservation of sums on hom-groups ([[def-additive-functor]]).
 
 ## Refutation
 

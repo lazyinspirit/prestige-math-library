@@ -34,8 +34,7 @@ $$\Gamma(n+1)=n!.$$
 
 **Given:** A nonnegative integer $n$.
 
-[L1] On the right half-plane, $\Gamma(z+1)=z\Gamma(z)$
-([[thm-gamma-functional-equation]]).
+[L1] On the right half-plane, $\Gamma(z+1)=z\Gamma(z)$ ([[thm-gamma-functional-equation]]).
 
 ## Proof
 

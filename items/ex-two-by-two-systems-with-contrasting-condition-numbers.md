@@ -34,18 +34,13 @@ $2\times 2$ shape and entries of the same order.
 
 ## Facts & Assumptions
 
-**Given:** The matrices $A_1=\operatorname{diag}(1,4)$ and
-$A_2=\begin{pmatrix}1&1\\1&1+\varepsilon\end{pmatrix}$ with $\varepsilon=1/100>0$.
+**Given:** The matrices $A_1=\operatorname{diag}(1,4)$ and $A_2=\begin{pmatrix}1&1\\1&1+\varepsilon\end{pmatrix}$ with $\varepsilon=1/100>0$.
 
-[L1] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$ for $p\in\{1,\infty\}$
-([[def-condition-number-of-a-nonsingular-linear-system]]).
+[L1] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$ for $p\in\{1,\infty\}$ ([[def-condition-number-of-a-nonsingular-linear-system]]).
 
-[L2] The induced $1$-norm is the maximum column sum and the induced
-$\infty$-norm the maximum row sum
-([[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]]).
+[L2] The induced $1$-norm is the maximum column sum and the induced $\infty$-norm the maximum row sum ([[thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums]]).
 
-[L3] For a nonsingular $2\times2$ matrix $M=\begin{pmatrix}a&b\\c&d\end{pmatrix}$,
-$M^{-1}=(ad-bc)^{-1}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$.
+[L3] For a nonsingular $2\times2$ matrix $M=\begin{pmatrix}a&b\\c&d\end{pmatrix}$, $M^{-1}=(ad-bc)^{-1}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$.
 
 ## Verification
 

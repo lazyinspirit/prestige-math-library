@@ -41,15 +41,11 @@ $$\prod_{p\mid q}\left(1-\frac1p\right)=\frac{\varphi(q)}{q}.$$
 
 **Given:** The principal character $\chi_0$ modulo $q$.
 
-[L1] $\chi_0(p)=0$ for primes $p\mid q$, and $\chi_0(p)=1$ for primes $p\nmid q$
-([[def-principal-dirichlet-character]]).
+[L1] $\chi_0(p)=0$ for primes $p\mid q$, and $\chi_0(p)=1$ for primes $p\nmid q$ ([[def-principal-dirichlet-character]]).
 
-[L2] Dirichlet $L$-functions and $\zeta$ have Euler products on
-$\operatorname{Re}s>1$ ([[thm-dirichlet-l-euler-product]],
-[[thm-euler-product-for-riemann-zeta]]).
+[L2] Dirichlet $L$-functions and $\zeta$ have Euler products on $\operatorname{Re}s>1$ ([[thm-dirichlet-l-euler-product]], [[thm-euler-product-for-riemann-zeta]]).
 
-[L3] The meromorphic continuation of $\zeta$ has a single simple pole at $1$ of
-residue $1$ ([[thm-riemann-zeta-meromorphic-continuation]]).
+[L3] The meromorphic continuation of $\zeta$ has a single simple pole at $1$ of residue $1$ ([[thm-riemann-zeta-meromorphic-continuation]]).
 
 ## Proof
 

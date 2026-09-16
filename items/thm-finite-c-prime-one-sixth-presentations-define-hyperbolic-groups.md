@@ -36,9 +36,7 @@ metric small-cancellation condition $C'(1/6)$. Then $G$ is hyperbolic.
 
 [A1] Finite $C'(1/6)$ presentations satisfy a linear isoperimetric inequality.
 
-[L1] A finite presentation with linear isoperimetric inequality defines a
-hyperbolic group
-([[thm-linear-isoperimetric-characterisation-of-hyperbolic-groups]]).
+[L1] A finite presentation with linear isoperimetric inequality defines a hyperbolic group ([[thm-linear-isoperimetric-characterisation-of-hyperbolic-groups]]).
 
 ## Proof
 

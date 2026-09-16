@@ -29,8 +29,7 @@ $L(f)=\int_a^bf(x)\,dx$. Then $L$ is positive and its RMK representing measure i
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice; continuous functions on $[a,b]$
-are Riemann and Lebesgue integrable with equal integrals.
+**Given:** The Axiom of Countable Choice; continuous functions on $[a,b]$ are Riemann and Lebesgue integrable with equal integrals.
 
 ## Verification
 
@@ -39,8 +38,4 @@ are Riemann and Lebesgue integrable with equal integrals.
 1.1 Linearity of the Riemann integral makes $L$ linear, and $f\ge0$ implies $L(f)\ge0$. Since $[a,b]$ is compact, $C_c([a,b])=C([a,b])$. [given]
 
 1.2 Under the stated choice hypothesis, Lebesgue measure is regular on [given]
-$\mathbb R$; its restriction to the closed subspace $[a,b]$ is finite and
-Radon. For every $f\in C([a,b])$, equality of the Riemann and Lebesgue
-integrals gives
-$L(f)=\int_{[a,b]}f\,d(\lambda|_{[a,b]})$. The RMK uniqueness theorem now
-identifies this measure as the representing measure. [given] ∎
+$\mathbb R$; its restriction to the closed subspace $[a,b]$ is finite and Radon. For every $f\in C([a,b])$, equality of the Riemann and Lebesgue integrals gives $L(f)=\int_{[a,b]}f\,d(\lambda|_{[a,b]})$. The RMK uniqueness theorem now identifies this measure as the representing measure. [given] ∎

@@ -40,38 +40,26 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 **Given:** A measure space $(X,\mathcal A,\mu)$.
 
-[L1] The null functions are those that vanish almost everywhere
-([[def-null-subspace-of-almost-everywhere-zero-functions]]).
+[L1] The null functions are those that vanish almost everywhere ([[def-null-subspace-of-almost-everywhere-zero-functions]]).
 
-[L2] $\mathcal L^p(\mu)$ and $L^\infty(\mu)$ are vector spaces in the relevant
-ranges ([[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]]).
+[L2] $\mathcal L^p(\mu)$ and $L^\infty(\mu)$ are vector spaces in the relevant ranges ([[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]]).
 
-[L3] A countable union of measurable null sets is null
-([[thm-finite-and-countable-subadditivity-of-measures]]).
+[L3] A countable union of measurable null sets is null ([[thm-finite-and-countable-subadditivity-of-measures]]).
 
-[L4] A linear subspace means the three closure conditions of
-[[def-linear-subspace]].
+[L4] A linear subspace means the three closure conditions of [[def-linear-subspace]].
 
-[L5] For $1\le p<\infty$, a nonnegative measurable function has integral $0$
-exactly when it vanishes almost everywhere
-([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]).
+[L5] For $1\le p<\infty$, a nonnegative measurable function has integral $0$ exactly when it vanishes almost everywhere ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]).
 
-[L6] If $\|f\|_\infty<\infty$, then $|f|\le\|f\|_\infty$ almost everywhere
-([[prop-essential-supremum-is-attained-as-the-least-essential-bound]]).
+[L6] If $\|f\|_\infty<\infty$, then $|f|\le\|f\|_\infty$ almost everywhere ([[prop-essential-supremum-is-attained-as-the-least-essential-bound]]).
 
 ## Proof
 
-**Proof technique:** Use countable-union stability of null sets for addition and
-scalar multiplication. For $1 \le p < infinity$, the $p$-seminorm vanishes
-exactly when the integral of $|f|^p$ is zero; for $p = infinity$, vanishing
-means the essential supremum is zero.
+**Proof technique:** Use countable-union stability of null sets for addition and scalar multiplication. For $1 \le p < infinity$, the $p$-seminorm vanishes exactly when the integral of $|f|^p$ is zero; for $p = infinity$, vanishing means the essential supremum is zero.
 
 1.1 Fix $1\le p<\infty$. If $f,g\in\mathcal N_p(\mu)$, choose measurable null sets $E_f,E_g$ outside which $f=0$ and $g=0$. Their union is null, and on its complement one has $f+g=0$ and $af=0$ for every $a\in\mathbb R$. Because $\mathcal L^p(\mu)$ is a vector space, [L4] makes $\mathcal N_p(\mu)$ a linear subspace. [L1, L2, L3, L4]
 
 1.2 If $f\in\mathcal N_p(\mu)$, then $|f|^p=0$ almost everywhere, so [L1, L5]
-$$\int |f|^p\,d\mu=0,$$
-hence $\|f\|_p=0$. Conversely, if $\|f\|_p=0$, then the same theorem [L5]
-forces $|f|^p=0$ almost everywhere and therefore $f=0$ almost everywhere.
+$$\int |f|^p\,d\mu=0,$$ hence $\|f\|_p=0$. Conversely, if $\|f\|_p=0$, then the same theorem [L5] forces $|f|^p=0$ almost everywhere and therefore $f=0$ almost everywhere.
 
 1.3 If $f\in\mathcal N_\infty(\mu)$, then $0$ is an essential bound for $|f|$, so $\|f\|_\infty=0$. Conversely, if $\|f\|_\infty=0$, then [L6] gives $|f|\le0$ almost everywhere, hence $f=0$ almost everywhere. [L1, L6]
 

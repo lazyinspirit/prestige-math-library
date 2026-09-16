@@ -44,28 +44,17 @@ Each is the natural logarithm.
 
 **Given:** The five descriptions listed in the statement.
 
-[F1] The natural logarithm is defined as the inverse of the exponential
-function ([[def-natural-logarithm]]).
+[F1] The natural logarithm is defined as the inverse of the exponential function ([[def-natural-logarithm]]).
 
-[L1] The natural logarithm satisfies
-$\log x=\int_1^xdt/t$ and $\log'(x)=1/x$
-([[thm-logarithm-derivative-and-integral]]).
+[L1] The natural logarithm satisfies $\log x=\int_1^xdt/t$ and $\log'(x)=1/x$ ([[thm-logarithm-derivative-and-integral]]).
 
-[L2] The independently constructed integral function satisfies $L=\log$
-([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
+[L2] The independently constructed integral function satisfies $L=\log$ ([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
 
-[L3] The Mercator formula holds for $-1<u\leq1$
-([[thm-log-one-plus-x-power-series]]), and exactly one product-law extension
-of those values exists, namely $\log$
-([[lem-log-series-extends-by-the-product-law]]).
+[L3] The Mercator formula holds for $-1<u\leq1$ ([[thm-log-one-plus-x-power-series]]), and exactly one product-law extension of those values exists, namely $\log$ ([[lem-log-series-extends-by-the-product-law]]).
 
-[L4] For $x>0$,
-$\log x=\lim_{n\to\infty}2^n(x^{1/2^n}-1)$
-([[thm-landau-logarithm-limit]]).
+[L4] For $x>0$, $\log x=\lim_{n\to\infty}2^n(x^{1/2^n}-1)$ ([[thm-landau-logarithm-limit]]).
 
-[L5] The natural logarithm is the unique continuous product-to-sum function
-with $f(e)=1$
-([[thm-logarithm-continuous-functional-equation-characterisation]]).
+[L5] The natural logarithm is the unique continuous product-to-sum function with $f(e)=1$ ([[thm-logarithm-continuous-functional-equation-characterisation]]).
 
 ## Proof
 

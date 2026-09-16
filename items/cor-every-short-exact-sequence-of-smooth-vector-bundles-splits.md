@@ -39,14 +39,11 @@ admits a smooth splitting $s:F\to G$ with $q\circ s=\operatorname{id}_F$.
 
 **Given:** A short exact sequence of smooth vector bundles over one base $M$.
 
-[L1] Constant-rank kernels and images of bundle maps over one base are smooth
-subbundles ([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
+[L1] Constant-rank kernels and images of bundle maps over one base are smooth subbundles ([[prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles]]).
 
-[L2] Every vector subbundle has a smooth complement
-([[cor-every-vector-subbundle-has-a-smooth-complement]]).
+[L2] Every vector subbundle has a smooth complement ([[cor-every-vector-subbundle-has-a-smooth-complement]]).
 
-[L3] A fibrewise bijective smooth bundle map over the identity is a bundle
-isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]]).
+[L3] A fibrewise bijective smooth bundle map over the identity is a bundle isomorphism ([[prop-a-fibrewise-bijective-smooth-bundle-map-over-a-diffeomorphism-is-a-bundle-isomorphism]]).
 
 ## Proof
 

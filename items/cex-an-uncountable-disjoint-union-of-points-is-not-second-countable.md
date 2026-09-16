@@ -32,16 +32,11 @@ An arbitrary disjoint union of second-countable manifolds is second-countable.
 
 ## Facts & Assumptions
 
-**Given:** An uncountable disjoint union $X=\bigsqcup_{i\in I}\{\ast_i\}$ of
-one-point spaces.
+**Given:** An uncountable disjoint union $X=\bigsqcup_{i\in I}\{\ast_i\}$ of one-point spaces.
 
-[L1] The A-page false statement already proves that such a space is discrete and
-admits no countable basis
-([[fs-an-arbitrary-disjoint-union-of-second-countable-manifolds-is-second-countable]]).
+[L1] The A-page false statement already proves that such a space is discrete and admits no countable basis ([[fs-an-arbitrary-disjoint-union-of-second-countable-manifolds-is-second-countable]]).
 
-[F1] The topology is the disjoint-union topology of [[def-disjoint-union-topology]],
-and second countability means existence of an at most countable basis
-([[def-second-countable-space]]).
+[F1] The topology is the disjoint-union topology of [[def-disjoint-union-topology]], and second countability means existence of an at most countable basis ([[def-second-countable-space]]).
 
 ## Counterexample
 

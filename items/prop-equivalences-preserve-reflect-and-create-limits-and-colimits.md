@@ -34,16 +34,11 @@ not assert strict creation with an unchanged target apex.
 
 **Given:** An equivalence $F:\mathcal C\to\mathcal D$.
 
-[F1] An equivalence has a quasi-inverse $G$ and unit and counit natural
-isomorphisms ([[def-equivalence-and-adjoint-equivalence-of-categories]],
-[[def-natural-isomorphism]]).
+[F1] An equivalence has a quasi-inverse $G$ and unit and counit natural isomorphisms ([[def-equivalence-and-adjoint-equivalence-of-categories]], [[def-natural-isomorphism]]).
 
-[L1] Fully faithful functors reflect limits and colimits
-([[prop-fully-faithful-functors-reflect-limits-and-colimits]]).
+[L1] Fully faithful functors reflect limits and colimits ([[prop-fully-faithful-functors-reflect-limits-and-colimits]]).
 
-[F2] Isomorphism-invariant creation asks for a limiting source lift whose image
-is isomorphic as a cone to the target limit, together with reflection
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F2] Isomorphism-invariant creation asks for a limiting source lift whose image is isomorphic as a cone to the target limit, together with reflection ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
 [L2] Limits and colimits are formal duals ([[prop-limit-colimit-duality]]).
 

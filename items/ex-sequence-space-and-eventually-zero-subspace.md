@@ -95,18 +95,8 @@ and $e_k(n) = 0_F$ for $n \ne k$. Then:
 
 ## Remarks
 
-- **The spanning set is infinite and every combination is finite.** The span of an
-  infinite set consists of the vectors built from finitely many of its elements
-  ([[lem-span-is-the-set-of-linear-combinations]]), which is exactly why the span
-  of all the $e_k$ is the eventually zero families and not all of
-  $F^{\mathbb{N}}$. Claim 3 is the concrete form of that distinction.
+- **The spanning set is infinite and every combination is finite.** The span of an infinite set consists of the vectors built from finitely many of its elements ([[lem-span-is-the-set-of-linear-combinations]]), which is exactly why the span of all the $e_k$ is the eventually zero families and not all of $F^{\mathbb{N}}$. Claim 3 is the concrete form of that distinction.
 
-- **No topology and no convergence are involved.** "Eventually zero" is a purely
-  algebraic condition on a family indexed by $\mathbb{N}$: some tail is
-  identically $0_F$. Nothing here needs an order or a metric on $F$, and $F$ is an
-  arbitrary field.
+- **No topology and no convergence are involved.** "Eventually zero" is a purely algebraic condition on a family indexed by $\mathbb{N}$: some tail is identically $0_F$. Nothing here needs an order or a metric on $F$, and $F$ is an arbitrary field.
 
-- **The witness $N$ is not unique and nothing above assumes it is.** If $N$
-  witnesses that $x$ is eventually zero then so does every larger natural number,
-  which is what makes the argument in step 1.3 work: two families are handled by
-  taking the larger of their witnesses.
+- **The witness $N$ is not unique and nothing above assumes it is.** If $N$ witnesses that $x$ is eventually zero then so does every larger natural number, which is what makes the argument in step 1.3 work: two families are handled by taking the larger of their witnesses.

@@ -35,9 +35,7 @@ The test-function topology exists as a Hausdorff locally convex vector topology,
 
 **Given:** $\Omega$, its fixed-support spaces and the family $\mathcal P$ of F1.
 
-1.1 Finite intersections of translated seminorm balls form a topology: each ball is stable under sufficiently small translates, by $|q(f)-q(g)|\le q(f-g)$, and intersections refine intersections. Addition is continuous since $q(h+k)\le q(h)+q(k)$. Joint scalar multiplication is continuous at $(a,f)$ since
-$$q(b g-a f)\le |b|q(g-f)+|b-a|q(f).$$
-Near $a$, bound $|b|$ by $|a|+1$ and make the two terms small for each of finitely many seminorms. Balls at zero are convex and balanced by the seminorm inequalities. Thus the construction is a locally convex vector topology. [given, F1, algebra]
+1.1 Finite intersections of translated seminorm balls form a topology: each ball is stable under sufficiently small translates, by $|q(f)-q(g)|\le q(f-g)$, and intersections refine intersections. Addition is continuous since $q(h+k)\le q(h)+q(k)$. Joint scalar multiplication is continuous at $(a,f)$ since $$q(b g-a f)\le |b|q(g-f)+|b-a|q(f).$$ Near $a$, bound $|b|$ by $|a|+1$ and make the two terms small for each of finitely many seminorms. Balls at zero are convex and balanced by the seminorm inequalities. Thus the construction is a locally convex vector topology. [given, F1, algebra]
 
 2.1 Each inclusion is continuous by the definition of $\mathcal P$. Define $Q_m(f)=\max_{|\alpha|\le m}\sup_{x\in\Omega}|\partial^\alpha f(x)|$, with value zero on the empty domain. Compact support makes this finite and its restriction to $\mathcal D_K$ is $p_m$, so $Q_m\in\mathcal P$. In particular $Q_0$ separates points: if $f\ne g$, the disjoint balls of radius $Q_0(f-g)/3$ about them separate them. On $\mathcal D_K$ the induced topology is no finer than its prescribed topology by inclusion continuity, and no coarser because all $p_m$ are restrictions of $Q_m$. [step 1.1, F1, F2]
 

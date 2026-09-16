@@ -42,8 +42,7 @@ $\overline{P_5}$-free graph $G$, at least one of the following holds:
 
 **Given:** A parameter $x\in(0,\tfrac12)$ and a $\overline{P_5}$-free graph $G$.
 
-[L1] Lemma 7.3 of the cited source proves exactly the displayed restricted-set
-or complete/anticomplete-blockade alternative, with explicit constants.
+[L1] Lemma 7.3 of the cited source proves exactly the displayed restricted-set or complete/anticomplete-blockade alternative, with explicit constants.
 
 ## Proof
 

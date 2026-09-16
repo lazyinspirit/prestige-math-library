@@ -76,15 +76,6 @@ the absolute value being that of [[def-int-abs]]. Moreover $b \mid a$
 
 ## Remarks
 
-- **What this discharges.** [[thm-division-algorithm-in-z]] is stated for a
-  positive divisor, and its own Remarks record that "the version for $b \ne 0$,
-  with $0 \le r < |b|$, follows once absolute values are in hand". Absolute
-  values on $\mathbb{Z}$ arrive on this page ([[def-int-abs]]), so the promise is
-  discharged here.
+- **What this discharges.** [[thm-division-algorithm-in-z]] is stated for a positive divisor, and its own Remarks record that "the version for $b \ne 0$, with $0 \le r < |b|$, follows once absolute values are in hand". Absolute values on $\mathbb{Z}$ arrive on this page ([[def-int-abs]]), so the promise is discharged here.
 
-- **The remainder is still taken nonnegative, and that is a choice.** With
-  $a = -7$ and $b = -3$ the statement above gives $-7 = 3 \cdot (-3) + 2$, so
-  $q = 3$ and $r = 2$, whereas truncating the quotient toward zero would give
-  $q = 2$ and $r = -1$, which the constraint $0 \le r$ excludes. The clause
-  $0 \le r < |b|$ is the one every use below makes, and no other convention is
-  introduced anywhere on this page.
+- **The remainder is still taken nonnegative, and that is a choice.** With $a = -7$ and $b = -3$ the statement above gives $-7 = 3 \cdot (-3) + 2$, so $q = 3$ and $r = 2$, whereas truncating the quotient toward zero would give $q = 2$ and $r = -1$, which the constraint $0 \le r$ excludes. The clause $0 \le r < |b|$ is the one every use below makes, and no other convention is introduced anywhere on this page.

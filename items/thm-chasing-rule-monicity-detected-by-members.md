@@ -38,15 +38,11 @@ equivalent:
 
 **Given:** A morphism $f:A \to B$.
 
-[L1] Monomorphisms are left-cancellable
-([[def-monomorphism-and-epimorphism]]).
+[L1] Monomorphisms are left-cancellable ([[def-monomorphism-and-epimorphism]]).
 
-[L2] A member equivalent to zero is literally the zero morphism, and every
-member has a zero comparison member
-([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
+[L2] A member equivalent to zero is literally the zero morphism, and every member has a zero comparison member ([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
 
-[L3] Postcomposition preserves member equivalence
-([[prop-a-morphism-carries-members-to-members-and-preserves-equivalence]]).
+[L3] Postcomposition preserves member equivalence ([[prop-a-morphism-carries-members-to-members-and-preserves-equivalence]]).
 
 ## Proof
 

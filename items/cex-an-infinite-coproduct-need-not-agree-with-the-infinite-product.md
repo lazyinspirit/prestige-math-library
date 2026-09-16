@@ -37,12 +37,9 @@ $\mathbf{Ab}=\mathbb Z\text{-}\mathbf{Mod}$.
 
 **Given:** The countable family $(\mathbb Z)_{n\in\mathbb N}$ in $\mathbf{Ab}$.
 
-[L1] The direct sum $\bigoplus_{n\in\mathbb N}\mathbb Z$ consists of those
-integer sequences with finite support
-([[def-direct-sum-of-a-family-of-modules]]).
+[L1] The direct sum $\bigoplus_{n\in\mathbb N}\mathbb Z$ consists of those integer sequences with finite support ([[def-direct-sum-of-a-family-of-modules]]).
 
-[L2] For every ring $R$, the category $R\text{-}\mathbf{Mod}$ has all small
-products and coproducts ([[thm-rmod-is-complete-and-cocomplete]]).
+[L2] For every ring $R$, the category $R\text{-}\mathbf{Mod}$ has all small products and coproducts ([[thm-rmod-is-complete-and-cocomplete]]).
 
 ## Counterexample
 

@@ -34,11 +34,9 @@ $F(z+1)=zF(z)$ and $F(n+1)=n!$ for every integer $n\ge0$, then $F=\Gamma$.
 
 **Given:** The Gamma recurrence and factorial values.
 
-[L1] Gamma satisfies $F(z+1)=zF(z)$ on its domain
-([[thm-gamma-functional-equation]]).
+[L1] Gamma satisfies $F(z+1)=zF(z)$ on its domain ([[thm-gamma-functional-equation]]).
 
-[L2] Gamma satisfies $\Gamma(n+1)=n!$ for integers $n\ge0$
-([[cor-gamma-factorial-values]]).
+[L2] Gamma satisfies $\Gamma(n+1)=n!$ for integers $n\ge0$ ([[cor-gamma-factorial-values]]).
 
 ## Refutation
 

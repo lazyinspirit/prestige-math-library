@@ -37,11 +37,9 @@ Every discrete valuation ring is a principal ideal domain.
 
 **Given:** A discrete valuation ring $V$.
 
-[L1] Every nonzero ideal of a DVR is a power of its maximal ideal, hence
-principal ([[thm-ideals-in-a-dvr]]).
+[L1] Every nonzero ideal of a DVR is a power of its maximal ideal, hence principal ([[thm-ideals-in-a-dvr]]).
 
-[F1] A principal ideal domain is an integral domain in which every ideal is
-principal ([[def-principal-ideal-domain]]).
+[F1] A principal ideal domain is an integral domain in which every ideal is principal ([[def-principal-ideal-domain]]).
 
 ## Proof
 

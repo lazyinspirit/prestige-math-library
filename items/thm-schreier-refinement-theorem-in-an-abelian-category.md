@@ -37,12 +37,9 @@ isomorphism.
 
 **Given:** The two finite subobject chains displayed in the statement.
 
-[F1] A refinement is obtained by inserting intermediate subobjects, and two
-finite chains are equivalent when their nonzero successive quotient objects can
-be paired up up to isomorphism.
+[F1] A refinement is obtained by inserting intermediate subobjects, and two finite chains are equivalent when their nonzero successive quotient objects can be paired up up to isomorphism.
 
-[L1] Each cell in the refinement grid is governed by the butterfly lemma
-([[thm-zassenhaus-butterfly-lemma-in-an-abelian-category]]).
+[L1] Each cell in the refinement grid is governed by the butterfly lemma ([[thm-zassenhaus-butterfly-lemma-in-an-abelian-category]]).
 
 ## Proof
 

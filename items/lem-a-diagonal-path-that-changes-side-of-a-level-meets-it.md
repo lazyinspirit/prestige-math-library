@@ -61,11 +61,6 @@ then $h(i)=c$ for some $i$ with $0\le i\le n$; that is, $v$ touches the level $c
 
 ## Remarks
 
-- **Where the step set is spent.** The argument uses only that consecutive
-  heights differ by exactly $1$, and it fails for a step set whose steps change
-  the height by more than one unit: such a path can pass from above a level to
-  below it without ever meeting it. The companion page carries that witness.
+- **Where the step set is spent.** The argument uses only that consecutive heights differ by exactly $1$, and it fails for a step set whose steps change the height by more than one unit: such a path can pass from above a level to below it without ever meeting it. The companion page carries that witness.
 
-- **Both orders are needed.** The reflection argument applies the lemma once with
-  the start above the level and the end below it, and once the other way round,
-  so neither inequality may be dropped.
+- **Both orders are needed.** The reflection argument applies the lemma once with the start above the level and the end below it, and once the other way round, so neither inequality may be dropped.

@@ -36,16 +36,11 @@ algebra $\mathfrak g$.
 
 ## Facts & Assumptions
 
-**Given:** The displayed real vector spaces and the linear map
-$\rho(at)=aJ$.
+**Given:** The displayed real vector spaces and the linear map $\rho(at)=aJ$.
 
-[L1] A representation is a linear map satisfying
-$\rho([x,y])=[\rho(x),\rho(y)]$
-([[def-representation-of-a-lie-algebra]]).
+[L1] A representation is a linear map satisfying $\rho([x,y])=[\rho(x),\rho(y)]$ ([[def-representation-of-a-lie-algebra]]).
 
-[L2] A nonzero representation is irreducible when its only stable subspaces
-are $0$ and the whole space
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L2] A nonzero representation is irreducible when its only stable subspaces are $0$ and the whole space ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Refutation
 

@@ -32,62 +32,33 @@ degree-one class on $\mathbb {RP}^n$; for $n=0$ it sends $a$ to zero.
 
 ## Facts & Assumptions
 
-**Given:** The standard filtration
-$\mathbb {RP}^0\subset\mathbb {RP}^1\subset\cdots\subset\mathbb {RP}^{\infty}$
-and coefficients $\mathbb F_2$.
+**Given:** The standard filtration $\mathbb {RP}^0\subset\mathbb {RP}^1\subset\cdots\subset\mathbb {RP}^{\infty}$ and coefficients $\mathbb F_2$.
 
-[F1] [[lem-real-projective-space-cellular-homology-and-pinch-map]] constructs
-one cell in each dimension of each finite $\mathbb {RP}^m$ and computes
-cellular incidence numbers zero or two; over $\mathbb F_2$ every finite-stage
-cellular differential is zero.
+[F1] [[lem-real-projective-space-cellular-homology-and-pinch-map]] constructs one cell in each dimension of each finite $\mathbb {RP}^m$ and computes cellular incidence numbers zero or two; over $\mathbb F_2$ every finite-stage cellular differential is zero.
 
-[F2] [[thm-cellular-homology-computes-singular-homology]] applies to arbitrary,
-possibly infinite-dimensional CW complexes and is natural for cellular maps.
+[F2] [[thm-cellular-homology-computes-singular-homology]] applies to arbitrary, possibly infinite-dimensional CW complexes and is natural for cellular maps.
 
-[F3] [[prop-cellular-maps-induce-cellular-chain-maps]] identifies the maps on
-cellular chains with the induced singular-homology maps.
+[F3] [[prop-cellular-maps-induce-cellular-chain-maps]] identifies the maps on cellular chains with the induced singular-homology maps.
 
-[F4] Under AC, [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]]
-identifies singular cohomology naturally with the full field dual of singular
-homology.
+[F4] Under AC, [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]] identifies singular cohomology naturally with the full field dual of singular homology.
 
-[F5] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] and
-[[thm-naturality-of-the-singular-cohomology-pair-sequence]] give exact pair
-sequences and their commuting restriction squares.
+[F5] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] and [[thm-naturality-of-the-singular-cohomology-pair-sequence]] give exact pair sequences and their commuting restriction squares.
 
-[F6] [[thm-homotopic-maps-induce-equal-maps-in-singular-cohomology]] applies
-to the explicit coordinate deformations below, and
-[[thm-excision-for-singular-cohomology]] removes a closed set lying inside the
-open relative subspace.
+[F6] [[thm-homotopic-maps-induce-equal-maps-in-singular-cohomology]] applies to the explicit coordinate deformations below, and [[thm-excision-for-singular-cohomology]] removes a closed set lying inside the open relative subspace.
 
-[F7] Under AC,
-[[lem-local-coordinate-cup-products-generate-top-relative-cohomology]] says
-that the two coordinate local generators in
-$\mathbb R^i\times\mathbb R^j$, for $i,j\geq1$, have nonzero top relative cup
-product.
+[F7] Under AC, [[lem-local-coordinate-cup-products-generate-top-relative-cohomology]] says that the two coordinate local generators in $\mathbb R^i\times\mathbb R^j$, for $i,j\geq1$, have nonzero top relative cup product.
 
-[F8] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]
-transports these relative products, while pullback is a unital ring
-homomorphism by
-[[prop-cup-product-is-natural-unital-and-associative]].
+[F8] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] transports these relative products, while pullback is a unital ring homomorphism by [[prop-cup-product-is-natural-unital-and-associative]].
 
 [A1] [[def-axiom-of-choice]] is assumed exactly through [F4] and [F7].
 
 ## Proof
 
-**Proof technique:** compute additive groups cellularly, prove the finite
-projective-space products by a local relative-cup calculation, and then detect
-the infinite powers on finite skeleta.
+**Proof technique:** compute additive groups cellularly, prove the finite projective-space products by a local relative-cup calculation, and then detect the infinite powers on finite skeleta.
 
 1.1 Mod-two singular homology is one-dimensional in every nonnegative degree, and $(i_n)_*$ is an isomorphism through degree $n$. Realize $\mathbb {RP}^{\infty}$ as the union of the projective spaces of lines in $\mathbb R^{m+1}$ under the coordinate inclusions. For each $j$, the lines whose last nonzero coordinate is the $j$th form an open $j$-cell: scale that coordinate to $1$ to identify it with $\mathbb R^j$. Its characteristic map is the quotient of the closed upper hemisphere in $S^j$, whose equator maps into $\mathbb {RP}^{j-1}$. Hence its closure is $\mathbb {RP}^j$, and these characteristic maps give the standard union its CW topology, one cell in every nonnegative degree. Restriction to the first $n+1$ coordinates is therefore the subcomplex consisting of the cells through dimension $n$. [given, F1, F2, F3]
 
-These are the same upper-hemisphere characteristic maps used in [F1], so its
-incidence calculation gives every infinite cellular differential as zero or
-two. Modulo two all are zero, and cellular homology is one copy of
-$\mathbb F_2$ in every degree. The cellular chain map for $i_n$ is the
-identity on the common cells in degrees at most $n$, so it induces the
-identity there. Facts [F2]--[F3] transfer both assertions to singular
-homology.
+These are the same upper-hemisphere characteristic maps used in [F1], so its incidence calculation gives every infinite cellular differential as zero or two. Modulo two all are zero, and cellular homology is one copy of $\mathbb F_2$ in every degree. The cellular chain map for $i_n$ is the identity on the common cells in degrees at most $n$, so it induces the identity there. Facts [F2]--[F3] transfer both assertions to singular homology.
 
 2.1 The cohomology groups and restriction maps have the corresponding description. By [F4], $H^k(\mathbb {RP}^{\infty};\mathbb F_2)$ is the dual of the one-dimensional group in step 1.1, hence is $\mathbb F_2$ for every $k\geq0$. Naturality identifies $i_n^*$ with precomposition by $(i_n)_*$; since the latter is an isomorphism for $k\leq n$, so is the former. [F4, A1, step 1.1]
 

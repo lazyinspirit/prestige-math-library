@@ -29,12 +29,9 @@ be Lebesgue measurable.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a Lebesgue measurable set $E \subseteq \mathbb{R}$, a subset
-$X \subseteq \mathbb{R}$, and a continuous map $g : X \to \mathbb{R}$ such that
-$g^{-1}[E]$ is not Lebesgue measurable.
+**Given:** The Axiom of Choice, a Lebesgue measurable set $E \subseteq \mathbb{R}$, a subset $X \subseteq \mathbb{R}$, and a continuous map $g : X \to \mathbb{R}$ such that $g^{-1}[E]$ is not Lebesgue measurable.
 
-[L1] Assuming the Axiom of Choice, such data exist.
-([[cor-a-continuous-preimage-of-a-lebesgue-measurable-set-can-be-nonmeasurable]])
+[L1] Assuming the Axiom of Choice, such data exist. ([[cor-a-continuous-preimage-of-a-lebesgue-measurable-set-can-be-nonmeasurable]])
 
 ## Counterexample
 

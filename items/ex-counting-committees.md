@@ -74,8 +74,4 @@ from exactly $3!$ ordered selections.
 
 ## Remarks
 
-- **The standard error is to count one set and name the other.** "How many ways
-  can a committee of three be chosen from ten people" is the count of
-  $[P]^{3}$ only if the committee is unordered; if the three roles are
-  distinguished it is the count of $\operatorname{Inj}(3,P)$. The two differ by a
-  factor of $6$, and no computation can decide which was meant.
+- **The standard error is to count one set and name the other.** "How many ways can a committee of three be chosen from ten people" is the count of $[P]^{3}$ only if the committee is unordered; if the three roles are distinguished it is the count of $\operatorname{Inj}(3,P)$. The two differ by a factor of $6$, and no computation can decide which was meant.

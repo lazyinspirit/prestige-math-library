@@ -40,10 +40,7 @@ $\kappa_2(A^{\mathsf T}A)=10^8$.
 
 **Given:** The displayed matrix $A$, vector $b$, and reduced QR factorisation.
 
-[L1] Reduced QR solves full-column-rank least squares through
-$\widehat R x=\widehat Q^*b$ and avoids the condition-number square of the
-normal equations
-([[thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number]]).
+[L1] Reduced QR solves full-column-rank least squares through $\widehat R x=\widehat Q^*b$ and avoids the condition-number square of the normal equations ([[thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number]]).
 
 ## Verification
 

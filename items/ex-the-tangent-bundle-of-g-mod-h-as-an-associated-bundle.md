@@ -38,22 +38,11 @@ $$G\times_H(\mathfrak g/\mathfrak h)\cong T(G/H).$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a closed subgroup $H\le G$, and the
-principal right $H$-bundle $q:G\to G/H$.
+**Given:** $\mathrm{AC}_\omega$, a closed subgroup $H\le G$, and the principal right $H$-bundle $q:G\to G/H$.
 
-[A1] The associated quotient uses the relation
-$[gh,v]=[g,\operatorname{Ad}_h v]$, has its canonical vector-bundle
-structure, and $q$ is a smooth principal bundle.
-[[def-countable-choice]],
-[[def-associated-bundle-to-a-principal-bundle-and-representation]],
-[[thm-associated-vector-bundle-is-well-defined]],
-[[thm-g-to-g-mod-h-is-a-smooth-principal-h-bundle]].
+[A1] The associated quotient uses the relation $[gh,v]=[g,\operatorname{Ad}_h v]$, has its canonical vector-bundle structure, and $q$ is a smooth principal bundle. [[def-countable-choice]], [[def-associated-bundle-to-a-principal-bundle-and-representation]], [[thm-associated-vector-bundle-is-well-defined]], [[thm-g-to-g-mod-h-is-a-smooth-principal-h-bundle]].
 
-[F1] The map $\overline{dq_e}:\mathfrak g/\mathfrak h\to T_{eH}(G/H)$ is an
-isomorphism, and the isotropy differential corresponds to
-$\operatorname{Ad}_h$ modulo $\mathfrak h$.
-[[prop-tangent-space-of-a-homogeneous-quotient]],
-[[prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h]].
+[F1] The map $\overline{dq_e}:\mathfrak g/\mathfrak h\to T_{eH}(G/H)$ is an isomorphism, and the isotropy differential corresponds to $\operatorname{Ad}_h$ modulo $\mathfrak h$. [[prop-tangent-space-of-a-homogeneous-quotient]], [[prop-isotropy-action-on-g-mod-h-is-induced-by-adjoint-mod-h]].
 
 ## Verification
 

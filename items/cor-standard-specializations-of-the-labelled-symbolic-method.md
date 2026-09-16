@@ -44,8 +44,7 @@ following exponential generating functions:
 
 ## Facts & Assumptions
 
-**Given:** The labelled symbolic rules and the set-partition formulas already
-proved on this page.
+**Given:** The labelled symbolic rules and the set-partition formulas already proved on this page.
 
 ## Proof
 

@@ -33,20 +33,15 @@ $$\operatorname{rad}\bigl(\mathfrak g/\operatorname{rad}(\mathfrak g)\bigr)=0.$$
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional Lie algebra $\mathfrak g$ and its radical
-$\mathfrak r=\operatorname{rad}(\mathfrak g)$.
+**Given:** A finite-dimensional Lie algebra $\mathfrak g$ and its radical $\mathfrak r=\operatorname{rad}(\mathfrak g)$.
 
-[L1] The radical is the largest solvable ideal
-([[def-radical-of-a-finite-dimensional-lie-algebra]]).
+[L1] The radical is the largest solvable ideal ([[def-radical-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] The sum theorem supplies existence and uniqueness of that largest ideal
-([[thm-sum-of-solvable-ideals-is-solvable]]).
+[L2] The sum theorem supplies existence and uniqueness of that largest ideal ([[thm-sum-of-solvable-ideals-is-solvable]]).
 
-[L3] Solvability passes to quotients and is preserved by extensions
-([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
+[L3] Solvability passes to quotients and is preserved by extensions ([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
 
-[L4] Ideals define quotient Lie algebras and canonical projections
-([[def-quotient-lie-algebra]]).
+[L4] Ideals define quotient Lie algebras and canonical projections ([[def-quotient-lie-algebra]]).
 
 ## Proof
 

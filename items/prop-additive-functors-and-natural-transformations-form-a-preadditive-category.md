@@ -35,20 +35,15 @@ morphisms are natural transformations is preadditive.
 
 ## Facts & Assumptions
 
-**Given:** A small category $\mathcal C$ and a preadditive category
-$\mathcal D$.
+**Given:** A small category $\mathcal C$ and a preadditive category $\mathcal D$.
 
-[L1] The functor category has functors as objects and natural transformations as
-morphisms ([[def-functor-category]]).
+[L1] The functor category has functors as objects and natural transformations as morphisms ([[def-functor-category]]).
 
-[L2] If the source is small and the target locally small, then the functor
-category is locally small ([[prop-size-of-functor-categories]]).
+[L2] If the source is small and the target locally small, then the functor category is locally small ([[prop-size-of-functor-categories]]).
 
-[L3] In a preadditive category each hom-set is an abelian group and composition
-is bilinear ([[def-preadditive-category]]).
+[L3] In a preadditive category each hom-set is an abelian group and composition is bilinear ([[def-preadditive-category]]).
 
-[L4] A functor is additive exactly when each induced map on hom-sets is a group
-homomorphism ([[def-additive-functor]]).
+[L4] A functor is additive exactly when each induced map on hom-sets is a group homomorphism ([[def-additive-functor]]).
 
 ## Proof
 

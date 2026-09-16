@@ -46,8 +46,4 @@ $$\sum_{i,j=1}^n a_i a_j\min(t_i,t_j)\ge0.$$
 
 ## Source notes
 
-Durrett and Sousi use the Brownian covariance kernel in their Gaussian
-constructions. The standard identity
-$\min(s,t)=\int\mathbf1_{[0,s]}\mathbf1_{[0,t]}$ interprets it as a Gram
-kernel; step 2.1 evaluates that identity as a finite level sum, avoiding an
-unnecessary measure construction and therefore remaining choice-free.
+Durrett and Sousi use the Brownian covariance kernel in their Gaussian constructions. The standard identity $\min(s,t)=\int\mathbf1_{[0,s]}\mathbf1_{[0,t]}$ interprets it as a Gram kernel; step 2.1 evaluates that identity as a finite level sum, avoiding an unnecessary measure construction and therefore remaining choice-free.

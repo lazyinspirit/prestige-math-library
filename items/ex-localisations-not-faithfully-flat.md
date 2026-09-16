@@ -38,8 +38,7 @@ is flat but not faithfully flat.
 
 [L1] Every localization is flat ([[thm-localisations-are-flat]]).
 
-[L2] Faithful flatness is equivalent to preserving proper ideals under extension
-([[thm-faithfully-flat-ring-map-characterisations]]).
+[L2] Faithful flatness is equivalent to preserving proper ideals under extension ([[thm-faithfully-flat-ring-map-characterisations]]).
 
 ## Verification
 

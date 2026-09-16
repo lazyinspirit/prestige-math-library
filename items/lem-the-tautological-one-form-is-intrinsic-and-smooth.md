@@ -29,13 +29,11 @@ $$\lambda=\sum_{i=1}^n p_i\,dq^i.$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a smooth $n$-manifold $Q$, and its canonical
-smooth cotangent bundle.
+**Given:** $\mathrm{AC}_\omega$, a smooth $n$-manifold $Q$, and its canonical smooth cotangent bundle.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] The tautological formula uses only the bundle projection and the natural
-covector--vector evaluation. [[def-tautological-one-form-on-a-cotangent-bundle]].
+[F1] The tautological formula uses only the bundle projection and the natural covector--vector evaluation. [[def-tautological-one-form-on-a-cotangent-bundle]].
 
 ## Proof
 

@@ -33,11 +33,9 @@ Every comb has pairwise anticomplete blocks.
 
 ## Facts & Assumptions
 
-**Given:** The counterexample item
-[[cex-a-comb-can-have-an-edge-between-two-blocks]].
+**Given:** The counterexample item [[cex-a-comb-can-have-an-edge-between-two-blocks]].
 
-[L1] The previous counterexample exhibits a comb whose two blocks are joined by
-an edge ([[cex-a-comb-can-have-an-edge-between-two-blocks]]).
+[L1] The previous counterexample exhibits a comb whose two blocks are joined by an edge ([[cex-a-comb-can-have-an-edge-between-two-blocks]]).
 
 ## Refutation
 

@@ -37,11 +37,9 @@ defined.
 
 **Given:** A topological space $X$ and an abelian group $G$.
 
-[L1] The augmentation sends every $0$-simplex tensor $g$ to $g$
-([[def-zero-simplex-augmentation-and-reduced-singular-homology]]).
+[L1] The augmentation sends every $0$-simplex tensor $g$ to $g$ ([[def-zero-simplex-augmentation-and-reduced-singular-homology]]).
 
-[L2] The singular boundary of a $1$-simplex is the terminal $0$-face minus the
-initial $0$-face ([[def-singular-boundary-operator]]).
+[L2] The singular boundary of a $1$-simplex is the terminal $0$-face minus the initial $0$-face ([[def-singular-boundary-operator]]).
 
 ## Proof
 

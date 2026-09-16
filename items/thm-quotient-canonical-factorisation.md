@@ -88,23 +88,8 @@ a quotient map carries no information beyond the partition of $X$ into fibres.
 
 ## Remarks
 
-- **This is the topological analogue of the first isomorphism theorem.** A
-  surjective homomorphism of groups factors through the quotient by its kernel
-  and induces an isomorphism; a quotient map of spaces factors through the
-  quotient by the partition into its fibres and induces a homeomorphism. In both
-  cases the content is that the target is determined by the equivalence relation
-  the map induces on the source.
+- **This is the topological analogue of the first isomorphism theorem.** A surjective homomorphism of groups factors through the quotient by its kernel and induces an isomorphism; a quotient map of spaces factors through the quotient by the partition into its fibres and induces a homeomorphism. In both cases the content is that the target is determined by the equivalence relation the map induces on the source.
 
-- **The hypothesis that $q$ is a quotient map is not decorative.** For a mere
-  continuous surjection the induced $\bar q$ is still a continuous bijection,
-  built by claim 2 of [[thm-quotient-universal-property]] applied to $\pi$, but
-  its inverse need not be continuous: that is exactly the failure recorded at
-  level 8 in [[fs-continuous-bijection-is-a-homeomorphism]]. What the quotient
-  hypothesis buys is step 2.2, which manufactures the inverse as a *continuous*
-  map.
+- **The hypothesis that $q$ is a quotient map is not decorative.** For a mere continuous surjection the induced $\bar q$ is still a continuous bijection, built by claim 2 of [[thm-quotient-universal-property]] applied to $\pi$, but its inverse need not be continuous: that is exactly the failure recorded at level 8 in [[fs-continuous-bijection-is-a-homeomorphism]]. What the quotient hypothesis buys is step 2.2, which manufactures the inverse as a *continuous* map.
 
-- **A practical consequence, used on the companion page.** To identify an
-  explicitly described gluing $X/\!\sim$ with a known space $Z$, it suffices to
-  produce a quotient map $X \to Z$ whose fibres are exactly the classes of
-  $\sim$; the theorem then supplies the homeomorphism, and no map between
-  equivalence classes ever has to be written down.
+- **A practical consequence, used on the companion page.** To identify an explicitly described gluing $X/\!\sim$ with a known space $Z$, it suffices to produce a quotient map $X \to Z$ whose fibres are exactly the classes of $\sim$; the theorem then supplies the homeomorphism, and no map between equivalence classes ever has to be written down.

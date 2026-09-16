@@ -36,17 +36,11 @@ $$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$
 
 **Given:** A positive nonsquare integer $D$, the convergents $p_n/q_n$ of $\sqrt D$, and the state variables $P_n,Q_n$.
 
-[F1] The complete-quotient tail formula gives
-$$\sqrt D=\frac{\alpha_{n+1}p_n+p_{n-1}}{\alpha_{n+1}q_n+q_{n-1}}$$
-for every $n\ge0$ ([[lem-continued-fraction-complete-quotient-formula]]).
+[F1] The complete-quotient tail formula gives $$\sqrt D=\frac{\alpha_{n+1}p_n+p_{n-1}}{\alpha_{n+1}q_n+q_{n-1}}$$ for every $n\ge0$ ([[lem-continued-fraction-complete-quotient-formula]]).
 
-[F2] Consecutive convergents satisfy
-$$p_nq_{n-1}-p_{n-1}q_n=(-1)^{n-1}.$$
-([[lem-continued-fraction-determinant-identity]]).
+[F2] Consecutive convergents satisfy $$p_nq_{n-1}-p_{n-1}q_n=(-1)^{n-1}.$$ ([[lem-continued-fraction-determinant-identity]]).
 
-[F3] The next complete quotient has the form
-$$\alpha_{n+1}=\frac{\sqrt D+P_{n+1}}{Q_{n+1}}$$
-with $Q_{n+1}>0$ ([[lem-square-root-continued-fraction-state-recurrence]]).
+[F3] The next complete quotient has the form $$\alpha_{n+1}=\frac{\sqrt D+P_{n+1}}{Q_{n+1}}$$ with $Q_{n+1}>0$ ([[lem-square-root-continued-fraction-state-recurrence]]).
 
 ## Proof
 

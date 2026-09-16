@@ -35,22 +35,15 @@ $$L(xy)=L(x)+L(y).$$
 
 **Given:** $y>0$, with $x$ ranging over $(0,\infty)$.
 
-[L1] $L'(z)=1/z$ for $z>0$, and $L(1)=0$
-([[thm-integral-logarithm-derivative-and-normalisation]]).
+[L1] $L'(z)=1/z$ for $z>0$, and $L(1)=0$ ([[thm-integral-logarithm-derivative-and-normalisation]]).
 
-[L2] If $f$ is differentiable at $g(x)$ and $g$ at $x$, then
-$(f\circ g)'(x)=f'(g(x))g'(x)$ ([[thm-chain-rule]]).
+[L2] If $f$ is differentiable at $g(x)$ and $g$ at $x$, then $(f\circ g)'(x)=f'(g(x))g'(x)$ ([[thm-chain-rule]]).
 
-[L3] A continuous function on an order-convex interval whose derivative
-vanishes throughout the interior is constant
-([[cor-zero-derivative-implies-constant]]).
+[L3] A continuous function on an order-convex interval whose derivative vanishes throughout the interior is constant ([[cor-zero-derivative-implies-constant]]).
 
-[L4] A differentiable function is continuous
-([[cor-differentiable-implies-continuous]]).
+[L4] A differentiable function is continuous ([[cor-differentiable-implies-continuous]]).
 
-[L5] Sums, differences and scalar multiples of functions differentiable at a
-point are differentiable there, with the corresponding derivatives
-([[thm-algebra-of-derivatives]]).
+[L5] Sums, differences and scalar multiples of functions differentiable at a point are differentiable there, with the corresponding derivatives ([[thm-algebra-of-derivatives]]).
 
 ## Proof
 

@@ -41,16 +41,11 @@ outcomes remain genuine outcomes in both descriptions.
 
 **Given:** A finite set $\Omega$.
 
-[L1] A finite probability space is a finite set with nonnegative weights summing
-to $1$, every subset is an event, and event probabilities are the corresponding
-sub-weight sums ([[def-finite-probability-space-and-event]]).
+[L1] A finite probability space is a finite set with nonnegative weights summing to $1$, every subset is an event, and event probabilities are the corresponding sub-weight sums ([[def-finite-probability-space-and-event]]).
 
-[L2] A probability measure is a measure of total mass $1$
-([[def-probability-measure]]).
+[L2] A probability measure is a measure of total mass $1$ ([[def-probability-measure]]).
 
-[L3] On a finite sigma-algebra, the atoms partition the space, every measurable
-set is the union of the atoms it contains, and a measure is the sum of the atom
-masses over those atoms ([[thm-measures-on-finite-sigma-algebras-are-atomic]]).
+[L3] On a finite sigma-algebra, the atoms partition the space, every measurable set is the union of the atoms it contains, and a measure is the sum of the atom masses over those atoms ([[thm-measures-on-finite-sigma-algebras-are-atomic]]).
 
 ## Proof
 

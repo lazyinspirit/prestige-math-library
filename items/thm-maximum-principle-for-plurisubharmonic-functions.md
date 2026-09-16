@@ -34,15 +34,11 @@ on $\Omega$.
 
 ## Facts & Assumptions
 
-**Given:** A plurisubharmonic function $u$ on a domain $\Omega\subseteq\mathbb C^m$
-and a point $a\in\Omega$ with $u(a)=\sup_\Omega u<+\infty$.
+**Given:** A plurisubharmonic function $u$ on a domain $\Omega\subseteq\mathbb C^m$ and a point $a\in\Omega$ with $u(a)=\sup_\Omega u<+\infty$.
 
-[L1] Plurisubharmonicity is tested by subharmonicity on every affine complex
-line ([[def-plurisubharmonic-function]]).
+[L1] Plurisubharmonicity is tested by subharmonicity on every affine complex line ([[def-plurisubharmonic-function]]).
 
-[L2] A subharmonic function of one complex variable that attains a finite
-interior maximum is constant on its connected component
-([[thm-maximum-principle-for-plane-subharmonic-functions]]).
+[L2] A subharmonic function of one complex variable that attains a finite interior maximum is constant on its connected component ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
 
 ## Proof
 

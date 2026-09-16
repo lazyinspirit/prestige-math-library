@@ -40,20 +40,16 @@ $$s = 2\,\mathbf{1}_{[0,1)} - \mathbf{1}_{[1,2)} + 0 \cdot \mathbf{1}_{\mathbb{R
 
 ## Facts & Assumptions
 
-**Given:** The Borel measurable space $(\mathbb R,\mathcal B(\mathbb R))$ and the function
-$s(x)=2\,\mathbf{1}_{[0,1)}(x)-\mathbf{1}_{[1,2)}(x)$.
+**Given:** The Borel measurable space $(\mathbb R,\mathcal B(\mathbb R))$ and the function $s(x)=2\,\mathbf{1}_{[0,1)}(x)-\mathbf{1}_{[1,2)}(x)$.
 
-[L1] A measurable real-valued function with finite range is simple, and its
-canonical representation is the sum over its level sets.
-([[def-simple-function-and-canonical-representation]])
+[L1] A measurable real-valued function with finite range is simple, and its canonical representation is the sum over its level sets. ([[def-simple-function-and-canonical-representation]])
 
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 The function $s$ takes only the three values $2$, $-1$, and $0$, and the [given]
-corresponding level sets are exactly the three Borel sets displayed above.
-Thus $s$ is measurable. [given]
+corresponding level sets are exactly the three Borel sets displayed above. Thus $s$ is measurable. [given]
 
 2.1 Therefore [L1] identifies $s$ as a simple function and the displayed sum as [step 1.1, L1]
 its canonical representation. [step 1.1, L1] ∎

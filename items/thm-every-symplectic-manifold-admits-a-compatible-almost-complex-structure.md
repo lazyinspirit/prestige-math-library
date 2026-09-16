@@ -30,20 +30,13 @@ smooth almost-complex structure $J$ compatible with $\omega$.
 
 ## Facts & Assumptions
 
-**Given:** A symplectic manifold $(M,\omega)$ and the axiom of countable choice
-$\mathrm{AC}_\omega$.
+**Given:** A symplectic manifold $(M,\omega)$ and the axiom of countable choice $\mathrm{AC}_\omega$.
 
-[F1] Under $\mathrm{AC}_\omega$, every smooth manifold admits a Riemannian
-metric. [[def-countable-choice]],
-[[thm-every-smooth-manifold-admits-a-riemannian-metric]].
+[F1] Under $\mathrm{AC}_\omega$, every smooth manifold admits a Riemannian metric. [[def-countable-choice]], [[thm-every-smooth-manifold-admits-a-riemannian-metric]].
 
-[F2] Smooth positive-definite self-adjoint bundle endomorphisms have unique
-smooth positive square roots.
-[[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]].
+[F2] Smooth positive-definite self-adjoint bundle endomorphisms have unique smooth positive square roots. [[lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots]].
 
-[F3] An endomorphism $J$ is compatible when $J^2=-I$ and
-$\omega(\cdot,J\cdot)$ is positive-definite symmetric.
-[[def-compatible-complex-structure-on-a-symplectic-vector-space]].
+[F3] An endomorphism $J$ is compatible when $J^2=-I$ and $\omega(\cdot,J\cdot)$ is positive-definite symmetric. [[def-compatible-complex-structure-on-a-symplectic-vector-space]].
 
 ## Proof
 

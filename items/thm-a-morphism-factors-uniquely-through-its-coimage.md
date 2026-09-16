@@ -34,11 +34,9 @@ $$\widetilde f\circ q=f.$$
 
 ## Facts & Assumptions
 
-**Given:** A morphism $f:A\to B$, a kernel $k:K\to A$ of $f$, and a cokernel
-$q:A\to\operatorname{coim}(f)$ of $k$.
+**Given:** A morphism $f:A\to B$, a kernel $k:K\to A$ of $f$, and a cokernel $q:A\to\operatorname{coim}(f)$ of $k$.
 
-[L1] The coimage of $f$ is the cokernel of a kernel of $f$
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L1] The coimage of $f$ is the cokernel of a kernel of $f$ ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
 ## Proof
 

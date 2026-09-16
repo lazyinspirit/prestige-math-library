@@ -35,11 +35,9 @@ is an isomorphism.
 
 **Given:** A Lie algebra with a specified totally ordered basis.
 
-[L1] PBW makes the empty word and all length-one ordered words part of one
-basis of $U(\mathfrak g)$ ([[thm-poincare-birkhoff-witt]]).
+[L1] PBW makes the empty word and all length-one ordered words part of one basis of $U(\mathfrak g)$ ([[thm-poincare-birkhoff-witt]]).
 
-[L2] $F_1$ is spanned by words of length at most one
-([[def-pbw-filtration-on-the-universal-enveloping-algebra]]).
+[L2] $F_1$ is spanned by words of length at most one ([[def-pbw-filtration-on-the-universal-enveloping-algebra]]).
 
 ## Proof
 

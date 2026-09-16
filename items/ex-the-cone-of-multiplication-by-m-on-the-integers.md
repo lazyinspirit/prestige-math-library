@@ -33,11 +33,9 @@ $$H_1(\operatorname{Cone}(f))=0,\qquad H_0(\operatorname{Cone}(f))\cong \mathbb 
 
 **Given:** A nonzero integer $m$ and the chain map $f=\times m:\mathbb Z[0]\to\mathbb Z[0]$.
 
-[L1] The cone of a chain map has terms $D_n\oplus C_{n-1}$ and differential
-$(y,x)\mapsto(d(y)+f(x),-d(x))$ ([[def-mapping-cone-of-a-chain-map]]).
+[L1] The cone of a chain map has terms $D_n\oplus C_{n-1}$ and differential $(y,x)\mapsto(d(y)+f(x),-d(x))$ ([[def-mapping-cone-of-a-chain-map]]).
 
-[L2] A chain map is a quasi-isomorphism exactly when its cone is acyclic
-([[thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic]]).
+[L2] A chain map is a quasi-isomorphism exactly when its cone is acyclic ([[thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic]]).
 
 ## Verification
 

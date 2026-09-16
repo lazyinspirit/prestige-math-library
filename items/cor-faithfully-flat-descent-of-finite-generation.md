@@ -34,14 +34,11 @@ $M$ is finitely generated as an $R$-module.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a faithfully flat ring map $R\to S$, and an $R$-module $M$ such that
-$M\otimes_R S$ is finitely generated over $S$.
+**Given:** The Axiom of Choice, a faithfully flat ring map $R\to S$, and an $R$-module $M$ such that $M\otimes_R S$ is finitely generated over $S$.
 
-[L1] A faithfully flat module detects nonzero quotients
-([[thm-faithful-flatness-detected-by-nonzero-modules-and-fibres]]).
+[L1] A faithfully flat module detects nonzero quotients ([[thm-faithful-flatness-detected-by-nonzero-modules-and-fibres]]).
 
-[L2] The given map is faithfully flat as an $R$-module map
-([[thm-faithfully-flat-ring-map-characterisations]]).
+[L2] The given map is faithfully flat as an $R$-module map ([[thm-faithfully-flat-ring-map-characterisations]]).
 
 ## Proof
 

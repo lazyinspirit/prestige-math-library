@@ -33,20 +33,13 @@ continuous and has dense image.  This holds in ZF.
 
 ## Facts & Assumptions
 
-**Given:** The LF test space $\mathcal D(\mathbb R^n)$ and Schwartz space
-$\mathcal S(\mathbb R^n)$.
+**Given:** The LF test space $\mathcal D(\mathbb R^n)$ and Schwartz space $\mathcal S(\mathbb R^n)$.
 
-[F1] A linear map from $\mathcal D$ is continuous exactly when every
-restriction to $\mathcal D_K$ is continuous
-([[lem-test-function-lf-topology-universal-property]]).
+[F1] A linear map from $\mathcal D$ is continuous exactly when every restriction to $\mathcal D_K$ is continuous ([[lem-test-function-lf-topology-universal-property]]).
 
-[F2] Schwartz space is defined by the seminorms $p_{\alpha\beta}$ and their
-locally convex topology ([[def-schwartz-space-and-its-seminorms]],
-[[def-schwartz-topology-and-convergence]]).
+[F2] Schwartz space is defined by the seminorms $p_{\alpha\beta}$ and their locally convex topology ([[def-schwartz-space-and-its-seminorms]], [[def-schwartz-topology-and-convergence]]).
 
-[F3] Smooth compactly supported cutoffs approximate every Schwartz function in
-all Schwartz seminorms
-([[lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space]]).
+[F3] Smooth compactly supported cutoffs approximate every Schwartz function in all Schwartz seminorms ([[lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space]]).
 
 ## Proof
 
@@ -56,9 +49,7 @@ all Schwartz seminorms
 
 $$p_{\alpha\beta}(\varphi) \leq\left(\sup_{x\in K}|x^\alpha|\right) \sup_{x\in K}|\partial^\beta\varphi(x)|.$$
 
-The multiplier on the right is finite, including the zero value when
-$K=\varnothing$.  Hence every Schwartz seminorm pulls back continuously to
-$\mathcal D_K$. [F2]
+The multiplier on the right is finite, including the zero value when $K=\varnothing$.  Hence every Schwartz seminorm pulls back continuously to $\mathcal D_K$. [F2]
 
 2.1 Step 1.1 makes every restricted inclusion $\mathcal D_K\to\mathcal S$ continuous.  The LF universal property therefore makes $\iota$ continuous on all of $\mathcal D$. [F1, step 1.1]
 

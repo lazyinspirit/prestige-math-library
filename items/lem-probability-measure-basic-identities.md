@@ -39,21 +39,11 @@ and let $(A_n)_{n\in\mathbb N}$ be events.
 
 ## Facts & Assumptions
 
-**Given:** A probability space $(\Omega,\mathcal F,\mathbb P)$, events $A,B$, and
-an event sequence $(A_n)$.
+**Given:** A probability space $(\Omega,\mathcal F,\mathbb P)$, events $A,B$, and an event sequence $(A_n)$.
 
-[L1] A probability measure is a measure of total mass $1$
-([[def-probability-measure]]).
+[L1] A probability measure is a measure of total mass $1$ ([[def-probability-measure]]).
 
-[L2] Measures are monotone, set differences subtract when the smaller set has
-finite measure, subadditivity holds, continuity from below holds, continuity
-from above holds once one set has finite measure, and finite inclusion-exclusion
-holds for finite-measure sets
-([[prop-measure-monotonicity]], [[prop-measure-of-a-set-difference]],
-[[thm-finite-and-countable-subadditivity-of-measures]],
-[[thm-continuity-from-below-for-measures]],
-[[thm-continuity-from-above-for-measures]],
-[[thm-finite-inclusion-exclusion-for-measures]]).
+[L2] Measures are monotone, set differences subtract when the smaller set has finite measure, subadditivity holds, continuity from below holds, continuity from above holds once one set has finite measure, and finite inclusion-exclusion holds for finite-measure sets ([[prop-measure-monotonicity]], [[prop-measure-of-a-set-difference]], [[thm-finite-and-countable-subadditivity-of-measures]], [[thm-continuity-from-below-for-measures]], [[thm-continuity-from-above-for-measures]], [[thm-finite-inclusion-exclusion-for-measures]]).
 
 ## Proof
 

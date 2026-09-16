@@ -41,17 +41,11 @@ is the unique maximal ideal, so $\mathcal O_a$ is a local ring.
 
 **Given:** A point $a \in \mathbb C$ and holomorphic germs $[f]_a,[g]_a,[h]_a$.
 
-[L1] Two holomorphic functions define the same germ at $a$ exactly when they
-agree on some neighbourhood of $a$, and then they have the same value at $a$
-([[def-holomorphic-germ]]).
+[L1] Two holomorphic functions define the same germ at $a$ exactly when they agree on some neighbourhood of $a$, and then they have the same value at $a$ ([[def-holomorphic-germ]]).
 
-[L2] Sums and products of holomorphic functions are holomorphic; if a
-holomorphic function is nonzero at a point, then it is nonzero on some
-neighbourhood of that point and its reciprocal is holomorphic there
-([[thm-algebra-of-complex-derivatives]]).
+[L2] Sums and products of holomorphic functions are holomorphic; if a holomorphic function is nonzero at a point, then it is nonzero on some neighbourhood of that point and its reciprocal is holomorphic there ([[thm-algebra-of-complex-derivatives]]).
 
-[L3] A local ring is a nonzero commutative ring with a unique maximal ideal
-([[def-local-ring]]).
+[L3] A local ring is a nonzero commutative ring with a unique maximal ideal ([[def-local-ring]]).
 
 ## Proof
 

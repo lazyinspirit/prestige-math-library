@@ -32,17 +32,9 @@ residue classes $a$. This action is transitive, but it is not faithful.
 
 **Given:** The additive group $\mathbb Z/2$ and the singleton set $X=\{*\}$.
 
-[L1] Division with remainder is available in the integers, and congruence
-classes modulo $2$ are the quotient group with its stated addition and identity
-class $0$ ([[thm-division-algorithm-in-z]],
-[[prop-integers-modulo-n-as-a-quotient-group]],
-[[thm-integers-modulo-n-basic-algebra]],
-[[def-addition-and-multiplication-modulo-n]]).
+[L1] Division with remainder is available in the integers, and congruence classes modulo $2$ are the quotient group with its stated addition and identity class $0$ ([[thm-division-algorithm-in-z]], [[prop-integers-modulo-n-as-a-quotient-group]], [[thm-integers-modulo-n-basic-algebra]], [[def-addition-and-multiplication-modulo-n]]).
 
-[L2] An action satisfies $0\cdot x=x$ and $(a+b)\cdot x=a\cdot(b\cdot x)$;
-it is transitive when one group element carries every point to every other
-point, and faithful only when an element fixing every point is the identity
-([[def-group-action]]).
+[L2] An action satisfies $0\cdot x=x$ and $(a+b)\cdot x=a\cdot(b\cdot x)$; it is transitive when one group element carries every point to every other point, and faithful only when an element fixing every point is the identity ([[def-group-action]]).
 
 ## Verification
 

@@ -34,8 +34,7 @@ adjoint.
 
 ## Facts & Assumptions
 
-**Given:** The definable-class category $\mathbf{Ord}^{\mathrm{op}}$ and the
-unique functor $U:\mathbf{Ord}^{\mathrm{op}}\to\mathbf 1$.
+**Given:** The definable-class category $\mathbf{Ord}^{\mathrm{op}}$ and the unique functor $U:\mathbf{Ord}^{\mathrm{op}}\to\mathbf 1$.
 
 [L1] A category is complete when every small diagram has a limit; this does not assert limits of large diagrams ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 

@@ -28,8 +28,7 @@ is strict.
 
 ## Facts & Assumptions
 
-**Given:** Lax monoidal functors
-$F:\mathcal C\to\mathcal D$ and $G:\mathcal D\to\mathcal E$.
+**Given:** Lax monoidal functors $F:\mathcal C\to\mathcal D$ and $G:\mathcal D\to\mathcal E$.
 
 [L1] A lax monoidal functor is a functor together with structure maps $F_2,F_0$ satisfying associativity and unit equations; strong means those maps are isomorphisms and strict means they are identities ([[def-lax-strong-and-strict-monoidal-functor]]).
 

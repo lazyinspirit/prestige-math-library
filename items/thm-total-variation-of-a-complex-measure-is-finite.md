@@ -36,14 +36,9 @@ More generally, $|\nu|(E)<+\infty$ for every measurable $E$.
 
 [L1] The total variation $|\nu|(E)$ is the supremum of the countable partition sums $\sum_n |\nu(E_n)|$. ([[def-total-variation-of-a-signed-or-complex-measure]])
 
-[L2] The set functions $\alpha:=\operatorname{Re}\nu$ and
-$\beta:=\operatorname{Im}\nu$ are finite signed measures and
-$\nu=\alpha+i\beta$.
-([[prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures]])
+[L2] The set functions $\alpha:=\operatorname{Re}\nu$ and $\beta:=\operatorname{Im}\nu$ are finite signed measures and $\nu=\alpha+i\beta$. ([[prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures]])
 
-[L3] For a signed measure $\rho$ with Jordan parts $\rho^+,\rho^-$,
-$|\rho|=\rho^++\rho^-$.
-([[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]])
+[L3] For a signed measure $\rho$ with Jordan parts $\rho^+,\rho^-$, $|\rho|=\rho^++\rho^-$. ([[prop-jordan-parts-and-total-variation-formulas-for-signed-measures]])
 
 ## Proof
 

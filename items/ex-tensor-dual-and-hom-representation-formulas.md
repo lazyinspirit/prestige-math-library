@@ -37,8 +37,7 @@ $$ (x\lambda)(v)=-\lambda(xv),\qquad xT=\rho_W(x)T-T\rho_V(x).$$
 
 **Given:** Representations $V,W$ of the same Lie algebra.
 
-[L1] These constructions are asserted in
-[[prop-direct-sum-dual-hom-and-tensor-representations]].
+[L1] These constructions are asserted in [[prop-direct-sum-dual-hom-and-tensor-representations]].
 
 ## Verification
 

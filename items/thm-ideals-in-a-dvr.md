@@ -41,12 +41,9 @@ for a unique integer $n\ge0$.
 
 **Given:** A discrete valuation ring $V$ with maximal ideal $\mathfrak m=(\pi)$, where $\pi$ is a uniformiser.
 
-[L1] Every nonzero element of the fraction field of $V$ is uniquely
-$u\pi^n$ with $u$ a unit and $n\in\mathbb Z$
-([[thm-dvr-element-normal-form]]).
+[L1] Every nonzero element of the fraction field of $V$ is uniquely $u\pi^n$ with $u$ a unit and $n\in\mathbb Z$ ([[thm-dvr-element-normal-form]]).
 
-[F1] A uniformiser generates the maximal ideal of a DVR
-([[def-uniformising-parameter]]).
+[F1] A uniformiser generates the maximal ideal of a DVR ([[def-uniformising-parameter]]).
 
 ## Proof
 

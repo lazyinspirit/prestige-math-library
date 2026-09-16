@@ -35,19 +35,13 @@ cohomology condition is imposed on such local extensions.
 
 **Given:** $\mathrm{AC}_\omega$, compact $M$, and the path in the statement.
 
-[F1] A smooth exact family on compact $M$ has jointly smooth primitives.
-[[lem-smooth-parametric-primitives-for-a-smooth-exact-family-on-a-compact-manifold]].
+[F1] A smooth exact family on compact $M$ has jointly smooth primitives. [[lem-smooth-parametric-primitives-for-a-smooth-exact-family-on-a-compact-manifold]].
 
-[F2] The Moser contraction equation uniquely determines a smooth field and
-makes the pulled-back form constant.
-[[lem-moser-pullback-differentiation-equation]].
+[F2] The Moser contraction equation uniquely determines a smooth field and makes the pulled-back form constant. [[lem-moser-pullback-differentiation-equation]].
 
-[F3] Smooth time-dependent fields have unique local smooth evolutions.
-[[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]].
+[F3] Smooth time-dependent fields have unique local smooth evolutions. [[thm-time-dependent-vector-fields-have-local-smooth-evolution-operators]].
 
-[F4] The standard smooth step $\tau:\mathbb R\to[0,1]$ is smooth, equals
-$0$ on $(-\infty,0]$, equals $1$ on $[1,\infty)$, and is flat at both
-endpoints. [[def-the-standard-smooth-step-function]].
+[F4] The standard smooth step $\tau:\mathbb R\to[0,1]$ is smooth, equals $0$ on $(-\infty,0]$, equals $1$ on $[1,\infty)$, and is flat at both endpoints. [[def-the-standard-smooth-step-function]].
 
 ## Proof
 

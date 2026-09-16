@@ -35,17 +35,13 @@ respectively. Its self-inner-product is $1$, so it is irreducible of degree $2$.
 
 ## Facts & Assumptions
 
-**Given:** The subgroup $A_3=\langle(123)\rangle\le S_3$ and the nontrivial
-character $\theta$ defined in the Example.
+**Given:** The subgroup $A_3=\langle(123)\rangle\le S_3$ and the nontrivial character $\theta$ defined in the Example.
 
-[F1] The induced character is computed by Frobenius' formula
-([[thm-frobenius-formula-for-induced-characters]]).
+[F1] The induced character is computed by Frobenius' formula ([[thm-frobenius-formula-for-induced-characters]]).
 
-[F2] A complex character is irreducible if and only if its self-inner-product
-is $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
+[F2] A complex character is irreducible if and only if its self-inner-product is $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
 
-[F3] The notation $\operatorname{Ind}_{A_3}^{S_3}\theta$ is the induced
-character from [[def-induced-character-of-a-complex-representation]].
+[F3] The notation $\operatorname{Ind}_{A_3}^{S_3}\theta$ is the induced character from [[def-induced-character-of-a-complex-representation]].
 
 ## Verification
 

@@ -33,17 +33,11 @@ Lie group.
 
 ## Facts & Assumptions
 
-**Given:** An irrational real number $\alpha$ and the homomorphism
-$i:\mathbb R\to\mathbb T^2$ defined below.
+**Given:** An irrational real number $\alpha$ and the homomorphism $i:\mathbb R\to\mathbb T^2$ defined below.
 
-[F1] A Lie subgroup in the standing convention is an injectively immersed
-subgroup with its intrinsic manifold structure; embeddedness and closedness
-are additional properties.
-[[def-immersed-embedded-and-closed-lie-subgroup]].
+[F1] A Lie subgroup in the standing convention is an injectively immersed subgroup with its intrinsic manifold structure; embeddedness and closedness are additional properties. [[def-immersed-embedded-and-closed-lie-subgroup]].
 
-[F2] The irrational flow on $\mathbb T^2$ is free and every one of its orbits
-is dense; its identity orbit map is an injective immersion and a homomorphism.
-[[lem-irrational-torus-flow-is-free-with-dense-orbits]].
+[F2] The irrational flow on $\mathbb T^2$ is free and every one of its orbits is dense; its identity orbit map is an injective immersion and a homomorphism. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
 
 ## Refutation
 

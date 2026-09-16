@@ -30,13 +30,9 @@ Every comb has pairwise anticomplete blocks.
 
 ## Facts & Assumptions
 
-**Given:** The five-vertex graph from
-[[ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle]],
-with teeth $a_1,a_2$ and singleton blocks $\{b_1\},\{b_2\}$.
+**Given:** The five-vertex graph from [[ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle]], with teeth $a_1,a_2$ and singleton blocks $\{b_1\},\{b_2\}$.
 
-[L1] The definition of a comb only requires each tooth to be adjacent to its
-own block and anticomplete to the other blocks; it does not impose any
-condition on edges between different blocks ([[def-comb-in-a-graph]]).
+[L1] The definition of a comb only requires each tooth to be adjacent to its own block and anticomplete to the other blocks; it does not impose any condition on edges between different blocks ([[def-comb-in-a-graph]]).
 
 ## Counterexample
 

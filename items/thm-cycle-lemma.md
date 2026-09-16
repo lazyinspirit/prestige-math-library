@@ -78,24 +78,8 @@ $j\bmod m$ of $a$ ([[def-cyclic-shift-and-the-periodic-partial-sum-function]]).
 
 ## Remarks
 
-- **The orientation convention is the one place this statement can silently go
-  wrong.** Dershowitz and Zaks cut a necklace at a valid origin and count shifts
-  by strict domination; Krattenthaler's Lemma 10.4.6 states a version with weak
-  domination below a line. These are the same lemma read in opposite directions,
-  and a page that mixes them gets a one-to-$k$ correspondence pointing the wrong
-  way. The convention above is strict positivity of every partial sum, with shifts
-  indexed by starting position, and it is cited rather than restated wherever it
-  is used.
+- **The orientation convention is the one place this statement can silently go wrong.** Dershowitz and Zaks cut a necklace at a valid origin and count shifts by strict domination; Krattenthaler's Lemma 10.4.6 states a version with weak domination below a line. These are the same lemma read in opposite directions, and a page that mixes them gets a one-to-$k$ correspondence pointing the wrong way. The convention above is strict positivity of every partial sum, with shifts indexed by starting position, and it is cited rather than restated wherever it is used.
 
-- **Indices, not words.** The count is of indices $j$ in $\{0,\dots,m-1\}$. Two
-  different indices can give the same word, and then the same word is counted
-  twice; that happens exactly when the shift stabiliser of $a$ is nontrivial, and
-  the case the applications need is the one where the weight is coprime to $m$ and
-  the $m$ shifts are pairwise distinct
-  ([[lem-a-word-whose-weight-is-coprime-to-its-length-has-a-trivial-shift-stabiliser]]).
+- **Indices, not words.** The count is of indices $j$ in $\{0,\dots,m-1\}$. Two different indices can give the same word, and then the same word is counted twice; that happens exactly when the shift stabiliser of $a$ is nontrivial, and the case the applications need is the one where the weight is coprime to $m$ and the $m$ shifts are pairwise distinct ([[lem-a-word-whose-weight-is-coprime-to-its-length-has-a-trivial-shift-stabiliser]]).
 
-- **What the hypotheses buy.** Boundedness of the letters above by $1$ makes the
-  strict right minima succeed one another at value steps of exactly $1$; positive
-  weight makes them exist. Neither is a normalisation, and the companion of each
-  is recorded in
-  [[lem-strict-right-minima-of-a-quasiperiodic-partial-sum-function]].
+- **What the hypotheses buy.** Boundedness of the letters above by $1$ makes the strict right minima succeed one another at value steps of exactly $1$; positive weight makes them exist. Neither is a normalisation, and the companion of each is recorded in [[lem-strict-right-minima-of-a-quasiperiodic-partial-sum-function]].

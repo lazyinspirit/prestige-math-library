@@ -29,15 +29,11 @@ Every split group extension is an internal direct product.
 
 ## Facts & Assumptions
 
-**Given:** The extension $1\to C_4\to D_4\to C_2\to1$ coming from the
-rotation subgroup and a reflection complement, in the convention that $D_n$
-has order $2n$.
+**Given:** The extension $1\to C_4\to D_4\to C_2\to1$ coming from the rotation subgroup and a reflection complement, in the convention that $D_n$ has order $2n$.
 
-[L1] A split extension is direct exactly when the complement centralizes the
-kernel ([[prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel]]).
+[L1] A split extension is direct exactly when the complement centralizes the kernel ([[prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel]]).
 
-[L2] A group extension splits if and only if its kernel has a complement
-([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
+[L2] A group extension splits if and only if its kernel has a complement ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
 
 ## Refutation
 

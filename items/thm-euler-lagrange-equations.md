@@ -34,11 +34,9 @@ $$\frac d{dt}\frac{\partial L}{\partial v^i}(q(t),\dot q(t))-\frac{\partial L}{\
 
 **Given:** A smooth Lagrangian $L$ and a $C^2$ curve with fixed endpoints.
 
-[F1] Stationarity is defined using all smooth fixed-endpoint variations.
-[[def-lagrangian-action-functional-on-curves]].
+[F1] Stationarity is defined using all smooth fixed-endpoint variations. [[def-lagrangian-action-functional-on-curves]].
 
-[F2] Integration by parts moves one time derivative and exposes the endpoint
-term. [[thm-integration-by-parts]].
+[F2] Integration by parts moves one time derivative and exposes the endpoint term. [[thm-integration-by-parts]].
 
 ## Proof
 

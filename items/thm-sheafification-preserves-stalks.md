@@ -34,14 +34,11 @@ $$\eta_{\mathcal F,x}:\mathcal F_x\xrightarrow{\ \cong\ }(a\mathcal F)_x.$$
 
 **Given:** A presheaf $\mathcal F$ on $X$ and a point $x\in X$.
 
-[F1] Sheafification is $a\mathcal F=(\mathcal F^+)^+$ with unit
-$\eta_{\mathcal F}:\mathcal F\to a\mathcal F$ ([[def-sheafification]]).
+[F1] Sheafification is $a\mathcal F=(\mathcal F^+)^+$ with unit $\eta_{\mathcal F}:\mathcal F\to a\mathcal F$ ([[def-sheafification]]).
 
-[L1] For any presheaf, the first plus construction preserves stalks
-([[lem-first-plus-construction-is-separated]]).
+[L1] For any presheaf, the first plus construction preserves stalks ([[lem-first-plus-construction-is-separated]]).
 
-[F2] Equality in a filtered-colimit stalk is eventual on a smaller
-neighbourhood ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
+[F2] Equality in a filtered-colimit stalk is eventual on a smaller neighbourhood ([[lem-equality-in-a-filtered-colimit-of-sets-is-eventual]]).
 
 ## Proof
 

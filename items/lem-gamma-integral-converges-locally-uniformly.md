@@ -39,8 +39,7 @@ converges locally uniformly on $\{z\in\mathbb C:\operatorname{Re}z>0\}$.
 
 **Given:** A compact set $K\subseteq\{z:\operatorname{Re}z>0\}$.
 
-[L1] The real Euler integral $\int_0^\infty t^{s-1}e^{-t}\,dt$ converges exactly
-for $s>0$ ([[thm-real-gamma-euler-integral-convergence]]).
+[L1] The real Euler integral $\int_0^\infty t^{s-1}e^{-t}\,dt$ converges exactly for $s>0$ ([[thm-real-gamma-euler-integral-convergence]]).
 
 ## Proof
 

@@ -34,11 +34,9 @@ its image is dense in $\mathbb Z_p$.
 
 **Given:** The canonical map from $\mathbb Z$ to $\mathbb Z_p$.
 
-[F1] The canonical map sends $m$ to the residue tuple
-$(m\bmod p^n)_{n\ge1}$ ([[def-canonical-map-from-the-integers-to-zp]]).
+[F1] The canonical map sends $m$ to the residue tuple $(m\bmod p^n)_{n\ge1}$ ([[def-canonical-map-from-the-integers-to-zp]]).
 
-[L1] An element of $\mathbb Z_p$ is a compatible system of residue classes
-modulo $p^n$ ([[def-p-adic-integers-as-compatible-residue-classes]]).
+[L1] An element of $\mathbb Z_p$ is a compatible system of residue classes modulo $p^n$ ([[def-p-adic-integers-as-compatible-residue-classes]]).
 
 ## Proof
 

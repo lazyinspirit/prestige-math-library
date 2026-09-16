@@ -77,23 +77,8 @@ inversion step in passing.
 
 ## Remarks
 
-- **Monotonicity gives the eventual form for free.** If $m \ge n \ge 1$ then
-  $m \cdot 1_F \ge n \cdot 1_F > 0$, because $k \mapsto k \cdot 1_F$ is strictly
-  increasing on the naturals $\ge 1$ ([[lem-of-naturals-positive]]), and so
-  $1/(m \cdot 1_F) \le 1/(n \cdot 1_F) < \varepsilon$ by [[lem-of-inverse-positive]]
-  again. So the corollary yields not merely one index but a threshold: every
-  $m \ge n$ satisfies $1/m < \varepsilon$. That one extra line is what a
-  convergence proof needs, and it is left to the caller rather than folded into
-  the statement, because the caller usually has a threshold of its own to combine
-  it with.
+- **Monotonicity gives the eventual form for free.** If $m \ge n \ge 1$ then $m \cdot 1_F \ge n \cdot 1_F > 0$, because $k \mapsto k \cdot 1_F$ is strictly increasing on the naturals $\ge 1$ ([[lem-of-naturals-positive]]), and so $1/(m \cdot 1_F) \le 1/(n \cdot 1_F) < \varepsilon$ by [[lem-of-inverse-positive]] again. So the corollary yields not merely one index but a threshold: every $m \ge n$ satisfies $1/m < \varepsilon$. That one extra line is what a convergence proof needs, and it is left to the caller rather than folded into the statement, because the caller usually has a threshold of its own to combine it with.
 
-- **Completeness is used only through [[thm-of-archimedean]].** Nothing here
-  needs the least-upper-bound property directly. The corollary therefore holds
-  verbatim in any Archimedean ordered field, in particular in $\mathbb{Q}$, and
-  it fails in a non-Archimedean ordered field, where an infinitesimal
-  $\varepsilon > 0$ is below every $1/n$ by construction.
+- **Completeness is used only through [[thm-of-archimedean]].** Nothing here needs the least-upper-bound property directly. The corollary therefore holds verbatim in any Archimedean ordered field, in particular in $\mathbb{Q}$, and it fails in a non-Archimedean ordered field, where an infinitesimal $\varepsilon > 0$ is below every $1/n$ by construction.
 
-- The equivalence is exact: the reciprocal form implies the cofinal form back
-  again, since given $x > 0$ one applies it to $\varepsilon = 1/x$. The two are
-  the same property written on the two sides of the inversion, and only the
-  direction proved above is used in this library.
+- The equivalence is exact: the reciprocal form implies the cofinal form back again, since given $x > 0$ one applies it to $\varepsilon = 1/x$. The two are the same property written on the two sides of the inversion, and only the direction proved above is used in this library.

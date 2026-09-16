@@ -36,10 +36,7 @@ $$-\frac{\zeta'(s)}{\zeta(s)} = \sum_{n \ge 1} \Lambda(n)n^{-s}.$$
 
 **Given:** A complex number $s$ with $\Re s>1$.
 
-[L1] Completely multiplicative Dirichlet series admit geometric Euler factors,
-and absolutely convergent Dirichlet series multiply by Dirichlet convolution
-([[cor-completely-multiplicative-dirichlet-series-euler-product]],
-[[thm-dirichlet-series-multiplication-convolution]]).
+[L1] Completely multiplicative Dirichlet series admit geometric Euler factors, and absolutely convergent Dirichlet series multiply by Dirichlet convolution ([[cor-completely-multiplicative-dirichlet-series-euler-product]], [[thm-dirichlet-series-multiplication-convolution]]).
 
 [L2] $\Lambda$ is the von Mangoldt function ([[def-von-mangoldt-function]]).
 

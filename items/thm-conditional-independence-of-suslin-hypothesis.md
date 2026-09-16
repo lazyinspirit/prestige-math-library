@@ -38,21 +38,15 @@ non-derivability statement.
 
 ## Facts & Assumptions
 
-**Given:** external $\operatorname{Con}(\mathrm{ZFC})$ for the fixed proof
-predicate and contradiction sentence.
+**Given:** external $\operatorname{Con}(\mathrm{ZFC})$ for the fixed proof predicate and contradiction sentence.
 
-[F1] External consistency of ZFC implies external consistency of ZFC+SH.
-[[cor-formal-consistency-of-suslin-hypothesis]]
+[F1] External consistency of ZFC implies external consistency of ZFC+SH. [[cor-formal-consistency-of-suslin-hypothesis]]
 
-[F2] PA proves, and hence the external metatheory validates, that consistency
-of ZFC implies consistency of ZFC+$\neg$SH.
-[[cor-formal-consistency-of-not-suslin-hypothesis]]
+[F2] PA proves, and hence the external metatheory validates, that consistency of ZFC implies consistency of ZFC+$\neg$SH. [[cor-formal-consistency-of-not-suslin-hypothesis]]
 
-[F3] $\operatorname{Con}(T)$ means that there is no actual certified finite
-$T$-refutation of the fixed contradiction. [[def-arithmetic-provability-and-consistency]]
+[F3] $\operatorname{Con}(T)$ means that there is no actual certified finite $T$-refutation of the fixed contradiction. [[def-arithmetic-provability-and-consistency]]
 
-[F4] SH is the assertion that no strong-convention Suslin line exists, so
-$\neg$SH is its literal logical negation. [[def-suslin-hypothesis-and-suslin-algebra]]
+[F4] SH is the assertion that no strong-convention Suslin line exists, so $\neg$SH is its literal logical negation. [[def-suslin-hypothesis-and-suslin-algebra]]
 
 ## Proof
 
@@ -68,9 +62,5 @@ $\neg$SH is its literal logical negation. [[def-suslin-hypothesis-and-suslin-alg
 
 ## Remarks
 
-- The result says neither SH nor its negation is derivable from ZFC, provided
-  ZFC is consistent. It does not choose a true side of SH in the ambient
-  universe.
-- All uses of the axiom of choice occur inside the object-theoretic suppliers.
-  The final metamathematical proof splices finite derivations and makes no
-  family choice.
+- The result says neither SH nor its negation is derivable from ZFC, provided ZFC is consistent. It does not choose a true side of SH in the ambient universe.
+- All uses of the axiom of choice occur inside the object-theoretic suppliers. The final metamathematical proof splices finite derivations and makes no family choice.

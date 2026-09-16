@@ -34,14 +34,11 @@ the right notion of smooth approximation.
 
 ## Facts & Assumptions
 
-**Given:** The continuous function $F(x)=|x|$ on $\mathbb R$ and the positive
-continuous error function $\varepsilon(x)=e^{-|x|}$.
+**Given:** The continuous function $F(x)=|x|$ on $\mathbb R$ and the positive continuous error function $\varepsilon(x)=e^{-|x|}$.
 
-[F1] A positive continuous error function may vary from point to point
-([[def-positive-continuous-error-function-for-strong-approximation]]).
+[F1] A positive continuous error function may vary from point to point ([[def-positive-continuous-error-function-for-strong-approximation]]).
 
-[L1] Euclidean Whitney approximation is formulated with such pointwise positive
-error functions ([[thm-whitney-approximation-for-euclidean-valued-maps]]).
+[L1] Euclidean Whitney approximation is formulated with such pointwise positive error functions ([[thm-whitney-approximation-for-euclidean-valued-maps]]).
 
 ## Refutation
 **Proof technique:** direct.

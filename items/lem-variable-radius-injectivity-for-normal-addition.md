@@ -77,10 +77,5 @@ $$ \Omega_\delta:=\{(p,v)\in N^\perp S:\|v\|<\delta(p)\}. $$
 
 ## Remarks
 
-- Once the normal-bundle manifold/local-inverse data and a smooth nonnegative
-  exhaustion with compact sublevels are supplied, the radius construction makes
-  no further choices. Compact minimum values are unique; no minimizing points
-  are selected as a family.
-- No partition-of-unity, Urysohn, or Euclidean Whitney approximation theorem is
-  used to smooth the radius. The explicit one-variable locally finite sums
-  retain the positive smooth radius required by the statement.
+- Once the normal-bundle manifold/local-inverse data and a smooth nonnegative exhaustion with compact sublevels are supplied, the radius construction makes no further choices. Compact minimum values are unique; no minimizing points are selected as a family.
+- No partition-of-unity, Urysohn, or Euclidean Whitney approximation theorem is used to smooth the radius. The explicit one-variable locally finite sums retain the positive smooth radius required by the statement.

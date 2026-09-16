@@ -63,6 +63,4 @@ $L^p(\mu;\mathbb R)$ and $L^p(\mu;\mathbb C)$ are reflexive.
 
 ## Remarks
 
-Using the bilinear complex pairing is what makes the canonical-map calculation
-literal: the two scalar factors commute in $\int hu=\int uh$.  With a
-sesquilinear convention an explicit conjugation map would be required.
+Using the bilinear complex pairing is what makes the canonical-map calculation literal: the two scalar factors commute in $\int hu=\int uh$.  With a sesquilinear convention an explicit conjugation map would be required.

@@ -27,8 +27,7 @@ Every locally finite-type morphism is finite type.
 
 **Given:** A field $k$.
 
-[F1] A finite-type morphism is locally of finite type and quasi-compact
-[[def-locally-finite-type-and-finite-type-morphism]].
+[F1] A finite-type morphism is locally of finite type and quasi-compact [[def-locally-finite-type-and-finite-type-morphism]].
 
 ## Counterexample
 

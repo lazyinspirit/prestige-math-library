@@ -37,19 +37,15 @@ $$ap>1.$$
 
 **Given:** Real numbers $a>0$ and $p>0$.
 
-[L1] $\ell^p$ is the counting-measure version of $L^p$
-([[rem-ell-p-is-l-p-of-counting-measure]]).
+[L1] $\ell^p$ is the counting-measure version of $L^p$ ([[rem-ell-p-is-l-p-of-counting-measure]]).
 
-[L2] The real $p$-series $\sum_{k\ge1} k^{-s}$ converges exactly when $s>1$
-([[thm-p-series-real-exponents]]).
+[L2] The real $p$-series $\sum_{k\ge1} k^{-s}$ converges exactly when $s>1$ ([[thm-p-series-real-exponents]]).
 
 ## Verification
 
-**Proof technique:** Apply the real $p$-series test to the series
-$\sum k^{-ap}$ and read off the threshold $ap>1$.
+**Proof technique:** Apply the real $p$-series test to the series $\sum k^{-ap}$ and read off the threshold $ap>1$.
 
 1.1 By [L1], the sequence $(a_k)$ lies in $\ell^p$ exactly when [L1, given]
-$$\sum_{k=0}^\infty |a_k|^p=\sum_{k=1}^\infty k^{-ap}$$
-converges.
+$$\sum_{k=0}^\infty |a_k|^p=\sum_{k=1}^\infty k^{-ap}$$ converges.
 
 2.1 By [L2], that series converges exactly when $ap>1$. [L2, step 1.1] ∎

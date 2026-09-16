@@ -31,15 +31,11 @@ nondegenerate.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field and the one-dimensional abelian
-algebra used below.
+**Given:** A characteristic-zero field and the one-dimensional abelian algebra used below.
 
-[L1] A Lie algebra is reductive exactly when it is the direct sum of its
-center and a semisimple ideal
-([[thm-equivalent-characterizations-of-reductive-lie-algebras]]).
+[L1] A Lie algebra is reductive exactly when it is the direct sum of its center and a semisimple ideal ([[thm-equivalent-characterizations-of-reductive-lie-algebras]]).
 
-[L2] The Killing form is the adjoint trace form
-([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
+[L2] The Killing form is the adjoint trace form ([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
 
 ## Counterexample
 

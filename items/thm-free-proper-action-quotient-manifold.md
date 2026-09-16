@@ -34,30 +34,17 @@ $q:M\to M/G$ is a smooth surjective submersion.
 
 ## Facts & Assumptions
 
-**Given:** A smooth free proper left action of $G$ on $M$, and the orbit map
-$q:M\to M/G$ with the quotient topology.
+**Given:** A smooth free proper left action of $G$ on $M$, and the orbit map $q:M\to M/G$ with the quotient topology.
 
-[F1] Every $x\in M$ has a submanifold slice $S$ for which
-$G\times S\to G\cdot S$ is a diffeomorphism onto an open saturated
-neighborhood. [[lem-local-slice-for-a-free-proper-action]].
+[F1] Every $x\in M$ has a submanifold slice $S$ for which $G\times S\to G\cdot S$ is a diffeomorphism onto an open saturated neighborhood. [[lem-local-slice-for-a-free-proper-action]].
 
-[F2] A surjective open continuous map is a quotient map, and maps constant on
-quotient fibres factor uniquely through the quotient.
-[[lem-open-or-closed-surjection-is-quotient]],
-[[thm-quotient-universal-property]], [[def-quotient-topology]].
+[F2] A surjective open continuous map is a quotient map, and maps constant on quotient fibres factor uniquely through the quotient. [[lem-open-or-closed-surjection-is-quotient]], [[thm-quotient-universal-property]], [[def-quotient-topology]].
 
-[F3] Smooth manifolds and their finite products are locally compact and
-Hausdorff. [[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]],
-[[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]].
+[F3] Smooth manifolds and their finite products are locally compact and Hausdorff. [[prop-topological-manifolds-are-locally-compact-and-locally-path-connected]], [[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]].
 
-[F4] Continuous images of compact sets are compact, compact subsets of
-Hausdorff spaces are closed, and closed subsets of compact spaces are compact.
-[[thm-compactness-under-continuous-maps]],
-[[thm-compact-subset-of-a-hausdorff-space-is-closed]],
-[[thm-closed-subspace-of-a-compact-space-is-compact]].
+[F4] Continuous images of compact sets are compact, compact subsets of Hausdorff spaces are closed, and closed subsets of compact spaces are compact. [[thm-compactness-under-continuous-maps]], [[thm-compact-subset-of-a-hausdorff-space-is-closed]], [[thm-closed-subspace-of-a-compact-space-is-compact]].
 
-[F5] A submersion has projection normal form and therefore admits smooth local
-sections. [[thm-constant-rank-theorem-for-manifolds]].
+[F5] A submersion has projection normal form and therefore admits smooth local sections. [[thm-constant-rank-theorem-for-manifolds]].
 
 ## Proof
 

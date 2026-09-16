@@ -36,31 +36,21 @@ framework.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-identity $e$, and a left-invariant smooth vector field $X$ on $G$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with identity $e$, and a left-invariant smooth vector field $X$ on $G$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Left invariance means
-$d(L_a)_q(X_q)=X_{aq}$ for all $a,q\in G$.
-[[def-left-and-right-invariant-vector-fields]].
+[F2] Left invariance means $d(L_a)_q(X_q)=X_{aq}$ for all $a,q\in G$. [[def-left-and-right-invariant-vector-fields]].
 
-[F3] Through every point there is a unique maximal integral curve on an open
-interval containing zero.
-[[thm-unique-maximal-integral-curve-through-each-point]].
+[F3] Through every point there is a unique maximal integral curve on an open interval containing zero. [[thm-unique-maximal-integral-curve-through-each-point]].
 
-[F4] An integral curve $c$ satisfies $c'(t)=X_{c(t)}$.
-[[def-integral-curve-of-a-vector-field]].
+[F4] An integral curve $c$ satisfies $c'(t)=X_{c(t)}$. [[def-integral-curve-of-a-vector-field]].
 
-[F5] Differentials obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F5] Differentials obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
-[F6] Completeness means that every maximal integral curve has domain all of
-$\mathbb R$. [[def-complete-vector-field]].
+[F6] Completeness means that every maximal integral curve has domain all of $\mathbb R$. [[def-complete-vector-field]].
 
-[F7] A vector field is complete if and only if its maximal flow domain is all
-of $\mathbb R\times G$.
-[[prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]].
+[F7] A vector field is complete if and only if its maximal flow domain is all of $\mathbb R\times G$. [[prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]].
 
 ## Proof
 

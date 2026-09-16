@@ -41,10 +41,7 @@ $$
 
 **Given:** The numerical choices displayed in the Example.
 
-[A1] Conditionally on the displayed value $c_1=1$, one has
-$|G|=2^{43}>2^{42}=m$, and $2^{43}$ is the first power of two strictly above
-the corresponding source threshold. The example does not assert that the
-existential constant $c_1$ can be freely chosen.
+[A1] Conditionally on the displayed value $c_1=1$, one has $|G|=2^{43}>2^{42}=m$, and $2^{43}$ is the first power of two strictly above the corresponding source threshold. The example does not assert that the existential constant $c_1$ can be freely chosen.
 
 ## Verification
 

@@ -42,8 +42,7 @@ $S$ onto $\mathbb R$.
 
 **Given:** The upper half-strip $S$ above.
 
-[F1] The sine map biholomorphically sends $S$ onto the upper half-plane
-([[thm-sine-biholomorphism-from-upper-half-strip]]).
+[F1] The sine map biholomorphically sends $S$ onto the upper half-plane ([[thm-sine-biholomorphism-from-upper-half-strip]]).
 
 ## Verification
 

@@ -33,11 +33,9 @@ the tagged disjoint union $\coprod_i\{i\}\times A_i$.
 
 **Given:** A set-indexed family $(A_i)_{i\in I}$.
 
-[F1] A product represents families $X\to A_i$, and a coproduct represents
-families $A_i\to X$ ([[def-products-and-coproducts]]).
+[F1] A product represents families $X\to A_i$, and a coproduct represents families $A_i\to X$ ([[def-products-and-coproducts]]).
 
-[F2] Morphisms of $\mathbf{Set}$ are functions
-([[prop-sets-and-functions-form-category-set]]).
+[F2] Morphisms of $\mathbf{Set}$ are functions ([[prop-sets-and-functions-form-category-set]]).
 
 ## Verification
 

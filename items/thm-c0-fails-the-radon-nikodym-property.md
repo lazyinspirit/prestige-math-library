@@ -38,20 +38,13 @@ space $c_0$ does not have the Radon--Nikodym property.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] The sequence space $c_0$ has the supremum norm
-([[def-c-zero-and-ell-infinity]]) and is Banach over both scalar fields
-([[lem-real-and-complex-c-zero-are-banach]]).
+[L1] The sequence space $c_0$ has the supremum norm ([[def-c-zero-and-ell-infinity]]) and is Banach over both scalar fields ([[lem-real-and-complex-c-zero-are-banach]]).
 
-[L2] Every $f\in c_0^*$ has the unique bilinear representation
-$f(x)=\sum_{n\geq0}a_nx_n$ by a sequence $a\in\ell^1$
-([[thm-dual-of-c0-is-ell-one]]), whose finite truncations converge in
-$\ell^1$ ([[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
+[L2] Every $f\in c_0^*$ has the unique bilinear representation $f(x)=\sum_{n\geq0}a_nx_n$ by a sequence $a\in\ell^1$ ([[thm-dual-of-c0-is-ell-one]]), whose finite truncations converge in $\ell^1$ ([[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
-[L3] A bounded set is dentable when it has slices of arbitrarily small norm
-diameter ([[def-dentable-bounded-set-and-slice]]).
+[L3] A bounded set is dentable when it has slices of arbitrarily small norm diameter ([[def-dentable-bounded-set-and-slice]]).
 
-[L4] Under AC, RNP is equivalent to dentability of every nonempty bounded
-closed convex set ([[thm-rnp-dentability-characterization]]).
+[L4] Under AC, RNP is equivalent to dentability of every nonempty bounded closed convex set ([[thm-rnp-dentability-characterization]]).
 
 ## Proof
 
@@ -65,8 +58,7 @@ closed convex set ([[thm-rnp-dentability-characterization]]).
 
 $$\operatorname{Re}f(y)\geq\operatorname{Re}f(x)-|a_k|\,|1-x_k|>\|f\|-\alpha,$$
 
-and the same estimate with $|-1-x_k|\leq2$ puts $z$ in $S$. Thus
-$\|y-z\|_\infty=2$.
+and the same estimate with $|-1-x_k|\leq2$ puts $z$ in $S$. Thus $\|y-z\|_\infty=2$.
 
 3.1 Compute every slice diameter and obtain nondentability. The triangle inequality bounds the diameter of $B$, and hence of $S$, by two; step 2.1 attains two. Therefore every slice of $B$ has diameter exactly two. In particular no slice has diameter below one, so $B$ is not dentable. The ball is nonempty, bounded, closed, and convex in the Banach space from [L1]. [L1, L3, step 2.1]
 

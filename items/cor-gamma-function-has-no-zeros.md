@@ -33,9 +33,7 @@ $0,-1,-2,\dots$.
 
 **Given:** The reciprocal-Gamma product.
 
-[L1] One has
-$1/\Gamma(z)=ze^{\gamma z}\prod_{n\ge1}(1+z/n)e^{-z/n}$
-([[thm-gamma-weierstrass-product]]).
+[L1] One has $1/\Gamma(z)=ze^{\gamma z}\prod_{n\ge1}(1+z/n)e^{-z/n}$ ([[thm-gamma-weierstrass-product]]).
 
 ## Proof
 

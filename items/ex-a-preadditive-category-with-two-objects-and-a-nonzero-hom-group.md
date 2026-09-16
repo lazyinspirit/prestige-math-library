@@ -41,8 +41,7 @@ hom-group $\mathcal C(X,Y)$.
 
 **Given:** The category $\mathcal C$ described in the Example.
 
-[L1] A preadditive category has abelian-group hom-sets and bilinear composition
-([[def-preadditive-category]]).
+[L1] A preadditive category has abelian-group hom-sets and bilinear composition ([[def-preadditive-category]]).
 
 ## Verification
 

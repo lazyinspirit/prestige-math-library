@@ -97,22 +97,8 @@ $(g_j)$ ([[def-sequence]], [[lem-limit-of-tail]]).
 
 ## Remarks
 
-- **The limit is not attained.** Every term is strictly below $2$ and the limit is
-  $2$, which is the supremum of the range and does not belong to it. That is the
-  ordinary situation for a strictly increasing convergent sequence, and it is why
-  [[thm-monotone-convergence]] is stated with a supremum rather than a maximum.
+- **The limit is not attained.** Every term is strictly below $2$ and the limit is $2$, which is the supremum of the range and does not belong to it. That is the ordinary situation for a strictly increasing convergent sequence, and it is why [[thm-monotone-convergence]] is stated with a supremum rather than a maximum.
 
-- **The quadratic has two roots and only one is admissible.** The limit equation
-  $L^2 = 2 + L$ is solved by $L = 2$ and by $L = -1$. The second is excluded by
-  step 4.1, which is why the bound $L \ge 1$ is proved rather than waved through:
-  without it the argument would identify the limit only up to a sign, and a
-  reader who writes down the limit equation without checking the range of $L$ has
-  proved strictly less than the example claims.
+- **The quadratic has two roots and only one is admissible.** The limit equation $L^2 = 2 + L$ is solved by $L = 2$ and by $L = -1$. The second is excluded by step 4.1, which is why the bound $L \ge 1$ is proved rather than waved through: without it the argument would identify the limit only up to a sign, and a reader who writes down the limit equation without checking the range of $L$ has proved strictly less than the example claims.
 
-- **Squaring the recursion avoids a continuity argument.** Passing to the limit in
-  $g_{j+1} = \sqrt{2 + g_j}$ directly would need continuity of the square root,
-  which this library has not proved at this point. Squaring first turns the
-  recursion into $(g_{j+1})^2 = 2 + g_j$, in which only the algebra of limits is
-  required. The device is worth remembering: an identity between polynomials in
-  the terms passes to the limit for free, whereas an identity involving a
-  function does not.
+- **Squaring the recursion avoids a continuity argument.** Passing to the limit in $g_{j+1} = \sqrt{2 + g_j}$ directly would need continuity of the square root, which this library has not proved at this point. Squaring first turns the recursion into $(g_{j+1})^2 = 2 + g_j$, in which only the algebra of limits is required. The device is worth remembering: an identity between polynomials in the terms passes to the limit for free, whereas an identity involving a function does not.

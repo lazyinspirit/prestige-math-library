@@ -37,10 +37,7 @@ admits a retraction $r_n:C_n\to Z_n(C)$, then $C_\bullet$ is contractible.
 
 [L3] The previous theorem treats the dual split criterion on the epimorphism side ([[thm-a-bounded-below-acyclic-complex-of-projective-objects-is-contractible-when-its-cycle-epimorphisms-split]]).
 
-[L4] The stated proof uses the chosen retractions. Injectivity of the terms
-$C_n$ alone does not provide retractions onto $Z_n(C)$; the extension property
-in [[def-injective-object]] would provide such a retraction if the target
-$Z_n(C)$ were injective.
+[L4] The stated proof uses the chosen retractions. Injectivity of the terms $C_n$ alone does not provide retractions onto $Z_n(C)$; the extension property in [[def-injective-object]] would provide such a retraction if the target $Z_n(C)$ were injective.
 
 [L5] Opposite abelian categories are abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 

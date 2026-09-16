@@ -41,21 +41,17 @@ for every measurable $E$.
 
 ## Facts & Assumptions
 
-[L1] An integrable $X$-valued simple function and its proposed integral are as
-in [[def-banach-valued-simple-function-and-integral]].
+[L1] An integrable $X$-valued simple function and its proposed integral are as in [[def-banach-valued-simple-function-and-integral]].
 
-[L2] A measure is countably, hence finitely, additive on disjoint measurable
-families and assigns measure zero to the empty set ([[def-measure]]).
+[L2] A measure is countably, hence finitely, additive on disjoint measurable families and assigns measure zero to the empty set ([[def-measure]]).
 
-[L3] The nonnegative simple integral is the coefficient--measure sum, with
-$0\cdot\infty=0$ ([[def-integral-of-a-nonnegative-simple-function]]).
+[L3] The nonnegative simple integral is the coefficient--measure sum, with $0\cdot\infty=0$ ([[def-integral-of-a-nonnegative-simple-function]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** Integrable simple functions on a measure space with values in a
-Banach space, as in the Statement.
+**Given:** Integrable simple functions on a measure space with values in a Banach space, as in the Statement.
 
 1.1 Form a finite common refinement. [given, L1] Suppose $s=\sum_{j=1}^mx_j\mathbf1_{A_j} =\sum_{k=1}^ny_k\mathbf1_{B_k}$ are two representations from [L1]. Because every displayed coefficient is nonzero, both unions $\bigcup_jA_j$ and $\bigcup_kB_k$ are the same set $\{\omega:s(\omega)\ne0\}$. Hence the cells $C_{jk}=A_j\cap B_k$ with $1\le j\le m$ and $1\le k\le n$ partition every $A_j$ and every $B_k$. On every nonempty $C_{jk}$, pointwise equality gives $x_j=y_k$. [given, L1, algebra]
 
@@ -63,9 +59,7 @@ Banach space, as in the Statement.
 
 $$\sum_j\mu(A_j)x_j=\sum_{j,k}\mu(C_{jk})x_j=\sum_{j,k}\mu(C_{jk})y_k=\sum_k\mu(B_k)y_k.$$
 
-Every $C_{jk}$ lies in the finite-measure cells $A_j$ and $B_k$, so every
-scalar-vector product in this display is defined. No complement cell and no
-$0\cdot\infty$ convention is used. This proves representation independence.
+Every $C_{jk}$ lies in the finite-measure cells $A_j$ and $B_k$, so every scalar-vector product in this display is defined. No complement cell and no $0\cdot\infty$ convention is used. This proves representation independence.
 
 3.1 Prove linearity. [L1, step 2.1] For integrable $s,t$ and scalars $a,b$, refine their finite level partitions. On each refined cell $as+bt$ has coefficient $ax_j+by_k$. Every cell on which this coefficient is nonzero lies in the union of the finite-measure supports of $s$ and $t$, so $as+bt$ is integrable. Applying step 2.1 and distributing the finite vector sum yields $\int_E(as+bt)=a\int_Es+b\int_Et$. [L1, step 2.1, algebra]
 
@@ -75,5 +69,4 @@ $0\cdot\infty$ convention is used. This proves representation independence.
 
 $$\left\|\int_Es\,d\mu\right\|=\left\|\sum_j\mu(E\cap A_j)x_j\right\|\leq\sum_j\mu(E\cap A_j)\|x_j\|=\int_E\|s\|\,d\mu.$$
 
-This also covers the empty representation and $E=\varnothing$: both sides are
-zero. ∎
+This also covers the empty representation and $E=\varnothing$: both sides are zero. ∎

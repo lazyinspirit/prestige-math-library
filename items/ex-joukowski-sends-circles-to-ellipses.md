@@ -40,12 +40,9 @@ $$\frac{x^2}{\left(\frac{r+r^{-1}}2\right)^2}+\frac{y^2}{\left(\frac{r-r^{-1}}2\
 
 ## Facts & Assumptions
 
-**Given:** A real $r>1$ and the Joukowski map of
-[[thm-joukowski-biholomorphism-outside-unit-disc]].
+**Given:** A real $r>1$ and the Joukowski map of [[thm-joukowski-biholomorphism-outside-unit-disc]].
 
-[F1] The Joukowski map is
-$$J(z)=\frac12\left(z+\frac1z\right)$$
-([[thm-joukowski-biholomorphism-outside-unit-disc]]).
+[F1] The Joukowski map is $$J(z)=\frac12\left(z+\frac1z\right)$$ ([[thm-joukowski-biholomorphism-outside-unit-disc]]).
 
 ## Verification
 

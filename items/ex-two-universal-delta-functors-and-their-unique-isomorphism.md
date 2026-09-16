@@ -39,20 +39,13 @@ $L_0^PF\cong F\cong L_0^QF$, the isomorphism is the unique one whose degree-zero
 component corresponds to $\operatorname{id}_F$.
 ## Facts & Assumptions
 
-**Given:** Two supplied projective resolution data $P$ and $Q$ on all objects
-of $\mathcal A$ for the same right exact functor $F$.
+**Given:** Two supplied projective resolution data $P$ and $Q$ on all objects of $\mathcal A$ for the same right exact functor $F$.
 
-[L1] Each of the two derived constructions is a universal homological delta
-functor
-([[thm-derived-functors-are-universal-delta-functors]]).
+[L1] Each of the two derived constructions is a universal homological delta functor ([[thm-derived-functors-are-universal-delta-functors]]).
 
-[L2] Two universal delta functors with the same degree-zero term are uniquely
-isomorphic
-([[cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic]]).
+[L2] Two universal delta functors with the same degree-zero term are uniquely isomorphic ([[cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic]]).
 
-[L3] For every supplied projective resolution datum, the zeroth left derived
-functor is naturally isomorphic to the original right exact functor
-([[thm-left-derived-functors-form-a-homological-delta-functor]]).
+[L3] For every supplied projective resolution datum, the zeroth left derived functor is naturally isomorphic to the original right exact functor ([[thm-left-derived-functors-form-a-homological-delta-functor]]).
 
 ## Verification
 

@@ -46,28 +46,19 @@ No smoothness of the pointwise common value is assumed in the hypothesis.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]], [[lem-ricci-curvature-is-symmetric-and-basis-independent]], [[def-scalar-curvature]], and [[thm-contracted-second-bianchi-identity]]; the pointwise tensor argument makes no additional countable-family choice.
 
-[F1] Algebraic curvature tensors are determined by their sectional
-curvatures. [[thm-sectional-curvatures-determine-the-riemann-tensor]].
+[F1] Algebraic curvature tensors are determined by their sectional curvatures. [[thm-sectional-curvatures-determine-the-riemann-tensor]].
 
-[F2] Sectional curvature uses the positive Gram determinant and, on an
-orthonormal pair, is $\operatorname{Rm}(X,Y,Y,X)$.
-[[def-sectional-curvature]].
+[F2] Sectional curvature uses the positive Gram determinant and, on an orthonormal pair, is $\operatorname{Rm}(X,Y,Y,X)$. [[def-sectional-curvature]].
 
-[F3] Ricci curvature is the orthonormal contraction of $\operatorname{Rm}$.
-[[lem-ricci-curvature-is-symmetric-and-basis-independent]].
+[F3] Ricci curvature is the orthonormal contraction of $\operatorname{Rm}$. [[lem-ricci-curvature-is-symmetric-and-basis-independent]].
 
-[F4] Scalar curvature is the metric trace of Ricci.
-[[def-scalar-curvature]].
+[F4] Scalar curvature is the metric trace of Ricci. [[def-scalar-curvature]].
 
-[F5] The contracted Bianchi identity is
-$\operatorname{div}\operatorname{Ric}=(1/2)dS$.
-[[thm-contracted-second-bianchi-identity]].
+[F5] The contracted Bianchi identity is $\operatorname{div}\operatorname{Ric}=(1/2)dS$. [[thm-contracted-second-bianchi-identity]].
 
-[F6] The Levi–Civita connection preserves $g$.
-[[def-levi-civita-connection]].
+[F6] The Levi–Civita connection preserves $g$. [[def-levi-civita-connection]].
 
-[F7] A smooth function whose differential vanishes is constant on every
-connected component. [[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]].
+[F7] A smooth function whose differential vanishes is constant on every connected component. [[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]].
 
 ## Proof
 

@@ -31,11 +31,9 @@ symplectomorphic to some neighbourhood of $p_1$, with $p_0$ sent to $p_1$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, equal-dimensional symplectic manifolds and
-chosen points as in the statement.
+**Given:** $\mathrm{AC}_\omega$, equal-dimensional symplectic manifolds and chosen points as in the statement.
 
-[F1] Darboux coordinates identify a neighbourhood of every point with an open
-neighbourhood of zero carrying the standard form. [[thm-darboux-theorem]].
+[F1] Darboux coordinates identify a neighbourhood of every point with an open neighbourhood of zero carrying the standard form. [[thm-darboux-theorem]].
 
 ## Proof
 

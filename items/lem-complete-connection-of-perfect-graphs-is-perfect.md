@@ -34,24 +34,13 @@ connection $G\nabla H$ is perfect.
 
 ## Facts & Assumptions
 
-**Given:** Perfect graphs $G=(V_G,E_G)$ and $H=(V_H,E_H)$ with
-$V_G\cap V_H=\varnothing$.
+**Given:** Perfect graphs $G=(V_G,E_G)$ and $H=(V_H,E_H)$ with $V_G\cap V_H=\varnothing$.
 
-[L1] A graph is perfect exactly when every induced subgraph has equal clique
-number and chromatic number ([[def-perfect-graph]]).
+[L1] A graph is perfect exactly when every induced subgraph has equal clique number and chromatic number ([[def-perfect-graph]]).
 
-[L2] If $X\subseteq V_G\cup V_H$ and $X_G:=X\cap V_G$, $X_H:=X\cap V_H$, then
-the induced subgraph of $G\nabla H$ on $X$ is
-$G[X_G]\nabla H[X_H]$
-([[def-complete-connection-of-two-disjoint-graphs]],
-[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
+[L2] If $X\subseteq V_G\cup V_H$ and $X_G:=X\cap V_G$, $X_H:=X\cap V_H$, then the induced subgraph of $G\nabla H$ on $X$ is $G[X_G]\nabla H[X_H]$ ([[def-complete-connection-of-two-disjoint-graphs]], [[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
 
-[L3] In a complete connection, every clique is the union of a clique from each
-side, while every stable set lies entirely in one side; therefore
-$\omega(G\nabla H)=\omega(G)+\omega(H)$ and
-$\chi(G\nabla H)=\chi(G)+\chi(H)$
-([[def-clique-stable-set-and-numbers]],
-[[def-proper-vertex-colouring-and-chromatic-number]]).
+[L3] In a complete connection, every clique is the union of a clique from each side, while every stable set lies entirely in one side; therefore $\omega(G\nabla H)=\omega(G)+\omega(H)$ and $\chi(G\nabla H)=\chi(G)+\chi(H)$ ([[def-clique-stable-set-and-numbers]], [[def-proper-vertex-colouring-and-chromatic-number]]).
 
 ## Proof
 

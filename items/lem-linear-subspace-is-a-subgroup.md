@@ -83,22 +83,8 @@ that are closed under scalar multiplication.
 
 ## Remarks
 
-- **What the two directions cost.** Going from a linear subspace to a subgroup
-  uses one fact about vector spaces and no group theory: closure under additive
-  inverses is not assumed but derived, from closure under scalar multiplication at
-  the scalar $-1_F$. Going back is pure bookkeeping, since (W1) and (W2) are
-  literally (S1) and (S2).
+- **What the two directions cost.** Going from a linear subspace to a subgroup uses one fact about vector spaces and no group theory: closure under additive inverses is not assumed but derived, from closure under scalar multiplication at the scalar $-1_F$. Going back is pure bookkeeping, since (W1) and (W2) are literally (S1) and (S2).
 
-- **Why this is worth an item.** Every statement the library proves about
-  subgroups applies to linear subspaces at once. In particular the intersection of
-  a nonempty family of subgroups is a subgroup
-  ([[lem-intersection-of-subgroups]]), which is the group-theoretic shadow of
-  [[lem-intersection-of-linear-subspaces]] below.
+- **Why this is worth an item.** Every statement the library proves about subgroups applies to linear subspaces at once. In particular the intersection of a nonempty family of subgroups is a subgroup ([[lem-intersection-of-subgroups]]), which is the group-theoretic shadow of [[lem-intersection-of-linear-subspaces]] below.
 
-- **The hypothesis in claim 3 is not decoration.** Conditions (S1)–(S3) do not
-  mention the scalars at all, so a subgroup of $(V,+,0_V)$ is required only to
-  contain $0_V$ and to be closed under addition and under negation; closure under
-  multiplication by an arbitrary $\lambda \in F$ is a further condition, and claim
-  3 assumes it rather than deriving it. Claim 2 says that in the other direction
-  nothing extra is needed, because (W3) is already one of the three defining
-  conditions of a linear subspace.
+- **The hypothesis in claim 3 is not decoration.** Conditions (S1)–(S3) do not mention the scalars at all, so a subgroup of $(V,+,0_V)$ is required only to contain $0_V$ and to be closed under addition and under negation; closure under multiplication by an arbitrary $\lambda \in F$ is a further condition, and claim 3 assumes it rather than deriving it. Claim 2 says that in the other direction nothing extra is needed, because (W3) is already one of the three defining conditions of a linear subspace.

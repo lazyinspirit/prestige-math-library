@@ -36,33 +36,17 @@ working sense of [[def-abelian-category]].
 
 ## Facts & Assumptions
 
-**Given:** A category $\mathcal A$ satisfying Freyd's axioms A0, A1, A1*, A2,
-A2*, A3, and A3*.
+**Given:** A category $\mathcal A$ satisfying Freyd's axioms A0, A1, A1*, A2, A2*, A3, and A3*.
 
-[L1] Freyd's axioms are the zero-object, binary product, binary coproduct,
-kernel, cokernel, normal-monic, and conormal-epic clauses listed in
-[[def-the-freyd-axioms-for-an-abelian-category]].
+[L1] Freyd's axioms are the zero-object, binary product, binary coproduct, kernel, cokernel, normal-monic, and conormal-epic clauses listed in [[def-the-freyd-axioms-for-an-abelian-category]].
 
-[L2] Once one object carries both the product and coproduct structures with the
-standard zero equations, the canonical comparison is the identity and the
-object is a biproduct
-([[thm-biproduct-data-characterisation-without-addition]]).
+[L2] Once one object carries both the product and coproduct structures with the standard zero equations, the canonical comparison is the identity and the object is a biproduct ([[thm-biproduct-data-characterisation-without-addition]]).
 
-[L3] Finite biproducts give a canonical commutative-monoid enrichment on
-hom-sets, and [L4] makes that enrichment unique
-([[thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids]],
-[[thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique]]).
+[L3] Finite biproducts give a canonical commutative-monoid enrichment on hom-sets, and [L4] makes that enrichment unique ([[thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids]], [[thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique]]).
 
-[L4] Earlier on this page, image, coimage, their factorization maps, and the
-canonical coimage-to-image morphism were constructed from kernels and
-cokernels
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]],
-[[thm-a-morphism-factors-uniquely-through-its-coimage]],
-[[thm-a-morphism-factors-uniquely-through-its-image]],
-[[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
+[L4] Earlier on this page, image, coimage, their factorization maps, and the canonical coimage-to-image morphism were constructed from kernels and cokernels ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]], [[thm-a-morphism-factors-uniquely-through-its-coimage]], [[thm-a-morphism-factors-uniquely-through-its-image]], [[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]).
 
-[L5] Every coequalizer is epic
-([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
+[L5] Every coequalizer is epic ([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
 
 ## Proof
 

@@ -31,8 +31,7 @@ A pseudopolynomial algorithm is polynomial in the binary input length.
 
 ## Facts & Assumptions
 
-**Given:** The standard dynamic program for SUBSET SUM that fills an
-$n\times T$ table for an instance with $n$ input numbers and target $T$.
+**Given:** The standard dynamic program for SUBSET SUM that fills an $n\times T$ table for an instance with $n$ input numbers and target $T$.
 
 [F1] A SUBSET SUM instance writes its target integer in binary, by [[def-subset-sum-and-partition]].
 
@@ -42,9 +41,7 @@ $n\times T$ table for an instance with $n$ input numbers and target $T$.
 
 **Proof technique:** direct.
 
-1.1 Consider the one-number SUBSET SUM instances
-$$ ([2^m],2^m) $$
-for $m\ge 1$. By [F1], the binary input length is $O(m)$. [F1, given]
+1.1 Consider the one-number SUBSET SUM instances $$ ([2^m],2^m) $$ for $m\ge 1$. By [F1], the binary input length is $O(m)$. [F1, given]
 
 2.1 The standard table-filling algorithm uses $\Theta(nT)=\Theta(2^m)$ time on this family because here $n=1$ and $T=2^m$. [step 1.1, given, algebra]
 

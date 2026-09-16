@@ -32,12 +32,9 @@ $\chi(1)>1$, then $G$ is nonabelian.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$ with an irreducible complex character $\chi$ such
-that $\chi(1)>1$.
+**Given:** A finite group $G$ with an irreducible complex character $\chi$ such that $\chi(1)>1$.
 
-[F1] A finite group is abelian if and only if all its irreducible complex
-characters have degree $1$
-([[thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one]]).
+[F1] A finite group is abelian if and only if all its irreducible complex characters have degree $1$ ([[thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one]]).
 
 ## Proof
 

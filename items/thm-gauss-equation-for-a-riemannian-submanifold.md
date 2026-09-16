@@ -43,27 +43,17 @@ projection constructions.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the embedded Riemannian submanifold, and tangent
-fields $X,Y,Z,W$.
+**Given:** Countable choice, the embedded Riemannian submanifold, and tangent fields $X,Y,Z,W$.
 
-[F1] The Gauss decomposition is
-$\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$.
-[[def-induced-connection-and-second-fundamental-form]].
+[F1] The Gauss decomposition is $\overline\nabla_XY=\nabla^M_XY+\mathrm{II}(X,Y)$. [[def-induced-connection-and-second-fundamental-form]].
 
-[F2] The induced connection is the Levi–Civita connection of the induced
-metric. [[thm-the-induced-connection-is-levi-civita]].
+[F2] The induced connection is the Levi–Civita connection of the induced metric. [[thm-the-induced-connection-is-levi-civita]].
 
-[F3] For every normal field $\nu$,
-$(\overline\nabla_X\nu)^\top=-S_\nu X$ and
-$g(S_\nu X,W)=\overline g(\mathrm{II}(X,W),\nu)$.
-[[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
+[F3] For every normal field $\nu$, $(\overline\nabla_X\nu)^\top=-S_\nu X$ and $g(S_\nu X,W)=\overline g(\mathrm{II}(X,W),\nu)$. [[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
 
-[F4] Curvature is the bracket-corrected covariant-derivative commutator with
-the stated sign. [[def-curvature-of-an-affine-connection]].
+[F4] Curvature is the bracket-corrected covariant-derivative commutator with the stated sign. [[def-curvature-of-an-affine-connection]].
 
-[F5] The Riemann four-tensor pairs curvature with the metric:
-$\operatorname{Rm}(X,Y,Z,W)=g(R(X,Y)Z,W)$.
-[[def-riemann-curvature-four-tensor]].
+[F5] The Riemann four-tensor pairs curvature with the metric: $\operatorname{Rm}(X,Y,Z,W)=g(R(X,Y)Z,W)$. [[def-riemann-curvature-four-tensor]].
 
 ## Proof
 

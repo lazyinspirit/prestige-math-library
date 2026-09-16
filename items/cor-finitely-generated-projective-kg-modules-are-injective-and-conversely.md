@@ -28,14 +28,11 @@ projective and injective are equivalent properties.
 
 **Given:** The finite-dimensional algebra $A=k[G]$ and a finite-dimensional left $A$-module.
 
-[L1] The group algebra $A$ is symmetric Frobenius
-([[prop-group-algebra-in-defining-characteristic-is-a-symmetric-frobenius-algebra]]).
+[L1] The group algebra $A$ is symmetric Frobenius ([[prop-group-algebra-in-defining-characteristic-is-a-symmetric-frobenius-algebra]]).
 
-[F1] Projective modules are characterized by lifting and by being direct
-summands of free modules ([[def-projective-module]], [[thm-projective-module-characterizations]]).
+[F1] Projective modules are characterized by lifting and by being direct summands of free modules ([[def-projective-module]], [[thm-projective-module-characterizations]]).
 
-[F2] Injective modules are characterized by extension and by splitting short
-exact sequences starting in the module ([[def-injective-module]], [[thm-injective-module-characterizations]]).
+[F2] Injective modules are characterized by extension and by splitting short exact sequences starting in the module ([[def-injective-module]], [[thm-injective-module-characterizations]]).
 
 ## Proof
 

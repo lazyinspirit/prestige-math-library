@@ -38,24 +38,15 @@ form a holomorphic atlas. The resulting space is Hausdorff and second countable.
 
 **Given:** The germ space $\mathcal R(\xi_0,\Omega)$ and its subsets $N(f,U)$.
 
-[L1] The germ space, its basic candidate sets $N(f,U)$, and the projection
-$p([f]_z)=z$ are those of
-[[def-riemann-surface-of-a-complete-analytic-function]].
+[L1] The germ space, its basic candidate sets $N(f,U)$, and the projection $p([f]_z)=z$ are those of [[def-riemann-surface-of-a-complete-analytic-function]].
 
-[L2] A family is a basis exactly when it covers the set and every point of an
-intersection of two members lies in a third member inside that intersection
-([[thm-basis-criterion]]).
+[L2] A family is a basis exactly when it covers the set and every point of an intersection of two members lies in a third member inside that intersection ([[thm-basis-criterion]]).
 
-[L3] If two holomorphic functions agree on a set with an accumulation point in a
-complex domain, then they agree on that whole domain
-([[thm-identity-theorem-holomorphic-functions]]).
+[L3] If two holomorphic functions agree on a set with an accumulation point in a complex domain, then they agree on that whole domain ([[thm-identity-theorem-holomorphic-functions]]).
 
-[L4] Hausdorff means that distinct points admit disjoint open neighbourhoods, and
-second countable means that the topology has a countable basis
-([[def-hausdorff-space]], [[def-second-countable-space]]).
+[L4] Hausdorff means that distinct points admit disjoint open neighbourhoods, and second countable means that the topology has a countable basis ([[def-hausdorff-space]], [[def-second-countable-space]]).
 
-[L5] Every open connected subset of $\mathbb R^2$ is polygonally connected
-([[thm-open-connected-subsets-of-rn-are-polygonally-connected]]).
+[L5] Every open connected subset of $\mathbb R^2$ is polygonally connected ([[thm-open-connected-subsets-of-rn-are-polygonally-connected]]).
 
 ## Proof
 

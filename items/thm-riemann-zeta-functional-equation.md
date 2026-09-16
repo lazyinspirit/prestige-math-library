@@ -32,17 +32,11 @@ as an identity of meromorphic functions.
 
 **Given:** The completed functional equation.
 
-[L1] The completed zeta function satisfies
-$$\pi^{-s/2}\Gamma(s/2)\zeta(s)=\pi^{-(1-s)/2}\Gamma((1-s)/2)\zeta(1-s)$$
-([[thm-completed-riemann-zeta-functional-equation]]).
+[L1] The completed zeta function satisfies $$\pi^{-s/2}\Gamma(s/2)\zeta(s)=\pi^{-(1-s)/2}\Gamma((1-s)/2)\zeta(1-s)$$ ([[thm-completed-riemann-zeta-functional-equation]]).
 
-[L2] Euler's reflection formula is
-$$\Gamma(z)\Gamma(1-z)=\frac{\pi}{\sin(\pi z)}$$
-([[thm-euler-reflection-formula]]).
+[L2] Euler's reflection formula is $$\Gamma(z)\Gamma(1-z)=\frac{\pi}{\sin(\pi z)}$$ ([[thm-euler-reflection-formula]]).
 
-[L3] Legendre's duplication formula is
-$$\Gamma(z)\Gamma(z+1/2)=2^{1-2z}\sqrt{\pi}\,\Gamma(2z)$$
-([[thm-legendre-duplication-formula]]).
+[L3] Legendre's duplication formula is $$\Gamma(z)\Gamma(z+1/2)=2^{1-2z}\sqrt{\pi}\,\Gamma(2z)$$ ([[thm-legendre-duplication-formula]]).
 
 ## Proof
 

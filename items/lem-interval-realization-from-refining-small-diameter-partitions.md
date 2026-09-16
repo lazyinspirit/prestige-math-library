@@ -27,66 +27,33 @@ Assume AC. Let S be nonempty, complete and separable, and let $(\mathcal P_k)$ b
 
 ## Facts & Assumptions
 
-[F1] [[thm-lebesgue-measure-of-a-box-of-every-kind]]: Let $n \ge 1$, **assume the Axiom of Countable Choice**
-(def-countable-choice), and let $a_i \le b_i$ be reals for $i<n$. Write
+[F1] [[thm-lebesgue-measure-of-a-box-of-every-kind]]: Let $n \ge 1$, **assume the Axiom of Countable Choice** (def-countable-choice), and let $a_i \le b_i$ be reals for $i<n$. Write
 
 $$R^{\circ} := \{\, x \in \mathbb{R}^n : a_i < x_i < b_i \text{ for every } i<n \,\}, \qquad \overline{R} := [a,b] = \{\, x \in \mathbb{R}^n : a_i \le x_i \le b_i \text{ for every } i<n \,\}$$
 
-(def-multidimensional-rectangle-and-volume). Then $R^{\circ}$ is open and
-$\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**
-set $R$ with $R^{\circ} \subseteq R \subseteq \overline{R}$ is Lebesgue
-measurable with
+(def-multidimensional-rectangle-and-volume). Then $R^{\circ}$ is open and $\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every** set $R$ with $R^{\circ} \subseteq R \subseteq \overline{R}$ is Lebesgue measurable with
 
 $$\lambda_n(R) \;=\; \prod_{i<n}(b_i-a_i).$$
 
-In particular this covers the four one-dimensional face conventions in each
-coordinate — the open box, the closed box $[a,b]$, the half-open box
-$B(a,b) = \prod_{i<n}(a_i,b_i]$ of def-half-open-box, and every mixture of
-them, in any combination of coordinates — and it gives measure $0$ to all of them
-whenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite
-parameters the value is already
-$\lambda_n(B) = \operatorname{vol}(B)$ (thm-lebesgue-measure-is-a-complete-measure).
+In particular this covers the four one-dimensional face conventions in each coordinate — the open box, the closed box $[a,b]$, the half-open box $B(a,b) = \prod_{i<n}(a_i,b_i]$ of def-half-open-box, and every mixture of them, in any combination of coordinates — and it gives measure $0$ to all of them whenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite parameters the value is already $\lambda_n(B) = \operatorname{vol}(B)$ (thm-lebesgue-measure-is-a-complete-measure).
 
-[F2] [[prop-countable-subsets-of-rn-are-lebesgue-null]]: Let $n \ge 1$ and **assume the Axiom of Countable Choice**
-(def-countable-choice). Every at most countable subset $E \subseteq \mathbb{R}^n$
-(def-countable) is Lebesgue measurable with
+[F2] [[prop-countable-subsets-of-rn-are-lebesgue-null]]: Let $n \ge 1$ and **assume the Axiom of Countable Choice** (def-countable-choice). Every at most countable subset $E \subseteq \mathbb{R}^n$ (def-countable) is Lebesgue measurable with
 
 $$\lambda_n(E) \;=\; 0,$$
 
-so $E$ is a $\lambda_n$-null set (def-measure-null-set-and-almost-everywhere).
-In particular every singleton is null, and on the real line the set
-$\mathbb{Q}_{\mathbb{R}}$ of rational reals (lem-rat-embeds-dense) satisfies
-$\lambda_1(\mathbb{Q}_{\mathbb{R}}) = 0$.
+so $E$ is a $\lambda_n$-null set (def-measure-null-set-and-almost-everywhere). In particular every singleton is null, and on the real line the set $\mathbb{Q}_{\mathbb{R}}$ of rational reals (lem-rat-embeds-dense) satisfies $\lambda_1(\mathbb{Q}_{\mathbb{R}}) = 0$.
 
 [F3] [[def-complete-metric-space]]: Let $(X,d)$ be a metric space (def-metric-space).
 
-$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$
-(def-cauchy-in-metric) converges to a point of $X$
-(def-metric-convergence).
+$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$ (def-cauchy-in-metric) converges to a point of $X$ (def-metric-convergence).
 
-A subset $A \subseteq X$ is called **complete** when the metric subspace
-$(A, d_A)$ is complete (def-isometry-and-metric-embedding); as always, the
-metric is part of the data, and $d_A$ is the restriction of $d$ to $A \times A$.
+A subset $A \subseteq X$ is called **complete** when the metric subspace $(A, d_A)$ is complete (def-isometry-and-metric-embedding); as always, the metric is part of the data, and $d_A$ is the restriction of $d$ to $A \times A$.
 
-**The limit is unique when it exists**, since limits in a metric space are unique
-(lem-metric-limits-unique), so a complete space assigns to each of its Cauchy
-sequences one point and not a set of points.
+**The limit is unique when it exists**, since limits in a metric space are unique (lem-metric-limits-unique), so a complete space assigns to each of its Cauchy sequences one point and not a set of points.
 
-**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the
-topology of $d$.** Both quantifiers in the definition are about the metric: the
-Cauchy condition is stated with distances, and so is convergence. Two metrics on
-the same set can have the same open sets while exactly one of them is complete,
-which is the content of fs-completeness-is-a-topological-property and its
-witness. Read the word *complete* as an abbreviation for *complete with respect
-to this metric*, always.
+**Completeness is a property of the pair $(X,d)$, not of $X$ and not of the topology of $d$.** Both quantifiers in the definition are about the metric: the Cauchy condition is stated with distances, and so is convergence. Two metrics on the same set can have the same open sets while exactly one of them is complete, which is the content of fs-completeness-is-a-topological-property and its witness. Read the word *complete* as an abbreviation for *complete with respect to this metric*, always.
 
-[F4] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that
-$f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single
-nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then
-$f\in L^1(\mu)$,
-$$\int|f_n-f|\,d\mu\longrightarrow0,$$
-and hence
-$$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
+[F4] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then $f\in L^1(\mu)$, $$\int|f_n-f|\,d\mu\longrightarrow0,$$ and hence $$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
 
 [F5] [[cor-weak-limits-are-unique]]: Bounded continuous real tests determine Borel probability measures on any metric space. In particular, weak limits are unique.
 

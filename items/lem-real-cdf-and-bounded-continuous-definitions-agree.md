@@ -29,12 +29,7 @@ For real random variables, the CDF continuity-point definition of convergence in
 
 [F1] [[thm-portmanteau-theorem]]: For Borel probabilities $\mu_n,\mu$ on a metric space S, the following are equivalent: (i) $\mu_n\Rightarrow\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\limsup_n\mu_n(F)\le\mu(F)$ for every closed F; (iv) $\liminf_n\mu_n(G)\ge\mu(G)$ for every open G; (v) $\mu_n(A)\to\mu(A)$ for every Borel A with $\mu(\partial A)=0$.
 
-[F2] [[def-convergence-in-distribution-for-real-random-variables]]: For real random variables $(X_n)$ and $X$, write $X_n\Rightarrow X$, or
-$X_n\to X$ **in distribution**, when
-$$F_{X_n}(x)\longrightarrow F_X(x)$$
-at every continuity point $x$ of $F_X$. Here $F_X$ is the CDF from
-def-cumulative-distribution-function-of-a-random-variable and continuity
-points are those of def-atom-and-continuity-point-of-a-law.
+[F2] [[def-convergence-in-distribution-for-real-random-variables]]: For real random variables $(X_n)$ and $X$, write $X_n\Rightarrow X$, or $X_n\to X$ **in distribution**, when $$F_{X_n}(x)\longrightarrow F_X(x)$$ at every continuity point $x$ of $F_X$. Here $F_X$ is the CDF from def-cumulative-distribution-function-of-a-random-variable and continuity points are those of def-atom-and-continuity-point-of-a-law.
 
 [F3] [[thm-continuity-from-above-for-measures]]: Let $(E_n)_{n\in\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\mu$. If $\mu(E_{n_0})<+\infty$ for some $n_0$, then
 
@@ -46,32 +41,15 @@ $$\mu\left(\bigcup_{n\in\mathbb N}E_n\right)=\sup_{n\in\mathbb N}\mu(E_n).$$
 
 No finiteness hypothesis is required.
 
-[F5] [[thm-heine-borel-rn]]: Let $n \in \mathbb{N}$ with $n \ge 1$, let $\mathbb{R}^n$ be the set of functions
-$n \to \mathbb{R}$ and let $d_2$ be the Euclidean metric on it
-(lem-metrics-on-rn). Then:
+[F5] [[thm-heine-borel-rn]]: Let $n \in \mathbb{N}$ with $n \ge 1$, let $\mathbb{R}^n$ be the set of functions $n \to \mathbb{R}$ and let $d_2$ be the Euclidean metric on it (lem-metrics-on-rn). Then:
 
-1. **Closed boxes are compact.** For reals $a_k \le b_k$ $(k < n)$ the box
-   $Q = \{\, x \in \mathbb{R}^n : a_k \le x_k \le b_k \text{ for every } k < n \,\}$
-   is a compact subset of $(\mathbb{R}^n, d_2)$ (def-metric-compactness).
-2. **Heine-Borel.** A subset $K \subseteq \mathbb{R}^n$ is a compact subset of
-   $(\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\mathbb{R}^n$
-   (def-metric-topology) and bounded
-   (def-metric-bounded-diameter).
-3. **The real line.** A subset $K \subseteq \mathbb{R}$ is a compact subset of
-   $(\mathbb{R}, d_{\mathbb{R}})$, the usual metric $d_{\mathbb{R}}(x,y) = |x-y|$
-   (lem-real-line-is-a-metric-space), if and only if $K$ is closed in
-   $\mathbb{R}$ and bounded.
+1. **Closed boxes are compact.** For reals $a_k \le b_k$ $(k < n)$ the box $Q = \{\, x \in \mathbb{R}^n : a_k \le x_k \le b_k \text{ for every } k < n \,\}$ is a compact subset of $(\mathbb{R}^n, d_2)$ (def-metric-compactness).
+2. **Heine-Borel.** A subset $K \subseteq \mathbb{R}^n$ is a compact subset of $(\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\mathbb{R}^n$ (def-metric-topology) and bounded (def-metric-bounded-diameter).
+3. **The real line.** A subset $K \subseteq \mathbb{R}$ is a compact subset of $(\mathbb{R}, d_{\mathbb{R}})$, the usual metric $d_{\mathbb{R}}(x,y) = |x-y|$ (lem-real-line-is-a-metric-space), if and only if $K$ is closed in $\mathbb{R}$ and bounded.
 
-**No choice principle is used.** The bisection below halves one coordinate at a
-time and takes the **left** half whenever the left half still fails to be finitely
-covered, the right half otherwise: a rule with two outcomes, decided by a
-property of the box, not a selection. That is the whole reason the theorem is
-available in ZF, while the general "complete and totally bounded implies compact"
-(thm-complete-and-totally-bounded-implies-compact) is not.
+**No choice principle is used.** The bisection below halves one coordinate at a time and takes the **left** half whenever the left half still fails to be finitely covered, the right half otherwise: a rule with two outcomes, decided by a property of the box, not a selection. That is the whole reason the theorem is available in ZF, while the general "complete and totally bounded implies compact" (thm-complete-and-totally-bounded-implies-compact) is not.
 
-The hypothesis $n \ge 1$ is inherited from lem-metrics-on-rn, which defines
-$\mathbb{R}^n$ and its metrics only there; the last remark below records what
-happens at $n = 0$.
+The hypothesis $n \ge 1$ is inherited from lem-metrics-on-rn, which defines $\mathbb{R}^n$ and its metrics only there; the last remark below records what happens at $n = 0$.
 
 ## Proof
 

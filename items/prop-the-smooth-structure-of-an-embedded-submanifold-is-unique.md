@@ -38,22 +38,15 @@ $i:S\hookrightarrow M$ is a smooth embedding.
 
 **Given:** An embedded submanifold $S\subseteq M$.
 
-[L1] The restricted slice charts define a smooth atlas on $S$ with the subspace
-topology ([[lem-slice-chart-restrictions-form-a-smooth-atlas]]).
+[L1] The restricted slice charts define a smooth atlas on $S$ with the subspace topology ([[lem-slice-chart-restrictions-form-a-smooth-atlas]]).
 
-[F1] A smooth embedding is an injective immersion and a homeomorphism onto its
-image with the subspace topology ([[def-smooth-embedding]]).
+[F1] A smooth embedding is an injective immersion and a homeomorphism onto its image with the subspace topology ([[def-smooth-embedding]]).
 
-[F2] Embedded submanifolds are defined by slice charts
-([[def-embedded-submanifold-and-slice-chart]]).
+[F2] Embedded submanifolds are defined by slice charts ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L2] A smooth map between manifolds of the same dimension whose differential
-is an isomorphism is a local diffeomorphism
-([[thm-smooth-inverse-function-theorem-on-manifolds]]).
+[L2] A smooth map between manifolds of the same dimension whose differential is an isomorphism is a local diffeomorphism ([[thm-smooth-inverse-function-theorem-on-manifolds]]).
 
-[L3] With the smooth structure from restricted slice charts, the inclusion
-$i:S\hookrightarrow M$ is a smooth embedding
-([[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]]).
+[L3] With the smooth structure from restricted slice charts, the inclusion $i:S\hookrightarrow M$ is a smooth embedding ([[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]]).
 
 ## Proof
 **Proof technique:** direct.

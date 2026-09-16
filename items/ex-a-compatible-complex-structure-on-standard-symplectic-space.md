@@ -33,9 +33,7 @@ $\omega_0=\sum_i dq^i\wedge dp_i$.
 
 **Given:** The displayed $J$ and standard form.
 
-[F1] Compatibility requires $J^2=-I$ and positivity and symmetry of
-$\omega_0(\cdot,J\cdot)$.
-[[def-compatible-complex-structure-on-a-symplectic-vector-space]].
+[F1] Compatibility requires $J^2=-I$ and positivity and symmetry of $\omega_0(\cdot,J\cdot)$. [[def-compatible-complex-structure-on-a-symplectic-vector-space]].
 
 ## Verification
 

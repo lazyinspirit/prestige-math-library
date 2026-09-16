@@ -27,15 +27,11 @@ Lebesgue measurable.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, open sets
-$U,V \subseteq \mathbb R^n$, a $C^1$ diffeomorphism $T : U \to V$, and a
-Lebesgue measurable set $E \subseteq U$.
+**Given:** The Axiom of Countable Choice, open sets $U,V \subseteq \mathbb R^n$, a $C^1$ diffeomorphism $T : U \to V$, and a Lebesgue measurable set $E \subseteq U$.
 
 [L1] A $C^1$ diffeomorphism maps null sets to null sets. ([[lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets]])
 
-[L2] Assuming countable choice, every Lebesgue measurable set is a Borel set
-up to a null modification.
-([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]])
+[L2] Assuming countable choice, every Lebesgue measurable set is a Borel set up to a null modification. ([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]])
 
 [L3] Continuous preimages of Borel sets are Borel. ([[thm-continuous-preimages-of-borel-sets-are-borel]])
 

@@ -36,16 +36,11 @@ is a complement to the canonical copy of $M$ in $M\rtimes G$.
 
 **Given:** A group action of $G$ on $M$, and the semidirect product $M\rtimes G$.
 
-[L1] A crossed homomorphism satisfies $z(gh)=z(g)(g\cdot z(h))$
-([[def-crossed-homomorphism-for-a-g-group]]).
+[L1] A crossed homomorphism satisfies $z(gh)=z(g)(g\cdot z(h))$ ([[def-crossed-homomorphism-for-a-g-group]]).
 
-[L2] The graph subset is $\Gamma_z=\{(z(g),g):g\in G\}$ in the semidirect product
-([[def-graph-subgroup-in-a-semidirect-product]]).
+[L2] The graph subset is $\Gamma_z=\{(z(g),g):g\in G\}$ in the semidirect product ([[def-graph-subgroup-in-a-semidirect-product]]).
 
-[L3] The semidirect-product multiplication is
-$$(m,g)(n,h)=(m(g\cdot n),gh),$$
-and the canonical copy of $M$ is the kernel of the projection to $G$
-([[thm-external-semidirect-product-is-a-group]], [[prop-canonical-subgroups-of-an-external-semidirect-product]]).
+[L3] The semidirect-product multiplication is $$(m,g)(n,h)=(m(g\cdot n),gh),$$ and the canonical copy of $M$ is the kernel of the projection to $G$ ([[thm-external-semidirect-product-is-a-group]], [[prop-canonical-subgroups-of-an-external-semidirect-product]]).
 
 ## Proof
 

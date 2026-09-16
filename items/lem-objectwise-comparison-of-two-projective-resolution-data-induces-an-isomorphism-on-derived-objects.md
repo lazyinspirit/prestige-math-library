@@ -37,19 +37,13 @@ induced by a comparison map between the chosen resolutions of $A$.
 
 **Given:** An object $A$ in the common domain and an integer $n$.
 
-[L1] The data $P$ and $Q$ supply specific projective resolutions of $A$
-([[def-supplied-projective-resolution-datum]]).
+[L1] The data $P$ and $Q$ supply specific projective resolutions of $A$ ([[def-supplied-projective-resolution-datum]]).
 
-[L2] Any two projective resolutions of the same object are homotopy equivalent
-over that object ([[thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object]]).
+[L2] Any two projective resolutions of the same object are homotopy equivalent over that object ([[thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object]]).
 
-[L3] Chain-homotopic maps induce the same homology map, and homology respects
-composition ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]],
-[[prop-homology-respects-identities-and-composition]]).
+[L3] Chain-homotopic maps induce the same homology map, and homology respects composition ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]], [[prop-homology-respects-identities-and-composition]]).
 
-[L4] The derived objects are the homology objects of the chosen deleted
-resolutions after applying $F$
-([[def-left-derived-object-relative-to-projective-resolution-data]]).
+[L4] The derived objects are the homology objects of the chosen deleted resolutions after applying $F$ ([[def-left-derived-object-relative-to-projective-resolution-data]]).
 
 ## Proof
 

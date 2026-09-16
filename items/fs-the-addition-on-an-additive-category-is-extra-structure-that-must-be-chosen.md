@@ -32,12 +32,9 @@ must be chosen independently of the biproduct data.
 
 **Given:** An additive category.
 
-[L1] An additive category has finite biproducts
-([[def-additive-category]]).
+[L1] An additive category has finite biproducts ([[def-additive-category]]).
 
-[L2] The commutative-monoid enrichment determined by finite biproducts is
-unique
-([[thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique]]).
+[L2] The commutative-monoid enrichment determined by finite biproducts is unique ([[thm-the-commutative-monoid-enrichment-of-a-category-with-finite-biproducts-is-unique]]).
 
 ## Refutation
 

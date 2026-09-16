@@ -33,19 +33,13 @@ $\varphi$, there is a direct extension $q\le^*p$ which decides $\varphi$.
 
 ## Facts & Assumptions
 
-**Given:** ZFC, $p=(s,A)$ in $\mathbb P_U$, and a fixed sentence $\varphi$
-(with any name parameters fixed). The stronger-below convention is in force.
+**Given:** ZFC, $p=(s,A)$ in $\mathbb P_U$, and a fixed sentence $\varphi$ (with any name parameters fixed). The stronger-below convention is in force.
 
-[F1] [[def-prikry-forcing-and-direct-extension]]: Conditions with a fixed stem
-are compatible by intersecting their measure-one upper parts.
+[F1] [[def-prikry-forcing-and-direct-extension]]: Conditions with a fixed stem are compatible by intersecting their measure-one upper parts.
 
-[F2] [[lem-normal-measure-rowbottom-homogeneity]]: A family of finite-set
-colourings into fewer than $\kappa$ colours is simultaneously homogeneous on
-one measure-one set.
+[F2] [[lem-normal-measure-rowbottom-homogeneity]]: A family of finite-set colourings into fewer than $\kappa$ colours is simultaneously homogeneous on one measure-one set.
 
-[F3] [[lem-forcing-monotonicity-density-and-decision]]: Conditions deciding a
-fixed sentence are dense, forcing persists to stronger conditions, and a
-sentence forced densely below a condition is forced by that condition.
+[F3] [[lem-forcing-monotonicity-density-and-decision]]: Conditions deciding a fixed sentence are dense, forcing persists to stronger conditions, and a sentence forced densely below a condition is forced by that condition.
 
 ## Proof
 

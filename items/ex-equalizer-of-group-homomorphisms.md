@@ -33,13 +33,9 @@ $E=\{x\in G:f(x)=g(x)\}\hookrightarrow G$.
 
 **Given:** The parallel group homomorphisms $f,g$.
 
-[F1] An equalizer is an equalizing arrow through which every other equalizing
-arrow factors uniquely ([[def-equalizers-and-coequalizers]]).
+[F1] An equalizer is an equalizing arrow through which every other equalizing arrow factors uniquely ([[def-equalizers-and-coequalizers]]).
 
-[F2] Groups and homomorphisms form $\mathbf{Grp}$, and homomorphisms preserve
-products, identities, and inverses
-([[prop-groups-and-homomorphisms-form-category-grp]],
-[[def-group-homomorphism]]).
+[F2] Groups and homomorphisms form $\mathbf{Grp}$, and homomorphisms preserve products, identities, and inverses ([[prop-groups-and-homomorphisms-form-category-grp]], [[def-group-homomorphism]]).
 
 ## Verification
 

@@ -31,11 +31,9 @@ is $\Sigma_1^0$-complete.
 
 **Given:** an acceptable numbering and a $\Sigma_1^0$ set $A$.
 
-[L1] Computably enumerable sets are exactly the $\Sigma_1^0$ sets
-([[thm-sigma-one-sets-are-exactly-ce-sets]]).
+[L1] Computably enumerable sets are exactly the $\Sigma_1^0$ sets ([[thm-sigma-one-sets-are-exactly-ce-sets]]).
 
-[L2] Acceptability supplies a total computable hard-wiring function
-([[def-universal-and-acceptable-numbering]]).
+[L2] Acceptability supplies a total computable hard-wiring function ([[def-universal-and-acceptable-numbering]]).
 
 ## Proof
 

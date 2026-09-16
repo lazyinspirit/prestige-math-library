@@ -36,9 +36,7 @@ for every integer $n$.
 
 **Given:** A field $F$ and an absolute value $|\cdot|$ on $F$.
 
-[L1] An absolute value is multiplicative and satisfies both the ordinary and,
-in the nonarchimedean case, the strong triangle inequality
-([[def-multiplicative-absolute-value-on-a-field]]).
+[L1] An absolute value is multiplicative and satisfies both the ordinary and, in the nonarchimedean case, the strong triangle inequality ([[def-multiplicative-absolute-value-on-a-field]]).
 
 ## Proof
 

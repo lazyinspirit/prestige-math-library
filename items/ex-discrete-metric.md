@@ -90,13 +90,6 @@ except the centre while the boundary of the ball is empty.
 
 ## Remarks
 
-- **Every map out of a discrete space is continuous**, since every preimage is
-  open ([[thm-metric-continuity-characterisations]]); so the discrete metric
-  carries no information about $X$ beyond its cardinality, and is the extreme
-  case at one end of the range of metrics on a set.
-- **Convergence is eventual constancy.** $x_k \to x$ in $(X,\delta)$ means
-  $\delta(x_k,x) < 1$ eventually, that is $x_k = x$ for all large $k$
-  ([[def-metric-convergence]]).
-- **Boundedness is immediate**: $X \subseteq B(x,2)$ for any $x$, so every
-  discrete metric space is bounded, with diameter $1$ as soon as $X$ has two
-  points ([[def-metric-bounded-diameter]]).
+- **Every map out of a discrete space is continuous**, since every preimage is open ([[thm-metric-continuity-characterisations]]); so the discrete metric carries no information about $X$ beyond its cardinality, and is the extreme case at one end of the range of metrics on a set.
+- **Convergence is eventual constancy.** $x_k \to x$ in $(X,\delta)$ means $\delta(x_k,x) < 1$ eventually, that is $x_k = x$ for all large $k$ ([[def-metric-convergence]]).
+- **Boundedness is immediate**: $X \subseteq B(x,2)$ for any $x$, so every discrete metric space is bounded, with diameter $1$ as soon as $X$ has two points ([[def-metric-bounded-diameter]]).

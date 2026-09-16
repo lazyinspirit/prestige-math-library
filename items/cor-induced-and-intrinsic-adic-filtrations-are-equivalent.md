@@ -37,12 +37,9 @@ intrinsic $I$-adic filtration of $N$ agree up to a bounded shift.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$, an ideal $I\subset R$, a finite
-$R$-module $M$, and a submodule $N\subseteq M$.
+**Given:** A Noetherian commutative ring $R$, an ideal $I\subset R$, a finite $R$-module $M$, and a submodule $N\subseteq M$.
 
-[L1] Artin-Rees gives $c\ge0$ with
-$$ I^nM\cap N = I^{n-c}(I^cM\cap N) $$
-for all $n\ge c$ ([[thm-artin-rees-lemma]]).
+[L1] Artin-Rees gives $c\ge0$ with $$ I^nM\cap N = I^{n-c}(I^cM\cap N) $$ for all $n\ge c$ ([[thm-artin-rees-lemma]]).
 
 ## Proof
 

@@ -44,10 +44,7 @@ anyway.
 
 [L1] Exactness at a node is stated as equality of the image subobject of $f$ with the kernel subobject of $g$ ([[def-exactness-at-a-node]]).
 
-[L2] A subobject of $B$ is represented by a monomorphism into $B$
-([[def-subobject-and-quotient-object]]), and the image of $f$ includes its
-defining kernel arrow into $B$
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L2] A subobject of $B$ is represented by a monomorphism into $B$ ([[def-subobject-and-quotient-object]]), and the image of $f$ includes its defining kernel arrow into $B$ ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
 ## Refutation
 

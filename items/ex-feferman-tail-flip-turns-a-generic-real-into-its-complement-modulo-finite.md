@@ -30,12 +30,9 @@ segment $k_0=\{k:k<k_0\}$.
 
 ## Facts & Assumptions
 
-**Given:** A finite condition $p$, natural numbers $n,k_0$, and
-$(n+1,k)\notin\operatorname{dom}(p)$ whenever $k\geq k_0$.
+**Given:** A finite condition $p$, natural numbers $n,k_0$, and $(n+1,k)\notin\operatorname{dom}(p)$ whenever $k\geq k_0$.
 
-[F1] [[lem-feferman-tail-complement-automorphism]] defines the relevant
-all-bit forcing automorphism and proves that it fixes the condition and all
-earlier-coordinate parameters.
+[F1] [[lem-feferman-tail-complement-automorphism]] defines the relevant all-bit forcing automorphism and proves that it fixes the condition and all earlier-coordinate parameters.
 
 ## Proof
 

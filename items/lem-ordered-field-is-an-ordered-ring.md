@@ -80,19 +80,8 @@ determine each other exactly as they do in any ordered ring.
 
 ## Remarks
 
-- **This is one of the four bridges the page carries.** The published
-  [[def-ordered-field]] and the [[def-ordered-ring]] of this page are two
-  presentations of compatible orders, and without this item a later result about
-  ordered rings could not be applied to $\mathbb{Q}$ or $\mathbb{R}$ without
-  redoing the translation each time.
+- **This is one of the four bridges the page carries.** The published [[def-ordered-field]] and the [[def-ordered-ring]] of this page are two presentations of compatible orders, and without this item a later result about ordered rings could not be applied to $\mathbb{Q}$ or $\mathbb{R}$ without redoing the translation each time.
 
-- **The converse is false as stated, and no converse is claimed.** $\mathbb{Z}$
-  is an ordered ring and is not a field at all, as the companion page records.
-  What is true, and is claim 2, is that on a field the two presentations of an
-  order agree.
+- **The converse is false as stated, and no converse is claimed.** $\mathbb{Z}$ is an ordered ring and is not a field at all, as the companion page records. What is true, and is claim 2, is that on a field the two presentations of an order agree.
 
-- **Where the strict form of (OR2) is used.** Axiom (O2) of
-  [[def-ordered-field]] is already strict, so claim 1 is a verbatim match with
-  the cone conditions of [[lem-ordered-ring-cone-and-order-agree]] and no
-  strengthening is needed; that is exactly why [[def-ordered-ring]] states its
-  multiplicative axiom in the strict form.
+- **Where the strict form of (OR2) is used.** Axiom (O2) of [[def-ordered-field]] is already strict, so claim 1 is a verbatim match with the cone conditions of [[lem-ordered-ring-cone-and-order-agree]] and no strengthening is needed; that is exactly why [[def-ordered-ring]] states its multiplicative axiom in the strict form.

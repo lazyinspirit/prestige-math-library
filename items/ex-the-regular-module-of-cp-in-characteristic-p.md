@@ -29,8 +29,7 @@ trivial module $k$.
 
 **Given:** The cyclic group $C_p$ and a field $k$ of characteristic $p$.
 
-[L1] Over every field of characteristic $p$, the group algebra of a finite $p$-group is local
-([[thm-kg-is-local-iff-g-is-a-p-group]]).
+[L1] Over every field of characteristic $p$, the group algebra of a finite $p$-group is local ([[thm-kg-is-local-iff-g-is-a-p-group]]).
 
 ## Verification
 

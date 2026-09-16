@@ -39,12 +39,9 @@ are isomorphic.
 
 **Given:** Finite-dimensional $kG$-modules $V$ and $W$.
 
-[L1] Brauer characters are additive on short exact sequences
-([[thm-brauer-character-is-additive-on-short-exact-sequences]]).
+[L1] Brauer characters are additive on short exact sequences ([[thm-brauer-character-is-additive-on-short-exact-sequences]]).
 
-[L2] The irreducible Brauer characters form a basis of the complex vector space
-of class functions on $G^0$
-([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
+[L2] The irreducible Brauer characters form a basis of the complex vector space of class functions on $G^0$ ([[thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions]]).
 
 ## Proof
 

@@ -33,8 +33,7 @@ data carried on an open subset and extended by no sections outside that subset.
 
 **Given:** An open subset $W\subseteq X$ and an open cover $V=\bigcup_{i\in I}V_i$.
 
-[L1] A sheaf is a presheaf with locality and unique gluing on every open cover
-([[def-sheaf-on-topological-space]]).
+[L1] A sheaf is a presheaf with locality and unique gluing on every open cover ([[def-sheaf-on-topological-space]]).
 
 ## Verification
 

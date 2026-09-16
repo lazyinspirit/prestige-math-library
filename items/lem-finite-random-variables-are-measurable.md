@@ -37,19 +37,13 @@ measure-theoretic definition on that full-power-set probability space.
 
 ## Facts & Assumptions
 
-**Given:** A finite probability space $(\Omega,w)$ and a function
-$X:\Omega\to\mathbb R$.
+**Given:** A finite probability space $(\Omega,w)$ and a function $X:\Omega\to\mathbb R$.
 
-[L1] The theorem on finite probability spaces identifies $(\Omega,w)$ with a
-probability measure on $(\Omega,\mathcal P(\Omega))$
-([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]]).
+[L1] The theorem on finite probability spaces identifies $(\Omega,w)$ with a probability measure on $(\Omega,\mathcal P(\Omega))$ ([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]]).
 
-[L2] A real random variable is a measurable map from the sample-space
-sigma-algebra to $(\mathbb R,\mathcal B(\mathbb R))$
-([[def-random-element-and-real-random-variable]]).
+[L2] A real random variable is a measurable map from the sample-space sigma-algebra to $(\mathbb R,\mathcal B(\mathbb R))$ ([[def-random-element-and-real-random-variable]]).
 
-[L3] On a finite probability space, a real random variable is simply a function
-$\Omega\to\mathbb R$ ([[def-finite-real-random-variable-and-distribution]]).
+[L3] On a finite probability space, a real random variable is simply a function $\Omega\to\mathbb R$ ([[def-finite-real-random-variable-and-distribution]]).
 
 ## Proof
 

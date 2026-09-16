@@ -27,9 +27,7 @@ For a measurable $X:\Omega\to[0,\infty]$ on a probability space, $\sum_{n\ge1}\m
 
 ## Facts & Assumptions
 
-[F1] [[thm-monotone-convergence-for-the-integral]]: Let $0\le f_1\le f_2\le\cdots$ be measurable and suppose $f_n(x)\uparrow f(x)$
-for every $x$. Then
-$$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
+[F1] [[thm-monotone-convergence-for-the-integral]]: Let $0\le f_1\le f_2\le\cdots$ be measurable and suppose $f_n(x)\uparrow f(x)$ for every $x$. Then $$\int f_n\,d\mu\uparrow\int f\,d\mu.$$
 
 ## Proof
 

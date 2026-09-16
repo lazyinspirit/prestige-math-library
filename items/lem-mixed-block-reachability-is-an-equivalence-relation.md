@@ -42,11 +42,7 @@ equivalence relation on its set of blocks.
 
 1.1 Reflexivity is immediate from [L2], because every block is related to itself. [L2]
 
-1.2 If $A\,\mathcal M\,B$ by a mixed chain
-$$A=A_1,A_2,\dots,A_m=B,$$
-then [L1] makes the reversed chain
-$$B=A_m,A_{m-1},\dots,A_1=A$$
-again a mixed chain, so $B\,\mathcal M\,A$. Thus $\mathcal M$ is symmetric. [L1, L2, algebra]
+1.2 If $A\,\mathcal M\,B$ by a mixed chain $$A=A_1,A_2,\dots,A_m=B,$$ then [L1] makes the reversed chain $$B=A_m,A_{m-1},\dots,A_1=A$$ again a mixed chain, so $B\,\mathcal M\,A$. Thus $\mathcal M$ is symmetric. [L1, L2, algebra]
 
 1.3 If $A\,\mathcal M\,B$ and $B\,\mathcal M\,C$, then [L2] gives a mixed chain from $A$ to $B$ and another from $B$ to $C$. Concatenating them at $B$ yields a mixed chain from $A$ to $C$, so $A\,\mathcal M\,C$. Thus $\mathcal M$ is transitive. [L2, algebra]
 

@@ -28,11 +28,9 @@ standard diagonal-type examples provide them.
 
 **Given:** A standard faithful diagonal-type primitive action with socle $T \times T$ for a nonabelian finite simple group $T$.
 
-[A1] In this action the left and right regular copies of $T$ are distinct
-minimal normal subgroups.
+[A1] In this action the left and right regular copies of $T$ are distinct minimal normal subgroups.
 
-[L1] Distinct minimal normal subgroups of a finite faithful primitive group are regular
-([[lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]]).
+[L1] Distinct minimal normal subgroups of a finite faithful primitive group are regular ([[lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]]).
 
 ## Verification
 

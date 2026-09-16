@@ -35,11 +35,9 @@ but not nilpotent.
 
 **Given:** The displayed two-dimensional Lie algebra over a field $k$.
 
-[L1] The derived series tests solvability
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] The derived series tests solvability ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] The lower central series tests nilpotence
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L2] The lower central series tests nilpotence ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
 ## Verification
 

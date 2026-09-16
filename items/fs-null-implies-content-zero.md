@@ -79,17 +79,8 @@ length less than $1$.
 
 ## Remarks
 
-- **Boundedness is not the missing hypothesis, closedness is.** $E$ is bounded
-  and its failure is total: no finite cover does better than total length $1$,
-  the same bound as for all of $[0,1]$. What $E$ lacks is closedness, and with it
-  compactness; [[thm-compact-null-is-content-zero]] shows that supplying it
-  repairs the implication completely.
+- **Boundedness is not the missing hypothesis, closedness is.** $E$ is bounded and its failure is total: no finite cover does better than total length $1$, the same bound as for all of $[0,1]$. What $E$ lacks is closedness, and with it compactness; [[thm-compact-null-is-content-zero]] shows that supplying it repairs the implication completely.
 
-- **The gap between the two notions is a quantifier, not a constant.** Given
-  $\varepsilon$, the countable cover of $E$ from
-  [[lem-countable-sets-are-null]] uses intervals whose lengths shrink
-  geometrically; no finite initial segment of it covers $E$, because the rationals
-  left over are still dense in $[0,1]$. Compactness is exactly what turns a
-  countable cover into a finite one, and that is the whole content of the repair.
+- **The gap between the two notions is a quantifier, not a constant.** Given $\varepsilon$, the countable cover of $E$ from [[lem-countable-sets-are-null]] uses intervals whose lengths shrink geometrically; no finite initial segment of it covers $E$, because the rationals left over are still dense in $[0,1]$. Compactness is exactly what turns a countable cover into a finite one, and that is the whole content of the repair.
 
 - **The named witness** is [[cex-null-set-not-of-content-zero]].

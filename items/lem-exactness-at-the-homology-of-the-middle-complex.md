@@ -34,9 +34,7 @@ $$\operatorname{im}(H_n(A)\to H_n(B))=\ker(H_n(B)\to H_n(C)).$$
 
 **Given:** A short exact sequence $0\to A_\bullet\to B_\bullet\to C_\bullet\to0$ of complexes and an integer $n$.
 
-[L1] Applying the weaker snake lemma to the quotient-kernel diagram in degree $n$ gives an exact segment
-$$H_n(A)\to H_n(B)\to H_n(C)$$
-under the canonical kernel identifications ([[lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes]], [[thm-snake-lemma-under-the-weaker-stacks-hypotheses]]).
+[L1] Applying the weaker snake lemma to the quotient-kernel diagram in degree $n$ gives an exact segment $$H_n(A)\to H_n(B)\to H_n(C)$$ under the canonical kernel identifications ([[lem-the-cycle-boundary-diagram-associated-to-a-short-exact-sequence-of-complexes]], [[thm-snake-lemma-under-the-weaker-stacks-hypotheses]]).
 
 ## Proof
 

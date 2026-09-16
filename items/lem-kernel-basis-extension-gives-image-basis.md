@@ -46,45 +46,23 @@ $T\circ c:r\to\operatorname{im}T$ is an ordered basis of the image.
 
 ## Facts & Assumptions
 
-**Given:** Vector spaces $V,W$ over $F$, a linear map $T:V\to W$, and a
-finite-dimensional domain $V$.
+**Given:** Vector spaces $V,W$ over $F$, a linear map $T:V\to W$, and a finite-dimensional domain $V$.
 
-[L1] The kernel and image of a linear map are linear subspaces, and
-$v\in\ker T$ exactly when $T(v)=0_W$
-([[thm-linear-kernel-image-and-injectivity]],
-[[def-kernel-and-image-of-a-linear-map]]).
+[L1] The kernel and image of a linear map are linear subspaces, and $v\in\ker T$ exactly when $T(v)=0_W$ ([[thm-linear-kernel-image-and-injectivity]], [[def-kernel-and-image-of-a-linear-map]]).
 
-[L2] A linear subspace of a finite-dimensional vector space is
-finite-dimensional; every linearly independent subset extends to a basis without
-a choice principle; and every linearly independent subset of a
-finite-dimensional space is finite
-([[thm-dimension-of-a-linear-subspace]], claims 1 and 3,
-[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]]).
+[L2] A linear subspace of a finite-dimensional vector space is finite-dimensional; every linearly independent subset extends to a basis without a choice principle; and every linearly independent subset of a finite-dimensional space is finite ([[thm-dimension-of-a-linear-subspace]], claims 1 and 3, [[cor-independent-set-is-no-larger-than-a-finite-spanning-set]]).
 
-[L3] A basis is a linearly independent spanning subset. An ordered basis is an
-injective finite list whose image is a basis, equivalently a linearly
-independent finite list that spans ([[def-linear-basis]]).
+[L3] A basis is a linearly independent spanning subset. An ordered basis is an injective finite list whose image is a basis, equivalently a linearly independent finite list that spans ([[def-linear-basis]]).
 
-[L4] Every vector has exactly one coordinate list with respect to an ordered
-basis ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]).
+[L4] Every vector has exactly one coordinate list with respect to an ordered basis ([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]).
 
-[L5] Finite sums in an abelian group have empty value zero and append one term
-at a successor; induction is valid on their natural-number length. Natural
-addition satisfies $p+0=p$ and $p+\sigma(q)=\sigma(p+q)$
-([[def-monoid-finite-product]], [[thm-induction-principle]],
-[[def-nat-addition]]).
+[L5] Finite sums in an abelian group have empty value zero and append one term at a successor; induction is valid on their natural-number length. Natural addition satisfies $p+0=p$ and $p+\sigma(q)=\sigma(p+q)$ ([[def-monoid-finite-product]], [[thm-induction-principle]], [[def-nat-addition]]).
 
-[L6] A linear map satisfies $T(au+bv)=aT(u)+bT(v)$; vector spaces have the usual zero, inverse, and
-distributive laws ([[def-linear-map]],
-[[lem-vector-space-elementary-consequences]]).
+[L6] A linear map satisfies $T(au+bv)=aT(u)+bT(v)$; vector spaces have the usual zero, inverse, and distributive laws ([[def-linear-map]], [[lem-vector-space-elementary-consequences]]).
 
-[L7] A subset of a finite set is finite. If two finite sets are disjoint, then
-their union has cardinality the sum of their cardinalities; finite cardinality
-is transported by a bijection ([[thm-subset-of-a-finite-set]],
-[[thm-sum-rule]], clause 1, [[def-finite-cardinality]]).
+[L7] A subset of a finite set is finite. If two finite sets are disjoint, then their union has cardinality the sum of their cardinalities; finite cardinality is transported by a bijection ([[thm-subset-of-a-finite-set]], [[thm-sum-rule]], clause 1, [[def-finite-cardinality]]).
 
-[L8] A function is bijective exactly when it is injective and surjective
-([[def-injection-surjection-bijection]]).
+[L8] A function is bijective exactly when it is injective and surjective ([[def-injection-surjection-bijection]]).
 
 ## Proof
 
@@ -106,9 +84,5 @@ is transported by a bijection ([[thm-subset-of-a-finite-set]],
 
 ## Remarks
 
-- The construction is valid when $V$ is the zero space: then
-  $K=B=\varnothing$, hence $C=T[C]=\varnothing$, and both empty lists are the
-  ordered bases of the zero spaces.
-- No choice principle is used. Both basis selections occur inside
-  finite-dimensional spaces and are licensed by the finite extension clause of
-  [[thm-dimension-of-a-linear-subspace]].
+- The construction is valid when $V$ is the zero space: then $K=B=\varnothing$, hence $C=T[C]=\varnothing$, and both empty lists are the ordered bases of the zero spaces.
+- No choice principle is used. Both basis selections occur inside finite-dimensional spaces and are licensed by the finite extension clause of [[thm-dimension-of-a-linear-subspace]].

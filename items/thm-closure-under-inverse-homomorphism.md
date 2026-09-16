@@ -30,8 +30,7 @@ is regular over $\Sigma$.
 
 ## Facts & Assumptions
 
-**Given:** An alphabet map $h:\Sigma\to\Delta^*$ and a regular language
-$K\subseteq\Delta^*$.
+**Given:** An alphabet map $h:\Sigma\to\Delta^*$ and a regular language $K\subseteq\Delta^*$.
 
 [L1] By [[def-alphabet-homomorphism-and-induced-word-map]], the induced map $\widehat h$ is obtained by concatenating the image words of the letters of the input word.
 

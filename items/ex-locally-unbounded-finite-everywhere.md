@@ -85,20 +85,8 @@ of any point.
 
 ## Remarks
 
-- **Finiteness at a point says nothing about local boundedness.** The two
-  notions are often conflated; this example separates them as sharply as
-  possible, since $h$ is unbounded on **every** nondegenerate interval and yet
-  takes only real values.
+- **Finiteness at a point says nothing about local boundedness.** The two notions are often conflated; this example separates them as sharply as possible, since $h$ is unbounded on **every** nondegenerate interval and yet takes only real values.
 
-- **$h$ is nowhere continuous, and the oscillation is infinite everywhere.**
-  Continuity at $c$ would give a neighbourhood on which $|h - h(c)| < 1$, hence
-  a neighbourhood on which $h$ is bounded, which claim 2 forbids; equivalently
-  $\omega_{h}(c) = +\infty$ at every real $c$ ([[def-oscillation]],
-  [[def-continuity-real]]). This is a different pathology from Thomae's
-  function, whose values are bounded by $1$ and which is continuous at every
-  irrational ([[thm-dirichlet-and-thomae-continuity-sets]]).
+- **$h$ is nowhere continuous, and the oscillation is infinite everywhere.** Continuity at $c$ would give a neighbourhood on which $|h - h(c)| < 1$, hence a neighbourhood on which $h$ is bounded, which claim 2 forbids; equivalently $\omega_{h}(c) = +\infty$ at every real $c$ ([[def-oscillation]], [[def-continuity-real]]). This is a different pathology from Thomae's function, whose values are bounded by $1$ and which is continuous at every irrational ([[thm-dirichlet-and-thomae-continuity-sets]]).
 
-- **The separation estimate is the only arithmetic used.** Step 1.2 is the
-  standard fact that two distinct rationals with denominators $q_{1}$ and
-  $q_{2}$ are at least $1/(q_{1}q_{2})$ apart, and it is proved from nothing more
-  than "a nonzero integer has absolute value at least $1$".
+- **The separation estimate is the only arithmetic used.** Step 1.2 is the standard fact that two distinct rationals with denominators $q_{1}$ and $q_{2}$ are at least $1/(q_{1}q_{2})$ apart, and it is proved from nothing more than "a nonzero integer has absolute value at least $1$".

@@ -28,8 +28,7 @@ while using $O(s(n))$ work space.
 
 ## Facts & Assumptions
 
-**Given:** the stated constructible bound and a read-only machine capped at
-$s(n)$ work cells.
+**Given:** the stated constructible bound and a read-only machine capped at $s(n)$ work cells.
 
 ## Proof
 

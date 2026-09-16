@@ -34,18 +34,11 @@ short-exact-column diagram and applying the nine lemma.
 
 ## Facts & Assumptions
 
-**Given:** The standard quotient diagrams attached to a subobject and to a
-chain of subobjects.
+**Given:** The standard quotient diagrams attached to a subobject and to a chain of subobjects.
 
-[L1] The nine lemma reconstructs a missing short exact row from the surrounding
-short exact rows and columns ([[thm-nine-lemma-in-an-abelian-category]]).
+[L1] The nine lemma reconstructs a missing short exact row from the surrounding short exact rows and columns ([[thm-nine-lemma-in-an-abelian-category]]).
 
-[L2] The quotient objects and the first and third isomorphism theorems are
-already established in the abelian-category development
-([[def-the-quotient-of-an-object-by-a-subobject]],
-[[thm-first-isomorphism-theorem-in-an-abelian-category]],
-[[thm-third-isomorphism-theorem-in-an-abelian-category]],
-[[thm-a-composite-of-a-quotient-and-a-subobject-inclusion-is-the-canonical-factorisation]]).
+[L2] The quotient objects and the first and third isomorphism theorems are already established in the abelian-category development ([[def-the-quotient-of-an-object-by-a-subobject]], [[thm-first-isomorphism-theorem-in-an-abelian-category]], [[thm-third-isomorphism-theorem-in-an-abelian-category]], [[thm-a-composite-of-a-quotient-and-a-subobject-inclusion-is-the-canonical-factorisation]]).
 
 ## Proof
 

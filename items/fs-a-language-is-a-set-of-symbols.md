@@ -35,14 +35,11 @@ is a subset of $\Sigma$.
 
 **Given:** The binary alphabet $\Sigma=\{0,1\}$ and the set $L=\{01\}$.
 
-[A1] The false claim: every language over an alphabet $\Sigma$ is a subset of
-$\Sigma$.
+[A1] The false claim: every language over an alphabet $\Sigma$ is a subset of $\Sigma$.
 
-[L1] A language over $\Sigma$ is a subset of $\Sigma^*$ by
-[[def-language-over-an-alphabet]].
+[L1] A language over $\Sigma$ is a subset of $\Sigma^*$ by [[def-language-over-an-alphabet]].
 
-[L2] The word $01$ is a binary word of length $2$, hence an element of
-$\Sigma^*$, by [[def-computation-alphabet-and-word-convention]].
+[L2] The word $01$ is a binary word of length $2$, hence an element of $\Sigma^*$, by [[def-computation-alphabet-and-word-convention]].
 
 ## Refutation
 

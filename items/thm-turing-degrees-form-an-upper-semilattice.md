@@ -29,8 +29,7 @@ bound. Hence the Turing degrees form an upper semilattice.
 
 ## Facts & Assumptions
 
-**Given:** $A,B,C\subseteq\mathbb N$ and the tagged-join convention of
-[[def-tagged-join-of-oracles]].
+**Given:** $A,B,C\subseteq\mathbb N$ and the tagged-join convention of [[def-tagged-join-of-oracles]].
 
 ## Proof
 

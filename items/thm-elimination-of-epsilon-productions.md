@@ -38,11 +38,9 @@ such that:
 
 **Given:** A context-free grammar $G=(V,\Sigma,P,S)$.
 
-[L1] A variable is nullable exactly when it derives $\varepsilon$, by
-[[def-nullable-generating-and-reachable-variable]].
+[L1] A variable is nullable exactly when it derives $\varepsilon$, by [[def-nullable-generating-and-reachable-variable]].
 
-[L2] The generated language is defined by derivability from the start symbol, by
-[[def-language-generated-by-a-cfg]].
+[L2] The generated language is defined by derivability from the start symbol, by [[def-language-generated-by-a-cfg]].
 
 ## Proof
 

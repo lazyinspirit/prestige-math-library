@@ -38,11 +38,9 @@ are classified by $H^2(G,A)$.
 
 **Given:** A group $G$ and an abelian group $A$ with trivial $G$-action.
 
-[L1] $H^2(G,M)$ classifies extensions with a fixed abelian kernel action
-([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L1] $H^2(G,M)$ classifies extensions with a fixed abelian kernel action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
-[L2] The zero class is the split semidirect-product class
-([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
+[L2] The zero class is the split semidirect-product class ([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
 
 ## Proof
 

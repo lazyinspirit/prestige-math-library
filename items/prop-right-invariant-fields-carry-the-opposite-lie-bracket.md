@@ -41,39 +41,27 @@ invariant-extension and tangent-bracket results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with inversion
-$\operatorname{inv}(g)=g^{-1}$, and $X,Y\in\mathfrak g=T_eG$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with inversion $\operatorname{inv}(g)=g^{-1}$, and $X,Y\in\mathfrak g=T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Multiplication and inversion are smooth, and inversion is involutive.
-[[def-lie-group]].
+[F2] Multiplication and inversion are smooth, and inversion is involutive. [[def-lie-group]].
 
-[F3] Left- and ordinary right-invariant fields use $L_g(h)=gh$ and
-$R_g(h)=hg$. [[def-left-and-right-invariant-vector-fields]].
+[F3] Left- and ordinary right-invariant fields use $L_g(h)=gh$ and $R_g(h)=hg$. [[def-left-and-right-invariant-vector-fields]].
 
-[F4] Left and right invariant extensions exist uniquely and satisfy
-$Z^L_g=d(L_g)_eZ$ and $Z^R_g=d(R_g)_eZ$.
-[[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F4] Left and right invariant extensions exist uniquely and satisfy $Z^L_g=d(L_g)_eZ$ and $Z^R_g=d(R_g)_eZ$. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
-[F5] The tangent bracket satisfies $[X^L,Y^L]=[X,Y]_G^L$.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F5] The tangent bracket satisfies $[X^L,Y^L]=[X,Y]_G^L$. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F6] Differentials obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F6] Differentials obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
-[F7] Tangent spaces of products split canonically as direct sums.
-[[thm-canonical-tangent-and-cotangent-splittings-for-products]].
+[F7] Tangent spaces of products split canonically as direct sums. [[thm-canonical-tangent-and-cotangent-splittings-for-products]].
 
-[F8] The differential is defined by pullback of germs, and is a linear map.
-[[def-differential-of-a-smooth-map]],
-[[lem-the-differential-sends-derivations-to-derivations-and-is-linear]].
+[F8] The differential is defined by pullback of germs, and is a linear map. [[def-differential-of-a-smooth-map]], [[lem-the-differential-sends-derivations-to-derivations-and-is-linear]].
 
-[F9] Diffeomorphism pushforward preserves vector-field brackets.
-[[cor-diffeomorphism-pushforward-preserves-lie-brackets]].
+[F9] Diffeomorphism pushforward preserves vector-field brackets. [[cor-diffeomorphism-pushforward-preserves-lie-brackets]].
 
-[F10] The field bracket is the commutator
-$[U,V]f=U(Vf)-V(Uf)$. [[def-lie-bracket-of-smooth-vector-fields]].
+[F10] The field bracket is the commutator $[U,V]f=U(Vf)-V(Uf)$. [[def-lie-bracket-of-smooth-vector-fields]].
 
 ## Proof
 

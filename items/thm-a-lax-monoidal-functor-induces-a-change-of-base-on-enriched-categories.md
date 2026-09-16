@@ -36,17 +36,11 @@ $(F_*\mathcal A)(A,B):=F(\mathcal A(A,B))$.
 
 ## Facts & Assumptions
 
-**Given:** A lax monoidal functor $F:\mathcal V\to\mathcal W$ and a
-$\mathcal V$-category $\mathcal A$.
+**Given:** A lax monoidal functor $F:\mathcal V\to\mathcal W$ and a $\mathcal V$-category $\mathcal A$.
 
-[L1] A lax monoidal functor provides comparison morphisms
-$F(X)\otimes F(Y)\to F(X\otimes Y)$ and $\mathbf 1_{\mathcal W}\to F(\mathbf 1_{\mathcal V})$
-compatible with associativity and the unitors
-([[def-lax-strong-and-strict-monoidal-functor]]).
+[L1] A lax monoidal functor provides comparison morphisms $F(X)\otimes F(Y)\to F(X\otimes Y)$ and $\mathbf 1_{\mathcal W}\to F(\mathbf 1_{\mathcal V})$ compatible with associativity and the unitors ([[def-lax-strong-and-strict-monoidal-functor]]).
 
-[L2] A $\mathcal V$-category is specified by hom-objects, composition maps, and
-identity maps satisfying the usual enriched diagrams
-([[def-enriched-category]]).
+[L2] A $\mathcal V$-category is specified by hom-objects, composition maps, and identity maps satisfying the usual enriched diagrams ([[def-enriched-category]]).
 
 ## Proof
 

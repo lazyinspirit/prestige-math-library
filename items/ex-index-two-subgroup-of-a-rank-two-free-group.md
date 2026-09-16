@@ -35,12 +35,9 @@ Consequently $\operatorname{rank}(H)=3$.
 
 **Given:** The subgroup $H\le F(a,b)$ of words with even exponent sum in $a$.
 
-[L1] Nielsen-Schreier identifies a free basis from the nontrivial Schreier
-generators of a Schreier system
-([[thm-nielsen-schreier-with-an-explicit-basis]]).
+[L1] Nielsen-Schreier identifies a free basis from the nontrivial Schreier generators of a Schreier system ([[thm-nielsen-schreier-with-an-explicit-basis]]).
 
-[L2] The index-rank formula gives $\operatorname{rank}(H)=1+[F(a,b):H]$
-([[thm-schreier-index-rank-formula]]).
+[L2] The index-rank formula gives $\operatorname{rank}(H)=1+[F(a,b):H]$ ([[thm-schreier-index-rank-formula]]).
 
 ## Verification
 

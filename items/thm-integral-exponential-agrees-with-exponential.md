@@ -34,13 +34,9 @@ $$E(x)=\exp(x).$$
 
 **Given:** The integral exponential $E$ constructed above.
 
-[L1] The function $E:\mathbb R\to\mathbb R$ is differentiable, satisfies
-$E'=E$, and has $E(0)=1$
-([[thm-integral-exponential-solves-the-normalised-ivp]]).
+[L1] The function $E:\mathbb R\to\mathbb R$ is differentiable, satisfies $E'=E$, and has $E(0)=1$ ([[thm-integral-exponential-solves-the-normalised-ivp]]).
 
-[L2] Every differentiable $y:\mathbb R\to\mathbb R$ satisfying $y'=y$ and
-$y(0)=1$ equals the published exponential function
-([[thm-exponential-ivp-uniqueness]]).
+[L2] Every differentiable $y:\mathbb R\to\mathbb R$ satisfying $y'=y$ and $y(0)=1$ equals the published exponential function ([[thm-exponential-ivp-uniqueness]]).
 
 ## Proof
 

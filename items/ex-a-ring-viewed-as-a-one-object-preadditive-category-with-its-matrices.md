@@ -41,11 +41,9 @@ the unique object of the ring category.
 
 **Given:** A ring $R$.
 
-[L1] A one-object preadditive category is the same thing as a ring
-([[thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring]]).
+[L1] A one-object preadditive category is the same thing as a ring ([[thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring]]).
 
-[L2] In $\mathbf{Mat}_R$, a morphism $n\to m$ is an $m\times n$ matrix
-([[def-the-additive-category-of-matrices-over-a-ring]]).
+[L2] In $\mathbf{Mat}_R$, a morphism $n\to m$ is an $m\times n$ matrix ([[def-the-additive-category-of-matrices-over-a-ring]]).
 
 ## Verification
 

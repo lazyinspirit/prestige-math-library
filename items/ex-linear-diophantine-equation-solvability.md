@@ -88,14 +88,8 @@ below are the images of the corresponding identities in $\mathbb{N}$.
 
 ## Remarks
 
-- **The criterion is decidable by the Euclidean algorithm**: compute
-  $\gcd(a,b)$ by [[thm-euclidean-algorithm]], test whether it divides $c$ by
-  division with remainder, and, when it does, obtain a solution by scaling the
-  Bézout pair that [[cor-extended-euclidean-bezout-coefficients]] computes.
+- **The criterion is decidable by the Euclidean algorithm**: compute $\gcd(a,b)$ by [[thm-euclidean-algorithm]], test whether it divides $c$ by division with remainder, and, when it does, obtain a solution by scaling the Bézout pair that [[cor-extended-euclidean-bezout-coefficients]] computes.
 
-- **Solutions are never unique when $a$ and $b$ are both nonzero**; the family is
-  described in [[ex-bezout-coefficients-not-unique]], and scaling that
-  description by $k = c/\gcd(a,b)$ describes the solutions of $ax + by = c$.
+- **Solutions are never unique when $a$ and $b$ are both nonzero**; the family is described in [[ex-bezout-coefficients-not-unique]], and scaling that description by $k = c/\gcd(a,b)$ describes the solutions of $ax + by = c$.
 
-- **The unsolvable case is genuinely unsolvable, not merely hard.** Every value
-  of $6x + 15y$ is a multiple of $3$, and $7$ is not one; no search is involved.
+- **The unsolvable case is genuinely unsolvable, not merely hard.** Every value of $6x + 15y$ is a multiple of $3$, and $7$ is not one; no search is involved.

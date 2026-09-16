@@ -32,13 +32,9 @@ cocomplete category is a preorder.
 
 **Given:** A small category $\mathcal C$ that is complete or cocomplete.
 
-[L1] If a small category has constant products or coproducts indexed by the
-cardinality of its morphism set, it is a preorder
-([[thm-cardinality-sized-products-or-coproducts-force-a-preorder]]).
+[L1] If a small category has constant products or coproducts indexed by the cardinality of its morphism set, it is a preorder ([[thm-cardinality-sized-products-or-coproducts-force-a-preorder]]).
 
-[F1] Complete categories have every small limit, and cocomplete categories
-have every small colimit
-([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] Complete categories have every small limit, and cocomplete categories have every small colimit ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
 ## Proof
 

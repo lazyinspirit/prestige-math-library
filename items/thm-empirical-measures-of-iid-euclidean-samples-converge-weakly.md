@@ -29,20 +29,12 @@ For IID $\mathbb R^d$-valued samples $(X_i)$ with common law $\mu$ and finite $d
 
 [F1] [[lem-countable-compactly-supported-tests-determine-euclidean-weak-convergence]]: For each finite $d\ge1$ there is a countable uniformly dense subset $\mathcal D$ of $C_c(\mathbb R^d;\mathbb R)$ containing nonnegative compact cutoffs $\chi_m\uparrow1$. If Borel probabilities $\mu_n,\mu$ have $\int h\,d\mu_n\to\int h\,d\mu$ for every $h\in\mathcal D$, then $\mu_n\Rightarrow\mu$.
 
-[F2] [[lem-measurable-functions-preserve-independence]]: Let $(X_i)_{i\in I}$ be an independent family of random elements
-$X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$. For each $i$, let
-$g_i:(S_i,\Sigma_i)\to(T_i,\mathcal T_i)$ be measurable. Then the family
-$(g_i\circ X_i)_{i\in I}$ is independent.
+[F2] [[lem-measurable-functions-preserve-independence]]: Let $(X_i)_{i\in I}$ be an independent family of random elements $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$. For each $i$, let $g_i:(S_i,\Sigma_i)\to(T_i,\mathcal T_i)$ be measurable. Then the family $(g_i\circ X_i)_{i\in I}$ is independent.
 
-[F3] [[thm-change-of-variables-for-expectation]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, let
-$\mathbb P_X$ be its law, and let $g:(S,\Sigma)\to\mathbb R$ or
-$g:(S,\Sigma)\to\mathbb C$ be measurable.
+[F3] [[thm-change-of-variables-for-expectation]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, let $\mathbb P_X$ be its law, and let $g:(S,\Sigma)\to\mathbb R$ or $g:(S,\Sigma)\to\mathbb C$ be measurable.
 
-1. If $g\ge0$, then
-   $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
-2. If $g(X)$ is integrable, then $g$ is integrable with respect to
-   $\mathbb P_X$ and the same formula holds:
-   $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
+1. If $g\ge0$, then $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
+2. If $g(X)$ is integrable, then $g$ is integrable with respect to $\mathbb P_X$ and the same formula holds: $$\mathbb E[g(X)]=\int_S g\,d\mathbb P_X.$$
 
 [F4] [[thm-kolmogorov-iid-l1-strong-law]]: For IID real $(X_n)_{n\ge1}$ with $\mathbb E|X_1|<\infty$, $S_n/n\to\mu=\mathbb EX_1$ almost surely.
 

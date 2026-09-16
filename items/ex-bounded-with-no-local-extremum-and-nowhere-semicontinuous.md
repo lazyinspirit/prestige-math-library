@@ -98,20 +98,8 @@ costs no countability argument.
 
 ## Remarks
 
-- **Boundedness is what makes the example surprising.** A function with no local
-  extremum anywhere is easy to arrange if it is allowed to be unbounded; here
-  every value lies strictly inside $(0,1)$ and yet no point is even a local
-  extremum, because arbitrarily close to any point the function takes both a
-  strictly larger and a strictly smaller value.
+- **Boundedness is what makes the example surprising.** A function with no local extremum anywhere is easy to arrange if it is allowed to be unbounded; here every value lies strictly inside $(0,1)$ and yet no point is even a local extremum, because arbitrarily close to any point the function takes both a strictly larger and a strictly smaller value.
 
-- **Everything comes from the level sets.** The only property of $f$ used after
-  step 1.1 is that its nonempty level sets are dense and indexed by the
-  rationals ([[ex-hamel-basis-additive-function]]); $\varphi$ contributes only
-  the bounding into $(0,1)$ and the preservation of strict order. Any function
-  with countably many dense level sets, relabelled by a strictly increasing
-  injection into a bounded interval, would do as well.
+- **Everything comes from the level sets.** The only property of $f$ used after step 1.1 is that its nonempty level sets are dense and indexed by the rationals ([[ex-hamel-basis-additive-function]]); $\varphi$ contributes only the bounding into $(0,1)$ and the preservation of strict order. Any function with countably many dense level sets, relabelled by a strictly increasing injection into a bounded interval, would do as well.
 
-- **The additivity of $f$ is not used here.** It was used to prove that the level
-  sets are dense, on the companion item; once that is known, $g$ has nothing to
-  do with Cauchy's equation. In particular $g$ is not additive: it takes values
-  in $(0,1)$ and $g(0) \ne 0$.
+- **The additivity of $f$ is not used here.** It was used to prove that the level sets are dense, on the companion item; once that is known, $g$ has nothing to do with Cauchy's equation. In particular $g$ is not additive: it takes values in $(0,1)$ and $g(0) \ne 0$.

@@ -34,14 +34,11 @@ $$\underline A_{\mathrm{loc},x}\cong A.$$
 
 **Given:** A set $A$, an open set $U\subseteq X$, and a point $x\in X$.
 
-[L1] The sheaf condition is locality and unique gluing on open covers
-([[def-sheaf-on-topological-space]]).
+[L1] The sheaf condition is locality and unique gluing on open covers ([[def-sheaf-on-topological-space]]).
 
-[F1] The stalk at $x$ is the colimit of sections on neighbourhoods of $x$
-([[def-stalk-of-presheaf]]).
+[F1] The stalk at $x$ is the colimit of sections on neighbourhoods of $x$ ([[def-stalk-of-presheaf]]).
 
-[F2] The germ of a section is its class in that stalk
-([[def-germ-of-section]]).
+[F2] The germ of a section is its class in that stalk ([[def-germ-of-section]]).
 
 ## Verification
 

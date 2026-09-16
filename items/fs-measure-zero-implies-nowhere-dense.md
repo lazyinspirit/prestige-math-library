@@ -71,15 +71,8 @@ every real as an adherent point, and $\mathbb{Q}$ does exactly that.
 
 ## Remarks
 
-- **$\mathbb{Q}_{\mathbb{R}}$ is nonetheless meager**, being a union of countably
-  many singletons, each of which *is* nowhere dense
-  ([[cor-q-is-meager-and-not-g-delta]]). So the failure above is not a failure of
-  topological smallness in every sense: it is exactly the failure of the
-  one-step condition. Meagreness is the countable-union closure of nowhere
-  density, and it is the notion under which $\mathbb{Q}$ is small.
+- **$\mathbb{Q}_{\mathbb{R}}$ is nonetheless meager**, being a union of countably many singletons, each of which *is* nowhere dense ([[cor-q-is-meager-and-not-g-delta]]). So the failure above is not a failure of topological smallness in every sense: it is exactly the failure of the one-step condition. Meagreness is the countable-union closure of nowhere density, and it is the notion under which $\mathbb{Q}$ is small.
 
-- **The converse implication is also false**, and needs an uncountable witness:
-  the Smith-Volterra-Cantor set is nowhere dense and not null
-  ([[fs-nowhere-dense-implies-measure-zero]]).
+- **The converse implication is also false**, and needs an uncountable witness: the Smith-Volterra-Cantor set is nowhere dense and not null ([[fs-nowhere-dense-implies-measure-zero]]).
 
 - **The named witness** is [[cex-dense-set-of-measure-zero]].

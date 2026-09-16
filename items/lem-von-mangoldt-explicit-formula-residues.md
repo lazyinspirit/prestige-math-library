@@ -29,19 +29,11 @@ Zeros are counted with multiplicity and $x^\rho=\exp(\rho\log x)$ uses real $\lo
 
 ## Facts & Assumptions
 
-[L1] The zeros of zeta in $\operatorname{Re}s\le0$ occur exactly at the
-negative even integers; in particular, $s=0$ is not a zero
-([[thm-trivial-zeros-and-critical-strip]]).
+[L1] The zeros of zeta in $\operatorname{Re}s\le0$ occur exactly at the negative even integers; in particular, $s=0$ is not a zero ([[thm-trivial-zeros-and-critical-strip]]).
 
-[L2] Zeta satisfies
-$$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$
-as an identity of meromorphic functions
-([[thm-riemann-zeta-functional-equation]]).
+[L2] Zeta satisfies $$\zeta(s)=2^s\pi^{s-1}\sin(\pi s/2)\Gamma(1-s)\zeta(1-s)$$ as an identity of meromorphic functions ([[thm-riemann-zeta-functional-equation]]).
 
-[L3] Gamma has poles only at the nonpositive integers and has no zeros, while
-zeta has no zeros on $\operatorname{Re}s\ge1$
-([[thm-gamma-meromorphic-continuation]], [[cor-gamma-function-has-no-zeros]],
-[[thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane]]).
+[L3] Gamma has poles only at the nonpositive integers and has no zeros, while zeta has no zeros on $\operatorname{Re}s\ge1$ ([[thm-gamma-meromorphic-continuation]], [[cor-gamma-function-has-no-zeros]], [[thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane]]).
 
 ## Proof
 

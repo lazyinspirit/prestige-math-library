@@ -48,22 +48,13 @@ Then:
 
 **Given:** The commutative diagram in the statement, with both rows short exact.
 
-[L1] Monicity is equivalent to cancellation on members
-([[thm-chasing-rule-monicity-by-member-cancellation]]).
+[L1] Monicity is equivalent to cancellation on members ([[thm-chasing-rule-monicity-by-member-cancellation]]).
 
-[L3] Exactness at a node is equivalent to the member-lifting condition
-([[thm-chasing-rule-exactness-detected-by-members]]).
+[L3] Exactness at a node is equivalent to the member-lifting condition ([[thm-chasing-rule-exactness-detected-by-members]]).
 
-[L4] Equivalent members admit representatives on a common epic domain. The
-pullback refinement used for transitivity puts any finite family of such
-witnesses on one common epic domain, where hom-sets are abelian groups
-([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]],
-[[def-abelian-category]]).
+[L4] Equivalent members admit representatives on a common epic domain. The pullback refinement used for transitivity puts any finite family of such witnesses on one common epic domain, where hom-sets are abelian groups ([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]], [[def-abelian-category]]).
 
-[L5] The opposite of an abelian category is abelian, and an abelian category is
-balanced
-([[thm-the-opposite-of-an-abelian-category-is-abelian]],
-[[thm-an-abelian-category-is-balanced]]).
+[L5] The opposite of an abelian category is abelian, and an abelian category is balanced ([[thm-the-opposite-of-an-abelian-category-is-abelian]], [[thm-an-abelian-category-is-balanced]]).
 
 ## Proof
 

@@ -32,13 +32,9 @@ line bundle.
 
 **Given:** The axiom $\mathrm{AC}_\omega$ and the unit sphere $S^n\subseteq\mathbb R^{n+1}$ with the Euclidean metric.
 
-[L1] The normal bundle is a smooth vector bundle and Euclidean orthogonality
-identifies it with the orthogonal normal line bundle
-([[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]],
-[[prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle]]).
+[L1] The normal bundle is a smooth vector bundle and Euclidean orthogonality identifies it with the orthogonal normal line bundle ([[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]], [[prop-an-ambient-riemannian-metric-identifies-the-normal-quotient-with-the-orthogonal-normal-bundle]]).
 
-[L2] A vector bundle is trivial exactly when it has a global frame
-([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
+[L2] A vector bundle is trivial exactly when it has a global frame ([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
 
 [L3] The tangent space of a regular level set is the kernel of the defining map's differential ([[prop-tangent-space-of-a-regular-level-set-is-the-kernel]]).
 

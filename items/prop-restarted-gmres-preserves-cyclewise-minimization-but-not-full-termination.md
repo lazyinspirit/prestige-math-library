@@ -33,19 +33,13 @@ finite-termination theorem does not carry over automatically.
 
 ## Facts & Assumptions
 
-**Given:** A restarted GMRES$(m)$ cycle from $x^{(j)}$ with residual
-$r^{(j)}=b-Ax^{(j)}$.
+**Given:** A restarted GMRES$(m)$ cycle from $x^{(j)}$ with residual $r^{(j)}=b-Ax^{(j)}$.
 
-[F1] Restarted GMRES$(m)$ is defined by running ordinary GMRES for $m$ steps
-from the current iterate and then restarting from the cycle output
-([[def-restarted-gmres-m]]).
+[F1] Restarted GMRES$(m)$ is defined by running ordinary GMRES for $m$ steps from the current iterate and then restarting from the cycle output ([[def-restarted-gmres-m]]).
 
-[L1] Ordinary GMRES minimizes the residual norm over its affine Krylov space
-([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
+[L1] Ordinary GMRES minimizes the residual norm over its affine Krylov space ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
 
-[L2] Unrestarted finite termination uses the fact that the exact solution lies
-in one large affine Krylov space built from the original residual
-([[thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic]]).
+[L2] Unrestarted finite termination uses the fact that the exact solution lies in one large affine Krylov space built from the original residual ([[thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic]]).
 
 ## Proof
 **Proof technique:** direct.

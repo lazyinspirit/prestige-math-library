@@ -27,12 +27,9 @@ $A_{\mathfrak p}\to B_{\mathfrak q}$ is local.
 
 **Given:** A ring map $\varphi:A\to B$ and a prime $\mathfrak q$ of $B$.
 
-[F1] The induced map of affine spectra has, on stalks, the localization map
-at $\mathfrak p=\varphi^{-1}(\mathfrak q)$ ([[def-morphism-affine-schemes-from-ring-map]]).
+[F1] The induced map of affine spectra has, on stalks, the localization map at $\mathfrak p=\varphi^{-1}(\mathfrak q)$ ([[def-morphism-affine-schemes-from-ring-map]]).
 
-[F2] The maximal ideals of $A_{\mathfrak p}$ and $B_{\mathfrak q}$ are
-$\mathfrak pA_{\mathfrak p}$ and $\mathfrak qB_{\mathfrak q}$, respectively
-([[thm-localisation-at-a-prime-is-local]]).
+[F2] The maximal ideals of $A_{\mathfrak p}$ and $B_{\mathfrak q}$ are $\mathfrak pA_{\mathfrak p}$ and $\mathfrak qB_{\mathfrak q}$, respectively ([[thm-localisation-at-a-prime-is-local]]).
 
 ## Proof
 

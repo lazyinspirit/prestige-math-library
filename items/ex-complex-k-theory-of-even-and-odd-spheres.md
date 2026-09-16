@@ -39,14 +39,11 @@ $$\widetilde K^q(S^n)\cong\begin{cases}\mathbb Z,&q-n\text{ is even},\\0,&q-n\te
 
 ## Facts & Assumptions
 
-**Given:** integers $n\geq0$ and $q$, with $n\geq1$ for the two unreduced
-degree-zero formulas, and AC.
+**Given:** integers $n\geq0$ and $q$, with $n\geq1$ for the two unreduced degree-zero formulas, and AC.
 
-[F1] The reduced sphere calculation, including its all-degree parity formula,
-is [[cor-complex-k-theory-of-spheres]].
+[F1] The reduced sphere calculation, including its all-degree parity formula, is [[cor-complex-k-theory-of-spheres]].
 
-[F2] The coefficient groups are $K^{2k}(*)\cong\mathbb Z$ and
-$K^{2k+1}(*)=0$ ([[ex-k-theory-of-a-point-and-the-empty-space]]).
+[F2] The coefficient groups are $K^{2k}(*)\cong\mathbb Z$ and $K^{2k+1}(*)=0$ ([[ex-k-theory-of-a-point-and-the-empty-space]]).
 
 [A1] AC is required by [F1] and by the periodic clause of [F2].
 

@@ -33,18 +33,13 @@ Every language satisfying the regular pumping conclusion is regular.
 
 ## Facts & Assumptions
 
-**Given:** The language
-$$ G:=\{ww^Rv:w,v\in\{0,1\}^+,\ w\neq\varepsilon\}. $$
+**Given:** The language $$ G:=\{ww^Rv:w,v\in\{0,1\}^+,\ w\neq\varepsilon\}. $$
 
 [L1] By [[fs-the-pumping-lemma-characterizes-regular-languages]], the claim would be true only if every pumpable language were regular.
 
 [L2] By [[cor-distinguishable-prefix-nonregularity-criterion]], it is enough to exhibit infinitely many pairwise distinguishable prefixes in $G$.
 
-[L3] For $p_n=(01)^n$ and $x_n=(10)^n1$, the companion refutation proves
-$p_nx_n\in G$ and $p_mx_n\notin G$ whenever $m>n$: the unique doubled pair in
-$(01)^m(10)^n1$ forces any palindromic prefix $rr^R$ to have length $4m$,
-which leaves no room for the required nonempty suffix
-([[fs-the-pumping-lemma-characterizes-regular-languages]]).
+[L3] For $p_n=(01)^n$ and $x_n=(10)^n1$, the companion refutation proves $p_nx_n\in G$ and $p_mx_n\notin G$ whenever $m>n$: the unique doubled pair in $(01)^m(10)^n1$ forces any palindromic prefix $rr^R$ to have length $4m$, which leaves no room for the required nonempty suffix ([[fs-the-pumping-lemma-characterizes-regular-languages]]).
 
 ## Counterexample
 

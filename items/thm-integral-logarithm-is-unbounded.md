@@ -36,12 +36,9 @@ In particular, $L$ is unbounded both below and above.
 
 **Given:** $M\in\mathbb R$.
 
-[L1] $L(2)>0$ and, for every natural $n$,
-$L(2^n)=nL(2)$ and $L(2^{-n})=-nL(2)$
-([[cor-integral-logarithm-reciprocals-and-integer-powers]]).
+[L1] $L(2)>0$ and, for every natural $n$, $L(2^n)=nL(2)$ and $L(2^{-n})=-nL(2)$ ([[cor-integral-logarithm-reciprocals-and-integer-powers]]).
 
-[L2] For every real $r$, there is a natural number $n\geq1$ with $r<n$
-([[thm-of-archimedean]]).
+[L2] For every real $r$, there is a natural number $n\geq1$ with $r<n$ ([[thm-of-archimedean]]).
 
 ## Proof
 

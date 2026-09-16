@@ -38,20 +38,13 @@ the approximation property. Consequently $B$ has no Schauder basis.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] The Walsh-block assembly produces a separable reflexive space $B$ whose
-finite-rank operators satisfy Enflo's logarithmic lower bound
-([[lem-enflo-symmetry-averaging-and-block-assembly]]).
+[L1] The Walsh-block assembly produces a separable reflexive space $B$ whose finite-rank operators satisfy Enflo's logarithmic lower bound ([[lem-enflo-symmetry-averaging-and-block-assembly]]).
 
-[L2] That lower bound excludes every finite BAP constant
-([[lem-enflo-quantitative-trace-obstruction-to-the-approximation-property]]).
+[L2] That lower bound excludes every finite BAP constant ([[lem-enflo-quantitative-trace-obstruction-to-the-approximation-property]]).
 
-[L3] Under AC, a reflexive space with AP has MAP
-([[thm-reflexive-approximation-property-implies-metric-approximation-property]]).
+[L3] Under AC, a reflexive space with AP has MAP ([[thm-reflexive-approximation-property-implies-metric-approximation-property]]).
 
-[L4] Under DC, every Schauder basis has a finite basis constant, and a space
-with such a basis has BAP
-([[thm-coordinate-functionals-of-a-schauder-basis-are-bounded]],
-[[thm-schauder-basis-implies-bounded-approximation-property]]).
+[L4] Under DC, every Schauder basis has a finite basis constant, and a space with such a basis has BAP ([[thm-coordinate-functionals-of-a-schauder-basis-are-bounded]], [[thm-schauder-basis-implies-bounded-approximation-property]]).
 
 ## Proof
 

@@ -43,16 +43,11 @@ $w \mapsto w^n$ of $\mathbb C^\times$.
 
 **Given:** The $n$th-root germ surface $\mathcal R_n$ and its projection $p_n$.
 
-[L1] The principal root branch on the slit plane is a biholomorphism onto the
-sector $V_n$, with inverse $w \mapsto w^n$
-([[thm-slit-plane-root-branch-biholomorphism-to-a-sector]]).
+[L1] The principal root branch on the slit plane is a biholomorphism onto the sector $V_n$, with inverse $w \mapsto w^n$ ([[thm-slit-plane-root-branch-biholomorphism-to-a-sector]]).
 
-[L2] The logarithm surface is biholomorphic to $\mathbb C$ over
-$\mathbb C^\times$ via the exponential map
-([[thm-riemann-surface-of-the-logarithm]]).
+[L2] The logarithm surface is biholomorphic to $\mathbb C$ over $\mathbb C^\times$ via the exponential map ([[thm-riemann-surface-of-the-logarithm]]).
 
-[L3] The germ projection on a complete analytic function is a local
-biholomorphism ([[thm-germ-projection-is-a-local-biholomorphism]]).
+[L3] The germ projection on a complete analytic function is a local biholomorphism ([[thm-germ-projection-is-a-local-biholomorphism]]).
 
 ## Proof
 

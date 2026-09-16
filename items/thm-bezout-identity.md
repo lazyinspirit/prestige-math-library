@@ -100,19 +100,8 @@ so the equation $ax + by = \gcd(a,b)$ is solvable in $\mathbb{Z}$.
 
 ## Remarks
 
-- **Where the work is.** Two places, and both are easy to hand-wave. The first is
-  that $I$ contains a positive element at all, which is what the hypothesis "not
-  both zero" buys and which is proved through $a \cdot a + b \cdot b$ rather than
-  by taking $|a|$ (that would need a case split on which of $a$, $b$ is nonzero).
-  The second is the last inequality: that every common divisor is *below* $d$
-  needs [[lem-divisor-bound]], not just $c \mid d$, because divisibility is not
-  the order of $\mathbb{Z}$.
+- **Where the work is.** Two places, and both are easy to hand-wave. The first is that $I$ contains a positive element at all, which is what the hypothesis "not both zero" buys and which is proved through $a \cdot a + b \cdot b$ rather than by taking $|a|$ (that would need a case split on which of $a$, $b$ is nonzero). The second is the last inequality: that every common divisor is *below* $d$ needs [[lem-divisor-bound]], not just $c \mid d$, because divisibility is not the order of $\mathbb{Z}$.
 
-- **The hypothesis cannot be dropped.** At $(a,b) = (0,0)$ the set $I$ is
-  $\{0\}$, which has no positive element, so "the least positive element of $I$"
-  names nothing; that is precisely the pair at which $\gcd$ is fixed by
-  convention ([[def-common-divisor-and-gcd]]).
+- **The hypothesis cannot be dropped.** At $(a,b) = (0,0)$ the set $I$ is $\{0\}$, which has no positive element, so "the least positive element of $I$" names nothing; that is precisely the pair at which $\gcd$ is fixed by convention ([[def-common-divisor-and-gcd]]).
 
-- **This is an existence statement.** The coefficients $x_0, y_0$ come from a
-  least element supplied by well-ordering, so nothing here computes them.
-  [[cor-extended-euclidean-bezout-coefficients]] does compute them.
+- **This is an existence statement.** The coefficients $x_0, y_0$ come from a least element supplied by well-ordering, so nothing here computes them. [[cor-extended-euclidean-bezout-coefficients]] does compute them.

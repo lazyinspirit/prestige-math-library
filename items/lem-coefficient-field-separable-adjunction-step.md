@@ -35,15 +35,11 @@ residue image contains $\overline u$.
 
 ## Facts & Assumptions
 
-**Given:** A complete equicharacteristic local ring $(A,\mathfrak m)$, a
-residue-injective subfield $K \subseteq A$, and a residue element
-$\overline u\notin\rho(K)$ separable algebraic over $\rho(K)$.
+**Given:** A complete equicharacteristic local ring $(A,\mathfrak m)$, a residue-injective subfield $K \subseteq A$, and a residue element $\overline u\notin\rho(K)$ separable algebraic over $\rho(K)$.
 
-[L1] Complete local rings are Henselian, hence satisfy the simple-root lifting
-criterion ([[cor-complete-local-rings-are-henselian]], [[cor-henselian-local-simple-root-criterion]]).
+[L1] Complete local rings are Henselian, hence satisfy the simple-root lifting criterion ([[cor-complete-local-rings-are-henselian]], [[cor-henselian-local-simple-root-criterion]]).
 
-[L2] Maximal residue-injective subfields are the objects to be enlarged in the
-coefficient-field argument ([[lem-maximal-residue-injective-subfield]]).
+[L2] Maximal residue-injective subfields are the objects to be enlarged in the coefficient-field argument ([[lem-maximal-residue-injective-subfield]]).
 
 ## Proof
 

@@ -31,11 +31,9 @@ $\mathbb Z_p$ is the full profinite completion of $\mathbb Z$.
 
 **Given:** A prime $p$.
 
-[L1] $\mathbb Z_p$ is the pro-$p$ completion of $\mathbb Z$
-([[thm-zp-is-the-pro-p-completion-of-the-integers]]).
+[L1] $\mathbb Z_p$ is the pro-$p$ completion of $\mathbb Z$ ([[thm-zp-is-the-pro-p-completion-of-the-integers]]).
 
-[L2] The full profinite completion of $\mathbb Z$ is $\prod_q\mathbb Z_q$ over
-all primes $q$ ([[prop-profinite-completion-of-z-is-the-product-of-all-zp]]).
+[L2] The full profinite completion of $\mathbb Z$ is $\prod_q\mathbb Z_q$ over all primes $q$ ([[prop-profinite-completion-of-z-is-the-product-of-all-zp]]).
 
 ## Refutation
 

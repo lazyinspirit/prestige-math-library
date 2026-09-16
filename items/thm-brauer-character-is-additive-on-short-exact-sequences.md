@@ -39,15 +39,11 @@ on $G^0$. In particular Brauer characters are additive on direct sums.
 
 ## Facts & Assumptions
 
-**Given:** A short exact sequence
-$0\to U\to V\to W\to0$ of finite-dimensional $kG$-modules.
+**Given:** A short exact sequence $0\to U\to V\to W\to0$ of finite-dimensional $kG$-modules.
 
-[F1] The Brauer character at a $p$-regular element is the lifted sum of the
-eigenvalues of that element on the module
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F1] The Brauer character at a $p$-regular element is the lifted sum of the eigenvalues of that element on the module ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
-[L1] That value is basis-independent
-([[lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation]]).
+[L1] That value is basis-independent ([[lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation]]).
 
 ## Proof
 

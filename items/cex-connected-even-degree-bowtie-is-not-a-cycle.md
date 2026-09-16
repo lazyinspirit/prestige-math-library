@@ -52,21 +52,4 @@ connected simple graph whose degrees are all even is itself a cycle.
 
 ## Remarks
 
-```tikz
-\begin{tikzpicture}[
-  vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\small},
-  centre/.style={vertex,draw=red!75!black,fill=red!12,line width=1.4pt},
-  edge/.style={draw=gray!75,line width=1.1pt}
-]
-\node[centre] (x) at (0,0) {$x$};
-\node[vertex] (a) at (-2,1.25) {$a$};
-\node[vertex] (b) at (-2,-1.25) {$b$};
-\node[vertex] (c) at (2,1.25) {$c$};
-\node[vertex] (d) at (2,-1.25) {$d$};
-\draw[edge] (x)--(a)--(b)--(x);
-\draw[edge] (x)--(c)--(d)--(x);
-\node[font=\scriptsize,red!75!black,anchor=west] at (.45,.2) {$\deg(x)=4$};
-\node[font=\scriptsize] at (0,-1.9)
-  {$\deg(a)=\deg(b)=\deg(c)=\deg(d)=2$};
-\end{tikzpicture}
-```
+```tikz \begin{tikzpicture}[ vertex/.style={draw,circle,fill=white,minimum size=8mm,inner sep=1pt,font=\small}, centre/.style={vertex,draw=red!75!black,fill=red!12,line width=1.4pt}, edge/.style={draw=gray!75,line width=1.1pt} ] \node[centre] (x) at (0,0) {$x$}; \node[vertex] (a) at (-2,1.25) {$a$}; \node[vertex] (b) at (-2,-1.25) {$b$}; \node[vertex] (c) at (2,1.25) {$c$}; \node[vertex] (d) at (2,-1.25) {$d$}; \draw[edge] (x)--(a)--(b)--(x); \draw[edge] (x)--(c)--(d)--(x); \node[font=\scriptsize,red!75!black,anchor=west] at (.45,.2) {$\deg(x)=4$}; \node[font=\scriptsize] at (0,-1.9) {$\deg(a)=\deg(b)=\deg(c)=\deg(d)=2$}; \end{tikzpicture} ```

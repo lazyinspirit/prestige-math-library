@@ -37,22 +37,15 @@ common eigenline, so Lie's theorem fails in positive characteristic.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$ of characteristic $p>0$, the displayed affine algebra,
-and the displayed operators $X,Y$ on $V$.
+**Given:** A field $k$ of characteristic $p>0$, the displayed affine algebra, and the displayed operators $X,Y$ on $V$.
 
-[L1] Lie's theorem assumes an algebraically closed field of characteristic
-zero and concludes the existence of a common eigenvector
-([[thm-lies-theorem]]).
+[L1] Lie's theorem assumes an algebraically closed field of characteristic zero and concludes the existence of a common eigenvector ([[thm-lies-theorem]]).
 
-[L2] Solvability is termination of the derived series
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L2] Solvability is termination of the derived series ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L3] A representation carries brackets to operator commutators
-([[def-representation-of-a-lie-algebra]]).
+[L3] A representation carries brackets to operator commutators ([[def-representation-of-a-lie-algebra]]).
 
-[L4] A nonzero representation is irreducible when it has no nonzero proper
-stable subspace
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L4] A nonzero representation is irreducible when it has no nonzero proper stable subspace ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Refutation
 

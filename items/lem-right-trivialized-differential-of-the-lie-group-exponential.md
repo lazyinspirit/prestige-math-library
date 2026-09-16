@@ -50,39 +50,21 @@ with absolute convergence uniformly on compact $t$-intervals.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and
-$Z,V\in\mathfrak g$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and $Z,V\in\mathfrak g$.
 
-[F1] Lie-group exponentials are smooth, and
-$t\mapsto\exp_G(tW)$ is the integral curve of $W^L$ through the identity.
-[[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]].
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
+[F1] Lie-group exponentials are smooth, and $t\mapsto\exp_G(tW)$ is the integral curve of $W^L$ through the identity. [[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]]. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
 
-[F2] Left and right translations and their differentials give the standard
-tangent trivializations. [[def-left-and-right-translations-on-a-lie-group]].
+[F2] Left and right translations and their differentials give the standard tangent trivializations. [[def-left-and-right-translations-on-a-lie-group]].
 
-[F3] Assuming countable choice,
-$\operatorname{Ad}_{\exp_G(tZ)}=e^{t\operatorname{ad}_Z}$, where the right
-side is the linear-ODE exponential.
-[[def-countable-choice]].
-[[prop-adjoint-exponential-identity]].
+[F3] Assuming countable choice, $\operatorname{Ad}_{\exp_G(tZ)}=e^{t\operatorname{ad}_Z}$, where the right side is the linear-ODE exponential. [[def-countable-choice]]. [[prop-adjoint-exponential-identity]].
 
-[F4] Linear matrix initial-value problems have unique solutions on compact
-intervals. [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
+[F4] Linear matrix initial-value problems have unique solutions on compact intervals. [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
 
-[F5] A finite basis gives bounded coordinates; the scalar exponential series
-converges everywhere and real power series differentiate termwise inside
-their radii.
-[[thm-coordinate-map-for-a-finite-dimensional-normed-space]].
-[[lem-exponential-series-has-infinite-radius]].
-[[thm-termwise-differentiation-of-a-real-power-series]].
+[F5] A finite basis gives bounded coordinates; the scalar exponential series converges everywhere and real power series differentiate termwise inside their radii. [[thm-coordinate-map-for-a-finite-dimensional-normed-space]]. [[lem-exponential-series-has-infinite-radius]]. [[thm-termwise-differentiation-of-a-real-power-series]].
 
-[F6] The vector-valued fundamental theorem of calculus integrates a
-continuous derivative componentwise.
-[[cor-vector-valued-ftc-and-lipschitz-bound]].
+[F6] The vector-valued fundamental theorem of calculus integrates a continuous derivative componentwise. [[cor-vector-valued-ftc-and-lipschitz-bound]].
 
-[F7] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F7] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

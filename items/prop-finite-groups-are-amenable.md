@@ -36,8 +36,7 @@ Every finite group is amenable.
 
 **Given:** A finite group $G$.
 
-[L1] A group is amenable exactly when it admits a left-invariant mean
-([[def-left-invariant-mean-and-amenable-group]]).
+[L1] A group is amenable exactly when it admits a left-invariant mean ([[def-left-invariant-mean-and-amenable-group]]).
 
 ## Proof
 

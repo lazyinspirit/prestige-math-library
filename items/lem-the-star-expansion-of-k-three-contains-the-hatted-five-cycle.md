@@ -34,11 +34,9 @@ The star-expansion of $K_3$ contains an induced hatted five-cycle.
 
 ## Facts & Assumptions
 
-**Given:** The star-expansion of $K_3$ with triangle vertices
-$b_1,b_2,b_3$, teeth $a_1,a_2,a_3$, and root $v$.
+**Given:** The star-expansion of $K_3$ with triangle vertices $b_1,b_2,b_3$, teeth $a_1,a_2,a_3$, and root $v$.
 
-[L1] In the star-expansion, the only new edges are $va_i$ and $a_ib_i$
-([[def-star-expansion-of-a-graph]]).
+[L1] In the star-expansion, the only new edges are $va_i$ and $a_ib_i$ ([[def-star-expansion-of-a-graph]]).
 
 ## Proof
 

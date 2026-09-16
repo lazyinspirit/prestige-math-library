@@ -29,25 +29,19 @@ Every nonzero measurable function has positive $L^p$ seminorm.
 
 **Given:** The rational indicator on $[0,1]$.
 
-[L1] $\mathbb Q$ is countable and countable subsets of $\mathbb R$ are null
-([[thm-rationals-countable]], [[lem-countable-sets-are-null]]).
+[L1] $\mathbb Q$ is countable and countable subsets of $\mathbb R$ are null ([[thm-rationals-countable]], [[lem-countable-sets-are-null]]).
 
-[L2] Null functions are exactly the zero-seminorm class in every range treated
-on this page
-([[prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class]]).
+[L2] Null functions are exactly the zero-seminorm class in every range treated on this page ([[prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class]]).
 
 ## Counterexample
 
-**Proof technique:** Use the indicator of a countable null subset of $[0,1]$.
-It is not the zero function, but its $p$-seminorm and essential supremum both
-vanish.
+**Proof technique:** Use the indicator of a countable null subset of $[0,1]$. It is not the zero function, but its $p$-seminorm and essential supremum both vanish.
 
 1.1 Let $f:=\chi_{\mathbb Q\cap[0,1]}$. Then $f$ is not the zero function, [given]
 because $f(q)=1$ for every rational $q\in[0,1]$.
 
 1.2 By [L1], the support of $f$ is null, so $f=0$ almost everywhere. Therefore [L1, L2]
-[L2] gives $\|f\|_p=0$ in every finite-$p$ range treated on the page, and also
-$\|f\|_\infty=0$.
+[L2] gives $\|f\|_p=0$ in every finite-$p$ range treated on the page, and also $\|f\|_\infty=0$.
 
 2.1 Thus a nonzero measurable function can have zero $L^p$ seminorm. [step 1.1, step 1.2]
 ∎

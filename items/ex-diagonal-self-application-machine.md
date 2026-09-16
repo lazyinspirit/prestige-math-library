@@ -30,9 +30,7 @@ input alphabet, $D_H$ does the opposite of $M$.
 
 **Given:** A hypothetical decider $H$ for $A_{TM}$ and the resulting machine $D_H$.
 
-[L1] The diagonal construction yields a machine $D_H$ with
-$$ D_H \text{ accepts } \overline{\ulcorner M\urcorner}\iff M \text{ does not accept } \overline{\ulcorner M\urcorner} $$
-for every coded machine $M$ whose input alphabet contains $\Sigma_2$, by [[lem-diagonal-self-application-machine]].
+[L1] The diagonal construction yields a machine $D_H$ with $$ D_H \text{ accepts } \overline{\ulcorner M\urcorner}\iff M \text{ does not accept } \overline{\ulcorner M\urcorner} $$ for every coded machine $M$ whose input alphabet contains $\Sigma_2$, by [[lem-diagonal-self-application-machine]].
 
 [L2] The existence of such a machine forces a contradiction and therefore proves $A_{TM}$ undecidable, by [[thm-machine-acceptance-is-undecidable]].
 

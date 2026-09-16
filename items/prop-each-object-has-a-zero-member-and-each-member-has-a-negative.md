@@ -42,14 +42,11 @@ For every object $A$ of an abelian category:
 
 **Given:** An abelian category and a member $x:X \to A$.
 
-[L1] A zero object supplies zero morphisms between any two objects
-([[prop-zero-object-induces-zero-morphisms]]).
+[L1] A zero object supplies zero morphisms between any two objects ([[prop-zero-object-induces-zero-morphisms]]).
 
-[L2] An abelian category is additive, so every hom-set has negatives
-([[def-abelian-category]]).
+[L2] An abelian category is additive, so every hom-set has negatives ([[def-abelian-category]]).
 
-[L3] Member equivalence is defined by comparison after epimorphisms
-([[def-equivalence-of-members]]).
+[L3] Member equivalence is defined by comparison after epimorphisms ([[def-equivalence-of-members]]).
 
 ## Proof
 

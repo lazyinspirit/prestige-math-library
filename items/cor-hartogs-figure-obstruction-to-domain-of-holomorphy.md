@@ -34,16 +34,11 @@ then $\Omega$ is not a domain of holomorphy.
 
 ## Facts & Assumptions
 
-**Given:** A domain $\Omega$ with
-$H(r,s)\subseteq\Omega\subseteq\widehat H(r,s)$ and
-$\Omega\ne\widehat H(r,s)$.
+**Given:** A domain $\Omega$ with $H(r,s)\subseteq\Omega\subseteq\widehat H(r,s)$ and $\Omega\ne\widehat H(r,s)$.
 
-[L1] A domain of holomorphy is defined by the nonexistence of one fixed overlap
-from which every holomorphic function extends farther
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L1] A domain of holomorphy is defined by the nonexistence of one fixed overlap from which every holomorphic function extends farther ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
-[L2] Every holomorphic function on $H(r,s)$ extends uniquely to the full bidisc
-$\widehat H(r,s)$ ([[thm-hartogs-figure-extension]]).
+[L2] Every holomorphic function on $H(r,s)$ extends uniquely to the full bidisc $\widehat H(r,s)$ ([[thm-hartogs-figure-extension]]).
 
 ## Proof
 

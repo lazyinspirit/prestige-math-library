@@ -36,11 +36,9 @@ functions. Then $f(n)=g(n)$ for every $n$.
 
 ## Facts & Assumptions
 
-**Given:** Absolute convergence and equality of the two Dirichlet series on
-$\Re s > \sigma$.
+**Given:** Absolute convergence and equality of the two Dirichlet series on $\Re s > \sigma$.
 
-[L1] A Dirichlet series is a sum $\sum a_n n^{-s}$
-([[def-dirichlet-series]]).
+[L1] A Dirichlet series is a sum $\sum a_n n^{-s}$ ([[def-dirichlet-series]]).
 
 ## Proof
 

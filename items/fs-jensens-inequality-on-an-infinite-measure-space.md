@@ -38,11 +38,8 @@ even when $\mu(X)\ne1$.
 **Proof technique:** direct.
 
 1.1 On $(\mathbb N,\mathcal P(\mathbb N),\#)$, let $f:=\chi_{\{1,2\}}$ and[L2, given, construct]
-$\varphi(x):=x^2$. Then
-$$\int f\,d\#=2,\qquad \int\varphi(f)\,d\#=2.$$
+$\varphi(x):=x^2$. Then $$\int f\,d\#=2,\qquad \int\varphi(f)\,d\#=2.$$
 
 
 2.1 Therefore [step 1.1, L1, algebra] ∎
-$$\varphi\!\left(\int f\,d\#\right)=4>2=\int\varphi(f)\,d\#,$$
-so the displayed inequality fails on this infinite measure space. This is why
-[L1] requires probability normalization.
+$$\varphi\!\left(\int f\,d\#\right)=4>2=\int\varphi(f)\,d\#,$$ so the displayed inequality fails on this infinite measure space. This is why [L1] requires probability normalization.

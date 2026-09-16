@@ -95,22 +95,8 @@ $P := \prod_{i \in I} X_i$ carry the product topology, with projections $\pi_j$
 
 ## Remarks
 
-- **Exactly where choice is spent, and where it is not.** Openness of the
-  projections (claim 3) is choice free: step 1.3 uses a *single* point of the box
-  in question, which is given by the assumption that the box is nonempty, and
-  builds the required preimage from it by changing one coordinate. Surjectivity
-  (claim 4) is different, because there the point has to be produced from nothing
-  but nonemptiness of the factors, and for an infinite index set that is the
-  Axiom of Choice itself.
+- **Exactly where choice is spent, and where it is not.** Openness of the projections (claim 3) is choice free: step 1.3 uses a *single* point of the box in question, which is given by the assumption that the box is nonempty, and builds the required preimage from it by changing one coordinate. Surjectivity (claim 4) is different, because there the point has to be produced from nothing but nonemptiness of the factors, and for an infinite index set that is the Axiom of Choice itself.
 
-- **The characteristic property is what makes the product topology the right
-  one.** The box topology has no analogue of claim 2: a map into a box-topologised
-  product may have all components continuous and fail to be continuous, and the
-  companion page exhibits the diagonal of $\mathbb{R}^{\mathbb{N}}$ doing exactly
-  that.
+- **The characteristic property is what makes the product topology the right one.** The box topology has no analogue of claim 2: a map into a box-topologised product may have all components continuous and fail to be continuous, and the companion page exhibits the diagonal of $\mathbb{R}^{\mathbb{N}}$ doing exactly that.
 
-- **Openness does not survive to closedness.** A projection is always open and is
-  in general not closed, and the standard witness, the hyperbola in
-  $\mathbb{R}^2$, is worked in the false statement on this page. There is no
-  asymmetry of taste here: images of open boxes are computed coordinatewise,
-  while a closed set of the product need not be a union of closed boxes at all.
+- **Openness does not survive to closedness.** A projection is always open and is in general not closed, and the standard witness, the hyperbola in $\mathbb{R}^2$, is worked in the false statement on this page. There is no asymmetry of taste here: images of open boxes are computed coordinatewise, while a closed set of the product need not be a union of closed boxes at all.

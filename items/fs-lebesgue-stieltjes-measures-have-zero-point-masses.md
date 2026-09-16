@@ -37,17 +37,14 @@ $$F(x) := \begin{cases} 0, & x < 0,\\ 1, & x \ge 0. \end{cases}$$
 
 [L1] For a Lebesgue-Stieltjes measure, one has $\mu_F(\{a\}) = F(a) - F(a^-)$. ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
 
-[L2] Assuming Countable Choice, every nondecreasing right-continuous real
-function defines a Lebesgue-Stieltjes measure.
-([[thm-existence-of-the-lebesgue-stieltjes-measure]])
+[L2] Assuming Countable Choice, every nondecreasing right-continuous real function defines a Lebesgue-Stieltjes measure. ([[thm-existence-of-the-lebesgue-stieltjes-measure]])
 
 ## Refutation
 
 **Proof technique:** direct.
 
 1.1 The function $F$ is nondecreasing and right-continuous, so [L2] defines its [given, L2]
-Lebesgue-Stieltjes measure $\mu_F$. At the point $0$, one has $F(0)=1$ and
-$F(0^-)=0$.
+Lebesgue-Stieltjes measure $\mu_F$. At the point $0$, one has $F(0)=1$ and $F(0^-)=0$.
 
 2.1 Applying [L1] at $a=0$ gives [step 1.1, L1]
 

@@ -32,17 +32,13 @@ $L^p\subseteq L^r$.
 
 **Given:** The two power-function counterexamples on $\mathbb R$.
 
-[L1] There is an $L^1$ function on $\mathbb R$ that is not in $L^2$
-([[cex-l-one-not-subset-l-two-on-the-line]]).
+[L1] There is an $L^1$ function on $\mathbb R$ that is not in $L^2$ ([[cex-l-one-not-subset-l-two-on-the-line]]).
 
-[L2] There is an $L^2$ function on $\mathbb R$ that is not in $L^1$
-([[cex-l-two-not-subset-l-one-on-the-line]]).
+[L2] There is an $L^2$ function on $\mathbb R$ that is not in $L^1$ ([[cex-l-two-not-subset-l-one-on-the-line]]).
 
 ## Refutation
 
-**Proof technique:** Refute with the two power-function counterexamples on the
-line: one witness lies in $L^1\setminus L^2$ and another lies in
-$L^2\setminus L^1$.
+**Proof technique:** Refute with the two power-function counterexamples on the line: one witness lies in $L^1\setminus L^2$ and another lies in $L^2\setminus L^1$.
 
 1.1 Taking $p=1$ and $r=2$, [L1] already contradicts the claim. [L1]
 

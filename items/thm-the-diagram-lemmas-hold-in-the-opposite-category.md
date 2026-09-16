@@ -37,16 +37,9 @@ the named lemmas on the same page.
 
 **Given:** An abelian category $\mathcal A$.
 
-[L1] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L1] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L2] The snake, four, sharp five, nine, and sharp nine lemmas have already been
-proved in an arbitrary abelian category
-([[thm-snake-lemma-in-an-abelian-category]],
-[[thm-four-lemma-in-an-abelian-category]],
-[[thm-sharp-five-lemma-in-an-abelian-category]],
-[[thm-nine-lemma-in-an-abelian-category]],
-[[thm-sharp-nine-lemma]]).
+[L2] The snake, four, sharp five, nine, and sharp nine lemmas have already been proved in an arbitrary abelian category ([[thm-snake-lemma-in-an-abelian-category]], [[thm-four-lemma-in-an-abelian-category]], [[thm-sharp-five-lemma-in-an-abelian-category]], [[thm-nine-lemma-in-an-abelian-category]], [[thm-sharp-nine-lemma]]).
 
 ## Proof
 

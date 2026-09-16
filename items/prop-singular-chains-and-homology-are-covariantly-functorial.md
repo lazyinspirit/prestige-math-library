@@ -40,15 +40,11 @@ $$H_n((g\circ f)_\#)=H_n(g_\#)\circ H_n(f_\#),\qquad H_n(\operatorname{id}_{X,\#
 
 **Given:** An abelian group $G$ and continuous maps $f:X\to Y$ and $g:Y\to Z$.
 
-[L1] The induced singular chain map sends a singular simplex $\sigma$ to
-$f\circ\sigma$ ([[def-induced-singular-chain-map]]).
+[L1] The induced singular chain map sends a singular simplex $\sigma$ to $f\circ\sigma$ ([[def-induced-singular-chain-map]]).
 
-[L2] Induced singular chain maps commute with the singular boundaries
-([[lem-induced-singular-chain-maps-commute-with-boundaries]]).
+[L2] Induced singular chain maps commute with the singular boundaries ([[lem-induced-singular-chain-maps-commute-with-boundaries]]).
 
-[L3] Homology sends identity chain maps to identity maps and composite chain
-maps to composite homology maps
-([[prop-homology-respects-identities-and-composition]]).
+[L3] Homology sends identity chain maps to identity maps and composite chain maps to composite homology maps ([[prop-homology-respects-identities-and-composition]]).
 
 ## Proof
 

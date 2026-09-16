@@ -37,19 +37,11 @@ supplied, the metric construction is choice-free.
 
 **Given:** AC and a finite-rank real or complex vector bundle $E\to X$.
 
-[F1] A numeration consists of linear charts $E|_{U_i}\cong
-U_i\times\mathbb F^n$ and a locally finite partition $(\rho_i)$ with
-$\operatorname{supp}\rho_i\subseteq U_i$
-([[def-real-and-complex-topological-vector-bundle]],
-[[def-partition-of-unity-subordinate-to-a-cover]]).
+[F1] A numeration consists of linear charts $E|_{U_i}\cong U_i\times\mathbb F^n$ and a locally finite partition $(\rho_i)$ with $\operatorname{supp}\rho_i\subseteq U_i$ ([[def-real-and-complex-topological-vector-bundle]], [[def-partition-of-unity-subordinate-to-a-cover]]).
 
-[F2] Under AC and DC, every open cover of a paracompact Hausdorff space has a
-subordinate locally finite partition of unity
-([[thm-subordinate-partitions-of-unity-exist]]).
+[F2] Under AC and DC, every open cover of a paracompact Hausdorff space has a subordinate locally finite partition of unity ([[thm-subordinate-partitions-of-unity-exist]]).
 
-[A1] AC is the stated choice principle, and it implies DC
-([[def-axiom-of-choice]],
-[[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
+[A1] AC is the stated choice principle, and it implies DC ([[def-axiom-of-choice]], [[lem-ac-supplies-dependent-choice-for-vector-bundle-constructions]]).
 
 ## Proof
 

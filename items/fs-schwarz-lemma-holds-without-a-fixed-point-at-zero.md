@@ -35,9 +35,7 @@ Schwarz's lemma even without the hypothesis $f(0)=0$.
 
 **Given:** The Blaschke factor $f(z)=\varphi_{1/2}(z)$.
 
-[F1] Every Blaschke factor is an automorphism of the unit disc, hence a
-holomorphic self-map of $\mathbb D$
-([[thm-blaschke-factor-is-a-disc-automorphism]]).
+[F1] Every Blaschke factor is an automorphism of the unit disc, hence a holomorphic self-map of $\mathbb D$ ([[thm-blaschke-factor-is-a-disc-automorphism]]).
 
 ## Refutation
 

@@ -36,11 +36,7 @@ under every complex-linear automorphism.
 
 **Given:** A nonzero complex vector space $W$ and a real form $W_0\subseteq W$.
 
-[L1] A real form is the fixed space of a conjugation, and its complexification
-recovers $W$; in particular every $w\in W$ has a unique expression
-$w=u+iv$ with $u,v\in W_0$
-([[cor-real-forms-correspond-to-conjugations]],
-[[thm-fixed-points-of-a-conjugation-form-a-real-space-and-its-complexification-recovers-the-ambient-space]]).
+[L1] A real form is the fixed space of a conjugation, and its complexification recovers $W$; in particular every $w\in W$ has a unique expression $w=u+iv$ with $u,v\in W_0$ ([[cor-real-forms-correspond-to-conjugations]], [[thm-fixed-points-of-a-conjugation-form-a-real-space-and-its-complexification-recovers-the-ambient-space]]).
 
 ## Refutation
 

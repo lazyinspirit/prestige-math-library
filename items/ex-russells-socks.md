@@ -48,15 +48,11 @@ nonimplication.
 
 ## Facts & Assumptions
 
-**Given:** A family $\mathcal F$ of two-element sets and a set $L$ such that
-$S\cap L$ has exactly one element for every $S\in\mathcal F$.
+**Given:** A family $\mathcal F$ of two-element sets and a set $L$ such that $S\cap L$ has exactly one element for every $S\in\mathcal F$.
 
-[L1] A choice function for $\mathcal F$ is a function $g$ with domain
-$\mathcal F$ such that $g(S)\in S$ for every $S\in\mathcal F$
-([[def-choice-function]]).
+[L1] A choice function for $\mathcal F$ is a function $g$ with domain $\mathcal F$ such that $g(S)\in S$ for every $S\in\mathcal F$ ([[def-choice-function]]).
 
-[L2] The Axiom of Choice asserts that every family of nonempty sets has a
-choice function ([[def-axiom-of-choice]]).
+[L2] The Axiom of Choice asserts that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
 
 ## Verification
 
@@ -72,9 +68,5 @@ choice function ([[def-axiom-of-choice]]).
 
 ## Remarks
 
-- Boundedly many indexed pairs require no choice principle: if the family is
-  listed as $F(0),\ldots,F(n-1)$, [[lem-finite-choice]] builds a selection one
-  value at a time. The definition of an arbitrary finite set appears later in
-  [[def-countable]], so this remark uses only the indexed-family form.
-- The argument never uses pairwise disjointness or cardinality two. It uses only
-  the supplied predicate selecting exactly one member of every set.
+- Boundedly many indexed pairs require no choice principle: if the family is listed as $F(0),\ldots,F(n-1)$, [[lem-finite-choice]] builds a selection one value at a time. The definition of an arbitrary finite set appears later in [[def-countable]], so this remark uses only the indexed-family form.
+- The argument never uses pairwise disjointness or cardinality two. It uses only the supplied predicate selecting exactly one member of every set.

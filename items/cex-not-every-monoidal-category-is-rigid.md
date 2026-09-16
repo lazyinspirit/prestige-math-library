@@ -28,11 +28,9 @@ Every monoidal category is rigid.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the monoidal category $\mathbf{Vect}_k$, and the
-infinite-dimensional vector space $V=k[x]$.
+**Given:** A field $k$, the monoidal category $\mathbf{Vect}_k$, and the infinite-dimensional vector space $V=k[x]$.
 
-[L1] A vector space with no finite basis is infinite-dimensional
-([[def-dimension]]).
+[L1] A vector space with no finite basis is infinite-dimensional ([[def-dimension]]).
 
 ## Counterexample
 

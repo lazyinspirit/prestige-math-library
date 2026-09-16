@@ -36,22 +36,13 @@ $\otimes_{\mathbb Z}$ is exactly a preadditive category.
 
 **Given:** A category or enriched category with object set $\operatorname{Ob}$.
 
-[L1] An $\mathbf{Ab}$-enriched category has abelian-group hom-objects,
-composition morphisms
-$\mathcal A(B,C)\otimes_{\mathbb Z}\mathcal A(A,B)\to\mathcal A(A,C)$, and
-identity morphisms $\mathbb Z\to\mathcal A(A,A)$
-([[def-enriched-category]]).
+[L1] An $\mathbf{Ab}$-enriched category has abelian-group hom-objects, composition morphisms $\mathcal A(B,C)\otimes_{\mathbb Z}\mathcal A(A,B)\to\mathcal A(A,C)$, and identity morphisms $\mathbb Z\to\mathcal A(A,A)$ ([[def-enriched-category]]).
 
-[L2] A preadditive category is a category whose hom-sets are abelian groups and
-whose composition is bilinear ([[def-preadditive-category]]).
+[L2] A preadditive category is a category whose hom-sets are abelian groups and whose composition is bilinear ([[def-preadditive-category]]).
 
-[L3] $\mathbf{Ab}$ is monoidal under $\otimes_{\mathbb Z}$, and morphisms
-out of $X\otimes_{\mathbb Z}Y$ are exactly bilinear maps out of
-$X\times Y$
-([[thm-the-category-of-abelian-groups-is-monoidal-under-the-tensor-product]]).
+[L3] $\mathbf{Ab}$ is monoidal under $\otimes_{\mathbb Z}$, and morphisms out of $X\otimes_{\mathbb Z}Y$ are exactly bilinear maps out of $X\times Y$ ([[thm-the-category-of-abelian-groups-is-monoidal-under-the-tensor-product]]).
 
-[L4] In a preadditive category, the hom-bifunctor already takes values in
-abelian groups ([[thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]]).
+[L4] In a preadditive category, the hom-bifunctor already takes values in abelian groups ([[thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]]).
 
 ## Proof
 

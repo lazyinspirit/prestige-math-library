@@ -31,11 +31,9 @@ $S$-valued random elements.
 
 **Given:** Countable choice, dependent choice, and a measurable probability space $(S,\Sigma,\nu)$.
 
-[F1] Under countable choice and dependent choice, the canonical countable
-product probability measure exists. ([[thm-countable-product-of-probability-spaces]])
+[F1] Under countable choice and dependent choice, the canonical countable product probability measure exists. ([[thm-countable-product-of-probability-spaces]])
 
-[F2] Its canonical coordinates have their prescribed laws and are independent.
-([[cor-coordinate-random-elements-on-a-countable-product-are-independent]])
+[F2] Its canonical coordinates have their prescribed laws and are independent. ([[cor-coordinate-random-elements-on-a-countable-product-are-independent]])
 
 ## Proof
 

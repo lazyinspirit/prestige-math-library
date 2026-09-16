@@ -34,12 +34,9 @@ $$Z=\sum_i p_i\frac{\partial}{\partial p_i}.$$
 
 **Given:** Canonical coordinates $(q^i,p_i)$ on $T^*Q$.
 
-[F1] $\lambda=\sum_i p_i\,dq^i$ and
-$\omega_{\mathrm{can}}=\sum_i dq^i\wedge dp_i$.
-[[def-tautological-one-form-on-a-cotangent-bundle]].
+[F1] $\lambda=\sum_i p_i\,dq^i$ and $\omega_{\mathrm{can}}=\sum_i dq^i\wedge dp_i$. [[def-tautological-one-form-on-a-cotangent-bundle]].
 
-[F2] The Liouville equation is $\iota_Z\omega=-\lambda$.
-[[def-liouville-vector-field-on-an-exact-symplectic-manifold]].
+[F2] The Liouville equation is $\iota_Z\omega=-\lambda$. [[def-liouville-vector-field-on-an-exact-symplectic-manifold]].
 
 ## Proof
 

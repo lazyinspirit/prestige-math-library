@@ -34,9 +34,7 @@ extensions.
 
 **Given:** Two pairs of equivalent extensions representing the same two classes.
 
-[F1] The Baer sum is defined by pullback over $G$ and pushout along addition on
-$M\oplus M$
-([[def-baer-sum-of-abelian-kernel-extensions]]).
+[F1] The Baer sum is defined by pullback over $G$ and pushout along addition on $M\oplus M$ ([[def-baer-sum-of-abelian-kernel-extensions]]).
 
 ## Proof
 

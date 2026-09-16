@@ -41,14 +41,11 @@ $$K:=\sup_{N\ge0}\|P_N\|<\infty.$$
 
 [A1] The Axiom of Dependent Choice holds ([[def-dependent-choice]]).
 
-[L1] The coefficient space $E$ is Banach and its summation map $S:E\to X$ is a
-bounded linear bijection ([[lem-schauder-coefficient-space-is-banach]]).
+[L1] The coefficient space $E$ is Banach and its summation map $S:E\to X$ is a bounded linear bijection ([[lem-schauder-coefficient-space-is-banach]]).
 
-[L2] Under DC, a bounded linear bijection between Banach spaces has bounded
-inverse ([[thm-bounded-inverse-theorem]]).
+[L2] Under DC, a bounded linear bijection between Banach spaces has bounded inverse ([[thm-bounded-inverse-theorem]]).
 
-[L3] $P_Nx=\sum_{n\le N}e_n^*(x)e_n$ and the basis constant is the supremum of
-their norms ([[def-partial-sum-projections-and-basis-constant]]).
+[L3] $P_Nx=\sum_{n\le N}e_n^*(x)e_n$ and the basis constant is the supremum of their norms ([[def-partial-sum-projections-and-basis-constant]]).
 
 ## Proof
 
@@ -68,6 +65,4 @@ for every $N$, including $N=0$. Hence $K<\infty$. [L1, L3, step 1.1]
 
 $$e_n^*(x)e_n=(P_n-P_{n-1})x.$$
 
-Because $e_n\ne0$, taking norms gives
-$|e_n^*(x)|\le(\|P_n\|+\|P_{n-1}\|)\|x\|/\|e_n\|$.
-Thus every $e_n^*$ is bounded. [L3, step 2.1] ∎
+Because $e_n\ne0$, taking norms gives $|e_n^*(x)|\le(\|P_n\|+\|P_{n-1}\|)\|x\|/\|e_n\|$. Thus every $e_n^*$ is bounded. [L3, step 2.1] ∎

@@ -32,12 +32,9 @@ suffices for Runge approximation on a compact annulus.
 
 ## Facts & Assumptions
 
-**Given:** The compact annulus $K=\{z:1\le|z|\le2\}$ and the function $1/z$ on a
-neighbourhood of $K$.
+**Given:** The compact annulus $K=\{z:1\le|z|\le2\}$ and the function $1/z$ on a neighbourhood of $K$.
 
-[L1] A rational function with all poles outside the unit disc is holomorphic on
-$|z|<1$, so its integral around $|z|=1$ is $0$
-([[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L1] A rational function with all poles outside the unit disc is holomorphic on $|z|<1$, so its integral around $|z|=1$ is $0$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
 
 ## Counterexample
 

@@ -35,11 +35,9 @@ $$ P_{\mathfrak m,M}(n)=\ell_R(M). $$
 
 ## Facts & Assumptions
 
-**Given:** A zero-dimensional Noetherian local ring $(R,\mathfrak m)$ and a
-finite $R$-module $M$.
+**Given:** A zero-dimensional Noetherian local ring $(R,\mathfrak m)$ and a finite $R$-module $M$.
 
-[L1] The length $\ell_R(M)$ is defined for finite-length modules
-([[def-composition-series-and-length-of-a-module]]).
+[L1] The length $\ell_R(M)$ is defined for finite-length modules ([[def-composition-series-and-length-of-a-module]]).
 
 [L2] The Hilbert-Samuel polynomial exists ([[thm-existence-of-hilbert-samuel-polynomial]]).
 

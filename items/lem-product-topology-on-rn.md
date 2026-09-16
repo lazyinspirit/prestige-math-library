@@ -132,20 +132,8 @@ and there is nothing to compare.
 
 ## Remarks
 
-- **This item exists to stop one symbol meaning two things.** Before it,
-  "$\mathbb{R}^2$" could denote the product of two copies of the real line or the
-  metric space of [[lem-metrics-on-rn]], and "open in $\mathbb{R}^2$" would have
-  had two readings. Claim 3 says they are one space, so every statement about
-  open sets, closures, convergence and continuity in $\mathbb{R}^n$ proved on
-  either side transfers verbatim to the other.
+- **This item exists to stop one symbol meaning two things.** Before it, "$\mathbb{R}^2$" could denote the product of two copies of the real line or the metric space of [[lem-metrics-on-rn]], and "open in $\mathbb{R}^2$" would have had two readings. Claim 3 says they are one space, so every statement about open sets, closures, convergence and continuity in $\mathbb{R}^n$ proved on either side transfers verbatim to the other.
 
-- **The $d_\infty$-ball is the natural object here and the $d_2$-ball is not.**
-  The proof works with $d_\infty$ because its balls *are* the basic boxes; for
-  $d_2$ the corresponding computation would need a round ball inscribed in a box
-  and a box inscribed in a round ball, which is the content of the inequalities
-  of claim 2 read geometrically.
+- **The $d_\infty$-ball is the natural object here and the $d_2$-ball is not.** The proof works with $d_\infty$ because its balls *are* the basic boxes; for $d_2$ the corresponding computation would need a round ball inscribed in a box and a box inscribed in a round ball, which is the content of the inequalities of claim 2 read geometrically.
 
-- **Choice is spent only on finitely many radii.** Step 1.6 selects one radius per
-  coordinate, and there are $n$ of them, so [[lem-finite-choice]] suffices and no
-  form of the Axiom of Choice is used anywhere in this item; step 3.2 only uses the
-  radius already built there.
+- **Choice is spent only on finitely many radii.** Step 1.6 selects one radius per coordinate, and there are $n$ of them, so [[lem-finite-choice]] suffices and no form of the Axiom of Choice is used anywhere in this item; step 3.2 only uses the radius already built there.

@@ -91,33 +91,10 @@ $> 1$, however small the excess $p$ and however large the exponent $\alpha$.
 
 ## Remarks
 
-- **The proof turns the problem into the single case $\alpha = 1$.** Writing
-  $\beta = \delta^{\alpha}$ with $\delta := \beta^{1/\alpha}$ makes
-  $w_k = \big(\iota(k)/\delta^{k}\big)^{\alpha}$, so it is enough to know that
-  $n/\delta^{n} \to 0$ for a base $\delta > 1$, and then that a fixed positive
-  rational power of a nonnegative null sequence is null. The exponent never has to
-  be moved inside a limit.
+- **The proof turns the problem into the single case $\alpha = 1$.** Writing $\beta = \delta^{\alpha}$ with $\delta := \beta^{1/\alpha}$ makes $w_k = \big(\iota(k)/\delta^{k}\big)^{\alpha}$, so it is enough to know that $n/\delta^{n} \to 0$ for a base $\delta > 1$, and then that a fixed positive rational power of a nonnegative null sequence is null. The exponent never has to be moved inside a limit.
 
-- **Bernoulli is applied to the square root of the base, and that is essential.**
-  Applied to $\delta$ itself it gives only $\delta^{n} \ge 1 + n(\delta-1)$, which
-  makes $n/\delta^{n}$ bounded but not null. Applied to
-  $\theta = \delta^{1/2}$ and then squared it gives
-  $\delta^{n} > n^{2}(\theta-1)^{2}$, a quadratic lower bound, and one factor of
-  $n$ is then left over to drive the quotient to $0$.
+- **Bernoulli is applied to the square root of the base, and that is essential.** Applied to $\delta$ itself it gives only $\delta^{n} \ge 1 + n(\delta-1)$, which makes $n/\delta^{n}$ bounded but not null. Applied to $\theta = \delta^{1/2}$ and then squared it gives $\delta^{n} > n^{2}(\theta-1)^{2}$, a quadratic lower bound, and one factor of $n$ is then left over to drive the quotient to $0$.
 
-- **Why the route through the root test is not taken.** The chain of
-  [[thm-ratio-root-inequality]] together with
-  [[lem-nth-root-of-n-tends-to-one]] would give
-  $\limsup_k w_k^{1/k} \le \limsup_k \big((k^{1/k})^{\alpha}\big)/\beta$, and
-  closing that requires knowing $t_k \to 1 \Rightarrow t_k^{\alpha} \to 1$, that
-  is the continuity of $x \mapsto x^{\alpha}$ at $x = 1$. That statement is not
-  available at this point in the reading order and is not proved on this page;
-  it is proved later in [[thm-real-power-continuity-and-derivatives]], so the
-  argument above is made directly instead. It needs only Bernoulli and the
-  Archimedean property.
+- **Why the route through the root test is not taken.** The chain of [[thm-ratio-root-inequality]] together with [[lem-nth-root-of-n-tends-to-one]] would give $\limsup_k w_k^{1/k} \le \limsup_k \big((k^{1/k})^{\alpha}\big)/\beta$, and closing that requires knowing $t_k \to 1 \Rightarrow t_k^{\alpha} \to 1$, that is the continuity of $x \mapsto x^{\alpha}$ at $x = 1$. That statement is not available at this point in the reading order and is not proved on this page; it is proved later in [[thm-real-power-continuity-and-derivatives]], so the argument above is made directly instead. It needs only Bernoulli and the Archimedean property.
 
-- **The growth hierarchy this places.** Together with
-  [[lem-factorial-beats-geometric]] it orders the three standard scales: a fixed
-  power of $n$ is beaten by every geometric sequence of ratio $> 1$, and every
-  geometric sequence is beaten by $k!$. Worked instances are collected in
-  [[ex-standard-limits-worked]].
+- **The growth hierarchy this places.** Together with [[lem-factorial-beats-geometric]] it orders the three standard scales: a fixed power of $n$ is beaten by every geometric sequence of ratio $> 1$, and every geometric sequence is beaten by $k!$. Worked instances are collected in [[ex-standard-limits-worked]].

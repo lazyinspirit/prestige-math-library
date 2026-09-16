@@ -30,12 +30,9 @@ $$\mathcal F(\delta_0')=2\pi i\xi, \qquad \mathcal F(x)=-\frac1{2\pi i}\delta_0'
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]] and the negative-sign
-$2\pi$ convention.
+**Given:** [[def-countable-choice|Countable Choice]] and the negative-sign $2\pi$ convention.
 
-[F1] The elementary-transform theorem supplies the derivative and monomial
-identities in $\mathcal S'$ with their distributional signs
-([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
+[F1] The elementary-transform theorem supplies the derivative and monomial identities in $\mathcal S'$ with their distributional signs ([[thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials]]).
 
 ## Verification
 
@@ -45,7 +42,6 @@ identities in $\mathcal S'$ with their distributional signs
 
 $$\langle\mathcal F\delta_0',\varphi\rangle =-\left.\frac d{dx}\widehat\varphi(x)\right|_{x=0} =2\pi i\int_{\mathbb R}\xi\varphi(\xi)\,d\xi.$$
 
-Thus $\mathcal F\delta_0'=2\pi i\xi$.  The two minus signs are respectively
-the derivative of delta and the negative Fourier exponential. [F1]
+Thus $\mathcal F\delta_0'=2\pi i\xi$.  The two minus signs are respectively the derivative of delta and the negative Fourier exponential. [F1]
 
 2.1 The monomial clause of [F1], specialized to the one-dimensional multi-index $1$, directly gives $\mathcal F(x)=-(2\pi i)^{-1}\delta_0'$, which is the second formula.  Together with step 1.1 this records both directions of the delta-derivative/monomial pair.  Countable Choice is used only through [F1]. [F1, step 1.1] ∎

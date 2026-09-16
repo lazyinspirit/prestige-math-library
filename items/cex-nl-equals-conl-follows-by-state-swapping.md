@@ -25,12 +25,9 @@ State swapping complements a nondeterministic machine's language.
 
 ## Facts & Assumptions
 
-**Given:** a fixed input $x$ and a nondeterministic machine which, from its
-start configuration on $x$, has exactly two choices: one moves directly to an
-accepting state and the other directly to a rejecting state.
+**Given:** a fixed input $x$ and a nondeterministic machine which, from its start configuration on $x$, has exactly two choices: one moves directly to an accepting state and the other directly to a rejecting state.
 
-[L1] A nondeterministic machine accepts when at least one branch accepts
-([[def-read-only-input-logspace-machine]]).
+[L1] A nondeterministic machine accepts when at least one branch accepts ([[def-read-only-input-logspace-machine]]).
 
 [L2] The state-swapping inference is the false statement refuted on the A page ([[fs-nl-equals-conl-follows-by-state-swapping]]).
 

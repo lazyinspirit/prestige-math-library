@@ -33,17 +33,13 @@ is compact, then the same series converges uniformly on $K$.
 
 **Given:** A compact set $K\subseteq\{s\in\mathbb C:\operatorname{Re}s>1\}$.
 
-[L1] The complex exponential is $\exp z=\sum_{m\ge0}z^m/m!$
-([[def-complex-exponential]]).
+[L1] The complex exponential is $\exp z=\sum_{m\ge0}z^m/m!$ ([[def-complex-exponential]]).
 
-[L2] The real logarithm is defined on $(0,\infty)$, so $\log n$ is defined for
-every integer $n\ge1$ ([[def-natural-logarithm]]).
+[L2] The real logarithm is defined on $(0,\infty)$, so $\log n$ is defined for every integer $n\ge1$ ([[def-natural-logarithm]]).
 
-[L3] If $|f_n(s)|\le M_n$ on a set and $\sum M_n$ converges, then
-$\sum f_n$ converges uniformly there ([[thm-weierstrass-m-test-for-complex-function-series]]).
+[L3] If $|f_n(s)|\le M_n$ on a set and $\sum M_n$ converges, then $\sum f_n$ converges uniformly there ([[thm-weierstrass-m-test-for-complex-function-series]]).
 
-[L4] For rational $p>1$, the series $\sum_{n\ge1}n^{-p}$ converges
-([[thm-p-series-rational]]).
+[L4] For rational $p>1$, the series $\sum_{n\ge1}n^{-p}$ converges ([[thm-p-series-rational]]).
 
 ## Proof
 

@@ -74,15 +74,6 @@ the sum being over the finite index set $\{0,1,\dots,n\}$
 
 ## Remarks
 
-- **The binomial coefficient is $\binom{n+k}{2k}$ and not $\binom{n}{2k}$.** A
-  Schröder path of half-length $n$ with $k$ up steps has $n+k$ steps, because a
-  level step covers two units of horizontal extent while an up or a down step
-  covers one. So the positions the non-level steps may occupy are $n+k$ in number,
-  and that number moves with $k$. In the Motzkin case every step has width $1$, the
-  number of positions is $n$ for every $k$, and the coefficient is $\binom{n}{2k}$.
+- **The binomial coefficient is $\binom{n+k}{2k}$ and not $\binom{n}{2k}$.** A Schröder path of half-length $n$ with $k$ up steps has $n+k$ steps, because a level step covers two units of horizontal extent while an up or a down step covers one. So the positions the non-level steps may occupy are $n+k$ in number, and that number moves with $k$. In the Motzkin case every step has width $1$, the number of positions is $n$ for every $k$, and the coefficient is $\binom{n}{2k}$.
 
-- **The same deletion, twice.** The argument is the level-step deletion of
-  [[cor-motzkin-numbers-as-a-binomial-sum-of-catalan-numbers]]; only the count of
-  available positions changes. Splitting by the number of up steps is what makes
-  that count available, and it is why the sum here is indexed by $k$ from $0$ to
-  $n$ rather than by the condition $2k\le n$.
+- **The same deletion, twice.** The argument is the level-step deletion of [[cor-motzkin-numbers-as-a-binomial-sum-of-catalan-numbers]]; only the count of available positions changes. Splitting by the number of up steps is what makes that count available, and it is why the sum here is indexed by $k$ from $0$ to $n$ rather than by the condition $2k\le n$.

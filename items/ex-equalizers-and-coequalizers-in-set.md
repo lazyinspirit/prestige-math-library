@@ -34,17 +34,13 @@ $f(x)\sim g(x)$ for all $x\in X$.
 
 **Given:** Parallel functions $f,g:X\rightrightarrows Y$.
 
-[F1] Equalizers and coequalizers have their factorization universal properties
-([[def-equalizers-and-coequalizers]]).
+[F1] Equalizers and coequalizers have their factorization universal properties ([[def-equalizers-and-coequalizers]]).
 
-[F2] Morphisms in $\mathbf{Set}$ are functions
-([[prop-sets-and-functions-form-category-set]]).
+[F2] Morphisms in $\mathbf{Set}$ are functions ([[prop-sets-and-functions-form-category-set]]).
 
-[F3] An equivalence relation is reflexive, symmetric, and transitive
-([[def-equivalence-relation]]).
+[F3] An equivalence relation is reflexive, symmetric, and transitive ([[def-equivalence-relation]]).
 
-[L1] A function factors uniquely through a quotient exactly when it is
-constant on equivalence classes ([[thm-universal-property-of-the-quotient]]).
+[L1] A function factors uniquely through a quotient exactly when it is constant on equivalence classes ([[thm-universal-property-of-the-quotient]]).
 
 ## Verification
 

@@ -86,18 +86,8 @@ $v \in V$. Write $Fv := \{\, \lambda v : \lambda \in F \,\}$. Then:
 
 ## Remarks
 
-- **The set $Fv$ is what a "line through the origin" is, over any field.** Claim 3
-  says that for $v \ne 0_V$ the scalars are recovered from the multiples: distinct
-  scalars give distinct vectors. That is the first place where claim 5 of
-  [[lem-vector-space-elementary-consequences]] does real work, and it is what
-  makes a single nonzero vector behave like a coordinate axis.
+- **The set $Fv$ is what a "line through the origin" is, over any field.** Claim 3 says that for $v \ne 0_V$ the scalars are recovered from the multiples: distinct scalars give distinct vectors. That is the first place where claim 5 of [[lem-vector-space-elementary-consequences]] does real work, and it is what makes a single nonzero vector behave like a coordinate axis.
 
-- **The word "line" is informal here.** Dimension is not available on this page,
-  so nothing above asserts that $\operatorname{span}\{v\}$ is one-dimensional; what
-  is asserted is exactly the three displayed claims. The companion page uses the
-  word in the same informal way, for the same sets.
+- **The word "line" is informal here.** Dimension is not available on this page, so nothing above asserts that $\operatorname{span}\{v\}$ is one-dimensional; what is asserted is exactly the three displayed claims. The companion page uses the word in the same informal way, for the same sets.
 
-- **The zero vector is not an exception to claim 1, only to claim 3.** At
-  $v = 0_V$ the set $Fv$ collapses to $\{0_V\}$ and the map $\lambda \mapsto
-  \lambda v$ is constant, so no scalar is recoverable. This is why claim 3 carries
-  the hypothesis $v \ne 0_V$ and claim 1 does not.
+- **The zero vector is not an exception to claim 1, only to claim 3.** At $v = 0_V$ the set $Fv$ collapses to $\{0_V\}$ and the map $\lambda \mapsto \lambda v$ is constant, so no scalar is recoverable. This is why claim 3 carries the hypothesis $v \ne 0_V$ and claim 1 does not.

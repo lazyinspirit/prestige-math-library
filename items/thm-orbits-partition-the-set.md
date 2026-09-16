@@ -33,14 +33,11 @@ $G\cdot x$, and the distinct orbits partition $X$.
 
 **Given:** A left action of a group $G$ on a set $X$.
 
-[L1] The action laws are $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$
-([[def-group-action]]).
+[L1] The action laws are $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$ ([[def-group-action]]).
 
-[L2] The orbit at $x$ is $G\cdot x=\{g\cdot x:g\in G\}$
-([[def-orbit-and-stabilizer]]).
+[L2] The orbit at $x$ is $G\cdot x=\{g\cdot x:g\in G\}$ ([[def-orbit-and-stabilizer]]).
 
-[L3] Equivalence classes of an equivalence relation partition the underlying set
-([[def-equivalence-relation]], [[lem-equivalence-classes-partition]]).
+[L3] Equivalence classes of an equivalence relation partition the underlying set ([[def-equivalence-relation]], [[lem-equivalence-classes-partition]]).
 
 ## Proof
 

@@ -33,11 +33,9 @@ characteristic zero is completely reducible.
 
 **Given:** A characteristic-zero field and the module displayed below.
 
-[L1] The reductive characterization allows a nonzero center
-([[thm-equivalent-characterizations-of-reductive-lie-algebras]]).
+[L1] The reductive characterization allows a nonzero center ([[thm-equivalent-characterizations-of-reductive-lie-algebras]]).
 
-[L2] Weyl complete reducibility applies to a semisimple acting algebra
-([[thm-weyls-complete-reducibility-theorem]]).
+[L2] Weyl complete reducibility applies to a semisimple acting algebra ([[thm-weyls-complete-reducibility-theorem]]).
 
 ## Counterexample
 

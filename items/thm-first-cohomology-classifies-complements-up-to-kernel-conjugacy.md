@@ -33,15 +33,11 @@ the semidirect product $A\rtimes G$.
 
 **Given:** An action of $G$ on an abelian group $A$.
 
-[L1] First cohomology is the quotient of crossed homomorphisms by principal
-crossed homomorphisms ([[def-first-cohomology-via-crossed-homomorphisms]]).
+[L1] First cohomology is the quotient of crossed homomorphisms by principal crossed homomorphisms ([[def-first-cohomology-via-crossed-homomorphisms]]).
 
-[L2] A graph subgroup is a complement exactly when its defining map is a
-crossed homomorphism ([[lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism]]).
+[L2] A graph subgroup is a complement exactly when its defining map is a crossed homomorphism ([[lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism]]).
 
-[L3] Conjugating a graph subgroup by a kernel element changes its defining
-crossed homomorphism by a principal one
-([[lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism]]).
+[L3] Conjugating a graph subgroup by a kernel element changes its defining crossed homomorphism by a principal one ([[lem-kernel-conjugation-by-an-element-of-the-coefficient-group-corresponds-to-a-principal-crossed-homomorphism]]).
 
 ## Proof
 

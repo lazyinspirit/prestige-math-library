@@ -37,9 +37,7 @@ $n^2$, each with multiplicity $1$.
 
 **Given:** The zero sequence $a_n=n^2$.
 
-[F1] If $\sum|a_n|^{-1}$ converges, then the genus-zero canonical product
-$\prod E_0(z/a_n)$ converges normally and has exactly the prescribed zeros
-([[thm-canonical-product-convergence-from-exponent-sum]]).
+[F1] If $\sum|a_n|^{-1}$ converges, then the genus-zero canonical product $\prod E_0(z/a_n)$ converges normally and has exactly the prescribed zeros ([[thm-canonical-product-convergence-from-exponent-sum]]).
 
 ## Verification
 

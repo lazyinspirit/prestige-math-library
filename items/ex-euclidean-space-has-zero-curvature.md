@@ -37,16 +37,13 @@ $R^{g_{\mathrm E}}=0$.
 
 ## Facts & Assumptions
 
-**Given:** An integer $n\ge0$ and the global Cartesian coordinate chart on
-$\mathbb R^n$.
+**Given:** An integer $n\ge0$ and the global Cartesian coordinate chart on $\mathbb R^n$.
 
 [F1] A covariant two-tensor is Riemannian precisely when its coordinate matrix is smooth, symmetric, and positive definite. [[prop-coordinate-criterion-for-a-riemannian-metric]].
 
-[F2] The Levi–Civita symbols of a Riemannian metric are
-$\Gamma^k{}_{ij}=\frac12g^{k\ell}(\partial_i g_{j\ell}+\partial_jg_{i\ell}-\partial_\ell g_{ij})$. [[prop-christoffel-formula-for-the-levi-civita-connection]].
+[F2] The Levi–Civita symbols of a Riemannian metric are $\Gamma^k{}_{ij}=\frac12g^{k\ell}(\partial_i g_{j\ell}+\partial_jg_{i\ell}-\partial_\ell g_{ij})$. [[prop-christoffel-formula-for-the-levi-civita-connection]].
 
-[F3] In coordinates,
-$R^\ell{}_{kij}=\partial_i\Gamma^\ell{}_{jk}-\partial_j\Gamma^\ell{}_{ik}+\Gamma^m{}_{jk}\Gamma^\ell{}_{im}-\Gamma^m{}_{ik}\Gamma^\ell{}_{jm}$. [[prop-coordinate-formula-for-the-curvature-tensor]].
+[F3] In coordinates, $R^\ell{}_{kij}=\partial_i\Gamma^\ell{}_{jk}-\partial_j\Gamma^\ell{}_{ik}+\Gamma^m{}_{jk}\Gamma^\ell{}_{im}-\Gamma^m{}_{ik}\Gamma^\ell{}_{jm}$. [[prop-coordinate-formula-for-the-curvature-tensor]].
 
 ## Verification
 

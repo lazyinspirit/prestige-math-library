@@ -34,12 +34,9 @@ $N\to M_\lambda$ with $N\subseteq U$ factors through some earlier stage
 $M_\alpha$.
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a locally small Grothendieck category with
-generator $U$, and the transfinite sequence defined from the one-step generator
-extension functor.
+**Given:** The Axiom of Choice, a locally small Grothendieck category with generator $U$, and the transfinite sequence defined from the one-step generator extension functor.
 
-[L1] The successor-stage maps $M_\alpha\to M_{\alpha+1}$ are monic
-([[lem-the-one-step-generator-map-is-a-functorial-monomorphism]]).
+[L1] The successor-stage maps $M_\alpha\to M_{\alpha+1}$ are monic ([[lem-the-one-step-generator-map-is-a-functorial-monomorphism]]).
 
 [L2] In a Grothendieck category, AB5 governs exactness under filtered colimits ([[def-the-axioms-ab5-and-ab5-star]]).
 

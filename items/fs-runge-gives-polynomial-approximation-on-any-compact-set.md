@@ -37,9 +37,7 @@ approximation for every function holomorphic on a neighbourhood of that set.
 
 **Given:** The unit circle and the function $1/z$ on it.
 
-[L1] The function $1/z$ on the unit circle is not uniformly approximable there
-by polynomials
-([[ex-one-over-z-not-polynomially-approximable-on-unit-circle]]).
+[L1] The function $1/z$ on the unit circle is not uniformly approximable there by polynomials ([[ex-one-over-z-not-polynomially-approximable-on-unit-circle]]).
 
 ## Refutation
 

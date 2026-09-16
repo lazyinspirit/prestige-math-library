@@ -33,15 +33,11 @@ the simple factors and has an ideal complement.
 
 ## Facts & Assumptions
 
-**Given:** A decomposition
-$\mathfrak g=\mathfrak g_1\oplus\cdots\oplus\mathfrak g_m$ into simple
-ideals and an ideal $\mathfrak a\lhd\mathfrak g$.
+**Given:** A decomposition $\mathfrak g=\mathfrak g_1\oplus\cdots\oplus\mathfrak g_m$ into simple ideals and an ideal $\mathfrak a\lhd\mathfrak g$.
 
-[L1] Such a finite decomposition exists
-([[thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals]]).
+[L1] Such a finite decomposition exists ([[thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals]]).
 
-[L2] Quotients by ideals carry the published quotient bracket
-([[def-quotient-lie-algebra]]).
+[L2] Quotients by ideals carry the published quotient bracket ([[def-quotient-lie-algebra]]).
 
 ## Proof
 

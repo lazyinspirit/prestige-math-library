@@ -31,14 +31,11 @@ $$C_\bullet\xrightarrow{0}D_\bullet\to D_\bullet\oplus C[1]_\bullet\to C[1]_\bul
 
 **Given:** A null-homotopic chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] Null-homotopic maps are chain-homotopic to the zero map
-([[def-chain-homotopy]]).
+[L1] Null-homotopic maps are chain-homotopic to the zero map ([[def-chain-homotopy]]).
 
-[L2] Homotopic maps have isomorphic mapping cones
-([[lem-homotopic-maps-have-chain-isomorphic-mapping-cones]]).
+[L2] Homotopic maps have isomorphic mapping cones ([[lem-homotopic-maps-have-chain-isomorphic-mapping-cones]]).
 
-[L3] The cone of the zero map is $D\oplus C[1]$ as a complex
-([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
+[L3] The cone of the zero map is $D\oplus C[1]$ as a complex ([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
 
 ## Proof
 

@@ -45,20 +45,9 @@ kernel and cokernel comparison isomorphisms.
 
 **Given:** An exact functor $F:\mathcal A \to \mathcal B$.
 
-[L1] Exactness is equivalent to preserving kernels and cokernels, and one-sided
-exactness preserves monomorphisms and epimorphisms
-([[thm-an-additive-functor-is-exact-exactly-when-it-preserves-kernels-and-cokernels]],
-[[thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms]]).
+[L1] Exactness is equivalent to preserving kernels and cokernels, and one-sided exactness preserves monomorphisms and epimorphisms ([[thm-an-additive-functor-is-exact-exactly-when-it-preserves-kernels-and-cokernels]], [[thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms]]).
 
-[L2] The connecting morphism is characterized uniquely by a pullback-pushout
-square, and the named diagram lemmas have already been proved in any abelian
-category
-([[thm-the-connecting-morphism-exists-and-is-unique]],
-[[thm-snake-lemma-in-an-abelian-category]],
-[[thm-four-lemma-in-an-abelian-category]],
-[[thm-sharp-five-lemma-in-an-abelian-category]],
-[[thm-nine-lemma-in-an-abelian-category]],
-[[thm-the-diagram-lemmas-hold-in-the-opposite-category]]).
+[L2] The connecting morphism is characterized uniquely by a pullback-pushout square, and the named diagram lemmas have already been proved in any abelian category ([[thm-the-connecting-morphism-exists-and-is-unique]], [[thm-snake-lemma-in-an-abelian-category]], [[thm-four-lemma-in-an-abelian-category]], [[thm-sharp-five-lemma-in-an-abelian-category]], [[thm-nine-lemma-in-an-abelian-category]], [[thm-the-diagram-lemmas-hold-in-the-opposite-category]]).
 
 ## Proof
 

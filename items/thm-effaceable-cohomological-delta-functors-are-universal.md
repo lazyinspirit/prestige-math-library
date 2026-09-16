@@ -33,25 +33,13 @@ category. If $T$ is effaceable in positive degrees by injectives, then $T$ is
 universal.
 ## Facts & Assumptions
 
-**Given:** A cohomological delta functor $S=(S^n,\partial_S)$ and a natural
-transformation $u^0:T^0\Rightarrow S^0$.
+**Given:** A cohomological delta functor $S=(S^n,\partial_S)$ and a natural transformation $u^0:T^0\Rightarrow S^0$.
 
-[L1] Universality for a cohomological delta functor means unique extension of
-$u^0$ to a morphism of cohomological delta functors
-([[def-universal-delta-functor]],
-[[def-morphism-of-cohomological-delta-functors]]).
+[L1] Universality for a cohomological delta functor means unique extension of $u^0$ to a morphism of cohomological delta functors ([[def-universal-delta-functor]], [[def-morphism-of-cohomological-delta-functors]]).
 
-[L2] Effaceability supplies admissible injective effacements, and the
-dimension-shift lemma identifies the source of the next map with a cokernel
-([[def-effaceable-cohomological-delta-functor-in-positive-degrees]],
-[[lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]]).
+[L2] Effaceability supplies admissible injective effacements, and the dimension-shift lemma identifies the source of the next map with a cokernel ([[def-effaceable-cohomological-delta-functor-in-positive-degrees]], [[lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]]).
 
-[L3] Item 19 defines the next-degree component from one chosen effacement,
-item 20 makes it choice-free, and item 21 preserves compatibility with the
-connecting maps
-([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]],
-[[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]],
-[[lem-the-effacement-extension-commutes-with-connecting-morphisms]]).
+[L3] Item 19 defines the next-degree component from one chosen effacement, item 20 makes it choice-free, and item 21 preserves compatibility with the connecting maps ([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]], [[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]], [[lem-the-effacement-extension-commutes-with-connecting-morphisms]]).
 
 ## Proof
 

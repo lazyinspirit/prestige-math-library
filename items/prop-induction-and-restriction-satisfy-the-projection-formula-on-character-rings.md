@@ -34,24 +34,17 @@ in the character ring $R(G)$.
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a subgroup $H\le G$, a complex character $\chi$
-of $H$, and a complex character $\psi$ of $G$.
+**Given:** A finite group $G$, a subgroup $H\le G$, a complex character $\chi$ of $H$, and a complex character $\psi$ of $G$.
 
-[F1] Frobenius' formula gives
-$\operatorname{Ind}_H^G\chi(g)=\frac1{|H|}\sum_{x^{-1}gx\in H}\chi(x^{-1}gx)$
-([[thm-frobenius-formula-for-induced-characters]]).
+[F1] Frobenius' formula gives $\operatorname{Ind}_H^G\chi(g)=\frac1{|H|}\sum_{x^{-1}gx\in H}\chi(x^{-1}gx)$ ([[thm-frobenius-formula-for-induced-characters]]).
 
-[F2] Characters multiply on tensor products, and addition is pointwise
-([[thm-characters-of-direct-sums-tensor-products-and-duals]]).
+[F2] Characters multiply on tensor products, and addition is pointwise ([[thm-characters-of-direct-sums-tensor-products-and-duals]]).
 
 [F3] A complex character is a class function ([[prop-basic-value-properties-of-a-complex-character]]).
 
-[F4] The character ring is the $\mathbb Z$-span of ordinary characters, with
-addition and multiplication extending $\mathbb Z$-bilinearly
-([[def-virtual-character-and-character-ring-of-a-finite-group]]).
+[F4] The character ring is the $\mathbb Z$-span of ordinary characters, with addition and multiplication extending $\mathbb Z$-bilinearly ([[def-virtual-character-and-character-ring-of-a-finite-group]]).
 
-[F5] Frobenius reciprocity identifies induction and restriction as adjoint
-operations on characters ([[cor-frobenius-reciprocity-for-complex-characters]]).
+[F5] Frobenius reciprocity identifies induction and restriction as adjoint operations on characters ([[cor-frobenius-reciprocity-for-complex-characters]]).
 
 ## Proof
 

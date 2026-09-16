@@ -29,8 +29,7 @@ The coprimality hypothesis $(a,q)=1$ in Dirichlet's theorem cannot be dropped.
 
 ## Facts & Assumptions
 
-**Given:** Dirichlet's theorem applies only to reduced residue classes
-([[thm-dirichlet-primes-arithmetic-progressions]]).
+**Given:** Dirichlet's theorem applies only to reduced residue classes ([[thm-dirichlet-primes-arithmetic-progressions]]).
 
 ## Counterexample
 

@@ -31,12 +31,9 @@ $r$ on some neighbourhood of that point.
 
 **Given:** The smooth map $f:\mathbb R\to\mathbb R$, $f(x)=x^2$.
 
-[L1] The derivative of $x^2$ is $2x$
-([[lem-derivative-of-a-power]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]).
+[L1] The derivative of $x^2$ is $2x$ ([[lem-derivative-of-a-power]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]).
 
-[L2] Local constancy of rank requires a neighbourhood conclusion stronger than a
-single-point rank computation
-([[prop-a-smooth-map-of-locally-maximal-rank-has-locally-constant-rank]]).
+[L2] Local constancy of rank requires a neighbourhood conclusion stronger than a single-point rank computation ([[prop-a-smooth-map-of-locally-maximal-rank-has-locally-constant-rank]]).
 
 ## Refutation
 **Proof technique:** direct.

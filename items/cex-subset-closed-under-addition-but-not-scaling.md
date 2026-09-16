@@ -92,20 +92,8 @@ subspace.
 
 ## Remarks
 
-- **Exactly one of the three conditions fails.** $Q$ satisfies (W1) and (W2) and
-  fails (W3), and it fails it at a single scalar, $-1$. The reverse failure, a
-  subset closed under scalar multiplication but not under addition, is recorded in
-  [[cex-subset-closed-under-scaling-but-not-addition]], so neither closure
-  condition implies the other.
+- **Exactly one of the three conditions fails.** $Q$ satisfies (W1) and (W2) and fails (W3), and it fails it at a single scalar, $-1$. The reverse failure, a subset closed under scalar multiplication but not under addition, is recorded in [[cex-subset-closed-under-scaling-but-not-addition]], so neither closure condition implies the other.
 
-- **What the order is doing here.** The example needs a field in which some
-  element is not the negative of a nonnegative one, so it needs an order; over an
-  arbitrary field there is no "first quadrant" to speak of. That is why this
-  witness is stated over $\mathbb{R}$ while its companion is stated over an
-  arbitrary field.
+- **What the order is doing here.** The example needs a field in which some element is not the negative of a nonnegative one, so it needs an order; over an arbitrary field there is no "first quadrant" to speak of. That is why this witness is stated over $\mathbb{R}$ while its companion is stated over an arbitrary field.
 
-- **$Q$ is closed under multiplication by nonnegative scalars.** If $0 \le \lambda$
-  and $x \in Q$ then $\lambda x \in Q$, by the closure of $P$ under multiplication
-  together with the zero cases. So the failure is confined to the negative
-  scalars; a subset with this weaker closure property is a cone, not a linear
-  subspace, and the difference is exactly what the example isolates.
+- **$Q$ is closed under multiplication by nonnegative scalars.** If $0 \le \lambda$ and $x \in Q$ then $\lambda x \in Q$, by the closure of $P$ under multiplication together with the zero cases. So the failure is confined to the negative scalars; a subset with this weaker closure property is a cone, not a linear subspace, and the difference is exactly what the example isolates.

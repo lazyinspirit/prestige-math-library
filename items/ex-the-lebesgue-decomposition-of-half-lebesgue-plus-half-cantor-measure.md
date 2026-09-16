@@ -35,9 +35,7 @@ $$\nu_a=\tfrac12\,\lambda\!\restriction_{[0,1]},\qquad \nu_s=\tfrac12\,\mu_c.$$
 
 [A1] The restriction $\lambda\!\restriction_{[0,1]}$ is absolutely continuous with respect to $\lambda$ because intersection with $[0,1]$ preserves Lebesgue-null sets.
 
-[L3] Under a common finite exhaustion, the Lebesgue decomposition relative to a
-fixed positive measure is unique
-([[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).
+[L3] Under a common finite exhaustion, the Lebesgue decomposition relative to a fixed positive measure is unique ([[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).
 
 ## Verification
 

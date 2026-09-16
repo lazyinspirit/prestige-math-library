@@ -99,20 +99,8 @@ natural range $n \ge 1$ where the expression means something.
 
 ## Remarks
 
-- **Where the $\sqrt{n}$ comes from.** AM-GM is applied to a list whose product is
-  $n$ but whose entries are as close to $1$ as possible: two copies of $n^{1/2}$
-  and $n-2$ copies of $1$. The arithmetic mean is then
-  $1 + (2n^{1/2} - 2)/n$, which tends to $1$ at the rate $2/n^{1/2}$. Splitting
-  $n$ as $n^{1/2} \cdot n^{1/2}$ rather than as $n \cdot 1$ is the whole trick:
-  the list $n, 1, \dots, 1$ gives only $n^{1/n} \le 2 - 1/n$, which does not
-  converge to $1$.
+- **Where the $\sqrt{n}$ comes from.** AM-GM is applied to a list whose product is $n$ but whose entries are as close to $1$ as possible: two copies of $n^{1/2}$ and $n-2$ copies of $1$. The arithmetic mean is then $1 + (2n^{1/2} - 2)/n$, which tends to $1$ at the rate $2/n^{1/2}$. Splitting $n$ as $n^{1/2} \cdot n^{1/2}$ rather than as $n \cdot 1$ is the whole trick: the list $n, 1, \dots, 1$ gives only $n^{1/n} \le 2 - 1/n$, which does not converge to $1$.
 
-- **The lower bound is not decoration.** Without $n^{1/n} \ge 1$ the squeeze has
-  nothing below it, and the upper bound alone would leave open a limit smaller
-  than $1$. It comes from monotonicity of rational powers in the base
-  ([[lem-rational-power-monotone]]) and holds with equality only at $n = 1$.
+- **The lower bound is not decoration.** Without $n^{1/n} \ge 1$ the squeeze has nothing below it, and the upper bound alone would leave open a limit smaller than $1$. It comes from monotonicity of rational powers in the base ([[lem-rational-power-monotone]]) and holds with equality only at $n = 1$.
 
-- **No logarithm and no exponential is used.** The usual quick proof writes
-  $n^{1/n} = e^{(\log n)/n}$ and appeals to $(\log n)/n \to 0$; neither function
-  exists in this library yet, and the AM-GM route needs nothing beyond roots and
-  finite sums.
+- **No logarithm and no exponential is used.** The usual quick proof writes $n^{1/n} = e^{(\log n)/n}$ and appeals to $(\log n)/n \to 0$; neither function exists in this library yet, and the AM-GM route needs nothing beyond roots and finite sums.

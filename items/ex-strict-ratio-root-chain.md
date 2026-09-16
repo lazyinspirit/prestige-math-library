@@ -104,20 +104,8 @@ at once.
 
 ## Remarks
 
-- **Why interleaving two different geometric sequences does it.** Each root is
-  determined by the base used at a single index, so the root sequence takes only
-  the two values $1/2$ and $1/3$, and its limit superior and limit inferior are
-  those two numbers. Each ratio, by contrast, compares two *different* bases at
-  consecutive indices, so it contains a factor $(2/3)^{k}$ or $(3/2)^{k}$ and runs
-  to $0$ on one subsequence and to $+\infty$ on the other. Widening the gap
-  between the two bases widens the outer two values without moving the inner two.
+- **Why interleaving two different geometric sequences does it.** Each root is determined by the base used at a single index, so the root sequence takes only the two values $1/2$ and $1/3$, and its limit superior and limit inferior are those two numbers. Each ratio, by contrast, compares two *different* bases at consecutive indices, so it contains a factor $(2/3)^{k}$ or $(3/2)^{k}$ and runs to $0$ on one subsequence and to $+\infty$ on the other. Widening the gap between the two bases widens the outer two values without moving the inner two.
 
-- **Compare [[ex-ratio-fails-root-succeeds]].** There the roots converge, so the
-  middle inequality is an equality and only the outer two are strict. Here all
-  three are strict, which is the most that
-  [[thm-ratio-root-inequality]] permits.
+- **Compare [[ex-ratio-fails-root-succeeds]].** There the roots converge, so the middle inequality is an equality and only the outer two are strict. Here all three are strict, which is the most that [[thm-ratio-root-inequality]] permits.
 
-- **Both outer values are attained by the ratios in the extreme sense.** The
-  ratio sequence has $\liminf = 0$ and $\limsup = +\infty$, so the ratio data
-  place no restriction whatever on the roots beyond the chain, and the chain is
-  therefore the sharpest general statement relating the two.
+- **Both outer values are attained by the ratios in the extreme sense.** The ratio sequence has $\liminf = 0$ and $\limsup = +\infty$, so the ratio data place no restriction whatever on the roots beyond the chain, and the chain is therefore the sharpest general statement relating the two.

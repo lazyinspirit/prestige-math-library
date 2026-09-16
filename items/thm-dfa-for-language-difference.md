@@ -27,17 +27,13 @@ $$ L_1\setminus L_2. $$
 
 ## Facts & Assumptions
 
-**Given:** Two DFA's $D_1=(Q_1,\Sigma,\delta_1,q_1,F_1)$ and
-$D_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$ over the same alphabet.
+**Given:** Two DFA's $D_1=(Q_1,\Sigma,\delta_1,q_1,F_1)$ and $D_2=(Q_2,\Sigma,\delta_2,q_2,F_2)$ over the same alphabet.
 
-[L1] For languages over a fixed alphabet, the difference is
-$L\setminus K$, by [[def-language-boolean-operations]].
+[L1] For languages over a fixed alphabet, the difference is $L\setminus K$, by [[def-language-boolean-operations]].
 
-[L2] The product construction tracks the two component runs in parallel, by
-[[thm-product-dfa-for-union-and-intersection]].
+[L2] The product construction tracks the two component runs in parallel, by [[thm-product-dfa-for-union-and-intersection]].
 
-[L3] A word is accepted exactly when its final state lies in the accepting set,
-by [[def-dfa-acceptance-and-recognized-language]].
+[L3] A word is accepted exactly when its final state lies in the accepting set, by [[def-dfa-acceptance-and-recognized-language]].
 
 ## Proof
 

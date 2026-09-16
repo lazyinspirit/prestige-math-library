@@ -36,25 +36,17 @@ supplied exponential-map results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, finite-dimensional real Lie groups $G,H$ with
-$G$ connected, and Lie-group homomorphisms $F_1,F_2:G\to H$ with equal
-differentials at the identity $e\in G$.
+**Given:** $\mathrm{AC}_\omega$, finite-dimensional real Lie groups $G,H$ with $G$ connected, and Lie-group homomorphisms $F_1,F_2:G\to H$ with equal differentials at the identity $e\in G$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] A Lie-group homomorphism intertwines exponential maps:
-$F(\exp_GX)=\exp_H(dF_eX)$. 
-[[prop-exponential-map-is-natural-for-lie-group-homomorphisms]].
+[F2] A Lie-group homomorphism intertwines exponential maps: $F(\exp_GX)=\exp_H(dF_eX)$. [[prop-exponential-map-is-natural-for-lie-group-homomorphisms]].
 
-[F3] There are open neighborhoods $V\subseteq T_eG$ of $0$ and $U\subseteq G$
-of $e$ such that $\exp_G|_V:V\to U$ is a diffeomorphism.
-[[cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]].
+[F3] There are open neighborhoods $V\subseteq T_eG$ of $0$ and $U\subseteq G$ of $e$ such that $\exp_G|_V:V\to U$ is a diffeomorphism. [[cor-the-exponential-map-is-a-local-diffeomorphism-at-zero]].
 
-[F4] A Lie-group homomorphism is smooth, preserves products, identities, and
-inverses. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
+[F4] A Lie-group homomorphism is smooth, preserves products, identities, and inverses. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
 
-[F5] A connected topological space has no partition into two nonempty clopen
-subsets. [[def-connected-space]].
+[F5] A connected topological space has no partition into two nonempty clopen subsets. [[def-connected-space]].
 
 ## Proof
 

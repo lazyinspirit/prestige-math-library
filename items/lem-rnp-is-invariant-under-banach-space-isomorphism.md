@@ -36,15 +36,11 @@ inverse. Then $X$ has RNP if and only if $Y$ has RNP.
 
 ## Facts & Assumptions
 
-[L1] A Banach-space topological isomorphism and its inverse are bounded linear
-maps ([[def-topological-isomorphism-of-normed-spaces]]).
+[L1] A Banach-space topological isomorphism and its inverse are bounded linear maps ([[def-topological-isomorphism-of-normed-spaces]]).
 
-[L2] Over every finite control measure, RNP supplies Bochner densities for
-absolutely continuous bounded-variation vector measures
-([[def-radon-nikodym-property]]).
+[L2] Over every finite control measure, RNP supplies Bochner densities for absolutely continuous bounded-variation vector measures ([[def-radon-nikodym-property]]).
 
-[L3] Bounded linear maps preserve Bochner integrability and commute with its
-integral ([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
+[L3] Bounded linear maps preserve Bochner integrability and commute with its integral ([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
 
 ## Proof
 

@@ -34,13 +34,9 @@ $m$ to $-m$.
 
 **Given:** oriented rank-two real vector bundles over $S^2$.
 
-[F1] Oriented rank-$n$ bundles over $S^k$ are classified by
-$[S^{k-1},\operatorname{SO}(n)]$, and reversing the chosen fiber orientation
-conjugates the clutching map by a reflection
-([[thm-oriented-clutching-classifies-oriented-bundles-over-spheres]]).
+[F1] Oriented rank-$n$ bundles over $S^k$ are classified by $[S^{k-1},\operatorname{SO}(n)]$, and reversing the chosen fiber orientation conjugates the clutching map by a reflection ([[thm-oriented-clutching-classifies-oriented-bundles-over-spheres]]).
 
-[F2] The degree map identifies the fundamental group of the circle with
-$\mathbb Z$ ([[thm-fundamental-group-of-the-circle]]).
+[F2] The degree map identifies the fundamental group of the circle with $\mathbb Z$ ([[thm-fundamental-group-of-the-circle]]).
 
 ## Verification
 

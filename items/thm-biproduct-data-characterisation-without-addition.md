@@ -36,14 +36,11 @@ $$p_j\iota_i=\begin{cases}1_{A_i},&i=j,\\0_{A_i,A_j},&i\ne j.\end{cases}$$
 
 ## Facts & Assumptions
 
-**Given:** A finite family $(A_i)_{i\in I}$ with maps $\iota_i:A_i\to B$ and
-$p_i:B\to A_i$ in a category with zero morphisms.
+**Given:** A finite family $(A_i)_{i\in I}$ with maps $\iota_i:A_i\to B$ and $p_i:B\to A_i$ in a category with zero morphisms.
 
-[L1] A biproduct is a coproduct and a product whose canonical comparison is an
-isomorphism ([[def-biproduct]]).
+[L1] A biproduct is a coproduct and a product whose canonical comparison is an isomorphism ([[def-biproduct]]).
 
-[L2] Products and coproducts have their universal properties
-([[def-products-and-coproducts]]).
+[L2] Products and coproducts have their universal properties ([[def-products-and-coproducts]]).
 
 ## Proof
 

@@ -33,8 +33,7 @@ Then $\mathfrak h_3(k)$ is nilpotent of class two.
 
 **Given:** The displayed three-dimensional Lie algebra over a field $k$.
 
-[L1] The nilpotency class is the least $c$ with
-$\gamma_{c+1}=0$ ([[def-nilpotency-class-of-a-lie-algebra]]).
+[L1] The nilpotency class is the least $c$ with $\gamma_{c+1}=0$ ([[def-nilpotency-class-of-a-lie-algebra]]).
 
 ## Verification
 

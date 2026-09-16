@@ -51,11 +51,6 @@ $(\lceil y^{-1}\rceil,y^{a+2}|G|)$-blockade.
 3.1 Let $Q$ be the set of indices $i$ such that every later block is $x$-sparse to $B_i$, and let $R$ be the set of indices $i$ such that every later block is complete to $B_i$. By construction every index lies in $Q\cup R$, so one of $Q$ or $R$ has cardinality at least $n/2\geq y^{-1}$. [step 1.1, step 2.1, algebra]
 
 4.1 Since one of $|Q|,|R|$ is an integer at least $y^{-1}$, step 3.1 makes that cardinality at least $\lceil y^{-1}\rceil$. [step 3.1, given]
-If it is $|Q|$, choose
-$\lceil y^{-1}\rceil$ indices from $Q$ in their inherited order; the
-corresponding blocks form an $x$-sparse blockade. If it is $|R|$, the same
-choice from $R$ gives a complete blockade. Every selected block has size at
-least $y^{a+2}|G|$ by step 1.1. Thus one of the two required blockades exists.
-[step 1.1, step 3.1, given, choose]
+If it is $|Q|$, choose $\lceil y^{-1}\rceil$ indices from $Q$ in their inherited order; the corresponding blocks form an $x$-sparse blockade. If it is $|R|$, the same choice from $R$ gives a complete blockade. Every selected block has size at least $y^{a+2}|G|$ by step 1.1. Thus one of the two required blockades exists. [step 1.1, step 3.1, given, choose]
 
 5.1 Therefore $G$ contains an $x$-sparse or complete $(\lceil y^{-1}\rceil,y^{a+2}|G|)$-blockade. [step 4.1] ∎

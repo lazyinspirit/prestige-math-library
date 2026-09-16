@@ -44,18 +44,11 @@ least one of the following holds:
 
 ## Facts & Assumptions
 
-**Given:** A parameter $y\in(0,\tfrac12)$ and a $y$-sparse
-$\overline{P_5}$-free graph $G$.
+**Given:** A parameter $y\in(0,\tfrac12)$ and a $y$-sparse $\overline{P_5}$-free graph $G$.
 
-[F1] Lemma 7.1 of Nguyen, Scott, and Seymour's cited paper states the displayed
-trichotomy, with the same constant $d\ge40$ and the same exponents and blockade
-parameters.
+[F1] Lemma 7.1 of Nguyen, Scott, and Seymour's cited paper states the displayed trichotomy, with the same constant $d\ge40$ and the same exponents and blockade parameters.
 
-[F2] In the proof of that lemma, Claim 7.1.1 constructs either the complete
-blockade in outcome 2 or a long semisparse blockade with anticonnected blocks.
-Claim 7.1.2 shows that a vertex mixed on many of those blocks yields outcome 1;
-otherwise averaging over the blocks gives a block anticomplete to a set of
-size at least $(1-3y)|V(G)|$, which is outcome 3.
+[F2] In the proof of that lemma, Claim 7.1.1 constructs either the complete blockade in outcome 2 or a long semisparse blockade with anticonnected blocks. Claim 7.1.2 shows that a vertex mixed on many of those blocks yields outcome 1; otherwise averaging over the blocks gives a block anticomplete to a set of size at least $(1-3y)|V(G)|$, which is outcome 3.
 
 ## Proof
 

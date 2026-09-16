@@ -29,11 +29,9 @@ $\mathbb F_p^2$.
 
 **Given:** The pro-$p$ group $G=\mathbb Z_p\times\mathbb Z_p$.
 
-[L1] Topological generation in a finitely generated pro-$p$ group is detected
-on the Frattini quotient ([[thm-topological-burnside-basis-theorem]]).
+[L1] Topological generation in a finitely generated pro-$p$ group is detected on the Frattini quotient ([[thm-topological-burnside-basis-theorem]]).
 
-[F1] The external direct product is coordinatewise
-([[def-external-direct-product-of-groups]]).
+[F1] The external direct product is coordinatewise ([[def-external-direct-product-of-groups]]).
 
 ## Verification
 

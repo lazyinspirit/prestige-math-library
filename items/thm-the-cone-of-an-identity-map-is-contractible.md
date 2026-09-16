@@ -30,15 +30,11 @@ is contractible.
 
 **Given:** A chain complex $C_\bullet$.
 
-[L1] A complex is contractible exactly when its identity map is null-homotopic
-([[def-contractible-complex]]).
+[L1] A complex is contractible exactly when its identity map is null-homotopic ([[def-contractible-complex]]).
 
-[L2] The cone differential for $1_C$ is
-$$d_n(y,x)=(d_n^C(y)+x,-d_{n-1}^C(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L2] The cone differential for $1_C$ is $$d_n(y,x)=(d_n^C(y)+x,-d_{n-1}^C(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
-[L3] A chain homotopy is a degree-one family whose commutator with the
-differential is the difference of two chain maps ([[def-chain-homotopy]]).
+[L3] A chain homotopy is a degree-one family whose commutator with the differential is the difference of two chain maps ([[def-chain-homotopy]]).
 
 ## Proof
 

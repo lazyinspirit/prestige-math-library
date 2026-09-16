@@ -32,9 +32,7 @@ equivalence relation.
 
 **Given:** A proper geodesic hyperbolic space $X$ with basepoint $o$.
 
-[L1] Hyperbolicity is equivalent to a Gromov-product inequality up to
-constants
-([[thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants]]).
+[L1] Hyperbolicity is equivalent to a Gromov-product inequality up to constants ([[thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants]]).
 
 [A1] Reflexivity and symmetry are immediate from the definition of asymptoticity.
 

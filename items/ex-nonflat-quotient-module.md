@@ -31,14 +31,11 @@ $I=(\varepsilon)$ is not flat.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the ring $R=k[\varepsilon]/(\varepsilon^2)$, and the
-ideal $I=(\varepsilon)$.
+**Given:** A field $k$, the ring $R=k[\varepsilon]/(\varepsilon^2)$, and the ideal $I=(\varepsilon)$.
 
-[L1] If $R/I$ is flat, then $I=I^2$
-([[cor-flat-quotients-and-idempotent-ideals]]).
+[L1] If $R/I$ is flat, then $I=I^2$ ([[cor-flat-quotients-and-idempotent-ideals]]).
 
-[L2] Flatness is detected by the ideal-injection criterion
-([[thm-flatness-criteria-by-injections-and-ideals]]).
+[L2] Flatness is detected by the ideal-injection criterion ([[thm-flatness-criteria-by-injections-and-ideals]]).
 
 ## Verification
 

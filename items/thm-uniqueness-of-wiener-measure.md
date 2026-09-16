@@ -57,6 +57,4 @@ That probability is Wiener measure.
 
 ## Source notes
 
-Durrett constructs Wiener measure from Brownian finite-dimensional laws. The
-local proof supplies the rational-cylinder pi-system and the complete
-pi-lambda uniqueness argument.
+Durrett constructs Wiener measure from Brownian finite-dimensional laws. The local proof supplies the rational-cylinder pi-system and the complete pi-lambda uniqueness argument.

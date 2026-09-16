@@ -30,15 +30,11 @@ same alphabet with $L(N)=L(D)$.
 
 **Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$.
 
-[L1] By [[def-deterministic-finite-automaton]], for each $(q,a)\in Q\times\Sigma$
-the DFA has exactly one next state $\delta(q,a)$.
+[L1] By [[def-deterministic-finite-automaton]], for each $(q,a)\in Q\times\Sigma$ the DFA has exactly one next state $\delta(q,a)$.
 
-[L2] By [[def-dfa-acceptance-and-recognized-language]], a word $w$ is accepted
-by $D$ exactly when the DFA run from $q_0$ on $w$ ends in a state of $F$.
+[L2] By [[def-dfa-acceptance-and-recognized-language]], a word $w$ is accepted by $D$ exactly when the DFA run from $q_0$ on $w$ ends in a state of $F$.
 
-[L3] By [[def-nfa-acceptance-and-recognized-language]], a word $w$ is accepted
-by an NFA exactly when the reachable state set after reading $w$ meets its
-accepting set.
+[L3] By [[def-nfa-acceptance-and-recognized-language]], a word $w$ is accepted by an NFA exactly when the reachable state set after reading $w$ meets its accepting set.
 
 ## Proof
 

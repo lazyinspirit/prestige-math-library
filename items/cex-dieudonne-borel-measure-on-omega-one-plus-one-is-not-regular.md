@@ -28,8 +28,7 @@ Hausdorff space need not be regular.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, $X=[0,\omega_1]$, and the resulting
-Dieudonne Borel probability measure $\bar m$.
+**Given:** The Axiom of Countable Choice, $X=[0,\omega_1]$, and the resulting Dieudonne Borel probability measure $\bar m$.
 
 ## Counterexample
 

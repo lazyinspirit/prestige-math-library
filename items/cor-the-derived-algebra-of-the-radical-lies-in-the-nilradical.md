@@ -35,10 +35,7 @@ $$[\operatorname{rad}(\mathfrak g),\operatorname{rad}(\mathfrak g)]\subseteq\ope
 
 **Given:** A finite-dimensional characteristic-zero Lie algebra $\mathfrak g$.
 
-[L1] The commutator of $\mathfrak g$ with its radical lies in its nilradical:
-$[\mathfrak g,\operatorname{rad}(\mathfrak g)]\subseteq
-\operatorname{nilrad}(\mathfrak g)$
-([[thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical]]).
+[L1] The commutator of $\mathfrak g$ with its radical lies in its nilradical: $[\mathfrak g,\operatorname{rad}(\mathfrak g)]\subseteq \operatorname{nilrad}(\mathfrak g)$ ([[thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical]]).
 
 ## Proof
 

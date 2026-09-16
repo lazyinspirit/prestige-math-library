@@ -33,11 +33,9 @@ produces a genuine common-height matrix.
 
 ## Facts & Assumptions
 
-**Given:** $T_1=T_2=2^{<\omega}$, the roots $t_1=0$ and $t_2=101$, and a
-finite $k\ge0$.
+**Given:** $T_1=T_2=2^{<\omega}$, the roots $t_1=0$ and $t_2=101$, and a finite $k\ge0$.
 
-[F1] Common-height cone extension and restriction preserve the adjusted
-density parameters. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
+[F1] Common-height cone extension and restriction preserve the adjusted density parameters. [[def-halpern-lauchli-finitistic-trees-density-and-matrices]]
 
 ## Verification
 

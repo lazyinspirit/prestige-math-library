@@ -32,9 +32,7 @@ intermediate probability is possible.
 
 **Given:** An independent sequence of real random variables $(X_n)_{n\in\mathbb N}$.
 
-[L1] Almost-sure convergence of an independent series is a tail event of
-probability $0$ or $1$.
-([[cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event]])
+[L1] Almost-sure convergence of an independent series is a tail event of probability $0$ or $1$. ([[cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event]])
 
 ## Verification
 

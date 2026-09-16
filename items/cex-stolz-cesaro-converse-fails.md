@@ -87,19 +87,8 @@ which takes the value $-2$ at even $k$ and $2$ at odd $k$ and does not converge.
 
 ## Remarks
 
-- **The implication is genuinely one-way, and the reason is averaging.** The
-  conclusion of [[thm-stolz-cesaro]] is obtained by summing the difference
-  quotients against the weights $b_{k+1}-b_k$ and dividing by $b_n$, which is a
-  weighted average. An average can converge while what is averaged oscillates,
-  and here it does: the quotients $a_k/b_k$ are damped by the growing
-  denominator, and no information about $d_k$ survives.
+- **The implication is genuinely one-way, and the reason is averaging.** The conclusion of [[thm-stolz-cesaro]] is obtained by summing the difference quotients against the weights $b_{k+1}-b_k$ and dividing by $b_n$, which is a weighted average. An average can converge while what is averaged oscillates, and here it does: the quotients $a_k/b_k$ are damped by the growing denominator, and no information about $d_k$ survives.
 
-- **The same phenomenon, in the summability language.** With $b_k = k$ the
-  weights are equal, so this is the Cesaro situation of
-  [[fs-cesaro-converse]] and [[ex-cesaro-means-of-alternating]] in another
-  costume; the divergent object is the same alternating sequence.
+- **The same phenomenon, in the summability language.** With $b_k = k$ the weights are equal, so this is the Cesaro situation of [[fs-cesaro-converse]] and [[ex-cesaro-means-of-alternating]] in another costume; the divergent object is the same alternating sequence.
 
-- **The index range is not a technicality.** $b_0 = 0$, so $a_0/b_0$ does not
-  denote anything, and the quotient sequence exists only from $k = 1$. That is
-  why [[thm-stolz-cesaro]] is stated for the tail, and why the convergence
-  asserted above is asserted over $k \ge 1$.
+- **The index range is not a technicality.** $b_0 = 0$, so $a_0/b_0$ does not denote anything, and the quotient sequence exists only from $k = 1$. That is why [[thm-stolz-cesaro]] is stated for the tail, and why the convergence asserted above is asserted over $k \ge 1$.

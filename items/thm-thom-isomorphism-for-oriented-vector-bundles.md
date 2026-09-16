@@ -35,24 +35,15 @@ The finite supplied-trivializing-cover theorem is a choice-free special case.
 
 ## Facts & Assumptions
 
-**Given:** AC and a numerable rank-$n$ vector bundle over one of the stated
-bases; in the untwisted clause its $R$-orientation is supplied.
+**Given:** AC and a numerable rank-$n$ vector bundle over one of the stated bases; in the untwisted clause its $R$-orientation is supplied.
 
 [F1] [[thm-numerable-vector-bundles-admit-bundle-metrics]] supplies the metric.
 
-[F2] [[lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence]]
-gives the relative skeletal spectral sequence with
-$E_2^{p,q}=H^p(B;\mathcal H^q(D^n,S^{n-1};R))$, finite convergence, and the
-normalized cup-product edge in the oriented case.
+[F2] [[lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence]] gives the relative skeletal spectral sequence with $E_2^{p,q}=H^p(B;\mathcal H^q(D^n,S^{n-1};R))$, finite convergence, and the normalized cup-product edge in the oriented case.
 
-[F3] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] makes the
-fiber cohomology vanish off degree $n$, and
-[[def-r-oriented-vector-bundle-and-orientation-local-system]] identifies the
-degree-$n$ system as $\mathcal O_R(\xi)$ before any orientation is supplied.
-[[def-homology-and-cohomology-with-local-coefficients]] types its cohomology.
+[F3] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] makes the fiber cohomology vanish off degree $n$, and [[def-r-oriented-vector-bundle-and-orientation-local-system]] identifies the degree-$n$ system as $\mathcal O_R(\xi)$ before any orientation is supplied. [[def-homology-and-cohomology-with-local-coefficients]] types its cohomology.
 
-[F4] [[lem-thom-isomorphism-extends-over-a-finite-numerable-trivializing-cover]]
-gives the independent finite-cover special case.
+[F4] [[lem-thom-isomorphism-extends-over-a-finite-numerable-trivializing-cover]] gives the independent finite-cover special case.
 
 [A1] [[def-axiom-of-choice]] is assumed for [F1]–[F3] as recorded in [F2].
 

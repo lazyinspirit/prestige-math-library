@@ -44,18 +44,11 @@ hypothesis; an arbitrary smooth function need not.
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $a$ with the derivative-by-derivative polynomial
-bounds in the statement.
+**Given:** A smooth function $a$ with the derivative-by-derivative polynomial bounds in the statement.
 
-[F1] Schwartz seminorms and topology are those of
-[[def-schwartz-space-and-its-seminorms]] and
-[[def-schwartz-topology-and-convergence]], with multi-indices interpreted by
-[[def-ck-and-multi-index-notation-in-several-variables]].
+[F1] Schwartz seminorms and topology are those of [[def-schwartz-space-and-its-seminorms]] and [[def-schwartz-topology-and-convergence]], with multi-indices interpreted by [[def-ck-and-multi-index-notation-in-several-variables]].
 
-[F2] Tempered distributions are continuous functionals on $\mathcal S$, and
-their weak and strong topologies test singletons and bounded subsets
-([[def-tempered-distribution]],
-[[def-weak-and-strong-topologies-on-tempered-distributions]]).
+[F2] Tempered distributions are continuous functionals on $\mathcal S$, and their weak and strong topologies test singletons and bounded subsets ([[def-tempered-distribution]], [[def-weak-and-strong-topologies-on-tempered-distributions]]).
 
 ## Proof
 
@@ -65,12 +58,7 @@ their weak and strong topologies test singletons and bounded subsets
 
 $$x^\alpha\partial^\beta(a\varphi) =\sum_{\gamma\leq\beta}{\beta\choose\gamma} x^\alpha(\partial^\gamma a)\partial^{\beta-\gamma}\varphi.$$
 
-For each of the finitely many $\gamma$, expansion of
-$(1+|x_1|+\cdots+|x_n|)^{m_\gamma}$ bounds that summand by a finite linear
-combination of seminorms
-$p_{\alpha+\delta,\,\beta-\gamma}(\varphi)$ with
-$|\delta|\leq m_\gamma$.  Hence each output seminorm is bounded by finitely
-many input seminorms. [F1, algebra]
+For each of the finitely many $\gamma$, expansion of $(1+|x_1|+\cdots+|x_n|)^{m_\gamma}$ bounds that summand by a finite linear combination of seminorms $p_{\alpha+\delta,\,\beta-\gamma}(\varphi)$ with $|\delta|\leq m_\gamma$.  Hence each output seminorm is bounded by finitely many input seminorms. [F1, algebra]
 
 2.1 Step 1.1 proves simultaneously that $a\varphi\in\mathcal S$ and that $M_a$ is continuous.  A polynomial has only finitely many nonzero derivatives and each grows polynomially.  If $a\in\mathcal S$, each derivative is bounded, so the hypothesis holds with exponent zero. [F1, step 1.1]
 

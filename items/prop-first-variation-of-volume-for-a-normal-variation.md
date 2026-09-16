@@ -58,53 +58,27 @@ variation, not merely the normal ones.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the stated smooth family of immersions, normal
-compactly supported variation field $V$, and eligible compact domain $K$.
+**Given:** Countable choice, the stated smooth family of immersions, normal compactly supported variation field $V$, and eligible compact domain $K$.
 
-[F1] The immersion normal bundle and second fundamental form are well defined,
-and $m\mathbf H_f=\operatorname{tr}_g\mathrm{II}_f$.
-[[def-mean-curvature-vector]].
+[F1] The immersion normal bundle and second fundamental form are well defined, and $m\mathbf H_f=\operatorname{tr}_g\mathrm{II}_f$. [[def-mean-curvature-vector]].
 
-[F2] Each pullback $g_t=F_t^*\overline g$ is a smooth positive-definite metric
-because $F_t$ is an immersion.
-[[prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions]].
+[F2] Each pullback $g_t=F_t^*\overline g$ is a smooth positive-definite metric because $F_t$ is an immersion. [[prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions]].
 
-[F3] In coordinates the Riemannian density is
-$\sqrt{\det G(t)}\lvert dx^1\cdots dx^m\rvert$.
-[[def-riemannian-volume-density]].
+[F3] In coordinates the Riemannian density is $\sqrt{\det G(t)}\lvert dx^1\cdots dx^m\rvert$. [[def-riemannian-volume-density]].
 
-[F4] On the invertible locus, Jacobi's formula is
-$D\det(G)[\dot G]=\det(G)\operatorname{tr}(G^{-1}\dot G)$.
-[[thm-determinant-differential-and-jacobis-formula]].
+[F4] On the invertible locus, Jacobi's formula is $D\det(G)[\dot G]=\det(G)\operatorname{tr}(G^{-1}\dot G)$. [[thm-determinant-differential-and-jacobis-formula]].
 
-[F5] The ambient Levi–Civita connection is metric compatible and torsion free;
-in coordinate frames the latter is symmetry of the Christoffel symbols.
-[[def-levi-civita-connection]],
-[[prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames]].
+[F5] The ambient Levi–Civita connection is metric compatible and torsion free; in coordinate frames the latter is symmetry of the Christoffel symbols. [[def-levi-civita-connection]], [[prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames]].
 
-[F6] Every immersion is locally an embedding, and on each such neighbourhood
-the Weingarten identity gives
-$\overline g(\overline\nabla_XV,df(Y))
-=-\overline g(V,\mathrm{II}_f(X,Y))$ for normal $V$.
-[[cor-every-immersion-is-locally-an-embedding]],
-[[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
+[F6] Every immersion is locally an embedding, and on each such neighbourhood the Weingarten identity gives $\overline g(\overline\nabla_XV,df(Y)) =-\overline g(V,\mathrm{II}_f(X,Y))$ for normal $V$. [[cor-every-immersion-is-locally-an-embedding]], [[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
 
-[F7] A parameter derivative dominated by one integrable function may pass
-through an integral.
-[[thm-differentiation-under-the-integral-sign]].
+[F7] A parameter derivative dominated by one integrable function may pass through an integral. [[thm-differentiation-under-the-integral-sign]].
 
-[F8] Under countable choice, compactly supported smooth Riemannian densities
-have intrinsic, orientation-free integrals, including on manifolds with
-boundary.
-[[def-riemannian-volume-of-a-compactly-supported-smooth-density]].
+[F8] Under countable choice, compactly supported smooth Riemannian densities have intrinsic, orientation-free integrals, including on manifolds with boundary. [[def-riemannian-volume-of-a-compactly-supported-smooth-density]].
 
-[F9] On a boundaryless smooth manifold, a compactly supported smooth tangent
-field is complete, and its time maps are diffeomorphisms with inverse time
-maps. [[thm-compactly-supported-vector-fields-are-complete]],
-[[prop-time-t-flow-maps-are-diffeomorphisms-between-open-domains]].
+[F9] On a boundaryless smooth manifold, a compactly supported smooth tangent field is complete, and its time maps are diffeomorphisms with inverse time maps. [[thm-compactly-supported-vector-fields-are-complete]], [[prop-time-t-flow-maps-are-diffeomorphisms-between-open-domains]].
 
-[F10] Intrinsic density integration is invariant under diffeomorphisms.
-[[thm-density-integration-is-defined-without-an-orientation]].
+[F10] Intrinsic density integration is invariant under diffeomorphisms. [[thm-density-integration-is-defined-without-an-orientation]].
 
 ## Proof
 

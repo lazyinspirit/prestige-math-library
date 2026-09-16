@@ -35,23 +35,17 @@ $\operatorname{colim}_{\mathcal J}:[\mathcal J,\mathcal C]\to\mathcal C$.
 
 ## Facts & Assumptions
 
-**Given:** A small $\mathcal J$ and, for every $D$, a chosen limit
-$(L_D,\lambda^D)$.
+**Given:** A small $\mathcal J$ and, for every $D$, a chosen limit $(L_D,\lambda^D)$.
 
-[F1] Objects and arrows of a functor category are functors and natural
-transformations ([[def-functor-category]], [[def-natural-transformation]]).
+[F1] Objects and arrows of a functor category are functors and natural transformations ([[def-functor-category]], [[def-natural-transformation]]).
 
-[F2] A chosen limit supplies a unique factor from every cone
-([[def-limit-and-colimit-of-a-diagram]]).
+[F2] A chosen limit supplies a unique factor from every cone ([[def-limit-and-colimit-of-a-diagram]]).
 
-[F3] Smallness is cardinality of the indexing category
-([[def-cardinality-of-a-small-category-and-kappa-small-diagram]]).
+[F3] Smallness is cardinality of the indexing category ([[def-cardinality-of-a-small-category-and-kappa-small-diagram]]).
 
-[L1] Limit legs are jointly monic
-([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
+[L1] Limit legs are jointly monic ([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
 
-[L2] The colimit construction is the formal dual
-([[prop-limit-colimit-duality]]).
+[L2] The colimit construction is the formal dual ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

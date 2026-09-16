@@ -49,24 +49,13 @@ Then the top row is short exact if and only if the bottom row is short exact.
 
 **Given:** The $3 \times 3$ diagram in the statement.
 
-[L1] If the bottom two rows are short exact, then the top row is exact at its
-first two nodes ([[lem-half-nine-lemma]]).
+[L1] If the bottom two rows are short exact, then the top row is exact at its first two nodes ([[lem-half-nine-lemma]]).
 
-[L2] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L2] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L3] Short exactness, monicity, epicity, and exactness are detected by the
-standard member rules
-([[thm-degenerate-exactness-criteria]],
-[[thm-chasing-rule-monicity-by-member-cancellation]],
-[[thm-chasing-rule-epimorphy-detected-by-members]],
-[[thm-chasing-rule-exactness-detected-by-members]]).
+[L3] Short exactness, monicity, epicity, and exactness are detected by the standard member rules ([[thm-degenerate-exactness-criteria]], [[thm-chasing-rule-monicity-by-member-cancellation]], [[thm-chasing-rule-epimorphy-detected-by-members]], [[thm-chasing-rule-exactness-detected-by-members]]).
 
-[L4] The common-refinement construction for member equivalence puts finitely
-many witness equalities on one epic domain, where hom-set subtraction is
-defined
-([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]],
-[[def-abelian-category]]).
+[L4] The common-refinement construction for member equivalence puts finitely many witness equalities on one epic domain, where hom-set subtraction is defined ([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]], [[def-abelian-category]]).
 
 ## Proof
 

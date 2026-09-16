@@ -38,8 +38,7 @@ has exactly one solution in the unit disc.
 
 **Given:** The function $f(z)=e^z-3z$ and the unit circle $|z|=1$.
 
-[L1] Rouché's theorem preserves the zero count under the strict boundary
-inequality ([[thm-rouche-theorem]]).
+[L1] Rouché's theorem preserves the zero count under the strict boundary inequality ([[thm-rouche-theorem]]).
 
 ## Verification
 

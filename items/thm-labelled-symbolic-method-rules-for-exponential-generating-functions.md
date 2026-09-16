@@ -50,9 +50,7 @@ $$\operatorname{EGF}(\mathcal{A}^{\square}\star\mathcal{B})=\int_{0}^{x}A'(t)B(t
 
 ## Facts & Assumptions
 
-**Given:** The labelled constructions of
-[[def-labelled-classes-and-basic-labelled-constructions]] and the formal
-identities in [[thm-formal-exponential-logarithm-identities]].
+**Given:** The labelled constructions of [[def-labelled-classes-and-basic-labelled-constructions]] and the formal identities in [[thm-formal-exponential-logarithm-identities]].
 
 ## Proof
 

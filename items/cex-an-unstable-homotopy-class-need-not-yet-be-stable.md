@@ -50,11 +50,7 @@ in $\pi_1(\Sigma^\infty X)$ is zero.
 
 **Given:** $X=S^1\vee S^1$ with standard generators $a,b$.
 
-1.1 By [F1], the loop $[a,b]$ corresponds to the word
-$aba^{-1}b^{-1}$ in the free group on $a,b$. No two adjacent letters in this
-four-letter word are formal inverses, so it is already reduced and is not the
-empty word. The reduced-word uniqueness in [F2] therefore proves that
-$[a,b]\neq1$. Thus it is a nonzero initial-stage element of [F1, F2]
+1.1 By [F1], the loop $[a,b]$ corresponds to the word $aba^{-1}b^{-1}$ in the free group on $a,b$. No two adjacent letters in this four-letter word are formal inverses, so it is already reduced and is not the empty word. The reduced-word uniqueness in [F2] therefore proves that $[a,b]\neq1$. Thus it is a nonzero initial-stage element of [F1, F2]
 
 $$ \pi_1(X)=\pi_{0+1}((\Sigma^\infty X)_0). $$
 

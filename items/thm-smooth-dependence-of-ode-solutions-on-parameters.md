@@ -51,7 +51,6 @@ $(y,\lambda)$.
 
 $$\begin{pmatrix}x\\ \lambda\end{pmatrix}' =\begin{pmatrix}F(t,x,\lambda)\\ 0\end{pmatrix}.$$
 
-Along every solution the parameter component remains constant, so solving this augmented system is equivalent to solving the original parameter-dependent ODE with fixed parameter $\lambda$.
-[given, construct]
+Along every solution the parameter component remains constant, so solving this augmented system is equivalent to solving the original parameter-dependent ODE with fixed parameter $\lambda$. [given, construct]
 
 2.1 The augmented right-hand side is smooth in the initial data $(y,\lambda)$, so [L1] applies on a common compact local time interval and makes the augmented solution map smooth in $(y,\lambda)$. Projecting to the $x$-component preserves that smoothness, which gives the claimed smooth dependence of solutions on initial state and parameter. [L1, step 1.1] ∎

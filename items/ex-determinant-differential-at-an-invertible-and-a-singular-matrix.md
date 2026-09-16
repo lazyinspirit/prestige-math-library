@@ -43,12 +43,9 @@ formula cannot even be written because $S^{-1}$ does not exist.
 
 ## Facts & Assumptions
 
-**Given:** The direction matrix $H$, the identity $I_2$, and the singular
-matrix $S=\operatorname{diag}(1,0)$.
+**Given:** The direction matrix $H$, the identity $I_2$, and the singular matrix $S=\operatorname{diag}(1,0)$.
 
-[L1] The determinant differential is $\operatorname{tr}(\operatorname{adj}(A)H)$
-for every $A$, while Jacobi's inverse form needs $A$ invertible
-([[thm-determinant-differential-and-jacobis-formula]]).
+[L1] The determinant differential is $\operatorname{tr}(\operatorname{adj}(A)H)$ for every $A$, while Jacobi's inverse form needs $A$ invertible ([[thm-determinant-differential-and-jacobis-formula]]).
 
 ## Verification
 **Proof technique:** direct.

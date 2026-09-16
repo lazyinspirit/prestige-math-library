@@ -45,12 +45,9 @@ equivalent:
 
 **Given:** A flat ring map $f:R\to S$.
 
-[L1] Faithful flatness for the $R$-module $S$ is equivalent to detecting every
-nonzero module and every residue field fibre
-([[thm-faithful-flatness-detected-by-nonzero-modules-and-fibres]]).
+[L1] Faithful flatness for the $R$-module $S$ is equivalent to detecting every nonzero module and every residue field fibre ([[thm-faithful-flatness-detected-by-nonzero-modules-and-fibres]]).
 
-[L2] A flat ring map is precisely a flat $R$-module structure on its target
-([[def-flat-and-faithfully-flat-modules-and-ring-maps]]).
+[L2] A flat ring map is precisely a flat $R$-module structure on its target ([[def-flat-and-faithfully-flat-modules-and-ring-maps]]).
 
 ## Proof
 

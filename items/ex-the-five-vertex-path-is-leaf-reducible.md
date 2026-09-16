@@ -37,17 +37,11 @@ The singleton family $\{P_5\}$ is leaf-reducible.
 
 **Given:** The path graph $P_5$.
 
-[L1] A family is leaf-reducible if deleting one leaf from one member leaves a
-modified family with the Erdős-Hajnal property
-([[def-leaf-reducible-finite-family]]).
+[L1] A family is leaf-reducible if deleting one leaf from one member leaves a modified family with the Erdős-Hajnal property ([[def-leaf-reducible-finite-family]]).
 
-[L2] Every $P_4$-free graph has a clique or stable set of size at least the
-square root of its order
-([[cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order]]).
+[L2] Every $P_4$-free graph has a clique or stable set of size at least the square root of its order ([[cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order]]).
 
-[L3] A graph has the Erdős-Hajnal property when its forbidden induced-subgraph
-class has some positive exponent
-([[def-erdos-hajnal-property-and-constant]]).
+[L3] A graph has the Erdős-Hajnal property when its forbidden induced-subgraph class has some positive exponent ([[def-erdos-hajnal-property-and-constant]]).
 
 ## Verification
 

@@ -32,8 +32,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** For any $\lambda\in F$,
-$$A=J_3(\lambda)\oplus J_1(\lambda),\qquad B=J_2(\lambda)\oplus J_2(\lambda).$$
+**Given:** For any $\lambda\in F$, $$A=J_3(\lambda)\oplus J_1(\lambda),\qquad B=J_2(\lambda)\oplus J_2(\lambda).$$
 
 [L1] The geometric multiplicity is the number of Jordan blocks for the eigenvalue ([[cor-jordan-block-data-controls-eigenspaces-and-polynomials]]).
 

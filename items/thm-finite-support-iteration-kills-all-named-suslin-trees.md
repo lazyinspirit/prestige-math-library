@@ -40,66 +40,39 @@ universe.
 
 ## Facts & Assumptions
 
-**Given:** $M$, the iteration $P_{\omega_2}$, and a supplied $M$-generic $G$
-as in the Statement. Assume AC and GCH in $M$.
+**Given:** $M$, the iteration $P_{\omega_2}$, and a supplied $M$-generic $G$ as in the Statement. Assume AC and GCH in $M$.
 
-[F1] The bookkeeping definition gives an $\omega_2$-length finite-support
-iteration whose iterands are forced nonempty and ccc; every earlier canonical
-nice code for a ccc order of size at most $\aleph_1$ is revisited later, using
-an isomorphic top-adjoined presentation on every positive branch.
-[[def-omega-two-ma-bookkeeping-iteration]]
+[F1] The bookkeeping definition gives an $\omega_2$-length finite-support iteration whose iterands are forced nonempty and ccc; every earlier canonical nice code for a ccc order of size at most $\aleph_1$ is revisited later, using an isomorphic top-adjoined presentation on every positive branch. [[def-omega-two-ma-bookkeeping-iteration]]
 
-[F2] Every stage of a finite-support iteration of forced ccc orders is ccc.
-[[thm-finite-support-iterations-preserve-ccc]]
+[F2] Every stage of a finite-support iteration of forced ccc orders is ccc. [[thm-finite-support-iterations-preserve-ccc]]
 
-[F3] In a finite-support ccc iteration of uncountable-cofinality length,
-structures coded by fewer than that cofinality many ground ordinals occur at a
-bounded stage. [[lem-bounded-stage-capture-in-finite-support-iterations]]
+[F3] In a finite-support ccc iteration of uncountable-cofinality length, structures coded by fewer than that cofinality many ground ordinals occur at a bounded stage. [[lem-bounded-stage-capture-in-finite-support-iterations]]
 
-[F4] Ccc forcing preserves all ground-model cardinals and cofinalities.
-[[thm-chain-condition-preserves-cofinalities-and-cardinals]]
+[F4] Ccc forcing preserves all ground-model cardinals and cofinalities. [[thm-chain-condition-preserves-cofinalities-and-cardinals]]
 
-[F5] A Suslin tree has height $\omega_1$, countable levels and no uncountable
-antichain; a natural-valued map separating comparable nodes specializes it.
-[[def-aronszajn-suslin-and-special-tree]]
+[F5] A Suslin tree has height $\omega_1$, countable levels and no uncountable antichain; a natural-valued map separating comparable nodes specializes it. [[def-aronszajn-suslin-and-special-tree]]
 
 [F6] Under AC, $\aleph_2$ is regular. [[thm-regularity-of-the-alephs]]
 
-[F7] Infinite-cardinal absorption identifies $\omega_1\times\omega_1$ and
-$\omega_1\times\omega$ with $\omega_1$ and bounds the countable union of its
-finite powers by $\aleph_1$. [[cor-cardinal-absorption]]
+[F7] Infinite-cardinal absorption identifies $\omega_1\times\omega_1$ and $\omega_1\times\omega$ with $\omega_1$ and bounds the countable union of its finite powers by $\aleph_1$. [[cor-cardinal-absorption]]
 
 [F8] Opposing injections give a bijection. [[thm-schroder-bernstein]]
 
-[F9] Restricting an iteration generic gives the corresponding earlier generic,
-and the successor quotient is the evaluated coordinate iterand.
-[[lem-iteration-restrictions-and-complete-embeddings]]
+[F9] Restricting an iteration generic gives the corresponding earlier generic, and the successor quotient is the evaluated coordinate iterand. [[lem-iteration-restrictions-and-complete-embeddings]]
 
-[F10] Isomorphic presentations and a top adjunction are forcing-equivalent when
-the original order embeds densely; corresponding generics and valuations give
-the same generic extension. [[thm-forcing-equivalence-and-boolean-completion]]
+[F10] Isomorphic presentations and a top adjunction are forcing-equivalent when the original order embeds densely; corresponding generics and valuations give the same generic extension. [[thm-forcing-equivalence-and-boolean-completion]]
 
-[F11] Finite-specialization forcing for a Suslin tree is ccc and forces its
-canonical generic union to be a total specialization.
-[[thm-specializing-forcing-kills-a-suslin-tree]]
+[F11] Finite-specialization forcing for a Suslin tree is ccc and forces its canonical generic union to be a total specialization. [[thm-specializing-forcing-kills-a-suslin-tree]]
 
-[F12] Under countable choice, a countable union of countable sets is countable.
-[[thm-countable-union-of-countable]]
+[F12] Under countable choice, a countable union of countable sets is countable. [[thm-countable-union-of-countable]]
 
-[F13] Nonexistence of a Suslin tree is equivalent in ZFC to the Suslin
-Hypothesis in the strong line convention.
-[[thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras]]
+[F13] Nonexistence of a Suslin tree is equivalent in ZFC to the Suslin Hypothesis in the strong line convention. [[thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras]]
 
-[F14] Generic extensions of a transitive ZFC ground satisfy ZFC.
-[[thm-generic-extensions-satisfy-zf-and-zfc]]
+[F14] Generic extensions of a transitive ZFC ground satisfy ZFC. [[thm-generic-extensions-satisfy-zf-and-zfc]]
 
-[F15] The forcing theorem supplies truth and the conditional semantic
-characterization, whose reverse implication requires externally available
-generics through conditions. [[thm-forcing-theorem]]
+[F15] The forcing theorem supplies truth and the conditional semantic characterization, whose reverse implication requires externally available generics through conditions. [[thm-forcing-theorem]]
 
-[A1] AC chooses simultaneous level enumerations, the transported presentation,
-and the bookkeeping data; it is preserved to all intermediate and final
-extensions. [[def-axiom-of-choice]]
+[A1] AC chooses simultaneous level enumerations, the transported presentation, and the bookkeeping data; it is preserved to all intermediate and final extensions. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -121,10 +94,5 @@ extensions. [[def-axiom-of-choice]]
 
 ## Remarks
 
-- What is captured is a canonical code for an isomorphic presentation on
-  $\omega_1$, not necessarily the original raw name for the tree. This is the
-  distinction required by the bookkeeping definition.
-- No claim that Suslinity is upward absolute is used. Under the contradiction
-  hypothesis, an earlier uncountable antichain cannot become countable in the
-  ccc final extension because it carries an injection from the preserved
-  $\omega_1$; a cofinal branch simply persists.
+- What is captured is a canonical code for an isomorphic presentation on $\omega_1$, not necessarily the original raw name for the tree. This is the distinction required by the bookkeeping definition.
+- No claim that Suslinity is upward absolute is used. Under the contradiction hypothesis, an earlier uncountable antichain cannot become countable in the ccc final extension because it carries an injection from the preserved $\omega_1$; a cofinal branch simply persists.

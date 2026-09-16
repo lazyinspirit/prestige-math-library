@@ -36,12 +36,9 @@ $$\|ST\| \le \|S\|\,\|T\|.$$
 
 **Given:** Bounded linear operators $T:X\to Y$ and $S:Y\to Z$.
 
-[L1] The operator norm is the unit-ball supremum and satisfies
-$\|Tu\| \le \|T\|\,\|u\|$ for every vector $u$
-([[def-operator-norm]]).
+[L1] The operator norm is the unit-ball supremum and satisfies $\|Tu\| \le \|T\|\,\|u\|$ for every vector $u$ ([[def-operator-norm]]).
 
-[L2] Bounded linear operators compose to a linear map, and
-$\mathcal B(X,Y)$ denotes the bounded ones ([[def-space-of-bounded-linear-operators]]).
+[L2] Bounded linear operators compose to a linear map, and $\mathcal B(X,Y)$ denotes the bounded ones ([[def-space-of-bounded-linear-operators]]).
 
 ## Proof
 

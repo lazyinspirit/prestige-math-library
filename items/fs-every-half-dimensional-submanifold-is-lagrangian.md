@@ -31,9 +31,7 @@ Every half-dimensional submanifold of a symplectic manifold is Lagrangian.
 
 **Given:** The proposed universal claim.
 
-[F1] A Lagrangian submanifold must have Lagrangian tangent spaces, hence the
-symplectic form restricts to zero on them.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F1] A Lagrangian submanifold must have Lagrangian tangent spaces, hence the symplectic form restricts to zero on them. [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
 ## Refutation
 

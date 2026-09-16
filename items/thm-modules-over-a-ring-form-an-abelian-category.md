@@ -32,18 +32,13 @@ an abelian category.
 
 **Given:** A ring $R$.
 
-[L1] Left $R$-modules and their homomorphisms form a category
-([[prop-modules-and-homomorphisms-form-category-rmod]]).
+[L1] Left $R$-modules and their homomorphisms form a category ([[prop-modules-and-homomorphisms-form-category-rmod]]).
 
-[L2] The category $R\text{-}\mathbf{Mod}$ is complete and cocomplete
-([[thm-rmod-is-complete-and-cocomplete]]).
+[L2] The category $R\text{-}\mathbf{Mod}$ is complete and cocomplete ([[thm-rmod-is-complete-and-cocomplete]]).
 
-[L3] Module kernels, images, and cokernels are the usual ones
-([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L3] Module kernels, images, and cokernels are the usual ones ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[L4] The first isomorphism theorem for modules identifies the coimage with the
-image
-([[thm-first-isomorphism-theorem-modules]]).
+[L4] The first isomorphism theorem for modules identifies the coimage with the image ([[thm-first-isomorphism-theorem-modules]]).
 
 ## Proof
 

@@ -43,9 +43,7 @@ $$\nabla f(x)=\begin{pmatrix}x_1+x_2-1\\x_1+2x_2-1\end{pmatrix},\qquad \nabla^2f
 
 **Given:** The displayed matrix $A$ and vector $b$.
 
-[L1] For $f(x)=\frac12\|Ax-b\|_2^2$, one has
-$\nabla f(x)=A^\ast(Ax-b)$ and $\nabla^2f=A^\ast A$
-([[thm-gradient-and-hessian-of-the-frobenius-least-squares-functional]]).
+[L1] For $f(x)=\frac12\|Ax-b\|_2^2$, one has $\nabla f(x)=A^\ast(Ax-b)$ and $\nabla^2f=A^\ast A$ ([[thm-gradient-and-hessian-of-the-frobenius-least-squares-functional]]).
 
 ## Verification
 **Proof technique:** direct.

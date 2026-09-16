@@ -32,15 +32,11 @@ algebras are isomorphic as Lie groups.
 
 ## Facts & Assumptions
 
-**Given:** $\mathsf{AC}_\omega$ and the usual Lie-group structures on the
-line and circle.
+**Given:** $\mathsf{AC}_\omega$ and the usual Lie-group structures on the line and circle.
 
-[L1] Every connected integration is a discrete central quotient of the
-simply connected integration
-([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
+[L1] Every connected integration is a discrete central quotient of the simply connected integration ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
 
-[L2] Countable choice is the declared weak-choice assumption
-([[def-countable-choice]]).
+[L2] Countable choice is the declared weak-choice assumption ([[def-countable-choice]]).
 
 ## Counterexample
 

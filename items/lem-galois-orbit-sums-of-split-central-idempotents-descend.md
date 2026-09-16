@@ -67,6 +67,4 @@ are empty and this last equality means $0=1_A$.
 
 ## Remarks
 
-The subset-of-factors argument combines the local matrix-center and
-simple-module results with Zheng, Theorem 3.8.1, pp.132–133. It does not assert
-that an individual simple module descends with multiplicity one.
+The subset-of-factors argument combines the local matrix-center and simple-module results with Zheng, Theorem 3.8.1, pp.132–133. It does not assert that an individual simple module descends with multiplicity one.

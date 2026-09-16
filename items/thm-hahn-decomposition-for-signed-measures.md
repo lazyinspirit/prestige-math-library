@@ -42,15 +42,11 @@ general existence assertion.
 
 **Given:** A signed measure $\nu$ on $(X,\mathcal A)$ in the sense of [[def-signed-measure]], and the Axiom of Choice ([[def-axiom-of-choice]]).
 
-[L1] A measurable set is positive, negative, or null according to the signs of
-the signed measures of all its measurable subsets.
-([[def-positive-negative-and-null-sets-for-a-signed-measure]])
+[L1] A measurable set is positive, negative, or null according to the signs of the signed measures of all its measurable subsets. ([[def-positive-negative-and-null-sets-for-a-signed-measure]])
 
-[L2] Under AC, a measurable set of positive finite signed measure contains a positive
-subset whose signed measure is at least as large. ([[lem-positive-finite-signed-measure-set-contains-a-positive-subset-of-at-least-the-same-mass]])
+[L2] Under AC, a measurable set of positive finite signed measure contains a positive subset whose signed measure is at least as large. ([[lem-positive-finite-signed-measure-set-contains-a-positive-subset-of-at-least-the-same-mass]])
 
-[L3] A set is null for a signed measure exactly when its total variation there
-is $0$. ([[prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation]])
+[L3] A set is null for a signed measure exactly when its total variation there is $0$. ([[prop-signed-null-sets-are-exactly-the-sets-of-zero-total-variation]])
 
 ## Proof
 

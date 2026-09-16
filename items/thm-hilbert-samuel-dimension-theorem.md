@@ -33,8 +33,7 @@ $$ \deg P_{I,M}=\dim \operatorname{Supp}(M). $$
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a Noetherian local ring $(R,\mathfrak m)$, a
-nonzero finite $R$-module $M$, and an ideal of definition $I$ for $M$.
+**Given:** The Axiom of Choice, a Noetherian local ring $(R,\mathfrak m)$, a nonzero finite $R$-module $M$, and an ideal of definition $I$ for $M$.
 
 [L1] The dimension of $\operatorname{Supp}(M)$ is the least number of generators of an ideal of definition for $M$, and such generating tuples are systems of parameters for $M$ ([[thm-dimension-and-parameters-for-modules]]).
 
@@ -46,11 +45,9 @@ nonzero finite $R$-module $M$, and an ideal of definition $I$ for $M$.
 
 [L5] If a finite module $N$ satisfies $JN=N$, then $(1-a)N=0$ for some $a\in J$ ([[lem-determinant-trick-for-nakayama]]).
 
-[L6] Every ideal of a Noetherian commutative ring is finitely generated
-([[thm-noetherian-ring-ideal-characterisations]]).
+[L6] Every ideal of a Noetherian commutative ring is finitely generated ([[thm-noetherian-ring-ideal-characterisations]]).
 
-[L7] In a local ring, the nonunits are exactly the elements of its maximal
-ideal ([[thm-local-ring-unit-characterisations]]).
+[L7] In a local ring, the nonunits are exactly the elements of its maximal ideal ([[thm-local-ring-unit-characterisations]]).
 
 ## Proof
 

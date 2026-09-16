@@ -43,9 +43,7 @@ blocks $A_1,A_2$ of $\mathcal L$, both contained in $D$, such that
 
 [L1] Because $u$ is mixed on $D$ but pure to each member block, there are original blocks $B_1,B_2\subseteq D$ such that $u$ is complete to $B_1$ and anticomplete to $B_2$ ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 
-[L2] Since $D$ is one quotient block, any two original blocks it contains are related by the mixed-block reachability relation, so there is a chain
-$$B_1=A_{r_1},A_{r_2},\dots,A_{r_m}=B_2$$
-with each consecutive pair mixed ([[def-quotient-blockade-by-mixed-block-reachability]], [[def-mixed-block-reachability-relation-on-a-blockade]]).
+[L2] Since $D$ is one quotient block, any two original blocks it contains are related by the mixed-block reachability relation, so there is a chain $$B_1=A_{r_1},A_{r_2},\dots,A_{r_m}=B_2$$ with each consecutive pair mixed ([[def-quotient-blockade-by-mixed-block-reachability]], [[def-mixed-block-reachability-relation-on-a-blockade]]).
 
 ## Proof
 

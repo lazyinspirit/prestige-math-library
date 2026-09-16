@@ -39,13 +39,9 @@ This module is canonically the $(p)$-adic completion of $\mathbb Z$.
 
 **Given:** A prime integer $p$.
 
-[L2] The $(p)$-adic completion of $\mathbb Z$ is
-$$ \widehat{\mathbb Z}^{\,(p)}=\varprojlim_n \mathbb Z/p^n\mathbb Z $$
-with completion map $m \mapsto (m \bmod p^n)_n$
-([[def-adic-completion-of-a-module]]).
+[L2] The $(p)$-adic completion of $\mathbb Z$ is $$ \widehat{\mathbb Z}^{\,(p)}=\varprojlim_n \mathbb Z/p^n\mathbb Z $$ with completion map $m \mapsto (m \bmod p^n)_n$ ([[def-adic-completion-of-a-module]]).
 
-[L3] The completion map has kernel $\bigcap_{n \ge 0} p^n\mathbb Z$
-([[thm-kernel-and-universal-property-of-adic-completion]]).
+[L3] The completion map has kernel $\bigcap_{n \ge 0} p^n\mathbb Z$ ([[thm-kernel-and-universal-property-of-adic-completion]]).
 
 ## Verification
 

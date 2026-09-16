@@ -42,12 +42,6 @@ by a finite regular complex Borel measure $\mu$. Conversely each such $\mu$ defi
 1.1 On the real vector space of real-valued functions put $A(u)=\operatorname{Re}L(u)$ and $B(u)=\operatorname{Im}L(u)$. Apply [L1], then [L2], to the positive decompositions of both $A$ and $B$. This gives finite regular signed measures $\alpha$ and $\beta$ representing $A$ and $B$. Put $\mu=\alpha+i\beta$. If $f=u+iv$, complex linearity gives $L(f)=L(u)+iL(v)$, whose real and imaginary parts agree exactly with those of $\int f\,d(\alpha+i\beta)$; hence $\mu$ represents $L$. [L1, L2]
 
 2.1 If two finite regular complex measures $\mu$ and $\nu$ represent $L$, [step 1.1, L2]
-then the real and imaginary signed parts of their difference $\mu-\nu$
-integrate every real $C_c$ function to zero. For either signed part, move its
-negative Jordan component to the other side; the two resulting positive
-Radon measures have equal integrals on $C_c$. The positive-measure
-uniqueness in [L2] makes those
-positive measures equal, so both signed parts of $\mu-\nu$ vanish and
-$\mu=\nu$. [step 1.1]
+then the real and imaginary signed parts of their difference $\mu-\nu$ integrate every real $C_c$ function to zero. For either signed part, move its negative Jordan component to the other side; the two resulting positive Radon measures have equal integrals on $C_c$. The positive-measure uniqueness in [L2] makes those positive measures equal, so both signed parts of $\mu-\nu$ vanish and $\mu=\nu$. [step 1.1]
 
 3.1 Conversely, $|\int f\,d\mu|\le\|f\|_\infty|\mu|(X)$, so integration is bounded with norm at most $|\mu|(X)$. The definition of total variation and regular approximation by compactly supported phase functions gives functions with $\|f\|_\infty\le1$ and integrals arbitrarily close to $|\mu|(X)$; hence equality of norms. [given] ∎

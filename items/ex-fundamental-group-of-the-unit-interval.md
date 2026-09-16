@@ -35,9 +35,7 @@ $$H(s,t)=(1-t)\alpha(s)+t x_0.$$
 
 **Given:** A basepoint $x_0\in I$ and a based loop $\alpha:I\to I$.
 
-[L1] The unit interval is convex: if $x,y,t\in[0,1]$, then
-$0\le(1-t)x+ty\le1$, so the convex combination remains in $[0,1]$
-([[def-interval]], [[def-convex-subset-of-euclidean-space]], algebra).
+[L1] The unit interval is convex: if $x,y,t\in[0,1]$, then $0\le(1-t)x+ty\le1$, so the convex combination remains in $[0,1]$ ([[def-interval]], [[def-convex-subset-of-euclidean-space]], algebra).
 
 [L2] Every nonempty convex Euclidean subset is simply connected, with the displayed straight-line endpoint homotopy ([[thm-convex-subsets-have-trivial-fundamental-group]]).
 

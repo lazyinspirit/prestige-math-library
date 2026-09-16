@@ -36,15 +36,11 @@ isomorphic.
 
 **Given:** An integer $n$.
 
-[L1] Both constructions define additive functors
-([[thm-left-derived-functors-relative-to-supplied-data-are-additive-functors]]).
+[L1] Both constructions define additive functors ([[thm-left-derived-functors-relative-to-supplied-data-are-additive-functors]]).
 
-[L2] For each object, objectwise comparison of the two chosen resolutions
-induces an isomorphism on derived objects
-([[lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects]]).
+[L2] For each object, objectwise comparison of the two chosen resolutions induces an isomorphism on derived objects ([[lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects]]).
 
-[L3] Those isomorphisms are natural in the object
-([[lem-the-change-of-projective-resolution-isomorphisms-are-natural]]).
+[L3] Those isomorphisms are natural in the object ([[lem-the-change-of-projective-resolution-isomorphisms-are-natural]]).
 
 ## Proof
 

@@ -31,11 +31,9 @@ element, that is, from a morphism $\mathbb Z \to A$.
 
 **Given:** The identity member $1_{\mathbb Z^2}:\mathbb Z^2 \to \mathbb Z^2$.
 
-[L1] Member classes correspond to subobjects
-([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
+[L1] Member classes correspond to subobjects ([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
 
-[L2] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L2] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
 ## Counterexample
 

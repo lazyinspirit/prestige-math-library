@@ -31,18 +31,13 @@ $d^{n+1}d^n f=0$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$, a representation $\rho$ on $M$, and
-the differential with the declared signs.
+**Given:** A Lie algebra $\mathfrak g$, a representation $\rho$ on $M$, and the differential with the declared signs.
 
-[L1] The two-sum differential and its zero-based signs are fixed in
-[[def-chevalley-eilenberg-differential]].
+[L1] The two-sum differential and its zero-based signs are fixed in [[def-chevalley-eilenberg-differential]].
 
-[L2] The representation identity is
-$[\rho(x),\rho(y)]=\rho([x,y])$
-([[def-representation-of-a-lie-algebra]]).
+[L2] The representation identity is $[\rho(x),\rho(y)]=\rho([x,y])$ ([[def-representation-of-a-lie-algebra]]).
 
-[L3] The bracket satisfies Jacobi
-([[def-lie-algebra-over-a-field]]).
+[L3] The bracket satisfies Jacobi ([[def-lie-algebra-over-a-field]]).
 
 ## Proof
 

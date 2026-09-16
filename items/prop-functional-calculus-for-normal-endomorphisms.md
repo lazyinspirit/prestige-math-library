@@ -33,9 +33,7 @@ normal, and let $f,g:\sigma(T)\to\mathbb C$.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional complex inner product space $V$, a normal endomorphism $T:V\to V$, its spectral resolution
-$$T=\sum_{j=1}^r \lambda_jP_j,$$
-and functions $f,g:\sigma(T)\to\mathbb C$.
+**Given:** A finite-dimensional complex inner product space $V$, a normal endomorphism $T:V\to V$, its spectral resolution $$T=\sum_{j=1}^r \lambda_jP_j,$$ and functions $f,g:\sigma(T)\to\mathbb C$.
 
 [L1] A normal endomorphism has a spectral resolution by pairwise orthogonal projections $P_j$ with $P_iP_j=0$ for $i\ne j$ and $P_j^2=P_j=P_j^*$ ([[thm-spectral-resolution-and-polynomial-spectral-projections]]).
 

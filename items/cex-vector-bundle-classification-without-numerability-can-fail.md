@@ -38,22 +38,13 @@ Assume AC. The tangent line bundle of the smooth long line is a counterexample.
 
 **Given:** AC, the smooth long line $L$, and its tangent line bundle $TL$.
 
-[F1] Nyikos, *Topology Proceedings* 4 (1979), printed pp.271–272, states that
-the long line $L$ is a connected Hausdorff differentiable one-manifold and is
-nonmetrizable. Being a Hausdorff one-manifold, it is locally compact and hence
-CGWH; it is outside the library's second-countable manifold convention.
+[F1] Nyikos, *Topology Proceedings* 4 (1979), printed pp.271–272, states that the long line $L$ is a connected Hausdorff differentiable one-manifold and is nonmetrizable. Being a Hausdorff one-manifold, it is locally compact and hence CGWH; it is outside the library's second-countable manifold convention.
 
-[F2] Under AC, every numerable real vector bundle admits a continuous
-positive-definite fiber inner product; with a supplied numeration the displayed
-weighted metric construction is choice-free
-([[thm-numerable-vector-bundles-admit-bundle-metrics]]).
+[F2] Under AC, every numerable real vector bundle admits a continuous positive-definite fiber inner product; with a supplied numeration the displayed weighted metric construction is choice-free ([[thm-numerable-vector-bundles-admit-bundle-metrics]]).
 
-[F3] Under AC, the tautological bundle over the stable Grassmannian is
-numerable, and every pullback of its numeration is numerable
-([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
+[F3] Under AC, the tautological bundle over the stable Grassmannian is numerable, and every pullback of its numeration is numerable ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
 
-[A1] AC means that every family of nonempty sets has a choice function
-([[def-axiom-of-choice]]).
+[A1] AC means that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
 
 ## Counterexample
 

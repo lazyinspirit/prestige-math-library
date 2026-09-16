@@ -38,8 +38,7 @@ resulting blockade is pure with width $w/\ell^2$.
 
 **Given:** A special-vertex comb with $\ell=4$ and width $w$.
 
-[L1] The third branch in [[def-property-star-for-a-finite-family]] gives a pure
-$(\ell,w/\ell^2)$-blockade.
+[L1] The third branch in [[def-property-star-for-a-finite-family]] gives a pure $(\ell,w/\ell^2)$-blockade.
 
 ## Verification
 

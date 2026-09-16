@@ -33,9 +33,7 @@ must be checked directly.
 
 **Given:** The residual range $2\le n\le467$ from [[thm-bertrands-postulate]].
 
-[L1] Bertrand's postulate is already proved abstractly, with the only explicit
-finite remainder being the interval $2\le n\le467$
-([[thm-bertrands-postulate]]).
+[L1] Bertrand's postulate is already proved abstractly, with the only explicit finite remainder being the interval $2\le n\le467$ ([[thm-bertrands-postulate]]).
 
 ## Verification
 

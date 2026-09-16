@@ -49,10 +49,7 @@ $$\|Df(x)^{-1}v\|_2\le\frac C{1-q}\|v\|_2.$$
 
 [L2] The entries of $Df$ are continuous by the definition of $C^1$ ([[def-c-one-map-and-local-inverse]]).
 
-[L3] Total derivatives obey the linear algebra and chain rules, and a uniform
-derivative bound on a convex open set gives the corresponding Lipschitz bound
-([[thm-algebra-of-total-derivatives]], [[thm-chain-rule-for-total-derivatives]],
-[[thm-mean-value-inequality-for-total-derivatives]]).
+[L3] Total derivatives obey the linear algebra and chain rules, and a uniform derivative bound on a convex open set gives the corresponding Lipschitz bound ([[thm-algebra-of-total-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[thm-mean-value-inequality-for-total-derivatives]]).
 
 [L4] Every $\mathbb R^n$, $n\ge1$, is complete, so its contractions have unique fixed points ([[thm-euclidean-space-complete]], [[thm-banach-fixed-point]]).
 

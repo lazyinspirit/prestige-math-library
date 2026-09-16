@@ -78,12 +78,6 @@ inspection. Take $3 = \{0,1,2\}$ and $2 = \{0,1\}$.
 
 ## Remarks
 
-- **The zero count is the interesting one.** $2^{\underline{3}} = 0$ because the
-  falling factorial acquires the factor $2-2 = 0$ at the third step, which is the
-  arithmetic shadow of the pigeonhole principle. Both routes are checked above
-  against the same explicit list.
+- **The zero count is the interesting one.** $2^{\underline{3}} = 0$ because the falling factorial acquires the factor $2-2 = 0$ at the third step, which is the arithmetic shadow of the pigeonhole principle. Both routes are checked above against the same explicit list.
 
-- **The three subsets of size $2$ and the three of size $1$** are matched by the
-  complementation bijection of [[thm-binomial-closed-formula]]:
-  $\{0\} \leftrightarrow \{1,2\}$, $\{1\} \leftrightarrow \{0,2\}$,
-  $\{2\} \leftrightarrow \{0,1\}$.
+- **The three subsets of size $2$ and the three of size $1$** are matched by the complementation bijection of [[thm-binomial-closed-formula]]: $\{0\} \leftrightarrow \{1,2\}$, $\{1\} \leftrightarrow \{0,2\}$, $\{2\} \leftrightarrow \{0,1\}$.

@@ -50,8 +50,7 @@ is weak-star compact.  Neither convexity nor balancedness of $U$ is required.
 
 1.1 Choose $\varepsilon>0$ with $\{x:\lVert x\rVert<\varepsilon\}\subseteq U$ and put $r=\varepsilon/2$.  Then $rB_X\subseteq U$.  If $f\in U^\circ$ and $\lVert x\rVert\leq1$, then $rx\in U$, whence $r|f(x)|\leq1$.  Thus $\lVert f\rVert\leq r^{-1}$ and $U^\circ\subseteq r^{-1}B_{X^*}$. [F3, given]
 
-1.2 The polar is weak-star closed.  Indeed, if $f_0\notin U^\circ$, some $u\in U$ satisfies $|f_0(u)|>1$; the basic neighborhood
-$\{f:|(f-f_0)(u)|<|f_0(u)|-1\}$ misses $U^\circ$ by the reverse triangle inequality. [F2, F3]
+1.2 The polar is weak-star closed.  Indeed, if $f_0\notin U^\circ$, some $u\in U$ satisfies $|f_0(u)|>1$; the basic neighborhood $\{f:|(f-f_0)(u)|<|f_0(u)|-1\}$ misses $U^\circ$ by the reverse triangle inequality. [F2, F3]
 
 1.3 The map $f\mapsto r^{-1}f$ is a weak-star homeomorphism with inverse $g\mapsto rg$, by continuity of scalar multiplication.  It carries $B_{X^*}$ onto $r^{-1}B_{X^*}$, so the latter is compact by [F1].  The ultrafilter lemma enters only through [F1]. [F1, F2]
 

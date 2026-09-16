@@ -34,15 +34,11 @@ $$
 
 ## Facts & Assumptions
 
-**Given:** A continuous map $f:X\to Y$, a sheaf $\mathcal G$ on $Y$, and a
-point $x\in X$.
+**Given:** A continuous map $f:X\to Y$, a sheaf $\mathcal G$ on $Y$, and a point $x\in X$.
 
-[F1] The inverse image sheaf is the sheafification of the presheaf
-$f_{\mathrm p}\mathcal G$
-([[def-inverse-image-presheaf-and-sheaf]]).
+[F1] The inverse image sheaf is the sheafification of the presheaf $f_{\mathrm p}\mathcal G$ ([[def-inverse-image-presheaf-and-sheaf]]).
 
-[F2] A stalk is the colimit of sections over neighbourhoods of the point
-([[def-stalk-of-presheaf]]).
+[F2] A stalk is the colimit of sections over neighbourhoods of the point ([[def-stalk-of-presheaf]]).
 
 [L1] Sheafification preserves stalks ([[thm-sheafification-preserves-stalks]]).
 

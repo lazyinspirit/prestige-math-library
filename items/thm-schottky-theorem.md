@@ -31,24 +31,15 @@ $$|f(z)|\le C(R,r)\qquad(|z|\le r).$$
 
 ## Facts & Assumptions
 
-**Given:** Real numbers $R>0$ and $0<r<1$, and a holomorphic map
-$f:\mathbb D\to\mathbb C\setminus\{0,1\}$ with $|f(0)|\le R$.
+**Given:** Real numbers $R>0$ and $0<r<1$, and a holomorphic map $f:\mathbb D\to\mathbb C\setminus\{0,1\}$ with $|f(0)|\le R$.
 
-[L1] The functions $f$ and $1-f$ admit holomorphic logarithms on $\mathbb D$
-([[lem-holomorphic-logarithms-for-two-omitted-values]]).
+[L1] The functions $f$ and $1-f$ admit holomorphic logarithms on $\mathbb D$ ([[lem-holomorphic-logarithms-for-two-omitted-values]]).
 
-[L2] The unit disc is homologically simply connected, so holomorphic roots and
-logs exist there for nowhere-zero functions
-([[prop-star-shaped-plane-domains-are-homologically-simply-connected]],
-[[cor-holomorphic-roots-homologically-simply-connected-domains]],
-[[thm-holomorphic-logarithms-homologically-simply-connected-domains]]).
+[L2] The unit disc is homologically simply connected, so holomorphic roots and logs exist there for nowhere-zero functions ([[prop-star-shaped-plane-domains-are-homologically-simply-connected]], [[cor-holomorphic-roots-homologically-simply-connected-domains]], [[thm-holomorphic-logarithms-homologically-simply-connected-domains]]).
 
-[L3] Bloch's theorem gives an absolute lower bound $b:=1/48$ for normalized
-Bloch discs ([[thm-bloch-theorem]]).
+[L3] Bloch's theorem gives an absolute lower bound $b:=1/48$ for normalized Bloch discs ([[thm-bloch-theorem]]).
 
-[L4] The complex exponential satisfies $e^{u+v}=e^u e^v$
-([[thm-complex-exponential-addition-and-real-extension]]) and is entire
-([[thm-complex-exponential-is-entire-with-derivative-itself]]).
+[L4] The complex exponential satisfies $e^{u+v}=e^u e^v$ ([[thm-complex-exponential-addition-and-real-extension]]) and is entire ([[thm-complex-exponential-is-entire-with-derivative-itself]]).
 
 ## Proof
 

@@ -36,16 +36,9 @@ size at least $16^{1/4}=2$.
 
 ## Facts & Assumptions
 
-**Given:** The families satisfying the structural comb-partition hypothesis,
-their common Erdős–Hajnal constant $c=1/2$, the finite
-$\overline{\mathcal H}$-free graph $G$ and its structurally partitioned
-$(\ell,w)$-comb with $\ell\ge4$, $w=16$, and an index $i$ with $|Y_i|=8$.
+**Given:** The families satisfying the structural comb-partition hypothesis, their common Erdős–Hajnal constant $c=1/2$, the finite $\overline{\mathcal H}$-free graph $G$ and its structurally partitioned $(\ell,w)$-comb with $\ell\ge4$, $w=16$, and an index $i$ with $|Y_i|=8$.
 
-[F1] Under the structural comb-partition hypothesis, with a common
-Erdős–Hajnal constant $c\in(0,1]$ for the two forbidden families and a
-structurally partitioned $(\ell,w)$-comb with $\ell,w\ge4$, a part with
-$|Y_i|\ge w/2$ yields a clique or stable set in $G$ of size at least
-$w^{c/2}$ ([[lem-large-y-part-in-a-structural-comb-partition-yields-a-homogeneous-set]]).
+[F1] Under the structural comb-partition hypothesis, with a common Erdős–Hajnal constant $c\in(0,1]$ for the two forbidden families and a structurally partitioned $(\ell,w)$-comb with $\ell,w\ge4$, a part with $|Y_i|\ge w/2$ yields a clique or stable set in $G$ of size at least $w^{c/2}$ ([[lem-large-y-part-in-a-structural-comb-partition-yields-a-homogeneous-set]]).
 
 ## Verification
 

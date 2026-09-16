@@ -88,26 +88,10 @@ index or an odd index, and never both.
 
 ## Remarks
 
-- **What survives is exactly Bolzano-Weierstrass in the stated direction.**
-  Boundedness gives a convergent subsequence ([[thm-bolzano-weierstrass]]); a
-  convergent subsequence gives nothing about the sequence. The correct
-  strengthening on the other side is not boundedness at all but a Cauchy
-  hypothesis: a Cauchy sequence with a convergent subsequence does converge, and
-  is bounded, by [[lem-cauchy-with-convergent-subsequence]] and
-  [[lem-cauchy-sequence-bounded]].
+- **What survives is exactly Bolzano-Weierstrass in the stated direction.** Boundedness gives a convergent subsequence ([[thm-bolzano-weierstrass]]); a convergent subsequence gives nothing about the sequence. The correct strengthening on the other side is not boundedness at all but a Cauchy hypothesis: a Cauchy sequence with a convergent subsequence does converge, and is bounded, by [[lem-cauchy-with-convergent-subsequence]] and [[lem-cauchy-sequence-bounded]].
 
-- **One subsequence is never evidence about a sequence.** The same point in a
-  different form is [[fs-subsequence-convergence-implies-convergence]] on the
-  previous page: a convergent subsequence does not force convergence. Here it
-  does not even force boundedness, which is weaker, so this is the sharper
-  failure of the two.
+- **One subsequence is never evidence about a sequence.** The same point in a different form is [[fs-subsequence-convergence-implies-convergence]] on the previous page: a convergent subsequence does not force convergence. Here it does not even force boundedness, which is weaker, so this is the sharper failure of the two.
 
-- **The witness is as extreme as possible in one direction and as tame as
-  possible in the other.** Its subsequential limit set is exactly $\{1\}$, a
-  single point, while the sequence itself is unbounded; so having a one-point
-  subsequential limit set does not imply convergence either, and
-  [[def-subsequential-limit]] records that consequence.
+- **The witness is as extreme as possible in one direction and as tame as possible in the other.** Its subsequential limit set is exactly $\{1\}$, a single point, while the sequence itself is unbounded; so having a one-point subsequential limit set does not imply convergence either, and [[def-subsequential-limit]] records that consequence.
 
-- The witness is recorded as the named counterexample
-  [[cex-unbounded-with-convergent-subsequence]], which also computes its
-  subsequential limit set.
+- The witness is recorded as the named counterexample [[cex-unbounded-with-convergent-subsequence]], which also computes its subsequential limit set.

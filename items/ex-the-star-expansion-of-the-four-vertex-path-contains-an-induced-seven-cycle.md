@@ -35,11 +35,9 @@ $v,a_1,b_1,b_2,b_3,b_4,a_4$ induce a seven-cycle.
 
 ## Facts & Assumptions
 
-**Given:** The star-expansion of $P_4$ with root $v$, teeth $a_1,a_4$, and path
-vertices $b_1,b_2,b_3,b_4$.
+**Given:** The star-expansion of $P_4$ with root $v$, teeth $a_1,a_4$, and path vertices $b_1,b_2,b_3,b_4$.
 
-[L1] The only edges using the new vertices are $va_i$ and $a_ib_i$
-([[def-star-expansion-of-a-graph]]).
+[L1] The only edges using the new vertices are $va_i$ and $a_ib_i$ ([[def-star-expansion-of-a-graph]]).
 
 ## Verification
 

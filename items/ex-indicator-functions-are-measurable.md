@@ -28,11 +28,9 @@ If $E$ is measurable, then its indicator $\mathbf{1}_E$ is measurable.
 
 ## Facts & Assumptions
 
-**Given:** A measurable space $(X,\mathcal{A})$ and a measurable set
-$E \in \mathcal{A}$.
+**Given:** A measurable space $(X,\mathcal{A})$ and a measurable set $E \in \mathcal{A}$.
 
-[L1] An indicator function is measurable exactly when its set is measurable.
-([[prop-indicator-function-is-measurable-iff-its-set-is-measurable]])
+[L1] An indicator function is measurable exactly when its set is measurable. ([[prop-indicator-function-is-measurable-iff-its-set-is-measurable]])
 
 ## Verification
 

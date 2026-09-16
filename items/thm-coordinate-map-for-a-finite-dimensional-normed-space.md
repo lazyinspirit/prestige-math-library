@@ -46,28 +46,17 @@ Then $T$ is a topological isomorphism of normed spaces in the sense of
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$ and an
-ordered basis $e:n\to X$.
+**Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$ and an ordered basis $e:n\to X$.
 
-[L1] An ordered basis is a finite list whose image is a basis
-([[def-linear-basis]]), and
-[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] identifies its span
-with exactly the vectors of the form $\sum_{j<n} a_j e_j$, with those
-coordinates unique.
+[L1] An ordered basis is a finite list whose image is a basis ([[def-linear-basis]]), and [[thm-unique-coordinates-with-respect-to-an-ordered-basis]] identifies its span with exactly the vectors of the form $\sum_{j<n} a_j e_j$, with those coordinates unique.
 
-[L2] A topological isomorphism of normed spaces is a bounded linear bijection
-whose inverse is bounded ([[def-topological-isomorphism-of-normed-spaces]]).
+[L2] A topological isomorphism of normed spaces is a bounded linear bijection whose inverse is bounded ([[def-topological-isomorphism-of-normed-spaces]]).
 
-[L3] For $m\ge1$, every norm on $\mathbb R^m$ is equivalent to the Euclidean
-norm ([[thm-all-norms-on-rn-are-equivalent]]).
+[L3] For $m\ge1$, every norm on $\mathbb R^m$ is equivalent to the Euclidean norm ([[thm-all-norms-on-rn-are-equivalent]]).
 
-[L4] The map $\Phi:\mathbb C\to\mathbb R^2$, $\Phi(a+bi)=(a,b)$, is a bijection
-with the stated coordinate arithmetic
-([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L4] The map $\Phi:\mathbb C\to\mathbb R^2$, $\Phi(a+bi)=(a,b)$, is a bijection with the stated coordinate arithmetic ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
-[L5] The complex case is read with the same norm axioms and with scalar
-absolute value replaced by the complex modulus
-([[rem-real-and-complex-normed-space-convention]]).
+[L5] The complex case is read with the same norm axioms and with scalar absolute value replaced by the complex modulus ([[rem-real-and-complex-normed-space-convention]]).
 
 ## Proof
 
@@ -87,8 +76,5 @@ absolute value replaced by the complex modulus
 
 ## Remarks
 
-- The proof uses the coordinate $\ell^1$ norm because it makes the boundedness
-  of $T$ immediate. Any other standard coordinate norm would do, and on a fixed
-  finite-dimensional coordinate space all of them are equivalent.
-- The finite-dimensional language in the title is implemented here by the actual
-  datum the page uses: a chosen ordered basis of finite length.
+- The proof uses the coordinate $\ell^1$ norm because it makes the boundedness of $T$ immediate. Any other standard coordinate norm would do, and on a fixed finite-dimensional coordinate space all of them are equivalent.
+- The finite-dimensional language in the title is implemented here by the actual datum the page uses: a chosen ordered basis of finite length.

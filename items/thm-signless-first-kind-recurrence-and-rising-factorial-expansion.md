@@ -40,9 +40,7 @@ $$x^{\overline{n}}=\sum_{k=0}^{n}c(n,k)x^k.$$
 
 ## Facts & Assumptions
 
-**Given:** The cycle decomposition conventions of
-[[def-permutation-support-disjoint-cycles-and-cycle-type]] and the rising
-factorial of [[def-rising-factorial]].
+**Given:** The cycle decomposition conventions of [[def-permutation-support-disjoint-cycles-and-cycle-type]] and the rising factorial of [[def-rising-factorial]].
 
 ## Proof
 

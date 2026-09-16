@@ -40,8 +40,7 @@ $\partial_\theta=-r\sin\theta\,\partial_x+r\cos\theta\,\partial_y$.
 
 ## Facts & Assumptions
 
-**Given:** An open set $U\subseteq\mathbb R^2\setminus\{0\}$ carrying a smooth
-polar angle $\theta$, with coordinate change $x=r\cos\theta$, $y=r\sin\theta$.
+**Given:** An open set $U\subseteq\mathbb R^2\setminus\{0\}$ carrying a smooth polar angle $\theta$, with coordinate change $x=r\cos\theta$, $y=r\sin\theta$.
 
 [L1] Tangent bases transform by the Jacobian of the coordinate change ([[thm-change-of-coordinate-formula-for-tangent-bases]]).
 

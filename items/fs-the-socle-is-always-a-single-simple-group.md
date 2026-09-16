@@ -28,13 +28,9 @@ a single simple subgroup.
 
 **Given:** A nonabelian finite simple group $T$ and the direct product $G=T \times T$.
 
-[L1] Finite characteristically simple groups are direct products of isomorphic
-simple groups
-([[thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups]]).
+[L1] Finite characteristically simple groups are direct products of isomorphic simple groups ([[thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups]]).
 
-[L2] The socle of a finite group is a direct product of minimal normal
-subgroups
-([[prop-socle-is-characteristic-and-admits-a-direct-product-decomposition]]).
+[L2] The socle of a finite group is a direct product of minimal normal subgroups ([[prop-socle-is-characteristic-and-admits-a-direct-product-decomposition]]).
 
 ## Refutation
 

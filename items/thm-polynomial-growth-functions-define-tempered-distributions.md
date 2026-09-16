@@ -39,23 +39,15 @@ to characterize all regular tempered distributions.
 
 **Given:** A locally integrable complex function $f$ on $\mathbb R^n$.
 
-[F1] A regular functional is defined by bilinear integration
-([[def-regular-distribution-from-a-locally-integrable-function]],
-[[def-locally-integrable-function-on-r-n]]).
+[F1] A regular functional is defined by bilinear integration ([[def-regular-distribution-from-a-locally-integrable-function]], [[def-locally-integrable-function-on-r-n]]).
 
-[F2] One finite rectangular Schwartz-seminorm estimate characterizes tempered
-functionals ([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
+[F2] One finite rectangular Schwartz-seminorm estimate characterizes tempered functionals ([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
 
-[F3] Hölder's inequality, including the $L^1$ and $L^\infty$ endpoints, applies
-to the real nonnegative functions $|f|$ and a weight
-([[thm-holder-inequality-for-integrals]]).
+[F3] Hölder's inequality, including the $L^1$ and $L^\infty$ endpoints, applies to the real nonnegative functions $|f|$ and a weight ([[thm-holder-inequality-for-integrals]]).
 
-[F4] Complex $L^p$ classes, their moduli, and their locally integrable
-representatives use the conventions of
-[[def-complex-lp-and-euclidean-test-function-conventions]].
+[F4] Complex $L^p$ classes, their moduli, and their locally integrable representatives use the conventions of [[def-complex-lp-and-euclidean-test-function-conventions]].
 
-[F5] A real $p$-series converges when its exponent exceeds one
-([[thm-p-series-real-exponents]]).
+[F5] A real $p$-series converges when its exponent exceeds one ([[thm-p-series-real-exponents]]).
 
 ## Proof
 
@@ -65,9 +57,7 @@ representatives use the conventions of
 
 $$(1+|x|)^N|\varphi(x)| \leq A_{n,N}\max_{|\alpha|\leq N}p_{\alpha,0}(\varphi).$$
 
-Thus the weighted hypothesis implies
-$|u_f(\varphi)|\leq A_{n,N}\bigl(\int|f|(1+|x|)^{-N}\bigr)
-\max_{|\alpha|\leq N}p_{\alpha,0}(\varphi)$. [F1, algebra]
+Thus the weighted hypothesis implies $|u_f(\varphi)|\leq A_{n,N}\bigl(\int|f|(1+|x|)^{-N}\bigr) \max_{|\alpha|\leq N}p_{\alpha,0}(\varphi)$. [F1, algebra]
 
 2.1 The estimate in step 1.1 makes the integral absolutely convergent for every Schwartz test and proves that $u_f$ is tempered.  It also shows directly that changing $f$ on a null set changes no pairing. [F1, F2, step 1.1]
 

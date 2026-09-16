@@ -37,16 +37,11 @@ hence chain-homotopy equivalent to $\operatorname{Cone}(g)$.
 
 **Given:** Composable chain maps $C_\bullet\xrightarrow{f}D_\bullet\xrightarrow{g}E_\bullet$.
 
-[L1] A strict square of chain maps induces a chain map of cones
-([[thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones]]).
+[L1] A strict square of chain maps induces a chain map of cones ([[thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones]]).
 
-[L2] The cone differential is
-$$d(y,x)=(d(y)+f(x),-d(x))$$
-with the relevant map in the upper-right corner
-([[def-mapping-cone-of-a-chain-map]]).
+[L2] The cone differential is $$d(y,x)=(d(y)+f(x),-d(x))$$ with the relevant map in the upper-right corner ([[def-mapping-cone-of-a-chain-map]]).
 
-[L3] The cone of an identity map is contractible
-([[thm-the-cone-of-an-identity-map-is-contractible]]).
+[L3] The cone of an identity map is contractible ([[thm-the-cone-of-an-identity-map-is-contractible]]).
 
 ## Proof
 

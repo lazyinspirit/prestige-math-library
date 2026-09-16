@@ -37,29 +37,19 @@ for some unrelated modification.
 
 **Given:** A standard Brownian motion $B$.
 
-[F1] Brownian increments have law $N(0,|t-s|)$, and the Brownian definition
-supplies one probability-one event of continuous paths. [[def-brownian-motion]]
+[F1] Brownian increments have law $N(0,|t-s|)$, and the Brownian definition supplies one probability-one event of continuous paths. [[def-brownian-motion]]
 
-[F2] For each integer $m\ge2$, Brownian increments satisfy the Kolmogorov
-moment bound with exponent threshold $(m-1)/(2m)$.
-[[lem-gaussian-even-moment-bound-for-brownian-increments]]
+[F2] For each integer $m\ge2$, Brownian increments satisfy the Kolmogorov moment bound with exponent threshold $(m-1)/(2m)$. [[lem-gaussian-even-moment-bound-for-brownian-increments]]
 
-[F3] The continuity criterion gives a continuous modification which is locally
-Hölder for every exponent below its threshold, simultaneously.
-[[thm-kolmogorov-continuity-criterion-one-parameter]]
+[F3] The continuity criterion gives a continuous modification which is locally Hölder for every exponent below its threshold, simultaneously. [[thm-kolmogorov-continuity-criterion-one-parameter]]
 
-[F4] The rationals are countable and dense; a countable union of null events is
-null. [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
-[[thm-finite-and-countable-subadditivity-of-measures]]
+[F4] The rationals are countable and dense; a countable union of null events is null. [[thm-rationals-countable]] [[lem-rat-embeds-dense]] [[thm-finite-and-countable-subadditivity-of-measures]]
 
-[F5] Two continuous real-valued maps agreeing on a dense subset are equal.
-[[cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]]
+[F5] Two continuous real-valued maps agreeing on a dense subset are equal. [[cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]]
 
-[F6] The natural numbers are cofinal in the reals.
-[[thm-of-archimedean]]
+[F6] The natural numbers are cofinal in the reals. [[thm-of-archimedean]]
 
-[F7] AC is available to select the countable family of modifications furnished
-by [F3]. [[def-axiom-of-choice]]
+[F7] AC is available to select the countable family of modifications furnished by [F3]. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -75,7 +65,4 @@ by [F3]. [[def-axiom-of-choice]]
 
 ## Source notes
 
-Sousi and Yoshida give the Brownian Hölder conclusion below one half from even
-normal moments and Kolmogorov continuity. Steps 2.1--3.1 supply the explicit
-dense-set indistinguishability argument that transfers the property back to the
-given continuous Brownian version.
+Sousi and Yoshida give the Brownian Hölder conclusion below one half from even normal moments and Kolmogorov continuity. Steps 2.1--3.1 supply the explicit dense-set indistinguishability argument that transfers the property back to the given continuous Brownian version.

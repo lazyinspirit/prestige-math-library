@@ -38,11 +38,9 @@ meromorphic there with a single simple pole at $s=1$ of residue $1$.
 
 **Given:** A complex number $s$ with $\operatorname{Re}s>1$.
 
-[L1] On $\operatorname{Re}s>1$, $\zeta(s)=\sum_{n\ge1}n^{-s}$
-([[def-riemann-zeta-function]]).
+[L1] On $\operatorname{Re}s>1$, $\zeta(s)=\sum_{n\ge1}n^{-s}$ ([[def-riemann-zeta-function]]).
 
-[L2] For rational $p>1$, the series $\sum_{n\ge1}n^{-p}$ converges
-([[thm-p-series-rational]]).
+[L2] For rational $p>1$, the series $\sum_{n\ge1}n^{-p}$ converges ([[thm-p-series-rational]]).
 
 ## Proof
 

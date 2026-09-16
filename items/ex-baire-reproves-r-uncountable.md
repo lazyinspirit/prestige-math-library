@@ -74,22 +74,8 @@ common, namely completeness used through nested intervals, and packages it once.
 
 ## Remarks
 
-- **The proof is not circular.** [[thm-baire-category-r]] is proved from the
-  nested interval property and an enumeration of $\mathbb{Q}$, and it nowhere uses
-  the uncountability of $\mathbb{R}$; nor does it use
-  [[thm-perfect-set-uncountable-r]]. What it shares with both is
-  [[thm-nested-interval-property]], and that is the one ingredient no proof of
-  uncountability here avoids.
+- **The proof is not circular.** [[thm-baire-category-r]] is proved from the nested interval property and an enumeration of $\mathbb{Q}$, and it nowhere uses the uncountability of $\mathbb{R}$; nor does it use [[thm-perfect-set-uncountable-r]]. What it shares with both is [[thm-nested-interval-property]], and that is the one ingredient no proof of uncountability here avoids.
 
-- **It proves more than uncountability.** The same argument shows that
-  $\mathbb{R}$ is not a countable union of nowhere dense sets, of which "not a
-  countable union of singletons" is the weakest case. So it also shows, for
-  instance, that $\mathbb{R}$ is not the union of countably many Cantor sets,
-  each of which is nowhere dense ([[thm-cantor-set-properties]]).
+- **It proves more than uncountability.** The same argument shows that $\mathbb{R}$ is not a countable union of nowhere dense sets, of which "not a countable union of singletons" is the weakest case. So it also shows, for instance, that $\mathbb{R}$ is not the union of countably many Cantor sets, each of which is nowhere dense ([[thm-cantor-set-properties]]).
 
-- **What it does not give.** It gives no cardinality beyond "not at most
-  countable", and in particular says nothing about a bijection with
-  $\mathcal{P}(\mathbb{N})$. For the Cantor set that stronger information is
-  available through the digit description
-  ([[thm-cantor-set-ternary-description]]), and it is what makes
-  [[fs-cantor-set-countable]] fail so badly.
+- **What it does not give.** It gives no cardinality beyond "not at most countable", and in particular says nothing about a bijection with $\mathcal{P}(\mathbb{N})$. For the Cantor set that stronger information is available through the digit description ([[thm-cantor-set-ternary-description]]), and it is what makes [[fs-cantor-set-countable]] fail so badly.

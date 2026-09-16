@@ -35,15 +35,11 @@ Every short exact sequence of abelian groups splits.
 
 ## Facts & Assumptions
 
-**Given:** The short exact sequence
-$$0 \to \mathbb Z \xrightarrow{\times 2} \mathbb Z \xrightarrow{q} \mathbb Z/2 \to 0.$$
+**Given:** The short exact sequence $$0 \to \mathbb Z \xrightarrow{\times 2} \mathbb Z \xrightarrow{q} \mathbb Z/2 \to 0.$$
 
-[L1] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] A short exact sequence splits exactly when the quotient map has a section
-([[def-split-short-exact-sequence-in-an-abelian-category]],
-[[thm-splitting-lemma-in-an-abelian-category]]).
+[L2] A short exact sequence splits exactly when the quotient map has a section ([[def-split-short-exact-sequence-in-an-abelian-category]], [[thm-splitting-lemma-in-an-abelian-category]]).
 
 ## Counterexample
 

@@ -36,8 +36,7 @@ maps is abelian.
 
 **Given:** A field $F$.
 
-[L1] Modules over a ring form an abelian category
-([[thm-modules-over-a-ring-form-an-abelian-category]]).
+[L1] Modules over a ring form an abelian category ([[thm-modules-over-a-ring-form-an-abelian-category]]).
 
 ## Verification
 

@@ -40,18 +40,13 @@ so $\mathfrak f_n$ has nilpotency class $n-1$. Its derived length is two.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, an integer $n\geq3$, and the displayed alternating
-bilinear bracket on the $k$-space with basis $e_1,\ldots,e_n$.
+**Given:** A field $k$, an integer $n\geq3$, and the displayed alternating bilinear bracket on the $k$-space with basis $e_1,\ldots,e_n$.
 
-[L1] The derived series and solvability convention are those of
-[[def-derived-series-and-solvable-lie-algebra]].
+[L1] The derived series and solvability convention are those of [[def-derived-series-and-solvable-lie-algebra]].
 
-[L2] The lower central series is defined recursively by
-$\gamma_{r+1}=[\mathfrak f_n,\gamma_r]$
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L2] The lower central series is defined recursively by $\gamma_{r+1}=[\mathfrak f_n,\gamma_r]$ ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L3] Nilpotency class is the least $c$ for which $\gamma_{c+1}=0$
-([[def-nilpotency-class-of-a-lie-algebra]]).
+[L3] Nilpotency class is the least $c$ for which $\gamma_{c+1}=0$ ([[def-nilpotency-class-of-a-lie-algebra]]).
 
 ## Verification
 

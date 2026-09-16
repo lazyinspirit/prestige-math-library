@@ -38,21 +38,13 @@ reflexive.
 
 [A1] AC holds ([[def-axiom-of-choice]]).
 
-[L1] Under the ultrafilter lemma, DC, and Hahn--Banach, real and complex
-$\ell^1$ are not reflexive ([[cor-ell-one-is-not-reflexive]]).
+[L1] Under the ultrafilter lemma, DC, and Hahn--Banach, real and complex $\ell^1$ are not reflexive ([[cor-ell-one-is-not-reflexive]]).
 
-[L2] Under Hahn--Banach and Countable Choice, $X$ is reflexive exactly when
-$X^*$ is reflexive
-([[thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive]]).
+[L2] Under Hahn--Banach and Countable Choice, $X$ is reflexive exactly when $X^*$ is reflexive ([[thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive]]).
 
-[L3] The real dual of $\ell^1$ is $\ell^\infty$
-([[cor-ell-p-duality-by-counting-measure]]), and the same holds over the complex
-field ([[thm-complex-dual-of-ell-one-is-ell-infinity]]).
+[L3] The real dual of $\ell^1$ is $\ell^\infty$ ([[cor-ell-p-duality-by-counting-measure]]), and the same holds over the complex field ([[thm-complex-dual-of-ell-one-is-ell-infinity]]).
 
-[L4] The dual $(\ell^\infty)^*$ is isometrically $ba$, and under AC the
-countably additive charges form its proper $\ell^1$ subspace
-([[thm-dual-of-ell-infinity-is-ba]],
-[[cor-countably-additive-part-of-ba-is-ell-one]]).
+[L4] The dual $(\ell^\infty)^*$ is isometrically $ba$, and under AC the countably additive charges form its proper $\ell^1$ subspace ([[thm-dual-of-ell-infinity-is-ba]], [[cor-countably-additive-part-of-ba-is-ell-one]]).
 
 ## Counterexample
 
@@ -61,14 +53,10 @@ countably additive charges form its proper $\ell^1$ subspace
 **Given:** The objects and hypotheses in the Statement.
 
 1.1 AC in [A1] supplies the ultrafilter lemma, DC, Hahn--Banach, and Countable [given, A1, L1, L2]
-Choice needed by [L1] and [L2]. Thus [L1] already refutes reflexivity of
-$\ell^1$, over both scalar fields. [A1, L1]
+Choice needed by [L1] and [L2]. Thus [L1] already refutes reflexivity of $\ell^1$, over both scalar fields. [A1, L1]
 
 2.1 By [L3], $(\ell^1)^*=\ell^\infty$. If $\ell^\infty$ were reflexive, [given, L3, L2, step 1.1]
-the reverse implication in [L2] would make $\ell^1$ reflexive, contradicting
-step 1.1. Hence $\ell^\infty$ is not reflexive. [L2, L3, step 1.1]
+the reverse implication in [L2] would make $\ell^1$ reflexive, contradicting step 1.1. Hence $\ell^\infty$ is not reflexive. [L2, L3, step 1.1]
 
 3.1 Independently, [L4] exhibits the bidual surplus: under the identification [given, L4, A1, step 2.1]
-$(\ell^1)^{**}=(\ell^\infty)^*=ba$, the canonical $\ell^1$ image is only the
-proper subspace of countably additive charges. This is a concrete failed-
-surjectivity witness consistent with steps 1.1-2.1. [A1, L4] ∎
+$(\ell^1)^{**}=(\ell^\infty)^*=ba$, the canonical $\ell^1$ image is only the proper subspace of countably additive charges. This is a concrete failed- surjectivity witness consistent with steps 1.1-2.1. [A1, L4] ∎

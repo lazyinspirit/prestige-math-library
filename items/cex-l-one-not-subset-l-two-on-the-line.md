@@ -25,21 +25,16 @@ On $\mathbb R$ with Lebesgue measure, every $L^1$ function lies in $L^2$.
 
 ## Facts & Assumptions
 
-**Given:** The power-family thresholds from
-[[ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership]].
+**Given:** The power-family thresholds from [[ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership]].
 
-[L1] For $f_0(x)=x^{-a}\chi_{(0,1)}(x)$, one has
-$f_0\in\mathcal L^p$ exactly when $ap<1$
-([[ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership]]).
+[L1] For $f_0(x)=x^{-a}\chi_{(0,1)}(x)$, one has $f_0\in\mathcal L^p$ exactly when $ap<1$ ([[ex-x-to-the-minus-a-on-zero-one-and-on-one-infinity-calibrates-l-p-membership]]).
 
 ## Counterexample
 
-**Proof technique:** Use the power-function family $x^{-a}$ near $0$ with
-$1/2\le a<1$.
+**Proof technique:** Use the power-function family $x^{-a}$ near $0$ with $1/2\le a<1$.
 
 1.1 Choose $a=3/4$ and set $f(x):=x^{-3/4}\chi_{(0,1)}(x)$. Then [L1, given]
-$a\cdot1=3/4<1$, so [L1] gives $f\in L^1$. But $a\cdot2=3/2>1$, so [L1] also
-gives $f\notin L^2$.
+$a\cdot1=3/4<1$, so [L1] gives $f\in L^1$. But $a\cdot2=3/2>1$, so [L1] also gives $f\notin L^2$.
 
 2.1 Thus $f$ is an $L^1$ function on $\mathbb R$ that does not lie in $L^2$, [step 1.1]
 refuting the claim. ∎

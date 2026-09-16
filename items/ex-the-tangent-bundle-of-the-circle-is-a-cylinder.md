@@ -43,12 +43,9 @@ $a(-y,x)$.
 
 [L1] The tangent bundle is a smooth manifold whose fibers are the tangent spaces ([[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]).
 
-[L2] Curve contact classes are canonically identified with derivation tangent
-vectors ([[thm-curve-contact-classes-are-canonically-isomorphic-to-derivation-tangent-vectors]]).
+[L2] Curve contact classes are canonically identified with derivation tangent vectors ([[thm-curve-contact-classes-are-canonically-isomorphic-to-derivation-tangent-vectors]]).
 
-[L3] A smooth coordinate chart induces tangent-bundle coordinates by recording
-the coefficients in its coordinate tangent basis
-([[def-induced-tangent-bundle-chart]]).
+[L3] A smooth coordinate chart induces tangent-bundle coordinates by recording the coefficients in its coordinate tangent basis ([[def-induced-tangent-bundle-chart]]).
 
 ## Verification
 

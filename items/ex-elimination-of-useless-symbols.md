@@ -38,8 +38,7 @@ which generates the same language $\{ab,a\}$.
 
 **Given:** The grammar displayed above.
 
-[L1] Eliminating useless symbols preserves the generated language, by
-[[thm-elimination-of-useless-symbols]].
+[L1] Eliminating useless symbols preserves the generated language, by [[thm-elimination-of-useless-symbols]].
 
 ## Verification
 

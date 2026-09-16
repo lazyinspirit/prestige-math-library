@@ -42,47 +42,27 @@ universe.
 
 **Given:** $M,T$ and $P=P(T)$ as in the Statement. Assume AC in $M$.
 
-[F1] A Suslin tree has height $\omega_1$, countable levels, no cofinal branch,
-and no uncountable antichain; a natural-valued map separating comparable nodes
-specializes a tree. [[def-aronszajn-suslin-and-special-tree]]
+[F1] A Suslin tree has height $\omega_1$, countable levels, no cofinal branch, and no uncountable antichain; a natural-valued map separating comparable nodes specializes a tree. [[def-aronszajn-suslin-and-special-tree]]
 
-[F2] Conditions in $P(T)$ are finite specializing functions, stronger
-conditions extend weaker graphs, the empty function is the greatest condition,
-and compatible conditions have a specializing union.
-[[def-finite-aronszajn-specialization-poset]]
+[F2] Conditions in $P(T)$ are finite specializing functions, stronger conditions extend weaker graphs, the empty function is the greatest condition, and compatible conditions have a specializing union. [[def-finite-aronszajn-specialization-poset]]
 
-[F3] In ZFC the finite-specialization forcing of an Aronszajn tree is ccc.
-[[thm-aronszajn-specialization-poset-ccc]]
+[F3] In ZFC the finite-specialization forcing of an Aronszajn tree is ccc. [[thm-aronszajn-specialization-poset-ccc]]
 
-[F4] Each node-domain set $D_t$ is dense, and the union of a nonempty directed
-family meeting all $D_t$ is a total specializing function.
-[[lem-specialization-dense-domains-and-union]]
+[F4] Each node-domain set $D_t$ is dense, and the union of a nonempty directed family meeting all $D_t$ is a total specializing function. [[lem-specialization-dense-domains-and-union]]
 
-[F5] Ccc forcing preserves all ground-model cofinalities and cardinals.
-[[thm-chain-condition-preserves-cofinalities-and-cardinals]]
+[F5] Ccc forcing preserves all ground-model cofinalities and cardinals. [[thm-chain-condition-preserves-cofinalities-and-cardinals]]
 
-[F6] Under countable choice, no at most countable subset of $\omega_1$ is
-cofinal. [[thm-countable-subsets-of-omega-one-are-bounded]]
+[F6] Under countable choice, no at most countable subset of $\omega_1$ is cofinal. [[thm-countable-subsets-of-omega-one-are-bounded]]
 
-[F7] Under countable choice, a countable union of countable sets is countable.
-[[thm-countable-union-of-countable]]
+[F7] Under countable choice, a countable union of countable sets is countable. [[thm-countable-union-of-countable]]
 
-[F8] Check names evaluate to their ground values; name valuation selects exactly
-the subnames whose coefficients lie in the filter.
-[[def-forcing-name-valuation-and-generic-extension]],
-[[thm-check-name-evaluation-and-generic-reconstruction]]
+[F8] Check names evaluate to their ground values; name valuation selects exactly the subnames whose coefficients lie in the filter. [[def-forcing-name-valuation-and-generic-extension]], [[thm-check-name-evaluation-and-generic-reconstruction]]
 
-[F9] Forcing is persistent and closed under dense truth, and the forcing theorem
-relates the internal predicate to truth in generic extensions without asserting
-that such a generic over the universe exists.
-[[lem-forcing-monotonicity-density-and-decision]], [[thm-forcing-theorem]]
+[F9] Forcing is persistent and closed under dense truth, and the forcing theorem relates the internal predicate to truth in generic extensions without asserting that such a generic over the universe exists. [[lem-forcing-monotonicity-density-and-decision]], [[thm-forcing-theorem]]
 
-[F10] A generic extension of a transitive ZFC ground is again a transitive ZFC
-model. [[thm-generic-extensions-satisfy-zf-and-zfc]]
+[F10] A generic extension of a transitive ZFC ground is again a transitive ZFC model. [[thm-generic-extensions-satisfy-zf-and-zfc]]
 
-[A1] The ground model satisfies AC; its use in the ccc and preservation
-suppliers and its preservation to the extension are declared explicitly.
-[[def-axiom-of-choice]]
+[A1] The ground model satisfies AC; its use in the ccc and preservation suppliers and its preservation to the extension are declared explicitly. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -100,9 +80,5 @@ suppliers and its preservation to the extension are declared explicitly.
 
 ## Remarks
 
-- “Kills” means destroys the Suslin property, not the tree or its height. The
-  specializing map itself rules out a new cofinal branch, so the forced tree is
-  still Aronszajn.
-- Preservation of $\omega_1$ alone does not exhibit an uncountable fiber. The
-  proof also uses ZFC in the extension to make a countable union of countable
-  fibers countable and then uses the cofinal node-height set.
+- “Kills” means destroys the Suslin property, not the tree or its height. The specializing map itself rules out a new cofinal branch, so the forced tree is still Aronszajn.
+- Preservation of $\omega_1$ alone does not exhibit an uncountable fiber. The proof also uses ZFC in the extension to make a countable union of countable fibers countable and then uses the cofinal node-height set.

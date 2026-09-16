@@ -32,14 +32,11 @@ published finite identities.
 
 **Given:** Square-integrable real random variables $X,Y$.
 
-[L1] Variance and covariance are the expectations of the centered square and
-centered product ([[def-moments-variance-and-covariance]]).
+[L1] Variance and covariance are the expectations of the centered square and centered product ([[def-moments-variance-and-covariance]]).
 
-[L2] Expectation is linear on integrable random variables
-([[cor-expectation-linearity-monotonicity-and-modulus-bound]]).
+[L2] Expectation is linear on integrable random variables ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]).
 
-[L3] Finite probability spaces agree with the full-power-set probability-space
-formalism ([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]]).
+[L3] Finite probability spaces agree with the full-power-set probability-space formalism ([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]]).
 
 ## Proof
 

@@ -98,27 +98,10 @@ uses [[thm-recursion]] and no choice principle.
 
 ## Remarks
 
-- **What each hypothesis buys.** Closedness enters through [L5]: the nested
-  interval property is stated for closed intervals and fails for open ones
-  ([[cex-nested-open-intervals-empty]]). Boundedness enters through the same
-  fact and through the length computation of step 3.2. Completeness of
-  $\mathbb{R}$ enters only inside [[thm-nested-interval-property]] and, through
-  [[cor-archimedean-reciprocal]], in step 5.1.
+- **What each hypothesis buys.** Closedness enters through [L5]: the nested interval property is stated for closed intervals and fails for open ones ([[cex-nested-open-intervals-empty]]). Boundedness enters through the same fact and through the length computation of step 3.2. Completeness of $\mathbb{R}$ enters only inside [[thm-nested-interval-property]] and, through [[cor-archimedean-reciprocal]], in step 5.1.
 
-- **Why the lengths are handled without powers.** The obvious route is
-  $\ell_k = \ell_0 \cdot 2^{-k}$ together with the nullity of a geometric
-  sequence, which is available ([[lem-geometric-sequence-null]]). The route
-  taken instead, the one-line induction of step 4.1, gives the weaker bound
-  $\ell_k \le \ell_0/(k+1)$, which is all step 5.1 needs, and it avoids
-  integer powers and the algebra of limits entirely.
+- **Why the lengths are handled without powers.** The obvious route is $\ell_k = \ell_0 \cdot 2^{-k}$ together with the nullity of a geometric sequence, which is available ([[lem-geometric-sequence-null]]). The route taken instead, the one-line induction of step 4.1, gives the weaker bound $\ell_k \le \ell_0/(k+1)$, which is all step 5.1 needs, and it avoids integer powers and the algebra of limits entirely.
 
-- **The recursion is over pairs, not over sets.** The state carried from stage
-  to stage is the pair of endpoints, so [L4] applies with $Y = X$ and a total
-  map $G$; had the rule been "choose a bad half", the state would have been
-  chosen rather than computed and the argument would have needed dependent
-  choice, which this library does not have.
+- **The recursion is over pairs, not over sets.** The state carried from stage to stage is the pair of endpoints, so [L4] applies with $Y = X$ and a total map $G$; had the rule been "choose a bad half", the state would have been chosen rather than computed and the argument would have needed dependent choice, which this library does not have.
 
-- **The converse direction is a separate result.** That a compact subset of
-  $\mathbb{R}$ must be closed and bounded is
-  [[lem-compact-implies-closed-and-bounded-r]], and the two together give
-  [[thm-heine-borel-characterisation-r]].
+- **The converse direction is a separate result.** That a compact subset of $\mathbb{R}$ must be closed and bounded is [[lem-compact-implies-closed-and-bounded-r]], and the two together give [[thm-heine-borel-characterisation-r]].

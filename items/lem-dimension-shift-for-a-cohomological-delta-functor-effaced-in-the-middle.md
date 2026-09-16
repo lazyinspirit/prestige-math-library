@@ -44,10 +44,7 @@ has the following properties:
 
 **Given:** A short exact sequence $0\to A\to I\to C\to0$ and an integer $n>0$.
 
-[L1] A cohomological delta functor attaches an exact segment
-$$T^{n-1}(I)\to T^{n-1}(C)\xrightarrow{\partial^{n-1}}T^n(A)\to T^n(I)$$
-to the given short exact sequence
-([[def-cohomological-delta-functor]]).
+[L1] A cohomological delta functor attaches an exact segment $$T^{n-1}(I)\to T^{n-1}(C)\xrightarrow{\partial^{n-1}}T^n(A)\to T^n(I)$$ to the given short exact sequence ([[def-cohomological-delta-functor]]).
 
 ## Proof
 

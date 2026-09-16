@@ -50,16 +50,9 @@ $|h\chi_A|\le|h|$.
 **Proof technique:** direct.
 
 1.1 Assume $f=g$ almost everywhere, with exceptional null set $N$. Then for [L1, L2, L4, given]
-every measurable $A$, the real and imaginary parts of $(f-g)\chi_A$ are
-supported on $N$, so [L1] and [L2] give
-$$\int_A(f-g)\,d\mu=0,$$
-hence $\int_A f\,d\mu=\int_A g\,d\mu$.
+every measurable $A$, the real and imaginary parts of $(f-g)\chi_A$ are supported on $N$, so [L1] and [L2] give $$\int_A(f-g)\,d\mu=0,$$ hence $\int_A f\,d\mu=\int_A g\,d\mu$.
 
 1.2 Assume instead that $\int_A f\,d\mu=\int_A g\,d\mu$ for every measurable [L2, L3, L4, given]
-$A$. Apply this to the real part $u:=\operatorname{Re}(f-g)$ on the set
-$A_+:=\{u>0\}$ and to $-u$ on $A_-:=\{u<0\}$. In each case the corresponding
-nonnegative integral is $0$, so [L3] gives $u=0$ almost everywhere. The same
-argument for $v:=\operatorname{Im}(f-g)$ shows $v=0$ almost everywhere. Hence
-$f=g$ almost everywhere.
+$A$. Apply this to the real part $u:=\operatorname{Re}(f-g)$ on the set $A_+:=\{u>0\}$ and to $-u$ on $A_-:=\{u<0\}$. In each case the corresponding nonnegative integral is $0$, so [L3] gives $u=0$ almost everywhere. The same argument for $v:=\operatorname{Im}(f-g)$ shows $v=0$ almost everywhere. Hence $f=g$ almost everywhere.
 
 2.1 Step 1.1 proves $(1)\Rightarrow(2)$ and step 1.2 proves $(2)\Rightarrow(1)$.[step 1.1, step 1.2] ∎

@@ -30,31 +30,17 @@ is an isomorphism for every $k$ and every commutative ring $R$.
 
 ## Facts & Assumptions
 
-**Given:** The product bundle, standard ordered orientation, and a commutative
-ring $R$.
+**Given:** The product bundle, standard ordered orientation, and a commutative ring $R$.
 
-[F1] [[prop-thom-space-of-zero-and-trivial-bundles]] identifies the product
-disk/sphere pair and its iterated suspension quotient.
+[F1] [[prop-thom-space-of-zero-and-trivial-bundles]] identifies the product disk/sphere pair and its iterated suspension quotient.
 
-[F2] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] supplies
-the ordered generator $v_n$ over arbitrary $R$.
+[F2] [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] supplies the ordered generator $v_n$ over arbitrary $R$.
 
-[F3] [[cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms]]
-and [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] give
-choice-free homotopy invariance, finite additivity, and the pair sequence.
-[[def-relative-singular-cochain-complex]],
-[[thm-cover-small-inclusion-is-a-chain-homotopy-equivalence]], and
-[[thm-five-lemma-for-modules]] supply the relative-pair comparison used in
-the iteration below.
+[F3] [[cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms]] and [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] give choice-free homotopy invariance, finite additivity, and the pair sequence. [[def-relative-singular-cochain-complex]], [[thm-cover-small-inclusion-is-a-chain-homotopy-equivalence]], and [[thm-five-lemma-for-modules]] supply the relative-pair comparison used in the iteration below.
 
-[F4] [[def-relative-cup-product]] constructs relative products,
-[[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]
-gives naturality and the signed connector rule, and
-[[prop-cup-product-is-natural-unital-and-associative]] gives cochain
-associativity.
+[F4] [[def-relative-cup-product]] constructs relative products, [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] gives naturality and the signed connector rule, and [[prop-cup-product-is-natural-unital-and-associative]] gives cochain associativity.
 
-[F5] [[def-thom-class-by-fiberwise-normalization]] gives the fiber restriction
-criterion.
+[F5] [[def-thom-class-by-fiberwise-normalization]] gives the fiber restriction criterion.
 
 ## Proof
 

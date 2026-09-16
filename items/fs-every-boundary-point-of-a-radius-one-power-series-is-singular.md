@@ -34,9 +34,7 @@ radius-one power series is singular.
 
 **Given:** The geometric-series boundary example.
 
-[L1] The geometric series has radius $1$, but only the boundary point $1$ is
-singular on the unit circle
-([[ex-the-geometric-series-has-only-one-singular-boundary-point]]).
+[L1] The geometric series has radius $1$, but only the boundary point $1$ is singular on the unit circle ([[ex-the-geometric-series-has-only-one-singular-boundary-point]]).
 
 ## Refutation
 

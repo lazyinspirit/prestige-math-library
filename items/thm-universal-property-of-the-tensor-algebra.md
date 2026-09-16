@@ -33,17 +33,13 @@ $\widehat f:T(V)\to A$.
 
 ## Facts & Assumptions
 
-**Given:** A vector space $V$, a unital associative $k$-algebra $A$, and a
-linear map $f:V\to A$.
+**Given:** A vector space $V$, a unital associative $k$-algebra $A$, and a linear map $f:V\to A$.
 
-[L1] Multilinear maps on $V^n$ factor uniquely through $V^{\otimes n}$
-([[cor-finite-iterated-tensor-products-represent-multilinear-maps]]).
+[L1] Multilinear maps on $V^n$ factor uniquely through $V^{\otimes n}$ ([[cor-finite-iterated-tensor-products-represent-multilinear-maps]]).
 
-[L2] Maps from a direct sum are determined uniquely by their restrictions to
-the summands ([[thm-universal-property-of-module-direct-sums]]).
+[L2] Maps from a direct sum are determined uniquely by their restrictions to the summands ([[thm-universal-property-of-module-direct-sums]]).
 
-[L3] The grading and concatenation multiplication are those of
-[[def-tensor-algebra-of-a-vector-space]].
+[L3] The grading and concatenation multiplication are those of [[def-tensor-algebra-of-a-vector-space]].
 
 ## Proof
 

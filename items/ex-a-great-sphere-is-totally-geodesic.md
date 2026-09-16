@@ -40,17 +40,13 @@ and shape-operator interfaces.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $n\geq1$, $0\leq k\leq n$, and the
-standard equatorial inclusion of unit round spheres.
+**Given:** $\mathrm{AC}_\omega$, $n\geq1$, $0\leq k\leq n$, and the standard equatorial inclusion of unit round spheres.
 
 [F1] Countable choice permits a choice from every sequence of nonempty sets. [[def-countable-choice]].
 
 [F2] A regular level set is an embedded submanifold whose tangent space is the kernel of the defining differential. [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
-[F3] The Christoffel formula and the connection Leibniz rule compute the
-Euclidean Levi–Civita connection in Cartesian coordinates.
-[[prop-christoffel-formula-for-the-levi-civita-connection]],
-[[prop-connection-laws-in-directional-form]].
+[F3] The Christoffel formula and the connection Leibniz rule compute the Euclidean Levi–Civita connection in Cartesian coordinates. [[prop-christoffel-formula-for-the-levi-civita-connection]], [[prop-connection-laws-in-directional-form]].
 
 [F4] For an embedded Riemannian submanifold, its intrinsic Levi–Civita connection is the tangential projection of the ambient one. [[thm-the-induced-connection-is-levi-civita]].
 

@@ -38,17 +38,11 @@ of the following holds:
 
 ## Facts & Assumptions
 
-**Given:** A bipartite graph $(A,B)$, parameters $\Gamma,\Delta>0$ and
-$d\in(0,1)$, every vertex of $B$ has a neighbour in $A$, and every vertex of
-$A$ has at most $\Delta$ neighbours in $B$.
+**Given:** A bipartite graph $(A,B)$, parameters $\Gamma,\Delta>0$ and $d\in(0,1)$, every vertex of $B$ has a neighbour in $A$, and every vertex of $A$ has at most $\Delta$ neighbours in $B$.
 
-[L1] Under the layer hypotheses of the previous lemma, either a
-$(t,\Gamma t^{-1/d})$-comb already appears or the current layer $C$ has size at
-most $2^{d+1}(2/3)^{s-sd-1}\Gamma^d\Delta^{1-d}$
-([[lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears]]).
+[L1] Under the layer hypotheses of the previous lemma, either a $(t,\Gamma t^{-1/d})$-comb already appears or the current layer $C$ has size at most $2^{d+1}(2/3)^{s-sd-1}\Gamma^d\Delta^{1-d}$ ([[lem-a-bipartite-layer-is-small-unless-a-large-comb-already-appears]]).
 
-[L2] If $|r|<1$, then $\sum_{n\geq 0} r^n=1/(1-r)$
-([[thm-geometric-series]]).
+[L2] If $|r|<1$, then $\sum_{n\geq 0} r^n=1/(1-r)$ ([[thm-geometric-series]]).
 
 ## Proof
 

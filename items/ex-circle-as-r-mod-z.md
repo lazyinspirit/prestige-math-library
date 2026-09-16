@@ -115,19 +115,8 @@ functions, which are not available at this point in the reading order.
 
 ## Remarks
 
-- **The fractional part is not continuous, and $r$ nevertheless is.** The map
-  $x \mapsto x - \lfloor x \rfloor$ jumps from values near $1$ to $0$ at every
-  integer; composing it with $p$ repairs the jump, because $p(1) = p(0)$. That is
-  the whole content of step 2.2, and it is why the closed pasting lemma of
-  [[lem-continuity-is-local-and-pastes]] is used with exactly two pieces.
+- **The fractional part is not continuous, and $r$ nevertheless is.** The map $x \mapsto x - \lfloor x \rfloor$ jumps from values near $1$ to $0$ at every integer; composing it with $p$ repairs the jump, because $p(1) = p(0)$. That is the whole content of step 2.2, and it is why the closed pasting lemma of [[lem-continuity-is-local-and-pastes]] is used with exactly two pieces.
 
-- **Why the quotient map being open matters here.** Claim 1 is not needed for
-  claim 2, but it is what makes $T$ easy to work with: the images of the intervals
-  $(a,b)$ form a basis of $T$, so a neighbourhood of a class is the image of a
-  neighbourhood of any of its representatives. The torus example on this page uses
-  the same fact for the product $q \times q$.
+- **Why the quotient map being open matters here.** Claim 1 is not needed for claim 2, but it is what makes $T$ easy to work with: the images of the intervals $(a,b)$ form a basis of $T$, so a neighbourhood of a class is the image of a neighbourhood of any of its representatives. The torus example on this page uses the same fact for the product $q \times q$.
 
-- **No circle appears.** Nothing above says that $T$ is the unit circle of
-  $\mathbb{R}^2$, and nothing may: the map $t \mapsto (\cos 2\pi t, \sin 2\pi t)$
-  needs the trigonometric functions, which are not available at this point in the
-  reading order. The name "circle" is avoided in the statement for that reason.
+- **No circle appears.** Nothing above says that $T$ is the unit circle of $\mathbb{R}^2$, and nothing may: the map $t \mapsto (\cos 2\pi t, \sin 2\pi t)$ needs the trigonometric functions, which are not available at this point in the reading order. The name "circle" is avoided in the statement for that reason.

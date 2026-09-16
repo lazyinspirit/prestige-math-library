@@ -39,11 +39,9 @@ still be removable, a pole, or essential just as in one variable.
 
 **Given:** Complex dimension $m\ge2$.
 
-[L1] In one variable every isolated singularity is exactly one of the removable,
-pole, or essential cases ([[thm-isolated-singularity-trichotomy]]).
+[L1] In one variable every isolated singularity is exactly one of the removable, pole, or essential cases ([[thm-isolated-singularity-trichotomy]]).
 
-[L2] In several variables with $m\ge2$, an isolated deleted point is always
-removable ([[cor-no-isolated-holomorphic-singularities-in-several-complex-variables]]).
+[L2] In several variables with $m\ge2$, an isolated deleted point is always removable ([[cor-no-isolated-holomorphic-singularities-in-several-complex-variables]]).
 
 ## Refutation
 

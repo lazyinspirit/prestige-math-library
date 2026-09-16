@@ -34,16 +34,11 @@ complexes.
 
 ## Facts & Assumptions
 
-**Given:** Chain maps $f,g:C_\bullet\to D_\bullet$ and a chain homotopy
-$s:f\simeq g$.
+**Given:** Chain maps $f,g:C_\bullet\to D_\bullet$ and a chain homotopy $s:f\simeq g$.
 
-[L1] A chain homotopy satisfies
-$$f-g=d^Ds+sd^C$$
-([[def-chain-homotopy]]).
+[L1] A chain homotopy satisfies $$f-g=d^Ds+sd^C$$ ([[def-chain-homotopy]]).
 
-[L2] The cone differential is
-$$d(y,x)=(d^D(y)+f(x),-d^C(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L2] The cone differential is $$d(y,x)=(d^D(y)+f(x),-d^C(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
 ## Proof
 

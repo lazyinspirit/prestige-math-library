@@ -33,20 +33,15 @@ reflects every small limit that is defined in $\mathcal C$.
 
 **Given:** A small category $\mathcal C$ and a small diagram in it.
 
-[F1] The Yoneda embedding sends $a$ to $\mathcal C(-,a)$
-([[def-yoneda-embedding]]).
+[F1] The Yoneda embedding sends $a$ to $\mathcal C(-,a)$ ([[def-yoneda-embedding]]).
 
-[L1] Covariant representable functors preserve small limits
-([[thm-representable-functors-preserve-small-limits]]).
+[L1] Covariant representable functors preserve small limits ([[thm-representable-functors-preserve-small-limits]]).
 
-[L2] Limits in functor categories are computed pointwise
-([[thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]]).
+[L2] Limits in functor categories are computed pointwise ([[thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]]).
 
-[L3] Fully faithful functors reflect limits
-([[prop-fully-faithful-functors-reflect-limits-and-colimits]]).
+[L3] Fully faithful functors reflect limits ([[prop-fully-faithful-functors-reflect-limits-and-colimits]]).
 
-[L4] The Yoneda embedding is fully faithful
-([[thm-yoneda-embedding-is-fully-faithful]]).
+[L4] The Yoneda embedding is fully faithful ([[thm-yoneda-embedding-is-fully-faithful]]).
 
 ## Proof
 

@@ -32,21 +32,13 @@ constructibility assumption.
 
 **Given:** The false claim above.
 
-[A1] Every total time bound $t$ with $t(n)\ge n$ can be uniformly materialized
-and enforced as a same-scale machine clock without a constructibility
-assumption.
+[A1] Every total time bound $t$ with $t(n)\ge n$ can be uniformly materialized and enforced as a same-scale machine clock without a constructibility assumption.
 
 [L1] A constructible time bound is one whose value can itself be written down within the same asymptotic scale, by [[def-time-and-space-constructible-function]].
 
-[L2] A constructible time bound that also satisfies $n\le t(n)$ for all
-sufficiently large $n$ yields a uniformly clocked simulator, by
-[[lem-clocked-machine-construction]].
+[L2] A constructible time bound that also satisfies $n\le t(n)$ for all sufficiently large $n$ yields a uniformly clocked simulator, by [[lem-clocked-machine-construction]].
 
-[F1] There exists a total noncomputable function
-$b:\mathbb N\to\{0,1\}$. Indeed, the total computable binary-valued functions
-form a countable family $(b_j)_{j\in\mathbb N}$ because machines have finite
-descriptions, and the diagonal function $b(n):=1-b_n(n)$ differs from every
-$b_j$ at input $j$.
+[F1] There exists a total noncomputable function $b:\mathbb N\to\{0,1\}$. Indeed, the total computable binary-valued functions form a countable family $(b_j)_{j\in\mathbb N}$ because machines have finite descriptions, and the diagonal function $b(n):=1-b_n(n)$ differs from every $b_j$ at input $j$.
 
 ## Refutation
 

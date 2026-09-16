@@ -42,32 +42,21 @@ Maurer--Cartan, invariant-field, and tangent-bracket results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, its left
-Maurer--Cartan form $\theta$, and $\mathfrak g=T_eG$ with the transported
-left-invariant-field bracket.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, its left Maurer--Cartan form $\theta$, and $\mathfrak g=T_eG$ with the transported left-invariant-field bracket.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Finite-dimensional vector-valued forms and their componentwise exterior
-derivative are defined by scalar dual evaluation.
-[[def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative]].
+[F2] Finite-dimensional vector-valued forms and their componentwise exterior derivative are defined by scalar dual evaluation. [[def-finite-dimensional-vector-valued-forms-and-their-exterior-derivative]].
 
-[F3] Every $\theta_p$ is a linear isomorphism with inverse $d(L_p)_e$, and
-$\theta(X^L)=X$. [[prop-maurer-cartan-form-is-a-pointwise-isomorphism-and-left-invariant]].
+[F3] Every $\theta_p$ is a linear isomorphism with inverse $d(L_p)_e$, and $\theta(X^L)=X$. [[prop-maurer-cartan-form-is-a-pointwise-isomorphism-and-left-invariant]].
 
-[F4] The transported tangent bracket satisfies
-$[X^L,Y^L]=[X,Y]_G^L$.
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F4] The transported tangent bracket satisfies $[X^L,Y^L]=[X,Y]_G^L$. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F5] The tangent bracket is bilinear and alternating.
-[[thm-the-tangent-space-at-the-identity-is-a-lie-algebra]].
+[F5] The tangent bracket is bilinear and alternating. [[thm-the-tangent-space-at-the-identity-is-a-lie-algebra]].
 
-[F6] Every $X\in\mathfrak g$ has a unique smooth left-invariant extension.
-[[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F6] Every $X\in\mathfrak g$ has a unique smooth left-invariant extension. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
-[F7] For a scalar one-form $\alpha$,
-$d\alpha(A,B)=A(\alpha(B))-B(\alpha(A))-\alpha([A,B])$.
-[[def-exterior-derivative-by-the-invariant-vector-field-formula]].
+[F7] For a scalar one-form $\alpha$, $d\alpha(A,B)=A(\alpha(B))-B(\alpha(A))-\alpha([A,B])$. [[def-exterior-derivative-by-the-invariant-vector-field-formula]].
 
 ## Proof
 

@@ -38,12 +38,9 @@ Here $SO(n)$ is embedded as $\operatorname{diag}(A,1)$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $n\ge1$, and the standard linear action of
-$SO(n+1)$ on the unit sphere $S^n\subseteq\mathbb R^{n+1}$.
+**Given:** $\mathrm{AC}_\omega$, $n\ge1$, and the standard linear action of $SO(n+1)$ on the unit sphere $S^n\subseteq\mathbb R^{n+1}$.
 
-[A1] A transitive smooth action identifies the manifold equivariantly with
-the quotient by a point stabilizer. [[def-countable-choice]],
-[[cor-transitive-smooth-actions-identify-m-with-g-mod-h]].
+[A1] A transitive smooth action identifies the manifold equivariantly with the quotient by a point stabilizer. [[def-countable-choice]], [[cor-transitive-smooth-actions-identify-m-with-g-mod-h]].
 
 ## Verification
 

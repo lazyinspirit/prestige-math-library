@@ -40,16 +40,11 @@ This item is stated under $\mathsf{ZF}+\mathsf{AC}_\omega$.
 
 ## Facts & Assumptions
 
-**Given:** Identify $\operatorname{SU}(2)$ with the unit quaternions
-$S^3$ and $\mathbb R^3$ with the imaginary quaternions.
+**Given:** Identify $\operatorname{SU}(2)$ with the unit quaternions $S^3$ and $\mathbb R^3$ with the imaginary quaternions.
 
-[L1] Isomorphic real Lie algebras determine the same simply connected
-integration but connected integrations may differ by discrete central
-quotients
-([[cor-isomorphic-lie-algebras-give-locally-isomorphic-but-not-necessarily-isomorphic-connected-lie-groups]]).
+[L1] Isomorphic real Lie algebras determine the same simply connected integration but connected integrations may differ by discrete central quotients ([[cor-isomorphic-lie-algebras-give-locally-isomorphic-but-not-necessarily-isomorphic-connected-lie-groups]]).
 
-[L2] The universal covering Lie group is a Lie-group covering with the
-same Lie algebra ([[thm-universal-covering-lie-group]]).
+[L2] The universal covering Lie group is a Lie-group covering with the same Lie algebra ([[thm-universal-covering-lie-group]]).
 
 ## Verification
 

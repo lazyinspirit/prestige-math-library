@@ -31,15 +31,11 @@ $$\operatorname{Cone}(f)\to\operatorname{Cone}(g).$$
 
 ## Facts & Assumptions
 
-**Given:** A morphism of chain maps
-$(a,b):f:C_\bullet\to D_\bullet\to g:C'_\bullet\to D'_\bullet$.
+**Given:** A morphism of chain maps $(a,b):f:C_\bullet\to D_\bullet\to g:C'_\bullet\to D'_\bullet$.
 
-[L1] A morphism of chain maps is a commuting square $bf=ga$
-([[def-morphism-of-chain-maps]]).
+[L1] A morphism of chain maps is a commuting square $bf=ga$ ([[def-morphism-of-chain-maps]]).
 
-[L2] The cone differential is
-$$d(y,x)=(d^D(y)+f(x),-d^C(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L2] The cone differential is $$d(y,x)=(d^D(y)+f(x),-d^C(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
 ## Proof
 

@@ -32,15 +32,11 @@ $$T^*S^1\cong S^1\times\mathbb R,\qquad \lambda=p\,d\theta,\qquad \omega_{\mathr
 
 ## Facts & Assumptions
 
-**Given:** The standard angular atlas of $S^1$ and its induced cotangent
-coordinates.
+**Given:** The standard angular atlas of $S^1$ and its induced cotangent coordinates.
 
-[F1] In cotangent coordinates, $\lambda=p_i\,dq^i$.
-[[lem-the-tautological-one-form-is-intrinsic-and-smooth]].
+[F1] In cotangent coordinates, $\lambda=p_i\,dq^i$. [[lem-the-tautological-one-form-is-intrinsic-and-smooth]].
 
-[F2] In cotangent coordinates,
-$\omega_{\mathrm{can}}=dq^i\wedge dp_i$.
-[[thm-the-canonical-cotangent-two-form-is-symplectic]].
+[F2] In cotangent coordinates, $\omega_{\mathrm{can}}=dq^i\wedge dp_i$. [[thm-the-canonical-cotangent-two-form-is-symplectic]].
 
 ## Verification
 

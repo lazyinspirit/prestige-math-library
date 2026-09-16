@@ -98,23 +98,10 @@ and $x^0 = 1$, so the sequence begins with $x^0/0! = 1$.
 
 ## Remarks
 
-- **The threshold $N$ is chosen so that the ratio is bounded by a constant less
-  than $1$.** Beyond index $N$ each further factor of the factorial is at least
-  $\iota(N)$, so multiplying by $x$ and dividing by that factor shrinks the term
-  by at least the factor $\lambda = M/\iota(N) < 1$. That is the entire mechanism:
-  a factorial eventually beats a geometric sequence because its ratios, unlike a
-  geometric sequence's, tend to $0$.
+- **The threshold $N$ is chosen so that the ratio is bounded by a constant less than $1$.** Beyond index $N$ each further factor of the factorial is at least $\iota(N)$, so multiplying by $x$ and dividing by that factor shrinks the term by at least the factor $\lambda = M/\iota(N) < 1$. That is the entire mechanism: a factorial eventually beats a geometric sequence because its ratios, unlike a geometric sequence's, tend to $0$.
 
-- **No halving is used.** Many texts take $N$ with $M/N \le 1/2$; here it is
-  enough to take $N$ with $M < \iota(N)$, which the Archimedean property supplies
-  directly and which keeps every quantity a ratio of things already in hand.
+- **No halving is used.** Many texts take $N$ with $M/N \le 1/2$; here it is enough to take $N$ with $M < \iota(N)$, which the Archimedean property supplies directly and which keeps every quantity a ratio of things already in hand.
 
-- **The case $x = 0$ is not special.** Then $M = 0$, $\lambda = 0$ and the bound
-  reads $M^{N+j}/(N+j)! \le 0$ for $j \ge 1$, which is correct since those terms
-  are $0$; and $(0^{j})_j$ converges to $0$ because $|0| < 1$, so
-  [[lem-geometric-sequence-null]] applies unchanged.
+- **The case $x = 0$ is not special.** Then $M = 0$, $\lambda = 0$ and the bound reads $M^{N+j}/(N+j)! \le 0$ for $j \ge 1$, which is correct since those terms are $0$; and $(0^{j})_j$ converges to $0$ because $|0| < 1$, so [[lem-geometric-sequence-null]] applies unchanged.
 
-- **This is the strongest of the three standard comparisons on this page.**
-  [[lem-power-over-geometric-null]] says a power is beaten by a geometric
-  sequence; this says every geometric sequence, that is every fixed $x$, is beaten
-  by the factorial. Instances are worked in [[ex-standard-limits-worked]].
+- **This is the strongest of the three standard comparisons on this page.** [[lem-power-over-geometric-null]] says a power is beaten by a geometric sequence; this says every geometric sequence, that is every fixed $x$, is beaten by the factorial. Instances are worked in [[ex-standard-limits-worked]].

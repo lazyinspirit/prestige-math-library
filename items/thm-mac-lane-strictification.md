@@ -35,8 +35,7 @@ strict monoidal category.
 
 ## Facts & Assumptions
 
-**Given:** A monoidal category $\mathcal C$ and its right-module endofunctor
-category $\mathcal C'$.
+**Given:** A monoidal category $\mathcal C$ and its right-module endofunctor category $\mathcal C'$.
 
 [L1] An object of $\mathcal C'$ is a functor $F$ together with coherent isomorphisms $c_{X,Y}:F(X)\otimes Y\to F(X\otimes Y)$, and a morphism in $\mathcal C'$ is a natural transformation compatible with those structure maps ([[def-the-category-of-right-module-endofunctors]]).
 

@@ -36,19 +36,13 @@ with the subspace topology inherited from the product topology on $X\times Y$.
 
 **Given:** The displayed continuous maps.
 
-[F1] A pullback represents compatible pairs of maps
-([[def-pullbacks-and-pushouts]]).
+[F1] A pullback represents compatible pairs of maps ([[def-pullbacks-and-pushouts]]).
 
-[L1] Top-limits have the Set-limit as underlying set
-([[thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both]]).
+[L1] Top-limits have the Set-limit as underlying set ([[thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both]]).
 
-[F2] For $P=\prod_iX_i$ with the product topology of [[def-product-topology]],
-a function $h:Z\to P$ is continuous exactly when every component $\pi_i\circ h$
-is continuous ([[thm-product-universal-property]], claim 2).
+[F2] For $P=\prod_iX_i$ with the product topology of [[def-product-topology]], a function $h:Z\to P$ is continuous exactly when every component $\pi_i\circ h$ is continuous ([[thm-product-universal-property]], claim 2).
 
-[F3] A map into a subspace is continuous exactly when its composite with the
-inclusion is continuous, provided its set map lands there
-([[def-subspace-topology-top]]).
+[F3] A map into a subspace is continuous exactly when its composite with the inclusion is continuous, provided its set map lands there ([[def-subspace-topology-top]]).
 
 ## Verification
 

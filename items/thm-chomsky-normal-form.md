@@ -30,17 +30,13 @@ normal form.
 
 **Given:** A context-free grammar $G$.
 
-[L1] Useless symbols can be eliminated without changing the language, by
-[[thm-elimination-of-useless-symbols]].
+[L1] Useless symbols can be eliminated without changing the language, by [[thm-elimination-of-useless-symbols]].
 
-[L2] Epsilon-productions can be eliminated except for the special start-symbol
-exception, by [[thm-elimination-of-epsilon-productions]].
+[L2] Epsilon-productions can be eliminated except for the special start-symbol exception, by [[thm-elimination-of-epsilon-productions]].
 
-[L3] Unit productions can be eliminated without changing the language, by
-[[thm-elimination-of-unit-productions]].
+[L3] Unit productions can be eliminated without changing the language, by [[thm-elimination-of-unit-productions]].
 
-[L4] Chomsky normal form allows only productions of the shapes listed in
-[[def-chomsky-normal-form]].
+[L4] Chomsky normal form allows only productions of the shapes listed in [[def-chomsky-normal-form]].
 
 ## Proof
 

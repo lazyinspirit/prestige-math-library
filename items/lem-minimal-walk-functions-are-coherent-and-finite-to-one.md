@@ -37,13 +37,9 @@ common domains of its members.
 
 **Given:** Ordinals $\beta\leq\beta'<\omega_1$ and the fixed minimal-walk data.
 
-[F1] [[def-minimal-walk-weights-and-coherent-functions]] identifies
-$e_\beta(\alpha)$ with the maximum of the finite local weights
-$|C_\zeta\cap\alpha|$ over $\zeta\in\operatorname{Tr}(\alpha,\beta)$.
+[F1] [[def-minimal-walk-weights-and-coherent-functions]] identifies $e_\beta(\alpha)$ with the maximum of the finite local weights $|C_\zeta\cap\alpha|$ over $\zeta\in\operatorname{Tr}(\alpha,\beta)$.
 
-[F2] [[lem-minimal-walk-trace-concatenation-and-limit-control]] proves trace
-concatenation once the finite initial intersections above the splice have
-stabilized.
+[F2] [[lem-minimal-walk-trace-concatenation-and-limit-control]] proves trace concatenation once the finite initial intersections above the splice have stabilized.
 
 ## Proof
 

@@ -37,18 +37,13 @@ nonzero entries in two distinct global blocks.
 
 ## Facts & Assumptions
 
-**Given:** AC and the modular system, element, centralizer, local block,
-Brauer character, and row in the Statement.
+**Given:** AC and the modular system, element, centralizer, local block, Brauer character, and row in the Statement.
 
-[F1] Brauer's Second Main Theorem gives the required block-support
-implication for each row ([[thm-brauer-second-main-theorem]]).
+[F1] Brauer's Second Main Theorem gives the required block-support implication for each row ([[thm-brauer-second-main-theorem]]).
 
-[F2] Every ordinary irreducible belongs to one and only one global block
-([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
+[F2] Every ordinary irreducible belongs to one and only one global block ([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
 
-[F3] The algebraically closed residue-field condition and AC are the
-hypotheses of F1 ([[def-algebraically-closed-field]] and
-[[def-axiom-of-choice]]).
+[F3] The algebraically closed residue-field condition and AC are the hypotheses of F1 ([[def-algebraically-closed-field]] and [[def-axiom-of-choice]]).
 
 ## Proof
 

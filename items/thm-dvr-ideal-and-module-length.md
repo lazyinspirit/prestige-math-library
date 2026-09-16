@@ -37,18 +37,13 @@ $$ \ell_V(V/(x))=n. $$
 
 **Given:** A discrete valuation ring $V$ with uniformiser $\pi$.
 
-[L1] Every nonzero element of the fraction field of $V$ is uniquely
-$u\pi^n$ with $u$ a unit and $n\in\mathbb Z$
-([[thm-dvr-element-normal-form]]).
+[L1] Every nonzero element of the fraction field of $V$ is uniquely $u\pi^n$ with $u$ a unit and $n\in\mathbb Z$ ([[thm-dvr-element-normal-form]]).
 
-[L2] Every nonzero ideal of $V$ is $(\pi^n)$ for a unique integer $n\ge0$
-([[thm-ideals-in-a-dvr]]).
+[L2] Every nonzero ideal of $V$ is $(\pi^n)$ for a unique integer $n\ge0$ ([[thm-ideals-in-a-dvr]]).
 
-[F1] A composition series has finitely many simple factors, and the length is
-their number ([[def-composition-series-and-length-of-a-module]]).
+[F1] A composition series has finitely many simple factors, and the length is their number ([[def-composition-series-and-length-of-a-module]]).
 
-[L3] Length is additive in short exact sequences
-([[cor-length-is-additive-in-short-exact-sequences]]).
+[L3] Length is additive in short exact sequences ([[cor-length-is-additive-in-short-exact-sequences]]).
 
 ## Proof
 

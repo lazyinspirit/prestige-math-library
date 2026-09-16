@@ -41,10 +41,7 @@ This DFA accepts exactly the binary words with no factor `11`.
 
 **Given:** The forbidden-factor set $B=\{11\}$ over $\{0,1\}$.
 
-[L1] The published prefix automaton extends canonically to a DFA for the
-factor-avoidance language by adjoining a sink and declaring the states in $S_B$
-accepting, by
-[[prop-published-prefix-automata-extend-to-factor-avoidance-dfas]].
+[L1] The published prefix automaton extends canonically to a DFA for the factor-avoidance language by adjoining a sink and declaring the states in $S_B$ accepting, by [[prop-published-prefix-automata-extend-to-factor-avoidance-dfas]].
 
 ## Verification
 

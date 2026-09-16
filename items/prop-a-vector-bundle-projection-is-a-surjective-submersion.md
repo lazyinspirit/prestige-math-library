@@ -32,12 +32,9 @@ submersion.
 
 **Given:** A smooth vector bundle $\pi:E\to M$.
 
-[L1] A smooth vector bundle is, in particular, a smooth fibre bundle with local
-trivializations over the identity on the base
-([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]).
+[L1] A smooth vector bundle is, in particular, a smooth fibre bundle with local trivializations over the identity on the base ([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]).
 
-[L2] A smooth map is a submersion exactly when its differential is surjective at
-every point ([[def-immersion-submersion-and-constant-rank-map]]).
+[L2] A smooth map is a submersion exactly when its differential is surjective at every point ([[def-immersion-submersion-and-constant-rank-map]]).
 
 ## Proof
 

@@ -31,13 +31,9 @@ finite-dimensional distributions.
 
 **Given:** AC and Gaussian processes $X,Y$ satisfying the two equalities in the Statement.
 
-[F1] Every finite evaluation vector of a Gaussian process has a possibly
-singular multivariate normal law. [[def-gaussian-process]]
+[F1] Every finite evaluation vector of a Gaussian process has a possibly singular multivariate normal law. [[def-gaussian-process]]
 
-[F2] Assume AC. The characteristic function of $N_n(m,\Sigma)$ is
-$u\mapsto\exp(iu\cdot m-u^T\Sigma u/2)$, and it uniquely determines the law,
-including when $\Sigma$ is singular.
-[[lem-characteristic-function-of-a-multivariate-normal-law]]
+[F2] Assume AC. The characteristic function of $N_n(m,\Sigma)$ is $u\mapsto\exp(iu\cdot m-u^T\Sigma u/2)$, and it uniquely determines the law, including when $\Sigma$ is singular. [[lem-characteristic-function-of-a-multivariate-normal-law]]
 
 ## Proof
 
@@ -49,6 +45,4 @@ including when $\Sigma$ is singular.
 
 ## Source notes
 
-Sousi, Section 6.1, records that the mean and covariance functions determine a
-Gaussian process in law. The proof above supplies the complete singular-law
-argument via the library's multivariate characteristic-function theorem.
+Sousi, Section 6.1, records that the mean and covariance functions determine a Gaussian process in law. The proof above supplies the complete singular-law argument via the library's multivariate characteristic-function theorem.

@@ -29,8 +29,7 @@ $$\mathbb P\!\left(S\le (1-\alpha)\mu\right)\le \exp\!\left(-\frac{\alpha^2\mu}{
 
 ## Facts & Assumptions
 
-**Given:** independent Bernoulli$(p)$ variables $X_1,\dots,X_k$, their sum
-$S$, and a parameter $0<\alpha<1$.
+**Given:** independent Bernoulli$(p)$ variables $X_1,\dots,X_k$, their sum $S$, and a parameter $0<\alpha<1$.
 
 [L1] Markov's inequality applies to every nonnegative random variable ([[thm-markov-inequality]]).
 

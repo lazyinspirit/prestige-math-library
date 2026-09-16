@@ -70,22 +70,10 @@ converges to the supremum of its range, or it runs away to $+\infty$.
 
 ## Remarks
 
-- **Only "not bounded above" is used, not unboundedness of the sequence.** For a
-  nondecreasing sequence the two coincide, since such a sequence is bounded below
-  by $x_0$ ([[def-monotone-sequence]]), so a nondecreasing sequence is unbounded
-  exactly when its range is not bounded above. The hypothesis is stated in the
-  one-sided form because that is the form the proof consumes.
+- **Only "not bounded above" is used, not unboundedness of the sequence.** For a nondecreasing sequence the two coincide, since such a sequence is bounded below by $x_0$ ([[def-monotone-sequence]]), so a nondecreasing sequence is unbounded exactly when its range is not bounded above. The hypothesis is stated in the one-sided form because that is the form the proof consumes.
 
-- **The dual statement holds with the same proof**: a nonincreasing sequence
-  whose range is not bounded below diverges to $-\infty$. Reflecting through the
-  origin turns one into the other.
+- **The dual statement holds with the same proof**: a nonincreasing sequence whose range is not bounded below diverges to $-\infty$. Reflecting through the origin turns one into the other.
 
-- **$+\infty$ is not a limit.** [[def-divergence-to-infinity]] is deliberately
-  not a case of [[def-real-limit]]: a sequence diverging to $+\infty$ is
-  unbounded, hence not convergent ([[lem-convergent-implies-bounded]]), and the
-  arrow in $x_k \to +\infty$ is an abbreviation for the displayed quantifier
-  statement and never an equation.
+- **$+\infty$ is not a limit.** [[def-divergence-to-infinity]] is deliberately not a case of [[def-real-limit]]: a sequence diverging to $+\infty$ is unbounded, hence not convergent ([[lem-convergent-implies-bounded]]), and the arrow in $x_k \to +\infty$ is an abbreviation for the displayed quantifier statement and never an equation.
 
-- The companion statement is [[thm-monotone-convergence]]: between them, a
-  nondecreasing sequence converges to the supremum of its range or diverges to
-  $+\infty$, with no third possibility.
+- The companion statement is [[thm-monotone-convergence]]: between them, a nondecreasing sequence converges to the supremum of its range or diverges to $+\infty$, with no third possibility.

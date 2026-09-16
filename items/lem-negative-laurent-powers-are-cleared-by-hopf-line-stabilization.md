@@ -33,21 +33,15 @@ multiplying by the inverse unit $[\gamma]^{-r}$.
 
 ## Facts & Assumptions
 
-**Given:** AC, $r,s\geq0$, and normalized Laurent clutching data $f$ supplied
-by [[lem-uniform-laurent-approximation-through-bundle-automorphisms]].
+**Given:** AC, $r,s\geq0$, and normalized Laurent clutching data $f$ supplied by [[lem-uniform-laurent-approximation-through-bundle-automorphisms]].
 
-[F1] Under the fixed convention, transition maps multiply under tensor product
-([[def-clutching-construction-for-bundles-over-a-suspension]]).
+[F1] Under the fixed convention, transition maps multiply under tensor product ([[def-clutching-construction-for-bundles-over-a-suspension]]).
 
-[F2] The external product pulls the Hopf line from $S^2$ to $X\times S^2$
-([[def-external-product-in-complex-k-theory]]).
+[F2] The external product pulls the Hopf line from $S^2$ to $X\times S^2$ ([[def-external-product-in-complex-k-theory]]).
 
-[F3] For $\beta=[\gamma]-1$, one has $\beta^2=0$ and hence
-$[\gamma]^{-1}=1-\beta$
-([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
+[F3] For $\beta=[\gamma]-1$, one has $\beta^2=0$ and hence $[\gamma]^{-1}=1-\beta$ ([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
 
-[A1] AC is inherited from [F2] for the reduced product convention and from
-[F3]; the exponent-clearing calculation itself is finite algebra.
+[A1] AC is inherited from [F2] for the reduced product convention and from [F3]; the exponent-clearing calculation itself is finite algebra.
 
 ## Proof
 

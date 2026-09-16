@@ -36,14 +36,11 @@ use its centrality.
 
 ## Facts & Assumptions
 
-**Given:** The standard basis $e,f,h$ of $\mathfrak{sl}_2$ and its images in
-$U(\mathfrak{sl}_2)$ over a characteristic-zero field.
+**Given:** The standard basis $e,f,h$ of $\mathfrak{sl}_2$ and its images in $U(\mathfrak{sl}_2)$ over a characteristic-zero field.
 
-[L1] The enveloping algebra is a unital associative quotient in which such
-finite sums and products are defined ([[def-universal-enveloping-algebra]]).
+[L1] The enveloping algebra is a unital associative quotient in which such finite sums and products are defined ([[def-universal-enveloping-algebra]]).
 
-[L2] For the PBW order $f<h<e$, one has $ef=fe+h$
-([[ex-pbw-reordering-in-sl-two]]).
+[L2] For the PBW order $f<h<e$, one has $ef=fe+h$ ([[ex-pbw-reordering-in-sl-two]]).
 
 ## Verification
 

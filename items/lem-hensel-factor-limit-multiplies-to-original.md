@@ -38,15 +38,11 @@ Then the coefficientwise limits $g,h \in A[T]$ exist and satisfy $f=gh$.
 
 ## Facts & Assumptions
 
-**Given:** An $I$-adically complete and separated ring $A$, a polynomial
-$f \in A[T]$, and stagewise lifts $(g_r,h_r)$ as above.
+**Given:** An $I$-adically complete and separated ring $A$, a polynomial $f \in A[T]$, and stagewise lifts $(g_r,h_r)$ as above.
 
-[L1] The Hensel correction sequences are coefficientwise $I$-adically Cauchy
-([[lem-hensel-factor-corrections-form-cauchy-sequences]]).
+[L1] The Hensel correction sequences are coefficientwise $I$-adically Cauchy ([[lem-hensel-factor-corrections-form-cauchy-sequences]]).
 
-[L2] Completeness gives limits of $I$-adic Cauchy sequences, and separatedness
-means that an element lying in every $I^r$ is zero
-([[def-separated-and-complete-filtered-module]]).
+[L2] Completeness gives limits of $I$-adic Cauchy sequences, and separatedness means that an element lying in every $I^r$ is zero ([[def-separated-and-complete-filtered-module]]).
 
 ## Proof
 

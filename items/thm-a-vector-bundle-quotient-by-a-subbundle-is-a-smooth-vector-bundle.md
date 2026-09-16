@@ -31,11 +31,9 @@ vector bundle.
 
 ## Facts & Assumptions
 
-**Given:** A smooth vector bundle $E\to M$ and a smooth rank-$k$ subbundle
-$S\subseteq E$.
+**Given:** A smooth vector bundle $E\to M$ and a smooth rank-$k$ subbundle $S\subseteq E$.
 
-[L1] Locally, a subbundle is spanned by part of a frame of the ambient bundle
-([[def-vector-subbundle]]).
+[L1] Locally, a subbundle is spanned by part of a frame of the ambient bundle ([[def-vector-subbundle]]).
 
 ## Proof
 

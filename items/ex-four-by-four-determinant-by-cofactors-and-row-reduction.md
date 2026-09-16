@@ -39,14 +39,11 @@ has determinant $30$, both by cofactor expansion and by row reduction.
 
 [F1] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]).
 
-[L1] Laplace expansion computes a determinant along every row and column
-([[thm-laplace-cofactor-expansion]]).
+[L1] Laplace expansion computes a determinant along every row and column ([[thm-laplace-cofactor-expansion]]).
 
-[L2] Adding a multiple of one row to another leaves the determinant unchanged
-([[thm-determinant-under-elementary-row-operations]]).
+[L2] Adding a multiple of one row to another leaves the determinant unchanged ([[thm-determinant-under-elementary-row-operations]]).
 
-[L3] A triangular determinant is the product of its diagonal entries
-([[thm-determinant-of-a-triangular-matrix]]).
+[L3] A triangular determinant is the product of its diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
 
 ## Verification
 

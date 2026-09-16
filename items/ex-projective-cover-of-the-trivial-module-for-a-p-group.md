@@ -36,11 +36,9 @@ is the projective cover of the trivial module.
 
 **Given:** A finite $p$-group $P$, a field $k$ of characteristic $p$, and the augmentation map $\varepsilon:kP\to k$.
 
-[L2] Over every characteristic-$p$ field, the algebra $kP$ is local
-([[thm-kg-is-local-iff-g-is-a-p-group]]).
+[L2] Over every characteristic-$p$ field, the algebra $kP$ is local ([[thm-kg-is-local-iff-g-is-a-p-group]]).
 
-[L3] Projective covers exist and are unique up to isomorphism over the target
-([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
+[L3] Projective covers exist and are unique up to isomorphism over the target ([[thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]]).
 
 ## Verification
 

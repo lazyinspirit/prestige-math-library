@@ -47,8 +47,7 @@ properties.
 **Proof technique:** direct.
 
 1.1 By [L1], $H_\varphi$ is harmonic on $\Omega$. By the hypothesis that every boundary point is regular and the definition packaged in [L2], for every $\zeta\in\partial\Omega$ one has [L1, L2, given]
-$$\lim_{\substack{z\to\zeta\\ z\in\Omega}}H_\varphi(z)=\varphi(\zeta).$$
-[L1, L2, given]
+$$\lim_{\substack{z\to\zeta\\ z\in\Omega}}H_\varphi(z)=\varphi(\zeta).$$ [L1, L2, given]
 
 2.1 Step 1.1 gives the boundary limits pointwise on $\partial\Omega$, and the continuity of $\varphi$ turns those limits into a continuous extension of $H_\varphi$ to $\overline\Omega$ by setting the boundary values equal to $\varphi$. [step 1.1, given]
 

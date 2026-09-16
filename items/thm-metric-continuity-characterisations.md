@@ -108,18 +108,6 @@ the implication (a) $\Rightarrow$ (d) are choice free.
 
 ## Remarks
 
-- **(b) is the definition of continuity in general topology**, and the theorem is
-  what makes the metric $\varepsilon$-$\delta$ definition agree with it. Once (b)
-  is available, continuity can be discussed without ever mentioning a metric,
-  which is what the later topology pages do.
-- **The sequential converse uses first countability and countable choice.**
-  The proof uses that metric spaces are first countable
-  ([[lem-metric-ball-neighbourhood-base]]), which is what
-  [[thm-metric-sequential-closure]] rests on. Nothing above should be read as
-  saying that sequential continuity always suffices.
-- **Preimages, not images.** Nothing here says that $f[U]$ is open for open $U$;
-  that is openness of the map, a different condition, which continuity does not
-  imply: a constant map is continuous and its image of any nonempty open set is
-  a single point. The
-  image condition that does hold is the closure inclusion (e), and even that is
-  an inclusion and not an equality.
+- **(b) is the definition of continuity in general topology**, and the theorem is what makes the metric $\varepsilon$-$\delta$ definition agree with it. Once (b) is available, continuity can be discussed without ever mentioning a metric, which is what the later topology pages do.
+- **The sequential converse uses first countability and countable choice.** The proof uses that metric spaces are first countable ([[lem-metric-ball-neighbourhood-base]]), which is what [[thm-metric-sequential-closure]] rests on. Nothing above should be read as saying that sequential continuity always suffices.
+- **Preimages, not images.** Nothing here says that $f[U]$ is open for open $U$; that is openness of the map, a different condition, which continuity does not imply: a constant map is continuous and its image of any nonempty open set is a single point. The image condition that does hold is the closure inclusion (e), and even that is an inclusion and not an equality.

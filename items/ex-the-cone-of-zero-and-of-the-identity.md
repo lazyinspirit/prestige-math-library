@@ -30,11 +30,9 @@ whereas $\operatorname{Cone}(1_C)$ is contractible.
 
 **Given:** A chain complex $C_\bullet$.
 
-[L1] The cone of the zero map is the direct sum with a shift
-([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
+[L1] The cone of the zero map is the direct sum with a shift ([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
 
-[L2] The cone of an identity map is contractible
-([[thm-the-cone-of-an-identity-map-is-contractible]]).
+[L2] The cone of an identity map is contractible ([[thm-the-cone-of-an-identity-map-is-contractible]]).
 
 ## Verification
 

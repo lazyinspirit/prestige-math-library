@@ -34,8 +34,7 @@ factorisation.
 
 ## Facts & Assumptions
 
-**Given:** The set $X=\{0,1\}$ and singleton sets $A=\{0\}$ and
-$B=\{*\}$.
+**Given:** The set $X=\{0,1\}$ and singleton sets $A=\{0\}$ and $B=\{*\}$.
 
 [L1] A subobject is an equivalence class of monomorphisms into a fixed object under mutual factorisation ([[def-subobject-and-quotient-object]]).
 

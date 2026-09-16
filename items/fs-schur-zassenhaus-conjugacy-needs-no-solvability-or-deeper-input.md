@@ -32,11 +32,9 @@ nor any deeper finite-group input.
 
 **Given:** The local page boundary for Schur-Zassenhaus conjugacy.
 
-[L1] This page proves complement conjugacy when the kernel or quotient is
-solvable ([[thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable]]).
+[L1] This page proves complement conjugacy when the kernel or quotient is solvable ([[thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable]]).
 
-[L2] The stronger clean theorem is recorded separately as a source-cited
-boundary item ([[rem-schur-zassenhaus-conjugacy-in-full-generality]]).
+[L2] The stronger clean theorem is recorded separately as a source-cited boundary item ([[rem-schur-zassenhaus-conjugacy-in-full-generality]]).
 
 ## Refutation
 

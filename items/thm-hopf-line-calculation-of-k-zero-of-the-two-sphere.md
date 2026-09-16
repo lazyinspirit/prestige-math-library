@@ -41,24 +41,13 @@ $\beta$ is tied to the stated clutching convention.
 
 **Given:** AC and the two-hemisphere decomposition of $S^2$.
 
-[F1] Complex bundles on $S^2$ are classified by clutching loops, with
-$g(z)=z$ defining the tautological Hopf line in the fixed convention
-([[def-clutching-construction-for-bundles-over-a-suspension]],
-[[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]],
-[[def-stiefel-space-grassmannian-and-tautological-bundle]]).
+[F1] Complex bundles on $S^2$ are classified by clutching loops, with $g(z)=z$ defining the tautological Hopf line in the fixed convention ([[def-clutching-construction-for-bundles-over-a-suspension]], [[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]], [[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
-[F2] Determinant classifies loops in every
-$\operatorname{GL}_n(\mathbb C)$ and sends winding $k$ to
-$\operatorname{diag}(z^k,1,\ldots,1)$
-([[lem-determinant-classifies-loops-in-complex-general-linear-groups]]).
+[F2] Determinant classifies loops in every $\operatorname{GL}_n(\mathbb C)$ and sends winding $k$ to $\operatorname{diag}(z^k,1,\ldots,1)$ ([[lem-determinant-classifies-loops-in-complex-general-linear-groups]]).
 
-[F3] Under AC, equality in $K^0$ is equivalent to a common trivial
-stabilization
-([[prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases]]).
+[F3] Under AC, equality in $K^0$ is equivalent to a common trivial stabilization ([[prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases]]).
 
-[F4] Tensor product is the $K^0$ multiplication and agrees with the bundle
-external-product convention
-([[def-external-product-in-complex-k-theory]]).
+[F4] Tensor product is the $K^0$ multiplication and agrees with the bundle external-product convention ([[def-external-product-in-complex-k-theory]]).
 
 [A1] AC is used only through [F3] and the already propagated AC clause of [F4].
 

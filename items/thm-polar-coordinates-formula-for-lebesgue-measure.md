@@ -32,8 +32,7 @@ property.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, a positive integer $n$, and a Borel
-measurable function $f : \mathbb R^n \to [0,\infty]$.
+**Given:** The Axiom of Countable Choice, a positive integer $n$, and a Borel measurable function $f : \mathbb R^n \to [0,\infty]$.
 
 [L1] The set function $\sigma$ is defined by $$\sigma(E)=n\,\lambda_n(\{r\omega : \omega \in E,\ 0<r\le 1\})$$ for Borel $E \subseteq S^{n-1}$. ([[def-polar-surface-measure-on-the-unit-sphere]])
 
@@ -43,13 +42,9 @@ measurable function $f : \mathbb R^n \to [0,\infty]$.
 
 [L4] Tonelli's theorem turns equality of measures on sets into the corresponding equality of nonnegative integrals. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]])
 
-[L5] Assuming countable choice, bounded subsets of Euclidean space have finite
-outer measure. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
+[L5] Assuming countable choice, bounded subsets of Euclidean space have finite outer measure. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
 
-[A1] Let $\Phi : \mathbb R^n \setminus \{0\} \to (0,\infty)\times S^{n-1}$
-be $\Phi(x)=(|x|,x/|x|)$. This map is continuous, so
-$m^*(B):=\lambda_n(\Phi^{-1}(B))$ defines a measure on the Borel subsets of
-$(0,\infty)\times S^{n-1}$.
+[A1] Let $\Phi : \mathbb R^n \setminus \{0\} \to (0,\infty)\times S^{n-1}$ be $\Phi(x)=(|x|,x/|x|)$. This map is continuous, so $m^*(B):=\lambda_n(\Phi^{-1}(B))$ defines a measure on the Borel subsets of $(0,\infty)\times S^{n-1}$.
 
 [A2] Sets of the form $(a,b]\times E$ with $0<a<b$ and Borel $E \subseteq S^{n-1}$ form a sigma-finite generating pi-system for the Borel sigma-algebra of $(0,\infty)\times S^{n-1}$.
 

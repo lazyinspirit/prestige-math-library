@@ -34,24 +34,15 @@ This remains valid when $A$ is Hermitian indefinite.
 
 ## Facts & Assumptions
 
-**Given:** A Hermitian matrix $A$, an initial guess $x_0$, the residual
-$r_0=b-Ax_0$, and an $m$th MINRES iterate $x_m$.
+**Given:** A Hermitian matrix $A$, an initial guess $x_0$, the residual $r_0=b-Ax_0$, and an $m$th MINRES iterate $x_m$.
 
-[F1] A MINRES iterate has the form $x_m=x_0+Q_my_m$, where $y_m$ minimizes
-$$\|\beta e_1-\bar T_my\|_2$$
-for the Lanczos tridiagonalization
-([[def-minres-iterate-from-the-lanczos-tridiagonalization]]).
+[F1] A MINRES iterate has the form $x_m=x_0+Q_my_m$, where $y_m$ minimizes $$\|\beta e_1-\bar T_my\|_2$$ for the Lanczos tridiagonalization ([[def-minres-iterate-from-the-lanczos-tridiagonalization]]).
 
-[L1] For Hermitian $A$, Arnoldi collapses to the Lanczos factorization with
-tridiagonal $\bar T_m$
-([[thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence]]).
+[L1] For Hermitian $A$, Arnoldi collapses to the Lanczos factorization with tridiagonal $\bar T_m$ ([[thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence]]).
 
-[L2] Arnoldi reduces GMRES to the small least-squares problem
-$$\min_y\|\beta e_1-\bar H_my\|_2$$
-([[thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem]]).
+[L2] Arnoldi reduces GMRES to the small least-squares problem $$\min_y\|\beta e_1-\bar H_my\|_2$$ ([[thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem]]).
 
-[L3] GMRES minimizes the Euclidean residual over $x_0+K_m(A,r_0)$
-([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
+[L3] GMRES minimizes the Euclidean residual over $x_0+K_m(A,r_0)$ ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
 
 ## Proof
 **Proof technique:** direct.

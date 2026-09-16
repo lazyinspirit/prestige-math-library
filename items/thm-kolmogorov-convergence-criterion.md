@@ -65,8 +65,4 @@ For independent centered square-integrable real random variables $(X_n)_{n\ge1}$
 
 ## Remarks
 
-No Choice assumption is required by this proof. The random variables and
-their partial sums are already supplied as measurable functions; the conull
-set and limit are explicitly defined. Abstract completeness for a sequence
-of $L^2$ equivalence classes may require countable choice of representatives,
-but that theorem is not used here.
+No Choice assumption is required by this proof. The random variables and their partial sums are already supplied as measurable functions; the conull set and limit are explicitly defined. Abstract completeness for a sequence of $L^2$ equivalence classes may require countable choice of representatives, but that theorem is not used here.

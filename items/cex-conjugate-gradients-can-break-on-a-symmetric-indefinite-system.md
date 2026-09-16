@@ -33,19 +33,11 @@ invertible matrix, every nonconverged CG step has $p_k^TAp_k>0$.
 
 ## Facts & Assumptions
 
-**Given:** The CG recurrence and the positive-denominator theorem for Hermitian
-positive-definite matrices.
+**Given:** The CG recurrence and the positive-denominator theorem for Hermitian positive-definite matrices.
 
-[F1] To test the proposed extension outside the positive-definite domain,
-define the attempted first search direction by $p_0:=r_0:=b-Ax_0$ and inspect
-the attempted denominator $p_0^TAp_0$. These are the same algebraic formulas
-used by CG on its legitimate domain
-([[def-conjugate-gradient-recurrence]]); this fact does not assert that the
-cited definition applies to an indefinite matrix.
+[F1] To test the proposed extension outside the positive-definite domain, define the attempted first search direction by $p_0:=r_0:=b-Ax_0$ and inspect the attempted denominator $p_0^TAp_0$. These are the same algebraic formulas used by CG on its legitimate domain ([[def-conjugate-gradient-recurrence]]); this fact does not assert that the cited definition applies to an indefinite matrix.
 
-[L1] For Hermitian positive-definite matrices, every nonconverged CG
-denominator is positive
-([[prop-conjugate-gradient-denominators-are-positive-before-convergence]]).
+[L1] For Hermitian positive-definite matrices, every nonconverged CG denominator is positive ([[prop-conjugate-gradient-denominators-are-positive-before-convergence]]).
 
 ## Counterexample
 **Proof technique:** direct calculation.

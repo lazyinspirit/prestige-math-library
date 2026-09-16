@@ -35,9 +35,7 @@ cycle returns the same iterate $x=0$.
 
 **Given:** The system from the previous counterexample.
 
-[L1] Restarted GMRES keeps cyclewise minimization but need not inherit the full
-unrestarted termination guarantee
-([[prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination]]).
+[L1] Restarted GMRES keeps cyclewise minimization but need not inherit the full unrestarted termination guarantee ([[prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination]]).
 
 ## Verification
 **Proof technique:** direct.

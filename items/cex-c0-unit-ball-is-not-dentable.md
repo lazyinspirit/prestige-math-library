@@ -39,18 +39,11 @@ dentable.
 
 ## Facts & Assumptions
 
-[L1] The real and complex sequence spaces $c_0$ carry the supremum norm and
-are Banach spaces ([[def-c-zero-and-ell-infinity]],
-[[lem-real-and-complex-c-zero-are-banach]]).
+[L1] The real and complex sequence spaces $c_0$ carry the supremum norm and are Banach spaces ([[def-c-zero-and-ell-infinity]], [[lem-real-and-complex-c-zero-are-banach]]).
 
-[L2] Every functional on $c_0$ has a unique bilinear representation
-$\phi(x)=\sum_{n\geq0}a_nx_n$ with $a\in\ell^1$, and finite truncations of
-$a$ converge in $\ell^1$ ([[thm-dual-of-c0-is-ell-one]],
-[[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
+[L2] Every functional on $c_0$ has a unique bilinear representation $\phi(x)=\sum_{n\geq0}a_nx_n$ with $a\in\ell^1$, and finite truncations of $a$ converge in $\ell^1$ ([[thm-dual-of-c0-is-ell-one]], [[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
-[L3] Slices in a complex space use real parts, and dentability asks for slices
-of arbitrarily small norm diameter
-([[def-dentable-bounded-set-and-slice]]).
+[L3] Slices in a complex space use real parts, and dentability asks for slices of arbitrarily small norm diameter ([[def-dentable-bounded-set-and-slice]]).
 
 ## Counterexample
 
@@ -66,9 +59,7 @@ $$\delta=\operatorname{Re}\phi(x)-(\lVert\phi\rVert-\alpha)>0.$$
 
 $$\operatorname{Re}\phi(y)\geq\operatorname{Re}\phi(x)-|a_k|\,|1-x_k|>\lVert\phi\rVert-\alpha,$$
 
-and the identical estimate using $|-1-x_k|\leq2$ puts $z$ in $S$. Their
-$k$th coordinates differ by two, hence
-$\lVert y-z\rVert_\infty=2$.
+and the identical estimate using $|-1-x_k|\leq2$ puts $z$ in $S$. Their $k$th coordinates differ by two, hence $\lVert y-z\rVert_\infty=2$.
 
 3.1 Compute the diameter and deduce nondentability. The triangle inequality bounds the diameter of $B$, and thus of $S$, above by two. Step 2.1 attains two, so every slice has diameter exactly two. In particular no slice has diameter below one, and [L3] says that $B$ is not dentable. The set $B$ is nonempty, bounded, closed, and convex in the Banach space from [L1]. [L1, L3, step 2.1]
 

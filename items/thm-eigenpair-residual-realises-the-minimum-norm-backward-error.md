@@ -35,17 +35,13 @@ In particular, the rank-one perturbation $E:=-rx^*$ attains the infimum.
 
 ## Facts & Assumptions
 
-**Given:** A unit vector $x\in\mathbb F^n$, a scalar $\mu\in\mathbb F$, a
-matrix $A\in M_n(\mathbb F)$, and the residual $r=Ax-\mu x$, where
-$\mathbb F\in\{\mathbb R,\mathbb C\}$.
+**Given:** A unit vector $x\in\mathbb F^n$, a scalar $\mu\in\mathbb F$, a matrix $A\in M_n(\mathbb F)$, and the residual $r=Ax-\mu x$, where $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
 [L1] The residual and the normwise backward error are defined by $r=Ax-\mu x$ and $\eta(A,\mu,x)=\inf\{\|E\|_2:(A+E)x=\mu x\}$ ([[def-eigenpair-residual-and-normwise-backward-error]]).
 
-[L2] The induced operator norm satisfies $\|Ey\|_2\le\|E\|_2\|y\|_2$
-([[def-operator-norm-on-a-finite-dimensional-inner-product-space]]).
+[L2] The induced operator norm satisfies $\|Ey\|_2\le\|E\|_2\|y\|_2$ ([[def-operator-norm-on-a-finite-dimensional-inner-product-space]]).
 
-[L3] Cauchy--Schwarz gives $|\langle x,y\rangle|\le\|x\|_2\|y\|_2$
-([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
+[L3] Cauchy--Schwarz gives $|\langle x,y\rangle|\le\|x\|_2\|y\|_2$ ([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
 
 ## Proof
 

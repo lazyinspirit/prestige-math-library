@@ -46,9 +46,7 @@ $\{\widehat{C_5},\overline{\widehat{C_5}}\}$ has the Erdős-Hajnal property.
 
 **Given:** The graph $\widehat{C_5}$.
 
-[L1] Theorem 8.1 of the cited primary source proves exactly the Erdős-Hajnal
-property for $\{\widehat{C_5},\overline{\widehat{C_5}}\}$, including the
-quantitative component-width and stable-pattern estimates.
+[L1] Theorem 8.1 of the cited primary source proves exactly the Erdős-Hajnal property for $\{\widehat{C_5},\overline{\widehat{C_5}}\}$, including the quantitative component-width and stable-pattern estimates.
 
 ## Proof
 

@@ -42,19 +42,13 @@ if $e$ is epic, then $\alpha$ is epic.
 
 **Given:** The displayed pullback square in an abelian category, with $e$ epic.
 
-[L1] The pullback is the kernel of the difference map on $A\oplus B$
-([[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]]).
+[L1] The pullback is the kernel of the difference map on $A\oplus B$ ([[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]]).
 
-[L2] Abelian categories are preadditive with zero morphisms
-([[def-abelian-category]],
-[[cor-a-preadditive-category-with-a-zero-object-has-zero-morphisms-in-the-published-sense]]).
+[L2] Abelian categories are preadditive with zero morphisms ([[def-abelian-category]], [[cor-a-preadditive-category-with-a-zero-object-has-zero-morphisms-in-the-published-sense]]).
 
-[L3] In an abelian category, a morphism is epic exactly when its cokernel is
-zero
-([[cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]]).
+[L3] In an abelian category, a morphism is epic exactly when its cokernel is zero ([[cor-a-morphism-in-an-abelian-category-is-monic-exactly-when-its-kernel-is-zero-and-epic-exactly-when-its-cokernel-is-zero]]).
 
-[L4] In an abelian category every epic morphism is the cokernel of its kernel
-([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+[L4] In an abelian category every epic morphism is the cokernel of its kernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
 
 ## Proof
 

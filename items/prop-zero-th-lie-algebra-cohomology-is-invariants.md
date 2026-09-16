@@ -32,11 +32,9 @@ $$H^0(\mathfrak g,M)=M^{\mathfrak g}=\{m\in M:xm=0\text{ for every }x\in\mathfra
 
 **Given:** A Lie algebra $\mathfrak g$ and a module $M$.
 
-[L1] Degree-zero cochains are $M$ and $(dm)(x)=xm$
-([[def-chevalley-eilenberg-differential]]).
+[L1] Degree-zero cochains are $M$ and $(dm)(x)=xm$ ([[def-chevalley-eilenberg-differential]]).
 
-[L2] Cohomology is kernel modulo the preceding image
-([[def-lie-algebra-cohomology]]).
+[L2] Cohomology is kernel modulo the preceding image ([[def-lie-algebra-cohomology]]).
 
 ## Proof
 

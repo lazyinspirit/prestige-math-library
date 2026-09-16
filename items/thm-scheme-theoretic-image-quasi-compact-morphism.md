@@ -32,11 +32,9 @@ $f^{-1}(W)\to W$.
 
 **Given:** A quasi-compact morphism $f:X\to Y$.
 
-[F1] A morphism is quasi-compact when inverse images of quasi-compact opens
-are quasi-compact [[def-quasi-compact-and-quasi-separated-morphism]].
+[F1] A morphism is quasi-compact when inverse images of quasi-compact opens are quasi-compact [[def-quasi-compact-and-quasi-separated-morphism]].
 
-[F2] For a scheme, quasi-coherent ideal sheaves and closed subschemes are in
-mutually inverse correspondence [[thm-quasi-coherent-ideal-closed-subscheme-correspondence]].
+[F2] For a scheme, quasi-coherent ideal sheaves and closed subschemes are in mutually inverse correspondence [[thm-quasi-coherent-ideal-closed-subscheme-correspondence]].
 
 ## Proof
 

@@ -39,11 +39,9 @@ $\widehat f^*\omega_{Q'}=\omega_Q$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] The canonical cotangent form is $-d\lambda$ and is symplectic.
-[[thm-the-canonical-cotangent-two-form-is-symplectic]].
+[F1] The canonical cotangent form is $-d\lambda$ and is symplectic. [[thm-the-canonical-cotangent-two-form-is-symplectic]].
 
-[F2] Exterior differentiation commutes with pullback.
-[[thm-the-exterior-derivative-commutes-with-pullback]].
+[F2] Exterior differentiation commutes with pullback. [[thm-the-exterior-derivative-commutes-with-pullback]].
 
 ## Proof
 

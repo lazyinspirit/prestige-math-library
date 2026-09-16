@@ -34,16 +34,11 @@ identity are literally the same equations.
 
 ## Facts & Assumptions
 
-**Given:** A short exact sequence of modules together with either a section of
-its quotient map or a retraction of its inclusion.
+**Given:** A short exact sequence of modules together with either a section of its quotient map or a retraction of its inclusion.
 
-[L1] From either a section or a retraction, the categorical splitting lemma
-produces the unique complementary retraction or section
-([[thm-splitting-lemma-in-an-abelian-category]]).
+[L1] From either a section or a retraction, the categorical splitting lemma produces the unique complementary retraction or section ([[thm-splitting-lemma-in-an-abelian-category]]).
 
-[L2] The published module splitting lemma states the same criterion in the
-module category
-([[thm-splitting-lemma-for-modules]]).
+[L2] The published module splitting lemma states the same criterion in the module category ([[thm-splitting-lemma-for-modules]]).
 
 ## Verification
 

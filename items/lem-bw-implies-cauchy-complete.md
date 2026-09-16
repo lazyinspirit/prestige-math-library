@@ -65,13 +65,6 @@ carries the Archimedean property on its own
 
 ## Remarks
 
-- **This is the only implication on the page that is pure bookkeeping**, and
-  that is precisely because both of its ingredients were extracted into
-  [[lem-of-sequence-basics]] and proved there for an arbitrary ordered field.
-  Written out inline it would repeat the boundedness induction and the
-  three-term triangle estimate of that lemma.
+- **This is the only implication on the page that is pure bookkeeping**, and that is precisely because both of its ingredients were extracted into [[lem-of-sequence-basics]] and proved there for an arbitrary ordered field. Written out inline it would repeat the boundedness induction and the three-term triangle estimate of that lemma.
 
-- The converse fails: $\mathbb{R}((t^{-1}))$ has (CC)
-  ([[thm-laurent-cauchy-complete]]) and, being non-Archimedean
-  ([[lem-laurent-non-archimedean]]), fails (BW) by
-  [[lem-bw-implies-archimedean]].
+- The converse fails: $\mathbb{R}((t^{-1}))$ has (CC) ([[thm-laurent-cauchy-complete]]) and, being non-Archimedean ([[lem-laurent-non-archimedean]]), fails (BW) by [[lem-bw-implies-archimedean]].

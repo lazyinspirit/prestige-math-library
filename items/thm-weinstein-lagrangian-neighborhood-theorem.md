@@ -35,19 +35,13 @@ $\Phi:V\to U$ satisfying $\Phi(0_x)=i(x)$ for every $x\in L$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and the closed Lagrangian embedding in the
-statement.
+**Given:** $\mathrm{AC}_\omega$ and the closed Lagrangian embedding in the statement.
 
-[F1] Under the assumed choice principle, $(M,\omega)$ admits a compatible
-almost-complex structure. [[thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure]].
+[F1] Under the assumed choice principle, $(M,\omega)$ admits a compatible almost-complex structure. [[thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure]].
 
-[F2] The cotangent zero section with $-d\lambda$ is the canonical model.
-[[def-canonical-symplectic-model-near-the-zero-section-of-t-star-l]].
+[F2] The cotangent zero section with $-d\lambda$ is the canonical model. [[def-canonical-symplectic-model-near-the-zero-section-of-t-star-l]].
 
-[F3] Closed embeddings have tubular neighbourhoods, and relative Moser
-corrects two forms agreeing as tensors along the submanifold.
-[[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]],
-[[thm-relative-moser-theorem]].
+[F3] Closed embeddings have tubular neighbourhoods, and relative Moser corrects two forms agreeing as tensors along the submanifold. [[thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold]], [[thm-relative-moser-theorem]].
 
 ## Proof
 

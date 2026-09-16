@@ -36,8 +36,7 @@ residual of $G$, and its image is dense in $\widehat G$.
 
 [L1] The profinite completion is the inverse limit of the quotients $G/N$, and $R_f(G)$ is the intersection of the finite-index normal subgroups ([[def-profinite-completion-of-an-abstract-group]], [[def-canonical-map-to-the-profinite-completion]], [[def-finite-residual-and-residually-finite-group]]).
 
-[L2] The completion carries the inverse-limit topology from its finite discrete
-quotients ([[def-profinite-completion-of-an-abstract-group]]).
+[L2] The completion carries the inverse-limit topology from its finite discrete quotients ([[def-profinite-completion-of-an-abstract-group]]).
 
 ## Proof
 

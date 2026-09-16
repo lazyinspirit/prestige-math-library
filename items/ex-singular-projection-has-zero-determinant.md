@@ -35,12 +35,9 @@ not invertible.
 
 [F1] $\mathbb R$ is a field ([[thm-reals-field]]).
 
-[F2] An operator determinant is the determinant of any representing matrix
-([[def-determinant-of-a-linear-operator]]).
+[F2] An operator determinant is the determinant of any representing matrix ([[def-determinant-of-a-linear-operator]]).
 
-[L1] A finite-dimensional operator over a field is invertible exactly when
-its determinant is nonzero
-([[thm-operator-invertible-iff-determinant-nonzero]]).
+[L1] A finite-dimensional operator over a field is invertible exactly when its determinant is nonzero ([[thm-operator-invertible-iff-determinant-nonzero]]).
 
 ## Verification
 

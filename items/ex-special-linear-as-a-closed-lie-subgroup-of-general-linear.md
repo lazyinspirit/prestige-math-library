@@ -40,21 +40,13 @@ $$\operatorname{Lie}(\operatorname{SL}_n(\mathbb F))=\mathfrak{sl}_n(\mathbb F)=
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $\mathbb F\in\{\mathbb R,\mathbb C\}$, and
-an integer $n\ge1$.
+**Given:** $\mathrm{AC}_\omega$, $\mathbb F\in\{\mathbb R,\mathbb C\}$, and an integer $n\ge1$.
 
-[F1] A Lie group has smooth multiplication and inversion; determinant and
-trace have their finite Leibniz and diagonal-sum formulas. [[def-lie-group]],
-[[def-determinant-of-a-square-matrix]],
-[[def-trace-of-a-square-matrix-over-a-commutative-ring]].
+[F1] A Lie group has smooth multiplication and inversion; determinant and trace have their finite Leibniz and diagonal-sum formulas. [[def-lie-group]], [[def-determinant-of-a-square-matrix]], [[def-trace-of-a-square-matrix-over-a-commutative-ring]].
 
-[A1] The kernel of a smooth Lie-group homomorphism is closed, embedded and
-normal, with tangent algebra equal to the kernel of its identity
-differential. [[def-countable-choice]],
-[[thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup]].
+[A1] The kernel of a smooth Lie-group homomorphism is closed, embedded and normal, with tangent algebra equal to the kernel of its identity differential. [[def-countable-choice]], [[thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup]].
 
-[F2] A regular level has tangent space equal to the kernel of its
-differential. [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
+[F2] A regular level has tangent space equal to the kernel of its differential. [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
 ## Verification
 

@@ -27,9 +27,7 @@ A closed subset of an affine scheme determines its closed subscheme structure.
 
 **Given:** A field $k$.
 
-[F1] Closed immersions into $\operatorname{Spec}A$ are classified, up to
-unique isomorphism over the target, by quotient rings $A/I$
-[[thm-affine-closed-immersions-quotient-rings]].
+[F1] Closed immersions into $\operatorname{Spec}A$ are classified, up to unique isomorphism over the target, by quotient rings $A/I$ [[thm-affine-closed-immersions-quotient-rings]].
 
 ## Counterexample
 

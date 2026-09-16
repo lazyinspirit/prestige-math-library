@@ -38,9 +38,7 @@ $$\sum_{n\in\mathbb Z}\frac1{n^2+a^2}=\frac{\pi}{a}\coth(\pi a).$$
 
 **Given:** A complex number $a\notin i\mathbb Z$.
 
-[L1] For $z\notin\mathbb Z$,
-$\pi\cot(\pi z)=\sum_{n\in\mathbb Z}1/(z-n)$ in the symmetric Mittag-Leffler
-sense ([[thm-mittag-leffler-expansion-of-pi-cotangent]]).
+[L1] For $z\notin\mathbb Z$, $\pi\cot(\pi z)=\sum_{n\in\mathbb Z}1/(z-n)$ in the symmetric Mittag-Leffler sense ([[thm-mittag-leffler-expansion-of-pi-cotangent]]).
 
 ## Verification
 

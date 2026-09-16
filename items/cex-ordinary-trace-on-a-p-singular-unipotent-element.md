@@ -32,15 +32,11 @@ Brauer-character value.
 
 ## Facts & Assumptions
 
-**Given:** The cyclic group $C_p=\langle u\rangle$ over a field $k$ of
-characteristic $p$, with $u$ acting on $k^2$ by
-$\bigl(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\bigr)$.
+**Given:** The cyclic group $C_p=\langle u\rangle$ over a field $k$ of characteristic $p$, with $u$ acting on $k^2$ by $\bigl(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\bigr)$.
 
-[L1] The false statement above is the claim to be refuted
-([[fs-a-brauer-character-is-defined-on-all-elements-by-the-usual-trace]]).
+[L1] The false statement above is the claim to be refuted ([[fs-a-brauer-character-is-defined-on-all-elements-by-the-usual-trace]]).
 
-[F1] Brauer characters are defined only on $p$-regular elements
-([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
+[F1] Brauer characters are defined only on $p$-regular elements ([[def-brauer-character-of-a-finite-dimensional-kg-module]]).
 
 ## Counterexample
 

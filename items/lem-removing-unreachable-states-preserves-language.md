@@ -28,15 +28,11 @@ $$ L(D_r)=L(D). $$
 
 ## Facts & Assumptions
 
-**Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$ and its reachable-state subset
-$Q_r$.
+**Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$ and its reachable-state subset $Q_r$.
 
-[L1] A state is reachable exactly when it has the form $\delta^*(q_0,w)$ for
-some input word $w$, by [[def-reachable-dfa-state]].
+[L1] A state is reachable exactly when it has the form $\delta^*(q_0,w)$ for some input word $w$, by [[def-reachable-dfa-state]].
 
-[L2] A word is accepted exactly when the extended transition from the start
-state lands in an accepting state, by
-[[def-dfa-acceptance-and-recognized-language]].
+[L2] A word is accepted exactly when the extended transition from the start state lands in an accepting state, by [[def-dfa-acceptance-and-recognized-language]].
 
 ## Proof
 

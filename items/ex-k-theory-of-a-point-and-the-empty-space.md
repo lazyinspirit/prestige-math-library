@@ -35,17 +35,13 @@ $K^{2k}(*)\cong\mathbb Z$ and $K^{2k+1}(*)=0$ for every integer $k$.
 
 **Given:** the point, the empty space, and AC only for the graded conclusion.
 
-[F1] $K^0$ is the Grothendieck completion of the Whitney-sum monoid
-([[def-complex-topological-k-zero-by-grothendieck-completion]]).
+[F1] $K^0$ is the Grothendieck completion of the Whitney-sum monoid ([[def-complex-topological-k-zero-by-grothendieck-completion]]).
 
-[F2] Reduced $K^0$ is the kernel of restriction to the basepoint
-([[def-reduced-complex-k-theory]]).
+[F2] Reduced $K^0$ is the kernel of restriction to the basepoint ([[def-reduced-complex-k-theory]]).
 
-[F3] Under AC, Bott multiplication extends the coefficient grading with
-period two ([[thm-complex-bott-periodicity]]).
+[F3] Under AC, Bott multiplication extends the coefficient grading with period two ([[thm-complex-bott-periodicity]]).
 
-[F4] Under AC, $\widetilde K^0(S^1)=0$
-([[cor-complex-k-theory-of-spheres]]).
+[F4] Under AC, $\widetilde K^0(S^1)=0$ ([[cor-complex-k-theory-of-spheres]]).
 
 [A1] AC is used only in step 3.1 through [F3] and [F4].
 

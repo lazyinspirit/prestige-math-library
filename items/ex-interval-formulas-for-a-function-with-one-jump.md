@@ -36,16 +36,9 @@ $$\mu_F((-1,0)) = 0,\qquad \mu_F((-1,0]) = 1,\qquad \mu_F([0,1)) = 1,\qquad \mu_
 
 ## Facts & Assumptions
 
-**Given:** The step function $F$ above and its Lebesgue-Stieltjes measure
-$\mu_F$.
+**Given:** The step function $F$ above and its Lebesgue-Stieltjes measure $\mu_F$.
 
-[L1] For a Lebesgue-Stieltjes measure, the open, closed, and half-open interval
-formulas are
-$\mu_F((a,b)) = F(b^-) - F(a)$,
-$\mu_F((a,b]) = F(b)-F(a)$,
-$\mu_F([a,b)) = F(b^-) - F(a^-)$, and
-$\mu_F([a,b]) = F(b)-F(a^-)$.
-([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
+[L1] For a Lebesgue-Stieltjes measure, the open, closed, and half-open interval formulas are $\mu_F((a,b)) = F(b^-) - F(a)$, $\mu_F((a,b]) = F(b)-F(a)$, $\mu_F([a,b)) = F(b^-) - F(a^-)$, and $\mu_F([a,b]) = F(b)-F(a^-)$. ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
 
 ## Verification
 
@@ -55,7 +48,4 @@ $\mu_F([a,b]) = F(b)-F(a^-)$.
 $F(-1)=F(-1^-)=0$, $F(0^-)=0$, $F(0)=1$, $F(1^-)=1$, and $F(1)=1$. [given]
 
 2.1 Substituting those values into [L1] gives [step 1.1, L1]
-$\mu_F((-1,0))=0-0=0$,
-$\mu_F((-1,0])=1-0=1$,
-$\mu_F([0,1))=1-0=1$, and
-$\mu_F((0,1])=1-1=0$. [step 1.1, L1] ∎
+$\mu_F((-1,0))=0-0=0$, $\mu_F((-1,0])=1-0=1$, $\mu_F([0,1))=1-0=1$, and $\mu_F((0,1])=1-1=0$. [step 1.1, L1] ∎

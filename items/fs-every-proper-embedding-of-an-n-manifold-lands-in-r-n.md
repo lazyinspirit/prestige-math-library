@@ -35,8 +35,7 @@ $\mathbb R^n$.
 
 **Given:** The circle $S^1$.
 
-[L1] Every smooth manifold does embed properly in $\mathbb R^{2n+1}$
-([[thm-weak-whitney-proper-embedding-theorem]]).
+[L1] Every smooth manifold does embed properly in $\mathbb R^{2n+1}$ ([[thm-weak-whitney-proper-embedding-theorem]]).
 
 ## Refutation
 **Proof technique:** direct.

@@ -41,10 +41,7 @@ and the same formula holds for every integrable real or complex $f$.
 **Proof technique:** direct.
 
 1.1 If $s=\sum_j c_j\chi_{E_j}$ is simple, then [L1, given, algebra]
-$$\int s\,d\delta_{x_0}=\sum_j c_j\delta_{x_0}(E_j)=s(x_0),$$
-because exactly one cell containing $x_0$ contributes.
+$$\int s\,d\delta_{x_0}=\sum_j c_j\delta_{x_0}(E_j)=s(x_0),$$ because exactly one cell containing $x_0$ contributes.
 
 2.1 For nonnegative measurable $f$, choose simple $s_n\uparrow f$ by [L2]. Then [step 1.1, L2, L3] ∎
-$$\int f\,d\delta_{x_0}=\lim_n\int s_n\,d\delta_{x_0} =\lim_ns_n(x_0)=f(x_0).$$
-Apply this to the positive/negative parts and to the real/imaginary parts to
-obtain the same formula for real and complex integrable $f$ by [L3].
+$$\int f\,d\delta_{x_0}=\lim_n\int s_n\,d\delta_{x_0} =\lim_ns_n(x_0)=f(x_0).$$ Apply this to the positive/negative parts and to the real/imaginary parts to obtain the same formula for real and complex integrable $f$ by [L3].

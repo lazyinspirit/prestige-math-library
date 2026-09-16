@@ -42,8 +42,7 @@ $$\dim_{\mathbb C}(\mathbb C\otimes_{\mathbb R}V)=2\dim_{\mathbb R}V.$$
 1.1 By [L2], $\dim_{\mathbb C}V_{\mathbb C}=\dim_{\mathbb R}V$ for every finite-dimensional real $V$: the embedded image of a real basis is already a complex basis of the complexification. [L2]
 
 1.2 The concrete witness $V=\mathbb R$ confirms the correct value: by [L1]
-with $n=1$, $V_{\mathbb C}\cong\mathbb C$, so
-$\dim_{\mathbb C}V_{\mathbb C}=1=\dim_{\mathbb R}\mathbb R$, not $2$. [L1, L2]
+with $n=1$, $V_{\mathbb C}\cong\mathbb C$, so $\dim_{\mathbb C}V_{\mathbb C}=1=\dim_{\mathbb R}\mathbb R$, not $2$. [L1, L2]
 
 2.1 The doubling behaviour belongs to realification, the reverse construction, which replaces complex scalars by real ones; complexification keeps the numerical dimension unchanged. [step 1.1, step 1.2]
 

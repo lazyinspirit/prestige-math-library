@@ -35,8 +35,7 @@ Lebesgue measure $0$.
 
 **Given:** The Cantor measure $\mu_c$ and the Cantor set $C$.
 
-[L1] The Cantor measure is a singular atomless probability measure concentrated
-on the Cantor set. ([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
+[L1] The Cantor measure is a singular atomless probability measure concentrated on the Cantor set. ([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
 
 ## Verification
 
@@ -45,5 +44,4 @@ on the Cantor set. ([[prop-cantor-measure-is-a-singular-atomless-probability-mea
 1.1 By [L1], $\mu_c(\mathbb{R} \setminus C)=0$. [L1]
 
 2.1 The same fact [L1] says $\mu_c([0,1])=1$, hence [step 1.1, L1]
-$\mu_c(C)=1-\mu_c([0,1]\setminus C)=1$. This is exactly what concentration on
-$C$ means. [step 1.1, L1] ∎
+$\mu_c(C)=1-\mu_c([0,1]\setminus C)=1$. This is exactly what concentration on $C$ means. [step 1.1, L1] ∎

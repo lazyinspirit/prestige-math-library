@@ -32,15 +32,11 @@ The function $L:(0,\infty)\to\mathbb R$ is continuous and strictly increasing.
 
 **Given:** $L$ on $(0,\infty)$.
 
-[L1] $L$ is differentiable and $L'(x)=1/x$ for $x>0$
-([[thm-integral-logarithm-derivative-and-normalisation]]).
+[L1] $L$ is differentiable and $L'(x)=1/x$ for $x>0$ ([[thm-integral-logarithm-derivative-and-normalisation]]).
 
-[L2] Differentiability at a point implies continuity there
-([[cor-differentiable-implies-continuous]]).
+[L2] Differentiability at a point implies continuity there ([[cor-differentiable-implies-continuous]]).
 
-[L3] If a function is continuous on $[a,b]$ and differentiable on $(a,b)$,
-then $f(b)-f(a)=f'(c)(b-a)$ for some $c\in(a,b)$
-([[cor-mean-value-theorem]]).
+[L3] If a function is continuous on $[a,b]$ and differentiable on $(a,b)$, then $f(b)-f(a)=f'(c)(b-a)$ for some $c\in(a,b)$ ([[cor-mean-value-theorem]]).
 
 ## Proof
 

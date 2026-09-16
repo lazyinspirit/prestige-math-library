@@ -48,9 +48,7 @@ $x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.
 
 [L3] Loop multiplication traverses the first loop and then the second, using the explicit two-piece concatenation formula ([[def-based-loops-and-fundamental-group]]).
 
-[L4] A map between groups is a group homomorphism exactly when it preserves
-products, and the loop-class operations in question are groups
-([[def-group-homomorphism]], [[thm-fundamental-group-laws]]).
+[L4] A map between groups is a group homomorphism exactly when it preserves products, and the loop-class operations in question are groups ([[def-group-homomorphism]], [[thm-fundamental-group-laws]]).
 
 ## Proof
 

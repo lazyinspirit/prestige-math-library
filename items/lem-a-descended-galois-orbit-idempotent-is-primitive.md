@@ -61,7 +61,4 @@ then $D\cong\operatorname{End}_A(S)^{\mathrm{op}}$.
 
 ## Remarks
 
-Zheng, Theorem 3.2.1 and Remark 3.2.3, pp.117–118, supply the semisimple
-decomposition; §3.3, especially Lemma 3.3.2 and Warning 3.3.3(1), explains the
-simple-ring versus simple-module distinction. The matrix-ideal computation
-above proves that distinction's needed positive assertion locally.
+Zheng, Theorem 3.2.1 and Remark 3.2.3, pp.117–118, supply the semisimple decomposition; §3.3, especially Lemma 3.3.2 and Warning 3.3.3(1), explains the simple-ring versus simple-module distinction. The matrix-ideal computation above proves that distinction's needed positive assertion locally.

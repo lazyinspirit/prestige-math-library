@@ -39,12 +39,9 @@ strictly nested in or disjoint from every earlier one.
 
 **Given:** the order $L$ above and the nested-interval recursion. Work in ZFC.
 
-[F1] The completed line-to-tree supplier recursively chooses closed intervals
-in the stated dense, endpoint-free, nowhere-separable ccc order and orders them
-by reverse nesting. [[lem-nowhere-separable-suslin-line-nested-interval-tree]]
+[F1] The completed line-to-tree supplier recursively chooses closed intervals in the stated dense, endpoint-free, nowhere-separable ccc order and orders them by reverse nesting. [[lem-nowhere-separable-suslin-line-nested-interval-tree]]
 
-[A1] AC supplies the simultaneous witness choices through all $\omega_1$
-stages of the full recursion. [[def-axiom-of-choice]]
+[A1] AC supplies the simultaneous witness choices through all $\omega_1$ stages of the full recursion. [[def-axiom-of-choice]]
 
 ## Verification
 
@@ -62,9 +59,5 @@ stages of the full recursion. [[def-axiom-of-choice]]
 
 ## Remarks
 
-- The indices $1$ and $2$ are siblings above $0$ only in the order-theoretic
-  sense: the construction does not assert that every node has immediate
-  successors at the next ordinal stage.
-- The calculation uses symbolic points of the supplied Suslin-line reduction;
-  replacing $L$ by the real line would destroy the nowhere-separable hypothesis
-  needed for the full $\omega_1$ recursion.
+- The indices $1$ and $2$ are siblings above $0$ only in the order-theoretic sense: the construction does not assert that every node has immediate successors at the next ordinal stage.
+- The calculation uses symbolic points of the supplied Suslin-line reduction; replacing $L$ by the real line would destroy the nowhere-separable hypothesis needed for the full $\omega_1$ recursion.

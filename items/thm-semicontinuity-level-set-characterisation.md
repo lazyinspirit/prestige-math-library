@@ -87,15 +87,6 @@ uncountable.
 
 ## Remarks
 
-- **Why "relatively" open and not open.** $S_\alpha$ is a subset of $A$, so it
-  cannot be open in $\mathbb{R}$ unless $A$ is; the correct statement is the one
-  above, exactly as in [[thm-continuity-preimage-characterisation]], where the
-  same phrase is fixed inline for the same reason. For $A = \mathbb{R}$ the
-  qualifier disappears and the level sets are open outright.
+- **Why "relatively" open and not open.** $S_\alpha$ is a subset of $A$, so it cannot be open in $\mathbb{R}$ unless $A$ is; the correct statement is the one above, exactly as in [[thm-continuity-preimage-characterisation]], where the same phrase is fixed inline for the same reason. For $A = \mathbb{R}$ the qualifier disappears and the level sets are open outright.
 
-- **The strict inequalities are not interchangeable with the weak ones.** Upper
-  semicontinuity says the strict sublevel sets are relatively open, equivalently
-  that the sets $\{f \ge \alpha\}$ are relatively closed. It does **not** say
-  that the sets $\{f \le \alpha\}$ are relatively closed; the indicator of a
-  closed set is upper semicontinuous while $\{f \le 0\}$ is the complement of
-  that closed set, which is relatively open and generally not closed.
+- **The strict inequalities are not interchangeable with the weak ones.** Upper semicontinuity says the strict sublevel sets are relatively open, equivalently that the sets $\{f \ge \alpha\}$ are relatively closed. It does **not** say that the sets $\{f \le \alpha\}$ are relatively closed; the indicator of a closed set is upper semicontinuous while $\{f \le 0\}$ is the complement of that closed set, which is relatively open and generally not closed.

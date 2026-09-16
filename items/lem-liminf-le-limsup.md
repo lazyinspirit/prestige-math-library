@@ -70,18 +70,8 @@ including those in which one or both sides are $\pm\infty$.
 
 ## Remarks
 
-- **The inequality can be strict, and that is the interesting case.** For the
-  alternating sequence the two sides are $-1$ and $1$
-  ([[ex-limsup-of-alternating-sequence]]). Equality is exactly convergence, in the
-  extended sense: that is [[thm-convergence-iff-limsup-equals-liminf]].
+- **The inequality can be strict, and that is the interesting case.** For the alternating sequence the two sides are $-1$ and $1$ ([[ex-limsup-of-alternating-sequence]]). Equality is exactly convergence, in the extended sense: that is [[thm-convergence-iff-limsup-equals-liminf]].
 
-- **What the proof actually uses is that the two families interleave.** Each
-  $i_m$ is below each $s_n$, not merely below $s_m$, and getting that needs a
-  common index $p$ beyond both, which is where totality of the order on
-  $\mathbb{N}$ enters. Without that step one would only know
-  $i_n \le s_n$ for each $n$, which does not by itself compare a supremum of the
-  first family with an infimum of the second.
+- **What the proof actually uses is that the two families interleave.** Each $i_m$ is below each $s_n$, not merely below $s_m$, and getting that needs a common index $p$ beyond both, which is where totality of the order on $\mathbb{N}$ enters. Without that step one would only know $i_n \le s_n$ for each $n$, which does not by itself compare a supremum of the first family with an infimum of the second.
 
-- **No completeness of $\mathbb{R}$ is used here beyond what is already inside
-  [[lem-extended-reals-complete]].** The argument is pure order theory in a
-  totally ordered set with a least and a greatest element.
+- **No completeness of $\mathbb{R}$ is used here beyond what is already inside [[lem-extended-reals-complete]].** The argument is pure order theory in a totally ordered set with a least and a greatest element.

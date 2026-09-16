@@ -30,12 +30,9 @@ $$ L(D^c)=\Sigma^*\setminus L(D). $$
 
 **Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$ over $\Sigma$.
 
-[L1] For languages over a fixed alphabet, the complement of $L$ is
-$L^c=\Sigma^*\setminus L$, by [[def-language-boolean-operations]].
+[L1] For languages over a fixed alphabet, the complement of $L$ is $L^c=\Sigma^*\setminus L$, by [[def-language-boolean-operations]].
 
-[L2] A word $w$ is accepted by a DFA exactly when the final state
-$\delta^*(q_0,w)$ lies in its accepting set, by
-[[def-dfa-acceptance-and-recognized-language]].
+[L2] A word $w$ is accepted by a DFA exactly when the final state $\delta^*(q_0,w)$ lies in its accepting set, by [[def-dfa-acceptance-and-recognized-language]].
 
 ## Proof
 

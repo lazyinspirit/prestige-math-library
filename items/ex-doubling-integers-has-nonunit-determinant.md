@@ -36,23 +36,15 @@ and after extending scalars to $\mathbb Q$ its inverse is $[1/2]$.
 
 **Given:** The $1\times1$ matrix $A=[2]$.
 
-[F1] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]) and its only
-units are $1$ and $-1$ ([[lem-units-of-z]]).
+[F1] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]) and its only units are $1$ and $-1$ ([[lem-units-of-z]]).
 
-[L1] Integer multiplication has cancellation
-([[lem-int-cancellation]]).
+[L1] Integer multiplication has cancellation ([[lem-int-cancellation]]).
 
-[F2] $T_A(x)=Ax$, $\det(T_A)=\det(A)$, and
-$\operatorname{adj}(T_A)=T_{\operatorname{adj}(A)}$
-([[def-coordinate-endomorphism-over-a-commutative-ring]]).
+[F2] $T_A(x)=Ax$, $\det(T_A)=\det(A)$, and $\operatorname{adj}(T_A)=T_{\operatorname{adj}(A)}$ ([[def-coordinate-endomorphism-over-a-commutative-ring]]).
 
-[L2] A positive-sized square matrix over a commutative ring is invertible
-exactly when its determinant is a unit
-([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
+[L2] A positive-sized square matrix over a commutative ring is invertible exactly when its determinant is a unit ([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
 
-[L3] If the determinant is a unit, then
-$A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$
-([[cor-inverse-matrix-by-adjugate]]).
+[L3] If the determinant is a unit, then $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$ ([[cor-inverse-matrix-by-adjugate]]).
 
 [F3] $\mathbb Q$ is a field ([[thm-rat-field]]).
 

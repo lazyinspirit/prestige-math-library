@@ -37,16 +37,11 @@ using the opposite-category interpretation of the projective resolutions as
 injective resolutions in $\mathbf{Ab}^{\mathrm{op}}$.
 ## Facts & Assumptions
 
-**Given:** The contravariant functor
-$G=\operatorname{Hom}_{\mathbb Z}(-,\mathbb Z)$, supplied projective data $P$
-on $\mathcal D$, and an object $A\in\mathcal D$.
+**Given:** The contravariant functor $G=\operatorname{Hom}_{\mathbb Z}(-,\mathbb Z)$, supplied projective data $P$ on $\mathcal D$, and an object $A\in\mathcal D$.
 
-[L1] Hom is left exact in each variable, so the displayed Hom functor is a
-standard contravariant example
-([[thm-hom-is-left-exact-in-each-variable]]).
+[L1] Hom is left exact in each variable, so the displayed Hom functor is a standard contravariant example ([[thm-hom-is-left-exact-in-each-variable]]).
 
-[L2] Contravariant derived functors are derived on the opposite category
-([[prop-contravariant-derived-functors-are-derived-on-the-opposite-category]]).
+[L2] Contravariant derived functors are derived on the opposite category ([[prop-contravariant-derived-functors-are-derived-on-the-opposite-category]]).
 
 ## Verification
 

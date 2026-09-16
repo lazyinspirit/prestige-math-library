@@ -29,8 +29,7 @@ converges almost everywhere to the constant $\int f\,d\mu$.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, Lebesgue probability on the circle, $T=R_{1/2}$,
-and $f=\mathbf1_E$ for $E=[0,1/4)\cup[1/2,3/4)$.
+**Given:** Countable choice, Lebesgue probability on the circle, $T=R_{1/2}$, and $f=\mathbf1_E$ for $E=[0,1/4)\cup[1/2,3/4)$.
 
 [F1] Every circle rotation preserves Lebesgue probability ([[prop-circle-rotations-preserve-lebesgue-measure]]).
 

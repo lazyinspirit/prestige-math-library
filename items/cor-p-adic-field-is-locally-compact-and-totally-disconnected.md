@@ -34,14 +34,11 @@ particular, $\mathbb Z_p$ is a compact open subring.
 
 **Given:** The p-adic field $\mathbb Q_p$ and $\mathrm{AC}_\omega$.
 
-[L1] $\mathbb Z_p = \{x : |x|_p \le 1\}$, and $p$-adic balls are clopen
-([[cor-zp-is-the-valuation-ring-of-qp]], [[lem-p-adic-balls-are-clopen]]).
+[L1] $\mathbb Z_p = \{x : |x|_p \le 1\}$, and $p$-adic balls are clopen ([[cor-zp-is-the-valuation-ring-of-qp]], [[lem-p-adic-balls-are-clopen]]).
 
-[L2] Every element of $\mathbb Z_p$ has a digit expansion
-([[thm-p-adic-digit-expansion]]).
+[L2] Every element of $\mathbb Z_p$ has a digit expansion ([[thm-p-adic-digit-expansion]]).
 
-[L3] Assuming $\mathrm{AC}_\omega$, a complete totally bounded metric space is compact
-([[thm-complete-and-totally-bounded-implies-compact]]).
+[L3] Assuming $\mathrm{AC}_\omega$, a complete totally bounded metric space is compact ([[thm-complete-and-totally-bounded-implies-compact]]).
 
 ## Proof
 

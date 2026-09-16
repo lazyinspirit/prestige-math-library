@@ -35,22 +35,15 @@ definition.
 
 **Given:** Degree-$n$ cocycles $a,b$ and the index $j=n-k$.
 
-[F1] For $0\leq k\leq n$, the proposed square is represented by
-$a\smile_{n-k}a$; for $k<0$ or $k>n$, it is the zero operation
-([[def-steenrod-squares-from-cup-i-products]]).
+[F1] For $0\leq k\leq n$, the proposed square is represented by $a\smile_{n-k}a$; for $k<0$ or $k>n$, it is the zero operation ([[def-steenrod-squares-from-cup-i-products]]).
 
-[F2] The cup-$i$ coboundary formula has the two transposed
-$\smile_{i-1}$ terms ([[thm-cup-i-coboundary-identity]]).
+[F2] The cup-$i$ coboundary formula has the two transposed $\smile_{i-1}$ terms ([[thm-cup-i-coboundary-identity]]).
 
-[F3] The maps $D_i$ are natural
-([[lem-natural-higher-diagonal-approximations-on-singular-chains]]).
+[F3] The maps $D_i$ are natural ([[lem-natural-higher-diagonal-approximations-on-singular-chains]]).
 
-[F4] They carry chains of a subspace into the tensor square of that subspace
-([[lem-natural-higher-diagonal-approximations-on-singular-chains]]).
+[F4] They carry chains of a subspace into the tensor square of that subspace ([[lem-natural-higher-diagonal-approximations-on-singular-chains]]).
 
-[F5] Two systems have natural $K_i$ satisfying
-$D_i-D_i'=dK_i+K_id+(1+T)K_{i-1}$
-([[lem-natural-higher-diagonal-approximations-on-singular-chains]]).
+[F5] Two systems have natural $K_i$ satisfying $D_i-D_i'=dK_i+K_id+(1+T)K_{i-1}$ ([[lem-natural-higher-diagonal-approximations-on-singular-chains]]).
 
 ## Proof
 
@@ -58,9 +51,7 @@ $D_i-D_i'=dK_i+K_id+(1+T)K_{i-1}$
 
 1.1 If $k<0$ or $k>n$, [F1] makes $Sq^k$ the zero homomorphism, so independence, additivity, and naturality are immediate. Hence assume $0\leq k\leq n$, so $j=n-k\geq0$. The operation is additive. Expanding $(a+b)\smile_j(a+b)$ leaves, besides the two individual squares, the cross term $a\smile_jb+b\smile_ja$. Since $a,b$ are cocycles, [F2] says [F1, F2]
 
-$$
-a\smile_jb+b\smile_ja=\delta(a\smile_{j+1}b).
-$$
+$$ a\smile_jb+b\smile_ja=\delta(a\smile_{j+1}b). $$
 
 Hence the cross term vanishes in cohomology.
 
@@ -70,12 +61,6 @@ Hence the cross term vanishes in cohomology.
 
 2.1 The class is independent of its cocycle representative. If $a'=a+\delta h$, expansion and two applications of [F2] give [F1, F2, step 1.1]
 
-$$
-a'\smile_j a'-a\smile_j a=\delta\bigl(a\smile_{j+1}\delta h+h\smile_j\delta h+h\smile_{j-1}h\bigr).
-$$
+$$ a'\smile_j a'-a\smile_j a=\delta\bigl(a\smile_{j+1}\delta h+h\smile_j\delta h+h\smile_{j-1}h\bigr). $$
 
-Indeed the first summand differentiates to the two $a,\delta h$ cross terms,
-while the last two differentiate to $(\delta h)\smile_j(\delta h)$; all
-remaining terms occur twice. Negative cup indices are zero, so this calculation
-also covers the endpoints. Together with steps 1.1--1.3, this proves every
-assertion. ∎
+Indeed the first summand differentiates to the two $a,\delta h$ cross terms, while the last two differentiate to $(\delta h)\smile_j(\delta h)$; all remaining terms occur twice. Negative cup indices are zero, so this calculation also covers the endpoints. Together with steps 1.1--1.3, this proves every assertion. ∎

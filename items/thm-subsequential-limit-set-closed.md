@@ -91,36 +91,10 @@ no choice principle and no topological notion used or needed.
 
 ## Remarks
 
-- **The diagonal is where the two approximations are balanced.** Step 2.1 spends
-  half of the allowance $1/(n+1)$ on getting from $y$ to some $y_J$ and the other
-  half on getting from $y_J$ to a term of $(x_k)$ arbitrarily far out. Splitting
-  the allowance is what the natural number $q_n = 2(n+1)$ is for; nothing is
-  halved in $\mathbb{R}$, so no divisibility fact about the field is needed.
+- **The diagonal is where the two approximations are balanced.** Step 2.1 spends half of the allowance $1/(n+1)$ on getting from $y$ to some $y_J$ and the other half on getting from $y_J$ to a term of $(x_k)$ arbitrarily far out. Splitting the allowance is what the natural number $q_n = 2(n+1)$ is for; nothing is halved in $\mathbb{R}$, so no divisibility fact about the field is needed.
 
-- **Choice is not used**, for the same reason as in
-  [[thm-limsup-is-greatest-subsequential-limit]]: the index map is built by taking
-  least elements of explicitly described nonempty subsets of $\mathbb{N}$
-  ([[thm-well-ordering-principle]]) and applying [[thm-recursion]]. The
-  subsequences witnessing $y_J \in \operatorname{SL}(x)$ are used one at a time
-  inside a single existence argument, never selected simultaneously for all $J$.
+- **Choice is not used**, for the same reason as in [[thm-limsup-is-greatest-subsequential-limit]]: the index map is built by taking least elements of explicitly described nonempty subsets of $\mathbb{N}$ ([[thm-well-ordering-principle]]) and applying [[thm-recursion]]. The subsequences witnessing $y_J \in \operatorname{SL}(x)$ are used one at a time inside a single existence argument, never selected simultaneously for all $J$.
 
-- **The hypothesis that $y$ be real is essential to the statement, not to the
-  proof technique.** $\operatorname{SL}(x)$ is a set of real numbers by
-  [[def-subsequential-limit]], so a limit outside $\mathbb{R}$ could not be
-  asserted to lie in it. The extended set $\overline{\operatorname{SL}}(x)$ always
-  contains its greatest and least elements
-  ([[thm-limsup-is-greatest-subsequential-limit]],
-  [[cor-liminf-is-least-subsequential-limit]]), which is the corresponding
-  statement at the two ends.
+- **The hypothesis that $y$ be real is essential to the statement, not to the proof technique.** $\operatorname{SL}(x)$ is a set of real numbers by [[def-subsequential-limit]], so a limit outside $\mathbb{R}$ could not be asserted to lie in it. The extended set $\overline{\operatorname{SL}}(x)$ always contains its greatest and least elements ([[thm-limsup-is-greatest-subsequential-limit]], [[cor-liminf-is-least-subsequential-limit]]), which is the corresponding statement at the two ends.
 
-- **Consequence: a nonempty $\operatorname{SL}(x)$ that is bounded above contains
-  its supremum.** Write $\sigma := \sup \operatorname{SL}(x)$, a real number under
-  those two hypotheses. For each $j$ the element $\sigma - 1/(j+1)$ fails to bound
-  $\operatorname{SL}(x)$ above ([[lem-sup-epsilon]]), so some
-  $y_j \in \operatorname{SL}(x)$ satisfies $\sigma - 1/(j+1) < y_j \le \sigma$, and
-  such a sequence converges to $\sigma$ by the reciprocal Archimedean property and
-  the squeeze ([[cor-archimedean-reciprocal]], [[thm-squeeze]]). The theorem then
-  puts $\sigma$ in $\operatorname{SL}(x)$. This is a second route to the *finite*
-  case of [[thm-limsup-is-greatest-subsequential-limit]], available only when the
-  set is already known to be nonempty and bounded above; the route taken there is
-  direct and covers the infinite cases too, which this one cannot.
+- **Consequence: a nonempty $\operatorname{SL}(x)$ that is bounded above contains its supremum.** Write $\sigma := \sup \operatorname{SL}(x)$, a real number under those two hypotheses. For each $j$ the element $\sigma - 1/(j+1)$ fails to bound $\operatorname{SL}(x)$ above ([[lem-sup-epsilon]]), so some $y_j \in \operatorname{SL}(x)$ satisfies $\sigma - 1/(j+1) < y_j \le \sigma$, and such a sequence converges to $\sigma$ by the reciprocal Archimedean property and the squeeze ([[cor-archimedean-reciprocal]], [[thm-squeeze]]). The theorem then puts $\sigma$ in $\operatorname{SL}(x)$. This is a second route to the *finite* case of [[thm-limsup-is-greatest-subsequential-limit]], available only when the set is already known to be nonempty and bounded above; the route taken there is direct and covers the infinite cases too, which this one cannot.

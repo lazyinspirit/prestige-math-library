@@ -38,16 +38,11 @@ with $\lambda(A_0)=\lambda_0$ and $x(A_0)=x_0$.
 
 ## Facts & Assumptions
 
-**Given:** A base matrix $A_0$, a simple eigenvalue $\lambda_0$, and normalized
-compatible eigenvectors $x_0,y_0$.
+**Given:** A base matrix $A_0$, a simple eigenvalue $\lambda_0$, and normalized compatible eigenvectors $x_0,y_0$.
 
-[L1] For a simple eigenvalue, one may normalize compatible left and right
-eigenvectors by $y_0^\ast x_0=1$
-([[prop-simple-eigenvalues-admit-left-right-normalization]]).
+[L1] For a simple eigenvalue, one may normalize compatible left and right eigenvectors by $y_0^\ast x_0=1$ ([[prop-simple-eigenvalues-admit-left-right-normalization]]).
 
-[L2] The parametrized implicit-function theorem gives a unique local $C^1$
-solution once the derivative in the solved-for variables is invertible
-([[thm-parametrized-implicit-function-theorem-with-higher-regularity]]).
+[L2] The parametrized implicit-function theorem gives a unique local $C^1$ solution once the derivative in the solved-for variables is invertible ([[thm-parametrized-implicit-function-theorem-with-higher-regularity]]).
 
 ## Proof
 **Proof technique:** direct.

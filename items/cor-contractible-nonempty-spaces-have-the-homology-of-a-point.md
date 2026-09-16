@@ -33,18 +33,13 @@ where $\ast$ denotes a one-point space.
 
 ## Facts & Assumptions
 
-**Given:** A nonempty contractible topological space $X$, an abelian group $G$,
-and an integer $n\geq 0$.
+**Given:** A nonempty contractible topological space $X$, an abelian group $G$, and an integer $n\geq 0$.
 
-[L1] For a nonempty space, contractibility is equivalent to the identity map
-being nullhomotopic ([[cor-contractible-iff-identity-nullhomotopic]]).
+[L1] For a nonempty space, contractibility is equivalent to the identity map being nullhomotopic ([[cor-contractible-iff-identity-nullhomotopic]]).
 
-[L2] A map that is homotopic to a constant map is nullhomotopic, and a space is
-contractible exactly when every map out of it is nullhomotopic
-([[def-nullhomotopic-map-and-contractible-space]]).
+[L2] A map that is homotopic to a constant map is nullhomotopic, and a space is contractible exactly when every map out of it is nullhomotopic ([[def-nullhomotopic-map-and-contractible-space]]).
 
-[L3] Homotopy equivalences induce isomorphisms on singular homology
-([[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]]).
+[L3] Homotopy equivalences induce isomorphisms on singular homology ([[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]]).
 
 ## Proof
 

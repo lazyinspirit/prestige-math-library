@@ -40,16 +40,11 @@ In the nonnegative case the right-hand side may be $+\infty$.
 
 ## Facts & Assumptions
 
-**Given:** A probability space, an integrable real random variable $X$, an
-interval $I$ containing its almost-everywhere range, and a convex
-$\varphi:I\to\mathbb R$ such that $\varphi(X)$ is integrable or nonnegative.
+**Given:** A probability space, an integrable real random variable $X$, an interval $I$ containing its almost-everywhere range, and a convex $\varphi:I\to\mathbb R$ such that $\varphi(X)$ is integrable or nonnegative.
 
-[L1] Expectation is integration against the underlying probability measure
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
+[L1] Expectation is integration against the underlying probability measure ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 
-[L2] Jensen's integral inequality holds for a probability measure whenever the
-composed function is integrable
-([[thm-jensens-integral-inequality]]).
+[L2] Jensen's integral inequality holds for a probability measure whenever the composed function is integrable ([[thm-jensens-integral-inequality]]).
 
 ## Proof
 

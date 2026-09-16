@@ -34,16 +34,11 @@ Then the sigma-algebras $\mathcal G_0,\dots,\mathcal G_{m-1}$ are independent.
 
 ## Facts & Assumptions
 
-**Given:** An independent family $(\mathcal F_i)_{i\in I}$ and pairwise
-disjoint index sets $J_0,\dots,J_{m-1}$.
+**Given:** An independent family $(\mathcal F_i)_{i\in I}$ and pairwise disjoint index sets $J_0,\dots,J_{m-1}$.
 
-[L1] Independence of sigma-algebras means finite intersections of events from
-distinct member sigma-algebras satisfy the product formula.
-([[def-independent-sigma-algebras-and-events]])
+[L1] Independence of sigma-algebras means finite intersections of events from distinct member sigma-algebras satisfy the product formula. ([[def-independent-sigma-algebras-and-events]])
 
-[L2] Independent pi-systems containing the whole space generate independent
-sigma-algebras.
-([[thm-pi-system-criterion-for-independent-sigma-algebras]])
+[L2] Independent pi-systems containing the whole space generate independent sigma-algebras. ([[thm-pi-system-criterion-for-independent-sigma-algebras]])
 
 ## Proof
 

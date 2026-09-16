@@ -34,14 +34,11 @@ cotensor is enough to prove that the object is a cotensor.
 
 ## Facts & Assumptions
 
-**Given:** The Cat-enriched setting, the discrete two-object category $X$, and
-the one-object category $E$ whose endomorphism monoid is $(\mathbb N,+)$.
+**Given:** The Cat-enriched setting, the discrete two-object category $X$, and the one-object category $E$ whose endomorphism monoid is $(\mathbb N,+)$.
 
-[L1] A cotensor requires an isomorphism of enriched hom-objects, not merely a
-bijection of their underlying sets ([[def-cotensor-and-tensor]]).
+[L1] A cotensor requires an isomorphism of enriched hom-objects, not merely a bijection of their underlying sets ([[def-cotensor-and-tensor]]).
 
-[L2] The underlying-category construction can forget morphisms inside a
-hom-object ([[rem-the-underlying-category-can-lose-information]]).
+[L2] The underlying-category construction can forget morphisms inside a hom-object ([[rem-the-underlying-category-can-lose-information]]).
 
 ## Counterexample
 

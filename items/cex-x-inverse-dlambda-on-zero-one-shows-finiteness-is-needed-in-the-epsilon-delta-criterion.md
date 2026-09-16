@@ -28,10 +28,7 @@ The epsilon-delta small-set condition characterises absolute continuity for ever
 
 **Given:** The measure $\nu(E)=\int_E x^{-1}\chi_{(0,1)}(x)\,d\lambda(x)$ on $\mathbb R$.
 
-[L1] A nonnegative measurable density defines a measure
-([[def-measure-with-density]]), and its integral over every Lebesgue-null set
-vanishes ([[cor-integral-over-a-null-set-vanishes]]), so the resulting measure
-is absolutely continuous with respect to $\lambda$.
+[L1] A nonnegative measurable density defines a measure ([[def-measure-with-density]]), and its integral over every Lebesgue-null set vanishes ([[cor-integral-over-a-null-set-vanishes]]), so the resulting measure is absolutely continuous with respect to $\lambda$.
 
 [L2] The finite-measure theorem proves the epsilon-delta criterion only under a finiteness hypothesis. ([[thm-epsilon-delta-characterisation-of-absolute-continuity-for-finite-signed-or-complex-measures]])
 

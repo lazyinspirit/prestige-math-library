@@ -27,12 +27,9 @@ the old accepting states to be nonaccepting.
 
 ## Facts & Assumptions
 
-**Given:** A DPDA with one state $q$, bottom marker $Z_0$, no accepting states,
-and one transition $(q,Z_0)\xrightarrow{\varepsilon}(q,Z_0)$, so the machine
-loops forever without reading input.
+**Given:** A DPDA with one state $q$, bottom marker $Z_0$, no accepting states, and one transition $(q,Z_0)\xrightarrow{\varepsilon}(q,Z_0)$, so the machine loops forever without reading input.
 
-[A1] The statement refuted is: swapping the accepting states of a DPDA
-automatically complements its language.
+[A1] The statement refuted is: swapping the accepting states of a DPDA automatically complements its language.
 
 [L1] By [[def-deterministic-pda]], a DPDA may have an enabled $\varepsilon$-move as its unique move from a configuration.
 

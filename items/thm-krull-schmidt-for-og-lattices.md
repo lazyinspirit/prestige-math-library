@@ -33,11 +33,9 @@ nonzero indecomposable $\mathcal O H$-lattice is local.
 
 ## Facts & Assumptions
 
-**Given:** The modular system, finite group, and finite-rank lattices in the
-Statement.
+**Given:** The modular system, finite group, and finite-rank lattices in the Statement.
 
-[F1] An $\mathcal O H$-lattice is finite free over the complete DVR
-$\mathcal O$ ([[def-relative-projectivity-and-vertices-for-og-lattices]]).
+[F1] An $\mathcal O H$-lattice is finite free over the complete DVR $\mathcal O$ ([[def-relative-projectivity-and-vertices-for-og-lattices]]).
 
 ## Proof
 

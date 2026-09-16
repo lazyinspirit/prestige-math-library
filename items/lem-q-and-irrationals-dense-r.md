@@ -93,23 +93,8 @@ claim 3 is proved alongside and used for it.
 
 ## Remarks
 
-- **Two dense sets can be disjoint.** $\mathbb{Q}_{\mathbb{R}}$ and $X$ partition
-  $\mathbb{R}$ and both are dense, so density says nothing about size: one of
-  them is countable and the other is not
-  ([[cor-irrationals-uncountable]]). What density does say is that neither has
-  interior: a set whose complement is dense has empty interior, which is the
-  computation carried out for $\mathbb{Q}$ in
-  [[ex-closure-interior-boundary-of-q]].
+- **Two dense sets can be disjoint.** $\mathbb{Q}_{\mathbb{R}}$ and $X$ partition $\mathbb{R}$ and both are dense, so density says nothing about size: one of them is countable and the other is not ([[cor-irrationals-uncountable]]). What density does say is that neither has interior: a set whose complement is dense has empty interior, which is the computation carried out for $\mathbb{Q}$ in [[ex-closure-interior-boundary-of-q]].
 
-- **Claim 3 is a statement about open sets, not about intervals.** It follows
-  from the uncountability of intervals ([[cor-interval-uncountable]]) only
-  because openness supplies an interval inside the set at each of its points.
-  A nonempty set with empty interior can perfectly well be countable, as
-  $\mathbb{Q}_{\mathbb{R}}$ shows.
+- **Claim 3 is a statement about open sets, not about intervals.** It follows from the uncountability of intervals ([[cor-interval-uncountable]]) only because openness supplies an interval inside the set at each of its points. A nonempty set with empty interior can perfectly well be countable, as $\mathbb{Q}_{\mathbb{R}}$ shows.
 
-- **An explicit irrational is not produced here.** Step 2.1 is a counting
-  argument and exhibits nothing. The library does exhibit one separately,
-  $\sqrt 2$ ([[thm-of-square-roots]], [[fs-sqrt2-rational]]), and an explicit
-  irrational in a given interval $(a,b)$ can be built from it as
-  $q_1 + (q_2 - q_1)/\sqrt 2$ for suitable rationals $q_1 < q_2$ in the
-  interval; that route is longer and is not the one taken above.
+- **An explicit irrational is not produced here.** Step 2.1 is a counting argument and exhibits nothing. The library does exhibit one separately, $\sqrt 2$ ([[thm-of-square-roots]], [[fs-sqrt2-rational]]), and an explicit irrational in a given interval $(a,b)$ can be built from it as $q_1 + (q_2 - q_1)/\sqrt 2$ for suitable rationals $q_1 < q_2$ in the interval; that route is longer and is not the one taken above.

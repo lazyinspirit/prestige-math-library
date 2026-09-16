@@ -35,25 +35,13 @@ Let $T=(T_n,\partial^T)$ be a homological delta functor on an abelian category.
 If $T$ is effaceable in positive degrees by projectives, then $T$ is universal.
 ## Facts & Assumptions
 
-**Given:** A homological delta functor $S=(S_n,\partial^S)$ and a natural
-transformation $u_0:S_0\Rightarrow T_0$.
+**Given:** A homological delta functor $S=(S_n,\partial^S)$ and a natural transformation $u_0:S_0\Rightarrow T_0$.
 
-[L1] Universality for a homological delta functor means unique extension of
-$u_0$ to a morphism of homological delta functors
-([[def-universal-delta-functor]],
-[[def-morphism-of-homological-delta-functors]]).
+[L1] Universality for a homological delta functor means unique extension of $u_0$ to a morphism of homological delta functors ([[def-universal-delta-functor]], [[def-morphism-of-homological-delta-functors]]).
 
-[L2] Effaceability supplies admissible projective effacements, and the
-dimension-shift lemma makes the corresponding connecting maps monic
-([[def-effaceable-homological-delta-functor-in-positive-degrees]],
-[[lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]]).
+[L2] Effaceability supplies admissible projective effacements, and the dimension-shift lemma makes the corresponding connecting maps monic ([[def-effaceable-homological-delta-functor-in-positive-degrees]], [[lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]]).
 
-[L3] Item 19 defines the next-degree component from one chosen effacement,
-item 20 makes it independent of that choice, and item 21 preserves
-compatibility with connecting morphisms
-([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]],
-[[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]],
-[[lem-the-effacement-extension-commutes-with-connecting-morphisms]]).
+[L3] Item 19 defines the next-degree component from one chosen effacement, item 20 makes it independent of that choice, and item 21 preserves compatibility with connecting morphisms ([[lem-extend-a-degree-zero-transformation-through-one-dimension-shift]], [[lem-the-effacement-extension-is-independent-of-the-effacing-morphism]], [[lem-the-effacement-extension-commutes-with-connecting-morphisms]]).
 
 ## Proof
 

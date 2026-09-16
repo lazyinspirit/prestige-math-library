@@ -52,29 +52,17 @@ by [[thm-argument-principle-null-homologous-cycle]].
 
 ## Facts & Assumptions
 
-**Given:** A closed complex contour $\gamma$, a meromorphic function $f$ on a
-neighbourhood of $\gamma^\ast$, and $f(z)\ne0$ on $\gamma^\ast$.
+**Given:** A closed complex contour $\gamma$, a meromorphic function $f$ on a neighbourhood of $\gamma^\ast$, and $f(z)\ne0$ on $\gamma^\ast$.
 
-[L1] The winding number of a closed contour about a point off its trace is
-$$n(\eta,p)=\frac{1}{2\pi i}\int_\eta \frac{dw}{w-p}$$
-([[def-winding-number-closed-complex-contour]]).
+[L1] The winding number of a closed contour about a point off its trace is $$n(\eta,p)=\frac{1}{2\pi i}\int_\eta \frac{dw}{w-p}$$ ([[def-winding-number-closed-complex-contour]]).
 
-[L2] The winding number is also the normalized increment of any continuous
-argument ([[cor-winding-number-is-the-normalized-argument-increment]]).
+[L2] The winding number is also the normalized increment of any continuous argument ([[cor-winding-number-is-the-normalized-argument-increment]]).
 
-[L3] A contour missing the origin admits a continuous logarithm, unique up to a
-constant in $2\pi i\mathbb Z$
-([[thm-continuous-logarithms-exist-along-a-contour]]).
+[L3] A contour missing the origin admits a continuous logarithm, unique up to a constant in $2\pi i\mathbb Z$ ([[thm-continuous-logarithms-exist-along-a-contour]]).
 
-[L4] A holomorphic nonvanishing function on a disc has a holomorphic logarithm,
-and that logarithm has derivative $f'/f$
-([[lem-local-holomorphic-logarithm-nonvanishing-function-on-disc]],
-[[cor-holomorphic-logarithm-has-the-logarithmic-derivative]]).
+[L4] A holomorphic nonvanishing function on a disc has a holomorphic logarithm, and that logarithm has derivative $f'/f$ ([[lem-local-holomorphic-logarithm-nonvanishing-function-on-disc]], [[cor-holomorphic-logarithm-has-the-logarithmic-derivative]]).
 
-[L5] Contour integrals add under concatenation, and a primitive computes the
-integral by endpoint increments
-([[prop-reversal-and-concatenation-of-complex-line-integrals]],
-[[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L5] Contour integrals add under concatenation, and a primitive computes the integral by endpoint increments ([[prop-reversal-and-concatenation-of-complex-line-integrals]], [[thm-fundamental-theorem-for-complex-line-integrals]]).
 
 ## Proof
 

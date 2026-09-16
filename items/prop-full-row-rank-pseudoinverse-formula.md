@@ -36,8 +36,7 @@ $$A^+=A^*(AA^*)^{-1}.$$
 
 ## Facts & Assumptions
 
-**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$ of full row rank, where
-$\mathbb F\in\{\mathbb R,\mathbb C\}$.
+**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$ of full row rank, where $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
 [L1] If a matrix has full column rank, then its pseudoinverse is $(A^*A)^{-1}A^*$ ([[prop-full-column-rank-pseudoinverse-formula]]).
 

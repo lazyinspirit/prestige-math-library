@@ -25,11 +25,9 @@ Left and right duals of an object are isomorphic.
 
 ## Facts & Assumptions
 
-**Given:** The rigid monoidal category and object constructed in the cited
-counterexample.
+**Given:** The rigid monoidal category and object constructed in the cited counterexample.
 
-[L1] The category $\mathcal R$ contains an object whose left and right duals are
-not isomorphic ([[cex-left-and-right-duals-and-double-duals-need-not-collapse]]).
+[L1] The category $\mathcal R$ contains an object whose left and right duals are not isomorphic ([[cex-left-and-right-duals-and-double-duals-need-not-collapse]]).
 
 ## Refutation
 

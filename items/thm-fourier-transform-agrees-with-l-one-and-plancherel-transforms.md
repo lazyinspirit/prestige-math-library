@@ -40,27 +40,19 @@ almost-everywhere classes.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]] and the fixed $2\pi$
-Fourier convention.
+**Given:** [[def-countable-choice|Countable Choice]] and the fixed $2\pi$ Fourier convention.
 
-[F1] Every $L^p$ class, including $p=1,2,\infty$, defines a regular tempered
-distribution ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
+[F1] Every $L^p$ class, including $p=1,2,\infty$, defines a regular tempered distribution ([[thm-polynomial-growth-functions-define-tempered-distributions]]).
 
-[F2] The transform on $\mathcal S'$ is defined by bilinear transposition
-([[def-fourier-transform-of-a-tempered-distribution]]).
+[F2] The transform on $\mathcal S'$ is defined by bilinear transposition ([[def-fourier-transform-of-a-tempered-distribution]]).
 
-[F3] Absolute Fubini applies on the sigma-finite Euclidean product
-([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
+[F3] Absolute Fubini applies on the sigma-finite Euclidean product ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
 
-[F4] Schwartz space is dense in complex $L^2$, and the Plancherel transform is
-its unitary extension ([[lem-schwartz-space-is-dense-in-l-two]],
-[[thm-plancherel]]).
+[F4] Schwartz space is dense in complex $L^2$, and the Plancherel transform is its unitary extension ([[lem-schwartz-space-is-dense-in-l-two]], [[thm-plancherel]]).
 
-[F5] The integral and Plancherel transforms agree on $L^1\cap L^2$
-([[thm-l-one-l-two-agreement-of-fourier-transform]]).
+[F5] The integral and Plancherel transforms agree on $L^1\cap L^2$ ([[thm-l-one-l-two-agreement-of-fourier-transform]]).
 
-[F6] Hölder applied to moduli controls all $L^2$ test pairings
-([[thm-holder-inequality-for-integrals]]).
+[F6] Hölder applied to moduli controls all $L^2$ test pairings ([[thm-holder-inequality-for-integrals]]).
 
 ## Proof
 
@@ -70,22 +62,16 @@ its unitary extension ([[lem-schwartz-space-is-dense-in-l-two]],
 
 $$\langle\mathcal Fu_f,\varphi\rangle =\int f(x)\!\left(\int\varphi(\xi)e^{-2\pi ix\cdot\xi}\,d\xi\right)dx =\int\widehat f(\xi)\varphi(\xi)\,d\xi.$$
 
-Since $\widehat f$ is bounded, [F1] makes the last functional tempered.  This
-proves the $L^1$ assertion. [F1, F2, F3]
+Since $\widehat f$ is bounded, [F1] makes the last functional tempered.  This proves the $L^1$ assertion. [F1, F2, F3]
 
 1.2 Let $f\in L^2$ and choose $f_j\in\mathcal S$ with $f_j\to f$ in $L^2$.  For a fixed $\varphi\in\mathcal S$, also $\mathcal F\varphi\in L^2$, and Hölder gives the first convergence below. [F4, F6]
 
 $$\int(f_j-f)\mathcal F\varphi\longrightarrow0.$$
 
-Plancherel gives $\mathcal F_2f_j\to\mathcal F_2f$ in $L^2$, so a second
-Hölder estimate gives
-$\int(\mathcal F_2f_j-\mathcal F_2f)\varphi\to0$. [F4, F6]
+Plancherel gives $\mathcal F_2f_j\to\mathcal F_2f$ in $L^2$, so a second Hölder estimate gives $\int(\mathcal F_2f_j-\mathcal F_2f)\varphi\to0$. [F4, F6]
 
 2.1 Each $f_j$ belongs to $L^1\cap L^2$, and the two agreement results give the displayed identity. [F5, step 1.1]
 
 $$\int f_j\mathcal F\varphi =\int(\mathcal F_2f_j)\varphi.$$
 
-Passing to the two limits from step 1.2 yields
-$\langle\mathcal Fu_f,\varphi\rangle=
-\langle u_{\mathcal F_2f},\varphi\rangle$.  Since this holds for every
-Schwartz test, the $L^2$ assertion follows. [F1, F2, F5, step 1.2] ∎
+Passing to the two limits from step 1.2 yields $\langle\mathcal Fu_f,\varphi\rangle= \langle u_{\mathcal F_2f},\varphi\rangle$.  Since this holds for every Schwartz test, the $L^2$ assertion follows. [F1, F2, F5, step 1.2] ∎

@@ -29,14 +29,9 @@ compact-inner-regular-on-all-Borel-sets convention.
 
 ## Facts & Assumptions
 
-**Given:** $n\ge1$, the Axiom of Countable Choice, and Lebesgue measure
-$\lambda^n$ on $\mathbb R^n$.
+**Given:** $n\ge1$, the Axiom of Countable Choice, and Lebesgue measure $\lambda^n$ on $\mathbb R^n$.
 
-[L1] Under these hypotheses, Lebesgue measure is finite on bounded sets,
-outer regular on arbitrary sets, and compact-inner-regular on measurable
-sets. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]],
-[[thm-lebesgue-outer-regularity-for-arbitrary-subsets]],
-[[thm-lebesgue-inner-regularity-by-closed-and-compact-sets]])
+[L1] Under these hypotheses, Lebesgue measure is finite on bounded sets, outer regular on arbitrary sets, and compact-inner-regular on measurable sets. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]], [[thm-lebesgue-outer-regularity-for-arbitrary-subsets]], [[thm-lebesgue-inner-regularity-by-closed-and-compact-sets]])
 
 ## Proof
 

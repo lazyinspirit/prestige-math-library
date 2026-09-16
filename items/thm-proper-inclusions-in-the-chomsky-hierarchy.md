@@ -27,8 +27,7 @@ $$ \text{regular}\subsetneq\text{context-free}\subsetneq\text{decidable}\subsetn
 
 ## Facts & Assumptions
 
-**Given:** The classes from [[def-chomsky-hierarchy]] over a finite alphabet
-$\Sigma$ containing distinct symbols $a,b$.
+**Given:** The classes from [[def-chomsky-hierarchy]] over a finite alphabet $\Sigma$ containing distinct symbols $a,b$.
 
 [L1] Every regular language satisfies the pumping property from [[thm-pumping-lemma-for-regular-languages]].
 

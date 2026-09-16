@@ -46,14 +46,9 @@ In either case the sequence is split.
 
 **Given:** The short exact sequence in the statement.
 
-[L1] In a short exact sequence, $i$ is a kernel of $p$ and $p$ is a cokernel of
-$i$
-([[thm-a-short-exact-sequence-is-a-kernel-cokernel-pair]]).
+[L1] In a short exact sequence, $i$ is a kernel of $p$ and $p$ is a cokernel of $i$ ([[thm-a-short-exact-sequence-is-a-kernel-cokernel-pair]]).
 
-[L2] A split short exact sequence is exactly one equipped with maps
-$s,\pi$ satisfying
-$p s = 1_C$, $\pi i = 1_A$, and $i \pi + s p = 1_B$
-([[def-split-short-exact-sequence-in-an-abelian-category]]).
+[L2] A split short exact sequence is exactly one equipped with maps $s,\pi$ satisfying $p s = 1_C$, $\pi i = 1_A$, and $i \pi + s p = 1_B$ ([[def-split-short-exact-sequence-in-an-abelian-category]]).
 
 ## Proof
 

@@ -37,14 +37,11 @@ statements for a morphism of short exact sequences.
 
 **Given:** A morphism of short exact sequences.
 
-[L1] The kernel and cokernel rows are only partially exact on their own
-([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
+[L1] The kernel and cokernel rows are only partially exact on their own ([[thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each]]).
 
-[L2] The kernel row need not be short exact
-([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
+[L2] The kernel row need not be short exact ([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
 
-[L3] The snake lemma adds the connecting morphism and the missing middle
-exactness ([[thm-snake-lemma-in-an-abelian-category]]).
+[L3] The snake lemma adds the connecting morphism and the missing middle exactness ([[thm-snake-lemma-in-an-abelian-category]]).
 
 ## Refutation
 

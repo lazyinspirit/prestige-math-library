@@ -34,13 +34,9 @@ and only if it is a right dual of $X$ in $\mathcal C$, and similarly with
 
 **Given:** A monoidal category $\mathcal C$ and an object $X$ of $\mathcal C$.
 
-[L1] In the reverse monoidal category, the tensor order is reversed and the
-unitors are swapped: $\lambda_X^{\mathrm{rev}}=\rho_X$ and
-$\rho_X^{\mathrm{rev}}=\lambda_X$
-([[def-the-reverse-and-the-opposite-of-a-monoidal-category]]).
+[L1] In the reverse monoidal category, the tensor order is reversed and the unitors are swapped: $\lambda_X^{\mathrm{rev}}=\rho_X$ and $\rho_X^{\mathrm{rev}}=\lambda_X$ ([[def-the-reverse-and-the-opposite-of-a-monoidal-category]]).
 
-[L2] Left and right duality are defined by the explicit zig-zag composites in
-[[def-left-dual-and-right-dual-object]].
+[L2] Left and right duality are defined by the explicit zig-zag composites in [[def-left-dual-and-right-dual-object]].
 
 ## Proof
 

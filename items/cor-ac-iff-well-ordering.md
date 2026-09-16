@@ -79,14 +79,8 @@ Over ZF the following three statements are equivalent:
 
 **What this licenses.** Any later result may be proved with whichever of the three forms is convenient, at exactly the same cost. Applications that build an object stage by stage naturally use (3) through [[thm-transfinite-recursion]]; applications that maximise something naturally use (2); applications about products of nonempty sets use (1).
 
-**What is not proved here.** No independence conclusion follows from an
-equivalence proof. Establishing models in which the equivalent principles hold
-or fail belongs to the later constructibility, forcing, and symmetric-model
-pages and is not a premise of this item.
+**What is not proved here.** No independence conclusion follows from an equivalence proof. Establishing models in which the equivalent principles hold or fail belongs to the later constructibility, forcing, and symmetric-model pages and is not a premise of this item.
 
-**Other principles get no information from this.** The equivalence says
-nothing about the ultrafilter lemma, dependent choice, or countable choice.
-Every theorem using one of those principles must state the actual hypothesis;
-the locally established implication ledger is [[rem-choice-ledger]].
+**Other principles get no information from this.** The equivalence says nothing about the ultrafilter lemma, dependent choice, or countable choice. Every theorem using one of those principles must state the actual hypothesis; the locally established implication ledger is [[rem-choice-ledger]].
 
 **Historical note.** Zermelo proved (1) implies (3) in 1904, Kuratowski and Zorn isolated (2) in 1922 and 1935, and the circle of equivalences was standard by the 1940s. The choice-free content of the theory of well-orders, by contrast, was settled earlier: Hartogs proved in 1915 that cardinal comparability implies (3), which is what makes [[thm-hartogs]] a choice-free theorem worth isolating.

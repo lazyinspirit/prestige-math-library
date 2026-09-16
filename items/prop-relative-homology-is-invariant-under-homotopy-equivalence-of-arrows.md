@@ -30,21 +30,15 @@ relative homology objects are naturally isomorphic in every degree.
 
 ## Facts & Assumptions
 
-**Given:** Chain maps $f$ and $g$ together with a homotopy equivalence of arrows
-from $f$ to $g$.
+**Given:** Chain maps $f$ and $g$ together with a homotopy equivalence of arrows from $f$ to $g$.
 
-[L1] Relative homology is defined by
-$$H_n(D,C;f)=H_n(\operatorname{Cone}(f))$$
-([[def-relative-homology-of-a-chain-map]]).
+[L1] Relative homology is defined by $$H_n(D,C;f)=H_n(\operatorname{Cone}(f))$$ ([[def-relative-homology-of-a-chain-map]]).
 
-[L2] The induced map on cones is a chain-homotopy equivalence
-([[prop-cones-preserve-chain-homotopy-equivalences-of-arrows]]).
+[L2] The induced map on cones is a chain-homotopy equivalence ([[prop-cones-preserve-chain-homotopy-equivalences-of-arrows]]).
 
-[L3] Every chain-homotopy equivalence is a quasi-isomorphism
-([[thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism]]).
+[L3] Every chain-homotopy equivalence is a quasi-isomorphism ([[thm-a-chain-homotopy-equivalence-is-a-quasi-isomorphism]]).
 
-[L4] A chain map induces a well-defined map on homology
-([[thm-a-chain-map-induces-a-well-defined-map-on-homology]]).
+[L4] A chain map induces a well-defined map on homology ([[thm-a-chain-map-induces-a-well-defined-map-on-homology]]).
 
 ## Proof
 

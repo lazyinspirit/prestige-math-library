@@ -35,16 +35,9 @@ proper geodesic hyperbolic spaces induces a homeomorphism of their boundaries.
 
 [A1] Different representatives of the same boundary point and different basepoints define equivalent neighborhood systems on the boundary.
 
-[A2] If $f:X\to Y$ is a quasi-isometry and $o'\in Y$ stays a bounded distance
-from $f(o)$, then there are constants $A\ge1$ and $C\ge0$, depending only on
-the quasi-isometry data, such that boundary Gromov products satisfy
-$$A^{-1}(\xi,\eta)_o-C\le (\partial f(\xi),\partial f(\eta))_{o'}\le A(\xi,\eta)_o+C.$$
-In particular $f$ sends Gromov sequences to Gromov sequences, preserves
-asymptoticity, and carries product neighborhoods to cofinal product
-neighborhoods. A quasi-inverse satisfies the corresponding estimates.
+[A2] If $f:X\to Y$ is a quasi-isometry and $o'\in Y$ stays a bounded distance from $f(o)$, then there are constants $A\ge1$ and $C\ge0$, depending only on the quasi-isometry data, such that boundary Gromov products satisfy $$A^{-1}(\xi,\eta)_o-C\le (\partial f(\xi),\partial f(\eta))_{o'}\le A(\xi,\eta)_o+C.$$ In particular $f$ sends Gromov sequences to Gromov sequences, preserves asymptoticity, and carries product neighborhoods to cofinal product neighborhoods. A quasi-inverse satisfies the corresponding estimates.
 
-[L1] Asymptoticity of Gromov sequences is an equivalence relation
-([[lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]]).
+[L1] Asymptoticity of Gromov sequences is an equivalence relation ([[lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences]]).
 
 ## Proof
 

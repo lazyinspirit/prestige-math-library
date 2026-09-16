@@ -43,12 +43,9 @@ faster visible error decay on this system.
 
 **Given:** The two displayed splittings of the same system.
 
-[F1] A stationary splitting has iteration matrix $B=M^{-1}N$
-([[def-stationary-iteration-from-a-matrix-splitting]]).
+[F1] A stationary splitting has iteration matrix $B=M^{-1}N$ ([[def-stationary-iteration-from-a-matrix-splitting]]).
 
-[L1] A stationary splitting converges for every start exactly when
-$\rho(B)<1$
-([[thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one]]).
+[L1] A stationary splitting converges for every start exactly when $\rho(B)<1$ ([[thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one]]).
 
 ## Verification
 **Proof technique:** direct calculation.

@@ -31,18 +31,13 @@ $[\mathcal A,\mathcal C]$ is cocomplete.
 
 ## Facts & Assumptions
 
-**Given:** A small $\mathcal A$ and the indicated completeness or
-cocompleteness of $\mathcal C$.
+**Given:** A small $\mathcal A$ and the indicated completeness or cocompleteness of $\mathcal C$.
 
-[L1] Functor-category limits and colimits are computed pointwise when the
-pointwise choices exist
-([[thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]]).
+[L1] Functor-category limits and colimits are computed pointwise when the pointwise choices exist ([[thm-limits-and-colimits-in-functor-categories-are-computed-pointwise]]).
 
-[F1] Completeness and cocompleteness mean existence of every small limit and
-colimit ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] Completeness and cocompleteness mean existence of every small limit and colimit ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
-[F2] Choice permits simultaneous selections from a set-indexed family of
-nonempty sets ([[def-axiom-of-choice]]).
+[F2] Choice permits simultaneous selections from a set-indexed family of nonempty sets ([[def-axiom-of-choice]]).
 
 ## Proof
 

@@ -33,9 +33,7 @@ $$\operatorname{null}_p(-f)=\operatorname{null}_p(f),\qquad \operatorname{ind}_p
 
 **Given:** A smooth function $f:M\to\mathbb R$ and a critical point $p$ of $f$.
 
-[F1] Nullity, index, and coindex are defined from the Hessian by kernel,
-negative-definite subspaces, and positive-definite subspaces
-([[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F1] Nullity, index, and coindex are defined from the Hessian by kernel, negative-definite subspaces, and positive-definite subspaces ([[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
 ## Proof
 

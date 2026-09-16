@@ -40,15 +40,11 @@ $2\pi\mathbb Z^n$.
 
 **Given:** The additive quotient torus.
 
-[F1] Smooth group operations define a Lie group.
-[[def-lie-group]].
+[F1] Smooth group operations define a Lie group. [[def-lie-group]].
 
-[F2] The Lie-group exponential is the time-one point of the one-parameter
-subgroup with the given velocity. [[def-exponential-map-of-a-lie-group]].
+[F2] The Lie-group exponential is the time-one point of the one-parameter subgroup with the given velocity. [[def-exponential-map-of-a-lie-group]].
 
-[F3] The exponential-map interface [F2] assumes countable choice and records
-its use through the supplied invariant-field and completeness result.
-[[def-countable-choice]].
+[F3] The exponential-map interface [F2] assumes countable choice and records its use through the supplied invariant-field and completeness result. [[def-countable-choice]].
 
 ## Verification
 

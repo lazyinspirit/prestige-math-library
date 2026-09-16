@@ -44,17 +44,10 @@ means converge uniformly for this $f$ by
 **Proof technique:** apply the finite Sidon inequality to Fejer polynomials and pass to monotone coefficient sums.
 
 1.1 The $N$-th Fejer mean is the finite polynomial [given, algebra]
-$$\sigma_Nf=\sum_{|k|\le N}\left(1-\frac{|k|}{N+1}\right)\widehat f(k)e_k.$$
-Its spectrum lies in $E$. Positivity and mass one of the Fejer kernel give
-$\|\sigma_Nf\|_\infty\le\|f\|_\infty$. [given, algebra]
+$$\sigma_Nf=\sum_{|k|\le N}\left(1-\frac{|k|}{N+1}\right)\widehat f(k)e_k.$$ Its spectrum lies in $E$. Positivity and mass one of the Fejer kernel give $\|\sigma_Nf\|_\infty\le\|f\|_\infty$. [given, algebra]
 
 2.1 Apply the Sidon inequality to this polynomial: [step 1.1, algebra]
-$$\sum_{\substack{k\in E\\ |k|\le N}}\left(1-\frac{|k|}{N+1}\right)|\widehat f(k)|\le C_E\|f\|_\infty.$$
-For every fixed finite subset of $E$, the displayed weights tend monotonically
-to $1$. [step 1.1, algebra]
+$$\sum_{\substack{k\in E\\ |k|\le N}}\left(1-\frac{|k|}{N+1}\right)|\widehat f(k)|\le C_E\|f\|_\infty.$$ For every fixed finite subset of $E$, the displayed weights tend monotonically to $1$. [step 1.1, algebra]
 
 3.1 Letting $N\to\infty$ first for each finite subset and then taking the [step 2.1, algebra]
-supremum over finite subsets gives $\sum_{k\in E}|\widehat f(k)|\le
-C_E\|f\|_\infty$. Uniform Fejer convergence identifies the same continuous
-function with these means, so no separate representative is introduced.
-[step 2.1, algebra] ∎
+supremum over finite subsets gives $\sum_{k\in E}|\widehat f(k)|\le C_E\|f\|_\infty$. Uniform Fejer convergence identifies the same continuous function with these means, so no separate representative is introduced. [step 2.1, algebra] ∎

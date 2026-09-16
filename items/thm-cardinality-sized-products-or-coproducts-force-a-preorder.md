@@ -33,24 +33,17 @@ coproduct.
 
 ## Facts & Assumptions
 
-**Given:** The small category, its morphism cardinal $\kappa$, and one of the
-two product or coproduct hypotheses.
+**Given:** The small category, its morphism cardinal $\kappa$, and one of the two product or coproduct hypotheses.
 
-[F1] A product represents every family of arrows into its factors
-([[def-products-and-coproducts]]).
+[F1] A product represents every family of arrows into its factors ([[def-products-and-coproducts]]).
 
-[F2] The cardinality of a small category is the cardinality of its morphism set
-([[def-cardinality-of-a-small-category-and-kappa-small-diagram]]).
+[F2] The cardinality of a small category is the cardinality of its morphism set ([[def-cardinality-of-a-small-category-and-kappa-small-diagram]]).
 
-[L1] Cantor's theorem gives $\kappa<2^\kappa=|\mathcal P(\kappa)|$
-([[thm-cardinal-power-set-and-cantor]]).
+[L1] Cantor's theorem gives $\kappa<2^\kappa=|\mathcal P(\kappa)|$ ([[thm-cardinal-power-set-and-cantor]]).
 
-[F3] A preorder is reflexive and transitive, and its associated category has
-at most one arrow between any two objects
-([[def-preorder]], [[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[F3] A preorder is reflexive and transitive, and its associated category has at most one arrow between any two objects ([[def-preorder]], [[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
 
-[L2] Products and coproducts are formal duals
-([[prop-limit-colimit-duality]]).
+[L2] Products and coproducts are formal duals ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

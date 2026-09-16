@@ -28,8 +28,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** The page's distinction between lax and strong monoidal functors and
-the cartesian monoidal category $\mathbf{Set}$.
+**Given:** The page's distinction between lax and strong monoidal functors and the cartesian monoidal category $\mathbf{Set}$.
 
 [L1] A strong monoidal functor is a lax monoidal functor whose binary and unit structure maps are isomorphisms ([[def-lax-strong-and-strict-monoidal-functor]]).
 

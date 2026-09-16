@@ -34,15 +34,11 @@ the Jacobi identity on the quotient vector space $\mathfrak g/\mathfrak i$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ over $k$ and an ideal
-$\mathfrak i\trianglelefteq\mathfrak g$.
+**Given:** A Lie algebra $\mathfrak g$ over $k$ and an ideal $\mathfrak i\trianglelefteq\mathfrak g$.
 
-[L1] An ideal is a linear subspace closed under brackets with arbitrary elements
-of $\mathfrak g$ ([[def-lie-subalgebra-ideal-and-center]]).
+[L1] An ideal is a linear subspace closed under brackets with arbitrary elements of $\mathfrak g$ ([[def-lie-subalgebra-ideal-and-center]]).
 
-[L2] The additive cosets form the quotient module and its vector-space operations
-are independent of representatives ([[def-quotient-module]],
-[[thm-quotient-module-laws]]).
+[L2] The additive cosets form the quotient module and its vector-space operations are independent of representatives ([[def-quotient-module]], [[thm-quotient-module-laws]]).
 
 ## Proof
 

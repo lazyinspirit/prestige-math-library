@@ -31,12 +31,9 @@ Dirichlet series $\sum_{n\ge1}n^{-s}$.
 
 **Given:** The point $s=1/2$.
 
-[L1] On $\operatorname{Re}s>0$,
-$$\sum_{n\ge1}(-1)^{n-1}n^{-s}=(1-2^{1-s})\zeta(s)$$
-([[thm-dirichlet-eta-representation]]).
+[L1] On $\operatorname{Re}s>0$, $$\sum_{n\ge1}(-1)^{n-1}n^{-s}=(1-2^{1-s})\zeta(s)$$ ([[thm-dirichlet-eta-representation]]).
 
-[L2] The series $\sum_{n\ge1}n^{-1/2}$ diverges because $1/2\le1$
-([[thm-p-series-rational]]).
+[L2] The series $\sum_{n\ge1}n^{-1/2}$ diverges because $1/2\le1$ ([[thm-p-series-rational]]).
 
 ## Counterexample
 

@@ -38,8 +38,7 @@ everywhere.
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice and an enumeration $(q_n)$ without repetitions of
-$\mathbb{Q} \cap (0,1]$.
+**Given:** Countable Choice and an enumeration $(q_n)$ without repetitions of $\mathbb{Q} \cap (0,1]$.
 
 [A1] The symbols are those of the statement.
 

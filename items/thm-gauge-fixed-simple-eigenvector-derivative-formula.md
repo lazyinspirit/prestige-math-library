@@ -34,15 +34,11 @@ $$x'(0)=-S A'(0)x(0).$$
 
 ## Facts & Assumptions
 
-**Given:** A differentiable simple eigenpair branch in the fixed gauge
-$y_0^\ast x(t)=1$ and the reduced resolvent $S$ at $t=0$.
+**Given:** A differentiable simple eigenpair branch in the fixed gauge $y_0^\ast x(t)=1$ and the reduced resolvent $S$ at $t=0$.
 
-[L1] The reduced resolvent satisfies
-$S(A-\lambda I)=I-P$ and $Sx=0$
-([[prop-reduced-resolvent-identities-for-a-simple-eigenvalue]]).
+[L1] The reduced resolvent satisfies $S(A-\lambda I)=I-P$ and $Sx=0$ ([[prop-reduced-resolvent-identities-for-a-simple-eigenvalue]]).
 
-[L2] The eigenvalue derivative is $\lambda'(0)=y_0^\ast A'(0)x(0)$
-([[thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x]]).
+[L2] The eigenvalue derivative is $\lambda'(0)=y_0^\ast A'(0)x(0)$ ([[thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x]]).
 
 ## Proof
 **Proof technique:** direct.

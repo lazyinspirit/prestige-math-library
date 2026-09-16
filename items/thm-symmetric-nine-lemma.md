@@ -33,14 +33,11 @@ exact, then the fourth is short exact.
 
 **Given:** The commutative $3 \times 3$ diagram in the statement.
 
-[L1] The sharp nine lemma recovers a missing outer row from the two rows below
-it and the three columns ([[thm-sharp-nine-lemma]]).
+[L1] The sharp nine lemma recovers a missing outer row from the two rows below it and the three columns ([[thm-sharp-nine-lemma]]).
 
-[L2] Passing to the opposite category preserves abelianity and reverses exact
-sequences ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L2] Passing to the opposite category preserves abelianity and reverses exact sequences ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L3] Transposing the indexing of a commutative $3\times3$ diagram exchanges
-rows with columns while preserving commutativity and exactness.
+[L3] Transposing the indexing of a commutative $3\times3$ diagram exchanges rows with columns while preserving commutativity and exactness.
 
 ## Proof
 

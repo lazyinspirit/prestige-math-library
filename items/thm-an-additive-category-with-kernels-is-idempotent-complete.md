@@ -34,17 +34,13 @@ complete.
 
 **Given:** An additive category $\mathcal C$ and an idempotent $e:A\to A$.
 
-[L1] In an additive category, hom-sets admit subtraction and there is a zero
-object ([[def-additive-category]]).
+[L1] In an additive category, hom-sets admit subtraction and there is a zero object ([[def-additive-category]]).
 
-[L2] On a biproduct, the injection-projection maps satisfy the identity-sum
-relation ([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
+[L2] On a biproduct, the injection-projection maps satisfy the identity-sum relation ([[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
 
-[L3] The criterion "monic iff kernel zero" holds in a preadditive category with
-a zero object ([[thm-in-a-preadditive-category-with-a-zero-object-a-morphism-is-monic-exactly-when-its-kernel-is-zero]]).
+[L3] The criterion "monic iff kernel zero" holds in a preadditive category with a zero object ([[thm-in-a-preadditive-category-with-a-zero-object-a-morphism-is-monic-exactly-when-its-kernel-is-zero]]).
 
-[L4] Idempotent completeness means that every idempotent splits
-([[def-idempotent-complete-category]], [[def-idempotent-and-split-idempotent]]).
+[L4] Idempotent completeness means that every idempotent splits ([[def-idempotent-complete-category]], [[def-idempotent-and-split-idempotent]]).
 
 ## Proof
 

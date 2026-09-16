@@ -40,8 +40,7 @@ conjugate to $v$ by an element of the base group $A$.
 
 [L2] Cyclic permutations of a positive-length cyclically Britton-reduced word are conjugate to it and remain cyclically Britton-reduced. ([[lem-cyclic-permutations-of-a-cyclically-britton-reduced-hnn-word-are-conjugate]])
 
-[L3] Every element has a unique transversal normal form relative to chosen
-transversals. ([[thm-hnn-normal-form-theorem]])
+[L3] Every element has a unique transversal normal form relative to chosen transversals. ([[thm-hnn-normal-form-theorem]])
 
 ## Proof
 

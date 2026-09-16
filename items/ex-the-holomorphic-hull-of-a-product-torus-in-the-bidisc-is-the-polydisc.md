@@ -40,12 +40,9 @@ $$\widehat T_{\mathbb D^2}=\{(z_1,z_2)\in\mathbb C^2: |z_1|\le r_1,\ |z_2|\le r_
 
 **Given:** The product torus $T$ in the bidisc $\mathbb D^2$.
 
-[L1] Hull membership is tested against all holomorphic functions on the ambient
-domain ([[def-holomorphically-convex-hull-and-domain]]).
+[L1] Hull membership is tested against all holomorphic functions on the ambient domain ([[def-holomorphically-convex-hull-and-domain]]).
 
-[L2] On a closed polydisc, the supremum of a holomorphic function is attained on
-the distinguished boundary
-([[cor-maximum-modulus-on-the-distinguished-boundary-of-a-polydisc]]).
+[L2] On a closed polydisc, the supremum of a holomorphic function is attained on the distinguished boundary ([[cor-maximum-modulus-on-the-distinguished-boundary-of-a-polydisc]]).
 
 ## Verification
 

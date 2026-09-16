@@ -35,17 +35,13 @@ invertible if and only if $\det(A)$ is a unit of $R$.
 
 **Given:** $R,n,A$ as in the statement.
 
-[L1] If a positive-sized square matrix is invertible, its determinant is a
-unit ([[cor-invertible-matrix-has-unit-determinant]]).
+[L1] If a positive-sized square matrix is invertible, its determinant is a unit ([[cor-invertible-matrix-has-unit-determinant]]).
 
-[L2] $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I_n$
-([[thm-adjugate-identity-over-a-commutative-ring]]).
+[L2] $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I_n$ ([[thm-adjugate-identity-over-a-commutative-ring]]).
 
-[F1] A square matrix is invertible when it has a two-sided multiplicative
-inverse ([[def-invertible-matrix-and-similarity-over-a-commutative-ring]]).
+[F1] A square matrix is invertible when it has a two-sided multiplicative inverse ([[def-invertible-matrix-and-similarity-over-a-commutative-ring]]).
 
-[L3] A unit has a unique multiplicative inverse
-([[lem-ring-units-form-a-group]]).
+[L3] A unit has a unique multiplicative inverse ([[lem-ring-units-form-a-group]]).
 
 ## Proof
 

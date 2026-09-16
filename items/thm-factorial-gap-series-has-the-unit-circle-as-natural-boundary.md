@@ -37,18 +37,13 @@ unit disc.
 
 **Given:** The factorial-gap series $F(z)=\sum_{n\ge0} z^{n!}$.
 
-[L1] A natural boundary is a boundary all of whose points are singular
-([[def-singular-boundary-point-and-natural-boundary]]).
+[L1] A natural boundary is a boundary all of whose points are singular ([[def-singular-boundary-point-and-natural-boundary]]).
 
-[L2] Pringsheim's theorem makes the positive real boundary point singular for a
-finite-radius power series with nonnegative coefficients
-([[thm-pringsheim-theorem]]).
+[L2] Pringsheim's theorem makes the positive real boundary point singular for a finite-radius power series with nonnegative coefficients ([[thm-pringsheim-theorem]]).
 
-[L3] Cauchy-Hadamard computes the radius of convergence from the coefficients
-([[thm-cauchy-hadamard-for-complex-power-series]]).
+[L3] Cauchy-Hadamard computes the radius of convergence from the coefficients ([[thm-cauchy-hadamard-for-complex-power-series]]).
 
-[L4] If $m \le n$, then $m!$ divides $n!$ by the factorial definition
-([[def-factorial-and-falling-factorial]]).
+[L4] If $m \le n$, then $m!$ divides $n!$ by the factorial definition ([[def-factorial-and-falling-factorial]]).
 
 ## Proof
 

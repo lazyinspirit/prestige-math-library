@@ -27,12 +27,9 @@ Every decomposition number $d_{\chi\varphi}$ is a nonnegative integer.
 
 ## Facts & Assumptions
 
-**Given:** An ordinary irreducible character $\chi$ and an irreducible Brauer
-character $\varphi$.
+**Given:** An ordinary irreducible character $\chi$ and an irreducible Brauer character $\varphi$.
 
-[F1] The decomposition numbers are the coefficients of the simple-module
-expansion of the reduction of a stable lattice
-([[def-decomposition-numbers-and-decomposition-matrix]]).
+[F1] The decomposition numbers are the coefficients of the simple-module expansion of the reduction of a stable lattice ([[def-decomposition-numbers-and-decomposition-matrix]]).
 
 ## Proof
 

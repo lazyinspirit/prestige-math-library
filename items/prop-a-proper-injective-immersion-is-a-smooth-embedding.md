@@ -34,15 +34,11 @@ a smooth embedding.
 
 **Given:** A proper injective immersion $F:M\to N$.
 
-[F1] A smooth embedding is an injective immersion that is a homeomorphism onto
-its image with the subspace topology ([[def-smooth-embedding]]).
+[F1] A smooth embedding is an injective immersion that is a homeomorphism onto its image with the subspace topology ([[def-smooth-embedding]]).
 
-[L1] Every immersion is locally an embedding
-([[cor-every-immersion-is-locally-an-embedding]]).
+[L1] Every immersion is locally an embedding ([[cor-every-immersion-is-locally-an-embedding]]).
 
-[L2] Smooth maps are continuous, and manifolds are locally compact Hausdorff
-spaces ([[prop-smooth-maps-are-continuous]],
-[[thm-locally-compact-hausdorff-basics]]).
+[L2] Smooth maps are continuous, and manifolds are locally compact Hausdorff spaces ([[prop-smooth-maps-are-continuous]], [[thm-locally-compact-hausdorff-basics]]).
 
 ## Proof
 **Proof technique:** direct.

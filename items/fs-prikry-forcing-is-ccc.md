@@ -35,22 +35,15 @@ though $\mathbb P_U$ is $\kappa^+$-cc.
 
 ## Facts & Assumptions
 
-**Given:** $U$ is a normal measure on the uncountable cardinal $\kappa$, and
-$\mathbb P_U$ uses the stronger-below order.
+**Given:** $U$ is a normal measure on the uncountable cardinal $\kappa$, and $\mathbb P_U$ uses the stronger-below order.
 
-[F1] [[lem-prikry-kappa-plus-chain-condition]]: Prikry forcing is
-$\kappa^+$-cc but has an antichain of size $\kappa$ and is not ccc.
+[F1] [[lem-prikry-kappa-plus-chain-condition]]: Prikry forcing is $\kappa^+$-cc but has an antichain of size $\kappa$ and is not ccc.
 
-[F2] [[def-prikry-forcing-and-direct-extension]]: A condition has a finite
-increasing stem and a measure-one upper part; any two conditions with the same
-stem are compatible.
+[F2] [[def-prikry-forcing-and-direct-extension]]: A condition has a finite increasing stem and a measure-one upper part; any two conditions with the same stem are compatible.
 
-[F3] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: The normal
-measure is nonprincipal and $\kappa$-complete.
+[F3] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: The normal measure is nonprincipal and $\kappa$-complete.
 
-[F4] [[def-kappa-closure-distributivity-and-chain-condition]]: ccc means that
-every antichain is countable, while $\kappa^+$-cc excludes antichains of size
-$\kappa^+$.
+[F4] [[def-kappa-closure-distributivity-and-chain-condition]]: ccc means that every antichain is countable, while $\kappa^+$-cc excludes antichains of size $\kappa^+$.
 
 ## Counterexample
 

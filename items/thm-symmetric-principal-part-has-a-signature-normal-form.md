@@ -44,19 +44,13 @@ only on the quadratic form, not on the chosen coordinates.
 
 ## Facts & Assumptions
 
-**Given:** The symmetric coefficient matrix
-$A=(a_{ij}(x_0))_{1\le i,j\le n}$ of the frozen principal part at $x_0$.
+**Given:** The symmetric coefficient matrix $A=(a_{ij}(x_0))_{1\le i,j\le n}$ of the frozen principal part at $x_0$.
 
-[L1] The order-$2$ principal symbol is the quadratic polynomial associated to
-the symmetric coefficient matrix ([[def-elliptic-hyperbolic-and-parabolic-principal-symbols]]).
+[L1] The order-$2$ principal symbol is the quadratic polynomial associated to the symmetric coefficient matrix ([[def-elliptic-hyperbolic-and-parabolic-principal-symbols]]).
 
-[L2] A self-adjoint endomorphism of a finite-dimensional real inner product
-space has an orthonormal eigenbasis
-([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]).
+[L2] A self-adjoint endomorphism of a finite-dimensional real inner product space has an orthonormal eigenbasis ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]).
 
-[L3] A real symmetric bilinear form is congruent to exactly one diagonal form
-$\operatorname{diag}(I_p,-I_q,0_r)$
-([[thm-sylvesters-law-of-inertia]]).
+[L3] A real symmetric bilinear form is congruent to exactly one diagonal form $\operatorname{diag}(I_p,-I_q,0_r)$ ([[thm-sylvesters-law-of-inertia]]).
 
 ## Proof
 

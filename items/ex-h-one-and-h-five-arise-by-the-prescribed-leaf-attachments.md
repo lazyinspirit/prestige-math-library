@@ -32,9 +32,7 @@ $H_1$ and the final graph $H_5$ exactly by the labelled leaf attachments.
 
 **Given:** The recursive family $H_0,H_1,\dots,H_5$.
 
-[L1] The graph $H_1$ is obtained from $H_0$ by adjoining a leaf $v_1'$ at
-$v_1$, and for each $i=1,\dots,5$, the graph $H_i$ is obtained from $H_{i-1}$
-by adjoining a leaf $v_i'$ at $v_i$ ([[def-h-zero-through-h-five]]).
+[L1] The graph $H_1$ is obtained from $H_0$ by adjoining a leaf $v_1'$ at $v_1$, and for each $i=1,\dots,5$, the graph $H_i$ is obtained from $H_{i-1}$ by adjoining a leaf $v_i'$ at $v_i$ ([[def-h-zero-through-h-five]]).
 
 ## Verification
 

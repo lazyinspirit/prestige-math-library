@@ -29,10 +29,7 @@ Every term and every formula in the delimited coding has exactly one outer const
 
 **Given:** Work in ZF unless the statement explicitly weakens or supplements it; fix the objects and hypotheses of the statement.
 
-[F1] [[def-set-coded-terms-and-formulas]] defines every constructor by an
-explicit concatenation map $\operatorname{enc}$: outer parentheses and
-balance-one commas delimit token fields and complete child words. Terms and
-formulas are the least subsets of $W_L$ closed under those maps.
+[F1] [[def-set-coded-terms-and-formulas]] defines every constructor by an explicit concatenation map $\operatorname{enc}$: outer parentheses and balance-one commas delimit token fields and complete child words. Terms and formulas are the least subsets of $W_L$ closed under those maps.
 
 [F2] Let $P$ be a property of naturals such that for every $n \in \mathbb{N}$, if $P(m)$ holds for all $m < n$ then $P(n)$. Then $P(n)$ holds for all $n \in \mathbb{N}$. (At $n = 0$ the hypothesis is vacuous, so $P(0)$ is forced.) ([[thm-strong-induction]])
 

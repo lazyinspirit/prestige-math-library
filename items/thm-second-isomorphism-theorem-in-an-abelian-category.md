@@ -34,14 +34,11 @@ $$(B\vee C)/C\;\cong\;B/(B\wedge C).$$
 
 **Given:** Subobjects $b:B\rightarrowtail A$ and $c:C\rightarrowtail A$.
 
-[L1] The join $B\vee C$ is the image of the induced map $[b,c]:B\oplus C\to A$
-([[def-the-join-of-subobjects-in-an-abelian-category]]).
+[L1] The join $B\vee C$ is the image of the induced map $[b,c]:B\oplus C\to A$ ([[def-the-join-of-subobjects-in-an-abelian-category]]).
 
-[L2] The meet $B\wedge C$ is represented by the pullback of $b$ and $c$
-([[thm-the-meet-of-subobjects-is-their-pullback]]).
+[L2] The meet $B\wedge C$ is represented by the pullback of $b$ and $c$ ([[thm-the-meet-of-subobjects-is-their-pullback]]).
 
-[L3] A morphism modulo its kernel is canonically isomorphic to its image
-([[thm-first-isomorphism-theorem-in-an-abelian-category]]).
+[L3] A morphism modulo its kernel is canonically isomorphic to its image ([[thm-first-isomorphism-theorem-in-an-abelian-category]]).
 
 ## Proof
 

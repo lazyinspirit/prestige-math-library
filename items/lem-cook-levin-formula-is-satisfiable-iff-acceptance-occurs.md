@@ -33,9 +33,7 @@ computation tableau for $N$ on $w$ of height and width $T+1$.
 
 ## Facts & Assumptions
 
-**Given:** A nondeterministic one-tape machine $N$, an input $w$, a bound $T$
-satisfying the hypotheses in the statement, and the Cook-Levin formula
-$\psi_{N,w}$.
+**Given:** A nondeterministic one-tape machine $N$, an input $w$, a bound $T$ satisfying the hypotheses in the statement, and the Cook-Levin formula $\psi_{N,w}$.
 
 [L1] The cell constraints force each tableau position to carry exactly one symbol, by [[lem-exactly-one-symbol-constraints-have-polynomial-size]].
 

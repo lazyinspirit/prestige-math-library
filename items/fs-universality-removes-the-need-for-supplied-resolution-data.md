@@ -28,20 +28,11 @@ pipeline_run: frontier-30
 
 **Given:** The derived-functor construction and its universality theorem.
 
-[L1] Left and right derived objects are defined relative to supplied projective
-or injective resolution data
-([[def-supplied-projective-resolution-datum]],
-[[def-supplied-injective-resolution-datum]]).
+[L1] Left and right derived objects are defined relative to supplied projective or injective resolution data ([[def-supplied-projective-resolution-datum]], [[def-supplied-injective-resolution-datum]]).
 
-[L2] The previous page proves well-definedness only after comparing different
-supplied data by natural isomorphism
-([[thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]],
-[[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
+[L2] The previous page proves well-definedness only after comparing different supplied data by natural isomorphism ([[thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]], [[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
 
-[L3] Universality is a later comparison principle for already constructed delta
-functors
-([[thm-derived-functors-are-universal-delta-functors]],
-[[cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero]]).
+[L3] Universality is a later comparison principle for already constructed delta functors ([[thm-derived-functors-are-universal-delta-functors]], [[cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero]]).
 
 ## Refutation
 

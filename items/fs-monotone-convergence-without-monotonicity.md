@@ -35,7 +35,6 @@ $$\int f_n\,d\mu\to\int f\,d\mu.$$
 **Proof technique:** direct.
 
 1.1 On $(0,1)$ with Lebesgue measure, let [given, construct]
-$f_n:=(n+1)\chi_{(0,1/(n+1))}$; then $f_n(x)\to0$ for every
-$x\in(0,1)$.
+$f_n:=(n+1)\chi_{(0,1/(n+1))}$; then $f_n(x)\to0$ for every $x\in(0,1)$.
 
 2.1 But $\int f_n\,d\mu=1$ for every $n$, whereas $\int0\,d\mu=0$. So the displayed conclusion fails, and [L1] shows that the missing monotonicity hypothesis is exactly what breaks. [step 1.1, L1, algebra] ∎

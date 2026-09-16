@@ -81,20 +81,8 @@ which is open.
 
 ## Remarks
 
-- **Exactly one hypothesis of [[thm-open-set-algebra-r]] is missing.** That
-  theorem asserts openness for *finite* intersections, and its proof takes the
-  minimum of finitely many positive radii. Here the family is infinite and the
-  radii at the surviving point $0$ are the numbers $1/k$, which have no positive
-  lower bound ([[cor-archimedean-reciprocal]]). So the true theorem is not
-  contradicted; its finiteness hypothesis cannot be dropped.
+- **Exactly one hypothesis of [[thm-open-set-algebra-r]] is missing.** That theorem asserts openness for *finite* intersections, and its proof takes the minimum of finitely many positive radii. Here the family is infinite and the radii at the surviving point $0$ are the numbers $1/k$, which have no positive lower bound ([[cor-archimedean-reciprocal]]). So the true theorem is not contradicted; its finiteness hypothesis cannot be dropped.
 
-- **The Archimedean property is doing the work in step 2.1.** In a
-  non-Archimedean ordered field a positive infinitesimal lies in every
-  $(-1/k, 1/k)$, and the intersection is then strictly larger than $\{0\}$. So
-  this is a counterexample about $\mathbb{R}$, supplied by
-  [[cor-archimedean-reciprocal]], and not a formal consequence of openness
-  alone.
+- **The Archimedean property is doing the work in step 2.1.** In a non-Archimedean ordered field a positive infinitesimal lies in every $(-1/k, 1/k)$, and the intersection is then strictly larger than $\{0\}$. So this is a counterexample about $\mathbb{R}$, supplied by [[cor-archimedean-reciprocal]], and not a formal consequence of openness alone.
 
-- **The intersection here is a single point, and that is not forced.** An
-  infinite intersection of open sets can be open, for instance when all members
-  are equal. The claim refuted is a universal one, so one witness settles it.
+- **The intersection here is a single point, and that is not forced.** An infinite intersection of open sets can be open, for instance when all members are equal. The claim refuted is a universal one, so one witness settles it.

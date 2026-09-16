@@ -35,20 +35,13 @@ $$\int_1^2\frac{dt}{t} =\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}n =\lim_{n\to\infty}
 
 **Given:** The positive input $2$.
 
-[L1] The inverse-exponential, integral, continued Mercator, Landau-limit, and
-normalised functional-equation characterisations all define $\log$
-([[thm-logarithm-definition-equivalence]]).
+[L1] The inverse-exponential, integral, continued Mercator, Landau-limit, and normalised functional-equation characterisations all define $\log$ ([[thm-logarithm-definition-equivalence]]).
 
-[L2] At $u=1$, the Mercator theorem gives
-$\log2=\sum_{n=1}^{\infty}(-1)^{n+1}/n$
-([[thm-log-one-plus-x-power-series]]).
+[L2] At $u=1$, the Mercator theorem gives $\log2=\sum_{n=1}^{\infty}(-1)^{n+1}/n$ ([[thm-log-one-plus-x-power-series]]).
 
-[L3] For $x>0$,
-$\log x=\lim_{n\to\infty}2^n(x^{1/2^n}-1)$
-([[thm-landau-logarithm-limit]]).
+[L3] For $x>0$, $\log x=\lim_{n\to\infty}2^n(x^{1/2^n}-1)$ ([[thm-landau-logarithm-limit]]).
 
-[F1] The natural logarithm is the inverse of exponential
-([[def-natural-logarithm]]).
+[F1] The natural logarithm is the inverse of exponential ([[def-natural-logarithm]]).
 
 ## Verification
 

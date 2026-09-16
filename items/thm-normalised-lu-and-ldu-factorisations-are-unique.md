@@ -42,16 +42,11 @@ Let $F$ be a field, let $n\ge 1$, and let $A\in M_n(F)$.
 
 ## Facts & Assumptions
 
-**Given:** A field $F$, a natural number $n\ge 1$, a matrix $A\in M_n(F)$, and
-two factorisations of $A$ of the shapes named in the statement.
+**Given:** A field $F$, a natural number $n\ge 1$, a matrix $A\in M_n(F)$, and two factorisations of $A$ of the shapes named in the statement.
 
-[L1] A normalised LU factorisation is $A=LU$ with $L$ unit lower triangular and
-$U$ upper triangular; an LDU factorisation is $A=LDU$ with $L$ unit lower
-triangular, $D$ diagonal, and $U$ unit upper triangular
-([[def-normalised-lu-factorisation]], [[def-ldu-factorisation]]).
+[L1] A normalised LU factorisation is $A=LU$ with $L$ unit lower triangular and $U$ upper triangular; an LDU factorisation is $A=LDU$ with $L$ unit lower triangular, $D$ diagonal, and $U$ unit upper triangular ([[def-normalised-lu-factorisation]], [[def-ldu-factorisation]]).
 
-[L2] Matrix multiplication is the product convention used throughout
-([[def-matrix-product-and-identity-matrix]]).
+[L2] Matrix multiplication is the product convention used throughout ([[def-matrix-product-and-identity-matrix]]).
 
 ## Proof
 

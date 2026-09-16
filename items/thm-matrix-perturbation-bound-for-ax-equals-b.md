@@ -47,17 +47,13 @@ perturbation is small.
 
 ## Facts & Assumptions
 
-**Given:** An invertible matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge1$,
-vectors $b\ne 0$, $x=A^{-1}b$, and $\delta x$ with
-$(A+\delta A)(x+\delta x)=b$ for a matrix $\delta A$; write $c=\lVert A^{-1}\rVert_p\lVert\delta A\rVert_p$.
+**Given:** An invertible matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge1$, vectors $b\ne 0$, $x=A^{-1}b$, and $\delta x$ with $(A+\delta A)(x+\delta x)=b$ for a matrix $\delta A$; write $c=\lVert A^{-1}\rVert_p\lVert\delta A\rVert_p$.
 
 [L1] $A^{-1}A=I_n$ ([[def-invertible-matrix-and-general-linear-group]]).
 
-[L2] Compatibility: $\lVert My\rVert_p\le\lVert M\rVert_p\lVert y\rVert_p$
-([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]]).
+[L2] Compatibility: $\lVert My\rVert_p\le\lVert M\rVert_p\lVert y\rVert_p$ ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]]).
 
-[L3] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$
-([[def-condition-number-of-a-nonsingular-linear-system]]).
+[L3] $\kappa_p(A)=\lVert A\rVert_p\lVert A^{-1}\rVert_p$ ([[def-condition-number-of-a-nonsingular-linear-system]]).
 
 ## Proof
 

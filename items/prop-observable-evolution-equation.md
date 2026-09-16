@@ -33,8 +33,7 @@ $$\frac d{dt}F(\gamma(t))=\{F,H\}(\gamma(t)).$$
 
 **Given:** Smooth functions $F,H$ and an integral curve $\gamma$ of $X_H$.
 
-[F1] $\{F,H\}=X_H(F)$.
-[[def-poisson-bracket-on-a-symplectic-manifold]].
+[F1] $\{F,H\}=X_H(F)$. [[def-poisson-bracket-on-a-symplectic-manifold]].
 
 ## Proof
 

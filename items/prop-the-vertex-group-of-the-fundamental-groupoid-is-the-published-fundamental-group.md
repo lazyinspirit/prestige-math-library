@@ -35,16 +35,11 @@ underlying loop classes is an anti-isomorphism, not an isomorphism.
 
 **Given:** A topological space $X$ and a point $x\in X$.
 
-[F1] [[def-based-loops-and-fundamental-group]] defines the loop-class set,
-the proposed product $[\alpha][\beta]=[\alpha*\beta]$, the constant loop
-$c_x$, and reversal $\bar\alpha$.
+[F1] [[def-based-loops-and-fundamental-group]] defines the loop-class set, the proposed product $[\alpha][\beta]=[\alpha*\beta]$, the constant loop $c_x$, and reversal $\bar\alpha$.
 
-[F2] [[thm-fundamental-group-laws]] proves that this product is well defined
-and is a group law with identity $[c_x]$ and inverse $[\bar\alpha]$.
+[F2] [[thm-fundamental-group-laws]] proves that this product is well defined and is a group law with identity $[c_x]$ and inverse $[\bar\alpha]$.
 
-[F3] [[def-fundamental-groupoid-of-a-space]] has the same endpoint-fixed loop
-classes at $x$, but $[\gamma]\circ[\delta]=[\delta*\gamma]$ in the vertex
-automorphism group.
+[F3] [[def-fundamental-groupoid-of-a-space]] has the same endpoint-fixed loop classes at $x$, but $[\gamma]\circ[\delta]=[\delta*\gamma]$ in the vertex automorphism group.
 
 ## Proof
 

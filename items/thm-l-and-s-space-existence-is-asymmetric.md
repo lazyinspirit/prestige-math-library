@@ -48,29 +48,21 @@ claim, not an unqualified proof in ZFC of PFA or of its own consistency.
 
 ## Facts & Assumptions
 
-**Given:** The named theories are read in separate branches.  ZFC includes AC;
-no branch inherits CH, $V=L$, or PFA from another branch.
+**Given:** The named theories are read in separate branches.  ZFC includes AC; no branch inherits CH, $V=L$, or PFA from another branch.
 
 [F1] [[thm-moore-zfc-l-space]] constructs an L-space in ZFC.
 
-[F2] [[thm-ch-implies-an-s-space-exists]] constructs a strong S-space in
-ZFC+CH, and hence an S-space by the definition it cites.
+[F2] [[thm-ch-implies-an-s-space-exists]] constructs a strong S-space in ZFC+CH, and hence an S-space by the definition it cites.
 
-[F3] [[thm-v-equals-l-implies-diamond]] proves in ZF that $V=L$ implies
-$\diamondsuit$ on $\omega_1$.
+[F3] [[thm-v-equals-l-implies-diamond]] proves in ZF that $V=L$ implies $\diamondsuit$ on $\omega_1$.
 
-[F4] [[prop-diamond-implies-continuum-hypothesis]] proves in ZFC that
-$\diamondsuit$ implies CH.
+[F4] [[prop-diamond-implies-continuum-hypothesis]] proves in ZFC that $\diamondsuit$ implies CH.
 
-[F5] [[thm-pfa-implies-there-are-no-s-spaces]] proves in ZFC+PFA that no
-S-space exists.
+[F5] [[thm-pfa-implies-there-are-no-s-spaces]] proves in ZFC+PFA that no S-space exists.
 
-[F6] [[cor-supercompact-consistency-of-no-s-spaces]] supplies the qualified
-formal consistency implication from ZFC plus a supercompact to ZFC plus no
-S-spaces.
+[F6] [[cor-supercompact-consistency-of-no-s-spaces]] supplies the qualified formal consistency implication from ZFC plus a supercompact to ZFC plus no S-spaces.
 
-[F7] [[def-axiom-of-choice]] is part of every ZFC branch and supplies the AC
-used by [F1], [F2], [F4], and [F5].  This assembly makes no additional choice.
+[F7] [[def-axiom-of-choice]] is part of every ZFC branch and supplies the AC used by [F1], [F2], [F4], and [F5].  This assembly makes no additional choice.
 
 ## Proof
 

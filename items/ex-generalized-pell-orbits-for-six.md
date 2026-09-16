@@ -42,8 +42,7 @@ $$\pm(3+\sqrt6)(5+2\sqrt6)^k,\qquad k\in\mathbb Z.$$
 
 **Given:** The equation $x^2-6y^2=3$.
 
-[F1] Every positive Pell solution is a power of the fundamental unit
-([[thm-all-positive-pell-solutions-are-fundamental-powers]]).
+[F1] Every positive Pell solution is a power of the fundamental unit ([[thm-all-positive-pell-solutions-are-fundamental-powers]]).
 
 [F2] Every generalized Pell solution is Pell-equivalent to one in the explicit bounded rectangle given by the orbit theorem ([[thm-generalized-pell-solutions-have-finitely-many-orbits]]).
 

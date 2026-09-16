@@ -85,20 +85,8 @@ $(0,1)$ and no finite subfamily does.
 
 ## Remarks
 
-- **The cover creeps up on the missing endpoint.** Every member of
-  $\mathcal{U}$ stops short of $0$, and the whole family reaches every point of
-  $(0,1)$ only because the reciprocals $1/k$ get arbitrarily small
-  ([[cor-archimedean-reciprocal]]). A finite subfamily stops at the largest of
-  its indices $K$ and therefore misses every point of $(0,1)$ that is at most
-  $1/K$.
+- **The cover creeps up on the missing endpoint.** Every member of $\mathcal{U}$ stops short of $0$, and the whole family reaches every point of $(0,1)$ only because the reciprocals $1/k$ get arbitrarily small ([[cor-archimedean-reciprocal]]). A finite subfamily stops at the largest of its indices $K$ and therefore misses every point of $(0,1)$ that is at most $1/K$.
 
-- **The empty member is not a defect.** $V_1 = (1,1)$ is empty because
-  $1/1 = 1$; a family of open sets is a cover as long as its union contains the
-  set, and an empty member contributes nothing either way. Writing the family
-  from $k = 2$ instead would change nothing in the argument.
+- **The empty member is not a defect.** $V_1 = (1,1)$ is empty because $1/1 = 1$; a family of open sets is a cover as long as its union contains the set, and an empty member contributes nothing either way. Writing the family from $k = 2$ instead would change nothing in the argument.
 
-- **The closed interval behaves differently, and that is the whole point.**
-  $[0,1]$ is compact by [[thm-heine-borel-r]], and the analogous family
-  $\{(1/k, 1)\}$ is not even a cover of it, since it misses both $0$ and $1$.
-  The endpoint that the cover above exploits is $0$, which $(0,1)$ omits and
-  $[0,1]$ contains.
+- **The closed interval behaves differently, and that is the whole point.** $[0,1]$ is compact by [[thm-heine-borel-r]], and the analogous family $\{(1/k, 1)\}$ is not even a cover of it, since it misses both $0$ and $1$. The endpoint that the cover above exploits is $0$, which $(0,1)$ omits and $[0,1]$ contains.

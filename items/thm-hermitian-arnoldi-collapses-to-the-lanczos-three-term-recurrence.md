@@ -41,22 +41,13 @@ Moreover, $T_m:=Q_m^*AQ_m$ is a real symmetric tridiagonal matrix.
 
 ## Facts & Assumptions
 
-**Given:** A Hermitian matrix $A$ and an Arnoldi run through step $m$ without
-breakdown.
+**Given:** A Hermitian matrix $A$ and an Arnoldi run through step $m$ without breakdown.
 
-[F1] The Lanczos process is Arnoldi specialized to a Hermitian matrix, with the
-phase chosen so that the subdiagonal coefficients are real and nonnegative
-([[def-lanczos-process-as-hermitian-arnoldi]]).
+[F1] The Lanczos process is Arnoldi specialized to a Hermitian matrix, with the phase chosen so that the subdiagonal coefficients are real and nonnegative ([[def-lanczos-process-as-hermitian-arnoldi]]).
 
-[L1] Arnoldi yields an orthonormal basis and an upper-Hessenberg factorization
-$$AQ_m=Q_{m+1}\bar H_m,$$
-with column relations
-$$Aq_j=\sum_{i=1}^{j+1}h_{ij}q_i$$
-([[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]).
+[L1] Arnoldi yields an orthonormal basis and an upper-Hessenberg factorization $$AQ_m=Q_{m+1}\bar H_m,$$ with column relations $$Aq_j=\sum_{i=1}^{j+1}h_{ij}q_i$$ ([[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]).
 
-[L2] An upper-Hessenberg matrix has $h_{ij}=0$ for $i>j+1$, and a real
-symmetric tridiagonal matrix has zeros whenever $|i-j|>1$
-([[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]]).
+[L2] An upper-Hessenberg matrix has $h_{ij}=0$ for $i>j+1$, and a real symmetric tridiagonal matrix has zeros whenever $|i-j|>1$ ([[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]]).
 
 ## Proof
 **Proof technique:** direct.

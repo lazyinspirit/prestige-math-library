@@ -32,22 +32,15 @@ any infinite subfamily. Consequently $\bigcup R$ is a Russell set.
 
 ## Facts & Assumptions
 
-**Given:** The forcing extension, parameters, function $f$, family $R$, and
-class $N$ from
-[[def-blass-finite-modification-classes-and-parameter-hod-model]].
+**Given:** The forcing extension, parameters, function $f$, family $R$, and class $N$ from [[def-blass-finite-modification-classes-and-parameter-hod-model]].
 
-[F1] [[def-blass-finite-modification-classes-and-parameter-hod-model]] makes every object in $N$ hereditarily definable from
-$f$, finitely many reals in $S\setminus\{f\}$, and ordinal parameters.
+[F1] [[def-blass-finite-modification-classes-and-parameter-hod-model]] makes every object in $N$ hereditarily definable from $f$, finitely many reals in $S\setminus\{f\}$, and ordinal parameters.
 
-[F2] [[lem-feferman-tail-complement-automorphism]] gives the finite-condition
-calculation for flipping the unused tail of one Cohen coordinate. The same
-calculation applies after renaming its distinguished coordinate to $k$.
+[F2] [[lem-feferman-tail-complement-automorphism]] gives the finite-condition calculation for flipping the unused tail of one Cohen coordinate. The same calculation applies after renaming its distinguished coordinate to $k$.
 
-[F3] [[lem-symmetry-lemma-for-forcing-automorphisms]] transports a forced
-formula and all its parameter names under such an automorphism.
+[F3] [[lem-symmetry-lemma-for-forcing-automorphisms]] transports a forced formula and all its parameter names under such an automorphism.
 
-[F4] [[lem-forcing-truth-lemma]] supplies a condition in the actual generic
-filter forcing each true fixed formula with the displayed name parameters.
+[F4] [[lem-forcing-truth-lemma]] supplies a condition in the actual generic filter forcing each true fixed formula with the displayed name parameters.
 
 ## Proof
 

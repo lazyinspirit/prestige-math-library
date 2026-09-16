@@ -44,13 +44,9 @@ pullback if and only if the induced morphism $X\to I$ is an isomorphism.
 
 **Given:** The displayed commutative square with monic right and bottom legs.
 
-[L1] In an abelian category, pullbacks of cospans exist and are computed by the
-construction of [[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]].
+[L1] In an abelian category, pullbacks of cospans exist and are computed by the construction of [[thm-the-pullback-of-a-cospan-is-the-kernel-of-the-difference-of-its-legs]].
 
-[L2] An intersection of two subobjects is their greatest lower bound in the
-subobject order
-([[def-intersection-of-a-family-of-subobjects]],
-[[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
+[L2] An intersection of two subobjects is their greatest lower bound in the subobject order ([[def-intersection-of-a-family-of-subobjects]], [[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
 
 ## Proof
 

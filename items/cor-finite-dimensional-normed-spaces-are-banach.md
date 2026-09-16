@@ -36,20 +36,15 @@ sense of [[def-banach-space]].
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$ with an
-ordered basis $e:n\to X$.
+**Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$ with an ordered basis $e:n\to X$.
 
-[L1] The basis map $T:\mathbb K^n\to X$ is a topological isomorphism
-([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] The basis map $T:\mathbb K^n\to X$ is a topological isomorphism ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] For $m\ge1$, $\mathbb R^m$ is complete in every norm
-([[thm-componentwise-convergence-and-completeness]]).
+[L2] For $m\ge1$, $\mathbb R^m$ is complete in every norm ([[thm-componentwise-convergence-and-completeness]]).
 
-[L3] $\mathbb C$ is the real coordinate plane
-([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L3] $\mathbb C$ is the real coordinate plane ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
-[L4] A Banach space is a normed space complete for its norm metric
-([[def-banach-space]]).
+[L4] A Banach space is a normed space complete for its norm metric ([[def-banach-space]]).
 
 ## Proof
 
@@ -67,5 +62,4 @@ ordered basis $e:n\to X$.
 
 ## Remarks
 
-- The only substantive input is completeness of finite-dimensional real
-  coordinate space. Everything else is transport of structure.
+- The only substantive input is completeness of finite-dimensional real coordinate space. Everything else is transport of structure.

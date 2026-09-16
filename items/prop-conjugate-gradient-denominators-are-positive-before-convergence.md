@@ -34,18 +34,11 @@ $$p_k^*Ap_k=\|p_k\|_A^2>0.$$
 
 ## Facts & Assumptions
 
-**Given:** A Hermitian positive-definite system $Ax=b$, a CG run through step
-$k$, and a nonzero residual $r_k$.
+**Given:** A Hermitian positive-definite system $Ax=b$, a CG run through step $k$, and a nonzero residual $r_k$.
 
-[F1] CG uses the recurrence
-$$\alpha_j=\frac{\langle r_j,r_j\rangle}{\langle Ap_j,p_j\rangle},\qquad r_{j+1}=r_j-\alpha_jAp_j,\qquad \beta_j=\frac{\langle r_{j+1},r_{j+1}\rangle}{\langle r_j,r_j\rangle},\qquad p_{j+1}=r_{j+1}+\beta_jp_j$$
-with $p_0=r_0$
-([[def-conjugate-gradient-recurrence]]).
+[F1] CG uses the recurrence $$\alpha_j=\frac{\langle r_j,r_j\rangle}{\langle Ap_j,p_j\rangle},\qquad r_{j+1}=r_j-\alpha_jAp_j,\qquad \beta_j=\frac{\langle r_{j+1},r_{j+1}\rangle}{\langle r_j,r_j\rangle},\qquad p_{j+1}=r_{j+1}+\beta_jp_j$$ with $p_0=r_0$ ([[def-conjugate-gradient-recurrence]]).
 
-[L1] For Hermitian positive-definite $A$, the energy norm satisfies
-$$\|u\|_A^2=\langle Au,u\rangle,$$
-and it is positive on nonzero vectors
-([[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]).
+[L1] For Hermitian positive-definite $A$, the energy norm satisfies $$\|u\|_A^2=\langle Au,u\rangle,$$ and it is positive on nonzero vectors ([[def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix]]).
 
 ## Proof
 **Proof technique:** direct.

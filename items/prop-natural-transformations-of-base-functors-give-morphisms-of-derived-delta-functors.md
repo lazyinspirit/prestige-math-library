@@ -37,28 +37,15 @@ $$R_I^n(\alpha):R_I^nF\Rightarrow R_I^nG$$
 assemble into a morphism of cohomological delta functors.
 ## Facts & Assumptions
 
-**Given:** A short exact sequence $0\to A'\to A\to A''\to0$ and an integer
-$n\geq 0$.
+**Given:** A short exact sequence $0\to A'\to A\to A''\to0$ and an integer $n\geq 0$.
 
-[L1] A natural transformation induces degreewise natural transformations on
-left and right derived functors
-([[prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors]],
-[[prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors]]).
+[L1] A natural transformation induces degreewise natural transformations on left and right derived functors ([[prop-a-natural-transformation-induces-natural-transformations-of-left-derived-functors]], [[prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors]]).
 
-[L2] The left and right derived families already carry delta-functor
-structures
-([[thm-left-derived-functors-form-a-homological-delta-functor]],
-[[thm-right-derived-functors-form-a-cohomological-delta-functor]]).
+[L2] The left and right derived families already carry delta-functor structures ([[thm-left-derived-functors-form-a-homological-delta-functor]], [[thm-right-derived-functors-form-a-cohomological-delta-functor]]).
 
-[L3] The homology and cohomology connecting morphisms are natural with respect
-to morphisms of short exact sequences of complexes
-([[thm-naturality-of-the-homology-connecting-morphism]],
-[[thm-naturality-of-the-cohomology-connecting-morphism]]).
+[L3] The homology and cohomology connecting morphisms are natural with respect to morphisms of short exact sequences of complexes ([[thm-naturality-of-the-homology-connecting-morphism]], [[thm-naturality-of-the-cohomology-connecting-morphism]]).
 
-[L4] A morphism of delta functors is a degreewise natural transformation that
-commutes with the connecting maps
-([[def-morphism-of-homological-delta-functors]],
-[[def-morphism-of-cohomological-delta-functors]]).
+[L4] A morphism of delta functors is a degreewise natural transformation that commutes with the connecting maps ([[def-morphism-of-homological-delta-functors]], [[def-morphism-of-cohomological-delta-functors]]).
 
 ## Proof
 

@@ -30,12 +30,9 @@ sources:
 
 [L1] The Cantor measure $\mu_c$ is singular with respect to Lebesgue measure, and it is concentrated on the Cantor set $C$ with $\mu_c(C)=1$. ([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
 
-[L2] Lebesgue measure is the Lebesgue--Stieltjes measure of the identity
-([[cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity]]).
+[L2] Lebesgue measure is the Lebesgue--Stieltjes measure of the identity ([[cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity]]).
 
-[L3] The Lebesgue--Stieltjes measure of a nondecreasing right-continuous
-function $F$ assigns $(a,b]$ the increment $F(b)-F(a)$
-([[thm-existence-of-the-lebesgue-stieltjes-measure]]).
+[L3] The Lebesgue--Stieltjes measure of a nondecreasing right-continuous function $F$ assigns $(a,b]$ the increment $F(b)-F(a)$ ([[thm-existence-of-the-lebesgue-stieltjes-measure]]).
 
 ## Refutation
 

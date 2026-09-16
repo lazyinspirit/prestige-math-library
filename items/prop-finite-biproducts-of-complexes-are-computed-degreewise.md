@@ -30,8 +30,7 @@ for every $n$.
 
 ## Facts & Assumptions
 
-**Given:** An abelian category $\mathcal A$ and chain complexes $C_\bullet$ and
-$D_\bullet$ in $\mathcal A$.
+**Given:** An abelian category $\mathcal A$ and chain complexes $C_\bullet$ and $D_\bullet$ in $\mathcal A$.
 
 [L1] $\operatorname{Ch}(\mathcal A)$ is additive, so it has finite biproducts ([[thm-the-category-of-complexes-in-an-additive-category-is-additive]]).
 

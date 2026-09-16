@@ -37,9 +37,7 @@ $$H(q,p)=\tfrac12g_q^{-1}(p,p)+V(q).$$
 
 **Given:** A smooth Riemannian metric $g$ and smooth potential $V$.
 
-[F1] For hyperregular $L$, $E_L=p(v)-L$ and
-$H=E_L\circ(\mathbb FL)^{-1}$.
-[[def-energy-and-hamiltonian-of-a-hyperregular-lagrangian]].
+[F1] For hyperregular $L$, $E_L=p(v)-L$ and $H=E_L\circ(\mathbb FL)^{-1}$. [[def-energy-and-hamiltonian-of-a-hyperregular-lagrangian]].
 
 ## Proof
 

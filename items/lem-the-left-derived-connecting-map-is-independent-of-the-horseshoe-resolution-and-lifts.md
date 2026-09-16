@@ -36,31 +36,19 @@ between chosen horseshoe middle resolutions; any two such middle maps induce
 the same maps on homology.
 ## Facts & Assumptions
 
-**Given:** Two choices of horseshoe middle resolution and comparison lifts for
-the same short exact sequence $0\to A'\to A\to A''\to0$.
+**Given:** Two choices of horseshoe middle resolution and comparison lifts for the same short exact sequence $0\to A'\to A\to A''\to0$.
 
-[L1] Item 9 defines the connecting map by transporting homology's connecting
-morphism from a chosen horseshoe sequence
-([[def-connecting-map-for-left-derived-functors]]).
+[L1] Item 9 defines the connecting map by transporting homology's connecting morphism from a chosen horseshoe sequence ([[def-connecting-map-for-left-derived-functors]]).
 
-[L2] Two horseshoe middle comparison maps fitting the same side data are
-chain-homotopic
-([[prop-horseshoe-resolutions-are-compatible-with-morphisms-of-short-exact-sequences-up-to-homotopy]]).
+[L2] Two horseshoe middle comparison maps fitting the same side data are chain-homotopic ([[prop-horseshoe-resolutions-are-compatible-with-morphisms-of-short-exact-sequences-up-to-homotopy]]).
 
-[L3] A horseshoe resolution is degreewise the biproduct of the chosen end
-resolutions ([[thm-horseshoe-lemma-for-projective-resolutions]]).
+[L3] A horseshoe resolution is degreewise the biproduct of the chosen end resolutions ([[thm-horseshoe-lemma-for-projective-resolutions]]).
 
-[L4] The homology connecting morphism is natural under morphisms of short exact
-sequences of complexes
-([[thm-naturality-of-the-homology-connecting-morphism]]).
+[L4] The homology connecting morphism is natural under morphisms of short exact sequences of complexes ([[thm-naturality-of-the-homology-connecting-morphism]]).
 
-[L5] Chain-homotopic maps induce the same map on homology
-([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
+[L5] Chain-homotopic maps induce the same map on homology ([[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
 
-[L6] Any two comparison maps between projective resolutions that lift the same
-object morphism are chain-homotopic, whether or not they were chosen as the
-same side maps of a horseshoe ladder
-([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
+[L6] Any two comparison maps between projective resolutions that lift the same object morphism are chain-homotopic, whether or not they were chosen as the same side maps of a horseshoe ladder ([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
 
 ## Proof
 

@@ -35,11 +35,9 @@ to the category of chain complexes.
 
 **Given:** Chain maps and morphisms of chain maps in the arrow category.
 
-[L1] Every morphism of chain maps induces a chain map of cones
-([[thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones]]).
+[L1] Every morphism of chain maps induces a chain map of cones ([[thm-a-morphism-of-chain-maps-induces-a-chain-map-of-cones]]).
 
-[L2] A morphism of chain maps is a commuting square in the category of chain
-complexes ([[def-morphism-of-chain-maps]]).
+[L2] A morphism of chain maps is a commuting square in the category of chain complexes ([[def-morphism-of-chain-maps]]).
 
 ## Proof
 

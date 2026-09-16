@@ -34,14 +34,11 @@ a smooth embedding.
 
 ## Facts & Assumptions
 
-**Given:** An embedded submanifold $S\subseteq M$ with its slice-chart smooth
-structure.
+**Given:** An embedded submanifold $S\subseteq M$ with its slice-chart smooth structure.
 
-[F1] A smooth embedding is an injective immersion and a homeomorphism onto its
-image with the subspace topology ([[def-smooth-embedding]]).
+[F1] A smooth embedding is an injective immersion and a homeomorphism onto its image with the subspace topology ([[def-smooth-embedding]]).
 
-[L1] The restricted slice charts form a smooth atlas on $S$ with the subspace
-topology ([[lem-slice-chart-restrictions-form-a-smooth-atlas]]).
+[L1] The restricted slice charts form a smooth atlas on $S$ with the subspace topology ([[lem-slice-chart-restrictions-form-a-smooth-atlas]]).
 
 ## Proof
 **Proof technique:** direct.

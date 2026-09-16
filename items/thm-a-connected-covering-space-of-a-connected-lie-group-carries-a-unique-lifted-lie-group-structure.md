@@ -33,36 +33,23 @@ homomorphism.
 
 ## Facts & Assumptions
 
-**Given:** The covering $p:\widetilde G\to G$, the stated connectedness
-hypotheses, and one chosen point $\widetilde e$ over the identity $e$ of $G$.
+**Given:** The covering $p:\widetilde G\to G$, the stated connectedness hypotheses, and one chosen point $\widetilde e$ over the identity $e$ of $G$.
 
-[F1] The covering gives $\widetilde G$ a unique smooth-manifold structure for
-which $p$ is a local diffeomorphism.
-[[lem-connected-covers-of-smooth-manifolds-have-a-canonical-smooth-structure]].
+[F1] The covering gives $\widetilde G$ a unique smooth-manifold structure for which $p$ is a local diffeomorphism. [[lem-connected-covers-of-smooth-manifolds-have-a-canonical-smooth-structure]].
 
-[F2] A based map from a path-connected locally path-connected space lifts
-through a covering exactly when its induced fundamental-group image lies in
-the covering subgroup; the based lift is unique.
-[[thm-covering-space-lifting-criterion]].
+[F2] A based map from a path-connected locally path-connected space lifts through a covering exactly when its induced fundamental-group image lies in the covering subgroup; the based lift is unique. [[thm-covering-space-lifting-criterion]].
 
-[F3] Two lifts from a connected space that agree at one point agree
-everywhere. [[thm-uniqueness-of-lifts-from-a-connected-space]].
+[F3] Two lifts from a connected space that agree at one point agree everywhere. [[thm-uniqueness-of-lifts-from-a-connected-space]].
 
-[F4] Pointwise multiplication of loops in a topological group represents
-their fundamental-group product.  Pointwise inversion therefore represents
-the inverse class.
-[[lem-loop-products-in-a-topological-group-agree-up-to-homotopy]].
+[F4] Pointwise multiplication of loops in a topological group represents their fundamental-group product.  Pointwise inversion therefore represents the inverse class. [[lem-loop-products-in-a-topological-group-agree-up-to-homotopy]].
 
-[F5] Finite products of connected spaces are connected.
-[[thm-product-of-connected-spaces]].
+[F5] Finite products of connected spaces are connected. [[thm-product-of-connected-spaces]].
 
-[F6] Connected locally path-connected spaces are path connected.
-[[thm-connected-and-locally-path-connected-implies-path-connected]].
+[F6] Connected locally path-connected spaces are path connected. [[thm-connected-and-locally-path-connected-implies-path-connected]].
 
 ## Proof
 
-**Proof technique:** lift multiplication and inversion and use uniqueness of
-lifts for the group laws.
+**Proof technique:** lift multiplication and inversion and use uniqueness of lifts for the group laws.
 
 1.1 Give $\widetilde G$ the canonical smooth structure of [F1]. Its finite products are connected by [F5], and are locally path connected as products of manifold coordinate domains; hence they are path connected by [F6]. [F1, F5, F6]
 

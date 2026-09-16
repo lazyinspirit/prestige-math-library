@@ -40,15 +40,11 @@ $[X,Y]=Z$ and $Z$ central.
 
 **Given:** Real coordinates $x,y,z$.
 
-[F1] The tangent bracket is computed from the commutator of left-invariant
-vector fields. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
-[[def-lie-bracket-of-smooth-vector-fields]].
+[F1] The tangent bracket is computed from the commutator of left-invariant vector fields. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]]. [[def-lie-bracket-of-smooth-vector-fields]].
 
-[F2] Matrix units have their standard entrywise definition.
-[[def-matrix-units]].
+[F2] Matrix units have their standard entrywise definition. [[def-matrix-units]].
 
-[F3] Countable choice is inherited from [F1].
-[[def-countable-choice]].
+[F3] Countable choice is inherited from [F1]. [[def-countable-choice]].
 
 ## Verification
 

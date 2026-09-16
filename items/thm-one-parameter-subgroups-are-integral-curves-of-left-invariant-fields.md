@@ -44,34 +44,21 @@ invariant-field construction and completeness theorem.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-identity $e$, and $X\in\mathfrak g=T_eG$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with identity $e$, and $X\in\mathfrak g=T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] A one-parameter subgroup is a smooth homomorphism
-$\gamma:(\mathbb R,+)\to G$, so
-$\gamma(s+t)=\gamma(s)\gamma(t)$ and $\gamma(0)=e$.
-[[def-one-parameter-subgroup-of-a-lie-group]].
+[F2] A one-parameter subgroup is a smooth homomorphism $\gamma:(\mathbb R,+)\to G$, so $\gamma(s+t)=\gamma(s)\gamma(t)$ and $\gamma(0)=e$. [[def-one-parameter-subgroup-of-a-lie-group]].
 
-[F3] Evaluation at $e$ identifies $\mathfrak g$ with the left-invariant
-smooth fields: $X$ determines the unique field
-$X^L_g=d(L_g)_eX$. This result assumes $\mathrm{AC}_\omega$ through the
-smooth tangent-bundle framework.
-[[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F3] Evaluation at $e$ identifies $\mathfrak g$ with the left-invariant smooth fields: $X$ determines the unique field $X^L_g=d(L_g)_eX$. This result assumes $\mathrm{AC}_\omega$ through the smooth tangent-bundle framework. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
-[F4] Every left-invariant smooth field is complete, assuming
-$\mathrm{AC}_\omega$ through that same framework.
-[[thm-left-invariant-vector-fields-are-complete]].
+[F4] Every left-invariant smooth field is complete, assuming $\mathrm{AC}_\omega$ through that same framework. [[thm-left-invariant-vector-fields-are-complete]].
 
-[F5] A curve $c$ is an integral curve of a field $Y$ precisely when
-$c'(t)=Y_{c(t)}$. [[def-integral-curve-of-a-vector-field]].
+[F5] A curve $c$ is an integral curve of a field $Y$ precisely when $c'(t)=Y_{c(t)}$. [[def-integral-curve-of-a-vector-field]].
 
-[F6] Through each point there is a unique maximal integral curve.
-[[thm-unique-maximal-integral-curve-through-each-point]].
+[F6] Through each point there is a unique maximal integral curve. [[thm-unique-maximal-integral-curve-through-each-point]].
 
-[F7] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F7] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

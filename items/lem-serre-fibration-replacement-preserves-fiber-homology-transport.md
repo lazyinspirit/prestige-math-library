@@ -42,9 +42,7 @@ $(j_b)_*$ commutes with transport. All assertions are choice-free.
 
 **Given:** The Serre fibration, its functorial mapping-path replacement, and an actual base point $b$.
 
-[F1] [[thm-mapping-path-factorization]] makes $p_p$ a Hurewicz fibration,
-makes $j$ an ordinary homotopy equivalence, and gives the strict equality
-$p_pj=p$. No homotopy inverse over $B$ is asserted or used.
+[F1] [[thm-mapping-path-factorization]] makes $p_p$ a Hurewicz fibration, makes $j$ an ordinary homotopy equivalence, and gives the strict equality $p_pj=p$. No homotopy inverse over $B$ is asserted or used.
 
 [F2] [[def-homotopy-fiber-of-a-map]] identifies the fiber of $p_p$ over $b$ with the displayed pairs $(e,\gamma)$, where $\gamma(0)=p(e)$ and $\gamma(1)=b$.
 

@@ -36,8 +36,7 @@ polydisc need not be locally bounded.
 
 **Given:** A separately holomorphic function on a polydisc.
 
-[L1] Separate holomorphy forces boundedness on every smaller closed polydisc
-([[lem-local-boundedness-of-separately-holomorphic-functions]]).
+[L1] Separate holomorphy forces boundedness on every smaller closed polydisc ([[lem-local-boundedness-of-separately-holomorphic-functions]]).
 
 ## Refutation
 

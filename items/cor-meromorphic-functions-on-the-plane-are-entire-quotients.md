@@ -30,16 +30,11 @@ Every meromorphic function on $\mathbb C$ is a quotient of entire functions.
 
 **Given:** A meromorphic function $f$ on $\mathbb C$.
 
-[F1] A meromorphic function on a plane domain is holomorphic off a discrete pole
-set, and each pole is an isolated pole in the usual sense
-([[def-meromorphic-function-complex-domain]]).
+[F1] A meromorphic function on a plane domain is holomorphic off a discrete pole set, and each pole is an isolated pole in the usual sense ([[def-meromorphic-function-complex-domain]]).
 
-[F2] The Weierstrass product theorem constructs an entire function with any
-prescribed discrete zero divisor on $\mathbb C$
-([[thm-weierstrass-product-theorem-on-the-complex-plane]]).
+[F2] The Weierstrass product theorem constructs an entire function with any prescribed discrete zero divisor on $\mathbb C$ ([[thm-weierstrass-product-theorem-on-the-complex-plane]]).
 
-[F3] A bounded punctured-neighbourhood singularity is removable
-([[thm-removable-singularity-characterizations]]).
+[F3] A bounded punctured-neighbourhood singularity is removable ([[thm-removable-singularity-characterizations]]).
 
 ## Proof
 

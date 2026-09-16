@@ -45,15 +45,9 @@ whose norm is $1/\sqrt2$.
 
 ## Facts & Assumptions
 
-**Given:** The Arnoldi data
-$H_2=\begin{pmatrix}2&1\\1&2\end{pmatrix}$,
-$h_{3,2}=1$,
-$v_3=e_3$,
-and $y=\frac1{\sqrt2}(1,1)^\mathsf T$.
+**Given:** The Arnoldi data $H_2=\begin{pmatrix}2&1\\1&2\end{pmatrix}$, $h_{3,2}=1$, $v_3=e_3$, and $y=\frac1{\sqrt2}(1,1)^\mathsf T$.
 
-[L1] For an Arnoldi Ritz pair,
-$Au-\theta u=h_{m+1,m}(e_m^\ast y)v_{m+1}$
-([[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]).
+[L1] For an Arnoldi Ritz pair, $Au-\theta u=h_{m+1,m}(e_m^\ast y)v_{m+1}$ ([[prop-ritz-residual-formula-for-an-arnoldi-ritz-pair]]).
 
 ## Verification
 **Proof technique:** direct.

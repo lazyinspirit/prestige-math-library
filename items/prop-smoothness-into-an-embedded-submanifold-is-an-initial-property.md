@@ -30,17 +30,13 @@ if and only if $i\circ G:N\to M$ is smooth.
 
 ## Facts & Assumptions
 
-**Given:** An embedded submanifold $S\subseteq M$, its inclusion $i$, and a map
-$G:N\to S$.
+**Given:** An embedded submanifold $S\subseteq M$, its inclusion $i$, and a map $G:N\to S$.
 
-[F1] Embedded submanifolds are locally cut out by slice charts
-([[def-embedded-submanifold-and-slice-chart]]).
+[F1] Embedded submanifolds are locally cut out by slice charts ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L1] The restricted slice charts define the smooth structure on $S$
-([[lem-slice-chart-restrictions-form-a-smooth-atlas]]).
+[L1] The restricted slice charts define the smooth structure on $S$ ([[lem-slice-chart-restrictions-form-a-smooth-atlas]]).
 
-[L2] Ambient charts are diffeomorphisms onto open Euclidean sets
-([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
+[L2] Ambient charts are diffeomorphisms onto open Euclidean sets ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 
 ## Proof
 **Proof technique:** direct.

@@ -76,15 +76,6 @@ it has a least element. In each case the element is unique.
 
 ## Remarks
 
-- **Why this has to be proved rather than quoted.** The well-ordering principle
-  ([[thm-well-ordering-principle]]) gives a *least* element of a nonempty set of
-  *naturals*. What the greatest common divisor needs is a *greatest* element of a
-  set of *integers* bounded above, and neither the direction nor the ambient set
-  matches. The bridge is the reflection $k \mapsto b - \iota(k)$, which turns
-  "large elements of $S$ below $b$" into "small naturals".
+- **Why this has to be proved rather than quoted.** The well-ordering principle ([[thm-well-ordering-principle]]) gives a *least* element of a nonempty set of *naturals*. What the greatest common divisor needs is a *greatest* element of a set of *integers* bounded above, and neither the direction nor the ambient set matches. The bridge is the reflection $k \mapsto b - \iota(k)$, which turns "large elements of $S$ below $b$" into "small naturals".
 
-- **Both hypotheses are needed.** $\mathbb{Z}$ itself is nonempty and has no
-  greatest element, and $\varnothing$ is bounded above by every integer and has
-  no greatest element because it has no element at all. The first of these is
-  exactly what makes the common divisors of $(0,0)$ have no greatest element
-  ([[cex-common-divisors-of-zero-have-no-greatest-element]]).
+- **Both hypotheses are needed.** $\mathbb{Z}$ itself is nonempty and has no greatest element, and $\varnothing$ is bounded above by every integer and has no greatest element because it has no element at all. The first of these is exactly what makes the common divisors of $(0,0)$ have no greatest element ([[cex-common-divisors-of-zero-have-no-greatest-element]]).

@@ -34,15 +34,11 @@ $M$.
 
 **Given:** A smooth map $F:M^m\to N^n$.
 
-[F1] $F$ is an immersion at $p$ exactly when $\operatorname{rank}_pF=m$, and it
-is a submersion at $p$ exactly when $\operatorname{rank}_pF=n$
-([[def-immersion-submersion-and-constant-rank-map]]).
+[F1] $F$ is an immersion at $p$ exactly when $\operatorname{rank}_pF=m$, and it is a submersion at $p$ exactly when $\operatorname{rank}_pF=n$ ([[def-immersion-submersion-and-constant-rank-map]]).
 
-[L1] For a smooth Euclidean map, the locus where the differential has rank at
-least a fixed integer is open ([[thm-differential-rank-is-lower-semicontinuous]]).
+[L1] For a smooth Euclidean map, the locus where the differential has rank at least a fixed integer is open ([[thm-differential-rank-is-lower-semicontinuous]]).
 
-[L2] Every manifold chart is a diffeomorphism onto an open Euclidean set
-([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
+[L2] Every manifold chart is a diffeomorphism onto an open Euclidean set ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 
 ## Proof
 **Proof technique:** direct.

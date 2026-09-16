@@ -32,21 +32,13 @@ Assume the Axiom of Dependent Choice.
 > its positive-degree values are zero.
 ## Facts & Assumptions
 
-**Given:** The right exact functor $F=(-)\otimes_{\mathbb Z}\mathbb Z/n$ on
-abelian groups, where $n>1$ is an integer, together with supplied projective
-resolution data on all abelian groups.
+**Given:** The right exact functor $F=(-)\otimes_{\mathbb Z}\mathbb Z/n$ on abelian groups, where $n>1$ is an integer, together with supplied projective resolution data on all abelian groups.
 
-[L1] Effaceability only says that a suitable induced map is zero
-([[def-effaceable-homological-delta-functor-in-positive-degrees]],
-[[def-effaceable-cohomological-delta-functor-in-positive-degrees]]).
+[L1] Effaceability only says that a suitable induced map is zero ([[def-effaceable-homological-delta-functor-in-positive-degrees]], [[def-effaceable-cohomological-delta-functor-in-positive-degrees]]).
 
-[L2] Positive left derived functors of a right exact functor on a category with
-enough projectives are effaceable
-([[prop-positive-left-derived-functors-are-effaceable-by-projectives]]).
+[L2] Positive left derived functors of a right exact functor on a category with enough projectives are effaceable ([[prop-positive-left-derived-functors-are-effaceable-by-projectives]]).
 
-[L3] Replacing supplied projective resolution data gives naturally isomorphic
-left derived functors
-([[thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]]).
+[L3] Replacing supplied projective resolution data gives naturally isomorphic left derived functors ([[thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic]]).
 
 ## Refutation
 

@@ -43,8 +43,7 @@ let $x \in I$.
 
 ## Facts & Assumptions
 
-**Given:** The interval $I$, the function $f : I \to \mathbb{R}$, and the point
-$x \in I$.
+**Given:** The interval $I$, the function $f : I \to \mathbb{R}$, and the point $x \in I$.
 
 [A1] We use the Dini-derivative notation fixed in the statement.
 

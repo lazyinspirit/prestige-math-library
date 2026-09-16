@@ -27,24 +27,11 @@ Assume AC. A family $\mathcal A$ of Borel probabilities on a Polish space S is t
 
 [F2] [[lem-standard-complete-metric-on-a-countable-product]]: Let $((X_n,d_n))_{n\in\mathbb N}$ be complete metric spaces with $d_n\le1$. On $\prod_nX_n$, the formula $D(x,y)=\sum_{n=0}^{\infty}2^{-(n+1)}d_n(x_n,y_n)$ defines a complete metric inducing the product topology. The empty product is the one-point space.
 
-[F3] [[thm-complete-and-totally-bounded-implies-compact]]: **Assume the Axiom of Countable Choice** (def-countable-choice). Let $(X,d)$
-be a metric space (def-metric-space) that is complete
-(def-complete-metric-space) and totally bounded (def-totally-bounded).
-Then $(X,d)$ is compact (def-metric-compactness).
+[F3] [[thm-complete-and-totally-bounded-implies-compact]]: **Assume the Axiom of Countable Choice** (def-countable-choice). Let $(X,d)$ be a metric space (def-metric-space) that is complete (def-complete-metric-space) and totally bounded (def-totally-bounded). Then $(X,d)$ is compact (def-metric-compactness).
 
-**Where the axiom is spent, and why the weaker principle suffices.**
-$\mathrm{AC}_\omega$ is used exactly once, at step 3.1, to fix one finite
-$1/(n+1)$-net **together with a listing of it** for every $n \in \mathbb{N}$ at
-once. The family of sets being chosen from is written down before any selection
-is made and does not depend on the earlier selections, which is precisely the
-situation countable choice covers and dependent choice
-(def-dependent-choice) is not needed for. Everything after step 3.1 is
-canonical: at each stage the construction takes the **least** admissible index in
-the listing already fixed.
+**Where the axiom is spent, and why the weaker principle suffices.** $\mathrm{AC}_\omega$ is used exactly once, at step 3.1, to fix one finite $1/(n+1)$-net **together with a listing of it** for every $n \in \mathbb{N}$ at once. The family of sets being chosen from is written down before any selection is made and does not depend on the earlier selections, which is precisely the situation countable choice covers and dependent choice (def-dependent-choice) is not needed for. Everything after step 3.1 is canonical: at each stage the construction takes the **least** admissible index in the listing already fixed.
 
-As always on this page, the claim is an upper bound on the cost of the proof
-given here, not an assertion that $\mathrm{AC}_\omega$ is necessary for the
-theorem.
+As always on this page, the claim is an upper bound on the cost of the proof given here, not an assertion that $\mathrm{AC}_\omega$ is necessary for the theorem.
 
 [F4] [[lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences]]: Assume AC. Every sequence of Borel probability laws on a compact metric K has a subsequence converging weakly to a Borel probability on K.
 

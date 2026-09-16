@@ -34,11 +34,9 @@ $p:\operatorname{Cyl}(f)\to D$ is a homotopy equivalence.
 
 **Given:** The inclusion $f:\mathbb Z[0]\to(0\to\mathbb Z\xrightarrow{1}\mathbb Z\to0)$.
 
-[L1] The mapping-cylinder terms and differential are given explicitly by
-[[def-mapping-cylinder-of-a-chain-map]].
+[L1] The mapping-cylinder terms and differential are given explicitly by [[def-mapping-cylinder-of-a-chain-map]].
 
-[L2] The mapping cylinder factors a chain map through a homotopy equivalence
-([[thm-the-mapping-cylinder-factors-a-chain-map]]).
+[L2] The mapping cylinder factors a chain map through a homotopy equivalence ([[thm-the-mapping-cylinder-factors-a-chain-map]]).
 
 ## Verification
 

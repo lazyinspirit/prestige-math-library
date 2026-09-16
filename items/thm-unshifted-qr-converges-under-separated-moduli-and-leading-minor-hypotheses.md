@@ -39,9 +39,7 @@ the diagonal. The upper-triangular entries need not themselves converge.
 
 ## Facts & Assumptions
 
-**Given:** A diagonalisable invertible matrix $A=X\Lambda X^{-1}$ with distinct
-eigenvalue moduli, nonzero leading principal minors of $X^{-1}$, and the
-positive-real-diagonal QR convention from the statement.
+**Given:** A diagonalisable invertible matrix $A=X\Lambda X^{-1}$ with distinct eigenvalue moduli, nonzero leading principal minors of $X^{-1}$, and the positive-real-diagonal QR convention from the statement.
 
 [L1] Unshifted QR is orthonormalised simultaneous iteration, and $A_k=\widehat Q_k^*A\widehat Q_k$ ([[prop-unshifted-qr-is-orthonormalised-simultaneous-iteration-and-preserves-unitary-similarity]]).
 

@@ -37,46 +37,17 @@ $$  d^t_{\chi_{\mathrm{std}},\varphi}=0, \qquad \chi_{\mathrm{std}}(t)=0.$$
 
 ## Facts & Assumptions
 
-**Given:** AC, the algebraically closed splitting system, $S_3$, its two
-blocks in characteristic $2$, and the transposition in the Example.
+**Given:** AC, the algebraically closed splitting system, $S_3$, its two blocks in characteristic $2$, and the transposition in the Example.
 
-[F1] The preceding example gives the two blocks $B_0,B_1$, with $B_0$
-principal and $B_1$ of defect zero, and gives $C_G(t)=\langle t\rangle$,
-its sole block $c$, and $c^G=B_0$
-([[ex-p-sections-and-brauer-subsections-in-a-small-finite-group]]).
+[F1] The preceding example gives the two blocks $B_0,B_1$, with $B_0$ principal and $B_1$ of defect zero, and gives $C_G(t)=\langle t\rangle$, its sole block $c$, and $c^G=B_0$ ([[ex-p-sections-and-brauer-subsections-in-a-small-finite-group]]).
 
-[F2] Block idempotents lift uniquely from $kG$ to $\mathcal OG$, and ordinary
-irreducible characters have unique block membership
-([[lem-block-idempotents-lift-uniquely-from-kh-to-oh]] and
-[[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
+[F2] Block idempotents lift uniquely from $kG$ to $\mathcal OG$, and ordinary irreducible characters have unique block membership ([[lem-block-idempotents-lift-uniquely-from-kh-to-oh]] and [[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
 
-[F3] Brauer's Second Main Theorem restricts a generalized expansion to local
-blocks inducing to the row's global block
-([[thm-brauer-second-main-theorem]]), under the algebraically closed and AC
-hypotheses ([[def-algebraically-closed-field]] and
-[[def-axiom-of-choice]]).
+[F3] Brauer's Second Main Theorem restricts a generalized expansion to local blocks inducing to the row's global block ([[thm-brauer-second-main-theorem]]), under the algebraically closed and AC hypotheses ([[def-algebraically-closed-field]] and [[def-axiom-of-choice]]).
 
 ## Verification
 
-1.1 Put $a=(123)$, $C=a+a^2$, and let $T$ be the sum of the three
-transpositions. The center of $kG$ has basis $1,T,C$, and in characteristic
-$2$ one directly obtains $T^2=1+C$, $C^2=C$, and $TC=0$. Thus its only
-nonzero primitive central idempotents are $e=1+C$ and $f=C$. The first acts
-as $1$ on the trivial module, so it is the principal block idempotent for
-$B_0$; F1 then identifies $f$ with the remaining block $B_1$. In
-$\mathcal OG$, the idempotents $\widehat e=(1+a+a^2)/3$ and
-$\widehat f=1-\widehat e$ reduce respectively to $e$ and $f$. By uniqueness
-in F2 they are the integral block lifts. Let
-$$ W=\{(x_1,x_2,x_3)\in K^3:x_1+x_2+x_3=0\} $$
-with the coordinate-permutation action. The operator $\widehat e$ averages
-over $\langle a\rangle$ and projects onto $W^{\langle a\rangle}$. An
-$a$-fixed vector has equal coordinates, and its coordinate sum is $3x_1$,
-so $W^{\langle a\rangle}=0$. If a line in $W$ were $G$-stable, the scalar
-$\lambda$ by which $a$ acted would satisfy $\lambda^3=1$ and, from
-$tat=a^{-1}$, $\lambda=\lambda^{-1}$; hence $\lambda=1$, contrary to
-$W^{\langle a\rangle}=0$. Thus $W$ is irreducible and affords
-$\chi_{\mathrm{std}}$. Now $\widehat eW=0$ and $\widehat fW=W$, making
-$\chi_{\mathrm{std}}$ a row of $B_1$ by F2. [F1, F2, algebra]
+1.1 Put $a=(123)$, $C=a+a^2$, and let $T$ be the sum of the three transpositions. The center of $kG$ has basis $1,T,C$, and in characteristic $2$ one directly obtains $T^2=1+C$, $C^2=C$, and $TC=0$. Thus its only nonzero primitive central idempotents are $e=1+C$ and $f=C$. The first acts as $1$ on the trivial module, so it is the principal block idempotent for $B_0$; F1 then identifies $f$ with the remaining block $B_1$. In $\mathcal OG$, the idempotents $\widehat e=(1+a+a^2)/3$ and $\widehat f=1-\widehat e$ reduce respectively to $e$ and $f$. By uniqueness in F2 they are the integral block lifts. Let $$ W=\{(x_1,x_2,x_3)\in K^3:x_1+x_2+x_3=0\} $$ with the coordinate-permutation action. The operator $\widehat e$ averages over $\langle a\rangle$ and projects onto $W^{\langle a\rangle}$. An $a$-fixed vector has equal coordinates, and its coordinate sum is $3x_1$, so $W^{\langle a\rangle}=0$. If a line in $W$ were $G$-stable, the scalar $\lambda$ by which $a$ acted would satisfy $\lambda^3=1$ and, from $tat=a^{-1}$, $\lambda=\lambda^{-1}$; hence $\lambda=1$, contrary to $W^{\langle a\rangle}=0$. Thus $W$ is irreducible and affords $\chi_{\mathrm{std}}$. Now $\widehat eW=0$ and $\widehat fW=W$, making $\chi_{\mathrm{std}}$ a row of $B_1$ by F2. [F1, F2, algebra]
 
 2.1 By F1, the only local block over $u=t$ induces to $B_0$, whereas step 1.1 puts the row $\chi_{\mathrm{std}}$ in $B_1$. F3 therefore gives $$d^t_{\chi_{\mathrm{std}},\varphi}=0$$ for every $\varphi\in\operatorname{IBr}(C_G(t),c)$. [F1, F3, step 1.1]
 

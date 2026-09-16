@@ -34,16 +34,11 @@ it is both complete and cocomplete exactly when it is a complete lattice.
 
 **Given:** A poset $P$ regarded as a category.
 
-[F1] In the associated category, $x\to y$ exists exactly when $x\le y$, and
-there is at most one such arrow
-([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[F1] In the associated category, $x\to y$ exists exactly when $x\le y$, and there is at most one such arrow ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
 
-[F2] Products and coproducts have their family-of-arrows universal properties
-([[def-products-and-coproducts]]).
+[F2] Products and coproducts have their family-of-arrows universal properties ([[def-products-and-coproducts]]).
 
-[L1] Products plus equalizers characterize completeness, and coproducts plus
-coequalizers characterize cocompleteness
-([[cor-completeness-and-cocompleteness-criteria]]).
+[L1] Products plus equalizers characterize completeness, and coproducts plus coequalizers characterize cocompleteness ([[cor-completeness-and-cocompleteness-criteria]]).
 
 ## Proof
 

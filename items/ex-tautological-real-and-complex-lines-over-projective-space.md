@@ -38,16 +38,11 @@ $B\operatorname U(1)=\mathbb CP^\infty$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathbb F=\mathbb R$ or $\mathbb C$ and
-$N\in\mathbb N\cup\{\infty\}$.
+**Given:** $\mathbb F=\mathbb R$ or $\mathbb C$ and $N\in\mathbb N\cup\{\infty\}$.
 
-[F1] $\operatorname{Gr}_1(\mathbb F^M)$ consists of lines in
-$\mathbb F^M$, and its tautological bundle has fiber that line
-([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
+[F1] $\operatorname{Gr}_1(\mathbb F^M)$ consists of lines in $\mathbb F^M$, and its tautological bundle has fiber that line ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
-[F2] The stable Grassmannians are denoted $B\operatorname O(n)$ and
-$B\operatorname U(n)$ in the real and complex models, respectively
-([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
+[F2] The stable Grassmannians are denoted $B\operatorname O(n)$ and $B\operatorname U(n)$ in the real and complex models, respectively ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
 
 ## Verification
 

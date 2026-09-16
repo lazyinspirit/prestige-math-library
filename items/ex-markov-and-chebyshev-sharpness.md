@@ -41,10 +41,7 @@ equality.
 
 **Given:** The two-point random variables described above.
 
-[L1] Markov's and Chebyshev's inequalities are the probability-space bounds
-already proved on the A page
-([[cor-markov-inequality-for-random-variables]],
-[[cor-chebyshev-inequality-for-random-variables]]).
+[L1] Markov's and Chebyshev's inequalities are the probability-space bounds already proved on the A page ([[cor-markov-inequality-for-random-variables]], [[cor-chebyshev-inequality-for-random-variables]]).
 
 ## Verification
 

@@ -84,19 +84,8 @@ continuous at a limit point of its own discontinuity set.
 
 ## Remarks
 
-- **What the example is for.** Froda's theorem bounds the discontinuity set of a
-  monotone function by countability and by nothing else; in particular it does
-  not bound it by finiteness, even inside a bounded interval. The set $E$ above
-  is the simplest witness: infinitely many jumps accumulating at a single point,
-  all within $[0,1)$.
+- **What the example is for.** Froda's theorem bounds the discontinuity set of a monotone function by countability and by nothing else; in particular it does not bound it by finiteness, even inside a bounded interval. The set $E$ above is the simplest witness: infinitely many jumps accumulating at a single point, all within $[0,1)$.
 
-- **The accumulation point is a point of continuity.** The real $1$ is not a
-  member of $E$, so claim 2 gives continuity of $f$ at $1$, even though every
-  neighbourhood of $1$ contains infinitely many discontinuities of $f$. Being a
-  limit of discontinuities is not itself an obstruction to continuity.
+- **The accumulation point is a point of continuity.** The real $1$ is not a member of $E$, so claim 2 gives continuity of $f$ at $1$, even though every neighbourhood of $1$ contains infinitely many discontinuities of $f$. Being a limit of discontinuities is not itself an obstruction to continuity.
 
-- **A denser example is available.** Taking $E = \mathbb{Q}$ instead gives a
-  monotone function discontinuous on a dense set
-  ([[ex-monotone-function-discontinuous-exactly-at-the-rationals]]); the present
-  example is the smaller and more concrete one, and it is the one where the
-  points can be listed.
+- **A denser example is available.** Taking $E = \mathbb{Q}$ instead gives a monotone function discontinuous on a dense set ([[ex-monotone-function-discontinuous-exactly-at-the-rationals]]); the present example is the smaller and more concrete one, and it is the one where the points can be listed.

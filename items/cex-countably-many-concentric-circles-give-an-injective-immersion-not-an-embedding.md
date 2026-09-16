@@ -29,18 +29,11 @@ inherits the subspace topology of its image.
 
 ## Facts & Assumptions
 
-**Given:** The disjoint union $M$ of one unit circle and the circles of radii
-$1+1/n$ for $n\ge1$, with the componentwise inclusion $F:M\to\mathbb R^2$.
+**Given:** The disjoint union $M$ of one unit circle and the circles of radii $1+1/n$ for $n\ge1$, with the componentwise inclusion $F:M\to\mathbb R^2$.
 
-[F1] The two displayed claims are the false statements under discussion
-([[fs-every-injective-immersion-is-an-embedding]],
-[[fs-the-intrinsic-topology-of-an-immersed-submanifold-is-always-the-subspace-topology]]).
+[F1] The two displayed claims are the false statements under discussion ([[fs-every-injective-immersion-is-an-embedding]], [[fs-the-intrinsic-topology-of-an-immersed-submanifold-is-always-the-subspace-topology]]).
 
-[L1] Countable disjoint unions of fixed-dimensional smooth manifolds are smooth
-manifolds, and the circles here are smooth one-manifolds
-([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]],
-[[thm-a-regular-level-set-is-an-embedded-submanifold]], [[lem-derivative-of-a-power]],
-[[thm-algebra-of-derivatives]]).
+[L1] Countable disjoint unions of fixed-dimensional smooth manifolds are smooth manifolds, and the circles here are smooth one-manifolds ([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]], [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]]).
 
 ## Counterexample
 **Proof technique:** direct.

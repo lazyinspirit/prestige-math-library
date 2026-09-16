@@ -87,32 +87,10 @@ than quoted from the suprema page, for the reason given in the remarks below.
 
 ## Remarks
 
-- **The monotonicity is where the two operations of the definition interlock.**
-  Because $(s_n)$ is nonincreasing, the outer infimum in
-  $\limsup_k x_k = \inf_n s_n$ is an infimum of a decreasing family, so it is the
-  value the tail suprema are pressing down towards; and because $(i_n)$ is
-  nondecreasing, $\liminf_k x_k = \sup_n i_n$ is the value the tail infima are
-  pressing up towards. Nothing in this lemma says the pressing converges, and for
-  an unbounded sequence there is nothing in $\mathbb{R}$ for it to converge to;
-  the exact statement is [[lem-limsup-epsilon-characterisation]].
+- **The monotonicity is where the two operations of the definition interlock.** Because $(s_n)$ is nonincreasing, the outer infimum in $\limsup_k x_k = \inf_n s_n$ is an infimum of a decreasing family, so it is the value the tail suprema are pressing down towards; and because $(i_n)$ is nondecreasing, $\liminf_k x_k = \sup_n i_n$ is the value the tail infima are pressing up towards. Nothing in this lemma says the pressing converges, and for an unbounded sequence there is nothing in $\mathbb{R}$ for it to converge to; the exact statement is [[lem-limsup-epsilon-characterisation]].
 
-- **Why the word "nonincreasing" is spelled out rather than cited.**
-  [[def-monotone-sequence]] defines monotone for sequences of *reals*, and
-  $(s_n)$ takes values in $\overline{\mathbb{R}}$, so the definition does not
-  apply to it. Claim 2 is therefore stated as the inequality it is. When $(x_k)$
-  is bounded every $s_n$ is real ([[def-limsup-liminf]]) and $(s_n)$ is then a
-  nonincreasing sequence of reals in the sense of [[def-monotone-sequence]], but
-  no proof on this page needs that reading.
+- **Why the word "nonincreasing" is spelled out rather than cited.** [[def-monotone-sequence]] defines monotone for sequences of *reals*, and $(s_n)$ takes values in $\overline{\mathbb{R}}$, so the definition does not apply to it. Claim 2 is therefore stated as the inequality it is. When $(x_k)$ is bounded every $s_n$ is real ([[def-limsup-liminf]]) and $(s_n)$ is then a nonincreasing sequence of reals in the sense of [[def-monotone-sequence]], but no proof on this page needs that reading.
 
-- **Claim 1 is not [[lem-sup-monotone]].** That lemma is the same one-line
-  argument carried out in $\mathbb{R}$, and its statement carries the hypotheses
-  that the smaller set be nonempty and the larger one bounded above, without
-  which neither supremum denotes anything. Those are exactly the hypotheses that
-  the extended bounds of [[lem-extended-reals-complete]] dispense with, so the
-  extended statement is not an instance of the real one and is proved from the
-  definition of a least upper bound instead.
+- **Claim 1 is not [[lem-sup-monotone]].** That lemma is the same one-line argument carried out in $\mathbb{R}$, and its statement carries the hypotheses that the smaller set be nonempty and the larger one bounded above, without which neither supremum denotes anything. Those are exactly the hypotheses that the extended bounds of [[lem-extended-reals-complete]] dispense with, so the extended statement is not an instance of the real one and is proved from the definition of a least upper bound instead.
 
-- **Claim 1 costs nothing and is used everywhere.** It is the one-line poset
-  argument: the larger set's supremum bounds the smaller set, and leastness does
-  the rest. It is stated as part of this lemma rather than as an item of its own
-  because it is used only in company with the tail bounds.
+- **Claim 1 costs nothing and is used everywhere.** It is the one-line poset argument: the larger set's supremum bounds the smaller set, and leastness does the rest. It is stated as part of this lemma rather than as an item of its own because it is used only in company with the tail bounds.

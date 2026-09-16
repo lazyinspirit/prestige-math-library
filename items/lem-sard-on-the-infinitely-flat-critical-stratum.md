@@ -51,19 +51,9 @@ If $K\subseteq C_r$ is compact, then $f(K)$ is null in $\mathbb R^n$.
 2.1 Fix one pair $Q\subseteq\widehat Q$, let $K_Q:=K\cap Q$, and let $\lambda$ be the side length of $Q$. The finitely many order-$r$ partial derivatives of the components of $f$ are uniformly continuous on the compact cube $\widehat Q$ by [L2]. Since they vanish at every $x\in K_Q$, applying [L1] componentwise with degree $r-1$ shows that for every $\eta>0$ there is a single $\delta>0$ such that $$ |f(y)-f(x)|\le\eta\|y-x\|^r $$ whenever $x\in K_Q$, $y\in Q$, and $\|y-x\|<\delta$. [L1, L2, step 1.1, algebra]
 
 3.1 Fix $\varepsilon>0$. If $rn=m$, choose $\eta>0$ so small that $(2\eta)^n m^{rn/2}\lambda^{rn}<\varepsilon$; if $rn>m$, choose any $\eta>0$. Let $\delta$ be furnished by step 2.1, and choose $N$ so large that the congruent subcubes in the subdivision of $Q$ into $N^m$ cubes have diameter below $\delta$. Use the following target cubes. [step 2.1, choose, cases]
-For each subcube $Q_\nu$ meeting $K_Q$, choose a point $x_\nu\in K_Q\cap Q_\nu$. If $y\in K_Q\cap Q_\nu$, then $\|y-x_\nu\|\le \sqrt m\,\lambda/N$, so step 2.1 gives
-$$ |f(y)-f(x_\nu)|\le \eta\Bigl(\frac{\sqrt m\,\lambda}{N}\Bigr)^r. $$
-Hence $f(K_Q\cap Q_\nu)$ lies in an $n$-cube of side length at most
-$$ 2\eta\Bigl(\frac{\sqrt m\,\lambda}{N}\Bigr)^r. $$
-[step 2.1, choose, algebra]
+For each subcube $Q_\nu$ meeting $K_Q$, choose a point $x_\nu\in K_Q\cap Q_\nu$. If $y\in K_Q\cap Q_\nu$, then $\|y-x_\nu\|\le \sqrt m\,\lambda/N$, so step 2.1 gives $$ |f(y)-f(x_\nu)|\le \eta\Bigl(\frac{\sqrt m\,\lambda}{N}\Bigr)^r. $$ Hence $f(K_Q\cap Q_\nu)$ lies in an $n$-cube of side length at most $$ 2\eta\Bigl(\frac{\sqrt m\,\lambda}{N}\Bigr)^r. $$ [step 2.1, choose, algebra]
 
 4.1 The union of those target cubes covers $f(K_Q)$, and its total $n$-volume has the following bound. [F1, step 3.1, cases, algebra]
-It is
-at most
-$$ N^m\Bigl(2\eta\Bigl(\frac{\sqrt m\,\lambda}{N}\Bigr)^r\Bigr)^n =(2\eta)^n m^{rn/2}\lambda^{rn}N^{m-rn}. $$
-If $rn>m$, increase $N$ until this quantity is below $\varepsilon$; if $rn=m$,
-the choice of $\eta$ in step 3.1 already makes it smaller than $\varepsilon$.
-In either case the total covering volume is below $\varepsilon$. Therefore [F1] implies that
-$f(K_Q)$ is null. [F1, step 3.1, cases, algebra]
+It is at most $$ N^m\Bigl(2\eta\Bigl(\frac{\sqrt m\,\lambda}{N}\Bigr)^r\Bigr)^n =(2\eta)^n m^{rn/2}\lambda^{rn}N^{m-rn}. $$ If $rn>m$, increase $N$ until this quantity is below $\varepsilon$; if $rn=m$, the choice of $\eta$ in step 3.1 already makes it smaller than $\varepsilon$. In either case the total covering volume is below $\varepsilon$. Therefore [F1] implies that $f(K_Q)$ is null. [F1, step 3.1, cases, algebra]
 
 5.1 Applying step 4.1 to the finite cover from step 1.1 shows that $f(K)$ is null. Thus the infinitely flat critical stratum has null image. [F1, step 1.1, step 4.1] ∎

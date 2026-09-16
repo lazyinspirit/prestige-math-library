@@ -35,14 +35,11 @@ that $i$ is monic.
 
 **Given:** The inclusion $i:2\mathbb Z \hookrightarrow \mathbb Z$.
 
-[L1] Monicity is detected by the implication $i x \equiv 0 \Rightarrow x \equiv 0$
-([[thm-chasing-rule-monicity-detected-by-members]]).
+[L1] Monicity is detected by the implication $i x \equiv 0 \Rightarrow x \equiv 0$ ([[thm-chasing-rule-monicity-detected-by-members]]).
 
-[L2] Member cancellation is an equivalent reformulation
-([[thm-chasing-rule-monicity-by-member-cancellation]]).
+[L2] Member cancellation is an equivalent reformulation ([[thm-chasing-rule-monicity-by-member-cancellation]]).
 
-[L3] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L3] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
 ## Verification
 

@@ -34,17 +34,11 @@ from the empty space likewise give singleton classification sets.
 
 ## Facts & Assumptions
 
-**Given:** a space $X$, a field $\mathbb F\in\{\mathbb R,\mathbb C\}$, and a
-nonnegative integer $n$.
+**Given:** a space $X$, a field $\mathbb F\in\{\mathbb R,\mathbb C\}$, and a nonnegative integer $n$.
 
-[F1] A rank-$n$ vector bundle is locally a projection
-$U\times\mathbb F^n\to U$
-([[def-real-and-complex-topological-vector-bundle]]).
+[F1] A rank-$n$ vector bundle is locally a projection $U\times\mathbb F^n\to U$ ([[def-real-and-complex-topological-vector-bundle]]).
 
-[F2] $\operatorname{Gr}_0(\mathbb F^N)$ and
-$\operatorname{Gr}_0(\mathbb F^\infty)$ are one-point spaces carrying the zero
-tautological bundle
-([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
+[F2] $\operatorname{Gr}_0(\mathbb F^N)$ and $\operatorname{Gr}_0(\mathbb F^\infty)$ are one-point spaces carrying the zero tautological bundle ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
 ## Verification
 

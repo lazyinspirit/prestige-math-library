@@ -36,9 +36,7 @@ $$A_re_k=r^{|k|}e_k.$$
 
 **Given:** An integer $k$ and a parameter $r$ with $0\le r<1$.
 
-[L1] The Abel means are defined by
-$$A_rf(x)=\sum_{m\in\mathbb Z}r^{|m|}\widehat f(m)e_m(x)$$
-([[def-cesaro-and-abel-means-of-a-fourier-series]]).
+[L1] The Abel means are defined by $$A_rf(x)=\sum_{m\in\mathbb Z}r^{|m|}\widehat f(m)e_m(x)$$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
 
 ## Verification
 

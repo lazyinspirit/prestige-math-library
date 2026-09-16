@@ -41,26 +41,15 @@ $M_{\mathrm{err}}$ is zero at $uv$.
 
 ## Facts & Assumptions
 
-**Given:** AC and the system, element, centralizer, block, lattice, and
-characters in the Statement.
+**Given:** AC and the system, element, centralizer, block, lattice, and characters in the Statement.
 
-[F1] The commuting $p$- and $p'$-parts of a finite-order element are unique
-([[lem-commuting-p-and-p-prime-parts-of-a-finite-group-element]]), and their
-use here places $uv$ in the $p$-section $S_G(u)$
-([[def-p-section-of-a-p-element]]).
+[F1] The commuting $p$- and $p'$-parts of a finite-order element are unique ([[lem-commuting-p-and-p-prime-parts-of-a-finite-group-element]]), and their use here places $uv$ in the $p$-section $S_G(u)$ ([[def-p-section-of-a-p-element]]).
 
-[F2] In the Nagao error part for $D=\langle u\rangle$, no vertex of an
-indecomposable summand contains $D$
-([[thm-nagao-decomposition-for-restriction-to-a-centralizer]]).
+[F2] In the Nagao error part for $D=\langle u\rangle$, no vertex of an indecomposable summand contains $D$ ([[thm-nagao-decomposition-for-restriction-to-a-centralizer]]).
 
-[F3] Over the algebraically closed residue field, a relatively
-$Q$-projective lattice has zero character at an element whose $p$-part is
-not conjugate into $Q$
-([[lem-relative-projectivity-forces-p-section-character-vanishing]] and
-[[def-algebraically-closed-field]]).
+[F3] Over the algebraically closed residue field, a relatively $Q$-projective lattice has zero character at an element whose $p$-part is not conjugate into $Q$ ([[lem-relative-projectivity-forces-p-section-character-vanishing]] and [[def-algebraically-closed-field]]).
 
-[F4] AC is available ([[def-axiom-of-choice]]) and is used only through the
-AC-stated suppliers F2–F3; trace additivity below is finite.
+[F4] AC is available ([[def-axiom-of-choice]]) and is used only through the AC-stated suppliers F2–F3; trace additivity below is finite.
 
 ## Proof
 

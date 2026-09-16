@@ -39,16 +39,11 @@ an object to $A \oplus C$, then the sequence splits.
 
 ## Facts & Assumptions
 
-**Given:** The ring $R = k[\varepsilon]/(\varepsilon^2)$, the quotient
-$q:R \to k = R/(\varepsilon)$, and the inclusion $i:k \to R$ with image
-$(\varepsilon)$.
+**Given:** The ring $R = k[\varepsilon]/(\varepsilon^2)$, the quotient $q:R \to k = R/(\varepsilon)$, and the inclusion $i:k \to R$ with image $(\varepsilon)$.
 
-[L1] Module categories are abelian
-([[thm-modules-over-a-ring-form-an-abelian-category]]).
+[L1] Module categories are abelian ([[thm-modules-over-a-ring-form-an-abelian-category]]).
 
-[L2] A short exact sequence splits exactly when the epimorphism has a section
-([[thm-splitting-lemma-in-an-abelian-category]],
-[[def-split-short-exact-sequence-in-an-abelian-category]]).
+[L2] A short exact sequence splits exactly when the epimorphism has a section ([[thm-splitting-lemma-in-an-abelian-category]], [[def-split-short-exact-sequence-in-an-abelian-category]]).
 
 ## Refutation
 

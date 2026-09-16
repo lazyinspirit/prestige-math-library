@@ -34,31 +34,19 @@ $$\mathfrak u(n)=\{X:X^*+X=0\},\qquad \mathfrak{su}(n)=\{X\in\mathfrak u(n):\ope
 
 ## Facts & Assumptions
 
-**Given:** An integer $n\geq1$ and complex matrices viewed as a
-finite-dimensional real vector space.
+**Given:** An integer $n\geq1$ and complex matrices viewed as a finite-dimensional real vector space.
 
-[F1] A Lie group has smooth multiplication and inversion, and its tangent
-bracket is the bracket of left-invariant fields.
-[[def-lie-group]]. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F1] A Lie group has smooth multiplication and inversion, and its tangent bracket is the bracket of left-invariant fields. [[def-lie-group]]. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F2] Over the field $\mathbb C$, a positive-sized matrix is invertible
-exactly when its determinant is nonzero, and its inverse is its adjugate
-divided by that determinant.
-[[cor-square-matrix-invertible-iff-determinant-is-a-unit]].
-[[cor-inverse-matrix-by-adjugate]].
+[F2] Over the field $\mathbb C$, a positive-sized matrix is invertible exactly when its determinant is nonzero, and its inverse is its adjugate divided by that determinant. [[cor-square-matrix-invertible-iff-determinant-is-a-unit]]. [[cor-inverse-matrix-by-adjugate]].
 
-[F3] Complex conjugation supplies the conjugate transpose $A^*$.
-[[def-complex-conjugate-real-imaginary-part-and-modulus]].
+[F3] Complex conjugation supplies the conjugate transpose $A^*$. [[def-complex-conjugate-real-imaginary-part-and-modulus]].
 
-[F4] Constant-rank level sets are embedded with tangent kernel.
-[[thm-constant-rank-theorem-for-manifolds]].
+[F4] Constant-rank level sets are embedded with tangent kernel. [[thm-constant-rank-theorem-for-manifolds]].
 
-[F5] Determinant is the finite alternating sum over permutations.
-[[def-determinant-of-a-square-matrix]].
+[F5] Determinant is the finite alternating sum over permutations. [[def-determinant-of-a-square-matrix]].
 
-[F6] Countable choice is inherited through the tangent-bracket supplier in
-[F1]; the finite matrix and level-set calculations need no further choice.
-[[def-countable-choice]].
+[F6] Countable choice is inherited through the tangent-bracket supplier in [F1]; the finite matrix and level-set calculations need no further choice. [[def-countable-choice]].
 
 ## Verification
 

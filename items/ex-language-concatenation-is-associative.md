@@ -36,11 +36,9 @@ $$ (L_1L_2)L_3=L_1(L_2L_3)=\{aa,abb,aba,abbb\}. $$
 
 **Given:** $L_1=\{a\}$, $L_2=\{\varepsilon,b\}$, and $L_3=\{a,bb\}$.
 
-[L1] Language concatenation is $LK=\{uv:u\in L\text{ and }v\in K\}$ by
-[[def-language-concatenation-powers-and-kleene-star]].
+[L1] Language concatenation is $LK=\{uv:u\in L\text{ and }v\in K\}$ by [[def-language-concatenation-powers-and-kleene-star]].
 
-[L2] Language concatenation is associative by
-[[lem-language-concatenation-is-associative]].
+[L2] Language concatenation is associative by [[lem-language-concatenation-is-associative]].
 
 ## Verification
 

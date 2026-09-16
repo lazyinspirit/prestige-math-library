@@ -34,16 +34,11 @@ $$c_{\varphi\psi}=\sum_\chi d_{\chi\varphi}d_{\chi\psi}.$$
 
 ## Facts & Assumptions
 
-**Given:** The decomposition matrix $D$ and the Cartan matrix $C$ of $G$ at
-$p$.
+**Given:** The decomposition matrix $D$ and the Cartan matrix $C$ of $G$ at $p$.
 
-[F1] The Cartan invariants record composition multiplicities in projective
-covers
-([[def-projective-indecomposable-characters-and-cartan-invariants]]).
+[F1] The Cartan invariants record composition multiplicities in projective covers ([[def-projective-indecomposable-characters-and-cartan-invariants]]).
 
-[L1] Brauer reciprocity identifies $d_{\chi\varphi}$ with the multiplicity of
-$\chi$ in the projective indecomposable character $\Phi_\varphi$
-([[thm-brauer-reciprocity]]).
+[L1] Brauer reciprocity identifies $d_{\chi\varphi}$ with the multiplicity of $\chi$ in the projective indecomposable character $\Phi_\varphi$ ([[thm-brauer-reciprocity]]).
 
 ## Proof
 

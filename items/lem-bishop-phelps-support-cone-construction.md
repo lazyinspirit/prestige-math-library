@@ -38,29 +38,19 @@ $\|g-f\|<\varepsilon$.
 
 **Given:** DC, HB, $X,C,f$ and $\varepsilon$ as in the statement.
 
-[F1] A closed subset of a complete metric space is complete, without a choice
-axiom ([[thm-complete-subspace-iff-closed]], claim 2,
-[[def-banach-space]]).
+[F1] A closed subset of a complete metric space is complete, without a choice axiom ([[thm-complete-subspace-iff-closed]], claim 2, [[def-banach-space]]).
 
-[F2] DC produces a sequence along an entire relation from a specified initial
-state ([[def-dependent-choice]]).
+[F2] DC produces a sequence along an entire relation from a specified initial state ([[def-dependent-choice]]).
 
-[F3] Every bounded monotone real sequence converges, and every nonempty subset
-of $\mathbb R$ bounded below has an infimum
-([[thm-monotone-convergence]], [[thm-infimum-property]]).
+[F3] Every bounded monotone real sequence converges, and every nonempty subset of $\mathbb R$ bounded below has an infimum ([[thm-monotone-convergence]], [[thm-infimum-property]]).
 
-[F4] Under HB, a real linear functional dominated by a sublinear functional
-on a subspace has a dominated real-linear extension
-([[thm-relative-hahn-banach-dominated-extension]],
-[[def-hahn-banach-extension-principle-relative]]).
+[F4] Under HB, a real linear functional dominated by a sublinear functional on a subspace has a dominated real-linear extension ([[thm-relative-hahn-banach-dominated-extension]], [[def-hahn-banach-extension-principle-relative]]).
 
-[F5] The dual norm is the supremum of the absolute values on the closed unit
-ball ([[def-dual-space-of-a-normed-space]]).
+[F5] The dual norm is the supremum of the absolute values on the closed unit ball ([[def-dual-space-of-a-normed-space]]).
 
 ## Proof
 
-**Proof technique:** maximizing variational construction followed by a
-support-cone Hahn–Banach argument.
+**Proof technique:** maximizing variational construction followed by a support-cone Hahn–Banach argument.
 
 1.1 Choose a real number $\eta$ with $0<\eta<\varepsilon$.  The restriction $F=f|_C$ is continuous and bounded above because $C$ is bounded.  By [F1], $C$ with its norm metric is complete.  Fix one $x_0\in C$, possible because $C$ is nonempty, and for $x\in C$ define $$S(x)=\{y\in C:F(y)\ge F(x)+\eta\|y-x\|\}.$$ Each $S(x)$ is nonempty because it contains $x$, and it is closed because $F(y)-F(x)-\eta\|y-x\|$ is continuous in $y$. [given, F1, construct]
 
@@ -84,8 +74,4 @@ support-cone Hahn–Banach argument.
 
 ## Source notes
 
-Loewen–Wang Theorem 2.2 proves a generalized variational principle and derives
-the Ekeland inequality in (2.14).  Proposition 5.1(i) applies that principle to
-a coercive function, and Theorem 5.2 states Bishop–Phelps for nonempty closed
-bounded convex sets.  The proof above derives exactly the maximizing inequality
-needed here and then spells out the support-cone/sublinear-gauge argument.
+Loewen–Wang Theorem 2.2 proves a generalized variational principle and derives the Ekeland inequality in (2.14).  Proposition 5.1(i) applies that principle to a coercive function, and Theorem 5.2 states Bishop–Phelps for nonempty closed bounded convex sets.  The proof above derives exactly the maximizing inequality needed here and then spells out the support-cone/sublinear-gauge argument.

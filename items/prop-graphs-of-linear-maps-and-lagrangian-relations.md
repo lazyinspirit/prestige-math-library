@@ -32,12 +32,9 @@ strictly larger symplectic space has an isotropic, but not Lagrangian, graph.
 
 ## Facts & Assumptions
 
-**Given:** Symplectic vector spaces $(V,\omega_V)$ and $(W,\omega_W)$ and a
-linear map $A:V\to W$.
+**Given:** Symplectic vector spaces $(V,\omega_V)$ and $(W,\omega_W)$ and a linear map $A:V\to W$.
 
-[F1] In a $2N$-dimensional symplectic space, an isotropic subspace is
-Lagrangian exactly when it has dimension $N$.
-[[thm-equivalent-characterizations-of-lagrangian-subspaces]].
+[F1] In a $2N$-dimensional symplectic space, an isotropic subspace is Lagrangian exactly when it has dimension $N$. [[thm-equivalent-characterizations-of-lagrangian-subspaces]].
 
 ## Proof
 

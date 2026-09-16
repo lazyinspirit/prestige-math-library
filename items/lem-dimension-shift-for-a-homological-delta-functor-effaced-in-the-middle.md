@@ -43,10 +43,7 @@ has the following properties:
 
 **Given:** A short exact sequence $0\to K\to P\to A\to0$ and an integer $n>0$.
 
-[L1] A homological delta functor attaches an exact segment
-$$T_n(P)\to T_n(A)\xrightarrow{\partial_n}T_{n-1}(K)\to T_{n-1}(P)$$
-to the given short exact sequence
-([[def-homological-delta-functor]]).
+[L1] A homological delta functor attaches an exact segment $$T_n(P)\to T_n(A)\xrightarrow{\partial_n}T_{n-1}(K)\to T_{n-1}(P)$$ to the given short exact sequence ([[def-homological-delta-functor]]).
 
 ## Proof
 

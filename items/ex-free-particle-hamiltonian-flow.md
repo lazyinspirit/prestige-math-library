@@ -34,12 +34,9 @@ and is defined for every $t\in\mathbb R$.
 
 ## Facts & Assumptions
 
-**Given:** The mass $m>0$, the initial point, and the library cotangent and
-Hamiltonian sign conventions.
+**Given:** The mass $m>0$, the initial point, and the library cotangent and Hamiltonian sign conventions.
 
-[F1] Under the stated choice assumption, Hamilton's equations are
-$\dot q=H_p$ and $\dot p=-H_q$.
-[[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
+[F1] Under the stated choice assumption, Hamilton's equations are $\dot q=H_p$ and $\dot p=-H_q$. [[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
 
 ## Verification
 

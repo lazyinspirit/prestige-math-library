@@ -38,15 +38,11 @@ $$\Gamma(z+1)=z\Gamma(z).$$
 
 **Given:** A complex number $z$ with $\operatorname{Re}z>0$.
 
-[L1] Integration by parts holds on compact intervals
-([[thm-integration-by-parts]]).
+[L1] Integration by parts holds on compact intervals ([[thm-integration-by-parts]]).
 
-[L2] The Gamma integral converges locally uniformly on right-half-plane compact
-sets ([[lem-gamma-integral-converges-locally-uniformly]]).
+[L2] The Gamma integral converges locally uniformly on right-half-plane compact sets ([[lem-gamma-integral-converges-locally-uniformly]]).
 
-[L3] Euler's Gamma function is the improper integral
-$\int_0^\infty t^{z-1}e^{-t}\,dt$ on $\operatorname{Re}z>0$
-([[def-euler-gamma-function]]).
+[L3] Euler's Gamma function is the improper integral $\int_0^\infty t^{z-1}e^{-t}\,dt$ on $\operatorname{Re}z>0$ ([[def-euler-gamma-function]]).
 
 ## Proof
 

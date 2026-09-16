@@ -34,15 +34,11 @@ and co-$E$ is its complement.
 
 ## Facts & Assumptions
 
-**Given:** The labelled graph with path vertices $p_1,p_2,p_3,p_4,p_5$ and an
-extra vertex $q$.
+**Given:** The labelled graph with path vertices $p_1,p_2,p_3,p_4,p_5$ and an extra vertex $q$.
 
-[L1] The $E$-graph has edge set
-$\{p_1p_2,p_2p_3,p_3p_4,p_4p_5,p_3q\}$, and co-$E$ is its complement
-([[def-e-graph-and-co-e-graph]], [[def-graph-isomorphism-and-complement]]).
+[L1] The $E$-graph has edge set $\{p_1p_2,p_2p_3,p_3p_4,p_4p_5,p_3q\}$, and co-$E$ is its complement ([[def-e-graph-and-co-e-graph]], [[def-graph-isomorphism-and-complement]]).
 
-[L2] The standard path $P_5$ has consecutive edges and no others
-([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L2] The standard path $P_5$ has consecutive edges and no others ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Verification
 

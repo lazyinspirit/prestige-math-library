@@ -34,14 +34,11 @@ category, not on the object.
 
 ## Facts & Assumptions
 
-**Given:** The abelian category $\mathbf{Ab}$ and the objects $\mathbb Z/p$ and
-$\mathbb Z$.
+**Given:** The abelian category $\mathbf{Ab}$ and the objects $\mathbb Z/p$ and $\mathbb Z$.
 
-[L1] Jordan-Holder compares composition series of a single object
-([[thm-jordan-holder-theorem-in-an-abelian-category]]).
+[L1] Jordan-Holder compares composition series of a single object ([[thm-jordan-holder-theorem-in-an-abelian-category]]).
 
-[L2] Finite length is an objectwise condition
-([[def-object-of-finite-length]]).
+[L2] Finite length is an objectwise condition ([[def-object-of-finite-length]]).
 
 ## Refutation
 

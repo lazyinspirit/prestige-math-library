@@ -32,11 +32,9 @@ $$Q=x-x_0,\qquad P(x,y)=\int_{y_0}^{y}f(x,s)\,ds.$$
 
 ## Facts & Assumptions
 
-**Given:** Work in a rectangle around $(x_0,y_0)$ on which the integral is
-defined.
+**Given:** Work in a rectangle around $(x_0,y_0)$ on which the integral is defined.
 
-[F1] Darboux's theorem predicts local coordinates with form $dQ\wedge dP$.
-[[thm-darboux-theorem]].
+[F1] Darboux's theorem predicts local coordinates with form $dQ\wedge dP$. [[thm-darboux-theorem]].
 
 ## Verification
 

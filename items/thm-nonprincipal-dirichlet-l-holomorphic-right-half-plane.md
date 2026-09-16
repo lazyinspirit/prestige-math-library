@@ -35,15 +35,11 @@ and defines a holomorphic function there.
 
 **Given:** A nonprincipal Dirichlet character $\chi$.
 
-[L1] The partial sums $A(x)=\sum_{1\le n\le x}\chi(n)$ satisfy $A(x)=O(1)$
-([[lem-nonprincipal-dirichlet-character-partial-sums]]).
+[L1] The partial sums $A(x)=\sum_{1\le n\le x}\chi(n)$ satisfy $A(x)=O(1)$ ([[lem-nonprincipal-dirichlet-character-partial-sums]]).
 
-[L2] If $A(x)=O(x^\theta)$, then
-$\sum_{n\ge1}a_n n^{-s}=s\int_1^\infty A(x)x^{-s-1}\,dx$ for $\operatorname{Re}s>\theta$
-([[thm-dirichlet-series-summatory-integral]]).
+[L2] If $A(x)=O(x^\theta)$, then $\sum_{n\ge1}a_n n^{-s}=s\int_1^\infty A(x)x^{-s-1}\,dx$ for $\operatorname{Re}s>\theta$ ([[thm-dirichlet-series-summatory-integral]]).
 
-[L3] The Dirichlet $L$-function is the Dirichlet series
-$\sum_{n\ge1}\chi(n)n^{-s}$ ([[def-dirichlet-l-function]]).
+[L3] The Dirichlet $L$-function is the Dirichlet series $\sum_{n\ge1}\chi(n)n^{-s}$ ([[def-dirichlet-l-function]]).
 
 ## Proof
 

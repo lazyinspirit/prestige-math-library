@@ -37,19 +37,13 @@ Every valuation ring is an integrally closed domain.
 
 **Given:** A valuation ring $V$ contained in a field $K$.
 
-[L1] A domain is integrally closed when every element of its field of fractions
-integral over it already lies in the domain
-([[def-integral-closure-and-integrally-closed-domain]]).
+[L1] A domain is integrally closed when every element of its field of fractions integral over it already lies in the domain ([[def-integral-closure-and-integrally-closed-domain]]).
 
-[F1] A valuation ring is a subring $V\subseteq K$ such that for each
-$x\in K^\times$, at least one of $x$ and $x^{-1}$ lies in $V$
-([[def-valuation-ring]]).
+[F1] A valuation ring is a subring $V\subseteq K$ such that for each $x\in K^\times$, at least one of $x$ and $x^{-1}$ lies in $V$ ([[def-valuation-ring]]).
 
-[L2] A valuation ring is local, and its nonunits form the unique maximal ideal
-([[lem-valuation-ring-is-local]]).
+[L2] A valuation ring is local, and its nonunits form the unique maximal ideal ([[lem-valuation-ring-is-local]]).
 
-[A1] Any subring of a field is a domain, and its field of fractions embeds in
-that field.
+[A1] Any subring of a field is a domain, and its field of fractions embeds in that field.
 
 ## Proof
 

@@ -36,8 +36,7 @@ pipeline_run: null
 
 **Given:** The meromorphic continuation theorem for Gamma.
 
-[L1] Gamma extends meromorphically to $\mathbb C$ with simple poles at
-$0,-1,-2,\dots$ ([[thm-gamma-meromorphic-continuation]]).
+[L1] Gamma extends meromorphically to $\mathbb C$ with simple poles at $0,-1,-2,\dots$ ([[thm-gamma-meromorphic-continuation]]).
 
 ## Refutation
 

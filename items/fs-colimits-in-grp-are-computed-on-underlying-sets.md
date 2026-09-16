@@ -32,16 +32,11 @@ underlying Set-diagram.
 
 **Given:** The empty diagram in $\mathbf{Grp}$.
 
-[L1] $\mathbf{Grp}$ has all small colimits
-([[thm-grp-is-complete-and-cocomplete]]).
+[L1] $\mathbf{Grp}$ has all small colimits ([[thm-grp-is-complete-and-cocomplete]]).
 
-[L2] An empty-diagram colimit is an initial object
-([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
+[L2] An empty-diagram colimit is an initial object ([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
 
-[F1] Groups and homomorphisms form $\mathbf{Grp}$, while sets and functions
-form $\mathbf{Set}$
-([[prop-groups-and-homomorphisms-form-category-grp]],
-[[prop-sets-and-functions-form-category-set]]).
+[F1] Groups and homomorphisms form $\mathbf{Grp}$, while sets and functions form $\mathbf{Set}$ ([[prop-groups-and-homomorphisms-form-category-grp]], [[prop-sets-and-functions-form-category-set]]).
 
 ## Refutation
 

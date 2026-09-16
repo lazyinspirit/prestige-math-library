@@ -32,15 +32,11 @@ $M\rtimes G$, so it represents the zero class in $H^2(G,M)$.
 
 ## Facts & Assumptions
 
-**Given:** A group $G$, an abelian $G$-module $M$, and the zero function
-$f(g,h)=0$.
+**Given:** A group $G$, an abelian $G$-module $M$, and the zero function $f(g,h)=0$.
 
-[F1] The twisted product uses the multiplication
-$(m,g)(n,h)=(m+g\cdot n+f(g,h),gh)$
-([[def-twisted-product-extension-from-a-two-cocycle]]).
+[F1] The twisted product uses the multiplication $(m,g)(n,h)=(m+g\cdot n+f(g,h),gh)$ ([[def-twisted-product-extension-from-a-two-cocycle]]).
 
-[L1] The zero class corresponds exactly to split extensions
-([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
+[L1] The zero class corresponds exactly to split extensions ([[cor-zero-h-two-class-is-equivalent-to-splitting]]).
 
 ## Verification
 

@@ -44,18 +44,13 @@ $u_{\xi\xi}$.
 
 ## Facts & Assumptions
 
-**Given:** The constant symmetric matrix
-$M=\begin{pmatrix}A&B\\ B&C\end{pmatrix}$ of the principal quadratic form.
+**Given:** The constant symmetric matrix $M=\begin{pmatrix}A&B\\ B&C\end{pmatrix}$ of the principal quadratic form.
 
-[L1] A symmetric second-order principal part has a signature normal form whose
-signature is coordinate invariant
-([[thm-symmetric-principal-part-has-a-signature-normal-form]]).
+[L1] A symmetric second-order principal part has a signature normal form whose signature is coordinate invariant ([[thm-symmetric-principal-part-has-a-signature-normal-form]]).
 
-[L2] In two variables the sign of $B^2-AC$ is coordinate invariant
-([[thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant]]).
+[L2] In two variables the sign of $B^2-AC$ is coordinate invariant ([[thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant]]).
 
-[L3] The discriminant is $B^2-AC$
-([[def-two-variable-second-order-discriminant]]).
+[L3] The discriminant is $B^2-AC$ ([[def-two-variable-second-order-discriminant]]).
 
 ## Proof
 

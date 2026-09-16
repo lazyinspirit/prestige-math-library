@@ -78,23 +78,8 @@ play.
 
 ## Remarks
 
-- **This is the item the characteristic rests on.** [[def-ring-characteristic]]
-  is stated for an arbitrary ring using the additive powers of
-  [[def-group-power]]; for a field a reader may already know
-  [[def-canonical-natural]], and without the present lemma the page would carry
-  two notations for one element and invite the reader to assume they agree. That
-  assumption is exactly the defect this item removes, and it is removed by a
-  proof rather than by a remark.
+- **This is the item the characteristic rests on.** [[def-ring-characteristic]] is stated for an arbitrary ring using the additive powers of [[def-group-power]]; for a field a reader may already know [[def-canonical-natural]], and without the present lemma the page would carry two notations for one element and invite the reader to assume they agree. That assumption is exactly the defect this item removes, and it is removed by a proof rather than by a remark.
 
-- **Uniqueness, not a computation, is what does the work.** Both functions are
-  characterised by the same recursion, and [[thm-recursion]] says a recursion of
-  that shape has exactly one solution. An induction on $\mathbb{N}$ would prove
-  the same thing directly; nothing is gained by writing it out, since the
-  uniqueness clause of [[thm-recursion]] is that induction.
+- **Uniqueness, not a computation, is what does the work.** Both functions are characterised by the same recursion, and [[thm-recursion]] says a recursion of that shape has exactly one solution. An induction on $\mathbb{N}$ would prove the same thing directly; nothing is gained by writing it out, since the uniqueness clause of [[thm-recursion]] is that induction.
 
-- **$\mathbb{N}$ contains $0$, and $\iota(0) = 0_F$**, not $1_F$. So $\iota$ is
-  not the map $n \mapsto$ "$1_F$ added to itself $n$ times" for $n \ge 1$ only:
-  the value at $0$ is a genuine value of the recursion.
-  [[def-canonical-natural]] records the same point, and the published
-  [[lem-of-naturals-positive]] states its own recursion from $n = 1$, which
-  agrees because $\iota(1) = \iota(0) + 1_F = 1_F$.
+- **$\mathbb{N}$ contains $0$, and $\iota(0) = 0_F$**, not $1_F$. So $\iota$ is not the map $n \mapsto$ "$1_F$ added to itself $n$ times" for $n \ge 1$ only: the value at $0$ is a genuine value of the recursion. [[def-canonical-natural]] records the same point, and the published [[lem-of-naturals-positive]] states its own recursion from $n = 1$, which agrees because $\iota(1) = \iota(0) + 1_F = 1_F$.

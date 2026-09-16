@@ -29,20 +29,15 @@ If a category has all small products, then it has all small limits.
 
 ## Facts & Assumptions
 
-**Given:** The full category $\mathbf{Set}_{\ne\varnothing}$ of nonempty sets
-and all functions between them, under the Axiom of Choice.
+**Given:** The full category $\mathbf{Set}_{\ne\varnothing}$ of nonempty sets and all functions between them, under the Axiom of Choice.
 
-[F1] Products represent set-indexed families of maps, including the empty
-family ([[def-products-and-coproducts]]).
+[F1] Products represent set-indexed families of maps, including the empty family ([[def-products-and-coproducts]]).
 
-[F2] Equalizers represent equalizing maps
-([[def-equalizers-and-coequalizers]]).
+[F2] Equalizers represent equalizing maps ([[def-equalizers-and-coequalizers]]).
 
-[L1] General small limits require products together with equalizers
-([[thm-small-limits-from-products-and-equalizers]]).
+[L1] General small limits require products together with equalizers ([[thm-small-limits-from-products-and-equalizers]]).
 
-[F3] Choice is equivalent to nonemptiness of a product of an arbitrary family
-of nonempty sets ([[def-axiom-of-choice]]).
+[F3] Choice is equivalent to nonemptiness of a product of an arbitrary family of nonempty sets ([[def-axiom-of-choice]]).
 
 ## Counterexample
 

@@ -31,12 +31,9 @@ such that $L(G')=L(G)$ and either:
 
 **Given:** A context-free grammar $G=(V,\Sigma,P,S)$.
 
-[L1] Variables may be nullable, generating, reachable, or useful exactly as in
-[[def-nullable-generating-and-reachable-variable]].
+[L1] Variables may be nullable, generating, reachable, or useful exactly as in [[def-nullable-generating-and-reachable-variable]].
 
-[L2] The generated language is
-$L(G)=\{w\in\Sigma^*:S\Rightarrow_G^* w\}$, by
-[[def-language-generated-by-a-cfg]].
+[L2] The generated language is $L(G)=\{w\in\Sigma^*:S\Rightarrow_G^* w\}$, by [[def-language-generated-by-a-cfg]].
 
 ## Proof
 

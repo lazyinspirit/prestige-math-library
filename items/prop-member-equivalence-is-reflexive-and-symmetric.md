@@ -34,9 +34,7 @@ For members of one object, the relation $\equiv$ is reflexive and symmetric.
 
 **Given:** Members $x:X \to A$ and $y:Y \to A$.
 
-[L1] By definition, $x \equiv y$ means there are epimorphisms
-$u:W \to X$ and $v:W \to Y$ with $x u = y v$
-([[def-equivalence-of-members]]).
+[L1] By definition, $x \equiv y$ means there are epimorphisms $u:W \to X$ and $v:W \to Y$ with $x u = y v$ ([[def-equivalence-of-members]]).
 
 ## Proof
 

@@ -41,22 +41,15 @@ the product law is the continuation rule.
 
 **Given:** A function $f$ satisfying the two displayed conditions.
 
-[L1] For $-1<u\leq1$,
-$\log(1+u)=\sum_{n=1}^{\infty}(-1)^{n+1}u^n/n$
-([[thm-log-one-plus-x-power-series]]).
+[L1] For $-1<u\leq1$, $\log(1+u)=\sum_{n=1}^{\infty}(-1)^{n+1}u^n/n$ ([[thm-log-one-plus-x-power-series]]).
 
-[L2] The natural logarithm satisfies
-$\log(xy)=\log x+\log y$
-([[thm-natural-logarithm-laws]]).
+[L2] The natural logarithm satisfies $\log(xy)=\log x+\log y$ ([[thm-natural-logarithm-laws]]).
 
-[L3] For every real $r$, there is a natural $n\geq1$ with $r<n$
-([[thm-of-archimedean]]).
+[L3] For every real $r$, there is a natural $n\geq1$ with $r<n$ ([[thm-of-archimedean]]).
 
-[F1] Natural powers satisfy $x^0=1$ and $x^{n+1}=x^nx$
-([[def-integer-power]]).
+[F1] Natural powers satisfy $x^0=1$ and $x^{n+1}=x^nx$ ([[def-integer-power]]).
 
-[L4] The induction principle proves a property for every natural once the base
-and successor steps are established ([[thm-induction-principle]]).
+[L4] The induction principle proves a property for every natural once the base and successor steps are established ([[thm-induction-principle]]).
 
 ## Proof
 

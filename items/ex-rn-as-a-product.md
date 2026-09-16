@@ -94,22 +94,8 @@ $\mathbb{R}^n = \prod_{k<n} \mathbb{R}$ carry the product topology
 
 ## Remarks
 
-- **This is the example the seam lemma exists for.** Without
-  [[lem-product-topology-on-rn]] the symbol $\mathbb{R}^2$ would name two spaces
-  on these two pages, the product of two lines and the metric space of
-  [[lem-metrics-on-rn]], and every sentence about open subsets of it would be
-  ambiguous. Claim 1 says the two are one space, so the hyperbola, the square and
-  the Sorgenfrey plane below may each be discussed in whichever language is
-  shorter.
+- **This is the example the seam lemma exists for.** Without [[lem-product-topology-on-rn]] the symbol $\mathbb{R}^2$ would name two spaces on these two pages, the product of two lines and the metric space of [[lem-metrics-on-rn]], and every sentence about open subsets of it would be ambiguous. Claim 1 says the two are one space, so the hyperbola, the square and the Sorgenfrey plane below may each be discussed in whichever language is shorter.
 
-- **Surjectivity is free here and is not free in general.** For an infinite index
-  set, surjectivity of a projection is the Axiom of Choice
-  ([[thm-product-universal-property]], claim 4). For $\mathbb{R}^n$ the constant
-  function does the work, and the same trick works for any product of copies of
-  one nonempty space, over any index set.
+- **Surjectivity is free here and is not free in general.** For an infinite index set, surjectivity of a projection is the Axiom of Choice ([[thm-product-universal-property]], claim 4). For $\mathbb{R}^n$ the constant function does the work, and the same trick works for any product of copies of one nonempty space, over any index set.
 
-- **The Euclidean metric plays no role in the topology.** All three of $d_1$,
-  $d_2$ and $d_\infty$ induce the product topology, so nothing topological about
-  $\mathbb{R}^n$ singles out $d_2$; what singles it out is metric structure, such
-  as which sets are balls, and that is not visible to the topology
-  ([[def-metrizable-space]]).
+- **The Euclidean metric plays no role in the topology.** All three of $d_1$, $d_2$ and $d_\infty$ induce the product topology, so nothing topological about $\mathbb{R}^n$ singles out $d_2$; what singles it out is metric structure, such as which sets are balls, and that is not visible to the topology ([[def-metrizable-space]]).

@@ -42,22 +42,15 @@ $P$ such that $dF(TP) \subseteq \mathcal D$ and $F(P)$ meets $L$. Then:
 
 [A1] Let $U := F^{-1}(L)$.
 
-[L1] An integrable distribution has a flat coordinate chart around every
-point ([[thm-frobenius-local-coordinate-theorem]]).
+[L1] An integrable distribution has a flat coordinate chart around every point ([[thm-frobenius-local-coordinate-theorem]]).
 
-[L2] A smooth real-valued function with zero differential is constant on each
-connected component
-([[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]]).
+[L2] A smooth real-valued function with zero differential is constant on each connected component ([[prop-a-smooth-function-with-zero-differential-is-constant-on-each-connected-component]]).
 
-[L3] A maximal leaf has the unique smooth structure constructed from its local
-plaque charts, and its inclusion in $M$ is an injective integral immersion
-([[thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds]]).
+[L3] A maximal leaf has the unique smooth structure constructed from its local plaque charts, and its inclusion in $M$ is an injective integral immersion ([[thm-existence-and-uniqueness-of-maximal-connected-integral-manifolds]]).
 
-[L4] A nonempty clopen subset of a connected space is the whole space
-([[def-connected-space]]).
+[L4] A nonempty clopen subset of a connected space is the whole space ([[def-connected-space]]).
 
-[L5] The connected components of a flat-coordinate slice are its plaques
-([[def-plaque-of-a-flat-chart]]).
+[L5] The connected components of a flat-coordinate slice are its plaques ([[def-plaque-of-a-flat-chart]]).
 
 ## Proof
 

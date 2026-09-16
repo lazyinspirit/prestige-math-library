@@ -32,8 +32,7 @@ implies that $k[G]$ is semisimple.
 
 **Given:** A finite group $G$ and a field $k$ with $\operatorname{char}k=p\mid |G|$.
 
-[L1] In defining characteristic, Maschke can fail and $k[G]$ need not be
-semisimple ([[rem-maschke-failure-in-defining-characteristic]]).
+[L1] In defining characteristic, Maschke can fail and $k[G]$ need not be semisimple ([[rem-maschke-failure-in-defining-characteristic]]).
 
 ## Refutation
 

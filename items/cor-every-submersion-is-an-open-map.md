@@ -36,15 +36,11 @@ Every smooth submersion $F:M\to N$ is an open map.
 
 **Given:** A smooth submersion $F:M\to N$.
 
-[F1] An open map sends open sets to open sets
-([[def-homeomorphism-and-open-maps]]).
+[F1] An open map sends open sets to open sets ([[def-homeomorphism-and-open-maps]]).
 
-[L1] Around each point of $M$, a submersion is locally the projection
-$(u,v)\mapsto u$ ([[cor-local-normal-form-for-submersions]]).
+[L1] Around each point of $M$, a submersion is locally the projection $(u,v)\mapsto u$ ([[cor-local-normal-form-for-submersions]]).
 
-[L2] Products carry the usual product topology, so if $(u_0,v_0)$ lies in an
-open set of a product, some product neighbourhood of $(u_0,v_0)$ lies inside
-that open set ([[thm-product-universal-property]]).
+[L2] Products carry the usual product topology, so if $(u_0,v_0)$ lies in an open set of a product, some product neighbourhood of $(u_0,v_0)$ lies inside that open set ([[thm-product-universal-property]]).
 
 ## Proof
 **Proof technique:** direct.

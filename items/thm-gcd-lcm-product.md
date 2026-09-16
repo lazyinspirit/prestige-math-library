@@ -96,20 +96,8 @@ two sides of clause 2 are $0$.
 
 ## Remarks
 
-- **Clause 1 is the clause later pages use.** "Least positive common multiple" is
-  how $\operatorname{lcm}$ was defined, but the useful property is that it divides
-  every common multiple, which is what identifies
-  $a\mathbb{Z} \cap b\mathbb{Z}$ with $\operatorname{lcm}(a,b)\mathbb{Z}$ in
-  [[thm-gcd-generates-the-subgroup]].
+- **Clause 1 is the clause later pages use.** "Least positive common multiple" is how $\operatorname{lcm}$ was defined, but the useful property is that it divides every common multiple, which is what identifies $a\mathbb{Z} \cap b\mathbb{Z}$ with $\operatorname{lcm}(a,b)\mathbb{Z}$ in [[thm-gcd-generates-the-subgroup]].
 
-- **The absolute value in clause 2 is not decorative.** The unsigned form
-  $\gcd(a,b)\operatorname{lcm}(a,b) = ab$ is false, and $(-2,3)$ refutes it:
-  the companion page records this as
-  [[fs-gcd-times-lcm-equals-the-product]].
+- **The absolute value in clause 2 is not decorative.** The unsigned form $\gcd(a,b)\operatorname{lcm}(a,b) = ab$ is false, and $(-2,3)$ refutes it: the companion page records this as [[fs-gcd-times-lcm-equals-the-product]].
 
-- **Where coprimality enters.** The only substantial step is step 3.3, which
-  proves that every common multiple is a multiple of $M$; what it uses is that
-  $a/d$ and $b/d$ are coprime
-  ([[cor-gcd-quotients-coprime]]) together with the coprime divisibility lemma
-  ([[lem-coprime-divides-product]]). Without those the argument gives only that
-  $M$ is *a* common multiple, not the least one.
+- **Where coprimality enters.** The only substantial step is step 3.3, which proves that every common multiple is a multiple of $M$; what it uses is that $a/d$ and $b/d$ are coprime ([[cor-gcd-quotients-coprime]]) together with the coprime divisibility lemma ([[lem-coprime-divides-product]]). Without those the argument gives only that $M$ is *a* common multiple, not the least one.

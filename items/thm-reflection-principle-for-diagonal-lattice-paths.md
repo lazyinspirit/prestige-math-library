@@ -81,14 +81,6 @@ $h(i)>c$ for every $i$ with $0\le i\le n$
 
 ## Remarks
 
-- **Where the two hypotheses are spent.** The hypothesis $a>c$ is what makes the
-  reflected starting height lie strictly below $c$, so that every reflected path
-  meets $c$ and the correspondence is onto; the hypothesis $b>c$ is what keeps
-  the first visit strictly before the last index, so that reflection preserves the
-  endpoint. Neither is a normalisation.
+- **Where the two hypotheses are spent.** The hypothesis $a>c$ is what makes the reflected starting height lie strictly below $c$, so that every reflected path meets $c$ and the correspondence is onto; the hypothesis $b>c$ is what keeps the first visit strictly before the last index, so that reflection preserves the endpoint. Neither is a normalisation.
 
-- **The identity is stated as a sum, and only then as a difference.** The
-  counting argument produces "touching plus avoiding equals all" in $\mathbb{N}$,
-  and the difference form is legitimate only because that identity has already
-  been proved; written the other way round the subtraction would need its own
-  justification whenever the second coefficient vanishes.
+- **The identity is stated as a sum, and only then as a difference.** The counting argument produces "touching plus avoiding equals all" in $\mathbb{N}$, and the difference form is legitimate only because that identity has already been proved; written the other way round the subtraction would need its own justification whenever the second coefficient vanishes.

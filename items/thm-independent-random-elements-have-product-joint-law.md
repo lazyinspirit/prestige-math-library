@@ -38,20 +38,13 @@ $$\mathbb P_X=\bigotimes_{i<n}\mathbb P_{X_i}.$$
 
 **Given:** Independent random elements $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$ for $i<n$.
 
-[L1] Independence of random elements is equivalent to factorization on
-measurable rectangles.
-([[thm-rectangle-criterion-for-independent-random-elements]])
+[L1] Independence of random elements is equivalent to factorization on measurable rectangles. ([[thm-rectangle-criterion-for-independent-random-elements]])
 
-[L2] The law of a random element is a probability measure.
-([[def-law-or-distribution-of-a-random-element]],
-[[lem-law-of-a-random-element-is-a-probability-measure]])
+[L2] The law of a random element is a probability measure. ([[def-law-or-distribution-of-a-random-element]], [[lem-law-of-a-random-element-is-a-probability-measure]])
 
-[L3] For sigma-finite factors, the product measure is the unique measure on the
-product sigma-algebra having the rectangle formula.
-([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
+[L3] For sigma-finite factors, the product measure is the unique measure on the product sigma-algebra having the rectangle formula. ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
 
-[L4] The finite product sigma-algebra is generated recursively by measurable
-rectangles. ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]])
+[L4] The finite product sigma-algebra is generated recursively by measurable rectangles. ([[def-product-sigma-algebra-and-finite-product-sigma-algebras]])
 
 ## Proof
 

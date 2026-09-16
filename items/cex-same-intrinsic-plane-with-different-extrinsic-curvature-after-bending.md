@@ -52,8 +52,7 @@ from the general second-fundamental-form construction.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $r>0$, $U$, the two displayed embeddings,
-and the standard Euclidean metric.
+**Given:** $\mathrm{AC}_\omega$, $r>0$, $U$, the two displayed embeddings, and the standard Euclidean metric.
 
 [F1] Countable choice permits a choice from every sequence of nonempty sets, and pullback by an immersion gives its induced Riemannian metric. [[def-countable-choice]], [[prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions]].
 

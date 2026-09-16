@@ -43,16 +43,11 @@ $r\uparrow R$ through radii that avoid zeros on $|z|=r$.
 
 **Given:** A holomorphic function $f$ on a neighbourhood of the closed disc $\{|z|\le R\}$, with $f(0)\ne0$.
 
-[F1] Cauchy's integral formula on a circle recovers the value at the centre
-([[thm-cauchy-integral-formula-circle]]).
+[F1] Cauchy's integral formula on a circle recovers the value at the centre ([[thm-cauchy-integral-formula-circle]]).
 
-[F2] A zero of multiplicity $m$ can be factored as $(z-a)^m$ times a
-holomorphic nonvanishing factor
-([[thm-zero-order-factorization-holomorphic-function]]).
+[F2] A zero of multiplicity $m$ can be factored as $(z-a)^m$ times a holomorphic nonvanishing factor ([[thm-zero-order-factorization-holomorphic-function]]).
 
-[F3] A nowhere-zero holomorphic function on a disc has a holomorphic logarithm,
-because discs are star-shaped and homologically simply connected
-([[prop-star-shaped-plane-domains-are-homologically-simply-connected]], [[thm-holomorphic-logarithms-homologically-simply-connected-domains]]).
+[F3] A nowhere-zero holomorphic function on a disc has a holomorphic logarithm, because discs are star-shaped and homologically simply connected ([[prop-star-shaped-plane-domains-are-homologically-simply-connected]], [[thm-holomorphic-logarithms-homologically-simply-connected-domains]]).
 
 ## Proof
 

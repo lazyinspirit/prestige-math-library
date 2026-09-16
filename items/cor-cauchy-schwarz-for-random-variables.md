@@ -35,12 +35,9 @@ $$|X|^2=c\,|Y|^2\qquad\mathbb P\text{-almost surely}.$$
 
 **Given:** Real random variables $X,Y\in L^2(\mathbb P)$.
 
-[L1] Holder's inequality on a probability space specializes to
-$$\mathbb E[|XY|]\le\|X\|_2\|Y\|_2$$
-([[cor-holder-inequality-for-random-variables]]).
+[L1] Holder's inequality on a probability space specializes to $$\mathbb E[|XY|]\le\|X\|_2\|Y\|_2$$ ([[cor-holder-inequality-for-random-variables]]).
 
-[L2] The $L^2$ Cauchy-Schwarz equality criterion is already proved for general
-measure spaces ([[cor-cauchy-schwarz-inequality-for-l-two]]).
+[L2] The $L^2$ Cauchy-Schwarz equality criterion is already proved for general measure spaces ([[cor-cauchy-schwarz-inequality-for-l-two]]).
 
 ## Proof
 

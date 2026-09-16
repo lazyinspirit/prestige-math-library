@@ -40,25 +40,15 @@ such identification is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The ring, spaces, bundles, and orientations in the statement,
-together with orientation-preserving pullback data or the two composable zero
-sections.
+**Given:** The ring, spaces, bundles, and orientations in the statement, together with orientation-preserving pullback data or the two composable zero sections.
 
-[F1] [[thm-naturality-and-uniqueness-of-thom-classes]] gives naturality of
-normalized Thom classes.
+[F1] [[thm-naturality-and-uniqueness-of-thom-classes]] gives naturality of normalized Thom classes.
 
-[F2] [[thm-external-product-and-whitney-sum-formulas-for-thom-classes]] gives
-the ordered-sum Thom formula and its Koszul convention.
+[F2] [[thm-external-product-and-whitney-sum-formulas-for-thom-classes]] gives the ordered-sum Thom formula and its Koszul convention.
 
-[F3] [[def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section]]
-defines each zero-section pushforward as Thom multiplication followed by the
-pair map. For the composite, the notation in the statement is defined only
-after the displayed compatible iterated pair identification is supplied.
+[F3] [[def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section]] defines each zero-section pushforward as Thom multiplication followed by the pair map. For the composite, the notation in the statement is defined only after the displayed compatible iterated pair identification is supplied.
 
-[F4] [[thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle]] gives the
-natural exact ladder, while
-[[prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]]
-identifies successive pullbacks.
+[F4] [[thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle]] gives the natural exact ladder, while [[prop-vector-bundle-pullback-is-functorial-up-to-canonical-isomorphism]] identifies successive pullbacks.
 
 [A1] [[def-axiom-of-choice]] is used only through [F1]–[F4].
 

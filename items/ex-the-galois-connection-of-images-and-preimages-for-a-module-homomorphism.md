@@ -38,14 +38,11 @@ $f_*B\le C \iff B\le f^*C$.
 
 **Given:** The homomorphism $f:\mathbb Z\to\mathbb Z/6$.
 
-[L1] Direct and inverse images form a Galois connection
-([[thm-direct-and-inverse-image-of-subobjects-form-a-galois-connection]]).
+[L1] Direct and inverse images form a Galois connection ([[thm-direct-and-inverse-image-of-subobjects-form-a-galois-connection]]).
 
-[L2] Inverse images preserve meets and direct images preserve joins
-([[cor-inverse-image-preserves-meets-and-direct-image-preserves-joins]]).
+[L2] Inverse images preserve meets and direct images preserve joins ([[cor-inverse-image-preserves-meets-and-direct-image-preserves-joins]]).
 
-[L3] Kernels and ordinary images are the special cases of inverse and direct
-images ([[cor-the-kernel-and-image-constructions-are-the-inverse-and-direct-images-along-a-morphism]]).
+[L3] Kernels and ordinary images are the special cases of inverse and direct images ([[cor-the-kernel-and-image-constructions-are-the-inverse-and-direct-images-along-a-morphism]]).
 
 ## Verification
 

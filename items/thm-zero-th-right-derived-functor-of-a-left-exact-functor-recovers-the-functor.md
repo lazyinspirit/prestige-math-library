@@ -33,19 +33,13 @@ natural in $A$.
 
 **Given:** An object $A\in\mathcal D$.
 
-[L1] The chosen injective resolution of $A$ is an exact coaugmented complex
-$$0\to A\to I^0(A)\to I^1(A)\to\cdots$$
-([[def-injective-resolution-in-an-abelian-category]]).
+[L1] The chosen injective resolution of $A$ is an exact coaugmented complex $$0\to A\to I^0(A)\to I^1(A)\to\cdots$$ ([[def-injective-resolution-in-an-abelian-category]]).
 
-[L2] The zeroth cohomology object is the quotient of the kernel of
-$d^0:F(I^0(A))\to F(I^1(A))$ by the zero-th coboundary, which is $0$
-([[def-cohomology-object-of-a-cochain-complex]]).
+[L2] The zeroth cohomology object is the quotient of the kernel of $d^0:F(I^0(A))\to F(I^1(A))$ by the zero-th coboundary, which is $0$ ([[def-cohomology-object-of-a-cochain-complex]]).
 
-[L3] Left exactness means that $F$ preserves the kernel at the beginning of the
-displayed injective resolution ([[def-left-exact-and-right-exact-functor]]).
+[L3] Left exactness means that $F$ preserves the kernel at the beginning of the displayed injective resolution ([[def-left-exact-and-right-exact-functor]]).
 
-[L4] The assignments $A\mapsto R_I^0F(A)$ are already functorial
-([[thm-right-derived-functors-relative-to-supplied-data-are-additive-functors]]).
+[L4] The assignments $A\mapsto R_I^0F(A)$ are already functorial ([[thm-right-derived-functors-relative-to-supplied-data-are-additive-functors]]).
 
 ## Proof
 

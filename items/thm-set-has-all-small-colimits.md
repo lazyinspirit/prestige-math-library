@@ -35,22 +35,15 @@ $$(j,x)\sim(k,D(u)(x))\qquad(u:j\to k).$$
 
 **Given:** A small diagram $D:\mathcal J\to\mathbf{Set}$.
 
-[F1] Smallness makes the object and morphism collections sets, and
-cocompleteness means existence of all small colimits
-([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] Smallness makes the object and morphism collections sets, and cocompleteness means existence of all small colimits ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
-[F2] Sets and functions form $\mathbf{Set}$
-([[prop-sets-and-functions-form-category-set]]).
+[F2] Sets and functions form $\mathbf{Set}$ ([[prop-sets-and-functions-form-category-set]]).
 
-[F3] An equivalence relation is reflexive, symmetric, and transitive
-([[def-equivalence-relation]]).
+[F3] An equivalence relation is reflexive, symmetric, and transitive ([[def-equivalence-relation]]).
 
-[L1] A function on a set factors uniquely through its quotient precisely when
-it is constant on equivalence classes
-([[thm-universal-property-of-the-quotient]]).
+[L1] A function on a set factors uniquely through its quotient precisely when it is constant on equivalence classes ([[thm-universal-property-of-the-quotient]]).
 
-[F4] A colimit has a unique mediating morphism to every cocone
-([[def-limit-and-colimit-of-a-diagram]]).
+[F4] A colimit has a unique mediating morphism to every cocone ([[def-limit-and-colimit-of-a-diagram]]).
 
 ## Proof
 

@@ -39,26 +39,17 @@ discrete valuation ring.
 
 **Given:** A Noetherian integrally closed domain $R$ and a height-one prime ideal $\mathfrak p$.
 
-[F1] The height of $\mathfrak p$ is
-$\operatorname{ht}(\mathfrak p)=\dim(R_{\mathfrak p})$
-([[def-height-of-a-prime-ideal]]).
+[F1] The height of $\mathfrak p$ is $\operatorname{ht}(\mathfrak p)=\dim(R_{\mathfrak p})$ ([[def-height-of-a-prime-ideal]]).
 
-[F2] Localisation at a prime means inverting $R\setminus\mathfrak p$
-([[def-localisation-at-a-prime-ideal]]).
+[F2] Localisation at a prime means inverting $R\setminus\mathfrak p$ ([[def-localisation-at-a-prime-ideal]]).
 
-[L1] The ring $R_{\mathfrak p}$ is local with maximal ideal
-$\mathfrak pR_{\mathfrak p}$ ([[thm-localisation-at-a-prime-is-local]]).
+[L1] The ring $R_{\mathfrak p}$ is local with maximal ideal $\mathfrak pR_{\mathfrak p}$ ([[thm-localisation-at-a-prime-is-local]]).
 
-[F3] A domain is integrally closed when every element of its fraction field
-integral over it already lies in the domain
-([[def-integral-closure-and-integrally-closed-domain]]).
+[F3] A domain is integrally closed when every element of its fraction field integral over it already lies in the domain ([[def-integral-closure-and-integrally-closed-domain]]).
 
-[L3] Localisations of Noetherian rings are Noetherian
-([[thm-noetherian-ring-quotients-and-localisations]]).
+[L3] Localisations of Noetherian rings are Noetherian ([[thm-noetherian-ring-quotients-and-localisations]]).
 
-[L4] A nonfield domain is a DVR exactly when it is a one-dimensional Noetherian
-local integrally closed domain
-([[thm-equivalent-characterisations-of-a-dvr]]).
+[L4] A nonfield domain is a DVR exactly when it is a one-dimensional Noetherian local integrally closed domain ([[thm-equivalent-characterisations-of-a-dvr]]).
 
 ## Proof
 

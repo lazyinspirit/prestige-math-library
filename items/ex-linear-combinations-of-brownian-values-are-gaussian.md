@@ -57,7 +57,4 @@ the empty sum when $n=0$.
 
 ## Source notes
 
-Yoshida, Lemma 6.1.3 and equation (6.5), printed pp. 174--175, identify
-Brownian finite collections as mean-zero Gaussian variables with covariance
-$\min(s,t)$ in dimension one. The displayed projection and singular-case
-calculation are supplied explicitly above.
+Yoshida, Lemma 6.1.3 and equation (6.5), printed pp. 174--175, identify Brownian finite collections as mean-zero Gaussian variables with covariance $\min(s,t)$ in dimension one. The displayed projection and singular-case calculation are supplied explicitly above.

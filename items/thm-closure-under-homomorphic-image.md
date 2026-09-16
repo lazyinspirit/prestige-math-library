@@ -31,8 +31,7 @@ is a regular language over $\Delta$.
 
 ## Facts & Assumptions
 
-**Given:** An alphabet map $h:\Sigma\to\Delta^*$ and a regular language
-$L\subseteq\Sigma^*$.
+**Given:** An alphabet map $h:\Sigma\to\Delta^*$ and a regular language $L\subseteq\Sigma^*$.
 
 [L1] By [[def-alphabet-homomorphism-and-induced-word-map]], the induced map $\widehat h$ sends a concatenated word to the concatenation of the image words of its letters.
 

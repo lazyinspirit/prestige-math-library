@@ -35,12 +35,9 @@ exact solution in one step although the ambient dimension is $3$.
 
 **Given:** The displayed Hermitian positive-definite system.
 
-[F1] The grade $\nu(A,r_0)$ is the degree of the relative minimal polynomial of
-$r_0$
-([[def-grade-and-relative-minimal-polynomial-of-a-start-vector]]).
+[F1] The grade $\nu(A,r_0)$ is the degree of the relative minimal polynomial of $r_0$ ([[def-grade-and-relative-minimal-polynomial-of-a-start-vector]]).
 
-[L1] Exact-arithmetic CG terminates no later than the relative grade
-([[thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic]]).
+[L1] Exact-arithmetic CG terminates no later than the relative grade ([[thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic]]).
 
 ## Verification
 **Proof technique:** direct calculation.

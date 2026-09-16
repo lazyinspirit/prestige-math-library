@@ -34,12 +34,9 @@ $$\Lambda(s)=\frac{1}{s(s-1)}+\frac12\int_1^\infty (\theta(t)-1)\left(t^{s/2-1}+
 
 **Given:** The Mellin representation and the completed functional equation.
 
-[L1] On $\operatorname{Re}s>1$,
-$$\Lambda(s)=\frac12\int_0^\infty(\theta(t)-1)t^{s/2-1}\,dt$$
-([[thm-theta-mellin-representation-of-completed-zeta]]).
+[L1] On $\operatorname{Re}s>1$, $$\Lambda(s)=\frac12\int_0^\infty(\theta(t)-1)t^{s/2-1}\,dt$$ ([[thm-theta-mellin-representation-of-completed-zeta]]).
 
-[L2] The completed-function theorem supplies the split formula displayed in the
-statement ([[thm-completed-riemann-zeta-functional-equation]]).
+[L2] The completed-function theorem supplies the split formula displayed in the statement ([[thm-completed-riemann-zeta-functional-equation]]).
 
 ## Verification
 

@@ -32,14 +32,11 @@ most two minimal normal subgroups.
 
 **Given:** A finite primitive permutation group $G \le \operatorname{Sym}(\Omega)$.
 
-[L1] Any two distinct minimal normal subgroups of $G$ are regular
-([[lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]]).
+[L1] Any two distinct minimal normal subgroups of $G$ are regular ([[lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular]]).
 
-[L2] Distinct minimal normal subgroups centralize one another
-([[lem-distinct-minimal-normal-subgroups-centralize-one-another]]).
+[L2] Distinct minimal normal subgroups centralize one another ([[lem-distinct-minimal-normal-subgroups-centralize-one-another]]).
 
-[A1] A regular permutation group has exactly one element sending a chosen point
-to a chosen point.
+[A1] A regular permutation group has exactly one element sending a chosen point to a chosen point.
 
 ## Proof
 

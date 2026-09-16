@@ -48,53 +48,21 @@ domain of $\log_G$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, a
-fixed norm on $\mathfrak g$, and one local logarithm
-$\log_G:U\to V$ associated with $\exp_G|_V$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, a fixed norm on $\mathfrak g$, and one local logarithm $\log_G:U\to V$ associated with $\exp_G|_V$.
 
-[F1] The local logarithm is the inverse of the exponential on the specified
-open neighborhoods, and Dynkin's BCH series converges absolutely on a
-sum-norm ball and uniformly on smaller closed balls.
-[[def-local-logarithm-on-a-lie-group]].
-[[lem-local-convergence-of-the-baker-campbell-hausdorff-series]].
+[F1] The local logarithm is the inverse of the exponential on the specified open neighborhoods, and Dynkin's BCH series converges absolutely on a sum-norm ball and uniformly on smaller closed balls. [[def-local-logarithm-on-a-lie-group]]. [[lem-local-convergence-of-the-baker-campbell-hausdorff-series]].
 
-[F2] Right-trivialization of $d\exp_Z$ is the entire operator series
-$D(\operatorname{ad}_Z)=\sum_{n\ge0}\operatorname{ad}_Z^n/(n+1)!$, and the
-linear-ODE exponential is its operator power series, uniformly on compact
-parameter intervals.
-[[lem-right-trivialized-differential-of-the-lie-group-exponential]].
+[F2] Right-trivialization of $d\exp_Z$ is the entire operator series $D(\operatorname{ad}_Z)=\sum_{n\ge0}\operatorname{ad}_Z^n/(n+1)!$, and the linear-ODE exponential is its operator power series, uniformly on compact parameter intervals. [[lem-right-trivialized-differential-of-the-lie-group-exponential]].
 
-[F3] The adjoint map is a smooth representation and, assuming countable
-choice, $\operatorname{Ad}_{\exp Z}=e^{\operatorname{ad}_Z}$.
-[[def-countable-choice]].
-[[prop-adjoint-is-a-smooth-lie-group-representation]].
-[[prop-adjoint-exponential-identity]].
+[F3] The adjoint map is a smooth representation and, assuming countable choice, $\operatorname{Ad}_{\exp Z}=e^{\operatorname{ad}_Z}$. [[def-countable-choice]]. [[prop-adjoint-is-a-smooth-lie-group-representation]]. [[prop-adjoint-exponential-identity]].
 
-[F4] The curve $t\mapsto\exp_G(tZ)$ is the integral curve of $Z^L$ through
-$e$; translations give the tangent trivializations; and differentials obey
-the chain rule.
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
-[[def-left-and-right-translations-on-a-lie-group]].
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F4] The curve $t\mapsto\exp_G(tZ)$ is the integral curve of $Z^L$ through $e$; translations give the tangent trivializations; and differentials obey the chain rule. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]]. [[def-left-and-right-translations-on-a-lie-group]]. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
-[F5] Formal exponential and logarithm over a commutative rational algebra are
-inverse, where $\log(1+w)=\sum_{j\ge1}(-1)^{j-1}w^j/j$.
-[[def-formal-exponential-logarithm-and-powers]].
-[[thm-formal-exponential-logarithm-identities]].
+[F5] Formal exponential and logarithm over a commutative rational algebra are inverse, where $\log(1+w)=\sum_{j\ge1}(-1)^{j-1}w^j/j$. [[def-formal-exponential-logarithm-and-powers]]. [[thm-formal-exponential-logarithm-identities]].
 
-[F6] The scalar exponential series converges everywhere, and a geometric
-series converges when its ratio has absolute value less than one.
-[[lem-exponential-series-has-infinite-radius]].
-[[thm-geometric-series]].
+[F6] The scalar exponential series converges everywhere, and a geometric series converges when its ratio has absolute value less than one. [[lem-exponential-series-has-infinite-radius]]. [[thm-geometric-series]].
 
-[F7] The tube lemma supplies one neighborhood uniform over a compact
-parameter set. A finite basis gives bounded coordinates; uniform scalar
-limits commute with Riemann integration; and vector-valued FTC is
-componentwise.
-[[lem-tube-lemma-for-a-compact-factor]].
-[[thm-coordinate-map-for-a-finite-dimensional-normed-space]].
-[[thm-uniform-limit-interchanges-riemann-integration]].
-[[cor-vector-valued-ftc-and-lipschitz-bound]].
+[F7] The tube lemma supplies one neighborhood uniform over a compact parameter set. A finite basis gives bounded coordinates; uniform scalar limits commute with Riemann integration; and vector-valued FTC is componentwise. [[lem-tube-lemma-for-a-compact-factor]]. [[thm-coordinate-map-for-a-finite-dimensional-normed-space]]. [[thm-uniform-limit-interchanges-riemann-integration]]. [[cor-vector-valued-ftc-and-lipschitz-bound]].
 
 ## Proof
 

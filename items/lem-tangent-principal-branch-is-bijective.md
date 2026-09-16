@@ -35,29 +35,17 @@ is continuous, strictly increasing, and bijective.
 
 **Given:** No hypotheses beyond those quantified in the statement.
 
-[L1] Tangent is defined where cosine is nonzero and is differentiable on its
-natural domain with $(\tan x)'=\sec^2x$; differentiability there implies
-continuity ([[def-tangent-cotangent-secant-cosecant]],
-[[thm-tangent-cotangent-secant-cosecant-derivatives-and-periods]],
-[[cor-differentiable-implies-continuous]]).
+[L1] Tangent is defined where cosine is nonzero and is differentiable on its natural domain with $(\tan x)'=\sec^2x$; differentiability there implies continuity ([[def-tangent-cotangent-secant-cosecant]], [[thm-tangent-cotangent-secant-cosecant-derivatives-and-periods]], [[cor-differentiable-implies-continuous]]).
 
-[L2] On the natural domain of tangent, $\sec^2x=1+\tan^2x$; moreover
-$\sec x=1/\cos x\ne0$, so $\sec^2x>0$
-([[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]],
-[[def-tangent-cotangent-secant-cosecant]], [[lem-of-square-positive]]).
+[L2] On the natural domain of tangent, $\sec^2x=1+\tan^2x$; moreover $\sec x=1/\cos x\ne0$, so $\sec^2x>0$ ([[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[def-tangent-cotangent-secant-cosecant]], [[lem-of-square-positive]]).
 
 [L3] The map $t\mapsto(\cos t,\sin t)$ maps $[0,2\pi)$ bijectively onto the unit circle ([[thm-sine-and-cosine-parametrize-the-unit-circle]]).
 
-[L4] Cosine decreases on $[0,\pi]$, increases on $[\pi,2\pi]$, has zeros at
-$\pi/2$ and $3\pi/2$ in $[0,2\pi)$, and sine and cosine have period $2\pi$
-([[thm-sine-cosine-signs-monotonicity-and-ranges]],
-[[thm-sine-cosine-zero-sets-and-fundamental-period]]).
+[L4] Cosine decreases on $[0,\pi]$, increases on $[\pi,2\pi]$, has zeros at $\pi/2$ and $3\pi/2$ in $[0,2\pi)$, and sine and cosine have period $2\pi$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]]).
 
 [L5] Every nonnegative real has a unique nonnegative square root ([[thm-of-square-roots]]).
 
-[L6] A continuous function on an interval whose derivative is positive at every
-interior point is strictly increasing
-([[thm-monotonicity-from-the-derivative]]).
+[L6] A continuous function on an interval whose derivative is positive at every interior point is strictly increasing ([[thm-monotonicity-from-the-derivative]]).
 
 ## Proof
 

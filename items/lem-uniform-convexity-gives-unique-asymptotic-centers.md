@@ -80,8 +80,4 @@ uses real coefficients even when $X$ is complex.
 
 ## Source notes
 
-Lim defines asymptotic radius and center for decreasing tails of a bounded net
-in §1, then proves nonemptiness and uniqueness for closed convex subsets of
-uniformly convex Banach spaces in Proposition 1 and Theorem 1 on printed
-pp. 422–423.  The local proof is independent and makes its Countable Choice
-use explicit.
+Lim defines asymptotic radius and center for decreasing tails of a bounded net in §1, then proves nonemptiness and uniqueness for closed convex subsets of uniformly convex Banach spaces in Proposition 1 and Theorem 1 on printed pp. 422–423.  The local proof is independent and makes its Countable Choice use explicit.

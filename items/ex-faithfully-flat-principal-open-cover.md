@@ -30,14 +30,11 @@ is faithfully flat.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, a commutative ring $R$, and elements $f_1,\ldots,f_n\in R$ with
-$(f_1,\ldots,f_n)=R$.
+**Given:** The Axiom of Choice, a commutative ring $R$, and elements $f_1,\ldots,f_n\in R$ with $(f_1,\ldots,f_n)=R$.
 
-[L1] Each localization $R_{f_i}$ is flat over $R$
-([[thm-localisations-are-flat]]).
+[L1] Each localization $R_{f_i}$ is flat over $R$ ([[thm-localisations-are-flat]]).
 
-[L2] A flat ring map is faithfully flat exactly when proper ideals remain proper
-([[thm-faithfully-flat-ring-map-characterisations]]).
+[L2] A flat ring map is faithfully flat exactly when proper ideals remain proper ([[thm-faithfully-flat-ring-map-characterisations]]).
 
 ## Verification
 

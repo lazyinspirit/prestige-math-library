@@ -30,17 +30,11 @@ that word accepts.
 
 ## Facts & Assumptions
 
-**Given:** The NFA over $\Sigma=\{a,b\}$ with states $q_0,q_1,q_2,q_3$, start
-state $q_0$, accepting state $q_3$, loops $q_0\xrightarrow{a}q_0$ and
-$q_0\xrightarrow{b}q_0$, and extra transitions
-$q_0\xrightarrow{a}q_1\xrightarrow{b}q_2\xrightarrow{b}q_3$.
+**Given:** The NFA over $\Sigma=\{a,b\}$ with states $q_0,q_1,q_2,q_3$, start state $q_0$, accepting state $q_3$, loops $q_0\xrightarrow{a}q_0$ and $q_0\xrightarrow{b}q_0$, and extra transitions $q_0\xrightarrow{a}q_1\xrightarrow{b}q_2\xrightarrow{b}q_3$.
 
-[A1] The statement refuted is: an NFA accepts a word only when every
-computation branch accepts.
+[A1] The statement refuted is: an NFA accepts a word only when every computation branch accepts.
 
-[L1] By [[def-nfa-acceptance-and-recognized-language]], an NFA accepts a word
-exactly when the set of states reachable after reading the word contains an
-accepting state.
+[L1] By [[def-nfa-acceptance-and-recognized-language]], an NFA accepts a word exactly when the set of states reachable after reading the word contains an accepting state.
 
 ## Refutation
 

@@ -28,8 +28,7 @@ measure on a compact Hausdorff space is regular” is false.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and $X=[0,\omega_1]$ with the
-resulting Dieudonne probability measure $\bar m$.
+**Given:** The Axiom of Countable Choice and $X=[0,\omega_1]$ with the resulting Dieudonne probability measure $\bar m$.
 
 ## Refutation
 

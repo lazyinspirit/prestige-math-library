@@ -31,8 +31,7 @@ Use a finite-dimensional algebra with composable nonsymmetric extension classes 
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, $R=k\langle x,y\rangle/(x,y)^2$, and the simple left
-$R$-module $S=R/(x,y)$.
+**Given:** A field $k$, $R=k\langle x,y\rangle/(x,y)^2$, and the simple left $R$-module $S=R/(x,y)$.
 
 ## Verification
 

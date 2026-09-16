@@ -44,19 +44,13 @@ contributes only to lower-order terms of $\widetilde L$.
 
 ## Facts & Assumptions
 
-**Given:** An order-$m$ operator $L$, a smooth local diffeomorphism $x=\Phi(y)$,
-and the pulled-back unknown $v(y)=u(\Phi(y))$.
+**Given:** An order-$m$ operator $L$, a smooth local diffeomorphism $x=\Phi(y)$, and the pulled-back unknown $v(y)=u(\Phi(y))$.
 
-[L1] The principal symbol is the homogeneous order-$m$ polynomial formed from
-the top-order coefficients of a linear scalar operator
-([[def-principal-part-and-principal-symbol-of-a-scalar-pde]]).
+[L1] The principal symbol is the homogeneous order-$m$ polynomial formed from the top-order coefficients of a linear scalar operator ([[def-principal-part-and-principal-symbol-of-a-scalar-pde]]).
 
-[L2] The chain rule differentiates a composite by the derivative of the outer
-map applied to the derivative of the inner map
-([[thm-chain-rule-for-total-derivatives]]).
+[L2] The chain rule differentiates a composite by the derivative of the outer map applied to the derivative of the inner map ([[thm-chain-rule-for-total-derivatives]]).
 
-[L3] Ordered mixed partial derivatives of the same order agree when the needed
-regularity is present ([[thm-symmetry-of-higher-mixed-partials]]).
+[L3] Ordered mixed partial derivatives of the same order agree when the needed regularity is present ([[thm-symmetry-of-higher-mixed-partials]]).
 
 ## Proof
 

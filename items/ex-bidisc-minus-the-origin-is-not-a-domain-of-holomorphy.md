@@ -42,12 +42,9 @@ is not a domain of holomorphy.
 
 **Given:** The punctured bidisc $\Omega$.
 
-[L1] A holomorphic function on a punctured several-variable domain extends
-across the missing point
-([[thm-removability-of-a-puncture-in-several-complex-variables]]).
+[L1] A holomorphic function on a punctured several-variable domain extends across the missing point ([[thm-removability-of-a-puncture-in-several-complex-variables]]).
 
-[L2] A domain of holomorphy is one for which no single larger overlap works for
-every holomorphic function ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L2] A domain of holomorphy is one for which no single larger overlap works for every holomorphic function ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
 ## Verification
 

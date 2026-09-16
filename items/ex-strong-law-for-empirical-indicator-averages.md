@@ -23,14 +23,9 @@ For IID random elements $(X_n)$ and a fixed measurable A, $n^{-1}\sum_{k\le n}\m
 
 ## Facts & Assumptions
 
-[F1] [[lem-measurable-functions-preserve-independence]]: Let $(X_i)_{i\in I}$ be an independent family of random elements
-$X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$. For each $i$, let
-$g_i:(S_i,\Sigma_i)\to(T_i,\mathcal T_i)$ be measurable. Then the family
-$(g_i\circ X_i)_{i\in I}$ is independent.
+[F1] [[lem-measurable-functions-preserve-independence]]: Let $(X_i)_{i\in I}$ be an independent family of random elements $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$. For each $i$, let $g_i:(S_i,\Sigma_i)\to(T_i,\mathcal T_i)$ be measurable. Then the family $(g_i\circ X_i)_{i\in I}$ is independent.
 
-[F2] [[cor-expectation-of-an-indicator-is-probability]]: Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space and let $A\in\mathcal F$.
-Then the indicator $\mathbf 1_A$ satisfies
-$$\mathbb E[\mathbf 1_A]=\mathbb P(A).$$
+[F2] [[cor-expectation-of-an-indicator-is-probability]]: Let $(\Omega,\mathcal F,\mathbb P)$ be a probability space and let $A\in\mathcal F$. Then the indicator $\mathbf 1_A$ satisfies $$\mathbb E[\mathbf 1_A]=\mathbb P(A).$$
 
 [F3] [[thm-kolmogorov-iid-l1-strong-law]]: For IID real $(X_n)_{n\ge1}$ with $\mathbb E|X_1|<\infty$, $S_n/n\to\mu=\mathbb EX_1$ almost surely.
 

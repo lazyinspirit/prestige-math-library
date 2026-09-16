@@ -38,8 +38,7 @@ for every member $x$ of $R$.
 
 **Given:** A morphism $h:R \to S$.
 
-[L1] The zero member exists, and a member equivalent to zero is literally zero
-([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
+[L1] The zero member exists, and a member equivalent to zero is literally zero ([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
 
 ## Proof
 

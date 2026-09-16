@@ -38,19 +38,13 @@ In particular, $\Omega$ is holomorphically convex.
 
 ## Facts & Assumptions
 
-**Given:** A convex domain $\Omega\subseteq\mathbb C^m$ and a compact set
-$K\Subset\Omega$.
+**Given:** A convex domain $\Omega\subseteq\mathbb C^m$ and a compact set $K\Subset\Omega$.
 
-[L1] A point outside a compact convex set can be strictly separated from it by
-the real part of a complex-linear functional
-([[lem-finite-dimensional-separation-of-a-compact-convex-set-and-a-point]]).
+[L1] A point outside a compact convex set can be strictly separated from it by the real part of a complex-linear functional ([[lem-finite-dimensional-separation-of-a-compact-convex-set-and-a-point]]).
 
-[L2] The holomorphic hull is defined by inequalities against all holomorphic
-functions on $\Omega$
-([[def-holomorphically-convex-hull-and-domain]]).
+[L2] The holomorphic hull is defined by inequalities against all holomorphic functions on $\Omega$ ([[def-holomorphically-convex-hull-and-domain]]).
 
-[L3] Convex subsets contain the line segment between any two of their points
-([[def-convex-subset-of-euclidean-space]]).
+[L3] Convex subsets contain the line segment between any two of their points ([[def-convex-subset-of-euclidean-space]]).
 
 ## Proof
 

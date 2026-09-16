@@ -29,10 +29,7 @@ For identically distributed integrable real $(X_n)$, put $Y_n=X_n\mathbf1_{\{|X_
 
 [F1] [[lem-tail-sum-integrability-equivalence]]: For a measurable $X:\Omega\to[0,\infty]$ on a probability space, $\sum_{n\ge1}\mathbb P(X>n)\le\mathbb EX\le1+\sum_{n\ge1}\mathbb P(X>n)$. Thus $\mathbb EX<\infty$ if and only if the tail series is finite.
 
-[F2] [[cor-first-borel-cantelli-lemma-for-events]]: Let $(A_n)_{n\in\mathbb N}$ be events in a probability space. If
-$$\sum_{n=0}^\infty \mathbb P(A_n)<+\infty,$$
-then
-$$\mathbb P(A_n\ \mathrm{i.o.})=0.$$
+[F2] [[cor-first-borel-cantelli-lemma-for-events]]: Let $(A_n)_{n\in\mathbb N}$ be events in a probability space. If $$\sum_{n=0}^\infty \mathbb P(A_n)<+\infty,$$ then $$\mathbb P(A_n\ \mathrm{i.o.})=0.$$
 
 No independence hypothesis is needed.
 

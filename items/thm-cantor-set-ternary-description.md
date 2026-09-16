@@ -108,29 +108,10 @@ throughout the proof.
 
 ## Remarks
 
-- **The endpoints are the digit sequences that are eventually constant.** For
-  instance $0 = \Phi(0,0,0,\dots)$, $1 = \Phi(2,2,2,\dots)$,
-  $\tfrac13 = \Phi(0,2,2,2,\dots)$ and $\tfrac23 = \Phi(2,0,0,0,\dots)$, the
-  first two by [[thm-geometric-series]] and the last two by the shift identity of
-  step 1.2. That the eventually constant sequences do **not** exhaust $C$ is the
-  content of [[cex-cantor-point-that-is-not-an-endpoint]], where $1/4$ is
-  computed to be $\Phi(0,2,0,2,\dots)$.
+- **The endpoints are the digit sequences that are eventually constant.** For instance $0 = \Phi(0,0,0,\dots)$, $1 = \Phi(2,2,2,\dots)$, $\tfrac13 = \Phi(0,2,2,2,\dots)$ and $\tfrac23 = \Phi(2,0,0,0,\dots)$, the first two by [[thm-geometric-series]] and the last two by the shift identity of step 1.2. That the eventually constant sequences do **not** exhaust $C$ is the content of [[cex-cantor-point-that-is-not-an-endpoint]], where $1/4$ is computed to be $\Phi(0,2,0,2,\dots)$.
 
-- **No digit is ever $1$, and that is the whole point.** A real of $[0,1]$ with a
-  ternary expansion using the digit $1$ at some place and not representable
-  without it lies in one of the removed middle thirds. The theorem does not
-  assert that every real has a ternary expansion, and it does not need to: the
-  map $\Phi$ is constructed from the digits, and the converse direction extracts
-  digits from a point of $C$ by the canonical recursion of step 2.2, never by
-  invoking a general expansion theorem.
+- **No digit is ever $1$, and that is the whole point.** A real of $[0,1]$ with a ternary expansion using the digit $1$ at some place and not representable without it lies in one of the removed middle thirds. The theorem does not assert that every real has a ternary expansion, and it does not need to: the map $\Phi$ is constructed from the digits, and the converse direction extracts digits from a point of $C$ by the canonical recursion of step 2.2, never by invoking a general expansion theorem.
 
-- **Where the choice-freeness lies.** The digit extraction is a definition by
-  cases on a total order fed to [[thm-recursion]], so the whole passage from a
-  point of $C$ to its digit sequence is a single function, not a sequence of
-  selections. The same discipline governs [[thm-perfect-set-uncountable-r]] and
-  [[thm-baire-category-r]].
+- **Where the choice-freeness lies.** The digit extraction is a definition by cases on a total order fed to [[thm-recursion]], so the whole passage from a point of $C$ to its digit sequence is a single function, not a sequence of selections. The same discipline governs [[thm-perfect-set-uncountable-r]] and [[thm-baire-category-r]].
 
-- **Claim 3 is what makes $C$ uncountable.** $\{0,1\}^{\mathbb{N}}$ is in
-  bijection with the power set of $\mathbb{N}$, which is uncountable by
-  [[thm-cantor-powerset]]; that route and the perfect-set route are both recorded
-  in [[thm-cantor-set-properties]].
+- **Claim 3 is what makes $C$ uncountable.** $\{0,1\}^{\mathbb{N}}$ is in bijection with the power set of $\mathbb{N}$, which is uncountable by [[thm-cantor-powerset]]; that route and the perfect-set route are both recorded in [[thm-cantor-set-properties]].

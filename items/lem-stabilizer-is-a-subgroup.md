@@ -34,11 +34,9 @@ stabilizer $G_x$ is a subgroup of $G$.
 
 [L1] $G_x=\{g\in G:g\cdot x=x\}$ ([[def-orbit-and-stabilizer]]).
 
-[L2] The action satisfies $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$
-([[def-group-action]]).
+[L2] The action satisfies $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$ ([[def-group-action]]).
 
-[L3] A nonempty subset $H$ of a group is a subgroup exactly when
-$ab^{-1}\in H$ for all $a,b\in H$ ([[lem-subgroup-criterion]], [[def-subgroup]]).
+[L3] A nonempty subset $H$ of a group is a subgroup exactly when $ab^{-1}\in H$ for all $a,b\in H$ ([[lem-subgroup-criterion]], [[def-subgroup]]).
 
 ## Proof
 

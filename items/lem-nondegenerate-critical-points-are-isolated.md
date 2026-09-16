@@ -30,20 +30,13 @@ an open neighbourhood containing no other critical point of $f$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $f:M\to\mathbb R$ and a nondegenerate critical
-point $p$ of $f$.
+**Given:** A smooth function $f:M\to\mathbb R$ and a nondegenerate critical point $p$ of $f$.
 
-[F1] A critical point is nondegenerate exactly when its Hessian has trivial
-kernel ([[def-hessian-of-a-function-at-a-critical-point]],
-[[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F1] A critical point is nondegenerate exactly when its Hessian has trivial kernel ([[def-hessian-of-a-function-at-a-critical-point]], [[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
-[L1] In coordinates $x=(x^1,\dots,x^n)$,
-$$df_q=\sum_i\frac{\partial(f\circ x^{-1})}{\partial x^i}(x(q))\,dx^i_q.$$
-([[thm-coordinate-formula-for-the-differential-of-a-function]])
+[L1] In coordinates $x=(x^1,\dots,x^n)$, $$df_q=\sum_i\frac{\partial(f\circ x^{-1})}{\partial x^i}(x(q))\,dx^i_q.$$ ([[thm-coordinate-formula-for-the-differential-of-a-function]])
 
-[L2] A $C^1$ map $\mathbb R^n\to\mathbb R^n$ with invertible derivative at a
-point is a local diffeomorphism there
-([[thm-euclidean-inverse-function-theorem]]).
+[L2] A $C^1$ map $\mathbb R^n\to\mathbb R^n$ with invertible derivative at a point is a local diffeomorphism there ([[thm-euclidean-inverse-function-theorem]]).
 
 ## Proof
 

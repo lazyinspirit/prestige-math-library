@@ -35,9 +35,7 @@ $G/\Phi(G)\to H/\Phi(H)$ is surjective.
 
 **Given:** A continuous homomorphism $f:G\to H$ of finitely generated pro-$p$ groups.
 
-[L1] In a finitely generated pro-$p$ group, a subset topologically generates
-the group exactly when its image spans the Frattini quotient
-([[thm-topological-burnside-basis-theorem]]).
+[L1] In a finitely generated pro-$p$ group, a subset topologically generates the group exactly when its image spans the Frattini quotient ([[thm-topological-burnside-basis-theorem]]).
 
 ## Proof
 

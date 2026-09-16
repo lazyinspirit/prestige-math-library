@@ -46,10 +46,7 @@ but the rational number $3/1$ is not a convergent of $\sqrt6$.
 
 **Given:** The generalized Pell solution $3+\sqrt6$.
 
-[F1] If a reduced rational number $r/s$ satisfies
-$$\left|\sqrt D-\frac rs\right|<\frac1{2s^2},$$
-then $r/s$ is a convergent of $\sqrt D$
-([[thm-legendre-continued-fraction-criterion]]).
+[F1] If a reduced rational number $r/s$ satisfies $$\left|\sqrt D-\frac rs\right|<\frac1{2s^2},$$ then $r/s$ is a convergent of $\sqrt D$ ([[thm-legendre-continued-fraction-criterion]]).
 
 ## Counterexample
 

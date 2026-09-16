@@ -27,13 +27,9 @@ $$ \delta^*(p,uv)=\delta^*(\delta^*(p,u),v). $$
 
 ## Facts & Assumptions
 
-**Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$ with its unique extended
-transition function $\delta^*$, a state $p\in Q$, and words $u,v\in\Sigma^*$.
+**Given:** A DFA $D=(Q,\Sigma,\delta,q_0,F)$ with its unique extended transition function $\delta^*$, a state $p\in Q$, and words $u,v\in\Sigma^*$.
 
-[L1] By [[thm-existence-and-uniqueness-of-extended-dfa-transition]], the
-function $\delta^*$ satisfies $\delta^*(q,\varepsilon)=q$ and
-$\delta^*(q,xa)=\delta(\delta^*(q,x),a)$ for all states $q$, words $x$, and
-letters $a$.
+[L1] By [[thm-existence-and-uniqueness-of-extended-dfa-transition]], the function $\delta^*$ satisfies $\delta^*(q,\varepsilon)=q$ and $\delta^*(q,xa)=\delta(\delta^*(q,x),a)$ for all states $q$, words $x$, and letters $a$.
 
 ## Proof
 

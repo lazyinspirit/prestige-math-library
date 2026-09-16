@@ -33,15 +33,11 @@ exists in $\mathcal B$.
 
 ## Facts & Assumptions
 
-**Given:** An enriched adjunction $F\dashv_{\mathcal V}G$ and a weighted limit
-$\{W,T\}$ in $\mathcal B$.
+**Given:** An enriched adjunction $F\dashv_{\mathcal V}G$ and a weighted limit $\{W,T\}$ in $\mathcal B$.
 
-[L1] An enriched adjunction is a natural isomorphism
-$\mathcal B(FA,B)\cong\mathcal A(A,GB)$
-([[def-enriched-adjunction]]).
+[L1] An enriched adjunction is a natural isomorphism $\mathcal B(FA,B)\cong\mathcal A(A,GB)$ ([[def-enriched-adjunction]]).
 
-[L2] A weighted limit represents the enriched natural-transformation object
-against the hom-functor ([[def-enriched-weighted-limit]]).
+[L2] A weighted limit represents the enriched natural-transformation object against the hom-functor ([[def-enriched-weighted-limit]]).
 
 ## Proof
 

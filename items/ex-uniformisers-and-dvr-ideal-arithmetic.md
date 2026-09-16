@@ -39,11 +39,9 @@ $$ (\pi^m)+(\pi^n)=(\pi^{\min\{m,n\}}),\qquad (\pi^m)\cap(\pi^n)=(\pi^{\max\{m,n
 
 **Given:** A discrete valuation ring $V$ and two uniformisers $\pi,\pi'$.
 
-[F1] A uniformiser generates the maximal ideal of a DVR
-([[def-uniformising-parameter]]).
+[F1] A uniformiser generates the maximal ideal of a DVR ([[def-uniformising-parameter]]).
 
-[L1] Every nonzero ideal of a DVR is a power of the maximal ideal
-([[thm-ideals-in-a-dvr]]).
+[L1] Every nonzero ideal of a DVR is a power of the maximal ideal ([[thm-ideals-in-a-dvr]]).
 
 ## Verification
 

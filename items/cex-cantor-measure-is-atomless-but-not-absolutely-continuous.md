@@ -27,9 +27,7 @@ with respect to Lebesgue measure.
 
 **Given:** The Axiom of Countable Choice and the Cantor measure $\mu_c$.
 
-[L1] Assuming Countable Choice, the Cantor measure is an atomless probability measure singular with
-respect to Lebesgue measure.
-([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
+[L1] Assuming Countable Choice, the Cantor measure is an atomless probability measure singular with respect to Lebesgue measure. ([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
 
 ## Counterexample
 
@@ -38,7 +36,4 @@ respect to Lebesgue measure.
 1.1 By [L1], the measure $\mu_c$ is atomless. [L1]
 
 2.1 The same fact [L1] says that $\mu_c$ is singular and has total mass $1$. [step 1.1, L1]
-If it were also absolutely continuous with respect to Lebesgue measure, its
-concentration on a Lebesgue-null set would force its total mass to be $0$, a
-contradiction. Therefore atomlessness does not imply absolute continuity.
-[step 1.1, L1] ∎
+If it were also absolutely continuous with respect to Lebesgue measure, its concentration on a Lebesgue-null set would force its total mass to be $0$, a contradiction. Therefore atomlessness does not imply absolute continuity. [step 1.1, L1] ∎

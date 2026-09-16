@@ -34,17 +34,13 @@ In the Feferman–Levy model $N$:
 
 **Given:** The Feferman–Levy model $N\models\mathrm{ZF}$.
 
-[F1] [[thm-feferman-levy-reals-are-a-countable-union-of-countable-sets]]
-writes the reals as one countable union of countable layers.
+[F1] [[thm-feferman-levy-reals-are-a-countable-union-of-countable-sets]] writes the reals as one countable union of countable layers.
 
-[F2] [[thm-feferman-levy-reals-remain-uncountable]] proves that this union is
-uncountable.
+[F2] [[thm-feferman-levy-reals-remain-uncountable]] proves that this union is uncountable.
 
-[F3] [[cor-feferman-levy-omega-one-has-countable-cofinality]] gives
-$\operatorname{cf}^N(\omega_1)=\omega$.
+[F3] [[cor-feferman-levy-omega-one-has-countable-cofinality]] gives $\operatorname{cf}^N(\omega_1)=\omega$.
 
-[F4] [[cor-countable-choice-and-omega-one-cofinality]] proves in ZF that
-$\mathrm{AC}_\omega$ implies $\operatorname{cf}(\omega_1)=\omega_1$.
+[F4] [[cor-countable-choice-and-omega-one-cofinality]] proves in ZF that $\mathrm{AC}_\omega$ implies $\operatorname{cf}(\omega_1)=\omega_1$.
 
 [F5] [[def-countable-choice]] fixes the exact choice principle being refuted.
 

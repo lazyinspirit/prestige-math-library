@@ -37,9 +37,7 @@ $$n(f\circ\gamma,0)=3.$$
 
 **Given:** The circle $\gamma(t)=2e^{it}$ and the cubic polynomial $f(z)=z^3-1$.
 
-[L1] The logarithmic-derivative integral equals the winding number of the image
-contour, and on a null-homologous contour it also equals the zero-minus-pole
-count ([[thm-argument-principle-as-image-winding-number]]).
+[L1] The logarithmic-derivative integral equals the winding number of the image contour, and on a null-homologous contour it also equals the zero-minus-pole count ([[thm-argument-principle-as-image-winding-number]]).
 
 ## Verification
 

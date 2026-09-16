@@ -33,12 +33,9 @@ $\mathbf F_2\text{-}\mathbf{Mod}$ is exactly the diamond $M_3$.
 
 **Given:** The vector space $V=\mathbf F_2^2$.
 
-[L1] Subobjects form a lattice in every abelian category
-([[thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice]]).
+[L1] Subobjects form a lattice in every abelian category ([[thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice]]).
 
-[L2] The A-page counterexample identifies the same diamond pattern as
-non-distributive
-([[cex-a-subobject-lattice-need-not-be-distributive]]).
+[L2] The A-page counterexample identifies the same diamond pattern as non-distributive ([[cex-a-subobject-lattice-need-not-be-distributive]]).
 
 ## Verification
 

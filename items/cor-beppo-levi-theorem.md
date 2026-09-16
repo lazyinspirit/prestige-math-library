@@ -50,6 +50,4 @@ $$\int S\,d\mu=\sum_{k=0}^\infty \int f_k\,d\mu.$$
 increasing, and $S_n\uparrow S$ pointwise.
 
 2.1 By [L2], $\int S_n\,d\mu=\sum_{k<n}\int f_k\,d\mu$ for every $n$. Applying [step 1.1, L2, L3, algebra] ∎
-[L3] to step 1.1 gives
-$$\int S\,d\mu=\lim_n\int S_n\,d\mu=\lim_n\sum_{k<n}\int f_k\,d\mu,$$
-which is exactly the displayed series identity.
+[L3] to step 1.1 gives $$\int S\,d\mu=\lim_n\int S_n\,d\mu=\lim_n\sum_{k<n}\int f_k\,d\mu,$$ which is exactly the displayed series identity.

@@ -30,15 +30,11 @@ $\Re s > \Re s_0$ and therefore defines a holomorphic function there.
 
 ## Facts & Assumptions
 
-**Given:** A Dirichlet series $D(s)=\sum_{n \ge 1} a_n n^{-s}$ converging at
-$s_0$, and a compact set $K \subseteq \{s : \Re s > \Re s_0\}$.
+**Given:** A Dirichlet series $D(s)=\sum_{n \ge 1} a_n n^{-s}$ converging at $s_0$, and a compact set $K \subseteq \{s : \Re s > \Re s_0\}$.
 
-[L1] Abel summation for complex series rewrites
-$\sum_{n=M}^N u_n b_n$ in terms of the partial sums of $(u_n)$
-([[lem-abel-summation-for-complex-series]]).
+[L1] Abel summation for complex series rewrites $\sum_{n=M}^N u_n b_n$ in terms of the partial sums of $(u_n)$ ([[lem-abel-summation-for-complex-series]]).
 
-[L2] A locally uniform limit of holomorphic functions is holomorphic
-([[thm-weierstrass-convergence-holomorphic-functions]]).
+[L2] A locally uniform limit of holomorphic functions is holomorphic ([[thm-weierstrass-convergence-holomorphic-functions]]).
 
 ## Proof
 

@@ -38,9 +38,7 @@ $$D\det(A)[H]=\det(A)\operatorname{tr}(A^{-1}H).$$
 
 **Given:** An $n\times n$ matrix $A$ and a perturbation direction $H$.
 
-[L1] On the invertible locus, the derivative of inversion is
-$D\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$
-([[thm-derivative-of-matrix-inversion]]).
+[L1] On the invertible locus, the derivative of inversion is $D\operatorname{inv}(A)[H]=-A^{-1}HA^{-1}$ ([[thm-derivative-of-matrix-inversion]]).
 
 ## Proof
 **Proof technique:** direct.

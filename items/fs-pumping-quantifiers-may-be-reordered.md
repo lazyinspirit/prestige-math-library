@@ -32,8 +32,7 @@ of every sufficiently long word pumps.
 
 ## Facts & Assumptions
 
-**Given:** The regular language
-$$ O:=\{x\in\{0,1\}^*:|x|\text{ is odd}\}. $$
+**Given:** The regular language $$ O:=\{x\in\{0,1\}^*:|x|\text{ is odd}\}. $$
 
 [L1] By [[thm-pumping-lemma-for-regular-languages]], a regular language only guarantees the existence of a good decomposition for each sufficiently long word.
 

@@ -48,12 +48,7 @@ In an abelian category:
 
 **Given:** The named pullback and pushout situations in the statement.
 
-[L1] Each of the five claims has already been proved under the displayed names
-([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]],
-[[cor-the-pushout-of-a-monomorphism-is-a-monomorphism]],
-[[thm-in-a-pullback-square-the-induced-morphism-on-the-kernels-of-the-parallel-legs-is-an-isomorphism]],
-[[thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact]],
-[[thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian]]).
+[L1] Each of the five claims has already been proved under the displayed names ([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]], [[cor-the-pushout-of-a-monomorphism-is-a-monomorphism]], [[thm-in-a-pullback-square-the-induced-morphism-on-the-kernels-of-the-parallel-legs-is-an-isomorphism]], [[thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact]], [[thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian]]).
 
 ## Proof
 

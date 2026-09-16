@@ -88,22 +88,8 @@ No commutativity is assumed, which is why each claim is stated on both sides.
 
 ## Remarks
 
-- **These are the general statements; the field versions already in the library
-  are instances of them.** For a field $F$, claim 1 is [[lem-of-zero-mult]] and
-  claims 2 and 3 are [[lem-of-mult-neg]], both proved earlier from the field
-  axioms alone. Once [[lem-field-is-a-commutative-ring]] identifies a field as a
-  commutative ring, those two lemmas are exactly the present ones read in $F$.
-  The direction of generality matters for citation: a proof about an arbitrary
-  ring must use this lemma, never the field lemmas, since a ring need not be a
-  field.
+- **These are the general statements; the field versions already in the library are instances of them.** For a field $F$, claim 1 is [[lem-of-zero-mult]] and claims 2 and 3 are [[lem-of-mult-neg]], both proved earlier from the field axioms alone. Once [[lem-field-is-a-commutative-ring]] identifies a field as a commutative ring, those two lemmas are exactly the present ones read in $F$. The direction of generality matters for citation: a proof about an arbitrary ring must use this lemma, never the field lemmas, since a ring need not be a field.
 
-- **Claim 1 is where the additive group is doing the work.** The identity
-  $0 \cdot a = 0$ is not an axiom and does not follow from the multiplicative
-  structure; it follows from distributivity together with the fact that addition
-  cancels, which is available because $(R,+,0)$ is a group and not merely a
-  monoid.
+- **Claim 1 is where the additive group is doing the work.** The identity $0 \cdot a = 0$ is not an axiom and does not follow from the multiplicative structure; it follows from distributivity together with the fact that addition cancels, which is available because $(R,+,0)$ is a group and not merely a monoid.
 
-- **The last sentence of the statement is why the zero ring exists at all.** A
-  ring with $1 = 0$ collapses to one element, so requiring $1 \ne 0$, as
-  [[def-zero-divisor-and-integral-domain]] and [[def-division-ring]] do, is
-  exactly the requirement that the ring is not that one-element ring.
+- **The last sentence of the statement is why the zero ring exists at all.** A ring with $1 = 0$ collapses to one element, so requiring $1 \ne 0$, as [[def-zero-divisor-and-integral-domain]] and [[def-division-ring]] do, is exactly the requirement that the ring is not that one-element ring.

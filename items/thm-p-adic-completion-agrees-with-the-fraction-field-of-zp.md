@@ -39,19 +39,13 @@ $$\{x\in\mathbb Q_p:|x|_p\leq 1\}.$$
 
 ## Facts & Assumptions
 
-**Given:** A prime $p$, its completion field $\mathbb Q_p$, and the $(p)$-adic
-completion $\mathbb Z_p$ of $\mathbb Z$.
+**Given:** A prime $p$, its completion field $\mathbb Q_p$, and the $(p)$-adic completion $\mathbb Z_p$ of $\mathbb Z$.
 
-[L1] $\mathbb Q_p$ is a complete valued field obtained from rational Cauchy
-classes ([[def-field-of-p-adic-numbers]], [[thm-p-adic-completion-is-a-field]]).
+[L1] $\mathbb Q_p$ is a complete valued field obtained from rational Cauchy classes ([[def-field-of-p-adic-numbers]], [[thm-p-adic-completion-is-a-field]]).
 
-[L2] The $(p)$-adic completion of $\mathbb Z$ is the compatible-residue inverse
-limit, and the completion map has kernel $\bigcap_n p^n\mathbb Z = 0$
-([[def-adic-completion-of-a-module]],
-[[thm-kernel-and-universal-property-of-adic-completion]]).
+[L2] The $(p)$-adic completion of $\mathbb Z$ is the compatible-residue inverse limit, and the completion map has kernel $\bigcap_n p^n\mathbb Z = 0$ ([[def-adic-completion-of-a-module]], [[thm-kernel-and-universal-property-of-adic-completion]]).
 
-[L3] If two integers are coprime, Bezout's identity gives an inverse of either
-one modulo the other ([[thm-bezout-identity]]).
+[L3] If two integers are coprime, Bezout's identity gives an inverse of either one modulo the other ([[thm-bezout-identity]]).
 
 [L4] Prime factorisation is unique ([[thm-fundamental-theorem-of-arithmetic]]).
 

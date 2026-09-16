@@ -35,14 +35,11 @@ $\ker(\operatorname{ad})=Z(\mathfrak g)$.
 
 **Given:** A Lie algebra $\mathfrak g$ over $k$.
 
-[L1] Derivations satisfy the Lie Leibniz law of
-[[def-derivation-of-a-lie-algebra]].
+[L1] Derivations satisfy the Lie Leibniz law of [[def-derivation-of-a-lie-algebra]].
 
-[L2] The bracket of $\mathfrak g$ is alternating and satisfies Jacobi
-([[def-lie-algebra-over-a-field]]).
+[L2] The bracket of $\mathfrak g$ is alternating and satisfies Jacobi ([[def-lie-algebra-over-a-field]]).
 
-[L3] The center and ideal conditions are those of
-[[def-lie-subalgebra-ideal-and-center]].
+[L3] The center and ideal conditions are those of [[def-lie-subalgebra-ideal-and-center]].
 
 ## Proof
 

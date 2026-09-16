@@ -39,24 +39,17 @@ belongs to $G$.
 
 ## Facts & Assumptions
 
-**Given:** The embedded Lie subgroup $G\subseteq\operatorname{GL}_n(\mathbb R)$
-and $X\in T_IG$.
+**Given:** The embedded Lie subgroup $G\subseteq\operatorname{GL}_n(\mathbb R)$ and $X\in T_IG$.
 
-[F1] The Lie exponential is the time-one value of the one-parameter subgroup
-with initial velocity $X$. [[def-exponential-map-of-a-lie-group]].
+[F1] The Lie exponential is the time-one value of the one-parameter subgroup with initial velocity $X$. [[def-exponential-map-of-a-lie-group]].
 
-[F2] The scalar exponential series has infinite radius of convergence.
-[[lem-exponential-series-has-infinite-radius]].
+[F2] The scalar exponential series has infinite radius of convergence. [[lem-exponential-series-has-infinite-radius]].
 
-[F3] Linear matrix initial-value problems have unique solutions on each
-compact interval.
-[[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
+[F3] Linear matrix initial-value problems have unique solutions on each compact interval. [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]].
 
-[F4] Matrix multiplication and the identity matrix have their usual
-coordinate definitions. [[def-matrix-product-and-identity-matrix]].
+[F4] Matrix multiplication and the identity matrix have their usual coordinate definitions. [[def-matrix-product-and-identity-matrix]].
 
-[F5] The construction of [F1] carries the stated countable-choice
-assumption. [[def-countable-choice]].
+[F5] The construction of [F1] carries the stated countable-choice assumption. [[def-countable-choice]].
 
 ## Verification
 

@@ -39,34 +39,23 @@ $$f(xy)=f(x)+f(y)\quad(x,y>0),\qquad f(e)=1.$$
 
 ## Facts & Assumptions
 
-**Given:** A continuous $f:(0,\infty)\to\mathbb R$ satisfying the displayed
-functional equation and normalisation.
+**Given:** A continuous $f:(0,\infty)\to\mathbb R$ satisfying the displayed functional equation and normalisation.
 
-[F1] $E=L^{-1}$, so $E(L(x))=x$
-([[def-integral-exponential]]).
+[F1] $E=L^{-1}$, so $E(L(x))=x$ ([[def-integral-exponential]]).
 
-[L1] $E(a+b)=E(a)E(b)$
-([[cor-integral-exponential-addition-law]]).
+[L1] $E(a+b)=E(a)E(b)$ ([[cor-integral-exponential-addition-law]]).
 
-[L2] $E$ is differentiable
-([[thm-integral-exponential-solves-the-normalised-ivp]]), hence continuous
-([[cor-differentiable-implies-continuous]]).
+[L2] $E$ is differentiable ([[thm-integral-exponential-solves-the-normalised-ivp]]), hence continuous ([[cor-differentiable-implies-continuous]]).
 
-[L3] A composite of continuous functions is continuous
-([[thm-composition-of-continuous-functions]]).
+[L3] A composite of continuous functions is continuous ([[thm-composition-of-continuous-functions]]).
 
-[L4] A continuous additive function $g:\mathbb R\to\mathbb R$ has the form
-$g(t)=ct$ ([[thm-cauchy-functional-equation-regularity]]).
+[L4] A continuous additive function $g:\mathbb R\to\mathbb R$ has the form $g(t)=ct$ ([[thm-cauchy-functional-equation-regularity]]).
 
-[L5] $E=\exp$ ([[thm-integral-exponential-agrees-with-exponential]]) and
-$e=\exp(1)$ ([[def-real-exponential-function-and-e]]).
+[L5] $E=\exp$ ([[thm-integral-exponential-agrees-with-exponential]]) and $e=\exp(1)$ ([[def-real-exponential-function-and-e]]).
 
-[L6] $L=\log$ on $(0,\infty)$
-([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
+[L6] $L=\log$ on $(0,\infty)$ ([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
 
-[L7] The natural logarithm is continuous and satisfies
-$\log(xy)=\log x+\log y$
-([[thm-natural-logarithm-laws]]).
+[L7] The natural logarithm is continuous and satisfies $\log(xy)=\log x+\log y$ ([[thm-natural-logarithm-laws]]).
 
 ## Proof
 

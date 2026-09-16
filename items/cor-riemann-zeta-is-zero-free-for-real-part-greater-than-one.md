@@ -26,12 +26,9 @@ If $\operatorname{Re}s>1$, then $\zeta(s)\ne0$.
 
 **Given:** A complex number $s$ with $\operatorname{Re}s>1$.
 
-[L1] On $\operatorname{Re}s>1$,
-$$\zeta(s)=\prod_p (1-p^{-s})^{-1}$$
-([[thm-euler-product-for-riemann-zeta]]).
+[L1] On $\operatorname{Re}s>1$, $$\zeta(s)=\prod_p (1-p^{-s})^{-1}$$ ([[thm-euler-product-for-riemann-zeta]]).
 
-[L2] An absolutely convergent infinite product has nonzero value
-([[thm-absolute-convergence-criterion-for-complex-infinite-products]]).
+[L2] An absolutely convergent infinite product has nonzero value ([[thm-absolute-convergence-criterion-for-complex-infinite-products]]).
 
 ## Proof
 

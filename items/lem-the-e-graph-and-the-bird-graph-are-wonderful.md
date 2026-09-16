@@ -36,24 +36,15 @@ Equivalently, the $E$-graph and the Bird graph are wonderful.
 
 **Given:** The $E$-graph, the Bird graph, and the wonderfulness criterion.
 
-[L1] A finite family is wonderful if it satisfies either the star-subdivision
-obstruction or the special-vertex obstruction from the previous criterion
-([[lem-star-or-special-vertex-obstructions-force-wonderfulness]]).
+[L1] A finite family is wonderful if it satisfies either the star-subdivision obstruction or the special-vertex obstruction from the previous criterion ([[lem-star-or-special-vertex-obstructions-force-wonderfulness]]).
 
-[L2] Every graph on at most five vertices has the Erdős-Hajnal property
-([[thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property]]).
+[L2] Every graph on at most five vertices has the Erdős-Hajnal property ([[thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property]]).
 
-[L3] Substitution preserves the Erdős-Hajnal property
-([[thm-substitution-preserves-the-erdos-hajnal-property]]).
+[L3] Substitution preserves the Erdős-Hajnal property ([[thm-substitution-preserves-the-erdos-hajnal-property]]).
 
-[L4] The Bird graph and co-Bird are complements of one another, and $H^+$ is the
-graph obtained by adding a new vertex adjacent exactly to the two distinguished
-vertices
-([[def-bird-graph-and-co-bird-graph]], [[def-h-plus-and-h-minus-for-two-special-vertices]]).
+[L4] The Bird graph and co-Bird are complements of one another, and $H^+$ is the graph obtained by adding a new vertex adjacent exactly to the two distinguished vertices ([[def-bird-graph-and-co-bird-graph]], [[def-h-plus-and-h-minus-for-two-special-vertices]]).
 
-[A1] Let $H$ be the graph on vertices $v_1,\dots,v_6$ with edge set
-$$ \{v_1v_2,v_1v_3,v_1v_5,v_1v_6,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5,v_4v_6\}. $$
-Its distinguished vertices are $v_1$ and $v_2$.
+[A1] Let $H$ be the graph on vertices $v_1,\dots,v_6$ with edge set $$ \{v_1v_2,v_1v_3,v_1v_5,v_1v_6,v_2v_3,v_2v_4,v_2v_5,v_3v_5,v_4v_5,v_4v_6\}. $$ Its distinguished vertices are $v_1$ and $v_2$.
 
 ## Proof
 

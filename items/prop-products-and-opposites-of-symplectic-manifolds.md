@@ -36,11 +36,9 @@ is symplectic on $M\times N$.
 
 **Given:** Symplectic manifolds $(M,\omega)$ and $(N,\eta)$.
 
-[F1] A symplectic form is closed and pointwise nondegenerate.
-[[def-symplectic-form-and-symplectic-manifold]].
+[F1] A symplectic form is closed and pointwise nondegenerate. [[def-symplectic-form-and-symplectic-manifold]].
 
-[F2] Exterior differentiation commutes with pullback.
-[[thm-the-exterior-derivative-commutes-with-pullback]].
+[F2] Exterior differentiation commutes with pullback. [[thm-the-exterior-derivative-commutes-with-pullback]].
 
 ## Proof
 

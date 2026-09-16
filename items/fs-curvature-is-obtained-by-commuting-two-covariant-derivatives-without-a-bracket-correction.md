@@ -40,19 +40,11 @@ $-\nabla_{[X,Y]}Z$ is essential.
 
 **Given:** An affine connection and smooth vector fields and functions.
 
-[F1] An affine connection is function-linear in its differentiating field and
-satisfies the section Leibniz rule.
-[[def-affine-connection-on-a-smooth-manifold]],
-[[prop-connection-laws-in-directional-form]].
+[F1] An affine connection is function-linear in its differentiating field and satisfies the section Leibniz rule. [[def-affine-connection-on-a-smooth-manifold]], [[prop-connection-laws-in-directional-form]].
 
-[F2] The bracket satisfies
-$[X,fY]=f[X,Y]+X(f)Y$.
-[[prop-leibniz-rules-for-the-lie-bracket-with-function-multiples]].
+[F2] The bracket satisfies $[X,fY]=f[X,Y]+X(f)Y$. [[prop-leibniz-rules-for-the-lie-bracket-with-function-multiples]].
 
-[F3] Curvature is the bracket-corrected commutator, and that corrected
-operation is function-linear in all three fields.
-[[def-curvature-of-an-affine-connection]],
-[[lem-curvature-is-c-infinity-linear-in-all-three-vector-fields]].
+[F3] Curvature is the bracket-corrected commutator, and that corrected operation is function-linear in all three fields. [[def-curvature-of-an-affine-connection]], [[lem-curvature-is-c-infinity-linear-in-all-three-vector-fields]].
 
 ## Refutation
 

@@ -31,42 +31,27 @@ Lie algebra over any characteristic-zero field is completely reducible.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional semisimple characteristic-zero Lie algebra
-$\mathfrak g$, a finite-dimensional $\mathfrak g$-module $V$, and a
-submodule $W\subseteq V$.
+**Given:** A finite-dimensional semisimple characteristic-zero Lie algebra $\mathfrak g$, a finite-dimensional $\mathfrak g$-module $V$, and a submodule $W\subseteq V$.
 
-[L1] A representation is completely reducible when it is an algebraic direct
-sum of irreducible representations; the zero representation is the empty sum
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L1] A representation is completely reducible when it is an algebraic direct sum of irreducible representations; the zero representation is the empty sum ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
-[L2] A Casimir element from a nondegenerate invariant form acts as an
-intertwiner ([[lem-the-casimir-operator-is-basis-independent-and-intertwining]]).
+[L2] A Casimir element from a nondegenerate invariant form acts as an intertwiner ([[lem-the-casimir-operator-is-basis-independent-and-intertwining]]).
 
-[L3] Over an algebraically closed field, every intertwiner of a finite-
-dimensional irreducible module is scalar
-([[cor-schurs-lemma-for-irreducible-lie-algebra-representations]]).
+[L3] Over an algebraically closed field, every intertwiner of a finite- dimensional irreducible module is scalar ([[cor-schurs-lemma-for-irreducible-lie-algebra-representations]]).
 
-[L4] The Killing form of a semisimple characteristic-zero algebra is
-nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
+[L4] The Killing form of a semisimple characteristic-zero algebra is nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
 
-[L5] A semisimple algebra is perfect
-([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
+[L5] A semisimple algebra is perfect ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 
-[L6] Cartan's solvability criterion applies to the trace form of any
-finite-dimensional representation ([[thm-cartans-solvability-criterion]]).
+[L6] Cartan's solvability criterion applies to the trace form of any finite-dimensional representation ([[thm-cartans-solvability-criterion]]).
 
-[L7] A nondegenerate invariant form and its dual bases define the Casimir
-operator used below
-([[def-casimir-operator-relative-to-an-invariant-form]]).
+[L7] A nondegenerate invariant form and its dual bases define the Casimir operator used below ([[def-casimir-operator-relative-to-an-invariant-form]]).
 
-[L8] A quotient of a semisimple algebra is semisimple
-([[prop-ideals-and-quotients-of-semisimple-lie-algebras]]).
+[L8] A quotient of a semisimple algebra is semisimple ([[prop-ideals-and-quotients-of-semisimple-lie-algebras]]).
 
-[L9] Every representation trace form is symmetric and invariant
-([[prop-trace-forms-are-symmetric-and-invariant]]).
+[L9] Every representation trace form is symmetric and invariant ([[prop-trace-forms-are-symmetric-and-invariant]]).
 
-[L10] The radical of an invariant symmetric form is an ideal
-([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
+[L10] The radical of an invariant symmetric form is an ideal ([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
 
 ## Proof
 

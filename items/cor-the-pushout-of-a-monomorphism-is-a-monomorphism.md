@@ -31,11 +31,9 @@ In an abelian category, the pushout of a monomorphism is a monomorphism.
 
 **Given:** An abelian category and a pushout square whose left leg is monic.
 
-[L1] The opposite of an abelian category is abelian
-([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L1] The opposite of an abelian category is abelian ([[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L2] In an abelian category, pullbacks of epimorphisms are epimorphisms
-([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
+[L2] In an abelian category, pullbacks of epimorphisms are epimorphisms ([[thm-the-pullback-of-an-epimorphism-is-an-epimorphism]]).
 
 ## Proof
 

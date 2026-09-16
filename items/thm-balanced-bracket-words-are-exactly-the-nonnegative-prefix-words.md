@@ -76,13 +76,6 @@ of ballot words of length $2n$, hence onto $\mathcal{D}_n$ through step words
 
 ## Remarks
 
-- **What the theorem buys.** The grammar is the definition, so this is the
-  statement that the left-to-right condition a reader would have written down is
-  the same notion. Without it the counting arguments would have to be run twice,
-  once for each description, and the two would never be known to agree.
+- **What the theorem buys.** The grammar is the definition, so this is the statement that the left-to-right condition a reader would have written down is the same notion. Without it the counting arguments would have to be run twice, once for each description, and the two would never be known to agree.
 
-- **Where the first-return lemma enters.** Only in the harder inclusion, and only
-  to produce the factorisation the grammar needs. The lemma is a statement about
-  paths, and the alphabet bijection of step 1.1 is what makes it applicable to
-  words; the transport is stated as a bijection rather than left as an
-  identification.
+- **Where the first-return lemma enters.** Only in the harder inclusion, and only to produce the factorisation the grammar needs. The lemma is a statement about paths, and the alphabet bijection of step 1.1 is what makes it applicable to words; the transport is stated as a bijection rather than left as an identification.

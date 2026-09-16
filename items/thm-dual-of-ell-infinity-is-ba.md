@@ -40,12 +40,9 @@ additive integral $I_\nu$.
 
 ## Facts & Assumptions
 
-[L1] For each finite-variation charge, $I_\nu$ is a bounded functional and
-$\|I_\nu\|=|\nu|(\mathbb N)$
-([[lem-finitely-additive-integral-is-well-defined-and-isometric]]).
+[L1] For each finite-variation charge, $I_\nu$ is a bounded functional and $\|I_\nu\|=|\nu|(\mathbb N)$ ([[lem-finitely-additive-integral-is-well-defined-and-isometric]]).
 
-[L2] The dual consists of bounded scalar-valued linear functionals with the
-operator norm ([[def-dual-space-of-a-normed-space]]).
+[L2] The dual consists of bounded scalar-valued linear functionals with the operator norm ([[def-dual-space-of-a-normed-space]]).
 
 ## Proof
 
@@ -57,8 +54,7 @@ operator norm ([[def-dual-space-of-a-normed-space]]).
 
 $$\sum_j|\nu_\varphi(A_j)| =\varphi\left(\sum_jc_j\mathbf1_{A_j}\right)\le\|\varphi\|.$$
 
-Thus $\nu_\varphi\in ba$ and $\|\nu_\varphi\|_{ba}\le\|\varphi\|$.
-[L2, finite additivity, phases]
+Thus $\nu_\varphi\in ba$ and $\|\nu_\varphi\|_{ba}\le\|\varphi\|$. [L2, finite additivity, phases]
 
 2.1 By construction, $I_{\nu_\varphi}(\mathbf1_A)=\varphi(\mathbf1_A)$. [given, L1, step 1.1] Linearity gives equality on finite-range sequences, and density plus boundedness gives $I_{\nu_\varphi}=\varphi$ on $\ell^\infty$. [L1, step 1.1, algebra]
 

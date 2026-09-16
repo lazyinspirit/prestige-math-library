@@ -28,17 +28,11 @@ language" is false.
 
 ## Facts & Assumptions
 
-**Given:** The ambiguous expression grammar
-$$ E\to E+E\mid E*E\mid(E)\mid a\mid b, $$
-and the precedence grammar
-$$ E\to E+T\mid T,\qquad T\to T*F\mid F,\qquad F\to(E)\mid a\mid b. $$
+**Given:** The ambiguous expression grammar $$ E\to E+E\mid E*E\mid(E)\mid a\mid b, $$ and the precedence grammar $$ E\to E+T\mid T,\qquad T\to T*F\mid F,\qquad F\to(E)\mid a\mid b. $$
 
-[A1] The statement refuted is: every ambiguous CFG generates an inherently
-ambiguous language.
+[A1] The statement refuted is: every ambiguous CFG generates an inherently ambiguous language.
 
-[L1] A context-free language is inherently ambiguous exactly when every
-context-free grammar generating it is ambiguous, by
-[[def-ambiguity-and-inherent-ambiguity]].
+[L1] A context-free language is inherently ambiguous exactly when every context-free grammar generating it is ambiguous, by [[def-ambiguity-and-inherent-ambiguity]].
 
 ## Counterexample
 

@@ -34,16 +34,11 @@ $R$-module $M:=F(1)$, and then $F(n)\cong M^{\oplus n}$ for every $n$.
 
 **Given:** An additive functor $F:\mathbf{Mat}_R\to\mathbf{Ab}$.
 
-[L1] Additive functors out of the one-object ring category are exactly left
-$R$-modules
-([[thm-additive-functors-from-a-ring-to-abelian-groups-are-left-modules]]).
+[L1] Additive functors out of the one-object ring category are exactly left $R$-modules ([[thm-additive-functors-from-a-ring-to-abelian-groups-are-left-modules]]).
 
-[L2] The matrix category is equivalent to the finitely generated free modules
-([[thm-the-matrix-category-is-equivalent-to-the-finitely-generated-free-modules]]).
+[L2] The matrix category is equivalent to the finitely generated free modules ([[thm-the-matrix-category-is-equivalent-to-the-finitely-generated-free-modules]]).
 
-[L3] Between additive categories, additivity is equivalent to preserving finite
-biproducts
-([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
+[L3] Between additive categories, additivity is equivalent to preserving finite biproducts ([[thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts]]).
 
 ## Verification
 

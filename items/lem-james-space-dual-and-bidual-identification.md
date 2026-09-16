@@ -53,16 +53,11 @@ canonical image of $J$ is the summand with $\lambda=0$.
 
 [A1] Countable Choice holds ([[def-countable-choice]]).
 
-[L1] $J$ is Banach, $c_{00}$ is dense, and its coordinate truncations and
-tails are contractions converging strongly to the identity
-([[thm-james-space-is-complete-and-separable]]).
+[L1] $J$ is Banach, $c_{00}$ is dense, and its coordinate truncations and tails are contractions converging strongly to the identity ([[thm-james-space-is-complete-and-separable]]).
 
-[L2] The defining James formula contains $\ell^2$ and satisfies
-$\|x\|_J\le\sqrt2\|x\|_2$ for every $x\in\ell^2$
-([[lem-james-formula-defines-a-norm]]).
+[L2] The defining James formula contains $\ell^2$ and satisfies $\|x\|_J\le\sqrt2\|x\|_2$ for every $x\in\ell^2$ ([[lem-james-formula-defines-a-norm]]).
 
-[L3] The real dual of $\ell^2$ is represented uniquely by $\ell^2$ sequences
-under the series pairing ([[cor-ell-p-duality-by-counting-measure]]).
+[L3] The real dual of $\ell^2$ is represented uniquely by $\ell^2$ sequences under the series pairing ([[cor-ell-p-duality-by-counting-measure]]).
 
 ## Proof
 
@@ -80,23 +75,13 @@ under the series pairing ([[cor-ell-p-duality-by-counting-measure]]).
 
 $$R(\xi)^2\le2\sum_{j\ge1}j^{-2}<\infty,$$
 
-where $R=\sup_pr_p$; the equivalence in [L1]'s proof gives $\xi\in J$.
-But
-$\langle y,\Pi_{N_k}\xi\rangle
-\ge\varepsilon\sum_{j<k}j^{-1}$ is unbounded, whereas [L1] makes
-$\|\Pi_{N_k}\xi\|_J\le\|\xi\|_J$. This contradicts $y\in J^*$, proving
-$\Pi_Ny\to y$. [L1, step 3.1, block calculation]
+where $R=\sup_pr_p$; the equivalence in [L1]'s proof gives $\xi\in J$. But $\langle y,\Pi_{N_k}\xi\rangle \ge\varepsilon\sum_{j<k}j^{-1}$ is unbounded, whereas [L1] makes $\|\Pi_{N_k}\xi\|_J\le\|\xi\|_J$. This contradicts $y\in J^*$, proving $\Pi_Ny\to y$. [L1, step 3.1, block calculation]
 
 5.1 Let $\Lambda\in J^{**}$ and set $z_n=\Lambda(e_n)$. Since $\|e_n\|_{J^*}=1$, $z$ is bounded. By step 4.1, [given, step 4.1]
 
 $$\Lambda(y)=\lim_N\Lambda(\Pi_Ny) =\lim_N\sum_{n\le N}y_nz_n.$$
 
-For each $p$, the gradients of the finite Euclidean seminorms $q_p$ and $r_p$
-are explicit finite-support functionals of $J^*$ of norm at most one (because
-$q_p(x),r_p(x)\le\|x\|_J$). Evaluating them on $z$ gives
-$q_p(z),r_p(z)\le\|\Lambda\|$. Hence
-$\sup_p\max\{q_p(z),r_p(z)\}\le\|\Lambda\|$. [step 4.1, finite Euclidean
-duality]
+For each $p$, the gradients of the finite Euclidean seminorms $q_p$ and $r_p$ are explicit finite-support functionals of $J^*$ of norm at most one (because $q_p(x),r_p(x)\le\|x\|_J$). Evaluating them on $z$ gives $q_p(z),r_p(z)\le\|\Lambda\|$. Hence $\sup_p\max\{q_p(z),r_p(z)\}\le\|\Lambda\|$. [step 4.1, finite Euclidean duality]
 
 6.1 Conversely, suppose bounded $z$ has [given, step 5.1] $B:=\sup_p\max\{q_p(z),r_p(z)\}<\infty$. It is Cauchy: otherwise some $\varepsilon>0$ permits recursively choosing the lexicographically least $p_1<q_1<p_2<q_2<\cdots$ with $|z_{p_j}-z_{q_j}|\ge\varepsilon$; then the cyclic variation on the first $2k$ indices is at least $\varepsilon\sqrt{k/2}$, contradicting $B<\infty$. Let $\lambda=\lim_nz_n$ and $x=z-\lambda\mathbf1$. Then $x\in c_0$ and $q_p(x)=q_p(z)$, so $x\in J$. [algebra]
 
@@ -104,9 +89,6 @@ duality]
 
 $$\Lambda_z(y):=\langle y,x\rangle+\lambda\lim_Nh_N(y) =\lim_N\langle y,\Pi_Nz\rangle$$
 
-is well-defined and linear. A tuple crossing the truncation point turns its
-cyclic variation into $r_{p'}(z)$, while a tuple on one side gives either zero
-or $q_p(z)$; therefore $\|\Pi_Nz\|_J\le B$. Taking limits yields
-$|\Lambda_z(y)|\le B\|y\|_{J^*}$. [step 4.1, step 6.1, truncation cases]
+is well-defined and linear. A tuple crossing the truncation point turns its cyclic variation into $r_{p'}(z)$, while a tuple on one side gives either zero or $q_p(z)$; therefore $\|\Pi_Nz\|_J\le B$. Taking limits yields $|\Lambda_z(y)|\le B\|y\|_{J^*}$. [step 4.1, step 6.1, truncation cases]
 
 8.1 Step 5.1 applied to $\Lambda_z$ gives the reverse norm inequality, so [given, step 5.1, step 6.1, step 7.1] $\|\Lambda_z\|=B$. Steps 5.1 and 7.1 are inverse constructions and prove the isometric bidual model. Step 6.1 gives the unique splitting $z=(z-\lambda\mathbf1)+\lambda\mathbf1$; since elements of $J$ tend to zero, the canonical image is exactly $\lambda=0$. [step 5.1, 6.1, 7.1] ∎

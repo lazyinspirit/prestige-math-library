@@ -36,17 +36,13 @@ where $P(S)$ is the projective cover of the simple module $S$.
 
 **Given:** The finite group algebra $A=k[G]$ over a splitting field $k$.
 
-[L1] Finite-dimensional modules decompose uniquely into indecomposables
-([[thm-krull-schmidt-for-finite-dimensional-kg-modules]]).
+[L1] Finite-dimensional modules decompose uniquely into indecomposables ([[thm-krull-schmidt-for-finite-dimensional-kg-modules]]).
 
-[L2] Indecomposable projectives correspond to simple heads
-([[thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules]]).
+[L2] Indecomposable projectives correspond to simple heads ([[thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules]]).
 
-[L3] The quotient $A/J(A)$ is semisimple
-([[thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple]]).
+[L3] The quotient $A/J(A)$ is semisimple ([[thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple]]).
 
-[F1] A splitting field is one over which the simple endomorphism rings are
-scalars ([[def-splitting-field-for-a-finite-group]]).
+[F1] A splitting field is one over which the simple endomorphism rings are scalars ([[def-splitting-field-for-a-finite-group]]).
 
 ## Proof
 

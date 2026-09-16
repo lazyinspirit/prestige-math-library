@@ -89,16 +89,8 @@ $\lvert B\rvert \ge 1$.
 
 ## Remarks
 
-- **Where the choice of $b$ sits.** A single element is taken from a single
-  nonempty set, which is an ordinary existential instantiation and not a choice
-  principle. Nothing in the argument selects a point of every member of a family.
+- **Where the choice of $b$ sits.** A single element is taken from a single nonempty set, which is an ordinary existential instantiation and not a choice principle. Nothing in the argument selects a point of every member of a family.
 
-- **$A^{B}$ here is a bare set.** The same set carries a vector space structure
-  over a field in [[def-function-space]], much later in the reading order; that
-  structure is not used, and this theorem is a count and nothing more.
+- **$A^{B}$ here is a bare set.** The same set carries a vector space structure over a field in [[def-function-space]], much later in the reading order; that structure is not used, and this theorem is a count and nothing more.
 
-- **The exponent notation is not an accident.** $\lvert A\rvert^{\lvert B\rvert}$
-  counts the functions $B \to A$, and $\lvert A\rvert^{n}$ is by clause (e) of
-  [[def-nat-power]] the product of $n$ copies of $\lvert A\rvert$: one factor for
-  each element of the domain, which is exactly what the inductive step does one
-  point at a time.
+- **The exponent notation is not an accident.** $\lvert A\rvert^{\lvert B\rvert}$ counts the functions $B \to A$, and $\lvert A\rvert^{n}$ is by clause (e) of [[def-nat-power]] the product of $n$ copies of $\lvert A\rvert$: one factor for each element of the domain, which is exactly what the inductive step does one point at a time.

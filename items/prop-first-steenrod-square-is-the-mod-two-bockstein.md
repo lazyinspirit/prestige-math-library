@@ -40,24 +40,17 @@ This equality, including its residue-lift calculation, requires no AC.
 
 ## Facts & Assumptions
 
-**Given:** A space $X$, a nonnegative degree $n$, and
-$x\in H^n(X;\mathbb F_2)$.
+**Given:** A space $X$, a nonnegative degree $n$, and $x\in H^n(X;\mathbb F_2)$.
 
-[F1] The displayed cyclic coefficient sequence defines the mod-two Bockstein,
-and least residue representatives supply its lifts without AC
-([[def-bockstein-connecting-operation]]).
+[F1] The displayed cyclic coefficient sequence defines the mod-two Bockstein, and least residue representatives supply its lifts without AC ([[def-bockstein-connecting-operation]]).
 
-[F2] The choice-free parity recurrence gives
-$\beta Sq^j=Sq^{j+1}$ when $j$ is even
-([[lem-bockstein-square-parity-recurrence]]).
+[F2] The choice-free parity recurrence gives $\beta Sq^j=Sq^{j+1}$ when $j$ is even ([[lem-bockstein-square-parity-recurrence]]).
 
-[F3] The zero square is the identity in every degree
-([[prop-steenrod-square-normalization-instability-and-top-square]]).
+[F3] The zero square is the identity in every degree ([[prop-steenrod-square-normalization-instability-and-top-square]]).
 
 ## Proof
 
-**Proof technique:** specialize the proved Bockstein recurrence at the zero
-square.
+**Proof technique:** specialize the proved Bockstein recurrence at the zero square.
 
 1.1 Apply the parity recurrence at $j=0$. [given, F2, F3]
 

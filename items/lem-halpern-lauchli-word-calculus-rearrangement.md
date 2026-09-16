@@ -35,9 +35,7 @@ $$\forall a_1\cdots\forall a_d\exists x_1\cdots\exists x_d \ \vdash_d\ \exists A
 
 **Given:** A positive integer $d$ and the two displayed endpoint words.
 
-[F1] The language $L_d$, elementary commutations, matched-pair replacement,
-finite block permutation, and $\vdash_d$ are exactly the finite calculus in
-the preceding definition. [[def-halpern-lauchli-finite-word-calculus]]
+[F1] The language $L_d$, elementary commutations, matched-pair replacement, finite block permutation, and $\vdash_d$ are exactly the finite calculus in the preceding definition. [[def-halpern-lauchli-finite-word-calculus]]
 
 ## Proof
 

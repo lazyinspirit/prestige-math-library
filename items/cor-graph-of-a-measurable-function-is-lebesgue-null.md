@@ -28,15 +28,13 @@ is Lebesgue measurable and has $(n+1)$-dimensional Lebesgue measure zero.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, a positive integer $n$, and a Lebesgue
-measurable function $f : \mathbb R^n \to \mathbb R$.
+**Given:** The Axiom of Countable Choice, a positive integer $n$, and a Lebesgue measurable function $f : \mathbb R^n \to \mathbb R$.
 
 [L1] Arithmetic operations preserve measurability. ([[thm-arithmetic-and-lattice-operations-preserve-measurability]])
 
 [L2] Tonelli's theorem holds on sigma-finite products. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]])
 
-[L3] Assuming countable choice, countable subsets of Euclidean space are
-Lebesgue null. ([[prop-countable-subsets-of-rn-are-lebesgue-null]])
+[L3] Assuming countable choice, countable subsets of Euclidean space are Lebesgue null. ([[prop-countable-subsets-of-rn-are-lebesgue-null]])
 
 ## Proof
 

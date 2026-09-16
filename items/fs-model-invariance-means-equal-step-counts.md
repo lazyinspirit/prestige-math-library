@@ -34,9 +34,7 @@ exactly the same number of steps.
 
 [L1] Polynomial-time and polynomial-space computation are model-invariant only up to asymptotic overhead, by [[prop-polynomial-time-and-space-are-model-invariant]].
 
-[L2] A one-tape machine is the $k=1$ case of the deterministic multitape model,
-whose transitions read, write, and move each tape head once per step
-([[def-multitape-and-nondeterministic-machines]]).
+[L2] A one-tape machine is the $k=1$ case of the deterministic multitape model, whose transitions read, write, and move each tape head once per step ([[def-multitape-and-nondeterministic-machines]]).
 
 ## Refutation
 

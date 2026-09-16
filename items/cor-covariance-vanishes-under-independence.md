@@ -33,13 +33,9 @@ Thus independence implies zero covariance. The converse is false in general.
 
 **Given:** Independent square-integrable real random variables $X$ and $Y$.
 
-[L1] Expectations factor for products of integrable independent random
-variables. ([[thm-factorization-of-expectations-for-independent-variables]])
+[L1] Expectations factor for products of integrable independent random variables. ([[thm-factorization-of-expectations-for-independent-variables]])
 
-[L2] Covariance satisfies
-$\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]$.
-([[def-moments-variance-and-covariance]],
-[[lem-variance-and-covariance-identities-for-random-variables]])
+[L2] Covariance satisfies $\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y]$. ([[def-moments-variance-and-covariance]], [[lem-variance-and-covariance-identities-for-random-variables]])
 
 ## Proof
 

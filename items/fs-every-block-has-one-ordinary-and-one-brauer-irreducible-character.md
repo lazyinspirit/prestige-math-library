@@ -30,11 +30,9 @@ irreducible Brauer character.
 
 **Given:** The cyclic group $C_p$ at the prime $p$.
 
-[L1] Blocks partition the ordinary and Brauer irreducible characters
-([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
+[L1] Blocks partition the ordinary and Brauer irreducible characters ([[thm-blocks-partition-ordinary-and-brauer-irreducible-characters]]).
 
-[L2] After ordering by blocks, the decomposition matrix is block diagonal
-([[prop-decomposition-matrix-is-block-diagonal-after-block-ordering]]).
+[L2] After ordering by blocks, the decomposition matrix is block diagonal ([[prop-decomposition-matrix-is-block-diagonal-after-block-ordering]]).
 
 ## Refutation
 

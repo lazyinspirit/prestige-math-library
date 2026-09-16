@@ -36,11 +36,9 @@ form a basis of $U(\mathfrak h)$.
 
 ## Facts & Assumptions
 
-**Given:** The Heisenberg Lie algebra with the displayed supplied ordered
-basis.
+**Given:** The Heisenberg Lie algebra with the displayed supplied ordered basis.
 
-[L1] PBW gives a basis of weakly increasing monomials for any supplied ordered
-basis ([[thm-poincare-birkhoff-witt]]).
+[L1] PBW gives a basis of weakly increasing monomials for any supplied ordered basis ([[thm-poincare-birkhoff-witt]]).
 
 ## Verification
 

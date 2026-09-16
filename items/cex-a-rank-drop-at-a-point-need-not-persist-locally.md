@@ -31,11 +31,9 @@ neighbourhood of that point.
 
 **Given:** The map $f(x)=x^2$ on $\mathbb R$.
 
-[F1] The displayed claim is the false statement under discussion
-([[fs-constant-rank-at-one-point-implies-constant-rank-nearby]]).
+[F1] The displayed claim is the false statement under discussion ([[fs-constant-rank-at-one-point-implies-constant-rank-nearby]]).
 
-[L1] The derivative of $x^2$ is $2x$
-([[lem-derivative-of-a-power]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]).
+[L1] The derivative of $x^2$ is $2x$ ([[lem-derivative-of-a-power]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]).
 
 ## Counterexample
 **Proof technique:** direct.

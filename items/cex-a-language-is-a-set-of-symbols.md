@@ -31,11 +31,9 @@ $\Sigma$" is false.
 
 **Given:** The binary alphabet $\Sigma=\{0,1\}$ and the set $L=\{01\}$.
 
-[A1] The statement refuted is: every language over an alphabet $\Sigma$ is a
-subset of $\Sigma$.
+[A1] The statement refuted is: every language over an alphabet $\Sigma$ is a subset of $\Sigma$.
 
-[L1] A language over $\Sigma$ is a subset of $\Sigma^*$ by
-[[def-language-over-an-alphabet]].
+[L1] A language over $\Sigma$ is a subset of $\Sigma^*$ by [[def-language-over-an-alphabet]].
 
 ## Counterexample
 

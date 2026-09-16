@@ -37,20 +37,13 @@ $F=f$ on $\Omega\setminus H$.
 
 ## Facts & Assumptions
 
-**Given:** A domain $\Omega\subseteq\mathbb C^m$, a holomorphic function
-$f:\Omega\setminus H\to\mathbb C$, and local boundedness near the coordinate
-hyperplane $H$.
+**Given:** A domain $\Omega\subseteq\mathbb C^m$, a holomorphic function $f:\Omega\setminus H\to\mathbb C$, and local boundedness near the coordinate hyperplane $H$.
 
-[L1] A bounded punctured slice extends holomorphically, and the missing value
-depends holomorphically on the remaining parameters
-([[lem-bounded-punctured-slice-has-holomorphic-parameter-extension]]).
+[L1] A bounded punctured slice extends holomorphically, and the missing value depends holomorphically on the remaining parameters ([[lem-bounded-punctured-slice-has-holomorphic-parameter-extension]]).
 
-[L2] A holomorphic function on a connected open set is determined by its values
-on a nonempty open subset
-([[thm-identity-theorem-in-several-complex-variables]]).
+[L2] A holomorphic function on a connected open set is determined by its values on a nonempty open subset ([[thm-identity-theorem-in-several-complex-variables]]).
 
-[L3] Holomorphic extension means agreement on some nonempty open overlap
-([[def-holomorphic-extension-and-domain-of-holomorphy]]).
+[L3] Holomorphic extension means agreement on some nonempty open overlap ([[def-holomorphic-extension-and-domain-of-holomorphy]]).
 
 ## Proof
 

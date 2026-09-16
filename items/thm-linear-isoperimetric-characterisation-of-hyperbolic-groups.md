@@ -40,8 +40,7 @@ Kampen diagram with at most $C|w|$ $2$-cells.
 
 [A2] A finite presentation with linear isoperimetric inequality yields uniformly thin geodesic bigons, and hence a hyperbolic Cayley graph.
 
-[L1] Hyperbolic groups admit finite Dehn presentations
-([[thm-hyperbolic-groups-admit-finite-dehn-presentations]]).
+[L1] Hyperbolic groups admit finite Dehn presentations ([[thm-hyperbolic-groups-admit-finite-dehn-presentations]]).
 
 ## Proof
 

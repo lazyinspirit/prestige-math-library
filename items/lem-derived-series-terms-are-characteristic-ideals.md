@@ -33,16 +33,11 @@ $f(\mathfrak g^{(r)})=\mathfrak g^{(r)}$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$, an automorphism
-$f:\mathfrak g\to\mathfrak g$, and an integer $r\geq0$.
+**Given:** A Lie algebra $\mathfrak g$, an automorphism $f:\mathfrak g\to\mathfrak g$, and an integer $r\geq0$.
 
-[L1] The derived series starts at $\mathfrak g$ and replaces each term $I$ by
-$[I,I]$; every term is an ideal
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] The derived series starts at $\mathfrak g$ and replaces each term $I$ by $[I,I]$; every term is an ideal ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] A Lie-algebra homomorphism is linear and satisfies
-$f([x,y])=[f(x),f(y)]$
-([[def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]]).
+[L2] A Lie-algebra homomorphism is linear and satisfies $f([x,y])=[f(x),f(y)]$ ([[def-homomorphism-of-possibly-infinite-dimensional-lie-algebras]]).
 
 ## Proof
 

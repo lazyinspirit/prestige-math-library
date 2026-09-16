@@ -82,11 +82,6 @@ $$\operatorname{Nat}(F,G)=\int_{c}\mathcal D(Fc,Gc).$$
 
 ## Remarks
 
-The two size hypotheses do different work in this sufficient construction.
-Local smallness of $\mathcal D$ makes the integrand $\mathbf{Set}$-valued, and
-smallness of $\mathcal C$ guarantees that the collection of natural
-transformations is a set. Smallness is not necessary for every particular pair
-of functors: over a large source the natural transformations can still happen
-to form a set. No such large-source case is asserted by this theorem.
+The two size hypotheses do different work in this sufficient construction. Local smallness of $\mathcal D$ makes the integrand $\mathbf{Set}$-valued, and smallness of $\mathcal C$ guarantees that the collection of natural transformations is a set. Smallness is not necessary for every particular pair of functors: over a large source the natural transformations can still happen to form a set. No such large-source case is asserted by this theorem.
 
 Identity morphisms of $\mathcal C$ impose nothing: at $f=1_c$ the condition of step 2.1 reads $\phi_c(y)=\phi_c(y)$. If $\mathcal C$ is discrete the wedge condition is vacuous and the end is the product of the sets $\mathcal D(Fc,Gc)$, which is also what an unconstrained family is.

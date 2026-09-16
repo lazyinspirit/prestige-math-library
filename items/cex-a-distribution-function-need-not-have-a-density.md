@@ -30,11 +30,9 @@ A distribution function need not arise from a Lebesgue density.
 
 ## Facts & Assumptions
 
-**Given:** A Bernoulli random variable $X$ with $\mathbb P(X=1)=p$ and
-$\mathbb P(X=0)=1-p$, where $0<p<1$.
+**Given:** A Bernoulli random variable $X$ with $\mathbb P(X=1)=p$ and $\mathbb P(X=0)=1-p$, where $0<p<1$.
 
-[L1] The cumulative distribution function is $F_X(x)=\mathbb P(X\le x)$
-([[def-cumulative-distribution-function-of-a-random-variable]]).
+[L1] The cumulative distribution function is $F_X(x)=\mathbb P(X\le x)$ ([[def-cumulative-distribution-function-of-a-random-variable]]).
 
 [L2] Atoms of a law are positive point masses ([[def-atom-and-continuity-point-of-a-law]]).
 

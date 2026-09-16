@@ -33,13 +33,9 @@ The graph $P_4$ has the Erdős-Hajnal property.
 
 **Given:** The four-vertex path $P_4$.
 
-[L1] Every finite $P_4$-free graph $G$ contains a clique or a stable set of size
-at least $\sqrt{|V(G)|}$
-([[cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order]]).
+[L1] Every finite $P_4$-free graph $G$ contains a clique or a stable set of size at least $\sqrt{|V(G)|}$ ([[cor-p-four-free-graphs-have-a-clique-or-stable-set-of-size-at-least-square-root-order]]).
 
-[L2] A graph $H$ has the Erdős-Hajnal property when the hereditary class of
-$H$-free graphs has some positive Erdős-Hajnal constant
-([[def-erdos-hajnal-property-and-constant]]).
+[L2] A graph $H$ has the Erdős-Hajnal property when the hereditary class of $H$-free graphs has some positive Erdős-Hajnal constant ([[def-erdos-hajnal-property-and-constant]]).
 
 ## Proof
 

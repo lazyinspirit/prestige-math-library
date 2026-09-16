@@ -30,8 +30,7 @@ hyperbolic, then so is the other.
 
 **Given:** A quasi-isometry between geodesic metric spaces $X$ and $Y$.
 
-[L1] Morse stability controls quasi-geodesics in hyperbolic spaces
-([[thm-morse-stability-of-quasi-geodesics]]).
+[L1] Morse stability controls quasi-geodesics in hyperbolic spaces ([[thm-morse-stability-of-quasi-geodesics]]).
 
 [A1] A quasi-isometry between geodesic spaces admits a quasi-inverse, and both maps send geodesic segments to uniform quasi-geodesics in the other space.
 

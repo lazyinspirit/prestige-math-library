@@ -32,16 +32,11 @@ numerable embeddings of one bundle are homotopic.
 
 **Given:** $\mathbb F\in\{\mathbb R,\mathbb C\}$, AC, a paracompact Hausdorff $X$, and the two maps in the statement.
 
-[F1] Endpoint pullbacks along a homotopy are isomorphic under the stated
-paracompact and AC hypotheses
-([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
+[F1] Endpoint pullbacks along a homotopy are isomorphic under the stated paracompact and AC hypotheses ([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
 
-[F2] A bundle embedding is isomorphic to the pullback along its image-plane
-map ([[lem-a-bundle-embedding-produces-its-grassmannian-classifying-map]]).
+[F2] A bundle embedding is isomorphic to the pullback along its image-plane map ([[lem-a-bundle-embedding-produces-its-grassmannian-classifying-map]]).
 
-[F3] Odd-coordinate displacement followed by Gram normalization gives a
-continuous stable homotopy of frames
-([[thm-stable-stiefel-space-is-contractible]]).
+[F3] Odd-coordinate displacement followed by Gram normalization gives a continuous stable homotopy of frames ([[thm-stable-stiefel-space-is-contractible]]).
 
 [A1] AC has the meaning fixed in [[def-axiom-of-choice]].
 

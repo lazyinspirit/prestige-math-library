@@ -38,16 +38,11 @@ between equivalence classes of members of $A$ and subobjects of $A$.
 
 **Given:** A member $x:X \to A$ and, when needed, a second member $y:Y \to A$.
 
-[L1] Every morphism factors as an epimorphism followed by a monomorphism
-([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
+[L1] Every morphism factors as an epimorphism followed by a monomorphism ([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
 
-[L2] Subobjects are mutual-factorization classes of monomorphisms
-([[def-subobject-and-quotient-object]],
-[[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
+[L2] Subobjects are mutual-factorization classes of monomorphisms ([[def-subobject-and-quotient-object]], [[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
 
-[L4] Member equivalence is transitive
-([[def-equivalence-of-members]],
-[[thm-member-equivalence-is-transitive]]).
+[L4] Member equivalence is transitive ([[def-equivalence-of-members]], [[thm-member-equivalence-is-transitive]]).
 
 ## Proof
 

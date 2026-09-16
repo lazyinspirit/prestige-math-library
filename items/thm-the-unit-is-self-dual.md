@@ -32,14 +32,9 @@ right dual of itself.
 
 **Given:** A monoidal category with unit object $\mathbf 1$.
 
-[L1] The two unitors agree on the unit object:
-$\lambda_{\mathbf 1}=\rho_{\mathbf 1}$
-([[cor-the-two-unitors-agree-on-the-unit-object]]).
+[L1] The two unitors agree on the unit object: $\lambda_{\mathbf 1}=\rho_{\mathbf 1}$ ([[cor-the-two-unitors-agree-on-the-unit-object]]).
 
-[L2] A left or right self-duality of $\mathbf 1$ requires an evaluation
-$\mathbf 1\otimes\mathbf 1\to\mathbf 1$ and a coevaluation
-$\mathbf 1\to\mathbf 1\otimes\mathbf 1$ satisfying the corresponding zig-zag
-identities ([[def-left-dual-and-right-dual-object]]).
+[L2] A left or right self-duality of $\mathbf 1$ requires an evaluation $\mathbf 1\otimes\mathbf 1\to\mathbf 1$ and a coevaluation $\mathbf 1\to\mathbf 1\otimes\mathbf 1$ satisfying the corresponding zig-zag identities ([[def-left-dual-and-right-dual-object]]).
 
 ## Proof
 

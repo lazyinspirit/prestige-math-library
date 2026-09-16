@@ -35,15 +35,11 @@ and therefore it is not Noetherian.
 
 **Given:** A field $k$ and the lexicographically ordered abelian group $\Gamma=\mathbb Z\times\mathbb Z$.
 
-[F1] A totally ordered abelian group has a translation-invariant total order
-([[def-totally-ordered-abelian-group]]).
+[F1] A totally ordered abelian group has a translation-invariant total order ([[def-totally-ordered-abelian-group]]).
 
-[F2] A valuation is a map to a totally ordered abelian group adjoined with
-$\infty$ satisfying the exact-zero, multiplicative, and ultrametric laws
-([[def-valuation-on-a-field]]).
+[F2] A valuation is a map to a totally ordered abelian group adjoined with $\infty$ satisfying the exact-zero, multiplicative, and ultrametric laws ([[def-valuation-on-a-field]]).
 
-[L1] A valuation ring is Noetherian exactly when it is a field or a DVR
-([[thm-noetherian-valuation-ring-characterisation]]).
+[L1] A valuation ring is Noetherian exactly when it is a field or a DVR ([[thm-noetherian-valuation-ring-characterisation]]).
 
 ## Verification
 

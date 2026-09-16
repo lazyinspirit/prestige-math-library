@@ -32,14 +32,11 @@ in the extended real line.
 
 ## Facts & Assumptions
 
-**Given:** A Dirichlet series $D(s)=\sum_{n \ge 1} a_n n^{-s}$ with abscissae
-$\sigma_c$ and $\sigma_a$.
+**Given:** A Dirichlet series $D(s)=\sum_{n \ge 1} a_n n^{-s}$ with abscissae $\sigma_c$ and $\sigma_a$.
 
-[L1] The two abscissae are defined by right-half-plane convergence and absolute
-convergence ([[def-abscissae-dirichlet-series]]).
+[L1] The two abscissae are defined by right-half-plane convergence and absolute convergence ([[def-abscissae-dirichlet-series]]).
 
-[L2] Convergence at one point gives convergence on the entire open half-plane to
-its right ([[thm-dirichlet-series-half-plane-convergence]]).
+[L2] Convergence at one point gives convergence on the entire open half-plane to its right ([[thm-dirichlet-series-half-plane-convergence]]).
 
 ## Proof
 

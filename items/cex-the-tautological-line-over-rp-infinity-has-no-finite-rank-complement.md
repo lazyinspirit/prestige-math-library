@@ -37,35 +37,19 @@ such that $\gamma\oplus\eta$ is trivial.
 
 **Given:** AC and the tautological line $\gamma\to\mathbb RP^\infty$.
 
-[F1] $\mathbb RP^\infty=\operatorname{Gr}_1(\mathbb R^\infty)$, its
-tautological line is $\gamma$, and its stable classifying map is the identity
-([[ex-tautological-real-and-complex-lines-over-projective-space]]).
+[F1] $\mathbb RP^\infty=\operatorname{Gr}_1(\mathbb R^\infty)$, its tautological line is $\gamma$, and its stable classifying map is the identity ([[ex-tautological-real-and-complex-lines-over-projective-space]]).
 
-[F2] Under AC, pullback along stable Grassmannian maps gives a bijection between
-homotopy classes of maps and numerable vector-bundle isomorphism classes; the
-proof also establishes that the stable Grassmannian is paracompact
-([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
+[F2] Under AC, pullback along stable Grassmannian maps gives a bijection between homotopy classes of maps and numerable vector-bundle isomorphism classes; the proof also establishes that the stable Grassmannian is paracompact ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
 
-[F3] The Schubert cells give $\mathbb RP^\infty=\operatorname{Gr}_1(\mathbb R^\infty)$
-its stable weak CW structure
-([[thm-schubert-cells-give-the-stable-grassmannian-cw-structure]]).
+[F3] The Schubert cells give $\mathbb RP^\infty=\operatorname{Gr}_1(\mathbb R^\infty)$ its stable weak CW structure ([[thm-schubert-cells-give-the-stable-grassmannian-cw-structure]]).
 
-[F4] The standard CW structure on each $\mathbb RP^m$ has one cell in each
-degree $0,\ldots,m$, and every cellular differential is zero over $\mathbb F_2$
-([[lem-real-projective-space-cellular-homology-and-pinch-map]]).
+[F4] The standard CW structure on each $\mathbb RP^m$ has one cell in each degree $0,\ldots,m$, and every cellular differential is zero over $\mathbb F_2$ ([[lem-real-projective-space-cellular-homology-and-pinch-map]]).
 
-[F5] Cellular homology computes singular homology, naturally for cellular maps
-([[thm-cellular-homology-computes-singular-homology]]), and homotopic maps
-induce the same singular-homology map
-([[cor-homotopic-maps-induce-the-same-map-on-singular-homology]]).
+[F5] Cellular homology computes singular homology, naturally for cellular maps ([[thm-cellular-homology-computes-singular-homology]]), and homotopic maps induce the same singular-homology map ([[cor-homotopic-maps-induce-the-same-map-on-singular-homology]]).
 
-[F6] A CW complex is Hausdorff and has the weak topology with respect to its
-closed cells ([[def-cw-complex-with-closure-finiteness-and-weak-topology]]);
-CGWH means compactly generated and weak Hausdorff
-([[def-compactly-generated-conventions-for-based-homotopy]]).
+[F6] A CW complex is Hausdorff and has the weak topology with respect to its closed cells ([[def-cw-complex-with-closure-finiteness-and-weak-topology]]); CGWH means compactly generated and weak Hausdorff ([[def-compactly-generated-conventions-for-based-homotopy]]).
 
-[A1] AC means that every family of nonempty sets has a choice function
-([[def-axiom-of-choice]]).
+[A1] AC means that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
 
 ## Counterexample
 

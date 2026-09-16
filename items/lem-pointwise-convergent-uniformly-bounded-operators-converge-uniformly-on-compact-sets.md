@@ -37,11 +37,9 @@ $T$ is bounded and $T_n\to T$ uniformly on every norm-compact subset of $X$.
 
 ## Facts & Assumptions
 
-[L1] For a bounded linear operator, $\|Sx\|\le\|S\|\|x\|$
-([[def-operator-norm]]).
+[L1] For a bounded linear operator, $\|Sx\|\le\|S\|\|x\|$ ([[def-operator-norm]]).
 
-[L2] The maps $T_n$ are bounded linear operators
-([[def-bounded-linear-operator]]).
+[L2] The maps $T_n$ are bounded linear operators ([[def-bounded-linear-operator]]).
 
 ## Proof
 

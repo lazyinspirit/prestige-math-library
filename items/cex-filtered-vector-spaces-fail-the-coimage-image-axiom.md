@@ -34,14 +34,9 @@ an isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** The filtered-vector-space category and the morphism $\iota:V\to W$
-from
-[[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]].
+**Given:** The filtered-vector-space category and the morphism $\iota:V\to W$ from [[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]].
 
-[L1] In that example, $\iota$ has zero kernel and zero cokernel, with
-$\operatorname{coim}(\iota)=V$ and $\operatorname{im}(\iota)=W$, but $\iota$ is
-not an isomorphism
-([[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]]).
+[L1] In that example, $\iota$ has zero kernel and zero cokernel, with $\operatorname{coim}(\iota)=V$ and $\operatorname{im}(\iota)=W$, but $\iota$ is not an isomorphism ([[cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian]]).
 
 ## Counterexample
 

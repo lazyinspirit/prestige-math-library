@@ -33,14 +33,11 @@ kernel is zero.
 
 **Given:** A representation $\rho:\mathfrak g\to\mathfrak{gl}(V)$ over $k$.
 
-[L1] A representation map is a Lie-algebra homomorphism
-([[def-representation-of-a-lie-algebra]]).
+[L1] A representation map is a Lie-algebra homomorphism ([[def-representation-of-a-lie-algebra]]).
 
-[L2] The kernel of a Lie-algebra homomorphism is an ideal
-([[prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]]).
+[L2] The kernel of a Lie-algebra homomorphism is an ideal ([[prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]]).
 
-[L3] Faithful means that $\rho$ is injective
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L3] Faithful means that $\rho$ is injective ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Proof
 

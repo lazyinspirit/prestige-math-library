@@ -34,19 +34,11 @@ $$U(\mathfrak g\oplus\mathfrak h)\cong U(\mathfrak g)\otimes_kU(\mathfrak h).$$
 
 **Given:** Lie algebras $\mathfrak g,\mathfrak h$ over the same field $k$.
 
-[L1] The two summands commute in their direct sum
-([[def-direct-product-and-direct-sum-of-lie-algebras]]).
+[L1] The two summands commute in their direct sum ([[def-direct-product-and-direct-sum-of-lie-algebras]]).
 
-[L2] Lie maps induce enveloping-algebra maps
-([[prop-functoriality-of-the-universal-enveloping-algebra]]), and Lie maps into
-associative commutator algebras extend uniquely
-([[thm-universal-property-of-the-universal-enveloping-algebra]]).
+[L2] Lie maps induce enveloping-algebra maps ([[prop-functoriality-of-the-universal-enveloping-algebra]]), and Lie maps into associative commutator algebras extend uniquely ([[thm-universal-property-of-the-universal-enveloping-algebra]]).
 
-[L3] The algebra tensor product has multiplication
-$(a\otimes b)(a'\otimes b')=aa'\otimes bb'$
-([[thm-tensor-product-of-algebras-over-a-commutative-ring]]), and bilinear maps
-factor through the module tensor product
-([[thm-universal-property-of-module-tensor-products]]).
+[L3] The algebra tensor product has multiplication $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$ ([[thm-tensor-product-of-algebras-over-a-commutative-ring]]), and bilinear maps factor through the module tensor product ([[thm-universal-property-of-module-tensor-products]]).
 
 ## Proof
 

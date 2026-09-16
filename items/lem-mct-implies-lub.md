@@ -93,16 +93,8 @@ bound, and it is identified as a limit of both bracketing sequences.
 
 ## Remarks
 
-- **Both bracketing sequences are needed.** The upper endpoints give the
-  upper-bound half of the conclusion and the lower endpoints give minimality;
-  the shrinking lengths are what force the two to have the same limit, and that
-  is the only place the Archimedean property is used.
+- **Both bracketing sequences are needed.** The upper endpoints give the upper-bound half of the conclusion and the lower endpoints give minimality; the shrinking lengths are what force the two to have the same limit, and that is the only place the Archimedean property is used.
 
-- **Nonincreasing sequences are handled by reflection**, as announced in
-  [[def-completeness-properties]]: (MCT) is stated only for nondecreasing
-  sequences, and step 3.2 applies it to $(-u_n)$ rather than assuming a second
-  form of the property.
+- **Nonincreasing sequences are handled by reflection**, as announced in [[def-completeness-properties]]: (MCT) is stated only for nondecreasing sequences, and step 3.2 applies it to $(-u_n)$ rather than assuming a second form of the property.
 
-- **No choice is used.** The bisection rule keeps the left half exactly when the
-  midpoint is an upper bound of $S$, which is a definite condition, so $f$ is a
-  function and [[thm-recursion]] applies.
+- **No choice is used.** The bisection rule keeps the left half exactly when the midpoint is an upper bound of $S$, which is a definite condition, so $f$ is a function and [[thm-recursion]] applies.

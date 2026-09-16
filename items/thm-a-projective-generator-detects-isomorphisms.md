@@ -35,12 +35,9 @@ is an isomorphism for a morphism $f:A\to B$, then $f$ is an isomorphism.
 
 **Given:** A projective generator $P$ and a morphism $f:A\to B$.
 
-[L1] Projectivity makes $\mathcal A(P,-)$ exact on short exact sequences
-([[thm-projective-object-characterisations]]).
+[L1] Projectivity makes $\mathcal A(P,-)$ exact on short exact sequences ([[thm-projective-object-characterisations]]).
 
-[L2] A generator is equivalently an object whose canonical coproduct maps are
-epic
-([[thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree]]).
+[L2] A generator is equivalently an object whose canonical coproduct maps are epic ([[thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree]]).
 
 ## Proof
 

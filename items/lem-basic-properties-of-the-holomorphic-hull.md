@@ -37,12 +37,9 @@ Let $\Omega\subseteq\mathbb C^m$ be a domain.
 
 ## Facts & Assumptions
 
-**Given:** A domain $\Omega\subseteq\mathbb C^m$, a subset $E\subseteq\Omega$,
-and a compact set $K\subseteq\Omega$.
+**Given:** A domain $\Omega\subseteq\mathbb C^m$, a subset $E\subseteq\Omega$, and a compact set $K\subseteq\Omega$.
 
-[L1] The holomorphic hull is defined by the pointwise inequalities
-$|f(a)|\le\sup_E|f|$ for every holomorphic $f$ on $\Omega$
-([[def-holomorphically-convex-hull-and-domain]]).
+[L1] The holomorphic hull is defined by the pointwise inequalities $|f(a)|\le\sup_E|f|$ for every holomorphic $f$ on $\Omega$ ([[def-holomorphically-convex-hull-and-domain]]).
 
 ## Proof
 

@@ -41,9 +41,7 @@ boundary.
 
 **Given:** The factorial-gap series witness.
 
-[L1] The factorial-gap series has radius $1$ and the whole unit circle as a
-natural boundary
-([[thm-factorial-gap-series-has-the-unit-circle-as-natural-boundary]]).
+[L1] The factorial-gap series has radius $1$ and the whole unit circle as a natural boundary ([[thm-factorial-gap-series-has-the-unit-circle-as-natural-boundary]]).
 
 ## Counterexample
 

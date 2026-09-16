@@ -33,14 +33,11 @@ their finite biproducts are the usual direct sums.
 
 **Given:** A ring $R$ and a field $F$.
 
-[L1] An additive category is a preadditive category with finite biproducts
-([[def-additive-category]]).
+[L1] An additive category is a preadditive category with finite biproducts ([[def-additive-category]]).
 
-[L2] Left $R$-modules and their homomorphisms form a category
-([[prop-modules-and-homomorphisms-form-category-rmod]]).
+[L2] Left $R$-modules and their homomorphisms form a category ([[prop-modules-and-homomorphisms-form-category-rmod]]).
 
-[L3] $F$-vector spaces and linear maps form a category
-([[prop-vector-spaces-and-linear-maps-form-category-vect]]).
+[L3] $F$-vector spaces and linear maps form a category ([[prop-vector-spaces-and-linear-maps-form-category-vect]]).
 
 ## Verification
 

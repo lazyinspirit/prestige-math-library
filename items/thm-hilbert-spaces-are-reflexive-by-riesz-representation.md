@@ -36,35 +36,23 @@ inner-product space $H$, with its inner-product norm, is reflexive.
 
 ## Facts & Assumptions
 
-[A1] Countable Choice selects one member from each countable family of
-nonempty sets ([[def-countable-choice]]).
+[A1] Countable Choice selects one member from each countable family of nonempty sets ([[def-countable-choice]]).
 
-[L1] The inner product is linear in its first argument and conjugate-linear in
-its second, and its norm is the square root of the diagonal pairing
-([[def-inner-product-space]], [[def-inner-product-norm]]).
+[L1] The inner product is linear in its first argument and conjugate-linear in its second, and its norm is the square root of the diagonal pairing ([[def-inner-product-space]], [[def-inner-product-norm]]).
 
-[L2] Cauchy--Schwarz bounds inner products by products of norms
-([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]), and the
-parallelogram identity holds
-([[prop-pythagorean-parallelogram-and-polarisation-identities]]).
+[L2] Cauchy--Schwarz bounds inner products by products of norms ([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]), and the parallelogram identity holds ([[prop-pythagorean-parallelogram-and-polarisation-identities]]).
 
-[L3] Nonempty real sets bounded below have infima, characterized by points
-arbitrarily close from above ([[thm-infimum-property]], [[lem-inf-epsilon]]).
+[L3] Nonempty real sets bounded below have infima, characterized by points arbitrarily close from above ([[thm-infimum-property]], [[lem-inf-epsilon]]).
 
-[L4] Completeness for the inner-product norm is the Banach condition
-([[def-banach-space]]). The continuous dual uses the operator norm
-([[def-dual-space-of-a-normed-space]]) and is Banach because its scalar target
-is Banach ([[thm-bounded-operator-space-is-banach]]).
+[L4] Completeness for the inner-product norm is the Banach condition ([[def-banach-space]]). The continuous dual uses the operator norm ([[def-dual-space-of-a-normed-space]]) and is Banach because its scalar target is Banach ([[thm-bounded-operator-space-is-banach]]).
 
-[L5] Reflexivity means surjectivity of the canonical evaluation map
-$J_H:H\to H^{**}$ ([[def-reflexive-banach-space]]).
+[L5] Reflexivity means surjectivity of the canonical evaluation map $J_H:H\to H^{**}$ ([[def-reflexive-banach-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** Countable Choice and a complete real or complex inner-product space
-$H$.
+**Given:** Countable Choice and a complete real or complex inner-product space $H$.
 
 1.1 Set up the Riesz representation problem. Let $\varphi\in H^*$. If $\varphi=0$, then $\varphi(x)=\langle x,0\rangle$ for every $x$. Suppose $\varphi\ne0$ and put $M=\{x\in H:\varphi(x)=1\}$. This is a nonempty closed affine set. The nonempty set of its norms is bounded below, so let $d=\inf_{x\in M}\|x\|$. Since $1=|\varphi(x)|\leq\|\varphi\|\|x\|$ on $M$, one has $d\geq1/\|\varphi\|>0$. [given, L1, L2, L3]
 
@@ -80,28 +68,17 @@ The right side tends to zero as $m,n\to\infty$, so $(y_n)$ is Cauchy.
 
 $$d^2\leq\|y+t z\|^2=d^2+2\operatorname{Re}\!\bigl(t\langle z,y\rangle\bigr)+|t|^2\|z\|^2.$$
 
-If $\langle z,y\rangle\ne0$, choosing the scalar phase of a sufficiently
-small $t$ to make the middle term negative contradicts this inequality.
-Therefore $\langle z,y\rangle=0$. For arbitrary $x\in H$, the vector
-$z=x-\varphi(x)y$ lies in $\ker\varphi$, and linearity in the first argument
-now gives
-$\langle x,y\rangle=\varphi(x)\|y\|^2$. Hence
+If $\langle z,y\rangle\ne0$, choosing the scalar phase of a sufficiently small $t$ to make the middle term negative contradicts this inequality. Therefore $\langle z,y\rangle=0$. For arbitrary $x\in H$, the vector $z=x-\varphi(x)y$ lies in $\ker\varphi$, and linearity in the first argument now gives $\langle x,y\rangle=\varphi(x)\|y\|^2$. Hence
 
 $$\varphi(x)=\langle x,R\varphi\rangle,\qquad R\varphi:=y/\|y\|^2.$$
 
-Together with $R0=0$, this represents every functional. Uniqueness follows by
-evaluating the difference of two representing vectors at that same difference.
-Cauchy--Schwarz and the unit vector in the representing direction give
-$\|R\varphi\|=\|\varphi\|$.
+Together with $R0=0$, this represents every functional. Uniqueness follows by evaluating the difference of two representing vectors at that same difference. Cauchy--Schwarz and the unit vector in the representing direction give $\|R\varphi\|=\|\varphi\|$.
 
 5.1 Put the transported Hilbert structure on the dual. Define $C:H\to H^*$ by $(Cx)(u)=\langle u,x\rangle$. Step 4.1 says that $C$ is onto with inverse $R$, and [L1] shows that both are conjugate-linear in the complex case and linear in the real case. They are isometries. Define on $H^*$ [L1, L4, step 4.1, construct]
 
 $$\langle\varphi,\psi\rangle_*:=\langle R\psi,R\varphi\rangle_H.$$
 
-The reversed order and the two conjugate-linear occurrences make this inner
-product linear in $\varphi$, conjugate-linear in $\psi$, and positive definite;
-its norm is the existing dual norm. By [L4], $H^*$ is complete for that norm,
-so it too is a Hilbert space.
+The reversed order and the two conjugate-linear occurrences make this inner product linear in $\varphi$, conjugate-linear in $\psi$, and positive definite; its norm is the existing dual norm. By [L4], $H^*$ is complete for that norm, so it too is a Hilbert space.
 
 6.1 Identify every bidual functional with canonical evaluation. Apply the representation proved in steps 1.1--4.1 to the Hilbert space $H^*$. For $\Phi\in H^{**}$ there is $w\in H^*$ with $\Phi(\varphi)=\langle\varphi,w\rangle_*$ for every $\varphi\in H^*$. Put $x=Rw\in H$. Since $\varphi(u)=\langle u,R\varphi\rangle_H$, the definition in step 5.1 gives [L1, L5, step 4.1, step 5.1]
 

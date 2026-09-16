@@ -35,12 +35,9 @@ Every abelian category has all finite limits and all finite colimits.
 
 **Given:** An abelian category $\mathcal A$.
 
-[L1] An abelian category is additive and every morphism has a kernel and a
-cokernel ([[def-abelian-category]]).
+[L1] An abelian category is additive and every morphism has a kernel and a cokernel ([[def-abelian-category]]).
 
-[L2] An additive category with all kernels and cokernels has all finite limits
-and all finite colimits
-([[thm-an-additive-category-with-all-kernels-and-cokernels-has-all-finite-limits-and-colimits]]).
+[L2] An additive category with all kernels and cokernels has all finite limits and all finite colimits ([[thm-an-additive-category-with-all-kernels-and-cokernels-has-all-finite-limits-and-colimits]]).
 
 ## Proof
 

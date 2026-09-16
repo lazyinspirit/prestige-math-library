@@ -36,11 +36,9 @@ made that the middle row is a complex.
 
 **Given:** The middle-row variant of the nine lemma.
 
-[L1] The middle-row conclusion is stated only after assuming the middle row is a
-complex ([[thm-nine-lemma-variants-by-which-rows-are-assumed-exact]]).
+[L1] The middle-row conclusion is stated only after assuming the middle row is a complex ([[thm-nine-lemma-variants-by-which-rows-are-assumed-exact]]).
 
-[L2] That zero-composite hypothesis is load-bearing
-([[rem-why-the-middle-nine-lemma-needs-a-zero-composite]]).
+[L2] That zero-composite hypothesis is load-bearing ([[rem-why-the-middle-nine-lemma-needs-a-zero-composite]]).
 
 ## Refutation
 

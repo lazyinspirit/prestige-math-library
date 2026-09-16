@@ -33,15 +33,11 @@ for all $t\in[0,1]$ and satisfies $\phi_t^*\omega_t=\omega_0$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and the path, primitives, and common compact
-support in the statement.
+**Given:** $\mathrm{AC}_\omega$ and the path, primitives, and common compact support in the statement.
 
-[F1] The Moser equation has a unique smooth solution and forces pullback
-constancy. [[lem-moser-pullback-differentiation-equation]].
+[F1] The Moser equation has a unique smooth solution and forces pullback constancy. [[lem-moser-pullback-differentiation-equation]].
 
-[F2] A smooth time-dependent vector field with common compact support has a
-global evolution over a compact time interval.
-[[thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval]].
+[F2] A smooth time-dependent vector field with common compact support has a global evolution over a compact time interval. [[thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval]].
 
 ## Proof
 

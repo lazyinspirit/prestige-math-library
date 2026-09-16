@@ -35,9 +35,7 @@ complete to the tooth blocks and anticomplete to the teeth.
 
 **Given:** The nine labelled vertices above with exactly the displayed edges.
 
-[L1] A comb is given by distinct teeth $a_i$, disjoint blocks $B_i$, each tooth
-complete to its own block and anticomplete to the other blocks
-([[def-comb-in-a-graph]]).
+[L1] A comb is given by distinct teeth $a_i$, disjoint blocks $B_i$, each tooth complete to its own block and anticomplete to the other blocks ([[def-comb-in-a-graph]]).
 
 ## Verification
 

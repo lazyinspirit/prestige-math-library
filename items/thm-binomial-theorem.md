@@ -98,20 +98,8 @@ they are. See the Remarks below.
 
 ## Remarks
 
-- **Two index traps, both checked.** The sum runs over $k < n+1$, that is
-  $k \le n$, so the exponent $n-k$ is never a truncated difference in disguise;
-  and the inductive step needs the coefficient $\binom{n}{\sigma(n)}$, which is
-  $0$ by the boundary values of [[def-binomial-coefficient]] rather than
-  undefined. Step 1.1 records that once and both rewritings use it.
+- **Two index traps, both checked.** The sum runs over $k < n+1$, that is $k \le n$, so the exponent $n-k$ is never a truncated difference in disguise; and the inductive step needs the coefficient $\binom{n}{\sigma(n)}$, which is $0$ by the boundary values of [[def-binomial-coefficient]] rather than undefined. Step 1.1 records that once and both rewritings use it.
 
-- **Where $0^{0}$ matters.** At $x = 0$ the term with $k = 0$ is
-  $\iota\binom{n}{0}\,0^{0}y^{n} = y^{n}$, and the identity reads
-  $y^{n} = y^{n}$. A treatment leaving $0^{0}$ undefined would have to state the
-  theorem with exceptions; [[def-integer-power]] fixes $a^{0} = 1$ for every real
-  $a$, so there are none.
+- **Where $0^{0}$ matters.** At $x = 0$ the term with $k = 0$ is $\iota\binom{n}{0}\,0^{0}y^{n} = y^{n}$, and the identity reads $y^{n} = y^{n}$. A treatment leaving $0^{0}$ undefined would have to state the theorem with exceptions; [[def-integer-power]] fixes $a^{0} = 1$ for every real $a$, so there are none.
 
-- **The ring version is a different statement.** It says the same thing about
-  $x, y$ in a commutative ring, with $\iota\binom{n}{k}$ replaced by the
-  $\binom{n}{k}$-fold multiple of the ring element. Making it requires rings,
-  which come later in the reading order; the pointer to [[def-ring]] is
-  orientation only and nothing above rests on it.
+- **The ring version is a different statement.** It says the same thing about $x, y$ in a commutative ring, with $\iota\binom{n}{k}$ replaced by the $\binom{n}{k}$-fold multiple of the ring element. Making it requires rings, which come later in the reading order; the pointer to [[def-ring]] is orientation only and nothing above rests on it.

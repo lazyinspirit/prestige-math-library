@@ -34,9 +34,7 @@ $$\zeta(2)=\frac{\pi^2}{6}\approx1.64493.$$
 
 **Given:** The Euler product and the special-value formula for zeta.
 
-[L1] For $\operatorname{Re}s>1$,
-$$\zeta(s)=\prod_p(1-p^{-s})^{-1}$$
-([[thm-euler-product-for-riemann-zeta]]).
+[L1] For $\operatorname{Re}s>1$, $$\zeta(s)=\prod_p(1-p^{-s})^{-1}$$ ([[thm-euler-product-for-riemann-zeta]]).
 
 [L2] One has $\zeta(2)=\pi^2/6$ ([[thm-special-values-of-riemann-zeta-at-integers]]).
 

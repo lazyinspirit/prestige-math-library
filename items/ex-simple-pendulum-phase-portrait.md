@@ -37,8 +37,7 @@ singular separatrix through the unstable equilibrium.
 
 **Given:** $q$ is taken modulo $2\pi$ and $p\in\mathbb R$.
 
-[F1] Hamilton's equations give $\dot q=p$ and $\dot p=-\sin q$.
-[[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
+[F1] Hamilton's equations give $\dot q=p$ and $\dot p=-\sin q$. [[thm-hamilton-equations-in-canonical-cotangent-coordinates]].
 
 ## Verification
 

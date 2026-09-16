@@ -29,9 +29,7 @@ FALSE: the Yoneda product is graded commutative for every abelian category
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the algebra
-$R=k\langle x,y\rangle/(x,y)^2$, and its simple left module
-$S=R/(x,y)$.
+**Given:** A field $k$, the algebra $R=k\langle x,y\rangle/(x,y)^2$, and its simple left module $S=R/(x,y)$.
 
 ## Refutation
 

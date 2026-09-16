@@ -41,17 +41,11 @@ $G[X]$ or $\overline G[X]$ has maximum degree at most $\epsilon |X|$.
 
 ## Facts & Assumptions
 
-**Given:** A finite graph $H$, a real $\epsilon\in(0,\tfrac12)$, and a
-nonempty finite graph $G$ with
-$\operatorname{ind}_H(G)<(\delta |V(G)|)^{|V(H)|}$.
+**Given:** A finite graph $H$, a real $\epsilon\in(0,\tfrac12)$, and a nonempty finite graph $G$ with $\operatorname{ind}_H(G)<(\delta |V(G)|)^{|V(H)|}$.
 
-[L1] Nikiforov's theorem yields $\delta_0>0$ such that the induced-copy bound
-forces an $\epsilon/4$-restricted set of size at least $\delta_0|V(G)|$
-([[thm-nikiforov-few-induced-copies-force-a-linear-restricted-set]]).
+[L1] Nikiforov's theorem yields $\delta_0>0$ such that the induced-copy bound forces an $\epsilon/4$-restricted set of size at least $\delta_0|V(G)|$ ([[thm-nikiforov-few-induced-copies-force-a-linear-restricted-set]]).
 
-[L2] In a sparse graph, any prescribed size up to half the order can be chosen
-so that the induced subgraph has proportionally bounded maximum degree
-([[lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree]]).
+[L2] In a sparse graph, any prescribed size up to half the order can be chosen so that the induced subgraph has proportionally bounded maximum degree ([[lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree]]).
 
 ## Proof
 

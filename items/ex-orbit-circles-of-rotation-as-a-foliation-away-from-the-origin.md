@@ -47,11 +47,7 @@ vanishes and the rank drops.
 regular one-dimensional distribution there. [given]
 
 1.2 Along the flow, [given]
-$$X(x^2 + y^2) = 2x(-y) + 2y(x) = 0,$$
-so the radius is constant on every orbit. The orbits are therefore contained in
-circles about the origin, and conversely each such circle is an orbit. [given,
-algebra]
+$$X(x^2 + y^2) = 2x(-y) + 2y(x) = 0,$$ so the radius is constant on every orbit. The orbits are therefore contained in circles about the origin, and conversely each such circle is an orbit. [given, algebra]
 
 1.3 Hence the punctured plane is foliated by the rotation circles. At the [given]
-origin the field vanishes, so the regular rank-one hypothesis fails there.
-[given] ∎
+origin the field vanishes, so the regular rank-one hypothesis fails there. [given] ∎

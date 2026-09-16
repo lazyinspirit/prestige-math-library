@@ -33,11 +33,9 @@ with $x \ne y$, then there exists $f \in X^*$ such that $f(x) \ne f(y)$.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and two vectors
-$x,y \in X$ with $x \ne y$.
+**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$ and two vectors $x,y \in X$ with $x \ne y$.
 
-[L1] Every nonzero vector admits a norming functional
-([[thm-dual-norms-every-vector]]).
+[L1] Every nonzero vector admits a norming functional ([[thm-dual-norms-every-vector]]).
 
 ## Proof
 

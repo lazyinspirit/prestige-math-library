@@ -37,13 +37,9 @@ mean.
 
 **Given:** A group $G$ with a paradoxical decomposition.
 
-[L1] A left-invariant mean is a positive normalized functional on
-$\ell^\infty(G)$ invariant under left translation
-([[def-left-invariant-mean-and-amenable-group]]).
+[L1] A left-invariant mean is a positive normalized functional on $\ell^\infty(G)$ invariant under left translation ([[def-left-invariant-mean-and-amenable-group]]).
 
-[L2] In a paradoxical decomposition, disjoint pieces $A_i,B_j$ partition $G$,
-and the translated families $(a_iA_i)$ and $(b_jB_j)$ each partition $G$
-([[def-paradoxical-decomposition-of-a-group]]).
+[L2] In a paradoxical decomposition, disjoint pieces $A_i,B_j$ partition $G$, and the translated families $(a_iA_i)$ and $(b_jB_j)$ each partition $G$ ([[def-paradoxical-decomposition-of-a-group]]).
 
 ## Proof
 

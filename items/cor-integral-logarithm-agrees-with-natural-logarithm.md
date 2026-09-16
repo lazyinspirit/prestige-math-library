@@ -36,11 +36,9 @@ $$L(x)=\log x.$$
 
 [F1] $E=L^{-1}$ ([[def-integral-exponential]]).
 
-[L1] $E=\exp$ on $\mathbb R$
-([[thm-integral-exponential-agrees-with-exponential]]).
+[L1] $E=\exp$ on $\mathbb R$ ([[thm-integral-exponential-agrees-with-exponential]]).
 
-[F2] The natural logarithm is the inverse of the bijection
-$\exp:\mathbb R\to(0,\infty)$ ([[def-natural-logarithm]]).
+[F2] The natural logarithm is the inverse of the bijection $\exp:\mathbb R\to(0,\infty)$ ([[def-natural-logarithm]]).
 
 ## Proof
 

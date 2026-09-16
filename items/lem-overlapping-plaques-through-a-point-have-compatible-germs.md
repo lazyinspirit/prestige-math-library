@@ -47,11 +47,9 @@ $$ P_1 \cap W = P_2 \cap W. $$
 **Proof technique:** direct.
 
 1.1 Apply the previous lemma to the connected integral manifold $P_1$ inside a [given]
-flat chart producing $P_2$. Near $p$, the set $P_1$ must lie in the plaque of
-that chart through $p$, namely in $P_2$. [given]
+flat chart producing $P_2$. Near $p$, the set $P_1$ must lie in the plaque of that chart through $p$, namely in $P_2$. [given]
 
 1.2 Reversing the roles of $P_1$ and $P_2$ gives the opposite inclusion on [given]
-possibly smaller neighborhoods. Intersecting those neighborhoods yields an open
-set $W$ with $P_1 \cap W = P_2 \cap W$. [given]
+possibly smaller neighborhoods. Intersecting those neighborhoods yields an open set $W$ with $P_1 \cap W = P_2 \cap W$. [given]
 
 2.1 Thus plaques through the same point determine the same germ. [given] ∎ [given]

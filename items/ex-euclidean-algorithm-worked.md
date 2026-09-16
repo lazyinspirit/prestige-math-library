@@ -92,15 +92,8 @@ decimal arithmetic of $\mathbb{N}$.
 
 ## Remarks
 
-- **Three divisions, and the count is exact for this pair only.** Nothing here,
-  and nothing on the companion page, proves a bound on the number of divisions
-  in terms of the size of the inputs.
+- **Three divisions, and the count is exact for this pair only.** Nothing here, and nothing on the companion page, proves a bound on the number of divisions in terms of the size of the inputs.
 
-- **The back-substitution is not a second algorithm.** It is the same descent
-  read in reverse, and
-  [[cor-extended-euclidean-bezout-coefficients]] performs it forwards, carrying
-  the coefficient pairs alongside the remainders instead of recovering them
-  afterwards.
+- **The back-substitution is not a second algorithm.** It is the same descent read in reverse, and [[cor-extended-euclidean-bezout-coefficients]] performs it forwards, carrying the coefficient pairs alongside the remainders instead of recovering them afterwards.
 
-- **The coefficients are not unique**: $1071 \cdot 19 + 462 \cdot (-44) = 21$ as
-  well, and [[ex-bezout-coefficients-not-unique]] describes the whole family.
+- **The coefficients are not unique**: $1071 \cdot 19 + 462 \cdot (-44) = 21$ as well, and [[ex-bezout-coefficients-not-unique]] describes the whole family.

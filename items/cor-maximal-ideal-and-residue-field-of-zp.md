@@ -31,11 +31,9 @@ $\mathbb Z_p/p\mathbb Z_p$ is canonically isomorphic to $\mathbb F_p$.
 
 **Given:** $\mathbb Z_p$ viewed inside $\mathbb Q_p$.
 
-[L1] $\mathbb Z_p$ is the subring of $\mathbb Q_p$ cut out by $|x|_p \le 1$
-([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_p$ is the subring of $\mathbb Q_p$ cut out by $|x|_p \le 1$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
 
-[L2] $\mathbb Z_p$ is also the compatible-residue inverse limit
-([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]]).
+[L2] $\mathbb Z_p$ is also the compatible-residue inverse limit ([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]]).
 
 ## Proof
 

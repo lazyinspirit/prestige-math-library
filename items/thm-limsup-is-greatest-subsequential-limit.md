@@ -129,34 +129,12 @@ too.
 
 ## Remarks
 
-- **The construction uses no choice.** Both index maps are built by taking a
-  *least* element ([[thm-well-ordering-principle]]) of an explicitly described
-  nonempty set of naturals, so the functions $f$ and $g$ are defined outright and
-  [[thm-recursion]] then produces the index map. This is the same device as in
-  [[lem-peak-monotone-subsequence]], and for the same reason: a subsequence
-  selected by repeated arbitrary choices would need a choice principle, and none
-  is needed here.
+- **The construction uses no choice.** Both index maps are built by taking a *least* element ([[thm-well-ordering-principle]]) of an explicitly described nonempty set of naturals, so the functions $f$ and $g$ are defined outright and [[thm-recursion]] then produces the index map. This is the same device as in [[lem-peak-monotone-subsequence]], and for the same reason: a subsequence selected by repeated arbitrary choices would need a choice principle, and none is needed here.
 
-- **Why the recursion threshold is indexed by the previous index rather than by
-  the step number.** The recursion theorem produces a function of one variable, so
-  the state carried from one step to the next is the index $n_j$ alone. Demanding
-  $x_{n_{j+1}} > n_j$ rather than $x_{n_{j+1}} > j$ keeps that single-variable
-  form, and $n_j \ge j$ ([[lem-index-map-grows]]) then upgrades the bound to the
-  one actually wanted. The same trick fixes the accuracy in the finite case at
-  $1/(n_j+1) \le 1/(j+1)$.
+- **Why the recursion threshold is indexed by the previous index rather than by the step number.** The recursion theorem produces a function of one variable, so the state carried from one step to the next is the index $n_j$ alone. Demanding $x_{n_{j+1}} > n_j$ rather than $x_{n_{j+1}} > j$ keeps that single-variable form, and $n_j \ge j$ ([[lem-index-map-grows]]) then upgrades the bound to the one actually wanted. The same trick fixes the accuracy in the finite case at $1/(n_j+1) \le 1/(j+1)$.
 
-- **Claim 2 is where the $\limsup$ earns the word "greatest".** A subsequence
-  cannot do better than the tail suprema allow: past any index $n$, every term of
-  the sequence, and so every term of any subsequence, is at most $s_n$, and
-  $\Lambda$ is the infimum of those. That is the entire content of step 2.5, and
-  the strictness of the inequality $\Lambda < c$ is what gives the contradiction,
-  since a limit inherits only the non-strict inequality
-  ([[lem-limit-preserves-order]]).
+- **Claim 2 is where the $\limsup$ earns the word "greatest".** A subsequence cannot do better than the tail suprema allow: past any index $n$, every term of the sequence, and so every term of any subsequence, is at most $s_n$, and $\Lambda$ is the infimum of those. That is the entire content of step 2.5, and the strictness of the inequality $\Lambda < c$ is what gives the contradiction, since a limit inherits only the non-strict inequality ([[lem-limit-preserves-order]]).
 
-- **Both failures of the real version really occur**, and
-  [[cex-limsup-infinite-not-attained-in-r]] on the companion page is the witness:
-  there $\operatorname{SL}(x)$ is nonempty with greatest element $0$ while
-  $\limsup_k x_k = +\infty$.
+- **Both failures of the real version really occur**, and [[cex-limsup-infinite-not-attained-in-r]] on the companion page is the witness: there $\operatorname{SL}(x)$ is nonempty with greatest element $0$ while $\limsup_k x_k = +\infty$.
 
-- **The dual statement is [[cor-liminf-is-least-subsequential-limit]]**, obtained
-  from this theorem by reflection rather than by repeating the construction.
+- **The dual statement is [[cor-liminf-is-least-subsequential-limit]]**, obtained from this theorem by reflection rather than by repeating the construction.

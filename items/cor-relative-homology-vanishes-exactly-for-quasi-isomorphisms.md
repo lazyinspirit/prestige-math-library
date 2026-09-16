@@ -31,14 +31,11 @@ For a chain map $f:C_\bullet\to D_\bullet$, the following are equivalent:
 
 **Given:** A chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] Relative homology is the homology of the mapping cone
-([[def-relative-homology-of-a-chain-map]]).
+[L1] Relative homology is the homology of the mapping cone ([[def-relative-homology-of-a-chain-map]]).
 
-[L2] A chain map is a quasi-isomorphism exactly when its cone is acyclic
-([[thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic]]).
+[L2] A chain map is a quasi-isomorphism exactly when its cone is acyclic ([[thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic]]).
 
-[L3] Acyclic means vanishing homology in every degree
-([[def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]]).
+[L3] Acyclic means vanishing homology in every degree ([[def-exactness-of-a-complex-at-a-degree-and-acyclic-complex]]).
 
 ## Proof
 

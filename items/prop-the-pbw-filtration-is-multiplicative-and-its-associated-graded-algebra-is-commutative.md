@@ -36,17 +36,13 @@ $\operatorname{gr}U(\mathfrak g)$ is commutative.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ and the PBW filtration on its enveloping
-algebra.
+**Given:** A Lie algebra $\mathfrak g$ and the PBW filtration on its enveloping algebra.
 
-[L1] $F_n$ is spanned by words of length at most $n$
-([[def-pbw-filtration-on-the-universal-enveloping-algebra]]).
+[L1] $F_n$ is spanned by words of length at most $n$ ([[def-pbw-filtration-on-the-universal-enveloping-algebra]]).
 
-[L2] In $U(\mathfrak g)$, $\iota_{\mathfrak g}(x)\iota_{\mathfrak g}(y)-\iota_{\mathfrak g}(y)\iota_{\mathfrak g}(x)=\iota_{\mathfrak g}([x,y])$
-([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
+[L2] In $U(\mathfrak g)$, $\iota_{\mathfrak g}(x)\iota_{\mathfrak g}(y)-\iota_{\mathfrak g}(y)\iota_{\mathfrak g}(x)=\iota_{\mathfrak g}([x,y])$ ([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
 
-[L3] Associated-graded multiplication is that of
-[[def-associated-graded-algebra-of-a-filtered-algebra]].
+[L3] Associated-graded multiplication is that of [[def-associated-graded-algebra-of-a-filtered-algebra]].
 
 ## Proof
 

@@ -76,16 +76,6 @@ diameter, and $(\mathbb{R},\rho)$ is bounded with diameter exactly $1$
 
 ## Remarks
 
-- **Which level of the hierarchy does preserve boundedness.** Lipschitz
-  equivalence does, since $\rho \le \beta d$ turns a $d$-ball into a $\rho$-ball
-  of radius $\beta$ times as large ([[def-equivalent-metrics]]). The present pair
-  is uniformly but not Lipschitz equivalent
-  ([[cex-uniformly-not-lipschitz-equivalent]]), which is exactly the room in
-  which boundedness is lost.
-- **Nor is the diameter a topological invariant**, even up to a constant: on
-  $\mathbb{R}$ the same construction with $\min\{d, c\}$ in place of
-  $\min\{d, 1\}$, for any real $c > 0$, gives diameter $c$ while leaving the
-  topology alone.
-- **The general statement behind this witness** is that every metric space is
-  boundedly remetrisable ([[lem-bounded-remetrisation]]), so the failure is not
-  a peculiarity of the real line but the normal state of affairs.
+- **Which level of the hierarchy does preserve boundedness.** Lipschitz equivalence does, since $\rho \le \beta d$ turns a $d$-ball into a $\rho$-ball of radius $\beta$ times as large ([[def-equivalent-metrics]]). The present pair is uniformly but not Lipschitz equivalent ([[cex-uniformly-not-lipschitz-equivalent]]), which is exactly the room in which boundedness is lost.
+- **Nor is the diameter a topological invariant**, even up to a constant: on $\mathbb{R}$ the same construction with $\min\{d, c\}$ in place of $\min\{d, 1\}$, for any real $c > 0$, gives diameter $c$ while leaving the topology alone.
+- **The general statement behind this witness** is that every metric space is boundedly remetrisable ([[lem-bounded-remetrisation]]), so the failure is not a peculiarity of the real line but the normal state of affairs.

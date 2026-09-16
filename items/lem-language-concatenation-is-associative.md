@@ -33,12 +33,9 @@ $$ (L_1L_2)L_3=L_1(L_2L_3). $$
 
 **Given:** Languages $L_1,L_2,L_3$ over a fixed alphabet $\Sigma$.
 
-[L1] Language concatenation is $LK=\{uv:u\in L\text{ and }v\in K\}$ by
-[[def-language-concatenation-powers-and-kleene-star]].
+[L1] Language concatenation is $LK=\{uv:u\in L\text{ and }v\in K\}$ by [[def-language-concatenation-powers-and-kleene-star]].
 
-[L2] If $u:m\to\Sigma$ and $v:n\to\Sigma$ are words, then the concatenated word
-$uv:(m+n)\to\Sigma$ is defined by the offset rule of
-[[def-computation-alphabet-and-word-convention]].
+[L2] If $u:m\to\Sigma$ and $v:n\to\Sigma$ are words, then the concatenated word $uv:(m+n)\to\Sigma$ is defined by the offset rule of [[def-computation-alphabet-and-word-convention]].
 
 ## Proof
 

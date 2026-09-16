@@ -36,18 +36,9 @@ Every open subset of $X$ is Caratheodory measurable for the RMK outer measure $\
 **Proof technique:** direct.
 
 1.1 Fix open $G,V$ and $f\prec V\cap G$. Put [given]
-$K=\operatorname{supp}f$. For any $g\prec V\setminus K$, the supports of
-$f$ and $g$ are disjoint, so $f+g\prec V$. Hence
-$\rho(V)\ge\Lambda(f)+\rho(V\setminus K)$. Since
-$V\setminus G\subseteq V\setminus K$,
-$\rho(V\setminus K)\ge\mu^*(V\setminus G)$. Taking the supremum over
-$f\prec V\cap G$ therefore gives
-$$\rho(V)\ge\rho(V\cap G)+\mu^*(V\setminus G)=\mu^*(V\cap G)+\mu^*(V\setminus G).$$ [given]
+$K=\operatorname{supp}f$. For any $g\prec V\setminus K$, the supports of $f$ and $g$ are disjoint, so $f+g\prec V$. Hence $\rho(V)\ge\Lambda(f)+\rho(V\setminus K)$. Since $V\setminus G\subseteq V\setminus K$, $\rho(V\setminus K)\ge\mu^*(V\setminus G)$. Taking the supremum over $f\prec V\cap G$ therefore gives $$\rho(V)\ge\rho(V\cap G)+\mu^*(V\setminus G)=\mu^*(V\cap G)+\mu^*(V\setminus G).$$ [given]
 
 2.1 For arbitrary $E$ and open $V\supseteq E$, monotonicity and step 1.1 [step 1.1]
-give
-$$\rho(V)\ge\mu^*(E\cap G)+\mu^*(E\setminus G).$$
-Infimizing over $V$ gives the hard Caratheodory inequality; outer
-subadditivity gives the reverse inequality. [step 1.1]
+give $$\rho(V)\ge\mu^*(E\cap G)+\mu^*(E\setminus G).$$ Infimizing over $V$ gives the hard Caratheodory inequality; outer subadditivity gives the reverse inequality. [step 1.1]
 
 3.1 Therefore every open $G$ is Caratheodory measurable. By [L1], the measurable sets form a complete sigma-algebra; since they contain all opens, they contain $\mathcal B(X)$, and the restriction is a Borel measure. [step 2.1, L1] ∎

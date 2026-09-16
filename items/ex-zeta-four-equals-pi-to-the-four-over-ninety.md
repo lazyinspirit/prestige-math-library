@@ -32,13 +32,9 @@ $$\zeta(4)=\frac{\pi^4}{90}.$$
 
 **Given:** The Bernoulli generating function and the even-integer zeta formula.
 
-[L1] Bernoulli numbers are defined by
-$$\frac{t}{e^t-1}=\sum_{n\ge0}\frac{B_n}{n!}t^n$$
-([[def-bernoulli-numbers-by-their-generating-function]]).
+[L1] Bernoulli numbers are defined by $$\frac{t}{e^t-1}=\sum_{n\ge0}\frac{B_n}{n!}t^n$$ ([[def-bernoulli-numbers-by-their-generating-function]]).
 
-[L2] For $m\ge1$,
-$$\zeta(2m)=(-1)^{m+1}\frac{B_{2m}(2\pi)^{2m}}{2(2m)!}$$
-([[thm-special-values-of-riemann-zeta-at-integers]]).
+[L2] For $m\ge1$, $$\zeta(2m)=(-1)^{m+1}\frac{B_{2m}(2\pi)^{2m}}{2(2m)!}$$ ([[thm-special-values-of-riemann-zeta-at-integers]]).
 
 ## Verification
 

@@ -34,17 +34,11 @@ nonconstant affine map of one complex variable.
 
 ## Facts & Assumptions
 
-**Given:** A domain $\Omega\subseteq\mathbb C^m$, a function
-$u:\Omega\to[-\infty,\infty)$, an affine line map $\lambda\mapsto a+\lambda v$
-with $v\ne0$, and a nonconstant affine change of variable
-$\phi(\mu)=\alpha\mu+\beta$ with $\alpha\ne0$.
+**Given:** A domain $\Omega\subseteq\mathbb C^m$, a function $u:\Omega\to[-\infty,\infty)$, an affine line map $\lambda\mapsto a+\lambda v$ with $v\ne0$, and a nonconstant affine change of variable $\phi(\mu)=\alpha\mu+\beta$ with $\alpha\ne0$.
 
-[L1] Plurisubharmonicity is defined by asking the line restriction to be
-subharmonic or identically $-\infty$ on each connected component
-([[def-plurisubharmonic-function]]).
+[L1] Plurisubharmonicity is defined by asking the line restriction to be subharmonic or identically $-\infty$ on each connected component ([[def-plurisubharmonic-function]]).
 
-[L2] Plane subharmonicity is the upper-semicontinuous disc-submean condition
-([[def-plane-subharmonic-function]]).
+[L2] Plane subharmonicity is the upper-semicontinuous disc-submean condition ([[def-plane-subharmonic-function]]).
 
 ## Proof
 

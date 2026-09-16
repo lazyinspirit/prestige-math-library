@@ -37,13 +37,9 @@ The bull graph has the Erdős-Hajnal property.
 
 **Given:** The bull graph.
 
-[L1] Every bull-free finite graph contains a clique or a stable set of size at
-least $|V(G)|^{1/4}$, so bull-free graphs have Erdős-Hajnal constant $1/4$
-([[cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter]]).
+[L1] Every bull-free finite graph contains a clique or a stable set of size at least $|V(G)|^{1/4}$, so bull-free graphs have Erdős-Hajnal constant $1/4$ ([[cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter]]).
 
-[L2] A graph $H$ has the Erdős-Hajnal property exactly when the hereditary class
-of $H$-free graphs has a positive Erdős-Hajnal constant
-([[def-erdos-hajnal-property-and-constant]]).
+[L2] A graph $H$ has the Erdős-Hajnal property exactly when the hereditary class of $H$-free graphs has a positive Erdős-Hajnal constant ([[def-erdos-hajnal-property-and-constant]]).
 
 ## Proof
 

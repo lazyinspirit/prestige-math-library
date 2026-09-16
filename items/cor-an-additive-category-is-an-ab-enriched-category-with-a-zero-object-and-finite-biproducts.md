@@ -36,11 +36,9 @@ ordinary category has a zero object and all finite biproducts.
 
 **Given:** An additive category $\mathcal A$.
 
-[L1] An additive category is a preadditive category with finite biproducts
-([[def-additive-category]]).
+[L1] An additive category is a preadditive category with finite biproducts ([[def-additive-category]]).
 
-[L2] A category is $\mathbf{Ab}$-enriched exactly when it is preadditive
-([[thm-a-category-enriched-in-abelian-groups-is-exactly-a-preadditive-category]]).
+[L2] A category is $\mathbf{Ab}$-enriched exactly when it is preadditive ([[thm-a-category-enriched-in-abelian-groups-is-exactly-a-preadditive-category]]).
 
 ## Proof
 

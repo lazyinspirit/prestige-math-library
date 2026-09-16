@@ -31,14 +31,11 @@ bundle $\operatorname{Hom}(E,f^*F)\to M$.
 
 ## Facts & Assumptions
 
-**Given:** Smooth vector bundles $E\to M$, $F\to N$, a smooth map $f:M\to N$,
-and a bundle map $\Phi:E\to F$ over $f$.
+**Given:** Smooth vector bundles $E\to M$, $F\to N$, a smooth map $f:M\to N$, and a bundle map $\Phi:E\to F$ over $f$.
 
-[L1] The pullback fibre product $f^*F$ is a smooth vector bundle over $M$
-([[thm-the-pullback-fibre-product-is-a-smooth-vector-bundle]]).
+[L1] The pullback fibre product $f^*F$ is a smooth vector bundle over $M$ ([[thm-the-pullback-fibre-product-is-a-smooth-vector-bundle]]).
 
-[L2] Sections of a Hom bundle are the same as fibrewise linear bundle maps over
-the identity ([[prop-sections-of-hom-are-the-same-as-smooth-fibrewise-linear-maps]]).
+[L2] Sections of a Hom bundle are the same as fibrewise linear bundle maps over the identity ([[prop-sections-of-hom-are-the-same-as-smooth-fibrewise-linear-maps]]).
 
 ## Proof
 

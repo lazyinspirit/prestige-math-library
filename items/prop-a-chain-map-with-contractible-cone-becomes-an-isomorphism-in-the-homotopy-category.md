@@ -31,12 +31,9 @@ $f$ is an isomorphism in the homotopy category.
 
 **Given:** A chain map $f:C_\bullet\to D_\bullet$ with contractible cone.
 
-[L1] A chain map is a chain-homotopy equivalence exactly when its cone is
-contractible
-([[thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible]]).
+[L1] A chain map is a chain-homotopy equivalence exactly when its cone is contractible ([[thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible]]).
 
-[L2] Morphisms in the homotopy category are homotopy classes of chain maps
-([[def-homotopy-category-of-chain-complexes]]).
+[L2] Morphisms in the homotopy category are homotopy classes of chain maps ([[def-homotopy-category-of-chain-complexes]]).
 
 ## Proof
 

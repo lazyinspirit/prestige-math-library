@@ -32,12 +32,9 @@ The element $-1$ is a square in $\mathbb Q_5$.
 
 **Given:** The polynomial $f(X)=X^2+1$ over $\mathbb Z_5$.
 
-[L1] For odd $p$, a unit of $\mathbb Z_p$ is a square in $\mathbb Q_p$ exactly
-when its residue class is a square in $\mathbb F_p^\times$
-([[thm-square-criterion-in-qp-for-odd-p]]).
+[L1] For odd $p$, a unit of $\mathbb Z_p$ is a square in $\mathbb Q_p$ exactly when its residue class is a square in $\mathbb F_p^\times$ ([[thm-square-criterion-in-qp-for-odd-p]]).
 
-[L2] Simple roots lift uniquely, and Newton iteration gives the same root
-([[cor-p-adic-simple-root-lifting]], [[thm-p-adic-newton-criterion]]).
+[L2] Simple roots lift uniquely, and Newton iteration gives the same root ([[cor-p-adic-simple-root-lifting]], [[thm-p-adic-newton-criterion]]).
 
 ## Verification
 

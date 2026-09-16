@@ -103,20 +103,6 @@ $$\cos\theta=\frac A H,\qquad \sin\theta=\frac O H.$$
 
 ## Remarks
 
-The strict hypotheses $A,O>0$ make the triangle nondegenerate and place $\theta$
-in the acute range $(0,\pi/2)$. If one of the legs is zero, the normalized point
-lies on a coordinate axis and the radian definition still supplies the
-corresponding unit-circle value, but the resulting configuration is not a
-nondegenerate right triangle; the theorem does not impose an acute-triangle
-side-ratio convention on those axis or quadrantal cases.
+The strict hypotheses $A,O>0$ make the triangle nondegenerate and place $\theta$ in the acute range $(0,\pi/2)$. If one of the legs is zero, the normalized point lies on a coordinate axis and the radian definition still supplies the corresponding unit-circle value, but the resulting configuration is not a nondegenerate right triangle; the theorem does not impose an acute-triangle side-ratio convention on those axis or quadrantal cases.
 
-**What is measured, and what is not.** The library assigns radian measure only
-to a counterclockwise unit-circle arc starting at $(1,0)$
-([[def-radian-angle-by-unit-circle-arc-length]]); it defines no interior angle
-of a triangle, and no invariance of an angle under scaling. So the theorem
-identifies $\theta$ as the radian measure of the arc ending at
-$(A/H,O/H)$ — the unit-circle point of which the hypotenuse vertex
-$P=H(\cos\theta,\sin\theta)$ is the positive multiple $H$ — and asserts the two
-side ratios of the triangle. It does not assert that the triangle's interior
-angle at the origin equals $\theta$, which would need a notion of angle the
-library has not built.
+**What is measured, and what is not.** The library assigns radian measure only to a counterclockwise unit-circle arc starting at $(1,0)$ ([[def-radian-angle-by-unit-circle-arc-length]]); it defines no interior angle of a triangle, and no invariance of an angle under scaling. So the theorem identifies $\theta$ as the radian measure of the arc ending at $(A/H,O/H)$ — the unit-circle point of which the hypotenuse vertex $P=H(\cos\theta,\sin\theta)$ is the positive multiple $H$ — and asserts the two side ratios of the triangle. It does not assert that the triangle's interior angle at the origin equals $\theta$, which would need a notion of angle the library has not built.

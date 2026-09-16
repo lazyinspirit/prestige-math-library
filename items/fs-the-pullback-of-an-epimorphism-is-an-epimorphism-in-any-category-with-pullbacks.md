@@ -34,16 +34,11 @@ epimorphism.
 
 **Given:** The full subcategory of Hausdorff spaces and continuous maps.
 
-[L1] A Hausdorff space is a topological space in which points are separated by
-disjoint neighbourhoods ([[def-hausdorff-space]]).
+[L1] A Hausdorff space is a topological space in which points are separated by disjoint neighbourhoods ([[def-hausdorff-space]]).
 
-[L2] A continuous map into a Hausdorff space is determined by its restriction
-to any dense subset
-([[def-dense-top]],
-[[cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]]).
+[L2] A continuous map into a Hausdorff space is determined by its restriction to any dense subset ([[def-dense-top]], [[cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal]]).
 
-[L3] The rationals are dense in $\mathbb R$, and the irrationals are nonempty
-([[lem-q-and-irrationals-dense-r]]).
+[L3] The rationals are dense in $\mathbb R$, and the irrationals are nonempty ([[lem-q-and-irrationals-dense-r]]).
 
 ## Refutation
 

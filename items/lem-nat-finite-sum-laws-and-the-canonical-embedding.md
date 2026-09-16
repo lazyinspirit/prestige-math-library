@@ -127,24 +127,8 @@ whose two sides are canonical naturals is an identity in $\mathbb{N}$.
 
 ## Remarks
 
-- **Why the zero cases are done by hand.** [[lem-of-naturals-positive]] states
-  $(m+n)\cdot 1_F = m \cdot 1_F + n \cdot 1_F$ and
-  $(mn)\cdot 1_F = (m\cdot 1_F)(n \cdot 1_F)$ **for $m, n \ge 1$ only**, because
-  the notation $n \cdot 1_F$ is introduced there by a recursion that starts at
-  $1$. Every count on this page can be $0$, so the two one-line checks at $0$ in
-  step 2.2 are not pedantry: without them clause 0 would be a citation to a
-  statement that was not made.
+- **Why the zero cases are done by hand.** [[lem-of-naturals-positive]] states $(m+n)\cdot 1_F = m \cdot 1_F + n \cdot 1_F$ and $(mn)\cdot 1_F = (m\cdot 1_F)(n \cdot 1_F)$ **for $m, n \ge 1$ only**, because the notation $n \cdot 1_F$ is introduced there by a recursion that starts at $1$. Every count on this page can be $0$, so the two one-line checks at $0$ in step 2.2 are not pedantry: without them clause 0 would be a citation to a statement that was not made.
 
-- **The real-valued laws are the same list.** [[lem-finite-sum-laws]] proves
-  additivity, scaling, splitting, monotonicity, telescoping and the product laws
-  for sums of **reals**. The clauses above are their $\mathbb{N}$-valued
-  counterparts, proved from the same recursion, and clause 6 is what ties the two
-  lists together. Neither list contains a permutation-invariance clause; that is
-  proved separately in the next item, and it is what the sum over a finite index
-  set needs.
+- **The real-valued laws are the same list.** [[lem-finite-sum-laws]] proves additivity, scaling, splitting, monotonicity, telescoping and the product laws for sums of **reals**. The clauses above are their $\mathbb{N}$-valued counterparts, proved from the same recursion, and clause 6 is what ties the two lists together. Neither list contains a permutation-invariance clause; that is proved separately in the next item, and it is what the sum over a finite index set needs.
 
-- **What clause 7 buys.** Because $\iota$ is injective, a proof may cross into
-  $\mathbb{R}$, use subtraction or division there, and come back: if
-  $\iota(x) = \iota(y)$ with $x, y \in \mathbb{N}$ then $x = y$. The binomial
-  theorem below lives in $\mathbb{R}$ for exactly this reason, while every
-  coefficient in it is a count.
+- **What clause 7 buys.** Because $\iota$ is injective, a proof may cross into $\mathbb{R}$, use subtraction or division there, and come back: if $\iota(x) = \iota(y)$ with $x, y \in \mathbb{N}$ then $x = y$. The binomial theorem below lives in $\mathbb{R}$ for exactly this reason, while every coefficient in it is a count.

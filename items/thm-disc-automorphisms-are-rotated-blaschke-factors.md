@@ -35,15 +35,11 @@ $$f(z)=e^{i\theta}\varphi_a(z)=e^{i\theta}\frac{a-z}{1-\overline a\,z}\qquad(z\i
 
 **Given:** A holomorphic self-map $f:\mathbb D\to\mathbb D$.
 
-[F1] The automorphism group $\operatorname{Aut}(\mathbb D)$ consists of the
-biholomorphic self-maps of $\mathbb D$
-([[def-conformal-equivalence-and-automorphism-group]]).
+[F1] The automorphism group $\operatorname{Aut}(\mathbb D)$ consists of the biholomorphic self-maps of $\mathbb D$ ([[def-conformal-equivalence-and-automorphism-group]]).
 
-[F2] Every Blaschke factor is an automorphism of $\mathbb D$
-([[thm-blaschke-factor-is-a-disc-automorphism]]).
+[F2] Every Blaschke factor is an automorphism of $\mathbb D$ ([[thm-blaschke-factor-is-a-disc-automorphism]]).
 
-[F3] Equality in Schwarz's lemma characterizes rotations
-([[thm-unit-disc-schwarz-lemma-with-rigidity]]).
+[F3] Equality in Schwarz's lemma characterizes rotations ([[thm-unit-disc-schwarz-lemma-with-rigidity]]).
 
 ## Proof
 

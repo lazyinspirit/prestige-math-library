@@ -50,23 +50,13 @@ Thus Hom is left exact in each variable.
 
 **Given:** An abelian category $\mathcal A$ and an object $X$ of $\mathcal A$.
 
-[L1] In an abelian category, exactness at the left end means that the first
-displayed map is a kernel of the second
-([[thm-degenerate-exactness-criteria]]).
+[L1] In an abelian category, exactness at the left end means that the first displayed map is a kernel of the second ([[thm-degenerate-exactness-criteria]]).
 
-[L2] Abelian categories have all finite limits, and representable functors
-preserve existing small limits
-([[thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits]],
-[[thm-representable-functors-preserve-small-limits]]).
+[L2] Abelian categories have all finite limits, and representable functors preserve existing small limits ([[thm-an-abelian-category-has-all-finite-limits-and-all-finite-colimits]], [[thm-representable-functors-preserve-small-limits]]).
 
-[L3] The covariant and contravariant Hom assignments are the representable
-functors $\mathcal A(X,-)$ and $\mathcal A^{\mathrm{op}}(X,-)$
-([[def-hom-functors-and-hom-bifunctor]],
-[[thm-the-opposite-of-an-abelian-category-is-abelian]]).
+[L3] The covariant and contravariant Hom assignments are the representable functors $\mathcal A(X,-)$ and $\mathcal A^{\mathrm{op}}(X,-)$ ([[def-hom-functors-and-hom-bifunctor]], [[thm-the-opposite-of-an-abelian-category-is-abelian]]).
 
-[L4] The target category of these Hom functors is $\mathbf{Ab}$, which is
-abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L4] The target category of these Hom functors is $\mathbf{Ab}$, which is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
 ## Proof
 

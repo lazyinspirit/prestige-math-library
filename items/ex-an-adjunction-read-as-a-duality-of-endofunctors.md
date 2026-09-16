@@ -30,14 +30,11 @@ the functor $(-)\times A$ has right dual the exponential functor $(-)^A$.
 
 ## Facts & Assumptions
 
-**Given:** A set $A$ and the endofunctors $(-)\times A$ and $(-)^A$ of
-$\mathbf{Set}$.
+**Given:** A set $A$ and the endofunctors $(-)\times A$ and $(-)^A$ of $\mathbf{Set}$.
 
-[L1] Currying gives an adjunction $(-)\times A\dashv(-)^A$
-([[thm-currying-is-an-adjunction-in-set]]).
+[L1] Currying gives an adjunction $(-)\times A\dashv(-)^A$ ([[thm-currying-is-an-adjunction-in-set]]).
 
-[L2] In the composition monoidal category, right adjoints are exactly right
-duals ([[thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor]]).
+[L2] In the composition monoidal category, right adjoints are exactly right duals ([[thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor]]).
 
 ## Verification
 

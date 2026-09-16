@@ -62,21 +62,11 @@ short exact sequences, then these maps are natural with respect to $f$.
 
 **Given:** An object $A$ and a chosen effacement sequence as in the statement.
 
-[L1] Effaceability supplies the chosen projective or injective short exact
-sequence
-([[def-effaceable-homological-delta-functor-in-positive-degrees]],
-[[def-effaceable-cohomological-delta-functor-in-positive-degrees]]).
+[L1] Effaceability supplies the chosen projective or injective short exact sequence ([[def-effaceable-homological-delta-functor-in-positive-degrees]], [[def-effaceable-cohomological-delta-functor-in-positive-degrees]]).
 
-[L2] In the homological case, the chosen effacement makes the connecting map
-$\partial_n^T:T_n(A)\to T_{n-1}(K)$ monic; in the cohomological case, the
-chosen effacement makes $S^{n+1}(A)$ the cokernel of
-$S^n(I)\to S^n(C)$
-([[lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]],
-[[lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]]).
+[L2] In the homological case, the chosen effacement makes the connecting map $\partial_n^T:T_n(A)\to T_{n-1}(K)$ monic; in the cohomological case, the chosen effacement makes $S^{n+1}(A)$ the cokernel of $S^n(I)\to S^n(C)$ ([[lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle]], [[lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle]]).
 
-[L3] A natural transformation is defined by commuting with the maps induced by
-the chosen morphisms
-([[def-natural-transformation]]).
+[L3] A natural transformation is defined by commuting with the maps induced by the chosen morphisms ([[def-natural-transformation]]).
 
 ## Proof
 

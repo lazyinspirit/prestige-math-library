@@ -39,20 +39,13 @@ $$\operatorname{hom}(J)\geq\sqrt q.$$
 **Proof technique:** direct.
 
 1.1 We prove the stronger inequality. [given]
-$$\alpha(J)\omega(J)\ge q$$
-by induction on $q$. The cases $q=0$ and $q=1$ are immediate. [given]
+$$\alpha(J)\omega(J)\ge q$$ by induction on $q$. The cases $q=0$ and $q=1$ are immediate. [given]
 
 2.1 Assume $q\geq2$. By [L1], write $V(J)=A\sqcup B$ with $A,B\neq\varnothing$ and $(A,B)$ pure. Put. [step 1.1, L1]
-$$a=\alpha(J[A]),\quad b=\alpha(J[B]),\quad c=\omega(J[A]),\quad d=\omega(J[B]).$$
-The induction hypothesis gives $ac\ge|A|$ and $bd\ge|B|$. [step 1.1, L1]
+$$a=\alpha(J[A]),\quad b=\alpha(J[B]),\quad c=\omega(J[A]),\quad d=\omega(J[B]).$$ The induction hypothesis gives $ac\ge|A|$ and $bd\ge|B|$. [step 1.1, L1]
 
 3.1 If $(A,B)$ is complete, then. [step 2.1, algebra]
-$\omega(J)=c+d$ and $\alpha(J)=\max\{a,b\}$, whence
-$$\alpha(J)\omega(J)=\max\{a,b\}(c+d)\ge ac+bd\ge|A|+|B|=q.$$
-If $(A,B)$ is anticomplete, then
-$\alpha(J)=a+b$ and $\omega(J)=\max\{c,d\}$, and the same calculation gives
-$\alpha(J)\omega(J)\ge ac+bd\ge q$. [step 2.1, algebra]
+$\omega(J)=c+d$ and $\alpha(J)=\max\{a,b\}$, whence $$\alpha(J)\omega(J)=\max\{a,b\}(c+d)\ge ac+bd\ge|A|+|B|=q.$$ If $(A,B)$ is anticomplete, then $\alpha(J)=a+b$ and $\omega(J)=\max\{c,d\}$, and the same calculation gives $\alpha(J)\omega(J)\ge ac+bd\ge q$. [step 2.1, algebra]
 
 4.1 The induction closes. Since. [step 1.1, step 3.1, algebra]
-$\max\{\alpha(J),\omega(J)\}\ge\sqrt{\alpha(J)\omega(J)}$, one obtains
-$\operatorname{hom}(J)\ge\sqrt q$. [step 1.1, step 3.1, algebra] ∎
+$\max\{\alpha(J),\omega(J)\}\ge\sqrt{\alpha(J)\omega(J)}$, one obtains $\operatorname{hom}(J)\ge\sqrt q$. [step 1.1, step 3.1, algebra] ∎

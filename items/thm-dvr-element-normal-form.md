@@ -43,8 +43,7 @@ with $u\in V^\times$ and $n\in\mathbb Z$.
 
 [F1] A uniformiser is an element of value $1$ in a discrete valuation ring ([[def-uniformising-parameter]]).
 
-[F2] A discrete valuation ring is the nonnegative locus of a surjective
-valuation $v:K\to\mathbb Z\cup\{\infty\}$ ([[def-discrete-valuation-ring]]).
+[F2] A discrete valuation ring is the nonnegative locus of a surjective valuation $v:K\to\mathbb Z\cup\{\infty\}$ ([[def-discrete-valuation-ring]]).
 
 ## Proof
 

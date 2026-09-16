@@ -46,18 +46,13 @@ satisfies equality in both conclusions.
 
 **Given:** A holomorphic map $f:\mathbb D\to\mathbb D$ with $f(0)=0$.
 
-[F1] The unit disc is $\mathbb D=\{z\in\mathbb C:|z|<1\}$
-([[def-unit-disc-upper-half-plane-and-blaschke-factor]]).
+[F1] The unit disc is $\mathbb D=\{z\in\mathbb C:|z|<1\}$ ([[def-unit-disc-upper-half-plane-and-blaschke-factor]]).
 
-[F2] If a holomorphic function on a punctured disc has a finite limit at the
-centre, then the singularity is removable
-([[thm-removable-singularity-characterizations]]).
+[F2] If a holomorphic function on a punctured disc has a finite limit at the centre, then the singularity is removable ([[thm-removable-singularity-characterizations]]).
 
-[F3] Boundary modulus control on a bounded domain bounds the modulus throughout
-the domain ([[thm-maximum-modulus-principle-with-boundary-and-infinity-control]]).
+[F3] Boundary modulus control on a bounded domain bounds the modulus throughout the domain ([[thm-maximum-modulus-principle-with-boundary-and-infinity-control]]).
 
-[F4] If the modulus of a holomorphic function has an interior local maximum,
-then the function is constant ([[thm-local-maximum-modulus-principle]]).
+[F4] If the modulus of a holomorphic function has an interior local maximum, then the function is constant ([[thm-local-maximum-modulus-principle]]).
 
 ## Proof
 

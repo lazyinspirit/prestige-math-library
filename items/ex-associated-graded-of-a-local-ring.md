@@ -42,12 +42,9 @@ $$ \operatorname{gr}_{\mathfrak m}(R_2)\cong k[X,Y]/(Y^2). $$
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the local rings $R_1$ and $R_2$ above, and the
-maximal-ideal filtrations.
+**Given:** A field $k$, the local rings $R_1$ and $R_2$ above, and the maximal-ideal filtrations.
 
-[L1] The associated graded ring is
-$$ \operatorname{gr}_{\mathfrak m}(R)=\bigoplus_{n\ge0}\mathfrak m^n/\mathfrak m^{n+1} $$
-([[def-associated-graded-ring-and-module]]).
+[L1] The associated graded ring is $$ \operatorname{gr}_{\mathfrak m}(R)=\bigoplus_{n\ge0}\mathfrak m^n/\mathfrak m^{n+1} $$ ([[def-associated-graded-ring-and-module]]).
 
 ## Verification
 

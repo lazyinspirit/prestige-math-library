@@ -53,20 +53,13 @@ All integrals in this clause are Lebesgue integrals.
 
 ## Facts & Assumptions
 
-**Given:** A Schwartz function $\varphi$; for the second clause also
-[[def-countable-choice|Countable Choice]], a family $H$ with the stated
-seminorm majorants, and $u\in\mathcal S'$.
+**Given:** A Schwartz function $\varphi$; for the second clause also [[def-countable-choice|Countable Choice]], a family $H$ with the stated seminorm majorants, and $u\in\mathcal S'$.
 
-[F1] Fixed translations, reflection, and derivatives preserve Schwartz space
-continuously
-([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]]).
+[F1] Fixed translations, reflection, and derivatives preserve Schwartz space continuously ([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]]).
 
-[F2] The functional $u$ obeys one finite Schwartz-seminorm estimate
-([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
+[F2] The functional $u$ obeys one finite Schwartz-seminorm estimate ([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
 
-[F3] Dominated convergence and the complex integral triangle inequality hold
-for the stated Lebesgue integrals ([[thm-dominated-convergence]],
-[[thm-integral-triangle-inequality]]).
+[F3] Dominated convergence and the complex integral triangle inequality hold for the stated Lebesgue integrals ([[thm-dominated-convergence]], [[thm-integral-triangle-inequality]]).
 
 ## Proof
 
@@ -76,8 +69,7 @@ for the stated Lebesgue integrals ([[thm-dominated-convergence]],
 
 $$p_{\alpha\beta}\!\left( \frac{T_{x+he_j}\varphi-T_x\varphi}{h}-T_x(\partial_j\varphi) \right)\longrightarrow0.$$
 
-The same estimate applied to every derivative gives continuity of all
-iterated derivatives. [F1, algebra]
+The same estimate applied to every derivative gives continuity of all iterated derivatives. [F1, algebra]
 
 Iterating step 1.1 proves that $x\mapsto T_x\varphi$ is $C^\infty$ in the Schwartz topology and gives the displayed derivative formula.  When $\varphi=0$ every derivative is zero.  No integration on parameter space and no choice principle occurred. [step 1.1]
 
@@ -85,10 +77,7 @@ Iterating step 1.1 proves that $x\mapsto T_x\varphi$ is $C^\infty$ in the Schwar
 
 $$\partial_y^\beta G(y)=\int\partial_y^\beta H(t,y)\,dt, \qquad p_{\alpha\beta}(G)\leq\int g_{\alpha\beta}(t)\,dt.$$
 
-The derivative statement follows successively from difference quotients and
-dominated convergence; the seminorm estimate follows from the integral
-triangle inequality before taking the supremum in $y$.  Thus $G\in\mathcal S$.
-[F3]
+The derivative statement follows successively from difference quotients and dominated convergence; the seminorm estimate follows from the integral triangle inequality before taking the supremum in $y$.  Thus $G\in\mathcal S$. [F3]
 
 1.3 Let $Q_R=[-R,R]^r$.  Subdivide it into the canonical equal mesh and form lower-corner finite sums $S_{R,m}$ for $H$.  Uniform continuity in each seminorm and [F3] make these sums converge to $G_R(y)=\int_{Q_R}H(t,y)\,dt$ in that seminorm.  Continuity of $u$ may therefore be passed through this explicit limit. [F2, F3]
 

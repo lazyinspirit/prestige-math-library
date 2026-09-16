@@ -33,17 +33,11 @@ same smooth structure.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a closed subgroup $H\le G$, and complements
-$\mathfrak g=\mathfrak m_1\oplus\mathfrak h=\mathfrak m_2\oplus\mathfrak h$.
+**Given:** $\mathrm{AC}_\omega$, a closed subgroup $H\le G$, and complements $\mathfrak g=\mathfrak m_1\oplus\mathfrak h=\mathfrak m_2\oplus\mathfrak h$.
 
-[A1] The quotient theorem gives the unique smooth structure for which the
-coset map is a surjective submersion and the left action is smooth.
-[[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
+[A1] The quotient theorem gives the unique smooth structure for which the coset map is a surjective submersion and the left action is smooth. [[def-countable-choice]], [[thm-quotient-manifold-by-a-closed-lie-subgroup]].
 
-[F1] The exponential is smooth with identity differential at zero, and a
-smooth map with invertible differential is locally a diffeomorphism.
-[[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]].
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F1] The exponential is smooth with identity differential at zero, and a smooth map with invertible differential is locally a diffeomorphism. [[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]]. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
 ## Proof
 

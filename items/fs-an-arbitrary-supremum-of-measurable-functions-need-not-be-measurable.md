@@ -26,16 +26,11 @@ functions is measurable. The correct theorem on this page is only the
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, the Lebesgue measurable-space structure on
-$[0,1]$, a Vitali set $V \subseteq [0,1]$, and the family
-$\{\mathbf{1}_{\{t\}} : t \in V\}$ of indicator functions on $[0,1]$.
+**Given:** The Axiom of Choice, the Lebesgue measurable-space structure on $[0,1]$, a Vitali set $V \subseteq [0,1]$, and the family $\{\mathbf{1}_{\{t\}} : t \in V\}$ of indicator functions on $[0,1]$.
 
-[L1] Assuming choice, Vitali sets exist and are not Lebesgue measurable.
-([[thm-vitali-sets-exist-under-choice-on-r-over-q]],
-[[thm-a-vitali-set-is-not-lebesgue-measurable]])
+[L1] Assuming choice, Vitali sets exist and are not Lebesgue measurable. ([[thm-vitali-sets-exist-under-choice-on-r-over-q]], [[thm-a-vitali-set-is-not-lebesgue-measurable]])
 
-[L2] The indicator of a measurable set is measurable.
-([[prop-indicator-function-is-measurable-iff-its-set-is-measurable]])
+[L2] The indicator of a measurable set is measurable. ([[prop-indicator-function-is-measurable-iff-its-set-is-measurable]])
 
 ## Refutation
 
@@ -48,6 +43,4 @@ $\mathbf{1}_{\{t\}}$ measurable. [given, L2]
 
 $$\sup_{t \in V} \mathbf{1}_{\{t\}} = \mathbf{1}_V.$$
 
-Since $V$ is not measurable by [L1], the function $\mathbf{1}_V$ is not
-measurable. So an uncountable supremum of measurable functions can fail to be
-measurable. [step 1.1, L1, L2] ∎
+Since $V$ is not measurable by [L1], the function $\mathbf{1}_V$ is not measurable. So an uncountable supremum of measurable functions can fail to be measurable. [step 1.1, L1, L2] ∎

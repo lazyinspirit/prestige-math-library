@@ -33,12 +33,9 @@ $Z(\mathfrak g)\neq0$.
 
 **Given:** A nonzero nilpotent Lie algebra $\mathfrak g$.
 
-[L1] Nilpotence means that the descending lower central series eventually
-vanishes, with $\gamma_{r+1}=[\mathfrak g,\gamma_r]$
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L1] Nilpotence means that the descending lower central series eventually vanishes, with $\gamma_{r+1}=[\mathfrak g,\gamma_r]$ ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
-[L2] The center consists of the elements $z$ satisfying
-$[\mathfrak g,z]=0$ ([[def-lie-subalgebra-ideal-and-center]]).
+[L2] The center consists of the elements $z$ satisfying $[\mathfrak g,z]=0$ ([[def-lie-subalgebra-ideal-and-center]]).
 
 ## Proof
 

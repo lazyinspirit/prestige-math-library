@@ -38,27 +38,17 @@ a field $F$. Then $T$ is invertible if and only if $\det(T)\neq0$.
 
 **Given:** $T,V,F$ as in the statement.
 
-[L1] If $T$ is invertible, its representing matrix is invertible
-([[thm-invertible-matrices-correspond-to-linear-isomorphisms]]).
+[L1] If $T$ is invertible, its representing matrix is invertible ([[thm-invertible-matrices-correspond-to-linear-isomorphisms]]).
 
-[L4] Every square matrix is the representing matrix of a unique operator, and
-composition of operators becomes multiplication of their matrices
-([[thm-matrix-representation-is-a-vector-space-isomorphism]],
-[[thm-matrix-of-a-composite-is-the-product]]).
+[L4] Every square matrix is the representing matrix of a unique operator, and composition of operators becomes multiplication of their matrices ([[thm-matrix-representation-is-a-vector-space-isomorphism]], [[thm-matrix-of-a-composite-is-the-product]]).
 
-[L2] A positive-sized square matrix over a commutative ring is invertible
-exactly when its determinant is a unit
-([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
+[L2] A positive-sized square matrix over a commutative ring is invertible exactly when its determinant is a unit ([[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
 
-[F1] A field is a commutative ring and its units are precisely its nonzero
-elements ([[lem-field-is-a-commutative-ring]]).
+[F1] A field is a commutative ring and its units are precisely its nonzero elements ([[lem-field-is-a-commutative-ring]]).
 
-[L3] The operator determinant is the determinant of a representing matrix and
-is basis independent
-([[thm-operator-determinant-is-basis-independent]]).
+[L3] The operator determinant is the determinant of a representing matrix and is basis independent ([[thm-operator-determinant-is-basis-independent]]).
 
-[F2] In dimension zero, the operator determinant is defined to be $1$
-([[def-determinant-of-a-linear-operator]]).
+[F2] In dimension zero, the operator determinant is defined to be $1$ ([[def-determinant-of-a-linear-operator]]).
 
 ## Proof
 

@@ -36,15 +36,11 @@ $\mathcal B(C,-):\mathcal B\to\mathcal V$ has a left enriched adjoint.
 
 **Given:** A right-closed monoidal base $\mathcal V$, a $\mathcal V$-category $\mathcal B$, and an object $C$ of it.
 
-[L1] Tensors of $C$ by objects $X\in\mathcal V$ are characterized by
-$\mathcal B(X\otimes C,B)\cong[X,\mathcal B(C,B)]$
-([[def-cotensor-and-tensor]]).
+[L1] Tensors of $C$ by objects $X\in\mathcal V$ are characterized by $\mathcal B(X\otimes C,B)\cong[X,\mathcal B(C,B)]$ ([[def-cotensor-and-tensor]]).
 
-[L2] An enriched adjunction is exactly a natural isomorphism of enriched
-hom-objects ([[def-enriched-adjunction]]).
+[L2] An enriched adjunction is exactly a natural isomorphism of enriched hom-objects ([[def-enriched-adjunction]]).
 
-[L3] The functor $\mathcal B(C,-)$ is the representable enriched functor at $C$
-([[def-representable-enriched-functor]]).
+[L3] The functor $\mathcal B(C,-)$ is the representable enriched functor at $C$ ([[def-representable-enriched-functor]]).
 
 ## Proof
 

@@ -40,14 +40,11 @@ index $\lambda$.
 
 ## Facts & Assumptions
 
-**Given:** Integers $n\ge0$ and $0\le\lambda\le n$, and the quadratic form
-$q_\lambda$ above.
+**Given:** Integers $n\ge0$ and $0\le\lambda\le n$, and the quadratic form $q_\lambda$ above.
 
-[F1] Index and nondegeneracy are read from the Hessian
-([[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
+[F1] Index and nondegeneracy are read from the Hessian ([[def-nondegenerate-critical-point-nullity-index-and-coindex]]).
 
-[L1] The Morse normal form is exactly the displayed signed quadratic form
-([[thm-morse-lemma]]).
+[L1] The Morse normal form is exactly the displayed signed quadratic form ([[thm-morse-lemma]]).
 
 ## Verification
 

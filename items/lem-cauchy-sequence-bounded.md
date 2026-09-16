@@ -80,25 +80,10 @@ handled by a maximum.
 
 ## Remarks
 
-- **One value of $\varepsilon$ suffices, and $\varepsilon = 1$ is not special.**
-  Any single positive rational would do; what matters is that the Cauchy
-  condition confines all terms from some index onward to within a fixed distance
-  of one term, after which only finitely many terms remain, and a finite list of
-  reals has a maximum ([[lem-finite-set-has-max]]). This is the same division of
-  labour as in [[lem-convergent-implies-bounded]].
+- **One value of $\varepsilon$ suffices, and $\varepsilon = 1$ is not special.** Any single positive rational would do; what matters is that the Cauchy condition confines all terms from some index onward to within a fixed distance of one term, after which only finitely many terms remain, and a finite list of reals has a maximum ([[lem-finite-set-has-max]]). This is the same division of labour as in [[lem-convergent-implies-bounded]].
 
-- **The converse is false.** A bounded sequence need not be Cauchy: the
-  alternating sequence of [[fs-bounded-implies-convergent]] is bounded and, being
-  divergent, is not Cauchy ([[lem-convergent-implies-cauchy]] would otherwise
-  make it convergent by [[thm-cauchy-criterion-via-lub]]). Boundedness is
-  strictly weaker, and what it does yield is a convergent *subsequence*
-  ([[thm-bolzano-weierstrass]]).
+- **The converse is false.** A bounded sequence need not be Cauchy: the alternating sequence of [[fs-bounded-implies-convergent]] is bounded and, being divergent, is not Cauchy ([[lem-convergent-implies-cauchy]] would otherwise make it convergent by [[thm-cauchy-criterion-via-lub]]). Boundedness is strictly weaker, and what it does yield is a convergent *subsequence* ([[thm-bolzano-weierstrass]]).
 
-- **No completeness is used.** The argument runs in any ordered field, and it is
-  used here as the first of the three steps by which the least-upper-bound
-  property is converted into Cauchy completeness in
-  [[thm-cauchy-criterion-via-lub]].
+- **No completeness is used.** The argument runs in any ordered field, and it is used here as the first of the three steps by which the least-upper-bound property is converted into Cauchy completeness in [[thm-cauchy-criterion-via-lub]].
 
-- The rational counterpart, proved on the Cauchy-construction page, is
-  [[lem-cauchy-bounded]]. It is the house-style exemplar for this argument, and
-  nothing here depends on it, since the two lemmas live in different fields.
+- The rational counterpart, proved on the Cauchy-construction page, is [[lem-cauchy-bounded]]. It is the house-style exemplar for this argument, and nothing here depends on it, since the two lemmas live in different fields.

@@ -35,9 +35,7 @@ $$ \mathbb{RP}^{\infty}\simeq B(\mathbb Z/2)=K(\mathbb Z/2,1). $$
 
 [F2] The same finite-join identification induces the antipodal quotient $S^N/(\mathbb Z/2)=\mathbb{RP}^N$ ([[lem-finite-join-models-for-circle-and-two-point-groups]]).
 
-[F3] For a well-pointed topological group of CW type, Milnor's $EG$ is
-contractible and its orbit map is a principal bundle
-([[thm-milnor-join-model-is-a-contractible-free-g-space]]).
+[F3] For a well-pointed topological group of CW type, Milnor's $EG$ is contractible and its orbit map is a principal bundle ([[thm-milnor-join-model-is-a-contractible-free-g-space]]).
 
 [F4] Assuming AC, the classifying space of a discrete group $G$ has CW type $K(G,1)$ ([[cor-classifying-space-of-a-discrete-group-is-a-k-g-one]]).
 
@@ -51,9 +49,6 @@ contractible and its orbit map is a principal bundle
 
 $$ S^\infty\longrightarrow\mathbb{RP}^{\infty}. $$
 
-It is the antipodal double cover and its quotient is Milnor's $B(\mathbb Z/2)$.
-By [F3] its total space is contractible and the map is locally trivial; because
-$\mathbb Z/2$ is discrete, each trivialization is an evenly covered
-neighborhood. Thus it is the universal double cover. [F1, F2, F3]
+It is the antipodal double cover and its quotient is Milnor's $B(\mathbb Z/2)$. By [F3] its total space is contractible and the map is locally trivial; because $\mathbb Z/2$ is discrete, each trivialization is an evenly covered neighborhood. Thus it is the universal double cover. [F1, F2, F3]
 
 2.1 Under [A1], apply [F4]: the base is connected, its fundamental group is $\mathbb Z/2$, and every higher homotopy group vanishes. The assumption is used exactly through that cited corollary. Hence $\mathbb{RP}^{\infty}$ is the displayed Eilenberg--Mac Lane model. $\square$ [F4, A1, step 1.1]

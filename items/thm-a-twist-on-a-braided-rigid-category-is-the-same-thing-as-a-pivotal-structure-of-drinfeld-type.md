@@ -32,21 +32,15 @@ Then $\psi$ is a pivotal structure if and only if $\theta$ is a twist.
 
 ## Facts & Assumptions
 
-**Given:** A braided tensor category, its Drinfeld isomorphism $u$, and a
-natural automorphism $\theta$ of the identity functor.
+**Given:** A braided tensor category, its Drinfeld isomorphism $u$, and a natural automorphism $\theta$ of the identity functor.
 
-[F1] EGNO formula (8.35) and the sentence after it state exactly that
-$\psi_X=u_X\theta_X$ is a tensor isomorphism $X\to X^{**}$ if and only if
-$\theta$ is a twist.
+[F1] EGNO formula (8.35) and the sentence after it state exactly that $\psi_X=u_X\theta_X$ is a tensor isomorphism $X\to X^{**}$ if and only if $\theta$ is a twist.
 
-[L1] The Drinfeld morphism exists, and in a braided tensor category it is an
-isomorphism ([[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]).
+[L1] The Drinfeld morphism exists, and in a braided tensor category it is an isomorphism ([[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]).
 
-[L2] A pivotal structure is precisely a monoidal natural isomorphism
-$\operatorname{id}\Rightarrow(-)^{\vee\vee}$ ([[def-pivotal-structure]]).
+[L2] A pivotal structure is precisely a monoidal natural isomorphism $\operatorname{id}\Rightarrow(-)^{\vee\vee}$ ([[def-pivotal-structure]]).
 
-[L3] A twist is precisely a natural automorphism satisfying the double-braiding
-tensor law ([[def-twist-and-ribbon-structure]]).
+[L3] A twist is precisely a natural automorphism satisfying the double-braiding tensor law ([[def-twist-and-ribbon-structure]]).
 
 ## Proof
 

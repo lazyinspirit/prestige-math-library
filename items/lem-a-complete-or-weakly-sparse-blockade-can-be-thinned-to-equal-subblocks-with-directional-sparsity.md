@@ -58,17 +58,13 @@ such that:
 
 [L2] A complete pair stays complete after passing to subsets ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 
-[L3] Expectation is linear for finite families of random variables, without an
-independence hypothesis ([[thm-linearity-of-expectation]]).
+[L3] Expectation is linear for finite families of random variables, without an independence hypothesis ([[thm-linearity-of-expectation]]).
 
-[L4] The probability of a finite union of events is at most the sum of their
-probabilities ([[thm-finite-union-bound]]).
+[L4] The probability of a finite union of events is at most the sum of their probabilities ([[thm-finite-union-bound]]).
 
 ## Proof
 
-**Proof technique:** use finite averaging to choose equal ambient blocks with
-controlled edge counts, then delete vertices that are too heavy against the
-chosen ambient blocks.
+**Proof technique:** use finite averaging to choose equal ambient blocks with controlled edge counts, then delete vertices that are too heavy against the chosen ambient blocks.
 
 1.1 Put $n:=\lceil m\rceil$ and $s:=\lceil\epsilon n\rceil$. Since every $|A_i|$ is an integer at least $m$, one has $n\le |A_i|$. Choose independently and uniformly an $n$-element subset $X_i\subseteq A_i$ for each $i$. For a weakly $\epsilon^a$-sparse pair $(A_i,A_j)$, finite double counting and [L3] give $$\mathbb E\,e_G(X_i,X_j)=e_G(A_i,A_j)\frac{n^2}{|A_i||A_j|}\le\epsilon^a n^2.$$ Consequently the probability that $e_G(X_i,X_j)>\epsilon^{a-2}n^2$ is less than $\epsilon^2$: on that event the nonnegative edge count already exceeds the threshold, so its expectation is greater than the threshold times the event probability. There are at most $\binom{\ell}{2}$ relevant pairs, and $$\binom{\ell}{2}\epsilon^2<\frac{1+\epsilon}{2}<1$$ because $\ell=\lceil\epsilon^{-1}\rceil<\epsilon^{-1}+1$. By [L4], some simultaneous choice of the $X_i$ therefore satisfies $$e_G(X_i,X_j)\le\epsilon^{a-2}n^2$$ for every weakly sparse pair. Complete pairs remain complete by [L2]. Fix such a choice. [given, L1, L2, L3, L4, choose, algebra]
 

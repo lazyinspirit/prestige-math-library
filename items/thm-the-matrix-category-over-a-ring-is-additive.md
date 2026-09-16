@@ -31,12 +31,9 @@ For every ring $R$, the matrix category $\mathbf{Mat}_R$ is additive.
 
 **Given:** A ring $R$ and its matrix category $\mathbf{Mat}_R$.
 
-[L1] An additive category is a preadditive category with finite biproducts
-([[def-additive-category]]).
+[L1] An additive category is a preadditive category with finite biproducts ([[def-additive-category]]).
 
-[L2] In $\mathbf{Mat}_R$, objects are natural numbers and morphisms $n\to m$ are
-$m\times n$ matrices, with composition by matrix multiplication and identities
-$I_n$ ([[def-the-additive-category-of-matrices-over-a-ring]]).
+[L2] In $\mathbf{Mat}_R$, objects are natural numbers and morphisms $n\to m$ are $m\times n$ matrices, with composition by matrix multiplication and identities $I_n$ ([[def-the-additive-category-of-matrices-over-a-ring]]).
 
 ## Proof
 

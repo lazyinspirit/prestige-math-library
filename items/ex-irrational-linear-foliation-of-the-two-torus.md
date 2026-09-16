@@ -44,25 +44,16 @@ and each leaf is dense in the torus.
 
 [A1] Translation by $(1,\alpha)$ on $\mathbb R^2$ descends to the torus.
 
-[A2] Equip $\mathbb R^2/\mathbb Z^2$ with its standard quotient smooth
-structure, equivalently the product smooth structure on two circles.
+[A2] Equip $\mathbb R^2/\mathbb Z^2$ with its standard quotient smooth structure, equivalently the product smooth structure on two circles.
 
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 On the smooth torus of [A2], the constant line field spanned by $(1,\alpha)$ [A2]
-is smooth and nowhere zero, so it gives a regular one-dimensional distribution
-on $\mathbb T^2$. [A2, given]
+is smooth and nowhere zero, so it gives a regular one-dimensional distribution on $\mathbb T^2$. [A2, given]
 
 1.2 The integral curve through $[p]$ is the projected affine line [given]
-$t\mapsto[p+(t,\alpha t)]$. For $p=0$, fix a point $[(u,v)]$ of the torus and
-a neighborhood of it. Because $\alpha$ is irrational, the set of classes
-$\{[n\alpha]:n\in\mathbb Z\}$ is dense in $\mathbb R/\mathbb Z$. Choose $n$
-so that $[n\alpha]$ is arbitrarily close to $[v-\alpha u]$, and set $t=u+n$.
-Then $$[(t,\alpha t)]=[(u,\alpha u+n\alpha)]$$ has first coordinate $[u]$ and
-second coordinate arbitrarily close to $[v]$. Thus the leaf through $[0]$ is
-dense. Every other leaf is a torus translate of this one, and translations are
-homeomorphisms, so every leaf is dense. [given, algebra]
+$t\mapsto[p+(t,\alpha t)]$. For $p=0$, fix a point $[(u,v)]$ of the torus and a neighborhood of it. Because $\alpha$ is irrational, the set of classes $\{[n\alpha]:n\in\mathbb Z\}$ is dense in $\mathbb R/\mathbb Z$. Choose $n$ so that $[n\alpha]$ is arbitrarily close to $[v-\alpha u]$, and set $t=u+n$. Then $$[(t,\alpha t)]=[(u,\alpha u+n\alpha)]$$ has first coordinate $[u]$ and second coordinate arbitrarily close to $[v]$. Thus the leaf through $[0]$ is dense. Every other leaf is a torus translate of this one, and translations are homeomorphisms, so every leaf is dense. [given, algebra]
 
 2.1 Therefore the torus carries a regular foliation with dense, nonembedded [given] leaves. [given] ∎

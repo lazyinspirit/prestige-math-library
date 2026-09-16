@@ -37,12 +37,9 @@ $U(\operatorname{id})=\operatorname{id}$ and $U(gf)=U(g)U(f)$.
 
 **Given:** Lie-algebra homomorphisms between Lie algebras over $k$.
 
-[L1] Each canonical map $\iota_{\mathfrak h}$ is a Lie map into the
-commutator algebra
-([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
+[L1] Each canonical map $\iota_{\mathfrak h}$ is a Lie map into the commutator algebra ([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
 
-[L2] Such Lie maps extend uniquely from $\mathfrak g$ to $U(\mathfrak g)$
-([[thm-universal-property-of-the-universal-enveloping-algebra]]).
+[L2] Such Lie maps extend uniquely from $\mathfrak g$ to $U(\mathfrak g)$ ([[thm-universal-property-of-the-universal-enveloping-algebra]]).
 
 ## Proof
 

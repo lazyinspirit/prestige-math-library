@@ -40,9 +40,7 @@ $$\int_E f\,d\mu=0.$$
 **Proof technique:** direct.
 
 1.1 Let $s=\sum_j c_j\chi_{A_j}$ be a simple minorant of $f\chi_E$. If $c_j>0$,[L1, L2, given]
-then $A_j\subseteq E$, so $\mu(A_j)=0$. Since $A\mapsto\int_A s\,d\mu$ is a
-measure by [L1], every positive-coefficient term contributes $0$, and the
-zero-coefficient terms contribute $0$ as well. Hence $\int s\,d\mu=0$.
+then $A_j\subseteq E$, so $\mu(A_j)=0$. Since $A\mapsto\int_A s\,d\mu$ is a measure by [L1], every positive-coefficient term contributes $0$, and the zero-coefficient terms contribute $0$ as well. Hence $\int s\,d\mu=0$.
 
 
 2.1 Taking the supremum over all such simple minorants in [L3] gives[step 1.1, L2, L3] ∎

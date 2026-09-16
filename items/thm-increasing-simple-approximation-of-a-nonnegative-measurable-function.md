@@ -46,18 +46,10 @@ for every $x\in X$.
 **Proof technique:** direct.
 
 1.1 Set $s_0:=0$. For $n\ge1$ and $0\le k<n2^n$, put [L1, L2, construct]
-$$E_{n,k}:=\{x:k2^{-n}\le f(x)<(k+1)2^{-n}\}\cap\{f<n\},$$
-and set
-$$s_n:=\sum_{k=0}^{n2^n-1}k2^{-n}\chi_{E_{n,k}}+n\chi_{\{f\ge n\}}.$$
-Each $E_{n,k}$ and $\{f\ge n\}$ is measurable by [L1], the range of $s_n$ is
-finite, and therefore each $s_n$ is simple by [L2]; $s_0$ is also simple.
+$$E_{n,k}:=\{x:k2^{-n}\le f(x)<(k+1)2^{-n}\}\cap\{f<n\},$$ and set $$s_n:=\sum_{k=0}^{n2^n-1}k2^{-n}\chi_{E_{n,k}}+n\chi_{\{f\ge n\}}.$$ Each $E_{n,k}$ and $\{f\ge n\}$ is measurable by [L1], the range of $s_n$ is finite, and therefore each $s_n$ is simple by [L2]; $s_0$ is also simple.
 
 2.1 For each $x$, one has $0\le s_n(x)\le f(x)$. If $f(x)<+\infty$ and [step 1.1, algebra]
-$n>f(x)$, then $f(x)-2^{-n}<s_n(x)\le f(x)$; if $f(x)=+\infty$, then
-$s_n(x)=n$. Hence $s_n(x)\to f(x)$.
+$n>f(x)$, then $f(x)-2^{-n}<s_n(x)\le f(x)$; if $f(x)=+\infty$, then $s_n(x)=n$. Hence $s_n(x)\to f(x)$.
 
 3.1 The functions are increasing. Indeed, $s_n(x)$ is a dyadic multiple of [step 2.1, L3, algebra] ∎
-$2^{-n}$ below $f(x)\wedge n$, hence also a dyadic multiple of $2^{-(n+1)}$
-below $f(x)\wedge(n+1)$; so the defining maximality of the $(n+1)$-st dyadic
-truncation gives $s_n(x)\le s_{n+1}(x)$. Therefore $s_n\uparrow f$, in accord
-with [L3].
+$2^{-n}$ below $f(x)\wedge n$, hence also a dyadic multiple of $2^{-(n+1)}$ below $f(x)\wedge(n+1)$; so the defining maximality of the $(n+1)$-st dyadic truncation gives $s_n(x)\le s_{n+1}(x)$. Therefore $s_n\uparrow f$, in accord with [L3].

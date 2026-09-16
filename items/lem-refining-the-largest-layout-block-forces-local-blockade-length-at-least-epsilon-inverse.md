@@ -39,12 +39,9 @@ then that local blockade has length at least $\epsilon^{-1}$.
 
 ## Facts & Assumptions
 
-**Given:** A maximal layout, its largest block $A$, and a pure or $x$-sparse
-polynomial blockade inside $A$.
+**Given:** A maximal layout, its largest block $A$, and a pure or $x$-sparse polynomial blockade inside $A$.
 
-[L1] The cited source claim proves that substituting a local blockade
-of length below $\epsilon^{-1}$ into the largest layout block preserves the
-three defining layout bounds while strictly increasing the number of blocks.
+[L1] The cited source claim proves that substituting a local blockade of length below $\epsilon^{-1}$ into the largest layout block preserves the three defining layout bounds while strictly increasing the number of blocks.
 
 ## Proof
 

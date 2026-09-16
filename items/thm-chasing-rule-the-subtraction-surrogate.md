@@ -40,19 +40,13 @@ Moreover:
 
 ## Facts & Assumptions
 
-**Given:** Morphisms $g:B \to C$, $f:B \to D$, and $h:B \to A$, and members
-$x:X \to B$, $y:Y \to B$ with $g x \equiv g y$.
+**Given:** Morphisms $g:B \to C$, $f:B \to D$, and $h:B \to A$, and members $x:X \to B$, $y:Y \to B$ with $g x \equiv g y$.
 
-[L1] The relation $g x \equiv g y$ is witnessed by one common pair of
-epimorphisms
-([[def-equivalence-of-members]]).
+[L1] The relation $g x \equiv g y$ is witnessed by one common pair of epimorphisms ([[def-equivalence-of-members]]).
 
-[L2] Every hom-set in an abelian category is an abelian group, so members with
-one common domain may be added and subtracted
-([[def-abelian-category]]).
+[L2] Every hom-set in an abelian category is an abelian group, so members with one common domain may be added and subtracted ([[def-abelian-category]]).
 
-[L3] Zero members and negatives behave literally under equivalence
-([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
+[L3] Zero members and negatives behave literally under equivalence ([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
 
 ## Proof
 

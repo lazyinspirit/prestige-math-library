@@ -35,15 +35,11 @@ The displayed forms are nondegenerate in these simple ranges.
 
 ## Facts & Assumptions
 
-**Given:** The standard defining matrix realizations, with the split
-symmetric or alternating form in the orthogonal or symplectic case.
+**Given:** The standard defining matrix realizations, with the split symmetric or alternating form in the orthogonal or symplectic case.
 
-[L1] The Killing form is the trace form of the adjoint representation
-([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
+[L1] The Killing form is the trace form of the adjoint representation ([[def-killing-form-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] Nondegeneracy of the Killing form is equivalent to semisimplicity in
-finite dimension and characteristic zero
-([[thm-cartans-semisimplicity-criterion]]).
+[L2] Nondegeneracy of the Killing form is equivalent to semisimplicity in finite dimension and characteristic zero ([[thm-cartans-semisimplicity-criterion]]).
 
 ## Verification
 

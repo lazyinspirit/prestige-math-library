@@ -37,17 +37,11 @@ has a positive nontrivial integral solution.
 
 **Given:** A positive nonsquare integer $D$.
 
-[F1] If $a_0=\lfloor\sqrt D\rfloor$, then
-$$\sqrt D=[a_0;\overline{a_1,\ldots,a_{\ell-1},2a_0}]$$
-for some $\ell\ge1$, and the returned state satisfies $Q_\ell=1$
-([[thm-square-root-continued-fraction-period-structure]]).
+[F1] If $a_0=\lfloor\sqrt D\rfloor$, then $$\sqrt D=[a_0;\overline{a_1,\ldots,a_{\ell-1},2a_0}]$$ for some $\ell\ge1$, and the returned state satisfies $Q_\ell=1$ ([[thm-square-root-continued-fraction-period-structure]]).
 
-[F2] The convergents of $\sqrt D$ satisfy
-$$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$
-([[lem-square-root-convergent-norm-identity]]).
+[F2] The convergents of $\sqrt D$ satisfy $$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$ ([[lem-square-root-convergent-norm-identity]]).
 
-[F3] The Pell norm is multiplicative on $\mathbb Z[\sqrt D]$
-([[lem-pell-norm-multiplication]]).
+[F3] The Pell norm is multiplicative on $\mathbb Z[\sqrt D]$ ([[lem-pell-norm-multiplication]]).
 
 ## Proof
 

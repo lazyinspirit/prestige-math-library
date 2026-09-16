@@ -36,12 +36,9 @@ $k[G/H]$ as relatively $H$-projective.
 
 ## Facts & Assumptions
 
-**Given:** A subgroup $H\le G$ of a finite group and the permutation module
-$M=k[G/H]$.
+**Given:** A subgroup $H\le G$ of a finite group and the permutation module $M=k[G/H]$.
 
-[L1] Higman's criterion says that a module is relatively $H$-projective exactly
-when the identity is a relative trace from an $H$-endomorphism
-([[thm-higman-criterion-for-relative-projectivity]]).
+[L1] Higman's criterion says that a module is relatively $H$-projective exactly when the identity is a relative trace from an $H$-endomorphism ([[thm-higman-criterion-for-relative-projectivity]]).
 
 ## Verification
 

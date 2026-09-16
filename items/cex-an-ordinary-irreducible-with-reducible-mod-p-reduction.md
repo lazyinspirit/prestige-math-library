@@ -35,14 +35,11 @@ irreducibility.
 
 **Given:** The splitting $3$-modular system $(K,\mathcal O,k)=(\mathbb Q_3(\zeta_3),\mathbb Z_3[\zeta_3],\mathbb F_3)$ and lattice $L=\{(a,b,c)\in\mathcal O^3:a+b+c=0\}$ from [[ex-reducing-an-integral-lattice-for-s-three]], where $\zeta_3$ is a primitive cube root of unity. The maximal ideal is $\mathfrak m=(1-\zeta_3)$; reduction is modulo $\mathfrak m$, not the ideal $(3)$ of this ramified valuation ring.
 
-[F1] Reduction modulo the maximal ideal produces a $kG$-module
-([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
+[F1] Reduction modulo the maximal ideal produces a $kG$-module ([[def-og-lattice-and-reduction-modulo-the-maximal-ideal]]).
 
-[L1] The defining-characteristic page route allows reducibility after reduction
-([[rem-maschke-failure-in-defining-characteristic]]).
+[L1] The defining-characteristic page route allows reducibility after reduction ([[rem-maschke-failure-in-defining-characteristic]]).
 
-[L2] The specified triple is a splitting $3$-modular system; $L$ has basis $(1,0,-1),(0,1,-1)$ and its reduction is the coordinate-sum-zero plane in $k^3$, containing the nonzero invariant vector $(1,1,1)$
-([[ex-reducing-an-integral-lattice-for-s-three]]).
+[L2] The specified triple is a splitting $3$-modular system; $L$ has basis $(1,0,-1),(0,1,-1)$ and its reduction is the coordinate-sum-zero plane in $k^3$, containing the nonzero invariant vector $(1,1,1)$ ([[ex-reducing-an-integral-lattice-for-s-three]]).
 
 ## Counterexample
 

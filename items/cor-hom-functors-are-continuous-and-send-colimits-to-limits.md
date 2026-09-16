@@ -36,17 +36,13 @@ $$\mathcal C(\operatorname*{colim}D,X) \cong\lim_{j\in\mathcal J^{\mathrm{op}}}\
 
 **Given:** An object $X$ and the indicated existing limits or colimits.
 
-[L1] Every covariantly representable functor preserves small limits
-([[thm-representable-functors-preserve-small-limits]]).
+[L1] Every covariantly representable functor preserves small limits ([[thm-representable-functors-preserve-small-limits]]).
 
-[F1] $\mathcal C(X,-)$ and $\mathcal C(-,X)$ are the covariant and
-contravariant hom-functors ([[def-hom-functors-and-hom-bifunctor]]).
+[F1] $\mathcal C(X,-)$ and $\mathcal C(-,X)$ are the covariant and contravariant hom-functors ([[def-hom-functors-and-hom-bifunctor]]).
 
-[L2] A colimit in $\mathcal C$ is a limit in $\mathcal C^{\mathrm{op}}$
-([[prop-limit-colimit-duality]]).
+[L2] A colimit in $\mathcal C$ is a limit in $\mathcal C^{\mathrm{op}}$ ([[prop-limit-colimit-duality]]).
 
-[F2] Continuous means preserving all small limits
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F2] Continuous means preserving all small limits ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
 ## Proof
 

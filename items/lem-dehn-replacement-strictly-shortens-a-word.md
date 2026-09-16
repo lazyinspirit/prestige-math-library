@@ -31,11 +31,9 @@ A Dehn replacement shortens the word strictly.
 
 ## Facts & Assumptions
 
-**Given:** A factorisation $r=uv$ of a symmetrised relator with $|u|>|v|$, and a
-word $w=ausb$ containing $u$ as a subword.
+**Given:** A factorisation $r=uv$ of a symmetrised relator with $|u|>|v|$, and a word $w=ausb$ containing $u$ as a subword.
 
-[L1] Replacing $u$ by $v^{-1}$ is the Dehn move associated to the relator
-$r=uv$ ([[def-dehn-reduced-word-and-dehn-presentation]]).
+[L1] Replacing $u$ by $v^{-1}$ is the Dehn move associated to the relator $r=uv$ ([[def-dehn-reduced-word-and-dehn-presentation]]).
 
 ## Proof
 

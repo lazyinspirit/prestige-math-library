@@ -40,11 +40,7 @@ $0$ and $n$, so $h$ is Morse and excellent.
 
 **Given:** The height function $h(x)=x_{n+1}$ on the unit sphere $S^n$.
 
-[F1] Critical points, nondegeneracy, index, and Morse/excellent functions have
-the meanings fixed on the A page
-([[def-critical-point-and-critical-value-of-a-smooth-function]],
-[[def-nondegenerate-critical-point-nullity-index-and-coindex]],
-[[def-morse-function-and-excellent-morse-function]]).
+[F1] Critical points, nondegeneracy, index, and Morse/excellent functions have the meanings fixed on the A page ([[def-critical-point-and-critical-value-of-a-smooth-function]], [[def-nondegenerate-critical-point-nullity-index-and-coindex]], [[def-morse-function-and-excellent-morse-function]]).
 
 ## Verification
 

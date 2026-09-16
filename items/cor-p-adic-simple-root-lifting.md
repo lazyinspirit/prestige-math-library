@@ -33,14 +33,11 @@ $f(a)=0$.
 
 ## Facts & Assumptions
 
-**Given:** A polynomial $f \in \mathbb Z_p[X]$ and $a_0 \in \mathbb Z_p$ with
-$f(a_0) \in p\mathbb Z_p$ and $f'(a_0) \notin p\mathbb Z_p$.
+**Given:** A polynomial $f \in \mathbb Z_p[X]$ and $a_0 \in \mathbb Z_p$ with $f(a_0) \in p\mathbb Z_p$ and $f'(a_0) \notin p\mathbb Z_p$.
 
-[L1] $\mathbb Z_p$ is the valuation ring in $\mathbb Q_p$
-([[cor-zp-is-the-valuation-ring-of-qp]]).
+[L1] $\mathbb Z_p$ is the valuation ring in $\mathbb Q_p$ ([[cor-zp-is-the-valuation-ring-of-qp]]).
 
-[L2] $\mathbb Q_p$ is complete
-([[thm-p-adic-completion-is-a-field]]).
+[L2] $\mathbb Q_p$ is complete ([[thm-p-adic-completion-is-a-field]]).
 
 ## Proof
 

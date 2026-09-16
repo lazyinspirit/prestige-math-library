@@ -35,18 +35,13 @@ in the subobject order of $B$.
 
 ## Facts & Assumptions
 
-**Given:** An abelian category, a morphism $f:A\to B$, and a factorization
-$f=n\circ g$ through a monomorphism $n:N\to B$.
+**Given:** An abelian category, a morphism $f:A\to B$, and a factorization $f=n\circ g$ through a monomorphism $n:N\to B$.
 
-[L1] Every morphism factors as an epimorphism followed by a monomorphism
-([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
+[L1] Every morphism factors as an epimorphism followed by a monomorphism ([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
 
-[L2] A subobject is a mutual-factorization class of monomorphisms, ordered by
-factorization ([[def-subobject-and-quotient-object]],
-[[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
+[L2] A subobject is a mutual-factorization class of monomorphisms, ordered by factorization ([[def-subobject-and-quotient-object]], [[thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections]]).
 
-[L3] Every monomorphism is the kernel of its cokernel
-([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+[L3] Every monomorphism is the kernel of its cokernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
 
 ## Proof
 

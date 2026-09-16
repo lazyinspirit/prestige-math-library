@@ -40,9 +40,7 @@ $$D\sigma(A)[H]=\operatorname{Re}(u^\ast Hv)=1.$$
 
 **Given:** The matrices $A$ and $H$ above.
 
-[L1] For a simple positive singular value,
-$D\sigma(A)[H]=\operatorname{Re}(u^\ast Hv)$
-([[thm-directional-derivative-of-a-simple-positive-singular-value]]).
+[L1] For a simple positive singular value, $D\sigma(A)[H]=\operatorname{Re}(u^\ast Hv)$ ([[thm-directional-derivative-of-a-simple-positive-singular-value]]).
 
 ## Verification
 **Proof technique:** direct.

@@ -30,12 +30,9 @@ If the series $\sum a_n$ converges, then the product $\prod(1+a_n)$ converges.
 
 ## Facts & Assumptions
 
-**Given:** The sequence
-$$a_{2m-1}=\frac1{\sqrt m},\qquad a_{2m}=-\frac1{\sqrt m}+\frac1{m^2}\qquad(m\ge1).$$
+**Given:** The sequence $$a_{2m-1}=\frac1{\sqrt m},\qquad a_{2m}=-\frac1{\sqrt m}+\frac1{m^2}\qquad(m\ge1).$$
 
-[F1] For real numbers $0\le p_m<1$, if $\sum p_m$ diverges then
-$\prod(1-p_m)$ tends to $0$
-([[thm-infinite-product-criterion]]).
+[F1] For real numbers $0\le p_m<1$, if $\sum p_m$ diverges then $\prod(1-p_m)$ tends to $0$ ([[thm-infinite-product-criterion]]).
 
 ## Counterexample
 

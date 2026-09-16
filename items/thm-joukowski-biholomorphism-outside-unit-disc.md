@@ -40,11 +40,7 @@ Then $J:E\to\Omega$ is a biholomorphism.
 
 **Given:** The exterior disc $E$, the slit-complement $\Omega$, and the map $J$ above.
 
-[F1] For $n=2$, the slit-plane root branch
-$R_2(t)=\exp(\operatorname{Log}t/2)$ is a biholomorphism from
-$\mathbb C\setminus\{x\in\mathbb R:x\le0\}$ onto the right half-plane
-$\{s\in\mathbb C:\operatorname{Re}s>0\}$, with inverse $s\mapsto s^2$
-([[thm-slit-plane-root-branch-biholomorphism-to-a-sector]]).
+[F1] For $n=2$, the slit-plane root branch $R_2(t)=\exp(\operatorname{Log}t/2)$ is a biholomorphism from $\mathbb C\setminus\{x\in\mathbb R:x\le0\}$ onto the right half-plane $\{s\in\mathbb C:\operatorname{Re}s>0\}$, with inverse $s\mapsto s^2$ ([[thm-slit-plane-root-branch-biholomorphism-to-a-sector]]).
 
 ## Proof
 

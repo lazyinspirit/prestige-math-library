@@ -37,29 +37,19 @@ $$\mathfrak{sp}(2n,\mathbb R)=\{X:X^TJ+JX=0\}.$$
 
 **Given:** The standard matrix $J$.
 
-[F1] General linear groups are matrix Lie groups with commutator bracket.
-[[ex-general-and-special-linear-lie-groups]].
+[F1] General linear groups are matrix Lie groups with commutator bracket. [[ex-general-and-special-linear-lie-groups]].
 
 [F2] Transpose reverses products. [[def-transpose-of-a-matrix]].
 
-[F3] The constant-rank theorem supplies the embedded level manifold and its
-tangent kernel. [[thm-constant-rank-theorem-for-manifolds]].
+[F3] The constant-rank theorem supplies the embedded level manifold and its tangent kernel. [[thm-constant-rank-theorem-for-manifolds]].
 
-[F4] Countable choice is inherited through [F1].
-[[def-countable-choice]].
+[F4] Countable choice is inherited through [F1]. [[def-countable-choice]].
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Let $\operatorname{Skew}_{2n}(\mathbb R)$ be the vector space of
-skew-symmetric matrices and define
-$F:\operatorname{GL}_{2n}(\mathbb R)\to\operatorname{Skew}_{2n}(\mathbb R)$
-by $F(A)=A^TJA$; the codomain is correct because $J^T=-J$. Then
-$dF_A(X)=X^TJA+A^TJX$. At a point of $F^{-1}(J)$ write $X=AZ$; then the
-differential is $Z^TJ+JZ$. Every skew-symmetric $S$ occurs by taking
-$Z=\frac12J^{-1}S$. Hence the differential is surjective onto its stated
-codomain along the level, and [F3] makes it embedded. [F2, F3, algebra]
+1.1 Let $\operatorname{Skew}_{2n}(\mathbb R)$ be the vector space of skew-symmetric matrices and define $F:\operatorname{GL}_{2n}(\mathbb R)\to\operatorname{Skew}_{2n}(\mathbb R)$ by $F(A)=A^TJA$; the codomain is correct because $J^T=-J$. Then $dF_A(X)=X^TJA+A^TJX$. At a point of $F^{-1}(J)$ write $X=AZ$; then the differential is $Z^TJ+JZ$. Every skew-symmetric $S$ occurs by taking $Z=\frac12J^{-1}S$. Hence the differential is surjective onto its stated codomain along the level, and [F3] makes it embedded. [F2, F3, algebra]
 
 2.1 The equations $(AB)^TJ(AB)=J$ and $(A^{-1})^TJA^{-1}=J$ show that the level is a subgroup, so [F1] makes it a Lie group. At $I$, the tangent kernel from step 1.1 is exactly $X^TJ+JX=0$. [F1, F2, step 1.1, algebra]
 

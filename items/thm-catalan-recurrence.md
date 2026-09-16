@@ -65,12 +65,6 @@ Catalan number ([[def-catalan-number]]).
 
 ## Remarks
 
-- **The recurrence determines the sequence, and the definition does not need
-  it.** Every value is computable from $C_0=1$ by the displayed convolution, but
-  $C_n$ was defined as a count, so the recurrence is a theorem about that count
-  rather than the object's definition. That is what makes the three closed forms
-  on this page statements rather than restatements.
+- **The recurrence determines the sequence, and the definition does not need it.** Every value is computable from $C_0=1$ by the displayed convolution, but $C_n$ was defined as a count, so the recurrence is a theorem about that count rather than the object's definition. That is what makes the three closed forms on this page statements rather than restatements.
 
-- **Where the first-return decomposition is spent.** Only in the bijection: the
-  sum has one summand for each possible length of the inner block, and the
-  disjointness of the summands is the uniqueness half of that decomposition.
+- **Where the first-return decomposition is spent.** Only in the bijection: the sum has one summand for each possible length of the inner block, and the disjointness of the summands is the uniqueness half of that decomposition.

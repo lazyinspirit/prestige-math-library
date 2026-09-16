@@ -35,14 +35,11 @@ for $0\le i,j<p$. This cocycle is nonzero in $H^2(C_p,C_p)$.
 
 ## Facts & Assumptions
 
-**Given:** The quotient map $\mathbb Z/p^2\mathbb Z\to\mathbb Z/p\mathbb Z$ and
-the section $s(i)=i$ for $0\le i<p$.
+**Given:** The quotient map $\mathbb Z/p^2\mathbb Z\to\mathbb Z/p\mathbb Z$ and the section $s(i)=i$ for $0\le i<p$.
 
-[L1] An extension determines a well-defined class in $H^2$
-([[cor-an-extension-determines-a-well-defined-h-two-class]]).
+[L1] An extension determines a well-defined class in $H^2$ ([[cor-an-extension-determines-a-well-defined-h-two-class]]).
 
-[L2] $H^2$ classifies extensions with fixed abelian kernel action
-([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L2] $H^2$ classifies extensions with fixed abelian kernel action ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
 ## Verification
 

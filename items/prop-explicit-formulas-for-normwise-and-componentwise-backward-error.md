@@ -44,20 +44,13 @@ Euclidean norm of [[lem-p-norms-are-norms-and-induce-the-published-metrics]].
 
 ## Facts & Assumptions
 
-**Given:** An invertible matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge1$,
-vectors $b,\widehat x\in\mathbb{R}^{n}$, the residual $r=b-A\widehat x$, and the
-backward errors $\eta_2(\widehat x)$, $\omega(\widehat x)$.
+**Given:** An invertible matrix $A\in\operatorname{GL}_n(\mathbb{R})$ with $n\ge1$, vectors $b,\widehat x\in\mathbb{R}^{n}$, the residual $r=b-A\widehat x$, and the backward errors $\eta_2(\widehat x)$, $\omega(\widehat x)$.
 
-[L1] An admissible perturbation satisfies $\Delta A\,\widehat x-\Delta b=r$ and
-the stated norm or entrywise bounds ([[def-normwise-and-componentwise-backward-error-for-linear-systems]]).
+[L1] An admissible perturbation satisfies $\Delta A\,\widehat x-\Delta b=r$ and the stated norm or entrywise bounds ([[def-normwise-and-componentwise-backward-error-for-linear-systems]]).
 
-[L2] Compatibility of the induced spectral norm: $\lVert My\rVert_2\le\lVert M\rVert_2\lVert y\rVert_2$
-([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]]),
-and the vector $2$-norm is the Euclidean norm with the triangle inequality
-([[lem-p-norms-are-norms-and-induce-the-published-metrics]]).
+[L2] Compatibility of the induced spectral norm: $\lVert My\rVert_2\le\lVert M\rVert_2\lVert y\rVert_2$ ([[thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized]]), and the vector $2$-norm is the Euclidean norm with the triangle inequality ([[lem-p-norms-are-norms-and-induce-the-published-metrics]]).
 
-[L3] Cauchy–Schwarz: $|u^{\mathsf T}v|\le\lVert u\rVert_2\lVert v\rVert_2$, with
-equality for $v$ a positive multiple of $u$ ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
+[L3] Cauchy–Schwarz: $|u^{\mathsf T}v|\le\lVert u\rVert_2\lVert v\rVert_2$, with equality for $v$ a positive multiple of $u$ ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
 
 [L5] Absolute value: $|u+v|\le|u|+|v|$ and $|uv|=|u||v|$ ([[def-abs-value]]).
 

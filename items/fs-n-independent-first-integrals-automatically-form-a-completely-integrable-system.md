@@ -32,13 +32,9 @@ automatically form a completely integrable system.
 
 **Given:** The proposed sufficiency claim.
 
-[F1] Complete integrability also requires pairwise zero Poisson brackets.
-[[def-completely-integrable-hamiltonian-system]].
+[F1] Complete integrability also requires pairwise zero Poisson brackets. [[def-completely-integrable-hamiltonian-system]].
 
-[F2] Hamiltonian fields satisfy $\iota_{X_F}\omega=dF$, and
-$\{F,G\}=\omega(X_F,X_G)$.
-[[def-hamiltonian-vector-field-and-hamiltonian-function]],
-[[def-poisson-bracket-on-a-symplectic-manifold]].
+[F2] Hamiltonian fields satisfy $\iota_{X_F}\omega=dF$, and $\{F,G\}=\omega(X_F,X_G)$. [[def-hamiltonian-vector-field-and-hamiltonian-function]], [[def-poisson-bracket-on-a-symplectic-manifold]].
 
 ## Refutation
 

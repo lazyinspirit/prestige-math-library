@@ -42,30 +42,15 @@ Radon--Nikodym property.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] AC supplies Countable Choice
-([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]). Under Countable
-Choice, Lebesgue measure is a complete measure and an interval has its length
-([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]],
-[[thm-lebesgue-measure-is-a-complete-measure]],
-[[thm-lebesgue-measure-of-a-box-of-every-kind]]).
+[L1] AC supplies Countable Choice ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]). Under Countable Choice, Lebesgue measure is a complete measure and an interval has its length ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], [[thm-lebesgue-measure-is-a-complete-measure]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]).
 
-[L2] Restriction to a measurable set is a measure
-([[def-restriction-of-a-measure]], [[prop-restriction-is-a-measure]]).
+[L2] Restriction to a measurable set is a measure ([[def-restriction-of-a-measure]], [[prop-restriction-is-a-measure]]).
 
-[L3] Real $L^1$ is the quotient by almost-everywhere equality, its integral
-formula is a norm, and it is complete under Countable Choice
-([[def-l-p-space-as-a-quotient-by-null-functions]],
-[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]],
-[[thm-riesz-fischer-completeness-of-l-p]]).
+[L3] Real $L^1$ is the quotient by almost-everywhere equality, its integral formula is a norm, and it is complete under Countable Choice ([[def-l-p-space-as-a-quotient-by-null-functions]], [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], [[thm-riesz-fischer-completeness-of-l-p]]).
 
-[L4] The same quotient norm and completeness statements hold for complex
-$L^1$ ([[def-complex-lp-and-euclidean-test-function-conventions]],
-[[thm-complex-holder-minkowski-and-the-quotient-norm]],
-[[thm-complex-lp-completeness-and-almost-everywhere-subsequences]]).
+[L4] The same quotient norm and completeness statements hold for complex $L^1$ ([[def-complex-lp-and-euclidean-test-function-conventions]], [[thm-complex-holder-minkowski-and-the-quotient-norm]], [[thm-complex-lp-completeness-and-almost-everywhere-subsequences]]).
 
-[L5] Under AC, a Banach space has RNP exactly when all its Lipschitz curves on
-$[0,1]$ are norm differentiable almost everywhere
-([[thm-rnp-lipschitz-differentiability-characterization]]).
+[L5] Under AC, a Banach space has RNP exactly when all its Lipschitz curves on $[0,1]$ are norm differentiable almost everywhere ([[thm-rnp-lipschitz-differentiability-characterization]]).
 
 ## Proof
 
@@ -79,16 +64,13 @@ $[0,1]$ are norm differentiable almost everywhere
 
 $$\|F(t)-F(s)\|_1=\|[\mathbf1_{(s,t)}]\|_1=\lambda((s,t))=t-s.$$
 
-Thus $F$ is an isometric, and in particular one-Lipschitz, curve in either
-the real or complex target.
+Thus $F$ is an isometric, and in particular one-Lipschitz, curve in either the real or complex target.
 
 3.1 Calculate two incompatible positive difference quotients. Fix $t\in(0,1)$ and $0<h<1-t$. The positive difference quotient is [L1, L3, L4, step 2.1, algebra]
 
 $$q_h:=\frac{F(t+h)-F(t)}h=\left[\frac1h\mathbf1_{(t,t+h)}\right].$$
 
-On $(t,t+h/2)$ the difference $q_h-q_{h/2}$ has absolute value $1/h$,
-and on $(t+h/2,t+h)$ it again has absolute value $1/h$. It vanishes
-elsewhere up to endpoints. Consequently
+On $(t,t+h/2)$ the difference $q_h-q_{h/2}$ has absolute value $1/h$, and on $(t+h/2,t+h)$ it again has absolute value $1/h$. It vanishes elsewhere up to endpoints. Consequently
 
 $$\|q_h-q_{h/2}\|_1=\frac1h\frac h2+\frac1h\frac h2=1.$$
 

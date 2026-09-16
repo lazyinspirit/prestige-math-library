@@ -27,11 +27,9 @@ Every function $f:G\times G\to M$ is a valid factor set.
 
 ## Facts & Assumptions
 
-**Given:** $G=C_2=\{1,t\}$, the trivial action on $M=\mathbb Z$, and the
-constant function $f(g,h)=1$.
+**Given:** $G=C_2=\{1,t\}$, the trivial action on $M=\mathbb Z$, and the constant function $f(g,h)=1$.
 
-[F1] A factor set must satisfy the normalized cocycle equations
-([[def-normalized-two-cocycle-and-two-coboundary]]).
+[F1] A factor set must satisfy the normalized cocycle equations ([[def-normalized-two-cocycle-and-two-coboundary]]).
 
 ## Refutation
 

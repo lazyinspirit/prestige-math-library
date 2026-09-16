@@ -33,14 +33,11 @@ $$\sum_{n \ge 1} f(n)n^{-s} = \prod_p \frac{1}{1-f(p)p^{-s}}.$$
 
 ## Facts & Assumptions
 
-**Given:** A completely multiplicative function $f$ and a point of absolute
-convergence.
+**Given:** A completely multiplicative function $f$ and a point of absolute convergence.
 
-[L1] Completely multiplicative means $f(p^k)=f(p)^k$ for every prime power
-([[def-completely-multiplicative-arithmetic-function]]).
+[L1] Completely multiplicative means $f(p^k)=f(p)^k$ for every prime power ([[def-completely-multiplicative-arithmetic-function]]).
 
-[L2] Multiplicative Dirichlet series factor into Euler products
-([[thm-multiplicative-dirichlet-series-euler-product]]).
+[L2] Multiplicative Dirichlet series factor into Euler products ([[thm-multiplicative-dirichlet-series-euler-product]]).
 
 ## Proof
 

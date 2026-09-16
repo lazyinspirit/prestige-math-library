@@ -38,21 +38,13 @@ Let $P$ and $I$ be objects of an abelian category.
 
 **Given:** An abelian category and objects $P$ and $I$ in it.
 
-[L1] Hom is left exact in each variable
-([[thm-hom-is-left-exact-in-each-variable]]).
+[L1] Hom is left exact in each variable ([[thm-hom-is-left-exact-in-each-variable]]).
 
-[L2] Projective objects are exactly those for which Hom out of them sends every
-short exact sequence to a short exact sequence
-([[def-projective-object]],
-[[thm-projective-object-characterisations]]).
+[L2] Projective objects are exactly those for which Hom out of them sends every short exact sequence to a short exact sequence ([[def-projective-object]], [[thm-projective-object-characterisations]]).
 
-[L3] Injective objects are exactly those for which Hom into them sends every
-short exact sequence to a short exact sequence
-([[def-injective-object]],
-[[thm-injective-object-characterisations]]).
+[L3] Injective objects are exactly those for which Hom into them sends every short exact sequence to a short exact sequence ([[def-injective-object]], [[thm-injective-object-characterisations]]).
 
-[L4] An exact functor is one that is both left exact and right exact
-([[def-exact-functor-between-abelian-categories]]).
+[L4] An exact functor is one that is both left exact and right exact ([[def-exact-functor-between-abelian-categories]]).
 
 ## Proof
 

@@ -104,23 +104,8 @@ claim 4, by the argument recorded in the remarks.
 
 ## Remarks
 
-- **The characteristic property pins the topology down.** Suppose two topologies
-  $\mathcal{T}_1$ and $\mathcal{T}_2$ on $X$ both satisfy claim 2 for every space
-  $Z$ and every function $h$. Apply claim 2 for $\mathcal{T}_1$ to
-  $Z = (X,\mathcal{T}_2)$ and $h = \mathrm{id}$: the composites $f_i$ are
-  continuous on $(X,\mathcal{T}_2)$ by claim 2 for $\mathcal{T}_2$ applied to the
-  identity of $(X,\mathcal{T}_2)$, so the identity
-  $(X,\mathcal{T}_2) \to (X,\mathcal{T}_1)$ is continuous, that is
-  $\mathcal{T}_1 \subseteq \mathcal{T}_2$. Exchanging the roles gives equality.
-  The same argument with the arrows reversed does claim 4.
+- **The characteristic property pins the topology down.** Suppose two topologies $\mathcal{T}_1$ and $\mathcal{T}_2$ on $X$ both satisfy claim 2 for every space $Z$ and every function $h$. Apply claim 2 for $\mathcal{T}_1$ to $Z = (X,\mathcal{T}_2)$ and $h = \mathrm{id}$: the composites $f_i$ are continuous on $(X,\mathcal{T}_2)$ by claim 2 for $\mathcal{T}_2$ applied to the identity of $(X,\mathcal{T}_2)$, so the identity $(X,\mathcal{T}_2) \to (X,\mathcal{T}_1)$ is continuous, that is $\mathcal{T}_1 \subseteq \mathcal{T}_2$. Exchanging the roles gives equality. The same argument with the arrows reversed does claim 4.
 
-- **Only continuity of the composites is tested, never their openness.** Claim 2
-  says nothing about whether $h$ is open or closed, and claim 4 says nothing
-  about $k$; the constructions below acquire such properties one at a time and
-  each is proved where it is used.
+- **Only continuity of the composites is tested, never their openness.** Claim 2 says nothing about whether $h$ is open or closed, and claim 4 says nothing about $k$; the constructions below acquire such properties one at a time and each is proved where it is used.
 
-- **The one-element family is not a degenerate case but the main one.** The
-  subspace topology is the initial topology of a single inclusion and the
-  quotient topology is the final topology of a single surjection
-  ([[def-initial-and-final-topology]]), so claims 2 and 4 with $I$ a one-element
-  set already carry the characteristic properties of both.
+- **The one-element family is not a degenerate case but the main one.** The subspace topology is the initial topology of a single inclusion and the quotient topology is the final topology of a single surjection ([[def-initial-and-final-topology]]), so claims 2 and 4 with $I$ a one-element set already carry the characteristic properties of both.

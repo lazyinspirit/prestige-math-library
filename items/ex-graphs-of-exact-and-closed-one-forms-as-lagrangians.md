@@ -33,8 +33,7 @@ Lagrangian, including closed forms that are not exact.
 
 **Given:** A smooth manifold $Q$ and the canonical cotangent convention.
 
-[F1] A one-form has Lagrangian graph exactly when it is closed.
-[[prop-graph-of-a-one-form-is-lagrangian-iff-the-one-form-is-closed]].
+[F1] A one-form has Lagrangian graph exactly when it is closed. [[prop-graph-of-a-one-form-is-lagrangian-iff-the-one-form-is-closed]].
 
 ## Verification
 

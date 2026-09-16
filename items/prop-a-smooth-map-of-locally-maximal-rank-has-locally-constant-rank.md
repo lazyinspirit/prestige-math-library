@@ -30,17 +30,13 @@ every $x\in U$. Then $F$ has constant rank on some neighbourhood of $p$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth map $F:M\to N$, a point $p\in M$, and a neighbourhood $U$
-on which the rank never exceeds $\operatorname{rank}_pF$.
+**Given:** A smooth map $F:M\to N$, a point $p\in M$, and a neighbourhood $U$ on which the rank never exceeds $\operatorname{rank}_pF$.
 
-[F1] $\operatorname{rank}_xF$ is the rank of the differential at $x$
-([[def-rank-of-a-smooth-map-at-a-point]]).
+[F1] $\operatorname{rank}_xF$ is the rank of the differential at $x$ ([[def-rank-of-a-smooth-map-at-a-point]]).
 
-[L1] For Euclidean smooth maps, the set where the differential has rank at
-least a fixed value is open ([[thm-differential-rank-is-lower-semicontinuous]]).
+[L1] For Euclidean smooth maps, the set where the differential has rank at least a fixed value is open ([[thm-differential-rank-is-lower-semicontinuous]]).
 
-[L2] Charts identify neighbourhoods in manifolds with open Euclidean sets
-([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
+[L2] Charts identify neighbourhoods in manifolds with open Euclidean sets ([[prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets]]).
 
 ## Proof
 **Proof technique:** direct.

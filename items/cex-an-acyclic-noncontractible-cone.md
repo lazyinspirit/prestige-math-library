@@ -26,21 +26,15 @@ Every acyclic mapping cone is contractible.
 
 ## Facts & Assumptions
 
-**Given:** The zero map from the three-term complex
-$$0\to\mathbb Z\xrightarrow{2}\mathbb Z\xrightarrow{\bmod 2}\mathbb Z/2\to0$$
-to the zero complex.
+**Given:** The zero map from the three-term complex $$0\to\mathbb Z\xrightarrow{2}\mathbb Z\xrightarrow{\bmod 2}\mathbb Z/2\to0$$ to the zero complex.
 
-[L1] A contractible complex is one whose identity map is null-homotopic
-([[def-contractible-complex]]).
+[L1] A contractible complex is one whose identity map is null-homotopic ([[def-contractible-complex]]).
 
-[L2] The cone of the zero map is the direct sum with a shift
-([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
+[L2] The cone of the zero map is the direct sum with a shift ([[prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift]]).
 
-[L3] Shift preserves contractibility and quasi-isomorphism status
-([[prop-shift-preserves-chain-homotopy-equivalences-contractibility-and-quasi-isomorphisms]]).
+[L3] Shift preserves contractibility and quasi-isomorphism status ([[prop-shift-preserves-chain-homotopy-equivalences-contractibility-and-quasi-isomorphisms]]).
 
-[L4] A quasi-isomorphism is a chain map inducing isomorphisms on all homology
-objects ([[def-quasi-isomorphism]]).
+[L4] A quasi-isomorphism is a chain map inducing isomorphisms on all homology objects ([[def-quasi-isomorphism]]).
 
 ## Counterexample
 

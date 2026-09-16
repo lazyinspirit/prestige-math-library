@@ -46,16 +46,11 @@ Then $G$ contains a $\mathcal B$-rainbow induced copy of $F$.
 
 ## Facts & Assumptions
 
-**Given:** A forest $F$ on vertices $u_1,\dots,u_m$, a graph $G$, and a
-blockade $\mathcal B=(B_1,\dots,B_m)$ satisfying the two displayed
-cross-block conditions.
+**Given:** A forest $F$ on vertices $u_1,\dots,u_m$, a graph $G$, and a blockade $\mathcal B=(B_1,\dots,B_m)$ satisfying the two displayed cross-block conditions.
 
-[L1] A $\mathcal B$-rainbow induced copy of $F$ means an induced copy lying in
-$V(\mathcal B)$ and using at most one vertex from each block
-([[def-blockade-rainbow-induced-copy]]).
+[L1] A $\mathcal B$-rainbow induced copy of $F$ means an induced copy lying in $V(\mathcal B)$ and using at most one vertex from each block ([[def-blockade-rainbow-induced-copy]]).
 
-[F1] Every block of a blockade is nonempty
-([[def-blockade-length-and-width]]).
+[F1] Every block of a blockade is nonempty ([[def-blockade-length-and-width]]).
 
 ## Proof
 

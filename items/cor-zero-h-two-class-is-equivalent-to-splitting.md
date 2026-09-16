@@ -35,11 +35,9 @@ $M\rtimes G$, equivalently if and only if it splits.
 
 **Given:** An extension $1\to M\to E\to G\to1$ inducing the given action.
 
-[L1] $H^2(G,M)$ classifies such extensions
-([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
+[L1] $H^2(G,M)$ classifies such extensions ([[thm-h-two-classifies-extensions-with-fixed-abelian-kernel-action]]).
 
-[L2] A split extension is equivalent to the semidirect product extension
-([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
+[L2] A split extension is equivalent to the semidirect product extension ([[thm-splitting-criteria-via-sections-complements-retractions-and-semidirect-products]]).
 
 ## Proof
 

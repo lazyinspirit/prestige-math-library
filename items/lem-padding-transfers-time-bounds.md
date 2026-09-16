@@ -38,9 +38,7 @@ $O(p(n)^c+u(p(n)))$ time.
 
 ## Facts & Assumptions
 
-**Given:** $p,c$ and the construction/validation procedures above; for the
-forward implication an $O(t(n))$ decider for $A$, and for the converse an
-$O(u(N))$ decider for $\operatorname{pad}_p(A)$.
+**Given:** $p,c$ and the construction/validation procedures above; for the forward implication an $O(t(n))$ decider for $A$, and for the converse an $O(u(N))$ decider for $\operatorname{pad}_p(A)$.
 
 ## Proof
 

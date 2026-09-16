@@ -32,11 +32,9 @@ where $\lambda$ is the Liouville function.
 
 **Given:** A complex number $s$ with $\Re s>1$.
 
-[L1] The Liouville function satisfies $\lambda(p^k)=(-1)^k$
-([[def-liouville-function]]).
+[L1] The Liouville function satisfies $\lambda(p^k)=(-1)^k$ ([[def-liouville-function]]).
 
-[L2] Completely multiplicative Dirichlet series have geometric Euler factors
-([[cor-completely-multiplicative-dirichlet-series-euler-product]]).
+[L2] Completely multiplicative Dirichlet series have geometric Euler factors ([[cor-completely-multiplicative-dirichlet-series-euler-product]]).
 
 ## Verification
 

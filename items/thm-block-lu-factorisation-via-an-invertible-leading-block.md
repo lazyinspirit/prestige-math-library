@@ -39,21 +39,15 @@ let $S:=A_{22}-A_{21}A_{11}^{-1}A_{12}$.
 
 ## Facts & Assumptions
 
-**Given:** The displayed block matrix $A$, an invertible leading block
-$A_{11}$, and the Schur complement
-$S=A_{22}-A_{21}A_{11}^{-1}A_{12}$.
+**Given:** The displayed block matrix $A$, an invertible leading block $A_{11}$, and the Schur complement $S=A_{22}-A_{21}A_{11}^{-1}A_{12}$.
 
-[L1] Block LU factorisation and Schur complement are defined as in
-[[def-block-lu-factorisation]].
+[L1] Block LU factorisation and Schur complement are defined as in [[def-block-lu-factorisation]].
 
-[L2] Triangular solves with nonzero diagonal are correct and unique
-([[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]).
+[L2] Triangular solves with nonzero diagonal are correct and unique ([[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]).
 
-[L3] An invertible matrix has a two-sided inverse
-([[def-invertible-matrix-and-general-linear-group]]).
+[L3] An invertible matrix has a two-sided inverse ([[def-invertible-matrix-and-general-linear-group]]).
 
-[L4] Matrix multiplication is associative and uses the product convention of
-[[def-matrix-product-and-identity-matrix]].
+[L4] Matrix multiplication is associative and uses the product convention of [[def-matrix-product-and-identity-matrix]].
 
 ## Proof
 

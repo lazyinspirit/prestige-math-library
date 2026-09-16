@@ -87,23 +87,10 @@ larger notion than convergence, consistent with it where both apply.
 
 ## Remarks
 
-- **What averaging destroys.** The Cesaro mean of the first $n+1$ terms of an
-  alternating sequence is either $0$ or $1/(n+1)$, because the terms cancel in
-  pairs and at most one is left over. The oscillation is real and is not damped
-  by any tail condition; it is simply invisible to the average. So the transform
-  loses information, and no regular summability method can be expected to
-  recover a limit that does not exist ([[cor-cesaro-matrix-is-regular]]).
+- **What averaging destroys.** The Cesaro mean of the first $n+1$ terms of an alternating sequence is either $0$ or $1/(n+1)$, because the terms cancel in pairs and at most one is left over. The oscillation is real and is not damped by any tail condition; it is simply invisible to the average. So the transform loses information, and no regular summability method can be expected to recover a limit that does not exist ([[cor-cesaro-matrix-is-regular]]).
 
-- **The worked computation** of the means, with the values displayed, is
-  [[ex-cesaro-means-of-alternating]].
+- **The worked computation** of the means, with the values displayed, is [[ex-cesaro-means-of-alternating]].
 
-- **A correct converse needs an extra hypothesis.** The classical one is
-  Tauberian: if the Cesaro means converge and in addition $k(x_k - x_{k-1})$ is
-  bounded, then $(x_k)$ converges. No such theorem is proved in this library,
-  and none may be cited from it; the statement is mentioned only to say what the
-  repaired claim would look like.
+- **A correct converse needs an extra hypothesis.** The classical one is Tauberian: if the Cesaro means converge and in addition $k(x_k - x_{k-1})$ is bounded, then $(x_k)$ converges. No such theorem is proved in this library, and none may be cited from it; the statement is mentioned only to say what the repaired claim would look like.
 
-- **The failure is not caused by unboundedness.** The witness is bounded, with
-  $|s_k| = 1$ at every index. It is the same sequence that refutes the claim
-  that bounded sequences converge ([[fs-bounded-implies-convergent]]), and for
-  the same underlying reason: boundedness forbids escaping, not oscillating.
+- **The failure is not caused by unboundedness.** The witness is bounded, with $|s_k| = 1$ at every index. It is the same sequence that refutes the claim that bounded sequences converge ([[fs-bounded-implies-convergent]]), and for the same underlying reason: boundedness forbids escaping, not oscillating.

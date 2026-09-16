@@ -42,14 +42,9 @@ quotients with these image Lie groups.
 
 **Given:** $\mathrm{AC}_\omega$ and an integer $n\ge1$.
 
-[F1] The determinant is multiplicative and is given by its finite Leibniz
-formula. [[thm-determinant-multiplicative]].
-[[def-determinant-of-a-square-matrix]].
+[F1] The determinant is multiplicative and is given by its finite Leibniz formula. [[thm-determinant-multiplicative]]. [[def-determinant-of-a-square-matrix]].
 
-[A1] A smooth Lie-group homomorphism factors through its canonical immersed
-image as a surjective submersion followed by inclusion.
-[[def-countable-choice]],
-[[prop-first-isomorphism-factorization-for-lie-group-homomorphisms]].
+[A1] A smooth Lie-group homomorphism factors through its canonical immersed image as a surjective submersion followed by inclusion. [[def-countable-choice]], [[prop-first-isomorphism-factorization-for-lie-group-homomorphisms]].
 
 ## Verification
 

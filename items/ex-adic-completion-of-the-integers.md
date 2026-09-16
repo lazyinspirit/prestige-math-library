@@ -36,11 +36,9 @@ compatible residue systems.
 
 **Given:** A prime integer $p$.
 
-[L1] The completion map for the $(p)$-adic filtration sends an element to its
-compatible residue classes modulo $p^r$ ([[def-adic-completion-of-a-module]]).
+[L1] The completion map for the $(p)$-adic filtration sends an element to its compatible residue classes modulo $p^r$ ([[def-adic-completion-of-a-module]]).
 
-[L2] The kernel of the completion map is the intersection of the powers of the
-defining ideal ([[thm-kernel-and-universal-property-of-adic-completion]]).
+[L2] The kernel of the completion map is the intersection of the powers of the defining ideal ([[thm-kernel-and-universal-property-of-adic-completion]]).
 
 ## Verification
 

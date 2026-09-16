@@ -27,35 +27,19 @@ Assume AC. For a compact metric K, $C(K;\mathbb R)$ has a countable uniformly de
 
 ## Facts & Assumptions
 
-[F1] [[thm-compact-implies-complete-and-totally-bounded]]: Let $(X,d)$ be a compact metric space (def-metric-compactness,
-def-metric-space). Then $(X,d)$ is totally bounded
-(def-totally-bounded) and complete (def-complete-metric-space).
+[F1] [[thm-compact-implies-complete-and-totally-bounded]]: Let $(X,d)$ be a compact metric space (def-metric-compactness, def-metric-space). Then $(X,d)$ is totally bounded (def-totally-bounded) and complete (def-complete-metric-space).
 
-**Both implications are theorems of ZF.** Completeness is obtained here from the
-finite intersection characterisation (thm-compact-iff-finite-intersection-property)
-applied to the closures of the tails of a Cauchy sequence, and not from the
-extraction of a convergent subsequence, which would route the argument through
-sequential compactness. What matters for the ledger is that the route taken below
-selects nothing at all; the first remark below says why the other route was not
-taken.
+**Both implications are theorems of ZF.** Completeness is obtained here from the finite intersection characterisation (thm-compact-iff-finite-intersection-property) applied to the closures of the tails of a Cauchy sequence, and not from the extraction of a convergent subsequence, which would route the argument through sequential compactness. What matters for the ledger is that the route taken below selects nothing at all; the first remark below says why the other route was not taken.
 
-[F2] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be
-nonempty and let $x, y \in X$. Then
+[F2] [[lem-distance-to-set-is-lipschitz]]: Let $(X,d)$ be a metric space (def-metric-space), let $A \subseteq X$ be nonempty and let $x, y \in X$. Then
 
 $$|d(x,A) - d(y,A)| \le d(x,y),$$
 
-with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter).
-Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$
-between $u$ and $v$: it is **$1$-Lipschitz**.
+with $d(\cdot,A)$ the distance to a nonempty set (def-metric-bounded-diameter). Thus the real-valued function $u \mapsto d(u,A)$ changes by at most $d(u,v)$ between $u$ and $v$: it is **$1$-Lipschitz**.
 
-[F3] [[thm-heine-cantor-metric]]: Let $(X,d_X)$ be a compact metric space (def-metric-compactness), let
-$(Y,d_Y)$ be any metric space (def-metric-space) and let $f : X \to Y$ be
-continuous (def-metric-continuity). Then $f$ is uniformly continuous
-(def-metric-uniform-continuity).
+[F3] [[thm-heine-cantor-metric]]: Let $(X,d_X)$ be a compact metric space (def-metric-compactness), let $(Y,d_Y)$ be any metric space (def-metric-space) and let $f : X \to Y$ be continuous (def-metric-continuity). Then $f$ is uniformly continuous (def-metric-uniform-continuity).
 
-No choice principle is used: the cover built below is cut out by a property, and
-the Lebesgue number lemma it is fed to is itself choice free
-(thm-lebesgue-number-lemma).
+No choice principle is used: the cover built below is cut out by a property, and the Lebesgue number lemma it is fed to is itself choice free (thm-lebesgue-number-lemma).
 
 ## Proof
 

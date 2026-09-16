@@ -28,11 +28,9 @@ Cantor set.
 
 **Given:** A free group $F_r$ of rank $r \ge 2$.
 
-[L1] Free groups are hyperbolic
-([[prop-finite-and-free-groups-are-hyperbolic]]).
+[L1] Free groups are hyperbolic ([[prop-finite-and-free-groups-are-hyperbolic]]).
 
-[A1] The boundary of a regular tree of valence at least $3$ is homeomorphic to
-a Cantor set.
+[A1] The boundary of a regular tree of valence at least $3$ is homeomorphic to a Cantor set.
 
 ## Verification
 

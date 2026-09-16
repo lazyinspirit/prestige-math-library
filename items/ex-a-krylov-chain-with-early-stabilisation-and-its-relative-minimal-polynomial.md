@@ -39,8 +39,7 @@ dimension $3$.
 
 **Given:** The matrix $A$ and vector $b$ displayed above.
 
-[L1] Krylov dimensions grow one step at a time until the grade and then
-stabilize ([[thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise]]).
+[L1] Krylov dimensions grow one step at a time until the grade and then stabilize ([[thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise]]).
 
 ## Verification
 **Proof technique:** direct.

@@ -28,9 +28,7 @@ simple type.
 
 **Given:** An integer $n \ge 5$ and the natural action of $A_n$ on $\{1,\dots,n\}$.
 
-[L1] A finite group is almost simple when it lies between a nonabelian simple
-group and its automorphism group
-([[def-almost-simple-finite-group]]).
+[L1] A finite group is almost simple when it lies between a nonabelian simple group and its automorphism group ([[def-almost-simple-finite-group]]).
 
 [A1] For $n \ge 5$, the alternating group $A_n$ is nonabelian simple.
 

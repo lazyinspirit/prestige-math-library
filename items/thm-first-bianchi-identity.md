@@ -42,13 +42,9 @@ endomorphism vanishes.
 
 [F2] Torsion freeness of the Levi–Civita connection says $\nabla_XY-\nabla_YX=[X,Y]$. [[def-levi-civita-connection]].
 
-[F3] In a chart, smoothness of a vector field is equivalent to smoothness of
-its coordinate coefficients.
-[[prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components]].
+[F3] In a chart, smoothness of a vector field is equivalent to smoothness of its coordinate coefficients. [[prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components]].
 
-[F4] The Lie bracket is the commutator of the two vector fields acting on
-smooth functions: $[X,Y]f=X(Yf)-Y(Xf)$.
-[[def-lie-bracket-of-smooth-vector-fields]].
+[F4] The Lie bracket is the commutator of the two vector fields acting on smooth functions: $[X,Y]f=X(Yf)-Y(Xf)$. [[def-lie-bracket-of-smooth-vector-fields]].
 
 ## Proof
 

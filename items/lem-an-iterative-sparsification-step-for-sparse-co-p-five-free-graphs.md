@@ -42,20 +42,11 @@ following holds:
 
 ## Facts & Assumptions
 
-**Given:** The constant $c=2^{-8}$, a parameter $x\in(0,c^5)$, and a
-$c^{16}$-sparse $\overline{P_5}$-free graph $G$ with
-$|V(G)|\ge x^{-7}$.
+**Given:** The constant $c=2^{-8}$, a parameter $x\in(0,c^5)$, and a $c^{16}$-sparse $\overline{P_5}$-free graph $G$ with $|V(G)|\ge x^{-7}$.
 
-[F1] Lemma 5.4 of Nguyen, Scott, and Seymour's cited paper gives the displayed
-two outcomes with these constants and exponents. Its statement prints
-$|G|\ge y^{-7}$ before $y$ is bound; the proof shows that the intended
-hypothesis is $|G|\ge x^{-7}$ by using it to deduce
-$cx|G|\ge x^2|G|\ge x^{-5}$.
+[F1] Lemma 5.4 of Nguyen, Scott, and Seymour's cited paper gives the displayed two outcomes with these constants and exponents. Its statement prints $|G|\ge y^{-7}$ before $y$ is bound; the proof shows that the intended hypothesis is $|G|\ge x^{-7}$ by using it to deduce $cx|G|\ge x^2|G|\ge x^{-5}$.
 
-[F2] The source proof chooses a minimal threshold $y\in[cx,c^5]$, applies its
-preceding three-outcome sparse-blockade lemma, and rules out the
-deeper-sparsification branch by minimality. The remaining branches give the
-pure blockade in outcome 1 or the $x$-sparse blockade in outcome 2.
+[F2] The source proof chooses a minimal threshold $y\in[cx,c^5]$, applies its preceding three-outcome sparse-blockade lemma, and rules out the deeper-sparsification branch by minimality. The remaining branches give the pure blockade in outcome 1 or the $x$-sparse blockade in outcome 2.
 
 ## Proof
 

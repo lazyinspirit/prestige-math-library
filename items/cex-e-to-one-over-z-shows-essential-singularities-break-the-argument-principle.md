@@ -35,8 +35,7 @@ enclosed singularity is essential.
 
 **Given:** The punctured unit disc and the function $f(z)=e^{1/z}-1$.
 
-[L1] The argument principle requires a finite zero-minus-pole count for a
-meromorphic function ([[thm-argument-principle-null-homologous-cycle]]).
+[L1] The argument principle requires a finite zero-minus-pole count for a meromorphic function ([[thm-argument-principle-null-homologous-cycle]]).
 
 ## Counterexample
 

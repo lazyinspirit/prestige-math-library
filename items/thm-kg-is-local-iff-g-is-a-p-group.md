@@ -38,11 +38,9 @@ algebra $k[G]$ is local if and only if $G$ is a $p$-group.
 
 [L2] The Jacobson radical is nilpotent and the quotient by it is semisimple ([[thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple]]).
 
-[L3] Cauchy's theorem supplies a subgroup of order $q$ whenever a prime $q$
-divides $|G|$ ([[thm-cauchys-theorem-for-finite-groups]]).
+[L3] Cauchy's theorem supplies a subgroup of order $q$ whenever a prime $q$ divides $|G|$ ([[thm-cauchys-theorem-for-finite-groups]]).
 
-[L4] In the group algebra, basis elements multiply by the group law
-([[thm-group-ring-is-a-unital-algebra-with-basis-g]]).
+[L4] In the group algebra, basis elements multiply by the group law ([[thm-group-ring-is-a-unital-algebra-with-basis-g]]).
 
 ## Proof
 

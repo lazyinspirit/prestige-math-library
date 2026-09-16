@@ -36,9 +36,7 @@ is an automorphism of $\mathbb D$ with $f_{a,b}(a)=b$.
 
 **Given:** Points $a,b\in\mathbb D$.
 
-[F1] Every disc automorphism is a rotated Blaschke factor, and each Blaschke
-factor $\varphi_c$ is itself a disc automorphism
-([[thm-disc-automorphisms-are-rotated-blaschke-factors]]).
+[F1] Every disc automorphism is a rotated Blaschke factor, and each Blaschke factor $\varphi_c$ is itself a disc automorphism ([[thm-disc-automorphisms-are-rotated-blaschke-factors]]).
 
 ## Verification
 

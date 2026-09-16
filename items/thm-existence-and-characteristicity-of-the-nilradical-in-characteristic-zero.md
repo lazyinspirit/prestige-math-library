@@ -31,28 +31,19 @@ nilpotent ideal, and this ideal is characteristic.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional Lie algebra $\mathfrak g$ over a
-characteristic-zero field $k$.
+**Given:** A finite-dimensional Lie algebra $\mathfrak g$ over a characteristic-zero field $k$.
 
-[L1] The nilradical, when it exists, is the largest nilpotent ideal
-([[def-nilradical-of-a-finite-dimensional-lie-algebra]]).
+[L1] The nilradical, when it exists, is the largest nilpotent ideal ([[def-nilradical-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] Every nilpotent Lie algebra is solvable
-([[prop-nilpotent-lie-algebras-are-solvable]]).
+[L2] Every nilpotent Lie algebra is solvable ([[prop-nilpotent-lie-algebras-are-solvable]]).
 
-[L3] Quotients and extensions of solvable Lie algebras are solvable
-([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
+[L3] Quotients and extensions of solvable Lie algebras are solvable ([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
 
-[L4] A finite-dimensional representation of a finite-dimensional solvable Lie
-algebra over an algebraically closed characteristic-zero field is simultaneously
-upper triangular
-([[cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations]]).
+[L4] A finite-dimensional representation of a finite-dimensional solvable Lie algebra over an algebraically closed characteristic-zero field is simultaneously upper triangular ([[cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations]]).
 
-[L5] If every adjoint endomorphism of a finite-dimensional Lie algebra is
-nilpotent, then the Lie algebra is nilpotent ([[thm-engels-theorem]]).
+[L5] If every adjoint endomorphism of a finite-dimensional Lie algebra is nilpotent, then the Lie algebra is nilpotent ([[thm-engels-theorem]]).
 
-[L6] Extension of scalars from $F$ to a field extension $K$ is
-$K\otimes_F-$ ([[def-restriction-and-extension-of-scalars]]).
+[L6] Extension of scalars from $F$ to a field extension $K$ is $K\otimes_F-$ ([[def-restriction-and-extension-of-scalars]]).
 
 ## Proof
 

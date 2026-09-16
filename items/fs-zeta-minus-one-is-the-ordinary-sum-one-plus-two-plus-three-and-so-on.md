@@ -30,11 +30,9 @@ sources:
 
 **Given:** The special value at $-1$.
 
-[L1] The special-values theorem gives $\zeta(-1)=-1/12$
-([[thm-special-values-of-riemann-zeta-at-integers]]).
+[L1] The special-values theorem gives $\zeta(-1)=-1/12$ ([[thm-special-values-of-riemann-zeta-at-integers]]).
 
-[L2] The continuation remark records that this value is not an ordinary series
-sum ([[rem-dirichlet-series-continuation-and-regularized-sums]]).
+[L2] The continuation remark records that this value is not an ordinary series sum ([[rem-dirichlet-series-continuation-and-regularized-sums]]).
 
 ## Refutation
 

@@ -35,9 +35,7 @@ on $\Omega$.
 
 **Given:** A finite faithful primitive action of $G$ on $\Omega$ and a minimal normal subgroup $N \trianglelefteq G$.
 
-[L1] In a primitive action, every normal subgroup is either transitive or
-contained in the kernel
-([[thm-normal-subgroups-of-a-primitive-action-are-transitive-or-kernel-contained]]).
+[L1] In a primitive action, every normal subgroup is either transitive or contained in the kernel ([[thm-normal-subgroups-of-a-primitive-action-are-transitive-or-kernel-contained]]).
 
 [A1] A faithful action has trivial kernel.
 

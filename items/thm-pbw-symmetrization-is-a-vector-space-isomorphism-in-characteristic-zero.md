@@ -39,20 +39,13 @@ algebra homomorphism.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field $k$, a Lie algebra $\mathfrak g$ over
-$k$, and a specified totally ordered basis of $\mathfrak g$.
+**Given:** A characteristic-zero field $k$, a Lie algebra $\mathfrak g$ over $k$, and a specified totally ordered basis of $\mathfrak g$.
 
-[L1] In a characteristic-zero field, every positive integer and hence every
-$n!$ is nonzero and invertible
-([[def-ring-characteristic]], [[lem-field-is-a-commutative-ring]],
-[[def-factorial-and-falling-factorial]]).
+[L1] In a characteristic-zero field, every positive integer and hence every $n!$ is nonzero and invertible ([[def-ring-characteristic]], [[lem-field-is-a-commutative-ring]], [[def-factorial-and-falling-factorial]]).
 
-[L2] Finite sums may be reindexed bijectively
-([[lem-finite-sum-reindexing-and-fubini]]).
+[L2] Finite sums may be reindexed bijectively ([[lem-finite-sum-reindexing-and-fubini]]).
 
-[L3] PBW identifies the symbol map
-$\sigma:S(\mathfrak g)\to\operatorname{gr}U(\mathfrak g)$ as a graded-algebra
-isomorphism ([[thm-poincare-birkhoff-witt]]).
+[L3] PBW identifies the symbol map $\sigma:S(\mathfrak g)\to\operatorname{gr}U(\mathfrak g)$ as a graded-algebra isomorphism ([[thm-poincare-birkhoff-witt]]).
 
 ## Proof
 

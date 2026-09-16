@@ -35,24 +35,15 @@ $\mathfrak{sl}_n(\mathbb R)=\{X:\operatorname{tr}X=0\}$.
 
 ## Facts & Assumptions
 
-**Given:** An integer $n\geq1$ and the standard Euclidean structure on
-$M_n(\mathbb R)$.
+**Given:** An integer $n\geq1$ and the standard Euclidean structure on $M_n(\mathbb R)$.
 
-[F1] Lie groups have smooth multiplication and inversion, and the tangent
-bracket is defined through left-invariant fields.
-[[def-lie-group]].
-[[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
+[F1] Lie groups have smooth multiplication and inversion, and the tangent bracket is defined through left-invariant fields. [[def-lie-group]]. [[def-lie-bracket-on-the-tangent-space-of-a-lie-group]].
 
-[F2] Determinant and trace use the standard finite formulas.
-[[def-determinant-of-a-square-matrix]].
-[[def-trace-of-a-square-matrix-over-a-commutative-ring]].
+[F2] Determinant and trace use the standard finite formulas. [[def-determinant-of-a-square-matrix]]. [[def-trace-of-a-square-matrix-over-a-commutative-ring]].
 
-[F3] A regular level is embedded and its tangent space is the kernel of the
-differential. [[thm-a-regular-level-set-is-an-embedded-submanifold]].
-[[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
+[F3] A regular level is embedded and its tangent space is the kernel of the differential. [[thm-a-regular-level-set-is-an-embedded-submanifold]]. [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
-[F4] Countable choice is inherited by the tangent-bracket supplier.
-[[def-countable-choice]].
+[F4] Countable choice is inherited by the tangent-bracket supplier. [[def-countable-choice]].
 
 ## Verification
 

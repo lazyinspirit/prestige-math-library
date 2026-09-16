@@ -32,12 +32,9 @@ manifolds $(S^2,\omega)$ and $(S^2,2\omega)$ are not symplectomorphic.
 
 **Given:** The oriented sphere and its positive area form.
 
-[F1] A symplectomorphism $f$ must satisfy $f^*\omega_1=\omega_0$.
-[[def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding]].
+[F1] A symplectomorphism $f$ must satisfy $f^*\omega_1=\omega_0$. [[def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding]].
 
-[F2] On a compact connected oriented surface, integration identifies top de
-Rham cohomology with $\mathbb R$.
-[[thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology]].
+[F2] On a compact connected oriented surface, integration identifies top de Rham cohomology with $\mathbb R$. [[thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology]].
 
 ## Verification
 

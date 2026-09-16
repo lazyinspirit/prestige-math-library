@@ -31,19 +31,13 @@ contained in every defect group of $c$.
 
 ## Facts & Assumptions
 
-**Given:** AC, the finite group, central $p$-subgroup, and block in the
-Statement.
+**Given:** AC, the finite group, central $p$-subgroup, and block in the Statement.
 
-[F1] For a $p$-subgroup $P\leq H$, the Brauer map deletes the coefficients
-outside $C_H(P)$ ([[def-brauer-homomorphism-for-a-p-subgroup]]).
+[F1] For a $p$-subgroup $P\leq H$, the Brauer map deletes the coefficients outside $C_H(P)$ ([[def-brauer-homomorphism-for-a-p-subgroup]]).
 
-[F2] If the Brauer image of a block at $P$ is nonzero, then $P$ is contained
-in an $H$-conjugate of every defect group of that block
-([[thm-defect-groups-are-maximal-brauer-support]]).
+[F2] If the Brauer image of a block at $P$ is nonzero, then $P$ is contained in an $H$-conjugate of every defect group of that block ([[thm-defect-groups-are-maximal-brauer-support]]).
 
-[F3] AC is available ([[def-axiom-of-choice]]). It is used only to discharge
-the current published dependency contract behind F2; the displayed finite
-group argument makes no additional choice.
+[F3] AC is available ([[def-axiom-of-choice]]). It is used only to discharge the current published dependency contract behind F2; the displayed finite group argument makes no additional choice.
 
 ## Proof
 

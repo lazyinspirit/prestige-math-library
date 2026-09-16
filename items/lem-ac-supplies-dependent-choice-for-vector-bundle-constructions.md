@@ -38,19 +38,13 @@ choice principle.
 
 ## Facts & Assumptions
 
-**Given:** ZF, AC, a nonempty set $X$, a relation $R$ entire on $X$, and a
-prescribed point $a\in X$.
+**Given:** ZF, AC, a nonempty set $X$, a relation $R$ entire on $X$, and a prescribed point $a\in X$.
 
-[F1] AC says that every family of nonempty sets has a choice function
-([[def-axiom-of-choice]]).
+[F1] AC says that every family of nonempty sets has a choice function ([[def-axiom-of-choice]]).
 
-[F2] DC with prescribed initial point asks for a function $x:\mathbb N\to X$
-with $x_0=a$ and $x_n\mathbin R x_{n+1}$ for every $n$
-([[def-dependent-choice]]).
+[F2] DC with prescribed initial point asks for a function $x:\mathbb N\to X$ with $x_0=a$ and $x_n\mathbin R x_{n+1}$ for every $n$ ([[def-dependent-choice]]).
 
-[F3] Given a set $X$, a point $a\in X$, and a function $s:X\to X$, recursion
-on $\mathbb N$ supplies a unique function $x:\mathbb N\to X$ with $x_0=a$ and
-$x_{n+1}=s(x_n)$ ([[thm-recursion]]).
+[F3] Given a set $X$, a point $a\in X$, and a function $s:X\to X$, recursion on $\mathbb N$ supplies a unique function $x:\mathbb N\to X$ with $x_0=a$ and $x_{n+1}=s(x_n)$ ([[thm-recursion]]).
 
 ## Proof
 

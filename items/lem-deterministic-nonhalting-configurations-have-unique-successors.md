@@ -29,19 +29,11 @@ configuration of $M$ has exactly one one-step successor.
 
 ## Facts & Assumptions
 
-**Given:** A deterministic one-tape Turing machine
-$M=(Q,\Sigma,\Gamma,\sqcup,q_0,q_{\mathrm{acc}},q_{\mathrm{rej}},\delta)$ and a
-nonhalting configuration $C=(q,h,t)$ of $M$.
+**Given:** A deterministic one-tape Turing machine $M=(Q,\Sigma,\Gamma,\sqcup,q_0,q_{\mathrm{acc}},q_{\mathrm{rej}},\delta)$ and a nonhalting configuration $C=(q,h,t)$ of $M$.
 
-[L1] The transition function of a deterministic one-tape Turing machine is a
-function
-$$ \delta:(Q\setminus\{q_{\mathrm{acc}},q_{\mathrm{rej}}\})\times\Gamma\to Q\times\Gamma\times\{L,R\}, $$
-by [[def-deterministic-one-tape-turing-machine]].
+[L1] The transition function of a deterministic one-tape Turing machine is a function $$ \delta:(Q\setminus\{q_{\mathrm{acc}},q_{\mathrm{rej}}\})\times\Gamma\to Q\times\Gamma\times\{L,R\}, $$ by [[def-deterministic-one-tape-turing-machine]].
 
-[L2] The relation $C\vdash_M C'$ is obtained by applying the unique transition
-value $\delta(q,t(h))$, rewriting only the scanned tape cell, and updating the
-head position by the stated left/right rule, by
-[[def-one-step-configuration-relation]].
+[L2] The relation $C\vdash_M C'$ is obtained by applying the unique transition value $\delta(q,t(h))$, rewriting only the scanned tape cell, and updating the head position by the stated left/right rule, by [[def-one-step-configuration-relation]].
 
 ## Proof
 

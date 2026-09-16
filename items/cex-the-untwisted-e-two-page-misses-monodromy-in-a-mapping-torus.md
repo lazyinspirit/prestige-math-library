@@ -29,15 +29,13 @@ For the mapping torus of a homeomorphism $h:F\to F$, the coefficient system $b\m
 
 ## Facts & Assumptions
 
-**Given:** A homeomorphism $h:F\to F$, its mapping-torus bundle
-$F\to T_h\to S^1$, and in the explicit case a reflection of $S^1$.
+**Given:** A homeomorphism $h:F\to F$, its mapping-torus bundle $F\to T_h\to S^1$, and in the explicit case a reflection of $S^1$.
 
 [F1] [[def-fiber-transport-and-monodromy-action]] identifies transport around the base loop with the gluing map up to fiber homotopy.
 
 [F2] [[lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems]] turns its induced homology maps into the coefficient local systems.
 
-[F3] [[thm-cellular-chains-compute-homology-with-local-coefficients]] computes
-base homology from the lifted one-cell incidence and the specified monodromy.
+[F3] [[thm-cellular-chains-compute-homology-with-local-coefficients]] computes base homology from the lifted one-cell incidence and the specified monodromy.
 
 ## Proof
 

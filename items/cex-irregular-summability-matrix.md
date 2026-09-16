@@ -89,26 +89,10 @@ third condition of [[thm-silverman-toeplitz]] is not redundant.
 
 ## Remarks
 
-- **Exactly one condition fails**, and the counterexample is arranged so. The
-  columns are eventually $0$ and the row sums are constantly $1$, so conditions
-  1 and 2 of [[thm-silverman-toeplitz]] hold outright; only the uniform bound
-  fails, and the failure is visible in a single line, $2n+3$ being unbounded.
+- **Exactly one condition fails**, and the counterexample is arranged so. The columns are eventually $0$ and the row sums are constantly $1$, so conditions 1 and 2 of [[thm-silverman-toeplitz]] hold outright; only the uniform bound fails, and the failure is visible in a single line, $2n+3$ being unbounded.
 
-- **How the failure is exploited.** The two entries of row $n$ are large and of
-  opposite sign, so they nearly cancel on a slowly varying input and do not
-  cancel at all on an alternating one. The input $x_k = s_k/(k+1)$ is chosen so
-  that the large factors $n+1$ and $n+2$ exactly cancel the small factors
-  $1/(n+1)$ and $1/(n+2)$, leaving the undamped oscillation $-2s_n$. That is the
-  gliding hump of the necessity proof in
-  [[thm-silverman-toeplitz]], in its simplest possible instance.
+- **How the failure is exploited.** The two entries of row $n$ are large and of opposite sign, so they nearly cancel on a slowly varying input and do not cancel at all on an alternating one. The input $x_k = s_k/(k+1)$ is chosen so that the large factors $n+1$ and $n+2$ exactly cancel the small factors $1/(n+1)$ and $1/(n+2)$, leaving the undamped oscillation $-2s_n$. That is the gliding hump of the necessity proof in [[thm-silverman-toeplitz]], in its simplest possible instance.
 
-- **The failure is the stronger of the two possible ones.** A matrix can be
-  irregular by changing a limit, for instance $c_{n,n} = 2$ and all other
-  entries $0$, whose row sums tend to $2$ rather than $1$ and which sends
-  $(x_k)$ to $(2x_k)$. The matrix above destroys convergence altogether.
+- **The failure is the stronger of the two possible ones.** A matrix can be irregular by changing a limit, for instance $c_{n,n} = 2$ and all other entries $0$, whose row sums tend to $2$ rather than $1$ and which sends $(x_k)$ to $(2x_k)$. The matrix above destroys convergence altogether.
 
-- **Contrast with the Cesaro matrix**, whose rows are nonnegative and sum to $1$,
-  so its row absolute sums are constantly $1$ and it is regular
-  ([[cor-cesaro-matrix-is-regular]]). Uniform boundedness of the row absolute
-  sums is what stops a weighting from amplifying, and it is the only one of the
-  three conditions that is not tested by a single fixed input.
+- **Contrast with the Cesaro matrix**, whose rows are nonnegative and sum to $1$, so its row absolute sums are constantly $1$ and it is regular ([[cor-cesaro-matrix-is-regular]]). Uniform boundedness of the row absolute sums is what stops a weighting from amplifying, and it is the only one of the three conditions that is not tested by a single fixed input.

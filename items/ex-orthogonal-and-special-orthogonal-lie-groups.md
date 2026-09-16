@@ -42,16 +42,13 @@ at the identity.
 
 **Given:** Real $n$-by-$n$ matrices.
 
-[F1] $\operatorname{GL}_n$ is a matrix Lie group with commutator tangent
-bracket. [[ex-general-and-special-linear-lie-groups]].
+[F1] $\operatorname{GL}_n$ is a matrix Lie group with commutator tangent bracket. [[ex-general-and-special-linear-lie-groups]].
 
 [F2] Transpose reverses matrix products. [[def-transpose-of-a-matrix]].
 
-[F3] A constant-rank level set has the induced embedded manifold structure and
-tangent kernel. [[thm-constant-rank-theorem-for-manifolds]].
+[F3] A constant-rank level set has the induced embedded manifold structure and tangent kernel. [[thm-constant-rank-theorem-for-manifolds]].
 
-[F4] Countable choice is inherited through [F1].
-[[def-countable-choice]].
+[F4] Countable choice is inherited through [F1]. [[def-countable-choice]].
 
 ## Verification
 

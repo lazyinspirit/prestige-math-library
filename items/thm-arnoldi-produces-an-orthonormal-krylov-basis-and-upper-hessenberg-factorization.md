@@ -45,22 +45,13 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** A square matrix $A$ over $\mathbb R$ or $\mathbb C$, a nonzero start
-vector $b$ of matching size, an integer $m\ge1$, and an Arnoldi run through
-step $m$ with no breakdown.
+**Given:** A square matrix $A$ over $\mathbb R$ or $\mathbb C$, a nonzero start vector $b$ of matching size, an integer $m\ge1$, and an Arnoldi run through step $m$ with no breakdown.
 
-[F1] In Arnoldi, each step defines
-$w_j=Av_j-\sum_{i=1}^j h_{ij}v_i$ with $h_{ij}=\langle Av_j,v_i\rangle$, and
-when $h_{j+1,j}=\|w_j\|\ne0$ one sets $v_{j+1}=w_j/h_{j+1,j}$
-([[def-arnoldi-process]]).
+[F1] In Arnoldi, each step defines $w_j=Av_j-\sum_{i=1}^j h_{ij}v_i$ with $h_{ij}=\langle Av_j,v_i\rangle$, and when $h_{j+1,j}=\|w_j\|\ne0$ one sets $v_{j+1}=w_j/h_{j+1,j}$ ([[def-arnoldi-process]]).
 
-[F2] For $m\ge1$, one has
-$K_m(A,b)=\operatorname{span}\{b,Ab,\ldots,A^{m-1}b\}$
-([[def-krylov-subspace-of-a-matrix-and-start-vector]]).
+[F2] For $m\ge1$, one has $K_m(A,b)=\operatorname{span}\{b,Ab,\ldots,A^{m-1}b\}$ ([[def-krylov-subspace-of-a-matrix-and-start-vector]]).
 
-[F3] The square-matrix upper-Hessenberg condition is the zero pattern
-$h_{ij}=0$ for $i>j+1$
-([[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]]).
+[F3] The square-matrix upper-Hessenberg condition is the zero pattern $h_{ij}=0$ for $i>j+1$ ([[def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices]]).
 
 ## Proof
 **Proof technique:** direct.

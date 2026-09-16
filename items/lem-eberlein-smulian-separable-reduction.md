@@ -38,41 +38,25 @@ $\sigma(X,X^*)$, and $Y$ is weakly closed in $X$.
 
 ## Facts & Assumptions
 
-**Given:** HB, a real or complex Banach space $X$, and one supplied sequence
-$(x_n)$ in $X$.
+**Given:** HB, a real or complex Banach space $X$, and one supplied sequence $(x_n)$ in $X$.
 
-[F1] A topological space is separable when it has an at most countable dense
-subset ([[def-separable-space]]).
+[F1] A topological space is separable when it has an at most countable dense subset ([[def-separable-space]]).
 
-[F2] The rationals are countably infinite, products of two at most countable
-sets are at most countable, and every nonempty image of a surjection from
-$\mathbb N$ is at most countable
-([[thm-rationals-countable]], [[thm-product-of-countable]],
-[[lem-countable-iff-surjection-from-n]]).
+[F2] The rationals are countably infinite, products of two at most countable sets are at most countable, and every nonempty image of a surjection from $\mathbb N$ is at most countable ([[thm-rationals-countable]], [[thm-product-of-countable]], [[lem-countable-iff-surjection-from-n]]).
 
-[F3] The embedded rationals are dense in $\mathbb R$
-([[lem-rat-embeds-dense]]).
+[F3] The embedded rationals are dense in $\mathbb R$ ([[lem-rat-embeds-dense]]).
 
-[F4] Under HB, each bounded scalar-linear functional on a subspace extends to
-the ambient normed space with the same norm
-([[thm-relative-hahn-banach-norm-preserving-extension]]).
+[F4] Under HB, each bounded scalar-linear functional on a subspace extends to the ambient normed space with the same norm ([[thm-relative-hahn-banach-norm-preserving-extension]]).
 
-[F5] Under HB, a point outside a nonempty closed convex set is uniformly
-strictly separated from that set by the real part of a member of the ambient
-dual ([[thm-relative-hahn-banach-geometric-separation]]).
+[F5] Under HB, a point outside a nonempty closed convex set is uniformly strictly separated from that set by the real part of a member of the ambient dual ([[thm-relative-hahn-banach-geometric-separation]]).
 
-[F6] A closed linear subspace of a Banach space is Banach with the restricted
-norm ([[lem-closed-subspace-of-a-banach-space-is-banach]]).
+[F6] A closed linear subspace of a Banach space is Banach with the restricted norm ([[lem-closed-subspace-of-a-banach-space-is-banach]]).
 
-[F7] The weak topology is the initial topology of all bounded scalar-linear
-functionals ([[def-weak-topology-on-a-normed-space]]), and HB denotes the real
-dominated-extension principle
-([[def-hahn-banach-extension-principle-relative]]).
+[F7] The weak topology is the initial topology of all bounded scalar-linear functionals ([[def-weak-topology-on-a-normed-space]]), and HB denotes the real dominated-extension principle ([[def-hahn-banach-extension-principle-relative]]).
 
 ## Proof
 
-**Proof technique:** explicit countable dense set, followed by Hahn–Banach
-extension and separation.
+**Proof technique:** explicit countable dense set, followed by Hahn–Banach extension and separation.
 
 1.1 Let $\mathbb Q_{\mathbb K}=\mathbb Q$ in the real case and $\mathbb Q+i\mathbb Q$ in the complex case, with the canonical embeddings into the scalar field understood. By [F2], $\mathbb Q_{\mathbb K}$ is at most countable: in the complex case it is the image of the countable product $\mathbb Q\times\mathbb Q$. It is nonempty, so fix one surjection $q:\mathbb N\to\mathbb Q_{\mathbb K}$. This is one instantiation of the countability theorem, not a countable family of choices. [F2]
 
@@ -90,7 +74,4 @@ extension and separation.
 
 ## Source notes
 
-Bühler–Salamon, proof of Theorem 3.42, printed p. 145, uses the smallest closed
-span of a sequence as the separable reduction.  The intrinsic/relative weak
-topology and weak-closedness details are supplied here from the exact
-HB-relative extension and separation results cited above.
+Bühler–Salamon, proof of Theorem 3.42, printed p. 145, uses the smallest closed span of a sequence as the separable reduction.  The intrinsic/relative weak topology and weak-closedness details are supplied here from the exact HB-relative extension and separation results cited above.

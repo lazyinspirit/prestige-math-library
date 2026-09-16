@@ -57,10 +57,6 @@ inclusion $A^N\hookrightarrow A$.
 
 1.2 Under [L2], a class in $H^2(Q,A^N)$ is an extension of $Q$ by $A^N$. The map to $H^2(G,A)$ first pulls that extension back along $G\to Q$, producing an extension of $G$ by $A^N$, and then pushes out along the inclusion $A^N\hookrightarrow A$. That is the extension-theoretic meaning of the last inflation map in the displayed sequence. [L2, given, algebra]
 
-1.3 Exactness of [A1] at $H^1(N,A)^Q$ says
-$$\ker(\operatorname{Tra})=\operatorname{im}(\operatorname{Res}).$$
-Thus $\operatorname{Tra}[u]=0$ exactly when $[u]$ is the restriction of a
-degree-one class on $G$, which is precisely the asserted extension criterion
-for the cohomology class. [A1, algebra]
+1.3 Exactness of [A1] at $H^1(N,A)^Q$ says $$\ker(\operatorname{Tra})=\operatorname{im}(\operatorname{Res}).$$ Thus $\operatorname{Tra}[u]=0$ exactly when $[u]$ is the restriction of a degree-one class on $G$, which is precisely the asserted extension criterion for the cohomology class. [A1, algebra]
 
 2.1 Steps 1.2 and 1.3 give the two claimed interpretations, while step 1.1 identifies the preceding degree-one maps. [step 1.1, step 1.2, step 1.3] ∎

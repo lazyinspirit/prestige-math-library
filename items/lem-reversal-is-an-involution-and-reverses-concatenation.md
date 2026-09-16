@@ -36,14 +36,9 @@ For words $u,v$ over a fixed alphabet and languages $L,K$ over that alphabet:
 
 **Given:** Words $u,v,w$ and languages $L,K$ over a fixed alphabet $\Sigma$.
 
-[L1] Word reversal is defined by $w^R(i)=w(n-1-i)$ for a word $w:n\to\Sigma$,
-and language reversal is $L^R=\{x^R:x\in L\}$, by
-[[def-word-and-language-reversal]].
+[L1] Word reversal is defined by $w^R(i)=w(n-1-i)$ for a word $w:n\to\Sigma$, and language reversal is $L^R=\{x^R:x\in L\}$, by [[def-word-and-language-reversal]].
 
-[L2] Word concatenation is the offset construction and language concatenation is
-$AB=\{ab:a\in A\text{ and }b\in B\}$ by
-[[def-computation-alphabet-and-word-convention]] and
-[[def-language-concatenation-powers-and-kleene-star]].
+[L2] Word concatenation is the offset construction and language concatenation is $AB=\{ab:a\in A\text{ and }b\in B\}$ by [[def-computation-alphabet-and-word-convention]] and [[def-language-concatenation-powers-and-kleene-star]].
 
 ## Proof
 

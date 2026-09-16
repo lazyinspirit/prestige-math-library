@@ -44,18 +44,18 @@ anticonnected.
 
 [F1] In a connected graph every vertex has a neighbour, and if $\overline G$ is connected then no vertex of $G$ is adjacent to all other vertices ([[def-connected-graph-and-connected-component]], [[def-graph-isomorphism-and-complement]]).
 
+
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 By [L1], if $G$ is disconnected then the first alternative of the Statement already holds. Assume instead that $G$ is connected. [L1, given]
 
-1.2 Suppose for contradiction that $G$ is also anticonnected. Then [L2] makes $\overline G$ connected. Choose a vertex $v\in V(G)$. Because $G$ is connected and nontrivial, [F1] gives a neighbour $x$ of $v$. Because $\overline G$ is connected, [F1] also gives a vertex $y$ nonadjacent to $v$. Among all pairs $(a,b)$ with $va\in E(G)$ and $vb\notin E(G)$, choose one for which the distance from $a$ to $b$ in $G$ is minimal. Let
-$$a=u_0,u_1,\dots,u_m=b$$
-be a shortest $a$-$b$ path in $G$. [step 1.1, L2, F1, choose, assume-contra]
+2.1 Suppose for contradiction that $G$ is also anticonnected. Then [L2] makes $\overline G$ connected. Choose a vertex $v\in V(G)$. Because $G$ is connected and nontrivial, [F1] gives a neighbour $x$ of $v$. Because $\overline G$ is connected, [F1] also gives a vertex $y$ nonadjacent to $v$. Among all pairs $(a,b)$ with $va\in E(G)$ and $vb\notin E(G)$, choose one for which the distance from $a$ to $b$ in $G$ is minimal. Let $$a=u_0,u_1,\dots,u_m=b$$ be a shortest $a$-$b$ path in $G$. [step 1.1, L2, F1, choose, assume-contra]
 
-2.1 Since $a$ and $b$ are nonadjacent, one has $m\ge 2$. A shortest path is induced, so $u_0u_2\notin E(G)$ and no nonconsecutive pair among $u_0,u_1,\dots,u_m$ is adjacent. If some $u_i$ with $1\le i<m$ were adjacent to $v$, then $(u_i,b)$ would be another neighbour/nonneighbour pair for $v$ whose distance is $m-i<m$, contradicting the choice in step 1.2. Hence $vu_1,vu_2\notin E(G)$. [step 1.2, algebra]
+3.1 Since $a$ and $b$ are nonadjacent, one has $m\ge 2$. A shortest path is induced, so $u_0u_2\notin E(G)$ and no nonconsecutive pair among $u_0,u_1,\dots,u_m$ is adjacent. If some $u_i$ with $1\le i<m$ were adjacent to $v$, then $(u_i,b)$ would be another neighbour/nonneighbour pair for $v$ whose distance is $m-i<m$, contradicting the choice in step 2.1. Hence $vu_1,vu_2\notin E(G)$. [step 2.1, algebra]
 
-3.1 The four vertices $v,u_0,u_1,u_2$ therefore induce a path: the edges are $vu_0$, $u_0u_1$, and $u_1u_2$, while the nonedges are $vu_1$, $vu_2$, and $u_0u_2$. This is an induced copy of $P_4$, contradicting [L3]. [step 2.1, L3, discharge-contradiction]
+4.1 The four vertices $v,u_0,u_1,u_2$ therefore induce a path: the edges are $vu_0$, $u_0u_1$, and $u_1u_2$, while the nonedges are $vu_1$, $vu_2$, and $u_0u_2$. This is an induced copy of $P_4$, contradicting [L3]. [step 3.1, L3, discharge-contradiction]
 
-4.1 So a nontrivial $P_4$-free graph cannot be both connected and anticonnected. Since step 1.1 reduced to the connected case, [L2] shows that whenever $G$ is connected, $\overline G$ must be disconnected. [step 1.1, step 3.1, L2] ∎
+5.1 So a nontrivial $P_4$-free graph cannot be both connected and anticonnected. Since step 1.1 reduced to the connected case, [L2] shows that whenever $G$ is connected, $\overline G$ must be disconnected. [step 1.1, step 4.1, L2] ∎

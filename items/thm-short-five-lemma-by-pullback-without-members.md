@@ -37,32 +37,21 @@ isomorphic outer maps force it to be an isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** A morphism of short exact sequences
-$$0 \to A \xrightarrow{i} B \xrightarrow{p} C \to 0,$$
-$$0 \to A' \xrightarrow{i'} B' \xrightarrow{p'} C' \to 0,$$
-with vertical maps $f,g,h$.
+**Given:** A morphism of short exact sequences $$0 \to A \xrightarrow{i} B \xrightarrow{p} C \to 0,$$ $$0 \to A' \xrightarrow{i'} B' \xrightarrow{p'} C' \to 0,$$ with vertical maps $f,g,h$.
 
-[L1] In a short exact sequence, the left map is a kernel and the right map is a
-cokernel ([[thm-a-short-exact-sequence-is-a-kernel-cokernel-pair]]).
+[L1] In a short exact sequence, the left map is a kernel and the right map is a cokernel ([[thm-a-short-exact-sequence-is-a-kernel-cokernel-pair]]).
 
-[L2] The pullback square of an epimorphism is again a pullback square with epic
-left projection, and its induced map on kernels is an isomorphism
-([[thm-in-a-pullback-square-the-induced-morphism-on-the-kernels-of-the-parallel-legs-is-an-isomorphism]]).
+[L2] The pullback square of an epimorphism is again a pullback square with epic left projection, and its induced map on kernels is an isomorphism ([[thm-in-a-pullback-square-the-induced-morphism-on-the-kernels-of-the-parallel-legs-is-an-isomorphism]]).
 
-[L3] A cartesian square over an epimorphism is also cocartesian
-([[thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian]]).
+[L3] A cartesian square over an epimorphism is also cocartesian ([[thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian]]).
 
-[L4] In an abelian category, monic-plus-epic implies isomorphism
-([[thm-an-abelian-category-is-balanced]]).
+[L4] In an abelian category, monic-plus-epic implies isomorphism ([[thm-an-abelian-category-is-balanced]]).
 
 ## Pullback diagram
 
 The proof uses the following pullback of $p'$ along $h$:
 
-```tikzcd
-P \arrow[r, "\beta"] \arrow[d, "\alpha"'] & B' \arrow[d, "p'"] \\
-C \arrow[r, "h"'] & C'.
-```
+```tikzcd P \arrow[r, "\beta"] \arrow[d, "\alpha"'] & B' \arrow[d, "p'"] \\ C \arrow[r, "h"'] & C'. ```
 
 ## Proof
 

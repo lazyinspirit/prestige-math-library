@@ -34,8 +34,7 @@ $L(1+it,\chi)\ne0$ for every real $t\ne0$.
 
 **Given:** A nonprincipal Dirichlet character $\chi$ and a real number $t\ne0$.
 
-[L1] The full product $\prod_{\psi\bmod q}L(s,\psi)$ has no zero on the line
-$\operatorname{Re}s=1$ ([[thm-product-dirichlet-l-nonvanishing-line-one]]).
+[L1] The full product $\prod_{\psi\bmod q}L(s,\psi)$ has no zero on the line $\operatorname{Re}s=1$ ([[thm-product-dirichlet-l-nonvanishing-line-one]]).
 
 ## Proof
 

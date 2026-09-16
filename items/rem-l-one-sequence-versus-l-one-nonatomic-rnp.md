@@ -34,28 +34,15 @@ two norms does not determine the RNP.
 
 ## Facts & Assumptions
 
-[A1] AC holds and supplies Countable Choice
-([[def-axiom-of-choice]],
-[[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
+[A1] AC holds and supplies Countable Choice ([[def-axiom-of-choice]], [[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
-[L1] Finite truncations are dense in $\ell^1$, while rational numbers are
-countable and dense in the reals; finite products and countable unions of
-countable sets are countable under Countable Choice
-([[lem-finite-truncations-are-dense-in-c0-and-ell-one]],
-[[thm-rationals-countable]], [[lem-q-and-irrationals-dense-r]],
-[[thm-product-of-countable]], [[thm-countable-union-of-countable]],
-[[lem-countable-iff-surjection-from-n]], [[def-separable-space]]).
+[L1] Finite truncations are dense in $\ell^1$, while rational numbers are countable and dense in the reals; finite products and countable unions of countable sets are countable under Countable Choice ([[lem-finite-truncations-are-dense-in-c0-and-ell-one]], [[thm-rationals-countable]], [[lem-q-and-irrationals-dense-r]], [[thm-product-of-countable]], [[thm-countable-union-of-countable]], [[lem-countable-iff-surjection-from-n]], [[def-separable-space]]).
 
-[L2] The bilinear coefficient map identifies $\ell^1$ isometrically with the
-continuous dual $c_0^*$, and continuous duals are Banach
-([[thm-dual-of-c0-is-ell-one]],
-[[thm-bounded-operator-space-is-banach]]).
+[L2] The bilinear coefficient map identifies $\ell^1$ isometrically with the continuous dual $c_0^*$, and continuous duals are Banach ([[thm-dual-of-c0-is-ell-one]], [[thm-bounded-operator-space-is-banach]]).
 
-[L3] Under AC, every norm-separable continuous dual has RNP
-([[thm-separable-dual-spaces-have-rnp]]).
+[L3] Under AC, every norm-separable continuous dual has RNP ([[thm-separable-dual-spaces-have-rnp]]).
 
-[L4] Under AC, real and complex $L^1([0,1],\lambda)$ fail RNP
-([[thm-l-one-of-zero-one-fails-rnp]]).
+[L4] Under AC, real and complex $L^1([0,1],\lambda)$ fail RNP ([[thm-l-one-of-zero-one-fails-rnp]]).
 
 ## Proof
 

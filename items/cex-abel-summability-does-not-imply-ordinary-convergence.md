@@ -30,11 +30,9 @@ If a series is Abel summable, then its ordinary partial sums converge.
 
 ## Facts & Assumptions
 
-**Given:** Grandi's series
-$$1-1+1-1+\cdots.$$
+**Given:** Grandi's series $$1-1+1-1+\cdots.$$
 
-[F1] For $|r|<1$, the geometric-series identity gives
-$$1-r+r^2-r^3+\cdots=\frac{1}{1+r}.$$
+[F1] For $|r|<1$, the geometric-series identity gives $$1-r+r^2-r^3+\cdots=\frac{1}{1+r}.$$
 
 ## Counterexample
 

@@ -36,13 +36,9 @@ and satisfies $C'(\lambda)$, then it satisfies $C(\lambda)$.
 
 ## Facts & Assumptions
 
-**Given:** A symmetrised relator set of nonempty words satisfying
-$C'(\lambda)$.
+**Given:** A symmetrised relator set of nonempty words satisfying $C'(\lambda)$.
 
-[L1] Under $C'(\lambda)$, every piece $p$ lying in a relator $r$ satisfies
-$|p|<\lambda |r|$, while $C(\lambda)$ asks that a factorisation of $r$ into
-pieces use more than $1/\lambda$ pieces
-([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
+[L1] Under $C'(\lambda)$, every piece $p$ lying in a relator $r$ satisfies $|p|<\lambda |r|$, while $C(\lambda)$ asks that a factorisation of $r$ into pieces use more than $1/\lambda$ pieces ([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
 
 ## Proof
 

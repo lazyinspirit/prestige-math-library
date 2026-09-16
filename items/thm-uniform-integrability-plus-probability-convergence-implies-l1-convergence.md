@@ -31,12 +31,9 @@ integrable, then $X\in L^1(\mathbb P)$ and $X_n\to X$ in $L^1$.
 
 **Given:** Integrable real random variables $X_n$, a real random variable $X$, probability convergence, and uniform integrability of $(X_n)$.
 
-[L1] Probability convergence is convergence in measure for the probability
-measure ([[def-convergence-in-probability]]).
+[L1] Probability convergence is convergence in measure for the probability measure ([[def-convergence-in-probability]]).
 
-[L2] On a finite measure space, convergence in measure plus uniform
-integrability is equivalent to $L^1$ convergence
-([[thm-vitali-convergence-theorem-on-finite-and-sigma-finite-measure-spaces]]).
+[L2] On a finite measure space, convergence in measure plus uniform integrability is equivalent to $L^1$ convergence ([[thm-vitali-convergence-theorem-on-finite-and-sigma-finite-measure-spaces]]).
 
 ## Proof
 
@@ -45,5 +42,4 @@ integrability is equivalent to $L^1$ convergence
 1.1 The underlying measure has total mass one, hence is finite; [L1] converts the hypothesis to convergence in measure. [L1]
 
 2.1 Apply the finite-measure reverse implication of [L2] to $(X_n)$. [step 1.1, L2]
-It supplies $X\in L^1$ and $\mathbb E|X_n-X|\to0$, namely $L^1$ convergence.
-[step 1.1, L2] ∎
+It supplies $X\in L^1$ and $\mathbb E|X_n-X|\to0$, namely $L^1$ convergence. [step 1.1, L2] ∎

@@ -78,7 +78,4 @@ an extreme point of $K$.
 
 ## Remarks
 
-The maximizer set need not be convex: for $f(x)=x^2$ on $[-1,1]$ it is
-$\{-1,1\}$.  The proof therefore does not apply Krein–Milman to that set; it
-uses closed $K$-extremal subsets, exactly as the endpoint calculation above
-requires.
+The maximizer set need not be convex: for $f(x)=x^2$ on $[-1,1]$ it is $\{-1,1\}$.  The proof therefore does not apply Krein–Milman to that set; it uses closed $K$-extremal subsets, exactly as the endpoint calculation above requires.

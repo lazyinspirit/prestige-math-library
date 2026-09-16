@@ -31,12 +31,9 @@ Every minimal normal subgroup of a finite group is characteristically simple.
 
 **Given:** A finite group $G$ and a minimal normal subgroup $M \trianglelefteq G$.
 
-[L1] If $K$ is characteristic in a normal subgroup $M \trianglelefteq G$, then
-$K$ is normal in $G$
-([[lem-characteristic-subgroup-of-a-normal-subgroup-is-normal]]).
+[L1] If $K$ is characteristic in a normal subgroup $M \trianglelefteq G$, then $K$ is normal in $G$ ([[lem-characteristic-subgroup-of-a-normal-subgroup-is-normal]]).
 
-[A1] A finite group is characteristically simple exactly when it has no proper
-nontrivial characteristic subgroup.
+[A1] A finite group is characteristically simple exactly when it has no proper nontrivial characteristic subgroup.
 
 ## Proof
 

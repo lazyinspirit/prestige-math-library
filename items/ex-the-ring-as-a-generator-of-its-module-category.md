@@ -37,11 +37,9 @@ element of $M$ maps onto $M$, which is the concrete generator criterion.
 
 **Given:** A ring $R$ and a left $R$-module $M$.
 
-[L1] The canonical coproduct map criterion characterizes generators in AB3
-([[thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree]]).
+[L1] The canonical coproduct map criterion characterizes generators in AB3 ([[thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree]]).
 
-[L2] Module categories are Grothendieck categories, hence in particular have
-such a generator ([[thm-module-categories-are-grothendieck-categories]]).
+[L2] Module categories are Grothendieck categories, hence in particular have such a generator ([[thm-module-categories-are-grothendieck-categories]]).
 
 ## Verification
 

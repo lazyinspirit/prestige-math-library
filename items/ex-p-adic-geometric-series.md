@@ -37,11 +37,9 @@ $1/(1-p)$.
 
 **Given:** A prime $p$.
 
-[L1] The $p$-adic absolute value satisfies $|p|_p = p^{-1} < 1$
-([[def-p-adic-absolute-value-on-the-rationals]]).
+[L1] The $p$-adic absolute value satisfies $|p|_p = p^{-1} < 1$ ([[def-p-adic-absolute-value-on-the-rationals]]).
 
-[L2] $\mathbb Q_p$ is a field
-([[thm-p-adic-completion-is-a-field]]).
+[L2] $\mathbb Q_p$ is a field ([[thm-p-adic-completion-is-a-field]]).
 
 ## Verification
 

@@ -39,27 +39,17 @@ $\operatorname{pr}_X^*[E_>]+\operatorname{pr}_X^*[E_<]\,
 
 ## Facts & Assumptions
 
-**Given:** AC, compact Hausdorff $X$, and the displayed linear clutching family
-obtained after [[lem-polynomial-clutching-families-stabilize-to-linear-clutching]].
+**Given:** AC, compact Hausdorff $X$, and the displayed linear clutching family obtained after [[lem-polynomial-clutching-families-stabilize-to-linear-clutching]].
 
-[F1] A constant bundle automorphism extends over a hemisphere and hence can be
-absorbed by changing a clutching trivialization
-([[def-clutching-construction-for-bundles-over-a-suspension]]).
+[F1] A constant bundle automorphism extends over a hemisphere and hence can be absorbed by changing a clutching trivialization ([[def-clutching-construction-for-bundles-over-a-suspension]]).
 
-[F2] Winding number is invariant under homotopy through nonzero loops and is
-additive under products
-([[cor-winding-number-classifies-loops-in-the-punctured-plane]]).
+[F2] Winding number is invariant under homotopy through nonzero loops and is additive under products ([[cor-winding-number-classifies-loops-in-the-punctured-plane]]).
 
-[F3] External product identifies $[E,I]$ with the pullback from $X$ and
-$[E,z]$ with the pullback of $E$ tensored by the Hopf line
-([[def-external-product-in-complex-k-theory]]).
+[F3] External product identifies $[E,I]$ with the pullback from $X$ and $[E,z]$ with the pullback of $E$ tensored by the Hopf line ([[def-external-product-in-complex-k-theory]]).
 
-[F4] The Hopf convention fixes $z$ as $\gamma$ and
-$\beta=[\gamma]-1$
-([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
+[F4] The Hopf convention fixes $z$ as $\gamma$ and $\beta=[\gamma]-1$ ([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
 
-[A1] AC is inherited from [F3] and [F4]; the finite-dimensional spectral
-construction itself makes no selections.
+[A1] AC is inherited from [F3] and [F4]; the finite-dimensional spectral construction itself makes no selections.
 
 ## Proof
 

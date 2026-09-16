@@ -31,8 +31,7 @@ strict monoidal category that is also skeletal.
 
 ## Facts & Assumptions
 
-**Given:** The meaning of skeletal category and the scope warning about
-strictification.
+**Given:** The meaning of skeletal category and the scope warning about strictification.
 
 [L1] A skeletal category is one in which isomorphic objects are equal ([[def-skeletal-category-and-skeleton]]).
 

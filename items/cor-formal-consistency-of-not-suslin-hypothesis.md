@@ -36,39 +36,23 @@ produces a transitive model of full ZFC.
 
 ## Facts & Assumptions
 
-**Given:** the fixed pure-membership proof calculus, certified presentations of
-ZFC and ZFC+$\neg$SH, and the fixed contradiction sentence.
+**Given:** the fixed pure-membership proof calculus, certified presentations of ZFC and ZFC+$\neg$SH, and the fixed contradiction sentence.
 
-[F1] The $L$-interpretation dispatcher translates certified finite
-ZFC+GCH derivations to ZF derivations by a primitive-recursive map whose
-totality and checker acceptance PA verifies.
-[[lem-finite-fragment-l-interpretation-with-gch]]
+[F1] The $L$-interpretation dispatcher translates certified finite ZFC+GCH derivations to ZF derivations by a primitive-recursive map whose totality and checker acceptance PA verifies. [[lem-finite-fragment-l-interpretation-with-gch]]
 
-[F2] ZF proves that $L$ satisfies ZFC+$V=L$, with fixed relativized-axiom
-derivations; no model or consistency transfer is asserted merely by that
-semantic theorem. [[thm-constructible-inner-model-semantic-and-formal-schema]]
+[F2] ZF proves that $L$ satisfies ZFC+$V=L$, with fixed relativized-axiom derivations; no model or consistency transfer is asserted merely by that semantic theorem. [[thm-constructible-inner-model-semantic-and-formal-schema]]
 
-[F3] ZF proves that $V=L$ yields a normal splitting Suslin tree on $\omega_1$.
-[[cor-v-equals-l-gives-a-suslin-tree]]
+[F3] ZF proves that $V=L$ yields a normal splitting Suslin tree on $\omega_1$. [[cor-v-equals-l-gives-a-suslin-tree]]
 
-[F4] In ZFC, existence of a Suslin tree implies existence of a Suslin line in
-the strong convention. [[thm-suslin-tree-implies-suslin-line]]
+[F4] In ZFC, existence of a Suslin tree implies existence of a Suslin line in the strong convention. [[thm-suslin-tree-implies-suslin-line]]
 
-[F5] SH says that no strong-convention Suslin line exists, so its literal
-negation is the existence assertion supplied by [F4].
-[[def-suslin-hypothesis-and-suslin-algebra]]
+[F5] SH says that no strong-convention Suslin line exists, so its literal negation is the existence assertion supplied by [F4]. [[def-suslin-hypothesis-and-suslin-algebra]]
 
-[F6] A base-verified total map from target contradiction proofs to source
-contradiction proofs yields the corresponding formal consistency implication.
-[[thm-formal-relative-consistency-from-verified-proof-reduction]]
+[F6] A base-verified total map from target contradiction proofs to source contradiction proofs yields the corresponding formal consistency implication. [[thm-formal-relative-consistency-from-verified-proof-reduction]]
 
-[F7] The chosen $\operatorname{Con}(T)$ formula is the negation of certified
-provability of one fixed contradiction sentence.
-[[def-arithmetic-provability-and-consistency]]
+[F7] The chosen $\operatorname{Con}(T)$ formula is the negation of certified provability of one fixed contradiction sentence. [[def-arithmetic-provability-and-consistency]]
 
-[A1] Choice is not assumed in ambient ZF for the interpretation. It is proved
-inside $L$ and is exactly the hypothesis used there by the tree-to-line
-construction. [[def-axiom-of-choice]]
+[A1] Choice is not assumed in ambient ZF for the interpretation. It is proved inside $L$ and is exactly the hypothesis used there by the tree-to-line construction. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -86,9 +70,5 @@ construction. [[def-axiom-of-choice]]
 
 ## Remarks
 
-- GCH is part of the already verified dispatcher but is not used in the fixed
-  derivation of $\neg$SH; $V=L$, diamond, the tree construction, and the
-  tree-to-line implication are the relevant object-theory route.
-- The reduction targets ZF proofs first. Since every ZF axiom is a ZFC axiom,
-  the same finite derivation is also a ZFC derivation, which is the orientation
-  required for the displayed consistency implication.
+- GCH is part of the already verified dispatcher but is not used in the fixed derivation of $\neg$SH; $V=L$, diamond, the tree construction, and the tree-to-line implication are the relevant object-theory route.
+- The reduction targets ZF proofs first. Since every ZF axiom is a ZFC axiom, the same finite derivation is also a ZFC derivation, which is the orientation required for the displayed consistency implication.

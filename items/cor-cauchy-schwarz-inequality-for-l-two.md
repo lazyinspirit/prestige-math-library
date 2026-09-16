@@ -40,16 +40,13 @@ $$|f|^2=c\,|g|^2\qquad\mu\text{-almost everywhere}.$$
 
 **Given:** Functions $f,g\in\mathcal L^2(\mu)$.
 
-[L1] Holder's inequality holds for conjugate exponents
-([[thm-holder-inequality-for-integrals]]).
+[L1] Holder's inequality holds for conjugate exponents ([[thm-holder-inequality-for-integrals]]).
 
-[L2] The strict-exponent equality criterion for Holder has already been proved
-([[thm-equality-case-in-holder-inequality]]).
+[L2] The strict-exponent equality criterion for Holder has already been proved ([[thm-equality-case-in-holder-inequality]]).
 
 ## Proof
 
-**Proof technique:** Specialize Holder to $p=q=2$, and inherit the equality
-clause from the strict-exponent equality theorem.
+**Proof technique:** Specialize Holder to $p=q=2$, and inherit the equality clause from the strict-exponent equality theorem.
 
 1.1 The exponent $2$ is conjugate to itself, so [L1] with $p=q=2$ gives [L1]
 $$\int |fg|\,d\mu\le\|f\|_2\|g\|_2.$$

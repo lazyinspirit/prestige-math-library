@@ -36,30 +36,17 @@ define an additive functor on the domain of $I$.
 
 **Given:** An integer $n$.
 
-[L1] Right derived maps are defined from injective comparison extensions
-([[def-right-derived-map-relative-to-resolution-data]]).
+[L1] Right derived maps are defined from injective comparison extensions ([[def-right-derived-map-relative-to-resolution-data]]).
 
-[L2] The cochain comparison-extension construction is available for every
-morphism, and its induced cohomology map is independent of the chosen extension
-([[lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions]],
-[[lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]]).
+[L2] The cochain comparison-extension construction is available for every morphism, and its induced cohomology map is independent of the chosen extension ([[lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions]], [[lem-the-induced-cohomology-map-is-independent-of-the-injective-comparison-extension]]).
 
-[L3] A cochain complex may be reindexed as a chain complex
-([[def-cochain-complex-in-an-abelian-category]]).
+[L3] A cochain complex may be reindexed as a chain complex ([[def-cochain-complex-in-an-abelian-category]]).
 
-[L4] The category of complexes in an additive category is additive, and
-additive functors apply degreewise to chain maps
-([[thm-the-category-of-complexes-in-an-additive-category-is-additive]],
-[[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]]).
+[L4] The category of complexes in an additive category is additive, and additive functors apply degreewise to chain maps ([[thm-the-category-of-complexes-in-an-additive-category-is-additive]], [[prop-an-additive-functor-applies-degreewise-to-complexes-and-chain-maps]]).
 
-[L5] Two injective comparison extensions of the same morphism are
-cochain-homotopic, and after reindexing chain-homotopic maps induce the same
-map on homology
-([[thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]],
-[[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
+[L5] Two injective comparison extensions of the same morphism are cochain-homotopic, and after reindexing chain-homotopic maps induce the same map on homology ([[thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]], [[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
 
-[L6] An additive functor is a functor that is additive on each hom-group
-([[def-additive-functor]]).
+[L6] An additive functor is a functor that is additive on each hom-group ([[def-additive-functor]]).
 
 ## Proof
 

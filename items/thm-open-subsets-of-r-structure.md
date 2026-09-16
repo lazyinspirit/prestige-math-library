@@ -122,31 +122,10 @@ component to the *least* index of a rational lying in it, which is canonical by
 
 ## Remarks
 
-- **The components are forced, not chosen.** A component is an equivalence class
-  of an explicitly written relation, so the family $\mathcal{C}$ is determined by
-  $U$ alone, with no selection anywhere. One half of the usual uniqueness
-  statement is immediate from that: if $U$ is written as a union of nonempty open
-  intervals, each of those intervals is order-convex and contained in $U$, so any
-  two of its points are equivalent and the whole interval lies inside a single
-  component. That the intervals must then *be* the components is the other half,
-  and it is neither needed below nor proved here.
+- **The components are forced, not chosen.** A component is an equivalence class of an explicitly written relation, so the family $\mathcal{C}$ is determined by $U$ alone, with no selection anywhere. One half of the usual uniqueness statement is immediate from that: if $U$ is written as a union of nonempty open intervals, each of those intervals is order-convex and contained in $U$, so any two of its points are equivalent and the whole interval lies inside a single component. That the intervals must then *be* the components is the other half, and it is neither needed below nor proved here.
 
-- **Where completeness is spent.** Only in steps 2.4 and 2.5, which produce
-  $\inf C$ and $\sup C$ from the least-upper-bound property. Everything else
-  uses the order alone. The argument therefore does not transpose to an
-  arbitrary ordered field, where the two bounds it asks for need not exist; the
-  standard obstruction is the set of positive rationals whose square is below
-  $2$, which is bounded above in $\mathbb{Q}$ and has no supremum there
-  ([[ex-sup-rationals-below-sqrt-two]]).
+- **Where completeness is spent.** Only in steps 2.4 and 2.5, which produce $\inf C$ and $\sup C$ from the least-upper-bound property. Everything else uses the order alone. The argument therefore does not transpose to an arbitrary ordered field, where the two bounds it asks for need not exist; the standard obstruction is the set of positive rationals whose square is below $2$, which is bounded above in $\mathbb{Q}$ and has no supremum there ([[ex-sup-rationals-below-sqrt-two]]).
 
-- **The two sizes in the statement pull in opposite directions.** Each single
-  component is an uncountable set, being a nonempty open set
-  ([[lem-q-and-irrationals-dense-r]]), while the family of components is at most
-  countable. There is no tension: the count in claim 3 is a count of components,
-  not of points, and the injection of step 4.1 is into $\mathbb{N}$ through the
-  rationals, which are countable and dense at once.
+- **The two sizes in the statement pull in opposite directions.** Each single component is an uncountable set, being a nonempty open set ([[lem-q-and-irrationals-dense-r]]), while the family of components is at most countable. There is no tension: the count in claim 3 is a count of components, not of points, and the injection of step 4.1 is into $\mathbb{N}$ through the rationals, which are countable and dense at once.
 
-- **This is one of the results whose statement is order vocabulary throughout**,
-  and [[rem-r-native-topology-scope]] collects them: interval, disjoint union of
-  intervals, and the components themselves are all defined from the order, so
-  there is nothing here to restate where no order is present.
+- **This is one of the results whose statement is order vocabulary throughout**, and [[rem-r-native-topology-scope]] collects them: interval, disjoint union of intervals, and the components themselves are all defined from the order, so there is nothing here to restate where no order is present.

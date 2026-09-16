@@ -29,27 +29,19 @@ $$\omega_1^N=\aleph_omega^V.$$
 
 ## Facts & Assumptions
 
-**Given:** Put $\kappa=\aleph_omega^V=\sup_{n<\omega}\aleph_n^V$ and regard
-all ground ordinals as the same ordinals in the transitive symmetric model.
+**Given:** Put $\kappa=\aleph_omega^V=\sup_{n<\omega}\aleph_n^V$ and regard all ground ordinals as the same ordinals in the transitive symmetric model.
 
-[F1] [[lem-ground-aleph-n-is-countable-in-the-feferman-levy-model]] proves
-that every $\aleph_n^V$ is countable in $N$.
+[F1] [[lem-ground-aleph-n-is-countable-in-the-feferman-levy-model]] proves that every $\aleph_n^V$ is countable in $N$.
 
-[F2] [[lem-feferman-levy-bounded-layer-support]] gives one $H_m$ supporting
-an HS name.
+[F2] [[lem-feferman-levy-bounded-layer-support]] gives one $H_m$ supporting an HS name.
 
-[F3] [[lem-feferman-levy-fixed-boolean-values-come-from-initial-layers]]
-reduces every $H_m$-fixed Boolean value to conditions restricted below layer
-$m$.
+[F3] [[lem-feferman-levy-fixed-boolean-values-come-from-initial-layers]] reduces every $H_m$-fixed Boolean value to conditions restricted below layer $m$.
 
-[F4] [[thm-forcing-theorem]] supplies the truth lemma relating the interpreted
-function to conditions in the generic filter.
+[F4] [[thm-forcing-theorem]] supplies the truth lemma relating the interpreted function to conditions in the generic filter.
 
-[F5] [[def-cofinality]] fixes the ordinal and aleph conventions used for the
-limit $\kappa$ and for the later cofinality consequence.
+[F5] [[def-cofinality]] fixes the ordinal and aleph conventions used for the limit $\kappa$ and for the later cofinality consequence.
 
-[F6] [[def-axiom-of-choice]] is used only in the ground-model cardinal count
-of the set of finite initial-layer conditions.
+[F6] [[def-axiom-of-choice]] is used only in the ground-model cardinal count of the set of finite initial-layer conditions.
 
 ## Proof
 

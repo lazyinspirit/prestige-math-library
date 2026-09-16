@@ -85,19 +85,8 @@ $j \in \mathbb{N}$, which is the same family under the substitution $k = j+1$
 
 ## Remarks
 
-- **The two computations are independent and both are needed.** That the
-  intersection is *a* single point comes from [[thm-nested-interval-property]] and
-  uses that the lengths are null; that the point is $0$ comes from inspection.
-  Without the theorem one would still have to rule out the intersection being
-  larger than $\{0\}$, which is exactly the content of the length condition.
+- **The two computations are independent and both are needed.** That the intersection is *a* single point comes from [[thm-nested-interval-property]] and uses that the lengths are null; that the point is $0$ comes from inspection. Without the theorem one would still have to rule out the intersection being larger than $\{0\}$, which is exactly the content of the length condition.
 
-- **The Archimedean property is the whole of step 2.2.** In a non-Archimedean
-  ordered field the same family has lengths that do not tend to $0$, and the
-  intersection contains every positive infinitesimal, so it is not a single
-  point. What makes the example come out as stated is
-  [[cor-archimedean-reciprocal]].
+- **The Archimedean property is the whole of step 2.2.** In a non-Archimedean ordered field the same family has lengths that do not tend to $0$, and the intersection contains every positive infinitesimal, so it is not a single point. What makes the example come out as stated is [[cor-archimedean-reciprocal]].
 
-- **Compare the open version.** Removing the left endpoint gives $(0, 1/k)$,
-  whose intersection is *empty* ([[cex-nested-open-intervals-empty]]). The two
-  computations differ in exactly one respect, whether the common point $0$
-  belongs to the sets, and that is the hypothesis of closedness in the theorem.
+- **Compare the open version.** Removing the left endpoint gives $(0, 1/k)$, whose intersection is *empty* ([[cex-nested-open-intervals-empty]]). The two computations differ in exactly one respect, whether the common point $0$ belongs to the sets, and that is the hypothesis of closedness in the theorem.

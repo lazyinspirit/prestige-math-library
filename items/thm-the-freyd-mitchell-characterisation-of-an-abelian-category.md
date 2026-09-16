@@ -42,20 +42,13 @@ For a category $\mathcal A$, the following are equivalent.
 
 **Given:** A category $\mathcal A$.
 
-[L1] An abelian category is additive, has kernels and cokernels, and has
-invertible coimage-image comparison maps
-([[def-abelian-category]]).
+[L1] An abelian category is additive, has kernels and cokernels, and has invertible coimage-image comparison maps ([[def-abelian-category]]).
 
-[L2] In an abelian category every monomorphism is the kernel of its cokernel,
-and dually every epimorphism is the cokernel of its kernel
-([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+[L2] In an abelian category every monomorphism is the kernel of its cokernel, and dually every epimorphism is the cokernel of its kernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
 
-[L3] Freyd's axioms imply the working abelian definition
-([[thm-the-freyd-axioms-imply-the-additive-axioms]]).
+[L3] Freyd's axioms imply the working abelian definition ([[thm-the-freyd-axioms-imply-the-additive-axioms]]).
 
-[L4] An additive category with all kernels and cokernels has all finite limits
-and finite colimits
-([[thm-an-additive-category-with-all-kernels-and-cokernels-has-all-finite-limits-and-colimits]]).
+[L4] An additive category with all kernels and cokernels has all finite limits and finite colimits ([[thm-an-additive-category-with-all-kernels-and-cokernels-has-all-finite-limits-and-colimits]]).
 
 ## Proof
 

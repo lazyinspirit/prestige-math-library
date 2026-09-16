@@ -31,17 +31,13 @@ irreducible degree-two character $(2,0,-1)$.
 
 ## Facts & Assumptions
 
-**Given:** The subgroup $H=\langle(12)\rangle\le S_3$ and its trivial character
-$\mathbf 1_H$.
+**Given:** The subgroup $H=\langle(12)\rangle\le S_3$ and its trivial character $\mathbf 1_H$.
 
-[F1] Inducing the trivial character gives the permutation representation on
-$S_3/H$ ([[thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets]]).
+[F1] Inducing the trivial character gives the permutation representation on $S_3/H$ ([[thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets]]).
 
-[F2] The character of a permutation representation counts fixed points
-([[thm-character-of-a-permutation-representation-counts-fixed-points]]).
+[F2] The character of a permutation representation counts fixed points ([[thm-character-of-a-permutation-representation-counts-fixed-points]]).
 
-[F3] A complex character is irreducible if and only if its self-inner-product
-is $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
+[F3] A complex character is irreducible if and only if its self-inner-product is $1$ ([[cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one]]).
 
 ## Verification
 

@@ -32,11 +32,9 @@ category. Equivalently, no nonzero abelian category satisfies both axioms.
 
 **Given:** An abelian category $\mathcal A$ satisfying both AB5 and AB5*.
 
-[L1] AB5 and AB5* are the directed-join and decreasing-meet distributivity laws
-of [[def-the-axioms-ab5-and-ab5-star]].
+[L1] AB5 and AB5* are the directed-join and decreasing-meet distributivity laws of [[def-the-axioms-ab5-and-ab5-star]].
 
-[L2] An abelian category has zero objects, kernels, cokernels, and finite
-biproducts ([[def-abelian-category]]).
+[L2] An abelian category has zero objects, kernels, cokernels, and finite biproducts ([[def-abelian-category]]).
 
 ## Proof
 

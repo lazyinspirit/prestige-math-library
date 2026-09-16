@@ -32,22 +32,13 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The disjoint union $M$ of one unit circle and the circles of radii
-$1+1/n$ for $n\ge1$, together with the componentwise inclusion $F:M\to\mathbb
-R^2$.
+**Given:** The disjoint union $M$ of one unit circle and the circles of radii $1+1/n$ for $n\ge1$, together with the componentwise inclusion $F:M\to\mathbb R^2$.
 
-[F1] A smooth embedding is an injective immersion that is a homeomorphism onto
-its image with the subspace topology ([[def-smooth-embedding]]).
+[F1] A smooth embedding is an injective immersion that is a homeomorphism onto its image with the subspace topology ([[def-smooth-embedding]]).
 
-[F2] An immersed submanifold only requires an injective immersion; its
-intrinsic topology need not be the subspace topology
-([[def-immersed-submanifold]]).
+[F2] An immersed submanifold only requires an injective immersion; its intrinsic topology need not be the subspace topology ([[def-immersed-submanifold]]).
 
-[L1] Countable disjoint unions of fixed-dimensional smooth manifolds are smooth
-manifolds, and each circle is a smooth embedded one-manifold
-([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]],
-[[thm-a-regular-level-set-is-an-embedded-submanifold]], [[lem-derivative-of-a-power]],
-[[thm-algebra-of-derivatives]]).
+[L1] Countable disjoint unions of fixed-dimensional smooth manifolds are smooth manifolds, and each circle is a smooth embedded one-manifold ([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]], [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]]).
 
 ## Refutation
 **Proof technique:** direct.

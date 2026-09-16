@@ -40,9 +40,7 @@ Under them, pullback of sections respects identities and composition.
 
 **Given:** The bundle and composable maps in the statement.
 
-[F1] Pullbacks are the indicated subspaces of products, and their canonical
-maps and sections have the displayed coordinate formulas
-([[def-pullback-vector-bundle-and-pullback-section]]).
+[F1] Pullbacks are the indicated subspaces of products, and their canonical maps and sections have the displayed coordinate formulas ([[def-pullback-vector-bundle-and-pullback-section]]).
 
 ## Proof
 

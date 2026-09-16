@@ -80,11 +80,6 @@ inequality from Cantor's theorem rather than leaving them side by side.
 
 ## Remarks
 
-- **The finiteness of $\mathcal{P}(A)$ is part of the statement**, and it is what
-  makes $[A]^{k}$ finite in the next definition: a set of $k$-element subsets is
-  a subset of $\mathcal{P}(A)$.
+- **The finiteness of $\mathcal{P}(A)$ is part of the statement**, and it is what makes $[A]^{k}$ finite in the next definition: a set of $k$-element subsets is a subset of $\mathcal{P}(A)$.
 
-- **Cantor's theorem is not weakened here.** $A \prec \mathcal{P}(A)$ holds for
-  every set, finite or infinite, and needs no counting; what the finite case adds
-  is the value of the gap, $2^{n}$ against $n$. The inequality above is deduced
-  from Cantor's theorem, so no independent argument can disagree with it.
+- **Cantor's theorem is not weakened here.** $A \prec \mathcal{P}(A)$ holds for every set, finite or infinite, and needs no counting; what the finite case adds is the value of the gap, $2^{n}$ against $n$. The inequality above is deduced from Cantor's theorem, so no independent argument can disagree with it.

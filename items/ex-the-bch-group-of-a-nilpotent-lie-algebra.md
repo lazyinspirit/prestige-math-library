@@ -31,15 +31,11 @@ This item is stated under $\mathsf{ZF}+\mathsf{AC}_\omega$.
 
 **Given:** A finite-dimensional real nilpotent Lie algebra.
 
-[L1] In exponential coordinates, the BCH series gives the local multiplication
-wherever the local logarithm is defined ([[thm-baker-campbell-hausdorff]]).
+[L1] In exponential coordinates, the BCH series gives the local multiplication wherever the local logarithm is defined ([[thm-baker-campbell-hausdorff]]).
 
 [L2] Under countable choice, every finite-dimensional real Lie algebra has a connected simply connected integration ([[thm-lie-third-fundamental-theorem]]).
 
-[L3] The exponential map of a connected simply connected group with nilpotent
-Lie algebra is a global diffeomorphism; in these coordinates multiplication is
-the BCH polynomial, which terminates after finitely many bracket lengths
-([[thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism]]).
+[L3] The exponential map of a connected simply connected group with nilpotent Lie algebra is a global diffeomorphism; in these coordinates multiplication is the BCH polynomial, which terminates after finitely many bracket lengths ([[thm-the-exponential-map-of-a-connected-simply-connected-nilpotent-lie-group-is-a-diffeomorphism]]).
 
 ## Verification
 

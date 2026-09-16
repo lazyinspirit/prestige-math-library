@@ -38,9 +38,7 @@ subgraph of size at least $x^6|V(G)|=2^{-48}|V(G)|$.
 
 **Given:** The numerical parameters displayed above.
 
-[L1] Under the lemma's hypotheses, the output size is at least
-$x^{b_1b_2}|V(G)|$
-([[lem-iterated-sparse-restriction-reaches-the-target-sparsity-threshold]]).
+[L1] Under the lemma's hypotheses, the output size is at least $x^{b_1b_2}|V(G)|$ ([[lem-iterated-sparse-restriction-reaches-the-target-sparsity-threshold]]).
 
 ## Verification
 

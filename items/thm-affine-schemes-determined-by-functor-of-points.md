@@ -25,9 +25,7 @@ commutative rings, then $X\cong Y$ as schemes.
 
 **Given:** Affine schemes $X,Y$ and a natural isomorphism $h_X\cong h_Y$.
 
-[F1] Yoneda identifies natural transformations between representable functors
-with morphisms between their representing objects
-([[thm-yoneda-lemma-is-natural-in-both-variables]]).
+[F1] Yoneda identifies natural transformations between representable functors with morphisms between their representing objects ([[thm-yoneda-lemma-is-natural-in-both-variables]]).
 
 ## Proof
 

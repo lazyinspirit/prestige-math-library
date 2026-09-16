@@ -26,8 +26,7 @@ map $k[t]\to k$.”
 
 **Given:** A field $k$ and $\mathbb A^1_k=\operatorname{Spec}k[t]$.
 
-[F1] The closure of a prime $\mathfrak p$ in a prime spectrum is
-$V(\mathfrak p)$ ([[def-generic-point-irreducible-closed-subset]]).
+[F1] The closure of a prime $\mathfrak p$ in a prime spectrum is $V(\mathfrak p)$ ([[def-generic-point-irreducible-closed-subset]]).
 
 ## Counterexample
 
@@ -38,10 +37,5 @@ $V(\mathfrak p)$ ([[def-generic-point-irreducible-closed-subset]]).
 2.1 Evaluation at $0$ identifies $k[t]/(t)$ with the domain $k$, so $(t)$ is prime and strictly contains $(0)$. Thus the closure in step 1.1 is not a singleton, and $(0)$ is not closed. [[thm-quotient-is-domain-iff-ideal-prime|quotient-domain criterion]] [step 1.1, algebra]
 
 3.1 A relative $k$-valued coordinate representing a point $\mathfrak p$ is a [F1, step 2.1, algebra]
-[[def-algebra-over-a-commutative-ring|$k$-algebra]] map $k[t]\to k$ whose
-kernel is $\mathfrak p$. Such a map fixes $k$, hence is surjective and has
-maximal kernel. By [F1] its closure is the set of primes containing it, which
-is the singleton consisting of that maximal ideal. Its kernel is therefore
-closed, whereas $(0)$ is not, so the generic point $(0)$ has no relative
-$k$-valued coordinate. [F1, step 2.1, algebra] ∎
+[[def-algebra-over-a-commutative-ring|$k$-algebra]] map $k[t]\to k$ whose kernel is $\mathfrak p$. Such a map fixes $k$, hence is surjective and has maximal kernel. By [F1] its closure is the set of primes containing it, which is the singleton consisting of that maximal ideal. Its kernel is therefore closed, whereas $(0)$ is not, so the generic point $(0)$ has no relative $k$-valued coordinate. [F1, step 2.1, algebra] ∎
  

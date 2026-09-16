@@ -31,16 +31,11 @@ not Hamiltonian.
 
 ## Facts & Assumptions
 
-**Given:** The standard quotient coordinates, so $dx$ and $dy$ descend to
-global one-forms.
+**Given:** The standard quotient coordinates, so $dx$ and $dy$ descend to global one-forms.
 
-[F1] A vector field is symplectic exactly when its contraction with $\omega$
-is closed.
-[[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
+[F1] A vector field is symplectic exactly when its contraction with $\omega$ is closed. [[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
 
-[F2] A symplectic field is Hamiltonian exactly when the cohomology class of
-its contraction with $\omega$ vanishes.
-[[thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]].
+[F2] A symplectic field is Hamiltonian exactly when the cohomology class of its contraction with $\omega$ vanishes. [[thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]].
 
 ## Verification
 

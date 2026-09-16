@@ -83,20 +83,8 @@ limit lies between them.
 
 ## Remarks
 
-- **Nothing is reconstructed.** The subsequence realising $\liminf_k x_k$ is the
-  one produced by [[thm-limsup-is-greatest-subsequential-limit]] for the reflected
-  sequence, read back through $y \mapsto -y$. That is the whole point of proving
-  [[lem-limsup-reflection]] first: the recursion and the well-ordering argument
-  are done once.
+- **Nothing is reconstructed.** The subsequence realising $\liminf_k x_k$ is the one produced by [[thm-limsup-is-greatest-subsequential-limit]] for the reflected sequence, read back through $y \mapsto -y$. That is the whole point of proving [[lem-limsup-reflection]] first: the recursion and the well-ordering argument are done once.
 
-- **Combined with the greatest element, this brackets every subsequential
-  limit.** For any real sequence and any $L \in \overline{\operatorname{SL}}(x)$,
-  $$\liminf_{k} x_k \;\le\; L \;\le\; \limsup_{k} x_k,$$
-  which contains [[lem-liminf-le-limsup]] as the special case obtained by taking
-  for $L$ either endpoint, both of which are in the set.
+- **Combined with the greatest element, this brackets every subsequential limit.** For any real sequence and any $L \in \overline{\operatorname{SL}}(x)$, $$\liminf_{k} x_k \;\le\; L \;\le\; \limsup_{k} x_k,$$ which contains [[lem-liminf-le-limsup]] as the special case obtained by taking for $L$ either endpoint, both of which are in the set.
 
-- **The real subsequential limit set inherits the statement only when the value is
-  finite.** If $\liminf_k x_k$ is a real number it is the least element of
-  $\operatorname{SL}(x)$ as well, since the two sets agree on $\mathbb{R}$
-  ([[def-extended-limits]]). If it is $-\infty$, then $\operatorname{SL}(x)$ may
-  have no least element at all, or be empty.
+- **The real subsequential limit set inherits the statement only when the value is finite.** If $\liminf_k x_k$ is a real number it is the least element of $\operatorname{SL}(x)$ as well, since the two sets agree on $\mathbb{R}$ ([[def-extended-limits]]). If it is $-\infty$, then $\operatorname{SL}(x)$ may have no least element at all, or be empty.

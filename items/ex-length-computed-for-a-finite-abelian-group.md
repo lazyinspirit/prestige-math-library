@@ -34,13 +34,11 @@ $3=2+1$.
 
 **Given:** The abelian group $A=\mathbb Z/12$ and its subgroup $B=\langle2\rangle$.
 
-[L1] Jordan-Holder makes the length independent of the chosen composition series
-([[thm-jordan-holder-theorem-in-an-abelian-category]]).
+[L1] Jordan-Holder makes the length independent of the chosen composition series ([[thm-jordan-holder-theorem-in-an-abelian-category]]).
 
 [L2] Finite length and length are the notions of [[def-object-of-finite-length]].
 
-[L3] Length is additive along a subobject
-([[thm-length-is-additive-along-a-subobject]]).
+[L3] Length is additive along a subobject ([[thm-length-is-additive-along-a-subobject]]).
 
 ## Verification
 

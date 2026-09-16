@@ -84,13 +84,6 @@ violates its bounded-range hypothesis as well as closedness.
 
 ## Remarks
 
-- **Closedness is isolated in the real-valued form.** $\mathbb{R}$ is normal
-  and $f$ is continuous on $A$ (step 1.1), but $A$ is not closed: its closure
-  is $[0,1]$. Thus, even assuming dependent choice, the witness meets every
-  hypothesis of clause 1 of
-  [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] except
-  closedness. It does not isolate closedness in
-  [[thm-tietze-extension-theorem]], since step 1.2 also rules out any bounded
-  interval containing its range.
+- **Closedness is isolated in the real-valued form.** $\mathbb{R}$ is normal and $f$ is continuous on $A$ (step 1.1), but $A$ is not closed: its closure is $[0,1]$. Thus, even assuming dependent choice, the witness meets every hypothesis of clause 1 of [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] except closedness. It does not isolate closedness in [[thm-tietze-extension-theorem]], since step 1.2 also rules out any bounded interval containing its range.
 
 - **The obstruction is unboundedness near the missing point, not discontinuity.** $f$ itself is continuous at every point of its own domain $A$; nothing about $f$ is badly behaved on $A$. What blocks an extension is that $f$ has no finite value it could sensibly take at the boundary point $0 \notin A$, and step 1.2 makes that failure of boundedness explicit rather than appealing to a limit that does not exist.

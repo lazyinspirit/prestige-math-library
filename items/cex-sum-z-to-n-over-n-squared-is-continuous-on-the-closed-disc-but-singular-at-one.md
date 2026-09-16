@@ -39,17 +39,11 @@ singular.
 
 **Given:** The series $f(z)=\sum_{n\ge1} z^n/n^2$.
 
-[L1] The $p$-series $\sum_{n\ge1} 1/n^2$ converges
-([[thm-p-series-rational]]).
+[L1] The $p$-series $\sum_{n\ge1} 1/n^2$ converges ([[thm-p-series-rational]]).
 
-[L2] A convergent numerical majorant makes a complex function series converge
-uniformly on the domain of the bound
-([[thm-weierstrass-m-test-for-complex-function-series]]).
+[L2] A convergent numerical majorant makes a complex function series converge uniformly on the domain of the bound ([[thm-weierstrass-m-test-for-complex-function-series]]).
 
-[L3] The coefficients $1/n^2$ give radius $1$, and Pringsheim makes the positive
-boundary point singular because those coefficients are nonnegative
-([[thm-cauchy-hadamard-for-complex-power-series]],
-[[thm-pringsheim-theorem]]).
+[L3] The coefficients $1/n^2$ give radius $1$, and Pringsheim makes the positive boundary point singular because those coefficients are nonnegative ([[thm-cauchy-hadamard-for-complex-power-series]], [[thm-pringsheim-theorem]]).
 
 ## Counterexample
 

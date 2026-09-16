@@ -30,8 +30,7 @@ grammar without first converting it to a suitable normal form.
 
 ## Facts & Assumptions
 
-**Given:** The grammar
-$$ S\to aSb\mid ab. $$
+**Given:** The grammar $$ S\to aSb\mid ab. $$
 
 [A1] The statement refuted is: the CYK algorithm can be applied directly to any context-free grammar without first converting it to a suitable normal form.
 

@@ -37,24 +37,15 @@ exactly through the smooth normal-bundle projections.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, an embedded Riemannian submanifold, tangent
-fields $X,Y$, and normal fields $\nu,\mu$.
+**Given:** Countable choice, an embedded Riemannian submanifold, tangent fields $X,Y$, and normal fields $\nu,\mu$.
 
-[F1] The Weingarten decomposition is
-$\overline\nabla_X\nu=-S_\nu X+\nabla^\perp_X\nu$, and shape operators are
-self-adjoint with
-$g(S_\mu U,V)=\overline g(\mathrm{II}(U,V),\mu)$.
-[[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
+[F1] The Weingarten decomposition is $\overline\nabla_X\nu=-S_\nu X+\nabla^\perp_X\nu$, and shape operators are self-adjoint with $g(S_\mu U,V)=\overline g(\mathrm{II}(U,V),\mu)$. [[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
 
-[F2] The projected operation $\nabla^\perp$ is a connection on $\nu M$.
-[[def-normal-connection]].
+[F2] The projected operation $\nabla^\perp$ is a connection on $\nu M$. [[def-normal-connection]].
 
-[F3] The shape operator is pointwise and linear in its normal direction.
-[[def-shape-operator]].
+[F3] The shape operator is pointwise and linear in its normal direction. [[def-shape-operator]].
 
-[F4] The curvature of a vector-bundle connection is
-$R^\nabla(X,Y)=\nabla_X\nabla_Y-\nabla_Y\nabla_X-\nabla_{[X,Y]}$.
-[[def-curvature-of-a-vector-bundle-connection]].
+[F4] The curvature of a vector-bundle connection is $R^\nabla(X,Y)=\nabla_X\nabla_Y-\nabla_Y\nabla_X-\nabla_{[X,Y]}$. [[def-curvature-of-a-vector-bundle-connection]].
 
 ## Proof
 

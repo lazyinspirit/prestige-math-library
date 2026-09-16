@@ -39,8 +39,7 @@ For a set $E \subseteq \mathbb{R}$, the following are equivalent:
 
 ## Facts & Assumptions
 
-**Given:** Dependent Choice (and therefore Countable Choice), the set
-$E \subseteq \mathbb{R}$, and a fine cover $\mathcal V$ of $E$.
+**Given:** Dependent Choice (and therefore Countable Choice), the set $E \subseteq \mathbb{R}$, and a fine cover $\mathcal V$ of $E$.
 
 [A1] The symbols are those of the statement.
 

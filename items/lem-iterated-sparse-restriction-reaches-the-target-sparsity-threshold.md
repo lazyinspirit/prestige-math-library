@@ -45,16 +45,13 @@ $x^{b_1b_2}|V(G)|$ vertices.
 
 **Given:** The parameters and hypotheses in the statement.
 
-[L1] A $\lambda$-sparse vertex set is nonempty, and every vertex has degree at
-most $\lambda$ times the size of that set inside the induced subgraph
-([[def-c-sparse-and-c-restricted-vertex-set]]).
+[L1] A $\lambda$-sparse vertex set is nonempty, and every vertex has degree at most $\lambda$ times the size of that set inside the induced subgraph ([[def-c-sparse-and-c-restricted-vertex-set]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Hypothesis 1 supplies a nonempty $c$-sparse vertex set, because
-$c$-sparse sets are nonempty by [L1]. Hence $|V(G)|>0$. [given, L1]
+1.1 Hypothesis 1 supplies a nonempty $c$-sparse vertex set, because $c$-sparse sets are nonempty by [L1]. Hence $|V(G)|>0$. [given, L1]
 
 1.2 For each nonempty induced subgraph $E$ of $G$, let $\mu(E)$ be its maximum degree divided by $|V(E)|$; by [L1], the graph $E$ is $\lambda$-sparse exactly when $\mu(E)\le \lambda$. Define $\lambda(E):=\max(x^{b_1},\mu(E))$. Hypothesis 1 gives a $c$-sparse induced subgraph $E_0$ with at least $c^{b_2}|V(G)|$ vertices, so $\lambda(E_0)\le c$ and $|V(E_0)|\ge \lambda(E_0)^{b_2}|V(G)|$. Because $G$ has only finitely many induced subgraphs, the set of values $\lambda(E)$ with $\lambda(E)\le c$ and $|V(E)|\ge \lambda(E)^{b_2}|V(G)|$ has a minimum. Choose an induced subgraph $F$ for which that minimum is attained, and write $\lambda:=\lambda(F)$. [given, choose, L1, algebra]
 

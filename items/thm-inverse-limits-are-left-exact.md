@@ -43,14 +43,11 @@ is exact.
 
 **Given:** A morphism of inverse systems $(f_n)\colon (M_n,\varphi_n)\to (N_n,\psi_n)$.
 
-[L1] The inverse limit consists of the compatible elements in the product
-system ([[def-inverse-system-and-inverse-limit-of-modules]]).
+[L1] The inverse limit consists of the compatible elements in the product system ([[def-inverse-system-and-inverse-limit-of-modules]]).
 
-[L2] The kernel of a homomorphism is the submodule of elements mapping to $0$
-([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L2] The kernel of a homomorphism is the submodule of elements mapping to $0$ ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
-[L3] A map into an inverse limit is determined by its compatible coordinate maps
-([[thm-universal-property-of-an-inverse-limit-of-modules]]).
+[L3] A map into an inverse limit is determined by its compatible coordinate maps ([[thm-universal-property-of-an-inverse-limit-of-modules]]).
 
 ## Proof
 

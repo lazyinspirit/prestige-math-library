@@ -46,19 +46,13 @@ where $B_1$ is the Meissel-Mertens constant of
 
 ## Facts & Assumptions
 
-**Given:** A real number $x\ge2$ and the function
-$$ A(y):=\sum_{p\le y}\frac{\log p}{p}. $$
+**Given:** A real number $x\ge2$ and the function $$ A(y):=\sum_{p\le y}\frac{\log p}{p}. $$
 
-[L1] Mertens' first theorem gives
-$$ A(y)=\log y+O(1) $$
-for $y\ge2$ ([[thm-first-mertens-theorem-for-primes]]).
+[L1] Mertens' first theorem gives $$ A(y)=\log y+O(1) $$ for $y\ge2$ ([[thm-first-mertens-theorem-for-primes]]).
 
 [L2] Abel summation by parts is available ([[lem-abel-summation-by-parts]]).
 
-[L3] The logarithm derivative is $1/t$, so
-$$ \frac{d}{dt}\frac1{\log t}=-\frac1{t\log^2 t} $$
-for $t>1$ ([[thm-logarithm-derivative-and-integral]],
-[[thm-natural-logarithm-laws]]).
+[L3] The logarithm derivative is $1/t$, so $$ \frac{d}{dt}\frac1{\log t}=-\frac1{t\log^2 t} $$ for $t>1$ ([[thm-logarithm-derivative-and-integral]], [[thm-natural-logarithm-laws]]).
 
 ## Proof
 

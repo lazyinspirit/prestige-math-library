@@ -44,35 +44,21 @@ Either displayed summand may be zero.
 
 ## Facts & Assumptions
 
-**Given:** AC and the system, groups, blocks, lift, and lattice in the
-Statement.
+**Given:** AC and the system, groups, blocks, lift, and lattice in the Statement.
 
-[F1] Block idempotents have unique central lifts to integral group algebras
-([[lem-block-idempotents-lift-uniquely-from-kh-to-oh]]).
+[F1] Block idempotents have unique central lifts to integral group algebras ([[lem-block-idempotents-lift-uniquely-from-kh-to-oh]]).
 
-[F2] Every finite-rank $\mathcal O H$-lattice has a finite Krull--Schmidt
-decomposition, and an indecomposable has local endomorphism ring
-([[thm-krull-schmidt-for-og-lattices]]).
+[F2] Every finite-rank $\mathcal O H$-lattice has a finite Krull--Schmidt decomposition, and an indecomposable has local endomorphism ring ([[thm-krull-schmidt-for-og-lattices]]).
 
-[F3] Integral relative traces satisfy Higman's criterion, and a vertex of an
-indecomposable relatively $R$-projective lattice is contained in an
-$H$-conjugate of $R$
-([[lem-integral-mackey-and-higman-for-og-lattices]] and
-[[def-relative-projectivity-and-vertices-for-og-lattices]]).
+[F3] Integral relative traces satisfy Higman's criterion, and a vertex of an indecomposable relatively $R$-projective lattice is contained in an $H$-conjugate of $R$ ([[lem-integral-mackey-and-higman-for-og-lattices]] and [[def-relative-projectivity-and-vertices-for-og-lattices]]).
 
-[F4] The center of a modular block is local
-([[lem-block-centre-locality-and-trace-ideal-sums]]).
+[F4] The center of a modular block is local ([[lem-block-centre-locality-and-trace-ideal-sums]]).
 
-[F5] Block induction is the unique restriction-summand block and exists under
-centralizer containment ([[def-induced-block-from-a-subgroup]] and
-[[lem-block-induction-exists-under-centralizer-containment]]).
+[F5] Block induction is the unique restriction-summand block and exists under centralizer containment ([[def-induced-block-from-a-subgroup]] and [[lem-block-induction-exists-under-centralizer-containment]]).
 
-[F6] A normal $p$-subgroup lies in every block defect group
-([[cor-normal-p-core-lies-in-every-block-defect-group]]).
+[F6] A normal $p$-subgroup lies in every block defect group ([[cor-normal-p-core-lies-in-every-block-defect-group]]).
 
-[F7] AC is available ([[def-axiom-of-choice]]) and discharges the inherited
-published contracts in F4–F6. All new sums and decompositions below are
-finite.
+[F7] AC is available ([[def-axiom-of-choice]]) and discharges the inherited published contracts in F4–F6. All new sums and decompositions below are finite.
 
 ## Proof
 

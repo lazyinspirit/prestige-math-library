@@ -51,20 +51,10 @@ $$ A\text{ is null in }M\iff F(A)\text{ is null in }N. $$
 1.1 By [F1], shrink around $p$ to a neighbourhood $U_0$ on which $F$ is a diffeomorphism onto an open set $V_0$. [F1, given, choose]
 
 2.1 If $\dim M=0$, then $U_0$ and $V_0$ are $0$-manifolds. [F2, step 1.1, cases, algebra]
-By [F2], a subset
-of $U_0$ is null exactly when it is empty, and the same holds in $V_0$;
-because $F|_{U_0}$ is bijective,
-$$ A\subseteq U_0\text{ is null }\iff A=\varnothing \iff F(A)=\varnothing \iff F(A)\text{ is null}. $$
-So the claim is proved in this case. Assume henceforth that $\dim M>0$, and
-let $A\subseteq U_0$. [F2, step 1.1, cases, algebra]
+By [F2], a subset of $U_0$ is null exactly when it is empty, and the same holds in $V_0$; because $F|_{U_0}$ is bijective, $$ A\subseteq U_0\text{ is null }\iff A=\varnothing \iff F(A)=\varnothing \iff F(A)\text{ is null}. $$ So the claim is proved in this case. Assume henceforth that $\dim M>0$, and let $A\subseteq U_0$. [F2, step 1.1, cases, algebra]
 
 3.1 Cover $A$ by relatively compact source-chart neighbourhoods $W\subseteq U_0$ whose images lie in target charts on $V_0$. [L1, L2, step 2.1, algebra]
-By [L1], the coordinate
-representatives of $F|_W$ and $(F|_W)^{-1}$ are Lipschitz on smaller compact
-closures. Therefore [L2] implies
-$$ B\subseteq W\text{ is null }\iff F(B)\subseteq F(W)\text{ is null} $$
-for each such piece $B$. [L1, L2, step 2.1, algebra]
+By [L1], the coordinate representatives of $F|_W$ and $(F|_W)^{-1}$ are Lipschitz on smaller compact closures. Therefore [L2] implies $$ B\subseteq W\text{ is null }\iff F(B)\subseteq F(W)\text{ is null} $$ for each such piece $B$. [L1, L2, step 2.1, algebra]
 
 4.1 The manifold definition of nullity checks exactly these chart images, so [step 3.1]
-the equivalence in step 3.1 globalizes over $U:=U_0$. Hence $A$ is null in $M$
-exactly when $F(A)$ is null in $N$. [step 3.1] ∎
+the equivalence in step 3.1 globalizes over $U:=U_0$. Hence $A$ is null in $M$ exactly when $F(A)$ is null in $N$. [step 3.1] ∎

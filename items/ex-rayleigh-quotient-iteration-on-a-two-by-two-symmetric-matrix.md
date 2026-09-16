@@ -40,10 +40,7 @@ Thus small nonzero errors cube in one step.
 
 **Given:** The symmetric matrix $A$ and the unit start vector $x(t)$.
 
-[L1] At positive sufficiently small distance from a simple Hermitian
-eigendirection, whenever the next step is defined, Rayleigh-quotient iteration
-reduces that distance cubically
-([[thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence]]).
+[L1] At positive sufficiently small distance from a simple Hermitian eigendirection, whenever the next step is defined, Rayleigh-quotient iteration reduces that distance cubically ([[thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence]]).
 
 ## Verification
 

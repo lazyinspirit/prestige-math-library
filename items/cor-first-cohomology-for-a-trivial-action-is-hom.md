@@ -29,11 +29,9 @@ $$H^1(G,A)\cong\operatorname{Hom}(G,A).$$
 
 **Given:** A trivial action of $G$ on an abelian group $A$.
 
-[L1] The crossed-homomorphism model computes $H^1(G,A)$
-([[thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]]).
+[L1] The crossed-homomorphism model computes $H^1(G,A)$ ([[thm-the-inhomogeneous-one-cocycle-model-agrees-with-crossed-homomorphisms-in-degree-one]]).
 
-[L2] A group homomorphism $f:G\to A$ is characterized by $f(gh)=f(g)+f(h)$ in
-additive notation ([[def-group-homomorphism]]).
+[L2] A group homomorphism $f:G\to A$ is characterized by $f(gh)=f(g)+f(h)$ in additive notation ([[def-group-homomorphism]]).
 
 ## Proof
 

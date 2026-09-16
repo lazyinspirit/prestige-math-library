@@ -32,10 +32,7 @@ symmetrization $S(\mathfrak g)\to U(\mathfrak g)$ is an algebra isomorphism.
 
 **Given:** A characteristic-zero nonabelian Lie algebra with a supplied basis.
 
-[L1] Symmetrization is a vector-space isomorphism with
-$\operatorname{sym}(x)=\iota_{\mathfrak g}(x)$ and
-$\operatorname{sym}(xy)=\tfrac12(\iota_{\mathfrak g}(x)\iota_{\mathfrak g}(y)+\iota_{\mathfrak g}(y)\iota_{\mathfrak g}(x))$
-([[thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero]]).
+[L1] Symmetrization is a vector-space isomorphism with $\operatorname{sym}(x)=\iota_{\mathfrak g}(x)$ and $\operatorname{sym}(xy)=\tfrac12(\iota_{\mathfrak g}(x)\iota_{\mathfrak g}(y)+\iota_{\mathfrak g}(y)\iota_{\mathfrak g}(x))$ ([[thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero]]).
 
 ## Refutation
 

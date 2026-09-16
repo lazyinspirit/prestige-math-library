@@ -29,18 +29,13 @@ Every exact functor between abelian categories is faithful.
 
 ## Facts & Assumptions
 
-**Given:** Two nonzero abelian categories $\mathcal A$ and $\mathcal B$, and an
-object $Y$ of $\mathcal B$ with $1_Y\neq0_{Y,Y}$.
+**Given:** Two nonzero abelian categories $\mathcal A$ and $\mathcal B$, and an object $Y$ of $\mathcal B$ with $1_Y\neq0_{Y,Y}$.
 
-[L1] A finite product of preadditive categories is preadditive
-([[prop-a-small-product-of-preadditive-categories-is-preadditive]]).
+[L1] A finite product of preadditive categories is preadditive ([[prop-a-small-product-of-preadditive-categories-is-preadditive]]).
 
-[L2] Abelian categories are additive and have kernels, cokernels, and
-coimage-image isomorphisms
-([[def-abelian-category]]).
+[L2] Abelian categories are additive and have kernels, cokernels, and coimage-image isomorphisms ([[def-abelian-category]]).
 
-[L3] Exact means additive, left exact, and right exact
-([[def-exact-functor-between-abelian-categories]]).
+[L3] Exact means additive, left exact, and right exact ([[def-exact-functor-between-abelian-categories]]).
 
 ## Counterexample
 

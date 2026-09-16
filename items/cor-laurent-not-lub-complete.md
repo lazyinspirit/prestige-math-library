@@ -86,19 +86,6 @@ $K$: every upper bound of $A$ admits a strictly smaller upper bound.
 
 ## Remarks
 
-- **Two proofs of one fact, kept apart on purpose.** [step 1.1] is the abstract
-  route: non-Archimedean ordered fields cannot be complete, by the contrapositive
-  of [[thm-of-archimedean]], and nothing about Laurent series enters it. The rest
-  of the proof is the concrete route, and it names the failing set. Only the
-  concrete route tells the reader *what* has no supremum, which matters because
-  the same field will be shown to be sequentially Cauchy complete in
-  [[thm-laurent-cauchy-complete]]: the reader is entitled to see the set on which
-  the two notions of completeness disagree.
+- **Two proofs of one fact, kept apart on purpose.** [step 1.1] is the abstract route: non-Archimedean ordered fields cannot be complete, by the contrapositive of [[thm-of-archimedean]], and nothing about Laurent series enters it. The rest of the proof is the concrete route, and it names the failing set. Only the concrete route tells the reader *what* has no supremum, which matters because the same field will be shown to be sequentially Cauchy complete in [[thm-laurent-cauchy-complete]]: the reader is entitled to see the set on which the two notions of completeness disagree.
 
-- **The halving is not special.** Any real $\lambda$ with $0 < \lambda < 1$
-  would serve in place of $1/2$: the only properties used are that
-  $\lambda c > 0$, so the smaller element is still positive of valuation $r < 0$
-  and therefore still above every canonical natural, and that
-  $c - \lambda c \ne 0$, so the descent is strict. Both hold for every such
-  $\lambda$, which is why the set of upper bounds of $A$ has no least element
-  rather than merely failing to contain one particular candidate.
+- **The halving is not special.** Any real $\lambda$ with $0 < \lambda < 1$ would serve in place of $1/2$: the only properties used are that $\lambda c > 0$, so the smaller element is still positive of valuation $r < 0$ and therefore still above every canonical natural, and that $c - \lambda c \ne 0$, so the descent is strict. Both hold for every such $\lambda$, which is why the set of upper bounds of $A$ has no least element rather than merely failing to contain one particular candidate.

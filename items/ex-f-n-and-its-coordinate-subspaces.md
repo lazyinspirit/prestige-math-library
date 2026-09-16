@@ -95,18 +95,8 @@ used informally, since dimension is not available here and nothing below uses it
 
 ## Remarks
 
-- **Every index here starts at $0$.** The coordinates are $x_0, x_1, x_2$ and the
-  summands are $L_0, L_1, L_2$, because $3 = \{0,1,2\}$ as a von Neumann natural.
-  Writing the same example with coordinates $x_1, x_2, x_3$ would not match the
-  definition of $F^{n}$ used here ([[def-function-space]]).
+- **Every index here starts at $0$.** The coordinates are $x_0, x_1, x_2$ and the summands are $L_0, L_1, L_2$, because $3 = \{0,1,2\}$ as a von Neumann natural. Writing the same example with coordinates $x_1, x_2, x_3$ would not match the definition of $F^{n}$ used here ([[def-function-space]]).
 
-- **$F^{0}$ is not empty.** There is exactly one function $\varnothing \to F$, so
-  $F^{0}$ has exactly one element and is the zero space. It is also the internal
-  direct sum of the empty family of its linear subspaces
-  ([[def-internal-direct-sum]]), which is the only space that is.
+- **$F^{0}$ is not empty.** There is exactly one function $\varnothing \to F$, so $F^{0}$ has exactly one element and is the zero space. It is also the internal direct sum of the empty family of its linear subspaces ([[def-internal-direct-sum]]), which is the only space that is.
 
-- **Nothing above is special to $3$.** The same computation works for any
-  $n \in \mathbb{N}$ and gives $F^{n} = \bigoplus_{j<n} L_j$, at $n = 0$
-  degenerating to the statement that the zero space is the direct sum of the empty
-  family. It is written out at $n = 3$ so that the finite sums are the explicit
-  $(u_0 + u_1) + u_2$ rather than an induction.
+- **Nothing above is special to $3$.** The same computation works for any $n \in \mathbb{N}$ and gives $F^{n} = \bigoplus_{j<n} L_j$, at $n = 0$ degenerating to the statement that the zero space is the direct sum of the empty family. It is written out at $n = 3$ so that the finite sums are the explicit $(u_0 + u_1) + u_2$ rather than an induction.

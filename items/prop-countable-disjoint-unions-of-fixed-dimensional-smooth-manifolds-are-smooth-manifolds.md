@@ -45,9 +45,7 @@ $I$ is essential, and no claim is made for an uncountable index set.
 
 ## Facts & Assumptions
 
-**Given:** An at most countable set $I$ with a fixed enumeration, and for each
-$i\in I$ a smooth $n$-manifold $M_i$ with a fixed finite or countable listing
-of a basis $\mathcal B_i$ of its topology and a smooth atlas $\mathcal A_i$.
+**Given:** An at most countable set $I$ with a fixed enumeration, and for each $i\in I$ a smooth $n$-manifold $M_i$ with a fixed finite or countable listing of a basis $\mathcal B_i$ of its topology and a smooth atlas $\mathcal A_i$.
 
 [F1] The disjoint union topology declares $U\subseteq\bigsqcup_i M_i$ open exactly when every trace $U\cap\kappa_i[M_i]$ is open in $M_i$, and each $\kappa_i$ is an injective embedding with clopen image ([[def-disjoint-union-topology]]).
 

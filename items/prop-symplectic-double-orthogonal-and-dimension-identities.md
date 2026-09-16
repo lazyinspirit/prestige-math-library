@@ -32,12 +32,9 @@ $$\dim W+\dim W^\omega=\dim V,\qquad (W^\omega)^\omega=W.$$
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional symplectic vector space $(V,\omega)$ and a
-subspace $W\le V$.
+**Given:** A finite-dimensional symplectic vector space $(V,\omega)$ and a subspace $W\le V$.
 
-[F1] The symplectic orthogonal is
-$(\omega^\flat)^{-1}(\operatorname{ann}W)$, where $\omega^\flat$ is an
-isomorphism. [[def-symplectic-orthogonal-complement]].
+[F1] The symplectic orthogonal is $(\omega^\flat)^{-1}(\operatorname{ann}W)$, where $\omega^\flat$ is an isomorphism. [[def-symplectic-orthogonal-complement]].
 
 ## Proof
 

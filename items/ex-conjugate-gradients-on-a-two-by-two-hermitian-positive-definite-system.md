@@ -36,16 +36,11 @@ CG reaches $x_*$ by the second step.
 
 ## Facts & Assumptions
 
-**Given:** The displayed system and the exact-arithmetic CG recurrence started
-from $x_0=0$.
+**Given:** The displayed system and the exact-arithmetic CG recurrence started from $x_0=0$.
 
-[L1] CG residuals are mutually orthogonal and search directions are
-$A$-conjugate
-([[thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate]]).
+[L1] CG residuals are mutually orthogonal and search directions are $A$-conjugate ([[thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate]]).
 
-[L2] Exact-arithmetic CG terminates no later than the relative grade and hence
-in at most $n$ steps
-([[thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic]]).
+[L2] Exact-arithmetic CG terminates no later than the relative grade and hence in at most $n$ steps ([[thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic]]).
 
 ## Verification
 **Proof technique:** direct calculation.

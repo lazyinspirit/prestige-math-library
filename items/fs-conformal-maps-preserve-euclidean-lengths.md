@@ -34,11 +34,9 @@ Conformal maps preserve Euclidean lengths.
 
 **Given:** The affine map $f:\mathbb C\to\mathbb C$, $f(z)=2z$.
 
-[F1] A biholomorphism is conformal in this page's orientation-preserving sense
-([[rem-biholomorphisms-are-conformal-with-holomorphic-inverse]]).
+[F1] A biholomorphism is conformal in this page's orientation-preserving sense ([[rem-biholomorphisms-are-conformal-with-holomorphic-inverse]]).
 
-[F2] A map is biholomorphic when it is bijective, holomorphic, and has
-holomorphic inverse ([[def-biholomorphic-map]]).
+[F2] A map is biholomorphic when it is bijective, holomorphic, and has holomorphic inverse ([[def-biholomorphic-map]]).
 
 ## Refutation
 

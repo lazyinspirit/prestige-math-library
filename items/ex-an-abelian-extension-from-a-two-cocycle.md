@@ -38,8 +38,7 @@ $$[x,y]=z,\qquad[x,z]=[y,z]=0.$$
 
 ## Facts & Assumptions
 
-**Given:** The displayed two-dimensional abelian algebra and trivial
-module over a characteristic-zero field.
+**Given:** The displayed two-dimensional abelian algebra and trivial module over a characteristic-zero field.
 
 ## Verification
 

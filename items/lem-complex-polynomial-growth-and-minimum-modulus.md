@@ -43,9 +43,7 @@ If $p$ is a nonconstant complex polynomial, then $|p(z)|\to\infty$ as $|z|\to\in
 
 **Proof technique:** direct.
 
-1.1 Put $C:=\sum_{k<n}|a_k|$. For $r=|z|\ge1$, [L1] gives
-$$|p(z)|\ge |a_n|r^n-\sum_{k<n}|a_k|r^k\ge r^n\bigl(|a_n|-C/r\bigr).$$
-Thus for $r\ge2C/|a_n|$ the right side is at least $(|a_n|/2)r^n$, which tends to $+\infty$. [L1, algebra]
+1.1 Put $C:=\sum_{k<n}|a_k|$. For $r=|z|\ge1$, [L1] gives $$|p(z)|\ge |a_n|r^n-\sum_{k<n}|a_k|r^k\ge r^n\bigl(|a_n|-C/r\bigr).$$ Thus for $r\ge2C/|a_n|$ the right side is at least $(|a_n|/2)r^n$, which tends to $+\infty$. [L1, algebra]
 
 1.2 Writing $z=x+iy$, each coordinate projection is continuous because $|x-x_0|,|y-y_0|\le\|(x,y)-(x_0,y_0)\|$. The identity $uv-u_0v_0=u(v-v_0)+v_0(u-u_0)$ proves continuity of products, so induction over the finite expression makes both coordinate polynomials of $p(x+iy)$ continuous. Then [L4] makes $p$ and $|p|$ continuous. [L4]
 

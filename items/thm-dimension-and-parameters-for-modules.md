@@ -36,15 +36,11 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian local ring $(R,\mathfrak m)$ and a nonzero finite
-$R$-module $M$.
+**Given:** A Noetherian local ring $(R,\mathfrak m)$ and a nonzero finite $R$-module $M$.
 
-[L1] In a Noetherian local ring, the dimension is the least number of generators
-of an ideal whose radical is the maximal ideal
-([[thm-dimension-as-minimal-number-of-radical-generators]]).
+[L1] In a Noetherian local ring, the dimension is the least number of generators of an ideal whose radical is the maximal ideal ([[thm-dimension-as-minimal-number-of-radical-generators]]).
 
-[L2] A system of parameters is a $d$-tuple in $\mathfrak m$ whose generated
-ideal has radical $\mathfrak m$ ([[def-system-of-parameters-and-parameter-ideal]]).
+[L2] A system of parameters is a $d$-tuple in $\mathfrak m$ whose generated ideal has radical $\mathfrak m$ ([[def-system-of-parameters-and-parameter-ideal]]).
 
 [L3] Every ideal in a Noetherian commutative ring is finitely generated ([[thm-noetherian-ring-ideal-characterisations]]).
 

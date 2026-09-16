@@ -32,16 +32,11 @@ independent.
 
 ## Facts & Assumptions
 
-**Given:** An independent family of events $(A_i)_{i\in I}$ and, for each
-$i\in I$, an event $B_i$ equal to either $A_i$ or $A_i^c$.
+**Given:** An independent family of events $(A_i)_{i\in I}$ and, for each $i\in I$, an event $B_i$ equal to either $A_i$ or $A_i^c$.
 
-[L1] Independence of events is the finite-intersection product identity
-([[def-independent-sigma-algebras-and-events]]).
+[L1] Independence of events is the finite-intersection product identity ([[def-independent-sigma-algebras-and-events]]).
 
-[L2] Probabilities respect complements and set differences:
-$\mathbb P(E^c)=1-\mathbb P(E)$ and, for $E\subseteq F$,
-$\mathbb P(F\setminus E)=\mathbb P(F)-\mathbb P(E)$
-([[lem-probability-measure-basic-identities]]).
+[L2] Probabilities respect complements and set differences: $\mathbb P(E^c)=1-\mathbb P(E)$ and, for $E\subseteq F$, $\mathbb P(F\setminus E)=\mathbb P(F)-\mathbb P(E)$ ([[lem-probability-measure-basic-identities]]).
 
 ## Proof
 

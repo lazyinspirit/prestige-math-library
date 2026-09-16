@@ -30,14 +30,11 @@ Every solvable Lie algebra is nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$ and the two-dimensional $k$-vector space
-$\mathfrak a=kx\oplus ky$ with bracket $[x,y]=y$.
+**Given:** A field $k$ and the two-dimensional $k$-vector space $\mathfrak a=kx\oplus ky$ with bracket $[x,y]=y$.
 
-[L1] Solvability means termination of the derived series
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] Solvability means termination of the derived series ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] Nilpotence means termination of the lower central series
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L2] Nilpotence means termination of the lower central series ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
 ## Refutation
 

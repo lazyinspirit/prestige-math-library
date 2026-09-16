@@ -33,28 +33,21 @@ $x\in\operatorname{nilrad}(\mathfrak g)$.
 
 ## Facts & Assumptions
 
-**Given:** Levi subalgebras $\mathfrak s_0,\mathfrak s_1$, radical
-$\mathfrak r$, and nilradical $\mathfrak n$ of $\mathfrak g$.
+**Given:** Levi subalgebras $\mathfrak s_0,\mathfrak s_1$, radical $\mathfrak r$, and nilradical $\mathfrak n$ of $\mathfrak g$.
 
-[L1] Levi factors exist and project isomorphically to
-$\mathfrak g/\mathfrak r$ ([[thm-levi-decomposition]]).
+[L1] Levi factors exist and project isomorphically to $\mathfrak g/\mathfrak r$ ([[thm-levi-decomposition]]).
 
-[L2] Every $1$-cocycle of a semisimple algebra in a finite module is a
-coboundary ([[thm-first-whitehead-lemma]]).
+[L2] Every $1$-cocycle of a semisimple algebra in a finite module is a coboundary ([[thm-first-whitehead-lemma]]).
 
-[L3] The commutator $[\mathfrak g,\mathfrak r]$ lies in the nilradical
-([[thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical]]).
+[L3] The commutator $[\mathfrak g,\mathfrak r]$ lies in the nilradical ([[thm-the-commutator-of-a-lie-algebra-with-its-radical-lies-in-the-nilradical]]).
 
-[L4] A semisimple characteristic-zero algebra is perfect
-([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
+[L4] A semisimple characteristic-zero algebra is perfect ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 
-[L5] A nonzero finite-dimensional nilpotent Lie algebra has nonzero center
-([[prop-a-nonzero-nilpotent-lie-algebra-has-nonzero-center]]).
+[L5] A nonzero finite-dimensional nilpotent Lie algebra has nonzero center ([[prop-a-nonzero-nilpotent-lie-algebra-has-nonzero-center]]).
 
 ## Proof
 
-**Proof technique:** induction on the radical, strengthened to place every
-conjugator in $[\mathfrak g,\mathfrak r]$.
+**Proof technique:** induction on the radical, strengthened to place every conjugator in $[\mathfrak g,\mathfrak r]$.
 
 1.1 We prove the stronger assertion that the conjugating factors may all be $\exp(\operatorname{ad}x)$ with $x\in[\mathfrak g,\mathfrak r]$. If this commutator is zero, then $\mathfrak r$ is central. Each Levi factor is a section of $\mathfrak g\to\mathfrak g/\mathfrak r$ by [L1]. The difference of two such sections is a linear map to the central algebra $\mathfrak r$; the two sections preserve brackets, so that difference vanishes on the derived algebra of the quotient. The quotient is semisimple and hence perfect by [L4], so the sections, and therefore the Levi factors, coincide. [L1, L4, base]
 

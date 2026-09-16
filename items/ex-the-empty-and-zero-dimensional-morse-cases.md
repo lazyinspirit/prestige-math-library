@@ -36,12 +36,9 @@ $0$-manifolds.
 
 ## Facts & Assumptions
 
-**Given:** A smooth function $f:M\to\mathbb R$ on either the empty manifold or a
-$0$-manifold.
+**Given:** A smooth function $f:M\to\mathbb R$ on either the empty manifold or a $0$-manifold.
 
-[F1] On a $0$-manifold every point is a nondegenerate critical point of index
-$0$, while the empty $0$-manifold has no critical points
-([[rem-zero-dimensional-morse-convention]]).
+[F1] On a $0$-manifold every point is a nondegenerate critical point of index $0$, while the empty $0$-manifold has no critical points ([[rem-zero-dimensional-morse-convention]]).
 
 ## Verification
 

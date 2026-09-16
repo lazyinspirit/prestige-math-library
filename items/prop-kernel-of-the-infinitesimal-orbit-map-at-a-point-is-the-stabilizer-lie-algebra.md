@@ -38,29 +38,19 @@ the orbit with its canonical injectively immersed structure.
 
 ## Facts & Assumptions
 
-**Given:** A smooth left action, a point $x\in M$, its orbit map
-$\Phi_x(g)=g\cdot x$, and quotient map $q:G\to G/G_x$.
+**Given:** A smooth left action, a point $x\in M$, its orbit map $\Phi_x(g)=g\cdot x$, and quotient map $q:G\to G/G_x$.
 
-[F1] With the standing minus convention,
-$X_M(x)=d(\Phi_x)_e(-X)$. [[def-fundamental-vector-field-of-a-left-action]].
-[[def-orbit-stabilizer-and-orbit-map-of-a-smooth-action]].
+[F1] With the standing minus convention, $X_M(x)=d(\Phi_x)_e(-X)$. [[def-fundamental-vector-field-of-a-left-action]]. [[def-orbit-stabilizer-and-orbit-map-of-a-smooth-action]].
 
-[F2] The stabilizer is a closed embedded Lie subgroup.
-[[thm-stabilizers-are-closed-embedded-lie-subgroups]].
+[F2] The stabilizer is a closed embedded Lie subgroup. [[thm-stabilizers-are-closed-embedded-lie-subgroups]].
 
-[F3] A constant-rank map has local normal form $(u,v)\mapsto(u,0)$.
-[[thm-constant-rank-theorem-for-manifolds]].
+[F3] A constant-rank map has local normal form $(u,v)\mapsto(u,0)$. [[thm-constant-rank-theorem-for-manifolds]].
 
-[F4] The quotient $G/G_x$ is smooth, $q$ is a submersion, and
-$T_{eG_x}(G/G_x)\simeq\mathfrak g/\mathfrak g_x$.
-[[thm-quotient-manifold-by-a-closed-lie-subgroup]].
-[[prop-tangent-space-of-a-homogeneous-quotient]].
+[F4] The quotient $G/G_x$ is smooth, $q$ is a submersion, and $T_{eG_x}(G/G_x)\simeq\mathfrak g/\mathfrak g_x$. [[thm-quotient-manifold-by-a-closed-lie-subgroup]]. [[prop-tangent-space-of-a-homogeneous-quotient]].
 
-[F5] Maps constant on quotient fibres factor uniquely through the quotient.
-[[thm-quotient-universal-property]].
+[F5] Maps constant on quotient fibres factor uniquely through the quotient. [[thm-quotient-universal-property]].
 
-[F6] The preceding suppliers carry countable choice.
-[[def-countable-choice]].
+[F6] The preceding suppliers carry countable choice. [[def-countable-choice]].
 
 ## Proof
 

@@ -31,15 +31,11 @@ for irreducible degrees, not a characterization.
 
 **Given:** The cyclic group $C_4$.
 
-[F1] A cyclic group of order $4$ exists and is finite
-([[thm-classification-of-cyclic-groups]]).
+[F1] A cyclic group of order $4$ exists and is finite ([[thm-classification-of-cyclic-groups]]).
 
-[F2] Every irreducible representation of a finite abelian group over a splitting
-field is one-dimensional
-([[thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional]]).
+[F2] Every irreducible representation of a finite abelian group over a splitting field is one-dimensional ([[thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional]]).
 
-[F3] Irreducible complex character degrees divide the group order
-([[thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order]]).
+[F3] Irreducible complex character degrees divide the group order ([[thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order]]).
 
 ## Verification
 

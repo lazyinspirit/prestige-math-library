@@ -36,24 +36,13 @@ bundles.
 
 ## Facts & Assumptions
 
-**Given:** AC, a compact Hausdorff space $X$, and a finite-rank complex bundle
-$V$ on $X\times S^2$.
+**Given:** AC, a compact Hausdorff space $X$, and a finite-rank complex bundle $V$ on $X\times S^2$.
 
-[F1] Under AC, bundle pullback is invariant under homotopy
-([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
+[F1] Under AC, bundle pullback is invariant under homotopy ([[thm-homotopy-invariance-of-vector-bundle-pullback]]).
 
-[F2] The fixed clutching definition supplies the upper-to-lower convention
-([[def-clutching-construction-for-bundles-over-a-suspension]]). Applying the
-transition-cocycle construction in local charts of $E$, also with an interval
-parameter, glues two copies of $\operatorname{pr}_X^*E$ by an equatorial
-bundle automorphism and turns a homotopy of such automorphisms into a bundle
-over the parameter cylinder
-([[thm-vector-bundles-glued-from-transition-cocycles]]).
+[F2] The fixed clutching definition supplies the upper-to-lower convention ([[def-clutching-construction-for-bundles-over-a-suspension]]). Applying the transition-cocycle construction in local charts of $E$, also with an interval parameter, glues two copies of $\operatorname{pr}_X^*E$ by an equatorial bundle automorphism and turns a homotopy of such automorphisms into a bundle over the parameter cylinder ([[thm-vector-bundles-glued-from-transition-cocycles]]).
 
-[F3] Under AC, finite complements and common trivial stabilization are
-available
-([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]],
-[[prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases]]).
+[F3] Under AC, finite complements and common trivial stabilization are available ([[thm-finite-rank-complement-theorem-over-compact-hausdorff-bases]], [[prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases]]).
 
 [A1] AC is used through [F1] and [F3].
 

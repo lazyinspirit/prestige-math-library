@@ -28,11 +28,9 @@ therefore a genuine hypothesis, not a consequence of being a Borel measure.
 
 **Given:** Counting measure $\#_{\mathbb{R}}$ on $\mathbb{R}$.
 
-[L1] Counting measure is a measure on $(\mathbb{R},\mathcal{P}(\mathbb{R}))$.
-([[prop-counting-measure-is-a-measure]])
+[L1] Counting measure is a measure on $(\mathbb{R},\mathcal{P}(\mathbb{R}))$. ([[prop-counting-measure-is-a-measure]])
 
-[L2] Counting measure assigns an infinite set the value $+\infty$.
-([[def-counting-measure]])
+[L2] Counting measure assigns an infinite set the value $+\infty$. ([[def-counting-measure]])
 
 ## Refutation
 
@@ -42,5 +40,4 @@ therefore a genuine hypothesis, not a consequence of being a Borel measure.
 compact interval $[0,1]$ is infinite. [L1, given]
 
 2.1 Therefore [L2] gives [step 1.1, L2]
-$\#_{\mathbb{R}}([0,1]) = +\infty$. So this Borel measure is not finite on the
-compact set $[0,1]$, and the claim is false. [step 1.1, L2] ∎
+$\#_{\mathbb{R}}([0,1]) = +\infty$. So this Borel measure is not finite on the compact set $[0,1]$, and the claim is false. [step 1.1, L2] ∎

@@ -35,11 +35,9 @@ Every smooth vector bundle is globally trivial.
 
 **Given:** The displayed universal triviality claim.
 
-[L1] A smooth cocycle defines a smooth vector bundle
-([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
+[L1] A smooth cocycle defines a smooth vector bundle ([[thm-vector-bundle-construction-from-a-smooth-cocycle]]).
 
-[L2] A smooth vector bundle is trivial if and only if it has a global frame
-([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
+[L2] A smooth vector bundle is trivial if and only if it has a global frame ([[cor-a-vector-bundle-is-trivial-if-and-only-if-it-has-a-global-frame]]).
 
 ## Refutation
 

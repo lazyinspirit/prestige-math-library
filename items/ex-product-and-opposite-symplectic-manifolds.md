@@ -33,14 +33,9 @@ $-\operatorname{pr}_1^*\omega+\operatorname{pr}_2^*\omega$.
 
 **Given:** A symplectic manifold $(M,\omega)$.
 
-[F1] Opposites and products carry the stated symplectic forms.
-[[prop-products-and-opposites-of-symplectic-manifolds]].
+[F1] Opposites and products carry the stated symplectic forms. [[prop-products-and-opposites-of-symplectic-manifolds]].
 
-[F2] In a $2n$-dimensional symplectic vector space a subspace is Lagrangian
-exactly when it is isotropic and of dimension $n$, and a submanifold is
-Lagrangian exactly when its tangent spaces are Lagrangian subspaces.
-[[thm-equivalent-characterizations-of-lagrangian-subspaces]],
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F2] In a $2n$-dimensional symplectic vector space a subspace is Lagrangian exactly when it is isotropic and of dimension $n$, and a submanifold is Lagrangian exactly when its tangent spaces are Lagrangian subspaces. [[thm-equivalent-characterizations-of-lagrangian-subspaces]], [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
 ## Verification
 

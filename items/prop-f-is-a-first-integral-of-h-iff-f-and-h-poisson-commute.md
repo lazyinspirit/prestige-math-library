@@ -31,12 +31,9 @@ $F$ is a first integral of $H$ if and only if $\{F,H\}=0$ on $M$.
 
 **Given:** Smooth functions $F,H$ on a symplectic manifold.
 
-[F1] Along every integral curve of $X_H$,
-$\frac d{dt}F=\{F,H\}$.
-[[prop-observable-evolution-equation]].
+[F1] Along every integral curve of $X_H$, $\frac d{dt}F=\{F,H\}$. [[prop-observable-evolution-equation]].
 
-[F2] A first integral is constant on every such local curve.
-[[def-first-integral-and-poisson-commuting-functions]].
+[F2] A first integral is constant on every such local curve. [[def-first-integral-and-poisson-commuting-functions]].
 
 ## Proof
 

@@ -75,8 +75,4 @@ group algebra.
 
 ## Remarks
 
-The norm computation restricts Zheng, Example 3.7.4(3), p.125, from real to
-rational coefficients. Wiese, Exercise 14, p.70, suggests the real/complex
-analogue but supplies no proof; the algebra and matrix calculations here
-prove the rational example. Wiese, Remark 2.4.2(ii), p.34, distinguishes the
-four-dimensional regular trace from this degree-two character.
+The norm computation restricts Zheng, Example 3.7.4(3), p.125, from real to rational coefficients. Wiese, Exercise 14, p.70, suggests the real/complex analogue but supplies no proof; the algebra and matrix calculations here prove the rational example. Wiese, Remark 2.4.2(ii), p.34, distinguishes the four-dimensional regular trace from this degree-two character.

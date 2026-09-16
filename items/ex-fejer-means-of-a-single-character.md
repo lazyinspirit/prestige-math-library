@@ -36,9 +36,7 @@ $$\sigma_Ne_k=\left(1-\frac{|k|}{N+1}\right)_+e_k.$$
 
 **Given:** An integer $k$ and an integer $N\ge0$.
 
-[L1] The Cesaro means are defined by
-$$\sigma_Nf=\frac1{N+1}\sum_{j=0}^N S_jf$$
-([[def-cesaro-and-abel-means-of-a-fourier-series]]).
+[L1] The Cesaro means are defined by $$\sigma_Nf=\frac1{N+1}\sum_{j=0}^N S_jf$$ ([[def-cesaro-and-abel-means-of-a-fourier-series]]).
 
 ## Verification
 

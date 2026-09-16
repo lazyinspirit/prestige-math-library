@@ -39,11 +39,9 @@ vector bundles over $S$.
 
 [L0] Assuming $\mathrm{AC}_\omega$, the induced tangent and cotangent bundle charts form smooth atlases on $TM$ and $T^*M$ ([[thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure]], [[thm-the-cotangent-bundle-has-a-canonical-smooth-2n-manifold-structure]]).
 
-[L1] Around each point of $S$ there is a slice chart in which $S$ is given by
-$y_1=\cdots=y_c=0$ ([[def-embedded-submanifold-and-slice-chart]]).
+[L1] Around each point of $S$ there is a slice chart in which $S$ is given by $y_1=\cdots=y_c=0$ ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L2] A quotient by a smooth vector subbundle is a smooth vector bundle
-([[thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle]]).
+[L2] A quotient by a smooth vector subbundle is a smooth vector bundle ([[thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle]]).
 
 ## Proof
 

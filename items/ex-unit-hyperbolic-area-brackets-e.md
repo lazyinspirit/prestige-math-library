@@ -37,26 +37,17 @@ $2<e<3$.
 
 **Given:** The integral function $L$ and the number $e$.
 
-[L1] $e$ is the unique positive number with
-$L(e)=\int_1^e dt/t=1$
-([[cor-e-is-the-unique-unit-hyperbolic-area]]).
+[L1] $e$ is the unique positive number with $L(e)=\int_1^e dt/t=1$ ([[cor-e-is-the-unique-unit-hyperbolic-area]]).
 
-[L2] $L(xy)=L(x)+L(y)$
-([[thm-integral-logarithm-product-law]]).
+[L2] $L(xy)=L(x)+L(y)$ ([[thm-integral-logarithm-product-law]]).
 
-[L3] $L$ is strictly increasing
-([[cor-integral-logarithm-is-strictly-increasing]]).
+[L3] $L$ is strictly increasing ([[cor-integral-logarithm-is-strictly-increasing]]).
 
-[L4] If $m\leq f\leq M$ on $[a,b]$, then
-$m(b-a)\leq\int_a^b f\leq M(b-a)$
-([[thm-monotonicity-of-the-integral]]).
+[L4] If $m\leq f\leq M$ on $[a,b]$, then $m(b-a)\leq\int_a^b f\leq M(b-a)$ ([[thm-monotonicity-of-the-integral]]).
 
-[L5] Oriented integrals satisfy
-$\int_u^v f+\int_v^w f=\int_u^w f$
-([[thm-additivity-over-subintervals]]).
+[L5] Oriented integrals satisfy $\int_u^v f+\int_v^w f=\int_u^w f$ ([[thm-additivity-over-subintervals]]).
 
-[L6] The published sharper bound is $2<e<3$
-([[cor-two-less-than-e-less-than-three]]).
+[L6] The published sharper bound is $2<e<3$ ([[cor-two-less-than-e-less-than-three]]).
 
 ## Verification
 

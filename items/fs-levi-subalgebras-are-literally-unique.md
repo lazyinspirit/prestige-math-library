@@ -31,12 +31,9 @@ subalgebra.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field and the semidirect product displayed
-below.
+**Given:** A characteristic-zero field and the semidirect product displayed below.
 
-[L1] Malcev's theorem asserts conjugacy, rather than equality, of Levi
-subalgebras
-([[thm-malcev-conjugacy-of-levi-subalgebras]]).
+[L1] Malcev's theorem asserts conjugacy, rather than equality, of Levi subalgebras ([[thm-malcev-conjugacy-of-levi-subalgebras]]).
 
 ## Counterexample
 

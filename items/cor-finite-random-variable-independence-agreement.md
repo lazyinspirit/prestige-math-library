@@ -36,22 +36,15 @@ the published attained-value definition
 
 ## Facts & Assumptions
 
-**Given:** A finite probability space $(\Omega,w)$, a finite family
-$(X_i)_{i\in I}$ of finite-valued random variables, and the corresponding
-full-power-set probability space $(\Omega,\mathcal P(\Omega),\mathbb P_w)$.
+**Given:** A finite probability space $(\Omega,w)$, a finite family $(X_i)_{i\in I}$ of finite-valued random variables, and the corresponding full-power-set probability space $(\Omega,\mathcal P(\Omega),\mathbb P_w)$.
 
-[L1] On a finite full-power-set probability space, every finite-valued random
-variable is measurable in the measure-theoretic sense.
-([[lem-finite-random-variables-are-measurable]])
+[L1] On a finite full-power-set probability space, every finite-valued random variable is measurable in the measure-theoretic sense. ([[lem-finite-random-variables-are-measurable]])
 
-[L2] Finite probability spaces are exactly finite full-power-set probability
-spaces. ([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]])
+[L2] Finite probability spaces are exactly finite full-power-set probability spaces. ([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]])
 
-[L3] Independence of random elements is equivalent to the rectangle criterion.
-([[thm-rectangle-criterion-for-independent-random-elements]])
+[L3] Independence of random elements is equivalent to the rectangle criterion. ([[thm-rectangle-criterion-for-independent-random-elements]])
 
-[L4] The published finite notion of independence requires factorization of every
-joint attained-value event. ([[def-independence-of-finite-random-variables]])
+[L4] The published finite notion of independence requires factorization of every joint attained-value event. ([[def-independence-of-finite-random-variables]])
 
 ## Proof
 

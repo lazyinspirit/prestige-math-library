@@ -33,18 +33,13 @@ pattern graph.
 
 ## Facts & Assumptions
 
-**Given:** The path $P_5$ on vertices $0,1,2,3,4$, and the singleton blocks
-$B_i:=\{i-1\}$ for $1\leq i\leq 5$.
+**Given:** The path $P_5$ on vertices $0,1,2,3,4$, and the singleton blocks $B_i:=\{i-1\}$ for $1\leq i\leq 5$.
 
-[L1] The preceding example shows that $P_5$ is perfect but not a cograph
-([[ex-the-five-vertex-path-is-perfect-but-not-a-cograph]]).
+[L1] The preceding example shows that $P_5$ is perfect but not a cograph ([[ex-the-five-vertex-path-is-perfect-but-not-a-cograph]]).
 
-[L2] In the pattern graph of a pure blockade, two indices are adjacent exactly
-when the corresponding two blocks are complete
-([[def-pattern-graph-of-a-pure-blockade]]).
+[L2] In the pattern graph of a pure blockade, two indices are adjacent exactly when the corresponding two blocks are complete ([[def-pattern-graph-of-a-pure-blockade]]).
 
-[L3] The graph $P_5$ has edges exactly $01,12,23,34$
-([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L3] The graph $P_5$ has edges exactly $01,12,23,34$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Verification
 

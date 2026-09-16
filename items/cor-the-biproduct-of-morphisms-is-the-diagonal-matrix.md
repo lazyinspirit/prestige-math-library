@@ -41,11 +41,9 @@ $$\begin{pmatrix}f&0\\0&g\end{pmatrix}.$$
 
 **Given:** Morphisms $f:A\to A'$ and $g:B\to B'$ in an additive category.
 
-[L1] Morphisms between finite biproducts are determined by their matrix entries
-([[thm-morphisms-between-finite-biproducts-correspond-to-matrices]]).
+[L1] Morphisms between finite biproducts are determined by their matrix entries ([[thm-morphisms-between-finite-biproducts-correspond-to-matrices]]).
 
-[L2] Composition of those morphisms is ordinary matrix multiplication
-([[thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]]).
+[L2] Composition of those morphisms is ordinary matrix multiplication ([[thm-composition-of-morphisms-between-finite-biproducts-is-matrix-multiplication]]).
 
 ## Proof
 

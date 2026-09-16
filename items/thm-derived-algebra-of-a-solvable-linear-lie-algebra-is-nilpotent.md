@@ -36,12 +36,9 @@ algebra $[\mathfrak g,\mathfrak g]$ is nilpotent.
 
 **Given:** The field, module, and solvable linear Lie algebra in the statement.
 
-[L1] A solvable representation under these field hypotheses is simultaneously
-upper triangularizable
-([[cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations]]).
+[L1] A solvable representation under these field hypotheses is simultaneously upper triangularizable ([[cor-simultaneous-upper-triangularization-of-solvable-lie-algebra-representations]]).
 
-[L2] A finite-dimensional Lie algebra is nilpotent when every one of its
-adjoint endomorphisms is nilpotent ([[thm-engels-theorem]]).
+[L2] A finite-dimensional Lie algebra is nilpotent when every one of its adjoint endomorphisms is nilpotent ([[thm-engels-theorem]]).
 
 ## Proof
 

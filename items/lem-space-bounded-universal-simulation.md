@@ -52,8 +52,7 @@ variable-alphabet symbols is asserted.
 
 ## Facts & Assumptions
 
-**Given:** an explicitly coded deterministic multitape machine $M$, its input,
-and a simulated run visiting at most $S$ cells in total.
+**Given:** an explicitly coded deterministic multitape machine $M$, its input, and a simulated run visiting at most $S$ cells in total.
 
 ## Proof
 

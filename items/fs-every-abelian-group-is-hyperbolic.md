@@ -31,8 +31,7 @@ sources:
 
 **Given:** The abelian group $\mathbb Z^2$.
 
-[L1] Free abelian groups of rank at least two are not hyperbolic
-([[prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]]).
+[L1] Free abelian groups of rank at least two are not hyperbolic ([[prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]]).
 
 ## Refutation
 

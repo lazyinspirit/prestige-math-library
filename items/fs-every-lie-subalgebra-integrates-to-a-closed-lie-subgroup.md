@@ -33,28 +33,17 @@ Lie algebra of a closed Lie subgroup.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, an irrational real number $\alpha$, the torus
-$G=\mathbb T^2$, and the line
+**Given:** $\mathrm{AC}_\omega$, an irrational real number $\alpha$, the torus $G=\mathbb T^2$, and the line
 
 $$\mathfrak h=\mathbb R(1,\alpha)\subseteq\operatorname{Lie}(\mathbb T^2)\cong\mathbb R^2.$$
 
-[F1] Under $\mathrm{AC}_\omega$, every Lie subalgebra has a unique connected
-immersed integral Lie subgroup. [[def-countable-choice]],
-[[thm-lie-subgroup-lie-subalgebra-correspondence]].
+[F1] Under $\mathrm{AC}_\omega$, every Lie subalgebra has a unique connected immersed integral Lie subgroup. [[def-countable-choice]], [[thm-lie-subgroup-lie-subalgebra-correspondence]].
 
-[F2] The irrational winding
-$i(t)=(e^{2\pi i t},e^{2\pi i\alpha t})$ is an injectively immersed
-Lie-group homomorphism into $\mathbb T^2$, and its image is dense.
-[[lem-irrational-torus-flow-is-free-with-dense-orbits]].
+[F2] The irrational winding $i(t)=(e^{2\pi i t},e^{2\pi i\alpha t})$ is an injectively immersed Lie-group homomorphism into $\mathbb T^2$, and its image is dense. [[lem-irrational-torus-flow-is-free-with-dense-orbits]].
 
-[F3] Connected components of a topological manifold are open, and connected
-components in any space are closed.
-[[prop-components-of-a-topological-manifold-are-open-and-at-most-countable]],
-[[thm-components-partition-and-are-closed]].
+[F3] Connected components of a topological manifold are open, and connected components in any space are closed. [[prop-components-of-a-topological-manifold-are-open-and-at-most-countable]], [[thm-components-partition-and-are-closed]].
 
-[F4] Finite products of connected spaces are connected, and continuous images
-of connected spaces are connected. [[thm-product-of-connected-spaces]],
-[[thm-continuous-image-of-a-connected-space]].
+[F4] Finite products of connected spaces are connected, and continuous images of connected spaces are connected. [[thm-product-of-connected-spaces]], [[thm-continuous-image-of-a-connected-space]].
 
 ## Refutation
 

@@ -34,11 +34,9 @@ $$\phi\circ i=i'.$$
 
 **Given:** Two free groups $(F,i)$ and $(F',i')$ on $X$.
 
-[L1] A map from the generators of a free group extends uniquely to a group
-homomorphism ([[def-free-group]]).
+[L1] A map from the generators of a free group extends uniquely to a group homomorphism ([[def-free-group]]).
 
-[L2] A group isomorphism is a bijective group homomorphism
-([[def-group-isomorphism-and-automorphism]]).
+[L2] A group isomorphism is a bijective group homomorphism ([[def-group-isomorphism-and-automorphism]]).
 
 ## Proof
 

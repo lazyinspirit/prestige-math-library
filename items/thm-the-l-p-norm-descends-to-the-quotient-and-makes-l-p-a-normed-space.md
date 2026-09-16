@@ -40,34 +40,24 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 **Given:** A measure space $(X,\mathcal A,\mu)$ and an exponent $1\le p\le\infty$.
 
-[L1] The quotient spaces $L^p(\mu)$ are those of
-[[def-l-p-space-as-a-quotient-by-null-functions]].
+[L1] The quotient spaces $L^p(\mu)$ are those of [[def-l-p-space-as-a-quotient-by-null-functions]].
 
-[L2] The null representatives are exactly the zero-seminorm class
-([[prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class]]).
+[L2] The null representatives are exactly the zero-seminorm class ([[prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class]]).
 
-[L3] Minkowski's inequality supplies the triangle inequality for the
-representative seminorms ([[thm-minkowski-inequality-for-integrals]]).
+[L3] Minkowski's inequality supplies the triangle inequality for the representative seminorms ([[thm-minkowski-inequality-for-integrals]]).
 
-[L4] The essential supremum is an attained essential bound
-([[prop-essential-supremum-is-attained-as-the-least-essential-bound]]).
+[L4] The essential supremum is an attained essential bound ([[prop-essential-supremum-is-attained-as-the-least-essential-bound]]).
 
-[L5] The quotient operations are well defined and produce a vector space
-([[prop-quotient-vector-space-operations-and-projection]]).
+[L5] The quotient operations are well defined and produce a vector space ([[prop-quotient-vector-space-operations-and-projection]]).
 
-[L6] A normed space means a real vector space with separation, homogeneity, and
-triangle inequality ([[def-norm-and-normed-space]]).
+[L6] A normed space means a real vector space with separation, homogeneity, and triangle inequality ([[def-norm-and-normed-space]]).
 
 ## Proof
 
-**Proof technique:** Use the previous proposition to identify the null functions
-as the kernel of the seminorm. Hence the seminorm is constant on cosets and
-separates points on the quotient, while Minkowski and homogeneity descend from
-representatives.
+**Proof technique:** Use the previous proposition to identify the null functions as the kernel of the seminorm. Hence the seminorm is constant on cosets and separates points on the quotient, while Minkowski and homogeneity descend from representatives.
 
 1.1 Suppose first $1\le p<\infty$ and $f-g\in\mathcal N_p(\mu)$. Then $\|f-g\|_p=0$. Applying Minkowski twice yields [L2, L3]
-$$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p,$$
-so $\|f\|_p=\|g\|_p$. Thus $\|[f]\|_p:=\|f\|_p$ is well defined.
+$$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p,$$ so $\|f\|_p=\|g\|_p$. Thus $\|[f]\|_p:=\|f\|_p$ is well defined.
 
 1.2 For $p=\infty$, if $f-g\in\mathcal N_\infty(\mu)$ then $f=g$ almost everywhere. Any essential bound for $f$ is therefore an essential bound for $g$ and conversely, so $\|f\|_\infty=\|g\|_\infty$. Thus $\|[f]\|_\infty:=\|f\|_\infty$ is well defined. [L2, L4]
 

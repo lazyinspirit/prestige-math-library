@@ -30,12 +30,9 @@ preserves zero morphisms.
 
 ## Facts & Assumptions
 
-**Given:** The functor $T:\mathbf{Ab}\to\mathbf{Ab}$ sending an abelian group
-$A$ to the reduced free abelian group $\mathbb Z[U(A)]/\mathbb Z[0]$ on its
-underlying pointed set.
+**Given:** The functor $T:\mathbf{Ab}\to\mathbf{Ab}$ sending an abelian group $A$ to the reduced free abelian group $\mathbb Z[U(A)]/\mathbb Z[0]$ on its underlying pointed set.
 
-[L1] Every additive functor preserves zero morphisms
-([[prop-an-additive-functor-preserves-zero-morphisms]]).
+[L1] Every additive functor preserves zero morphisms ([[prop-an-additive-functor-preserves-zero-morphisms]]).
 
 ## Refutation
 

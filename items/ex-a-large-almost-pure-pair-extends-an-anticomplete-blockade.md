@@ -45,14 +45,11 @@ $(B_0,B_1,X,Y)$.
 
 ## Facts & Assumptions
 
-**Given:** The blocks $B_0,B_1,B_2$ and the subsets $X,Y\subseteq B_2$ with the
-adjacency relations stated in the example.
+**Given:** The blocks $B_0,B_1,B_2$ and the subsets $X,Y\subseteq B_2$ with the adjacency relations stated in the example.
 
-[L1] A blockade is an ordered sequence of pairwise disjoint nonempty vertex
-sets ([[def-blockade-length-and-width]]).
+[L1] A blockade is an ordered sequence of pairwise disjoint nonempty vertex sets ([[def-blockade-length-and-width]]).
 
-[L2] A pair of disjoint vertex sets is anticomplete exactly when there are no
-edges between them ([[def-edges-between-sets-and-pure-mixed-pairs]]).
+[L2] A pair of disjoint vertex sets is anticomplete exactly when there are no edges between them ([[def-edges-between-sets-and-pure-mixed-pairs]]).
 
 ## Verification
 

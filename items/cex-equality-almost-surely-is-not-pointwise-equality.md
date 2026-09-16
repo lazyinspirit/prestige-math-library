@@ -30,14 +30,11 @@ If two random variables are equal almost surely, then they are pointwise equal.
 
 ## Facts & Assumptions
 
-**Given:** The probability space $([0,1],\mathcal B([0,1]),\lambda)$, the zero
-function $X$, and the indicator $Y=\mathbf 1_{\{0\}}$.
+**Given:** The probability space $([0,1],\mathcal B([0,1]),\lambda)$, the zero function $X$, and the indicator $Y=\mathbf 1_{\{0\}}$.
 
-[L1] A property holds almost everywhere when its exceptional set is contained in
-a measurable null set ([[def-measure-null-set-and-almost-everywhere]]).
+[L1] A property holds almost everywhere when its exceptional set is contained in a measurable null set ([[def-measure-null-set-and-almost-everywhere]]).
 
-[L2] Integrable random variables with the same almost-sure class have the same
-expectation ([[lem-expectation-is-independent-of-the-ae-representative]]).
+[L2] Integrable random variables with the same almost-sure class have the same expectation ([[lem-expectation-is-independent-of-the-ae-representative]]).
 
 ## Counterexample
 

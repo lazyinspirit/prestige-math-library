@@ -35,17 +35,13 @@ $\operatorname{Sch}_X(H)$ be the labeled Schreier coset graph. Then:
 
 ## Facts & Assumptions
 
-**Given:** A free group $F(X)$, a subgroup $H\le F(X)$, and its labeled
-Schreier coset graph.
+**Given:** A free group $F(X)$, a subgroup $H\le F(X)$, and its labeled Schreier coset graph.
 
-[L1] A free group on a set $X$ is a group $F(X)$ equipped with the universal
-property for maps out of $X$ ([[def-free-group]]).
+[L1] A free group on a set $X$ is a group $F(X)$ equipped with the universal property for maps out of $X$ ([[def-free-group]]).
 
-[L2] Words, elementary cancellations, and reduced words on $X\sqcup X^{-1}$
-are defined as in [[def-alphabet-words-and-reduction]].
+[L2] Words, elementary cancellations, and reduced words on $X\sqcup X^{-1}$ are defined as in [[def-alphabet-words-and-reduction]].
 
-[L3] The Schreier graph has vertices the right cosets $Hg$ and an $x$-labeled
-edge $Hg\to Hgx$ for each $x\in X$ ([[def-labeled-schreier-coset-graph]]).
+[L3] The Schreier graph has vertices the right cosets $Hg$ and an $x$-labeled edge $Hg\to Hgx$ for each $x\in X$ ([[def-labeled-schreier-coset-graph]]).
 
 ## Proof
 

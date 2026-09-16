@@ -50,9 +50,7 @@ $\mathcal D$ has constant rank it is involutive.
 $X(f^a) = 0 = Y(f^a)$ for every component $f^a$. [given]
 
 1.2 Therefore [given]
-$$ [X,Y](f^a) = X(Y(f^a)) - Y(X(f^a)) = 0 $$
-for every $a$. This means $dF([X,Y]) = 0$, so $[X,Y]$ is again tangent to the
-kernel family. [given, algebra]
+$$ [X,Y](f^a) = X(Y(f^a)) - Y(X(f^a)) = 0 $$ for every $a$. This means $dF([X,Y]) = 0$, so $[X,Y]$ is again tangent to the kernel family. [given, algebra]
 
 1.3 Thus kernel distributions are closed under brackets whenever they are [given]
 defined as smooth distributions. [given] ∎

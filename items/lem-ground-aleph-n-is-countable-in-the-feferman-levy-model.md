@@ -28,18 +28,13 @@ the Feferman–Levy model $N$.
 
 ## Facts & Assumptions
 
-**Given:** The Feferman–Levy system, its generic $G$, and one fixed
-$n<\omega$.
+**Given:** The Feferman–Levy system, its generic $G$, and one fixed $n<\omega$.
 
-[F1] [[def-feferman-levy-symmetric-collapse-system]] presents layer $n$ as
-finite partial functions from $\omega$ to $\aleph_n^V$ and says that
-$H_{n+1}$ fixes that layer pointwise.
+[F1] [[def-feferman-levy-symmetric-collapse-system]] presents layer $n$ as finite partial functions from $\omega$ to $\aleph_n^V$ and says that $H_{n+1}$ fixes that layer pointwise.
 
-[F2] [[thm-collapse-and-levy-collapse-effects]] proves that the generic union
-of this collapse is a surjection $\omega\twoheadrightarrow\aleph_n^V$.
+[F2] [[thm-collapse-and-levy-collapse-effects]] proves that the generic union of this collapse is a surjection $\omega\twoheadrightarrow\aleph_n^V$.
 
-[F3] [[lem-forcing-monotonicity-density-and-decision]] supplies the dense-set
-reading of totality and surjectivity.
+[F3] [[lem-forcing-monotonicity-density-and-decision]] supplies the dense-set reading of totality and surjectivity.
 
 ## Proof
 

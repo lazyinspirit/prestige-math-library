@@ -42,8 +42,7 @@ $c$-sparse $\overline{P_5}$-free graph has at least one of the following:
 
 **Given:** A sufficiently large $c$-sparse $\overline{P_5}$-free graph $G$.
 
-[L1] Lemma 7.2 of the cited source proves the displayed complete-or-anticomplete
-blockade versus deeper-sparsification alternative with explicit parameters.
+[L1] Lemma 7.2 of the cited source proves the displayed complete-or-anticomplete blockade versus deeper-sparsification alternative with explicit parameters.
 
 ## Proof
 

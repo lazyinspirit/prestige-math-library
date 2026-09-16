@@ -35,18 +35,13 @@ The path $P_4$ has a blockade-rainbow copy with four singleton blocks.
 
 ## Facts & Assumptions
 
-**Given:** The path $P_4$ on vertices $0,1,2,3$, with blocks
-$B_1:=\{0\}$, $B_2:=\{1\}$, $B_3:=\{2\}$, and $B_4:=\{3\}$.
+**Given:** The path $P_4$ on vertices $0,1,2,3$, with blocks $B_1:=\{0\}$, $B_2:=\{1\}$, $B_3:=\{2\}$, and $B_4:=\{3\}$.
 
-[L1] An induced subgraph is $\mathcal B$-rainbow when it lies in the support of
-the blockade and meets each block in at most one vertex
-([[def-blockade-rainbow-induced-copy]]).
+[L1] An induced subgraph is $\mathcal B$-rainbow when it lies in the support of the blockade and meets each block in at most one vertex ([[def-blockade-rainbow-induced-copy]]).
 
-[L2] The graph $P_4$ has edges exactly $01,12,23$
-([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L2] The graph $P_4$ has edges exactly $01,12,23$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
-[L3] The support of the blockade $(B_1,B_2,B_3,B_4)$ is the union of those four
-singleton blocks ([[def-blockade-length-and-width]]).
+[L3] The support of the blockade $(B_1,B_2,B_3,B_4)$ is the union of those four singleton blocks ([[def-blockade-length-and-width]]).
 
 ## Verification
 

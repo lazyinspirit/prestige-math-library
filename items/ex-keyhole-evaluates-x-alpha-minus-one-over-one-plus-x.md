@@ -32,11 +32,7 @@ $\int_0^\infty \frac{x^{\alpha-1}}{1+x}\,dx=\frac{\pi}{\sin(\pi\alpha)}.$
 
 **Given:** The keyhole integrand $f(z)=z^{\alpha-1}/(1+z)$ with $0<\Re\alpha<1$.
 
-[L1] If the rational factor has no pole on $[0,\infty)$, the Mellin integral
-converges, and the inner and outer keyhole circles vanish, then
-$$\left(1-e^{2\pi i\alpha}\right)\int_0^\infty x^{\alpha-1}R(x)\,dx=2\pi i\sum\operatorname{Res}(z^{\alpha-1}R(z),a)$$
-for the branch with $\operatorname{Arg}z\in(0,2\pi)$
-([[thm-keyhole-residue-formula-mellin-rational-integrals]]).
+[L1] If the rational factor has no pole on $[0,\infty)$, the Mellin integral converges, and the inner and outer keyhole circles vanish, then $$\left(1-e^{2\pi i\alpha}\right)\int_0^\infty x^{\alpha-1}R(x)\,dx=2\pi i\sum\operatorname{Res}(z^{\alpha-1}R(z),a)$$ for the branch with $\operatorname{Arg}z\in(0,2\pi)$ ([[thm-keyhole-residue-formula-mellin-rational-integrals]]).
 
 ## Verification
 

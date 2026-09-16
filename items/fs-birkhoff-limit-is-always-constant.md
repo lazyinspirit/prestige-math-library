@@ -29,8 +29,7 @@ ergodicity hypothesis.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, Lebesgue probability on the circle,
-$T=R_{1/2}$, and $f=\mathbf1_{[0,1/4)\cup[1/2,3/4)}$.
+**Given:** Countable choice, Lebesgue probability on the circle, $T=R_{1/2}$, and $f=\mathbf1_{[0,1/4)\cup[1/2,3/4)}$.
 
 [F1] The rotation $R_{1/2}$ preserves Lebesgue probability ([[prop-circle-rotations-preserve-lebesgue-measure]]).
 

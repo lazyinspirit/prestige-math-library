@@ -32,8 +32,7 @@ $d\lambda$.
 
 **Given:** $\mathrm{AC}_\omega$ and the library's cotangent convention.
 
-[F1] The convention is $\omega_{\mathrm{can}}=-d\lambda$.
-[[def-tautological-one-form-on-a-cotangent-bundle]].
+[F1] The convention is $\omega_{\mathrm{can}}=-d\lambda$. [[def-tautological-one-form-on-a-cotangent-bundle]].
 
 ## Refutation
 

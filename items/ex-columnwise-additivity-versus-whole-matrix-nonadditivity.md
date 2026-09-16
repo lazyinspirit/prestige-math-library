@@ -32,19 +32,13 @@ is fixed, but it is not additive as a function of the whole matrix.
 
 ## Facts & Assumptions
 
-**Given:** $u=(1,0)^{\mathsf T}$,
-$v=(0,1)^{\mathsf T}$, $w=(0,1)^{\mathsf T}$, and
-$A=B=I_2$.
+**Given:** $u=(1,0)^{\mathsf T}$, $v=(0,1)^{\mathsf T}$, $w=(0,1)^{\mathsf T}$, and $A=B=I_2$.
 
-[F1] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]) and the
-displayed columns and matrices belong to the corresponding matrix sets
-([[def-matrices-over-a-commutative-ring]]).
+[F1] $\mathbb Z$ is a commutative ring ([[thm-int-comm-ring]]) and the displayed columns and matrices belong to the corresponding matrix sets ([[def-matrices-over-a-commutative-ring]]).
 
-[L1] Determinant is multilinear in its columns
-([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
+[L1] Determinant is multilinear in its columns ([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
 
-[F2] The $2\times2$ determinant is the two-term Leibniz sum
-([[def-determinant-of-a-square-matrix]]).
+[F2] The $2\times2$ determinant is the two-term Leibniz sum ([[def-determinant-of-a-square-matrix]]).
 
 ## Verification
 

@@ -30,15 +30,11 @@ alternating, and satisfies the Jacobi identity.
 
 ## Facts & Assumptions
 
-**Given:** Lie algebras $\mathfrak g,\mathfrak h$ and a Lie homomorphism
-$\rho:\mathfrak g\to\operatorname{Der}(\mathfrak h)$, with the bracket of
-[[def-semidirect-product-of-lie-algebras]].
+**Given:** Lie algebras $\mathfrak g,\mathfrak h$ and a Lie homomorphism $\rho:\mathfrak g\to\operatorname{Der}(\mathfrak h)$, with the bracket of [[def-semidirect-product-of-lie-algebras]].
 
-[L1] Each $\rho(x)$ is a derivation:
-$\rho(x)[u,v]=[\rho(x)u,v]+[u,\rho(x)v]$.
+[L1] Each $\rho(x)$ is a derivation: $\rho(x)[u,v]=[\rho(x)u,v]+[u,\rho(x)v]$.
 
-[L2] Bracket preservation says
-$[\rho(x),\rho(y)]=\rho([x,y])$.
+[L2] Bracket preservation says $[\rho(x),\rho(y)]=\rho([x,y])$.
 
 ## Proof
 

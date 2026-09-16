@@ -36,12 +36,9 @@ and the residue map identifies that copy with the prime field of $k$.
 
 **Given:** An equicharacteristic local ring $(A,\mathfrak m)$ with residue field $k$.
 
-[L1] Every field has a prime subfield, isomorphic either to $\mathbf Q$ or to
-$\mathbf F_p$ according to its characteristic
-([[thm-prime-subfield-classification]]).
+[L1] Every field has a prime subfield, isomorphic either to $\mathbf Q$ or to $\mathbf F_p$ according to its characteristic ([[thm-prime-subfield-classification]]).
 
-[L2] Equicharacteristic means $\operatorname{char}(A)=\operatorname{char}(k)$
-([[def-equicharacteristic-local-ring-and-coefficient-field]]).
+[L2] Equicharacteristic means $\operatorname{char}(A)=\operatorname{char}(k)$ ([[def-equicharacteristic-local-ring-and-coefficient-field]]).
 
 ## Proof
 

@@ -31,11 +31,9 @@ Every domain in $\mathbb C^n$ is a domain of holomorphy.
 
 ## Facts & Assumptions
 
-**Given:** The punctured bidisc
-$$\Omega=\{(z_1,z_2)\in\mathbb C^2: |z_1|<1,\ |z_2|<1\}\setminus\{(0,0)\}.$$
+**Given:** The punctured bidisc $$\Omega=\{(z_1,z_2)\in\mathbb C^2: |z_1|<1,\ |z_2|<1\}\setminus\{(0,0)\}.$$
 
-[L1] The punctured bidisc is not holomorphically convex
-([[cex-the-bidisc-minus-the-origin-is-not-holomorphically-convex]]).
+[L1] The punctured bidisc is not holomorphically convex ([[cex-the-bidisc-minus-the-origin-is-not-holomorphically-convex]]).
 
 ## Refutation
 

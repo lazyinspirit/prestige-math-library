@@ -31,11 +31,9 @@ Every abelian category satisfying AB5 also satisfies AB4.
 
 **Given:** An abelian category satisfying AB5.
 
-[L1] AB5 is the directed-join distributivity law together with AB3
-([[def-the-axioms-ab5-and-ab5-star]]).
+[L1] AB5 is the directed-join distributivity law together with AB3 ([[def-the-axioms-ab5-and-ab5-star]]).
 
-[L2] AB4 is the assertion that small coproducts of monomorphisms are monic
-([[def-the-axioms-ab4-and-ab4-star]]).
+[L2] AB4 is the assertion that small coproducts of monomorphisms are monic ([[def-the-axioms-ab4-and-ab4-star]]).
 
 ## Proof
 

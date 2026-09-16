@@ -47,9 +47,7 @@ is a rooted stable-tooth comb in $G$.
 
 **Given:** The five-vertex graph in the Example.
 
-[L1] A rooted stable-tooth comb is a comb whose teeth form a stable set and
-whose root is adjacent to all teeth and anticomplete to all blocks
-([[def-rooted-stable-tooth-comb]]).
+[L1] A rooted stable-tooth comb is a comb whose teeth form a stable set and whose root is adjacent to all teeth and anticomplete to all blocks ([[def-rooted-stable-tooth-comb]]).
 
 ## Verification
 

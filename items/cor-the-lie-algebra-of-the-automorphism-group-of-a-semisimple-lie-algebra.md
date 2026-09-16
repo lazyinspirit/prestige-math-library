@@ -36,15 +36,11 @@ $$\operatorname{Lie}(\operatorname{Aut}(\mathfrak g))=\operatorname{Der}(\mathfr
 
 **Given:** Countable choice and such a real or complex Lie algebra.
 
-[A1] Countable choice is the principle recorded in
-[[def-countable-choice]].
+[A1] Countable choice is the principle recorded in [[def-countable-choice]].
 
-[L1] A closed subgroup of a finite-dimensional Lie group is an embedded Lie
-subgroup; its published proof uses [A1]
-([[thm-cartans-closed-subgroup-theorem]]).
+[L1] A closed subgroup of a finite-dimensional Lie group is an embedded Lie subgroup; its published proof uses [A1] ([[thm-cartans-closed-subgroup-theorem]]).
 
-[L2] Every derivation of $\mathfrak g$ is inner
-([[thm-every-derivation-of-a-semisimple-lie-algebra-is-inner]]).
+[L2] Every derivation of $\mathfrak g$ is inner ([[thm-every-derivation-of-a-semisimple-lie-algebra-is-inner]]).
 
 ## Proof
 

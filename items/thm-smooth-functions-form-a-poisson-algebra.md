@@ -32,11 +32,9 @@ bracket, is a real Poisson algebra.
 
 **Given:** A symplectic manifold $(M,\omega)$.
 
-[F1] The Poisson bracket is bilinear, skew, and a derivation in each entry.
-[[prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry]].
+[F1] The Poisson bracket is bilinear, skew, and a derivation in each entry. [[prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry]].
 
-[F2] It satisfies the Jacobi identity.
-[[thm-poisson-bracket-satisfies-the-jacobi-identity]].
+[F2] It satisfies the Jacobi identity. [[thm-poisson-bracket-satisfies-the-jacobi-identity]].
 
 ## Proof
 

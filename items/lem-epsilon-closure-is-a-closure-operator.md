@@ -38,9 +38,7 @@ Then:
 
 **Given:** An NFA with epsilon-moves $N$ and subsets $S,T$ of its state set.
 
-[L1] By [[def-epsilon-closure-of-a-state-set]], a state lies in
-$\operatorname{ECl}(S)$ exactly when it is reachable from some state of $S$ by
-a finite chain of $\varepsilon$-transitions.
+[L1] By [[def-epsilon-closure-of-a-state-set]], a state lies in $\operatorname{ECl}(S)$ exactly when it is reachable from some state of $S$ by a finite chain of $\varepsilon$-transitions.
 
 ## Proof
 

@@ -31,12 +31,9 @@ Every equalizer morphism is monic, and every coequalizer morphism is epic.
 
 **Given:** An equalizer $e:E\to A$ and a coequalizer $q:B\to Q$.
 
-[F1] An equalizer is the single nonidentity leg of a limiting cone, and a
-coequalizer is the single nonidentity leg of a colimiting cocone
-([[def-equalizers-and-coequalizers]]).
+[F1] An equalizer is the single nonidentity leg of a limiting cone, and a coequalizer is the single nonidentity leg of a colimiting cocone ([[def-equalizers-and-coequalizers]]).
 
-[L1] Limit legs are jointly monic and colimit legs are jointly epic
-([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
+[L1] Limit legs are jointly monic and colimit legs are jointly epic ([[lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic]]).
 
 ## Proof
 

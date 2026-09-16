@@ -33,8 +33,7 @@ The star-expansion of $K_3$ contains an induced hatted five-cycle.
 
 **Given:** The star-expansion of $K_3$.
 
-[L1] The A-page lemma proves this containment directly
-([[lem-the-star-expansion-of-k-three-contains-the-hatted-five-cycle]]).
+[L1] The A-page lemma proves this containment directly ([[lem-the-star-expansion-of-k-three-contains-the-hatted-five-cycle]]).
 
 ## Verification
 

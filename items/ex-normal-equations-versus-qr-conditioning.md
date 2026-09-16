@@ -46,11 +46,7 @@ so it keeps the conditioning at $\kappa_2(A)=10^{8}$ instead of squaring it.
 
 **Proof technique:** direct.
 
-1.1 The columns of $A$ are orthogonal and have norms $1$ and $\varepsilon$.
-Writing $A=U\Sigma V^{\mathsf T}$ with
-$U=[e_1\ e_2]$, $V=I_2$, and the $2\times2$ matrix
-$\Sigma=\operatorname{diag}(1,\varepsilon)$ shows that the singular values are the
-diagonal entries $1$ and $\varepsilon$ of $\Sigma$. [algebra]
+1.1 The columns of $A$ are orthogonal and have norms $1$ and $\varepsilon$. Writing $A=U\Sigma V^{\mathsf T}$ with $U=[e_1\ e_2]$, $V=I_2$, and the $2\times2$ matrix $\Sigma=\operatorname{diag}(1,\varepsilon)$ shows that the singular values are the diagonal entries $1$ and $\varepsilon$ of $\Sigma$. [algebra]
 
 1.2 By [L2], Gram-Schmidt applied to the columns $a_1=(1,0,0)^{\mathsf T}$ and $a_2=(0,\varepsilon,0)^{\mathsf T}$ returns the already orthogonal unit vectors $q_1=(1,0,0)^{\mathsf T}$ and $q_2=(0,1,0)^{\mathsf T}$ after scaling by their norms. Writing $Q=[q_1\ q_2]$, one has $A=QR$ with $R=Q^{\mathsf T}A=\operatorname{diag}(1,\varepsilon)$. [L2, algebra, construct]
 

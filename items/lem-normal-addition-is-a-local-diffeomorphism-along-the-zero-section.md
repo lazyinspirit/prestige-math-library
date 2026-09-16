@@ -38,15 +38,11 @@ of the zero section.
 
 ## Facts & Assumptions
 
-**Given:** An embedded smooth submanifold $S\subseteq\mathbb R^m$ and its normal
-addition map $E$.
+**Given:** An embedded smooth submanifold $S\subseteq\mathbb R^m$ and its normal addition map $E$.
 
-[F1] The map is $E(p,v)=p+v$
-([[def-normal-addition-map-for-a-euclidean-submanifold]]).
+[F1] The map is $E(p,v)=p+v$ ([[def-normal-addition-map-for-a-euclidean-submanifold]]).
 
-[L1] A smooth map with invertible differential at a point is a local
-diffeomorphism there
-([[thm-smooth-inverse-function-theorem-on-manifolds]]).
+[L1] A smooth map with invertible differential at a point is a local diffeomorphism there ([[thm-smooth-inverse-function-theorem-on-manifolds]]).
 
 ## Proof
 **Proof technique:** direct.

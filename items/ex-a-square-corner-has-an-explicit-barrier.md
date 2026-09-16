@@ -40,9 +40,6 @@ where the branch of $z^{2/3}$ is taken on the first quadrant.
 **Proof technique:** direct.
 
 1.1 On the first quadrant one may choose the holomorphic branch of $z^{2/3}$. If $z=re^{it}$ with $0<t<\pi/2$, then [given, algebra]
-$$z^{2/3}=r^{2/3}e^{2it/3}$$
-has argument in $(0,\pi/3)$, so $\operatorname{Re}(z^{2/3})>0$. Therefore
-$b(z)=-\operatorname{Re}(z^{2/3})<0$ on $Q$ near the corner, and
-$b(z)\to0$ as $z\to0$. [given, algebra]
+$$z^{2/3}=r^{2/3}e^{2it/3}$$ has argument in $(0,\pi/3)$, so $\operatorname{Re}(z^{2/3})>0$. Therefore $b(z)=-\operatorname{Re}(z^{2/3})<0$ on $Q$ near the corner, and $b(z)\to0$ as $z\to0$. [given, algebra]
 
 2.1 On any set in the square that stays a positive distance from $0$, the quantity $\operatorname{Re}(z^{2/3})$ has a positive minimum, so $b$ stays uniformly below a negative constant there. Thus $b$ has exactly the shape required in [L2], and it is the concrete barrier predicted abstractly by [L1]. [L1, L2, step 1.1] ∎

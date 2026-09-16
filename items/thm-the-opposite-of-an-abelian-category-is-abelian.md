@@ -32,14 +32,11 @@ $\mathcal A^{\mathrm{op}}$ is also abelian.
 
 **Given:** An abelian category $\mathcal A$.
 
-[L1] An abelian category is additive and every morphism in it has a kernel and
-a cokernel ([[def-abelian-category]]).
+[L1] An abelian category is additive and every morphism in it has a kernel and a cokernel ([[def-abelian-category]]).
 
-[L2] The opposite of an additive category is additive
-([[cor-additive-categories-are-closed-under-passage-to-the-opposite]]).
+[L2] The opposite of an additive category is additive ([[cor-additive-categories-are-closed-under-passage-to-the-opposite]]).
 
-[L3] Passing to the opposite reverses every morphism while keeping the same
-objects ([[def-opposite-category]]).
+[L3] Passing to the opposite reverses every morphism while keeping the same objects ([[def-opposite-category]]).
 
 ## Proof
 

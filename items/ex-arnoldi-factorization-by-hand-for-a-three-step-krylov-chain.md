@@ -44,9 +44,7 @@ $$AQ_2=Q_3\bar H_2.$$
 
 **Given:** The matrix $A$ and start vector $v_1=e_1$.
 
-[L1] Before breakdown, Arnoldi produces an orthonormal Krylov basis and the
-factorization $AQ_m=Q_{m+1}\bar H_m$
-([[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]).
+[L1] Before breakdown, Arnoldi produces an orthonormal Krylov basis and the factorization $AQ_m=Q_{m+1}\bar H_m$ ([[thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization]]).
 
 ## Verification
 **Proof technique:** direct.

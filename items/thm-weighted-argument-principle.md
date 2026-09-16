@@ -42,20 +42,13 @@ and only finitely many terms are nonzero.
 
 ## Facts & Assumptions
 
-**Given:** An open set $\Omega$, a meromorphic function $f$ on $\Omega$, an
-admissible cycle $\Gamma$ with $f\ne0$ on $\Gamma^\ast$, and a holomorphic
-function $g$ on $\Omega$.
+**Given:** An open set $\Omega$, a meromorphic function $f$ on $\Omega$, an admissible cycle $\Gamma$ with $f\ne0$ on $\Gamma^\ast$, and a holomorphic function $g$ on $\Omega$.
 
-[L1] The logarithmic derivative has residue $m$ at a zero of order $m$ and
-residue $-m$ at a pole of order $m$
-([[lem-logarithmic-derivative-order-residue]]).
+[L1] The logarithmic derivative has residue $m$ at a zero of order $m$ and residue $-m$ at a pole of order $m$ ([[lem-logarithmic-derivative-order-residue]]).
 
-[L2] The unweighted argument principle already shows that only finitely many
-zeros and poles of $f$ have nonzero index with respect to $\Gamma$
-([[thm-argument-principle-null-homologous-cycle]]).
+[L2] The unweighted argument principle already shows that only finitely many zeros and poles of $f$ have nonzero index with respect to $\Gamma$ ([[thm-argument-principle-null-homologous-cycle]]).
 
-[L3] The residue theorem sums the indexed residues of an admissible meromorphic
-function over $\Gamma$ ([[thm-residue-theorem-null-homologous-cycle]]).
+[L3] The residue theorem sums the indexed residues of an admissible meromorphic function over $\Gamma$ ([[thm-residue-theorem-null-homologous-cycle]]).
 
 ## Proof
 

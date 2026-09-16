@@ -29,10 +29,7 @@ Let S,T be metric spaces, $g:S\to T$ measurable, and $\mu_n\Rightarrow\mu$. If t
 
 [F1] [[thm-portmanteau-theorem]]: For Borel probabilities $\mu_n,\mu$ on a metric space S, the following are equivalent: (i) $\mu_n\Rightarrow\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\limsup_n\mu_n(F)\le\mu(F)$ for every closed F; (iv) $\liminf_n\mu_n(G)\ge\mu(G)$ for every open G; (v) $\mu_n(A)\to\mu(A)$ for every Borel A with $\mu(\partial A)=0$.
 
-[F2] [[lem-laws-commute-with-measurable-maps]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, and let
-$g:(S,\Sigma)\to(T,\Tau)$ be measurable. Then $g\circ X$ is a random element and
-for every $B\in\Tau$,
-$$\mathbb P_{g\circ X}(B)=\mathbb P_X(g^{-1}(B)).$$
+[F2] [[lem-laws-commute-with-measurable-maps]]: Let $X:(\Omega,\mathcal F,\mathbb P)\to(S,\Sigma)$ be a random element, and let $g:(S,\Sigma)\to(T,\Tau)$ be measurable. Then $g\circ X$ is a random element and for every $B\in\Tau$, $$\mathbb P_{g\circ X}(B)=\mathbb P_X(g^{-1}(B)).$$
 
 ## Proof
 

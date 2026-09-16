@@ -34,14 +34,11 @@ preserve every existing finite limit. In particular, they are left exact.
 
 **Given:** A preadditive category $\mathcal C$ and an object $A$.
 
-[L1] In a preadditive category, the hom-functors take values in abelian groups
-([[thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]]).
+[L1] In a preadditive category, the hom-functors take values in abelian groups ([[thm-the-hom-bifunctor-of-a-preadditive-category-takes-values-in-abelian-groups]]).
 
-[L2] Every covariantly representable functor to $\mathbf{Set}$ preserves all
-existing small limits ([[thm-representable-functors-preserve-small-limits]]).
+[L2] Every covariantly representable functor to $\mathbf{Set}$ preserves all existing small limits ([[thm-representable-functors-preserve-small-limits]]).
 
-[L3] The opposite of a preadditive category is preadditive
-([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
+[L3] The opposite of a preadditive category is preadditive ([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
 
 ## Proof
 

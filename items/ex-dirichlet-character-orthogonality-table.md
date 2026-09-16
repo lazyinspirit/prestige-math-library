@@ -31,10 +31,7 @@ orthogonality relations and the residue-class indicator numerically.
 
 ## Facts & Assumptions
 
-**Given:** The four characters modulo $5$, the orthogonality theorem, and the
-indicator corollary ([[ex-dirichlet-characters-modulo-three-four-and-five]],
-[[thm-dirichlet-character-orthogonality]],
-[[cor-dirichlet-character-residue-class-indicator]]).
+**Given:** The four characters modulo $5$, the orthogonality theorem, and the indicator corollary ([[ex-dirichlet-characters-modulo-three-four-and-five]], [[thm-dirichlet-character-orthogonality]], [[cor-dirichlet-character-residue-class-indicator]]).
 
 ## Verification
 

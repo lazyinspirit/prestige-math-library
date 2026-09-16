@@ -35,13 +35,11 @@ action–angle coordinates.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a regular compact connected torus fibration covered by the local
-action–angle charts of Liouville–Arnold.
+**Given:** $\mathrm{AC}_\omega$, a regular compact connected torus fibration covered by the local action–angle charts of Liouville–Arnold.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[thm-liouville-arnold-action-angle-theorem]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Each local chart chooses a $\mathbb Z$-basis of the stabilizer lattice.
-[[thm-liouville-arnold-action-angle-theorem]].
+[F1] Each local chart chooses a $\mathbb Z$-basis of the stabilizer lattice. [[thm-liouville-arnold-action-angle-theorem]].
 
 ## Proof
 

@@ -37,16 +37,13 @@ $f_n\to f$ locally uniformly on $\Omega$. Then $f$ is injective or constant.
 
 ## Facts & Assumptions
 
-**Given:** A complex domain $\Omega$, injective holomorphic functions $f_n$ on
-$\Omega$, and locally uniform convergence $f_n\to f$.
+**Given:** A complex domain $\Omega$, injective holomorphic functions $f_n$ on $\Omega$, and locally uniform convergence $f_n\to f$.
 
 [L1] The limit $f$ is holomorphic ([[thm-weierstrass-convergence-holomorphic-functions]]).
 
-[L2] A nonzero holomorphic function on a complex domain has isolated zeros
-([[thm-isolated-zeros-holomorphic-function]]).
+[L2] A nonzero holomorphic function on a complex domain has isolated zeros ([[thm-isolated-zeros-holomorphic-function]]).
 
-[L3] Near an isolated zero of the limit, sufficiently late approximants preserve
-the total zero multiplicity ([[thm-continuity-of-zeros-locally-uniform-convergence]]).
+[L3] Near an isolated zero of the limit, sufficiently late approximants preserve the total zero multiplicity ([[thm-continuity-of-zeros-locally-uniform-convergence]]).
 
 ## Proof
 

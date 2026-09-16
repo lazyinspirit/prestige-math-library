@@ -39,9 +39,7 @@ is determined by its restriction to $\mathfrak h$.
 
 ## Facts & Assumptions
 
-**Given:** A complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra
-$\mathfrak h$, and an adjoint-invariant polynomial function
-$f\in S(\mathfrak g)^{\mathfrak g}$ whose restriction to $\mathfrak h$ is zero.
+**Given:** A complex semisimple Lie algebra $\mathfrak g$, a Cartan subalgebra $\mathfrak h$, and an adjoint-invariant polynomial function $f\in S(\mathfrak g)^{\mathfrak g}$ whose restriction to $\mathfrak h$ is zero.
 
 ## Proof
 

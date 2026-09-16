@@ -32,25 +32,18 @@ $$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$
 
 ## Facts & Assumptions
 
-**Given:** The Cantor measure $\mu_c$ and the restricted Lebesgue measure
-$\lambda_0$ on $[0,1]$.
+**Given:** The Cantor measure $\mu_c$ and the restricted Lebesgue measure $\lambda_0$ on $[0,1]$.
 
-[L1] The Cantor measure is a singular probability measure concentrated on the
-Cantor set $C$, and $\lambda(C)=0$. ([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
+[L1] The Cantor measure is a singular probability measure concentrated on the Cantor set $C$, and $\lambda(C)=0$. ([[prop-cantor-measure-is-a-singular-atomless-probability-measure]])
 
-[L2] Jordan decomposition is the unique decomposition of a signed measure into
-mutually singular positive parts. ([[thm-jordan-decomposition-for-signed-measures]])
+[L2] Jordan decomposition is the unique decomposition of a signed measure into mutually singular positive parts. ([[thm-jordan-decomposition-for-signed-measures]])
 
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 By [L1], $\mu_c$ vanishes on measurable subsets of $\mathbb R\setminus C$, [L1, L2]
-while $\lambda_0$ vanishes on measurable subsets of $C$ because $\lambda(C)=0$.
-Thus $\mu_c\perp\lambda_0$. Both are positive measures, so
-$\nu=\mu_c-\lambda_0$ is a signed measure already written as a difference of
-mutually singular positive measures.
+while $\lambda_0$ vanishes on measurable subsets of $C$ because $\lambda(C)=0$. Thus $\mu_c\perp\lambda_0$. Both are positive measures, so $\nu=\mu_c-\lambda_0$ is a signed measure already written as a difference of mutually singular positive measures.
 
 2.1 The uniqueness clause in [L2] now forces [L2, step 1.1] ∎
-$$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$
-Hence $\mu_c-\lambda_0$ is already in Jordan form.
+$$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$ Hence $\mu_c-\lambda_0$ is already in Jordan form.

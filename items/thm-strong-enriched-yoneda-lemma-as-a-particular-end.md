@@ -42,26 +42,15 @@ end or the whole enriched functor category exists.
 
 ## Facts & Assumptions
 
-**Given:** A symmetric monoidal right-closed locally small base $\mathcal V$
-whose collection of objects is a set, a small $\mathcal V$-category
-$\mathcal A$, an object $K$, and a $\mathcal V$-functor
-$F:\mathcal A\to\mathcal V$.
+**Given:** A symmetric monoidal right-closed locally small base $\mathcal V$ whose collection of objects is a set, a small $\mathcal V$-category $\mathcal A$, an object $K$, and a $\mathcal V$-functor $F:\mathcal A\to\mathcal V$.
 
-[L1] The weak enriched Yoneda lemma gives natural bijections
-$\operatorname{Nat}_{\mathcal V}(\mathcal A(K,-),G)\cong\mathcal V(\mathbf 1,GK)$
-for every $\mathcal V$-functor $G:\mathcal A\to\mathcal V$
-([[thm-weak-enriched-yoneda-lemma]]).
+[L1] The weak enriched Yoneda lemma gives natural bijections $\operatorname{Nat}_{\mathcal V}(\mathcal A(K,-),G)\cong\mathcal V(\mathbf 1,GK)$ for every $\mathcal V$-functor $G:\mathcal A\to\mathcal V$ ([[thm-weak-enriched-yoneda-lemma]]).
 
-[L2] In a right-closed base, a morphism $X\to[Y,Z]$ is equivalent to a morphism
-$X\otimes Y\to Z$, and global elements of $[Y,Z]$ are morphisms $Y\to Z$
-([[def-the-internal-hom-and-its-evaluation-morphism]], [[thm-the-unit-is-an-internal-hom-unit]]).
+[L2] In a right-closed base, a morphism $X\to[Y,Z]$ is equivalent to a morphism $X\otimes Y\to Z$, and global elements of $[Y,Z]$ are morphisms $Y\to Z$ ([[def-the-internal-hom-and-its-evaluation-morphism]], [[thm-the-unit-is-an-internal-hom-unit]]).
 
-[L3] An enriched end is an object representing enriched wedges, whose
-dinaturality equations use the hom-objects of the enriching category rather
-than only the arrows of its underlying ordinary category.
+[L3] An enriched end is an object representing enriched wedges, whose dinaturality equations use the hom-objects of the enriching category rather than only the arrows of its underlying ordinary category.
 
-[L4] The base $\mathcal V$ is a $\mathcal V$-category under its internal homs
-([[thm-a-closed-monoidal-category-is-enriched-in-itself]]).
+[L4] The base $\mathcal V$ is a $\mathcal V$-category under its internal homs ([[thm-a-closed-monoidal-category-is-enriched-in-itself]]).
 
 ## Proof
 

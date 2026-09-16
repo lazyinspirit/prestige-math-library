@@ -47,8 +47,7 @@ $$\nu_s(A)=\int_A s\,d\mu=\sum_{j=1}^m c_j\mu(A\cap E_j).$$
 
 
 2.1 Step 1.1 gives $\nu_s(\varnothing)=0$. If $(A_n)$ is a pairwise disjoint[step 1.1, L2, L3, algebra]
-measurable sequence, then each $(A_n\cap E_j)$ is pairwise disjoint, so
-$$\nu_s\!\left(\bigcup_n A_n\right)=\sum_{j=1}^m c_j\mu\!\left(\bigcup_n(A_n\cap E_j)\right) =\sum_{j=1}^m c_j\sum_n\mu(A_n\cap E_j)=\sum_n\nu_s(A_n).$$
+measurable sequence, then each $(A_n\cap E_j)$ is pairwise disjoint, so $$\nu_s\!\left(\bigcup_n A_n\right)=\sum_{j=1}^m c_j\mu\!\left(\bigcup_n(A_n\cap E_j)\right) =\sum_{j=1}^m c_j\sum_n\mu(A_n\cap E_j)=\sum_n\nu_s(A_n).$$
 
 
 3.1 Therefore $\nu_s$ satisfies the two conditions in [L3], so it is a [step 2.1, L3] ∎

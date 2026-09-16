@@ -42,8 +42,7 @@ $$A=QR,\qquad Q=H,\qquad R=HA=\begin{pmatrix}\sqrt2&0\\0&\sqrt2\end{pmatrix}.$$
 
 **Given:** The displayed matrix $A$, vector $v$, and reflector $H$.
 
-[L1] Successive Householder reflectors produce QR factorisations
-([[thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts]]).
+[L1] Successive Householder reflectors produce QR factorisations ([[thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts]]).
 
 ## Verification
 

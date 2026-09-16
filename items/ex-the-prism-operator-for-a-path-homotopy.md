@@ -40,18 +40,13 @@ chains.
 
 ## Facts & Assumptions
 
-**Given:** A path homotopy $H:I\times I\to X$ rel $\{0,1\}$ from $\alpha$ to
-$\beta$.
+**Given:** A path homotopy $H:I\times I\to X$ rel $\{0,1\}$ from $\alpha$ to $\beta$.
 
-[L1] A path homotopy rel $\{0,1\}$ keeps the two endpoint tracks constant
-([[def-homotopy-relative-and-path-homotopy]]).
+[L1] A path homotopy rel $\{0,1\}$ keeps the two endpoint tracks constant ([[def-homotopy-relative-and-path-homotopy]]).
 
-[L2] The prism operator is built by triangulating $\Delta^1\times I$ into two
-oriented $2$-simplices ([[def-prism-operator-for-a-homotopy]]).
+[L2] The prism operator is built by triangulating $\Delta^1\times I$ into two oriented $2$-simplices ([[def-prism-operator-for-a-homotopy]]).
 
-[L3] The prism operator satisfies
-$$g_\#-f_\#=\partial P_H+P_H\partial$$
-([[thm-singular-chain-homotopy-formula]]).
+[L3] The prism operator satisfies $$g_\#-f_\#=\partial P_H+P_H\partial$$ ([[thm-singular-chain-homotopy-formula]]).
 
 ## Verification
 

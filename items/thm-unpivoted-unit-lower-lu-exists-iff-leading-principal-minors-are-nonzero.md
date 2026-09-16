@@ -40,14 +40,11 @@ invertible.
 
 **Given:** A field $F$, a natural number $n\ge 1$, and a matrix $A\in M_n(F)$.
 
-[L1] A normalised LU factorisation is $A=LU$ with $L$ unit lower triangular and
-$U$ upper triangular ([[def-normalised-lu-factorisation]]).
+[L1] A normalised LU factorisation is $A=LU$ with $L$ unit lower triangular and $U$ upper triangular ([[def-normalised-lu-factorisation]]).
 
-[L2] An invertible leading block gives the block LU factorisation through its
-Schur complement ([[thm-block-lu-factorisation-via-an-invertible-leading-block]]).
+[L2] An invertible leading block gives the block LU factorisation through its Schur complement ([[thm-block-lu-factorisation-via-an-invertible-leading-block]]).
 
-[L3] The determinant of a triangular matrix is the product of its diagonal
-entries ([[thm-determinant-of-a-triangular-matrix]]).
+[L3] The determinant of a triangular matrix is the product of its diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
 
 [L4] Determinants are multiplicative ([[thm-determinant-multiplicative]]).
 

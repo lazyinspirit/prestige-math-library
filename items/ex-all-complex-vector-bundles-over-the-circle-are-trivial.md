@@ -32,10 +32,7 @@ rank-zero bundle. This contrasts with the nontrivial Möbius real line bundle.
 
 **Given:** a rank-$n$ complex vector bundle $E\to S^1$, where $n\geq0$.
 
-[F1] Clutching over $S^1$ represents $E$ by a map
-$g:S^0\to\operatorname{GL}_n(\mathbb C)$, and homotopic clutching maps give
-isomorphic bundles
-([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
+[F1] Clutching over $S^1$ represents $E$ by a map $g:S^0\to\operatorname{GL}_n(\mathbb C)$, and homotopic clutching maps give isomorphic bundles ([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
 
 ## Verification
 

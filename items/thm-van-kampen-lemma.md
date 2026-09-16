@@ -33,15 +33,11 @@ finite van Kampen diagram over $\langle X\mid R\rangle$.
 
 ## Facts & Assumptions
 
-**Given:** A presentation $G=\langle X\mid R\rangle$ and a word $w$ on
-$X^{\pm1}$.
+**Given:** A presentation $G=\langle X\mid R\rangle$ and a word $w$ on $X^{\pm1}$.
 
-[L1] The boundary label of every van Kampen diagram is trivial in the presented
-group ([[lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group]]).
+[L1] The boundary label of every van Kampen diagram is trivial in the presented group ([[lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group]]).
 
-[F1] A word lies in the normal closure of $R$ exactly when it is a finite
-product of conjugates of relators and their inverses
-([[prop-normal-closure-is-products-of-conjugates]]).
+[F1] A word lies in the normal closure of $R$ exactly when it is a finite product of conjugates of relators and their inverses ([[prop-normal-closure-is-products-of-conjugates]]).
 
 ## Proof
 

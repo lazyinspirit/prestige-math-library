@@ -38,15 +38,11 @@ $$L_n^PF(A)\to L_n^PF(B).$$
 This is what makes the left derived map well defined.
 ## Facts & Assumptions
 
-**Given:** The supplied datum $P$, additive functor $F$, morphism $u:A\to B$
-with $A,B\in\mathcal D$, and two comparison lifts
-$\widetilde u_\bullet,\widehat u_\bullet$.
+**Given:** The supplied datum $P$, additive functor $F$, morphism $u:A\to B$ with $A,B\in\mathcal D$, and two comparison lifts $\widetilde u_\bullet,\widehat u_\bullet$.
 
-[L1] Two comparison maps lifting the same morphism are chain-homotopic
-([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
+[L1] Two comparison maps lifting the same morphism are chain-homotopic ([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]]).
 
-[L2] The induced homology map is independent of the chosen comparison lift
-([[lem-the-induced-homology-map-is-independent-of-the-comparison-lift]]).
+[L2] The induced homology map is independent of the chosen comparison lift ([[lem-the-induced-homology-map-is-independent-of-the-comparison-lift]]).
 
 ## Verification
 

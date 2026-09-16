@@ -34,8 +34,7 @@ Every nonamenable group contains a free subgroup of rank $2$.
 
 **Given:** The false claim above.
 
-[L1] There exist nonamenable groups without nonabelian free subgroups
-([[rem-nonamenable-groups-without-nonabelian-free-subgroups]]).
+[L1] There exist nonamenable groups without nonabelian free subgroups ([[rem-nonamenable-groups-without-nonabelian-free-subgroups]]).
 
 ## Refutation
 

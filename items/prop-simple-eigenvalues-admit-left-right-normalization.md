@@ -31,12 +31,9 @@ $$y^\ast x=1.$$
 
 ## Facts & Assumptions
 
-**Given:** A simple eigenvalue $\lambda$ of $A$ and compatible nonzero vectors
-$x,y$ with $Ax=\lambda x$ and $y^\ast A=\lambda y^\ast$.
+**Given:** A simple eigenvalue $\lambda$ of $A$ and compatible nonzero vectors $x,y$ with $Ax=\lambda x$ and $y^\ast A=\lambda y^\ast$.
 
-[F1] Compatible left and right eigenvectors for a simple eigenvalue satisfy the
-displayed equations above
-([[def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue]]).
+[F1] Compatible left and right eigenvectors for a simple eigenvalue satisfy the displayed equations above ([[def-compatible-left-and-right-eigenvectors-for-a-simple-eigenvalue]]).
 
 ## Proof
 **Proof technique:** direct.

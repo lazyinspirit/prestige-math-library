@@ -33,11 +33,9 @@ zero.
 
 **Given:** A morphism $f:A\to B$ in a preadditive category with a zero object.
 
-[L1] In this setting, monicity is equivalent to zero kernel
-([[thm-in-a-preadditive-category-with-a-zero-object-a-morphism-is-monic-exactly-when-its-kernel-is-zero]]).
+[L1] In this setting, monicity is equivalent to zero kernel ([[thm-in-a-preadditive-category-with-a-zero-object-a-morphism-is-monic-exactly-when-its-kernel-is-zero]]).
 
-[L2] The opposite of a preadditive category is preadditive
-([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
+[L2] The opposite of a preadditive category is preadditive ([[thm-the-opposite-of-a-preadditive-category-is-preadditive]]).
 
 ## Proof
 

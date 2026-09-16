@@ -33,8 +33,7 @@ to a unique idempotent $e \in A$.
 
 **Given:** A Henselian pair $(A,I)$ and an idempotent $\overline e \in A/I$.
 
-[L1] In a Henselian pair, coprime monic factorizations lift uniquely
-([[def-henselian-pair-and-henselian-local-ring]]).
+[L1] In a Henselian pair, coprime monic factorizations lift uniquely ([[def-henselian-pair-and-henselian-local-ring]]).
 
 ## Proof
 

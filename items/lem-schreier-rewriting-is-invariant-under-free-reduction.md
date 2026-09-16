@@ -37,9 +37,7 @@ In particular, the two rewrites represent the same element of the subgroup.
 
 ## Facts & Assumptions
 
-**Given:** A free group $F(X)$, a subgroup $H\le F(X)$, a Schreier system
-$\mathcal T$, its rewriting map $\tau$, and freely equivalent words $u$ and $v$
-on $X\sqcup X^{-1}$.
+**Given:** A free group $F(X)$, a subgroup $H\le F(X)$, a Schreier system $\mathcal T$, its rewriting map $\tau$, and freely equivalent words $u$ and $v$ on $X\sqcup X^{-1}$.
 
 [L1] Elementary cancellations delete adjacent inverse pairs $aa^{-1}$ or $a^{-1}a$ ([[def-alphabet-words-and-reduction]]).
 

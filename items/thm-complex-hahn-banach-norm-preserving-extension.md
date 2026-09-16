@@ -37,18 +37,13 @@ $F|_M=f_0$ and $\|F\|=\|f_0\|$.
 
 ## Facts & Assumptions
 
-**Given:** A complex normed space $X$, a linear subspace $M \subseteq X$, and a
-bounded complex linear functional $f_0:M \to \mathbb{C}$.
+**Given:** A complex normed space $X$, a linear subspace $M \subseteq X$, and a bounded complex linear functional $f_0:M \to \mathbb{C}$.
 
-[L1] A bounded real linear functional on a real normed subspace extends with the
-same norm ([[thm-hahn-banach-norm-preserving-extension]]).
+[L1] A bounded real linear functional on a real normed subspace extends with the same norm ([[thm-hahn-banach-norm-preserving-extension]]).
 
-[L2] A complex linear functional is recovered from its real part by
-$f(x)=u(x)-iu(ix)$, and conversely every such formula defines a complex linear
-functional ([[lem-real-part-determines-a-complex-linear-functional]]).
+[L2] A complex linear functional is recovered from its real part by $f(x)=u(x)-iu(ix)$, and conversely every such formula defines a complex linear functional ([[lem-real-part-determines-a-complex-linear-functional]]).
 
-[L3] The complex case uses the scalar convention from
-[[rem-real-and-complex-normed-space-convention]].
+[L3] The complex case uses the scalar convention from [[rem-real-and-complex-normed-space-convention]].
 
 ## Proof
 

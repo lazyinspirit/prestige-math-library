@@ -29,19 +29,13 @@ sign from the shifted summand.
 
 ## Facts & Assumptions
 
-**Given:** The identity map $1_C$ on the two-term complex
-$$0\to \mathbb Z\xrightarrow{1}\mathbb Z\to0,$$
-placed in degrees $1$ and $0$.
+**Given:** The identity map $1_C$ on the two-term complex $$0\to \mathbb Z\xrightarrow{1}\mathbb Z\to0,$$ placed in degrees $1$ and $0$.
 
-[A1] The statement refuted is: the mapping-cone differential still squares to
-zero if one removes the minus sign from the shifted summand.
+[A1] The statement refuted is: the mapping-cone differential still squares to zero if one removes the minus sign from the shifted summand.
 
-[L1] With the minus sign present, the mapping-cone differential squares to zero
-([[lem-the-mapping-cone-differential-squares-to-zero]]).
+[L1] With the minus sign present, the mapping-cone differential squares to zero ([[lem-the-mapping-cone-differential-squares-to-zero]]).
 
-[L2] The actual cone differential is
-$$d(y,x)=(d(y)+f(x),-d(x))$$
-([[def-mapping-cone-of-a-chain-map]]).
+[L2] The actual cone differential is $$d(y,x)=(d(y)+f(x),-d(x))$$ ([[def-mapping-cone-of-a-chain-map]]).
 
 ## Refutation
 

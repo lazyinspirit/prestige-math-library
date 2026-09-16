@@ -31,22 +31,13 @@ so the density recovered from $F$ is $2x\,\chi_{[0,1]}(x)$.
 
 **Given:** The piecewise-quadratic distribution function $F$ above.
 
-[L1] A nondecreasing right-continuous function on $\mathbb R$ defines a
-Lebesgue--Stieltjes measure. Two Borel measures finite on compact sets and
-agreeing on all half-open intervals are equal
-([[thm-existence-of-the-lebesgue-stieltjes-measure]],
-[[thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]]).
+[L1] A nondecreasing right-continuous function on $\mathbb R$ defines a Lebesgue--Stieltjes measure. Two Borel measures finite on compact sets and agreeing on all half-open intervals are equal ([[thm-existence-of-the-lebesgue-stieltjes-measure]], [[thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r]]).
 
-[L3] A nonnegative measurable density defines a measure
-([[def-measure-with-density]]).
+[L3] A nonnegative measurable density defines a measure ([[def-measure-with-density]]).
 
-[L2] For an absolutely continuous signed measure and a sigma-finite positive
-base satisfying a common finite exhaustion, a Radon--Nikodym derivative is
-represented by a measurable function whose measurable-set integrals recover
-the measure ([[def-radon-nikodym-derivative]]).
+[L2] For an absolutely continuous signed measure and a sigma-finite positive base satisfying a common finite exhaustion, a Radon--Nikodym derivative is represented by a measurable function whose measurable-set integrals recover the measure ([[def-radon-nikodym-derivative]]).
 
-[L4] Integrals over null sets vanish
-([[cor-integral-over-a-null-set-vanishes]]).
+[L4] Integrals over null sets vanish ([[cor-integral-over-a-null-set-vanishes]]).
 
 ## Verification
 

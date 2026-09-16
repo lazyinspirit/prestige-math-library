@@ -35,11 +35,9 @@ apex is initial.
 
 **Given:** A category $\mathcal C$ and its identity diagram.
 
-[F1] Completeness concerns all small diagrams and makes no assertion about a
-large identity diagram ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] Completeness concerns all small diagrams and makes no assertion about a large identity diagram ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
-[F2] An initial object $I$ has exactly one morphism $I\to C$ for every object
-$C$ ([[def-initial-terminal-and-zero-object]]).
+[F2] An initial object $I$ has exactly one morphism $I\to C$ for every object $C$ ([[def-initial-terminal-and-zero-object]]).
 
 ## Proof
 

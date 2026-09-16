@@ -33,11 +33,9 @@ summands is unique up to isomorphism and permutation.
 
 **Given:** A finite-dimensional left module $M$ over a finite-dimensional algebra.
 
-[F1] A composition series is a finite chain of simple factors
-([[def-composition-series-and-length-of-a-module]]).
+[F1] A composition series is a finite chain of simple factors ([[def-composition-series-and-length-of-a-module]]).
 
-[L1] Finite-dimensional modules have finite length
-([[thm-composition-series-iff-noetherian-and-artinian]]).
+[L1] Finite-dimensional modules have finite length ([[thm-composition-series-iff-noetherian-and-artinian]]).
 
 ## Proof
 

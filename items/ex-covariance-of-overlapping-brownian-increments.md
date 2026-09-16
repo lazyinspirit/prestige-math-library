@@ -58,7 +58,4 @@ zero.
 
 ## Source notes
 
-Durrett, Section 7.1, printed p. 355, derives
-$\mathbb E[B_sB_t]=s\wedge t$ for $s<t$ from independent increments. The
-four-term overlap calculation and its complete endpoint case split are given
-above.
+Durrett, Section 7.1, printed p. 355, derives $\mathbb E[B_sB_t]=s\wedge t$ for $s<t$ from independent increments. The four-term overlap calculation and its complete endpoint case split are given above.

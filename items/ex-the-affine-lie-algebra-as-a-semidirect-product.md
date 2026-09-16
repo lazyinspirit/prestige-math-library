@@ -32,11 +32,9 @@ $$[(A,u),(B,v)]=([A,B],Av-Bu).$$
 
 ## Facts & Assumptions
 
-**Given:** A vector space $V$, with $\mathfrak{gl}(V)$ acting on the abelian
-Lie algebra $V$ by evaluation.
+**Given:** A vector space $V$, with $\mathfrak{gl}(V)$ acting on the abelian Lie algebra $V$ by evaluation.
 
-[L1] The semidirect bracket is that of
-[[def-semidirect-product-of-lie-algebras]].
+[L1] The semidirect bracket is that of [[def-semidirect-product-of-lie-algebras]].
 
 ## Verification
 

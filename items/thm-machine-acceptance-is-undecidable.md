@@ -32,9 +32,7 @@ decidable.
 
 [L1] A language is decidable exactly when some deterministic Turing machine halts on every input and answers membership correctly, by [[def-decidable-and-recognizable-language]].
 
-[L2] If a deterministic Turing machine $H$ decides $A_{TM}$, then there exists a deterministic one-tape machine $D_H$ with input alphabet $\Sigma_2$ such that, for every coded machine $M$ whose input alphabet contains $\Sigma_2$,
-$$ D_H \text{ accepts } \overline{\ulcorner M\urcorner}\iff M \text{ does not accept } \overline{\ulcorner M\urcorner}, $$
-by [[lem-diagonal-self-application-machine]].
+[L2] If a deterministic Turing machine $H$ decides $A_{TM}$, then there exists a deterministic one-tape machine $D_H$ with input alphabet $\Sigma_2$ such that, for every coded machine $M$ whose input alphabet contains $\Sigma_2$, $$ D_H \text{ accepts } \overline{\ulcorner M\urcorner}\iff M \text{ does not accept } \overline{\ulcorner M\urcorner}, $$ by [[lem-diagonal-self-application-machine]].
 
 [L3] Every coded deterministic one-tape machine has one definite chosen code $\ulcorner M\urcorner$, by [[def-effective-encoding-of-turing-machines]].
 

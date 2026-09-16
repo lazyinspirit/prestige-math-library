@@ -30,12 +30,9 @@ $$H_0(\mathbb Z,\mathbb Z;\times m)\cong \mathbb Z/m\mathbb Z,\qquad H_n(\mathbb
 
 **Given:** A nonzero integer $m$.
 
-[L1] Relative homology is the homology of the mapping cone
-([[def-relative-homology-of-a-chain-map]]).
+[L1] Relative homology is the homology of the mapping cone ([[def-relative-homology-of-a-chain-map]]).
 
-[L2] The cone of multiplication by $m$ on $\mathbb Z[0]$ has homology
-$H_0\cong\mathbb Z/m\mathbb Z$ and $H_n=0$ for $n\neq0$
-([[ex-the-cone-of-multiplication-by-m-on-the-integers]]).
+[L2] The cone of multiplication by $m$ on $\mathbb Z[0]$ has homology $H_0\cong\mathbb Z/m\mathbb Z$ and $H_n=0$ for $n\neq0$ ([[ex-the-cone-of-multiplication-by-m-on-the-integers]]).
 
 ## Verification
 

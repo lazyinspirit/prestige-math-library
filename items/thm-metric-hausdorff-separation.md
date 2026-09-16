@@ -73,15 +73,6 @@ distinct points are separated by disjoint open sets
 
 ## Remarks
 
-- **This is a strengthening of uniqueness of limits.** A sequence converging to
-  two distinct points would eventually be inside both $B(p,r)$ and $B(q,r)$,
-  which the theorem forbids; that is a second route to
-  [[lem-metric-limits-unique]], and the two proofs use the same halving.
-- **Separation (M1) is what the proof spends.** A pseudometric
-  ([[def-metric-space]]) with $d(p,q) = 0$ for distinct $p, q$ gives $r = 0$ at
-  step 1.1 and there is no ball to speak of; such a space is not Hausdorff, and
-  no argument repairs that.
-- **The radius $d(p,q)/2$ is not the only choice**, and it is not optimal in
-  every space: in an ultrametric space ([[def-metric-space]]) the balls
-  $B(p,c)$ and $B(q,c)$ are already disjoint, because a common point would force
-  $d(p,q) \le \max\{d(p,z), d(z,q)\} < c$.
+- **This is a strengthening of uniqueness of limits.** A sequence converging to two distinct points would eventually be inside both $B(p,r)$ and $B(q,r)$, which the theorem forbids; that is a second route to [[lem-metric-limits-unique]], and the two proofs use the same halving.
+- **Separation (M1) is what the proof spends.** A pseudometric ([[def-metric-space]]) with $d(p,q) = 0$ for distinct $p, q$ gives $r = 0$ at step 1.1 and there is no ball to speak of; such a space is not Hausdorff, and no argument repairs that.
+- **The radius $d(p,q)/2$ is not the only choice**, and it is not optimal in every space: in an ultrametric space ([[def-metric-space]]) the balls $B(p,c)$ and $B(q,c)$ are already disjoint, because a common point would force $d(p,q) \le \max\{d(p,z), d(z,q)\} < c$.

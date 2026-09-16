@@ -39,12 +39,9 @@ epimorphism-monomorphism factorization of $f$.
 
 **Given:** A module homomorphism $f:M\to N$.
 
-[L1] Modules over a ring form an abelian category
-([[thm-modules-over-a-ring-form-an-abelian-category]]).
+[L1] Modules over a ring form an abelian category ([[thm-modules-over-a-ring-form-an-abelian-category]]).
 
-[L2] The first isomorphism theorem for modules identifies $M/\ker(f)$ with
-$\operatorname{im}(f)$
-([[thm-first-isomorphism-theorem-modules]]).
+[L2] The first isomorphism theorem for modules identifies $M/\ker(f)$ with $\operatorname{im}(f)$ ([[thm-first-isomorphism-theorem-modules]]).
 
 ## Verification
 

@@ -65,18 +65,8 @@ subspaces is a linear subspace.
 
 ## Remarks
 
-- **The hypothesis that $\mathcal{W}$ is nonempty is load bearing.** The
-  intersection of the empty family of subsets of $V$ is not a subset of $V$ by
-  any convention used here, and step 1.1 is where the hypothesis is spent. The
-  same hypothesis appears for the same reason in
-  [[lem-intersection-of-subgroups]].
+- **The hypothesis that $\mathcal{W}$ is nonempty is load bearing.** The intersection of the empty family of subsets of $V$ is not a subset of $V$ by any convention used here, and step 1.1 is where the hypothesis is spent. The same hypothesis appears for the same reason in [[lem-intersection-of-subgroups]].
 
-- **This is what makes the span definable.** The set of linear subspaces of $V$
-  containing a given subset $S$ is nonempty, since $V$ itself belongs to it, so
-  its intersection is a linear subspace, and it is by construction the smallest
-  linear subspace containing $S$. That is [[def-linear-combination-and-span]], and
-  the pattern is copied from [[def-generated-subgroup]].
+- **This is what makes the span definable.** The set of linear subspaces of $V$ containing a given subset $S$ is nonempty, since $V$ itself belongs to it, so its intersection is a linear subspace, and it is by construction the smallest linear subspace containing $S$. That is [[def-linear-combination-and-span]], and the pattern is copied from [[def-generated-subgroup]].
 
-- **Unions behave quite differently.** The union of two linear subspaces is almost
-  never a linear subspace, and the companion examples page records the failure as
-  a false statement.
+- **Unions behave quite differently.** The union of two linear subspaces is almost never a linear subspace, and the companion examples page records the failure as a false statement.

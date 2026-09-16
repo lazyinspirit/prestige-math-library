@@ -27,8 +27,7 @@ naturally in $R$.
 
 **Given:** A commutative ring $k$ and a $k$-algebra $R$.
 
-[F1] A $k$-algebra homomorphism from $k[t]$ is uniquely determined by the image
-of $t$ ([[thm-universal-property-of-a-polynomial-ring]]).
+[F1] A $k$-algebra homomorphism from $k[t]$ is uniquely determined by the image of $t$ ([[thm-universal-property-of-a-polynomial-ring]]).
 
 ## Verification
 

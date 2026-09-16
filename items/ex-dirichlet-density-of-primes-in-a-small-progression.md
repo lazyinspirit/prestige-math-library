@@ -30,8 +30,7 @@ Dirichlet density $1/2$ among the primes.
 
 ## Facts & Assumptions
 
-**Given:** The residue-class Dirichlet-density theorem
-([[thm-primes-residue-class-dirichlet-density]]).
+**Given:** The residue-class Dirichlet-density theorem ([[thm-primes-residue-class-dirichlet-density]]).
 
 ## Verification
 

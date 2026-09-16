@@ -33,18 +33,13 @@ Lie algebra.
 
 ## Facts & Assumptions
 
-**Given:** The upper-unitriangular real $3$-by-$3$ matrix group and
-$X=E_{01}$, $Y=E_{12}$.
+**Given:** The upper-unitriangular real $3$-by-$3$ matrix group and $X=E_{01}$, $Y=E_{12}$.
 
-[F1] Matrix units have their standard entries, and the row-by-column product
-therefore gives $E_{ij}E_{kl}=\delta_{jk}E_{il}$.
-[[def-matrix-units]]. [[def-matrix-product-and-identity-matrix]].
+[F1] Matrix units have their standard entries, and the row-by-column product therefore gives $E_{ij}E_{kl}=\delta_{jk}E_{il}$. [[def-matrix-units]]. [[def-matrix-product-and-identity-matrix]].
 
-[F2] Matrix multiplication and the identity matrix have their usual entrywise
-meaning. [[def-matrix-product-and-identity-matrix]].
+[F2] Matrix multiplication and the identity matrix have their usual entrywise meaning. [[def-matrix-product-and-identity-matrix]].
 
-[F3] The scalar exponential series converges absolutely.
-[[lem-exponential-series-has-infinite-radius]].
+[F3] The scalar exponential series converges absolutely. [[lem-exponential-series-has-infinite-radius]].
 
 ## Refutation
 

@@ -37,9 +37,7 @@ even number of $1$'s.
 
 **Given:** The parity DFA just described.
 
-[L1] By [[prop-every-dfa-is-an-nfa]], every DFA can be viewed as an NFA by
-replacing each one-letter transition by a singleton transition set and adding
-no $\varepsilon$-moves.
+[L1] By [[prop-every-dfa-is-an-nfa]], every DFA can be viewed as an NFA by replacing each one-letter transition by a singleton transition set and adding no $\varepsilon$-moves.
 
 ## Verification
 

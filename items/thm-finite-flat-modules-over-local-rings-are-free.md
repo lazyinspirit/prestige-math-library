@@ -32,17 +32,13 @@ $R$-module. Then $M$ is free.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian local ring $(R,\mathfrak m)$ and a finite flat
-$R$-module $M$.
+**Given:** A Noetherian local ring $(R,\mathfrak m)$ and a finite flat $R$-module $M$.
 
-[L1] If lifts of residue classes generate $M/\mathfrak mM$, they generate $M$
-([[cor-nakayama-generators-modulo-an-ideal]]).
+[L1] If lifts of residue classes generate $M/\mathfrak mM$, they generate $M$ ([[cor-nakayama-generators-modulo-an-ideal]]).
 
-[L2] The equational criterion characterizes flatness by lifting finite relations
-([[thm-equational-criterion-for-flatness]]).
+[L2] The equational criterion characterizes flatness by lifting finite relations ([[thm-equational-criterion-for-flatness]]).
 
-[L3] Over a Noetherian ring, finite modules are finitely presented
-([[thm-finite-generation-and-finite-presentation-over-a-noetherian-ring]]).
+[L3] Over a Noetherian ring, finite modules are finitely presented ([[thm-finite-generation-and-finite-presentation-over-a-noetherian-ring]]).
 
 ## Proof
 

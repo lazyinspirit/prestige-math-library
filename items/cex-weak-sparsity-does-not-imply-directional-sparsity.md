@@ -35,8 +35,7 @@ $c$-sparse to $Y$.
 
 ## Facts & Assumptions
 
-**Given:** $X=\{x_1,x_2\}$, $Y=\{y_1,y_2\}$, $c=\tfrac12$, and the edges
-$x_1y_1,x_1y_2$ only.
+**Given:** $X=\{x_1,x_2\}$, $Y=\{y_1,y_2\}$, $c=\tfrac12$, and the edges $x_1y_1,x_1y_2$ only.
 
 ## Counterexample
 

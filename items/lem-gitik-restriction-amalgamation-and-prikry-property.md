@@ -58,34 +58,21 @@ supports.
 
 ## Facts & Assumptions
 
-**Given:** The ground model and Gitik forcing of
-[[def-gitik-strongly-compact-filter-system-and-class-forcing]], a finite
-$\operatorname{cf}'$-closed support $a$, and a strongly compact cutoff
-$\kappa$.
+**Given:** The ground model and Gitik forcing of [[def-gitik-strongly-compact-filter-system-and-class-forcing]], a finite $\operatorname{cf}'$-closed support $a$, and a strongly compact cutoff $\kappa$.
 
-[F1] [[def-gitik-strongly-compact-filter-system-and-class-forcing]]: The ten
-tree clauses give measure-one successor sets, predecessor closure, compatible
-small-coordinate unions, restrictions, support extensions and tree shrinking.
+[F1] [[def-gitik-strongly-compact-filter-system-and-class-forcing]]: The ten tree clauses give measure-one successor sets, predecessor closure, compatible small-coordinate unions, restrictions, support extensions and tree shrinking.
 
-[F2] [[cor-lc-large-cardinal-implication-ledger]]: Every strongly compact
-cardinal is inaccessible.
+[F2] [[cor-lc-large-cardinal-implication-ledger]]: Every strongly compact cardinal is inaccessible.
 
-[F3] [[cor-cardinal-absorption]]: Finite products and sums of infinite
-cardinals below an infinite cardinal remain bounded by it.
+[F3] [[cor-cardinal-absorption]]: Finite products and sums of infinite cardinals below an infinite cardinal remain bounded by it.
 
-[F4] [[lem-forcing-monotonicity-density-and-decision]]: Decision conditions are
-dense, decisions persist downward, and a formula forced densely below a
-condition is forced there.
+[F4] [[lem-forcing-monotonicity-density-and-decision]]: Decision conditions are dense, decisions persist downward, and a formula forced densely below a condition is forced there.
 
-[F5] [[thm-forcing-theorem]]: Set forcing is definable and satisfies truth in
-the lower set-sized extension.
+[F5] [[thm-forcing-theorem]]: Set forcing is definable and satisfies truth in the lower set-sized extension.
 
-[F6] [[def-kappa-closure-distributivity-and-chain-condition]]: The
-$\kappa$-closed order is the order in which every descending sequence of length
-below $\kappa$ has a common lower bound.
+[F6] [[def-kappa-closure-distributivity-and-chain-condition]]: The $\kappa$-closed order is the order in which every descending sequence of length below $\kappa$ has a common lower bound.
 
-[F7] [[def-axiom-of-choice]]: AC selects the simultaneous tree prunings,
-maximal antichains and deciding refinements used below.
+[F7] [[def-axiom-of-choice]]: AC selects the simultaneous tree prunings, maximal antichains and deciding refinements used below.
 
 ## Proof
 
@@ -105,6 +92,4 @@ maximal antichains and deciding refinements used below.
 
 7.1 Let $\gamma<\kappa$ and suppose a tail condition forces $\dot x\subseteq\gamma$. Recursively apply step 6.1 to decide each statement ``$\xi\in\dot x$'' by a fixed-trunk refinement. At limit stages below $\gamma$, and once more at the end, use the direct $\kappa$-closure from step 5.1. The final condition decides all memberships; Separation in the lower extension forms the corresponding set $x\subseteq\gamma$, and F4 gives that the condition forces $\dot x=\check x$. This includes $\gamma=0$ (the original condition and the empty set) and proves that $Q$ adds no bounded subsets below its completeness bound. [F4, F7, step 5.1, step 6.1] ∎
 
-Normality is absent from the proof: the backward finite colouring uses only
-ultrafilterhood, and the simultaneous pruning uses completeness. This is why
-the ordinary normal-measure Rowbottom lemma is not a dependency.
+Normality is absent from the proof: the backward finite colouring uses only ultrafilterhood, and the simultaneous pruning uses completeness. This is why the ordinary normal-measure Rowbottom lemma is not a dependency.

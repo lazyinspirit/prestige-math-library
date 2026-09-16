@@ -37,9 +37,7 @@ $$R_I^nF(J)=0.$$
 
 [L3] Changing the supplied injective resolution datum changes the derived objects only by natural isomorphism ([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]).
 
-[L4] The right derived object is the cohomology of the deleted chosen
-resolution after applying $F$
-([[def-right-derived-object-relative-to-injective-resolution-data]]).
+[L4] The right derived object is the cohomology of the deleted chosen resolution after applying $F$ ([[def-right-derived-object-relative-to-injective-resolution-data]]).
 
 ## Proof
 

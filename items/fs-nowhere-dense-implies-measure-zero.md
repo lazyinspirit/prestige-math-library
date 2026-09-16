@@ -68,16 +68,8 @@ so that they are.
 
 ## Remarks
 
-- **The converse implication is also false**, and for a completely different
-  reason: $\mathbb{Q}$ has measure zero and is not nowhere dense
-  ([[fs-measure-zero-implies-nowhere-dense]]). So neither of the two notions of
-  smallness implies the other, and the two failures are witnessed by sets of
-  different cardinality, $S$ being uncountable and $\mathbb{Q}$ countable.
+- **The converse implication is also false**, and for a completely different reason: $\mathbb{Q}$ has measure zero and is not nowhere dense ([[fs-measure-zero-implies-nowhere-dense]]). So neither of the two notions of smallness implies the other, and the two failures are witnessed by sets of different cardinality, $S$ being uncountable and $\mathbb{Q}$ countable.
 
-- **What is true.** A nowhere dense set contains no interval of positive length,
-  which is a genuine consequence of the definition; and a set of measure zero
-  also contains no interval of positive length
-  ([[lem-nondegenerate-interval-is-not-null]]). The two conditions share that
-  consequence and nothing beyond it.
+- **What is true.** A nowhere dense set contains no interval of positive length, which is a genuine consequence of the definition; and a set of measure zero also contains no interval of positive length ([[lem-nondegenerate-interval-is-not-null]]). The two conditions share that consequence and nothing beyond it.
 
 - **The named witness** is [[cex-nowhere-dense-with-positive-measure]].

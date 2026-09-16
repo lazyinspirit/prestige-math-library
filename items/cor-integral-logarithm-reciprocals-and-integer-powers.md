@@ -41,18 +41,13 @@ and in particular $L(2^m)=mL(2)$. Moreover, $L(2)>0$.
 
 **Given:** $x>0$ and an integer exponent $m$.
 
-[L1] $L(xy)=L(x)+L(y)$ for positive $x,y$
-([[thm-integral-logarithm-product-law]]).
+[L1] $L(xy)=L(x)+L(y)$ for positive $x,y$ ([[thm-integral-logarithm-product-law]]).
 
-[L2] $L$ is strictly increasing on $(0,\infty)$
-([[cor-integral-logarithm-is-strictly-increasing]]).
+[L2] $L$ is strictly increasing on $(0,\infty)$ ([[cor-integral-logarithm-is-strictly-increasing]]).
 
-[F1] Natural powers are defined recursively by $x^0=1$ and
-$x^{n+1}=x^nx$; negative integer powers are reciprocal positive powers
-([[def-integer-power]]).
+[F1] Natural powers are defined recursively by $x^0=1$ and $x^{n+1}=x^nx$; negative integer powers are reciprocal positive powers ([[def-integer-power]]).
 
-[L3] A property holding at $0$ and inherited from $n$ to $n+1$ holds for
-every natural number ([[thm-induction-principle]]).
+[L3] A property holding at $0$ and inherited from $n$ to $n+1$ holds for every natural number ([[thm-induction-principle]]).
 
 ## Proof
 

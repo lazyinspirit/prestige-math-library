@@ -32,9 +32,7 @@ $E\oplus F\to M$ is a smooth vector bundle of rank $r+s$.
 
 **Given:** Smooth vector bundles $E\to M$ and $F\to M$.
 
-[L1] On a common trivializing neighborhood, vector bundle charts identify $E$
-and $F$ with $U\times\mathbb R^r$ and $U\times\mathbb R^s$
-([[def-vector-bundle-chart-and-transition-function]]).
+[L1] On a common trivializing neighborhood, vector bundle charts identify $E$ and $F$ with $U\times\mathbb R^r$ and $U\times\mathbb R^s$ ([[def-vector-bundle-chart-and-transition-function]]).
 
 ## Proof
 

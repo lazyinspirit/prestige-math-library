@@ -43,15 +43,11 @@ vertex of $M$, then $P$ is contained in an $H$-conjugate of $R$.
 
 ## Facts & Assumptions
 
-**Given:** The modular system, finite groups, subgroups, and finite-free
-lattices in the Statement.
+**Given:** The modular system, finite groups, subgroups, and finite-free lattices in the Statement.
 
-[F1] Relative projectivity and vertices for these lattices are defined by the
-induction-summand condition
-([[def-relative-projectivity-and-vertices-for-og-lattices]]).
+[F1] Relative projectivity and vertices for these lattices are defined by the induction-summand condition ([[def-relative-projectivity-and-vertices-for-og-lattices]]).
 
-[F2] A nonzero indecomposable $\mathcal O H$-lattice has a local
-endomorphism ring ([[thm-krull-schmidt-for-og-lattices]]).
+[F2] A nonzero indecomposable $\mathcal O H$-lattice has a local endomorphism ring ([[thm-krull-schmidt-for-og-lattices]]).
 
 ## Proof
 

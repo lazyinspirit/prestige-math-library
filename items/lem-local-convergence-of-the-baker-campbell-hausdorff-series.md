@@ -47,30 +47,19 @@ $\log(\exp X\exp Y)$; that is the content of the following BCH theorem.
 
 **Given:** A finite-dimensional real Lie algebra $\mathfrak g$ with a norm.
 
-[F1] The degree-$N$ Dynkin polynomial is the stated finite sum of
-right-nested commutators, and BCH is its formal degree-indexed series.
-[[def-baker-campbell-hausdorff-series]].
+[F1] The degree-$N$ Dynkin polynomial is the stated finite sum of right-nested commutators, and BCH is its formal degree-indexed series. [[def-baker-campbell-hausdorff-series]].
 
 [F2] The Lie bracket is bilinear. [[def-finite-dimensional-lie-algebra]].
 
-[F3] A chosen finite basis gives a bounded coordinate isomorphism for any
-norm. [[thm-coordinate-map-for-a-finite-dimensional-normed-space]].
+[F3] A chosen finite basis gives a bounded coordinate isomorphism for any norm. [[thm-coordinate-map-for-a-finite-dimensional-normed-space]].
 
-[F4] Every finite-dimensional normed real vector space is complete.
-[[cor-finite-dimensional-normed-spaces-are-banach]].
+[F4] Every finite-dimensional normed real vector space is complete. [[cor-finite-dimensional-normed-spaces-are-banach]].
 
-[F5] The real exponential series converges absolutely everywhere and obeys
-$\exp(a+b)=\exp(a)\exp(b)$.
-[[lem-exponential-series-has-infinite-radius]].
-[[thm-exponential-addition-formula]].
+[F5] The real exponential series converges absolutely everywhere and obeys $\exp(a+b)=\exp(a)\exp(b)$. [[lem-exponential-series-has-infinite-radius]]. [[thm-exponential-addition-formula]].
 
-[F6] The binomial theorem and its factorial coefficient formula give
-$\sum_{m+n=d}a^mb^n/(m!n!)=(a+b)^d/d!$ for nonnegative reals $a,b$.
-[[thm-binomial-theorem]].
-[[thm-binomial-closed-formula]].
+[F6] The binomial theorem and its factorial coefficient formula give $\sum_{m+n=d}a^mb^n/(m!n!)=(a+b)^d/d!$ for nonnegative reals $a,b$. [[thm-binomial-theorem]]. [[thm-binomial-closed-formula]].
 
-[F7] If $0\le q<1$, the geometric series $\sum_{k\ge0}q^k$ converges.
-[[thm-geometric-series]].
+[F7] If $0\le q<1$, the geometric series $\sum_{k\ge0}q^k$ converges. [[thm-geometric-series]].
 
 ## Proof
 

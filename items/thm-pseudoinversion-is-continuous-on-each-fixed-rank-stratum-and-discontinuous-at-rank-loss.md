@@ -48,8 +48,7 @@ Let $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
 [L3] Rank equals the number of nonzero singular values ([[cor-rank-equals-number-of-nonzero-singular-values]]).
 
-[L4] Closed bounded subsets of a finite-dimensional Euclidean space are
-compact ([[thm-heine-borel-rn]]).
+[L4] Closed bounded subsets of a finite-dimensional Euclidean space are compact ([[thm-heine-borel-rn]]).
 
 ## Proof
 

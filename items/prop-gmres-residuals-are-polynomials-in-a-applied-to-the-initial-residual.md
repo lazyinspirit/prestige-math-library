@@ -36,11 +36,9 @@ chooses one minimizing $\|p(A)r_0\|_2$.
 
 **Given:** A GMRES iterate $x_m$ with residual $r_m=b-Ax_m$.
 
-[L1] Every vector in $K_m(A,r_0)$ has the form $q(A)r_0$ with $\deg q<m$
-([[prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector]]).
+[L1] Every vector in $K_m(A,r_0)$ has the form $q(A)r_0$ with $\deg q<m$ ([[prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector]]).
 
-[L2] GMRES minimizes the residual norm over $x_0+K_m(A,r_0)$
-([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
+[L2] GMRES minimizes the residual norm over $x_0+K_m(A,r_0)$ ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
 
 ## Proof
 **Proof technique:** direct.

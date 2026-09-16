@@ -41,16 +41,11 @@ enriched identity is the unit morphism into $[X,X]$.
 
 **Given:** A right-closed monoidal category $\mathcal V$ with a set of objects.
 
-[L1] Right closedness supplies internal hom-objects $[X,Y]$
-([[def-left-closed-and-right-closed-monoidal-category]]).
+[L1] Right closedness supplies internal hom-objects $[X,Y]$ ([[def-left-closed-and-right-closed-monoidal-category]]).
 
-[L2] There is a natural composition morphism
-$[Y,Z]\otimes[X,Y]\to[X,Z]$ with associative and unital laws
-([[thm-the-internal-hom-composition-morphism]]).
+[L2] There is a natural composition morphism $[Y,Z]\otimes[X,Y]\to[X,Z]$ with associative and unital laws ([[thm-the-internal-hom-composition-morphism]]).
 
-[L3] The unit object yields the external hom-set bijection
-$\mathcal V(\mathbf 1,[X,Y])\cong\mathcal V(X,Y)$
-([[thm-the-unit-is-an-internal-hom-unit]]).
+[L3] The unit object yields the external hom-set bijection $\mathcal V(\mathbf 1,[X,Y])\cong\mathcal V(X,Y)$ ([[thm-the-unit-is-an-internal-hom-unit]]).
 
 ## Proof
 

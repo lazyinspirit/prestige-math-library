@@ -39,35 +39,21 @@ whose kernel is $\{1,-1\}$.
 
 ## Facts & Assumptions
 
-**Given:** the quaternion basis $1,i,j,k$, with
-$\operatorname{Im}\mathbb H=\mathbb Ri\oplus\mathbb Rj\oplus\mathbb Rk$
-carrying its ordinary Euclidean inner product.
+**Given:** the quaternion basis $1,i,j,k$, with $\operatorname{Im}\mathbb H=\mathbb Ri\oplus\mathbb Rj\oplus\mathbb Rk$ carrying its ordinary Euclidean inner product.
 
-[F1] Quaternion multiplication is associative, every nonzero quaternion is
-invertible, and $q^{-1}=\overline q/N(q)$.
-[[def-quaternions]], [[thm-quaternions-form-a-division-ring]].
+[F1] Quaternion multiplication is associative, every nonzero quaternion is invertible, and $q^{-1}=\overline q/N(q)$. [[def-quaternions]], [[thm-quaternions-form-a-division-ring]].
 
-[F2] Regular level sets are embedded submanifolds, and a closed subgroup of a
-finite-dimensional Lie group has its unique embedded Lie-group structure.
-[[thm-a-regular-level-set-is-an-embedded-submanifold]],
-[[thm-cartans-closed-subgroup-theorem]].
+[F2] Regular level sets are embedded submanifolds, and a closed subgroup of a finite-dimensional Lie group has its unique embedded Lie-group structure. [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[thm-cartans-closed-subgroup-theorem]].
 
-[F3] A smooth map with invertible differential has a smooth local inverse.
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F3] A smooth map with invertible differential has a smooth local inverse. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
-[F4] Determinants, transposes, and the parametrization of the unit circle are
-available. [[def-determinant-of-a-square-matrix]],
-[[def-transpose-of-a-matrix]],
-[[thm-sine-and-cosine-parametrize-the-unit-circle]].
+[F4] Determinants, transposes, and the parametrization of the unit circle are available. [[def-determinant-of-a-square-matrix]], [[def-transpose-of-a-matrix]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].
 
-[A1] $\mathrm{AC}_\omega$ is used through the closed-subgroup theorem [F2]
-that constructs the embedded Lie-group structure on $SO(3)$.
-[[def-countable-choice]].
+[A1] $\mathrm{AC}_\omega$ is used through the closed-subgroup theorem [F2] that constructs the embedded Lie-group structure on $SO(3)$. [[def-countable-choice]].
 
 ## Verification
 
-**Proof technique:** explicit quaternion calculation followed by explicit
-covering sheets.
+**Proof technique:** explicit quaternion calculation followed by explicit covering sheets.
 
 1.1 Write $q=a+bi+cj+dk$. A coordinate check from [F1] gives $\overline{qr}=\bar r\bar q$ and hence $N(qr)=N(q)N(r)$. Thus the unit sphere $S^3\subset\mathbb H$ is a group, with inverse $q\mapsto\bar q$. It is a smooth three-manifold by [F2], because $N^{-1}(1)$ is regular: $dN_q(w)=2\langle q,w\rangle$ is nonzero on every unit $q$. Multiplication and inversion are polynomial and linear respectively, so this is a Lie group. [F1, F2, algebra]
 

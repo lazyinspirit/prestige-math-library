@@ -45,24 +45,16 @@ subspaces on a smooth manifold $M$. Then the following are equivalent:
 
 **Given:** A rank-$k$ family $p \mapsto \mathcal D_p \subseteq T_pM$.
 
-[A1] In item `1`, smoothness means that $\mathcal D$ is a rank-$k$ smooth
-vector subbundle of $TM$.
+[A1] In item `1`, smoothness means that $\mathcal D$ is a rank-$k$ smooth vector subbundle of $TM$.
 
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Assume $\mathcal D$ is a smooth distribution. By the local description of a [given]
-subbundle, each point has a neighborhood $U$ and a frame of $TM|_U$ whose first
-$k$ members already frame $\mathcal D|_U$. Those first $k$ sections are smooth
-vector fields, pointwise independent, and span the prescribed subspaces.
-[given]
+subbundle, each point has a neighborhood $U$ and a frame of $TM|_U$ whose first $k$ members already frame $\mathcal D|_U$. Those first $k$ sections are smooth vector fields, pointwise independent, and span the prescribed subspaces. [given]
 
 1.2 Conversely, assume such local vector fields exist near every point. On a [given]
-neighborhood $U$ where $X_1,\dots,X_k$ are pointwise independent, their span is
-a rank-$k$ subbundle of $TM|_U$, because in a local trivialization of $TM$ the
-columns formed by the $X_i$ have rank $k$ everywhere. Since that subbundle has
-fibres exactly $\mathcal D_q$, the family is a smooth distribution on $U$.
-[given, algebra]
+neighborhood $U$ where $X_1,\dots,X_k$ are pointwise independent, their span is a rank-$k$ subbundle of $TM|_U$, because in a local trivialization of $TM$ the columns formed by the $X_i$ have rank $k$ everywhere. Since that subbundle has fibres exactly $\mathcal D_q$, the family is a smooth distribution on $U$. [given, algebra]
 
 2.1 The two implications establish the equivalence. [given] ∎ [given]

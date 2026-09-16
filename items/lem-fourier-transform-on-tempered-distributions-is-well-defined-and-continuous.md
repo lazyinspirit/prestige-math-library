@@ -32,17 +32,13 @@ $\beta(\mathcal S',\mathcal S)$.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]] and a tempered
-distribution $u$.
+**Given:** [[def-countable-choice|Countable Choice]] and a tempered distribution $u$.
 
-[F1] The distributional transform is the bilinear transpose of the Schwartz
-transform ([[def-fourier-transform-of-a-tempered-distribution]]).
+[F1] The distributional transform is the bilinear transpose of the Schwartz transform ([[def-fourier-transform-of-a-tempered-distribution]]).
 
-[F2] The Schwartz transform is a continuous linear automorphism
-([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]).
+[F2] The Schwartz transform is a continuous linear automorphism ([[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]).
 
-[F3] Weak dual seminorms use single tests and strong dual seminorms use bounded
-test sets ([[def-weak-and-strong-topologies-on-tempered-distributions]]).
+[F3] Weak dual seminorms use single tests and strong dual seminorms use bounded test sets ([[def-weak-and-strong-topologies-on-tempered-distributions]]).
 
 ## Proof
 
@@ -56,6 +52,4 @@ test sets ([[def-weak-and-strong-topologies-on-tempered-distributions]]).
 
 $$p_B(\mathcal Fu)=\sup_{\varphi\in B}|u(\mathcal F\varphi)| =p_{\mathcal F(B)}(u).$$
 
-Thus every target strong seminorm pulls back to a strong seminorm and the map
-is strongly continuous.  Countable Choice was used only in [F2], not in these
-transpose calculations. [F2, F3] ∎
+Thus every target strong seminorm pulls back to a strong seminorm and the map is strongly continuous.  Countable Choice was used only in [F2], not in these transpose calculations. [F2, F3] ∎

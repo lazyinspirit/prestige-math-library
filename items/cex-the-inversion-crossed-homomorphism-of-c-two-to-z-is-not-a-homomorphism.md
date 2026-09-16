@@ -34,8 +34,7 @@ $z(1)=0$, $z(t)=1$ is a crossed homomorphism but not a homomorphism.
 
 **Given:** The false claim of [[fs-every-crossed-homomorphism-is-an-ordinary-homomorphism]].
 
-[L1] The crossed-homomorphism identity for abelian coefficients is
-$z(gh)=z(g)+g\cdot z(h)$ ([[fs-every-crossed-homomorphism-is-an-ordinary-homomorphism]]).
+[L1] The crossed-homomorphism identity for abelian coefficients is $z(gh)=z(g)+g\cdot z(h)$ ([[fs-every-crossed-homomorphism-is-an-ordinary-homomorphism]]).
 
 ## Counterexample
 

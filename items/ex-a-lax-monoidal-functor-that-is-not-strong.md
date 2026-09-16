@@ -36,8 +36,7 @@ pick the unique subset $\{*\}$ of the singleton set.
 
 ## Facts & Assumptions
 
-**Given:** The power-set construction and the cartesian monoidal structure on
-$\mathbf{Set}$.
+**Given:** The power-set construction and the cartesian monoidal structure on $\mathbf{Set}$.
 
 [L1] $\mathcal P(X)$ is the set of all subsets of $X$ ([[def-power-set]]).
 

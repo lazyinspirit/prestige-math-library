@@ -35,8 +35,7 @@ for every $\varphi\in\mathcal S(\mathbb R^n)$.
 
 **Given:** A complex-linear functional $u$ on $\mathcal S(\mathbb R^n)$.
 
-[F1] A basic zero-neighborhood in Schwartz space imposes finitely many strict
-bounds on its defining seminorms ([[def-tempered-distribution]]).
+[F1] A basic zero-neighborhood in Schwartz space imposes finitely many strict bounds on its defining seminorms ([[def-tempered-distribution]]).
 
 ## Proof
 

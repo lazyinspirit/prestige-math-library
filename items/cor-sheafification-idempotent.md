@@ -33,11 +33,9 @@ $$a(a\mathcal F)\cong a\mathcal F.$$
 
 **Given:** A presheaf $\mathcal F$ on $X$.
 
-[F1] The object $a\mathcal F$ is the sheafification of $\mathcal F$
-([[def-sheafification]]).
+[F1] The object $a\mathcal F$ is the sheafification of $\mathcal F$ ([[def-sheafification]]).
 
-[L1] Any map from a presheaf to a sheaf factors uniquely through its
-sheafification ([[thm-sheafification-universal-property]]).
+[L1] Any map from a presheaf to a sheaf factors uniquely through its sheafification ([[thm-sheafification-universal-property]]).
 
 ## Proof
 

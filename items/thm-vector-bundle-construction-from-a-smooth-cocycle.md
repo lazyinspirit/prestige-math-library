@@ -38,18 +38,13 @@ is a smooth rank-$r$ vector bundle over $M$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth manifold $M$, a supplied countable open cover $(U_\alpha)$,
-and a smooth $GL(r,\mathbb R)$-cocycle $g_{\beta\alpha}$ on the overlaps.
+**Given:** A smooth manifold $M$, a supplied countable open cover $(U_\alpha)$, and a smooth $GL(r,\mathbb R)$-cocycle $g_{\beta\alpha}$ on the overlaps.
 
-[L1] The transition functions satisfy the identity and cocycle laws on all
-overlaps ([[lem-vector-bundle-transition-functions-satisfy-the-cocycle-identities]]).
+[L1] The transition functions satisfy the identity and cocycle laws on all overlaps ([[lem-vector-bundle-transition-functions-satisfy-the-cocycle-identities]]).
 
-[L2] A countable disjoint union of fixed-dimensional smooth manifolds carries the
-obvious smooth-manifold structure
-([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]]).
+[L2] A countable disjoint union of fixed-dimensional smooth manifolds carries the obvious smooth-manifold structure ([[prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds]]).
 
-[F1] The quotient topology is the topology for which a set is open exactly when
-its full preimage under the quotient map is open ([[def-quotient-topology]]).
+[F1] The quotient topology is the topology for which a set is open exactly when its full preimage under the quotient map is open ([[def-quotient-topology]]).
 
 ## Proof
 

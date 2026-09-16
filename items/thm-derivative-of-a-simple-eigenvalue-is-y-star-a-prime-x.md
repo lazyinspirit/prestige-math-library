@@ -36,12 +36,9 @@ $$\lambda'(t)=y(t)^\ast A'(t)x(t).$$
 
 ## Facts & Assumptions
 
-**Given:** A differentiable matrix path $A(t)$, a differentiable simple
-eigenpair branch $\lambda(t),x(t),y(t)$, and the normalization
-$y(t)^\ast x(t)=1$.
+**Given:** A differentiable matrix path $A(t)$, a differentiable simple eigenpair branch $\lambda(t),x(t),y(t)$, and the normalization $y(t)^\ast x(t)=1$.
 
-[L1] Simple eigenpairs admit local differentiable branches after gauge fixing
-([[thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing]]).
+[L1] Simple eigenpairs admit local differentiable branches after gauge fixing ([[thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing]]).
 
 ## Proof
 **Proof technique:** direct.

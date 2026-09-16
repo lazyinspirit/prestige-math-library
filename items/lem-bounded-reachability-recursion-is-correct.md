@@ -31,8 +31,7 @@ Let $G=(V,A)$ be a finite digraph, let $u,v\in V$, and let $i\in\mathbb N$. Then
 
 ## Facts & Assumptions
 
-**Given:** a finite digraph $G=(V,A)$, vertices $u,v\in V$, and a natural
-number $i$.
+**Given:** a finite digraph $G=(V,A)$, vertices $u,v\in V$, and a natural number $i$.
 
 [L1] The definition of $\operatorname{Reach}_0^G(u,v)$ says exactly that $u=v$ or $(u,v)\in A$, and the definition of $\operatorname{Reach}_i^G$ for $i\ge 1$ says that some midpoint $z$ makes both $\operatorname{Reach}_{i-1}^G(u,z)$ and $\operatorname{Reach}_{i-1}^G(z,v)$ hold ([[def-bounded-reachability-recursion]]).
 

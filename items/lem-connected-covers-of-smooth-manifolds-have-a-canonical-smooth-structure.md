@@ -31,32 +31,21 @@ It has the same dimension as $M$.
 
 ## Facts & Assumptions
 
-**Given:** A smooth $n$-manifold $M$ and a covering map $p:E\to M$ with $E$
-connected.
+**Given:** A smooth $n$-manifold $M$ and a covering map $p:E\to M$ with $E$ connected.
 
-[F1] A covering is locally a disjoint union of sheets, each mapped
-homeomorphically onto an evenly covered open subset of the base.
-[[def-covering-map-and-evenly-covered-neighbourhoods]].
+[F1] A covering is locally a disjoint union of sheets, each mapped homeomorphically onto an evenly covered open subset of the base. [[def-covering-map-and-evenly-covered-neighbourhoods]].
 
-[F2] A smooth manifold is a Hausdorff, second-countable, locally Euclidean
-space equipped with a maximal smooth atlas. [[def-smooth-manifold]],
-[[def-topological-manifold-without-boundary]].
+[F2] A smooth manifold is a Hausdorff, second-countable, locally Euclidean space equipped with a maximal smooth atlas. [[def-smooth-manifold]], [[def-topological-manifold-without-boundary]].
 
-[F3] Local path connectedness lifts along coverings, and a connected locally
-path-connected space is path connected.
-[[prop-local-path-connectedness-lifts-and-descends-along-coverings]],
-[[thm-connected-and-locally-path-connected-implies-path-connected]].
+[F3] Local path connectedness lifts along coverings, and a connected locally path-connected space is path connected. [[prop-local-path-connectedness-lifts-and-descends-along-coverings]], [[thm-connected-and-locally-path-connected-implies-path-connected]].
 
-[F4] In a locally connected space the components of every open subset are
-open. [[thm-locally-connected-iff-components-of-open-sets-are-open]].
+[F4] In a locally connected space the components of every open subset are open. [[thm-locally-connected-iff-components-of-open-sets-are-open]].
 
-[F5] A smooth atlas is contained in a unique maximal smooth atlas.
-[[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]].
+[F5] A smooth atlas is contained in a unique maximal smooth atlas. [[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]].
 
 ## Proof
 
-**Proof technique:** pull back covering charts, with the countability point
-checked separately.
+**Proof technique:** pull back covering charts, with the countability point checked separately.
 
 1.1 If $E=\varnothing$, surjectivity in the covering-map definition forces $M=\varnothing$; the empty pulled-back atlas gives the unique compatible smooth structure, the local-diffeomorphism condition is vacuous, and the asserted dimension is the supplied dimension $n$ of $M$. Henceforth assume $E\ne\varnothing$. The space $E$ is locally Euclidean of dimension $n$: if $U\subseteq M$ is an evenly covered coordinate domain and $S$ is a sheet over $U$, then a chart $\varphi:U\to\varphi(U)\subseteq\mathbb R^n$ pulls back to the chart $\varphi\circ p|_S:S\to\varphi(U)$. It is Hausdorff: points with different images are separated by inverse images of disjoint base neighborhoods, while distinct points in one fibre lie in distinct sheets over a common evenly covered neighborhood. [F1, F2]
 

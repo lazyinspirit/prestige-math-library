@@ -42,18 +42,13 @@ function on $U$ satisfying this formula is that unique classical solution.
 
 ## Facts & Assumptions
 
-**Given:** A classical solution of the homogeneous transport equation on a
-region $U$ where every characteristic segment from time $t$ to time $0$
-remains in $U$, is unique, and satisfies flow consistency.
+**Given:** A classical solution of the homogeneous transport equation on a region $U$ where every characteristic segment from time $t$ to time $0$ remains in $U$, is unique, and satisfies flow consistency.
 
-[L1] A transport equation and its characteristics are defined by the displayed
-PDE and ODE ([[def-linear-transport-equation-and-its-characteristic-flow]]).
+[L1] A transport equation and its characteristics are defined by the displayed PDE and ODE ([[def-linear-transport-equation-and-its-characteristic-flow]]).
 
-[L2] Along a characteristic, a transport solution satisfies the corresponding
-scalar ODE ([[lem-transport-equation-along-a-characteristic]]).
+[L2] Along a characteristic, a transport solution satisfies the corresponding scalar ODE ([[lem-transport-equation-along-a-characteristic]]).
 
-[L3] The chain rule computes the derivative of a $C^1$ function along a
-$C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
+[L3] The chain rule computes the derivative of a $C^1$ function along a $C^1$ curve ([[thm-chain-rule-for-total-derivatives]]).
 
 ## Proof
 

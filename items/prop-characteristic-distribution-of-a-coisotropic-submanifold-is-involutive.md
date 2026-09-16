@@ -36,11 +36,9 @@ called the **characteristic distribution**.
 
 **Given:** A coisotropic submanifold $C\subseteq(M,\omega)$.
 
-[F1] Coisotropic means $(T_pC)^\omega\subseteq T_pC$ at every $p$.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
+[F1] Coisotropic means $(T_pC)^\omega\subseteq T_pC$ at every $p$. [[def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds]].
 
-[F2] Cartan's formula relates Lie derivative, contraction, and exterior
-differentiation. [[thm-cartans-magic-formula]].
+[F2] Cartan's formula relates Lie derivative, contraction, and exterior differentiation. [[thm-cartans-magic-formula]].
 
 ## Proof
 

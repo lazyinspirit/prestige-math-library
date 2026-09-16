@@ -93,24 +93,8 @@ reciprocals of the naturals get below every positive real
 
 ## Remarks
 
-- **Why the reciprocal form is unavoidable in step 1.2.** The sets covering $K$
-  must exhaust the complement of the single point $x$, and the natural way to do
-  that with open sets is to exclude a shrinking closed neighbourhood of $x$. The
-  radii of those neighbourhoods have to become smaller than $|y - x|$ for each
-  $y \in K$, and that is exactly the statement of
-  [[cor-archimedean-reciprocal]]. The cofinal form [[thm-of-archimedean]] says
-  the naturals get large, which is what step 1.1 needs and is a different
-  assertion; the corollary exists in this library precisely so that the
-  inversion between them is done once.
+- **Why the reciprocal form is unavoidable in step 1.2.** The sets covering $K$ must exhaust the complement of the single point $x$, and the natural way to do that with open sets is to exclude a shrinking closed neighbourhood of $x$. The radii of those neighbourhoods have to become smaller than $|y - x|$ for each $y \in K$, and that is exactly the statement of [[cor-archimedean-reciprocal]]. The cofinal form [[thm-of-archimedean]] says the naturals get large, which is what step 1.1 needs and is a different assertion; the corollary exists in this library precisely so that the inversion between them is done once.
 
-- **The converse needs completeness and this lemma does not.** Nothing above
-  uses the least-upper-bound property except through the Archimedean property;
-  beyond the ordered-field axioms the proof asks only for that property and for
-  the existence of a maximum of a finite set. The converse, that a closed bounded
-  set is compact, is false in $\mathbb{Q}$
-  ([[fs-closed-bounded-compact-without-completeness]]) and true in $\mathbb{R}$
-  ([[thm-heine-borel-characterisation-r]]).
+- **The converse needs completeness and this lemma does not.** Nothing above uses the least-upper-bound property except through the Archimedean property; beyond the ordered-field axioms the proof asks only for that property and for the existence of a maximum of a finite set. The converse, that a closed bounded set is compact, is false in $\mathbb{Q}$ ([[fs-closed-bounded-compact-without-completeness]]) and true in $\mathbb{R}$ ([[thm-heine-borel-characterisation-r]]).
 
-- **Neither conclusion can be strengthened to an equivalence on its own.** A
-  closed set need not be compact and a bounded set need not be compact, and both
-  failures are recorded in [[cex-unbounded-closed-set-not-compact]].
+- **Neither conclusion can be strengthened to an equivalence on its own.** A closed set need not be compact and a bounded set need not be compact, and both failures are recorded in [[cex-unbounded-closed-set-not-compact]].

@@ -36,18 +36,11 @@ $X=\log_Gg$, $Y=\log_Gh$, one has $[X,Y]=0$.
 
 **Given:** The stated group and local logarithm.
 
-[F1] The local logarithm is inverse to the exponential on its fixed domain.
-[[def-local-logarithm-on-a-lie-group]].
+[F1] The local logarithm is inverse to the exponential on its fixed domain. [[def-local-logarithm-on-a-lie-group]].
 
-[F2] Conjugation intertwines exponential, and
-$\operatorname{Ad}_{\exp X}=e^{\operatorname{ad}_X}$ under countable choice.
-[[prop-adjoint-intertwines-the-exponential-map]].
-[[prop-adjoint-exponential-identity]].
-[[def-countable-choice]].
+[F2] Conjugation intertwines exponential, and $\operatorname{Ad}_{\exp X}=e^{\operatorname{ad}_X}$ under countable choice. [[prop-adjoint-intertwines-the-exponential-map]]. [[prop-adjoint-exponential-identity]]. [[def-countable-choice]].
 
-[F3] The entire operator series
-$D(A)=\sum_{n\ge0}A^n/(n+1)!$ has constant term $I$.
-[[lem-right-trivialized-differential-of-the-lie-group-exponential]].
+[F3] The entire operator series $D(A)=\sum_{n\ge0}A^n/(n+1)!$ has constant term $I$. [[lem-right-trivialized-differential-of-the-lie-group-exponential]].
 
 ## Proof
 

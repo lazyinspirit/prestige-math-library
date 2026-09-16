@@ -37,33 +37,17 @@ $g:(S,\Sigma)\to\mathbb C$ be measurable.
 
 ## Facts & Assumptions
 
-**Given:** A random element $X$, its law $\mathbb P_X$, and a measurable map $g$
-as in the Statement.
+**Given:** A random element $X$, its law $\mathbb P_X$, and a measurable map $g$ as in the Statement.
 
-[L1] The law $\mathbb P_X$ is a probability measure on $(S,\Sigma)$
-([[def-law-or-distribution-of-a-random-element]],
-[[lem-law-of-a-random-element-is-a-probability-measure]]).
+[L1] The law $\mathbb P_X$ is a probability measure on $(S,\Sigma)$ ([[def-law-or-distribution-of-a-random-element]], [[lem-law-of-a-random-element-is-a-probability-measure]]).
 
-[L2] Measurable outer maps preserve measurability under composition
-([[thm-composition-with-borel-functions-preserves-measurability]]).
+[L2] Measurable outer maps preserve measurability under composition ([[thm-composition-with-borel-functions-preserves-measurability]]).
 
-[L3] Every nonnegative measurable function is the increasing limit of nonnegative
-simple functions, monotone convergence holds, and the nonnegative integral
-agrees with the simple integral on simple functions
-([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]],
-[[thm-monotone-convergence-for-the-integral]],
-[[prop-the-nonnegative-integral-agrees-with-the-simple-integral]],
-[[def-integral-of-a-nonnegative-simple-function]]).
+[L3] Every nonnegative measurable function is the increasing limit of nonnegative simple functions, monotone convergence holds, and the nonnegative integral agrees with the simple integral on simple functions ([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]], [[thm-monotone-convergence-for-the-integral]], [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[def-integral-of-a-nonnegative-simple-function]]).
 
-[L4] Expectation is integration against $\mathbb P$, and real or complex
-integrability uses the positive-negative and real-imaginary decompositions
-([[def-expectation-of-a-nonnegative-or-integrable-random-variable]],
-[[def-integrable-real-and-complex-functions-and-their-integrals]]).
+[L4] Expectation is integration against $\mathbb P$, and real or complex integrability uses the positive-negative and real-imaginary decompositions ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]], [[def-integrable-real-and-complex-functions-and-their-integrals]]).
 
-[L5] Measurable functions are closed under the elementary operations used by the
-integral, and the Lebesgue integral is linear on $L^1$
-([[prop-closure-properties-of-measurable-functions-used-by-the-integral]],
-[[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
+[L5] Measurable functions are closed under the elementary operations used by the integral, and the Lebesgue integral is linear on $L^1$ ([[prop-closure-properties-of-measurable-functions-used-by-the-integral]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
 
 ## Proof
 

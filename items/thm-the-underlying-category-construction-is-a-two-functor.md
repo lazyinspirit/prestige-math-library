@@ -37,21 +37,13 @@ enriched categories of this page.
 
 ## Facts & Assumptions
 
-**Given:** A locally small monoidal category $\mathcal V$, $\mathcal V$-categories $\mathcal A,\mathcal B$, and $\mathcal V$-functors
-$T,S:\mathcal A\to\mathcal B$.
+**Given:** A locally small monoidal category $\mathcal V$, $\mathcal V$-categories $\mathcal A,\mathcal B$, and $\mathcal V$-functors $T,S:\mathcal A\to\mathcal B$.
 
-[L1] The underlying category $\mathcal A_0$ has the same objects as
-$\mathcal A$, hom-sets $\mathcal V(\mathbf 1,\mathcal A(A,B))$, and composition
-induced from enriched composition
-([[def-the-underlying-ordinary-category-of-an-enriched-category]]).
+[L1] The underlying category $\mathcal A_0$ has the same objects as $\mathcal A$, hom-sets $\mathcal V(\mathbf 1,\mathcal A(A,B))$, and composition induced from enriched composition ([[def-the-underlying-ordinary-category-of-an-enriched-category]]).
 
-[L2] A $\mathcal V$-functor gives hom-object maps
-$T_{A,B}:\mathcal A(A,B)\to\mathcal B(TA,TB)$ compatible with composition and
-units ([[def-enriched-functor]]).
+[L2] A $\mathcal V$-functor gives hom-object maps $T_{A,B}:\mathcal A(A,B)\to\mathcal B(TA,TB)$ compatible with composition and units ([[def-enriched-functor]]).
 
-[L3] A $\mathcal V$-natural transformation has components
-$\alpha_A:\mathbf 1\to\mathcal B(TA,SA)$
-([[def-enriched-natural-transformation]]).
+[L3] A $\mathcal V$-natural transformation has components $\alpha_A:\mathbf 1\to\mathcal B(TA,SA)$ ([[def-enriched-natural-transformation]]).
 
 ## Proof
 

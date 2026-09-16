@@ -32,22 +32,13 @@ many choices.
 
 ## Facts & Assumptions
 
-**Given:** The compact manifold, finite-dimensional parameter manifold, and
-smooth exact family in the statement.
+**Given:** The compact manifold, finite-dimensional parameter manifold, and smooth exact family in the statement.
 
-[F1] Under the stated choice assumption, $M$ has a Riemannian metric and every
-point has arbitrarily small strongly geodesically convex neighbourhoods;
-nonempty finite intersections of such neighbourhoods remain strongly
-geodesically convex.
-[[thm-every-smooth-manifold-admits-a-riemannian-metric]],
-[[thm-existence-of-geodesically-convex-neighborhoods]].
+[F1] Under the stated choice assumption, $M$ has a Riemannian metric and every point has arbitrarily small strongly geodesically convex neighbourhoods; nonempty finite intersections of such neighbourhoods remain strongly geodesically convex. [[thm-every-smooth-manifold-admits-a-riemannian-metric]], [[thm-existence-of-geodesically-convex-neighborhoods]].
 
-[F2] A compact set inside an open subset of a manifold admits a smooth cutoff.
-[[lem-manifold-bump-for-a-compact-set-inside-an-open-set]].
+[F2] A compact set inside an open subset of a manifold admits a smooth cutoff. [[lem-manifold-bump-for-a-compact-set-inside-an-open-set]].
 
-[F3] The homotopy operator $K_H$ satisfies
-$H_1^*-H_0^*=dK_H+K_Hd$.
-[[thm-de-rham-homotopy-formula-for-a-smooth-homotopy]].
+[F3] The homotopy operator $K_H$ satisfies $H_1^*-H_0^*=dK_H+K_Hd$. [[thm-de-rham-homotopy-formula-for-a-smooth-homotopy]].
 
 ## Proof
 

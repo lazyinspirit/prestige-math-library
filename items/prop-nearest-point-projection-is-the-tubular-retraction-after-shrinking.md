@@ -34,11 +34,9 @@ projection onto $S$.
 
 **Given:** A closed embedded smooth submanifold $S\subseteq\mathbb R^m$.
 
-[L1] There is a tubular neighbourhood $E:\Omega_\delta\to U$ of $S$ in
-$\mathbb R^m$ ([[thm-euclidean-tubular-neighbourhood-theorem]]).
+[L1] There is a tubular neighbourhood $E:\Omega_\delta\to U$ of $S$ in $\mathbb R^m$ ([[thm-euclidean-tubular-neighbourhood-theorem]]).
 
-[L2] The tubular chart yields a smooth retraction $r:U\to S$
-([[cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction]]).
+[L2] The tubular chart yields a smooth retraction $r:U\to S$ ([[cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction]]).
 
 ## Proof
 **Proof technique:** direct.

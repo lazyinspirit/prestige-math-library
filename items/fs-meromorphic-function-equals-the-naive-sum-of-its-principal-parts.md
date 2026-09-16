@@ -33,8 +33,7 @@ principal parts, with no convergence-forcing corrections.
 
 **Given:** The principal parts $p_n(z)=-n/(z-n)$ at the positive integers.
 
-[L1] Mittag-Leffler on the plane needs correction terms to force convergence
-([[thm-mittag-leffler-theorem-on-the-plane]]).
+[L1] Mittag-Leffler on the plane needs correction terms to force convergence ([[thm-mittag-leffler-theorem-on-the-plane]]).
 
 ## Refutation
 

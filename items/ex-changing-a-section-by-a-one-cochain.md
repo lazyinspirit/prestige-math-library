@@ -36,15 +36,11 @@ the one-cochain $u(t)=1$ produces a new factor set with $f'(t,t)=2$.
 
 ## Facts & Assumptions
 
-**Given:** The direct-product extension $\mathbb Z\times C_2$ with trivial
-action.
+**Given:** The direct-product extension $\mathbb Z\times C_2$ with trivial action.
 
-[F1] The factor set of a section is defined by the equation
-$s(g)s(h)s(gh)^{-1}=i(f_s(g,h))$
-([[def-normalized-set-theoretic-section-and-factor-set]]).
+[F1] The factor set of a section is defined by the equation $s(g)s(h)s(gh)^{-1}=i(f_s(g,h))$ ([[def-normalized-set-theoretic-section-and-factor-set]]).
 
-[L1] Changing the section changes the factor set by a coboundary
-([[lem-changing-the-section-changes-the-factor-set-by-a-coboundary]]).
+[L1] Changing the section changes the factor set by a coboundary ([[lem-changing-the-section-changes-the-factor-set-by-a-coboundary]]).
 
 ## Verification
 

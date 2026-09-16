@@ -32,14 +32,11 @@ for every member $x$ of $A$, then $f = g$.
 
 ## Facts & Assumptions
 
-**Given:** The abelian category $\mathbf{Ab}$ and the two endomorphisms
-$1_{\mathbb Z}, -1_{\mathbb Z} : \mathbb Z \to \mathbb Z$.
+**Given:** The abelian category $\mathbf{Ab}$ and the two endomorphisms $1_{\mathbb Z}, -1_{\mathbb Z} : \mathbb Z \to \mathbb Z$.
 
-[L1] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] Every member has a negative, and equivalence to zero is literal equality
-([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
+[L2] Every member has a negative, and equivalence to zero is literal equality ([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
 
 ## Counterexample
 

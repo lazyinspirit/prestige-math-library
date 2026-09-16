@@ -30,16 +30,11 @@ singular point of the holomorphic function defined by $D$ on $\Re s>\sigma_c$.
 
 ## Facts & Assumptions
 
-**Given:** A Dirichlet series $D(s)=\sum a_n n^{-s}$ with $a_n \ge 0$ and finite
-abscissa $\sigma_c$.
+**Given:** A Dirichlet series $D(s)=\sum a_n n^{-s}$ with $a_n \ge 0$ and finite abscissa $\sigma_c$.
 
-[L1] The abscissa is defined through right-half-plane convergence
-([[def-abscissae-dirichlet-series]]).
+[L1] The abscissa is defined through right-half-plane convergence ([[def-abscissae-dirichlet-series]]).
 
-[L2] On every half-plane of absolute convergence, the series and all its
-derivatives converge locally uniformly
-([[thm-dirichlet-series-half-plane-convergence]],
-[[thm-dirichlet-series-absolute-half-plane-holomorphy]]).
+[L2] On every half-plane of absolute convergence, the series and all its derivatives converge locally uniformly ([[thm-dirichlet-series-half-plane-convergence]], [[thm-dirichlet-series-absolute-half-plane-holomorphy]]).
 
 ## Proof
 

@@ -36,11 +36,9 @@ least $w$, then $(A,B)$ is a complete $(2,w)$-blockade.
 
 ## Facts & Assumptions
 
-**Given:** Two distinct anticonnected components $A,B$ of a graph $G$ with
-$|A|,|B|\ge w>0$.
+**Given:** Two distinct anticonnected components $A,B$ of a graph $G$ with $|A|,|B|\ge w>0$.
 
-[L1] Distinct anticonnected components are complete to one another
-([[lem-components-are-anticomplete-and-anticomponents-complete]]).
+[L1] Distinct anticonnected components are complete to one another ([[lem-components-are-anticomplete-and-anticomponents-complete]]).
 
 ## Verification
 

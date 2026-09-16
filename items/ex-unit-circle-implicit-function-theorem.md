@@ -32,15 +32,9 @@ the graph of a $C^1$ function of one coordinate.
 
 **Given:** No hypotheses beyond those quantified in the statement.
 
-[L1] On an open domain, a $C^1$ map satisfying $F(a,b)=0$ can be solved locally
-for the second block when $D_yF(a,b)$ is invertible
-([[thm-euclidean-implicit-function-theorem]]).
+[L1] On an open domain, a $C^1$ map satisfying $F(a,b)=0$ can be solved locally for the second block when $D_yF(a,b)$ is invertible ([[thm-euclidean-implicit-function-theorem]]).
 
-[L2] Direct difference quotients give $\partial_xF(x,y)=2x$ and
-$\partial_yF(x,y)=2y$; their displayed affine formulas are continuous. Thus the
-continuous-partials theorem gives $DF(x,y)(u,v)=2xu+2yv$, and $F$ is $C^1$
-([[thm-continuous-partial-derivatives-imply-total-differentiability]],
-[[def-c-one-map-and-local-inverse]], [[lem-derivative-of-a-power]]).
+[L2] Direct difference quotients give $\partial_xF(x,y)=2x$ and $\partial_yF(x,y)=2y$; their displayed affine formulas are continuous. Thus the continuous-partials theorem gives $DF(x,y)(u,v)=2xu+2yv$, and $F$ is $C^1$ ([[thm-continuous-partial-derivatives-imply-total-differentiability]], [[def-c-one-map-and-local-inverse]], [[lem-derivative-of-a-power]]).
 
 ## Proof
 

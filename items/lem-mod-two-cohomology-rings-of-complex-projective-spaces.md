@@ -32,54 +32,27 @@ complex dimension of the finite target.
 
 ## Facts & Assumptions
 
-**Given:** The standard finite skeleta
-$\mathbb {CP}^0\subset\mathbb {CP}^1\subset\cdots\subset\mathbb {CP}^{\infty}$
-and coefficients $\mathbb F_2$.
+**Given:** The standard finite skeleta $\mathbb {CP}^0\subset\mathbb {CP}^1\subset\cdots\subset\mathbb {CP}^{\infty}$ and coefficients $\mathbb F_2$.
 
-[F1] [[cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary]]
-computes a cellular complex with no adjacent cells, while
-[[thm-cellular-homology-computes-singular-homology]],
-[[def-oriented-cellular-chain-group]], and
-[[prop-cellular-maps-induce-cellular-chain-maps]] compare its oriented cell
-generators and skeletal maps with singular homology.
+[F1] [[cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary]] computes a cellular complex with no adjacent cells, while [[thm-cellular-homology-computes-singular-homology]], [[def-oriented-cellular-chain-group]], and [[prop-cellular-maps-induce-cellular-chain-maps]] compare its oriented cell generators and skeletal maps with singular homology.
 
-[F2] Under AC,
-[[thm-topological-universal-coefficient-short-exact-sequence-for-cohomology]]
-gives natural evaluation exact sequences for integral and mod-two
-cohomology, natural also in coefficient homomorphisms.
+[F2] Under AC, [[thm-topological-universal-coefficient-short-exact-sequence-for-cohomology]] gives natural evaluation exact sequences for integral and mod-two cohomology, natural also in coefficient homomorphisms.
 
-[F3] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] and
-[[thm-naturality-of-the-singular-cohomology-pair-sequence]] give exact pair
-sequences and their natural squares.
+[F3] [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]] and [[thm-naturality-of-the-singular-cohomology-pair-sequence]] give exact pair sequences and their natural squares.
 
-[F4] [[thm-homotopic-maps-induce-equal-maps-in-singular-cohomology]] applies
-to the coordinate retractions below, and
-[[thm-excision-for-singular-cohomology]] removes closed coordinate
-hyperplanes lying inside the open relative subspaces.
+[F4] [[thm-homotopic-maps-induce-equal-maps-in-singular-cohomology]] applies to the coordinate retractions below, and [[thm-excision-for-singular-cohomology]] removes closed coordinate hyperplanes lying inside the open relative subspaces.
 
-[F5] Under AC,
-[[lem-local-coordinate-cup-products-generate-top-relative-cohomology]] says
-that the two coefficient-one local generators on
-$\mathbb C^i\times\mathbb C^j\cong\mathbb R^{2i}\times\mathbb R^{2j}$
-have nonzero top mod-two relative cup product when $i,j\geq1$.
+[F5] Under AC, [[lem-local-coordinate-cup-products-generate-top-relative-cohomology]] says that the two coefficient-one local generators on $\mathbb C^i\times\mathbb C^j\cong\mathbb R^{2i}\times\mathbb R^{2j}$ have nonzero top mod-two relative cup product when $i,j\geq1$.
 
-[F6] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]]
-transports open relative products. Pullback is a unital ring homomorphism by
-[[prop-cup-product-is-natural-unital-and-associative]].
+[F6] [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] transports open relative products. Pullback is a unital ring homomorphism by [[prop-cup-product-is-natural-unital-and-associative]].
 
-[F7] [[def-singular-cochain-complex-with-coefficients]],
-[[def-singular-cup-product-on-cochains]], and
-[[prop-singular-cohomology-is-contravariantly-functorial]] make coefficient
-reduction valuewise on cochains and make it commute with coboundary,
-pullback, and the front/back cup formula.
+[F7] [[def-singular-cochain-complex-with-coefficients]], [[def-singular-cup-product-on-cochains]], and [[prop-singular-cohomology-is-contravariantly-functorial]] make coefficient reduction valuewise on cochains and make it commute with coboundary, pullback, and the front/back cup formula.
 
 [A1] [[def-axiom-of-choice]] is assumed exactly through [F2] and [F5].
 
 ## Proof
 
-**Proof technique:** build the standard even-cell filtration explicitly,
-compute its additive groups, prove finite products by local relative
-coordinates, and detect infinite powers on finite skeleta.
+**Proof technique:** build the standard even-cell filtration explicitly, compute its additive groups, prove finite products by local relative coordinates, and detect infinite powers on finite skeleta.
 
 1.1 The standard filtration gives one oriented cell in each even dimension and no odd cells. Write $P^r=\mathbb {CP}^r$ as nonzero vectors in $\mathbb C^{r+1}$ modulo nonzero complex scaling. Attach a real $2r$-disk to $P^{r-1}$ by $$w\longmapsto[w_0:\cdots:w_{r-1}:\sqrt{1-\lVert w\rVert^2}].$$ The boundary lands in $P^{r-1}$, while each line outside $P^{r-1}$ has a unique unit representative whose last coordinate is positive real, so the open disk maps homeomorphically to the complement. The attachment quotient is compact. Projective space is Hausdorff because a unit vector $z$ maps to the rank-one matrix $zz^*$, whose fibres are precisely scalar-phase orbits; the induced continuous bijection from the compact phase quotient to its matrix image is a homeomorphism. Hence the attachment map from its compact quotient to $P^r$ is a homeomorphism. Starting from $P^0=*$ gives compatible cells in dimensions $0,2,\ldots,2r$. Orient the $2r$-cell by the ordered real and imaginary coordinates of $\mathbb C^r$. [given, construct]
 

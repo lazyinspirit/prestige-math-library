@@ -32,8 +32,7 @@ additive group of $\mathbb Z_p$ is torsion.
 
 **Given:** The additive group of $\mathbb Z_p$.
 
-[L1] The additive group of $\mathbb Z_p$ is torsion-free
-([[prop-additive-group-of-zp-is-torsion-free]]).
+[L1] The additive group of $\mathbb Z_p$ is torsion-free ([[prop-additive-group-of-zp-is-torsion-free]]).
 
 ## Refutation
 

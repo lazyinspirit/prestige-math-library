@@ -38,26 +38,19 @@ that is differentiable at $1$ with $f'(1)=1$.
 
 ## Facts & Assumptions
 
-**Given:** A function $f$ satisfying the displayed equation, differentiable
-at $1$, with $f'(1)=1$.
+**Given:** A function $f$ satisfying the displayed equation, differentiable at $1$, with $f'(1)=1$.
 
-[F1] The derivative is the limit of the difference quotient
-([[def-derivative]]).
+[F1] The derivative is the limit of the difference quotient ([[def-derivative]]).
 
-[L1] $L'(x)=1/x$ and $L(1)=0$
-([[thm-integral-logarithm-derivative-and-normalisation]]).
+[L1] $L'(x)=1/x$ and $L(1)=0$ ([[thm-integral-logarithm-derivative-and-normalisation]]).
 
-[L2] $L(xy)=L(x)+L(y)$
-([[thm-integral-logarithm-product-law]]).
+[L2] $L(xy)=L(x)+L(y)$ ([[thm-integral-logarithm-product-law]]).
 
-[L3] A differentiable function is continuous
-([[cor-differentiable-implies-continuous]]).
+[L3] A differentiable function is continuous ([[cor-differentiable-implies-continuous]]).
 
-[L4] A continuous function on an interval with zero derivative is constant
-([[cor-zero-derivative-implies-constant]]).
+[L4] A continuous function on an interval with zero derivative is constant ([[cor-zero-derivative-implies-constant]]).
 
-[L5] $L=\log$ on $(0,\infty)$
-([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
+[L5] $L=\log$ on $(0,\infty)$ ([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
 
 [L6] Sums, differences and scalar multiples of functions differentiable at a point are differentiable there, with the corresponding derivatives ([[thm-algebra-of-derivatives]]).
 

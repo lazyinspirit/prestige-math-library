@@ -24,8 +24,7 @@ $$N(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}-\frac{T}{2\pi}+O(\log T).$$
 
 ## Facts & Assumptions
 
-[L1] The completed zeta function satisfies $\Lambda(s)=\Lambda(1-s)$
-([[thm-completed-riemann-zeta-functional-equation]]).
+[L1] The completed zeta function satisfies $\Lambda(s)=\Lambda(1-s)$ ([[thm-completed-riemann-zeta-functional-equation]]).
 
 ## Proof
 

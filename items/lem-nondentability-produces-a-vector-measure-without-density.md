@@ -38,38 +38,23 @@ lies in a closed separable subspace of $X$ and which has no Bochner density.
 
 ## Facts & Assumptions
 
-[A1] The Axiom of Choice supplies arbitrary and recursive choices
-([[def-axiom-of-choice]]).
+[A1] The Axiom of Choice supplies arbitrary and recursive choices ([[def-axiom-of-choice]]).
 
-[L1] Dentability is the existence of slices of arbitrarily small norm diameter
-([[def-dentable-bounded-set-and-slice]]).
+[L1] Dentability is the existence of slices of arbitrarily small norm diameter ([[def-dentable-bounded-set-and-slice]]).
 
-[L2] Under AC, dominated Hahn--Banach establishes HB, and under HB a point
-outside a nonempty closed convex set in a real or complex normed space can be
-uniformly strictly separated from it by a bounded functional
-([[thm-hahn-banach-dominated-extension]],
-[[thm-relative-hahn-banach-geometric-separation]]).
+[L2] Under AC, dominated Hahn--Banach establishes HB, and under HB a point outside a nonempty closed convex set in a real or complex normed space can be uniformly strictly separated from it by a bounded functional ([[thm-hahn-banach-dominated-extension]], [[thm-relative-hahn-banach-geometric-separation]]).
 
-[L3] RNP requires a Bochner density for every absolutely continuous
-bounded-variation vector measure over a finite scalar measure
-([[def-radon-nikodym-property]]).
+[L3] RNP requires a Bochner density for every absolutely continuous bounded-variation vector measure over a finite scalar measure ([[def-radon-nikodym-property]]).
 
-[L4] A Bochner-integrable function has integrable simple approximants
-([[def-bochner-integrable-function]]) and its integral obeys the norm inequality
-([[lem-bochner-integral-norm-inequality]]).
+[L4] A Bochner-integrable function has integrable simple approximants ([[def-bochner-integrable-function]]) and its integral obeys the norm inequality ([[lem-bochner-integral-norm-inequality]]).
 
-[L5] Continuity from below and measurable set-difference calculus hold for
-measures ([[thm-continuity-from-below-for-measures]],
-[[prop-measure-of-a-set-difference]]), and the Lebesgue sigma-algebra is the
-completion of the Borel one
-([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]]).
+[L5] Continuity from below and measurable set-difference calculus hold for measures ([[thm-continuity-from-below-for-measures]], [[prop-measure-of-a-set-difference]]), and the Lebesgue sigma-algebra is the completion of the Borel one ([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]]).
 
 ## Proof
 
 **Proof technique:** contradiction.
 
-**Given:** A nondentable nonempty bounded closed convex set $C\subseteq X$ and
-AC.
+**Given:** A nondentable nonempty bounded closed convex set $C\subseteq X$ and AC.
 
 1.1 Convert nondentability into a uniformly separated convex bush. Choose $\eta>0$ such that no slice of $C$ has diameter below $\eta$, and put $r=\eta/4$. For $x\in C$, if $x\notin\overline{\operatorname{conv}}(C\setminus B(x,r))$, [L2] gives a slice lying inside $B(x,r)$ and hence of diameter at most $2r<\eta$, a contradiction. Thus every $x\in C$ belongs to that closed convex hull. Enlarge to $D=C+B(0,r/2)$. Given $z=x+y\in D$, approximate $x$ by a finite convex combination $\sum_i\alpha_ix_i=x+e$ of points outside $B(x,r)$ with error $e$ satisfying $\|e\|+\|y\|<r/2$, and put $z_i=x_i+y-e$. Then $z=\sum_i\alpha_i z_i$, every $z_i\in D$, and $\|z_i-z\|\geq r-\|e\|>r/2$. With $\delta=r/2$, [A1] recursively chooses such finite successor families from an initial $z_0\in C$. The resulting node set is countable, bounded, and every child is at least $\delta$ from its parent. [given, A1, L1, L2, construct]
 

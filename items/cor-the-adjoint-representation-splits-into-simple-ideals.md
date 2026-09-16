@@ -34,11 +34,9 @@ adjoint summands are precisely the simple ideals.
 
 **Given:** A semisimple Lie algebra $\mathfrak g$ under its adjoint action.
 
-[L1] Weyl's theorem gives every submodule an invariant complement
-([[thm-weyls-complete-reducibility-theorem]]).
+[L1] Weyl's theorem gives every submodule an invariant complement ([[thm-weyls-complete-reducibility-theorem]]).
 
-[L2] The algebra is a finite direct sum of simple ideals
-([[thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals]]).
+[L2] The algebra is a finite direct sum of simple ideals ([[thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals]]).
 
 ## Proof
 

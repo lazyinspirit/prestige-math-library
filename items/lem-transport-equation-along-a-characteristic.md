@@ -39,15 +39,11 @@ $$\frac{d}{ds}u(X(s),s)+c(X(s),s)u(X(s),s)=f(X(s),s).$$
 
 ## Facts & Assumptions
 
-**Given:** A $C^1$ solution $u$ of the transport equation and a characteristic
-$X$.
+**Given:** A $C^1$ solution $u$ of the transport equation and a characteristic $X$.
 
-[L1] A linear transport equation and its characteristics are defined by the
-displayed PDE and ODE ([[def-linear-transport-equation-and-its-characteristic-flow]]).
+[L1] A linear transport equation and its characteristics are defined by the displayed PDE and ODE ([[def-linear-transport-equation-and-its-characteristic-flow]]).
 
-[L2] The total-derivative chain rule differentiates a composite by the gradient
-of the outer function applied to the derivative of the inner function
-([[thm-chain-rule-for-total-derivatives]]).
+[L2] The total-derivative chain rule differentiates a composite by the gradient of the outer function applied to the derivative of the inner function ([[thm-chain-rule-for-total-derivatives]]).
 
 ## Proof
 

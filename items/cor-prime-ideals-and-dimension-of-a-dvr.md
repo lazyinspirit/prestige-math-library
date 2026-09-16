@@ -35,11 +35,9 @@ $$ \dim V=1. $$
 
 **Given:** A discrete valuation ring $V$ with maximal ideal $\mathfrak m=(\pi)$.
 
-[L1] Every nonzero ideal of $V$ is $(\pi^n)=\mathfrak m^n$ for a unique
-$n\ge0$ ([[thm-ideals-in-a-dvr]]).
+[L1] Every nonzero ideal of $V$ is $(\pi^n)=\mathfrak m^n$ for a unique $n\ge0$ ([[thm-ideals-in-a-dvr]]).
 
-[F1] The Krull dimension of a nonzero ring is the supremum of the lengths of
-its strict chains of prime ideals ([[def-krull-dimension-of-a-ring]]).
+[F1] The Krull dimension of a nonzero ring is the supremum of the lengths of its strict chains of prime ideals ([[def-krull-dimension-of-a-ring]]).
 
 [A1] A discrete valuation ring is a domain, so $(0)$ is prime.
 

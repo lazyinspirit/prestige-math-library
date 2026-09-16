@@ -65,10 +65,6 @@ continuous, with $A \subseteq g^{-1}(\{0\})$ and $B \subseteq g^{-1}(\{1\})$.
 
 ## Remarks
 
-- **For $0<x<1$**, neither clamp is active and $g(x)=x$, so $g$
-  interpolates linearly across the gap between $A$ and $B$. Nothing in
-  [[thm-urysohn-lemma]] requires linearity: replacing $x$ by $x^2$ on
-  $[0,1]$ while keeping the same constant values outside that interval gives
-  a different Urysohn function for this pair.
+- **For $0<x<1$**, neither clamp is active and $g(x)=x$, so $g$ interpolates linearly across the gap between $A$ and $B$. Nothing in [[thm-urysohn-lemma]] requires linearity: replacing $x$ by $x^2$ on $[0,1]$ while keeping the same constant values outside that interval gives a different Urysohn function for this pair.
 
 - **No dyadic recursion is visible here.** This $g$ is written down directly, not produced by the construction of [[thm-urysohn-lemma]]; the companion example works through several levels of that construction by hand for the same pair $A,B$.

@@ -50,20 +50,11 @@ is exact.
 
 **Given:** The displayed commutative square.
 
-[L1] Pullbacks are defined by the usual universal property
-([[def-pullbacks-and-pushouts]]).
+[L1] Pullbacks are defined by the usual universal property ([[def-pullbacks-and-pushouts]]).
 
-[L2] In a biproduct, a morphism into $X \oplus Y$ is determined by its two
-projections, and
-$$i_X p_X + i_Y p_Y = 1_{X \oplus Y}$$
-([[def-biproduct]],
-[[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
+[L2] In a biproduct, a morphism into $X \oplus Y$ is determined by its two projections, and $$i_X p_X + i_Y p_Y = 1_{X \oplus Y}$$ ([[def-biproduct]], [[thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation]]).
 
-[L3] Exactness of
-$0 \to P \to X \oplus Y \to Z$
-is equivalent to the first map being a kernel of the second
-([[thm-degenerate-exactness-criteria]],
-[[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]]).
+[L3] Exactness of $0 \to P \to X \oplus Y \to Z$ is equivalent to the first map being a kernel of the second ([[thm-degenerate-exactness-criteria]], [[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]]).
 
 ## Proof
 

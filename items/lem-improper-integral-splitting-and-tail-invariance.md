@@ -47,7 +47,6 @@ Consequently, convergence and value in the definitions of an interior-singularit
 **Proof technique:** direct.
 
 1.1 If $a<a'$, then for every $R>a'$, [L1, L2]
-$$\int_a^R f=\int_a^{a'}f+\int_{a'}^R f.$$
-The first term is fixed and finite. Subtracting it changes the absolute error from a proposed translated limit by exactly the same amount, so [L2] shows that either truncation limit exists exactly when the other does and that their values differ by $\int_a^{a'}f$. The other three one-ended orientations follow by the same identity with endpoints reversed. [L1, L2]
+$$\int_a^R f=\int_a^{a'}f+\int_{a'}^R f.$$ The first term is fixed and finite. Subtracting it changes the absolute error from a proposed translated limit by exactly the same amount, so [L2] shows that either truncation limit exists exactly when the other does and that their values differ by $\int_a^{a'}f$. The other three one-ended orientations follow by the same identity with endpoints reversed. [L1, L2]
 
 2.1 Let $s<t$ be two split points on the whole line. Step 1.1 transfers the finite proper integral $\int_s^t f$ from the right tail to the left tail, so the two sums agree. The same calculation around an interior singularity changes only the nonsingular finite portion. Because [L3] continues to require both pieces separately, no cancellation of divergent pieces is introduced. [step 1.1, L1, L3] ∎

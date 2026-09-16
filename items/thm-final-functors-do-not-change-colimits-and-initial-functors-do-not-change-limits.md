@@ -38,20 +38,15 @@ limits.
 
 **Given:** The final functor $u$ and diagram $F$ in the statement.
 
-[F1] Finality means every $(b\downarrow u)$ is nonempty and connected
-([[def-final-and-initial-functors]]).
+[F1] Finality means every $(b\downarrow u)$ is nonempty and connected ([[def-final-and-initial-functors]]).
 
-[F2] A colimit is an initial cocone, characterized by a unique map to every
-cocone ([[def-limit-and-colimit-of-a-diagram]]).
+[F2] A colimit is an initial cocone, characterized by a unique map to every cocone ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L1] Two colimits are uniquely compatibly isomorphic
-([[thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism]]).
+[L1] Two colimits are uniquely compatibly isomorphic ([[thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism]]).
 
-[F3] Choice selects one object from every member of a set-indexed family of
-nonempty sets ([[def-axiom-of-choice]]).
+[F3] Choice selects one object from every member of a set-indexed family of nonempty sets ([[def-axiom-of-choice]]).
 
-[L2] Initiality and limits are dual to finality and colimits
-([[prop-limit-colimit-duality]]).
+[L2] Initiality and limits are dual to finality and colimits ([[prop-limit-colimit-duality]]).
 
 ## Proof
 

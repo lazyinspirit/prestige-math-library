@@ -36,9 +36,7 @@ $$S(n,k)=k\,S(n-1,k)+S(n-1,k-1).$$
 
 ## Facts & Assumptions
 
-**Given:** A partition of $[n]$ into exactly $k$ nonempty blocks, with
-$n\geq1$ and $k\geq1$, counted by
-[[def-stirling-second-kind-and-bell-number]].
+**Given:** A partition of $[n]$ into exactly $k$ nonempty blocks, with $n\geq1$ and $k\geq1$, counted by [[def-stirling-second-kind-and-bell-number]].
 
 ## Proof
 

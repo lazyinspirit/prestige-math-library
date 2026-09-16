@@ -36,12 +36,9 @@ $$\sum_{1\le n \le N} a_n n^{-s} = A(N)N^{-s} + s\int_1^N A(x)x^{-s-1}\,dx.$$
 
 ## Facts & Assumptions
 
-**Given:** A real number $\theta$, complex coefficients $(a_n)_{n\ge1}$, their
-summatory function $A(x)=\sum_{1\le n\le x}a_n$, and a complex number $s$ with
-$\Re s > \theta$.
+**Given:** A real number $\theta$, complex coefficients $(a_n)_{n\ge1}$, their summatory function $A(x)=\sum_{1\le n\le x}a_n$, and a complex number $s$ with $\Re s > \theta$.
 
-[L1] Abel summation for complex coefficients expresses finite weighted sums
-through their partial sums ([[lem-abel-summation-for-complex-series]]).
+[L1] Abel summation for complex coefficients expresses finite weighted sums through their partial sums ([[lem-abel-summation-for-complex-series]]).
 
 [L2] The growth bound means $|A(x)| \le Cx^\theta$ for large $x$.
 

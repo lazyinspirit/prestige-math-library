@@ -44,8 +44,7 @@ $\pi_k(E)$ does not change the resulting group.
 
 ## Proof
 
-**Given:** The sequential group system, legal initial cutoff $n_0$, and tail
-index $N\geq n_0$ in the statement.
+**Given:** The sequential group system, legal initial cutoff $n_0$, and tail index $N\geq n_0$ in the statement.
 
 1.1 **Surjectivity.** A class $[n,x]$ in the colimit beginning at $n_0$ has the same value as $[N,b_{N-1}\cdots b_nx]$ if $n<N$, and already has a representative in the tail if $n\geq N$. Hence every class comes from the tail. [F1, F2]
 

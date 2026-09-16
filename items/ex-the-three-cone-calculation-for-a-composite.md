@@ -34,13 +34,9 @@ homotopy equivalent to $\operatorname{Cone}(n)$.
 
 **Given:** Nonzero integers $m$ and $n$.
 
-[L1] The three-cone calculation identifies $\operatorname{Cone}(\alpha)$ with
-$\operatorname{Cone}(g)\oplus\operatorname{Cone}(1_{C[1]})$
-([[lem-the-three-cone-calculation-for-a-composite-chain-map]]).
+[L1] The three-cone calculation identifies $\operatorname{Cone}(\alpha)$ with $\operatorname{Cone}(g)\oplus\operatorname{Cone}(1_{C[1]})$ ([[lem-the-three-cone-calculation-for-a-composite-chain-map]]).
 
-[L2] The cone of multiplication by an integer on $\mathbb Z[0]$ is the two-term
-complex with that multiplication as differential
-([[ex-the-cone-of-multiplication-by-m-on-the-integers]]).
+[L2] The cone of multiplication by an integer on $\mathbb Z[0]$ is the two-term complex with that multiplication as differential ([[ex-the-cone-of-multiplication-by-m-on-the-integers]]).
 
 ## Verification
 

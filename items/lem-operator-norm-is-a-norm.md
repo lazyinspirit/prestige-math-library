@@ -37,15 +37,11 @@ $\mathcal B(X,Y)$ of bounded linear operators, the operator norm of
 
 ## Facts & Assumptions
 
-**Given:** Bounded linear operators $S,T \in \mathcal B(X,Y)$, a scalar
-$\lambda$, and a vector $x \in X$.
+**Given:** Bounded linear operators $S,T \in \mathcal B(X,Y)$, a scalar $\lambda$, and a vector $x \in X$.
 
-[L1] The operator norm is the supremum of $\|Tx\|$ over the unit ball of $X$,
-and it satisfies $\|Tx\| \le \|T\|\,\|x\|$ for every $x \in X$
-([[def-operator-norm]]).
+[L1] The operator norm is the supremum of $\|Tx\|$ over the unit ball of $X$, and it satisfies $\|Tx\| \le \|T\|\,\|x\|$ for every $x \in X$ ([[def-operator-norm]]).
 
-[L2] $\mathcal B(X,Y)$ is the space of bounded linear operators, with pointwise
-addition and scalar multiplication ([[def-space-of-bounded-linear-operators]]).
+[L2] $\mathcal B(X,Y)$ is the space of bounded linear operators, with pointwise addition and scalar multiplication ([[def-space-of-bounded-linear-operators]]).
 
 ## Proof
 

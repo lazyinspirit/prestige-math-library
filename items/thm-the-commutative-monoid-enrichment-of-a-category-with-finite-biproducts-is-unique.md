@@ -37,11 +37,9 @@ In particular, the commutative-monoid enrichment is unique.
 
 ## Facts & Assumptions
 
-**Given:** A category with finite biproducts and a second candidate bilinear
-commutative-monoid law $\boxplus$ on its hom-sets.
+**Given:** A category with finite biproducts and a second candidate bilinear commutative-monoid law $\boxplus$ on its hom-sets.
 
-[L1] Finite biproducts define a canonical addition on every hom-set
-([[thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids]]).
+[L1] Finite biproducts define a canonical addition on every hom-set ([[thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids]]).
 
 ## Proof
 

@@ -34,14 +34,11 @@ lemma is valid over every field.
 
 **Given:** A nonzero finite-dimensional solvable Lie algebra $\mathfrak g$.
 
-[L1] Solvability means the derived series eventually vanishes
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] Solvability means the derived series eventually vanishes ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] An ideal has a quotient Lie algebra with a canonical projection
-([[def-quotient-lie-algebra]]).
+[L2] An ideal has a quotient Lie algebra with a canonical projection ([[def-quotient-lie-algebra]]).
 
-[L3] Rank-nullity computes codimension through a surjective linear map
-([[thm-rank-nullity]]).
+[L3] Rank-nullity computes codimension through a surjective linear map ([[thm-rank-nullity]]).
 
 ## Proof
 

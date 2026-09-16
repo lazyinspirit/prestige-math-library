@@ -41,26 +41,17 @@ existence-and-uniqueness theorem for one-parameter subgroups.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with
-identity $e$, its Lie algebra $\mathfrak g=T_eG$, a vector
-$X\in\mathfrak g$, and real numbers $a,s,t$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$ with identity $e$, its Lie algebra $\mathfrak g=T_eG$, a vector $X\in\mathfrak g$, and real numbers $a,s,t$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] The exponential map is defined by
-$\exp_G(Y)=\gamma_Y(1)$, where $\gamma_Y$ is the unique one-parameter
-subgroup with initial velocity $Y$. [[def-exponential-map-of-a-lie-group]].
+[F2] The exponential map is defined by $\exp_G(Y)=\gamma_Y(1)$, where $\gamma_Y$ is the unique one-parameter subgroup with initial velocity $Y$. [[def-exponential-map-of-a-lie-group]].
 
-[F3] Assuming $\mathrm{AC}_\omega$, every $Y\in\mathfrak g$ determines a
-unique one-parameter subgroup $\gamma_Y$ with $\gamma_Y'(0)=Y$.
-[[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
+[F3] Assuming $\mathrm{AC}_\omega$, every $Y\in\mathfrak g$ determines a unique one-parameter subgroup $\gamma_Y$ with $\gamma_Y'(0)=Y$. [[thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields]].
 
-[F4] A one-parameter subgroup $\gamma$ is smooth and satisfies
-$\gamma(u+v)=\gamma(u)\gamma(v)$ for all $u,v\in\mathbb R$.
-[[def-one-parameter-subgroup-of-a-lie-group]].
+[F4] A one-parameter subgroup $\gamma$ is smooth and satisfies $\gamma(u+v)=\gamma(u)\gamma(v)$ for all $u,v\in\mathbb R$. [[def-one-parameter-subgroup-of-a-lie-group]].
 
-[F5] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F5] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

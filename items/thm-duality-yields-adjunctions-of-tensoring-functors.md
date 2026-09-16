@@ -36,14 +36,11 @@ Dually, $-\otimes V^\vee$ is right adjoint to $-\otimes V$.
 
 ## Facts & Assumptions
 
-**Given:** A monoidal category and a left dual
-$(V^\vee,\operatorname{ev}_V,\operatorname{coev}_V)$ of $V$.
+**Given:** A monoidal category and a left dual $(V^\vee,\operatorname{ev}_V,\operatorname{coev}_V)$ of $V$.
 
-[L1] An adjunction is unit-counit data satisfying the two triangle identities
-([[def-adjunction-by-unit-counit-and-triangle-identities]]).
+[L1] An adjunction is unit-counit data satisfying the two triangle identities ([[def-adjunction-by-unit-counit-and-triangle-identities]]).
 
-[L2] The pair $(V^\vee,\operatorname{ev}_V,\operatorname{coev}_V)$ satisfies
-the zig-zag identities ([[def-left-dual-and-right-dual-object]]).
+[L2] The pair $(V^\vee,\operatorname{ev}_V,\operatorname{coev}_V)$ satisfies the zig-zag identities ([[def-left-dual-and-right-dual-object]]).
 
 ## Proof
 

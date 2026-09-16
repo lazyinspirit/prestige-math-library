@@ -35,12 +35,9 @@ This item is stated under $\mathsf{ZF}+\mathsf{AC}_\omega$.
 
 ## Facts & Assumptions
 
-**Given:** The usual additive real Lie group and the unit circle under
-multiplication.
+**Given:** The usual additive real Lie group and the unit circle under multiplication.
 
-[L1] Connected integrations of a fixed Lie algebra are discrete central
-quotients of its simply connected integration
-([[cor-isomorphic-lie-algebras-give-locally-isomorphic-but-not-necessarily-isomorphic-connected-lie-groups]]).
+[L1] Connected integrations of a fixed Lie algebra are discrete central quotients of its simply connected integration ([[cor-isomorphic-lie-algebras-give-locally-isomorphic-but-not-necessarily-isomorphic-connected-lie-groups]]).
 
 ## Refutation
 

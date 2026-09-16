@@ -28,9 +28,7 @@ In ZFC, a $P*\dot Q$-generic $K$ factors as a $P$-generic $G$ and $\dot Q_G$-gen
 
 **Given:** AC, a two-step iteration in a transitive ground model, and the stated chain hypotheses for the last clause.
 
-[F1] [[def-two-step-forcing-iteration]] fixes the set-sized order and, under
-AC, supplies a bounded-carrier name forced equal below any condition to an
-arbitrary local name for a member of $\dot Q$.
+[F1] [[def-two-step-forcing-iteration]] fixes the set-sized order and, under AC, supplies a bounded-carrier name forced equal below any condition to an arbitrary local name for a member of $\dot Q$.
 
 [F2] [[thm-forcing-theorem]] supplies name evaluation and the truth lemma; [[def-forcing-relation-for-formulas]] supplies the existential and negation clauses, [[def-forcing-relation-for-atomic-formulas]] supplies atomic membership, and [[lem-forcing-monotonicity-density-and-decision]] supplies dense decisions and density closure.
 

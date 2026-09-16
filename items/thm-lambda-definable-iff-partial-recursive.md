@@ -40,16 +40,9 @@ are equivalent:
 
 [L3] A partial function on natural numbers is partial recursive exactly when it is Turing computable, by [[thm-partial-recursive-iff-turing-computable]].
 
-[L4] Finite tuples of natural numbers have an effective natural-number coding
-with primitive-recursive length and coordinate readers, by
-[[def-natural-number-coding-of-finite-sequences]] and
-[[thm-sequence-length-and-coordinate-functions-are-primitive-recursive]].
+[L4] Finite tuples of natural numbers have an effective natural-number coding with primitive-recursive length and coordinate readers, by [[def-natural-number-coding-of-finite-sequences]] and [[thm-sequence-length-and-coordinate-functions-are-primitive-recursive]].
 
-[L5] The fixed-arity tuple coder is primitive recursive: binary length and bit
-extraction are bounded arithmetic operations, appending a block is
-$u\,2^{|v|}+v$, and $2^m$ is obtained by primitive recursion from
-multiplication
-([[prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive]]).
+[L5] The fixed-arity tuple coder is primitive recursive: binary length and bit extraction are bounded arithmetic operations, appending a block is $u\,2^{|v|}+v$, and $2^m$ is obtained by primitive recursion from multiplication ([[prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive]]).
 
 ## Proof
 

@@ -40,8 +40,7 @@ $g+\ker(f)\mapsto f(g)$.
 
 **Given:** A homomorphism $f:G\to H$ of abelian groups.
 
-[L1] Abelian groups form an abelian category
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] Abelian groups form an abelian category ([[thm-abelian-groups-form-an-abelian-category]]).
 
 ## Verification
 

@@ -42,15 +42,11 @@ $$f-g'h' \in I^{r+1}[T].$$
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $A$, an ideal $I$, monic polynomials $f,g,h$ as
-above, an integer $r \ge 1$, an error term $e=f-gh \in I^r[T]$, and a lifted
-Bezout relation $ag+bh \equiv 1 \pmod I$, with $\deg f=m+n$.
+**Given:** A commutative ring $A$, an ideal $I$, monic polynomials $f,g,h$ as above, an integer $r \ge 1$, an error term $e=f-gh \in I^r[T]$, and a lifted Bezout relation $ag+bh \equiv 1 \pmod I$, with $\deg f=m+n$.
 
-[L1] A coprime residue factorization admits such a lifted Bezout identity
-modulo $I$ ([[lem-coprime-factor-bezout-lift]]).
+[L1] A coprime residue factorization admits such a lifted Bezout identity modulo $I$ ([[lem-coprime-factor-bezout-lift]]).
 
-[L2] Corrections of degrees $<m$ and $<n$ preserve the monicity and degrees of
-the factors ([[lem-hensel-factor-lift-leading-coefficient-normalisation]]).
+[L2] Corrections of degrees $<m$ and $<n$ preserve the monicity and degrees of the factors ([[lem-hensel-factor-lift-leading-coefficient-normalisation]]).
 
 ## Proof
 

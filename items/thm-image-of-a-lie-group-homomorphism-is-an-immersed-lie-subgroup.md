@@ -36,21 +36,13 @@ Its Lie algebra is $\operatorname{im}(dF_e)$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a smooth Lie-group homomorphism
-$F:G\to H$; put $K=\ker F$ and $B=G/K$ as a set of left cosets.
+**Given:** $\mathrm{AC}_\omega$ and a smooth Lie-group homomorphism $F:G\to H$; put $K=\ker F$ and $B=G/K$ as a set of left cosets.
 
-[A1] $K$ is a closed embedded normal Lie subgroup and
-$T_eK=\ker dF_e$. [[def-countable-choice]],
-[[thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup]].
+[A1] $K$ is a closed embedded normal Lie subgroup and $T_eK=\ker dF_e$. [[def-countable-choice]], [[thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup]].
 
-[F1] $F$ has constant rank and local form $(u,v)\mapsto(u,0)$.
-[[thm-lie-group-homomorphisms-have-constant-rank]],
-[[thm-constant-rank-theorem-for-manifolds]].
+[F1] $F$ has constant rank and local form $(u,v)\mapsto(u,0)$. [[thm-lie-group-homomorphisms-have-constant-rank]], [[thm-constant-rank-theorem-for-manifolds]].
 
-[F2] Quotient topology and its universal property characterize continuous
-maps constant on quotient fibres. [[def-quotient-topology]],
-[[thm-quotient-universal-property]],
-[[lem-open-or-closed-surjection-is-quotient]].
+[F2] Quotient topology and its universal property characterize continuous maps constant on quotient fibres. [[def-quotient-topology]], [[thm-quotient-universal-property]], [[lem-open-or-closed-surjection-is-quotient]].
 
 ## Proof
 

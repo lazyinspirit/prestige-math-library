@@ -42,33 +42,19 @@ atoms of $\mu_F$ is at most countable.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, a nondecreasing right-continuous
-function $F : \mathbb{R} \to \mathbb{R}$, its Lebesgue-Stieltjes measure
-$\mu_F$, and real numbers $a < b$.
+**Given:** The Axiom of Countable Choice, a nondecreasing right-continuous function $F : \mathbb{R} \to \mathbb{R}$, its Lebesgue-Stieltjes measure $\mu_F$, and real numbers $a < b$.
 
-[L1] Assuming Countable Choice, the measure $\mu_F$ satisfies
-$\mu_F((u,v]) = F(v) - F(u)$ for all $u < v$.
-([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]])
+[L1] Assuming Countable Choice, the measure $\mu_F$ satisfies $\mu_F((u,v]) = F(v) - F(u)$ for all $u < v$. ([[thm-lebesgue-stieltjes-correspondence-with-distribution-functions]])
 
-[L2] Measures are continuous from below along increasing set limits; they are
-continuous from above along decreasing set limits when one set has finite
-measure ([[thm-continuity-from-below-for-measures]],
-[[thm-continuity-from-above-for-measures]]).
+[L2] Measures are continuous from below along increasing set limits; they are continuous from above along decreasing set limits when one set has finite measure ([[thm-continuity-from-below-for-measures]], [[thm-continuity-from-above-for-measures]]).
 
-[L3] For a bounded-variation function on a compact interval, every well-posed
-one-sided limit exists, every discontinuity is of the first kind, and there are
-at most countably many discontinuities
-([[cor-bv-discontinuities-are-countable-and-of-first-kind]]).
+[L3] For a bounded-variation function on a compact interval, every well-posed one-sided limit exists, every discontinuity is of the first kind, and there are at most countably many discontinuities ([[cor-bv-discontinuities-are-countable-and-of-first-kind]]).
 
-[L4] Assuming Countable Choice, a countable union of at most countable sets is
-at most countable ([[thm-countable-union-of-countable]]).
+[L4] Assuming Countable Choice, a countable union of at most countable sets is at most countable ([[thm-countable-union-of-countable]]).
 
-[L5] A point $x$ is an atom of a Borel measure $\mu$ exactly when
-$\mu(\{x\})>0$ ([[def-atom-of-a-measure-on-r]]).
+[L5] A point $x$ is an atom of a Borel measure $\mu$ exactly when $\mu(\{x\})>0$ ([[def-atom-of-a-measure-on-r]]).
 
-[L6] If $A\subseteq B$ are measurable and $\mu(B)<+\infty$, then
-$\mu(B\setminus A)=\mu(B)-\mu(A)$
-([[prop-measure-of-a-set-difference]]).
+[L6] If $A\subseteq B$ are measurable and $\mu(B)<+\infty$, then $\mu(B\setminus A)=\mu(B)-\mu(A)$ ([[prop-measure-of-a-set-difference]]).
 
 ## Proof
 
@@ -80,8 +66,7 @@ Because $(a,b) = \bigcup_n (a,t_n]$, continuity from below and [L1] give
 
 $$\mu_F((a,b)) = \lim_n \mu_F((a,t_n]) = \lim_n \big(F(t_n) - F(a)\big) = F(b^-) - F(a).$$
 
-Here $F|_{[a,b]}$ has bounded variation because it is nondecreasing, so [L3]
-ensures that the displayed left limit exists. [L1, L2, L3, algebra]
+Here $F|_{[a,b]}$ has bounded variation because it is nondecreasing, so [L3] ensures that the displayed left limit exists. [L1, L2, L3, algebra]
 
 2.1 Put $s_n := a - 1/(n+1)$. Then $s_n < a$ and $s_n \uparrow a$, while the intervals $(s_n,b]$ decrease to $[a,b]$. [step 1.1, L1, L2, L3]
 
@@ -89,15 +74,11 @@ The first interval has finite measure because $F$ is real-valued, so continuity 
 
 $$\mu_F([a,b]) = \lim_n \mu_F((s_n,b]) = \lim_n \big(F(b) - F(s_n)\big) = F(b) - F(a^-).$$
 
-The restriction $F|_{[a-1,a]}$ has bounded variation because it is
-nondecreasing, so [L3] ensures that the displayed left limit exists.
-[L1, L2, L3, algebra]
+The restriction $F|_{[a-1,a]}$ has bounded variation because it is nondecreasing, so [L3] ensures that the displayed left limit exists. [L1, L2, L3, algebra]
 
 3.1 The intervals $(s_n,a]$ decrease to $\{a\}$, and continuity from above gives $\mu_F(\{a\})=F(a)-F(a^-)$. [step 2.1, L1, L2, L3]
 
-Indeed, $(s_0,a]$ has finite measure and
-$$\mu_F(\{a\})=\lim_n\mu_F((s_n,a])=\lim_n\big(F(a)-F(s_n)\big)=F(a)-F(a^-).$$
-[step 2.1, L1, L2, L3]
+Indeed, $(s_0,a]$ has finite measure and $$\mu_F(\{a\})=\lim_n\mu_F((s_n,a])=\lim_n\big(F(a)-F(s_n)\big)=F(a)-F(a^-).$$ [step 2.1, L1, L2, L3]
 
 The same argument gives $\mu_F(\{b\})=F(b)-F(b^-)$. Therefore
 
@@ -109,11 +90,7 @@ Together with step 1.1, this proves all four interval formulas. [step 1.1, step 
 
 5.1 Fix $m \ge 1$. The restriction $F|_{[-m,m]}$ is nondecreasing, hence of bounded variation on $[-m,m]$. [step 4.1, L3]
 
-So [L3] makes its discontinuity set at most countable. Every atom of $\mu_F$
-in $(-m,m)$ is an interior jump point by step 4.1, hence lies in that countable
-discontinuity set. Therefore the atoms in $(-m,m)$ are at most countable. By
-[L4], their union over $m\ge1$ is at most countable, and this union contains
-every atom of $\mu_F$. [given, step 4.1, L3, L4]
+So [L3] makes its discontinuity set at most countable. Every atom of $\mu_F$ in $(-m,m)$ is an interior jump point by step 4.1, hence lies in that countable discontinuity set. Therefore the atoms in $(-m,m)$ are at most countable. By [L4], their union over $m\ge1$ is at most countable, and this union contains every atom of $\mu_F$. [given, step 4.1, L3, L4]
 
 6.1 Steps 1.1 through 5.1 prove the claimed interval formulas, the atom criterion, and the countability of the atom set. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1]
 

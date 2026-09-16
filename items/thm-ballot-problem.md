@@ -77,15 +77,6 @@ $$(p+q)\,N = (p-q)\binom{p+q}{p}.$$
 
 ## Remarks
 
-- **The quotient form.** The identity of the statement is an identity of natural
-  numbers. Reading each natural number as its canonical natural in $\mathbb{R}$
-  ([[def-canonical-natural]]) and dividing by the nonzero real $p+q$ turns it into
-  the familiar $\frac{p-q}{p+q}\binom{p+q}{p}$; the multiplicative form is the one
-  proved, and the division is legitimate only because $p+q\ne0$, which needs
-  $p>q$ or at least $p+q\ge1$.
+- **The quotient form.** The identity of the statement is an identity of natural numbers. Reading each natural number as its canonical natural in $\mathbb{R}$ ([[def-canonical-natural]]) and dividing by the nonzero real $p+q$ turns it into the familiar $\frac{p-q}{p+q}\binom{p+q}{p}$; the multiplicative form is the one proved, and the division is legitimate only because $p+q\ne0$, which needs $p>q$ or at least $p+q\ge1$.
 
-- **Why $p>q$ and not $p\ge q$.** With $p=q$ the height ends at $0$, so the last
-  vote brings the count level and the first candidate is not strictly ahead
-  throughout; the count is then $0$, while the right-hand side is $0$ as well, so
-  the identity survives but says nothing. The interesting weak form, in which the
-  first candidate is merely never behind, is a separate statement.
+- **Why $p>q$ and not $p\ge q$.** With $p=q$ the height ends at $0$, so the last vote brings the count level and the first candidate is not strictly ahead throughout; the count is then $0$, while the right-hand side is $0$ as well, so the identity survives but says nothing. The interesting weak form, in which the first candidate is merely never behind, is a separate statement.

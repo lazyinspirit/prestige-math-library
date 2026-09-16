@@ -37,34 +37,17 @@ their simultaneous-equality event is empty.
 
 **Given:** Countable choice and the interval $\Omega=[0,1]$.
 
-[F1] Under countable choice, Lebesgue measurable sets form a sigma-algebra and
-$\lambda_1$ is a measure. The interval $[0,1]$ is measurable with measure one,
-and every singleton is measurable with measure zero.
-[[thm-lebesgue-measure-is-a-complete-measure]]
-[[thm-lebesgue-measure-of-a-box-of-every-kind]]
-[[prop-countable-subsets-of-rn-are-lebesgue-null]]
+[F1] Under countable choice, Lebesgue measurable sets form a sigma-algebra and $\lambda_1$ is a measure. The interval $[0,1]$ is measurable with measure one, and every singleton is measurable with measure zero. [[thm-lebesgue-measure-is-a-complete-measure]] [[thm-lebesgue-measure-of-a-box-of-every-kind]] [[prop-countable-subsets-of-rn-are-lebesgue-null]]
 
-[F2] Every Borel subset of $\mathbb R$ is Lebesgue measurable, and an
-indicator is measurable exactly when its set is measurable.
-[[thm-borel-sets-are-lebesgue-measurable]]
-[[prop-indicator-function-is-measurable-iff-its-set-is-measurable]]
+[F2] Every Borel subset of $\mathbb R$ is Lebesgue measurable, and an indicator is measurable exactly when its set is measurable. [[thm-borel-sets-are-lebesgue-measurable]] [[prop-indicator-function-is-measurable-iff-its-set-is-measurable]]
 
-[F3] A probability measure is a measure of total mass one. A modification
-requires almost-sure equality at each fixed time, whereas indistinguishability
-requires one measurable probability-one event of equality at every time.
-[[def-probability-measure]]
-[[def-law-modification-and-indistinguishability-of-processes]]
+[F3] A probability measure is a measure of total mass one. A modification requires almost-sure equality at each fixed time, whereas indistinguishability requires one measurable probability-one event of equality at every time. [[def-probability-measure]] [[def-law-modification-and-indistinguishability-of-processes]]
 
-[F4] Continuity on $[0,1]$ is the unpunctured epsilon--delta condition at
-every point, including the one-sided domain condition at its endpoints.
-[[def-continuity-real]]
+[F4] Continuity on $[0,1]$ is the unpunctured epsilon--delta condition at every point, including the one-sided domain condition at its endpoints. [[def-continuity-real]]
 
-[F5] The nondegenerate closed interval $[0,1]$ is uncountable.
-[[cor-interval-uncountable]]
+[F5] The nondegenerate closed interval $[0,1]$ is uncountable. [[cor-interval-uncountable]]
 
-[F6] Countable choice is used through the construction and measure properties
-of Lebesgue measure in [F1]--[F2]. No outcome or time is selected from a family
-in the proof. [[def-countable-choice]]
+[F6] Countable choice is used through the construction and measure properties of Lebesgue measure in [F1]--[F2]. No outcome or time is selected from a family in the proof. [[def-countable-choice]]
 
 ## Counterexample
 
@@ -84,9 +67,4 @@ in the proof. [[def-countable-choice]]
 
 ## Source notes
 
-Sousi, Section 3.2, Definition 3.6, Remark 3.7, and Example 3.8, printed
-pp. 31--32, gives this zero-process/uniform-spike construction and records that
-it is a version with different sample-path behavior. The trace probability
-space, coordinate measurability, empty simultaneous-equality event, and direct
-epsilon--delta verification at interior points and both endpoints are supplied
-above.
+Sousi, Section 3.2, Definition 3.6, Remark 3.7, and Example 3.8, printed pp. 31--32, gives this zero-process/uniform-spike construction and records that it is a version with different sample-path behavior. The trace probability space, coordinate measurability, empty simultaneous-equality event, and direct epsilon--delta verification at interior points and both endpoints are supplied above.

@@ -41,9 +41,7 @@ $$15+4\sqrt{14}.$$
 
 [F1] The continued fraction of $\sqrt D$ has symmetric period ending in $2a_0$, and the returned state satisfies $Q_\ell=1$ ([[thm-square-root-continued-fraction-period-structure]]).
 
-[F2] The convergents of $\sqrt D$ satisfy
-$$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$
-([[lem-square-root-convergent-norm-identity]]).
+[F2] The convergents of $\sqrt D$ satisfy $$p_n^2-Dq_n^2=(-1)^{n+1}Q_{n+1}.$$ ([[lem-square-root-convergent-norm-identity]]).
 
 ## Verification
 

@@ -48,25 +48,17 @@ This is the page's precise reading of "finite-dimensional".
 
 **Given:** A normed space $X$ over $\mathbb K\in\{\mathbb R,\mathbb C\}$.
 
-[L1] A chosen ordered basis yields a topological isomorphism with a coordinate
-space ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] A chosen ordered basis yields a topological isomorphism with a coordinate space ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] Riesz's lemma: for every proper closed normed subspace $M\subsetneq X$ and
-$0<\alpha<1$ there is a unit vector at distance $>\alpha$ from $M$
-([[lem-riesz-lemma]]).
+[L2] Riesz's lemma: for every proper closed normed subspace $M\subsetneq X$ and $0<\alpha<1$ there is a unit vector at distance $>\alpha$ from $M$ ([[lem-riesz-lemma]]).
 
-[L3] Compact metric spaces are totally bounded
-([[thm-compact-implies-complete-and-totally-bounded]]).
+[L3] Compact metric spaces are totally bounded ([[thm-compact-implies-complete-and-totally-bounded]]).
 
-[L4] $\mathbb R^n$ is locally compact for $n\ge1$
-([[cor-rn-is-locally-compact-and-sigma-compact]]).
+[L4] $\mathbb R^n$ is locally compact for $n\ge1$ ([[cor-rn-is-locally-compact-and-sigma-compact]]).
 
-[L5] $\mathbb C$ is the real coordinate plane
-([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L5] $\mathbb C$ is the real coordinate plane ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
-[L6] In a metric space, local compactness at a point is equivalent to the
-existence of an open ball around that point contained in a compact subset
-([[def-locally-compact-space]]).
+[L6] In a metric space, local compactness at a point is equivalent to the existence of an open ball around that point contained in a compact subset ([[def-locally-compact-space]]).
 
 ## Proof
 
@@ -88,5 +80,4 @@ existence of an open ball around that point contained in a compact subset
 
 ## Remarks
 
-- The reverse implication uses only one finite recursion at a time. No choice
-  principle is needed.
+- The reverse implication uses only one finite recursion at a time. No choice principle is needed.

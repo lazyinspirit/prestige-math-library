@@ -35,15 +35,11 @@ Let $f:A\to A'$ be a morphism in an abelian category.
 
 **Given:** A morphism $f:A\to A'$.
 
-[L1] Inverse image is defined by pullback and direct image by ordinary image
-factorization ([[def-the-direct-image-and-inverse-image-of-a-subobject]]).
+[L1] Inverse image is defined by pullback and direct image by ordinary image factorization ([[def-the-direct-image-and-inverse-image-of-a-subobject]]).
 
-[L2] A subobject is represented by a monomorphism; in particular $0\to A'$ and
-$1_A:A\to A$ represent the zero and total subobjects
-([[def-subobject-and-quotient-object]]).
+[L2] A subobject is represented by a monomorphism; in particular $0\to A'$ and $1_A:A\to A$ represent the zero and total subobjects ([[def-subobject-and-quotient-object]]).
 
-[L3] The ordinary image of a morphism is defined as the kernel of a cokernel
-([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
+[L3] The ordinary image of a morphism is defined as the kernel of a cokernel ([[def-image-and-coimage-in-a-category-with-kernels-and-cokernels]]).
 
 ## Proof
 

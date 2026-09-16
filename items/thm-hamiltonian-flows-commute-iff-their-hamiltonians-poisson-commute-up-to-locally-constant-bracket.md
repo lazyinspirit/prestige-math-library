@@ -33,15 +33,11 @@ $\{F,G\}=0$ is sufficient.
 
 **Given:** Smooth functions $F,G$ on a symplectic manifold.
 
-[F1] $[X_F,X_G]=-X_{\{F,G\}}$.
-[[thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism]].
+[F1] $[X_F,X_G]=-X_{\{F,G\}}$. [[thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism]].
 
-[F2] Two vector fields have commuting local flows exactly when their Lie
-bracket vanishes.
-[[thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute]].
+[F2] Two vector fields have commuting local flows exactly when their Lie bracket vanishes. [[thm-two-vector-fields-commute-if-and-only-if-their-local-flows-commute]].
 
-[F3] The zero field has precisely the locally constant Hamiltonians.
-[[prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function]].
+[F3] The zero field has precisely the locally constant Hamiltonians. [[prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function]].
 
 ## Proof
 

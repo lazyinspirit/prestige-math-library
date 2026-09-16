@@ -49,20 +49,13 @@ subgraph of size at least $x^8|G|$.
 
 ## Facts & Assumptions
 
-**Given:** The numerical choices $c_3=c_4=4$, $c=\tfrac14$, and $x=2^{-10}$,
-and a graph $G$ satisfying the conditional hypotheses in the Example.
+**Given:** The numerical choices $c_3=c_4=4$, $c=\tfrac14$, and $x=2^{-10}$, and a graph $G$ satisfying the conditional hypotheses in the Example.
 
-[L1] The helper claim uses the substitutions
-$b_1=c_4/2$, $b_2=4c_3/c_4$, and $b_3=c_3$
-([[lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph]]).
+[L1] The helper claim uses the substitutions $b_1=c_4/2$, $b_2=4c_3/c_4$, and $b_3=c_3$ ([[lem-a-large-cy-restricted-subgraph-in-the-three-outcome-theorem-forces-a-smaller-scale-restricted-subgraph]]).
 
-[L2] The iterative restricted-sparsification lemma concludes with an
-$x$-restricted induced subgraph of size at least $x^{b_1b_2}|G|$
-([[lem-iterated-restricted-sparsification-reaches-the-target-scale]]).
+[L2] The iterative restricted-sparsification lemma concludes with an $x$-restricted induced subgraph of size at least $x^{b_1b_2}|G|$ ([[lem-iterated-restricted-sparsification-reaches-the-target-scale]]).
 
-[L3] The final generalized-niceness lemma is obtained by exactly this choice of
-$b_1,b_2,b_3$
-([[lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade]]).
+[L3] The final generalized-niceness lemma is obtained by exactly this choice of $b_1,b_2,b_3$ ([[lem-constant-scale-restricted-generalized-niceness-yields-an-x-scale-restricted-subgraph-a-polynomial-clique-or-stable-set-or-a-blockade]]).
 
 ## Verification
 

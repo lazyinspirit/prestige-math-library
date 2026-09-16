@@ -30,12 +30,9 @@ $$K_m(A,b)=\{p(A)b:p=0\text{ or }\deg p<m\}.$$
 
 ## Facts & Assumptions
 
-**Given:** A square matrix $A$ over $\mathbb R$ or $\mathbb C$, a vector $b$ of
-matching size, and an integer $m\ge 1$.
+**Given:** A square matrix $A$ over $\mathbb R$ or $\mathbb C$, a vector $b$ of matching size, and an integer $m\ge 1$.
 
-[F1] For $m\ge 1$, the Krylov subspace is
-$K_m(A,b)=\operatorname{span}\{b,Ab,\dots,A^{m-1}b\}$
-([[def-krylov-subspace-of-a-matrix-and-start-vector]]).
+[F1] For $m\ge 1$, the Krylov subspace is $K_m(A,b)=\operatorname{span}\{b,Ab,\dots,A^{m-1}b\}$ ([[def-krylov-subspace-of-a-matrix-and-start-vector]]).
 
 ## Proof
 **Proof technique:** direct.

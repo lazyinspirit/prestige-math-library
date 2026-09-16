@@ -33,16 +33,11 @@ $$\lambda((a,b]) = b-a,\quad \lambda((a,b)) = b-a,\quad \lambda([a,b]) = b-a.$$
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and the identity function $F(x)=x$ on
-$\mathbb{R}$.
+**Given:** The Axiom of Countable Choice and the identity function $F(x)=x$ on $\mathbb{R}$.
 
-[L1] Assuming Countable Choice, the Lebesgue-Stieltjes measure of the identity
-function is Lebesgue measure.
-([[cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity]])
+[L1] Assuming Countable Choice, the Lebesgue-Stieltjes measure of the identity function is Lebesgue measure. ([[cor-lebesgue-measure-is-the-lebesgue-stieltjes-measure-of-the-identity]])
 
-[L2] The interval formulas for a Lebesgue-Stieltjes measure recover open,
-closed, and half-open interval values from the distribution function.
-([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
+[L2] The interval formulas for a Lebesgue-Stieltjes measure recover open, closed, and half-open interval values from the distribution function. ([[thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures]])
 
 ## Verification
 
@@ -51,5 +46,4 @@ closed, and half-open interval values from the distribution function.
 1.1 By [L1], the measure attached to $F(x)=x$ is $\lambda$. [L1]
 
 2.1 Applying [L2] with $F(x)=x$ gives [step 1.1, L2]
-$F(b)-F(a)=F(b^-)-F(a)=F(b)-F(a^-)=b-a$, so every one of the four interval
-conventions has measure $b-a$. [step 1.1, L2] ∎
+$F(b)-F(a)=F(b^-)-F(a)=F(b)-F(a^-)=b-a$, so every one of the four interval conventions has measure $b-a$. [step 1.1, L2] ∎

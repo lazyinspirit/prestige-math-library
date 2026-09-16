@@ -31,16 +31,11 @@ $N\subseteq U$. If $\lambda$ is a limit ordinal with
 $\operatorname{cf}(\lambda)>\kappa$, then $M_\lambda$ is injective.
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, the transfinite tower $(M_\alpha)$ in a locally
-small Grothendieck category with generator $U$, the bound $\kappa$ from [L2],
-and a limit ordinal $\lambda$ with $\operatorname{cf}(\lambda)>\kappa$.
+**Given:** The Axiom of Choice, the transfinite tower $(M_\alpha)$ in a locally small Grothendieck category with generator $U$, the bound $\kappa$ from [L2], and a limit ordinal $\lambda$ with $\operatorname{cf}(\lambda)>\kappa$.
 
 [L1] Extension from subobjects of the fixed generator detects injectivity ([[lem-extension-from-subobjects-of-a-generator-detects-injectivity]]).
 
-[L2] If $\operatorname{cf}(\lambda)>\kappa$, every map from a subobject of the
-generator to $M_\lambda$ factors through an earlier stage, and all transition
-maps are monic
-([[lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps]]).
+[L2] If $\operatorname{cf}(\lambda)>\kappa$, every map from a subobject of the generator to $M_\lambda$ factors through an earlier stage, and all transition maps are monic ([[lem-transfinite-iteration-of-the-generator-extension-preserves-monomorphisms-and-factorizes-small-source-maps]]).
 
 [L3] Every map from a subobject of the generator into one stage extends across the generator at the next stage ([[lem-the-one-step-generator-map-is-a-functorial-monomorphism]]).
 ## Proof

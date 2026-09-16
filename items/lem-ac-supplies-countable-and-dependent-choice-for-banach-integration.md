@@ -37,18 +37,13 @@ prescribed-initial-point form of Dependent Choice.
 
 **Given:** ZF and the Axiom of Choice.
 
-[F1] AC supplies a choice function on any set of nonempty sets
-([[def-axiom-of-choice]]).
+[F1] AC supplies a choice function on any set of nonempty sets ([[def-axiom-of-choice]]).
 
-[F2] Countable Choice asks for a choice function on every countable family of
-nonempty sets ([[def-countable-choice]]).
+[F2] Countable Choice asks for a choice function on every countable family of nonempty sets ([[def-countable-choice]]).
 
-[F3] Prescribed-initial-point Dependent Choice asks for a sequence through any
-serial relation on a nonempty set, beginning at the supplied point
-([[def-dependent-choice]]).
+[F3] Prescribed-initial-point Dependent Choice asks for a sequence through any serial relation on a nonempty set, beginning at the supplied point ([[def-dependent-choice]]).
 
-[F4] A supplied self-map $s:X\to X$ and starting point $a\in X$ determine a
-unique sequence with $x_0=a$ and $x_{n+1}=s(x_n)$ ([[thm-recursion]]).
+[F4] A supplied self-map $s:X\to X$ and starting point $a\in X$ determine a unique sequence with $x_0=a$ and $x_{n+1}=s(x_n)$ ([[thm-recursion]]).
 
 ## Proof
 

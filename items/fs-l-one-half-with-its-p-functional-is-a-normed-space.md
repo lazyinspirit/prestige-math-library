@@ -28,17 +28,13 @@ space.
 
 **Given:** The explicit half-norm triangle-inequality failure.
 
-[L1] The previous counterexample exhibits functions with
-$$\|f+g\|_{1/2}>\|f\|_{1/2}+\|g\|_{1/2}$$
-([[cex-half-norm-fails-the-triangle-inequality-on-two-indicators]]).
+[L1] The previous counterexample exhibits functions with $$\|f+g\|_{1/2}>\|f\|_{1/2}+\|g\|_{1/2}$$ ([[cex-half-norm-fails-the-triangle-inequality-on-two-indicators]]).
 
-[L2] A normed space requires a norm, hence the triangle inequality
-([[def-norm-and-normed-space]]).
+[L2] A normed space requires a norm, hence the triangle inequality ([[def-norm-and-normed-space]]).
 
 ## Refutation
 
-**Proof technique:** Refute with the explicit $1/2$-triangle-inequality
-failure on two indicators.
+**Proof technique:** Refute with the explicit $1/2$-triangle-inequality failure on two indicators.
 
 1.1 The functions from [L1] violate the triangle inequality required by [L2]. [L1, L2]
 

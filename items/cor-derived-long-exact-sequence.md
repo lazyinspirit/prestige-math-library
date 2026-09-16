@@ -45,11 +45,9 @@ $$0\to R_I^0G(A')\to R_I^0G(A)\to R_I^0G(A'')\to R_I^1G(A')\to R_I^1G(A)\to\cdot
 
 **Given:** A short exact sequence $0\to A'\to A\to A''\to0$ in $\mathcal A$.
 
-[L1] Left derived functors form a homological delta functor
-([[thm-left-derived-functors-form-a-homological-delta-functor]]).
+[L1] Left derived functors form a homological delta functor ([[thm-left-derived-functors-form-a-homological-delta-functor]]).
 
-[L2] Right derived functors form a cohomological delta functor
-([[thm-right-derived-functors-form-a-cohomological-delta-functor]]).
+[L2] Right derived functors form a cohomological delta functor ([[thm-right-derived-functors-form-a-cohomological-delta-functor]]).
 
 ## Proof
 

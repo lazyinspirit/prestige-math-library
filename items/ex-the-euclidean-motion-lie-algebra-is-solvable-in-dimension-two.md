@@ -34,18 +34,13 @@ It has derived length two and is not nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A basis $R,P,Q$ in which $R$ is infinitesimal rotation and $P,Q$
-are translations.
+**Given:** A basis $R,P,Q$ in which $R$ is infinitesimal rotation and $P,Q$ are translations.
 
-[L1] The semidirect-product bracket combines the acting algebra, its action,
-and the ideal bracket ([[def-semidirect-product-of-lie-algebras]]).
+[L1] The semidirect-product bracket combines the acting algebra, its action, and the ideal bracket ([[def-semidirect-product-of-lie-algebras]]).
 
-[L2] The derived series tests solvability
-([[def-derived-series-and-solvable-lie-algebra]]), and its least vanishing
-index is the derived length ([[def-solvable-length-of-a-lie-algebra]]).
+[L2] The derived series tests solvability ([[def-derived-series-and-solvable-lie-algebra]]), and its least vanishing index is the derived length ([[def-solvable-length-of-a-lie-algebra]]).
 
-[L3] The lower central series tests nilpotence
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L3] The lower central series tests nilpotence ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
 ## Verification
 

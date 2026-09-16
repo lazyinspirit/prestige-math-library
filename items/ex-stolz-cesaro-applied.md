@@ -98,20 +98,8 @@ algebraic identity, the factorisation of $(n+1)^{p+1} - n^{p+1}$.
 
 ## Remarks
 
-- **Why the limit is taken from $n = 1$.** $b_0 = 0$, so $a_0/b_0$ does not
-  denote anything, and [[thm-stolz-cesaro]] is stated for the tail exactly for
-  this reason. Nothing is lost: convergence is a property of a tail
-  ([[lem-limit-of-tail]]).
+- **Why the limit is taken from $n = 1$.** $b_0 = 0$, so $a_0/b_0$ does not denote anything, and [[thm-stolz-cesaro]] is stated for the tail exactly for this reason. Nothing is lost: convergence is a property of a tail ([[lem-limit-of-tail]]).
 
-- **The closed form is available and is not needed.** For $p = 1$ one has
-  $a_n = n(n+1)/2$, and dividing by $n^2$ gives the limit $1/2$ directly. For
-  general $p$ the closed form is Faulhaber's formula, which this library does
-  not prove; the difference quotient sidesteps it entirely, and that is the
-  practical content of Stolz-Cesaro.
+- **The closed form is available and is not needed.** For $p = 1$ one has $a_n = n(n+1)/2$, and dividing by $n^2$ gives the limit $1/2$ directly. For general $p$ the closed form is Faulhaber's formula, which this library does not prove; the difference quotient sidesteps it entirely, and that is the practical content of Stolz-Cesaro.
 
-- **A sanity check on the answer.** The quotient compares a sum of $n$ terms,
-  the largest of which is $n^p$, with $n^{p+1} = n \cdot n^p$, so the limit must
-  lie in $[0,1]$; and the terms $k^p$ grow, so the sum should be a definite
-  fraction of the largest term times $n$. The fraction is $1/(p+1)$, which is
-  what an integral comparison would also predict. No such comparison is used
-  above.
+- **A sanity check on the answer.** The quotient compares a sum of $n$ terms, the largest of which is $n^p$, with $n^{p+1} = n \cdot n^p$, so the limit must lie in $[0,1]$; and the terms $k^p$ grow, so the sum should be a definite fraction of the largest term times $n$. The fraction is $1/(p+1)$, which is what an integral comparison would also predict. No such comparison is used above.

@@ -35,11 +35,9 @@ is Cauchy for the additive $p$-adic metric and converges in $\mathbb Z_p$.
 
 **Given:** The sequence $t_n=1+p+\cdots+p^{n-1}$ in $\mathbb Z_p$.
 
-[F1] The $p$-adic metric measures how many initial residue coordinates agree
-([[def-p-adic-metric-on-zp]]).
+[F1] The $p$-adic metric measures how many initial residue coordinates agree ([[def-p-adic-metric-on-zp]]).
 
-[L1] $\mathbb Z_p$ is complete for that metric
-([[thm-zp-is-compact-hausdorff-totally-disconnected-and-complete]]).
+[L1] $\mathbb Z_p$ is complete for that metric ([[thm-zp-is-compact-hausdorff-totally-disconnected-and-complete]]).
 
 ## Verification
 

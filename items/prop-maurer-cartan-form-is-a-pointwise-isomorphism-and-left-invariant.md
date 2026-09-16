@@ -42,23 +42,17 @@ the supplied Maurer--Cartan definition and invariant-extension theorem.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, elements
-$g,h\in G$, a vector $V\in T_gG$, and $X\in\mathfrak g=T_eG$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, elements $g,h\in G$, a vector $V\in T_gG$, and $X\in\mathfrak g=T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] The left Maurer--Cartan form is
-$\theta_g=d(L_{g^{-1}})_g$, and its associated bundle map is the inverse of
-smooth left trivialization. [[def-left-maurer-cartan-form]].
+[F2] The left Maurer--Cartan form is $\theta_g=d(L_{g^{-1}})_g$, and its associated bundle map is the inverse of smooth left trivialization. [[def-left-maurer-cartan-form]].
 
-[F3] Left translations are $L_a(b)=ab$, with inverse $L_{a^{-1}}$.
-[[def-left-and-right-translations-on-a-lie-group]].
+[F3] Left translations are $L_a(b)=ab$, with inverse $L_{a^{-1}}$. [[def-left-and-right-translations-on-a-lie-group]].
 
-[F4] Differentials obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F4] Differentials obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
-[F5] The left-invariant extension of $X\in\mathfrak g$ is
-$X^L_g=d(L_g)_eX$. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
+[F5] The left-invariant extension of $X\in\mathfrak g$ is $X^L_g=d(L_g)_eX$. [[thm-left-invariant-vector-fields-evaluate-isomorphically-at-the-identity]].
 
 ## Proof
 

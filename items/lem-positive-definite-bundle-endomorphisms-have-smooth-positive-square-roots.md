@@ -34,13 +34,9 @@ bundle endomorphism $S$ with $S^2=T$.
 
 **Given:** The bundle, metric, and endomorphism in the statement.
 
-[F1] Every non-negative self-adjoint endomorphism of a finite-dimensional inner
-product space has a unique non-negative square root.
-[[thm-non-negative-square-root-exists-and-is-unique]].
+[F1] Every non-negative self-adjoint endomorphism of a finite-dimensional inner product space has a unique non-negative square root. [[thm-non-negative-square-root-exists-and-is-unique]].
 
-[F2] A solution of a smooth finite-dimensional equation depends smoothly on
-parameters when its derivative in the unknown is invertible.
-[[thm-parametrized-implicit-function-theorem-with-higher-regularity]].
+[F2] A solution of a smooth finite-dimensional equation depends smoothly on parameters when its derivative in the unknown is invertible. [[thm-parametrized-implicit-function-theorem-with-higher-regularity]].
 
 ## Proof
 

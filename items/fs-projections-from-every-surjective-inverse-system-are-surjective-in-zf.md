@@ -28,13 +28,9 @@ surjective coordinate projections from its inverse limit.
 
 ## Facts & Assumptions
 
-**Given:** The classical set-theoretic fact that this surjectivity principle is
-not provable in ZF for arbitrary infinite inverse systems of finite groups.
+**Given:** The classical set-theoretic fact that this surjectivity principle is not provable in ZF for arbitrary infinite inverse systems of finite groups.
 
-[L1] The coordinate projections from an inverse limit are the canonical maps,
-and the universal property alone does not assert their surjectivity
-([[def-coordinate-projections-from-an-inverse-limit]],
-[[thm-concrete-inverse-limit-universal-property-in-groups]]).
+[L1] The coordinate projections from an inverse limit are the canonical maps, and the universal property alone does not assert their surjectivity ([[def-coordinate-projections-from-an-inverse-limit]], [[thm-concrete-inverse-limit-universal-property-in-groups]]).
 
 ## Refutation
 

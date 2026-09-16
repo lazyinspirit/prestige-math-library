@@ -31,9 +31,7 @@ is isotropic over $\mathbb Q$.
 
 ## Facts & Assumptions
 
-**Given:** The global square-class approximation lemma and the Hasse-Minkowski
-theorem ([[lem-global-square-class-approximation]],
-[[thm-hasse-minkowski-over-the-rationals]]).
+**Given:** The global square-class approximation lemma and the Hasse-Minkowski theorem ([[lem-global-square-class-approximation]], [[thm-hasse-minkowski-over-the-rationals]]).
 
 ## Verification
 

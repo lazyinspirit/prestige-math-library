@@ -36,12 +36,9 @@ $$X+\mathfrak h\longmapsto \operatorname{Ad}_hX+\mathfrak h.$$
 
 **Given:** $\mathrm{AC}_\omega$, a closed subgroup $H\le G$, and $h\in H$.
 
-[A1] The map $dq_e$ identifies $\mathfrak g/\mathfrak h$ with
-$T_{eH}(G/H)$. [[def-countable-choice]],
-[[prop-tangent-space-of-a-homogeneous-quotient]].
+[A1] The map $dq_e$ identifies $\mathfrak g/\mathfrak h$ with $T_{eH}(G/H)$. [[def-countable-choice]], [[prop-tangent-space-of-a-homogeneous-quotient]].
 
-[F1] $\operatorname{Ad}_h=d(C_h)_e$, where $C_h(g)=hgh^{-1}$.
-[[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
+[F1] $\operatorname{Ad}_h=d(C_h)_e$, where $C_h(g)=hgh^{-1}$. [[def-conjugation-and-the-adjoint-representation-of-a-lie-group]].
 
 ## Proof
 

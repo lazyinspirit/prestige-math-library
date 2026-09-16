@@ -35,7 +35,6 @@ $$\int f_n\,d\mu\to\int f\,d\mu.$$
 **Proof technique:** direct.
 
 1.1 On $(0,1)$ with Lebesgue measure, let [given, construct]
-$$f_n:=(n+1)\chi_{(0,1/(n+1))}.$$
-Then $f_n\to0$ almost everywhere and every $f_n$ is integrable.
+$$f_n:=(n+1)\chi_{(0,1/(n+1))}.$$ Then $f_n\to0$ almost everywhere and every $f_n$ is integrable.
 
 2.1 However $\int f_n\,d\mu=1$ for every $n$, while $\int0\,d\mu=0$. So the conclusion fails, and [L1] identifies the missing dominating function as the lost hypothesis. [step 1.1, L1, algebra] ∎

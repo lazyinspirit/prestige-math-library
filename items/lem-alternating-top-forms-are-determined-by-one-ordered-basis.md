@@ -38,17 +38,13 @@ $\mathcal B$.
 
 ## Facts & Assumptions
 
-**Given:** $V,F,n,\mathcal B,\omega$, and $v_0,\ldots,v_{n-1}$ as in the
-statement.
+**Given:** $V,F,n,\mathcal B,\omega$, and $v_0,\ldots,v_{n-1}$ as in the statement.
 
-[F1] An $n$-dimensional vector space has an ordered basis of $n$ vectors
-([[def-dimension]]).
+[F1] An $n$-dimensional vector space has an ordered basis of $n$ vectors ([[def-dimension]]).
 
-[F2] Every vector has a unique coordinate column in an ordered basis
-([[def-coordinate-column-and-matrix-of-a-linear-map]]).
+[F2] Every vector has a unique coordinate column in an ordered basis ([[def-coordinate-column-and-matrix-of-a-linear-map]]).
 
-[L1] If $G:M_n(F)\to F$ is alternating and column-multilinear, then
-$G(A)=G(I_n)\det(A)$ ([[lem-rigidity-of-alternating-multilinear-matrix-functions]]).
+[L1] If $G:M_n(F)\to F$ is alternating and column-multilinear, then $G(A)=G(I_n)\det(A)$ ([[lem-rigidity-of-alternating-multilinear-matrix-functions]]).
 
 ## Proof
 

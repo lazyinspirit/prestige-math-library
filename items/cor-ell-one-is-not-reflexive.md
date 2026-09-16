@@ -32,9 +32,7 @@ Assume the ultrafilter lemma, DC, and HB.  Neither $\ell^1(\mathbb R)$ nor $\ell
 
 [F3] The space $\ell^1(\mathbb K)$ consists of scalar sequences with norm $\|a\|_1=\sum_{n=0}^{\infty}|a_n|$ ([[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
-[F4] The ultrafilter lemma is the statement that every filter on a set is
-contained in an ultrafilter; DC and HB are respectively the principles named
-in [[def-dependent-choice]] and [[def-hahn-banach-extension-principle-relative]].
+[F4] The ultrafilter lemma is the statement that every filter on a set is contained in an ultrafilter; DC and HB are respectively the principles named in [[def-dependent-choice]] and [[def-hahn-banach-extension-principle-relative]].
 
 ## Proof
 
@@ -46,9 +44,4 @@ in [[def-dependent-choice]] and [[def-hahn-banach-extension-principle-relative]]
 
 ## Remarks
 
-- The ultrafilter lemma, DC and HB are hypotheses of this corollary, not
-  results consumed from the proof: the statement above names each of them in
-  full. The library states the ultrafilter lemma, and proves it from AC, as
-  [[thm-ultrafilter-lemma]], and records its proved choice cost in
-  [[rem-choice-strengths]]; this corollary assumes the lemma and inherits no
-  part of that AC-based proof.
+- The ultrafilter lemma, DC and HB are hypotheses of this corollary, not results consumed from the proof: the statement above names each of them in full. The library states the ultrafilter lemma, and proves it from AC, as [[thm-ultrafilter-lemma]], and records its proved choice cost in [[rem-choice-strengths]]; this corollary assumes the lemma and inherits no part of that AC-based proof.

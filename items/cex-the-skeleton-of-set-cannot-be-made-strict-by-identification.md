@@ -33,8 +33,7 @@ objects.
 
 ## Facts & Assumptions
 
-**Given:** A skeleton $\mathcal S$ of $\mathbf{Set}$ containing such an object
-$D$.
+**Given:** A skeleton $\mathcal S$ of $\mathbf{Set}$ containing such an object $D$.
 
 [L1] In Isbell's skeleton argument, forcing the associator to become an identity collapses every endomorphism $D\to D$ to the same map, which is absurd ([[rem-isbells-argument-that-isomorphic-objects-cannot-simply-be-identified]]).
 

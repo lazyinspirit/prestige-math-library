@@ -40,11 +40,9 @@ in $\Omega$ is null-homologous in $\Omega$.
 **Proof technique:** direct.
 
 1.1 Since $\Gamma^\ast\subseteq\Omega$, the index $n(\Gamma,p)$ is defined for every $p\in\mathbb C\setminus\Omega$. By [L1], the function $p\mapsto n(\Gamma,p)$ is locally constant on $\mathbb C\setminus\Gamma^\ast$, and there is $R>0$ with $n(\Gamma,p)=0$ whenever $|p|>R$. Thus the subset [given, L1, construct]
-$$E=\{\infty\}\cup\{p\in\mathbb C\setminus\Omega:n(\Gamma,p)=0\}$$
-contains $\infty$ together with a punctured neighborhood of $\infty$ in the sphere. [given, L1, construct]
+$$E=\{\infty\}\cup\{p\in\mathbb C\setminus\Omega:n(\Gamma,p)=0\}$$ contains $\infty$ together with a punctured neighborhood of $\infty$ in the sphere. [given, L1, construct]
 
 2.1 The set $E$ is open in $\widehat{\mathbb C}\setminus\Omega$ by the local constancy from [L1], and its complement in $\widehat{\mathbb C}\setminus\Omega$ is open for the same reason. Since $\widehat{\mathbb C}\setminus\Omega$ is connected and $E$ is nonempty by step 1.1, it follows that [step 1.1, L1, algebra]
-$$E=\widehat{\mathbb C}\setminus\Omega.$$
-Therefore $n(\Gamma,p)=0$ for every $p\in\mathbb C\setminus\Omega$.
+$$E=\widehat{\mathbb C}\setminus\Omega.$$ Therefore $n(\Gamma,p)=0$ for every $p\in\mathbb C\setminus\Omega$.
 
 3.1 By [L2], the vanishing from step 2.1 is exactly the statement that $\Gamma$ is null-homologous in $\Omega$. [step 2.1, L2] ∎

@@ -47,8 +47,7 @@ and no further family choice is made beyond the stated inherited assumption.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the supplied intervals, smooth unit-speed profile with $r>0$, the
-displayed local surface parametrization, and the standard Euclidean metric.
+**Given:** $\mathrm{AC}_\omega$, the supplied intervals, smooth unit-speed profile with $r>0$, the displayed local surface parametrization, and the standard Euclidean metric.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 

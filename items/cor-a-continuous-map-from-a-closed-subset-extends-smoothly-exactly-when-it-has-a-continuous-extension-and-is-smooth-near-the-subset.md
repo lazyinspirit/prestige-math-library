@@ -36,9 +36,7 @@ that is smooth on a neighbourhood of $A$.
 
 **Given:** A closed subset $A\subseteq M$ and a continuous map $f:A\to N$.
 
-[L1] Relative Whitney approximation for manifold-valued maps smooths a
-continuous extension without changing it near the closed set
-([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
+[L1] Relative Whitney approximation for manifold-valued maps smooths a continuous extension without changing it near the closed set ([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
 
 ## Proof
 **Proof technique:** direct.

@@ -38,13 +38,9 @@ $E$ have a supplied bundle metric. The splitting need not be canonical.
 
 **Given:** The short exact sequence and base hypotheses in the statement.
 
-[F1] Short exactness includes the local subbundle structure on $i(E')$ and
-fiberwise exactness of $q$
-([[def-vector-bundle-map-section-subbundle-and-isomorphism]]).
+[F1] Short exactness includes the local subbundle structure on $i(E')$ and fiberwise exactness of $q$ ([[def-vector-bundle-map-section-subbundle-and-isomorphism]]).
 
-[A1] Under AC a finite-rank bundle over a paracompact Hausdorff base has a
-bundle metric; with a supplied numeration the metric construction is
-choice-free ([[thm-numerable-vector-bundles-admit-bundle-metrics]]).
+[A1] Under AC a finite-rank bundle over a paracompact Hausdorff base has a bundle metric; with a supplied numeration the metric construction is choice-free ([[thm-numerable-vector-bundles-admit-bundle-metrics]]).
 
 ## Proof
 

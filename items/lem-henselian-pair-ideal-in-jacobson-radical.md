@@ -32,9 +32,7 @@ If $(A,I)$ is a Henselian pair, then $I \subseteq J(A)$.
 
 **Given:** A Henselian pair $(A,I)$.
 
-[L1] A Henselian pair is defined by the Jacobson-radical condition together
-with unique lifting of coprime monic factorizations
-([[def-henselian-pair-and-henselian-local-ring]]).
+[L1] A Henselian pair is defined by the Jacobson-radical condition together with unique lifting of coprime monic factorizations ([[def-henselian-pair-and-henselian-local-ring]]).
 
 ## Proof
 

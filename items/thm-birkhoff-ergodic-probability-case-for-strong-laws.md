@@ -27,23 +27,16 @@ If $T$ is an ergodic measure-preserving transformation of a probability space an
 
 ## Facts & Assumptions
 
-[F1] [[thm-linearity-of-the-lebesgue-integral-on-l-one]]: The class $L^1(\mu)$ is a complex vector space, and the Lebesgue integral is
-complex-linear on it:
-$$\int (\alpha f+\beta g)\,d\mu=\alpha\int f\,d\mu+\beta\int g\,d\mu \qquad(\alpha,\beta\in\mathbb C,\ f,g\in L^1(\mu)).$$
+[F1] [[thm-linearity-of-the-lebesgue-integral-on-l-one]]: The class $L^1(\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\int (\alpha f+\beta g)\,d\mu=\alpha\int f\,d\mu+\beta\int g\,d\mu \qquad(\alpha,\beta\in\mathbb C,\ f,g\in L^1(\mu)).$$
 
-[F2] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let
-$f,g : X \to \overline{\mathbb{R}}$ be measurable. Then:
+[F2] [[thm-arithmetic-and-lattice-operations-preserve-measurability]]: Let $(X,\mathcal{A})$ be a measurable space and let $f,g : X \to \overline{\mathbb{R}}$ be measurable. Then:
 
 1. $cf$ is measurable for every real scalar $c$;
 2. $\max(f,g)$, $\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;
 3. if $f+g$ is pointwise defined, then $f+g$ is measurable;
-4. with the convention of
-   rem-zero-times-infinity-convention-for-pointwise-products, the pointwise
-   product $fg$ is measurable.
+4. with the convention of rem-zero-times-infinity-convention-for-pointwise-products, the pointwise product $fg$ is measurable.
 
-[F3] [[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]]: Let $(X,\mathcal{A})$ be a measurable space and let
-$f_n : X \to \overline{\mathbb{R}}$ be measurable for every $n \in \mathbb{N}$.
-Then the functions
+[F3] [[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]]: Let $(X,\mathcal{A})$ be a measurable space and let $f_n : X \to \overline{\mathbb{R}}$ be measurable for every $n \in \mathbb{N}$. Then the functions
 
 $$\sup_n f_n,\qquad \inf_n f_n,\qquad \limsup_n f_n,\qquad \liminf_n f_n$$
 
@@ -67,16 +60,9 @@ $$\mu\left(\bigcup_{k<m}E_k\right)\le\sum_{k<m}\mu(E_k),$$
 
 including $m=0$, where both sides are $0$.
 
-[F7] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that
-$f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single
-nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then
-$f\in L^1(\mu)$,
-$$\int|f_n-f|\,d\mu\longrightarrow0,$$
-and hence
-$$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
+[F7] [[thm-dominated-convergence]]: Let $f$ and $(f_n)$ be measurable complex-valued functions such that $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for a single nonnegative measurable function $g$ with $\int g\,d\mu<+\infty$. Then $f\in L^1(\mu)$, $$\int|f_n-f|\,d\mu\longrightarrow0,$$ and hence $$\int f_n\,d\mu\longrightarrow\int f\,d\mu.$$
 
-[F8] [[thm-integral-triangle-inequality]]: If $f\in L^1(\mu)$, then
-$$\left|\int f\,d\mu\right|\le\int |f|\,d\mu.$$
+[F8] [[thm-integral-triangle-inequality]]: If $f\in L^1(\mu)$, then $$\left|\int f\,d\mu\right|\le\int |f|\,d\mu.$$
 
 [F9] [[thm-integrals-are-invariant-under-measure-preserving-maps]]: If $T$ preserves $\mu$ and $f:X\to[0,\infty]$ is measurable, then $\int f\circ T\,d\mu=\int f\,d\mu$, allowing infinity. If $f$ is integrable real or complex valued, $f\circ T$ is integrable and the same equality holds. Conversely, for a measurable self-map, equality for every measurable indicator implies measure preservation.
 

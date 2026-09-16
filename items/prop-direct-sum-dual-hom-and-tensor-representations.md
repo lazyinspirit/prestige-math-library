@@ -43,17 +43,13 @@ respectively.
 
 ## Facts & Assumptions
 
-**Given:** Representations of one Lie algebra $\mathfrak g$ on all displayed
-vector spaces.
+**Given:** Representations of one Lie algebra $\mathfrak g$ on all displayed vector spaces.
 
-[L1] Their operators satisfy $[\rho(x),\rho(y)]=\rho([x,y])$
-([[def-representation-of-a-lie-algebra]]).
+[L1] Their operators satisfy $[\rho(x),\rho(y)]=\rho([x,y])$ ([[def-representation-of-a-lie-algebra]]).
 
-[L2] A bilinear map induces a unique linear map from a tensor product
-([[thm-universal-property-of-module-tensor-products]]).
+[L2] A bilinear map induces a unique linear map from a tensor product ([[thm-universal-property-of-module-tensor-products]]).
 
-[L3] Elements of an algebraic direct sum have finite support
-([[def-direct-sum-of-a-family-of-modules]]).
+[L3] Elements of an algebraic direct sum have finite support ([[def-direct-sum-of-a-family-of-modules]]).
 
 ## Proof
 

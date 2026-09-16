@@ -36,11 +36,9 @@ then stop changing.
 
 **Given:** A square matrix $A$, a vector $b$, and its grade $\nu=\nu(A,b)$.
 
-[F1] The relative minimal polynomial $q_{A,b}$ is monic of degree $\nu$ and
-satisfies $q_{A,b}(A)b=0$ ([[def-grade-and-relative-minimal-polynomial-of-a-start-vector]]).
+[F1] The relative minimal polynomial $q_{A,b}$ is monic of degree $\nu$ and satisfies $q_{A,b}(A)b=0$ ([[def-grade-and-relative-minimal-polynomial-of-a-start-vector]]).
 
-[L1] For every $m\ge 1$,
-$K_m(A,b)=\{p(A)b:\deg p<m\}$ ([[prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector]]).
+[L1] For every $m\ge 1$, $K_m(A,b)=\{p(A)b:\deg p<m\}$ ([[prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector]]).
 
 ## Proof
 **Proof technique:** direct.

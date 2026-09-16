@@ -34,7 +34,6 @@ space.
 $A_{\mathfrak p}$. [given]
 
 2.1 The ring $A_{\mathfrak p}$ is local, with maximal ideal [step 1.1]
-$\mathfrak pA_{\mathfrak p}$, so the canonically isomorphic stalk is local as
-well. [step 1.1]
+$\mathfrak pA_{\mathfrak p}$, so the canonically isomorphic stalk is local as well. [step 1.1]
 
 3.1 Thus every stalk is local, which is exactly the locally ringed condition. [step 2.1] ∎

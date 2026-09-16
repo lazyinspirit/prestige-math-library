@@ -39,11 +39,7 @@ $$\|f\|_{L^2(\mathbb T)}^2=\sum_{j\in J}|a_j|^2.$$
 **Proof technique:** direct character integration.
 
 1.1 Expanding $|f|^2$ gives [given, algebra]
-$$|f(x)|^2=\sum_{j,k\in J}a_j\overline{a_k}e_{\lambda_j-\lambda_k}(x).$$
-The frequencies are distinct because the defining sequence is strictly
-increasing. [given, algebra]
+$$|f(x)|^2=\sum_{j,k\in J}a_j\overline{a_k}e_{\lambda_j-\lambda_k}(x).$$ The frequencies are distinct because the defining sequence is strictly increasing. [given, algebra]
 
 2.1 For an integer $n$, direct integration gives [step 1.1, algebra]
-$\int_0^1e_n(x)\,dx=1$ when $n=0$ and $0$ otherwise. Thus integration of
-step 1.1 retains precisely the $j=k$ terms and gives
-$$\int_0^1|f(x)|^2\,dx=\sum_{j\in J}|a_j|^2.$$ [step 1.1, algebra] ∎
+$\int_0^1e_n(x)\,dx=1$ when $n=0$ and $0$ otherwise. Thus integration of step 1.1 retains precisely the $j=k$ terms and gives $$\int_0^1|f(x)|^2\,dx=\sum_{j\in J}|a_j|^2.$$ [step 1.1, algebra] ∎

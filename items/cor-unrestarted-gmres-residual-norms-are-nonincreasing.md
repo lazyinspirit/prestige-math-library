@@ -29,11 +29,9 @@ $$\|b-Ax_{m+1}\|_2\le \|b-Ax_m\|_2 \qquad(m\ge 0).$$
 
 ## Facts & Assumptions
 
-**Given:** Unrestarted GMRES iterates $x_m$ and $x_{m+1}$ for the same initial
-guess $x_0$.
+**Given:** Unrestarted GMRES iterates $x_m$ and $x_{m+1}$ for the same initial guess $x_0$.
 
-[L1] Each GMRES iterate minimizes the residual norm over its affine Krylov
-space $x_0+K_m(A,r_0)$ ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
+[L1] Each GMRES iterate minimizes the residual norm over its affine Krylov space $x_0+K_m(A,r_0)$ ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
 
 ## Proof
 **Proof technique:** direct.

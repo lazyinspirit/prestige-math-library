@@ -31,9 +31,7 @@ Every Lie subalgebra is an ideal.
 
 **Given:** The asserted implication from Lie subalgebra to ideal.
 
-[L1] A subalgebra is closed under its internal brackets, whereas an ideal must
-be closed under brackets with every ambient element
-([[def-lie-subalgebra-ideal-and-center]]).
+[L1] A subalgebra is closed under its internal brackets, whereas an ideal must be closed under brackets with every ambient element ([[def-lie-subalgebra-ideal-and-center]]).
 
 ## Refutation
 

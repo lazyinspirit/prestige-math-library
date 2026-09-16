@@ -28,19 +28,15 @@ measure $\lambda_{m+n}$ agree on every Borel subset of $\mathbb R^{m+n}$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice, positive integers $m,n$, and the
-identification $\mathbb R^{m+n}=\mathbb R^m \times \mathbb R^n$.
+**Given:** The Axiom of Countable Choice, positive integers $m,n$, and the identification $\mathbb R^{m+n}=\mathbb R^m \times \mathbb R^n$.
 
 [L1] The Borel sigma-algebra on $\mathbb R^{m+n}$ is $\mathcal B(\mathbb R^m)\otimes\mathcal B(\mathbb R^n)$. ([[thm-borel-products-of-euclidean-spaces-are-euclidean-borel]])
 
 [L2] The product measure on sigma-finite spaces exists and satisfies the rectangle formula. ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]])
 
-[L3] Assuming countable choice, Lebesgue measure of a box is the product of its
-side lengths. ([[thm-lebesgue-measure-of-a-box-of-every-kind]])
+[L3] Assuming countable choice, Lebesgue measure of a box is the product of its side lengths. ([[thm-lebesgue-measure-of-a-box-of-every-kind]])
 
-[L4] Assuming countable choice, Lebesgue measure is sigma-finite and finite on
-bounded sets.
-([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
+[L4] Assuming countable choice, Lebesgue measure is sigma-finite and finite on bounded sets. ([[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]])
 
 [L5] Two measures that agree on a sigma-finite generating pi-system agree on the generated sigma-algebra. ([[thm-measure-uniqueness-on-a-sigma-finite-pi-system]])
 

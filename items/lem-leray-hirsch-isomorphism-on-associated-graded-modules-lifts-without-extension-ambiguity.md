@@ -31,20 +31,13 @@ splitting of either filtration.
 
 ## Facts & Assumptions
 
-**Given:** A Serre fibration over a CW base, a supplied finite homogeneous
-family $(e_i)$, and the displayed actual cup-product map.
+**Given:** A Serre fibration over a CW base, a supplied finite homogeneous family $(e_i)$, and the displayed actual cup-product map.
 
-[F1] [[thm-cohomological-serre-spectral-sequence]] gives in each total degree
-the exhaustive, complete Serre filtration and identifies its associated
-graded with $E_\infty$, under AC.
+[F1] [[thm-cohomological-serre-spectral-sequence]] gives in each total degree the exhaustive, complete Serre filtration and identifies its associated graded with $E_\infty$, under AC.
 
-[F2] [[thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence]]
-states that pullback and cup product preserve the filtration and induce the
-corresponding products on every page.
+[F2] [[thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence]] states that pullback and cup product preserve the filtration and induce the corresponding products on every page.
 
-[F3] [[lem-finite-and-complete-filtered-isomorphism-lifting]] states that a
-filtered map between the applicable finite complete filtrations is an
-isomorphism if its associated-graded map is one.
+[F3] [[lem-finite-and-complete-filtered-isomorphism-lifting]] states that a filtered map between the applicable finite complete filtrations is an isomorphism if its associated-graded map is one.
 
 [A1] [[def-axiom-of-choice]] is used only through [F1]–[F2].
 

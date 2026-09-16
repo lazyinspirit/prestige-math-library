@@ -35,16 +35,11 @@ given by $m+\ker f\mapsto f(m)$.
 
 **Given:** A module homomorphism $f:M\to N$.
 
-[L1] Its kernel and image are submodules, and a module homomorphism is
-injective exactly when its kernel is trivial
-([[thm-module-kernel-image-and-injectivity]]).
+[L1] Its kernel and image are submodules, and a module homomorphism is injective exactly when its kernel is trivial ([[thm-module-kernel-image-and-injectivity]]).
 
-[L2] A homomorphism vanishing on a submodule factors uniquely through the
-quotient module ([[thm-quotient-module-universal-property]]).
+[L2] A homomorphism vanishing on a submodule factors uniquely through the quotient module ([[thm-quotient-module-universal-property]]).
 
-[L3] Module isomorphisms are precisely bijective module homomorphisms; kernel
-and image have their displayed definitions
-([[def-module-homomorphism-kernel-image-and-cokernel]]).
+[L3] Module isomorphisms are precisely bijective module homomorphisms; kernel and image have their displayed definitions ([[def-module-homomorphism-kernel-image-and-cokernel]]).
 
 ## Proof
 

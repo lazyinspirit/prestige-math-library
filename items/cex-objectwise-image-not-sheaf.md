@@ -29,14 +29,11 @@ a subsheaf of the target.
 
 ## Facts & Assumptions
 
-**Given:** The sheaf morphism
-$$\exp: C^0(-,\mathbb R)\longrightarrow C^0(-,S^1),\qquad \exp_U(f)(z)=e^{2\pi i f(z)},$$
-on the circle $X=S^1$.
+**Given:** The sheaf morphism $$\exp: C^0(-,\mathbb R)\longrightarrow C^0(-,S^1),\qquad \exp_U(f)(z)=e^{2\pi i f(z)},$$ on the circle $X=S^1$.
 
 [F1] A subsheaf must in particular be a sheaf ([[def-subsheaf]]).
 
-[L1] The image sheaf is obtained by sheafifying the objectwise image presheaf
-([[lem-image-sheaf-is-sheafification-presheaf-image]]).
+[L1] The image sheaf is obtained by sheafifying the objectwise image presheaf ([[lem-image-sheaf-is-sheafification-presheaf-image]]).
 
 ## Counterexample
 

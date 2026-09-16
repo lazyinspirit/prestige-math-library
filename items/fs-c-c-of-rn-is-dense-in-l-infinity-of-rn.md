@@ -27,8 +27,7 @@ sources:
 
 **Given:** The $L^\infty$-closure theorem for $C_c(\mathbb{R}^n)$.
 
-[L1] The closure of $C_c(\mathbb{R}^n)$ in $L^\infty$ is exactly
-$C_0(\mathbb{R}^n)$ ([[thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn]]).
+[L1] The closure of $C_c(\mathbb{R}^n)$ in $L^\infty$ is exactly $C_0(\mathbb{R}^n)$ ([[thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn]]).
 
 ## Refutation
 
@@ -38,5 +37,4 @@ $C_0(\mathbb{R}^n)$ ([[thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn]]).
 $C_0(\mathbb{R}^n)$, because it does not vanish at infinity. [L1]
 
 2.1 By [L1], every $L^\infty$-limit of compactly supported continuous functions [L1, step 1.1]
-lies in $C_0(\mathbb{R}^n)$. Therefore $1$ cannot lie in the closure of
-$C_c(\mathbb{R}^n)$, and the claim is false. [L1, step 1.1] ∎
+lies in $C_0(\mathbb{R}^n)$. Therefore $1$ cannot lie in the closure of $C_c(\mathbb{R}^n)$, and the claim is false. [L1, step 1.1] ∎

@@ -34,16 +34,11 @@ logarithm for every $x>0$. For every $x>2$, this uncontinued series diverges.
 
 **Given:** $x>2$ and $u:=x-1>1$.
 
-[L1] The ratio test says that a series diverges if the lower limit of the
-absolute ratios of successive nonzero terms is greater than $1$
-([[thm-ratio-test]]).
+[L1] The ratio test says that a series diverges if the lower limit of the absolute ratios of successive nonzero terms is greater than $1$ ([[thm-ratio-test]]).
 
-[L2] If a series converges, then its terms tend to $0$
-([[lem-nth-term-test]]).
+[L2] If a series converges, then its terms tend to $0$ ([[lem-nth-term-test]]).
 
-[L3] The Mercator series gives local data on $-1<u\leq1$; a separate product
-law continues those data uniquely to all positive inputs
-([[lem-log-series-extends-by-the-product-law]]).
+[L3] The Mercator series gives local data on $-1<u\leq1$; a separate product law continues those data uniquely to all positive inputs ([[lem-log-series-extends-by-the-product-law]]).
 
 ## Counterexample
 

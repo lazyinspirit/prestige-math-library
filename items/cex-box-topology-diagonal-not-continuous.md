@@ -90,19 +90,8 @@ is box-open and $\Delta^{-1}[B] = \{0\}$, which is not open in $\mathbb{R}$.
 
 ## Remarks
 
-- **This is the practical reason the product topology is the default.** The
-  characteristic property of [[thm-product-universal-property]] is what makes a
-  map into a product easy to build, and the box topology has no such property:
-  here every component is the identity, and continuity still fails. Any
-  construction that assembles a map coordinate by coordinate would break in the
-  box topology.
+- **This is the practical reason the product topology is the default.** The characteristic property of [[thm-product-universal-property]] is what makes a map into a product easy to build, and the box topology has no such property: here every component is the identity, and continuity still fails. Any construction that assembles a map coordinate by coordinate would break in the box topology.
 
-- **The two topologies are separated by this single map.** If they agreed, the
-  same map could not be continuous for one and not for the other; so this item
-  reproves the strictness recorded in
-  [[fs-product-topology-equals-box-topology]], by a different route and with the
-  same box.
+- **The two topologies are separated by this single map.** If they agreed, the same map could not be continuous for one and not for the other; so this item reproves the strictness recorded in [[fs-product-topology-equals-box-topology]], by a different route and with the same box.
 
-- **Nothing here needs a choice principle**, the box $B$ and the map $\Delta$
-  being written down by formulas, and the only existential step being the
-  Archimedean one of [[cor-archimedean-reciprocal]].
+- **Nothing here needs a choice principle**, the box $B$ and the map $\Delta$ being written down by formulas, and the only existential step being the Archimedean one of [[cor-archimedean-reciprocal]].

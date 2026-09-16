@@ -106,27 +106,10 @@ failure there.
 
 ## Remarks
 
-- **Only one half is proved twice.** Claim 2 could instead be deduced from claim
-  1 by reflection, since $(-y_k)$ is nondecreasing and bounded above and
-  $\inf T = -\sup(-T)$ ([[thm-infimum-property]]). The direct argument is written
-  out because it is no longer, and because it puts [[lem-inf-epsilon]] to work in
-  the place it was proved for, rather than routing an infimum statement through a
-  supremum statement and a sign change.
+- **Only one half is proved twice.** Claim 2 could instead be deduced from claim 1 by reflection, since $(-y_k)$ is nondecreasing and bounded above and $\inf T = -\sup(-T)$ ([[thm-infimum-property]]). The direct argument is written out because it is no longer, and because it puts [[lem-inf-epsilon]] to work in the place it was proved for, rather than routing an infimum statement through a supremum statement and a sign change.
 
-- **The limit is the supremum of the range, not merely some upper bound.** That
-  identification is what [[lem-sup-epsilon]] supplies and it is the useful part
-  of the theorem: it is how a limit is *computed* from a monotone construction,
-  as in the recursive sequences of the examples page, rather than merely shown to
-  exist.
+- **The limit is the supremum of the range, not merely some upper bound.** That identification is what [[lem-sup-epsilon]] supplies and it is the useful part of the theorem: it is how a limit is *computed* from a monotone construction, as in the recursive sequences of the examples page, rather than merely shown to exist.
 
-- **Boundedness on the other side is automatic and is not a hypothesis.** A
-  nondecreasing sequence is bounded below by $x_0$ ([[def-monotone-sequence]]),
-  so "nondecreasing and bounded above" already means "nondecreasing and bounded";
-  this is what makes [[cor-monotone-converges-iff-bounded]] an equivalence rather
-  than a one-sided statement.
+- **Boundedness on the other side is automatic and is not a hypothesis.** A nondecreasing sequence is bounded below by $x_0$ ([[def-monotone-sequence]]), so "nondecreasing and bounded above" already means "nondecreasing and bounded"; this is what makes [[cor-monotone-converges-iff-bounded]] an equivalence rather than a one-sided statement.
 
-- **Without the hypothesis of boundedness the conclusion fails completely, and
-  fails in a describable way**: a nondecreasing sequence that is not bounded
-  above diverges to $+\infty$ ([[lem-monotone-unbounded-diverges]]), so a
-  nondecreasing sequence either converges to the supremum of its range or runs
-  away, with no third possibility.
+- **Without the hypothesis of boundedness the conclusion fails completely, and fails in a describable way**: a nondecreasing sequence that is not bounded above diverges to $+\infty$ ([[lem-monotone-unbounded-diverges]]), so a nondecreasing sequence either converges to the supremum of its range or runs away, with no third possibility.

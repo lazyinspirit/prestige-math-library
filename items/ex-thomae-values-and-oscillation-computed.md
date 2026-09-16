@@ -80,13 +80,6 @@ point of the example is to see the numbers.
 
 ## Remarks
 
-- **The least denominator is what the values record.** $t$ is large exactly at
-  the rationals with small denominators, and those are sparse: every point with least
-  denominator $q$ is a multiple of $1/\iota(q)$, and consecutive multiples of
-  $1/\iota(q)$ are $1/\iota(q)$ apart. The
-  graph is the familiar picture of tall spikes at the integers, half as tall at
-  the half-integers, and so on down.
+- **The least denominator is what the values record.** $t$ is large exactly at the rationals with small denominators, and those are sparse: every point with least denominator $q$ is a multiple of $1/\iota(q)$, and consecutive multiples of $1/\iota(q)$ are $1/\iota(q)$ apart. The graph is the familiar picture of tall spikes at the integers, half as tall at the half-integers, and so on down.
 
-- **Every value $1/\iota(q)$ is attained**, by step 1.2, so the range of $t$ is
-  exactly $\{0\} \cup \{\, 1/\iota(q) : q \in \mathbb{N},\ q \ge 1 \,\}$; the
-  value $0$ is attained at every irrational.
+- **Every value $1/\iota(q)$ is attained**, by step 1.2, so the range of $t$ is exactly $\{0\} \cup \{\, 1/\iota(q) : q \in \mathbb{N},\ q \ge 1 \,\}$; the value $0$ is attained at every irrational.

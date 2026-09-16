@@ -40,22 +40,15 @@ $$\det(T)=(-1)^{s}\Big(\prod_{j=1}^{m}c_j\Big)^{-1}\det(U).$$
 
 ## Facts & Assumptions
 
-**Given:** $T$, an ordered basis $\mathcal B$, and
-$A=[T]_{\mathcal B}$.
+**Given:** $T$, an ordered basis $\mathcal B$, and $A=[T]_{\mathcal B}$.
 
-[L1] The operator determinant equals the determinant of its representing
-matrix in every ordered basis
-([[thm-operator-determinant-is-basis-independent]]).
+[L1] The operator determinant equals the determinant of its representing matrix in every ordered basis ([[thm-operator-determinant-is-basis-independent]]).
 
-[L2] Gaussian elimination over a field reduces every finite matrix to row
-echelon form ([[thm-gaussian-elimination-produces-row-echelon-form]]).
+[L2] Gaussian elimination over a field reduces every finite matrix to row echelon form ([[thm-gaussian-elimination-produces-row-echelon-form]]).
 
-[L3] A row swap negates a determinant, scaling one row by $c$ scales it by
-$c$, and adding a scalar multiple of one row to another leaves it unchanged
-([[thm-determinant-under-elementary-row-operations]]).
+[L3] A row swap negates a determinant, scaling one row by $c$ scales it by $c$, and adding a scalar multiple of one row to another leaves it unchanged ([[thm-determinant-under-elementary-row-operations]]).
 
-[L4] The determinant of a triangular square matrix is the product of its
-diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
+[L4] The determinant of a triangular square matrix is the product of its diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
 
 ## Proof
 

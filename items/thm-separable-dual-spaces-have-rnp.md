@@ -35,45 +35,21 @@ Radon--Nikodym property.
 
 [A1] The Axiom of Choice holds ([[def-axiom-of-choice]]).
 
-[L1] AC implies Countable Choice and the relative Hahn--Banach principle: the
-former follows from the preceding local choice lemma, while the latter is
-realized by the AC form of dominated Hahn--Banach
-([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]],
-[[thm-hahn-banach-dominated-extension]]).
+[L1] AC implies Countable Choice and the relative Hahn--Banach principle: the former follows from the preceding local choice lemma, while the latter is realized by the AC form of dominated Hahn--Banach ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]], [[thm-hahn-banach-dominated-extension]]).
 
-[L2] Under Countable Choice and relative Hahn--Banach, norm separability of
-$Y^*$ implies norm separability of $Y$
-([[thm-separable-dual-implies-separable-primal]]).
+[L2] Under Countable Choice and relative Hahn--Banach, norm separability of $Y^*$ implies norm separability of $Y$ ([[thm-separable-dual-implies-separable-primal]]).
 
-[L3] RNP is the Bochner-density assertion for every absolutely continuous
-bounded-variation vector measure over a finite measure
-([[def-radon-nikodym-property]]), and the variation of such a vector measure is
-a finite positive measure
-([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]).
+[L3] RNP is the Bochner-density assertion for every absolutely continuous bounded-variation vector measure over a finite measure ([[def-radon-nikodym-property]]), and the variation of such a vector measure is a finite positive measure ([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]).
 
-[L4] On the finite measure spaces fixed in [L3], hence on sigma-finite
-reference spaces, AC gives integrable scalar densities for finite absolutely
-continuous signed and complex measures
-([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]],
-[[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]]).
+[L4] On the finite measure spaces fixed in [L3], hence on sigma-finite reference spaces, AC gives integrable scalar densities for finite absolutely continuous signed and complex measures ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]]).
 
-[L5] The variation of a scalar measure with density $h$ has density $|h|$
-([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]]).
+[L5] The variation of a scalar measure with density $h$ has density $|h|$ ([[thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value]]).
 
-[L6] Countable scalar suprema and pointwise limits preserve measurability
-([[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]]).
+[L6] Countable scalar suprema and pointwise limits preserve measurability ([[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]]).
 
-[L7] A strongly measurable Banach-valued function is Bochner integrable when
-its norm is integrable ([[thm-bochner-integrability-criterion]]), and bounded
-linear maps commute with its integral
-([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
+[L7] A strongly measurable Banach-valued function is Bochner integrable when its norm is integrable ([[thm-bochner-integrability-criterion]]), and bounded linear maps commute with its integral ([[thm-bounded-linear-maps-commute-with-bochner-integration]]).
 
-[L8] Nonempty at most countable sets can be enumerated; rational and Gaussian
-rational finite spans are countable under Countable Choice
-([[lem-countable-iff-surjection-from-n]], [[thm-rationals-countable]],
-[[lem-q-and-irrationals-dense-r]],
-[[thm-product-of-countable]], [[thm-countable-union-of-countable]],
-[[def-separable-space]]).
+[L8] Nonempty at most countable sets can be enumerated; rational and Gaussian rational finite spans are countable under Countable Choice ([[lem-countable-iff-surjection-from-n]], [[thm-rationals-countable]], [[lem-q-and-irrationals-dense-r]], [[thm-product-of-countable]], [[thm-countable-union-of-countable]], [[def-separable-space]]).
 
 ## Proof
 
@@ -91,13 +67,7 @@ rational finite spans are countable under Countable Choice
 
 $$\int_E|h_d|\,d\mu=|\nu_d|(E)\leq\|d\|\int_Eg\,d\mu.$$
 
-Testing this inequality on
-$\{|h_d|>\|d\|g+1/m\}$ shows
-$|h_d|\leq\|d\|g$ almost everywhere, for every $d\in D$. The union of the
-exceptional sets for all relations, bounds, and $d$ is null by countable
-additivity. Replace every $h_d$ by zero there. Off this one null set, the map
-$d\mapsto h_d(\omega)$ is $\mathbb K_0$-linear and bounded by
-$g(\omega)\|d\|$.
+Testing this inequality on $\{|h_d|>\|d\|g+1/m\}$ shows $|h_d|\leq\|d\|g$ almost everywhere, for every $d\in D$. The union of the exceptional sets for all relations, bounds, and $d$ is null by countable additivity. Replace every $h_d$ by zero there. Off this one null set, the map $d\mapsto h_d(\omega)$ is $\mathbb K_0$-linear and bounded by $g(\omega)\|d\|$.
 
 4.1 Extend the pointwise functionals to $Y^*$. For every remaining $\omega$, continuity and density of $D$ extend $d\mapsto h_d(\omega)$ uniquely to a scalar-linear functional $f(\omega)\in Y^*$ with $\|f(\omega)\|\leq g(\omega)$. In the complex case, $\mathbb Q+i\mathbb Q$-linearity and continuity give full complex linearity. Set $f=0$ on the common null set. Then $f(\omega)(d)=h_d(\omega)$ for all $d\in D$ off that set. [step 3.1, construct]
 
@@ -105,19 +75,12 @@ $g(\omega)\|d\|$.
 
 $$\|f(\omega)-x^*\|=\sup_{j\geq1}|f(\omega)(u_j)-x^*(u_j)|,$$
 
-so [L6] makes this distance measurable. Finally enumerate a norm-dense
-positively indexed sequence $(x_k^*)_{k\geq1}$ in the separable space $X$.
-For each integer $m\geq1$, assign to $\omega$ the least indexed nearest point among
-$x_1^*,\ldots,x_m^*$. The measurable distance functions make its finitely
-many tie-broken cells measurable, and density makes these simple functions
-converge in norm to $f(\omega)$. Thus $f$ is strongly measurable.
+so [L6] makes this distance measurable. Finally enumerate a norm-dense positively indexed sequence $(x_k^*)_{k\geq1}$ in the separable space $X$. For each integer $m\geq1$, assign to $\omega$ the least indexed nearest point among $x_1^*,\ldots,x_m^*$. The measurable distance functions make its finitely many tie-broken cells measurable, and density makes these simple functions converge in norm to $f(\omega)$. Thus $f$ is strongly measurable.
 
 6.1 Integrate the extension and identify the vector measure. The bound $\|f\|\leq g$ and [L7] make $f$ Bochner integrable. For $d\in D$, boundedness of evaluation at $d$, commutation in [L7], and step 2.1 give [L7, step 2.1, step 4.1, step 5.1]
 
 $$\left(\int_Ef\,d\mu\right)(d)=\int_Ef(\omega)(d)\,d\mu=\int_Eh_d\,d\mu=\nu(E)(d).$$
 
-Both $\int_Ef$ and $\nu(E)$ are continuous functionals on $Y$ and agree on
-the norm-dense subspace $D$, so they agree on all of $Y$. Hence
-$\nu(E)=\int_Ef\,d\mu$ for every measurable $E$.
+Both $\int_Ef$ and $\nu(E)$ are continuous functionals on $Y$ and agree on the norm-dense subspace $D$, so they agree on all of $Y$. Hence $\nu(E)=\int_Ef\,d\mu$ for every measurable $E$.
 
 7.1 Conclude RNP and close the degenerate cases. [A1, L3, step 1.1, step 6.1] The measure space and $\nu$ were arbitrary, so step 6.1 proves the RNP condition in [L3]. If $Y^*=\{0\}$, every scalar measure and every density above is zero; if $\mu(\Omega)=0$ or $\nu=0$, take $g=f=0$. A one-point dense set and a one-element rational span are covered by the same construction. AC is used for Hahn--Banach and Countable Choice in step 1.1, scalar RN and simultaneous representatives in steps 1.2--2.1, and the common countable family of a.e. relations; no stronger unstated choice is used. [A1, L3, step 1.1, step 6.1] ∎

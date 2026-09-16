@@ -37,17 +37,13 @@ full lattice in $\mathbb R^n$, and $N\cong\mathbb R^n/\Gamma$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Its infinitesimal generators form a basis of every $T_pN$.
-[[prop-regular-common-level-sets-are-lagrangian-submanifolds]].
+[F1] Its infinitesimal generators form a basis of every $T_pN$. [[prop-regular-common-level-sets-are-lagrangian-submanifolds]].
 
-[F2] The commuting fields define the local $\mathbb R^n$-action.
-[[prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action]].
+[F2] The commuting fields define the local $\mathbb R^n$-action. [[prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action]].
 
-[F3] Every smooth vector field on a compact manifold is complete.
-[[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]].
+[F3] Every smooth vector field on a compact manifold is complete. [[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]].
 
-[F4] Every finitely generated torsion-free abelian group is free abelian.
-[[cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules]].
+[F4] Every finitely generated torsion-free abelian group is free abelian. [[cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules]].
 
 ## Proof
 

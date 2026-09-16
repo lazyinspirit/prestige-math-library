@@ -45,29 +45,19 @@ Here $c=0$ gives the zero function.
 
 **Given:** A continuous $f$ satisfying the product-to-sum equation.
 
-[F1] $E=L^{-1}$ ([[def-integral-exponential]]) and
-$E(a+b)=E(a)E(b)$ ([[cor-integral-exponential-addition-law]]).
+[F1] $E=L^{-1}$ ([[def-integral-exponential]]) and $E(a+b)=E(a)E(b)$ ([[cor-integral-exponential-addition-law]]).
 
-[L1] $E$ is differentiable
-([[thm-integral-exponential-solves-the-normalised-ivp]]), so it is continuous
-([[cor-differentiable-implies-continuous]]).
+[L1] $E$ is differentiable ([[thm-integral-exponential-solves-the-normalised-ivp]]), so it is continuous ([[cor-differentiable-implies-continuous]]).
 
-[L2] Composites of continuous functions are continuous
-([[thm-composition-of-continuous-functions]]).
+[L2] Composites of continuous functions are continuous ([[thm-composition-of-continuous-functions]]).
 
-[L3] Every continuous additive real function has the form $g(t)=ct$
-([[thm-cauchy-functional-equation-regularity]]).
+[L3] Every continuous additive real function has the form $g(t)=ct$ ([[thm-cauchy-functional-equation-regularity]]).
 
-[L4] $E=\exp$ ([[thm-integral-exponential-agrees-with-exponential]]),
-$e=\exp(1)$ ([[def-real-exponential-function-and-e]]), and
-$L=\log$ ([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
+[L4] $E=\exp$ ([[thm-integral-exponential-agrees-with-exponential]]), $e=\exp(1)$ ([[def-real-exponential-function-and-e]]), and $L=\log$ ([[cor-integral-logarithm-agrees-with-natural-logarithm]]).
 
-[F2] For $b>0$, $b\neq1$, one defines
-$\log_bx=\log x/\log b$ ([[def-logarithm-to-a-base]]).
+[F2] For $b>0$, $b\neq1$, one defines $\log_bx=\log x/\log b$ ([[def-logarithm-to-a-base]]).
 
-[L5] The natural logarithm is continuous and satisfies
-$\log(xy)=\log x+\log y$
-([[thm-natural-logarithm-laws]]).
+[L5] The natural logarithm is continuous and satisfies $\log(xy)=\log x+\log y$ ([[thm-natural-logarithm-laws]]).
 
 ## Proof
 

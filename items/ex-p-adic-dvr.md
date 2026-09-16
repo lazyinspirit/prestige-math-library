@@ -37,14 +37,11 @@ is $p^n\mathbb Z_{(p)}$ for a unique $n\ge0$.
 
 **Given:** A prime integer $p$.
 
-[F1] A discrete valuation ring is the valuation ring of a surjective valuation
-$v:K\to\mathbb Z\cup\{\infty\}$ ([[def-discrete-valuation-ring]]).
+[F1] A discrete valuation ring is the valuation ring of a surjective valuation $v:K\to\mathbb Z\cup\{\infty\}$ ([[def-discrete-valuation-ring]]).
 
-[L1] In a DVR every nonzero fraction is uniquely a unit times a power of a
-uniformiser ([[thm-dvr-element-normal-form]]).
+[L1] In a DVR every nonzero fraction is uniquely a unit times a power of a uniformiser ([[thm-dvr-element-normal-form]]).
 
-[L2] Every nonzero ideal of a DVR is a power of its maximal ideal
-([[thm-ideals-in-a-dvr]]).
+[L2] Every nonzero ideal of a DVR is a power of its maximal ideal ([[thm-ideals-in-a-dvr]]).
 
 ## Verification
 

@@ -35,11 +35,9 @@ manifold.
 
 **Given:** The $x$-axis $S=\{(x,0):x\in\mathbb R\}\subseteq\mathbb R^2$.
 
-[F1] Embedded submanifolds are locally coordinate slices
-([[def-embedded-submanifold-and-slice-chart]]).
+[F1] Embedded submanifolds are locally coordinate slices ([[def-embedded-submanifold-and-slice-chart]]).
 
-[F2] Codimension records the dimension drop inside the ambient manifold
-([[def-codimension-and-hypersurface]]).
+[F2] Codimension records the dimension drop inside the ambient manifold ([[def-codimension-and-hypersurface]]).
 
 ## Refutation
 **Proof technique:** direct.

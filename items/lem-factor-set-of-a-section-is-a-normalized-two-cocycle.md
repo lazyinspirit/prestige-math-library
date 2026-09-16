@@ -32,16 +32,11 @@ set $f_s$ is a normalized two-cocycle.
 
 ## Facts & Assumptions
 
-**Given:** An extension $1\to M\to E\to G\to1$ with abelian kernel, and a
-normalized section $s:G\to E$.
+**Given:** An extension $1\to M\to E\to G\to1$ with abelian kernel, and a normalized section $s:G\to E$.
 
-[F1] Normalized two-cocycles are characterized by the cocycle and normalization
-equations
-([[def-normalized-two-cocycle-and-two-coboundary]]).
+[F1] Normalized two-cocycles are characterized by the cocycle and normalization equations ([[def-normalized-two-cocycle-and-two-coboundary]]).
 
-[F2] The factor set of a normalized section is defined by
-$s(g)s(h)s(gh)^{-1}=i(f_s(g,h))$
-([[def-normalized-set-theoretic-section-and-factor-set]]).
+[F2] The factor set of a normalized section is defined by $s(g)s(h)s(gh)^{-1}=i(f_s(g,h))$ ([[def-normalized-set-theoretic-section-and-factor-set]]).
 
 ## Proof
 

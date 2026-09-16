@@ -36,8 +36,7 @@ space.
 
 **Given:** The displayed claim.
 
-[L1] The pullback bundle consists of pairs $(q,e)$ with $f(q)=\pi(e)$
-([[def-pullback-vector-bundle-as-a-fibre-product]]).
+[L1] The pullback bundle consists of pairs $(q,e)$ with $f(q)=\pi(e)$ ([[def-pullback-vector-bundle-as-a-fibre-product]]).
 
 ## Refutation
 

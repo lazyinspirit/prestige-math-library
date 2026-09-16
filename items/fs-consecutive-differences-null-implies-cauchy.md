@@ -108,27 +108,10 @@ between the two hypotheses is exactly the uniform ratio.
 
 ## Remarks
 
-- **The failure is not marginal.** The witness does not merely fail to be Cauchy;
-  it is unbounded, and indeed $\sqrt k \to +\infty$. The consecutive differences
-  are of size roughly $1/(2\sqrt k)$, so they are null, but their partial sums
-  telescope to $\sqrt m - \sqrt k$, which is large when $m$ is much larger than
-  $k$. Nothing about "small steps" constrains what many steps accumulate to.
+- **The failure is not marginal.** The witness does not merely fail to be Cauchy; it is unbounded, and indeed $\sqrt k \to +\infty$. The consecutive differences are of size roughly $1/(2\sqrt k)$, so they are null, but their partial sums telescope to $\sqrt m - \sqrt k$, which is large when $m$ is much larger than $k$. Nothing about "small steps" constrains what many steps accumulate to.
 
-- **The repair is a uniform ratio, not a faster rate.** It is tempting to think
-  that a fast enough decay of the gaps would suffice, and in a sense that is
-  true, since summability of the gaps implies Cauchy; but the hypothesis
-  available in practice is the contractive one, a single $c < 1$ with
-  $|x_{k+2} - x_{k+1}| \le c|x_{k+1} - x_k|$, and that is what
-  [[thm-contractive-implies-cauchy]] consumes. Merely having each gap smaller
-  than the last is not enough either, which is the separate witness
-  [[cex-strictly-decreasing-gaps-no-limit]].
+- **The repair is a uniform ratio, not a faster rate.** It is tempting to think that a fast enough decay of the gaps would suffice, and in a sense that is true, since summability of the gaps implies Cauchy; but the hypothesis available in practice is the contractive one, a single $c < 1$ with $|x_{k+2} - x_{k+1}| \le c|x_{k+1} - x_k|$, and that is what [[thm-contractive-implies-cauchy]] consumes. Merely having each gap smaller than the last is not enough either, which is the separate witness [[cex-strictly-decreasing-gaps-no-limit]].
 
-- **Two of the three false statements on this page have the same shape.** A condition that
-  looks like the Cauchy condition, but at only one pair of indices per step, is
-  not the Cauchy condition. The other one is
-  [[fs-convergent-subsequence-implies-bounded]], where a condition holding along
-  one subsequence is mistaken for a condition on the sequence.
+- **Two of the three false statements on this page have the same shape.** A condition that looks like the Cauchy condition, but at only one pair of indices per step, is not the Cauchy condition. The other one is [[fs-convergent-subsequence-implies-bounded]], where a condition holding along one subsequence is mistaken for a condition on the sequence.
 
-- The witness is recorded as the named counterexample
-  [[cex-sqrt-k-differences-null-not-cauchy]], which adds the sharper statement
-  that $\sqrt k$ diverges to $+\infty$.
+- The witness is recorded as the named counterexample [[cex-sqrt-k-differences-null-not-cauchy]], which adds the sharper statement that $\sqrt k$ diverges to $+\infty$.

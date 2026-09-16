@@ -34,15 +34,11 @@ every event $B\in\mathcal H_m$.
 
 ## Facts & Assumptions
 
-**Given:** An independent sequence $(X_n)_{n\in\mathbb N}$, an index $m$, a
-tail event $A$, and an event $B\in\mathcal H_m$.
+**Given:** An independent sequence $(X_n)_{n\in\mathbb N}$, an index $m$, a tail event $A$, and an event $B\in\mathcal H_m$.
 
-[L1] The tail sigma-algebra is
-$\mathcal T(X_n:n\in\mathbb N)=\bigcap_{r\in\mathbb N}\sigma(X_n:n\ge r)$.
-([[def-tail-sigma-algebra-of-a-sequence]])
+[L1] The tail sigma-algebra is $\mathcal T(X_n:n\in\mathbb N)=\bigcap_{r\in\mathbb N}\sigma(X_n:n\ge r)$. ([[def-tail-sigma-algebra-of-a-sequence]])
 
-[L2] Disjoint groups of an independent sigma-algebra family remain independent.
-([[thm-grouping-independent-sigma-algebras]])
+[L2] Disjoint groups of an independent sigma-algebra family remain independent. ([[thm-grouping-independent-sigma-algebras]])
 
 ## Proof
 

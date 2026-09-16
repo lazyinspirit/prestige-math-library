@@ -32,19 +32,13 @@ $H^1(\mathfrak g,M)=0$.
 
 ## Facts & Assumptions
 
-**Given:** Such $\mathfrak g$, $M$, and a $1$-cocycle
-$\delta:\mathfrak g\to M$.
+**Given:** Such $\mathfrak g$, $M$, and a $1$-cocycle $\delta:\mathfrak g\to M$.
 
-[L1] A cocycle satisfies
-$\delta([x,y])=x\delta(y)-y\delta(x)$, and coboundaries have the form
-$x\mapsto xm$
-([[prop-first-lie-algebra-cohomology-is-derivations-modulo-inner-derivations]]).
+[L1] A cocycle satisfies $\delta([x,y])=x\delta(y)-y\delta(x)$, and coboundaries have the form $x\mapsto xm$ ([[prop-first-lie-algebra-cohomology-is-derivations-modulo-inner-derivations]]).
 
-[L2] Every finite-dimensional $\mathfrak g$-module is completely reducible
-([[thm-weyls-complete-reducibility-theorem]]).
+[L2] Every finite-dimensional $\mathfrak g$-module is completely reducible ([[thm-weyls-complete-reducibility-theorem]]).
 
-[L3] A semisimple characteristic-zero Lie algebra is perfect
-([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
+[L3] A semisimple characteristic-zero Lie algebra is perfect ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 
 ## Proof
 

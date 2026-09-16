@@ -35,19 +35,13 @@ of countable sets.
 
 **Given:** The Feferman–Levy symmetric interpretation $N$.
 
-[F1] [[lem-feferman-levy-bounded-layer-support]] gives every real in $N$ a
-Boolean name supported by one $H_m$.
+[F1] [[lem-feferman-levy-bounded-layer-support]] gives every real in $N$ a Boolean name supported by one $H_m$.
 
-[F2] [[def-feferman-levy-real-layers]] puts the sequence
-$\langle R_m:m<\omega\rangle$ in $N$ and identifies $R_m$ with the reals
-having such an $m$-bounded name.
+[F2] [[def-feferman-levy-real-layers]] puts the sequence $\langle R_m:m<\omega\rangle$ in $N$ and identifies $R_m$ with the reals having such an $m$-bounded name.
 
-[F3] [[lem-each-feferman-levy-real-layer-is-countable]] proves in $N$ that
-each fixed $R_m$ is countable.
+[F3] [[lem-each-feferman-levy-real-layer-is-countable]] proves in $N$ that each fixed $R_m$ is countable.
 
-[F4] [[thm-hereditarily-symmetric-interpretations-form-a-zf-model]] ensures
-that $N$ is a transitive ZF model, so its sequence, union, and internal
-countability assertions have their ordinary ZF meanings.
+[F4] [[thm-hereditarily-symmetric-interpretations-form-a-zf-model]] ensures that $N$ is a transitive ZF model, so its sequence, union, and internal countability assertions have their ordinary ZF meanings.
 
 ## Proof
 

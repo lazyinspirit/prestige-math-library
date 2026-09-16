@@ -27,12 +27,9 @@ Every hyperbolic group has solvable word problem.
 
 **Given:** A hyperbolic group $G$ with a finite Dehn presentation $\langle S \mid R \rangle$.
 
-[L1] In a Dehn presentation, every nonempty freely reduced trivial word
-contains a subword longer than half of a relator
-([[thm-hyperbolic-groups-admit-finite-dehn-presentations]]).
+[L1] In a Dehn presentation, every nonempty freely reduced trivial word contains a subword longer than half of a relator ([[thm-hyperbolic-groups-admit-finite-dehn-presentations]]).
 
-[A1] Replacing such a long subword by the complementary shorter subword strictly
-decreases word length and preserves the represented group element.
+[A1] Replacing such a long subword by the complementary shorter subword strictly decreases word length and preserves the represented group element.
 
 ## Proof
 

@@ -35,14 +35,11 @@ residual no later than step $\nu$.
 
 ## Facts & Assumptions
 
-**Given:** An invertible matrix $A$, an initial guess $x_0$, the initial
-residual $r_0=b-Ax_0$, and its grade $\nu=\nu(A,r_0)$.
+**Given:** An invertible matrix $A$, an initial guess $x_0$, the initial residual $r_0=b-Ax_0$, and its grade $\nu=\nu(A,r_0)$.
 
-[L1] The exact correction $A^{-1}r_0$ lies in $K_\nu(A,r_0)$
-([[cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade]]).
+[L1] The exact correction $A^{-1}r_0$ lies in $K_\nu(A,r_0)$ ([[cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade]]).
 
-[L2] GMRES minimizes the residual norm over
-$x_0+K_\nu(A,r_0)$ ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
+[L2] GMRES minimizes the residual norm over $x_0+K_\nu(A,r_0)$ ([[cor-gmres-minimizes-the-residual-over-the-affine-krylov-space]]).
 
 ## Proof
 **Proof technique:** direct.

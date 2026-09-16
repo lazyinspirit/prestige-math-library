@@ -29,15 +29,11 @@ isomorphisms are the corresponding relative suspension isomorphisms.
 
 ## Facts & Assumptions
 
-**Given:** A space $B$, a commutative ring $R$, and the standard ordered
-orientations of $\mathbb R$ and $\mathbb R^2$.
+**Given:** A space $B$, a commutative ring $R$, and the standard ordered orientations of $\mathbb R$ and $\mathbb R^2$.
 
-[F1] [[prop-thom-space-of-zero-and-trivial-bundles]] calculates the Thom space
-of a trivial rank-$n$ bundle as $\Sigma^nB_+$.
+[F1] [[prop-thom-space-of-zero-and-trivial-bundles]] calculates the Thom space of a trivial rank-$n$ bundle as $\Sigma^nB_+$.
 
-[F2] [[thm-thom-isomorphism-for-a-trivial-oriented-bundle]] constructs its
-normalized class by the ordered relative suspension and proves cup by it is an
-isomorphism over arbitrary $R$ without AC.
+[F2] [[thm-thom-isomorphism-for-a-trivial-oriented-bundle]] constructs its normalized class by the ordered relative suspension and proves cup by it is an isomorphism over arbitrary $R$ without AC.
 
 ## Verification
 

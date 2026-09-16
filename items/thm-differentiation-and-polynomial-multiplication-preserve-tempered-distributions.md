@@ -39,21 +39,13 @@ $\mathcal D'$.
 
 ## Facts & Assumptions
 
-**Given:** A tempered distribution $u$, a multi-index $\alpha$, and a complex
-polynomial $P$ ([[def-tempered-distribution]]).
+**Given:** A tempered distribution $u$, a multi-index $\alpha$, and a complex polynomial $P$ ([[def-tempered-distribution]]).
 
-[F1] Differentiation and polynomial multiplication are continuous linear
-endomorphisms of Schwartz space
-([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]],
-[[lem-smooth-polynomially-bounded-multipliers-on-schwartz-space]]).
+[F1] Differentiation and polynomial multiplication are continuous linear endomorphisms of Schwartz space ([[thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space]], [[lem-smooth-polynomially-bounded-multipliers-on-schwartz-space]]).
 
-[F2] Weak and strong dual topologies use point tests and bounded test sets
-([[def-weak-and-strong-topologies-on-tempered-distributions]]).
+[F2] Weak and strong dual topologies use point tests and bounded test sets ([[def-weak-and-strong-topologies-on-tempered-distributions]]).
 
-[F3] On $\mathcal D'$, distributional differentiation has the same sign and
-smooth multiplication has the same transpose formula
-([[def-distributional-derivative]],
-[[def-multiplication-of-a-distribution-by-a-smooth-function]]).
+[F3] On $\mathcal D'$, distributional differentiation has the same sign and smooth multiplication has the same transpose formula ([[def-distributional-derivative]], [[def-multiplication-of-a-distribution-by-a-smooth-function]]).
 
 ## Proof
 

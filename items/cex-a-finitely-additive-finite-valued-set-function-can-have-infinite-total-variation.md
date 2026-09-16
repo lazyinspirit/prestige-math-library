@@ -38,9 +38,7 @@ Every finitely additive finite-valued set function has finite total variation.
 
 [A3] For $u_n=(2\pi n+\pi/2)^{-1/2}$ and $v_n=(2\pi n+3\pi/2)^{-1/2}$, one has $g(u_n)=u_n$ and $g(v_n)=-v_n$, so $|g(u_n)-g(v_n)|=u_n+v_n$. The series $\sum_n (u_n+v_n)$ diverges.
 
-[A4] For a finitely additive real-valued set function on an algebra, its total
-variation on $E$ means
-$$|\phi|(E):=\sup\left\{\sum_{j=1}^m|\phi(E_j)|:E=\bigsqcup_{j=1}^mE_j,\ E_j\in\mathcal A\right\}.$$
+[A4] For a finitely additive real-valued set function on an algebra, its total variation on $E$ means $$|\phi|(E):=\sup\left\{\sum_{j=1}^m|\phi(E_j)|:E=\bigsqcup_{j=1}^mE_j,\ E_j\in\mathcal A\right\}.$$
 
 ## Counterexample
 

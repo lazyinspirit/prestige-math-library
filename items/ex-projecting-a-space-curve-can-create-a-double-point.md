@@ -36,8 +36,7 @@ projection creates double points.
 
 ## Facts & Assumptions
 
-**Given:** The space curve $\gamma:S^1\to\mathbb R^3$ above and the
-$y$-coordinate projection $\pi$.
+**Given:** The space curve $\gamma:S^1\to\mathbb R^3$ above and the $y$-coordinate projection $\pi$.
 
 ## Verification
 **Proof technique:** direct.

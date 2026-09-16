@@ -41,8 +41,7 @@ $\{\overline F,F^\star\}$ has the Erdős-Hajnal property.
 
 **Given:** A forest $F$.
 
-[L1] Theorem 7.2 of the cited primary source proves exactly that
-$\{\overline F,F^\star\}$ has the Erdős-Hajnal property for every forest $F$.
+[L1] Theorem 7.2 of the cited primary source proves exactly that $\{\overline F,F^\star\}$ has the Erdős-Hajnal property for every forest $F$.
 
 ## Proof
 

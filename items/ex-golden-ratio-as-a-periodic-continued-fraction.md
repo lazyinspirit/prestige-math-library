@@ -40,16 +40,11 @@ $$\varphi=\frac{1+\sqrt5}{2}.$$
 
 **Given:** The purely periodic continued fraction $x=[1;\overline1]$.
 
-[F1] Every eventually periodic regular continued fraction has quadratic-
-irrational value ([[lem-periodic-continued-fraction-is-quadratic]]).
+[F1] Every eventually periodic regular continued fraction has quadratic- irrational value ([[lem-periodic-continued-fraction-is-quadratic]]).
 
-[F2] The value of an infinite regular continued fraction is the common limit
-of its convergents; for $[1;1,1,\ldots]$ the increasing even subsequence starts
-at $1$ ([[thm-convergence-of-infinite-regular-continued-fractions]]).
+[F2] The value of an infinite regular continued fraction is the common limit of its convergents; for $[1;1,1,\ldots]$ the increasing even subsequence starts at $1$ ([[thm-convergence-of-infinite-regular-continued-fractions]]).
 
-[F3] Finite regular continued fractions are evaluated by the recursion
-$[a_0;a_1,\ldots,a_n]=a_0+1/[a_1;\ldots,a_n]$
-([[def-regular-continued-fraction]]).
+[F3] Finite regular continued fractions are evaluated by the recursion $[a_0;a_1,\ldots,a_n]=a_0+1/[a_1;\ldots,a_n]$ ([[def-regular-continued-fraction]]).
 
 ## Verification
 

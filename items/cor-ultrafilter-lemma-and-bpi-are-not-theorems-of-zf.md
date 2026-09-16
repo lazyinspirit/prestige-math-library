@@ -30,17 +30,13 @@ nor the Boolean Prime Ideal Theorem is provable in ZF.
 
 **Given:** $\operatorname{Con}(\mathrm{ZF})$ for the fixed formalization.
 
-[F1] [[cor-relative-consistency-of-no-free-ultrafilter-on-omega-over-zf]]
-proves the consistency of
-$$T=\mathrm{ZF}+\text{``every ultrafilter on }\omega\text{ is principal''}+\neg\mathrm{BPI}.$$
+[F1] [[cor-relative-consistency-of-no-free-ultrafilter-on-omega-over-zf]] proves the consistency of $$T=\mathrm{ZF}+\text{``every ultrafilter on }\omega\text{ is principal''}+\neg\mathrm{BPI}.$$
 
-[F2] [[thm-bpi-equivalent-to-set-ultrafilter-lemma]] proves in ZF that BPI is
-equivalent to the set Ultrafilter Lemma (UFL).
+[F2] [[thm-bpi-equivalent-to-set-ultrafilter-lemma]] proves in ZF that BPI is equivalent to the set Ultrafilter Lemma (UFL).
 
 ## Proof
 
-**Proof technique:** contradiction by adjoining a hypothetical ZF proof to the
-consistent countertheory.
+**Proof technique:** contradiction by adjoining a hypothetical ZF proof to the consistent countertheory.
 
 1.1 By F1, $T$ is consistent. Suppose for contradiction that $\mathrm{ZF}\vdash\mathrm{BPI}$. Because every axiom of ZF is an axiom of $T$, the same finite derivation is a $T$-derivation of BPI. But $\neg\mathrm{BPI}$ is an axiom of $T$, so $T$ would be inconsistent, contradicting F1. Thus $\mathrm{ZF}\nvdash\mathrm{BPI}$. [F1, assume-contra, discharge-contradiction]
 

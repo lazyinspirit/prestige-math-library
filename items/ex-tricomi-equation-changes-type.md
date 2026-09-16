@@ -35,11 +35,9 @@ is elliptic for $y>0$, hyperbolic for $y<0$, and parabolic on the line $y=0$.
 
 **Given:** The principal part $y\,u_{xx}+u_{yy}$.
 
-[L1] For a two-variable second-order principal part, the discriminant is
-$B^2-AC$ ([[def-two-variable-second-order-discriminant]]).
+[L1] For a two-variable second-order principal part, the discriminant is $B^2-AC$ ([[def-two-variable-second-order-discriminant]]).
 
-[L2] The elliptic/parabolic/hyperbolic trichotomy is only a pointwise
-second-order classification ([[rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy]]).
+[L2] The elliptic/parabolic/hyperbolic trichotomy is only a pointwise second-order classification ([[rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy]]).
 
 ## Verification
 

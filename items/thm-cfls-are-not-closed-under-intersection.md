@@ -31,8 +31,7 @@ Context-free languages are not closed under intersection.
 
 ## Facts & Assumptions
 
-**Given:** The languages
-$$ L_1=\{a^n b^n c^m:n,m\ge 0\},\qquad L_2=\{a^m b^n c^n:m,n\ge 0\}. $$
+**Given:** The languages $$ L_1=\{a^n b^n c^m:n,m\ge 0\},\qquad L_2=\{a^m b^n c^n:m,n\ge 0\}. $$
 
 [L1] By [[def-language-generated-by-a-cfg]], a language is context-free exactly when some context-free grammar generates it.
 

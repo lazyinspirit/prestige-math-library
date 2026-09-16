@@ -29,13 +29,9 @@ tubular neighbourhood of one fixed radius.
 
 ## Facts & Assumptions
 
-**Given:** A smooth embedded curve obtained by joining, for each integer
-$n\ge1$, a long horizontal segment to a smoothed hairpin whose two parallel
-strands are distance $2^{-n}$ apart.
+**Given:** A smooth embedded curve obtained by joining, for each integer $n\ge1$, a long horizontal segment to a smoothed hairpin whose two parallel strands are distance $2^{-n}$ apart.
 
-[L1] The Euclidean tubular neighbourhood theorem only guarantees a positive
-radius function along the submanifold
-([[thm-euclidean-tubular-neighbourhood-theorem]]).
+[L1] The Euclidean tubular neighbourhood theorem only guarantees a positive radius function along the submanifold ([[thm-euclidean-tubular-neighbourhood-theorem]]).
 
 ## Refutation
 **Proof technique:** direct.

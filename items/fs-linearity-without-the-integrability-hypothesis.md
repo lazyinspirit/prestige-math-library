@@ -38,7 +38,4 @@ $\int f\,d\mu+\int g\,d\mu$ is defined and equals $\int(f+g)\,d\mu$.
 1.1 On $\mathbb R$ with Lebesgue measure, let $f:=\chi_{[0,\infty)}$; its nonnegative Lebesgue integral is $+\infty$. [given, construct]
 
 2.1 The integrals of $f$, $-f$, and $f-f=0$ are individually defined, with [step 1.1, L1, algebra]
-values $+\infty$, $-\infty$, and $0$. But
-$$\int f\,d\lambda+\int(-f)\,d\lambda=+\infty+(-\infty)$$
-is undefined, so the claimed unrestricted linearity identity fails. This is
-why [L1] restricts linearity to $L^1$. [step 1.1, L1, algebra] ∎
+values $+\infty$, $-\infty$, and $0$. But $$\int f\,d\lambda+\int(-f)\,d\lambda=+\infty+(-\infty)$$ is undefined, so the claimed unrestricted linearity identity fails. This is why [L1] restricts linearity to $L^1$. [step 1.1, L1, algebra] ∎

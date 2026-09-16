@@ -44,8 +44,7 @@ constructions.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a radius $r>0$, the standard Euclidean
-metric, and the displayed cylinder with its outward orientation.
+**Given:** $\mathrm{AC}_\omega$, a radius $r>0$, the standard Euclidean metric, and the displayed cylinder with its outward orientation.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 

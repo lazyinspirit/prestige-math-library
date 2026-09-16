@@ -36,9 +36,7 @@ projective.
 
 **Given:** A projective object $P$ with a decomposition $P\cong Q\oplus Q'$.
 
-[L1] Projective objects are exactly those with the lifting property against
-epimorphisms
-([[thm-projective-object-characterisations]]).
+[L1] Projective objects are exactly those with the lifting property against epimorphisms ([[thm-projective-object-characterisations]]).
 
 ## Proof
 

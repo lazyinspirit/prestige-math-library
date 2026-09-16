@@ -31,18 +31,13 @@ depends only on the subobject class $[B\to A]$.
 
 ## Facts & Assumptions
 
-**Given:** Two monomorphisms $m:M\to A$ and $n:N\to A$ representing the same
-subobject.
+**Given:** Two monomorphisms $m:M\to A$ and $n:N\to A$ representing the same subobject.
 
-[L1] The quotient by a subobject is defined as the cokernel of a representing
-monomorphism ([[def-the-quotient-of-an-object-by-a-subobject]]).
+[L1] The quotient by a subobject is defined as the cokernel of a representing monomorphism ([[def-the-quotient-of-an-object-by-a-subobject]]).
 
-[L2] Representing the same subobject means mutual factorization
-([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
+[L2] Representing the same subobject means mutual factorization ([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
 
-[L3] The cokernel assignment depends only on the subobject class and gives the
-inverse order-preserving correspondence to the kernel assignment
-([[thm-kernel-and-cokernel-are-mutually-inverse-order-anti-isomorphisms-between-subobjects-and-quotient-objects]]).
+[L3] The cokernel assignment depends only on the subobject class and gives the inverse order-preserving correspondence to the kernel assignment ([[thm-kernel-and-cokernel-are-mutually-inverse-order-anti-isomorphisms-between-subobjects-and-quotient-objects]]).
 
 ## Proof
 

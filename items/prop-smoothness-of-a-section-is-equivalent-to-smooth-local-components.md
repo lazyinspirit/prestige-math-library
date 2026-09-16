@@ -34,11 +34,9 @@ $$\sigma(p)=\sum_{i=1}^r f_i(p)s_i(p)\qquad(p\in U).$$
 
 ## Facts & Assumptions
 
-**Given:** A local frame $(s_1,\dots,s_r)$ on $U$ and a local section
-$\sigma:U\to E|_U$.
+**Given:** A local frame $(s_1,\dots,s_r)$ on $U$ and a local section $\sigma:U\to E|_U$.
 
-[L1] A local frame determines a local trivialization, and conversely
-([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
+[L1] A local frame determines a local trivialization, and conversely ([[prop-local-frames-and-local-trivializations-are-equivalent-data]]).
 
 [L2] Smoothness is local on the source ([[prop-smoothness-is-local-on-the-source]]).
 

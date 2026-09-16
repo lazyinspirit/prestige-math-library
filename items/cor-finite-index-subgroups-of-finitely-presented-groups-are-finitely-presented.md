@@ -31,12 +31,9 @@ presented.
 
 **Given:** A finitely presented group $G$ and a finite-index subgroup $H\le G$.
 
-[L1] A finite presentation has finite generating and relator sets
-([[def-relators-relations-and-finite-presentations]]).
+[L1] A finite presentation has finite generating and relator sets ([[def-relators-relations-and-finite-presentations]]).
 
-[L2] Reidemeister-Schreier presents a subgroup $H$ by finitely many rewritten
-Schreier generators and relators $\tau(trt^{-1})$
-([[thm-reidemeister-schreier-presentation]]).
+[L2] Reidemeister-Schreier presents a subgroup $H$ by finitely many rewritten Schreier generators and relators $\tau(trt^{-1})$ ([[thm-reidemeister-schreier-presentation]]).
 
 ## Proof
 

@@ -36,42 +36,27 @@ a Banach space $X$ is dentable, then $X$ has the Radon--Nikodym property.
 
 ## Facts & Assumptions
 
-[A1] The Axiom of Choice supplies choices from arbitrary nonempty families
-([[def-axiom-of-choice]]).
+[A1] The Axiom of Choice supplies choices from arbitrary nonempty families ([[def-axiom-of-choice]]).
 
-[L1] RNP asks for a Bochner density of every bounded-variation vector measure
-absolutely continuous with respect to a finite scalar measure
-([[def-radon-nikodym-property]]).
+[L1] RNP asks for a Bochner density of every bounded-variation vector measure absolutely continuous with respect to a finite scalar measure ([[def-radon-nikodym-property]]).
 
-[L2] Dentability means existence of slices of arbitrarily small norm diameter
-([[def-dentable-bounded-set-and-slice]]).
+[L2] Dentability means existence of slices of arbitrarily small norm diameter ([[def-dentable-bounded-set-and-slice]]).
 
-[L3] The variation of a bounded-variation vector measure is a finite positive
-measure ([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]).
+[L3] The variation of a bounded-variation vector measure is a finite positive measure ([[lem-bounded-variation-of-a-vector-measure-is-a-finite-measure]]).
 
-[L4] Under AC, an absolutely continuous finite scalar measure has an integrable
-Radon--Nikodym density
-([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]),
-and integration against that density agrees with integration for the density
-measure ([[thm-integration-against-a-density]]).
+[L4] Under AC, an absolutely continuous finite scalar measure has an integrable Radon--Nikodym density ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]]), and integration against that density agrees with integration for the density measure ([[thm-integration-against-a-density]]).
 
-[L5] A Bochner density measure has variation equal to the integral of its norm
-([[lem-bochner-density-defines-an-absolutely-continuous-vector-measure]]).
+[L5] A Bochner density measure has variation equal to the integral of its norm ([[lem-bochner-density-defines-an-absolutely-continuous-vector-measure]]).
 
-[L6] Strong measurability plus finite norm integral is equivalent to Bochner
-integrability ([[thm-bochner-integrability-criterion]]); nonnegative monotone
-convergence controls increasing sums
-([[thm-monotone-convergence-for-the-integral]]).
+[L6] Strong measurability plus finite norm integral is equivalent to Bochner integrability ([[thm-bochner-integrability-criterion]]); nonnegative monotone convergence controls increasing sums ([[thm-monotone-convergence-for-the-integral]]).
 
-[L7] Simple Banach-valued integrals are linear and computed level by level
-([[lem-banach-valued-simple-integral-is-well-defined]]).
+[L7] Simple Banach-valued integrals are linear and computed level by level ([[lem-banach-valued-simple-integral-is-well-defined]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-**Given:** The dentability hypothesis and data $(\Omega,\mathcal A,\mu,\nu)$
-from [L1].
+**Given:** The dentability hypothesis and data $(\Omega,\mathcal A,\mu,\nu)$ from [L1].
 
 1.1 Normalize by the variation measure. Put $\rho=|\nu|$. By [L3], $\rho$ is finite, and $\nu\ll\mu$ implies $\rho\ll\mu$ by refining subsets of a $\mu$-null set. If $\rho(\Omega)=0$, $\nu=0$ has the zero density. Otherwise [L4], using [A1], gives $w\geq0$ with $\rho=w\,d\mu$. We first construct a density with respect to $\rho$, for which $|\nu|\leq\rho$ holds tautologically. [given, A1, L1, L3, L4]
 

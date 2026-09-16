@@ -36,11 +36,9 @@ exists satisfies $y<x$.
 
 ## Facts & Assumptions
 
-**Given:** A parameter $x\in(0,\tfrac12)$ and a counterexample graph $G$ in
-which $y$ is minimal with the stated property.
+**Given:** A parameter $x\in(0,\tfrac12)$ and a counterexample graph $G$ in which $y$ is minimal with the stated property.
 
-[L1] Claim 7.3.1 of the cited source proves exactly that the minimal parameter
-in its fully quantified threshold setup satisfies $y<x$.
+[L1] Claim 7.3.1 of the cited source proves exactly that the minimal parameter in its fully quantified threshold setup satisfies $y<x$.
 
 ## Proof
 

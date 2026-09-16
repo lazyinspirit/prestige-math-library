@@ -36,13 +36,9 @@ determines the exact leading constant in front of $1/\log x$.
 
 ## Facts & Assumptions
 
-**Given:** The weaker $\Theta(1/\log x)$ conclusion of Shoup's product bound and
-the exact constant statement of [[thm-third-mertens-theorem-for-primes]].
+**Given:** The weaker $\Theta(1/\log x)$ conclusion of Shoup's product bound and the exact constant statement of [[thm-third-mertens-theorem-for-primes]].
 
-[L1] The second and third Mertens theorems distinguish a bounded-error
-reciprocal-prime asymptotic from the exact factor $e^{-\gamma}$ in the product
-formula ([[thm-second-mertens-theorem-for-primes]],
-[[thm-third-mertens-theorem-for-primes]]).
+[L1] The second and third Mertens theorems distinguish a bounded-error reciprocal-prime asymptotic from the exact factor $e^{-\gamma}$ in the product formula ([[thm-second-mertens-theorem-for-primes]], [[thm-third-mertens-theorem-for-primes]]).
 
 ## Counterexample
 

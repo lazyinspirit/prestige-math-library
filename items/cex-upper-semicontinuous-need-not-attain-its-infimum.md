@@ -83,13 +83,6 @@ attain a maximum, namely $1$ at $x = 0$, as [[thm-semicontinuous-evt]] requires.
 
 ## Remarks
 
-- **The failing hypothesis, named exactly.** $f$ is not lower semicontinuous at
-  $0$: taking $\varepsilon := 1/2$, every neighbourhood of $0$ contains points
-  $x$ with $f(x) = x < 1/2 = f(0) - \varepsilon$. Lower semicontinuity is
-  precisely what [[thm-semicontinuous-evt]] requires for a minimum, and it is
-  precisely what is missing.
+- **The failing hypothesis, named exactly.** $f$ is not lower semicontinuous at $0$: taking $\varepsilon := 1/2$, every neighbourhood of $0$ contains points $x$ with $f(x) = x < 1/2 = f(0) - \varepsilon$. Lower semicontinuity is precisely what [[thm-semicontinuous-evt]] requires for a minimum, and it is precisely what is missing.
 
-- **Reflecting the example gives the dual failure.** The function $-f$ is lower
-  semicontinuous on $[0,1]$, bounded above, and attains no maximum, by
-  [[def-semicontinuity]]; so neither half of the theorem can be strengthened to
-  the other extremum.
+- **Reflecting the example gives the dual failure.** The function $-f$ is lower semicontinuous on $[0,1]$, bounded above, and attains no maximum, by [[def-semicontinuity]]; so neither half of the theorem can be strengthened to the other extremum.

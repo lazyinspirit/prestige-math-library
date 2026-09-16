@@ -36,11 +36,9 @@ $$\sup_{z\in K}|f(z)-p(z)|<\varepsilon.$$
 
 ## Facts & Assumptions
 
-**Given:** A compact set $K$ with connected complement and a holomorphic
-function $f$ on a neighbourhood of $K$.
+**Given:** A compact set $K$ with connected complement and a holomorphic function $f$ on a neighbourhood of $K$.
 
-[L1] Runge approximation holds for every pole set meeting each complementary
-component ([[thm-runge-approximation-with-prescribed-poles]]).
+[L1] Runge approximation holds for every pole set meeting each complementary component ([[thm-runge-approximation-with-prescribed-poles]]).
 
 ## Proof
 

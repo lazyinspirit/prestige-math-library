@@ -70,13 +70,6 @@ the difference $b-a$.
 
 ## Remarks
 
-- **The vanishing clause is used, not decorative.** The reflection principle below
-  subtracts one of these counts from another, and both the parity and the range
-  conditions can fail for the reflected endpoint while holding for the original;
-  the difference is correct only because the count is then $0$ rather than
-  undefined.
+- **The vanishing clause is used, not decorative.** The reflection principle below subtracts one of these counts from another, and both the parity and the range conditions can fail for the reflected endpoint while holding for the original; the difference is correct only because the count is then $0$ rather than undefined.
 
-- **Why the answer is stated through $u$ rather than as a quotient.** The natural
-  number $u$ with $2u=n+b-a$ exists exactly under the stated hypotheses, and
-  writing $\tfrac{1}{2}(n+b-a)$ would name an element of a field where the
-  hypothesis of the statement is that the halving is exact in $\mathbb{Z}$.
+- **Why the answer is stated through $u$ rather than as a quotient.** The natural number $u$ with $2u=n+b-a$ exists exactly under the stated hypotheses, and writing $\tfrac{1}{2}(n+b-a)$ would name an element of a field where the hypothesis of the statement is that the halving is exact in $\mathbb{Z}$.

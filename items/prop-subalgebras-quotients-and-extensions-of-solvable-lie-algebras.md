@@ -35,19 +35,13 @@ $$\operatorname{dl}(\mathfrak g)\leq\operatorname{dl}(\mathfrak i)+\operatorname
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$, a subalgebra $\mathfrak h$, and, for
-the quotient and extension assertions, an ideal $\mathfrak i$.
+**Given:** A Lie algebra $\mathfrak g$, a subalgebra $\mathfrak h$, and, for the quotient and extension assertions, an ideal $\mathfrak i$.
 
-[L1] Solvability is termination of the derived series
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] Solvability is termination of the derived series ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] An ideal defines a quotient Lie algebra and a surjective canonical
-projection $\pi:\mathfrak g\to\mathfrak g/\mathfrak i$
-([[def-quotient-lie-algebra]]).
+[L2] An ideal defines a quotient Lie algebra and a surjective canonical projection $\pi:\mathfrak g\to\mathfrak g/\mathfrak i$ ([[def-quotient-lie-algebra]]).
 
-[L3] The kernel of a Lie homomorphism is an ideal and its quotient by the
-kernel identifies with its image
-([[prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]]).
+[L3] The kernel of a Lie homomorphism is an ideal and its quotient by the kernel identifies with its image ([[prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]]).
 
 ## Proof
 

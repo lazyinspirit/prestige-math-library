@@ -32,14 +32,11 @@ supremum.
 
 **Given:** The rational-indicator example on $[0,1]$.
 
-[L1] The function $\chi_{\mathbb Q\cap[0,1]}$ has pointwise supremum $1$ but
-essential supremum $0$
-([[ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one]]).
+[L1] The function $\chi_{\mathbb Q\cap[0,1]}$ has pointwise supremum $1$ but essential supremum $0$ ([[ex-indicator-of-the-rationals-has-zero-essential-supremum-but-pointwise-supremum-one]]).
 
 ## Refutation
 
-**Proof technique:** Refute with the indicator of the rationals on $[0,1]$,
-whose pointwise supremum is $1$ but whose essential supremum is $0$.
+**Proof technique:** Refute with the indicator of the rationals on $[0,1]$, whose pointwise supremum is $1$ but whose essential supremum is $0$.
 
 1.1 The single function from [L1] already violates the claimed equality. [L1]
 

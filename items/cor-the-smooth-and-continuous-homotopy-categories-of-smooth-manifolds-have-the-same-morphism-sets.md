@@ -38,11 +38,9 @@ continuous maps $M\to N$.
 
 **Given:** Smooth manifolds $M$ and $N$.
 
-[L1] Every continuous map is homotopic to a smooth map
-([[cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map]]).
+[L1] Every continuous map is homotopic to a smooth map ([[cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map]]).
 
-[L2] Continuous homotopies between smooth maps can be smoothed
-([[thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic]]).
+[L2] Continuous homotopies between smooth maps can be smoothed ([[thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic]]).
 
 ## Proof
 **Proof technique:** direct.

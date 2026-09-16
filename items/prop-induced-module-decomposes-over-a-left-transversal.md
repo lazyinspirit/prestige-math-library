@@ -40,19 +40,13 @@ In particular $n=[G:H]$.
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, a group $G$, a subgroup $H\le G$, an
-$R$-linear $H$-module $W$, and a left transversal $T=\{t_1,\dots,t_n\}$ for
-$G/H$.
+**Given:** A commutative ring $R$, a group $G$, a subgroup $H\le G$, an $R$-linear $H$-module $W$, and a left transversal $T=\{t_1,\dots,t_n\}$ for $G/H$.
 
-[F1] The induced module consists of the functions $f:G\to W$ satisfying
-$f(gh)=h^{-1}\cdot f(g)$, with pointwise $R$-module structure
-([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
+[F1] The induced module consists of the functions $f:G\to W$ satisfying $f(gh)=h^{-1}\cdot f(g)$, with pointwise $R$-module structure ([[def-induced-r-linear-g-module-by-h-covariant-functions]]).
 
-[F2] The left cosets of $H$ are the subsets $gH=\{gh:h\in H\}$ of $G$
-([[def-coset]]).
+[F2] The left cosets of $H$ are the subsets $gH=\{gh:h\in H\}$ of $G$ ([[def-coset]]).
 
-[F3] For a finite index set, the direct sum is the module of tuples with
-coordinatewise operations ([[def-direct-sum-of-a-family-of-modules]]).
+[F3] For a finite index set, the direct sum is the module of tuples with coordinatewise operations ([[def-direct-sum-of-a-family-of-modules]]).
 
 ## Proof
 

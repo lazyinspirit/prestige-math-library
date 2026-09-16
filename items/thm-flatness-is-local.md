@@ -39,8 +39,7 @@ equivalent:
 
 [L1] Localization preserves flatness ([[thm-localisations-are-flat]]).
 
-[L2] Flatness is equivalent to the ideal-injection criterion
-([[thm-flatness-criteria-by-injections-and-ideals]]).
+[L2] Flatness is equivalent to the ideal-injection criterion ([[thm-flatness-criteria-by-injections-and-ideals]]).
 
 ## Proof
 

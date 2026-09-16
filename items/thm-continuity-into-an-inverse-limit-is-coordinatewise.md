@@ -28,16 +28,11 @@ if all of its coordinate composites are continuous.
 
 ## Facts & Assumptions
 
-**Given:** A map $f:Y\to L=\varprojlim G_i$, where $L$ has its inverse-limit
-topology.
+**Given:** A map $f:Y\to L=\varprojlim G_i$, where $L$ has its inverse-limit topology.
 
-[L1] The coordinate projections $\pi_i:L\to G_i$ are defined on the inverse
-limit ([[def-coordinate-projections-from-an-inverse-limit]]).
+[L1] The coordinate projections $\pi_i:L\to G_i$ are defined on the inverse limit ([[def-coordinate-projections-from-an-inverse-limit]]).
 
-[F1] The inverse-limit topology is the subspace topology from the product, and a
-map into a product is continuous exactly when every coordinate composite is
-continuous ([[def-inverse-limit-topology-for-finite-discrete-groups]],
-[[def-continuous-map-top]]).
+[F1] The inverse-limit topology is the subspace topology from the product, and a map into a product is continuous exactly when every coordinate composite is continuous ([[def-inverse-limit-topology-for-finite-discrete-groups]], [[def-continuous-map-top]]).
 
 ## Proof
 

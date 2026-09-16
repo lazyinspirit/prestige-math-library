@@ -36,13 +36,9 @@ equivalent:
 
 **Given:** A morphism $f:A \to B$.
 
-[L1] Monicity is equivalent to the rule
-$f z \equiv 0 \Rightarrow z \equiv 0$
-([[thm-chasing-rule-monicity-detected-by-members]]).
+[L1] Monicity is equivalent to the rule $f z \equiv 0 \Rightarrow z \equiv 0$ ([[thm-chasing-rule-monicity-detected-by-members]]).
 
-[L2] Members have negatives, and equivalence to zero means literal zero after a
-common epic comparison
-([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
+[L2] Members have negatives, and equivalence to zero means literal zero after a common epic comparison ([[prop-each-object-has-a-zero-member-and-each-member-has-a-negative]]).
 
 ## Proof
 

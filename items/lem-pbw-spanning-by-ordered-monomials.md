@@ -38,13 +38,11 @@ including the empty monomial $1$, span $U(\mathfrak g)$.
 
 **Given:** A Lie algebra $\mathfrak g$ with a specified ordered basis $B$.
 
-[L1] Every element of $U(\mathfrak g)$ is a finite linear combination of
-images of tensor words ([[def-pbw-filtration-on-the-universal-enveloping-algebra]]).
+[L1] Every element of $U(\mathfrak g)$ is a finite linear combination of images of tensor words ([[def-pbw-filtration-on-the-universal-enveloping-algebra]]).
 
 [L2] In $U(\mathfrak g)$ one has $xy=yx+[x,y]$ for basis elements $x,y$.
 
-[L3] Every bracket $[x,y]\in\mathfrak g$ has a finite expansion in $B$
-([[def-linear-basis]]).
+[L3] Every bracket $[x,y]\in\mathfrak g$ has a finite expansion in $B$ ([[def-linear-basis]]).
 
 ## Proof
 

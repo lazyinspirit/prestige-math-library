@@ -48,12 +48,7 @@ only on $I$. Besides the choice used in the cited compact-flow results, the proo
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]. It is used through both [[thm-compact-connected-regular-fibres-are-tori]] and [[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]], and directly in step 3.1 to select one offending base-point/period pair for each member of a countable neighborhood basis when local lattice generation is negated.
 
-[F1] The commuting Hamiltonian fields give a global $\mathbb R^n$-action on
-each compact regular fibre; on a connected fibre it is transitive and its
-stabilizer is a discrete full lattice. Consequently the fibre is a torus.
-[[prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action]],
-[[lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice]],
-[[thm-compact-connected-regular-fibres-are-tori]].
+[F1] The commuting Hamiltonian fields give a global $\mathbb R^n$-action on each compact regular fibre; on a connected fibre it is transitive and its stabilizer is a discrete full lattice. Consequently the fibre is a torus. [[prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action]], [[lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice]], [[thm-compact-connected-regular-fibres-are-tori]].
 
 [F2] Action–angle coordinates use period-one angles and form $\sum_i d\theta_i\wedge dI_i$. [[def-action-and-angle-coordinates]].
 

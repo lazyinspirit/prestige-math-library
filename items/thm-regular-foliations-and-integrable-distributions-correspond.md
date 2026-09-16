@@ -45,8 +45,7 @@ integrable rank-$k$ distributions determine each other:
 
 ## Facts & Assumptions
 
-**Given:** Either a regular foliation atlas of leaf dimension $k$ or an
-integrable rank-$k$ distribution on $M$.
+**Given:** Either a regular foliation atlas of leaf dimension $k$ or an integrable rank-$k$ distribution on $M$.
 
 [A1] In foliation charts and flat charts, plaques are the local leaf pieces.
 
@@ -55,23 +54,12 @@ integrable rank-$k$ distribution on $M$.
 **Proof technique:** direct.
 
 1.1 In a regular foliation chart $(x,y)$, declare the tangent distribution to [given]
-be the span of $\partial_{x^1},\dots,\partial_{x^k}$. Because overlap maps send
-plaque directions to plaque directions, these local $k$-planes patch to a
-smooth rank-$k$ distribution. Plaques are local integral manifolds, so the
-distribution is integrable. [given, construct]
+be the span of $\partial_{x^1},\dots,\partial_{x^k}$. Because overlap maps send plaque directions to plaque directions, these local $k$-planes patch to a smooth rank-$k$ distribution. Plaques are local integral manifolds, so the distribution is integrable. [given, construct]
 
 1.2 Conversely, let $\mathcal D$ be an integrable rank-$k$ distribution. By the [given]
-local Frobenius theorem, every point has a flat chart $(x,y)$ for $\mathcal D$.
-Choose a covering by sufficiently small restrictions of these charts, refining
-overlap domains into plaque-coordinate neighborhoods. On each such overlap the
-new transverse coordinate has differential zero in every old plaque direction,
-so it is locally a function only of the old transverse coordinate. The refined
-charts therefore have transitions of the form required by a regular foliation
-atlas. This asserts existence of a compatible refined atlas; it does not claim
-that every unrestricted flat chart belongs to one common atlas. [given, construct]
+local Frobenius theorem, every point has a flat chart $(x,y)$ for $\mathcal D$. Choose a covering by sufficiently small restrictions of these charts, refining overlap domains into plaque-coordinate neighborhoods. On each such overlap the new transverse coordinate has differential zero in every old plaque direction, so it is locally a function only of the old transverse coordinate. The refined charts therefore have transitions of the form required by a regular foliation atlas. This asserts existence of a compatible refined atlas; it does not claim that every unrestricted flat chart belongs to one common atlas. [given, construct]
 
 1.3 In that atlas the plaques are precisely the local integral pieces of [given]
-$\mathcal D$, so the global leaves are exactly the maximal connected integral
-manifolds. The two constructions therefore recover one another. [given]
+$\mathcal D$, so the global leaves are exactly the maximal connected integral manifolds. The two constructions therefore recover one another. [given]
 
 2.1 Thus regular foliations and integrable distributions correspond. [given] ∎ [given]

@@ -37,17 +37,13 @@ So this explicit power pair realizes the norm of the duality functional.
 
 ## Facts & Assumptions
 
-**Given:** An exponent $1<p<\infty$, its conjugate exponent $q$, and a real
-parameter $a$ with $0<a<1/q$.
+**Given:** An exponent $1<p<\infty$, its conjugate exponent $q$, and a real parameter $a$ with $0<a<1/q$.
 
-[L1] The pairing functional $\Lambda_g$ has norm $\|g\|_q$
-([[prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm]]).
+[L1] The pairing functional $\Lambda_g$ has norm $\|g\|_q$ ([[prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm]]).
 
 ## Verification
 
-**Proof technique:** Take $g(x)=x^{-a}$ with $0<a<1/q$, normalize the
-extremizer $|g|^{q-1}$ explicitly, and compute both norms by one-variable power
-integrals.
+**Proof technique:** Take $g(x)=x^{-a}$ with $0<a<1/q$, normalize the extremizer $|g|^{q-1}$ explicitly, and compute both norms by one-variable power integrals.
 
 1.1 Since $aq<1$, one has $1-aq>0$ and therefore $$\int_0^1 x^{-aq}\,dx=\left[\frac{x^{1-aq}}{1-aq}\right]_0^1=(1-aq)^{-1}.$$ Hence $g \in L^q(0,1)$ and $$\|g\|_q^q=\int_0^1 x^{-aq}\,dx=(1-aq)^{-1},\qquad \|g\|_q=(1-aq)^{-1/q}.$$ [given, algebra]
 

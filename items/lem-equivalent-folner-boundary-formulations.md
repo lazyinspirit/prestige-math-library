@@ -36,11 +36,9 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** A group $G$, a finite subset $S\subseteq G$, a finite nonempty set
-$F\subseteq G$, and a real $\varepsilon>0$.
+**Given:** A group $G$, a finite subset $S\subseteq G$, a finite nonempty set $F\subseteq G$, and a real $\varepsilon>0$.
 
-[L1] An $(S,\varepsilon)$-Folner set is defined by the symmetric-difference
-inequality ([[def-folner-set-and-folner-condition]]).
+[L1] An $(S,\varepsilon)$-Folner set is defined by the symmetric-difference inequality ([[def-folner-set-and-folner-condition]]).
 
 ## Proof
 

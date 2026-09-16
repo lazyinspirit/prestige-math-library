@@ -38,35 +38,21 @@ $X_0=0$ almost surely. The following are equivalent:
 
 **Given:** AC, a real process $X$ with $X_0=0$ almost surely, and either condition 1 or condition 2.
 
-[F1] Finite evaluation vectors of a Gaussian process are possibly singular
-multivariate normal, and every finite linear combination is normal.
-[[def-gaussian-process]]
+[F1] Finite evaluation vectors of a Gaussian process are possibly singular multivariate normal, and every finite linear combination is normal. [[def-gaussian-process]]
 
-[F2] Under AC, $N_n(m,\Sigma)$ exists for every positive semidefinite
-$\Sigma$ and has a realization $m+\Sigma^{1/2}Z$ with independent standard
-normal coordinates. [[def-multivariate-normal-law]]
+[F2] Under AC, $N_n(m,\Sigma)$ exists for every positive semidefinite $\Sigma$ and has a realization $m+\Sigma^{1/2}Z$ with independent standard normal coordinates. [[def-multivariate-normal-law]]
 
-[F3] Under AC, the characteristic function of $N_n(m,\Sigma)$ is
-$u\mapsto\exp(iu\cdot m-u^T\Sigma u/2)$ and uniquely determines the vector
-law. [[lem-characteristic-function-of-a-multivariate-normal-law]]
+[F3] Under AC, the characteristic function of $N_n(m,\Sigma)$ is $u\mapsto\exp(iu\cdot m-u^T\Sigma u/2)$ and uniquely determines the vector law. [[lem-characteristic-function-of-a-multivariate-normal-law]]
 
-[F4] A scalar $N(m,\sigma^2)$ law has characteristic function
-$u\mapsto\exp(imu-\sigma^2u^2/2)$, including $\sigma=0$.
-[[lem-characteristic-function-of-a-normal-law]]
+[F4] A scalar $N(m,\sigma^2)$ law has characteristic function $u\mapsto\exp(imu-\sigma^2u^2/2)$, including $\sigma=0$. [[lem-characteristic-function-of-a-normal-law]]
 
-[F5] Characteristic functions respect affine maps and multiply for finite
-sums of mutually independent real random variables.
-[[lem-characteristic-functions-under-affine-maps-and-independent-sums]]
+[F5] Characteristic functions respect affine maps and multiply for finite sums of mutually independent real random variables. [[lem-characteristic-functions-under-affine-maps-and-independent-sums]]
 
-[F6] Under AC, equality of scalar characteristic functions determines the
-law. [[thm-uniqueness-of-a-law-from-its-characteristic-function]]
+[F6] Under AC, equality of scalar characteristic functions determines the law. [[thm-uniqueness-of-a-law-from-its-characteristic-function]]
 
-[F7] Mutual independence is the finite measurable-rectangle factorization
-property and hence depends only on the joint law.
-[[thm-rectangle-criterion-for-independent-random-elements]]
+[F7] Mutual independence is the finite measurable-rectangle factorization property and hence depends only on the joint law. [[thm-rectangle-criterion-for-independent-random-elements]]
 
-[F8] Products of integrable functions of independent random variables factor
-in expectation. [[thm-factorization-of-expectations-for-independent-variables]]
+[F8] Products of integrable functions of independent random variables factor in expectation. [[thm-factorization-of-expectations-for-independent-variables]]
 
 ## Proof
 
@@ -84,8 +70,4 @@ in expectation. [[thm-factorization-of-expectations-for-independent-variables]]
 
 ## Source notes
 
-Yoshida's Lemma 6.1.3, printed pp. 173–174, proves both directions, including
-Gaussianity from independent normal increments. Sousi, Sections 6.1–6.2, uses
-the same characterization. The reverse direction here is stated for an
-arbitrary process, repairing the scaffold's circular assumption that the
-process was already Gaussian.
+Yoshida's Lemma 6.1.3, printed pp. 173–174, proves both directions, including Gaussianity from independent normal increments. Sousi, Sections 6.1–6.2, uses the same characterization. The reverse direction here is stated for an arbitrary process, repairing the scaffold's circular assumption that the process was already Gaussian.

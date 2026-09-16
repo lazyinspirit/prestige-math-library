@@ -35,21 +35,15 @@ one-parameter-subgroup/exponential characterization.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie-group homomorphism $F:G\to H$, and
-$X\in\mathfrak g=T_eG$.
+**Given:** $\mathrm{AC}_\omega$, a Lie-group homomorphism $F:G\to H$, and $X\in\mathfrak g=T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] A one-parameter subgroup with initial velocity $Y$ is uniquely the curve
-$t\mapsto\exp(tY)$.
-[[thm-one-parameter-subgroups-are-exactly-exponentials]].
+[F2] A one-parameter subgroup with initial velocity $Y$ is uniquely the curve $t\mapsto\exp(tY)$. [[thm-one-parameter-subgroups-are-exactly-exponentials]].
 
-[F3] The map $F$ is smooth, preserves identities, and satisfies
-$F(gh)=F(g)F(h)$.
-[[def-lie-group-homomorphism-isomorphism-and-automorphism]].
+[F3] The map $F$ is smooth, preserves identities, and satisfies $F(gh)=F(g)F(h)$. [[def-lie-group-homomorphism-isomorphism-and-automorphism]].
 
-[F4] Differentials of smooth maps obey the chain rule.
-[[thm-chain-rule-for-differentials-of-smooth-maps]].
+[F4] Differentials of smooth maps obey the chain rule. [[thm-chain-rule-for-differentials-of-smooth-maps]].
 
 ## Proof
 

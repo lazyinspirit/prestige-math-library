@@ -39,17 +39,13 @@ a vector space over $\mathbb K$. Then no norm on $\mathbb K[x]$ is complete.
 
 ## Facts & Assumptions
 
-**Given:** A scalar field $\mathbb K\in\{\mathbb R,\mathbb C\}$ and the vector
-space $\mathbb K[x]$ of polynomials in one indeterminate.
+**Given:** A scalar field $\mathbb K\in\{\mathbb R,\mathbb C\}$ and the vector space $\mathbb K[x]$ of polynomials in one indeterminate.
 
-[L1] A Banach space has no countably infinite Hamel basis
-([[thm-banach-space-no-countably-infinite-hamel-basis]]).
+[L1] A Banach space has no countably infinite Hamel basis ([[thm-banach-space-no-countably-infinite-hamel-basis]]).
 
-[L2] A basis is a linearly independent spanning subset
-([[def-linear-basis]]).
+[L2] A basis is a linearly independent spanning subset ([[def-linear-basis]]).
 
-[L3] The polynomial ring $\mathbb K[x]$ is the set of finite sums
-$a_0+a_1x+\cdots+a_mx^m$ ([[def-polynomial-ring-over-a-commutative-ring]]).
+[L3] The polynomial ring $\mathbb K[x]$ is the set of finite sums $a_0+a_1x+\cdots+a_mx^m$ ([[def-polynomial-ring-over-a-commutative-ring]]).
 
 ## Counterexample
 

@@ -25,9 +25,7 @@ On a locally compact Hausdorff space, a Borel measure that is finite on compact 
 
 ## Facts & Assumptions
 
-**Given:** Work with Countable Choice. Put $A=\{0\}\times\mathbb R$, $D=\{(1/n,m/n^2):m,n\in\mathbb N_{>0}\}$, and $X=A\cup D$. Declare each point of $D$ isolated and declare the following sets, for $N\ge1$, to be a neighbourhood basis at $(0,y)$:
-$$W_N(y)=\{(0,y)\}\cup\{(1/n,m/n^2)\in D:n>N,\ |m/n^2-y|<1/n\}.$$
-In particular a basic neighbourhood contains exactly one axis point. Define $\mu(E)=\sum_{(1/n,m/n^2)\in E\cap D}n^{-3}$ for every subset $E$ of $X$, and $M(E)=\inf_{E\subseteq U\text{ open}}\mu(U)$.
+**Given:** Work with Countable Choice. Put $A=\{0\}\times\mathbb R$, $D=\{(1/n,m/n^2):m,n\in\mathbb N_{>0}\}$, and $X=A\cup D$. Declare each point of $D$ isolated and declare the following sets, for $N\ge1$, to be a neighbourhood basis at $(0,y)$: $$W_N(y)=\{(0,y)\}\cup\{(1/n,m/n^2)\in D:n>N,\ |m/n^2-y|<1/n\}.$$ In particular a basic neighbourhood contains exactly one axis point. Define $\mu(E)=\sum_{(1/n,m/n^2)\in E\cap D}n^{-3}$ for every subset $E$ of $X$, and $M(E)=\inf_{E\subseteq U\text{ open}}\mu(U)$.
 
 [A1] The Baire category theorem for the ordinary complete interval $[1,2]$ says that a countable closed cover has a member with nonempty relative interior.
 

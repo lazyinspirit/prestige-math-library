@@ -33,8 +33,7 @@ $$
 
 ## Facts & Assumptions
 
-**Given:** The explicit formula for the Hilbert symbol over $\mathbb Q_2$
-([[thm-two-adic-hilbert-symbol-formula]]).
+**Given:** The explicit formula for the Hilbert symbol over $\mathbb Q_2$ ([[thm-two-adic-hilbert-symbol-formula]]).
 
 ## Verification
 

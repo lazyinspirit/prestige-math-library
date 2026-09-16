@@ -34,15 +34,11 @@ $$\|(x+y)+M\|_{X/M} \le \|x+M\|_{X/M} + \|y+M\|_{X/M}.$$
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$, a linear subspace $M \le X$, vectors $x,y \in X$,
-and a real $\varepsilon > 0$.
+**Given:** A normed space $X$, a linear subspace $M \le X$, vectors $x,y \in X$, and a real $\varepsilon > 0$.
 
-[L1] The quotient seminorm is
-$\|x+M\|_{X/M} = \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
+[L1] The quotient seminorm is $\|x+M\|_{X/M} = \inf_{m \in M}\|x+m\|$ ([[def-quotient-seminorm]]).
 
-[L2] The quotient seminorm is representative-independent, so
-$(x+y)+(m_1+m_2)+M = (x+y)+M$ may be read with any $m_1,m_2 \in M$
-([[lem-quotient-seminorm-is-representative-independent]]).
+[L2] The quotient seminorm is representative-independent, so $(x+y)+(m_1+m_2)+M = (x+y)+M$ may be read with any $m_1,m_2 \in M$ ([[lem-quotient-seminorm-is-representative-independent]]).
 
 ## Proof
 

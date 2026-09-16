@@ -35,8 +35,7 @@ defines an element of $\mathbb Z_p$.
 
 **Given:** Digits $a_i\in\{0,\ldots,p-1\}$ for $i\ge0$.
 
-[L1] An element of $\mathbb Z_p$ is a compatible residue-class tuple
-([[def-p-adic-integers-as-compatible-residue-classes]]).
+[L1] An element of $\mathbb Z_p$ is a compatible residue-class tuple ([[def-p-adic-integers-as-compatible-residue-classes]]).
 
 ## Verification
 

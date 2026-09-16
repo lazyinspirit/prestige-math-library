@@ -36,8 +36,7 @@ $s=1$.
 
 [L2] On $\operatorname{Re}s>0$, zeta is meromorphic with only a simple pole at $1$ ([[thm-riemann-zeta-continuation-to-the-right-half-plane]]).
 
-[L3] On $\operatorname{Re}s>1$, the Euler product for zeta converges
-absolutely and locally uniformly ([[thm-euler-product-for-riemann-zeta]]).
+[L3] On $\operatorname{Re}s>1$, the Euler product for zeta converges absolutely and locally uniformly ([[thm-euler-product-for-riemann-zeta]]).
 
 ## Proof
 

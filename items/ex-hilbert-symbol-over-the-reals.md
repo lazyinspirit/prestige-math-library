@@ -34,9 +34,7 @@ $$
 
 ## Facts & Assumptions
 
-**Given:** The real Hilbert-symbol formula and the equivalent solvability/norm
-interpretation ([[thm-real-hilbert-symbol-formula]],
-[[lem-equivalent-definitions-of-the-hilbert-symbol]]).
+**Given:** The real Hilbert-symbol formula and the equivalent solvability/norm interpretation ([[thm-real-hilbert-symbol-formula]], [[lem-equivalent-definitions-of-the-hilbert-symbol]]).
 
 ## Verification
 

@@ -32,16 +32,11 @@ $$\mathbb E[\mathbf 1_A]=\mathbb P(A).$$
 
 **Given:** A probability space $(\Omega,\mathcal F,\mathbb P)$ and an event $A$.
 
-[L1] Expectation of a nonnegative random variable is its integral with respect to
-$\mathbb P$ ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
+[L1] Expectation of a nonnegative random variable is its integral with respect to $\mathbb P$ ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 
-[L2] The complement identity gives $\mathbb P(A^c)=1-\mathbb P(A)$
-([[lem-probability-measure-basic-identities]]).
+[L2] The complement identity gives $\mathbb P(A^c)=1-\mathbb P(A)$ ([[lem-probability-measure-basic-identities]]).
 
-[L3] On nonnegative simple functions, the nonnegative integral is the simple
-integral $\sum_j c_j\mu(E_j)$
-([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]],
-[[def-integral-of-a-nonnegative-simple-function]]).
+[L3] On nonnegative simple functions, the nonnegative integral is the simple integral $\sum_j c_j\mu(E_j)$ ([[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[def-integral-of-a-nonnegative-simple-function]]).
 
 ## Proof
 

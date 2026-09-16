@@ -113,22 +113,8 @@ which the inequality is strict.
 
 ## Remarks
 
-- **This is the theorem that makes $\limsup$ and $\liminf$ worth defining.** They
-  exist for every sequence, with no hypothesis, and their coincidence is exactly
-  convergence in $\overline{\mathbb{R}}$. So a question about convergence becomes
-  a question about two computable quantities, and a proof of convergence can be
-  assembled from one-sided estimates without a candidate limit in hand.
+- **This is the theorem that makes $\limsup$ and $\liminf$ worth defining.** They exist for every sequence, with no hypothesis, and their coincidence is exactly convergence in $\overline{\mathbb{R}}$. So a question about convergence becomes a question about two computable quantities, and a proof of convergence can be assembled from one-sided estimates without a candidate limit in hand.
 
-- **The equation is between elements of $\overline{\mathbb{R}}$, and reading it in
-  $\mathbb{R}$ would lose two thirds of the content.** Clauses 2 and 3 are
-  statements about divergence, and they are true statements about
-  [[def-divergence-to-infinity]], not a redefinition of it: nothing above claims
-  that a sequence diverging to $+\infty$ has a limit in $\mathbb{R}$, and the
-  symbol $+\infty$ occurring in them is the element of $\overline{\mathbb{R}}$
-  introduced in [[def-extended-reals]].
+- **The equation is between elements of $\overline{\mathbb{R}}$, and reading it in $\mathbb{R}$ would lose two thirds of the content.** Clauses 2 and 3 are statements about divergence, and they are true statements about [[def-divergence-to-infinity]], not a redefinition of it: nothing above claims that a sequence diverging to $+\infty$ has a limit in $\mathbb{R}$, and the symbol $+\infty$ occurring in them is the element of $\overline{\mathbb{R}}$ introduced in [[def-extended-reals]].
 
-- **A sequence with $\liminf < \limsup$ does neither.** The alternating sequence
-  is the standard witness, with the two values $-1$ and $1$
-  ([[ex-limsup-of-alternating-sequence]]); it is bounded, so it also does not
-  diverge to $\pm\infty$, and the theorem says its failure to converge is exactly
-  the gap between the two quantities.
+- **A sequence with $\liminf < \limsup$ does neither.** The alternating sequence is the standard witness, with the two values $-1$ and $1$ ([[ex-limsup-of-alternating-sequence]]); it is bounded, so it also does not diverge to $\pm\infty$, and the theorem says its failure to converge is exactly the gap between the two quantities.

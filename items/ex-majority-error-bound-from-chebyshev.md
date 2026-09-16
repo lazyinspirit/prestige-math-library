@@ -31,8 +31,7 @@ If $25$ independent trials are each correct with probability $3/4$, then the maj
 
 ## Facts & Assumptions
 
-**Given:** $25$ independent Bernoulli trials, each correct with probability
-$3/4$.
+**Given:** $25$ independent Bernoulli trials, each correct with probability $3/4$.
 
 [L1] The Chebyshev majority bound gives $\mathbb P(S\le k/2)\le 9/k$ whenever each trial has success probability at least $2/3$ ([[lem-majority-error-bound-from-chebyshev]]).
 

@@ -34,17 +34,13 @@ Then $w$ is subharmonic on $\Omega$.
 
 ## Facts & Assumptions
 
-**Given:** A complex domain $\Omega$, an open subset $D\subseteq\Omega$,
-subharmonic functions $u$ on $\Omega$ and $v$ on every component of $D$, and
-the boundary limsup inequality of the Statement.
+**Given:** A complex domain $\Omega$, an open subset $D\subseteq\Omega$, subharmonic functions $u$ on $\Omega$ and $v$ on every component of $D$, and the boundary limsup inequality of the Statement.
 
 [L1] Subharmonicity is equivalent to harmonic comparison on compactly contained discs ([[thm-harmonic-majorant-characterization-of-plane-subharmonicity]]).
 
-[L2] Finite maxima preserve subharmonicity
-([[lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity]]).
+[L2] Finite maxima preserve subharmonicity ([[lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity]]).
 
-[L3] A subharmonic function attaining a finite interior maximum on a connected
-domain is constant ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
+[L3] A subharmonic function attaining a finite interior maximum on a connected domain is constant ([[thm-maximum-principle-for-plane-subharmonic-functions]]).
 
 ## Proof
 

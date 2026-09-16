@@ -38,9 +38,7 @@ $$\{x \in \mathbb Q_p : |x|_p \le 1\}.$$
 
 **Given:** The canonical embedding $\mathbb Z_p \hookrightarrow \mathbb Q_p$.
 
-[L1] The comparison theorem identifies $\mathbb Q_p$ with the fraction field of
-$\mathbb Z_p$ and identifies the embedded copy of $\mathbb Z_p$ with the closed
-unit ball ([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]]).
+[L1] The comparison theorem identifies $\mathbb Q_p$ with the fraction field of $\mathbb Z_p$ and identifies the embedded copy of $\mathbb Z_p$ with the closed unit ball ([[thm-p-adic-completion-agrees-with-the-fraction-field-of-zp]]).
 
 ## Proof
 

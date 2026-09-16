@@ -42,27 +42,19 @@ shape/projection constructions and the supplied sectional-curvature interface.
 
 ## Facts & Assumptions
 
-**Given:** Countable choice, the Euclidean hypersurface, a point $p$, and the
-two supplied orthonormal principal directions.
+**Given:** Countable choice, the Euclidean hypersurface, a point $p$, and the two supplied orthonormal principal directions.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[def-sectional-curvature]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 
-[F1] Principal directions satisfy $S_\nu e_a=\kappa_a e_a$.
-[[def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface]].
+[F1] Principal directions satisfy $S_\nu e_a=\kappa_a e_a$. [[def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface]].
 
-[F2] For tangent vectors,
-$g(S_\nu X,Y)=\langle\mathrm{II}(X,Y),\nu\rangle$.
-[[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
+[F2] For tangent vectors, $g(S_\nu X,Y)=\langle\mathrm{II}(X,Y),\nu\rangle$. [[thm-weingarten-equation-and-adjointness-of-the-shape-operator]].
 
-[F3] The Gauss equation has quadratic terms in the order stated on this page.
-[[thm-gauss-equation-for-a-riemannian-submanifold]].
+[F3] The Gauss equation has quadratic terms in the order stated on this page. [[thm-gauss-equation-for-a-riemannian-submanifold]].
 
-[F4] Euclidean space is locally isometric to itself and therefore has zero
-Riemann curvature. [[thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space]].
+[F4] Euclidean space is locally isometric to itself and therefore has zero Riemann curvature. [[thm-a-riemannian-manifold-is-flat-iff-it-is-locally-isometric-to-euclidean-space]].
 
-[F5] On an orthonormal pair, sectional curvature is
-$\operatorname{Rm}(e_i,e_j,e_j,e_i)$.
-[[def-sectional-curvature]].
+[F5] On an orthonormal pair, sectional curvature is $\operatorname{Rm}(e_i,e_j,e_j,e_i)$. [[def-sectional-curvature]].
 
 ## Proof
 

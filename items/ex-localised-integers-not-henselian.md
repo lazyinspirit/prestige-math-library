@@ -30,17 +30,13 @@ The local ring $\mathbf Z_{(7)}$ is not Henselian.
 
 ## Facts & Assumptions
 
-**Given:** The localization $A=\mathbf Z_{(7)}$ and the polynomial
-$f(T)=T^2-2 \in A[T]$.
+**Given:** The localization $A=\mathbf Z_{(7)}$ and the polynomial $f(T)=T^2-2 \in A[T]$.
 
-[L1] The localization at the prime $(7)$ is a local ring
-([[thm-localisation-at-a-prime-is-local]]).
+[L1] The localization at the prime $(7)$ is a local ring ([[thm-localisation-at-a-prime-is-local]]).
 
-[L2] Its residue field is $\mathbf F_7$
-([[cor-residue-field-of-a-localisation-at-a-prime]], [[thm-z-mod-p-is-a-field]]).
+[L2] Its residue field is $\mathbf F_7$ ([[cor-residue-field-of-a-localisation-at-a-prime]], [[thm-z-mod-p-is-a-field]]).
 
-[L3] In a Henselian local ring, every simple residue root lifts
-([[cor-henselian-local-simple-root-criterion]]).
+[L3] In a Henselian local ring, every simple residue root lifts ([[cor-henselian-local-simple-root-criterion]]).
 
 ## Verification
 

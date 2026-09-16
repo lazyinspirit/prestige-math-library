@@ -37,15 +37,11 @@ Thus each condition characterizes the Lagrangian subspaces.
 
 ## Facts & Assumptions
 
-**Given:** A $2n$-dimensional real symplectic vector space $(V,\omega)$ and
-$L\le V$.
+**Given:** A $2n$-dimensional real symplectic vector space $(V,\omega)$ and $L\le V$.
 
-[F1] For every $W\le V$, $\dim W+\dim W^\omega=2n$.
-[[prop-symplectic-double-orthogonal-and-dimension-identities]].
+[F1] For every $W\le V$, $\dim W+\dim W^\omega=2n$. [[prop-symplectic-double-orthogonal-and-dimension-identities]].
 
-[F2] Isotropic, coisotropic, and Lagrangian mean respectively
-$W\subseteq W^\omega$, $W^\omega\subseteq W$, and $W=W^\omega$.
-[[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]].
+[F2] Isotropic, coisotropic, and Lagrangian mean respectively $W\subseteq W^\omega$, $W^\omega\subseteq W$, and $W=W^\omega$. [[def-isotropic-coisotropic-symplectic-and-lagrangian-subspaces]].
 
 ## Proof
 

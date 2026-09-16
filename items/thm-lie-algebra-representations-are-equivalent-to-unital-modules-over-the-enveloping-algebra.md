@@ -34,27 +34,13 @@ module homomorphism on the other.
 
 **Given:** A Lie algebra $\mathfrak g$ and a vector space $V$ over $k$.
 
-[L1] A unital left $U(\mathfrak g)$-module structure whose central
-$k$-scalars act by the given scalar multiplication is equivalently a unital
-$k$-algebra map $U(\mathfrak g)\to\operatorname{End}_k(V)$. Indeed, the
-module axioms give additivity, multiplicativity, and preservation of the
-unit, while the stated scalar compatibility gives $k$-linearity; conversely
-such a map defines the required action
-([[def-left-and-right-modules]]).
+[L1] A unital left $U(\mathfrak g)$-module structure whose central $k$-scalars act by the given scalar multiplication is equivalently a unital $k$-algebra map $U(\mathfrak g)\to\operatorname{End}_k(V)$. Indeed, the module axioms give additivity, multiplicativity, and preservation of the unit, while the stated scalar compatibility gives $k$-linearity; conversely such a map defines the required action ([[def-left-and-right-modules]]).
 
-[L2] Lie maps from $\mathfrak g$ into a commutator algebra extend uniquely
-across $U(\mathfrak g)$
-([[thm-universal-property-of-the-universal-enveloping-algebra]]).
+[L2] Lie maps from $\mathfrak g$ into a commutator algebra extend uniquely across $U(\mathfrak g)$ ([[thm-universal-property-of-the-universal-enveloping-algebra]]).
 
-[L3] Representations and intertwiners are as in
-[[def-representation-of-a-lie-algebra]] and
-[[def-subrepresentation-quotient-representation-and-intertwiner]].
+[L3] Representations and intertwiners are as in [[def-representation-of-a-lie-algebra]] and [[def-subrepresentation-quotient-representation-and-intertwiner]].
 
-[L4] By its quotient-tensor-algebra definition, every element of
-$U(\mathfrak g)$ is a finite linear combination of images of tensor words,
-including the empty word $1$; these images are products of elements
-$\iota_{\mathfrak g}(x)$.
-[[def-universal-enveloping-algebra]].
+[L4] By its quotient-tensor-algebra definition, every element of $U(\mathfrak g)$ is a finite linear combination of images of tensor words, including the empty word $1$; these images are products of elements $\iota_{\mathfrak g}(x)$. [[def-universal-enveloping-algebra]].
 
 ## Proof
 

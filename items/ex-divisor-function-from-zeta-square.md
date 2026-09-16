@@ -32,8 +32,7 @@ The coefficient of $12^{-s}$ in $\zeta(s)^2$ is $\tau(12)=6$.
 
 **Given:** The identity $\sum_{n \ge 1}\tau(n)n^{-s}=\zeta(s)^2$.
 
-[L1] The square of the zeta Dirichlet series is the divisor-counting Dirichlet
-series ([[cor-divisor-dirichlet-series-zeta-square]]).
+[L1] The square of the zeta Dirichlet series is the divisor-counting Dirichlet series ([[cor-divisor-dirichlet-series-zeta-square]]).
 
 ## Verification
 

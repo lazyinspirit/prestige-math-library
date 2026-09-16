@@ -39,19 +39,13 @@ other bases.
 
 **Given:** $c\in\mathbb R$.
 
-[L1] Every continuous product-to-sum function is uniquely
-$c\log x$, including $c=0$
-([[cor-continuous-logarithmic-functions-form-a-one-parameter-family]]).
+[L1] Every continuous product-to-sum function is uniquely $c\log x$, including $c=0$ ([[cor-continuous-logarithmic-functions-form-a-one-parameter-family]]).
 
-[L2] The natural logarithm is continuous and satisfies
-$\log(xy)=\log x+\log y$
-([[thm-natural-logarithm-laws]]).
+[L2] The natural logarithm is continuous and satisfies $\log(xy)=\log x+\log y$ ([[thm-natural-logarithm-laws]]).
 
-[L3] The natural logarithm satisfies $\log(e)=1$
-([[thm-logarithm-continuous-functional-equation-characterisation]]).
+[L3] The natural logarithm satisfies $\log(e)=1$ ([[thm-logarithm-continuous-functional-equation-characterisation]]).
 
-[F1] For $b>0$, $b\neq1$,
-$\log_bx=\log x/\log b$ ([[def-logarithm-to-a-base]]).
+[F1] For $b>0$, $b\neq1$, $\log_bx=\log x/\log b$ ([[def-logarithm-to-a-base]]).
 
 ## Verification
 

@@ -32,9 +32,7 @@ those structures are automatically biproducts.
 
 **Given:** The category $\mathbf{Set}_*$ of pointed sets and pointed maps.
 
-[L1] A biproduct requires the canonical coproduct-to-product morphism to be an
-isomorphism ([[def-biproduct]],
-[[def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product]]).
+[L1] A biproduct requires the canonical coproduct-to-product morphism to be an isomorphism ([[def-biproduct]], [[def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product]]).
 
 ## Refutation
 

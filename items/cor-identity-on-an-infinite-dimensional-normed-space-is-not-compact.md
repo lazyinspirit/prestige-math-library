@@ -37,14 +37,11 @@ the identity operator is not compact.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ with no ordered basis of finite length, its closed
-unit ball $\overline B_X$, and the identity map $I_X$.
+**Given:** A normed space $X$ with no ordered basis of finite length, its closed unit ball $\overline B_X$, and the identity map $I_X$.
 
-[L1] A bounded linear operator is a linear map satisfying one global norm bound
-([[def-bounded-linear-operator]]).
+[L1] A bounded linear operator is a linear map satisfying one global norm bound ([[def-bounded-linear-operator]]).
 
-[L2] In this setting the closed unit ball is not compact
-([[cor-infinite-dimensional-closed-unit-ball-is-not-compact]]).
+[L2] In this setting the closed unit ball is not compact ([[cor-infinite-dimensional-closed-unit-ball-is-not-compact]]).
 
 ## Proof
 
@@ -56,5 +53,4 @@ unit ball $\overline B_X$, and the identity map $I_X$.
 
 ## Remarks
 
-- This item uses only the unit-ball criterion. It does not depend on a separate
-  compact-operator definition item.
+- This item uses only the unit-ball criterion. It does not depend on a separate compact-operator definition item.

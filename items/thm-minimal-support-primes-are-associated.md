@@ -31,8 +31,7 @@ $$ \mathfrak p \in \operatorname{Ass}_R(M). $$
 
 **Given:** A Noetherian commutative ring $R$, a finitely generated left $R$-module $M$, and a prime ideal $\mathfrak p$ minimal in $\operatorname{Supp}_R(M)$.
 
-[L1] The module $M$ admits a prime filtration
-$0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ for prime ideals $\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
+[L1] The module $M$ admits a prime filtration $0=M_0\subset M_1\subset\cdots\subset M_n=M$ with $M_i/M_{i-1}\cong R/\mathfrak p_i$ for prime ideals $\mathfrak p_i$ ([[thm-prime-filtration-of-a-finite-module]]).
 
 [L2] Support in a short exact sequence is the union of the supports of the outer terms ([[thm-support-in-a-short-exact-sequence]]).
 

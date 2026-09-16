@@ -30,18 +30,13 @@ preserves $\varepsilon$ without any special exception.
 
 ## Facts & Assumptions
 
-**Given:** The grammar with one variable and one production,
-$$ S\to\varepsilon. $$
+**Given:** The grammar with one variable and one production, $$ S\to\varepsilon. $$
 
-[A1] The statement refuted is: CNF conversion preserves $\varepsilon$ without a
-special start-symbol exception.
+[A1] The statement refuted is: CNF conversion preserves $\varepsilon$ without a special start-symbol exception.
 
-[L1] Chomsky normal form allows an $\varepsilon$-production only in the special
-case $S\to\varepsilon$ with $S$ absent from every right-hand side, by
-[[def-chomsky-normal-form]].
+[L1] Chomsky normal form allows an $\varepsilon$-production only in the special case $S\to\varepsilon$ with $S$ absent from every right-hand side, by [[def-chomsky-normal-form]].
 
-[L2] Every context-free grammar is equivalent to one in Chomsky normal form, by
-[[thm-chomsky-normal-form]].
+[L2] Every context-free grammar is equivalent to one in Chomsky normal form, by [[thm-chomsky-normal-form]].
 
 ## Refutation
 

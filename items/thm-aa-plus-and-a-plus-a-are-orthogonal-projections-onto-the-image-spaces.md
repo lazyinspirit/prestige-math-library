@@ -42,8 +42,7 @@ onto $\operatorname{im}A^*$.
 
 [L3] A self-adjoint idempotent is exactly an orthogonal projection onto its image ([[thm-self-adjoint-idempotents-are-exactly-orthogonal-projections]]).
 
-[L4] Every finite real or complex matrix has a singular value decomposition
-([[thm-singular-value-decomposition]]).
+[L4] Every finite real or complex matrix has a singular value decomposition ([[thm-singular-value-decomposition]]).
 
 ## Proof
 

@@ -33,14 +33,11 @@ $\omega^n$ is nowhere zero.
 
 **Given:** A smooth $2n$-manifold $M$ and $\omega\in\Omega^2(M)$.
 
-[F1] Wedge products of differential forms are defined pointwise.
-[[def-wedge-product-of-differential-forms]].
+[F1] Wedge products of differential forms are defined pointwise. [[def-wedge-product-of-differential-forms]].
 
-[F2] Every alternating form has the symplectic-pair/radical normal form.
-[[thm-alternating-forms-have-a-symplectic-normal-form]].
+[F2] Every alternating form has the symplectic-pair/radical normal form. [[thm-alternating-forms-have-a-symplectic-normal-form]].
 
-[F3] Pointwise nondegeneracy is the linear clause in the definition of a
-symplectic form. [[def-symplectic-form-and-symplectic-manifold]].
+[F3] Pointwise nondegeneracy is the linear clause in the definition of a symplectic form. [[def-symplectic-form-and-symplectic-manifold]].
 
 ## Proof
 

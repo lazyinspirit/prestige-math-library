@@ -36,27 +36,21 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** The scalar autonomous ODE $x'=x^2$ on $\mathbb R$ with initial value
-$x(0)=1$.
+**Given:** The scalar autonomous ODE $x'=x^2$ on $\mathbb R$ with initial value $x(0)=1$.
 
-[F1] This is an autonomous ODE in the sense of
-[[def-autonomous-ordinary-differential-equation]].
+[F1] This is an autonomous ODE in the sense of [[def-autonomous-ordinary-differential-equation]].
 
-[L1] Smooth autonomous ODEs have unique local smooth solutions
-([[thm-fundamental-theorem-for-autonomous-smooth-odes]]).
+[L1] Smooth autonomous ODEs have unique local smooth solutions ([[thm-fundamental-theorem-for-autonomous-smooth-odes]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
 1.1 The vector field $V(x)=x^2$ is smooth on $\mathbb R$. The explicit curve [F1, L1]
-$x(t)=1/(1-t)$ satisfies $x(0)=1$ and
-$x'(t)=1/(1-t)^2=x(t)^2$ for $t<1$, so [L1] identifies it with the unique local
-solution through $1$. [F1, L1]
+$x(t)=1/(1-t)$ satisfies $x(0)=1$ and $x'(t)=1/(1-t)^2=x(t)^2$ for $t<1$, so [L1] identifies it with the unique local solution through $1$. [F1, L1]
 
 2.1 This solution cannot be extended past $t=1$ as a real-valued solution, [step 1.1]
-because $x(t)\to+\infty$ as $t\uparrow1$. Hence the maximal solution is not
-defined for all time. [step 1.1]
+because $x(t)\to+\infty$ as $t\uparrow1$. Hence the maximal solution is not defined for all time. [step 1.1]
 
 3.1 Therefore a smooth Euclidean vector field need not be complete. [step 2.1]
 ∎

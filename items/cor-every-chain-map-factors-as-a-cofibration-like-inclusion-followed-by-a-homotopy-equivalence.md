@@ -33,10 +33,7 @@ chain-homotopy equivalence.
 
 **Given:** A chain map $f:C_\bullet\to D_\bullet$.
 
-[L1] The mapping-cylinder factorization writes
-$$f=p\,i$$
-with $i$ degreewise split monic and $p$ a chain-homotopy equivalence
-([[thm-the-mapping-cylinder-factors-a-chain-map]]).
+[L1] The mapping-cylinder factorization writes $$f=p\,i$$ with $i$ degreewise split monic and $p$ a chain-homotopy equivalence ([[thm-the-mapping-cylinder-factors-a-chain-map]]).
 
 ## Proof
 

@@ -77,12 +77,7 @@ At $s=0$ this is the even-coordinate embedding $R_0(\sum t_i g_i)=\sum t_i g_i$ 
 
 $$ U_i\times G\longrightarrow p^{-1}(U_i),\quad(b,h)\longmapsto s_i(b)h,\qquad x\longmapsto(p(x),g_i(x)) $$
 
-are continuous for the ordinary product and subspace topologies: the first is
-the composite of $s_i\times\mathrm{id}_G$ with the ordinary action, and the
-second is continuous by the ordinary product universal property and the
-partial-label continuity in [F1]. They are inverse because
-$g_i(s_i(b)h)=h$ and $s_i(p(x))g_i(x)=x$. Thus they are precisely the
-ordinary principal-bundle charts required by [F3]. Step 3.1 supplies the same charts for the compact weak branch. [F1, F3]
+are continuous for the ordinary product and subspace topologies: the first is the composite of $s_i\times\mathrm{id}_G$ with the ordinary action, and the second is continuous by the ordinary product universal property and the partial-label continuity in [F1]. They are inverse because $g_i(s_i(b)h)=h$ and $s_i(p(x))g_i(x)=x$. Thus they are precisely the ordinary principal-bundle charts required by [F3]. Step 3.1 supplies the same charts for the compact weak branch. [F1, F3]
 
 1.4 The coordinate family need not be locally finite, so set [F1, F2]
 

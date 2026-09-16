@@ -36,8 +36,7 @@ $$A^+=(A^*A)^{-1}A^*.$$
 
 ## Facts & Assumptions
 
-**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$ of full column rank, where
-$\mathbb F\in\{\mathbb R,\mathbb C\}$.
+**Given:** A matrix $A\in M_{m\times n}(\mathbb F)$ of full column rank, where $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
 [L1] Full column rank means that all $n$ singular values of $A$ are nonzero ([[cor-rank-equals-number-of-nonzero-singular-values]]).
 
@@ -45,8 +44,7 @@ $\mathbb F\in\{\mathbb R,\mathbb C\}$.
 
 [L3] An invertible matrix has a two-sided inverse ([[def-invertible-matrix-and-general-linear-group]]).
 
-[L4] Every finite real or complex matrix has a singular value decomposition
-([[thm-singular-value-decomposition]]).
+[L4] Every finite real or complex matrix has a singular value decomposition ([[thm-singular-value-decomposition]]).
 
 ## Proof
 

@@ -30,12 +30,9 @@ group.
 
 **Given:** An inverse system of groups indexed by a directed set $I$.
 
-[L1] The inverse limit is the set of tuples satisfying
-$\varphi_{ij}(g_j)=g_i$ for every comparable pair $i\le j$
-([[def-compatible-tuple-inverse-limit-of-groups]]).
+[L1] The inverse limit is the set of tuples satisfying $\varphi_{ij}(g_j)=g_i$ for every comparable pair $i\le j$ ([[def-compatible-tuple-inverse-limit-of-groups]]).
 
-[F1] A subset of a group is a subgroup exactly when it contains the identity and
-is closed under products and inverses ([[def-subgroup]], [[def-group]]).
+[F1] A subset of a group is a subgroup exactly when it contains the identity and is closed under products and inverses ([[def-subgroup]], [[def-group]]).
 
 ## Proof
 

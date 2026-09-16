@@ -105,16 +105,6 @@ two remarks are not needed for the equivalence and are not proved below.
 
 ## Remarks
 
-- **The constants blow up with the dimension, and that is the whole point of the
-  distinction.** The comparison $d_1 \le n\, d_\infty$ is Lipschitz for each
-  fixed $n$ and useless uniformly in $n$, so no pair of constants serves all
-  dimensions at once. Whether an analogue survives on spaces of infinite
-  sequences is a question for a later page and is not addressed here.
-- **Only $n \ge 1$ is treated**, because $d_\infty$ is a maximum over the index
-  set $\{0,\dots,n-1\}$ and that set is empty when $n = 0$
-  ([[lem-metrics-on-rn]]). For $n = 0$ the space $\mathbb{R}^0$ is a single
-  point and $d_1$, $d_2$ are identically $0$ on it, while $d_\infty$ is not
-  defined there at all, so there is nothing to compare.
-- **Minkowski is not used here.** The triangle inequalities were settled in
-  [[lem-metrics-on-rn]]; what this page needs is only the comparison of the three
-  values, and that runs on the finite-sum laws and Cauchy-Schwarz.
+- **The constants blow up with the dimension, and that is the whole point of the distinction.** The comparison $d_1 \le n\, d_\infty$ is Lipschitz for each fixed $n$ and useless uniformly in $n$, so no pair of constants serves all dimensions at once. Whether an analogue survives on spaces of infinite sequences is a question for a later page and is not addressed here.
+- **Only $n \ge 1$ is treated**, because $d_\infty$ is a maximum over the index set $\{0,\dots,n-1\}$ and that set is empty when $n = 0$ ([[lem-metrics-on-rn]]). For $n = 0$ the space $\mathbb{R}^0$ is a single point and $d_1$, $d_2$ are identically $0$ on it, while $d_\infty$ is not defined there at all, so there is nothing to compare.
+- **Minkowski is not used here.** The triangle inequalities were settled in [[lem-metrics-on-rn]]; what this page needs is only the comparison of the three values, and that runs on the finite-sum laws and Cauchy-Schwarz.

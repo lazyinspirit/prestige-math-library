@@ -27,23 +27,15 @@ For an additive functor, the zeroth left derived object always agrees with the
 original functor value.
 ## Facts & Assumptions
 
-**Given:** The functor
-$F(M)=\operatorname{Hom}_{\mathbb Z}(\mathbb Z/2\mathbb Z,M)$, and supplied
-projective resolution data $P$ on a class containing $\mathbb Z/2\mathbb Z$
-that assigns it the standard projective resolution below.
+**Given:** The functor $F(M)=\operatorname{Hom}_{\mathbb Z}(\mathbb Z/2\mathbb Z,M)$, and supplied projective resolution data $P$ on a class containing $\mathbb Z/2\mathbb Z$ that assigns it the standard projective resolution below.
 
-[L1] The companion false statement is false
-([[fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself]]).
+[L1] The companion false statement is false ([[fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself]]).
 
-[L2] Hom is left exact in each variable
-([[thm-hom-is-left-exact-in-each-variable]]).
+[L2] Hom is left exact in each variable ([[thm-hom-is-left-exact-in-each-variable]]).
 
-[L3] Right exactness is sufficient for the natural recovery of $F$ from $L_0$
-([[thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]]).
+[L3] Right exactness is sufficient for the natural recovery of $F$ from $L_0$ ([[thm-zero-th-left-derived-functor-of-a-right-exact-functor-recovers-the-functor]]).
 
-[L4] Left derived objects are computed from the homology of an applied deleted
-projective resolution
-([[def-left-derived-object-relative-to-projective-resolution-data]]).
+[L4] Left derived objects are computed from the homology of an applied deleted projective resolution ([[def-left-derived-object-relative-to-projective-resolution-data]]).
 
 ## Counterexample
 

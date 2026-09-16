@@ -37,14 +37,9 @@ If a basepoint and one oriented lift of each cell outside $A$ are supplied on ev
 
 [F1] [[def-homology-and-cohomology-with-local-coefficients]] defines the singular local groups, while [[lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases]] makes the cellular tensor complex independent of supplied lift bases.
 
-[F2] [[thm-excision-for-singular-homology]] states the ordinary
-constant-coefficient excision theorem. Its subdivision and prism calculation
-is reconstructed with local transports in Step 1.1; no local-coefficient
-skeletal conclusion is attributed to the ordinary cellular theorem.
+[F2] [[thm-excision-for-singular-homology]] states the ordinary constant-coefficient excision theorem. Its subdivision and prism calculation is reconstructed with local transports in Step 1.1; no local-coefficient skeletal conclusion is attributed to the ordinary cellular theorem.
 
-[F3] [[lem-compact-cw-images-have-finite-cell-support-without-choice]] places
-the image of every compact simplex in a finite CW subcomplex without using a
-selection principle.
+[F3] [[lem-compact-cw-images-have-finite-cell-support-without-choice]] places the image of every compact simplex in a finite CW subcomplex without using a selection principle.
 
 ## Proof
 

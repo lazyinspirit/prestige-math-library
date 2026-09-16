@@ -27,11 +27,9 @@ $\operatorname{Spec}A$.
 
 **Given:** A commutative ring $A$ and $f\in A$.
 
-[F1] The map on prime spectra induced by $A\to A_f$ is a homeomorphism onto
-$D(f)$ ([[cor-principal-localisation-spectrum-is-distinguished-open]]).
+[F1] The map on prime spectra induced by $A\to A_f$ is a homeomorphism onto $D(f)$ ([[cor-principal-localisation-spectrum-is-distinguished-open]]).
 
-[F2] The structure-sheaf sections on a distinguished open are the corresponding
-localizations ([[thm-sections-basic-open-affine-scheme]]).
+[F2] The structure-sheaf sections on a distinguished open are the corresponding localizations ([[thm-sections-basic-open-affine-scheme]]).
 
 ## Proof
 

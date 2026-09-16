@@ -47,17 +47,9 @@ Consequently:
 
 **Given:** A natural number $n\ge1$ and a prime $p$.
 
-[L1] For every nonzero integer $a$, the valuation $v_p(a)$ is additive on
-products and detects exactly the powers $p^k$ that divide $a$
-([[lem-p-adic-valuation-additive]], [[lem-p-adic-valuation-basic]],
-[[def-p-adic-valuation]]).
+[L1] For every nonzero integer $a$, the valuation $v_p(a)$ is additive on products and detects exactly the powers $p^k$ that divide $a$ ([[lem-p-adic-valuation-additive]], [[lem-p-adic-valuation-basic]], [[def-p-adic-valuation]]).
 
-[L2] The factorial satisfies
-$$ n!=1\cdot2\cdots n $$
-and
-$$ \binom{2n}{n}\,n!\,n!=(2n)! $$
-([[def-factorial-and-falling-factorial]], [[thm-binomial-closed-formula]],
-[[def-binomial-coefficient]]).
+[L2] The factorial satisfies $$ n!=1\cdot2\cdots n $$ and $$ \binom{2n}{n}\,n!\,n!=(2n)! $$ ([[def-factorial-and-falling-factorial]], [[thm-binomial-closed-formula]], [[def-binomial-coefficient]]).
 
 ## Proof
 

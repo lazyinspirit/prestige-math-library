@@ -52,60 +52,36 @@ would make $P^0=-\mathrm{id}$.
 
 ## Facts & Assumptions
 
-**Given:** AC, an odd prime $p$, $m=(p-1)/2$, a space $X$, a degree
-$q\geq0$ class, and an integer $i$.
+**Given:** AC, an odd prime $p$, $m=(p-1)/2$, a space $X$, a degree $q\geq0$ class, and an integer $i$.
 
-[F1] The cyclic coefficients are natural and additive and vanish for
-$j<0$ or $j>(p-1)q$
-([[lem-cyclic-p-fold-power-construction]]).
+[F1] The cyclic coefficients are natural and additive and vanish for $j<0$ or $j>(p-1)q$ ([[lem-cyclic-p-fold-power-construction]]).
 
-[F2] The mod-$p$ Bockstein is the connecting operation for the cyclic
-coefficient sequence ([[def-bockstein-connecting-operation]]).
+[F2] The mod-$p$ Bockstein is the connecting operation for the cyclic coefficient sequence ([[def-bockstein-connecting-operation]]).
 
-[F3] The Bockstein is independent of its lift and cocycle representative
-([[lem-the-bockstein-is-independent-of-lift-and-cocycle-representative]]).
+[F3] The Bockstein is independent of its lift and cocycle representative ([[lem-the-bockstein-is-independent-of-lift-and-cocycle-representative]]).
 
-[F4] The top cyclic coefficient is
-$D_{(p-1)q}(x)=(-1)^{mq(q+1)/2}(m!)^qx$
-([[lem-cyclic-p-fold-power-construction]]).
+[F4] The top cyclic coefficient is $D_{(p-1)q}(x)=(-1)^{mq(q+1)/2}(m!)^qx$ ([[lem-cyclic-p-fold-power-construction]]).
 
-[A1] [[def-axiom-of-choice]] is assumed exactly because the singular cyclic
-coefficient supplier [F1] assumes it.
+[A1] [[def-axiom-of-choice]] is assumed exactly because the singular cyclic coefficient supplier [F1] assumes it.
 
 ## Verification
 
-**Proof technique:** check the grading and normalization directly from the
-cyclic coefficient formula.
+**Proof technique:** check the grading and normalization directly from the cyclic coefficient formula.
 
 1.1 The formula is defined and has the stated degree. None of $1,\ldots,m$ is zero in $\mathbb F_p$, so $m!$ and every $(m!)^q$ are units. If $j=(q-2i)(p-1)$, then [given, F1, A1]
 
-$$
-pq-j=pq-(q-2i)(p-1)=q+2i(p-1).
-$$
+$$ pq-j=pq-(q-2i)(p-1)=q+2i(p-1). $$
 
-Thus the scalar multiple of $D_j(x)$ lies in the displayed target. Since
-$q(q+1)$ is even, the sign exponent is an integer. Naturality and
-additivity are inherited from [F1].
+Thus the scalar multiple of $D_j(x)$ lies in the displayed target. Since $q(q+1)$ is even, the sign exponent is an integer. Naturality and additivity are inherited from [F1].
 
 2.1 The normalization gives $P^0=\mathrm{id}$. At $i=0$, [F4] gives [F4, step 1.1]
 
-$$
-P^0(x)=(-1)^{mq(q+1)/2}(m!)^{-q}(-1)^{mq(q+1)/2}(m!)^qx=x.
-$$
+$$ P^0(x)=(-1)^{mq(q+1)/2}(m!)^{-q}(-1)^{mq(q+1)/2}(m!)^qx=x. $$
 
-The two equal sign exponents add to an even integer, and the factorial
-factors cancel.
+The two equal sign exponents add to an even integer, and the factorial factors cancel.
 
 2.2 The index conventions include negative operations and instability. For $i<0$, the operation is zero by definition; equivalently its cyclic index exceeds $(p-1)q$. If $i\geq0$ and $2i>q$, then $(q-2i)(p-1)<0$, so [F1] makes $P^i(x)=0$. At $2i=q$, the cyclic index is zero and the formula legitimately uses $D_0(x)=x^p$; it is not included in the vanishing range. [F1, step 1.1]
 
 3.1 The Bockstein composite and all boundary cases are well-defined. The specified cyclic short exact sequence and [F2] define the positive mod-$p$ Bockstein, while [F3] makes the resulting cohomology operation independent of cochain choices. Hence its composite with $P^i$ has degree one more than $P^i$. [F2, F3, A1, step 1.1, step 2.1, step 2.2]
 
-For the empty space and the zero class, both operations are zero. At $q=0$,
-step 2.1 gives $P^0=\mathrm{id}$, while every $i>0$ is in the strict
-instability range; this includes the point and its elements zero and one.
-The endpoints $i=0$ and $2i=q$, negative $i$, and $2i>q$ are all
-explicit. Degenerate singular simplices require no new convention because
-the operations are formed by composing the already well-defined suppliers.
-No biconditional is asserted. This definition makes no new selection: AC is
-propagated exactly from [F1], and the cyclic Bockstein uses canonical least
-residue lifts. ∎
+For the empty space and the zero class, both operations are zero. At $q=0$, step 2.1 gives $P^0=\mathrm{id}$, while every $i>0$ is in the strict instability range; this includes the point and its elements zero and one. The endpoints $i=0$ and $2i=q$, negative $i$, and $2i>q$ are all explicit. Degenerate singular simplices require no new convention because the operations are formed by composing the already well-defined suppliers. No biconditional is asserted. This definition makes no new selection: AC is propagated exactly from [F1], and the cyclic Bockstein uses canonical least residue lifts. ∎

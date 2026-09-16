@@ -35,16 +35,11 @@ subcomplex is contained in a finite stage.
 
 ## Facts & Assumptions
 
-**Given:** $\mathbb F=\mathbb R$ or $\mathbb C$, $0\leq n\leq N$, and the
-coordinate flag.
+**Given:** $\mathbb F=\mathbb R$ or $\mathbb C$, $0\leq n\leq N$, and the coordinate flag.
 
-[F1] A Schubert symbol $a$ has a cell
-$e(a)\cong\mathbb F^{d(a)}$ with $d(a)=\sum_i(a_i-i)$
-([[def-schubert-cells-in-real-and-complex-grassmannians]]).
+[F1] A Schubert symbol $a$ has a cell $e(a)\cong\mathbb F^{d(a)}$ with $d(a)=\sum_i(a_i-i)$ ([[def-schubert-cells-in-real-and-complex-grassmannians]]).
 
-[F2] A CW structure requires characteristic disks, closure finiteness, and
-the weak topology
-([[def-cw-complex-with-closure-finiteness-and-weak-topology]]).
+[F2] A CW structure requires characteristic disks, closure finiteness, and the weak topology ([[def-cw-complex-with-closure-finiteness-and-weak-topology]]).
 
 ## Proof
 

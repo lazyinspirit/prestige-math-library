@@ -31,9 +31,7 @@ Every representation of every Lie algebra is completely reducible.
 
 **Given:** The asserted universal complete reducibility.
 
-[L1] Completely reducible means an algebraic direct sum of irreducible
-subrepresentations
-([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L1] Completely reducible means an algebraic direct sum of irreducible subrepresentations ([[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 
 ## Refutation
 

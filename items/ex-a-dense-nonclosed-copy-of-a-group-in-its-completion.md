@@ -30,12 +30,9 @@ completion $\widehat{\mathbb Z}$.
 
 **Given:** The canonical map $\iota:\mathbb Z\to\widehat{\mathbb Z}$.
 
-[L1] The image of the canonical map is dense in every profinite completion
-([[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]]).
+[L1] The image of the canonical map is dense in every profinite completion ([[thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion]]).
 
-[L2] The profinite completion of $\mathbb Z$ is the inverse limit
-$\varprojlim_n \mathbb Z/n\mathbb Z$
-([[ex-the-profinite-completion-of-the-integers]]).
+[L2] The profinite completion of $\mathbb Z$ is the inverse limit $\varprojlim_n \mathbb Z/n\mathbb Z$ ([[ex-the-profinite-completion-of-the-integers]]).
 
 ## Verification
 

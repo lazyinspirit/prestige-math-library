@@ -30,22 +30,13 @@ $$\mathbb E[X]=\sum_{\omega\in\Omega}X(\omega)w(\omega)=\sum_{x\in X(\Omega)}x\,
 
 ## Facts & Assumptions
 
-**Given:** A finite probability space $(\Omega,w)$ and a real-valued function
-$X:\Omega\to\mathbb R$.
+**Given:** A finite probability space $(\Omega,w)$ and a real-valued function $X:\Omega\to\mathbb R$.
 
-[L1] Finite probability spaces are exactly full-power-set probability spaces, and
-every finite real random variable is measurable there
-([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],
-[[lem-finite-random-variables-are-measurable]]).
+[L1] Finite probability spaces are exactly full-power-set probability spaces, and every finite real random variable is measurable there ([[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]], [[lem-finite-random-variables-are-measurable]]).
 
-[L2] Change of variables for expectation identifies $\mathbb E[X]$ with the
-integral of the identity function against the law of $X$
-([[thm-change-of-variables-for-expectation]]).
+[L2] Change of variables for expectation identifies $\mathbb E[X]$ with the integral of the identity function against the law of $X$ ([[thm-change-of-variables-for-expectation]]).
 
-[L3] The published finite expectation is $\sum_{\omega\in\Omega}X(\omega)w(\omega)$,
-and it is also the sum over attained values weighted by their probabilities
-([[def-expectation-on-a-finite-probability-space]],
-[[lem-expectation-by-distribution]]).
+[L3] The published finite expectation is $\sum_{\omega\in\Omega}X(\omega)w(\omega)$, and it is also the sum over attained values weighted by their probabilities ([[def-expectation-on-a-finite-probability-space]], [[lem-expectation-by-distribution]]).
 
 ## Proof
 

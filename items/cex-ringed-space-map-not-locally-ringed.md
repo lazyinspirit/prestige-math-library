@@ -31,14 +31,11 @@ morphism of locally ringed spaces.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, the local ring $A=k[y]_{(y)}$, and the field
-$K=k(x)$.
+**Given:** A field $k$, the local ring $A=k[y]_{(y)}$, and the field $K=k(x)$.
 
-[F1] A morphism of ringed spaces between one-point spaces is exactly a ring map
-between their stalk rings ([[def-morphism-ringed-spaces]]).
+[F1] A morphism of ringed spaces between one-point spaces is exactly a ring map between their stalk rings ([[def-morphism-ringed-spaces]]).
 
-[F2] A morphism of locally ringed spaces must induce local maps on stalks
-([[def-morphism-locally-ringed-spaces]]).
+[F2] A morphism of locally ringed spaces must induce local maps on stalks ([[def-morphism-locally-ringed-spaces]]).
 
 [L1] A local ring has a unique maximal ideal ([[def-local-ring]]).
 

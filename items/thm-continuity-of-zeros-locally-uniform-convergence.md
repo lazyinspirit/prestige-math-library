@@ -37,11 +37,9 @@ exactly $m$ zeros in $D(a,r)$ counted with multiplicity.
 
 ## Facts & Assumptions
 
-**Given:** Holomorphic functions $f_n$ on an open set $\Omega$ converging
-locally uniformly to $f$, and an isolated zero $a$ of $f$ of multiplicity $m$.
+**Given:** Holomorphic functions $f_n$ on an open set $\Omega$ converging locally uniformly to $f$, and an isolated zero $a$ of $f$ of multiplicity $m$.
 
-[L1] A strict boundary perturbation preserves the total zero multiplicity in the
-disc ([[cor-local-zero-count-via-rouche]]).
+[L1] A strict boundary perturbation preserves the total zero multiplicity in the disc ([[cor-local-zero-count-via-rouche]]).
 
 ## Proof
 

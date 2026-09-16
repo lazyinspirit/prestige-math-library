@@ -44,13 +44,9 @@ $$\widehat E_{\mathbb C}=\{z\in\mathbb C: |z|\le1\}.$$
 
 **Given:** The unit circle $E\subseteq\mathbb C$.
 
-[L1] Hull membership is tested by comparison with the boundary suprema of all
-holomorphic functions on the ambient domain
-([[def-holomorphically-convex-hull-and-domain]]).
+[L1] Hull membership is tested by comparison with the boundary suprema of all holomorphic functions on the ambient domain ([[def-holomorphically-convex-hull-and-domain]]).
 
-[L2] A holomorphic function on the unit disc is bounded on the interior by its
-boundary maximum
-([[thm-boundary-maximum-modulus-principle]]).
+[L2] A holomorphic function on the unit disc is bounded on the interior by its boundary maximum ([[thm-boundary-maximum-modulus-principle]]).
 
 ## Verification
 

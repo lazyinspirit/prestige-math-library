@@ -30,18 +30,13 @@ Lie's theorem holds over every field and in every characteristic.
 
 ## Facts & Assumptions
 
-**Given:** The proposed removal of the algebraic-closure and
-characteristic-zero hypotheses from Lie's theorem.
+**Given:** The proposed removal of the algebraic-closure and characteristic-zero hypotheses from Lie's theorem.
 
-[L1] Lie's theorem supplies a common eigenvector only for finite-dimensional
-solvable Lie algebras over an algebraically closed field of characteristic
-zero ([[thm-lies-theorem]]).
+[L1] Lie's theorem supplies a common eigenvector only for finite-dimensional solvable Lie algebras over an algebraically closed field of characteristic zero ([[thm-lies-theorem]]).
 
-[L2] Solvability is termination of the derived series
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L2] Solvability is termination of the derived series ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L3] A representation preserves brackets as operator commutators
-([[def-representation-of-a-lie-algebra]]).
+[L3] A representation preserves brackets as operator commutators ([[def-representation-of-a-lie-algebra]]).
 
 ## Refutation
 

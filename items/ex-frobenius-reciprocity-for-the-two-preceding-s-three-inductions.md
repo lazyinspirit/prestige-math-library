@@ -34,18 +34,13 @@ $$ \langle \operatorname{Ind}_{\langle(12)\rangle}^{S_3}\mathbf 1,\chi_2\rangle_
 
 ## Facts & Assumptions
 
-**Given:** The character $\chi_2=(2,0,-1)$ and the two induced characters from
-the preceding examples.
+**Given:** The character $\chi_2=(2,0,-1)$ and the two induced characters from the preceding examples.
 
-[F1] The induction from $A_3$ of a nontrivial linear character is exactly
-$\chi_2$
-([[ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character]]).
+[F1] The induction from $A_3$ of a nontrivial linear character is exactly $\chi_2$ ([[ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character]]).
 
-[F2] The induction from a subgroup of order two is $1+\chi_2$
-([[ex-inducing-the-trivial-character-of-a-subgroup-of-order-two-in-s-three-gives-one-plus-an-irreducible-degree-two-character]]).
+[F2] The induction from a subgroup of order two is $1+\chi_2$ ([[ex-inducing-the-trivial-character-of-a-subgroup-of-order-two-in-s-three-gives-one-plus-an-irreducible-degree-two-character]]).
 
-[F3] Frobenius reciprocity matches the two inner products
-([[cor-frobenius-reciprocity-for-complex-characters]]).
+[F3] Frobenius reciprocity matches the two inner products ([[cor-frobenius-reciprocity-for-complex-characters]]).
 
 ## Verification
 

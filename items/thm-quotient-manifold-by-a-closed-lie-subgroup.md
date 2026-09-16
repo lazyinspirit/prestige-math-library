@@ -37,30 +37,19 @@ $\dim(G/H)=\dim G-\dim H$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and
-a closed subgroup $H\le G$.
+**Given:** $\mathrm{AC}_\omega$, a finite-dimensional real Lie group $G$, and a closed subgroup $H\le G$.
 
-[A1] Under countable choice, $H$ has its unique embedded Lie-subgroup
-structure. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
+[A1] Under countable choice, $H$ has its unique embedded Lie-subgroup structure. [[def-countable-choice]], [[thm-cartans-closed-subgroup-theorem]].
 
-[F1] A finite-dimensional subspace admits a linear projection, without any
-additional choice. [[lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice]].
+[F1] A finite-dimensional subspace admits a linear projection, without any additional choice. [[lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice]].
 
-[F2] A smooth map with invertible differential is a local diffeomorphism.
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F2] A smooth map with invertible differential is a local diffeomorphism. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
-[F3] The exponential map is smooth and has identity differential at zero.
-[[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]].
+[F3] The exponential map is smooth and has identity differential at zero. [[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]].
 
-[F4] Quotient topology, open quotient maps, and factorization through a
-quotient are available. [[def-quotient-topology]],
-[[lem-open-or-closed-surjection-is-quotient]],
-[[thm-quotient-universal-property]].
+[F4] Quotient topology, open quotient maps, and factorization through a quotient are available. [[def-quotient-topology]], [[lem-open-or-closed-surjection-is-quotient]], [[thm-quotient-universal-property]].
 
-[F5] A smooth submersion has local projection form and therefore admits a
-smooth local section near each point in its image; a surjective submersion
-therefore has such a section near every target point.
-[[thm-constant-rank-theorem-for-manifolds]].
+[F5] A smooth submersion has local projection form and therefore admits a smooth local section near each point in its image; a surjective submersion therefore has such a section near every target point. [[thm-constant-rank-theorem-for-manifolds]].
 
 ## Proof
 

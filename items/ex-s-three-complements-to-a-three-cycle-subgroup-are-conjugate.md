@@ -32,8 +32,7 @@ and they are conjugate.
 
 **Given:** The symmetric group $S_3$ ([[def-symmetric-group]]) and its alternating subgroup $A_3$ ([[def-alternating-group]]).
 
-[L1] Schur-Zassenhaus gives conjugacy of complements when the quotient is
-solvable ([[thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable]]).
+[L1] Schur-Zassenhaus gives conjugacy of complements when the quotient is solvable ([[thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable]]).
 
 ## Verification
 

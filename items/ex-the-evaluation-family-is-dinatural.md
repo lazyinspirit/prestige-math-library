@@ -74,11 +74,6 @@ $Y$ ([[def-wedge-and-cowedge]]).
 
 ## Remarks
 
-The displayed evaluation family supplies only diagonal components. There is no
-canonical evaluation map $Y^{B_1}\times B_2\to Y$ for unrelated $B_1,B_2$, and
-no natural family of such maps extending evaluation in general; special cases
-such as singleton $Y$ may admit constant maps. What the family always has is
-one component per object on the diagonal, tied together by the equation checked
-above, which is precisely the shape dinaturality was defined to capture.
+The displayed evaluation family supplies only diagonal components. There is no canonical evaluation map $Y^{B_1}\times B_2\to Y$ for unrelated $B_1,B_2$, and no natural family of such maps extending evaluation in general; special cases such as singleton $Y$ may admit constant maps. What the family always has is one component per object on the diagonal, tied together by the equation checked above, which is precisely the shape dinaturality was defined to capture.
 
 The chase uses nothing about $Y$. If $Y$ is empty then $Y^{B}$ is empty unless $B$ is, and the two legs are then functions with empty domain, which are equal for that reason; the computation above covers that case without a separate argument, since it verifies the two legs agree at every element of the domain.

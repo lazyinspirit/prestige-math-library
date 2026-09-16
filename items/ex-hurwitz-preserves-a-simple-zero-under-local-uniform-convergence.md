@@ -39,8 +39,7 @@ sufficiently large $f_n$ has exactly one zero counted with multiplicity.
 
 **Given:** The sequence $f_n(z)=z+z^2/(n+1)$ and the limit function $f(z)=z$.
 
-[L1] Locally uniform convergence preserves the total multiplicity near an
-isolated zero ([[thm-continuity-of-zeros-locally-uniform-convergence]]).
+[L1] Locally uniform convergence preserves the total multiplicity near an isolated zero ([[thm-continuity-of-zeros-locally-uniform-convergence]]).
 
 ## Verification
 

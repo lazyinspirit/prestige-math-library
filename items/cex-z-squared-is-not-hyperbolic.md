@@ -32,8 +32,7 @@ standard witness is $\mathbb Z^2$.
 
 **Given:** The free abelian group $\mathbb Z^2$.
 
-[L1] Free abelian groups of rank at least two are not hyperbolic
-([[prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]]).
+[L1] Free abelian groups of rank at least two are not hyperbolic ([[prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic]]).
 
 ## Counterexample
 

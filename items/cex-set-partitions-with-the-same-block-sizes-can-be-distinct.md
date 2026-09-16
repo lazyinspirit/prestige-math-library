@@ -35,9 +35,7 @@ sizes.
 
 ## Facts & Assumptions
 
-**Given:** The partitions
-$\mathcal{P}=\{\{1,2\},\{3,4\}\}$ and
-$\mathcal{Q}=\{\{1,3\},\{2,4\}\}$ of $[4]$.
+**Given:** The partitions $\mathcal{P}=\{\{1,2\},\{3,4\}\}$ and $\mathcal{Q}=\{\{1,3\},\{2,4\}\}$ of $[4]$.
 
 ## Proof
 

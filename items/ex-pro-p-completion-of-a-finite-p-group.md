@@ -32,11 +32,9 @@ an isomorphism.
 
 **Given:** A finite $p$-group $P$.
 
-[F1] The pro-$p$ completion is the inverse limit over all finite $p$-group
-quotients ([[def-pro-p-completion-of-an-abstract-group]]).
+[F1] The pro-$p$ completion is the inverse limit over all finite $p$-group quotients ([[def-pro-p-completion-of-an-abstract-group]]).
 
-[L1] A finite $p$-group is itself a pro-$p$ group
-([[def-pro-p-group]]).
+[L1] A finite $p$-group is itself a pro-$p$ group ([[def-pro-p-group]]).
 
 ## Verification
 

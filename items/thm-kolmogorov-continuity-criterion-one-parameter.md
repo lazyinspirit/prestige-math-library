@@ -39,35 +39,23 @@ every compact interval for every exponent $0<\gamma<\beta/\alpha$.
 
 **Given:** The metric-space, process, exponent, constant-family, and moment-bound hypotheses in the Statement.
 
-[F1] Completeness means every Cauchy sequence converges in $S$; separability
-provides a countable dense subset. [[def-complete-metric-space]]
-[[def-separable-space]]
+[F1] Completeness means every Cauchy sequence converges in $S$; separability provides a countable dense subset. [[def-complete-metric-space]] [[def-separable-space]]
 
-[F2] For a nonnegative random variable $Z$ and $a>0$,
-$P(Z\ge a)\le E[Z]/a$ on an arbitrary probability space.
-[[cor-markov-inequality-for-random-variables]]
+[F2] For a nonnegative random variable $Z$ and $a>0$, $P(Z\ge a)\le E[Z]/a$ on an arbitrary probability space. [[cor-markov-inequality-for-random-variables]]
 
-[F3] A finite or countable union has measure at most the sum of the member
-measures. [[thm-finite-and-countable-subadditivity-of-measures]]
+[F3] A finite or countable union has measure at most the sum of the member measures. [[thm-finite-and-countable-subadditivity-of-measures]]
 
-[F4] A geometric series of ratio strictly between zero and one converges.
-[[thm-geometric-series]]
+[F4] A geometric series of ratio strictly between zero and one converges. [[thm-geometric-series]]
 
-[F5] If the sum of event probabilities is finite, only finitely many events
-occur almost surely. [[cor-first-borel-cantelli-lemma-for-events]]
+[F5] If the sum of event probabilities is finite, only finitely many events occur almost surely. [[cor-first-borel-cantelli-lemma-for-events]]
 
-[F6] Bounded almost-everywhere convergence of measurable indicators implies
-convergence of their expectations. [[thm-dominated-convergence]]
+[F6] Bounded almost-everywhere convergence of measurable indicators implies convergence of their expectations. [[thm-dominated-convergence]]
 
-[F7] A modification agrees with the original process almost surely at every
-fixed time; this is weaker than indistinguishability.
-[[def-law-modification-and-indistinguishability-of-processes]]
+[F7] A modification agrees with the original process almost surely at every fixed time; this is weaker than indistinguishability. [[def-law-modification-and-indistinguishability-of-processes]]
 
-[F8] The rationals are countable, and strictly between two real numbers lies a
-rational. [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
+[F8] The rationals are countable, and strictly between two real numbers lies a rational. [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
 
-[F9] The sequence $2^{-j}$ tends to zero.
-[[lem-geometric-sequence-null]]
+[F9] The sequence $2^{-j}$ tends to zero. [[lem-geometric-sequence-null]]
 
 ## Proof
 
@@ -91,8 +79,4 @@ rational. [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
 
 ## Source notes
 
-Durrett's Theorem 7.1.3, printed pp. 356–358, and Sousi's Theorem 3.19 give
-the complete dyadic Markov--Borel--Cantelli and chaining argument. The local
-proof also supplies the complete-target extension, Borel measurability of its
-pointwise metric limit, and the fixed-time modification argument. Yoshida
-Section 6.3 gives the same Hölder exponent threshold.
+Durrett's Theorem 7.1.3, printed pp. 356–358, and Sousi's Theorem 3.19 give the complete dyadic Markov--Borel--Cantelli and chaining argument. The local proof also supplies the complete-target extension, Borel measurability of its pointwise metric limit, and the fixed-time modification argument. Yoshida Section 6.3 gives the same Hölder exponent threshold.

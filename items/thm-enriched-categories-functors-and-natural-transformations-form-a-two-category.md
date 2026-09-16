@@ -38,21 +38,13 @@ $\mathcal V$-natural transformations between those functors form a strict
 
 **Given:** A locally small monoidal category $\mathcal V$.
 
-[L1] A $\mathcal V$-category has a set of objects, hom-objects in $\mathcal V$,
-composition morphisms, and identity morphisms satisfying associativity and the
-unit laws ([[def-enriched-category]]).
+[L1] A $\mathcal V$-category has a set of objects, hom-objects in $\mathcal V$, composition morphisms, and identity morphisms satisfying associativity and the unit laws ([[def-enriched-category]]).
 
-[L2] A $\mathcal V$-functor is a function on objects together with hom-object
-maps compatible with enriched composition and units
-([[def-enriched-functor]]).
+[L2] A $\mathcal V$-functor is a function on objects together with hom-object maps compatible with enriched composition and units ([[def-enriched-functor]]).
 
-[L3] A $\mathcal V$-natural transformation is a family of components
-$\mathbf 1\to\mathcal B(TA,SA)$ satisfying the enriched naturality law
-([[def-enriched-natural-transformation]]).
+[L3] A $\mathcal V$-natural transformation is a family of components $\mathbf 1\to\mathcal B(TA,SA)$ satisfying the enriched naturality law ([[def-enriched-natural-transformation]]).
 
-[L4] A strict 2-category consists of objects, hom-categories, identity
-1-morphisms, and horizontally composable functors satisfying strict
-associativity and unit laws ([[def-strict-two-category]]).
+[L4] A strict 2-category consists of objects, hom-categories, identity 1-morphisms, and horizontally composable functors satisfying strict associativity and unit laws ([[def-strict-two-category]]).
 
 ## Proof
 

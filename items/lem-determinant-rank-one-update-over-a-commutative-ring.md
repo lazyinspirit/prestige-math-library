@@ -40,21 +40,15 @@ $$\det(A+uv^{\mathsf T}) =\det(A)+v^{\mathsf T}\operatorname{adj}(A)u.$$
 
 **Given:** $R,n,A,u,v$ as in the statement.
 
-[L1] The determinant is alternating and multilinear in its columns
-([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
+[L1] The determinant is alternating and multilinear in its columns ([[thm-leibniz-determinant-is-alternating-multilinear-and-normalized]]).
 
-[L2] Expansion along column $j$ is
-$\det(B)=\sum_i b_{ij}C_{ij}(B)$
-([[thm-laplace-cofactor-expansion]]).
+[L2] Expansion along column $j$ is $\det(B)=\sum_i b_{ij}C_{ij}(B)$ ([[thm-laplace-cofactor-expansion]]).
 
-[F1] $\operatorname{adj}(A)_{ji}=C_{ij}(A)$
-([[def-matrix-minors-cofactors-and-adjugate]]).
+[F1] $\operatorname{adj}(A)_{ji}=C_{ij}(A)$ ([[def-matrix-minors-cofactors-and-adjugate]]).
 
-[F2] Matrix products and transposes are given by their entry formulas
-([[def-ring-matrix-product-identity-and-transpose]]).
+[F2] Matrix products and transposes are given by their entry formulas ([[def-ring-matrix-product-identity-and-transpose]]).
 
-[L3] Matrix addition and multiplication obey the usual distributive laws
-([[thm-ring-matrix-arithmetic-laws]]).
+[L3] Matrix addition and multiplication obey the usual distributive laws ([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 

@@ -40,17 +40,13 @@ No closedness hypothesis on $M$ is needed.
 
 ## Facts & Assumptions
 
-**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$, a linear
-subspace $M \subseteq X$, and a bounded linear functional $f_0$ on $M$.
+**Given:** A normed space $X$ over $\mathbb{R}$ or $\mathbb{C}$, a linear subspace $M \subseteq X$, and a bounded linear functional $f_0$ on $M$.
 
-[L1] In the real case, a bounded linear functional on a subspace extends with
-the same norm ([[thm-hahn-banach-norm-preserving-extension]]).
+[L1] In the real case, a bounded linear functional on a subspace extends with the same norm ([[thm-hahn-banach-norm-preserving-extension]]).
 
-[L2] In the complex case, a bounded linear functional on a subspace extends with
-the same norm ([[thm-complex-hahn-banach-norm-preserving-extension]]).
+[L2] In the complex case, a bounded linear functional on a subspace extends with the same norm ([[thm-complex-hahn-banach-norm-preserving-extension]]).
 
-[L3] The page's normed-space language is read over either scalar field by the
-convention of [[rem-real-and-complex-normed-space-convention]].
+[L3] The page's normed-space language is read over either scalar field by the convention of [[rem-real-and-complex-normed-space-convention]].
 
 ## Proof
 

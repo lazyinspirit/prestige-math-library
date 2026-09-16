@@ -33,18 +33,11 @@ triangularization.
 
 ## Facts & Assumptions
 
-**Given:** A field $k$, an integer $n\geq1$, the standard basis
-$e_1,\ldots,e_n$ of $V=k^n$, and the inclusion action of
-$\mathfrak n_n(k)\subseteq\mathfrak{gl}(V)$.
+**Given:** A field $k$, an integer $n\geq1$, the standard basis $e_1,\ldots,e_n$ of $V=k^n$, and the inclusion action of $\mathfrak n_n(k)\subseteq\mathfrak{gl}(V)$.
 
-[L1] Engel triangularization produces a flag
-$0=V_0\subset V_1\subset\cdots\subset V_n=V$ with
-$\mathfrak gV_i\subseteq V_{i-1}$ for a nil representation
-([[thm-engels-triangularization-theorem]]).
+[L1] Engel triangularization produces a flag $0=V_0\subset V_1\subset\cdots\subset V_n=V$ with $\mathfrak gV_i\subseteq V_{i-1}$ for a nil representation ([[thm-engels-triangularization-theorem]]).
 
-[L2] For $n\geq2$, $\mathfrak n_n(k)$ is the strictly upper triangular
-matrix Lie algebra and is nilpotent of class $n-1$
-([[ex-strictly-upper-triangular-matrices-form-a-nilpotent-lie-algebra]]).
+[L2] For $n\geq2$, $\mathfrak n_n(k)$ is the strictly upper triangular matrix Lie algebra and is nilpotent of class $n-1$ ([[ex-strictly-upper-triangular-matrices-form-a-nilpotent-lie-algebra]]).
 
 ## Verification
 

@@ -35,19 +35,13 @@ only if $I$ is a left ideal of $R$.
 
 **Given:** A ring $R$ and its underlying additive group.
 
-[L1] A left module is an abelian group with a unital scalar action satisfying
-the two distributive laws and associativity of scalar multiplication
-([[def-left-and-right-modules]]).
+[L1] A left module is an abelian group with a unital scalar action satisfying the two distributive laws and associativity of scalar multiplication ([[def-left-and-right-modules]]).
 
-[L2] A subset is a submodule exactly when it is an additive subgroup and is
-closed under multiplication by every scalar ([[def-submodule]]).
+[L2] A subset is a submodule exactly when it is an additive subgroup and is closed under multiplication by every scalar ([[def-submodule]]).
 
-[L3] A left ideal is an additive subgroup $I$ such that $ri\in I$ for all
-$r\in R$ and $i\in I$ ([[def-left-right-and-two-sided-ideal]]).
+[L3] A left ideal is an additive subgroup $I$ such that $ri\in I$ for all $r\in R$ and $i\in I$ ([[def-left-right-and-two-sided-ideal]]).
 
-[L4] In a ring, addition is an abelian-group operation, multiplication is
-associative and unital, and multiplication distributes over addition on both
-sides ([[def-ring]]).
+[L4] In a ring, addition is an abelian-group operation, multiplication is associative and unital, and multiplication distributes over addition on both sides ([[def-ring]]).
 
 ## Proof
 
@@ -63,6 +57,4 @@ sides ([[def-ring]]).
 
 ## Remarks
 
-- With the right regular module $R_R$, the same argument identifies its
-  submodules with the right ideals. Two-sided ideals are precisely the subsets
-  that are submodules in both regular-module structures.
+- With the right regular module $R_R$, the same argument identifies its submodules with the right ideals. Two-sided ideals are precisely the subsets that are submodules in both regular-module structures.

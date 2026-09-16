@@ -33,8 +33,7 @@ $$
 
 ## Facts & Assumptions
 
-**Given:** The odd-prime Hilbert-symbol formula
-([[thm-odd-p-hilbert-symbol-formula]]).
+**Given:** The odd-prime Hilbert-symbol formula ([[thm-odd-p-hilbert-symbol-formula]]).
 
 ## Verification
 

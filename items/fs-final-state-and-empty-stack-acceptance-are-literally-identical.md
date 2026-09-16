@@ -32,11 +32,9 @@ empty stack are the same condition with no machine conversion.
 
 ## Facts & Assumptions
 
-**Given:** A PDA whose start state $q_0$ is accepting, whose initial stack
-symbol is $Z_0$, and which has no transitions at all.
+**Given:** A PDA whose start state $q_0$ is accepting, whose initial stack symbol is $Z_0$, and which has no transitions at all.
 
-[A1] The statement refuted is: for one fixed PDA, final-state acceptance and
-empty-stack acceptance are literally identical.
+[A1] The statement refuted is: for one fixed PDA, final-state acceptance and empty-stack acceptance are literally identical.
 
 [L1] By [[def-pda-acceptance-by-final-state]], the empty word is accepted by final state whenever the start state is already accepting.
 

@@ -35,13 +35,9 @@ This is a finite $C'(1/6)$ presentation and hence defines a hyperbolic group.
 
 **Given:** The displayed presentation of $G$.
 
-[A1] In the single relator $x_1x_2x_3x_4x_5x_6x_7$, no nonempty subword occurs
-as an initial segment of two distinct cyclic conjugates or inverse cyclic
-conjugates, so the symmetrized presentation has no nontrivial pieces and
-therefore satisfies $C'(1/6)$ vacuously.
+[A1] In the single relator $x_1x_2x_3x_4x_5x_6x_7$, no nonempty subword occurs as an initial segment of two distinct cyclic conjugates or inverse cyclic conjugates, so the symmetrized presentation has no nontrivial pieces and therefore satisfies $C'(1/6)$ vacuously.
 
-[L1] Finite $C'(1/6)$ presentations define hyperbolic groups
-([[thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups]]).
+[L1] Finite $C'(1/6)$ presentations define hyperbolic groups ([[thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups]]).
 
 ## Verification
 

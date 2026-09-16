@@ -35,23 +35,13 @@ by any comparison extension $S^\bullet(A)\to T^\bullet(A)$ of $1_A$. Then:
 
 **Given:** An object $A$ in the common domain and an integer $n$.
 
-[L1] The chosen injective resolutions of the same object are homotopy
-equivalent under that object
-([[thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object]]).
+[L1] The chosen injective resolutions of the same object are homotopy equivalent under that object ([[thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object]]).
 
-[L2] Two injective comparison maps extending the same morphism are
-cochain-homotopic
-([[thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]]).
+[L2] Two injective comparison maps extending the same morphism are cochain-homotopic ([[thm-injective-comparison-maps-are-unique-up-to-cochain-homotopy]]).
 
-[L3] Reindexing turns cochain homotopies into chain homotopies, and homology
-then respects both homotopy and composition
-([[def-cochain-complex-in-an-abelian-category]],
-[[thm-chain-homotopic-maps-induce-the-same-map-on-homology]],
-[[prop-homology-respects-identities-and-composition]]).
+[L3] Reindexing turns cochain homotopies into chain homotopies, and homology then respects both homotopy and composition ([[def-cochain-complex-in-an-abelian-category]], [[thm-chain-homotopic-maps-induce-the-same-map-on-homology]], [[prop-homology-respects-identities-and-composition]]).
 
-[L4] Comparison extensions exist for morphisms between objects in the domain
-of each supplied injective datum
-([[lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions]]).
+[L4] Comparison extensions exist for morphisms between objects in the domain of each supplied injective datum ([[lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions]]).
 
 ## Proof
 

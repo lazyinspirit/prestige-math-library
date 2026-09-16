@@ -51,18 +51,11 @@ transformed exact solutions are denoted by $y_*$.
 
 ## Facts & Assumptions
 
-**Given:** A linear system $Ax=b$, the left, right, and symmetric preconditioned
-forms from the definition, and, when an error formula is used, a solution
-$x_*$ of $Ax=b$.
+**Given:** A linear system $Ax=b$, the left, right, and symmetric preconditioned forms from the definition, and, when an error formula is used, a solution $x_*$ of $Ax=b$.
 
-[F1] Left, right, and symmetric preconditioning are exactly the transformed
-systems
-$$P^{-1}Ax=P^{-1}b,\qquad AP^{-1}y=b,\qquad C^{-1}AC^{-*}y=C^{-1}b$$
-with the accompanying variable changes
-([[def-left-right-and-symmetric-positive-definite-preconditioning]]).
+[F1] Left, right, and symmetric preconditioning are exactly the transformed systems $$P^{-1}Ax=P^{-1}b,\qquad AP^{-1}y=b,\qquad C^{-1}AC^{-*}y=C^{-1}b$$ with the accompanying variable changes ([[def-left-right-and-symmetric-positive-definite-preconditioning]]).
 
-[L1] An invertible matrix has a two-sided inverse
-([[def-invertible-matrix-and-general-linear-group]]).
+[L1] An invertible matrix has a two-sided inverse ([[def-invertible-matrix-and-general-linear-group]]).
 
 ## Proof
 **Proof technique:** direct.

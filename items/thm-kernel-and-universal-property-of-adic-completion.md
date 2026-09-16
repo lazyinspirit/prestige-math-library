@@ -45,24 +45,15 @@ an $R$-module.
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $R$, an ideal $I \subseteq R$, an $R$-module $M$,
-and for part 2 an $I$-adically complete $R$-module $N$ together with an
-$R$-linear map $f \colon M \to N$.
+**Given:** A commutative ring $R$, an ideal $I \subseteq R$, an $R$-module $M$, and for part 2 an $I$-adically complete $R$-module $N$ together with an $R$-linear map $f \colon M \to N$.
 
-[L1] The $I$-adic completion is
-$$\widehat M=\varprojlim M/I^nM$$
-with completion map $m \mapsto (m \bmod I^nM)_n$
-([[def-adic-completion-of-a-module]]).
+[L1] The $I$-adic completion is $$\widehat M=\varprojlim M/I^nM$$ with completion map $m \mapsto (m \bmod I^nM)_n$ ([[def-adic-completion-of-a-module]]).
 
-[L2] An $I$-adically complete module is separated and its canonical map to the
-inverse limit of its quotients is an isomorphism
-([[def-separated-and-complete-filtered-module]]).
+[L2] An $I$-adically complete module is separated and its canonical map to the inverse limit of its quotients is an isomorphism ([[def-separated-and-complete-filtered-module]]).
 
-[L3] The $I$-adic topology has the submodules $I^nN$ as a neighbourhood basis
-of $0$ ([[def-adic-topology-on-a-module]]).
+[L3] The $I$-adic topology has the submodules $I^nN$ as a neighbourhood basis of $0$ ([[def-adic-topology-on-a-module]]).
 
-[L4] Compatible maps into an inverse limit factor uniquely through it
-([[thm-universal-property-of-an-inverse-limit-of-modules]]).
+[L4] Compatible maps into an inverse limit factor uniquely through it ([[thm-universal-property-of-an-inverse-limit-of-modules]]).
 
 ## Proof
 

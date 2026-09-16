@@ -36,14 +36,11 @@ In every snake configuration, the induced kernel row is already short exact.
 
 ## Facts & Assumptions
 
-**Given:** The multiplication-by-two snake configuration from
-[[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]].
+**Given:** The multiplication-by-two snake configuration from [[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]].
 
-[L1] That published example already shows the kernel row can fail to be short
-exact ([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
+[L1] That published example already shows the kernel row can fail to be short exact ([[cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact]]).
 
-[L2] The snake lemma repairs the failure by adding the connecting morphism
-([[thm-snake-lemma-in-an-abelian-category]]).
+[L2] The snake lemma repairs the failure by adding the connecting morphism ([[thm-snake-lemma-in-an-abelian-category]]).
 
 ## Counterexample
 

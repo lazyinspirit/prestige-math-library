@@ -35,19 +35,13 @@ $U(\mathfrak g)$.
 
 ## Facts & Assumptions
 
-**Given:** A Lie algebra $\mathfrak g$ with a specified totally ordered basis
-$B$.
+**Given:** A Lie algebra $\mathfrak g$ with a specified totally ordered basis $B$.
 
-[L1] Let $P$ be the vector space freely spanned by weakly increasing finite
-words in $B$; these words are the ordered basis model of $S(\mathfrak g)$
-([[lem-symmetric-algebra-has-an-ordered-commutative-monomial-basis]]).
+[L1] Let $P$ be the vector space freely spanned by weakly increasing finite words in $B$; these words are the ordered basis model of $S(\mathfrak g)$ ([[lem-symmetric-algebra-has-an-ordered-commutative-monomial-basis]]).
 
-[F1] Every vector of $\mathfrak g$, in particular every bracket of two basis
-vectors, has a unique finite expansion in $B$. [[def-linear-basis]].
+[F1] Every vector of $\mathfrak g$, in particular every bracket of two basis vectors, has a unique finite expansion in $B$. [[def-linear-basis]].
 
-[L2] A Lie action of $\mathfrak g$ on $P$ extends uniquely to a unital
-$U(\mathfrak g)$-action
-([[thm-universal-property-of-the-universal-enveloping-algebra]]).
+[L2] A Lie action of $\mathfrak g$ on $P$ extends uniquely to a unital $U(\mathfrak g)$-action ([[thm-universal-property-of-the-universal-enveloping-algebra]]).
 
 ## Proof
 

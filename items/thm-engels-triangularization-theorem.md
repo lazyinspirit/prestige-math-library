@@ -36,17 +36,13 @@ there is a basis in which every $\rho(x)$ is strictly upper triangular.
 
 ## Facts & Assumptions
 
-**Given:** A nil representation of a Lie algebra $\mathfrak g$ on a
-finite-dimensional vector space $V$.
+**Given:** A nil representation of a Lie algebra $\mathfrak g$ on a finite-dimensional vector space $V$.
 
-[L1] On a nonzero finite-dimensional nil module there is a nonzero vector
-annihilated by all of $\mathfrak g$ ([[lem-engel-common-zero-vector]]).
+[L1] On a nonzero finite-dimensional nil module there is a nonzero vector annihilated by all of $\mathfrak g$ ([[lem-engel-common-zero-vector]]).
 
-[L2] An invariant subspace and its quotient carry the restricted and induced
-representations ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
+[L2] An invariant subspace and its quotient carry the restricted and induced representations ([[def-subrepresentation-quotient-representation-and-intertwiner]]).
 
-[L3] The canonical projection onto a vector-space quotient is linear and
-surjective ([[def-quotient-vector-space-and-canonical-projection]]).
+[L3] The canonical projection onto a vector-space quotient is linear and surjective ([[def-quotient-vector-space-and-canonical-projection]]).
 
 ## Proof
 

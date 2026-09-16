@@ -32,25 +32,17 @@ $\mathfrak g$ is nilpotent.
 
 ## Facts & Assumptions
 
-**Given:** A characteristic-zero field $k$ and a finite-dimensional solvable
-$k$-Lie algebra $\mathfrak g$.
+**Given:** A characteristic-zero field $k$ and a finite-dimensional solvable $k$-Lie algebra $\mathfrak g$.
 
-[L1] Over an algebraically closed characteristic-zero field, the derived
-algebra of a finite-dimensional solvable linear Lie algebra is nilpotent
-([[thm-derived-algebra-of-a-solvable-linear-lie-algebra-is-nilpotent]]).
+[L1] Over an algebraically closed characteristic-zero field, the derived algebra of a finite-dimensional solvable linear Lie algebra is nilpotent ([[thm-derived-algebra-of-a-solvable-linear-lie-algebra-is-nilpotent]]).
 
-[L2] A central extension of a nilpotent Lie algebra is nilpotent
-([[prop-a-central-extension-of-a-nilpotent-lie-algebra-is-nilpotent]]).
+[L2] A central extension of a nilpotent Lie algebra is nilpotent ([[prop-a-central-extension-of-a-nilpotent-lie-algebra-is-nilpotent]]).
 
-[L3] The adjoint map is a Lie homomorphism with kernel the center
-([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
+[L3] The adjoint map is a Lie homomorphism with kernel the center ([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
 
-[L4] A Lie homomorphism induces an isomorphism from the quotient by its kernel
-to its image
-([[prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]]).
+[L4] A Lie homomorphism induces an isomorphism from the quotient by its kernel to its image ([[prop-kernels-images-and-first-isomorphism-theorem-for-lie-algebras]]).
 
-[L5] Extension of scalars from $F$ to a field extension $K$ is
-$K\otimes_F-$ ([[def-restriction-and-extension-of-scalars]]).
+[L5] Extension of scalars from $F$ to a field extension $K$ is $K\otimes_F-$ ([[def-restriction-and-extension-of-scalars]]).
 
 ## Proof
 

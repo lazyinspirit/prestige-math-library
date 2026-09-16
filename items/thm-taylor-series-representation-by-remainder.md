@@ -51,41 +51,23 @@ compact interval $[a-r,a+r]$.
 
 ## Facts & Assumptions
 
-**Given:** An open interval $I$, a function $f\in C^\infty(I)$, a point
-$a\in I$, and the Taylor polynomials and remainders of $f$ at $a$.
+**Given:** An open interval $I$, a function $f\in C^\infty(I)$, a point $a\in I$, and the Taylor polynomials and remainders of $f$ at $a$.
 
-[A1] For the uniform assertion, $r>0$, $[a-r,a+r]\subset I$, and
-$M_{n+1}r^{n+1}/(n+1)!\to0$, where
-$M_{n+1}=\max_{|t-a|\le r}|f^{(n+1)}(t)|$.
+[A1] For the uniform assertion, $r>0$, $[a-r,a+r]\subset I$, and $M_{n+1}r^{n+1}/(n+1)!\to0$, where $M_{n+1}=\max_{|t-a|\le r}|f^{(n+1)}(t)|$.
 
-[L1] The $n$th partial sum of the Taylor series at $a$ is $T_{n,a}f$, and
-$R_{n,a}f(x)=f(x)-T_{n,a}f(x)$
-([[def-taylor-and-maclaurin-series]],
-[[def-taylor-polynomial-and-remainder]]).
+[L1] The $n$th partial sum of the Taylor series at $a$ is $T_{n,a}f$, and $R_{n,a}f(x)=f(x)-T_{n,a}f(x)$ ([[def-taylor-and-maclaurin-series]], [[def-taylor-polynomial-and-remainder]]).
 
-[L2] A continuous real-valued function on a nonempty compact set attains its
-maximum and minimum ([[thm-extreme-value-r]]).
+[L2] A continuous real-valued function on a nonempty compact set attains its maximum and minimum ([[thm-extreme-value-r]]).
 
-[L3] If $|f^{(n+1)}(t)|\le M$ throughout the closed interval between $a$ and
-$x$, then
-$$|R_{n,a}f(x)|\le\frac{M|x-a|^{n+1}}{(n+1)!}$$
-([[cor-taylor-remainder-bound]]).
+[L3] If $|f^{(n+1)}(t)|\le M$ throughout the closed interval between $a$ and $x$, then $$|R_{n,a}f(x)|\le\frac{M|x-a|^{n+1}}{(n+1)!}$$ ([[cor-taylor-remainder-bound]]).
 
-[L4] A sequence $(g_n)$ converges uniformly to $g$ on a set $E$ exactly when,
-for every $\varepsilon>0$, there is $N$ such that
-$|g_n(x)-g(x)|<\varepsilon$ for every $x\in E$ and every $n\ge N$
-([[def-pointwise-uniform-and-uniformly-cauchy-convergence]]).
+[L4] A sequence $(g_n)$ converges uniformly to $g$ on a set $E$ exactly when, for every $\varepsilon>0$, there is $N$ such that $|g_n(x)-g(x)|<\varepsilon$ for every $x\in E$ and every $n\ge N$ ([[def-pointwise-uniform-and-uniformly-cauchy-convergence]]).
 
-[L5] A function is of class $C^k$ on an interval when $f^{(j)}$ exists there
-for every $j\le k$ and each such $f^{(j)}$ is continuous there, and it is
-smooth, or $C^\infty$, when it is $C^k$ for every $k\in\mathbb N$
-([[def-higher-derivatives-and-smoothness]]).
+[L5] A function is of class $C^k$ on an interval when $f^{(j)}$ exists there for every $j\le k$ and each such $f^{(j)}$ is continuous there, and it is smooth, or $C^\infty$, when it is $C^k$ for every $k\in\mathbb N$ ([[def-higher-derivatives-and-smoothness]]).
 
-[L6] If $g$ is continuous at a point of its domain, then so is $|g|$, the
-function $x\mapsto|g(x)|$ ([[thm-algebra-of-continuous-functions]]).
+[L6] If $g$ is continuous at a point of its domain, then so is $|g|$, the function $x\mapsto|g(x)|$ ([[thm-algebra-of-continuous-functions]]).
 
-[L7] For reals $u\le v$, the closed bounded interval $[u,v]$ is compact
-([[thm-heine-borel-r]]).
+[L7] For reals $u\le v$, the closed bounded interval $[u,v]$ is compact ([[thm-heine-borel-r]]).
 
 ## Proof
 

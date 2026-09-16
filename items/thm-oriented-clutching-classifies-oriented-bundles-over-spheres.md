@@ -37,17 +37,11 @@ with an orientation-reversing matrix.
 
 **Given:** $n\geq1$, $k\geq1$, and an oriented rank-$n$ bundle over $S^k$.
 
-[F1] Unoriented clutching is controlled by hemisphere trivializations,
-homotopies, and disk-extending gauge maps
-([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
+[F1] Unoriented clutching is controlled by hemisphere trivializations, homotopies, and disk-extending gauge maps ([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
 
-[F2] Positive frames and orientation-preserving maps have transition matrices
-in $\operatorname{GL}_n^+(\mathbb R)$
-([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
+[F2] Positive frames and orientation-preserving maps have transition matrices in $\operatorname{GL}_n^+(\mathbb R)$ ([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
 
-[F3] With a metric, positive orthonormal frames are the corresponding
-$\operatorname{SO}(n)$ reduction
-([[prop-orientation-is-equivalent-to-an-so-n-reduction]]).
+[F3] With a metric, positive orthonormal frames are the corresponding $\operatorname{SO}(n)$ reduction ([[prop-orientation-is-equivalent-to-an-so-n-reduction]]).
 
 ## Proof
 

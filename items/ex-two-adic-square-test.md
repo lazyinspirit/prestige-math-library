@@ -32,8 +32,7 @@ In $\mathbb Q_2$, the number $17$ is a square but $5$ is not.
 
 **Given:** The $2$-adic square criterion.
 
-[L1] An element $2^n u$ with odd $u$ is a square in $\mathbb Q_2$ exactly when
-$n$ is even and $u \equiv 1 \pmod 8$ ([[thm-square-criterion-in-q2]]).
+[L1] An element $2^n u$ with odd $u$ is a square in $\mathbb Q_2$ exactly when $n$ is even and $u \equiv 1 \pmod 8$ ([[thm-square-criterion-in-q2]]).
 
 ## Verification
 

@@ -119,28 +119,10 @@ every admissible pair occurs, are then three short inductions.
 
 ## Remarks
 
-- **Every point of $[0,1]$ is approached, and the rate is the block width.** In
-  block $m$ the terms are $1/m, 2/m, \dots, m/m$, spaced $1/m$ apart and covering
-  $(0,1]$, so any target in $[0,1]$ has a term of block $m$ within $1/m$ of it.
-  Since blocks of every width occur, and occur arbitrarily late, this produces a
-  subsequence converging to the target. That is the whole idea; steps 2.2 and 3.2
-  only make the choice of term canonical, by taking a least element rather than
-  an arbitrary one, so that no choice principle is used.
+- **Every point of $[0,1]$ is approached, and the rate is the block width.** In block $m$ the terms are $1/m, 2/m, \dots, m/m$, spaced $1/m$ apart and covering $(0,1]$, so any target in $[0,1]$ has a term of block $m$ within $1/m$ of it. Since blocks of every width occur, and occur arbitrarily late, this produces a subsequence converging to the target. That is the whole idea; steps 2.2 and 3.2 only make the choice of term canonical, by taking a least element rather than an arbitrary one, so that no choice principle is used.
 
-- **The set is closed, as it must be.** $[0,1]$ contains the limit of every
-  convergent sequence of its own points, which is what
-  [[thm-subsequential-limit-set-closed]] predicts for any subsequential limit set.
-  This example shows the prediction is not vacuous: the set here is an entire
-  interval, in contrast with the two-point set of
-  [[ex-limsup-of-alternating-sequence]].
+- **The set is closed, as it must be.** $[0,1]$ contains the limit of every convergent sequence of its own points, which is what [[thm-subsequential-limit-set-closed]] predicts for any subsequential limit set. This example shows the prediction is not vacuous: the set here is an entire interval, in contrast with the two-point set of [[ex-limsup-of-alternating-sequence]].
 
-- **Neither endpoint is a value of the sequence in the case of $0$.** Every term
-  is $> 0$ by step 2.1, so $0 \in \operatorname{SL}(x)$ is a genuine limit and
-  not an attained value, while $1$ is attained, once in every block. Subsequential
-  limits need not be values, and values need not be subsequential limits.
+- **Neither endpoint is a value of the sequence in the case of $0$.** Every term is $> 0$ by step 2.1, so $0 \in \operatorname{SL}(x)$ is a genuine limit and not an attained value, while $1$ is attained, once in every block. Subsequential limits need not be values, and values need not be subsequential limits.
 
-- **Why the sequence is not written by a closed formula.** The classical
-  presentation defines $x_k$ by first solving $m(m-1)/2 \le k < m(m+1)/2$ for $m$,
-  which needs a least-element argument at every index and a quadratic estimate to
-  get $m \le k+1$. The recursion carries the block and position forward instead,
-  and the estimate $m_k \le k+1$ becomes the one-line induction of step 1.3.
+- **Why the sequence is not written by a closed formula.** The classical presentation defines $x_k$ by first solving $m(m-1)/2 \le k < m(m+1)/2$ for $m$, which needs a least-element argument at every index and a quadratic estimate to get $m \le k+1$. The recursion carries the block and position forward instead, and the estimate $m_k \le k+1$ becomes the one-line induction of step 1.3.

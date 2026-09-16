@@ -89,15 +89,6 @@ Let $a, b, c \in \mathbb{Z}$ and let $|\cdot|$ be as in [[def-int-abs]]. Then
 
 ## Remarks
 
-- Claim 6 is stated with $\le$ on both sides deliberately, and the strict form
-  follows from it: $|a| < c$ holds exactly when $-c < a < c$. From left to right,
-  $a \le |a| < c$ and $-c < -|a| \le a$ by claim 5. From right to left,
-  $-c < a < c$ gives $|a| \le c$ by claim 6, and $|a| = c$ is impossible, since
-  $|a|$ is $a$ or $-a$ and both $a = c$ and $-a = c$ are excluded by the two
-  strict inequalities.
+- Claim 6 is stated with $\le$ on both sides deliberately, and the strict form follows from it: $|a| < c$ holds exactly when $-c < a < c$. From left to right, $a \le |a| < c$ and $-c < -|a| \le a$ by claim 5. From right to left, $-c < a < c$ gives $|a| \le c$ by claim 6, and $|a| = c$ is impossible, since $|a|$ is $a$ or $-a$ and both $a = c$ and $-a = c$ are excluded by the two strict inequalities.
 
-- The list does **not** include the triangle inequality, which is not used
-  anywhere on this page. What the proofs below actually reach for is claim 1,
-  claim 2, claim 4 and the bound $a \le |a|$ of claim 5; claim 3 is used once, in
-  the identification of the associate classes, and claim 6 is recorded for
-  completeness rather than because something later needs it.
+- The list does **not** include the triangle inequality, which is not used anywhere on this page. What the proofs below actually reach for is claim 1, claim 2, claim 4 and the bound $a \le |a|$ of claim 5; claim 3 is used once, in the identification of the associate classes, and claim 6 is recorded for completeness rather than because something later needs it.

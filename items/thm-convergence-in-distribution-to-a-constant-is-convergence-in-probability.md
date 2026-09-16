@@ -30,8 +30,7 @@ on that space.
 
 ## Facts & Assumptions
 
-**Given:** Real random variables $X_n$ on one probability space,
-$X_n\Rightarrow c$, and $\varepsilon>0$.
+**Given:** Real random variables $X_n$ on one probability space, $X_n\Rightarrow c$, and $\varepsilon>0$.
 
 [L1] Distributional convergence gives CDF convergence at continuity points ([[def-convergence-in-distribution-for-real-random-variables]]).
 

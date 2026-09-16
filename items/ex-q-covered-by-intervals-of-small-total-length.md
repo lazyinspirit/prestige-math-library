@@ -78,22 +78,8 @@ covered by open intervals whose lengths add up to a millionth.
 
 ## Remarks
 
-- **The union is a dense open set of arbitrarily small total length.** Each $V_k$
-  is open, so $\bigcup_k V_k$ is an open set containing every rational, hence
-  dense; and its covering intervals have total length $\varepsilon$. Iterating
-  this over a sequence of shrinking $\varepsilon$ is exactly the construction of
-  [[cex-meager-set-of-full-measure]], where the intersection of countably many
-  such open sets turns out to be null and residual at the same time.
+- **The union is a dense open set of arbitrarily small total length.** Each $V_k$ is open, so $\bigcup_k V_k$ is an open set containing every rational, hence dense; and its covering intervals have total length $\varepsilon$. Iterating this over a sequence of shrinking $\varepsilon$ is exactly the construction of [[cex-meager-set-of-full-measure]], where the intersection of countably many such open sets turns out to be null and residual at the same time.
 
-- **Indexing.** The first interval has length $\varepsilon \cdot 2^{-1}$, not
-  $\varepsilon$: sequences here start at $k = 0$ and the total
-  $\varepsilon 2^{-1} \sum_{k \ge 0} 2^{-k}$ is exactly $\varepsilon$. Copying the
-  classical $\varepsilon 2^{-k}$ from a $1$-indexed source would give total
-  $2\varepsilon$.
+- **Indexing.** The first interval has length $\varepsilon \cdot 2^{-1}$, not $\varepsilon$: sequences here start at $k = 0$ and the total $\varepsilon 2^{-1} \sum_{k \ge 0} 2^{-k}$ is exactly $\varepsilon$. Copying the classical $\varepsilon 2^{-k}$ from a $1$-indexed source would give total $2\varepsilon$.
 
-- **What this does not show.** It does not show that the union of the $V_k$ is
-  small: that union is an open set containing a dense set, and one may not
-  conclude anything about its own total length from the lengths of the $V_k$,
-  since they overlap heavily. The correct statement is about the cover, not the
-  union, and that is why [[def-measure-zero-and-content-zero]] is phrased in terms
-  of covers throughout.
+- **What this does not show.** It does not show that the union of the $V_k$ is small: that union is an open set containing a dense set, and one may not conclude anything about its own total length from the lengths of the $V_k$, since they overlap heavily. The correct statement is about the cover, not the union, and that is why [[def-measure-zero-and-content-zero]] is phrased in terms of covers throughout.

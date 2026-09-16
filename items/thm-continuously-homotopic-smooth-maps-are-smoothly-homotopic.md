@@ -35,18 +35,13 @@ smoothly homotopic.
 
 ## Facts & Assumptions
 
-**Given:** Smooth maps $f_0,f_1:M\to N$ and a continuous homotopy
-$H:M\times I\to N$ from $f_0$ to $f_1$.
+**Given:** Smooth maps $f_0,f_1:M\to N$ and a continuous homotopy $H:M\times I\to N$ from $f_0$ to $f_1$.
 
-[F1] Homotopies are maps on products with $I=[0,1]$
-([[def-homotopy-relative-and-path-homotopy]]).
+[F1] Homotopies are maps on products with $I=[0,1]$ ([[def-homotopy-relative-and-path-homotopy]]).
 
-[L1] Products of smooth manifolds carry canonical smooth structures
-([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
+[L1] Products of smooth manifolds carry canonical smooth structures ([[prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure]]).
 
-[L2] Relative manifold-valued approximation can smooth a continuous map while
-fixing it on closed regions where it is already smooth
-([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
+[L2] Relative manifold-valued approximation can smooth a continuous map while fixing it on closed regions where it is already smooth ([[thm-relative-whitney-approximation-for-manifold-valued-maps]]).
 
 ## Proof
 **Proof technique:** direct.

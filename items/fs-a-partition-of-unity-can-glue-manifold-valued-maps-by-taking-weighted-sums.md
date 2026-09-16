@@ -36,14 +36,11 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The target manifold $S^1\subseteq \mathbb R^2$, the two-member cover
-$U=V=\mathbb R$, the subordinate smooth partition $\phi_U=\phi_V=1/2$, and
-the constant maps $f_U\equiv (1,0)$ and $f_V\equiv (-1,0)$.
+**Given:** The target manifold $S^1\subseteq \mathbb R^2$, the two-member cover $U=V=\mathbb R$, the subordinate smooth partition $\phi_U=\phi_V=1/2$, and the constant maps $f_U\equiv (1,0)$ and $f_V\equiv (-1,0)$.
 
 [L1] Partition-of-unity gluing works for real-valued functions because addition and scalar multiplication are available in the target ([[thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity]]).
 
-[A1] On the overlap $U\cap V=\mathbb R$, the partition weights are $1/2$ and
-$1/2$.
+[A1] On the overlap $U\cap V=\mathbb R$, the partition weights are $1/2$ and $1/2$.
 
 ## Refutation
 

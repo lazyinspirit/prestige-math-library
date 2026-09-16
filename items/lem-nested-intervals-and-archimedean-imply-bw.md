@@ -95,18 +95,8 @@ visits cofinally often, and reads the limit off (NIP).
 
 ## Remarks
 
-- **No choice is used.** Both recursions are applications of
-  [[thm-recursion]] to functions defined outright: the bisection rule keeps the
-  left half exactly when that half is visited cofinally often, and the index
-  $n_{j+1}$ is the *least* admissible one, supplied by
-  [[thm-well-ordering-principle]] rather than chosen.
+- **No choice is used.** Both recursions are applications of [[thm-recursion]] to functions defined outright: the bisection rule keeps the left half exactly when that half is visited cofinally often, and the index $n_{j+1}$ is the *least* admissible one, supplied by [[thm-well-ordering-principle]] rather than chosen.
 
-- **Where each hypothesis enters.** (NIP) is used once, at step 4.1. The
-  Archimedean property is used once, at step 3.1, and only to know that the
-  halved lengths get below every positive element of $F$. Without it the
-  bisection still runs and still produces nested intervals, but their lengths
-  need not tend to $0$ in $F$, and (NIP) as stated would not apply.
+- **Where each hypothesis enters.** (NIP) is used once, at step 4.1. The Archimedean property is used once, at step 3.1, and only to know that the halved lengths get below every positive element of $F$. Without it the bisection still runs and still produces nested intervals, but their lengths need not tend to $0$ in $F$, and (NIP) as stated would not apply.
 
-- **The bracketing interval is widened by $1_F$** in step 1.1 so that $M > 0$
-  even when the sequence is identically $0$; the argument of step 3.1 divides by
-  $2M$ and would otherwise have to treat that case separately.
+- **The bracketing interval is widened by $1_F$** in step 1.1 so that $M > 0$ even when the sequence is identically $0$; the argument of step 3.1 divides by $2M$ and would otherwise have to treat that case separately.

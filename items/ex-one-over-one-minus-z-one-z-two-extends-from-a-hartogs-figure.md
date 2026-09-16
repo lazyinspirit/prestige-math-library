@@ -42,8 +42,7 @@ fortiori, on every Hartogs figure inside that bidisc.
 
 **Given:** The function $f(z_1,z_2)=1/(1-z_1z_2)$ on the unit bidisc.
 
-[L1] Every holomorphic function on a Hartogs figure extends uniquely to the full
-bidisc hull ([[thm-hartogs-figure-extension]]).
+[L1] Every holomorphic function on a Hartogs figure extends uniquely to the full bidisc hull ([[thm-hartogs-figure-extension]]).
 
 ## Verification
 

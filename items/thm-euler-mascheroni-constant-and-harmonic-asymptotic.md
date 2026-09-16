@@ -46,25 +46,15 @@ for $n\ge2$.
 
 **Given:** The sequences $(H_n)$ and $(\gamma_n)$ displayed in the statement.
 
-[A1] For every $n\ge1$,
-$H_n=\sum_{k=1}^n1/k$ and $\gamma_n=H_n-\log n$.
+[A1] For every $n\ge1$, $H_n=\sum_{k=1}^n1/k$ and $\gamma_n=H_n-\log n$.
 
-[L1] For $x>0$, $\log x=\int_1^x dt/t$, and the derivative of $\log$ is
-$1/x$ ([[thm-logarithm-derivative-and-integral]]).
+[L1] For $x>0$, $\log x=\int_1^x dt/t$, and the derivative of $\log$ is $1/x$ ([[thm-logarithm-derivative-and-integral]]).
 
-[L2] Let $a<b$ and let $f,g:[a,b]\to\mathbb R$ be integrable. If $f(x)\ge0$
-for every $x\in[a,b]$, then $\int_a^b f\ge0$; if $f(x)\le g(x)$ for every
-$x\in[a,b]$, then $\int_a^b f\le\int_a^b g$; and if $m\le f(x)\le M$ for every
-$x\in[a,b]$, with $m,M$ real, then
-$m(b-a)\le\int_a^b f\le M(b-a)$ ([[thm-monotonicity-of-the-integral]]).
+[L2] Let $a<b$ and let $f,g:[a,b]\to\mathbb R$ be integrable. If $f(x)\ge0$ for every $x\in[a,b]$, then $\int_a^b f\ge0$; if $f(x)\le g(x)$ for every $x\in[a,b]$, then $\int_a^b f\le\int_a^b g$; and if $m\le f(x)\le M$ for every $x\in[a,b]$, with $m,M$ real, then $m(b-a)\le\int_a^b f\le M(b-a)$ ([[thm-monotonicity-of-the-integral]]).
 
-[L3] If $a<c<b$, then a bounded function on $[a,b]$ is integrable there exactly
-when its restrictions to $[a,c]$ and $[c,b]$ are integrable, and in that case
-$\int_a^b f=\int_a^c f+\int_c^b f$
-([[thm-additivity-over-subintervals]]).
+[L3] If $a<c<b$, then a bounded function on $[a,b]$ is integrable there exactly when its restrictions to $[a,c]$ and $[c,b]$ are integrable, and in that case $\int_a^b f=\int_a^c f+\int_c^b f$ ([[thm-additivity-over-subintervals]]).
 
-[L4] Every nonincreasing real sequence that is bounded below converges to its
-infimum ([[thm-monotone-convergence]]).
+[L4] Every nonincreasing real sequence that is bounded below converges to its infimum ([[thm-monotone-convergence]]).
 
 ## Proof
 

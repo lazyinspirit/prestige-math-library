@@ -33,11 +33,7 @@ Every subharmonic function on a complex domain belongs to $L^1_{\mathrm{loc}}$.
 
 [L3] Every open connected subset of $\mathbb R^2$ is polygonally connected ([[thm-open-connected-subsets-of-rn-are-polygonally-connected]]).
 
-[L4] For a nonnegative Borel function $F$ on a disc, the polar-coordinate
-identity
-$$\int_{D(c,s)}F\,dA=\int_0^s\int_0^{2\pi}F(c+te^{i\theta})\,t\,d\theta\,dt$$
-follows first for indicators of annular sectors and nonnegative simple
-functions, and then for general $F$ by monotone convergence.
+[L4] For a nonnegative Borel function $F$ on a disc, the polar-coordinate identity $$\int_{D(c,s)}F\,dA=\int_0^s\int_0^{2\pi}F(c+te^{i\theta})\,t\,d\theta\,dt$$ follows first for indicators of annular sectors and nonnegative simple functions, and then for general $F$ by monotone convergence.
 
 ## Proof
 

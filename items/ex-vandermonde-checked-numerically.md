@@ -72,7 +72,4 @@ $0$, and both sides come to $21$.
 
 ## Remarks
 
-- **Why a case with vanishing terms is included.** The identity is stated for all
-  $m$, $n$, $k$ with no side condition, and that is only correct because
-  out-of-range binomial coefficients are $0$ rather than undefined. Checking a
-  case where three terms vanish is checking exactly that clause.
+- **Why a case with vanishing terms is included.** The identity is stated for all $m$, $n$, $k$ with no side condition, and that is only correct because out-of-range binomial coefficients are $0$ rather than undefined. Checking a case where three terms vanish is checking exactly that clause.

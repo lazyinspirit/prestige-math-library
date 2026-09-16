@@ -36,23 +36,15 @@ $$ \operatorname{Ind}_H^G\chi(g) = \frac1{|H|} \sum_{\substack{x\in G\\x^{-1}gx\
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a subgroup $H\le G$, a finite-dimensional
-complex representation $W$ of $H$ with character $\chi$, and an element
-$g\in G$.
+**Given:** A finite group $G$, a subgroup $H\le G$, a finite-dimensional complex representation $W$ of $H$ with character $\chi$, and an element $g\in G$.
 
-[F1] The induced character is the character of the induced representation
-$\operatorname{Ind}_H^G W$ ([[def-induced-character-of-a-complex-representation]]).
+[F1] The induced character is the character of the induced representation $\operatorname{Ind}_H^G W$ ([[def-induced-character-of-a-complex-representation]]).
 
-[F2] A left transversal identifies $\operatorname{Ind}_H^G W$ with a direct sum
-of one copy of $W$ for each left coset of $H$ in $G$
-([[prop-induced-module-decomposes-over-a-left-transversal]]).
+[F2] A left transversal identifies $\operatorname{Ind}_H^G W$ with a direct sum of one copy of $W$ for each left coset of $H$ in $G$ ([[prop-induced-module-decomposes-over-a-left-transversal]]).
 
-[F3] A complex character is constant on conjugacy classes, and
-$\chi(h)=\operatorname{tr}\rho(h)$ on its defining representation
-([[prop-basic-value-properties-of-a-complex-character]]).
+[F3] A complex character is constant on conjugacy classes, and $\chi(h)=\operatorname{tr}\rho(h)$ on its defining representation ([[prop-basic-value-properties-of-a-complex-character]]).
 
-[F4] A finite sum is unchanged by reindexing a finite set bijectively
-([[def-sum-over-a-finite-index-set]]).
+[F4] A finite sum is unchanged by reindexing a finite set bijectively ([[def-sum-over-a-finite-index-set]]).
 
 ## Proof
 

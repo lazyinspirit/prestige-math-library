@@ -33,15 +33,11 @@ $\overline a$ such that $f(a)=0$.
 
 ## Facts & Assumptions
 
-**Given:** A Henselian local ring $(A,\mathfrak m)$, a monic polynomial
-$f \in A[T]$, and a simple residue root $\overline a$ of $\overline f$.
+**Given:** A Henselian local ring $(A,\mathfrak m)$, a monic polynomial $f \in A[T]$, and a simple residue root $\overline a$ of $\overline f$.
 
-[L1] A simple residue root gives a coprime factorization
-$$\overline f=(T-\overline a)\overline h$$
-in $k[T]$ ([[lem-simple-root-to-coprime-factorisation]]).
+[L1] A simple residue root gives a coprime factorization $$\overline f=(T-\overline a)\overline h$$ in $k[T]$ ([[lem-simple-root-to-coprime-factorisation]]).
 
-[L2] A Henselian pair lifts coprime monic factorizations uniquely
-([[def-henselian-pair-and-henselian-local-ring]], [[prop-uniqueness-of-hensel-factor-lifting]]).
+[L2] A Henselian pair lifts coprime monic factorizations uniquely ([[def-henselian-pair-and-henselian-local-ring]], [[prop-uniqueness-of-hensel-factor-lifting]]).
 
 ## Proof
 

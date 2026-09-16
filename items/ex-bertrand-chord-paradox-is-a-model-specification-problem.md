@@ -41,8 +41,7 @@ different probabilities.
 
 **Given:** The three sample-space models stated in the Example.
 
-[L1] A probability question is determined only after the sample space and its
-probability measure have been fixed ([[def-probability-measure]]).
+[L1] A probability question is determined only after the sample space and its probability measure have been fixed ([[def-probability-measure]]).
 
 ## Verification
 

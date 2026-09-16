@@ -40,30 +40,17 @@ embedding of distributions injective.
 
 ## Facts & Assumptions
 
-**Given:** [[def-countable-choice|Countable Choice]] and a hypothetical triple
-$(A,J,\partial)$ satisfying the three displayed requirements.
+**Given:** [[def-countable-choice|Countable Choice]] and a hypothetical triple $(A,J,\partial)$ satisfying the three displayed requirements.
 
-[F1] A locally integrable function $f$ defines the regular distribution
-$u_f$, and $f\mapsto u_f$ is injective
-([[def-locally-integrable-function-on-r-n]],
-[[def-regular-distribution-from-a-locally-integrable-function]],
-[[thm-locally-integrable-functions-embed-in-distributions]]).
+[F1] A locally integrable function $f$ defines the regular distribution $u_f$, and $f\mapsto u_f$ is injective ([[def-locally-integrable-function-on-r-n]], [[def-regular-distribution-from-a-locally-integrable-function]], [[thm-locally-integrable-functions-embed-in-distributions]]).
 
-[F2] Distributional differentiation is defined by
-$\langle u',\varphi\rangle=-\langle u,\varphi'\rangle$
-([[def-distributional-derivative]]).
+[F2] Distributional differentiation is defined by $\langle u',\varphi\rangle=-\langle u,\varphi'\rangle$ ([[def-distributional-derivative]]).
 
-[F3] The Dirac distribution satisfies
-$\langle\delta_0,\varphi\rangle=\varphi(0)$
-([[def-dirac-delta-and-its-derivatives]]).
+[F3] The Dirac distribution satisfies $\langle\delta_0,\varphi\rangle=\varphi(0)$ ([[def-dirac-delta-and-its-derivatives]]).
 
-[F4] Products of a distribution with a smooth function already have a
-canonical meaning, but the Heaviside function used below is not smooth
-([[def-multiplication-of-a-distribution-by-a-smooth-function]]).
+[F4] Products of a distribution with a smooth function already have a canonical meaning, but the Heaviside function used below is not smooth ([[def-multiplication-of-a-distribution-by-a-smooth-function]]).
 
-[F5] Integration by parts, and hence the endpoint evaluation of an integral
-of $\varphi'$, is valid for compactly supported smooth test functions
-([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]]).
+[F5] Integration by parts, and hence the endpoint evaluation of an integral of $\varphi'$, is valid for compactly supported smooth test functions ([[lem-complex-integration-by-parts-on-intervals-and-decaying-lines]]).
 
 ## Counterexample
 
@@ -85,8 +72,7 @@ Apply it to $h^3=h$.  Associativity, commutativity, and the Leibniz rule give
 
 $$3h^2d=d.$$
 
-Because $h^2=h$, subtraction of these identities gives $hd=0$, and the first
-identity then gives $d=0$. [given, step 2.1, algebra]
+Because $h^2=h$, subtraction of these identities gives $hd=0$, and the first identity then gives $d=0$. [given, step 2.1, algebra]
 
 4.1 Yet $\delta_0\ne0$: choose a test function with $\varphi(0)=1$ and use [F3].  Injectivity of $J$ therefore implies $d=J(\delta_0)\ne0$, contradicting step 3.1. [given, F3, step 3.1]
 

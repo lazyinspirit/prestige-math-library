@@ -30,8 +30,7 @@ for every continuous real or complex $f$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and the resulting extended club-set
-probability measure $\bar m$.
+**Given:** The Axiom of Countable Choice and the resulting extended club-set probability measure $\bar m$.
 
 [L1] Continuous functions on $[0,\omega_1]$ are eventually constant. ([[lem-continuous-functions-on-omega-one-plus-one-are-eventually-constant]])
 

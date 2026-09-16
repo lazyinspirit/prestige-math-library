@@ -32,12 +32,9 @@ as chain complexes.
 
 **Given:** Chain complexes $C_\bullet$ and $D_\bullet$.
 
-[L1] The cone of a chain map has underlying graded object $D\oplus C[1]$ and
-differential $(y,x)\mapsto(d^D(y)+f(x),-d^C(x))$
-([[def-mapping-cone-of-a-chain-map]]).
+[L1] The cone of a chain map has underlying graded object $D\oplus C[1]$ and differential $(y,x)\mapsto(d^D(y)+f(x),-d^C(x))$ ([[def-mapping-cone-of-a-chain-map]]).
 
-[L2] Finite biproducts of complexes are computed degreewise
-([[prop-finite-biproducts-of-complexes-are-computed-degreewise]]).
+[L2] Finite biproducts of complexes are computed degreewise ([[prop-finite-biproducts-of-complexes-are-computed-degreewise]]).
 
 ## Proof
 

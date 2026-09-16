@@ -81,20 +81,8 @@ hypothesis.
 
 ## Remarks
 
-- **The Cauchy hypothesis is doing all the work.** Without it a convergent
-  subsequence says nothing at all about the sequence, which is
-  [[fs-subsequence-convergence-implies-convergence]]; the alternating sequence
-  has a constant, hence convergent, subsequence and does not converge. What the
-  Cauchy condition adds is that the terms are eventually close to *each other*,
-  so being close to $L$ at one late index propagates to all late indices.
+- **The Cauchy hypothesis is doing all the work.** Without it a convergent subsequence says nothing at all about the sequence, which is [[fs-subsequence-convergence-implies-convergence]]; the alternating sequence has a constant, hence convergent, subsequence and does not converge. What the Cauchy condition adds is that the terms are eventually close to *each other*, so being close to $L$ at one late index propagates to all late indices.
 
-- **The single index $j$ chosen in step 3.1 is the whole trick.** It is used
-  once, as a bridge, and is not required to grow with $k$; this is why $n_j \ge j$
-  ([[lem-index-map-grows]]) is needed only to know that some subsequence index
-  lies beyond $K$.
+- **The single index $j$ chosen in step 3.1 is the whole trick.** It is used once, as a bridge, and is not required to grow with $k$; this is why $n_j \ge j$ ([[lem-index-map-grows]]) is needed only to know that some subsequence index lies beyond $K$.
 
-- **The limit is forced to be $L$, not merely to exist.** Combined with
-  uniqueness of limits ([[lem-limit-unique]]), this says that a Cauchy sequence
-  has at most one subsequential limit, so for Cauchy sequences the subsequential
-  limit set ([[def-subsequential-limit]]) is empty or a single point, and
-  [[thm-cauchy-criterion-via-lub]] rules out the empty case in $\mathbb{R}$.
+- **The limit is forced to be $L$, not merely to exist.** Combined with uniqueness of limits ([[lem-limit-unique]]), this says that a Cauchy sequence has at most one subsequential limit, so for Cauchy sequences the subsequential limit set ([[def-subsequential-limit]]) is empty or a single point, and [[thm-cauchy-criterion-via-lub]] rules out the empty case in $\mathbb{R}$.

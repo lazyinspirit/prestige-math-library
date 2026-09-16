@@ -92,24 +92,8 @@ hypothesis that the lengths tend to $0$ in $K$, is true
 
 ## Remarks
 
-- **What the counterexample really exhibits.** It is a *gap* in $K$. Each of the
-  two requirements is satisfiable on its own — $\iota(1)$ lies above every
-  $\iota(n)t^{-1}$, and $0_K$ lies below every $\iota(1/(n+1))$ — yet steps 4.1
-  and 4.2 show that nothing in $K$ satisfies both at once. Both sides of the gap
-  are approached along countable sequences, which is why intervals indexed by
-  $\mathbb{N}$ can straddle it, and the lengths cannot shrink across it: they
-  stay of valuation $0$ while the left endpoints stay of valuation $1$.
+- **What the counterexample really exhibits.** It is a *gap* in $K$. Each of the two requirements is satisfiable on its own — $\iota(1)$ lies above every $\iota(n)t^{-1}$, and $0_K$ lies below every $\iota(1/(n+1))$ — yet steps 4.1 and 4.2 show that nothing in $K$ satisfies both at once. Both sides of the gap are approached along countable sequences, which is why intervals indexed by $\mathbb{N}$ can straddle it, and the lengths cannot shrink across it: they stay of valuation $0$ while the left endpoints stay of valuation $1$.
 
-- **Why this does not contradict Cauchy completeness.** $(a_n)$ is not Cauchy in
-  $K$: consecutive terms differ by exactly $t^{-1}$, so the Cauchy condition
-  fails at $\varepsilon = t^{-1}$. Cauchy completeness
-  ([[thm-laurent-cauchy-complete]]) constrains sequences whose terms crowd
-  together in the order of $K$, and neither endpoint sequence here does.
+- **Why this does not contradict Cauchy completeness.** $(a_n)$ is not Cauchy in $K$: consecutive terms differ by exactly $t^{-1}$, so the Cauchy condition fails at $\varepsilon = t^{-1}$. Cauchy completeness ([[thm-laurent-cauchy-complete]]) constrains sequences whose terms crowd together in the order of $K$, and neither endpoint sequence here does.
 
-- **Consequence for the equivalence of completeness properties.** Since $K$ is
-  Cauchy complete but has neither the least-upper-bound property
-  ([[cor-laurent-not-lub-complete]]) nor the unrestricted nested interval
-  property, any statement of the form "nested intervals imply least upper
-  bounds" has to say *which* nested interval property it means. The form that
-  $K$ does satisfy is the shrinking one, and that is the form for which $K$ is
-  a counterexample to the implication.
+- **Consequence for the equivalence of completeness properties.** Since $K$ is Cauchy complete but has neither the least-upper-bound property ([[cor-laurent-not-lub-complete]]) nor the unrestricted nested interval property, any statement of the form "nested intervals imply least upper bounds" has to say *which* nested interval property it means. The form that $K$ does satisfy is the shrinking one, and that is the form for which $K$ is a counterexample to the implication.

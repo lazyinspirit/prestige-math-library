@@ -40,22 +40,13 @@ $$\operatorname{Cone}(f)\to\operatorname{Cone}(g).$$
 
 [L2] A chain homotopy satisfies the commutator identity between the two maps it connects ([[def-chain-homotopy]]).
 
-[L3] The cone differential is
-$$d(y,x)=(d^D(y)+f(x),-d^C(x))$$
-for $\operatorname{Cone}(f)$, and analogously for $g$
-([[def-mapping-cone-of-a-chain-map]]).
+[L3] The cone differential is $$d(y,x)=(d^D(y)+f(x),-d^C(x))$$ for $\operatorname{Cone}(f)$, and analogously for $g$ ([[def-mapping-cone-of-a-chain-map]]).
 
-[L4] The cone of a chain map belongs to the cone triangle consisting of the
-map, the canonical inclusion, and the canonical projection
-([[def-cone-triangle-of-a-chain-map]]).
+[L4] The cone of a chain map belongs to the cone triangle consisting of the map, the canonical inclusion, and the canonical projection ([[def-cone-triangle-of-a-chain-map]]).
 
-[L5] Morphisms in the homotopy category $K(\mathcal A)$ are homotopy classes
-of chain maps ([[def-homotopy-category-of-chain-complexes]]).
+[L5] Morphisms in the homotopy category $K(\mathcal A)$ are homotopy classes of chain maps ([[def-homotopy-category-of-chain-complexes]]).
 
-[L6] The Stacks Project, Lemma 13.9.13, states that if
-$(a,b,c)$ is a morphism between two cone triangles in $K(\mathcal A)$ and
-$a,b$ are chain-homotopy equivalences, then $c$ is a chain-homotopy
-equivalence.
+[L6] The Stacks Project, Lemma 13.9.13, states that if $(a,b,c)$ is a morphism between two cone triangles in $K(\mathcal A)$ and $a,b$ are chain-homotopy equivalences, then $c$ is a chain-homotopy equivalence.
 
 ## Proof
 

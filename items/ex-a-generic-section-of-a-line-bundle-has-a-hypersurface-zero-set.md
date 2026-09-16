@@ -38,8 +38,7 @@ codimension-one submanifold.
 
 ## Facts & Assumptions
 
-**Given:** The section $s(x,y)=x$ of the trivial line bundle
-$\mathbb R^2\times\mathbb R\to\mathbb R^2$.
+**Given:** The section $s(x,y)=x$ of the trivial line bundle $\mathbb R^2\times\mathbb R\to\mathbb R^2$.
 
 ## Verification
 **Proof technique:** direct.

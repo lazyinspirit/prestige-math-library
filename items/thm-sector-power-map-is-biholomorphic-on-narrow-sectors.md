@@ -37,19 +37,15 @@ Then the power map $f(z)=z^n$ is a biholomorphism from $S$ onto $T$.
 
 **Given:** The integer $n\ge1$ and the sectors $S,T$ above.
 
-[F1] On the slit plane the principal logarithm is holomorphic and satisfies
-$\exp(\operatorname{Log}z)=z$
-([[cor-principal-logarithm-is-holomorphic-on-the-slit-plane]]).
+[F1] On the slit plane the principal logarithm is holomorphic and satisfies $\exp(\operatorname{Log}z)=z$ ([[cor-principal-logarithm-is-holomorphic-on-the-slit-plane]]).
 
 [F2] If $L$ is a holomorphic logarithm branch on a domain, then $z^\alpha_L:=\exp(\alpha L(z))$ defines the branch power ([[def-complex-power-from-holomorphic-logarithm-branch]]).
 
-[F3] For integer exponents, branch powers agree with ordinary powers
-([[thm-branch-power-agrees-with-integer-powers]]).
+[F3] For integer exponents, branch powers agree with ordinary powers ([[thm-branch-power-agrees-with-integer-powers]]).
 
 [F4] The complex exponential is entire ([[thm-complex-exponential-is-entire-with-derivative-itself]]).
 
-[F5] A map is biholomorphic when it is bijective, holomorphic, and has
-holomorphic inverse ([[def-biholomorphic-map]]).
+[F5] A map is biholomorphic when it is bijective, holomorphic, and has holomorphic inverse ([[def-biholomorphic-map]]).
 
 ## Proof
 

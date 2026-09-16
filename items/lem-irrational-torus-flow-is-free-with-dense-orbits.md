@@ -42,14 +42,11 @@ is an injective immersion and a Lie-group homomorphism.
 
 ## Facts & Assumptions
 
-**Given:** An irrational real number $\alpha$, the additive Lie group
-$\mathbb R$, and the usual torus Lie group $\mathbb T^2$.
+**Given:** An irrational real number $\alpha$, the additive Lie group $\mathbb R$, and the usual torus Lie group $\mathbb T^2$.
 
-[F1] A smooth left action is jointly smooth and satisfies the identity and
-associativity laws. [[def-smooth-left-action-of-a-lie-group]].
+[F1] A smooth left action is jointly smooth and satisfies the identity and associativity laws. [[def-smooth-left-action-of-a-lie-group]].
 
-[F2] Among $N+1$ points placed in $N$ sets, two points lie in the same set.
-[[lem-pigeonhole]].
+[F2] Among $N+1$ points placed in $N$ sets, two points lie in the same set. [[lem-pigeonhole]].
 
 ## Proof
 

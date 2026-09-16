@@ -30,38 +30,23 @@ sets, is Polish.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and the uniform-on-compacts metric
-$d_{\mathrm{uoc}}$.
+**Given:** The Axiom of Countable Choice and the uniform-on-compacts metric $d_{\mathrm{uoc}}$.
 
-[F1] The metric $d_{\mathrm{uoc}}$ induces compact convergence, with geometric
-weights on the interval suprema.
-[[def-uniform-on-compacts-metric-on-continuous-path-space]]
-[[thm-geometric-series]] [[lem-geometric-sequence-null]]
+[F1] The metric $d_{\mathrm{uoc}}$ induces compact convergence, with geometric weights on the interval suprema. [[def-uniform-on-compacts-metric-on-continuous-path-space]] [[thm-geometric-series]] [[lem-geometric-sequence-null]]
 
-[F2] For a complete target, the continuous-function space on a nonempty domain
-is complete in the bounded uniform metric, and uniform limits are continuous.
-[[thm-function-space-is-complete-for-a-complete-target]]
-[[thm-uniform-limit-theorem]]
+[F2] For a complete target, the continuous-function space on a nonempty domain is complete in the bounded uniform metric, and uniform limits are continuous. [[thm-function-space-is-complete-for-a-complete-target]] [[thm-uniform-limit-theorem]]
 
-[F3] The real line is complete, and every interval $[0,n]$ is compact.
-[[thm-euclidean-space-complete]] [[thm-heine-borel-rn]]
+[F3] The real line is complete, and every interval $[0,n]$ is compact. [[thm-euclidean-space-complete]] [[thm-heine-borel-rn]]
 
-[F4] A continuous map on a compact metric space is uniformly continuous.
-[[thm-heine-cantor-metric]]
+[F4] A continuous map on a compact metric space is uniformly continuous. [[thm-heine-cantor-metric]]
 
-[F5] The rationals are countable and dense in the real line.
-[[thm-rationals-countable]] [[lem-rat-embeds-dense]]
+[F5] The rationals are countable and dense in the real line. [[thm-rationals-countable]] [[lem-rat-embeds-dense]]
 
-[F6] Finite products of countable sets are countable, and under
-$\mathrm{AC}_\omega$ a countable union of countable sets is countable.
-[[thm-product-of-countable]] [[thm-countable-union-of-countable]]
-[[def-countable-choice]]
+[F6] Finite products of countable sets are countable, and under $\mathrm{AC}_\omega$ a countable union of countable sets is countable. [[thm-product-of-countable]] [[thm-countable-union-of-countable]] [[def-countable-choice]]
 
-[F7] The natural numbers are cofinal in the reals.
-[[thm-of-archimedean]]
+[F7] The natural numbers are cofinal in the reals. [[thm-of-archimedean]]
 
-[F8] A topology is Polish when it is separable and induced by a complete
-metric. [[def-polish-space]]
+[F8] A topology is Polish when it is separable and induced by a complete metric. [[def-polish-space]]
 
 ## Proof
 
@@ -79,7 +64,4 @@ metric. [[def-polish-space]]
 
 ## Source notes
 
-The cited weak-convergence text uses this standard Polish path space. The local
-proof exhibits the compatible compact limits and an explicit dense family of
-eventually constant rational polygonal paths, so completeness and the exact
-choice use are visible.
+The cited weak-convergence text uses this standard Polish path space. The local proof exhibits the compatible compact limits and an explicit dense family of eventually constant rational polygonal paths, so completeness and the exact choice use are visible.

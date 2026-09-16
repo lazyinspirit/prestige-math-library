@@ -40,19 +40,13 @@ The last map lands in the positive identity component.
 
 **Given:** The displayed groups with their open-submanifold structures.
 
-[F1] Smooth group operations define a Lie group.
-[[def-lie-group]].
+[F1] Smooth group operations define a Lie group. [[def-lie-group]].
 
-[F2] The Lie-group exponential is the time-one value of the invariant integral
-curve. [[def-exponential-map-of-a-lie-group]].
+[F2] The Lie-group exponential is the time-one value of the invariant integral curve. [[def-exponential-map-of-a-lie-group]].
 
-[F3] The ordinary exponential satisfies $e^{s+t}=e^se^t$ and has derivative
-$e^t$. [[thm-exponential-addition-formula]].
-[[thm-derivative-of-exponential]].
+[F3] The ordinary exponential satisfies $e^{s+t}=e^se^t$ and has derivative $e^t$. [[thm-exponential-addition-formula]]. [[thm-derivative-of-exponential]].
 
-[F4] The exponential-map interface [F2] assumes countable choice and records
-its use through the supplied invariant-field and completeness result.
-[[def-countable-choice]].
+[F4] The exponential-map interface [F2] assumes countable choice and records its use through the supplied invariant-field and completeness result. [[def-countable-choice]].
 
 ## Verification
 

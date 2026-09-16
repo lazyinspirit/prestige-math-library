@@ -40,16 +40,11 @@ so the resulting generator is $[\gamma^*]-1=-\beta$.
 
 **Given:** the clutching orientation for $\gamma$ and AC.
 
-[F1] The Hopf-line calculation gives the displayed ring presentation and says
-that $1,\beta$ are an additive basis
-([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
+[F1] The Hopf-line calculation gives the displayed ring presentation and says that $1,\beta$ are an additive basis ([[thm-hopf-line-calculation-of-k-zero-of-the-two-sphere]]).
 
-[F2] Interchanging the two cones in a clutching construction replaces a
-transition function $f$ by $f^{-1}$
-([[def-clutching-construction-for-bundles-over-a-suspension]]).
+[F2] Interchanging the two cones in a clutching construction replaces a transition function $f$ by $f^{-1}$ ([[def-clutching-construction-for-bundles-over-a-suspension]]).
 
-[A1] AC is inherited from [F1]; the algebraic convention calculation itself
-uses no further choice.
+[A1] AC is inherited from [F1]; the algebraic convention calculation itself uses no further choice.
 
 ## Verification
 

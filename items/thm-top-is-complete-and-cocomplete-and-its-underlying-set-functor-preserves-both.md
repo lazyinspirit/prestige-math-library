@@ -33,26 +33,15 @@ every small colimit.
 
 **Given:** A small diagram $D:\mathcal J\to\mathbf{Top}$.
 
-[L1] The underlying Set-diagram has a limit and a colimit
-([[thm-set-has-all-small-limits]], [[thm-set-has-all-small-colimits]]).
+[L1] The underlying Set-diagram has a limit and a colimit ([[thm-set-has-all-small-limits]], [[thm-set-has-all-small-colimits]]).
 
-[F1] Topological spaces and continuous maps form $\mathbf{Top}$
-([[prop-topological-spaces-and-continuous-maps-form-category-top]]).
+[F1] Topological spaces and continuous maps form $\mathbf{Top}$ ([[prop-topological-spaces-and-continuous-maps-form-category-top]]).
 
-[F2] For the initial topology of a family $(f_i:X\to Y_i)$, a function
-$h:Z\to X$ is continuous exactly when every $f_i\circ h$ is continuous; dually,
-for the final topology of a family $(g_i:Y_i\to X)$, a function $h:X\to Z$ is
-continuous exactly when every $h\circ g_i$ is continuous
-([[thm-initial-and-final-characteristic-properties]], claims 2 and 4). The
-topologies themselves are constructed in [[def-initial-and-final-topology]],
-which states these characteristic properties are proved separately.
+[F2] For the initial topology of a family $(f_i:X\to Y_i)$, a function $h:Z\to X$ is continuous exactly when every $f_i\circ h$ is continuous; dually, for the final topology of a family $(g_i:Y_i\to X)$, a function $h:X\to Z$ is continuous exactly when every $h\circ g_i$ is continuous ([[thm-initial-and-final-characteristic-properties]], claims 2 and 4). The topologies themselves are constructed in [[def-initial-and-final-topology]], which states these characteristic properties are proved separately.
 
-[F3] Continuity means inverse images of open sets are open
-([[def-continuous-map-top]]).
+[F3] Continuity means inverse images of open sets are open ([[def-continuous-map-top]]).
 
-[F4] Preservation means that the image of a limiting or colimiting cone is
-again limiting or colimiting
-([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
+[F4] Preservation means that the image of a limiting or colimiting cone is again limiting or colimiting ([[def-preservation-reflection-creation-continuity-and-cocontinuity]]).
 
 ## Proof
 

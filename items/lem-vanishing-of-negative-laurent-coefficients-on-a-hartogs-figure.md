@@ -38,22 +38,13 @@ $$ a_n(w)=0 \qquad\text{for every } n<0 \text{ and every } |w|<1. $$
 
 ## Facts & Assumptions
 
-**Given:** A holomorphic function $f$ on $H(r,s)$, a radius $\rho$ with
-$r<\rho<1$, and the Laurent coefficient functions $a_n$ defined in the
-preceding lemma.
+**Given:** A holomorphic function $f$ on $H(r,s)$, a radius $\rho$ with $r<\rho<1$, and the Laurent coefficient functions $a_n$ defined in the preceding lemma.
 
-[L1] Each $a_n$ is holomorphic on the unit disc, and for fixed $w$ the numbers
-$a_n(w)$ are the Laurent coefficients of the slice $z\mapsto f(z,w)$ on the
-annulus $r<|z|<1$
-([[lem-holomorphic-dependence-of-slice-laurent-coefficients]]).
+[L1] Each $a_n$ is holomorphic on the unit disc, and for fixed $w$ the numbers $a_n(w)$ are the Laurent coefficients of the slice $z\mapsto f(z,w)$ on the annulus $r<|z|<1$ ([[lem-holomorphic-dependence-of-slice-laurent-coefficients]]).
 
-[L2] A holomorphic function on a punctured disc has a removable singularity
-exactly when its Laurent expansion has no negative powers
-([[thm-removable-singularity-characterizations]]).
+[L2] A holomorphic function on a punctured disc has a removable singularity exactly when its Laurent expansion has no negative powers ([[thm-removable-singularity-characterizations]]).
 
-[L3] A holomorphic function on a connected open set that vanishes on a nonempty
-open subset vanishes identically
-([[thm-identity-theorem-in-several-complex-variables]]).
+[L3] A holomorphic function on a connected open set that vanishes on a nonempty open subset vanishes identically ([[thm-identity-theorem-in-several-complex-variables]]).
 
 ## Proof
 

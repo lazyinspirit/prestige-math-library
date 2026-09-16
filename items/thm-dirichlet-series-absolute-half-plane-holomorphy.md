@@ -36,15 +36,11 @@ the open half-plane to the right of $s_0$.
 
 ## Facts & Assumptions
 
-**Given:** A Dirichlet series $\sum_{n \ge 1} a_n n^{-s}$ that converges
-absolutely at $s_0$, and a fixed $\varepsilon > 0$.
+**Given:** A Dirichlet series $\sum_{n \ge 1} a_n n^{-s}$ that converges absolutely at $s_0$, and a fixed $\varepsilon > 0$.
 
-[L1] The Weierstrass M-test gives absolute pointwise and uniform convergence
-from a convergent majorant series
-([[thm-weierstrass-m-test-for-complex-function-series]]).
+[L1] The Weierstrass M-test gives absolute pointwise and uniform convergence from a convergent majorant series ([[thm-weierstrass-m-test-for-complex-function-series]]).
 
-[L2] Locally uniform convergence of holomorphic functions controls the limit and
-its derivatives ([[thm-weierstrass-convergence-holomorphic-functions]]).
+[L2] Locally uniform convergence of holomorphic functions controls the limit and its derivatives ([[thm-weierstrass-convergence-holomorphic-functions]]).
 
 ## Proof
 

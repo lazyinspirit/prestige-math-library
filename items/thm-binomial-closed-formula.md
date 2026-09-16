@@ -100,18 +100,8 @@ truncated difference, which for $k \le n$ is the ordinary one.
 
 ## Remarks
 
-- **Why the symmetry is proved by a bijection.** Complementation is shorter than
-  manipulating the closed formula, it needs no hypothesis beyond $k \le n$, and
-  it is the argument that survives to the multinomial coefficient, where no
-  single closed formula is available until the analogous count has been made.
+- **Why the symmetry is proved by a bijection.** Complementation is shorter than manipulating the closed formula, it needs no hypothesis beyond $k \le n$, and it is the argument that survives to the multinomial coefficient, where no single closed formula is available until the analogous count has been made.
 
-- **Where $k \le n$ is used.** In step 1.1, so that $k$ is a subset of $n$ of
-  cardinality $k$ and $[n]^{k}$ is nonempty; and in step 1.2, so that $n-k$ is a
-  genuine difference. For $k > n$ both sides of the displayed identity are still
-  defined, but the left-hand side is $0$ while $n!$ is not, so the hypothesis is
-  not removable.
+- **Where $k \le n$ is used.** In step 1.1, so that $k$ is a subset of $n$ of cardinality $k$ and $[n]^{k}$ is nonempty; and in step 1.2, so that $n-k$ is a genuine difference. For $k > n$ both sides of the displayed identity are still defined, but the left-hand side is $0$ while $n!$ is not, so the hypothesis is not removable.
 
-- **The quotient formula is a theorem about a natural number.** A reader who
-  starts from $n!/(k!(n-k)!)$ has to prove that the division comes out exact.
-  Starting from the count, the exactness is what step 3.1 says, and the quotient
-  is a consequence.
+- **The quotient formula is a theorem about a natural number.** A reader who starts from $n!/(k!(n-k)!)$ has to prove that the division comes out exact. Starting from the count, the exactness is what step 3.1 says, and the quotient is a consequence.

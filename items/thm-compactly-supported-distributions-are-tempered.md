@@ -35,16 +35,11 @@ $\widetilde v$ to $\mathcal D$ recovers $v$.  No choice axiom is required.
 
 **Given:** A distribution $v$ with compact support in $\mathbb R^n$.
 
-[F1] Such a distribution extends uniquely to a continuous linear functional
-on $C^\infty$, with $\widetilde v(f)=v(\chi f)$ for any fixed cutoff equal to
-one near the support
-([[lem-compactly-supported-distributions-extend-to-smooth-functions]]).
+[F1] Such a distribution extends uniquely to a continuous linear functional on $C^\infty$, with $\widetilde v(f)=v(\chi f)$ for any fixed cutoff equal to one near the support ([[lem-compactly-supported-distributions-extend-to-smooth-functions]]).
 
-[F2] A finite Schwartz-seminorm estimate proves temperateness
-([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
+[F2] A finite Schwartz-seminorm estimate proves temperateness ([[thm-finite-seminorm-bound-characterizes-tempered-distributions]]).
 
-[F3] The inclusion $\mathcal D\to\mathcal S$ is continuous with dense image
-([[lem-test-function-inclusion-in-schwartz-space-is-continuous]]).
+[F3] The inclusion $\mathcal D\to\mathcal S$ is continuous with dense image ([[lem-test-function-inclusion-in-schwartz-space-is-continuous]]).
 
 ## Proof
 

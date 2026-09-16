@@ -35,26 +35,17 @@ $$[\mathfrak g,\operatorname{rad}(\mathfrak g)]\subseteq\operatorname{nilrad}(\m
 
 **Given:** A finite-dimensional characteristic-zero Lie algebra $\mathfrak g$.
 
-[L1] The radical is the largest solvable ideal
-([[def-radical-of-a-finite-dimensional-lie-algebra]]).
+[L1] The radical is the largest solvable ideal ([[def-radical-of-a-finite-dimensional-lie-algebra]]).
 
-[L2] The nilradical is the largest nilpotent ideal
-([[def-nilradical-of-a-finite-dimensional-lie-algebra]]), whose existence is
-proved in
-[[thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero]].
+[L2] The nilradical is the largest nilpotent ideal ([[def-nilradical-of-a-finite-dimensional-lie-algebra]]), whose existence is proved in [[thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero]].
 
-[L3] A derivation action defines a semidirect-product Lie algebra in which the
-acted-on algebra is an ideal ([[def-semidirect-product-of-lie-algebras]]).
+[L3] A derivation action defines a semidirect-product Lie algebra in which the acted-on algebra is an ideal ([[def-semidirect-product-of-lie-algebras]]).
 
-[L4] An extension of a solvable ideal by a solvable quotient is solvable
-([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
+[L4] An extension of a solvable ideal by a solvable quotient is solvable ([[prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras]]).
 
-[L5] The derived algebra of a finite-dimensional solvable Lie algebra in
-characteristic zero is nilpotent
-([[cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero]]).
+[L5] The derived algebra of a finite-dimensional solvable Lie algebra in characteristic zero is nilpotent ([[cor-the-derived-algebra-of-a-finite-dimensional-solvable-lie-algebra-is-nilpotent-in-characteristic-zero]]).
 
-[L6] Every nilpotent Lie algebra is solvable
-([[prop-nilpotent-lie-algebras-are-solvable]]).
+[L6] Every nilpotent Lie algebra is solvable ([[prop-nilpotent-lie-algebras-are-solvable]]).
 
 ## Proof
 

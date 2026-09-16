@@ -34,8 +34,7 @@ If $H$ has finite index $d$ in a rank-$n$ free group, then $\operatorname{rank}(
 
 **Given:** The false claim above.
 
-[L1] The correct formula is $\operatorname{rank}(H)=1+d(n-1)$
-([[thm-schreier-index-rank-formula]]).
+[L1] The correct formula is $\operatorname{rank}(H)=1+d(n-1)$ ([[thm-schreier-index-rank-formula]]).
 
 ## Refutation
 

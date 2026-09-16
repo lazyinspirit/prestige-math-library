@@ -35,8 +35,7 @@ inequality $|f-g|<|g|$ is weakened to $|f-g|\le|g|$.
 
 **Given:** The unit circle, $g(z)=z$, and $f(z)=z+1$.
 
-[L1] The classical theorem requires the strict inequality
-([[thm-rouche-theorem]]).
+[L1] The classical theorem requires the strict inequality ([[thm-rouche-theorem]]).
 
 ## Counterexample
 

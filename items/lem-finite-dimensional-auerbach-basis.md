@@ -39,11 +39,9 @@ $$\|x_i\|=\|x_i^*\|=1\qquad(1\le i\le n).$$
 
 ## Facts & Assumptions
 
-[L1] An ordered finite basis gives a topological coordinate isomorphism
-([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
+[L1] An ordered finite basis gives a topological coordinate isomorphism ([[thm-coordinate-map-for-a-finite-dimensional-normed-space]]).
 
-[L2] Closed bounded subsets of finite-dimensional real coordinate space are
-compact ([[thm-heine-borel-rn]]).
+[L2] Closed bounded subsets of finite-dimensional real coordinate space are compact ([[thm-heine-borel-rn]]).
 
 ## Proof
 
@@ -57,8 +55,6 @@ compact ([[thm-heine-borel-rn]]).
 
 $$|\det(x_1,\ldots,y,\ldots,x_n)| =|x_i^*(y)|\,|\det(x_1,\ldots,x_i,\ldots,x_n)|.$$
 
-Maximality therefore gives $|x_i^*(y)|\le1$, so
-$\|x_i^*\|\le1$. Since $x_i^*(x_i)=1$ and $\|x_i\|=1$, the reverse inequality
-holds. [step 1.1, determinant multilinearity]
+Maximality therefore gives $|x_i^*(y)|\le1$, so $\|x_i^*\|\le1$. Since $x_i^*(x_i)=1$ and $\|x_i\|=1$, the reverse inequality holds. [step 1.1, determinant multilinearity]
 
 3.1 The argument selects one maximizer from one nonempty compact set and does [given, step 2.1] not select bases for a family of spaces. Thus it uses no choice principle. [step 1.1, 2.1] ∎

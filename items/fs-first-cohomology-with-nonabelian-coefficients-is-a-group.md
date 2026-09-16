@@ -32,11 +32,9 @@ induces a group structure on first cohomology.
 
 **Given:** The trivial action of $C_2\times C_2=\langle s,t\rangle$ on $S_3$.
 
-[L1] Nonabelian first cohomology is defined as a pointed orbit set
-([[def-first-nonabelian-cohomology-as-a-pointed-set]]).
+[L1] Nonabelian first cohomology is defined as a pointed orbit set ([[def-first-nonabelian-cohomology-as-a-pointed-set]]).
 
-[L2] It classifies complements only up to coefficient-group conjugacy as a
-pointed set ([[thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set]]).
+[L2] It classifies complements only up to coefficient-group conjugacy as a pointed set ([[thm-nonabelian-first-cohomology-classifies-complements-as-a-pointed-set]]).
 
 ## Refutation
 

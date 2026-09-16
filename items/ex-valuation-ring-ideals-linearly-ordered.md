@@ -37,12 +37,9 @@ is an explicit nonprincipal ideal.
 
 **Given:** The valuation ring $V$ and valuation $v$ constructed in [[ex-nondiscrete-ordered-subgroup-valuation]].
 
-[L1] In a valuation ring the ideals are linearly ordered by inclusion
-([[thm-valuation-ring-characterisations]]).
+[L1] In a valuation ring the ideals are linearly ordered by inclusion ([[thm-valuation-ring-characterisations]]).
 
-[L2] The valuation ring in the incommensurate-value example has value group
-$\Gamma=\mathbb Z+\mathbb Z\sqrt2$, and that ordered group has no least positive
-element ([[ex-nondiscrete-ordered-subgroup-valuation]]).
+[L2] The valuation ring in the incommensurate-value example has value group $\Gamma=\mathbb Z+\mathbb Z\sqrt2$, and that ordered group has no least positive element ([[ex-nondiscrete-ordered-subgroup-valuation]]).
 
 ## Verification
 

@@ -34,8 +34,7 @@ finite index.
 
 [A1] An abelian subgroup of a hyperbolic group that is torsion is finite.
 
-[L1] Centralizers of infinite-order elements are virtually cyclic
-([[thm-centralizer-of-an-infinite-order-element-is-virtually-cyclic]]).
+[L1] Centralizers of infinite-order elements are virtually cyclic ([[thm-centralizer-of-an-infinite-order-element-is-virtually-cyclic]]).
 
 ## Proof
 

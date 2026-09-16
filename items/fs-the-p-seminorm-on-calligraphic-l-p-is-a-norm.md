@@ -28,17 +28,13 @@ $f\mapsto\|f\|_p$ is a norm.
 
 **Given:** A nonzero function with zero seminorm.
 
-[L1] The previous counterexample supplies a measurable function $f\not\equiv0$
-with $\|f\|_p=0$
-([[cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm]]).
+[L1] The previous counterexample supplies a measurable function $f\not\equiv0$ with $\|f\|_p=0$ ([[cex-a-nonzero-function-on-a-null-set-has-zero-l-p-seminorm]]).
 
-[L2] A norm must satisfy the separation axiom $N(v)=0\Leftrightarrow v=0$
-([[def-norm-and-normed-space]]).
+[L2] A norm must satisfy the separation axiom $N(v)=0\Leftrightarrow v=0$ ([[def-norm-and-normed-space]]).
 
 ## Refutation
 
-**Proof technique:** Refute with a nonzero function supported on a null set,
-whose seminorm is $0$.
+**Proof technique:** Refute with a nonzero function supported on a null set, whose seminorm is $0$.
 
 1.1 Let $f$ be the function from [L1]. Then $f\ne0$ pointwise but [L1]
 $\|f\|_p=0$.

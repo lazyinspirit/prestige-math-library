@@ -34,23 +34,15 @@ has all finite limits and all finite colimits.
 
 ## Facts & Assumptions
 
-**Given:** An additive category $\mathcal C$ in which every morphism has a
-kernel and a cokernel.
+**Given:** An additive category $\mathcal C$ in which every morphism has a kernel and a cokernel.
 
-[L1] An additive category has finite biproducts and is preadditive
-([[def-additive-category]]).
+[L1] An additive category has finite biproducts and is preadditive ([[def-additive-category]]).
 
-[L2] In a preadditive category, finite products are biproducts
-([[thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct]]).
+[L2] In a preadditive category, finite products are biproducts ([[thm-in-a-preadditive-category-a-finite-product-is-automatically-a-biproduct]]).
 
-[L3] Equalizers are kernels of differences, and coequalizers are cokernels of
-differences
-([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]],
-[[cor-in-a-preadditive-category-the-coequalizer-of-a-parallel-pair-is-the-cokernel-of-their-difference]]).
+[L3] Equalizers are kernels of differences, and coequalizers are cokernels of differences ([[thm-in-a-preadditive-category-the-equalizer-of-a-parallel-pair-is-the-kernel-of-their-difference]], [[cor-in-a-preadditive-category-the-coequalizer-of-a-parallel-pair-is-the-cokernel-of-their-difference]]).
 
-[L4] Finite limits are equivalent to finite products and equalizers, and
-finite colimits to finite coproducts and coequalizers
-([[thm-finite-limit-and-colimit-criteria]]).
+[L4] Finite limits are equivalent to finite products and equalizers, and finite colimits to finite coproducts and coequalizers ([[thm-finite-limit-and-colimit-criteria]]).
 
 ## Proof
 

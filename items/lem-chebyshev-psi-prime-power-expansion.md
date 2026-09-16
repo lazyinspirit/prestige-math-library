@@ -35,16 +35,11 @@ and both sums are finite.
 
 **Given:** A real number $x\ge1$.
 
-[L1] The von Mangoldt function satisfies $\Lambda(n)=\log p$ when $n=p^k$ is a
-prime power and $\Lambda(n)=0$ otherwise ([[def-von-mangoldt-function]]).
+[L1] The von Mangoldt function satisfies $\Lambda(n)=\log p$ when $n=p^k$ is a prime power and $\Lambda(n)=0$ otherwise ([[def-von-mangoldt-function]]).
 
-[L2] By definition,
-$$ \psi(x)=\sum_{n\le x}\Lambda(n) $$
-([[def-chebyshev-psi-function]]).
+[L2] By definition, $$ \psi(x)=\sum_{n\le x}\Lambda(n) $$ ([[def-chebyshev-psi-function]]).
 
-[L3] By definition,
-$$ \theta(y)=\sum_{p\le y}\log p $$
-for every real $y\ge2$ ([[def-chebyshev-theta-function]]).
+[L3] By definition, $$ \theta(y)=\sum_{p\le y}\log p $$ for every real $y\ge2$ ([[def-chebyshev-theta-function]]).
 
 ## Proof
 

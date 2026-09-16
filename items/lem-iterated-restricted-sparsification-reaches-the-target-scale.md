@@ -47,12 +47,9 @@ $x^{b_1b_2}|G|$ vertices.
 
 ## Facts & Assumptions
 
-**Given:** The parameters $c,b_1,b_2,b_3,x$ and the two hypotheses in the
-statement.
+**Given:** The parameters $c,b_1,b_2,b_3,x$ and the two hypotheses in the statement.
 
-[L1] A set is $\lambda$-restricted exactly when it is $\lambda$-sparse or
-$\lambda$-dense in the induced subgraph on that set
-([[def-c-sparse-and-c-restricted-vertex-set]]).
+[L1] A set is $\lambda$-restricted exactly when it is $\lambda$-sparse or $\lambda$-dense in the induced subgraph on that set ([[def-c-sparse-and-c-restricted-vertex-set]]).
 
 ## Proof
 

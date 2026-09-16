@@ -36,21 +36,13 @@ not the assertion that either set models all of ZF.
 
 ## Facts & Assumptions
 
-**Given:** The fixed first-order presentation of ZF and the fixed formulas for
-ordinals, constructible histories and membership in $L$.
+**Given:** The fixed first-order presentation of ZF and the fixed formulas for ordinals, constructible histories and membership in $L$.
 
-[F1] [[thm-constructibility-is-absolute-and-l-is-minimal]] proves the
-comparison of internal and external constructible histories for transitive ZF
-models by one fixed induction using absoluteness of the definable-subset
-operation.
+[F1] [[thm-constructibility-is-absolute-and-l-is-minimal]] proves the comparison of internal and external constructible histories for transitive ZF models by one fixed induction using absoluteness of the definable-subset operation.
 
-[F2] [[lem-derivation-finite-support-and-concatenation]] extracts the finitely
-many nonlogical axiom occurrences from any fixed formal derivation and permits
-weakening by further axioms.
+[F2] [[lem-derivation-finite-support-and-concatenation]] extracts the finitely many nonlogical axiom occurrences from any fixed formal derivation and permits weakening by further axioms.
 
-[F3] [[def-countable-transitive-model-and-fragment-transfer]] defines what it
-means for a transitive set to satisfy a fixed finite sentence fragment; no
-full-theory satisfaction predicate is implicit.
+[F3] [[def-countable-transitive-model-and-fragment-transfer]] defines what it means for a transitive set to satisfy a fixed finite sentence fragment; no full-theory satisfaction predicate is implicit.
 
 ## Proof
 

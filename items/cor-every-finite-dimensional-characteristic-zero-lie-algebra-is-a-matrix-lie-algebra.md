@@ -34,11 +34,9 @@ $n\geq0$.
 
 **Given:** Such a Lie algebra $\mathfrak g$.
 
-[L1] Ado supplies a faithful finite-dimensional representation
-([[thm-ado-faithful-representation-with-nilpotent-nilradical-action]]).
+[L1] Ado supplies a faithful finite-dimensional representation ([[thm-ado-faithful-representation-with-nilpotent-nilradical-action]]).
 
-[L2] Faithfulness is injectivity, and a representation kernel is an ideal
-([[prop-representation-kernels-are-ideals-and-faithfulness-is-injectivity]]).
+[L2] Faithfulness is injectivity, and a representation kernel is an ideal ([[prop-representation-kernels-are-ideals-and-faithfulness-is-injectivity]]).
 
 ## Proof
 

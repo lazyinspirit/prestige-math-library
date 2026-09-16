@@ -30,19 +30,15 @@ The left-translated distribution $\mathcal D^{\mathfrak h}$ is involutive.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ and a Lie subalgebra
-$\mathfrak h\subseteq\mathfrak g=\operatorname{Lie}(G)$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ and a Lie subalgebra $\mathfrak h\subseteq\mathfrak g=\operatorname{Lie}(G)$.
 
 [A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F1] Under $\mathrm{AC}_\omega$, left translation makes $\mathcal D^{\mathfrak h}$ a smooth
-constant-rank distribution. [[def-left-translated-distribution-associated-to-a-lie-subalgebra]].
+[F1] Under $\mathrm{AC}_\omega$, left translation makes $\mathcal D^{\mathfrak h}$ a smooth constant-rank distribution. [[def-left-translated-distribution-associated-to-a-lie-subalgebra]].
 
-[F2] Involutivity can be checked on any smooth local frame.
-[[prop-involutivity-can-be-checked-on-a-local-frame]].
+[F2] Involutivity can be checked on any smooth local frame. [[prop-involutivity-can-be-checked-on-a-local-frame]].
 
-[F3] Under $\mathrm{AC}_\omega$, the bracket of left-invariant vector fields is left invariant.
-[[prop-the-lie-bracket-of-left-invariant-fields-is-left-invariant]].
+[F3] Under $\mathrm{AC}_\omega$, the bracket of left-invariant vector fields is left invariant. [[prop-the-lie-bracket-of-left-invariant-fields-is-left-invariant]].
 
 ## Proof
 

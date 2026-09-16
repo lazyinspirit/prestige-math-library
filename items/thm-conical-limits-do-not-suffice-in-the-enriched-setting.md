@@ -33,12 +33,9 @@ limit of a different diagram.
 
 **Given:** The enriched setting of this page.
 
-[L1] A conical enriched limit is the limit for the constant-unit weight on a
-free enriched category ([[def-conical-limit-in-an-enriched-category]]).
+[L1] A conical enriched limit is the limit for the constant-unit weight on a free enriched category ([[def-conical-limit-in-an-enriched-category]]).
 
-[L2] Cotensors are weighted limits over the one-object free enriched category,
-with an arbitrary object of the base as weight
-([[def-cotensor-and-tensor]]).
+[L2] Cotensors are weighted limits over the one-object free enriched category, with an arbitrary object of the base as weight ([[def-cotensor-and-tensor]]).
 
 ## Proof
 

@@ -46,8 +46,7 @@ the four curvature and scalar-curvature suppliers named above.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, $r>0$, and the product of the displayed
-round and hyperbolic surfaces.
+**Given:** $\mathrm{AC}_\omega$, $r>0$, and the product of the displayed round and hyperbolic surfaces.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is required here through [[ex-the-round-sphere-has-positive-constant-sectional-curvature]], [[ex-hyperbolic-space-has-negative-constant-sectional-curvature]], [[ex-curvature-of-a-riemannian-product]], and [[prop-scalar-curvature-is-twice-the-sum-of-sectional-curvatures-of-coordinate-planes]]; after those supplied interfaces are fixed, the remaining local or finite calculation makes no additional countable-family choice.
 

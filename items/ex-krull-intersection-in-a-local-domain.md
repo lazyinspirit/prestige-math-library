@@ -35,9 +35,7 @@ $$ \bigcap_{n\ge0}\mathfrak m^n=0. $$
 
 **Given:** The Axiom of Choice and a Noetherian local domain $(R,\mathfrak m)$.
 
-[L1] The Krull intersection theorem says that for a finite module $M$,
-$$ \bigcap_{n\ge0}\mathfrak m^nM=0 $$
-when $\mathfrak m\subseteq J(R)$ ([[thm-krull-intersection-theorem]]).
+[L1] The Krull intersection theorem says that for a finite module $M$, $$ \bigcap_{n\ge0}\mathfrak m^nM=0 $$ when $\mathfrak m\subseteq J(R)$ ([[thm-krull-intersection-theorem]]).
 
 ## Verification
 

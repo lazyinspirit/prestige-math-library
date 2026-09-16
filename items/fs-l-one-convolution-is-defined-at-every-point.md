@@ -26,8 +26,7 @@ every $x \in \mathbb{R}^n$.
 
 ## Facts & Assumptions
 
-**Given:** The one-dimensional functions
-$$ f(x)=g(x):=\begin{cases}\dfrac{1}{|x|(\log(e/|x|))^2},&0<|x|<1/2,\\ 0,&\text{otherwise}.\end{cases} $$
+**Given:** The one-dimensional functions $$ f(x)=g(x):=\begin{cases}\dfrac{1}{|x|(\log(e/|x|))^2},&0<|x|<1/2,\\ 0,&\text{otherwise}.\end{cases} $$
 
 [L1] The $L^1$ convolution theorem guarantees only almost-everywhere existence ([[thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound]]).
 

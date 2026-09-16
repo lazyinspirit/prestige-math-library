@@ -38,14 +38,11 @@ Schur-complement solve and yields $x=(1,1,1)^{\mathsf T}$.
 
 ## Facts & Assumptions
 
-**Given:** The displayed matrix $A$, its block split, the right-hand side $b$,
-and the candidate factorisation.
+**Given:** The displayed matrix $A$, its block split, the right-hand side $b$, and the candidate factorisation.
 
-[L1] An invertible leading block yields the block LU factorisation through its
-Schur complement ([[thm-block-lu-factorisation-via-an-invertible-leading-block]]).
+[L1] An invertible leading block yields the block LU factorisation through its Schur complement ([[thm-block-lu-factorisation-via-an-invertible-leading-block]]).
 
-[L2] Triangular systems are solved by forward and backward substitution
-([[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]).
+[L2] Triangular systems are solved by forward and backward substitution ([[thm-forward-and-back-substitution-are-correct-unique-and-quadratic-cost]]).
 
 ## Verification
 

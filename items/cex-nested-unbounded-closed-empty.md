@@ -81,20 +81,8 @@ proof.
 
 ## Remarks
 
-- **What fails is the existence of the supremum, not the argument's bookkeeping.**
-  In the proof of [[thm-nested-interval-property]] the intersection is computed as
-  $[\sup a_k, \inf b_k]$. Here $a_k = k$ and the set $\{k : k \in \mathbb{N}\}$ has
-  no supremum in $\mathbb{R}$, precisely because $\mathbb{R}$ is Archimedean, so
-  there is no candidate point at all. This is a different failure mode from
-  [[cex-nested-open-intervals-empty]], where the candidate point exists and is
-  merely not a member.
+- **What fails is the existence of the supremum, not the argument's bookkeeping.** In the proof of [[thm-nested-interval-property]] the intersection is computed as $[\sup a_k, \inf b_k]$. Here $a_k = k$ and the set $\{k : k \in \mathbb{N}\}$ has no supremum in $\mathbb{R}$, precisely because $\mathbb{R}$ is Archimedean, so there is no candidate point at all. This is a different failure mode from [[cex-nested-open-intervals-empty]], where the candidate point exists and is merely not a member.
 
-- **The sets are intervals but not bounded intervals.** [[def-interval]] admits
-  $[a,\infty)$ as one of its nine forms and assigns it no length, which is exactly
-  why the length hypothesis of the nested interval property has nothing to say
-  about this family.
+- **The sets are intervals but not bounded intervals.** [[def-interval]] admits $[a,\infty)$ as one of its nine forms and assigns it no length, which is exactly why the length hypothesis of the nested interval property has nothing to say about this family.
 
-- **The Archimedean property is again what makes the intersection empty.** In a
-  non-Archimedean ordered field an element exceeding every canonical natural lies
-  in every $I_k$, so the intersection is nonempty there. The counterexample is a
-  statement about $\mathbb{R}$.
+- **The Archimedean property is again what makes the intersection empty.** In a non-Archimedean ordered field an element exceeding every canonical natural lies in every $I_k$, so the intersection is nonempty there. The counterexample is a statement about $\mathbb{R}$.

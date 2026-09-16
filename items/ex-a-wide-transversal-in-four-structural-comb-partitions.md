@@ -37,9 +37,7 @@ is a pure transversal of width $1$, hence also of width $1/2=w/\ell^2$.
 
 ## Facts & Assumptions
 
-**Given:** A structural partition of a $(4,8)$-comb and four selected singleton
-blocks, one from each of its comb-block partitions, each of size
-$1=w/(2\ell)$, with the listed pairwise adjacencies.
+**Given:** A structural partition of a $(4,8)$-comb and four selected singleton blocks, one from each of its comb-block partitions, each of size $1=w/(2\ell)$, with the listed pairwise adjacencies.
 
 [F1] Such one-per-partition selected blocks form a pure $(\ell,w/\ell^2)$-blockade ([[lem-transversal-wide-blocks-in-structural-comb-partitions-yields-a-pure-blockade]]).
 

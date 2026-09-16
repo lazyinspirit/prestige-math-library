@@ -32,35 +32,19 @@ $\alpha=2m$, $\beta=m-1$, and $C_T=c_m$.
 
 **Given:** Times $s,t\ge0$, the stated increment law, and an integer $m\ge1$.
 
-[F1] Under AC, $N(0,1)$ is the probability measure with density
-$\phi(x)=e^{-x^2/2}/\sqrt{2\pi}$, and $N(0,h)$ is its image under
-$x\mapsto\sqrt h\,x$, including $h=0$.
-[[def-standard-normal-and-normal-laws]] [[def-axiom-of-choice]]
+[F1] Under AC, $N(0,1)$ is the probability measure with density $\phi(x)=e^{-x^2/2}/\sqrt{2\pi}$, and $N(0,h)$ is its image under $x\mapsto\sqrt h\,x$, including $h=0$. [[def-standard-normal-and-normal-laws]] [[def-axiom-of-choice]]
 
-[F2] A nonnegative expectation is the integral of the corresponding function
-against the random variable's law. [[thm-change-of-variables-for-expectation]]
+[F2] A nonnegative expectation is the integral of the corresponding function against the random variable's law. [[thm-change-of-variables-for-expectation]]
 
-[F3] Integration against the measure with density $\phi$ equals integration
-of the product with $\phi$ against Lebesgue measure.
-[[thm-integration-against-a-density]]
+[F3] Integration against the measure with density $\phi$ equals integration of the product with $\phi$ against Lebesgue measure. [[thm-integration-against-a-density]]
 
-[F4] Increasing nonnegative measurable functions may be passed to the limit
-under the integral. [[thm-monotone-convergence-for-the-integral]]
+[F4] Increasing nonnegative measurable functions may be passed to the limit under the integral. [[thm-monotone-convergence-for-the-integral]]
 
-[F5] Compact-interval integration by parts includes its two endpoint terms.
-Under countable choice, a bounded Riemann-integrable function on a compact
-interval is Lebesgue integrable there with the same integral.
-[[thm-integration-by-parts]]
-[[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]]
+[F5] Compact-interval integration by parts includes its two endpoint terms. Under countable choice, a bounded Riemann-integrable function on a compact interval is Lebesgue integrable there with the same integral. [[thm-integration-by-parts]] [[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]]
 
-[F6] The power, product, and chain rules, together with $(e^x)'=e^x$, give
-$\phi'(x)=-x\phi(x)$.
-[[lem-derivative-of-a-power]] [[thm-algebra-of-derivatives]]
-[[thm-chain-rule]] [[thm-derivative-of-exponential]]
+[F6] The power, product, and chain rules, together with $(e^x)'=e^x$, give $\phi'(x)=-x\phi(x)$. [[lem-derivative-of-a-power]] [[thm-algebra-of-derivatives]] [[thm-chain-rule]] [[thm-derivative-of-exponential]]
 
-[F7] The exponential is its nonnegative power series, so for $R>0$ and every
-integer $k\ge0$, $e^{R^2/2}\ge(R^2/2)^k/k!$.
-[[thm-exponential-definition-equivalence]]
+[F7] The exponential is its nonnegative power series, so for $R>0$ and every integer $k\ge0$, $e^{R^2/2}\ge(R^2/2)^k/k!$. [[thm-exponential-definition-equivalence]]
 
 ## Proof
 
@@ -78,7 +62,4 @@ integer $k\ge0$, $e^{R^2/2}\ge(R^2/2)^k/k!$.
 
 ## Source notes
 
-Durrett, Section 7.1, printed p. 358, uses the finite even moments of a normal
-increment in the Brownian continuity argument. Steps 1.1--2.1 supply the full
-compact-truncation integration-by-parts calculation, including the boundary
-term and its limit.
+Durrett, Section 7.1, printed p. 358, uses the finite even moments of a normal increment in the Brownian continuity argument. Steps 1.1--2.1 supply the full compact-truncation integration-by-parts calculation, including the boundary term and its limit.

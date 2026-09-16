@@ -1,0 +1,94 @@
+---
+id: thm-multidimensional-ito-formula-for-brownian-driven-processes
+kind: theorem
+title: "Multidimensional Ito formula for Brownian-driven processes"
+status: draft
+origin: pipeline
+deps: [def-continuous-brownian-ito-process, def-d-dimensional-brownian-motion, def-brownian-motion, thm-quadratic-covariation-of-brownian-ito-processes, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-ito-formula-one-dimensional, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-partition-and-refinement, def-continuity-real, thm-heine-cantor-r, def-convergence-in-probability, def-law-modification-and-indistinguishability-of-processes, cor-second-order-taylor-expansion-with-the-hessian, cor-multivariable-taylor-formula-with-peano-remainder, def-multivariable-taylor-polynomial, def-taylor-polynomial-and-remainder, cor-taylor-remainder-bound, def-c-c-and-c-c-infinity-on-rn, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, cor-cauchy-schwarz-for-random-variables, thm-dominated-convergence, thm-fatou-lemma, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 5.85"
+      url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
+    - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Theorem 3.7.2"
+      url: "https://www.math.uchicago.edu/~lawler/finbook.pdf"
+---
+
+## Statement
+
+Assume the Axiom of Choice and the standing hypothesis (H) of
+[[def-elementary-predictable-brownian-integrand]]. Let $m,d\ge1$ be finite
+integers, let $B=(B^1,\dots,B^m)$ be a standard $m$-dimensional Brownian motion,
+and let $X$ be an $\mathbb R^d$-valued continuous Brownian Ito process
+$$X^i_t=X^i_0+\int_0^tb^i_s\,ds+\sum_{k=1}^m\int_0^t\sigma^{ik}_s\,dB^k_s, \qquad i=1,\dots,d,$$
+in the sense of [[def-continuous-brownian-ito-process]]. Let
+$f\in C^{1,2}([0,\infty)\times\mathbb R^d)$, meaning that $f,\partial_tf$,
+$\partial_if$ and $\partial_i\partial_jf$ ($1\le i,j\le d$) exist and are
+continuous. Then, up to indistinguishability, for every $t\ge0$
+$$f(t,X_t)=f(0,X_0)+\int_0^t\Bigl(\partial_tf+\sum_ib^i\partial_if+\tfrac12\sum_{i,j}(\sigma\sigma^{\mathsf T})^{ij}\partial_i\partial_jf\Bigr)(s,X_s)\,ds+\sum_{i,k}\int_0^t\partial_if(s,X_s)\sigma^{ik}_s\,dB^k_s,$$
+where the stochastic integrals are localized Ito integrals of the predictable
+locally square-integrable integrands $\partial_if(\cdot,X)\sigma^{ik}$, and
+$(\sigma\sigma^{\mathsf T})^{ij}_s=\sum_k\sigma^{ik}_s\sigma^{jk}_s$. In
+differential form,
+$df(t,X_t)=\bigl(\partial_tf+\sum_ib^i\partial_if+\tfrac12\sum_{i,j}(\sigma\sigma^{\mathsf T})^{ij}\partial_i\partial_jf\bigr)(t,X_t)\,dt+\sum_{i,k}\partial_if(t,X_t)\sigma^{ik}_t\,dB^k_t$.
+
+## Facts & Assumptions
+
+**Given:** AC, (H), an $m$-dimensional standard Brownian motion $B$, an $\mathbb R^d$-valued continuous Brownian Ito process $X$ with coefficients $b=(b^i)$ and $\sigma=(\sigma^{ik})$, a function $f\in C^{1,2}([0,\infty)\times\mathbb R^d)$, a finite horizon $T>0$, and an arbitrary deterministic partition sequence $(\pi_n)$ of $[0,T]$ with mesh $\delta_n\to0$. The stopping time $\rho_c$ is defined as in [F7].
+ 
+[F1] **Componentwise class structure and predictability.** $X^i=X^i_0+A^i+M^i$ with $A^i_t=\int_0^tb^i_s\,ds$ and $M^i=\sum_kM^{ik}$, $M^{ik}=\int\sigma^{ik}dB^k$; the vector process is adapted with continuous paths and hence predictable, and so is every continuous function of $(s,X_s)$; products with the coefficients are predictable, and the composition $\partial_if(\cdot,X)\sigma^{ik}$ is predictable and locally square-integrable because $\partial_if(\cdot,X)$ is continuous hence locally bounded. [[def-continuous-brownian-ito-process]] [[def-d-dimensional-brownian-motion]] [[lem-adapted-continuous-processes-are-progressively-measurable]] [[def-progressively-measurable-and-predictable-process]] [[def-locally-square-integrable-predictable-brownian-integrand]]
+ 
+[F2] **Localized-integral interfaces.** For finite energy: isometry $E(\int_0^TG\,dB^k)^2=E\int_0^TG^2ds$, restriction to subintervals, the Doob maximal bound, convergence of elementary sums, and uniqueness of continuous versions; for locally square-integrable integrands the stopped pieces are the finite-energy integrals of the truncations; and a bounded $\mathcal F_u$-measurable multiplier $c$ pulls out of the integral over an interval inside $(u,\infty)$. [[thm-localized-ito-integral]] [[thm-stopping-an-ito-integral]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[thm-doob-maximal-bound-for-the-ito-integral]] [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[def-ito-integral-for-square-integrable-predictable-processes]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-elementary-predictable-brownian-integrand]]
+ 
+[F3] **Covariation matrix of the class.** For all $i,j$ the covariation exists and $[X^i,X^j]_t=\int_0^t(\sigma\sigma^{\mathsf T})^{ij}_s\,ds$, with $\sum_j\Delta_jX^i\Delta_jX^j\to[X^i,X^j]$ uniformly in probability along every deterministic vanishing-mesh sequence and in both conventions. [[thm-quadratic-covariation-of-brownian-ito-processes]] [[def-quadratic-covariation-of-brownian-ito-processes]] [[def-quadratic-variation-along-a-partition-sequence]]
+ 
+[F4] **Multivariable Taylor with third-order remainder.** Let $f\in C^3$ on an open set containing the closed segment from $a=(t_0,x_0)$ to $a+h=(t_0+h_0,x_0+h')$, $h'\in\mathbb R^d$. Then $f(a+h)=f(a)+\partial_tf(a)h_0+\sum_i\partial_if(a)h_i+\tfrac12\bigl(\partial^2_{tt}f(a)h_0^2+2h_0\sum_i\partial_t\partial_if(a)h_i+\sum_{i,j}\partial_i\partial_jf(a)h_ih_j\bigr)+R$ with $|R|\le M_3|h|^3$, where $M_3$ bounds the third partial derivatives on a ball containing the segment; this is the one-variable formula with remainder bound applied to $u\mapsto f(a+uh)$ on $[0,1]$. [[cor-second-order-taylor-expansion-with-the-hessian]] [[cor-multivariable-taylor-formula-with-peano-remainder]] [[def-multivariable-taylor-polynomial]] [[def-taylor-polynomial-and-remainder]] [[cor-taylor-remainder-bound]]
+ 
+[F5] **Weighted pullback of the covariation matrix.** If $w$ is continuous adapted with $|w|\le K$, then for every $i,j$ the weighted sums satisfy $\sum_lw(t_l)\Delta_lX^i\Delta_lX^j\to\int_0^Tw_s(\sigma\sigma^{\mathsf T})^{ij}_sds$ in probability, uniformly in the upper summation limit; the weighted version is proved in steps 1.4--2.1 by block telescoping against the cumulative sums of [F3] and a staircase approximation. [[thm-quadratic-covariation-of-brownian-ito-processes]] [[thm-ito-isometry-and-linearity-in-predictable-l2]]
+ 
+[F6] **Staircase comparison and Riemann sums.** If $G$ is continuous adapted and $g^{(n)}$ its left-endpoint staircase on $\pi_n$, then for a locally square-integrable predictable $H$ the integrals of $g^{(n)}H1_{I}$ and of $G1_IH$ over an interval $I$ coincide when $G$ is frozen at the left endpoint, and the integrals of $g^{(n)}H$ converge to those of $GH$ in $L^2(P)$ on uniform-convergence events of finite energy; and for continuous $Z$ and pathwise integrable $h$, $\sum_jZ_{t_j}\int_{t_j}^{t_{j+1}}h_s\,ds\to\int_0^TZ_sh_s\,ds$ along vanishing meshes. [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[thm-heine-cantor-r]] [[def-continuity-real]]
+ 
+[F7] **Localization.** For $c>0$ put $\rho_c:=\inf\{t:\max(|X_t|,\sum_i\int_0^t|b^i|,\sum_{i,k}\int_0^t(\sigma^{ik})^2)\ge c\}\wedge T$. Then $\rho_c$ is a stopping time, the stopped process is again a continuous Brownian Ito process with frozen coefficients, on $\{\rho_c\ge T\}$ the process and all integrals over $[0,T]$ coincide with those of the stopped version, and $\rho_c\uparrow\infty$ almost surely as $c\to\infty$. [[def-continuous-brownian-ito-process]] [[thm-localized-ito-integral]] [[thm-stopping-an-ito-integral]] [[def-continuous-time-stopping-time]] [[thm-heine-cantor-r]]
+ 
+[F8] **Cutoff and mollification.** A $C^{1,2}$ function on a neighbourhood of the compact cylinder $K=[-1,T+1]\times[-c-1,c+1]^d$ can be multiplied by a smooth cutoff equal to $1$ on $K$ and convolved with a mollifier so that the smoothed function and its derivatives $\partial_t,\partial_i,\partial_i\partial_j$ converge uniformly to the original ones on compact subsets of the inner region; reflection in $t$ extends $f$ from $[0,\infty)\times\mathbb R^d$ to a $C^{1,2}$ function near $K$. [[def-c-c-and-c-c-infinity-on-rn]] [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]] [[thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign]] [[lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff]] [[thm-c-c-infinity-rn-is-dense-in-l-p-of-rn]]
+ 
+[F9] **Estimates.** Cauchy--Schwarz for sums and expectations; dominated convergence; Fatou; and bounded-by-$R_n$ with $ER_n\to0$ implies convergence in probability to $0$. [[cor-cauchy-schwarz-for-random-variables]] [[thm-dominated-convergence]] [[thm-fatou-lemma]] [[def-convergence-in-probability]]
+ 
+[F10] **AC bookkeeping.** Choice is declared for the ambient conditional-expectation, completeness and density interfaces; all stopping levels, partitions and mollification scales are canonical. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+ 
+ 
+ 
+ 
+
+## Proof
+
+**Proof technique:** direct.
+ 
+1.1 Reduction to a bounded localized problem: fix $c$ and work with $X^{\rho_c}$ as in [F7]; on $\{\rho_c\ge T\}$ the process, the coefficients and all integrals over $[0,T]$ are unchanged, and on that event $|X_s|\le c$, $\sum_i\int_0^T|b^i|\le c$ and $\sum_{i,k}\int_0^T(\sigma^{ik})^2\le c$; the stochastic integrands $\partial_if(\cdot,X)\sigma^{ik}$ then have finite energy bounded by $c\sup|\partial_if|^2$, and all continuous functions of $(s,X_s)$ are bounded on $[0,T]$. It suffices to prove the identity under these bounds. [F1, F2, F7, given]
+ 
+1.2 Setup of the $C^3$ case: assume $f\in C^3$ on a neighbourhood of the compact cylinder $[0,T]\times[-c,c]^d$ with finite bounds $M_0,M_1,M_2,M_3$ on partial derivatives of orders $0,1,2,3$; write $\Delta t_j=t_{j+1}-t_j$ and $\Delta X_j=X_{t_{j+1}}-X_{t_j}$. [F1, F4, given]
+ 
+1.3 Remainder control: Taylor's formula [F4] gives for each $j$ an expansion of $f(t_{j+1},X_{t_{j+1}})-f(t_j,X_{t_j})$ with third-order remainder $R_j$, $|R_j|\le M_3(|\Delta t_j|+|\Delta X_j|)^3\le4M_3(|\Delta t_j|^3+|\Delta X_j|^3)$; summing, $\sum_j|\Delta t_j|^3\le\operatorname{mesh}(\pi_n)^2T\to0$ and $\sum_j|\Delta X_j|^3\le\max_j|\Delta X_j|\sum_j|\Delta X_j|^2\le\max_j|\Delta X_j|(2\sum_i\sum_j(\Delta_jA^i)^2+2\sum_iQ_n(X^i)(T))$, where $\max_j|\Delta X_j|\to0$ almost surely by continuity of the paths, $\sum_j(\Delta_jA^i)^2\le\max_j|\Delta_jA^i|\int_0^T|b^i|\to0$, and $Q_n(X^i)(T)\to[X^i]_T$ in probability by [F3]; hence $\sum_jR_j\to0$ in probability. [F3, F4, F6]
+ 
+1.4 Weighted pullback, elementary weights: let $w=\sum_a\lambda_a1_{(u_a,u_{a+1}]}$ be elementary with bounded coefficients and deterministic block points $u_a$; refine $\pi_n$ by adding the finitely many $u_a$. With the cumulative cross sums $S_n(v):=\sum_{j:\,s_j\le v}\Delta_jX^i\Delta_jX^j$ of the refined sequence, [F3] gives $\sup_v|S_n(v)-\int_0^v(\sigma\sigma^{\mathsf T})^{ij}ds|\to0$ in probability; the block sums equal $S_n(u_{a+1})-S_n(u_a)$ up to at most two boundary intervals per block, each of size at most $\max_j|\Delta_jX^i||\Delta_jX^j|$, which is bounded by $\max_j|\Delta_jX|^2$ and tends to $0$ by continuity. Hence $\sum_lw(t_l)\Delta_lX^i\Delta_lX^j\to\int_0^Tw_s(\sigma\sigma^{\mathsf T})^{ij}_sds$ in probability, uniformly in the upper limit. [F3, F6, given]
+ 
+1.5 First-order terms: $\sum_j\partial_tf(t_j,X_{t_j})\Delta t_j\to\int_0^T\partial_tf(s,X_s)ds$ and $\sum_j\sum_i\partial_if(t_j,X_{t_j})\Delta_jA^i\to\int_0^T\sum_i\partial_if(s,X_s)b^i_s\,ds$ almost surely by the Riemann estimate [F6]; and the martingale part equals $\sum_{i,k}\int_0^Tg^{(n)}_i\sigma^{ik}dB^k$ for the left-endpoint staircases $g^{(n)}_i$ of $s\mapsto\partial_if(s,X_s)$, which converges in $L^2(P)$ to $\sum_{i,k}\int_0^T\partial_if(s,X_s)\sigma^{ik}_s dB^k_s$ by the multiplier property, the staircase comparison and the isometry. [F2, F5, F6, given]
+ 
+2.1 Weighted pullback, continuous weights: for continuous adapted $w$ with $|w|\le K$ and its left-endpoint staircase $w^{(m)}$ on the grid of mesh $2^{-m}T$, uniform continuity gives $\sup_s|w^{(m)}_s-w_s|\to0$, so $\bigl|\sum_l(w(t_l)-w^{(m)}(t_l))\Delta_lX^i\Delta_lX^j\bigr|\le\sup_s|w^{(m)}_s-w_s|\,Q_n(X^i)^{1/2}Q_n(X^j)^{1/2}\to0$ in probability because both quadratic sums are bounded in probability, while step 1.4 applies to $w^{(m)}$ and $\int w^{(m)}(\sigma\sigma^{\mathsf T})^{ij}\to\int w(\sigma\sigma^{\mathsf T})^{ij}$ by dominated convergence with bound $Kc$. This proves [F5]. [F3, F5, F6, step 1.4]
+ 
+3.1 Second-order terms: by step 2.1 applied to $w=\partial_i\partial_jf(\cdot,X)$, $\sum_j\tfrac12\partial_i\partial_jf(t_j,X_{t_j})\Delta_jX^i\Delta_jX^j\to\tfrac12\int_0^T\partial_i\partial_jf(s,X_s)(\sigma\sigma^{\mathsf T})^{ij}_sds$ in probability for each pair $i,j$, hence for the finite sum. The mixed drift--covariation terms satisfy $\bigl|\sum_j\partial_i\partial_jf\Delta_jA^i\Delta_jX^j\bigr|\le M_2(\sum_j(\Delta_jA^i)^2)^{1/2}(\sum_j(\Delta_jX^j)^2)^{1/2}\le M_2\bigl(\max_j|\Delta_jA^i|\int_0^T|b^i|\bigr)^{1/2}Q_n(X^j)(T)^{1/2}\to0$ in probability, the pure drift terms satisfy $\sum_j\tfrac12\partial_i\partial_jf\Delta_jA^i\Delta_jA^j\le\tfrac{M_2}{2}\max_j|\Delta_jA|^2\sum_j|\Delta_jA|\to0$, and the time terms satisfy $\sum_j\bigl(h_0\sum_i\partial_t\partial_if\Delta t_j\Delta X^i_j\bigr)+\sum_j\tfrac12\partial^2_{tt}f\Delta t_j^2\le M_2\operatorname{mesh}(\pi_n)T+\sqrt{d}M_2T\max_j|\Delta X_j|\to0$. [F3, F6, step 2.1]
+ 
+4.1 Assemble the $C^3$ case: summing the exact expansions of step 1.3 over $j$, the left side telescopes to $f(T,X_T)-f(0,X_0)$ and the right side is controlled by steps 1.3, 1.5 and 3.1; passing to the limit along $\pi_n$ gives the identity at $T$ in probability, hence almost surely, and then at every $t\in[0,T]$ by restricting and augmenting the partition sequence; both sides are continuous in $t$, so the identity holds up to indistinguishability. [F2, F3, step 1.3, step 1.5, step 3.1]
+ 
+5.1 Reduction to $C^{1,2}$ by cutoff and mollification: for $f\in C^{1,2}$ take the reflected extension near $K=[-1,T+1]\times[-c-1,c+1]^d$, multiply by a cutoff $\chi$ equal to $1$ on $K$, and mollify; on the inner cylinder $[0,T]\times[-c,c]^d$ the smoothed functions and their derivatives $\partial_t,\partial_i,\partial_i\partial_j$ converge uniformly to those of $f$. Apply the $C^3$ result of step 4.1 to the smoothed function; then let the mollification scale tend to $0$: the drift integral converges by dominated convergence with dominating function $K'(1+\sum_i|b^i|+\sum_{i,k}(\sigma^{ik})^2)$, whose integral is bounded by $K'(T+2c)$; each stochastic integral converges in $L^2(P)$ because $E\bigl(\int_0^T\sigma(\partial_if_\varepsilon-\partial_if)dB^k\bigr)^2=E\int_0^T(\sigma^{ik})^2(\partial_if_\varepsilon-\partial_if)^2ds\to0$ by dominated convergence; and the left side converges to $f(T,X_T)$ since the path lies in the inner cylinder. [F2, F5, F7, F8, F9, step 4.1]
+ 
+6.1 Removal of the localization and conclusion: the identity holds on each $\{\rho_c\ge T\}$, and $\rho_c\uparrow\infty$ almost surely, so it holds almost surely at every deterministic time and, by continuity of both sides, up to indistinguishability; the integrands are predictable and locally square-integrable by [F1] and [F2], and the displayed statement follows. [F1, F2, F7, step 5.1]
+ 
+7.1 Boundary and consistency cases: for $d=1$ and $m=1$ the formula is the one-dimensional formula of [[thm-ito-formula-one-dimensional]]; for $f(t,x)=x^i$ it reduces to the defining display of $X^i$; for $f(t,x)=|x|^2$ it gives $|X_t|^2=|X_0|^2+2\sum_i\int_0^tX^i_s\,dX^i_s+\sum_{i,k}\int_0^t(\sigma^{ik}_s)^2ds$; if $\sigma\equiv0$ the covariation matrix vanishes and the formula is the chain rule along an absolutely continuous path; at $t=0$ both sides equal $f(0,X_0)$; if $d=0$ is excluded there is nothing degenerate to treat, and a singular dispersion matrix is allowed because only the products $(\sigma\sigma^{\mathsf T})^{ij}$ enter the quadratic term; no independence of the Brownian coordinates is assumed anywhere, only the matrix formula of [F3]. AC enters only through [F10], and all localization and mollification parameters are canonical. [F3, F10, step 6.1] ∎
+
+## Source notes
+
+Van der Vaart, Theorem 5.85, proves the multidimensional formula for continuous local martingales with the full covariation matrix $[X^i,X^j]$; Lawler, Theorem 3.7.2, states the space-time form under which the Hessian term appears with the dispersion matrix. The proof above follows the localized Taylor route of the one-dimensional item componentwise, with the two new ingredients made explicit: the covariance matrix enters only through the already proved covariation theorem, and the weighted pullback of the matrix covariation is proved rather than cited.

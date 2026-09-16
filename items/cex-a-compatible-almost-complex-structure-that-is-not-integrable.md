@@ -31,18 +31,11 @@ almost-complex structure with nonzero Nijenhuis tensor.
 
 ## Facts & Assumptions
 
-**Given:** Let $J_0\partial_{x_i}=\partial_{y_i}$ and
-$J_0\partial_{y_i}=-\partial_{x_i}$. Put
-$A=\operatorname{diag}(e^{x_2},e^{-x_2},1,1)$ in the displayed coordinate
-frame and $J=AJ_0A^{-1}$.
+**Given:** Let $J_0\partial_{x_i}=\partial_{y_i}$ and $J_0\partial_{y_i}=-\partial_{x_i}$. Put $A=\operatorname{diag}(e^{x_2},e^{-x_2},1,1)$ in the displayed coordinate frame and $J=AJ_0A^{-1}$.
 
-[F1] Symplectic conjugation preserves compatibility.
-[[def-compatible-complex-structure-on-a-symplectic-vector-space]].
+[F1] Symplectic conjugation preserves compatibility. [[def-compatible-complex-structure-on-a-symplectic-vector-space]].
 
-[F2] An integrable almost-complex structure has vanishing Nijenhuis tensor
-$N_J(X,Y)=[JX,JY]-J[JX,Y]-J[X,JY]-[X,Y]$; this necessary implication is the
-easy direction of the Newlander--Nirenberg criterion recorded in the cited
-source. [[rem-compatible-almost-complex-structures-and-kahler-geometry]].
+[F2] An integrable almost-complex structure has vanishing Nijenhuis tensor $N_J(X,Y)=[JX,JY]-J[JX,Y]-J[X,JY]-[X,Y]$; this necessary implication is the easy direction of the Newlander--Nirenberg criterion recorded in the cited source. [[rem-compatible-almost-complex-structures-and-kahler-geometry]].
 
 ## Verification
 

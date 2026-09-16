@@ -80,13 +80,6 @@ fails (MCT), since (MCT) would force it to be Archimedean
 
 ## Remarks
 
-- **What the Archimedean property does here.** It is used exactly once, in the
-  final estimate, to say that a fixed positive $\varepsilon$ added to itself
-  often enough exceeds a given element. In a non-Archimedean field the increments
-  $\varepsilon$ of the recursion can be infinitesimal relative to $B - x_{k_0}$, and
-  the sequence $(x_{k_j})$ climbs forever without ever passing $B$; that is
-  exactly how (CC) survives while (MCT) fails.
+- **What the Archimedean property does here.** It is used exactly once, in the final estimate, to say that a fixed positive $\varepsilon$ added to itself often enough exceeds a given element. In a non-Archimedean field the increments $\varepsilon$ of the recursion can be infinitesimal relative to $B - x_{k_0}$, and the sequence $(x_{k_j})$ climbs forever without ever passing $B$; that is exactly how (CC) survives while (MCT) fails.
 
-- **No choice is used:** the recursion takes the *least* admissible index,
-  supplied by [[thm-well-ordering-principle]], and it is [[thm-recursion]]
-  applied to a function defined outright.
+- **No choice is used:** the recursion takes the *least* admissible index, supplied by [[thm-well-ordering-principle]], and it is [[thm-recursion]] applied to a function defined outright.

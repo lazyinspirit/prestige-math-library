@@ -39,18 +39,13 @@ the supplied smoothness and identity-differential theorem.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$ and a finite-dimensional real Lie group $G$
-with identity $e$ and Lie algebra $\mathfrak g$.
+**Given:** $\mathrm{AC}_\omega$ and a finite-dimensional real Lie group $G$ with identity $e$ and Lie algebra $\mathfrak g$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Assuming $\mathrm{AC}_\omega$, $\exp_G$ is smooth,
-$\exp_G(0)=e$, and $d(\exp_G)_0=\operatorname{id}_{\mathfrak g}$.
-[[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]].
+[F2] Assuming $\mathrm{AC}_\omega$, $\exp_G$ is smooth, $\exp_G(0)=e$, and $d(\exp_G)_0=\operatorname{id}_{\mathfrak g}$. [[thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero]].
 
-[F3] A smooth map whose differential at a point is an isomorphism restricts
-to a diffeomorphism between neighborhoods of that point and its image.
-[[thm-smooth-inverse-function-theorem-on-manifolds]].
+[F3] A smooth map whose differential at a point is an isomorphism restricts to a diffeomorphism between neighborhoods of that point and its image. [[thm-smooth-inverse-function-theorem-on-manifolds]].
 
 ## Proof
 

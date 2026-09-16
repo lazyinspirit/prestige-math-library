@@ -34,11 +34,9 @@ identification of subgroup data with image subgroups.
 
 **Given:** An abelian group $A$ and a homomorphism $x:X \to A$.
 
-[L1] The category $\mathbf{Ab}$ is abelian
-([[thm-abelian-groups-form-an-abelian-category]]).
+[L1] The category $\mathbf{Ab}$ is abelian ([[thm-abelian-groups-form-an-abelian-category]]).
 
-[L2] Member-equivalence classes correspond to subobjects
-([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
+[L2] Member-equivalence classes correspond to subobjects ([[thm-members-modulo-equivalence-correspond-to-subobjects]]).
 
 ## Verification
 

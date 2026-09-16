@@ -35,26 +35,17 @@ for every $x\in H$ whose $p$-part is not $H$-conjugate to an element of $Q$.
 
 ## Facts & Assumptions
 
-**Given:** AC and the modular system, groups, lattice, character, and element
-in the Statement.
+**Given:** AC and the modular system, groups, lattice, character, and element in the Statement.
 
-[F1] Relative $Q$-projectivity means that $M$ is a summand of its induction
-from $Q$ ([[def-relative-projectivity-and-vertices-for-og-lattices]]).
+[F1] Relative $Q$-projectivity means that $M$ is a summand of its induction from $Q$ ([[def-relative-projectivity-and-vertices-for-og-lattices]]).
 
-[F2] Integral Mackey decomposition and induction transitivity hold for these
-lattices ([[lem-integral-mackey-and-higman-for-og-lattices]]).
+[F2] Integral Mackey decomposition and induction transitivity hold for these lattices ([[lem-integral-mackey-and-higman-for-og-lattices]]).
 
-[F3] Finite-rank group lattices have Krull--Schmidt decompositions
-([[thm-krull-schmidt-for-og-lattices]]).
+[F3] Finite-rank group lattices have Krull--Schmidt decompositions ([[thm-krull-schmidt-for-og-lattices]]).
 
-[F4] Induction across a normal subgroup of index $p$ preserves
-indecomposability when $k$ is algebraically closed
-([[thm-green-indecomposability-for-index-p-integral-induction]] and
-[[def-algebraically-closed-field]]).
+[F4] Induction across a normal subgroup of index $p$ preserves indecomposability when $k$ is algebraically closed ([[thm-green-indecomposability-for-index-p-integral-induction]] and [[def-algebraically-closed-field]]).
 
-[F5] AC is available ([[def-axiom-of-choice]]). It is retained for the
-pair's inherited foundation contract; the proof below uses only finite
-coset sets and finite decompositions and makes no additional use of AC.
+[F5] AC is available ([[def-axiom-of-choice]]). It is retained for the pair's inherited foundation contract; the proof below uses only finite coset sets and finite decompositions and makes no additional use of AC.
 
 ## Proof
 

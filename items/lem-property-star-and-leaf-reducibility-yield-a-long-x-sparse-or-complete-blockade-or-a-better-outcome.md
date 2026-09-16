@@ -48,29 +48,17 @@ following holds:
 
 ## Facts & Assumptions
 
-**Given:** A finite family $\mathcal F$ with property $(*)$ and
-leaf-reducible, parameters $0<x\le y\le c$, and a $cy^3$-restricted
-$\overline{\mathcal F}$-free graph $G$.
+**Given:** A finite family $\mathcal F$ with property $(*)$ and leaf-reducible, parameters $0<x\le y\le c$, and a $cy^3$-restricted $\overline{\mathcal F}$-free graph $G$.
 
-[L1] The five-outcome lemma provides constants $c_1,c_2,c_3>0$ and
-$c_4,c_5\ge 4$ for $y^3$-restricted graphs
-([[lem-property-star-and-leaf-reducibility-yield-five-comb-outcomes]]).
+[L1] The five-outcome lemma provides constants $c_1,c_2,c_3>0$ and $c_4,c_5\ge 4$ for $y^3$-restricted graphs ([[lem-property-star-and-leaf-reducibility-yield-five-comb-outcomes]]).
 
-[L2] If every induced subgraph $F$ of $G$ with $|F|\ge c|G|$ has disjoint sets
-$X,Y$ with $|X|\ge y^{c_4}|F|$, $|Y|\ge (1-c_5y)|F|$, and $Y$ $x$-sparse or
-complete to $X$, then $G$ has an $x$-sparse or complete blockade of length at
-least $y^{-1}$ and width at least $y^{c_4+2}|G|$
-([[thm-large-sparse-pair-hypotheses-yield-x-sparse-blockades]]).
+[L2] If every induced subgraph $F$ of $G$ with $|F|\ge c|G|$ has disjoint sets $X,Y$ with $|X|\ge y^{c_4}|F|$, $|Y|\ge (1-c_5y)|F|$, and $Y$ $x$-sparse or complete to $X$, then $G$ has an $x$-sparse or complete blockade of length at least $y^{-1}$ and width at least $y^{c_4+2}|G|$ ([[thm-large-sparse-pair-hypotheses-yield-x-sparse-blockades]]).
 
-[L3] If a graph is $cy^3$-restricted and $F$ is an induced subgraph with
-$|F|\ge c|G|$, then $F$ is $y^3$-restricted
-([[def-c-sparse-and-c-restricted-vertex-set]]).
+[L3] If a graph is $cy^3$-restricted and $F$ is an induced subgraph with $|F|\ge c|G|$, then $F$ is $y^3$-restricted ([[def-c-sparse-and-c-restricted-vertex-set]]).
 
 ## Proof
 
-**Proof technique:** either every large induced subgraph satisfies the large
-pair hypothesis of [L2], or choose a counterexample $F$ and apply the
-five-outcome lemma inside it.
+**Proof technique:** either every large induced subgraph satisfies the large pair hypothesis of [L2], or choose a counterexample $F$ and apply the five-outcome lemma inside it.
 
 
 1.1 Let $c_1,c_2,c_3>0$ and $c_4,c_5\ge 4$ be the constants from [L1], and put $c:=2^{-4c_5}$. [L1, choose]

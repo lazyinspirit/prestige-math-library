@@ -43,11 +43,9 @@ $h\mapsto C^\ast Ch$.
 
 **Given:** A fixed matrix $C$, a vector $x$, and a perturbation direction $h$.
 
-[L1] Matrix differentials satisfy the product and adjoint rules
-([[prop-matrix-differentials-obey-sum-product-and-adjoint-rules]]).
+[L1] Matrix differentials satisfy the product and adjoint rules ([[prop-matrix-differentials-obey-sum-product-and-adjoint-rules]]).
 
-[L2] Frobenius-linear functionals differentiate by inspection
-([[prop-differentials-of-trace-and-frobenius-linear-functionals]]).
+[L2] Frobenius-linear functionals differentiate by inspection ([[prop-differentials-of-trace-and-frobenius-linear-functionals]]).
 
 ## Proof
 **Proof technique:** direct.

@@ -36,25 +36,17 @@ cardinality $\kappa$, and hence is not ccc.
 
 ## Facts & Assumptions
 
-**Given:** ZFC, a normal measure $U$ on the uncountable cardinal $\kappa$, and
-$\mathbb P_U$ with the stronger-below order.
+**Given:** ZFC, a normal measure $U$ on the uncountable cardinal $\kappa$, and $\mathbb P_U$ with the stronger-below order.
 
-[F1] [[def-prikry-forcing-and-direct-extension]]: Conditions with the same stem
-are compatible after intersecting their upper parts.
+[F1] [[def-prikry-forcing-and-direct-extension]]: Conditions with the same stem are compatible after intersecting their upper parts.
 
-[F2] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal
-measure is nonprincipal and $\kappa$-complete.
+[F2] [[def-lc-complete-ultrafilters-and-measurable-cardinals]]: A normal measure is nonprincipal and $\kappa$-complete.
 
-[F3] [[def-kappa-closure-distributivity-and-chain-condition]]: A forcing is
-$\lambda$-cc exactly when every antichain has cardinality below $\lambda$; ccc
-is $\aleph_1$-cc.
+[F3] [[def-kappa-closure-distributivity-and-chain-condition]]: A forcing is $\lambda$-cc exactly when every antichain has cardinality below $\lambda$; ccc is $\aleph_1$-cc.
 
-[F4] [[cor-cardinal-absorption]]: Products of an infinite cardinal with a
-nonzero cardinal at most it, and sums with any cardinal at most it, have the
-same cardinality as the infinite cardinal.
+[F4] [[cor-cardinal-absorption]]: Products of an infinite cardinal with a nonzero cardinal at most it, and sums with any cardinal at most it, have the same cardinality as the infinite cardinal.
 
-[F5] [[def-aleph-and-beth-hierarchies]]: $\kappa^+$ is the least cardinal strictly above
-$\kappa$.
+[F5] [[def-aleph-and-beth-hierarchies]]: $\kappa^+$ is the least cardinal strictly above $\kappa$.
 
 ## Proof
 

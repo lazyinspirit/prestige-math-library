@@ -30,16 +30,11 @@ a theorem of ZF.
 
 ## Facts & Assumptions
 
-**Given:** $\operatorname{Con}(\mathrm{ZF})$. The conclusion is conditional
-syntactic nonprovability; it does not assert a transitive model from bare
-consistency.
+**Given:** $\operatorname{Con}(\mathrm{ZF})$. The conclusion is conditional syntactic nonprovability; it does not assert a transitive model from bare consistency.
 
-[F1] [[cor-relative-consistency-of-feferman-levy-choice-failures-over-zf]]
-proves consistency of ZF with a sequence of countable real layers whose union
-is the whole real line.
+[F1] [[cor-relative-consistency-of-feferman-levy-choice-failures-over-zf]] proves consistency of ZF with a sequence of countable real layers whose union is the whole real line.
 
-[F2] [[thm-r-uncountable]] proves in ZF, without Choice, that the real line is
-uncountable.
+[F2] [[thm-r-uncountable]] proves in ZF, without Choice, that the real line is uncountable.
 
 ## Proof
 

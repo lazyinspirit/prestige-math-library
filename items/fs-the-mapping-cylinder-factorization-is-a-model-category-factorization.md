@@ -31,15 +31,11 @@ factorization, without first choosing and verifying a model structure.
 
 ## Facts & Assumptions
 
-**Given:** The factorization supplied by the mapping cylinder for an arbitrary
-chain map.
+**Given:** The factorization supplied by the mapping cylinder for an arbitrary chain map.
 
-[A1] The statement refuted is: the mapping-cylinder factorization by itself
-specifies a model-category factorization without a chosen model structure.
+[A1] The statement refuted is: the mapping-cylinder factorization by itself specifies a model-category factorization without a chosen model structure.
 
-[L1] The proven corollary gives only a degreewise split inclusion followed by a
-chain-homotopy equivalence
-([[cor-every-chain-map-factors-as-a-cofibration-like-inclusion-followed-by-a-homotopy-equivalence]]).
+[L1] The proven corollary gives only a degreewise split inclusion followed by a chain-homotopy equivalence ([[cor-every-chain-map-factors-as-a-cofibration-like-inclusion-followed-by-a-homotopy-equivalence]]).
 
 ## Refutation
 

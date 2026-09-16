@@ -31,11 +31,9 @@ Schur-Zassenhaus says that every Hall subgroup of a finite group is normal.
 
 **Given:** The subgroup $\langle(12)\rangle\le S_3$.
 
-[L1] A Hall subgroup is defined by a coprime order-index condition
-([[def-hall-pi-subgroup]]).
+[L1] A Hall subgroup is defined by a coprime order-index condition ([[def-hall-pi-subgroup]]).
 
-[L2] Schur-Zassenhaus starts from a normal Hall subgroup and then produces a
-complement ([[thm-schur-zassenhaus-existence]]).
+[L2] Schur-Zassenhaus starts from a normal Hall subgroup and then produces a complement ([[thm-schur-zassenhaus-existence]]).
 
 ## Refutation
 

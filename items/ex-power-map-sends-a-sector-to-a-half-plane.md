@@ -43,9 +43,7 @@ $$\{\,w\in\mathbb C:\operatorname{Re}w>0\,\}.$$
 
 **Given:** The sector $S$ above.
 
-[F1] On sectors of angular width less than $\pi$, the square map is a
-biholomorphism onto the angle-doubled sector
-([[thm-sector-power-map-is-biholomorphic-on-narrow-sectors]]).
+[F1] On sectors of angular width less than $\pi$, the square map is a biholomorphism onto the angle-doubled sector ([[thm-sector-power-map-is-biholomorphic-on-narrow-sectors]]).
 
 ## Verification
 

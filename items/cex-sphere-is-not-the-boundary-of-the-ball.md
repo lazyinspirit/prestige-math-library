@@ -72,19 +72,6 @@ $$B(p,1) = \{p\}, \qquad \partial B(p,1) = \emptyset, \qquad S(p,1) = X \setminu
 
 ## Remarks
 
-- **One inclusion does survive.** In any metric space
-  $\partial B(x,r) \subseteq S(x,r)$: the ball $B(x,r)$ is open
-  ([[thm-metric-open-set-algebra]]), so it is its own interior and
-  $\partial B(x,r) = \overline{B(x,r)} \setminus B(x,r)$, which sits inside
-  $\bar B(x,r) \setminus B(x,r) = S(x,r)$ because
-  $\overline{B(x,r)} \subseteq \bar B(x,r)$
-  ([[fs-closed-ball-is-the-closure-of-the-open-ball]], [[def-metric-ball]]). What
-  the witness above shows is that the inclusion can be strict, and as strict as
-  possible: empty on the left, everything but the centre on the right.
-- **It is the same defect as** [[fs-closed-ball-is-the-closure-of-the-open-ball]]:
-  the names *open ball*, *closed ball* and *sphere* are labels for three sets
-  defined by three inequalities ([[def-metric-ball]]), and none of the
-  topological relations suggested by the words is automatic.
-- **Every point of a discrete space is isolated**, so no ball has any boundary at
-  all; the post-office metric ([[ex-post-office-metric]]) shows the intermediate
-  case, where all but one point is isolated.
+- **One inclusion does survive.** In any metric space $\partial B(x,r) \subseteq S(x,r)$: the ball $B(x,r)$ is open ([[thm-metric-open-set-algebra]]), so it is its own interior and $\partial B(x,r) = \overline{B(x,r)} \setminus B(x,r)$, which sits inside $\bar B(x,r) \setminus B(x,r) = S(x,r)$ because $\overline{B(x,r)} \subseteq \bar B(x,r)$ ([[fs-closed-ball-is-the-closure-of-the-open-ball]], [[def-metric-ball]]). What the witness above shows is that the inclusion can be strict, and as strict as possible: empty on the left, everything but the centre on the right.
+- **It is the same defect as** [[fs-closed-ball-is-the-closure-of-the-open-ball]]: the names *open ball*, *closed ball* and *sphere* are labels for three sets defined by three inequalities ([[def-metric-ball]]), and none of the topological relations suggested by the words is automatic.
+- **Every point of a discrete space is isolated**, so no ball has any boundary at all; the post-office metric ([[ex-post-office-metric]]) shows the intermediate case, where all but one point is isolated.

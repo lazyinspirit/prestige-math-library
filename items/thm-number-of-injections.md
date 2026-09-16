@@ -88,18 +88,8 @@ is none, and $n^{\underline{k}} = 0$.
 
 ## Remarks
 
-- **The two regimes of the falling factorial are the two cases of the proof.**
-  $n^{\underline{k}}$ was defined by a single recursion whose factor $n-k$ is
-  truncated at $0$, and step 2.1 is exactly the regime where that truncation
-  bites. Writing the cases out is what keeps the theorem true past $k = n$
-  instead of only up to it.
+- **The two regimes of the falling factorial are the two cases of the proof.** $n^{\underline{k}}$ was defined by a single recursion whose factor $n-k$ is truncated at $0$, and step 2.1 is exactly the regime where that truncation bites. Writing the cases out is what keeps the theorem true past $k = n$ instead of only up to it.
 
-- **Pigeonhole is not needed.** That no injection exists when $k > n$ is here a
-  consequence of the induction rather than a citation of [[lem-pigeonhole]];
-  the two agree, and the lemma remains what makes $\lvert\cdot\rvert$ well posed
-  in the first place.
+- **Pigeonhole is not needed.** That no injection exists when $k > n$ is here a consequence of the induction rather than a citation of [[lem-pigeonhole]]; the two agree, and the lemma remains what makes $\lvert\cdot\rvert$ well posed in the first place.
 
-- **The count is of a set of functions.** $\operatorname{Inj}(B,A)$ is a subset of
-  $A^{B}$, so its finiteness comes from
-  [[thm-cardinality-of-a-set-of-functions]] and
-  [[thm-subset-of-a-finite-set]] rather than being assumed.
+- **The count is of a set of functions.** $\operatorname{Inj}(B,A)$ is a subset of $A^{B}$, so its finiteness comes from [[thm-cardinality-of-a-set-of-functions]] and [[thm-subset-of-a-finite-set]] rather than being assumed.

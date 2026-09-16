@@ -31,16 +31,11 @@ product $k$ on $V$ canonically determines one.
 
 ## Facts & Assumptions
 
-**Given:** A finite-dimensional symplectic vector space $(V,\omega)$ and an
-inner product $k$ on $V$.
+**Given:** A finite-dimensional symplectic vector space $(V,\omega)$ and an inner product $k$ on $V$.
 
-[F1] A non-negative self-adjoint endomorphism of a finite-dimensional inner
-product space has a unique non-negative square root.
-[[thm-non-negative-square-root-exists-and-is-unique]].
+[F1] A non-negative self-adjoint endomorphism of a finite-dimensional inner product space has a unique non-negative square root. [[thm-non-negative-square-root-exists-and-is-unique]].
 
-[F2] Compatibility means that $J^2=-I$ and
-$g_J(u,v)=\omega(u,Jv)$ is an inner product.
-[[def-compatible-complex-structure-on-a-symplectic-vector-space]].
+[F2] Compatibility means that $J^2=-I$ and $g_J(u,v)=\omega(u,Jv)$ is an inner product. [[def-compatible-complex-structure-on-a-symplectic-vector-space]].
 
 ## Proof
 

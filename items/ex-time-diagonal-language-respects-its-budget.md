@@ -28,8 +28,7 @@ of $g(n)$. The required padding threshold may depend on $M$ and $c$.
 
 ## Facts & Assumptions
 
-**Given:** time-constructible $f,g$ with $n\le f(n)$ eventually and
-$f\log f=o(g)$, a fixed pair $(M,c)$, and its padded codes of length $n$.
+**Given:** time-constructible $f,g$ with $n\le f(n)$ eventually and $f\log f=o(g)$, a fixed pair $(M,c)$, and its padded codes of length $n$.
 
 ## Verification
 

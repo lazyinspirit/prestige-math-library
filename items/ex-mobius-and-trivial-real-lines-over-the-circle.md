@@ -35,9 +35,7 @@ $\operatorname{GL}_1(\mathbb R)=\mathbb R^\times$.
 
 **Given:** A real line bundle over $S^1$.
 
-[F1] Clutching over $S^1$ is the component/orbit case for maps
-$S^0\to\operatorname{GL}_1(\mathbb R)$, with disk-extending gauge changes
-([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
+[F1] Clutching over $S^1$ is the component/orbit case for maps $S^0\to\operatorname{GL}_1(\mathbb R)$, with disk-extending gauge changes ([[thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range]]).
 
 ## Verification
 

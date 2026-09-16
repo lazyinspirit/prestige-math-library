@@ -33,14 +33,11 @@ unit circle is not the uniform limit there of any sequence of polynomials.
 
 ## Facts & Assumptions
 
-**Given:** The unit-circle contour $\gamma(t)=e^{it}$ and the function $1/z$ on
-$\gamma^\ast$.
+**Given:** The unit-circle contour $\gamma(t)=e^{it}$ and the function $1/z$ on $\gamma^\ast$.
 
-[L1] Every polynomial has a global primitive, so its integral around a closed
-contour is $0$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L1] Every polynomial has a global primitive, so its integral around a closed contour is $0$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
 
-[L2] The exponential parametrizes the unit circle
-([[def-complex-trigonometric-and-hyperbolic-functions]]).
+[L2] The exponential parametrizes the unit circle ([[def-complex-trigonometric-and-hyperbolic-functions]]).
 
 ## Verification
 

@@ -34,33 +34,21 @@ For collapses $\pi_\alpha:M_\alpha\to\bar M_\alpha$ of an elementary membership 
 
 [F3] [[thm-countable-elementary-submodels-and-transitive-collapses]]: In ZFC, if an infinite set membership structure $M$ satisfies Extensionality, then for every at most countable $A\subseteq M$ there is a countably infinite $X\prec M$ containing $A$, and $X$ has a countable transitive collapse. To retain a set $a\in M$ as one parameter, use $A=\{a\}$.
 
-[F4] [[thm-hartogs]]: For every set $A$ there is an ordinal (def-ordinal) that does not inject
-into $A$, that is, admits no injective function into $A$. The least such
-ordinal is the **Hartogs number** $\aleph(A)$, and it is exactly
+[F4] [[thm-hartogs]]: For every set $A$ there is an ordinal (def-ordinal) that does not inject into $A$, that is, admits no injective function into $A$. The least such ordinal is the **Hartogs number** $\aleph(A)$, and it is exactly
 
 $$\aleph(A) = \{\mathrm{ot}(S, R) : S \subseteq A \text{ and } R \text{ well-orders } S\},$$
 
-the set of order types (thm-mostowski-collapse) of the well-ordered subsets
-of $A$.
+the set of order types (thm-mostowski-collapse) of the well-ordered subsets of $A$.
 
-**The proof is choice free.** That is the whole point of the theorem: in ZF
-alone, with no assumption that $A$ can be well ordered, one still gets an
-ordinal too long to be laid inside $A$.
+**The proof is choice free.** That is the whole point of the theorem: in ZF alone, with no assumption that $A$ can be well ordered, one still gets an ordinal too long to be laid inside $A$.
 
 [F5] [[def-axiom-of-choice]]: The **Axiom of Choice** (AC) is the following statement.
 
-> Every family of nonempty sets has a choice function
-> (def-choice-function).
+> Every family of nonempty sets has a choice function > (def-choice-function).
 
-Written out: for every set $\mathcal{F}$ all of whose members are nonempty,
-there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for
-all $S \in \mathcal{F}$.
+Written out: for every set $\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\mathcal{F}$ satisfying $g(S) \in S$ for all $S \in \mathcal{F}$.
 
-An equivalent formulation is that a product of nonempty sets is nonempty: if
-$X_i \ne \emptyset$ for every $i \in I$, then $\prod_{i \in I} X_i \ne \emptyset$.
-Here $\prod_{i \in I} X_i$ is the set of functions $f$ with domain $I$ such that
-$f(i) \in X_i$ for every $i \in I$; when a family of nonempty sets is indexed by
-itself, such an $f$ is precisely a choice function for it.
+An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \ne \emptyset$ for every $i \in I$, then $\prod_{i \in I} X_i \ne \emptyset$. Here $\prod_{i \in I} X_i$ is the set of functions $f$ with domain $I$ such that $f(i) \in X_i$ for every $i \in I$; when a family of nonempty sets is indexed by itself, such an $f$ is precisely a choice function for it.
 
 ## Verification
 

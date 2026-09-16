@@ -76,11 +76,6 @@ $(2,1,1)$, $(1,2,1)$ and $(1,1,2)$, matching $\binom{n-1}{m-1} = \binom{3}{2} = 
 
 ## Remarks
 
-- **A stars-and-bars example that only checks the number is the weaker example.**
-  Step 2.2 exhibits the bijection on four of the fifteen tuples, so the reader
-  sees which subset of $6$ each composition corresponds to rather than being told
-  that some correspondence exists.
+- **A stars-and-bars example that only checks the number is the weaker example.** Step 2.2 exhibits the bijection on four of the fifteen tuples, so the reader sees which subset of $6$ each composition corresponds to rather than being told that some correspondence exists.
 
-- **The count $1+2+3+4+5$ in step 1.1 is itself an instance of the theorem**, at
-  $m = 2$: the number of weak compositions of $j$ into $2$ parts is
-  $\binom{j+1}{1} = j+1$.
+- **The count $1+2+3+4+5$ in step 1.1 is itself an instance of the theorem**, at $m = 2$: the number of weak compositions of $j$ into $2$ parts is $\binom{j+1}{1} = j+1$.

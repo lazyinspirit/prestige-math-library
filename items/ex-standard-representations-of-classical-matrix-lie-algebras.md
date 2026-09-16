@@ -33,12 +33,9 @@ spaces by matrix multiplication.
 
 ## Facts & Assumptions
 
-**Given:** One of the displayed bracket-closed matrix Lie algebras over its
-defining field, and its defining vector space $V$.
+**Given:** One of the displayed bracket-closed matrix Lie algebras over its defining field, and its defining vector space $V$.
 
-[L1] A representation is equivalently a bilinear action satisfying
-$[X,Y]v=X(Yv)-Y(Xv)$
-([[def-representation-of-a-lie-algebra]]).
+[L1] A representation is equivalently a bilinear action satisfying $[X,Y]v=X(Yv)-Y(Xv)$ ([[def-representation-of-a-lie-algebra]]).
 
 ## Verification
 

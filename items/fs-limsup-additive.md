@@ -88,21 +88,10 @@ separately as a named counterexample on the companion page.
 
 ## Remarks
 
-- **Which half of the equality fails.** Only $\ge$; the inequality $\le$ is a
-  theorem ([[thm-limsup-subadditive]]). So the claim is not wrong by accident of
-  the witness: the reverse inequality has no proof, and this pair shows it has no
-  proof because it is false.
+- **Which half of the equality fails.** Only $\ge$; the inequality $\le$ is a theorem ([[thm-limsup-subadditive]]). So the claim is not wrong by accident of the witness: the reverse inequality has no proof, and this pair shows it has no proof because it is false.
 
-- **The mechanism is a mismatch of index sets.** $\limsup_k x_k = 1$ is achieved
-  along the even indices and $\limsup_k y_k = 1$ along the odd ones. The sum can
-  only see both at once if some index is large in both sequences simultaneously,
-  and here no index is: where $x_k = 1$ one has $y_k = -1$. Equality does hold
-  when one of the two sequences converges, because then its limit superior is
-  achieved along *every* subsequence.
+- **The mechanism is a mismatch of index sets.** $\limsup_k x_k = 1$ is achieved along the even indices and $\limsup_k y_k = 1$ along the odd ones. The sum can only see both at once if some index is large in both sequences simultaneously, and here no index is: where $x_k = 1$ one has $y_k = -1$. Equality does hold when one of the two sequences converges, because then its limit superior is achieved along *every* subsequence.
 
-- **The witness is named on the companion page** as
-  [[cex-limsup-subadditivity-strict]], which quotes the computation made here.
+- **The witness is named on the companion page** as [[cex-limsup-subadditivity-strict]], which quotes the computation made here.
 
-- **The defined-sum hypothesis is inherited from [[thm-limsup-subadditive]] and is
-  not what fails here.** Both limit superiors in the witness are real, so the
-  right-hand side is a perfectly good real number; the equality is false anyway.
+- **The defined-sum hypothesis is inherited from [[thm-limsup-subadditive]] and is not what fails here.** Both limit superiors in the witness are real, so the right-hand side is a perfectly good real number; the equality is false anyway.

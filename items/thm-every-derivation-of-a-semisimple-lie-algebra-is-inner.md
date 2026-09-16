@@ -35,20 +35,15 @@ The representing element is unique because $Z(\mathfrak g)=0$.
 
 **Given:** Such a Lie algebra $\mathfrak g$.
 
-[L1] The derivations form a Lie algebra and the inner derivations form an
-ideal ([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
+[L1] The derivations form a Lie algebra and the inner derivations form an ideal ([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
 
-[L2] Trace forms are invariant
-([[prop-trace-forms-are-symmetric-and-invariant]]).
+[L2] Trace forms are invariant ([[prop-trace-forms-are-symmetric-and-invariant]]).
 
-[L3] The Killing form is nondegenerate
-([[thm-cartans-semisimplicity-criterion]]).
+[L3] The Killing form is nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
 
-[L4] The algebra is centerless
-([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
+[L4] The algebra is centerless ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 
-[L5] The orthogonal complement of an ideal under an invariant symmetric form
-is an ideal ([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
+[L5] The orthogonal complement of an ideal under an invariant symmetric form is an ideal ([[lem-orthogonal-complements-under-invariant-forms-are-ideals]]).
 
 ## Proof
 

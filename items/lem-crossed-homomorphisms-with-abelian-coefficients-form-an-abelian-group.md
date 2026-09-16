@@ -35,8 +35,7 @@ is an abelian group under pointwise addition.
 
 **Given:** A group $G$ acting on an abelian group $A$.
 
-[L1] For abelian coefficients, a crossed homomorphism satisfies
-$z(gh)=z(g)+g\cdot z(h)$ ([[def-crossed-homomorphism-for-a-g-group]]).
+[L1] For abelian coefficients, a crossed homomorphism satisfies $z(gh)=z(g)+g\cdot z(h)$ ([[def-crossed-homomorphism-for-a-g-group]]).
 
 ## Proof
 

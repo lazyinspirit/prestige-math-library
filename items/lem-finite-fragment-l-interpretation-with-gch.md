@@ -38,29 +38,17 @@ merely knowing separately that each standard axiom has some ZF proof.
 
 ## Facts & Assumptions
 
-**Given:** The fixed pure-membership calculus and certified ZF presentation of
-F5. The target presentation adds one literal well-ordering sentence as AC and
-one literal initial-ordinal cardinal-arithmetic sentence as GCH. Relativization
-uses one fixed pure-membership formula $D(x)$ defining $x\in L$, with equality
-and membership interpreted literally.
+**Given:** The fixed pure-membership calculus and certified ZF presentation of F5. The target presentation adds one literal well-ordering sentence as AC and one literal initial-ordinal cardinal-arithmetic sentence as GCH. Relativization uses one fixed pure-membership formula $D(x)$ defining $x\in L$, with equality and membership interpreted literally.
 
-[F1] [[thm-constructible-inner-model-semantic-and-formal-schema]] supplies a
-ZF derivation of the $L$-relativization of each fixed ZFC axiom and identifies
-the interpretation domain with the constructible universe.
+[F1] [[thm-constructible-inner-model-semantic-and-formal-schema]] supplies a ZF derivation of the $L$-relativization of each fixed ZFC axiom and identifies the interpretation domain with the constructible universe.
 
-[F2] [[thm-generalized-continuum-hypothesis-in-l]] supplies fixed ZF
-derivations of the selected AC and GCH sentences after relativization to $L$.
+[F2] [[thm-generalized-continuum-hypothesis-in-l]] supplies fixed ZF derivations of the selected AC and GCH sentences after relativization to $L$.
 
-[F3] [[def-effective-interpretation-and-proof-translation]] fixes guarded
-formula translation, certified proof predicates, malformed-input behavior and
-the stronger requirement for a base-verified primitive-recursive proof map.
+[F3] [[def-effective-interpretation-and-proof-translation]] fixes guarded formula translation, certified proof predicates, malformed-input behavior and the stronger requirement for a base-verified primitive-recursive proof map.
 
-[F4] [[lem-interpretation-translates-finite-derivations]] compiles proofs once
-the interpretation obligations and translated source-axiom proofs are supplied.
+[F4] [[lem-interpretation-translates-finite-derivations]] compiles proofs once the interpretation obligations and translated source-axiom proofs are supplied.
 
-[F5] [[def-coded-first-order-zf-theory]] gives exact certificates for the six
-fixed ZF axioms and arbitrary Separation and Replacement matrices, with
-capture-free renaming and universal closure conventions.
+[F5] [[def-coded-first-order-zf-theory]] gives exact certificates for the six fixed ZF axioms and arbitrary Separation and Replacement matrices, with capture-free renaming and universal closure conventions.
 
 ## Proof
 

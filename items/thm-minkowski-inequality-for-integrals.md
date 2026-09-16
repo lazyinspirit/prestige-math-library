@@ -55,21 +55,9 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 $$\|f+g\|_1=\int|f+g|\,d\mu\le\int|f|\,d\mu+\int|g|\,d\mu=\|f\|_1+\|g\|_1.$$
 
 1.2 Assume $1<p<\infty$ and let $q:=p/(p-1)$. Then [L1, L2, L4, L5, L6, given, algebra]
-$$\int |f+g|^p\,d\mu\le 2^{p-1}\left(\int |f|^p\,d\mu+\int |g|^p\,d\mu\right)<\infty.$$
-Indeed, [L6] applied pointwise to the two-term families $(|f(x)|,|g(x)|)$ and $(1,1)$ gives
-$$|f(x)|+|g(x)|\le 2^{1/q}\bigl(|f(x)|^p+|g(x)|^p\bigr)^{1/p},$$
-so
-$$|f+g|^p\le(|f|+|g|)^p\le 2^{p-1}(|f|^p+|g|^p)$$
-pointwise. Thus $f+g\in\mathcal L^p(\mu)$. Put $C:=\|f+g\|_p$. If $C=0$, the claim is immediate. Otherwise
-$$|f+g|^p=|f+g|\,|f+g|^{p-1}\le |f|\,|f+g|^{p-1}+|g|\,|f+g|^{p-1}.$$
-Because $(p-1)q=p$, the function $|f+g|^{p-1}$ lies in $\mathcal L^q(\mu)$ and has $q$-norm $C^{p-1}$. Integrating and applying [L1] with conjugate exponents $p$ and $q$ to each term yields
-$$C^p\le\|f\|_p\left(\int |f+g|^{(p-1)q}\,d\mu\right)^{1/q}+\|g\|_p\left(\int |f+g|^{(p-1)q}\,d\mu\right)^{1/q}.$$
-Since $(p-1)q=p$, this becomes
-$$C^p\le(\|f\|_p+\|g\|_p)C^{p-1}.$$
-If $C>0$, divide by $C^{p-1}$ to obtain the claim.
+$$\int |f+g|^p\,d\mu\le 2^{p-1}\left(\int |f|^p\,d\mu+\int |g|^p\,d\mu\right)<\infty.$$ Indeed, [L6] applied pointwise to the two-term families $(|f(x)|,|g(x)|)$ and $(1,1)$ gives $$|f(x)|+|g(x)|\le 2^{1/q}\bigl(|f(x)|^p+|g(x)|^p\bigr)^{1/p},$$ so $$|f+g|^p\le(|f|+|g|)^p\le 2^{p-1}(|f|^p+|g|^p)$$ pointwise. Thus $f+g\in\mathcal L^p(\mu)$. Put $C:=\|f+g\|_p$. If $C=0$, the claim is immediate. Otherwise $$|f+g|^p=|f+g|\,|f+g|^{p-1}\le |f|\,|f+g|^{p-1}+|g|\,|f+g|^{p-1}.$$ Because $(p-1)q=p$, the function $|f+g|^{p-1}$ lies in $\mathcal L^q(\mu)$ and has $q$-norm $C^{p-1}$. Integrating and applying [L1] with conjugate exponents $p$ and $q$ to each term yields $$C^p\le\|f\|_p\left(\int |f+g|^{(p-1)q}\,d\mu\right)^{1/q}+\|g\|_p\left(\int |f+g|^{(p-1)q}\,d\mu\right)^{1/q}.$$ Since $(p-1)q=p$, this becomes $$C^p\le(\|f\|_p+\|g\|_p)C^{p-1}.$$ If $C>0$, divide by $C^{p-1}$ to obtain the claim.
 
 1.3 For $p=\infty$, let $M:=\|f\|_\infty$ and $N:=\|g\|_\infty$. Then [L2, L3, given]
-$$|f+g|\le |f|+|g|\le M+N.$$
-Indeed, outside the union of the two null exceptional sets supplied by [L3], one has $|f|\le M$ and $|g|\le N$. Therefore $\|f+g\|_\infty\le M+N$.
+$$|f+g|\le |f|+|g|\le M+N.$$ Indeed, outside the union of the two null exceptional sets supplied by [L3], one has $|f|\le M$ and $|g|\le N$. Therefore $\|f+g\|_\infty\le M+N$.
 
 2.1 Steps 1.1, 1.2, and 1.3 prove the $p=1$, $1<p<\infty$, and $p=\infty$ cases. [step 1.1, step 1.2, step 1.3] ∎

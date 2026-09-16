@@ -34,17 +34,13 @@ $I$-adic completion $\widehat R$ is a Noetherian ring.
 
 **Given:** The Axiom of Choice, a Noetherian commutative ring $R$, and an ideal $I \subseteq R$.
 
-[L1] Quotients of Noetherian rings are Noetherian
-([[thm-noetherian-ring-quotients-and-localisations]]).
+[L1] Quotients of Noetherian rings are Noetherian ([[thm-noetherian-ring-quotients-and-localisations]]).
 
-[L2] Every ideal of a Noetherian ring is finitely generated
-([[thm-noetherian-ring-ideal-characterisations]]).
+[L2] Every ideal of a Noetherian ring is finitely generated ([[thm-noetherian-ring-ideal-characterisations]]).
 
-[L3] A finite-variable polynomial ring over a Noetherian ring is Noetherian
-([[cor-finite-variable-polynomial-ring-noetherian]]).
+[L3] A finite-variable polynomial ring over a Noetherian ring is Noetherian ([[cor-finite-variable-polynomial-ring-noetherian]]).
 
-[L4] For a finite module, completion commutes with quotients and ideal powers
-([[cor-completion-commutes-with-finite-quotients-and-submodules]]).
+[L4] For a finite module, completion commutes with quotients and ideal powers ([[cor-completion-commutes-with-finite-quotients-and-submodules]]).
 
 ## Proof
 

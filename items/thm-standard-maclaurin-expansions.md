@@ -51,117 +51,53 @@ $$\binom{\alpha}{0}=1,\qquad \binom{\alpha}{n+1}=\binom{\alpha}{n}\frac{\alpha-n
 
 **Given:** The functions and power series displayed in the statement, and an arbitrary real parameter $\alpha$ for the generalized-binomial family.
 
-[L1] The Maclaurin series of a smooth function $f$ is
-$\sum_{n\ge0}f^{(n)}(0)x^n/n!$
-([[def-taylor-and-maclaurin-series]]).
+[L1] The Maclaurin series of a smooth function $f$ is $\sum_{n\ge0}f^{(n)}(0)x^n/n!$ ([[def-taylor-and-maclaurin-series]]).
 
-[L2] For $|x|<1$, the geometric series satisfies
-$\sum_{n\ge0}x^n=1/(1-x)$ ([[thm-geometric-series]]).
+[L2] For $|x|<1$, the geometric series satisfies $\sum_{n\ge0}x^n=1/(1-x)$ ([[thm-geometric-series]]).
 
-[L3] For every real $x$, $\exp(x)=\sum_{n\ge0}x^n/n!$, and $e:=\exp(1)$
-([[def-real-exponential-function-and-e]]); and
-$\sin x=\sum_{n\ge0}(-1)^nx^{2n+1}/(2n+1)!$,
-$\cos x=\sum_{n\ge0}(-1)^nx^{2n}/(2n)!$
-([[def-sine-and-cosine-by-power-series]]). The first definition names $\exp$
-and names $e$ only as $\exp(1)$; it does not name $e^x$.
+[L3] For every real $x$, $\exp(x)=\sum_{n\ge0}x^n/n!$, and $e:=\exp(1)$ ([[def-real-exponential-function-and-e]]); and $\sin x=\sum_{n\ge0}(-1)^nx^{2n+1}/(2n+1)!$, $\cos x=\sum_{n\ge0}(-1)^nx^{2n}/(2n)!$ ([[def-sine-and-cosine-by-power-series]]). The first definition names $\exp$ and names $e$ only as $\exp(1)$; it does not name $e^x$.
 
-[L4] For $-1<x\le1$,
-$\log(1+x)=\sum_{n\ge1}(-1)^{n+1}x^n/n$; at $x=1$ the sum is $\log2$,
-and at $x=-1$ the series diverges ([[thm-log-one-plus-x-power-series]]).
+[L4] For $-1<x\le1$, $\log(1+x)=\sum_{n\ge1}(-1)^{n+1}x^n/n$; at $x=1$ the sum is $\log2$, and at $x=-1$ the series diverges ([[thm-log-one-plus-x-power-series]]).
 
-[L5] For $|x|<1$,
-$\arctan x=\sum_{n\ge0}(-1)^nx^{2n+1}/(2n+1)$, and the series at $x=1$
-converges to $\pi/4$ ([[thm-principal-inverse-tangent-calculus]]).
+[L5] For $|x|<1$, $\arctan x=\sum_{n\ge0}(-1)^nx^{2n+1}/(2n+1)$, and the series at $x=1$ converges to $\pi/4$ ([[thm-principal-inverse-tangent-calculus]]).
 
-[L6] For every real $\beta$, $x\mapsto x^\beta$ is continuous on
-$(0,\infty)$ and has derivative $\beta x^{\beta-1}$ there
-([[thm-real-power-continuity-and-derivatives]]).
+[L6] For every real $\beta$, $x\mapsto x^\beta$ is continuous on $(0,\infty)$ and has derivative $\beta x^{\beta-1}$ there ([[thm-real-power-continuity-and-derivatives]]).
 
-[L7] Factorials satisfy $(n+1)!=(n+1)\,n!$
-([[def-factorial-and-falling-factorial]]), and for reals $u,v$ and a natural
-number $m$ the finite binomial theorem is
-$$(u+v)^m=\sum_{k=0}^{m}\binom mk\,u^{k}\,v^{\,m-k}$$
-([[thm-binomial-theorem]]), the coefficients being the natural numbers
-$\binom mk$ read in $\mathbb R$ through the canonical embedding. The exponents
-there are the natural-number ones: for every real $a$, $n\mapsto a^n$
-is the unique function on $\mathbb N$ with $a^0=1$ and $a^{n+1}=a^n\cdot a$
-([[def-integer-power]]).
+[L7] Factorials satisfy $(n+1)!=(n+1)\,n!$ ([[def-factorial-and-falling-factorial]]), and for reals $u,v$ and a natural number $m$ the finite binomial theorem is $$(u+v)^m=\sum_{k=0}^{m}\binom mk\,u^{k}\,v^{\,m-k}$$ ([[thm-binomial-theorem]]), the coefficients being the natural numbers $\binom mk$ read in $\mathbb R$ through the canonical embedding. The exponents there are the natural-number ones: for every real $a$, $n\mapsto a^n$ is the unique function on $\mathbb N$ with $a^0=1$ and $a^{n+1}=a^n\cdot a$ ([[def-integer-power]]).
 
-[L8] If a sequence has no zero terms and
-$\limsup_{n\to\infty}|a_{n+1}/a_n|<1$, then $\sum a_n$ converges absolutely
-([[thm-ratio-test]]).
+[L8] If a sequence has no zero terms and $\limsup_{n\to\infty}|a_{n+1}/a_n|<1$, then $\sum a_n$ converges absolutely ([[thm-ratio-test]]).
 
-[L9] A real power series may be differentiated term by term at every point
-inside its radius of convergence, and the differentiated series has the same
-radius ([[thm-termwise-differentiation-of-a-real-power-series]]).
+[L9] A real power series may be differentiated term by term at every point inside its radius of convergence, and the differentiated series has the same radius ([[thm-termwise-differentiation-of-a-real-power-series]]).
 
-[L10] Sums and products of differentiable functions satisfy the sum and
-product rules ([[thm-algebra-of-derivatives]]).
+[L10] Sums and products of differentiable functions satisfy the sum and product rules ([[thm-algebra-of-derivatives]]).
 
-[L11] If a real-valued function is continuous on an order-convex interval and
-has derivative zero at every interior point, then it is constant
-([[cor-zero-derivative-implies-constant]]).
+[L11] If a real-valued function is continuous on an order-convex interval and has derivative zero at every interior point, then it is constant ([[cor-zero-derivative-implies-constant]]).
 
-[L12] For naturals $k\le n$, $\binom nk\,k!\,(n-k)!=n!$; consequently, as a
-real number, $\binom nk=n!/\bigl(k!\,(n-k)!\bigr)$
-([[thm-binomial-closed-formula]]).
+[L12] For naturals $k\le n$, $\binom nk\,k!\,(n-k)!=n!$; consequently, as a real number, $\binom nk=n!/\bigl(k!\,(n-k)!\bigr)$ ([[thm-binomial-closed-formula]]).
 
-[L13] If $g$ is differentiable at a limit point $c$ of its domain and $h$ is
-differentiable at $g(c)$, itself a limit point of the domain of $h$, then
-$h\circ g$ is differentiable at $c$ and
-$(h\circ g)'(c)=h'\bigl(g(c)\bigr)g'(c)$ ([[thm-chain-rule]]).
+[L13] If $g$ is differentiable at a limit point $c$ of its domain and $h$ is differentiable at $g(c)$, itself a limit point of the domain of $h$, then $h\circ g$ is differentiable at $c$ and $(h\circ g)'(c)=h'\bigl(g(c)\bigr)g'(c)$ ([[thm-chain-rule]]).
 
-[L14] For a natural $n\ge1$ the function $x\mapsto x^n$ is differentiable at
-every real with derivative $nx^{n-1}$, and for $n=0$ it is the constant $1$,
-with derivative $0$; consequently every polynomial function is differentiable
-at every real, with the derivative computed term by term
-([[lem-derivative-of-a-power]]).
+[L14] For a natural $n\ge1$ the function $x\mapsto x^n$ is differentiable at every real with derivative $nx^{n-1}$, and for $n=0$ it is the constant $1$, with derivative $0$; consequently every polynomial function is differentiable at every real, with the derivative computed term by term ([[lem-derivative-of-a-power]]).
 
-[L15] A function differentiable at a limit point $c$ of its domain is
-continuous at $c$ ([[cor-differentiable-implies-continuous]]).
+[L15] A function differentiable at a limit point $c$ of its domain is continuous at $c$ ([[cor-differentiable-implies-continuous]]).
 
-[L16] For $a>0$ and $x\in\mathbb R$, $a^x=\exp(x\log a)$ ([[def-real-power]]);
-$\log$ is the inverse of $\exp$, so $\log(\exp y)=y$ for every real $y$ and
-$\exp(\log w)=w$ for every $w>0$ ([[def-natural-logarithm]]); and for $a,b>0$
-and $r,s\in\mathbb R$, $a^{r+s}=a^ra^s$ ([[thm-real-power-laws]]).
+[L16] For $a>0$ and $x\in\mathbb R$, $a^x=\exp(x\log a)$ ([[def-real-power]]); $\log$ is the inverse of $\exp$, so $\log(\exp y)=y$ for every real $y$ and $\exp(\log w)=w$ for every $w>0$ ([[def-natural-logarithm]]); and for $a,b>0$ and $r,s\in\mathbb R$, $a^{r+s}=a^ra^s$ ([[thm-real-power-laws]]).
 
-[L17] $\exp:\mathbb R\to(0,\infty)$ is a bijection
-([[cor-exponential-is-a-bijection-onto-positive-reals]]); in particular every
-value of $\exp$ is positive.
+[L17] $\exp:\mathbb R\to(0,\infty)$ is a bijection ([[cor-exponential-is-a-bijection-onto-positive-reals]]); in particular every value of $\exp$ is positive.
 
-[L18] A real power series about the centre $c$ is $\sum_{n\ge0}a_n(x-c)^n$,
-where the powers are those of [[def-integer-power]] and convergence is that of
-[[def-series]]; at $x=c$ it always converges to $a_0$, the $n=0$ term being
-$a_0$ because $0^0=1$ and every later term being $0$; and its radius of
-convergence is the supremum, in $[0,+\infty]$, of the $r\ge0$ such that the
-series converges absolutely at every $x$ with $|x-c|<r$
-([[def-real-power-series-and-radius-of-convergence]]).
+[L18] A real power series about the centre $c$ is $\sum_{n\ge0}a_n(x-c)^n$, where the powers are those of [[def-integer-power]] and convergence is that of [[def-series]]; at $x=c$ it always converges to $a_0$, the $n=0$ term being $a_0$ because $0^0=1$ and every later term being $0$; and its radius of convergence is the supremum, in $[0,+\infty]$, of the $r\ge0$ such that the series converges absolutely at every $x$ with $|x-c|<r$ ([[def-real-power-series-and-radius-of-convergence]]).
 
-[L19] $f^{(0)}:=f$, and $f^{(j+1)}:=(f^{(j)})'$ wherever $f^{(j)}$ is
-differentiable; $f$ is smooth, that is $C^\infty$, on an interval when every
-$f^{(j)}$ exists there and is continuous there
-([[def-higher-derivatives-and-smoothness]]).
+[L19] $f^{(0)}:=f$, and $f^{(j+1)}:=(f^{(j)})'$ wherever $f^{(j)}$ is differentiable; $f$ is smooth, that is $C^\infty$, on an interval when every $f^{(j)}$ exists there and is continuous there ([[def-higher-derivatives-and-smoothness]]).
 
-[L20] For naturals $n,k$, $\binom nk$ is the number of $k$-element subsets of
-$n$; in particular $\binom n0=1$ for every $n$, and $\binom nk=0$ for $k>n$
-([[def-binomial-coefficient]]).
+[L20] For naturals $n,k$, $\binom nk$ is the number of $k$-element subsets of $n$; in particular $\binom n0=1$ for every $n$, and $\binom nk=0$ for $k>n$ ([[def-binomial-coefficient]]).
 
-[L21] If $\sum a_k$ and $\sum b_k$ converge and $c$ is real, then
-$\sum(a_k+b_k)$ converges to $\sum a_k+\sum b_k$, and $\sum ca_k$ converges to
-$c\sum a_k$ ([[lem-series-linearity]]).
+[L21] If $\sum a_k$ and $\sum b_k$ converge and $c$ is real, then $\sum(a_k+b_k)$ converges to $\sum a_k+\sum b_k$, and $\sum ca_k$ converges to $c\sum a_k$ ([[lem-series-linearity]]).
 
-[L22] A real sequence converges to a real $L$ if and only if its limit inferior
-and its limit superior are both $L$
-([[thm-convergence-iff-limsup-equals-liminf]]).
+[L22] A real sequence converges to a real $L$ if and only if its limit inferior and its limit superior are both $L$ ([[thm-convergence-iff-limsup-equals-liminf]]).
 
-[L23] If $x_k\to x$ and $y_k\to y$ then $x_k+y_k\to x+y$, $cx_k\to cx$,
-$x_k-y_k\to x-y$ and $x_ky_k\to xy$ ([[thm-algebra-of-limits]]); and for every
-$\varepsilon>0$ there is a natural $n\ge1$ with $1/n<\varepsilon$
-([[cor-archimedean-reciprocal]]).
+[L23] If $x_k\to x$ and $y_k\to y$ then $x_k+y_k\to x+y$, $cx_k\to cx$, $x_k-y_k\to x-y$ and $x_ky_k\to xy$ ([[thm-algebra-of-limits]]); and for every $\varepsilon>0$ there is a natural $n\ge1$ with $1/n<\varepsilon$ ([[cor-archimedean-reciprocal]]).
 
-[L24] A real power series $\sum a_n(x-c)^n$ of radius $R$ converges absolutely
-at every $x$ with $|x-c|<R$ and diverges at every $x$ with $|x-c|>R$
-([[cor-power-series-convergence-dichotomy]]).
+[L24] A real power series $\sum a_n(x-c)^n$ of radius $R$ converges absolutely at every $x$ with $|x-c|<R$ and diverges at every $x$ with $|x-c|>R$ ([[cor-power-series-convergence-dichotomy]]).
 
 ## Proof
 
@@ -197,27 +133,12 @@ at every $x$ with $|x-c|<R$ and diverges at every $x$ with $|x-c|>R$
 
 ## Remarks
 
-**Which symbol is which.** Three symbols in the statement name objects the
-library builds separately, and each is matched to its own definition rather than
-to a near neighbour.
+**Which symbol is which.** Three symbols in the statement name objects the library builds separately, and each is matched to its own definition rather than to a near neighbour.
 
-$e^x$ is the real power of [[def-real-power]], not the series that defines
-$\exp$: [[def-real-exponential-function-and-e]] defines $\exp$ and defines $e$
-only as $\exp(1)$. Step 1.1 supplies the bridge, from $\log e=1$.
+$e^x$ is the real power of [[def-real-power]], not the series that defines $\exp$: [[def-real-exponential-function-and-e]] defines $\exp$ and defines $e$ only as $\exp(1)$. Step 1.1 supplies the bridge, from $\log e=1$.
 
-The exponent in $(1+x)^\alpha$ is real, so that power too is
-$\exp\bigl(\alpha\log(1+x)\bigr)$, whereas the exponent in the finite binomial
-theorem is a natural number and the $(1+x)^m$ appearing there is the integer
-power of [[def-integer-power]]. Step 2.1 proves the two readings agree on
-$(-1,1)$; without that they are different functions with the same name.
+The exponent in $(1+x)^\alpha$ is real, so that power too is $\exp\bigl(\alpha\log(1+x)\bigr)$, whereas the exponent in the finite binomial theorem is a natural number and the $(1+x)^m$ appearing there is the integer power of [[def-integer-power]]. Step 2.1 proves the two readings agree on $(-1,1)$; without that they are different functions with the same name.
 
-For real $\alpha$ the symbol $\binom{\alpha}{n}$ is defined by the recurrence in
-the statement, while $\binom nk$ elsewhere in the library is a count
-([[def-binomial-coefficient]]). Step 2.1 proves the recurrence reproduces the
-count at a nonnegative integer $\alpha$, so the notation extends rather than
-overloads.
+For real $\alpha$ the symbol $\binom{\alpha}{n}$ is defined by the recurrence in the statement, while $\binom nk$ elsewhere in the library is a count ([[def-binomial-coefficient]]). Step 2.1 proves the recurrence reproduces the count at a nonnegative integer $\alpha$, so the notation extends rather than overloads.
 
-Two power conventions coexist here without conflict, and it is worth saying
-which is used where. The integer power fixes $0^0=1$, which is what makes a
-power series equal its constant coefficient at the centre; the real power leaves
-$0^0$ undefined and is only ever applied above to bases $1+x>0$, $1$, and $e$.
+Two power conventions coexist here without conflict, and it is worth saying which is used where. The integer power fixes $0^0=1$, which is what makes a power series equal its constant coefficient at the centre; the real power leaves $0^0$ undefined and is only ever applied above to bases $1+x>0$, $1$, and $e$.

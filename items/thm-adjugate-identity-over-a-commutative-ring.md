@@ -37,23 +37,15 @@ $$A\operatorname{adj}(A) =\operatorname{adj}(A)A =\det(A)I_n.$$
 
 **Given:** $R,n,A$ as in the statement.
 
-[L1] Laplace expansion along row $i$ is
-$\det(A)=\sum_k a_{ik}C_{ik}(A)$, and expansion along column $j$ is
-$\det(A)=\sum_k a_{kj}C_{kj}(A)$
-([[thm-laplace-cofactor-expansion]]).
+[L1] Laplace expansion along row $i$ is $\det(A)=\sum_k a_{ik}C_{ik}(A)$, and expansion along column $j$ is $\det(A)=\sum_k a_{kj}C_{kj}(A)$ ([[thm-laplace-cofactor-expansion]]).
 
-[L2] The determinant is alternating and multilinear in rows
-([[cor-determinant-is-alternating-multilinear-in-the-rows]]).
+[L2] The determinant is alternating and multilinear in rows ([[cor-determinant-is-alternating-multilinear-in-the-rows]]).
 
-[L3] A matrix with two equal columns has determinant $0$
-([[cor-determinant-vanishes-with-a-zero-or-repeated-column]]).
+[L3] A matrix with two equal columns has determinant $0$ ([[cor-determinant-vanishes-with-a-zero-or-repeated-column]]).
 
-[F1] Matrix multiplication is given by
-$(BC)_{ij}=\sum_k b_{ik}c_{kj}$
-([[def-ring-matrix-product-identity-and-transpose]]).
+[F1] Matrix multiplication is given by $(BC)_{ij}=\sum_k b_{ik}c_{kj}$ ([[def-ring-matrix-product-identity-and-transpose]]).
 
-[L4] Matrix multiplication is associative and distributive, and $I_n$ is its
-identity ([[thm-ring-matrix-arithmetic-laws]]).
+[L4] Matrix multiplication is associative and distributive, and $I_n$ is its identity ([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 

@@ -35,11 +35,9 @@ Every abelian category has a nonzero projective object.
 
 **Given:** The abelian category $\mathbf{FinAb}$ of finite abelian groups.
 
-[L1] Projective objects are exactly those for which every epimorphism onto them
-splits ([[thm-projective-object-characterisations]]).
+[L1] Projective objects are exactly those for which every epimorphism onto them splits ([[thm-projective-object-characterisations]]).
 
-[L2] Enough projectives would require, in particular, some nonzero projective
-object ([[def-a-category-with-enough-projectives-and-with-enough-injectives]]).
+[L2] Enough projectives would require, in particular, some nonzero projective object ([[def-a-category-with-enough-projectives-and-with-enough-injectives]]).
 
 ## Counterexample
 

@@ -35,11 +35,9 @@ is a free basis of $H$.
 
 **Given:** The kernel $H=\ker\phi$ of the exponent-sum map above.
 
-[L1] A Schreier system is a family of reduced right-coset representatives
-closed under initial segments ([[def-schreier-transversal-and-schreier-system]]).
+[L1] A Schreier system is a family of reduced right-coset representatives closed under initial segments ([[def-schreier-transversal-and-schreier-system]]).
 
-[L2] Nielsen-Schreier promotes the nontrivial Schreier generators of such a
-system to a free basis ([[thm-nielsen-schreier-with-an-explicit-basis]]).
+[L2] Nielsen-Schreier promotes the nontrivial Schreier generators of such a system to a free basis ([[thm-nielsen-schreier-with-an-explicit-basis]]).
 
 ## Verification
 

@@ -31,10 +31,7 @@ neighbourhood $U$ and a smooth retraction $r:U\to S$.
 
 **Given:** A closed embedded smooth submanifold $S\subseteq\mathbb R^m$.
 
-[L1] The Euclidean tubular neighbourhood theorem gives a diffeomorphism
-$E:\Omega_\delta\to U$ from a variable-radius normal neighbourhood onto an open
-neighbourhood $U$ of $S$
-([[thm-euclidean-tubular-neighbourhood-theorem]]).
+[L1] The Euclidean tubular neighbourhood theorem gives a diffeomorphism $E:\Omega_\delta\to U$ from a variable-radius normal neighbourhood onto an open neighbourhood $U$ of $S$ ([[thm-euclidean-tubular-neighbourhood-theorem]]).
 
 ## Proof
 **Proof technique:** direct.

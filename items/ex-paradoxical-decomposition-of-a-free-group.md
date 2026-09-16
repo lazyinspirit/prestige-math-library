@@ -34,11 +34,9 @@ The free group $F(a,b)$ admits a paradoxical decomposition.
 
 **Given:** The free group $F(a,b)$.
 
-[L1] Paradoxical decompositions are the translated finite partitions from
-[[def-paradoxical-decomposition-of-a-group]].
+[L1] Paradoxical decompositions are the translated finite partitions from [[def-paradoxical-decomposition-of-a-group]].
 
-[L2] The rank-two free group is nonamenable
-([[thm-free-group-of-rank-two-is-nonamenable]]).
+[L2] The rank-two free group is nonamenable ([[thm-free-group-of-rank-two-is-nonamenable]]).
 
 ## Verification
 

@@ -31,34 +31,19 @@ ball: there is $x\in B_X$ with $|f(x)|=\|f\|$.  This includes $X=\{0\}$.
 
 ## Facts & Assumptions
 
-**Given:** the ultrafilter lemma, DC, HB, and a real or complex Banach space
-$X$.
+**Given:** the ultrafilter lemma, DC, HB, and a real or complex Banach space $X$.
 
-[F1] Reflexivity is surjectivity of the canonical map $J_X:X\to X^{**}$;
-under HB the canonical map is an isometry
-([[def-reflexive-banach-space]],
-[[cor-relative-hahn-banach-bidual-isometry]]).
+[F1] Reflexivity is surjectivity of the canonical map $J_X:X\to X^{**}$; under HB the canonical map is an isometry ([[def-reflexive-banach-space]], [[cor-relative-hahn-banach-bidual-isometry]]).
 
-[F2] Under HB, every bounded scalar-linear functional on a scalar-linear
-subspace of a normed space has a norm-preserving extension
-([[thm-relative-hahn-banach-norm-preserving-extension]],
-[[def-hahn-banach-extension-principle-relative]]).
+[F2] Under HB, every bounded scalar-linear functional on a scalar-linear subspace of a normed space has a norm-preserving extension ([[thm-relative-hahn-banach-norm-preserving-extension]], [[def-hahn-banach-extension-principle-relative]]).
 
-[F3] Under DC and HB, and under the ultrafilter lemma for its nonreflexive
-consequence, the James convex-block criterion says that every nonreflexive real
-Banach space has a bounded real functional that does not attain its norm
-([[lem-james-norm-attainment-compactness-criterion]],
-[[def-dependent-choice]],
-[[thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma]]).
+[F3] Under DC and HB, and under the ultrafilter lemma for its nonreflexive consequence, the James convex-block criterion says that every nonreflexive real Banach space has a bounded real functional that does not attain its norm ([[lem-james-norm-attainment-compactness-criterion]], [[def-dependent-choice]], [[thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma]]).
 
-[F4] The continuous dual consists of bounded scalar-linear functionals and its
-norm is the supremum on the closed unit ball; a Banach space is complete for
-its norm ([[def-dual-space-of-a-normed-space]], [[def-banach-space]]).
+[F4] The continuous dual consists of bounded scalar-linear functionals and its norm is the supremum on the closed unit ball; a Banach space is complete for its norm ([[def-dual-space-of-a-normed-space]], [[def-banach-space]]).
 
 ## Proof
 
-**Proof technique:** Hahn–Banach representation for the forward implication,
-then contrapositive and realification for the reverse implication.
+**Proof technique:** Hahn–Banach representation for the forward implication, then contrapositive and realification for the reverse implication.
 
 1.1 Suppose $X$ is reflexive and let $f\in X^*$.  If $f=0$, then $x=0\in B_X$ attains its norm.  If $f\ne0$, define $g$ on the one-dimensional scalar-linear subspace $\operatorname{span}_{\mathbb K}\{f\}\subseteq X^*$ by $g(cf)=c\|f\|$.  Then $|g(cf)|=\|cf\|$, so $\|g\|=1$.  By [F2] it extends to $G\in X^{**}$ with $\|G\|=1$.  Reflexivity and [F1] give $x\in X$ with $G=J_Xx$ and $\|x\|=\|G\|=1$.  Hence $f(x)=G(f)=\|f\|$, so $f$ attains its norm on $B_X$. [F1, F2, F4, given]
 
@@ -74,9 +59,4 @@ then contrapositive and realification for the reverse implication.
 
 ## Source notes
 
-Megginson's Theorem 1.13.14 proves the real contrapositive through the full
-convex-block argument.  Theorem 1.13.15, printed p. 134, passes from complex
-norm attainment to real norm attainment using
-$f_u(x)=u(x)-iu(ix)$ and a unit-modulus rotation.  The final passage from
-real reflexivity to complex reflexivity is expanded here by representing an
-arbitrary complex bidual functional and recovering both of its scalar parts.
+Megginson's Theorem 1.13.14 proves the real contrapositive through the full convex-block argument.  Theorem 1.13.15, printed p. 134, passes from complex norm attainment to real norm attainment using $f_u(x)=u(x)-iu(ix)$ and a unit-modulus rotation.  The final passage from real reflexivity to complex reflexivity is expanded here by representing an arbitrary complex bidual functional and recovering both of its scalar parts.

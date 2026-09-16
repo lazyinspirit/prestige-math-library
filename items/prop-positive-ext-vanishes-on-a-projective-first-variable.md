@@ -33,9 +33,7 @@ $$\operatorname{Ext}_{P}^{q}(P,N)=0.$$
 
 [L1] Projective-resolution Ext is the cohomology of $\operatorname{Hom}(P_\bullet,-)$ ([[def-ext-via-a-projective-resolution-of-the-first-variable]]).
 
-[L2] Positive right derived functors computed from arbitrary supplied
-injective-resolution data vanish on injective objects, assuming Dependent
-Choice ([[prop-positive-right-derived-functors-vanish-on-injective-objects]]).
+[L2] Positive right derived functors computed from arbitrary supplied injective-resolution data vanish on injective objects, assuming Dependent Choice ([[prop-positive-right-derived-functors-vanish-on-injective-objects]]).
 
 ## Proof
 

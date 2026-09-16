@@ -32,22 +32,13 @@ $$\iota(\operatorname{ord}(g,h))=\operatorname{lcm}(\iota(m),\iota(n)).$$
 
 ## Facts & Assumptions
 
-**Given:** Groups $G,H$, elements $g\in G,h\in H$, and positive natural
-numbers $m,n$ with $\operatorname{ord}(g)=m$ and $\operatorname{ord}(h)=n$.
+**Given:** Groups $G,H$, elements $g\in G,h\in H$, and positive natural numbers $m,n$ with $\operatorname{ord}(g)=m$ and $\operatorname{ord}(h)=n$.
 
-[L1] The direct product is a group with componentwise multiplication
-([[thm-external-direct-product-is-a-group]]).
+[L1] The direct product is a group with componentwise multiplication ([[thm-external-direct-product-is-a-group]]).
 
-[L2] If an element has finite order $r$, then for every natural $k$ its $k$th
-power is the identity exactly when $\iota(r)\mid\iota(k)$; equivalently, $r$ is
-the least positive natural exponent taking it to the identity
-([[def-order-in-a-group]], [[lem-order-characterisation]]).
+[L2] If an element has finite order $r$, then for every natural $k$ its $k$th power is the identity exactly when $\iota(r)\mid\iota(k)$; equivalently, $r$ is the least positive natural exponent taking it to the identity ([[def-order-in-a-group]], [[lem-order-characterisation]]).
 
-[L3] For positive $m,n$, the integer
-$L=\operatorname{lcm}(\iota(m),\iota(n))$ is a positive common multiple of
-$\iota(m)$ and $\iota(n)$, and it divides every common multiple. Thus
-$L=\iota(\ell)$ for a unique natural $\ell\ge1$
-([[def-lcm]], [[thm-gcd-lcm-product]], [[lem-nat-embeds-int]]).
+[L3] For positive $m,n$, the integer $L=\operatorname{lcm}(\iota(m),\iota(n))$ is a positive common multiple of $\iota(m)$ and $\iota(n)$, and it divides every common multiple. Thus $L=\iota(\ell)$ for a unique natural $\ell\ge1$ ([[def-lcm]], [[thm-gcd-lcm-product]], [[lem-nat-embeds-int]]).
 
 [L4] Induction is valid for natural-number powers ([[thm-induction-principle]]).
 

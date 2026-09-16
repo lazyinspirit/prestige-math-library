@@ -44,11 +44,7 @@ eigendirection and the spectral projector do not.
 
 **Given:** The family $A(t)$ and the eigenvalue branch $\lambda(t)\equiv 2$.
 
-[L1] Different fixed gauges give eigenvector derivatives determined only up to
-addition of a multiple of the eigenvector, while the spectral projector
-derivative is gauge-invariant
-([[thm-gauge-fixed-simple-eigenvector-derivative-formula]],
-[[thm-derivative-of-the-simple-spectral-projector]]).
+[L1] Different fixed gauges give eigenvector derivatives determined only up to addition of a multiple of the eigenvector, while the spectral projector derivative is gauge-invariant ([[thm-gauge-fixed-simple-eigenvector-derivative-formula]], [[thm-derivative-of-the-simple-spectral-projector]]).
 
 ## Verification
 **Proof technique:** direct.

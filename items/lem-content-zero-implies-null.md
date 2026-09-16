@@ -68,14 +68,6 @@ the remarks below.
 
 ## Remarks
 
-- **All that is used is that a finite list can be padded.** The definition of
-  measure zero asks for a sequence, and a finite family becomes one at the cost
-  of degenerate intervals, which are intervals of length $0$
-  ([[def-interval]]). No estimate is involved and no completeness of $\mathbb{R}$
-  is used.
+- **All that is used is that a finite list can be padded.** The definition of measure zero asks for a sequence, and a finite family becomes one at the cost of degenerate intervals, which are intervals of length $0$ ([[def-interval]]). No estimate is involved and no completeness of $\mathbb{R}$ is used.
 
-- **The implication is strict.** $\mathbb{Q} \cap [0,1]$ is null and bounded and
-  does not have content zero ([[fs-null-implies-content-zero]],
-  [[cex-null-set-not-of-content-zero]]), so the two notions are genuinely
-  different even for bounded sets. What closes the gap is compactness, not
-  boundedness ([[thm-compact-null-is-content-zero]]).
+- **The implication is strict.** $\mathbb{Q} \cap [0,1]$ is null and bounded and does not have content zero ([[fs-null-implies-content-zero]], [[cex-null-set-not-of-content-zero]]), so the two notions are genuinely different even for bounded sets. What closes the gap is compactness, not boundedness ([[thm-compact-null-is-content-zero]]).

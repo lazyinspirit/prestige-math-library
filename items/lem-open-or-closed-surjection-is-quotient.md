@@ -93,22 +93,8 @@ and 2 is worked on the companion page, and is named in the remarks below.
 
 ## Remarks
 
-- **The three clauses are genuinely different, and neither clause 1 nor clause 2
-  reverses.** The canonical projection of an identification space need be neither
-  open nor closed, and the companion page's
-  [[cex-quotient-map-neither-open-nor-closed]] is a quotient map that fails both
-  conditions while satisfying clause 3. In the other direction, being an open
-  map and being a closed map are unrelated notions, as
-  [[def-homeomorphism-and-open-maps]] records with a two-point witness.
+- **The three clauses are genuinely different, and neither clause 1 nor clause 2 reverses.** The canonical projection of an identification space need be neither open nor closed, and the companion page's [[cex-quotient-map-neither-open-nor-closed]] is a quotient map that fails both conditions while satisfying clause 3. In the other direction, being an open map and being a closed map are unrelated notions, as [[def-homeomorphism-and-open-maps]] records with a two-point witness.
 
-- **Clause 3 is the cheapest of the three in practice.** Exhibiting a continuous
-  right inverse is a one-line construction whenever one is available, and it
-  requires no computation with images at all; clauses 1 and 2 require knowing
-  what $q$ does to every open, respectively every closed, subset of $X$.
+- **Clause 3 is the cheapest of the three in practice.** Exhibiting a continuous right inverse is a one-line construction whenever one is available, and it requires no computation with images at all; clauses 1 and 2 require knowing what $q$ does to every open, respectively every closed, subset of $X$.
 
-- **Where openness usually comes from.** For a quotient by an equivalence
-  relation, $q$ is open exactly when the saturation of every open set is open
-  ([[def-quotient-topology]]), since $q[U]$ is open in the quotient exactly when
-  $q^{-1}[q[U]]$ is open in $X$. That criterion is what the group-like quotients
-  on the companion page verify, translation of an open set by a group element
-  being a homeomorphism there.
+- **Where openness usually comes from.** For a quotient by an equivalence relation, $q$ is open exactly when the saturation of every open set is open ([[def-quotient-topology]]), since $q[U]$ is open in the quotient exactly when $q^{-1}[q[U]]$ is open in $X$. That criterion is what the group-like quotients on the companion page verify, translation of an open set by a group element being a homeomorphism there.

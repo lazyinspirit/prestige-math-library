@@ -34,36 +34,23 @@ $$\mathrm{MA}+\neg\mathrm{CH}\quad\Longrightarrow\quad\mathrm{SH}.$$
 
 **Given:** ZFC, MA, and $\neg\mathrm{CH}$.
 
-[F1] MA is the scheme $\mathrm{MA}(\kappa)$ for every infinite cardinal
-$\kappa<2^{\aleph_0}$. [[def-martins-axiom]]
+[F1] MA is the scheme $\mathrm{MA}(\kappa)$ for every infinite cardinal $\kappa<2^{\aleph_0}$. [[def-martins-axiom]]
 
-[F2] CH says that there is no set $A$ with
-$\mathbb N\prec A\prec\mathcal P(\mathbb N)$. [[rem-continuum-hypothesis]]
+[F2] CH says that there is no set $A$ with $\mathbb N\prec A\prec\mathcal P(\mathbb N)$. [[rem-continuum-hypothesis]]
 
-[F3] Every well-orderable set has a cardinality equinumerous with it, and
-equinumerous well-orderable sets have equal cardinalities.
-[[lem-cardinality-of-a-well-orderable-set]]
+[F3] Every well-orderable set has a cardinality equinumerous with it, and equinumerous well-orderable sets have equal cardinalities. [[lem-cardinality-of-a-well-orderable-set]]
 
-[F4] For well-orderable sets $X,Y$, an injection $X\to Y$ implies
-$|X|\le |Y|$; for cardinals, $\kappa\le\lambda$ is equivalent to an injection
-$\kappa\to\lambda$. [[lem-cardinal-arithmetic-basic-laws]]
+[F4] For well-orderable sets $X,Y$, an injection $X\to Y$ implies $|X|\le |Y|$; for cardinals, $\kappa\le\lambda$ is equivalent to an injection $\kappa\to\lambda$. [[lem-cardinal-arithmetic-basic-laws]]
 
-[F5] Under AC,
-$|\mathcal P(\mathbb N)|=2^{\aleph_0}$ and
-$\aleph_0<2^{\aleph_0}$. [[thm-cardinal-power-set-and-cantor]]
+[F5] Under AC, $|\mathcal P(\mathbb N)|=2^{\aleph_0}$ and $\aleph_0<2^{\aleph_0}$. [[thm-cardinal-power-set-and-cantor]]
 
-[F6] $\aleph_1=\aleph_0^+$ is the least cardinal strictly above
-$\aleph_0$. [[def-aleph-and-beth-hierarchies]]
+[F6] $\aleph_1=\aleph_0^+$ is the least cardinal strictly above $\aleph_0$. [[def-aleph-and-beth-hierarchies]]
 
-[F7] $\mathrm{MA}(\aleph_1)$ implies that no Suslin tree exists.
-[[thm-ma-aleph-one-eliminates-suslin-trees]]
+[F7] $\mathrm{MA}(\aleph_1)$ implies that no Suslin tree exists. [[thm-ma-aleph-one-eliminates-suslin-trees]]
 
-[F8] In ZFC, SH is equivalent to the nonexistence of a Suslin tree.
-[[thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras]]
+[F8] In ZFC, SH is equivalent to the nonexistence of a Suslin tree. [[thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras]]
 
-[A1] AC well-orders the CH witness and its power-set bound, so their strict
-injection comparisons can be converted into cardinal inequalities.
-[[def-axiom-of-choice]]
+[A1] AC well-orders the CH witness and its power-set bound, so their strict injection comparisons can be converted into cardinal inequalities. [[def-axiom-of-choice]]
 
 ## Proof
 

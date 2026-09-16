@@ -32,23 +32,15 @@ class by the Koszul sign $(-1)^{nm}$.
 
 ## Facts & Assumptions
 
-**Given:** The two supplied orientations and Thom classes in the scope of the
-general theorem.
+**Given:** The two supplied orientations and Thom classes in the scope of the general theorem.
 
-[F1] [[thm-naturality-and-uniqueness-of-thom-classes]] gives pullback
-naturality and uniqueness under AC.
+[F1] [[thm-naturality-and-uniqueness-of-thom-classes]] gives pullback naturality and uniqueness under AC.
 
-[F2] [[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]] identifies
-the Whitney sum as diagonal pullback of the external product bundle.
+[F2] [[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]] identifies the Whitney sum as diagonal pullback of the external product bundle.
 
-[F3] [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]] gives radial
-pair maps, while
-[[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] fixes the
-ordered fiber generators.
+[F3] [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]] gives radial pair maps, while [[lem-disk-pair-cohomology-over-an-arbitrary-commutative-ring]] fixes the ordered fiber generators.
 
-[F4] [[def-relative-cup-product]] and
-[[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] give
-the relative external/cup product and its naturality.
+[F4] [[def-relative-cup-product]] and [[prop-relative-cup-products-are-natural-and-compatible-with-connectors]] give the relative external/cup product and its naturality.
 
 [A1] [[def-axiom-of-choice]] is used only through [F1].
 

@@ -38,8 +38,7 @@ $3$-cycle.
 
 [L1] A normal Hall subgroup has a complement ([[thm-schur-zassenhaus-existence]]).
 
-[L2] Under the solvability hypothesis, any two complements are conjugate
-([[thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable]]).
+[L2] Under the solvability hypothesis, any two complements are conjugate ([[thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable]]).
 
 ## Verification
 

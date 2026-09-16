@@ -36,17 +36,13 @@ $q_us=D(u)p_j$ and $q_ut=p_k$ exist, then that equalizer is a limit of $D$.
 
 **Given:** The displayed products and an equalizer $e:L\to P$ of $s,t$.
 
-[F1] A product represents families of arrows into its factors
-([[def-products-and-coproducts]]).
+[F1] A product represents families of arrows into its factors ([[def-products-and-coproducts]]).
 
-[F2] An equalizer represents arrows on which its parallel pair agrees
-([[def-equalizers-and-coequalizers]]).
+[F2] An equalizer represents arrows on which its parallel pair agrees ([[def-equalizers-and-coequalizers]]).
 
-[F3] A small diagram has sets of objects and arrows
-([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F3] A small diagram has sets of objects and arrows ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
-[F4] A limit represents cones by unique mediating arrows
-([[def-limit-and-colimit-of-a-diagram]]).
+[F4] A limit represents cones by unique mediating arrows ([[def-limit-and-colimit-of-a-diagram]]).
 
 ## Proof
 

@@ -33,12 +33,9 @@ such that $\widetilde f|_{U\cap S}=f|_{U\cap S}$.
 
 **Given:** An embedded submanifold $S\subseteq M$ and a map $f:S\to N$.
 
-[F1] Embedded submanifolds have slice charts
-([[def-embedded-submanifold-and-slice-chart]]).
+[F1] Embedded submanifolds have slice charts ([[def-embedded-submanifold-and-slice-chart]]).
 
-[L1] A map into an embedded submanifold is smooth exactly when its ambient
-composite is smooth
-([[prop-smoothness-into-an-embedded-submanifold-is-an-initial-property]]).
+[L1] A map into an embedded submanifold is smooth exactly when its ambient composite is smooth ([[prop-smoothness-into-an-embedded-submanifold-is-an-initial-property]]).
 
 [L2] Smooth maps are continuous ([[prop-smooth-maps-are-continuous]]).
 

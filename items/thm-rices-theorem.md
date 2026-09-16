@@ -32,7 +32,7 @@ is undecidable.
 
 **Given:** A nontrivial extensional property $\mathcal P$ and its index set $I_{\mathcal P}$.
 
-[L1] For such a property, [[lem-rice-witness-machine-construction]] gives a recognizable language $W$ opposite to $\varnothing$ with respect to $\mathcal P$ and a total computable map $g$ such that $x\in A_{TM}$ implies $L(N_x)=W$ while $x\notin A_{TM}$ implies $L(N_x)=\varnothing$. 
+[L1] For such a property, [[lem-rice-witness-machine-construction]] gives a recognizable language $W$ opposite to $\varnothing$ with respect to $\mathcal P$ and a total computable map $g$ such that $x\in A_{TM}$ implies $L(N_x)=W$ while $x\notin A_{TM}$ implies $L(N_x)=\varnothing$.
 
 [L2] The language $A_{TM}$ is undecidable, by [[thm-machine-acceptance-is-undecidable]].
 

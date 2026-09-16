@@ -26,23 +26,15 @@ $\Delta$.
 
 ## Facts & Assumptions
 
-**Given:** Externally, one finite list $\Delta$ of formulas consisting of
-finitely many ZF axiom instances and the three displayed failure sentences.
+**Given:** Externally, one finite list $\Delta$ of formulas consisting of finitely many ZF axiom instances and the three displayed failure sentences.
 
-[F1] [[cor-countable-union-and-omega-one-regularity-fail-in-the-feferman-levy-model]]
-completes the mathematical forcing and symmetry derivations of all three
-sentences.
+[F1] [[cor-countable-union-and-omega-one-regularity-fail-in-the-feferman-levy-model]] completes the mathematical forcing and symmetry derivations of all three sentences.
 
-[F2] [[lem-forcing-transfer-for-finite-zfc-fragments]] proves that a fixed
-finite forcing verification uses only a fixed finite source fragment and that
-ZFC constructs a countable transitive model of that fragment with a generic.
+[F2] [[lem-forcing-transfer-for-finite-zfc-fragments]] proves that a fixed finite forcing verification uses only a fixed finite source fragment and that ZFC constructs a countable transitive model of that fragment with a generic.
 
-[F3] [[thm-hereditarily-symmetric-interpretations-form-a-zf-model]] gives the
-rank recursions and the formula-by-formula ZF verification for an HS
-interpretation.
+[F3] [[thm-hereditarily-symmetric-interpretations-form-a-zf-model]] gives the rank recursions and the formula-by-formula ZF verification for an HS interpretation.
 
-[F4] [[def-axiom-of-choice]] records the ambient Choice used by the reflected
-source-model construction; it is not an axiom of the target fragment.
+[F4] [[def-axiom-of-choice]] records the ambient Choice used by the reflected source-model construction; it is not an axiom of the target fragment.
 
 ## Proof
 

@@ -33,11 +33,9 @@ If $\chi\ne\chi_0$ is a Dirichlet character, then $L(1,\chi)\ne0$.
 
 **Given:** A nonprincipal Dirichlet character $\chi$.
 
-[L1] Nonreal Dirichlet characters satisfy $L(1,\chi)\ne0$
-([[lem-nonreal-dirichlet-l-nonzero-at-one]]).
+[L1] Nonreal Dirichlet characters satisfy $L(1,\chi)\ne0$ ([[lem-nonreal-dirichlet-l-nonzero-at-one]]).
 
-[L2] Real nonprincipal Dirichlet characters satisfy $L(1,\chi)\ne0$
-([[lem-real-dirichlet-l-nonzero-at-one]]).
+[L2] Real nonprincipal Dirichlet characters satisfy $L(1,\chi)\ne0$ ([[lem-real-dirichlet-l-nonzero-at-one]]).
 
 ## Proof
 

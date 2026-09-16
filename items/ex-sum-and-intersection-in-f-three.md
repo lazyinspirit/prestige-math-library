@@ -94,18 +94,8 @@ uses it.
 
 ## Remarks
 
-- **A sum can be everything without being direct.** Condition (D1) holds here and
-  (D2) fails, and the two are independent: the failure is exactly the nonzero
-  overlap $\operatorname{span}\{e_1\}$. Concretely, $e_1$ decomposes in more than
-  one way, for instance as $e_1 + 0_V$ with $e_1 \in U$ and as $0_V + e_1$ with
-  $e_1 \in W$.
+- **A sum can be everything without being direct.** Condition (D1) holds here and (D2) fails, and the two are independent: the failure is exactly the nonzero overlap $\operatorname{span}\{e_1\}$. Concretely, $e_1$ decomposes in more than one way, for instance as $e_1 + 0_V$ with $e_1 \in U$ and as $0_V + e_1$ with $e_1 \in W$.
 
-- **The intersection did not have to be computed by hand to know it is a
-  subspace**, since intersections of linear subspaces always are
-  ([[lem-intersection-of-linear-subspaces]]). What the computation adds is the
-  identification of that subspace as $\operatorname{span}\{e_1\}$, which is the
-  point of the example.
+- **The intersection did not have to be computed by hand to know it is a subspace**, since intersections of linear subspaces always are ([[lem-intersection-of-linear-subspaces]]). What the computation adds is the identification of that subspace as $\operatorname{span}\{e_1\}$, which is the point of the example.
 
-- **Everything here is over an arbitrary field.** No order, no square roots and no
-  counting are used; the only field facts needed are $1_F \ne 0_F$ and the
-  identity laws.
+- **Everything here is over an arbitrary field.** No order, no square roots and no counting are used; the only field facts needed are $1_F \ne 0_F$ and the identity laws.

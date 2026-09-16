@@ -29,18 +29,11 @@ with $b$, then the forward error $x-\widehat x$ is tiny compared with $x$.
 
 ## Facts & Assumptions
 
-**Given:** A parameter $\varepsilon$ with $0<\varepsilon<1$, the matrix
-$A=\operatorname{diag}(1,\varepsilon)$, the right-hand side $b=(1,\varepsilon)$,
-the exact solution $x=A^{-1}b=(1,1)$, the approximation
-$\widehat x=(1,0)$, the residual $r=b-A\widehat x$, and the error $e=x-\widehat x$.
+**Given:** A parameter $\varepsilon$ with $0<\varepsilon<1$, the matrix $A=\operatorname{diag}(1,\varepsilon)$, the right-hand side $b=(1,\varepsilon)$, the exact solution $x=A^{-1}b=(1,1)$, the approximation $\widehat x=(1,0)$, the residual $r=b-A\widehat x$, and the error $e=x-\widehat x$.
 
-[L1] For $r=Ae$ and $e=A^{-1}r$ the residual and the error satisfy
-$\lVert e\rVert_2\le\lVert A^{-1}\rVert_2\lVert r\rVert_2$ and
-$\lVert r\rVert_2\le\lVert A\rVert_2\lVert e\rVert_2$
-([[thm-residual-to-forward-error-bounds-for-linear-systems]]).
+[L1] For $r=Ae$ and $e=A^{-1}r$ the residual and the error satisfy $\lVert e\rVert_2\le\lVert A^{-1}\rVert_2\lVert r\rVert_2$ and $\lVert r\rVert_2\le\lVert A\rVert_2\lVert e\rVert_2$ ([[thm-residual-to-forward-error-bounds-for-linear-systems]]).
 
-[L2] $\kappa_2(A)=\lVert A\rVert_2\lVert A^{-1}\rVert_2=1/\varepsilon$
-([[def-condition-number-of-a-nonsingular-linear-system]]).
+[L2] $\kappa_2(A)=\lVert A\rVert_2\lVert A^{-1}\rVert_2=1/\varepsilon$ ([[def-condition-number-of-a-nonsingular-linear-system]]).
 
 ## Counterexample
 

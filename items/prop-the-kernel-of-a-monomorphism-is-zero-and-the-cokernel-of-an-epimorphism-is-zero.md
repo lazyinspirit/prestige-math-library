@@ -40,19 +40,13 @@ a zero object and $q$ is the zero morphism out of $B$.
 
 ## Facts & Assumptions
 
-**Given:** A zero object $0$, a monomorphism $m:A\to B$ with kernel
-$k:K\to A$, and an epimorphism $e:A\to B$ with cokernel $q:B\to Q$.
+**Given:** A zero object $0$, a monomorphism $m:A\to B$ with kernel $k:K\to A$, and an epimorphism $e:A\to B$ with cokernel $q:B\to Q$.
 
-[L1] A zero object is both initial and terminal, so there are unique morphisms
-$0\to X$ and $X\to0$ for every object $X$
-([[def-initial-terminal-and-zero-object]]).
+[L1] A zero object is both initial and terminal, so there are unique morphisms $0\to X$ and $X\to0$ for every object $X$ ([[def-initial-terminal-and-zero-object]]).
 
-[L2] Monomorphisms are left-cancellable and epimorphisms are right-cancellable
-([[def-monomorphism-and-epimorphism]]).
+[L2] Monomorphisms are left-cancellable and epimorphisms are right-cancellable ([[def-monomorphism-and-epimorphism]]).
 
-[L3] A kernel of $m$ is a morphism $k$ with $mk=0$ through which every
-morphism $h$ with $mh=0$ factors uniquely; a cokernel is dual
-([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
+[L3] A kernel of $m$ is a morphism $k$ with $mk=0$ through which every morphism $h$ with $mh=0$ factors uniquely; a cokernel is dual ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
 
 ## Proof
 

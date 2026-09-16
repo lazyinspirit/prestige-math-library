@@ -32,8 +32,7 @@ $\eta=dx_1\wedge dy_1+e^{x_1}dx_2\wedge dy_2$.
 
 **Given:** The displayed two-form.
 
-[F1] Symplecticity requires both nondegeneracy and closedness.
-[[def-symplectic-form-and-symplectic-manifold]].
+[F1] Symplecticity requires both nondegeneracy and closedness. [[def-symplectic-form-and-symplectic-manifold]].
 
 ## Verification
 

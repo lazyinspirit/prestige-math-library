@@ -25,12 +25,9 @@ is sober.
 
 ## Facts & Assumptions
 
-**Given:** A commutative ring $A$, the Axiom of Choice, and an irreducible
-closed subset $Z$ of $\operatorname{Spec}A$.
+**Given:** A commutative ring $A$, the Axiom of Choice, and an irreducible closed subset $Z$ of $\operatorname{Spec}A$.
 
-[F1] A nonempty irreducible closed subset is $V(\mathfrak p)$ for a unique
-prime $\mathfrak p$, which is its unique generic point
-([[thm-irreducible-closed-subsets-and-prime-ideals]]).
+[F1] A nonempty irreducible closed subset is $V(\mathfrak p)$ for a unique prime $\mathfrak p$, which is its unique generic point ([[thm-irreducible-closed-subsets-and-prime-ideals]]).
 
 ## Proof
 

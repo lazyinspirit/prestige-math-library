@@ -30,14 +30,11 @@ and all reduced singular homology groups vanish.
 
 **Given:** The unit interval $I=[0,1]$.
 
-[L1] Every nonempty convex subset of $\mathbb R^n$ is contractible
-([[cor-convex-subsets-of-rn-are-contractible]]).
+[L1] Every nonempty convex subset of $\mathbb R^n$ is contractible ([[cor-convex-subsets-of-rn-are-contractible]]).
 
-[L2] A nonempty contractible space has the singular homology of a point
-([[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]]).
+[L2] A nonempty contractible space has the singular homology of a point ([[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]]).
 
-[L3] The one-point space has $H_0\cong\mathbb Z$, trivial higher homology, and
-trivial reduced homology ([[ex-singular-chain-complex-of-a-point]]).
+[L3] The one-point space has $H_0\cong\mathbb Z$, trivial higher homology, and trivial reduced homology ([[ex-singular-chain-complex-of-a-point]]).
 
 ## Verification
 

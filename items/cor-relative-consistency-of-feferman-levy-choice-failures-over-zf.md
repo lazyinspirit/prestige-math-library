@@ -29,17 +29,11 @@ $\operatorname{cf}(\omega_1)=\omega$, and $\neg\mathrm{AC}_\omega$.
 
 ## Facts & Assumptions
 
-**Given:** The fixed arithmetizations of the displayed first-order theories and
-the hypothesis $\operatorname{Con}(\mathrm{ZF})$.
+**Given:** The fixed arithmetizations of the displayed first-order theories and the hypothesis $\operatorname{Con}(\mathrm{ZF})$.
 
-[F1] [[lem-feferman-levy-symmetric-collapse-is-finitely-formalizable]] proves,
-for every externally fixed finite target fragment, that ZFC+GCH proves the
-existence of a set model of that fragment.
+[F1] [[lem-feferman-levy-symmetric-collapse-is-finitely-formalizable]] proves, for every externally fixed finite target fragment, that ZFC+GCH proves the existence of a set model of that fragment.
 
-[F2] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] proves
-$\operatorname{Con}(\mathrm{ZF})\to
-\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ without assuming a transitive
-set model of ZF.
+[F2] [[thm-formal-consistency-of-zfc-plus-gch-from-zf]] proves $\operatorname{Con}(\mathrm{ZF})\to \operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ without assuming a transitive set model of ZF.
 
 ## Proof
 

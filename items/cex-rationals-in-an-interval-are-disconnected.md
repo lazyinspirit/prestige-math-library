@@ -83,24 +83,8 @@ not enough to make a set connected.
 
 ## Remarks
 
-- **What the witness shows about
-  [[thm-connected-subsets-of-r-are-intervals]].** That theorem says a subset of
-  $\mathbb{R}$ is connected exactly when it is order-convex **in $\mathbb{R}$**.
-  $E$ is not order-convex in $\mathbb{R}$: the point $r$ lies between $0$ and
-  $2$ and is not in $E$. So no contradiction arises, and the example locates
-  precisely what "interval" has to mean in the theorem: order-convex with
-  respect to the complete order, not with respect to the order of a dense
-  subfield.
+- **What the witness shows about [[thm-connected-subsets-of-r-are-intervals]].** That theorem says a subset of $\mathbb{R}$ is connected exactly when it is order-convex **in $\mathbb{R}$**. $E$ is not order-convex in $\mathbb{R}$: the point $r$ lies between $0$ and $2$ and is not in $E$. So no contradiction arises, and the example locates precisely what "interval" has to mean in the theorem: order-convex with respect to the complete order, not with respect to the order of a dense subfield.
 
-- **Where completeness is spent in the theorem, and why it is absent here.** The
-  proof of [[thm-connected-subsets-of-r-are-intervals]] produces a supremum, and
-  that supremum is the point at which the two pieces of a would-be disconnection
-  must meet. For $E$ the corresponding supremum is $r$, which exists in
-  $\mathbb{R}$ and not in $\mathbb{Q}$; inside $\mathbb{Q}$ there is no point at
-  which to detect the split, which is exactly why $E$ looks like an interval
-  there.
+- **Where completeness is spent in the theorem, and why it is absent here.** The proof of [[thm-connected-subsets-of-r-are-intervals]] produces a supremum, and that supremum is the point at which the two pieces of a would-be disconnection must meet. For $E$ the corresponding supremum is $r$, which exists in $\mathbb{R}$ and not in $\mathbb{Q}$; inside $\mathbb{Q}$ there is no point at which to detect the split, which is exactly why $E$ looks like an interval there.
 
-- **The same phenomenon in a different guise** is
-  [[cex-closed-bounded-in-q-not-compact]]: a set that behaves well inside
-  $\mathbb{Q}$ because the real number that would spoil it is missing from
-  $\mathbb{Q}$. In both cases the missing number is $\sqrt 2$.
+- **The same phenomenon in a different guise** is [[cex-closed-bounded-in-q-not-compact]]: a set that behaves well inside $\mathbb{Q}$ because the real number that would spoil it is missing from $\mathbb{Q}$. In both cases the missing number is $\sqrt 2$.

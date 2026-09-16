@@ -33,8 +33,7 @@ without multiplicity.
 
 **Given:** The function $f(z)=z^2$ and the unit circle $\gamma(t)=e^{it}$.
 
-[L1] The argument principle counts zeros with multiplicity
-([[thm-argument-principle-null-homologous-cycle]]).
+[L1] The argument principle counts zeros with multiplicity ([[thm-argument-principle-null-homologous-cycle]]).
 
 ## Refutation
 

@@ -48,10 +48,7 @@ holds on $B$.
 
 [L2] The two adjacent Walsh layers satisfy the exact symmetry trace estimate with factor $2/n$ ([[lem-enflo-walsh-block-estimates]]).
 
-[L3] Under AC, the real dominated Hahn--Banach theorem supplies Hahn--Banach;
-under Hahn--Banach, a closed subspace of a reflexive Banach space is reflexive
-([[thm-hahn-banach-dominated-extension]],
-[[thm-closed-subspaces-of-reflexive-spaces-are-reflexive]]).
+[L3] Under AC, the real dominated Hahn--Banach theorem supplies Hahn--Banach; under Hahn--Banach, a closed subspace of a reflexive Banach space is reflexive ([[thm-hahn-banach-dominated-extension]], [[thm-closed-subspaces-of-reflexive-spaces-are-reflexive]]).
 
 [L4] Property A and localized traces have their fixed-generator meanings ([[def-enflo-finite-support-localized-trace-system]]).
 
@@ -97,17 +94,7 @@ The vector supplied by [L2] therefore satisfies
 
 $$\left|\widetilde{\operatorname{Tr}}(N_{m,j},T)-\widetilde{\operatorname{Tr}}(M_{m+1,j},T)\right|\le \frac{2}{n_{m+1}}\frac{\lVert\!\lvert T'x\rvert\!\rVert}{\lVert\!\lvert x\rvert\!\rVert}.$$
 
-Its values on every other $K_{m+1,i}$ have modulus at most
-$|N_{m,i}\cap N_{m,j}|/t_{m+1}\le2/n_{m+1}$ by condition 4. Its values on
-$K_{m,i}$ and $K_{m+2,i}$ have modulus at most $1/n_{m+1}$ by the two
-parts of condition 5, while [L2] gives
-$\lVert\!\lvert x\rvert\!\rVert\ge2/n_{m+1}$. Thus the middle block has
-sup norm $\lVert\!\lvert x\rvert\!\rVert$, each adjacent outer block has
-sup norm at most half of that, and all other blocks vanish. Since the ambient
-sum is Hilbertian,
-$\|x\|\le\sqrt{3/2}\,\lVert\!\lvert x\rvert\!\rVert<
-2\lVert\!\lvert x\rvert\!\rVert$. Also
-$\lVert\!\lvert T'x\rvert\!\rVert\le\|Tx\|\le\|T\|\|x\|$. Hence
+Its values on every other $K_{m+1,i}$ have modulus at most $|N_{m,i}\cap N_{m,j}|/t_{m+1}\le2/n_{m+1}$ by condition 4. Its values on $K_{m,i}$ and $K_{m+2,i}$ have modulus at most $1/n_{m+1}$ by the two parts of condition 5, while [L2] gives $\lVert\!\lvert x\rvert\!\rVert\ge2/n_{m+1}$. Thus the middle block has sup norm $\lVert\!\lvert x\rvert\!\rVert$, each adjacent outer block has sup norm at most half of that, and all other blocks vanish. Since the ambient sum is Hilbertian, $\|x\|\le\sqrt{3/2}\,\lVert\!\lvert x\rvert\!\rVert< 2\lVert\!\lvert x\rvert\!\rVert$. Also $\lVert\!\lvert T'x\rvert\!\rVert\le\|Tx\|\le\|T\|\|x\|$. Hence
 
 $$|\widetilde{\operatorname{Tr}}(N_{m,j},T) -\widetilde{\operatorname{Tr}}(M_{m+1,j},T)| \le\frac{4\|T\|}{n_{m+1}}.$$
 
@@ -121,25 +108,17 @@ $$|\widetilde{\operatorname{Tr}}(M_{m+1},T) -\widetilde{\operatorname{Tr}}(M_m,T
 
 $$L_m=\left\lfloor\frac{k_m}{t_{m+1}}\right\rfloor,\qquad \nu_m=\left\lfloor\frac{k_{m+1}}{L_mt_m}\right\rfloor,$$
 
-and identify each Walsh layer with a cyclic group of the corresponding
-cardinality. Inside
-$\{1,\ldots,L_mt_{m+1}\}\times\mathbb Z_{t_m}$, enumerate
+and identify each Walsh layer with a cyclic group of the corresponding cardinality. Inside $\{1,\ldots,L_mt_{m+1}\}\times\mathbb Z_{t_m}$, enumerate
 
 $$(j,j\rho+k),\qquad \rho=0,1,2,\ldots,\quad k=0,\ldots,t_m-1,\quad j=1,\ldots,L_mt_{m+1},$$
 
-first by increasing $\rho$, then $k$, then $j$. Take the first $k_{m+1}$
-successive blocks of $t_{m+1}$ points as $N_{m,1},\ldots,N_{m,k_{m+1}}$.
-Each such block meets every $M_{m,i}=\{i\}\times\mathbb Z_{t_m}$ in at
-most one point, so condition 5 holds eventually. [explicit lexicographic construction]
+first by increasing $\rho$, then $k$, then $j$. Take the first $k_{m+1}$ successive blocks of $t_{m+1}$ points as $N_{m,1},\ldots,N_{m,k_{m+1}}$. Each such block meets every $M_{m,i}=\{i\}\times\mathbb Z_{t_m}$ in at most one point, so condition 5 holds eventually. [explicit lexicographic construction]
 
 8.1 Put $A_m=\{1,\ldots,L_mt_{m+1}\}\times\mathbb Z_{t_m}$ and $q_m=k_{m+1}/(L_mt_m)$. Every point of $A_m$ occurs once at each complete $\rho$-level, so its multiplicity $\sigma(e)$ among the selected blocks differs from $q_m$ by at most one; points outside $A_m$ have multiplicity zero. Since $|A_m|=L_mt_{m+1}t_m$, [given, step 7.1]
 
 $$\sum_{e\in M_m}\left|\frac1{k_mt_m}-\frac{\sigma(e)}{k_{m+1}t_{m+1}}\right|\le \frac{2t_{m+1}}{k_m}+\frac{k_mt_m}{k_{m+1}t_{m+1}}.$$
 
-Both terms are $o(1/n_{m+1})$: their exponential orders are respectively
-$t_m^{\alpha-\gamma+o(1)}$ and
-$t_m^{(\gamma+1)(1-\alpha)+o(1)}$. Thus condition 6 holds after discarding
-finitely many indices. [step 1.1, balanced incidence count]
+Both terms are $o(1/n_{m+1})$: their exponential orders are respectively $t_m^{\alpha-\gamma+o(1)}$ and $t_m^{(\gamma+1)(1-\alpha)+o(1)}$. Thus condition 6 holds after discarding finitely many indices. [step 1.1, balanced incidence count]
 
 8.2 Suppose two distinct selected blocks share a point represented both as $(j,j\rho_1+k_1)$ and $(j,j\rho_2+k_2)$. The injectivity at a fixed $\rho$-level gives $\rho_1\ne\rho_2$, and $|\rho_1-\rho_2|\le\nu_m$. For any other common point whose first coordinate differs by $\mu$, congruence in $\mathbb Z_{t_m}$ gives [given, step 1.1, step 7.1]
 
@@ -149,12 +128,6 @@ Moreover
 
 $$\frac{t_m}{\nu_m}\sim\frac{L_mt_m^2}{k_{m+1}}\sim\frac{k_mt_m^2}{t_{m+1}k_{m+1}}=t_m^{\gamma+2-\alpha(\gamma+1)+o(1)}.$$
 
-The exponent is positive precisely because
-$\alpha<(2+\gamma)/(1+\gamma)$, so eventually $t_m/\nu_m>n_{m+1}$.
-The common first coordinates lie in an interval of length less than
-$t_{m+1}$ and are more than $n_{m+1}$ apart. There are therefore at most
-$1+t_{m+1}/n_{m+1}\le2t_{m+1}/n_{m+1}$ of them. This proves condition 4.
-Together with steps 7.1--8.1, all three incidence conditions hold after a
-finite reindexing. [step 1.1, finite arithmetic count, Stirling estimate]
+The exponent is positive precisely because $\alpha<(2+\gamma)/(1+\gamma)$, so eventually $t_m/\nu_m>n_{m+1}$. The common first coordinates lie in an interval of length less than $t_{m+1}$ and are more than $n_{m+1}$ apart. There are therefore at most $1+t_{m+1}/n_{m+1}\le2t_{m+1}/n_{m+1}$ of them. This proves condition 4. Together with steps 7.1--8.1, all three incidence conditions hold after a finite reindexing. [step 1.1, finite arithmetic count, Stirling estimate]
 
 9.1 Finally [given, L1, step 6.1, step 8.2] $\log|M_m|=\log(k_mt_m)\sim(\gamma+1)(2\log2)n_m$. Therefore $|M_{m+1}|>|M_m|^b$ eventually and $5/n_{m+1}\le K/\log|M_m|$ for one constant $K$. Step 6.1 supplies the trace hypothesis, so [L1] gives the claimed logarithmic finite-rank lower bound. [L1, step 1.1, 6.1, algebra] ∎

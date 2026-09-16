@@ -34,18 +34,13 @@ $$ \rho_V(\widehat C)=\omega_\chi(\widehat C)\operatorname{id}_V. $$
 
 ## Facts & Assumptions
 
-**Given:** A finite group $G$, a conjugacy class $C$ of $G$, its class sum
-$\widehat C$, and an irreducible complex representation $V$ of $G$ with
-character $\chi$.
+**Given:** A finite group $G$, a conjugacy class $C$ of $G$, its class sum $\widehat C$, and an irreducible complex representation $V$ of $G$ with character $\chi$.
 
-[F1] The class sums form a basis of the center of $\mathbb C[G]$, so each class
-sum lies in the center ([[thm-class-sums-form-a-basis-of-the-center-of-k-g]]).
+[F1] The class sums form a basis of the center of $\mathbb C[G]$, so each class sum lies in the center ([[thm-class-sums-form-a-basis-of-the-center-of-k-g]]).
 
-[F2] The central character is $\omega_\chi(\widehat C)=|C|\chi(g)/\chi(1)$ for
-$g\in C$ ([[def-central-character-of-an-irreducible-complex-character]]).
+[F2] The central character is $\omega_\chi(\widehat C)=|C|\chi(g)/\chi(1)$ for $g\in C$ ([[def-central-character-of-an-irreducible-complex-character]]).
 
-[F3] On an irreducible complex representation, every $G$-endomorphism is scalar
-([[cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars]]).
+[F3] On an irreducible complex representation, every $G$-endomorphism is scalar ([[cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars]]).
 
 ## Proof
 

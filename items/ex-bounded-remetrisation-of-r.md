@@ -92,15 +92,6 @@ Lipschitz equivalent.
 
 ## Remarks
 
-- **Nothing about $\mathbb{R}$ is special here except unboundedness.** The same
-  computation on any unbounded metric space gives a bounded metric with the same
-  topology ([[lem-bounded-remetrisation]]); the real line is chosen because it is
-  the space every reader already has.
-- **The diameter is exactly $1$ and not less**, which is what step 1.2
-  contributes: for the construction $\min\{d,1\}$ the bound of
-  [[lem-bounded-remetrisation]] is attained as soon as $d$ takes some value
-  $\ge 1$, because the new metric then takes the value $1$ itself.
-- **The two metrics are not Lipschitz equivalent**, so this pair also witnesses
-  the strictness of the first implication of
-  [[thm-metric-equivalence-hierarchy]]; that computation is
-  [[cex-uniformly-not-lipschitz-equivalent]].
+- **Nothing about $\mathbb{R}$ is special here except unboundedness.** The same computation on any unbounded metric space gives a bounded metric with the same topology ([[lem-bounded-remetrisation]]); the real line is chosen because it is the space every reader already has.
+- **The diameter is exactly $1$ and not less**, which is what step 1.2 contributes: for the construction $\min\{d,1\}$ the bound of [[lem-bounded-remetrisation]] is attained as soon as $d$ takes some value $\ge 1$, because the new metric then takes the value $1$ itself.
+- **The two metrics are not Lipschitz equivalent**, so this pair also witnesses the strictness of the first implication of [[thm-metric-equivalence-hierarchy]]; that computation is [[cex-uniformly-not-lipschitz-equivalent]].

@@ -38,8 +38,7 @@ $m(f\cdot g)=m(f)$ for every $g\in G$, where $(f\cdot g)(x)=f(xg^{-1})$.
 
 **Given:** A group $G$.
 
-[L1] Amenability is defined by existence of a left-invariant mean
-([[def-left-invariant-mean-and-amenable-group]]).
+[L1] Amenability is defined by existence of a left-invariant mean ([[def-left-invariant-mean-and-amenable-group]]).
 
 ## Proof
 

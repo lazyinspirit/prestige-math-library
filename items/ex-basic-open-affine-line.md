@@ -27,8 +27,7 @@ $\operatorname{Spec}k[t,t^{-1}]$.
 
 **Given:** A commutative ring $k$ and the polynomial variable $t$.
 
-[F1] A principal localization spectrum is the corresponding distinguished
-open as a locally ringed space ([[lem-spectrum-localization-open-immersion]]).
+[F1] A principal localization spectrum is the corresponding distinguished open as a locally ringed space ([[lem-spectrum-localization-open-immersion]]).
 
 ## Verification
 

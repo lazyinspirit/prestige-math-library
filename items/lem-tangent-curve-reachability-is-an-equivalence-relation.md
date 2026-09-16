@@ -48,7 +48,6 @@ smooth and has derivative $0 \in \mathcal D$. [given]
 its derivative but keeps it inside the same linear subspaces. [given]
 
 1.3 Transitivity holds because concatenating two tangent piecewise smooth curves [given]
-produces another piecewise smooth curve with the same tangency property.
-[given, construct]
+produces another piecewise smooth curve with the same tangency property. [given, construct]
 
 2.1 Therefore $\sim_{\mathcal D}$ is an equivalence relation. [given] ∎ [given]

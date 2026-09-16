@@ -48,17 +48,13 @@ invariant-field and smooth translation-trivialization results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, and a
-vector $v\in T_eG$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$ with identity $e$, and a vector $v\in T_eG$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Invariance is equivalent to the appropriate identity-value formula.
-[[def-left-and-right-invariant-vector-fields]].
+[F2] Invariance is equivalent to the appropriate identity-value formula. [[def-left-and-right-invariant-vector-fields]].
 
-[F3] The maps $(g,v)\mapsto d(L_g)_e(v)$ and
-$(g,v)\mapsto d(R_g)_e(v)$ are smooth vector-bundle isomorphisms.
-[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]].
+[F3] The maps $(g,v)\mapsto d(L_g)_e(v)$ and $(g,v)\mapsto d(R_g)_e(v)$ are smooth vector-bundle isomorphisms. [[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]].
 
 ## Proof
 

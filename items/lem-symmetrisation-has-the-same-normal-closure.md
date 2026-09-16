@@ -33,14 +33,11 @@ closure in the free group on the generators.
 
 ## Facts & Assumptions
 
-**Given:** A cyclically reduced relator set $R$ in a free group $F(X)$, and its
-symmetrisation $R^{\operatorname{sym}}$.
+**Given:** A cyclically reduced relator set $R$ in a free group $F(X)$, and its symmetrisation $R^{\operatorname{sym}}$.
 
-[F1] The normal closure of a subset $S\subseteq F(X)$ is the smallest normal
-subgroup of $F(X)$ containing $S$ ([[def-normal-closure]]).
+[F1] The normal closure of a subset $S\subseteq F(X)$ is the smallest normal subgroup of $F(X)$ containing $S$ ([[def-normal-closure]]).
 
-[L1] Every element of $R^{\operatorname{sym}}$ is either a cyclic conjugate of a
-member of $R$ or of its inverse ([[def-symmetrisation-of-a-relator-set]]).
+[L1] Every element of $R^{\operatorname{sym}}$ is either a cyclic conjugate of a member of $R$ or of its inverse ([[def-symmetrisation-of-a-relator-set]]).
 
 ## Proof
 

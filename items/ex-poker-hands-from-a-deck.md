@@ -75,12 +75,6 @@ below divides one by another or calls a count a chance.
 
 ## Remarks
 
-- **The sum rule is doing real work in step 2.2**, and its hypothesis is checked
-  rather than assumed: two different suits share no card, so the four blocks are
-  disjoint. Without that, adding the four counts would overcount, which is the
-  failure this page's counterexample exhibits.
+- **The sum rule is doing real work in step 2.2**, and its hypothesis is checked rather than assumed: two different suits share no card, so the four blocks are disjoint. Without that, adding the four counts would overcount, which is the failure this page's counterexample exhibits.
 
-- **What is deliberately absent.** Turning $5148/2598960$ into a probability
-  needs a probability space, which the library does not have here. The
-  temptation to write one down is exactly the place a worked example smuggles in
-  machinery it has not got.
+- **What is deliberately absent.** Turning $5148/2598960$ into a probability needs a probability space, which the library does not have here. The temptation to write one down is exactly the place a worked example smuggles in machinery it has not got.

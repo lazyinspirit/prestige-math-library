@@ -36,11 +36,9 @@ square-root scale rather than linearly.
 
 ## Facts & Assumptions
 
-**Given:** The perturbed Jordan block
-$A_\varepsilon=\begin{pmatrix}\lambda&1\\ \varepsilon&\lambda\end{pmatrix}$.
+**Given:** The perturbed Jordan block $A_\varepsilon=\begin{pmatrix}\lambda&1\\ \varepsilon&\lambda\end{pmatrix}$.
 
-[F1] Eigenvalues are roots of the characteristic polynomial
-([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).
+[F1] Eigenvalues are roots of the characteristic polynomial ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).
 
 ## Counterexample
 **Proof technique:** direct.

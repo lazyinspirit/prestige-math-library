@@ -92,22 +92,8 @@ no algebraic property of $F$ can distinguish $u$ from $-u$.
 
 ## Remarks
 
-- **Two orders, one field, and no way to tell them apart algebraically.** The
-  automorphism $\sigma$ carries $(F,P_1)$ isomorphically onto $(F,P_2)$ as an
-  *ordered* field, so the two ordered fields are isomorphic even though the two
-  orders on the underlying $F$ are different subsets. That is the precise sense
-  in which an order is not determined by the field: what is determined here is
-  the order up to isomorphism, not the order itself.
+- **Two orders, one field, and no way to tell them apart algebraically.** The automorphism $\sigma$ carries $(F,P_1)$ isomorphically onto $(F,P_2)$ as an *ordered* field, so the two ordered fields are isomorphic even though the two orders on the underlying $F$ are different subsets. That is the precise sense in which an order is not determined by the field: what is determined here is the order up to isomorphism, not the order itself.
 
-- **Contrast with $\mathbb{Q}$ and with $\mathbb{R}$**, each of which carries
-  exactly one order. For $\mathbb{Q}$ this is step 1.2: every rational is a
-  quotient of canonical naturals, so its sign is forced. For $\mathbb{R}$ it is
-  [[thm-of-square-roots]]: the positives are exactly the nonzero squares, and
-  the squares are fixed by the field structure alone. $\mathbb{Q}(\sqrt 2)$ sits
-  between the two and has room for exactly two, because $2$ acquires a square
-  root while $F$ still has elements that are not squares.
+- **Contrast with $\mathbb{Q}$ and with $\mathbb{R}$**, each of which carries exactly one order. For $\mathbb{Q}$ this is step 1.2: every rational is a quotient of canonical naturals, so its sign is forced. For $\mathbb{R}$ it is [[thm-of-square-roots]]: the positives are exactly the nonzero squares, and the squares are fixed by the field structure alone. $\mathbb{Q}(\sqrt 2)$ sits between the two and has room for exactly two, because $2$ acquires a square root while $F$ still has elements that are not squares.
 
-- **What decides an order on $F$ is a single bit**, the sign of $u$, after which
-  every other comparison reduces to a comparison of rationals. That is also
-  why there are exactly two and not more: the sign of $u$ is the only free
-  choice, and both of its values are realised.
+- **What decides an order on $F$ is a single bit**, the sign of $u$, after which every other comparison reduces to a comparison of rationals. That is also why there are exactly two and not more: the sign of $u$ is the only free choice, and both of its values are realised.

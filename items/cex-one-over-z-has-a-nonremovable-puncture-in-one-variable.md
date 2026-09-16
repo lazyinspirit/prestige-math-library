@@ -41,8 +41,7 @@ across $0$.
 
 [L1] A simple pole is a pole of order $1$ ([[def-simple-pole]]).
 
-[L2] A pole is exactly a nonremovable singularity whose reciprocal has a zero at
-the singular point ([[thm-pole-characterizations]]).
+[L2] A pole is exactly a nonremovable singularity whose reciprocal has a zero at the singular point ([[thm-pole-characterizations]]).
 
 ## Counterexample
 

@@ -36,19 +36,15 @@ invariant-field and smooth translation-trivialization results.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Lie group $G$, and left-invariant smooth
-vector fields $X,Y$ on $G$.
+**Given:** $\mathrm{AC}_\omega$, a Lie group $G$, and left-invariant smooth vector fields $X,Y$ on $G$.
 
 [F1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]].
 
-[F2] Left invariance means that every left translation carries the field to
-itself pointwise. [[def-left-and-right-invariant-vector-fields]].
+[F2] Left invariance means that every left translation carries the field to itself pointwise. [[def-left-and-right-invariant-vector-fields]].
 
-[F3] Every left translation is a diffeomorphism.
-[[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]].
+[F3] Every left translation is a diffeomorphism. [[prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle]].
 
-[F4] Pushforward by a diffeomorphism preserves the Lie bracket.
-[[cor-diffeomorphism-pushforward-preserves-lie-brackets]].
+[F4] Pushforward by a diffeomorphism preserves the Lie bracket. [[cor-diffeomorphism-pushforward-preserves-lie-brackets]].
 
 ## Proof
 

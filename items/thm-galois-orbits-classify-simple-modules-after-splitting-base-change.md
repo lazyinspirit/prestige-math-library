@@ -117,9 +117,4 @@ it makes no assertion about existence of a finite Galois splitting field.
 
 ## Remarks
 
-Zheng, Proposition 4.3.2, pp.145–146, gives scalar-extension multiplicities;
-Wiese, Lemma 2.2.9 and Corollary 2.2.12, pp.29–30, give their Galois-orbit
-behavior. The local proof obtains it from descended central idempotents.
-The specialization steps expand Zheng's averaging argument (Theorem 4.1.6, p.139) using
-finite basis extension and strict dimension induction. They provide the
-needed finite-group semisimplicity directly.
+Zheng, Proposition 4.3.2, pp.145–146, gives scalar-extension multiplicities; Wiese, Lemma 2.2.9 and Corollary 2.2.12, pp.29–30, give their Galois-orbit behavior. The local proof obtains it from descended central idempotents. The specialization steps expand Zheng's averaging argument (Theorem 4.1.6, p.139) using finite basis extension and strict dimension induction. They provide the needed finite-group semisimplicity directly.

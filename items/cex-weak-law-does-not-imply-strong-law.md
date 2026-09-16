@@ -25,39 +25,21 @@ A weak sample-mean law need not be a centered strong law. Assuming AC, there are
 
 [F1] [[thm-recursion]]: Let $(N,0,\sigma)$ be a Peano system (def-peano-system), in particular the natural numbers $\mathbb{N}$ (def-natural-numbers). For any set $A$, any element $a \in A$, and any function $f : A \to A$, there is a unique function $g : N \to A$ such that $g(0) = a$ and $g(\sigma(n)) = f(g(n))$ for all $n \in N$.
 
-[F2] [[thm-lebesgue-measure-of-a-box-of-every-kind]]: Let $n \ge 1$, **assume the Axiom of Countable Choice**
-(def-countable-choice), and let $a_i \le b_i$ be reals for $i<n$. Write
+[F2] [[thm-lebesgue-measure-of-a-box-of-every-kind]]: Let $n \ge 1$, **assume the Axiom of Countable Choice** (def-countable-choice), and let $a_i \le b_i$ be reals for $i<n$. Write
 
 $$R^{\circ} := \{\, x \in \mathbb{R}^n : a_i < x_i < b_i \text{ for every } i<n \,\}, \qquad \overline{R} := [a,b] = \{\, x \in \mathbb{R}^n : a_i \le x_i \le b_i \text{ for every } i<n \,\}$$
 
-(def-multidimensional-rectangle-and-volume). Then $R^{\circ}$ is open and
-$\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**
-set $R$ with $R^{\circ} \subseteq R \subseteq \overline{R}$ is Lebesgue
-measurable with
+(def-multidimensional-rectangle-and-volume). Then $R^{\circ}$ is open and $\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every** set $R$ with $R^{\circ} \subseteq R \subseteq \overline{R}$ is Lebesgue measurable with
 
 $$\lambda_n(R) \;=\; \prod_{i<n}(b_i-a_i).$$
 
-In particular this covers the four one-dimensional face conventions in each
-coordinate — the open box, the closed box $[a,b]$, the half-open box
-$B(a,b) = \prod_{i<n}(a_i,b_i]$ of def-half-open-box, and every mixture of
-them, in any combination of coordinates — and it gives measure $0$ to all of them
-whenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite
-parameters the value is already
-$\lambda_n(B) = \operatorname{vol}(B)$ (thm-lebesgue-measure-is-a-complete-measure).
+In particular this covers the four one-dimensional face conventions in each coordinate — the open box, the closed box $[a,b]$, the half-open box $B(a,b) = \prod_{i<n}(a_i,b_i]$ of def-half-open-box, and every mixture of them, in any combination of coordinates — and it gives measure $0$ to all of them whenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite parameters the value is already $\lambda_n(B) = \operatorname{vol}(B)$ (thm-lebesgue-measure-is-a-complete-measure).
 
-[F3] [[cor-countable-independent-copies-exist]]: Assume countable choice and dependent choice. Every probability measure $\nu$
-on $(S,\Sigma)$ is the common law of a countable independent family of
-$S$-valued random elements.
+[F3] [[cor-countable-independent-copies-exist]]: Assume countable choice and dependent choice. Every probability measure $\nu$ on $(S,\Sigma)$ is the common law of a countable independent family of $S$-valued random elements.
 
-[F4] [[lem-measurable-functions-preserve-independence]]: Let $(X_i)_{i\in I}$ be an independent family of random elements
-$X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$. For each $i$, let
-$g_i:(S_i,\Sigma_i)\to(T_i,\mathcal T_i)$ be measurable. Then the family
-$(g_i\circ X_i)_{i\in I}$ is independent.
+[F4] [[lem-measurable-functions-preserve-independence]]: Let $(X_i)_{i\in I}$ be an independent family of random elements $X_i:(\Omega,\mathcal F,\mathbb P)\to(S_i,\Sigma_i)$. For each $i$, let $g_i:(S_i,\Sigma_i)\to(T_i,\mathcal T_i)$ be measurable. Then the family $(g_i\circ X_i)_{i\in I}$ is independent.
 
-[F5] [[cor-second-borel-cantelli-lemma-under-pairwise-independence]]: Let $(A_n)_{n\in\mathbb N}$ be pairwise independent events with
-$$\sum_{n=0}^\infty \mathbb P(A_n)=+\infty.$$
-Then
-$$\mathbb P(A_n\ \mathrm{i.o.})=1.$$
+[F5] [[cor-second-borel-cantelli-lemma-under-pairwise-independence]]: Let $(A_n)_{n\in\mathbb N}$ be pairwise independent events with $$\sum_{n=0}^\infty \mathbb P(A_n)=+\infty.$$ Then $$\mathbb P(A_n\ \mathrm{i.o.})=1.$$
 
 ## Counterexample
 

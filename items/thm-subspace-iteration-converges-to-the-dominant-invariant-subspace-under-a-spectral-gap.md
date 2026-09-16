@@ -41,10 +41,7 @@ $$\|Z_k\|_2=O(|\lambda_{p+1}/\lambda_p|^k).$$
 
 ## Facts & Assumptions
 
-**Given:** The field, dimensions, diagonalisable matrix $A$, spectral gap,
-initial orthonormal frame $Q_0$, and valid subspace iteration $(Q_k)$ from the
-statement, for which
-the leading coefficient block $C_1$ in the statement is invertible.
+**Given:** The field, dimensions, diagonalisable matrix $A$, spectral gap, initial orthonormal frame $Q_0$, and valid subspace iteration $(Q_k)$ from the statement, for which the leading coefficient block $C_1$ in the statement is invertible.
 
 [L1] A diagonalisable matrix admits an eigenbasis ([[def-diagonalisable-endomorphism]]).
 

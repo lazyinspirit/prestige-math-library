@@ -35,15 +35,11 @@ path.
 
 ## Facts & Assumptions
 
-**Given:** The $1$-subdivision of $K_{1,3}$ with center $c$, subdivision
-vertices $s_1,s_2,s_3$, and leaves $t_1,t_2,t_3$.
+**Given:** The $1$-subdivision of $K_{1,3}$ with center $c$, subdivision vertices $s_1,s_2,s_3$, and leaves $t_1,t_2,t_3$.
 
-[L1] The $E$-graph has edge set
-$$ \{p_1p_2,p_2p_3,p_3p_4,p_4p_5,p_3q\} $$
-([[def-e-graph-and-co-e-graph]]).
+[L1] The $E$-graph has edge set $$ \{p_1p_2,p_2p_3,p_3p_4,p_4p_5,p_3q\} $$ ([[def-e-graph-and-co-e-graph]]).
 
-[L2] The path $P_5$ has five vertices in one chain and no other edges
-([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[L2] The path $P_5$ has five vertices in one chain and no other edges ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Verification
 

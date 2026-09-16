@@ -38,13 +38,9 @@ is a submersion.
 
 **Given:** The two displayed coordinate maps.
 
-[F1] A smooth map is an immersion exactly when its differential is injective
-at every point, and is a submersion exactly when its differential is surjective
-at every point ([[def-immersion-submersion-and-constant-rank-map]]).
+[F1] A smooth map is an immersion exactly when its differential is injective at every point, and is a submersion exactly when its differential is surjective at every point ([[def-immersion-submersion-and-constant-rank-map]]).
 
-[L1] For a totally differentiable Euclidean map, the differential is computed
-by the Jacobian matrix
-([[thm-total-derivative-computes-directional-and-partial-derivatives]]).
+[L1] For a totally differentiable Euclidean map, the differential is computed by the Jacobian matrix ([[thm-total-derivative-computes-directional-and-partial-derivatives]]).
 
 ## Verification
 **Proof technique:** direct.

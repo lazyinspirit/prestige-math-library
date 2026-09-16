@@ -31,34 +31,21 @@ in the Feferman--Levy model.
 
 ## Facts & Assumptions
 
-**Given:** The Feferman--Levy model $N$. This is a finite, choice-free
-calculation inside $N$; the ground-model uses of AC and GCH have already been
-declared by the construction suppliers.
+**Given:** The Feferman--Levy model $N$. This is a finite, choice-free calculation inside $N$; the ground-model uses of AC and GCH have already been declared by the construction suppliers.
 
-[F1] [[def-feferman-levy-symmetric-collapse-system]] defines $H_m$ to fix
-pointwise the permutation action on exactly the forcing layers $n<m$.
+[F1] [[def-feferman-levy-symmetric-collapse-system]] defines $H_m$ to fix pointwise the permutation action on exactly the forcing layers $n<m$.
 
-[F2] [[def-feferman-levy-real-layers]] identifies $R_m$ with the reals having
-a Boolean name fixed by $H_m$ and puts the whole sequence
-$\langle R_m:m<\omega\rangle$ in $N$.
+[F2] [[def-feferman-levy-real-layers]] identifies $R_m$ with the reals having a Boolean name fixed by $H_m$ and puts the whole sequence $\langle R_m:m<\omega\rangle$ in $N$.
 
-[F3] [[lem-feferman-levy-real-layer-ground-cardinality-bound]] supplies for
-each fixed $m$ a surjection
-$e_m:\aleph_{m+1}^V\twoheadrightarrow R_m$ in $N$.
+[F3] [[lem-feferman-levy-real-layer-ground-cardinality-bound]] supplies for each fixed $m$ a surjection $e_m:\aleph_{m+1}^V\twoheadrightarrow R_m$ in $N$.
 
-[F4] [[lem-ground-aleph-n-is-countable-in-the-feferman-levy-model]] supplies
-the canonical layer-$n$ surjection
-$f_n:\omega\twoheadrightarrow\aleph_n^V$ in $N$.
+[F4] [[lem-ground-aleph-n-is-countable-in-the-feferman-levy-model]] supplies the canonical layer-$n$ surjection $f_n:\omega\twoheadrightarrow\aleph_n^V$ in $N$.
 
-[F5] [[lem-each-feferman-levy-real-layer-is-countable]] verifies that the
-composition of the preceding maps makes each fixed $R_m$ countable.
+[F5] [[lem-each-feferman-levy-real-layer-is-countable]] verifies that the composition of the preceding maps makes each fixed $R_m$ countable.
 
-[F6] [[thm-feferman-levy-reals-are-a-countable-union-of-countable-sets]]
-proves $\mathbb R^N=\bigcup_{m<\omega}R_m$ while explicitly not choosing the
-surjections simultaneously.
+[F6] [[thm-feferman-levy-reals-are-a-countable-union-of-countable-sets]] proves $\mathbb R^N=\bigcup_{m<\omega}R_m$ while explicitly not choosing the surjections simultaneously.
 
-[F7] [[thm-feferman-levy-reals-remain-uncountable]] proves that
-$\mathbb R^N$ is not countable.
+[F7] [[thm-feferman-levy-reals-remain-uncountable]] proves that $\mathbb R^N$ is not countable.
 
 ## Proof
 

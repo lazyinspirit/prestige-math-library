@@ -33,11 +33,9 @@ $2\delta$-neighborhood of the union of the other three sides.
 
 **Given:** A geodesic $\delta$-hyperbolic space $X$ and a geodesic quadrilateral with vertices $a,b,c,d$.
 
-[L1] Every geodesic triangle in $X$ is $\delta$-slim
-([[def-delta-slim-geodesic-triangle-and-hyperbolic-space]]).
+[L1] Every geodesic triangle in $X$ is $\delta$-slim ([[def-delta-slim-geodesic-triangle-and-hyperbolic-space]]).
 
-[A1] The diagonal $[a,c]$ cuts the quadrilateral into the geodesic triangles
-$abc$ and $acd$.
+[A1] The diagonal $[a,c]$ cuts the quadrilateral into the geodesic triangles $abc$ and $acd$.
 
 ## Proof
 

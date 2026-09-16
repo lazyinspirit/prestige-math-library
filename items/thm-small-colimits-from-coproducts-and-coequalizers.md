@@ -37,17 +37,13 @@ a colimit of $D$.
 
 **Given:** The displayed coproducts and coequalizer.
 
-[L1] The product-equalizer construction yields every small limit when its
-constituent limits exist ([[thm-small-limits-from-products-and-equalizers]]).
+[L1] The product-equalizer construction yields every small limit when its constituent limits exist ([[thm-small-limits-from-products-and-equalizers]]).
 
-[L2] Formal duality exchanges limits with colimits, products with coproducts,
-and equalizers with coequalizers ([[prop-limit-colimit-duality]]).
+[L2] Formal duality exchanges limits with colimits, products with coproducts, and equalizers with coequalizers ([[prop-limit-colimit-duality]]).
 
-[F1] Coproducts give unique maps out of families of summands
-([[def-products-and-coproducts]]).
+[F1] Coproducts give unique maps out of families of summands ([[def-products-and-coproducts]]).
 
-[F2] A coequalizer gives a unique factor for each arrow that equalizes its pair
-([[def-equalizers-and-coequalizers]]).
+[F2] A coequalizer gives a unique factor for each arrow that equalizes its pair ([[def-equalizers-and-coequalizers]]).
 
 ## Proof
 

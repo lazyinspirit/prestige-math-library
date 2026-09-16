@@ -38,13 +38,9 @@ $2^{-18}|A|$ neighbours in $A$.
 
 ## Facts & Assumptions
 
-**Given:** The parameters $y=2^{-8}$, $x=2^{-9}$, a graph $G$ with
-$|V(G)|=2^{40}$, and all hypotheses of the cited lemma.
+**Given:** The parameters $y=2^{-8}$, $x=2^{-9}$, a graph $G$ with $|V(G)|=2^{40}$, and all hypotheses of the cited lemma.
 
-[L1] Under those hypotheses, the lemma produces disjoint sets $A,B$ with
-$|B|\ge y^4|V(G)|$, $|A|\ge (1-3y)|V(G)|$, $A$ $y^2$-sparse to $B$, and every
-vertex of $B$ having at least $x^2|A|$ neighbours in $A$
-([[lem-a-sparse-graph-without-a-large-sparse-pair-has-a-large-nearly-covered-sparse-pair]]).
+[L1] Under those hypotheses, the lemma produces disjoint sets $A,B$ with $|B|\ge y^4|V(G)|$, $|A|\ge (1-3y)|V(G)|$, $A$ $y^2$-sparse to $B$, and every vertex of $B$ having at least $x^2|A|$ neighbours in $A$ ([[lem-a-sparse-graph-without-a-large-sparse-pair-has-a-large-nearly-covered-sparse-pair]]).
 
 ## Verification
 

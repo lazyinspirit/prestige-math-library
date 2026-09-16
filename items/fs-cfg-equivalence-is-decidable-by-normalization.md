@@ -34,8 +34,7 @@ decision procedure for the CFG equivalence problem.
 
 [L1] By [[def-cfg-equivalence-and-ambiguity-problems]], CFG equivalence asks whether two grammars over the same alphabet generate exactly the same language.
 
-[F1] Aho's cited Lecture 11 lists the problem “do two given CFG's generate the
-same language?” among the undecidable problems for context-free grammars.
+[F1] Aho's cited Lecture 11 lists the problem “do two given CFG's generate the same language?” among the undecidable problems for context-free grammars.
 
 ## Refutation
 

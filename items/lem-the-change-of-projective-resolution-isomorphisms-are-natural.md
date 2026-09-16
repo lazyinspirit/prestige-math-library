@@ -34,16 +34,11 @@ the isomorphisms $\theta_{P,Q}(A)$ are natural in $A$.
 
 **Given:** A morphism $u:A\to B$ and an integer $n$.
 
-[L1] The supplied projective data admit comparison lifts of $u$ on both sides
-([[lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions]]).
+[L1] The supplied projective data admit comparison lifts of $u$ on both sides ([[lem-a-morphism-has-a-comparison-lift-between-the-supplied-projective-resolutions]]).
 
-[L2] The objectwise comparison maps induce isomorphisms on derived objects
-([[lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects]]).
+[L2] The objectwise comparison maps induce isomorphisms on derived objects ([[lem-objectwise-comparison-of-two-projective-resolution-data-induces-an-isomorphism-on-derived-objects]]).
 
-[L3] Two projective comparison maps lifting the same morphism are
-chain-homotopic, and chain-homotopic maps induce the same homology map
-([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]],
-[[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
+[L3] Two projective comparison maps lifting the same morphism are chain-homotopic, and chain-homotopic maps induce the same homology map ([[thm-projective-comparison-maps-are-unique-up-to-chain-homotopy]], [[thm-chain-homotopic-maps-induce-the-same-map-on-homology]]).
 
 ## Proof
 

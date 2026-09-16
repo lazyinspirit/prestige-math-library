@@ -33,21 +33,15 @@ with its coordinate projections.
 
 ## Facts & Assumptions
 
-**Given:** A small category $\mathcal J$ and a diagram
-$D:\mathcal J\to\mathbf{Set}$.
+**Given:** A small category $\mathcal J$ and a diagram $D:\mathcal J\to\mathbf{Set}$.
 
-[F1] A small category has sets of objects and morphisms, and completeness means
-existence of limits for all small diagrams
-([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
+[F1] A small category has sets of objects and morphisms, and completeness means existence of limits for all small diagrams ([[def-small-finite-and-large-limits-completeness-and-cocompleteness]]).
 
-[F2] Sets and functions form $\mathbf{Set}$
-([[prop-sets-and-functions-form-category-set]]).
+[F2] Sets and functions form $\mathbf{Set}$ ([[prop-sets-and-functions-form-category-set]]).
 
-[F3] The product of a set-indexed family consists of functions choosing one
-element from each member ([[def-product-of-an-indexed-family]]).
+[F3] The product of a set-indexed family consists of functions choosing one element from each member ([[def-product-of-an-indexed-family]]).
 
-[F4] A limit requires a unique mediating morphism from every cone
-([[def-limit-and-colimit-of-a-diagram]]).
+[F4] A limit requires a unique mediating morphism from every cone ([[def-limit-and-colimit-of-a-diagram]]).
 
 ## Proof
 

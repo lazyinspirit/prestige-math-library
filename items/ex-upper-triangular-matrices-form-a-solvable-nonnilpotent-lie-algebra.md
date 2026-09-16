@@ -33,11 +33,9 @@ $n\times n$ matrices is solvable but not nilpotent.
 
 **Given:** A field $k$, an integer $n\geq2$, and the standard matrix units.
 
-[L1] Solvability is termination of the derived series
-([[def-derived-series-and-solvable-lie-algebra]]).
+[L1] Solvability is termination of the derived series ([[def-derived-series-and-solvable-lie-algebra]]).
 
-[L2] Nilpotence is termination of the lower central series
-([[def-lower-central-series-and-nilpotent-lie-algebra]]).
+[L2] Nilpotence is termination of the lower central series ([[def-lower-central-series-and-nilpotent-lie-algebra]]).
 
 ## Verification
 

@@ -39,14 +39,11 @@ $\operatorname{Der}(\mathfrak g)/\operatorname{ad}(\mathfrak g)$.
 
 **Given:** A Lie algebra $\mathfrak g$ and a module $M$.
 
-[L1] The CE differential has the declared low-degree formula
-([[def-chevalley-eilenberg-differential]]).
+[L1] The CE differential has the declared low-degree formula ([[def-chevalley-eilenberg-differential]]).
 
-[L2] Cohomology is cocycles modulo coboundaries
-([[def-lie-algebra-cohomology]]).
+[L2] Cohomology is cocycles modulo coboundaries ([[def-lie-algebra-cohomology]]).
 
-[L3] Ordinary derivations obey the Leibniz rule for the adjoint module
-([[def-derivation-of-a-lie-algebra]]).
+[L3] Ordinary derivations obey the Leibniz rule for the adjoint module ([[def-derivation-of-a-lie-algebra]]).
 
 ## Proof
 

@@ -42,12 +42,9 @@ $$\sqrt[\operatorname{Log}] {((-1)(-1))}=1\qquad\text{but}\qquad \sqrt[\operator
 
 ## Facts & Assumptions
 
-**Given:** The principal-logarithm and principal-power conventions of
-[[rem-holomorphic-logarithm-and-principal-power-dictionary]].
+**Given:** The principal-logarithm and principal-power conventions of [[rem-holomorphic-logarithm-and-principal-power-dictionary]].
 
-[F1] The principal logarithm has $\operatorname{Log}(-1)=i\pi$, and branch
-power laws can fail across the cut
-([[rem-holomorphic-logarithm-and-principal-power-dictionary]]).
+[F1] The principal logarithm has $\operatorname{Log}(-1)=i\pi$, and branch power laws can fail across the cut ([[rem-holomorphic-logarithm-and-principal-power-dictionary]]).
 
 ## Verification
 

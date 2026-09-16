@@ -40,9 +40,7 @@ $$ \operatorname{Time}_{S_M}(n)=O((n+T(n))^2). $$
 
 [L1] Every fixed multitape machine has an equivalent deterministic one-tape simulator, by [[thm-multitape-machines-have-one-tape-simulations]].
 
-[L2] On an input $w$, if the fixed multitape machine runs for $t$ steps, the
-standard simulator runs for at most $c_M(|w|+t+1)^2$ steps, by
-[[lem-multitape-simulation-has-quadratic-time-overhead]].
+[L2] On an input $w$, if the fixed multitape machine runs for $t$ steps, the standard simulator runs for at most $c_M(|w|+t+1)^2$ steps, by [[lem-multitape-simulation-has-quadratic-time-overhead]].
 
 [L3] Big-$O$ compares functions up to eventual constant factors, by [[def-asymptotic-resource-comparison]].
 

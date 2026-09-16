@@ -29,17 +29,13 @@ is an isomorphism.
 
 ## Facts & Assumptions
 
-**Given:** A homotopy equivalence $f:X\to Y$, an abelian group $G$, and an
-integer $n\geq 0$.
+**Given:** A homotopy equivalence $f:X\to Y$, an abelian group $G$, and an integer $n\geq 0$.
 
-[L1] A homotopy equivalence has a homotopy inverse $g:Y\to X$
-([[def-homotopy-equivalence]]).
+[L1] A homotopy equivalence has a homotopy inverse $g:Y\to X$ ([[def-homotopy-equivalence]]).
 
-[L2] Singular homology is functorial for identities and composites
-([[prop-singular-chains-and-homology-are-covariantly-functorial]]).
+[L2] Singular homology is functorial for identities and composites ([[prop-singular-chains-and-homology-are-covariantly-functorial]]).
 
-[L3] Homotopic maps induce the same map on singular homology
-([[cor-homotopic-maps-induce-the-same-map-on-singular-homology]]).
+[L3] Homotopic maps induce the same map on singular homology ([[cor-homotopic-maps-induce-the-same-map-on-singular-homology]]).
 
 ## Proof
 

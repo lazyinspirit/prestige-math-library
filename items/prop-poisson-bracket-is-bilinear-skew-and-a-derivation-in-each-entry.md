@@ -33,8 +33,7 @@ $$\{F,GH\}=\{F,G\}H+G\{F,H\},\qquad \{FG,H\}=F\{G,H\}+G\{F,H\}.$$
 
 **Given:** Smooth functions $F,G,H$ on $(M,\omega)$.
 
-[F1] $\{F,G\}=\omega(X_F,X_G)=X_G(F)$.
-[[def-poisson-bracket-on-a-symplectic-manifold]].
+[F1] $\{F,G\}=\omega(X_F,X_G)=X_G(F)$. [[def-poisson-bracket-on-a-symplectic-manifold]].
 
 ## Proof
 

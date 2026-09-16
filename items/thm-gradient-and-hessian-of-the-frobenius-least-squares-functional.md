@@ -38,11 +38,9 @@ map $h\mapsto A^\ast Ah$.
 
 ## Facts & Assumptions
 
-**Given:** A fixed matrix $A$, a fixed vector $b$, a vector $x$, and a
-direction $h$.
+**Given:** A fixed matrix $A$, a fixed vector $b$, a vector $x$, and a direction $h$.
 
-[L1] The quadratic form $x\mapsto \frac12\|Cx\|_2^2$ has gradient $C^\ast Cx$
-and Hessian $C^\ast C$ ([[prop-gradient-of-a-quadratic-matrix-form]]).
+[L1] The quadratic form $x\mapsto \frac12\|Cx\|_2^2$ has gradient $C^\ast Cx$ and Hessian $C^\ast C$ ([[prop-gradient-of-a-quadratic-matrix-form]]).
 
 ## Proof
 **Proof technique:** direct.

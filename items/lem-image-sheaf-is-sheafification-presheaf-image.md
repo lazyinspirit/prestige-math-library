@@ -39,14 +39,11 @@ objectwise image presheaf.
 
 **Given:** A morphism of sheaves $\varphi:\mathcal F\to\mathcal G$.
 
-[F1] A subsheaf is a sheaf whose sections embed objectwise into the ambient
-sheaf ([[def-subsheaf]]).
+[F1] A subsheaf is a sheaf whose sections embed objectwise into the ambient sheaf ([[def-subsheaf]]).
 
-[F2] A morphism of presheaves is a compatible family of component maps
-([[def-morphism-of-presheaves]]).
+[F2] A morphism of presheaves is a compatible family of component maps ([[def-morphism-of-presheaves]]).
 
-[L1] Maps from a presheaf to a sheaf factor uniquely through sheafification
-([[thm-sheafification-universal-property]]).
+[L1] Maps from a presheaf to a sheaf factor uniquely through sheafification ([[thm-sheafification-universal-property]]).
 
 ## Proof
 

@@ -33,10 +33,7 @@ $$\{F,\{G,H\}\}+\{G,\{H,F\}\}+\{H,\{F,G\}\}=0.$$
 
 **Given:** Three smooth functions on a symplectic manifold.
 
-[F1] The bracket is skew and
-$[X_F,X_G]=-X_{\{F,G\}}$.
-[[prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry]],
-[[thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism]].
+[F1] The bracket is skew and $[X_F,X_G]=-X_{\{F,G\}}$. [[prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry]], [[thm-hamiltonian-vector-field-map-is-a-lie-antihomomorphism]].
 
 ## Proof
 

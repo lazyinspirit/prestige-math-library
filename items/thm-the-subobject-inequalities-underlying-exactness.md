@@ -50,22 +50,13 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** The composable pair $A \xrightarrow{f} B \xrightarrow{g} C$, the
-factorization $f = m e$ with $e$ epic and $m$ monic, and the kernel
-$k:K \to B$ of $g$.
+**Given:** The composable pair $A \xrightarrow{f} B \xrightarrow{g} C$, the factorization $f = m e$ with $e$ epic and $m$ monic, and the kernel $k:K \to B$ of $g$.
 
-[L1] Every morphism in an abelian category admits an epimorphism-monomorphism
-factorization, unique up to unique isomorphism
-([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
+[L1] Every morphism in an abelian category admits an epimorphism-monomorphism factorization, unique up to unique isomorphism ([[thm-epimorphism-monomorphism-factorisation-exists-and-is-unique-up-to-unique-isomorphism]]).
 
-[L2] Subobjects are ordered by factorization of monomorphisms, and the image is
-the least subobject through which the morphism factors
-([[def-subobject-and-quotient-object]],
-[[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
+[L2] Subobjects are ordered by factorization of monomorphisms, and the image is the least subobject through which the morphism factors ([[def-subobject-and-quotient-object]], [[thm-the-image-is-the-least-subobject-through-which-a-morphism-factors]]).
 
-[L3] The kernel $k$ satisfies $gk = 0$, and every morphism killed by $g$
-factors uniquely through $k$
-([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
+[L3] The kernel $k$ satisfies $gk = 0$, and every morphism killed by $g$ factors uniquely through $k$ ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
 
 ## Proof
 

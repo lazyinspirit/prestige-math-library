@@ -36,16 +36,11 @@ $\kappa(\lambda;A)=\|x\|_2\|y\|_2$.
 
 ## Facts & Assumptions
 
-**Given:** A simple eigenvalue $\lambda$ of $A$ and compatible nonzero vectors
-$x,y$.
+**Given:** A simple eigenvalue $\lambda$ of $A$ and compatible nonzero vectors $x,y$.
 
-[F1] The condition number is
-$\kappa(\lambda;A)=\sup_{\|H\|_2=1}|D\lambda(A)[H]|$
-([[def-condition-number-of-a-simple-eigenvalue]]).
+[F1] The condition number is $\kappa(\lambda;A)=\sup_{\|H\|_2=1}|D\lambda(A)[H]|$ ([[def-condition-number-of-a-simple-eigenvalue]]).
 
-[L1] For any differentiable branch normalized by $y^\ast x=1$,
-$D\lambda(A)[H]=y^\ast Hx$
-([[thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x]]).
+[L1] For any differentiable branch normalized by $y^\ast x=1$, $D\lambda(A)[H]=y^\ast Hx$ ([[thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x]]).
 
 ## Proof
 **Proof technique:** direct.

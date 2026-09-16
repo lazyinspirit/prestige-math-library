@@ -77,16 +77,8 @@ cardinality as the whole is the whole", and neither survives without it.
 
 ## Remarks
 
-- **A set for which the statement fails is called Dedekind-infinite**, and the
-  refutation above exhibits $\mathbb{N}$ as one. Claim 5 of [[lem-pigeonhole]] says that no
-  natural number is Dedekind-infinite, which is the finite half of the same
-  picture.
+- **A set for which the statement fails is called Dedekind-infinite**, and the refutation above exhibits $\mathbb{N}$ as one. Claim 5 of [[lem-pigeonhole]] says that no natural number is Dedekind-infinite, which is the finite half of the same picture.
 
-- **The relation between the two notions of infinity** — "not finite" and
-  "Dedekind-infinite" — is a genuine question of set theory without choice, and
-  it is treated on the countability page rather than here.
+- **The relation between the two notions of infinity** — "not finite" and "Dedekind-infinite" — is a genuine question of set theory without choice, and it is treated on the countability page rather than here.
 
-- **The surjective half fails too.** The map $\mathbb{N} \to \mathbb{N}$ sending
-  $0$ and $1$ to $0$ and $n \ge 2$ to $n-1$ is surjective and not injective, so
-  neither half of clause 4 of [[thm-subset-of-a-finite-set]] survives the loss of
-  finiteness.
+- **The surjective half fails too.** The map $\mathbb{N} \to \mathbb{N}$ sending $0$ and $1$ to $0$ and $n \ge 2$ to $n-1$ is surjective and not injective, so neither half of clause 4 of [[thm-subset-of-a-finite-set]] survives the loss of finiteness.

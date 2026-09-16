@@ -39,27 +39,17 @@ provable in ZF.
 
 **Given:** A set-theoretic tree $(T,<_T)$.
 
-[F1] A tree is special exactly when it is a countable union of antichains; a
-strictly increasing rational labeling implies specialness. Empty and singleton
-trees are special. [[def-aronszajn-suslin-and-special-tree]]
+[F1] A tree is special exactly when it is a countable union of antichains; a strictly increasing rational labeling implies specialness. Empty and singleton trees are special. [[def-aronszajn-suslin-and-special-tree]]
 
-[F2] A nonempty set is at most countable exactly when it is the range of a
-surjection from $\mathbb N$, and every subset of an at most countable set is at
-most countable. [[def-countable]], [[lem-countable-iff-surjection-from-n]],
-[[lem-subset-of-countable]]
+[F2] A nonempty set is at most countable exactly when it is the range of a surjection from $\mathbb N$, and every subset of an at most countable set is at most countable. [[def-countable]], [[lem-countable-iff-surjection-from-n]], [[lem-subset-of-countable]]
 
-[F3] Natural recursion and induction construct and verify finite lists and their
-length-by-length enumeration. [[thm-recursion]], [[thm-induction-principle]]
+[F3] Natural recursion and induction construct and verify finite lists and their length-by-length enumeration. [[thm-recursion]], [[thm-induction-principle]]
 
-[F4] Every nonempty subset of $\mathbb N$ has a least element.
-[[thm-well-ordering-principle]]
+[F4] Every nonempty subset of $\mathbb N$ has a least element. [[thm-well-ordering-principle]]
 
-[F5] Every at most countable linear order has a strictly order-preserving
-injection into $\mathbb Q$.
-[[thm-every-countable-linear-order-embeds-in-the-rationals]]
+[F5] Every at most countable linear order has a strictly order-preserving injection into $\mathbb Q$. [[thm-every-countable-linear-order-embeds-in-the-rationals]]
 
-[F6] A linear order is a partial order in which every two elements are
-comparable. [[def-partial-order]]
+[F6] A linear order is a partial order in which every two elements are comparable. [[def-partial-order]]
 
 ## Proof
 
@@ -77,10 +67,5 @@ comparable. [[def-partial-order]]
 
 ## Remarks
 
-- The required first-difference bound is $p\le c(t)$, not in general
-  $p\le\min(c(s),c(t))$. For example, if $c(s)=0<c(t)=1$ and there are no
-  earlier colors, the first difference can occur at coordinate $1$. The proof
-  above supplies the missing derivation of $p\le c(t)$ in Monk's second case.
-- Injectivity of $t\mapsto g_t$ is neither claimed nor needed: step 2.1 proves
-  distinct codes precisely for comparable distinct nodes, which is exactly what
-  the rational specialization requires.
+- The required first-difference bound is $p\le c(t)$, not in general $p\le\min(c(s),c(t))$. For example, if $c(s)=0<c(t)=1$ and there are no earlier colors, the first difference can occur at coordinate $1$. The proof above supplies the missing derivation of $p\le c(t)$ in Monk's second case.
+- Injectivity of $t\mapsto g_t$ is neither claimed nor needed: step 2.1 proves distinct codes precisely for comparable distinct nodes, which is exactly what the rational specialization requires.

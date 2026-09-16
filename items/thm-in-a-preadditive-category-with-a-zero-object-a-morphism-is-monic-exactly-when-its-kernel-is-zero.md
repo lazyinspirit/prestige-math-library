@@ -36,22 +36,17 @@ morphism into $A$.
 
 ## Facts & Assumptions
 
-**Given:** A morphism $f:A\to B$ with kernel $k:K\to A$ in a preadditive
-category with a zero object.
+**Given:** A morphism $f:A\to B$ with kernel $k:K\to A$ in a preadditive category with a zero object.
 
 [L1] Monic means left-cancellable ([[def-monomorphism-and-epimorphism]]).
 
-[L2] A kernel is an equalizer of $f$ and the zero morphism
-([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
+[L2] A kernel is an equalizer of $f$ and the zero morphism ([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).
 
-[L3] In this setting, the published zero morphism is the additive identity of
-the hom-group ([[prop-the-zero-morphism-of-a-preadditive-category-is-the-neutral-element-of-its-hom-group]]).
+[L3] In this setting, the published zero morphism is the additive identity of the hom-group ([[prop-the-zero-morphism-of-a-preadditive-category-is-the-neutral-element-of-its-hom-group]]).
 
-[L4] In a preadditive category, initial and terminal objects coincide
-([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
+[L4] In a preadditive category, initial and terminal objects coincide ([[thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal]]).
 
-[L5] Hom-sets in a preadditive category are abelian groups
-([[def-preadditive-category]]).
+[L5] Hom-sets in a preadditive category are abelian groups ([[def-preadditive-category]]).
 
 ## Proof
 

@@ -78,21 +78,6 @@ See the first remark below.
 
 ## Remarks
 
-- **Neither implication reverses, and the witnesses are on the companion page.**
-  On $(0,\infty)$ the metrics $|x-y|$ and $|1/x - 1/y|$ have the same topology
-  and are not uniformly equivalent
-  ([[cex-topologically-not-uniformly-equivalent]]); on $\mathbb{R}$ the metrics
-  $|x-y|$ and $\min\{|x-y|,1\}$ are uniformly equivalent and not Lipschitz
-  equivalent ([[cex-uniformly-not-lipschitz-equivalent]]). Those two items are
-  read here as orientation only: this theorem does not depend on them, and its
-  statement claims nothing about strictness.
-- **Uniform equivalence is strictly more than "both identities are
-  continuous".** Continuity of both identity maps is exactly topological
-  equivalence, by the argument of step 2.1 read in reverse; uniform equivalence
-  additionally demands that one $\delta$ serve at every point at once, and that
-  is the whole difference between the two conditions.
-- **What each level preserves.** Lipschitz equivalence preserves boundedness and
-  changes diameters by at most a constant factor; uniform equivalence preserves
-  Cauchy sequences and uniform continuity, notions taken up on a later page and
-  not defined here; topological equivalence preserves the open sets and
-  everything defined from them, and nothing else.
+- **Neither implication reverses, and the witnesses are on the companion page.** On $(0,\infty)$ the metrics $|x-y|$ and $|1/x - 1/y|$ have the same topology and are not uniformly equivalent ([[cex-topologically-not-uniformly-equivalent]]); on $\mathbb{R}$ the metrics $|x-y|$ and $\min\{|x-y|,1\}$ are uniformly equivalent and not Lipschitz equivalent ([[cex-uniformly-not-lipschitz-equivalent]]). Those two items are read here as orientation only: this theorem does not depend on them, and its statement claims nothing about strictness.
+- **Uniform equivalence is strictly more than "both identities are continuous".** Continuity of both identity maps is exactly topological equivalence, by the argument of step 2.1 read in reverse; uniform equivalence additionally demands that one $\delta$ serve at every point at once, and that is the whole difference between the two conditions.
+- **What each level preserves.** Lipschitz equivalence preserves boundedness and changes diameters by at most a constant factor; uniform equivalence preserves Cauchy sequences and uniform continuity, notions taken up on a later page and not defined here; topological equivalence preserves the open sets and everything defined from them, and nothing else.

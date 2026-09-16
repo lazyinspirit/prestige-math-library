@@ -37,5 +37,4 @@ $$\int f_n\,d\mu\downarrow\int f\,d\mu.$$
 1.1 The functions $f_n$ decrease pointwise to $0$. [given]
 
 2.1 But $\int f_n\,d\lambda=+\infty$ for every $n$, while $\int0\,d\lambda=0$. [step 1.1, L1, algebra] ∎
-So the displayed conclusion fails, confirming the directionality recorded in
-[L1].
+So the displayed conclusion fails, confirming the directionality recorded in [L1].

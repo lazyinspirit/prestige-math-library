@@ -39,9 +39,7 @@ at least $\eta|V(G)|$.
 
 **Given:** An $\eta$-sparse $P_5$-free graph $G$ with $|V(G)|\ge \eta^{-1}$.
 
-[L1] Lemma 4.4 of the cited source proves exactly the displayed conclusion for
-$\eta=2^{-5}$, using repeated large-component consequences of the failure of
-the desired anticomplete blockade.
+[L1] Lemma 4.4 of the cited source proves exactly the displayed conclusion for $\eta=2^{-5}$, using repeated large-component consequences of the failure of the desired anticomplete blockade.
 
 ## Proof
 

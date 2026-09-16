@@ -94,21 +94,8 @@ principle is used, the factors of $B$ being given by a formula.
 
 ## Remarks
 
-- **What is true is the inclusion, in one direction only.** The box topology is
-  always finer than the product topology, and the two agree whenever the index
-  set is finite ([[thm-box-finer-than-product]], claims 1 and 2); it is only the
-  converse inclusion for infinite index sets that fails, and the box above is the
-  cheapest witness of the failure.
+- **What is true is the inclusion, in one direction only.** The box topology is always finer than the product topology, and the two agree whenever the index set is finite ([[thm-box-finer-than-product]], claims 1 and 2); it is only the converse inclusion for infinite index sets that fails, and the box above is the cheapest witness of the failure.
 
-- **The failure is not an artefact of $\mathbb{R}$.** Claim 3 of
-  [[thm-box-finer-than-product]] shows that any infinite family of nonempty
-  factors, infinitely many of which have an open subset that is neither empty nor
-  everything, produces the same separation. The real line is used here only
-  because its open intervals are written down without effort.
+- **The failure is not an artefact of $\mathbb{R}$.** Claim 3 of [[thm-box-finer-than-product]] shows that any infinite family of nonempty factors, infinitely many of which have an open subset that is neither empty nor everything, produces the same separation. The real line is used here only because its open intervals are written down without effort.
 
-- **The practical consequence is the failure of the characteristic property.**
-  A map into a box-topologised product can have every component continuous and
-  still fail to be continuous; the diagonal of $\mathbb{R}^{\mathbb{N}}$ does
-  exactly that, and it is worked on the companion page as
-  [[cex-box-topology-diagonal-not-continuous]]. That is why the product topology,
-  and not the box topology, is what $\prod_i X_i$ carries by default.
+- **The practical consequence is the failure of the characteristic property.** A map into a box-topologised product can have every component continuous and still fail to be continuous; the diagonal of $\mathbb{R}^{\mathbb{N}}$ does exactly that, and it is worked on the companion page as [[cex-box-topology-diagonal-not-continuous]]. That is why the product topology, and not the box topology, is what $\prod_i X_i$ carries by default.

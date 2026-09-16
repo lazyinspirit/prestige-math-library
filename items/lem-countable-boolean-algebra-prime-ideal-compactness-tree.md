@@ -36,15 +36,11 @@ set of requirements has a valuation in $\mathbf2$ satisfying it.
 
 ## Facts & Assumptions
 
-**Given:** A nontrivial Boolean algebra $B$ and a specified surjection
-$b:\omega\to B$.
+**Given:** A nontrivial Boolean algebra $B$ and a specified surjection $b:\omega\to B$.
 
-[F1] Homomorphisms on finite generated subalgebras are finite partial
-prime-ideal diagrams, and their zero fibres are prime on those subalgebras.
-[[def-finite-partial-prime-ideal-diagrams]]
+[F1] Homomorphisms on finite generated subalgebras are finite partial prime-ideal diagrams, and their zero fibres are prime on those subalgebras. [[def-finite-partial-prime-ideal-diagrams]]
 
-[F2] Every such finite homomorphism extends across a larger finite generated
-subalgebra in ZF. [[lem-finite-partial-prime-ideal-extension]]
+[F2] Every such finite homomorphism extends across a larger finite generated subalgebra in ZF. [[lem-finite-partial-prime-ideal-extension]]
 
 ## Proof
 

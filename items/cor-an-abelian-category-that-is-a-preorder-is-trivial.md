@@ -32,11 +32,9 @@ zero object. In particular it is equivalent to the terminal one-object category.
 
 **Given:** An abelian category $\mathcal A$ that is also a preorder.
 
-[L1] In a preorder there is at most one morphism between any two fixed objects
-([[def-preorder]]).
+[L1] In a preorder there is at most one morphism between any two fixed objects ([[def-preorder]]).
 
-[L2] Abelian categories have a zero object and are balanced
-([[def-abelian-category]], [[thm-an-abelian-category-is-balanced]]).
+[L2] Abelian categories have a zero object and are balanced ([[def-abelian-category]], [[thm-an-abelian-category-is-balanced]]).
 
 ## Proof
 

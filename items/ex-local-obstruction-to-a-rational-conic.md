@@ -35,8 +35,7 @@ has no $\mathbb Q_3$-point, and therefore no rational point.
 
 ## Facts & Assumptions
 
-**Given:** The ternary Hilbert-symbol criterion
-([[cor-ternary-isotropy-via-hilbert-symbol]]).
+**Given:** The ternary Hilbert-symbol criterion ([[cor-ternary-isotropy-via-hilbert-symbol]]).
 
 ## Verification
 

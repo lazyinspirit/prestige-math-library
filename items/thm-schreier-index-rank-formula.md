@@ -33,17 +33,13 @@ $$\operatorname{rank}(H)=1+d(n-1).$$
 
 ## Facts & Assumptions
 
-**Given:** A free group $F$ of finite rank $n$ and a finite-index subgroup
-$H\le F$ with $[F:H]=d$.
+**Given:** A free group $F$ of finite rank $n$ and a finite-index subgroup $H\le F$ with $[F:H]=d$.
 
-[L1] A finite-rank free group has a free basis with $n$ elements
-([[def-rank-of-a-finite-rank-free-group]]).
+[L1] A finite-rank free group has a free basis with $n$ elements ([[def-rank-of-a-finite-rank-free-group]]).
 
-[L2] Rooted spanning trees in the Schreier graph correspond to Schreier systems
-([[lem-spanning-trees-and-schreier-systems-correspond]]).
+[L2] Rooted spanning trees in the Schreier graph correspond to Schreier systems ([[lem-spanning-trees-and-schreier-systems-correspond]]).
 
-[L3] For any Schreier system, the nontrivial Schreier generators form a free
-basis of the subgroup ([[thm-nielsen-schreier-with-an-explicit-basis]]).
+[L3] For any Schreier system, the nontrivial Schreier generators form a free basis of the subgroup ([[thm-nielsen-schreier-with-an-explicit-basis]]).
 
 ## Proof
 

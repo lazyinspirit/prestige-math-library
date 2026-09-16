@@ -31,18 +31,13 @@ machine using $O(\log^2(n+2))$ work cells.
 
 [L1] The local work-space convention charges work cells but not read-only input cells ([[def-read-only-input-workspace-classes]]).
 
-[L2] The number of configurations reachable from the start configuration is
-polynomial in $n$ ([[lem-logspace-machines-have-polynomially-many-configurations]]).
+[L2] The number of configurations reachable from the start configuration is polynomial in $n$ ([[lem-logspace-machines-have-polynomially-many-configurations]]).
 
 ## Proof
 
 **Proof technique:** midpoint reachability recursion.
 
-1.1 On input $x$, encode a configuration by its state, input-head position,
-work contents, and work-head positions. There are only polynomially many
-syntactically possible encodings, by the same finite product count used in
-[L2]. Choose $r=O(\log(n+2))$ with $2^r$ at least that number. [L2,
-construct]
+1.1 On input $x$, encode a configuration by its state, input-head position, work contents, and work-head positions. There are only polynomially many syntactically possible encodings, by the same finite product count used in [L2]. Choose $r=O(\log(n+2))$ with $2^r$ at least that number. [L2, construct]
 
 2.1 Define $R(C,D,0)$ to test whether $C=D$ or $C\to D$ is one legal transition, and define $R(C,D,j+1)$ by enumerating every configuration $E$ and accepting exactly if both $R(C,E,j)$ and $R(E,D,j)$ hold. Induction on $j$ shows that it decides reachability by a path of length at most $2^j$. [step 1.1, induction]
 

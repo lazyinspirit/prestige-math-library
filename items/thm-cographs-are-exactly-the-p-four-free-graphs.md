@@ -45,38 +45,19 @@ A finite graph is a cograph if and only if it is $P_4$-free.
 
 **Given:** A finite graph $G$.
 
-[L1] Every induced subgraph of a cograph is a cograph
-([[lem-induced-subgraphs-of-cographs-are-cographs]]).
+[L1] Every induced subgraph of a cograph is a cograph ([[lem-induced-subgraphs-of-cographs-are-cographs]]).
 
-[L2] Every nontrivial cograph is disconnected or has disconnected complement
-([[thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement]]).
+[L2] Every nontrivial cograph is disconnected or has disconnected complement ([[thm-every-nontrivial-cograph-is-disconnected-or-has-disconnected-complement]]).
 
-[L3] The four-vertex path $P_4$ has vertices $0,1,2,3$ and edges
-$01,12,23$, and its complement has edges $02,03,13$. Hence both $P_4$ and
-$\overline{P_4}$ are connected
-([[def-standard-complete-bipartite-path-and-cycle-graphs]],
-[[def-connected-graph-and-connected-component]],
-[[def-graph-isomorphism-and-complement]]).
+[L3] The four-vertex path $P_4$ has vertices $0,1,2,3$ and edges $01,12,23$, and its complement has edges $02,03,13$. Hence both $P_4$ and $\overline{P_4}$ are connected ([[def-standard-complete-bipartite-path-and-cycle-graphs]], [[def-connected-graph-and-connected-component]], [[def-graph-isomorphism-and-complement]]).
 
-[L4] Every nontrivial $P_4$-free graph is disconnected or its complement is
-disconnected
-([[thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected]]).
+[L4] Every nontrivial $P_4$-free graph is disconnected or its complement is disconnected ([[thm-nontrivial-p-four-free-graphs-are-disconnected-or-their-complements-are-disconnected]]).
 
-[L5] Connected components partition the vertex set, anticomponents do too,
-distinct components are anticomplete, and distinct anticomponents are complete
-([[cor-connected-components-partition-the-vertex-set]],
-[[lem-anticonnected-components-are-complement-components]],
-[[lem-components-are-anticomplete-and-anticomponents-complete]]).
+[L5] Connected components partition the vertex set, anticomponents do too, distinct components are anticomplete, and distinct anticomponents are complete ([[cor-connected-components-partition-the-vertex-set]], [[lem-anticonnected-components-are-complement-components]], [[lem-components-are-anticomplete-and-anticomponents-complete]]).
 
-[F1] A graph is $P_4$-free when it contains no induced copy of the path $P_4$
-([[def-h-free-and-family-free-graph]],
-[[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+[F1] A graph is $P_4$-free when it contains no induced copy of the path $P_4$ ([[def-h-free-and-family-free-graph]], [[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
-[F2] Every induced subgraph of a $P_4$-free graph is again $P_4$-free, because
-an induced copy inside an induced subgraph is also an induced copy in the whole
-graph
-([[def-h-free-and-family-free-graph]],
-[[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
+[F2] Every induced subgraph of a $P_4$-free graph is again $P_4$-free, because an induced copy inside an induced subgraph is also an induced copy in the whole graph ([[def-h-free-and-family-free-graph]], [[def-subgraph-induced-subgraph-and-spanning-subgraph]]).
 
 ## Proof
 

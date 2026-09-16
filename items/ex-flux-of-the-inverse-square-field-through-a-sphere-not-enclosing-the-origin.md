@@ -65,9 +65,7 @@ $B=\{(x,y,z):(x^2+y^2+(z-2)^2)\le1\}$ is $0$.
 
 **Proof technique:** direct.
 
-1.1 Put $s(x,y,z)=x^2+y^2+z^2$, which is positive and continuous on $U$ by [L7]. The $i$th component of $F$ is $F_i=x_i s^{-3/2}$. By the product and chain rules [L3, L4], the positive-base power rule [L6], and the coordinate interpretation of partial derivatives [F2], every coordinate partial derivative is
-$$\partial_jF_i=\begin{cases}s^{-3/2}-3x_i^2s^{-5/2},&j=i,\\-3x_ix_js^{-5/2},&j\ne i.\end{cases}$$
-The coordinate projections are continuous by [L7], so $s$ is continuous; because $s>0$ on $U$, [L6] and [L7] make every function in the displayed formulas continuous there. Hence $F$ is $C^1$ on $U$. [L3, L4, L6, L7, F2, F3, given]
+1.1 Put $s(x,y,z)=x^2+y^2+z^2$, which is positive and continuous on $U$ by [L7]. The $i$th component of $F$ is $F_i=x_i s^{-3/2}$. By the product and chain rules [L3, L4], the positive-base power rule [L6], and the coordinate interpretation of partial derivatives [F2], every coordinate partial derivative is $$\partial_jF_i=\begin{cases}s^{-3/2}-3x_i^2s^{-5/2},&j=i,\\-3x_ix_js^{-5/2},&j\ne i.\end{cases}$$ The coordinate projections are continuous by [L7], so $s$ is continuous; because $s>0$ on $U$, [L6] and [L7] make every function in the displayed formulas continuous there. Hence $F$ is $C^1$ on $U$. [L3, L4, L6, L7, F2, F3, given]
 
 1.2 Translating the octant presentation of the unit ball by $(0,0,2)$ gives an elementary solid region presentation of $B$, because translation adds a constant to each patch and changes no derivative. [L2, F4, given]
 

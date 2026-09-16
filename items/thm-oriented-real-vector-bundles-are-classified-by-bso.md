@@ -38,17 +38,11 @@ singletons.
 
 **Given:** AC, a paracompact Hausdorff CGWH space $X$, and $n\geq0$.
 
-[F1] Under AC, numerable real rank-$n$ bundles over $X$ have countable
-Grassmannian embeddings and are classified by their stable Gauss maps
-([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
+[F1] Under AC, numerable real rank-$n$ bundles over $X$ have countable Grassmannian embeddings and are classified by their stable Gauss maps ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]).
 
-[F2] With a metric, an orientation is equivalent to an
-$\operatorname{SO}(n)$ reduction
-([[prop-orientation-is-equivalent-to-an-so-n-reduction]]).
+[F2] With a metric, an orientation is equivalent to an $\operatorname{SO}(n)$ reduction ([[prop-orientation-is-equivalent-to-an-so-n-reduction]]).
 
-[F3] The oriented Grassmannian carries the tautological oriented bundle and
-is the chosen $B\operatorname{SO}(n)$ model
-([[def-oriented-grassmannian-and-tautological-oriented-bundle]]).
+[F3] The oriented Grassmannian carries the tautological oriented bundle and is the chosen $B\operatorname{SO}(n)$ model ([[def-oriented-grassmannian-and-tautological-oriented-bundle]]).
 
 [A1] AC has the meaning fixed in [[def-axiom-of-choice]].
 

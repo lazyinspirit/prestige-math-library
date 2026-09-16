@@ -35,17 +35,13 @@ $\operatorname{cf}(\kappa)=\omega$ and is therefore singular.
 
 **Given:** The completed Gitik symmetric model.
 
-[F1] [[thm-gitik-symmetric-submodel-satisfies-zf]]: $N_G$ satisfies ZF, without
-assuming Choice.
+[F1] [[thm-gitik-symmetric-submodel-satisfies-zf]]: $N_G$ satisfies ZF, without assuming Choice.
 
-[F2] [[thm-cardinal-arithmetic-agrees-with-finite-counting]]: In ZF every
-infinite cardinal, viewed as an initial ordinal, is a limit ordinal.
+[F2] [[thm-cardinal-arithmetic-agrees-with-finite-counting]]: In ZF every infinite cardinal, viewed as an initial ordinal, is a limit ordinal.
 
-[F3] [[thm-gitik-every-limit-ordinal-has-cofinality-omega]]: Every nonzero
-limit ordinal of $N_G$ has cofinality $\omega$.
+[F3] [[thm-gitik-every-limit-ordinal-has-cofinality-omega]]: Every nonzero limit ordinal of $N_G$ has cofinality $\omega$.
 
-[F4] [[def-cardinal]] and [[def-cofinality]]: An infinite cardinal is singular
-exactly when its cofinality differs from the cardinal.
+[F4] [[def-cardinal]] and [[def-cofinality]]: An infinite cardinal is singular exactly when its cofinality differs from the cardinal.
 
 ## Proof
 

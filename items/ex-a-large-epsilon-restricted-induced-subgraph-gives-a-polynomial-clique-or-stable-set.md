@@ -38,17 +38,9 @@ $|G|^{1/42}=4$.
 
 **Given:** The data in the Example.
 
-[L1] An $\epsilon$-restricted set is $\epsilon$-sparse in one of $G$ and
-$\overline G$, and complementation swaps cliques with stable sets
-([[def-c-sparse-and-c-restricted-vertex-set]],
-[[lem-restrictedness-is-complement-invariant]],
-[[lem-complement-swaps-cliques-and-stable-sets]]).
+[L1] An $\epsilon$-restricted set is $\epsilon$-sparse in one of $G$ and $\overline G$, and complementation swaps cliques with stable sets ([[def-c-sparse-and-c-restricted-vertex-set]], [[lem-restrictedness-is-complement-invariant]], [[lem-complement-swaps-cliques-and-stable-sets]]).
 
-[L2] For a nonempty $\epsilon$-sparse graph $H$,
-$$
-\chi(H)\le \epsilon|H|+1,\qquad |H|\le \chi(H)\alpha(H)
-$$
-([[lem-greedy-colouring-bound]], [[thm-clique-independence-chromatic-bounds]]).
+[L2] For a nonempty $\epsilon$-sparse graph $H$, $$ \chi(H)\le \epsilon|H|+1,\qquad |H|\le \chi(H)\alpha(H) $$ ([[lem-greedy-colouring-bound]], [[thm-clique-independence-chromatic-bounds]]).
 
 ## Verification
 

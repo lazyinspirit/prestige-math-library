@@ -28,8 +28,7 @@ $\mathbf{Vect}_k$.
 
 **Given:** The infinite-dimensional vector space $k[x]$.
 
-[L1] The earlier counterexample already proves that this space has no dual
-object ([[cex-not-every-monoidal-category-is-rigid]]).
+[L1] The earlier counterexample already proves that this space has no dual object ([[cex-not-every-monoidal-category-is-rigid]]).
 
 ## Counterexample
 

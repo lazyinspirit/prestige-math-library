@@ -34,8 +34,7 @@ length at least $\sqrt t$ and of width at least the width of $\mathcal{B}$.
 
 ## Facts & Assumptions
 
-**Given:** A pure blockade $\mathcal{B}=(B_1,\dots,B_t)$ with $P_4$-free pattern
-graph $P(\mathcal{B})$.
+**Given:** A pure blockade $\mathcal{B}=(B_1,\dots,B_t)$ with $P_4$-free pattern graph $P(\mathcal{B})$.
 
 ## Proof
 

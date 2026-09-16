@@ -34,15 +34,11 @@ $$[X_F,X_G]=-X_{\{F,G\}}.$$
 
 **Given:** Smooth functions $F,G$ on $(M,\omega)$.
 
-[F1] $X_F$ is symplectic, so $\mathcal L_{X_F}\omega=0$.
-[[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
+[F1] $X_F$ is symplectic, so $\mathcal L_{X_F}\omega=0$. [[prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed]].
 
-[F2] Cartan calculus gives
-$\iota_{[X,Y]}=\mathcal L_X\iota_Y-\iota_Y\mathcal L_X$.
-[[prop-cartan-commutator-identities]].
+[F2] Cartan calculus gives $\iota_{[X,Y]}=\mathcal L_X\iota_Y-\iota_Y\mathcal L_X$. [[prop-cartan-commutator-identities]].
 
-[F3] $X_F(G)=-\{F,G\}$ in the library convention.
-[[def-poisson-bracket-on-a-symplectic-manifold]].
+[F3] $X_F(G)=-\{F,G\}$ in the library convention. [[def-poisson-bracket-on-a-symplectic-manifold]].
 
 ## Proof
 

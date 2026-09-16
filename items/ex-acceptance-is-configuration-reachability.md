@@ -42,12 +42,9 @@ cell $0$.
 
 ## Facts & Assumptions
 
-**Given:** The machine and input just described, with vertices
-$C_0,C_{\mathrm{acc}},C_L$ in its configuration graph.
+**Given:** The machine and input just described, with vertices $C_0,C_{\mathrm{acc}},C_L$ in its configuration graph.
 
-[L1] A machine accepts an input if and only if some accepting configuration is
-reachable from the initial configuration in its configuration graph, by
-[[lem-acceptance-is-configuration-reachability]].
+[L1] A machine accepts an input if and only if some accepting configuration is reachable from the initial configuration in its configuration graph, by [[lem-acceptance-is-configuration-reachability]].
 
 ## Verification
 
