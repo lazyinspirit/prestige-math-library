@@ -44,9 +44,9 @@ original evidence, creates no model-success receipts, and runs current gates
 before fresh cross-group closure and judgment.
 
 The active model boundary is stage-owned: Step 1 scaffolding, Step 5a readers
-and Step 5a refuters use Sol high; both Step 3 audit/author phases and Step 5a
-adjudication use Sol xhigh; Step 5b, Step 6 group readers and Step 9 agent
-closure use DeepSeek V4.1 Flash max. DeepSeek dispatches require the
+and Step 5a refuters use Sol high; Step 3a pair scope and Step 5a adjudication
+use Sol xhigh; Step 3b pair authoring, Step 5b, Step 6 group readers and Step 9
+agent closure use DeepSeek V4.1 Flash max. DeepSeek dispatches require the
 repository's single-tool live web bridge. It prefers Tavily and falls back to
 Firecrawl when Tavily is not configured. Deterministic tool plans remain
 model-free.

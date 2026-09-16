@@ -51,7 +51,7 @@ const ROLES = Object.freeze({
   alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'Sol-high group Alpha, <=3 batches each; nine groups cover the 27-batch ceiling' },
   // Assignment is validated mechanically. All roles retain source access.
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
-  // Step 3 selects Sol-xhigh for this pair-author lane; later stages
+  // Step 3b selects DeepSeek-Flash-max for this pair-author lane; later stages
   // select their own explicit profile when reusing it for pathway prose.
   // Twelve slots let an owner-authorized three-lead/nine-helper partition run
   // concurrently. File ownership and lead-only shared-file writes still

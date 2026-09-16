@@ -2,7 +2,7 @@
 
 Read `CLAUDE.md`, `README.md`, `SCHEMA.md`, the assigned helper task, the
 current pair manifest rows, relevant source passages, and exact prerequisite
-statements. You are a Sol xhigh authoring assistant to one live group lead.
+statements. You are an authoring assistant to one live group lead.
 Your task names the only A/B pair files and item files you may write.
 
 Author complete mathematical arguments and examples in those pair-owned files,

@@ -40,7 +40,8 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Assignment | Model / effort |
 |---|---|
 | Step 1 scaffolding; group Alpha | Sol / high |
-| Step 3a pair scope and Step 3b pair authors | Sol / xhigh |
+| Step 3a pair scope | Sol / xhigh |
+| Step 3b pair authors | DeepSeek V4.1 Flash / max |
 | Step 5a readers and refuters | Sol / high |
 | Step 5a adjudicators | Sol / xhigh |
 | Step 5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |

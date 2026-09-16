@@ -62,14 +62,14 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3 authors and Step 5a adjudicators use Sol xhigh while Step 5b and Step 6 readers use DeepSeek Flash max', () => {
+test('Step 3b authors use DeepSeek Flash max while Step 3a scope and Step 5a adjudication use Sol xhigh', () => {
   const authorStage = stage('3b-author');
   const author = { role: 'alpha-high', job: 'authoring' };
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.solXHigh);
+  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.deepseekFlashMax);
   assert.equal(selected(authorStage, {
     role: 'beta', job: 'authoring', label: 'author-recover-1-1',
-  }), MODEL_PROFILE_NAMES.solXHigh, 'Step 3 recovery authors use the same profile');
-  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.solXHigh);
+  }), MODEL_PROFILE_NAMES.deepseekFlashMax, 'Step 3 recovery authors use the same profile');
+  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
   const adjudicate = stage('5a-adjudicate');
   assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solXHigh);
@@ -119,13 +119,15 @@ test('group Alpha resolves to Sol high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step-3 scope and item adjudication use Sol xhigh', () => {
-  for (const id of ['3a-scope', '3b-author']) {
-    const profile = MODEL_PROFILES[stage(id).modelProfile];
-    assert.equal(profile.model, MODELS.sol.id);
-    assert.equal(profile.effort, 'xhigh');
-    assert.equal(profile.requestedEffort, 'xhigh');
-  }
+test('Step-3 scope uses Sol xhigh and Step-3 authoring uses DeepSeek Flash max', () => {
+  const scope = MODEL_PROFILES[stage('3a-scope').modelProfile];
+  assert.equal(scope.model, MODELS.sol.id);
+  assert.equal(scope.effort, 'xhigh');
+  assert.equal(scope.requestedEffort, 'xhigh');
+  const author = MODEL_PROFILES[stage('3b-author').modelProfile];
+  assert.equal(author.model, MODELS.deepseekFlash.id);
+  assert.equal(author.effort, 'max');
+  assert.equal(author.requestedEffort, 'max');
 });
 
 test('Step-7 fatal group adjudicator uses Sol xhigh', () => {
