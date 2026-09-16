@@ -45,7 +45,8 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 5a readers and refuters | Sol / high |
 | Step 5a adjudicators | Sol / xhigh |
 | Step 5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
-| Assignment; ordinary Step 8 work | Terra / high |
+| Assignment | DeepSeek V4.1 Flash / max |
+| Ordinary Step 8 work | Terra / high |
 | Item judges | Terra / xhigh |
 | Step 7 adjudication | Sol / xhigh |
 | Step 7 final adjudication; Step 8 lead | Astra / medium |

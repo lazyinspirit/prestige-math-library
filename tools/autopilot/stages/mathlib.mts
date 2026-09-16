@@ -1865,6 +1865,7 @@ export const stages = [
     // days ago. Not written through `resultPattern`, which takes one role.
     pattern: /^alpha-(?:assign-)?assign\.result\.json$/,
     artifacts: (ctx) => `research/${ctx.run}-alpha-groups.json`,
+    modelProfile: DEEPSEEK_FLASH_MAX,
     concurrency: 1,
     plan: (ctx) => [{
       role: 'alpha-assign',

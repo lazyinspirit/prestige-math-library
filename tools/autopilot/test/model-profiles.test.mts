@@ -110,6 +110,8 @@ test('Step 1 scaffolders use DeepSeek Flash max', () => {
 });
 
 test('group Alpha resolves to Sol high', () => {
+  assert.equal(stage('2-assign').modelProfile, MODEL_PROFILE_NAMES.deepseekFlashMax,
+    'batch assignment runs on the DeepSeek Flash lane');
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'alpha', '--brief', 'briefs/alpha.md', '--label', 'alpha-model-test',
     '--run', 'alpha-model-test', '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
