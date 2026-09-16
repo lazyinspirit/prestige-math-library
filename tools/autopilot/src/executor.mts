@@ -2058,55 +2058,66 @@ export class Executor {
     for (;;) {
       if (this.signal?.aborted) return 'aborted';
       const version = this.stateVersion;
-      // A DATA DEFECT MUST NOT END THE RUN. Manifests are written by live agent
-      // processes, so a tick can meet a truncated file, a transient duplicate
-      // item id minted by two authors at once, or any other malformed input.
-      // Those are owner-visible blockers: record one and keep the loop alive,
-      // so a repaired input plus `retry` resumes the same run. Letting the
-      // exception escape ended a 49-hour build on 2026-09-16.
-      let r;
+      // A DATA DEFECT MUST NOT END THE RUN, ANYWHERE IN THE ITERATION.
+      //
+      // Manifests are written by live agent processes, so engine work can meet
+      // a truncated file or a transient duplicate item id minted by two
+      // authors at once. Guards at two call sites were not enough: on
+      // 2026-09-16 a duplicate killed a 49-hour build through `tick`, and on
+      // 2026-09-17 the SAME defect killed its successor through the post-tick
+      // `currentStage()` boundary check and through `snapshot()` inside the
+      // blocked report. The whole iteration is therefore guarded: a throw
+      // becomes an owner blocker, the loop waits out the poll interval and
+      // keeps running, and a repaired input plus `retry` resumes the run.
+      let r: 'done' | 'working' | 'blocked' | 'stopped';
       try {
         r = await this.tick();
+        if (r === 'done' || r === 'stopped') return r;
+        if (r === 'blocked') {
+          // A blocker is not the end of the run. The first live takeover blocked
+          // on a citation sweep hitting an HTTP/2 framing error against a host
+          // that had answered 200 twice that hour — and the engine exited, ending
+          // a build over a network blip. Keep ticking: a transient clears itself,
+          // an owner can `retry`, and a genuinely stuck run is reported every
+          // interval rather than silently dead.
+          this.blockedTicks = (this.blockedTicks ?? 0) + 1;
+          if (this.blockedTicks === 1 || this.blockedTicks % 20 === 0) {
+            this.reporter.notify('blocked-holding',
+              `still blocked after ${this.blockedTicks} tick(s); holding and re-checking. ` +
+              `\`autopilot retry\` to re-arm, \`autopilot stop\` to end.`);
+          }
+          if (this.config.exitOnBlocked && this.blockedTicks >= (this.config.blockedTickLimit ?? 40)) return 'blocked';
+        } else {
+          this.blockedTicks = 0;
+        }
+        ticks += 1;
+        if (ticks >= maxTicks) return 'working';
+        // Drain completed boundaries immediately; keep the polling fallback for
+        // controls and adopted processes, whose completion has no local promise.
+        if (r === 'working' && !this.state.paused
+          && (this.stateVersion !== version
+            || this.currentStage().stage?.id !== this.state.data.stage)) continue;
+        const wait = new AbortController();
+        try {
+          await Promise.race([
+            sleep(pollMs, this.signal ? AbortSignal.any([this.signal, wait.signal]) : wait.signal),
+            ...[...this.inflight.values()].map(({ promise }) => promise),
+          ]);
+        } finally { wait.abort(); }
       } catch (error: any) {
-        const msg = `engine tick threw — ${error?.message ?? error}`;
+        const msg = `engine loop threw — ${error?.message ?? error}`;
         if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
           this.state.addBlocker(this.state.data.stage ?? '(engine)', msg);
         }
-        this.reporter.notify('tick-error', msg);
-        r = 'blocked';
-      }
-      if (r === 'done' || r === 'stopped') return r;
-      if (r === 'blocked') {
-        // A blocker is not the end of the run. The first live takeover blocked
-        // on a citation sweep hitting an HTTP/2 framing error against a host
-        // that had answered 200 twice that hour — and the engine exited, ending
-        // a build over a network blip. Keep ticking: a transient clears itself,
-        // an owner can `retry`, and a genuinely stuck run is reported every
-        // interval rather than silently dead.
+        try { this.reporter.notify('tick-error', msg); } catch { /* reporting must not rethrow */ }
         this.blockedTicks = (this.blockedTicks ?? 0) + 1;
-        if (this.blockedTicks === 1 || this.blockedTicks % 20 === 0) {
-          this.reporter.notify('blocked-holding',
-            `still blocked after ${this.blockedTicks} tick(s); holding and re-checking. ` +
-            `\`autopilot retry\` to re-arm, \`autopilot stop\` to end.`);
-        }
-        if (this.config.exitOnBlocked && this.blockedTicks >= (this.config.blockedTickLimit ?? 40)) return 'blocked';
-      } else {
-        this.blockedTicks = 0;
+        // The iteration still counts: a harness with a tick budget must
+        // terminate even when every tick throws, and a bounded drive must not
+        // be turned into an unbounded one by a data defect.
+        ticks += 1;
+        if (ticks >= maxTicks) return 'working';
+        await sleep(Math.min(pollMs, 15_000), this.signal);
       }
-      ticks += 1;
-      if (ticks >= maxTicks) return 'working';
-      // Drain completed boundaries immediately; keep the polling fallback for
-      // controls and adopted processes, whose completion has no local promise.
-      if (r === 'working' && !this.state.paused
-        && (this.stateVersion !== version
-          || this.currentStage().stage?.id !== this.state.data.stage)) continue;
-      const wait = new AbortController();
-      try {
-        await Promise.race([
-          sleep(pollMs, this.signal ? AbortSignal.any([this.signal, wait.signal]) : wait.signal),
-          ...[...this.inflight.values()].map(({ promise }) => promise),
-        ]);
-      } finally { wait.abort(); }
     }
   }
 }

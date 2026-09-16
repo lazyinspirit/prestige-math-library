@@ -431,3 +431,17 @@ test('a pause-at marker stops the run at the named stage boundary', async () => 
   assert.ok(notifications.some((n) => n.kind === 'pause-armed'));
   assert.deepEqual(gateRuns(fx), ['first'], 'the stage after the boundary never started');
 });
+
+// The first guard covered tick() only. On 2026-09-17 the same duplicate-id
+// defect killed the successor controller through the post-tick boundary check,
+// so the whole iteration is guarded now.
+test('a throw outside tick is caught and the loop keeps running', async () => {
+  const fx = fixture();
+  const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'never')]));
+  ex.tick = async () => 'working';
+  ex.currentStage = () => { throw new Error('Duplicate item prop-the-roots'); };
+  assert.equal(await ex.run({ pollMs: 1, maxTicks: 2 }), 'working');
+  assert.ok(ex.state.data.blockers.some((b: any) => /engine loop threw — Duplicate item prop-the-roots/.test(b.message)),
+    'the defect is an owner blocker');
+  assert.ok(notifications.some((n) => n.kind === 'tick-error'));
+});
