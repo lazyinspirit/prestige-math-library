@@ -4,9 +4,37 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1365, U-C 0, A-R 190, A-P 330. The
+Current classifications: U-P 1365, U-C 0, A-R 190, A-P 331. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Shelah inaccessible remark: superseded "not proved here" scope — 2026-09-16
+
+The Step-3a scope review of run `phase-2-remaining-27` (pair
+`shelahs-baire-property-model-and-inner-model-lower-bounds`) found that the
+published remark `rem-shelah-inaccessible-and-the-baire-property` had no entry
+here even though the run scaffolds the forcing and inner-model track whose
+absence its "Not proved in this library" clause asserts.
+
+- `rem-shelah-inaccessible-and-the-baire-property` (published; `proved_here:
+  false`; frontmatter `deps: [rem-solovay-model]`). The Statement's first clause
+  — Con(ZF) implies Con(ZF + DC + every set of reals has the Baire property) —
+  is the conclusion of the in-run `thm-baire-property-model-equiconsistent-with-zfc`
+  together with `thm-shelah-internal-model-all-sets-of-reals-have-baire-property`,
+  built from the batch-15 sweetness chain (`def-shelah-sweetness-model`,
+  `thm-shelah-sweet-amalgamation-preserves-sweetness`,
+  `thm-shelah-ch-omega-one-sweet-construction`). Its "What would prove it"
+  bullet — an amalgamated Souslin forcing replacing the Levy collapse — is the
+  run's `lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets` and
+  the amalgamation example `ex-sweet-amalgam-over-a-common-complete-subalgebra`.
+  The second clause (measurability implies an inaccessible) remains unproved
+  here and is unaffected. Required Phase-3 repair: once batch 15 publishes,
+  rewrite the "Not proved in this library" and "What would prove it" prose to
+  cite the new suppliers, add the dependency on the equiconsistency theorem and
+  `thm-shelah-baire-model-separates-baire-property-from-measurability`, and keep
+  the reverse-mathematical clause recorded-not-proved. Supplying prerequisites
+  are in-run items of `phase-2-remaining-27` and none is published yet. Status:
+  audited, repair pending Phase 3 (A-P); no Phase-2 supplier is missing.
 
 ## High-impact arithmetic spine follow-up — 2026-09-14
 
@@ -29540,7 +29568,7 @@ dependencies.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,957 unique
+subsequently reconciled published IDs. It currently contains **2,958 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-12 from item front matter, has **16,555 published items**. All
@@ -29556,10 +29584,10 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1365 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 190 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 330 | Recorded direct review and an unresolved item-specific repair. | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 331 | Recorded direct review and an unresolved item-specific repair. | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
-defect classes. The four queues currently contain 1,885 distinct items.
+defect classes. The four queues currently contain 1,886 distinct items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -32917,6 +32945,7 @@ ID):
 | `rem-feferman-levy-model` | A-P: Alpha-d Step 5A 2026-09-14. Support-structure description defect; replacement chain and source recorded above. |
 | `rem-solovay-model` | A-P: Alpha-d Step 5A 2026-09-14. Unproved Recorded conclusions; exact semantic and negative suppliers recorded above. |
 | `rem-banach-tarski` | A-P: Alpha-d Step 5A 2026-09-14. Unproved positive theorem; only the negative Solovay clause has a supplier map here. |
+| `rem-shelah-inaccessible-and-the-baire-property` | A-P: Step-3a scope review of `phase-2-remaining-27` 2026-09-16. Published "not proved here" scope is superseded by the run's sweet-forcing and inner-model track; Phase-3 prose and dependency rewrite pending batch-15 publication. Evidence above. |
 
 Bounded no-repair-needed note: the remaining published suppliers cited by the
 92 owned items (Jech, Repický, Feferman, Tachtsis, Ransom, Hamkins, Monk,
