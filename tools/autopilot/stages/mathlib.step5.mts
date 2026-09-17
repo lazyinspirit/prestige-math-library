@@ -4,8 +4,6 @@
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { holdStep5 } from './step5-hold.mts';
 
-const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
-const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
@@ -48,7 +46,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-read',
       label: 'independent readers over authored content',
-      modelProfile: (plan: any) => plan.role === 'reader' ? SOL_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'reader' ? DEEPSEEK_FLASH_MAX : undefined,
       pipeline: 'read',
       role: 'reader',
       units: batches,
@@ -94,7 +92,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-refute',
       label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? DEEPSEEK_FLASH_MAX : undefined,
       pipeline: 'read',
       role: 'refuter',
       units: batches,
@@ -136,7 +134,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-adjudicate',
       label: 'group Alpha adjudication of reader repairs, refuter findings and pages',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_XHIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? DEEPSEEK_FLASH_MAX : undefined,
       units: batches,
       pattern: resultPattern('alpha', '5a-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {

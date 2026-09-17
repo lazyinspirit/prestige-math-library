@@ -73,7 +73,8 @@ test('Step 3a and 3b use DeepSeek Flash max while Step 5a adjudication uses Sol 
   assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
   const adjudicate = stage('5a-adjudicate');
-  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.solXHigh);
+  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax,
+    'Step 5a adjudication runs on the DeepSeek Flash lane');
   const cross = stage('5b-cross');
   assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
@@ -86,12 +87,12 @@ test('Step 3a and 3b use DeepSeek Flash max while Step 5a adjudication uses Sol 
     'the judge tool is not a Step-6 reader agent');
 });
 
-test('Step 5a readers and refuters use Sol high and the tool lanes stay model-free', () => {
+test('Step 5a readers and refuters use DeepSeek Flash max and the tool lanes stay model-free', () => {
   for (const [id, role] of [['5a-read', 'reader'], ['5a-refute', 'refuter']] as const) {
     const st = stage(id);
     const plan = st.plan(ctx, ['1'])[0];
     assert.equal(plan.role, role);
-    assert.equal(selected(st, plan), MODEL_PROFILE_NAMES.solHigh);
+    assert.equal(selected(st, plan), MODEL_PROFILE_NAMES.deepseekFlashMax);
     assert.equal(selected(st, { role: 'tool' }), undefined, `${id} keeps its tool lane model-free`);
   }
   for (const id of ['5a-prepare', '5a-split', '5a-collect', '5a-baseline', '5b-edges', '5b-close']) {
