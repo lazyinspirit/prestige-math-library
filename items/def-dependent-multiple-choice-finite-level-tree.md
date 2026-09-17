@@ -53,11 +53,15 @@ with $x \mathbin{R} y$. The **$R$-chain tree** is
 
 $$T_R := \{\, t : t \text{ a node over } A \text{ and } t(i) \mathbin{R} t(i+1) \text{ for every } i+1 < \operatorname{dom} t \,\} .$$
 
-It is a tree of height $\omega$ on $A$, and it is pruned exactly when $R$ is
-serial on $A$: a node $t$ has a proper extension precisely when its last entry
-$t(\operatorname{dom} t - 1)$ has an $R$-successor, and for the one-entry node
-$(a)$ this says that $a$ has one. Its level $n$ is nonempty for every $n$ as
-soon as $A \ne \varnothing$, by iterating the successor condition.
+It is a tree of height $\omega$ on $A$. For $A \ne \varnothing$ it is pruned
+exactly when $R$ is serial on $A$: a node of positive length has a proper
+extension precisely when its last entry $t(\operatorname{dom} t - 1)$ has an
+$R$-successor, the empty node has the one-entry node $(a)$ as an extension for
+every $a \in A$, and the one-entry node $(a)$ has a proper extension exactly
+when $a$ has an $R$-successor. For $A = \varnothing$ the equivalence fails: then
+$T_R = \{\varnothing\}$, $R$ is vacuously serial on $A$, and the empty node has
+no proper extension. If $R$ is serial on $A$ and $A \ne \varnothing$, then every
+level of $T_R$ is nonempty, by iterating the successor condition.
 
 **Successor menus.** Let $R$ again be a relation on $A$. A **successor menu
 sequence** for $R$ is a sequence $(F_n)_{n \in \mathbb{N}}$ of nonempty finite

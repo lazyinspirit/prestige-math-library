@@ -5,7 +5,7 @@ title: Gelfand transform of ell one of Z
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-absolute-convergence-of-complex-series, thm-tonelli-for-nonnegative-double-series, thm-double-series-fubini, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle]
+deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-absolute-convergence-of-complex-series, thm-tonelli-for-nonnegative-double-series, thm-double-series-fubini, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-the-one-dimensional-torus-and-normalized-haar-integral, def-character-and-maximal-ideal-space]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -43,7 +43,7 @@ $\hat a(\chi_z) = \sum_n a_nz^n$.
 
 **Given:** The bijections above, the space $\ell^1(\mathbb Z)$ with convolution, and the unit circle $\mathbb T$.
 
-[L1] Characters of a nonzero unital complex Banach algebra are unital and continuous, with $|\chi(a)| \le \|a\|$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]]).
+[L1] Characters of a nonzero unital complex Banach algebra are unital and continuous, with $|\chi(a)| \le \|a\|$, and the character space carries the pointwise-evaluation topology, so every map $\chi \mapsto \chi(a)$ is continuous ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[def-character-and-maximal-ideal-space]]).
 
 [L2] The finite truncations $P_Na$ converge to $a$ in $\ell^1$ norm ([[lem-finite-truncations-are-dense-in-c0-and-ell-one]]).
 
@@ -51,7 +51,7 @@ $\hat a(\chi_z) = \sum_n a_nz^n$.
 
 [L4] $\mathbb C$ is complete ([[thm-complex-plane-is-complete]]), and a continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]]).
 
-[L5] $\mathbb T$ is homeomorphic to $\mathbb R/\mathbb Z$ and is compact Hausdorff ([[thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle]]).
+[L5] $\mathbb T$ is homeomorphic to $\mathbb R/\mathbb Z$ and is compact Hausdorff.
 
 ## Verification
 
@@ -65,7 +65,7 @@ $\hat a(\chi_z) = \sum_n a_nz^n$.
 
 1.4 $\delta_1$ is invertible with inverse $\delta_{-1}$, since $\delta_1 * \delta_{-1} = \delta_0$; if $\chi$ is a character and $z := \chi(\delta_1)$, then $1 = \chi(\delta_0) = \chi(\delta_1)\chi(\delta_{-1})$ so $|z| \ge 1$ by [L1], while $|z| \le \|\delta_1\|_1 = 1$; hence $|z| = 1$, and multiplicativity gives $\chi(\delta_n) = z^n$ for all $n \in \mathbb Z$. [1.2, L1, algebra]
 
-1.5 Let $z^{(k)} \to z$ in $\mathbb T$ and $a \in \ell^1(\mathbb Z)$; then $\chi_{z^{(k)}}(a) \to \chi_z(a)$: given $\epsilon>0$ choose $N$ with $\sum_{|n|>N}|a_n| < \epsilon/4$, and for $|n| \le N$ use $|z^{(k)n} - z^n| \le |n||z^{(k)}-z|$ to make $\sum_{|n|\le N}|a_n||z^{(k)n}-z^n| < \epsilon/2$ for $k$ large; hence $z \mapsto \chi_z$ is continuous, and its inverse $\chi \mapsto \chi(\delta_1)$ is continuous by the definition of the evaluation topology on $\Delta(\ell^1(\mathbb Z))$. [3.1, L1, L5, algebra]
+1.5 Let $z^{(k)} \to z$ in $\mathbb T$ and $a \in \ell^1(\mathbb Z)$; then $\chi_{z^{(k)}}(a) \to \chi_z(a)$: given $\epsilon>0$ choose $N$ with $\sum_{|n|>N}|a_n| < \epsilon/4$, and for $|n| \le N$ use $|z^{(k)n} - z^n| \le |n||z^{(k)}-z|$ to make $\sum_{|n|\le N}|a_n||z^{(k)n}-z^n| < \epsilon/2$ for $k$ large; hence $z \mapsto \chi_z$ is continuous, and its inverse $\chi \mapsto \chi(\delta_1)$ is continuous because it is the evaluation map $\chi \mapsto \chi(\delta_1)$, one of the maps that generate the evaluation topology by [L1]. [L1, L5, algebra]
 
 1.6 For $|z| = 1$ the map $\chi_z(a) := \sum_n a_nz^n$ is a character: it is complex-linear, nonzero ($\chi_z(\delta_0) = 1$) and multiplicative, because expanding $\chi_z(a)\chi_z(b) = \sum_j\sum_k a_jb_kz^{j+k}$ and regrouping along $n = j+k$ (Tonelli and Fubini on the absolutely summable family $(a_jb_kz^{j+k})$, [L3]) gives $\sum_n(a*b)_nz^n = \chi_z(a*b)$. [1.1, L3, algebra]
 

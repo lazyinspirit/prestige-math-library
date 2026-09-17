@@ -51,7 +51,7 @@ possesses a unit eigenvector; here $\|T\|>0$.
 
 **Given:** Countable Choice, a nonzero compact self-adjoint $T$, its quadratic form $q$, and the closed unit ball $\overline B$.
 
-1.1 **Approximate maximisers.** By [A1], for every $n\ge1$ the set of unit vectors $u$ with $|q(u)|>\|T\|-1/n$ is nonempty (when $1/n\ge\|T\|$ any unit vector qualifies), so Countable Choice [A5] produces a sequence $(x_n)_{n\ge1}$ of unit vectors with $|q(x_n)|>\|T\|-1/n$ for all $n$. [A1, A5]
+1.1 **Approximate maximisers.** By [A1], for every $n\ge1$ the set of unit vectors $u$ with $|q(u)|>\|T\|-1/n$ is nonempty (if $\|T\|>0$ the supremum in [A1] is approached by unit vectors, so such a vector exists whenever $\|T\|>1/n$, and when $\|T\|\le1/n$ it suffices to take a unit vector with $q(u)\ne0$, which exists because $\|T\|=\sup_{\|u\|=1}|q(u)|>0$; the self-adjoint operator $\operatorname{diag}(1,-1)$ shows that not every unit vector has $q(u)\ne0$ in the boundary case), so Countable Choice [A5] produces a sequence $(x_n)_{n\ge1}$ of unit vectors with $|q(x_n)|>\|T\|-1/n$ for all $n$. [A1, A5]
 
 2.1 **A constant sign on a subsequence.** Put $A:=\{n\ge1:q(x_n)\ge0\}$; since $\mathbb N=A\cup(\mathbb N\setminus A)$, at least one of $A$ and $\mathbb N\setminus A$ is infinite. If $A$ is infinite let $n_0<n_1<\cdots$ be its increasing enumeration and set $\lambda:=\|T\|$; otherwise let $n_0<n_1<\cdots$ enumerate the infinite set $\mathbb N\setminus A$ and set $\lambda:=-\|T\|$. Then $\lambda\in\{-\|T\|,\|T\|\}$ and for every $k$, because $q(x_{n_k})$ has the sign of $\lambda$ on this subsequence and $|\lambda|=\|T\|$, $\lambda q(x_{n_k})=\|T\|\,|q(x_{n_k})|\ge\|T\|(\|T\|-1/n_k)$ and $\lambda^{2}=\|T\|^{2}$. [step 1.1, A1, A5, algebra]
 

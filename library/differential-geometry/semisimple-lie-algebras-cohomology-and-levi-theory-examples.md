@@ -4,15 +4,12 @@ title: Semisimple Lie Algebras, Cohomology, and Levi Theory — Examples
 status: published
 items: []
 examples:
-  - ex-killing-form-of-sl-two
-  - ex-classical-simple-lie-algebras-and-their-killing-forms
   - ex-a-reductive-algebra-with-degenerate-killing-form
   - ex-direct-sum-decomposition-of-a-semisimple-lie-algebra
   - ex-first-cohomology-with-trivial-coefficients-is-the-dual-abelianization
   - ex-an-abelian-extension-from-a-two-cocycle
   - ex-a-levi-decomposition-of-the-euclidean-motion-algebra
   - ex-distinct-conjugate-levi-subalgebras
-  - ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups
   - ex-the-bch-group-of-a-nilpotent-lie-algebra
   - cex-centerless-does-not-imply-semisimple
   - cex-the-circle-and-line-have-isomorphic-one-dimensional-lie-algebras-but-are-not-isomorphic-lie-groups

@@ -33,7 +33,7 @@ $L(V)\to\mathfrak g$.
 
 [L2] Every linear map $V\to A$ into a unital associative algebra $A$ extends uniquely to a unital algebra homomorphism $T(V)\to A$ ([[thm-universal-property-of-the-tensor-algebra]]).
 
-[L3] The canonical inclusion $\mathfrak g\hookrightarrow U(\mathfrak g)$, $x\mapsto x$, into the universal enveloping algebra is injective, and it carries $[x,y]$ is sent to $xy-yx$ ([[thm-poincare-birkhoff-witt]]).
+[L3] The canonical inclusion $\mathfrak g\hookrightarrow U(\mathfrak g)$, $x\mapsto x$, into the universal enveloping algebra is injective, and it carries $[x,y]$ to $xy-yx$ ([[thm-poincare-birkhoff-witt]]).
 
 ## Proof
 
@@ -41,6 +41,6 @@ $L(V)\to\mathfrak g$.
 
 1.1 By [L2] applied to the composition of $f$ with the inclusion $\mathfrak g\hookrightarrow U(\mathfrak g)$, there is a unique unital algebra homomorphism $\widehat f:T(V)\to U(\mathfrak g)$ extending $f$. [L2, L3, algebra]
 
-2.1 The restriction of $\widehat f$ to $L(V)$ takes values in the image of $\mathfrak g$ and is a Lie-algebra homomorphism: for $x,y\in L(V)$ one has $\widehat f([x,y])=\widehat f(x)\widehat f(y)-\widehat f(y)\widehat f(x)$, and by induction on the generation of $L(V)$ each $\widehat f(x)$ lies in the image of $\mathfrak g$, where the bracket of two images is the image of the bracket by [L3]; hence the composite $g:L(V)	o\mathfrak g$ obtained by restricting $\widehat f$ and inverting the inclusion is a Lie homomorphism $L(V)\to\mathfrak g$ extending $f$. [L1, L3, step 1.1, algebra]
+2.1 The restriction of $\widehat f$ to $L(V)$ takes values in the image of $\mathfrak g$ and is a Lie-algebra homomorphism: for $x,y\in L(V)$ one has $\widehat f([x,y])=\widehat f(x)\widehat f(y)-\widehat f(y)\widehat f(x)$, and by induction on the generation of $L(V)$ each $\widehat f(x)$ lies in the image of $\mathfrak g$, where the bracket of two images is the image of the bracket by [L3]; hence the composite $g:L(V)\to\mathfrak g$ obtained by restricting $\widehat f$ and inverting the inclusion is a Lie homomorphism $L(V)\to\mathfrak g$ extending $f$. [L1, L3, step 1.1, algebra]
 
 3.1 Uniqueness: if $g_1,g_2:L(V)\to\mathfrak g$ are Lie homomorphisms agreeing on $V$, then the set of $x\in L(V)$ with $g_1(x)=g_2(x)$ is a Lie subalgebra containing $V$; since $L(V)$ is generated as a Lie algebra by $V$, it is all of $L(V)$. [L1, algebra] ∎

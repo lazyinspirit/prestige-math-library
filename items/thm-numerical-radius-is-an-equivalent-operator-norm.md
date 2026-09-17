@@ -58,11 +58,11 @@ Assume AC. On a complex Hilbert space, $w$ is a norm with $w(T)\le\|T\|\le2w(T)$
 
 2.1 $w$ is a norm on $\mathcal B(H)$: homogeneity is $w(\lambda T)=|\lambda|w(T)$ from $W(\lambda T)=\lambda W(T)$, the triangle inequality follows from $|\langle(S+T)x,x\rangle|\le|\langle Sx,x\rangle|+|\langle Tx,x\rangle|\le w(S)+w(T)$ on unit vectors, and definiteness is step 1.3. [step 1.3, A1, algebra]
 
-2.2 For unit vectors $x,y$ the real and imaginary parts of $\langle Tx,y\rangle$ are bounded by $w(T)$: by the expansion, $|\operatorname{Re}\langle Tx,y\rangle|\le\tfrac{w(T)}4(\|x+y\|^2+\|x-y\|^2)=\tfrac{w(T)}2(\|x\|^2+\|y\|^2)=w(T)$, and the same estimate holds for the imaginary part. [step 1.1, A1, A8, algebra]
+2.2 For unit vectors $x,y$ one has $|\langle Tx,y\rangle|\le2w(T)$: the expansion of step 1.1 writes $4\langle Tx,y\rangle$ as a signed sum of the four values $\langle Tz,z\rangle$ at $z=x+y,x-y,x+iy,x-iy$, so $4|\langle Tx,y\rangle|\le\sum_z|\langle Tz,z\rangle|\le w(T)\sum_z\|z\|^2$, and the four squared norms sum to $\|x+y\|^2+\|x-y\|^2+\|x+iy\|^2+\|x-iy\|^2=4(\|x\|^2+\|y\|^2)=8$, whence $4|\langle Tx,y\rangle|\le8w(T)$. [step 1.1, A1, A8, algebra]
 
 2.3 If $T$ is normal and $\lambda\in\sigma(T)$, then $T-\lambda I$ is not bounded below: if it were, its range would be closed and its kernel would be zero, and normality gives $\ker(T-\lambda I)^*=\ker(T-\lambda I)=\{0\}$ by equality of the two kernel norms, so the range would be dense, hence all of $H$, making $T-\lambda I$ invertible with bounded inverse. [step 1.4, A4, A6, A7, algebra]
 
-3.1 Hence $w(T)\le\|T\|$ and $\|T\|\le2w(T)$: the first is the definition, and the second follows by taking the supremum of $|\langle Tx,y\rangle|\le|\operatorname{Re}\langle Tx,y\rangle|+|\operatorname{Im}\langle Tx,y\rangle|\le2w(T)$ over unit $x,y$. [step 2.2, step 1.2, A1, A8]
+3.1 Hence $w(T)\le\|T\|$ and $\|T\|\le2w(T)$: the first is the definition, and the second follows by taking the supremum of $|\langle Tx,y\rangle|\le2w(T)$ over unit $x,y$ and using step 1.2, which identifies that supremum with $\|T\|$. [step 2.2, step 1.2, A1, A8]
 
 3.2 If $T$ is normal then $\sigma(T)\subseteq\overline{W(T)}$: step 2.3 produces unit vectors $x_n$ with $\|(T-\lambda I)x_n\|<1/n$, and then $|\langle Tx_n,x_n\rangle-\lambda|=|\langle(T-\lambda I)x_n,x_n\rangle|\le\|(T-\lambda I)x_n\|\to0$, so $|\lambda|\le w(T)$ for every $\lambda\in\sigma(T)$ and $r(T)\le w(T)$. [step 2.3, A1, A2, A9]
 

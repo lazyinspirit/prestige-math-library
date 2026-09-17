@@ -5,7 +5,7 @@ title: Integral complex projective bundle theorem
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator, thm-leray-hirsch-module-isomorphism, thm-numerable-fiber-bundles-are-hurewicz-fibrations, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, cor-singular-cohomology-is-homotopy-invariant, def-axiom-of-choice]
+deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator, thm-leray-hirsch-module-isomorphism, thm-numerable-fiber-bundles-are-hurewicz-fibrations, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the numerable-bundle and Thom suppliers."
 provenance:
@@ -56,7 +56,7 @@ occurring in the iterated construction below.
 
 [F5] Totals of numerable bundles with compact Hausdorff fiber over a paracompact Hausdorff base of CW type are again paracompact Hausdorff of CW type ([[lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type]]).
 
-[F6] Singular cohomology is homotopy invariant ([[cor-singular-cohomology-is-homotopy-invariant]]).
+[F6] Singular cohomology is homotopy invariant.
 
 ## Proof
 

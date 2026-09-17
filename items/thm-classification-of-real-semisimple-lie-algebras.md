@@ -1,0 +1,107 @@
+---
+id: thm-classification-of-real-semisimple-lie-algebras
+kind: theorem
+title: Classification of real semisimple lie algebras
+status: draft
+origin: pipeline
+pipeline_run: phase-2-remaining-27
+deps: [thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals, thm-complexification-dichotomy-for-a-real-simple-lie-algebra, thm-classification-of-real-forms-by-vogan-diagrams, thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications, lem-chevalley-basis-and-real-structure-constants, thm-serre-presentation-theorem, thm-existence-theorem-for-complex-semisimple-lie-algebras, thm-isomorphism-theorem-for-complex-semisimple-lie-algebras, thm-existence-and-uniqueness-up-to-isomorphism-of-the-split-real-form, def-cartan-matrix-of-a-based-root-system, def-coroot-of-a-lie-algebra-root, def-axiom-of-choice, def-real-form-of-a-complex-lie-algebra, def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-simple-semisimple-and-reductive-lie-algebras, def-satake-diagram, def-vogan-diagram]
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter VI"
+      url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
+      locator: "Chapter VI, §9, Theorem 6.94, printed pp. 406-408; §10, the Borel-de Siebenthal Theorem 6.96 and the classification Theorem 6.105 with Figures 6.1-6.3, printed pp. 408-422; §11, restricted roots in the classification, printed pp. 422-426"
+    - title: "Pavel Etingof, Lie Groups and Lie Algebras"
+      url: "https://math.mit.edu/~etingof/lnlg.pdf"
+      locator: "Lecture 40, §§40.1-40.3, printed pp. 185-189; Lecture 41, §41.1, printed pp. 190-193"
+landmark: true
+proof_strategy: direct
+---
+
+## Statement
+
+Assume the Axiom of Choice. Every finite-dimensional real semisimple Lie
+algebra $\mathfrak g_0$ is a direct sum of real simple ideals
+([[thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals]]),
+and each of those simple ideals is either
+
+1. a complex simple Lie algebra regarded as a real Lie algebra, or
+2. a noncomplex simple Lie algebra whose complexification is a complex simple
+   Lie algebra, and then it is a real form of that complexification
+   ([[def-real-form-of-a-complex-lie-algebra]],
+   [[thm-complexification-dichotomy-for-a-real-simple-lie-algebra]]);
+
+in case 2 the isomorphism class of the form is one of the classes in the
+Vogan/Satake list of the complex simple Lie algebra: the compact real form,
+the split real form, the classical intermediate forms
+$\mathfrak{su}(p,q)$, $\mathfrak{so}(p,q)$, $\mathfrak{sp}(p,q)$,
+$\mathfrak{sp}_{2n}(\mathbb R)$, $\mathfrak{so}^{*}(2n)$,
+$\mathfrak{sl}_n(\mathbb R)$, $\mathfrak{sl}_n(\mathbb H)$ in their admissible
+ranges, and the twelve exceptional noncompact noncomplex forms; the classical
+families are recorded in the source in Figure 6.1 (Knapp, printed pp. 413-415)
+and the exceptional ones in Figures 6.2 and 6.3 (Knapp, printed pp. 416 and
+420). This list is complete up to isomorphism, and the
+directions of the rest of this page identify its entries by their Vogan and
+Satake diagrams ([[thm-classification-of-real-forms-by-vogan-diagrams]],
+[[thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications]]).
+
+## Facts & Assumptions
+
+**Given:** The Axiom of Choice; a finite-dimensional real semisimple Lie algebra $\mathfrak g_0$ with its decomposition into simple ideals; the classification of complex simple Lie algebras by connected Dynkin diagrams; and the two diagram classifications of real forms.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the decomposition into simple ideals, through the classification of real forms by diagrams and through the isomorphism theorem for complex semisimple Lie algebras used to identify the complexifications.
+
+[L1] A finite-dimensional semisimple real Lie algebra is a finite direct sum of simple ideals, and simple means nonabelian with no nonzero proper ideal while semisimple means zero radical ([[thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals]], [[def-simple-semisimple-and-reductive-lie-algebras]]).
+
+[L2] The complexification of a real simple Lie algebra is either complex simple or the direct sum of two isomorphic simple ideals interchanged by the conjugation, and in the latter case the real algebra is a complex simple algebra regarded as real ([[thm-complexification-dichotomy-for-a-real-simple-lie-algebra]]).
+
+[L3] Every real form of a complex semisimple Lie algebra determines a Vogan diagram, well defined up to equivalence, and two real forms with equivalent Vogan diagrams are isomorphic; the Satake diagrams determine the same real-form isomorphism classes as the Vogan diagrams ([[thm-classification-of-real-forms-by-vogan-diagrams]], [[thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications]], [[def-vogan-diagram]], [[def-satake-diagram]]).
+
+[L4] The compact real form is characterized by negative definiteness of the Killing form, the split real form by a real Cartan subalgebra with simultaneously diagonalizable adjoint action, and the classical forms $\mathfrak{su}(p,q),\mathfrak{so}(p,q),\mathfrak{sp}(p,q),\mathfrak{sp}_{2n}(\mathbb R),\mathfrak{so}^{*}(2n),\mathfrak{sl}_n(\mathbb R),\mathfrak{sl}_n(\mathbb H)$ are the real forms of the classical complex simple Lie algebras, in admissible ranges, with the stated low-rank coincidences; the identifications of the classical families with these matrix algebras are recorded in Knapp, §10, Figure 6.1 (printed pp. 413-415) ([[def-compact-real-form-of-a-complex-semisimple-lie-algebra]], [[def-split-real-form]]).
+
+[L5] Root-space data: for a complex semisimple Lie algebra with Cartan subalgebra and root system there are root vectors $X_\alpha$ with $[X_\alpha,X_{-\alpha}]=H_\alpha$, $[X_\alpha,X_\beta]=N_{\alpha\beta}X_{\alpha+\beta}$ when $\alpha+\beta$ is a root and $[X_\alpha,X_\beta]=0$ otherwise for $\alpha+\beta\ne0$, $B(X_\alpha,X_{-\alpha})=1$, $N_{\alpha\beta}=-N_{-\alpha,-\beta}$ and $N_{\alpha\beta}^{2}=\tfrac12q(1+p)|\alpha|^{2}$ for the $\alpha$-string through $\beta$; the Cartan matrix, its simple coroots $h_i$, the root system, and the existence and isomorphism theorems for complex semisimple Lie algebras are available ([[lem-chevalley-basis-and-real-structure-constants]], [[def-cartan-matrix-of-a-based-root-system]], [[def-coroot-of-a-lie-algebra-root]], [[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]], [[thm-existence-theorem-for-complex-semisimple-lie-algebras]], [[thm-isomorphism-theorem-for-complex-semisimple-lie-algebras]]).
+
+[L6] The Borel-de Siebenthal theorem and its two lemmas are recorded in the source with proofs: the set of elements of $i\mathfrak t_0$ with the stated integrality and parity properties is nonempty and discrete, its least-norm element can be made dominant, and the painting can be reduced to at most one simple root, with the numerical restriction of step 2.4 on which vertex may be painted (Source, Chapter VI, Theorem 6.96 with Lemmas 6.97-6.98, printed pp. 409-412).
+
+[L7] The classification theorem of the source lists the simple real Lie algebras as the complex simple algebras regarded as real, the compact and split forms, the classical matrix algebras in admissible ranges, and the twelve exceptional noncompact noncomplex forms of Figures 6.2 and 6.3, with $\mathfrak{so}^{*}(8)\cong\mathfrak{so}(6,2)$ the only isomorphism among the entries (Source, Theorem 6.105 and its remark, printed pp. 421-422; Figures 6.1-6.3, printed pp. 413-420).
+
+
+**Proof technique:** direct.
+
+1.1 By [L1] write $\mathfrak g_0=\mathfrak g_1\oplus\cdots\oplus\mathfrak g_m$ with each $\mathfrak g_i$ a real simple ideal; applying [L2] to each summand, every $\mathfrak g_i$ is either a complex simple Lie algebra regarded as a real Lie algebra, or a noncomplex simple Lie algebra whose complexification $(\mathfrak g_i)_{\mathbb C}$ is complex simple, in which case $\mathfrak g_i$ is a real form of $(\mathfrak g_i)_{\mathbb C}$. [L1, L2]
+
+1.2 For the summands of the second kind the classification problem is therefore to classify the real forms of a complex simple Lie algebra $\mathfrak g$ up to isomorphism; by [L3] that classification is given by the equivalence classes of Vogan diagrams over the root system of $\mathfrak g$, equivalently by the equivalence classes of Satake diagrams over the same root system, and the two classifications determine the same real-form isomorphism classes. [L3]
+
+1.3 Realization of an abstract Vogan diagram. Let an abstract diagram over the root system $\Phi$ of a complex simple Lie algebra be given, that is, an order-two automorphism $\tau$ of a base $\Delta$ together with a painting of the $\tau$-fixed simple roots ([[def-vogan-diagram]]). There are a complex semisimple Lie algebra $\mathfrak g$ with Cartan subalgebra $\mathfrak h$, a positive system $\Phi^{+}$ with base $\Delta$, and normalized root vectors $X_\alpha$ as in [L5]; then $$\mathfrak u_0=\sum_{\alpha\in\Phi}\mathbb R\, iH_\alpha+\sum_{\alpha\in\Phi}\mathbb R\,(X_\alpha-X_{-\alpha})+\sum_{\alpha\in\Phi}\mathbb R\, i(X_\alpha+X_{-\alpha})$$ is a compact real form of $\mathfrak g$ with $\mathfrak g=\mathfrak u_0\oplus i\mathfrak u_0$. [L4, L5, algebra]
+
+1.4 Normal form of the enumeration. Every abstract Vogan diagram is equivalent, under the moves of [[def-vogan-diagram]], to one in which the automorphism is trivial and at most one simple root is painted, subject to the following restriction when the automorphism is trivial: if $\Delta=\{\alpha_1,\dots,\alpha_l\}$ and $\{\omega_1,\dots,\omega_l\}$ is the dual basis defined by $\langle\omega_j,\alpha_k\rangle=\delta_{jk}$, then the painted root may be chosen so that there is no $i'$ with $\langle\omega_i-\omega_{i'},\omega_{i'}\rangle>0$. This is the Borel-de Siebenthal theorem with its two lemmas: the set $H$ of elements of $i\mathfrak t_0$ on which all roots of the imaginary subsystem take integer values and the noncompact ones odd values is nonempty and discrete (Lemma 6.98), a smallest-norm element of $H$ is made dominant by a change of positive system and the positivity lemma (Lemma 6.97) shows that at most one simple root of the new base is noncompact, and the remaining case of a nontrivial automorphism is reduced to the trivial one by a Weyl element of the imaginary subsystem extended to the whole base (Source, Chapter VI, Theorem 6.96 with Lemmas 6.97-6.98 and their proofs, printed pp. 409-412; the multiplicativity rules for the compact and noncompact types of imaginary roots and the connectedness of the fixed diagram are used there). [L5, L6, algebra]
+
+2.1 The diagram automorphism. The isometry $\tau$ of the base extends to an isometry of the root system carrying $\Phi^{+}$ to itself and permuting the simple roots, so it acts on $\mathfrak h^{*}$. Define the linear automorphism $\theta$ of $\mathfrak h$ on the simple coroots by $\theta(h_i)=h_{\tau i}$, and extend it to the root vectors by $\theta(X_{\alpha_i})=a_iX_{\tau\alpha_i}$ on the simple roots, where $a_i$ is $+1$ on the unpainted fixed roots, $-1$ on the painted ones, and the transposition of the two members of each two-element orbit; the Serre relations among these generators are preserved because $\tau$ is a diagram automorphism, so $\theta$ extends uniquely to an automorphism of $\mathfrak g$ with $\theta^{2}=\mathrm{id}$. By [L5] the normalized root vectors satisfy $\theta(X_\alpha)=\pm X_{\tau\alpha}$ for all roots: the sign is prescribed on the simple roots and propagates along the root system through $a_{\alpha+\beta}=N_{\alpha\beta}^{-1}N_{\tau\alpha,\tau\beta}a_\alpha a_\beta$, where $N_{\alpha\beta}=\pm N_{\tau\alpha,\tau\beta}$ by the reality and $\tau$-invariance of the formula $N_{\alpha\beta}^{2}=\tfrac12q(1+p)|\alpha|^{2}$ of [L5]. Consequently $\theta(\mathfrak u_0)=\mathfrak u_0$, because $\theta$ permutes the three families of generators displayed in step 1.3: it fixes the family $\{iH_\alpha\}$ and carries $X_\alpha-X_{-\alpha}$ and $i(X_\alpha+X_{-\alpha})$ to $\pm(X_{\tau\alpha}-X_{-\tau\alpha})$ and $\pm i(X_{\tau\alpha}+X_{-\tau\alpha})$. [L4, L5, step 1.3, algebra]
+
+2.2 Enumeration, trivial automorphism. For a fixed connected Dynkin diagram with the trivial automorphism, an abstract Vogan diagram with at most one painted root is exactly a choice of at most one vertex of $\Delta$, and two such choices are equivalent precisely when the vertices are carried to one another by an automorphism of the diagram. Running over the connected diagrams of type $A_n$ $(n\ge1)$, $B_n$ $(n\ge2)$, $C_n$ $(n\ge3)$, $D_n$ $(n\ge4)$ and $E_6,E_7,E_8,F_4,G_2$, and applying the restriction of step 1.4, the vertex choices survive as follows: for $A_n$ the compact form at no painted root and the forms $\mathfrak{su}(p,q)$, $p\ge q>0$, $p+q=n+1$, at the painted vertices, with the painted root $\alpha_{n+1-p}$ realized by $\mathfrak{su}(p,q)$ (Source, §8 Example 1, p. 398); for $B_n$ the compact form and $\mathfrak{so}(p,q)$ with $p+q=2n+1$; for $C_n$ the compact form, $\mathfrak{sp}(p,q)$ with $p+q=n$, and $\mathfrak{sp}(n,\mathbb R)$ at the last vertex (Source, p. 413); for $D_n$ the compact form, $\mathfrak{so}(p,q)$ with $p+q=2n$ and even $q>0$, and at the two end vertices $\mathfrak{so}^{*}(2n)$ (Source, pp. 414-415); for $E_6$ the compact form and two forms corresponding to the paintings at $\alpha_2$ and $\alpha_4$; for $E_7$ the compact form and three forms; for $E_8$ the compact form and one form; for $F_4$ the compact form and two forms; for $G_2$ the compact form and one form. In each exceptional case the surviving painting is the one described in the source's Figures 6.2 and 6.3 (printed pp. 416 and 420), the painted vertex being an endpoint there. [L6, step 1.4, algebra]
+
+2.3 Enumeration, nontrivial automorphism. The connected Dynkin diagrams admitting a nontrivial order-two automorphism are $A_n$, $D_n$ and $E_6$. For $A_n$ with $n$ even there is exactly one such abstract Vogan diagram, realized by $\mathfrak{sl}(n+1,\mathbb R)$; for $A_n$ with $n$ odd there are two, the second realized by $\mathfrak{sl}(\tfrac{n+1}{2},\mathbb H)$; for $D_n$ there is one, realized by $\mathfrak{so}^{*}(2n)$; for $E_6$ there is one, numbered E IV, with $k_0=f_4$. These four families and the one diagram of $E_6$ are the source's remaining entries (Source, Chapter VI, §10, printed pp. 417-420, Figures 6.1 and 6.3), and the classical realizations are the Example 2 in §8 (printed pp. 398-399) for $\mathfrak{sl}(2n,\mathbb R)$ and the constructions of Figure 6.1 for $\mathfrak{so}^{*}(2n)$ and $\mathfrak{sl}(m,\mathbb H)$. [L6, step 1.4, algebra]
+
+3.1 The real form and its Cartan subalgebra. Set $\mathfrak k_0=\mathfrak u_0\cap\mathfrak k$ and $\mathfrak p_0=i(\mathfrak u_0\cap\mathfrak p)$, where $\mathfrak k$ and $\mathfrak p$ are the $+1$ and $-1$ eigenspaces of $\theta$ in $\mathfrak g$; since $\theta\mathfrak u_0=\mathfrak u_0$ by step 2.1 one has $\mathfrak u_0=\mathfrak k_0\oplus i\mathfrak p_0$ and $\mathfrak g_0:=\mathfrak k_0\oplus\mathfrak p_0$ is a real form of $\mathfrak g$ closed under brackets, and the involution $\theta$ is a Cartan involution of $\mathfrak g_0$ because $\mathfrak k_0\oplus i\mathfrak p_0=\mathfrak u_0$ is compact. Finally $\mathfrak h_0=(\mathfrak k_0\cap\mathfrak h)\oplus(\mathfrak p_0\cap\mathfrak h)$ is a $\theta$-stable Cartan subalgebra of $\mathfrak g_0$, and it is maximally compact: a real root would satisfy $\tau\alpha=-\alpha$, contradicting the fact that $\tau$ preserves the positive system. [L5, step 1.3, step 2.1, algebra]
+
+4.1 Identification of the diagram. With $\mathfrak h_0=\mathfrak t_0\oplus\mathfrak a_0$ as in step 3.1 and the positive system $\Phi^{+}$ of step 1.3, the imaginary roots are exactly the $\tau$-fixed roots, the simple root $\alpha$ is compact when $\theta X_\alpha=X_\alpha$ and noncompact when $\theta X_\alpha=-X_\alpha$, and the two-element orbits of $\tau$ on $\Delta$ are the complex simple roots; hence the Vogan diagram of the triple $(\mathfrak g_0,\mathfrak h_0,\Phi^{+})$ is the given abstract diagram, and every abstract Vogan diagram is realized by a real form of a complex simple Lie algebra. [L5, step 1.3, step 2.1, step 3.1, algebra]
+
+5.1 Assembly of the enumeration. Every abstract Vogan diagram is equivalent to one of the diagrams enumerated in steps 2.2 and 2.3: by step 1.4 its normal form has the trivial automorphism with at most one painted root, or the automorphism is nontrivial, and in the latter case exactly the diagrams listed in step 2.3 occur. Conversely every diagram enumerated in steps 2.2 and 2.3 is realized by a real form: for the trivial automorphism this is step 4.1, and for the nontrivial diagrams it is the explicit matrix realization recorded in the source. Counting, the classes over $A_n$ are the compact and split forms, the $\mathfrak{su}(p,q)$ with $p\ge q>0$, $p+q=n+1$, and $\mathfrak{sl}(m,\mathbb H)$ with $2m=n+1$; over $B_n$, $C_n$ and $D_n$ they are the compact and split forms together with the $\mathfrak{so}(p,q)$, $\mathfrak{sp}(p,q)$ and $\mathfrak{so}^{*}(2n)$ entries in their admissible ranges; and over the exceptional complex types they are the compact and split forms together with the twelve noncompact noncomplex forms of Figures 6.2 and 6.3, giving in particular two forms of $F_4$ beyond the compact one. [L6, step 4.1, step 2.2, step 2.3, algebra]
+
+6.1 The enumerated classes are pairwise non-isomorphic by the injectivity in [L3]: different Vogan classes over the same complex simple algebra are realized by non-isomorphic real forms. Therefore the list of step 5.1 is a complete and irredundant list of the isomorphism classes of real forms of a complex simple Lie algebra, up to the stated admissible ranges and the single source isomorphism $\mathfrak{so}^{*}(8)\cong\mathfrak{so}(6,2)$. [L3, step 5.1]
+
+7.1 The classes of the second kind in statement 1.1 are the following, where $\mathfrak g$ runs over the complex simple Lie algebras of the Cartan-Killing list: the compact form, the split form, the classical intermediate forms of [L7], and the twelve exceptional noncompact noncomplex forms. The source records this list with the associated maximal compact subalgebras $\mathfrak k_0$ in Figure 6.1 (classical diagrams) and Figures 6.2 and 6.3 (exceptional diagrams) together with the classification Theorem 6.105, and the compact and split forms occur inside the classical list at the extreme signatures, for example $\mathfrak{su}(n)$ and $\mathfrak{sl}_n(\mathbb R)$ for type $A_{n-1}$. [L3, L7, step 1.1, step 5.1, step 6.1]
+
+8.1 Completeness of the list in step 7.1 is the content of the classification of abstract Vogan diagrams over the root system of $\mathfrak g$: steps 2.2 and 2.3 enumerate all of them by the reduction of step 1.4 to at most one painted simple root together with the finite case analysis of the classical and exceptional diagrams, step 6.1 makes the enumeration irredundant, and every listed algebra is a real form of the corresponding complex simple algebra by the construction of step 3.1 together with the matrix realizations of [L7]. [L3, L7, step 3.1, step 2.2, step 2.3, step 6.1]
+
+9.1 Every real form of a complex simple Lie algebra is isomorphic to one of the algebras of step 7.1, because its Vogan class has a normal-form representative by step 1.4 and the classes with at most one painted simple root, together with those with nontrivial automorphism, are exactly the listed ones by steps 2.2 and 2.3; conversely each listed algebra is a real form of the corresponding complex simple algebra by step 3.1 and the coefficient list of [L7]; and two listed algebras with the same complexification are isomorphic exactly when their diagrams are equivalent, by the injectivity half of [L3] and the completeness of the enumeration. Combined with the decomposition of step 1.1, this gives the asserted classification of real semisimple Lie algebras as a sum of real simple ideals, each of which is one of the listed forms or a complex simple algebra regarded as real. [L3, L7, step 1.1, step 5.1, step 6.1] ∎
+
+
+
+## Remarks
+
+- **Where the case analysis enters.** The two reduction lemmas of the Borel-de Siebenthal theorem leave only decorations with at most one painted simple root and the numerical restriction of step 1.4; the classical types are then read off from the matrix realizations of the source (Figure 6.1, printed pp. 413-415), and the exceptional ones from the explicit computations for $E_6,E_7,E_8,F_4,G_2$ culminating in Figures 6.2 and 6.3 (printed pp. 416 and 420). The realization direction uses the normalized root-vector system of the source's Theorem 6.6 (printed pp. 351-353), supplied locally by [[lem-chevalley-basis-and-real-structure-constants]], so that the diagram automorphism can be extended to an automorphism of the complex algebra whose fixed-point real form has the prescribed Vogan diagram.
+- **The complex case.** A complex simple Lie algebra regarded as a real Lie algebra is simple ([[thm-complexification-dichotomy-for-a-real-simple-lie-algebra]]) and contributes the entries $(\mathfrak g)_{\mathbb R}$ of the source's classification; the split forms of the complex simple algebras are the $\mathfrak{sl}(n,\mathbb R)$, $\mathfrak{so}(n+1,n)$, $\mathfrak{sp}(n,\mathbb R)$ and exceptional split forms on the list.

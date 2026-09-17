@@ -4,7 +4,7 @@ kind: remark
 title: "Ito versus Stratonovich boundary"
 status: draft
 origin: pipeline
-deps: [def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, def-quadratic-covariation-of-brownian-ito-processes, thm-ito-formula-one-dimensional, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, def-quadratic-covariation-of-brownian-ito-processes, thm-ito-formula-one-dimensional, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable

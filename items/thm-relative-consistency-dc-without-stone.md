@@ -23,11 +23,16 @@ sources:
 
 ## Statement
 
-If $\mathrm{ZF}$ is consistent, then $\mathrm{ZF} + \mathrm{DC}$ with a
-zero-dimensional metrizable nonparacompact space is consistent: there is a model
-of $\mathrm{ZF} + \mathrm{DC}$ ([[def-dependent-choice]]) containing a metric
+If $\mathrm{ZF}$ is consistent, then $\mathrm{ZF} + \mathrm{DC}$ is
+consistent with the failure of Stone's theorem: there is a model of
+$\mathrm{ZF} + \mathrm{DC}$ ([[def-dependent-choice]]) containing a metric
 space that is not paracompact ([[def-paracompact-space]],
-[[def-cover-refinement-and-local-finiteness]]).
+[[def-cover-refinement-and-local-finiteness]]). The witness space of this
+separation is *not* zero-dimensional: it is the metric sum of the nondegenerate
+connected components of fact [F4], so no base of clopen sets can exist. (The
+source's zero-dimensional witness is a different space, the rational-parameter
+subset $\bigcup_n Q_n$, whose nonparacompactness is proved there in
+$\mathrm{ZF}$ without DC.)
 
 ## Facts & Assumptions
 
@@ -39,7 +44,7 @@ space that is not paracompact ([[def-paracompact-space]],
 
 [F3] No function of $N$ chooses a nonempty proper subset of every component $R_\xi$ ([[lem-good-tree-watson-selector-obstruction]]).
 
-[F4] The metric sum $\bigsqcup_{\xi<\lambda} R_\xi$ carries the metric that agrees with the metric of each component and puts distance $1$ between different components; its topology is the topological sum of the components, each $R_\xi$ is a clopen connected subspace, and the whole space is metrizable, indeed zero-dimensional ([[def-metric-space]], [[def-metric-ball]], [[def-metric-topology]], [[thm-metric-open-set-algebra]], [[def-topological-space]]).
+[F4] The metric sum $\bigsqcup_{\xi<\lambda} R_\xi$ carries the metric that agrees with the metric of each component and puts distance $1$ between different components; its topology is the topological sum of the components, each $R_\xi$ is a clopen connected subspace with more than one point, and the whole space is metrizable ([[def-metric-space]], [[def-metric-ball]], [[def-metric-topology]], [[thm-metric-open-set-algebra]], [[def-topological-space]]). Because a clopen connected set with more than one point has no proper nonempty clopen subset, the space has no base of clopen sets and is therefore not zero-dimensional.
 
 [F5] The formal consistency compilers convert the construction and its verification into the syntactic implication $\operatorname{Con}(\mathrm{ZF}) \Rightarrow \operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{failure of Stone's theorem})$ ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]], [[thm-formal-relative-consistency-from-verified-proof-reduction]]).
 

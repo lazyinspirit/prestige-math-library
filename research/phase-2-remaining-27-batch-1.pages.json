@@ -1,0 +1,2154 @@
+[
+  {
+    "order": 288.071,
+    "id": "hilbert-space-geometry-and-riesz-representation",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Hilbert Space Geometry and Riesz Representation",
+    "companion": "hilbert-space-geometry-and-riesz-representation-examples",
+    "requires": [
+      "banach-valued-integration-and-the-radon-nikodym-property",
+      "weak-mixing-and-the-chacon-transformation"
+    ],
+    "items": [
+      {
+        "id": "def-real-and-complex-inner-product-space",
+        "kind": "definition",
+        "title": "Real and complex inner-product spaces",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ],
+        "statement": "An inner product on a real or complex vector space is positive definite, linear in the first variable, conjugate symmetric, and therefore conjugate-linear in the second variable; its induced length is ||x||=sqrt(<x,x>).",
+        "strategy": "Restate the library-wide scalar convention explicitly and verify that conjugate symmetry plus first-variable linearity gives second-variable conjugate linearity. Record agreement with the published general inner-product definition.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+        "kind": "theorem",
+        "title": "Cauchy–Schwarz in an inner-product space",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-inner-product-norm",
+          "thm-nth-roots-exist",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-of-abs-value",
+          "lem-of-square-monotone",
+          "def-linear-independence"
+        ],
+        "statement": "For all x,y, |<x,y>| <= ||x||||y||, with equality exactly when x and y are linearly dependent.",
+        "strategy": "Handle y=0 first. For y nonzero minimize ||x-lambda y||^2 at lambda=<x,y>/||y||^2 in the first-variable-linear convention, obtaining the inequality; inspect equality in the nonnegative remainder and include the x=0 case.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-inner-product-induces-a-norm",
+        "kind": "corollary",
+        "title": "An inner product induces a norm",
+        "deps": [
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-inner-product-norm",
+          "def-norm-and-normed-space",
+          "rem-real-and-complex-normed-space-convention",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-of-abs-value",
+          "lem-of-square-monotone",
+          "thm-nth-roots-exist",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ],
+        "statement": "The induced length satisfies definiteness, homogeneity and the triangle inequality, hence is a norm.",
+        "strategy": "Expand ||x+y||^2, bound the real part of the cross term by Cauchy–Schwarz, and square the desired nonnegative inequality.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-parallelogram-law",
+        "kind": "theorem",
+        "title": "The parallelogram law",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-real-and-complex-inner-product-space",
+          "def-inner-product-norm"
+        ],
+        "statement": "Every real or complex inner-product norm satisfies ||x+y||^2+||x-y||^2=2||x||^2+2||y||^2.",
+        "strategy": "Expand both squares using first-variable linearity and conjugate symmetry; the cross terms cancel.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-jordan-von-neumann-polarization",
+        "kind": "theorem",
+        "title": "Jordan–von Neumann polarization",
+        "deps": [
+          "thm-parallelogram-law",
+          "def-real-and-complex-inner-product-space",
+          "def-inner-product-norm",
+          "def-norm-and-normed-space",
+          "rem-real-and-complex-normed-space-convention",
+          "lem-rat-embeds-dense",
+          "cor-archimedean-reciprocal",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-of-square-monotone",
+          "thm-of-square-roots"
+        ],
+        "statement": "A real or complex norm is induced by an inner product iff it satisfies the parallelogram law. In the real case <x,y>=(||x+y||^2-||x-y||^2)/4; in the complex first-variable-linear case <x,y>=(||x+y||^2-||x-y||^2+i||x+iy||^2-i||x-iy||^2)/4.",
+        "strategy": "Necessity is the parallelogram theorem. For sufficiency set q(x)=||x||^2 and use the parallelogram identity to prove the real polarization is additive first for doubling, integers, rationals, then reals by norm continuity. In the complex case apply the real construction to the underlying real space and define B(x,y)=B_R(x,y)-i B_R(ix,y); verify complex linearity in the first variable, Hermitian symmetry, positivity and that B(x,x)=q(x).",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-hilbert-space",
+        "kind": "definition",
+        "title": "Hilbert space",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "cor-inner-product-induces-a-norm",
+          "def-banach-space",
+          "def-complete-metric-space"
+        ],
+        "statement": "A Hilbert space is a real or complex inner-product space complete for its induced norm in the library's Cauchy-sequence sense.",
+        "strategy": "Fix sequential completeness as the convention. Contrast it explicitly with sigma-completeness only in an axiom note; do not silently import the stronger set-theoretic notion.",
+        "axiom_audit": "Definition is choice-free; later nearest-point selection from arbitrary approximants uses only AC_omega.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            },
+            {
+              "title": "Blackadar, Farah and Karagila, Hilbert spaces without the Countable Axiom of Choice, §§1–2",
+              "url": "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-inner-product-is-jointly-continuous",
+        "kind": "lemma",
+        "title": "The inner product is jointly continuous",
+        "deps": [
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-inner-product-induces-a-norm",
+          "def-real-and-complex-inner-product-space",
+          "def-metric-topology",
+          "def-metric-ball",
+          "def-product-topology",
+          "def-metric-convergence"
+        ],
+        "statement": "The pairing (x,y) -> <x,y> is jointly continuous for the product of the induced norm topologies. Quantitatively, |<x,y>-<x',y'>| <= ||x-x'||||y||+||x'||||y-y'||; in particular x_n->x and y_n->y imply <x_n,y_n>-><x,y>.",
+        "strategy": "Insert and subtract <x',y>, apply Cauchy–Schwarz twice, and bound ||y|| by ||y'||+||y-y'|| in a norm ball. Given epsilon at (x',y'), choose one product-neighbourhood radius making both terms small. This proves norm-topology continuity directly, with the sequential statement only as a consequence, before any completion pairing is defined.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-completion-of-an-inner-product-space-is-hilbert",
+        "kind": "theorem",
+        "title": "Completion of an inner-product space is Hilbert",
+        "deps": [
+          "def-completion-of-a-normed-space",
+          "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "lem-inner-product-is-jointly-continuous",
+          "thm-parallelogram-law",
+          "thm-jordan-von-neumann-polarization",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "def-countable-choice",
+          "def-hilbert-space"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, the norm completion of an inner-product space carries an inner product extending the original one whose induced norm is the completion norm, and it is the unique such extension among inner products that induce the completion norm.",
+        "strategy": "For Cauchy representatives (x_n),(y_n), define the pairing as lim <x_n,y_n>. Joint continuity/Cauchy–Schwarz proves the scalar sequence is Cauchy and that equivalent representatives give the same limit. Pass sesquilinearity, symmetry and positivity to limits; prove definiteness from the completed norm and identify that norm by lim ||x_n||. Uniqueness follows from density and joint continuity.",
+        "axiom_audit": "Uses AC_omega exactly through the published Cauchy-sequence metric-completion supplier; the pairing extension adds no further choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-orthogonality-and-orthogonal-complement",
+        "kind": "definition",
+        "title": "Orthogonality and orthogonal complement",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-linear-subspace",
+          "cor-inner-product-induces-a-norm"
+        ],
+        "statement": "Vectors x,y are orthogonal when <x,y>=0. For a subset S, S^perp is the set of vectors orthogonal to every s in S.",
+        "strategy": "Check symmetry of orthogonality and note that S^perp is a linear subspace because the inner product is linear in the first variable.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+        "kind": "lemma",
+        "title": "Pythagoras and finite orthogonal sums",
+        "deps": [
+          "def-orthogonality-and-orthogonal-complement",
+          "thm-parallelogram-law",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "statement": "If x_1,...,x_n are pairwise orthogonal, then ||sum_j x_j||^2=sum_j||x_j||^2.",
+        "strategy": "Prove the two-vector identity by expansion and induct on the number of summands; an empty sum has squared norm zero.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-orthogonal-complement-is-closed",
+        "kind": "lemma",
+        "title": "Orthogonal complements are closed",
+        "deps": [
+          "def-orthogonality-and-orthogonal-complement",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "cor-inner-product-induces-a-norm",
+          "def-metric-topology",
+          "def-metric-ball"
+        ],
+        "statement": "For every subset S of an inner-product space, S^perp is a closed linear subspace.",
+        "strategy": "Linearity was checked in the definition. If x is not in S^perp, choose a single s in S with <x,s> nonzero; then s is nonzero and the norm ball of radius |<x,s>|/(2||s||) about x misses S^perp by Cauchy–Schwarz. Thus the complement is norm-open and S^perp is closed, without converting closure into a sequential assertion.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy",
+        "kind": "lemma",
+        "title": "A minimizing sequence in a closed convex set is Cauchy",
+        "deps": [
+          "thm-parallelogram-law",
+          "def-infimum",
+          "def-relative-normed-convexity-and-separation",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "statement": "Let C be nonempty and convex in an inner-product space, d=inf_{c in C}||x-c||, and let c_n in C satisfy ||x-c_n||->d. Then (c_n) is Cauchy.",
+        "strategy": "Translate by x. Apply the parallelogram identity to x-c_m and x-c_n. Their midpoint corresponds to a point of C, so its norm is at least d; the remaining two excess terms tend to zero and force ||c_m-c_n||->0.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-projection-onto-a-nonempty-closed-convex-set",
+        "kind": "theorem",
+        "title": "Projection onto a nonempty closed convex set",
+        "deps": [
+          "lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy",
+          "def-hilbert-space",
+          "thm-infimum-property",
+          "lem-inf-epsilon",
+          "def-infimum",
+          "cor-archimedean-reciprocal",
+          "def-real-limit",
+          "def-countable-choice",
+          "def-relative-normed-convexity-and-separation",
+          "def-metric-topology",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "thm-parallelogram-law"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, every nonempty closed convex subset C of a Hilbert space has, for each x, a unique p in C minimizing ||x-p||.",
+        "strategy": "Let d be the distance. Countable choice selects c_n in C with ||x-c_n||<d+1/n. The minimizing-sequence lemma makes (c_n) Cauchy; Hilbert completeness and closedness put its limit p in C, and norm continuity gives distance d. Apply the parallelogram estimate to two minimizers and convexity of their midpoint to prove uniqueness.",
+        "axiom_audit": "Uses exactly AC_omega to select one approximate minimizer for each n. With sigma-completeness the nested closed-set argument is ZF, but that stronger definition is not used here.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            },
+            {
+              "title": "Blackadar, Farah and Karagila, Hilbert spaces without the Countable Axiom of Choice, §§1–2",
+              "url": "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hilbert-projection-variational-characterization",
+        "kind": "theorem",
+        "title": "Variational characterization of Hilbert projection",
+        "deps": [
+          "thm-projection-onto-a-nonempty-closed-convex-set",
+          "def-relative-normed-convexity-and-separation",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for closed convex C and p in C, p is the nearest point to x iff Re<x-p,y-p><=0 for every y in C.",
+        "strategy": "For a minimizer, apply minimality along p+t(y-p), 0<=t<=1, expand the squared norm, divide by t and let t decrease to zero. Conversely expand ||x-y||^2 using the stated inequality to show it is at least ||x-p||^2.",
+        "axiom_audit": "AC_omega is inherited when the theorem invokes existence of the nearest point; the equivalence for a supplied p is ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-orthogonal-decomposition-by-a-closed-subspace",
+        "kind": "theorem",
+        "title": "Orthogonal decomposition by a closed subspace",
+        "deps": [
+          "thm-projection-onto-a-nonempty-closed-convex-set",
+          "thm-hilbert-projection-variational-characterization",
+          "def-linear-subspace",
+          "def-orthogonality-and-orthogonal-complement",
+          "lem-orthogonal-complement-is-closed",
+          "def-metric-topology",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, if M is a closed linear subspace of a Hilbert space H, then every x has a unique decomposition x=m+n with m in M and n in M^perp.",
+        "strategy": "Apply convex projection to x and M. The variational inequality with y=m+tw for real t gives Re<x-m,w>=0; in the complex case also use y=m+itw to kill the imaginary part. Thus x-m lies in M^perp. Uniqueness follows from M intersect M^perp={0}.",
+        "axiom_audit": "Inherits only AC_omega through the sequential closest-point theorem; no basis choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            },
+            {
+              "title": "Blackadar, Farah and Karagila, Hilbert spaces without the Countable Axiom of Choice, §§1–2",
+              "url": "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-hilbert-orthogonal-projection",
+        "kind": "definition",
+        "title": "Hilbert orthogonal projection",
+        "deps": [
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "def-orthogonal-projection",
+          "def-linear-subspace",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for a closed subspace M of H, P_M x is the unique M-component in x=P_Mx+(x-P_Mx), with x-P_Mx in M^perp. It agrees with the earlier finite-dimensional projection.",
+        "strategy": "Use uniqueness of the orthogonal decomposition to define P_M and record its range, kernel and agreement with the published finite-dimensional construction.",
+        "axiom_audit": "The definition relies on existence supplied by the AC_omega-dependent decomposition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+        "kind": "lemma",
+        "title": "Hilbert orthogonal projections are linear, symmetric and contractive",
+        "deps": [
+          "def-hilbert-orthogonal-projection",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-linear-subspace",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for closed M, P_M is linear and idempotent, ker P_M=M^perp, ran P_M=M, <P_Mx,y>=<x,P_My>, and ||P_Mx||<=||x||; if M is nonzero then ||P_M||=1.",
+        "strategy": "Add decompositions and use uniqueness for linearity; applying P again proves idempotence and identifies range/kernel. Orthogonality gives the pairing identity. Pythagoras gives contractivity, and a unit vector of nonzero M gives norm one.",
+        "axiom_audit": "Inherits only AC_omega through the definition of P_M.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-double-orthogonal-complement-is-closure",
+        "kind": "theorem",
+        "title": "Double orthogonal complement is closure",
+        "deps": [
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "lem-orthogonal-complement-is-closed",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-linear-subspace",
+          "thm-metric-closure-characterisation",
+          "lem-vector-operations-are-continuous-in-a-normed-space",
+          "def-metric-convergence",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for every linear subspace M of a Hilbert space, M^{perp perp}=closure(M).",
+        "strategy": "The closure of M is contained in M^{perp perp} by continuity. Apply orthogonal decomposition to the closed subspace closure(M); if x is also in M^{perp perp}, its component in closure(M)^perp=M^perp is orthogonal to itself and hence zero.",
+        "axiom_audit": "Inherits only AC_omega through orthogonal decomposition; the claim is deliberately restricted to linear subspaces.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-riesz-representation-for-hilbert-space",
+        "kind": "theorem",
+        "title": "Riesz representation for Hilbert spaces",
+        "deps": [
+          "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-dual-space-of-a-normed-space",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-linear-subspace",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, every bounded linear functional f on H is uniquely f(x)=<x,y> for a vector y, with ||f||=||y||; y depends conjugate-linearly and isometrically on f under the first-variable-linear convention.",
+        "strategy": "For f=0 take y=0. Otherwise use boundedness to show ker f is norm closed directly: a point x outside ker f has a ball of radius |f(x)|/(2||f||) disjoint from the kernel. Choose z with f(z)=1 and orthogonally decompose z=m+n relative to ker f; n is nonzero and every x-f(x)z lies in ker f, yielding f(x)=<x,n>/||n||^2. Set y=n/||n||^2. Cauchy–Schwarz gives ||f||<=||y|| and testing y/||y|| gives equality; uniqueness and conjugate linearity follow by nondegeneracy.",
+        "axiom_audit": "Uses only AC_omega through the sequential orthogonal-decomposition theorem; it does not use Hahn–Banach or full AC.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            },
+            {
+              "title": "Blackadar, Farah and Karagila, Hilbert spaces without the Countable Axiom of Choice, §§1–2",
+              "url": "https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-hilbert-spaces-are-reflexive",
+        "kind": "corollary",
+        "title": "Hilbert spaces are reflexive",
+        "deps": [
+          "thm-riesz-representation-for-hilbert-space",
+          "def-canonical-map-into-the-bidual",
+          "def-reflexive-banach-space",
+          "def-dual-space-of-a-normed-space",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, the canonical evaluation map J_H:H->H** is surjective, so every Hilbert space is reflexive.",
+        "strategy": "Let R(y)(x)=<x,y>, the conjugate-linear Riesz isometry onto H*. Given Phi in H**, define g(y)=overline{Phi(Ry)}; it is a bounded linear functional. Riesz gives z with g(y)=<y,z>. Conjugating yields Phi(Ry)=<z,y>=(Ry)(z)=J_H(z)(Ry). Surjectivity of R gives Phi=J_H(z), verifying the canonical map rather than an abstract isomorphism.",
+        "axiom_audit": "Inherits only AC_omega through Riesz representation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-hilbert-space-adjoint",
+        "kind": "definition",
+        "title": "Hilbert-space adjoint",
+        "deps": [
+          "thm-riesz-representation-for-hilbert-space",
+          "def-transpose-of-a-bounded-operator",
+          "def-space-of-bounded-linear-operators",
+          "def-bounded-linear-operator",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-operator-norm",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for bounded T:H->K, its Hilbert adjoint T*:K->H is defined by <Tx,y>_K=<x,T*y>_H. If R_H,R_K are Riesz maps, then R_H T*=T'_Banach R_K.",
+        "strategy": "For fixed y, x maps to <Tx,y>, a bounded functional. Riesz supplies the unique representing vector T*y. The displayed dictionary distinguishes this operator from the Banach transpose; boundedness and linearity are proved next.",
+        "axiom_audit": "Uses only AC_omega through Riesz representation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hilbert-adjoint-properties",
+        "kind": "theorem",
+        "title": "Hilbert-adjoint identities",
+        "deps": [
+          "def-hilbert-space-adjoint",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-operator-norm",
+          "lem-composition-operator-norm-inequality",
+          "def-bounded-linear-operator",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, hilbert adjoints are unique and bounded; ||T*||=||T||, (aT+bS)*=conj(a)T*+conj(b)S*, (ST)*=T*S*, T**=T, and ||T*T||=||T||^2.",
+        "strategy": "Use nondegeneracy for uniqueness. Move scalars through the second inner-product variable for conjugate linearity in the operator and compute composition pairings. Cauchy–Schwarz gives ||T*||<=||T||, involution gives equality, and the first-variable-linear adjoint identity ||Tx||^2=<x,T*Tx> gives one C*-inequality while submultiplicativity and norm equality give the reverse.",
+        "axiom_audit": "Inherits only AC_omega through existence of the adjoint.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-self-adjoint-positive-unitary-and-normal-operator",
+        "kind": "definition",
+        "title": "Self-adjoint, positive, unitary and normal operators",
+        "deps": [
+          "thm-hilbert-adjoint-properties",
+          "def-hilbert-space-adjoint",
+          "def-space-of-bounded-linear-operators",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for T in B(H), self-adjoint means T*=T, positive means <Tx,x> lies in the real interval [0,+infinity) for all x, unitary means T*T=TT*=I, and normal means T*T=TT*.",
+        "strategy": "State the four notions over real or complex Hilbert spaces, noting that positivity forces the displayed quadratic values to be real and that self-adjoint and unitary operators are normal.",
+        "axiom_audit": "Inherits only AC_omega because the adjoint was constructed by Riesz.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kernel-range-orthogonality-for-hilbert-adjoints",
+        "kind": "lemma",
+        "title": "Kernel–range orthogonality for Hilbert adjoints",
+        "deps": [
+          "def-hilbert-space-adjoint",
+          "thm-hilbert-adjoint-properties",
+          "thm-double-orthogonal-complement-is-closure",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-linear-subspace",
+          "def-bounded-linear-operator",
+          "def-real-and-complex-inner-product-space",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for bounded T:H->K, (ran T)^perp=ker T* and (ran T*)^perp=ker T; consequently closure(ran T)=(ker T*)^perp and closure(ran T*)=(ker T)^perp.",
+        "strategy": "Unwind <Tx,y>=<x,T*y> to prove the two annihilator identities (the second uses T**=T). Take orthogonal complements and apply the double-complement theorem to the linear ranges.",
+        "axiom_audit": "Inherits only AC_omega through adjoints and double-complement.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-l2-projection-agreement",
+        "kind": "remark",
+        "title": "Agreement with concrete L2 projection",
+        "deps": [
+          "def-hilbert-orthogonal-projection",
+          "lem-closed-l-two-subspaces-have-orthogonal-projections",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration"
+        ],
+        "statement": "Assuming AC, whenever the published L2 construction gives an orthogonal projection onto a closed subspace, it is the Hilbert projection defined here by uniqueness.",
+        "strategy": "Compare the concrete range and orthogonal-residual identities with the defining decomposition; uniqueness identifies the maps. This is orientation only and is not used to prove the Hilbert theorem.",
+        "axiom_audit": "Full AC is retained because the published concrete L2-projection supplier assumes it; AC implies the AC_omega used by the abstract Hilbert projection.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-lax-milgram-owned-by-pde",
+        "kind": "remark",
+        "title": "Lax–Milgram is owned by the PDE track",
+        "deps": [
+          "thm-riesz-representation-for-hilbert-space",
+          "def-bounded-linear-operator",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, the later PDE development may combine Riesz representation with its own definitions of bounded and coercive sesquilinear forms; no Lax–Milgram theorem is asserted on this page.",
+        "strategy": "Record the ownership boundary so this page does not silently import coercivity, form-representation, or PDE hypotheses.",
+        "axiom_audit": "Inherits only AC_omega through the Riesz supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.072,
+    "id": "hilbert-space-geometry-and-riesz-representation-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Hilbert Space Geometry and Riesz Representation — Examples",
+    "companion": "hilbert-space-geometry-and-riesz-representation",
+    "requires": [
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "ex-standard-inner-products-on-kn-ell-two-and-l-two",
+        "kind": "example",
+        "title": "Standard Hilbert-space inner products",
+        "deps": [
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-finite-dimensional-normed-spaces-are-banach",
+          "rem-ell-p-is-l-p-of-counting-measure",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-counting-measure",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, the standard dot/Hermitian products make K^n, ell^2, and quotient L^2 Hilbert spaces, with <x,y>=sum x_j conjugate(y_j) or integral f conjugate(g).",
+        "strategy": "Check the finite-dimensional dot/Hermitian form directly. Identify ell^2 with counting-measure L^2. For quotient L^2 use the published real Riesz–Fischer and Cauchy–Schwarz suppliers in the real case and the complete complex Lp/pairing interface in the complex case, including null-class independence.",
+        "axiom_audit": "Uses exactly AC_omega through the published real and complex L2-completeness suppliers; the finite-dimensional check adds no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-projection-onto-a-finite-dimensional-subspace-by-a-gram-matrix",
+        "kind": "example",
+        "title": "Finite-dimensional projection by a Gram matrix",
+        "deps": [
+          "def-hilbert-orthogonal-projection",
+          "def-gram-matrix-and-gram-determinant",
+          "thm-gram-determinant-detects-linear-independence",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "thm-operator-invertible-iff-determinant-nonzero",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, let H be a real or complex Hilbert space, let v_1,...,v_n be linearly independent, put M=span(v_j), and set G_ij=<v_i,v_j> and b_i=<x,v_i>. Then M is closed and P_Mx=sum_j c_jv_j, where the unique coefficient vector solves G^T c=b; the result is independent of the chosen basis.",
+        "strategy": "Finite-dimensional subspaces are closed, so the Hilbert projection applies. The published Gram theorem makes G and hence G^T invertible. In the first-variable-linear convention, ||sum_j c_jv_j||^2=c^T G conjugate(c), while <x-sum_j c_jv_j,v_i>=b_i-sum_j c_jG_ji; therefore orthogonality is exactly G^T c=b. Hilbert-projection uniqueness proves the formula and basis independence.",
+        "axiom_audit": "Inherits only AC_omega through the abstract Hilbert projection; finite-dimensional closedness and the Gram calculation are ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-projection-onto-constants-is-the-mean",
+        "kind": "example",
+        "title": "Projection onto constants is the mean",
+        "deps": [
+          "def-hilbert-orthogonal-projection",
+          "ex-standard-inner-products-on-kn-ell-two-and-l-two",
+          "cor-finite-dimensional-subspaces-are-closed",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, if 0<mu(X)<infinity, the projection in real or complex L^2(mu) onto the closed one-dimensional subspace of constants is P f=mu(X)^(-1)(integral_X f dmu) 1; for a probability measure this is the mean.",
+        "strategy": "The constants are a closed finite-dimensional subspace. Cauchy–Schwarz makes the integral finite, and solving <f-c1,1>=0 gives c=mu(X)^(-1) integral_X f dmu. The displayed scalar is unique, so the formula is the Hilbert projection.",
+        "axiom_audit": "Inherits only AC_omega through the abstract Hilbert projection; finite-dimensional closedness and the scalar calculation are ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-distance-to-a-closed-subspace",
+        "kind": "example",
+        "title": "Distance to a closed subspace",
+        "deps": [
+          "def-hilbert-orthogonal-projection",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, for closed M, dist(x,M)=||x-P_Mx|| and ||x-m||^2=||x-P_Mx||^2+||P_Mx-m||^2 for every m in M.",
+        "strategy": "Decompose x-m=(x-P_Mx)+(P_Mx-m); the summands are orthogonal. Pythagoras proves the identity and its minimum statement.",
+        "axiom_audit": "Inherits only AC_omega through the abstract Hilbert projection; Pythagoras adds no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-an-inner-product-space-need-not-be-complete",
+        "kind": "counterexample",
+        "title": "An inner-product space need not be complete",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-p-series-rational",
+          "rem-ell-p-is-l-p-of-counting-measure",
+          "def-counting-measure",
+          "lem-convergent-implies-cauchy",
+          "def-complete-metric-space",
+          "def-hilbert-space",
+          "def-real-limit"
+        ],
+        "statement": "The finitely supported sequences c_00 with the ell^2 inner product form an incomplete inner-product space.",
+        "strategy": "Use the published p-series theorem to show that the partial sums of (1/n)_{n>=1} are Cauchy in the ell^2 norm. If they converged to an element of c_00, norm convergence would force convergence in every fixed coordinate, so the limit would have coordinate 1/n at every n and could not have finite support.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-norm-need-not-satisfy-the-parallelogram-law",
+        "kind": "counterexample",
+        "title": "A norm need not satisfy the parallelogram law",
+        "deps": [
+          "thm-jordan-von-neumann-polarization",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-counting-measure",
+          "rem-ell-p-is-l-p-of-counting-measure",
+          "lem-rational-power-laws",
+          "lem-rational-power-monotone",
+          "def-rational-power",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "statement": "For 1<=p<=infinity with p!=2, the usual ell^p norm on a space containing two coordinate vectors is not induced by an inner product.",
+        "strategy": "Take e_1,e_2. For finite p the two sides of the parallelogram identity are 2*2^(2/p) and 4; for p=infinity they are 2 and 4. Jordan–von Neumann then excludes an inducing inner product.",
+        "axiom_audit": "ZF relative to the stated data.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-nearest-point-map-to-a-convex-set-need-not-be-linear",
+        "kind": "counterexample",
+        "title": "Nearest-point maps to convex sets need not be linear",
+        "deps": [
+          "def-hilbert-space",
+          "def-relative-normed-convexity-and-separation",
+          "def-real-and-complex-inner-product-space",
+          "def-complete-metric-space",
+          "def-banach-space",
+          "def-norm-and-normed-space"
+        ],
+        "statement": "For C=[0,infinity) in the real Hilbert space R, direct minimization gives P_C(t)=max(t,0), so the nearest-point map is neither additive nor linear.",
+        "strategy": "Compute distances separately for t>=0 and t<0, without invoking the general choice-dependent projection theorem. Then P_C(1)+P_C(-1)=1 while P_C(0)=0, so additivity fails.",
+        "axiom_audit": "ZF: the one-dimensional minimizer is explicit and no general projection theorem is invoked.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-adjoints-of-shifts-multiplication-and-integral-operators",
+        "kind": "example",
+        "title": "Adjoints of shifts, multiplication and integral operators",
+        "deps": [
+          "def-hilbert-space-adjoint",
+          "ex-standard-inner-products-on-kn-ell-two-and-l-two",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-countable-choice"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, on ell^2(N) the unilateral right shift has adjoint the left shift. For m in complex L^infinity(X,mu), M_m on L^2(X,mu) has adjoint M_conjugate(m). If (X,A,mu) and (Y,B,nu) are sigma-finite and k is a measurable representative of a class in complex L^2(X times Y,mu times nu), then K:L^2(Y)->L^2(X), Kf(x)=integral_Y k(x,y)f(y)dnu(y), is well defined independently of representatives and K* g(y)=integral_X conjugate(k(x,y))g(x)dmu(x).",
+        "strategy": "Compute the ell^2 pairing by an index shift. For m in L^infinity, complex Holder proves boundedness and moving m across the second slot gives M_m*=M_conjugate(m). For k in product L^2, Tonelli and the complex L2 Cauchy–Schwarz inequality prove the a.e. slice formulas, representative independence, ||Kf||_2<=||k||_2||f||_2, and absolute integrability of the paired double integral. Sigma-finite Fubini then interchanges the integrals and conjugation identifies the displayed reversed kernel.",
+        "axiom_audit": "Uses exactly AC_omega through the Hilbert-adjoint and complex L2-completeness suppliers; the pairing calculations add no full choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.073,
+    "id": "orthonormal-bases-parseval-and-fourier-series",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Orthonormal Bases Parseval and Fourier Series",
+    "companion": "orthonormal-bases-parseval-and-fourier-series-examples",
+    "requires": [
+      "hilbert-space-geometry-and-riesz-representation",
+      "measure-preserving-systems-and-mixing-criteria"
+    ],
+    "items": [
+      {
+        "id": "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+        "kind": "definition",
+        "title": "Orthonormal family complete orthonormal system and hilbert basis",
+        "deps": [
+          "def-hilbert-space",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-linear-subspace"
+        ],
+        "strategy": "Fix inner product linear in its first variable. Explain empty basis for zero space, distinction from Hamel bases, and finite-subset ordering rather than an assumed enumeration.",
+        "statement": "For a real or complex Hilbert space H, an indexed family (e_i) is orthonormal when <e_i,e_j>=delta_ij, and complete when its closed linear span is H. A Hilbert basis is a complete orthonormal family.",
+        "axiom_audit": "Definition, no new choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Definition 2.62, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-bessel-inequality",
+        "kind": "lemma",
+        "title": "Finite bessel inequality",
+        "deps": [
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "def-real-and-complex-inner-product-space",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-linear-subspace"
+        ],
+        "strategy": "Show residual orthogonal to every e_i in F, then apply finite Pythagoras. Also establish best approximation by P_F for use in the net argument.",
+        "statement": "For finite F in an orthonormal index set, P_F x=sum_{i in F}<x,e_i>e_i has squared norm sum |<x,e_i>|^2; ||x-P_F x||^2=||x||^2-sum |<x,e_i>|^2.",
+        "axiom_audit": "ZF relative to supplied Hilbert structure.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.47–48, Lemma 2.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-square-summable-family-on-an-arbitrary-index-set",
+        "kind": "definition",
+        "title": "Square summable family on an arbitrary index set",
+        "statement": "For any set I and real or complex scalar family a, define sum_{i in I}|a_i|^2 as the supremum in [0,+infinity] of its finite subsums; it equals +infinity when those subsums are unbounded. The space ell^2(I) consists of the families for which this value is finite, with norm equal to its square root.",
+        "strategy": "Use the directed set of finite subsets ordered by inclusion and the extended-real supremum, including the empty finite subsum. Define finite-subset tails. For families with finite square sum, establish vector-space closure and the triangle inequality by finite-dimensional Cauchy–Schwarz and passage to suprema; no enumeration is used.",
+        "deps": [
+          "def-directed-set-and-net",
+          "def-net-convergence-and-cluster-point",
+          "thm-hausdorff-iff-net-limits-are-unique",
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "def-finite-sum",
+          "def-complete-ordered-field",
+          "lem-sup-epsilon",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "def-real-numbers"
+        ],
+        "axiom_audit": "ZF: the arbitrary supremum is taken in the complete extended real line, and all finite estimates are choice-free.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+        "kind": "theorem",
+        "title": "Bessel inequality for an arbitrary orthonormal family",
+        "deps": [
+          "lem-finite-bessel-inequality",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis"
+        ],
+        "strategy": "Take the supremum of finite Bessel bounds.",
+        "statement": "For x in H and any orthonormal family, sum_I |<x,e_i>|^2 <= ||x||^2 in the finite-supremum convention.",
+        "axiom_audit": "ZF relative to the supplied family.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.48, equation (2.4)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-only-countably-many-fourier-coefficients-are-nonzero",
+        "kind": "lemma",
+        "title": "Only countably many fourier coefficients are nonzero",
+        "deps": [
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-countable-union-of-countable",
+          "def-countable-choice",
+          "cor-archimedean-reciprocal",
+          "lem-subset-of-countable",
+          "def-countable",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis"
+        ],
+        "strategy": "For m>=1, let A_m={i:|a_i|>=1/m}. If A_m contained arbitrarily large finite subsets, their square subsums would exceed the finite total; choose an integer N>m^2 sum_I|a_i|^2 by the Archimedean theorem to obtain the explicit contradiction, so A_m is finite. Every nonzero coefficient belongs to some A_m, again by Archimedeanness. Apply the countable-union theorem under AC_omega to conclude that the support is at most countable; do not present this final step as ZF.",
+        "statement": "Assuming the Axiom of Countable Choice, an ell^2(I) family has at most countable support; in particular the Fourier coefficients of a fixed x do.",
+        "axiom_audit": "Uses AC_omega at the countable-union step; the threshold sets and their finite cardinal bounds are constructed in ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.48, threshold argument after (2.4)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+        "kind": "lemma",
+        "title": "Square summable orthogonal families have norm convergent finite sums",
+        "statement": "Assuming the Axiom of Countable Choice, if (x_i)_{i in I} is an orthogonal family in H with sum_I ||x_i||^2 finite, then the finite-subset net sum_{i in F}x_i converges in H and its limit has squared norm sum_I ||x_i||^2. In particular, for an orthonormal family (e_i) and a in ell^2(I), sum_F a_i e_i converges, has coefficient a_i, and has squared norm sum_I |a_i|^2.",
+        "strategy": "Use AC_omega to choose finite sets whose omitted squared mass is below 2^(-2n), and replace them by cumulative unions. Pythagoras makes their sums Cauchy, so sequential Hilbert completeness gives a limit. For every finite F containing one chosen control set, compare F with later cumulative sets through their symmetric difference in the controlled tail; passing to the limit proves convergence of the entire finite-subset net. Norm continuity gives the norm identity, and inner-product continuity gives the coefficient assertion.",
+        "deps": [
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-hilbert-space",
+          "def-countable-choice",
+          "cor-archimedean-reciprocal",
+          "lem-of-square-monotone",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis"
+        ],
+        "axiom_audit": "Uses exactly AC_omega to choose the countable family of finite tail-control sets; no enumeration of I and no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.49, Theorem 2.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+        "kind": "theorem",
+        "title": "Parseval equivalences for a complete orthonormal family",
+        "deps": [
+          "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-double-orthogonal-complement-is-closure",
+          "def-countable-choice",
+          "lem-finite-bessel-inequality",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-orthogonality-and-orthogonal-complement",
+          "def-linear-subspace",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-metric-closure-characterisation",
+          "lem-sup-epsilon",
+          "lem-reverse-triangle-inequality-in-a-normed-space"
+        ],
+        "strategy": "Construct the orthogonal-series limit; residual is perpendicular to all family members. Zero complement identifies it with x. Conversely Parseval makes the residual zero; net convergence gives dense span. Use the double-complement theorem for the remaining equivalence.",
+        "statement": "Assuming the Axiom of Countable Choice, for an orthonormal family in H: dense span, zero orthogonal complement, Parseval equality for every x, and convergence P_F x -> x of the finite-subset net are equivalent.",
+        "axiom_audit": "Uses only AC_omega through arbitrary-index finite-subset-net synthesis and the FA-13 projection/double-complement chain; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.50–51, Theorem 2.4",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hilbert-space-fourier-expansion",
+        "kind": "theorem",
+        "title": "Hilbert space fourier expansion",
+        "deps": [
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "lem-only-countably-many-fourier-coefficients-are-nonzero",
+          "def-countable-choice",
+          "lem-finite-bessel-inequality",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-countable-iff-surjection-from-n",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "strategy": "Apply Parseval equivalences and coefficient continuity. With the support lemma, every enumeration of the nonzero coefficients has the same limit; this does not impose a global ordering on I.",
+        "statement": "Assuming the Axiom of Countable Choice, for a complete orthonormal family, x=sum_I <x,e_i>e_i unconditionally in norm. The coefficients are unique.",
+        "axiom_audit": "Uses only AC_omega through arbitrary-index finite-subset-net synthesis and the FA-13 projection/double-complement chain; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.49–50, Theorem 2.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-existence-of-a-maximal-orthonormal-family",
+        "kind": "theorem",
+        "title": "Existence of a maximal orthonormal family",
+        "deps": [
+          "thm-zorn",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "def-axiom-of-choice",
+          "lem-ac-supplies-countable-and-dependent-choice-for-banach-integration",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-orthogonality-and-orthogonal-complement",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "strategy": "Partially order orthonormal subsets by inclusion; chain unions remain orthonormal, so Zorn applies. A nonzero vector in the orthogonal complement normalizes to an extension; conversely dense span prohibits an extension.",
+        "statement": "Assuming AC, every Hilbert space has a maximal orthonormal family, and an orthonormal family is maximal iff complete.",
+        "axiom_audit": "Uses full AC explicitly via Zorn; the AC=>AC_omega bridge discharges the weaker hypothesis of the Parseval supplier. This item is not used to produce a basis from a supplied dense sequence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.52, Theorem 2.7",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+        "kind": "theorem",
+        "title": "Hilbert space with a given orthonormal basis is ell two of the index set",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "thm-hilbert-space-fourier-expansion",
+          "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-countable-choice",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-hilbert-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-finite-bessel-inequality",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "strategy": "Parseval gives isometry; synthesize any square-summable family by the preceding net lemma to prove onto, without presupposing completeness of ell^2(I). Obtain inner product by polarization or limit of finite pairings.",
+        "statement": "Assuming the Axiom of Countable Choice, given an orthonormal basis (e_i) of H over F, x -> (<x,e_i>) is a surjective linear isometry H -> ell^2(I,F), preserving inner products. In particular ell^2(I,F) is complete.",
+        "axiom_audit": "Uses only AC_omega through arbitrary-index finite-subset-net synthesis and the FA-13 projection/double-complement chain; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.52, ell^2(J) discussion following Theorem 2.7",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.64, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+        "kind": "theorem",
+        "title": "Separable hilbert space has a countable orthonormal basis",
+        "deps": [
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-finite-bessel-inequality",
+          "def-hilbert-space",
+          "def-dense-top",
+          "def-linear-subspace",
+          "thm-recursion",
+          "def-countable",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "strategy": "Run Gram–Schmidt in the given order, discard zero residuals, normalize each nonzero residual. Every input vector lies in the span of outputs generated up to its index; their span is dense. The infinite-dimensional case supplies infinitely many outputs.",
+        "statement": "A Hilbert space supplied with a countable dense sequence has a finite or countable orthonormal basis.",
+        "axiom_audit": "Deterministic from a supplied dense sequence; no maximal-family choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.49–50, Gram–Schmidt and Theorem 2.3",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.63, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-separable-infinite-dimensional-hilbert-space-is-ell-two",
+        "kind": "corollary",
+        "title": "Separable infinite dimensional hilbert space is ell two",
+        "deps": [
+          "def-real-and-complex-inner-product-space",
+          "def-separable-space",
+          "lem-countable-iff-surjection-from-n",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-finite-bessel-inequality",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "def-hilbert-space",
+          "thm-monotone-convergence",
+          "thm-metric-closure-characterisation",
+          "lem-subset-of-countable",
+          "def-countable",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-linear-subspace",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-dense-top"
+        ],
+        "strategy": "Instantiate one at-most-countable dense subset from separability; because the space is nonempty, the countability supplier gives a single surjection N onto it, hence a supplied dense sequence without a choice function. Deterministic Gram–Schmidt yields an infinite orthonormal basis indexed by N. Finite Bessel and approximation by its finite spans prove Parseval and convergence for the canonical initial partial sums. Conversely, for a in ell^2(N), those canonical partial sums are Cauchy by Pythagoras and converge by sequential Hilbert completeness. The coefficient map is therefore a linear isometric bijection without invoking arbitrary-index synthesis or maximal-family choice.",
+        "statement": "In ZF, every separable infinite-dimensional Hilbert space over F is linearly isometric to ell^2(N,F).",
+        "axiom_audit": "ZF: one existential separability witness and one enumeration witness are instantiated, Gram–Schmidt is deterministic, and only the canonical N-order partial sums are used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.52, Theorem 2.6",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+        "kind": "lemma",
+        "title": "L two with the integral pairing is a hilbert space",
+        "statement": "Assuming the Axiom of Countable Choice, for a measure space, real/complex L^2 with <f,g>=integral f conjugate(g) is Hilbert; its norm is the established quotient L^2 norm.",
+        "strategy": "For real L^2, integral Cauchy–Schwarz makes the pairing finite and null-class invariant, integral positivity proves definiteness, and the real Riesz–Fischer theorem gives completeness. For complex L^2, invoke the published complex Lp/pairing interface, which proves representative independence, the first-variable-linear inner product, equality with the quotient norm, and completeness. This is an A-page supplier rather than an appeal to a Hilbert-space B example.",
+        "deps": [
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "def-countable-choice",
+          "def-real-and-complex-inner-product-space",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space"
+        ],
+        "axiom_audit": "Uses exactly AC_omega through the published real and complex L2-completeness suppliers; pairing well-definedness adds no further choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+        "kind": "definition",
+        "title": "The one dimensional torus and normalized haar integral",
+        "deps": [
+          "thm-finite-products-of-compact-spaces",
+          "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-quotient-topology",
+          "lem-integer-part",
+          "def-borel-sigma-algebra",
+          "def-restriction-of-a-measure",
+          "prop-restriction-is-a-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "def-countable-choice",
+          "def-integers",
+          "def-measure",
+          "def-topological-space",
+          "def-continuous-map-top",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-quotient-universal-property",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-product-topology",
+          "thm-compactness-under-continuous-maps",
+          "def-real-numbers",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-measure-space"
+        ],
+        "strategy": "Let q:R->T be the quotient map. For Borel E in T define m_T(E)=lambda(q^{-1}(E) intersect [0,1)); continuity of q makes the preimage measurable, restriction of Lebesgue measure handles the half-open fundamental interval, and disjoint preimages plus countable additivity prove directly that m_T is a probability measure because every class has exactly one representative in [0,1). Prove the pushforward integral identity first for indicators and finite simple functions, then for nonnegative functions by increasing simple approximation and monotone convergence, and finally for integrable real/complex functions by decomposition. Splitting a translated fundamental interval and using Lebesgue translation invariance makes every torus rotation measure preserving, so the published integral-invariance theorem gives normalized Haar invariance without invoking abstract Haar theory. Finite-product measure and Fubini give T^n and its [0,1)^n formula. The following local lemma supplies compact Hausdorff topology; do not cite the later order-295 fundamental-group page.",
+        "statement": "Assuming the Axiom of Countable Choice, T=R/Z with its quotient topology carries the Borel probability measure m_T(E)=lambda(q^{-1}(E) intersect [0,1)), whose integral is represented on [0,1) and is invariant under every torus translation. For positive integer n, T^n has the finite product topology and product probability measure, with integral represented on [0,1)^n.",
+        "axiom_audit": "Uses only AC_omega, inherited through the published Lebesgue-measure supplier; the quotient and finite-product definitions add no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-tori-are-compact-hausdorff-character-spaces",
+        "kind": "lemma",
+        "title": "Finite tori are compact Hausdorff spaces separated by characters",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-quotient-universal-property",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-compactness-under-continuous-maps",
+          "thm-heine-borel-r",
+          "thm-finite-products-of-compact-spaces",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "lem-integer-part",
+          "def-countable-choice",
+          "def-quotient-topology",
+          "def-hausdorff-space",
+          "def-compact-space",
+          "def-integers",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-real-numbers"
+        ],
+        "statement": "Assuming the Axiom of Countable Choice, the map [t] -> (cos(2 pi t),sin(2 pi t)) identifies T homeomorphically with the Euclidean unit circle. For finite n, T^n is compact Hausdorff and its coordinate characters separate points.",
+        "strategy": "The quotient map R->T is continuous and its restriction to [0,1] is onto by integer parts, so T is compact. The continuous trigonometric parametrization descends by the quotient universal property; period and unique parametrization on [0,2pi) give bijectivity. A continuous bijection from compact T onto the Hausdorff Euclidean circle is a homeomorphism. Finite products give compactness and Hausdorffness; distinct tuples differ in one coordinate, whose character separates them. Reprove this here from earlier local topology rather than importing the published but later order-295 circle theorem.",
+        "axiom_audit": "Inherits AC_omega only because the preceding torus package includes its normalized integral. The compact-Hausdorff and character-separation proof itself is ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-fourier-coefficients-and-trigonometric-polynomials",
+        "kind": "definition",
+        "title": "Fourier coefficients and trigonometric polynomials",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-countable-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-complex-conjugation-and-modulus-laws"
+        ],
+        "strategy": "Use the complex Lp conventions and Holder interface to check representative independence on null classes; the character has modulus one. Check independence of real representatives modulo Z by periodicity of the complex exponential. The same formulas on T^n use k dot x and k in Z^n.",
+        "statement": "Assuming the Axiom of Countable Choice, on T let e_k(x)=exp(2 pi i kx), k in Z. For f in complex L^1(T), define fhat(k)=integral_T f(x) exp(-2 pi i kx) dx. Trigonometric polynomials are finite complex linear combinations of the characters.",
+        "axiom_audit": "Uses only AC_omega through the normalized torus integral and published complex Lp conventions; the finite character formulas add no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 pp.63–64, equations (2.42)–(2.44)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-trigonometric-characters-are-orthonormal",
+        "kind": "lemma",
+        "title": "Trigonometric characters are orthonormal",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-sine-and-cosine-derivatives",
+          "def-countable-choice",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-chain-rule",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ],
+        "strategy": "Write exp(2 pi i(k-l)x) in sine and cosine parts. The derivative formulas and the second fundamental theorem of calculus compute their Riemann integrals on [0,1], distinguishing zero from nonzero integer frequency; continuous integrability and the bounded Riemann/Lebesgue agreement transfer the calculation to the normalized Lebesgue integral. Check the first-variable-linear convention gives fhat(k)=<f,e_k>.",
+        "statement": "Assuming the Axiom of Countable Choice, the family (e_k)_{k in Z} is orthonormal in complex L^2(T).",
+        "axiom_audit": "Uses only AC_omega through the local L2 Hilbert-space and Riemann/Lebesgue comparison suppliers; the finite calculus computation adds no full choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions",
+        "kind": "corollary",
+        "title": "Trigonometric polynomials are dense in continuous periodic functions",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "lem-finite-tori-are-compact-hausdorff-character-spaces",
+          "def-countable-choice",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "strategy": "The character algebra contains 1, is self-adjoint by conjugate(e_k)=e_-k, and separates circle points by e_1 and the quotient-circle homeomorphism. Apply precisely the unital case of complex Stone–Weierstrass.",
+        "statement": "Assuming the Axiom of Countable Choice, trigonometric polynomials are uniformly dense in complex C(T).",
+        "axiom_audit": "Inherits only AC_omega through the torus package; once the compact Hausdorff character space is supplied, Stone–Weierstrass adds no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 p.68, Problem 2.19",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+        "kind": "lemma",
+        "title": "Continuous periodic functions are dense in l p of finite tori",
+        "statement": "Assuming the Axiom of Countable Choice, for n>=1 and 1<=p<infinity, complex C(T^n) is dense in complex L^p(T^n). Complex continuous functions are also dense in L^p of every bounded interval; the real versions follow by taking real parts.",
+        "strategy": "Extend a complex representative on the unit cube by zero to R^n and use the published complex compact-support density theorem. Restrict an approximant to the cube and multiply by a real continuous cutoff that vanishes near every boundary face and equals one on the inner cube. The complex Minkowski inequality and the boundary-strip volume bound make the error tend to zero. Periodize; vanishing near the boundary makes the result continuous on T^n. For an arbitrary bounded interval, zero-extend directly to R, apply the same published density theorem, and restrict the smooth approximants to the interval; no unproved affine change-of-variables formula is invoked. Real density follows by taking real parts.",
+        "deps": [
+          "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice",
+          "thm-absolute-continuity-of-the-integral",
+          "cor-archimedean-reciprocal",
+          "thm-quotient-universal-property",
+          "def-metric-continuity",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ],
+        "axiom_audit": "Uses exactly AC_omega through the published complex Euclidean density theorem; the finite cutoff, boundary-strip, and periodization steps add no full choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 p.68, Problem 2.18",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+        "kind": "theorem",
+        "title": "Trigonometric system is complete in l two of the torus",
+        "deps": [
+          "lem-trigonometric-characters-are-orthonormal",
+          "cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions",
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "def-fourier-coefficients-and-trigonometric-polynomials"
+        ],
+        "strategy": "First approximate by continuous periodic functions in L^2, then uniformly by trigonometric polynomials; ||g||_2<=||g||_infinity on probability T. No use of Parseval to establish completeness.",
+        "statement": "Assuming the Axiom of Countable Choice, the characters form an orthonormal basis of complex L^2(T).",
+        "axiom_audit": "Uses only AC_omega through the declared L2, density, and arbitrary-index Hilbert-basis suppliers; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 pp.64–65, Theorem 2.17",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-l-two-fourier-series-converges-in-mean-square",
+        "kind": "theorem",
+        "title": "L two fourier series converges in mean square",
+        "deps": [
+          "def-directed-set-and-net",
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-hilbert-space-fourier-expansion",
+          "def-countable-choice",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "lem-trigonometric-characters-are-orthonormal",
+          "lem-finite-set-has-max",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Apply Hilbert Fourier expansion to the now-proved character basis. The symmetric intervals are cofinal among finite subsets. This is not pointwise convergence.",
+        "statement": "Assuming the Axiom of Countable Choice, for f in L^2(T), sum_{|k|<=N} fhat(k)e_k -> f in L^2; the finite-subset net also converges.",
+        "axiom_audit": "Uses only AC_omega through the declared L2, density, and arbitrary-index Hilbert-basis suppliers; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 Theorem 2.17, equation (2.48)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-parseval-identity-for-fourier-series",
+        "kind": "theorem",
+        "title": "Parseval identity for fourier series",
+        "deps": [
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "def-countable-choice",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-trigonometric-characters-are-orthonormal",
+          "lem-finite-set-has-max",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "strategy": "Parseval equivalences put both coefficient families in ell^2(Z). Finite Cauchy–Schwarz bounds every finite subsum of |fhat(k) conjugate(ghat(k))| and proves absolute convergence. Pair finite Fourier sums, pass to the L^2 limit by inner-product continuity, and identify the limit with the finite-subset net (hence also the canonical Z enumeration).",
+        "statement": "Assuming the Axiom of Countable Choice, for f,g in L^2(T), ||f||_2^2=sum_Z |fhat(k)|^2 and <f,g>=sum_Z fhat(k) conjugate(ghat(k)); the bilinear-Parseval series is absolutely convergent and both sums have their finite-subset-net meaning (equivalently, their canonical Z-enumeration meaning).",
+        "axiom_audit": "Uses only AC_omega through the declared L2, density, and arbitrary-index Hilbert-basis suppliers; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 Theorem 2.17, equation (2.48)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-riesz-fischer-for-fourier-coefficients",
+        "kind": "theorem",
+        "title": "Riesz fischer for fourier coefficients",
+        "deps": [
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "def-countable-choice",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Apply the coefficient isometry and synthesis theorem to the proved character basis. State this as a surjective linear isometry between two Hilbert spaces, since the earlier endomorphism definition of a unitary operator does not type a map between different spaces. Distinguish this surjectivity theorem from MT completeness of L^p.",
+        "statement": "Assuming the Axiom of Countable Choice, the Fourier coefficient map is a surjective linear isometry L^2(T;C) -> ell^2(Z;C) and preserves inner products. Thus every square-summable coefficient sequence determines a unique L^2 class.",
+        "axiom_audit": "Uses only AC_omega through the declared L2, density, and arbitrary-index Hilbert-basis suppliers; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 Theorem 2.17, final assertion",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fourier-basis-and-parseval-on-the-n-torus",
+        "kind": "theorem",
+        "title": "Fourier basis and parseval on the n torus",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "lem-finite-tori-are-compact-hausdorff-character-spaces",
+          "def-countable-choice",
+          "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-hilbert-space-fourier-expansion"
+        ],
+        "strategy": "Fubini computes orthogonality. Coordinate characters separate points, their algebra is unital and self-adjoint; compact finite-product Stone–Weierstrass and periodic L^2 density give completeness. Apply Hilbert expansion and coefficient isometry. Explicitly avoid any unproved Hilbert tensor-product identification.",
+        "statement": "Assuming the Axiom of Countable Choice, for n>=1, the characters exp(2 pi i k dot x), k in Z^n, form an orthonormal basis of complex L^2(T^n); expansion, Parseval, and surjectivity of the coefficient isometry onto ell^2(Z^n;C) hold.",
+        "axiom_audit": "Uses only AC_omega through the declared L2, density, and arbitrary-index Hilbert-basis suppliers; no full AC is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis, §§1.3.3, 2.3.6 and 5.3.1–5.3.2",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            },
+            {
+              "title": "Andrew Lin and Casey Rodriguez, MIT 18.102 Introduction to Functional Analysis, Lectures 15–16 and 22–23",
+              "url": "https://live.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.074,
+    "id": "orthonormal-bases-parseval-and-fourier-series-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Orthonormal Bases Parseval and Fourier Series — Examples",
+    "companion": "orthonormal-bases-parseval-and-fourier-series",
+    "requires": [
+      "orthonormal-bases-parseval-and-fourier-series"
+    ],
+    "items": [
+      {
+        "id": "ex-standard-basis-of-ell-two",
+        "kind": "example",
+        "title": "Standard basis of ell two",
+        "deps": [
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "thm-monotone-convergence",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-hilbert-space-fourier-expansion",
+          "def-countable-choice",
+          "lem-finite-bessel-inequality",
+          "def-real-and-complex-inner-product-space",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "strategy": "Identify real or complex ell^2(N) with real or complex L^2 for counting measure, whose completeness is supplied by the local L2 Hilbert lemma. Finite-coordinate initial partial sums have squared tail error equal to the omitted coordinate-square sum, so the coordinate vectors have dense span; Hilbert expansion gives the stated coefficient and norm formulas without circularly assuming ell^2 is Hilbert.",
+        "statement": "Assuming the Axiom of Countable Choice, the coordinate vectors form an orthonormal basis of ell^2(N), with the usual coordinate expansion and norm formula.",
+        "axiom_audit": "Uses only AC_omega through complex counting-measure L2 completeness and the general Hilbert expansion; the explicit coordinate-tail calculation is ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.65, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-legendre-polynomials-from-gram-schmidt",
+        "kind": "example",
+        "title": "Legendre polynomials from gram schmidt",
+        "deps": [
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-countable-choice",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "def-real-and-complex-inner-product-space",
+          "lem-finite-bessel-inequality"
+        ],
+        "strategy": "Compute the three projections and normalizations explicitly. The published real Weierstrass theorem makes real polynomials uniformly dense on [-1,1]; combine this with interval continuous L^2 density to prove completeness of the Gram–Schmidt family. Standard Legendre P_n use P_n(1)=1, not unit L^2 norm.",
+        "statement": "Assuming the Axiom of Countable Choice, gram–Schmidt on 1,x,x^2,... in real L^2([-1,1],dx) gives a complete orthonormal family, beginning 1/sqrt(2), sqrt(3/2)x, sqrt(5/8)(3x^2-1).",
+        "axiom_audit": "Uses only AC_omega through L2 completeness and continuous-function density. Gram–Schmidt from the displayed ordered sequence is deterministic.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.50, example after Theorem 2.3",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-haar-orthonormal-basis-of-l-two-zero-one",
+        "kind": "example",
+        "title": "Haar orthonormal basis of l two zero one",
+        "deps": [
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-heine-cantor-metric",
+          "thm-heine-borel-r",
+          "def-countable-choice",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-continuous-implies-integrable",
+          "def-real-and-complex-inner-product-space"
+        ],
+        "strategy": "Disjoint supports or zero integral on nested dyadic intervals prove orthogonality; compute norm one. Induct on levels to identify finite Haar spans with dyadic step functions. Heine–Cantor on compact [0,1] makes every continuous real- or complex-valued function uniformly approximable by its dyadic step samples (apply the metric theorem directly, or to real and imaginary parts); interval continuous L^2 density proves completeness. Endpoints are null.",
+        "statement": "Assuming the Axiom of Countable Choice, the constant 1 and h_{j,k}=2^(j/2)(1_left-half-1_right-half) of each dyadic interval [k2^-j,(k+1)2^-j), j>=0,0<=k<2^j, form an orthonormal basis of L^2([0,1]).",
+        "axiom_audit": "Uses only AC_omega through L2 completeness and interval density; the dyadic orthogonality and span calculations are ZF.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vladimir Dobrushkin, Eigenfunction Expansion, APMA0360 course tutorial — Example 5, displayed dyadic functions and span discussion",
+              "url": "https://www.cfm.brown.edu/people/dobrush/am36/Mathematica/ch2/expand.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-fourier-series-of-a-sawtooth",
+        "kind": "example",
+        "title": "Fourier series of a sawtooth",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-l-two-fourier-series-converges-in-mean-square",
+          "thm-parseval-identity-for-fourier-series",
+          "def-countable-choice",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "lem-derivative-of-a-power",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Use the real and imaginary parts of the character. The derivative rules, integration by parts, and the second FTC compute each nonzero coefficient and the Riemann integral of x^2; the bounded Riemann/Lebesgue agreement transfers both calculations to the L2/Fourier integrals. Pair positive and negative squared coefficients. Assign arbitrary endpoint values and claim only L2 convergence.",
+        "statement": "Assuming the Axiom of Countable Choice, for the periodic L^2 class f(x)=x on (-1/2,1/2), fhat(0)=0 and fhat(k)=(-1)^(k+1)/(2 pi i k), k nonzero. Parseval gives sum_{k>=1}1/k^2=pi^2/6.",
+        "axiom_audit": "Uses only AC_omega through the Fourier expansion, Parseval, and Riemann/Lebesgue comparison suppliers; the calculus and finite Basel algebra add no full choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henri P. Gavin, Dynamic Periodic Response to Periodic Forcing, System Identification course notes, Fall 2013 — §4.2 p.7, formula below f(t)=t",
+              "url": "https://people.duke.edu/~hpgavin/SystemID/CourseNotes/Fourier.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-fourier-series-of-a-square-wave",
+        "kind": "example",
+        "title": "Fourier series of a square wave",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-l-two-fourier-series-converges-in-mean-square",
+          "thm-parseval-identity-for-fourier-series",
+          "def-countable-choice",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Split at zero and write each character in sine and cosine parts. The derivative rules and second FTC compute the two proper Riemann integrals; the bounded Riemann/Lebesgue agreement transfers them to the Fourier coefficients. Use ||f||_2=1 and Parseval, and distinguish norm convergence from every pointwise or endpoint assertion.",
+        "statement": "Assuming the Axiom of Countable Choice, for the periodic class sgn(x) on (-1/2,1/2), fhat(0)=0 and fhat(k)=(1-(-1)^k)/(pi i k), k nonzero; Parseval gives sum_{k positive odd}1/k^2=pi^2/8.",
+        "axiom_audit": "Uses only AC_omega through the Fourier expansion, Parseval, and Riemann/Lebesgue comparison suppliers; the two elementary half-interval calculations add no full choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henri P. Gavin, Dynamic Periodic Response to Periodic Forcing, System Identification course notes, Fall 2013 — §4.1 p.6, formula below f(t)=sgn(t)",
+              "url": "https://people.duke.edu/~hpgavin/SystemID/CourseNotes/Fourier.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

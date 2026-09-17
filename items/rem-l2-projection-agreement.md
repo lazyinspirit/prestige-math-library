@@ -5,7 +5,7 @@ title: Agreement with the concrete L-two projection
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-hilbert-orthogonal-projection, lem-closed-l-two-subspaces-have-orthogonal-projections, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-hilbert-orthogonal-projection, lem-closed-l-two-subspaces-have-orthogonal-projections, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -21,4 +21,4 @@ Assume the Axiom of Choice, and let $H$ be complex $L^2(\mu)$ or a closed linear
 
 The Hilbert orthogonal projection of [[def-hilbert-orthogonal-projection]] is characterised by the same two properties: its value at $f$ is the unique $M$-component of the unique orthogonal decomposition $f=P_Mf+(f-P_Mf)$ with $f-P_Mf\in M^\perp$. Since the concrete construction supplies a vector of $M$ whose residual is orthogonal to $M$, and the orthogonal decomposition is unique, the concrete map and the Hilbert projection agree wherever both are defined. The concrete theorem is used only to identify the two constructions: it is not a supplier for the existence, linearity, contractivity or self-adjointness of the Hilbert projection, which are proved on this page from the abstract decomposition.
 
-The choice cost of the identification is the concrete theorem's: it assumes AC, and AC implies the Axiom of Countable Choice ([[thm-choice-implies-dependent-implies-countable-choice]]) under which the abstract projection exists ([[def-axiom-of-choice]]). No stronger principle is claimed, and the identification is orientation only, not a load-bearing prerequisite of any theorem on this page.
+The choice cost of the identification is the concrete theorem's: it assumes AC, and AC implies the Axiom of Countable Choice, under which the abstract projection exists ([[def-axiom-of-choice]]). No stronger principle is claimed, and the identification is orientation only, not a load-bearing prerequisite of any theorem on this page.

@@ -5,7 +5,7 @@ title: The complex tautological Euler class restricts to the projective-fiber ge
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-orientation-of-underlying-real-bundles, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-stable-stiefel-space-is-contractible, def-oriented-grassmannian-and-tautological-oriented-bundle, def-stiefel-space-grassmannian-and-tautological-bundle, def-projective-space-points, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, lem-cohomology-ring-of-infinite-complex-projective-space, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
+deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-orientation-of-underlying-real-bundles, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-stable-stiefel-space-is-contractible, def-oriented-grassmannian-and-tautological-oriented-bundle, def-stiefel-space-grassmannian-and-tautological-bundle, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, lem-cohomology-ring-of-infinite-complex-projective-space, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the oriented bundle classification and the Euler-class supplier."
 provenance:
@@ -55,7 +55,7 @@ no statement below depends on which sign it is.
 
 [F2] For an $R$-oriented numerable rank-$m$ bundle there is a natural Gysin long exact sequence $\cdots\to H^{k-m}(B;R)\xrightarrow{\ \smile e}H^k(B;R)\xrightarrow{p^*}H^k(S(\xi);R)\xrightarrow{\partial_G}H^{k-m+1}(B;R)\to\cdots$ ([[thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle]]).
 
-[F3] An oriented real two-plane carries the positive quarter-turn complex structure, and sending it to the complex line it defines identifies the oriented Grassmannian $\operatorname{Gr}_2^+(\mathbb R^\infty)$ with $\operatorname{Gr}_1(\mathbb C^\infty)=\mathbb{CP}^\infty$, carrying the tautological oriented two-plane $\gamma_2^+$ to the tautological complex line $\gamma_{\mathbb C}$ regarded as an oriented real two-plane ([[def-oriented-grassmannian-and-tautological-oriented-bundle]], [[def-stiefel-space-grassmannian-and-tautological-bundle]], [[def-projective-space-points]]).
+[F3] An oriented real two-plane carries the positive quarter-turn complex structure, and sending it to the complex line it defines identifies the oriented Grassmannian $\operatorname{Gr}_2^+(\mathbb R^\infty)$ with $\operatorname{Gr}_1(\mathbb C^\infty)=\mathbb{CP}^\infty$, carrying the tautological oriented two-plane $\gamma_2^+$ to the tautological complex line $\gamma_{\mathbb C}$ regarded as an oriented real two-plane ([[def-oriented-grassmannian-and-tautological-oriented-bundle]], [[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
 [F4] The stable Stiefel space $V_n(\mathbb F^\infty)$ is contractible for $\mathbb F=\mathbb R$ or $\mathbb C$ and all $n\geq0$ ([[thm-stable-stiefel-space-is-contractible]]).
 
@@ -93,4 +93,4 @@ no statement below depends on which sign it is.
 
 ## Source notes
 
-The argument follows Hatcher, *Vector Bundles & K-Theory* section 3.1, printed pp. 77-82 (the projective bundle $P(E)$, its fiber $\mathbb{CP}^{n-1}$, and the powers of the canonical class as a Leray-Hirsch basis), with the universal oriented two-plane $B\operatorname{SO}(2)\cong\mathbb{CP}^\infty$ and the Gysin computation of $e(\gamma_2^+)$ as in Miller's Lectures 34-35. The standing normalization of this pair is that $u$ of the published projective ring is $c_1(\gamma^*)$ for the dual tautological line, equivalently $j_b^*x=-u$; the opposite normalization would flip both signs at once.
+The argument follows Hatcher, *Vector Bundles & K-Theory* section 3.1, printed pp. 77-82 (the projective bundle $P(E)$, its fiber $\mathbb{CP}^{n-1}$, and the powers of the canonical class as a Leray-Hirsch basis), with the universal oriented two-plane $B\operatorname{SO}(2)\cong\mathbb{CP}^\infty$ and the Gysin computation of $e(\gamma_2^+)$ as in Miller's Lectures 34-35. In the published normalization the generator $u=e(\gamma_{\mathbb R})$ of the projective ring is the Euler class of the tautological line, equivalently $c_1(\gamma)=-c_1(\gamma^*)$; with the complex orientation fixed in [F3] the relation $j_b^*x=\pm u$ is the single global sign recorded in the Statement, and no step of the proof depends on its value.

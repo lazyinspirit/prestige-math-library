@@ -5,7 +5,7 @@ title: Every commutative C star algebra has an approximate unit
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-nonunital-commutative-gelfand-naimark, def-approximate-unit-and-proper-c-star-morphism, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-c-star-algebra]
+deps: [thm-nonunital-commutative-gelfand-naimark, def-approximate-unit-and-proper-c-star-morphism, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-c-star-algebra]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -22,8 +22,7 @@ sources:
 ## Statement
 
 Assume the Axiom of Choice ([[def-axiom-of-choice]]), with the Dependent Choice
-cost of the cutoff lemma inherited
-([[thm-choice-implies-dependent-implies-countable-choice]]). Every commutative
+cost of the cutoff lemma inherited. Every commutative
 C\*-algebra $A$ ([[def-c-star-algebra]]) has an approximate unit of positive
 contractions in the sense of
 [[def-approximate-unit-and-proper-c-star-morphism]]. If $A = C_0(X)$ for a
@@ -38,7 +37,7 @@ family of all $e \in C_c(X)$ with $0 \le e \le 1$ ordered pointwise.
 
 [L2] An approximate unit is a net of positive contractions $e_i$ with $\|e_i a - a\| \to 0$; a net is indexed by a nonempty directed set ([[def-approximate-unit-and-proper-c-star-morphism]]).
 
-[L3] Assuming Dependent Choice — which follows from the Axiom of Choice — for a compact set $K$ inside an open set $U$ in a locally compact Hausdorff space $X$ there is $f \in C_c(X)$ with $\mathbf 1_K \le f \le \mathbf 1_U$ ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]], [[thm-choice-implies-dependent-implies-countable-choice]]).
+[L3] Assuming Dependent Choice — which follows from the Axiom of Choice — for a compact set $K$ inside an open set $U$ in a locally compact Hausdorff space $X$ there is $f \in C_c(X)$ with $\mathbf 1_K \le f \le \mathbf 1_U$ ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]]).
 
 ## Proof
 
@@ -58,5 +57,5 @@ family of all $e \in C_c(X)$ with $0 \le e \le 1$ ordered pointwise.
 
 ## Remarks
 
-- **Directedness avoids choosing bumps simultaneously.** The net is indexed by all compactly supported functions $0 \le e \le 1$ at once, so no simultaneous selection of cutoffs is made; the single cutoff in [step 1.3] is chosen for a fixed $f$ and $\epsilon$.
+- **Directedness avoids choosing bumps simultaneously.** The net is indexed by all compactly supported functions $0 \le e \le 1$ at once, so no simultaneous selection of cutoffs is made; the single cutoff in [step 2.1] is chosen for a fixed $f$ and $\epsilon$.
 - **The choice cost is the cutoff's.** Dependent Choice is inherited from [[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]] and is used nowhere else; the directedness and the estimates are choice-free.

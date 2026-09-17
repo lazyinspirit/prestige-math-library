@@ -4,7 +4,7 @@ kind: definition
 title: "Locally square-integrable predictable Brownian integrands"
 status: draft
 origin: pipeline
-deps: [def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-stopping-time, def-ito-integral-for-square-integrable-predictable-processes, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-stopping-time, def-ito-integral-for-square-integrable-predictable-processes, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable

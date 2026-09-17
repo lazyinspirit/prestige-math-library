@@ -5,7 +5,7 @@ title: The first Chern class classifies complex line bundles
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-chern-classes-from-the-projective-bundle-relation, thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-integral-cohomology-of-bu-n, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, def-stiefel-space-grassmannian-and-tautological-bundle, def-projective-space-points, thm-eilenberg-maclane-spaces-represent-singular-cohomology, lem-circle-and-path-loop-models-for-eilenberg-maclane-induction, thm-milnor-join-model-is-a-contractible-free-g-space, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, lem-cohomology-ring-of-infinite-complex-projective-space, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
+deps: [def-chern-classes-from-the-projective-bundle-relation, thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-integral-cohomology-of-bu-n, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, def-stiefel-space-grassmannian-and-tautological-bundle, thm-eilenberg-maclane-spaces-represent-singular-cohomology, lem-circle-and-path-loop-models-for-eilenberg-maclane-induction, thm-milnor-join-model-is-a-contractible-free-g-space, thm-long-exact-sequence-of-homotopy-groups-of-a-fibration, lem-cohomology-ring-of-infinite-complex-projective-space, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the classification and representing-space suppliers."
 provenance:
@@ -32,7 +32,7 @@ homotopy type.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited from the classification, representing-space and Gysin suppliers ([[def-axiom-of-choice]]).
 
-[F1] Pullback of the universal line induces a natural bijection $[X,\operatorname{Gr}_1(\mathbb C^\infty)]\cong\operatorname{Vect}^{\mathbb C}_1(X)$ between homotopy classes of maps and isomorphism classes of numerable complex line bundles, and $\operatorname{Gr}_1(\mathbb C^\infty)=\mathbb{CP}^\infty$ is the space of complex lines ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]], [[def-stiefel-space-grassmannian-and-tautological-bundle]], [[def-projective-space-points]]).
+[F1] Pullback of the universal line induces a natural bijection $[X,\operatorname{Gr}_1(\mathbb C^\infty)]\cong\operatorname{Vect}^{\mathbb C}_1(X)$ between homotopy classes of maps and isomorphism classes of numerable complex line bundles, and $\operatorname{Gr}_1(\mathbb C^\infty)=\mathbb{CP}^\infty$ is the space of complex lines ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]], [[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 
 [F2] $c_1$ is natural, $c_1(L)=e(L_{\mathbb R})$ for a complex line, and $c_1(L\otimes M)=c_1(L)+c_1(M)$ follows from the classifying description once the universal case is known; the Chern classes satisfy the Whitney formula ([[thm-naturality-normalization-and-whitney-sum-for-chern-classes]], [[def-chern-classes-from-the-projective-bundle-relation]]).
 

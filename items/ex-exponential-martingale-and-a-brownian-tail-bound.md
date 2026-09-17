@@ -4,7 +4,7 @@ kind: example
 title: "Exponential martingale Brownian tail bound"
 status: draft
 origin: pipeline
-deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-fatou-lemma, def-convergence-in-probability, def-partition-and-refinement, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-two-sided-exit-probability-for-brownian-motion]
+deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-fatou-lemma, def-convergence-in-probability, def-partition-and-refinement, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, thm-two-sided-exit-probability-for-brownian-motion]
 proof_strategy: direct
 generation:
   role: example
@@ -34,7 +34,7 @@ $$P\Bigl(\sup_{0\le t\le T}B_t\ge a\Bigr)\le e^{-a^2/(2T)} .$$
  
 [F3] **Discrete optional sampling and Fatou.** If a martingale is sampled on a deterministic finite grid, the sampled process is a discrete martingale, and for every grid stopping time bounded by the last grid point the expectation is unchanged; dyadic ceilings of a stopping time give such grid stopping times increasing to the original stopping time, and Fatou's lemma bounds the expectation of the almost-sure limit by the liminf of the expectations. [[thm-optional-sampling-for-bounded-stopping-times]] [[thm-fatou-lemma]] [[def-continuous-time-filtration-and-all-pairs-martingale]]
  
-[F4] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

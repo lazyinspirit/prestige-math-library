@@ -4,7 +4,7 @@ kind: example
 title: "Expected exit time from an interval"
 status: draft
 origin: pipeline
-deps: [thm-dynkin-formula-for-bounded-brownian-stopping, def-brownian-motion-started-at-x, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, thm-two-sided-exit-probability-for-brownian-motion, def-continuous-time-stopping-time, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-continuity-real, thm-heine-cantor-r, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-elementary-predictable-brownian-integrand]
+deps: [thm-dynkin-formula-for-bounded-brownian-stopping, def-brownian-motion-started-at-x, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, thm-two-sided-exit-probability-for-brownian-motion, def-continuous-time-stopping-time, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-continuity-real, thm-heine-cantor-r, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
 generation:
   role: example
@@ -39,7 +39,7 @@ $$E_x\tau=(x+a)(b-x),\qquad\text{in particular}\qquad E_0\tau=ab .$$
  
 [F4] **Convergence tools.** Dominated convergence applies to bounded sequences of random variables; monotone convergence applies to nondecreasing nonnegative sequences, so $E(\tau\wedge n)\uparrow E\tau$ including the value $+\infty$. [[thm-dominated-convergence]] [[thm-monotone-convergence-for-the-integral]] [[def-continuity-real]]
  
-[F5] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F5] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

@@ -5,7 +5,7 @@ title: Chern classes of a sum of universal complex lines
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-integral-cohomology-of-bu-n, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, lem-cohomology-ring-of-infinite-complex-projective-space, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
+deps: [thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-integral-cohomology-of-bu-n, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, lem-cohomology-ring-of-infinite-complex-projective-space, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -36,7 +36,7 @@ $H^*((\mathbb{CP}^\infty)^n;\mathbb Z)=\mathbb Z[x_1,\dots,x_n]$.
 
 [F2] $H^*(\mathbb{CP}^\infty;\mathbb Z)=\mathbb Z[u]$ with free finitely generated homology in each degree, and the Kunneth cross product is a ring isomorphism for products of such spaces over a PID ([[lem-cohomology-ring-of-infinite-complex-projective-space]], [[thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism]]).
 
-[F3] $B\mathbb U(n)=\operatorname{Gr}_n(\mathbb C^\infty)$ is the classifying space of numerable rank-$n$ complex bundles, and the classifying map of a sum of lines is the map induced by the sum construction ([[thm-integral-cohomology-of-bu-n]]).
+[F3] $B\mathbb U(n)=\operatorname{Gr}_n(\mathbb C^\infty)$ is the classifying space of numerable rank-$n$ complex bundles, and the classifying map of a sum of lines is the map induced by the sum construction ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]); the universal bundle and its flag bundle over this model are those of [[thm-integral-cohomology-of-bu-n]].
 
 [F4] Direct sums of complex line bundles are formed fiberwise and are compatible with pullback ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 

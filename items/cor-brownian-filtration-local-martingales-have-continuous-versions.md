@@ -4,7 +4,7 @@ kind: corollary
 title: "Brownian-filtration local martingales have continuous versions"
 status: draft
 origin: pipeline
-deps: [thm-brownian-filtration-martingale-representation, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, def-locally-square-integrable-predictable-brownian-integrand, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-brownian-filtration-martingale-representation, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, def-locally-square-integrable-predictable-brownian-integrand, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -12,7 +12,7 @@ provenance:
 sources:
   references:
     - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Theorem 6.6"
-      url: "https://diamhomes.ewi.tudelft.nl/~andervaart/books/stochint.pdf"
+      url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
 ---
 
 ## Statement
@@ -34,7 +34,7 @@ paths, and any two continuous versions of $M$ are indistinguishable.
  
 [F3] **Indistinguishability from rational agreement.** If two processes with continuous paths agree at every rational time on a single event of probability one, then they are indistinguishable: continuity extends the agreement to all times on that event. [[def-law-modification-and-indistinguishability-of-processes]] [[def-continuity-real]]
  
-[F4] **AC bookkeeping.** Choice is declared for the conditional-expectation interface underlying the representation. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] **AC bookkeeping.** Choice is declared for the conditional-expectation interface underlying the representation. [[def-axiom-of-choice]]
  
  
  

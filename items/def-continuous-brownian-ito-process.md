@@ -4,7 +4,7 @@ kind: definition
 title: "Continuous Brownian Ito processes"
 status: draft
 origin: pipeline
-deps: [def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, def-d-dimensional-brownian-motion, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, def-d-dimensional-brownian-motion, def-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -111,5 +111,5 @@ construction: the coefficients $b,\sigma$ and the process are given data, and
 the canonically localized integral is constructed in
 [[thm-localized-ito-integral]]. The Axiom of Choice is declared because the
 conditional-expectation and $L^2$ interfaces used downstream assume it, and
-the implication bridge [[thm-choice-implies-dependent-implies-countable-choice]]
-records the inherited countable-choice obligations.
+the countable-choice obligations inherited from those interfaces are declared
+as dependencies of this item.

@@ -5,7 +5,7 @@ title: Zero free entire function of exponential type is an exponential
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-path-independence-and-complex-primitive-criterion, thm-local-maximum-modulus-principle, cor-cauchy-theorem-convex-domain, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, cor-complex-power-series-sums-have-derivatives-of-all-orders, cor-zero-derivative-implies-constant, thm-unit-disc-schwarz-lemma-with-rigidity, thm-liouville-bounded-entire-function, cor-complex-power-series-sums-are-analytic, thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]
+deps: [thm-path-independence-and-complex-primitive-criterion, thm-local-maximum-modulus-principle, cor-cauchy-theorem-convex-domain, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, cor-complex-power-series-sums-have-derivatives-of-all-orders, cor-zero-derivative-implies-constant, thm-liouville-bounded-entire-function, cor-complex-power-series-sums-are-analytic, thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -50,7 +50,7 @@ linearity in $|z|$, and the constant factor is exactly what survives.
 
 [L6] Quotients of holomorphic functions with nonvanishing denominators and power series sums are holomorphic ([[thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]], [[cor-complex-power-series-sums-are-analytic]]), so $f'/f$ is holomorphic on $\mathbb C$ and, if $H$ is entire with $H(0)=0$, then $H(z)/z$ extends to an entire function.
 
-[L7] The Schwarz lemma on the unit disc: if $G$ is holomorphic on the unit disc with $G(0)=0$ and $|G(\zeta)| \le 1$, then $|G(\zeta)| \le |\zeta|$; the underlying engine is the maximum modulus principle ([[thm-unit-disc-schwarz-lemma-with-rigidity]], [[thm-local-maximum-modulus-principle]]).
+[L7] The Schwarz lemma on the unit disc: if $G$ is holomorphic on the unit disc with $G(0)=0$ and $|G(\zeta)| \le 1$, then $|G(\zeta)| \le |\zeta|$; the underlying engine is the maximum modulus principle ([[thm-local-maximum-modulus-principle]]).
 
 [L8] Every bounded entire function is constant ([[thm-liouville-bounded-entire-function]]).
 

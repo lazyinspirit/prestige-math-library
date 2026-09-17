@@ -37,66 +37,29 @@ the stated uniform base, hence is metacompact.
 
 ## Facts & Assumptions
 
-**Given:** $\kappa, (\kappa_n), E$ and the ladders as in the Statement; we may
-and do assume $\kappa_0 = 0$ (replacing $(\kappa_n)$ by $0, \kappa_0, \kappa_1,
-\dots$ preserves every hypothesis and $\sup_n \kappa_n = \kappa$).
+**Given:** $\kappa, (\kappa_n), E$ and the ladders as in the Statement; we may and do assume $\kappa_0 = 0$ (replacing $(\kappa_n)$ by $0, \kappa_0, \kappa_1, \dots$ preserves every hypothesis and $\sup_n \kappa_n = \kappa$).
 
-[F1] $\kappa^+$ is a regular cardinal with $\operatorname{cf}(\kappa^+) =
-\kappa^+ > \omega$; sums and products of infinite cardinals absorb: $\mu \cdot
-\mu = \mu$ and $\mu^{\aleph_0} = 2^\mu$ for infinite $\mu \le \kappa^+$; and
-$2^\kappa = \kappa^+$ is the given continuum hypothesis at $\kappa$
-([[def-cardinal]], [[def-cardinal-arithmetic]], [[cor-cardinal-absorption]],
-[[thm-cardinal-power-set-and-cantor]]).
+[F1] $\kappa^+$ is a regular cardinal with $\operatorname{cf}(\kappa^+) = \kappa^+ > \omega$; sums and products of infinite cardinals absorb: $\mu \cdot \mu = \mu$ and $\mu^{\aleph_0} = 2^\mu$ for infinite $\mu \le \kappa^+$; and $2^\kappa = \kappa^+$ is the given continuum hypothesis at $\kappa$ ([[def-cardinal]], [[def-cardinal-arithmetic]], [[cor-cardinal-absorption]], [[thm-cardinal-power-set-and-cantor]]).
 
-[F2] Every set can be well-ordered, so a set of cardinality $\mu$ can be
-enumerated as $\{x_\alpha : \alpha < \mu\}$ ([[def-well-order]],
-[[def-injection-surjection-bijection]], [[def-axiom-of-choice]]).
+[F2] Every set can be well-ordered, so a set of cardinality $\mu$ can be enumerated as $\{x_\alpha : \alpha < \mu\}$ ([[def-well-order]], [[def-injection-surjection-bijection]], [[def-axiom-of-choice]]).
 
-[F3] Clubs and stationary sets in $\kappa^+$: a set is closed if it contains the
-sup of each of its bounded subsets, clubs are the closed unbounded sets,
-stationary means meeting every club; a club is stationary; supersets of
-stationary sets are stationary; a stationary set minus a non-stationary set is
-stationary; and a countable union of non-stationary subsets of $\kappa^+$ is
-non-stationary ([[def-club-subsets-of-ordinals]],
-[[def-club-filter-and-nonstationary-ideal]],
-[[prop-basic-stationary-set-calculus]]).
+[F3] Clubs and stationary sets in $\kappa^+$: a set is closed if it contains the sup of each of its bounded subsets, clubs are the closed unbounded sets, stationary means meeting every club; a club is stationary; supersets of stationary sets are stationary; a stationary set minus a non-stationary set is stationary; and a countable union of non-stationary subsets of $\kappa^+$ is non-stationary ([[def-club-subsets-of-ordinals]], [[def-club-filter-and-nonstationary-ideal]], [[prop-basic-stationary-set-calculus]]).
 
-[F4] Fodor's pressing-down lemma: if $S \subseteq \kappa^+\setminus\{0\}$ is
-stationary and $f : S \to \kappa^+$ is regressive ($f(\alpha) < \alpha$
-throughout), then some fibre of $f$ is stationary ([[thm-fodor-pressing-down]],
-[[def-regressive-function-on-ordinals]]).
+[F4] Fodor's pressing-down lemma: if $S \subseteq \kappa^+\setminus\{0\}$ is stationary and $f : S \to \kappa^+$ is regressive ($f(\alpha) < \alpha$ throughout), then some fibre of $f$ is stationary ([[thm-fodor-pressing-down]], [[def-regressive-function-on-ordinals]]).
 
-[F5] For $\kappa > \omega$ the Erdős–Rado theorem gives $\beth_1(\kappa_n)^+ =
-(2^{\kappa_n})^+ \longrightarrow (\kappa_n^+)^2_{\kappa_n}$, and for
-$\kappa = \omega$ the infinite Ramsey theorem gives $\omega \to (\omega)^2_r$
-for every finite $r \ge 1$; the arrow means that every colouring of pairs
-admits a homogeneous set of the target size ([[thm-general-cardinal-erdos-rado]],
-[[thm-infinite-ramsey-finite-colors]], [[def-partition-arrow-notation]],
-[[def-cardinal]]).
+[F5] For $\kappa > \omega$ the Erdős–Rado theorem gives $\beth_1(\kappa_n)^+ = (2^{\kappa_n})^+ \longrightarrow (\kappa_n^+)^2_{\kappa_n}$, and for $\kappa = \omega$ the infinite Ramsey theorem gives $\omega \to (\omega)^2_r$ for every finite $r \ge 1$; the arrow means that every colouring of pairs admits a homogeneous set of the target size ([[thm-general-cardinal-erdos-rado]], [[thm-infinite-ramsey-finite-colors]], [[def-partition-arrow-notation]], [[def-cardinal]]).
 
-[F6] Moore spaces, developments, stars, and first countability; regular $T_1$
-spaces; metrizable spaces are collectionwise normal; a metrizable space is
-collectionwise normal, so a non-collectionwise-normal Moore space is not
-metrizable ([[def-moore-spaces-and-developments]], [[def-regular-and-t3-spaces]],
-[[def-metrizable-space]], [[def-normalized-families-and-collectionwise-normality]],
-[[lem-metrizable-spaces-are-collectionwise-normal]],
-[[def-discrete-family-and-sigma-bases]]).
+[F6] Moore spaces, developments, stars, and first countability; regular $T_1$ spaces; metrizable spaces are collectionwise normal; a metrizable space is collectionwise normal, so a non-collectionwise-normal Moore space is not metrizable ([[def-moore-spaces-and-developments]], [[def-regular-and-t3-spaces]], [[def-metrizable-space]], [[def-normalized-families-and-collectionwise-normality]], [[lem-metrizable-spaces-are-collectionwise-normal]], [[def-discrete-family-and-sigma-bases]]).
 
-[F7] Topological vocabulary: basis, open and closed sets, closure, discrete
-subspaces, subspace topology ([[def-topological-space]],
-[[def-discrete-family-and-sigma-bases]], [[def-regular-and-t3-spaces]]).
+[F7] Topological vocabulary: basis, open and closed sets, closure, discrete subspaces, subspace topology ([[def-topological-space]], [[def-discrete-family-and-sigma-bases]], [[def-regular-and-t3-spaces]]).
 
-[F8] A function with domain $\omega$ and values in $E$ is exactly an element of
-$E^\omega$; finite sequences from $E$ are functions on natural numbers with
-range in $E$; the wood $\Sigma$ below is the set of all finite such sequences
-([[def-function]], [[def-natural-numbers]]).
+[F8] A function with domain $\omega$ and values in $E$ is exactly an element of $E^\omega$; finite sequences from $E$ are functions on natural numbers with range in $E$; the wood $\Sigma$ below is the set of all finite such sequences ([[def-function]], [[def-natural-numbers]]).
 
 
 
 ## Proof
 
-**Proof technique:** construction, with two induction arguments (the recursion
-of step 4.1 and the inside-first Lemma 3(a) argument of steps 11.2-7.6).
+**Proof technique:** construction, with two induction arguments (the recursion of step 4.1 and the inside-first Lemma 3(a) argument of steps 11.2-7.6).
 
 1.1 Fix a well-ordering of the universe and enumerate the family $$\mathcal Z := \{\, Z \subseteq \Sigma : \operatorname{card} Z \le \kappa \text{ and } Z \subseteq \Sigma_k \text{ for some } k \in \omega \,\}$$ as $\{Z_\alpha : \alpha < \kappa^+\}$, arranged so that $Z_0 = \varnothing$. Here $\Sigma := \bigcup_{n \in \omega} \Sigma_n$ with $\Sigma_n := \{f \restriction n : f \in E^\omega\}$, and $[\sigma] := \{f \in F : \sigma \subseteq f\}$ for $F := E^\omega$; write $a^*$ for the greatest ordinal in the range of a nonempty $a \in \Sigma$, and put $\Sigma^\beta := \{\sigma \in \Sigma : \sigma = \varnothing \text{ or } \sigma^* < \beta\}$ and $\mathcal Z(\beta) := \{Z_\alpha : \alpha < \beta\}$. Enumerating $\mathcal Z$ is legitimate because $|\Sigma| = \kappa^+$ and $2^\kappa = \kappa^+$ bound it above, while every subset of $\Sigma_1$ of cardinality $\le \kappa$ lies in $\mathcal Z$ and there are $\kappa^+$ of those. [given, F1, F2, F8]
 1.2 With $\kappa$, $(\kappa_n)$ and the enumeration $\{Z_\alpha : \alpha < \kappa^+\}$ of $\mathcal Z$ fixed as above, let $\operatorname{level}(Z)$ be the least $k$ with $Z \subseteq \Sigma_k$ ($0$ for $Z = \varnothing$), and for $\sigma \in \Sigma$ with $|\sigma| = n \ge 1$ put $F_\sigma := \mathcal Z(\sigma^*) \cap \{Z : \operatorname{level}(Z) < n\}$. For $m \ge 1$ let $S(\sigma,m)$ be the union, over all $\sigma'' \subseteq \sigma$, of the set of the first $\kappa_m$ elements of $F_{\sigma''}$ in the fixed enumeration order, and let $A(\sigma,m)$ be the list of length $\kappa_m$ whose entries are the members of $S(\sigma,m)$ (repeating entries when $\operatorname{card} S(\sigma,m) < \kappa_m$); put $A(\sigma,0) := \varnothing$ (the empty list) and $A(\varnothing,m) := \varnothing$. This is the list-valued reading of the source's (4)-(6). Here $\operatorname{card} S(\sigma,m) \le 2^{|\sigma|} \cdot \kappa_m = \kappa_m$, because $|\sigma|$ is finite and $\kappa_m$ is infinite, so the list exists; $\bigcup_m S(\sigma,m) = F_\sigma$, because every $Z \in F_\sigma$ occurs among the first $\kappa_m$ elements of $F_\sigma$ as soon as $\kappa_m$ exceeds its position in the enumeration, and that position is below $\kappa = \sup_m \kappa_m$ since $|F_\sigma| \le |\sigma^*| \le \kappa$; and if $\sigma \subseteq \sigma'$ and $m \le m'$ then $S(\sigma,m) \subseteq S(\sigma',m')$, since every $\sigma'' \subseteq \sigma$ satisfies $\sigma'' \subseteq \sigma'$ and the first $\kappa_m$ elements of $F_{\sigma''}$ are among the first $\kappa_{m'}$. [given, F1, F2]
@@ -112,7 +75,7 @@ of step 4.1 and the inside-first Lemma 3(a) argument of steps 11.2-7.6).
 4.1 $X$ is regular: for $x \in F$ and open $D \ni x$ there is $\sigma_0 \subseteq x$ with $B(\sigma_0) \subseteq D$; then for $n \ge |\sigma_0|$ the star $\operatorname{St}(x,\mathcal G_n) = \bigcup\{B(\sigma) : \sigma \subseteq x, |\sigma| = n\}$ is contained in $B(\sigma_0) \subseteq D$, because $\sigma \supseteq \sigma_0$ gives $B(\sigma) \subseteq B(\sigma_0)$; for $x \in Q$ the singleton $\{x\}$ witnesses regularity, and regularity at points of $F$ also gives that $\operatorname{cl}[\sigma] \subseteq B(\sigma)$. Together with step 3.2 this makes $X$ a regular $T_1$ space. [step 1.2, step 2.1, step 3.2, F6]
 4.2 For disjoint closed $H, K \subseteq X$, reduce to $H \cup K \subseteq F$: $H \cap F$ and $K \cap F$ are closed in the normal space $F$ (a metrizable space), so if $U_0, V_0$ are disjoint open subsets of $F$ with $H \cap F \subseteq U_0$, $K \cap F \subseteq V_0$, then $U := U_0 \cup (H \cap Q)$ and $V := V_0 \cup (K \cap Q)$ are disjoint open subsets of $X$ containing $H$ and $K$: $H \cap Q$ and $K \cap Q$ are open because $Q$ is a discrete open subspace, and disjointness uses $H \cap K = \varnothing$, $H \cap Q \subseteq H$ disjoint from $V_0 \subseteq X \setminus H$ (as $V_0 \cap H \subseteq V_0 \cap H \cap F = \varnothing$) and symmetrically. [step 2.1, step 3.2, F6, F7]
 4.3 Suppose $B_1 \cup B_2 = E$. If $B_1$ is stationary, choose for each $v \in B_1$ the least level $n_v$ of a dangerous $S_v$ and a least such $S_v$ in the fixed well-order; some $E' := \{v \in B_1 : n_v = n_0\}$ is stationary by the countable case split, and $V := \bigcup_{v \in E'} S_v \subseteq T \cap \Sigma_{n_0}$ is nonempty with all members extending $\rho$. Acceptability of $\rho$ gives $\sigma \in V$ and $j \in [i,n_0)$ with $B(\sigma,j,V)$ non-stationary. Pick $v \in E'$ with $\sigma \in S_v$. If $j \ge i+1$ then $B(\sigma,j,V) \supseteq B(\sigma,j,S_v)$ is stationary because $S_v$ is dangerous, a contradiction; if $j = i$ then $B(\sigma,i,V) = \{\tau(i) : \tau \in V\} \supseteq E'$, because $S_v \ni \sigma$ witnesses $v \in B(\sigma,i,V)$ for every $v \in E'$, so $B(\sigma,i,V)$ is stationary, again a contradiction. If $B_1$ is non-stationary then $E \setminus B_1$ is stationary and contained in $B_2$, so $B_2$ is stationary; applying acceptability of $\rho$ to the nonempty $S := \{\rho \widehat{\ } v \in T \cap \Sigma_{i+1} : v \in E\}$ and $n = i+1$ gives $B(\sigma,i,S)$ non-stationary for some $\sigma \in S$, but $B(\sigma,i,S) = \{\tau(i) : \tau \in S\} \supseteq B_2$ is stationary. Both cases are contradictory, so $B_1 \cup B_2 \ne E$. [step 3.3, step 2.2, F3]
-5.1 Define $\mathcal G_n := \{B(\sigma) : \sigma \in \Sigma_n\} \cup \{\{q\} : q \in Q_k, k \le n\}$. Each $\mathcal G_n$ is an open cover: a point of $F$ lies in $[f\restriction n] \subseteq B(f \restriction n)$, and a point $q \in Q_k$ lies in $\{q\} \in \mathcal G_n$ for every $n \ge k$. Hence $(\mathcal G_n)$ is a development: at $x \in F$ step 4.1 exhibits $\operatorname{St}(x,\mathcal G_n) \subseteq D$, and at $x \in Q_k$ and $n > k$ no $B(\sigma)$ with $|\sigma| = n$ contains $x$ (an initial segment $\sigma$ of $\rho$ or of $\tau$ has length at most $k$), so $\operatorname{St}(x,\mathcal G_n) = \{x\} \subseteq D$. Therefore $X$ is a Moore space; moreover the family $\bigcup_n \mathcal G_n$ is a uniform base in the source's sense, hence $X$ is metacompact by the Aleksandrov-Arhangel'skii equivalence recorded in [[def-moore-spaces-and-developments]]. [step 4.1, step 2.1, F6]
+5.1 Define $\mathcal G_n := \{B(\sigma) : \sigma \in \Sigma_n\} \cup \{\{q\} : q \in Q_k, k \le n\}$. Each $\mathcal G_n$ is an open cover: a point of $F$ lies in $[f\restriction n] \subseteq B(f \restriction n)$, and a point $q \in Q_k$ lies in $\{q\} \in \mathcal G_n$ for every $n \ge k$. Hence $(\mathcal G_n)$ is a development: at $x \in F$ step 4.1 exhibits $\operatorname{St}(x,\mathcal G_n) \subseteq D$, and at $x \in Q_k$ and $n > k$ no $B(\sigma)$ with $|\sigma| = n$ contains $x$ (an initial segment $\sigma$ of $\rho$ or of $\tau$ has length at most $k$), so $\operatorname{St}(x,\mathcal G_n) = \{x\} \subseteq D$. Therefore $X$ is a Moore space. Moreover $\bigcup_n \mathcal G_n$ is a uniform base in the source's sense: if $\mathcal R$ is an infinite subfamily and $x \in \bigcap \mathcal R$, then $x \notin Q$ (the only member of $\bigcup_n\mathcal G_n$ containing a point of $Q$ is its singleton), so $x \in F$ has a branch $\rho$ and the members of $\mathcal R$ are the sets $B(\rho \restriction k)$, at most one for each $k$ and hence at arbitrarily large levels $k$ because $\mathcal R$ is infinite; given open $D \ni x$ pick $n$ with $B(\rho \restriction n) \subseteq D$, and a member $B(\rho \restriction k)$ of $\mathcal R$ with $k \ge n$ satisfies $x \in B(\rho \restriction k) \subseteq B(\rho \restriction n) \subseteq D$. Hence $\mathcal R$ is a neighbourhood base at $x$, and the source concludes from this that $X$ is a metacompact Moore space, by the Aleksandrov–Arhangel'skij equivalence of uniform bases with metacompact Moore spaces that the source records in its §2 (Fleissner, printed pp. 365-366 and p. 369); the library does not re-prove that equivalence here, and the metacompactness clause of the Statement rests on this citation. [step 4.1, step 2.1, F6]
 5.2 For $n \in \omega$ and $Z \subseteq \Sigma_n$ put $H_Z := \bigcup\{[\sigma] : \sigma \in Z\}$ and $K_Z := F \setminus H_Z$. For disjoint closed $H,K \subseteq F$ and each $n$, the sets $\{\sigma \in \Sigma_n : [\sigma] \cap H = \varnothing\}$ have union $H_n$ with $H_n \subseteq X \setminus H$ and $K \cap F \subseteq F \setminus H_n$; because $F$ is metrizable it is normal, and assembling the countably many separations of $H_n$ from $F \setminus H_n$ and of the complementary pieces gives disjoint open sets separating $H$ and $K$. So it suffices to separate, for every $n$ and every $Z \subseteq \Sigma_n$, the closed set $H_Z$ from $K_Z$; this is the source's Lemma 2 reduction. [step 4.2, F6, F7]
 5.3 Choosing $v \in E \setminus (B_1 \cup B_2)$ gives that $\rho \widehat{\ } v$ is acceptable — any nonempty $S \subseteq T \cap \Sigma_n$ above $\rho \widehat{\ } v$ failing the acceptability witness would be dangerous for $v$ — and $\rho \widehat{\ } v \notin T$. The recursion produces an infinite sequence $f \in E^\omega$ with every prefix acceptable and $f \restriction (i+1) \notin T$ for all $i$; since $f \in [\sigma]$ means $\sigma = f \restriction |\sigma| \in T$, the covering hypothesis is contradicted. Therefore some $T \cap \Sigma_n$ has a stafull subset, proving Lemma 3(a). [step 2.2, step 4.3, contradiction]
 6.1 Fix $n \ge 1$ and $Z \subseteq \Sigma_n$ with $H_Z$ as in step 5.2, and let $C := \{\gamma < \kappa^+ : \text{if } \beta < \gamma \text{ then } Z \cap \Sigma^\beta = Z_\alpha \text{ for some } \alpha < \gamma\}$. Then $C$ is a club: it is closed because for a limit $\gamma$ of $C$-points and $\beta < \gamma$ some $\gamma' \in C$ has $\beta < \gamma' < \gamma$, so $Z \cap \Sigma^\beta = Z_\alpha$ with $\alpha < \gamma' < \gamma$; and it is unbounded because the assignment $\gamma \mapsto \sup\{\alpha + 1 : \beta < \gamma,\ Z \cap \Sigma^\beta = Z_\alpha\}$ can be iterated countably many times, remains below $\kappa^+$ by regularity, and its limit lies in $C$. This uses $\operatorname{card} Z \le \kappa$, so that at most $\kappa$ distinct truncations occur, and $\operatorname{cf}(\kappa^+) > \omega$. [step 1.1, step 1.2, F1, F3]
@@ -136,22 +99,7 @@ of step 4.1 and the inside-first Lemma 3(a) argument of steps 11.2-7.6).
 
 ## Remarks
 
-- **Two documented readings of the printed notation.** (12) is used with the
-  bound $\rho(m)$ for a level-$m$ set, which is how the source's own Case 1
-  display on printed p. 370 uses it; the printed notation sentence after (12)
-  is off by one restriction step. (17) is used in trace form
-  $Z(\rho,\delta) \cap \Sigma^{\rho(m)} = Z(\tau,\eta) \cap \Sigma^{\rho(m)}$,
-  which is what the printed four-term chain displays. Both are recorded as
-  local repairs, not source attributions.
-- **The two local repairs to the §6 parameters.** $j(\sigma)$ is chosen
-  strictly above the printed lower bounds, and the entry level of $Z \cap
-  \Sigma^{\sigma(n)}$ is arranged one step below $j(\sigma)$; without the
-  strictness the printed Case 2 does not close. Recorded as a local repair.
-- **The trace-domain condition** of step 1.3 is the guarded reading of (12);
-  §6's instances are proved in step 11.1, and §7's instances are the applicable
-  ones by definition, so no trace outside $\mathcal Z(\rho^*)$ is ever
-  evaluated.
-- **AC is used** in the enumeration of $\mathcal Z$ and of $E \cap \beta$, in
-  the choice of the ladders and the $j(\sigma)$, in the countable recursion of
-  step 3.3, and in the Ramsey/Erdős–Rado step; it is declared as a dependency
-  and no choice-free reading is claimed.
+- **Two documented readings of the printed notation.** (12) is used with the bound $\rho(m)$ for a level-$m$ set, which is how the source's own Case 1 display on printed p. 370 uses it; the printed notation sentence after (12) is off by one restriction step. (17) is used in trace form $Z(\rho,\delta) \cap \Sigma^{\rho(m)} = Z(\tau,\eta) \cap \Sigma^{\rho(m)}$, which is what the printed four-term chain displays. Both are recorded as local repairs, not source attributions.
+- **The two local repairs to the §6 parameters.** $j(\sigma)$ is chosen strictly above the printed lower bounds, and the entry level of $Z \cap \Sigma^{\sigma(n)}$ is arranged one step below $j(\sigma)$; without the strictness the printed Case 2 does not close. Recorded as a local repair.
+- **The trace-domain condition** of step 1.3 is the guarded reading of (12); §6's instances are proved in step 11.1, and §7's instances are the applicable ones by definition, so no trace outside $\mathcal Z(\rho^*)$ is ever evaluated.
+- **AC is used** in the enumeration of $\mathcal Z$ and of $E \cap \beta$, in the choice of the ladders and the $j(\sigma)$, in the countable recursion of step 3.3, and in the Ramsey/Erdős–Rado step; it is declared as a dependency and no choice-free reading is claimed.

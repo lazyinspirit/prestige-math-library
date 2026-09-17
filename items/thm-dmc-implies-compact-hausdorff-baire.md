@@ -74,7 +74,7 @@ finite successor menus.
 
 9.1 The sequence $K_n$ is a decreasing sequence of nonempty closed subsets of the countably compact space $X$ of step 2.2, so $\bigcap_n K_n \ne \varnothing$: otherwise the open sets $X \setminus K_n$ would cover $X$, and a finite subcover $X \setminus K_{n_1}, \dots, X \setminus K_{n_m}$ would give $K_{\max n_j} = \varnothing$ by [L2], contradicting nonemptiness. [step 2.2, step 8.1, F3, L2]
 
-10.1 Fix $x \in \bigcap_n K_n$; then $x \in K_1 \subseteq W_0 \subseteq G \subseteq W$ by step 7.1, so $x \in W$, and for every $n$ we have $x \in K_{n+1} \subseteq W_n \subseteq G'_n \subseteq G_{n-1}$ for $n \ge 1$, so $x \in \bigcap_n G_n$; thus $W \cap \bigcap_n G_n \ne \varnothing$. [step 8.1, step 9.1]
+10.1 Fix $x \in \bigcap_n K_n$; then $x \in K_1 \subseteq W_0 \subseteq W$ by steps 7.1 and 8.1, so $x \in W$, and for every $n$ we have $x \in K_{n+1} \subseteq W_n \subseteq G'_n \subseteq G_{n-1}$ for $n \ge 1$, so $x \in \bigcap_n G_n$; thus $W \cap \bigcap_n G_n \ne \varnothing$. [step 8.1, step 9.1]
 
 11.1 Steps 2.1 and 10.1 cover the empty and nonempty cases of the ambient space, and the only choice principle used was DMC in step 5.1; hence every compact Hausdorff space is Baire. [step 2.1, step 10.1, F4] ∎
 
@@ -82,4 +82,4 @@ finite successor menus.
 
 - **Which hypothesis of the source is used.** Fossy and Morillon state the result for countably compact regular spaces; compactness enters here twice, once to make the space regular and countably compact (steps 2.2 and 2.2) and once to make the decreasing closed sets of step 8.1 have a common point. Hausdorffness is used only through the compact-Hausdorff regularity theorem.
 
-- **Why the sets $G'_k$ are not closed.** They are finite intersections of dense open sets, hence dense and open, and they are decreasing; the closed sets whose intersection is taken in step 8.1 are the finite unions of closures of the pruned menus, which is why the pruning of step 5.2 is needed.
+- **Why the sets $G'_k$ are not closed.** They are finite intersections of dense open sets, hence dense and open, and they are decreasing; the closed sets whose intersection is taken in step 9.1 are the finite unions of closures of the pruned menus, which is why the pruning of step 6.1 is needed.

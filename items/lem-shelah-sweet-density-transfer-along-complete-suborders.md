@@ -22,7 +22,7 @@ Suppose $q\in D$ and $p\in P$ forces $q\in Q/P$. Then some $j,k<\omega$ have the
 following uniform property: for every $q'\mathrel{E_k}q$ there is $p'\in A_j$
 with $p'\le p$ which forces $q'\in Q/P$. Moreover, the union of all $A_j$ for
 which such a $k$ exists is dense below $p$. This is the full two-part conclusion
-of Shelah the corresponding source claim, in the library order.
+of Claim 7.4 of the source, in the library order.
 
 ## Facts & Assumptions
 
@@ -32,7 +32,7 @@ of Shelah the corresponding source claim, in the library order.
 
 [F2] [[thm-forcing-equivalence-and-boolean-completion]] with [[def-complete-boolean-algebra-and-regular-open-sets]]: $Q$ is order-densely embedded in $BA(Q)$, so every nonzero element of $BA(Q)$ lies above a condition of $Q$; $P\subseteq BA(Q)$ is a complete suborder, so every element of $BA(Q)$ lies above a condition of $P$.
 
-[F3] [[def-two-step-forcing-iteration]]: the assertion $p\Vdash q\in Q/P$ is the quotient assertion of the two-step iteration $P*Q$; it implies that $p$ and $q$ are compatible in $BA(Q)$, and if $p'\in P$ satisfies $p'\le q$ for a condition $q\in Q$, then $p'\Vdash q\in Q/P$.
+[F3] [[def-two-step-forcing-iteration]] with the quotient convention recorded on this page: the assertion $p\Vdash q\in Q/P$ is the quotient assertion of the pair $P\le BA(Q)$ from Shelah's Section 7.1; it implies that $p$ and $q$ are compatible in $BA(Q)$, and if $p'\in P$ satisfies $p'\le q$ for a condition $q\in Q$, then $p'\Vdash q\in Q/P$.
 
 [F4] [[thm-forcing-theorem]] with [[lem-iteration-restrictions-and-complete-embeddings]]: forcing is monotone and definable, and the complete embeddings of iteration stages locate $P$ inside $BA(Q)$.
 

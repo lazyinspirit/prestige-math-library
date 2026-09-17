@@ -1,0 +1,66 @@
+I've completed a full read of all 46 scoped carriers plus the load-bearing dependencies, and verified the two reader repairs against the current files. I found one concrete defect the reader missed (a false Cauchy–Schwarz bound and an unlicensed Fubini application in the kernel theorem's measurability step), with two counterexamples within the item's hypotheses.
+
+```json
+{
+  "batch": "2",
+  "opened": [
+    "cex-a-compact-operator-can-have-nondense-range",
+    "cex-compactness-is-not-preserved-by-strong-operator-limits",
+    "cex-identity-is-compact-iff-the-space-is-finite-dimensional",
+    "compact-operators-and-riesz-schauder-theory",
+    "compact-operators-and-riesz-schauder-theory-examples",
+    "cor-lambda-identity-minus-compact-has-index-zero",
+    "cor-spectrum-of-a-compact-operator-is-countable-with-only-zero-as-possible-accumulation",
+    "def-approximable-operator",
+    "def-compact-linear-operator",
+    "def-fredholm-operator-cokernel-and-index",
+    "def-hilbert-schmidt-operator",
+    "def-spectrum-and-resolvent-of-a-bounded-operator",
+    "ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval",
+    "ex-diagonal-operator-on-ell-p-is-compact-iff-diagonal-tends-to-zero",
+    "ex-fredholm-alternative-for-an-integral-equation",
+    "ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two",
+    "ex-square-integrable-kernel-finite-rank-truncations",
+    "ex-square-integrable-kernel-without-continuous-representative",
+    "ex-square-integrable-separable-product-kernel",
+    "lem-a-compact-remainder-estimate-forces-closed-range",
+    "lem-compositions-with-a-compact-operator-are-compact",
+    "lem-dependent-choice-implies-countable-choice",
+    "lem-finite-rank-operators-are-compact",
+    "lem-fredholm-splitting-and-parametrix",
+    "lem-kernel-of-identity-minus-compact-is-finite-dimensional",
+    "lem-linear-combinations-of-compact-operators-are-compact",
+    "lem-neumann-series-and-small-perturbations-of-bounded-inverses",
+    "lem-product-rectangle-kernels-are-dense-in-product-l-two",
+    "lem-range-of-identity-minus-compact-is-closed",
+    "lem-riesz-schauder-ascent-and-descent-stabilize",
+    "rem-approximation-property-controls-finite-rank-density-in-compact-operators",
+    "square-integrable-kernels-and-hilbert-schmidt-compactness",
+    "square-integrable-kernels-and-hilbert-schmidt-compactness-examples",
+    "thm-atkinson",
+    "thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences",
+    "thm-fredholm-alternative-for-identity-minus-compact",
+    "thm-fredholm-index-is-additive",
+    "thm-fredholm-index-is-locally-constant",
+    "thm-fredholm-index-is-stable-under-compact-perturbations",
+    "thm-hilbert-schmidt-norm-is-basis-independent",
+    "thm-hilbert-schmidt-operators-are-compact",
+    "thm-l-two-kernels-give-hilbert-schmidt-operators",
+    "thm-norm-limit-of-compact-operators-is-compact",
+    "thm-riesz-schauder-spectrum-of-a-compact-operator",
+    "thm-schauder-compact-adjoint-theorem",
+    "thm-sequential-characterization-of-compact-operators"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "thm-l-two-kernels-give-hilbert-schmidt-operators",
+      "location": "step 4.1 (Measurability)",
+      "defect": "false-claim",
+      "evidence": "Step 4.1 asserts: 'the function g_j(x,y):=k_0(x,y)1_{B_j}(y) satisfies ∫|g_j| dρ <= ||k_0||_{L2(ρ)} ν(B_j)^{1/2} < +∞ by Cauchy–Schwarz in L2(ρ)', and then invokes Fubini [F4] on that basis. Cauchy–Schwarz in L2(ρ) with the indicator of X×B_j gives only ∫|g_j| dρ <= ||k_0||_{L2(ρ)}·ρ(X×B_j)^{1/2} = ||k_0||_{L2(ρ)}·(μ(X)ν(B_j))^{1/2}; the factor μ(X)^{1/2} is missing, so the displayed bound is false whenever μ(X) > 1. Counterexample within the hypotheses: X = Y = {0,1} with counting measure, k_0 ≡ 1 (so ||k_0||_{L2(ρ)} = 2), B_j = Y (ν(B_j) = 2): the left side is ρ(X×Y) = 4, the written right side is 2·2^{1/2} ≈ 2.83. The invoked Fubini hypothesis genuinely fails in general: on X = Y = N with counting measure take k_0(m,n) = 1/m for n = 0 and 0 otherwise, so ||k_0||^2_{L2(ρ)} = Σ_{m>=1} 1/m^2 < ∞, and take the finite-measure simple f = 1_{{0}} (ν({0}) = 1); then ∫|g_j| dρ = Σ_{m>=1} 1/m = ∞, so g_j is not in L1(ρ) and [F4] (Fubini for L1) does not apply. The conclusion of the step (μ-measurability and μ-a.e. finiteness of the section-integral function) is true and recoverable from Tonelli's measurability of the section integrals together with the a.e. finiteness supplied by steps 2.1/3.1, but the written inequality and the L1-based justification are defective as they stand.",
+      "severity": "fatal"
+    }
+  ],
+  "coverage_note": "Read all 4 page carriers and all 42 items of refuter_scope exactly once each, in full, from the current files on disk, and re-read the two reader-repaired items: the epsilon/4-net estimate in step 2.1 of thm-norm-limit-of-compact-operators-is-compact and the S*T*=(TS)*=I−(−G*) containment of ker T* in steps 2.2/3.2 of thm-atkinson are both correct as they now stand, and I re-derived their conclusions (finite epsilon-net from ||x−x_i|| <= 2; finite-dimensionality of ker T* via the identity-minus-compact kernel lemma, hence finite-dimensional cokernel via (Y/ran T)* ≅ (ran T)^⊥ = ker T*). I opened the load-bearing dependency statements and checked exact hypotheses/directions against use: metric compactness equivalences and its DC/AC_omega ledger, lem-closed-range-iff-quotient-estimate, lem-elementary-kernel-range-annihilator-identities, thm-dual-of-a-quotient-is-the-annihilator, def-approximation-property-and-bounded-approximation-property, thm-closed-unit-ball-compact-iff-finite-dimensional, lem-riesz-lemma, thm-bounded-inverse-theorem, transpose/bidual/annihilator and uniform-boundedness interfaces, weak and strong operator convergence, Riesz–Fischer and complex Lp completeness, Parseval/Fourier/Bessel/finite-Bessel, square-summable families, product-measure existence, completed product, completion representatives, finite-rectangle algebra and finite-measure approximation, Tonelli/Fubini and zero-integral items, Arzela–Ascoli, C(K) completeness, quotient/splitting/complement results, counting measure. I re-derived the Fredholm, Riesz–Schauder, spectrum and index chains step by step, the six-term exact sequence and telescoping index count, the block-diagonal Schur-complement computation, the path-connectedness argument, the B-page computations (diagonal truncation errors sup_{n>N}|a_n| and (Σ_{n>N}|a_n|^2)^{1/2}, integral-operator compactness via Arzela–Ascoli over both scalar fields, the strong-limit counterexample with ||I−P_N||=1, nondense-range and finite-dimensional-identity witnesses), the square-integrable/kernel items (representative with equal norm, a.e. section integrability, measurability, boundedness, exact Hilbert–Schmidt norm Σ_e||T_k e||^2 = Σ_f||T_k* f||^2 = ||k||_2^2), and the four page prose summaries against the items they describe; the page frontmatter lists match the batch manifest. One concrete defect was found and is reported in flagged (thm-l-two-kernels-give-hilbert-schmidt-operators, step 4.1). Accepted as nonfatal and not flagged: Riesz's lemma read inside ker A^{n+1} / ran A^n plus the two-line propagation of the stabilised chains in lem-riesz-schauder-ascent-and-descent-stabilize; Banach-ness of X* used but not listed among the facts of thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences; the true 1-Lipschitz distance step in step 6.1 of lem-a-compact-remainder-estimate-forces-closed-range (stated inline, only loosely covered by its fact A3); and the direct-sum index additivity in step 4.1 of thm-fredholm-index-is-locally-constant. Limitation, stated honestly: the textbook locators cited by the batch were not re-fetched (no network access), so external-source fidelity was checked only through the items' own quoted facts and the library's dependency statements on disk, with independent re-derivation of the arguments; the two counterexamples supporting the single flag are self-contained arithmetic within the item's hypotheses."
+}
+```

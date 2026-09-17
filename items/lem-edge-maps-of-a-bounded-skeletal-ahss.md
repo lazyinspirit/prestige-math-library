@@ -37,7 +37,8 @@ In homology, the corresponding map is the pair map
 $j:D_{p,q}\to E_{p,q}$, and
 $$E^\infty_{p,q}\xrightarrow{\ \cong\ } F_ph_{p+q}(X)\big/F_{p-1}h_{p+q}(X),$$
 with $F_ph_n(X)=\operatorname{im}(h_n(X^p)\to h_n(X))$. The $0$-column edge is
-the inclusion $h_n(X^0)=F_0h_n(X)\subseteq h_n(X)$, and the top-column edge is the
+the inclusion $F_0h_n(X)=\operatorname{im}(h_n(X^0)\to h_n(X))\subseteq h_n(X)$,
+the pair map $j$ carrying $h_n(X^0)$ onto it, and the top-column edge is the
 quotient $h_n(X)\to h_n(X)/F_{N-1}h_n(X)\cong E^\infty_{N,n-N}$.
 
 These identifications require boundedness of the skeletal index only: for each

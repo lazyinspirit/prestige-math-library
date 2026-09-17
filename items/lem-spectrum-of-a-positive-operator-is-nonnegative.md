@@ -52,6 +52,6 @@ Assume Countable Choice. If $T$ is a bounded positive operator on a nonzero comp
 
 2.1 If $z\notin\mathbb R$ then $\|(T-zI)x\|\ge|\operatorname{Im}z|\,\|x\|$ by the estimate and Cauchy–Schwarz, and the same lower bound with $|\operatorname{Re}z|$ holds when $z$ is real and negative; in either case $T-zI$ is injective and has closed range. [step 1.1, A3, A7, algebra]
 
-3.1 For such $z$ the orthogonal complement of $\operatorname{ran}(T-zI)$ is $\ker(T^*-zI)=\{0\}$, and the closed range equals its closure, so $\operatorname{ran}(T-zI)=H$. [step 2.1, step 1.2, A5, A6, A8]
+3.1 For such $z$ the orthogonal complement of $\operatorname{ran}(T-zI)$ is $\ker(T^*-\overline zI)=\{0\}$, the vanishing being step 1.2 applied to the scalar $\overline z$, which also lies outside $[0,+\infty)$; the closed range equals its closure, so $\operatorname{ran}(T-zI)=H$. [step 2.1, step 1.2, A5, A6, A8]
 
 4.1 Hence every $z\notin[0,+\infty)$ lies in $\rho(T)$: $T-zI$ is bijective with bounded inverse, so $\sigma(T)\subseteq[0,+\infty)$. [step 2.1, step 3.1, A4] ∎

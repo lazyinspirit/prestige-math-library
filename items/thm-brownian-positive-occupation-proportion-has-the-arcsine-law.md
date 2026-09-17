@@ -69,7 +69,7 @@ the two random variables are of a different nature.
 
 7.1 Differentiating the distribution function on $(0,1)$ gives $\frac{d}{dx}\frac2\pi\arcsin\sqrt x=\frac2\pi\cdot\frac{1}{2\sqrt{x(1-x)}}=\frac{1}{\pi\sqrt{x(1-x)}}$; this density is integrable on $(0,1)$ (substitute $x=\sin^2\theta$), so it is the density of $A_t/t$ and both endpoints carry zero mass. [step 6.1, F5]
 
-8.1 The boundary cases are covered: $x=0$ gives $P(A_1=0)=0=\frac2\pi\arcsin0$ and $x=1$ gives $1=\frac2\pi\arcsin\frac\pi2$; the value $\theta=\pi/2$ of the substitution is the endpoint of the principal branch of [F5]; the parameters satisfy $\alpha,\beta>0$ in [step 3.1] and $0<\beta<1$ in [step 4.1]; the occupation time is taken over the half-line $\{y>0\}$ so the single instant $s=0$ is excluded by a null set; and AC enters only through [F8]. [step 3.1, step 4.1, step 7.1, F5, F8, given] ∎
+8.1 The boundary cases are covered: $x=0$ gives $P(A_1=0)=0=\frac2\pi\arcsin0$ and $x=1$ gives $1=\frac2\pi\arcsin1=\frac2\pi\cdot\frac\pi2$; the value $\theta=\pi/2$ of the substitution is the endpoint of the principal branch of [F5]; the parameters satisfy $\alpha,\beta>0$ in [step 3.1] and $0<\beta<1$ in [step 4.1]; the occupation time is taken over the half-line $\{y>0\}$ so the single instant $s=0$ is excluded by a null set; and AC enters only through [F8]. [step 3.1, step 4.1, step 7.1, F5, F8, given] ∎
 
 ## Source notes
 

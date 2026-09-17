@@ -4,7 +4,7 @@ kind: corollary
 title: "The exponential Brownian martingale"
 status: draft
 origin: pipeline
-deps: [thm-ito-formula-one-dimensional, def-continuous-brownian-ito-process, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-c-one-change-of-variables-for-l-one-functions, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-ito-formula-one-dimensional, def-continuous-brownian-ito-process, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, cor-c-one-change-of-variables-for-l-one-functions, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-continuous-time-adapted-process-and-martingale, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -40,7 +40,7 @@ square-integrable process $\theta Z$.
  
 [F5] **Integral interfaces.** A finite-energy integral $\int H\,dB$ has a continuous version that is a square-integrable martingale with mean zero and isometry $E(\int_0^tH\,dB)^2=E\int_0^tH^2ds$; the localized integral exists for locally square-integrable predictable integrands. [[thm-localized-ito-integral]] [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[def-elementary-predictable-brownian-integrand]]
  
-[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

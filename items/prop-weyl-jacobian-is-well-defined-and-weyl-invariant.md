@@ -15,7 +15,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "§15, the Jacobian depends only on the root system"
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
-      url: "https://www.math.stanford.edu/~aknapp/download/Beyond2-clickable.pdf"
+      url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §6 and VIII §1"
 proof_strategy: direct
 ---

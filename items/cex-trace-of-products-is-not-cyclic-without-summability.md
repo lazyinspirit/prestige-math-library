@@ -53,11 +53,10 @@ $S^*S-SS^*$ has trace $1$, so no subtraction of "infinite traces" is available.
 
 **Given:** Countable Choice, the shift $S$, the projection $P_0$, and the standard basis.
 
-1.1 **The products.** Since $S$ is an isometry, $\langle S^*Sx,y\rangle=\langle Sx,Sy\rangle=\langle x,y\rangle$ for all $x,y$ by [A1], so $S^*S=I$. Similarly $\langle SS^*x,u_n\rangle=\langle S^*x,S^*u_n\rangle$ for $n\ge1$ equals $\langle S^*x,u_{n-1}\rangle=\langle x,u_n\rangle$, while $\langle SS^*x,u_0\rangle=\langle S^*x,S^*u_0\rangle=0$; hence $SS^*=\langle\cdot,u_0\rangle u_0^{\perp}$-part, that is $SS^*x=x-\langle x,u_0\rangle u_0=(I-P_0)x$ for all $x$, and $S^*S-SS^*=P_0$. [A1]
+1.1 **The products.** Since $S$ is an isometry, $\langle S^*Sx,y\rangle=\langle Sx,Sy\rangle=\langle x,y\rangle$ for all $x,y$ by [A1], so $S^*S=I$. Similarly $\langle SS^*x,u_n\rangle=\langle S^*x,S^*u_n\rangle$ for $n\ge1$ equals $\langle S^*x,u_{n-1}\rangle=\langle x,u_n\rangle$, while $\langle SS^*x,u_0\rangle=\langle S^*x,S^*u_0\rangle=0$; hence $SS^*$ fixes each $u_n$ with $n\ge1$ and annihilates $u_0$, that is $SS^*x=x-\langle x,u_0\rangle u_0=(I-P_0)x$ for all $x$, and $S^*S-SS^*=P_0$. [A1]
 
 1.2 **Neither product is trace class.** For $I$ with the Hilbert basis $(u_n)$, every diagonal coefficient is $\langle Iu_n,u_n\rangle=1$, so $\sum_n|\langle Iu_n,u_n\rangle|=+\infty$ and $I$ is not trace class by [A2]. For $I-P_0$, the coefficients at $u_n$ with $n\ge1$ are $\langle(I-P_0)u_n,u_n\rangle=1$, again infinitely many equal to $1$, so $I-P_0$ is not trace class by [A2]. [A1, A2]
 
 1.3 **The difference has trace one.** $P_0=\langle\cdot,u_0\rangle u_0$ is a rank-one operator whose trace is $\langle u_0,u_0\rangle=1$ by [A3]; note that $u_0\ne0$ because it is a unit vector. [A3]
 
 2.1 **Conclusion.** The products $S^*S=I$ and $SS^*=I-P_0$ are not trace class by [step 1.2], so the hypothesis of the cyclicity theorem [A4] fails for this pair and no equality of traces is asserted or available; the difference of the two products is $P_0$ with trace $1$ by [step 1.1] and [step 1.3], so the identity cannot be repaired by subtracting the two "traces", which are not defined. [step 1.1, step 1.2, step 1.3, A4] ∎
-

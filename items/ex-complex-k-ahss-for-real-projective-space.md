@@ -29,7 +29,7 @@ extensions.
 
 ## Facts & Assumptions
 
-[A1] Assume AC. The $K$-AHSS of $\mathbb{RP}^r$ has $E_2^{p,q}=H^p(\mathbb{RP}^r;\mathbb Z)$ for even $q$ and zero for odd $q$, with all differentials zero; the integral cohomology is $\mathbb Z$ in degree $0$, $\mathbb Z/2$ in the even positive degrees and odd degrees below $r$, and $\mathbb Z$ in degree $r$ for odd $r$ ([[cor-complex-k-theory-ahss]], the standard universal-coefficient computation).
+[A1] Assume AC. The $K$-AHSS of $\mathbb{RP}^r$ has $E_2^{p,q}=H^p(\mathbb{RP}^r;\mathbb Z)$ for even $q$ and zero for odd $q$, with all differentials zero (every target lies in an odd degree below $r$ or in the top degree with a torsion source, and the $0$-column survives by the rank of its edge); the integral cohomology is $\mathbb Z$ in degree $0$, $\mathbb Z/2$ in the even positive degrees below $r$, zero in the odd degrees below $r$, and $\mathbb Z$ in degree $r$ for odd $r$, $\mathbb Z/2$ for even $r$ ([[cor-complex-k-theory-ahss]], the standard universal-coefficient computation).
 
 [A2] Assume AC. The complexified tautological line $\xi$ has $\alpha=[\xi]-1$ with $\alpha^2=-2\alpha$, exact order $2^m$, and $\widetilde K^0(\mathbb{RP}^r)=\mathbb Z\alpha$; the odd groups are $K^1(\mathbb{RP}^{2m})=0$ and $K^1(\mathbb{RP}^{2m+1})\cong\mathbb Z$ ([[lem-complexified-tautological-line-resolves-real-projective-k-theory-extensions]]).
 

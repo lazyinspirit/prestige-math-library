@@ -4,7 +4,7 @@ kind: theorem
 title: "Levy characterization of Brownian motion"
 status: draft
 origin: pipeline
-deps: [lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t, lem-normal-density-has-total-mass-one, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-quadratic-covariation-of-brownian-ito-processes, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, thm-uniqueness-of-a-law-from-its-characteristic-function, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t, lem-normal-density-has-total-mass-one, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-quadratic-covariation-of-brownian-ito-processes, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, thm-uniqueness-of-a-law-from-its-characteristic-function, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-law-modification-and-indistinguishability-of-processes, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -39,7 +39,7 @@ the increment $M_t-M_s$ is independent of $\mathcal F_s$ with law $N(0,t-s)$.
  
 [F4] **Conditional expectations and test events.** Conditional expectations are unique almost-sure classes, and for $A\in\mathcal F_s$ the identity $E[1_AX\mid\mathcal F_s]=1_AE[X\mid\mathcal F_s]$ holds; the tower property gives $E[1_AE[X\mid\mathcal F_s]]=E[1_AX]$. [[def-conditional-expectation-as-an-ae-class]] [[thm-tower-property-of-conditional-expectation]]
  
-[F5] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F5] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

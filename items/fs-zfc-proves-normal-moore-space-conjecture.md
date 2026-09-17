@@ -26,24 +26,15 @@ not prove that every normal Moore space is metrizable.
 
 ## Facts & Assumptions
 
-**Given:** The metatheoretic hypothesis $\operatorname{Con}(\mathrm{ZFC})$ and
-the fixed arithmetization of [[def-arithmetic-provability-and-consistency]].
+**Given:** The metatheoretic hypothesis $\operatorname{Con}(\mathrm{ZFC})$ and the fixed arithmetization of [[def-arithmetic-provability-and-consistency]].
 
-[F1] The verified finite-proof reduction: for the fixed theories, a target
-refutation compiles to a source refutation, giving the corresponding
-consistency implication ([[thm-formal-relative-consistency-from-verified-proof-reduction]]).
+[F1] The verified finite-proof reduction: for the fixed theories, a target refutation compiles to a source refutation, giving the corresponding consistency implication ([[thm-formal-relative-consistency-from-verified-proof-reduction]]).
 
-[F2] $\operatorname{Con}(\mathrm{ZF})$ implies
-$\operatorname{Con}(\mathrm{ZFC} + \mathrm{GCH})$, by the guarded
-$L$-interpretation compiler ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]]).
+[F2] $\operatorname{Con}(\mathrm{ZF})$ implies $\operatorname{Con}(\mathrm{ZFC} + \mathrm{GCH})$, by the guarded $L$-interpretation compiler ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]]).
 
-[F3] GCH implies CH at $\omega$, and $\mathrm{ZFC}+\mathrm{CH}$ proves that
-there is a normal nonmetrizable Moore space
-([[thm-ch-normal-nonmetrizable-moore-space]],
-[[def-moore-spaces-and-developments]]).
+[F3] GCH implies CH at $\omega$, and $\mathrm{ZFC}+\mathrm{CH}$ proves that there is a normal nonmetrizable Moore space ([[thm-ch-normal-nonmetrizable-moore-space]], [[def-moore-spaces-and-developments]]).
 
-[F4] $\mathrm{NMSC}$ is the assertion that every normal Moore space is
-metrizable. [given]
+[F4] $\mathrm{NMSC}$ is the assertion that every normal Moore space is metrizable. [given]
 
 
 
@@ -57,10 +48,5 @@ metrizable. [given]
 
 ## Remarks
 
-- **The consistency hypothesis cannot be dropped.** The conclusion is a
-  relative statement; $\mathrm{ZFC}$ itself cannot prove
-  $\operatorname{Con}(\mathrm{ZFC})$ ([[def-arithmetic-provability-and-consistency]]).
-- **The failure is not a theorem of $\mathrm{ZFC}$ alone.** The witness space
-  is produced under CH; under PMEA every normal Moore space is metrizable
-  ([[thm-strongly-compact-relative-consistency-normal-moore]]), so the
-  statement is independent in the usual relative-consistency sense.
+- **The consistency hypothesis cannot be dropped.** The conclusion is a relative statement; $\mathrm{ZFC}$ itself cannot prove $\operatorname{Con}(\mathrm{ZFC})$ ([[def-arithmetic-provability-and-consistency]]).
+- **The failure is not a theorem of $\mathrm{ZFC}$ alone.** The witness space is produced under CH; under PMEA every normal Moore space is metrizable ([[thm-pmea-implies-normal-moore-space-conjecture]]), so the statement is independent in the usual relative-consistency sense.

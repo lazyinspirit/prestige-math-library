@@ -49,7 +49,7 @@ might hold, and no uniform modulus theorem is asserted.
 
 3.1 The family of ordered pairs of rationals and of integers is countable, so [step 2.1], countable subadditivity and [F4] give $P(\bigcup_{a<b,\ a,b\in\mathbb Q}\bigcup_{C\ge1}E_{a,b,C})=0$. [step 2.1, F4]
 
-4.1 On the complement of that null event there is no nondegenerate interval $I$ with a finite one-half Hölder constant: if $I$ were such an interval with finite constant $C>0$, then by [F3] we could choose rationals $a<b$ with $[a,b]\subseteq I$, and with $C'=\max(C,1)\in\mathbb N$ the bound $|B_t-B_s|\le C'|t-s|^{1/2}$ would hold for all $s,t\in[a,b]$, that is, $E_{a,b,C'}$ would occur. [step 3.1, F3]
+4.1 On the complement of that null event there is no nondegenerate interval $I$ with a finite one-half Hölder constant: if $I$ were such an interval with finite constant $C>0$, then by [F3] we could choose rationals $a<b$ with $[a,b]\subseteq I$, and with $C':=\lceil\max(C,1)\rceil\in\mathbb N$ the bound $|B_t-B_s|\le C|t-s|^{1/2}\le C'|t-s|^{1/2}$ would hold for all $s,t\in[a,b]$, that is, $E_{a,b,C'}$ would occur. [step 3.1, F3]
 
 5.1 The intended cases are covered: the interval is required to be nondegenerate, so the empty and singleton interval cases are excluded; the value $n=1$ in [step 2.1] is the degenerate single-increment case of the estimate and already gives $P(A_1)=p_C<1$; the union over integers $C\ge1$ covers every finite real constant up to rounding up; the intersection over $n$ in [step 2.1] uses the single countable sequence of uniform meshes rather than an uncountable family of partitions; and AC is used only through [F4] via [F1] and [F2]. [step 2.1, step 3.1, step 4.1, F4, given] ∎
 

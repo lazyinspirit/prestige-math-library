@@ -5,7 +5,7 @@ title: Integral cohomology ring of complex projective space
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complex-projective-bundle-and-tautological-complex-line, def-projective-space-points, def-stiefel-space-grassmannian-and-tautological-bundle, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, cor-homology-of-spheres, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
+deps: [def-complex-projective-bundle-and-tautological-complex-line, def-stiefel-space-grassmannian-and-tautological-bundle, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, cor-homology-of-spheres, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the Gysin and coefficient suppliers."
 provenance:
@@ -35,7 +35,7 @@ $\mathbb C^{m+1}\subseteq\mathbb C^{N+1}$, pulls $x$ back to $x$.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited from the Gysin and coefficient suppliers ([[def-axiom-of-choice]]).
 
-[F1] For an algebraically closed field $k$ one has $\mathbf P^n_k=(k^{n+1}\setminus\{0\})/k^\times$ with classes $[a_0:\cdots:a_n]$; for $k=\mathbb C$ this is the space of complex lines in $\mathbb C^{n+1}$ with its standard topology ([[def-projective-space-points]]).
+[F1] For an algebraically closed field $k$ one has $\mathbf P^n_k=(k^{n+1}\setminus\{0\})/k^\times$ with classes $[a_0:\cdots:a_n]$; for $k=\mathbb C$ this is the space of complex lines in $\mathbb C^{n+1}$ with its standard topology.
 
 [F2] $\operatorname{Gr}_1(\mathbb C^{N+1})$ is the space of complex lines with the quotient topology, its tautological bundle is $\gamma$, and the standard inclusions $\mathbb C^{m+1}\subseteq\mathbb C^{N+1}$ induce compatible inclusions of Grassmannians with compatible tautological bundles ([[def-stiefel-space-grassmannian-and-tautological-bundle]]).
 

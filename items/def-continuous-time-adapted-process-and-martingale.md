@@ -4,13 +4,13 @@ kind: definition
 title: "Continuous-time adapted processes and martingales"
 status: draft
 origin: pipeline
-deps: [def-continuous-time-filtration-and-all-pairs-martingale, def-continuous-time-stopping-time, def-conditional-expectation-as-an-ae-class, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-continuous-time-filtration-and-all-pairs-martingale, def-continuous-time-stopping-time, def-conditional-expectation-as-an-ae-class, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable
 sources:
   references:
-    - title: "Aad van der Vaart, Stochastic Integration and Differential Equations, Sections 4.1 and 5.4"
+    - title: "Aad van der Vaart, Martingales, Diffusions and Financial Mathematics (preliminary notes), Sections 4.1 and 5.4"
       url: "https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf"
 ---
 
@@ -24,9 +24,8 @@ this definition are real-valued and indexed by $[0,\infty)$; the filtration is
 neither assumed complete nor right-continuous. The Axiom of Choice is declared
 because the conditional-expectation classes used in clause 3 are supplied by
 the Radon--Nikodym interface of [[def-conditional-expectation-as-an-ae-class]],
-which assumes it; the implication bridge
-[[thm-choice-implies-dependent-implies-countable-choice]] records the inherited
-countable-choice obligations of that interface.
+which assumes it; the countable-choice obligations inherited from that
+interface are declared as dependencies of this item.
 
 1. **Adapted.** $X=(X_t)_{t\ge0}$ is **adapted** to $(\mathcal F_t)$ when $X_t$
    is $\mathcal F_t$-measurable for every $t\ge0$. This is exactly the notion
@@ -90,5 +89,5 @@ used below, and are direct consequences of the clauses above.
 
 No path continuity, no right continuity of the filtration, and no completeness
 of the underlying probability space is imposed by this definition. Choice
-enters only through the conditional-expectation interface named above, as
-recorded by [[thm-choice-implies-dependent-implies-countable-choice]].
+enters only through the conditional-expectation interface named above,
+whose countable-choice obligations are declared as dependencies of this item.

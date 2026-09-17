@@ -4,7 +4,7 @@ kind: definition
 title: "Ito integral of an elementary predictable process"
 status: draft
 origin: pipeline
-deps: [def-elementary-predictable-brownian-integrand, def-brownian-motion, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-elementary-predictable-brownian-integrand, def-brownian-motion, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -61,6 +61,5 @@ Three conventions are part of the definition.
 The Axiom of Choice is declared because the standing hypothesis (H) is part of
 the Brownian interface of
 [[def-elementary-predictable-brownian-integrand]], which assumes it; the
-definition of the finite sum uses no choice. The implication bridge
-[[thm-choice-implies-dependent-implies-countable-choice]] records the inherited
-countable-choice obligations.
+definition of the finite sum uses no choice. The countable-choice obligations
+inherited from that interface are declared as dependencies of this item.

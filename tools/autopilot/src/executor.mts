@@ -1204,11 +1204,23 @@ export class Executor {
     // Step 3" cannot race the next fan-out. The marker clears itself; a later
     // `resume` continues past the boundary.
     const pauseAfter = this.state.data.pauseAfter;
-    if (pauseAfter && this.state.data.stages[pauseAfter]?.doneAt) {
-      this.state.data.pauseAfter = null;
-      this.state.paused = true;
-      this.state.save();
-      this.reporter.notify('paused', `armed pause fired — ${pauseAfter} is stamped complete; resume to continue`);
+    if (pauseAfter) {
+      const armed = this.stages.find((s: any) => s.id === pauseAfter);
+      // A GATES-WAIVED STAGE NEVER CARRIES A `doneAt` STAMP. `runGroupGates`
+      // reaches its stamp loop only when the group has a non-empty gate list,
+      // so keying the pause on the stamp alone made `pause-at` silently never
+      // fire for stages like `5b-close`, and phase-2-remaining-27 slid straight
+      // from the end of Step 5 into the Step-6 judge fan-out. `stageStatus` is
+      // the engine's own definition of finished — units covered, artifacts on
+      // disk, gates passed — and answers the same question for both kinds of
+      // stage.
+      const complete = Boolean(armed) && this.stageStatus(armed, ctx).done;
+      if (complete) {
+        this.state.data.pauseAfter = null;
+        this.state.paused = true;
+        this.state.save();
+        this.reporter.notify('paused', `armed pause fired — ${pauseAfter} is complete; resume to continue`);
+      }
     }
 
     // A COMPLETED STAGE CANNOT HAVE A LIVE BLOCKER. Neither can a recovered

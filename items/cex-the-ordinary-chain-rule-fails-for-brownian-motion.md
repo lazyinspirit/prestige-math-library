@@ -4,7 +4,7 @@ kind: counterexample
 title: "The ordinary chain rule fails for Brownian motion"
 status: draft
 origin: pipeline
-deps: [cor-brownian-square-martingale, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-gaussian-even-moment-bound-for-brownian-increments, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-continuous-time-adapted-process-and-martingale, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [cor-brownian-square-martingale, def-brownian-motion, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-gaussian-even-moment-bound-for-brownian-increments, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-continuous-time-adapted-process-and-martingale, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: counterexample
@@ -36,7 +36,7 @@ $t>0$: the missing term is exactly the quadratic-variation correction $t$.
  
 [F3] **Second moment of Brownian motion.** $EB_t^2=t$: for $t>0$, $B_t$ has law $N(0,t)$ with density $(2\pi t)^{-1/2}e^{-x^2/(2t)}$, whose second moment is $t$; the value at $t=0$ is $0$. [[def-standard-normal-and-normal-laws]] [[def-brownian-motion]] [[lem-normal-density-has-total-mass-one]] [[lem-gaussian-even-moment-bound-for-brownian-increments]] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
  
-[F4] **AC bookkeeping.** Choice is declared for the ambient completeness interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] **AC bookkeeping.** Choice is declared for the ambient completeness interface. [[def-axiom-of-choice]]
  
  
  

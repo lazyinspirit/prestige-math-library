@@ -4,7 +4,7 @@ kind: example
 title: "Integral of Brownian motion against itself"
 status: draft
 origin: pipeline
-deps: [lem-adapted-continuous-processes-are-progressively-measurable, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, thm-ito-isometry-and-linearity-in-predictable-l2, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-brownian-motion, cor-law-of-the-brownian-maximum, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [lem-adapted-continuous-processes-are-progressively-measurable, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, thm-ito-isometry-and-linearity-in-predictable-l2, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-brownian-motion, cor-law-of-the-brownian-maximum, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,9 +22,9 @@ Assume the Axiom of Choice and the standing hypothesis (H) of
 Brownian motion [[def-brownian-motion]]. Then for every $t\ge0$
 $$\int_0^tB_s\,dB_s=\frac{B_t^2-t}{2}\qquad\text{almost surely},$$
 and since both sides are continuous in $t$ the two processes are
-indistinguishable. In particular the integral is not centered and has mean
-$0$, variance $E(B_t^2-t)^2/4=(2t^2)/4=t^2/2$; it is not a Brownian integral of
-the type arising from a deterministic integrand.
+indistinguishable. In particular the integral has mean $0$ and variance
+$E(B_t^2-t)^2/4=(2t^2)/4=t^2/2$; it is not a Brownian integral of the type
+arising from a deterministic integrand.
 
 ## Facts & Assumptions
 
@@ -38,7 +38,7 @@ the type arising from a deterministic integrand.
 
 [F4] Along the dyadic partitions of $[0,t]$, $\sum_k(B_{t_{k+1}}-B_{t_k})^2\to t$ uniformly on $[0,t]$ almost surely, in the step convention of the quadratic variation. [[thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes]] [[def-quadratic-variation-along-a-partition-sequence]]
 
-[F5] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F5] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Verification
 

@@ -21,7 +21,7 @@ sources:
 external_dependency:
   source_url: "https://msp.org/pjm/1951/1-3/pjm-v1-n3-p04-s.pdf"
   exact_statement: "For a metric space X, a nonempty closed subset A ⊆ X and a locally convex topological vector space L, every continuous map f : A → L admits a continuous extension F : X → L with F[X] ⊆ conv(f[A]). The intended stronger claim in the catalogue adds that the extension can be chosen by a single linear operator C(A,L) → C(X,L) continuous for uniform convergence on compact sets."
-  local_proof_attempt: "The inspected sections of the original paper prove the convex-combination extension formula and the bounded simultaneous scalar extension in the supremum norm; they do not establish the stronger compact-open continuous linear-operator formulation. No local proof of the stronger claim is attempted here, and the metric paracompactness and uniform-partition choices it would need are not costed on this page. The draft target [[rem-dugundji-extension-linear]] remains Recorded."
+  local_proof_attempt: "The inspected sections of the original paper prove the convex-combination extension formula and the bounded simultaneous scalar extension in the supremum norm; they do not establish the stronger compact-open continuous linear-operator formulation. No local proof of the stronger claim is attempted here, and the metric paracompactness and uniform-partition choices it would need are not costed on this page. The catalogue target [[rem-dugundji-extension-linear]] remains Recorded."
   necessity: "None for this pair: the remark is orientation only and is not used in any proof, dependency or well-definedness justification here."
 ---
 
@@ -43,4 +43,4 @@ target is [[rem-dugundji-extension-linear]].
 ## Remarks
 
 - **Orientation only.** Nothing on this page depends on this remark, and the topological extension theory is not part of the Gelfand proof spine.
-- **Open obligation for the catalogue.** Either obtain a complete source or proof of the compact-open operator form, or narrow the draft target to the proved formulation; the choice cost of the metric paracompactness input must be recorded in that repair.
+- **Open obligation for the catalogue.** Either obtain a complete source or proof of the compact-open operator form, or narrow the catalogue target to the proved formulation; the choice cost of the metric paracompactness input must be recorded in that repair.

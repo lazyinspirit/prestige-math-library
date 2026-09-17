@@ -34,7 +34,7 @@ space of the orbit of $p$ and $\mathfrak g_p$ is the infinitesimal stabilizer.
 
 **Given:** $\mathrm{AC}_\omega$, a Hamiltonian $G$-space with moment map $\mu$, and a point $p\in M$.
 
-[A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field interface cited in [F2].
+[A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the orbit and fundamental-field interface of the two suppliers cited in [F3], both of which carry the same assumption.
 
 [F1] $d\mu^\xi=-\iota_{\xi_M}\omega$ for every $\xi\in\mathfrak g$. [[def-moment-map-and-component-hamiltonian]].
 

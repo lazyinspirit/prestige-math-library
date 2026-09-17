@@ -432,6 +432,43 @@ test('a pause-at marker stops the run at the named stage boundary', async () => 
   assert.deepEqual(gateRuns(fx), ['first'], 'the stage after the boundary never started');
 });
 
+// 2026-09-17: phase-2-remaining-27 armed `pause-at 5b-close` to stop at the end
+// of Step 5. `5b-close` waives its gates, and a gates-waived stage is finished
+// by coverage alone — it never reaches `runGroupGates`' stamp loop and so never
+// gets a `doneAt`. The pause keyed on that stamp, never fired, and the engine
+// walked into the Step-6 judge fan-out. Completion now comes from
+// `stageStatus`, the same predicate that advances the pipeline.
+test('a pause-at marker fires on a gates-waived stage, which carries no doneAt stamp', async () => {
+  const fx = fixture();
+  const stages = [
+    {
+      id: 'first', label: 'first', units: () => ['1'], pattern: /^tool-first\.result\.json$/,
+      plan: () => [{ role: 'tool', label: 'first', job: 'bookkeeping-mechanical', covers: ['1'], argv: ['true'] }],
+      gatesWaived: 'one serialized tool; its result is the artifact',
+    },
+    {
+      // The terminal stage must not waive its gates; this one is never reached.
+      id: 'second', label: 'second', units: () => ['1'], pattern: /^tool-second\.result\.json$/,
+      plan: () => [{ role: 'tool', label: 'second', job: 'bookkeeping-mechanical', covers: ['1'], argv: ['true'] }],
+      gates: () => [loggingGate(fx, 'second')],
+    },
+  ];
+  const { ex, notifications } = makeExecutor(fx, stages);
+  cover(fx, 'tool', 'first', ['1']);
+  writeFileSync(join(fx.repo, '.autopilot', 'control.json'),
+    JSON.stringify({ command: 'pause-at', stage: 'first' }));
+  await ex.tick();
+  assert.equal(ex.state.data.stages.first?.doneAt ?? null, null,
+    'a gates-waived stage is never stamped');
+  // The armed stage is already unit-complete and waives its gates, so the
+  // boundary is here: the pause fires on the tick that arms it and the stage
+  // after it is never dispatched.
+  assert.equal(ex.state.paused, true, 'the run paused at the boundary');
+  assert.equal(ex.state.data.pauseAfter, null, 'the marker clears itself');
+  assert.ok(notifications.some((n) => n.kind === 'paused' && /is complete/.test(n.message)));
+  assert.deepEqual(gateRuns(fx), [], 'the stage after the boundary never started');
+});
+
 // The first guard covered tick() only. On 2026-09-17 the same duplicate-id
 // defect killed the successor controller through the post-tick boundary check,
 // so the whole iteration is guarded now.

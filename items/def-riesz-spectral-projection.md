@@ -6,7 +6,6 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-holomorphic-functional-calculus-homomorphism, def-holomorphic-functional-calculus, lem-admissible-cycle-around-a-compact-plane-set, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-axiom-of-choice]
-forward_refs: [ex-riesz-projection-for-a-matrix-with-separated-spectrum]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -44,11 +43,15 @@ $$P_E \;:=\; \chi_E(a) \;=\; \frac{1}{2\pi i}\int_\Gamma \chi_E(z)\, R(z,a)\,dz 
 where $\Gamma$ is any cycle with trace in $(U_1\cup U_0)\setminus\sigma_A(a)$
 whose index is $1$ at every point of $E$, whose index is $0$ at every point of
 $\sigma_A(a)\setminus E$, and whose index is $0$ outside $U_1\cup U_0$ — for
-instance a cycle admissible for the whole spectrum whose inner buffer lies in
-$U_1$. Such a cycle exists by
-[[lem-admissible-cycle-around-a-compact-plane-set]] applied to the compact set
-$\sigma_A(a)$ (use a cycle admissible for the whole spectrum) together with the
-separation of $E$ from $\sigma_A(a)\setminus E$; the value is independent of
+instance the difference $c_{\mathrm{all}} - c_{E}$, where $c_{\mathrm{all}}$ is
+admissible for $(\chi_E, U_1\cup U_0)$ and $c_E$ is a cycle with index $1$ on
+the compact set $\sigma_A(a)\setminus E$ and index $0$ outside $U_0$ (the zero
+cycle when $\sigma_A(a)\setminus E=\varnothing$): the difference has index
+$1-0=1$ on $E$, index $1-1=0$ on $\sigma_A(a)\setminus E$, and index $0$
+outside $U_1\cup U_0$, because $c_{\mathrm{all}}$ has index $0$ there and
+$c_E$ has index $0$ outside $U_0\subseteq U_1\cup U_0$. Such cycles exist by
+[[lem-admissible-cycle-around-a-compact-plane-set]] applied to the two compact
+sets $\sigma_A(a)$ and $\sigma_A(a)\setminus E$; the value is independent of
 the choice of $U_0,U_1$ and of the cycle by
 [[lem-holomorphic-functional-calculus-is-contour-independent]], applied to the
 germ of $\chi_E$ near $\sigma_A(a)$.
@@ -77,4 +80,6 @@ germ of $\chi_E$ near $\sigma_A(a)$.
   alone: replacing the cycle by another with the same indices does not change
   the value, as in the calculus at large. For a single isolated eigenvalue
   $\lambda$ the projection is the classical residue
-  ([[ex-riesz-projection-for-a-matrix-with-separated-spectrum]]).
+  (`ex-riesz-projection-for-a-matrix-with-separated-spectrum`).
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

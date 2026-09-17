@@ -4,7 +4,7 @@ kind: example
 title: "A deterministic step integrand"
 status: draft
 origin: pipeline
-deps: [def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: example
@@ -37,7 +37,7 @@ variance $\int_0^Th^2ds$.
 
 [F2] For deterministic $h\in L^2[0,T]$ the integral is centered normal with variance $\int_0^Th^2ds$. [[cor-deterministic-ito-integrals-are-gaussian]] [[def-standard-normal-and-normal-laws]]
 
-[F3] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F3] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Verification
 

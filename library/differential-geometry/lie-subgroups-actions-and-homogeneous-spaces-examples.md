@@ -10,7 +10,6 @@ examples:
   - ex-spheres-as-so-n-plus-one-mod-so-n
   - ex-real-and-complex-projective-spaces-as-homogeneous-spaces
   - ex-grassmannians-and-flag-manifolds-as-homogeneous-spaces
-  - ex-su-two-to-so-three-as-a-covering-homomorphism
   - ex-the-mobius-line-bundle-as-an-associated-bundle
   - ex-the-free-proper-integer-translation-action-on-the-line
   - cex-an-irrational-real-action-on-the-torus-that-is-free-but-not-proper

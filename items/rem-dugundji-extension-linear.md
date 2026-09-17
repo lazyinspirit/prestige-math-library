@@ -2,7 +2,7 @@
 id: rem-dugundji-extension-linear
 kind: remark
 title: "Dugundji's extension theorem in its linear form"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -12,7 +12,12 @@ aliases: []
 landmark: false
 short: "linear extenders into locally convex spaces"
 verification:
+  audited: 2026-09-17
   precheck: n/a
+  sources_checked:
+    date: 2026-09-17
+    scope: citations
+    by: owner-supervisor 5b-cross audit-manifest repair
 sources:
   scraped: []
   references:

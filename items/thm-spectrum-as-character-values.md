@@ -7,7 +7,6 @@ origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, thm-characters-on-a-unital-banach-algebra-are-continuous, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-spectral-radius, def-axiom-of-choice, def-unital-banach-algebra]
 justified_by: []
-forward_refs: [cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -66,4 +65,6 @@ of the Gelfand transform is asserted.
 
 - **AC is spent once, in the maximal-ideal extension.** Both inclusions are otherwise algebraic: the forward inclusion only tests the character on a coset representative, and the reverse inclusion only extends an ideal.
 - **Consequences for the Gelfand transform.** Since $\hat a(\chi) = \chi(a)$, the equality of the statement says that the range of $\hat a$ is exactly $\sigma_A(a)$, which is how the norm formula $\|\hat a\|_\infty = r(a)$ is proved in [[thm-gelfand-transform-is-a-contractive-unital-homomorphism]].
-- **No isometry claim.** The inequality chain $|\chi(a)| \le r(a) \le \|a\|$ is all that the spectrum identity yields; for a general commutative Banach algebra the first inequality can be strict, as [[cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric]] records.
+- **No isometry claim.** The inequality chain $|\chi(a)| \le r(a) \le \|a\|$ is all that the spectrum identity yields; for a general commutative Banach algebra the first inequality can be strict, as `cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric` records.
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

@@ -5,7 +5,7 @@ title: Maximal ideals and characters of a commutative Banach algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-closed-ideal-quotient-is-a-banach-algebra, lem-neumann-series, thm-gelfand-mazur, thm-zorn, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice, def-prime-and-maximal-ideals, def-character-and-maximal-ideal-space, def-unital-banach-algebra]
+deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-closed-ideal-quotient-is-a-banach-algebra, lem-neumann-series, thm-gelfand-mazur, thm-zorn, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-prime-and-maximal-ideals, def-character-and-maximal-ideal-space, def-unital-banach-algebra]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -55,7 +55,7 @@ ideals and a weaker choice principle.
 
 [L6] Under the Axiom of Choice, a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
 
-[L7] In ZF, $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$ ([[thm-choice-implies-dependent-implies-countable-choice]], [[def-axiom-of-choice]]).
+[L7] In ZF, $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$ ([[def-axiom-of-choice]]).
 
 [L8] Every character of $A$ is unital with $\chi(1) = 1$, is bounded of norm one, and satisfies $\chi(a) \in \sigma_A(a)$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]]).
 
@@ -87,6 +87,6 @@ ideals and a weaker choice principle.
 
 ## Remarks
 
-- **Where the Axiom of Choice is spent.** Exactly once, through Zorn's lemma in [1.3]; the Countable Choice used for the quotient is derived from AC by [L7], and Gelfand–Mazur spends AC through spectrum nonemptiness. The closedness argument [2.1], the field computation [2.2] and both direction computations [3.1]–[3.3] are choice-free.
+- **Where the Axiom of Choice is spent.** Directly through Zorn's lemma in [step 2.1], applied to the poset built in [step 1.3]; through the Countable Choice used for the completeness of the quotient in [step 3.2], which [L7] derives from AC; and through Gelfand–Mazur in [step 4.1], whose nonemptiness-of-spectrum input spends AC. The remaining computations of [step 1.1], [step 1.2], [step 1.4] and [step 1.5] involve no further selection.
 - **Maximal ideals are automatically closed.** This is what makes the maximal ideal space a topological object: by [2.1] the word "closed" in claim 1 is redundant, but it is proved, not assumed.
 - **No unit is assumed on the quotient.** The quotient unit is $1+M$, whose norm is one by [[lem-closed-ideal-quotient-is-a-banach-algebra]]; the nonzero hypothesis on $A$ is used only to know that the zero ideal is proper.

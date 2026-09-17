@@ -53,11 +53,16 @@ consists of the following interface statements.
    (Good, Lemma 11, after Devlin).
 5. **Nonreflecting stationary set.** From $\square_\kappa$ and
    $\diamondsuit_{\kappa^+}(W)$ there is a stationary $E \subseteq W$ with
-   $\square_\kappa(E)$: the square sequence has $C_\beta \cap E = \varnothing$
-   for every limit point $\beta$ of $C_\alpha$, and
-   $\{\alpha \in E : X \cap \alpha = S_\alpha\}$ stationary for every
-   $X \subseteq \kappa^+$ (Good, Lemma 12, exactly item IV.2.10 of Devlin's
-   *Constructibility*).
+   $\square_\kappa(E)$, the assertion of Good's Definition 3: there is a
+   sequence $\langle C_\alpha : \alpha < \kappa^+,\ \lim(\alpha)\rangle$ with
+   each $C_\alpha$ club in $\alpha$, $\operatorname{otp}(C_\alpha) < \kappa$
+   whenever $\operatorname{cf}(\alpha) < \kappa$, and such that for every limit
+   point $\beta$ of $C_\alpha$ one has $\beta \notin E$ and
+   $C_\beta = \beta \cap C_\alpha$; the clause $\beta \notin E$ is the one from
+   which Good derives that a stationary $E$ with $\square_\kappa(E)$ is
+   nonreflecting. In addition $\{\alpha \in E : X \cap \alpha = S_\alpha\}$ is
+   stationary for every $X \subseteq \kappa^+$ (Good, Lemma 12, exactly item
+   IV.2.10 of Devlin's *Constructibility*).
 
 Statement 1 is the covering theorem of Dodd-Jensen; statements 2, 4 and 5 are
 fine-structural consequences recorded with the exact citations above. The

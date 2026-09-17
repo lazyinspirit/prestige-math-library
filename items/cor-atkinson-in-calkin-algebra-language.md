@@ -28,7 +28,8 @@ the following are equivalent:
    $\mathcal C(X) = \mathcal B(X)/\mathcal K(X)$
    ([[def-calkin-algebra]]);
 3. there is a bounded $S \in \mathcal B(X)$ with $ST - I_X$ and $TS - I_X$ both
-   compact — a bounded two-sided parametrix modulo compact operators.
+   compact ([[def-compact-linear-operator]]) — a bounded two-sided parametrix
+   modulo compact operators.
 
 ## Facts & Assumptions
 
@@ -38,7 +39,7 @@ the following are equivalent:
 
 [L2] In the quotient algebra $\mathcal C(X)$ one has $T + \mathcal K$ invertible if and only if there is $S + \mathcal K$ with $(T+\mathcal K)(S+\mathcal K) = 1$ and $(S+\mathcal K)(T+\mathcal K) = 1$; these equations are exactly $TS - I_X \in \mathcal K(X)$ and $ST - I_X \in \mathcal K(X)$ ([[def-calkin-algebra]]).
 
-[L3] The Calkin algebra is built under Countable Choice, which is available here because the standing hypothesis is the stronger Axiom of Choice ([[def-countable-choice]], [[def-compact-linear-operator]]).
+[L3] The Calkin algebra is built under Countable Choice, which is available here because the standing hypothesis is the stronger Axiom of Choice ([[def-axiom-of-choice]]), whose standard consequences include Countable Choice ([[def-countable-choice]]).
 
 ## Proof
 

@@ -4,7 +4,7 @@ kind: corollary
 title: "Heat-semigroup martingales"
 status: draft
 origin: pipeline
-deps: [def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, thm-brownian-markov-property, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-differentiation-under-the-integral-sign, thm-dominated-convergence, thm-tower-property-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, def-continuous-time-adapted-process-and-martingale, def-natural-and-usual-augmented-brownian-filtrations, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-brownian-transition-semigroup, lem-brownian-transition-semigroup-property, thm-brownian-markov-property, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-differentiation-under-the-integral-sign, thm-dominated-convergence, thm-tower-property-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, def-continuous-time-adapted-process-and-martingale, def-natural-and-usual-augmented-brownian-filtrations, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -40,7 +40,7 @@ $$\partial_tu+\tfrac12\partial^2_{x}u=0\qquad(0<t<T,\ x\in\mathbb R).$$
  
 [F5] **Gaussian derivative bounds.** For $s>0$ and $z=y-x$ one has $p_s(x,y)=(2\pi s)^{-1/2}e^{-z^2/(2s)}$, $\partial_xp_s=(z/s)p_s$, $\partial^2_{xx}p_s=((z^2/s^2)-(1/s))p_s$, and $|\partial_xp_s|\le Cs^{-1/2}q_s$, $|\partial^2_{xx}p_s|\le C's^{-1}q_s$ where $q_s(x,y)$ is a Gaussian in $y$ of variance $2s$ with $\int q_s(x,y)dy=1$; hence for fixed $s>0$ these derivative families have $y$-integrals bounded uniformly in $x$. [[def-brownian-transition-semigroup]] [[lem-normal-density-has-total-mass-one]] [[def-standard-normal-and-normal-laws]]
  
-[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation and completeness interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation and completeness interfaces. [[def-axiom-of-choice]]
  
  
  

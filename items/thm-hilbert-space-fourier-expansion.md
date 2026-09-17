@@ -33,15 +33,16 @@ $P_Fx=\sum_{i\in F}\langle x,e_i\rangle e_i$ over finite $F\subseteq I$. Then:
 2. **the coefficients are unique**: if $(a_i)_{i\in I}$ is a family in
    $\mathbb F$ whose finite-subset net $\sum_{i\in F}a_ie_i$ converges to $x$,
    then $a_i=\langle x,e_i\rangle$ for every $i\in I$;
-3. the support $\{i : \langle x,e_i\rangle\ne0\}$ is at most countable, and if
-   $J\subseteq I$ contains it and $\sigma:\mathbb N\to J$ is a surjection, then
-   the sequence of partial sums $\sum_{k<n}\langle x,e_{\sigma(k)}\rangle e_{\sigma(k)}$
-   also converges to $x$.
+3. the support $\{i : \langle x,e_i\rangle\ne0\}$ is at most countable, and the
+   expansion does not depend on an ordering: if $(i_k)_{k\in\mathbb N}$ is a
+   sequence of pairwise distinct elements of $I$ whose image contains the
+   support, then the sequence of partial sums
+   $\sum_{k<n}\langle x,e_{i_k}\rangle e_{i_k}$ also converges to $x$.
 
 Claim 3 is the sense in which the expansion is **unconditional**: the sum is
 independent of any ordering, because the finite-subset net converges and any
-enumerating sequence of a set containing the support is cofinal in the squared
-mass.
+enumeration of a set containing the support by pairwise distinct indices is
+cofinal in the squared mass.
 
 ## Facts & Assumptions
 
@@ -51,13 +52,9 @@ mass.
 
 [A3] The support of the coefficient family is at most countable ([[lem-only-countably-many-fourier-coefficients-are-nonzero]], [[def-countable-choice]]).
 
-[A4] A nonempty at most countable set is a surjective image of $\mathbb N$ ([[lem-countable-iff-surjection-from-n]]).
-
 [A5] For every finite $F\subseteq I$, $\|x-P_Fx\|^2=\sum_{i\in I\setminus F}|\langle x,e_i\rangle|^2$, and if $F\subseteq G$ then $\|P_Gx-P_Fx\|^2=\sum_{i\in G\setminus F}|\langle x,e_i\rangle|^2$ ([[lem-finite-bessel-inequality]], [[lem-pythagorean-theorem-and-finite-orthogonal-sums]]).
 
 [A6] If $\sum_{i\in I}|a_i|^2<+\infty$ then for every real $\varepsilon>0$ there is a finite $F\subseteq I$ with $\sum_{i\in I\setminus F}|a_i|^2<\varepsilon$ ([[def-square-summable-family-on-an-arbitrary-index-set]]).
-
-[A7] The norm is continuous along convergent nets ([[lem-reverse-triangle-inequality-in-a-normed-space]]).
 
 ## Proof
 
@@ -71,6 +68,6 @@ mass.
 
 1.3 The support of $(a_i)$ is at most countable by the support lemma. [A3]
 
-2.1 For claim 3, let $J\subseteq I$ contain the support of $(a_i)$ and let $\sigma:\mathbb N\to J$ be a surjection, which exists because the support is nonempty and at most countable or else the claim is vacuous. Given a real $\varepsilon>0$, choose a finite $F_0\subseteq I$ with tail $\sum_{i\in I\setminus F_0}|a_i|^2<\varepsilon^2$, possible because the coefficient family is square-summable; then choose $n_0$ with $F_0\subseteq\sigma[\{k : k<n_0\}]$, possible because $\sigma$ is onto $J$ and $F_0\cap J\subseteq J$ while $F_0\setminus J$ carries no coefficients. For $n\ge n_0$ put $s_n:=\sum_{k<n}a_{\sigma(k)}e_{\sigma(k)}$; then $x-s_n=(x-P_{F_0}x)-(s_n-P_{F_0}x)$ and both terms have squared norm at most $\sum_{i\in I\setminus F_0}|a_i|^2<\varepsilon^2$, the second because its coefficients are a subfamily of the tail and Pythagoras applies, so $\|x-s_n\|<2\varepsilon$. Hence $s_n\to x$. [step 1.1, step 1.3, A4, A5, A6, A7]
+2.1 For claim 3, let $(i_k)_{k\in\mathbb N}$ be a sequence of pairwise distinct elements of $I$ whose image contains the support $S$ of $(a_i)$, let $E_n:=\{i_k:k<n\}$ and put $s_n:=\sum_{k<n}a_{i_k}e_{i_k}=P_{E_n}x$, so each $E_n$ is a finite set of $n$ distinct indices. Given a real $\varepsilon>0$, [A5] with $F=\varnothing$ gives $\sum_{i\in I}|a_i|^2=\|x\|^2<+\infty$, so [A6] supplies a finite $F_0\subseteq I$ with $\sum_{i\in I\setminus F_0}|a_i|^2<\varepsilon^2$; since every element of the finite set $F_0\cap S$ occurs among the $i_k$, choose $n_0$ with $F_0\cap S\subseteq E_{n_0}$. For $n\ge n_0$ we have $F_0\cap S\subseteq E_n$, and since $a_i=0$ off $S$, an index outside $E_n$ is either not in $S$ or a support index outside $E_n$, hence in either case outside $F_0$; therefore $\sum_{i\in I\setminus E_n}|a_i|^2\le\sum_{i\in I\setminus F_0}|a_i|^2<\varepsilon^2$, and [A5] gives $\|x-s_n\|^2=\|x-P_{E_n}x\|^2=\sum_{i\in I\setminus E_n}|a_i|^2<\varepsilon^2$. Hence $\|x-s_n\|<\varepsilon$ for every $n\ge n_0$, that is, $s_n\to x$. [step 1.3, A5, A6]
 
 3.1 Claims 1, 2 and 3 are established by steps 1.1, 1.2 and 2.1, so a complete orthonormal family expands every vector uniquely and unconditionally in norm. [step 1.1, step 1.2, step 2.1] ∎

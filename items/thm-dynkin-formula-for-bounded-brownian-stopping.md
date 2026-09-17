@@ -4,7 +4,7 @@ kind: theorem
 title: "Dynkin formula for bounded Brownian stopping"
 status: draft
 origin: pipeline
-deps: [def-brownian-generator, thm-multidimensional-ito-formula-for-brownian-driven-processes, def-continuous-brownian-ito-process, def-d-dimensional-brownian-motion, def-brownian-motion, def-brownian-motion-started-at-x, def-c-c-and-c-c-infinity-on-rn, def-locally-square-integrable-predictable-brownian-integrand, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-partition-and-refinement, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, lem-adapted-continuous-processes-are-progressively-measurable, thm-optional-sampling-for-bounded-stopping-times]
+deps: [def-brownian-generator, thm-multidimensional-ito-formula-for-brownian-driven-processes, def-continuous-brownian-ito-process, def-d-dimensional-brownian-motion, def-brownian-motion, def-brownian-motion-started-at-x, def-c-c-and-c-c-infinity-on-rn, def-locally-square-integrable-predictable-brownian-integrand, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-partition-and-refinement, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, lem-adapted-continuous-processes-are-progressively-measurable, thm-optional-sampling-for-bounded-stopping-times]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -46,7 +46,7 @@ interval $[0,\tau]$.
  
 [F6] **Convergence.** Dominated convergence applies to sequences bounded by an integrable random variable, and $m(t):=Lf(B_t)$ is continuous and bounded by $\|Lf\|_\infty$ on $[0,K]$; hence $\int_0^{\tau_n}m\,ds\to\int_0^\tau m\,ds$ almost surely and in $L^1$ when $\tau_n\downarrow\tau$. [[thm-dominated-convergence]] [[def-convergence-in-probability]] [[def-continuity-real]]
  
-[F7] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F7] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  
@@ -68,6 +68,6 @@ interval $[0,\tau]$.
  
 5.1 Boundary and consistency cases: for $\tau=0$ both sides are $f(x)$; for deterministic $\tau\equiv t$ the formula becomes the integrated Ito identity; for $f$ affine ($c+\lambda\cdot y$) one has $Lf=0$ and both sides equal the martingale property of $\lambda\cdot B$; for $f\ge0$ compactly supported the formula is meaningful with both sides finite; if $Lf=0$ (harmonic compactly supported $f$, hence $f=0$ by the maximum principle) the formula reduces to the mean-value identity $E_xf(B_\tau)=f(x)$; the boundedness of $\tau$ is used exactly in step 3.1 for the grid optional-sampling identity, and no unbounded stopping time is claimed; the compact support of $f$ is used for the bounded gradie nt and Hessian, and a general $C^2$ function is not covered; AC enters only through [F7], which is the only choice-theoretic input. [F3, F6, F7, step 3.1, step 4.1] ∎
 
-
+## Remarks
 
 Lawler, Sections 2.10 and 3.5, computes the generator and states the stopping identity that Dynkin's formula expresses. The proof above stops the compactly supported Ito martingale at the bounded stopping time through the dyadic ceiling approximation and discrete optional sampling, so no general optional-stopping theorem for local martingales and no PDE regularity is imported.

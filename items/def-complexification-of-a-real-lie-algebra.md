@@ -38,8 +38,8 @@ whose argument verifies bilinearity and the Jacobi identity on generators; the
 definition is not being used circularly, since that proof only uses the explicit
 formula recorded here.
 
-The map $\iota\colon\mathfrak g_0\to\mathfrak g_{\mathbb C}$,
-$\iota(X)=X\otimes 1$, is the **canonical real embedding**, and we write
+The map $\varepsilon\colon\mathfrak g_0\to\mathfrak g_{\mathbb C}$,
+$\varepsilon(X)=X\otimes 1$, is the **canonical real embedding**, and we write
 $\mathfrak g_0^{\mathbb C}:=\mathfrak g_{\mathbb C}$. Every element of
 $\mathfrak g_{\mathbb C}$ has a unique expression $X\otimes1+i\,Y\otimes1$ with
 $X,Y\in\mathfrak g_0$; the **real part** of such an element is $X$ and its

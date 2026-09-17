@@ -5,7 +5,7 @@ title: A regular level set in a Banach space
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-regular-value-theorem-for-banach-manifolds, def-complemented-subspace, def-axiom-of-choice, def-banach-space, def-frechet-derivative-between-banach-spaces, def-bounded-linear-operator, def-linear-subspace]
+deps: [def-second-countable-space, thm-countable-products-of-second-countable-spaces, def-countable-base-banach-manifold-and-smooth-map, thm-regular-value-theorem-for-banach-manifolds, def-complemented-subspace, def-axiom-of-choice, def-banach-space, def-frechet-derivative-between-banach-spaces, def-bounded-linear-operator, def-linear-subspace]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -22,7 +22,12 @@ sources:
 Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $K$ and $Y$ be real
 Banach spaces ([[def-banach-space]]) and let $X = K \oplus Y$ be their
 topological direct sum, with bounded coordinate projections
-([[def-complemented-subspace]]). Then the projection
+([[def-complemented-subspace]]), where the direct sum is *second countable*
+([[def-second-countable-space]]) — for instance this holds whenever $K$ and $Y$
+are second countable, since the direct sum is a finite product
+([[thm-countable-products-of-second-countable-spaces]]). Then $X$ and $Y$ are
+$C^\infty$ Banach manifolds in the sense of
+[[def-countable-base-banach-manifold-and-smooth-map]], and the projection
 $p : X \to Y$, $p(k+y) := y$, has every $y \in Y$ as a regular value in the
 sense of the regular value theorem
 ([[thm-regular-value-theorem-for-banach-manifolds]]): $p$ is smooth — a bounded linear map
@@ -36,7 +41,7 @@ of $X$, and its tangent space at every point is $K$.
 
 ## Facts & Assumptions
 
-**Given:** Real Banach spaces $K,Y$, their topological direct sum $X = K\oplus Y$ with bounded projections, and a point $y \in Y$.
+**Given:** Real Banach spaces $K,Y$ with second countable topological direct sum $X = K\oplus Y$ with bounded projections, and a point $y \in Y$.
 
 [L1] In a topological direct sum $X = K\oplus Y$ every $x$ has a unique decomposition $x = k+y$ with $k\in K$, $y\in Y$, and the coordinate maps $p(x)=y$, $q(x)=k$ are bounded linear operators; $p$ is the projection onto $Y$ along $K$ ([[def-complemented-subspace]]).
 

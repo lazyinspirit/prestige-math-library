@@ -38,7 +38,7 @@ Assume AC. Every nonzero bounded operator has nonzero spectrum; equivalently, va
 
 **Given:** The two-dimensional complex inner-product space with orthonormal basis $(e_1,e_2)$ and the Jordan block $J=\begin{pmatrix}0&1\\0&0\end{pmatrix}$, so $Je_1=0$, $Je_2=e_1$.
 
-1.1 $J^2=0$ and $J\ne0$, and $zI-J$ is invertible for every $z\ne0$ with inverse $z^{-1}(I+z^{-1}J)$, because $(zI-J)z^{-1}(I+z^{-1}J)=z^{-1}(zI+z^{-1}J^2-J-z^{-1}J\cdot J)=I$ using $J^2=0$. [A2, algebra]
+1.1 $J^2=0$ and $J\ne0$, and $zI-J$ is invertible for every $z\ne0$ with inverse $z^{-1}(I+z^{-1}J)$, because $(zI-J)z^{-1}(I+z^{-1}J)=z^{-1}(zI+J-J-z^{-1}J^2)=z^{-1}(zI-z^{-1}J^2)=I$ using $J^2=0$. [A2, algebra]
 
 1.2 $J$ is not normal: $J^*=\begin{pmatrix}0&0\\1&0\end{pmatrix}$, so $JJ^*=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ while $J^*J=\begin{pmatrix}0&0\\0&1\end{pmatrix}$, and these are different operators. [A2, A3]
 

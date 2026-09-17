@@ -64,4 +64,4 @@ $$V_\lambda=\mathbb Cv .$$
 
 4.2 For the top weight, a monomial $f_{j_1}^{a_1}\cdots f_{j_k}^{a_k}$ has weight $\lambda$ exactly when $\sum_ra_r\alpha^{(j_r)}=0$; since the $\alpha^{(j_r)}$ are nonzero elements of $Q_+$ and the simple roots are linearly independent by [L5], this forces $a_r=0$ for every $r$, so the only monomial of weight $\lambda$ is the empty one and $V_\lambda=\mathbb Cv$. [L5, step 3.1]
 
-5.1 Steps 2.1, 4.1 and 5.1 prove the three assertions. [step 2.1, step 4.1, step 4.2] ∎
+5.1 Steps 2.1, 4.1 and 4.2 prove the three assertions. [step 2.1, step 4.1, step 4.2] ∎

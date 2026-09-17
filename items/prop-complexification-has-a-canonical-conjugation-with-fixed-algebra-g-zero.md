@@ -5,7 +5,7 @@ title: Complexification has a canonical conjugation with fixed algebra g zero
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complexification-of-a-real-lie-algebra]
+deps: [def-complexification-of-a-real-lie-algebra, def-lie-algebra-over-a-field, def-tensor-product-of-modules-by-generators-and-relations]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -25,17 +25,17 @@ proof_strategy: direct
 
 Let $\mathfrak g_0$ be a finite-dimensional real Lie algebra with
 complexification $\mathfrak g_{\mathbb C}=\mathfrak g_0\otimes_{\mathbb R}\mathbb C$,
-real embedding $\iota$ and bracket $[X\otimes z,Y\otimes w]=[X,Y]\otimes zw$
+real embedding $\varepsilon$ and bracket $[X\otimes z,Y\otimes w]=[X,Y]\otimes zw$
 ([[def-complexification-of-a-real-lie-algebra]]). Then the following hold.
 
 1. The bracket is well-defined and makes $\mathfrak g_{\mathbb C}$ a complex Lie
-   algebra, and $\iota$ is an injective real Lie-algebra homomorphism.
+   algebra, and $\varepsilon$ is an injective real Lie-algebra homomorphism.
 2. The assignment $\sigma(X\otimes z)=X\otimes\overline z$, extended by
    $\sigma(Z_1+Z_2)=\sigma(Z_1)+\sigma(Z_2)$, is a well-defined
    conjugate-linear involution of $\mathfrak g_{\mathbb C}$, and
    $\sigma([Z,W])=[\sigma Z,\sigma W]$ for all $Z,W$.
 3. The fixed locus $\mathfrak g_{\mathbb C}^{\sigma}=\{Z:\sigma Z=Z\}$ equals
-   $\iota(\mathfrak g_0)$, so that $\iota(\mathfrak g_0)$ is a real Lie
+   $\varepsilon(\mathfrak g_0)$, so that $\varepsilon(\mathfrak g_0)$ is a real Lie
    subalgebra of $\mathfrak g_{\mathbb C}$ naturally identified with
    $\mathfrak g_0$.
 
@@ -61,8 +61,7 @@ real embedding $\iota$ and bracket $[X\otimes z,Y\otimes w]=[X,Y]\otimes zw$
 
 2.2 $\sigma$ is conjugate-linear: it is additive by construction, and $\sigma(t(X\otimes z))=X\otimes\overline{tz}=\overline t\,(X\otimes\overline z)=\overline t\,\sigma(X\otimes z)$ for complex $t$; both sides are additive in the argument, so the identity extends to all of $\mathfrak g_{\mathbb C}$. It is involutive because $\sigma^2(X\otimes z)=X\otimes z$ on pure tensors and $\sigma^2$ is additive. Finally $\sigma$ preserves brackets: on pure tensors $\sigma([X\otimes z,Y\otimes w])=[X,Y]\otimes\overline{zw}=[X\otimes\overline z,Y\otimes\overline w]=[\sigma(X\otimes z),\sigma(Y\otimes w)]$, and since both sides are additive and the bracket and $\sigma$ are additive, the identity extends to all pairs. [step 1.1, step 1.2, algebra]
 
-3.1 A pure tensor $X\otimes z$ is fixed by $\sigma$ exactly when $X\otimes(z-\overline z)=0$, that is $X\otimes 2i\,\mathrm{Im}\,z=0$; the tensor relations make this equivalent to $\mathrm{Im}\,z=0$ or $X=0$ (the case $2i\in\mathbb C$ is a nonzero complex number, and $X\otimes 2iz'=2iz'(X\otimes 1)$), so the fixed pure tensors are exactly the elements $X\otimes r$ with $X\in\mathfrak g_0$, $r\in\mathbb R$, which are the elements of $\iota(\mathfrak g_0)$. Since $\sigma$ is conjugate-linear and additive, every $Z\in\mathfrak g_{\mathbb C}$ decomposes as $Z=\tfrac12(Z+\sigma Z)+\tfrac12(Z-\sigma Z)$ with the first summand fixed and the second anti-fixed, so the fixed locus is exactly $\iota(\mathfrak g_0)$. [L1, step 2.2, algebra]
+3.1 A pure tensor $X\otimes z$ is fixed by $\sigma$ exactly when $X\otimes(z-\overline z)=0$, that is $X\otimes 2i\,\mathrm{Im}\,z=0$. For $X\ne0$ and any complex $c\ne0$ one has $X\otimes c\ne0$: extending $X$ to an $\mathbb R$-basis of $\mathfrak g_0$ and taking the dual basis functional $\lambda$ with $\lambda(X)=1$, the $\mathbb R$-bilinear map $\mathfrak g_0\times\mathbb C\to\mathbb C$, $(Y,z')\mapsto\lambda(Y)z'$, induces by [L2] an $\mathbb R$-linear $\varphi\colon\mathfrak g_{\mathbb C}\to\mathbb C$ with $\varphi(Y\otimes z')=\lambda(Y)z'$, whence $\varphi(X\otimes c)=c\ne0$; taking $c=2i\,\mathrm{Im}\,z$ shows that $X\otimes(z-\overline z)=0$ holds precisely when $\mathrm{Im}\,z=0$ or $X=0$. Hence the fixed pure tensors are exactly the elements $X\otimes r$ with $X\in\mathfrak g_0$, $r\in\mathbb R$, which are the elements of $\varepsilon(\mathfrak g_0)$. Since $\sigma$ is conjugate-linear and additive, every $Z\in\mathfrak g_{\mathbb C}$ decomposes as $Z=\tfrac12(Z+\sigma Z)+\tfrac12(Z-\sigma Z)$ with the first summand fixed and the second anti-fixed, so the fixed locus is exactly $\varepsilon(\mathfrak g_0)$. [L1, L2, step 2.2, algebra]
 
-4.1 $\iota$ is injective because $X\otimes1=0$ forces $X=0$ (apply the $\mathbb R$-linear functional $\mathfrak g_{\mathbb C}\to\mathbb R$, $Y\otimes z\mapsto z$ when $Y=X$ and $0$ otherwise, which is well-defined on generators and vanishes on the relations), and $\iota([X,Y])=[X,Y]\otimes1=[X\otimes1,Y\otimes1]=[\iota X,\iota Y]$ by the bracket formula, so $\iota$ is an injective real Lie-algebra homomorphism. Together with step 3.1 this identifies $\mathfrak g_{\mathbb C}^\sigma$ with $\mathfrak g_0$ as a real Lie subalgebra. [L1, L3, step 1.1, step 3.1, algebra] ∎
+4.1 $\varepsilon$ is injective: if $X\ne0$, extend $X$ to an $\mathbb R$-basis of $\mathfrak g_0$ and let $\lambda$ be the dual basis functional with $\lambda(X)=1$; the $\mathbb R$-bilinear map $(Y,z)\mapsto\lambda(Y)z$ induces by [L2] an $\mathbb R$-linear $\varphi\colon\mathfrak g_{\mathbb C}\to\mathbb C$ with $\varphi(Y\otimes z)=\lambda(Y)z$, so $\varphi(X\otimes1)=1$ and $X\otimes1\ne0$. Moreover $\varepsilon([X,Y])=[X,Y]\otimes1=[X\otimes1,Y\otimes1]=[\varepsilon X,\varepsilon Y]$ by the bracket formula, so $\varepsilon$ is an injective real Lie-algebra homomorphism. Together with step 3.1 this identifies $\mathfrak g_{\mathbb C}^\sigma$ with $\mathfrak g_0$ as a real Lie subalgebra. [L1, L2, L3, step 1.1, step 3.1, algebra] ∎
 
-1 checked, 1 failing

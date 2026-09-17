@@ -51,7 +51,10 @@ items:
   - fs-right-invariant-fields-identify-t-e-g-with-the-same-bracket-as-left-invariant-fields
   - fs-every-continuous-group-homomorphism-is-smooth-by-definition
   - fs-differential-at-the-identity-determines-a-homomorphism-from-a-disconnected-lie-group
-examples: []
+examples: [ex-general-and-special-linear-lie-groups,
+           ex-orthogonal-and-special-orthogonal-lie-groups,
+           ex-unitary-and-special-unitary-lie-groups,
+           ex-matrix-exponential-as-the-lie-group-exponential]
 ---
 
 A Lie group's tangent space at the identity acquires its bracket from

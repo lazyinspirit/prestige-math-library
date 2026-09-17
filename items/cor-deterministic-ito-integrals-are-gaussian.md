@@ -4,7 +4,7 @@ kind: corollary
 title: "Deterministic Ito integrals are Gaussian"
 status: draft
 origin: pipeline
-deps: [thm-ito-isometry-and-linearity-in-predictable-l2, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, def-brownian-motion, def-multivariate-normal-law, lem-characteristic-function-of-a-normal-law, lem-characteristic-functions-under-affine-maps-and-independent-sums, thm-uniqueness-of-a-law-from-its-characteristic-function, thm-convergence-in-probability-implies-convergence-in-distribution, def-weak-convergence-of-borel-probability-measures, def-convergence-in-probability, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, cor-cauchy-schwarz-for-random-variables, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-ito-isometry-and-linearity-in-predictable-l2, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-standard-normal-and-normal-laws, def-brownian-motion, def-multivariate-normal-law, lem-characteristic-function-of-a-normal-law, lem-characteristic-functions-under-affine-maps-and-independent-sums, thm-uniqueness-of-a-law-from-its-characteristic-function, thm-convergence-in-probability-implies-convergence-in-distribution, def-weak-convergence-of-borel-probability-measures, def-convergence-in-probability, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, cor-cauchy-schwarz-for-random-variables, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -50,7 +50,7 @@ integrands with disjoint supports are independent.
 
 [F6] A Borel probability law on $\mathbb R^d$ is $N_d(0,\Sigma)$ exactly when every projection $u\cdot X$ has law $N(0,u^T\Sigma u)$; such a vector has mean $0$ and covariance $\Sigma$. [[def-multivariate-normal-law]]
 
-[F7] AC is declared for the ambient interfaces; the step approximations are given by the deterministic $L^2$ density of step functions. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F7] AC is declared for the ambient interfaces; the step approximations are given by the deterministic $L^2$ density of step functions. [[def-axiom-of-choice]]
 
 ## Proof
 

@@ -4,7 +4,7 @@ kind: theorem
 title: "DC is equivalent to Baireness of compact-Hausdorff products"
 status: draft
 origin: pipeline
-deps: [def-dependent-choice, def-product-topology, def-compact-space, def-baire-space, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, def-countable-choice, thm-choice-implies-dependent-implies-countable-choice, def-standard-topologies, def-one-point-compactification, thm-one-point-compactification-properties, def-locally-compact-space, lem-products-preserve-t0-t1-and-hausdorff, def-hausdorff-space, lem-discrete-sequence-spaces-are-complete-in-zf, lem-serial-relation-successor-sets-are-open-dense, thm-well-ordering-principle, thm-recursion, lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf, def-countable, thm-countable-union-of-countable, lem-finite-choice, thm-subset-of-a-finite-set, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-natural-numbers, thm-compact-iff-fip, def-finite-intersection-property]
+deps: [thm-a-compact-hausdorff-space-is-regular-and-normal, def-dependent-choice, def-product-topology, def-compact-space, def-baire-space, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf, def-countable-choice, thm-choice-implies-dependent-implies-countable-choice, def-standard-topologies, def-one-point-compactification, thm-one-point-compactification-properties, def-locally-compact-space, lem-products-preserve-t0-t1-and-hausdorff, def-hausdorff-space, lem-discrete-sequence-spaces-are-complete-in-zf, lem-serial-relation-successor-sets-are-open-dense, thm-well-ordering-principle, thm-recursion, lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf, def-countable, thm-countable-union-of-countable, lem-finite-choice, thm-subset-of-a-finite-set, def-dense-top, def-interior-closure-boundary-top, def-topological-space, def-natural-numbers, thm-compact-iff-fip, def-finite-intersection-property]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -53,6 +53,8 @@ claimed: that statement is strictly stronger than DC.
 
 [L1] A space is Baire when the intersection of every sequence of dense open sets meets every nonempty open set; a dense subset of a space meets every nonempty open set; and a compact space is one in which every family of closed sets with the finite intersection property has nonempty intersection ([[def-baire-space]], [[def-dense-top]], [[def-interior-closure-boundary-top]], [[thm-compact-iff-fip]], [[def-finite-intersection-property]], [[def-topological-space]]).
 
+[L2] A compact Hausdorff space is regular and normal ([[thm-a-compact-hausdorff-space-is-regular-and-normal]]), so for every point $x$ of such a space and every open $U \ni x$ there is an open $V$ with $x \in V \subseteq \overline{V} \subseteq U$.
+
 ## Proof
 
 **Proof technique:** direct.
@@ -69,11 +71,11 @@ claimed: that statement is strictly stronger than DC.
 
 3.2 Under step 2.2 and $A$ infinite, let $\alpha A := A \cup \{\infty\}$ be the one-point compactification of the discrete space $A$; by [F3] it is compact Hausdorff, and $A$ is open and dense in $\alpha A$ because the infinite discrete space $A$ is not compact. [step 2.2, F3]
 
-4.1 Under step 3.1 define $\rho$ on $Y$ by $(n,F,(B_i)) \mathrel{\rho} (n',F',(B'_i))$ iff $n' = n+1$, $F \subseteq F'$, $B'_i = B_i$ for $i \in F$, and $\overline{B_i} \subseteq B'_i$ for $i \in F$; then $\rho$ is entire on $Y$, because given $(n,F,(B_i))$ one fixes a point $w$ of the nonempty open set $\bigcap_{i\in F}\pi_i^{-1}[B_i] \cap (B \cap U_{n+1})$, which is nonempty since $B \cap U_{n+1}$ is dense and the cylinder is nonempty open, and then takes a basic open cylinder around $w$ refining both $B \cap U_{n+1}$ and the old cylinder, with new coordinates for $F' \setminus F$ and, for $i \in F$, a nonempty open $B'_i$ with $w_i \in B'_i$ and $\overline{B_i} \subseteq B'_i$, which exists because $X_i$ is compact Hausdorff and hence regular. [step 3.1, L1, F4]
+4.1 Under step 3.1 define $\rho$ on $Y$ by $(n,F,(B_i)) \mathrel{\rho} (n',F',(B'_i))$ iff $n' = n+1$, $F \subseteq F'$, and $\overline{B'_i} \subseteq B_i$ for $i \in F$; the new open sets indexed by $F' \setminus F$ are unrestricted beyond the membership condition of $Y$. Then $\rho$ is entire on $Y$: given $(n,F,(B_i)) \in Y$ the cylinder $C := \bigcap_{i\in F}\pi_i^{-1}[B_i]$ is a nonempty open subset of $B \cap U_n$, so $C \cap U_{n+1}$ is nonempty open because $U_{n+1}$ is dense; fix a point $w$ of it. Some basic open cylinder around $w$ lies in the open set $C \cap U_{n+1}$; intersecting it with $C$ and adding the coordinates of $C$ that it omits, we obtain a basic open cylinder $\bigcap_{i\in F^{\dagger}}\pi_i^{-1}[B^{\dagger}_i]$ with $F \subseteq F^{\dagger}$, $B^{\dagger}_i \subseteq B_i$ for $i \in F$, and $w \in \bigcap_{i \in F^{\dagger}}\pi_i^{-1}[B^{\dagger}_i] \subseteq C \cap U_{n+1}$. For each $i \in F^{\dagger}$ the point $w_i$ lies in $B^{\dagger}_i$, so by the regularity clause of [L2] applied in the compact Hausdorff space $X_i$ there is a nonempty open $B'_i$ with $w_i \in B'_i \subseteq \overline{B'_i} \subseteq B^{\dagger}_i$; put $F' := F^{\dagger}$. Then $\bigcap_{i \in F'}\pi_i^{-1}[B'_i] \subseteq \bigcap_{i \in F'}\pi_i^{-1}[B^{\dagger}_i] \subseteq B \cap U_{n+1}$, so $(n+1,F',(B'_i)) \in Y$, and $\overline{B'_i} \subseteq B^{\dagger}_i \subseteq B_i$ for every $i \in F$, so $(n,F,(B_i)) \mathrel{\rho} (n+1,F',(B'_i))$. [step 3.1, L1, L2, F4]
 
 4.2 Under step 3.2 let $X := (\alpha A)^{\omega}$; it is a product of compact Hausdorff spaces, hence Baire by the hypothesis of step 1.2, and the sets $D_n := \{\, g \in X : g(n) \in A \,\}$ are open and dense, so $A^{\omega} = \bigcap_n D_n$ is a dense $G_{\delta}$ of $X$; a dense $G_{\delta}$ subspace of a Baire space is Baire, since the traces of countably many dense open sets of the bigger space witness the subspace condition. [step 3.2, L1, F4]
 
-5.1 Under step 1.1 and step 4.1, DC gives a sequence $y_n = (n, F_n, (B^n_i)_{i \in F_n})$ in $Y$ with $y_n \mathrel{\rho} y_{n+1}$ for all $n$; in particular $F_n \subseteq F_{n+1}$, $B^{n+1}_i = B^n_i$ for $i \in F_n$, and $\overline{B^n_i} \subseteq B^{n+1}_i$ for $i \in F_n$. [step 4.1, F1]
+5.1 Under step 1.1 and step 4.1, DC gives a sequence $y_n = (n, F_n, (B^n_i)_{i \in F_n})$ in $Y$ with $y_n \mathrel{\rho} y_{n+1}$ for all $n$; in particular $F_n \subseteq F_{n+1}$ and, for every $i \in F_n$, the closures nest inside the previous open sets: $\overline{B^{n+1}_i} \subseteq B^n_i$. [step 4.1, F1]
 
 5.2 Under step 4.2 the subspace $A^{\omega}$ is the discrete sequence space with its product topology, complete under the reciprocal first-difference metric by [F5]; so this complete metric space is Baire. [step 4.2, F5]
 
@@ -83,7 +85,7 @@ claimed: that statement is strictly stronger than DC.
 
 6.3 Under step 5.2 the sets $V_i := \{\, f \in A^{\omega} : \exists j\ f(i) \mathrel{R} f(j) \,\}$ are open and dense in $A^{\omega}$ by [F5], so their intersection is dense and hence nonempty; fix $f \in \bigcap_i V_i$. [step 5.2, F5, L1]
 
-7.1 Under step 6.1, step 6.2 and countable choice, choose $b_i \in \bigcap_{n \ge n_i} B^n_i$ for each $i \in F$ and define $y \in X$ by $y_i := b_i$ for $i \in F$ and $y_i := x_i$ for $i \notin F$. [step 6.1, step 6.2, F2, F7]
+7.1 Under step 6.1, step 6.2 and countable choice, choose $b_i \in \bigcap_{n \ge n_i} \overline{B^n_i}$ for each $i \in F$ — the set is nonempty by step 6.2, where compactness gives a point of the intersection of the nested closed sets, and step 6.2 also identifies the intersection as a subset of $\bigcap_{n \ge n_i} B^n_i$ — and define $y \in X$ by $y_i := b_i$ for $i \in F$ and $y_i := x_i$ for $i \notin F$. [step 6.1, step 6.2, F2, F7]
 
 7.2 Under step 6.3 define $q(i) := \min\{\, j \in \mathbb{N} : f(i) \mathrel{R} f(j) \,\}$, which exists by [F6] because $f \in V_i$, and $k(0) := 0$, $k(n+1) := q(k(n))$, a definition by recursion; then $a(n) := f(k(n))$ satisfies $a(n) = f(k(n)) \mathrel{R} f(q(k(n))) = f(k(n+1)) = a(n+1)$ for every $n$, so $a$ is an infinite $R$-chain. [step 6.3, F6]
 

@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ b08cb1a3f847 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ c4ab06bfaf23 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 8799 |
-| now mechanically prevented | 299 |
+| defects caught before publication | 9043 |
+| now mechanically prevented | 356 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -771,6 +771,30 @@
 | ill-formed |  |  |  | 1 |
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
+
+## phase-2-remaining-27 — 244 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross |
+|---|---|---|
+| false-claim | 72 |  |
+| citation-inaccurate | 28 |  |
+| unlicensed-inference | 28 |  |
+| citation-missing | 5 | 16 |
+| ill-formed | 20 |  |
+| citation-inflated |  | 15 |
+| false-computation | 13 |  |
+| arithmetic-error | 8 |  |
+| missing-hypothesis | 8 |  |
+| false-or-overstrong-statement | 7 |  |
+| invalid-inference | 7 |  |
+| unsupported-inference | 4 |  |
+| contract-mismatch | 3 |  |
+| undefined-notation | 3 |  |
+| invalid-witness | 2 |  |
+| other | 2 |  |
+| missing-choice-scope | 1 |  |
+| ill-typed-claim | 1 |  |
+| reader-repair | 1 |  |
 
 ## phase-2-wave-1 — 74 row(s)
 

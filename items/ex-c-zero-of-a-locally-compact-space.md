@@ -46,11 +46,11 @@ exactly $C_0(\mathbb N)$ ([[def-c-zero-and-ell-infinity]]). Then:
 
 **Proof technique:** direct.
 
-1.1 Each $\mathrm{ev}_n$ is a character of $c_0(\mathbb N)$: it is nonzero, complex-linear and multiplicative, and $\mathrm{ev}_n(\mathbf 1) = 1$ where $\mathbf 1$ is the constant sequence. [algebra]
+1.1 Each $\mathrm{ev}_n$ is a character of $c_0(\mathbb N)$: it is complex-linear and multiplicative because evaluation at a point is, and it is nonzero because $\mathrm{ev}_n(\delta_n) = 1$ for the coordinate vector $\delta_n \in c_0(\mathbb N)$. [algebra]
 
 1.2 If $\chi$ is a character then $\chi(\delta_n) \in \{0,1\}$ for every $n$, because $\delta_n^2 = \delta_n$ gives $\chi(\delta_n)^2 = \chi(\delta_n)$ and $\mathbb C$ is a field; the values are not all zero, since otherwise $\chi$ would vanish on all finite truncations by linearity and hence, by continuity from [L2] and the density of truncations [L1], on all of $c_0$, contradicting that $\chi \ne 0$; and for $m \ne n$ one has $0 = \chi(\delta_m\delta_n) = \chi(\delta_m)\chi(\delta_n)$, so if $\chi(\delta_{n_0}) = 1$ then $\chi(\delta_m) = 0$ for all $m \ne n_0$. [L1, L2, algebra]
 
-1.3 For a character $\chi$ with $\chi(\delta_{n_0}) = 1$ and $a \in c_0(\mathbb N)$ one has $\chi(a) = \sum_n a_n\chi(\delta_n) = a_{n_0}$: approximate $a$ by its truncations [L1], use linearity on each truncation, and pass to the limit with continuity of $\chi$ from [L2] (the scalar series is absolutely convergent because $|a_n\chi(\delta_n)| \le |a_n|$ and $a \in \ell^1$). [1.2, L2, algebra]
+1.3 For a character $\chi$ with $\chi(\delta_{n_0}) = 1$ and $a \in c_0(\mathbb N)$ one has $\chi(a) = \sum_n a_n\chi(\delta_n) = a_{n_0}$: approximate $a$ by its truncations [L1], use linearity on each truncation, and pass to the limit with continuity of $\chi$ from [L2]; the series has at most one nonzero term, because $\chi(\delta_n) = 0$ for every $n \ne n_0$ by [1.2], so the limit is $a_{n_0}\chi(\delta_{n_0}) = a_{n_0}$ and no summability of $a$ is needed (a general element of $c_0$ need not be summable). [1.2, L2, algebra]
 
 1.4 $c_0(\mathbb N)$ has no unit: if $e$ were a unit then $e\delta_n = \delta_n$ for every $n$ gives $e(n) = 1$ for all $n$, so $e$ is the constant sequence $1 \notin c_0$, a contradiction; this proves claim 2. [algebra]
 

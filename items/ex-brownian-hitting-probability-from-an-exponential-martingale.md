@@ -4,7 +4,7 @@ kind: example
 title: "Hitting probabilities from an exponential martingale"
 status: draft
 origin: pipeline
-deps: [cor-exponential-brownian-martingale, def-brownian-motion-started-at-x, def-brownian-motion, thm-two-sided-exit-probability-for-brownian-motion, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [cor-exponential-brownian-martingale, def-brownian-motion-started-at-x, def-brownian-motion, thm-two-sided-exit-probability-for-brownian-motion, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: example
@@ -42,7 +42,7 @@ and for $\mu=0$ the probability is $(x+a)/(a+b)$.
  
 [F5] **Domination.** The bounded family $(M_{\tau_n})$ is uniformly integrable, so expectations pass to the almost-sure limit. [[thm-dominated-convergence]] [[def-convergence-in-probability]]
  
-[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

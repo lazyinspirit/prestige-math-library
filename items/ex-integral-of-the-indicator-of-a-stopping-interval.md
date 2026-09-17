@@ -4,7 +4,7 @@ kind: example
 title: "Indicator of a stopping interval"
 status: draft
 origin: pipeline
-deps: [thm-stopping-an-ito-integral, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-continuous-time-stopping-time, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-stopping-an-ito-integral, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-continuous-time-stopping-time, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: example
@@ -35,7 +35,7 @@ is $B_{t\wedge t_0}-B_0$, the Brownian path stopped at $t_0$.
 
 [F2] The process $H\equiv1$ is predictable and locally square-integrable, with energy $\int_0^t1^2ds=t<\infty$; for such an $H$ and any stopping time $\tau$ the stopping identity $(H\cdot B)_{t\wedge\tau}=\int_0^t1_{[0,\tau]}H\,dB$ holds up to indistinguishability, and both sides are continuous. [[def-locally-square-integrable-predictable-brownian-integrand]] [[thm-stopping-an-ito-integral]]
 
-[F3] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F3] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Verification
 

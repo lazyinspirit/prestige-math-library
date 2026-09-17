@@ -28,8 +28,10 @@ of the circle group satisfies $\exp(2\pi i)=1$. Differentiation identifies the
 character lattice $X^*(T)$ with the set
 $$\{\lambda\in\operatorname{Hom}_{\mathbb C}(\mathfrak t_{\mathbb C},\mathbb C):\ \lambda(\Lambda)\subseteq2\pi i\,\mathbb Z\},\qquad \Lambda=\ker\exp,$$
 through the formula $\chi(\exp X)=e^{\lambda(X)}$; the cocharacter lattice is
-identified with $\Lambda$ through $\eta(e^{i\theta})=\exp(\theta X_\eta)$ with
-$X_\eta\in\Lambda$, and under these identifications the pairing is
+identified with the lattice
+$\frac{1}{2\pi}\Lambda=\{X\in\mathfrak t:2\pi X\in\Lambda\}$ through
+$\eta(e^{i\theta})=\exp(\theta X_\eta)$, and under these identifications the
+pairing is
 $$\langle\chi,\eta\rangle=\frac{\lambda(X_\eta)}{i}\in\mathbb Z .$$
 In particular $X^*(T)$ and $X_*(T)$ are free abelian groups of rank
 $\dim T$, and the pairing $X^*(T)\times X_*(T)\to\mathbb Z$ is perfect.
@@ -50,12 +52,12 @@ $\dim T$, and the pairing $X^*(T)\times X_*(T)\to\mathbb Z$ is perfect.
 
 **Proof technique:** direct.
 
-1.1 Let $\chi\in X^*(T)$. Since $\mathfrak t$ is simply connected and $\exp:\mathfrak t\to T$ and $t\mapsto e^{it}$ (equivalently $\mathbb R\to S^1$) are covering homomorphisms, $\chi\circ\exp$ lifts to a continuous homomorphism $\lambda:\mathfrak t\to\mathbb R$ with $e^{\lambda(X)}=\chi(\exp X)$; by [L3] it is $\mathbb R$-linear, and we extend it $\mathbb C$-linearly to $\mathfrak t_{\mathbb C}$. Well-definedness of $\chi$ on $T=\mathfrak t/\Lambda$ forces $\lambda(\Lambda)\subseteq2\pi i\mathbb Z$; the map $\chi\mapsto\lambda$ is injective because $\exp$ is surjective. [L1, L2, L3]
+1.1 Let $\chi\in X^*(T)$. Since $\mathfrak t$ is simply connected and $\exp:\mathfrak t\to T$ and $t\mapsto e^{it}$ (equivalently $\mathbb R\to S^1$) are covering homomorphisms, $\chi\circ\exp$ lifts to a continuous homomorphism $\mu:\mathfrak t\to\mathbb R$ with $e^{i\mu(X)}=\chi(\exp X)$; by [L3] $\mu$ is $\mathbb R$-linear, and $\lambda:=i\mu:\mathfrak t\to i\mathbb R\subseteq\mathbb C$ extends $\mathbb C$-linearly to $\mathfrak t_{\mathbb C}$, so that $\chi(\exp X)=e^{\lambda(X)}$. Well-definedness of $\chi$ on $T=\mathfrak t/\Lambda$ forces $\lambda(\Lambda)\subseteq2\pi i\mathbb Z$; the map $\chi\mapsto\lambda$ is injective because $\exp$ is surjective. [L1, L2, L3]
 
-1.2 The cocharacter lattice is identified with $\Lambda$: a cocharacter $\eta:S^1\to T$ has $X_\eta:=d\eta_1(i)\in\mathfrak t$ (where $i$ generates $\operatorname{Lie}(S^1)$), and $\eta(e^{i\theta})=\exp(\theta X_\eta)$; well-definedness at $\theta=2\pi$ gives $\exp(2\pi X_\eta)=1$, i.e. $X_\eta\in\Lambda$, and every $X\in\Lambda$ gives the cocharacter $e^{i\theta}\mapsto\exp(\theta X)$. [L1, L2]
+1.2 The cocharacter lattice is identified with $\frac{1}{2\pi}\Lambda$: a cocharacter $\eta:S^1\to T$ has $X_\eta:=d\eta_1(i)\in\mathfrak t$ (where $i$ generates $\operatorname{Lie}(S^1)$), and $\eta(e^{i\theta})=\exp(\theta X_\eta)$; well-definedness at $\theta=2\pi$ gives $\exp(2\pi X_\eta)=1$, i.e. $2\pi X_\eta\in\Lambda$, and conversely every $X\in\mathfrak t$ with $2\pi X\in\Lambda$ gives the cocharacter $e^{i\theta}\mapsto\exp(\theta X)$. [L1, L2]
 
 2.1 Conversely let $\lambda:\mathfrak t\to\mathbb C$ be $\mathbb C$-linear with $\lambda(\Lambda)\subseteq2\pi i\mathbb Z$. Then $\chi(\exp X):=e^{\lambda(X)}$ is well defined: if $\exp X=\exp X'$ then $X-X'\in\Lambda$, so $e^{\lambda(X-X')}=1$. It is a continuous homomorphism $T\to S^1$, so it is a character, and its lift is $\lambda$; hence the constructions are mutually inverse bijections. [L1, L2, step 1.1]
 
-2.2 Pairing: with $\chi$ and $\lambda$ related as in step 1.1 and $\eta$ with $X_\eta\in\Lambda$ as in step 1.2, one has $\chi(\eta(e^{i\theta}))=e^{\lambda(\theta X_\eta)}=e^{i\theta\lambda(X_\eta)/i}$, so the integer $n$ with $\chi\circ\eta(z)=z^n$ is $n=\lambda(X_\eta)/i$; it is an integer because $X_\eta\in\Lambda$ and $\lambda(\Lambda)\subseteq2\pi i\mathbb Z$. [L1, L2, step 1.1, step 1.2]
+2.2 Pairing: with $\chi$ and $\lambda$ related as in step 1.1 and $\eta$ with $2\pi X_\eta\in\Lambda$ as in step 1.2, one has $\chi(\eta(e^{i\theta}))=e^{\lambda(\theta X_\eta)}=e^{i\theta\lambda(X_\eta)/i}$, so the integer $n$ with $\chi\circ\eta(z)=z^n$ is $n=\lambda(X_\eta)/i$; it is an integer because $2\pi X_\eta\in\Lambda$ and $\lambda(2\pi X_\eta)\in2\pi i\mathbb Z$, so that $\lambda(X_\eta)/i=\lambda(2\pi X_\eta)/(2\pi i)\in\mathbb Z$. [L1, L2, step 1.1, step 1.2]
 
-3.1 Perfectness and freeness: choosing a $\mathbb Z$-basis $X_1,\dots,X_r$ of $\Lambda$ identifies $\Lambda\cong\mathbb Z^r$ and $X_*(T)\cong\mathbb Z^r$, while the characters correspond to the dual basis: $\lambda$ is determined by the integers $\lambda(X_j)/(2\pi i)$, and conversely every integer vector gives such a $\lambda$ by linear extension, because the basis spans $\mathfrak t$ over $\mathbb R$. Hence $X^*(T)\cong\mathbb Z^r$ is free of rank $r=\dim T$, the pairing is the dot product in these coordinates, and it is perfect. [A1, L1, step 2.1, step 1.2, step 2.2]∎
+3.1 Perfectness and freeness: choosing a $\mathbb Z$-basis $Y_1,\dots,Y_r$ of $\Lambda$ identifies $\Lambda\cong\mathbb Z^r$, hence also $X_*(T)\cong\frac{1}{2\pi}\Lambda\cong\mathbb Z^r$, while the characters correspond to the dual basis: $\lambda$ is determined by the integers $\lambda(Y_j)/(2\pi i)$, and conversely every integer vector gives such a $\lambda$ by linear extension, because the basis spans $\mathfrak t$ over $\mathbb R$. Hence $X^*(T)\cong\mathbb Z^r$ is free of rank $r=\dim T$, the pairing is the dot product in these coordinates, and it is perfect. [A1, L1, step 2.1, step 1.2, step 2.2]∎

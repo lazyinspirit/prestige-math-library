@@ -6,7 +6,6 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-banach-space]
-forward_refs: [ex-bounded-operators-form-a-noncommutative-banach-algebra, ex-continuous-functions-form-a-commutative-banach-algebra]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -58,9 +57,9 @@ equality.
 - **Multiplication is bilinear and associative, and nothing more.** No
   commutativity, involution, or approximate unit is assumed. The algebra
   $\mathcal B(X)$ of bounded operators on a nonzero complex Banach space
-  ([[ex-bounded-operators-form-a-noncommutative-banach-algebra]]) is the
+  (`ex-bounded-operators-form-a-noncommutative-banach-algebra`) is the
   motivating noncommutative example, and $C(K,\mathbb C)$ for compact Hausdorff
-  $K$ ([[ex-continuous-functions-form-a-commutative-banach-algebra]]) the
+  $K$ (`ex-continuous-functions-form-a-commutative-banach-algebra`) the
   motivating commutative one.
 
 - **Completeness is with respect to the submultiplicative norm.** A complete
@@ -74,3 +73,5 @@ equality.
   that preserves multiplication and the unit is exactly a multiplicative
   linear map sending $1$ to $1$; this is the convention used for characters on
   the following page of this track.
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

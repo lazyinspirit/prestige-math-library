@@ -4,7 +4,7 @@ kind: example
 title: "Logarithm of geometric Brownian motion"
 status: draft
 origin: pipeline
-deps: [thm-ito-formula-one-dimensional, def-brownian-motion, def-continuous-brownian-ito-process, def-continuity-real, thm-heine-cantor-r, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-stopping-an-ito-integral, def-continuous-time-stopping-time, def-convergence-in-probability, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-elementary-predictable-brownian-integrand]
+deps: [thm-ito-formula-one-dimensional, def-brownian-motion, def-continuous-brownian-ito-process, def-continuity-real, thm-heine-cantor-r, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-stopping-an-ito-integral, def-continuous-time-stopping-time, def-convergence-in-probability, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
 generation:
   role: example
@@ -39,7 +39,7 @@ formula.
  
 [F3] **Localized integration.** For a locally square-integrable predictable $H$ the localized integral exists and the stopping identity identifies its stopped pieces with finite-energy integrals; on the event $\{t\le\rho\}$ the integral of $H1_{[0,\rho]}$ and that of $H$ agree. [[thm-localized-ito-integral]] [[thm-stopping-an-ito-integral]] [[def-locally-square-integrable-predictable-brownian-integrand]] [[def-convergence-in-probability]]
  
-[F4] **AC bookkeeping.** Choice is declared for the ambient completeness interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] **AC bookkeeping.** Choice is declared for the ambient completeness interface. [[def-axiom-of-choice]]
  
  
  

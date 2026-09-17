@@ -47,10 +47,14 @@ of $T_pM$.
 - **Splitness is a local condition, and the complement is part of the local
   data.** The definition does not assert that an arbitrary closed subspace of a
   Banach space is a submanifold of it: the complement $E_1$ is produced along
-  with the chart, and the companion page exhibits a closed subspace of
-  $\ell^\infty$ that is not a split submanifold of it. For a closed subspace
-  $E_0 \le E$ the split charts with $M = E$ and $\varphi = \mathrm{id}$ exist
-  exactly when $E_0$ is complemented in $E$.
+  with the chart, and the companion page exhibits a closed subspace $c_0$ of
+  $\ell^\infty$ that is not complemented in it. For a closed subspace
+  $E_0 \le E$ with $E$ second countable, the split charts with $M = E$ and
+  $\varphi = \mathrm{id}$ exist exactly when $E_0$ is complemented in $E$; for
+  $E = \ell^\infty$ the ambient is not a Banach manifold in the library's
+  sense, so the example separates closedness from complementedness at the level
+  of Banach spaces rather than exhibiting a split-submanifold failure for a
+  Banach manifold.
 
 - **The tangent space of a split submanifold is complemented.** In a chart at
   $p$ the tangent space of $S$ corresponds to $E_0$ and that of $M$ to $E$, so

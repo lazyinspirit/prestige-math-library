@@ -59,4 +59,4 @@ the positive roots of the positive system defined by the chamber $w(C)$.
 
 2.1 Applying the linear map $w$ to the relation of step 1.2 gives $w(\lambda)-\mu\in w(Q_+)$, which is exactly the statement that $w(\lambda)-\mu$ is a nonnegative integral combination of the roots in the positive system $w(\Phi^+)$ attached to the chamber $w(C)$ by [L3]; hence $w(\lambda)$ is extremal in that chamber. [L3, step 1.2]
 
-3.1 Steps 1.1 and 3.1 prove the multiplicity-one and extremality assertions for every $w\in W$. [step 1.1, step 2.1] ∎
+3.1 Steps 1.1 and 2.1 prove the multiplicity-one and extremality assertions for every $w\in W$. [step 1.1, step 2.1] ∎

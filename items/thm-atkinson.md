@@ -51,11 +51,11 @@ linear $S:Y\to X$ such that both $ST-I_X$ and $TS-I_Y$ are compact
 
 2.1 For every $x\in X$ one has $x=STx-Fx$, hence $\|x\|\le\|S\|\,\|Tx\|+\|Fx\|\le C\|Tx\|+\|Fx\|$. [step 1.2, algebra]
 
-2.2 For $g\in X^*$ one has $g=T^*S^*g-F^*g$, because $F^*=T^*S^*-I_{X^*}$; hence $T^*g=0$ implies $T^*S^*g=0$, so $\ker T^*\subseteq\ker(T^*S^*)$. [step 1.2, A3]
+2.2 By [A3] the transpose of $G=TS-I_Y$ is $G^*=S^*T^*-I_{Y^*}$, so $S^*T^*=I_{Y^*}+G^*=I_{Y^*}-(-G^*)$; for $g\in Y^*$ with $T^*g=0$ one has $S^*T^*g=S^*(T^*g)=0$ by linearity of $S^*$, hence $(I_{Y^*}-(-G^*))g=S^*T^*g=0$ and $\ker T^*\subseteq\ker(I_{Y^*}-(-G^*))$. [step 1.2, A3]
 
 3.1 Under the hypothesis of [step 1.2], $\ker T$ is finite dimensional and $\operatorname{ran}T$ is closed, by [A2] applied to the estimate of [step 2.1] with the compact operator $F$. [step 2.1, A2]
 
-3.2 Under the hypothesis of [step 1.2], $F^*$ is compact by [A3], so the compact operator $-F^*$ makes $\ker(T^*S^*)=\ker(I_{X^*}-(-F^*))$ finite dimensional; hence $\ker T^*$ is finite dimensional by [step 2.2]. [step 2.2, A3]
+3.2 Under the hypothesis of [step 1.2] the operator $G:=TS-I_Y$ is compact, so its transpose $G^*$ is compact by [A3]; the negative $-G^*$ is compact as well, because the image of a bounded set under $-G^*$ is the negative of its image under $G^*$ and negating a set preserves the compactness of its closure. So [A3] applies to the compact operator $-G^*$ and makes $\ker(I_{Y^*}-(-G^*))$ finite dimensional; by [step 2.2] the subspace $\ker T^*$ is finite dimensional. [step 1.2, step 2.2, A3]
 
 4.1 Under the hypothesis of [step 1.2], the dual of the cokernel is finite dimensional: since $\operatorname{ran}T$ is closed by [step 3.1], [A4] gives $(\operatorname{coker}T)^*=(Y/\operatorname{ran}T)^*\cong(\operatorname{ran}T)^\perp=\ker T^*$, which is finite dimensional by [step 3.2]. [step 3.1, step 3.2, A4]
 

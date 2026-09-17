@@ -5,7 +5,7 @@ title: Compact Lie groups admit bi-invariant metrics
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-integration-against-haar-is-invariant-under-translations-and-conjugation, def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian, def-conjugation-and-the-adjoint-representation-of-a-lie-group, thm-fundamental-theorem-of-riemannian-geometry, def-axiom-of-choice, def-geodesic-of-an-affine-connection, thm-existence-uniqueness-and-smooth-dependence-of-geodesics, cor-every-vector-space-has-a-basis, prop-standard-coordinate-inner-products, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-linearity-of-the-lebesgue-integral-on-l-one]
+deps: [prop-integration-against-haar-is-invariant-under-translations-and-conjugation, def-riemannian-metric-and-riemannian-manifold, def-conjugation-and-the-adjoint-representation-of-a-lie-group, thm-fundamental-theorem-of-riemannian-geometry, def-axiom-of-choice, def-geodesic-of-an-affine-connection, thm-existence-uniqueness-and-smooth-dependence-of-geodesics, cor-every-vector-space-has-a-basis, prop-standard-coordinate-inner-products, lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets, thm-linearity-of-the-lebesgue-integral-on-l-one]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -33,7 +33,7 @@ $t\mapsto\exp(tX)$, $X\in\operatorname{Lie}G$.
 
 [A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the normalized Haar measure used in [L4] and [L6].
 
-[L1] A Riemannian metric is a smooth bundle metric on $TM$; the Levi-Civita connection of a Riemannian metric is characterised by symmetry, $\nabla_XY-\nabla_YX=[X,Y]$, and metric compatibility, $X\langle Y,Z\rangle=\langle\nabla_XY,Z\rangle+\langle Y,\nabla_XZ\rangle$, and it is unique ([[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]], [[thm-fundamental-theorem-of-riemannian-geometry]]).
+[L1] A Riemannian metric is a smooth bundle metric on $TM$; the Levi-Civita connection of a Riemannian metric is characterised by symmetry, $\nabla_XY-\nabla_YX=[X,Y]$, and metric compatibility, $X\langle Y,Z\rangle=\langle\nabla_XY,Z\rangle+\langle Y,\nabla_XZ\rangle$, and it is unique ([[thm-fundamental-theorem-of-riemannian-geometry]]).
 
 [L2] A geodesic is a smooth curve with $\nabla_{\gamma'}\gamma'=0$; for every initial datum $(p,v)\in TG$ there is a unique maximal geodesic $\gamma_{p,v}$ with $\gamma_{p,v}(0)=p$ and $\gamma'_{p,v}(0)=v$ ([[def-geodesic-of-an-affine-connection]], [[thm-existence-uniqueness-and-smooth-dependence-of-geodesics]]).
 

@@ -4,7 +4,7 @@ kind: counterexample
 title: "Product-measure equality is not pointwise equality"
 status: draft
 origin: pipeline
-deps: [def-progressively-measurable-and-predictable-process, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, def-ito-integral-for-square-integrable-predictable-processes, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-progressively-measurable-and-predictable-process, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, def-ito-integral-for-square-integrable-predictable-processes, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: counterexample
@@ -40,7 +40,7 @@ almost-everywhere class, not pointwise agreement.
 
 [F3] The Ito integral is a function of the $(\mathrm dt\otimes P)$-class of the integrand: if two finite-energy predictable integrands agree almost everywhere, their integrals agree almost surely. [[lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative]] [[def-ito-integral-for-square-integrable-predictable-processes]]
 
-[F4] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Counterexample
 

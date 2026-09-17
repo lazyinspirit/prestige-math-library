@@ -5,7 +5,7 @@ title: Banach-Stone
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-extreme-points-of-the-dual-ball-of-c-of-k, lem-characters-of-continuous-functions-are-evaluations, def-transpose-of-a-bounded-operator, lem-transpose-is-bounded-and-has-the-same-norm, lem-transpose-reverses-composition, lem-evaluation-map-of-separating-family-is-an-embedding, thm-urysohn-lemma, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
+deps: [lem-extreme-points-of-the-dual-ball-of-c-of-k, lem-characters-of-continuous-functions-are-evaluations, def-transpose-of-a-bounded-operator, lem-transpose-is-bounded-and-has-the-same-norm, lem-transpose-reverses-composition, lem-evaluation-map-of-separating-family-is-an-embedding, thm-urysohn-lemma, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -49,7 +49,7 @@ unital.
 
 [L4] For a nonempty compact Hausdorff space $M$, the evaluation map $M \to \Delta(C(M))$ is a homeomorphism, and the family $C(M)$ separates points from closed sets, so the evaluation map into the product over $C(M,[0,1])$ is an embedding ([[lem-characters-of-continuous-functions-are-evaluations]], [[lem-evaluation-map-of-separating-family-is-an-embedding]]).
 
-[L5] Under Dependent Choice — which follows from the Axiom of Choice — the Urysohn lemma holds in normal spaces, so in a compact Hausdorff space two distinct points are separated by a continuous function into $[0,1]$ ([[thm-urysohn-lemma]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-axiom-of-choice]]).
+[L5] Under Dependent Choice — which follows from the Axiom of Choice — the Urysohn lemma holds in normal spaces, so in a compact Hausdorff space two distinct points are separated by a continuous function into $[0,1]$ ([[thm-urysohn-lemma]], [[def-axiom-of-choice]]).
 
 ## Proof
 

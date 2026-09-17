@@ -5,7 +5,7 @@ title: Zero set ultrafilters and Stone-Cech points
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-zero-set-filter-and-zero-set-ultrafilter, thm-stone-cech-evaluation-closure-universal-property, def-completely-regular-and-tychonoff-spaces, thm-urysohn-lemma, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-zero-set-filter-and-zero-set-ultrafilter, thm-stone-cech-evaluation-closure-universal-property, def-completely-regular-and-tychonoff-spaces, thm-urysohn-lemma, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -20,8 +20,7 @@ sources:
 ## Statement
 
 Assume the Axiom of Choice ([[def-axiom-of-choice]]), so that the ultrafilter
-lemma and Dependent Choice are available
-([[thm-choice-implies-dependent-implies-countable-choice]]). Let $X$ be a
+lemma and Dependent Choice are available. Let $X$ be a
 Tychonoff space ([[def-completely-regular-and-tychonoff-spaces]]) and let
 $(\beta X, e)$ be its Stone–Čech compactification as supplied by the evaluation
 theorem ([[thm-stone-cech-evaluation-closure-universal-property]]); identify
@@ -42,7 +41,7 @@ is a **bijection** from $\beta X$ onto the set of z-ultrafilters on $X$
 
 [L3] A family of closed subsets of a compact space has nonempty intersection whenever every finite subfamily has nonempty intersection: otherwise the complements form an open cover and a finite subcover exhibits a finite subfamily with empty intersection.
 
-[L4] If $Z = Z(f)$ with $f \in C(X)$ and $\tilde f := \min(1,|f|) \in C(X,[0,1])$, then $Z(\tilde f) = Z$ and for every $u \in C(X,[0,1])$ the quotient $u\,\tilde f_1/(\tilde f_1+\tilde f_2)$ (with value $0$ where $\tilde f_1 = \tilde f_2 = 0$) is a continuous $[0,1]$-valued function vanishing on $Z(f_1)$ and bounded by $|u|$; this elementary construction is used in [step 2.2]. [algebra]
+[L4] If $Z = Z(f)$ with $f \in C(X)$ and $\tilde f := \min(1,|f|) \in C(X,[0,1])$, then $Z(\tilde f) = Z$ and for every $u \in C(X,[0,1])$ the quotient $u\,\tilde f_1/(\tilde f_1+\tilde f_2)$ (with value $0$ where $\tilde f_1 = \tilde f_2 = 0$) is a continuous $[0,1]$-valued function vanishing on $Z(f_1)$ and bounded by $|u|$; this elementary construction is used in [step 3.1] to write $u$ as $u_1+u_2$ with $u_i$ vanishing on $Z_i$. [algebra]
 
 ## Proof
 

@@ -4,7 +4,7 @@ kind: theorem
 title: "Localized Ito integral"
 status: draft
 origin: pipeline
-deps: [def-locally-square-integrable-predictable-brownian-integrand, thm-ito-integral-process-has-a-continuous-martingale-version, thm-doob-maximal-bound-for-the-ito-integral, thm-ito-isometry-and-linearity-in-predictable-l2, def-ito-integral-for-square-integrable-predictable-processes, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, def-law-modification-and-indistinguishability-of-processes, def-progressively-measurable-and-predictable-process, thm-monotone-convergence-for-the-integral, lem-rat-embeds-dense, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-locally-square-integrable-predictable-brownian-integrand, thm-ito-integral-process-has-a-continuous-martingale-version, thm-doob-maximal-bound-for-the-ito-integral, thm-ito-isometry-and-linearity-in-predictable-l2, def-ito-integral-for-square-integrable-predictable-processes, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-continuous-time-stopping-time, def-law-modification-and-indistinguishability-of-processes, def-progressively-measurable-and-predictable-process, thm-monotone-convergence-for-the-integral, lem-rat-embeds-dense, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -71,7 +71,7 @@ $\int H1_{(0,\tau_n]}\,dB$
 
 [F5] For a stopping time $\sigma$ the indicator $1_{[0,\sigma]}$ is predictable and every truncation $1_{[0,t]}$ is predictable; products of predictable processes are predictable. [[def-progressively-measurable-and-predictable-process]]
 
-[F7] AC is declared for the ambient interfaces; the localization times are canonical and no additional sequence is selected. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F7] AC is declared for the ambient interfaces; the localization times are canonical and no additional sequence is selected. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -79,7 +79,7 @@ $\int H1_{(0,\tau_n]}\,dB$
 
 1.1 Clause 4 for elementary $G$ and finite-valued $\sigma$: refine the partition of $G$ so that it contains the finitely many values of $\sigma$ and the point $t$; on each block $(t_k,t_{k+1}]$ the indicator $1_{s\le\sigma}$ is constant in $s$ with value $1_{\sigma\ge t_{k+1}}$, and $\{\sigma<t_{k+1}\}=\{\sigma\le t_k\}\in\mathcal F_{t_k}$ because $\sigma$ takes only partition values, so $G1_{[0,\sigma]}1_{[0,t]}$ is elementary with coefficients $\xi_k1_{\sigma\ge t_{k+1}}$; its defining sum is $\sum_k\xi_k1_{\sigma\ge t_{k+1}}(B_{t_{k+1}\wedge t}-B_{t_k\wedge t})$, which term-by-term equals $\sum_k\xi_k(B_{(t\wedge\sigma)\wedge t_{k+1}}-B_{(t\wedge\sigma)\wedge t_k})=(G\cdot B)_{t\wedge\sigma}$. [F3, F5, given]
 
-2.1 Clause 4 for elementary $G$ and arbitrary $\sigma$: let $\sigma_m:=2^{-m}\lceil2^m\sigma\rceil$ be the dyadic ceiling of $\sigma$, a finite-valued stopping time with $\sigma_m\ge\sigma$ and $\sigma_m\downarrow\sigma$; by step 1.1 and [F3], $(G\cdot B)_{t\wedge\sigma_m}=I_T(G1_{[0,\sigma_m]}1_{[0,t]})$ for every $m$. [F3, step 1.1]
+2.1 Clause 4 for elementary $G$ and arbitrary $\sigma$: let $\sigma_m:=2^{-m}\lceil2^m(\sigma\wedge m)\rceil$ be the dyadic ceiling of the bounded stopping time $\sigma\wedge m$, a finite-valued stopping time with $\sigma_m\ge\sigma\wedge m$ and $\sigma_m\to\sigma$; by step 1.1 and [F3], $(G\cdot B)_{t\wedge\sigma_m}=I_T(G1_{[0,\sigma_m]}1_{[0,t]})$ for every $m$. [F3, step 1.1]
 
 3.1 As $m\to\infty$: $(G\cdot B)_{t\wedge\sigma_m}\to(G\cdot B)_{t\wedge\sigma}$ in $L^2(P)$ by continuity of the path and the maximal bound [F2] with dominated convergence; and $I_T(G1_{[0,\sigma_m]}1_{[0,t]})\to I_T(G1_{[0,\sigma]}1_{[0,t]})$ in $L^2(P)$ because the integrands converge pointwise, are dominated by $|G|1_{[0,t]}\in L^2$, and the integral is an isometry [F4]. Hence $(G\cdot B)_{t\wedge\sigma}=\int_0^tG1_{(0,\sigma]}dB$ almost surely for elementary $G$ and every stopping time $\sigma$. [F2, F4, step 2.1]
 

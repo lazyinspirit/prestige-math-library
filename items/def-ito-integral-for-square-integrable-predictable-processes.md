@@ -4,7 +4,7 @@ kind: definition
 title: "Ito integral for square-integrable predictable processes"
 status: draft
 origin: pipeline
-deps: [thm-density-of-elementary-predictable-processes-in-predictable-l2, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-ito-isometry-for-elementary-integrands, thm-riesz-fischer-completeness-of-l-p, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-density-of-elementary-predictable-processes-in-predictable-l2, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-ito-isometry-for-elementary-integrands, thm-riesz-fischer-completeness-of-l-p, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -84,7 +84,6 @@ is defined as follows.
 
 The Axiom of Choice is declared because the construction selects an
 approximating sequence and uses the completeness and conditional-expectation
-interfaces that assume it; the implication bridge
-[[thm-choice-implies-dependent-implies-countable-choice]] records the inherited
-obligations. An alternative construction that avoids selecting the sequence is
+interfaces that assume it; the inherited obligations are declared as
+dependencies of this item. An alternative construction that avoids selecting the sequence is
 not needed, because item 11 shows every sequence gives the same class.

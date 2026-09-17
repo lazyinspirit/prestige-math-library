@@ -4,7 +4,7 @@ kind: counterexample
 title: "An unbounded stopped exponential martingale needs uniform integrability"
 status: draft
 origin: pipeline
-deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-continuous-time-stopping-time, def-uniformly-integrable-family, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, thm-doob-lp-maximal-inequality, thm-doob-l1-maximal-inequality, cor-absolute-value-and-powers-of-a-martingale-are-submartingales, thm-optional-sampling-for-bounded-stopping-times, thm-dominated-convergence, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, def-convergence-in-probability, def-elementary-predictable-brownian-integrand, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [cor-exponential-brownian-martingale, def-brownian-motion, def-continuous-time-stopping-time, def-uniformly-integrable-family, thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, thm-doob-lp-maximal-inequality, thm-doob-l1-maximal-inequality, cor-absolute-value-and-powers-of-a-martingale-are-submartingales, thm-optional-sampling-for-bounded-stopping-times, thm-dominated-convergence, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, def-convergence-in-probability, def-elementary-predictable-brownian-integrand, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: counterexample
@@ -42,7 +42,7 @@ $EZ_\tau=1/2\ne1$, and the stopped family is not uniformly integrable.
  
 [F5] **Uniform integrability and $L^1$ limits.** If a sequence converges almost surely and is uniformly integrable, then it converges in $L^1$; equivalently, the expectations converge to the expectation of the limit whenever the limit is integrable and the family is uniformly integrable. [[thm-uniform-integrability-plus-probability-convergence-implies-l1-convergence]] [[def-uniformly-integrable-family]] [[def-convergence-in-probability]]
  
-[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

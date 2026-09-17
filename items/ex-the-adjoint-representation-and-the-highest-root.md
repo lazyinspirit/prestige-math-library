@@ -50,6 +50,6 @@ root
 
 1.2 $E_{1n}$ is killed by every positive root vector: for $i<j$ we have $[E_{ij},E_{1n}]=\delta_{j1}E_{in}-\delta_{in}E_{1j}$, and $\delta_{j1}=0$ because $i<j$ with $i\ge1$, while $\delta_{in}=0$ because $i<j\le n$ forces $i<n$; hence $[E_{ij},E_{1n}]=0$. [L3]
 
-2.1 By [L2] the functional $\varepsilon_1-\varepsilon_n$ is the highest root $\theta$; by [L1] the adjoint representation is irreducible with highest weight $\theta$, and by steps 1.1 and 2.1 the vector $E_{1n}$ is a highest weight vector realising that weight. [L1, L2, step 1.1, step 1.2]
+2.1 By [L2] the functional $\varepsilon_1-\varepsilon_n$ is the highest root $\theta$; by [L1] the adjoint representation is irreducible with highest weight $\theta$, and by steps 1.1 and 1.2 the vector $E_{1n}$ is a highest weight vector realising that weight. [L1, L2, step 1.1, step 1.2]
 
 3.1 Hence the adjoint representation of $\mathfrak{sl}_n(\mathbb C)$ has highest vector $E_{1n}$ and highest weight the highest root $\varepsilon_1-\varepsilon_n$, as asserted. [step 2.1] ∎

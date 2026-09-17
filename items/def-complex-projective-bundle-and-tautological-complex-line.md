@@ -5,7 +5,7 @@ title: Complex projective bundle and tautological complex line
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-real-and-complex-topological-vector-bundle, thm-vector-bundles-glued-from-transition-cocycles, def-euler-class-by-zero-section-pullback-of-the-thom-class, lem-complex-orientation-of-underlying-real-bundles, def-stiefel-space-grassmannian-and-tautological-bundle, def-projective-space-points, def-axiom-of-choice]
+deps: [def-real-and-complex-topological-vector-bundle, thm-vector-bundles-glued-from-transition-cocycles, def-euler-class-by-zero-section-pullback-of-the-thom-class, lem-complex-orientation-of-underlying-real-bundles, def-stiefel-space-grassmannian-and-tautological-bundle, def-axiom-of-choice]
 axiom_strength: "ZF + AC; inherited from the bundle and Thom suppliers."
 provenance:
   statement: literature-derived
@@ -39,9 +39,8 @@ complex-linear isomorphisms, so
 [[thm-vector-bundles-glued-from-transition-cocycles]] applies to the
 projectivized cocycle. Under the identification
 $\mathbb{CP}^{n-1}=\operatorname{Gr}_1(\mathbb C^n)$ supplied by
-[[def-stiefel-space-grassmannian-and-tautological-bundle]] and
-[[def-projective-space-points]], a point of the fiber over $b\in B$ is a
-complex line $\ell\subseteq E_b$.
+[[def-stiefel-space-grassmannian-and-tautological-bundle]], a point of the
+fiber over $b\in B$ is a complex line $\ell\subseteq E_b$.
 
 The **tautological complex line** $\gamma_E\subseteq p^*E$ is the subbundle
 whose fiber over $\ell\subseteq E_b$ is $\ell$ itself, with the complex

@@ -4,7 +4,7 @@ kind: lemma
 title: "Cross Ito isometry"
 status: draft
 origin: pipeline
-deps: [thm-ito-isometry-for-elementary-integrands, lem-elementary-ito-integral-is-independent-of-the-step-representation, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-ito-isometry-for-elementary-integrands, lem-elementary-ito-integral-is-independent-of-the-step-representation, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -36,7 +36,7 @@ finite.
 
 [F3] The pointwise identity $(H+K)^2-(H-K)^2=4HK$ holds on $[0,T]\times\Omega$, and the same expansion applies to the random variables $I_t(H)\pm I_t(K)$. [[def-elementary-predictable-brownian-integrand]]
 
-[F4] AC enters only through the ambient isometry item and its conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] AC enters only through the ambient isometry item and its conditional-expectation interface. [[def-axiom-of-choice]]
 
 ## Proof
 

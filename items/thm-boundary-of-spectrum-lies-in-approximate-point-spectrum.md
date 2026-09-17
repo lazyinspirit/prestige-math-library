@@ -52,7 +52,7 @@ $\mathbb C$.
 
 1.1 Since $\lambda$ is a boundary point, for each $n \ge 1$ the disc $\{|z-\lambda| < 1/n\}$ meets $\rho(T)$; Countable Choice selects $\lambda_n \in \rho(T)$ with $|\lambda_n - \lambda| < 1/n$ for every $n$; in particular $\lambda_n \to \lambda$. [L1, L5, algebra]
 
-1.2 First suppose that the resolvent norms are bounded along this sequence, say $\|R(\lambda_n)\| \le M$ for all $n$, and suppose $M \ge 1$. For $n$ with $|\lambda_n-\lambda| < 1/(2M)$ the operator $T - \lambda = (T - \lambda_n) + (\lambda_n-\lambda) = (T-\lambda_n)\bigl(1 + (\lambda_n-\lambda)R(\lambda_n)\bigr)$ is a product of invertible factors, the second by the Neumann series since $\|(\lambda_n-\lambda)R(\lambda_n)\| \le 1/2 < 1$, so $T-\lambda$ would be invertible and $\lambda \in \rho(T)$, contradicting $\lambda \in \sigma(T)$. [L2, L3, L1, algebra]
+1.2 First suppose that the resolvent norms are bounded along this sequence, say $\|R(\lambda_n)\| \le M$ for all $n$, and suppose $M \ge 1$. For $n$ with $|\lambda_n-\lambda| < 1/(2M)$ the operator $T - \lambda = (T - \lambda_n) + (\lambda_n-\lambda) = (T-\lambda_n)\bigl(1 - (\lambda_n-\lambda)R(\lambda_n)\bigr)$ is a product of invertible factors: the displayed identity holds because $(T-\lambda_n)R(\lambda_n) = -1$ by [L2], and the second factor is invertible by the Neumann series since $\|(\lambda_n-\lambda)R(\lambda_n)\| \le 1/2 < 1$. Hence $T-\lambda$ would be invertible and $\lambda \in \rho(T)$, contradicting $\lambda \in \sigma(T)$. [L2, L3, L1, algebra]
 
 2.1 Consequently the norms $\|R(\lambda_n)\|$ are unbounded; passing to a subsequence, which we relabel, we may assume $\|R(\lambda_n)\| \to \infty$. [step 1.1, step 1.2, algebra]
 

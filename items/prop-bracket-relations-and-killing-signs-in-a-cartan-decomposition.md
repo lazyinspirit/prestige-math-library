@@ -5,7 +5,7 @@ title: Bracket relations and Killing signs in a Cartan decomposition
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra]
+deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -52,5 +52,3 @@ $-1$-eigenspace.
 3.1 For $X\in\mathfrak k_0$ we have $B(X,X)=-B(X,\theta X)=-B_\theta(X,X)\le0$, with equality only for $X=0$; hence $B$ is negative definite on $\mathfrak k_0$. For $Y\in\mathfrak p_0$ we have $B(Y,Y)=B(Y,-\theta Y)=-B_\theta(Y,-Y)=B_\theta(Y,Y)\ge0$ with equality only for $Y=0$; hence $B$ is positive definite on $\mathfrak p_0$. [L1, step 1.1, step 2.1, algebra]
 
 4.1 By step 1.1, $\mathfrak k_0$ is closed under brackets and is therefore a Lie subalgebra; the restriction of $\theta$ to $\mathfrak k_0$ is the identity and to $\mathfrak p_0$ is minus the identity by definition of the eigenspaces. Together with steps 2.1 and 3.1 this proves all the assertions. [L1, step 1.1, step 2.1, step 3.1, algebra] ∎
-
-1 checked, 1 failing

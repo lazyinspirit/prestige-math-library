@@ -4,7 +4,7 @@ kind: definition
 title: "The Brownian differential generator"
 status: draft
 origin: pipeline
-deps: [thm-multidimensional-ito-formula-for-brownian-driven-processes, def-c-c-and-c-c-infinity-on-rn, thm-ito-formula-one-dimensional, thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-multidimensional-ito-formula-for-brownian-driven-processes, def-c-c-and-c-c-infinity-on-rn, thm-ito-formula-one-dimensional, thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -66,6 +66,6 @@ does and does not assert.
 No choice principle is used in the definition itself: $L$ is an explicit
 differential expression applied to given functions. The Axiom of Choice is
 declared because the theorems that use $L$ on this page invoke the
-conditional-expectation and $L^2$ interfaces, and
-[[thm-choice-implies-dependent-implies-countable-choice]] records the
-inherited countable-choice obligations.
+conditional-expectation and $L^2$ interfaces, and the
+inherited countable-choice obligations of those interfaces are declared as
+dependencies of this item.

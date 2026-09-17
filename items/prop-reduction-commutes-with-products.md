@@ -40,7 +40,7 @@ product level, and the product of the canonical diffeomorphisms
 $$M_\alpha\times N_\beta\longrightarrow \mu_{M\times N}^{-1}(\alpha,\beta)/(G_\alpha\times H_\beta)$$
 
 is a symplectomorphism onto the reduced product, the form being
-$\omega_\alpha\oplus\beta$-product on the left and the reduced form on the
+$\omega_\alpha\oplus\omega_\beta$ on the left and the reduced form on the
 right.
 
 ## Facts & Assumptions

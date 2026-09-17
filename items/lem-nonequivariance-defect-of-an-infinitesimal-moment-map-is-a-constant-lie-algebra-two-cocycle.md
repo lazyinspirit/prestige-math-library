@@ -35,9 +35,13 @@ with trivial coefficients:
 
 $$c([\xi,\eta],\zeta)+c([\eta,\zeta],\xi)+c([\zeta,\xi],\eta)=0 \qquad\text{for all }\xi,\eta,\zeta\in\mathfrak g.$$
 
-Consequently $\mu$ is coadjoint equivariant if and only if $c=0$, and the
-identity $c=0$ need only be verified at one point of the connected manifold
-$M$.
+Consequently, if $G$ is connected, $\mu$ is coadjoint equivariant if and
+only if $c=0$. For a general group the identity $c=0$ is equivalent to
+equivariance under the identity component $G^0$, and equivariance under all of
+$G$ requires in addition equivariance under one representative of each coset
+of $G/G^0$ ([[prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity]]).
+In every case the identity $c=0$ need only be verified at one point of the
+connected manifold $M$, because $c$ is constant there by the first part.
 
 ## Facts & Assumptions
 
@@ -75,4 +79,4 @@ $M$.
 
 3.1 Jacobi for the Poisson bracket applied to $\mu^\xi,\mu^\eta,\mu^\zeta$ reads $$0=\{\{\mu^\xi,\mu^\eta\},\mu^\zeta\}+\{\{\mu^\eta,\mu^\zeta\},\mu^\xi\}+\{\{\mu^\zeta,\mu^\xi\},\mu^\eta\}.$$ Replacing each inner bracket by $\mu^{[\cdot,\cdot]}+c(\cdot,\cdot)$ and using that a constant Poisson-commutes with every function, the three $\mu$-terms combine into $\mu^{\lbrack\lbrack\xi,\eta\rbrack,\zeta\rbrack+\lbrack\lbrack\eta,\zeta\rbrack,\xi\rbrack+\lbrack\lbrack\zeta,\xi\rbrack,\eta\rbrack}=0$ by the Jacobi identity in $\mathfrak g$, and the three defect terms give exactly $c([\xi,\eta],\zeta)+c([\eta,\zeta],\xi)+c([\zeta,\xi],\eta)$. Hence this cyclic sum vanishes, which by [F7] is $dc=0$. [step 2.1, F1, F5, F6, F7]
 
-4.1 Since $c$ is constant on the connected manifold $M$, the bracket identity of [F9] holds if and only if $c=0$, and it suffices to test $c=0$ at one point of $M$; by [F9] this is equivalent to coadjoint equivariance of $\mu$. [step 2.1, step 3.1, F9, A1] ∎
+4.1 Since $c$ is constant on the connected manifold $M$, the bracket identity of [F9] holds if and only if $c=0$, and it suffices to test $c=0$ at a single point of $M$. By [F9] that bracket identity is equivalent to equivariance under the identity component $G^0$, and hence to coadjoint equivariance of $\mu$ when $G$ is connected; for a general $G$, equivariance under all of $G$ additionally requires equivariance under one representative of each coset of $G/G^0$. [step 2.1, step 3.1, F9, A1] ∎

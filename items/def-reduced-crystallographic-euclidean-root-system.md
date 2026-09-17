@@ -44,5 +44,5 @@ Every root $\alpha$ satisfies $-\alpha\in\Phi$: taking $\beta=\alpha$ in
 condition 2 gives $2\in\mathbb Z$, and condition 1 gives
 $s_\alpha(\alpha)=-\alpha\in\Phi$. The integer
 $2(\beta,\alpha)/(\alpha,\alpha)$ is the **Cartan integer** attached to the
-ordered pair $(\beta,\alpha)$; condition 2 is the crystallographic axiom of
-[[def-reduced-crystallographic-euclidean-root-system]].
+ordered pair $(\beta,\alpha)$; condition 2 is the crystallographic axiom
+recorded above.

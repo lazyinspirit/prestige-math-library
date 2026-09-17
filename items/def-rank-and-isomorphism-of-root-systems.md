@@ -35,10 +35,12 @@ $$\frac{2(\varphi(\beta),\varphi(\alpha))}{(\varphi(\alpha),\varphi(\alpha))} = 
 Because
 $$\frac{2(\beta,\alpha)}{(\alpha,\alpha)} =2\cos\theta\;\frac{|\beta|}{|\alpha|}, \qquad \theta\text{ the angle between }\alpha,\beta,$$
 a map as above preserves the angle of every pair of nonproportional roots and
-the ratio of their lengths; conversely, a linear isomorphism carrying $\Phi$
-onto $\Phi'$ that preserves the angle and the length ratio of every pair of
-nonproportional roots preserves all Cartan integers and is therefore an
-isomorphism of root systems. An isomorphism need not preserve the given inner
-products on the nose, but it preserves the common scale within each
-irreducible component, so it preserves all angles between roots and all ratios
-$|\beta|/|\alpha|$.
+the ratio of their lengths whenever the two roots lie in the same irreducible
+component; conversely, a linear isomorphism carrying $\Phi$ onto $\Phi'$ that
+preserves the angle and the length ratio of every pair of nonproportional
+roots preserves all Cartan integers and is therefore an isomorphism of root
+systems. An isomorphism need not preserve the given inner products on the
+nose, but within each irreducible component it preserves the common scale,
+hence all angles between roots and all ratios $|\beta|/|\alpha|$ formed by
+two roots of the same irreducible component; ratios of lengths of roots taken
+from different irreducible components need not be preserved.

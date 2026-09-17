@@ -75,7 +75,7 @@ $(X,Y)$, and both are $0$ at $t=0$.
    each $T$ and each admissible partition sequence, the cross sums of $A$
    against any continuous process $Y$ satisfy
    $$\Bigl|\sum_k\bigl(A_{s_k}-A_{s_{k-1}}\bigr)\bigl(Y_{s_k}-Y_{s_{k-1}}\bigr)\Bigr| \le\Bigl(\max_k\sup_{u,v\in[s_{k-1},s_k]}|Y_u-Y_v|\Bigr)\int_0^T|a_s|\,ds,$$
-   because $\sum_k|A_{s_k}-A_{s_{k-1}}|=\int_0^T|a_s|\,ds$ exactly; the
+   because the triangle inequality for the pathwise Lebesgue integral gives $\sum_k|A_{s_k}-A_{s_{k-1}}|\le\int_0^T|a_s|\,ds$; the
    maximum tends to $0$ along vanishing meshes by uniform continuity of the
    continuous path $Y$ on the compact interval $[0,T]$. Hence $[A,Y]$ exists
    and equals the zero process for every such $A$ and every continuous $Y$,

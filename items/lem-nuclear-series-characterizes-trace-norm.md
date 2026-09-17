@@ -4,6 +4,7 @@ kind: lemma
 title: Nuclear series characterizes trace norm
 status: draft
 origin: pipeline
+pipeline_run: phase-2-remaining-27
 deps: [def-trace-class-operator, def-absolute-value-and-singular-values-of-a-compact-operator, thm-singular-value-decomposition-for-compact-operators, thm-hilbert-space-fourier-expansion, thm-norm-limit-of-compact-operators-is-compact, lem-finite-rank-operators-are-compact, thm-cauchy-schwarz-in-an-inner-product-space, lem-finite-bessel-inequality, def-operator-norm, def-bounded-linear-operator, def-metric-convergence, def-infimum, def-dimension, def-hilbert-space, def-countable-choice, def-real-and-complex-inner-product-space]
 proof_strategy: direct
 provenance:

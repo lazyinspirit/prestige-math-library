@@ -4,7 +4,7 @@ kind: theorem
 title: "Doob maximal bound for the Ito integral"
 status: draft
 origin: pipeline
-deps: [thm-ito-integral-process-has-a-continuous-martingale-version, thm-doob-lp-maximal-inequality, thm-ito-isometry-and-linearity-in-predictable-l2, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, thm-monotone-convergence-for-the-integral, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, lem-rat-embeds-dense, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-ito-integral-process-has-a-continuous-martingale-version, thm-doob-lp-maximal-inequality, thm-ito-isometry-and-linearity-in-predictable-l2, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, thm-monotone-convergence-for-the-integral, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, lem-rat-embeds-dense, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -41,7 +41,7 @@ the integral process satisfies the same bound.
 
 [F5] Two continuous versions of the same integral process are indistinguishable, so their path suprema agree almost surely. [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[def-law-modification-and-indistinguishability-of-processes]]
 
-[F6] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Proof
 

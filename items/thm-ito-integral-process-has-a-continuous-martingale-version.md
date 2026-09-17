@@ -4,7 +4,7 @@ kind: theorem
 title: "The Ito integral process has a continuous martingale version"
 status: draft
 origin: pipeline
-deps: [def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-and-linearity-in-predictable-l2, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, thm-doob-lp-maximal-inequality, thm-monotone-convergence-for-the-integral, thm-tower-property-of-conditional-expectation, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, cor-cauchy-schwarz-for-random-variables, lem-rat-embeds-dense, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-and-linearity-in-predictable-l2, lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, thm-doob-lp-maximal-inequality, thm-monotone-convergence-for-the-integral, thm-tower-property-of-conditional-expectation, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, cor-cauchy-schwarz-for-random-variables, lem-rat-embeds-dense, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -51,7 +51,7 @@ is the integral class.
 
 [F7] If $X_n\to X$ in $L^2(P)$ then $E|X_n-X|\le\|X_n-X\|_2\to0$, and conditional expectations are $L^1$-contractive: $\|E[X_n\mid\mathcal G]-E[X\mid\mathcal G]\|_1\le E|X_n-X|$. [[cor-cauchy-schwarz-for-random-variables]] [[thm-basic-algebra-and-order-properties-of-conditional-expectation]]
 
-[F8] AC is declared for the ambient interfaces; the construction itself fixes an explicit least-index sequence. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F8] AC is declared for the ambient interfaces; the construction itself fixes an explicit least-index sequence. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -63,7 +63,7 @@ is the integral class.
 
 2.1 For each $n$, $H^{n+1}-H^n$ is elementary on a common refinement and $\|H^{n+1}-H^n\|_{L^2(\mathrm dt\otimes P)}\le2^{-2(n+1)}+2^{-2n}\le2^{1-2n}$; applying step 1.2 to $J=H^{n+1}-H^n$ gives $E a_n^2\le4\bigl(2^{1-2n}\bigr)^2=2^{4-4n}$ for $a_n:=\sup_{t\le T}|X^{n+1}_t-X^n_t|$. [F2, step 1.1, step 1.2]
 
-3.1 Consequently $E\sum_{n\ge1}2^na_n^2=\sum_{n\ge1}2^nEa_n^2\le\sum_{n\ge1}2^{4-3n}<\infty$ by monotone convergence for the nonnegative series, so $\sum_n2^na_n^2<\infty$ almost surely; the Cauchy--Schwarz inequality $\sum_na_n=\sum_n(2^{n/2}a_n)2^{-n/2}\le\bigl(\sum_n2^na_n^2\bigr)^{1/2}\bigl(\sum_n2^{-n}\bigr)^{1/2}$ then gives $\sum_na_n<\infty$ almost surely, on an event $A_T$ of probability one. [F7, step 2.1]
+3.1 Consequently $E\sum_{n\ge1}2^na_n^2=\sum_{n\ge1}2^nEa_n^2\le\sum_{n\ge1}2^{4-3n}<\infty$ by monotone convergence for the nonnegative series [F4], so $\sum_n2^na_n^2<\infty$ almost surely; the Cauchy--Schwarz inequality $\sum_na_n=\sum_n(2^{n/2}a_n)2^{-n/2}\le\bigl(\sum_n2^na_n^2\bigr)^{1/2}\bigl(\sum_n2^{-n}\bigr)^{1/2}$ then gives $\sum_na_n<\infty$ almost surely, on an event $A_T$ of probability one. [F4, step 2.1]
 
 4.1 On $A_T$ the sequence $X^n$ converges uniformly on $[0,T]$ to a limit; define $M^{(T)}_t:=\limsup_nX^n_t$ for $t\in[0,T]$, which is $\mathcal F_t$-measurable as a limit superior of $\mathcal F_t$-measurable random variables and satisfies $M^{(T)}_t=\lim_nX^n_t$ almost surely for every $t$; on $A_T$ the paths of $M^{(T)}$ are continuous, being uniform limits of continuous paths. [F2, step 3.1]
 

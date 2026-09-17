@@ -4,7 +4,7 @@ kind: counterexample
 title: Zero Euler class does not in general imply a nowhere-zero section
 status: draft
 origin: pipeline
-deps: ["thm-oriented-clutching-classifies-oriented-bundles-over-spheres", "ex-su-two-to-so-three-as-a-covering-homomorphism", "thm-homotopy-lifting-for-covering-maps", "thm-covering-space-lifting-criterion", "cor-real-line-is-universal-cover-of-circle", "thm-based-sphere-maps-are-classified-by-geometric-degree", "cor-homology-of-spheres", "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology", "cor-short-exact-sequences-of-vector-bundles-split-over-the-base", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
+deps: ["thm-oriented-clutching-classifies-oriented-bundles-over-spheres", "lem-pi-three-so-three-generated-by-the-quaternion-double-cover", "thm-homotopy-lifting-for-covering-maps", "thm-covering-space-lifting-criterion", "cor-real-line-is-universal-cover-of-circle", "thm-based-sphere-maps-are-classified-by-geometric-degree", "cor-homology-of-spheres", "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology", "cor-short-exact-sequences-of-vector-bundles-split-over-the-base", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-axiom-of-choice"]
 proof_strategy: contradiction
 provenance:
   statement: literature-derived
@@ -28,11 +28,11 @@ class vanishes and which admits no nowhere-zero section.
 
 ## Facts & Assumptions
 
-**Given:** AC, the sphere $S^4$ with its standard structure, and the covering homomorphism $\rho:SU(2)\to SO(3)$.
+**Given:** AC, the sphere $S^4$ with its standard structure, and the covering homomorphism $\rho:S^3\to SO(3)$.
 
 [F1] For $n\geq1$ and $k\geq1$, orientation-preserving isomorphism classes of oriented rank-$n$ real bundles over $S^k$ correspond bijectively to $[S^{k-1},\operatorname{SO}(n)]$ by clutching; the trivial bundle corresponds to the class of a constant map ([[thm-oriented-clutching-classifies-oriented-bundles-over-spheres]]).
 
-[F2] Conjugation identifies $SU(2)$ with the unit quaternions and defines a surjective two-sheeted covering homomorphism $\rho:SU(2)\to SO(3)$ with kernel $\{\pm1\}$; identifying $SU(2)$ with $S^3$ presents $\rho$ as a covering map $S^3\to SO(3)\cong\mathbb{RP}^3$ ([[ex-su-two-to-so-three-as-a-covering-homomorphism]]).
+[F2] Conjugation by the unit quaternions is a continuous surjective two-sheeted covering homomorphism $\rho:S^3\to SO(3)$ with kernel $\{\pm1\}$, where $S^3$ is the group of unit quaternions and $\rho(q)(v)=qvq^{-1}$ ([[lem-pi-three-so-three-generated-by-the-quaternion-double-cover]]).
 
 [F3] A homotopy into the base of a covering lifts uniquely through the covering once an initial lift is prescribed ([[thm-homotopy-lifting-for-covering-maps]]).
 

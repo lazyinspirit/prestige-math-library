@@ -78,13 +78,19 @@ manifold modelled on $F$, and let $f : M \to N$ be a map.
   different Banach spaces are compared by maps whose coordinate
   representatives map open subsets of one model space into the other.
 
-- **Open sets are the basic examples.** An open subset $W$ of a Banach space
-  $E$ is a $C^\infty$ Banach manifold modelled on $E$ with the single chart
-  $(W,\mathrm{id}_W)$, and a map between open sets is of class $C^k$ as a map of
-  manifolds exactly when it is of class $C^k$ in the sense of
-  [[def-c-k-map-between-banach-spaces]]. All the local theorems of this page
-  are statements about such open sets, transported to manifolds exactly through
-  charts.
+- **Open sets are the basic examples, when the model space is second
+  countable.** If $E$ is second countable, then an open subset $W$ of $E$ is a
+  $C^\infty$ Banach manifold modelled on $E$ with the single chart
+  $(W,\mathrm{id}_W)$: a basis of $E$ restricts to a basis of the subspace $W$,
+  and $W$ is Hausdorff because $E$ is. The hypothesis cannot be dropped: for
+  $E=\ell^\infty$ and $W=E$ the identity chart covers $E$, but $E$ is not
+  second countable — the uncountably many $0$-$1$ sequences are pairwise at
+  distance $1$, so any dense subset is uncountable and $E$ is not separable,
+  hence not second countable. A map between open subsets of a second countable
+  $E$ is of class $C^k$ as a map of manifolds exactly when it is of class $C^k$
+  in the sense of [[def-c-k-map-between-banach-spaces]]. All the local theorems
+  of this page are statements about such open sets, transported to manifolds
+  exactly through charts.
 
 - **The Hausdorff and countability hypotheses are part of the definition.** They
   are the standard hypotheses of the global theory: the countable base is what

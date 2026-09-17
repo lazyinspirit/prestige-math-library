@@ -4,7 +4,7 @@ kind: theorem
 title: "Ito isometry and linearity in predictable L2"
 status: draft
 origin: pipeline
-deps: [lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, lem-cross-ito-isometry, def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-riesz-fischer-completeness-of-l-p, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [lem-general-ito-integral-is-independent-of-the-approximating-sequence-and-ae-representative, lem-cross-ito-isometry, def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-continuous-time-adapted-process-and-martingale, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-riesz-fischer-completeness-of-l-p, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -47,7 +47,7 @@ $H\mapsto\int_0^TH\,dB$ is injective up to the $(\mathrm dt\otimes P)$-class.
 
 [F5] The algebraic identities $(X+Y)^2-(X-Y)^2=4XY$ and $X^2-Y^2=(X-Y)(X+Y)$ hold for real random variables, and $L^2(P)$ is a real vector space of classes. [[def-conditional-expectation-as-an-ae-class]]
 
-[F6] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Proof
 

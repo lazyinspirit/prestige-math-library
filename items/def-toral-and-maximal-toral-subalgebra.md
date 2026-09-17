@@ -21,13 +21,17 @@ landmark: false
 
 Let $\mathfrak g$ be a complex Lie algebra. A Lie subalgebra $\mathfrak
 t\subseteq\mathfrak g$ ([[def-lie-subalgebra-ideal-and-center]]) is
-**toral** if it is abelian and every endomorphism
-$\operatorname{ad}_x|_{\mathfrak t}$ of $\mathfrak t$ is semisimple in the
-sense of [[def-semisimple-and-nilpotent-endomorphisms]]
+**toral** if it is abelian and $\operatorname{ad}_x$ is a semisimple
+endomorphism of $\mathfrak g$ for every $x\in\mathfrak t$, semisimplicity
+being understood in the sense of
+[[def-semisimple-and-nilpotent-endomorphisms]]
 ([[def-derivation-of-a-lie-algebra]] supplies the notation
-$\operatorname{ad}_x(y)=[x,y]$). Equivalently, $\mathfrak t$ is abelian and
-$\operatorname{ad}_x$ is a semisimple endomorphism of $\mathfrak g$ for every
-$x\in\mathfrak t$.
+$\operatorname{ad}_x(y)=[x,y]$). Because $\mathfrak t$ is abelian,
+$\operatorname{ad}_x|_{\mathfrak t}$ is the zero endomorphism of
+$\mathfrak t$ and is therefore semisimple automatically: the requirement
+must be placed on $\mathfrak g$ itself, and requiring only that
+$\operatorname{ad}_x|_{\mathfrak t}$ be semisimple would merely repeat
+abelianness.
 
 The coordinates on $\mathfrak g$ are irrelevant to this notion: the choice of
 an algebraic closure in [[def-semisimple-and-nilpotent-endomorphisms]] makes

@@ -43,7 +43,7 @@ $u_n = 0$ for all $n \ge k$ and both sides equal $0$.
 
 [L3] For a sequence $(x_k)$ of reals the limit superior and limit inferior are elements of $\overline{\mathbb R}$ with $\liminf_k x_k \le \limsup_k x_k$, and $(x_k)$ converges to $L \in \mathbb R$ exactly when $\liminf_k x_k = \limsup_k x_k = L$ ([[def-limsup-liminf]], [[thm-convergence-iff-limsup-equals-liminf]]).
 
-[L4] If $x_k \le y_k$ eventually, then $\limsup_k x_k \le \limsup_k y_k$ ([[lem-limsup-monotone-comparison]]).
+[L4] If $x_k \le y_k$ eventually, then $\limsup_k x_k \le \limsup_k y_k$ and $\liminf_k x_k \le \liminf_k y_k$ ([[lem-limsup-monotone-comparison]]).
 
 [L5] For every real $c > 0$ the sequence $c^{1/n}$ converges to $1$ ([[lem-nth-root-of-constant-tends-to-one]]).
 
@@ -59,11 +59,11 @@ $u_n = 0$ for all $n \ge k$ and both sides equal $0$.
 
 2.1 Suppose $u_k = 0$ for some $k$. Then $u_n^{1/n} = 0$ for all $n \ge k$ by [step 1.2] and [L1], and $L = 0$ because the term $u_k^{1/k} = 0$ occurs in the set whose infimum is $L$; hence $u_n^{1/n} \to 0 = L$. [step 1.2, step 1.1, L1, L3]
 
-2.2 With $t = u_k^{1/k} > 0$ as in [step 1.3] the bound $u_k^q \le t^n\,t^{-k}$ holds for $n = qk + r \ge k$: indeed $u_k^q = (t^k)^q = t^{kq} = t^{n-r}$ by the integer index laws, and the correction factor satisfies $t^{-r} \le t^{-k}$ when $t \le 1$ and $t^{-r} \le 1 \le t^{-k}$ when $t \ge 1$, so in both cases $t^{n-r} = t^n\,t^{-r} \le t^n\,t^{-k}$. [L1, L2, algebra]
+2.2 With $t = u_k^{1/k} > 0$ as in [step 1.3] the bound $u_k^q \le t^n\,B_k$ holds for $n = qk + r \ge k$ and the constant $B_k := \max(1, t^{-k})$: indeed $u_k^q = (t^k)^q = t^{kq} = t^{n-r}$ by the integer index laws, and the correction factor satisfies $t^{-r} \le t^{-k} \le B_k$ when $t \le 1$ (then $r < k$ makes $t^{-r} \le t^{-k}$) and $t^{-r} \le 1 \le B_k$ when $t \ge 1$, so in both cases $t^{n-r} = t^n\,t^{-r} \le t^n\,B_k$. [L1, L2, algebra]
 
-2.3 On the other hand every term satisfies $u_n^{1/n} \ge L$ by [step 1.1], so the comparison of [L4] with the constant sequence $L$ gives $\liminf_n u_n^{1/n} \ge L$. [step 1.1, L4]
+2.3 On the other hand every term satisfies $u_n^{1/n} \ge L$ by [step 1.1], so the liminf clause of [L4] applied to the constant sequence $L$ gives $L = \liminf_n L \le \liminf_n u_n^{1/n}$, that is $\liminf_n u_n^{1/n} \ge L$. [step 1.1, L4]
 
-3.1 Define the positive constant $B_k := t^{-k}C_k$. Combining [step 1.3] and [step 2.2] gives $u_n \le t^nB_k$, hence $u_n^{1/n} \le t\,B_k^{1/n}$ for every $n \ge k$, taking $n$-th roots by [L2]. [step 1.3, step 2.2, L1, L2]
+3.1 Define the positive constant $B_k := \max(1,t^{-k})\,C_k$. Combining [step 1.3] and [step 2.2] gives $u_n \le t^nB_k$, hence $u_n^{1/n} \le t\,B_k^{1/n}$ for every $n \ge k$, taking $n$-th roots by [L2]. [step 1.3, step 2.2, L1, L2]
 
 4.1 Since $B_k^{1/n} \to 1$ by [L5], for every real $\varepsilon > 0$ the inequality $B_k^{1/n} \le 1+\varepsilon$ holds eventually; hence $u_n^{1/n} \le t(1+\varepsilon)$ eventually, and [L4] gives $\limsup_n u_n^{1/n} \le t(1+\varepsilon)$. [step 3.1, L4, L5, algebra]
 

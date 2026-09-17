@@ -6,7 +6,6 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, def-banach-algebra-valued-contour-integral, def-complex-chain-and-cycle, def-null-homologous-and-homologous-complex-cycles, lem-admissible-cycle-around-a-compact-plane-set, thm-spectrum-is-nonempty-compact-and-norm-bounded, def-axiom-of-choice]
-forward_refs: [ex-bounded-operators-form-a-noncommutative-banach-algebra]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -65,7 +64,7 @@ admissible cycle.
   $T \in \mathcal B(X)$ the definition applies with $A = \mathcal B(X)$ and
   gives $f(T) = \frac{1}{2\pi i}\int_\Gamma f(z)(z1-T)^{-1}dz \in
   \mathcal B(X)$, the Dunford integral of the resolvent. The spectrum is taken
-  in $\mathcal B(X)$ ([[ex-bounded-operators-form-a-noncommutative-banach-algebra]]).
+  in $\mathcal B(X)$ (`ex-bounded-operators-form-a-noncommutative-banach-algebra`).
 
 - **What is *not* part of the definition.** The definition does not assert that
   $f \mapsto f(a)$ is multiplicative, that it preserves polynomials, or that
@@ -79,3 +78,5 @@ admissible cycle.
   the value, and shrinking it is allowed as long as it still contains the
   spectrum and the cycle lies inside it. Both statements follow from
   [[lem-holomorphic-functional-calculus-is-contour-independent]].
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

@@ -42,11 +42,11 @@ $$K^0(S_g)\cong\mathbb Z^2,\qquad K^1(S_g)\cong\mathbb Z^{2g}.$$
 
 1.1 By [A2] the page $E_2$ has nonzero entries $H^0,H^1,H^2$ in each even coefficient row, all free abelian, and vanishes in odd coefficient rows. [A1, A2]
 
-2.1 Every differential $d_r$ with $r\geq2$ maps an even coefficient row to the odd row $q-r+1$ when $r$ is odd, and to a column beyond $p=2$ when $r$ is even; since the odd coefficient rows and the columns above the surface dimension vanish, all differentials $d_r$ for $r\geq2$ vanish. The first differential is the cellular coboundary, so $E_2$ is already the cohomology page by construction. [A1, A2, step 1.1]
+2.1 Every differential $d_r$ with $r\geq2$ has target in the odd coefficient row $q-r+1$ when $r$ is even, and in the column $p+r>2$ when $r$ is odd; since the odd coefficient rows and the columns above the surface dimension $2$ vanish, all differentials $d_r$ for $r\geq2$ vanish. The first differential is the cellular coboundary, so $E_2$ is already the cohomology page by construction. [A1, A2, step 1.1]
 
-3.1 The stable page has graded pieces $\mathbb Z$ in total degree zero for the rows contributing $H^0$ and $H^2$, and $\mathbb Z^{2g}$ in total degree one from $H^1$, so the associated graded of $K^0$ is $\mathbb Z^{2g+2}$ and that of $K^1$ is $\mathbb Z^{2g}$. [A1, A2, step 2.1]
+3.1 The stable page has graded pieces $\mathbb Z$ in total degree zero for the rows contributing $H^0$ and $H^2$, and $\mathbb Z^{2g}$ in total degree one from $H^1$, so the associated graded of $K^0$ is $\mathbb Z^2$ and that of $K^1$ is $\mathbb Z^{2g}$. [A1, A2, step 2.1]
 
-4.1 Since all graded pieces are free, the finite filtrations split by [A3], so $K^0(S_g)\cong\mathbb Z^{2g+2}=\mathbb Z^2\oplus\widetilde K^0(S_g)$ with $\widetilde K^0(S_g)\cong\mathbb Z^{2g}$ and $K^1(S_g)\cong\mathbb Z^{2g}$; the extension data are not inferred from the collapse but from the splitting of free extensions. [A3, A4, step 3.1]
+4.1 Since all graded pieces are free, the finite filtrations split by [A3], so $K^0(S_g)\cong\mathbb Z^2\cong\mathbb Z\oplus\widetilde K^0(S_g)$ with $\widetilde K^0(S_g)\cong\mathbb Z$ and $K^1(S_g)\cong\mathbb Z^{2g}$; the extension data are not inferred from the collapse but from the splitting of free extensions. [A3, A4, step 3.1]
 
 5.1 This verifies the displayed groups $K^0\cong\mathbb Z^2$ and $K^1\cong\mathbb Z^{2g}$. [step 4.1] ∎
 

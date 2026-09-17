@@ -33,11 +33,11 @@ Q-set exists.
 
 [F2] $\mathrm{MA}$ is the scheme $\mathrm{MA}(\kappa)$ for every infinite $\kappa < \mathfrak c$ ([[def-martins-axiom]]).
 
-[F3] Solovay's almost-disjoint extension lemma: if $\mathcal B \subseteq \mathcal P(\omega)$ is almost disjoint and $|\mathcal B| < \mathfrak c$, then every $A \subseteq \mathcal B$ is extended by a $d \subseteq \omega$ infinite on $A$ and finite on $\mathcal B \setminus A$ ([[lem-solovay-almost-disjoint-extension-under-ma]]).
+[F3] Solovay's almost-disjoint extension lemma: if $\mathcal B \subseteq \mathcal P(\omega)$ is almost disjoint and $|\mathcal B| < \mathfrak c$, then every $A \subseteq \mathcal B$ all of whose members are infinite is extended by a $d \subseteq \omega$ that is infinite on $A$ and finite on $\mathcal B \setminus A$ ([[lem-solovay-almost-disjoint-extension-under-ma]]).
 
-[L1] $\mathbb R$ has a countable base of dyadic intervals: enumerating the intervals $(k/2^n,(k+1)/2^n)$, $k \in \mathbb Z$, $n \in \mathbb N$, gives $W_i$ with $i \in \omega$; a set is relatively $G_\delta$ in $E$ exactly as in the definition of Q-set ([[def-q-sets-and-heath-moore-space-interface]]).
+[L1] $\mathbb R$ has a countable base of dyadic intervals: enumerating the intervals $W(k,n) := (k/2^n - 2^{-n-1},\, k/2^n + 2^{-n-1})$, $k \in \mathbb Z$, $n \in \mathbb N$, gives $W_i$ with $i \in \omega$. Every real lies in infinitely many of them: for each $n$ either $x$ is itself a dyadic grid point of scale $2^{-n}$, hence the centre of one of the intervals and a member of it, or the nearest grid point $k/2^n$ has $|x - k/2^n| < 2^{-n-1}$; and a set is relatively $G_\delta$ in $E$ exactly as in the definition of Q-set ([[def-q-sets-and-heath-moore-space-interface]]).
 
-[L2] For distinct $x,y \in \mathbb R$ only finitely many dyadic intervals of a fixed scale $2^{-n}$ contain both, and only finitely many scales $n$ satisfy $2^{-n} > |x-y|$; hence $\{i : x,y \in W_i\}$ is finite ([[def-natural-numbers]], [[def-function]]).
+[L2] For distinct $x,y \in \mathbb R$ an interval of scale $n$ containing both forces $|x-y| < 2^{-n}$ because its radius is $2^{-n-1}$, and at most one interval of a fixed scale contains both, since two distinct centres are at distance at least $2^{-n}$; only the finitely many scales with $2^{-n} > |x-y|$ can contribute, so $\{i : x,y \in W_i\}$ is finite ([[def-natural-numbers]], [[def-function]]).
 
 ## Proof
 
@@ -47,7 +47,7 @@ Q-set exists.
 
 2.1 $\mathcal B := \{s(x) : x \in E\}$ satisfies $|\mathcal B| \le \omega_1 < \mathfrak c$ by [F1], and $|s(x) \cap s(y)| < \omega$ for distinct $x,y \in E$ by [L2]. [step 1.1, F1, L2]
 
-3.1 Let $X \subseteq E$. Applying [F3] to $A := \{s(x) : x \in X\} \subseteq \mathcal B$ gives $d \subseteq \omega$ with $|s(x) \cap d| = \omega$ for $x \in X$ and $|s(z) \cap d| < \omega$ for $z \in E \setminus X$. [step 2.1, F3, F2]
+3.1 Let $X \subseteq E$. Each $s(x)$ is infinite by [L1], so [F3] applies to $A := \{s(x) : x \in X\} \subseteq \mathcal B$ and gives $d \subseteq \omega$ with $|s(x) \cap d| = \omega$ for $x \in X$ and $|s(z) \cap d| < \omega$ for $z \in E \setminus X$. [step 2.1, F3, F2]
 
 4.1 If $d$ is infinite, enumerate it increasingly as $d = \{p(1) < p(2) < \dots\}$; if $d$ is finite then $X = \varnothing$ by step 3.1, and $X = E \cap \varnothing$ is relatively $G_\delta$ trivially. In the infinite case, $X = E \cap \bigcap_{n} \bigcup_{k \ge n} W_{p(k)}$: for $x \in X$ the set $\{k : x \in W_{p(k)}\}$ is infinite by step 3.1, so $x$ lies in every tail union; conversely if $x \in E$ lies in every tail union then $\{k : x \in W_{p(k)}\}$ is infinite, so $|s(x) \cap d| = \omega$, and step 3.1 excludes $x \in E \setminus X$. [step 3.1, L1]
 

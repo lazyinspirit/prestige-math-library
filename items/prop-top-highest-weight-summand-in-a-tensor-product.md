@@ -60,4 +60,4 @@ highest weight strictly below $\lambda+\mu$ in the root order
 
 4.1 The $(\lambda+\mu)$-weight space of $U$ is one-dimensional: it contains the nonzero vector $v_\lambda\otimes v_\mu$ and lies in the one-dimensional space of step 2.1; hence $U$ has exactly one summand isomorphic to $L(\lambda+\mu)$ and every other summand of $U$ has strictly smaller highest weight; but $v_\lambda\otimes v_\mu$ lies in that $L(\lambda+\mu)$ summand, which is therefore stable under the generation by $v_\lambda\otimes v_\mu$, so $U$ equals that summand and is isomorphic to $V(\lambda+\mu)$. [step 2.1, step 3.1, step 1.3]
 
-5.1 By steps 3.1 and 5.1 the tensor product contains $V(\lambda+\mu)$ with multiplicity one and every other irreducible summand has highest weight below $\lambda+\mu$, as asserted. [step 3.1, step 4.1] ∎
+5.1 By steps 3.1 and 4.1 the tensor product contains $V(\lambda+\mu)$ with multiplicity one and every other irreducible summand has highest weight below $\lambda+\mu$, as asserted. [step 3.1, step 4.1] ∎

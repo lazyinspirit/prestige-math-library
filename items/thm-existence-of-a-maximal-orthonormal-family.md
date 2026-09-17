@@ -5,7 +5,7 @@ title: Existence of a maximal orthonormal family, and maximality as completeness
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-zorn, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, def-real-and-complex-inner-product-space]
+deps: [thm-zorn, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, thm-cauchy-schwarz-in-an-inner-product-space, def-real-and-complex-inner-product-space]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -35,8 +35,7 @@ orthonormal as an indexed family when indexed by itself
 
 **The hypothesis is full AC, and it is used exactly once**, through Zorn's
 lemma. The Parseval supplier used in the second claim needs only
-$\mathrm{AC}_\omega$, which AC supplies by
-[[thm-choice-implies-dependent-implies-countable-choice]].
+$\mathrm{AC}_\omega$, which AC supplies.
 
 ## Facts & Assumptions
 
@@ -44,7 +43,7 @@ $\mathrm{AC}_\omega$, which AC supplies by
 
 [A2] A set $S$ is orthonormal when $\|s\|=1$ for all $s\in S$ and $\langle s,t\rangle=0$ for distinct $s,t\in S$; the union of a chain of orthonormal sets is orthonormal, because two elements of the union lie in members of the chain, one of which contains both ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).
 
-[A3] For an orthonormal family in a Hilbert space, completeness, the vanishing of the orthogonal complement of its span, and Parseval's identity are equivalent, and this uses Countable Choice, hence AC ([[thm-parseval-equivalences-for-a-complete-orthonormal-family]], [[thm-choice-implies-dependent-implies-countable-choice]]).
+[A3] For an orthonormal family in a Hilbert space, completeness, the vanishing of the orthogonal complement of its span, and Parseval's identity are equivalent, and this uses Countable Choice, hence AC ([[thm-parseval-equivalences-for-a-complete-orthonormal-family]]).
 
 [A4] $S^\perp=\{v : \langle v,s\rangle=0\text{ for all }s\in S\}$ is a linear subspace, and $z\in S^\perp$ with $z\ne0$ normalises to $z/\|z\|$, a unit vector orthogonal to every element of $S$ ([[def-orthogonality-and-orthogonal-complement]], [[def-real-and-complex-inner-product-space]]).
 

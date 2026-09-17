@@ -53,7 +53,7 @@ $\widehat p(j)=c_j$, and $\widehat p(j)=0$ for $j\notin F$.
 
 1.1 For $k,l\in\mathbb Z$ put $m:=k-l$; then $e_k\overline{e_l}=e_m$, and the corresponding $1$-periodic function on $\mathbb R$ is $g_m(t)=\cos(2\pi mt)+i\sin(2\pi mt)$. [A1, A5]
 
-2.1 The torus integral of $e_k\overline{e_l}$ is the Riemann integral of $g_m$ over $[0,1]$: for $m=0$ the integrand is $1$ and the integral is $1=2\pi m$'s analogue, while for $m\ne0$ the antiderivatives $t\mapsto\sin(2\pi mt)/(2\pi m)$ and $t\mapsto-\cos(2\pi mt)/(2\pi m)$ vanish at both endpoints, because $\sin(2\pi m)=\sin 0=0$ and $\cos(2\pi m)=\cos 0=1$. Hence the integral is $1$ when $m=0$ and $(0-0)+i(0-0)=0$ when $m\ne0$. [step 1.1, A2, A3, A4, algebra]
+2.1 The torus integral of $e_k\overline{e_l}$ is the Riemann integral of $g_m$ over $[0,1]$: for $m=0$ the integrand is $1$ and the integral is $1$, while for $m\ne0$ the real and imaginary parts have the primitives $t\mapsto\sin(2\pi mt)/(2\pi m)$ and $t\mapsto-\cos(2\pi mt)/(2\pi m)$, whose values at $t=0$ and $t=1$ agree because $\sin(2\pi m)=\sin 0=0$ and $\cos(2\pi m)=\cos 0=1$, so each of the two definite integrals vanishes. Hence the integral is $1$ when $m=0$ and $0$ when $m\ne0$. [step 1.1, A2, A3, A4, algebra]
 
 3.1 Therefore $\langle e_k,e_l\rangle=1$ for $k=l$ and $0$ for $k\ne l$, so the characters are orthonormal. [step 2.1, A5]
 

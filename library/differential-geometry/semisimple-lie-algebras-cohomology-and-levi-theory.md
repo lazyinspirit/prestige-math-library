@@ -49,7 +49,8 @@ items:
   - fs-second-cohomology-classifies-all-nonabelian-extensions
   - fs-levi-subalgebras-are-literally-unique
   - fs-isomorphic-lie-algebras-determine-isomorphic-connected-lie-groups
-examples: [ex-classical-simple-lie-algebras-and-their-killing-forms,
+examples: [ex-killing-form-of-sl-two,
+           ex-classical-simple-lie-algebras-and-their-killing-forms,
            ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups]
 ---
 

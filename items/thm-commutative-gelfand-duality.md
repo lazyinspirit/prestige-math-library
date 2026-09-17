@@ -5,7 +5,7 @@ title: Commutative Gelfand duality
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-commutative-gelfand-naimark, lem-characters-of-continuous-functions-are-evaluations, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice, def-c-star-algebra, thm-maximal-ideal-space-is-compact-hausdorff]
+deps: [thm-commutative-gelfand-naimark, lem-characters-of-continuous-functions-are-evaluations, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice, def-c-star-algebra, thm-maximal-ideal-space-is-compact-hausdorff]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -51,7 +51,7 @@ and the unique arrows match.
 
 [L1] For a nonzero unital commutative C\*-algebra $A$, the Gelfand transform $\Gamma_A : A \to C(\Delta(A))$ is an isometric unital $\ast$-isomorphism onto $C(\Delta(A))$ ([[thm-commutative-gelfand-naimark]], [[def-axiom-of-choice]]).
 
-[L2] For a nonempty compact Hausdorff space $X$, the evaluation map $\eta_X : X \to \Delta(C(X))$ is a homeomorphism, under Dependent Choice, which follows from the Axiom of Choice ([[lem-characters-of-continuous-functions-are-evaluations]], [[thm-choice-implies-dependent-implies-countable-choice]]).
+[L2] For a nonempty compact Hausdorff space $X$, the evaluation map $\eta_X : X \to \Delta(C(X))$ is a homeomorphism, under Dependent Choice, which follows from the Axiom of Choice ([[lem-characters-of-continuous-functions-are-evaluations]]).
 
 [L3] In a unital commutative C\*-algebra a $\ast$-homomorphism between unital algebras is unital by hypothesis here; the transpose $\varphi^*(\psi) = \psi \circ \varphi$ of a unital $\ast$-homomorphism $\varphi$ is nonzero because $\psi(\varphi(1_A)) = \psi(1_B) = 1$, and it is a character of the domain; likewise $g^*(f) = f \circ g$ is a unital $\ast$-homomorphism of unital commutative C\*-algebras.
 

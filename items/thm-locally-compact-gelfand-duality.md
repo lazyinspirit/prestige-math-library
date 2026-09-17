@@ -5,7 +5,7 @@ title: Locally compact Gelfand duality
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-c-star-algebra, def-approximate-unit-and-proper-c-star-morphism, thm-nonunital-commutative-gelfand-naimark, thm-every-commutative-c-star-algebra-has-an-approximate-unit, thm-commutative-gelfand-duality, thm-minimal-c-star-unitization, thm-character-space-of-the-unitization-is-one-point-compactification, thm-characters-on-a-unital-banach-algebra-are-continuous, def-compact-support-c-c-and-c-zero-on-an-lch-space, thm-one-point-compactification-properties, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-c-star-algebra, def-approximate-unit-and-proper-c-star-morphism, thm-nonunital-commutative-gelfand-naimark, thm-every-commutative-c-star-algebra-has-an-approximate-unit, thm-commutative-gelfand-duality, thm-minimal-c-star-unitization, thm-character-space-of-the-unitization-is-one-point-compactification, thm-characters-on-a-unital-banach-algebra-are-continuous, def-compact-support-c-c-and-c-zero-on-an-lch-space, thm-one-point-compactification-properties, lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -51,7 +51,7 @@ unit level, so the two statements agree on compact spaces.
 
 [L2] $\Gamma : A \to C_0(\Delta(A))$ is an isometric $\ast$-isomorphism and every commutative C\*-algebra has an approximate unit of positive contractions; for $A = C_0(X)$ the standard approximate unit is the net of all $e \in C_c(X)$ with $0 \le e \le 1$ ([[thm-nonunital-commutative-gelfand-naimark]], [[thm-every-commutative-c-star-algebra-has-an-approximate-unit]], [[def-compact-support-c-c-and-c-zero-on-an-lch-space]]).
 
-[L3] For a proper continuous $g : Y \to X$, the preimage of a compact set is compact; for a compact $K \subseteq X$ and a compactly supported function $u \in C_c(X)$ with $\mathbf 1_{g[K]} \le u \le 1$ — which exists by the cutoff lemma under Dependent Choice, derived from the Axiom of Choice — one has $u(g(y)) = 1$ for $y \in K$ ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]], [[def-compact-support-c-c-and-c-zero-on-an-lch-space]], [[thm-choice-implies-dependent-implies-countable-choice]]).
+[L3] For a proper continuous $g : Y \to X$, the preimage of a compact set is compact; for a compact $K \subseteq X$ and a compactly supported function $u \in C_c(X)$ with $\mathbf 1_{g[K]} \le u \le 1$ — which exists by the cutoff lemma under Dependent Choice, derived from the Axiom of Choice — one has $u(g(y)) = 1$ for $y \in K$ ([[lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set]], [[def-compact-support-c-c-and-c-zero-on-an-lch-space]]).
 
 [L4] For a nonzero genuinely nonunital commutative C\*-algebra $A$, the unitization $A^+$ is a unital commutative C\*-algebra with $\Delta(A^+) = \Delta(A) \cup \{\chi_\infty\}$ the one-point compactification; a unital $\ast$-homomorphism $\varphi^+ : A^+ \to B^+$ is obtained from any bounded star-homomorphism $\varphi : A \to B$ by $\varphi^+(a,\lambda) := (\varphi(a),\lambda)$, and its transpose is continuous and carries $\chi_\infty$ to $\chi_\infty$ ([[thm-minimal-c-star-unitization]], [[thm-character-space-of-the-unitization-is-one-point-compactification]], [[def-axiom-of-choice]]).
 

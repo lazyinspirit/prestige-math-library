@@ -45,6 +45,6 @@ the set of even naturals.
 
 1.2 $\mathbb{N} \setminus E$, the set of odd naturals, is infinite: $k \mapsto 2k+1$ is injective from $\mathbb{N}$ into it, so it is not finite. [given]
 
-2.1 $E$ is not closed: if $E$ were closed then its complement $\mathbb{N} \setminus E$ would be open, hence by [F1] either empty or cofinite; it is not empty because $1 \setminus 0 = 1 \in E$? — rather, $0 \in E$ so the complement is nonempty, and it is infinite by step 1.2, so it is neither empty nor cofinite, a contradiction. [step 1.2, F1]
+2.1 $E$ is not closed: if $E$ were closed then its complement $\mathbb{N} \setminus E$ would be open, hence by [F1] either empty or cofinite; it is nonempty because $0 \in E$ is even and so $0 \notin \mathbb{N} \setminus E$, and it is infinite by step 1.2, so it is neither empty nor cofinite, a contradiction. [step 1.2, F1]
 
 3.1 Thus an infinite subset of an infinite cofinite space with infinite complement need not be closed, which refutes the displayed claim; this is exactly the closedness obligation that the cofinite presentation of $A \cup \{\infty\}$ fails, and which the isolated-point repair of [F2] meets by making $\{\infty\}$ open. [step 2.1, F1, F2] ∎

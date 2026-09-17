@@ -4,7 +4,7 @@ kind: lemma
 title: "The general Ito integral is well defined"
 status: draft
 origin: pipeline
-deps: [def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-ito-integral-for-square-integrable-predictable-processes, thm-ito-isometry-for-elementary-integrands, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, lem-elementary-ito-integral-is-independent-of-the-step-representation, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -42,7 +42,7 @@ $(\mathrm dt\otimes P)$-class alone.
 
 [F4] The elementary integral of the difference is the difference of the elementary integrals on a common refinement, and the class of a bounded elementary integrand depends only on its $(\mathrm dt\otimes P)$-class. [[def-ito-integral-of-an-elementary-predictable-process]] [[lem-elementary-ito-integral-is-independent-of-the-step-representation]]
 
-[F5] AC is declared for the ambient interfaces; the argument below only uses the two given sequences and the metric algebra of $L^2$. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F5] AC is declared for the ambient interfaces; the argument below only uses the two given sequences and the metric algebra of $L^2$. [[def-axiom-of-choice]]
 
 ## Proof
 

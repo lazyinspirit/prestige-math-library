@@ -4,7 +4,7 @@ kind: lemma
 title: "A closed L2 subspace with trivial orthogonal complement fills L2"
 status: draft
 origin: pipeline
-deps: [thm-riesz-fischer-completeness-of-l-p, thm-parallelogram-law-in-l-two, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, cor-cauchy-schwarz-inequality-for-l-two, def-complete-metric-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-riesz-fischer-completeness-of-l-p, thm-parallelogram-law-in-l-two, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, cor-cauchy-schwarz-inequality-for-l-two, def-complete-metric-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -38,7 +38,7 @@ $V=L^2(\mu)$.
  
 [F3] **Inner product bounds.** $|\langle u,w\rangle|\le\|u\|_2\|w\|_2$ and the norm is induced by the inner product, $\|z\|_2^2=\langle z,z\rangle$; for a closed subspace the distance $d:=\inf_{v\in V}\|x-v\|_2$ is a nonnegative real number. [[cor-cauchy-schwarz-inequality-for-l-two]] [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
  
-[F4] **Countable choice for a minimizing sequence.** For each $n$ the set $\{v\in V:\|x-v\|_2^2<d^2+1/n\}$ is nonempty by definition of the infimum; AC provides a sequence $(v_n)$ with $\|x-v_n\|_2^2\le d^2+1/n$. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] **Countable choice for a minimizing sequence.** For each $n$ the set $\{v\in V:\|x-v\|_2^2<d^2+1/n\}$ is nonempty by definition of the infimum; AC provides a sequence $(v_n)$ with $\|x-v_n\|_2^2\le d^2+1/n$. [[def-axiom-of-choice]]
  
 [F5] **Linear structure.** $V$ is closed under finite linear combinations and under multiplication by real scalars; in the complex case also by $i$. [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
  

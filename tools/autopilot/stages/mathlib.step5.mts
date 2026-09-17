@@ -234,7 +234,10 @@ export function step5Stages(d: any) {
       plan: (ctx: any) => [{
         role: 'tool', label: 'step5-close', job: 'bookkeeping-mechanical', covers: ['all'],
         argv: ['node', 'tools/step5-close.mjs', 'close', '--run', ctx.run],
-        timeout: 900,
+        // The close tool re-runs the exact Step-5 routing check, which costs
+        // about ten minutes on this corpus; the older 900 s budget equalled
+        // the tool's internal cap and left no headroom for the other checks.
+        timeout: 1800,
       }],
       gatesWaived: 'The close tool reruns exact Step-5 routing, cross-edge, plan, and ledger checks before writing the immutable closure receipt; any nonzero check produces no successful result.',
     },

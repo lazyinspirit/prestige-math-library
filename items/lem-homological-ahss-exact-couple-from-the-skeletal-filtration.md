@@ -5,7 +5,7 @@ title: Homological AHSS exact couple from the skeletal filtration
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-reduced-generalized-homology-theory, def-coefficient-groups-of-a-generalized-homology-theory, def-exact-couple, prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, def-incidence-number-of-two-cw-cells, def-oriented-cellular-chain-group, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces, prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs]
+deps: [def-reduced-generalized-homology-theory, def-coefficient-groups-of-a-generalized-homology-theory, def-exact-couple, prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory, thm-cellular-boundary-is-the-incidence-degree-matrix, thm-cellular-homology-computes-singular-homology, def-incidence-number-of-two-cw-cells, def-oriented-cellular-chain-group, lem-cw-quotients-and-collapse-of-a-contractible-subcomplex, def-wedge-of-pointed-spaces, prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs, prop-relative-cw-inclusions-are-cofibrations, lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -37,7 +37,7 @@ incidence-degree matrix. In particular $E^2_{p,q}\cong H_p(X;h_q(*))$.
 
 [F1] A reduced generalized homology theory has based homotopy invariance, a long exact sequence of a pair, and for a finite wedge an isomorphism $\bigoplus_\alpha\widetilde h_n(S^p_\alpha)\cong\widetilde h_n(\bigvee_\alpha S^p_\alpha)$ ([[def-reduced-generalized-homology-theory]]).
 
-[F2] For a reduced ordinary theory and a CW pair $(X,A)$ one has $h_n(X,A)\cong\widetilde h_n(X/A)$ for $A\ne\varnothing$ and $h_n(X,\varnothing)=\widetilde h_n(X_+)$, compatibly with pair boundaries ([[prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs]]).
+[F2] For a reduced generalized homology theory define the pair groups of a CW pair $(X,A)$ by $h_n(X,A):=\widetilde h_n(C_i)$ for the based inclusion $i:A_+\to X_+$, and $h_n(X,\varnothing):=\widetilde h_n(X_+)$. For $A\ne\varnothing$ a CW subcomplex inclusion is a based cofibration and the collapse $C_i\to X/A$ is a based homotopy equivalence, so $h_n(X,A)\cong\widetilde h_n(X/A)$; the exact cofiber sequence of [F1] is then the pair long exact sequence with its natural boundary, natural in maps of pairs ([[def-reduced-generalized-homology-theory]], [[prop-relative-cw-inclusions-are-cofibrations]], [[lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient]]).
 
 [F3] For $p\geq1$ the quotient $X^p/X^{p-1}$ is the finite wedge of the $p$-spheres belonging to the $p$-cells, and $X^0$ is a finite discrete set ([[lem-cw-quotients-and-collapse-of-a-contractible-subcomplex]], [[def-wedge-of-pointed-spaces]]).
 
@@ -53,7 +53,7 @@ incidence-degree matrix. In particular $E^2_{p,q}\cong H_p(X;h_q(*))$.
 
 **Given:** A finite CW complex $X$ with chosen cells and orientations, a reduced generalized homology theory $\widetilde h$, and the groups and maps displayed in the statement.
 
-1.1 The exactness conditions of [[def-exact-couple]] hold with $r=1$: the image of $i_{p-1,q+1}$ equals the kernel of $j_{p,q}$ by exactness of the pair sequence of $(X^p,X^{p-1})$ at $h_{p+q}(X^p)$; the image of $j_{p,q}$ equals the kernel of $k_{p,q}$ by exactness at $E_{p,q}$; and the image of $k_{p+1,q}$ equals the kernel of $i_{p,q}$ by exactness of that same sequence at $h_{p+q-1}(X^{p-1})$. [F1, given]
+1.1 The exactness conditions of [[def-exact-couple]] hold with $r=1$: the image of $i_{p-1,q+1}$ equals the kernel of $j_{p,q}$ by exactness of the pair sequence of $(X^p,X^{p-1})$ at $h_{p+q}(X^p)$; the image of $j_{p,q}$ equals the kernel of $k_{p,q}$ by exactness of that same sequence at $E_{p,q}=h_{p+q}(X^p,X^{p-1})$; and the image of $k_{p+1,q}$ equals the kernel of $i_{p,q}$ by exactness of the pair sequence of $(X^{p+1},X^p)$ at $h_{p+q}(X^p)$. [F1, given]
 
 1.2 The wedge decomposition [F3] and the quotient identification of [F2] give $E_{p,q}\cong\widetilde h_{p+q}(\bigvee_{\alpha\in I_p}S^p_\alpha)$, and the wedge axiom [F1] followed by the suspension identification [F4] gives $\widetilde h_{p+q}(\bigvee_{\alpha\in I_p}S^p_\alpha)\cong\bigoplus_{\alpha\in I_p}h_q(*)$. [F1, F2, F3, F4]
 

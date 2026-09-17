@@ -1,0 +1,55 @@
+---
+id: def-borel-functional-calculus-for-a-bounded-normal-operator
+kind: definition
+title: Borel functional calculus for a bounded normal operator
+status: draft
+origin: pipeline
+pipeline_run: phase-2-remaining-27
+deps: [thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, def-measurable-function-between-measurable-spaces, def-projection-valued-measure, def-axiom-of-choice]
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Theo Bühler and Dietmar Salamon, Functional Analysis, Definition 5.75, printed pp.291–293"
+      url: "https://sci.mu.edu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+    - title: "Dana P. Williams, Lecture Notes on the Spectral Theorem, Theorem 5.6, pp.17–20"
+      url: "https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf"
+---
+
+## Definition
+
+Assume AC. Let $T$ be a bounded normal operator on a nonzero complex Hilbert
+space $H$ and let $E$ be its spectral projection valued measure on the Borel
+$\sigma$-algebra of $\sigma(T)$, the unique regular projection valued measure
+with $\int z\,dE(z)=T$
+([[thm-spectral-theorem-for-bounded-normal-operators-pvm-form]]). For a
+**bounded Borel function** $f:\sigma(T)\to\mathbb C$, that is a bounded
+$\Sigma$-measurable function on the Borel $\sigma$-algebra of $\sigma(T)$
+([[def-measurable-function-between-measurable-spaces]]), define the **Borel
+functional calculus** of $T$ at $f$ by
+
+$$f(T):=\Phi_E(f)=\int_{\sigma(T)}f\,dE,$$
+
+the bounded Borel integral of $f$ against $E$ from
+[[thm-bounded-borel-pvm-integral]]. The map $f\mapsto f(T)$ from bounded Borel
+functions on $\sigma(T)$ to $\mathcal B(H)$ is the **bounded Borel functional
+calculus** of $T$.
+
+**Well-definedness and consistency.** The operator $f(T)$ is well defined
+because the spectral projection valued measure $E$ of $T$ is unique: if $E'$
+were another regular projection valued measure with $\int z\,dE'=T$, then
+$E'=E$. The construction agrees with the continuous calculus on continuous
+functions, $\Phi_E(f)=f(T)$ for $f\in C(\sigma(T))$, by the displayed clause of
+the spectral theorem. It inherits the algebraic behaviour of the projection
+valued measure integral: $f(T)$ is complex-linear in $f$, unital with
+$\mathbf 1(T)=I$, multiplicative, star-preserving with
+$\overline f(T)=f(T)^*$, norm bounded by $\|f(T)\|\le\|f\|_\infty$, strongly
+continuous under bounded pointwise $E$-almost everywhere convergence, and every
+bounded operator commuting with $T$ and $T^*$ commutes with every $f(T)$
+([[thm-pvm-integral-is-a-star-homomorphism]]); these properties are stated and
+their consequences collected in
+[[thm-borel-functional-calculus-for-bounded-normal-operators]]. In particular
+$\mathbf 1_B(T)=E(B)$ for every Borel set $B\subseteq\sigma(T)$, and the norm of
+$f(T)$ is the $E$-essential supremum of $f$
+([[thm-bounded-borel-pvm-integral]]).

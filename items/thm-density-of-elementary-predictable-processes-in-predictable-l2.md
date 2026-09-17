@@ -4,7 +4,7 @@ kind: theorem
 title: "Density of elementary predictable processes in predictable L2"
 status: draft
 origin: pipeline
-deps: [def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-dynkin-pi-lambda, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-progressively-measurable-and-predictable-process, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-dynkin-pi-lambda, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -51,7 +51,7 @@ approximant.
 
 [F7] $\mu(\{0\}\times C)=0$ for every $C$: the section at $\omega$ is the singleton $\{0\}$, which is Lebesgue-null, so Tonelli gives $\mu(\{0\}\times C)=\int_C\!\!\int 1_{\{0\}}(s)\,ds\,dP=0$. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
 
-[F8] AC is declared for uniformity with the ambient probability interfaces; the density argument itself is choice-free, and the implication bridge records the inherited obligations. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F8] AC is declared for uniformity with the ambient probability interfaces; the density argument itself is choice-free, and the implication bridge records the inherited obligations. [[def-axiom-of-choice]]
 
 ## Proof
 
@@ -77,7 +77,7 @@ approximant.
 
 7.1 For a general real $H\in L^2(\mu)$, decompose $H=H^+-H^-$; both parts are nonnegative and $\mathcal P_T$-measurable with $H^\pm\le|H|$, so both lie in $L^2(\mu)$ and each is approximated to within $\varepsilon/2$ by a bounded elementary process by step 6.1; their difference is bounded and elementary on a common refinement by [F1] and is within $\varepsilon$ of $H$ by the triangle inequality. [F1, step 6.1]
 
-8.1 Steps 6.1 and 7.1 prove the density statement for nonnegative and for general predictable $L^2$ classes, with all approximants bounded and elementary; equalities of processes are equalities of $(\mathrm dt\otimes P)$-classes throughout, which is exactly the qualification "modulo product-almost-everywhere equality". The only non-explicit selection in the argument is the simultaneous selection, in step 2.2, of one approximant $G_j$ for each $j$ from the nonempty set of bounded elementary processes within $\varepsilon/(2m)$ of $1_{A_j}$; that is a countable family of selections and is covered by the declared Axiom of Choice through its countable-choice consequence [[thm-choice-implies-dependent-implies-countable-choice]]. [step 2.2, step 6.1, step 7.1, F8, given] ∎
+8.1 Steps 6.1 and 7.1 prove the density statement for nonnegative and for general predictable $L^2$ classes, with all approximants bounded and elementary; equalities of processes are equalities of $(\mathrm dt\otimes P)$-classes throughout, which is exactly the qualification "modulo product-almost-everywhere equality". The only non-explicit selection in the argument is the simultaneous selection, in step 2.2, of one approximant $G_j$ for each $j$ from the nonempty set of bounded elementary processes within $\varepsilon/(2m)$ of $1_{A_j}$; that is a countable family of selections and is covered by the declared Axiom of Choice through its countable-choice consequence. [step 2.2, step 6.1, step 7.1, F8, given] ∎
 
 ## Source notes
 

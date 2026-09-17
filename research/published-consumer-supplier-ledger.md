@@ -29587,6 +29587,30 @@ adequate published supplier is not itself defect debt, its earlier bounded
 clear disposition remains unchanged. The new pair declares its own exact
 dependencies.
 
+## Published AC-dependency gap: additive Jordan–Chevalley — 2026-09-17
+
+Run `phase-2-remaining-27` Step 5a (group `a`, batches 11–13) confirmed one
+published prerequisite-interface defect, reported independently by the batch-11
+reader (`reader:11:3`) and re-read here at the adjudication stage.
+
+- `thm-additive-jordan-chevalley-decomposition`. Its Statement opens with
+  "Assume the Axiom of Choice." while its direct `deps` list omits the
+  published supplier `def-axiom-of-choice`. The in-run consumers of the
+  theorem (`lem-jordan-chevalley-parts-agree-under-adjoint-representation` and
+  the Cartan/root chain of batch 11) declare AC in their own contracts, and the
+  defect is recorded here because published content is read-only in this
+  dispatch. The same metadata gap had already been noted for this run in
+  `research/phase-2-remaining-27-batch-13.notes.md`.
+- Repair strategy (Phase 3, no Phase-2 supplier needed): add
+  `def-axiom-of-choice` to the item's direct dependencies, verify that the AC
+  use is exactly the selection through the algebraic-closure/perfect-field
+  interface already recorded in its proof, and audit its direct published
+  consumers for inherited AC declarations. The item is published and
+  `def-axiom-of-choice` is already published; no new A/B pair is required.
+- Review scope: statement, front matter and the immediate consumer interfaces
+  were read; this is a bounded assumption-interface audit, not a full proof
+  rejudgment of the item. Classified A-P (one new row below).
+
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
@@ -29607,7 +29631,7 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1365 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 190 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 331 | Recorded direct review and an unresolved item-specific repair. | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 332 | Recorded direct review and an unresolved item-specific repair. | Recorded direct review and an unresolved item-specific repair. |
 
 Bounded no-repair-needed dispositions appear below, outside these four active
 defect classes. The four queues currently contain 1,886 distinct items.
@@ -30800,6 +30824,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-additive-jordan-chevalley-decomposition` | Run phase-2-remaining-27 Step 5a group-a adjudication 2026-09-17 (reader:11:3, re-read against the current published bytes): the Statement assumes AC but the direct `deps` omit published `def-axiom-of-choice`. Add that published axiom edge, confirm the exact AC use through the algebraic-closure/perfect-field interface, and audit direct published consumers for the inherited declaration. Bounded assumption-interface audit, not a full proof rejudgment. New A-P; evidence in “Published AC-dependency gap: additive Jordan–Chevalley” above. |
 | `rem-fraenkel-socks-model` | Bounded owner review 2026-09-13: the Statement discussion overstates Jech–Sochor by claiming transfer of any statement bounded in the carried hierarchy. Replace with the typed pair-family no-choice certificate and existential consequence; audit direct consumers for the general wording. The socks consistency conclusion remains sound. New A-P; exact hash and scope in “Fraenkel socks remark: Jech–Sochor transfer scope” above. |
 | `lem-nat-trichotomy` | Independent Sol xhigh proof-body review 2026-09-14: steps 1.3 and 2.1 omit the nonzero-addend proof needed for strict inequality. Use existing published commutativity and `lem-nat-add-cancellative` to show `m+j=m` forces `j=0`; cite the argument at each use and audit direct consumers. Earlier Frontier-22 bounded clear remains historical. Exact hash and scope are in “High-impact arithmetic spine follow-up” above. |
 | `thm-recursion` | Independent Sol xhigh proof-body review 2026-09-14: L1 cites induction on omega for an arbitrary Peano system. Repoint to axiom P3 of already-declared published `def-peano-system`, reassess the redundant theorem dependency, and audit direct consumers. Earlier Frontier-22 bounded clear remains historical. Exact hash and scope are above. |

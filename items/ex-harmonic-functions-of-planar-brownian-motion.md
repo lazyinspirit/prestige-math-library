@@ -4,7 +4,7 @@ kind: example
 title: "Harmonic functions of planar Brownian motion"
 status: draft
 origin: pipeline
-deps: [thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-d-dimensional-brownian-motion, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, def-continuity-real, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-elementary-predictable-brownian-integrand]
+deps: [thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-d-dimensional-brownian-motion, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-locally-square-integrable-predictable-brownian-integrand, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, def-continuity-real, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
 generation:
   role: example
@@ -36,7 +36,7 @@ bounded domain they become true square-integrable martingales.
  
 [F3] **Bounded gradients on bounded domains.** On the disc $\{|y|\le R\}$ the gradients $\nabla p=(y_2,y_1)$ and $\nabla q=(2y_1,-2y_2)$ are bounded by $R$ and $2R$ respectively, so the stopped integrands in the localization of [F1] have finite energy and the stopped integrals are true square-integrable martingales. [[thm-space-time-harmonic-functions-yield-brownian-local-martingales]] [[def-locally-square-integrable-predictable-brownian-integrand]] [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[thm-ito-isometry-and-linearity-in-predictable-l2]]
  
-[F4] **AC bookkeeping.** Choice is declared for the ambient conditional-expectation and completeness interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] **AC bookkeeping.** Choice is declared for the ambient conditional-expectation and completeness interfaces. [[def-axiom-of-choice]]
  
  
  

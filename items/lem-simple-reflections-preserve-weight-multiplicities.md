@@ -59,10 +59,10 @@ $\mu\in\mathfrak h^*$
 
 2.1 For an irreducible summand $T=T_r$ let $m\ge0$ be its top weight with respect to $h_\alpha$, so that by [L2] the operator $\rho(h_\alpha)$ has on $T$ the eigenvalues $m,m-2,\dots,-m$, each with multiplicity one, and every $h_\alpha$-eigenvector in $T$ is a weight vector for $\mathfrak h$ of some weight $\nu$ with $\nu(h_\alpha)=m-2k$ for a unique $k\in\{0,\dots,m\}$. [L2, step 1.1]
 
-3.1 For such a summand $T$ and its weight $\nu$ write $q=\nu(h_\alpha)=m-2k$ with $0\le k\le m$; then $s_\alpha(\nu)=\nu-q\alpha$ satisfies $s_\alpha(\nu)(h_\alpha)=-q=m-2(m-k)$ by [L1], so $s_\alpha(\nu)$ is the weight of the (one-dimensional) $h_\alpha$-eigenspace of $T$ of eigenvalue $-q$; hence $T_\nu$ and $T_{s_\alpha(\nu)}$ are either both zero or both one-dimensional, and $\dim T_\nu=\dim T_{s_\alpha(\nu)}$. [L1, L2, step 2.1]
+3.1 For such a summand $T$ and its weight $\nu$ write $q=\nu(h_\alpha)=m-2k$ with $0\le k\le m$; then $s_\alpha(\nu)=\nu-q\alpha$ satisfies $s_\alpha(\nu)(h_\alpha)=-q=m-2(m-k)$ by [L1]. Choosing $0\ne u\in T_\nu$, the vectors $f_\alpha^{\,j}u$ for $0\le j\le q$ are nonzero by the $\mathfrak{sl}_2$-theory of [L2], and they lie in the weight spaces $T_{\nu-j\alpha}$ of $V$: for $x\in\mathfrak g_{-\alpha}$ and $w\in V_\mu$ one computes $H\cdot(x\cdot w)=[H,x]\cdot w+x\cdot(H\cdot w)=(\mu-\alpha)(H)\,x\cdot w$ for every $H\in\mathfrak h$, so $x\cdot w\in V_{\mu-\alpha}$, and induction gives $f_\alpha^{\,j}u\in V_{\nu-j\alpha}$. Hence the (one-dimensional) $h_\alpha$-eigenspace of $T$ of eigenvalue $-q$ contains the nonzero vector $f_\alpha^{\,q}u\in T_{\nu-q\alpha}=T_{s_\alpha(\nu)}$ and has $h$-weight exactly $s_\alpha(\nu)$; therefore $T_\nu$ and $T_{s_\alpha(\nu)}$ are either both zero or both one-dimensional, and $\dim T_\nu=\dim T_{s_\alpha(\nu)}$. [L1, L2, step 2.1]
 
 4.1 Summing the equalities of step 3.1 over the finitely many irreducible summands of step 1.1 gives $\dim V_\nu=\sum_r\dim(T_r)_\nu=\sum_r\dim(T_r)_{s_\alpha(\nu)}=\dim V_{s_\alpha(\nu)}$ for every weight $\nu$, and hence, both sides being zero, for an arbitrary $\mu\in\mathfrak h^*$. [L3, step 1.1, step 3.1]
 
 5.1 Every $w\in W$ is a product of simple reflections by [L5], so applying step 4.1 once for each factor, with the reflections acting on $\mathfrak h^*$ by the linear formulas of [L4], gives $\dim V_{w\mu}=\dim V_\mu$ for every $w\in W$. [L4, L5, step 4.1]
 
-6.1 The stated equalities are proved. ∎
+6.1 The stated equalities are proved. [step 4.1, step 5.1] ∎

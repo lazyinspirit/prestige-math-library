@@ -4,7 +4,7 @@ kind: theorem
 title: "Ito isometry for elementary integrands"
 status: draft
 origin: pipeline
-deps: [def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, lem-elementary-ito-integral-is-independent-of-the-step-representation, def-continuous-time-adapted-process-and-martingale, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-taking-out-what-is-known, thm-tower-property-of-conditional-expectation, thm-factorization-of-expectations-for-independent-variables, def-independent-sigma-algebras-and-events, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, lem-gaussian-even-moment-bound-for-brownian-increments, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, lem-elementary-ito-integral-is-independent-of-the-step-representation, def-continuous-time-adapted-process-and-martingale, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-taking-out-what-is-known, thm-tower-property-of-conditional-expectation, thm-factorization-of-expectations-for-independent-variables, def-independent-sigma-algebras-and-events, lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments, lem-gaussian-even-moment-bound-for-brownian-increments, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -44,7 +44,7 @@ sides depend only on the $(\mathrm dt\otimes P)$-class of $H$.
 
 [F5] A martingale is exactly an adapted process with $E|M_t|<\infty$ and $E[M_t\mid\mathcal F_r]=M_r$ almost surely for all $r\le t$. [[def-continuous-time-adapted-process-and-martingale]]
 
-[F6] AC is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] AC is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
 
 ## Proof
 

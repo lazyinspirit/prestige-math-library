@@ -54,12 +54,15 @@ used later.
 (b) $(\mathcal F_t)_{t\ge0}$ is increasing and **right-continuous**: for every
     $t\ge0$,
     $$\bigcap_{s>t}\mathcal F_s=\mathcal F_t .$$
-    Indeed each $s>t$ gives $\mathcal F_s\subseteq\overline{\mathcal F}{}^0_s$,
-    so $\bigcap_{s>t}\mathcal F_s\subseteq\bigcap_{s>t}\overline{\mathcal F}{}^0_s=\mathcal F_t$;
-    conversely $u>s'>u'$ with $u',s'>t$ would give
-    $\overline{\mathcal F}{}^0_{s'}\subseteq\overline{\mathcal F}{}^0_{u'}$,
-    so intersecting over all $u>t$ is the same as intersecting over all pairs
-    $t<u'<u$, which is contained in $\bigcap_{s>t}\mathcal F_s$.
+    Indeed, for $s>t$ and any $u>s$ one has
+    $\mathcal F_s=\bigcap_{v>s}\overline{\mathcal F}{}^0_v\subseteq
+    \overline{\mathcal F}{}^0_u$, so
+    $\mathcal F_s\subseteq\bigcap_{u>s}\overline{\mathcal F}{}^0_u=\mathcal F_t$
+    and hence $\bigcap_{s>t}\mathcal F_s\subseteq\mathcal F_t$; conversely
+    $t\le s$ gives $\mathcal F_t\subseteq\mathcal F_s$, because
+    $\overline{\mathcal F}{}^0$ is increasing and the intersection defining
+    $\mathcal F_t$ ranges over the larger parameter set $\{u>t\}\supseteq\{u>s\}$,
+    so $\mathcal F_t\subseteq\bigcap_{s>t}\mathcal F_s$.
 (c) **Every completed set differs from a raw set by a null set.** Let
     $$\mathcal D_t:=\{A\subseteq\Omega:\text{there is }A_0\in\mathcal F^0_t \text{ and }M\in\mathcal N\text{ with }A\triangle A_0\subseteq M\}.$$
     Then $\mathcal D_t$ is a sigma-algebra containing

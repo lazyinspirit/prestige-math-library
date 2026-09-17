@@ -30,7 +30,7 @@ Assume AC. If $T=T^*$ and $p$ is a complex polynomial, then $\|p(T)\|=\max_{\lam
 
 [A3] For a normal element $a$ of a unital complex C\*-algebra one has $r(a)=\|a\|$, and $\mathcal B(H)$ is such a C\*-algebra ([[lem-c-star-spectral-radius-equals-norm-for-normal-elements]], [[lem-bounded-hilbert-operators-form-a-c-star-algebra]]).
 
-[A4] $(aT+bS)^*=\overline aT^*+\overline bS^*$ and $(ST)^*=S^*T^*$, so for a polynomial $p(z)=\sum_kc_kz^k$ and $T=T^*$ one has $p(T)^*=\overline p(T)$ with $\overline p(z)=\sum_k\overline{c_k}z^k$; the maps $p\mapsto p(T)$ and $p\mapsto\overline p(T)$ are ring homomorphisms ([[thm-hilbert-adjoint-properties]]).
+[A4] $(aT+bS)^*=\overline aT^*+\overline bS^*$ and $(ST)^*=T^*S^*$, so for a polynomial $p(z)=\sum_kc_kz^k$ and $T=T^*$ one has $p(T)^*=\overline p(T)$ with $\overline p(z)=\sum_k\overline{c_k}z^k$; the maps $p\mapsto p(T)$ and $p\mapsto\overline p(T)$ are ring homomorphisms ([[thm-hilbert-adjoint-properties]]).
 
 [A5] For a normal operator the norm equals the spectral radius and the maximum is attained: $\|T\|=r(T)=\max\{|\lambda|:\lambda\in\sigma(T)\}$ ([[cor-normal-operator-norm-equals-spectral-radius]]).
 

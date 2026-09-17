@@ -51,7 +51,7 @@ $n=\lambda(h)$.
 
 [L3] In $U(\mathfrak{sl}_2)$ the commutation identity $[e,f^k]=kf^{k-1}(h-(k-1))$ holds for every $k\ge1$, by induction from $[e,f]=h$ and $[h,f]=-2f$. [L1]
 
-[L4] A finite-dimensional irreducible $\mathfrak{sl}_2$-module of highest weight $m\ge0$ is isomorphic to $V(m)$ of [[ex-all-finite-dimensional-irreducible-sl-two-modules]] ([[ex-all-finite-dimensional-irreducible-sl-two-modules]]).
+[L4] A finite-dimensional irreducible $\mathfrak{sl}_2$-module of highest weight $m\ge0$ is isomorphic to $V(m)$ of [[ex-all-finite-dimensional-irreducible-sl-two-modules]].
 
 ## Verification
 
@@ -67,4 +67,4 @@ $n=\lambda(h)$.
 
 4.1 On $M(\lambda)/K$ the classes of $v_0,\dots,v_n$ satisfy exactly the relations of $V(n)$ from [[ex-all-finite-dimensional-irreducible-sl-two-modules]], with $h$-eigenvalues $n-2k$ and operators $f,e$ acting by $v_k\mapsto v_{k+1}$ and $v_k\mapsto k(n-k+1)v_{k-1}$; hence the quotient is the finite-dimensional simple module $V(n)$ by [L4]. [L4, step 3.2]
 
-5.1 Collecting steps 1.1–5.1, $M(\lambda)$ is an infinite-dimensional highest weight module of highest weight $\lambda$, and it has a finite-dimensional simple quotient exactly for $\lambda(h)\in\mathbb Z_{\ge0}$, in which case that quotient is $V(\lambda(h))$; this proves all the assertions. [step 1.1, step 2.1, step 3.1, step 3.2, step 4.1] ∎
+5.1 Collecting steps 1.1–4.1, $M(\lambda)$ is an infinite-dimensional highest weight module of highest weight $\lambda$, and it has a finite-dimensional simple quotient exactly for $\lambda(h)\in\mathbb Z_{\ge0}$, in which case that quotient is $V(\lambda(h))$; this proves all the assertions. [step 1.1, step 2.1, step 3.1, step 3.2, step 4.1] ∎

@@ -4,7 +4,7 @@ kind: corollary
 title: "The Brownian square martingale"
 status: draft
 origin: pipeline
-deps: [thm-ito-formula-one-dimensional, def-continuous-brownian-ito-process, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-locally-square-integrable-predictable-brownian-integrand, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-continuous-time-adapted-process-and-martingale, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, def-convergence-in-probability]
+deps: [thm-ito-formula-one-dimensional, def-continuous-brownian-ito-process, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, def-locally-square-integrable-predictable-brownian-integrand, def-brownian-motion, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-continuous-time-adapted-process-and-martingale, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-convergence-in-probability]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -39,7 +39,7 @@ $$E(B_t^2-t)=0,\qquad E\int_0^tB_s^2\,ds=\frac{t^2}{2},\qquad E(B_t^2-t)^2=2t^2 
  
 [F5] **True martingales from finite energy.** A finite-energy integral $\int H\,dB$ has a continuous version that is a square-integrable martingale with $E\int_0^tH\,dB=0$ and $E(\int_0^tH\,dB)^2=E\int_0^tH^2ds$. [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[def-continuous-time-adapted-process-and-martingale]]
  
-[F6] **AC bookkeeping.** Choice is declared for the ambient conditional-expectation and completeness interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] **AC bookkeeping.** Choice is declared for the ambient conditional-expectation and completeness interfaces. [[def-axiom-of-choice]]
  
  
  

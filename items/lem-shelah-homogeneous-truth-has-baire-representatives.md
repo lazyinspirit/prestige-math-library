@@ -30,7 +30,7 @@ The Borel code and meagre-error code belong to the final extension.
 
 [F1] [[lem-shelah-real-name-capture-and-coded-meagre-unions]]: $s$ and $\vec\gamma$ are captured over a countably generated complete subalgebra $B_0\subseteq B$ built from their deciding antichains.
 
-[F2] [[thm-shelah-ch-omega-one-sweet-construction]] with [[thm-shelah-sweet-partial-isomorphism-extension]]: isomorphism extension and free amalgamation over a countably generated complete subalgebra are available, so the automorphism group of $B$ over $B_0$ acts transitively on the Cohen conditions over $B_0$.
+[F2] [[thm-shelah-ch-omega-one-sweet-construction]] with [[thm-shelah-sweet-partial-isomorphism-extension]]: every complete isomorphism between countably generated complete subalgebras of $B$ extends to an automorphism of $B$, and every free-amalgamation task of the construction is answered at a later stage, so the automorphism group of $B$ over $B_0$ acts transitively on the Cohen conditions over $B_0$.
 
 [F3] [[def-property-of-baire-for-subsets]]: a set has the Baire property when it differs from an open set by a meagre set.
 
@@ -42,7 +42,7 @@ The Borel code and meagre-error code belong to the final extension.
 
 1.1 Let $B_0\subseteq B$ be a countably generated complete subalgebra capturing $s$, the ordinal parameters and the Boolean value of the statement $\varphi(\dot c,s,\vec\gamma)$ for the canonical Cohen name $\dot c$ over $B_0$: this is possible by [F1], since the value and the parameters are determined by countably many antichains, and the complete subalgebra they generate is countably generated. [F1]
 
-1.2 Let $\mathbb C$ be the Cohen algebra over $B_0$ of finite binary strings, with generic real $c$. If two complete embeddings of $B_0*\mathbb C$ into $B$ agree on $B_0$, then the free-amalgamation clause of [F2] embeds their ranges freely over $B_0$ and the isomorphism-extension clause extends the induced map to an automorphism of $B$. Consequently the automorphism group of $B$ fixing $B_0$ acts transitively on the conditions of $\mathbb C$ above any fixed finite condition, and the truth value of $\varphi(\dot c,s,\vec\gamma)$ is invariant under that group. [F2]
+1.2 Let $\mathbb C$ be the Cohen algebra over $B_0$ of finite binary strings, with generic real $c$. If two complete embeddings $e_1,e_2$ of $B_0*\mathbb C$ into $B$ agree on $B_0$, then their ranges are countably generated complete subalgebras of $B$ and $e_2\circ e_1^{-1}$ is a complete isomorphism between them, which the isomorphism-extension clause of [F2] extends to an automorphism of $B$. Consequently the automorphism group of $B$ fixing $B_0$ acts transitively on the conditions of $\mathbb C$ above any fixed finite condition, and the truth value of $\varphi(\dot c,s,\vec\gamma)$ is invariant under that group. [F2]
 
 2.1 Let $U=\bigcup\{[p]:p\in\mathbb C\text{ and }p\Vdash\varphi(\dot c,s,\vec\gamma)\}$, an open subset of Cantor space, where $[p]$ is the clopen cylinder of reals extending the finite string $p$. By step 1.2 the Boolean value of the statement depends only on the corresponding Cohen condition, so $U$ is exactly the set of reals whose finite initial segments force $\varphi$; $U$ is open and has a Borel code definable from the ground-model data of the construction. [F2, F5, step 1.2]
 

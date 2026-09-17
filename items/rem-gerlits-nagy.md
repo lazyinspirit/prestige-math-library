@@ -2,7 +2,7 @@
 id: rem-gerlits-nagy
 kind: remark
 title: "Gerlits-Nagy theorem: $C_p(X)$ is Frechet-Urysohn exactly for gamma-spaces"
-status: draft
+status: published
 origin: session
 proved_here: false
 deps: []
@@ -12,7 +12,12 @@ aliases: []
 landmark: false
 short: "Frechet-Urysohn C_p(X) means gamma-space"
 verification:
+  audited: 2026-09-17
   precheck: n/a
+  sources_checked:
+    date: 2026-09-17
+    scope: citations
+    by: owner-supervisor 5b-cross audit-manifest repair
 sources:
   scraped: []
   references:

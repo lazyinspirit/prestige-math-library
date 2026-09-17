@@ -4,7 +4,7 @@ kind: definition
 title: "Elementary predictable Brownian integrands"
 status: draft
 origin: pipeline
-deps: [def-progressively-measurable-and-predictable-process, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, thm-brownian-future-path-markov-property, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-progressively-measurable-and-predictable-process, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, thm-brownian-future-path-markov-property, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -77,6 +77,5 @@ The following properties are part of the definition and are used at once.
 The Axiom of Choice is declared because the Brownian construction and the
 conditional-expectation interface used in items 6, 7 and 13 assume it; the
 definition itself, including the predictability computation of clause 1, uses
-no choice. The implication bridge
-[[thm-choice-implies-dependent-implies-countable-choice]] records the inherited
-countable-choice obligations.
+no choice. The countable-choice obligations inherited from that interface are declared
+as dependencies of this item.

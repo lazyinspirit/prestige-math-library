@@ -15,7 +15,7 @@ sources:
       url: "https://math.stanford.edu/~conrad/210CPage/handouts/lie_groups_notes.pdf"
       locator: "Appendix V, root data and marked quotients"
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
-      url: "https://www.math.stanford.edu/~aknapp/download/Beyond2-clickable.pdf"
+      url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter IV §§7–8"
 ---
 

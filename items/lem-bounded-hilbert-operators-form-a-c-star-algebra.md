@@ -30,7 +30,7 @@ Assume Countable Choice. For every nonzero complex Hilbert space $H$, $\mathcal 
 
 [A3] If $Y$ is a Banach space then $\mathcal B(X,Y)$ is complete for the operator norm ([[thm-bounded-operator-space-is-banach]]).
 
-[A4] The Hilbert adjoint $T^*$ is the unique operator with $\langle Tx,y\rangle=\langle x,T^*y\rangle$; the assignment $T\mapsto T^*$ is conjugate-linear, involutive and isometric, satisfies $(ST)^*=S^*T^*$, and obeys $\|T^*T\|=\|T\|^2$ ([[thm-hilbert-adjoint-properties]]).
+[A4] The Hilbert adjoint $T^*$ is the unique operator with $\langle Tx,y\rangle=\langle x,T^*y\rangle$; the assignment $T\mapsto T^*$ is conjugate-linear, involutive and isometric, satisfies $(ST)^*=T^*S^*$, and obeys $\|T^*T\|=\|T\|^2$ ([[thm-hilbert-adjoint-properties]]).
 
 [A5] A unital complex Banach algebra is a nonzero complex Banach algebra with submultiplicative norm and a unit of norm one; a complex C\*-algebra is a complex Banach algebra carrying a conjugate-linear involution with $(a^*)^*=a$, $(ab)^*=b^*a^*$ and $\|a^*a\|=\|a\|^2$ ([[def-unital-banach-algebra]], [[def-c-star-algebra]]).
 
@@ -46,7 +46,7 @@ Assume Countable Choice. For every nonzero complex Hilbert space $H$, $\mathcal 
 
 1.2 The identity operator $I$ lies in $\mathcal B(H)$ and satisfies $IT=TI=T$, and $\|I\|=1$: since $H\ne\{0\}$ every nonzero $x$ has $\|x/\|x\|\|=1$, so the unit-ball supremum defining $\|I\|$ equals $1$. Thus $\mathcal B(H)$ is a nonzero algebra whose unit $I$ has norm one. [A2, algebra]
 
-1.3 The Hilbert adjoint is a map $\mathcal B(H)\to\mathcal B(H)$ which is conjugate-linear, involutive and isometric, satisfies $(ST)^*=S^*T^*$, and satisfies $\|T^*T\|=\|T\|^2$ for every $T$. [A4, A6]
+1.3 The Hilbert adjoint is a map $\mathcal B(H)\to\mathcal B(H)$ which is conjugate-linear, involutive and isometric, satisfies $(ST)^*=T^*S^*$, and satisfies $\|T^*T\|=\|T\|^2$ for every $T$. [A4, A6]
 
 2.1 The space $H$ is Banach for its norm by [A1], so $\mathcal B(H)$ is complete for the operator norm by [A3]; together with the submultiplicativity, the identity of norm one and the nonvanishing just recorded, this makes $\mathcal B(H)$ a unital complex Banach algebra in the sense of [A5]. [step 1.1, step 1.2, A1, A3, A5]
 

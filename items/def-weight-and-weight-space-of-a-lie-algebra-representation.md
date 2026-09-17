@@ -36,11 +36,11 @@ weight; $V_0$ is the space of vectors fixed by $\mathfrak h$.
 Distinct weight spaces are independent. Indeed, if
 $v_1+\dots+v_m=0$ with $0\ne v_j\in V_{\mu_j}$ and pairwise distinct functionals
 $\mu_1,\dots,\mu_m$, choose $H\in\mathfrak h$ with the scalars $\mu_j(H)$
-pairwise distinct; this is possible because $\mathfrak h^*$ is an
-infinite-dimensional space over the infinite field $\mathbb C$ whenever
-$\mathfrak h\ne0$, the finitely many hyperplanes
-$\{\mu:\mu(H)=\mu_i(H)-\mu_j(H)\}$ are proper, and a finite union of proper
-subspaces is proper. Then the $v_j$ are eigenvectors of $\rho(H)$ for the
+pairwise distinct; this is possible because the finitely many sets
+$\{H\in\mathfrak h:(\mu_i-\mu_j)(H)=0\}$ are proper subspaces of $\mathfrak h$
+(the functionals $\mu_i-\mu_j$ are nonzero for $i\ne j$) and a finite union of
+proper subspaces of a vector space over the infinite field $\mathbb C$ is
+proper. Then the $v_j$ are eigenvectors of $\rho(H)$ for the
 pairwise distinct eigenvalues $\mu_j(H)$ and hence are linearly independent
 ([[thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent]]),
 forcing $v_1=\dots=v_m=0$, a contradiction. Thus the sum

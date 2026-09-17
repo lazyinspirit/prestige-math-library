@@ -44,7 +44,7 @@ and the sphere $K$-AHSS has no nonzero differential and no nontrivial extension.
 
 1.1 By [A3] the $E_2$ page has $E_2^{0,q}=K^q(*)$ and $E_2^{n,q}=K^q(*)$ for every even $q$, and vanishes in all other positions. [A1, A2, A3]
 
-2.1 For $n$ even, a differential $d_r:E_r^{p,q}\to E_r^{p+r,q-r+1}$ with source in an even coefficient row has odd target coefficient row $q-r+1$ when $r$ is odd, and zero target column when $r$ is even; in either case the target vanishes, so every differential is zero. [A1, A2, step 1.1]
+2.1 For $n$ even, consider a differential $d_r:E_r^{p,q}\to E_r^{p+r,q-r+1}$ with source in an even coefficient row $q$ at a nonzero column $p\in\{0,n\}$. If $r$ is even then the target row $q-r+1$ is odd, so the target lies in a vanishing coefficient row. If $r$ is odd then the target column $p+r$ is odd, hence is neither $0$ nor $n$ when $p=0$ (the number $n$ being even) and exceeds $n$ when $p=n$; in both cases the target column lies outside the support $\{0,n\}$ of $H^*(S^n;\mathbb Z)$, and the parity of the target row is irrelevant. In either case the target vanishes, so every differential is zero. [A1, A2, step 1.1]
 
 2.2 For $n$ odd, the only possibly nonzero differentials are $d_n:E_n^{0,q}\to E_n^{n,q-n+1}$ on even rows $q$. If one of them were nonzero, the quotient at $(0,q)$ would be a proper subgroup of $\mathbb Z$; but the $p=0$ filtration quotient $F^0K^q(S^n)/F^1K^q(S^n)$ is $\mathbb Z$ for even $q$, since $F^1=\ker(K^q(S^n)\to K^q(\mathrm{pt}))=0$ for even $q$ by [A4] and Bott periodicity. Hence $d_n=0$ as well. [A2, A4, step 1.1]
 

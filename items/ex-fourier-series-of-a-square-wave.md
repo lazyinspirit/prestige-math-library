@@ -31,8 +31,9 @@ $$\widehat s(0)=0,\qquad \widehat s(k)=\frac{1-(-1)^k}{\pi ik}\quad(k\ne0),$$
 the Fourier series of $s$ converges to $s$ in mean square
 ([[thm-l-two-fourier-series-converges-in-mean-square]]), and Parseval's identity
 gives $\sum_{k\ \text{odd},\,k\ge1}k^{-2}=\pi^2/8$. The example deliberately
-claims **norm** convergence and nothing else: the series does not converge
-pointwise at the jump, and no endpoint statement is made.
+claims **norm** convergence and nothing else: it asserts no pointwise
+convergence of the series to the values of this representative at the jump,
+and no endpoint statement is made.
 
 ## Facts & Assumptions
 

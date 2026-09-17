@@ -5,7 +5,7 @@ title: Extreme points of the dual ball of C(K)
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, def-extreme-point-and-face, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
+deps: [thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals, def-extreme-point-and-face, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-axiom-of-choice]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -42,7 +42,7 @@ the final remark.
 
 [L2] A point $x$ of a convex set $K_0$ is extreme when $x = (1-t)y + tz$ with $y,z \in K_0$, $0<t<1$, forces $y = z = x$ ([[def-extreme-point-and-face]]).
 
-[L3] The Axiom of Choice holds; in particular the selection of finitely many open sets and of one point from a nonempty compact set used below is licensed, and $\mathrm{AC} \Rightarrow \mathrm{AC}_\omega$ ([[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]]).
+[L3] The Axiom of Choice holds; in particular the selection of finitely many open sets and of one point from a nonempty compact set used below is licensed, and $\mathrm{AC} \Rightarrow \mathrm{AC}_\omega$ ([[def-axiom-of-choice]]).
 
 ## Proof
 

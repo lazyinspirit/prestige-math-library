@@ -4,7 +4,7 @@ kind: theorem
 title: "Quadratic variation of an Ito integral"
 status: draft
 origin: pipeline
-deps: [thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-doob-maximal-bound-for-the-ito-integral, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-lp-maximal-inequality, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-quadratic-variation-along-a-partition-sequence, def-partition-and-refinement, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, cor-chebyshev-inequality-for-random-variables, thm-heine-cantor-r, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-doob-maximal-bound-for-the-ito-integral, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-lp-maximal-inequality, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, def-locally-square-integrable-predictable-brownian-integrand, def-quadratic-variation-along-a-partition-sequence, def-partition-and-refinement, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, cor-chebyshev-inequality-for-random-variables, thm-heine-cantor-r, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, thm-density-of-elementary-predictable-processes-in-predictable-l2, thm-tower-property-of-conditional-expectation, cor-cauchy-schwarz-for-random-variables, def-continuous-time-adapted-process-and-martingale, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -51,7 +51,7 @@ $t\mapsto\int_0^tH_s^2ds$, uniformly in probability.
 
 [F6] The dyadic special case of the statement is the almost-sure uniform theorem [[thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes]], which is stronger than the in-probability Brownian estimate proved below; the estimate is proved for arbitrary deterministic partition sequences because that is what the statement requires. [[def-quadratic-variation-along-a-partition-sequence]]
 
-[F7] AC is declared for the ambient interfaces; the partition sequence and the localization times are given or canonical. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F7] AC is declared for the ambient interfaces; the partition sequence and the localization times are given or canonical. [[def-axiom-of-choice]]
 
 [F8] For real numbers and for random variables one has $\bigl|\sum_ja_jb_j\bigr|\le\bigl(\sum_ja_j^2\bigr)^{1/2}\bigl(\sum_jb_j^2\bigr)^{1/2}$ and $E[XY]\le\|X\|_2\|Y\|_2$; these Cauchy--Schwarz inequalities control the polarization of the squared-increment sums and the expected products of the block sums. [[cor-cauchy-schwarz-for-random-variables]]
 

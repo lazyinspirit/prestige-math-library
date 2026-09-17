@@ -52,9 +52,9 @@ $\mathcal P(\mathbb N) \cong \operatorname{Clop}(\beta\mathbb N)$ of
 
 1.3 Let $K$ be compact Hausdorff and $f : \mathbb N \to K$ continuous (that is, arbitrary). For an ultrafilter $U$ on $\mathbb N$ let $f_*U := \{B \subseteq K : f^{-1}(B) \in U\}$, an ultrafilter on $K$, which converges to a unique point by [L3]; define $F(U)$ to be that limit. [L3, algebra]
 
-1.4 The map $F$ extends $f$: for the principal ultrafilter $U_n$ the pushforward $f_*U_n$ is the principal ultrafilter at $f(n)$, which converges to $f(n)$, so $F(U_n) = f(n)$. [2.1, L2, algebra]
+1.4 The map $F$ extends $f$: for the principal ultrafilter $U_n$ the pushforward $f_*U_n$ is the principal ultrafilter at $f(n)$, which converges to $f(n)$, so $F(U_n) = f(n)$. [1.3, L2, algebra]
 
-1.5 The map $F$ is continuous: for open $V \subseteq K$ one has $F(U) \in V$ if and only if $V \in f_*U$, that is, $f^{-1}(V) \in U$: the forward implication holds because $V$ is a neighbourhood of the limit $F(U)$, and the backward implication holds because if $F(U) \notin V$ then the closed set $K \setminus V$ is a neighbourhood of $F(U)$, hence lies in $f_*U$, contradicting $V \in f_*U$; consequently $F^{-1}(V) = [f^{-1}(V)]$ is open. [2.1, L1, algebra]
+1.5 The map $F$ is continuous: for open $V \subseteq K$ one has $F(U) \in V$ if and only if $V \in f_*U$, that is, $f^{-1}(V) \in U$: the forward implication holds because $V$ is a neighbourhood of the limit $F(U)$, and the backward implication holds because if $F(U) \notin V$ then the closed set $K \setminus V$ is a neighbourhood of $F(U)$, hence lies in $f_*U$, contradicting $V \in f_*U$; consequently $F^{-1}(V) = [f^{-1}(V)]$ is open. [1.3, L1, algebra]
 
 2.1 Uniqueness: $F$ is determined on the dense subset $\{U_n : n \in \mathbb N\}$ by [step 1.2] and [step 1.4], and $K$ is Hausdorff, so two continuous extensions agree. [step 1.1, step 1.2, step 1.4, algebra]
 

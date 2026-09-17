@@ -4,7 +4,7 @@ kind: remark
 title: "General semimartingale calculus is outside this block"
 status: draft
 origin: pipeline
-deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-ito-formula-one-dimensional, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-ito-formula-one-dimensional, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: ai-altered
   proof: not-applicable

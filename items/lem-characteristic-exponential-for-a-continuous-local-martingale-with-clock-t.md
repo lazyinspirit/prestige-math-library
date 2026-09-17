@@ -4,7 +4,7 @@ kind: lemma
 title: "Characteristic exponential for a continuous local martingale with deterministic clock"
 status: draft
 origin: pipeline
-deps: [def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, def-convergence-in-probability, def-conditional-expectation-as-an-ae-class, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-continuous-time-stopping-time, def-continuity-real, thm-heine-cantor-r, cor-cauchy-schwarz-for-random-variables, thm-dominated-convergence, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, cor-taylor-remainder-bound, def-taylor-polynomial-and-remainder]
+deps: [def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, def-convergence-in-probability, def-conditional-expectation-as-an-ae-class, def-conditional-expectation-as-an-ae-class, thm-tower-property-of-conditional-expectation, def-continuous-time-stopping-time, def-continuity-real, thm-heine-cantor-r, cor-cauchy-schwarz-for-random-variables, thm-dominated-convergence, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, cor-taylor-remainder-bound, def-taylor-polynomial-and-remainder]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -54,7 +54,7 @@ $t$ uniformly in probability. Then for every real $\theta$:
  
 [F6] **Estimates and convergence.** Cauchy--Schwarz for sums; if a sequence of random variables is bounded by $R_n$ with $ER_n\to0$, then it tends to $0$ in probability; and dominated convergence passes limits through conditional expectations of sequences bounded by an integrable random variable. [[cor-cauchy-schwarz-for-random-variables]] [[def-convergence-in-probability]] [[thm-dominated-convergence]]
  
-[F7] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F7] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
  
  

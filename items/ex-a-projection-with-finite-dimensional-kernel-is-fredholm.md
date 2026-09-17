@@ -5,7 +5,7 @@ title: A projection with finite-dimensional kernel is Fredholm
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, def-fredholm-operator-cokernel-and-index, def-axiom-of-choice, def-complemented-subspace, def-c-k-map-between-banach-spaces, def-banach-space, def-bounded-linear-operator, def-frechet-derivative-between-banach-spaces]
+deps: [def-second-countable-space, thm-countable-products-of-second-countable-spaces, def-countable-base-banach-manifold-and-smooth-map, def-fredholm-map-between-banach-manifolds, lem-local-finite-dimensional-reduction-for-a-fredholm-map, def-fredholm-operator-cokernel-and-index, def-axiom-of-choice, def-complemented-subspace, def-c-k-map-between-banach-spaces, def-banach-space, def-bounded-linear-operator, def-frechet-derivative-between-banach-spaces]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -22,17 +22,23 @@ sources:
 Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $N$ and $Y$ be real
 Banach spaces with $\dim N < \infty$ ([[def-banach-space]]), and let
 $X = N \oplus Y$ be their topological direct sum with bounded projections
-([[def-complemented-subspace]]). Then the projection $p : X \to Y$ onto $Y$
+([[def-complemented-subspace]]), where the direct sum is *second countable*
+([[def-second-countable-space]]) — for instance this holds whenever $N$ and $Y$
+are second countable ([[thm-countable-products-of-second-countable-spaces]]).
+Then $X$ and $Y$ are $C^\infty$ Banach manifolds in the sense of
+[[def-countable-base-banach-manifold-and-smooth-map]], and the projection
+$p : X \to Y$ onto $Y$
 along $N$ is a smooth Fredholm map
 ([[def-fredholm-map-between-banach-manifolds]]) of index $\dim N$, and its local
 finite-dimensional reduction
 ([[lem-local-finite-dimensional-reduction-for-a-fredholm-map]]) has zero
 obstruction space: in suitable coordinates it is the projection
-$(u,v) \mapsto (u,0)$ onto the complement of the range.
+$(u,v) \mapsto (u,0)$ onto the range factor of the splitting
+$\operatorname{ran}p \oplus C$, with the complement coordinate set to zero.
 
 ## Facts & Assumptions
 
-**Given:** Real Banach spaces $N, Y$ with $\dim N < \infty$, their topological direct sum $X = N \oplus Y$ with bounded projections, and the projection $p : X \to Y$ onto the second factor.
+**Given:** Real Banach spaces $N, Y$ with $\dim N < \infty$ and second countable topological direct sum $X = N \oplus Y$ with bounded projections, and the projection $p : X \to Y$ onto the second factor.
 
 [L1] In a topological direct sum $X=N\oplus Y$ every $x$ decomposes uniquely as $x = n+y$ and the coordinates $n = q(x)$, $y = p(x)$ are bounded linear; here $\ker p = N$ is finite dimensional by hypothesis and $\operatorname{ran}p = Y$ ([[def-complemented-subspace]]).
 

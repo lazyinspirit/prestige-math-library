@@ -4,7 +4,7 @@ kind: example
 title: "A deterministic time-changed quadratic variation"
 status: draft
 origin: pipeline
-deps: [thm-quadratic-variation-of-an-ito-integral, def-locally-square-integrable-predictable-brownian-integrand, def-quadratic-variation-along-a-partition-sequence, def-progressively-measurable-and-predictable-process, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
+deps: [thm-quadratic-variation-of-an-ito-integral, def-locally-square-integrable-predictable-brownian-integrand, def-quadratic-variation-along-a-partition-sequence, def-progressively-measurable-and-predictable-process, lem-ac-supplies-sequential-choices-for-probability-constructions, def-axiom-of-choice]
 proof_strategy: direct
 generation:
   role: example
@@ -40,7 +40,7 @@ elapsed time $t$ that governs Brownian motion itself.
 
 [F2] For every locally square-integrable predictable $H$ and every deterministic vanishing-mesh partition sequence, the squared-increment partial sums of $M=H\cdot B$ converge to $\int_0^tH_s^2ds$ uniformly in probability on $[0,T]$. [[thm-quadratic-variation-of-an-ito-integral]] [[def-quadratic-variation-along-a-partition-sequence]]
 
-[F3] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F3] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Verification
 

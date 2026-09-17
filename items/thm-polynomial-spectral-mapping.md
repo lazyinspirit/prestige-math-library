@@ -6,7 +6,6 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-fundamental-theorem-of-algebra-liouville-proof, def-unital-banach-algebra, def-invertible-element-and-general-linear-group-of-a-banach-algebra]
-forward_refs: [cex-spectrum-can-shrink-in-a-larger-banach-algebra]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -65,4 +64,6 @@ equal $\{c\}$.
 
 - **Where the fundamental theorem of algebra is used.** The forward inclusion [step 2.1] needs the *existence* of all roots of $p(z) - \mu$, which is [[thm-fundamental-theorem-of-algebra-liouville-proof]]. The reverse inclusion needs only polynomial division by the known linear factor $z - \lambda$.
 
-- **The statement is about the ambient algebra.** Both spectra in the theorem are computed in the same unital Banach algebra $A$; the identity can fail for spectra taken in different algebras, since spectra may shrink in a larger algebra ([[cex-spectrum-can-shrink-in-a-larger-banach-algebra]]).
+- **The statement is about the ambient algebra.** Both spectra in the theorem are computed in the same unital Banach algebra $A$; the identity can fail for spectra taken in different algebras, since spectra may shrink in a larger algebra (`cex-spectrum-can-shrink-in-a-larger-banach-algebra`).
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

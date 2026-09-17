@@ -42,7 +42,7 @@ and $c_1(\gamma)$ is the negative generator.
 
 [F4] Under the fixed upper-to-lower coefficient convention of the clutching construction, the map $g(z)=z$ clutches the tautological Hopf line $\gamma$ over $S^2=\mathbb{CP}^1$, which is the restriction of the tautological line over $\mathbb{CP}^n$ ([[def-clutching-construction-for-bundles-over-a-suspension]]).
 
-[F5] $H^*(\mathbb{CP}^n;\mathbb Z)=\mathbb Z[x]/(x^{n+1})$ with $x=e(\gamma_{\mathbb R})$ the class of the tautological line, and the standard inclusion $\mathbb{CP}^1\hookrightarrow\mathbb{CP}^n$ pulls $x$ back to $x$, so restriction to $\mathbb{CP}^1$ detects generation in $H^2$ ([[lem-integral-cohomology-ring-of-complex-projective-space-by-splitting]]).
+[F5] $H^*(\mathbb{CP}^n;\mathbb Z)=\mathbb Z[t]/(t^{n+1})$ with $t=e(\gamma_{\mathbb R})=c_1(\gamma)=-x$ the class of the tautological line in the published convention, and the standard inclusion $\mathbb{CP}^1\hookrightarrow\mathbb{CP}^n$ pulls $t$ back to $t$, so restriction to $\mathbb{CP}^1$ is an isomorphism on $H^2$ and detects generation there ([[lem-integral-cohomology-ring-of-complex-projective-space-by-splitting]]).
 
 [F6] For a complex line $c_i=0$ for $i\geq2$ and $c_0=1$ ([[def-chern-classes-from-the-projective-bundle-relation]]).
 

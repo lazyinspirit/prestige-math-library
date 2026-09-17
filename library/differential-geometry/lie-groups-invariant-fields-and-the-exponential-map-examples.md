@@ -5,14 +5,10 @@ status: published
 items: []
 examples:
   - ex-the-additive-and-multiplicative-real-lie-groups
-  - ex-general-and-special-linear-lie-groups
-  - ex-orthogonal-and-special-orthogonal-lie-groups
-  - ex-unitary-and-special-unitary-lie-groups
   - ex-the-real-symplectic-matrix-group
   - ex-the-heisenberg-lie-group-and-algebra
   - ex-the-affine-group-of-the-line
   - ex-the-n-torus-and-its-exponential-lattice
-  - ex-matrix-exponential-as-the-lie-group-exponential
   - ex-adjoint-and-ad-for-a-matrix-lie-group
   - cex-a-real-invertible-matrix-with-no-real-logarithm
   - cex-bch-truncation-fails-when-higher-commutators-do-not-vanish

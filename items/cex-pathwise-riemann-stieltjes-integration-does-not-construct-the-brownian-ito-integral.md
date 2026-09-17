@@ -4,7 +4,7 @@ kind: counterexample
 title: "Bounded-variation Riemann-Stieltjes theory does not construct the Brownian Ito integral"
 status: draft
 origin: pipeline
-deps: [cor-brownian-paths-have-infinite-total-variation-on-every-interval, def-bounded-variation-and-total-variation, def-partition-and-refinement, cor-riemann-stieltjes-existence-bv-continuous, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, def-brownian-motion, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [cor-brownian-paths-have-infinite-total-variation-on-every-interval, def-bounded-variation-and-total-variation, def-partition-and-refinement, cor-riemann-stieltjes-existence-bv-continuous, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, def-brownian-motion, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -41,7 +41,7 @@ exists, and it does not claim that the Ito integral fails to exist.
 
 [F3] Along the dyadic partitions of $[0,t]$, $\sum_k(B_{t_{k+1}}-B_{t_k})^2\to t$ uniformly almost surely, and the two telescoping identities $2\sum_kB_{t_k}\Delta_k=B_t^2-\sum_k\Delta_k^2$ and $2\sum_kB_{t_{k+1}}\Delta_k=B_t^2+\sum_k\Delta_k^2$ hold with $\Delta_k=B_{t_{k+1}}-B_{t_k}$. [[thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes]] [[def-quadratic-variation-along-a-partition-sequence]]
 
-[F4] AC is declared for the ambient interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F4] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 
 ## Counterexample
 

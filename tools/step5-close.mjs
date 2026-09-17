@@ -108,9 +108,15 @@ const checks = [
   ['validate-plan', ['tools/validate-plan.mjs', 'research/plan-spec.json']],
   ['defect-ledger', ['tools/defect-ledger.mjs', 'validate', '--run', run]],
 ];
+// The routing check is the expensive one: on phase-2-remaining-27's 1,032-item
+// corpus it takes about ten minutes, so a five-minute cap aborted the close
+// with a bare ETIMEDOUT while the check itself was healthy. The bound below is
+// the tool's own safety net; the stage dispatch timeout (30 min) stays the
+// binding budget.
+const checkTimeoutMs = 20 * 60 * 1000;
 for (const [label, args] of checks) {
   const result = spawnSync(process.execPath, args, {
-    cwd: root, encoding: 'utf8', timeout: 300_000, maxBuffer: 32 * 1024 * 1024,
+    cwd: root, encoding: 'utf8', timeout: checkTimeoutMs, maxBuffer: 32 * 1024 * 1024,
   });
   if (result.error) fail(`${label} could not complete: ${result.error.message}`);
   if (result.status !== 0) fail(`${label} failed\n${result.stderr || result.stdout}`);

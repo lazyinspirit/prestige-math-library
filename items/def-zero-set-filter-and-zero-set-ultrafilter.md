@@ -67,8 +67,8 @@ here rather than reproved each time:
   arbitrary closed sets; this is the structural reason the theory of
   $\beta X$ is developed with $\mathcal Z(X)$.
 - **Source status.** The historical target
-  ([[rem-nagata-cp-theorem-remains-topological]] records the neighbouring
-  deferral) was inaccessible in this run, and the failed recovery record is in
+  (the neighbouring deferral is recorded as a remark on the companion examples
+  page) was inaccessible in this run, and the failed recovery record is in
   the Batch 4 coverage ledger. This definition and its consumers
   ([[lem-maximal-ideals-of-c-of-x-and-zero-set-ultrafilters]],
   [[lem-zero-set-ultrafilters-and-stone-cech-points]],

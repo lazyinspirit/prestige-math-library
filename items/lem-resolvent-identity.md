@@ -46,7 +46,7 @@ is assumed, and the factor order shown is the one that is used later.
 
 **Proof technique:** direct.
 
-1.1 For $u,v \in \{z1-a,\; w1-a,\; z1-b\}$ the resolvents satisfy $(u)(R(u)) = R(u)(u) = 1$, and the difference of the two scalar multiples of $1$ is $(z1-a) - (w1-a) = (z-w)1$, while $(z1-a)-(z1-b) = b - a$; all these elements commute with one another because each is a complex multiple of $1$ minus one of the commuting elements $a,b$ and inverses of commuting elements commute. [L1, L2, algebra]
+1.1 Each resolvent is a two-sided inverse of its own argument: $R(z,a)(z1-a) = (z1-a)R(z,a) = 1$, $R(w,a)(w1-a) = (w1-a)R(w,a) = 1$ and $R(z,b)(z1-b) = (z1-b)R(z,b) = 1$ by [L2]; and the scalar identities $(z1-a) - (w1-a) = (z-w)1$ and $(z1-a) - (z1-b) = b - a$ are immediate. No commutativity between $a$ and $b$, and no commutativity between $R(z,a)$ and $R(z,b)$, is claimed or needed: the two computations below multiply each resolvent against its own argument only. [L1, L2, algebra]
 
 2.1 Multiplying the identity $(z1-a) - (w1-a) = (z-w)1$ on the left by $R(z,a)$ and on the right by $R(w,a)$ yields $R(z,a)(z1-a)R(w,a) - R(z,a)(w1-a)R(w,a) = (z-w)R(z,a)R(w,a)$; the two terms on the left equal $R(w,a)$ and $R(z,a)$ respectively, so $R(w,a) - R(z,a) = (z-w)R(z,a)R(w,a)$, which is claim 1. [step 1.1, L2, algebra]
 

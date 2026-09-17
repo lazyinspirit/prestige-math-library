@@ -5,7 +5,6 @@ title: "Raw versus usual filtrations in the strong Markov theorem"
 status: draft
 origin: pipeline
 deps: [def-natural-and-usual-augmented-brownian-filtrations, thm-strong-markov-property-of-brownian-motion, thm-brownian-future-path-markov-property, def-brownian-motion, def-axiom-of-choice]
-forward_refs: [cex-strong-markov-fails-at-a-nonstopping-random-time]
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -51,7 +50,7 @@ matter and are fixed by that choice.
    on this page asserts it.
 4. **The stopping-time hypothesis is not decorative.** For a random time that
    is not a stopping time the conclusion can fail outright; the companion
-   example [[cex-strong-markov-fails-at-a-nonstopping-random-time]] on the
+   example `cex-strong-markov-fails-at-a-nonstopping-random-time` on the
    companion examples page exhibits
    the last zero before a fixed time, where the post-time future has no zero in
    a right-neighbourhood and therefore cannot have the Wiener law.
@@ -62,6 +61,8 @@ page use the non-strict test directly; the ceiling identity
 $\{\tau_n\le t\}=\{\tau\le2^{-n}\lfloor2^nt\rfloor\}$ is a non-strict test and
 needs no right-continuity. AC is declared because the conditional-expectation
 interface and the ambient Brownian construction assume it.
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.
 
 ## Source notes
 

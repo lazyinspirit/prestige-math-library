@@ -6,7 +6,6 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 deps: [thm-spectrum-is-nonempty-compact-and-norm-bounded, def-axiom-of-choice]
-forward_refs: [cex-norm-need-not-equal-spectral-radius]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -55,10 +54,12 @@ is fixed by the spectrum definition above.
   $\sigma(\lambda 1) = \{\lambda\}$ and hence $r(\lambda 1) = |\lambda|$: the
   element $\lambda 1$ is the unit rescaled, and $z1 - \lambda 1 = (z-\lambda)1$
   is invertible exactly when $z \ne \lambda$. This computation is used in the
-  counterexample [[cex-norm-need-not-equal-spectral-radius]].
+  counterexample `cex-norm-need-not-equal-spectral-radius`.
 
 - **The radius is not the norm in general.** The inequality $r(a) \le \|a\|$ is
   strict for many elements; the definitive relation
   $r(a) = \lim_n \|a^n\|^{1/n}$ is the theorem
   [[thm-spectral-radius-formula]]. In particular $r(a) = 0$ is possible for
   nonzero $a$, and then $\sigma_A(a) = \{0\}$.
+
+- **Reading order.** The example items named by ID above are homed on later pages of the plan, so they are named rather than hyperlinked: a body link to later material must be declared as a forward reference, and Step-5b closure removes every such declaration. Rehoming those items to an earlier page (an owner-only reading-order change) would make the citations backward and restore the links.

@@ -4,7 +4,7 @@ kind: theorem
 title: "Space-time harmonic functions yield Brownian local martingales"
 status: draft
 origin: pipeline
-deps: [thm-multidimensional-ito-formula-for-brownian-driven-processes, def-continuous-brownian-ito-process, def-d-dimensional-brownian-motion, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-continuity-real, thm-heine-cantor-r, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice]
+deps: [thm-multidimensional-ito-formula-for-brownian-driven-processes, def-continuous-brownian-ito-process, def-d-dimensional-brownian-motion, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, def-locally-square-integrable-predictable-brownian-integrand, def-progressively-measurable-and-predictable-process, lem-adapted-continuous-processes-are-progressively-measurable, def-elementary-predictable-brownian-integrand, def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, thm-localized-ito-integral, thm-stopping-an-ito-integral, thm-ito-integral-process-has-a-continuous-martingale-version, thm-ito-isometry-and-linearity-in-predictable-l2, thm-doob-maximal-bound-for-the-ito-integral, def-continuous-time-stopping-time, def-continuous-time-adapted-process-and-martingale, def-continuity-real, thm-heine-cantor-r, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -33,8 +33,11 @@ $K\subseteq U$ put $\tau_K:=\inf\{t\ge0:(t,B_t)\notin\operatorname{int}K\}$.
    thus each stopped piece is a true martingale.
 2. If $\tau_U:=\inf\{t\ge0:(t,B_t)\notin U\}$ and
    $E\int_0^t|\nabla f|^2(s,B_s)1_{[0,\tau_U)}(s)\,ds<\infty$ for a given
-   $t\ge0$, then $f(t,B_t)-f(0,0)=\int_0^t\sum_k\partial_{x_k}f(s,B_s)\,dB^k_s$
-   is a square-integrable martingale identity on $[0,t]$.
+   $t\ge0$, then
+   $$f(t\wedge\tau_U,B_{t\wedge\tau_U})-f(0,0)=\int_0^t1_{[0,\tau_U)}(s)\sum_{k=1}^d\partial_{x_k}f(s,B_s)\,dB^k_s,$$
+   a square-integrable martingale identity on $[0,t]$; the truncation by
+   $t\wedge\tau_U$ and by $1_{[0,\tau_U)}$ is what makes both sides defined when
+   $(t,B_t)$ leaves the open set $U$ on which $f$ and its derivatives exist.
 3. On the stochastic interval $[0,\tau_U)$ the process $t\mapsto f(t,B_t)$,
    read through continuous versions, is a continuous local martingale with
    localizing sequence $\tau_{K_n}$ for any increasing sequence of compact sets
@@ -54,7 +57,7 @@ $K\subseteq U$ put $\tau_K:=\inf\{t\ge0:(t,B_t)\notin\operatorname{int}K\}$.
  
 [F5] **Stopping times and localization.** For an open set $V\subseteq[0,\infty)\times\mathbb R^d$ and a continuous adapted $\mathbb R^d$-valued process, the first exit time $\inf\{t:(t,X_t)\notin V\}$ is a stopping time when the exit event is computed through the continuous path and the usual filtration conventions; if $K_n\subseteq U$ are compact with $\bigcup_nK_n=U$ and $\tau_{K_n}\uparrow$ then $\lim_n\tau_{K_n}=\tau_U$ almost surely, because otherwise the continuous path on the compact time interval $[0,\lim\tau_{K_n}]$ would be a compact subset of the open set $U$, hence contained in some $\operatorname{int}K_N$, forcing $\tau_{K_N}>\lim\tau_{K_n}$. [[def-continuous-time-stopping-time]] [[def-continuous-time-adapted-process-and-martingale]] [[def-continuity-real]]
  
-[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation and completeness interfaces. [[def-axiom-of-choice]] [[thm-choice-implies-dependent-implies-countable-choice]]
+[F6] **AC bookkeeping.** Choice is declared for the conditional-expectation and completeness interfaces. [[def-axiom-of-choice]]
  
  
  

@@ -49,7 +49,7 @@ $$\sigma(a) := \sigma_{\widetilde A}\bigl((0,a)\bigr) = \{\,\lambda \in \mathbb 
 
 **Proof technique:** direct.
 
-1.1 Associativity: expanding both sides of the associativity identity for $((\lambda,a)(\mu,b))(\nu,c)$ and $(\lambda,a)((\mu,b)(\nu,c))$ gives the three scalar terms $\lambda\mu\nu$, the three mixed terms $\lambda\mu c$, $\lambda b\nu$, $a\mu\nu$, and the terms $\lambda bc$, $ab\nu$, $\lambda bc$ assembled with the associativity of $A$; both sides equal $(\lambda\mu\nu,\ \lambda\mu c + \lambda b\nu + a\mu\nu + \lambda bc + ab\nu)$. [L1, algebra]
+1.1 Associativity: expanding both sides of the associativity identity for $((\lambda,a)(\mu,b))(\nu,c)$ and $(\lambda,a)((\mu,b)(\nu,c))$ by bilinearity gives the common value $$(\lambda\mu\nu,\ \lambda\mu c + \lambda\nu b + \mu\nu a + \lambda(bc) + \mu(ac) + \nu(ab) + (ab)c):$$ the left side produces $\lambda\mu c + \nu(\lambda b + \mu a + ab) + (\lambda b + \mu a + ab)c$ and the right side produces $\lambda(\mu c + \nu b + bc) + \mu\nu a + a(\mu c + \nu b + bc)$, and the two agree because scalars may be moved across the product, the multiplication of $A$ is bilinear, and $a(bc) = (ab)c$ by associativity. [L1, algebra]
 
 2.1 The element $(1,0)$ is a two-sided identity: $(1,0)(\mu,b) = (\mu, b + 0 + 0) = (\mu,b)$ and $(\lambda,a)(1,0) = (\lambda, 0 + a + 0) = (\lambda,a)$. Submultiplicativity holds because $\|(\lambda,a)(\mu,b)\| = |\lambda\mu| + \|\lambda b + \mu a + ab\| \le |\lambda||\mu| + |\lambda|\|b\| + |\mu|\|a\| + \|a\|\|b\| = (|\lambda| + \|a\|)(|\mu| + \|b\|) = \|(\lambda,a)\|\,\|(\mu,b)\|$ by [L1], and $\|(1,0)\| = 1$. [step 1.1, L1, algebra]
 
