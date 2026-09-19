@@ -36,11 +36,17 @@ trace norm, by definition of the latter
 ([[def-trace-class-operator]]), including the zero padding and the finite-rank
 case. $\mathcal S_2(H,K)$ is exactly the class of operators that are
 Hilbert–Schmidt relative to a supplied Hilbert basis $E$ of $H$: for such a
-basis, expanding each $Te$ in an orthonormal eigenbasis of $|T|$ and applying
-Parseval and the interchange of the nonnegative finite-subset suprema gives
+basis, let $(e_j)_{j\in J}\subseteq H$ and $(f_j)_{j\in J}\subseteq K$ be the
+right and left singular families supplied by the SVD.  Its expansion gives
+$$Te=\sum_{j\in J}s_j\langle e,e_j\rangle f_j,$$
+so orthonormality of the $f_j$, Parseval for the supplied basis $E$, and the
+interchange of the nonnegative finite-subset suprema give
 $$\sum_{e\in E}\|Te\|^2=\sum_{n\ge1}s_n(T)^2,$$
-because $|T|$ is self-adjoint with eigenvalues $s_n$ and eigenvectors forming a
-complete orthonormal family of $(\ker T)^\perp$
+since
+$$\sum_{e\in E}\|Te\|^2
+=\sum_{j\in J}s_j^2\sum_{e\in E}|\langle e,e_j\rangle|^2
+=\sum_{j\in J}s_j^2,$$
+and the last sum is the zero-padded singular-value sum
 ([[thm-singular-value-decomposition-for-compact-operators]],
 [[def-hilbert-schmidt-operator]],
 [[thm-parseval-equivalences-for-a-complete-orthonormal-family]],
@@ -58,4 +64,3 @@ $\|T\|\le\|T\|_1$ from the trace-class page is claimed. Later items must not use
 this remark as a supplier: it is recorded for orientation, exactly as the
 functional-analysis plan's FA-16 boundary requires, and the general theory of
 Schatten classes belongs to a later, separate development.
-

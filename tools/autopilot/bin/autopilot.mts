@@ -33,6 +33,7 @@ import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { recoverStep8 } from '../src/step8-recovery.mts';
+import { reopenStep5 } from '../src/step5-reopen.mts';
 import type { Config } from '../src/types.mts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -226,6 +227,32 @@ switch (cmd) {
     console.log(`recover-step8: ${result.recoveryId} reopened the Step-8 certification suffix`);
     console.log(`  ${result.changed.length} changed item(s), ${result.archived.length} archived result file(s)`);
     console.log('  run remains paused; start the controller, then resume after inspecting status');
+    break;
+  }
+
+  case 'reopen-step5': {
+    const run = opt('run') ?? die('--run is required');
+    const authorization = opt('authorization') ?? die('--authorization is required');
+    const config = loadConfig();
+    // Runs live in `.autopilot/<run>`; an explicit --state-dir still wins.
+    const runStateDir = opt('state-dir') ? stateDir : join(repo, '.autopilot', run);
+    try {
+      const result = reopenStep5({
+        repo,
+        run,
+        stateDir: runStateDir,
+        dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`),
+        authorizationPath: resolve(repo, authorization),
+        pauseAfter: opt('pause-after', '5b-close'),
+      });
+      console.log(`reopen-step5: ${result.reopenId} archived ${result.archived.length} file(s) and cleared `
+        + `${result.clearedStages.length} Step-5 stage record(s)`);
+      console.log(`  archive: ${result.archiveDir}`);
+      console.log('  run remains paused; start the controller and resume to re-run Step 5 to its boundary');
+    } catch (error: any) {
+      console.error(String(error?.message ?? error));
+      process.exitCode = 1;
+    }
     break;
   }
 

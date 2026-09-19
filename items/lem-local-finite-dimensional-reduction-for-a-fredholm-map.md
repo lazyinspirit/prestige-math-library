@@ -22,7 +22,10 @@ sources:
 Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $f : M \to N$ be a
 $C^k$ Fredholm map with $k \ge 1$ between $C^k$ Banach manifolds
 ([[def-fredholm-map-between-banach-manifolds]]), and let $p \in M$. Let $E$ and
-$F$ be the model spaces of $M$ and $N$, let $L := Df(p) : E \to F$, and fix
+$F$ be the model spaces of $M$ and $N$. Choose charts $\varphi$ at $p$ and
+$\psi$ at $f(p)$, centred at $0$, put
+$\widehat f:=\psi\circ f\circ\varphi^{-1}$, and let
+$L:=D\widehat f(0):E\to F$. Fix
 topological direct sums
 
 $$E = \ker L \oplus E_1, \qquad F = \operatorname{ran}L \oplus C$$
@@ -53,7 +56,7 @@ claim is made, and $g$ depends on both variables.
 
 ## Facts & Assumptions
 
-**Given:** AC, $C^k$ Banach manifolds $M,N$ with $k\ge1$, a $C^k$ Fredholm map $f : M \to N$, a point $p \in M$, and a Fredholm splitting as in the statement with $L := Df(p)$.
+**Given:** AC, $C^k$ Banach manifolds $M,N$ with $k\ge1$, a $C^k$ Fredholm map $f:M\to N$, a point $p\in M$, centred charts $\varphi,\psi$, and a Fredholm splitting as in the statement for $L:=D(\psi\circ f\circ\varphi^{-1})(0):E\to F$.
 
 [L1] Fredholm maps, tangents and chart-independence of the differential ([[def-fredholm-map-between-banach-manifolds]], [[lem-banach-manifold-differentials-are-chart-independent]], [[def-tangent-space-and-differential-on-a-banach-manifold]]).
 
@@ -73,16 +76,16 @@ claim is made, and $g$ depends on both variables.
 
 **Proof technique:** direct.
 
-1.1 Choose charts $\varphi$ of $M$ at $p$ and $\psi$ of $N$ at $f(p)$ with $\varphi(p)=0$ and $\psi(f(p))=0$. The representative $\hat f := \psi \circ f \circ \varphi^{-1}$ is $C^k$ on an open neighbourhood $\Omega$ of $0$ in $E$, satisfies $\hat f(0)=0$, and its derivative $\hat L := D\hat f(0)$ is conjugate to $L$ by the bounded linear isomorphisms $D\varphi(p)$ and $D\psi(f(p))$; hence $\hat L$ is Fredholm with $\ker\hat L = D\varphi(p)[\ker L]$ and $\operatorname{ran}\hat L = D\psi(f(p))[\operatorname{ran}L]$ by [L1]. [L1, L5, L6]
+1.1 The representative $\widehat f:=\psi\circ f\circ\varphi^{-1}$ is $C^k$ on an open neighbourhood $\Omega$ of $0$ in $E$, satisfies $\widehat f(0)=0$, and has derivative $D\widehat f(0)=L$ by definition. Chart independence identifies $L$ with the tangent map $Df(p)$ up to the bounded chart isomorphisms, so $L$ is Fredholm. [L1, L5, L6]
 
-2.1 Apply the splitting theorem [L2] to the Fredholm operator $\hat L$: it provides a closed complement $E_1$ of $\hat K := \ker\hat L$ in $E$ and a closed finite-dimensional complement $C'$ of $\operatorname{ran}\hat L$ in $F$, with bounded projections, and $\dim C' = \dim\operatorname{coker}\hat L = \dim\operatorname{coker}L$; the restriction $\hat L_1 := \hat L|_{E_1} : E_1 \to \operatorname{ran}\hat L$ is a bounded isomorphism. [step 1.1, L2]
+2.1 Use the fixed splittings from the statement. The restriction $L_1:=L|_{E_1}:E_1\to\operatorname{ran}L$ is bounded and injective because $E_1\cap\ker L=\{0\}$; it is surjective because writing any $x\in E$ as $x=v+x_1$ gives $Lx=Lx_1$. The range is closed and hence Banach, and $C$ is finite dimensional with $\dim C=\dim\operatorname{coker}L$, as guaranteed by [L2]. [step 1.1, L2]
 
-3.1 By [L3] the inverse $\hat L_1^{-1} : \operatorname{ran}\hat L \to E_1$ is bounded; AC supplies the DC assumed by that theorem. [step 2.1, L3]
+3.1 By [L3] the inverse $L_1^{-1}:\operatorname{ran}L\to E_1$ is bounded; AC supplies the DC assumed by that theorem. [step 2.1, L3]
 
-4.1 Write $\rho := \mathrm{pr}_{\operatorname{ran}\hat L} \circ \hat f$ and $c := \mathrm{pr}_{C'} \circ \hat f$ on $\Omega$; both are $C^k$ by [L5]. Consider the map $G : \Omega' \to \operatorname{ran}\hat L$ defined on the open set $$\Omega' := \bigl\{\bigl((w,y),u\bigr) \in (\hat K \times \operatorname{ran}\hat L) \times E_1 : w+u \in \Omega\bigr\}$$ by $G((w,y),u) := \rho(w+u) - y$. Then $G((0,0),0) = 0$ and the partial derivative of $G$ in the $u$-variable at $((0,0),0)$ is $\hat L_1$, a bounded linear isomorphism by [step 3.1]; by [L4] there are neighbourhoods $A \subseteq \hat K \times \operatorname{ran}\hat L$ of $(0,0)$ and $B \subseteq E_1$ of $0$ and a $C^k$ map $\phi : A \to B$ such that $\rho(w+\phi(w,y)) = y$ for every $(w,y) \in A$ and such that every $u \in B$ with $\rho(w+u)=y$ and $(w,y)\in A$ equals $\phi(w,y)$. [step 2.1, step 3.1, L4, L5]
+4.1 Write $K:=\ker L$, $\rho:=\operatorname{pr}_{\operatorname{ran}L}\circ\widehat f$, and $c:=\operatorname{pr}_{C}\circ\widehat f$ on $\Omega$; both component maps are $C^k$ by [L5]. On the open set $\Omega':=\{((w,y),x_1)\in(K\times\operatorname{ran}L)\times E_1:w+x_1\in\Omega\}$ define $G((w,y),x_1):=\rho(w+x_1)-y$. Its partial derivative in $x_1$ at the origin is $L_1$, a bounded isomorphism by step 3.1. By [L4], after shrinking to a product $A_0\times U_0\subseteq K\times\operatorname{ran}L$, there are a neighbourhood $B\subseteq E_1$ and a $C^k$ map $\theta:A_0\times U_0\to B$ such that $\rho(w+\theta(w,u))=u$, uniquely among $x_1\in B$. [step 2.1, step 3.1, L4, L5]
 
-5.1 Let $T(w,u) := (w, \rho(w+u))$ on the open set $T_0 := \{(w,u) \in \hat K\times B : (w,\rho(w+u)) \in A\}$, a $C^k$ map. For $(w,y) \in A$ the point $(w,\phi(w,y))$ lies in $T_0$ and is sent to $(w,y)$ because $\rho(w+\phi(w,y)) = y$; conversely, if $(w,u) \in T_0$ and $y := \rho(w+u)$, then $u \in B$, $(w,y) \in A$ and $\rho(w+u) = y$, so the uniqueness in [step 4.1] gives $u = \phi(w,y)$: the map $T : T_0 \to A$ is a bijection with inverse $(w,y) \mapsto (w,\phi(w,y))$, and that inverse is $C^k$; hence $T : T_0 \to A$ is a $C^k$ diffeomorphism. [step 4.1, L5, algebra]
+5.1 Let $T_0:=\{(w,x_1)\in K\times B:(w,\rho(w+x_1))\in A_0\times U_0\}$ and define $S:T_0\to U_0\times A_0$ by $S(w,x_1):=(\rho(w+x_1),w)$. Step 4.1 shows that $S$ is bijective with $C^k$ inverse $(u,w)\mapsto(w,\theta(w,u))$; hence $S$ is a $C^k$ diffeomorphism. Composing with the chart $\varphi$ and the linear splitting $E=K\oplus E_1$ gives the asserted coordinate map $T$ from a neighbourhood of $p$ onto $U_0\times A_0$. [step 4.1, L5]
 
-6.1 For $(w,y) \in A$ one has $\hat f(T^{-1}(w,y)) = \hat f(w+\phi(w,y)) = \bigl(\rho(w+\phi(w,y)),\ c(w+\phi(w,y))\bigr) = \bigl(y,\ g(w,y)\bigr)$, where $g := c \circ (w+\phi(w,y)) : A \to C'$ is $C^k$; writing $(u,v)$ for the pair $(y,w)$ this is the displayed normal form. [step 5.1, L5, algebra]
+6.1 Define $g:U_0\times A_0\to C$ by $g(u,w):=c(w+\theta(w,u))$. It is $C^k$, and for $(u,w)\in U_0\times A_0$ one has $\widehat f(S^{-1}(u,w))=(u,g(u,w))$ under the fixed decomposition $F=\operatorname{ran}L\oplus C$. [step 4.1, step 5.1, L5]
 
-7.1 Returning through the charts $\varphi, \psi$ and the chosen splittings, the neighbourhoods $A$ and the splitting of [step 2.1] are exactly the objects asserted: $u$ ranges over an open subset of $\operatorname{ran}L$ up to the fixed bounded isomorphism $D\psi(f(p))$, $v$ over an open subset of the kernel, and $g$ takes values in the finite-dimensional complement $C'$ of the range, of dimension $\dim\operatorname{coker}L$. [step 6.1, step 2.1, L1, algebra] ∎
+7.1 Returning through $\varphi$ and $\psi$, step 6.1 is exactly the asserted local normal form for the originally fixed chart representative and the originally fixed splittings; the kernel variable and obstruction target are finite dimensional by [L2]. [step 2.1, step 5.1, step 6.1, L1] ∎

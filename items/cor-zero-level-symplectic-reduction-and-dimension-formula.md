@@ -23,8 +23,9 @@ proof_strategy: direct
 ## Statement
 
 Assume $\mathrm{AC}_\omega$. Let $(M,\omega,G,\mu)$ be a Hamiltonian $G$-space
-and suppose that $0\in\mathfrak g^*$ is a regular value of $\mu$ and that $G$
-acts freely and properly on $\mu^{-1}(0)$. Then the symplectic quotient
+and suppose that $0\in\mathfrak g^*$ is a regular value of $\mu$, that
+$\mu^{-1}(0)$ is nonempty, and that $G$ acts freely and properly on
+$\mu^{-1}(0)$. Then the symplectic quotient
 
 $$M_0:=\mu^{-1}(0)/G$$
 
@@ -34,7 +35,7 @@ $$\dim M_0=\dim M-2\dim G .$$
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Hamiltonian $G$-space, $0$ a regular value of $\mu$, and $G$ acting freely and properly on $\mu^{-1}(0)$.
+**Given:** $\mathrm{AC}_\omega$, a Hamiltonian $G$-space, $0$ a regular value of $\mu$, a nonempty level $\mu^{-1}(0)$, and $G$ acting freely and properly on that level.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the reduction and fundamental-field suppliers.
 

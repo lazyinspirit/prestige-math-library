@@ -45,7 +45,8 @@ off the compact ideals.
 
 On the Lie-algebra level the same object is the pair $(\mathfrak g_0,\theta_*)$
 consisting of a real semisimple Lie algebra $\mathfrak g_0$ and a Cartan
-involution $\theta_*$; the corresponding symmetric space is $G/K$ with the
+involution $\theta_*$, with $\mathfrak g_0$ having no nonzero compact ideal;
+the corresponding symmetric space is $G/K$ with the
 $G$-invariant Riemannian metric whose value at the origin $eK$ is the positive
 definite form $B_{\theta_*}$ restricted to
 $\mathfrak p_0\cong T_{eK}(G/K)$. The metric, its invariance and its curvature

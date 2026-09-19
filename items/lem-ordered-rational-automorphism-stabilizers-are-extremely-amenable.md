@@ -34,7 +34,12 @@ Hausdorff space has a fixed point.
 
 [F1] Finite Ramsey for colourings of $k$-element subsets: for all positive $k, c, r$ there is $N$ with $N \to (r)^k_c$ ([[thm-finite-ramsey-for-uniform-subsets]], [[def-ramsey-colouring-and-arrow-notation]], [[def-natural-numbers]]).
 
-[F2] The KPT correspondence: for a Fraisse structure with rigid finite substructures and the Ramsey property, the automorphism group is extremely amenable; the finite linear orders are the instance used here ([[thm-finite-ramsey-for-uniform-subsets]]).
+[F2] The KPT correspondence: for a Fraïssé structure with rigid finite
+substructures and the Ramsey property, the automorphism group is extremely
+amenable. This is Kechris--Pestov--Todorcevic, Theorem 4.7; its finite-linear-
+order instance is the one used here. The Ramsey hypothesis for that instance,
+but not the KPT fixed-point conclusion itself, is supplied by
+[[thm-finite-ramsey-for-uniform-subsets]].
 
 [L1] A finite point stabiliser of $\operatorname{Aut}(\mathbb{Q},<)$ is the direct product of the automorphism groups of the finitely many open intervals cut out by the support, each of which is order-isomorphic to $\mathbb{Q}$; a finite product of extremely amenable groups is extremely amenable, because fixed points can be taken one factor at a time: an action of $G_1 \times G_2$ on a compact space has a fixed point for $G_1$ by extreme amenability of $G_1$, the fixed-point set is compact and invariant under $G_2$, and extreme amenability of $G_2$ supplies a point fixed by both. [given]
 

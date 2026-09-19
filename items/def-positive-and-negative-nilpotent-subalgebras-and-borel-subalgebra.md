@@ -64,8 +64,9 @@ $\operatorname{ht}(\alpha+\gamma)=\operatorname{ht}(\alpha)+\operatorname{ht}(\g
 by uniqueness of the simple-root coefficients, so
 $[\mathfrak n^+,F_k]\subseteq F_{k+1}$. Induction gives
 $\gamma_k(\mathfrak n^+)\subseteq F_k$ for the lower central series
-([[def-lower-central-series-and-nilpotent-lie-algebra]]). Since the finite set
-$\Phi^+$ has a maximal height $H$, we get $F_{H+1}=0$ and hence
+([[def-lower-central-series-and-nilpotent-lie-algebra]]). If $\Phi^+$ is
+empty, then $\mathfrak n^+=0$ is nilpotent. Otherwise the finite nonempty set
+$\Phi^+$ has a maximal height $H$, so $F_{H+1}=0$ and hence
 $\gamma_{H+1}(\mathfrak n^+)=0$: the algebra $\mathfrak n^+$ is nilpotent. The
 negative case is identical, with heights of the positive roots $-\gamma$ for
 $\gamma\in\Phi^-$, since $\Phi^-=-\Phi^+$. Thus the terms "positive and

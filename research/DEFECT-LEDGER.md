@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 5b5cd75c644c by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ aea2b60f7183 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 9591 |
+| defects caught before publication | 9770 |
 | now mechanically prevented | 356 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -772,32 +772,32 @@
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
 
-## phase-2-remaining-27 — 792 row(s)
+## phase-2-remaining-27 — 971 row(s)
 
 | subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
 |---|---|---|---|
-| invalid-inference | 7 |  | 229 |
-| citation-inaccurate | 28 |  | 201 |
-| false-claim | 72 |  | 11 |
-| citation-missing | 5 | 16 | 10 |
-| citation-inflated |  | 15 | 14 |
+| citation-inaccurate | 28 |  | 238 |
+| invalid-inference | 7 |  | 259 |
+| false-claim | 72 |  | 37 |
+| citation-inflated |  | 15 | 37 |
+| ill-typed-construction |  |  | 41 |
+| missing-hypothesis | 8 |  | 27 |
+| citation-missing | 5 | 16 | 12 |
 | unlicensed-inference | 28 |  |  |
 | false-or-overstrong-statement | 7 |  | 20 |
-| missing-hypothesis | 8 |  | 16 |
 | ill-formed | 20 |  |  |
-| false-computation | 13 |  | 3 |
-| ill-typed-construction |  |  | 15 |
+| false-computation | 13 |  | 6 |
+| missing-case |  |  | 16 |
 | arithmetic-error | 8 |  | 6 |
+| missing-choice-scope | 1 |  | 6 |
+| unsupported-inference | 4 |  | 2 |
+| ill-typed-claim | 1 |  | 5 |
 | false-boundary-disposition |  |  | 6 |
-| missing-case |  |  | 5 |
-| missing-choice-scope | 1 |  | 3 |
-| unsupported-inference | 4 |  |  |
-| ill-typed-claim | 1 |  | 3 |
+| invalid-witness | 2 |  | 3 |
 | contract-mismatch | 3 |  |  |
 | undefined-notation | 3 |  |  |
-| invalid-witness | 2 |  | 1 |
 | other | 2 |  | 1 |
-| false-or-overstrong-title |  |  | 2 |
+| false-or-overstrong-title |  |  | 3 |
 | reader-repair | 1 |  |  |
 | citation-misattributed |  |  | 1 |
 | invalid-refutation |  |  | 1 |

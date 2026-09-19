@@ -31,7 +31,7 @@ conjugate.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice; a connected real semisimple Lie group $G$ with finite center, a global Cartan involution $\Theta$, $K=G^\Theta$, the Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$ of its Lie algebra, and the symmetric space $X=G/K$ with the invariant metric of the pair $(\mathfrak g_0,\theta_*)$.
+**Given:** The Axiom of Choice; a connected real semisimple Lie group $G$ with finite center, a global Cartan involution $\Theta$, $K=G^\Theta$, the Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$ of its Lie algebra, and $X=G/K$.
 
 [A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the global decomposition of [L1] and the Cartan closed subgroup theorem of [L6].
 
@@ -39,7 +39,7 @@ conjugate.
 
 [L2] $\mathfrak g_0$ is semisimple, hence centerless and equal to its own derived subalgebra, and the Killing form is negative definite on $\mathfrak k_0$, positive definite on $\mathfrak p_0$, with the summands orthogonal and $[\mathfrak k_0,\mathfrak p_0]\subseteq\mathfrak p_0$, $[\mathfrak p_0,\mathfrak p_0]\subseteq\mathfrak k_0$ ([[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]], [[cor-semisimple-lie-algebras-are-centerless-and-perfect]], [[def-cartan-decomposition-of-a-real-semisimple-lie-algebra]], [[def-simple-semisimple-and-reductive-lie-algebras]]).
 
-[L3] $(G,K)$ is a Riemannian symmetric pair of noncompact type with $G$-invariant metric whose value at the origin is $B_{\theta_*}$; the map $\Phi:\mathfrak p_0\to X$, $X\mapsto\exp(X)K$, is a diffeomorphism onto $X$ with $\Phi(0)=K$, the geodesics of the invariant metric through the origin are the curves $t\mapsto\exp(tX)K$, and the curvature satisfies $R(X,Y)Z=-\lbrack\lbrack X,Y\rbrack,Z\rbrack$ for $X,Y,Z\in\mathfrak p_0$, so the sectional curvature is nonpositive at every point ([[def-riemannian-symmetric-pair-of-noncompact-type]], [[thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space]], [[prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k]], [[def-levi-civita-connection]]).
+[L3] The pair $(G,K)$ need not itself be of noncompact type: $\mathfrak g_0$ may have compact ideals. The noncompact-type convention explicitly splits off those compact ideals, which lie in $\mathfrak k_0$ and act trivially on $G/K$; the resulting effective pair has the same symmetric space $X$ and tangent space $\mathfrak p_0$ ([[def-riemannian-symmetric-pair-of-noncompact-type]]). Applied to that effective pair, the symmetric-space results give a $G$-invariant metric on $X$ whose value at the origin is $B_{\theta_*}|_{\mathfrak p_0}$; the map $\Phi:\mathfrak p_0\to X$, $X\mapsto\exp(X)K$, is a diffeomorphism with $\Phi(0)=K$, the geodesics through the origin are $t\mapsto\exp(tX)K$, and $R(X,Y)Z=-\lbrack\lbrack X,Y\rbrack,Z\rbrack$, so sectional curvature is nonpositive everywhere ([[thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space]], [[prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k]], [[def-levi-civita-connection]]).
 
 [L4] $X$ is a smooth manifold with the quotient smooth structure, $G$ acts smoothly and transitively on $X$, the stabilizer of the origin is $K$, and for the invariant Riemannian metric the action of $G$ is by isometries: $d(gx,gy)=d(x,y)$ for all $g\in G$ and $x,y\in X$ ([[def-homogeneous-space-of-a-lie-group]], [[def-riemannian-distance-on-a-connected-manifold]], [[prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k]]).
 
@@ -61,7 +61,7 @@ conjugate.
 
 1.4 The exponential map of a compact connected Lie group is surjective: every element lies in a maximal torus by [L5], and the exponential map of a torus is surjective by [L5]. [L5]
 
-1.5 The distance function on $X$ is complete: the metric of [L3] is that of the Riemannian symmetric pair, $X$ is diffeomorphic to the vector space $\mathfrak p_0$ by [L3], and the Riemannian distance of a complete connected Riemannian manifold is complete. [L3]
+1.5 The distance function on $X$ is complete: after the harmless compact-ideal reduction described in [L3], the metric is that of the effective Riemannian symmetric pair of noncompact type, and $X$ is diffeomorphic to the vector space $\mathfrak p_0$ by [L3]. [L3]
 
 1.6 Convexity of the radius function of a compact set. Let $O\subseteq X$ be a nonempty compact subset and put $f(x):=\max_{y\in O}d(x,y)$; this is finite and continuous because $O$ is compact. For every geodesic $\gamma$ of the invariant metric of [L3] with midpoint $m=\gamma(1/2)$ the midpoint inequality $$f(m)^{2}\le\tfrac12\bigl(f(\gamma(0))^{2}+f(\gamma(1))^{2}\bigr)-\tfrac14 d(\gamma(0),\gamma(1))^{2}$$ holds: by [L7] each $y\in O$ satisfies $d(y,m)^{2}\le\tfrac12(d(y,\gamma(0))^{2}+d(y,\gamma(1))^{2})-\tfrac14 d(\gamma(0),\gamma(1))^{2}$, and the deficit term is independent of $y$, so taking the maximum over the compact set $O$ on the left, and bounding each of the two remaining maxima by $f(\gamma(0))$ and $f(\gamma(1))$ in the sense $\max_y\tfrac12(d(y,\gamma(0))^{2}+d(y,\gamma(1))^{2})\le\tfrac12(f(\gamma(0))^{2}+f(\gamma(1))^{2})$, gives the displayed inequality with the same deficit. [L3, L4, L7, algebra]
 

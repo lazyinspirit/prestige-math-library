@@ -43,7 +43,7 @@ each summand occurring with multiplicity one.
 
 1.2 For the right-hand side $\bigoplus_{i=0}^{\min(a,b)}V(a+b-2i)$ the same weight $m$ occurs in the summand $V(a+b-2i)$ exactly when $|m|\le a+b-2i$ and $m\equiv a+b$ modulo $2$, so its multiplicity is $w'_m=\max(0,\min(\min(a,b),\lfloor(a+b-|m|)/2\rfloor)+1)$ in that parity case and $0$ otherwise. [L1, L2]
 
-2.1 The counts agree, $w_m=w'_m$ for every integer $m$: writing $j=(a+b-m)/2$, the tensor count is $c_j=\min(j,a)-\max(0,j-b)+1$, a direct case check for $m\ge0$ in the cases $a\le b$ and $a>b$ identifies this with the right-hand count of step 1.2, and the identity for $m<0$ follows from the symmetries $w_{-m}=w_m$ and $w'_{-m}=w'_m$ obtained by reflecting the weight strings. [L1, step 1.1, step 1.2]
+2.1 The counts agree, $w_m=w'_m$ for every integer $m$. If $m\not\equiv a+b\pmod 2$ or $|m|>a+b$, both counts are zero. Otherwise put $j=(a+b-m)/2$. For $m\ge0$ one has $0\le j\le(a+b)/2$, and the tensor count is $$c_j=\max\bigl(0,\min(j,a)-\max(0,j-b)+1\bigr).$$ A direct case check for $a\le b$ and $a>b$ identifies this with the right-hand count of step 1.2. The identity for $m<0$ follows from the symmetries $w_{-m}=w_m$ and $w'_{-m}=w'_m$ obtained by reflecting the weight strings. [L1, step 1.1, step 1.2]
 
 2.2 Both sides are direct sums of irreducibles and the left side is completely reducible by [L2]; moreover in a completely reducible $\mathfrak{sl}_2$-module the multiplicity $c_n$ of $V(n)$ is determined by the weight multiplicities through $w_n=\sum_{m\ge n,\ m\equiv n\ (2)}c_m$, so that $c_n=w_n-\sum_{m>n,\ m\equiv n\ (2)}c_m$ is recovered by downward induction on $n$. [L1, L2, step 1.1]
 

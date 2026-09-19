@@ -38,7 +38,7 @@ to the assertion that every product of compact $T_1$ spaces
 
 [F3] A space is compact if and only if every family of closed sets with the finite intersection property has nonempty intersection ([[thm-compact-iff-fip]], [[def-finite-intersection-property]]).
 
-[F4] Finite choice produces one point in each of finitely many nonempty sets ([[lem-finite-choice]]).
+[F4] If $n\in\mathbb N$ and $F:n\to V$ is a natural-number-indexed list of nonempty sets, then the family of values $F[n]$ has a choice function ([[lem-finite-choice]]).
 
 [L1] A cylinder $\pi_i^{-1}[A_i]$ is closed in $X$ when $A_i$ is closed in $X_{A_i}$, being the preimage of a closed set under a continuous projection ([[def-product-topology]], [[thm-subspace-closure-and-interior]]).
 
@@ -52,7 +52,7 @@ to the assertion that every product of compact $T_1$ spaces
 
 2.1 Form $X := \prod_{i \in I} X_{A_i}$ where $X_{A_i}$ is the repaired coordinate of [F1]; each factor is compact $T_1$, so $X$ is compact by the hypothesis. [step 1.2, F1]
 
-3.1 For each $i$ the cylinder $C_i := \pi_i^{-1}[A_i]$ is a closed subset of $X$ by [L1] and [F1], and the family $\{C_i : i \in I\}$ has the finite intersection property: for a finite $J \subseteq I$, finite choice [F4] selects $a_j \in A_j$ for $j \in J$, and the point that is $a_j$ at coordinates in $J$ and $\infty$ elsewhere lies in $\bigcap_{j \in J} C_j$. [step 2.1, F1, F4, L1]
+3.1 For each $i$ the cylinder $C_i := \pi_i^{-1}[A_i]$ is closed in $X$ by [L1] and [F1]. To verify the finite intersection property in its finite-list form, let $n\in\mathbb N$ and let $s:n\to\{C_i:i\in I\}$ be arbitrary. For each $k<n$, choose the unique $i_k\in I$ with $s(k)=C_{i_k}$ (the cylinder determines its coordinate), and define $F(k):=A_{i_k}$. By [F4] the family $F[n]$ has a choice function $h$. Define $x\in X$ by $x(i):=h(A_i)$ when $i=i_k$ for some $k<n$, and by the distinguished point $\infty\in X_{A_i}$ otherwise. If the same coordinate occurs more than once this gives the same value, and $h(A_i)\in A_i$; hence $x\in C_{i_k}=s(k)$ for every $k<n$. Thus every finite list from $\{C_i:i\in I\}$ has nonempty intersection. [step 2.1, F1, F4, L1]
 
 4.1 By compactness of $X$ and [F3] the intersection $\bigcap_i C_i$ is nonempty; any point $x$ of it has $x_i \in A_i$ for every $i$, so $i \mapsto x_i$ is a choice function for the family $(A_i)_{i \in I}$. [step 2.1, step 3.1, F3]
 

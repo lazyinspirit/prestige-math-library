@@ -39,7 +39,8 @@ For $\lambda,\mu\in\mathfrak h^*$ write $\mu\le\lambda$ when
 $\lambda-\mu\in Q_+$; in words, when $\lambda-\mu$ is a nonnegative integral
 combination of the chosen simple roots. This is the **root order** on
 $\mathfrak h^*$. In particular $\mu\le\lambda$ forces
-$\lambda-\mu\in E$, so comparisons only occur inside $E$.
+$\lambda-\mu\in E$, so comparable functionals lie in the same affine coset
+of $E$ in $\mathfrak h^*$; neither functional need itself lie in $E$.
 
 **The root order is a partial order.** Reflexivity holds with $n_i=0$.
 Antisymmetry: if $\mu\le\lambda$ and $\lambda\le\mu$, then

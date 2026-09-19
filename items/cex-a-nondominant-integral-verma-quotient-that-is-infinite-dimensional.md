@@ -33,7 +33,7 @@ highest weight module $M(\lambda)$ of weight $\lambda$ is finite-dimensional.
 
 [L1] $\lambda$ is integral: $\langle\lambda,\alpha^\vee\rangle=\lambda(h_\alpha)=\lambda(h)=-1\in\mathbb Z$, but it is not dominant, since $-1$ is not nonnegative ([[def-integral-dominant-and-strictly-dominant-weights]], [[def-coroot-of-a-lie-algebra-root]]).
 
-[L2] For the module $M(\lambda)$ of [[ex-verma-modules-for-sl-two]] with $\lambda(h)=-1\notin\mathbb Z_{\ge0}$, the module is simple and infinite-dimensional, and it has no finite-dimensional simple quotient. [example statement]
+[L2] Every Verma module $M(\lambda)$ in [[ex-verma-modules-for-sl-two]] has the infinite basis $v_k=f^k\cdot v_0$, $k\ge0$, and is therefore infinite-dimensional. [example statement]
 
 ## Counterexample
 
@@ -41,6 +41,6 @@ highest weight module $M(\lambda)$ of weight $\lambda$ is finite-dimensional.
 
 1.1 The functional $\lambda$ with $\lambda(h)=-1$ is integral by [L1], so it satisfies the hypothesis of the refuted statement. [L1, A1]
 
-1.2 By [L2] the highest weight module $M(\lambda)$ for this $\lambda$ is simple, infinite-dimensional, and admits no finite-dimensional simple quotient; the conclusion of the refuted statement ("$M(\lambda)$ is finite-dimensional") thus fails. [L2]
+1.2 By [L2] the highest weight module $M(\lambda)$ for this $\lambda$ is infinite-dimensional; the conclusion of the refuted statement ("$M(\lambda)$ is finite-dimensional") thus fails. [L2]
 
 2.1 The witness is explicit: the integral but nondominant functional $\lambda$ with $\lambda(h)=-1$ and the module $M(\lambda)$ with its infinite basis $v_k=f^k\cdot v_0$, $k\ge0$; the failed conclusion is the implication from integrality to finite-dimensionality. [step 1.1, step 1.2] ∎

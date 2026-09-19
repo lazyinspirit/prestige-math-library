@@ -40,18 +40,20 @@ $\omega$-sequences from the full generic extension.
 
 [F3] Hereditary symmetry is evaluated through supports: a set is in $N$ exactly when it has a support in the normal filter of the construction, and the filter contains every pointwise stabiliser of a set of size below $\lambda$ ([[def-good-tree-watson-symmetric-stone-model]], [[def-symmetric-forcing-system-and-hereditarily-symmetric-names]], [[thm-hereditarily-symmetric-interpretations-form-a-zf-model]]).
 
+[L1] A $<\lambda$-closed forcing over a ZFC ground model adds no new sequences of ground-model sets of length below $\lambda$. Indeed, below any condition and for a name for such a sequence of length $\beta<\lambda$, recursively strengthen the condition to decide one coordinate at each successor stage and take lower bounds at limit stages and at $\beta$; the conditions produced at the final stage are dense, so the generic filter contains one which decides the whole sequence as a ground-model sequence. [F1, F2]
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $\beta < \lambda$ and let $g : \beta \to N$ be a function in the full extension, and suppose $g = \dot g_H$ for a $P$-name $\dot g$. [given]
+1.1 Let $\beta<\lambda$ and let $g:\beta\to N$ belong to the full extension. For each $\xi<\beta$, choose in the full ZFC extension a hereditarily symmetric ground-model name $\dot x_\xi$ such that $(\dot x_\xi)_H=g(\xi)$. [given, F3]
 
-2.1 $P$ is $<\lambda$-closed by [F1], so the value of $\dot g$ is decided by a condition in the ground model: there is a condition $p$ forcing that $\dot g$ is a function on $\check\beta$ whose values lie in the hereditarily symmetric class, and for each $\xi < \beta$ there is a condition below $p$ deciding $\dot g(\check\xi)$ to be some hereditarily symmetric name. [step 1.1, F1, F2]
+2.1 The sequence $h=\langle\dot x_\xi:\xi<\beta\rangle$ has length below $\lambda$ and all its entries belong to the ground model. By [L1], $h$ itself belongs to the ground model. This is the point at which closure is used: it produces one ground-model sequence of names, rather than unrelated values decided by incompatible conditions. [step 1.1, L1]
 
-3.1 In the ground model, for each $\xi < \beta$ the value of $\dot g$ at $\xi$ is given by a hereditarily symmetric name $\dot x_\xi$; choose a support $e_\xi$ of $\dot x_\xi$ with $|e_\xi| < \lambda$ by [F3], and put $e := \bigcup_{\xi < \beta} e_\xi$. [step 2.1, F3]
+3.1 Working now in the ground model, use Choice there to select for every $\xi<\beta$ a support $e_\xi$ of $\dot x_\xi$ with $|e_\xi|<\lambda$, and put $e:=\bigcup_{\xi<\beta}e_\xi$. [step 2.1, F3]
 
 4.1 The union $e$ has size below $\lambda$: it is the union of $\beta < \lambda$ many sets each of size below $\lambda$, and $\lambda$ is regular, so the union is below $\lambda$. [step 3.1, F1, F3]
 
-5.1 Every automorphism in $\operatorname{fix}(e)$ fixes each $\dot x_\xi$ pointwise, hence fixes the graph name $\{(\check\xi, \dot x_\xi) : \xi < \beta\}$; that graph name is therefore symmetric, and all its elements are hereditarily symmetric, so the graph name is hereditarily symmetric in the sense of [F3]. [step 3.1, step 4.1, F2, F3]
+5.1 Form in the ground model the canonical name $\dot k$ for the graph $\{\langle\xi,(\dot x_\xi)_H\rangle:\xi<\beta\}$. Every automorphism in $\operatorname{fix}(e)$ fixes each $\dot x_\xi$ and each canonical ordinal name $\check\xi$, hence fixes $\dot k$. Its constituent names are hereditarily symmetric, so $\dot k$ is hereditarily symmetric. [step 3.1, step 4.1, F2, F3]
 
-6.1 By [F2] the interpretation of that hereditarily symmetric graph name is the function $g$, and by [F3] it belongs to $N$; hence $g \in N$ for every $\beta < \lambda$, and in particular for $\beta = \omega$ when $\lambda = \omega_1$. [step 5.1, F2, F3] ∎
+6.1 By construction, $(\dot k)_H=\{\langle\xi,g(\xi)\rangle:\xi<\beta\}=g$. Since $\dot k$ is hereditarily symmetric, [F3] gives $g\in N$. This holds for every $\beta<\lambda$, and in particular for $\beta=\omega$ when $\lambda=\omega_1$. [step 1.1, step 5.1, F2, F3] ∎

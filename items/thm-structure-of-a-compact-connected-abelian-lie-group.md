@@ -5,7 +5,7 @@ title: Structure of compact connected abelian Lie groups
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, def-exponential-map-of-a-lie-group, thm-universal-covering-lie-group, def-axiom-of-choice, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-compactness-under-continuous-maps]
+deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, def-exponential-map-of-a-lie-group, thm-universal-covering-lie-group, prop-commuting-lie-algebra-elements-have-multiplicative-exponentials, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-compactness-under-continuous-maps]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -22,7 +22,7 @@ proof_strategy: direct
 
 ## Statement
 
-Assume the Axiom of Choice. Let $T$ be a compact connected abelian Lie group with
+Let $T$ be a compact connected abelian Lie group with
 Lie algebra $\mathfrak t$ and exponential map
 $\exp:\mathfrak t\to T$
 ([[def-torus-and-maximal-torus-in-a-compact-lie-group]],
@@ -33,9 +33,7 @@ $r=\dim\mathfrak t$.
 
 ## Facts & Assumptions
 
-**Given:** Assume the Axiom of Choice, a compact connected abelian Lie group $T$ with Lie algebra $\mathfrak t$ and exponential map $\exp$.
-
-[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through the Haar-based theory of the surrounding page and through the choice of a lattice basis in [L5], and is not otherwise used in the elementary group-theoretic steps.
+**Given:** A compact connected abelian Lie group $T$ with Lie algebra $\mathfrak t$ and exponential map $\exp$.
 
 [L1] For commuting $X,Y\in\mathfrak t$ one has $\exp(X+Y)=\exp(X)\exp(Y)$; in particular $\exp:\mathfrak t\to T$ is a homomorphism of abelian groups because $\mathfrak t$ is abelian and $T$ is abelian, and $\exp(tX)=\exp(X)^t$ for integers $t$ ([[prop-commuting-lie-algebra-elements-have-multiplicative-exponentials]], [[def-exponential-map-of-a-lie-group]]).
 
@@ -61,4 +59,4 @@ $r=\dim\mathfrak t$.
 
 4.1 The rank equals $n:=\dim\mathfrak t$: if $V=\operatorname{span}(\Lambda)\subsetneq\mathfrak t$, then the third isomorphism theorem for topological groups gives a continuous surjection $\mathfrak t/\Lambda\to\mathfrak t/V\cong\mathbb R^{n-m}$ with $n-m>0$; its image is compact by [L5], while $\mathbb R^{n-m}$ is not compact, a contradiction. Hence $m=n$, so $\Lambda$ has a $\mathbb Z$-basis $X_1,\dots,X_n$ that is an $\mathbb R$-basis of $\mathfrak t$; in particular $\Lambda$ is a full lattice and $T\cong\mathfrak t/\Lambda$ by step 3.1. [L4, L5, step 3.1, step 3.2]
 
-5.1 The linear isomorphism $\mathbb R^n\to\mathfrak t$, $(a_1,\dots,a_n)\mapsto\sum_ia_iX_i$, carries $\mathbb Z^n$ onto $\Lambda$, so it induces a Lie-group isomorphism $\mathbb R^n/\mathbb Z^n\to\mathfrak t/\Lambda$, and $\mathbb R^n/\mathbb Z^n=(S^1)^n$ in the notation of [L3]; composing with step 3.1 gives $T\cong(S^1)^r$ with $r=n$. The Axiom of Choice entered through the lattice basis selection in [L4] as stated. [A1, L3, step 3.1, step 4.1] ∎
+5.1 The linear isomorphism $\mathbb R^n\to\mathfrak t$, $(a_1,\dots,a_n)\mapsto\sum_ia_iX_i$, carries $\mathbb Z^n$ onto $\Lambda$, so it induces a Lie-group isomorphism $\mathbb R^n/\mathbb Z^n\to\mathfrak t/\Lambda$. Since $\mathbb R^n/\mathbb Z^n=(S^1)^n$ in the notation of [L3], composing with step 3.1 gives $T\cong(S^1)^r$ with $r=n$. [L3, step 3.1, step 4.1] ∎

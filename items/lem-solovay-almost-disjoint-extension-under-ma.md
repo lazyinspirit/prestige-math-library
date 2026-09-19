@@ -44,7 +44,7 @@ $$|a \cap d| = \omega \ \ (a \in A), \qquad |b \cap d| < \omega \ \ (b \in \math
 
 **Proof technique:** direct.
 
-1.1 Let $\mathbb P$ be the set of pairs $(s,F)$ with $s \subseteq \omega$ finite and $F \subseteq \mathcal B \setminus A$ finite, ordered by $(s,F) \le (s',F')$ if and only if $s \supseteq s'$, $F \supseteq F'$ and $(s \setminus s') \cap \bigcup F' = \varnothing$. This is a partial order with least element $(\varnothing,\varnothing)$. [given, L1]
+1.1 Let $\mathbb P$ be the set of pairs $(s,F)$ with $s \subseteq \omega$ finite and $F \subseteq \mathcal B \setminus A$ finite, ordered by $(s,F) \le (s',F')$ if and only if $s \supseteq s'$, $F \supseteq F'$ and $(s \setminus s') \cap \bigcup F' = \varnothing$. This is a partial order with greatest (weakest) element $(\varnothing,\varnothing)$; every condition is below it in the stronger-smaller convention. [given, L1]
 
 2.1 $\mathbb P$ is ccc, indeed a countable union of centered sets: conditions with the same first coordinate $s$ are pairwise compatible, since for $(s,F_1)$ and $(s,F_2)$ the pair $(s,F_1 \cup F_2)$ is a common extension; and there are only countably many finite $s \subseteq \omega$. [step 1.1, L1]
 

@@ -46,9 +46,9 @@ $\operatorname{Lie}G$.
 
 ## Remarks
 
-- A torus is a compact connected abelian *Lie* group; the compact connected
-  abelian topological group $\mathbb Z_p$ for a prime $p$ is not a torus,
-  because it is not a Lie group of positive dimension, and a disconnected
+- A torus is a compact connected abelian *Lie* group; the compact abelian
+  topological group $\mathbb Z_p$ for a prime $p$ is not a torus because it is
+  totally disconnected (and is not a positive-dimensional Lie group), and a disconnected
   compact abelian Lie group such as $\mathbb Z/2$ is not a torus either.
 - Connectedness is part of the definition: the orthogonal group $O(2)$ is a
   compact Lie group that is not connected, and its identity component $SO(2)$

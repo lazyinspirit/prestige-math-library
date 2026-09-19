@@ -49,7 +49,7 @@ Q-set exists.
 
 3.1 Let $X \subseteq E$. Each $s(x)$ is infinite by [L1], so [F3] applies to $A := \{s(x) : x \in X\} \subseteq \mathcal B$ and gives $d \subseteq \omega$ with $|s(x) \cap d| = \omega$ for $x \in X$ and $|s(z) \cap d| < \omega$ for $z \in E \setminus X$. [step 2.1, F3, F2]
 
-4.1 If $d$ is infinite, enumerate it increasingly as $d = \{p(1) < p(2) < \dots\}$; if $d$ is finite then $X = \varnothing$ by step 3.1, and $X = E \cap \varnothing$ is relatively $G_\delta$ trivially. In the infinite case, $X = E \cap \bigcap_{n} \bigcup_{k \ge n} W_{p(k)}$: for $x \in X$ the set $\{k : x \in W_{p(k)}\}$ is infinite by step 3.1, so $x$ lies in every tail union; conversely if $x \in E$ lies in every tail union then $\{k : x \in W_{p(k)}\}$ is infinite, so $|s(x) \cap d| = \omega$, and step 3.1 excludes $x \in E \setminus X$. [step 3.1, L1]
+4.1 If $d$ is infinite, enumerate it increasingly as $d=\{p(0)<p(1)<\cdots\}$ with domain $\omega$; if $d$ is finite then $X=\varnothing$ by step 3.1, and $X=E\cap\varnothing$ is relatively $G_\delta$ trivially. In the infinite case, $X=E\cap\bigcap_{n\in\omega}\bigcup_{k\ge n}W_{p(k)}$: for $x\in X$ the set $\{k:x\in W_{p(k)}\}$ is infinite by step 3.1, so $x$ lies in every tail union; conversely, if $x\in E$ lies in every tail union, then $\{k:x\in W_{p(k)}\}$ is infinite, so $|s(x)\cap d|=\omega$, and step 3.1 excludes $x\in E\setminus X$. [step 3.1, L1]
 
 5.1 The sets $\bigcup_{k \ge n} W_{p(k)}$ are open in $\mathbb R$, so step 4.1 exhibits every subset $X \subseteq E$ as a relative $G_\delta$ set in $E$; hence $E$ is a Q-set, and since $|E| = \omega_1$ it is uncountable, so an uncountable Q-set exists. [step 4.1, L1] ∎
 

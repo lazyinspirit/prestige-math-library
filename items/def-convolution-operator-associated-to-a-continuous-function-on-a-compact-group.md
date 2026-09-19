@@ -43,10 +43,12 @@ and the **adjoint kernel** is $k^*(x):=\overline{k(x^{-1})}$.
 ## Remarks
 
 - The convention $(T_kf)(x)=\int_Gk(x^{-1}y)f(y)\,dy$ makes $T_k$ the operator
-  of right convolution by $k$: equivalently
-  $T_kf(x)=\int_Gf(y)k(y^{-1}x)\,dy$ after the substitution $y\mapsto x^{-1}y$
-  and use of invariance of $dy$, so $T_k$ acts on the *right* variable of the
-  two-sided action.
+  associated with right translation of the argument: after the substitution
+  $y=xu$ and use of left invariance of Haar measure,
+  $$T_kf(x)=\int_G k(u)f(xu)\,du.$$
+  In general this is not $\int_G f(y)k(y^{-1}x)\,dy$; that expression uses the
+  inverted kernel and agrees with this convention only under an additional
+  inversion symmetry of $k$.
 - The kernel $K(x,y)=k(x^{-1}y)$ of $T_k$ is continuous on $G\times G$; it is
   the kernel whose square-integrability is proved on this page.
 - Convolution is commutative on central functions, and for $k$ central the

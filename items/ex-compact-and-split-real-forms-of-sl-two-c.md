@@ -5,7 +5,7 @@ title: Compact and split real forms of sl two c
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-special-linear-lie-algebra-sl-two, def-real-form-of-a-complex-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, ex-killing-form-of-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, ex-unitary-and-special-unitary-lie-groups, ex-general-and-special-linear-lie-groups, def-cartan-subalgebra-of-a-lie-algebra, def-transpose-of-a-matrix]
+deps: [def-compact-real-form-of-a-complex-semisimple-lie-algebra, def-split-real-form, def-special-linear-lie-algebra-sl-two, def-real-form-of-a-complex-lie-algebra, thm-real-forms-correspond-to-conjugate-linear-involutions, ex-killing-form-of-sl-two, def-killing-form-of-a-finite-dimensional-lie-algebra, ex-unitary-and-special-unitary-lie-groups, ex-general-and-special-linear-lie-groups, def-cartan-subalgebra-of-a-lie-algebra, def-transpose-of-a-matrix, def-countable-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -23,7 +23,8 @@ proof_strategy: direct
 
 ## Example
 
-Let $\mathfrak s=\mathfrak{sl}_2(\mathbb C)$ be the complex special linear Lie
+Assume $\mathrm{AC}_\omega$. Let
+$\mathfrak s=\mathfrak{sl}_2(\mathbb C)$ be the complex special linear Lie
 algebra with its standard basis $e,f,h$
 ([[def-special-linear-lie-algebra-sl-two]]). The conjugate-transpose map
 $\sigma_c(X)=-X^{*}$ and entrywise complex conjugation $\sigma_s(X)=\overline X$
@@ -38,9 +39,9 @@ $\mathfrak s$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathfrak s=\mathfrak{sl}_2(\mathbb C)$ with the basis
-$$e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},$$
-so that $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$, and the two maps $\sigma_c(X)=-X^{*}$ and $\sigma_s(X)=\overline X$.
+**Given:** $\mathrm{AC}_\omega$ and $\mathfrak s=\mathfrak{sl}_2(\mathbb C)$ with the basis $$e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad h=\begin{pmatrix}1&0\\0&-1\end{pmatrix},$$ so that $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$, and the two maps $\sigma_c(X)=-X^{*}$ and $\sigma_s(X)=\overline X$.
+
+[A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the matrix Lie-group examples cited in [L1] and [L2].
 
 [L1] $\mathfrak s$ is the Lie algebra of traceless complex $2\times2$ matrices with bracket $[A,B]=AB-BA$, with basis $e,f,h$ and the displayed relations, and the real traceless matrices form the real Lie subalgebra $\mathfrak{sl}_2(\mathbb R)$ ([[def-special-linear-lie-algebra-sl-two]], [[ex-general-and-special-linear-lie-groups]]).
 
@@ -74,4 +75,4 @@ so that $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$, and the two maps $\sigma_c(X)=-X^{*}
 
 2.2 For nonzero $X\in\mathfrak{su}(2)$ one has $X^{*}=-X$, so step 1.4 gives $B(X,X)=4\operatorname{tr}(X^2)=-4\operatorname{tr}(XX^{*})=-4\sum_{i,j}|X_{ij}|^2<0$, because a nonzero matrix has a nonzero entry. Hence $B$ is negative definite on $\mathfrak{su}(2)$, and $\mathfrak{su}(2)$ is a compact real form by [L5]. [step 1.4, L5, algebra]
 
-3.1 The two forms are genuinely different: $B(h,h)=8>0$ on $\mathfrak{sl}_2(\mathbb R)$ while $B(e-f,e-f)=B(e,e)-2B(e,f)+B(f,f)=-8<0$, so the Killing form of $\mathfrak{sl}_2(\mathbb R)$ is indefinite, as a noncompact real form must be, whereas the form on $\mathfrak{su}(2)$ is definite by step 2.2. All computations are finite and no choice principle is used. [step 1.4, step 2.2, step 1.5, algebra] ∎
+3.1 The two forms are genuinely different: $B(h,h)=8>0$ on $\mathfrak{sl}_2(\mathbb R)$ while $B(e-f,e-f)=B(e,e)-2B(e,f)+B(f,f)=-8<0$, so the Killing form of $\mathfrak{sl}_2(\mathbb R)$ is indefinite, as a noncompact real form must be, whereas the form on $\mathfrak{su}(2)$ is definite by step 2.2. All computations are finite; $\mathrm{AC}_\omega$ enters only through [L1] and [L2]. [A1, step 1.4, step 2.2, step 1.5, algebra] ∎

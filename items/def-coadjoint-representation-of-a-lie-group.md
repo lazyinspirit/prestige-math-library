@@ -57,9 +57,9 @@ $$\operatorname{Ad}^*_{gh}=\operatorname{Ad}^*_g\circ\operatorname{Ad}^*_h, \qqu
 
 so the coadjoint action is a **left** action; the inverse $g^{-1}$ in the
 definition is exactly what makes it left rather than right. The action is
-jointly smooth. Indeed, in a fixed basis of $\mathfrak g$ the linear maps
-$\operatorname{Ad}_{g^{-1}}$ and $\operatorname{Ad}^*_g$ are inverse
-transposes of one another, the matrix entries of $g\mapsto
+jointly smooth. Indeed, in a fixed basis of $\mathfrak g$ and its dual, the
+matrix of $\operatorname{Ad}^*_g$ is the transpose of the matrix of
+$\operatorname{Ad}_{g^{-1}}$; the matrix entries of $g\mapsto
 \operatorname{Ad}_{g^{-1}}$ are smooth because $\operatorname{Ad}$ is a smooth
 representation and inversion in $G$ is smooth
 ([[def-lie-group]]), and the coordinates of

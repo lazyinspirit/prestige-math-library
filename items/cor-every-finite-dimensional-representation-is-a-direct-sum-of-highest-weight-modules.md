@@ -25,9 +25,10 @@ proof_strategy: direct
 Assume the Axiom of Choice. Let $\mathfrak g$ be a finite-dimensional complex
 semisimple Lie algebra with Cartan subalgebra $\mathfrak h$ and a fixed
 positive system. Then every finite-dimensional representation $V$ of
-$\mathfrak g$ is a finite direct sum of irreducible submodules
-$$V=L(\lambda_1)\oplus\dots\oplus L(\lambda_N)$$
-with dominant integral highest weights $\lambda_j$
+$\mathfrak g$ is a finite direct sum
+$$V=V_1\oplus\dots\oplus V_N$$
+of irreducible submodules, where each $V_j$ is isomorphic to a highest-weight
+module $L(\lambda_j)$ for a dominant integral weight $\lambda_j$
 ([[def-integral-dominant-and-strictly-dominant-weights]]).
 
 ## Facts & Assumptions
@@ -48,6 +49,6 @@ with dominant integral highest weights $\lambda_j$
 
 2.1 The index set $I$ is finite: each $V_i$ is nonzero, and a direct sum of nonzero subspaces of the finite-dimensional space $V$ has at most $\dim V$ summands; reindexing the finite set gives $V=V_1\oplus\dots\oplus V_N$. [L1, step 1.1]
 
-3.1 By [L2] each summand $V_j$ is isomorphic to $L(\lambda_j)$ for a dominant integral weight $\lambda_j$, so $V=L(\lambda_1)\oplus\dots\oplus L(\lambda_N)$ with dominant integral highest weights. [L2, step 2.1]
+3.1 By [L2] each summand $V_j$ is isomorphic to $L(\lambda_j)$ for a dominant integral weight $\lambda_j$. Thus $V=V_1\oplus\dots\oplus V_N$ with $V_j\cong L(\lambda_j)$; equivalently, choosing these isomorphisms gives an isomorphism $V\cong\bigoplus_{j=1}^NL(\lambda_j)$. [L2, step 2.1]
 
 4.1 This is the asserted finite decomposition. [step 3.1] ∎

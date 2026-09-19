@@ -5,7 +5,7 @@ title: An irrational flow on a symplectic torus is symplectic but not Hamiltonia
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-symplectic-and-hamiltonian-lie-group-action, def-two-dimensional-torus, cor-a-nonzero-period-obstructs-exactness-and-bounding, def-fundamental-vector-field-of-a-left-action, def-countable-choice, thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]
+deps: [def-symplectic-and-hamiltonian-lie-group-action, def-two-dimensional-torus, ex-a-symplectic-nonhamiltonian-vector-field-on-the-two-torus, cor-a-nonzero-period-obstructs-exactness-and-bounding, def-fundamental-vector-field-of-a-left-action, def-countable-choice, thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -32,7 +32,7 @@ function exists for it.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field interface.
 
-[F1] $dx$ and $dy$ are global one-forms on $T^2$, $\omega=dx\wedge dy$ is symplectic, and a one-form with nonzero period is not exact. [[def-two-dimensional-torus]], [[cor-a-nonzero-period-obstructs-exactness-and-bounding]].
+[F1] In the standard smooth quotient coordinates on $T^2=\mathbb R^2/\mathbb Z^2$, $dx$ and $dy$ descend to global one-forms and $\omega=dx\wedge dy$ is the standard symplectic form ([[ex-a-symplectic-nonhamiltonian-vector-field-on-the-two-torus]]). A one-form with nonzero period is not exact ([[cor-a-nonzero-period-obstructs-exactness-and-bounding]]).
 
 [F2] A vector field is Hamiltonian exactly when $\iota_X\omega$ is exact, and the flow of a complete symplectic field is a symplectic action of $\mathbb R$. [[def-symplectic-and-hamiltonian-lie-group-action]].
 

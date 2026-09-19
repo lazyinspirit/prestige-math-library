@@ -33,7 +33,8 @@ It is a group because $T$ is a normal subgroup of $N_G(T)$, and it acts on $T$
 by
 $$(gT)\cdot t:=gtg^{-1},$$
 a well-defined action: replacing $g$ by $gt'$ with $t'\in T$ changes
-$gtg^{-1}$ to $t'gtg^{-1}t'^{-1}=gtg^{-1}$ because $T$ is abelian. The
+$gtg^{-1}$ to
+$(gt')t(gt')^{-1}=g(t'tt'^{-1})g^{-1}=gtg^{-1}$ because $T$ is abelian. The
 differential of this action at the identity is the linear action of $gT$ on
 $\mathfrak t=\operatorname{Lie}(T)$ by $\operatorname{Ad}_g|_{\mathfrak t}$,
 and the action on $\mathfrak t$ is a homomorphism from $W(G,T)$ to

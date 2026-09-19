@@ -20,13 +20,13 @@ proof_strategy: direct
 
 ## Example
 
-The $B_n$ and $C_n$ diagrams have the same underlying chain and opposite
+For $n\ge2$, the $B_n$ and $C_n$ diagrams have the same underlying chain and opposite
 arrows on the unique double edge; transposing the Cartan matrix exchanges
 them.
 
 ## Facts & Assumptions
 
-**Given:** The simple roots of $B_n$: $\alpha_1=\varepsilon_1-\varepsilon_2,\dots,\alpha_{n-1}=\varepsilon_{n-1}-\varepsilon_n,\alpha_n=\varepsilon_n$, and of $C_n$: $\beta_1=\varepsilon_1-\varepsilon_2,\dots,\beta_{n-1}=\varepsilon_{n-1}-\varepsilon_n,\beta_n=2\varepsilon_n$.
+**Given:** An integer $n\ge2$; the simple roots of $B_n$: $\alpha_1=\varepsilon_1-\varepsilon_2,\dots,\alpha_{n-1}=\varepsilon_{n-1}-\varepsilon_n,\alpha_n=\varepsilon_n$; and of $C_n$: $\beta_1=\varepsilon_1-\varepsilon_2,\dots,\beta_{n-1}=\varepsilon_{n-1}-\varepsilon_n,\beta_n=2\varepsilon_n$.
 
 [L1] The Cartan matrix entry is $a_{ij}=2(\alpha_j,\alpha_i)/(\alpha_i,\alpha_i)$, and the diagram has $a_{ij}a_{ji}$ edges with the arrow toward the shorter root ([[def-cartan-matrix-of-a-based-root-system]], [[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]]).
 

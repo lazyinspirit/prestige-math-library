@@ -28,13 +28,13 @@ $N=HOD(S)$, then $f$ itself belongs to $N$.
 
 [F2] [[lem-solovay-inner-model-is-closed-under-ambient-omega-sequences]]: the corresponding closure statement for the Solovay $HOD(S)$ model, whose proof uses exactly the definable surjection and the interleaving of the parameter sequence.
 
-[F3] [[def-axiom-of-choice]]: used exactly once, to select for each $n$ a code of $f(n)$ from the nonempty class of its codes.
+[F3] [[def-axiom-of-choice]]: after Collection bounds the coding witnesses by one set, Choice is used exactly once to select a code of each $f(n)$ from a nonempty set-sized fibre.
 
 ## Proof
 
 1.1 The code assignment of [F1], read at the same interface as the corresponding Solovay closure statement [F2], gives a definable surjection from $\mathrm{Ord}\times S$ onto $N$: a pair $(\alpha,\vec\gamma,s)$ codes the set uniquely defined in rank $V_\alpha$ by the fixed formula from $s$ and the finite ordinal tuple, and every member of $N$ arises from at least one such code, its hereditary definition. [F1]
 
-2.1 Ambient AC selects, for every $n<\omega$, one code $(\alpha_n,s_n)$ of the value $f(n)$; the selection is a single application of choice to the countably many nonempty classes of codes. [F3, step 1.1]
+2.1 For each $n<\omega$ there exists a set code $c$ with $F(c)=f(n)$. Collection applied to this formula over the set $\omega$ supplies a set $C$ of codes meeting every fibre. Hence $C_n=\{c\in C:F(c)=f(n)\}$ is a nonempty set for each $n$, and ambient AC selects one $c_n=(\alpha_n,s_n)\in C_n$ simultaneously. This is a single application of Choice to a set-indexed family of nonempty sets, not to proper classes. [F3, step 1.1]
 
 3.1 The sequence of parameters $\langle s_n:n<\omega\rangle$ of countable ordinal sequences and the ordinal sequence $\langle\alpha_n:n<\omega\rangle$ interleave, by a fixed pairing on $\omega$, into one countable sequence $s^*$ of ordinals. [F1, step 2.1]
 

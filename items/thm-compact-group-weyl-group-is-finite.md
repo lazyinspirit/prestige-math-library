@@ -5,7 +5,7 @@ title: The compact Weyl group is finite
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-weyl-group-of-a-compact-connected-lie-group, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-maximal-tori-exist-in-compact-lie-groups, thm-structure-of-a-compact-connected-abelian-lie-group, def-axiom-of-choice, thm-cartans-closed-subgroup-theorem, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, thm-closure-of-a-connected-set, lem-closed-subset-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-quotient-manifold-by-a-closed-lie-subgroup]
+deps: [def-weyl-group-of-a-compact-connected-lie-group, thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-maximal-tori-exist-in-compact-lie-groups, thm-structure-of-a-compact-connected-abelian-lie-group, def-axiom-of-choice, thm-cartans-closed-subgroup-theorem, cor-the-exponential-map-is-a-local-diffeomorphism-at-zero, thm-closure-of-a-connected-set, lem-closed-subset-of-a-compact-space-is-compact, thm-compact-subset-of-a-hausdorff-space-is-closed, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -39,7 +39,7 @@ faithfully on $T$ and on its Lie algebra.
 
 [L3] $G$ carries a bi-invariant Riemannian metric whose value at the identity is a positive-definite inner product on $\mathfrak g$ invariant under every $\operatorname{Ad}_g$; consequently $\langle[X,U],V\rangle=-\langle U,[X,V]\rangle$ for all $X,U,V\in\mathfrak g$ ([[prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics]]).
 
-[L4] For a closed subgroup $H$ of a finite-dimensional real Lie group the coset space is a Lie group of dimension $\dim G-\dim H$ when $H$ is normal, and the Lie algebra of a closed subgroup $H$ consists exactly of those $X$ with $\exp(tX)\in H$ for all $t$ ([[thm-quotient-manifold-by-a-closed-lie-subgroup]]).
+[L4] If $H$ is a closed normal subgroup of a finite-dimensional real Lie group $K$, then $K/H$ is a Lie group with Lie algebra canonically $\operatorname{Lie}(K)/\operatorname{Lie}(H)$ ([[thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group]]). For a closed subgroup $H\le K$, its Lie algebra is $$ \operatorname{Lie}(H)=\{X\in\operatorname{Lie}(K):\exp(tX)\in H\text{ for every }t\in\mathbb R\} $$ by the construction in [[thm-cartans-closed-subgroup-theorem]].
 
 ## Proof
 

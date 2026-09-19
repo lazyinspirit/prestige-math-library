@@ -25,7 +25,7 @@ proof_strategy: direct
 
 Assume the Axiom of Choice. Fix integers $1\le p<q$ and put $m=p+q$. Let
 
-$$\mathfrak g_0=\mathfrak{su}(p,q)=\{X\in M_m(\mathbb C):X^{*}I+IX=0\},\qquad I=\operatorname{diag}(I_p,-I_q),$$
+$$\mathfrak g_0=\mathfrak{su}(p,q)=\{X\in M_m(\mathbb C):X^{*}I+IX=0,\ \operatorname{tr}X=0\},\qquad I=\operatorname{diag}(I_p,-I_q),$$
 
 written in block form as $X=\begin{pmatrix}A&C\\ C^{*}&E\end{pmatrix}$ with $A\in\mathfrak u(p)$, $E\in\mathfrak u(q)$, $\operatorname{tr}A+\operatorname{tr}E=0$ and $C\in\mathbb C^{p\times q}$, with Cartan involution $\theta(X)=-X^{*}$ and Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, $\mathfrak k_0=\{X:C=0\}$, $\mathfrak p_0=\{X:A=E=0\}$. Let
 
@@ -65,7 +65,7 @@ $\pm f_i\pm f_j$ ($i\ne j$), $2(q-p)$ for $\pm f_i$ and $1$ for $\pm 2f_i$
 
 **Proof technique:** direct block-matrix computation.
 
-1.1 The displayed block form is correct and $\theta$ is a Cartan involution. Writing $X=\begin{pmatrix}A&C\\ C^{*}&E\end{pmatrix}$, the condition $X^{*}I+IX=0$ is equivalent to $A^{*}+A=0$, $E^{*}+E=0$ and $\operatorname{tr}A+\operatorname{tr}E=0$, so $\mathfrak k_0=\{X:C=0\}$ and $\mathfrak p_0=\{X:A=E=0\}$ for $\theta(X)=-X^{*}$; moreover $B_\theta(X,X)=-2m\operatorname{tr}(X(-X^{*}))=2m\sum_{i,j}|X_{ij}|^2>0$ for $X\ne0$ by [L1], so $\theta$ is a Cartan involution by [L2] and the decomposition is the one claimed. [given, L1, L2, algebra]
+1.1 The displayed block form is correct and $\theta$ is a Cartan involution. Writing $X=\begin{pmatrix}A&C\\ C^{*}&E\end{pmatrix}$, the two conditions $X^{*}I+IX=0$ and $\operatorname{tr}X=0$ are equivalent to $A^{*}+A=0$, $E^{*}+E=0$ and $\operatorname{tr}A+\operatorname{tr}E=0$, so $\mathfrak k_0=\{X:C=0\}$ and $\mathfrak p_0=\{X:A=E=0\}$ for $\theta(X)=-X^{*}$; moreover $B_\theta(X,X)=-2m\operatorname{tr}(X(-X^{*}))=2m\sum_{i,j}|X_{ij}|^2>0$ for $X\ne0$ by [L1], so $\theta$ is a Cartan involution by [L2] and the decomposition is the one claimed. [given, L1, L2, algebra]
 
 2.1 Each $H_D$ lies in $\mathfrak p_0$, and $\mathfrak a$ is abelian: $H_D$ has $A=E=0$ and real $C=[D\ \ 0]$, so $H_D\in\mathfrak p_0$, and for $B=[D\ \ 0]$, $B'=[D'\ \ 0]$ one computes $[H_D,H_{D'}]=\begin{pmatrix}BB'^{*}-B'B^{*}&0\\ 0&B^{*}B'-B'^{*}B\end{pmatrix}$ with $BB'^{*}=DD'$ and $B^{*}B'=\operatorname{diag}(DD',0)$ diagonal, so both blocks vanish because diagonal matrices commute. [given, step 1.1, algebra]
 

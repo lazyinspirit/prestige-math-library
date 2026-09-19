@@ -5,7 +5,7 @@ title: Simple reflections preserve weight multiplicities
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-weyl-group-of-a-root-system, def-root-reflection-from-a-coroot, prop-weyl-length-equals-positive-root-inversion-number, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
+deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-weyl-group-of-a-root-system, def-root-reflection-from-a-coroot, prop-weyl-length-equals-positive-root-inversion-number, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -43,11 +43,11 @@ $\mu\in\mathfrak h^*$
 
 [L1] For every root $\alpha$ the coroot $h_\alpha$ and suitable $e_\alpha\in\mathfrak g_\alpha$, $f_\alpha\in\mathfrak g_{-\alpha}$ form a copy of $\mathfrak{sl}_2$ with $[e_\alpha,f_\alpha]=h_\alpha$; moreover $\alpha(h_\alpha)=2$ and $s_\alpha(\mu)=\mu-\mu(h_\alpha)\alpha$ is the reflection of [[def-root-reflection-from-a-coroot]] ([[thm-root-sl-two-triple]], [[def-coroot-of-a-lie-algebra-root]]).
 
-[L2] A finite-dimensional $\mathfrak{sl}_2$-module is a direct sum of irreducible submodules, and an irreducible submodule of dimension $m+1$ has $h$ acting with eigenvalues $m,m-2,\dots,-m$, each on a one-dimensional subspace ([[thm-finite-dimensional-representations-of-sl-two]]).
+[L2] A finite-dimensional $\mathfrak{sl}_2$-module is a direct sum of irreducible submodules, and on each irreducible summand the operators $e$ and $f$ move along a finite weight string; in particular they act nilpotently ([[thm-finite-dimensional-representations-of-sl-two]]).
 
-[L3] $V$ is the direct sum of its weight spaces for $\mathfrak h$, and each weight space is finite dimensional ([[prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces]]).
+[L3] For $\mu\in\mathfrak h^*$, the weight space is $V_\mu=\{v:H\cdot v=\mu(H)v\text{ for all }H\in\mathfrak h\}$ ([[def-weight-and-weight-space-of-a-lie-algebra-representation]]).
 
-[L4] The roots of $\mathfrak g$ form a reduced crystallographic Euclidean root system on $E$ whose reflections coincide with the $s_\alpha$ of [L1], and for a chosen base the simple roots are a basis of $E$ ([[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]], [[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
+[L4] The roots of $\mathfrak g$ form a reduced crystallographic Euclidean root system on $E$, and its root reflections coincide with the $s_\alpha$ of [L1] after complex-linear extension to $\mathfrak h^*$ ([[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]], [[def-weyl-group-of-a-root-system]], [[def-root-reflection-from-a-coroot]]).
 
 [L5] Every element of the Weyl group is a product of simple reflections ([[prop-weyl-length-equals-positive-root-inversion-number]]).
 
@@ -55,14 +55,12 @@ $\mu\in\mathfrak h^*$
 
 **Proof technique:** direct.
 
-1.1 Fix a simple root $\alpha=\alpha_i$ and the $\mathfrak{sl}_2$-triple $(e_\alpha,f_\alpha,h_\alpha)$ of [L1], and write $\rho$ for the action of $\mathfrak g$ on $V$; restricting $\rho$ to this triple makes $V$ a finite-dimensional $\mathfrak{sl}_2$-module, which by [L2] is a direct sum $V=\bigoplus_rT_r$ of irreducible $\mathfrak{sl}_2$-submodules. [A1, L1, L2]
+1.1 Fix a simple root $\alpha=\alpha_i$ and the $\mathfrak{sl}_2$-triple $(e_\alpha,f_\alpha,h_\alpha)$ of [L1], and write $\rho$ for the action of $\mathfrak g$ on $V$. By [L2], the endomorphisms $E=\rho(e_\alpha)$ and $F=\rho(f_\alpha)$ are nilpotent. Hence the finite sums $\exp(E)$ and $\exp(-F)$ are defined and invertible, and so is $N_\alpha=\exp(E)\exp(-F)\exp(E)$. [A1, L1, L2, algebra]
 
-2.1 For an irreducible summand $T=T_r$ let $m\ge0$ be its top weight with respect to $h_\alpha$, so that by [L2] the operator $\rho(h_\alpha)$ has on $T$ the eigenvalues $m,m-2,\dots,-m$, each with multiplicity one, and every $h_\alpha$-eigenvector in $T$ is a weight vector for $\mathfrak h$ of some weight $\nu$ with $\nu(h_\alpha)=m-2k$ for a unique $k\in\{0,\dots,m\}$. [L2, step 1.1]
+2.1 Let $H\in\mathfrak h$ and put $a=\alpha(H)$. In the adjoint action of the root triple, the relations of [L1] give $\exp(\operatorname{ad}e_\alpha)H=H-ae_\alpha$, then $\exp(-\operatorname{ad}f_\alpha)(H-ae_\alpha)=H-ae_\alpha-ah_\alpha$, and applying $\exp(\operatorname{ad}e_\alpha)$ once more gives $H-ah_\alpha$. Conjugation by an exponential satisfies $\exp(E)\rho(x)\exp(-E)=\rho(\exp(\operatorname{ad}e_\alpha)x)$, with finite series here. Therefore $N_\alpha\rho(H)N_\alpha^{-1}=\rho(H-\alpha(H)h_\alpha)$. [L1, step 1.1, algebra]
 
-3.1 For such a summand $T$ and its weight $\nu$ write $q=\nu(h_\alpha)=m-2k$ with $0\le k\le m$; then $s_\alpha(\nu)=\nu-q\alpha$ satisfies $s_\alpha(\nu)(h_\alpha)=-q=m-2(m-k)$ by [L1]. Choosing $0\ne u\in T_\nu$, the vectors $f_\alpha^{\,j}u$ for $0\le j\le q$ are nonzero by the $\mathfrak{sl}_2$-theory of [L2], and they lie in the weight spaces $T_{\nu-j\alpha}$ of $V$: for $x\in\mathfrak g_{-\alpha}$ and $w\in V_\mu$ one computes $H\cdot(x\cdot w)=[H,x]\cdot w+x\cdot(H\cdot w)=(\mu-\alpha)(H)\,x\cdot w$ for every $H\in\mathfrak h$, so $x\cdot w\in V_{\mu-\alpha}$, and induction gives $f_\alpha^{\,j}u\in V_{\nu-j\alpha}$. Hence the (one-dimensional) $h_\alpha$-eigenspace of $T$ of eigenvalue $-q$ contains the nonzero vector $f_\alpha^{\,q}u\in T_{\nu-q\alpha}=T_{s_\alpha(\nu)}$ and has $h$-weight exactly $s_\alpha(\nu)$; therefore $T_\nu$ and $T_{s_\alpha(\nu)}$ are either both zero or both one-dimensional, and $\dim T_\nu=\dim T_{s_\alpha(\nu)}$. [L1, L2, step 2.1]
+3.1 Since the reflection $r_\alpha(H)=H-\alpha(H)h_\alpha$ is an involution, step 2.1 also gives $N_\alpha^{-1}\rho(H)N_\alpha=\rho(r_\alpha(H))$. If $v\in V_\mu$, then for every $H\in\mathfrak h$ one has $\rho(H)N_\alpha v=N_\alpha\rho(r_\alpha(H))v=\mu(r_\alpha(H))N_\alpha v=s_\alpha(\mu)(H)N_\alpha v$. Thus $N_\alpha(V_\mu)\subseteq V_{s_\alpha(\mu)}$. Applying the same argument to $N_\alpha^{-1}$ gives the reverse inclusion, so $N_\alpha$ restricts to an isomorphism $V_\mu\cong V_{s_\alpha(\mu)}$. Hence $\dim V_\mu=\dim V_{s_\alpha(\mu)}$ for every $\mu\in\mathfrak h^*$. [L1, L3, L4, step 2.1, algebra]
 
-4.1 Summing the equalities of step 3.1 over the finitely many irreducible summands of step 1.1 gives $\dim V_\nu=\sum_r\dim(T_r)_\nu=\sum_r\dim(T_r)_{s_\alpha(\nu)}=\dim V_{s_\alpha(\nu)}$ for every weight $\nu$, and hence, both sides being zero, for an arbitrary $\mu\in\mathfrak h^*$. [L3, step 1.1, step 3.1]
+4.1 Every $w\in W$ is a product of simple reflections by [L5]. Applying step 3.1 successively to those factors gives $\dim V_{w\mu}=\dim V_\mu$ for every $w\in W$ and $\mu\in\mathfrak h^*$. [L4, L5, step 3.1]
 
-5.1 Every $w\in W$ is a product of simple reflections by [L5], so applying step 4.1 once for each factor, with the reflections acting on $\mathfrak h^*$ by the linear formulas of [L4], gives $\dim V_{w\mu}=\dim V_\mu$ for every $w\in W$. [L4, L5, step 4.1]
-
-6.1 The stated equalities are proved. [step 4.1, step 5.1] ∎
+5.1 The stated equalities follow from steps 3.1 and 4.1. [step 3.1, step 4.1] ∎

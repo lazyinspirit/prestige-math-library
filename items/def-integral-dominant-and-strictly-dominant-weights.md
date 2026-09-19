@@ -60,7 +60,9 @@ an integral $\lambda\in\mathfrak h^*$ automatically lies in $E$: the simple
 coroots form a real basis of $\mathfrak h_{\mathbb R}$ by loc. cit., the values
 $\lambda(h_{\alpha_i})$ are real, hence $\lambda$ is real valued on
 $\mathfrak h_{\mathbb R}$, which is exactly the condition defining $E$ inside
-$\mathfrak h^*$. Thus integral weights, dominant integral weights and strictly
-dominant weights are the elements of $P\subseteq E$ whose fundamental-weight
-coefficients are integers, nonnegative integers, and positive numbers
-respectively.
+$\mathfrak h^*$. Thus the integral weights are the elements of $P\subseteq E$,
+and the dominant integral weights are those elements of $P$ whose
+fundamental-weight coefficients are nonnegative integers.  By contrast, the
+strictly dominant weights are all elements of $E$ whose fundamental-weight
+coefficients are positive real numbers; they need not be integral or belong to
+$P$.

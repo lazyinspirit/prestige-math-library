@@ -5,7 +5,7 @@ title: Finite-dimensional representations separate points
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group, def-axiom-of-choice, def-lie-group, thm-c-c-is-dense-in-l-p-for-radon-measures]
+deps: [cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group, def-axiom-of-choice, def-lie-group, cor-a-compact-hausdorff-space-is-tychonoff, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -31,13 +31,13 @@ $\pi(x)\ne\pi(y)$.
 
 [L1] Finite linear combinations of matrix coefficients of finite-dimensional unitary representations are uniformly dense in $C(G)$ ([[cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group]]).
 
-[L2] A compact Lie group is a Hausdorff topological group, so distinct points are separated by a continuous real function: a continuous function of compact support equal to $1$ near $x$ and supported away from $y$ exists ([[def-lie-group]], [[thm-c-c-is-dense-in-l-p-for-radon-measures]]).
+[L2] A Lie group is Hausdorff, so $G$ is compact Hausdorff. Under dependent choice, disjoint closed subsets of a compact Hausdorff space are separated by a continuous function into $[0,1]$; the assumed Axiom of Choice supplies dependent choice ([[def-lie-group]], [[cor-a-compact-hausdorff-space-is-tychonoff]], [[lem-ac-supplies-sequential-choices-for-probability-constructions]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L2] choose $f\in C(G)$ with $f(x)\ne f(y)$ (for instance a continuous bump at $x$ vanishing at $y$), and set $\eta:=|f(x)-f(y)|>0$. [L2]
+1.1 The singletons $\{x\}$ and $\{y\}$ are disjoint closed subsets of the compact Hausdorff space $G$. By [L2] choose $f\in C(G,[0,1])$ with $f(x)=0$ and $f(y)=1$, and set $\eta:=|f(x)-f(y)|=1$. [L2]
 
 2.1 By [L1] choose a finite linear combination $s$ of matrix coefficients with $\|s-f\|_\infty<\eta/4$; then $|s(x)-s(y)|\ge|f(x)-f(y)|-2\|s-f\|_\infty>\eta/2>0$, so some matrix coefficient $\pi_{ij}$ occurring in $s$ satisfies $\pi_{ij}(x)\ne\pi_{ij}(y)$. [L1, step 1.1]
 

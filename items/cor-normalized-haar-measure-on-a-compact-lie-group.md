@@ -44,7 +44,7 @@ probability measure invariant under left and right translations and inversion.
 
 1.1 A finite-dimensional Lie group is a Hausdorff topological group, and compactness is a topological property, so a compact Lie group is a compact Hausdorff group; by [L1] it therefore carries a unique left Haar probability measure $\mu$, which is right invariant and inversion invariant. [L1, L2, algebra]
 
-1.2 Since $G$ is compact, every Borel measure on $G$ that is a left Haar measure is a regular Borel probability measure by [L2]; conversely a regular Borel probability measure that is left invariant is a left Haar measure in the sense of [L2]. Hence the uniqueness assertion of [L1] is exactly uniqueness among regular Borel probability measures that are left invariant. [L2]
+1.2 Since $G$ is compact, every left Haar measure on $G$ has finite positive total mass and can be normalized by dividing by that mass; compactness alone does not make an arbitrary Haar measure a probability measure. Conversely, a regular Borel probability measure that is left invariant is a left Haar measure of total mass one in the sense of [L2]. Hence the uniqueness assertion of [L1] is exactly uniqueness among regular Borel probability measures that are left invariant. [L1, L2]
 
 2.1 By [L3] the measure $\mu$ of step 1.1 is bi-invariant satisfying all three invariance conditions, so a measure with the stated properties exists. [L3, step 1.1]
 

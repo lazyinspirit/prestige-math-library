@@ -5,7 +5,7 @@ title: Root vectors shift weights
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-representation-of-a-lie-algebra, def-axiom-of-choice]
+deps: [def-weight-and-weight-space-of-a-lie-algebra-representation, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-representation-of-a-lie-algebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -19,8 +19,8 @@ proof_strategy: direct
 
 ## Statement
 
-Assume the Axiom of Choice. Let $\mathfrak g$ be a finite-dimensional complex
-semisimple Lie algebra with Cartan subalgebra $\mathfrak h$, let $V$ be a
+Let $\mathfrak g$ be a finite-dimensional complex semisimple Lie algebra with
+Cartan subalgebra $\mathfrak h$, let $V$ be a
 representation of $\mathfrak g$, let $\alpha$ be a root and let
 $\mathfrak g_\alpha$ be its root space
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]). If
@@ -31,9 +31,7 @@ particular $x\cdot v=0$ is allowed.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Choice, such $\mathfrak g,\mathfrak h,V$, a root $\alpha$, $x\in\mathfrak g_\alpha$, $\mu\in\mathfrak h^*$ and $v\in V_\mu$.
-
-[A1] The Axiom of Choice is assumed; it enters through the root-space theory supplying [L2] ([[def-axiom-of-choice]]).
+**Given:** Such $\mathfrak g,\mathfrak h,V$, a root $\alpha$, $x\in\mathfrak g_\alpha$, $\mu\in\mathfrak h^*$ and $v\in V_\mu$.
 
 [L1] The action of $\mathfrak g$ on $V$ is a Lie algebra homomorphism into the endomorphisms of $V$ with commutator bracket ([[def-representation-of-a-lie-algebra]]): for all $X,Y$ and $w$, $$X\cdot(Y\cdot w)-Y\cdot(X\cdot w)=[X,Y]\cdot w .$$
 
@@ -43,7 +41,7 @@ particular $x\cdot v=0$ is allowed.
 
 **Proof technique:** direct.
 
-1.1 Let $H\in\mathfrak h$; using [L1] with $X=H$, $Y=x$, $w=v$ and [L2], $H\cdot(x\cdot v)=[H,x]\cdot v+x\cdot(H\cdot v)=\alpha(H)\,x\cdot v+\mu(H)\,x\cdot v=(\alpha+\mu)(H)\,(x\cdot v)$. [A1, L1, L2]
+1.1 Let $H\in\mathfrak h$; using [L1] with $X=H$, $Y=x$, $w=v$ and [L2], $H\cdot(x\cdot v)=[H,x]\cdot v+x\cdot(H\cdot v)=\alpha(H)\,x\cdot v+\mu(H)\,x\cdot v=(\alpha+\mu)(H)\,(x\cdot v)$. [L1, L2]
 
 2.1 Equation 1.1 says precisely that $x\cdot v$ is annihilated by $\rho(H)-(\mu+\alpha)(H)\operatorname{id}_V$ for every $H\in\mathfrak h$, that is, $x\cdot v\in V_{\mu+\alpha}$ ([[def-weight-and-weight-space-of-a-lie-algebra-representation]]); this includes the possibility $x\cdot v=0$, which lies in every subspace. [step 1.1]
 

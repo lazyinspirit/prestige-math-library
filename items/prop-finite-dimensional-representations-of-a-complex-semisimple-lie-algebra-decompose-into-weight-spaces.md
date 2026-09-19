@@ -39,7 +39,7 @@ and only finitely many of the spaces $V_\mu$ are nonzero.
 
 [L1] For every root $\alpha$ of $(\mathfrak g,\mathfrak h)$ there are $e_\alpha\in\mathfrak g_\alpha$ and $f_\alpha\in\mathfrak g_{-\alpha}$ with $[e_\alpha,f_\alpha]=h_\alpha$, $[h_\alpha,e_\alpha]=2e_\alpha$ and $[h_\alpha,f_\alpha]=-2f_\alpha$, so that $\operatorname{span}\{e_\alpha,f_\alpha,h_\alpha\}$ is a copy of $\mathfrak{sl}_2$ ([[thm-root-sl-two-triple]]).
 
-[L2] For a finite-dimensional module over $\mathfrak{sl}_2$ the operator $h$ acts diagonalisably with integer eigenvalues ([[thm-finite-dimensional-representations-of-sl-two]]).
+[L2] For a nonzero finite-dimensional module over $\mathfrak{sl}_2$, the operator $h$ acts diagonalisably with integer eigenvalues ([[thm-finite-dimensional-representations-of-sl-two]]).
 
 [L3] A family of diagonalisable endomorphisms of a finite-dimensional vector space is simultaneously diagonalisable if and only if its members commute pairwise ([[thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms]]).
 
@@ -49,7 +49,7 @@ and only finitely many of the spaces $V_\mu$ are nonzero.
 
 **Proof technique:** direct.
 
-1.1 Fix a root $\alpha$ and the $\mathfrak{sl}_2$-triple $(e_\alpha,f_\alpha,h_\alpha)$ of [L1]; restricting the representation to this three-dimensional subalgebra makes $V$ a finite-dimensional $\mathfrak{sl}_2$-module, so by [L2] the operator $\rho(h_\alpha)$ is diagonalisable. [A1, L1, L2]
+1.1 If $V=0$, every weight space is zero and the asserted direct sum is the empty direct sum, so the conclusion is immediate. If the root set $\Phi$ is empty, [L4] gives $\mathfrak h=0$, and then $V=V_0$ is already the required decomposition. Assume henceforth that $V\ne0$ and $\Phi\ne\varnothing$. Fix a root $\alpha$ and the $\mathfrak{sl}_2$-triple $(e_\alpha,f_\alpha,h_\alpha)$ of [L1]; restricting the representation to this three-dimensional subalgebra makes $V$ a nonzero finite-dimensional $\mathfrak{sl}_2$-module, so by [L2] the operator $\rho(h_\alpha)$ is diagonalisable. [A1, L1, L2, L4]
 
 1.2 The coroots span $\mathfrak h$ over $\mathbb C$ by [L4] and the root set $\Phi$ is finite, so there are roots $\alpha_1,\dots,\alpha_N$ with $\mathfrak h=\operatorname{span}_{\mathbb C}\{h_{\alpha_1},\dots,h_{\alpha_N}\}$. [A1, L4]
 
@@ -59,4 +59,4 @@ and only finitely many of the spaces $V_\mu$ are nonzero.
 
 4.1 A basis vector $v_j$ spans a nonzero weight space $V_{\mu_j}$ ([[def-weight-and-weight-space-of-a-lie-algebra-representation]]), while a vector $v\in V_\mu$ has $\rho(H)v=\mu(H)v$ for all $H$ and is therefore a linear combination of the basis vectors $v_j$ with $\mu_j=\mu$; hence each $V_\mu$ is the span of those $v_j$ with $\mu_j=\mu$, distinct weights have disjoint sets of basis vectors, and $V=\bigoplus_\mu V_\mu$, with only finitely many nonzero summands. [A1, step 3.1]
 
-5.1 The stated direct-sum decomposition and finiteness of the list of weights are proved. ∎
+5.1 The stated direct-sum decomposition and finiteness of the list of weights are proved. [step 4.1] ∎

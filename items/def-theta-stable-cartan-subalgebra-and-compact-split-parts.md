@@ -5,7 +5,7 @@ title: Theta-stable Cartan subalgebras and their compact and split parts
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]
+deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-cartan-subalgebra-of-a-lie-algebra, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-sylvesters-law-of-inertia]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -77,25 +77,16 @@ The integers $\dim_{\mathbb R}\mathfrak t_0$ and
 $\dim_{\mathbb R}\mathfrak a_0$ are invariants of the conjugacy class of
 $\mathfrak h_0$. Indeed, let an automorphism $\alpha$ of $\mathfrak g_0$ carry
 $\mathfrak h_0$ onto another $\theta$-stable Cartan subalgebra
-$\mathfrak h_0'=\mathfrak t_0'\oplus\mathfrak a_0'$, and for $X\in\mathfrak h_0$
-write $\alpha X=Y+Z$ with $Y\in\mathfrak t_0'$, $Z\in\mathfrak a_0'$. Since
-$B$ is preserved by $\alpha$ and is $\theta$-invariant, while
-$\mathfrak t_0'$ and $\mathfrak a_0'$ are $\theta$-eigenspaces for the
-eigenvalues $+1$ and $-1$, the two summands are orthogonal, so
-$B(\alpha X,\alpha X)=B(X,X)=B(Y,Y)+B(Z,Z)$ with $B(Y,Y)\le0$ and
-$B(Z,Z)\ge0$. If $X\in\mathfrak t_0$ then $B(X,X)\le0$, and
-$B(Z,Z)\ge0$ then forces $B(Z,Z)=0$, that is $Z=0$: hence
-$\alpha(\mathfrak t_0)\subseteq\mathfrak t_0'$. The same argument applied to
-$\alpha^{-1}$ gives $\alpha^{-1}(\mathfrak t_0')\subseteq\mathfrak t_0$, so
-$\dim\mathfrak t_0=\dim\mathfrak t_0'$ and $\alpha(\mathfrak t_0)=\mathfrak t_0'$.
-If now $X\in\mathfrak a_0$, then $B(\alpha X,\alpha(\mathfrak t_0))=B(X,\mathfrak t_0)=0$
-because $\mathfrak k_0$ and $\mathfrak p_0$ are orthogonal for $B$ and
-$\alpha(\mathfrak t_0)=\mathfrak t_0'$; with $\alpha X=Y+Z$ as above and
-$B(\mathfrak t_0',\mathfrak a_0')=0$ this gives $B(Y,\mathfrak t_0')=0$, so
-$Y=0$ by the negative definiteness of $B$ on $\mathfrak t_0'$ and
-$\alpha(\mathfrak a_0)\subseteq\mathfrak a_0'$. Applying the last step to
-$\alpha^{-1}$ as well gives $\dim\mathfrak a_0=\dim\mathfrak a_0'$ and
-$\alpha(\mathfrak a_0)=\mathfrak a_0'$; thus the compact and noncompact
+$\mathfrak h_0'=\mathfrak t_0'\oplus\mathfrak a_0'$. Every Lie-algebra
+automorphism preserves the Killing form, so $\alpha|_{\mathfrak h_0}$ is an
+isometry from $B|_{\mathfrak h_0}$ to $B|_{\mathfrak h_0'}$. The displayed
+orthogonal decompositions show that the negative and positive inertia indices
+of these two restrictions are respectively
+$(\dim\mathfrak t_0,\dim\mathfrak a_0)$ and
+$(\dim\mathfrak t_0',\dim\mathfrak a_0')$. Sylvester's law of inertia
+([[thm-sylvesters-law-of-inertia]]) therefore gives
+$\dim\mathfrak t_0=\dim\mathfrak t_0'$ and
+$\dim\mathfrak a_0=\dim\mathfrak a_0'$. Thus the compact and noncompact
 dimensions are invariants of the conjugacy class of $\mathfrak h_0$. This is the sense in which the
 compact and noncompact dimensions are used in the classification of the
 $\theta$-stable Cartan subalgebras. The maximality criteria in terms of the

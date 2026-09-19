@@ -5,7 +5,7 @@ title: Complete reducibility for compact Lie groups
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, def-axiom-of-choice, def-continuous-and-unitary-representation-of-a-compact-lie-group, def-real-and-complex-inner-product-space]
+deps: [thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, def-axiom-of-choice, def-continuous-and-unitary-representation-of-a-compact-lie-group, thm-finite-dimensional-orthogonal-decomposition, cor-double-orthogonal-complement-and-dimension]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -36,7 +36,7 @@ representations.
 
 [L2] A subrepresentation of $\pi$ is a linear subspace stable under every $\pi(g)$; $\pi$ is irreducible when $V\ne0$ and there is no nonzero proper subrepresentation, and a direct sum of subrepresentations $V=V_1\oplus\dots\oplus V_m$ is a decomposition into representations by restriction ([[def-continuous-and-unitary-representation-of-a-compact-lie-group]]).
 
-[L3] A finite-dimensional nonzero vector space has a nonzero vector and hence a one-dimensional subspace; dimensions of proper subspaces are strictly smaller, and $\dim W^\perp=\dim V-\dim W$ for a subspace $W$ of a finite-dimensional inner-product space; $0$ is the direct sum of the empty family ([[def-real-and-complex-inner-product-space]]).
+[L3] For every subspace $W$ of a finite-dimensional inner-product space $V$, one has $V=W\oplus W^\perp$ and $\dim W+\dim W^\perp=\dim V$ ([[thm-finite-dimensional-orthogonal-decomposition]], [[cor-double-orthogonal-complement-and-dimension]]). A proper subspace of a finite-dimensional space has smaller dimension, and the zero representation is the direct sum of the empty family. [finite-dimensional linear algebra, empty-sum convention]
 
 ## Proof
 

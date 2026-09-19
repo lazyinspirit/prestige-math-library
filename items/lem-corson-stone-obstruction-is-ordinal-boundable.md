@@ -20,9 +20,9 @@ sources:
 
 ## Statement
 
-The sentence asserting that there is a metric space with rational-valued metric
-whose open cover by the rational balls of the construction has no point-finite
-refinement is an atom-blind boundable sentence in the sense of
+The sentence asserting that there is a rational-valued metric space with an
+open cover having no point-finite open refining cover is an atom-blind
+boundable sentence in the sense of
 [[def-boundable-sentence-over-an-atom-set]], with the explicit absolute bound
 $\omega + 41$ of the source's Lemma 5.
 
@@ -30,22 +30,24 @@ $\omega + 41$ of the source's Lemma 5.
 
 **Given:** Corson's model and the covering failure certified in [[lem-corson-rational-metric-not-metacompact]].
 
-[F1] Boundable sentences over an atom set: a formula is boundable when there is a fixed absolutely defined ordinal $\alpha$ such that ZFA proves the formula equivalent to its relativisation to $V_\alpha(\bigcup \vec x)$, and the sentence is the existential closure of such a formula ([[def-boundable-sentence-over-an-atom-set]]).
+[F1] A formula $\varphi(\vec x)$ is boundable when a fixed absolutely defined ordinal $\alpha$ makes ZFA prove $\varphi(\vec x)\leftrightarrow\varphi^{V_\alpha(\bigcup\vec x)}(\vec x)$; its existential closure is then a boundable sentence ([[def-boundable-sentence-over-an-atom-set]]).
 
 [F2] The metric space is the ordered rational Urysohn space of [[def-corson-ordered-rational-permutation-model]], its metric is rational-valued, and its open cover has no point-finite refinement ([[lem-corson-rational-metric-not-metacompact]], [[def-metric-space]], [[def-metacompact-space]]).
 
-[L1] The construction objects: the underlying atom set, the rational metric as a set of triples, the rational parameters of the balls, the open cover, the candidate refinements, and the functions witnessing point-finiteness are all built from finitely many iterates of the power set over the atoms and the fixed rational codebook, so they all occur below the stated iterate height ([[def-boundable-sentence-over-an-atom-set]]).
+[L1] With the standard set encodings, $\omega\in V_{\omega+1}(\varnothing)$, and successively constructing $(\omega,+)$, $\mathbb Z$, $(\mathbb Z,+)$, $\mathbb Q$, and $(\mathbb Q,+)$ puts $(\mathbb Q,+)$ in $V_{\omega+30}(\varnothing)$. [source, Corson Lemma 5]
+
+[L2] If $X$ is a set, then $X\times X\in V_2(X)$; hence a function $d:X\times X\to\mathbb Q$ lies in $V_{\omega+33}(X)$. A family of subsets of $X$ lies in $V_2(X)$; an ordered triple $(X,d,\mathcal U)$ lies in $V_{\omega+37}(X)$; and a function from a natural number into an open cover of $X$ lies in $V_{\omega+41}(X)$. [L1, source, Corson Lemma 5]
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Expand the sentence of step [F2] into a membership formula: there is a set $X$ carrying a rational-valued metric $d$ satisfying the metric axioms, a family $\mathcal{U}$ of open balls with rational radii covering $X$, and for every family $\mathcal{V}$ of open sets that refines $\mathcal{U}$ and covers $X$ there is a point of $X$ belonging to infinitely many members of $\mathcal{V}$. [given, F2]
+1.1 Let $\operatorname{Cov}(X,d,\mathcal U)$ say that $d$ is a rational-valued metric on $X$ and $\mathcal U$ is an open cover in its metric topology. Let $\operatorname{Ref}(X,d,\mathcal U,\mathcal V)$ say that both $\mathcal U$ and $\mathcal V$ satisfy $\operatorname{Cov}$ and that $\mathcal V$ refines $\mathcal U$. Let $\operatorname{Inj}(f,Y,Z)$ say that $f$ is an injection from $Y$ into $Z$. These are formulas built only from equality, membership, the carried sets, and the fixed pure rational codebook. [given, F1, F2]
 
-2.1 Each conjunct of step 1.1 is a membership statement about objects of the carried sorts: a metric is a function into the rationals with the three metric axioms, a ball is a definable subset, a cover and a refinement are families of subsets, and point-finiteness is a statement about the set of members through a point and the natural numbers. [step 1.1, L1]
+2.1 Define $\Phi(X,d,\mathcal U)$ to be $\operatorname{Cov}(X,d,\mathcal U)$ together with the assertion that for every $\mathcal V\in\mathcal P(\mathcal P(X))$, if $\operatorname{Ref}(X,d,\mathcal U,\mathcal V)$, then some $x\in X$ has the following property: for every $n\in\omega$ there is $f\subseteq n\times\mathcal V$ such that $\operatorname{Inj}(f,n,\mathcal V)$ and $x\in f(m)$ for every $m<n$. Thus $\Phi$ says exactly that $\mathcal U$ has no point-finite open refining cover. [step 1.1]
 
-3.1 The quantifiers relativise to $V_{\omega+41}(A)$: the space, its metric, the cover and every candidate refinement are constructed from the atom set, the fixed rational codebook and finitely many power-set iterates, so the relativised formula holds exactly when the original does, and the equivalence is provable in ZFA by the same coding lemmas that the source's Lemma 5 provides. [step 2.1, L1, F1]
+3.1 The bounds [L1]-[L2] contain every object quantified in step 2.1: candidate covers and refinements lie in the second relative level over $X$, while every finite injection witnessing arbitrarily many members through $x$ lies below level $\omega+41$. Expanding the displayed definitions therefore gives the ZFA theorem $\Phi(X,d,\mathcal U)\leftrightarrow\Phi^{V_{\omega+41}(X\cup d\cup\mathcal U)}(X,d,\mathcal U)$. [step 2.1, L1, L2]
 
-3.2 The formula is atom-blind: its atomic tests are equality and membership on the carried sorts together with the fixed rational comparisons, and it never examines the internal structure of an atom. [step 2.1, F1]
+3.2 The formula is atom-blind: its base sort $X$ is used only opaquely through the carried metric, subsets, covers, and finite function graphs; its atomic tests are equality and membership together with the fixed pure rational parameter, and it never tests whether an element of $X$ is an atom or inspects its internal membership structure. [step 1.1, step 2.1]
 
-4.1 By [F1] the relativised formula with its fixed bound $\omega+41$ is boundable, and its existential closure is the sentence of the statement; by [F2] that sentence holds in Corson's model. [step 3.1, step 3.2, F1, F2] ∎
+4.1 By [F1] and step 3.1, the existential closure $\exists X\,\exists d\,\exists\mathcal U\,\Phi(X,d,\mathcal U)$ is boundable with the fixed absolute bound $\omega+41$; step 3.2 supplies the atom-blind typed certificate, and [F2] supplies a witness in Corson's model. [step 3.1, step 3.2, F1, F2] ∎

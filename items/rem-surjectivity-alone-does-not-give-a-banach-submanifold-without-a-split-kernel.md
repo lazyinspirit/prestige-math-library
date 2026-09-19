@@ -1,7 +1,7 @@
 ---
 id: rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel
 kind: remark
-title: Surjectivity alone does not give a Banach submanifold without a split kernel
+title: Surjectivity alone does not imply a complemented kernel
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -33,16 +33,18 @@ not a consequence of the first, and it cannot be dropped:
   derivative admit a bounded right inverse along the level set.
 
 - **Why surjectivity by itself is not enough, and where the failure is seen.**
-  The open mapping theorem makes $L$ open, so it is onto and has continuous
-  right-inverse *as a map into $X$* only with the help of a complement; without
-  one, the level sets of the linear map need not be affine copies of a closed
-  complemented subspace, and the split chart demanded by
-  [[def-split-banach-submanifold]] cannot exist. The companion page carries the
+  The open mapping theorem makes $L$ open, but it does not supply a bounded
+  **linear** right inverse. Without one, the fibres of the linear map are affine
+  translates of a closed uncomplemented subspace and cannot be the split
+  coordinate slices demanded by [[def-split-banach-submanifold]]. The companion
+  page carries the
   standard witness: $c_0$ is a closed subspace of $\ell^\infty$ that is not
-  complemented in it, so it is not a split submanifold of the Banach space
-  $\ell^\infty$. A read-only list of the underlying non-complementation theorem
-  is available on the page, and the companion counterexample derives the
-  submanifold conclusion from it.
+  complemented in it, so the identity chart has no split-coordinate
+  decomposition for the pair $(\ell^\infty,c_0)$. Because $\ell^\infty$ is not
+  second countable, this is a Banach-space obstruction and **not** a
+  counterexample involving a Banach manifold under this library's convention.
+  It shows why complementability is a genuine extra linear hypothesis; it does
+  not by itself exhibit a regular level set in the manifold category.
 
 - **Automatic cases, and the ones that matter below.** A closed subspace that is
   finite dimensional or of finite codimension is automatically complemented

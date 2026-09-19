@@ -34,7 +34,7 @@ Then the permutation model satisfies BPI
 
 **Given:** A finite-support permutation system over a ZFA + AC ground model; the extreme-amenability hypothesis for every finite point stabiliser; a Boolean algebra $B$ of the permutation model and a finite support $E$ of a name for it.
 
-[F1] A hereditarily symmetric interpretation of a normal permutation system is a ZFA model with the same atoms and kernel, and a set belongs to it exactly when it admits a support in the filter ([[thm-fraenkel-mostowski-permutation-model]], [[def-symmetric-and-hereditarily-symmetric-sets]]).
+[F1] A hereditarily symmetric interpretation of a normal permutation system is a ZFA model with the same atoms and kernel. An object belongs to that model exactly when it is hereditarily symmetric. In the finite-support system, admitting a finite support proves symmetry of the object itself, but membership also requires hereditary symmetry of all its membership descendants ([[thm-fraenkel-mostowski-permutation-model]], [[def-symmetric-and-hereditarily-symmetric-sets]], [[def-permutation-support-system-and-normal-filter]]).
 
 [F2] The set of prime ideals of a nontrivial Boolean algebra is nonempty by the ultrafilter lemma in the ground model, and it is a closed subspace of the product $2^{B}$, hence compact Hausdorff in the product topology ([[def-boolean-prime-ideal-principle]], [[thm-bpi-equivalent-to-set-ultrafilter-lemma]], [[def-boolean-ideals-filters-and-primality]], [[def-stone-ultrafilter-space-and-clopens]], [[def-product-topology]], [[def-compact-space]], [[def-hausdorff-space]]).
 

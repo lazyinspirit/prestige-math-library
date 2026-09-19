@@ -22,14 +22,14 @@ sources:
 
 Over $\mathrm{ZF}$: suppose that for every discrete metrizable space $X$ and
 every open cover $\mathcal{U}$ of $X$ there exist a point-finite open refinement
-$\mathcal{V}$ and a map $a : \mathcal{V} \to \mathcal{U}$ with $V \subseteq a(V)$
-for every $V \in \mathcal{V}$. Then the Axiom of Choice holds
+$\mathcal{V}$ which covers $X$, and a map $a : \mathcal{V} \to \mathcal{U}$ with
+$V \subseteq a(V)$ for every $V \in \mathcal{V}$. Then the Axiom of Choice holds
 ([[def-axiom-of-choice]], [[def-metacompact-space]],
 [[def-cover-refinement-and-local-finiteness]]).
 
 ## Facts & Assumptions
 
-**Given:** The effective-metacompactness hypothesis; a pairwise disjoint family $F$ of nonempty sets.
+**Given:** The effective-metacompactness hypothesis, including that each supplied refining family covers the space; a pairwise disjoint family $F$ of nonempty sets.
 
 [F1] Multiple choice and its equivalence with AC: in ZF, MC is equivalent to AC, and MC asserts that every family of nonempty sets admits a function assigning to each member a nonempty finite subset ([[def-multiple-and-dependent-multiple-choice]], [[thm-multiple-choice-equivalent-to-choice-in-zf]]).
 
@@ -43,7 +43,7 @@ for every $V \in \mathcal{V}$. Then the Axiom of Choice holds
 
 1.1 Let $F$ be a pairwise disjoint family of nonempty sets and let $X := (F \times \{0\}) \cup (\bigcup F \times \{1\})$ carry the discrete metric; the two tags keep the family and its members apart, so that a set is never confused with an element of a member of the family. [given, F2]
 
-2.1 The family $\mathcal{U}$ of [F2] is an open cover of $X$ by [F2], so by the hypothesis applied once to this cover there are a point-finite open refinement $\mathcal{V}$ and a map $a : \mathcal{V} \to \mathcal{U}$ with $V \subseteq a(V)$ for all $V \in \mathcal{V}$; no global refinement operator is assumed, only this one per-cover existential pair. [step 1.1, F2, L1]
+2.1 The family $\mathcal{U}$ of [F2] is an open cover of $X$ by [F2], so by the hypothesis applied once to this cover there are a point-finite open refinement $\mathcal{V}$ which covers $X$ and a map $a : \mathcal{V} \to \mathcal{U}$ with $V \subseteq a(V)$ for all $V \in \mathcal{V}$; no global refinement operator is assumed, only this one per-cover existential pair. [step 1.1, F2, L1]
 
 3.1 For each $F \in F$ let $C(F) := \{\, V \in \mathcal{V} : (F,0) \in V \,\}$, the set of refinement members through the point $(F,0)$ of the space; $C(F)$ is nonempty because $\mathcal{V}$ covers $X$, and finite because $\mathcal{V}$ is point-finite at $(F,0)$. [step 2.1, L1]
 

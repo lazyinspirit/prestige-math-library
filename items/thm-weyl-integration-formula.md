@@ -5,7 +5,7 @@ title: Weyl integration formula
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits, prop-weyl-jacobian-is-well-defined-and-weyl-invariant, cor-normalized-haar-measure-on-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-quotient-manifold-by-a-closed-lie-subgroup, prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density, def-axiom-of-choice, def-weyl-group-of-a-compact-connected-lie-group, cor-proper-local-diffeomorphisms-have-constant-finite-fibres, lem-c1-local-diffeomorphisms-preserve-null-sets-locally, thm-change-of-variables-for-oriented-manifold-diffeomorphisms, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
+deps: [prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits, prop-weyl-jacobian-is-well-defined-and-weyl-invariant, cor-normalized-haar-measure-on-a-compact-lie-group, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics, thm-quotient-manifold-by-a-closed-lie-subgroup, prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density, def-axiom-of-choice, def-weyl-group-of-a-compact-connected-lie-group, thm-compact-group-weyl-group-is-finite, cor-proper-local-diffeomorphisms-have-constant-finite-fibres, lem-c1-local-diffeomorphisms-preserve-null-sets-locally, thm-change-of-variables-for-oriented-manifold-diffeomorphisms, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -41,7 +41,7 @@ $\int_G f\,dg=|W(G,T)|^{-1}\int_T f(t)J(t)\,dt$.
 
 [L1] $dg$ is the unique regular Borel probability on $G$ invariant under left and right translations and inversion, $dt$ is the corresponding measure on $T$, and integrals against them are invariant under translations and conjugation ([[cor-normalized-haar-measure-on-a-compact-lie-group]], [[prop-integration-against-haar-is-invariant-under-translations-and-conjugation]]).
 
-[L2] Conjugacy classes meet $T$, and two points of $T$ are conjugate exactly when they are in the same $W(G,T)$-orbit; $|W(G,T)|<+\infty$ and acts faithfully by Lie-group automorphisms of $T$ ([[prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits]], [[def-weyl-group-of-a-compact-connected-lie-group]]).
+[L2] Conjugacy classes meet $T$, and two points of $T$ are conjugate exactly when they are in the same $W(G,T)$-orbit ([[prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits]]). The group $W(G,T)$ is finite and acts faithfully on $T$ ([[thm-compact-group-weyl-group-is-finite]]); its action is by Lie-group automorphisms ([[def-weyl-group-of-a-compact-connected-lie-group]]).
 
 [L3] $G/T$ is a compact smooth manifold with a smooth left $G$-action and $\dim(G/T)=\dim G-\dim T$; every locally compact LCH space carries a Radon volume measure for any smooth Riemannian metric, and the Riemannian volume of a compact manifold is a finite Radon measure ([[thm-quotient-manifold-by-a-closed-lie-subgroup]], [[prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density]], [[prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics]]).
 

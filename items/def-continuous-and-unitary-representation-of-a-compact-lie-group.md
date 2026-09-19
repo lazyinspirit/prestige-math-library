@@ -46,8 +46,9 @@ representation is unitary in the usual sense.
 Infinite-dimensional **Hilbert-space representations** are named explicitly at
 the few places where they occur, namely for the left and right regular
 representations on $L^2(G)$; a representation of $G$ on a complex Hilbert space
-$H$ is a group homomorphism $\pi:G\to\mathcal B(H)$ such that each $\pi(g)$ is
-unitary and $g\mapsto\pi(g)\xi$ is continuous for every $\xi\in H$.
+$H$ is a group homomorphism $\pi:G\to U(H)$, where $U(H)$ is the group of
+unitary bounded operators on $H$, such that $g\mapsto\pi(g)\xi$ is continuous
+for every $\xi\in H$.
 
 ## Remarks
 

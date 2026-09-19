@@ -5,7 +5,7 @@ title: Existence of maximal tori
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, thm-structure-of-a-compact-connected-abelian-lie-group, def-axiom-of-choice, def-immersed-embedded-and-closed-lie-subgroup, thm-lie-subgroup-lie-subalgebra-correspondence, thm-cartans-closed-subgroup-theorem, thm-closure-of-a-connected-set, lem-closed-subset-of-a-compact-space-is-compact]
+deps: [def-torus-and-maximal-torus-in-a-compact-lie-group, thm-structure-of-a-compact-connected-abelian-lie-group, def-axiom-of-choice, def-immersed-embedded-and-closed-lie-subgroup, thm-lie-subgroup-lie-subalgebra-correspondence, thm-closure-of-a-connected-set, lem-closed-subset-of-a-compact-space-is-compact]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -37,7 +37,7 @@ and every torus of $G$ is contained in a maximal torus.
 
 [L3] Connected immersed Lie subgroups of $G$ correspond bijectively to Lie subalgebras of $\mathfrak g$: every subalgebra $\mathfrak h$ is the Lie algebra of a connected immersed subgroup $H$, unique up to the unique isomorphism over $G$ ([[thm-lie-subgroup-lie-subalgebra-correspondence]]).
 
-[L4] The closure of a subgroup is a subgroup; the closure of a connected set is connected; a closed subset of the compact group $G$ is compact; the exponential image of an abelian subalgebra generates an abelian subgroup ([[thm-cartans-closed-subgroup-theorem]], [[thm-closure-of-a-connected-set]], [[lem-closed-subset-of-a-compact-space-is-compact]]).
+[L4] The closure of a subgroup $H$ in a topological group is a subgroup: if $a,b\in\overline H$, choose nets $a_i,b_j$ in $H$ converging to $a,b$; then the product net $a_ib_j^{-1}$ converges to $ab^{-1}$ and lies in $H$. The closure of a connected set is connected, and a closed subset of the compact group $G$ is compact ([[thm-closure-of-a-connected-set]], [[lem-closed-subset-of-a-compact-space-is-compact]]). The exponential image of an abelian subalgebra generates an abelian subgroup, because exponentials of commuting elements satisfy $\exp X\exp Y=\exp(X+Y)=\exp Y\exp X$.
 
 ## Proof
 

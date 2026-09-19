@@ -22,11 +22,12 @@ sources:
 
 ## Statement
 
-As of 15 September 2026: AC proves Stone's theorem, while neither DC nor BPI
-suffices for it; the stronger assertion that every open cover of every discrete
-metrizable space has a point-finite refinement equipped with a refinement map
-implies AC; the exact strength of the ordinary existential Stone theorem over
-$\mathrm{ZF}$ is not identified here and remains open in the cited line of work.
+As of 15 September 2026: AC proves Stone's theorem, while, assuming the
+consistency of ZF, neither DC nor BPI proves it; the stronger assertion that
+every open cover of every discrete metrizable space has a point-finite
+refinement equipped with a refinement map implies AC; the exact strength of the
+ordinary existential Stone theorem over $\mathrm{ZF}$ is not identified here
+and remains open in the cited line of work.
 
 ## Remarks
 
@@ -34,11 +35,13 @@ $\mathrm{ZF}$ is not identified here and remains open in the cited line of work.
   that under AC every metric space is paracompact, and it is the positive half of
   the ledger.
 
-- **The two countermodels.** [[thm-relative-consistency-dc-without-stone]] gives a
-  model of $\mathrm{ZF}+\mathrm{DC}$ with a metrizable nonparacompact space, and
+- **The two countermodels.** Conditional on $\operatorname{Con}(\mathrm{ZF})$,
+  [[thm-relative-consistency-dc-without-stone]] gives a model of
+  $\mathrm{ZF}+\mathrm{DC}$ with a metrizable nonparacompact space, and
   [[thm-relative-consistency-bpi-without-stone]] gives a model of
   $\mathrm{ZF}+\mathrm{BPI}$ with a metrizable nonmetacompact space
-  ([[def-metacompact-space]]); hence neither DC nor BPI proves Stone's theorem.
+  ([[def-metacompact-space]]); hence, under that same consistency hypothesis,
+  neither DC nor BPI proves Stone's theorem.
 
 - **The stronger assertion.** [[thm-effective-metacompact-discrete-metrics-implies-ac]]
   proves that if every open cover of every discrete metrizable space has a

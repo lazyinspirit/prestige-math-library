@@ -29,7 +29,7 @@ isomorphic.
 
 [L1] $SU(2)$ and $SO(3)$ have the same $A_1$ root system and are centrally isogenous, the adjoint double cover being $SU(2)\to SO(3)=SU(2)/\{\pm I\}$ ([[thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems]], [[ex-character-lattices-of-su-two-and-so-three]]).
 
-[L2] The centre of $SU(2)$ is $\{\pm I\}$ and the centre of $SO(3)$ is trivial; an isomorphism of groups carries the centre onto the centre ([[ex-character-lattices-of-su-two-and-so-three]]).
+[L2] The centre of $SU(2)$ is $\{\pm I\}$: a central matrix commutes with every $\operatorname{diag}(z,z^{-1})$, so it is diagonal, and commuting with $J=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$ makes its diagonal entries equal; determinant one then gives $\pm I$. The centre of $SO(3)$ is trivial: commuting with the three coordinate half-turns makes a central rotation diagonal, and commuting with the cyclic coordinate permutation makes its three diagonal entries equal; orthogonality and determinant one then force $I$. Finally, if $\varphi:G\to H$ is an isomorphism and $z\in Z(G)$, then $\varphi(z)$ commutes with every $\varphi(g)\in H$, so $\varphi(Z(G))=Z(H)$. [matrix multiplication, group axioms]
 
 [L3] The character lattice of $SU(2)$ is $P=\mathbb Z\omega$ while that of $SO(3)$ is $Q=2\mathbb Z\omega$ ([[ex-character-lattices-of-su-two-and-so-three]]).
 

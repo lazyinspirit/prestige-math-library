@@ -22,7 +22,7 @@ proof_strategy: direct
 
 ## Example
 
-Let the circle act by scalar multiplication on $\mathbb C^n$ with
+Let $n\ge1$. Let the circle act by scalar multiplication on $\mathbb C^n$ with
 $\omega_0=\sum_jdx_j\wedge dy_j$ and moment map
 $\mu(z)=-\frac12|z|^2+c$ of the previous example. For $c>0$ the value $0$ is
 regular, the circle acts freely on the level $\mu^{-1}(0)=S^{2n-1}_r$, the
@@ -38,7 +38,7 @@ $n=1$ the quotient is a point and the reduced form is zero.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the scalar circle action on $\mathbb C^n$ with its moment map $\mu(z)=-\frac12|z|^2+c$, and $c>0$.
+**Given:** $\mathrm{AC}_\omega$, an integer $n\ge1$, the scalar circle action on $\mathbb C^n$ with its moment map $\mu(z)=-\frac12|z|^2+c$, and $c>0$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field and reduction suppliers.
 

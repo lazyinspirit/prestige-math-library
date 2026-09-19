@@ -48,7 +48,7 @@ $$V_\lambda=\mathbb Cv .$$
 
 [L4] If $x\in\mathfrak g_\alpha$ and $w\in V_\mu$, then $x\cdot w\in V_{\mu+\alpha}$ ([[prop-root-vectors-shift-weight-spaces]]).
 
-[L5] The positive roots are exactly the nonzero nonnegative integral combinations of the simple roots, each root space is one-dimensional, and the simple roots are linearly independent ([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]], [[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]]).
+[L5] Every positive root is a nonzero nonnegative integral combination of the simple roots, each root space is one-dimensional, and the simple roots are linearly independent ([[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]], [[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]]).
 
 ## Proof
 

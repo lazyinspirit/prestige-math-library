@@ -15,6 +15,9 @@ sources:
     - title: "Marianne Morillon, Axiom of Choice"
       url: "https://lim.univ-reunion.fr/staff/mar/mem-HDR.pdf"
       locator: "§2.1, Question 1, p. 6"
+    - title: "J. Dodu and M. Morillon, The Hahn-Banach Property and the Axiom of Choice"
+      url: "https://lim.univ-reunion.fr/staff/mar/dodu.pdf"
+      locator: "§7, printed p. 10"
 ---
 
 ## Statement
@@ -34,12 +37,12 @@ $\mathrm{ZF}$ is asserted.
   the finite-selection form is the one in which the implication is stated, so no
   conversion between the tree and menu presentations is needed.
 
-- **The $\mathrm{ZFA}$ strictness.** In the permutation models of the cited line
-  of work there are serial relations with no DMC menu system while every relation
-  on a well-orderable carrier behaves as in $\mathrm{ZFC}$; the resulting
-  separation is a statement about $\mathrm{ZFA}$, where atoms are available to
-  break the symmetric construction that DC needs. It is not a statement about
-  $\mathrm{ZF}$, and no such statement is made here.
+- **The $\mathrm{ZFA}$ strictness.** Dodu and Morillon record that Fraenkel's
+  second model of $\mathrm{ZFA}$ satisfies DMC but does not satisfy DC. Thus the
+  model has a DMC menu system for every serial relation while some serial
+  relation has no infinite dependent-choice chain. This is the direction needed
+  to show that DMC does not imply DC in $\mathrm{ZFA}$. It is not a statement
+  about $\mathrm{ZF}$, and no such statement is made here.
 
 - **The open question.** Morillon poses the reversal over $\mathrm{ZF}$ as an
   open question in the same section that records the tree form of DMC. This item

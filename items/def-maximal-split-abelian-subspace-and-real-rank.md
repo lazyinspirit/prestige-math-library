@@ -5,7 +5,7 @@ title: Maximal split abelian subspace and real rank
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-split-real-form, def-cartan-involution-of-a-real-semisimple-lie-algebra]
+deps: [def-cartan-decomposition-of-a-real-semisimple-lie-algebra, def-split-real-form, def-cartan-involution-of-a-real-semisimple-lie-algebra, def-riemannian-symmetric-pair-of-noncompact-type, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,7 +19,8 @@ landmark: false
 
 ## Definition
 
-Let $\mathfrak g_0$ be a finite-dimensional real semisimple Lie algebra with a
+Assume the Axiom of Choice. Let $\mathfrak g_0$ be a finite-dimensional real
+semisimple Lie algebra with a
 Cartan involution $\theta$ and Cartan decomposition
 $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$
 ([[def-cartan-involution-of-a-real-semisimple-lie-algebra]],
@@ -34,8 +35,13 @@ $\mathfrak p_0$. The **real rank** of $\mathfrak g_0$ is
 
 $$\operatorname{rank}_{\mathbb R}\mathfrak g_0:=\dim\mathfrak a,$$
 
-which is independent of the choice of $\mathfrak a$ by
-[[thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k]].
+which is independent of the choice of $\mathfrak a$. Indeed, split off the
+compact ideals of $\mathfrak g_0$ as in
+[[def-riemannian-symmetric-pair-of-noncompact-type]]. They lie in
+$\mathfrak k_0$ and contribute nothing to $\mathfrak p_0$, so the maximal
+abelian subspaces of $\mathfrak p_0$ are exactly those for the remaining
+noncompact-type summand. Their conjugacy, and hence equality of their
+dimensions, is [[thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k]].
 
 The terminology is related to the split real forms of
 [[def-split-real-form]]: a real form $\mathfrak g_0$ is split precisely when

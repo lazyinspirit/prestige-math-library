@@ -5,7 +5,7 @@ title: Roots of a compact connected Lie group
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-matrix-coefficient-and-character-of-a-compact-group-representation, def-conjugation-and-the-adjoint-representation-of-a-lie-group, def-weight-and-weight-space-of-a-lie-algebra-representation]
+deps: [def-character-and-cocharacter-lattices-of-a-torus, def-conjugation-and-the-adjoint-representation-of-a-lie-group, thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -30,7 +30,7 @@ representation of $G$ on $\mathfrak g$, extended $\mathbb C$-linearly to
 $\mathfrak g_{\mathbb C}$ ([[def-conjugation-and-the-adjoint-representation-of-a-lie-group]]).
 
 A **root** of $(G,T)$ is a continuous character $\alpha:T\to S^1$
-([[def-matrix-coefficient-and-character-of-a-compact-group-representation]])
+([[def-character-and-cocharacter-lattices-of-a-torus]])
 whose **weight space**
 $$\mathfrak g_\alpha:=\{X\in\mathfrak g_{\mathbb C}:\operatorname{Ad}(t)X=\alpha(t)X\ \text{for all }t\in T\}$$
 is nonzero. The set of roots is written $\Phi(G,T)$, or simply $\Phi$. Since
@@ -39,9 +39,15 @@ space $\mathfrak g_0=\{X:\operatorname{Ad}(t)X=X\ \forall t\in T\}$ give a
 direct sum decomposition
 $$\mathfrak g_{\mathbb C}=\mathfrak g_0\oplus\bigoplus_{\alpha\in\Phi}\mathfrak g_\alpha,$$
 the **root space decomposition** of $\mathfrak g_{\mathbb C}$ with respect to
-$T$; it is a weight decomposition in the sense of
-[[def-weight-and-weight-space-of-a-lie-algebra-representation]], and it is finite
-because $\mathfrak g_{\mathbb C}$ is finite-dimensional.
+$T$. Indeed, the adjoint representation can be made unitary by
+[[thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable]];
+the commuting normal operators $\operatorname{Ad}(t)$ are diagonalizable by
+[[thm-complex-spectral-theorem-for-normal-endomorphisms]] and have a common
+eigenbasis by
+[[thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms]].
+The resulting common eigenvalue functions are continuous characters of $T$,
+and only finitely many occur because $\mathfrak g_{\mathbb C}$ is
+finite-dimensional.
 
 **The differential notation.** For a character $\alpha$ of $T$, its
 differential at the identity, extended $\mathbb C$-linearly, is the

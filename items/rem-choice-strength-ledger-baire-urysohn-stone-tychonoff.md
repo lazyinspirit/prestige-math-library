@@ -33,14 +33,15 @@ sources:
 
 Ledger: separable complete metric Baire is a theorem of $\mathrm{ZF}$; complete
 metric Baire is DC; compact-Hausdorff Baire is exactly DMC; Baireness of
-products of compact Hausdorff spaces is DC; DMC implies Urysohn's lemma, while
-countable choice and BPI imply neither Urysohn's lemma nor bounded Tietze
-extension; Stone follows from AC but neither DC nor BPI suffices; the stronger
+products of compact Hausdorff spaces is DC; DMC implies Urysohn's lemma, while,
+relative to the consistency of ZF, countable choice and BPI are each consistent
+with the failure of Urysohn's lemma and of bounded Tietze extension; Stone
+follows from AC but neither DC nor BPI suffices; the stronger
 per-cover effective refinement assertion for discrete metrizable spaces implies
 AC; compact Hausdorff products and cofinite products have the strength of BPI;
-compact $T_1$ and arbitrary compact products have the strength of AC. DC implies
-DMC, DMC is not provable in $\mathrm{ZF}$, and DMC-to-DC over $\mathrm{ZF}$
-remains open.
+compact $T_1$ and arbitrary compact products have the strength of AC. DC
+implies DMC; if ZF is consistent, ZF does not prove DMC; and DMC-to-DC over
+$\mathrm{ZF}$ remains open.
 
 ## Remarks
 
@@ -72,8 +73,8 @@ remains open.
   ([[thm-compact-t1-product-theorem-iff-ac]],
   [[thm-arbitrary-compact-product-theorem-iff-ac]]).
 
-- **Principle rows.** DC implies DMC and DMC is not a ZF theorem
-  ([[cor-dmc-is-not-provable-in-zf]]); BPI does not imply DMC
+- **Principle rows.** DC implies DMC and, assuming the consistency of ZF, DMC is
+  not a ZF theorem ([[cor-dmc-is-not-provable-in-zf]]); BPI does not imply DMC
   ([[cor-bpi-does-not-imply-dmc]]); the qualifications over $\mathrm{ZFA}$ and
   the openness of the reversal are in [[rem-dmc-mc-ac-zfa-qualification]] and
   [[rem-dmc-versus-dc-over-zf-is-open]]. No strict DMC-versus-DC claim over

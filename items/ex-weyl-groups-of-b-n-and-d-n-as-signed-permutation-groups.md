@@ -20,13 +20,14 @@ proof_strategy: direct
 
 ## Example
 
-$W(B_n)$ is the full group of signed permutations of the coordinates, of
-order $2^nn!$, and $W(D_n)$ is the subgroup of signed permutations with an
-even number of sign changes, of order $2^{n-1}n!$.
+For $n\ge1$, $W(B_n)$ is the full group of signed permutations of the
+coordinates, of order $2^nn!$. For $n\ge2$, $W(D_n)$ is the subgroup of
+signed permutations with an even number of sign changes, of order
+$2^{n-1}n!$.
 
 ## Facts & Assumptions
 
-**Given:** The coordinate models $B_n=\{\pm\varepsilon_i\}\cup\{\pm\varepsilon_i\pm\varepsilon_j\}$ and $D_n=\{\pm\varepsilon_i\pm\varepsilon_j\}$ in $\mathbb R^{n}$.
+**Given:** The coordinate model $B_n=\{\pm\varepsilon_i\}\cup\{\pm\varepsilon_i\pm\varepsilon_j\}$ in $\mathbb R^n$ for $n\ge1$, and the coordinate model $D_n=\{\pm\varepsilon_i\pm\varepsilon_j\}$ in $\mathbb R^n$ for $n\ge2$.
 
 [L1] $s_{\varepsilon_i}$ negates the $i$-th coordinate; $s_{\varepsilon_i-\varepsilon_j}$ swaps coordinates $i,j$; $s_{\varepsilon_i+\varepsilon_j}$ swaps coordinates $i,j$ and negates both ([[ex-classical-root-systems-in-euclidean-coordinates]]).
 

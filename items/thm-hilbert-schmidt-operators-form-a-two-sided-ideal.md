@@ -35,9 +35,9 @@ square-sum and $\|T\|_{HS,E}$ the Hilbert–Schmidt norm of
    $$\|T^*\|_{HS,F}=\|T\|_{HS,E};$$
 3. if $T\in\mathcal B(H,K)$ is Hilbert–Schmidt relative to $E$ and
    $A\in\mathcal B(K,L)$, $B\in\mathcal B(H_0,H)$ are bounded with $E_0$ a
-   Hilbert basis of $H_0$, then $AT\in\mathcal B(H,L)$ is Hilbert–Schmidt
-   relative to $E$ and $TB\in\mathcal B(H_0,K)$ is Hilbert–Schmidt relative to
-   $E_0$, with
+   Hilbert basis of $H_0$ and $F$ a supplied Hilbert basis of $K$, then
+   $AT\in\mathcal B(H,L)$ is Hilbert–Schmidt relative to $E$ and
+   $TB\in\mathcal B(H_0,K)$ is Hilbert–Schmidt relative to $E_0$, with
    $$\|AT\|_{HS,E}\le\|A\|\,\|T\|_{HS,E},\qquad \|TB\|_{HS,E_0}\le\|T\|_{HS,E}\,\|B\|,$$
    and consequently
    $$\|ATB\|_{HS,E_0}\le\|A\|\,\|T\|_{HS,E}\,\|B\| .$$
@@ -45,6 +45,8 @@ square-sum and $\|T\|_{HS,E}$ the Hilbert–Schmidt norm of
 ## Facts & Assumptions
 
 **Given:** Countable Choice, real or complex Hilbert spaces $H,H_0,K,L$, a Hilbert basis $E$ of $H$, Hilbert–Schmidt operators $S,T$ relative to $E$, and bounded operators $A\in\mathcal B(K,L)$, $B\in\mathcal B(H_0,H)$.
+
+For claim 3, Hilbert bases $E_0$ of $H_0$ and $F$ of $K$ are supplied as additional data; their existence is not inferred from Countable Choice.
 
 [A1] **Hilbert–Schmidt data.** For a Hilbert basis $E$ of $H$, $s_E(T)=\sum_{e\in E}\|Te\|^2$ is the supremum of the finite subsums, $T$ is Hilbert–Schmidt relative to $E$ when $s_E(T)<+\infty$, and then $\|T\|_{HS,E}=s_E(T)^{1/2}$; the finite-subset supremum splits as $\sum_{e\in E}\|Te\|^2=\sum_{e\in F}\|Te\|^2+\sum_{e\in E\setminus F}\|Te\|^2$ for finite $F$ ([[def-hilbert-schmidt-operator]], [[def-square-summable-family-on-an-arbitrary-index-set]]).
 
@@ -66,9 +68,8 @@ square-sum and $\|T\|_{HS,E}$ the Hilbert–Schmidt norm of
 
 1.3 **Left multiplication.** For finite $F\subseteq E$, [A3] gives $\sum_{e\in F}\|ATe\|^2\le\|A\|^2\sum_{e\in F}\|Te\|^2\le\|A\|^2\|T\|^2_{HS,E}$, so $AT$ is Hilbert–Schmidt relative to $E$ with $\|AT\|_{HS,E}\le\|A\|\|T\|_{HS,E}$. [A1, A3, algebra]
 
-2.1 **Right multiplication.** Let $E_0$ be a Hilbert basis of $H_0$ and put $U:=TB\in\mathcal B(H_0,K)$, so $U^*=B^*T^*$ by [A3]. Fix a Hilbert basis $F$ of $K$; by [step 1.2] $T^*$ is Hilbert–Schmidt relative to $F$, and [step 1.3] applied to the left multiplication $B^*T^*$ gives that $U^*$ is Hilbert–Schmidt relative to $F$ with $\|U^*\|_{HS,F}\le\|B^*\|\|T^*\|_{HS,F}=\|B\|\|T\|_{HS,E}$. Applying [step 1.2] to $U$ in place of $T$ shows that $U=TB$ is Hilbert–Schmidt relative to every Hilbert basis of $H_0$, in particular relative to $E_0$, with $\|TB\|_{HS,E_0}=\|U^*\|_{HS,F}\le\|T\|_{HS,E}\|B\|$. [step 1.2, step 1.3, A2, A3]
+2.1 **Right multiplication.** Let $E_0$ and $F$ be the supplied Hilbert bases of $H_0$ and $K$, respectively, and put $U:=TB\in\mathcal B(H_0,K)$, so $U^*=B^*T^*$ by [A3]. By [step 1.2], $T^*$ is Hilbert–Schmidt relative to $F$, and [step 1.3] applied to the left multiplication $B^*T^*$ gives that $U^*$ is Hilbert–Schmidt relative to $F$ with $$ \|U^*\|_{HS,F}\le\|B^*\|\|T^*\|_{HS,F} =\|B\|\|T\|_{HS,E}. $$ Now apply [step 1.2] to the Hilbert–Schmidt operator $U^*:K\to H_0$, using $F$ as its domain basis and $E_0$ as its codomain basis. It follows that $(U^*)^*=U^{**}$ is Hilbert–Schmidt relative to $E_0$ and has Hilbert–Schmidt norm $\|U^*\|_{HS,F}$. Since $U^{**}=U$ by [A3], $U=TB$ is Hilbert–Schmidt relative to $E_0$ and $$ \|TB\|_{HS,E_0}=\|U^*\|_{HS,F} \le\|T\|_{HS,E}\|B\|. $$ [step 1.2, step 1.3, A2, A3]
 
 3.1 **Both-sided bound.** Combining [step 1.3] with $TB$ in place of $T$ and [step 2.1], $ATB=(AT)B$ is Hilbert–Schmidt relative to $E_0$ with $\|ATB\|_{HS,E_0}\le\|A\|\|TB\|_{HS,E_0}\le\|A\|\|T\|_{HS,E}\|B\|$. [step 1.3, step 2.1]
 
 4.1 **Conclusion.** Claim 1 is [step 1.1], claim 2 is [step 1.2] and claim 3 is the combination of [step 1.3], [step 2.1] and [step 3.1]; no Hilbert basis is assumed to exist, since $E$, $E_0$ and $F$ are supplied as data and only the finite-subset supremum definition of [A1] and the invariance theorem [A2] are used. [step 1.1, step 1.2, step 1.3, step 2.1, step 3.1, A2] ∎
-

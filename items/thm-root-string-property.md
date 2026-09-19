@@ -5,7 +5,7 @@ title: The root-string property
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-brackets-of-root-spaces, prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two]
+deps: [thm-root-sl-two-triple, def-coroot-of-a-lie-algebra-root, thm-finite-dimensional-representations-of-sl-two, prop-brackets-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -36,7 +36,7 @@ $$p-q=\beta(h_\alpha)\in\mathbb Z .$$
 
 [L1] There are $e_\alpha\in\mathfrak g_\alpha$, $f_\alpha\in\mathfrak g_{-\alpha}$ with $[e_\alpha,f_\alpha]=h_\alpha$, $[h_\alpha,e_\alpha]=2e_\alpha$, $[h_\alpha,f_\alpha]=-2f_\alpha$, so that $\mathbb Ce_\alpha\oplus\mathbb Cf_\alpha\oplus\mathbb Ch_\alpha$ is a copy of $\mathfrak{sl}_2$ ([[thm-root-sl-two-triple]], [[def-special-linear-lie-algebra-sl-two]]).
 
-[L2] The bracket of root spaces satisfies $[\mathfrak g_\gamma,\mathfrak g_\delta]\subseteq\mathfrak g_{\gamma+\delta}$ and $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]=\mathbb CH_\alpha\subseteq\mathfrak h$ ([[prop-brackets-of-root-spaces]], [[prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra]]).
+[L2] With $\mathfrak g_0=\mathfrak h$ and $\mathfrak g_\lambda=0$ when $\lambda$ is neither a root nor zero, the bracket of weight spaces satisfies $[\mathfrak g_\gamma,\mathfrak g_\delta]\subseteq\mathfrak g_{\gamma+\delta}$ for all functionals $\gamma,\delta$ ([[prop-brackets-of-root-spaces]], [[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]).
 
 [L3] Every finite-dimensional module over a copy of $\mathfrak{sl}_2$ is a direct sum of irreducibles whose $h$-weights are $m,m-2,\dots,-m$ for some integer $m\ge0$, each on a one-dimensional weight space ([[thm-finite-dimensional-representations-of-sl-two]]).
 
@@ -48,8 +48,8 @@ $$p-q=\beta(h_\alpha)\in\mathbb Z .$$
 
 **Proof technique:** direct.
 
-1.1 The subspace $V=\bigoplus_{k\in\mathbb Z}\mathfrak g_{\beta+k\alpha}$ is finite-dimensional and is stable under the three operators of the triple [L1]: by [L2] $\operatorname{ad}_{e_\alpha}$ and $\operatorname{ad}_{f_\alpha}$ shift the index $k$ by one, and for $k=-1$ the image $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]\subseteq\mathbb CH_\alpha$ lies in $V$; $\operatorname{ad}_{h_\alpha}$ preserves each $\mathfrak g_{\beta+k\alpha}$. Thus $V$ is a finite-dimensional module over a copy of $\mathfrak{sl}_2$, and its $h_\alpha$-weight spaces are exactly the nonzero members of the family $\mathfrak g_{\beta+k\alpha}$, since those lie in distinct eigenspaces of $\operatorname{ad}_{h_\alpha}$. [L1, L2, L4, algebra]
+1.1 The subspace $V=\bigoplus_{k\in\mathbb Z}\mathfrak g_{\beta+k\alpha}$ is finite-dimensional. By [L2], $\operatorname{ad}_{e_\alpha}$ maps its $k$-th summand into its $(k+1)$-st summand and $\operatorname{ad}_{f_\alpha}$ maps it into its $(k-1)$-st summand, including any case in which the target is $\mathfrak g_0=\mathfrak h$; $\operatorname{ad}_{h_\alpha}$ preserves every summand. Thus $V$ is a finite-dimensional module over the copy of $\mathfrak{sl}_2$ in [L1]. On $\mathfrak g_{\beta+k\alpha}$, $h_\alpha$ has eigenvalue $\beta(h_\alpha)+2k$ by [L5], and these eigenvalues are distinct as $k$ varies. Hence the nonzero summands $\mathfrak g_{\beta+k\alpha}$ are exactly the $h_\alpha$-weight spaces of $V$. [L1, L2, L4, L5, algebra]
 
-2.1 Decompose $V$ into irreducibles as in [L3]. If $W$ is one irreducible summand, its $h_\alpha$-weights are $m,m-2,\dots,-m$ with $m\ge0$ integer, each with multiplicity one, so the indices $k$ with $W\cap\mathfrak g_{\beta+k\alpha}\ne0$ are those with $\beta(h_\alpha)+2k\in\{m,m-2,\dots,-m\}$; writing $q=\max k$ and $-p=\min k$ for $W$ we get $m=\beta(h_\alpha)+2q=-(\beta(h_\alpha)-2p)$, hence $p-q=\beta(h_\alpha)$, and the index set of $W$ is the interval $\{-p,\dots,q\}$. [L3, L5, step 1.1, algebra]
+2.1 Decompose $V$ into irreducibles as in [L3]. If $W$ is one irreducible summand, its $h_\alpha$-weights are $m,m-2,\dots,-m$ with $m\ge0$ integer. Thus the indices $k$ for which $W\cap\mathfrak g_{\beta+k\alpha}\ne0$ form an interval of integers $\{a_W,a_W+1,\dots,b_W\}$ determined by $\beta(h_\alpha)+2a_W=-m$ and $\beta(h_\alpha)+2b_W=m$. Consequently $a_W+b_W=-\beta(h_\alpha)$ for every irreducible summand $W$. [L3, step 1.1, algebra]
 
-3.1 All intervals obtained in step 2.1 are concentric: each satisfies $p-q=\beta(h_\alpha)$, so $q-p$ is the same for all of them. The union of finitely many intervals with a common centre is the interval between the smallest and largest indices occurring, and the set $\{k:\mathfrak g_{\beta+k\alpha}\ne0\}$ is exactly the union of the index sets of the summands by step 1.1. Hence that set is $\{-p,\dots,q\}$ for the extreme indices, so it is a nonempty interval of consecutive integers, and its own $p-q$ equals the common value $\beta(h_\alpha)$ of step 2.1, which is an integer because $p$ and $q$ are integers. [step 2.1, algebra] ∎
+3.1 The intervals in step 2.1 all have centre $-\beta(h_\alpha)/2$, so they are nested and their finite union is the interval $\{a,a+1,\dots,b\}$ with $a+b=-\beta(h_\alpha)$. This union is exactly $\{k:\mathfrak g_{\beta+k\alpha}\ne0\}$ by step 1.1. It contains $0$, because $\mathfrak g_\beta\ne0$ for $\beta\in\Phi\cup\{0\}$ and $\mathfrak g_0=\mathfrak h\ne0$; hence $a\le0\le b$. Put $p=-a\ge0$ and $q=b\ge0$. Then the index set is $\{-p,\dots,q\}$ and $p-q=-(a+b)=\beta(h_\alpha)\in\mathbb Z$. [L4, step 1.1, step 2.1, algebra] ∎

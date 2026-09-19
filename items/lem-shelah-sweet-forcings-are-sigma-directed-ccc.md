@@ -1,7 +1,7 @@
 ---
 id: lem-shelah-sweet-forcings-are-sigma-directed-ccc
 kind: lemma
-title: Sweet forcings are sigma-directed and ccc
+title: Sweet forcings are countable unions of directed sets and ccc
 status: draft
 origin: pipeline
 deps: [def-shelah-sweetness-model, def-kappa-closure-distributivity-and-chain-condition]

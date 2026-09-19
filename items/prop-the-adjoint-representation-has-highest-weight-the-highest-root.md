@@ -5,7 +5,7 @@ title: The adjoint highest weight is the highest root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system, def-height-of-a-root-and-highest-root, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-brackets-of-root-spaces, def-adjoint-representation-of-a-lie-algebra, def-simple-semisimple-and-reductive-lie-algebras, def-lie-subalgebra-ideal-and-center, def-highest-weight-vector-and-highest-weight-module, def-partial-order-on-weights, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
+deps: [prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system, def-height-of-a-root-and-highest-root, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-brackets-of-root-spaces, def-adjoint-representation-of-a-lie-algebra, def-simple-semisimple-and-reductive-lie-algebras, def-lie-subalgebra-ideal-and-center, def-highest-weight-vector-and-highest-weight-module, def-partial-order-on-weights, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -44,8 +44,6 @@ highest weight is $\theta$.
 
 [L4] The highest root $\theta$ is a positive root with $\theta\le\gamma$ for no positive root $\gamma\ne\theta$; every positive root $\gamma$ satisfies $\gamma\le\theta$, and every negative root $-\gamma$ with $\gamma\in\Phi^+$ satisfies $-\gamma\le\theta$ ([[prop-highest-root-exists-and-is-unique-in-an-irreducible-finite-root-system]], [[def-height-of-a-root-and-highest-root]], [[def-partial-order-on-weights]], [[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
 
-[L5] Finite-dimensional irreducible representations of $\mathfrak g$ are classified by their highest weights, and the highest weight of an irreducible module is its unique maximal weight ([[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]], [[def-highest-weight-vector-and-highest-weight-module]]).
-
 ## Proof
 
 **Proof technique:** direct.
@@ -56,4 +54,4 @@ highest weight is $\theta$.
 
 1.3 Choose $0\ne x\in\mathfrak g_\theta$; for a positive root $\alpha$ we have $[y,x]\in\mathfrak g_{\alpha+\theta}$ for $y\in\mathfrak g_\alpha$, and $\mathfrak g_{\alpha+\theta}=0$ because $\alpha+\theta>\theta$ is not a root by maximality of $\theta$; hence every positive root space annihilates $x$, that is, $\mathfrak n^+\cdot x=0$, and $H\cdot x=\theta(H)x$ for $H\in\mathfrak h$; thus $x$ is a highest weight vector of weight $\theta$. [L3, L4]
 
-2.1 By steps 1.1, 1.2 and 1.3 the adjoint module is a finite-dimensional irreducible representation whose maximal weight is $\theta$; by [L5] its highest weight is $\theta$, as asserted. [L5, step 1.1, step 1.2, step 1.3] ∎
+2.1 The vector $x$ of step 1.3 is nonzero, so the submodule $U(\mathfrak g)x$ is nonzero and therefore equals the whole adjoint module by irreducibility from step 1.1. Thus $x$ generates the adjoint module and is killed by $\mathfrak n^+$ with weight $\theta$; by the definition of a highest-weight module, the adjoint module has highest weight $\theta$. Together with step 1.1, this proves the assertion. ([[def-highest-weight-vector-and-highest-weight-module]], step 1.1, step 1.3) ∎

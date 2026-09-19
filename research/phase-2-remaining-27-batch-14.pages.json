@@ -849,7 +849,7 @@
           ]
         },
         "statement": "No symmetric function chooses a nonempty proper subset of every distinguished metric component.",
-        "proof_plan": "Take a <lambda-sized support e for a supposed selector. Regularity makes the projection of e to the first coordinate have size <lambda, so choose xi<lambda outside it. Decide one selected and one unselected point of R_xi, and apply an e-fixing automorphism exchanging their indistinguishable coordinates. Symmetry preserves the name but reverses the decisions. This is Claim 1.3 with finite/omega replaced uniformly by <lambda/lambda, exactly as directed in the paragraph after Theorem 3.",
+        "proof_plan": "Follow Claim 1.3 with finite/omega replaced uniformly by <lambda/lambda. Take a <lambda-sized support e for a supposed selector and choose xi outside its first-coordinate projection. Strengthen once to decide X_{xi,r} selected and X_{xi,s} unselected. If C is the <lambda-sized set of third coordinates used by that condition in the xi-block, swap C with a disjoint copy C' while reflecting r and s only in that block. This source-authorized coordinate-local automorphism fixes e and the selector name; its image condition reverses the two decisions. The original and image conditions are compatible because their xi-block third-coordinate supports are disjoint and the automorphism is the identity elsewhere, so their union forces a contradiction.",
         "axiom_base": "ZF in the symmetric model"
       },
       {
@@ -954,7 +954,7 @@
           ]
         },
         "statement": "In Corson's permutation model, the rational Urysohn metric space has an open cover with no point-finite refinement.",
-        "proof_plan": "Use Corson §2.2. The cover is by rational-radius balls of the displayed small radii. Assume a point-finite refinement and fix a finite support E for it. Choose a point outside E and one refining member containing it. Ordered-metric ultrahomogeneity extends the finite partial isometries which fix E and the chosen point while moving the unsupported witness through infinitely many rational positions. Symmetry returns infinitely many distinct refinement members through the fixed point, contradicting point-finiteness. Follow the paper's finite metric-extension inequalities explicitly; there is no Proposition 7.",
+        "proof_plan": "Follow Corson §2.2 exactly. Use the cover by radius-1/2 balls, assume a point-finite open refining cover, and fix a nonempty finite support E. Choose a beyond E at constant distance D+4, where D=diam(E). For arbitrary n, choose V containing a and m with B(a,1/m) subset V; with K=nm embed the ordered rational chain a_0<...<a_{3K}=a having distances |i-j|/K and constant distance D+4 from E. Extend the shift fixing E to an automorphism phi. The last n chain points lie in V, so a lies in phi^j(V) for j<n. If L is the first chain index in V, the diameter-at-most-1 refinement condition gives 2K<=L<=3K-n+1, and the points a_{L+j} distinguish the n sets phi^j(V). Arbitrary finite injections into the family through a contradict point-finiteness.",
         "axiom_base": "ZFA in the permutation model"
       },
       {
@@ -964,9 +964,14 @@
         "deps": [
           "def-corson-ordered-rational-permutation-model",
           "thm-extreme-amenability-yields-bpi-in-finite-support-models",
-          "thm-finite-ramsey-for-uniform-subsets",
           "def-metric-space",
-          "def-ramsey-colouring-and-arrow-notation"
+          "def-ramsey-colouring-and-arrow-notation",
+          "def-axiom-of-choice",
+          "thm-tychonoff",
+          "def-product-topology",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "def-hausdorff-space",
+          "cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed"
         ],
         "justified_by": [],
         "provenance": {
@@ -993,8 +998,8 @@
             }
           ]
         },
-        "statement": "The pointwise-convergence group Aut(U_Q^<), and every finite point stabilizer required by its finite-support permutation model, is extremely amenable.",
-        "proof_plan": "The age of U_Q^< is the rigid class of finite linearly ordered rational metric spaces. Apply Nešetřil's Ramsey theorem to this age, then KPT Theorem 4.7 to its Fraïssé limit, obtaining extreme amenability. For a finite support E, the point stabilizer is the automorphism group of the Fraïssé expansion with constants for E; its age remains rigid and Ramsey by coloring expansions over the fixed finite substructure, so KPT applies again. Feed this exact stabilizer conclusion, not merely extreme amenability of the full group, to the preceding BPI theorem.",
+        "statement": "Assume AC. The pointwise-convergence group Aut(U_Q^<), and every finite point stabilizer required by its finite-support permutation model, is extremely amenable.",
+        "proof_plan": "Use the correctly quantified Ramsey property: for each finite A,B and colour count k there is an extension C with C→(B)^A_k. The age of U_Q^< is the rigid class of finite linearly ordered rational metric spaces, so Nešetřil's theorem and KPT Theorems 4.7/6.16 give extreme amenability of the full group G. For a finite support E, H=fix(E) is open in the pointwise-convergence topology. Prove directly under AC that open subgroups of an extremely amenable group are extremely amenable: for a compact Hausdorff H-flow X, the closed coinduced subspace {Phi in X^G: Phi(hg)=h Phi(g)} is nonempty and compact by choice and Tychonoff; right translation makes it a compact G-flow, and a G-fixed function is constant with H-fixed value at the identity. Feed this exact stabilizer conclusion to the preceding BPI theorem.",
         "axiom_base": "ZFC metatheory"
       },
       {
@@ -1023,7 +1028,7 @@
             }
           ]
         },
-        "statement": "The sentence asserting a Q-valued metric space with an open cover having no point-finite refinement is ordinal boundable, with Corson's explicit absolute bound omega+41, and has an atom-blind typed transfer certificate.",
+        "statement": "The sentence asserting a Q-valued metric space with an open cover having no point-finite open refining cover is ordinal boundable, with Corson's explicit absolute bound omega+41, and has an atom-blind typed transfer certificate.",
         "proof_plan": "Reproduce Lemma 5 constructor by constructor: code the underlying atom set, Q-valued metric, rational balls, open cover, candidate refinements, functions and point-finiteness within the stated iterates of the relative hierarchy, ending at V_{omega+41}(A). Relativization captures every possible refinement, not only a chosen one. All atomic tests are equality/membership on carried sorts and the pure rational parameter is fixed, so the formula is atom-blind and meets the typed Jech-Sochor/Pincus certificate.",
         "axiom_base": "ZFA; explicit fixed ordinal bound"
       },
@@ -1149,8 +1154,7 @@
           "def-subspace-topology-top",
           "def-disjoint-union-topology",
           "def-product-topology",
-          "thm-coproduct-universal-property",
-          "thm-finite-products-of-compact-spaces"
+          "thm-coproduct-universal-property"
         ],
         "justified_by": [],
         "provenance": {
@@ -1167,8 +1171,8 @@
             }
           ]
         },
-        "statement": "For a nonempty set A, the topological sum X_A=A_c plus {infinity}, where A_c has the cofinite topology and infinity is isolated, is compact T1 and A_c is a closed subspace. This is the corrected Kelley coordinate.",
-        "proof_plan": "The cofinite space A_c is compact in ZF: take one member of an open cover containing any fixed a in A; its finite complement is covered by finitely many further members using finite choice. It is T1 because singletons are closed. Adding the isolated one-point compact summand preserves compactness and T1 by a two-piece finite-subcover argument. The coordinate constraint A_c is closed because its complement {infinity} is open. Contrast this with A inside the one-point cofinite topology on A union {infinity}, where an infinite A with infinite complement need not be closed.",
+        "statement": "For every set A, the topological sum X_A=A_c plus {infinity}, where A_c has the cofinite topology and infinity is isolated, is compact T1 and A_c is a closed subspace. This is the corrected Kelley coordinate.",
+        "proof_plan": "The cofinite space A_c is compact in ZF: the empty case is immediate; otherwise take one member of an open cover containing a fixed a in A and cover its finite complement using finite choice. It is T1 because singletons are closed. In the sum, openness means independently that the A-trace is cofinite or empty and the singleton trace is either empty or the singleton. Adding the isolated point preserves compactness by a direct two-piece finite-subcover argument and preserves T1; A_c is clopen because its complement {infinity} is open. Contrast this with an infinite A inside the cofinite topology on A union {infinity}, where A is a proper infinite subset and hence is not closed.",
         "axiom_base": "ZF"
       },
       {
@@ -1865,28 +1869,34 @@
       },
       {
         "id": "lem-sigma-cellular-base-yields-a-compatible-metric",
-        "title": "A sigma-cellular base yields a compatible metric",
+        "title": "A sigma-cellular base metrizes a normal Moore space",
         "kind": "lemma",
         "deps": [
-          "def-topological-space",
+          "def-moore-spaces-and-developments",
+          "def-normal-and-t4-spaces",
+          "def-discrete-family-and-sigma-bases",
           "def-topology-basis-subbasis",
-          "def-metrizable-space",
-          "def-metric-space",
-          "def-metric-topology",
-          "def-metric-ball",
-          "def-neighbourhood-top"
+          "lem-normality-via-shrinking",
+          "thm-bing-metrization",
+          "def-axiom-of-choice"
         ],
         "justified_by": [],
         "provenance": {
-          "statement": "literature-derived",
-          "proof": "not-applicable"
+          "statement": "ai-altered",
+          "proof": "ai-generated"
         },
         "sources": {
           "scraped": [],
-          "references": []
+          "references": [
+            {
+              "title": "R. H. Bing, Metrization of topological spaces",
+              "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf",
+              "locator": "Theorem 3, printed pp. 178-179, and Theorem 8, printed pp. 181-182"
+            }
+          ]
         },
-        "statement": "Let $X$ be a $T_1$ topological space carrying a **base** of the form $\\bigcup_{n \\in \\mathbb N} \\mathcal B_n$ ([[def-topology-basis-subbasis]]) in which each $\\mathcal B_n$ is a **pairwise",
-        "proof_plan": "Local lemma supplied by the Step 3b author: a T1 space with a sigma-cellular base is metrizable via an explicit level metric.",
+        "statement": "Assume ZFC. If a normal Moore space has a base that is a countable union of pairwise disjoint open families, then it is metrizable.",
+        "proof_plan": "For each cellular base level, use the development to exhaust its union by closed sets X_{n,i}. Normal shrinking places each X_{n,i} inside an open D_{n,i} whose closure remains in that union. Intersecting D_{n,i} with the cellular family gives a discrete open family, and all such families form a sigma-discrete basis. Bing's metrization theorem then supplies a compatible metric.",
         "axiom_base": "ZFC"
       },
       {
@@ -2044,7 +2054,7 @@
           ]
         },
         "statement": "In ZFC+MA+not-CH, every subset E of the real line of cardinality omega_1 is a Q-set, and hence an uncountable Q-set exists.",
-        "proof_plan": "Fix E={x_alpha:alpha<omega_1} and a countable rational-interval base {W_i}. Refine the base so each pair of distinct points belongs jointly to only finitely many W_i, and let s(x)={i:x in W_i}. Burke Lemma 4.3, proved by the ccc finite-condition poset and the fewer-than-continuum dense sets supplied by MA, says that for every Y subset E there is d subset omega with s(y) almost contained in d for y in Y and s(z) intersect d finite for z in E minus Y. Enumerate d as p(k). Then Y=E intersect intersection_n union_{k>n} W_{p(k)}: almost containment gives membership for y, while finite intersection excludes z. Thus every Y is relatively G-delta. Since not-CH gives omega_1<continuum, the MA hypothesis applies to all required dense families.",
+        "proof_plan": "Fix E={x_alpha:alpha<omega_1} and a countable rational-interval base {W_i}, arranged so every point lies in infinitely many members and every distinct pair lies jointly in only finitely many. Put s(x)={i:x in W_i}. Burke Lemma 4.3, proved by the ccc finite-condition poset and the fewer-than-continuum dense sets supplied by MA, says that for every Y subset E there is d subset omega with s(y) intersect d infinite for y in Y and s(z) intersect d finite for z in E minus Y. Enumerate an infinite d zero-based as p(0)<p(1)<... . Then Y=E intersect intersection_n union_{k>=n} W_{p(k)}; infinite intersection gives every tail membership for y, while finite intersection excludes z. The finite-d case forces Y empty. Thus every Y is relatively G-delta. Since not-CH gives omega_1<continuum, the MA hypothesis applies to all required dense families.",
         "axiom_base": "ZFC+MA+not-CH"
       },
       {
@@ -2307,8 +2317,8 @@
             }
           ]
         },
-        "statement": "Under PMEA, a normalized family in a space of character below the continuum admits point-neighbourhood good events of measure above three quarters whose overlaps yield a disjoint open expansion; PMEA-sigma suffices in first-countable spaces.",
-        "proof_plan": "For every random subfamily use its normalizing open set. At x, the local-base failures are null; closure under fewer than continuum unions selects one base neighbourhood with good-event measure above 3/4. Two opposite-label events overlap with measure at least their sum minus one, hence above 1/2. A parameter in the overlap gives the two closure separations. In first-countable spaces only countable additivity is used.",
+        "statement": "Under PMEA, a discrete family and downwards-directed neighbourhood families of size below the continuum admit one neighbourhood per point, disjoint across different family members; PMEA-sigma suffices for countable open local bases.",
+        "proof_plan": "For every random split of the discrete family, first separate the disjoint closures of the complementary subunions. Downward directedness makes the pointwise good events upward directed, so continuum additivity selects one event of measure above 3/4. For two different family members, the strict complement bounds together with the opposite-label cylinder of measure 1/2 give a nonempty triple intersection, and its parameter forces the selected neighbourhoods disjoint. In first-countable spaces only countable additivity is used.",
         "axiom_base": "ZFC+PMEA; ZFC+PMEA-sigma for first-countable spaces"
       },
       {
@@ -2462,7 +2472,7 @@
           "references": []
         },
         "statement": "Let $\\kappa, (\\kappa_n)_{n \\in \\omega}, E$ satisfy HYP and fix ladders $(\\delta_i)_{i \\in \\omega}$ for $\\delta \\in E$ ([[def-fleissner-hyp-covering-interface]]). Then for every $\\beta < \\kappa^+$",
-        "proof_plan": "Local lemma supplied by the Step 3b author: Fleissner's ladder separation map from HYP, proved by induction on beta.",
+        "proof_plan": "Prove Fleissner's ladder separation map by induction on beta, in the strengthened eventual-separation form. At a limit beta, clause (3b) supplies an arbitrary club C disjoint from E; adjoin 0, but do not falsely require C to consist of limit ordinals. The predecessor and successor C-points around each delta split pairs into a same-gap case handled by the earlier induction hypothesis and a different-gap case handled once the ladders cross their predecessor endpoints. Successor stages raise old thresholds when a new member of E enters.",
         "axiom_base": "ZFC"
       },
       {

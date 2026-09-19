@@ -131,17 +131,20 @@ diagrams in [[def-vogan-diagram]]:
    the decorations by the corresponding diagram automorphism and by changes of
    base.
 
-Accordingly, two **abstract Satake diagrams** over a reduced crystallographic
-root system $\Phi$ are **equivalent** if they are related by a finite chain of
-moves of the following two kinds: an isomorphism of the decorated data, that
-is, an isometry of the ambient Euclidean space carrying $\Phi$ to itself or to
-the root system of the second diagram, the base to the base, the colouring to
-the colouring and the arrow pairing to the arrow pairing; and a change of base
-inside one root system, in which the base is replaced by another base for
-which the colouring and arrow pairing are defined as above. The equivalence of
-the Vogan and Satake pictures, and the fact that the decorated data are
-determined by the pair $(\mathfrak g_0,\theta)$ rather than by the choices
-made in their construction, is the content of
+For Satake diagrams arising from such quadruples, the decorations after a
+change of base are recomputed using the same split part $\mathfrak a_0$ and
+restriction map $\mathfrak h^*\to\mathfrak a_0^*$; the two geometric moves
+above generate **equivalence**. An **abstract Satake diagram** with no chosen
+real-form realization is only the decorated based root system, and two such
+abstract diagrams are called equivalent precisely when they are isomorphic as
+decorated data: an isometry carries one root system and base to the other and
+preserves the colouring and arrow pairing. An arbitrary change of base is not
+a move on the abstract decoration alone, because that decoration does not
+contain the split part or restriction map needed to redecorate the new base.
+The equivalence of the Vogan and Satake pictures, and the fact that the
+realized decorated data are determined by the pair
+$(\mathfrak g_0,\theta)$ rather than by the choices made in their construction,
+is the content of
 [[thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications]];
 the passage between the two pictures is given by real-root and
 noncompact-imaginary Cayley transforms

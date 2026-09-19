@@ -5,7 +5,7 @@ title: Positive restricted roots and nilpotent n algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces]
+deps: [def-restricted-root-and-restricted-root-space, thm-restricted-root-space-decomposition, lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -19,7 +19,8 @@ landmark: false
 
 ## Definition
 
-Let $\mathfrak g_0$ be a finite-dimensional real semisimple Lie algebra with
+Assume the Axiom of Choice. Let $\mathfrak g_0$ be a finite-dimensional real
+semisimple Lie algebra with
 Cartan decomposition $\mathfrak g_0=\mathfrak k_0\oplus\mathfrak p_0$, let
 $\mathfrak a\subseteq\mathfrak p_0$ be a maximal abelian subspace, and let
 $\Sigma=\Sigma(\mathfrak g_0,\mathfrak a)$ be the restricted-root system with

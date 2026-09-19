@@ -5,7 +5,7 @@ title: The Weyl vector
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-positive-system-and-base-of-simple-roots, def-reduced-crystallographic-euclidean-root-system]
+deps: [def-positive-system-and-base-of-simple-roots, def-reduced-crystallographic-euclidean-root-system, def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -30,8 +30,9 @@ $$\rho=\frac12\sum_{\alpha\in\Phi^+}\alpha\in E .$$
 The sum is finite because a root system is finite, and it is taken in the real
 vector space $E$, so the factor $\frac12$ is the real scalar $\frac12$; no
 integrality of $\rho$ is asserted. Since every positive root lies in the root
-lattice $Q$, one has $2\rho=\sum_{\alpha\in\Phi^+}\alpha\in Q$, so $\rho$ lies
-in $\frac12Q$.
+lattice $Q$ ([[def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice]]),
+one has $2\rho=\sum_{\alpha\in\Phi^+}\alpha\in Q$, so $\rho$ lies in
+$\frac12Q$.
 
 Replacing the positive system by its opposite replaces $\rho$ by
 $$\frac12\sum_{\alpha\in\Phi^+}(-\alpha)=-\rho ,$$

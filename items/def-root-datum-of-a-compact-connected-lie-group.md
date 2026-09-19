@@ -27,7 +27,7 @@ $(X,\Phi,X^\vee,\Phi^\vee)$ in which:
 1. $X$ and $X^\vee$ are finite free abelian groups of the same rank, equipped
    with a perfect $\mathbb Z$-bilinear pairing
    $\langle\cdot,\cdot\rangle:X\times X^\vee\to\mathbb Z$;
-2. $\Phi\subseteq X$ and $\Phi^\vee\subseteq X^\vee$ are finite nonempty subsets
+2. $\Phi\subseteq X$ and $\Phi^\vee\subseteq X^\vee$ are finite subsets
    with a fixed bijection $\Phi\to\Phi^\vee$, $\alpha\mapsto\alpha^\vee$, such
    that $\langle\alpha,\alpha^\vee\rangle=2$ for every root;
 3. the **paired reflections**
@@ -65,3 +65,6 @@ central character lattice as part of $X$ rather than discarding it.
   of the root systems page, written additively for the lattice $X$.
 - The definition of a root datum here is deliberately symmetric in $X$ and
   $X^\vee$; the perfect pairing is data, not a consequence of the axioms.
+- Empty root and coroot sets are allowed. In particular, a torus has root datum
+  $(X,\varnothing,X^\vee,\varnothing)$; the root-indexed conditions above are
+  then vacuous.

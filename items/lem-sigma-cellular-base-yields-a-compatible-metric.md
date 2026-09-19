@@ -1,10 +1,10 @@
 ---
 id: lem-sigma-cellular-base-yields-a-compatible-metric
 kind: lemma
-title: "A sigma-cellular base yields a compatible metric"
+title: "A sigma-cellular base metrizes a normal Moore space"
 status: draft
 origin: pipeline
-deps: [def-topological-space, def-topology-basis-subbasis, def-metrizable-space, def-metric-space, def-metric-topology, def-metric-ball, def-neighbourhood-top]
+deps: [def-moore-spaces-and-developments, def-normal-and-t4-spaces, def-discrete-family-and-sigma-bases, def-topology-basis-subbasis, lem-normality-via-shrinking, thm-bing-metrization, def-axiom-of-choice]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -15,58 +15,49 @@ sources:
   references:
     - title: "R. H. Bing, Metrization of topological spaces"
       url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf"
-      locator: "Theorem 3, printed pp. 178-179, and Theorem 4, printed p. 179"
+      locator: "Theorem 3, printed pp. 178-179, and Theorem 8, printed pp. 181-182"
 ---
 
 ## Statement
 
-Let $X$ be a $T_1$ topological space carrying a **base** of the form
-$\bigcup_{n \in \mathbb N} \mathcal B_n$
-([[def-topology-basis-subbasis]]) in which each $\mathcal B_n$ is a **pairwise
-disjoint** family of open sets: $B \cap B' = \varnothing$ for distinct
-$B, B' \in \mathcal B_n$. Then $X$ is metrizable
-([[def-metrizable-space]]).
+Assume $\mathrm{ZFC}$. Let $X$ be a normal Moore space carrying a base of the
+form $\bigcup_{n\in\mathbb N}\mathcal B_n$
+([[def-topology-basis-subbasis]]) in which every $\mathcal B_n$ is a pairwise
+disjoint family of open sets. Then $X$ is metrizable.
 
-Explicitly: with $W_n := X \setminus \bigcup \mathcal B_n$ and
-$\mathcal C_n := \mathcal B_n \cup \{W_n\}$, each $\mathcal C_n$ is a partition
-of $X$ into open sets; define
-$$\delta_n(x,y) := \begin{cases} 0 & \text{if } x,y \text{ lie in a common member of } \mathcal C_n,\\ 1 & \text{otherwise,}\end{cases} \qquad d(x,y) := \begin{cases} 0 & \text{if } x = y,\\ 2^{-k(x,y)} & \text{otherwise,}\end{cases}$$
-where $k(x,y) := \min \{\, n \in \mathbb N : \delta_n(x,y) = 1 \,\}$, which exists for $x \ne y$ whenever the base separates points. Then $d$ is a metric on $X$ whose metric topology is the given topology.
+The normality and development hypotheses are essential to this conclusion:
+a $T_1$ space with a sigma-disjoint base need not be metrizable.
 
 ## Facts & Assumptions
 
-**Given:** A $T_1$ space $(X,\mathcal T)$ with a base $\bigcup_n \mathcal B_n$ of pairwise disjoint open families, and the sets $\mathcal C_n$, functions $\delta_n$ and $d$ defined above.
+**Given:** A normal Moore space $X$, a development $(\mathcal G_i)_{i\in\mathbb N}$, and a base $\bigcup_n\mathcal B_n$ whose levels are pairwise disjoint open families.
 
-[F1] A base is a family of open sets such that every open set is a union of members; equivalently, for open $D$ and $x \in D$ there is a base member $B$ with $x \in B \subseteq D$ ([[def-topology-basis-subbasis]]).
+[F1] A Moore space is regular and $T_1$ and has a development: every $\mathcal G_i$ covers $X$, and for every open $O\ni x$ some $i$ satisfies $\operatorname{St}(x,\mathcal G_i)\subseteq O$ ([[def-moore-spaces-and-developments]]).
 
-[F2] $X$ is $T_1$: for $x \ne y$ the set $X \setminus \{y\}$ is an open neighbourhood of $x$ ([[def-topological-space]], [[def-neighbourhood-top]]).
+[F2] For every open $O\ni x$, some member of the displayed base contains $x$ and is contained in $O$ ([[def-topology-basis-subbasis]]).
 
-[L1] Metric axioms: a metric is a function $X \times X \to \mathbb R$ satisfying (M1) $d(x,y) = 0 \iff x = y$, (M2) symmetry and (M3) the triangle inequality ([[def-metric-space]]); a metric is nonnegative ([[def-metric-space]]).
+[F3] If $A$ is closed, $U$ is open, $A\subseteq U$, and $X$ is normal, then there is open $D$ with $A\subseteq D\subseteq\overline D\subseteq U$ ([[lem-normality-via-shrinking]], [[def-normal-and-t4-spaces]]).
 
-[L2] Metric topology and balls: $B(x,r) = \{y : d(x,y) < r\}$ is open and the balls form a neighbourhood base; a set is open exactly when each of its points has a ball inside it ([[def-metric-ball]], [[def-metric-topology]]).
+[F4] A family is discrete when every point has a neighbourhood meeting at most one member; a sigma-discrete open basis of a regular $T_1$ space yields a compatible metric in $\mathrm{ZFC}$ ([[def-discrete-family-and-sigma-bases]], [[thm-bing-metrization]], [[def-axiom-of-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Each $\mathcal C_n$ is a partition of $X$ into open sets: members of $\mathcal B_n$ are open and pairwise disjoint, $W_n$ is open, and $W_n \cap \bigcup \mathcal B_n = \varnothing$, so the members are disjoint and cover $X$. Consequently each point lies in exactly one member of $\mathcal C_n$. [given]
+1.1 For $n,i\in\mathbb N$, put $B_n^*=\bigcup\mathcal B_n$, $W_n=X\setminus B_n^*$, and $X_{n,i}=X\setminus\bigcup\{G\in\mathcal G_i:G\cap W_n\ne\varnothing\}$. The set $W_n$ is closed and $X_{n,i}$ is closed. Also $X_{n,i}\subseteq B_n^*$: a member of the cover $\mathcal G_i$ containing a point of $X_{n,i}$ is disjoint from $W_n$. [given, F1]
 
-2.1 Define $\delta_n$ and $d$ as in the statement. For $x \ne y$ the set of levels separating them is nonempty: by [F1] and [F2] there is $B \in \bigcup_n \mathcal B_n$ with $x \in B \subseteq X \setminus \{y\}$; writing $B \in \mathcal B_{n_0}$, step 1.1 shows that no member of $\mathcal C_{n_0}$ contains both $x$ and $y$, so $\delta_{n_0}(x,y) = 1$ and $k(x,y)$ exists. [step 1.1, F1, F2]
+2.1 Every point of $B_n^*$ belongs to some $X_{n,i}$. Indeed, if $x\in B\in\mathcal B_n$, choose $i$ with $\operatorname{St}(x,\mathcal G_i)\subseteq B$ by [F1]. Every member of $\mathcal G_i$ containing $x$ is then disjoint from $W_n$, which is precisely $x\in X_{n,i}$. Empty levels cause no exception: then $B_n^*=X_{n,i}=\varnothing$. [F1, step 1.1]
 
-3.1 (M1) holds: $d(x,x) = 0$ by definition, every $\delta_n(x,x) = 0$ because $x$ lies in a member of $\mathcal C_n$, and for $x \ne y$ step 2.1 gives $k(x,y) \in \mathbb N$ with $d(x,y) = 2^{-k(x,y)} > 0$. [step 1.1, step 2.1, L1]
+2.2 Apply [F3] to the closed set $X_{n,i}$ inside the open set $B_n^*$ and obtain open $D_{n,i}$ with $X_{n,i}\subseteq D_{n,i}\subseteq\overline{D_{n,i}}\subseteq B_n^*$. [F3, step 1.1]
 
-3.2 (M2) holds because $\delta_n(x,y) = \delta_n(y,x)$ for every $n$, so $k$ and hence $d$ are symmetric. [step 2.1]
+3.1 The family $\mathcal H_{n,i}=\{D_{n,i}\cap B:B\in\mathcal B_n\}$ is a discrete family of open sets. A point outside $\overline{D_{n,i}}$ has an open neighbourhood missing every member. A point of $\overline{D_{n,i}}$ lies in $B_n^*$ by step 2.2 and hence in a unique $B_0\in\mathcal B_n$; the open neighbourhood $B_0$ meets no $D_{n,i}\cap B$ with $B\ne B_0$. [given, F4, step 2.2]
 
-3.3 (M3) holds. If $x = y$ or $y = z$ the inequality is immediate from $d \ge 0$; otherwise let $a := k(x,y)$, $b := k(y,z)$ and $m := \min(a,b)$. For every $n < m$ we have $\delta_n(x,y) = \delta_n(y,z) = 0$, so $x,y$ lie in a common member of $\mathcal C_n$ and $y,z$ do too; by step 1.1 those two members are the member containing $y$, hence equal, and $x,z$ lie in it as well, giving $\delta_n(x,z) = 0$. Therefore either $x = z$, or $k(x,z) \ge m$, and in both cases $d(x,z) \le 2^{-m} \le 2^{-a} + 2^{-b} = d(x,y) + d(y,z)$. [step 1.1, step 2.1]
+4.1 The countable union $\bigcup_{n,i}\mathcal H_{n,i}$ is an open sigma-discrete basis. To verify the basis property, let $O$ be open and $x\in O$. By [F2] choose $n$ and $B\in\mathcal B_n$ with $x\in B\subseteq O$. Step 2.1 gives $i$ with $x\in X_{n,i}\subseteq D_{n,i}$, so $x\in D_{n,i}\cap B\subseteq O$ and this set belongs to $\mathcal H_{n,i}$. [F2, F4, step 2.1, step 2.2, step 3.1]
 
-4.1 The two topologies agree. (i) If $D$ is open and $x \in D$, choose $B \in \mathcal B_{k}$ with $x \in B \subseteq D$ by [F1]. For $y$ with $d(x,y) < 2^{-(N+1)}$ and $N \ge k$ we have $k(x,y) > N \ge k$, so $\delta_k(x,y) = 0$, that is, $y$ lies in the member of $\mathcal C_k$ containing $x$, which is $B$ by step 1.1; hence $y \in D$. So every open set contains a ball around each of its points. (ii) If $x \in X$, $\varepsilon > 0$ and $y$ satisfies $d(x,y) < \varepsilon$, put $\eta := \varepsilon - d(x,y) > 0$ and choose $N$ with $2^{-(N+1)} < \eta$. Let $O$ be the intersection of the members of $\mathcal C_n$ containing $y$, for $n \le N$; it is open by step 1.1 and contains $y$, and for $z \in O$ we have $\delta_n(y,z) = 0$ for all $n \le N$, so $k(y,z) > N$ and $d(y,z) \le 2^{-(N+1)} < \eta$; hence $d(x,z) \le d(x,y) + \eta = \varepsilon$ and $O \subseteq B(x,\varepsilon)$. So every ball is open. [step 1.1, step 2.1, step 3.3, F1, L2]
-
-5.1 By steps 3.1, 3.2 and 3.3 the function $d$ is a metric on $X$, and by step 4.1 its metric topology is the given topology; hence $X$ is metrizable. [step 3.1, step 3.2, step 3.3, step 4.1, L1, L2] ∎
+5.1 By [F1], $X$ is regular and $T_1$. The sigma-discrete basis of step 4.1 therefore satisfies the reverse direction of Bing's metrization theorem [F4], so $X$ admits a compatible metric. [F1, F4, step 4.1] ∎
 
 ## Remarks
 
-- **Why the extra member $W_n$.** Without it a point outside $\bigcup \mathcal B_n$ would lie in no member of the level, and the level indicator would not be an equivalence relation on blocks; adjoining the open complement of $\bigcup \mathcal B_n$ repairs exactly that, and it remains disjoint from every member of $\mathcal B_n$.
+- **Why the naive block metric fails.** Although $B_n^*$ is open, its complement $W_n$ need not be open. Thus $\mathcal B_n\cup\{W_n\}$ need not be an open partition, and agreement on those blocks does not directly define the original topology. Normality and the development are exactly what replace each cellular level by the countable family of discrete open families in step 3.1.
 
-- **The metric is the minimum separating level.** It is the level metric determined by the decreasing sequence of block partitions; equivalently one may use the weighted sum $\sum_n 2^{-(n+1)}\delta_n$, which has the same balls of radius below $2^{-(N+1)}$ as the definition above. The level form is used here because it needs no convergence argument.
-
-- **Where $T_1$ is used.** Only in step 2.1, to separate two distinct points by a base member; the construction is otherwise formal. In the applications on this page the space is a Moore space, hence regular $T_1$ ([[def-moore-spaces-and-developments]]).
+- **Source route.** Step 3.1 is Bing's normal-development conversion from screenable to strongly screenable (Theorem 8). Step 5.1 uses the sigma-discrete-basis form of his metrization theorem (Theorem 3).

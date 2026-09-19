@@ -43,9 +43,7 @@ $\mathfrak t_0=0$, $\mathfrak a_0=\mathfrak h_0'$ and is the split
 
 ## Facts & Assumptions
 
-**Given:** $\mathfrak g_0=\mathfrak{sl}_2(\mathbb R)$ with the basis
-$e=\begin{pmatrix}0&1\\0&0\end{pmatrix}$, $f=\begin{pmatrix}0&0\\1&0\end{pmatrix}$,
-$H=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ satisfying $[H,e]=2e$, $[H,f]=-2f$, $[e,f]=H$, and the matrices $K_0=f-e=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ and $\theta$.
+**Given:** $\mathfrak g_0=\mathfrak{sl}_2(\mathbb R)$ with the basis $e=\begin{pmatrix}0&1\\0&0\end{pmatrix}$, $f=\begin{pmatrix}0&0\\1&0\end{pmatrix}$, $H=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ satisfying $[H,e]=2e$, $[H,f]=-2f$, $[e,f]=H$, and the matrices $K_0=f-e=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ and $\theta$.
 
 [L1] $\mathfrak{sl}_2(\mathbb R)$ consists of the real traceless $2\times2$ matrices, with basis $e,f,H$ and the displayed bracket relations ([[def-special-linear-lie-algebra-sl-two]], [[ex-general-and-special-linear-lie-groups]]).
 
@@ -61,9 +59,9 @@ $H=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ satisfying $[H,e]=2e$, $[H,f]=-2f$, $[
 
 1.1 The elements $K_0$ and $H$ lie where claimed: $K_0^{\mathsf T}=-K_0$, so $\theta K_0=K_0$ and $K_0\in\mathfrak k_0$, while $H^{\mathsf T}=H$ and $\operatorname{tr}H=0$, so $\theta H=-H$ and $H\in\mathfrak p_0$. In particular both lines $\mathbb RK_0$ and $\mathbb RH$ are $\theta$-stable. [given, L2, algebra]
 
-1.2 The normalizer of $\mathbb RK_0$ in $\mathfrak g_0$ is $\mathbb RK_0$: for $X=\begin{pmatrix}a&b\\ c&-a\end{pmatrix}$ one computes $[K_0,X]=\begin{pmatrix}-b-c&2a\\ 2a&b+c\end{pmatrix}$, which vanishes exactly when $a=0$ and $c=-b$, that is $X\in\mathbb RK_0$. Hence $\mathbb RK_0$ is abelian, nilpotent and self-normalizing, so it is a Cartan subalgebra by [L3]. [given, L1, L3, algebra]
+1.2 The normalizer of $\mathbb RK_0$ in $\mathfrak g_0$ is $\mathbb RK_0$: for $X=\begin{pmatrix}a&b\\ c&-a\end{pmatrix}$ one computes $[K_0,X]=\begin{pmatrix}-b-c&2a\\ 2a&b+c\end{pmatrix}$. For this matrix to equal $rK_0$ its diagonal entries force $c=-b$, while its two off-diagonal entries give $2a=-r$ and $2a=r$, hence $a=r=0$. Thus $X\in\mathbb RK_0$, and conversely every such $X$ normalizes the line. Hence $\mathbb RK_0$ is abelian, nilpotent and self-normalizing, so it is a Cartan subalgebra by [L3]. [given, L1, L3, algebra]
 
-1.3 The normalizer of $\mathbb RH$ in $\mathfrak g_0$ is $\mathbb RH$: for $X=\begin{pmatrix}a&b\\ c&-a\end{pmatrix}$ one computes $[H,X]=\begin{pmatrix}0&2b\\ -2c&0\end{pmatrix}$, which vanishes exactly when $b=c=0$, that is $X=\operatorname{diag}(a,-a)\in\mathbb RH$. Hence $\mathbb RH$ is abelian, nilpotent and self-normalizing, so it is a Cartan subalgebra by [L3]. [given, L1, L3, algebra]
+1.3 The normalizer of $\mathbb RH$ in $\mathfrak g_0$ is $\mathbb RH$: for $X=\begin{pmatrix}a&b\\ c&-a\end{pmatrix}$ one computes $[H,X]=\begin{pmatrix}0&2b\\ -2c&0\end{pmatrix}$. If this equals $rH$, comparison of diagonal and off-diagonal entries gives $r=0$ and $b=c=0$, so $X=\operatorname{diag}(a,-a)\in\mathbb RH$; conversely every such $X$ normalizes the line. Hence $\mathbb RH$ is abelian, nilpotent and self-normalizing, so it is a Cartan subalgebra by [L3]. [given, L1, L3, algebra]
 
 1.4 The adjoint spectra distinguish the two: by [L1], $[K_0,H]=[f-e,H]=[f,H]-[e,H]=2f+2e=2(e+f)$ and $[K_0,e+f]=[f,e]+[f,f]-[e,e]-[e,f]=[f,e]-[e,f]=-2H$, so $\operatorname{ad}_{K_0}$ is zero on $K_0$ and has the matrix $\begin{pmatrix}0&-2\\ 2&0\end{pmatrix}$ in the basis $(H,e+f)$ of $\mathfrak p_0$, with eigenvalues $0,\pm2i$; whereas $\operatorname{ad}_H$ is diagonal on $e,f,H$ with real eigenvalues $2,-2,0$. [given, L1, algebra]
 

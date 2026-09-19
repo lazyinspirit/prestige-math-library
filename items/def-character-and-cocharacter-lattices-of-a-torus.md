@@ -40,8 +40,10 @@ $S^1=\mathbb R/\mathbb Z$ for the circle group.
   The pairing is biadditive in $\chi$ and $\eta$.
 
 The identity element of either lattice is the trivial homomorphism; the inverse
-of $\chi$ is $z\mapsto\chi(z)^{-1}$ and is written $\chi^{-1}$, and the inverse
-of $\eta$ is written $\eta^{-1}$. Both lattices are abelian groups.
+of $\chi$ is the character $t\mapsto\chi(t)^{-1}$ for $t\in T$ and is written
+$\chi^{-1}$, while the inverse of $\eta$ is the cocharacter
+$z\mapsto\eta(z)^{-1}$ and is written $\eta^{-1}$. Both lattices are abelian
+groups.
 
 ## Remarks
 

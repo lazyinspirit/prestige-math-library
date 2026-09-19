@@ -40,7 +40,7 @@ intersected coordinatewise to obtain a single dyadic scale.
 
 [F3] Dyadic scale lemma: if $(U_r)_{r\in D}$ are open subsets of $X$ with $\overline{U_r} \subseteq U_s$ whenever $r<s$ and $U_1 = X$, then $f(x) := \inf(\{r \in D : x \in U_r\} \cup \{1\})$ is a continuous map $X \to [0,1]$ ([[lem-a-dyadic-scale-of-open-sets-defines-a-continuous-function]]).
 
-[F4] Finite choice: a function with finite domain all of whose values are nonempty sets admits a choice function for the family of its values ([[lem-finite-choice]]).
+[F4] Finite choice: a natural-number-indexed list of nonempty sets admits a choice function for its family of values ([[lem-finite-choice]]).
 
 [F5] DMC: every serial relation on a nonempty set admits nonempty finite successor menus ([[def-dependent-multiple-choice-finite-level-tree]]).
 
@@ -64,11 +64,11 @@ intersected coordinatewise to obtain a single dyadic scale.
 
 7.1 Under step 6.1, $U_{n+1,2i} = U_{n,i}$ for all $n$ and $1 \le i \le 2^n$: every $b \in F'_{n+1}$ has $b_{2i} = a_i$ for the predecessor $a \in F'_n$ with $a \mathrel{S} b$, and every $a \in F'_n$ occurs as the predecessor of some $b \in F'_{n+1}$ by the successor property, so the two intersections have the same entries. [step 5.1, step 6.1]
 
-8.1 Under step 7.1 the family $(U_{n,i})$ is a dyadic scale: for $r = i/2^n \in D$ define $U_r := U_{n,i}$, which is well defined by step 7.1 and [F2], and put $U_1 := X$; if $r < s$ in $D$ choose $N$ with $r = i/2^N$, $s = j/2^N$ and $i < j$ by [F2], so $U_r = U_{N,i}$ and $U_s = U_{N,j}$ and $\overline{U_r} \subseteq U_s$ by step 6.1. [step 6.1, step 7.1, F2]
+8.1 Under step 7.1 define a family on all dyadics by $U_0:=\varnothing$, $U_1:=X$, and, for $0<r<1$, $U_r:=U_{n,i}$ whenever $r=i/2^n$ with $1\le i<2^n$. This is well defined by step 7.1 and [F2]. If $0<r<s<1$, choose $N$ with $r=i/2^N$, $s=j/2^N$ and $i<j$ by [F2]; then $U_r=U_{N,i}$, $U_s=U_{N,j}$, and $\overline{U_r}\subseteq U_s$ by step 6.1. The same inclusion is automatic when $r=0$ or $s=1$. Thus $(U_r)_{r\in D}$ satisfies the hypotheses of [F3] literally. [step 6.1, step 7.1, F2, F3]
 
 9.1 Under step 8.1, [F3] applies to the scale and gives the continuous $f(x) = \inf(\{r \in D : x \in U_r\} \cup \{1\}) : X \to [0,1]$. [step 8.1, F3]
 
-10.1 Under step 9.1, $F \subseteq f^{-1}(\{0\})$: for $a \in F$ and every $r = i/2^n \in D$ we have $a \in F \subseteq U_{n,1} \subseteq U_{n,i} = U_r$, so $\{r \in D : a \in U_r\} = D$ and $f(a) = \inf(D \cup \{1\}) = 0$. [step 6.1, step 8.1, step 9.1]
+10.1 Under step 9.1, $F \subseteq f^{-1}(\{0\})$: if $a\in F$ and $0<r=i/2^n<1$, then $a\in F\subseteq U_{n,1}\subseteq U_{n,i}=U_r$, and also $a\in U_1=X$. Hence $\{r\in D:a\in U_r\}=D\setminus\{0\}$, whose infimum is $0$, so $f(a)=0$. [step 6.1, step 8.1, step 9.1]
 
 10.2 Under step 9.1, $G \subseteq f^{-1}(\{1\})$: for $b \in G$ and $r = i/2^n \in D$ with $r<1$ we have $i < 2^n$ and $U_{n,i} \subseteq U_{n,2^n} = X \setminus G$, so $b \notin U_r$; also $b \in X = U_1$; hence $\{r \in D : b \in U_r\} \cup \{1\} = \{1\}$ and $f(b) = 1$. [step 6.1, step 8.1, step 9.1]
 
@@ -78,4 +78,4 @@ intersected coordinatewise to obtain a single dyadic scale.
 
 - **Comparison with the dependent-choice proof.** The published [[thm-urysohn-lemma]] runs the same dyadic construction under DC, choosing one new open set at a time by dependent choice. Here the menus are finite, so a whole level of the scale is obtained at once, and the only price is DMC, which is strictly weaker than DC in $\mathrm{ZFA}$ and of unknown relative position over $\mathrm{ZF}$.
 
-- **Where the finite intersections enter.** Passing from the finite menus to the single scale values $U_{n,i}$ is the step that makes the construction a proof in $\mathrm{ZF}$: a finite intersection of open sets is open, its closure is contained in the intersection of the closures, and the coherence verified in step 11.1 makes the resulting values nest along the dyadic refinement.
+- **Where the finite intersections enter.** Passing from the finite menus to the single scale values $U_{n,i}$ is the step that makes the construction a proof in $\mathrm{ZF}$: a finite intersection of open sets is open, its closure is contained in the intersection of the closures, and the coherence verified in step 7.1 makes the resulting values nest along the dyadic refinement.

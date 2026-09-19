@@ -4,7 +4,7 @@ kind: theorem
 title: All-real-set measurability yields an inaccessible inner model
 status: draft
 origin: pipeline
-deps: [thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l, thm-choice-implies-dependent-implies-countable-choice, thm-constructible-inner-model-semantic-and-formal-schema, thm-constructible-universe-satisfies-choice, def-lc-inaccessible-and-mahlo-cardinals, def-boldface-sigma-one-three-measurability, thm-formal-consistency-transfer-by-forcing]
+deps: [thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l, thm-choice-implies-dependent-implies-countable-choice, thm-constructible-inner-model-semantic-and-formal-schema, thm-constructible-universe-satisfies-choice, def-lc-inaccessible-and-mahlo-cardinals, def-boldface-sigma-one-three-measurability]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -19,8 +19,8 @@ sources:
 If a universe satisfies ZF+DC and every set of reals is Lebesgue measurable, then
 its constructible universe $L$ satisfies ZFC and contains an inaccessible
 cardinal — indeed the ambient $\omega_1$ is inaccessible in $L$. Consequently
-this theory has at least the consistency strength of ZFC plus an inaccessible
-cardinal.
+the assumed universe has a definable inner model of ZFC with an inaccessible
+cardinal. No arithmetized consistency implication is asserted by this item.
 
 ## Facts & Assumptions
 
@@ -36,8 +36,6 @@ cardinal.
 
 [F5] [[def-lc-inaccessible-and-mahlo-cardinals]]: the definition of inaccessibility, so that the same ordinal certified in [F3] is verified to be uncountable, regular and a strong limit inside $L$.
 
-[F6] [[thm-formal-consistency-transfer-by-forcing]]: the formal compiler that turns an internally verified model construction into a consistency implication, fragment by fragment.
-
 ## Proof
 
 1.1 DC implies Countable Choice by [F1], so the choice hypothesis of [F3] holds in $V$. [F1]
@@ -48,6 +46,4 @@ cardinal.
 
 3.1 By [F4], $L$ satisfies ZFC and has the same ordinals as $V$; by [F5] the ordinal certified in step 2.1 is uncountable, regular and a strong limit in $L$, so $L\models$ "there is an inaccessible cardinal". [F4, F5, step 2.1]
 
-4.1 Formal consistency: every finite fragment of ZF+DC+all-measurable is verified in $V$ to yield the corresponding finite fragment of ZFC+inaccessible inside the definable class $L$; the inner-model schema [F4] and the compiler [F6] convert this fragment-by-fragment verification into $\operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{all measurable})\to\operatorname{Con}(\mathrm{ZFC}+\text{inaccessible})$, without any external well-order of $V$ and without assuming a transitive set model. [F4, F6, step 3.1]
-
-5.1 The steps above give the semantic conclusion that the ambient $\omega_1$ is inaccessible in $L$, and step 4.1 the stated consistency-strength consequence; this is the Statement. [step 2.1, step 4.1] ∎
+4.1 The steps above give the semantic conclusion that the ambient $\omega_1$ is inaccessible in the definable inner model $L\models\mathrm{ZFC}$. The formal-inner-model supplier [F4] expressly supplies no arithmetized consistency transfer, so this proof stops at that exact conclusion. [step 2.1, step 3.1, F4] ∎

@@ -26,26 +26,13 @@ space ([[def-fleissner-hyp-covering-interface]],
 
 ## Facts & Assumptions
 
-**Given:** Witnesses $\kappa, (\kappa_n)_{n \in \omega}, E$ for HYP and fixed
-ladders $(\delta_i)_{i \in \omega}$ for $\delta \in E$
-([[def-fleissner-hyp-covering-interface]]).
+**Given:** Witnesses $\kappa, (\kappa_n)_{n \in \omega}, E$ for HYP and fixed ladders $(\delta_i)_{i \in \omega}$ for $\delta \in E$ ([[def-fleissner-hyp-covering-interface]]).
 
-[F1] HYP is the conjunction of clauses (1a), (1b), (2), (3a), (3b): $\sup_n
-\kappa_n = \kappa$; $2^{\kappa_n} < \kappa$ for every $n$; $2^\kappa =
-\kappa^+$; $E \subseteq \{\delta < \kappa^+ : \operatorname{cf}(\delta) =
-\omega\}$ is stationary in $\kappa^+$; and $E \cap \beta$ is not stationary in
-$\beta$ ([[def-fleissner-hyp-covering-interface]],
-[[def-cardinal]]).
+[F1] HYP asserts that $\kappa$ is an infinite cardinal, that $(\kappa_n)_{n \in \omega}$ is an increasing sequence of cardinals, and the conjunction of clauses (1a), (1b), (2), (3a), (3b): $\sup_n \kappa_n = \kappa$; $2^{\kappa_n} < \kappa$ for every $n$; $2^\kappa = \kappa^+$; $E \subseteq \{\delta < \kappa^+ : \operatorname{cf}(\delta) = \omega\}$ is stationary in $\kappa^+$; and $E \cap \beta$ is not stationary in $\beta$ ([[def-fleissner-hyp-covering-interface]], [[def-cardinal]]).
 
-[F2] Lemma 1 from the same hypotheses: for every $\beta < \kappa^+$ there is
-$m_\beta : E \cap \beta \to \omega$ such that $\delta_i \ne \eta_i$ for all
-distinct $\delta, \eta \in E \cap \beta$ and all $i \ge \max(m_\beta(\delta),
-m_\beta(\eta))$ ([[lem-ladder-separation-from-hyp]]).
+[F2] Lemma 1 from the same hypotheses: for every $\beta < \kappa^+$ there is $m_\beta : E \cap \beta \to \omega$ such that $\delta_i \ne \eta_i$ for all distinct $\delta, \eta \in E \cap \beta$ and all $i \ge \max(m_\beta(\delta), m_\beta(\eta))$ ([[lem-ladder-separation-from-hyp]]).
 
-[F3] The construction of [[thm-fleissner-normal-moore-space-construction]]
-converts exactly the data of [F1] together with [F2] into a normal
-nonmetrizable Moore space ([[def-moore-spaces-and-developments]],
-[[lem-metrizable-spaces-are-collectionwise-normal]]).
+[F3] The construction of [[thm-fleissner-normal-moore-space-construction]] converts exactly the data of [F1] together with [F2] into a normal nonmetrizable Moore space ([[def-moore-spaces-and-developments]], [[lem-metrizable-spaces-are-collectionwise-normal]]).
 
 
 
@@ -53,19 +40,13 @@ nonmetrizable Moore space ([[def-moore-spaces-and-developments]],
 
 **Proof technique:** direct.
 
-1.1 Assume HYP. Then clauses (1a), (1b), (2), (3a) of [F1] hold for the given $\kappa, (\kappa_n), E$, and $\kappa$ is infinite because the $\kappa_n$ are cardinals cofinal in it. [given, F1]
+1.1 Assume HYP. Then $\kappa$ is infinite, $(\kappa_n)$ is increasing, and clauses (1a), (1b), (2), (3a) of [F1] hold for the given $\kappa$, $(\kappa_n)$, and $E$. [given, F1]
+
 2.1 The separation conclusion of [F2] holds for the fixed ladders; its proof consumes clause (3b) at limit ordinals, which is exactly why (3b) is part of HYP. [step 1.1, F1, F2]
+
 3.1 Steps 1.1 and 2.1 put all hypotheses of the construction of [F3] at the given parameters, so there is a normal nonmetrizable Moore space. [step 1.1, step 2.1, F3] ∎
 
 ## Remarks
 
-- **HYP is used only through [F2].** The source says so explicitly ("we will
-  not use (3b) directly, but rather the following consequence"), and the
-  construction of [F3] is stated with the separation conclusion as an
-  hypothesis, so the formal dependency is exact.
-- **The case $\kappa = \omega$ is covered by the same item.** When HYP holds
-  with $\kappa = \omega$ the clause (1b) is literal cardinal arithmetic on
-  finite ordinals and the separation conclusion is supplied by
-  [[lem-ladder-separation-from-hyp]] like every other instance; the CH case
-  with nonreflecting failure is treated separately in
-  [[thm-ch-normal-nonmetrizable-moore-space]].
+- **HYP is used only through [F2].** The source says so explicitly ("we will not use (3b) directly, but rather the following consequence"), and the construction of [F3] is stated with the separation conclusion as an hypothesis, so the formal dependency is exact.
+- **The case $\kappa = \omega$ is covered by the same item.** When HYP holds with $\kappa = \omega$ the clause (1b) is literal cardinal arithmetic on finite ordinals and the separation conclusion is supplied by [[lem-ladder-separation-from-hyp]] like every other instance; the CH case with nonreflecting failure is treated separately in [[thm-ch-normal-nonmetrizable-moore-space]].

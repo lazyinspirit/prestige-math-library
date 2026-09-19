@@ -29,7 +29,7 @@ bases $(f_i)$ of $V_\pi$ and $(e_k)$ of $V_\sigma$ and matrix coefficient
 functions $\pi_{ij},\sigma_{kl}$
 ([[def-matrix-coefficient-and-character-of-a-compact-group-representation]]).
 Then
-$$\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=\begin{cases}0&\pi,\sigma\ \text{inequivalent},\\[2pt] \dfrac{\delta_{ik}\delta_{jl}}{d_\pi}&\pi=\sigma\ \text{under the fixed identification of }V_\sigma\text{ with }V_\pi.\end{cases}$$
+$$\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=\begin{cases}0&\pi,\sigma\ \text{inequivalent},\\[2pt] \dfrac{\delta_{ik}\delta_{jl}}{d_\pi}&\pi=\sigma\ \text{and }e_k=f_k\ \text{under the fixed identification}.\end{cases}$$
 
 ## Facts & Assumptions
 
@@ -57,14 +57,14 @@ $$\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=\begin{cases}0&\pi,\sigma\
 
 2.1 For every $h\in G$ one has $T(A)\sigma(h)=\pi(h)T(A)$: indeed $T(A)\sigma(h)=\int_G\pi(g)A\sigma(g)^{-1}\sigma(h)\,d\mu(g)=\int_G\pi(g)A\sigma(g^{-1}h)\,d\mu(g)$, and substituting $g=hg'$ in the integral, which the left invariance [L3] permits, gives $\int_G\pi(hg')A\sigma(g'^{-1})\,d\mu(g')=\pi(h)T(A)$. [L3, L4, step 1.1]
 
-2.2 For every $A$ one has $\operatorname{tr}T(A)=\operatorname{tr}A$: by [L5] and [L4], $\operatorname{tr}T(A)=\int_G\operatorname{tr}\bigl(\pi(g)A\pi(g)^{-1}\bigr)\,d\mu(g)=\int_G\operatorname{tr}A\,d\mu(g)=\operatorname{tr}A$, because the trace of the constant integrand is $\operatorname{tr}A$ and $\mu$ is a probability measure. [L4, L5, step 1.1]
+2.2 In the special case $V_\sigma=V_\pi=V$ and $\sigma=\pi$, every $A\in\operatorname{End}(V)$ satisfies $\operatorname{tr}T(A)=\operatorname{tr}A$: by [L5] and [L4], $$\operatorname{tr}T(A) =\int_G\operatorname{tr}\bigl(\pi(g)A\pi(g)^{-1}\bigr)\,d\mu(g) =\int_G\operatorname{tr}A\,d\mu(g)=\operatorname{tr}A,$$ because $\mu$ is a probability measure. [L4, L5, step 1.1]
 
-2.3 Let $A=\langle\cdot,e_l\rangle f_j\in\operatorname{Hom}(V_\sigma,V_\pi)$, so that $\operatorname{tr}A=\delta_{jl}$ and $A\sigma(g)^{-1}e_k=\overline{\sigma_{kl}(g)}\,f_j$ by [L6]; then for all $i,k$ the $i$-th coordinate of $T(A)e_k$ is $\langle T(A)e_k,f_i\rangle=\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)$. [L2, L4, L6, step 1.1]
+2.3 Let $A=\langle\mathord\cdot,e_l\rangle f_j\in \operatorname{Hom}(V_\sigma,V_\pi)$. Then $A\sigma(g)^{-1}e_k=\overline{\sigma_{kl}(g)}\,f_j$ by [L6], and for all $i,k$, $$\langle T(A)e_k,f_i\rangle =\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g).$$ [L2, L4, L6, step 1.1]
 
 3.1 If $\pi$ and $\sigma$ are inequivalent, then $T(A)=0$ for every $A$: by step 2.1 the map $T(A)$ intertwines the irreducible $\sigma$ with the irreducible $\pi$, so if it were nonzero it would be an isomorphism by Schur's lemma [L1], contradicting inequivalence. [L1, step 2.1]
 
 3.2 If $V_\sigma=V_\pi=V$ and $\sigma=\pi$, then $T(A)=\lambda(A)\operatorname{id}_V$ for every $A$: by step 2.1 the endomorphism $T(A)$ intertwines the irreducible representation $\pi$ with itself, so the intertwining endomorphisms form a division ring [L1]; if $T(A)\ne0$, then $T(A)$ has an eigenvalue $\lambda$ by [L1] applied to the nonzero finite-dimensional complex space $V$, and $T(A)-\lambda\operatorname{id}_V$ is a non-injective intertwining endomorphism, hence $0$ in the division ring, so $T(A)=\lambda\operatorname{id}_V$ (the case $T(A)=0$ is the same statement with $\lambda=0$). [L1, step 2.1]
 
-4.1 If $\pi$ and $\sigma$ are equivalent, fix once and for all a unitary intertwining isomorphism $V_\sigma\to V_\pi$ and use it to identify $V_\sigma$ with $V_\pi$, so that $\sigma=\pi$ in the computation; combining steps 3.2 and 2.2 gives $T(A)=\lambda(A)\operatorname{id}_V$ with $\lambda(A)=\operatorname{tr}A/d_\pi=\delta_{jl}/d_\pi$, hence $\langle T(A)e_k,f_i\rangle=\delta_{ik}\delta_{jl}/d_\pi$. [step 3.2, step 2.2]
+4.1 In the equal-representation case of the statement, use the fixed identification for which $V_\sigma=V_\pi=V$, $\sigma=\pi$, and $e_k=f_k$. Then the rank-one operator $A$ of step 2.3 is an endomorphism with $\operatorname{tr}A=\delta_{jl}$. Combining steps 3.2 and 2.2 gives $T(A)=\lambda(A)\operatorname{id}_V$ with $\lambda(A)=\operatorname{tr}A/d_\pi=\delta_{jl}/d_\pi$, and hence $\langle T(A)e_k,f_i\rangle=\delta_{ik}\delta_{jl}/d_\pi$. [step 2.2, step 2.3, step 3.2]
 
-5.1 Comparing step 2.3 with step 4.1 yields $\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=\delta_{ik}\delta_{jl}/d_\pi$ in the equivalent case, and comparing step 2.3 with step 3.1 yields $\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g)=0$ in the inequivalent case; this is the claimed orthogonality relation, and the Axiom of Choice entered only through the normalized Haar measure of [L3]. [A1, step 3.1, step 2.3, step 4.1] ∎
+5.1 Comparing step 2.3 with step 4.1 yields $\int_G\pi_{ij}(g)\overline{\sigma_{kl}(g)}\,d\mu(g) =\delta_{ik}\delta_{jl}/d_\pi$ in the equal-representation, aligned-basis case, and comparing step 2.3 with step 3.1 yields zero in the inequivalent case. This is the claimed orthogonality relation, and the Axiom of Choice entered only through the normalized Haar measure of [L3]. [A1, step 2.3, step 3.1, step 4.1] ∎

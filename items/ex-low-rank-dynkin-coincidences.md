@@ -5,7 +5,7 @@ title: Low-rank Dynkin coincidences
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-classification-of-irreducible-reduced-crystallographic-root-systems, ex-classical-root-systems-in-euclidean-coordinates, prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types, ex-root-system-a-one, ex-dynkin-diagram-duality-of-b-n-and-c-n]
+deps: [ex-classical-root-systems-in-euclidean-coordinates, ex-root-system-a-one, ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -28,20 +28,26 @@ $$B_1=C_1=A_1,\qquad B_2=C_2,\qquad D_2=A_1\sqcup A_1,\qquad D_3=A_3 .$$
 
 ## Facts & Assumptions
 
-**Given:** The classical coordinate models and the classification list of types.
+**Given:** The classical coordinate models.
 
-[L1] A rank-one reduced crystallographic root system is $\{\pm\alpha\}$, the system $A_1$ ([[ex-root-system-a-one]], [[thm-classification-of-irreducible-reduced-crystallographic-root-systems]]).
+[L1] The set $\{\pm\alpha\}$ in a Euclidean line is the root system $A_1$ ([[ex-root-system-a-one]]).
 
-[L2] The systems $B_n$ and $C_n$ have the same root set up to relabelling for $n=2$, and in general are related by the rotation of the plane carrying the four short directions and the four long directions of one onto those of the other ([[prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types]], [[ex-dynkin-diagram-duality-of-b-n-and-c-n]]).
+[L2] The coordinate root systems $B_2$ and $C_2$ are isomorphic: an explicit orthogonal transformation followed by a uniform rescaling carries one root set to the other ([[ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras]]).
 
-[L3] The trivalent simply-laced diagram with arms $1,1,1$ is the path on three vertices, and the rank-two even orthogonal system $\{\pm(e_1+e_2),\pm(e_1-e_2)\}$ splits into the orthogonal union of $\{\pm(e_1+e_2)\}$ and $\{\pm(e_1-e_2)\}$ ([[thm-classification-of-irreducible-reduced-crystallographic-root-systems]], [[ex-classical-root-systems-in-euclidean-coordinates]]).
+[L3] In the classical coordinate models,
+$$D_n=\{\pm e_i\pm e_j:1\le i<j\le n\}.$$
+For $D_3$, the roots
+$$\delta_1=e_1-e_2,\qquad \delta_2=e_2-e_3,\qquad \delta_3=e_2+e_3$$
+form a simple system ([[ex-classical-root-systems-in-euclidean-coordinates]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 $B_1=C_1=A_1$: in rank one the only reduced crystallographic system is $\{\pm\alpha\}$ by [L1], so the names $A_1,B_1,C_1$ all denote it, and the classification list records this identification. [L1, algebra]
+1.1 Extending the coordinate notation to rank one gives $B_1=\{\pm e_1\}$ and $C_1=\{\pm2e_1\}$. The linear maps $e_1\mapsto\alpha$ and $2e_1\mapsto\alpha$ identify these systems with $A_1$ from [L1]. Thus $B_1=C_1=A_1$ up to root-system isomorphism. [L1, algebra]
 
-1.2 $B_2=C_2$: both are the eight-root system with four directions at mutual angles $45^{\circ}$ and two lengths in ratio $2$; the rotation by $45^{\circ}$ followed by a uniform rescaling carries the root set of one onto that of the other and preserves Cartan integers, giving an explicit isomorphism by [L2]. [L2, algebra]
+1.2 The explicit similarity in [L2] identifies the eight roots of $B_2$ with those of $C_2$ and preserves every Cartan integer. Hence $B_2=C_2$ up to root-system isomorphism. [L2]
 
-2.1 $D_2=A_1\sqcup A_1$: the rank-two even orthogonal system is $\{\pm(e_1+e_2),\pm(e_1-e_2)\}$, an orthogonal disjoint union of two rank-one systems each equal to $A_1$ by [L1], so $D_2=A_1\sqcup A_1$ as a reducible system; and $D_3=A_3$ because the trivalent diagram with arm lengths $1,1,1$ is the path on three vertices, which is the $A_3$ diagram by [L3]. [L1, L3, algebra] ∎
+1.3 For $D_2$, [L3] gives $D_2=\{\pm(e_1+e_2),\pm(e_1-e_2)\}$, the orthogonal disjoint union of two rank-one systems, so $D_2=A_1\sqcup A_1$ by [L1]. [L1, L3, algebra]
+
+2.1 For the simple roots of $D_3$ in [L3], all squared lengths are $2$, while $(\delta_1,\delta_2)=(\delta_1,\delta_3)=-1$ and $(\delta_2,\delta_3)=0$. Their Dynkin graph therefore has the three-vertex path $\delta_2-\delta_1-\delta_3$, the $A_3$ diagram. Hence $D_3=A_3$ up to root-system isomorphism. [L3, algebra] ∎

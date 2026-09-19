@@ -4,7 +4,7 @@ kind: lemma
 title: "Aut(U_Q^<) is extremely amenable"
 status: draft
 origin: pipeline
-deps: [def-corson-ordered-rational-permutation-model, thm-extreme-amenability-yields-bpi-in-finite-support-models, thm-finite-ramsey-for-uniform-subsets, def-metric-space, def-ramsey-colouring-and-arrow-notation]
+deps: [def-corson-ordered-rational-permutation-model, thm-extreme-amenability-yields-bpi-in-finite-support-models, def-metric-space, def-ramsey-colouring-and-arrow-notation, def-axiom-of-choice, thm-tychonoff, def-product-topology, lem-closed-subset-of-a-compact-space-is-compact, def-hausdorff-space, cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -26,7 +26,8 @@ sources:
 
 ## Statement
 
-The group $\operatorname{Aut}(U_{\mathbb{Q}}^{<})$ of order-and-metric
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). The group
+$\operatorname{Aut}(U_{\mathbb{Q}}^{<})$ of order-and-metric
 automorphisms of the rational ordered Urysohn metric space, with the topology of
 pointwise convergence, is extremely amenable, and so is every finite point
 stabiliser required by the finite-support permutation model of
@@ -36,9 +37,30 @@ stabiliser required by the finite-support permutation model of
 
 **Given:** The age of $U_{\mathbb{Q}}^{<}$, namely the finite ordered rational metric spaces, and a finite support $E$.
 
-[F1] Nešetřil's Ramsey theorem: the class of finite ordered rational metric spaces is a Ramsey class, so for every finite ordered rational metric space $A$ and every finite colouring of the copies of $A$ in a larger finite ordered rational metric space $B$ there is a copy $B'$ of $B$ all of whose copies of $A$ have the same colour ([[def-ramsey-colouring-and-arrow-notation]], source of the item).
+[A1] The Axiom of Choice is assumed ([[def-axiom-of-choice]]).
 
-[F2] The KPT correspondence: the automorphism group of a Fraïssé structure whose finite substructures are rigid and whose age is Ramsey is extremely amenable ([[thm-extreme-amenability-yields-bpi-in-finite-support-models]] is the consumer; the criterion is the cited KPT theorem).
+[F1] Nešetřil's Ramsey theorem says that the class $\mathcal K$ of finite
+ordered rational metric spaces is a Ramsey class: for all $A,B\in\mathcal K$
+and every positive integer $k$, there is $C\in\mathcal K$ such that
+$$C\longrightarrow(B)^A_k.$$
+Thus every $k$-colouring of the copies of $A$ in this *extension* $C$ has a
+copy $B'\cong B$ whose copies of $A$ are monochromatic
+([[def-ramsey-colouring-and-arrow-notation]]). No self-arrow $B\to(B)^A_k$ is
+asserted.
+
+[F2] The KPT correspondence: the automorphism group of a Fraïssé structure whose finite substructures are rigid and whose age is Ramsey is extremely amenable (Kechris--Pestov--Todorcevic, Theorem 4.7; Theorem 6.16 gives this ordered-rational-Urysohn instance). The resulting stabiliser conclusion is consumed by [[thm-extreme-amenability-yields-bpi-in-finite-support-models]].
+
+[F3] Under AC, an arbitrary product of compact spaces is compact
+([[thm-tychonoff]]), and a closed subspace of a compact space is compact
+([[lem-closed-subset-of-a-compact-space-is-compact]]). Products and their
+coordinate topology are as in [[def-product-topology]].
+
+[L2] For continuous maps into a Hausdorff space, the agreement set is closed
+([[cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed]],
+[[def-hausdorff-space]]).
+
+[L3] A basic neighbourhood in a product topology restricts only finitely many
+coordinates ([[def-product-topology]]).
 
 [L1] A finite ordered rational metric space is rigid: an isomorphism onto itself preserving the order and all distances is the identity, because the points are distinguished by their order positions and their distances to the other points ([[def-metric-space]]).
 
@@ -50,8 +72,14 @@ stabiliser required by the finite-support permutation model of
 
 2.1 Every finite ordered rational metric space is rigid by [L1], and the age is a Ramsey class by [F1]; hence the hypotheses of the KPT criterion [F2] hold for the Fraïssé limit $U_{\mathbb{Q}}^{<}$, and $\operatorname{Aut}(U_{\mathbb{Q}}^{<})$ is extremely amenable. [step 1.1, F1, F2, L1]
 
-3.1 For a finite support $E$, the stabiliser $\operatorname{fix}(E)$ is the automorphism group of the expansion of $U_{\mathbb{Q}}^{<}$ by constants for the finitely many points of $E$; the age of that expansion is again a class of finite ordered rational metric spaces with finitely many named constants, and it remains rigid and Ramsey, because colourings of expansions over a fixed finite substructure are colourings of a finite set of structural embeddings to which [F1] and [L1] apply unchanged. [step 2.1, F1, L1]
+3.1 Put $G:=\operatorname{Aut}(U_{\mathbb Q}^{<})$ and $H:=\operatorname{fix}(E)$. In the pointwise-convergence topology $H$ is an open subgroup of $G$, since fixing the finitely many points of $E$ is a basic identity neighbourhood. [given, step 2.1]
 
-4.1 By [F2] applied to the expansion of step 3.1, $\operatorname{fix}(E)$ is extremely amenable; since $E$ was an arbitrary finite support, every finite point stabiliser required by the permutation model is extremely amenable. [step 3.1, F2]
+4.1 Let $X$ be a nonempty compact Hausdorff $H$-flow. Inside the product $X^G$, define the coinduced space $$Y:=\{\Phi:G\to X:\Phi(hg)=h\cdot\Phi(g)\text{ for all }h\in H, g\in G\}.$$ It is nonempty: AC chooses one representative of every left $H$-orbit in $G$; after choosing an arbitrary value of $X$ at each representative, the displayed rule extends it uniquely to that orbit. [given, A1, step 3.1, construct]
 
-5.1 The whole group is the case $E = \varnothing$ of step 4.1, so both the group and its finite stabilisers are extremely amenable, which is the statement. [step 2.1, step 4.1, F2] ∎
+5.1 The space $Y$ is closed in $X^G$: for fixed $h,g$, the equation $\Phi(hg)=h\cdot\Phi(g)$ is an equaliser of two continuous coordinate maps and is closed because $X$ is Hausdorff. Hence [F3] makes $Y$ compact. [step 4.1, F3, L2]
+
+5.2 Define a $G$-action on $Y$ by $$(a\cdot\Phi)(g):=\Phi(ga).$$ The defining equivariance of $Y$ is preserved. This action is continuous. Indeed, at $a_0\in G$ and for each of finitely many output coordinates $g_i$, openness of $H$ gives a neighbourhood on which $h_i(a):=g_i a a_0^{-1}g_i^{-1}\in H$; then $g_i a=h_i(a)g_i a_0$ and $\Phi(g_i a)=h_i(a)\cdot\Phi(g_i a_0)$. Continuity of $h_i$, of the $H$-action, and the product topology at the finitely many fixed coordinates $g_i a_0$ therefore give joint continuity. [step 3.1, step 4.1, L3]
+
+6.1 Extreme amenability of $G$ from [step 2.1] gives a $G$-fixed $\Phi\in Y$. The right-translation action then makes $\Phi$ constant, since $\Phi(a)=(a\cdot\Phi)(1)=\Phi(1)$ for every $a\in G$. For $h\in H$, the defining equation for $Y$ gives $h\cdot\Phi(1)=\Phi(h)=\Phi(1)$, so $\Phi(1)$ is an $H$-fixed point of $X$. [step 2.1, step 4.1, step 5.2]
+
+7.1 Thus every nonempty compact Hausdorff $H$-flow has a fixed point, so $H=\operatorname{fix}(E)$ is extremely amenable. Since $E$ was arbitrary and $E=\varnothing$ gives the whole group, the stated group and all required finite point stabilisers are extremely amenable. [step 3.1, step 6.1] ∎

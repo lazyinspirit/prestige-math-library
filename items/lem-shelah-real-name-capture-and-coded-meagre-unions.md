@@ -4,7 +4,7 @@ kind: lemma
 title: Real names are captured and coded meagre unions are absorbed
 status: draft
 origin: pipeline
-deps: [thm-shelah-ch-omega-one-sweet-construction, lem-bounded-stage-capture-in-finite-support-iterations, thm-countable-subsets-of-omega-one-are-bounded, thm-forcing-theorem, lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets, def-axiom-of-choice]
+deps: [thm-shelah-ch-omega-one-sweet-construction, thm-countable-subsets-of-omega-one-are-bounded, thm-forcing-theorem, lem-forcing-monotonicity-density-and-decision, lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -29,20 +29,21 @@ codes; hence $s$ is definable from that real and finitely many ordinals.
 
 **Given:** A $B$-generic filter $G$ over a ground model $V$, the CH-length chain $(B_\alpha)_{\alpha<\omega_1}$ of [[thm-shelah-ch-omega-one-sweet-construction]] with union $B$, and a $B$-name $\dot s$ for a real, a Borel code, or a countable sequence of ordinals.
 
-[F1] [[thm-shelah-ch-omega-one-sweet-construction]]: the chain is continuous, each $B_\alpha$ is a complete subalgebra of $B$, the union is ccc, and above every stage there is a later stage whose quotient over it is forcing-equivalent to $\mathrm{UM}$.
+[F1] [[thm-shelah-ch-omega-one-sweet-construction]]: the chain is continuous, each $B_\alpha$ is a complete subalgebra of $B$, the union is ccc, and above every stage there is a later stage whose quotient over it is forcing-equivalent to $\mathrm{UM}$; in particular, every antichain in $B$ is countable.
 
-[F2] [[thm-forcing-theorem]]: forcing and names are definable, the ccc makes every maximal antichain countable, and the value of a name is determined by the generic's trace on the deciding antichains.
+[F2] [[thm-forcing-theorem]]: forcing is definable and satisfies the truth lemma.
 
-[F3] [[thm-countable-subsets-of-omega-one-are-bounded]] with [[def-axiom-of-choice]]: a countable set of ordinals below $\omega_1$ is bounded, and the countably many birth stages of the data of a name can be enumerated.
+[F3] [[lem-forcing-monotonicity-density-and-decision]]: for each formula the conditions deciding it are dense; with [[def-axiom-of-choice]], one may extend a maximal antichain inside each such dense set.
 
+[F4] [[thm-countable-subsets-of-omega-one-are-bounded]] with [[def-axiom-of-choice]]: a countable set of ordinals below $\omega_1$ is bounded, and the countably many birth stages of the data of a name can be enumerated.
 
 [F5] [[lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets]]: a $\mathrm{UM}$ quotient absorbs all ground-model closed nowhere-dense sets into a single coded meagre envelope.
 
 ## Proof
 
-1.1 Capture of reals: let $\dot x$ be a $B$-name for a real. For each $n<\omega$ and $k\in\{0,1\}$ the set of conditions deciding $\dot x(n)=k$ is dense, and a maximal antichain inside it is countable by ccc. The union $A$ of these countably many antichains is a countable subset of $B=\bigcup_\alpha B_\alpha$, so the set of stages in which its members occur is countable and bounded by some $\alpha<\omega_1$; since $B_\alpha$ is complete in $B$, the same antichains are maximal in $B_\alpha$ and determine a $B_\alpha$-name with the same value. Hence every real name is a $B_\alpha$-name. [F1, F2, F3]
+1.1 Capture of reals: let $\dot x$ be a $B$-name for a real. For each $n<\omega$, [F3] makes the set of conditions deciding the value of $\dot x(n)$ dense; use Choice to take a maximal antichain $A_n$ in that dense set, labelled by the decided value $0$ or $1$. Each $A_n$ is countable by the ccc in [F1]. Thus $A=\bigcup_{n<\omega}A_n$ is countable, and the set of stages in which its members occur is countable and bounded by some $\alpha<\omega_1$ by [F4]. Since $B_\alpha$ is complete in $B$, every $A_n$ remains maximal in $B_\alpha$. The labelled antichains therefore define a $B_\alpha$-name $\dot x_\alpha$; for every generic $G$, the unique member of $A_n\cap G$ gives both $\dot x_G(n)$ and $(\dot x_\alpha)_{G\cap B_\alpha}(n)$, so the two names have the same value coordinatewise. Hence every real name is equivalent to a $B_\alpha$-name. [F1, F2, F3, F4]
 
-2.1 Capture of countable ordinal sequences and Borel codes: a name for a countable sequence of ordinals consists of countably many coordinate names; each coordinate name is decided by a maximal antichain, and each such antichain is countable and, as in step 1.1, contained, together with its decisions, in some $B_\alpha$. Borel codes are coded by reals together with countably many ordinal parameters, so the same argument applies to them; a Borel-code name is a countable object in the sense of the forcing language. [F2, F3, step 1.1]
+2.1 Capture of countable ordinal sequences and Borel codes: for a name forced to be a function from $\omega$ to the ordinals, apply [F3] to each coordinate and choose a maximal antichain whose members decide that coordinate as a check ordinal. The union of these antichains is countable by [F1] and Choice, so [F4] bounds all of their birth stages below one $\alpha$. The labelled antichains define an equivalent $B_\alpha$-name exactly as in step 1.1. A Borel-code name is likewise a name for a hereditarily countable code, so choose deciding antichains for the countably many entries of a fixed real/ordinal coding of that object and repeat the same argument. [F1, F2, F3, F4, step 1.1]
 
 3.1 Over the constructible ground: when $V=L$, the chain, the names and all deciding antichains are constructed by the definable recursion of [F1], so they are constructible and canonically enumerated by the $L$-well-order. The generic meets exactly one condition in each deciding antichain; packing the countably many chosen indices into a single real $r$ by the standard pairing of $\omega\times\omega$ with $\omega$ exhibits $s$ as definable from $r$ and finitely many ordinals coding the name and the enumerations. No ultra-filter on an arbitrary countably generated complete algebra is claimed to be generated by its generators. [F1, F2, step 2.1]
 

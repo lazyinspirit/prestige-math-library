@@ -31,7 +31,8 @@ converge to $T$ in operator norm ([[def-operator-norm]],
 [[def-metric-convergence]]). In that case
 $$\|T\|_1=\inf\Bigl\{\sum_{j\ge1}\|u_j\|\,\|v_j\|:\ R_m\to T\ \text{in operator norm}\Bigr\},$$
 the infimum being over all such **nuclear representations** of $T$, and the
-infimum is attained: the singular-value series
+infimum is attained: after reindexing its at-most-countable index set by the
+positive integers, the singular-value series
 $T=\sum_{j\in J}s_j\langle\cdot,e_j\rangle f_j$ is a nuclear representation with
 sum $\|T\|_1$.
 
@@ -55,7 +56,7 @@ sum $\|T\|_1$.
 
 **Given:** Countable Choice, the compact $T$, its singular system, and the nuclear data.
 
-1.1 **The singular series is nuclear with sum $\|T\|_1$.** Writing the SVD as $T=\sum_{j\in J}s_j\langle\cdot,e_j\rangle f_j=\sum_{j\in J}\langle\cdot,s_je_j\rangle f_j$ and enumerating the at most countable index set $J$ by $j=1,2,\dots$ when it is infinite (padding with zeros, i.e. omitting zero terms, otherwise) gives sequences $u_j:=s_je_j$, $v_j:=f_j$ with $\sum_j\|u_j\|\|v_j\|=\sum_js_j=\|T\|_1<+\infty$; the partial sums converge to $T$ in operator norm by [A1]. Hence if $T$ is trace class it has a nuclear representation with sum $\|T\|_1$. [A1, A2]
+1.1 **The singular series is nuclear with sum $\|T\|_1$.** Write the SVD as $T=\sum_{j\in J}s_j\langle\cdot,e_j\rangle f_j=\sum_{j\in J}\langle\cdot,s_je_j\rangle f_j$. If $J=\mathbb N$ (the infinite-rank case), define $u_{m+1}:=s_me_m$ and $v_{m+1}:=f_m$ for every $m\in\mathbb N$; thus the positive-indexed nuclear series includes the SVD term with index $m=0$. If $J=\{1,\ldots,r\}$, use $u_j:=s_je_j$, $v_j:=f_j$ for $1\le j\le r$ and put $u_j=v_j:=0$ for $j>r$; if $J=\varnothing$, use the two zero sequences. In every case $\sum_{j\ge1}\|u_j\|\|v_j\|$ is exactly the sum of all positive singular values, hence equals $\|T\|_1<+\infty$, and the corresponding partial sums converge to $T$ in operator norm by [A1]. Hence if $T$ is trace class it has a nuclear representation with sum $\|T\|_1$. [A1, A2]
 
 1.2 **A nuclear representation makes $T$ trace class.** Assume $R_m=\sum_{j\le m}\langle\cdot,u_j\rangle v_j$ converges to $T$ in operator norm with $C:=\sum_j\|u_j\|\|v_j\|<+\infty$. Each $R_m$ has finite rank, hence is compact [A4], and the target $K$ is a Hilbert space, so the norm limit $T$ is compact [A4]; the singular system of [A1] therefore applies, and for every finite $F\subseteq J$, $R_m\to T$ gives $\langle Te_j,f_j\rangle=\lim_m\langle R_me_j,f_j\rangle=\lim_m\sum_{j'\le m}\langle e_j,u_{j'}\rangle\langle v_{j'},f_j\rangle$ [A5]; hence $\sum_{j\in F}s_j=\lim_m\sum_{j\in F}\sum_{j'\le m}\langle e_j,u_{j'}\rangle\langle v_{j'},f_j\rangle=\lim_m\sum_{j'\le m}\sum_{j\in F}\langle e_j,u_{j'}\rangle\langle v_{j'},f_j\rangle$ (finite sums) and, bounding the inner sum by finite Cauchy–Schwarz and Bessel, $|\sum_{j\in F}\langle e_j,u_{j'}\rangle\langle v_{j'},f_j\rangle|\le(\sum_{j\in F}|\langle u_{j'},e_j\rangle|^2)^{1/2}(\sum_{j\in F}|\langle v_{j'},f_j\rangle|^2)^{1/2}\le\|u_{j'}\|\|v_{j'}\|$; therefore $\sum_{j\in F}s_j\le\sum_{j'}\|u_{j'}\|\|v_{j'}\|=C$. Taking the supremum over finite $F$ gives $\|T\|_1=\sum_js_j\le C<+\infty$, so $T$ is trace class and $\|T\|_1\le C$. [A1, A2, A4, A5, algebra]
 

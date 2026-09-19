@@ -5,7 +5,7 @@ title: Root systems of the classical complex Lie algebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-classical-complex-matrix-lie-algebras, prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-reduced-crystallographic-euclidean-root-system, def-cartan-subalgebra-of-a-lie-algebra, thm-existence-of-each-classified-root-system]
+deps: [def-classical-complex-matrix-lie-algebras, prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-reduced-crystallographic-euclidean-root-system, def-cartan-subalgebra-of-a-lie-algebra, thm-existence-of-each-classified-root-system, ex-low-rank-dynkin-coincidences]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -26,7 +26,9 @@ proof_strategy: direct
 Let $\mathfrak h$ be the diagonal Cartan subalgebra of one of
 $\mathfrak{sl}_n(\mathbb C)$, $\mathfrak{sp}_{2n}(\mathbb C)$,
 $\mathfrak{so}_{2n}(\mathbb C)$, $\mathfrak{so}_{2n+1}(\mathbb C)$
-([[prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras]]) and let
+([[prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras]]), where
+$n\ge2$ in the special-linear and even-orthogonal cases and $n\ge1$ in the
+symplectic and odd-orthogonal cases, and let
 $\varepsilon_1,\dots,\varepsilon_n\in\mathfrak h^{*}$ be the coordinate
 functionals, $\varepsilon_i(H)=H_{ii}$. Then the roots and root spaces are:
 1. $\mathfrak{sl}_n(\mathbb C)$: the roots $\varepsilon_i-\varepsilon_j$,
@@ -43,17 +45,18 @@ functionals, $\varepsilon_i(H)=H_{ii}$. Then the roots and root spaces are:
 
 In every case every root space is one-dimensional, and the listed root sets are
 reduced crystallographic Euclidean root systems of types $A_{n-1}$, $C_n$,
-$D_n$, $B_n$ respectively.
+$D_n$, $B_n$ respectively, with the low-rank identifications
+$B_1=C_1=A_1$, $C_2=B_2$, $D_2=A_1\sqcup A_1$, and $D_3=A_3$.
 
 ## Facts & Assumptions
 
 **Given:** One of the classical matrix Lie algebras $\mathfrak g$, its diagonal subalgebra $\mathfrak h$, the coordinate functionals $\varepsilon_i$, and the matrix units $E_{ab}$.
 
-[L1] The algebras and their block decompositions are as in [[def-classical-complex-matrix-lie-algebras]]; for diagonal $H$ and matrix units $E_{ab}$ one has $[H,E_{ab}]=(H_{aa}-H_{bb})E_{ab}$, and the off-diagonal block units satisfy the symmetry conditions $b=b^{T}$ (symplectic), $b=-b^{T}$ (orthogonal), with the odd case adding the $u$ and $w$ blocks. ([[def-classical-complex-matrix-lie-algebras]])
+[L1] The algebras and their block decompositions are as in [[def-classical-complex-matrix-lie-algebras]]; for diagonal $H$ and matrix units $E_{ab}$ one has $[H,E_{ab}]=(H_{aa}-H_{bb})E_{ab}$, and the off-diagonal block units satisfy the symmetry conditions $b=b^{T}$ (symplectic), $b=-b^{T}$ (orthogonal), with the odd case adding the $u$ and $w$ blocks.
 
 [L2] The diagonal subalgebra $\mathfrak h$ is a Cartan subalgebra with simultaneous diagonalization of the adjoint action ([[prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras]], [[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]).
 
-[L3] The standard coordinate models of $A_{n-1}$, $B_n$, $C_n$, $D_n$ are the root sets $\{\varepsilon_i-\varepsilon_j\}$, $\{\pm\varepsilon_i,\pm\varepsilon_i\pm\varepsilon_j\}$, $\{\pm2\varepsilon_i,\pm\varepsilon_i\pm\varepsilon_j\}$, $\{\pm\varepsilon_i\pm\varepsilon_j\}$ in the Euclidean spaces of [[thm-existence-of-each-classified-root-system]].
+[L3] The standard coordinate models of $A_{n-1}$, $B_n$, $C_n$, $D_n$ are the root sets $\{\varepsilon_i-\varepsilon_j\}$, $\{\pm\varepsilon_i,\pm\varepsilon_i\pm\varepsilon_j\}$, $\{\pm2\varepsilon_i,\pm\varepsilon_i\pm\varepsilon_j\}$, $\{\pm\varepsilon_i\pm\varepsilon_j\}$ in their stable ranges; the low-rank models have the identifications stated above ([[thm-existence-of-each-classified-root-system]], [[ex-low-rank-dynkin-coincidences]]).
 
 [L4] A root system in the sense used here is a reduced crystallographic root system ([[def-reduced-crystallographic-euclidean-root-system]]).
 

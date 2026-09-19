@@ -613,6 +613,768 @@ This report is the task-authorized continuity record. Each completed item record
 - Defect ledger: append target `phase-2-remaining-27-step7-a-051`, exact-linked to the rejection tuple and pre-edit guard.
 - Unresolved obligations: none for this item. Next action is `fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic`.
 
+### `fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic`
+
+- Rejection tuple: `gpt-5.6-terra` / `4f34973fd3cd01300385f81c606f0061226f8f40528efc636fb09d751fa9a782`.
+- Exact issue: L2 attributed the claims that $\mathfrak{su}(2)$ complexifies to $\mathfrak{sl}_2(\mathbb C)$ and that the latter has type $A_1$ to a false-statement interface and a generic root-system existence theorem, neither of which states those claims.
+- Evidence read: the complete counterexample; the exact published $\operatorname{SU}(2)\to\operatorname{SO}(3)$ covering example; and the exact earlier computation of the diagonal Cartan subalgebra and two root spaces of $\mathfrak{sl}_2(\mathbb C)$.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `d5796146e5025c0fce45d3da044fa2fe2fca433262454da2c103f19df5c1301f`.
+- Repair: computed directly that $ih,e-f,i(e+f)$ are a real basis of $\mathfrak{su}(2)$ and a complex basis of $\mathfrak{sl}_2(\mathbb C)$, then cited the exact $\mathfrak{sl}_2$ root computation for the $A_1$ diagram. Replaced the two unsupported dependencies, synchronized the Batch-11 manifest and source metadata, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `062ea4c20ce982b22f41a1837f487117a41a017c286da1cc68cbc7a08ec533da`.
+- Focused checks: counterexample precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-052`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras`.
+
+### `prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `dbfd910c6b969ea17ec3e94f1060e8bf5c616307b85b3202aed8637d376f191b`.
+- Exact issue: step 1.2 killed only off-diagonal entries of the $a$-block, then falsely claimed that the defining form equation killed the independent $b,c$ and odd $u,w$ blocks.
+- Evidence read: the complete proposition and the corrected classical block definitions. In the full ambient matrix representation, a Cartan element can be chosen with pairwise distinct entries $1,\dots,n,-1,\dots,-n$, with an additional zero in the odd case.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `31fec3a0bc2cf6e4ad0787b8175585002d7a5c3360661e849889b205ce7bb392`.
+- Repair: chose one Cartan element with pairwise distinct full ambient diagonal entries; a normalizing commutator is both diagonal and zero on the diagonal, hence zero, so every off-diagonal matrix entry of the normalizer vanishes at once. The repair also stated the ambient simultaneous diagonalization argument correctly before restricting it to the invariant classical subalgebra. Regenerated item and aggregate contracts.
+- Post-edit guard: `b4fafb86c499ea072f6605258c1293562737e58805b9c3fbccf4f3817d75f100`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-053`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `ex-dynkin-diagram-duality-of-b-n-and-c-n`.
+
+### `ex-dynkin-diagram-duality-of-b-n-and-c-n`
+
+- Rejection tuple: `gpt-5.6-terra` / `7b58485e416945662f8b3b101fc9735e3b653dbc2e96518c84053f0669733de9`.
+- Exact issue: no $n\ge2$ restriction was stated, although at $n=1$ there is no double edge and the proof's $\alpha_{n-1},\beta_{n-1}$ are undefined.
+- Evidence read: the complete example, the Cartan-matrix and arrow definitions, and the duality proposition. The displayed calculation is correct exactly from rank two onward.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `1b2f480b2bfa4b61d3a51401ac16ea66f1a3462b2b5075b0d81a5c41a6100e1a`.
+- Repair: added $n\ge2$ to the Example and Given data and synchronized the Batch-11 manifest and exact source locator; regenerated item and aggregate contracts.
+- Post-edit guard: `9206bde818a4e757b10011270bdf791601d160b8a699f2d7ed92d5139d4f2295`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-054`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras`.
+
+### `ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `d2758657af99c1074abd448591dd3c926f31326471844ad8e3c527ac5ac0f2f4`.
+- Exact issue: the anti-diagonal matrix $S$ was called antisymmetric although $S^t=S$; moreover an invertible antisymmetric $5\times5$ matrix cannot exist.
+- Evidence read: the complete example, the exact classical Killing-form and Cartan-criterion suppliers, the root-system theorem and isomorphism definition, and direct matrix calculations for both defining forms.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `bf931505e69118767e9f0d8f23f548afdf25789e38f6819e71fe5989df8f78b9`.
+- Repair: identified $S$ as the symmetric Gram matrix and wrote its exact quadratic form; supplied semisimplicity; used a full distinct diagonal to prove both Cartans self-normalizing; corrected the orthogonal decomposition to include its zero-weight Cartan part; listed actual form-compatible symplectic root vectors; and proved the $B_2\to C_2$ map scales inner products by $2$, hence preserves every Cartan integer. Removed unused dependencies, added the exact needed suppliers, synchronized the Batch-11 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `b7f775d8a983bffeca9e5e177dd8c3833af416ef0ad56e8fc0e2d1807a93bf9b`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-055`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `ex-classical-root-systems-in-euclidean-coordinates`.
+
+### `ex-classical-root-systems-in-euclidean-coordinates`
+
+- Rejection tuple: `gpt-5.6-terra` / `ce7b900ed824ab9306d3d05508ea983b4806f68426d74601049574b95f85d150`.
+- Exact issue: L1 attributed the displayed coordinate models to an existence theorem whose Statement gives only existence by type, and the item supplied no range, making $D_1$ empty and nonspanning in $\mathbb R$.
+- Evidence read: the complete example; the exact internal root-system definition and matrix-Lie-algebra root computation; Knapp, Chapter II, formulas (2.43) and (2.50); and Etingof, Example 21.18.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `3e08b5166215dd632b18bbb89c68f6c8235e5c71cb13002c26a6195de3d5a3d9`.
+- Repair: imposed $n\ge2$; directly proved spanning, reducedness, reflection closure, and integrality for all four coordinate sets; distinguished the $D_2=A_1\sqcup A_1$ simple system; corrected the reflection-closure prose so single sign changes were not claimed to preserve $A$; and retained the exact supplier only for the matrix-Lie-algebra identification. Synchronized the Batch-11 manifest and source metadata, adopted canonical proof-step order, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `8d3e5cba3bf7053942a9fcbc7f3fca16f540ea4dac3c88b85cea50e82281b041`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-056`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras`.
+
+### `fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `4368438df7a56066e515729e914a18edbc6c66c72fcfb04bdaf97368d5850627`.
+- Exact issue: if $M_a$ is already the matrix of $\operatorname{ad}_{A_a}$, then the Killing form is $\operatorname{tr}(M_aM_b)$, not $4\operatorname{tr}(M_aM_b)$; the displayed equality was false and the next step introduced a second incompatible normalization.
+- Evidence read: the complete counterexample, the exact Killing-form definition and Cartan criterion, the split $\mathfrak{sl}_2$ Killing-form computation, and the earlier exact $\mathfrak{sl}_2$ Cartan/root example.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `0b8e151bda6d0f2ae04fb51e8c14365faa2881d570cff78601cb86b8b9e36e55`.
+- Repair: corrected $K(A_a,A_b)$ to $\operatorname{tr}(M_aM_b)=-8\delta_{ab}$ and $\operatorname{ad}_X$ to $\sum x_aM_a$; restricted the trace-form supplier to the split real algebra it actually covers; explicitly showed the compact and split bases complexify to $\mathfrak{sl}_2(\mathbb C)$; and cited the exact $A_1$ root computation. Replaced inflated dependencies, synchronized the Batch-11 manifest and sources, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `7cf6f4a5d1e089f997ad572eb6bf94d1bc36ce9b5fc625512084f78f661aa5a4`.
+- Focused checks: counterexample precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-057`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `ex-low-rank-dynkin-coincidences`.
+
+### `ex-low-rank-dynkin-coincidences`
+
+- Rejection tuple: `gpt-5.6-terra` / `9fc2d7f49b52c4177bdbe182ff4f6a212e960b4f42af30cd111fb448f7c4c2ff`.
+- Exact issue: Fact [L3] falsely called the simply-laced trivalent diagram with arms $1,1,1$ a three-vertex path; that diagram has four vertices and is $D_4$, so the stated argument for $D_3=A_3$ was invalid.
+- Evidence read: the complete example; the exact coordinate models for the classical root systems; the repaired explicit $B_2/C_2$ similarity; the $A_1$ coordinate example; and Etingof, Remark 23.18.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `5aecbd6b0f01b944f0785f3f2f3b961e5e0a40a47d9bc6ec816ee098b5f859d1`.
+- Repair: replaced the false trivalent-diagram argument by the standard $D_3$ simple roots $e_1-e_2,e_2-e_3,e_2+e_3$, whose inner products give the three-vertex $A_3$ path; derived the rank-one coincidence directly; and replaced the vague $B_n/C_n$ fact by the exact previously proved $B_2/C_2$ similarity. Synchronized the Batch-11 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `6f463dff3dc96718d97e6bdc9d7a32122499d675b9c8db62c9dbb06cb8cebedf`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-058`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral`
+
+- Rejection tuple: `gpt-5.6-terra` / `b2c90c0e1aa55dbebfd1dbce7d44699d365b3eae4db82e1ca956d4d99bb1a46f`.
+- Exact issue: a vector in a direct sum need not belong to one irreducible summand, so the claimed summand containing the highest-weight vector did not exist in general.
+- Evidence read: the complete lemma and the exact finite-dimensional $\mathfrak{sl}_2$ decomposition theorem.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `c71ce7b6b76e82ff481bb4fa026e50d16ffd3e1400f58c3b05ef5be9c4a646bb`.
+- Repair: decomposed the vector into irreducible-summand components; stability and direct-sum uniqueness show every component is killed by $e_i$ and has the same $h_i$ eigenvalue, and any nonzero component proves that eigenvalue is a nonnegative integer. Regenerated item and aggregate contracts.
+- Post-edit guard: `94a0960289b0c30bcd096f4617c79142f66a7b6548af7be523a271571224cd5a`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-066`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `9f1636a636381831be51f9b50517b9dd3567f48b853338300495cec800b35d97`.
+- Exact issue: the witness required connected groups but attributed connectedness of $\mathrm{GL}_2(\mathbb C)$ and $\mathrm{SL}_2(\mathbb C)$ to interfaces that did not state it.
+- Evidence read: the complete counterexample and both cited group-identification interfaces.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `c6ace76f8f49524be22eeb0193a0ea189ab153c1588360cb3712ae7d5011acad`.
+- Repair: proved $\mathrm{SL}_2(\mathbb C)$ path connected by explicit Gauss-factor paths, deduced connectedness of $\mathrm{GL}_2(\mathbb C)$ and its projective quotient, and made the two center computations self-contained. Regenerated item and aggregate contracts.
+- Post-edit guard: `7f53ae1e1cec85df7af6bfbbb29efd0ee1d9de9dba98735b82702c928246987c`.
+- Focused checks: counterexample precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-067`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `def-partial-order-on-weights`
+
+- Rejection tuple: `gpt-5.6-terra` / `bb5f25dad04b0bf2a3eec3345be4760b2921f81c3fe26bad040c129d98078a10`.
+- Exact issue: $\lambda-\mu\in E$ does not imply $\lambda,\mu\in E$, so the claim that comparisons occur only inside $E$ was false on the declared domain $\mathfrak h^*$.
+- Evidence read: the complete definition and its simple-root-basis supplier.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `190eb5d53736434c85d8726a8bb8e6d524ce8911603033653a11c4623fd9e923`.
+- Repair: stated the exact conclusion: comparable functionals lie in one affine coset of $E$ in $\mathfrak h^*$, while neither need lie in $E$. Regenerated aggregate contracts.
+- Post-edit guard: `76c45db70d836d23fa4e8c6f738f5000b99b7d2db70a26e845afc3bfb9b48eba`.
+- Focused checks: definition precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-068`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `def-integral-dominant-and-strictly-dominant-weights`
+
+- Rejection tuple: `gpt-5.6-terra` / `b92f277446500f972b1140657c5bae9ee50a4b017810b0320f042bcdf2f03389`.
+- Exact issue: strict dominance was defined only by positive real coroot pairings, but the closing summary falsely put every strictly dominant weight in the integral lattice $P$.
+- Evidence read: the complete definition and the exact fundamental-weight and weight-lattice definitions.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `35118c07a51558cb97bc70fd6ac0a55be7a802240459499c5490f487efca759b`.
+- Repair: separated dominant-integral weights in $P$ from strictly dominant elements of $E$ having positive real fundamental-weight coordinates, explicitly noting that the latter need not be integral. Regenerated aggregate contracts.
+- Post-edit guard: `41b73841731c60accce8d96c246b694aab08a420c76825f2578a47c7d78208a2`.
+- Focused checks: definition precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-069`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-root-systems-of-the-classical-complex-lie-algebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `e1f7372058c433d169230b26c3e1dcb16c4d7e2cad06c602f75da0bcdff4c9e4`.
+- Exact issue: the even-orthogonal family allowed $n=1$, where $\mathfrak{so}_2$ has a one-dimensional Cartan but the displayed $D_1$ root set is empty and does not span its dual.
+- Evidence read: the complete proposition, its block-matrix definition and split-Cartan supplier, the repaired existence theorem, and the explicit low-rank coincidence example.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `eb718aae8f4745acc74f8f8aadc9805e0b1b23b8df4ee77c02b47ad666cd8322`.
+- Repair: imposed $n\ge2$ for the special-linear and even-orthogonal families, retained $n\ge1$ for symplectic and odd orthogonal families, and supplied the exact low-rank identifications needed outside the stable classification ranges. Synchronized the Batch-11 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `63c0b7a230377e3609d1534c9e52bf1665da0966c5c98443d8177d0d4e795c46`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-070`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `def-dominant-integrable-highest-weight-cyclic-module`
+
+- Rejection tuple: `gpt-5.6-terra` / `dc8837d6f28800e5292847ca38c8e72cf9fc7065ef7a3dfa6a8d52db3e4dc85f`.
+- Exact issue: the item cited an interface for generated two-sided ideals as though it defined generated left ideals.
+- Evidence read: the complete definition, the cited ideal definition, and the universal-enveloping-algebra interface.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `5220b87129a1b82032e5e90fa3083f5d1189d6630bd18e06db715a1b6cf4d175`.
+- Repair: removed the inaccurate dependency and explicitly constructed the generated left ideal as the finite sums $\sum u_js_j$, proving its minimality and the quotient-module construction directly. Synchronized the Batch-12 manifest, regenerated aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `1e68c45ecba8f9e9613e236d0c47f37496672f314ecd6953059a5136d5077563`.
+- Focused checks: definition precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-071`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `ex-positive-roots-and-highest-root-of-g-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `2a7dc5d862b2ca73bedf4280aafbd9943ad2a01f466784665c12373b616deeca`.
+- Exact issue: Fact [L2] dropped the reduced-crystallographic hypotheses needed for signed integral coordinates and the finite hypothesis needed by the highest-root theorem.
+- Evidence read: the complete example and the exact Statements of both cited root-coordinate and highest-root results.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `e5d6d10a4c479ea010a48f5a4658a1c215f55125a0e75d19983640fba0a6b1a4`.
+- Repair: restored every supplier hypothesis and corrected the closing dominance calculation: each other coefficient pair is coordinatewise below $(3,2)$, rather than incomparable with it. Regenerated item and aggregate contracts.
+- Post-edit guard: `9544b297ec983c9a0d6421e8c33e04a03cc898d3d9d4c62b3e7550a11464166c`.
+- Focused checks: example precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-072`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives`
+
+- Rejection tuple: `gpt-5.6-terra` / `07e2127f7c89083a3ac77b16a421e1095ba3ffa6f7272a3f9c15233b59812b37`.
+- Exact issue: the augmentation used to project the PBW decomposition sent $H$ to zero, so it sent $H-\lambda(H)$ to $-\lambda(H)$ rather than annihilating the defining left ideal.
+- Evidence read: the complete lemma, PBW and triangular-decomposition interfaces, the enveloping quotient definition, and the repaired cyclic-module definition.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `501554a27ba944b559414b860bdcdae21857e9355109a07ea5e7402d1a1ccf4c`.
+- Repair: replaced the augmentation by the Borel character $\chi_\lambda(H+x)=\lambda(H)$, proved directly that it descends to $U(\mathfrak b)$, and used the corresponding PBW projection to show $U(\mathfrak n^-)\cap J=0$. Regenerated item and aggregate contracts.
+- Post-edit guard: `9a82929f2319ce3115a594a9dc21fc50edf42607f9c5e3de97b95f4ac234586e`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-073`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `lem-integrability-relations-for-a-dominant-highest-weight`
+
+- Rejection tuple: `gpt-5.6-terra` / `75ba9e6c35aded4d1c06f2738577789a0667bc4b0e7b8591939057475e442f46`.
+- Exact issue: a vector in a direct sum of irreducible $\mathfrak{sl}_2$-modules need not lie in one summand, so the selected summand containing $v_\lambda$ was unjustified.
+- Evidence read: the complete lemma and the exact finite-dimensional $\mathfrak{sl}_2$ theorem.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `47f804575675494fe9fec9673bcf08217657b137dab7cfabbf840c0e80aac333`.
+- Repair: decomposed $v_\lambda$ into summand components; direct-sum uniqueness gives every component the same raising-annihilation and Cartan-eigenvalue equations, so the nilpotence relation holds componentwise and hence for their sum. Regenerated item and aggregate contracts.
+- Post-edit guard: `5e9c815eaf190ecedbf1a0112a26f8208a3050f4863a6e351333b39e8fae0335`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-074`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `def-weyl-vector-rho`
+
+- Rejection tuple: `gpt-5.6-terra` / `213f1abb0b7353e3351765e30d5ee0f298ee4cae3727576cdefb416baaf2bb76`.
+- Exact issue: the definition used the root lattice $Q$ without defining it or citing an interface that did.
+- Evidence read: the complete definition and the exact root-lattice definition.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `c3ecca31b5c7f7b1347e4f30081c791a6a3ef046bbd3bfb9eca3edf89e0e09f2`.
+- Repair: added the root-lattice supplier at the first use of $Q$, synchronized the Batch-12 manifest, regenerated aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `f371ffd57e297866f14f020a0e43748b372a6e3d39336679f29b033f70efbe24`.
+- Focused checks: definition precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-075`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules`
+
+- Rejection tuple: `gpt-5.6-terra` / `069db1e83ed05724e12debd992593e92186252e4ff138395358cbc43ca31784a`.
+- Exact issue: classification supplied isomorphisms $V_j\cong L(\lambda_j)$, but the statement and proof replaced the actual submodules by literal equal modules.
+- Evidence read: the complete corollary, complete-reducibility interface, direct-sum definition, and highest-weight classification.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `e9003505b502e8c081a92234080b03abb3f757a427f9fdfd42f604f73333d00c`.
+- Repair: retained the literal internal decomposition $V=\bigoplus_jV_j$, stated $V_j\cong L(\lambda_j)$, and distinguished the induced external isomorphism $V\cong\bigoplus_jL(\lambda_j)$. Synchronized the Batch-12 manifest and regenerated item and aggregate contracts.
+- Post-edit guard: `539aedaa55a530573da006d30d4a1f531661b11deee06b39c594e66e6389ab10`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-076`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces`
+
+- Rejection tuple: `gpt-5.6-terra` / `52c5ac96e0cbb69e9ec0d58b293d5c9cb6914671541545f6aafe79f0904ba175`.
+- Exact issue: Fact [L2] and step 1.1 applied an $\mathfrak{sl}_2$ result whose stated module hypothesis was nonzero, while the proposition allowed $V=0$.
+- Evidence read: the complete proposition, exact $\mathfrak{sl}_2$ theorem, coroot-spanning interface, and weight-space definition.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `0c5657ab228a5a0193b04db3be6de777ba03e1cbdb0e8cf6017d6d17cd05de88`.
+- Repair: stated the supplier's nonzero hypothesis exactly and discharged both $V=0$ and the empty-root/zero-Cartan case before choosing a root; the remaining proof then applies the theorem within its domain. Regenerated item and aggregate contracts.
+- Post-edit guard: `dd185f0552ea858201870dec8b572fdfb9336559c3c95462e89aa1b9ed0fe53c`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-077`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `lem-simple-root-integrability-bounds-the-dominant-cyclic-module`
+
+- Rejection tuple: `gpt-5.6-terra` / `b3463233e34bc243fe469ce1e77d1646b0f8ca481bb851d906238eac6b8d27cb`.
+- Exact issue: associativity does not identify $U(\mathfrak{sl}_2)(xw)$ with the adjoint orbit space $Xw$; applying a generator also acts on $w$.
+- Evidence read: the complete lemma, the Lie-representation identity, and its finite-dimensional adjoint and cyclic $\mathfrak{sl}_2$ submodules.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `a32441fb8cd4c6f3e1af48ae042e01620c15c1ad394094e762537c325fce2c26`.
+- Repair: for $S=U(\mathfrak{sl}_2)w$ and the adjoint orbit $X=U(\mathfrak{sl}_2)x$, proved that $\operatorname{span}(X\cdot S)$ is a finite-dimensional invariant subspace containing $xw$, using $y(x's)=[y,x']s+x'(ys)$. Regenerated item and aggregate contracts.
+- Post-edit guard: `1e1b53851025e40c28587431119efc1551f6227fe48155dabd9591a4c9e368f0`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-078`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `lem-highest-weight-modules-have-weights-below-the-top-weight`
+
+- Rejection tuple: `gpt-5.6-terra` / `0807574d6fb5685d676188cf4f94762123d9bbf6c5fe315341f0ecbe839b4247`.
+- Exact issue: Fact [L5] claimed conversely that every nonzero nonnegative integral combination of simple roots is a root, which the cited theorem neither states nor is true.
+- Evidence read: the complete lemma and exact simple-root-coordinate theorem.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `534828575089052c409d046fb0d443f003d0f687491fdd28a65f8e002a58faf7`.
+- Repair: retained only the supplied and used direction: every positive root is a nonzero nonnegative integral combination of the simple roots. Regenerated item and aggregate contracts.
+- Post-edit guard: `029933bc925a014b06f7cadfc882fffefeb1aa3e3394840baaafd975da28883a`.
+- Focused checks: direct item precheck and rendercheck passed; strict Batch-12 proof-contract check passed with one existing shotgun-citation warning and no errors.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-079`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `ex-weyl-groups-of-b-n-and-d-n-as-signed-permutation-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `fd9334778924b3a03a0a0da45f3b18d5172a47fbd05cb44351c929f433f7d012`.
+- Exact issue: no rank ranges were stated, so the library's zero natural and the empty $D_1$ model made the order formula meaningless or false.
+- Evidence read: the complete example, coordinate root-system model, and Weyl-group definition.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `d7071f15ef07a853584f0fe34dc3e37ec0b8534b4b463cc72ccf9ece517dfce6`.
+- Repair: imposed $n\ge1$ for $B_n$ and $n\ge2$ for $D_n$ in both the statement and Given data, and synchronized the Batch-11 manifest. Regenerated item and aggregate contracts.
+- Post-edit guard: `2b3f4ee324b0175c274b1e6bc8f1855674ca12f7740a8c4404f06b3f0539c837`.
+- Focused checks: example precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-080`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-the-adjoint-representation-has-highest-weight-the-highest-root`
+
+- Rejection tuple: `gpt-5.6-terra` / `b463e68820143566ec78f9a595f2e1dab0e7fcec95bef5e94ea46e95d524334c`.
+- Exact issue: Fact [L5] attributed the unique-maximal-weight characterization to interfaces that did not state it.
+- Evidence read: the complete proposition, exact highest-weight definition, adjoint-ideal correspondence, and root-space interfaces.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `65cba6cfd3c9e9128f72c4a1c9192a5f709ff0acbe2c918c165d8c95fe77c375`.
+- Repair: removed the inflated classification dependency and concluded directly: the constructed nonzero $\theta$-weight vector is killed by $\mathfrak n^+$, and irreducibility makes it generate the whole adjoint module. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `179fd0a92c00788912aee6c2b3eba4b90e87235775b5dc6a588b307b174e3a27`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-081`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `ex-the-adjoint-representation-and-the-highest-root`
+
+- Rejection tuple: `gpt-5.6-terra` / `0a53b27d29ee780c33ffea8a5ba690694dd8bf3911c98e2dd796e0654045099e`.
+- Exact issue: the example allowed $n=1$, where $E_{1n}$ is not traceless and no highest root exists; its conditional simplicity fact was also used without establishing the premise.
+- Evidence read: the complete example, classical root calculation, highest-weight definition, and direct matrix commutators.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `3848344bda49560edaecc0b64aca8092d2d69742619e487e0c6435dbd3673120`.
+- Repair: imposed $n\ge2$, removed the unsupported simplicity route, proved directly that $E_{1n}$ generates every off-diagonal matrix unit and diagonal difference under the adjoint action, and verified the highest-root order formula explicitly. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `abf232b45b6ea154d65ad09de3918f82ee9bc87ea580a4c636ef90da0663ea2c`.
+- Focused checks: example precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-082`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `ex-verma-modules-for-sl-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `9c1f493507fdb3795ca115703d48dc8e2df1dda8ac2d6d3f9282c69047dc7891`.
+- Exact issue: the proof selected the least nonzero index in a finite sum and claimed that applying that power of $e$ leaves only its $v_0$ contribution, although all higher-index terms generally survive. The PBW projection used to prove the basis also did not annihilate the left ideal generated by $h-\lambda(h)$ when $\lambda(h)\ne0$, and the maximal-submodule argument assumed without proof that a submodule containing a sum contains an individual basis vector.
+- Evidence read: the complete example; the PBW factorisation; the displayed $\mathfrak{sl}_2$ action; and the distinct $h$-weights of the PBW basis.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `209ca629b05712d5411cc06561ef81099cb139cb119f735398aa2fe6bf6068bc`.
+- Repair: obtained the PBW basis by tensoring the factorisation $U(\mathbb Cf)\otimes U(\mathfrak b)\simeq U(\mathfrak{sl}_2)$ with the Borel character; used the greatest nonzero index so that its corresponding power of $e$ kills all lower terms; and used polynomial spectral projection in $h$ to isolate a basis vector before proving uniqueness of the maximal proper submodule. The unused choice hypothesis was removed. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `6a584a6c4cde52912d0d4e8f308e234c63879a01cf280d925c70941d504062c2`.
+- Focused checks: example precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-083`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `cor-normalized-haar-measure-on-a-compact-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `7d89981133e44ba3339c60a88758a1746c1a308a8885d3d98c1fb30d8de68cd7`.
+- Exact issue: step 1.2 claimed that compactness makes every left Haar measure a probability measure, although positive scalar multiples have arbitrary finite positive total mass.
+- Evidence read: the complete corollary and the exact normalized-Haar and left-Haar interfaces.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `cd5725820dffdd48b4cd6c88471ec4dc4a7d4b0f0b5ed1263e164a2e1016d7dd`.
+- Repair: distinguished finiteness from normalization, stated the division by total mass explicitly, and retained uniqueness only within the total-mass-one class. Regenerated item and aggregate contracts.
+- Post-edit guard: `f59d59c217e19fa82f78a8da7f9959ba85a3eda15ad8761f60964d996df8639b`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-084`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics`
+
+- Rejection tuple: `gpt-5.6-terra` / `59e47ebe4ddfa91a8007ac0020ac3b5f336ba41378050a7fa8de8a7a0fead449`.
+- Exact issue: Fact [L3] computed $dL_{xh}^{-1}dR_hdL_x$ as $\operatorname{Ad}_{(xh)^{-1}}$ rather than $\operatorname{Ad}_{h^{-1}}$, so the displayed proof of right invariance used a false differential identity.
+- Evidence read: the complete proposition and the exact definition of conjugation and the adjoint representation.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `2876298ed64b6848e0bf93e1d57416c1b6f871989c3af0db62e2e24f62e6777d`.
+- Repair: computed the composite map $L_{(xh)^{-1}}R_hL_x(y)=h^{-1}yh$ and rewrote the right-invariance calculation using $\operatorname{Ad}_{h^{-1}}$. Regenerated item and aggregate contracts.
+- Post-edit guard: `3f08500c2e26520ab7d70217954a6038e329b7c09812dead1792af0beb78a2a6`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-085`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-conjugacy-of-maximal-tori`
+
+- Rejection tuple: `gpt-5.6-terra` / `0f40cc46c26a9f384c234f1b4f7bd79b9c42eed2d2febbca6f69e6057d853216`.
+- Exact issue: Fact [L2] reversed the containment needed to prove that a maximal torus has maximal abelian Lie algebra, so the centralizer argument had no valid premise.
+- Evidence read: the complete theorem; the torus definition; the analytic subgroup correspondence; closed subgroup theorem; and compact connected abelian structure theorem.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `cbf3cb977143dbbf878492809fe0a27063e8333781910acaab4699551e38227d`.
+- Repair: assumed correctly that $\mathfrak t_i\subsetneq\mathfrak a$, constructed the analytic subgroup and its compact connected abelian closure, proved it strictly contains $T_i$, and supplied the exact topological and Lie-subgroup dependencies. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `80803e827b6f5785bf848cdf37c75d9cc40d9e0938d1648bc4ae53bdad847e91`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-086`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-schur-orthogonality-for-compact-lie-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `bc62aba82eb165db296b036378c6df3babf2c2f18da707bcae91c0e9611db7de`.
+- Exact issue: step 2.2 took traces and used similarity on $T(A):V_\sigma\to V_\pi$ and $A:V_\sigma\to V_\pi$ before the spaces and representations had been identified, so those expressions were not defined.
+- Evidence read: the complete theorem, Schur's lemma, the matrix-coefficient convention, and the trace interface.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `069316d4008c906cd3fe2a46d9cadc1777a0f4a08b15d7f8d57e980f0b4e6c23`.
+- Repair: restricted the trace computation to the endomorphism case $V_\sigma=V_\pi$ and $\sigma=\pi$, separated the always-valid rank-one coordinate identity from trace, and made the aligned-basis identification in the equal-representation formula explicit. Regenerated item and aggregate contracts.
+- Post-edit guard: `d25688d631aab306c82ba0047029d6aa9d5d9cedc6b0cf07b7c486a01962937f`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-087`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-maximal-tori-exist-in-compact-lie-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `64cb01c551125eabdfaa98f067b13ba39b72389cffad2f1934259f9bd3452a38`.
+- Exact issue: Fact [L4] attributed “the closure of a subgroup is a subgroup” to Cartan's closed subgroup theorem, which only gives Lie-subgroup structure once closedness and the subgroup property are already known.
+- Evidence read: the complete theorem and the exact closed-subgroup, connected-closure, and compact-closed-subset interfaces.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `4365914f94a49efd4de71ea64e68ad921c004d6d9eaf745e7fb2a8014df67933`.
+- Repair: supplied the elementary net proof that closure is closed under $ab^{-1}$, retained exact citations for connectedness and compactness, and removed the inflated Cartan citation. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `85c31caeb4d14b64ed83c64397620fb2193b51eda46cc0757a4a0b33912ad986`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-088`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-weyl-integration-formula`
+
+- Rejection tuple: `gpt-5.6-terra` / `840ab771674c6a96919023cdaa73fa6d6409a14c0dd88abfeafb0146d2778bc9`.
+- Exact issue: Fact [L2] attributed finiteness and faithfulness of the compact Weyl group to the orbit proposition and definition, neither of which states those conclusions; the degree computation then used the unsupported finite cardinality.
+- Evidence read: the complete theorem; the conjugacy-orbit proposition; the Weyl-group definition; and the exact compact-Weyl-group finiteness theorem.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `b082e54f4ca510cd37c9bfb787f747a8fc2471445d2cec976bcd84c05052702e`.
+- Repair: added and cited the theorem that states finiteness and faithful action, while retaining the definition only for the automorphism action and the orbit proposition only for conjugacy. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `1a89ff865c8e41ba9531b13fa9a01164f6a88f0b197a91b45927e9a7fb0e7e22`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-089`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-integration-against-haar-is-invariant-under-translations-and-conjugation`
+
+- Rejection tuple: `gpt-5.6-terra` / `cfc6c3f693944cadd78e8ff3c31d57adb14909022166e60ec6dc3d512396daa8`.
+- Exact issue: step 1.1 labels the $h^{-1}E$ equality as right invariance and the $Eh^{-1}$ equality as left invariance, whereas those two labels should be interchanged.
+- Evidence read: the complete proposition and its Fact [L1], which explicitly supplies both translation invariances.
+- Decision: `confirmed_nonfatal` against guard `87ff55a1ef2d78d889d81e12099ccfe70a8aed7aa1a29eb50e44b426069a52b4`. The two valid equalities and both required hypotheses occur in the same sentence; a reader closes the defect by an immediate exchange of two words, and no claim, witness, computation, or dependency is missing.
+- Repair and rejudge target: none under the fatal-only Step-7 rule.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `7245dca3e4a8e35fc90a56ae4a2b50ad8f78ae2fdd7a72712be509f408a36de2`.
+- Exact issue: Fact [L5] attributed compactness of the universal cover and finiteness of the central kernel to the bi-invariant-metric proposition, whose interface supplies neither; the attempted finite-cover argument also used the wrong character-lattice index.
+- Evidence read: the complete proposition; the central-quotient theorem; finite-sheeted compactness; maximal-torus existence and conjugacy; torus exponential lattices; and the structure theorem for finitely generated abelian groups.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `7babacb90246b9618c95adb6a032aba525a9333400cb2fee224faa66bfe2eb98`.
+- Repair: proved the central covering kernel finitely generated from a compact fundamental set; used arbitrarily large finite quotients if it were infinite; compared a finite central covering of maximal tori through their exponential lattices to obtain $|D|=[X^*(T_K):X^*(T)]\le[P:Q]$; and concluded that the simply connected cover is finite-sheeted and compact. Removed the inflated metric citation and added the exact finite-cover, torus, conjugacy, and group-structure dependencies. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `aa038f6e35eacd05e9e082e886a44c2f0833ad87fd410ff8f2e1464944e27bec`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-090`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-compact-connected-lie-groups-are-classified-by-root-data`
+
+- Rejection tuple: `gpt-5.6-terra` / `4c53a4d196314a2175c89b0ca8f6b5efb2fb6e311a905318b261367d3455d02b`.
+- Exact issue: step 2.1 treated characters of the maximal torus as characters of the full nonabelian group and consequently defined no actual homomorphism or kernel on $A\times G_{sc}$.
+- Evidence read: the complete theorem; torus character/lattice duality; the semisimple simply connected endpoint; and the compact root-datum definition.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `4425f6028557cb665665fcb50cf7b07261faace82515ab367307650fe917a4e8`.
+- Repair: embedded the prescribed lattice $X$ as a finite-index sublattice of $X^*(T_{sc}\times A)=P\oplus(X/X_V)$ using the semisimple projection; defined $C$ as the common kernel inside that torus; proved roots vanish on $C$, hence $C$ is central in $A\times G_{sc}$; and identified the quotient torus character lattice with $X$. Regenerated item and aggregate contracts.
+- Post-edit guard: `8930131f7261683f923fd719ac09abe110d0f5dbd4abf475b8bf135322c59ca6`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-091`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-analytic-and-root-system-weyl-groups-agree`
+
+- Rejection tuple: `gpt-5.6-terra` / `ccff4356e9e7abb8f03df045811da6b7eeaf7cc40ce62e4dbe668b83e1513dfc`.
+- Exact issue: step 1.1 normalized compact conjugation as $\sigma(e_\alpha)=f_\alpha$; the correct compact normalization has the minus sign, and with the printed sign the purported real $\mathfrak{su}(2)$ generators were anti-fixed rather than in $\mathfrak g$.
+- Evidence read: the complete theorem, the root $\mathfrak{sl}_2$ triple, and the compact-conjugation/Killing-form normalization.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `a56f8d2adf02952a37092a5d85e38271085fe7e1e11abecbd677960ba84adebe`.
+- Repair: normalized $\sigma(e_\alpha)=-f_\alpha$, $\sigma(f_\alpha)=-e_\alpha$, and $\sigma(h_\alpha)=-h_\alpha$ using negative definiteness; verified that the displayed $X,Y,H$ are fixed and retain the stated $\mathfrak{su}(2)$ brackets. Regenerated item and aggregate contracts.
+- Post-edit guard: `1b9ab834f89d1a89968b2dc59d7a1b258e12a9421b6080c8f09f94e8e9301e9f`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-092`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-highest-weight-classification-for-a-compact-connected-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `a2bb9f9ea7e3ced797ed7683360ee42471fe59a7792f878c2773ccdd32bf2e13`.
+- Exact issue: Fact [L2] asserted $Q\subseteq X^*(T)\subseteq P$ for an arbitrary compact connected group, although the cited lattice sandwich is semisimple and fails already for a torus.
+- Evidence read: the complete theorem; the semisimple lattice-sandwich statement; the finite central product cover; and torus character differentiation.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `32cfa5f976138fb01c530d8e4f676d84579d3dfc10eb76c8524e64a967a588e5`.
+- Repair: restricted the sandwich fact to compact semisimple groups and, in the converse construction, pulled $\lambda$ to $Z(G)^0\times T_{sc}$, where its $T_{sc}$ component is an actual character and hence lies in $P$ because the derived factor is simply connected semisimple. Regenerated item and aggregate contracts.
+- Post-edit guard: `6e1e238a68e90a68222e368320467de2648bea33e19cc89714c808946f226195`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-093`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-structure-of-a-compact-connected-abelian-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `b61e03a9863596bf1f252ccfb3284d90b3edcb6274288b65eff56ca010cb2b0a`.
+- Exact issue: [A1] claimed that the Axiom of Choice entered through [L5] and through selecting a basis of a finite-rank lattice, but [L5] is only compactness of continuous images and the displayed minimal-norm induction is finite-dimensional and choice-free.
+- Evidence read: the complete theorem, its explicit lattice-basis induction, and the compact-image supplier.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `4114e8822d99218169ed6540d317ed9c30b3ea87443194a81c2d9a466e4ce466`.
+- Repair: removed the false choice hypothesis, dependency, accounting fact, and final use tag; the constructive finite-dimensional proof is otherwise unchanged. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `db112cb255e2402a563a7c3eec0c888ece76a8760d0019cb3eaa443cc50ed53e`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-094`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. The two Step-6 warnings about [L3]'s circle supplier are independently nonfatal presentation gaps: the item uses only the standard finite-product quotient identification, which is immediate from the displayed quotient Lie-group structure, and no statement or computation depends on the supplier asserting smoothness verbatim.
+
+### `ex-root-systems-a-two-b-two-and-g-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `4aae028607fc274f86086931416a72970c831278483b5303f66c1929d9d11b5c`.
+- Exact issue: step 1.2 called the orthogonal pair $(e_1,e_2)$ a $B_2$ simple base and assigned it the non-diagonal Cartan matrix; its off-diagonal Cartan integers are actually zero.
+- Evidence read: the complete example; the exact root-system and Cartan-matrix definitions; the repaired rank-two classification; the explicit classical coordinate models; and Etingof, Theorem 21.10 and its rank-two diagram.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `b9d5b6d15093ffe70f1ea1120b3977659442e54b48fbe3ba78585584f1fb9c47`.
+- Repair: replaced the false $B_2$ base by $(e_1-e_2,e_2)$ and computed its matrix; made the $A_2$ obtuse simple pair explicit; fully verified the $G_2$ reflection orbits, reducedness, integrality, and base; and replaced the overbroad existence citation with exact definition interfaces. Synchronized the Batch-11 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `73256c53bcf85a6e34bffc6d2cc28efbf8e7b04f185340fd6d31ddcb24828f76`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-059`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `thm-existence-theorem-for-complex-semisimple-lie-algebras`.
+
+### `thm-existence-theorem-for-complex-semisimple-lie-algebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `551f18a526bf8ffd0cfedf3e57d7eedd6317ad2724257f0e19ce440a1f683b82`.
+- Exact issue: Fact [L2] changed the Serre theorem's conditional simplicity clause into the stronger claim that every “irreducible finite-type” matrix gives a simple algebra, instead of retaining the supplied hypothesis that the matrix comes from an irreducible root-system component.
+- Evidence read: the complete theorem; the exact Serre theorem Statement; the unique component decomposition; the positive-system and simple-root-basis interfaces; the same-Cartan-matrix isomorphism theorem; and the library convention that the zero algebra is semisimple but not simple.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `f57b2a87baa162434d4a243ba9d2b945b9f756485aa263d7406c8c4347963251`.
+- Repair: restored the exact Serre simplicity hypothesis and applied it only to actual component Cartan matrices; inserted the required same-Cartan-matrix isomorphisms rather than identifying root systems literally; supplied the construction of component bases; removed the unrelated classified-model existence dependency; and handled the empty root system explicitly, whose irreducibility under the library definition does not permit the zero algebra to be called simple. Synchronized the Batch-11 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `16e0407ebee46a26f131ba0d8b74e175730dc09c101d849f13191db64e4bce11`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-060`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `fs-every-finite-reflection-invariant-set-of-vectors-is-a-crystallographic-root-system`.
+
+### `fs-every-finite-reflection-invariant-set-of-vectors-is-a-crystallographic-root-system`
+
+- Rejection tuple: `gpt-5.6-terra` / `80d4d895a155696584a2a8cbef13f007108118c77a4a58a7bb450c2e2ebebe2e`.
+- Exact issue: step 1.2 misidentified $s_\alpha$ as reflection in the root line $\mathbb R\alpha$, whereas the library defines it as reflection in $\alpha^\perp$; the cited pentagon symmetry therefore did not prove the required reflection invariance.
+- Evidence read: the complete counterexample; the exact reduced crystallographic root-system definition; and Knapp's discussion of the noncrystallographic dihedral systems.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `9a70208b7188130822c7830303d85531be6bcfc02f58317f34ba9cbe232abfbd`.
+- Repair: parametrized the ten roots by angles $m\pi/5$ and computed that reflection in the perpendicular line sends $n\pi/5$ to $(2m+5-n)\pi/5$, proving closure under the library's actual reflection; also made the elementary nonintegrality contradiction exhaustive. Synchronized the Batch-11 manifest and regenerated item and aggregate contracts.
+- Post-edit guard: `4fbafe1c8a557fb4974167adcf90d6dfa8ca9745dc04d28ad427b747d32e29ab`.
+- Focused checks: counterexample precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-061`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `ex-serre-relations-for-a-two-recover-sl-three`.
+
+### `ex-serre-relations-for-a-two-recover-sl-three`
+
+- Rejection tuple: `gpt-5.6-terra` / `c71455da842c490e6aa1ceb8948d76324a0c37bac23b3cb8b6aac7b15d9d0db3`.
+- Exact issue: step 2.1 asserted $[E_{23},E_{12}]=0$, but matrix multiplication gives $[E_{23},E_{12}]=-E_{13}$.
+- Evidence read: the complete example; the exact Serre presentation definition and theorem; the matrix definition of $\mathfrak{sl}_3$; and the earlier published complete $A_2$ matrix calculation.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `d2ebb7ee5aac0108c6f978214853e28f7041b799d13dfcf4eca5bdf0863004df`.
+- Repair: corrected the commutator; checked all four positive and negative quadratic Serre relations rather than only two; made the six off-diagonal generators and two diagonal basis elements explicit; and proved injectivity internally from the three-dimensional bounds on each Serre half and the triangular decomposition, removing an inflated dimension claim and the irrelevant $\mathfrak{sl}_2$ dependency. Synchronized the Batch-11 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `6370e9a64be18a948c8cc0cfdb37953a809119a70f366df54dedfe12ec745e9f`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-062`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `thm-root-string-property`.
+
+### `thm-root-string-property`
+
+- Rejection tuple: `gpt-5.6-terra` / `78d369326c5ebe9abf25876e13a3cf71d548a79d5a623cee00d2f210009a2b20`.
+- Exact issue: step 1.1 called the $k=-1$ summand $\mathfrak g_{-\alpha}$ and invoked the opposite-root bracket, but that summand is $\mathfrak g_{\beta-\alpha}$ in general; the stated stability argument was therefore false outside the special case $\beta=0$.
+- Evidence read: the complete theorem; the general bracket-of-weight-spaces proposition including the zero weight; the exact root-space decomposition; the root $\mathfrak{sl}_2$ triple; and the finite-dimensional $\mathfrak{sl}_2$ classification.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `6eb39d1ad0e41c3e6eec6083d4ec28700202e4cc6aec3a3ba371c69f5d3b9a0b`.
+- Repair: proved stability uniformly from $[\mathfrak g_\gamma,\mathfrak g_\delta]\subseteq\mathfrak g_{\gamma+\delta}$, including targets equal to $\mathfrak g_0$; removed the inapplicable opposite-root dependency; computed each irreducible summand's interval by general endpoints instead of assuming every summand contains index zero; and used that the union is a nested concentric interval containing the actual $k=0$ summand. Synchronized the Batch-11 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `d0c2ac98fd2b42aa30ca979c333e0729c47fda7bc0ac59fa21fbec1f59b0a0d7`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-11 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-063`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `lem-simple-reflections-preserve-weight-multiplicities`.
+
+### `lem-simple-reflections-preserve-weight-multiplicities`
+
+- Rejection tuple: `gpt-5.6-terra` / `1ff9c8d03633a64e877dcafcc55fbb88283507f3171b84164c2a17eca97e7ff5`.
+- Exact issue: step 3.1 used $f_\alpha^q$ even when $q<0$, and step 2.1 incorrectly asserted that every $h_\alpha$-eigenvector in an arbitrary irreducible summand of the restricted $\mathfrak{sl}_2$-module is automatically a simultaneous $\mathfrak h$-weight vector.
+- Evidence read: the complete lemma; the root $\mathfrak{sl}_2$ triple; the finite-dimensional $\mathfrak{sl}_2$ classification; the exact weight-space definition; the Lie-theoretic and abstract reflection identifications; and Kirillov §8.1.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `e742e5432e6e3d83c48811cb3ecfc85969a6cc466452cec893bf8077f69f66fb`.
+- Repair: replaced the invalid summandwise argument by the standard invertible operator $N_\alpha=\exp(\rho(e_\alpha))\exp(-\rho(f_\alpha))\exp(\rho(e_\alpha))$; computed its conjugation action $H\mapsto H-\alpha(H)h_\alpha$ on the Cartan; used it to give an actual isomorphism $V_\mu\to V_{s_\alpha\mu}$ for every functional, including zero spaces; and removed dependencies used only by the defective decomposition argument. Synchronized the Batch-12 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `06e3cc7c91abec5c1fd1c7a77ae04db2b7581ca473af7be9a01a03ca54707ccd`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-064`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is `prop-root-vectors-shift-weight-spaces`.
+
+### `prop-root-vectors-shift-weight-spaces`
+
+- Rejection tuple: `gpt-5.6-terra` / `a434f92dbf19d201c890ea96b610e37c7bb5378b9fc218fc7300abed00048917`.
+- Exact issue: Fact [A1] claimed that the Axiom of Choice entered through the cited root-space definition, but that supplier merely defines the eigenspaces and uses no choice; the one-line representation calculation is choice-free as well.
+- Evidence read: the complete proposition, the exact representation identity, and the cited root/root-space definition.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `819bdeab0a9837c8353d9fcd04c6929ab85dc0bb59ba808741c7b107168cb347`.
+- Repair: removed the false choice hypothesis, dependency, fact, and proof tag while leaving the direct calculation unchanged. Synchronized the Batch-12 manifest, regenerated item and aggregate contracts, and refreshed the frontier ledger.
+- Post-edit guard: `5252e75f145311a60220346315ff65680b05770755b600adfd8340d71f407ad0`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-065`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-weyl-character-formula-for-compact-connected-lie-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `97fd9efc421cc89cde52261c9b7765dfbc00e171f12335bdc49fc0b0321f5734`.
+- Exact issue: the theorem chose an arbitrary maximal torus $\widetilde T$ in the finite central cover and then evaluated lifted weights on lifts of elements of the specified torus $T$, although no compatibility $p(\widetilde T)=T$ had been imposed.
+- Evidence read: the complete theorem; the element-in-a-maximal-torus and conjugacy theorems; and the finite central product cover used by the proof.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `6560c0d05f0bbc8f02c6b798cb5f3f6a183d2737e8586d2e4e47a7f5eb35f98f`.
+- Repair: defined $\widetilde T=(p^{-1}T)^0$; proved it is a maximal torus, that every central kernel element lies in it, and hence that $p|_{\widetilde T}:\widetilde T\to T$ is surjective with the full finite kernel; then made the regular-element lift explicit before evaluating the denominator formula. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `681d5608b00e95c4c7923c051077dcf957e7bbcc98c1392dace036d61976ad9b`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-095`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `thm-compact-group-weyl-group-is-finite`
+
+- Rejection tuple: `gpt-5.6-terra` / `e39aa5727e993d1f7a899b01ffb9ba784b6abf33e641907ae2e6829cb88a6b96`.
+- Exact issue: Fact [L4] attributed the normal-quotient Lie-group structure, its quotient Lie algebra, and the exponential characterization of a closed subgroup's Lie algebra to the quotient-manifold theorem, whose statement supplies only the manifold, submersion, action, and dimension.
+- Evidence read: the complete item; the quotient-manifold theorem; the exact closed-normal-subgroup quotient theorem; and the construction in Cartan's closed-subgroup theorem.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `5de4332f3354a2611e39590f2e8f8a4871f1d9602ef958e254a6d77af756b197`.
+- Repair: replaced the overclaimed quotient-manifold dependency by the exact closed-normal-subgroup theorem for the Lie-group and quotient-Lie-algebra assertions, and separately cited the explicit exponential construction in the already-required closed-subgroup theorem. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `e8d4732916bb529bede938431e9071c570211962e577ecd123f35737e0090035`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-096`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the next unadjudicated targeted rejection in the authoritative ledger.
+
+### `prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t`
+
+- Rejection tuple: `gpt-5.6-terra` / `b7655f8c46bd87c123eb0f2c8fc5de315fc6339a7ea14a246b99d65168fe39af`.
+- Exact issue: Fact [L3] attributed real-linearity of continuous additive maps to the character/cocharacter definition, which states only the circle-to-circle classification; step 1.1 depended essentially on the absent assertion.
+- Evidence read: the complete proposition, the exact character/cocharacter definition, and the torus quotient/lattice structure theorem.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `65be41bcbab49e99fe719611825b9113b5c4e61f1c6aa13e3c598c1746a36224`.
+- Repair: proved directly, via a local continuous argument and the local Cauchy equation, that every continuous homomorphism from a finite-dimensional real vector space to $S^1$ is the exponential of a unique real-linear functional; used lattice coordinates to derive the cocharacter formula from the actually supplied circle classification; and corrected the converse's complex domain and its $S^1$-valuedness argument. Regenerated item and aggregate contracts.
+- Post-edit guard: `05a42fee7aac85cef28e690b670ae9ab8927697cf866bb305b3b4b43e6e3e722`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-097`, exact-linked to the rejection tuple and pre-edit guard.
+- Unresolved obligations: none for this item. Next action is the last unadjudicated targeted rejection, `thm-peter-weyl-for-compact-lie-groups`.
+
+### `thm-peter-weyl-for-compact-lie-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `d6cf860b4a0beb3500232269569257fe8cf6db25a38f3923a6600a3d0f1cec95`.
+- Exact issue: step 8.1 identified the fixed-column coefficient space $V_j(\pi)$ with $\pi$ under the library's left regular action, but the displayed transformation matrix is that of the contragredient $\pi^*$; already for $G=U(1)$ and $\pi(z)=z$, left translation acts on the function $z$ by $x^{-1}$.
+- Evidence read: the complete theorem; the fixed left/right regular-action convention; the matrix-coefficient convention; the exact contragredient definition; both Hilbert-space suppliers implicated by the Step-6 warning; and Schur orthogonality.
+- Decision: `confirmed_fatal` (`logic`) against pre-edit guard `4b87bf6982182e3295eefb4f6952fc102a4a2169c68a9e9ee14e4b2af7c6c936`.
+- Repair: computed the left translation formula as the contragredient action, showed $V_j(\rho)\cong\rho^*$, and identified the $\pi$-isotypic summand as $\bigoplus_{j=1}^{d_\pi}V_j(\pi^*)$. The same edit repaired the independently fatal reader-warning citation in [L5] by assigning Fourier convergence to its actual supplier and orthogonal-complement existence to the exact closed-subspace decomposition theorem. Synchronized the Batch-12 manifest, regenerated contracts, and refreshed the frontier ledger.
+- Post-edit guard: `4b5d783b9919cd14e3ab388795e248be04e07a96f9e1d885967b85f726f5ff0b`.
+- Focused checks: direct item precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append targets `phase-2-remaining-27-step7-a-098` for the targeted rejection and `phase-2-remaining-27-step7-a-099` for reader warning `s8a-32a5894c99c2e337c193ecbd`, both bound to the same guarded edit.
+- Unresolved obligations: none for this item. The duplicate warning `s8a-912c4448ec9268d07012201a` records the same citation defect and requires no second repair.
+
+### `cex-a-nondominant-integral-verma-quotient-that-is-infinite-dimensional`
+
+- Rejection tuple: `gpt-5.6-terra` / `76a57f1ce746158ce25f48e4901fd2f9da4a6a0ea515268ae527f63b35e0b6f9`.
+- Decision: `confirmed_fatal` (`dependency_citation`) against pre-edit guard `360d1f24fd451bd6f60cca282c67e687d31187a1dd8481d0397dc7cd0a8761fb`.
+- Exact issue and repair: [L2] attributed simplicity to the cited example's statement although that statement only supplies the infinite PBW basis and finite-quotient criterion. Simplicity was irrelevant to the counterexample, so the repair retains only the exactly supplied infinite-dimensionality claim and removes the unsupported surplus conclusion.
+- Post-edit guard: `8685eee8a01354b75403715942ef9c42f880fec8733c6e664799dff915e06c52`.
+- Focused checks: counterexample precheck, rendercheck, and strict Batch-12 proof-contract check all passed.
+- Defect ledger: append target `phase-2-remaining-27-step7-a-100`.
+
+### `cex-irrational-flow-on-a-symplectic-torus-is-symplectic-but-not-hamiltonian`
+
+- Rejection tuple: `gpt-5.6-terra` / `0cb39ad5773fe7c322aae5c501eac7f3ff4aa40fefbcf65583c008695897b495`; decision `confirmed_fatal` (`dependency_citation`) at guard `be7dd05003bc7c1ca02d23d58abbd0b34a064a80fa8a271c1e35d926469a6081`.
+- Repair: replaced the merely topological torus definition as supplier for $dx,dy,dx\wedge dy$ by the published smooth two-torus example that states those quotient-coordinate facts; retained the exact period obstruction. Post-guard `a1cd0fd8c0c3ae0c6aea11d843cba2dc4a6c6189a4a05d4a5997c86f44ef30ab`; Batch-13 precheck, rendercheck, and strict contract check passed; defect `phase-2-remaining-27-step7-a-101`.
+
+### `cex-su-two-and-so-three-share-a-root-system-but-are-not-isomorphic`
+
+- Rejection tuple: `gpt-5.6-terra` / `99768d680ec6ded7d92e0cdb7d927e4f69990ca68c3373a05ec97cb5967c5ce6`; decision `confirmed_fatal` (`dependency_citation`) at guard `f3dea8a454b9637e0366f5e30b49dd571bf222ccf43cfb79a2ceab389141fa29`.
+- Repair: proved $Z(SU(2))=\{\pm I\}$ and $Z(SO(3))=\{I\}$ by explicit commuting-matrix calculations and proved algebraically that an isomorphism preserves the centre, instead of attributing those facts to the character-lattice example. Post-guard `3a2e7b7dc5512b68620edc32992a9b104f63fd464c52a4c81917ed851da07dfe`; Batch-12 checks passed; defect `phase-2-remaining-27-step7-a-102`.
+
+### `cor-complete-reducibility-for-compact-lie-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `a48cd253ceea89d548060985ccd37e3b6f3ded332d8f563bd53aa957ddbce3ec`; decision `confirmed_fatal` (`dependency_citation`) at guard `59bc4fbd040759f63035a80b0eaca8e54a115c568db54debe997d489ddb6f3d9`.
+- Repair: replaced the inner-product definition's inflated attribution with the exact finite-dimensional orthogonal-decomposition and dimension corollaries, while stating the empty-sum convention directly. Post-guard `c639bbf8006cd3e9f7cd970acbe836cb9214fe55ddbbfb899d5f75b82decc729`; Batch-12 checks passed; defect `phase-2-remaining-27-step7-a-103`. This is the exact repair independently identified by warning `s8a-4454bbe082772fc44e0e7520`.
+
+### `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus`
+
+- Rejection tuple: `gpt-5.6-terra` / `7e4fecff4df3cb3014c2f929760d94621397e8c68732c4ae4f094438dd2a769b`; decision `confirmed_fatal` (`dependency_citation`) at guard `85dfffb060c69d2e9c1db786cefec9d5df3f3163979c4be215c769b6e6f4f22e`.
+- Repair: corrected the Choice audit to record that AC supplies the countable choice assumed by Cartan's closed-subgroup theorem as well as the maximal-torus structure theory. Post-guard `0124b0ae219809207166bd3243fdd3ccfb71987f144a90c6274675913b747f6a`; Batch-12 precheck, rendercheck and strict contract check passed; defect `phase-2-remaining-27-step7-a-104`.
+
+### `cor-every-compact-lie-group-is-isomorphic-to-a-closed-matrix-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `cb6de8e901ff03e4addafc7e424e3743b9e1fb88537f1ab922cb632ef5c77dba`; decision `confirmed_fatal` (`dependency_citation`) at guard `82d3155bb8614bf03c29d22ee1cdeaaac91eee20ec3205a6f1d0a6e89622cd74`.
+- Repair: after proving the faithful image closed, gave it the closed-subgroup Lie structure, used automatic smoothness for the corestriction, proved its identity differential invertible from exponential naturality and dimension invariance, and used local inverses to prove the global inverse smooth. Post-guard `ffb2fb0b7a051002173289dcf22dfc54e6352ed188a536d1875118b3ba821a01`; Batch-12 focused checks passed; defect `phase-2-remaining-27-step7-a-105`.
+
+### `cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `29bd7fe2a2dabcf5e446063b14cce067c85aaf4538ba65e2dda53f52b82105fa`; decision `confirmed_fatal` (`dependency_citation`) at guard `1116aec89489ab6f95acb3006e52d92e88aea6f64f966330e1c8bc48bc3282a9`.
+- Repair: replaced the unrelated $L^p$-density citation by the exact compact-Hausdorff Urysohn separation corollary and recorded that AC supplies its dependent-choice hypothesis. Post-guard `1eca3c201eb986a5731cd455570709efae73c39e92c4b71a31dc98c90290e6ff`; Batch-12 focused checks passed; defect `phase-2-remaining-27-step7-a-106`.
+
+### `cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `03957051092b8f5abf9eb179886b7d209e90eea12206c45c5a0769213ade7d27`; decision `confirmed_fatal` (`logic`) at guard `e14baf65b7c4486103a8c9fc054031573dcdf14e82bb1be1059e5a024d77cea`.
+- Repair: replaced the ill-typed expression $f*T_{k_n}$ by a direct Cauchy--Schwarz comparison of the well-defined operators $T_p f$ and $T_{k_n}f$, then expanded $T_p f$ into contragredient matrix coefficients. Post-guard `bcd2894f29cd7851cddc24a058be599a18b94dba5679283817d7de5ddd7e880e`; Batch-12 focused checks passed; defect `phase-2-remaining-27-step7-a-107`.
+
+### `cor-maximal-compact-subgroups-exist-and-are-conjugate-in-a-connected-finite-center-semisimple-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `2642d81e7ed1cb8a61ce5ef3abd35da40866caaeb80582419fa48cb12ad8c74d`; decision `confirmed_fatal` (`dependency_citation`) at guard `074ed425a19595762a4de7c86793a082e3920e25cb2f8f36e58e47e75cb149af`.
+- Repair: no longer calls $(G,K)$ itself noncompact type when compact ideals may occur; instead it uses the definition's compact-ideal splitting and applies the symmetric-space interfaces to the effective pair, whose compact factors act trivially on the unchanged quotient. Post-guard `d2bda571a7f0fde4476a77a320d7314f1ebb213ccdcc80b59f8f6f09bbed4d06`; item precheck and rendercheck passed (this carrier is absent from the batch proof-contract scope); defect `phase-2-remaining-27-step7-a-108`.
+
+### `cor-rank-of-a-compact-connected-lie-group-is-well-defined`
+
+- Rejection tuple: `gpt-5.6-terra` / `89b9f62ee36eb50d817df6a49a6b63ee9bf8a171ab3f49ddd4b232fb09ed796b`; decision `confirmed_fatal` (`dependency_citation`) at guard `0fa9aa5d47189399117e0c3ebe6345c8c1bbb36fb27a0e619bf7a8cb900ec063`.
+- Repair: added the maximal-torus existence theorem, chose a reference maximal torus, and then used conjugacy to prove every maximal torus has its dimension, eliminating the vacuous-existence gap. Post-guard `bd3fb89fd25427c9d53f0849047d3bc88cb2e01fe60e141ff96cac84c1b947ca`; Batch-12 focused checks passed; defect `phase-2-remaining-27-step7-a-109`.
+
+### `cor-representation-ring-has-the-dominant-character-basis`
+
+- Rejection tuple: `gpt-5.6-terra` / `351ff471f399da3b0aad3548b8d81ab9494a5d14db3b23ed5f398c8e6a3e8395`; decision `confirmed_fatal` (`dependency_citation`) at guard `46f6c06f8dc9fb33596ee4fddca415a377f4f08f66d24ba5686dd8105dfa68e5`.
+- Repair: stopped attributing integral group-ring membership to the Weyl quotient formula. The proof now obtains a finite $T$-weight decomposition by unitarity and simultaneous diagonalization, proves Weyl invariance from the normalizer action, and proves injectivity using conjugacy into $T$. Post-guard `7f15c44242287486bf0ae849757ecd7d164b0353d34e92c1fd8100b118ac69d8`; Batch-12 precheck, rendercheck, and strict contract check passed; defect `phase-2-remaining-27-step7-a-110`.
+
+### `cor-zero-level-symplectic-reduction-and-dimension-formula`
+
+- Rejection tuple: `gpt-5.6-terra` / `2a3845cb3ba97bfc2f6d3129b24c94350d2465a2346bd16136368f002e572623`; decision `confirmed_fatal` (`logic`) at guard `d8f4cae50f04b526edcb0ebb76e8e0cc08cfd40cbf00d4e97d964777407caf73`.
+- Repair: added the necessary nonempty-level hypothesis, because regularity is vacuous on an empty fiber while the original conclusion asserted a numerical manifold dimension. Post-guard `8556650bb35bb70b2fc4e3c370936e477f9275300012685baa10237c5d3ac999`; Batch-13 checks passed; defect `phase-2-remaining-27-step7-a-111`.
+
+### `def-character-and-cocharacter-lattices-of-a-torus`
+
+- Rejection tuple: `gpt-5.6-terra` / `0259c6885e7fa5fa28b4580434fb38cfcd4abaa946d08dfe9f3fd7b0286a3d8d`; decision `confirmed_fatal` (`logic`) at guard `29e9a409ee4cef8bb5bcb2e6f1772cd1d90db78d272c3a6b859aaf6cdf1d41a4`.
+- Repair: corrected the ill-typed inverse of a character to the map $t\mapsto\chi(t)^{-1}$ on $T$ and stated the cocharacter inverse separately. Post-guard `724ac37ad9fe7a07b6ee61ad9b0904f1de1c875c0b1524f0727e44a4688d2128`; definition precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-112`.
+
+### `def-coadjoint-representation-of-a-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `841ba6a99018430c2ddbcfcf2bcf95ec016b7161ee6757c1ec37f5e6c579e661`; decision `confirmed_fatal` (`logic`) at guard `0a987d49d280c1f8965d7c370ced028d6de27e1b7d2e3b5946951b4c4d8373c6`.
+- Repair: replaced the false “inverse transpose” relation by the correct statement that the matrix of $\operatorname{Ad}^*_g$ is the transpose of the matrix of $\operatorname{Ad}_{g^{-1}}$. Post-guard `378a18f3765756a96d559f016cbbe5bcb0fa57c6ffc9d72995f3f7830f0ebaf0`; definition checks passed; defect `phase-2-remaining-27-step7-a-113`.
+
+### `def-continuous-and-unitary-representation-of-a-compact-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `5b0e9915a8995e864625bb61b79caca05fbe73853b5ea53cd90ec0b847db5559`; decision `confirmed_fatal` (`logic`) at guard `91f6d48e85dc003146d6fb4193ce1bb74d6e6731ebe98699dbfbb21dc2247d09`.
+- Repair: changed the Hilbert-space representation codomain from the nongroup $\mathcal B(H)$ to the unitary group $U(H)$. Post-guard `1d1378f286818514d2bc7840c89867b96fe0adb02f1c23f4ca22e2981d73078d`; definition checks passed; defect `phase-2-remaining-27-step7-a-114`.
+
+### `def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `7b0258aaf781b2f25f33abcd26f8973e52afe2265b8103ea748be05d069611cb`; decision `confirmed_fatal` (`logic`) at guard `85343c63bb78fba062f9820e2ab57da94970308e9afbd92e268e7f3078fd734f`.
+- Repair: replaced the false reversed-kernel “equivalence” by the valid substitution $y=xu$, obtaining $T_kf(x)=\int k(u)f(xu)\,du$, and identified the extra inversion symmetry needed for the former formula. Post-guard `bceda7ba2632a7faed68efa77dc5f00b3aafde370bbe77ea3928b0f9e7506636`; definition checks passed; defect `phase-2-remaining-27-step7-a-115`.
+
+### `def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `c195c083e481837db431977b4715759777368989d8dbaa901a64540a61b1aace`; decision `confirmed_fatal` (`dependency_citation`) at guard `a1d8859e9635a52eb8ede2cdbb2d8f6948bfd012fd482b65e154162d5eee5a4a`.
+- Repair: supplied the missing strong-continuity proof from $C(G)$ density in $L^2$, uniform continuity on compact $G$, and translation isometries. Post-guard `9f7dc6f4d23cd70163ab9a9e55a7b51fb1a1b5dcddd77c2aedf5552f6c6dd3c1`; definition checks passed; defect `phase-2-remaining-27-step7-a-116`.
+
+### `def-maximal-split-abelian-subspace-and-real-rank`
+
+- Rejection tuple: `gpt-5.6-terra` / `65a38c643bacda5c00740e379c26c776790437a593e8c2e0e2478de355c20e80`; decision `confirmed_fatal` (`dependency_citation`) at guard `7593aae070728d7c49d441aa210ca3232d7e1fab77c19c651039e6d010fd74e1`.
+- Repair: added the AC scope and split off compact ideals, which lie in $\mathfrak k_0$ and do not alter $\mathfrak p_0$, before invoking conjugacy for the effective noncompact-type pair. Post-guard `bc2a62f64e30a5b4a33ecd79abb637a89258fc9a42506321936fa7ccfe705a92`; definition checks passed; defect `phase-2-remaining-27-step7-a-117`.
+
+### `def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra`
+
+- Rejection tuple: `gpt-5.6-terra` / `7ae8a7c70a90feafea33e2883e5e14067a15acaa9c47b72fb86f454ced385233`; decision `confirmed_fatal` (`logic`) at guard `19e5524063b49395fee9d5f66ac9dcb74215c890547632c3e0e394167d9bf64a`.
+- Repair: handled $\Phi^+=\varnothing$ before taking a maximum height; then $\mathfrak n^+=0$ is nilpotent. Post-guard `b202b94e539d65b167cf2b72717ff985be355dc3a445dff8abba28a30b8192d2`; definition checks passed; defect `phase-2-remaining-27-step7-a-118`.
+
+### `def-positive-restricted-roots-and-nilpotent-n-algebra`
+
+- Rejection tuple: `gpt-5.6-terra` / `8c6f11654162732414f254fdd67698978360671e624abaa29b92ef33725316aa`; decision `confirmed_fatal` (`dependency_citation`) at guard `a0902bb867cc5bf3e001bf0a30327315968fac3d3c0fa5495fd5a10e6635ea9e`.
+- Repair: added the AC hypothesis and exact axiom dependency required by the Iwasawa theorem whose nilpotency, solvability, and direct-sum conclusions the definition imports. Post-guard `bd3d968f8a2338cfbe808eaeede3f5745451d52b38fc8df23b5c85ef0d60288e`; definition checks passed; defect `phase-2-remaining-27-step7-a-119`.
+
+### `def-riemannian-symmetric-pair-of-noncompact-type`
+
+- Rejection tuple: `gpt-5.6-terra` / `d3690e0fee9cb79119897f0f0ccf7617b36133221c19cde5d194b5e5d03adf72`; decision `confirmed_fatal` (`logic`) at guard `32658a1fb5cbd8eaaa69e4e1d2101a4b13b42a9895e655f58b8848ff5febec85`.
+- Repair: restored the no-nonzero-compact-ideal condition in the Lie-algebra-level reformulation. Post-guard `b444bf39aaa16a5c3b19b967d37f366c19ec3ca527ed3f311adb5c30c28c0235`; definition checks passed; defect `phase-2-remaining-27-step7-a-120`.
+
+### `def-root-datum-of-a-compact-connected-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `197f87ab2aeccc8fa27e79444654daae74fffe42f25041359217fe741bde9e05`; decision `confirmed_fatal` (`logic`) at guard `29df9b75cd86b1a0f598c23e511765822ffb8e1b8db739302c11d99c0893b264`.
+- Repair: allowed empty finite root and coroot sets and recorded the torus datum $(X,\varnothing,X^\vee,\varnothing)$, so the definition now applies to every compact connected Lie group as claimed. Post-guard `c550f28abbb2b3ad380316b8a57e5aafce7653859cdc9440b2b1eabbc6503a76`; definition checks passed; defect `phase-2-remaining-27-step7-a-121`.
+
+### `def-roots-of-a-compact-connected-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `f9d497d4d5f9aa75a973346d164464ab421e2eae1e2a490426836e1035c6d9a3`; decision `confirmed_fatal` (`dependency_citation`) at guard `08c9c20c9fc4f3404e8deb4c819be2b2033c5e9e461847a071907f819d829c62`.
+- Repair: replaced the inapplicable semisimple-Lie-algebra weight supplier by unitarizability, spectral, and simultaneous-diagonalisation suppliers that prove the compact-torus character decomposition. Post-guard `9664d4da220b36ca42dc993c71304357b54c389fa25ed412f9f03e4849e978cb`; definition precheck and rendercheck passed, and all affected Batch-12 consumer contracts passed strict validation; defect `phase-2-remaining-27-step7-a-122`.
+
+### `def-satake-diagram`
+
+- Rejection tuple: `gpt-5.6-terra` / `2a82d22767b06352a7896ce25b32e53ba2462b45b967608d0c359ee4a45963c6`; decision `confirmed_fatal` (`logic`) at guard `2d74f662ad10fe3d0b01a0611812c6fc9906a62f7a2605a698459f860bea08ff`.
+- Repair: restricted change-of-base redecorations to realized diagrams retaining the split part and restriction map, while abstract diagrams are compared by decorated-data isomorphism. Post-guard `28c3bca8a17a1bae26d9366dafd922468a49d82f060e89842bd0d53426fd6310`; definition precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-123`.
+
+### `def-theta-stable-cartan-subalgebra-and-compact-split-parts`
+
+- Rejection tuple: `gpt-5.6-terra` / `d3a939ba5722f6cda1aac157387e60c9f4b63f26612a6b1fa7bceb02af520ada`; decision `confirmed_fatal` (`logic`) at guard `3a75b43c5dd6f23dd977b94bce19804cdcf609f76720fca8f2a1fc9ac4ef51ff`.
+- Repair: replaced the invalid signed-sum inference by invariance of the Killing-form inertia and Sylvester's law. Post-guard `731d767e3b5aa974c9454462e3c225061c38277ba8b9922eda4c9a6b8c6e848b`; definition precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-124`.
+
+### `def-torus-and-maximal-torus-in-a-compact-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `616b13eac21f227723931e5c2b4f367a0f3903b61fe7826984ffab27e4227860`; decision `confirmed_fatal` (`logic`) at guard `86bfd3629f1b7204201053787e599a04348835a9ba577e285b8718c257a3e000`.
+- Repair: corrected the p-adic integers from “connected” to totally disconnected. Post-guard `aeab4af90d782c2a021084e40c4d3a0ca793b432d9d2e094f91542d8a91dcc34`; definition precheck and rendercheck passed, and all affected Batch-12 consumer contracts passed strict validation; defect `phase-2-remaining-27-step7-a-125`.
+
+### `def-vogan-diagram`
+
+- Rejection tuple: `gpt-5.6-terra` / `895f676c0361e71fc6c687de60402f6be7dfe17dd1d5eba1713fa9a0b9a50166`; decision `confirmed_fatal` (`logic`) at guard `b76672c1813a7f852836fc1b11c56ee1dc634de7ac31d10b01203e1f5652dc18`.
+- Repair: removed the false reconstruction of all fixed-root signs from the fixed-simple-root painting and retained the full marking as abstract data. Post-guard `a79d359728964833c1bb383cc069d7c35f405f9bc3bc6c1473c9999ad5d64ce1`; definition precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-126`.
+
+### `def-weyl-group-of-a-compact-connected-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `2d59850b20aba48e1887d975c64be1384631ffba7e4bb9a038cec27807224b2f`; decision `confirmed_fatal` (`logic`) at guard `3ea681db86338454af1632107d2ac29040de93df17dfedb8d99e01aa83712123`.
+- Repair: corrected the representative-change computation to conjugation by $gt'$ and used commutativity in $T$. Post-guard `b9c9128957680afea4030c3511d687c51b761fc19f813a59c3c291ba3a4b0f99`; definition precheck and rendercheck passed, and all affected Batch-12 consumer contracts passed strict validation; defect `phase-2-remaining-27-step7-a-127`.
+
+### `ex-a-nonreduced-bc-root-system-from-a-real-form`
+
+- Rejection tuple: `gpt-5.6-terra` / `0eee91f29f39fb0e7920e8054dfd10ed4adb656caeea255d06473650387ad3a8`; decision `confirmed_fatal` (`logic`) at guard `73d2ac2dc7b57f661db65d2922ba66c8c1a6ef89fdf382153cf9887abba40869`.
+- Repair: added the missing trace-zero condition so the displayed algebra is $mathfrak{su}(p,q)$ rather than $mathfrak u(p,q)$. Post-guard `4cc77fb3b80ff93b64299ab3aaa59f0def5e31ae21094809074d9ebfd3547132`; direct precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-128`.
+
+### `ex-a-tensor-product-decomposition-for-sl-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `083c8d68e1623700cfdaef7b762aea536e5402f690a8ab4a1a1414d57dbc2ef2`; decision `confirmed_fatal` (`logic`) at guard `cffbdc1f4463c2a75de696c3b4cd7cacdd34c6d720e1537e4b294aeddf881b75`.
+- Repair: separated parity and support-zero cases and made the coefficient count nonnegative before the case comparison. Post-guard `fa7f7ffb7d0fefff4bda5f29a88ad3dcdb57ea299c212b2127c4050e813bae6e`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-129`.
+
+### `ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle`
+
+- Rejection tuple: `gpt-5.6-terra` / `fc096ac24e0d7ebf0f15a80c96def11bf65b111a11f6f61e444c22c42586c7ed`; decision `confirmed_fatal` (`dependency_citation`) at guard `4ad23252bec43c5c7a3c677e9231f70c07ff88c616e6e3a39ba759380a28d379`.
+- Repair: directly proved the hat-map bracket, trace pairing, adjoint rotation action, and coadjoint rotation action instead of attributing them to an insufficient example. Post-guard `de1ad058be1924bab5aae4f017a5f72e2bb96a3d89ed520eb8f31dcfe2a97dee`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-130`.
+
+### `ex-cartan-involution-and-k-plus-p-for-sl-n-r`
+
+- Rejection tuple: `gpt-5.6-terra` / `1ff4f0064d9bb65bbab1f857812f4bde36b1ad909784ac77036cc239cb98b333`; decision `confirmed_fatal` (`logic`) at guard `186a03b125ce9d899a1d2b3f902721ba691dc46a4987aac82440bd8e5f845445`.
+- Repair: corrected the endpoint discussion: the zero algebra $mathfrak{sl}_1(mathbb R)$ is semisimple, while $n\ge2$ selects the nonzero classical case. Post-guard `30a2cd9d8c1a3549cb567ba15faf1fcd00cbcb30ad696e5906144aacfb9c4ded`; direct precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-131`.
+
+### `ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map`
+
+- Rejection tuple: `gpt-5.6-terra` / `5b51552367eadd71a4df9a6652864e58c2b36aa6c4eca2f294be72138e24d1d5`; decision `confirmed_fatal` (`logic`) at guard `dc7800f1e501453e3d8001402455986d756db119d499b23b9c86d89fe92e68b7`.
+- Repair: typed the circle Lie algebra and its dual explicitly and verified the component equation for every Lie-algebra element, not only the unit generator. Post-guard `10b68dd9bbc5a94285924e877fe66c3b59c00f35edd2efd9e9973b63b38ee0a0`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-132`.
+
+### `ex-compact-and-split-cartan-subalgebras-of-sl-two-r`
+
+- Rejection tuple: `gpt-5.6-terra` / `9cd81c7b8b301d716109aebc3ee68b5f3b3f8c3554b00ce7128706b9679c2471`; decision `confirmed_fatal` (`logic`) at guard `0df8124667a63b1b20fda7f3b83a155f62f2eb9ce404baf4f75715338e8ef5d4`.
+- Repair: computed the actual normalizer condition $[X,H]\in\mathbb RH$ and its compact-line analogue rather than only the centralizers. Post-guard `43ea50817973b6bf81888c5ed9a4e9d178a873a04762a0334606f77838bc9e3b`; direct precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-133`.
+
+### `ex-compact-and-split-real-forms-of-sl-two-c`
+
+- Rejection tuple: `gpt-5.6-terra` / `87a1884615324900a43d9b849da8af1cf362dc4d4759fd726a3d26ef1f52688b`; decision `confirmed_fatal` (`dependency_citation`) at guard `6fdcf4d6623c383c0d5a7fd29b61a2206546c132a2cc1b07a67afb356d99e1fd`.
+- Repair: declared and registered $mathrm{AC}_\omega$, which the two matrix Lie-group suppliers assume, and recorded its exact use. Post-guard `058546f867cdc776b2203de423330be01007b87bd78bab6480afc12eedce3cd9`; direct precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-134`.
+
+### `ex-complex-projective-space-as-a-circle-symplectic-reduction`
+
+- Rejection tuple: `gpt-5.6-terra` / `d663293084e92810bed867e8b730889f560f3bddb26dc46373845645af9a2c27`; decision `confirmed_fatal` (`logic`) at guard `466be4db0e0f45de3dd3478cc077dd975383d193a8b3d77ca725d579e7c17c85`.
+- Repair: added $n\ge1$, excluding the empty positive-radius level in $mathbb C^0$. Post-guard `9f059fc10f14c3b1d5333b517f873efc0f2be8cd1728f69fcc571e70d2604bd9`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-135`.
+
+### `ex-complex-simple-lie-algebra-viewed-as-a-real-simple-algebra`
+
+- Rejection tuple: `gpt-5.6-terra` / `55556c4204416a10d3f6012d0862bf6b881fba0a6f4513f7d26ca0589554b55e`; decision `confirmed_fatal` (`logic`) at guard `96150765f63aabffeb0ebfab8ec29503c5477767b76e770c73eebb1ae57c810f`.
+- Repair: corrected the complex-dimension check for the complexification and its two-factor target from $d$ to $2d$. Post-guard `5d00ea99426390509123c594f9f7deeb2907d54608d9fde5e680f3837d18a0da`; direct precheck and rendercheck passed; defect `phase-2-remaining-27-step7-a-136`.
+
 ## Reader-warning dispositions
 
 - `s8a-504d6f91bba7d13a5818352d` — `covered_by_rejection` via the exact confirmed-fatal rejection of `prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra`; repaired sign identity and checked contract.
@@ -620,6 +1382,13 @@ This report is the task-authorized continuity record. Each completed item record
 - `s8a-8a04705b005451a70517e6fa` — `covered_by_rejection` via the exact confirmed-fatal rejection of `lem-killing-length-of-a-root-is-nonzero`; repaired the inherited sign and checked the contract.
 - `s8a-95c9c72fdb655c4bbe61b22b` — `covered_by_rejection` via the exact confirmed-fatal rejection of `ex-root-strings-in-type-a-two`; repaired the root-string indexing and checked the contract.
 - `s8a-ca3e35230c0f4eba4b54efcc` — `confirmed_fatal` independently of the targeted rejection: Statement (i) transposed all unequal-length Cartan pairs; repaired against guard `f5716626bd13ea94d1db8c9a4466c07f2169aac343cdb437f74eaeaffbd962cd`, yielding `ac3cf023bc6967575540c18bdc5cc502c68c1e0845b85b5eb041d8e6307ad2d8`.
+- `s8a-32a5894c99c2e337c193ecbd` — `confirmed_fatal` independently of the targeted Peter–Weyl rejection: [L5] attributed the nonzero-orthogonal-complement theorem to the Fourier-expansion supplier. The guarded Peter–Weyl edit added the exact orthogonal-decomposition dependency and separated the two claims.
+- `s8a-912c4448ec9268d07012201a` — `nonfatal` duplicate of `s8a-32a5894c99c2e337c193ecbd`; the one citation defect received one guarded repair and one defect row.
+- `s8a-957adcaa2f669c513daa2534` — `nonfatal`: the circle supplier omits the adjective “Lie,” but the proof uses only the explicit quotient Lie-group structure already displayed in the item; no claim or inference fails.
+- `s8a-86041504bf6d2fcc5e6f5825` — `nonfatal` duplicate of `s8a-957adcaa2f669c513daa2534`.
+- `s8a-0c4f5daa7b7ad293b0e3bfbd` — `nonfatal`: “abstract root system” is immediately qualified by the nonreduced conclusion and is not used as the library's defined reduced-root-system term; this is presentation only.
+- `s8a-6620c22509cb5bf85dd67ba3` — `not_defect`: this is explicitly a reading-depth disclosure and asserts no mathematical defect.
+- `s8a-4454bbe082772fc44e0e7520` — `covered_by_rejection` via the exact confirmed-fatal rejection of `cor-complete-reducibility-for-compact-lie-groups`; the repair installed the precise orthogonal-decomposition and dimension suppliers.
 
 ## Rejudge targets
 
@@ -673,6 +1442,90 @@ This report is the task-authorized continuity record. Each completed item record
 - `ex-root-system-a-one`
 - `ex-weyl-group-of-a-n-is-the-symmetric-group`
 - `prop-classical-types-correspond-to-sl-so-and-sp`
+- `fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic`
+- `prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras`
+- `ex-dynkin-diagram-duality-of-b-n-and-c-n`
+- `ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras`
+- `ex-classical-root-systems-in-euclidean-coordinates`
+- `fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras`
+- `ex-low-rank-dynkin-coincidences`
+- `ex-root-systems-a-two-b-two-and-g-two`
+- `thm-existence-theorem-for-complex-semisimple-lie-algebras`
+- `fs-every-finite-reflection-invariant-set-of-vectors-is-a-crystallographic-root-system`
+- `ex-serre-relations-for-a-two-recover-sl-three`
+- `thm-root-string-property`
+- `lem-simple-reflections-preserve-weight-multiplicities`
+- `prop-root-vectors-shift-weight-spaces`
+- `lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral`
+- `cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two`
+- `def-partial-order-on-weights`
+- `def-integral-dominant-and-strictly-dominant-weights`
+- `prop-root-systems-of-the-classical-complex-lie-algebras`
+- `def-dominant-integrable-highest-weight-cyclic-module`
+- `ex-positive-roots-and-highest-root-of-g-two`
+- `lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives`
+- `lem-integrability-relations-for-a-dominant-highest-weight`
+- `def-weyl-vector-rho`
+- `cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules`
+- `prop-finite-dimensional-representations-of-a-complex-semisimple-lie-algebra-decompose-into-weight-spaces`
+- `lem-simple-root-integrability-bounds-the-dominant-cyclic-module`
+- `lem-highest-weight-modules-have-weights-below-the-top-weight`
+- `ex-weyl-groups-of-b-n-and-d-n-as-signed-permutation-groups`
+- `prop-the-adjoint-representation-has-highest-weight-the-highest-root`
+- `ex-the-adjoint-representation-and-the-highest-root`
+- `ex-verma-modules-for-sl-two`
+- `cor-normalized-haar-measure-on-a-compact-lie-group`
+- `prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics`
+- `thm-conjugacy-of-maximal-tori`
+- `thm-schur-orthogonality-for-compact-lie-groups`
+- `thm-maximal-tori-exist-in-compact-lie-groups`
+- `thm-weyl-integration-formula`
+- `prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group`
+- `thm-compact-connected-lie-groups-are-classified-by-root-data`
+- `thm-analytic-and-root-system-weyl-groups-agree`
+- `thm-highest-weight-classification-for-a-compact-connected-lie-group`
+- `thm-structure-of-a-compact-connected-abelian-lie-group`
+- `thm-weyl-character-formula-for-compact-connected-lie-groups`
+- `thm-compact-group-weyl-group-is-finite`
+- `prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t`
+- `thm-peter-weyl-for-compact-lie-groups`
+- `cex-a-nondominant-integral-verma-quotient-that-is-infinite-dimensional`
+- `cex-irrational-flow-on-a-symplectic-torus-is-symplectic-but-not-hamiltonian`
+- `cex-su-two-and-so-three-share-a-root-system-but-are-not-isomorphic`
+- `cor-complete-reducibility-for-compact-lie-groups`
+- `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus`
+- `cor-every-compact-lie-group-is-isomorphic-to-a-closed-matrix-lie-group`
+- `cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group`
+- `cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group`
+- `cor-maximal-compact-subgroups-exist-and-are-conjugate-in-a-connected-finite-center-semisimple-lie-group`
+- `cor-rank-of-a-compact-connected-lie-group-is-well-defined`
+- `cor-representation-ring-has-the-dominant-character-basis`
+- `cor-zero-level-symplectic-reduction-and-dimension-formula`
+- `def-character-and-cocharacter-lattices-of-a-torus`
+- `def-coadjoint-representation-of-a-lie-group`
+- `def-continuous-and-unitary-representation-of-a-compact-lie-group`
+- `def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group`
+- `def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group`
+- `def-maximal-split-abelian-subspace-and-real-rank`
+- `def-positive-and-negative-nilpotent-subalgebras-and-borel-subalgebra`
+- `def-positive-restricted-roots-and-nilpotent-n-algebra`
+- `def-riemannian-symmetric-pair-of-noncompact-type`
+- `def-root-datum-of-a-compact-connected-lie-group`
+- `def-roots-of-a-compact-connected-lie-group`
+- `def-satake-diagram`
+- `def-theta-stable-cartan-subalgebra-and-compact-split-parts`
+- `def-torus-and-maximal-torus-in-a-compact-lie-group`
+- `def-vogan-diagram`
+- `def-weyl-group-of-a-compact-connected-lie-group`
+- `ex-a-nonreduced-bc-root-system-from-a-real-form`
+- `ex-a-tensor-product-decomposition-for-sl-two`
+- `ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle`
+- `ex-cartan-involution-and-k-plus-p-for-sl-n-r`
+- `ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map`
+- `ex-compact-and-split-cartan-subalgebras-of-sl-two-r`
+- `ex-compact-and-split-real-forms-of-sl-two-c`
+- `ex-complex-projective-space-as-a-circle-symplectic-reduction`
+- `ex-complex-simple-lie-algebra-viewed-as-a-real-simple-algebra`
 
 ## Sources consulted
 

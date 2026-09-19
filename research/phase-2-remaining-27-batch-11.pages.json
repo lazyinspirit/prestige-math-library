@@ -80,6 +80,10 @@
         "sources": {
           "references": [
             {
+              "title": "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II",
+              "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
+            },
+            {
               "title": "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19–24",
               "url": "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
             }
@@ -824,14 +828,13 @@
         "id": "thm-root-string-property",
         "kind": "theorem",
         "title": "Root-string property",
-        "statement": "For roots α,β with β not proportional to α, the roots β+kα form an unbroken string β-pα,…,β+qα and p-q=β(h_α)=2B(t_β,t_α)/B(t_α,t_α)∈Z.",
+        "statement": "For a root α and β either a root or zero, the nonzero spaces g_{β+kα} occur for an unbroken interval -p≤k≤q and satisfy p-q=β(h_α)∈Z.",
         "deps": [
-          "thm-root-sl-two-triple",
-          "def-coroot-of-a-lie-algebra-root",
-          "thm-finite-dimensional-representations-of-sl-two",
-          "prop-brackets-of-root-spaces",
-          "prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra",
-          "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
+        "thm-root-sl-two-triple",
+        "def-coroot-of-a-lie-algebra-root",
+        "thm-finite-dimensional-representations-of-sl-two",
+        "prop-brackets-of-root-spaces",
+        "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
           "def-special-linear-lie-algebra-sl-two"
         ],
@@ -850,7 +853,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-        "strategy": "Restrict the adjoint representation to the root sl₂. The sum of spaces g_{β+kα} is a finite-dimensional weight module, with h_α-weight β(h_α)+2k. The classified sl₂ strings are consecutive, symmetric about zero, and their endpoint difference gives p-q=β(h_α). Nonzero raising/lowering maps prevent gaps.",
+        "strategy": "Restrict the adjoint representation to the root sl₂. Each irreducible summand contributes a consecutive interval of indices centred at -β(h_α)/2; their union is a nested interval containing zero, and its endpoints give p-q=β(h_α).",
         "axiom_base": "ZFC"
       },
       {
@@ -1623,14 +1626,12 @@
         "statement": "The standard Cartans of so₅(C) and sp₄(C) yield coordinate root sets B₂={±e_i,±e_1±e_2} and C₂={±2e_i,±e_1±e_2}; after rescaling and swapping long and short roots these root systems are isomorphic.",
         "deps": [
           "thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system",
-          "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
           "def-cartan-subalgebra-of-a-lie-algebra",
           "def-normalizer-of-a-lie-subalgebra",
-          "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras",
-          "def-coroot-of-a-lie-algebra-root",
-          "prop-brackets-of-root-spaces",
-          "cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root"
+          "def-rank-and-isomorphism-of-root-systems",
+          "ex-classical-simple-lie-algebras-and-their-killing-forms",
+          "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1645,7 +1646,7 @@
           ]
         },
         "source_locators": [
-          "Lectures 19–24"
+          "Examples 20.12-20.14, printed pp. 110-111"
         ],
         "strategy": "Use diagonal blocks to compute the adjoint weights of the defining matrix entries, then give the explicit orthogonal similarity exchanging the two octagons.",
         "axiom_base": "ZFC"
@@ -2785,13 +2786,15 @@
         "id": "thm-existence-theorem-for-complex-semisimple-lie-algebras",
         "kind": "theorem",
         "title": "Existence theorem for complex semisimple Lie algebras",
-        "statement": "Every reduced crystallographic root system is the root system of a finite-dimensional complex semisimple Lie algebra; an irreducible root system yields a simple algebra.",
+        "statement": "Every reduced crystallographic root system is isomorphic to the root system of a finite-dimensional complex semisimple Lie algebra; a nonempty irreducible root system yields a simple algebra, while the empty system yields the zero algebra.",
         "deps": [
           "thm-serre-presentation-theorem",
           "prop-root-systems-decompose-uniquely-into-irreducible-components",
-          "thm-existence-of-each-classified-root-system",
-          "def-axiom-of-choice",
-          "def-reducible-and-irreducible-root-system"
+          "def-positive-system-and-base-of-simple-roots",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
+          "thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix",
+          "def-simple-semisimple-and-reductive-lie-algebras",
+          "def-axiom-of-choice"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2808,7 +2811,7 @@
         "source_locators": [
           "Chapter II"
         ],
-        "strategy": "Apply the Serre construction to the Cartan matrix of each irreducible component and take their direct sum. The theorem identifies the resulting root system. For connected A, any nonzero ideal has a weight component; root-string lowering reaches a simple root space and its opposite, hence all Chevalley generators, proving simplicity.",
+      "strategy": "Handle the empty system by the zero algebra. Otherwise choose component bases, apply the Serre construction to each component Cartan matrix, identify each resulting root system by its Cartan matrix, and take the direct sum.",
         "axiom_base": "ZFC"
       },
       {
@@ -2932,14 +2935,15 @@
         "id": "prop-root-systems-of-the-classical-complex-lie-algebras",
         "kind": "proposition",
         "title": "Root systems of the classical complex Lie algebras",
-        "statement": "With respect to the diagonal Cartan subalgebra h = C^n and the coordinate functionals e_i: the roots of sl_n(C) are the e_i - e_j with i != j; the roots of sp_{2n}(C) are the ±e_i ± e_j with i < j together with the ±2e_i; the roots of so_{2n}(C) are the ±e_i ± e_j with i < j; the roots of so_{2n+1}(C) are the ±e_i ± e_j with i < j together with the ±e_i. Each listed set is a reduced crystallographic Euclidean root system of type A_{n-1}, C_n, D_n, B_n respectively, and every root space is one-dimensional.",
+        "statement": "With respect to the diagonal Cartan subalgebra h and the coordinate functionals e_i, assume n >= 2 for sl_n(C) and so_{2n}(C), and n >= 1 for sp_{2n}(C) and so_{2n+1}(C). The roots of sl_n(C) are the e_i - e_j with i != j; the roots of sp_{2n}(C) are the ±e_i ± e_j with i < j together with the ±2e_i; the roots of so_{2n}(C) are the ±e_i ± e_j with i < j; the roots of so_{2n+1}(C) are the ±e_i ± e_j with i < j together with the ±e_i. Each listed set is a reduced crystallographic Euclidean root system of type A_{n-1}, C_n, D_n, B_n respectively, subject to the standard low-rank identifications, and every root space is one-dimensional.",
         "deps": [
           "def-classical-complex-matrix-lie-algebras",
           "prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras",
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-reduced-crystallographic-euclidean-root-system",
           "def-cartan-subalgebra-of-a-lie-algebra",
-          "thm-existence-of-each-classified-root-system"
+          "thm-existence-of-each-classified-root-system",
+          "ex-low-rank-dynkin-coincidences"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3068,7 +3072,7 @@
         "source_locators": [
           "Chapter II"
         ],
-        "strategy": "The vertices of a regular pentagon together with their negatives form the noncrystallographic dihedral root system I₂(5); adjacent Cartan products equal 4cos²(π/5), not an integer in {0,1,2,3}.",
+        "strategy": "Use the ten unit vectors at angles mπ/5. Reflection in the hyperplane perpendicular to any one of them preserves the angle set, while the Cartan integer 2cos(2π/5) is not integral.",
         "axiom_base": "ZF"
       },
       {
@@ -3166,8 +3170,7 @@
         "deps": [
           "thm-cartans-semisimplicity-criterion",
           "def-killing-form-of-a-finite-dimensional-lie-algebra",
-          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
-          "thm-existence-of-each-classified-root-system",
+          "ex-cartan-subalgebra-and-roots-of-sl-two",
           "ex-classical-simple-lie-algebras-and-their-killing-forms"
         ],
         "provenance": {
@@ -3177,13 +3180,18 @@
         "sources": {
           "references": [
             {
-              "title": "J. S. Milne, Lie Algebras, Algebraic Groups, and Lie Groups",
-              "url": "https://www.jmilne.org/math/CourseNotes/LAG.pdf"
+              "title": "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II",
+              "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
+            },
+            {
+              "title": "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I",
+              "url": "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
             }
           ]
         },
         "source_locators": [
-          "relevant sections"
+          "Knapp Chapter II, §11, printed p. 203; Chapter VI",
+          "Etingof Lecture 20, real forms of sl_2"
         ],
         "strategy": "The nonisomorphic real algebras sl₂(R) and su(2), distinguished by Killing-form signature, have the same A₁ complexification.",
         "axiom_base": "ZF"
@@ -3196,8 +3204,7 @@
         "deps": [
           "ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups",
           "def-countable-choice",
-          "fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras",
-          "thm-existence-of-each-classified-root-system"
+          "ex-cartan-subalgebra-and-roots-of-sl-two"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3206,24 +3213,29 @@
         "sources": {
           "references": [
             {
-              "title": "J. S. Milne, Lie Algebras, Algebraic Groups, and Lie Groups",
-              "url": "https://www.jmilne.org/math/CourseNotes/LAG.pdf"
+              "title": "Kirillov, An Introduction to Lie Groups and Lie Algebras, SU(2) and SO(3)",
+              "url": "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
+            },
+            {
+              "title": "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I",
+              "url": "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
             }
           ]
         },
         "source_locators": [
-          "relevant sections"
+          "Kirillov Exercises 2.8-2.10 and §3.10, printed pp. 24-25 and 44-45",
+          "Etingof Lecture 20 and Exercise 3.9"
         ],
-        "strategy": "SL₂(C) and PGL₂(C) have Lie algebra sl₂(C) and diagram A₁, but their centers differ, so the groups are not isomorphic.",
+        "strategy": "Use the twofold cover SU(2) to SO(3), compute directly that su(2) complexifies to sl_2(C), and invoke the exact sl_2 root computation to identify the common A_1 diagram.",
         "axiom_base": "ZF + AC_omega"
       },
       {
         "id": "ex-classical-root-systems-in-euclidean-coordinates",
         "kind": "example",
         "title": "Classical root systems in coordinates",
-        "statement": "A_{n-1}={ε_i−ε_j}, B_n={±ε_i}∪{±ε_i±ε_j}, C_n={±2ε_i}∪{±ε_i±ε_j} and D_n={±ε_i±ε_j} are reduced crystallographic root systems with the standard simple roots and Dynkin diagrams, and they are the root systems of the classical matrix Lie algebras.",
+        "statement": "For n>=2, A_{n-1}={ε_i−ε_j}, B_n={±ε_i}∪{±ε_i±ε_j}, C_n={±2ε_i}∪{±ε_i±ε_j} and D_n={±ε_i±ε_j} are reduced crystallographic root systems with the standard simple roots and Dynkin diagrams, and they are the root systems of the classical matrix Lie algebras.",
         "deps": [
-          "thm-existence-of-each-classified-root-system",
+          "def-reduced-crystallographic-euclidean-root-system",
           "prop-root-systems-of-the-classical-complex-lie-algebras"
         ],
         "provenance": {
@@ -3253,7 +3265,7 @@
         "id": "ex-weyl-groups-of-b-n-and-d-n-as-signed-permutation-groups",
         "kind": "example",
         "title": "Weyl groups of B_n and D_n",
-        "statement": "W(B_n) is the full group of signed permutations of the coordinates, of order 2^n n!, and W(D_n) is the subgroup with an even number of sign changes, of order 2^{n−1} n!.",
+        "statement": "For n >= 1, W(B_n) is the full group of signed permutations of the coordinates, of order 2^n n!. For n >= 2, W(D_n) is the subgroup with an even number of sign changes, of order 2^{n−1} n!.",
         "deps": [
           "def-weyl-group-of-a-root-system",
           "ex-classical-root-systems-in-euclidean-coordinates"
@@ -3314,7 +3326,8 @@
           ]
         },
         "source_locators": [
-          "Lectures 19–24"
+          "Knapp Chapter II, (2.43) and (2.50), printed pp. 150 and 155",
+          "Etingof Lecture 21, Example 21.18"
         ],
         "strategy": "Check the single reflection swaps the roots and compute the Cartan integer.",
         "axiom_base": "ZF"
@@ -3323,10 +3336,11 @@
         "id": "ex-root-systems-a-two-b-two-and-g-two",
         "kind": "example",
         "title": "Rank-two systems A₂, B₂, and G₂",
-        "statement": "The regular 6-, 8-, and 12-root configurations realize A₂,B₂,G₂ with Cartan products 1,2,3.",
-        "deps": [
-          "thm-rank-two-root-system-classification",
-          "thm-existence-of-each-classified-root-system"
+      "statement": "Explicit planar 6-, 8-, and 12-root configurations realize A₂, B₂, and G₂ with Cartan products 1, 2, and 3.",
+      "deps": [
+        "def-reduced-crystallographic-euclidean-root-system",
+        "def-cartan-matrix-of-a-based-root-system",
+        "thm-rank-two-root-system-classification"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3406,7 +3420,7 @@
         "id": "ex-dynkin-diagram-duality-of-b-n-and-c-n",
         "kind": "example",
         "title": "Dynkin duality of Bₙ and Cₙ",
-        "statement": "The B_n and C_n diagrams have the same chain and opposite double-edge arrows; transposing the Cartan matrix exchanges them.",
+        "statement": "For n>=2, the B_n and C_n diagrams have the same chain and opposite double-edge arrows; transposing the Cartan matrix exchanges them.",
         "deps": [
           "prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types",
           "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
@@ -3426,7 +3440,7 @@
           ]
         },
         "source_locators": [
-          "Lectures 19–24"
+          "Lecture 21, Example 21.18; Lecture 23, Example 23.5"
         ],
         "strategy": "Compute the final two simple-root lengths and Cartan entries in the coordinate models; the arrow points to the shorter root.",
         "axiom_base": "ZF"
@@ -3436,12 +3450,10 @@
         "kind": "example",
         "title": "Low-rank Dynkin coincidences",
         "statement": "B₁=C₁=A₁, B₂=C₂, D₂=A₁⊔A₁, and D₃=A₃.",
-        "deps": [
-          "thm-classification-of-irreducible-reduced-crystallographic-root-systems",
-          "ex-classical-root-systems-in-euclidean-coordinates",
-          "prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types",
-          "ex-root-system-a-one",
-          "ex-dynkin-diagram-duality-of-b-n-and-c-n"
+      "deps": [
+        "ex-classical-root-systems-in-euclidean-coordinates",
+        "ex-root-system-a-one",
+        "ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3458,7 +3470,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-        "strategy": "Give explicit changes of orthonormal coordinates and compare the resulting root sets and diagrams.",
+      "strategy": "Identify the rank-one systems and B₂/C₂ by explicit similarities, then compute the D₂ decomposition and the D₃ Cartan graph from coordinate roots.",
         "axiom_base": "ZF"
       },
       {
@@ -3467,10 +3479,9 @@
         "title": "Serre relations for A₂ recover sl₃",
         "statement": "For A=[[2,-1],[-1,2]], the Serre generators map to E₁₂,E₂₃,E₂₁,E₃₂ and diagonal coroots in sl₃, yielding an isomorphism.",
         "deps": [
-          "thm-serre-presentation-theorem",
-          "def-serre-lie-algebra-of-a-finite-type-cartan-matrix",
-          "def-classical-complex-matrix-lie-algebras",
-          "def-special-linear-lie-algebra-sl-two"
+        "thm-serre-presentation-theorem",
+        "def-serre-lie-algebra-of-a-finite-type-cartan-matrix",
+        "def-classical-complex-matrix-lie-algebras"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3487,7 +3498,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-        "strategy": "Check all defining brackets and quadratic Serre relations; the generated matrices include E₁₃,E₃₁ and the Cartan, hence span sl₃. Serre dimension eight proves injectivity.",
+        "strategy": "Check all defining brackets and all four quadratic Serre relations; the generated matrices span sl₃. Bound each Serre half by three dimensions and use the triangular decomposition plus surjectivity to prove injectivity.",
         "axiom_base": "ZFC"
       },
       {
