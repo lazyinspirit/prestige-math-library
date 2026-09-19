@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ cab8857aa912 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 0254da570ae1 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 9833 |
+| defects caught before publication | 9834 |
 | now mechanically prevented | 356 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -772,11 +772,11 @@
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
 
-## phase-2-remaining-27 — 1034 row(s)
+## phase-2-remaining-27 — 1035 row(s)
 
 | subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
 |---|---|---|---|
-| citation-inaccurate | 28 |  | 261 |
+| citation-inaccurate | 28 |  | 262 |
 | invalid-inference | 7 |  | 273 |
 | false-claim | 72 |  | 41 |
 | citation-inflated |  | 15 | 37 |

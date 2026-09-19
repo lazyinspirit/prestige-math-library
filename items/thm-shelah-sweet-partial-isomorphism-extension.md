@@ -30,9 +30,11 @@ be chosen compatibly with any previously fixed sweetness-model embedding.
 
 [F2] [[lem-shelah-continuous-unions-of-sweetness-models]]: the direct union of an increasing $\omega$-chain of sweetness models is sweet and each stage is complete in the union.
 
-[F3] [[def-complete-boolean-algebra-and-regular-open-sets]]: complete Boolean homomorphisms preserve all joins and infima, so an automorphism of the union extending the chain of isomorphisms is unique on the completion.
+[F3] [[def-complete-boolean-algebra-and-regular-open-sets]]: a Boolean completion is an order-dense Boolean embedding into a complete Boolean algebra. The definition itself does not assert that maps extend to completions.
 
 [F4] [[def-axiom-of-choice]]: used exactly for the simultaneous selection of the countably many data that code the requests in the induction.
+
+[F5] Shelah, Claim 7.13(2): for the alternating chain constructed there, the union map is an automorphism of the union Boolean algebra and has a unique extension to an automorphism of its Boolean completion.
 
 ## Proof
 
@@ -44,8 +46,8 @@ be chosen compatibly with any previously fixed sweetness-model embedding.
 
 2.3 The construction is compatible with a previously fixed sweetness-model embedding: start the induction at the given algebra with its given model rather than at $B$, and use the extension form of [F1], which extends a fixed model together with the partial isomorphism. [F1, step 1.1]
 
-3.1 Put $B^*=\bigcup_l BA(U_l)$ with the union sweetness model, which is sweet by [F2], and let $f=\bigcup_l h_l$. The map $f$ is well defined and injective because the maps are coherent and each pair of elements lies in a common stage; it is defined on all of $B^*$ because every element of the union occurs in some $BA(U_l)$ and $B^1_{2l+1}=BA(U_{2l})$; and its image is all of $B^*$ because $B^2_{2l+2}=BA(U_{2l+1})$. Hence $f$ is a bijection of $B^*$ onto itself extending $h$. [F2, step 2.1]
+3.1 Put $P^*=\bigcup_l U_l$ and $C=\bigcup_l BA(U_l)$, taking both unions through the coherent complete embeddings. By [F2], $P^*$ has the union sweetness model and every stage is complete in $P^*$. Let $f_0=\bigcup_l h_l$. The map $f_0$ is well defined and injective because the maps are coherent and each pair of elements lies in a common stage. It is defined on all of $C$ because every element of the union occurs in some $BA(U_l)$ and $B^1_{2l+1}=BA(U_{2l})$; its image is all of $C$ because $B^2_{2l+2}=BA(U_{2l+1})$. Finite Boolean operations are computed in a common stage, so $f_0$ is a Boolean automorphism of $C$ extending $h$. [F2, step 2.1]
 
-4.1 The map $f$ preserves Boolean operations: finitely many elements lie in a common stage, where $h_l$ is a Boolean isomorphism, and for an arbitrary subset $A\subseteq B^*$ the join $\bigvee A$ and the joins of its finite approximants are computed stagewise, since each stage is a complete subalgebra of the union; completeness of the $h_l$ then gives $f(\bigvee A)=\bigvee f[A]$, and likewise for meets and complements. Thus $f$ is a complete Boolean automorphism of $B^*$ extending $h$. [F3, step 3.1]
+4.1 The algebra $C$ need not be complete: an arbitrary subset of it need not occur in one stage. Instead let $B^*=BA(P^*)$, the Boolean completion of the sweet union forcing. The canonical image of $P^*$ is order-dense in $B^*$ and is contained in $C$, so $C$ is order-dense in $B^*$ in the sense of [F3]. By the exact completion clause [F5], $f_0$ has a unique extension $f$ to a complete Boolean automorphism of $B^*$. Equivalently, the extension is determined by $$f(b)=\bigvee\{f_0(c):c\in C,\ c\le b\};$$ the analogous formula for $f_0^{-1}$ gives its inverse. Thus $f$ extends $h$. [F3, F5, step 3.1]
 
-5.1 The steps above exhibit a sweet complete Boolean algebra $B^*$ containing $B$ completely such that $h$ extends to an automorphism of $B^*$, compatibly with any previously fixed embedding; this is the Statement. [step 3.1, step 4.1, step 2.3] ∎
+5.1 The sweetness model on the dense forcing $P^*$ induces one on the nonzero part of $B^*$, while completeness of the stage embeddings puts $B$ completely inside $B^*$. Hence the steps above exhibit the required sweet complete Boolean algebra and automorphism, compatibly with any previously fixed embedding. [F1, F2, step 2.3, step 4.1] ∎

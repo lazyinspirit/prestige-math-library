@@ -164,3 +164,14 @@ bundle preamble and the task header: adjudicators keep web search
 groups' items for seams and cross-group alerts. A bundle is an entry point,
 never a fence. Asserted by `step7-groups.test.mts` on the lane's own command
 line and by `evidence-bundle.test.mts` on the bundle text.
+
+**Owner revision (2026-09-20): the compaction threshold is 250k, not 120k, and
+applies to EVERY lane whatever its provider.** `dispatch.mjs` now carries a
+single `AUTO_COMPACT_TOKEN_LIMIT = 250_000` with scope `total`, and the DeepSeek
+lane gets it too — its generated model catalog sets `auto_compact_token_limit:
+null`, so without the explicit flag that lane would never compact. Verified by a
+live DeepSeek probe with the threshold lowered to 1,500: the session recorded a
+`compacted` event, proving the flag overrides the catalog. The 250k value keeps
+the earlier token win in the Step-7 lanes (they were already carrying ~130k per
+turn after their own 200k compactions) without forcing the more aggressive
+120k rewinds.

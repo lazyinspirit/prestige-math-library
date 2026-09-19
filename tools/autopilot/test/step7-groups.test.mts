@@ -463,8 +463,8 @@ test('the final-adjudicator lane is independently pinned to Astra medium with we
   assert.equal(row.model, MODELS.astra.id);
   assert.equal(row.requested_effort, 'medium');
   assert.equal(row.provider_effort, 'medium');
-  assert.equal(row.auto_compact_token_limit, 120000);
-  assert.match(row.command, /model_auto_compact_token_limit=120000/);
+  assert.equal(row.auto_compact_token_limit, 250000);
+  assert.match(row.command, /model_auto_compact_token_limit=250000/);
   assert.match(row.command, /tools\.web_search=true/);
   // The access guarantees the owner restated on 2026-09-20: an adjudicator keeps
   // web search AND shell network access (source fetch), reads the whole library
@@ -484,7 +484,38 @@ test('the Step-7 group adjudicator lane keeps web search, network access and ear
   assert.equal(row.sandbox, 'workspace-write');
   assert.match(row.command, /tools\.web_search=true/);
   assert.match(row.command, /sandbox_workspace_write\.network_access=true/);
-  assert.equal(row.auto_compact_token_limit, 120000);
+  assert.equal(row.auto_compact_token_limit, 250000);
+});
+
+// Owner rule, 2026-09-20: EVERY agent lane auto-compacts at 250k, whatever the
+// provider. The DeepSeek lane is the one that needs the check: its generated
+// model catalog sets `auto_compact_token_limit: null`, so without the explicit
+// `-c` flag that lane would never compact at all.
+test('every role lane carries the 250k auto-compaction rule, DeepSeek included', () => {
+  const roles = ['beta', 'reader', 'refuter', 'alpha', 'alpha-high', 'alpha-report',
+    'alpha-adjudicate', 'final-adjudicator', 'alpha-group-read', 'alpha-assign',
+    'scaffolder', 'mechanic'];
+  for (const role of roles) {
+    const result = spawnSync('node', ['tools/dispatch.mjs',
+      '--role', role, '--brief', 'briefs/alpha.md', '--task', 'briefs/tasks/alpha-step7.md',
+      '--label', 'compact-test', '--run', 'compact-test', '--covers', '1',
+      '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 0, `${role}: ${result.stderr}`);
+    const row = JSON.parse(result.stdout);
+    assert.equal(row.auto_compact_token_limit, 250000, `${role} must compact at 250k`);
+    assert.match(row.command, /model_auto_compact_token_limit=250000/, `${role} command`);
+    assert.match(row.command, /model_auto_compact_token_limit_scope="total"/, `${role} scope`);
+  }
+  const deepseek = spawnSync('node', ['tools/dispatch.mjs',
+    '--role', 'reader', '--brief', 'briefs/reader.md', '--label', 'compact-ds',
+    '--run', 'compact-test', '--covers', '1', '--profile', 'deepseek-v4.1-flash-max',
+    '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(deepseek.status, 0, deepseek.stderr);
+  const dsRow = JSON.parse(deepseek.stdout);
+  assert.equal(dsRow.provider, 'deepseek');
+  assert.equal(dsRow.auto_compact_token_limit, 250000,
+    'the DeepSeek lane must compact at 250k too, overriding its catalog default');
+  assert.match(dsRow.command, /model_auto_compact_token_limit=250000/);
 });
 
 // Against the live run, because the plan reads the VALIDATED group assignment

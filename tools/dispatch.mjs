@@ -24,15 +24,15 @@ import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 // tools/models.mjs owns model IDs and semantic lane assignments.
 import { lane, modelProfile } from './models.mjs';
 
-// Earlier compaction for the multi-item agentic lanes (owner, 2026-09-20).
-// Measured on phase-2-remaining-27's Step-7 adjudicators: ~130k input tokens
-// PER CALL over ~2,900 calls, because a long-lived lane re-sends its whole
-// history every turn. Compacting at 120k instead of 200k cuts the average
-// context by roughly a third; the briefs already require re-anchoring to the
-// live item and dependencies after any compaction, which is what makes the
-// smaller window safe. One-shot judge lanes build their own prompt and do not
-// use this.
-const DEFAULT_AUTO_COMPACT_TOKEN_LIMIT = 120_000;
+// OWNER RULE (2026-09-20): every agent in the workflow auto-compacts its context
+// once it passes 250k tokens, at the earliest convenient point — the CLI
+// compacts at a turn boundary, which is the earliest point at which it can.
+// Applies to EVERY lane and provider, the DeepSeek lane included: its generated
+// model catalog carries `auto_compact_token_limit: null`, and this explicit `-c`
+// flag is what overrides that catalog value (config keys win over catalog
+// metadata). The briefs already require re-anchoring to the live item and its
+// dependencies after any compaction, which is what makes the rewind safe.
+const AUTO_COMPACT_TOKEN_LIMIT = 250_000;
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
@@ -277,9 +277,7 @@ const spec = Object.freeze({
   requestedEffort: ROLES[role].effort ?? 'xhigh',
   ...profileSpec,
   profile: profileName,
-  autoCompactTokenLimit: profileSpec?.provider === 'deepseek'
-    ? null
-    : (ROLES[role].autoCompactTokenLimit ?? DEFAULT_AUTO_COMPACT_TOKEN_LIMIT),
+  autoCompactTokenLimit: ROLES[role].autoCompactTokenLimit ?? AUTO_COMPACT_TOKEN_LIMIT,
 });
 const compactionArgs = spec.autoCompactTokenLimit == null ? [] : [
   '-c', `model_auto_compact_token_limit=${spec.autoCompactTokenLimit}`,

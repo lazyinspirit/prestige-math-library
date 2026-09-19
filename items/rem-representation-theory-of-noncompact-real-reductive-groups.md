@@ -51,9 +51,12 @@ character, the asymptotics of matrix coefficients, and the harmonic analysis
 of $L^2(G)$ — use elliptic regularity, Fourier analysis on groups and
 invariant integral geometry, none of which is developed in this library
 track. For the same reason the compact-group representation theory that the
-library does contain is not a substitute: a noncompact reductive group has no
-finite-dimensional faithful unitary representations beyond the compact
-quotients, so the unitary dual is genuinely infinite-dimensional.
+library does contain is not a substitute. A finite-dimensional unitary
+representation has relatively compact image; it can be faithful for a
+noncompact group (even with dense image in a torus), but it cannot realise
+that group as a closed noncompact matrix subgroup. The unitary dual and its
+topological representation theory are therefore not captured by the compact
+theory.
 
 The boundary is recorded here so that no consumer of this page treats the
 Vogan/Satake classification of real forms as a classification of

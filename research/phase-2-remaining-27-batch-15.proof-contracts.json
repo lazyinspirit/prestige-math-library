@@ -429,13 +429,11 @@
           "source_section": "Statement",
           "quote": "If $(P,D,(E_n))$ is a sweetness model, then $D$, and hence $P$, is a countable\nunion of directed subsets. Consequently every antichain in $P$ is countable, so\n$P$ satisfies the countable chain condition.",
           "uses": [
-            "2.1",
-            "7.1",
-            "8.1"
+            "7.1"
           ]
         },
         {
-          "fact": "F3",
+          "fact": "F4",
           "source": "lem-shelah-sweet-density-transfer-along-complete-suborders",
           "source_section": "Statement",
           "quote": "Assume ZFC. Let $P$ be a complete suborder of $B=BA(Q)$, let\n$(Q,D,(E_n))$ be a sweetness model, and let $(A_j)_{j<\\omega}$ be subsets of\n$P$ whose union is dense in $P$. Write $e:Q\\to B\\setminus\\{0_B\\}$ for the\ncanonical dense completion map, and use Shelah's quotient convention\n\n$$p\\Vdash_P q\\in Q/P\\quad\\Longleftrightarrow\\quad\n  \\text{every }p_0\\in P\\text{ with }p_0\\le p\n  \\text{ is compatible in }B\\text{ with }e(q).$$\n\nSuppose $q\\in D$ and $p\\in P$ forces $q\\in Q/P$. Then some $j,k<\\omega$ have\nthe following uniform property: for every $q'\\mathrel{E_k}q$ there is\n$p'\\in A_j$ with $p'\\le p$ which forces $q'\\in Q/P$. Moreover, the union of\nall $A_j$ for which such a $k$ exists is dense below $p$. This is the full\ntwo-part conclusion of Claim 7.4 of the source, in the library order.",
@@ -444,33 +442,43 @@
             "2.1",
             "7.1"
           ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Let $D=\\{(q_1,q_2)\\in O:q_\\ell\\in D_\\ell\\text{ for }\\ell=1,2\\}$: this set is dense in $O$, because for an admitted pair with witness $p_0$ one may apply [F3] below $p_0$ in each coordinate to reach the dense sets $D_\\ell$.",
+          "claim": "Let $D=\\{(q_1,q_2)\\in O:q_\\ell\\in D_\\ell\\text{ for }\\ell=1,2\\}$: this set is dense in $O$, because for an admitted pair with witness $p_0$ one may apply [F4] below $p_0$ in each coordinate to reach the dense sets $D_\\ell$.",
           "step": "1.1",
           "inputs": [
             "F1",
-            "F3"
+            "F4"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "For every $(q_1,q_2)\\in D$ there are $j<\\omega$ and a common witness $p_0$ together with a modulus $m$ such that every pair $(q_1',q_2')$ with $q_\\ell'\\mathrel{E^\\ell_m}q_\\ell$ for $\\ell=1,2$ is admitted by some $p_0'\\in A_j$ with $p_0'\\le p_0$: apply [F3] to $q_1$ in $Q_1$ to obtain $S=\\{j:A_j$ has the uniform property for $q_1$ at some $k_1\\}$, then apply [F3] inside the dense family $\\{A_j:j\\in S\\}$ to $q_2$ in $Q_2$; the resulting index $j$ and the maximum $m$ of the two moduli work, because a directed $A_j$ permits one common strengthening of the two coordinate witnesses.",
+          "claim": "For every $(q_1,q_2)\\in D$ there are $j<\\omega$ and a common witness $p_0$ together with a modulus $m$ such that every pair $(q_1',q_2')$ with $q_\\ell'\\mathrel{E^\\ell_m}q_\\ell$ for $\\ell=1,2$ is admitted by some $p_0'\\in A_j$ with $p_0'\\le p_0$: apply [F4] to $q_1$ in $Q_1$ to obtain $S=\\{j:A_j$ has the uniform property for $q_1$ at some $k_1\\}$, then reindex the subfamily $(A_j)_{j\\in S}$, whose union is dense below $p_0$, and apply [F4] to $q_2$ in $Q_2$. The resulting index $j$ and the maximum $m$ of the two moduli work, because directedness of $A_j$ gives a common strengthening of the two coordinate witnesses.",
           "step": "2.1",
           "inputs": [
-            "F2",
             "F3",
+            "F4",
             "step 1.1"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "Define $m(q_1,q_2)$ to be the least $m$ for which step 2.1 holds for some $j$, and fix for the rest of the proof one such $j(q_1,q_2)$ and witness $p_0(q_1,q_2)$; least-element selection in $\\omega$ and the finitely many witness choices are available in ZF+DC.",
+          "claim": "Define $m(q_1,q_2)$ to be the least $m$ for which step 2.1 holds for some $j$, and fix for the rest of the proof one such $j(q_1,q_2)$ and witness $p_0(q_1,q_2)$. These simultaneous choices are made in the ambient ZFC theory fixed above.",
           "step": "3.1",
           "inputs": [
+            "F5",
             "step 2.1"
           ]
         },
@@ -521,35 +529,35 @@
         },
         {
           "id": "step-6-2",
-          "claim": "The $E_n$-classes are downward directed: given $(q_1,q_2)\\mathrel{E_n}(q_1',q_2')$ with common modulus $m$, use downward directedness of the $E^\\ell_{m+n}$-classes to pick $q_\\ell^*\\mathrel{E^\\ell_{m+n}}q_\\ell$ with $q_\\ell^*\\le q_\\ell,q_\\ell'$ for $\\ell=1,2$. Then $(q_1^*,q_2^*)$ is admitted by the witness of $(q_1,q_2)$ together with upward closure of the quotient assertion, and step 4.1 gives $m(q_1^*,q_2^*)=m$, so $(q_1^*,q_2^*)\\mathrel{E_n}(q_1,q_2)$ is a common lower bound in the class.",
+          "claim": "The $E_n$-classes are downward directed: given $(q_1,q_2)\\mathrel{E_n}(q_1',q_2')$ with common modulus $m$, use downward directedness of the $E^\\ell_{m+n}$-classes to pick $q_\\ell^*\\mathrel{E^\\ell_{m+n}}q_\\ell$ with $q_\\ell^*\\le q_\\ell,q_\\ell'$ for $\\ell=1,2$. Since $E^\\ell_{m+n}$ refines $E^\\ell_m$, the uniform property in step 2.1 supplies one $P_0$-condition admitting the pair $(q_1^*,q_2^*)$. Step 4.1 gives $m(q_1^*,q_2^*)=m$, so $(q_1^*,q_2^*)\\mathrel{E_n}(q_1,q_2)$ is a common lower bound in the class.",
           "step": "6.2",
           "inputs": [
             "F1",
+            "step 2.1",
             "step 4.1",
             "step 5.1"
           ]
         },
         {
           "id": "step-7-1",
-          "claim": "The canonical copies are complete: the maps $q_1\\mapsto(q_1,1_{Q_2})$ and $q_2\\mapsto(1_{Q_1},q_2)$ embed $Q_1$ and $Q_2$ order-fully into $O$, and they land in the dense set $D$ in the sense of step 1.1 after strengthening the first coordinate; a maximal antichain $A$ of $Q_1$ is predense in $O$ because an admitted pair $(p_1,p_2)$ with witness $p_0$ is compatible with some $(a,1_{Q_2})$, $a\\in A$, below it: strengthen $p_1$ inside $A$ and use that $p_0$ remains compatible with the strengthening. Hence the amalgam contains complete canonical copies of both forcings, and sweetness gives ccc for the amalgam by the countable-class clause of step 6.1 and the sigma-directedness argument of [F2].",
+          "claim": "The canonical copies are complete: the maps $q_1\\mapsto(q_1,1_{Q_2})$ and $q_2\\mapsto(1_{Q_1},q_2)$ embed $Q_1$ and $Q_2$ order-fully into $O$, and they land in the dense set $D$ in the sense of step 1.1 after strengthening the first coordinate; a maximal antichain $A$ of $Q_1$ is predense in $O$ because an admitted pair $(p_1,p_2)$ with witness $p_0$ is compatible with some $(a,1_{Q_2})$, $a\\in A$, below it: strengthen $p_1$ inside $A$ and use that $p_0$ remains compatible with the strengthening. Hence the amalgam contains complete canonical copies of both forcings. The relations constructed in steps 5.1 through 6.2 make it sweet, and [F2] then makes it ccc.",
           "step": "7.1",
           "inputs": [
             "F2",
-            "F3",
+            "F4",
             "step 1.1",
             "step 5.3",
-            "step 6.1"
+            "step 6.2",
+            "step 5.1"
           ]
         },
         {
           "id": "step-8-1",
-          "claim": "If now $(Q_2,D_2,(E^2_n))$ extends $(Q_1,D_1,(E^1_n))$, let $D^+$ be the image of $D_1$ in $O$ and let $\\bar D=D\\cup D^+$ with $\\bar E_n=E_n\\cup E^1_n$; after shrinking the dense set $D$ to a dense-open subset disjoint from $D^+$, as the density clause of [F2] permits, the union is a relation with the two parts on disjoint domains. The steps above apply to the part $D$ and, by [F1], to the part $D_1$ inside $Q_1$; the only mixed clause is the transfer clause between a pair of $D$ and a pair of $D^+$, and there both coordinates can be computed inside $Q_1$ after projecting along the complete embedding of the extension relation. The extension clauses of [F1] then show that $(\\bar D,\\bar E_n)$ extends the fixed model on $Q_1$: the old relations are restrictions, and every $\\bar E_n$-class meeting $D_1$ is contained in $D_1$ by the disjointness of the two parts and the corresponding clause for $Q_1\\subseteq Q_2$.",
+          "claim": "Suppose now that the sweetness model on $Q_2$ extends the fixed model on $Q_1$. The cited source's amalgamation claim applies to exactly these models and embeddings. Starting with the sweetness model constructed above, it first replaces its dense set by a dense-open set disjoint from the canonical copy of $D_1$, then adjoins that copy and takes on the two disjoint pieces respectively the new relations and the original $E^1_n$. The source proof checks the only additional mixed transfer clause and the five extension clauses, yielding a sweetness model on $O$ extending the fixed model on $Q_1$.",
           "step": "8.1",
           "inputs": [
             "F1",
-            "step 5.3",
-            "step 7.1",
-            "F2"
+            "step 7.1"
           ]
         },
         {
@@ -1255,29 +1263,31 @@
           "fact": "F1",
           "source": "thm-shelah-sweet-amalgamation-preserves-sweetness",
           "source_section": "Statement",
-          "quote": "The formulation also permits two named complete embeddings of $P_0$, by identifying their images before taking the amalgam.",
+          "quote": "Let $Q_1$ and $Q_2$ be sweet forcings and let $P_0$ be completely embedded in\n$BA(Q_1)$ and in $BA(Q_2)$. Their Boolean amalgam $Q_1*_{P_0}Q_2$ is sweet and\ncontains complete canonical copies of $Q_1$ and $Q_2$. If the sweetness model\non $Q_2$ extends a fixed model on $Q_1$ in the sense of the extension clauses,\nthe amalgam can be equipped with a sweetness model extending that fixed model.\nThe formulation also permits two named complete embeddings of $P_0$, by\nidentifying their images before taking the amalgam.",
           "uses": [
             "1.1",
             "2.1",
-            "2.3"
+            "2.3",
+            "5.1"
           ]
         },
         {
           "fact": "F2",
           "source": "lem-shelah-continuous-unions-of-sweetness-models",
           "source_section": "Statement",
-          "quote": "Let $(P_i,D_i,(E^i_n))_{i<\\delta}$ be a continuous increasing chain of sweetness models, where $\\delta$ has countable cofinality and every successor extends its predecessor in the exact sweetness-model sense.",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let\n$(P_i,D_i,(E^i_n))_{i<\\delta}$ be a continuous increasing chain of sweetness\nmodels, where $\\delta$ has countable cofinality and every successor extends its\npredecessor in the exact sweetness-model sense. Then the direct union forcing,\ndense set, and stabilized equivalence relations form a sweetness model, and\nevery $P_i$ is a complete subforcing of the union.",
           "uses": [
             "2.1",
             "2.2",
-            "3.1"
+            "3.1",
+            "5.1"
           ]
         },
         {
           "fact": "F3",
           "source": "def-complete-boolean-algebra-and-regular-open-sets",
           "source_section": "Definition",
-          "quote": "Its proposed operations, justified by [[thm-regular-open-sets-form-a-complete-boolean-algebra]], are $$\\bigvee\\mathcal U=\\operatorname{int}\\overline{\\bigcup\\mathcal U},\\qquad \\bigwedge\\mathcal U=\\operatorname{int}\\bigcap\\mathcal U,\\qquad \\neg U=\\operatorname{int}(X\\setminus U)=X\\setminus\\overline U.$$ Here the empty union is $\\varnothing$ and the empty intersection is $X$; finite meets will be ordinary finite intersections, and the bounds will be $\\varnothing,X$.",
+          "quote": "A [[def-boolean-algebra-for-stone-duality|Boolean algebra]] $B$ is **complete**, or **Dedekind complete**, if every subset $A\\subseteq B$ has a least upper bound $\\bigvee A$. Complements then give greatest lower bounds by $\\bigwedge A=\\neg\\bigvee\\{\\neg a:a\\in A\\}$. The empty bounds are $\\bigvee\\varnothing=0$ and $\\bigwedge\\varnothing=1$. The one-element Boolean algebra is allowed.\n\nFor a [[def-topological-space|topological space]] $X$, $\\operatorname{int}E$ is the union of the open subsets of $E$, and $\\overline E$ is the intersection of the closed subsets containing $E$. An open set $U$ is **regular open** if $U=\\operatorname{int}\\overline U$. Write $\\operatorname{RO}(X)$ for the set of regular open subsets, ordered by inclusion. Its proposed operations, justified by [[thm-regular-open-sets-form-a-complete-boolean-algebra]], are\n\n$$\\bigvee\\mathcal U=\\operatorname{int}\\overline{\\bigcup\\mathcal U},\\qquad \\bigwedge\\mathcal U=\\operatorname{int}\\bigcap\\mathcal U,\\qquad \\neg U=\\operatorname{int}(X\\setminus U)=X\\setminus\\overline U.$$\n\nHere the empty union is $\\varnothing$ and the empty intersection is $X$; finite meets will be ordinary finite intersections, and the bounds will be $\\varnothing,X$. No separation axiom on $X$ is assumed.\n\nA [[def-boolean-homomorphism-and-quotient|Boolean homomorphism]] $h:B\\to C$ is **order-continuous** if it preserves every supremum and infimum that exists in $B$: whenever $b=\\bigvee_B A$ exists, $h(b)=\\bigvee_C h[A]$, and likewise for infima. This includes empty families. An **order-dense Boolean embedding** $i:B\\to C$ is an injective Boolean homomorphism such that each $0<c\\in C$ has some $b\\in B$ with $0<i(b)\\le c$. A **Boolean completion** is such an embedding into a complete Boolean algebra. This definition asserts neither existence of a completion nor extension of a homomorphism.",
           "uses": [
             "4.1"
           ]
@@ -1286,7 +1296,7 @@
           "fact": "F4",
           "source": "def-axiom-of-choice",
           "source_section": "Definition",
-          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
           "uses": [
             "1.1"
           ]
@@ -1307,9 +1317,9 @@
           "claim": "The chain is coherent: each $h_l$ extends $h_{l-1}$, because the amalgamation of [F1] extends the given partial isomorphism and the closure of the union of the two copies is canonical. At the $l$-th stage the union of the earlier complete subalgebras embeds completely into $U_l$ by the extension clauses.",
           "step": "2.1",
           "inputs": [
-            "1.1",
             "F1",
-            "F2"
+            "F2",
+            "step 1.1"
           ]
         },
         {
@@ -1317,8 +1327,8 @@
           "claim": "Each $U_l$ is sweet and $U_{l+1}$ extends the model of $U_l$; limit objects are obtained by the continuous-union lemma, which applies because $\\omega$ has countable cofinality.",
           "step": "2.2",
           "inputs": [
-            "1.1",
-            "F2"
+            "F2",
+            "step 1.1"
           ]
         },
         {
@@ -1326,36 +1336,38 @@
           "claim": "The construction is compatible with a previously fixed sweetness-model embedding: start the induction at the given algebra with its given model rather than at $B$, and use the extension form of [F1], which extends a fixed model together with the partial isomorphism.",
           "step": "2.3",
           "inputs": [
-            "1.1",
-            "F1"
+            "F1",
+            "step 1.1"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "Put $B^*=\\bigcup_l BA(U_l)$ with the union sweetness model, which is sweet by [F2], and let $f=\\bigcup_l h_l$. The map $f$ is well defined and injective because the maps are coherent and each pair of elements lies in a common stage; it is defined on all of $B^*$ because every element of the union occurs in some $BA(U_l)$ and $B^1_{2l+1}=BA(U_{2l})$; and its image is all of $B^*$ because $B^2_{2l+2}=BA(U_{2l+1})$. Hence $f$ is a bijection of $B^*$ onto itself extending $h$.",
+          "claim": "Put $P^*=\\bigcup_l U_l$ and $C=\\bigcup_l BA(U_l)$, taking both unions through the coherent complete embeddings. By [F2], $P^*$ has the union sweetness model and every stage is complete in $P^*$. Let $f_0=\\bigcup_l h_l$. The map $f_0$ is well defined and injective because the maps are coherent and each pair of elements lies in a common stage. It is defined on all of $C$ because every element of the union occurs in some $BA(U_l)$ and $B^1_{2l+1}=BA(U_{2l})$; its image is all of $C$ because $B^2_{2l+2}=BA(U_{2l+1})$. Finite Boolean operations are computed in a common stage, so $f_0$ is a Boolean automorphism of $C$ extending $h$.",
           "step": "3.1",
           "inputs": [
-            "2.1",
-            "F2"
+            "F2",
+            "step 2.1"
           ]
         },
         {
           "id": "step-4-1",
-          "claim": "The map $f$ preserves Boolean operations: finitely many elements lie in a common stage, where $h_l$ is a Boolean isomorphism, and for an arbitrary subset $A\\subseteq B^*$ the join $\\bigvee A$ and the joins of its finite approximants are computed stagewise, since each stage is a complete subalgebra of the union; completeness of the $h_l$ then gives $f(\\bigvee A)=\\bigvee f[A]$, and likewise for meets and complements. Thus $f$ is a complete Boolean automorphism of $B^*$ extending $h$.",
+          "claim": "The algebra $C$ need not be complete: an arbitrary subset of it need not occur in one stage. Instead let $B^*=BA(P^*)$, the Boolean completion of the sweet union forcing. The canonical image of $P^*$ is order-dense in $B^*$ and is contained in $C$, so $C$ is order-dense in $B^*$ in the sense of [F3]. By the exact completion clause [F5], $f_0$ has a unique extension $f$ to a complete Boolean automorphism of $B^*$. Equivalently, the extension is determined by $$f(b)=\\bigvee\\{f_0(c):c\\in C,\\ c\\le b\\};$$ the analogous formula for $f_0^{-1}$ gives its inverse. Thus $f$ extends $h$.",
           "step": "4.1",
           "inputs": [
-            "3.1",
-            "F3"
+            "F3",
+            "F5",
+            "step 3.1"
           ]
         },
         {
           "id": "step-5-1",
-          "claim": "the steps above exhibit a sweet complete Boolean algebra $B^*$ containing $B$ completely such that $h$ extends to an automorphism of $B^*$, compatibly with any previously fixed embedding; this is the Statement.",
+          "claim": "The sweetness model on the dense forcing $P^*$ induces one on the nonzero part of $B^*$, while completeness of the stage embeddings puts $B$ completely inside $B^*$. Hence the steps above exhibit the required sweet complete Boolean algebra and automorphism, compatibly with any previously fixed embedding.",
           "step": "5.1",
           "inputs": [
-            "2.3",
-            "3.1",
-            "4.1"
+            "F1",
+            "F2",
+            "step 2.3",
+            "step 4.1"
           ]
         }
       ],
