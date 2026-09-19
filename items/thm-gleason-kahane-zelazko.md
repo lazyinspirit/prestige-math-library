@@ -55,7 +55,12 @@ nonzero on $A$; together with $\varphi(1) = 1$ it is the exact hypothesis used.
 
 **Proof technique:** direct.
 
-1.1 $|\varphi(a)| \le \|a\|$ for every $a$: if $|\lambda| > \|a\|$ then $\lambda 1 - a = \lambda(1 - a/\lambda)$ is invertible by [L2], while $\varphi(\lambda1 - a) = \lambda - \varphi(a) = 0$ by linearity and $\varphi(1) = 1$; this contradicts the hypothesis that $\varphi$ vanishes at no invertible element. [L1, L2, algebra]
+1.1 $|\varphi(a)| \le \|a\|$ for every $a$: otherwise put
+$\lambda:=\varphi(a)$, so $|\lambda|>\|a\|$ and
+$\lambda 1-a=\lambda(1-a/\lambda)$ is invertible by [L2], while
+$\varphi(\lambda1-a)=\lambda-\varphi(a)=0$ by linearity and
+$\varphi(1)=1$; this contradicts the hypothesis that $\varphi$ vanishes at no
+invertible element. [L1, L2, algebra]
 
 1.2 For $a \in A$ and $z \in \mathbb C$ the series $E_a(z) := \sum_{n\ge0} z^na^n/n!$ converges absolutely in $A$ and satisfies $\|E_a(z)\| \le e^{|z|\|a\|}$ and $E_a(z)E_a(-z) = E_a(-z)E_a(z) = 1$, so $E_a(z)$ is invertible: absolute convergence follows from [L3] and the scalar majorant $\sum|z|^n\|a\|^n/n! = e^{|z|\|a\|} < \infty$ [L4] with the norm estimate by the triangle inequality; for the product, the partial sums satisfy $S_N(z)S_N(-z) = \sum_{n\le N}(z-z)^n/n! + R_N = 1 + R_N$ with $\|R_N\| \le \sum_{N<n\le 2N}\binom{n}{k}\ldots$ bounded by $\sum_{n>N}(2|z|\|a\|)^n/n!$, which tends to $0$; multiplication is jointly continuous by [L1], so passing to the limit gives $E_a(z)E_a(-z) = 1$, and the same computation with the factors exchanged gives $E_a(-z)E_a(z) = 1$. [L1, L3, L4, algebra]
 

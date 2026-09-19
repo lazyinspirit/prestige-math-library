@@ -22,13 +22,13 @@ A **reduced generalized cohomology theory** on based CW complexes consists of th
 following data.
 
 1. For every integer $n$ a contravariant functor $\widetilde h^n$ from based CW
-   complexes and based continuous maps to abelian groups; a based map $f:X\to Y$
+   complexes and based cellular maps to abelian groups; a based cellular map $f:X\to Y$
    induces $f^*:\widetilde h^n(Y)\to\widetilde h^n(X)$.
 2. For every based CW complex $X$ and integer $n$ a **suspension isomorphism**
    $$\sigma=\sigma_n(X):\widetilde h^n(X)\xrightarrow{\ \cong\ }\widetilde h^{n+1}(\Sigma X),$$
    natural in $X$, where $\Sigma$ is the reduced suspension and the sphere
    coordinate is written first.
-3. For every based map $f:X\to Y$ with reduced cofiber $C_f$ and structural
+3. For every based cellular map $f:X\to Y$ with reduced cofiber $C_f$ and structural
    inclusion $i:Y\to C_f$, **connecting homomorphisms**
    $\delta_f:\widetilde h^n(X)\to\widetilde h^{n+1}(C_f)$, natural in the based
    map $f$.
@@ -37,7 +37,7 @@ The data satisfy the following axioms.
 
 - **(H) Homotopy invariance.** If $f\simeq_* g$ are based homotopic based maps,
   then $f^*=g^*$ on every reduced group.
-- **(E) Exactness.** For every based map $f:X\to Y$ the long sequence
+- **(E) Exactness.** For every based cellular map $f:X\to Y$ the long sequence
 $$\cdots\to\widetilde h^n(C_f)\xrightarrow{i^*}\widetilde h^n(Y) \xrightarrow{f^*}\widetilde h^n(X)\xrightarrow{\delta_f}\widetilde h^{n+1}(C_f)\to\cdots$$
   is exact, and the connecting maps are natural for maps of based maps.
 - **(W) Wedge axiom.** For every family $(X_\alpha)$ of based CW complexes and

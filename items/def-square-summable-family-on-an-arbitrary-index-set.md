@@ -81,23 +81,28 @@ $$|s_F-s_G|\le\sum_{i\in F\triangle G}|a_i|\le S-S_{F\cap G} . \qquad (2)$$
 Now fix a real $\varepsilon>0$, let $F_0$ be a tail-control set for
 $\varepsilon$, and let $F,G\supseteq F_0$ be finite. Then $F\cap G\supseteq F_0$,
 so $S-S_{F\cap G}\le S-S_{F_0}<\varepsilon$ and (2) gives
-$|s_F-s_G|<\varepsilon$. For each finite $F$ define
+$|s_F-s_G|<\varepsilon$.
+
+First suppose $\mathbb F=\mathbb R$. For each finite $F$ define
 $A_F:=\inf\{s_G : G\supseteq F\}$ and $B_F:=\sup\{s_G : G\supseteq F\}$ over
 finite $G$. Both are real numbers, because $|s_G|\le S_G\le S$, so the two sets
-are nonempty and bounded, and $A_F\le B_F$. If $H\supseteq F$ then the tail of
-$H$ is contained in the tail of $F$, so $A_H\ge A_F$ and $B_H\le B_F$. Let
-$L:=\sup_FA_F$ and $U:=\inf_FB_F$, suprema and infima of nonempty sets of reals
-bounded above by $S$ and below by $-S$. Since $A_F\le s_{F\cup H}\le B_H$ for all
-finite $F,H$, we get $L\le U$; and taking $F=G=F_0$ above gives
-$B_{F_0}-A_{F_0}\le\varepsilon$, so from $L\ge A_{F_0}$ and $U\le B_{F_0}$ we get
-$0\le U-L\le\varepsilon$ for every real $\varepsilon>0$, hence $L=U=:s$. Finally,
-if $F\supseteq F_0$ then both $s_F$ and $s$ lie in
-$[A_{F_0},B_{F_0}]$, whose length is at most $\varepsilon$, so
+are nonempty and bounded, and $A_F\le B_F$. If $H\supseteq F$ then
+$A_H\ge A_F$ and $B_H\le B_F$. Let $L:=\sup_FA_F$ and $U:=\inf_FB_F$.
+Since $A_F\le s_{F\cup H}\le B_H$ for all finite $F,H$, we get $L\le U$.
+Moreover, the preceding estimate holds for every pair $F,G\supseteq F_0$;
+taking the supremum over $F$ and the infimum over $G$ gives
+$B_{F_0}-A_{F_0}\le\varepsilon$. Hence
+$0\le U-L\le B_{F_0}-A_{F_0}\le\varepsilon$ for every $\varepsilon>0$, so
+$L=U=:s$. If $F\supseteq F_0$, then both $s_F$ and $s$ lie in
+$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\le\varepsilon$.
 
-$$|s_F-s|\le B_{F_0}-A_{F_0}\le\varepsilon \qquad\text{for every finite } F\supseteq F_0 .$$
-
-This says exactly that the net $(s_F)$ converges to $s$. **No choice principle
-is used**: the argument is a two-sided supremum argument in $\mathbb R$.
+If $\mathbb F=\mathbb C$, apply the real argument just proved to the families
+$(\operatorname{Re}a_i)$ and $(\operatorname{Im}a_i)$. They are absolutely
+summable because $|\operatorname{Re}a_i|,|\operatorname{Im}a_i|\le|a_i|$.
+Their finite-subset nets converge to real numbers $r$ and $t$, respectively,
+so $s_F\to r+it$ in $\mathbb C$. Thus every absolutely summable real or complex
+family is summable. **No choice principle is used**: the construction uses only
+two-sided suprema in $\mathbb R$.
 
 **Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely
 summable and $\lambda\in\mathbb F$, then so are $(a_i+b_i)$ and

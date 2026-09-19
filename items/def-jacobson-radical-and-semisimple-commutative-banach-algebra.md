@@ -5,7 +5,7 @@ title: Jacobson radical and semisimple commutative Banach algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-prime-and-maximal-ideals]
+deps: [def-prime-and-maximal-ideals, def-character-and-maximal-ideal-space, thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra, def-axiom-of-choice]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -42,8 +42,9 @@ characterization is invoked anywhere in this library's Gelfand theory.
 
 ## Remarks
 
-- **Two equivalent readings for Banach algebras.** For a commutative unital
-  Banach algebra the intersection of all maximal ideals is the same as the
+- **Two equivalent readings for Banach algebras under Choice.** Assuming the
+  Axiom of Choice ([[def-axiom-of-choice]]), for a commutative unital Banach
+  algebra the intersection of all maximal ideals is the same as the
   intersection of the kernels of all characters, because the maximal ideals are
   exactly the character kernels
   ([[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]]); this

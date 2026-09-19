@@ -5,7 +5,7 @@ title: Dependent choice implies countable choice
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-dependent-choice, def-countable-choice, def-choice-function, def-function, def-natural-numbers, def-indexed-union-and-intersection, def-power-set, def-axiom-schema-of-separation, def-ordered-pair, lem-the-set-of-functions-between-two-sets-is-a-set, thm-induction-principle]
+deps: [def-dependent-choice, def-countable-choice, def-choice-function, def-function, def-natural-numbers, def-indexed-union-and-intersection, def-power-set, def-axiom-schema-of-separation, def-ordered-pair, lem-the-set-of-functions-between-two-sets-is-a-set, thm-induction-principle, thm-well-ordering-principle]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -27,9 +27,9 @@ every at most countable family of nonempty sets has a choice function
 
 [A1] $\mathrm{DC}$: for every nonempty set $X$, every relation $R\subseteq X\times X$ entire on $X$ and every $a\in X$ there is a function $x:\mathbb N\to X$ with $x_0=a$ and $x_n\mathbin R x_{n+1}$ for every $n$ ([[def-dependent-choice]], [[def-natural-numbers]], [[def-function]]).
 
-[A2] $\mathrm{AC}_\omega$: for every family $(E_n)_{n\in\mathbb N}$ of nonempty sets there is a function $f$ with domain $\mathbb N$ and $f(n)\in E_n$ for all $n$ ([[def-countable-choice]]); such an $f$ is a choice function for the family ([[def-choice-function]]).
+[A2] $\mathrm{AC}_\omega$: for every family $(E_n)_{n\in\mathbb N}$ of nonempty sets there is a function $f$ with domain $\mathbb N$ and $f(n)\in E_n$ for all $n$ ([[def-countable-choice]]). A choice function on the set $\mathcal E:=\{E_n:n\in\mathbb N\}$ instead has domain $\mathcal E$ and selects an element of each of its members ([[def-choice-function]]).
 
-[A3] For sets $A$ and $B$ the collection of functions $A\to B$ is a set ([[lem-the-set-of-functions-between-two-sets-is-a-set]], [[def-power-set]], [[def-axiom-schema-of-separation]], [[def-ordered-pair]]); unions and intersections of indexed families are available ([[def-indexed-union-and-intersection]]), and induction on $\mathbb N$ is available ([[thm-induction-principle]], [[def-natural-numbers]]); a natural number is the set of its predecessors, so $\bigcup_{n\in\mathbb N}n=\mathbb N$.
+[A3] For sets $A$ and $B$ the collection of functions $A\to B$ is a set ([[lem-the-set-of-functions-between-two-sets-is-a-set]], [[def-power-set]], [[def-axiom-schema-of-separation]], [[def-ordered-pair]]); unions and intersections of indexed families are available ([[def-indexed-union-and-intersection]]), induction on $\mathbb N$ is available ([[thm-induction-principle]], [[def-natural-numbers]]), and every nonempty subset of $\mathbb N$ has a least element ([[thm-well-ordering-principle]]); a natural number is the set of its predecessors, so $\bigcup_{n\in\mathbb N}n=\mathbb N$.
 
 ## Proof
 
@@ -51,4 +51,6 @@ every at most countable family of nonempty sets has a choice function
 
 5.2 For every $n\in\mathbb N$ one has $f(n)=s_{n+1}(n)\in E_n$: the point $n$ lies in $\operatorname{dom}s_{n+1}$ by [step 4.1] and $s_{n+1}\in H$ with $\operatorname{dom}s_{n+1}=n+1>n$. [step 4.1]
 
-6.1 Hence $f$ is a function with domain $\mathbb N$ and $f(n)\in E_n$ for every $n$, which is exactly the conclusion of [A2] for the family $(E_n)$; since the family was arbitrary, $\mathrm{DC}$ implies $\mathrm{AC}_\omega$. [step 4.2, step 5.1, step 5.2, A2] ∎
+6.1 Put $\mathcal E:=\{E_n:n\in\mathbb N\}$. For each $E\in\mathcal E$, the set $\{n:E_n=E\}$ is a nonempty subset of $\mathbb N$, so let $n(E)$ be its least element and define $c(E):=f(n(E))$. Then $c$ has domain $\mathcal E$ and $c(E)\in E_{n(E)}=E$, so $c$ is a choice function on the set of members even when the indexed family has repetitions. [step 5.2, A2, A3]
+
+7.1 Hence $f$ is a function with domain $\mathbb N$ and $f(n)\in E_n$ for every $n$, which is exactly the indexed conclusion of [A2], while $c$ is the corresponding choice function on the set of member sets. Since the family was arbitrary, $\mathrm{DC}$ implies $\mathrm{AC}_\omega$. [step 4.2, step 5.1, step 5.2, step 6.1, A2] ∎

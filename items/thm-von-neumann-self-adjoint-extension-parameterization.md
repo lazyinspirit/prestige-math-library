@@ -34,7 +34,7 @@ operators $K_+\to K_-$ onto the set of self-adjoint extensions of $T$.
 
 [A1] $H=\operatorname{ran}(T+i)\oplus K_+=\operatorname{ran}(T-i)\oplus K_-$ orthogonally, $K_+\cap K_-=\{0\}$, and $C_T:\operatorname{ran}(T+i)\to\operatorname{ran}(T-i)$ is an isometric isomorphism ([[def-deficiency-subspaces-and-deficiency-indices]], [[def-cayley-transform-of-a-self-adjoint-operator]]).
 
-[A2] For a self-adjoint operator $S\supseteq T$, its Cayley transform $U_S$ is unitary, extends $C_T$ (that is, $U_S$ agrees with $C_T$ on $\operatorname{ran}(T+i)$), and $U_S(K_+)\subseteq K_-$: for $x\in D(T)$ one has $U_S(T+i)x=(S-i)x=(T-i)x$, so $\langle U_Su,(T-i)x\rangle=\langle u,(T+i)x\rangle=0$ for $u\in K_+$ ([[thm-cayley-correspondence]], [[def-cayley-transform-of-a-self-adjoint-operator]], [A1]).
+[A2] For a self-adjoint operator $S\supseteq T$, its Cayley transform $U_S$ is unitary and extends $C_T$. Hence $U_S$ maps $\operatorname{ran}(T+i)$ onto $\operatorname{ran}(T-i)$ and maps their orthogonal complements onto one another, so $U_S(K_+)=K_-$ ([[thm-cayley-correspondence]], [[def-cayley-transform-of-a-self-adjoint-operator]], [A1]).
 
 [A3] A densely defined symmetric operator $S$ with $\operatorname{ran}(S\pm i)=H$ is self-adjoint, and the inverse Cayley construction $S=i(I+U)(I-U)^{-1}$ on $\operatorname{ran}(I-U)$ produces a self-adjoint operator for every unitary $U$ with $\ker(I-U)=\{0\}$ ([[thm-cayley-correspondence]], [[thm-self-adjointness-range-criterion]]).
 
@@ -58,6 +58,6 @@ operators $K_+\to K_-$ onto the set of self-adjoint extensions of $T$.
 
 4.2 The stated action: for $x\in D(T)$ and $u\in K_+$ the vector $2i(x+u+Vu)$ equals $2ix+u'+Vu'$ with $u':=2iu\in K_+$, so by step 3.1 $T_V(2ix+u'+Vu')=i(2Tx+u'-Vu')=i(2Tx+2iu-2iVu)$, that is $2i(Tx+iu-iVu)$; dividing by the nonzero scalar $2i$ gives the displayed formula $T_V(x+u+Vu)=Tx+iu-iVu$. [step 3.1]
 
-5.1 Every self-adjoint extension $S\supseteq T$ arises this way: by [A2] its unitary $U_S$ extends $C_T$ and maps $K_+$ into $K_-$, and since $U_S$ is unitary the same argument applied to $U_S^*$ (whose Cayley transform is that of the same self-adjoint $S$) gives $U_S^*(K_-)\subseteq K_+$; hence $U_S(K_+)=K_-$ and $V:=-U_S|_{K_+}$ is a unitary $K_+\to K_-$ whose construction reproduces $S$, the Cayley transform being recovered as $U$. [A2, A3, step 4.2]
+5.1 Every self-adjoint extension $S\supseteq T$ arises this way: by [A2] its unitary $U_S$ extends $C_T$ and maps $K_+$ onto $K_-$. Thus $V:=-U_S|_{K_+}$ is a unitary $K_+\to K_-$ whose construction reproduces $S$, the Cayley transform being recovered as $U$. [A2, A3, step 4.2]
 
 6.1 By steps 4.1, 4.2, 5.1 and 2.2 the map $V\mapsto T_V$ is a bijection from unitaries $K_+\to K_-$ onto the self-adjoint extensions of $T$, with the displayed domain and action. ∎

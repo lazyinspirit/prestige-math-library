@@ -140,6 +140,7 @@
           "def-norm-and-normed-space",
           "def-dual-space-of-a-normed-space",
           "def-operator-norm",
+          "def-metric-topology",
           "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
         ],
         "strategy": "Put w=f(y)-f(x). If w=0 the claim is immediate. Otherwise the Hahn–Banach norming theorem gives φ∈Y* with ||φ||=1 and φ(w)=||w||. The scalar function t↦φ(f(x+t(y-x))) is continuous on [0,1], differentiable on (0,1), and has derivative φ(Df(x+t(y-x))(y-x)). Apply the scalar mean-value theorem and bound that derivative by M||y-x||. This needs neither a Banach-valued integral nor continuity of Df.",
@@ -229,7 +230,7 @@
         "id": "def-countable-base-banach-manifold-and-smooth-map",
         "kind": "definition",
         "title": "Countable base Banach manifold and smooth map",
-        "statement": "A C^k Banach manifold is a Hausdorff second-countable space locally homeomorphic to open subsets of a fixed real Banach space, with C^k transition maps in the Fréchet sense. A map is C^k when all chart representatives are C^k; smooth means C^∞.",
+        "statement": "A C^k Banach manifold is a Hausdorff second-countable space equipped with a specified atlas of charts into a fixed real Banach space, with C^k transition maps in the Fréchet sense. A chart of the structured manifold means a member of that atlas. A map is C^k when all representatives in the specified source and target atlases are C^k; smooth means C^∞.",
         "deps": [
           "def-c-k-map-between-banach-spaces",
           "def-topological-space",
@@ -240,7 +241,7 @@
           "def-metric-topology",
           "thm-chain-sum-product-and-composition-rules-for-banach-derivatives"
         ],
-        "strategy": "Specify the Hausdorff and countable-base assumptions and define smoothness through coordinate representatives; chart independence follows from the chain rule.",
+        "strategy": "Specify the Hausdorff and countable-base assumptions, distinguish an arbitrary local homeomorphism on the underlying space from a chart in the chosen manifold atlas, and define smoothness through representatives in those atlases; independence among the atlas charts follows from their transition compatibility and the chain rule.",
         "axiom_audit": "Definition; no atlas selection or new choice is asserted.",
         "provenance": {
           "statement": "literature-derived",
@@ -319,7 +320,7 @@
           "def-subspace-topology-top",
           "cor-finite-dimensional-subspaces-are-complemented"
         ],
-        "strategy": "Build splitness into the chart definition and record the induced tangent inclusion. Do not call an arbitrary closed linear subspace a Banach submanifold.",
+        "strategy": "Build splitness into the chart definition and record the induced tangent inclusion componentwise. On overlaps the local model spaces are linearly isomorphic, so each connected component has one model type; do not claim that distinct components share a model or that an arbitrary closed linear subspace is a Banach submanifold.",
         "axiom_audit": "Definition; a complement is part of the local data.",
         "provenance": {
           "statement": "literature-derived",
@@ -371,7 +372,7 @@
         "id": "def-smooth-banach-vector-bundle-and-section",
         "kind": "definition",
         "title": "Smooth Banach vector bundle and section",
-        "statement": "A smooth Banach vector bundle π:E→M with fibre F is locally smoothly trivial as U×F with fibrewise bounded-linear transition maps depending smoothly on the base. A smooth section is smooth s:M→E with πs=id; locally it is a smooth F-valued map. At a zero p of a section, its vertical derivative D^v s(p):T_pM→E_p is the derivative of that fibre component, transported back to the fibre; this is independent of the trivialization.",
+        "statement": "A smooth Banach vector bundle π:E→M with second-countable Banach fibre F is locally smoothly trivial as U×F with fibrewise bounded-linear transition maps depending smoothly on the base. A smooth section is smooth s:M→E with πs=id; locally it is a smooth F-valued map. At a zero p of a section, its vertical derivative D^v s(p):T_pM→E_p is the derivative of that fibre component, transported back to the fibre; this is independent of the trivialization.",
         "deps": [
           "def-countable-base-banach-manifold-and-smooth-map",
           "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
@@ -1215,7 +1216,7 @@
         "id": "cor-compact-operator-iff-approximation-numbers-tend-to-zero",
         "kind": "corollary",
         "title": "Compact operator iff approximation numbers tend to zero",
-        "statement": "Assume the Axiom of Countable Choice. For any bounded T between Hilbert spaces, T is compact iff a_n(T)=inf_{rank F<n}||T-F|| tends to zero. For compact T these are its zero-padded singular values.",
+        "statement": "Assume the Axiom of Countable Choice. For any bounded T between Hilbert spaces, set a_0(T)=||T|| and a_n(T)=inf_{rank F<n}||T-F|| for n≥1. Then T is compact iff the resulting zero-based sequence tends to zero. For compact T, a_n(T) is the zero-padded singular value s_n(T) for every n≥1.",
         "deps": [
           "lem-singular-values-equal-approximation-numbers",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
@@ -1232,7 +1233,7 @@
           "def-countable-choice",
           "thm-singular-value-decomposition-for-compact-operators"
         ],
-        "strategy": "For compact T use equality with singular values and their decay. Conversely use AC_omega for finite-rank F_n with ||T-F_n||≤a_n+1/n; compact-operator norm closure gives compactness. Thus the iff concerns arbitrary bounded T without defining singular values circularly there.",
+        "strategy": "Define the harmless initial value a_0(T)=||T|| so convergence has the library's required ℕ-domain. For compact T use equality with singular values on the positive-indexed tail and their decay. Conversely use AC_omega for finite-rank F_n with ||T-F_n||≤a_n+1/n for n≥1, set F_0=0, and invoke compact-operator norm closure. Thus the iff concerns arbitrary bounded T without defining singular values circularly there.",
         "axiom_audit": "AC_omega supplies approximate minimizers and is propagated by the norm-closure theorem; no full AC is used.",
         "provenance": {
           "statement": "literature-derived",
@@ -1255,7 +1256,7 @@
         "id": "cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators",
         "kind": "corollary",
         "title": "Finite rank operators are norm dense in compact Hilbert space operators",
-        "statement": "Assume the Axiom of Countable Choice. Every compact Hilbert-space operator is an operator-norm limit of finite-rank operators; its n-term SVD truncation has error the next singular value.",
+        "statement": "Assume the Axiom of Countable Choice. Relabel the SVD system by positive integers and let T_n retain its first n terms, with T_0=0. Then every compact Hilbert-space operator satisfies ||T-T_n||=s_{n+1}(T) for n∈ℕ and is an operator-norm limit of finite-rank operators.",
         "deps": [
           "thm-singular-value-decomposition-for-compact-operators",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
@@ -1268,7 +1269,7 @@
           "def-hilbert-space",
           "def-countable-choice"
         ],
-        "strategy": "Use the explicit finite-rank SVD truncations and compute the diagonal remainder norm as s_{n+1}, which tends to zero. Cover finite-rank and zero cases via zero padding.",
+        "strategy": "First relabel the infinite-rank SVD system from the library's zero-based index set to positive integers so its m-th vector corresponds to the numerical singular value s_m(T). Define a zero-based approximation sequence by taking the first n singular terms and T_0=0. Compute the remainder norm as s_{n+1}(T), which tends to zero; cover finite-rank and zero cases via zero padding.",
         "axiom_audit": "AC_omega is inherited from SVD; truncations are explicit.",
         "provenance": {
           "statement": "literature-derived",
@@ -1332,7 +1333,7 @@
         "id": "def-trace-class-operator",
         "kind": "definition",
         "title": "Trace class operator",
-        "statement": "Assume the Axiom of Countable Choice. A compact operator T is trace class when Σ_ns_n(T)<∞; its trace norm is ||T||_1=Σ_ns_n(T).",
+        "statement": "Assume the Axiom of Countable Choice. A compact operator T is trace class when the zero-based shifted series Σ_{m∈N}s_{m+1}(T) converges; this sum is its trace norm ||T||_1.",
         "deps": [
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "thm-singular-value-decomposition-for-compact-operators",
@@ -1345,7 +1346,7 @@
           "def-hilbert-space",
           "def-countable-choice"
         ],
-        "strategy": "Use the nonincreasing zero-padded singular sequence, include finite-rank and zero cases, and do not define trace class through a diagonal sum whose invariance is not yet proved.",
+        "strategy": "Use the explicit zero-based shift (s_{m+1})_{m∈N} of the nonincreasing zero-padded singular sequence, include finite-rank and zero cases, and do not define trace class through a diagonal sum whose invariance is not yet proved.",
         "axiom_audit": "AC_omega is propagated from singular values; no new choice.",
         "provenance": {
           "statement": "literature-derived",
@@ -1763,9 +1764,11 @@
           "def-hilbert-space",
           "def-real-and-complex-inner-product-space",
           "thm-cauchy-schwarz-in-an-inner-product-space",
-          "def-hilbert-schmidt-operator"
+          "def-hilbert-schmidt-operator",
+          "def-hilbert-space-adjoint",
+          "def-self-adjoint-positive-unitary-and-normal-operator"
         ],
-        "strategy": "Its kernel 1_{0≤t≤x} has L² norm squared 1/2, so the imported kernel theorem gives HS and compactness. Iterated integration gives V^nf(x)=1/(n-1)!∫_0^x(x-t)^{n-1}f(t)dt and hence a factorial operator-norm bound. If Vf=λf with λ≠0, then |λ|^n||f||=||V^nf||≤||V^n||||f|| for every n, which is impossible unless f=0. Riesz–Schauder now says every nonzero spectral value would be an eigenvalue, so the spectrum is {0}. Use no later spectral-radius theory.",
+        "strategy": "Its kernel 1_{0≤t≤x} has L² norm squared 1/2, so the imported kernel theorem gives HS and compactness. Iterated integration gives V^nf(x)=1/(n-1)!∫_0^x(x-t)^{n-1}f(t)dt and the explicit factorial operator-norm bound. If Vf=λf with λ≠0, divide that bound by |λ|^n and use the ratio test to show the quotient tends to zero, contradicting the eigenvector inequality. Riesz–Schauder then gives spectrum {0}. Finally compare the pairings on f=1 and g=x to prove V is not self-adjoint directly.",
         "axiom_audit": "Full AC is propagated from the sigma-finite kernel theorem and Riesz–Schauder.",
         "provenance": {
           "statement": "literature-derived",
@@ -1789,6 +1792,7 @@
           "thm-hilbert-adjoint-properties",
           "def-hilbert-space-adjoint",
           "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-finite-rank-operators-are-compact",
           "thm-singular-value-decomposition-for-compact-operators",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "lem-positive-square-root-of-a-compact-positive-operator",
@@ -1886,6 +1890,7 @@
           "ex-diagonal-schatten-class-criteria-on-ell-two",
           "thm-p-series-rational",
           "def-hilbert-schmidt-operator",
+          "thm-hilbert-schmidt-norm-is-basis-independent",
           "def-compact-linear-operator",
           "def-trace-class-operator",
           "def-square-summable-family-on-an-arbitrary-index-set",
@@ -1938,8 +1943,8 @@
       {
         "id": "cex-trace-of-products-is-not-cyclic-without-summability",
         "kind": "counterexample",
-        "title": "Trace of products is not cyclic without summability",
-        "statement": "Assume the Axiom of Countable Choice. For the unilateral shift S on ℓ², S*S=I and SS*=I-P_0. Neither product is trace class, while S*S-SS*=P_0 is rank one with trace 1; cyclicity cannot be extended by subtracting undefined infinite traces.",
+        "title": "The unilateral shift obstructs a cyclic linear trace extension",
+        "statement": "Assume the Axiom of Countable Choice. For the unilateral shift S on ℓ², S*S=I and SS*=I-P_0. Neither product is trace class, while S*S-SS*=P_0 is rank one with trace 1; hence no linear extension of the trace can be cyclic on this pair.",
         "deps": [
           "thm-cyclicity-of-the-trace",
           "ex-rank-one-operator-adjoint-norm-and-trace",
@@ -1961,7 +1966,7 @@
           "def-bounded-linear-operator",
           "def-countable-choice"
         ],
-        "strategy": "Compute S* on the standard basis and hence both products. I has all singular values one and is not trace class, while P_0 is rank one of trace one. Emphasize failure of hypotheses, not unequal traces of two trace-class products.",
+        "strategy": "Compute S* on the standard basis and hence both products. I is not trace class, while P_0 is rank one of trace one. A cyclic linear extension would force its value on P_0 to be both zero and one.",
         "axiom_audit": "AC_omega is inherited from trace-class cyclicity; the shift calculation is explicit.",
         "provenance": {
           "statement": "literature-derived",

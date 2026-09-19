@@ -29,7 +29,7 @@ $\mathbb R^2$.
 uncountable and every subset $A \subseteq E$ is **relatively $G_\delta$**: there
 are open sets $V_n \subseteq \mathbb R$, $n \in \mathbb N$, with
 $$A = E \cap \bigcap_{n \in \mathbb N} V_n .$$
-(Equivalently, replacing $V_n$ by $V_1 \cap \dots \cap V_n$, the sets may be
+(Equivalently, replacing $V_n$ by $\bigcap_{k \le n}V_k$, the sets may be
 assumed decreasing.) Nothing here asserts that a Q-set exists; existence is
 proved from Martin's axiom on the companion item
 [[lem-ma-produces-an-uncountable-q-set]].

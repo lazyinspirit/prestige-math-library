@@ -55,9 +55,9 @@ with $\chi_\infty$ corresponding to evaluation at the added point.
 
 1.2 By the uniqueness statement of [L2] the canonical algebraic isomorphism $C_0(X)^+ \to C(X^+)$, $(f,\lambda) \mapsto f+\lambda\mathbf 1$, is an isometric $\ast$-isomorphism: both sides are C\*-algebras with the same underlying algebra over $C_0(X)$, and the norm of $C(X^+)$ restricts to the norm of $C_0(X)$. [1.1, L2, algebra]
 
-1.3 Under this isomorphism the quotient character $\chi_\infty(f,\lambda) = \lambda$ corresponds to evaluation at $\infty$, because $(f+\lambda\mathbf 1)(\infty) = f(\infty) + \lambda = \lambda$ for $f \in C_0(X)$. [1.1, 2.1, algebra]
+2.1 Under this isomorphism the quotient character $\chi_\infty(f,\lambda) = \lambda$ corresponds to evaluation at $\infty$, because $(f+\lambda\mathbf 1)(\infty) = f(\infty) + \lambda = \lambda$ for $f \in C_0(X)$. [step 1.1, algebra]
 
-2.1 Specialising to $X = \mathbb N$ discrete: $C_0(\mathbb N) = c_0(\mathbb N)$ by [L3] and $C(\mathbb N^+)$ is the algebra of convergent sequences with the supremum norm, evaluation at $\infty$ being the limit functional; hence the minimal unitization of $c_0(\mathbb N)$ is the algebra of convergent sequences and the quotient character is the limit at infinity. [step 1.2, step 1.3, L3, algebra] ∎
+3.1 Specialising to $X = \mathbb N$ discrete: $C_0(\mathbb N) = c_0(\mathbb N)$ by [L3] and $C(\mathbb N^+)$ is the algebra of convergent sequences with the supremum norm, evaluation at $\infty$ being the limit functional; hence the minimal unitization of $c_0(\mathbb N)$ is the algebra of convergent sequences and the quotient character is the limit at infinity. [step 1.2, step 2.1, L3, algebra] ∎
 
 ## Remarks
 

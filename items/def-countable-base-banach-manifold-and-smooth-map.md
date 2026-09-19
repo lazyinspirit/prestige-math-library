@@ -39,14 +39,18 @@ Let $k \in \mathbb N \cup \{\infty\}$ and let $E$ be a real Banach space
 
 Thus every point of $M$ lies in the domain of a chart: $M$ is locally
 homeomorphic to open subsets of the Banach space $E$, and the change of
-coordinates between any two charts is a $C^k$ map. The pair (Hausdorff, second
-countable) is part of the definition and is never dropped below.
+coordinates between any two charts in its specified atlas is a $C^k$ map.
+Henceforth a **chart of the structured manifold $M$** means a member of that
+specified atlas; it does not mean an arbitrary local homeomorphism on the
+underlying topological space. The pair (Hausdorff, second countable) is part of
+the definition and is never dropped below.
 
 Let $M$ be a $C^k$ Banach manifold modelled on $E$ and $N$ a $C^k$ Banach
 manifold modelled on $F$, and let $f : M \to N$ be a map.
 
-* $f$ is of **class $C^k$** when for every chart $(\varphi,U)$ of $M$ and every
-  chart $(\psi,V)$ of $N$ the **coordinate representative**
+* $f$ is of **class $C^k$** when for every chart $(\varphi,U)$ in the specified
+  atlas of $M$ and every chart $(\psi,V)$ in the specified atlas of $N$ the
+  **coordinate representative**
   $$\psi \circ f \circ \varphi^{-1} : \varphi\bigl[U \cap f^{-1}[V]\bigr] \to F$$
   is of class $C^k$ where it is defined, that is on the open set
   $\varphi[U \cap f^{-1}[V]] \subseteq E$.
@@ -58,8 +62,9 @@ manifold modelled on $F$, and let $f : M \to N$ be a map.
 
 - **Chart independence of the class of a map is a chain-rule statement.** If
   $(\varphi,U)$, $(\varphi',U')$ are charts of $M$ and $(\psi,V)$,
-  $(\psi',V')$ are charts of $N$, then on the open set where both sides are
-  defined, $\psi' \circ f \circ \varphi'^{-1}$ equals
+  $(\psi',V')$ are charts of $N$ from their specified atlases, then on the open
+  set where both sides are defined,
+  $\psi' \circ f \circ \varphi'^{-1}$ equals
   $(\psi' \circ \psi^{-1}) \circ (\psi \circ f \circ \varphi^{-1}) \circ
   (\varphi \circ \varphi'^{-1})$, a composite of $C^k$ transition maps and the
   representative $\psi \circ f \circ \varphi^{-1}$. For $k = 1$ the class is
@@ -70,7 +75,8 @@ manifold modelled on $F$, and let $f : M \to N$ be a map.
   ([[def-c-k-map-between-banach-spaces]]) — and consequently $C^1$-ness may be
   checked at each point with one pair of charts around it. Nothing below uses
   this independence for $k \ge 2$, and the definition itself quantifies over
-  all chart pairs, so no higher-order chain rule is presupposed.
+  all pairs from the specified atlases, so no higher-order chain rule is
+  presupposed.
 
 - **The model space is fixed.** Charts take values in one Banach space $E$,
   which may be infinite dimensional; a manifold with a finite-dimensional model

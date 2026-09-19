@@ -4,7 +4,7 @@ kind: example
 title: "A deterministic step integrand"
 status: draft
 origin: pipeline
-deps: [def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [def-ito-integral-of-an-elementary-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-elementary-predictable-brownian-integrand, cor-deterministic-ito-integrals-are-gaussian, def-standard-normal-and-normal-laws, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: example
@@ -33,7 +33,7 @@ variance $\int_0^Th^2ds$.
 
 **Given:** AC, the standing hypothesis (H), a deterministic step function $h=\sum_ka_k1_{(t_k,t_{k+1}]}$ on $[0,T]$ and $t\in[0,T]$.
 
-[F1] A deterministic step function is an elementary predictable integrand with coefficients $a_k\in\mathcal F_{t_k}$ (constants), and its integral is the finite sum $\sum_ka_k(B_{t\wedge t_{k+1}}-B_{t\wedge t_k})$, which is the general integral of $h$ as well. [[def-elementary-predictable-brownian-integrand]] [[def-ito-integral-of-an-elementary-predictable-process]]
+[F1] A deterministic step function is an elementary predictable integrand with coefficients $a_k\in\mathcal F_{t_k}$ (constants), and its elementary integral is the finite sum $\sum_ka_k(B_{t\wedge t_{k+1}}-B_{t\wedge t_k})$; the general integral agrees with the elementary one on this subspace. [[def-elementary-predictable-brownian-integrand]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-ito-integral-for-square-integrable-predictable-processes]]
 
 [F2] For deterministic $h\in L^2[0,T]$ the integral is centered normal with variance $\int_0^Th^2ds$. [[cor-deterministic-ito-integrals-are-gaussian]] [[def-standard-normal-and-normal-laws]]
 

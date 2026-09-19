@@ -33,15 +33,16 @@ $K\subseteq U$ put $\tau_K:=\inf\{t\ge0:(t,B_t)\notin\operatorname{int}K\}$.
    thus each stopped piece is a true martingale.
 2. If $\tau_U:=\inf\{t\ge0:(t,B_t)\notin U\}$ and
    $E\int_0^t|\nabla f|^2(s,B_s)1_{[0,\tau_U)}(s)\,ds<\infty$ for a given
-   $t\ge0$, then
-   $$f(t\wedge\tau_U,B_{t\wedge\tau_U})-f(0,0)=\int_0^t1_{[0,\tau_U)}(s)\sum_{k=1}^d\partial_{x_k}f(s,B_s)\,dB^k_s,$$
-   a square-integrable martingale identity on $[0,t]$; the truncation by
-   $t\wedge\tau_U$ and by $1_{[0,\tau_U)}$ is what makes both sides defined when
-   $(t,B_t)$ leaves the open set $U$ on which $f$ and its derivatives exist.
+   $t\ge0$, then the process
+   $$N_r:=\int_0^r1_{[0,\tau_U)}(s)\sum_{k=1}^d\partial_{x_k}f(s,B_s)\,dB^k_s,
+   \qquad 0\le r\le t,$$
+   is a square-integrable martingale, and for every $0\le r\le t$ one has
+   $$f(r,B_r)-f(0,0)=N_r\qquad\text{on the event }\{r<\tau_U\}.$$
+   No value of $f$ at the exit point $(\tau_U,B_{\tau_U})\notin U$ is asserted.
 3. On the stochastic interval $[0,\tau_U)$ the process $t\mapsto f(t,B_t)$,
    read through continuous versions, is a continuous local martingale with
-   localizing sequence $\tau_{K_n}$ for any increasing sequence of compact sets
-   $K_n\subseteq U$ with $\bigcup_nK_n=U$.
+   localizing sequence $\tau_{K_n}$ for any compact exhaustion satisfying
+   $K_n\subseteq\operatorname{int}K_{n+1}$ and $\bigcup_nK_n=U$.
 
 ## Facts & Assumptions
 
@@ -55,7 +56,7 @@ $K\subseteq U$ put $\tau_K:=\inf\{t\ge0:(t,B_t)\notin\operatorname{int}K\}$.
  
 [F4] **Localized-integral interfaces.** For a bounded predictable integrand $H$ on $[0,T]$: the integral $\int H\,dB^k$ is a continuous square-integrable martingale with $E(\int_0^TH\,dB^k)^2=E\int_0^TH^2ds$, the stopping identity identifies stopped integrals with integrals of $H1_{[0,\tau]}$, and a bounded integrand has finite energy. [[thm-localized-ito-integral]] [[thm-stopping-an-ito-integral]] [[thm-ito-integral-process-has-a-continuous-martingale-version]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[def-locally-square-integrable-predictable-brownian-integrand]] [[def-progressively-measurable-and-predictable-process]]
  
-[F5] **Stopping times and localization.** For an open set $V\subseteq[0,\infty)\times\mathbb R^d$ and a continuous adapted $\mathbb R^d$-valued process, the first exit time $\inf\{t:(t,X_t)\notin V\}$ is a stopping time when the exit event is computed through the continuous path and the usual filtration conventions; if $K_n\subseteq U$ are compact with $\bigcup_nK_n=U$ and $\tau_{K_n}\uparrow$ then $\lim_n\tau_{K_n}=\tau_U$ almost surely, because otherwise the continuous path on the compact time interval $[0,\lim\tau_{K_n}]$ would be a compact subset of the open set $U$, hence contained in some $\operatorname{int}K_N$, forcing $\tau_{K_N}>\lim\tau_{K_n}$. [[def-continuous-time-stopping-time]] [[def-continuous-time-adapted-process-and-martingale]] [[def-continuity-real]]
+[F5] **Stopping times and localization.** For an open set $V\subseteq[0,\infty)\times\mathbb R^d$ and a continuous adapted $\mathbb R^d$-valued process, the first exit time $\inf\{t:(t,X_t)\notin V\}$ is a stopping time when the exit event is computed through the continuous path and the usual filtration conventions. If $K_n\subseteq\operatorname{int}K_{n+1}\subseteq U$ are compact with $\bigcup_nK_n=U$, then $\tau_{K_n}\uparrow\tau_U$ almost surely: every compact path segment lying in $U$ is covered by the increasing open sets $\operatorname{int}K_n$ and hence lies in one of them. [[def-continuous-time-stopping-time]] [[def-continuous-time-adapted-process-and-martingale]] [[def-continuity-real]]
  
 [F6] **AC bookkeeping.** Choice is declared for the conditional-expectation and completeness interfaces. [[def-axiom-of-choice]]
  
@@ -73,7 +74,7 @@ $K\subseteq U$ put $\tau_K:=\inf\{t\ge0:(t,B_t)\notin\operatorname{int}K\}$.
  
 3.1 The stopped identity: by the stopping identity of [F4] applied to the bounded (on $[0,t\wedge\tau_K]$) integrand $\nabla g(\cdot,B)$, the stochastic integral in step 1.1 equals $\sum_k\int_0^t1_{[0,\tau_K]}(s)\partial_{x_k}g(s,B_s)dB^k_s$ up to indistinguishability; substituting step 2.1 gives clause 1 of the statement. The integrand $1_{[0,\tau_K]}\partial_{x_k}f(\cdot,B)$ is predictable and bounded by $C_K$ on the neighbourhood of $K$ by [F3], so its integral has finite energy and is a continuous square-integrable martingale by [F4]; the stopped process is therefore a true martingale. [F3, F4, step 2.1]
  
-4.1 Clause 2: fix $t\ge0$ and assume $E\int_0^t|\nabla f|^2(s,B_s)1_{[0,\tau_U)}(s)ds<\infty$; the integrand $\nabla f(\cdot,B)1_{[0,\tau_U)}$ is predictable whenever $\nabla f(\cdot,B)$ is, is locally square-integrable by the finite-energy hypothesis on $[0,t]$, and the stopping identity expresses the stopped integrals through it; the finite-energy integral is a square-integrable martingale by [F4], and its identity with $f(\cdot,B)-f(0,0)$ holds on $[0,\tau_U)$ by clause 1 with $K=K_n$, letting $n\to\infty$ along the exhaustion of [F5]. [F4, F5, step 3.1]
+4.1 Clause 2: fix $t\ge0$ and assume $E\int_0^t|\nabla f|^2(s,B_s)1_{[0,\tau_U)}(s)ds<\infty$, and choose a compact exhaustion $(K_n)$ as in [F5]. The predictable finite-energy integrands $H^{(n)}:=1_{[0,\tau_{K_n}]}\nabla f(\cdot,B)$ converge in $L^2([0,t]\times\Omega)$ to a predictable class $H$ whose value is $1_{[0,\tau_U)}\nabla f(\cdot,B)$ away from the single exit time on each path; this follows from $\tau_{K_n}\uparrow\tau_U$ and the displayed energy assumption. By the Ito isometry their integrals converge in $L^2$, defining the square-integrable martingale $N=H\cdot B$ in clause 2. For a deterministic $0\le r\le t$, the events $\{r<\tau_{K_n}\}$ increase to $\{r<\tau_U\}$; on each of them clause 1 gives $f(r,B_r)-f(0,0)=N^{(n)}_r$, and the $L^2$ convergence of $N^{(n)}_r$ to $N_r$ yields the asserted equality on $\{r<\tau_U\}$. This proves clause 2 without evaluating $f$ at the exit point, which need not belong to $U$. [F4, F5, step 3.1]
  
 5.1 Clause 3 and boundary cases: for an increasing exhaustion $K_n$ of $U$ by compact sets, clause 1 exhibits each stopped piece $f(\cdot\wedge\tau_{K_n},B_{\cdot\wedge\tau_{K_n}})$ as a martingale, and [F5] gives $\tau_{K_n}\uparrow\tau_U$ almost surely, so the pieces form a localizing sequence on $[0,\tau_U)$; this proves clause 3. If $K$ is a singleton neighbourhood of the starting point or $U$ is all of space-time, the same argument applies; if $f$ is constant the gradient vanishes and both sides reduce to the constant value; if $d=1$ the formula involves the single integral $\int\partial_xf(s,B_s)dB_s$; the harmonicity equation is used only through the cancellation in step 2.1, so the spatial growth of $f$ outside $U$ is irrelevant; and AC enters only through [F6]. [F5, F6, step 3.1, step 4.1] ∎
 

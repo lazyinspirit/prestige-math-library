@@ -53,7 +53,7 @@ are continuous martingales, with $B_t^2-t=2\int_0^tB_s\,dB_s$ the case $n=2$.
  
 3.1 The cases $n=2$ and $n=3$: for $n=2$ the formula reads $B_t^2=2\int_0^tB_sdB_s+t$, the square identity of [[cor-brownian-square-martingale]], and subtracting the deterministic clock $t$ gives $B_t^2-t=2\int_0^tB_sdB_s$, a martingale. For $n=3$ the formula reads $B_t^3=3\int_0^tB_s^2dB_s+3\int_0^tB_sds$; applying the space-time Ito formula [F1] to $f(t,x)=x^3-3tx$ gives $\partial_tf=-3x$, $\partial_xf=3x^2-3t$, $\partial^2_xf=6x$ and drift coefficient $-3x+3x=0$, so $B_t^3-3tB_t=3\int_0^t(B_s^2-s)dB_s$, which is a true martingale by step 2.1 applied to the integrand $3(B^2-s)$ of finite energy $9E\int_0^t(B_s^2-s)^2ds<\infty$ (finite by [F2] and the triangle inequality). [F2, F3, step 2.1]
  
-4.1 Boundary and consistency cases: for $n=2$ the drift coefficient $n(n-1)/2=1$ matches the quadratic-variation term of $x^2$; for $n=1$ the same formula would read $B_t=\int_0^t1\,dB_s+0$, which is the definition; the case $n=0$ (the constant $1$) is not covered by the displayed range $n\ge2$ and is trivial; at $t=0$ both sides vanish; for $n=2$ at $t=0$ the identities are $0=0$; the finite-energy hypothesis fails for $n<2$ in the form of a negative power and is not used; AC enters only through [F4]. [F2, F3, F4, step 3.1] ∎
+4.1 Boundary and consistency cases: for $n=2$ the drift coefficient $n(n-1)/2=1$ matches the quadratic-variation term of $x^2$; for $n=1$ the same formula would read $B_t=\int_0^t1\,dB_s+0$, which is the definition; the case $n=0$ (the constant $1$) is not covered by the displayed range $n\ge2$ and is trivial; at $t=0$ both sides vanish; for $n=2$ at $t=0$ the identities are $0=0$; AC enters only through [F4]. [F2, F3, F4, step 3.1] ∎
 
 ## Source notes
 

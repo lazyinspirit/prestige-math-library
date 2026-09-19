@@ -5,7 +5,7 @@ title: Linear combinations of compact operators are compact
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, lem-finite-rank-operators-are-compact, lem-compositions-with-a-compact-operator-are-compact, thm-finite-products-of-compact-spaces, lem-vector-operations-are-continuous-in-a-normed-space, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, def-bounded-linear-operator, def-metric-bounded-diameter, def-linear-basis]
+deps: [def-compact-linear-operator, lem-finite-rank-operators-are-compact, lem-compositions-with-a-compact-operator-are-compact, thm-finite-products-of-compact-spaces, lem-vector-operations-are-continuous-in-a-normed-space, thm-compactness-under-continuous-maps, thm-compact-subset-is-closed-and-bounded, lem-closed-subset-of-a-compact-space-is-compact, def-bounded-linear-operator, def-operator-norm, def-metric-bounded-diameter, def-linear-basis]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -32,13 +32,13 @@ $\sum_{k=1}^{m}a_kK^k= a_1K+a_2K^2+\dots+a_mK^m$ is compact.
 
 ## Facts & Assumptions
 
-[A1] $S$ is compact exactly when $\overline{S(E)}$ is compact for every bounded $E$; in particular $\overline{S(\overline B_X)}$ is compact for the closed unit ball ([[def-compact-linear-operator]]), and a bounded linear operator such as $K$ satisfies $\|Kw\|\le\|K\|\,\|w\|$ ([[def-bounded-linear-operator]]).
+[A1] $S$ is compact exactly when $\overline{S(E)}$ is compact for every bounded $E$; in particular $\overline{S(\overline B_X)}$ is compact for the closed unit ball ([[def-compact-linear-operator]]), and a bounded linear operator such as $K$ satisfies $\|Kw\|\le\|K\|\,\|w\|$ ([[def-operator-norm]]).
 
 [A2] The zero operator has range $\{0\}$, and the space $\{0\}$ admits the empty ordered basis of finite length, so the zero operator is compact ([[lem-finite-rank-operators-are-compact]], [[def-linear-basis]]).
 
 [A3] If $T$ is compact and $C$ is bounded linear, then $TC$ and $CT$ are compact ([[lem-compositions-with-a-compact-operator-are-compact]]).
 
-[A4] Addition $+:Y\times Y\to Y$ and scalar multiplication are continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]); a finite product of compact spaces is compact ([[thm-finite-products-of-compact-spaces]]); a continuous image of a compact set is compact ([[thm-compactness-under-continuous-maps]]); a compact subset of a metric space is closed ([[thm-compact-subset-is-closed-and-bounded]]).
+[A4] Addition $+:Y\times Y\to Y$ and scalar multiplication are continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]); a finite product of compact spaces is compact ([[thm-finite-products-of-compact-spaces]]); a continuous image of a compact set is compact ([[thm-compactness-under-continuous-maps]]); a compact subset of a metric space is closed, and a closed subset of a compact metric space is compact ([[thm-compact-subset-is-closed-and-bounded]], [[lem-closed-subset-of-a-compact-space-is-compact]]).
 
 
 

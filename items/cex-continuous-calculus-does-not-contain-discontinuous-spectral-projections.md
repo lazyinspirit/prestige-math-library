@@ -28,7 +28,12 @@ Assume AC. For the self-adjoint operator $T=M_t$ of multiplication by the coordi
 
 [A2] $L^2(0,1)$ is a Hilbert space of a.e. classes with $\langle f,g\rangle=\int_0^1f\overline g$; multiplication by a bounded function is a bounded operator on it ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]).
 
-[A3] $M_g$ is an orthogonal projection exactly when $g$ is an indicator function modulo null sets; the Hilbert orthogonal projection onto a closed subspace is the unique self-adjoint idempotent with that range ([[def-hilbert-orthogonal-projection]]).
+[A3] For a measurable set $A$, pointwise multiplication gives
+$M_{\mathbf 1_A}^2=M_{\mathbf 1_A}$ and
+$\langle M_{\mathbf 1_A}u,v\rangle=\langle u,M_{\mathbf 1_A}v\rangle$; its
+range is the closed subspace of classes supported in $A$, so it is the Hilbert
+orthogonal projection onto that subspace
+([[def-hilbert-orthogonal-projection]]).
 
 [A4] AC is the hypothesis of the calculus supplier ([[def-axiom-of-choice]]).
 

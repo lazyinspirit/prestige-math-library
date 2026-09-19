@@ -5,7 +5,7 @@ title: "Unbounded Borel functional calculus: domains, products, spectral mapping
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-unbounded-integral-against-a-pvm, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-support-and-uniqueness-of-the-spectral-measure, def-projection-valued-measure, thm-dominated-convergence, def-axiom-of-choice, def-orthogonality-and-orthogonal-complement]
+deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-unbounded-integral-against-a-pvm, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-projection-valued-measure, thm-dominated-convergence, def-axiom-of-choice, def-orthogonality-and-orthogonal-complement]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -44,8 +44,6 @@ $f,g:\mathbb R\to\mathbb C$ be Borel. Then:
 
 [A2] Truncations: for Borel $u$ and $x\in D_u$ one has $u(T)x=\lim_m u_m(T)x$ with $u_m=u\mathbf 1_{\{|u|\le m\}}$, and if bounded Borel $g_n$ satisfy $|g_n|\le C|u|$ and $g_n\to u$ pointwise then $g_n(T)x\to u(T)x$ ([[lem-unbounded-pvm-integral-is-well-defined-and-closed]]).
 
-[A3] The support of $E$ is $\sigma(T)$, so $E(U)\ne0$ for every nonempty relatively open $U\subseteq\sigma(T)$; and $\|(f(T)-z)^{-1}\|\le\varepsilon^{-1}$ on the set where $|f-z|\ge\varepsilon$ ([[thm-support-and-uniqueness-of-the-spectral-measure]], [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]).
-
 ## Proof
 
 **Proof technique:** direct.
@@ -66,6 +64,8 @@ $f,g:\mathbb R\to\mathbb C$ be Borel. Then:
 
 6.1 Conversely if $E(f^{-1}(B_\varepsilon(z)))\ne0$ for every $\varepsilon$, choose a unit vector $x_\varepsilon=E(f^{-1}(B_\varepsilon(z)))x_\varepsilon$ (possible because the projection is nonzero) for each $\varepsilon$; then $\|(f(T)-z)x_\varepsilon\|^2=\int_{f^{-1}(B_\varepsilon(z))}|f-z|^2dE_x\le\varepsilon^2$, so $(f(T)-z)$ has no bounded inverse and $z\in\sigma(f(T))$. [A1, step 5.1]
 
-7.1 For continuous $f$ the essential range is $\overline{f(\sigma(T))}$: if $z\notin\overline{f(\sigma(T))}$ then $f^{-1}(B_\varepsilon(z))\cap\sigma(T)=\varnothing$ for small $\varepsilon$, hence $E(f^{-1}(B_\varepsilon(z)))=0$ by [A3]; conversely if $z\in\overline{f(\sigma(T))}$ then for every $\varepsilon$ the set $f^{-1}(B_\varepsilon(z))\cap\sigma(T)$ is a nonempty relatively open subset of $\sigma(T)$, so its $E$-value is nonzero by [A3]. [A3, step 5.1, step 6.1]
+7.1 Apply steps 5.1--6.1 first to the identity function. They say that $\lambda\in\sigma(T)$ exactly when $E(B_\delta(\lambda))\ne0$ for every $\delta>0$. Moreover $E(\mathbb R\setminus\sigma(T))=0$: every point of the open set $\mathbb R\setminus\sigma(T)$ has an open interval of zero $E$-projection, and a countable rational subcover plus countable additivity of the PVM gives the assertion. [step 5.1, step 6.1]
 
-8.1 The claims collected are 1 = [A1], 2 = steps 2.1 and 3.1, 3 = step 1.2, 4 = steps 5.1 and 6.1, 5 = step 7.1. ∎
+8.1 Now let $f$ be continuous. If $z\notin\overline{f(\sigma(T))}$, then for some $\varepsilon>0$, $f^{-1}(B_\varepsilon(z))\subseteq\mathbb R\setminus\sigma(T)$, so its $E$-projection is zero by step 7.1. Conversely, if $z\in\overline{f(\sigma(T))}$ and $\varepsilon>0$, choose $\lambda\in\sigma(T)$ with $|f(\lambda)-z|<\varepsilon/2$. Continuity gives an open interval $V$ about $\lambda$ contained in $f^{-1}(B_\varepsilon(z))$. Step 7.1 gives $E(V)\ne0$, hence $E(f^{-1}(B_\varepsilon(z)))\ne0$. Thus the essential range is $\overline{f(\sigma(T))}$. [step 7.1]
+
+9.1 The claims collected are 1 = [A1], 2 = steps 2.1 and 3.1, 3 = step 1.2, 4 = steps 5.1 and 6.1, 5 = steps 7.1 and 8.1. ∎

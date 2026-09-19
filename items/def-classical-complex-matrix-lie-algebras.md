@@ -34,11 +34,11 @@ each case by the computation displayed.
   $\mathfrak{sl}_2(\mathbb C)$ agrees with
   [[def-special-linear-lie-algebra-sl-two]].
 * The **symplectic Lie algebra** $\mathfrak{sp}_{2n}(\mathbb C)$ is the set of
-  $A\in M_{2n}(\mathbb C)$ with $AJ+JA^{T}=0$, where
+  $A\in M_{2n}(\mathbb C)$ with $AJ+JA^{T}=0$, for $n\ge1$, where
   $J=\begin{pmatrix}0&I_n\\-I_n&0\end{pmatrix}$.
 * The **orthogonal Lie algebras** $\mathfrak{so}_{2n}(\mathbb C)$ and
   $\mathfrak{so}_{2n+1}(\mathbb C)$ are the sets of $A\in M_m(\mathbb C)$ with
-  $AJ+JA^{T}=0$, where $J=\begin{pmatrix}0&I_n\\I_n&0\end{pmatrix}$ for
+  $AJ+JA^{T}=0$, for $n\ge1$, where $J=\begin{pmatrix}0&I_n\\I_n&0\end{pmatrix}$ for
   $m=2n$ and
   $J=\begin{pmatrix}1&0&0\\0&0&I_n\\0&I_n&0\end{pmatrix}$ for $m=2n+1$.
 
@@ -46,12 +46,12 @@ Solving $AJ+JA^{T}=0$ blockwise gives
 $A=\begin{pmatrix}a&b\\c&-a^{T}\end{pmatrix}$ for the symplectic and even
 orthogonal cases, with $b,c$ symmetric for $\mathfrak{sp}_{2n}(\mathbb C)$ and
 $b,c$ skew-symmetric for $\mathfrak{so}_{2n}(\mathbb C)$, and gives
-$$A=\begin{pmatrix}0&u&-u\\ w&a&b\\ -w^{T}&c&-a^{T}\end{pmatrix},\qquad u,w\in M_{1\times n}(\mathbb C),\ b,c\ \text{skew-symmetric},$$
+$$A=\begin{pmatrix}0&u&-w^{T}\\ w&a&b\\ -u^{T}&c&-a^{T}\end{pmatrix},\qquad u\in M_{1\times n}(\mathbb C),\quad w\in M_{n\times1}(\mathbb C),\quad b,c\ \text{skew-symmetric},$$
 for $\mathfrak{so}_{2n+1}(\mathbb C)$. In particular
 $\dim\mathfrak{sp}_{2n}(\mathbb C)=n(2n+1)=\dim\mathfrak{so}_{2n+1}(\mathbb C)$
 and $\dim\mathfrak{so}_{2n}(\mathbb C)=n(2n-1)$. Each set is closed under the
 bracket: if $AJ=-JA^{T}$ and $BJ=-JB^{T}$, then
-$[A,B]J+J[A,B]^{T}=ABJ-BAJ+JA^{T}B^{T}-JB^{T}A^{T}$, and substituting
+$[A,B]J+J[A,B]^{T}=ABJ-BAJ+JB^{T}A^{T}-JA^{T}B^{T}$, and substituting
 $AJ=-JA^{T}$ and $BJ=-JB^{T}$ (equivalently $JA^{T}=-AJ$ and $JB^{T}=-BJ$) makes
-the four terms cancel in pairs. Each family is a nonzero proper subspace of
+the four terms cancel in pairs. For $n\ge1$, each symplectic or orthogonal family is a nonzero proper subspace of
 $M_m(\mathbb C)$ closed under the commutator, hence a Lie subalgebra.

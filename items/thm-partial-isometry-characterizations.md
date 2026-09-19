@@ -56,4 +56,6 @@ Assume Countable Choice. For a bounded operator $U$ on a nonzero complex Hilbert
 
 3.2 If $U$ is a partial isometry then $U^*$ is a partial isometry: $\ker U^*=(\operatorname{ran}U)^\perp$ and $(\ker U^*)^\perp=\operatorname{ran}U$ by closedness of the range, $U^*$ vanishes on its kernel, and for $y=Ux\in\operatorname{ran}U$ one has $\|U^*y\|=\|U^*Ux\|=\|P_Mx\|=\|Ux\|=\|y\|$. [step 2.1, step 1.3, A4, algebra]
 
-4.1 Therefore the partial-isometry condition, the identity $U^*U=P_{(\ker U)^\perp}$, the identity $UU^*=P_{\operatorname{ran}U}$ and the partial-isometry of $U^*$ all hold together or fail together, which is the asserted equivalence. [step 2.1, step 2.2, step 3.1, step 3.2] ∎
+4.1 Conversely, if $U^*$ is a partial isometry, then step 3.2 applied to $U^*$ shows that $U^{**}=U$ is a partial isometry. [step 3.2, A2]
+
+5.1 Therefore $U$ is a partial isometry exactly when $U^*U=P_{(\ker U)^\perp}$, and exactly when $U^*$ is a partial isometry; whenever these conditions hold, $\operatorname{ran}U$ is closed and $UU^*=P_{\operatorname{ran}U}$. [step 2.1, step 2.2, step 3.1, step 3.2, step 4.1] ∎

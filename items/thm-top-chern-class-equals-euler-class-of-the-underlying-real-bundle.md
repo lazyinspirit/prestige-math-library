@@ -21,7 +21,7 @@ sources:
 ## Statement
 
 Assume AC. Let $E\to B$ be a numerable complex rank-$n$ bundle over a
-path-connected CW complex (or CW-type base), regarded as an oriented real
+path-connected CW complex, regarded as an oriented real
 rank-$2n$ bundle through the complex orientation of
 [[lem-complex-orientation-of-underlying-real-bundles]]. Then
 $$c_n(E)=e(E_{\mathbb R})\qquad\text{in }H^{2n}(B;\mathbb Z).$$
@@ -44,7 +44,9 @@ $$c_n(E)=e(E_{\mathbb R})\qquad\text{in }H^{2n}(B;\mathbb Z).$$
 
 **Given:** AC and a numerable complex rank-$n$ bundle $E\to B$ over a path-connected CW complex.
 
-1.1 Pulling back to the flag bundle, $q^*E=L_1\oplus\cdots\oplus L_n$ by [F1]. [F1]
+1.1 If $n=0$, both sides are $1$ by the rank-zero conventions. Assume
+$n\geq1$. Pulling back to the flag bundle,
+$q^*E=L_1\oplus\cdots\oplus L_n$ by [F1]. [F1]
 
 2.1 On the flag bundle the top Chern class of the split bundle is the product of the line classes: $q^*c_n(E)=\prod_{i=1}^nc_1(L_i)$, by multiplicativity in [F2] and the vanishing $c_k(L_i)=0$ for $k\geq2$. [F2, step 1.1]
 
@@ -54,7 +56,7 @@ $$c_n(E)=e(E_{\mathbb R})\qquad\text{in }H^{2n}(B;\mathbb Z).$$
 
 4.1 Injectivity of $q^*$ on $H^{2n}(-;\mathbb Z)$ from [F1] gives $c_n(E)=e(E_{\mathbb R})$, which is the assertion. [F1, step 3.1]
 
-5.1 Boundary cases. For $n=0$ both sides are $1$ by the rank-zero conventions of [F2] and the Euler-class convention. For $n=1$ the assertion is the line normalization $c_1(L)=e(L_{\mathbb R})$ of [F2], and no splitting is needed. The empty base is excluded by the path-connected hypothesis, and the coefficient ring $\mathbb Z$ is nonzero. AC enters only through [A1] in the splitting and Thom/Euler suppliers. [A1, F2, step 4.1] ∎
+5.1 Boundary cases. The case $n=0$ was discharged in step 1.1. For $n=1$ the assertion is the line normalization $c_1(L)=e(L_{\mathbb R})$ of [F2], and no splitting is needed. The empty base is excluded by the path-connected hypothesis, and the coefficient ring $\mathbb Z$ is nonzero. AC enters only through [A1] in the splitting and Thom/Euler suppliers. [A1, F2, step 1.1, step 4.1] ∎
 
 ## Source notes
 

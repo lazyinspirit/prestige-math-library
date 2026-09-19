@@ -36,7 +36,7 @@ over $\mathbb R$ or $\mathbb C$, let $K:X\to X$ be a compact operator
 
 ## Facts & Assumptions
 
-[A1] Under DC there is $m$ with $\ker A^m=\ker A^n$ and $\operatorname{ran}A^m=\operatorname{ran}A^n$ for all $n\ge m$, and with $N:=\ker A^m$, $Y:=\operatorname{ran}A^m$ one has $X=N\oplus Y$, $N$ finite dimensional, $Y$ closed, $A(Y)=Y$ and $A|_Y$ a bounded isomorphism ([[lem-riesz-schauder-ascent-and-descent-stabilize]], [[def-dependent-choice]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
+[A1] Under DC there is $m_0$ from which the kernel and range chains stabilize; since every larger exponent has the same properties, take $m\ge\max\{m_0,1\}$. Then $\ker A^m=\ker A^n$ and $\operatorname{ran}A^m=\operatorname{ran}A^n$ for all $n\ge m$, and with $N:=\ker A^m$, $Y:=\operatorname{ran}A^m$ one has $X=N\oplus Y$, $N$ finite dimensional, $Y$ closed, $A(Y)=Y$ and $A|_Y$ a bounded isomorphism ([[lem-riesz-schauder-ascent-and-descent-stabilize]], [[def-dependent-choice]]); $\mathrm{AC}$ supplies DC ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
 [A2] $A^*=I-K^*$: the transpose of the identity is the identity and the transpose is additive ([[lem-transpose-reverses-composition]], [[def-transpose-of-a-bounded-operator]]); under DC the range of $I-K$ is closed ([[lem-range-of-identity-minus-compact-is-closed]]). For a bounded linear $T$ with closed range one has $(\operatorname{ran}T)^\perp=\ker T^*$ and $\overline{\operatorname{ran}T}={}^\perp(\ker T^*)$ ([[lem-elementary-kernel-range-annihilator-identities]]).
 

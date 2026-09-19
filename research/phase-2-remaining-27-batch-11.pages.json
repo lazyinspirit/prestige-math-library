@@ -127,6 +127,7 @@
         "statement": "Assume AC. Every element x of a finite-dimensional complex semisimple Lie algebra has a unique abstract Jordan decomposition x=x_s+x_n, and ad(x_s), ad(x_n) are the additive Jordan–Chevalley parts of ad(x).",
         "deps": [
           "def-abstract-jordan-decomposition-in-a-lie-algebra",
+          "thm-additive-jordan-chevalley-decomposition",
           "lem-jordan-chevalley-parts-agree-under-adjoint-representation",
           "def-axiom-of-choice"
         ],
@@ -203,7 +204,7 @@
         "id": "def-toral-and-maximal-toral-subalgebra",
         "kind": "definition",
         "title": "Toral and maximal toral subalgebras",
-        "statement": "A toral subalgebra of a complex Lie algebra is an abelian subalgebra all of whose adjoint endomorphisms are semisimple. It is maximal toral if it is maximal by inclusion among toral subalgebras.",
+        "statement": "A toral subalgebra of a finite-dimensional complex Lie algebra is an abelian subalgebra all of whose adjoint endomorphisms are semisimple. It is maximal toral if it is maximal by inclusion among toral subalgebras.",
         "deps": [
           "def-lie-subalgebra-ideal-and-center",
           "def-semisimple-and-nilpotent-endomorphisms",
@@ -371,6 +372,7 @@
           "prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal",
           "lem-generalized-weight-space-decomposition-for-a-nilpotent-subalgebra",
           "thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra",
+          "thm-additive-jordan-chevalley-decomposition",
           "thm-engels-theorem",
           "prop-nilpotent-lie-algebras-are-solvable",
           "thm-lies-theorem",
@@ -454,7 +456,6 @@
         "title": "Root and root space",
         "statement": "For a Cartan subalgebra h of complex semisimple g and α in h*, define g_α={x:[H,x]=α(H)x for all H in h}. A root is a nonzero α with g_α nonzero; Φ(g,h) denotes the set of roots.",
         "deps": [
-          "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras",
           "def-cartan-subalgebra-of-a-lie-algebra",
           "def-derivation-of-a-lie-algebra"
         ],
@@ -516,7 +517,8 @@
         "deps": [
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
-          "def-derivation-of-a-lie-algebra"
+          "def-derivation-of-a-lie-algebra",
+          "prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -575,7 +577,8 @@
         "deps": [
           "prop-killing-form-orthogonality-of-root-spaces",
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
-          "def-root-and-root-space-relative-to-a-cartan-subalgebra"
+          "def-root-and-root-space-relative-to-a-cartan-subalgebra",
+          "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -762,7 +765,9 @@
           "cor-opposite-root-spaces-pair-nondegenerately",
           "prop-brackets-of-root-spaces",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
-          "def-killing-form-of-a-finite-dimensional-lie-algebra"
+          "def-killing-form-of-a-finite-dimensional-lie-algebra",
+          "prop-trace-forms-are-symmetric-and-invariant",
+          "prop-killing-form-orthogonality-of-root-spaces"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -916,11 +921,14 @@
         "title": "Root systems are reduced",
         "statement": "If α is a root and cα is a root for c∈C, then c=±1.",
         "deps": [
-          "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional",
           "cor-cartan-integers-are-integral",
           "def-coroot-of-a-lie-algebra-root",
           "def-killing-dual-vector-of-a-root",
-          "def-root-and-root-space-relative-to-a-cartan-subalgebra"
+          "def-root-and-root-space-relative-to-a-cartan-subalgebra",
+          "thm-root-sl-two-triple",
+          "prop-brackets-of-root-spaces",
+          "prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra",
+          "thm-trace-of-ab-equals-trace-of-ba"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -937,7 +945,7 @@
         "source_locators": [
           "Lectures 19–24"
         ],
-        "strategy": "Both c and 1/c give integral Cartan integers, forcing c∈{±1,±2,±1/2}. The α-string through a putative 2α or α/2 and the one-dimensional adjoint sl₂ weight-2 space exclude the doubled alternatives.",
+        "strategy": "Both c and 1/c give integral Cartan integers, forcing c∈{±1,±2,±1/2}. A trace-of-commutator computation on the negative-multiple root spaces proves locally that no doubled root exists, excluding the four doubled alternatives.",
         "axiom_base": "ZFC"
       },
       {
@@ -1052,8 +1060,7 @@
           "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional",
           "thm-root-reflections-preserve-the-root-set",
           "def-root-reflection-from-a-coroot",
-          "prop-killing-form-orthogonality-of-root-spaces",
-          "def-killing-dual-vector-of-a-root",
+          "cor-opposite-root-spaces-pair-nondegenerately",
           "def-coroot-of-a-lie-algebra-root",
           "cor-semisimple-lie-algebras-are-centerless-and-perfect",
           "def-axiom-of-choice"
@@ -1081,14 +1088,16 @@
         "id": "prop-dimension-formula-from-roots",
         "kind": "proposition",
         "title": "Dimension formula from roots",
-        "statement": "For complex semisimple g with Cartan h and root system Φ, dim g=dim h+|Φ|.",
+        "statement": "For complex semisimple g with Cartan h and root system Φ, dim g=dim h+|Φ|=rank(g)+|Φ|.",
         "deps": [
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional",
           "thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system",
           "thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
-          "def-regular-element-and-rank-of-a-complex-lie-algebra"
+          "def-regular-element-and-rank-of-a-complex-lie-algebra",
+          "lem-regular-semisimple-elements-form-a-dense-open-subset",
+          "thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1202,7 +1211,6 @@
         "deps": [
           "prop-centralizer-dimension-from-vanishing-roots",
           "def-regular-root-hyperplanes",
-          "prop-the-center-is-the-common-kernel-of-all-roots-inside-the-cartan-subalgebra",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra"
         ],
         "provenance": {
@@ -1260,7 +1268,9 @@
         "deps": [
           "def-special-linear-lie-algebra-sl-two",
           "def-semisimple-and-nilpotent-endomorphisms",
-          "def-regular-element-and-rank-of-a-complex-lie-algebra"
+          "def-regular-element-and-rank-of-a-complex-lie-algebra",
+          "ex-killing-form-of-sl-two",
+          "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1318,7 +1328,7 @@
         "deps": [
           "thm-root-string-property",
           "cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root",
-          "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional",
+          "cor-opposite-root-spaces-pair-nondegenerately",
           "prop-brackets-of-root-spaces",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra"
         ],
@@ -1347,7 +1357,6 @@
         "statement": "False: a reduced root system contains only α and -α on the line through α.",
         "deps": [
           "cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root",
-          "thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional",
           "thm-root-string-property",
           "def-root-and-root-space-relative-to-a-cartan-subalgebra",
           "def-special-linear-lie-algebra-sl-two"
@@ -1378,9 +1387,11 @@
         "deps": [
           "def-special-linear-lie-algebra-sl-two",
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
-          "def-semisimple-and-nilpotent-endomorphisms",
-          "def-simple-semisimple-and-reductive-lie-algebras",
-          "def-derivation-of-a-lie-algebra"
+        "def-semisimple-and-nilpotent-endomorphisms",
+        "def-simple-semisimple-and-reductive-lie-algebras",
+        "def-derivation-of-a-lie-algebra",
+        "ex-killing-form-of-sl-two",
+        "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1411,8 +1422,10 @@
           "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras",
           "def-cartan-subalgebra-of-a-lie-algebra",
           "def-normalizer-of-a-lie-subalgebra",
-          "def-toral-and-maximal-toral-subalgebra",
-          "def-special-linear-lie-algebra-sl-two"
+        "def-toral-and-maximal-toral-subalgebra",
+        "def-special-linear-lie-algebra-sl-two",
+        "ex-classical-simple-lie-algebras-and-their-killing-forms",
+        "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1457,8 +1470,9 @@
           "def-normalizer-of-a-lie-subalgebra",
           "def-special-linear-lie-algebra-sl-two",
           "def-killing-dual-vector-of-a-root",
-          "def-coroot-of-a-lie-algebra-root",
-          "def-killing-form-of-a-finite-dimensional-lie-algebra"
+        "def-coroot-of-a-lie-algebra-root",
+        "def-killing-form-of-a-finite-dimensional-lie-algebra",
+        "thm-cartans-semisimplicity-criterion"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -1519,7 +1533,8 @@
           "thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras",
           "thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra",
           "def-simple-semisimple-and-reductive-lie-algebras",
-          "def-lie-subalgebra-ideal-and-center"
+          "def-lie-subalgebra-ideal-and-center",
+          "def-axiom-of-choice"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2182,10 +2197,12 @@
         "kind": "definition",
         "title": "Open and closed Weyl chambers",
         "statement": "The root hyperplanes divide E into open chambers. The fundamental chamber is C={x:(x,α_i)>0}; its closure replaces > by ≥.",
-        "deps": [
-          "def-weyl-group-of-a-root-system",
-          "def-positive-system-and-base-of-simple-roots"
-        ],
+      "deps": [
+        "def-weyl-group-of-a-root-system",
+        "def-positive-system-and-base-of-simple-roots",
+        "def-reduced-crystallographic-euclidean-root-system",
+        "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates"
+      ],
         "provenance": {
           "statement": "literature-derived",
           "proof": "not-applicable"
@@ -2299,10 +2316,7 @@
           "def-length-and-longest-element-of-a-finite-weyl-group",
           "thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers",
           "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
-          "thm-rank-two-root-system-classification",
-          "def-open-and-closed-weyl-chambers",
-          "def-weyl-group-of-a-root-system",
-          "prop-distinct-simple-roots-have-nonpositive-inner-product"
+          "def-open-and-closed-weyl-chambers"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2411,7 +2425,6 @@
         "deps": [
           "def-cartan-matrix-of-a-based-root-system",
           "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
-          "thm-rank-two-root-system-classification",
           "prop-finite-type-cartan-matrix-properties",
           "def-positive-system-and-base-of-simple-roots"
         ],
@@ -2441,9 +2454,11 @@
         "deps": [
           "prop-root-systems-decompose-uniquely-into-irreducible-components",
           "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
-          "def-reducible-and-irreducible-root-system",
-          "def-cartan-matrix-of-a-based-root-system",
-          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates"
+        "def-reducible-and-irreducible-root-system",
+        "def-cartan-matrix-of-a-based-root-system",
+        "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
+        "def-positive-system-and-base-of-simple-roots",
+        "def-reduced-crystallographic-euclidean-root-system"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2502,9 +2517,11 @@
           "lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching",
           "thm-rank-two-root-system-classification",
           "thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix",
-          "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
-          "prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram",
-          "def-reducible-and-irreducible-root-system"
+        "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
+        "prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram",
+        "def-reducible-and-irreducible-root-system",
+        "def-rank-and-isomorphism-of-root-systems",
+        "prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2532,6 +2549,7 @@
         "statement": "Every type in the classification is realized by a reduced crystallographic Euclidean root system with the indicated Dynkin diagram.",
         "deps": [
           "thm-classification-of-irreducible-reduced-crystallographic-root-systems",
+          "thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates",
           "def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention",
           "def-reduced-crystallographic-euclidean-root-system"
         ],
@@ -2544,13 +2562,17 @@
             {
               "title": "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II",
               "url": "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
+            },
+            {
+              "title": "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19–24",
+              "url": "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
             }
           ]
         },
         "source_locators": [
-          "Chapter II"
+          "Knapp, Chapter II; Etingof, Lecture 23, Exercises 23.10 and 23.13"
         ],
-        "strategy": "Construct A_n as {e_i-e_j} in the sum-zero space, B_n as {±e_i, ±e_i±e_j}, C_n as {±2e_i, ±e_i±e_j}, D_n as {±e_i±e_j}, and G2 in the hexagonal lattice. Construct F4 from ±e_i, ±e_i±e_j and the even half-sums, and E8 from the D8 roots plus the even-sign half-sums; obtain E7 and E6 as the fixed lattices of the standard orthogonal involutions of the E8 construction. Each construction and its verification - spanning, integrality of Cartan integers, reducedness, and the computed simple-root Cartan matrix - is carried out inside this item, so no construction is imported from an unscaffolded supplier.",
+        "strategy": "Construct A_n as {e_i-e_j} in the sum-zero space, B_n as {±e_i, ±e_i±e_j}, C_n as {±2e_i, ±e_i±e_j}, D_n as {±e_i±e_j}, and G2 in the hexagonal lattice. Construct F4 from ±e_i, ±e_i±e_j and the half-sums, and E8 from the D8 roots plus the even-sign half-sums; Etingof's exact polarization exercises certify the displayed F4 and E8 simple systems, while the item verifies the root-system axioms. Obtain E7 and E6 as explicit E8 subsystems and identify them by rank, root count, and the classification.",
         "axiom_base": "ZF"
       },
       {
@@ -2616,8 +2638,10 @@
         "deps": [
           "def-free-lie-algebra-on-a-vector-space",
           "thm-universal-property-of-the-tensor-algebra",
-          "thm-poincare-birkhoff-witt",
-          "def-lie-algebra-over-a-field"
+          "def-lie-algebra-over-a-field",
+          "cor-every-vector-space-has-a-basis",
+          "cor-the-enveloping-algebra-has-no-hidden-linear-relations-in-degree-one",
+          "lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -2794,6 +2818,7 @@
         "statement": "The finite-dimensional complex simple Lie algebras are classified up to isomorphism by the connected Dynkin diagrams A_n,B_n,C_n,D_n,E₆,E₇,E₈,F₄,G₂ in the stated rank ranges.",
         "deps": [
           "thm-classification-of-irreducible-reduced-crystallographic-root-systems",
+          "thm-existence-of-each-classified-root-system",
           "thm-isomorphism-theorem-for-complex-semisimple-lie-algebras",
           "thm-existence-theorem-for-complex-semisimple-lie-algebras",
           "def-axiom-of-choice",
@@ -2813,7 +2838,7 @@
           ]
         },
         "source_locators": [
-          "Chapter II"
+          "Chapter II, Proposition 2.44, printed pp. 151–152, and §§10–11, printed pp. 196–202"
         ],
         "strategy": "A simple algebra has irreducible roots because an orthogonal root decomposition generates commuting nonzero ideals. Classification assigns one connected diagram. The isomorphism theorem gives uniqueness, and the existence theorem realizes every diagram by a simple algebra.",
         "landmark": true,
@@ -2827,6 +2852,7 @@
         "deps": [
           "thm-cartan-killing-classification-of-complex-simple-lie-algebras",
           "thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals",
+          "prop-ideals-and-quotients-of-semisimple-lie-algebras",
           "def-axiom-of-choice"
         ],
         "provenance": {
@@ -2937,10 +2963,9 @@
         "id": "prop-classical-types-correspond-to-sl-so-and-sp",
         "kind": "proposition",
         "title": "Classical types correspond to sl, so, and sp",
-        "statement": "The simple algebras of types A_n,B_n,C_n,D_n are sl_{n+1}(C), so_{2n+1}(C), sp_{2n}(C), so_{2n}(C), subject to the low-rank coincidences.",
+        "statement": "The simple algebras of types A_n (n>=1), B_n (n>=2), C_n (n>=3), and D_n (n>=4) are sl_{n+1}(C), so_{2n+1}(C), sp_{2n}(C), and so_{2n}(C), with the stated low-rank coincidences handled separately.",
         "deps": [
           "thm-cartan-killing-classification-of-complex-simple-lie-algebras",
-          "thm-existence-of-each-classified-root-system",
           "prop-root-systems-of-the-classical-complex-lie-algebras",
           "thm-isomorphism-theorem-for-complex-semisimple-lie-algebras",
           "def-axiom-of-choice",
@@ -2959,10 +2984,10 @@
           ]
         },
         "source_locators": [
-          "Lectures 19-24",
-          "Lecture 20.3, Examples 20.12-20.14, printed pp. 110-111"
+          "Lecture 20.3, Examples 20.12-20.14, printed pp. 110-111",
+          "Remark 23.18, printed p. 125"
         ],
-        "strategy": "Use the computed root systems of the classical matrix Lie algebras: sl_{n+1}(C), so_{2n+1}(C), sp_{2n}(C) and so_{2n}(C) have types A_n, B_n, C_n and D_n with the stated dimensions, and the isomorphism theorem identifies each with the simple Lie algebra of that type. The low-rank coincidences are exactly the isomorphisms of the corresponding Dynkin diagrams.",
+        "strategy": "Use the computed root systems and nondegenerate Killing forms in the stable simple ranges, apply the isomorphism theorem to the low-rank root coincidences, and prove so_4 is sl_2 plus sl_2 by the tensor-product construction.",
         "axiom_base": "ZFC"
       },
       {
@@ -2972,7 +2997,6 @@
         "statement": "The dimensions of G₂,F₄,E₆,E₇,E₈ are respectively 14,52,78,133,248.",
         "deps": [
           "prop-dimension-formula-from-roots",
-          "thm-existence-of-each-classified-root-system",
           "thm-cartan-killing-classification-of-complex-simple-lie-algebras",
           "thm-existence-theorem-for-complex-semisimple-lie-algebras",
           "def-axiom-of-choice"
@@ -2990,7 +3014,7 @@
           ]
         },
         "source_locators": [
-          "Lectures 19–24"
+          "Lecture 21, Example 21.9; Lecture 23, Definitions 23.8, 23.11, 23.14, 23.15"
         ],
         "strategy": "Count roots in the explicit models: 12,48,72,126,240, then add ranks 2,4,6,7,8 using dim g=rank+|Φ|.",
         "axiom_base": "ZFC"
@@ -2999,9 +3023,10 @@
         "id": "rem-dynkin-diagrams-do-not-classify-global-lie-groups",
         "kind": "remark",
         "title": "Dynkin diagrams do not classify global Lie groups",
-        "statement": "A Dynkin diagram classifies the complex semisimple Lie algebra, not a real form and not a connected Lie group with that Lie algebra. Global classification also requires isogeny or lattice data, and real classification requires real-form data.",
+        "statement": "A connected Dynkin diagram classifies a complex simple Lie algebra, and finite disjoint unions classify complex semisimple Lie algebras; neither classifies real forms or global connected Lie groups without additional data.",
         "deps": [
-          "thm-cartan-killing-classification-of-complex-simple-lie-algebras"
+          "thm-cartan-killing-classification-of-complex-simple-lie-algebras",
+          "cor-complex-semisimple-lie-algebras-are-classified-by-finite-disjoint-unions-of-dynkin-diagrams"
         ],
         "provenance": {
           "statement": "literature-derived",
@@ -3357,8 +3382,7 @@
         "statement": "W(A_n) is S_{n+1}, acting by coordinate permutations.",
         "deps": [
           "def-weyl-group-of-a-root-system",
-          "ex-classical-root-systems-in-euclidean-coordinates",
-          "thm-existence-of-each-classified-root-system"
+          "ex-classical-root-systems-in-euclidean-coordinates"
         ],
         "provenance": {
           "statement": "literature-derived",

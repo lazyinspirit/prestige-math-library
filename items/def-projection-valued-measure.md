@@ -36,7 +36,7 @@ such that:
 4. for every pairwise disjoint sequence $(B_n)_{n\in\mathbb N}$ in $\Sigma$ with
    union $B$ and every $x\in H$, the series $\sum_nE(B_n)x$ converges in norm
    to $E(B)x$, that is
-   $$E(B)x=\sum_{n=1}^{\infty}E(B_n)x .$$
+   $$E(B)x=\sum_{n=0}^{\infty}E(B_n)x .$$
 
 Clause 4 is **strong countable additivity**. A PVM is called **regular** when
 $X$ is a locally compact Hausdorff space ([[def-locally-compact-space]]), the

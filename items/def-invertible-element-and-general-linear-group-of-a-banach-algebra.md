@@ -60,7 +60,7 @@ The map $a \mapsto a^{-1}$ is the **inversion map** of $A^{\times}$.
   $ba = 1$ in a general unital Banach algebra; both inverses are always
   verified explicitly below.
 
-- **The group need not be dense, open or connected — but it is open.** In a
+- **The group need not be dense or connected, but it is open.** In a
   Banach algebra $A^{\times}$ is an open subset of $A$ and inversion is
   continuous there; this is
   [[thm-invertible-group-is-open-and-inversion-is-continuous]]. Openness is what

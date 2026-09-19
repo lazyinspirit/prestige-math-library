@@ -26,11 +26,12 @@ with zero-padded singular-value sequence $(s_n(T))_{n\ge1}$
 ([[def-absolute-value-and-singular-values-of-a-compact-operator]]).
 
 **Trace class.** The operator $T$ is **trace class** when
-$$\sum_{n\ge1}s_n(T)<+\infty ,$$
-the series being the limit of the partial sums of the numerical sequence
-([[def-series-and-absolute-convergence-in-a-normed-space]]). In that case its
-**trace norm** is
-$$\|T\|_1:=\sum_{n\ge1}s_n(T)\in[0,+\infty),$$
+$$\sum_{n\ge1}s_n(T):=\sum_{m\in\mathbb N}s_{m+1}(T)<+\infty .$$
+Thus the series in the zero-based convention of
+[[def-series-and-absolute-convergence-in-a-normed-space]] is formed from the
+explicit sequence $(s_{m+1}(T))_{m\in\mathbb N}$. In that case its **trace
+norm** is
+$$\|T\|_1:=\sum_{m\in\mathbb N}s_{m+1}(T)\in[0,+\infty),$$
 and $\|T\|_1$ is also written $\|T\|_{\mathrm{tr}}$. The set of trace-class
 operators $H\to K$ is written $\mathcal S_1(H,K)$.
 
@@ -39,12 +40,12 @@ operators $H\to K$ is written $\mathcal S_1(H,K)$.
 are nonnegative and $\|T\|_1\ge\|T\|\ge0$ whenever $T$ is trace class; the zero
 operator is trace class with $\|0\|_1=0$. When $T$ has finite rank $r$ the
 sequence is zero-padded, the series is the finite sum
-$\sum_{n\le r}s_n(T)=\sum_{\lambda>0}\lambda\dim E_\lambda(|T|)$ over the finitely
+$\sum_{n=1}^r s_n(T)=\sum_{\lambda>0}\lambda\dim E_\lambda(|T|)$ over the finitely
 many positive eigenvalues of $|T|$ counted with multiplicity ([[def-dimension]]),
 and every finite-rank operator is therefore trace class; in particular every
 operator with finite-dimensional range and every rank-one operator is trace
 class. If $T$ has infinite rank then $s_n(T)>0$ for every $n$ and the series
-$\sum_n s_n(T)$ converges in the summable case. A trace-class operator with infinite rank has $s_n(T)\to0$, hence
+$\sum_{n\ge1}s_n(T)$ converges in the summable case. A trace-class operator with infinite rank has $s_n(T)\to0$, hence
 is a norm limit of finite-rank operators
 ([[thm-singular-value-decomposition-for-compact-operators]]).
 
@@ -53,4 +54,3 @@ is a norm limit of finite-rank operators
 construction uses $\mathrm{AC}_\omega$ through the countable selection of finite
 orthonormal bases of the eigenspaces of $|T|$ and the spectral theorem; no
 Hilbert basis of the ambient space, and no stronger choice, is used here.
-

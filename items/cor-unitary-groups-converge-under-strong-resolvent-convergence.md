@@ -25,7 +25,7 @@ sources:
 Assume the Axiom of Choice. Let $A_n,A$ be self-adjoint operators on $H$ with
 $A_n\to A$ in the strong resolvent sense. Then
 $$e^{itA_n}x\longrightarrow e^{itA}x\qquad\text{for every }t\in\mathbb R\text{ and every }x\in H.$$
-If, in addition, the $A_n$ are bounded below by a common real constant
+If, in addition, $A$ and all $A_n$ are bounded below by a common real constant
 $\gamma$, then $e^{-tA_n}\to e^{-tA}$ strongly for every $t\ge0$.
 
 ## Facts & Assumptions
@@ -40,7 +40,7 @@ $\gamma$, then $e^{-tA_n}\to e^{-tA}$ strongly for every $t\ge0$.
 
 **Proof technique:** direct.
 
-**Given:** Self-adjoint $A_n,A$ with strong resolvent convergence, and $t\ge0$.
+**Given:** Self-adjoint $A_n,A$ with strong resolvent convergence, and $t\ge0$; for the semigroup claim, assume that $A$ and every $A_n$ are bounded below by the same $\gamma\in\mathbb R$.
 
 1.1 The functions $\lambda\mapsto e^{it\lambda}$ are bounded continuous, so [A2] gives $e^{itA_n}x\to e^{itA}x$ for every $x$, which is the first claim by [A1]. [A1, A2]
 

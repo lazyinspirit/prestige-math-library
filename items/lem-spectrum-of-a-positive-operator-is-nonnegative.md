@@ -5,7 +5,7 @@ title: Spectrum of a positive operator is nonnegative
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice, def-spectrum-and-resolvent-of-a-bounded-operator, thm-cauchy-schwarz-in-an-inner-product-space, lem-kernel-range-orthogonality-for-hilbert-adjoints, thm-hilbert-adjoint-properties, def-operator-norm, def-hilbert-space, def-orthogonality-and-orthogonal-complement, def-complex-conjugate-real-imaginary-part-and-modulus]
+deps: [def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice, def-spectrum-and-resolvent-of-a-bounded-operator, thm-cauchy-schwarz-in-an-inner-product-space, lem-kernel-range-orthogonality-for-hilbert-adjoints, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, thm-hilbert-adjoint-properties, def-operator-norm, def-hilbert-space, def-orthogonality-and-orthogonal-complement, def-complex-conjugate-real-imaginary-part-and-modulus]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -26,7 +26,7 @@ Assume Countable Choice. If $T$ is a bounded positive operator on a nonzero comp
 
 [A1] $T$ is positive when $\langle Tx,x\rangle$ is a real number in $[0,+\infty)$ for every $x$; positivity is a condition on the values of the quadratic form and does not presuppose self-adjointness ([[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
-[A2] $\langle T^*x,y\rangle=\langle x,Ty\rangle$, and for a fixed $w$ the expansion of $\langle Tx,x\rangle$ at $x+ty$ shows that $\langle Tx,y\rangle$ is linear in each argument separately in the appropriate sense ([[thm-hilbert-adjoint-properties]]).
+[A2] $\langle T^*x,y\rangle=\langle x,Ty\rangle$, and for a fixed $w$ the expansion of $\langle Tx,x\rangle$ at $x+ty$ uses the linear/conjugate-linear inner-product conventions ([[def-hilbert-space-adjoint]], [[def-real-and-complex-inner-product-space]]).
 
 [A3] $|\langle u,v\rangle|\le\|u\|\,\|v\|$ for all vectors $u,v$ ([[thm-cauchy-schwarz-in-an-inner-product-space]]).
 

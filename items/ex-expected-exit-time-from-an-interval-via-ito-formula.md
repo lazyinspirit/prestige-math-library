@@ -4,7 +4,7 @@ kind: example
 title: "Expected exit time from an interval"
 status: draft
 origin: pipeline
-deps: [thm-dynkin-formula-for-bounded-brownian-stopping, def-brownian-motion-started-at-x, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff, thm-two-sided-exit-probability-for-brownian-motion, def-continuous-time-stopping-time, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-continuity-real, thm-heine-cantor-r, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
+deps: [thm-dynkin-formula-for-bounded-brownian-stopping, def-brownian-motion-started-at-x, def-brownian-motion, def-c-c-and-c-c-infinity-on-rn, lem-schwartz-cutoffs-from-the-standard-smooth-step, thm-two-sided-exit-probability-for-brownian-motion, def-continuous-time-stopping-time, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-continuity-real, thm-heine-cantor-r, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions, def-elementary-predictable-brownian-integrand]
 proof_strategy: direct
 generation:
   role: example
@@ -33,7 +33,7 @@ $$E_x\tau=(x+a)(b-x),\qquad\text{in particular}\qquad E_0\tau=ab .$$
  
 [F1] **Dynkin formula.** If $f\in C_c^2(\mathbb R)$ and $\sigma$ is a bounded stopping time, then $E_x[f(B^x_\sigma)]=f(x)+E_x\int_0^\sigma\tfrac12f''(B^x_s)\,ds$. [[thm-dynkin-formula-for-bounded-brownian-stopping]] [[def-brownian-motion-started-at-x]]
  
-[F2] **Cutoff extension of a quadratic.** For $u(y)=(y+a)(b-y)$ there is $f\in C_c^2(\mathbb R)$ with $f=u$ on a neighbourhood of $[-a,b]$, $f''=-2$ there, and $f$ bounded by $\max_{[-a,b]}|u|$ on its support: multiply $u$ by a smooth compactly supported cutoff equal to $1$ on a neighbourhood of $[-a,b]$, using the explicit cutoff of [[lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff]]; the resulting function is $C_c^\infty$, hence $C_c^2$. [[def-c-c-and-c-c-infinity-on-rn]] [[lem-a-compact-set-inside-a-bounded-open-set-admits-an-explicit-compactly-supported-cutoff]]
+[F2] **Cutoff extension of a quadratic.** For $u(y)=(y+a)(b-y)$ there is $f\in C_c^2(\mathbb R)$ with $f=u$ on a neighbourhood of $[-a,b]$ and $f''=-2$ there: multiply $u$ by a smooth compactly supported cutoff equal to $1$ on a neighbourhood of $[-a,b]$, using [[lem-schwartz-cutoffs-from-the-standard-smooth-step]]; the resulting function is $C_c^\infty$, hence $C_c^2$, and therefore bounded. [[def-c-c-and-c-c-infinity-on-rn]] [[lem-schwartz-cutoffs-from-the-standard-smooth-step]]
  
 [F3] **Finiteness of the exit time and endpoint values.** The path of $B^x$ is continuous, $u(0)>0$ at the start and $u(-a)=u(b)=0$; by [[thm-two-sided-exit-probability-for-brownian-motion]] the probability that Brownian motion started at $x$ reaches $b$ before $-a$ is $(x+a)/(a+b)$, and the complementary event has probability $(b-x)/(a+b)$, so $\tau<\infty$ almost surely; on $\{\tau<\infty\}$ continuity gives $B^x_\tau\in\{-a,b\}$ and $u(B^x_\tau)=0$. [[thm-two-sided-exit-probability-for-brownian-motion]] [[def-brownian-motion-started-at-x]] [[def-continuity-real]]
  

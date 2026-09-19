@@ -50,7 +50,7 @@ $\mathbb Z[t_1,\dots,t_n]$.
 
 [F3] Numerable principal bundles over CGWH bases of CW type are classified by maps to the Milnor model: $[X,BG]\cong\operatorname{Bun}^{\mathrm{num}}_G(X)$ ([[thm-principal-bundles-are-classified-by-maps-to-bg]]).
 
-[F4] A fibration with contractible total space has $F\to P\to B$ giving $\pi_k(B)\cong\pi_{k-1}(F)$ for $k\geq1$ and trivial $\pi_0(B)$ from exactness ([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
+[F4] For a fibration $F\to P\to B$ with contractible total space, the long exact sequence gives $\pi_k(B)\cong\pi_{k-1}(F)$ for $k\geq2$. If $F$ is path connected, its exact low-degree segment also gives $\pi_1(B)=0$; and if $P$ is path connected, the quotient base $B$ is path connected as a continuous image ([[thm-long-exact-sequence-of-homotopy-groups-of-a-fibration]]).
 
 [F5] A morphism of long exact sequences that is an isomorphism on the two outer families and on one middle family is an isomorphism on the remaining family ([[thm-five-lemma-for-a-morphism-of-long-exact-sequences]]).
 
@@ -70,7 +70,7 @@ $\mathbb Z[t_1,\dots,t_n]$.
 
 1.2 The product $(S^\infty)^n$ is contractible and carries a free action of $T^n=(S^1)^n$ with quotient $(\mathbb{CP}^\infty)^n$, so both $E\mathbb U(n)/T^n$ and $(\mathbb{CP}^\infty)^n$ are quotients of contractible spaces by free $T^n$-actions. [F2, algebra]
 
-2.1 Both quotients are total spaces of numerable principal $T^n$-bundles with contractible total spaces, so by [F4] applied to each projection, $\pi_k$ of either quotient is $\pi_{k-1}(T^n)$ for $k\geq1$ and $\pi_0$ is trivial. By [F3] the bundle $E\mathbb U(n)\to E\mathbb U(n)/T^n$ and the product bundle are classified by maps between the two quotient spaces over $BT^n$; comparing the two long exact sequences through the induced map of bundles gives an isomorphism on the fiber $\pi_*(T^n)$ and on the contractible total spaces, hence on $\pi_*$ of the bases by the five lemma [F5]. As both bases have CW type, [F6] upgrades this to a homotopy equivalence. [F3, F4, F5, F6, step 1.2]
+2.1 The projections $E\mathbb U(n)\to E\mathbb U(n)/T^n$ and $(S^\infty)^n\to(\mathbb{CP}^\infty)^n$ are numerable principal $T^n$-bundles with contractible total spaces. By [F3], the first is classified by a map $f:E\mathbb U(n)/T^n\to BT^n=(\mathbb{CP}^\infty)^n$, and pulling back the universal bundle supplies a map of principal bundles whose fiber map is the identity of $T^n$. For $k\geq2$, comparison of the two long exact sequences gives isomorphisms on base homotopy groups by [F5]. Since $T^n$ is path connected, [F4] gives trivial $\pi_1$ for both bases, while both bases are path connected as images of their contractible total spaces. Thus $f$ induces isomorphisms on all homotopy groups, and [F6] makes it a homotopy equivalence because both bases have CW type. [F3, F4, F5, F6, step 1.2]
 
 3.1 The tautological lines on $E\mathbb U(n)/T^n$ are the associated bundles for the coordinate characters of $T^n$, so under the equivalence of step 2.1 the $i$-th line is the pullback of the universal line from the $i$-th factor of $(\mathbb{CP}^\infty)^n$. Hence $t_i=c_1(L_i)$ is the pullback of the generator of the $i$-th factor, and [F7] gives $H^*(BT^n;\mathbb Z)=\mathbb Z[t_1,\dots,t_n]$ by Kunneth. [F7, step 2.1]
 

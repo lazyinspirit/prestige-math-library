@@ -4,7 +4,7 @@ kind: remark
 title: "General semimartingale calculus is outside this block"
 status: draft
 origin: pipeline
-deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-ito-formula-one-dimensional, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [def-continuous-brownian-ito-process, def-quadratic-covariation-of-brownian-ito-processes, def-quadratic-variation-along-a-partition-sequence, thm-ito-formula-one-dimensional, thm-multidimensional-ito-formula-for-brownian-driven-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -23,7 +23,8 @@ $X_t=X_0+\int_0^tb_s\,ds+\int_0^t\sigma_s\,dB_s$
 deterministic partition sequences
 [[def-quadratic-covariation-of-brownian-ito-processes]]
 [[def-quadratic-variation-along-a-partition-sequence]], and the one- and
-multidimensional Ito formulas [[thm-ito-formula-one-dimensional]].
+multidimensional Ito formulas [[thm-ito-formula-one-dimensional]]
+[[thm-multidimensional-ito-formula-for-brownian-driven-processes]].
 
 **Outside the block.** The following are not defined, proved or used here, and
 none of the statements on this page may be quoted as covering them:

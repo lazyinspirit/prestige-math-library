@@ -4,7 +4,7 @@ kind: example
 title: "Integral of Brownian motion against itself"
 status: draft
 origin: pipeline
-deps: [lem-adapted-continuous-processes-are-progressively-measurable, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, thm-ito-isometry-and-linearity-in-predictable-l2, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-brownian-motion, cor-law-of-the-brownian-maximum, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [lem-adapted-continuous-processes-are-progressively-measurable, def-progressively-measurable-and-predictable-process, def-ito-integral-for-square-integrable-predictable-processes, def-ito-integral-of-an-elementary-predictable-process, def-elementary-predictable-brownian-integrand, thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes, def-quadratic-variation-along-a-partition-sequence, thm-ito-isometry-and-linearity-in-predictable-l2, thm-density-of-elementary-predictable-processes-in-predictable-l2, def-brownian-motion, thm-dominated-convergence, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -32,9 +32,11 @@ arising from a deterministic integrand.
 
 [F1] $B$ is adapted with continuous paths, so it is predictable and progressively measurable; and $B$ has finite energy on $[0,t]$: $E\int_0^tB_s^2ds=\int_0^ts\,ds=t^2/2<\infty$. [[lem-adapted-continuous-processes-are-progressively-measurable]] [[def-brownian-motion]] [[thm-ito-isometry-and-linearity-in-predictable-l2]]
 
-[F2] The left-endpoint dyadic integrands $H^n:=\sum_{k=0}^{2^n-1}B_{t_k}1_{(t_k,t_{k+1}]}$ are elementary predictable, and $H^n\to B$ in $L^2(\mathrm dt\otimes P)$ on $[0,t]$: pointwise convergence follows from continuity and the domination $|H^n_s-B_s|\le2\sup_{u\le t}|B_u|$, whose square is integrable because each one-sided maximum of $B$ on $[0,t]$ has the law of $|B_t|$ and $E B_t^2=t$. [[def-elementary-predictable-brownian-integrand]] [[cor-law-of-the-brownian-maximum]]
+[F2] The left-endpoint dyadic integrands $H^n:=\sum_{k=0}^{2^n-1}B_{t_k}1_{(t_k,t_{k+1}]}$ are predictable and square-integrable, though their unbounded coefficients mean that they need not be elementary in the bounded-coefficient convention. Moreover $E\int_0^t|H^n_s-B_s|^2ds=\sum_k\int_{t_k}^{t_{k+1}}(s-t_k)ds=t^2/2^{n+1}\to0$. [[def-progressively-measurable-and-predictable-process]] [[def-brownian-motion]]
 
-[F3] Consequently $\int_0^tH^n\,dB\to\int_0^tB\,dB$ in $L^2(P)$, and the elementary sums satisfy the telescoping identity $2\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})=B_t^2-\sum_k(B_{t_{k+1}}-B_{t_k})^2$. [[def-ito-integral-for-square-integrable-predictable-processes]] [[def-ito-integral-of-an-elementary-predictable-process]] [[thm-ito-isometry-and-linearity-in-predictable-l2]]
+[F3] Consequently $\int_0^tH^n\,dB\to\int_0^tB\,dB$ in $L^2(P)$. For $r>0$, truncate each coefficient by $B_{t_k}^{(r)}=(-r)\vee(B_{t_k}\wedge r)$ and write $H^{n,r}:=\sum_kB_{t_k}^{(r)}1_{(t_k,t_{k+1}]}$. Then $H^{n,r}$ is elementary, $H^{n,r}\to H^n$ in predictable $L^2$ as $r\to\infty$, and the elementary integral formula plus the Ito isometry gives
+$$\int_0^tH^n\,dB=\lim_{r\to\infty}\sum_k B_{t_k}^{(r)}(B_{t_{k+1}}-B_{t_k})=\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})$$
+in $L^2(P)$. The last finite sum satisfies $2\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})=B_t^2-\sum_k(B_{t_{k+1}}-B_{t_k})^2$. [[def-ito-integral-for-square-integrable-predictable-processes]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-elementary-predictable-brownian-integrand]] [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[thm-dominated-convergence]]
 
 [F4] Along the dyadic partitions of $[0,t]$, $\sum_k(B_{t_{k+1}}-B_{t_k})^2\to t$ uniformly on $[0,t]$ almost surely, in the step convention of the quadratic variation. [[thm-uniform-brownian-quadratic-variation-process-on-dyadic-meshes]] [[def-quadratic-variation-along-a-partition-sequence]]
 
@@ -44,7 +46,7 @@ arising from a deterministic integrand.
 
 **Proof technique:** direct.
 
-1.1 Each $H^n$ is elementary, so $\int_0^tH^n\,dB=\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})$ is the defining sum; by [F3] these sums converge to $\int_0^tB\,dB$ in $L^2(P)$. [F2, F3, given]
+1.1 By the truncation argument in [F3], the general integral of $H^n$ equals $\sum_kB_{t_k}(B_{t_{k+1}}-B_{t_k})$ in $L^2(P)$; since $H^n\to B$ in predictable $L^2$ by [F2], these sums converge to $\int_0^tB\,dB$ in $L^2(P)$. [F2, F3, given]
 
 1.2 The telescoping identity of [F3] writes the same sums as $\tfrac12\bigl(B_t^2-\sum_k(B_{t_{k+1}}-B_{t_k})^2\bigr)$, and by [F4] the quadratic sum converges to $t$ almost surely, so the elementary sums converge almost surely to $\tfrac12(B_t^2-t)$. [F3, F4]
 

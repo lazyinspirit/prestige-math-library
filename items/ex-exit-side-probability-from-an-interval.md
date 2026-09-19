@@ -43,7 +43,7 @@ to $1$, as they must.
 
 1.1 Apply [F1] with $a=-2$, $x=0$, $b=3$: $P_0(T_3<T_{-2})=\frac{0-(-2)}{3-(-2)}=\frac25$. [F1, F2, given]
 
-2.1 The events $\{T_3<T_{-2}\}$ and $\{T_{-2}<T_3\}$ are disjoint, and their union has probability one because both hitting times are finite almost surely by [F4] and the process cannot be at both levels at once; hence $P(T_{-2}<T_3)=1-\frac25=\frac35$, which also agrees with [F1] applied to the pair $(-2,3)$ with the roles exchanged. [F1, F4, step 1.1]
+2.1 The events $\{T_3<T_{-2}\}$ and $\{T_{-2}<T_3\}$ are disjoint, and their union has probability one because both hitting times are finite almost surely by [F4] and the process cannot be at both levels at once; hence $P(T_{-2}<T_3)=1-\frac25=\frac35$. [F4, step 1.1]
 
 3.1 The values $\frac25+\frac35=1$ sum to one, the starting point $0$ lies strictly between the endpoints, and the common denominator $b-a=5$ is nonzero. AC is used only through [F3]. [F3, given, step 2.1] ∎
 

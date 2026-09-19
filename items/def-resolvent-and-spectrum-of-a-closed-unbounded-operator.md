@@ -1,7 +1,7 @@
 ---
 id: def-resolvent-and-spectrum-of-a-closed-unbounded-operator
 kind: definition
-title: "Resolvent and spectrum of a closed operator"
+title: "Resolvent and spectrum of an unbounded operator"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27

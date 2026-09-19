@@ -29,8 +29,7 @@ system with a chosen positive system and base $\Delta$
 highest root $\theta$ relative to this base
 ([[def-height-of-a-root-and-highest-root]]): a positive root $\theta$ such
 that $\theta\le\gamma$ for no positive root $\gamma\ne\theta$. Moreover
-$(\theta,\alpha)>0$ for every simple root $\alpha$, and $\theta$ is dominant:
-$(\theta,\gamma)\ge0$ for every positive root $\gamma$.
+$\theta$ is dominant: $(\theta,\gamma)\ge0$ for every positive root $\gamma$.
 
 ## Facts & Assumptions
 
@@ -60,8 +59,8 @@ $(\theta,\gamma)\ge0$ for every positive root $\gamma$.
 
 3.1 The support of $\theta$ is all of $\Delta$: write $\theta=\sum_i n_i\alpha_i$ with $n_i\ge0$. If $n_i=0$ for some $i$, then by step 2.1 and [L4] $0\le(\theta,\alpha_i)=\sum_{j:n_j>0}n_j(\alpha_j,\alpha_i)\le0$, so $(\alpha_j,\alpha_i)=0$ for every $j$ with $n_j>0$, that is, no vertex outside the nonempty support of $\theta$ is adjacent in the diagram to any vertex of the support; this contradicts the connectedness of step 2.2. [L4, step 2.1, step 2.2, algebra]
 
-4.1 In fact $(\theta,\alpha_i)>0$ for every simple root $\alpha_i$: if $(\theta,\alpha_i)=0$ then the expansion $0=(\theta,\alpha_i)=n_i(\alpha_i,\alpha_i)+\sum_{j\ne i}n_j(\alpha_j,\alpha_i)$ with all off-diagonal terms $\le0$ shows $(\alpha_j,\alpha_i)=0$ whenever $n_j>0$, i.e. $\alpha_i$ is orthogonal to the whole support $\Delta$ of $\theta$ by step 3.1; then $\alpha_i$ is orthogonal to a basis of $E$ and hence $\alpha_i=0$, a contradiction. [L4, step 3.1, algebra]
+4.1 At least one simple root pairs strictly positively with $\theta$. Indeed step 3.1 writes $\theta=\sum_i n_i\alpha_i$ with every $n_i>0$, while step 2.1 gives $(\theta,\alpha_i)\ge0$ for every $i$. Since $$0<(\theta,\theta)=\sum_i n_i(\theta,\alpha_i),$$ not all these nonnegative pairings can vanish. [step 2.1, step 3.1, algebra]
 
-5.1 Uniqueness: let $\theta'$ be a second highest root and write $\theta'=\sum_i c_i\alpha_i$ with $c_i\ge0$ integers; since $\theta'\ne0$ some $c_i>0$, so $(\theta,\theta')=\sum_ic_i(\theta,\alpha_i)>0$ by step 4.1. Then $\theta-\theta'\in\Phi$ by [L3]; this root is positive, in which case $\theta'<\theta$ and $\theta'$ is not maximal, or negative, in which case $\theta<\theta'$ and $\theta$ is not maximal. Both alternatives are impossible, so $\theta'=\theta$. [L2, L3, step 4.1, algebra]
+5.1 Uniqueness: let $\theta'$ be a second highest root. Steps 2.1 through 3.1 apply equally to $\theta'$, so $\theta'=\sum_i c_i\alpha_i$ with every $c_i>0$. Together with steps 2.1 and 4.1 this gives $$(\theta,\theta')=\sum_i c_i(\theta,\alpha_i)>0.$$ If $\theta$ and $\theta'$ were proportional, reducedness and positivity would already force $\theta=\theta'$. Otherwise [L3] gives $\theta-\theta'\in\Phi$; this root is positive, in which case $\theta'<\theta$ and $\theta'$ is not maximal, or negative, in which case $\theta<\theta'$ and $\theta$ is not maximal. Both alternatives are impossible, so $\theta'=\theta$. [L1, L2, L3, step 2.1, step 3.1, step 4.1, algebra]
 
-6.1 The dominance statement for all positive roots follows because $(\theta,\gamma)=\sum_ic_i(\theta,\alpha_i)\ge0$ whenever $\gamma=\sum_ic_i\alpha_i$ is positive with $c_i\ge0$, using step 2.1. This completes the proof of existence, uniqueness, strict dominance on simple roots and dominance on positive roots. [step 2.1, step 5.1, algebra] ∎
+6.1 The dominance statement for all positive roots follows because $(\theta,\gamma)=\sum_ic_i(\theta,\alpha_i)\ge0$ whenever $\gamma=\sum_ic_i\alpha_i$ is positive with $c_i\ge0$, using step 2.1. This completes the proof of existence, uniqueness, and dominance on positive roots. [step 2.1, step 5.1, algebra] ∎

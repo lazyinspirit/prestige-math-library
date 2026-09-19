@@ -22,11 +22,12 @@ sources:
 
 ## Statement refuted
 
-Assume Dependent Choice. Let $X,Y$ be Banach spaces and let $T:X\to Y$ be a
-linear operator defined on all of $X$ whose graph is closed in $X\oplus Y$.
-Then $T$ is bounded. Consequently an unbounded self-adjoint operator on a
-Hilbert space $H$ cannot have domain $H$: its domain is a proper dense
-subspace.
+Assume Dependent Choice. The inference that a closed linear operator defined
+on all of a Banach space can nevertheless be unbounded is false. Indeed, if
+$X,Y$ are Banach spaces and $T:X\to Y$ is linear, defined on all of $X$, and
+has closed graph in $X\oplus Y$, then $T$ is bounded. Consequently an
+unbounded self-adjoint operator on a Hilbert space $H$ cannot have domain $H$:
+its domain is a proper dense subspace.
 
 ## Facts & Assumptions
 

@@ -36,7 +36,7 @@ homotopy type.
 
 [F2] $c_1$ is natural, $c_1(L)=e(L_{\mathbb R})$ for a complex line, and $c_1(L\otimes M)=c_1(L)+c_1(M)$ follows from the classifying description once the universal case is known; the Chern classes satisfy the Whitney formula ([[thm-naturality-normalization-and-whitney-sum-for-chern-classes]], [[def-chern-classes-from-the-projective-bundle-relation]]).
 
-[F3] For an abelian group $A$, $n\geq1$ and a based CW model $K(A,n)$, pullback of the fundamental class gives a natural bijection $[X,K(A,n)]_*\cong H^n(X;A)$ for based CW complexes whose basepoint is a vertex ([[thm-eilenberg-maclane-spaces-represent-singular-cohomology]]).
+[F3] For an abelian group $A$, $n\geq1$ and a based CW model $K(A,n)$, pullback of the fundamental class gives a natural bijection $[X,K(A,n)]_*\cong\widetilde H^n(X;A)$; in positive degree the supplied theorem identifies this relative group with absolute $H^n(X;A)$ when $X$ is connected ([[thm-eilenberg-maclane-spaces-represent-singular-cohomology]]).
 
 [F4] The quotient circle $S^1=\mathbb R/\mathbb Z$ with its one-vertex CW structure is a marked $K(\mathbb Z,1)$ ([[lem-circle-and-path-loop-models-for-eilenberg-maclane-induction]]).
 

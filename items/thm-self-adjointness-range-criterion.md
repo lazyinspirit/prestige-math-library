@@ -63,7 +63,7 @@ by $i\lambda$ for any real $\lambda>0$.
 
 1.3 (4) implies (5) is immediate, since $\pm i$ are nonreal.
 
-1.4 (5) implies (1): let $v\in D(T^*)$. Since $\operatorname{ran}(T-i)=H$, choose $w\in D(T)$ with $(T-i)w=(T^*-i)v$. Then $(T^*-i)(v-w)=0$, because $T^*w=Tw$ for $w\in D(T)$; and by [A2] with $z=i$ the kernel of $T^*-i$ is $\operatorname{ran}(T+i)^\perp=\{0\}$. Hence $v=w\in D(T)$. So $D(T^*)\subseteq D(T)$, and with $T\subseteq T^*$ this gives $T=T^*$. [A1, A2]
+1.4 (5) implies (1): let $v\in D(T^*)$. Since $\operatorname{ran}(T-i)=H$, choose $w\in D(T)$ with $(T-i)w=(T^*-i)v$. Then $(T^*-i)(v-w)=0$, because $T^*w=Tw$ for $w\in D(T)$; and by [A2] with $z=-i$ the kernel of $T^*-i$ is $\operatorname{ran}(T+i)^\perp=\{0\}$. Hence $v=w\in D(T)$. So $D(T^*)\subseteq D(T)$, and with $T\subseteq T^*$ this gives $T=T^*$. [A1, A2]
 
 1.5 (1) implies (6) by [A4]. Conversely (6) implies (4): if $\sigma(T)\subseteq\mathbb R$ then every nonreal $z$ lies in $\rho(T)$, so $z-T$ is surjective and $\operatorname{ran}(T-z)=H$. [A4]
 

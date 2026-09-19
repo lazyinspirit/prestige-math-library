@@ -5,7 +5,7 @@ title: Polynomial spectral mapping
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-fundamental-theorem-of-algebra-liouville-proof, def-unital-banach-algebra, def-invertible-element-and-general-linear-group-of-a-banach-algebra]
+deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-spectrum-is-nonempty-compact-and-norm-bounded, thm-fundamental-theorem-of-algebra-liouville-proof, def-unital-banach-algebra, def-invertible-element-and-general-linear-group-of-a-banach-algebra, def-axiom-of-choice]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -21,7 +21,8 @@ sources:
 
 ## Statement
 
-Let $A$ be a unital complex Banach algebra, let $a \in A$, and let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $A$ be a unital
+complex Banach algebra, let $a \in A$, and let
 $p \in \mathbb C[z]$ be a complex polynomial with constant term $c_0$ and degree
 at most $n$. Form $p(a) := \sum_{k=0}^{n} c_k a^k \in A$, with $a^0 := 1$. Then
 
@@ -34,7 +35,7 @@ equal $\{c\}$.
 
 ## Facts & Assumptions
 
-**Given:** A unital complex Banach algebra $A$, an element $a \in A$, and a complex polynomial $p$; write $p(a) = \sum_k c_k a^k$, a finite sum of scalar multiples of powers of $a$.
+**Given:** The Axiom of Choice, a unital complex Banach algebra $A$, an element $a \in A$, and a complex polynomial $p$; write $p(a) = \sum_k c_k a^k$, a finite sum of scalar multiples of powers of $a$.
 
 [L1] The algebra $A$ is associative, the multiplication is bilinear and $1u = u1 = u$; every polynomial in $a$ commutes with $a$, and powers of $a$ satisfy the usual index laws ([[def-unital-banach-algebra]]).
 
@@ -44,11 +45,15 @@ equal $\{c\}$.
 
 [L4] Every nonconstant complex polynomial of degree $d$ has a factorisation $q(z) = c\prod_{j=1}^{d}(z - \lambda_j)$ with $c \ne 0$ and $\lambda_j \in \mathbb C$ the roots of $q$ ([[thm-fundamental-theorem-of-algebra-liouville-proof]]).
 
+[L5] Under the Axiom of Choice, the spectrum of every element of a nonzero
+unital complex Banach algebra is nonempty
+([[thm-spectrum-is-nonempty-compact-and-norm-bounded]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Constant case: if $p \equiv c$ then $p(a) = c1$ and, for $z \in \mathbb C$, the element $z1 - c1 = (z-c)1$ is invertible exactly when $z \ne c$ — its inverse is then $(z-c)^{-1}1$ — while at $z = c$ it is $0$, which is not invertible in a nonzero algebra. Hence $\sigma_A(c1) = \{c\} = p(\sigma_A(a))$. [L1, L2, algebra]
+1.1 Constant case: if $p \equiv c$ then $p(a) = c1$ and, for $z \in \mathbb C$, the element $z1 - c1 = (z-c)1$ is invertible exactly when $z \ne c$ — its inverse is then $(z-c)^{-1}1$ — while at $z = c$ it is $0$, which is not invertible in a nonzero algebra. Hence $\sigma_A(c1) = \{c\}$; and $\sigma_A(a)$ is nonempty by [L5], so $p(\sigma_A(a))=\{c\}$ as well. [L1, L2, L5, algebra]
 
 1.2 Nonconstant case, factor step: for $\lambda \in \mathbb C$ the polynomial $q(z) := p(z) - p(\lambda)$ vanishes at $\lambda$, so $q(z) = (z-\lambda)r(z)$ for a polynomial $r$ of degree $\deg p - 1$; evaluating at $a$ gives $p(a) - p(\lambda)1 = (a - \lambda 1)\,r(a)$. [L1, algebra]
 

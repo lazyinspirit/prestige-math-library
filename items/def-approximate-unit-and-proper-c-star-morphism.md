@@ -46,6 +46,11 @@ $Y$.
 
 ## Remarks
 
-- **Why the unital case is not excluded.** A unital C\*-algebra has the constant net $e_i = 1$ as an approximate unit; a proper morphism then sends $1$ to an approximate unit of the target, which need not be a unit unless the target is unital, so properness is genuinely weaker than unitality.
+- **The unital case forces a unital target.** A unital C\*-algebra has the
+  constant net $e_i=1_A$ as an approximate unit.  If $\varphi:A\to B$ is
+  proper, the constant net $\varphi(1_A)$ is therefore an approximate unit of
+  $B$, so $\varphi(1_A)b=b=b\varphi(1_A)$ for every $b\in B$.  Thus $B$ is
+  unital and $\varphi(1_A)=1_B$; in the unital case properness is not weaker
+  than unitality.
 - **The two uses of "proper" are linked by the duality.** Under [[thm-locally-compact-gelfand-duality]] the proper continuous maps correspond exactly to the proper star-homomorphisms, and this is where the pullback of a compactly supported function uses the compact-preimage condition.
 - **No choice principle is used in the definition.** The definition is a condition on nets and maps; existence of approximate units is the theorem [[thm-every-commutative-c-star-algebra-has-an-approximate-unit]].

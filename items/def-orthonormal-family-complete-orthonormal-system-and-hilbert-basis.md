@@ -5,7 +5,7 @@ title: Orthonormal families, complete orthonormal systems and Hilbert bases
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-hilbert-space, def-orthogonality-and-orthogonal-complement, def-linear-subspace]
+deps: [def-hilbert-space, def-real-and-complex-inner-product-space, def-orthogonality-and-orthogonal-complement, def-linear-subspace]
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -19,15 +19,16 @@ sources:
 
 ## Definition
 
-Let $H$ be a real or complex Hilbert space ([[def-hilbert-space]]), with inner
+Let $H$ be a real or complex inner-product space ([[def-real-and-complex-inner-product-space]]), with inner
 product linear in the first argument and conjugate-linear in the second, and
 with the induced length $\|v\|=\sqrt{\langle v,v\rangle}$. The definitions below
-are stated for such an $H$; no further completeness is used in them.
+do not require completeness. When the term *Hilbert basis* is used, $H$ is
+additionally assumed complete ([[def-hilbert-space]]).
 
 **Orthonormal indexed family.** Let $I$ be any set. An indexed family
 $(e_i)_{i\in I}$ of vectors of $H$ is **orthonormal** when
 
-$$\langle e_i,e_j\rangle=\delta_{ij}:=\begin{cases}1,&i=j,\\0,&i\ne j,\end{cases} \qquad\text{for all } i,j\in I .$$Because $1\ne 0$ in the scalar field, the family contains no zero vector: $\|e_i\|^2=\langle e_i,e_i\rangle=1$, so $\|e_i\|=1$ for every $i$ ([[def-hilbert-space]]); and the index map is injective, since $e_i=e_j$ with $i\ne j$ would give $0=\langle e_i,e_j\rangle=1$. Thus an orthonormal family is the same thing as an orthonormal set together with a labelling of it, and in the sequel no choice is hidden in passing between the two descriptions. **Orthonormal set.** A subset $S\subseteq H$ is **orthonormal** when every $s\in S$ has $\|s\|=1$ and $\langle s,t\rangle=0$ for all distinct $s,t\in S$. For such an $S$ the family $(e_s)_{s\in S}$ with $e_s:=s$ is orthonormal in the indexed sense, and the image of an orthonormal indexed family is an orthonormal set. Orthogonal means $\langle s,t\rangle=0$ ([[def-orthogonality-and-orthogonal-complement]]). **Independence and unique coefficients.** Let $(e_i)_{i\in I}$ be orthonormal, let $F\subseteq I$ be finite, and let scalars $c_i$ satisfy $\sum_{i\in F}c_ie_i=0$. For each fixed $j\in F$, linearity in the first argument gives$$0=\Bigl\langle \sum_{i\in F}c_ie_i,\;e_j\Bigr\rangle=\sum_{i\in F}c_i\langle e_i,e_j\rangle=c_j ,$$
+$$\langle e_i,e_j\rangle=\delta_{ij}:=\begin{cases}1,&i=j,\\0,&i\ne j,\end{cases} \qquad\text{for all } i,j\in I .$$Because $1\ne 0$ in the scalar field, the family contains no zero vector: $\|e_i\|^2=\langle e_i,e_i\rangle=1$, so $\|e_i\|=1$ for every $i$ ([[def-real-and-complex-inner-product-space]]); and the index map is injective, since $e_i=e_j$ with $i\ne j$ would give $0=\langle e_i,e_j\rangle=1$. Thus an orthonormal family is the same thing as an orthonormal set together with a labelling of it, and in the sequel no choice is hidden in passing between the two descriptions. **Orthonormal set.** A subset $S\subseteq H$ is **orthonormal** when every $s\in S$ has $\|s\|=1$ and $\langle s,t\rangle=0$ for all distinct $s,t\in S$. For such an $S$ the family $(e_s)_{s\in S}$ with $e_s:=s$ is orthonormal in the indexed sense, and the image of an orthonormal indexed family is an orthonormal set. Orthogonal means $\langle s,t\rangle=0$ ([[def-orthogonality-and-orthogonal-complement]]). **Independence and unique coefficients.** Let $(e_i)_{i\in I}$ be orthonormal, let $F\subseteq I$ be finite, and let scalars $c_i$ satisfy $\sum_{i\in F}c_ie_i=0$. For each fixed $j\in F$, linearity in the first argument gives$$0=\Bigl\langle \sum_{i\in F}c_ie_i,\;e_j\Bigr\rangle=\sum_{i\in F}c_i\langle e_i,e_j\rangle=c_j ,$$
 
 so every finite subfamily of an orthonormal family is linearly independent. In
 particular the coefficients in a finite expansion are unique: if
@@ -38,7 +39,7 @@ $c-d$ gives $c_i=d_i$ for every $i\in F$.
 the set of all finite linear combinations $\sum_{i\in F}c_ie_i$ with $F\subseteq I$
 finite and scalars $c_i$; it is the smallest linear subspace of $H$ containing
 every $e_i$ ([[def-linear-subspace]]). Its closure in the induced norm is the
-**closed linear span** of the family, the smallest closed subspace of $H$
+**closed linear span** of the family, the smallest closed linear subspace of $H$
 containing every $e_i$. The family is **complete**, or is a **complete
 orthonormal system**, when its closed linear span is all of $H$. A
 **Hilbert basis**, or **orthonormal basis**, of $H$ is a complete orthonormal

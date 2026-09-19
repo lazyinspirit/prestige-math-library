@@ -4,7 +4,7 @@ kind: lemma
 title: "The Brownian zero set has Lebesgue measure zero"
 status: draft
 origin: pipeline
-deps: [def-brownian-zero-set, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, def-axiom-of-choice]
+deps: [def-brownian-zero-set, lem-brownian-motion-has-a-jointly-measurable-continuous-version, thm-tonelli-theorem-for-sigma-finite-product-spaces, lem-brownian-transition-semigroup-property, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -35,7 +35,7 @@ Lebesgue measure zero.
 
 [F2] The map $(t,\omega)\mapsto\widehat B_t(\omega)$ is $\mathcal B([0,\infty))\otimes\mathcal F$-measurable, so $(t,\omega)\mapsto1_{\{\widehat B_t=0\}}$ is product measurable. [[lem-brownian-motion-has-a-jointly-measurable-continuous-version]]
 
-[F3] $N(0,t)$ has the strictly positive density $p_t(0,y)$ for $t>0$, hence $P(\widehat B_t=0)=P(B_t=0)=0$ for every $t>0$. [[def-standard-normal-and-normal-laws]] [[lem-normal-density-has-total-mass-one]]
+[F3] A standard Brownian motion satisfies $B_t\sim N(0,t)$, whose law has density $p_t(0,y)$ for $t>0$; hence $P(\widehat B_t=0)=P(B_t=0)=0$ for every $t>0$. [[lem-brownian-transition-semigroup-property]] [[def-standard-normal-and-normal-laws]] [[lem-normal-density-has-total-mass-one]]
 
 [F4] Tonelli: for a product-measurable $f\ge0$ on a product of sigma-finite spaces, the section integrals are measurable and the two iterated integrals agree. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
 

@@ -37,8 +37,10 @@ built into the word.
 
 - **Why this item exists on this page.** The ZF countermodel of Stone's theorem
   on this page produces a metrizable space with an open cover that has no
-  point-finite refinement at all; that is the precise failure, and it is what the
-  relative-consistency theorem and the open-status remark state. The word
+  point-finite open refining cover; that is the precise failure, and it is what
+  the relative-consistency theorem and the open-status remark state. (The empty
+  family is a point-finite refinement in the bare containment sense, but it does
+  not cover a nonempty space.) The word
   *metacompact* is used only as an abbreviation for that covering property.
 
 - **Effectivity is a separate strengthening.** A refinement is called *effective*

@@ -28,7 +28,7 @@ exclude most connected graphs.
 
 **Given:** A cycle graph on $m\ge3$ vertices and the conventions of the Dynkin diagram.
 
-[L1] The Dynkin diagram of a based root system has $a_{ij}a_{ji}$ edges between vertices $i,j$ and no others; a finite-type Cartan matrix is symmetrizable to a positive definite matrix, and its diagram is a tree ([[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]], [[prop-finite-type-cartan-matrix-properties]], [[lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching]]).
+[L1] The Dynkin diagram of a based root system has $a_{ij}a_{ji}$ edges between vertices $i,j$ and no others; a finite-type Cartan matrix is symmetrizable to a positive definite matrix. When the root system is irreducible, equivalently when its diagram is connected, that diagram is a tree ([[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]], [[prop-finite-type-cartan-matrix-properties]], [[lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching]]).
 
 ## Proof
 

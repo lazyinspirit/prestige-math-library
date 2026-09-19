@@ -5,7 +5,7 @@ title: Compositions with a compact operator are compact
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, def-bounded-linear-operator, lem-composition-operator-norm-inequality, thm-compactness-under-continuous-maps, thm-bounded-linear-operator-equivalences, lem-vector-operations-are-continuous-in-a-normed-space, thm-compact-subset-is-closed-and-bounded, def-metric-bounded-diameter]
+deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, lem-composition-operator-norm-inequality, thm-compactness-under-continuous-maps, thm-bounded-linear-operator-equivalences, lem-vector-operations-are-continuous-in-a-normed-space, thm-compact-subset-is-closed-and-bounded, lem-closed-subset-of-a-compact-space-is-compact, def-metric-bounded-diameter]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -27,11 +27,11 @@ the composites $TA:W\to Y$ and $BT:X\to Z$ are compact.
 
 ## Facts & Assumptions
 
-[A1] A bounded linear operator is continuous and satisfies $\|Sw\|\le\|S\|\,\|w\|$ for all $w$ ([[thm-bounded-linear-operator-equivalences]], [[lem-composition-operator-norm-inequality]]); $T$ is compact exactly when $\overline{T(E)}$ is compact for every bounded $E\subseteq X$, in particular for $E=\overline B_X=\{x:\|x\|\le1\}$ ([[def-compact-linear-operator]]).
+[A1] A bounded linear operator is continuous and satisfies $\|Sw\|\le\|S\|\,\|w\|$ for all $w$ ([[thm-bounded-linear-operator-equivalences]], [[def-operator-norm]]); $T$ is compact exactly when $\overline{T(E)}$ is compact for every bounded $E\subseteq X$, in particular for $E=\overline B_X=\{x:\|x\|\le1\}$ ([[def-compact-linear-operator]]).
 
 [A2] A subset $E$ of a metric space is bounded when $E=\varnothing$ or $E\subseteq B(x_0,r)$ for some point $x_0$ and real $r>0$; a subset of a bounded set is bounded ([[def-metric-bounded-diameter]]).
 
-[A3] A continuous image of a compact subset is compact ([[thm-compactness-under-continuous-maps]]); scalar multiplication by a fixed scalar is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]); a compact subset of a metric space is closed, and a closed subset of a compact set is compact ([[thm-compact-subset-is-closed-and-bounded]]).
+[A3] A continuous image of a compact subset is compact ([[thm-compactness-under-continuous-maps]]); scalar multiplication by a fixed scalar is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]); a compact subset of a metric space is closed, and a closed subset of a compact metric space is compact ([[thm-compact-subset-is-closed-and-bounded]], [[lem-closed-subset-of-a-compact-space-is-compact]]).
 
 ## Proof
 

@@ -38,7 +38,7 @@ diagonalisably on $V$ with integer eigenvalues.
 
 [L1] The bracket relations and the three-dimensionality of $\mathfrak{sl}_2$ are those of [[def-special-linear-lie-algebra-sl-two]]; in particular a module is a bilinear action with $xy\,v-yx\,v=[x,y]v$ ([[def-representation-of-a-lie-algebra]]).
 
-[L2] Every nonzero finite-dimensional complex vector space endomorphism has an eigenvalue, and the eigenspaces of a single endomorphism are its invariant subspaces ([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]); commuting operators preserve each other's eigenspaces ([[lem-commuting-endomorphisms-preserve-eigenspaces]]).
+[L2] Every endomorphism of a nonzero finite-dimensional complex vector space has an eigenvalue ([[cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue]]); commuting operators preserve each other's eigenspaces ([[lem-commuting-endomorphisms-preserve-eigenspaces]]).
 
 [L3] Every finite-dimensional module of a finite-dimensional semisimple Lie algebra over a characteristic-zero field is completely reducible ([[thm-weyls-complete-reducibility-theorem]], [[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
 

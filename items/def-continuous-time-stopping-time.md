@@ -37,11 +37,12 @@ The following facts are used below, and each is a direct set computation.
     $\bigl(\bigcup_nA_n\bigr)\cap\{\tau\le t\}=\bigcup_n(A_n\cap\{\tau\le
     t\})\in\mathcal F_t$. All operations are literal, not modulo null sets, and
     no completeness of the filtration is assumed.
-(b) If $\tau\equiv t_0$ is deterministic, then
+(b) If $\tau\equiv t_0<\infty$ is deterministic, then
     $A\cap\{\tau\le t\}$ is $A$ for $t\ge t_0$ and $\emptyset$ for $t<t_0$, so
-    $\mathcal F_\tau=\bigcap_{t\ge t_0}\mathcal F_t$. When the filtration is
-    right-continuous this is $\mathcal F_{t_0}$, and the deterministic-time case
-    of every later computation may use $\mathcal F_{t_0}$.
+    $\mathcal F_\tau=\bigcap_{t\ge t_0}\mathcal F_t=\mathcal F_{t_0}$, where
+    the last equality follows because the intersection includes its least
+    member $\mathcal F_{t_0}$. If $\tau\equiv\infty$, then every test event
+    $\{\tau\le t\}$ is empty and $\mathcal F_\tau=\mathcal F$.
 (c) Suppose the filtration is right-continuous. Then $\tau$ is a stopping time
     if and only if $\{\tau<t\}\in\mathcal F_t$ for every $t>0$. Indeed
     $$\{\tau<t\}=\bigcup_{n\ge1}\{\tau\le t-\tfrac1n\}$$

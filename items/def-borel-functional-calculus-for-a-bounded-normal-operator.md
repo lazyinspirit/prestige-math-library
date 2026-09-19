@@ -45,7 +45,8 @@ the spectral theorem. It inherits the algebraic behaviour of the projection
 valued measure integral: $f(T)$ is complex-linear in $f$, unital with
 $\mathbf 1(T)=I$, multiplicative, star-preserving with
 $\overline f(T)=f(T)^*$, norm bounded by $\|f(T)\|\le\|f\|_\infty$, strongly
-continuous under bounded pointwise $E$-almost everywhere convergence, and every
+continuous when $f_n\to f$ pointwise $E$-almost everywhere and
+$\sup_n\|f_n\|_\infty<\infty$, and every
 bounded operator commuting with $T$ and $T^*$ commutes with every $f(T)$
 ([[thm-pvm-integral-is-a-star-homomorphism]]); these properties are stated and
 their consequences collected in

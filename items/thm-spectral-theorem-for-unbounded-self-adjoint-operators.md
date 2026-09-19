@@ -45,7 +45,7 @@ spectral projection valued measure is $E$ again.
 
 [A4] For a unitary $C$ one has $\sigma(C)\subseteq S^1=\{z:|z|=1\}$: $|z|>\|C\|$ forces $z\in\rho(C)$ by the Neumann series, so $\sigma(C)$ lies in the closed unit disk, and $0\notin\sigma(C)$ with $z\in\sigma(C)$ equivalent to $z^{-1}\in\sigma(C^{-1})$ ([[lem-neumann-series]], [[def-spectrum-and-resolvent-of-a-bounded-operator]]).
 
-[A5] For bounded Borel $h$ on $S^1$ the identity $\int h\,dF=\Phi_F(h)$ holds, and for any bijection $\psi:\mathbb R\to S^1\setminus\{1\}$ with Borel inverse the formula $E(B):=F(\psi(B))$ defines a PVM on $\mathbb R$ with $\int(h\circ\psi)\,dE=\int h\,dF$; regularity is preserved by such a transport ([[thm-bounded-borel-pvm-integral]], [[def-projection-valued-measure]], [[def-regular-borel-measure-on-an-lch-space]]).
+[A5] For bounded Borel $h$ on $S^1$ the identity $\int h\,dF=\Phi_F(h)$ holds. If a PVM $F$ on $S^1$ satisfies $F(\{1\})=0$ and $\psi:\mathbb R\to S^1\setminus\{1\}$ is a Borel isomorphism, then $E(B):=F(\psi(B))$ defines a PVM on $\mathbb R$ with $\int(h\circ\psi)\,dE=\int h\,dF$; regularity is preserved by this transport ([[thm-bounded-borel-pvm-integral]], [[def-projection-valued-measure]], [[def-regular-borel-measure-on-an-lch-space]]).
 
 ## Proof
 
@@ -53,7 +53,7 @@ spectral projection valued measure is $E$ again.
 
 **Given:** A self-adjoint operator $T$ on $H$ and $C:=C_T$.
 
-1.1 By [A3] the operator $C$ is unitary with $\ker(I-C)=\{0\}$, and by [A4] its spectrum lies in $S^1$; let $F$ be the regular spectral PVM of $C$ on $\sigma(C)\subseteq S^1$, so $C=\int z\,dF$ by [A2]. [A2, A3, A4]
+1.1 By [A3] the operator $C$ is unitary with $\ker(I-C)=\{0\}$, and by [A4] its spectrum lies in $S^1$. Let $F_0$ be the regular spectral PVM of $C$ on $\sigma(C)$ supplied by [A2], and extend it to $S^1$ by $F(B):=F_0(B\cap\sigma(C))$ for Borel $B\subseteq S^1$. Then $F$ is a regular PVM on $S^1$, is carried by $\sigma(C)$, and $C=\int_{S^1}z\,dF(z)$. [A2, A3, A4]
 
 2.1 $F(\{1\})=0$: for a bounded normal operator the spectral projection at a point $\lambda$ is the orthogonal projection onto $\ker(C-\lambda)$, because $F(\{\lambda\})x=x$ gives $Cx=\int z\,dF_x=\lambda x$, while $Cx=\lambda x$ gives $\int|z-\lambda|^2dF_x=\|(C-\lambda)x\|^2=0$, hence $F_x(\{z\ne\lambda\})=0$ and $F(\{\lambda\})x=x$; with $\lambda=1$ the kernel is $\{0\}$ by [A3]. [A2, A3, step 1.1]
 
@@ -63,6 +63,6 @@ spectral projection valued measure is $E$ again.
 
 5.1 Substituting 2.1 into the formula $T=i(I+C)(I-C)^{-1}$ of [A3] gives $T=(1/2)(I+C)(A+i)$; now $I+C=\int(1+\psi)dE=\int2\lambda h(\lambda)\,dE=2\lambda h(\lambda)(E)$, so $T=(\lambda h)(E)(A+i)=(\lambda^2h)(E)+i(\lambda h)(E)=(\lambda)(E)=A$ on $D(A)$, because $\lambda^2h+i\lambda h=\lambda h(\lambda+i)=\lambda$. [A1, A3, step 4.1]
 
-5.2 Uniqueness: let $E'$ be a regular PVM on $\mathbb R$ with $D(T)=\{x:\int\lambda^2dE'_x<\infty\}$ and $Tx=\int\lambda\,dE'x$ for $x\in D(T)$, and put $F'(B):=E'(\psi^{-1}(B))$ for Borel $B\subseteq S^1$. Then $F'$ is a regular PVM on $S^1$ with $\int z\,dF'=\int\psi\,dE'=I-2i\,h(E')=I-2i(T+i)^{-1}=C$, where $(T+i)^{-1}=h(E')$ is proved as in step 4.1 with $E'$ in place of $E$. By the uniqueness clause of [A2] applied to the bounded normal operator $C$, $F'=F$ on $\sigma(C)$ and $F'(S^1\setminus\sigma(C))=0$, so $E'=F'\circ\psi=F\circ\psi=E$. [A2, A5, step 3.1, step 4.1]
+5.2 Uniqueness: let $E'$ be a regular PVM on $\mathbb R$ with $D(T)=\{x:\int\lambda^2dE'_x<\infty\}$ and $Tx=\int\lambda\,dE'x$ for $x\in D(T)$, and put $F'(B):=E'(\psi^{-1}(B\setminus\{1\}))$ for Borel $B\subseteq S^1$. Then $F'$ is a regular PVM on $S^1$, $F'(\{1\})=0$, and $\int z\,dF'=\int\psi\,dE'=I-2i\,h(E')=I-2i(T+i)^{-1}=C$, where $(T+i)^{-1}=h(E')$ is proved as in step 4.1 with $E'$ in place of $E$. By the uniqueness clause of [A2] applied to the bounded normal operator $C$, $F'$ is carried by $\sigma(C)$ and agrees there with $F_0$, hence $F'=F$ on $S^1$. Therefore $E'(B)=F'(\psi(B))=F(\psi(B))=E(B)$. [A2, A5, step 3.1, step 4.1]
 
 6.1 Conversely, if $E$ is a regular PVM on $\mathbb R$, then $A=\int\lambda\,dE$ is self-adjoint by [A1] and $E$ represents $A$; by step 5.2 the representing PVM is unique, so $E$ is the spectral PVM of $A$. [A1, step 5.2] ∎

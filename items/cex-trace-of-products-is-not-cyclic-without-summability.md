@@ -1,7 +1,7 @@
 ---
 id: cex-trace-of-products-is-not-cyclic-without-summability
 kind: counterexample
-title: Trace of products is not cyclic without summability
+title: The unilateral shift obstructs a cyclic linear trace extension
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -29,11 +29,13 @@ $$S^*S=I,\qquad SS^*=I-P_0,\qquad S^*S-SS^*=P_0,$$
 neither $S^*S=I$ nor $SS^*=I-P_0$ is trace class
 ([[def-trace-class-operator]]), while $P_0$ is rank one with
 $\operatorname{tr}(P_0)=1$
-([[ex-rank-one-operator-adjoint-norm-and-trace]]). Consequently the cyclicity
-identity $\operatorname{tr}(ST)=\operatorname{tr}(TS)$ of
-[[thm-cyclicity-of-the-trace]] cannot be extended to products that are not
-trace class: here the two products fail the hypothesis, and the difference
-$S^*S-SS^*$ has trace $1$, so no subtraction of "infinite traces" is available.
+([[ex-rank-one-operator-adjoint-norm-and-trace]]). Consequently there is no
+linear functional $\tau$ on a linear subspace of $\mathcal B(\ell^2)$ that
+contains the trace-class operators, $S^*S$, and $SS^*$, agrees with the usual
+trace on trace-class operators, and satisfies $\tau(S^*S)=\tau(SS^*)$. Thus the
+cyclicity identity $\operatorname{tr}(ST)=\operatorname{tr}(TS)$ of
+[[thm-cyclicity-of-the-trace]] has no linear cyclic extension whose domain
+contains this pair of nonsummable products.
 
 ## Facts & Assumptions
 
@@ -59,4 +61,6 @@ $S^*S-SS^*$ has trace $1$, so no subtraction of "infinite traces" is available.
 
 1.3 **The difference has trace one.** $P_0=\langle\cdot,u_0\rangle u_0$ is a rank-one operator whose trace is $\langle u_0,u_0\rangle=1$ by [A3]; note that $u_0\ne0$ because it is a unit vector. [A3]
 
-2.1 **Conclusion.** The products $S^*S=I$ and $SS^*=I-P_0$ are not trace class by [step 1.2], so the hypothesis of the cyclicity theorem [A4] fails for this pair and no equality of traces is asserted or available; the difference of the two products is $P_0$ with trace $1$ by [step 1.1] and [step 1.3], so the identity cannot be repaired by subtracting the two "traces", which are not defined. [step 1.1, step 1.2, step 1.3, A4] ∎
+2.1 **Conclusion.** Suppose that a linear functional $\tau$ on a linear subspace containing the trace-class operators, $S^*S$, and $SS^*$ agreed with the usual trace on trace-class operators and satisfied $\tau(S^*S)=\tau(SS^*)$. By linearity, [step 1.1], and [step 1.3],
+$$0=\tau(S^*S)-\tau(SS^*)=\tau(P_0)=\operatorname{tr}(P_0)=1,$$
+a contradiction. Hence no such cyclic linear extension exists. The products themselves are not trace class by [step 1.2], so [A4] neither asserts nor assigns their individual traces. [step 1.1, step 1.2, step 1.3, A4, assume-contra, discharge-contradiction] ∎

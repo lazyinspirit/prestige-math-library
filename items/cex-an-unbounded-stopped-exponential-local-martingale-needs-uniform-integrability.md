@@ -30,7 +30,7 @@ $EZ_\tau=1/2\ne1$, and the stopped family is not uniformly integrable.
 
 ## Facts & Assumptions
 
-**Given:** AC, (H), a standard Brownian motion $B$, the process $Z_t=\exp(B_t-t/2)$, the level $1/2$, the stopping time $\tau=\inf\{t:Z_t=1/2\}$, and $t>0$.
+**Given:** AC, (H), a standard Brownian motion $B$ equipped with its usual augmented natural filtration, the process $Z_t=\exp(B_t-t/2)$, the level $1/2$, the stopping time $\tau=\inf\{t:Z_t=1/2\}$, and $t>0$.
  
 [F1] **Exponential martingale.** $Z$ is a positive continuous martingale with $EZ_t=1$ for every $t$, and for $\theta=2$ the same statement applied to $\exp(2B_t-2t)$ gives $Ee^{2B_t}=e^{2t}$, hence $EZ_t^2=Ee^{2B_t-t}=e^{t}<\infty$. [[cor-exponential-brownian-martingale]] [[def-brownian-motion]]
  

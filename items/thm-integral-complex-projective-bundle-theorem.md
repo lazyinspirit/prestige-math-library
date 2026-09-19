@@ -5,7 +5,7 @@ title: Integral complex projective bundle theorem
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator, thm-leray-hirsch-module-isomorphism, thm-numerable-fiber-bundles-are-hurewicz-fibrations, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, def-axiom-of-choice]
+deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator, thm-leray-hirsch-module-isomorphism, thm-numerable-fiber-bundles-are-hurewicz-fibrations, lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type, thm-homotopic-maps-induce-equal-maps-in-singular-cohomology, def-partition-of-unity-subordinate-to-a-cover, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the numerable-bundle and Thom suppliers."
 provenance:
@@ -46,7 +46,7 @@ occurring in the iterated construction below.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited by the numerable-bundle, Leray-Hirsch and Euler-class suppliers ([[def-axiom-of-choice]]).
 
-[F1] The projective bundle $P(E)$ is a fiber bundle over $B$ with fiber $\mathbb{CP}^{n-1}$, its tautological line is $\gamma_E$, and $x=e((\gamma_E)_{\mathbb R})$ ([[def-complex-projective-bundle-and-tautological-complex-line]]).
+[F1] The projective bundle $P(E)$ uses the same base trivializing cover as $E$, has fiber $\mathbb{CP}^{n-1}$ and tautological line $\gamma_E$, and $x=e((\gamma_E)_{\mathbb R})$ ([[def-complex-projective-bundle-and-tautological-complex-line]]). A bundle atlas is numerable when its cover has a subordinate partition of unity ([[def-partition-of-unity-subordinate-to-a-cover]]).
 
 [F2] On every fiber the restrictions of $1,x,\dots,x^{n-1}$ are a $\mathbb Z$-basis of the fiber cohomology, and their reductions are an $\mathbb F_p$-basis ([[lem-complex-tautological-euler-class-restricts-to-the-projective-fiber-generator]]).
 
@@ -64,7 +64,7 @@ occurring in the iterated construction below.
 
 **Given:** AC, a numerable complex rank-$n$ bundle $E\to B$ with $n\geq1$ over a path-connected CW complex $B$, and a coefficient ring $R$ equal to $\mathbb Z$ or a field $\mathbb F_p$.
 
-1.1 By [F1] the projection $p:P(E)\to B$ is a numerable fiber bundle with compact Hausdorff fiber $\mathbb{CP}^{n-1}$, so by [F4] it is a Hurewicz fibration and hence a Serre fibration over the path-connected CW complex $B$. [F1, F4, given]
+1.1 Since $E$ is numerable, choose a subordinate partition of unity on a vector-bundle trivializing cover. By [F1] that same cover and the same partition trivialize and numerate $P(E)\to B$, whose fiber $\mathbb{CP}^{n-1}$ is compact Hausdorff. Thus [F4] makes $p$ a Hurewicz, hence Serre, fibration over the path-connected CW complex $B$. [F1, F4, given]
 
 1.2 By [F2] the classes $1,x_R,\dots,x_R^{n-1}$ restrict on every fiber to an $R$-basis of $H^*(\mathbb{CP}^{n-1};R)$: for $R=\mathbb Z$ directly, and for $R=\mathbb F_p$ through the coefficient reductions. [F2, given]
 

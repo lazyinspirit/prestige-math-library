@@ -54,11 +54,11 @@ and $c_1(\gamma)$ is the negative generator.
 
 1.2 Nontriviality of the restricted tautological bundle: by [F4] the bundle $\gamma|_{\mathbb{CP}^1}$ is clutched by the degree-one map $z\mapsto z$, hence is nontrivial by [F3]; by the isomorphism of [F2] its first Chern class is nonzero. [F2, F3, F4]
 
-2.1 Generation of $x$: by [F1], $x|_{\mathbb{CP}^1}=c_1(\gamma^*|_{\mathbb{CP}^1})=-c_1(\gamma|_{\mathbb{CP}^1})$, which is nonzero by step 1.2; by [F5] the restriction $H^2(\mathbb{CP}^n;\mathbb Z)\to H^2(\mathbb{CP}^1;\mathbb Z)$ is an isomorphism of infinite cyclic groups, so $x$ is a generator of $H^2(\mathbb{CP}^n;\mathbb Z)\cong\mathbb Z$. [F1, F5, step 1.1, step 1.2]
+2.1 Generation of $x$: [F5] identifies $t=c_1(\gamma)$ as a generator of $H^2(\mathbb{CP}^n;\mathbb Z)$, and step 1.1 gives $x=-t$. The negative of a generator is a generator, so $x$ generates $H^2(\mathbb{CP}^n;\mathbb Z)\cong\mathbb Z$. Its restriction to $\mathbb{CP}^1$ is likewise the negative of the tautological generator because the restriction map carries $t$ to $t$ by [F5]. [F5, step 1.1]
 
 3.1 Total class of the hyperplane line: since $\gamma^*$ has rank one, [F6] gives $c(\gamma^*)=1+c_1(\gamma^*)=1+x$, the higher Chern classes vanishing. [F6, step 2.1]
 
-4.1 Boundary cases. For $n=1$ the inclusion $\mathbb{CP}^1\subseteq\mathbb{CP}^n$ is the identity and the computation of step 2.1 is the statement that $x$ is a generator of $H^2(\mathbb{CP}^1;\mathbb Z)$; the negative sign displayed is the pair's convention, under which $c_1$ of the tautological Hopf line is the negative generator. The rank-one case is exactly the range where [F6] applies; the empty base does not occur. The coefficient ring $\mathbb Z$ is nonzero, so a nonzero class is genuinely a generator of the infinite cyclic group. AC is used only through [A1] in the classification and clutching suppliers. [A1, F1, F6, step 2.1] ∎
+4.1 Boundary cases. For $n=1$ the inclusion $\mathbb{CP}^1\subseteq\mathbb{CP}^n$ is the identity and the computation of step 2.1 is the statement that $x$ is a generator of $H^2(\mathbb{CP}^1;\mathbb Z)$; the negative sign displayed is the pair's convention, under which $c_1$ of the tautological Hopf line is the negative generator. The rank-one case is exactly the range where [F6] applies; the empty base does not occur. AC is used only through [A1] in the classification and clutching suppliers. [A1, F1, F6, step 2.1] ∎
 
 ## Source notes
 

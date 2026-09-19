@@ -31,7 +31,7 @@ probability is decreasing in $a$.
 
 **Given:** AC, a standard Brownian motion $B$ and reals $a>0$, $t>0$.
 
-[F1] $P(M_t\le x)=2\Phi(x/\sqrt t)-1$ for $x\ge0$; hence $P(M_t\ge a)=1-P(M_t<a)$ and the crossing event is the complement of $\{M_t\le x\}$ at $x=a$. [[cor-law-of-the-brownian-maximum]]
+[F1] $P(M_t\le x)=2\Phi(x/\sqrt t)-1$ for $x\ge0$, and the law of $M_t$ is atomless; hence $P(M_t<a)=P(M_t\le a)$ and $P(M_t\ge a)=1-P(M_t<a)$. [[cor-law-of-the-brownian-maximum]]
 
 [F2] $\Phi(0)=1/2$, $\lim_{x\to\infty}\Phi(x)=1$, and $\Phi$ is continuous and nondecreasing. [[def-standard-normal-and-normal-laws]] [[def-cumulative-distribution-function-of-a-random-variable]]
 
@@ -41,7 +41,7 @@ probability is decreasing in $a$.
 
 **Proof technique:** direct.
 
-1.1 By [F1], $P(M_t\ge a)=1-\bigl(2\Phi(a/\sqrt t)-1\bigr)=2\bigl(1-\Phi(a/\sqrt t)\bigr)$ for every $a>0$ and $t>0$, which is the displayed value. [F1, given]
+1.1 By [F1], $P(M_t\ge a)=1-P(M_t<a)=1-P(M_t\le a)=1-\bigl(2\Phi(a/\sqrt t)-1\bigr)=2\bigl(1-\Phi(a/\sqrt t)\bigr)$ for every $a>0$ and $t>0$, which is the displayed value. [F1, given]
 
 2.1 As $a\downarrow0$ one has $a/\sqrt t\downarrow0$, so continuity of $\Phi$ at $0$ with $\Phi(0)=1/2$ gives $2(1-\Phi(a/\sqrt t))\to2(1-1/2)=1$; as $a\to\infty$ one has $a/\sqrt t\to\infty$ and $\Phi\to1$, so the value tends to $0$. Since $\Phi$ is nondecreasing, the value is nonincreasing in $a$. [F2, step 1.1]
 

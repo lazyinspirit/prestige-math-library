@@ -30,8 +30,6 @@ Assume AC. If $T=T^*$ on a nonzero complex Hilbert space, then $\min\sigma(T)\,I
 
 [A3] A bounded positive operator has spectrum in $[0,+\infty)$ ([[lem-spectrum-of-a-positive-operator-is-nonnegative]]).
 
-[A4] If $\|T\|=0$ then $T=0$, and $\sigma(T)$ is a subset of the disc of radius $\|T\|$ ([[def-spectrum-and-resolvent-of-a-bounded-operator]]).
-
 [A5] Continuous functions on $\sigma(T)$ satisfy the pointwise identities used below: $z-m\ge0$ if $m\le\min\sigma(T)$, and $M-z\ge0$ if $M\ge\max\sigma(T)$ ([[def-self-adjoint-positive-unitary-and-normal-operator]] for the scalar-multiple convention used in the calculus).
 
 [A6] AC is the hypothesis of the calculus and spectral suppliers ([[def-axiom-of-choice]]).
@@ -46,7 +44,7 @@ Assume AC. If $T=T^*$ on a nonzero complex Hilbert space, then $\min\sigma(T)\,I
 
 1.2 The functions $z-m$ and $M-z$ are continuous and nonnegative on $\sigma(T)$, so $(z-m)(T)=T-mI$ and $(M-z)(T)=MI-T$ are positive operators. [A1, A5]
 
-1.3 The norm identity: $\|T\|=\|z(T)\|=\|z\|_{\infty,\sigma(T)}=\max_{\lambda\in\sigma(T)}|\lambda|=\max(|m|,|M|)$, since $\sigma(T)\subseteq[m,M]$. [A1, A4]
+1.3 The norm identity: $\|T\|=\|z(T)\|=\|z\|_{\infty,\sigma(T)}=\max_{\lambda\in\sigma(T)}|\lambda|=\max(|m|,|M|)$, since $\sigma(T)\subseteq[m,M]$. [A1]
 
 2.1 Consequently $mI\le T\le MI$ in the order of the definition, since the two differences are positive operators. [step 1.2, A2]
 

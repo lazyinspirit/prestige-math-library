@@ -5,7 +5,7 @@ title: Complexification and spectrum of a real operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-canonical-banach-complexification-of-a-real-banach-space, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-spectral-radius]
+deps: [def-bounded-linear-operator, lem-canonical-banach-complexification-of-a-real-banach-space, def-spectrum-and-resolvent-set-in-a-banach-algebra, def-spectral-radius]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -20,7 +20,7 @@ sources:
 
 ## Definition
 
-Let $X$ be a real Banach space and let $T : X \to X$ be a bounded real-linear
+Let $X$ be a nonzero real Banach space and let $T : X \to X$ be a bounded real-linear
 operator ([[def-bounded-linear-operator]]). Let
 $X_{\mathbb C} = X \times X$ be the canonical complexification with the
 rotation-supremum norm $\rho$ and let

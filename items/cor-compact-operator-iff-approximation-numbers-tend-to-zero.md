@@ -22,14 +22,17 @@ sources:
 
 Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and
 $K$ be real or complex Hilbert spaces and let $T\in\mathcal B(H,K)$ be a bounded
-linear operator ([[def-bounded-linear-operator]], [[def-hilbert-space]]). For
-$n\ge1$ put
+linear operator ([[def-bounded-linear-operator]], [[def-hilbert-space]]). Put
+$a_0(T):=\|T\|$, and for $n\ge1$ put
 $$a_n(T):=\inf\bigl\{\|T-F\|:\ F\in\mathcal B(H,K),\ \dim\operatorname{ran}F<n\bigr\}$$
-([[def-infimum]], [[def-operator-norm]], [[def-dimension]]). Then $T$ is compact
+([[def-infimum]], [[def-operator-norm]], [[def-dimension]]). Thus
+$(a_n(T))_{n\in\mathbb N}$ is a sequence in the library's zero-based
+convention. Then $T$ is compact
 ([[def-compact-linear-operator]]) if and only if $a_n(T)\to0$
 ([[def-metric-convergence]]). If $T$ is compact, then $a_n(T)=s_n(T)$ for every
 $n$, where $(s_n(T))$ is the zero-padded singular-value sequence of $T$
-([[def-absolute-value-and-singular-values-of-a-compact-operator]]).
+([[def-absolute-value-and-singular-values-of-a-compact-operator]]) for every
+$n\ge1$.
 
 ## Facts & Assumptions
 
@@ -41,7 +44,9 @@ $n$, where $(s_n(T))$ is the zero-padded singular-value sequence of $T$
 
 [A3] **Infimum and convergence.** For a nonempty set of reals bounded below, the infimum is the greatest lower bound, so for every real $\varepsilon>0$ there is an element $x$ of the set with $x<\inf+\varepsilon$; a sequence of real numbers tends to $0$ when for every $\varepsilon>0$ eventually $|a_n|<\varepsilon$ ([[def-infimum]], [[def-metric-convergence]]).
 
-[A4] Countable Choice selects one finite-rank approximant for each $n$ ([[def-countable-choice]]).
+[A4] Countable Choice selects one finite-rank approximant for each $n\ge1$ by
+applying it to the shifted family indexed by $\mathbb N$; assigning $F_0=0$
+then gives a zero-based sequence ([[def-countable-choice]]).
 
 ## Proof
 
@@ -49,9 +54,8 @@ $n$, where $(s_n(T))$ is the zero-padded singular-value sequence of $T$
 
 **Given:** Countable Choice, the Hilbert spaces $H,K$, the bounded operator $T$, and the numbers $a_n(T)$.
 
-1.1 **Compact implies vanishing.** If $T$ is compact then [A1] gives $a_n(T)=s_n(T)$ for all $n$ and $s_n(T)\to0$, so $a_n(T)\to0$. [A1]
+1.1 **Compact implies vanishing.** If $T$ is compact then [A1] gives $a_n(T)=s_n(T)$ for all $n\ge1$ and $s_n(T)\to0$ along the positive-indexed tail, so the zero-based sequence $(a_n(T))_{n\in\mathbb N}$ tends to $0$; its single value $a_0(T)=\|T\|$ does not affect convergence. [A1]
 
-1.2 **Vanishing implies compact.** Assume $a_n(T)\to0$. Since the infimum defining $a_n(T)$ is over a nonempty set, for each $n\ge1$ there is $F_n\in\mathcal B(H,K)$ with $\dim\operatorname{ran}F_n<n$ and $\|T-F_n\|<a_n(T)+1/n$, by [A3]; countable choice [A4] selects such a sequence $(F_n)$. Each $F_n$ has finite rank, hence is compact, and $\|T-F_n\|\to0$ because $0\le a_n(T)+1/n\to0$; as the target $K$ is a Banach space, [A2] makes $T$ compact. [A2, A3, A4, algebra]
+1.2 **Vanishing implies compact.** Assume $(a_n(T))_{n\in\mathbb N}\to0$. Since the infimum defining $a_n(T)$ is over a nonempty set, for each $n\ge1$ there is $F_n\in\mathcal B(H,K)$ with $\dim\operatorname{ran}F_n<n$ and $\|T-F_n\|<a_n(T)+1/n$, by [A3]; countable choice [A4] selects these operators, and we put $F_0=0$ to obtain a sequence indexed by $\mathbb N$. Each $F_n$ has finite rank, hence is compact, and $\|T-F_n\|\to0$ because the tail satisfies $0\le\|T-F_n\|<a_n(T)+1/n\to0$; as the target $K$ is a Banach space, [A2] makes $T$ compact. [A2, A3, A4, algebra]
 
-2.1 **Conclusion.** Steps 1.1 and 1.2 give the equivalence; the identification $a_n(T)=s_n(T)$ in the compact case is [A1]. [step 1.1, step 1.2, A1] ∎
-
+2.1 **Conclusion.** Steps 1.1 and 1.2 give the equivalence; the identification $a_n(T)=s_n(T)$ in the compact case for every $n\ge1$ is [A1]. [step 1.1, step 1.2, A1] ∎

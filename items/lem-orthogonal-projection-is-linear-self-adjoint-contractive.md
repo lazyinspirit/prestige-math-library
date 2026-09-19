@@ -48,6 +48,6 @@ Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a r
 
 2.1 Range and kernel: $P_Mx\in M$ always, $P_Mm=m$ for $m\in M$ because $m-m=0\in M^\perp$, and $P_Mx=0$ exactly when $x=x-0\in M^\perp$; hence $\operatorname{ran}P_M=M$ and $\ker P_M=M^\perp$. [step 1.1, A1, A2]
 
-3.1 Self-adjointness: writing $y=P_My+(y-P_My)$ and using linearity in the second argument together with $y-P_My\in M^\perp$ and $P_Mx\in M$ gives $\langle P_Mx,y\rangle=\langle P_Mx,P_My\rangle$, and symmetrically $\langle x,P_My\rangle=\langle P_Mx,P_My\rangle$; hence the two pairings agree. [step 2.1, A1, A2]
+3.1 Self-adjointness: writing $y=P_My+(y-P_My)$ and using additivity in the second argument together with $y-P_My\in M^\perp$ and $P_Mx\in M$ gives $\langle P_Mx,y\rangle=\langle P_Mx,P_My\rangle$, and symmetrically $\langle x,P_My\rangle=\langle P_Mx,P_My\rangle$; hence the two pairings agree. [step 2.1, A1, A2]
 
 4.1 Contractivity: $x=P_Mx+(x-P_Mx)$ is a sum of orthogonal vectors, so Pythagoras gives $\|x\|^2=\|P_Mx\|^2+\|x-P_Mx\|^2\ge\|P_Mx\|^2$, hence $\|P_Mx\|\le\|x\|$ and $\|P_M\|\le1$ by the definition of the operator norm; if $M\ne\{0\}$ choose $0\ne m\in M$, then $P_Mm=m$ gives $\|P_M\|\ge\|P_Mm\|/\|m\|=1$, so $\|P_M\|=1$. [step 3.1, A3, A4, algebra] ∎

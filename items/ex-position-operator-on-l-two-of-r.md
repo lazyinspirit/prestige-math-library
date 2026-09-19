@@ -32,7 +32,7 @@ subspace of $H$.
 
 ## Facts & Assumptions
 
-[A1] The multiplication-operator example gives the domain, self-adjointness, spectral PVM $E(B)f=\mathbf 1_Bf$, functional calculus and essential-range spectrum formula for $L^2(X,\mu)$ and real measurable $m$ ([[ex-unbounded-multiplication-operator-and-its-domain]]).
+[A1] The multiplication-operator example gives the domain, self-adjointness, spectral PVM $E(B)f=\mathbf 1_{m^{-1}(B)}f$, functional calculus and essential-range spectrum formula for $L^2(X,\mu)$ and real measurable $m$ ([[ex-unbounded-multiplication-operator-and-its-domain]]).
 
 [A2] A self-adjoint operator $T$ generates the strongly continuous unitary group $e^{itT}$ computed by the Borel calculus, with generator $iT$ and derivative domain $D(T)$ ([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]], [[def-strongly-continuous-one-parameter-unitary-group]]).
 

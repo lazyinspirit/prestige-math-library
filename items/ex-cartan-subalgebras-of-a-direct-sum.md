@@ -5,7 +5,7 @@ title: Cartan subalgebras of a direct sum
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-simple-semisimple-and-reductive-lie-algebras, def-lie-subalgebra-ideal-and-center]
+deps: [def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-simple-semisimple-and-reductive-lie-algebras, def-lie-subalgebra-ideal-and-center, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -20,7 +20,7 @@ proof_strategy: direct
 
 ## Example
 
-Let $\mathfrak g_1,\mathfrak g_2$ be finite-dimensional complex semisimple
+Assume the Axiom of Choice. Let $\mathfrak g_1,\mathfrak g_2$ be finite-dimensional complex semisimple
 Lie algebras and $\mathfrak g=\mathfrak g_1\oplus\mathfrak g_2$ their direct
 sum, which is again semisimple because the radical of a direct sum is the
 direct sum of the radicals
@@ -38,14 +38,16 @@ systems of the summands.
 
 **Given:** Finite-dimensional complex semisimple Lie algebras $\mathfrak g_1,\mathfrak g_2$, their direct sum $\mathfrak g$, Cartan subalgebras and normalizers as in [[def-cartan-subalgebra-of-a-lie-algebra]], [[def-normalizer-of-a-lie-subalgebra]] and [[def-toral-and-maximal-toral-subalgebra]], and the identification of Cartan with maximal toral subalgebras in [[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]]; semisimplicity of a direct sum uses [[def-simple-semisimple-and-reductive-lie-algebras]] and [[def-lie-subalgebra-ideal-and-center]].
 
+[A1] The Axiom of Choice is assumed for the Cartan/maximal-toral theorem ([[def-axiom-of-choice]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 If each $\mathfrak h_i$ is a Cartan subalgebra of $\mathfrak g_i$, then $\mathfrak h_1\oplus\mathfrak h_2$ is nilpotent, being a direct sum of nilpotent algebras, and its normalizer is $N_{\mathfrak g_1}(\mathfrak h_1)\oplus N_{\mathfrak g_2}(\mathfrak h_2)=\mathfrak h_1\oplus\mathfrak h_2$: an element $x=x_1+x_2$ normalizes $\mathfrak h_1\oplus\mathfrak h_2$ exactly when $[x_i,\mathfrak h_i]\subseteq\mathfrak h_i$ for $i=1,2$, because brackets in a direct sum are computed componentwise and mixed brackets vanish. [given, algebra]
 
-1.2 Conversely let $\mathfrak h$ be a Cartan subalgebra of $\mathfrak g$. By [[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]] it is maximal toral, hence abelian with all adjoint operators semisimple ([[def-toral-and-maximal-toral-subalgebra]]). Let $\mathfrak h_i$ be the image of $\mathfrak h$ under the projection $\mathfrak g\to\mathfrak g_i$; each $\mathfrak h_i$ is abelian, since it is the image of an abelian subalgebra under a Lie-algebra homomorphism, and each of its elements is semisimple, because the adjoint operator of $x_1+x_2$ splits as the direct sum of the adjoint operators of $x_1$ and $x_2$, and a direct sum of endomorphisms is semisimple exactly when both summands are. Hence $\mathfrak h_1\oplus\mathfrak h_2$ is toral and contains $\mathfrak h$, so maximality gives $\mathfrak h=\mathfrak h_1\oplus\mathfrak h_2$. [given, algebra]
+1.2 Conversely let $\mathfrak h$ be a Cartan subalgebra of $\mathfrak g$. By [[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]] it is maximal toral, hence abelian with all adjoint operators semisimple ([[def-toral-and-maximal-toral-subalgebra]]). Let $\mathfrak h_i$ be the image of $\mathfrak h$ under the projection $\mathfrak g\to\mathfrak g_i$; each $\mathfrak h_i$ is abelian, since it is the image of an abelian subalgebra under a Lie-algebra homomorphism, and each of its elements is semisimple, because the adjoint operator of $x_1+x_2$ splits as the direct sum of the adjoint operators of $x_1$ and $x_2$, and a direct sum of endomorphisms is semisimple exactly when both summands are. Hence $\mathfrak h_1\oplus\mathfrak h_2$ is toral and contains $\mathfrak h$, so maximality gives $\mathfrak h=\mathfrak h_1\oplus\mathfrak h_2$. [A1, given, algebra]
 
-2.1 Each $\mathfrak h_i$ is maximal toral in $\mathfrak g_i$: if $\mathfrak t_i\supseteq\mathfrak h_i$ were toral in $\mathfrak g_i$, then $\mathfrak t_1\oplus\mathfrak h_2$ would be a toral subalgebra of $\mathfrak g$ strictly containing $\mathfrak h$, contradicting maximality. By [[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]] each $\mathfrak h_i$ is a Cartan subalgebra of $\mathfrak g_i$, which completes the first half. The dimension formula is additivity of dimensions over a direct sum. [given, step 1.2, algebra]
+2.1 Each $\mathfrak h_i$ is maximal toral in $\mathfrak g_i$: if $\mathfrak t_i\supsetneq\mathfrak h_i$ were toral in $\mathfrak g_i$, then replacing the $i$th summand of $\mathfrak h_1\oplus\mathfrak h_2$ by $\mathfrak t_i$ would give a toral subalgebra of $\mathfrak g$ strictly containing $\mathfrak h$, contradicting maximality. By [[thm-cartan-subalgebras-of-complex-semisimple-lie-algebras-are-exactly-maximal-toral-subalgebras]] each $\mathfrak h_i$ is a Cartan subalgebra of $\mathfrak g_i$, which completes the first half. The dimension formula is additivity of dimensions over a direct sum. [A1, given, step 1.2, algebra]
 
 3.1 For the root statement, the eigenvectors of $\operatorname{ad}_H$ for $H=H_1+H_2\in\mathfrak h$ are exactly the sums of eigenvectors in the two summands: a functional on $\mathfrak h$ that is nonzero on both summands occurs for no nonzero eigenvector, while the roots of $\mathfrak g$ are the union of the roots of $\mathfrak g_1$ with respect to $\mathfrak h_1$ and of $\mathfrak g_2$ with respect to $\mathfrak h_2$, extended by zero on the other summand. Hence the root systems form a disjoint union, as asserted. [given, step 1.1, step 1.2, algebra] ∎

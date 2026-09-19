@@ -23,7 +23,7 @@ sources:
 
 ## Statement
 
-Assume AC. Let $E\mathbb U(n)\to B\mathbb U(n)$ be the universal rank-$n$
+Assume AC and $n\geq1$. Let $E\mathbb U(n)\to B\mathbb U(n)$ be the universal rank-$n$
 complex bundle over the Grassmannian model $B\mathbb U(n)=
 \operatorname{Gr}_n(\mathbb C^\infty)$, and let
 $q:BT^n=E\mathbb U(n)/T^n\to B\mathbb U(n)$ be the universal flag bundle of

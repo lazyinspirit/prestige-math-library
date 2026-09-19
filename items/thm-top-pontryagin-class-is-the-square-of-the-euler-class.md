@@ -24,7 +24,7 @@ sources:
 ## Statement
 
 Assume AC. Let $E\to B$ be a numerable oriented real vector bundle of rank
-$2n$ over a path-connected CW base (or CW-type base), with Euler class
+$2n$ over a path-connected CW base, with Euler class
 $e(E)\in H^{2n}(B;\mathbb Z)$ in the given orientation. Then
 $$p_n(E)=e(E)^2\qquad\text{in }H^{4n}(B;\mathbb Z).$$
 In particular the top Pontryagin class is independent of the choice of

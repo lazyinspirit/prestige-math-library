@@ -21,7 +21,8 @@ Assume the Axiom of Choice and the standing hypothesis (H) of
 [[def-elementary-predictable-brownian-integrand]]. Let $H$ be an elementary
 predictable integrand on $[0,T]$ with representation
 $H_s=\sum_{k=0}^{m-1}\xi_k1_{(t_k,t_{k+1}]}(s)$ and defining sums $I_t(H)$
-[[def-ito-integral-of-an-elementary-predictable-process]]. Then
+[[def-ito-integral-of-an-elementary-predictable-process]]. Extend those sums to
+$[0,\infty)$ by setting $I_t(H):=I_T(H)$ for $t\ge T$. Then
 $t\mapsto I_t(H)$ is a continuous square-integrable martingale relative to
 $(\mathcal F_t)$ [[def-continuous-time-adapted-process-and-martingale]], and
 for every $t\in[0,T]$
@@ -60,7 +61,7 @@ sides depend only on the $(\mathrm dt\otimes P)$-class of $H$.
 
 3.1 Summing the diagonal terms of step 2.2 and using $H_s^2=\sum_k\xi_k^21_{(t_k,t_{k+1}]}(s)$ gives $EI_t(H)^2=\sum_{k=0}^{m-1}E[\xi_k^2](t\wedge t_{k+1}-t\wedge t_k)=E\int_0^tH_s^2\,ds$, finite because there are finitely many bounded coefficients. [step 2.2, F3]
 
-4.1 Steps 2.1, 3.1 and [F3] show that $I(H)$ is an adapted continuous path process with $E|I_t(H)|<\infty$, the conditional identity $E[I_t(H)\mid\mathcal F_s]=I_s(H)$ and finite second moments; by [F5] it is a continuous square-integrable martingale, and the isometry displayed in the statement holds. Independence of the representation is the content of item 6. AC is used only through the conditional-expectation facts [F2], [F4] and the Brownian interface (H); the partition, the blocks and the sums are fixed by the representation. [step 2.1, step 3.1, F3, F5, F6, given] ∎
+4.1 Steps 2.1, 3.1 and [F3] show the martingale and isometry assertions on $[0,T]$.  The constant extension from the statement is adapted and continuous; if $s<T<t$, the already proved identity gives $E[I_t(H)\mid\mathcal F_s]=E[I_T(H)\mid\mathcal F_s]=I_s(H)$, while for $T\le s\le t$ both sides equal $I_T(H)$.  Thus [F5] makes the extended process a continuous square-integrable martingale on $[0,\infty)$. Independence of the representation is the content of item 6. AC is used only through the conditional-expectation facts [F2], [F4] and the Brownian interface (H); the partition, the blocks and the sums are fixed by the representation. [step 2.1, step 3.1, F3, F5, F6, given] ∎
 
 ## Source notes
 

@@ -39,7 +39,7 @@ $A+B\ge\gamma-\max\{a|\gamma|+b,\ b/(1-a)\}$.
 
 [A4] A densely defined symmetric operator $S$ with $\operatorname{ran}(S+i\mu)=\operatorname{ran}(S-i\mu)=H$ for some $\mu>0$ is self-adjoint, by the range criterion with the parameter $i\mu$ ([[thm-self-adjointness-range-criterion]]).
 
-[A5] For a self-adjoint $S$ the spectrum is a closed subset of $\mathbb R$, $\inf\sigma(S)\in\sigma(S)$, and $\|R_S(t)\|=\operatorname{dist}(t,\sigma(S))^{-1}$ for every real $t\notin\sigma(S)$; if $S\ge c$ then $\sigma(S)\subseteq[c,\infty)$, the inequality $S\ge c$ is exactly $\sigma(S)\subseteq[c,\infty)$, $\inf\sigma(S)=\min\sigma(S)$, and $\|R_S(t)\|\le(t-c)^{-1}$ for $t>c$ ([[thm-self-adjoint-resolvent-estimate]], [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]).
+[A5] For a self-adjoint $S$ the spectrum is a closed subset of $\mathbb R$ and $\|R_S(t)\|=\operatorname{dist}(t,\sigma(S))^{-1}$ for every real $t\notin\sigma(S)$. If $S$ is bounded below, then $\inf\sigma(S)$ is finite and belongs to the closed spectrum; moreover $S\ge c$ exactly when $\sigma(S)\subseteq[c,\infty)$, and $\|R_S(t)\|\le(c-t)^{-1}$ for $t<c$ ([[thm-self-adjoint-resolvent-estimate]], [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]).
 
 ## Proof
 

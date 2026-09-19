@@ -5,7 +5,7 @@ title: Kernel of identity minus compact is finite dimensional
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-closed-subspace-of-a-compact-space-is-compact, def-metric-convergence, lem-metric-limits-unique, def-metric-ball, def-linear-basis, def-norm-and-normed-space]
+deps: [def-compact-linear-operator, def-bounded-linear-operator, thm-bounded-linear-operator-equivalences, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-closed-subspace-of-a-compact-space-is-compact, thm-metric-open-set-algebra, def-metric-convergence, lem-metric-limits-unique, def-metric-ball, def-linear-basis, def-norm-and-normed-space]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -33,7 +33,7 @@ length ([[def-linear-basis]]).
 
 [A1] $K$ is a bounded linear operator, and a bounded linear operator is continuous ([[def-bounded-linear-operator]], [[thm-bounded-linear-operator-equivalences]]); $K$ is compact, that is, $\overline{K(\overline B_X)}$ is compact ([[def-compact-linear-operator]]).
 
-[A2] The normed space $X$ is a metric space with $d(x,y)=\|x-y\|$, convergence is metric convergence and limits of sequences are unique ([[def-metric-convergence]], [[lem-metric-limits-unique]], [[def-norm-and-normed-space]]); the closed unit ball is $\overline B_X=\{x\in X:\|x\|\le1\}$ ([[def-metric-ball]]).
+[A2] The normed space $X$ is a metric space with $d(x,y)=\|x-y\|$, convergence is metric convergence and limits of sequences are unique ([[def-metric-convergence]], [[lem-metric-limits-unique]], [[def-norm-and-normed-space]]); the closed unit ball is $\overline B_X=\{x\in X:\|x\|\le1\}$ and is closed ([[def-metric-ball]], [[thm-metric-open-set-algebra]]).
 
 [A3] If the closed unit ball of a normed space is compact, then that space admits an ordered basis of finite length ([[thm-closed-unit-ball-compact-iff-finite-dimensional]]); a closed subset of a compact topological space is a compact subset ([[thm-closed-subspace-of-a-compact-space-is-compact]]).
 

@@ -38,10 +38,10 @@ Assume Countable Choice. The numerical range of the compression of an operator t
 
 **Given:** A complex Hilbert space $H$, a complex subspace $V\subseteq H$ with $\dim V\le2$, a bounded operator $T$ on $H$ and the compression $A:=P_VT|_V$ of $T$ to $V$.
 
-1.1 The numerical range of the compression depends only on $A$ and equals $\{\langle Ax,x\rangle:x\in V,\ \|x\|=1\}$, since $P_V$ is the identity on $V$; if $\dim V\le1$ this set is a single scalar and is convex. [A1, A2, A4, algebra]
+1.1 The numerical range of the compression depends only on $A$ and equals $\{\langle Ax,x\rangle:x\in V,\ \|x\|=1\}$, since $P_V$ is the identity on $V$. If $\dim V=0$ the set is empty, hence convex; if $\dim V=1$ it is a singleton, hence convex. [A1, A2, A4, algebra]
 
 1.2 If $\dim V=2$, choose an orthonormal basis of $V$ and write $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$; for a unit vector $x=(x_1,x_2)$ direct expansion gives $\langle Ax,x\rangle=\tfrac12(a+d)+\tfrac12\bigl((a-d)t+(b+c)s+i(c-b)u\bigr)$ with $t=|x_1|^2-|x_2|^2$, $s=2\operatorname{Re}(x_1\overline{x_2})$, $u=2\operatorname{Im}(x_1\overline{x_2})$, and the achievable triples $(s,u,t)$ are exactly the unit sphere $S^2\subseteq\mathbb R^3$. [A2, algebra]
 
 2.1 In the notation of the expansion, the assignment $L(s,u,t):=\tfrac12((a-d)t+(b+c)s+i(c-b)u)$ is real-linear from $\mathbb R^3$ to $\mathbb C\cong\mathbb R^2$, so its kernel is nontrivial and $L(S^2)=L(\bar B^3)$ is a convex subset of $\mathbb C$; hence $W(A)$ is the affine image $\tfrac12(a+d)+L(S^2)$ and is convex. [step 1.2, A3, algebra]
 
-3.1 Both cases $\dim V\le1$ and $\dim V=2$ give a convex numerical range, which is the assertion. [step 1.1, step 2.1] ∎
+3.1 The cases $\dim V=0$, $\dim V=1$ and $\dim V=2$ all give a convex numerical range, which is the assertion. [step 1.1, step 2.1] ∎

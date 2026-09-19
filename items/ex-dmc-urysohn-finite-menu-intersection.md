@@ -28,13 +28,13 @@ predecessor coherence of the menus is preserved.
 
 ## Facts & Assumptions
 
-**Given:** A normal space $X$ with disjoint closed sets $F,G$; nodes $\langle U_1,\dots,U_{2^n}\rangle$ of open sets with $\overline{U_i} \subseteq U_{i+1}$ for $1 \le i < 2^n$, $F \subseteq U_1$ and $U_{2^n} = X \setminus G$; a menu $\{a^{(1)},\dots,a^{(m)}\}$ of such nodes at one level.
+**Given:** A normal space $X$ with disjoint closed sets $F,G$; nodes $\langle U_1,\dots,U_{2^n}\rangle$ of open sets with $\overline{U_i} \subseteq U_{i+1}$ for $1 \le i < 2^n$, $F \subseteq U_1$ and $U_{2^n} = X \setminus G$; and nonempty finite menus $M_n,M_{n+1}$ of such nodes. The successor relation used here is the one fixed in [[thm-dmc-implies-urysohn-lemma]]: for $a\in M_n$ and $b\in M_{n+1}$, $aSb$ means $b_{2i}=a_i$ for every $1\le i\le2^n$. Every $a\in M_n$ has an $S$-successor in $M_{n+1}$, and every $b\in M_{n+1}$ has an $S$-predecessor in $M_n$.
 
 [F1] The closure of a finite union is the union of the closures, and for finitely many sets the closure of an intersection is contained in the intersection of the closures; $A \subseteq \overline{A}$ ([[def-interior-closure-boundary-top]], [[lem-interior-closure-boundary-identities]]).
 
 [F2] A finite intersection of open sets is open, and the entries of a node satisfy the closure inclusions displayed above ([[def-topological-space]], [[def-normal-and-t4-spaces]]).
 
-[F3] DMC supplies nonempty finite menus at every level with the successor property, and the menus can be pruned so that every element of the next menu has a predecessor in the current one ([[def-dependent-multiple-choice-finite-level-tree]], [[def-natural-numbers]]).
+[F3] DMC supplies nonempty finite menus at every level with the successor property, and the Urysohn construction prunes them so that every element of the next menu has a predecessor in the current one ([[def-dependent-multiple-choice-finite-level-tree]], [[thm-dmc-implies-urysohn-lemma]], [[def-natural-numbers]]). The coordinate identity $b_{2i}=a_i$ is not a generic property of DMC: it is part of the particular relation $S$ specified in the Given data.
 
 ## Verification
 
@@ -44,4 +44,4 @@ predecessor coherence of the menus is preserved.
 
 2.2 The boundary values are preserved: $F \subseteq U_1$ because $F$ is contained in every $a^{(j)}_1$, and $U_{2^n} = X \setminus G$ because every $a^{(j)}_{2^n}$ equals $X \setminus G$. [step 1.1, F2]
 
-3.1 Predecessor coherence is preserved: if every element of the level-$(n+1)$ menu has a predecessor in the level-$n$ menu by [F3], then the entry at position $2i$ of the level-$(n+1)$ intersection is the entry at position $i$ of the level-$n$ intersection, since for each node of the larger menu its $2i$-th entry is the $i$-th entry of its predecessor and each predecessor occurs. [step 1.1, F3] ∎
+3.1 Predecessor coherence is preserved: the Given predecessor property and the definition of $S$ show that every $2i$-th entry occurring in the level-$(n+1)$ menu is an $i$-th entry occurring in the level-$n$ menu. Conversely, the successor property supplied by [F3] makes every level-$n$ node occur as the predecessor of some level-$(n+1)$ node, so every level-$n$ $i$-th entry occurs among those $2i$-th entries. The two indexed families of sets therefore have the same range, and their intersections are equal. [step 1.1, given, F3] ∎

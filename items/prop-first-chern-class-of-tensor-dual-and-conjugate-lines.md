@@ -35,7 +35,7 @@ where $L^*$ is the dual line and $\overline L$ the conjugate line.
 
 [F3] Every numerable complex bundle admits a Hermitian metric ([[thm-numerable-vector-bundles-admit-bundle-metrics]]).
 
-[F4] For a complex line $L$ the first Chern class equals the Euler class of the underlying real line bundle, $c_1(L)=e(L_{\mathbb R})$ ([[def-chern-classes-from-the-projective-bundle-relation]]).
+[F4] For a complex line $L$ the first Chern class equals the Euler class of its underlying real rank-two bundle, $c_1(L)=e(L_{\mathbb R})$ ([[def-chern-classes-from-the-projective-bundle-relation]]).
 
 ## Proof
 

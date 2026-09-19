@@ -38,7 +38,7 @@ fiber products of such total spaces over $B$.
 
 **Given:** AC, a numerable locally trivial fiber bundle $p:S\to B$ with compact Hausdorff fiber $F$ over a paracompact Hausdorff base $B$.
 
-[F1] A numeration consists of fiber homeomorphisms $\theta_i:p^{-1}(U_i)\to U_i\times F$ with $\operatorname{pr}_1\theta_i=p$ over a locally finite open cover, together with a subordinate partition of unity; the overlap change on $U_i\cap U_j$ is $(b,x)\mapsto(b,g_{ji}(b,x))$ with each $g_{ji}(b,-)$ a homeomorphism of $F$ ([[def-locally-trivial-fiber-bundle]]).
+[F1] A locally trivial bundle has fiber homeomorphisms $\theta_i:p^{-1}(U_i)\to U_i\times F$ over an open cover. A numeration additionally supplies a partition of unity whose cozero sets, not necessarily the original chart cover, are locally finite and whose supports lie in the chart domains; the overlap change on $U_i\cap U_j$ is $(b,x)\mapsto(b,g_{ji}(b,x))$ with each $g_{ji}(b,-)$ a homeomorphism of $F$ ([[def-locally-trivial-fiber-bundle]]).
 
 [F2] Let $K\subseteq X$ be compact, $z_0\in Z$, and $N\subseteq X\times Z$ open with $K\times\{z_0\}\subseteq N$. Then there is an open $W\subseteq Z$ with $z_0\in W$ and $K\times W\subseteq N$ ([[lem-tube-lemma-for-a-compact-factor]]).
 

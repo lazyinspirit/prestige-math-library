@@ -5,7 +5,7 @@ title: Complex projective bundle and tautological complex line
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-real-and-complex-topological-vector-bundle, thm-vector-bundles-glued-from-transition-cocycles, def-euler-class-by-zero-section-pullback-of-the-thom-class, lem-complex-orientation-of-underlying-real-bundles, def-stiefel-space-grassmannian-and-tautological-bundle, def-axiom-of-choice]
+deps: [def-real-and-complex-topological-vector-bundle, def-euler-class-by-zero-section-pullback-of-the-thom-class, lem-complex-orientation-of-underlying-real-bundles, def-stiefel-space-grassmannian-and-tautological-bundle, def-axiom-of-choice]
 axiom_strength: "ZF + AC; inherited from the bundle and Thom suppliers."
 provenance:
   statement: literature-derived
@@ -33,11 +33,12 @@ base point.
 
 $P(E)$ is a fiber bundle over $B$ with fiber $\mathbb{CP}^{n-1}$: over a
 complex linear chart $U\times\mathbb C^n$ of $E$ the quotient is
-$U\times\mathbb{CP}^{n-1}$, and the transition maps of $E$ induce the
-homeomorphisms $\mathbb{CP}^{n-1}\to\mathbb{CP}^{n-1}$ given by projectivized
-complex-linear isomorphisms, so
-[[thm-vector-bundles-glued-from-transition-cocycles]] applies to the
-projectivized cocycle. Under the identification
+$U\times\mathbb{CP}^{n-1}$. On an overlap, the transition matrix
+$g_{UV}(b)\in\operatorname{GL}_n(\mathbb C)$ induces
+$(b,[v])\mapsto(b,[g_{UV}(b)v])$; this is a homeomorphism with inverse induced
+by $g_{VU}$, depends continuously on $b$, and the cocycle identities descend
+unchanged to projective classes. These quotient charts therefore form a
+fiber-bundle atlas with fiber $\mathbb{CP}^{n-1}$. Under the identification
 $\mathbb{CP}^{n-1}=\operatorname{Gr}_1(\mathbb C^n)$ supplied by
 [[def-stiefel-space-grassmannian-and-tautological-bundle]], a point of the
 fiber over $b\in B$ is a complex line $\ell\subseteq E_b$.

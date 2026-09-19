@@ -5,7 +5,7 @@ title: Canonical Banach complexification of a real Banach space
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-banach-space, def-norm-and-normed-space, def-bounded-linear-operator, def-complex-numbers-and-arithmetic, def-complex-conjugate-real-imaginary-part-and-modulus, def-complete-ordered-field, thm-sine-and-cosine-addition-formulas, thm-polar-form-with-unique-principal-argument]
+deps: [def-banach-space, def-norm-and-normed-space, def-bounded-linear-operator, def-operator-norm, def-complex-numbers-and-arithmetic, def-complex-conjugate-real-imaginary-part-and-modulus, def-complete-ordered-field, thm-sine-and-cosine-addition-formulas, thm-polar-form-with-unique-principal-argument]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -69,7 +69,10 @@ same rotation-supremum norm on the comparison model.
 
 [L4] For all real $u,v$, $\cos(u+v) = \cos u\cos v - \sin u\sin v$ and $\sin(u+v) = \sin u\cos v + \cos u\sin v$ ([[thm-sine-and-cosine-addition-formulas]]).
 
-[L5] A real-linear $T : X \to X$ is bounded with operator norm $\|T\|$ when $\|Tx\| \le \|T\|\,\|x\|$ for all $x$, and then $\|T\|$ is the least such constant ([[def-bounded-linear-operator]]).
+[L5] A real-linear $T : X \to X$ is bounded when it has a finite bound
+([[def-bounded-linear-operator]]). Its operator norm $\|T\|$ is the least such
+bound, and $\|Tx\|\leq\|T\|\,\|x\|$ for all $x$
+([[def-operator-norm]]).
 
 [L6] The real field is a complete ordered field: every nonempty subset of $\mathbb R$ that is bounded above has a least upper bound, and the supremum respects the order and addition ([[def-complete-ordered-field]]).
 

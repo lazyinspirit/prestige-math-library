@@ -52,7 +52,7 @@ cofinal in the squared mass.
 
 [A3] The support of the coefficient family is at most countable ([[lem-only-countably-many-fourier-coefficients-are-nonzero]], [[def-countable-choice]]).
 
-[A5] For every finite $F\subseteq I$, $\|x-P_Fx\|^2=\sum_{i\in I\setminus F}|\langle x,e_i\rangle|^2$, and if $F\subseteq G$ then $\|P_Gx-P_Fx\|^2=\sum_{i\in G\setminus F}|\langle x,e_i\rangle|^2$ ([[lem-finite-bessel-inequality]], [[lem-pythagorean-theorem-and-finite-orthogonal-sums]]).
+[A5] Parseval gives $\|x\|^2=\sum_{i\in I}|\langle x,e_i\rangle|^2$ for a complete orthonormal family. Combining this with the finite residual identity and the splitting identity for a nonnegative family yields $\|x-P_Fx\|^2=\sum_{i\in I\setminus F}|\langle x,e_i\rangle|^2$. If $F\subseteq G$, finite Pythagoras gives $\|P_Gx-P_Fx\|^2=\sum_{i\in G\setminus F}|\langle x,e_i\rangle|^2$ ([[thm-parseval-equivalences-for-a-complete-orthonormal-family]], [[lem-finite-bessel-inequality]], [[def-square-summable-family-on-an-arbitrary-index-set]], [[lem-pythagorean-theorem-and-finite-orthogonal-sums]]).
 
 [A6] If $\sum_{i\in I}|a_i|^2<+\infty$ then for every real $\varepsilon>0$ there is a finite $F\subseteq I$ with $\sum_{i\in I\setminus F}|a_i|^2<\varepsilon$ ([[def-square-summable-family-on-an-arbitrary-index-set]]).
 

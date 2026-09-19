@@ -45,7 +45,7 @@ space $H$, with operator spectrum $\sigma(T)$
 
 [A3] For a nonempty compact Hausdorff $K$ and a unital star-homomorphism $\pi:C(K;\mathbb C)\to\mathcal B(H)$ there is a unique regular PVM $E$ on the Borel $\sigma$-algebra of $K$ with $\Phi_E(f)=\pi(f)$ for every continuous $f$, and for bounded Borel $h$ the operator $\Phi_E(h)$ satisfies $\|\Phi_E(h)\|\le\|h\|_\infty$ ([[lem-continuous-functional-calculus-produces-a-regular-pvm]], [[thm-bounded-borel-pvm-integral]]).
 
-[A4] For every PVM the map $\Phi_E$ is linear, unital, multiplicative and star-preserving on bounded Borel functions, $\Phi_E(z)=T_E$ is self-adjoint exactly when $z$ is real and $T_E$ is normal because $T_ET_E^*=\Phi_E(|z|^2)=T_E^*T_E$ ([[thm-pvm-integral-is-a-star-homomorphism]]).
+[A4] For every PVM the map $\Phi_E$ is linear, unital, multiplicative and star-preserving on bounded Borel functions; consequently $T_E:=\Phi_E(z)$ is normal because $T_ET_E^*=\Phi_E(|z|^2)=T_E^*T_E$ ([[thm-pvm-integral-is-a-star-homomorphism]]).
 
 [A5] For an orthogonal projection value $E(\Lambda)=I$ and a continuous bounded $g$ on $\Lambda$ the operators $\Phi_E(g)$ are bounded by $\|g\|_\infty$, and for $|\lambda-z|>0$ on $\Lambda$ the function $z\mapsto(\lambda-z)^{-1}$ is continuous ([[thm-bounded-borel-pvm-integral]], [[def-projection-valued-measure]]).
 

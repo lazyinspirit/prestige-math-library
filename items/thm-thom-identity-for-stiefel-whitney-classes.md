@@ -4,7 +4,7 @@ kind: theorem
 title: Thom identity for Stiefel–Whitney classes
 status: draft
 origin: pipeline
-deps: ["def-total-steenrod-square", "thm-steenrod-squares-are-well-defined-and-natural", "prop-steenrod-square-normalization-instability-and-top-square", "thm-cartan-formula-for-steenrod-squares", "thm-thom-isomorphism-for-oriented-vector-bundles", "thm-naturality-and-uniqueness-of-thom-classes", "thm-external-product-and-whitney-sum-formulas-for-thom-classes", "def-thom-class-by-fiberwise-normalization", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-real-splitting-principle-with-mod-two-injective-pullback", "def-real-flag-bundle-and-stiefel-whitney-roots", "def-thom-euler-class-of-an-oriented-vector-bundle", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-stable-stiefel-space-is-contractible", "def-axiom-of-choice"]
+deps: ["def-total-steenrod-square", "thm-steenrod-squares-are-well-defined-and-natural", "prop-steenrod-square-normalization-instability-and-top-square", "thm-cartan-formula-for-steenrod-squares", "thm-thom-isomorphism-for-oriented-vector-bundles", "thm-naturality-and-uniqueness-of-thom-classes", "thm-external-product-and-whitney-sum-formulas-for-thom-classes", "def-thom-class-by-fiberwise-normalization", "def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-real-splitting-principle-with-mod-two-injective-pullback", "def-real-flag-bundle-and-stiefel-whitney-roots", "def-thom-euler-class-of-an-oriented-vector-bundle", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-stable-stiefel-space-is-contractible", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -45,7 +45,7 @@ with both sides vanishing for $i>n$.
 
 [F4] For a real line bundle $L$, $e_2(L)=w_1(L)$ ([[thm-mod-two-euler-class-is-the-top-stiefel-whitney-class]]).
 
-[F5] The Stiefel–Whitney classes satisfy naturality and the Whitney product formula, with $w_i=0$ above the rank ([[thm-whitney-sum-formula-for-stiefel-whitney-classes]], [[thm-naturality-of-stiefel-whitney-classes]]).
+[F5] The Stiefel–Whitney classes satisfy naturality and the Whitney product formula, and their defining rank convention sets $w_i(E)=0$ for $i$ above the rank of $E$ ([[thm-whitney-sum-formula-for-stiefel-whitney-classes]], [[thm-naturality-of-stiefel-whitney-classes]], [[def-stiefel-whitney-classes-from-the-projective-bundle-relation]]).
 
 [F6] The flag bundle $q:\operatorname{Fl}(E)\to B$ is admissible, splits $q^*E\cong L_1\oplus\cdots\oplus L_n$ and has $q^*$ injective on $\mathbb F_2$-cohomology ([[def-real-flag-bundle-and-stiefel-whitney-roots]], [[thm-real-splitting-principle-with-mod-two-injective-pullback]]).
 

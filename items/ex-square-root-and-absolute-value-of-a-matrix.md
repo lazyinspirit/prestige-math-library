@@ -5,7 +5,7 @@ title: Square root and absolute value of a matrix
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-positive-square-root, def-absolute-value-of-a-bounded-operator, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-operator, thm-hilbert-adjoint-properties, def-order-on-bounded-self-adjoint-operators]
+deps: [thm-positive-square-root, def-absolute-value-of-a-bounded-operator, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, def-order-on-bounded-self-adjoint-operators]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -24,7 +24,7 @@ Assume AC. On the two-dimensional complex inner-product space with orthonormal b
 
 ## Facts & Assumptions
 
-[A1] For a bounded operator on a nonzero complex Hilbert space, $T^*$ is characterised by $\langle Tx,y\rangle=\langle x,T^*y\rangle$ and the pairing is linear in the first argument and conjugate-linear in the second ([[thm-hilbert-adjoint-properties]]).
+[A1] For a bounded operator on a nonzero complex Hilbert space, $T^*$ is characterised by $\langle Tx,y\rangle=\langle x,T^*y\rangle$ ([[def-hilbert-space-adjoint]]).
 
 [A2] $|T|=(T^*T)^{1/2}$, this square root is positive, $|T|^2=T^*T$ and $\ker|T|=\ker T$ ([[def-absolute-value-of-a-bounded-operator]]).
 

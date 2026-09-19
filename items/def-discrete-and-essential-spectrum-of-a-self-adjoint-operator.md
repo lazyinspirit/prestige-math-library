@@ -5,7 +5,7 @@ title: "Discrete and essential spectrum of a self-adjoint operator"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-support-and-uniqueness-of-the-spectral-measure, def-axiom-of-choice]
+deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-axiom-of-choice]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -53,13 +53,13 @@ $\varepsilon>0$.
    spectrum in that interval is finite and $\lambda$ is an isolated point of
    $\sigma(A)$, and then $P_{\varepsilon'}=E(\{\lambda\})$ for small
    $\varepsilon'$, whose rank is the dimension of the eigenspace by item 1
-   ([[thm-support-and-uniqueness-of-the-spectral-measure]] for the support
+   ([[thm-unbounded-borel-functional-calculus]] for the support
    description, [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).
 3. *$\lambda\in\sigma_{\mathrm{ess}}(A)$ if and only if
    $\operatorname{rank}P_\varepsilon=\infty$ for every $\varepsilon>0$.*
    If rank $P_\varepsilon<\infty$ for some $\varepsilon$ and
    $\lambda\in\sigma(A)$, then $P_\varepsilon\ne0$ because the support of $E$
-   is $\sigma(A)$, and $\operatorname{ran}P_\varepsilon$ is a
+   is $\sigma(A)$ [[thm-unbounded-borel-functional-calculus]], and $\operatorname{ran}P_\varepsilon$ is a
    finite-dimensional reducing subspace; the restriction of $A$ to it is a
    self-adjoint operator on a finite-dimensional space, and its spectrum is
    exactly $\sigma(A)\cap(\lambda-\varepsilon,\lambda+\varepsilon)$, hence a

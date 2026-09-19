@@ -59,6 +59,6 @@ has dense closed range $X$ and bounded inverse.
   $\sigma_r$ with the compression spectrum.
 
 - **The three sets are not individually closed.** The spectrum is closed, but
-  the point spectrum need not be, and the three parts may meet at accumulation
-  points of the whole spectrum; only their union is known to be closed from this
-  definition.
+  the point spectrum need not be, and the closures of the three disjoint parts
+  may meet at accumulation points of the whole spectrum; only their union is
+  known to be closed from this definition.

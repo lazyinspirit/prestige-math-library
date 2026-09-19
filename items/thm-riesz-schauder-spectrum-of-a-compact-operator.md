@@ -5,7 +5,7 @@ title: Riesz schauder spectrum of a compact operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectrum-and-resolvent-of-a-bounded-operator, def-compact-linear-operator, def-bounded-linear-operator, lem-neumann-series-and-small-perturbations-of-bounded-inverses, thm-fredholm-alternative-for-identity-minus-compact, lem-riesz-schauder-ascent-and-descent-stabilize, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-heine-borel-rn, def-complex-metric-convergence-and-continuity, def-metric-compactness, def-metric-ball, def-banach-space, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, thm-complete-subspace-iff-closed]
+deps: [def-spectrum-and-resolvent-of-a-bounded-operator, def-compact-linear-operator, def-bounded-linear-operator, lem-neumann-series-and-small-perturbations-of-bounded-inverses, thm-fredholm-alternative-for-identity-minus-compact, lem-riesz-schauder-ascent-and-descent-stabilize, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-closed-unit-ball-compact-iff-finite-dimensional, thm-heine-borel-rn, def-complex-metric-convergence-and-continuity, thm-metric-open-set-algebra, def-metric-compactness, def-metric-ball, def-banach-space, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, thm-complete-subspace-iff-closed]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -41,7 +41,7 @@ space, let $K:X\to X$ be a compact operator
 
 [A3] If $B\in\mathcal B(X)$ is invertible with bounded inverse and $\|(\mu-\lambda)B^{-1}\|<1$ then $B+(\mu-\lambda)I$ is invertible with bounded inverse; if $\|C\|<1$ then $I-C$ is invertible with bounded inverse ([[lem-neumann-series-and-small-perturbations-of-bounded-inverses]]); and for a nilpotent endomorphism $N$ of a vector space with $N^m=0$ the operator $I+tN$ is invertible with inverse $\sum_{j<m}(-tN)^j$ for every scalar $t$ (finite telescoping sum).
 
-[A4] Under the identification $\mathbb C=\mathbb R^2$ the metric of $\mathbb C$ is the Euclidean metric of $\mathbb R^2$ ([[def-complex-metric-convergence-and-continuity]]); a subset of $\mathbb R^2$ is compact exactly when it is closed and bounded ([[thm-heine-borel-rn]]), and singletons are closed ([[def-metric-ball]], [[def-metric-compactness]]).
+[A4] Under the identification $\mathbb C=\mathbb R^2$ the metric of $\mathbb C$ is the Euclidean metric of $\mathbb R^2$ ([[def-complex-metric-convergence-and-continuity]]); a subset of $\mathbb R^2$ is compact exactly when it is closed and bounded ([[thm-heine-borel-rn]]), and every metric open ball is open ([[def-metric-ball]], [[thm-metric-open-set-algebra]]).
 
 [A5] If $T$ is compact and $C$ is bounded linear then $TC$ and $CT$ are compact ([[lem-compositions-with-a-compact-operator-are-compact]]); a normed space whose closed unit ball is compact admits an ordered basis of finite length ([[thm-closed-unit-ball-compact-iff-finite-dimensional]]); a closed subspace of a Banach space is Banach ([[thm-complete-subspace-iff-closed]], [[def-banach-space]]).
 

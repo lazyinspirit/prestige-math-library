@@ -5,7 +5,7 @@ title: Cartan subalgebras are exactly maximal toral subalgebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, lem-generalized-weight-space-decomposition-for-a-nilpotent-subalgebra, thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra, thm-engels-theorem, prop-nilpotent-lie-algebras-are-solvable, thm-lies-theorem, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
+deps: [thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-toral-and-maximal-toral-subalgebra, def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal, lem-generalized-weight-space-decomposition-for-a-nilpotent-subalgebra, thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra, thm-additive-jordan-chevalley-decomposition, thm-engels-theorem, prop-nilpotent-lie-algebras-are-solvable, thm-lies-theorem, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -37,7 +37,7 @@ subalgebras ([[def-toral-and-maximal-toral-subalgebra]]).
 
 [L3] A Cartan subalgebra is nilpotent and equals its normalizer, and the normalizer is $N_{\mathfrak g}(\mathfrak h)=\{x:[x,\mathfrak h]\subseteq\mathfrak h\}$ ([[def-cartan-subalgebra-of-a-lie-algebra]], [[def-normalizer-of-a-lie-subalgebra]]).
 
-[L4] Every element $x\in\mathfrak g$ has an abstract Jordan decomposition, and for $x_s$ one has $\operatorname{ad}_{x_s}=p(\operatorname{ad}_x)$ for a polynomial $p$ with $\operatorname{ad}_{x_s}$ semisimple and $\operatorname{ad}_{x_n}$ nilpotent ([[thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra]]).
+[L4] Every element $x\in\mathfrak g$ has an abstract Jordan decomposition whose adjoints are the additive Jordan–Chevalley parts of $\operatorname{ad}_x$ ([[thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra]]); the semisimple additive part is $p(\operatorname{ad}_x)$ for a polynomial $p$, while the other part is nilpotent ([[thm-additive-jordan-chevalley-decomposition]]).
 
 [L5] A nilpotent Lie algebra is solvable and all its adjoint operators are nilpotent ([[thm-engels-theorem]], [[prop-nilpotent-lie-algebras-are-solvable]]); a solvable Lie algebra over $\mathbb C$ acts triangularly on $\mathfrak g$ in some basis ([[thm-lies-theorem]]).
 

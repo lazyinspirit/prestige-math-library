@@ -54,8 +54,9 @@ conversely.** If $(T-\lambda I)^nx=0$ with $x\ne0$, let $k\ge1$ be least with
 $(T-\lambda I)^kx=0$; then $y:=(T-\lambda I)^{k-1}x$ is nonzero and satisfies
 $(T-\lambda I)y=0$. So $G_\lambda(T)\ne\{0\}$ exactly when $\lambda$ is an
 eigenvalue. In particular $\lambda\in\rho(T)$ implies
-$G_\lambda(T)=\{0\}$, and for an eigenvalue the algebraic multiplicity is at
-least the dimension of the eigenspace.
+$G_\lambda(T)=\{0\}$. If $G_\lambda(T)$ is finite dimensional, then the
+algebraic multiplicity is defined and is at least
+$\dim_{\mathbb C}E_\lambda(T)$, because $E_\lambda(T)\subseteq G_\lambda(T)$.
 
 **Conventions.** Only complex scalars are treated here; the real case is
 handled by complexification on a later page, so no spectrum is attached here to

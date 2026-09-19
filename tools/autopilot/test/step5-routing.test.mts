@@ -33,12 +33,12 @@ const stages = step5Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step5-ctx-')), dispatchDir: '/tmp/none' };
 
-test('5a adjudication and the 5b lead both keep DeepSeek V4.1 Flash max', async () => {
+test('5a adjudication and the 5b lead both run Sol xhigh, with tool lanes model-free', async () => {
   const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
   const stage = byId('5a-adjudicate');
-  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.solXHigh);
   assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
-  assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.solXHigh);
   assert.equal(byId('5b-cross').modelProfile({ role: 'tool' }), undefined);
 });
 

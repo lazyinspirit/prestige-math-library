@@ -5,7 +5,7 @@ title: Chern classes of a sum of universal complex lines
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-integral-cohomology-of-bu-n, thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, lem-cohomology-ring-of-infinite-complex-projective-space, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
+deps: [thm-naturality-normalization-and-whitney-sum-for-chern-classes, thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism, lem-cohomology-ring-of-infinite-complex-projective-space, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -36,23 +36,19 @@ $H^*((\mathbb{CP}^\infty)^n;\mathbb Z)=\mathbb Z[x_1,\dots,x_n]$.
 
 [F2] $H^*(\mathbb{CP}^\infty;\mathbb Z)=\mathbb Z[u]$ with free finitely generated homology in each degree, and the Kunneth cross product is a ring isomorphism for products of such spaces over a PID ([[lem-cohomology-ring-of-infinite-complex-projective-space]], [[thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism]]).
 
-[F3] $B\mathbb U(n)=\operatorname{Gr}_n(\mathbb C^\infty)$ is the classifying space of numerable rank-$n$ complex bundles, and the classifying map of a sum of lines is the map induced by the sum construction ([[thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians]]); the universal bundle and its flag bundle over this model are those of [[thm-integral-cohomology-of-bu-n]].
-
-[F4] Direct sums of complex line bundles are formed fiberwise and are compatible with pullback ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F3] Direct sums of complex line bundles are formed fiberwise and are compatible with pullback ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Each $L_i$ is a complex line bundle and $E=\bigoplus_iL_i$ by [F4]; by multiplicativity and line normalization [F1], $c(E)=\prod_ic(L_i)=\prod_i(1+x_i)$. [F1, F4, given]
+1.1 Each $L_i$ is a complex line bundle and $E=\bigoplus_iL_i$ by [F3]; by multiplicativity and line normalization [F1], $c(E)=\prod_ic(L_i)=\prod_i(1+x_i)$. [F1, F3, given]
 
 2.1 The degree-$k$ part of the product is the $k$-th elementary symmetric polynomial: $c_k(E)=e_k(x_1,\dots,x_n)$ by definition of the elementary symmetric functions as the coefficients of $\prod_i(1+x_i)$. [step 1.1, algebra]
 
 3.1 The classes $x_i$ generate a polynomial ring: by [F2] the Kunneth isomorphism identifies $H^*((\mathbb{CP}^\infty)^n;\mathbb Z)$ with $\mathbb Z[u]\otimes\cdots\otimes\mathbb Z[u]=\mathbb Z[x_1,\dots,x_n]$, so the displayed product expansion is the standard one with no relations among the $x_i$. [F2, step 2.1]
 
-4.1 Consistency with the classifying-space description: by [F3] the bundle $E$ is pulled back from the universal rank-$n$ bundle along the classifying map of the sum, and its Chern classes restrict under $p_i$ to $c_1(\gamma)=x_i$, matching the elementary symmetric description after the substitution of the $A$-page theorem identifying $H^*(B\mathbb U(n);\mathbb Z)$ with $\mathbb Z[c_1,\dots,c_n]$. [F3, step 3.1]
-
-5.1 Boundary cases. For $n=1$ the product is $1+x_1$ and $E=L_1$; for $k>n$ the elementary symmetric polynomial $e_k$ vanishes, matching the rank cutoff. The trivial summand case $L_i=\varepsilon^1$ has $x_i=0$ and contributes a factor $1$. The coefficient ring $\mathbb Z$ is nonzero and the product is finite, so no convergence question arises. AC is used only through [A1]. [A1, F1, step 2.1] ∎
+4.1 Boundary cases. For $n=1$ the product is $1+x_1$ and $E=L_1$; for $k>n$ the elementary symmetric polynomial $e_k$ vanishes, matching the rank cutoff. The trivial summand case $L_i=\varepsilon^1$ has $x_i=0$ and contributes a factor $1$. The coefficient ring $\mathbb Z$ is nonzero and the product is finite, so no convergence question arises. AC is used only through [A1]. [A1, F1, step 2.1] ∎
 
 ## Source notes
 

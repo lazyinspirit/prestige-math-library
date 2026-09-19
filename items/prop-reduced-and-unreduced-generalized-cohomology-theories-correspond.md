@@ -70,7 +70,7 @@ $h^n(X)=\widetilde h^n(X_+)$ hold with all structure maps transported.
 
 ## Facts & Assumptions
 
-[F1] A reduced generalized cohomology theory consists of contravariant functors on based CW complexes, natural suspension isomorphisms $\sigma:\widetilde h^n(X)\to\widetilde h^{n+1}(\Sigma X)$, natural connecting maps $\delta_f:\widetilde h^n(X)\to\widetilde h^{n+1}(C_f)$ for a based map $f:X\to Y$ with reduced cofiber $C_f$, and the axioms (H), (E) and (W) ([[def-reduced-generalized-cohomology-theory]]).
+[F1] A reduced generalized cohomology theory consists of contravariant functors on based CW complexes, natural suspension isomorphisms $\sigma:\widetilde h^n(X)\to\widetilde h^{n+1}(\Sigma X)$, natural connecting maps $\delta_f:\widetilde h^n(X)\to\widetilde h^{n+1}(C_f)$ for a based cellular map $f:X\to Y$ with reduced cofiber $C_f$, and the axioms (H), (E) and (W) ([[def-reduced-generalized-cohomology-theory]]).
 
 [F2] A CW subcomplex inclusion is a cofibration, and the reduced cofiber of the based inclusion $A_+\to X_+$ is the space $X\cup_A CA$ ([[prop-relative-cw-inclusions-are-cofibrations]], [[def-reduced-cone-suspension-and-cofiber-sequence]]).
 
@@ -102,7 +102,7 @@ $h^n(X)=\widetilde h^n(X_+)$ hold with all structure maps transported.
 
 1.7 Let $CY$ be the reduced cone and $j:Y\to CY$ its base inclusion. The pair $(CY,*)$ is homotopy equivalent to $(*,*)$, so $h^i(CY,*)=0$ for all $i$ by homotopy invariance; the long exact sequence of the triple $(*,Y,CY)$ therefore collapses to an isomorphism $\partial:h^n(Y,*)\xrightarrow{\cong}h^{n+1}(CY,Y)$, and under the quotient identification $CY/Y=\Sigma Y$ and excision the target is $h^{n+1}(\Sigma Y,*)$, which is the suspension isomorphism of [F1]. [F1, F4, F6, given]
 
-1.8 Let $f:X\to Y$ be a based map with reduced cofiber $C_f$ and structural inclusion. Since $X\hookrightarrow C_f$ is a cofibration with quotient $\Sigma X$, excision identifies $h^{n+1}(C_f,Y)\cong h^{n+1}(\Sigma X,*)$, and the connecting map $h^n(Y,*)\to h^{n+1}(\Sigma X,*)$ is the suspension isomorphism followed by the map induced by $-\Sigma f$, whose kernel is $\ker(f^*)$; exactness of the triple sequence at $h^n(Y,*)$ therefore gives $\operatorname{im}(h^n(C_f,*)\to h^n(Y,*))=\ker(f^*:h^n(Y,*)\to h^n(X,*))$, which is (E) of [F1]. [F1, F3, F6, given]
+1.8 Let $f:X\to Y$ be a based cellular map with reduced cofiber $C_f=Y\cup_f CX$. The structural inclusion $Y\hookrightarrow C_f$ is a CW-subcomplex cofibration and its quotient is $C_f/Y\cong\Sigma X$, so excision identifies $h^{n+1}(C_f,Y)\cong h^{n+1}(\Sigma X,*)$. In the long exact sequence of the pair $(C_f,Y)$, the connecting map $h^n(Y,*)\to h^{n+1}(C_f,Y)$ becomes, under the suspension isomorphism, the map induced by $-\Sigma f$; hence its kernel is $\ker(f^*)$. Exactness therefore gives $\operatorname{im}(h^n(C_f,*)\to h^n(Y,*))=\ker(f^*:h^n(Y,*)\to h^n(X,*))$, which is (E) of [F1]. [F1, F2, F3, F6, given]
 
 1.9 For a family $(Y_\alpha)$ the collapse map of pairs $\bigl(\bigsqcup_\alpha Y_\alpha,\bigsqcup_\alpha\{*_\alpha\}\bigr)\to(\bigvee_\alpha Y_\alpha,*)$ is a quotient by a discrete set of points, so excision makes it an isomorphism on $h^n$, and additivity gives $\widetilde h^n\bigl(\bigvee_\alpha Y_\alpha\bigr)\cong\prod_\alpha h^n(Y_\alpha,*_\alpha)=\prod_\alpha\widetilde h^n(Y_\alpha)$, which is the wedge axiom of [F1]; both sides vanish for the empty family. [F1, F5, given]
 

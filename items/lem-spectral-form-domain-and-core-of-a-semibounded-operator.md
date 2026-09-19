@@ -25,7 +25,7 @@ $$Q(A):=D\bigl((A-cI)^{1/2}\bigr),\qquad q_A[x]:=c\|x\|^2+\bigl\|(A-cI)^{1/2}x\b
 Then $Q(A)$ and $q_A$ do not depend on the choice of the constant
 $c\le\inf\sigma(A)$ (the form $q_A[x]=\int\lambda\,dE_x$ is itself unchanged,
 while the summand $\|(A-cI)^{1/2}x\|^2$ changes by the constant
-$(c'-c)\|x\|^2$ when $c$ is replaced by $c'$),
+$(c-c')\|x\|^2$ when $c$ is replaced by $c'\le c$),
 $q_A[x]=\int\lambda\,dE_x(\lambda)=\langle Ax,x\rangle$ for $x\in D(A)$, the
 domain $D(A)$ is dense in $Q(A)$ for the norm
 $\|x\|_Q=(\|x\|^2+\|(A-cI)^{1/2}x\|^2)^{1/2}$, and $q_A$ is a closed quadratic
@@ -47,7 +47,7 @@ form with $q_A[x]\ge c\|x\|^2$.
 
 1.1 $Q(A)=D((A-cI)^{1/2})=\{x:\int(\lambda-c)dE_x<\infty\}$ and, for $x\in Q(A)$, $q_A[x]=c\|x\|^2+\int(\lambda-c)dE_x=\int\lambda\,dE_x$. [A1, A2]
 
-2.1 Independence of $c$: since $\lambda-c'=(\lambda-c)+(c'-c)$ on the spectrum, $x\in Q(A)$ if and only if $\int(\lambda-c')dE_x<\infty$, and then $q_A[x]=c'\|x\|^2+\int(\lambda-c')dE_x=\int\lambda\,dE_x=c\|x\|^2+\int(\lambda-c)dE_x$, so the form itself is $c$-independent while its summand $\|(A-cI)^{1/2}x\|^2=\int(\lambda-c)dE_x$ changes by the constant $(c'-c)\|x\|^2$; in particular $D(A)\subseteq Q(A)$. [A1, A2, step 1.1]
+2.1 Independence of $c$: since $\lambda-c'=(\lambda-c)+(c-c')$ on the spectrum, $x\in Q(A)$ if and only if $\int(\lambda-c')dE_x<\infty$, and then $q_A[x]=c'\|x\|^2+\int(\lambda-c')dE_x=\int\lambda\,dE_x=c\|x\|^2+\int(\lambda-c)dE_x$, so the form itself is $c$-independent while its square-root summand increases by $(c-c')\|x\|^2$ when $c$ is replaced by $c'\le c$; in particular $D(A)\subseteq Q(A)$. [A1, A2, step 1.1]
 
 2.2 $q_A[x]=\langle Ax,x\rangle$ for $x\in D(A)$: for such $x$ one has $\int\lambda^2dE_x<\infty$, so $x\in Q(A)$ and $q_A[x]=\int\lambda\,dE_x=\langle Ax,x\rangle$. [A2, step 1.1]
 

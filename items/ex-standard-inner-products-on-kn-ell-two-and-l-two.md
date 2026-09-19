@@ -42,7 +42,7 @@ In the real case conjugation is the identity, so the pairings read $x\cdot y=\su
 
 [A6] Under countable choice, complex $L^p$ is complete and the complex $L^2$ pairing and its Cauchy–Schwarz inequality are available; the real $L^p$ spaces are complete for the same hypothesis ([[lem-complex-lp-completeness-density-and-inner-product]], [[thm-riesz-fischer-completeness-of-l-p]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
 
-[A7] Countable Choice is the hypothesis under which the $L^p$ completeness theorems and the complex pairing theorem are stated ([[def-countable-choice]]).
+[A7] Countable Choice is the hypothesis used by the cited $L^p$ completeness theorems; the complex $L^2$ pairing theorem [A5] itself is choice-free ([[def-countable-choice]]).
 
 ## Verification
 

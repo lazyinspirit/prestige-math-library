@@ -43,7 +43,7 @@ its coefficients, not from the spectral-sequence machinery.
 
 **Given:** Assume AC and let $X$ be a finite CW complex.
 
-1.1 Complex $K$-theory is a reduced generalized cohomology theory on finite CW pairs, so [A3] applies to it; its coefficient groups are $K^{2k}(*)\cong\mathbb Z$ and $K^{2k+1}(*)=0$ by [A1], and [A2] extends this to all integer degrees. [A1, A2, A3, given]
+1.1 The reduced groups $\widetilde K^q$ constructed in [A1] on based finite CW complexes satisfy the reduced generalized-cohomology axioms, and the absolute and relative groups $K^q$ in [A1] are the associated pair theory. Thus [A3] applies to $\widetilde K$ and abuts to the stated skeletal filtration of $K^q(X)$. Its coefficient groups are $K^{2k}(*)\cong\mathbb Z$ and $K^{2k+1}(*)=0$ by [A1], and [A2] supplies the two-periodic identifications in every integer degree. [A1, A2, A3, given]
 
 2.1 Substituting $h^q(*)=K^q(*)$ into $E_2^{p,q}=H^p(X;h^q(*))$ gives $E_2^{p,q}=H^p(X;\mathbb Z)$ for even $q$ and $E_2^{p,q}=0$ for odd $q$, while the differential bidegree and the convergence statement are those of [A3]. [A3, step 1.1]
 

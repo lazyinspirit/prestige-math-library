@@ -20,7 +20,7 @@ sources:
 Assume the Axiom of Choice. Let $g:\mathbb R\to\mathbb R$ be bounded and Borel
 measurable, let $T>0$, and let $p_t$ and $P_t$ be the Brownian transition
 kernel and operators [[def-brownian-transition-semigroup]]. Define
-$$M_t:=P_{T-t}g(B_t)\quad(0\le t<T),\qquad M_T:=g(B_T).$$
+$$M_t:=P_{T-t}g(B_t)\quad(0\le t<T),\qquad M_t:=g(B_T)\quad(t\ge T).$$
 Then $M$ is a bounded martingale relative to the Brownian filtration, and for
 every $0\le t<T$ the function $u(t,x):=P_{T-t}g(x)$ is smooth on
 $(0,T)\times\mathbb R$ and solves the backward heat equation
@@ -52,9 +52,9 @@ $$\partial_tu+\tfrac12\partial^2_{x}u=0\qquad(0<t<T,\ x\in\mathbb R).$$
  
 1.1 Kernel identities and derivative bounds: from [F5], for $s>0$ the functions $y\mapsto p_s(x,y)$, $y\mapsto\partial_xp_s(x,y)$, $y\mapsto\partial^2_{xx}p_s(x,y)$ are bounded by $s^{-k/2}$ times integrable Gaussians, so for fixed $s$ the integrals $\int|g(y)||\partial^\alpha_xp_s(x,y)|dy\le\|g\|_\infty\int|\partial^\alpha_xp_s(x,y)|dy$ are bounded uniformly in $x$ in compact sets; and the heat kernel satisfies $\partial_sp_s=\tfrac12\partial^2_{xx}p_s$, as the displayed formulas show. [F5, given]
  
-1.2 Martingale property: for $0\le t\le T$ the Markov property [F2] with $s=t$, $u=T-t$ and $f=g$ gives $E[g(B_T)\mid\mathcal F_t]=P_{T-t}g(B_t)=M_t$ almost surely; at $t=T$ this is the identity $M_T=g(B_T)$ and at $t<T$ it is the defining formula. Hence $M$ is adapted (as a deterministic function of $B_t$ for $t<T$, and $g(B_T)$ at $T$), and for $0\le s\le t\le T$ the tower property [F3] gives $E[M_t\mid\mathcal F_s]=E[E[g(B_T)\mid\mathcal F_t]\mid\mathcal F_s]=E[g(B_T)\mid\mathcal F_s]=M_s$ almost surely. [F1, F2, F3]
+1.2 Martingale property: for $0\le t\le T$ the Markov property [F2] with $s=t$, $u=T-t$ and $f=g$ gives $E[g(B_T)\mid\mathcal F_t]=P_{T-t}g(B_t)=M_t$ almost surely; at $t=T$ this is the identity $M_T=g(B_T)$ and at $t<T$ it is the defining formula. Hence $M$ is adapted on $[0,\infty)$, because it is a deterministic function of $B_t$ before $T$ and the $\mathcal F_T$-measurable variable $g(B_T)$ thereafter. For $0\le s\le t\le T$, the tower property [F3] gives $E[M_t\mid\mathcal F_s]=M_s$. If $s<T\le t$, then $M_t=M_T$ and the same identity follows from the preceding calculation with terminal time $T$; if $T\le s\le t$, then $M_s=M_t=g(B_T)$ is $\mathcal F_s$-measurable. Thus the martingale identity holds for every $0\le s\le t<\infty$. [F1, F2, F3]
  
-2.1 Boundedness: for $t<T$, $|M_t|=|P_{T-t}g(B_t)|\le\|g\|_\infty$ by [F1], and $|M_T|\le\|g\|_\infty$; so $M$ is a bounded martingale and in particular uniformly integrable with $M_t\to M_T$ almost surely. [F1, step 1.2]
+2.1 Boundedness: for $t<T$, $|M_t|=|P_{T-t}g(B_t)|\le\|g\|_\infty$ by [F1], and for $t\ge T$, $|M_t|=|g(B_T)|\le\|g\|_\infty$; so $M$ is a bounded martingale and in particular uniformly integrable. [F1, step 1.2]
  
 2.2 Smoothness and the heat equation: fix $0<t<T$ and put $s=T-t>0$; then $u(t,x)=\int g(y)p_s(x,y)dy$ and $P_{T-t}g$ is defined by that integral. By [F4] and the majorants of line 1.1, the map $x\mapsto u(t,x)$ is twice differentiable with $\partial^2_{xx}u(t,x)=\int g(y)\partial^2_{xx}p_s(x,y)dy$, and the map $t\mapsto u(t,x)$ is differentiable with $\partial_tu(t,x)=-\int g(y)\partial_sp_s(x,y)dy$, since $\partial_t[p_{T-t}(x,y)]=-\partial_sp_{T-t}(x,y)$; the mixed smoothness in both variables follows by applying the same domination argument to the parameter families on compact subintervals of $(0,T)$ and compact $x$-intervals. Combining with $\partial_sp_s=\tfrac12\partial^2_{xx}p_s$ from line 1.1 gives $\partial_tu+\tfrac12\partial^2_{xx}u=-\int g\partial_sp_s+\tfrac12\int g\partial^2_{xx}p_s=0$ on $(0,T)\times\mathbb R$. [F4, step 1.1]
  

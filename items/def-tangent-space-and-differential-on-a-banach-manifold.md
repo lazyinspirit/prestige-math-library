@@ -83,9 +83,12 @@ proved on this page as [[lem-banach-manifold-differentials-are-chart-independent
   sets and differentiating those identities exhibits each derivative as the
   inverse of the other. Both facts are recorded in the lemma below.
 
-- **For an open set the tangent space is the model space.** If $W \subseteq E$
-  is open and $p \in W$, the single chart $(\mathrm{id}_W,W)$ makes $T_pW$ the
-  set of classes $[\mathrm{id}_W,v]$, which is canonically identified with $E$;
+- **For an admissible open model the tangent space is the model space.** If the
+  norm topology of $E$ is second countable, $W \subseteq E$ is open, and
+  $p \in W$, then $W$ is a Banach manifold under the convention of
+  [[def-countable-base-banach-manifold-and-smooth-map]]. The single chart
+  $(\mathrm{id}_W,W)$ makes $T_pW$ the set of classes
+  $[\mathrm{id}_W,v]$, which is canonically identified with $E$;
   under this identification $Df(p)$ of a map $f : W \to E$ is the Fréchet
   derivative of the coordinate representative, which here is $f$ itself. All
   computations on this page are performed through this identification.

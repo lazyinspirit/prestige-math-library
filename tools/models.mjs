@@ -36,14 +36,14 @@ export const MODEL_PROFILE_NAMES = Object.freeze({
   solHigh: 'gpt-5.6-sol-high',
   solXHigh: 'gpt-5.6-sol-xhigh',
   terraHigh: 'gpt-5.6-terra-high',
+  terraXHigh: 'gpt-5.6-terra-xhigh',
   deepseekFlashMax: 'deepseek-v4.1-flash-max',
 });
 
-// Controllers started before the 2026-09-05 lane change retain this literal
-// profile name in memory for Step-5 refuters and Step-6 group readers. Keep it
-// resolvable at the new high effort until those live runs terminate; fresh
-// controllers select `terraHigh` directly from their stage definitions.
-const LIVE_TERRA_XHIGH_COMPAT = 'gpt-5.6-terra-xhigh';
+// `gpt-5.6-terra-xhigh` is the canonical Step-5 refuter profile (owner,
+// 2026-09-19: 5a reviewers Sol/high, 5a refuters Terra/xhigh, 5a adjudicators
+// and every 5b agent Sol/xhigh) and the compatibility name controllers started
+// before the 2026-09-05 lane change still hold in memory.
 
 export const MODEL_PROFILES = Object.freeze({
   [MODEL_PROFILE_NAMES.astraMedium]: Object.freeze({
@@ -76,13 +76,13 @@ export const MODEL_PROFILES = Object.freeze({
     requestedEffort: 'max',
     contextWindow: 1_048_576,
   }),
-  [LIVE_TERRA_XHIGH_COMPAT]: Object.freeze({
+  [MODEL_PROFILE_NAMES.terraXHigh]: Object.freeze({
     model: MODELS.terra.id,
     runner: MODELS.terra.runner,
     family: MODELS.terra.family,
     provider: 'openai',
-    effort: 'high',
-    requestedEffort: 'high',
+    effort: 'xhigh',
+    requestedEffort: 'xhigh',
     contextWindow: 872_000,
   }),
 });

@@ -5,7 +5,7 @@ title: Characters of continuous functions are evaluations
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-urysohn-lemma, thm-uniform-limit-continuous-complex-functions, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-dependent-choice, def-character-and-maximal-ideal-space, def-compact-support-c-c-and-c-zero-on-an-lch-space]
+deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-urysohn-lemma, thm-uniform-cauchy-criterion-complex-functions, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-dependent-choice, def-character-and-maximal-ideal-space, def-compact-support-c-c-and-c-zero-on-an-lch-space]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -45,7 +45,11 @@ nonemptiness.
 
 **Given:** Dependent Choice, a nonempty compact Hausdorff space $K$, and the algebra $C(K)$ of continuous complex functions on $K$ with pointwise operations and the supremum norm.
 
-[L1] The pointwise limit of a sequence of continuous complex functions that converges uniformly is continuous ([[thm-uniform-limit-continuous-complex-functions]]).
+[L1] A uniformly Cauchy sequence of complex-valued functions on a set converges
+uniformly to a function ([[thm-uniform-cauchy-criterion-complex-functions]]).
+If the domain is any topological space and all the functions are continuous,
+the uniform limit is continuous: at a point, approximate the limit uniformly
+by one function and apply that function's continuity.
 
 [L2] $\mathbb C$ is complete, and a sequence in $\mathbb C$ converges if and only if it is Cauchy ([[thm-complex-plane-is-complete]]).
 

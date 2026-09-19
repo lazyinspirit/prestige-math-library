@@ -5,7 +5,7 @@ title: Stone duality for a power set algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-stone-duality, thm-stone-representation-for-boolean-algebras, def-stone-cech-compactification, thm-compactness-via-nets-filters-and-ultrafilters, thm-ultrafilter-lemma, def-axiom-of-choice, def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality]
+deps: [thm-stone-duality, thm-stone-representation-for-boolean-algebras, def-stone-cech-compactification, thm-compactness-via-nets-filters-and-ultrafilters, thm-ultrafilter-lemma, def-axiom-of-choice, def-boolean-algebra-and-boolean-ultrafilter-for-stone-duality, thm-a-compact-hausdorff-space-is-regular-and-normal]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -42,6 +42,10 @@ $\mathcal P(\mathbb N) \cong \operatorname{Clop}(\beta\mathbb N)$ of
 
 [L4] A Stone–Čech compactification of $X$ is a Hausdorff compactification $(B,i)$ such that every continuous map from $X$ into a compact Hausdorff space extends uniquely ([[def-stone-cech-compactification]]).
 
+[L5] A compact Hausdorff space is regular: if $p$ belongs to an open set $V$,
+there is an open $W\ni p$ with $\overline W\subseteq V$
+([[thm-a-compact-hausdorff-space-is-regular-and-normal]]).
+
 ## Verification
 
 **Proof technique:** direct.
@@ -54,11 +58,11 @@ $\mathcal P(\mathbb N) \cong \operatorname{Clop}(\beta\mathbb N)$ of
 
 1.4 The map $F$ extends $f$: for the principal ultrafilter $U_n$ the pushforward $f_*U_n$ is the principal ultrafilter at $f(n)$, which converges to $f(n)$, so $F(U_n) = f(n)$. [1.3, L2, algebra]
 
-1.5 The map $F$ is continuous: for open $V \subseteq K$ one has $F(U) \in V$ if and only if $V \in f_*U$, that is, $f^{-1}(V) \in U$: the forward implication holds because $V$ is a neighbourhood of the limit $F(U)$, and the backward implication holds because if $F(U) \notin V$ then the closed set $K \setminus V$ is a neighbourhood of $F(U)$, hence lies in $f_*U$, contradicting $V \in f_*U$; consequently $F^{-1}(V) = [f^{-1}(V)]$ is open. [1.3, L1, algebra]
+2.1 The map $F$ is continuous. Let $F(U)\in V$ with $V\subseteq K$ open. By [L5] choose an open $W$ with $F(U)\in W$ and $\overline W\subseteq V$. Since $f_*U$ converges to $F(U)$, one has $W\in f_*U$, equivalently $f^{-1}(W)\in U$, so the basic open $[f^{-1}(W)]$ contains $U$. If $U'$ lies in this basic open, then $W\in f_*U'$; because $f_*U'$ converges to $F(U')$, its limit lies in $\overline W$ (otherwise the open complement of $\overline W$ would also belong to the ultrafilter). Thus $F(U')\in\overline W\subseteq V$, proving $[f^{-1}(W)]\subseteq F^{-1}(V)$ and hence continuity. [step 1.3, L1, L3, L5, algebra]
 
-2.1 Uniqueness: $F$ is determined on the dense subset $\{U_n : n \in \mathbb N\}$ by [step 1.2] and [step 1.4], and $K$ is Hausdorff, so two continuous extensions agree. [step 1.1, step 1.2, step 1.4, algebra]
+2.2 Uniqueness: $F$ is determined on the dense subset $\{U_n : n \in \mathbb N\}$ by [step 1.2] and [step 1.4], and $K$ is Hausdorff, so two continuous extensions agree. [step 1.1, step 1.2, step 1.4, algebra]
 
-3.1 By [step 1.1], [step 1.2], [step 1.5] and [step 2.1] the pair (ultrafilter space, $n \mapsto U_n$) is a Hausdorff compactification of $\mathbb N$ satisfying the universal property [L4], so it is a Stone–Čech compactification; by [L1] the basic clopens are the $[A]$ and the algebra of clopens is canonically $\mathcal P(\mathbb N)$. [step 1.1, step 1.2, step 1.5, step 2.1, L1, L4] ∎
+3.1 By [step 1.1], [step 1.2], [step 2.1] and [step 2.2] the pair (ultrafilter space, $n \mapsto U_n$) is a Hausdorff compactification of $\mathbb N$ satisfying the universal property [L4], so it is a Stone–Čech compactification; by [L1] the basic clopens are the $[A]$ and the algebra of clopens is canonically $\mathcal P(\mathbb N)$. [step 1.1, step 1.2, step 2.1, step 2.2, L1, L4] ∎
 
 ## Remarks
 

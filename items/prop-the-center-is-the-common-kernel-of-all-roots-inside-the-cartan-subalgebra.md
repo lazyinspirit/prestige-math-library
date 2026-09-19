@@ -25,7 +25,7 @@ semisimple Lie algebra $\mathfrak g$, with root set $\Phi$
 ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]). Then
 $$\{H\in\mathfrak h:\alpha(H)=0\text{ for all }\alpha\in\Phi\}=Z(\mathfrak g)\cap\mathfrak h=0 .$$
 In particular the roots span $\mathfrak h^*$, and the description of the zero
-weight space as the center holds inside any Cartan subalgebra.
+common-root-kernel as the center is an equality inside $\mathfrak h$.
 
 ## Facts & Assumptions
 

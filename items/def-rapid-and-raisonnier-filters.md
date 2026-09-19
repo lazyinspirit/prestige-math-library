@@ -28,7 +28,7 @@ there is $a\in F$ with $|a\cap f(n)|\le g(n)$ for all $n$. The forward direction
 takes $g(n)=n$. For the converse, given $g$ and an increasing $f$, apply the
 hypothesis to $f^*(n)=f(g(n+1))$ to obtain $a\in F$ with
 $|a\cap f(g(n+1))|\le g(n)$ for all $n$; then for $k\in[g(n),g(n+1))$ the
-monotonicity of $f$ gives $|a\cap f(k)|\le|a\cap f(g(n+1))|\le g(n)\le n$, and
+monotonicity of $f$ gives $|a\cap f(k)|\le|a\cap f(g(n+1))|\le g(n)\le k$, and
 deleting the finite initial segment $a\setminus f(g(0))$, which preserves
 membership in $F$ because the Fréchet filter is contained in $F$, gives the exact
 inequality $|a\cap f(k)|\le k$ for all $k$ (the values below $g(0)$ being

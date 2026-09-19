@@ -4,7 +4,7 @@ kind: example
 title: "Hitting probabilities from an exponential martingale"
 status: draft
 origin: pipeline
-deps: [cor-exponential-brownian-martingale, def-brownian-motion-started-at-x, def-brownian-motion, thm-two-sided-exit-probability-for-brownian-motion, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [cor-exponential-brownian-martingale, def-brownian-motion-started-at-x, def-brownian-motion, def-natural-and-usual-augmented-brownian-filtrations, thm-two-sided-exit-probability-for-brownian-motion, thm-law-of-the-iterated-logarithm-for-brownian-motion-at-infinity, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, lem-normal-density-has-total-mass-one, thm-optional-sampling-for-bounded-stopping-times, def-elementary-predictable-brownian-integrand, def-continuous-time-filtration-and-all-pairs-martingale, def-continuity-real, thm-heine-cantor-r, thm-dominated-convergence, def-convergence-in-probability, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: example
@@ -30,7 +30,7 @@ and for $\mu=0$ the probability is $(x+a)/(a+b)$.
 
 ## Facts & Assumptions
 
-**Given:** AC, (H), $a,b>0$, a start $x\in(-a,b)$, a real $\mu\ne0$, the drifted process $X_t=x+B_t+\mu t$, and the exit time $\tau$.
+**Given:** AC, (H), $a,b>0$, a start $x\in(-a,b)$, a real $\mu\ne0$, a standard Brownian motion $B$ equipped with its usual augmented natural filtration, the drifted process $X_t=x+B_t+\mu t$, and the exit time $\tau$. [[def-natural-and-usual-augmented-brownian-filtrations]]
  
 [F1] **Exponential martingale.** For every real $\theta$, $\exp(\theta B_t-\theta^2t/2)$ is a positive continuous martingale with $EZ_t=1$; consequently $M_t:=\exp(-2\mu X_t)=e^{-2\mu x}\exp(-2\mu B_t-2\mu^2t)$ is a positive continuous martingale equal to a positive constant times the exponential martingale with parameter $\theta=-2\mu$, so $EM_t=e^{-2\mu x}$ and $E[M_t\mid\mathcal F_s]=M_s$. [[cor-exponential-brownian-martingale]] [[def-brownian-motion-started-at-x]] [[def-brownian-motion]]
  

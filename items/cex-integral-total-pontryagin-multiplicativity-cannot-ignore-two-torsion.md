@@ -60,7 +60,7 @@ integral multiplicativity formula fails. This is the witness refuted below.
 
 3.1 The right-hand side of the refuted formula is $p(\lambda)p(\lambda)=1\cdot1=1$ by step 1.1, whose degree-four component is $0$; the left-hand side $p(E)$ has degree-four component $-a^2\neq0$ by step 2.1. [step 1.1, step 2.1]
 
-4.1 Hence $p(\lambda\oplus\lambda)\neq p(\lambda)p(\lambda)$ integrally: the degree-four components differ by the nonzero two-torsion class $-a^2$. The witness is the pair $(E,F)=(\lambda\oplus\lambda,\lambda)$, or equivalently the failure for the single bundle $E$ against $p(\lambda)^2$. The argument uses no additive universal-coefficient computation beyond the nonvanishing $a^2\neq0$ proved on the companion $A$-page lemma. [F2, step 2.1, step 3.1]
+4.1 Hence $p(\lambda\oplus\lambda)\neq p(\lambda)p(\lambda)$ integrally: the degree-four components differ by the nonzero two-torsion class $-a^2$. The witness pair is $(\lambda,\lambda)$; its Whitney sum is the bundle $E=\lambda\oplus\lambda$ used above. The argument uses no additive universal-coefficient computation beyond the nonvanishing $a^2\neq0$ proved on the companion $A$-page lemma. [F2, step 2.1, step 3.1]
 
 5.1 Boundary cases. Over $\mathbb Z[1/2]$ the class $a$ becomes zero and the formula is restored, so the failure is exactly integral; the trivial bundle case $a=0$ gives no failure, and the rank cutoffs are used at rank one ($p(\lambda)=1$) and rank two ($p_1$ is the first nonzero Pontryagin class). The base $\mathbb{RP}^\infty$ is path connected and the coefficient group $\mathbb Z$ is nonzero. AC is used only through [A1]. [A1, F1, step 1.1, step 3.1] ∎
 

@@ -4,7 +4,7 @@ kind: theorem
 title: Mod-two cohomology of BO(n)
 status: draft
 origin: pipeline
-deps: ["def-stiefel-space-grassmannian-and-tautological-bundle", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-cohomological-serre-spectral-sequence", "thm-stable-stiefel-space-is-contractible", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-r-oriented-vector-bundle-and-orientation-local-system", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "def-axiom-of-choice"]
+deps: ["def-stiefel-space-grassmannian-and-tautological-bundle", "def-tautological-degree-one-class-on-a-real-projective-bundle", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "def-stiefel-whitney-classes-from-the-projective-bundle-relation", "thm-whitney-sum-formula-for-stiefel-whitney-classes", "thm-naturality-of-stiefel-whitney-classes", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-cohomological-serre-spectral-sequence", "thm-stable-stiefel-space-is-contractible", "thm-schubert-cells-give-the-stable-grassmannian-cw-structure", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-r-oriented-vector-bundle-and-orientation-local-system", "thm-real-and-complex-vector-bundles-are-classified-by-stable-grassmannians", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -41,7 +41,7 @@ classes of its tautological bundle. For $n=0$ the right side is $\mathbb F_2$.
 
 [F5] The stable Stiefel space $V_1(\mathbb R^\infty)=S^\infty$ is contractible, and a contractible space has vanishing reduced cohomology in every degree by homotopy invariance ([[thm-stable-stiefel-space-is-contractible]]).
 
-[F6] $H^*(\mathbb{RP}^\infty;\mathbb F_2)=\mathbb F_2[a]$ with $|a|=1$, and the Stiefel–Whitney classes of the universal line are $w(\gamma_1)=1+a$ ([[lem-mod-two-cohomology-ring-of-infinite-real-projective-space]], [[def-stiefel-whitney-classes-from-the-projective-bundle-relation]]).
+[F6] $H^*(\mathbb{RP}^\infty;\mathbb F_2)=\mathbb F_2[a]$ with $|a|=1$. The tautological class $x_{\gamma_1}$ is the pullback of $a$ along a classifying map of the universal line; independence of that map permits the identity map, which classifies $\gamma_1$, and hence $x_{\gamma_1}=a$. The rank-one projective-bundle relation then gives $w(\gamma_1)=1+x_{\gamma_1}=1+a$ ([[lem-mod-two-cohomology-ring-of-infinite-real-projective-space]], [[def-tautological-degree-one-class-on-a-real-projective-bundle]], [[lem-tautological-degree-one-class-is-well-defined-and-fiber-generating]], [[def-stiefel-whitney-classes-from-the-projective-bundle-relation]]).
 
 [F7] The Whitney product formula, naturality of the classes, and the vanishing $w(G)=1$ for a trivial bundle hold over admissible bases ([[thm-whitney-sum-formula-for-stiefel-whitney-classes]], [[thm-naturality-of-stiefel-whitney-classes]]).
 

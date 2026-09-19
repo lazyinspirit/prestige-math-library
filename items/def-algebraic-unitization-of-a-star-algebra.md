@@ -39,13 +39,14 @@ without further comment:
 - **the product is associative and complex-bilinear**, and $(0,1)$ is a two-sided
   identity: expanding $((a,\lambda)(b,\mu))(c,\nu)$ and
   $(a,\lambda)((b,\mu)(c,\nu))$ gives in both cases
-  $(abc + \lambda bc + \mu ac + \nu ab,\ \lambda\mu\nu)$;
+  $(abc + \lambda bc + \mu ac + \nu ab + \lambda\mu c
+  + \lambda\nu b + \mu\nu a,\ \lambda\mu\nu)$;
 - **the involution is involutive and anti-multiplicative**:
   $(a,\lambda)^{**} = (a,\lambda)$ and
   $((a,\lambda)(b,\mu))^* = (b^*, \overline\mu)(a^*, \overline\lambda)$, both
   direct computations from the C\*-algebra axioms;
 - **$A \cong A \oplus \{0\}$ is a two-sided ideal of $A^+$** with
-  $(a,\lambda)(b,0) = (ab + \lambda b, 0)$ and $(b,0)(a,\lambda) = (ba + \mu b, 0)$
+  $(a,\lambda)(b,0) = (ab + \lambda b, 0)$ and $(b,0)(a,\lambda) = (ba + \lambda b, 0)$
   in $A \oplus \{0\}$.
 
 No norm is defined here; the C\*-norm on $A^+$ is constructed in

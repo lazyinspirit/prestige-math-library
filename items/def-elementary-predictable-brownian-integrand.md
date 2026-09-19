@@ -48,9 +48,11 @@ The following properties are part of the definition and are used at once.
 1. **Predictability.** $H$ is predictable
    [[def-progressively-measurable-and-predictable-process]]. Indeed, for a
    Borel set $\Gamma\subseteq\mathbb R$,
-   $$\{H\in\Gamma\}=\bigcup_{k=0}^{m-1}\bigl((t_k,t_{k+1}]\times\{\xi_k\in\Gamma\}\bigr),$$
+   $$\{H\in\Gamma\}=Z_\Gamma\cup\bigcup_{k=0}^{m-1}\bigl((t_k,t_{k+1}]\times\{\xi_k\in\Gamma\}\bigr),
+   \qquad Z_\Gamma:=\begin{cases}\{0\}\times\Omega,&0\in\Gamma,\\\varnothing,&0\notin\Gamma,\end{cases}$$
    a finite union of generators of the predictable sigma-algebra because
-   $\{\xi_k\in\Gamma\}\in\mathcal F_{t_k}$. Consequently $H$ is progressively
+   $\{\xi_k\in\Gamma\}\in\mathcal F_{t_k}$ and
+   $\{0\}\times\Omega$ is a time-zero generator. Consequently $H$ is progressively
    measurable and measurable for the product sigma-algebra
    $\mathcal B([0,T])\otimes\mathcal F$, and $H$ belongs to
    $L^2([0,T]\times\Omega,\mathrm dt\otimes P)$: with

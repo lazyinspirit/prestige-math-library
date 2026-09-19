@@ -49,7 +49,7 @@ $\operatorname{span}\{e_i : i\in I\}^\perp=\{0\}$
 
 [A3] For every finite $F$, $\|x-P_Fx\|^2=\|x\|^2-\sum_{i\in F}|\langle x,e_i\rangle|^2$ ([[lem-finite-bessel-inequality]]).
 
-[A4] If $z\in H$ satisfies $\langle z,e_i\rangle=0$ for every $i$, then $\langle z,v\rangle=0$ for every $v$ in the closed linear span of the family: orthogonality is linear in the second argument on the span, and $|\langle z,w\rangle|\le\|z\|\|w\|$ passes the vanishing to norm limits ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-orthogonality-and-orthogonal-complement]]).
+[A4] If $z\in H$ satisfies $\langle z,e_i\rangle=0$ for every $i$, then $\langle z,v\rangle=0$ for every $v$ in the closed linear span of the family: conjugate-linearity, and in particular additivity, in the second argument passes the vanishing to the algebraic span, while $|\langle z,w\rangle|\le\|z\|\|w\|$ passes it to norm limits ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-orthogonality-and-orthogonal-complement]]).
 
 [A5] $\overline{A}=\{x : d(x,A)=0\}$ for nonempty $A$, so $x\in\overline{A}$ exactly when vectors of $A$ come arbitrarily close to $x$ ([[thm-metric-closure-characterisation]]).
 

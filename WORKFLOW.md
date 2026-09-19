@@ -42,8 +42,10 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 1 scaffolding | DeepSeek V4.1 Flash / max |
 | Step 1 drift review; group Alpha | Sol / high |
 | Step 3a pair scope and Step 3b pair authors | DeepSeek V4.1 Flash / max |
-| Step 5a readers, refuters and adjudicators | DeepSeek V4.1 Flash / max |
-| Step 5b; Step 6 group readers; Step 8 and Step 9 agent lanes | DeepSeek V4.1 Flash / max |
+| Step 5a readers | Sol / high |
+| Step 5a refuters | Terra / xhigh |
+| Step 5a adjudicators; Step 5b agents | Sol / xhigh |
+| Step 6 group readers; Step 8 and Step 9 agent lanes | DeepSeek V4.1 Flash / max |
 | Assignment | DeepSeek V4.1 Flash / max |
 | Item judges | Terra / xhigh |
 | Step 7 adjudication | Sol / xhigh |

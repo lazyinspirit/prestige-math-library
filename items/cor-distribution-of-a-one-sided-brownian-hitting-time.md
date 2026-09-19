@@ -46,7 +46,7 @@ and there is no mass at infinity, and $P(\tau_a=0)=0$.
 
 **Proof technique:** direct.
 
-1.1 By [F1], $P(\tau_a\le t)=P(M_t\ge a)=1-\bigl(2\Phi(a/\sqrt t)-1\bigr)=2\bigl(1-\Phi(a/\sqrt t)\bigr)$ for $t>0$ and $a>0$, which is the stated distribution function; as $t\to\infty$ one has $a/\sqrt t\to0$ and $\Phi(a/\sqrt t)\to\Phi(0)=1/2$, so the limit is $1$ and no mass escapes to infinity. [F1, F2, given]
+1.1 By [F1] and the continuity of its displayed distribution function, $P(M_t=a)=0$: indeed $P(M_t<a)=\lim_{x\uparrow a}P(M_t\le x)=2\Phi(a/\sqrt t)-1=P(M_t\le a)$. Hence $P(\tau_a\le t)=P(M_t\ge a)=1-P(M_t<a)=2\bigl(1-\Phi(a/\sqrt t)\bigr)$ for $t>0$ and $a>0$, which is the stated distribution function. As $t\to\infty$ one has $a/\sqrt t\to0$ and $\Phi(a/\sqrt t)\to\Phi(0)=1/2$, so the limit is $1$ and no mass escapes to infinity. [F1, F2, given]
 
 1.2 Define $g(s)=a(2\pi s^3)^{-1/2}e^{-a^2/(2s)}$ for $s>0$. For $0<\varepsilon<t$, the substitution $u=a/\sqrt s$ on $[\varepsilon,t]$, whose derivative $-a/(2s^{3/2})$ is continuous and $2\varphi$ is continuous, gives $\int_\varepsilon^t g(s)\,ds=\int_{a/\sqrt t}^{a/\sqrt\varepsilon}2\varphi(u)\,du=2\bigl(\Phi(a/\sqrt\varepsilon)-\Phi(a/\sqrt t)\bigr)$ by the oriented substitution formula and the fact that $2\Phi$ is a primitive of $2\varphi$. [F2, F3]
 

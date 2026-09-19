@@ -65,7 +65,7 @@ kernel and operators of [[def-brownian-transition-semigroup]].
 
 3.1 By [F1] with the one-term list $0<t$, the random variable $B_t-B_0$ has law $N(0,t)$; since $B_0=0$ almost surely, $B_t$ has the same law $N(0,t)$. By steps 1.1-2.1 with $m=0$ and $\sigma=\sqrt t$, the law of $B_t$ has density $\gamma_t$, and the law of $x+B_t$ has density $v\mapsto\gamma_t(v-x)=p_t(x,v)$; hence for bounded Borel $f$, $P_tf(x)=\int_{\mathbb R}f(v)p_t(x,v)\,dv=E[f(x+B_t)]$, while for $t=0$ both sides equal $f(x)$ by the convention $P_0f=f$ and $B_0=0$ almost surely. This is assertion 1. [F1, F6, step 1.1, step 2.1]
 
-4.1 Continuing the kernel analysis of step 3.1, fix $s,t>0$ and $x,z\in\mathbb R$ and put $A:=\frac{1}{2s}+\frac1{2t}=\frac{s+t}{2st}$, $m:=\frac{tz+sx}{s+t}$ and $C:=\frac{(z-x)^2}{2(s+t)}$. [step 3.1, algebra]
+4.1 Continuing the kernel analysis of step 3.1, fix $s,t>0$ and $x,z\in\mathbb R$ and put $A:=\frac{1}{2s}+\frac1{2t}=\frac{s+t}{2st}$, $m:=\frac{tx+sz}{s+t}$ and $C:=\frac{(z-x)^2}{2(s+t)}$. [step 3.1, algebra]
 
 5.1 Expanding squares gives $\frac{(y-x)^2}{2s}+\frac{(z-y)^2}{2t}=A(y-m)^2+C$: $A$ is the coefficient of $y^2$, $2Am=x/s+z/t$ is the coefficient of $-2y$, and both constant terms equal $(z-x)^2/(2(s+t))$; consequently $p_s(x,y)p_t(y,z)=\frac{1}{2\pi\sqrt{st}}\exp(-A(y-m)^2-C)$. [step 4.1, algebra]
 

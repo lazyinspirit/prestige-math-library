@@ -1,7 +1,7 @@
 ---
 id: def-unbounded-integral-against-a-pvm
 kind: definition
-title: "Integral of a Borel function against a projection-valued measure"
+title: "Integral of a measurable function against a projection-valued measure"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -24,8 +24,8 @@ sources:
 
 Assume Countable Choice. Let $E$ be a projection valued measure on the
 measurable space $(X,\Sigma)$ acting on the complex Hilbert space $H$
-([[def-projection-valued-measure]]), and let $f:X\to\mathbb C$ be a Borel
-function. Put
+([[def-projection-valued-measure]]), and let $f:X\to\mathbb C$ be
+$\Sigma$-measurable. Put
 $$D(f(E)):=\Bigl\{x\in H:\int_X|f|^2\,dE_x<\infty\Bigr\},\qquad E_x(B)=\langle E(B)x,x\rangle,$$
 where the scalar measures $E_x$ are those of
 [[lem-scalar-and-complex-measures-from-a-pvm]], and for $x\in D(f(E))$ set

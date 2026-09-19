@@ -5,7 +5,7 @@ title: "Riesz–Fischer: the Fourier coefficient map is onto the space of square
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-trigonometric-system-is-complete-in-l-two-of-the-torus, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, def-countable-choice, def-fourier-coefficients-and-trigonometric-polynomials, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-square-summable-family-on-an-arbitrary-index-set]
+deps: [thm-trigonometric-system-is-complete-in-l-two-of-the-torus, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, thm-hilbert-space-fourier-expansion, def-countable-choice, def-fourier-coefficients-and-trigonometric-polynomials, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-square-summable-family-on-an-arbitrary-index-set]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -45,6 +45,8 @@ map, not the completeness theorem for $L^p$.
 
 [A4] The elements of $\ell^2(\mathbb Z,\mathbb C)$ are the square-summable families, and the expansion of an element $a$ in the coordinate vectors is its defining family, so surjectivity of the coefficient map means exactly that every $a$ occurs as $(\widehat f(k))$ for some $f$ ([[def-square-summable-family-on-an-arbitrary-index-set]]).
 
+[A5] For a complete orthonormal family, the finite-subset net of Fourier partial sums of any vector converges in norm to that vector ([[thm-hilbert-space-fourier-expansion]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -55,6 +57,6 @@ map, not the completeness theorem for $L^p$.
 
 2.1 The general coefficient-isometry theorem for Hilbert spaces with a given orthonormal basis therefore applies to $\Phi$: it is a linear bijection onto $\ell^2(\mathbb Z,\mathbb C)$ satisfying $\|\Phi(f)\|_2=\|f\|_2$ and $\langle\Phi(f),\Phi(g)\rangle_{\ell^2}=\langle f,g\rangle$, and the target space is complete. [step 1.1, A2]
 
-3.1 In particular $\Phi$ is surjective: for every $a\in\ell^2(\mathbb Z,\mathbb C)$ there is exactly one $f\in L^2(\mathbb T;\mathbb C)$ with $\widehat f(k)=a_k$ for all $k$, and that $f$ is the limit of the partial sums of the series $\sum a_ke_k$ by the synthesis part of the same theorem. [step 2.1, A4]
+3.1 In particular $\Phi$ is surjective: for every $a\in\ell^2(\mathbb Z,\mathbb C)$ there is exactly one $f\in L^2(\mathbb T;\mathbb C)$ with $\widehat f(k)=a_k$ for all $k$. For this $f$, [A5] says that the finite-subset net $\sum_{k\in F}\widehat f(k)e_k$ converges to $f$. Given a finite $F_0\subseteq\mathbb Z$, some $N_0$ has $F_0\subseteq\{-N_0,\ldots,N_0\}$; hence the symmetric finite sets are cofinal, and the symmetric sums $\sum_{|k|\le N}a_ke_k$ converge to $f$. [step 2.1, A4, A5]
 
 4.1 Steps 2.1 and 3.1 are the announced surjective isometry and the Riesz–Fischer uniqueness of the class realizing a given square-summable coefficient family. [step 2.1, step 3.1] ∎

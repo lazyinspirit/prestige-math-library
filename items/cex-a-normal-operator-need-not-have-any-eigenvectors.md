@@ -27,7 +27,7 @@ a nonzero eigenvector.
 
 [A1] $T=M_x$ on $L^2([0,1],\lambda)$ is bounded self-adjoint with $\sigma(T)=[0,1]$, spectral projections $E(B)=M_{\mathbf 1_B}$, and the eigenvector identity is available in the form $E(\{\mu\})H=\ker(T-\mu I)$ ([[ex-pvm-of-a-multiplication-operator]], [[cor-spectral-projections-and-resolution-of-the-identity]], [[thm-spectral-theorem-for-bounded-normal-operators-pvm-form]]).
 
-[A2] In $L^2$, a class $h$ satisfies $x h=\mu h$ if and only if $(x-\mu)h=0$ almost everywhere; a product of a bounded measurable function with $h$ vanishes almost everywhere exactly when $h=0$ almost everywhere off the zero set of the factor, and a nonzero measurable function is nonzero on a set of positive measure ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-borel-functional-calculus-for-a-bounded-normal-operator]]).
+[A2] In $L^2$, a class $h$ satisfies $x h=\mu h$ if and only if $(x-\mu)h=0$ almost everywhere; a product of a bounded measurable function with $h$ vanishes almost everywhere exactly when $h=0$ almost everywhere off the zero set of the factor, and every representative of a nonzero $L^2$ class is nonzero on a set of positive measure ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-borel-functional-calculus-for-a-bounded-normal-operator]]).
 
 [A3] AC is the declared choice hypothesis of this page from the construction item onward ([[def-axiom-of-choice]]).
 

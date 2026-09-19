@@ -28,7 +28,7 @@ $2^\lambda = \{0,1\}^\lambda$ be the set of all functions $\lambda \to \{0,1\}$.
 - A **finite cylinder** is a set of the form
   $C(i_1,\dots,i_k;\varepsilon_1,\dots,\varepsilon_k) := \{\, x \in 2^\lambda : x(i_j) = \varepsilon_j \text{ for } j \le k \,\}$
   with $k \in \mathbb{N}$, distinct $i_1,\dots,i_k < \lambda$ and $\varepsilon_j \in \{0,1\}$. The **finite-cylinder $\sigma$-algebra** is the $\sigma$-algebra these generate ([[def-product-measure-on-sigma-finite-spaces]]).
-- The **fair-coin product measure** $\mu_\lambda$ is the unique probability measure on the finite-cylinder $\sigma$-algebra with $\mu_\lambda(C) = 2^{-k}$ for every cylinder $C$ described by $k$ coordinates; it is the Kolmogorov product of fair coins at each coordinate, and for finite $\lambda$ it is the usual product of counting measures ([[def-product-measure-on-sigma-finite-spaces]]).
+- The **fair-coin product measure** $\mu_\lambda$ is the unique probability measure on the finite-cylinder $\sigma$-algebra with $\mu_\lambda(C) = 2^{-k}$ for every cylinder $C$ described by $k$ coordinates; it is the Kolmogorov product of fair coins at each coordinate, and for finite $\lambda$ it is the product of the normalized counting measures on $\{0,1\}$ ([[def-product-measure-on-sigma-finite-spaces]]).
 
 A **full extension** of $\mu_\lambda$ is a probability measure $\nu$ with domain the full power set $\mathcal P(2^\lambda)$ whose restriction to the finite-cylinder $\sigma$-algebra is $\mu_\lambda$ ([[def-complete-measure-space]]). It is **countably additive** when
 $$\nu\Bigl(\bigcup_{n \in \mathbb N} A_n\Bigr) = \sup_{n} \nu(A_n)$$

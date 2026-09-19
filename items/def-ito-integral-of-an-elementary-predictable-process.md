@@ -34,9 +34,10 @@ Three conventions are part of the definition.
 
 1. **Adaptedness and continuity.** For fixed $t$, each summand
    $\xi_k(B_{t\wedge t_{k+1}}-B_{t\wedge t_k})$ is $\mathcal F_t$-measurable:
-   $\xi_k$ is $\mathcal F_{t_k}$-measurable with
-   $\mathcal F_{t_k}\subseteq\mathcal F_t$, and $B_{t\wedge u}$ is
-   $\mathcal F_t$-measurable for every $u$ because $t\wedge u\le t$. Thus
+   if $t<t_k$, the Brownian difference and hence the summand are zero; if
+   $t\ge t_k$, then $\mathcal F_{t_k}\subseteq\mathcal F_t$, while
+   $B_{t\wedge u}$ is $\mathcal F_t$-measurable for every $u$ because
+   $t\wedge u\le t$. Thus
    $I(H)$ is adapted. For each fixed $\omega$ the map
    $t\mapsto B_{t\wedge t_{k+1}}(\omega)-B_{t\wedge t_k}(\omega)$ is continuous
    outside the single exceptional null set of (H) on which the Brownian path is

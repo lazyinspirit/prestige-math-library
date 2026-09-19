@@ -5,7 +5,7 @@ title: Zero free entire function of exponential type is an exponential
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-path-independence-and-complex-primitive-criterion, thm-local-maximum-modulus-principle, cor-cauchy-theorem-convex-domain, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, cor-complex-power-series-sums-have-derivatives-of-all-orders, cor-zero-derivative-implies-constant, thm-liouville-bounded-entire-function, cor-complex-power-series-sums-are-analytic, thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]
+deps: [thm-path-independence-and-complex-primitive-criterion, thm-local-maximum-modulus-principle, cor-cauchy-theorem-convex-domain, thm-algebra-of-complex-derivatives, thm-chain-rule-for-complex-derivatives, cor-complex-power-series-sums-have-derivatives-of-all-orders, thm-zero-complex-derivative-on-a-domain-implies-constant, thm-liouville-bounded-entire-function, cor-complex-power-series-sums-are-analytic, thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -46,7 +46,8 @@ linearity in $|z|$, and the constant factor is exactly what survives.
 
 [L4] The chain rule holds for complex derivatives: $(g \circ h)'(z) = g'(h(z))h'(z)$ ([[thm-chain-rule-for-complex-derivatives]]).
 
-[L5] A holomorphic function on a complex domain with zero derivative is constant ([[cor-zero-derivative-implies-constant]]).
+[L5] A holomorphic function on a complex domain with zero complex derivative is
+constant ([[thm-zero-complex-derivative-on-a-domain-implies-constant]]).
 
 [L6] Quotients of holomorphic functions with nonvanishing denominators and power series sums are holomorphic ([[thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition]], [[cor-complex-power-series-sums-are-analytic]]), so $f'/f$ is holomorphic on $\mathbb C$ and, if $H$ is entire with $H(0)=0$, then $H(z)/z$ extends to an entire function.
 

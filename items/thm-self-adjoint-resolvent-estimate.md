@@ -5,7 +5,7 @@ title: "Resolvent of a self-adjoint operator: nonreal resolvents and the estimat
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-double-orthogonal-complement-is-closure, def-orthogonality-and-orthogonal-complement, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-operator-norm]
+deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-double-orthogonal-complement-is-closure, def-orthogonality-and-orthogonal-complement, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,7 +22,7 @@ sources:
 
 ## Statement
 
-Let $T$ be a self-adjoint operator on $H$. Then every nonreal number belongs to
+Assume Countable Choice. Let $T$ be a self-adjoint operator on $H$. Then every nonreal number belongs to
 $\rho(T)$: $\mathbb C\setminus\mathbb R\subseteq\rho(T)$. More precisely, for
 $z=a+ib$ with $a,b\in\mathbb R$, $b\ne0$, and every $x\in D(T)$,
 $$\|(T-z)x\|^2=\|(T-a)x\|^2+b^2\|x\|^2 ,$$
@@ -45,7 +45,7 @@ $\sigma(T)\subseteq\mathbb R$.
 
 **Proof technique:** direct.
 
-**Given:** A self-adjoint operator $T$ on $H$ and a number $z=a+ib$ with $b\ne0$.
+**Given:** Countable Choice, a self-adjoint operator $T$ on $H$, and a number $z=a+ib$ with $b\ne0$.
 
 1.1 For $x\in D(T)$, expanding $\|(T-z)x\|^2=\langle(T-z)x,(T-z)x\rangle$ gives $\|Tx\|^2-\overline z\langle Tx,x\rangle-z\langle x,Tx\rangle+|z|^2\|x\|^2$; by [A2] the two middle terms combine to $-2a\langle Tx,x\rangle$, so $\|(T-z)x\|^2=\|Tx\|^2-2a\langle Tx,x\rangle+|z|^2\|x\|^2$. [A2]
 

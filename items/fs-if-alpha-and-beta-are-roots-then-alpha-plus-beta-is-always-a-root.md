@@ -5,7 +5,7 @@ title: If alpha and beta are roots then alpha plus beta is always a root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-string-property, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [thm-root-string-property, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, cor-opposite-root-spaces-pair-nondegenerately, prop-brackets-of-root-spaces, def-root-and-root-space-relative-to-a-cartan-subalgebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -25,7 +25,7 @@ to a Cartan subalgebra, then $\alpha+\beta$ is again a root.
 
 ## Facts & Assumptions
 
-**Given:** Roots are nonzero functionals with $\mathfrak g_\alpha\ne0$ ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]), and $[\mathfrak g_\alpha,\mathfrak g_\beta]\subseteq\mathfrak g_{\alpha+\beta}$ with $\mathfrak g_\gamma=0$ for $\gamma$ neither a root nor $0$ ([[prop-brackets-of-root-spaces]]). The set of indices $k$ with $\beta+k\alpha\in\Phi\cup\{0\}$ is a nonempty interval $\{-p,\dots,q\}$ ([[thm-root-string-property]]), and for a root $\alpha$ the only scalar multiples of $\alpha$ that are roots are $\pm\alpha$ ([[cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root]], [[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]]).
+**Given:** Roots are nonzero functionals with $\mathfrak g_\alpha\ne0$ ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]]), and $[\mathfrak g_\alpha,\mathfrak g_\beta]\subseteq\mathfrak g_{\alpha+\beta}$ with $\mathfrak g_\gamma=0$ for $\gamma$ neither a root nor $0$ ([[prop-brackets-of-root-spaces]]). The set of indices $k$ with $\beta+k\alpha\in\Phi\cup\{0\}$ is a nonempty interval $\{-p,\dots,q\}$ ([[thm-root-string-property]]). For every root $\alpha$, the opposite $-\alpha$ is a root ([[cor-opposite-root-spaces-pair-nondegenerately]]), and the only scalar multiples of $\alpha$ that are roots are $\pm\alpha$ ([[cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root]]).
 
 ## Refutation
 

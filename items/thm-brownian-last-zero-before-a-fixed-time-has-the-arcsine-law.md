@@ -54,7 +54,7 @@ Both endpoints receive no mass: $P(L_t=0)=0$ and $P(L_t=t)=0$.
 
 1.1 Since $Z$ is closed and $0\in Z$, the supremum $L_t$ is attained in $Z$, and $\{L_t\le u\}=\{Z\cap(u,t]=\emptyset\}$ for every $0\le u\le t$; moreover $L_t(B)/t$ has the law of $L_1$ by [F5], because zeros of $B$ on $[0,t]$ correspond to zeros of $Y$ on $[0,1]$. [given, F1, F5]
 
-2.1 Let $u\in[0,t)$, put $s:=t-u>0$, and let $\Phi$ be the indicator of the path event $\{w:w(r)\ne0\ \text{for all }r\in(0,s]\}$, a bounded Borel functional; by [F2] and [F1], $P(L_t\le u\mid\mathcal F_u)=E[\Phi((B_{u+r})_{r\ge0})\mid\mathcal F_u]=\Psi_\Phi(B_u)$ almost surely, where $\Psi_\Phi(x)=P_x(\text{no zero in }(0,s])$. [step 1.1, F1, F2]
+2.1 First let $u\in(0,t)$ and put $s:=t-u>0$. Let $\Phi$ be the indicator of $\{w:\inf_{r\in\mathbb Q\cap[0,s]}|w(r)|>0\}$. This is a bounded Borel functional because the infimum uses countably many coordinate maps. On continuous paths that start away from zero it is exactly the event of having no zero in $[0,s]$, hence no zero in $(0,s]$. Since $P(B_u=0)=0$, [F2] and [F1] therefore give $P(L_t\le u\mid\mathcal F_u)=E[\Phi((B_{u+r})_{r\ge0})\mid\mathcal F_u]=\Psi_\Phi(B_u)$ almost surely, where for $x\ne0$, $\Psi_\Phi(x)=P_x(\text{no zero in }(0,s])$. [step 1.1, F1, F2, F6]
 
 3.1 For $x\ne0$ the shifted probability in [step 2.1] is $\Psi_\Phi(x)=2\Phi(|x|/\sqrt s)-1$: for $x>0$, absence of zeros in $(0,s]$ is the event that the motion started at $x$ stays positive, whose complement has probability $P(\sup_{0\le r\le s}(-W_r)\ge x)=2\overline\Phi(x/\sqrt s)$ by [F3] and [F4]; the case $x<0$ is analogous by symmetry. [step 2.1, F3, F4]
 
@@ -68,7 +68,7 @@ Both endpoints receive no mass: $P(L_t=0)=0$ and $P(L_t=t)=0$.
 
 8.1 Consequently $P(L_t/t\le v)=\frac2\pi\arcsin\sqrt v$ for $v\in[0,1]$, and differentiation on $(0,1)$ gives $\frac{d}{dv}\frac2\pi\arcsin\sqrt v=\frac2\pi\cdot\frac{1}{2\sqrt{v(1-v)}}=\frac{1}{\pi\sqrt{v(1-v)}}$, which is integrable on $(0,1)$ and hence is the density of $L_t/t$. [step 7.1]
 
-9.1 The endpoint and degenerate cases are covered: $u=t$ gives the empty interval $(t,t]$ and probability $1$; $u=0$ gives $P(L_t\le0)=P(Z\cap(0,t]=\emptyset)=0$ because the last zero is at least $0$ and the zero set is nonempty, the formula value $\frac2\pi\arcsin0=0$ agreeing; the case $B_u=0$ has probability zero and is therefore excluded in applying [step 3.1]; the substitution of [step 5.1] is over $u>0$ and the limit formula at $u=0$ is a statement about the continuous extension of the arcsine, not an application of the substitution; AC enters only through [F9]. [step 2.1, step 7.1, step 8.1, F9, given] ∎
+9.1 The endpoint and degenerate cases are covered: $u=t$ gives the empty interval $(t,t]$ and probability $1$; and, since $\{L_t\le0\}\subseteq\{L_t\le u\}$ for every $u>0$, step 7.1 followed by $u\downarrow0$ gives $P(L_t\le0)=0$, agreeing with the formula value $\frac2\pi\arcsin0=0$.  The case $B_u=0$ has probability zero for the positive times used in step 2.1; the substitution of step 5.1 is likewise only for $u>0$; and AC enters only through [F9]. [step 2.1, step 7.1, step 8.1, F9, given] ∎
 
 ## Source notes
 

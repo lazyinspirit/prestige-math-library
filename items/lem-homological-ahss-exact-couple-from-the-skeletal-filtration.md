@@ -61,7 +61,7 @@ incidence-degree matrix. In particular $E^2_{p,q}\cong H_p(X;h_q(*))$.
 
 1.4 The differential is $d_1=j\circ k$: the connecting map sends the $\sigma$-summand of $E_{p,q}$ to $h_{p+q-1}(X^{p-1})$ by composing with the attaching map of $e^p_\sigma$, and the pair map then collapses the $(p-1)$-skeleton quotient; on the $\tau$-summand the induced map is therefore induced by the composite of the attaching map with the collapse to the sphere of $\tau$. [given]
 
-2.1 By the degree action [F5] the $(\tau,\sigma)$ component of $d_1$ is multiplication by the incidence number $[e^p_\sigma:e^{p-1}_\tau]$, so by [F6] the differential agrees with the cellular boundary. [F5, F6, step 1.4]
+2.1 For $p\ge2$, the component map in step 1.4 is a self-map of $S^{p-1}$, so the degree action [F5] makes the $(\tau,\sigma)$ component multiplication by the incidence number $[e^p_\sigma:e^{p-1}_\tau]$. For $p=1$, the boundary of the oriented interval is its terminal endpoint minus its initial endpoint; naturality of the pair boundary therefore gives coefficients $+1$ and $-1$ on the corresponding $0$-cell summands directly, without representing $-1$ by a based self-map of $S^0$. For $p=0$ the target is zero. Hence in every dimension [F6] identifies $d_1$ with the cellular boundary. [F1, F6, step 1.4]
 
 3.1 Steps 1.1, 1.2 and 2.1 exhibit an initial exact couple whose first page is the cellular chain complex with coefficients $h_q(*)$ and whose first differential is the cellular boundary; hence $E^2_{p,q}\cong H_p(X;h_q(*))$ by definition of the second page and the identification of cellular with singular homology. [F6, step 1.1, step 1.2, step 2.1]
 

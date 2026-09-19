@@ -33,7 +33,7 @@ Thus almost-sure finiteness does not imply integrability for this random time.
 
 [F2] For a nonnegative random variable with a density, the expectation is the integral of $t$ against that density; integration against a density is integration of the product with the density. [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] [[thm-integration-against-a-density]]
 
-[F3] Monotone convergence for nonnegative integrands, and the divergence $\int_{a^2}^{\infty}t^{-1/2}dt=+\infty$. [[thm-monotone-convergence-for-the-integral]] [[def-standard-normal-and-normal-laws]]
+[F3] Monotone convergence applies to nonnegative integrands. [[thm-monotone-convergence-for-the-integral]]
 
 [F4] AC is the ambient assumption of the Brownian construction. [[def-axiom-of-choice]]
 
@@ -45,7 +45,7 @@ Thus almost-sure finiteness does not imply integrability for this random time.
 
 2.1 For $t\ge a^2$ the exponent satisfies $a^2/(2t)\le1/2$, so $e^{-a^2/(2t)}\ge e^{-1/2}$; hence the integrand in step 1.1 is bounded below on $[a^2,\infty)$ by $a(2\pi)^{-1/2}e^{-1/2}\,t^{-1/2}$. [algebra]
 
-3.1 By [F3], $\int_{a^2}^{\infty}t^{-1/2}dt=\lim_{L\to\infty}2(\sqrt L-a)=+\infty$, and monotone convergence applied to the lower bound of step 2.1 gives $\int_0^\infty t^{-1/2}e^{-a^2/(2t)}dt\ge e^{-1/2}\int_{a^2}^\infty t^{-1/2}dt=+\infty$; hence $\mathbb E[\tau_a]=+\infty$. [F3, step 1.1, step 2.1]
+3.1 For every integer $j\ge0$, on $I_j=[2^ja^2,2^{j+1}a^2]$ one has $t^{-1/2}\ge(2^{j+1}a^2)^{-1/2}$, so $\int_{I_j}t^{-1/2}dt\ge a2^{(j-1)/2}$. These lower bounds do not tend to zero and their partial sums diverge. Monotone convergence over the increasing finite unions of the $I_j$, together with step 2.1, therefore gives $\int_0^\infty t^{-1/2}e^{-a^2/(2t)}dt=+\infty$ and hence $\mathbb E[\tau_a]=+\infty$. [F3, step 1.1, step 2.1]
 
 4.1 The comparison with finite almost-sure values is the point of the example: [F1] gives $\tau_a<\infty$ almost surely, so the random variable is finite-valued almost surely while its expectation is infinite; the divergence comes from the polynomial tail $t^{-1/2}$ of the first-moment integrand and not from any exceptional path. The cases $a=0$ (where $\tau_0=0$) and $a<0$ are excluded by the hypothesis $a>0$. AC is used only through [F4]. [F1, F4, given, step 3.1] ∎
 

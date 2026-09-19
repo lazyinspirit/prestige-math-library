@@ -37,4 +37,5 @@ to a complex Lie algebra extends uniquely to a homomorphism of Lie algebras
 from $L(V)$. The construction is licensed by the Poincaré-Birkhoff-Witt
 theorem, which identifies $T(V)$ with the universal enveloping algebra of the
 free Lie algebra and shows in particular that $V$ embeds in $L(V)$ and that
-$L(V)$ is infinite-dimensional whenever $V\ne0$.
+$L(V)=0$ when $V=0$, $L(V)=V$ when $\dim V=1$, and $L(V)$ is
+infinite-dimensional when $\dim V\ge2$.

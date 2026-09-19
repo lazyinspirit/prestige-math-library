@@ -26,8 +26,8 @@ h\subseteq\mathfrak g$ which is nilpotent
 $N_{\mathfrak g}(\mathfrak h)=\mathfrak h$ for the normalizer of
 [[def-normalizer-of-a-lie-subalgebra]].
 
-This definition is stated for arbitrary Lie algebras and carries no
-semisimplicity hypothesis. In particular the zero subalgebra of the zero Lie
+This definition is stated for arbitrary finite-dimensional Lie algebras and
+carries no semisimplicity hypothesis. In particular the zero subalgebra of the zero Lie
 algebra is a Cartan subalgebra, since the zero algebra is nilpotent and its
 normalizer is again zero; in a nonzero Lie algebra the zero subalgebra is not
 a Cartan subalgebra, because its normalizer is the whole algebra.

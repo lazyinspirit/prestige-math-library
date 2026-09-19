@@ -57,7 +57,7 @@ algebra indicated.
 
 **Proof technique:** direct.
 
-1.1 $A(\overline{\mathbb D})$ is complete: if $(f_n)$ is uniformly Cauchy on $\overline{\mathbb D}$, then it converges uniformly to a continuous $f$ by [L1]; each triangle integral of $f$ is the limit of the corresponding integrals of the holomorphic $f_n$, which vanish on triangles contained in $\mathbb D$ by [L6], and for triangles touching the boundary the integrals still vanish in the limit by [L2]; hence $f$ is holomorphic on $\mathbb D$ by [L1] and $A(\overline{\mathbb D})$ is closed under uniform limits. [L1, L2, L6]
+1.1 $A(\overline{\mathbb D})$ is complete: if $(f_n)$ is uniformly Cauchy on $\overline{\mathbb D}$, then it converges uniformly to a continuous $f$ by [L1]; for every filled triangle contained in $\mathbb D$, its boundary integral of $f$ is the limit of the corresponding integrals of the holomorphic $f_n$ by [L2], and those integrals vanish by [L6]. Hence $f$ is holomorphic on $\mathbb D$ by [L1] and $A(\overline{\mathbb D})$ is closed under uniform limits. [L1, L2, L6]
 
 2.1 Pointwise operations make $A(\overline{\mathbb D})$ a commutative complex algebra with unit $1$, and the supremum norm is submultiplicative with $\|1\|_\infty = 1$; by [step 1.1] the algebra is a unital commutative Banach algebra, and the restriction map $\rho$ is a unital algebra homomorphism. [step 1.1, L5, algebra]
 

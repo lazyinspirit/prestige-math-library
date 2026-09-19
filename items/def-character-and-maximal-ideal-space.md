@@ -40,11 +40,10 @@ Two things are deliberately *not* part of the definition:
   below, and for a commutative Banach algebra it then follows for free;
 - preservation of a unit is **not** assumed either. If $A$ happens to have an
   identity $1$, a character is not required to satisfy $\chi(1) = 1$ by
-  definition; for a unital Banach algebra this too is a theorem
-  ([[thm-characters-on-a-unital-banach-algebra-are-continuous]]).
+  definition; for a unital Banach algebra this too is proved later on this
+  page.
 
-The **character space** (or **maximal ideal space**, a name justified by
-[[thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra]]) of $A$ is
+The **character space** of $A$ is
 
 $$\Delta(A) \;:=\; \{\, \chi : \chi \text{ is a character on } A \,\},$$
 
@@ -57,8 +56,11 @@ $\{\chi : |\chi(a_i) - \chi_0(a_i)| < \varepsilon,\ i \le k\}$ for finitely many
 $a_i \in A$ and $\varepsilon > 0$. Once characters are known to be bounded
 linear functionals they are points of the dual $A^*$, and this topology is
 exactly the subspace topology induced by the weak-star topology $\sigma(A^*,A)$
-([[thm-maximal-ideal-space-is-compact-hausdorff]]); no duality theory is used
-before that point.
+(as proved later on this page); no duality theory is used before that point.
+For a nonzero commutative unital Banach algebra, under the Axiom of Choice,
+$\Delta(A)$ is also called the **maximal ideal space**: only in that setting
+does the later maximal-ideal correspondence identify its points with all
+maximal ideals.
 
 ## Remarks
 

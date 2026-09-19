@@ -5,7 +5,7 @@ title: Irreducibility equals connectedness of the diagram
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-root-systems-decompose-uniquely-into-irreducible-components, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-reducible-and-irreducible-root-system, def-cartan-matrix-of-a-based-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
+deps: [prop-root-systems-decompose-uniquely-into-irreducible-components, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, def-reducible-and-irreducible-root-system, def-cartan-matrix-of-a-based-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates, def-positive-system-and-base-of-simple-roots, def-reduced-crystallographic-euclidean-root-system]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -39,12 +39,14 @@ and only if $\Gamma$ is connected.
 
 [L3] The Cartan matrix entry $a_{ij}$ vanishes exactly when $(\alpha_i,\alpha_j)=0$ ([[def-cartan-matrix-of-a-based-root-system]]).
 
+[L4] A positive root is simple exactly when it is not a sum of two positive roots; every root reflection preserves $\Phi$ ([[def-positive-system-and-base-of-simple-roots]], [[def-reduced-crystallographic-euclidean-root-system]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $\Gamma$ is disconnected, write $\Delta=S\sqcup T$ for its vertex sets of connected components, so that $(S,T)=0$ by [L3] and the subspaces $U=\operatorname{span}S$, $W=\operatorname{span}T$ are nonzero and orthogonal. Every root has support in $S$ or in $T$: if a positive root $\gamma$ had support meeting both, then writing $\gamma=\gamma_U+\gamma_W$ with $\gamma_U\ne0$, $\gamma_W\ne0$ and $(\gamma_U,\gamma_W)=0$ gives $(\gamma,\gamma_U)=(\gamma_U,\gamma_U)>0$, so $\gamma-\gamma_U=\gamma_W\in\Phi$; but the positive root $\gamma$ is a nonnegative integral combination of $\Delta$ and its restriction to $T$ has smaller height, so iterating this descent with respect to each simple root in its support would produce a positive root of height zero, a contradiction. Hence $\Phi=(\Phi\cap U)\sqcup(\Phi\cap W)$ is an orthogonal splitting with both parts nonempty, and $\Phi$ is reducible. [L1, L2, L3, algebra]
+1.1 If $\Gamma$ is disconnected, partition its vertices as $\Delta=S\sqcup T$ into two nonempty unions of connected components. Then $(S,T)=0$ by [L3], and $U=\operatorname{span}S$, $W=\operatorname{span}T$ are nonzero orthogonal subspaces with $E=U\oplus W$ by [L2]. Every root has support in just one side. Otherwise, after replacing a root by its negative if necessary, choose a positive root $\beta$ of least height whose support meets both $S$ and $T$. It is not simple, so [L4] writes $\beta=\gamma+\delta$ for positive roots $\gamma,\delta$. Minimality makes each summand supported on one side, and because $\beta$ is mixed they lie on opposite sides; hence $(\gamma,\delta)=0$. Reflection in $\gamma$ then gives $$s_\gamma(\beta)=\beta-\frac{2(\beta,\gamma)}{(\gamma,\gamma)}\gamma=\delta-\gamma\in\Phi,$$ but $\delta-\gamma$ has nonzero simple-root coefficients of both signs, contradicting [L2]. Thus $\Phi=(\Phi\cap U)\sqcup(\Phi\cap W)$ is an orthogonal splitting with both parts nonempty, and $\Phi$ is reducible. [L2, L3, L4, algebra]
 
-2.1 If $\Phi$ is reducible, write $\Phi=\Phi_1\sqcup\Phi_2$ as an orthogonal union of nonempty subsystems spanning orthogonal nonzero subspaces by [L1]. Let $\Delta_i=\Delta\cap\Phi_i$; then $\Delta=\Delta_1\sqcup\Delta_2$: every simple root belongs to exactly one $\Phi_i$ (it lies in one of the two orthogonal parts), the $\Delta_i$ are nonempty because each $\Phi_i$ has positive roots, and the positive roots of $\Phi_i$ are exactly the nonnegative integral combinations of $\Delta_i$, by the argument of step 1.1 applied inside the subsystem $\Phi_i$. Since $(\Phi_1,\Phi_2)=0$, the inner products between the two bases vanish by [L3], so no edge of $\Gamma$ joins $\Delta_1$ to $\Delta_2$ and $\Gamma$ is disconnected. [L1, L2, L3, algebra]
+1.2 If $\Phi$ is reducible, write $\Phi=\Phi_1\sqcup\Phi_2$ as an orthogonal union of nonempty subsystems spanning orthogonal nonzero subspaces by [L1]. Put $\Delta_i=\Delta\cap\Phi_i$. Every simple root belongs to exactly one $\Phi_i$, so $\Delta=\Delta_1\sqcup\Delta_2$. Each $\Delta_i$ is nonempty: choose a positive root $\beta\in\Phi_i$ and expand it in the basis $\Delta$ using [L2]; orthogonal projection to the other component, together with linear independence of the simple roots there, forces all coefficients from $\Delta_{3-i}$ to vanish, while $\beta\ne0$ leaves a coefficient from $\Delta_i$. Since $(\Phi_1,\Phi_2)=0$, no edge of $\Gamma$ joins $\Delta_1$ to $\Delta_2$, and $\Gamma$ is disconnected. [L1, L2, L3, algebra]
 
-3.1 Steps 1.1 and 2.1 prove the two implications; hence irreducibility is equivalent to connectedness of the Dynkin diagram. [step 1.1, step 2.1, algebra] ∎
+2.1 Steps 1.1 and 1.2 prove the two implications; hence irreducibility is equivalent to connectedness of the Dynkin diagram. [step 1.1, step 1.2, algebra] ∎

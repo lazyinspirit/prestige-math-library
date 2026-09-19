@@ -74,11 +74,15 @@ given by $\Phi(|T|x):=Tx$ is well defined and linear, because $|T|x=|T|x'$ force
 $x-x'\in\ker|T|=\ker T$ and hence $Tx=Tx'$; it is injective, because $Tx=0$ gives
 $x\in\ker T=\ker|T|$ and $|T|x=0$; it is surjective onto $\operatorname{ran}T$
 because $T=\Phi\circ|T|$; and it is isometric, $\|Tx\|=\||T|x\|$. Hence
-$\dim\operatorname{ran}T=\dim\operatorname{ran}|T|$ ([[def-dimension]]), and the
-positive singular values with multiplicity number exactly $\dim\operatorname{ran}T$:
-whenever $T$ has finite rank, their number with multiplicity is $\dim\operatorname{ran}T$,
-the rank of $T$, and then all later $s_n$ vanish and the sequence is
-**zero-padded**. When the multiset is infinite it is countably infinite
+$\operatorname{ran}T$ is finite-dimensional if and only if
+$\operatorname{ran}|T|$ is finite-dimensional; in that case the linear
+bijection $\Phi$ gives
+$\dim\operatorname{ran}T=\dim\operatorname{ran}|T|$
+([[def-dimension]]). Consequently, whenever $T$ has finite rank, the positive
+singular values with multiplicity number exactly
+$\dim\operatorname{ran}T$, the rank of $T$, and all later $s_n$ vanish, so the
+sequence is **zero-padded**. If $T$ does not have finite rank, the multiset of
+positive singular values is infinite and countable
 ([[def-countable]]) and $s_n>0$ for every $n$, with $s_n\downarrow0$; in
 particular finite rank of $T$ is characterised by the eventual vanishing $s_n=0$ for all sufficiently large
 $n$, and conversely such eventual vanishing forces finite rank. The sequence $(s_n)$ is numerical data only: no orthonormal system is

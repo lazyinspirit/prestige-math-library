@@ -5,7 +5,7 @@ title: "The unbounded PVM integral is densely defined, closed and normal"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-unbounded-integral-against-a-pvm, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, thm-monotone-convergence, def-densely-defined-closed-and-closable-operator, def-countable-choice]
+deps: [def-unbounded-integral-against-a-pvm, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, def-densely-defined-closed-and-closable-operator, def-countable-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -20,13 +20,13 @@ sources:
 ## Statement
 
 Assume Countable Choice. Let $E$ be a projection valued measure on $(X,\Sigma)$
-on the complex Hilbert space $H$ and let $f:X\to\mathbb C$ be Borel. Then the
+on the complex Hilbert space $H$ and let $f:X\to\mathbb C$ be $\Sigma$-measurable. Then the
 operator $f(E)$ of [[def-unbounded-integral-against-a-pvm]] is densely defined
 and closed, and it is normal: $D(f(E))=D(\overline f(E))$ and
 $\|f(E)x\|=\|\overline f(E)x\|$ for all such $x$. Moreover
 $$\|f(E)x\|^2=\int|f|^2\,dE_x,\qquad \langle x,f(E)x\rangle=\int\overline f\,dE_x\qquad(x\in D(f(E))),$$
 and $(f(E))^*=\overline f(E)$; in particular $f(E)$ is self-adjoint whenever
-$f$ takes real values. Finally, if $(g_n)$ are bounded Borel functions with
+$f$ takes real values. Finally, if $(g_n)$ are bounded $\Sigma$-measurable functions with
 $|g_n|\le C|f|$ pointwise and $g_n\to f$ pointwise, then $g_n(E)x\to f(E)x$
 for every $x\in D(f(E))$.
 
@@ -38,7 +38,7 @@ for every $x\in D(f(E))$.
 
 [A3] Scalar dominated convergence applies to the finite measure $E_x$: if $|h_n|\le G$ with $\int G\,dE_x<\infty$ and $h_n\to h$ pointwise, then $\int|h_n-h|^2dE_x\to0$ ([[thm-dominated-convergence]], [[lem-scalar-and-complex-measures-from-a-pvm]]).
 
-[A4] Scalar monotone convergence: for nonnegative Borel $u_n\uparrow u$ the integrals $\int u_n\,dE_x$ increase to $\int u\,dE_x$ ([[thm-monotone-convergence]]).
+[A4] Scalar monotone convergence: for nonnegative measurable $u_n\uparrow u$ the integrals $\int u_n\,dE_x$ increase to $\int u\,dE_x$ ([[thm-monotone-convergence-for-the-integral]]).
 
 [A5] The adjoint of a densely defined operator is closed, and $D(T^*)$ consists of those $y$ for which $z\mapsto\langle Tz,y\rangle$ is bounded, with $T^*y$ the representing vector ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[lem-unbounded-adjoint-is-well-defined-and-closed]]).
 

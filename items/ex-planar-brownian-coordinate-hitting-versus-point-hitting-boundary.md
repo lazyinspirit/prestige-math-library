@@ -24,8 +24,8 @@ motion [[def-d-dimensional-brownian-motion]], let $x\ne y$ in $\mathbb R^2$
 and let $P_x$ be the shifted planar law [[def-brownian-motion-started-at-x]].
 Then:
 
-1. each coordinate process $t\mapsto W^{(i)}_t$ is a standard one-dimensional
-   Brownian motion and, almost surely, visits every neighbourhood of $y_i$ at
+1. under $P_x$, each coordinate increment process $t\mapsto W^{(i)}_t-x_i$ is a standard one-dimensional
+   Brownian motion, and each coordinate process almost surely visits every neighbourhood of $y_i$ at
    arbitrarily large times;
 2. nevertheless $P_x(\exists t\ge0:W_t=y)=0$, so the two coordinate hitting
    events do not synchronize: almost surely
@@ -38,7 +38,7 @@ Then:
 
 [F1] Planar annular exit probability: for $0<\varepsilon<|z-y|<R$ and the law $P_z$, $$P_z(S_\varepsilon<T_R)=\frac{\log R-\log|z-y|}{\log R-\log\varepsilon},$$ where $S_\varepsilon,T_R$ are the first hits of the circles of radii $\varepsilon$ and $R$ about $y$. [[lem-planar-brownian-annular-exit-probability]]
 
-[F2] The coordinates of a standard planar Brownian motion are standard one-dimensional Brownian motions, and one-dimensional Brownian motion visits every neighbourhood of every level at arbitrarily large times almost surely. [[def-d-dimensional-brownian-motion]] [[cor-one-dimensional-brownian-motion-is-recurrent]] [[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]]
+[F2] Under $P_x$, the shifted planar process $W-x$ is standard planar Brownian motion, so each coordinate increment $W^{(i)}-x_i$ is standard one-dimensional Brownian motion; one-dimensional Brownian motion visits every neighbourhood of every level at arbitrarily large times almost surely. [[def-brownian-motion-started-at-x]] [[def-d-dimensional-brownian-motion]] [[cor-one-dimensional-brownian-motion-is-recurrent]] [[cor-one-dimensional-brownian-motion-hits-every-point-almost-surely]]
 
 [F3] Countable subadditivity of a probability measure and countable intersections of probability-one events. [[lem-probability-measure-basic-identities]]
 
@@ -54,7 +54,7 @@ Then:
 
 1.2 For a given $\delta>0$ choose $0<\varepsilon<\min\{\delta,|x-y|\}$; then $P_x(S_\varepsilon<T_R)=\frac{\log R-\log|x-y|}{\log R-\log\varepsilon}\to1$ as $R\to\infty$, so the $\varepsilon$-circle about $y$ is hit almost surely, hence the disc of radius $\delta$ about $y$ is hit almost surely. Applying this to the countably many discs with rational centre and rational radius and intersecting the resulting probability-one events via [F3], while every nonempty open disc contains such a rational disc by [F4], gives the almost-sure statement of assertion 3. [F1, F3, F4, given]
 
-1.3 By [F2] each coordinate process is a standard one-dimensional Brownian motion, so each visits every neighbourhood of its target coordinate at arbitrarily large times almost surely; this is assertion 1, and it does not synchronize the two coordinates. [F2, given]
+1.3 By [F2] each coordinate increment $W^{(i)}-x_i$ is a standard one-dimensional Brownian motion, so it visits every neighbourhood of the level $y_i-x_i$ at arbitrarily large times; equivalently, $W^{(i)}$ visits every neighbourhood of $y_i$ at arbitrarily large times almost surely. This is assertion 1, and it does not synchronize the two coordinates. [F2, given]
 
 2.1 The event $\{T_y<\infty\}$ is the union over the countably many integers $R>|x-y|$ of the increasing events $\{T_y<T_R\}$: if $T_y<\infty$ then the path on $[0,T_y]$ is a compact subset of $\mathbb R^2$, hence stays in some disc of integer radius about $y$, and conversely $T_y<T_R<\infty$ implies $T_y<\infty$. By [F3] and step 1.1, $P_x(T_y<\infty)\le\sum_RP_x(T_y<T_R)=0$. [F3, step 1.1]
 

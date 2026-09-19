@@ -64,6 +64,6 @@ Assume AC. On a complex Hilbert space, $w$ is a norm with $w(T)\le\|T\|\le2w(T)$
 
 3.1 Hence $w(T)\le\|T\|$ and $\|T\|\le2w(T)$: the first is the definition, and the second follows by taking the supremum of $|\langle Tx,y\rangle|\le2w(T)$ over unit $x,y$ and using step 1.2, which identifies that supremum with $\|T\|$. [step 2.2, step 1.2, A1, A8]
 
-3.2 If $T$ is normal then $\sigma(T)\subseteq\overline{W(T)}$: step 2.3 produces unit vectors $x_n$ with $\|(T-\lambda I)x_n\|<1/n$, and then $|\langle Tx_n,x_n\rangle-\lambda|=|\langle(T-\lambda I)x_n,x_n\rangle|\le\|(T-\lambda I)x_n\|\to0$, so $|\lambda|\le w(T)$ for every $\lambda\in\sigma(T)$ and $r(T)\le w(T)$. [step 2.3, A1, A2, A9]
+3.2 If $T$ is normal then $\sigma(T)\subseteq\overline{W(T)}$: step 2.3 produces unit vectors $x_n$ with $\|(T-\lambda I)x_n\|<1/(n+1)$, and then $|\langle Tx_n,x_n\rangle-\lambda|=|\langle(T-\lambda I)x_n,x_n\rangle|\le\|(T-\lambda I)x_n\|\to0$, so $|\lambda|\le w(T)$ for every $\lambda\in\sigma(T)$ and $r(T)\le w(T)$. [step 2.3, A1, A2, A9]
 
 4.1 Therefore $w$ is a norm with $w(T)\le\|T\|\le2w(T)$, and for normal $T$ the chain $\|T\|=r(T)\le w(T)\le\|T\|$ gives $w(T)=\|T\|$. [step 2.1, step 3.1, step 3.2, A5] ∎

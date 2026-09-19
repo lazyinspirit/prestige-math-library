@@ -5,7 +5,7 @@ title: Classification of irreducible root systems
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching, thm-rank-two-root-system-classification, thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram, def-reducible-and-irreducible-root-system]
+deps: [lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching, thm-rank-two-root-system-classification, thm-a-based-root-system-is-determined-up-to-isomorphism-by-its-cartan-matrix, def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention, prop-irreducibility-corresponds-to-connectedness-of-the-dynkin-diagram, def-reducible-and-irreducible-root-system, def-rank-and-isomorphism-of-root-systems, prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -45,6 +45,8 @@ are specified by their diagrams of the classification list.
 
 [L3] For a double edge the length ratio of the two simple roots is $2$, and for a triple edge it is $3$; the arrow points to the shorter root ([[thm-rank-two-root-system-classification]], [[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]]).
 
+[L4] A root-system isomorphism is linear, carries the root set onto the root set, and preserves every Cartan integer; the Weyl group acts transitively on the bases of a root system ([[def-rank-and-isomorphism-of-root-systems]], [[prop-every-positive-system-is-weyl-conjugate-and-bases-correspond-to-chambers]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -55,7 +57,7 @@ are specified by their diagrams of the classification list.
 
 1.3 If $\Gamma$ has a multiple edge, then by [L1] its underlying graph is a path and the possibilities are: a double edge at an end, which gives the two orientation choices $B_n$ and $C_n$ on $n\ge2$ vertices (the double edge being the end edge of the path); a central double edge on exactly four vertices, which is $F_4$; or a two-vertex triple edge, which is $G_2$. [L1, L2, L3, algebra]
 
-1.4 The list has no repetitions beyond the stated coincidences: $B_n$ and $C_n$ for $n\ge3$ have Cartan matrices that are transposes of one another and are not related by a permutation, so the corresponding based systems are non-isomorphic by [L2]; for $n=2$ the two orientations of the single double edge are interchanged by permuting the two vertices, so $B_2\cong C_2$; and for $n=1$ the unique reduced rank-one system $\{\pm\alpha\}$ is simultaneously $A_1$, $B_1$ and $C_1$. [L2, L3, algebra]
+1.4 The list has no repetitions beyond the stated coincidences. In particular $B_n$ and $C_n$ for $n\ge3$ are non-isomorphic even as unbased root systems. If an isomorphism $\varphi:B_n\to C_n$ existed, the image of a chosen base $\Delta_B$ would be a base. Indeed it is a basis of roots, every root has integral coefficients of one sign relative to it because this is true relative to $\Delta_B$ and $\varphi$ is linear, and a vector pairing positively with every member of $\varphi(\Delta_B)$ therefore defines the corresponding positive system, whose indecomposable roots are precisely those basis vectors. By [L4] a Weyl element of $C_n$ carries $\varphi(\Delta_B)$ to the standard base $\Delta_C$. After ordering the bases, the composite based isomorphism would identify their Cartan matrices up to a simultaneous row-and-column permutation, because it preserves every Cartan integer. But for $n\ge3$ the $B_n$ and $C_n$ matrices are transposes and no vertex permutation identifies them: the unique double edge fixes its end of the path, while its arrow is reversed. This contradiction proves non-isomorphism. For $n=2$ the two orientations of the single double edge are interchanged by permuting the two vertices, so [L2] gives $B_2\cong C_2$; and for $n=1$ the unique reduced rank-one system $\{\pm\alpha\}$ is simultaneously $A_1$, $B_1$ and $C_1$. [L2, L3, L4, algebra]
 
 1.5 The remaining recorded coincidences are similar degenerate cases: $D_3$ is the simply-laced trivalent diagram with arm lengths $1,1,1$, whose underlying graph is the path on three vertices, hence $D_3\cong A_3$; and the rank-two member of the $D$-series, whose standard realization is $\{\pm(e_1+e_2),\pm(e_1-e_2)\}$, is the orthogonal union of two copies of $A_1$, that is $D_2=A_1\sqcup A_1$ as a reducible system (which is why the $D$-series begins at $n=4$). [L2, L3, algebra]
 

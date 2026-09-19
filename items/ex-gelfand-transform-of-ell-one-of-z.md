@@ -5,7 +5,7 @@ title: Gelfand transform of ell one of Z
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-absolute-convergence-of-complex-series, thm-tonelli-for-nonnegative-double-series, thm-double-series-fubini, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-the-one-dimensional-torus-and-normalized-haar-integral, def-character-and-maximal-ideal-space]
+deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, lem-finite-truncations-are-dense-in-c0-and-ell-one, thm-absolute-convergence-of-complex-series, thm-tonelli-for-nonnegative-double-series, thm-double-series-fubini, thm-complex-plane-is-complete, thm-compactness-under-continuous-maps, def-the-one-dimensional-torus-and-normalized-haar-integral, def-countable-choice, def-character-and-maximal-ideal-space]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -21,7 +21,8 @@ sources:
 
 ## Example
 
-Fix explicit bijections $\mathbb N \to \mathbb Z$ and $\mathbb N \to \mathbb Z^2$
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix explicit
+bijections $\mathbb N \to \mathbb Z$ and $\mathbb N \to \mathbb Z^2$
 and let $\ell^1(\mathbb Z)$ be the complex Banach space of absolutely summable
 families $a = (a_n)_{n \in \mathbb Z}$ with
 $\|a\|_1 = \sum_n |a_n|$, convolution
@@ -41,7 +42,7 @@ $\hat a(\chi_z) = \sum_n a_nz^n$.
 
 ## Facts & Assumptions
 
-**Given:** The bijections above, the space $\ell^1(\mathbb Z)$ with convolution, and the unit circle $\mathbb T$.
+**Given:** Countable Choice, the bijections above, the space $\ell^1(\mathbb Z)$ with convolution, and the unit circle $\mathbb T$.
 
 [L1] Characters of a nonzero unital complex Banach algebra are unital and continuous, with $|\chi(a)| \le \|a\|$, and the character space carries the pointwise-evaluation topology, so every map $\chi \mapsto \chi(a)$ is continuous ([[thm-characters-on-a-unital-banach-algebra-are-continuous]], [[def-character-and-maximal-ideal-space]]).
 
@@ -51,7 +52,7 @@ $\hat a(\chi_z) = \sum_n a_nz^n$.
 
 [L4] $\mathbb C$ is complete ([[thm-complex-plane-is-complete]]), and a continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]]).
 
-[L5] $\mathbb T$ is homeomorphic to $\mathbb R/\mathbb Z$ and is compact Hausdorff.
+[L5] Under Countable Choice, $\mathbb T$ is homeomorphic to $\mathbb R/\mathbb Z$ and is compact Hausdorff ([[def-the-one-dimensional-torus-and-normalized-haar-integral]], [[def-countable-choice]]).
 
 ## Verification
 

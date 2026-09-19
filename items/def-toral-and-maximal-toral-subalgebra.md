@@ -19,7 +19,7 @@ landmark: false
 
 ## Definition
 
-Let $\mathfrak g$ be a complex Lie algebra. A Lie subalgebra $\mathfrak
+Let $\mathfrak g$ be a finite-dimensional complex Lie algebra. A Lie subalgebra $\mathfrak
 t\subseteq\mathfrak g$ ([[def-lie-subalgebra-ideal-and-center]]) is
 **toral** if it is abelian and $\operatorname{ad}_x$ is a semisimple
 endomorphism of $\mathfrak g$ for every $x\in\mathfrak t$, semisimplicity

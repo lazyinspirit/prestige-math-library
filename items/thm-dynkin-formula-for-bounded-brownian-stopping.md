@@ -19,15 +19,15 @@ sources:
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
 [[def-elementary-predictable-brownian-integrand]]. Let $d\ge1$, let $B^x=x+B$
-be standard $d$-dimensional Brownian motion started at $x$
-[[def-brownian-motion-started-at-x]] with shifted law $P_x$, let $\tau$ be a
-stopping time [[def-continuous-time-stopping-time]] bounded by a deterministic
-constant, and let $f\in C_c^2(\mathbb R^d)$
+be the $d$-dimensional Brownian motion started at $x$
+[[def-brownian-motion-started-at-x]] on the given filtered probability space,
+let $\tau$ be a stopping time [[def-continuous-time-stopping-time]] bounded by
+a deterministic constant, and let $f\in C_c^2(\mathbb R^d)$
 [[def-c-c-and-c-c-infinity-on-rn]]. Then
-$$E_x\bigl[f(B_\tau)\bigr]=f(x)+E_x\int_0^\tau Lf(B_s)\,ds,$$
+$$E\bigl[f(B^x_\tau)\bigr]=f(x)+E\int_0^\tau Lf(B^x_s)\,ds,$$
 where $Lf=\tfrac12\Delta f$ is the Brownian generator
 [[def-brownian-generator]] and the inner integral is the pathwise Lebesgue
-integral of the continuous bounded process $s\mapsto Lf(B_s)$ over the random
+integral of the continuous bounded process $s\mapsto Lf(B^x_s)$ over the random
 interval $[0,\tau]$.
 
 ## Facts & Assumptions
@@ -44,7 +44,7 @@ interval $[0,\tau]$.
  
 [F5] **Optional sampling for the discretized martingale.** If $N$ is a martingale on a discrete grid $0=r_0<r_1<\dots<r_M$ (that is, the sampled continuous martingale $\tilde N_j=N_{r_j}$ is a discrete martingale relative to the grid filtration), and $\rho$ is a grid stopping time bounded by the last grid point, then $E[\tilde N_\rho]=E[\tilde N_0]$. For a continuous martingale and a bounded stopping time $\tau\le K$, the dyadic ceilings $\tau_n:=2^{-n}K\lceil2^n\tau/K\rceil$ form a decreasing sequence of grid stopping times with $\tau_n\downarrow\tau$, and $N_{\tau_n}\to N_\tau$ almost surely. [[thm-optional-sampling-for-bounded-stopping-times]] [[def-continuous-time-stopping-time]] [[def-continuous-time-adapted-process-and-martingale]]
  
-[F6] **Convergence.** Dominated convergence applies to sequences bounded by an integrable random variable, and $m(t):=Lf(B_t)$ is continuous and bounded by $\|Lf\|_\infty$ on $[0,K]$; hence $\int_0^{\tau_n}m\,ds\to\int_0^\tau m\,ds$ almost surely and in $L^1$ when $\tau_n\downarrow\tau$. [[thm-dominated-convergence]] [[def-convergence-in-probability]] [[def-continuity-real]]
+[F6] **Convergence.** Dominated convergence applies to sequences bounded by an integrable random variable, and $m(t):=Lf(B^x_t)$ is continuous and bounded by $\|Lf\|_\infty$ on $[0,K]$; hence $\int_0^{\tau_n}m\,ds\to\int_0^\tau m\,ds$ almost surely and in $L^1$ when $\tau_n\downarrow\tau$. [[thm-dominated-convergence]] [[def-convergence-in-probability]] [[def-continuity-real]]
  
 [F7] **AC bookkeeping.** Choice is declared for the conditional-expectation interface. [[def-axiom-of-choice]]
  
@@ -64,9 +64,9 @@ interval $[0,\tau]$.
  
 3.1 $EM_\tau=0$: fix $n$ and the dyadic grid of mesh $2^{-n}K$; the sampled process $\tilde M_j:=M_{j2^{-n}K}$ is a discrete martingale relative to the grid filtration (each increment $M_{r_{j+1}}-M_{r_j}=E[M_{r_{j+1}}-M_{r_j}\mid\mathcal F_{r_j}]$ has conditional mean zero because $M$ is a martingale), the ceiling $\tau_n:=2^{-n}K\lceil2^n\tau/K\rceil$ is a grid stopping time bounded by $K+2^{-n}K$, and [F5] gives $E[M_{\tau_n}]=E[M_0]=0$. Since $\tau_n\downarrow\tau$ and $M$ has continuous paths, $M_{\tau_n}\to M_\tau$ almost surely; the sequence is dominated by $\sup_{t\le K+1}|M_t|$, which is integrable by the Doob maximal bound of [F4] applied with $H=\nabla f(B^x)$ on the finite horizon $K+1$; dominated convergence gives $EM_\tau=0$. [F4, F5, step 2.1]
  
-4.1 Taking expectations in the identity of step 2.1 and using step 3.1: $$E_x f(B_\tau)=f(x)+E_x\int_0^\tau Lf(B_s)\,ds,$$ where on the right we used that the pathwise Lebesgue integral is integrable because $|Lf|\le\|Lf\|_\infty$ and $\tau\le K$; this is Dynkin's formula. [F6, step 2.1, step 3.1]
+4.1 Taking expectations in the identity of step 2.1 and using step 3.1 gives $$E f(B^x_\tau)=f(x)+E\int_0^\tau Lf(B^x_s)\,ds,$$ where the pathwise Lebesgue integral is integrable because $|Lf|\le\|Lf\|_\infty$ and $\tau\le K$; this is Dynkin's formula for the started process on the original filtered space. [F6, step 2.1, step 3.1]
  
-5.1 Boundary and consistency cases: for $\tau=0$ both sides are $f(x)$; for deterministic $\tau\equiv t$ the formula becomes the integrated Ito identity; for $f$ affine ($c+\lambda\cdot y$) one has $Lf=0$ and both sides equal the martingale property of $\lambda\cdot B$; for $f\ge0$ compactly supported the formula is meaningful with both sides finite; if $Lf=0$ (harmonic compactly supported $f$, hence $f=0$ by the maximum principle) the formula reduces to the mean-value identity $E_xf(B_\tau)=f(x)$; the boundedness of $\tau$ is used exactly in step 3.1 for the grid optional-sampling identity, and no unbounded stopping time is claimed; the compact support of $f$ is used for the bounded gradie nt and Hessian, and a general $C^2$ function is not covered; AC enters only through [F7], which is the only choice-theoretic input. [F3, F6, F7, step 3.1, step 4.1] ∎
+5.1 Boundary and consistency cases: for $\tau=0$ both sides are $f(x)$; for deterministic $\tau\equiv t$ the formula becomes the integrated Ito identity; for $f$ affine ($c+\lambda\cdot y$) one has $Lf=0$ and both sides equal the martingale property of $\lambda\cdot B^x$; for $f\ge0$ compactly supported the formula is meaningful with both sides finite; if $Lf=0$ (harmonic compactly supported $f$, hence $f=0$ by the maximum principle) the formula reduces to the mean-value identity $Ef(B^x_\tau)=f(x)$; the boundedness of $\tau$ is used exactly in step 3.1 for the grid optional-sampling identity, and no unbounded stopping time is claimed; the compact support of $f$ is used for the bounded gradient and Hessian, and a general $C^2$ function is not covered; AC enters only through [F7], which is the only choice-theoretic input. [F3, F6, F7, step 3.1, step 4.1] ∎
 
 ## Remarks
 

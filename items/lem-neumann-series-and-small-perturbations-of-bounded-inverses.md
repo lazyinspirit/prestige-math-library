@@ -5,7 +5,7 @@ title: Neumann series and small perturbations of bounded inverses
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-banach-space, def-bounded-linear-operator, def-operator-norm, def-space-of-bounded-linear-operators, thm-bounded-operator-space-is-banach, thm-banach-series-criterion, lem-composition-operator-norm-inequality, thm-geometric-series, lem-vector-operations-are-continuous-in-a-normed-space, def-metric-convergence]
+deps: [def-banach-space, def-bounded-linear-operator, def-operator-norm, def-space-of-bounded-linear-operators, thm-bounded-operator-space-is-banach, thm-banach-series-criterion, lem-composition-operator-norm-inequality, thm-geometric-series, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, def-metric-convergence]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -39,9 +39,9 @@ Let $X$ and $Y$ be Banach spaces over the same scalar field
 
 [A2] For $|r|<1$ the scalar series $\sum r^k$ converges with sum $1/(1-r)$ ([[thm-geometric-series]]); in particular $\|R\|<1$ makes $\sum_n\|R\|^n$ converge to the real number $1/(1-\|R\|)$.
 
-[A3] If $Y$ is Banach then $\mathcal B(X,Y)$ is Banach for the operator norm ([[thm-bounded-operator-space-is-banach]], [[def-space-of-bounded-linear-operators]], [[def-banach-space]]); a series in a Banach space that converges absolutely converges, with the norm of the sum bounded by the sum of the norms ([[thm-banach-series-criterion]]).
+[A3] If $Y$ is Banach then $\mathcal B(X,Y)$ is Banach for the operator norm ([[thm-bounded-operator-space-is-banach]], [[def-space-of-bounded-linear-operators]], [[def-banach-space]]); a series in a Banach space that converges absolutely converges ([[thm-banach-series-criterion]]).
 
-[A4] Addition and scalar multiplication are continuous on a normed space ([[lem-vector-operations-are-continuous-in-a-normed-space]]), and the operator norm is continuous with respect to norm convergence ([[def-metric-convergence]], [[def-operator-norm]]).
+[A4] Addition and scalar multiplication are continuous on a normed space ([[lem-vector-operations-are-continuous-in-a-normed-space]]), and the reverse triangle inequality makes every norm continuous with respect to norm convergence ([[lem-reverse-triangle-inequality-in-a-normed-space]], [[def-metric-convergence]]).
 
 ## Proof
 
@@ -51,7 +51,9 @@ Let $X$ and $Y$ be Banach spaces over the same scalar field
 
 1.1 For every $n$ one has $\|R^n\|\le\|R\|^n$, and $\sum_n\|R\|^n$ converges to $1/(1-\|R\|)$. [A1, A2]
 
-2.1 The space $\mathcal B(X)$ is Banach, so the absolutely convergent series $\sum_nR^n$ converges in operator norm to some $S\in\mathcal B(X)$, and $\|S\|\le\sum_n\|R\|^n=1/(1-\|R\|)$. [step 1.1, A3, A4]
+2.1 The space $\mathcal B(X)$ is Banach, so the absolutely convergent series $\sum_nR^n$ converges in operator norm to some $S\in\mathcal B(X)$. For every $N$, the finite triangle inequality and [step 1.1] give
+$$\|S_N\|\le\sum_{n<N}\|R^n\|\le\sum_{n=0}^{\infty}\|R\|^n=\frac1{1-\|R\|}.$$
+Since $S_N\to S$ and the norm is continuous, taking the limit yields $\|S\|\le1/(1-\|R\|)$. [step 1.1, A2, A3, A4]
 
 2.2 For every $N$ one has $(I-R)S_N=S_N(I-R)=I-R^N$, and $\|R^N\|\le\|R\|^N\to0$, so $R^N\to0$. [step 1.1, A1, algebra]
 

@@ -5,7 +5,7 @@ title: Identity is compact iff the space is finite dimensional
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, thm-closed-unit-ball-compact-iff-finite-dimensional, def-linear-basis, def-linear-independence, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-square-summable-family-on-an-arbitrary-index-set, def-metric-ball, def-metric-compactness, thm-metric-closure-characterisation]
+deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, thm-closed-unit-ball-compact-iff-finite-dimensional, def-linear-basis, def-linear-independence, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-square-summable-family-on-an-arbitrary-index-set, def-metric-ball, thm-metric-open-set-algebra, thm-metric-closure-characterisation]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -30,7 +30,7 @@ $\ell^2(\mathbb N,\mathbb K)$ is not compact
 
 ## Facts & Assumptions
 
-[A1] $I_X$ is compact exactly when $\overline{I_X(\overline B_X)}$ is compact, where $\overline B_X=\{x\in X:\|x\|\le1\}$ ([[def-compact-linear-operator]], [[def-metric-ball]]); the closed unit ball is closed, so $\overline{\overline B_X}=\overline B_X$ ([[thm-metric-closure-characterisation]], [[def-metric-compactness]]).
+[A1] $I_X$ is compact exactly when $\overline{I_X(\overline B_X)}$ is compact, where $\overline B_X=\{x\in X:\|x\|\le1\}$ ([[def-compact-linear-operator]], [[def-metric-ball]]); the closed unit ball is closed, so $\overline{\overline B_X}=\overline B_X$ ([[thm-metric-open-set-algebra]], [[thm-metric-closure-characterisation]]).
 
 [A2] $\overline B_X$ is compact if and only if $X$ admits an ordered basis of finite length ([[thm-closed-unit-ball-compact-iff-finite-dimensional]]).
 

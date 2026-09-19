@@ -33,7 +33,7 @@ family of all $e \in C_c(X)$ with $0 \le e \le 1$ ordered pointwise.
 
 **Given:** The Axiom of Choice, a commutative C\*-algebra $A$, and the isometric $\ast$-isomorphism $\Gamma : A \to C_0(\Delta(A))$ of the nonunital commutative Gelfand–Naimark theorem.
 
-[L1] $\Gamma : A \to C_0(X)$ with $X := \Delta(A)$ is an isometric $\ast$-isomorphism, $X$ is locally compact Hausdorff, and $a \in A$ is positive (a sum of elements $b^*b$) if and only if $\Gamma(a) \ge 0$ pointwise, with $\sqrt{\Gamma(a)} \in C_0(X)$ for nonnegative $\Gamma(a)$ ([[thm-nonunital-commutative-gelfand-naimark]], [[def-axiom-of-choice]]).
+[L1] $\Gamma : A \to C_0(X)$ with $X := \Delta(A)$ is an isometric $\ast$-isomorphism, $X$ is locally compact Hausdorff, and $a \in A$ is positive (of the form $b^*b$ for some $b \in A$) if and only if $\Gamma(a) \ge 0$ pointwise, with $\sqrt{\Gamma(a)} \in C_0(X)$ for nonnegative $\Gamma(a)$ ([[thm-nonunital-commutative-gelfand-naimark]], [[def-axiom-of-choice]]).
 
 [L2] An approximate unit is a net of positive contractions $e_i$ with $\|e_i a - a\| \to 0$; a net is indexed by a nonempty directed set ([[def-approximate-unit-and-proper-c-star-morphism]]).
 

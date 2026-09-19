@@ -5,7 +5,7 @@ title: Fredholm index is stable under compact perturbations
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-fredholm-operator-cokernel-and-index, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, thm-atkinson, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-fredholm-index-is-locally-constant, thm-connected-subsets-of-r-are-intervals, def-connected-r, def-interval, def-metric-convergence, def-metric-ball, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice]
+deps: [def-fredholm-operator-cokernel-and-index, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, thm-atkinson, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-fredholm-index-is-locally-constant, thm-connected-subsets-of-r-are-intervals, thm-closure-characterisations-r, def-connected-r, def-interval, def-metric-convergence, def-metric-ball, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -32,7 +32,7 @@ is Fredholm and $\operatorname{ind}(T+K)=\operatorname{ind}T$.
 
 [A2] The Fredholm operators form an open subset of $\mathcal B(X,Y)$ and the index is locally constant ([[thm-fredholm-index-is-locally-constant]], [[def-operator-norm]]): for each Fredholm $A$ there is $\delta_A>0$ such that every bounded $B$ with $\|B-A\|<\delta_A$ is Fredholm with $\operatorname{ind}B=\operatorname{ind}A$.
 
-[A3] The interval $[0,1]$ is a connected subset of $\mathbb R$ ([[thm-connected-subsets-of-r-are-intervals]], [[def-connected-r]], [[def-interval]]); a subset of $\mathbb R$ that is both open and closed in $[0,1]$ and is neither empty nor all of $[0,1]$ would give a disconnection of $[0,1]$, since a set closed in $[0,1]$ contains no limit point of its complement inside $[0,1]$ and a set open in $[0,1]$ contains none of its complement's closure points either. Convergence in operator norm is metric convergence ([[def-metric-convergence]], [[def-metric-ball]]).
+[A3] The interval $[0,1]$ is a connected subset of $\mathbb R$ ([[thm-connected-subsets-of-r-are-intervals]], [[def-connected-r]], [[def-interval]]). A real point lies in the closure of a set exactly when each of its neighbourhoods meets that set ([[thm-closure-characterisations-r]]). Convergence in operator norm is metric convergence ([[def-metric-convergence]], [[def-metric-ball]]).
 
 ## Proof
 
@@ -44,10 +44,10 @@ is Fredholm and $\operatorname{ind}(T+K)=\operatorname{ind}T$.
 
 1.2 The path $t\mapsto T+tK$ is continuous for the operator norm: $\|(T+sK)-(T+tK)\|\le|s-t|\,\|K\|$ for all real $s,t$. [A1, A3, algebra]
 
-2.1 The set $U:=\{t\in[0,1]:\operatorname{ind}(T+tK)=\operatorname{ind}T\}$ is open in $[0,1]$: for $t\in U$ the local constancy [A2] gives $\delta>0$ with all operators within $\delta$ of $T+tK$ Fredholm of the same index, and by [step 1.2] every $s$ with $|s-t|\,\|K\|<\delta$ satisfies $\|(T+sK)-(T+tK)\|<\delta$, hence $\operatorname{ind}(T+sK)=\operatorname{ind}(T+tK)=\operatorname{ind}T$ and $s\in U$. [step 1.2, A2]
+2.1 Put $U:=\{t\in[0,1]:\operatorname{ind}(T+tK)=\operatorname{ind}T\}$. For every $t\in U$, local constancy [A2] gives $\delta>0$ with all operators within $\delta$ of $T+tK$ having the same index. With $\eta:=\delta/(1+\|K\|)>0$, every $s\in[0,1]$ satisfying $|s-t|<\eta$ has $\|(T+sK)-(T+tK)\|\le|s-t|\|K\|<\delta$, hence lies in $U$. [step 1.2, A2]
 
-2.2 The set $U$ is closed in $[0,1]$: its complement is open by the same argument, since for $t\notin U$ the same local constancy ball consists of operators all having index $\operatorname{ind}(T+tK)\ne\operatorname{ind}T$. [step 1.2, A2]
+2.2 Put $V:=[0,1]\setminus U$. For every $t\in V$, the same argument gives $\eta>0$ such that every $s\in[0,1]$ with $|s-t|<\eta$ has index $\operatorname{ind}(T+tK)\ne\operatorname{ind}T$ and hence lies in $V$. [step 1.2, A2]
 
-3.1 Hence $U=[0,1]$: the set $U$ is nonempty because $0\in U$, and it is open and closed in $[0,1]$ by [step 2.1] and [step 2.2]; if it were a proper nonempty subset, its two parts would form a disconnection of the connected interval $[0,1]$, contradicting [A3]. [step 2.1, step 2.2, A3]
+3.1 Hence $U=[0,1]$. Indeed $0\in U$. If $V$ were nonempty, then $U\cup V=[0,1]$ would be a disconnection: if $t\in V$, step 2.2 supplies a neighbourhood of $t$ whose intersection with $[0,1]$ is contained in $V$, so this neighbourhood misses $U$ and [A3] gives $t\notin\overline U$; hence $\overline U\cap V=\varnothing$. Similarly step 2.1 gives $U\cap\overline V=\varnothing$. Thus the two nonempty sets would be separated, contradicting connectedness of $[0,1]$ in [A3]. [step 2.1, step 2.2, A3]
 
 4.1 In particular $1\in U$, so $T+K$ is Fredholm with $\operatorname{ind}(T+K)=\operatorname{ind}T$, as claimed. [step 1.1, step 3.1] ∎

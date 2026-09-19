@@ -84,7 +84,7 @@ analytic estimate itself is choice-free.
 
 7.1 For $0 < \rho < \min(1/R,\,1/\|a\|)$ the series of [step 2.1] converges uniformly on the circle $|\zeta| = \rho$, so $g(\zeta) = \varphi((1-\zeta a)^{-1}) = \sum_{k\ge0}\varphi(a^k)\zeta^k$ uniformly there, and integrating term by term using [L6] gives $g^{(n)}(0) = n!\,\varphi(a^n)$ for every $n \ge 0$. [step 6.1, step 2.1, L6, algebra]
 
-8.1 Norm estimate for the coefficients: for $n \ge 0$, by [step 7.1] and the integral formula of [step 6.1], $|\varphi(a^n)| = \frac{1}{2\pi}\left|\int_{|\zeta|=1/R}g(\zeta)\zeta^{-n-1}d\zeta\right| \le \left(\sup_{|\zeta|=1/R}\|h(\zeta)\|\right)\|\varphi\|\,R^n$; the supremum is finite because $|\zeta| = 1/R$ is a compact subset of $D_R$ and $h$ is continuous there by [step 4.1]. [step 6.1, step 7.1, step 4.1, L4, algebra]
+8.1 Norm estimate for the coefficients: for $n \ge 0$, by [step 7.1] and the integral formula of [step 6.1], $|\varphi(a^n)| = \frac{1}{2\pi}\left|\int_{|\zeta|=1/R}g(\zeta)\zeta^{-n-1}d\zeta\right| \le \left(\sup_{|\zeta|=1/R}\|h(\zeta)\|\right)\|\varphi\|\,R^n$; the supremum is finite because [step 6.1] places the circle $|\zeta|=1/R$ as a compact subset of the larger disc $D_{R'}$, on which the argument of [step 4.1] makes $h$ holomorphic and hence continuous. [step 6.1, step 7.1, step 4.1, L4, algebra]
 
 9.1 Put $C_R := \sup_{|\zeta| = 1/R}\|h(\zeta)\| < \infty$. Taking the supremum in [step 8.1] over all $\varphi$ with $\|\varphi\| \le 1$ and using [L7] gives $\|a^n\| \le C_RR^n$ for every $n \ge 0$; hence $\|a^n\|^{1/n} \le C_R^{1/n}R$ for $n \ge 1$, and since $C_R^{1/n} \to 1$ by [L11], the limit superior satisfies $\limsup_n\|a^n\|^{1/n} \le R$ for every $R > r(a)$, so $\limsup_n\|a^n\|^{1/n} \le r(a)$. [step 8.1, L7, L11, algebra]
 

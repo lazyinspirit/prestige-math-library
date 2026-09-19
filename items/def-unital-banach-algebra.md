@@ -65,8 +65,8 @@ equality.
 - **Completeness is with respect to the submultiplicative norm.** A complete
   normed algebra whose norm is merely equivalent to a submultiplicative one is
   not thereby a unital Banach algebra in this sense; rescaling a norm to
-  $\lambda\|\cdot\|$ with $\lambda > 1$ preserves completeness but destroys
-  both submultiplicativity and the normalization $\|1\| = 1$.
+  $\lambda\|\cdot\|$ with $\lambda > 1$ preserves completeness and
+  submultiplicativity but destroys the normalization $\|1\| = 1$.
 
 - **The unit is not a separate structure.** It is determined by the
   multiplication, so an algebra homomorphism between unital Banach algebras

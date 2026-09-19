@@ -40,7 +40,11 @@ $\mathbb C$.
 
 [L2] For $z \in \rho(T)$ the resolvent $R(z) := (z-T)^{-1}$ is bounded, and $1 = (z-T)R(z) = R(z)(z-T)$ ([[def-spectrum-and-resolvent-set-in-a-banach-algebra]]).
 
-[L3] The invertible group of $\mathcal B(X)$ is open: if $\|T - \lambda\| < 1/\|R\|$ for some invertible operator (here $T-\lambda_n$) with inverse $R$, then $T-\lambda$ is invertible ([[thm-invertible-group-is-open-and-inversion-is-continuous]]).
+[L3] The invertible group of $\mathcal B(X)$ is open: if $A$ is invertible and
+$\|A-B\|<1/\|A^{-1}\|$, then $B$ is invertible
+([[thm-invertible-group-is-open-and-inversion-is-continuous]]).  Here one may
+take $A=T-\lambda_n$, whose inverse is $-R(\lambda_n)$ by [L2], and
+$B=T-\lambda$, for which $\|A-B\|=|\lambda_n-\lambda|$.
 
 [L4] $\lambda \in \sigma_{ap}(T)$ exactly when $T-\lambda$ is not bounded below; a bounded-below operator satisfies $\|(T-\lambda)x\| \ge c\|x\|$ for all $x$ and some $c > 0$ ([[def-bounded-below-operator]], [[def-approximate-point-and-compression-spectrum]]).
 

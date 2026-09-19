@@ -33,7 +33,7 @@ then $T$ is closable.
 
 [A2] If $M$ is a linear subspace of the Hilbert space $H\oplus H$, then $M^{\perp\perp}=\overline M$ ([[thm-double-orthogonal-complement-is-closure]]).
 
-[A3] For a densely defined $T$ the operator $T^*$ is closed and $T^{**}$ is again an adjoint, hence closed; and $T\subseteq T^{**}$ ([[lem-unbounded-adjoint-is-well-defined-and-closed]], [[def-adjoint-of-a-densely-defined-unbounded-operator]]).
+[A3] For a densely defined $T$ the operator $T^*$ is closed. If in addition $D(T^*)$ is dense, then $T^{**}$ is defined, is closed, and contains $T$ ([[lem-unbounded-adjoint-is-well-defined-and-closed]], [[def-adjoint-of-a-densely-defined-unbounded-operator]]).
 
 [A4] $T$ is closable when it has a closed extension; if $T$ is closable then $\overline T$ is the least closed extension of $T$ and $T\subseteq\overline T$ ([[thm-closure-of-a-closable-operator]], [[def-densely-defined-closed-and-closable-operator]]).
 

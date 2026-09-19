@@ -22,7 +22,8 @@ sources:
 
 Assume AC. Let $T$ be a bounded self-adjoint operator on a nonzero complex
 Hilbert space $H$ with spectral projection valued measure $E$ on the compact set
-$\sigma(T)\subseteq\mathbb R$, and let $a<b$ be real. Then, with the resolvents
+$\sigma(T)\subseteq\mathbb R$, and let $a<b$ be real. For every Borel set
+$A\subseteq\mathbb R$, write $E(A):=E(A\cap\sigma(T))$. Then, with the resolvents
 $(T-(t\pm i\varepsilon))^{-1}$ defined for $\varepsilon>0$ by
 [[def-spectrum-and-resolvent-of-a-bounded-operator]] and the integral of a
 continuous $\mathcal B(H)$-valued function understood in the Bochner sense

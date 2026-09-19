@@ -5,7 +5,7 @@ title: Contour integral commutes with bounded linear maps
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-banach-algebra-valued-contour-integral, def-bounded-linear-operator, cor-piecewise-c1-paths-have-additive-speed-integral-length]
+deps: [def-banach-algebra-valued-contour-integral, def-bounded-linear-operator, def-operator-norm, cor-piecewise-c1-paths-have-additive-speed-integral-length]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -40,9 +40,16 @@ contour, and let $f : \gamma^\ast \to A$ be continuous. Then
 
 [L1] $\int_\gamma f\,dz$ is the limit of the tagged Riemann sums $\sum_j f(\gamma(\xi_j))\gamma'(\xi_j)\Delta_j$ and equals the Bochner integral of $F$ over $[a,b]$; the chain version is the corresponding finite sum ([[def-banach-algebra-valued-contour-integral]]).
 
-[L2] $B$ is complex-linear and bounded: $B(\lambda u + \mu v) = \lambda B(u) + \mu B(v)$ and $\|B(u)\| \le \|B\|\,\|u\|$ for all $u,v \in A$ and scalars $\lambda,\mu$ ([[def-bounded-linear-operator]]).
+[L2] $B$ is complex-linear and bounded, and its operator norm satisfies
+$B(\lambda u + \mu v) = \lambda B(u) + \mu B(v)$ and
+$\|B(u)\| \le \|B\|\,\|u\|$ for all $u,v \in A$ and scalars $\lambda,\mu$
+([[def-bounded-linear-operator]], [[def-operator-norm]]).
 
-[L3] For a piecewise $C^1$ path $\gamma$ the length equals the integral of the speed: $L(\gamma) = \int_a^b|\gamma'(t)|\,dt$, and the Riemann sums of the continuous function $t \mapsto |\gamma'(t)|$ converge to it ([[cor-piecewise-c1-paths-have-additive-speed-integral-length]]).
+[L3] For a piecewise $C^1$ path $\gamma$ the length is the sum of the speed
+integrals over a $C^1$ subdivision:
+$L(\gamma)=\sum_k\int_{t_{k-1}}^{t_k}|\gamma'(t)|\,dt$; on each such interval
+the speed is continuous, and the corresponding refined Riemann sums converge
+to this sum ([[cor-piecewise-c1-paths-have-additive-speed-integral-length]]).
 
 ## Proof
 

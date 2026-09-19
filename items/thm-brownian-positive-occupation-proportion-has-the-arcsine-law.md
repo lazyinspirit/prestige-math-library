@@ -17,8 +17,9 @@ sources:
 
 ## Statement
 
-Let $B$ be a standard Brownian motion [[def-brownian-motion]] and for $t>0$ let
-$$A_t:=\int_0^t1_{\{B_s>0\}}\,ds$$
+Let $B$ be a standard Brownian motion [[def-brownian-motion]], choose its
+all-path continuous jointly measurable version $\widehat B$, and for $t>0$ let
+$$A_t:=\int_0^t1_{\{\widehat B_s>0\}}\,ds$$
 be the occupation time of the positive half-line up to time $t$. Then for every
 $0\le x\le1$,
 $$P\Bigl(\frac{A_t}{t}\le x\Bigr)=\frac{2}{\pi}\arcsin\sqrt x,$$
@@ -35,7 +36,7 @@ the two random variables are of a different nature.
 
 [F1] With $V=\alpha+\beta1_{\{y>0\}}$ the function $u(x)=\int_0^\infty E[\exp(-\int_0^tV(x+\widehat B_r)dr)]dt$ satisfies $u(0)=1/\sqrt{\alpha(\alpha+\beta)}$, and its defining integral is an $E$-integral against the occupied time. [[lem-brownian-step-potential-resolvent-at-zero]]
 
-[F2] Every path of $\widehat B$ is continuous and the evaluation is jointly measurable, so $s\mapsto1_{\{\widehat B_s>0\}}$ is measurable and $A_t=\int_0^t1_{\{B_s>0\}}ds$ is a random variable with $0\le A_t\le t$. [[lem-brownian-motion-has-a-jointly-measurable-continuous-version]]
+[F2] Every path of $\widehat B$ is continuous and the evaluation is jointly measurable, so $s\mapsto1_{\{\widehat B_s>0\}}$ is measurable and $A_t=\int_0^t1_{\{\widehat B_s>0\}}ds$ is a random variable with $0\le A_t\le t$. Any two such jointly measurable indistinguishable versions give the same occupation time almost surely by Tonelli. [[lem-brownian-motion-has-a-jointly-measurable-continuous-version]] [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
 
 [F3] Scaling: for $c>0$ the process $r\mapsto c^{-1/2}B_{cr}$ is again standard Brownian motion, so the occupation times satisfy $A_t=^d tA_1$. [[thm-brownian-scaling]]
 

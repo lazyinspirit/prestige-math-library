@@ -20,7 +20,10 @@ sources:
 
 Let $M$ be a smooth ($C^\infty$) Banach manifold modelled on the real Banach
 space $E$ ([[def-countable-base-banach-manifold-and-smooth-map]]) and let $F$ be
-a real Banach space ([[def-banach-space]]).
+a real Banach space whose norm topology is second countable
+([[def-banach-space]]). This countability hypothesis makes the product
+$U\times F$, with its product atlas, a Banach manifold in the library's
+second-countable convention.
 
 A **smooth Banach vector bundle over $M$ with fibre $F$** is a smooth Banach
 manifold $\mathcal E$ together with a surjective smooth map
@@ -38,9 +41,10 @@ such that:
 3. **cocycle condition**: if $\Phi$ over $U$ and $\Psi$ over $V$ are local
    trivializations, then on $\pi^{-1}[U \cap V]$,
    $$\Psi \circ \Phi^{-1}(q,v) = \bigl(q,\ g(q)v\bigr)$$
-   for a smooth map $g : U \cap V \to \mathcal B(F)$ into the bounded operators
-   on $F$ ([[def-space-of-bounded-linear-operators]]), and $g(q)$ is invertible
-   for every $q \in U \cap V$.
+   for a map $g : U \cap V \to \mathcal B(F)$ into the bounded operators on
+   $F$ ([[def-space-of-bounded-linear-operators]]) whose representative in
+   every base chart is $C^\infty$ in the Banach-space sense, and $g(q)$ is
+   invertible for every $q \in U \cap V$.
 
 A **smooth section of $\pi$** is a smooth map $s : M \to \mathcal E$ with
 $\pi \circ s = \mathrm{id}_M$. Its **zeros** are the points $p \in M$ with
@@ -94,7 +98,8 @@ $$D\sigma_\Psi(p) = g(p)\,D\sigma_\Phi(p) + Dg(p)\,\sigma_\Phi(p) = g(p)\,D\sigm
   the next theorem on this page, where the zero set is straightened.
 
 - **Ranks and dimension.** Nothing is assumed about the dimension of $F$ or of
-  $E$; the fibre may be infinite dimensional, which is exactly the case the
+  $E$ beyond the second-countability convention above; the fibre may be
+  infinite dimensional and second countable, which is exactly the case the
   infinite-dimensional transversality theorem below needs. When
   $\dim F < \infty$ and $D^vs(p)$ is onto, its kernel has finite codimension in
   $T_pM$ and is therefore automatically complemented, so the local condition of

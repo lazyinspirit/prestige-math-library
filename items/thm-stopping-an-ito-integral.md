@@ -40,7 +40,7 @@ definition of the localized integral.
 
 [F3] If $(\rho_k)$ is nondecreasing with $\rho_k\uparrow\infty$ a.s., each $H1_{(0,\rho_k]}$ has finite energy, and a continuous adapted $N$ with $N_0=0$ has $N^{\rho_k}$ indistinguishable from the finite-energy integral of $H1_{(0,\rho_k]}$ for every $k$, then $N$ is indistinguishable from the localized integral of $H$. [[thm-localized-ito-integral]]
 
-[F4] Localization is stable under stopping: if $(\tau_n)$ localizes $H\cdot B$, so does $(\tau\wedge\tau_n)$, and $N:=(H\cdot B)^{\tau}$ is an adapted continuous process with $N_0=0$. [[def-continuous-time-adapted-process-and-martingale]] [[thm-localized-ito-integral]]
+[F4] Stopping preserves adaptedness and continuity, so $N:=(H\cdot B)^{\tau}$ is an adapted continuous process with $N_0=0$.  The proof below uses the original sequence $(\tau_n)\uparrow\infty$ to localize $N$; the bounded sequence $(\tau\wedge\tau_n)$ is not asserted to be a localizing sequence. [[def-continuous-time-adapted-process-and-martingale]] [[thm-localized-ito-integral]]
 
 [F5] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 

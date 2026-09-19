@@ -5,7 +5,7 @@ title: Riesz projection for a matrix with separated spectrum
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-riesz-spectral-projection-properties, def-riesz-spectral-projection, ex-spectrum-in-a-finite-dimensional-matrix-algebra, thm-circle-integrals-of-integer-monomials, def-axiom-of-choice]
+deps: [thm-riesz-spectral-projection-properties, def-riesz-spectral-projection, ex-spectrum-in-a-finite-dimensional-matrix-algebra, thm-circle-integrals-of-integer-monomials, thm-uniform-limit-interchanges-complex-line-integrals, def-axiom-of-choice]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -46,7 +46,11 @@ them have spectra $\{1\}$ and $\{2\}$ respectively.
 
 [L3] For a closed cycle, $\frac{1}{2\pi i}\int_\gamma(z-a)^mdz$ equals $1$ for $m = -1$ and $0$ otherwise when $\gamma$ winds once around $a$ ([[thm-circle-integrals-of-integer-monomials]]).
 
-[L4] The range and kernel of a Riesz projection are closed invariant summands, and the restriction spectra are the corresponding spectral parts ([[thm-riesz-spectral-projection-properties]]).
+[L4] A uniformly convergent sequence of continuous functions on a contour may
+be integrated term by term
+([[thm-uniform-limit-interchanges-complex-line-integrals]]).
+
+[L5] The range and kernel of a Riesz projection are closed invariant summands, and the restriction spectra are the corresponding spectral parts ([[thm-riesz-spectral-projection-properties]]).
 
 ## Verification
 
@@ -54,6 +58,6 @@ them have spectra $\{1\}$ and $\{2\}$ respectively.
 
 1.1 Resolvent: for $z \notin \{1,2\}$ one has $(zI-T)^{-1} = \operatorname{diag}((z-1)^{-1},(z-2)^{-1})$, and the circle $\gamma$ of radius $1/2$ about $1$ avoids both spectral points; on it the resolvent is the diagonal pair of scalar functions $1/(z-1)$ and $1/(z-2)$. [L1, algebra]
 
-2.1 Contour integral: by [L3], $\frac{1}{2\pi i}\int_\gamma\frac{dz}{z-1} = 1$ (the circle winds once about its centre $1$) and $\frac{1}{2\pi i}\int_\gamma\frac{dz}{z-2} = 0$ (the point $2$ lies outside the closed disc bounded by $\gamma$); hence $P_E = \frac{1}{2\pi i}\int_\gamma(zI-T)^{-1}dz = \operatorname{diag}(1,0)$, the locally constant characteristic function of $\{1\}$ evaluated on the diagonal. [step 1.1, L2, L3, algebra]
+2.1 Contour integral: by [L3], $\frac{1}{2\pi i}\int_\gamma\frac{dz}{z-1} = 1$ because $\gamma$ is the circle about $1$. On this circle $|z-1|=1/2$, and $\frac1{z-2}=-\frac1{1-(z-1)}=-\sum_{n\ge0}(z-1)^n$ uniformly: the tail after degree $N$ has modulus at most $2^{-N-1}/(1-1/2)$. Each term has integral zero by [L3], so [L4] gives $\int_\gamma dz/(z-2)=0$. Hence $P_E = \frac{1}{2\pi i}\int_\gamma(zI-T)^{-1}dz = \operatorname{diag}(1,0)$, the locally constant characteristic function of $\{1\}$ evaluated on the diagonal. [step 1.1, L2, L3, L4, algebra]
 
-3.1 The projection $\operatorname{diag}(1,0)$ is idempotent, commutes with $T$ and has $\operatorname{ran}(P_E) = \mathbb C e_1$, $\ker(P_E) = \mathbb C e_2$; both are $T$-invariant, $T|_{\mathbb C e_1}$ is multiplication by $1$ and $T|_{\mathbb C e_2}$ is multiplication by $2$, so the two restrictions have spectra $\{1\}$ and $\{2\}$; this agrees with [L4] and the separation of the spectral parts. [step 2.1, L4, L1, algebra] ∎
+3.1 The projection $\operatorname{diag}(1,0)$ is idempotent, commutes with $T$ and has $\operatorname{ran}(P_E) = \mathbb C e_1$, $\ker(P_E) = \mathbb C e_2$; both are $T$-invariant, $T|_{\mathbb C e_1}$ is multiplication by $1$ and $T|_{\mathbb C e_2}$ is multiplication by $2$, so the two restrictions have spectra $\{1\}$ and $\{2\}$; this agrees with [L5] and the separation of the spectral parts. [step 2.1, L5, L1, algebra] ∎

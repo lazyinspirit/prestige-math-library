@@ -30,13 +30,14 @@ in reduced cohomology, using
 In degree one use the suspension identification of the *based* theory
 $\widetilde K^{-1}(X)=\widetilde K^0(\Sigma X)$ together with the reduced
 cohomology suspension
-$\widetilde H^{1+2k}(X;\mathbb Q)\cong\widetilde H^{2k}(\Sigma X;\mathbb Q)$
+$\widetilde H^{2k}(\Sigma X;\mathbb Q)\cong\widetilde H^{2k-1}(X;\mathbb Q)$
 from [[prop-reduced-and-unreduced-generalized-cohomology-theories-correspond]],
 and define
-$$\operatorname{ch}:\widetilde K^{-1}(X)\longrightarrow \bigoplus_k\widetilde H^{1+2k}(X;\mathbb Q)$$
-as the composite $\widetilde{\operatorname{ch}}\circ(\text{suspension
-identification})^{-1}$ transported across the cohomology suspension
-isomorphism. Bott periodicity
+$$\operatorname{ch}:\widetilde K^{-1}(X)\longrightarrow \bigoplus_k\widetilde H^{2k-1}(X;\mathbb Q)$$
+by first applying $\widetilde{\operatorname{ch}}$ on $\Sigma X$ and then the
+inverse of the cohomological suspension map
+$\widetilde H^{2k-1}(X;\mathbb Q)\xrightarrow{\cong}
+\widetilde H^{2k}(\Sigma X;\mathbb Q)$. Bott periodicity
 [[thm-complex-bott-periodicity]] supplies natural isomorphisms
 $K^{q}(X)\cong K^{q-2}(X)$, and the two-periodic theory
 [[thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory]] makes

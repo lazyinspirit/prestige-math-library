@@ -56,7 +56,7 @@ dense both
 
 [F7] Under Countable Choice, a function measurable for a completion is almost everywhere equal to a function measurable for the original sigma-algebra, and the completion of a measure agrees with it on the original measurable sets ([[thm-completion-measurable-functions-have-base-measurable-representatives]], [[thm-completion-of-a-measure-space]]).
 
-[F8] For a measurable set $E$ the $L^2$ norm of the class of $\mathbf 1_E$ satisfies $\|\mathbf 1_E\|_2^2=\rho(E)$, and for measurable $E,C$ the class of $\mathbf 1_E-\mathbf 1_C$ has squared norm $\rho(E\mathbin\triangle C)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).
+[F8] If a measurable set $E$ has $\rho(E)<+\infty$, then $\mathbf 1_E$ has an $L^2$ class and $\|\mathbf 1_E\|_2^2=\rho(E)$. More generally, if measurable $E,C$ satisfy $\rho(E\mathbin\triangle C)<+\infty$, then $\mathbf 1_E-\mathbf 1_C$ has an $L^2$ class with squared norm $\rho(E\mathbin\triangle C)$ ([[def-l-p-space-as-a-quotient-by-null-functions]]).
 
 ## Proof
 

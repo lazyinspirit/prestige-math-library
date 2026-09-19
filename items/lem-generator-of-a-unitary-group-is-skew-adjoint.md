@@ -5,7 +5,7 @@ title: "The generator of a unitary group is closed and skew-adjoint"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-laplace-resolvents-of-a-unitary-group, thm-self-adjointness-range-criterion, thm-self-adjoint-resolvent-estimate, def-infinitesimal-generator-of-a-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-strongly-continuous-one-parameter-unitary-group, def-hilbert-space, def-countable-choice, def-densely-defined-closed-and-closable-operator]
+deps: [lem-laplace-resolvents-of-a-unitary-group, thm-self-adjointness-range-criterion, thm-self-adjoint-resolvent-estimate, def-infinitesimal-generator-of-a-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-strongly-continuous-one-parameter-unitary-group, def-hilbert-space, def-countable-choice, def-dependent-choice, def-densely-defined-closed-and-closable-operator]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,8 +22,8 @@ sources:
 
 ## Statement
 
-Assume Countable Choice. The generator $G$ of a strongly continuous
-one-parameter unitary group $U$ is densely defined, closed, symmetric and
+Assume Countable Choice and Dependent Choice. The generator $G$ of a strongly continuous
+one-parameter unitary group $U$ is densely defined, closed, and
 skew-adjoint: $G^*=-G$. Consequently $T=-iG$ is self-adjoint with $D(T)=D(G)$.
 
 ## Facts & Assumptions
@@ -40,11 +40,13 @@ skew-adjoint: $G^*=-G$. Consequently $T=-iG$ is self-adjoint with $D(T)=D(G)$.
 
 **Proof technique:** direct.
 
-**Given:** A strongly continuous unitary group $U$ with generator $G$.
+**Given:** Countable Choice, Dependent Choice, and a strongly continuous unitary group $U$ with generator $G$.
 
-1.1 $D(G)$ is dense: if $y\perp D(G)$ then $0=\langle Q_+(1)y,y\rangle=\int_0^\infty e^{-t}\langle U(t)y,y\rangle\,dt$ because $Q_+(1)$ has range $D(G)$; taking real parts, the function $t\mapsto\operatorname{Re}\langle U(t)y,y\rangle$ is continuous with value $\|y\|^2$ at $t=0$, so its weighted integral is positive unless $y=0$; hence $y=0$. [A1, given]
+1.1 $D(G)$ is dense: for $y\in H$ and $\lambda>0$, [A1] gives $\lambda Q_+(\lambda)y\in D(G)$ and
+$$\lambda Q_+(\lambda)y-y=\int_0^\infty \lambda e^{-\lambda t}(U(t)y-y)\,dt.$$
+Given $\varepsilon>0$, strong continuity supplies $\delta>0$ such that $\|U(t)y-y\|<\varepsilon$ for $0\le t\le\delta$; the integral norm is then at most $\varepsilon+2\|y\|e^{-\lambda\delta}$. Letting $\lambda\to\infty$ and then $\varepsilon\downarrow0$ proves $\lambda Q_+(\lambda)y\to y$. Thus $D(G)$ is dense. [A1, given]
 
-1.2 $G$ is symmetric: the function $t\mapsto\langle U(t)x,U(t)y\rangle$ is constant with value $\langle x,y\rangle$ for $x,y\in D(G)$, so its derivative at $0$ vanishes, that is $\langle Gx,y\rangle+\langle x,Gy\rangle=0$; equivalently $\langle Gx,y\rangle=-\langle x,Gy\rangle$. [A2]
+1.2 $G$ is skew-symmetric: the function $t\mapsto\langle U(t)x,U(t)y\rangle$ is constant with value $\langle x,y\rangle$ for $x,y\in D(G)$, so its derivative at $0$ vanishes, that is $\langle Gx,y\rangle+\langle x,Gy\rangle=0$; equivalently $\langle Gx,y\rangle=-\langle x,Gy\rangle$. [A2]
 
 1.3 $G$ is closed: with $R:=Q_+(1)$ one has $(1-G)R=I$ and $R(1-G)x=x$ for $x\in D(G)$ by [A1], so the closed-graph argument of [A4] applies. [A1, A4]
 

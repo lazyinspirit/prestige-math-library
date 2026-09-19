@@ -52,7 +52,7 @@ Assume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert 
 
 1.3 The map $\Phi:A\to\mathcal B(H)$, $p|_{\sigma(T)}\mapsto p(T)$, is well defined and is complex-linear, multiplicative, unital, star-preserving (for $\sigma(T)\subseteq\mathbb R$ the conjugate of $p|_{\sigma(T)}$ is $\overline p|_{\sigma(T)}$) and isometric. [A1, algebra]
 
-2.1 For $f\in C(\sigma(T))$ and polynomials $p_n$ with $\|p_n-f\|_\infty\le1/n$ (which exist by density) the sequence $p_n(T)$ is Cauchy in operator norm because $\|p_n(T)-p_m(T)\|=\|p_n-p_m\|_\infty\le\tfrac1n+\tfrac1m$, so it converges; the limit does not depend on the choice of sequence, since two such sequences differ in norm by at most $\tfrac1n+\tfrac1n$. [step 1.3, A6, A8]
+2.1 For $f\in C(\sigma(T))$ and polynomials $p_n$ with $\|p_n-f\|_\infty\le1/(n+1)$ (which exist by density) the sequence $p_n(T)$ is Cauchy in operator norm because $\|p_n(T)-p_m(T)\|=\|p_n-p_m\|_\infty\le\tfrac1{n+1}+\tfrac1{m+1}$, so it converges; the limit does not depend on the choice of sequence, since two such sequences differ in norm by at most $2/(n+1)$. [step 1.3, A6, A8]
 
 3.1 Defining $\Psi(f)$ as that limit makes $\Psi:C(\sigma(T))\to\mathcal B(H)$ complex-linear, unital, multiplicative, star-preserving and isometric: each property holds for polynomial representatives by step 1.3 and passes to the limit by continuity of the algebra operations and the norm in $\mathcal B(H)$, while the norm identity passes by continuity of the modulus; moreover $\Psi(z)=T$. [step 2.1, step 1.3, A6, algebra]
 
@@ -60,6 +60,6 @@ Assume AC. For a bounded self-adjoint operator $T$ on a nonzero complex Hilbert 
 
 4.2 With step 1.2, the map $\Psi$ is an isometric unital star-homomorphism of complex C\*-algebras in the sense of the definition, and $\Psi(z)=T$. [step 3.1, step 1.2, A7]
 
-4.3 $\Psi$ is the only such map: if $\Xi$ is an isometric unital star-homomorphism with $\Xi(z)=T$, then $\Xi(p|_{\sigma(T)})=p(T)=\Psi(p|_{\sigma(T)})$ for every polynomial $p$, by multiplicativity, unitality and star-preservation; for $f\in C(\sigma(T))$ and approximating polynomials $p_n$ with $\|p_n-f\|_\infty\le1/n$, continuity of both isometric maps gives $\Xi(f)=\lim\Xi(p_n)=\lim p_n(T)=\Psi(f)$. [step 3.1, step 1.3, algebra]
+4.3 $\Psi$ is the only such map: if $\Xi$ is an isometric unital star-homomorphism with $\Xi(z)=T$, then $\Xi(p|_{\sigma(T)})=p(T)=\Psi(p|_{\sigma(T)})$ for every polynomial $p$, by multiplicativity, unitality and star-preservation; for $f\in C(\sigma(T))$ and approximating polynomials $p_n$ with $\|p_n-f\|_\infty\le1/(n+1)$, continuity of both isometric maps gives $\Xi(f)=\lim\Xi(p_n)=\lim p_n(T)=\Psi(f)$. [step 3.1, step 1.3, algebra]
 
 5.1 The map $f\mapsto f(T):=\Psi(f)$ is therefore the unique isometric unital star-homomorphism $C(\sigma(T))\to\mathcal B(H)$ with $z\mapsto T$ and range $C^*(I,T)$. [step 4.1, step 4.2, step 4.3] ∎

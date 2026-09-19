@@ -39,7 +39,7 @@ is a function of that class.
 
 [F3] If $Y\in L^1(P)$ is independent of a sub-sigma-algebra $\mathcal G$, then $E[Y\mid\mathcal G]=EY$ almost surely: the constant $EY$ is $\mathcal G$-measurable, and for $A\in\mathcal G$ the factorization of expectations for the independent pair $(Y,1_A)$ gives $E[Y1_A]=EY\,P(A)$. [[def-independent-sigma-algebras-and-events]] [[thm-factorization-of-expectations-for-independent-variables]] [[lem-conditional-expectation-is-unique-almost-surely]]
 
-[F4] For integrable $Z$ and $\mathcal H\subseteq\mathcal G$, $E[E[Z\mid\mathcal G]\mid\mathcal H]=E[Z\mid\mathcal H]$ almost surely; if $Z$ is $\mathcal G$-measurable and $ZW$ is integrable, $E[ZW\mid\mathcal G]=ZE[W\mid\mathcal G]$. [[thm-tower-property-of-conditional-expectation]] [[thm-taking-out-what-is-known]]
+[F4] For integrable $Z$ and $\mathcal H\subseteq\mathcal G$, $E[E[Z\mid\mathcal G]\mid\mathcal H]=E[Z\mid\mathcal H]$ almost surely. If $W\in L^1$, $Z$ is $\mathcal G$-measurable, and both $ZW$ and $ZE[W\mid\mathcal G]$ are integrable, then $E[ZW\mid\mathcal G]=ZE[W\mid\mathcal G]$. [[thm-tower-property-of-conditional-expectation]] [[thm-taking-out-what-is-known]]
 
 [F5] The defining sums are linear under a common refinement and $I_0(H)=0$; adaptedness and path continuity are part of the definition. [[def-ito-integral-of-an-elementary-predictable-process]]
 

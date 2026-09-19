@@ -4,7 +4,7 @@ kind: proposition
 title: The Euler class of an oriented odd-rank bundle is two-torsion
 status: draft
 origin: pipeline
-deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish", "def-axiom-of-choice"]
+deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-naturality-orientation-sign-and-whitney-product-for-euler-classes", "def-oriented-real-vector-bundle-and-oriented-frame-bundle", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -36,8 +36,6 @@ fiberwise $-1$ to the identity is used or claimed.
 
 [F2] The Euler class is natural for orientation-preserving pullbacks and isomorphism squares, and reversing an integral orientation negates it: $e(f^*E)=f^*e(E)$ for orientation-preserving $f$, and $e(E,-o)=-e(E,o)$ ([[thm-naturality-orientation-sign-and-whitney-product-for-euler-classes]], [[def-euler-class-by-zero-section-pullback-of-the-thom-class]]).
 
-[F3] An oriented positive-rank real line bundle admits a nowhere-zero section and hence has vanishing Euler class ([[prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish]]).
-
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]].
 
 ## Proof
@@ -49,4 +47,4 @@ fiberwise $-1$ to the identity is used or claimed.
 
 3.1 Combining gives $e(E,o)=e(E,-o)=-e(E,o)$, hence $2e(E,o)=0$ in the abelian group $H^n(B;\mathbb Z)$. No assertion that $\varphi$ is homotopic to the identity is made: the argument compares two orientations of one bundle through an orientation-preserving isomorphism, exactly as displayed. [step 2.1, step 1.2, algebra]
 
-4.1 Boundary cases. For rank $n=1$ the bundle is an oriented line bundle, which carries a nowhere-zero section and has vanishing Euler class by [F3]; this is consistent with $2e=0$ and is not a separate assumption. Rank zero is excluded, since no orientation reversal separates the two orientations of the zero bundle. Even rank is excluded from the statement: there $-\operatorname{id}$ is orientation-preserving on $(E,o)$ itself, so the argument gives no two-torsion conclusion. Over the empty base the group is zero and the identity is vacuous. The only choice principle used is the Thom-theoretic AC of [F2]. [F2, F3, A1, step 3.1] ∎
+4.1 Boundary cases. Rank one is included directly in steps 1.1--3.1, so no separate triviality or section claim is needed. Rank zero is excluded, since no orientation reversal separates the two orientations of the zero bundle. Even rank is excluded from the statement: there $-\operatorname{id}$ is orientation-preserving on $(E,o)$ itself, so the argument gives no two-torsion conclusion. Over the empty base the group is zero and the identity is vacuous. The only choice principle used is the Thom-theoretic AC of [F2]. [F2, A1, step 3.1] ∎

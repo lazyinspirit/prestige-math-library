@@ -4,7 +4,7 @@ kind: definition
 title: "Corson's ordered-rational permutation model"
 status: draft
 origin: pipeline
-deps: [thm-fraenkel-mostowski-permutation-model, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-zfa-universe-atoms-and-kernel, def-metric-space, def-order-topology-on-a-linearly-ordered-set]
+deps: [thm-fraenkel-mostowski-permutation-model, def-permutation-support-system-and-normal-filter, def-symmetric-and-hereditarily-symmetric-sets, def-zfa-universe-atoms-and-kernel, def-metric-space]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -33,15 +33,17 @@ model with the same atoms and kernel ([[thm-fraenkel-mostowski-permutation-model
 
 The atom space itself, with its metric, belongs to the model: it is fixed by
 every automorphism, hence has empty support, and its metric satisfies the metric
-axioms in the model ([[def-metric-space]]). The ordering of the atoms is the
-dense rational order, so the metric topology and the order topology on the atoms
-are compatible in the sense used by the construction.
+axioms in the model ([[def-metric-space]]). The ordering is a distinguished
+dense rational order used to rigidify the finite metric structures; no equality
+or compatibility between its order topology and the metric topology is part of
+the construction.
 
 ## Remarks
 
 - **Why this group and not $\operatorname{Aut}(\mathbb{Q},<)$.** The atoms carry
-  both a rational metric and a compatible order, and the automorphisms preserve
-  both structures. The ordered-metric analogue of the finite-stabiliser
+  both a rational metric and a distinguished order, and the automorphisms
+  preserve both structures without any claim that their induced topologies
+  coincide. The ordered-metric analogue of the finite-stabiliser
   extreme-amenability criterion is supplied separately in the next items, through
   Nešetřil's Ramsey theorem for finite ordered rational metric spaces and the KPT
   correspondence.

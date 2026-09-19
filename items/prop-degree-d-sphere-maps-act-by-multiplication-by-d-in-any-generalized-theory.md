@@ -34,7 +34,7 @@ and the corresponding statements are the identities $1$ and $0$.
 
 [F1] For $r\geq1$, degree is an isomorphism $\pi_r(S^r,b)\to\mathbb Z$ sending the identity to $1$; the group operation is the oriented pinch sum, equivalently cubical concatenation, and two based self-maps of $S^r$ are based homotopic if and only if their degrees agree ([[thm-based-sphere-maps-are-classified-by-geometric-degree]]).
 
-[F2] The degree of a based self-map of an oriented sphere is an integer, additive under composition and invariant under based homotopy ([[def-degree-of-a-self-map-of-an-oriented-sphere]]).
+[F2] The degree of a based self-map of an oriented sphere is an integer, multiplicative under composition and invariant under based homotopy ([[def-degree-of-a-self-map-of-an-oriented-sphere]]).
 
 [F3] A reduced generalized homology theory has based homotopy invariance, and for a finite wedge the summand inclusions induce an isomorphism $\bigoplus_\alpha\widetilde h_n(X_\alpha)\cong\widetilde h_n(\bigvee_\alpha X_\alpha)$ ([[def-reduced-generalized-homology-theory]]).
 

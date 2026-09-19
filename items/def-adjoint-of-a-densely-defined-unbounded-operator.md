@@ -49,9 +49,12 @@ The map $T^*:D(T^*)\to H$, $y\mapsto T^*y$, is the **adjoint** of $T$.
 **Well-definedness.** The functional $\varphi_y$ is linear in $x$ for each
 $y$, so its domain of boundedness $D(T^*)$ is a linear subspace: if
 $\varphi_y,\varphi_{y'}$ are bounded so is $\varphi_{ay+by'}$ for scalars
-$a,b$, by linearity of the inner product in its second argument. On $D(T^*)$
-the map $T^*$ is linear, because $ay+by'$ is represented by $aw+bw'$ and the
-representing vector is unique: by Riesz representation for the Hilbert space
+$a,b$, because the first-variable-linear convention gives
+$\varphi_{ay+by'}=\overline a\,\varphi_y+\overline b\,\varphi_{y'}$. On
+$D(T^*)$ the map $T^*$ is linear: if $y,y'$ are represented by $w,w'$, then
+$ay+by'$ is represented by $aw+bw'$, since
+$\langle x,aw+bw'\rangle=\overline a\langle x,w\rangle+
+\overline b\langle x,w'\rangle$; the representing vector is unique. By Riesz representation for the Hilbert space
 $H$ a vector $w\in H$ is determined by the values $\langle z,w\rangle$ with
 $z$ ranging over $H$, and those values are determined by the functional
 $\widetilde{\varphi_y}$; uniqueness also follows directly by taking

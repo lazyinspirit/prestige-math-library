@@ -24,7 +24,7 @@ Assume the Axiom of Choice and the standing hypothesis (H) of
 $B=(B^1,B^2)$ [[def-d-dimensional-brownian-motion]], the processes
 $$B^1_tB^2_t,\qquad (B^1_t)^2-(B^2_t)^2$$
 are continuous local martingales, and after stopping at the first exit from any
-bounded domain they become true square-integrable martingales.
+origin-centred disc they become true square-integrable martingales.
 
 ## Facts & Assumptions
 
@@ -52,7 +52,7 @@ bounded domain they become true square-integrable martingales.
  
 3.1 Explicit form of the stopped integrals: from [F1] with the cancellation of the drift, $p(B_{t\wedge\tau_R})=p(0)+\int_0^{t\wedge\tau_R}(B^2_s\,dB^1_s+B^1_s\,dB^2_s)$ and $q(B_{t\wedge\tau_R})=q(0)+\int_0^{t\wedge\tau_R}(2B^1_s\,dB^1_s-2B^2_s\,dB^2_s)$, so the martingale representation is explicit. [F1, F2, step 2.1]
  
-4.1 Boundary and consistency cases: at $t=0$ both processes start at $0$; for $R\to\infty$ the local martingales are recovered as limits of the stopped martingales; the harmonic functions are not bounded on the whole plane, which is why the local-martingale statement needs the bounded-domain stopping and why the true-martingale claim is made only for bounded domains; for $B$ starting at the origin the disc contains the starting point for every $R>0$; and AC enters only through [F4]. [F1, F3, F4, step 2.1] ∎
+4.1 Boundary and consistency cases: at $t=0$ both processes start at $0$; for $R\to\infty$ the local martingales are recovered as limits of the stopped martingales; the harmonic functions are not bounded on the whole plane, which is why the local-martingale statement is localized and why the true-martingale claim here is made for exits from bounded discs; for $B$ starting at the origin the disc contains the starting point for every $R>0$; and AC enters only through [F4]. [F1, F3, F4, step 2.1] ∎
 
 ## Source notes
 

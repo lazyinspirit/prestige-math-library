@@ -4,7 +4,7 @@ kind: example
 title: "Development stars form a countable local base"
 status: draft
 origin: pipeline
-deps: [def-moore-spaces-and-developments, def-metric-space, def-metric-ball, def-metric-topology, def-neighbourhood-top, def-cover-refinement-and-local-finiteness]
+deps: [def-moore-spaces-and-developments, def-metric-space, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-metrizable-space, thm-metric-spaces-are-tychonoff-and-perfectly-normal, def-neighbourhood-top, def-cover-refinement-and-local-finiteness]
 justified_by: []
 provenance:
   statement: ai-generated
@@ -34,11 +34,13 @@ in the sense of [[def-moore-spaces-and-developments]].
 
 **Given:** A metric space $(X,d)$, its balls $B(x,r)$, and the covers $\mathcal G_n = \{B(x,2^{-n}) : x \in X\}$.
 
-[F1] Star: $\operatorname{St}(x,\mathcal G_n) = \bigcup \{\, B(z,2^{-n}) : x \in B(z,2^{-n}) \,\}$, and each $\mathcal G_n$ is an open cover because $x \in B(x,2^{-n})$ ([[def-cover-refinement-and-local-finiteness]], [[def-metric-ball]]).
+[F1] Star: $\operatorname{St}(x,\mathcal G_n) = \bigcup \{\, B(z,2^{-n}) : x \in B(z,2^{-n}) \,\}$, and each $\mathcal G_n$ is an open cover because $x \in B(x,2^{-n})$ and every metric ball is open ([[def-cover-refinement-and-local-finiteness]], [[def-metric-ball]], [[thm-metric-open-set-algebra]], claim 1).
 
 [L1] Metric axioms: $d(x,y) \ge 0$ with $d(x,y) = 0$ only for $x = y$, symmetry, and the triangle inequality $d(x,y) \le d(x,z) + d(z,y)$ ([[def-metric-space]]).
 
-[L2] A set is open in the metric topology exactly when each of its points has a ball inside it, and balls are open ([[def-metric-topology]], [[def-metric-ball]]).
+[L2] A set is open in the metric topology exactly when each of its points has a ball inside it, and balls are open ([[def-metric-topology]], [[thm-metric-open-set-algebra]], claim 1).
+
+[L3] A space carrying its metric topology is metrizable, and every metrizable space is $T_3$, hence regular $T_1$ ([[def-metrizable-space]], [[thm-metric-spaces-are-tychonoff-and-perfectly-normal]], claim 4).
 
 ## Verification
 
@@ -48,7 +50,7 @@ in the sense of [[def-moore-spaces-and-developments]].
 
 2.1 Hence $(\mathcal G_n)$ is a development. Let $U$ be open and $x \in U$ ([[def-neighbourhood-top]]). By [L2] there is $\varepsilon > 0$ with $B(x,\varepsilon) \subseteq U$; choose $n$ with $2^{1-n} < \varepsilon$; then step 1.1 gives $\operatorname{St}(x,\mathcal G_n) \subseteq B(x,2^{1-n}) \subseteq B(x,\varepsilon) \subseteq U$. [step 1.1, L2]
 
-3.1 Consequently every metric space is developable, and since metric spaces are regular $T_1$, every metric space is a Moore space; the star family $\{\operatorname{St}(x,\mathcal G_n) : n \in \mathbb N\}$ is the countable local base at $x$ supplied by step 1.1. [step 1.1, step 2.1] ∎
+3.1 Consequently every metric space is developable, and [L3] makes it regular $T_1$, so it is a Moore space; the star family $\{\operatorname{St}(x,\mathcal G_n) : n \in \mathbb N\}$ is the countable local base at $x$ supplied by step 1.1. [step 1.1, step 2.1, L3] ∎
 
 ## Remarks
 

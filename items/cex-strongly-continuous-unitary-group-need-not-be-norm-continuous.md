@@ -53,6 +53,6 @@ continuity fails, confirming the computation below.
 
 1.3 $U(t)=e^{itQ}$ with $Q$ the position operator: by the position-operator example, $U(t)=\int e^{it\lambda}dE(\lambda)$ for the spectral PVM of $Q$, and the calculus identifies this with multiplication by $e^{itx}$; hence the generator of $U$ is $iQ$ by the generation lemma. [A2, A3]
 
-1.4 Norm discontinuity: $U(t)-I$ is multiplication by $h_t(x)=e^{itx}-1$, an operator whose norm is the essential supremum $\|h_t\|_\infty=\sup_{x\in\mathbb R}|e^{itx}-1|=2$ for $t\ne0$; the upper bound is clear and for every $\varepsilon>0$ the set $\{|h_t|>2-\varepsilon\}$ has positive measure, so testing on its indicator gives the reverse inequality. [A4, given]
+1.4 Norm discontinuity: $U(t)-I$ is multiplication by $h_t(x)=e^{itx}-1$, an operator whose norm is the essential supremum $\|h_t\|_\infty=\sup_{x\in\mathbb R}|e^{itx}-1|=2$ for $t\ne0$; the upper bound is clear. For every $\varepsilon>0$ the set $E_\varepsilon:=\{|h_t|>2-\varepsilon\}$ has positive measure, so for some $N$ its intersection $E_{\varepsilon,N}:=E_\varepsilon\cap[-N,N]$ has positive finite measure. Testing on $1_{E_{\varepsilon,N}}/\sqrt{|E_{\varepsilon,N}|}\in L^2(\mathbb R)$ gives the reverse inequality. [A4, given]
 
 2.1 The generator $iQ$ is unbounded by step 1.3, while the generator of a strongly continuous semigroup that is norm continuous at $0$ is bounded; hence $U$ is not norm continuous, and step 1.4 computes the norm distance $2$ directly. [A5, step 1.3, step 1.4] ∎

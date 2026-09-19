@@ -64,7 +64,8 @@ negates under reversal:
 $$\int_{\gamma_1 \ast \gamma_2} f\,dz = \int_{\gamma_1} f\,dz + \int_{\gamma_2} f\,dz , \qquad \int_{\gamma^-} f\,dz = -\int_{\gamma} f\,dz ,$$
 
 whenever $f$ is continuous on the relevant traces, and it is unchanged by an
-increasing reparametrization of the parameter interval. Finally, for a **complex
+orientation-preserving piecewise-$C^1$ reparametrization whose inverse is also
+piecewise $C^1$. Finally, for a **complex
 chain** $\Gamma = \sum_{k<r}m_k\gamma_k$ with trace $\Gamma^\ast$ and a function
 $f$ continuous on $\Gamma^\ast$, the **integral over the chain** is
 
@@ -101,8 +102,9 @@ estimate used when integrals are bounded in the calculus below.
 - **Additivity and reversal are inherited from the parameter integral.** The
 Bochner integral is additive over adjacent intervals and reverses sign under an
 orientation-reversing affine change of parameter; concatenation of contours is
-by definition the two affine pieces, reversal replaces $t$ by $a+b-t$, and an
-increasing reparametrization is absorbed into the Riemann sums. Consequently
+by definition the two affine pieces, reversal replaces $t$ by $a+b-t$, and the
+one-dimensional substitution theorem applies to the piecewise-$C^1$
+reparametrizations just specified. Consequently
 the chain integral is a finite linear combination of contour integrals and
 inherits additivity in the chain: $\int_{\Gamma_1+\Gamma_2} = \int_{\Gamma_1} +
 \int_{\Gamma_2}$ and $\int_{-\Gamma} = -\int_\Gamma$.

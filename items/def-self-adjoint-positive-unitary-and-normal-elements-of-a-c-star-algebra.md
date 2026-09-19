@@ -32,7 +32,7 @@ Let $A$ be a complex C\*-algebra ([[def-c-star-algebra]]) and let $a \in A$.
 If in addition $A$ is unital, with unit $1$
 ([[def-unital-banach-algebra]]), then:
 
-- $a$ is **unitary** when $u^*u = uu^* = 1$.
+- $a$ is **unitary** when $a^*a = aa^* = 1$.
 
 No unitary notion is claimed here for a genuinely nonunital C\*-algebra, where
 the equation $u^*u = uu^* = 1$ has no solution since a noninvertible element

@@ -39,7 +39,7 @@ assumption at time zero.
 
 [F2] The raw natural filtration is $\mathcal F^0_t=\sigma(B_s:0\le s\le t)$, and the usual augmentation contains it. [[def-natural-and-usual-augmented-brownian-filtrations]]
 
-[F3] $t\mapsto B_t(\omega)$ is continuous on $[0,\infty)$ for every $\omega$, and the distance function $x\mapsto\operatorname{dist}(x,C)$ is continuous with $\operatorname{dist}(x,C)=0$ exactly on $C$ because $C$ is closed. [[def-brownian-motion]]
+[F3] By the explicit all-path-continuity hypothesis in the statement, $t\mapsto B_t(\omega)$ is continuous on $[0,\infty)$ for every $\omega$.  The distance function $x\mapsto\operatorname{dist}(x,C)$ is continuous with $\operatorname{dist}(x,C)=0$ exactly on $C$ because $C$ is closed.
 
 [F4] A continuous image of a compact interval is compact, and every sequence in a compact subset of $[0,t]$ has a convergent subsequence; measurable functions build the events below out of countably many coordinate events. [[def-continuous-time-filtration-and-all-pairs-martingale]]
 

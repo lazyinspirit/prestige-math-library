@@ -40,6 +40,6 @@ $$[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]=\mathbb CH_\alpha .$$
 
 **Proof technique:** direct.
 
-1.1 Let $e\in\mathfrak g_\alpha$, $f\in\mathfrak g_{-\alpha}$ and $H\in\mathfrak h$. By [L1] $[e,f]\in\mathfrak h$, and invariance [L2] together with $[H,f]=-\alpha(H)f$ gives $B([e,f],H)=B(e,[H,f])=-\alpha(H)B(e,f)=-B(e,f)B(H_\alpha,H)=B(-B(e,f)H_\alpha,H)$. Since $B|_{\mathfrak h}$ is nondegenerate, $[e,f]=-B(e,f)H_\alpha$. [L1, L2, algebra]
+1.1 Let $e\in\mathfrak g_\alpha$, $f\in\mathfrak g_{-\alpha}$ and $H\in\mathfrak h$. By [L1] $[e,f]\in\mathfrak h$, and invariance [L2] together with $[f,H]=\alpha(H)f$ gives $B([e,f],H)=B(e,[f,H])=\alpha(H)B(e,f)=B(e,f)B(H_\alpha,H)=B(B(e,f)H_\alpha,H)$. Since $B|_{\mathfrak h}$ is nondegenerate, $[e,f]=B(e,f)H_\alpha$. [L1, L2, algebra]
 
-2.1 Hence every bracket of $\mathfrak g_\alpha$ with $\mathfrak g_{-\alpha}$ lies in $\mathbb CH_\alpha$, and by [L3] there are $e\in\mathfrak g_\alpha$, $f\in\mathfrak g_{-\alpha}$ with $B(e,f)\ne0$, for which step 1.1 gives $[e,f]=-B(e,f)H_\alpha\ne0$ because $H_\alpha\ne0$ by [[def-killing-dual-vector-of-a-root]]. Therefore the bracket is exactly the line $\mathbb CH_\alpha$. [L2, L3, step 1.1, algebra] ∎
+2.1 Hence every bracket of $\mathfrak g_\alpha$ with $\mathfrak g_{-\alpha}$ lies in $\mathbb CH_\alpha$, and by [L3] there are $e\in\mathfrak g_\alpha$, $f\in\mathfrak g_{-\alpha}$ with $B(e,f)\ne0$, for which step 1.1 gives $[e,f]=B(e,f)H_\alpha\ne0$ because $H_\alpha\ne0$ by [[def-killing-dual-vector-of-a-root]]. Therefore the bracket is exactly the line $\mathbb CH_\alpha$. [L2, L3, step 1.1, algebra] ∎

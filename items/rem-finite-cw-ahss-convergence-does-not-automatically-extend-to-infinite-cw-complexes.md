@@ -24,9 +24,11 @@ The convergence theorems of
 complexes. Their proofs use boundedness of the skeletal filtration: for each
 fixed total degree only finitely many filtration stages can differ, so both the
 increasing and decreasing families of stable cycles and boundaries stabilize
-after finitely many steps. For an infinite CW complex the skeletal filtration is
-neither bounded nor in general finite in each total degree, and the same argument
-does not apply: one needs separate hypotheses and arguments, such as conditional
+after finitely many steps. For an infinite-dimensional CW complex the skeletal
+filtration is unbounded, and for a general infinite CW complex the finite-CW
+argument cannot simply be invoked. An infinite but finite-dimensional CW complex
+still has a bounded skeletal filtration, so infinitude alone is not the
+obstruction. In the genuinely unbounded case one needs separate hypotheses and arguments, such as conditional
 or strong convergence together with the derived-limit analysis of the filtration.
 No convergence and no failure of convergence is asserted here for infinite
 complexes; this is a limitation of the stated theorems, not a counterexample.

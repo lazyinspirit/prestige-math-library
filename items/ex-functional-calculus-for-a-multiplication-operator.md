@@ -5,7 +5,7 @@ title: Functional calculus for a multiplication operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-axiom-of-choice, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-primitives-of-a-continuous-function, thm-substitution, lem-derivative-of-a-power, def-operator-norm, def-spectrum-and-resolvent-of-a-bounded-operator, thm-spectral-mapping-for-continuous-normal-functional-calculus, def-self-adjoint-positive-unitary-and-normal-operator, def-lebesgue-measure-and-the-lebesgue-sigma-algebra]
+deps: [thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, thm-complex-stone-weierstrass-self-adjoint, def-axiom-of-choice, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-primitives-of-a-continuous-function, thm-substitution, lem-derivative-of-a-power, def-operator-norm, def-spectrum-and-resolvent-of-a-bounded-operator, thm-spectral-mapping-for-continuous-normal-functional-calculus, def-self-adjoint-positive-unitary-and-normal-operator, def-lebesgue-measure-and-the-lebesgue-sigma-algebra]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -30,7 +30,7 @@ Assume AC. Let $H=L^2(0,1)$ with Lebesgue measure and let $T=M_t$ be multiplicat
 
 [A3] $z\in\rho(T)$ exactly when $zI-T$ is bijective with bounded inverse; a self-adjoint operator $T$ is normal, and $f(T)$ is self-adjoint for real $f$ ([[def-spectrum-and-resolvent-of-a-bounded-operator]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
-[A4] For the self-adjoint calculus of a bounded self-adjoint operator there is a unique isometric unital star-homomorphism $C(\sigma(T))\to\mathcal B(H)$ with $z\mapsto T$ and range $C^*(I,T)$; the map $f\mapsto M_f$ is a unital star-isomorphism $C([0,1])\to\{M_f\}$ ([[thm-continuous-functional-calculus-for-bounded-self-adjoint-operators]], [[thm-spectral-mapping-for-continuous-normal-functional-calculus]], [[def-operator-norm]]).
+[A4] For the self-adjoint calculus of a bounded self-adjoint operator there is a unique isometric unital star-homomorphism $C(\sigma(T))\to\mathcal B(H)$ with $z\mapsto T$ and range $C^*(I,T)$; complex polynomials are uniformly dense in $C([0,1])$ ([[thm-continuous-functional-calculus-for-bounded-self-adjoint-operators]], [[thm-complex-stone-weierstrass-self-adjoint]]).
 
 [A5] AC is the hypothesis of the calculus and Hilbert-space suppliers ([[def-axiom-of-choice]]).
 
@@ -48,6 +48,6 @@ Assume AC. Let $H=L^2(0,1)$ with Lebesgue measure and let $T=M_t$ be multiplicat
 
 3.1 Steps 2.1 and 2.2 give $\sigma(M_t)=[0,1]$, and $M_t$ is self-adjoint, so the continuous functional calculus for $M_t$ is defined on $C([0,1])$. [step 1.1, step 2.1, step 2.2, A3]
 
-4.1 $f(M_t)=M_f$ for every $f\in C([0,1])$: the assignment $f\mapsto M_f$ is a unital $\ast$-homomorphism with $z\mapsto M_t$ and range $\{M_f:f\in C([0,1])\}=C^*(I,M_t)$, because the polynomials in $M_t$ are dense there; by uniqueness of the calculus it is the calculus, so $f(M_t)=M_f$. [step 3.1, A4]
+4.1 For $f\in C([0,1])$, the assignment $f\mapsto M_f$ is a unital $\ast$-homomorphism with $z\mapsto M_t$ and $\|M_f\|=\|f\|_\infty$. The upper bound follows from the integral norm; for the lower bound, continuity at a point where $|f|$ attains its maximum gives, for every $\varepsilon>0$, an interval of positive measure on which $|f|>\|f\|_\infty-\varepsilon$, and testing on its normalized indicator gives $\|M_f\|\ge\|f\|_\infty-\varepsilon$. Thus its range is closed. Polynomial density gives $M_f$ as a norm limit of polynomials in $M_t$, while every polynomial in $M_t$ is a multiplier, so the range is exactly $C^*(I,M_t)$. Uniqueness of the calculus now gives $f(M_t)=M_f$. [step 3.1, A1, A2, A4]
 
 5.1 Therefore $\sigma(M_t)=[0,1]$ and the calculus of $M_t$ is multiplication by $f$. [step 3.1, step 4.1, A5] ∎

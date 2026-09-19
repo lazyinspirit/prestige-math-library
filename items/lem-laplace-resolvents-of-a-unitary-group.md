@@ -5,7 +5,7 @@ title: "Laplace resolvents of a unitary group"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-infinitesimal-generator-of-a-unitary-group, def-strongly-continuous-one-parameter-unitary-group, def-bochner-integrable-function, lem-bochner-integral-norm-inequality, thm-bochner-dominated-convergence, thm-bochner-integrability-criterion, thm-bounded-linear-maps-commute-with-bochner-integration, def-strongly-measurable-banach-valued-function, def-banach-valued-simple-function-and-integral, def-countable-choice, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, def-absolutely-continuous-function, def-metric-convergence]
+deps: [def-infinitesimal-generator-of-a-unitary-group, def-strongly-continuous-one-parameter-unitary-group, def-bochner-integrable-function, lem-bochner-integral-norm-inequality, thm-bochner-dominated-convergence, thm-bochner-integrability-criterion, thm-bounded-linear-maps-commute-with-bochner-integration, def-strongly-measurable-banach-valued-function, def-banach-valued-simple-function-and-integral, def-countable-choice, def-dependent-choice, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, def-absolutely-continuous-function, def-metric-convergence]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,7 +22,7 @@ sources:
 
 ## Statement
 
-Assume Countable Choice. Let $U$ be a strongly continuous one-parameter unitary
+Assume Countable Choice and Dependent Choice. Let $U$ be a strongly continuous one-parameter unitary
 group on $H$ with infinitesimal generator $G$, and let $\lambda>0$. Then
 $$Q_\pm(\lambda)x=\int_0^\infty e^{-\lambda t}U(\pm t)x\,dt$$
 is a Bochner integral depending linearly and boundedly on $x$, with
@@ -45,7 +45,7 @@ and $Q_+(\lambda)+Q_-(\lambda)=2\lambda\,Q_+(\lambda)Q_-(\lambda)$.
 
 **Proof technique:** direct.
 
-**Given:** A strongly continuous unitary group $U$ with generator $G$ and $\lambda>0$.
+**Given:** Countable Choice, Dependent Choice, a strongly continuous unitary group $U$ with generator $G$, and $\lambda>0$.
 
 1.1 $t\mapsto e^{-\lambda t}U(\pm t)x$ is continuous and $\int_0^\infty\|e^{-\lambda t}U(\pm t)x\|dt=\|x\|/\lambda<\infty$, so $Q_\pm(\lambda)x$ is a well-defined Bochner integral, linear in $x$ and bounded with $\|Q_\pm(\lambda)\|\le1/\lambda$. [A1]
 

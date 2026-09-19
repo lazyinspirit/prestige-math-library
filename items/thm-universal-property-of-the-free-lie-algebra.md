@@ -5,7 +5,7 @@ title: Universal property of the free Lie algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-free-lie-algebra-on-a-vector-space, thm-universal-property-of-the-tensor-algebra, thm-poincare-birkhoff-witt, def-lie-algebra-over-a-field]
+deps: [def-free-lie-algebra-on-a-vector-space, thm-universal-property-of-the-tensor-algebra, def-lie-algebra-over-a-field, cor-every-vector-space-has-a-basis, cor-the-enveloping-algebra-has-no-hidden-linear-relations-in-degree-one, lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -23,7 +23,7 @@ proof_strategy: direct
 Let $V$ be a complex vector space and let $\mathfrak g$ be a complex Lie
 algebra ([[def-lie-algebra-over-a-field]]). Every linear map
 $f:V\to\mathfrak g$ extends uniquely to a homomorphism of Lie algebras
-$L(V)\to\mathfrak g$.
+$L(V)\to\mathfrak g$. Assume the Axiom of Choice for the basis used below.
 
 ## Facts & Assumptions
 
@@ -33,14 +33,16 @@ $L(V)\to\mathfrak g$.
 
 [L2] Every linear map $V\to A$ into a unital associative algebra $A$ extends uniquely to a unital algebra homomorphism $T(V)\to A$ ([[thm-universal-property-of-the-tensor-algebra]]).
 
-[L3] The canonical inclusion $\mathfrak g\hookrightarrow U(\mathfrak g)$, $x\mapsto x$, into the universal enveloping algebra is injective, and it carries $[x,y]$ to $xy-yx$ ([[thm-poincare-birkhoff-witt]]).
+[L3] The canonical map $\iota_{\mathfrak g}:\mathfrak g\to U(\mathfrak g)$ satisfies $\iota_{\mathfrak g}([x,y])=\iota_{\mathfrak g}(x)\iota_{\mathfrak g}(y)-\iota_{\mathfrak g}(y)\iota_{\mathfrak g}(x)$ ([[lem-the-canonical-map-to-the-enveloping-algebra-is-a-lie-algebra-homomorphism-into-the-commutator-algebra]]).
+
+[L4] Under the Axiom of Choice, $\mathfrak g$ has a basis; after ordering it, the degree-one PBW corollary makes $\iota_{\mathfrak g}$ injective ([[cor-every-vector-space-has-a-basis]], [[cor-the-enveloping-algebra-has-no-hidden-linear-relations-in-degree-one]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [L2] applied to the composition of $f$ with the inclusion $\mathfrak g\hookrightarrow U(\mathfrak g)$, there is a unique unital algebra homomorphism $\widehat f:T(V)\to U(\mathfrak g)$ extending $f$. [L2, L3, algebra]
+1.1 By [L2] applied to the composition of $f$ with the injective canonical map $\iota_{\mathfrak g}:\mathfrak g\hookrightarrow U(\mathfrak g)$, there is a unique unital algebra homomorphism $\widehat f:T(V)\to U(\mathfrak g)$ extending $\iota_{\mathfrak g}\circ f$. [L2, L4, algebra]
 
-2.1 The restriction of $\widehat f$ to $L(V)$ takes values in the image of $\mathfrak g$ and is a Lie-algebra homomorphism: for $x,y\in L(V)$ one has $\widehat f([x,y])=\widehat f(x)\widehat f(y)-\widehat f(y)\widehat f(x)$, and by induction on the generation of $L(V)$ each $\widehat f(x)$ lies in the image of $\mathfrak g$, where the bracket of two images is the image of the bracket by [L3]; hence the composite $g:L(V)\to\mathfrak g$ obtained by restricting $\widehat f$ and inverting the inclusion is a Lie homomorphism $L(V)\to\mathfrak g$ extending $f$. [L1, L3, step 1.1, algebra]
+2.1 The restriction of $\widehat f$ to $L(V)$ takes values in the image of $\mathfrak g$ and is a Lie-algebra homomorphism: for $x,y\in L(V)$ one has $\widehat f([x,y])=\widehat f(x)\widehat f(y)-\widehat f(y)\widehat f(x)$, and by induction on the generation of $L(V)$ each $\widehat f(x)$ lies in the image of $\mathfrak g$, where the bracket of two images is the image of the bracket by [L3]; hence the composite $g:L(V)\to\mathfrak g$ obtained by restricting $\widehat f$ and inverting the injective canonical map from [L4] is a Lie homomorphism $L(V)\to\mathfrak g$ extending $f$. [L1, L3, L4, step 1.1, algebra]
 
 3.1 Uniqueness: if $g_1,g_2:L(V)\to\mathfrak g$ are Lie homomorphisms agreeing on $V$, then the set of $x\in L(V)$ with $g_1(x)=g_2(x)$ is a Lie subalgebra containing $V$; since $L(V)$ is generated as a Lie algebra by $V$, it is all of $L(V)$. [L1, algebra] ∎

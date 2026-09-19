@@ -5,7 +5,7 @@ title: Brackets of root spaces
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-derivation-of-a-lie-algebra]
+deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-derivation-of-a-lie-algebra, prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -32,7 +32,7 @@ for all $\alpha,\beta\in\mathfrak h^*$.
 
 **Given:** Such $\mathfrak g,\mathfrak h$ and functionals $\alpha,\beta$.
 
-[L1] For $H\in\mathfrak h$, the operator $\operatorname{ad}_H$ is a derivation: $\operatorname{ad}_H[x,y]=[\operatorname{ad}_Hx,y]+[x,\operatorname{ad}_Hy]$ ([[def-derivation-of-a-lie-algebra]]); this is the Jacobi identity rewritten.
+[L1] For $H\in\mathfrak h$, the operator $\operatorname{ad}_H$ of [[def-derivation-of-a-lie-algebra]] is a derivation: $\operatorname{ad}_H[x,y]=[\operatorname{ad}_Hx,y]+[x,\operatorname{ad}_Hy]$ ([[prop-derivations-form-a-lie-algebra-and-inner-derivations-form-an-ideal]]).
 
 [L2] The root spaces are the eigenspaces $\mathfrak g_\gamma=\{x:[H,x]=\gamma(H)x\text{ for all }H\in\mathfrak h\}$ and the root-space decomposition holds ([[def-root-and-root-space-relative-to-a-cartan-subalgebra]], [[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]).
 

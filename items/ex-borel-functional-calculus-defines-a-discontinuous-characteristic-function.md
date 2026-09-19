@@ -33,7 +33,7 @@ subspace and whose kernel is $L^2((\tfrac12,1])$.
 
 [A2] The indicator $\mathbf 1_{[0,1/2]}$ is bounded Borel on $[0,1]$ and satisfies $\mathbf 1_{[0,1/2]}^2=\mathbf 1_{[0,1/2]}=\overline{\mathbf 1_{[0,1/2]}}$, so its calculus value is an orthogonal projection equal to the spectral projection $E([0,1/2])$ ([[thm-borel-functional-calculus-for-bounded-normal-operators]], [[cor-spectral-projections-and-resolution-of-the-identity]]).
 
-[A3] In $L^2$, a multiplication operator $M_g$ has range the classes vanishing off $\{g\ne0\}$ and kernel the classes vanishing off $\{g=0\}$; the classes vanishing almost everywhere on a set form a closed subspace, and $L^2(A)$ for a Borel $A\subseteq[0,1]$ is the subspace of classes supported in $A$ ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-orthogonality-and-orthogonal-complement]], [[def-hilbert-space]]).
+[A3] In $L^2$, multiplication by an indicator $\mathbf 1_A$ has range exactly the classes supported in $A$ and kernel exactly the classes supported in the complement of $A$; these are closed subspaces, and $L^2(A)$ for a Borel $A\subseteq[0,1]$ denotes the subspace of classes supported in $A$ ([[def-l-p-space-as-a-quotient-by-null-functions]], [[def-orthogonality-and-orthogonal-complement]], [[def-hilbert-space]]).
 
 [A4] AC is the declared choice hypothesis of this page from the construction item onward ([[def-axiom-of-choice]]).
 

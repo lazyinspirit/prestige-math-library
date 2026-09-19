@@ -46,7 +46,7 @@ $$(T+i)^{-1}=-R_T(-i),\qquad C_T=I+2iR_T(-i)=I-2i(T+i)^{-1}.$$
    unitary ([[def-bounded-linear-operator]]). Concretely $C^*Cx=x$ for
    $x\in D(T)$ by direct substitution, and both sides are continuous.
 3. *$\ker(I-C)=\{0\}$, and $I-C=2i(T+i)^{-1}$, $I+C=2T(T+i)^{-1}$ as maps
-   with domains $H$ and $D(T)$ respectively.* Indeed
+   on $H$.* Indeed
    $I-C=2i(T+i)^{-1}$ is injective with inverse $(2i)^{-1}(T+i)$, while
    $(I+C)(T+i)x=(T+i)x+(T-i)x=2Tx$ for $x\in D(T)$.
 4. *Domain recovery.* $\operatorname{ran}(I-C)=D(T)$: by item 3,

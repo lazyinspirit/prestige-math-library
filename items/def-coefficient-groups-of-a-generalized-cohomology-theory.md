@@ -34,8 +34,10 @@ $$\widetilde h^{n-p}(S^0)\xrightarrow{\ \sigma\ }\widetilde h^{n-p+1}(S^1) \xrig
 gives, for every $p\geq0$ and every $n\in\mathbb Z$, a canonical isomorphism
 $$\widetilde h^{n}(S^p)\cong h^{n-p}(*).$$
 For $p=0$ this is the identity $\widetilde h^n(S^0)=h^n(*)$. These
-identifications are natural for based maps of spheres in the sense of the
-naturality of $\sigma$; no dimension axiom is imposed, so the groups
+identifications are compatible with the iterated suspension maps used to
+construct them. An arbitrary based self-map of a sphere need not act as the
+identity under these identifications; its induced endomorphism is transported
+to the corresponding endomorphism of the coefficient group. No dimension axiom is imposed, so the groups
 $h^q(*)$ may be nonzero for infinitely many $q$.
 
 ## Source notes

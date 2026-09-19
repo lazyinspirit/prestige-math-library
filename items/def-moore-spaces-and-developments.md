@@ -46,8 +46,8 @@ regular $T_1$ space ([[def-regular-and-t3-spaces]]) that is developable.
 
 **Every development can be made decreasing, and then it still is one.** Let
 $(\mathcal G_n)$ be a development and let $\mathcal G'_n$ be the family of all
-intersections $G_1 \cap \dots \cap G_n$ with $G_i \in \mathcal G_i$ for
-$i \le n$. Each $\mathcal G'_n$ is an open cover of $X$; a member of
+intersections $G_0 \cap \dots \cap G_n$ with $G_i \in \mathcal G_i$ for
+$0 \le i \le n$. Each $\mathcal G'_n$ is an open cover of $X$; a member of
 $\mathcal G'_m$ is contained in a member of $\mathcal G_i$ whenever $i \le m$,
 so $\mathcal G'_m$ refines $\mathcal G_i$ and
 $$\operatorname{St}(x, \mathcal G'_m) \subseteq \operatorname{St}(x, \mathcal G_i) \qquad (i \le m);$$
@@ -79,6 +79,6 @@ particular every Moore space is first countable.
   the local Bing-style argument recorded on this page.
 
 - **The normalization uses no choice.** The family $\mathcal G'_n$ is described
-  by a formula from the given $\mathcal G_1, \dots, \mathcal G_n$, and per point
+  by a formula from the given $\mathcal G_0, \dots, \mathcal G_n$, and per point
   one selects one member of each of finitely many covers, which is finite choice
   and hence available in $\mathrm{ZF}$.

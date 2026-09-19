@@ -30,10 +30,10 @@ the operator of [[thm-bounded-borel-pvm-integral]]. Then:
    $a,b\in\mathbb C$;
 2. $\Phi_E$ is multiplicative: $\Phi_E(fg)=\Phi_E(f)\Phi_E(g)$;
 3. $\Phi_E$ preserves conjugation: $\Phi_E(\overline f)=\Phi_E(f)^*$;
-4. if $(f_n)$ are bounded measurable with $\sup_n\|f_n\|_\infty<\infty$ and
-   $f_n\to f$ pointwise $E$-almost everywhere, meaning $E_x$-almost everywhere
-   for every $x\in H$, then $\Phi_E(f_n)\to\Phi_E(f)$ in the strong operator
-   topology.
+4. if $(f_n)$ are bounded measurable with $\sup_n\|f_n\|_\infty<\infty$, $f$
+   is bounded measurable, and $f_n\to f$ pointwise $E$-almost everywhere,
+   meaning $E_x$-almost everywhere for every $x\in H$, then
+   $\Phi_E(f_n)\to\Phi_E(f)$ in the strong operator topology.
 
 ## Facts & Assumptions
 

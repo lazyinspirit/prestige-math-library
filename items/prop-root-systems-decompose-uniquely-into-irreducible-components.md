@@ -27,12 +27,14 @@ Let $\Phi\subseteq E$ be a reduced crystallographic root system. Then $\Phi$ is
 the disjoint union $\Phi=\Phi_1\sqcup\cdots\sqcup\Phi_m$ of root systems
 $\Phi_i\subseteq E_i:=\operatorname{span}\Phi_i$ that are irreducible, pairwise
 orthogonal, and span $E$ as an orthogonal direct sum
-$E=E_1\oplus\cdots\oplus E_m$. Moreover this decomposition is unique up to the
-order of its terms: if $\Phi=\Psi_1\sqcup\cdots\sqcup\Psi_k$ is a second
-decomposition into pairwise orthogonal root systems $\Psi_j$ spanning pairwise
-orthogonal subspaces $F_j$ with $E=\bigoplus_jF_j$, then each $\Psi_j$ is a
-union of some of the $\Phi_i$, and each $\Phi_i$ is contained in some
-$\Psi_j$.
+$E=E_1\oplus\cdots\oplus E_m$. More generally, if
+$\Phi=\Psi_1\sqcup\cdots\sqcup\Psi_k$ is any decomposition into pairwise
+orthogonal root systems $\Psi_j$ spanning pairwise orthogonal subspaces $F_j$
+with $E=\bigoplus_jF_j$, then each $\Psi_j$ is a union of some of the
+$\Phi_i$, and each $\Phi_i$ is contained in some $\Psi_j$. If the $\Psi_j$
+are also irreducible, the two decompositions agree up to the order of their
+terms. Thus the decomposition into irreducible components is unique up to
+order.
 
 ## Facts & Assumptions
 

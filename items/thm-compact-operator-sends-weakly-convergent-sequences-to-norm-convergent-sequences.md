@@ -5,7 +5,7 @@ title: Compact operator sends weakly convergent sequences to norm convergent seq
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, def-transpose-of-a-bounded-operator, thm-sequential-characterization-of-compact-operators, thm-uniform-boundedness-principle, thm-canonical-bidual-map-is-an-isometry, cor-dual-separates-points, def-weak-convergence-of-nets-and-sequences, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, def-metric-convergence, def-sequence, lem-index-map-grows]
+deps: [def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-banach-space, def-transpose-of-a-bounded-operator, thm-sequential-characterization-of-compact-operators, thm-uniform-boundedness-principle, thm-canonical-bidual-map-is-an-isometry, rem-continuous-dual-completeness-and-pairing, cor-dual-separates-points, def-weak-convergence-of-nets-and-sequences, def-axiom-of-choice, lem-ac-supplies-countable-and-dependent-choice-for-banach-integration, def-dependent-choice, def-metric-convergence, def-sequence, lem-index-map-grows]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -29,7 +29,7 @@ $\|Tx_n-Tx\|\to0$ ([[def-metric-convergence]]).
 
 ## Facts & Assumptions
 
-[A1] Under the Axiom of Dependent Choice, a family of bounded linear operators on a Banach space that is pointwise bounded is norm bounded ([[thm-uniform-boundedness-principle]], [[def-banach-space]]); the canonical map $J_X:X\to X^{**}$ is a linear isometry ([[thm-canonical-bidual-map-is-an-isometry]]).
+[A1] Under the Axiom of Dependent Choice, a family of bounded linear operators on a Banach space that is pointwise bounded is norm bounded ([[thm-uniform-boundedness-principle]], [[def-banach-space]]); the continuous dual $X^*$ is Banach even when $X$ is incomplete ([[rem-continuous-dual-completeness-and-pairing]]), and the canonical map $J_X:X\to X^{**}$ is a linear isometry ([[thm-canonical-bidual-map-is-an-isometry]]).
 
 [A2] $x_n\rightharpoonup x$ means $f(x_n)\to f(x)$ for every $f\in X^*$; the transpose satisfies $(T^*g)(x)=g(Tx)$ and $T^*g\in X^*$ for $g\in Y^*$ ([[def-weak-convergence-of-nets-and-sequences]], [[def-transpose-of-a-bounded-operator]], [[def-bounded-linear-operator]]).
 

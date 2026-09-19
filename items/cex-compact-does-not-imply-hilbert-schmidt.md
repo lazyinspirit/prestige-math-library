@@ -5,7 +5,7 @@ title: Compact does not imply Hilbert Schmidt
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-diagonal-schatten-class-criteria-on-ell-two, thm-p-series-rational, def-hilbert-schmidt-operator, def-compact-linear-operator, def-trace-class-operator, def-square-summable-family-on-an-arbitrary-index-set, def-countable-choice]
+deps: [ex-diagonal-schatten-class-criteria-on-ell-two, thm-p-series-rational, def-hilbert-schmidt-operator, thm-hilbert-schmidt-norm-is-basis-independent, def-compact-linear-operator, def-trace-class-operator, def-square-summable-family-on-an-arbitrary-index-set, def-countable-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -31,7 +31,7 @@ imply the Hilbert–Schmidt property.
 
 **Given:** Countable Choice, the space $\ell^2$ with its standard basis $(u_n)$, and the diagonal operator with $d_0=0$, $d_n=n^{-1/2}$ for $n\ge1$.
 
-[A1] **Diagonal criteria.** For a diagonal operator with bounded sequence $d$, boundedness, compactness, the Hilbert–Schmidt criterion $\sum_n|d_n|^2<+\infty$ relative to the standard basis, and the trace-class criterion $\sum_n|d_n|<+\infty$ hold as in the diagonal example; the Hilbert–Schmidt property and norm are basis-independent, and the standard basis is orthonormal with $\|u_n\|_2=1$ ([[ex-diagonal-schatten-class-criteria-on-ell-two]], [[def-hilbert-schmidt-operator]], [[def-square-summable-family-on-an-arbitrary-index-set]]).
+[A1] **Diagonal criteria.** For a diagonal operator with bounded sequence $d$, boundedness, compactness, the Hilbert–Schmidt criterion $\sum_n|d_n|^2<+\infty$ relative to the standard basis, and the trace-class criterion $\sum_n|d_n|<+\infty$ hold as in the diagonal example; the Hilbert–Schmidt property and norm are basis-independent, and the standard basis is orthonormal with $\|u_n\|_2=1$ ([[ex-diagonal-schatten-class-criteria-on-ell-two]], [[def-hilbert-schmidt-operator]], [[thm-hilbert-schmidt-norm-is-basis-independent]], [[def-square-summable-family-on-an-arbitrary-index-set]]).
 
 [A2] **Divergence and convergence of $p$-series.** For rational $p>1$ the series $\sum_{k\ge1}k^{-p}$ converges, while at $p=1$ the harmonic series $\sum_{k\ge1}1/k$ diverges; in particular $\sum_{n\ge1}n^{-1/2}$ is not summable because its terms dominate the harmonic terms for $n\ge1$ ([[thm-p-series-rational]]).
 
@@ -48,4 +48,3 @@ imply the Hilbert–Schmidt property.
 1.2 **$T$ is not Hilbert–Schmidt.** Relative to the standard basis, $\sum_n\|Tu_n\|_2^2=\sum_{n\ge1}n^{-1}=+\infty$ by the divergence of the harmonic series [A2], so $T$ is not Hilbert–Schmidt relative to the standard basis by the diagonal criterion [A1]; since the Hilbert–Schmidt property and its norm are independent of the chosen Hilbert basis [A1], $T$ is not Hilbert–Schmidt relative to any Hilbert basis. [A1, A2]
 
 2.1 **Conclusion.** The operator $T$ is compact by [step 1.1] and fails to be Hilbert–Schmidt by [step 1.2]; hence compactness does not imply the Hilbert–Schmidt property. [step 1.1, step 1.2, A3] ∎
-

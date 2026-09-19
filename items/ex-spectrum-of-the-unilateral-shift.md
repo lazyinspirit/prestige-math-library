@@ -5,7 +5,7 @@ title: Spectrum of the unilateral shift
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-point-continuous-and-residual-spectrum, def-approximate-point-and-compression-spectrum, ex-bounded-operators-form-a-noncommutative-banach-algebra, rem-ell-p-is-l-p-of-counting-measure, def-counting-measure, prop-counting-measure-is-a-measure, lem-complex-lp-completeness-density-and-inner-product, def-countable-choice, def-bounded-below-operator, def-spectrum-and-resolvent-set-in-a-banach-algebra]
+deps: [def-point-continuous-and-residual-spectrum, def-approximate-point-and-compression-spectrum, ex-bounded-operators-form-a-noncommutative-banach-algebra, rem-ell-p-is-l-p-of-counting-measure, def-counting-measure, prop-counting-measure-is-a-measure, lem-complex-lp-completeness-density-and-inner-product, def-countable-choice, def-axiom-of-choice, def-bounded-below-operator, def-spectrum-and-resolvent-set-in-a-banach-algebra]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -19,7 +19,7 @@ sources:
 
 ## Example
 
-Assume Countable Choice ([[def-countable-choice]]). Let
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let
 $\ell^2 = \ell^2(\mathbb N_0)$ be identified with $L^2$ of the counting
 measure on $\mathbb N_0 = \{0,1,2,\dots\}$
 ([[rem-ell-p-is-l-p-of-counting-measure]],
@@ -44,7 +44,7 @@ $\mathcal B(\ell^2)$ of
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, the Hilbert space $\ell^2 = \ell^2(\mathbb N_0)$ with orthonormal coordinate vectors $e_n$, and the isometric coordinate shift $S e_n = e_{n+1}$.
+**Given:** The Axiom of Choice, the Hilbert space $\ell^2 = \ell^2(\mathbb N_0)$ with orthonormal coordinate vectors $e_n$, and the isometric coordinate shift $S e_n = e_{n+1}$.
 
 [L1] Elements of $\ell^2$ are determined by their coordinates, almost-everywhere equality for the counting measure is pointwise equality, and $\|x\|_2^2 = \sum_n|x_n|^2$; the inner product is $\langle x,y\rangle = \sum_nx_n\overline{y_n}$ ([[rem-ell-p-is-l-p-of-counting-measure]], [[def-counting-measure]], [[prop-counting-measure-is-a-measure]], [[lem-complex-lp-completeness-density-and-inner-product]]).
 

@@ -29,9 +29,10 @@ is [[lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension]]; and
 the classification statement is
 [[thm-unitary-equivalence-classified-by-measure-class-and-multiplicity]]. In
 that theorem the multiplicity is the almost-everywhere dimension of the
-direct-integral fiber, not the dimension of the eigenspace $\ker(T-zI)$ at a
-non-atomic point, which is zero almost everywhere by
-[[cex-a-normal-operator-need-not-have-any-eigenvectors]].
+direct-integral fiber, not the dimension of the eigenspace $\ker(T-zI)$. The
+two notions can differ drastically: [[cex-a-normal-operator-need-not-have-any-eigenvectors]]
+exhibits a normal operator with spectrum $[0,1]$ but no nonzero eigenspace at
+any spectral point.
 
 General measurable fields of Hilbert spaces beyond the standard countable
 fibers used here, and nonseparable multiplicity theory, are **orientation

@@ -31,11 +31,13 @@ $$0=V_0\subset V_1\subset V_2\subset\cdots\subset V_n=E_b,\qquad\dim_{\mathbb C}
 The **flag bundle** $q:\operatorname{Fl}(E)\to B$ is the bundle of complete
 flags: its points are the pairs $(b,V_\bullet)$, topologized by the iterated
 projective-bundle construction, which exhibits it as a fiber bundle with fiber
-the full flag manifold $U(n)/T^n$. Concretely, put $B_0:=B$, $E_0:=E$, and
-recursively $B_{i+1}:=P(E_i^{\perp})$ where $E_i^{\perp}\subseteq\pi_i^*E$ is
-the metric-orthogonal complement of the tautological line over
-$B_i=P(E_{i-1}^{\perp})$ and $\pi_i$ is the projection; the composite
-$q:B_{n-1}\to B$ is $\operatorname{Fl}(E)$. All intermediate bases are
+the full flag manifold $U(n)/T^n$. Concretely, put $B_0:=B$ and
+$E^{(0)}:=E$. For $r=1,\dots,n-1$, let $B_r:=P(E^{(r-1)})$ with projection
+$\pi_r:B_r\to B_{r-1}$, let $L_r\subseteq\pi_r^*E^{(r-1)}$ be its
+tautological line, and let $E^{(r)}:=L_r^\perp$ inside
+$\pi_r^*E^{(r-1)}$. Pulling the earlier $L_j$ through the later projections
+and taking $L_n:=E^{(n-1)}$ gives the $n$ ordered orthogonal lines. The
+composite $q:B_{n-1}\to B$ is $\operatorname{Fl}(E)$. All intermediate bases are
 numerable projective bundles with compact fiber and CW-type total space by
 [[lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type]].
 

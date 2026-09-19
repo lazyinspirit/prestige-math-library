@@ -44,7 +44,7 @@ $\operatorname{ran}p \oplus C$, with the complement coordinate set to zero.
 
 [L2] A bounded linear map is differentiable everywhere with derivative itself, and is smooth of class $C^\infty$ as a map of Banach manifolds ([[def-frechet-derivative-between-banach-spaces]], [[def-c-k-map-between-banach-spaces]]).
 
-[L3] Fredholm operator and index: finite-dimensional kernel, closed range and finite-dimensional cokernel, index $\dim\ker - \dim\operatorname{coker}$ ([[def-fredholm-operator-cokernel-and-index]]); the local finite-dimensional reduction produces coordinates in which a Fredholm map is $(u,v)\mapsto(u,g(u,v))$ with $u$ ranging over an open subset of a complement of the range and $g$ taking values in a finite-dimensional complement of the range ([[lem-local-finite-dimensional-reduction-for-a-fredholm-map]]).
+[L3] Fredholm operator and index: finite-dimensional kernel, closed range and finite-dimensional cokernel, index $\dim\ker - \dim\operatorname{coker}$ ([[def-fredholm-operator-cokernel-and-index]]); the local finite-dimensional reduction produces coordinates in which a Fredholm map is $(u,v)\mapsto(u,g(u,v))$ with $u$ ranging over an open subset of the range, $v$ over an open subset of the finite-dimensional kernel, and $g$ taking values in a finite-dimensional complement of the range ([[lem-local-finite-dimensional-reduction-for-a-fredholm-map]]).
 
 
 

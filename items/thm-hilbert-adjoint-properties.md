@@ -20,9 +20,9 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $S\in\mathcal B(H,K)$, $T\in\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:
+Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\in\mathcal B(H,K)$ and $T\in\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:
 
-1. $(aT+bS)^*=\overline a\,T^*+\overline b\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;
+1. $(aR+bS)^*=\overline a\,R^*+\overline b\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;
 2. $(TS)^*=S^*T^*$;
 3. $T^{**}=T$ and $\|T^*\|=\|T\|$;
 4. $\|T^*T\|=\|T\|^2$.
@@ -43,10 +43,10 @@ Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spa
 
 **Proof technique:** direct.
 
-**Given:** Countable Choice, Hilbert spaces $H,K,L$ and bounded operators $S\in\mathcal B(H,K)$, $T\in\mathcal B(K,L)$.
+**Given:** Countable Choice, Hilbert spaces $H,K,L$ and bounded operators $R,S\in\mathcal B(H,K)$, $T\in\mathcal B(K,L)$.
 
-1.1 For unitarity of the adjoint and conjugate-linearity in the operator: if $U,V\in\mathcal B(H,K)$ both satisfy the defining identity and $y\in K$, then $\langle x,(U-V)y\rangle=0$ for all $x$, in particular for $x=(U-V)y$, so $(U-V)y=0$; and for scalars $a,b$ the pairing identities $\langle(aT+bS)x,y\rangle=a\langle Tx,y\rangle+b\langle Sx,y\rangle=\langle x,\overline aT^*y+\overline bS^*y\rangle$ hold for all $x,y$, so $(aT+bS)^*=\overline aT^*+\overline bS^*$. [A1, A2, A5]
+1.1 For uniqueness of the adjoint and conjugate-linearity in the operator, let $U,V\in\mathcal B(K,H)$ both satisfy the defining adjoint identity for the same operator in $\mathcal B(H,K)$. For $y\in K$, one has $\langle x,(U-V)y\rangle_H=0$ for every $x\in H$; taking $x=(U-V)y$ gives $(U-V)y=0$. For scalars $a,b$, the identities $\langle(aR+bS)x,y\rangle_K=a\langle Rx,y\rangle_K+b\langle Sx,y\rangle_K=\langle x,\overline aR^*y+\overline bS^*y\rangle_H$ hold for all $x\in H$ and $y\in K$, so $(aR+bS)^*=\overline aR^*+\overline bS^*$. [A1, A2, A5]
 
-2.1 Composition and involution: for $T\in\mathcal B(K,L)$ and $S\in\mathcal B(H,K)$, $\langle x,S^*T^*y\rangle_K=\langle Sx,T^*y\rangle_L=\langle TSx,y\rangle_L$ for all $x\in H$ and $y\in L$, so $(TS)^*=S^*T^*$ by uniqueness; likewise $\langle x,T^{**}y\rangle_K=\overline{\langle T^*y,x\rangle_H}=\overline{\langle y,Tx\rangle_L}=\langle Tx,y\rangle_L$ for all $x,y$, so $T^{**}=T$. [step 1.1, A1, A2]
+2.1 Composition and involution: for $x\in H$ and $y\in L$, $\langle x,S^*T^*y\rangle_H=\langle Sx,T^*y\rangle_K=\langle TSx,y\rangle_L$, so $(TS)^*=S^*T^*$ by uniqueness. Likewise, for $x\in K$ and $y\in L$, the defining identity for $T^*$ gives $\langle T^*y,x\rangle_K=\langle y,T^{**}x\rangle_L$; conjugate symmetry and the defining identity for $T$ give $\langle T^{**}x,y\rangle_L=\langle x,T^*y\rangle_K=\langle Tx,y\rangle_L$, so $T^{**}=T$ by uniqueness. [step 1.1, A1, A2]
 
 3.1 Norms: Cauchy–Schwarz gives $\|T^*y\|^2=\langle T^*y,T^*y\rangle_K=\langle T(T^*y),y\rangle_L\le\|T\|\,\|T^*y\|\,\|y\|$, hence $\|T^*y\|\le\|T\|\,\|y\|$ (trivially when $T^*y=0$) and $\|T^*\|\le\|T\|$; applying this to $T^*$ and using $T^{**}=T$ gives $\|T^*\|=\|T\|$. Moreover $\|T^*T\|\le\|T^*\|\,\|T\|=\|T\|^2$, while for $\|x\|\le1$ one has $\|Tx\|^2=\langle x,T^*Tx\rangle_K\le\|x\|\,\|T^*Tx\|\le\|T^*T\|$, so $\|T\|^2\le\|T^*T\|$ and hence $\|T^*T\|=\|T\|^2$. [step 2.1, A3, A4, algebra] ∎

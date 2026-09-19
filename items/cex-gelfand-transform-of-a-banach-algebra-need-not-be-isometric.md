@@ -5,7 +5,7 @@ title: Gelfand transform of a Banach algebra need not be isometric
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-gelfand-transform, thm-characters-on-a-unital-banach-algebra-are-continuous, thm-spectrum-as-character-values]
+deps: [def-gelfand-transform, thm-characters-on-a-unital-banach-algebra-are-continuous]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -31,8 +31,6 @@ algebra is isometric, that is, that $\|\hat a\|_\infty = \|a\|$ for all $a$, is
 
 [L1] A character of a nonzero unital complex Banach algebra is unital and continuous with $|\chi(x)| \le \|x\|$; it is complex-linear and multiplicative ([[thm-characters-on-a-unital-banach-algebra-are-continuous]].
 
-[L2] $\sigma_A(a) = \{\chi(a) : \chi \in \Delta(A)\}$ for a commutative unital complex Banach algebra ([[thm-spectrum-as-character-values]]).
-
 ## Counterexample
 
 **Proof technique:** direct.
@@ -41,7 +39,7 @@ algebra is isometric, that is, that $\|\hat a\|_\infty = \|a\|$ for all $a$, is
 
 1.2 Every character $\chi$ of $A$ satisfies $\chi(\varepsilon)^2 = \chi(\varepsilon^2) = \chi(0) = 0$ by multiplicativity [L1], so $\chi(\varepsilon) = 0$ since $\mathbb C$ is a field; hence $\chi(a + b\varepsilon) = a\chi(1) + b\chi(\varepsilon) = a$ by linearity and unitality [L1]; in particular $\Delta(A)$ consists of the single character $\chi_0(a+b\varepsilon) = a$. [1.1, L1, algebra]
 
-2.1 The element $\varepsilon = 0 + 1\varepsilon$ has norm $\|\varepsilon\| = 1 \ne 0$, while its Gelfand transform vanishes identically: $\hat\varepsilon(\chi_0) = \chi_0(\varepsilon) = 0$ by [step 1.2]; hence $\|\hat\varepsilon\|_\infty = 0 \ne 1 = \|\varepsilon\|$, so the Gelfand transform of $A$ is not isometric (and not injective, since $\varepsilon \ne 0$ has zero transform). [step 1.2, L1, L2, algebra] ∎
+2.1 The element $\varepsilon = 0 + 1\varepsilon$ has norm $\|\varepsilon\| = 1 \ne 0$, while its Gelfand transform vanishes identically: $\hat\varepsilon(\chi_0) = \chi_0(\varepsilon) = 0$ by [step 1.2]; hence $\|\hat\varepsilon\|_\infty = 0 \ne 1 = \|\varepsilon\|$, so the Gelfand transform of $A$ is not isometric (and not injective, since $\varepsilon \ne 0$ has zero transform). [step 1.2, L1, algebra] ∎
 
 ## Remarks
 

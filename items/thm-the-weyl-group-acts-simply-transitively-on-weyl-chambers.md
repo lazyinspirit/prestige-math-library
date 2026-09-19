@@ -36,7 +36,7 @@ there is exactly one $w\in W$ with $w(C)=C'$.
 
 [L1] Each root reflection $s_\alpha$ is orthogonal, fixes $L_\alpha$ pointwise, and negates $\alpha$; $W$ is finite and acts faithfully on $\Phi$ ([[def-weyl-group-of-a-root-system]], [[prop-the-weyl-group-is-finite-and-acts-faithfully-on-the-root-system]]).
 
-[L2] The complement of $\bigcup_{\alpha\in\Phi}L_\alpha$ is a finite union of open convex cones, its components are the open chambers, and each chamber is defined by a system of strict inequalities $\pm(x,\alpha)>0$; the fundamental chamber $C_+$ is a chamber, and a point $x$ of a chamber satisfies $(x,\alpha)>0$ for every positive root $\alpha$ when the chamber is $C_+$ or a Weyl image of $C_+$ ([[def-open-and-closed-weyl-chambers]], [[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
+[L2] The complement of $\bigcup_{\alpha\in\Phi}L_\alpha$ is a finite union of open convex cones, its components are the open chambers, and each chamber is defined by a system of strict inequalities $\pm(x,\alpha)>0$; the fundamental chamber $C_+$ is a chamber, and every $x\in C_+$ satisfies $(x,\alpha)>0$ for every positive root $\alpha$ ([[def-open-and-closed-weyl-chambers]], [[thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]]).
 
 [L3] For $w\in W$, the inversion set is $N(w)=\{\alpha\in\Phi^{+}:w(\alpha)\in\Phi^{-}\}$ and its length is $\ell(w)=|N(w)|$; the number of root hyperplanes separating two chambers equals the number of roots that are positive on the first and negative on the second ([[def-length-and-longest-element-of-a-finite-weyl-group]]).
 

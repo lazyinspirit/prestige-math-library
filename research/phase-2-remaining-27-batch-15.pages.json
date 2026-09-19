@@ -35,7 +35,7 @@
             }
           ]
         },
-        "statement": "Use the library convention that q≤p means q is stronger. A Shelah sweetness model is a tuple (P,D,(E_n) for n<ω) where P is a forcing preorder, D is dense, each E_n is an equivalence relation on D with countably many classes, E_(n+1) refines E_n, and every E_n-class is downward directed. If p_i∈D for i≤ω and p_i E_i p_ω for every i<ω, then the sequence has a common lower bound; moreover, for every n the tail {p_i:n≤i≤ω} has a common lower bound in the E_n-class of p_ω. Finally, for every p,q∈D and n there is k such that, for every p' E_k p, if some r E_n q satisfies r≤p, then some r' E_n q satisfies r'≤p'. A sweetness model M_2 extends M_1 exactly when P_1 is a complete suborder of P_2, D_1⊆D_2, each old E_n is the restriction of the new one, every new E_n-class meeting D_1 is contained in D_1, and if q∈D_1, p∈D_2 and q≤p then p∈D_1. Boolean-algebra language means the corresponding separative completion.",
+        "statement": "Use the library convention that q≤p means q is stronger. A Shelah sweetness model is a tuple (P,D,(E_n) for n<ω) where P is a forcing preorder, D is dense, each E_n is an equivalence relation on D with countably many classes, E_(n+1) refines E_n, and every E_n-class is downward directed. If p_i∈D for i≤ω and p_i E_i p_ω for every i<ω, then the sequence has a common lower bound; moreover, for every n the tail {p_i:n≤i≤ω} has a common lower bound in the E_n-class of p_ω. Finally, for every p,q∈D and n there is k such that, for every p' E_k p, if some r E_n q satisfies r≤p, then some r' E_n q satisfies r'≤p'. A sweetness model M_2 extends M_1 exactly when P_1 is a complete suborder of P_2 in the maximal-antichain sense (not necessarily dense), D_1⊆D_2, each old E_n is the restriction of the new one, each new E_n-class based at D_1 stays inside P_1, and if p∈D_2 has a stronger q∈P_1 then p∈D_1. Boolean-algebra language means the corresponding separative completion.",
         "proof_plan": "Translate Shelah Definitions 7.2 and 7.9 once and for all from the paper's larger-is-stronger order to the library's smaller-is-stronger order. In particular, source upper bounds become library lower bounds. Verify that the displayed conditional transfer clause is exactly source 7.2(d). Also prove the frequently used comparable reformulation: if q≤p, then for every n some k makes each p' E_k p have a common strengthening q' E_n q with q'≤q,p'; conversely, apply that comparable case to the source clause's witness r E_n q to recover the full conditional form. Passing to the separative quotient and regular-open completion preserves compatibility, density, complete embeddings and generic extensions, so all later preorder and Boolean presentations are typed consistently.",
         "axiom_base": "ZF; no choice principle is used in the definition"
       },
@@ -147,7 +147,7 @@
           ]
         },
         "statement": "The universal-meagre forcing UM consists of pairs (t,T), where T is a perfect nowhere-dense subtree of 2^(<ω) and t=T∩2^(≤n) is its finite initial tree through some height n. In the library order, (t_2,T_2)≤(t_1,T_1) exactly when T_1⊆T_2 and t_1 is the restriction of t_2 through the old height. Thus stronger conditions enlarge the witness tree while permanently preserving the recorded finite initial tree. The generic union of the finite initial trees is a perfect nowhere-dense tree U_G. The meagre envelope of the old nowhere-dense sets is a countable union of finite-prefix rearrangements of [U_G], not [U_G] alone.",
-        "proof_plan": "Spell out finite tree restriction, perfection, nowhere density and the agreement clause, translating Definition 7.7 from Shelah's order to the library order. Reflexivity and transitivity follow because successive initial-tree agreement composes and witness-tree inclusion is transitive. Compatible conditions have a common extension obtained from the finite union of their witness trees; that union remains perfect and nowhere dense and respects the longer recorded initial tree. Dense height extensions make U_G closed and nowhere dense: once an omitted extension is recorded below the finite height, no stronger condition can add it. Do not claim that one arbitrary old tree is directly included in U_G; Claim 7.15 uses the countable family of prefix rearrangements built in the next lemma.",
+        "proof_plan": "Spell out finite tree restriction, perfection, nowhere density and the agreement clause, translating Definition 7.7 from Shelah's order to the library order. Reflexivity and transitivity follow because successive initial-tree agreement composes and witness-tree inclusion is transitive. Compatible conditions have a common extension obtained from the finite union of their witness trees; that union remains perfect and nowhere dense and respects the longer recorded initial tree. Height extensions are dense in the cone below the condition whose witness tree supplies the node; they are not asserted dense below incompatible conditions. This cone density makes U_G closed and nowhere dense. Do not claim that one arbitrary old tree is directly included in U_G; Claim 7.15 uses the countable family of prefix rearrangements built in the next lemma.",
         "axiom_base": "ZF"
       },
       {
@@ -529,6 +529,7 @@
         "deps": [
           "def-analytic-and-coanalytic-by-closed-projection",
           "lem-cantor-and-baire-sequence-coding",
+          "lem-dyadic-coding-coin-measure-and-lebesgue-transfer",
           "def-lebesgue-measure-and-the-lebesgue-sigma-algebra"
         ],
         "justified_by": [],
@@ -546,8 +547,8 @@
             }
           ]
         },
-        "statement": "For a real parameter x, a subset A of Baire or Cantor space is Sigma^1_3(x) when membership has the form: there exists a real y, for every real z, there exists a real w such that an arithmetic predicate of the displayed reals, x, and a natural-number code holds. Boldface Sigma^1_3 measurability means that every Sigma^1_3(x) set is Lebesgue measurable for every real x. Sigma^1_2(x) sets are included by a dummy final existential quantifier.",
-        "proof_plan": "Define arithmetic predicates using natural-number quantification and fixed real coding. Use the published Cantor/Baire coding maps to show that changing between the two sequence spaces preserves the pointclass and transports completed coin measure to Lebesgue measurability. Verify closure under adding dummy real quantifiers, which is the exact implication used later from Sigma^1_3 measurability to Sigma^1_2 measurability.",
+        "statement": "For a real parameter x, a subset A of Cantor space is Sigma^1_3(x) when membership has the form: there exists a Baire real y, for every Baire real z, there exists a Baire real w such that an arithmetic predicate of the displayed reals, x, and a natural-number code holds. Boldface Sigma^1_3 measurability means that every Sigma^1_3(x) subset of Cantor space is measurable for completed coin measure for every real x. Sigma^1_2(x) sets are included by a dummy final existential quantifier.",
+        "proof_plan": "Define arithmetic predicates using natural-number quantification and fixed real coding on Cantor space, with auxiliary quantifiers over Baire space. Use coordinate pairing only to fold tuples of codes; record explicitly that the published Baire-space map is a homeomorphism onto a proper subspace of Cantor space and supplies no measure transport. Take completed coin measure from the dedicated dyadic-coding interface. Verify closure under adding a dummy real quantifier.",
         "axiom_base": "ZF; this is a coding definition"
       },
       {
@@ -575,7 +576,7 @@
           ]
         },
         "statement": "A filter F on omega is rapid when it extends the Frechet filter and, for every increasing f:omega→omega, some a∈F satisfies |a∩f(n)|≤n for every n. Equivalently, it is enough that one fixed strictly increasing g uniformly replace n on the right for every increasing f; the Frechet filter then permits deletion of one finite initial segment to recover the exact inequality. For distinct binary reals u,v let h(u,v) be their first differing coordinate and H(X)={h(u,v):u,v∈X,u≠v}. For a real x, a∈F(x) exactly when a countable cover (F_n) of L[x]∩2^omega satisfies the union of all H(F_n) is contained in a.",
-        "proof_plan": "Prove Ishii Lemma 3.6 explicitly. The forward direction takes g(n)=n. Conversely apply the uniform-g hypothesis to f*(n)=f(g(n+1)); on each interval [g(n),g(n+1)) obtain the desired bound after deleting the finite set f(g(0)), which preserves filter membership because the Frechet filter is contained in F. Check that first difference exists and that H is invariant under closure by approximating two distinct closure points through their first-difference coordinate. Thus witnessing cover members may be replaced by closed tree bodies. The filter and rapidity assertions are still proved separately from the definition.",
+        "proof_plan": "Prove Ishii Lemma 3.6 explicitly. The forward direction takes g(n)=n. Conversely apply the uniform-g hypothesis to f*(n)=f(g(n+1)); for k in [g(n),g(n+1)) use the exact inequality g(n)<=k, then delete the finite set f(g(0)), which preserves filter membership because the Frechet filter is contained in F. Check that first difference exists and that H is invariant under closure by approximating two distinct closure points through their first-difference coordinate. Thus witnessing cover members may be replaced by closed tree bodies. The filter and rapidity assertions are still proved separately from the definition.",
         "axiom_base": "ZF"
       },
       {
@@ -930,8 +931,8 @@
             }
           ]
         },
-        "statement": "Let S be an old perfect nowhere-dense binary tree and let (t,T) be a UM condition. There is a direct extension whose generic F-sigma code contains [S]. For the singleton closed nowhere-dense set {0^omega}, this extension can be displayed level by level.",
-        "proof_plan": "Choose a level beyond t at which every node of T has a splitting extension. There are only finitely many S-sections at that level. Assign each one to a distinct section of an enlarged perfect nowhere-dense witness tree and record the required finite prefix substitutions; the extension forces [S] into the corresponding finite union of rearranged copies of [U_G]. For {0^omega}, one prefix substitution sends the zero branch into a chosen branch of U_G, while the reserved sibling verifies nowhere density. This displays one finite stage of the countable F-sigma envelope from the absorption lemma and does not claim that the generic tree itself directly contains every old tree.",
+        "statement": "For every old perfect nowhere-dense binary tree S and UM condition (t,T), the absorption lemma gives a direct extension whose generic F-sigma code contains [S]. If some level beyond t satisfies |T_n|≥|S_n|, the finite graft is explicit; this always covers the singleton {0^omega} instance.",
+        "proof_plan": "Invoke the absorption lemma for the general existence assertion. For the explicit display, assume a matched-width level beyond t, assign the finitely many S-sections there to distinct T-nodes, graft the sections, and record the finite prefix substitutions. For {0^omega}, a single target node suffices; nowhere density follows from the body being a finite union of closed nowhere-dense sets, without any sibling-at-the-same-level assertion.",
         "axiom_base": "ZF"
       },
       {
@@ -983,8 +984,8 @@
             }
           ]
         },
-        "statement": "For the constant function f(n)=0, the uniform construction gives N_f as the intersection of the tail unions of the independent blocks B_(n,0). It is a null G-delta. Whenever an open U of measure below one contains N_f, the finite capture sets satisfy 0∈φ_U(n) for all sufficiently large n.",
-        "proof_plan": "Write the first three tail unions and verify each is open. Their measures are bounded by the geometric tails sum_{n≥k}2^{-(n+1)}=2^{-k}, so the intersection is null. Apply the capture proof to K=2^omega minus U: find a basic cylinder [s] and tail index k missed by K; for all n beyond k and n(s), K∩[s]∩B_(n,0) is empty, so 0 lies in A_s(n) and hence φ_U(n). This illustrates the eventual, not pointwise, nature of capture.",
+        "statement": "For the constant function f(n)=0, the uniform capture lemma assigns a null G-delta set N_f. Whenever an open U of measure below one contains N_f, the associated finite capture sets satisfy 0∈φ_U(n) for all sufficiently large n.",
+        "proof_plan": "Instantiate the exact uniform-capture theorem at the constant function f(n)=0. Its first conclusion supplies the null G-delta N_f. Under N_f⊆U, its capture conclusion gives f(n)∈φ_U(n) eventually, which specializes to 0∈φ_U(n) eventually.",
         "axiom_base": "ZF"
       },
       {
@@ -1022,8 +1023,8 @@
         "deps": [
           "def-shelah-sweetness-model",
           "thm-shelah-sweet-amalgamation-preserves-sweetness",
-          "thm-shelah-sweet-partial-isomorphism-extension",
-          "thm-shelah-ch-omega-one-sweet-construction"
+          "lem-shelah-sweet-density-transfer-along-complete-suborders",
+          "lem-shelah-sweet-forcings-are-sigma-directed-ccc"
         ],
         "justified_by": [],
         "provenance": {
@@ -1040,9 +1041,9 @@
             }
           ]
         },
-        "statement": "Let (P_1, Q_1, E^1_n) and (P_2, Q_2, E^2_n) be sweetness models whose complete Boolean algebras share a common complete subalgebra B_0, with B_0 contained in BA(P_1) and in BA(P_2). Then the amalgam P_1 *_{B_0} P_2 is sweet: below any condition of the amalgam there is a single modulus k such that every n >= k and every two conditions in the same E_n-class are compatible, the canonical embeddings of P_1 and P_2 into the amalgam are complete, and BA(P_1 *_{B_0} P_2) inherits the countable chain condition from the omega-one sweet construction.",
-        "proof_plan": "Instantiate the amalgamation theorem with the two sweet notions, taking Claim 7.4's uniform modulus as the single k that witnesses sweetness below an arbitrary condition, and Claim 7.12's E_n-classes to identify the conditions that are forced to be compatible. Lemma 7.5 then makes the amalgam sweet; Claim 7.13 extends the canonical isomorphism of the two complete subalgebras over B_0, and Main Lemma 7.14(a) supplies the countable chain condition together with the completeness of the embeddings. The example is the concrete witness the B companion asks for: two sweet models glued over one countably generated complete subalgebra, with the amalgamation verified rather than asserted.",
-        "axiom_base": "ZF+DC through the amalgamation and isomorphism-extension suppliers; the ccc instance inherits ZFC+CH from the omega-one construction"
+        "statement": "Let (P_1, Q_1, E^1_n) and (P_2, Q_2, E^2_n) be sweetness models whose complete Boolean algebras share a common complete subalgebra B_0. Then the amalgam P_1 *_{B_0} P_2 is sweet, has complete canonical embeddings of both factors, and is ccc.",
+        "proof_plan": "Instantiate the amalgamation theorem with the two sweet notions. Use the uniform density-transfer modulus and the amalgam E_n-classes to display sweetness, take completeness of the canonical copies directly from the theorem, and derive ccc from the sigma-directed decomposition of every sweet forcing. No partial-isomorphism or CH-length construction is used.",
+        "axiom_base": "The choice cost is inherited from the amalgamation and density-transfer suppliers; no CH-length construction is invoked."
       }
     ]
   }

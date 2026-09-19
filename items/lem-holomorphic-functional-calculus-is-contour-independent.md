@@ -33,7 +33,10 @@ $\sigma_A(a)$, then $f(a) = g(a)$ with $g$ computed from $V$.
 
 **Given:** An assumed Axiom of Choice, a unital complex Banach algebra $A$, an element $a \in A$ with nonempty compact spectrum $\sigma_A(a)$, an open $U \supseteq \sigma_A(a)$, a holomorphic $f : U \to \mathbb C$, and two admissible cycles $\Gamma_1,\Gamma_2$ in $U\setminus\sigma_A(a)$.
 
-[L1] $f(a) = \frac{1}{2\pi i}\int_\Gamma f(z)R(z,a)\,dz$ for every admissible cycle $\Gamma$; the integrand is continuous on the trace ([[def-holomorphic-functional-calculus]]).
+[L1] The definition chooses an admissible cycle $\Gamma_0$ and sets
+$f(a)=\frac{1}{2\pi i}\int_{\Gamma_0}f(z)R(z,a)\,dz$; for every admissible
+cycle the displayed integral is defined because the integrand is continuous on
+its trace ([[def-holomorphic-functional-calculus]]).
 
 [L2] A cycle $\Gamma$ is null-homologous in an open set $\Omega$ exactly when $n(\Gamma,p) = 0$ for every $p \notin \Omega$; equivalently $n(\Gamma,p)$ vanishes at every point outside $\Omega$ ([[def-null-homologous-and-homologous-complex-cycles]]).
 

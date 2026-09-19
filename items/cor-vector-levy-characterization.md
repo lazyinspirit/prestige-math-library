@@ -4,7 +4,7 @@ kind: corollary
 title: "Vector Levy characterization"
 status: draft
 origin: pipeline
-deps: [thm-levy-characterization-of-brownian-motion, def-quadratic-covariation-of-brownian-ito-processes, def-d-dimensional-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms, thm-tower-property-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [thm-levy-characterization-of-brownian-motion, def-quadratic-covariation-of-brownian-ito-processes, def-d-dimensional-brownian-motion, def-continuous-time-adapted-process-and-martingale, def-continuous-time-filtration-and-all-pairs-martingale, def-continuous-time-stopping-time, def-standard-normal-and-normal-laws, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms, thm-tower-property-of-conditional-expectation, def-conditional-expectation-as-an-ae-class, def-law-modification-and-indistinguishability-of-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -37,7 +37,7 @@ $\mathcal F_s$ with law $N_d(0,(t-s)I_d)$.
 
 [F3] **Scalar Levy characterization.** A real continuous local martingale $N$ with $N_0=0$ and $[N]_t=t$ is a standard Brownian motion with the increment independence and $N(0,t-s)$ conditional law of [[thm-levy-characterization-of-brownian-motion]]. [[thm-levy-characterization-of-brownian-motion]] [[def-continuous-time-adapted-process-and-martingale]]
 
-[F4] **Multivariate Fourier uniqueness and Gaussian laws.** Finite Borel measures on $\mathbb R^n$ with equal Fourier transforms are equal; the law $N_d(0,(t-s)I_d)$ is the product of independent $N(0,t-s)$ coordinates, and its Fourier transform at $\lambda$ is $e^{-(t-s)|\lambda|^2/2}$. [[cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms]] [[def-standard-normal-and-normal-laws]] [[def-d-dimensional-brownian-motion]]
+[F4] **Multivariate Fourier uniqueness and Gaussian laws.** Finite Borel measures on $\mathbb R^n$ with equal Fourier transforms are equal. The law $N_d(0,(t-s)I_d)$ exists, can be realized as the product of independent $N(0,t-s)$ coordinates, and its Fourier transform at $\lambda$ is $e^{-(t-s)|\lambda|^2/2}$. [[cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms]] [[def-multivariate-normal-law]] [[lem-characteristic-function-of-a-multivariate-normal-law]] [[def-standard-normal-and-normal-laws]] [[def-d-dimensional-brownian-motion]]
 
 [F5] **Conditional expectations and towers.** Conditional expectations are unique almost-sure classes; for $A\in\mathcal F_s$ one has $E[1_AX\mid\mathcal F_s]=1_AE[X\mid\mathcal F_s]$ and $E[1_AE[X\mid\mathcal F_s]]=E[1_AX]$; the tower property passes conditional laws from one time to an earlier time. [[def-conditional-expectation-as-an-ae-class]] [[thm-tower-property-of-conditional-expectation]]
 

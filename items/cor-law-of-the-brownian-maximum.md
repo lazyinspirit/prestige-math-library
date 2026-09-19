@@ -47,7 +47,7 @@ $$f(x)=\sqrt{\frac{2}{\pi t}}\,\exp\!\left(-\frac{x^2}{2t}\right).$$
 
 **Proof technique:** direct.
 
-1.1 For $x>0$, [F1] with $a=x$ gives $P(M_t>x)=2P(B_t>x)$, so $P(M_t\le x)=1-2P(B_t>x)$. By [F2], $P(B_t>x)=P(Z>x/\sqrt t)=1-\Phi(x/\sqrt t)$ because the law of the standard normal is atomless, so $P(M_t\le x)=2\Phi(x/\sqrt t)-1$ for $x>0$; for $x=0$ both sides are $0$, since $M_t\ge0$ and $\Phi(0)=1/2$. [F1, F2, given]
+1.1 For $x>0$, [F1] with $a=x$ gives $P(M_t>x)=2P(B_t>x)$, so $P(M_t\le x)=1-2P(B_t>x)$. By [F2], $P(B_t>x)=P(Z>x/\sqrt t)=1-\Phi(x/\sqrt t)$ because the law of the standard normal is atomless, so $P(M_t\le x)=2\Phi(x/\sqrt t)-1$ for $x>0$. For $x=0$, the events $\{M_t\le0\}$ are contained in $\{M_t\le\varepsilon\}$ for every $\varepsilon>0$; the formula just proved and the continuity of $\Phi$ therefore give $P(M_t\le0)\le\lim_{\varepsilon\downarrow0}(2\Phi(\varepsilon/\sqrt t)-1)=0$, so the same formula holds at zero. [F1, F2, given]
 
 1.2 Define $G(x):=\int_0^x f(y)\,dy$ for $x\ge0$ with $f(y)=\sqrt{2/(\pi t)}e^{-y^2/(2t)}$. The substitution $y=\sqrt t\,u$, applied to the continuous integrand on $[0,x]$, gives $G(x)=2(\Phi(x/\sqrt t)-\Phi(0))=2\Phi(x/\sqrt t)-1$ for every $x>0$: indeed $f(\sqrt t u)\sqrt t=2\varphi(u)$. Letting $x\downarrow0$ with [F3]'s monotone convergence gives $G(0^+)=0$, and the same computation with the upper limit tending to $+\infty$, together with $\lim_{u\to\infty}\Phi(u)=1$, gives $\int_0^\infty f=1$. [F2, F3]
 

@@ -55,7 +55,7 @@ ideals and a weaker choice principle.
 
 [L6] Under the Axiom of Choice, a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]]).
 
-[L7] In ZF, $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$ ([[def-axiom-of-choice]]).
+[L7] In ZF, $\mathrm{AC} \Rightarrow \mathrm{DC} \Rightarrow \mathrm{AC}_\omega$ ([[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]).
 
 [L8] Every character of $A$ is unital with $\chi(1) = 1$, is bounded of norm one, and satisfies $\chi(a) \in \sigma_A(a)$ ([[thm-characters-on-a-unital-banach-algebra-are-continuous]]).
 

@@ -34,7 +34,7 @@ Then $\ker T$ is finite dimensional and $\operatorname{ran}T$ is closed in $Y$.
 
 [A1] Bounded linear operators are continuous, and the kernel of $T$ is a closed subspace of $X$ ([[thm-bounded-linear-operator-equivalences]], [[def-bounded-linear-operator]]); limits of sequences in a metric space are unique ([[lem-metric-limits-unique]], [[def-metric-convergence]]).
 
-[A2] Assume DC. A compact operator maps bounded sequences to sequences with convergent subsequences ([[thm-sequential-characterization-of-compact-operators]], [[def-sequence]], [[lem-index-map-grows]]); a normed space with compact closed unit ball admits an ordered basis of finite length ([[thm-closed-unit-ball-compact-iff-finite-dimensional]]); compact, sequentially compact and complete-and-totally-bounded agree for metric spaces under $\mathrm{AC}_\omega$ and DC ([[thm-metric-compactness-equivalences]]).
+[A2] Assume DC. Then Countable Choice holds ([[lem-dependent-choice-implies-countable-choice]], [[def-countable-choice]]); a compact operator maps bounded sequences to sequences with convergent subsequences ([[thm-sequential-characterization-of-compact-operators]], [[def-sequence]], [[lem-index-map-grows]]); a normed space with compact closed unit ball admits an ordered basis of finite length ([[thm-closed-unit-ball-compact-iff-finite-dimensional]]); compact, sequentially compact and complete-and-totally-bounded agree for metric spaces under $\mathrm{AC}_\omega$ and DC ([[thm-metric-compactness-equivalences]]).
 
 [A3] Under DC, $\operatorname{ran}T$ is closed exactly when there is a real $C'>0$ with $\operatorname{dist}(x,\ker T)\le C'\|Tx\|$ for every $x$ ([[lem-closed-range-iff-quotient-estimate]], [[def-quotient-seminorm]]); the distance scales, $\operatorname{dist}(\lambda x,\ker T)=|\lambda|\operatorname{dist}(x,\ker T)$, because $\ker T$ is a subspace, and $\operatorname{dist}(u,M)\le\|u\|$ for nonempty $M\ni0$.
 
@@ -54,7 +54,7 @@ Then $\ker T$ is finite dimensional and $\operatorname{ran}T$ is closed in $Y$.
 
 2.1 The closed unit ball $B_N:=N\cap\{x:\|x\|\le1\}$ is compact: if $(x_j)$ is a sequence in $B_N$, then it is bounded so by [A2] some subsequence has $Kx_{j_k}\to z$; by [step 1.1] the subsequence is Cauchy, $\|x_{j_k}-x_{j_l}\|\le\|Kx_{j_k}-Kx_{j_l}\|$, hence converges to some $x\in N$ by [step 1.2], and $\|x\|\le1$; thus every sequence in $B_N$ has a subsequence converging in $B_N$, so $B_N$ is sequentially compact, hence compact by [A2]. [step 1.1, step 1.2, A2]
 
-2.2 If the estimate of [A3] fails for every constant, then for every $j$ there are $w_j\in X$ with $\operatorname{dist}(w_j,N)=1$, $\|w_j\|\le2$ and $\|Tw_j\|<1/(j+1)$, by [step 1.3]. [step 1.3]
+2.2 If the estimate of [A3] fails for every constant, then [step 1.3] makes the set of witnesses with $\operatorname{dist}(w,N)=1$, $\|w\|\le2$ and $\|Tw\|<1/(j+1)$ nonempty for each $j$; Countable Choice in [A2] therefore supplies a sequence $(w_j)$ with those three properties. [step 1.3, A2]
 
 3.1 $\ker T$ is finite dimensional: its closed unit ball is compact by [step 2.1], so $N$ admits an ordered basis of finite length by [A2]. [step 2.1, A2]
 

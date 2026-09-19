@@ -4,7 +4,7 @@ kind: example
 title: "Expected dyadic quadratic variation"
 status: draft
 origin: pipeline
-deps: [def-quadratic-variation-along-a-partition-sequence, def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, def-axiom-of-choice]
+deps: [def-brownian-motion, lem-gaussian-even-moment-bound-for-brownian-increments, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -27,7 +27,7 @@ for every $n\ge1$; no independence is needed for this mean computation.
 
 **Given:** AC, a standard Brownian motion $B$, $T>0$ and $n\ge1$ with $h=T/2^n$ and $\Delta_k=B_{kh}-B_{(k-1)h}$.
 
-[F1] The terminal quadratic sum over the dyadic partition is the number $[B]^{\pi_n}_T$ of [[def-quadratic-variation-along-a-partition-sequence]]. [[def-quadratic-variation-along-a-partition-sequence]]
+[F1] The terminal dyadic quadratic sum in this example is the finite sum $\sum_{k=1}^{2^n}\Delta_k^2$.
 
 [F2] Each increment over an interval of length $h$ has law $N(0,h)$ and $E(\Delta B)^2=h$. [[def-brownian-motion]] [[lem-gaussian-even-moment-bound-for-brownian-increments]]
 

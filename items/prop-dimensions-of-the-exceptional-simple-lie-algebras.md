@@ -5,7 +5,7 @@ title: Dimensions of exceptional simple Lie algebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-dimension-formula-from-roots, thm-existence-of-each-classified-root-system, thm-cartan-killing-classification-of-complex-simple-lie-algebras, thm-existence-theorem-for-complex-semisimple-lie-algebras, def-axiom-of-choice]
+deps: [prop-dimension-formula-from-roots, thm-cartan-killing-classification-of-complex-simple-lie-algebras, thm-existence-theorem-for-complex-semisimple-lie-algebras, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -13,7 +13,7 @@ sources:
   references:
     - title: "Pavel Etingof, MIT 18.745 Lie Groups and Lie Algebras I, Lectures 19-24"
       url: "https://ocw.mit.edu/courses/18-745-lie-groups-and-lie-algebras-i-fall-2020/mit18_745_f20_lec_full.pdf"
-      locator: "Lecture 23, Definitions 23.8, 23.11, 23.14, 23.15 for the root counts"
+      locator: "Lecture 21, Example 21.9 for G_2; Lecture 23, Definitions 23.8, 23.11, 23.14, 23.15 for F_4,E_8,E_7,E_6"
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed., Chapter II"
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
       locator: "Chapter II, Problem 16, printed p. 205"
@@ -28,11 +28,14 @@ of types $G_2,F_4,E_6,E_7,E_8$ are respectively $14,52,78,133,248$.
 
 ## Facts & Assumptions
 
-**Given:** The explicit reduced crystallographic root systems of types $G_2,F_4,E_6,E_7,E_8$ of [[thm-existence-of-each-classified-root-system]].
+**Given:** The explicit reduced crystallographic root systems of types $G_2,F_4,E_6,E_7,E_8$ described in the cited source.
 
 [A1] AC is assumed and is used through the existence and classification theorems ([[def-axiom-of-choice]]).
 
-[L1] The explicit models of $G_2,F_4,E_6,E_7,E_8$ have $12,48,72,126,240$ roots and ranks $2,4,6,7,8$ ([[thm-existence-of-each-classified-root-system]]).
+[L1] In the explicit models of the cited source, $G_2$ has the twelve roots
+listed in Example 21.9 and rank $2$; Definitions 23.8, 23.11, 23.14 and 23.15
+give respectively $48,240,126,72$ roots for $F_4,E_8,E_7,E_6$, whose ranks
+are respectively $4,8,7,6$.
 
 [L2] For a finite-dimensional complex semisimple Lie algebra $\mathfrak g$ with Cartan subalgebra $\mathfrak h$ and root system $\Phi$ one has $\dim\mathfrak g=\dim\mathfrak h+|\Phi|$ ([[prop-dimension-formula-from-roots]]).
 

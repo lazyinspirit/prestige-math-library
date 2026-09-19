@@ -21,8 +21,9 @@ sources:
 
 ## Statement
 
-Assume AC. Let $w'$ be a rule assigning to every numerable real vector bundle
-$E\to B$ over an admissible base a total class $w'(E)\in H^*(B;\mathbb F_2)$
+Assume AC. Let $w'$ be a rule assigning to every isomorphism class of
+numerable real vector bundles $E\to B$ over an admissible base a total class
+$w'(E)\in H^*(B;\mathbb F_2)$
 such that
 
 1. the degree-zero part of $w'(E)$ is $1$ and $w'(E)$ has finite degree

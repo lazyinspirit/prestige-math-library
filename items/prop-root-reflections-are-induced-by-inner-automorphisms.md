@@ -57,7 +57,11 @@ $s_\alpha$ of [[def-root-reflection-from-a-coroot]] on the root system.
 
 1.1 First, a vanishing criterion: if $X,x\in\mathfrak g$ satisfy $[X,x]=0$, then $\operatorname{Ad}_{\exp_GX}(x)=x$. Indeed the curve $t\mapsto\operatorname{Ad}_{\exp_G(tX)}$ is a homomorphism in $t$ with derivative satisfying $U'(t)=\operatorname{ad}_X\circ U(t)$, by [L4] and the chain rule, and $U(0)=I$; hence $u(t)=U(t)x$ solves $u'=\operatorname{ad}_Xu$ with $u(0)=x$, and so does the constant curve $x$ because $[X,x]=0$. Uniqueness [L5] gives $\operatorname{Ad}_{\exp_GX}(x)=x$. [L4, L5, algebra]
 
-1.2 Similarly, if $\operatorname{ad}_X$ is nilpotent then $\operatorname{Ad}_{\exp_GX}=e^{\operatorname{ad}_X}=\sum_k(\operatorname{ad}_X)^k/k!$: the finite sum $\sum_{k<n}(\operatorname{ad}_X)^k/k!$ with $(\operatorname{ad}_X)^n=0$ satisfies the defining linear ODE of [L4] directly by termwise differentiation, so uniqueness [L5] identifies it with $e^{\operatorname{ad}_X}$. [L4, L5, algebra]
+1.2 Similarly, if $\operatorname{ad}_X$ is nilpotent and $(\operatorname{ad}_X)^n=0$, then
+$$\operatorname{Ad}_{\exp_GX}=e^{\operatorname{ad}_X}=\sum_{k<n}\frac{(\operatorname{ad}_X)^k}{k!}.$$
+Indeed the polynomial curve
+$$E(t)=\sum_{k<n}\frac{t^k(\operatorname{ad}_X)^k}{k!}$$
+satisfies $E'(t)=\operatorname{ad}_X\circ E(t)$ and $E(0)=I$ by termwise differentiation. Uniqueness [L5] therefore identifies it with $e^{t\operatorname{ad}_X}$, and setting $t=1$ gives the displayed formula. [L4, L5, algebra]
 
 1.3 $\tau_\alpha$ is an inner automorphism: by [L4] each factor $\operatorname{Ad}_{\exp_G(\pm e_\alpha)}$, $\operatorname{Ad}_{\exp_G(-f_\alpha)}$ is an automorphism of $\mathfrak g$, and $\operatorname{Ad}$ is multiplicative, so $\tau_\alpha=\operatorname{Ad}_{g}$ for $g=\exp_G(e_\alpha)\exp_G(-f_\alpha)\exp_G(e_\alpha)\in G$. [L4, algebra]
 

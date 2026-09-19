@@ -5,7 +5,7 @@ title: Integral powers of the complexified universal real line
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-mod-two-reduction-of-chern-classes, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, thm-whitney-sum-formula-for-stiefel-whitney-classes, def-stiefel-whitney-classes-from-the-projective-bundle-relation, def-tautological-degree-one-class-on-a-real-projective-bundle, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, lem-complex-orientation-of-underlying-real-bundles, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
+deps: [thm-mod-two-reduction-of-chern-classes, cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion, thm-whitney-sum-formula-for-stiefel-whitney-classes, def-stiefel-whitney-classes-from-the-projective-bundle-relation, def-tautological-degree-one-class-on-a-real-projective-bundle, lem-mod-two-cohomology-ring-of-infinite-real-projective-space, def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the characteristic-class suppliers."
 provenance:
@@ -32,7 +32,7 @@ $\rho_2(a^k)=u^{2k}$.
 
 [A1] The Axiom of Choice is assumed, exactly as inherited from the characteristic-class suppliers ([[def-axiom-of-choice]]).
 
-[F1] The underlying real bundle of the complexification of a real bundle is canonically the sum of two copies: $(\lambda_{\mathbb C})_{\mathbb R}\cong\lambda\oplus\lambda$ ([[lem-complex-orientation-of-underlying-real-bundles]], [[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F1] Complexification is the fiberwise tensor product with $\mathbb C$, and underlying-real bundles and Whitney sums are formed fiberwise ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
 [F2] For a complex bundle $E$ one has $w_{2i}(E_{\mathbb R})=\rho_2c_i(E)$ and $w_{2i+1}(E_{\mathbb R})=0$ ([[thm-mod-two-reduction-of-chern-classes]]).
 
@@ -48,7 +48,7 @@ $\rho_2(a^k)=u^{2k}$.
 
 **Given:** AC, the universal real line $\lambda$ over $\mathbb{RP}^\infty$, the class $u=w_1(\lambda)$ and $a=c_1(\lambda_{\mathbb C})$.
 
-1.1 By [F1] the underlying real bundle of $\lambda_{\mathbb C}$ is $\lambda\oplus\lambda$, so by [F3] its total Stiefel-Whitney class is $w(\lambda\oplus\lambda)=w(\lambda)^2=(1+u)^2=1+u^2$ over $\mathbb F_2$, where the middle identity uses [F4] and the last uses that $2u=0$ in characteristic two. [F1, F3, F4]
+1.1 The real-linear map $(\lambda_{\mathbb C})_{\mathbb R}\to\lambda\oplus\lambda$ given fiberwise by $v\otimes(a+ib)\mapsto(av,bv)$ has inverse $(x,y)\mapsto x\otimes1+y\otimes i$ and commutes with the real transition functions, so it is a canonical real-bundle isomorphism by [F1]. Hence [F3] gives $w((\lambda_{\mathbb C})_{\mathbb R})=w(\lambda\oplus\lambda)=w(\lambda)^2=(1+u)^2=1+u^2$ over $\mathbb F_2$, where [F4] identifies $w(\lambda)=1+u$ and $2u=0$ in characteristic two. [F1, F3, F4, algebra]
 
 1.2 Two-torsion: by [F5] with $j=0$ we have $2a=0$; multiplying by $a^{k-1}$ gives $2a^k=0$ for every $k\geq1$. [F5]
 

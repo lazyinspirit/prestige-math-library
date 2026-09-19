@@ -39,7 +39,7 @@ constant $\sqrt{2\pi st/(s+t)}$.
 
 **Proof technique:** direct.
 
-1.1 Put $A=\frac{1}{2s}+\frac1{2t}=\frac{s+t}{2st}$, $m=\frac{tz+sx}{s+t}$ and $C=\frac{(z-x)^2}{2(s+t)}$. Expanding squares gives $\frac{(y-x)^2}{2s}+\frac{(z-y)^2}{2t}=A(y-m)^2+C$: the coefficient of $y^2$ is $A$, the coefficient of $-2y$ is $2Am=\frac zt+\frac xs$, and subtracting the square leaves the constant $\frac{x^2}{2s}+\frac{z^2}{2t}-\frac{(z/t+x/s)^2}{4A}$, which equals $\frac{(z-x)^2}{2(s+t)}$. [F1, algebra]
+1.1 Put $A=\frac{1}{2s}+\frac1{2t}=\frac{s+t}{2st}$, $m=\frac{tx+sz}{s+t}$ and $C=\frac{(z-x)^2}{2(s+t)}$. Expanding squares gives $\frac{(y-x)^2}{2s}+\frac{(z-y)^2}{2t}=A(y-m)^2+C$: the coefficient of $y^2$ is $A$, the coefficient of $-2y$ is $2Am=\frac zt+\frac xs$, and subtracting the square leaves the constant $\frac{x^2}{2s}+\frac{z^2}{2t}-\frac{(z/t+x/s)^2}{4A}$, which equals $\frac{(z-x)^2}{2(s+t)}$. [F1, algebra]
 
 2.1 Consequently $p_s(x,y)p_t(y,z)=\frac{1}{2\pi\sqrt{st}}e^{-C}e^{-A(y-m)^2}$ for every $y$, a nonnegative continuous function of $y$. [step 1.1, F1]
 

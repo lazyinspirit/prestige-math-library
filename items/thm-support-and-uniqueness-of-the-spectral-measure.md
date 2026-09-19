@@ -5,7 +5,7 @@ title: Support and uniqueness of the spectral measure
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-borel-functional-calculus-for-bounded-normal-operators, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, lem-continuous-functional-calculus-produces-a-regular-pvm, thm-continuous-functional-calculus-for-bounded-normal-operators, thm-complex-stone-weierstrass-self-adjoint, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-regular-borel-measure-on-an-lch-space, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, def-axiom-of-choice]
+deps: [thm-borel-functional-calculus-for-bounded-normal-operators, thm-spectral-theorem-for-bounded-normal-operators-pvm-form, thm-pvm-integral-is-a-star-homomorphism, lem-continuous-functional-calculus-produces-a-regular-pvm, thm-continuous-functional-calculus-for-bounded-normal-operators, thm-complex-stone-weierstrass-self-adjoint, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-regular-borel-measure-on-an-lch-space, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -34,7 +34,7 @@ $\sigma$-algebra of $\sigma(T)$. Then:
 
 ## Facts & Assumptions
 
-[A1] For every continuous $f$ on $\sigma(T)$ one has $\|f(T)\|=\|f\|_\infty$ and $f(T)=\Phi_E(f)=\int f\,dE$; for every bounded Borel $h$ one has $\langle h(T)x,y\rangle=\int h\,dE_{x,y}$ with $E_{x,y}(B)=\langle E(B)x,y\rangle$ ([[thm-continuous-functional-calculus-for-bounded-normal-operators]], [[thm-spectral-theorem-for-bounded-normal-operators-pvm-form]], [[thm-borel-functional-calculus-for-bounded-normal-operators]]).
+[A1] For every continuous $f$ on $\sigma(T)$ one has $\|f(T)\|=\|f\|_\infty$ and $f(T)=\Phi_E(f)=\int f\,dE$; for every bounded Borel $h$ one has $\langle h(T)x,y\rangle=\int h\,dE_{x,y}$ with $E_{x,y}(B)=\langle E(B)x,y\rangle$. For every PVM $F$, its bounded integral $\Phi_F$ is a unital star-homomorphism ([[thm-continuous-functional-calculus-for-bounded-normal-operators]], [[thm-spectral-theorem-for-bounded-normal-operators-pvm-form]], [[thm-borel-functional-calculus-for-bounded-normal-operators]], [[thm-pvm-integral-is-a-star-homomorphism]]).
 
 [A2] The Borel calculus is multiplicative: $(fg)(T)=f(T)g(T)$ for bounded Borel $f,g$, and $E(B)=\mathbf 1_B(T)$; in particular $\Phi_E(g)=0$ whenever $g$ vanishes on a Borel set carrying the full projection ([[thm-borel-functional-calculus-for-bounded-normal-operators]], [[def-projection-valued-measure]]).
 

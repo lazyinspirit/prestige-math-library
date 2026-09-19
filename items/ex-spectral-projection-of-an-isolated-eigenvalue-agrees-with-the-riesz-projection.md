@@ -41,7 +41,7 @@ $(T-zI)^{-1}$), and where $E$ is the spectral PVM of
 
 [A3] The function $z\mapsto(zI-T)^{-1}$ is norm continuous on $\rho(T)$, hence Bochner integrable along the compact contour $\gamma$; a bounded linear map commutes with the Bochner integral ([[thm-bounded-linear-maps-commute-with-bochner-integration]], [[def-bochner-integrable-function]], [[def-spectrum-and-resolvent-of-a-bounded-operator]]).
 
-[A4] Scalar Cauchy facts: for $f$ holomorphic on a disc and $\gamma$ the positively oriented circle of radius $r$ about its centre, $f(z)=\frac{1}{2\pi i}\int_\gamma\frac{f(\zeta)}{\zeta-z}d\zeta$ for $|z|<r$; and for a holomorphic $f$ on a convex domain and a closed rectifiable contour in it, $\int_\gamma f=0$ ([[thm-cauchy-integral-formula-circle]], [[cor-cauchy-theorem-convex-domain]]).
+[A4] Scalar Cauchy facts: if $f$ is holomorphic on the disc $D(a,R)$ and $\gamma$ is the positively oriented circle $|\zeta-a|=r$ with $0<r<R$, then $f(z)=\frac{1}{2\pi i}\int_\gamma\frac{f(\zeta)}{\zeta-z}d\zeta$ for $|z-a|<r$; and for a holomorphic $f$ on a convex domain and a closed rectifiable contour in it, $\int_\gamma f=0$ ([[thm-cauchy-integral-formula-circle]], [[cor-cauchy-theorem-convex-domain]]).
 
 [A5] For every bounded Borel $h$ one has $\Phi_E(\mathbf 1_B)=E(B)$ and $\Phi_E$ is linear and bounded, with $\|\Phi_E(h)\|\le\|h\|_\infty$ ([[thm-bounded-borel-pvm-integral]], [[def-borel-functional-calculus-for-a-bounded-normal-operator]], [[def-hilbert-space]]).
 

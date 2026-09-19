@@ -27,8 +27,9 @@ Let $\nu$ be a full extension of a fair-coin product measure on $2^I$
 $E, F, D \subseteq 2^I$ be sets with $\nu(E) > 3/4$, $\nu(F) > 3/4$ and
 $\nu(D) = 1/2$, where $D = \{z : z(i) \ne z(j)\}$ is the difference event of
 two distinct coordinates $i \ne j$. The example computes that
-$\nu(E \cap F) > 1/2$ and $\nu(E \cap F \cap D) > 0$: the three-quarter
-estimates of the separation lemma overlap in a point witnessing separation.
+$\nu(E \cap F) > 1/2$ and $\nu(E \cap F \cap D) > 0$. This is only the
+measure-theoretic calculation consumed by the separation lemma; the lemma's
+additional definitions relate its good events to disjoint neighbourhoods.
 
 ## Facts & Assumptions
 
@@ -48,7 +49,7 @@ estimates of the separation lemma overlap in a point witnessing separation.
 
 2.1 $\nu(E \cap F \cap D) > 0$: the complement of the triple intersection is contained in $E^c \cup F^c \cup D^c$, which has measure at most $\nu(E^c) + \nu(F^c) + \nu(D^c) < 1/4 + 1/4 + 1/2 = 1$ by [L1] and [F1] (using $\nu(D^c) = 1/2$). Hence the triple intersection has positive measure and is nonempty. [step 1.1, F1, L1, L2]
 
-3.1 Any $z \in E \cap F \cap D$ has $z(i) \ne z(j)$ by definition of $D$, and lies in both good events $E$ and $F$; in the application of the separation lemma, $E = A(x,U^x)$ and $F = A(y,U^y)$ are the two good events, so $z$ supplies the coordinate separation that makes the chosen neighbourhoods $U^x, U^y$ disjoint. [step 2.1, L2] ∎
+3.1 Hence there exists $z \in E \cap F \cap D$; every such $z$ lies in both $E$ and $F$ and satisfies $z(i) \ne z(j)$ by the definition of $D$. This example proves no topological conclusion from the abstract sets $E$ and $F$: in [[lem-pmea-three-quarter-separation-estimate]] the separately defined good events and separating open sets give that conclusion. [step 2.1, L2] ∎
 
 ## Remarks
 

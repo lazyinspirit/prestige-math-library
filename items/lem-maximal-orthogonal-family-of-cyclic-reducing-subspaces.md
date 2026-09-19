@@ -43,7 +43,7 @@ space $H$. Then:
 
 [A4] Zorn's lemma: a nonempty poset in which every chain has an upper bound has a maximal element ([[thm-zorn]], [[def-axiom-of-choice]]).
 
-[A5] A subset of a Hilbert space is dense exactly when every vector orthogonal to it is zero, and a closed subspace containing a dense subset of $H$ is $H$ ([[def-orthogonality-and-orthogonal-complement]], [[def-dense-top]], [[def-hilbert-space]]).
+[A5] The closed linear span of a subset $S$ of a Hilbert space is $H$ exactly when every vector orthogonal to $S$ is zero, and a closed subspace containing a dense subset of $H$ is $H$ ([[def-orthogonality-and-orthogonal-complement]], [[def-dense-top]], [[def-hilbert-space]]).
 
 [A6] Separability means the existence of an at most countable dense subset, and every vector of $H$ splits as the sum of its components along a closed subspace and its orthogonal complement; the sum of a countable family of pairwise orthogonal closed subspaces is closed ([[def-separable-space]], [[thm-orthogonal-decomposition-by-a-closed-subspace]], [[def-complete-metric-space]]).
 

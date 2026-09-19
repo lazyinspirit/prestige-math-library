@@ -43,13 +43,15 @@ might hold, and no uniform modulus theorem is asserted.
 
 **Proof technique:** direct.
 
-1.1 Fix rationals $a<b$ and an integer $C\ge1$, and put $E_{a,b,C}:=\{\omega:\ |B_t(\omega)-B_s(\omega)|\le C|t-s|^{1/2}$ for all $s,t\in[a,b]\}$. For every integer $n\ge1$, with $h=(b-a)/n$ and grid points $t_k=a+kh$, the event $E_{a,b,C}$ is contained in $A_n:=\{\omega:\ |B_{t_k}(\omega)-B_{t_{k-1}}(\omega)|\le C\sqrt h$ for $k=1,\dots,n\}$, because consecutive grid points are pairs of times in $[a,b]$ at distance $h$. [given, F1]
+1.1 Fix rationals $a<b$ and an integer $C\ge1$, and put
+$$E_{a,b,C}:=\bigcap_{r,q\in\mathbb Q\cap[a,b]}\{|B_r-B_q|\le C|r-q|^{1/2}\}.$$
+This is measurable because it is a countable intersection of coordinate events.  For every integer $n\ge1$, with $h=(b-a)/n$ and grid points $t_k=a+kh$ (all rational), the event $E_{a,b,C}$ is contained in $A_n:=\{\omega:\ |B_{t_k}(\omega)-B_{t_{k-1}}(\omega)|\le C\sqrt h$ for $k=1,\dots,n\}$, because consecutive grid points are rational pairs in $[a,b]$ at distance $h$. [given, F1]
 
 2.1 By [F1] and [F2] the increments $B_{t_k}-B_{t_{k-1}}$, $k=1,\dots,n$, are independent with the law of $\sqrt h\,Z$, so each satisfies $P(|B_{t_k}-B_{t_{k-1}}|\le C\sqrt h)=P(|Z|\le C)=p_C<1$, and independence gives $P(A_n)=p_C^{\,n}$; hence $P(E_{a,b,C})\le p_C^{\,n}$ for every $n\ge1$ and therefore $P(E_{a,b,C})=0$. [F1, F2, step 1.1]
 
 3.1 The family of ordered pairs of rationals and of integers is countable, so [step 2.1], countable subadditivity and [F4] give $P(\bigcup_{a<b,\ a,b\in\mathbb Q}\bigcup_{C\ge1}E_{a,b,C})=0$. [step 2.1, F4]
 
-4.1 On the complement of that null event there is no nondegenerate interval $I$ with a finite one-half Hölder constant: if $I$ were such an interval with finite constant $C>0$, then by [F3] we could choose rationals $a<b$ with $[a,b]\subseteq I$, and with $C':=\lceil\max(C,1)\rceil\in\mathbb N$ the bound $|B_t-B_s|\le C|t-s|^{1/2}\le C'|t-s|^{1/2}$ would hold for all $s,t\in[a,b]$, that is, $E_{a,b,C'}$ would occur. [step 3.1, F3]
+4.1 On the complement of that null event there is no nondegenerate interval $I$ with a finite one-half Hölder constant: if $I$ were such an interval with finite constant $C>0$, then by [F3] we could choose rationals $a<b$ with $[a,b]\subseteq I$, and with $C':=\lceil\max(C,1)\rceil\in\mathbb N$ the bound would in particular hold for all rational $s,t\in[a,b]$, that is, $E_{a,b,C'}$ would occur. [step 3.1, F3]
 
 5.1 The intended cases are covered: the interval is required to be nondegenerate, so the empty and singleton interval cases are excluded; the value $n=1$ in [step 2.1] is the degenerate single-increment case of the estimate and already gives $P(A_1)=p_C<1$; the union over integers $C\ge1$ covers every finite real constant up to rounding up; the intersection over $n$ in [step 2.1] uses the single countable sequence of uniform meshes rather than an uncountable family of partitions; and AC is used only through [F4] via [F1] and [F2]. [step 2.1, step 3.1, step 4.1, F4, given] ∎
 

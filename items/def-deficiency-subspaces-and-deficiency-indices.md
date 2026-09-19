@@ -5,7 +5,7 @@ title: "Deficiency subspaces and deficiency indices"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, thm-hilbert-adjoint-properties, def-countable-choice, thm-double-orthogonal-complement-is-closure, thm-self-adjoint-resolvent-estimate, thm-existence-of-a-maximal-orthonormal-family]
+deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, thm-hilbert-adjoint-properties, def-axiom-of-choice, thm-double-orthogonal-complement-is-closure, thm-self-adjoint-resolvent-estimate, thm-existence-of-a-maximal-orthonormal-family]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -22,7 +22,7 @@ sources:
 
 ## Definition
 
-Assume Countable Choice. Let $T$ be a densely defined closed symmetric
+Assume the Axiom of Choice. Let $T$ be a densely defined closed symmetric
 operator on $H$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]],
 [[def-densely-defined-closed-and-closable-operator]]). Its **deficiency
 subspaces** are

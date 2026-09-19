@@ -5,7 +5,7 @@ title: Cartan subalgebra and roots of sl_2
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-special-linear-lie-algebra-sl-two, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, def-killing-form-of-a-finite-dimensional-lie-algebra]
+deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-special-linear-lie-algebra-sl-two, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, def-killing-form-of-a-finite-dimensional-lie-algebra, thm-cartans-semisimplicity-criterion]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -36,16 +36,18 @@ $H_\alpha=\tfrac14h$ and $h_\alpha=h$
 
 ## Facts & Assumptions
 
-**Given:** The Lie algebra $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ with the brackets of [[def-special-linear-lie-algebra-sl-two]], its one-dimensional subalgebra $\mathfrak h=\mathbb Ch$, the root $\alpha$ with $\alpha(h)=2$ from [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], and the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]].
+**Given:** The Lie algebra $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ with the brackets of [[def-special-linear-lie-algebra-sl-two]], its one-dimensional subalgebra $\mathfrak h=\mathbb Ch$, the functional $\alpha\in\mathfrak h^*$ determined by $\alpha(h)=2$, and the Killing form of [[def-killing-form-of-a-finite-dimensional-lie-algebra]].
+
+[L1] A finite-dimensional Lie algebra over a characteristic-zero field is semisimple if and only if its Killing form is nondegenerate ([[thm-cartans-semisimplicity-criterion]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The subspace $\mathfrak h=\mathbb Ch$ is a Cartan subalgebra: it is one-dimensional, hence abelian and nilpotent, and $N_{\mathfrak g}(\mathfrak h)=\{a h+be+cf:[ah+be+cf,h]\in\mathbb Ch\}$ equals $\mathbb Ch$, because $[h,h]=0$, $[e,h]=-2e$ and $[f,h]=2f$, so a normalizing element has $b=c=0$. [given, algebra]
+1.1 Killing-form computation: $\operatorname{ad}_h=\operatorname{diag}(0,2,-2)$ on the basis $(h,e,f)$, $\operatorname{ad}_e(h)=-2e$, $\operatorname{ad}_e(e)=0$, $\operatorname{ad}_e(f)=h$, and $\operatorname{ad}_f(h)=2f$, $\operatorname{ad}_f(e)=-h$, $\operatorname{ad}_f(f)=0$. Hence $B(h,h)=8$, $B(e,f)=B(f,e)=4$, and all other basis pairings vanish. The Killing matrix $\begin{pmatrix}8&0&0\\0&0&4\\0&4&0\end{pmatrix}$ has determinant $-128\ne0$, so [L1] proves that $\mathfrak{sl}_2(\mathbb C)$ is semisimple. [given, L1, algebra]
 
-1.2 The eigenspaces of $\operatorname{ad}_h$ are $\mathbb Ch$ with eigenvalue $0$, $\mathbb Ce$ with eigenvalue $2$ and $\mathbb Cf$ with eigenvalue $-2$. Defining $\alpha\in\mathfrak h^*$ by $\alpha(h)=2$ and using [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], the nonzero eigenspaces are $\mathfrak g_\alpha=\mathbb Ce$ and $\mathfrak g_{-\alpha}=\mathbb Cf$, so $\Phi=\{\pm\alpha\}$ and the root-space decomposition is the displayed one. [given, algebra]
+1.2 The subspace $\mathfrak h=\mathbb Ch$ is a Cartan subalgebra: it is one-dimensional, hence abelian and nilpotent, and $N_{\mathfrak g}(\mathfrak h)=\{a h+be+cf:[ah+be+cf,h]\in\mathbb Ch\}$ equals $\mathbb Ch$, because $[h,h]=0$, $[e,h]=-2e$ and $[f,h]=2f$, so a normalizing element has $b=c=0$. [given, algebra]
 
-1.3 Killing-form computation: $\operatorname{ad}_h=\operatorname{diag}(0,2,-2)$ on the basis $(h,e,f)$, $\operatorname{ad}_e(h)=-2e$, $\operatorname{ad}_e(e)=0$, $\operatorname{ad}_e(f)=h$, and $\operatorname{ad}_f(h)=2f$, $\operatorname{ad}_f(e)=-h$, $\operatorname{ad}_f(f)=0$. Hence $B(h,h)=\operatorname{tr}(\operatorname{ad}_h^2)=0+4+4=8$, while $B(h,e)=B(h,f)=B(e,e)=B(f,f)=0$ and $B(e,f)=4$. [given, algebra]
+2.1 The eigenspaces of $\operatorname{ad}_h$ are $\mathbb Ch$ with eigenvalue $0$, $\mathbb Ce$ with eigenvalue $2$ and $\mathbb Cf$ with eigenvalue $-2$. Defining $\alpha\in\mathfrak h^*$ by $\alpha(h)=2$ and using [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], the nonzero eigenspaces are $\mathfrak g_\alpha=\mathbb Ce$ and $\mathfrak g_{-\alpha}=\mathbb Cf$, so $\Phi=\{\pm\alpha\}$ and the root-space decomposition is the displayed one. [given, step 1.1, step 1.2, algebra]
 
-2.1 The dual vector $H_\alpha$ satisfies $B(H_\alpha,h)=\alpha(h)=2$; writing $H_\alpha=th$ gives $8t=2$, so $t=\tfrac14$ and $H_\alpha=\tfrac14h$; then $\alpha(H_\alpha)=\tfrac14\cdot2=\tfrac12=B(H_\alpha,H_\alpha)$, so the coroot is $h_\alpha=2H_\alpha/\alpha(H_\alpha)=2\cdot\tfrac14h/\tfrac12=h$. [given, step 1.3, algebra] ∎
+3.1 The dual vector $H_\alpha$ satisfies $B(H_\alpha,h)=\alpha(h)=2$; writing $H_\alpha=th$ gives $8t=2$, so $t=\tfrac14$ and $H_\alpha=\tfrac14h$; then $\alpha(H_\alpha)=\tfrac14\cdot2=\tfrac12=B(H_\alpha,H_\alpha)$, so the coroot is $h_\alpha=2H_\alpha/\alpha(H_\alpha)=2\cdot\tfrac14h/\tfrac12=h$. [given, step 1.1, algebra] ∎

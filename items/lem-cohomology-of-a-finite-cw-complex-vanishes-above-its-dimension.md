@@ -5,7 +5,7 @@ title: Cohomology of a finite CW complex vanishes above its dimension
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cellular-cochains-compute-cohomology-with-local-coefficients, def-singular-cohomology-with-coefficients, def-cellular-homology, def-axiom-of-choice]
+deps: [thm-cellular-cochains-compute-cohomology-with-local-coefficients, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the cellular-cochain comparison."
 provenance:
@@ -34,8 +34,6 @@ $H^n(X,A;R)=0$ for every $n>d$.
 
 [F2] Taking the trivial local system with fiber $R$ recovers singular cohomology with coefficients in $R$ ([[def-singular-cohomology-with-coefficients]]).
 
-[F3] The cellular cochain group $C^n_{\mathrm{cell}}(X,A;R)$ is the dual of the relative cellular chain group, which is free on the relative $n$-cells ([[def-cellular-homology]]).
-
 ## Proof
 
 **Proof technique:** direct.
@@ -44,13 +42,13 @@ $H^n(X,A;R)=0$ for every $n>d$.
 
 1.1 By [F1] and [F2] the singular cohomology $H^*(X,A;R)$ is the cohomology of the cellular cochain complex $C^*_{\mathrm{cell}}(X,A;R)$ built from the relative cells of the skeletal filtration. [F1, F2]
 
-1.2 A finite CW complex of dimension $d$ has no cells in dimensions $n>d$, so by [F3] the relative cochain groups $C^n_{\mathrm{cell}}(X,A;R)$ vanish for $n>d$. [F3]
+1.2 A finite CW complex of dimension $d$ has $X^n=X^{n-1}=X$ for $n>d$. The degree-$n$ cellular cochain group from the skeletal filtration of [F1] is the relative cohomology of the consecutive skeleta $(X^n\cup A,X^{n-1}\cup A)$, which is therefore the zero group. Thus $C^n_{\mathrm{cell}}(X,A;R)=0$ for $n>d$. [F1, algebra]
 
 2.1 A cochain complex whose groups vanish in all degrees above $d$ has cohomology zero above $d$, since a degree-$n$ cohomology class for $n>d$ is a class in a zero group; therefore $H^n(X,A;R)=0$ for $n>d$. [F1, step 1.1, step 1.2]
 
 3.1 In the absolute case $A=\varnothing$ this gives $H^n(X;R)=0$ for $n>d$, which is the first assertion. [step 2.1]
 
-4.1 Boundary cases. For $d=0$ the complex is a finite discrete set, all cochains vanish in positive degrees and the statement reads $H^n(X;R)=0$ for $n\geq1$, which holds because $X$ is a disjoint union of points. For the empty complex both sides vanish in every degree (the empty CW complex has dimension $-\infty$ by convention, and the statement is vacuous). Negative degrees are outside the assertion. The ring $R$ may be the zero ring, in which case all groups vanish; no division or flatness is used. AC is used only through [A1] in the cellular comparison. [A1, F1, F3, step 2.1] ∎
+4.1 Boundary cases. For $d=0$ the complex is a finite discrete set, all cochains vanish in positive degrees and the statement reads $H^n(X;R)=0$ for $n\geq1$, which holds because $X$ is a disjoint union of points. For the empty complex both sides vanish in every degree (the empty CW complex has dimension $-\infty$ by convention, and the statement is vacuous). Negative degrees are outside the assertion. The ring $R$ may be the zero ring, in which case all groups vanish; no division or flatness is used. AC is used only through [A1] in the cellular comparison. [A1, F1, step 2.1] ∎
 
 ## Source notes
 

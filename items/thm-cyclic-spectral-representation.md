@@ -63,7 +63,7 @@ $H_x$ be the cyclic subspace of
 
 3.1 The image of $U$ is $H_x$: the continuous classes map onto the set $\{f(T)x:f\in C(\sigma(T))\}$, whose closed span is $H_x$ by definition, and an isometry with complete domain has closed image, so the image of the extension is exactly $H_x$; hence $U:L^2(\sigma(T),E_x)\to H_x$ is a unitary. [step 2.1, A2, A5]
 
-3.2 Borel multipliers: for a bounded Borel $h$ the operator $M_h$ is bounded with $\|M_h\|\le\|h\|_\infty$ and $h(T)$ is bounded; for continuous $f$ one has $U(M_hf)=(hf)(T)x=h(T)f(T)x=h(T)U(f)$ by multiplicativity of the Borel calculus, so by density $UM_h=h(T)U$ on $L^2(\sigma(T),E_x)$. [step 2.1, A2, A4]
+3.2 Borel multipliers: first let $q$ be bounded Borel and choose continuous $q_n\to q$ in $L^2(E_x)$. Then $U[q]=\lim_n q_n(T)x=q(T)x$, because $\|(q_n(T)-q(T))x\|^2=\int|q_n-q|^2\,dE_x\to0$. Now, for bounded Borel $h$ and continuous $f$, the product $hf$ is bounded Borel, so $U(M_hf)=(hf)(T)x=h(T)f(T)x=h(T)U(f)$ by multiplicativity. Since $M_h$ and $h(T)$ are bounded, density extends this equality to all of $L^2(\sigma(T),E_x)$. [step 2.1, A1, A2, A4]
 
 4.1 Intertwining with the coordinate: for continuous $f$ one has $U(M_zf)=(zf)(T)x=Tf(T)x=T\,U(f)$, because $T=\Phi_E(z)$ and the calculus is multiplicative; both $U M_z$ and $T U$ are bounded linear maps agreeing on the dense set of continuous classes, so $U M_z=T U$ on $L^2(\sigma(T),E_x)$. [step 2.1, step 3.1, A2, A4]
 

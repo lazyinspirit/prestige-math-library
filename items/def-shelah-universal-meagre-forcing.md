@@ -57,9 +57,11 @@ tree through height $|t|$ is $t$. Two conditions whose recorded trees
 disagree on the levels common to both heights are incomparable, since a common
 strengthening would have to record both trees below the shorter height; distinct
 perfect nowhere-dense trees can disagree on such a level, so compatibility of
-$\mathrm{UM}$ is not automatic. For a condition $(t,T)$ and a node $\sigma\in T$, the set
-of conditions below $(t,T)$ whose recorded tree contains $\sigma$ is dense,
-because one extends the height past $|\sigma|$. Consequently, for a generic
+$\mathrm{UM}$ is not automatic. For a condition $(t,T)$ and a node
+$\sigma\in T$, the conditions below $(t,T)$ whose recorded tree contains
+$\sigma$ are dense in the cone below $(t,T)$, because one extends the height
+past $|\sigma|$. They need not be dense in all of $\mathrm{UM}$, since
+conditions incompatible with $(t,T)$ have no such extension. Consequently, for a generic
 filter $G\subseteq\mathrm{UM}$, every witness tree of a condition in $G$ is
 contained in the **generic tree**
 

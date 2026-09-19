@@ -4,7 +4,7 @@ kind: example
 title: Euler class of the universal oriented two-plane
 status: draft
 origin: pipeline
-deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-oriented-real-vector-bundles-are-classified-by-bso", "def-oriented-grassmannian-and-tautological-oriented-bundle", "thm-stable-stiefel-space-is-contractible", "lem-mod-two-cohomology-rings-of-complex-projective-spaces", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "def-axiom-of-choice"]
+deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-oriented-real-vector-bundles-are-classified-by-bso", "def-oriented-grassmannian-and-tautological-oriented-bundle", "thm-stable-stiefel-space-is-contractible", "lem-mod-two-cohomology-rings-of-complex-projective-spaces", "thm-mod-two-euler-class-is-the-top-stiefel-whitney-class", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -46,9 +46,9 @@ $$\rho_2\bigl(e(\gamma_2^+)\bigr)=w_2(\gamma_2^+)\in H^2(B\operatorname{SO}(2);\
 
 [F4] The mod-two Gysin sequence of an $\mathbb F_2$-oriented bundle in the Thom scope is exact; for $n\geq2$ the Euler class is the transgression of the fiber generator ([[thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle]]).
 
-[F5] $H^*(\mathbb{CP}^\infty;\mathbb F_2)=\mathbb F_2[c]$ with $|c|=2$, and $H^2(\mathbb{CP}^\infty;\mathbb Z)\cong\mathbb Z$ with the corresponding integral class reducing to $c$ ([[lem-mod-two-cohomology-rings-of-complex-projective-spaces]]).
+[F5] $H^*(\mathbb{CP}^\infty;\mathbb F_2)=\mathbb F_2[c]$ with $|c|=2$, where $c$ is the reduction of the normalized integral degree-two generator. The cited lemma proves from the standard even-cell structure and the universal coefficient sequence that $H^2(\mathbb{CP}^\infty;\mathbb Z)\cong\mathbb Z$ and fixes that generator ([[lem-mod-two-cohomology-rings-of-complex-projective-spaces]]).
 
-[F6] For every real bundle with its canonical $\mathbb F_2$-orientation, $e_2=w_n$ in degree $n$ ([[thm-mod-two-euler-class-is-the-top-stiefel-whitney-class]]).
+[F6] For every real bundle with its canonical $\mathbb F_2$-orientation, $e_2=w_n$ in degree $n$; for an integrally oriented bundle, coefficient reduction sends its integral Euler class to this mod-two Euler class ([[thm-mod-two-euler-class-is-the-top-stiefel-whitney-class]]). Coefficient homomorphisms commute with pullback ([[prop-singular-cohomology-is-contravariantly-functorial]]).
 
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]].
 
@@ -59,6 +59,6 @@ $$\rho_2\bigl(e(\gamma_2^+)\bigr)=w_2(\gamma_2^+)\in H^2(B\operatorname{SO}(2);\
 
 3.1 The sign. The chosen generator is the one determined by the standard complex orientation: the normalized Thom class restricts to the chosen orientation class on each fiber by definition, and the identification $H^2(\mathbb{CP}^\infty;\mathbb Z)\cong\mathbb Z$ is made so that the first Chern class of the tautological complex line is the positive generator; with this convention [F2] gives that $e(\gamma_2^+)$ is that generator, not its negative. The mod-two reduction is insensitive to the sign, so the computation below does not use this convention. [F2, step 2.1]
 
-4.1 Mod-two reduction. By [F6] applied to the rank-two bundle $\gamma_2^+$ with its canonical $\mathbb F_2$-orientation, the mod-two Euler class equals the top Stiefel–Whitney class: $e_2(\gamma_2^+)=w_2(\gamma_2^+)$. Since reduction of coefficients commutes with the defining zero-section pullback of the Thom class, $\rho_2(e(\gamma_2^+))=e_2(\gamma_2^+)=w_2(\gamma_2^+)$, and by [F5] this is a nonzero element of $H^2(\mathbb{CP}^\infty;\mathbb F_2)=\mathbb F_2\cdot c$. [F5, F6, step 3.1]
+4.1 Mod-two reduction. By [F6] applied to the integrally oriented rank-two bundle $\gamma_2^+$, coefficient reduction sends its integral Euler class to the mod-two Euler class, and the latter equals the top Stiefel–Whitney class: $\rho_2(e(\gamma_2^+))=e_2(\gamma_2^+)=w_2(\gamma_2^+)$. By [F5] the chosen integral generator reduces to the nonzero element $c$ of $H^2(\mathbb{CP}^\infty;\mathbb F_2)$, so this class is nonzero. [F5, F6, step 3.1]
 
 5.1 Boundary cases. The bundle has rank two and positive rank, so the Euler class lies in degree two and no rank-zero convention is used; for the trivial oriented two-plane over a point the same Gysin computation would give the unit, matching the general rank comparison. The fiber $S^1$ is connected, so the fiber generator is well defined up to sign, which is exactly the sign convention fixed in step 3.1. The base is nonempty and path-connected, so no componentwise statement is needed. AC is used through the Thom/Gysin supplies, as recorded. [F1, F4, A1, step 1.1, step 4.1] ∎

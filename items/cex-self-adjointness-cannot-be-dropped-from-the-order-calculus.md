@@ -5,7 +5,7 @@ title: Self adjointness cannot be dropped from the order calculus
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-order-on-bounded-self-adjoint-operators, def-countable-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-spectrum-and-resolvent-of-a-bounded-operator, thm-hilbert-adjoint-properties]
+deps: [def-order-on-bounded-self-adjoint-operators, def-countable-choice, def-self-adjoint-positive-unitary-and-normal-operator, def-spectrum-and-resolvent-of-a-bounded-operator, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -26,7 +26,7 @@ Assume Countable Choice. For every bounded operator whose spectrum is a subset o
 
 [A1] Positivity of an operator is the quadratic-form condition that $\langle Tx,x\rangle$ is a real number in $[0,+\infty)$ for every $x$, and the order relation is defined only for self-adjoint pairs ([[def-self-adjoint-positive-unitary-and-normal-operator]], [[def-order-on-bounded-self-adjoint-operators]]).
 
-[A2] The adjoint is characterised by $\langle Tx,y\rangle=\langle x,T^*y\rangle$, and in an orthonormal basis the adjoint matrix is the conjugate transpose ([[thm-hilbert-adjoint-properties]]).
+[A2] The adjoint is characterised by $\langle Tx,y\rangle=\langle x,T^*y\rangle$ ([[def-hilbert-space-adjoint]]).
 
 [A3] $\lambda\in\rho(T)$ exactly when $\lambda I-T$ is bijective with bounded inverse ([[def-spectrum-and-resolvent-of-a-bounded-operator]]).
 
@@ -42,7 +42,7 @@ Assume Countable Choice. For every bounded operator whose spectrum is a subset o
 
 1.2 $J$ is not positive: for $x:=\tfrac1{\sqrt2}(e_1+ie_2)$ one has $Jx=\tfrac{i}{\sqrt2}e_1$ and hence $\langle Jx,x\rangle=\tfrac{i}{\sqrt2}\cdot\overline{\tfrac1{\sqrt2}}=\tfrac i2$, which is not a real number, while positivity of a bounded operator requires the value of the quadratic form at every vector to be a real number in $[0,+\infty)$. [A1, A2, algebra]
 
-1.3 $J$ is not self-adjoint: $J^*=\begin{pmatrix}0&0\\1&0\end{pmatrix}\ne J$. [A2]
+1.3 $J$ is not self-adjoint: the defining pairing on the standard orthonormal basis gives $J^*e_1=e_2$ and $J^*e_2=0$, so $J^*=\begin{pmatrix}0&0\\1&0\end{pmatrix}\ne J$. [A2, algebra]
 
 2.1 The witness $J$ therefore has nonnegative real spectrum but is neither positive nor self-adjoint, so nonnegativity of the spectrum alone does not give the quadratic-form inequalities of the order calculus. [step 1.1, step 1.2, step 1.3]
 

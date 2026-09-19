@@ -5,7 +5,7 @@ title: Roots of a complex semisimple Lie algebra form a reduced crystallographic
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, cor-cartan-integers-are-integral, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-root-reflections-preserve-the-root-set, def-root-reflection-from-a-coroot, prop-killing-form-orthogonality-of-root-spaces, def-killing-dual-vector-of-a-root, def-coroot-of-a-lie-algebra-root, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
+deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, cor-cartan-integers-are-integral, cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-root-reflections-preserve-the-root-set, def-root-reflection-from-a-coroot, cor-opposite-root-spaces-pair-nondegenerately, def-coroot-of-a-lie-algebra-root, cor-semisimple-lie-algebras-are-centerless-and-perfect, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -51,7 +51,7 @@ developed on a later page, and only the listed properties are asserted here.
 
 [L4] $\beta(h_\alpha)\in\mathbb Z$ for all roots $\alpha,\beta$ ([[cor-cartan-integers-are-integral]], [[def-coroot-of-a-lie-algebra-root]]).
 
-[L5] $-\alpha\in\Phi$ whenever $\alpha\in\Phi$, and $\mathfrak g_\alpha$ pairs nondegenerately with $\mathfrak g_{-\alpha}$ under the Killing form ([[prop-killing-form-orthogonality-of-root-spaces]], [[def-killing-dual-vector-of-a-root]], [[def-root-and-root-space-relative-to-a-cartan-subalgebra]]).
+[L5] $-\alpha\in\Phi$ whenever $\alpha\in\Phi$, and $\mathfrak g_\alpha$ pairs nondegenerately with $\mathfrak g_{-\alpha}$ under the Killing form ([[cor-opposite-root-spaces-pair-nondegenerately]]).
 
 [L6] The algebra is centerless ([[cor-semisimple-lie-algebras-are-centerless-and-perfect]]).
 

@@ -57,7 +57,7 @@ never extended to $\beta X$.
 
 **Proof technique:** direct.
 
-1.1 For $x \in X$ the ideal $M_x = \{f : Z(f) \ni x\} = \{f : f(x) = 0\}$ is a maximal ideal, and $\mathcal Z[M_x] = \mathcal U_x := \{Z : x \in Z\}$: maximality follows from [L1] applied to the z-ultrafilter $\mathcal U_x$ (a family of zero sets containing $x$, closed under finite intersections and upward closed, and maximal because any zero set either contains $x$ or is disjoint from $\{x\}$), and the displayed identity for $M_x$ uses [L4]. [L1, L4, algebra]
+1.1 For $x \in X$ put $\mathcal U_x:=\{Z:x\in Z\}$. This is a z-ultrafilter: it is a z-filter, and if a zero set $Z=Z(f)$ omits $x$, set $\epsilon:=|f(x)|/2>0$ and $g(y):=\max\{\epsilon-|f(y)|,0\}$. Then $W:=Z(g)$ is a zero set containing $x$ and is disjoint from $Z(f)$, so adjoining $Z$ would destroy the finite-intersection property. Thus $\mathcal U_x$ is maximal. By [L1], $M_x = \{f : Z(f) \ni x\} = \{f : f(x) = 0\}$ is a maximal ideal and $\mathcal Z[M_x]=\mathcal U_x$; the displayed identity also agrees with [L4]. [L1, L4, algebra]
 
 1.2 For every $p \in \beta X$ the ideal $M_p$ is maximal: by [L3] $M_p = M_{\mathcal U_p}$ with $\mathcal U_p$ a z-ultrafilter, and [L1] says that $M_{\mathcal U_p}$ is maximal. [L1, L3]
 

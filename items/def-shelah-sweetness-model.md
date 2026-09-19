@@ -61,18 +61,20 @@ $E_n$-class.
 $M_2=(P_2,D_2,(E^2_n))$ **extends** $M_1=(P_1,D_1,(E^1_n))$ when
 
 - $P_1$ is a complete suborder of $P_2$, that is, $P_1\subseteq P_2$, the order
-  of $P_1$ is the restriction of the order of $P_2$, and every condition of
-  $P_2$ has a condition of $P_1$ below it; the latter density also makes
-  compatibility of two $P_1$-conditions the same whether it is computed in
-  $P_1$ or in $P_2$;
+  and incompatibility relations on $P_1$ are the restrictions of those on
+  $P_2$, and every maximal antichain of $P_1$ is maximal in $P_2$. This is not
+  a density requirement: an arbitrary condition of $P_2$ need not have a
+  stronger condition in $P_1$;
 - $D_1\subseteq D_2$;
 - each old $E^1_n$ is the restriction of $E^2_n$ to $D_1$;
-- every $E^2_n$-class that meets $D_1$ is contained in $D_1$;
-- whenever $q\in D_1$, $p\in D_2$ and $q\le p$, then $p\in D_1$.
+- for every $p\in D_1$ and every $n<\omega$, its $E^2_n$-class is contained in
+  $P_1$;
+- whenever $p\in D_2$, $q\in P_1$ and $q\le p$, then $p\in D_1$.
 
-The inclusion of iteration stages in
-[[lem-iteration-restrictions-and-complete-embeddings]] is a complete suborder
-in this sense.
+Thus in particular $D_2\cap P_1=D_1$, and the preceding class-containment
+clause may equivalently say that every $E^2_n$-class meeting $D_1$ is contained
+in $D_1$. Standard iteration-stage inclusions are complete suborders in this
+sense.
 
 **Boolean-algebra language.** By
 [[thm-forcing-equivalence-and-boolean-completion]] the separative quotient and

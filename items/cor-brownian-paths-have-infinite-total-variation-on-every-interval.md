@@ -20,7 +20,7 @@ sources:
 ## Statement
 
 Let $B$ be a standard Brownian motion [[def-brownian-motion]]. Almost surely,
-on every nondegenerate compact interval $[a,b]$ the variation sums of the path
+on every nondegenerate compact interval $[a,b]\subseteq[0,\infty)$ the variation sums of the path
 are unbounded above:
 $$\sup_P\sum_{i<n}|B_{t_{i+1}}-B_{t_i}|=+\infty$$
 over all partitions $P=(n,t)$ of $[a,b]$ in the sense of
@@ -29,7 +29,7 @@ path is not of bounded variation on any nondegenerate compact interval.
 
 ## Facts & Assumptions
 
-**Given:** AC, a standard Brownian motion $B$, and rationals $a<b$.
+**Given:** AC, a standard Brownian motion $B$, and nonnegative rationals $a<b$.
 
 [F1] For disjoint time intervals the increments of $B$ are independent with laws $N(0,h)$ for interval length $h$. [[def-brownian-motion]]
 
@@ -59,9 +59,9 @@ path is not of bounded variation on any nondegenerate compact interval.
 
 4.1 By [F6] and [step 2.1], almost surely $S_n>\tfrac12E S_n$ for all sufficiently large $n$, and hence $S_n\to\infty$; since each $S_n=V(B,P_n)$ is the variation of the path over the dyadic partition $P_n$ of $[a,b]$, the variation sums over partitions of $[a,b]$ are almost surely unbounded above. [step 2.1, step 3.1, F4, F6]
 
-5.1 The argument of steps 1.1-4.1 depends on $a<b$ only through the single number $b-a$, so it applies verbatim to every ordered pair of rationals $a<b$; intersecting over this countable family gives a probability-one event on which the variation sums of $B$ are unbounded above on every compact interval with rational endpoints. [step 1.1, step 4.1, F8]
+5.1 The argument of steps 1.1-4.1 depends on $0\le a<b$ only through the single number $b-a$, so it applies verbatim to every ordered pair of nonnegative rationals $a<b$; intersecting over this countable family gives a probability-one event on which the variation sums of $B$ are unbounded above on every compact interval in $[0,\infty)$ with rational endpoints. [step 1.1, step 4.1, F8]
 
-6.1 On that event every nondegenerate compact interval $[c,d]$ has unbounded variation sums as well: choose, by [F7], rationals $a<b$ with $c\le a<b\le d$, note that the dyadic partitions of $[a,b]$ extend to partitions of $[c,d]$ by adding the points $c$ and $d$, and that adding points can only increase a variation sum by the triangle inequality, so the sums over partitions of $[c,d]$ dominate the unbounded family for $[a,b]$. [step 5.1, F4, F7]
+6.1 On that event every nondegenerate compact interval $[c,d]\subseteq[0,\infty)$ has unbounded variation sums as well: choose, by [F7], nonnegative rationals $a<b$ with $c\le a<b\le d$, note that the dyadic partitions of $[a,b]$ extend to partitions of $[c,d]$ by adding the points $c$ and $d$, and that adding points can only increase a variation sum by the triangle inequality, so the sums over partitions of $[c,d]$ dominate the unbounded family for $[a,b]$. [step 5.1, F4, F7]
 
 7.1 The boundary cases are covered: the interval is required to be nondegenerate, so $a=b$ and the singleton convention are excluded; $2^n\ge2$ increments are used, so the $n$-sums are genuine variation sums over partitions in the sense of [F4]; the constant $\operatorname{Var}(S_n)$ and the divergence of $E S_n$ are both independent of the particular rational interval, so the countable intersection of step 5.1 is legitimate; and AC enters only through [F8]. [step 6.1, F4, F8, given] ∎
 

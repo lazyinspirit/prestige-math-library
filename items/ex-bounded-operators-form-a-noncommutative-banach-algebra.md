@@ -1,7 +1,7 @@
 ---
 id: ex-bounded-operators-form-a-noncommutative-banach-algebra
 kind: example
-title: Bounded operators form a noncommutative Banach algebra
+title: Bounded operators form a Banach algebra, noncommutative in dimension at least two
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27

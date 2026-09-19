@@ -36,11 +36,14 @@ filtration-like families are distinguished.
    positive rationals, since $t\mapsto\mathcal F^0_t$ is increasing. This
    family is not adjoined to $P$.
 3. **Terminal null ideal and completed raw filtration.** Let
-   $$\mathcal N:=\{M\subseteq\Omega:\text{there is }N_0\in\mathcal F^0_\infty \text{ with }P(N_0)=0\text{ and }M\subseteq N_0\}$$
-   be the family of subsets of $P$-null events of $\mathcal F^0_\infty$. Put
+   $$\mathcal N:=\{M\in\mathcal F:\text{there is }N_0\in\mathcal F^0_\infty
+   \text{ with }P(N_0)=0\text{ and }M\subseteq N_0\}$$
+   be the family of ambient-measurable subsets of $P$-null events of
+   $\mathcal F^0_\infty$. Put
    $$\overline{\mathcal F}{}^0_t:=\sigma\bigl(\mathcal F^0_t\cup\mathcal N\bigr),\qquad t\ge0 .$$
-   Each $\overline{\mathcal F}{}^0_t$ contains every member of $\mathcal N$
-   (that is, it is $P$-complete in the ambient space) and
+   Each $\overline{\mathcal F}{}^0_t$ is a sub-sigma-algebra of $\mathcal F$,
+   contains every member of $\mathcal N$ (that is, it is complete relative to
+   the given ambient probability space), and
    $\overline{\mathcal F}{}^0_s\subseteq\overline{\mathcal F}{}^0_t$ for
    $s\le t$, so $(\overline{\mathcal F}{}^0_t)_{t\ge0}$ is a filtration.
 4. **Usual augmentation.** $\mathcal F_t:=\bigcap_{u>t}\overline{\mathcal F}{}^0_u$

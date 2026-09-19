@@ -80,11 +80,10 @@ used below, and are direct consequences of the clauses above.
    $s\wedge n\le t\wedge n$. The converse fails; a local martingale need not be
    a martingale, and no such implication is used in this development.
 2. **Localization is stable under stopping.** If $(\tau_n)$ localizes $X$ and
-   $\sigma$ is any stopping time, then $(\sigma\wedge\tau_n)$ localizes
-   $X^\sigma$: the stopped pieces $(X^{\sigma})^{\sigma\wedge\tau_n}=X^{\sigma\wedge\tau_n}$
-   are the corresponding pieces of the original localization, so they are
-   martingales, and $\sigma\wedge\tau_n\uparrow\sigma$; when $\sigma\equiv\infty$
-   this is the original sequence. This remark is used by the localized-integral
+   $\sigma$ is any stopping time, then the original sequence $(\tau_n)$
+   localizes $X^\sigma$: it still increases to infinity, and the stopped
+   pieces $(X^{\sigma})^{\tau_n}=X^{\sigma\wedge\tau_n}$ are stopped versions
+   of the martingales $X^{\tau_n}-X_0$, hence are martingales. This remark is used by the localized-integral
    item below.
 
 No path continuity, no right continuity of the filtration, and no completeness

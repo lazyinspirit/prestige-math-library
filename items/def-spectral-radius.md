@@ -46,9 +46,10 @@ is fixed by the spectrum definition above.
   compact set of moduli uses no further choice, since a nonempty compact subset
   of $\mathbb R$ contains its supremum.
 
-- **Monotonicity under containment.** If $\sigma_B(a) \subseteq \sigma_A(a)$ —
-  for instance when $B$ is a unital subalgebra of $A$ containing $a$ and
-  $1$ — then $r_B(a) \le r_A(a)$ by taking maxima over the larger set.
+- **Monotonicity under containment.** If $B$ is a unital subalgebra of $A$
+  containing $a$ and the same unit, then
+  $\sigma_A(a)\subseteq\sigma_B(a)$: invertibility in $B$ implies
+  invertibility in $A$. Consequently $r_A(a)\le r_B(a)$.
 
 - **Constancy on scalar multiples.** For $\lambda \in \mathbb C$ one has
   $\sigma(\lambda 1) = \{\lambda\}$ and hence $r(\lambda 1) = |\lambda|$: the

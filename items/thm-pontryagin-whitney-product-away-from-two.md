@@ -24,7 +24,7 @@ sources:
 ## Statement
 
 Assume AC. Let $E,F\to B$ be numerable real bundles over a path-connected CW
-base (or CW-type base). Over $\mathbb Z[1/2]$, or any coefficient ring in which
+base. Over $\mathbb Z[1/2]$, or any coefficient ring in which
 $2$ is invertible, the total Pontryagin classes multiply:
 $$p(E\oplus F)=p(E)\,p(F).$$
 No integral multiplicativity is asserted: integrally the omitted odd-Chern
@@ -41,7 +41,9 @@ a witness for that failure.
 
 [F3] Total Chern classes are multiplicative over Whitney sums and natural ([[thm-naturality-normalization-and-whitney-sum-for-chern-classes]]).
 
-[F4] Complexification commutes with direct sums: $(E\oplus F)_{\mathbb C}\cong E_{\mathbb C}\oplus F_{\mathbb C}$ ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F4] Direct sums and scalar extensions of bundles are formed fiberwise from
+their transition functions
+([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
 ## Proof
 
@@ -49,7 +51,13 @@ a witness for that failure.
 
 **Given:** AC and numerable real bundles $E,F\to B$ over a path-connected CW base.
 
-1.1 By [F4] and multiplicativity of the total Chern class [F3], $c((E\oplus F)_{\mathbb C})=c(E_{\mathbb C})c(F_{\mathbb C})$; expanding the product in degree $2i$ gives $c_{2i}((E\oplus F)_{\mathbb C})=\sum_{a+b=2i}c_a(E_{\mathbb C})c_b(F_{\mathbb C})$, the sum splitting into the terms with $a,b$ both even and the terms with $a,b$ both odd. [F3, F4]
+1.1 Distributivity gives a fiberwise complex-linear isomorphism
+$((E\oplus F)\otimes_{\mathbb R}\mathbb C)_b\to
+(E_b\otimes_{\mathbb R}\mathbb C)\oplus
+(F_b\otimes_{\mathbb R}\mathbb C)$; compatibility with the transition
+functions makes this an isomorphism
+$(E\oplus F)_{\mathbb C}\cong E_{\mathbb C}\oplus F_{\mathbb C}$. Hence by
+multiplicativity [F3], $c((E\oplus F)_{\mathbb C})=c(E_{\mathbb C})c(F_{\mathbb C})$; expanding in degree $2i$ gives the sum of the even-even and odd-odd terms. [F3, F4]
 
 2.1 In the even-even terms write $a=2r$, $b=2s$ with $r+s=i$: then $(-1)^ic_{2r}(E_{\mathbb C})c_{2s}(F_{\mathbb C})=(-1)^{r+s}c_{2r}(E_{\mathbb C})c_{2s}(F_{\mathbb C})=p_r(E)p_s(F)$ by [F1], since $(-1)^{r+s}=(-1)^i$. [F1, step 1.1]
 

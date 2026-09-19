@@ -34,13 +34,21 @@ $$\varphi[U \cap S] = \varphi[U] \cap \bigl(E_0 \oplus \{0\}\bigr) .$$
 
 In other words, in the chart the submanifold is exactly the slice of the open
 set $\varphi[U]$ cut out by setting the $E_1$-coordinate equal to zero. The
-subspace topology on $S$ ([[def-subspace-topology-top]]) then makes $S$ a
-$C^k$ Banach manifold modelled on $E_0$: the charts $(\varphi|_{U \cap S},
-U \cap S)$ take values in the open subsets $\varphi[U] \cap E_0$ of $E_0$, and
-their transition maps are restrictions of the $C^k$ transition maps of $M$.
-For $p \in S$ the **tangent space** $T_pS$ is the tangent space of this induced
-manifold, and the differential of the inclusion identifies it with a subspace
-of $T_pM$.
+subspace topology on $S$ ([[def-subspace-topology-top]]) carries the resulting
+componentwise $C^k$ structure: the charts $(\varphi|_{U \cap S},U \cap S)$ take
+values in open subsets of the local space $E_0$, and their transition maps are
+restrictions of the $C^k$ transition maps of $M$. On an overlap, the derivative
+of such a transition map is a bounded linear isomorphism between the two local
+model spaces. Hence the isomorphism type of $E_0$ is locally constant on $S$,
+and every connected component of $S$ is a $C^k$ Banach manifold modelled on one
+fixed representative of that type. Different components need not have
+isomorphic model spaces; without an additional uniform-model hypothesis, $S$
+as a whole need not be modelled on one Banach space in the global convention of
+[[def-countable-base-banach-manifold-and-smooth-map]].
+
+For $p \in S$ the **tangent space** $T_pS$ is the tangent space of the component
+of $S$ containing $p$, and the differential of the inclusion identifies it
+with a subspace of $T_pM$.
 
 ## Remarks
 
@@ -55,6 +63,12 @@ of $T_pM$.
   sense, so the example separates closedness from complementedness at the level
   of Banach spaces rather than exhibiting a split-submanifold failure for a
   Banach manifold.
+
+- **The local model can vary between components.** For example,
+  $\{0\} \cup (1,2) \subseteq \mathbb R$ satisfies the slice condition, with
+  local model $\{0\}$ at the isolated point and $\mathbb R$ on the interval.
+  Thus it is split in the componentwise sense above, but it is not modelled on
+  one fixed Banach space.
 
 - **The tangent space of a split submanifold is complemented.** In a chart at
   $p$ the tangent space of $S$ corresponds to $E_0$ and that of $M$ to $E$, so

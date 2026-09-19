@@ -4,7 +4,7 @@ kind: example
 title: Stiefel–Whitney class of the universal real line
 status: draft
 origin: pipeline
-deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-real-projective-bundle-and-tautological-line", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
+deps: ["def-stiefel-whitney-classes-from-the-projective-bundle-relation", "def-real-projective-bundle-and-tautological-line", "def-tautological-degree-one-class-on-a-real-projective-bundle", "lem-tautological-degree-one-class-is-well-defined-and-fiber-generating", "lem-mod-two-cohomology-ring-of-infinite-real-projective-space", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -35,11 +35,13 @@ $$w(\gamma_1)=1+a,\qquad\text{that is}\quad w_0(\gamma_1)=1,\ w_1(\gamma_1)=a,\ 
 
 [F2] For a rank-one bundle $L$, the projection $P(L)\to B$ is a homeomorphism over $B$, the tautological line is $L$, and the defining relation of the projective bundle reads $x_L+w_1(L)=0$, so $w_1(L)=x_L$ and $w(L)=1+x_L$; the classes above the rank vanish by convention ([[def-real-projective-bundle-and-tautological-line]], [[def-stiefel-whitney-classes-from-the-projective-bundle-relation]]).
 
+[F3] The tautological degree-one class of a line is the pullback of the fixed generator $a$ along any classifying map, independently of that map ([[def-tautological-degree-one-class-on-a-real-projective-bundle]], [[lem-tautological-degree-one-class-is-well-defined-and-fiber-generating]]).
+
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]], used only through the projective-bundle theorem that supplies the coefficients.
 
 ## Verification
 1.1 The projective bundle of $\gamma_1$ is $\mathbb{RP}^\infty$ itself, since a point of $P(\gamma_1)$ is a line in a line, and its tautological line is $\gamma_1$; by [F2] the defining relation is $x_{\gamma_1}+w_1(\gamma_1)=0$ in $H^1(\mathbb{RP}^\infty;\mathbb F_2)$. [F2]
 
-2.1 The class $x_{\gamma_1}$ is the pullback of $a$ along a classifying map of $\gamma_1$; the identity map of $\mathbb{RP}^\infty$ classifies $\gamma_1$, so $x_{\gamma_1}=\operatorname{id}^*a=a$ by [F1]. Substituting in step 1.1 and using that $-1=1$ in $\mathbb F_2$ gives $w_1(\gamma_1)=a$; by the rank convention $w_i(\gamma_1)=0$ for $i\geq2$ and $w_0=1$, so $w(\gamma_1)=1+a$. [F1, F2, step 1.1]
+2.1 By [F3], $x_{\gamma_1}$ is the pullback of $a$ along any classifying map of $\gamma_1$. The identity map of $\mathbb{RP}^\infty$ classifies $\gamma_1$, so $x_{\gamma_1}=\operatorname{id}^*a=a$. Substituting in step 1.1 and using that $-1=1$ in $\mathbb F_2$ gives $w_1(\gamma_1)=a$; by the rank convention $w_i(\gamma_1)=0$ for $i\geq2$ and $w_0=1$, so $w(\gamma_1)=1+a$. [F1, F2, F3, step 1.1]
 
 3.1 Boundary cases. The degree-zero class is the unit $1$ in $H^0$ of the connected space $\mathbb{RP}^\infty$, matching the degree-zero convention. The bundle is a line, so every class of degree at least two vanishes; in particular the reduction modulo two of the integral Euler class is $w_1$, which is nonzero. The base is nonempty, so no empty-base convention is exercised, and no choice beyond [A1] is made. [F1, F2, step 2.1] ∎

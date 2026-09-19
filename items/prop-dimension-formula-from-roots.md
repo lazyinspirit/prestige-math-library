@@ -5,7 +5,7 @@ title: Dimension formula from roots
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-regular-element-and-rank-of-a-complex-lie-algebra]
+deps: [thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-regular-element-and-rank-of-a-complex-lie-algebra, lem-regular-semisimple-elements-form-a-dense-open-subset, thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -26,9 +26,8 @@ semisimple Lie algebra $\mathfrak g$ with root set $\Phi$
 $$\dim\mathfrak g=\dim\mathfrak h+|\Phi| .$$
 Moreover all Cartan subalgebras of $\mathfrak g$ have the same dimension, so
 the right-hand side is independent of the chosen Cartan subalgebra, and this
-common value is the quantity called $\operatorname{rank}\mathfrak g$ in
-[[def-regular-element-and-rank-of-a-complex-lie-algebra]] whenever that
-minimum of centralizer dimensions is attained by the Cartan subalgebras.
+common dimension is the quantity $\operatorname{rank}\mathfrak g$ of
+[[def-regular-element-and-rank-of-a-complex-lie-algebra]].
 
 ## Facts & Assumptions
 
@@ -38,10 +37,12 @@ minimum of centralizer dimensions is attained by the Cartan subalgebras.
 
 [L2] Any two Cartan subalgebras of $\mathfrak g$ are conjugate, hence of the same dimension ([[thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate]]).
 
+[L3] Regular semisimple elements exist in $\mathfrak g$, and the centralizer of every regular semisimple element is a Cartan subalgebra ([[lem-regular-semisimple-elements-form-a-dense-open-subset]], [[thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 By [L1] the vector space $\mathfrak g$ is the direct sum of $\mathfrak h$ and one one-dimensional space for each of the $|\Phi|$ roots; dimensions are additive over direct sums, so $\dim\mathfrak g=\dim\mathfrak h+|\Phi|$. [L1, algebra]
 
-2.1 Since conjugation carries Cartan subalgebras to Cartan subalgebras of the same dimension, [L2] shows that $\dim\mathfrak h$ does not depend on the choice of $\mathfrak h$; hence $\dim\mathfrak g-|\Phi|$ is well defined independently of $\mathfrak h$. If the minimum of $\dim\ker(\operatorname{ad}_x)$ over $x\in\mathfrak g$ is attained at an element lying in a Cartan subalgebra (equivalently, if that minimum equals the common Cartan dimension), then that minimum equals $\dim\mathfrak h$ and the formula reads $\dim\mathfrak g=\operatorname{rank}\mathfrak g+|\Phi|$. [L2, step 1.1] ∎
+2.1 By [L3] choose a regular semisimple element $x$. Its centralizer $\mathfrak g^x$ is a Cartan subalgebra, so [L2] gives $\dim\mathfrak g^x=\dim\mathfrak h$. Regularity and the rank definition give $\dim\mathfrak g^x=\operatorname{rank}\mathfrak g$. Thus the common Cartan dimension is $\operatorname{rank}\mathfrak g$, independently of $\mathfrak h$, and step 1.1 becomes $\dim\mathfrak g=\operatorname{rank}\mathfrak g+|\Phi|$. [L2, L3, step 1.1] ∎

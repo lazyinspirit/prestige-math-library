@@ -48,7 +48,7 @@ examples.
 
 [F1] On measurable rectangles the product measure is given by $(\mu\times\nu)(A\times B)=\mu(A)\nu(B)$, and the completion $\overline{\mu\times\nu}$ extends it, agreeing with it on $(\mathcal A\otimes\mathcal B)$-measurable sets ([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], [[def-measurable-rectangle]], [[thm-completion-of-a-measure-space]]).
 
-[F2] The one-dimensional interval measures satisfy $\mu([0,1])=\nu([0,1])=1$ and $\mu([0,\tfrac12])=\tfrac12$ ([[thm-lebesgue-measure-of-a-box-of-every-kind]], [[def-multidimensional-rectangle-and-volume]]).
+[F2] Every nondegenerate interval in $[0,1]$, with any combination of included or excluded endpoints, is Lebesgue measurable and has measure equal to its positive length. In particular $\mu([0,1])=\nu([0,1])=1$ and $\mu([0,\tfrac12])=\tfrac12$ ([[thm-lebesgue-measure-of-a-box-of-every-kind]], [[def-multidimensional-rectangle-and-volume]]).
 
 [F3] The preceding example computes the product kernel: $k$ is square integrable with $\|k\|_2^2=\|a\|_2^2\|b\|_2^2$, its kernel operator is $(T_kf)(x)=a(x)\langle f,b\rangle$, and its range admits an ordered basis of length at most one ([[ex-square-integrable-separable-product-kernel]]).
 
@@ -56,7 +56,7 @@ examples.
 
 [F5] A continuous map between metric spaces is sequentially continuous: from $p_j\to p$ it follows that $h(p_j)\to h(p)$ ([[thm-metric-continuity-characterisations]], [[def-metric-continuity]], [[def-metric-convergence]]).
 
-[F6] In $[0,1]^2$ every ball $B(p,r)$ with $r>0$ about a point $p$ contains a nondegenerate open rectangle, hence a measurable rectangle of positive $(\mu\times\nu)$-measure and of positive completed measure, by [F1] and [F2] ([[def-metric-ball]], [[def-measurable-rectangle]]).
+[F6] In $[0,1]^2$ every relative ball $B(p,r)$ with $r>0$ about a point $p$ contains a product $I\times J$ of two nondegenerate intervals in $[0,1]$ (with the boundary faces included when $p$ lies on the boundary). By [F2], $\mu(I)>0$ and $\nu(J)>0$, so this is a measurable rectangle of positive $(\mu\times\nu)$-measure and, by [F1], of the same positive completed measure ([[def-metric-ball]], [[def-measurable-rectangle]]).
 
 [F7] Choice implies Countable Choice ([[def-axiom-of-choice]], [[lem-ac-supplies-countable-and-dependent-choice-for-banach-integration]]), and Countable Choice selects one point from each of countably many nonempty subsets of a metric space ([[def-countable-choice]]).
 

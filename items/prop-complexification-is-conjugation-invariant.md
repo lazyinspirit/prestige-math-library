@@ -20,12 +20,14 @@ sources:
 
 ## Statement
 
-Assume AC. Let $E\to B$ be a real vector bundle with complexification
-$E_{\mathbb C}=E\otimes_{\mathbb R}\mathbb C$. Then:
+Assume AC. Let $B$ be a path-connected CW complex, let $E\to B$ be a
+numerable real vector bundle with complexification
+$E_{\mathbb C}=E\otimes_{\mathbb R}\mathbb C$, and let all complex bundles
+below be numerable bundles over $B$. Then:
 
 1. $E_{\mathbb C}$ is canonically complex-linearly isomorphic to its
    conjugate $\overline{E_{\mathbb C}}$;
-2. for every complex vector bundle $V\to B$ the conjugate bundle satisfies
+2. for every such complex vector bundle $V\to B$ the conjugate bundle satisfies
    $$c_i(\overline V)=(-1)^ic_i(V)\qquad(i\geq0).$$
 
 ## Facts & Assumptions

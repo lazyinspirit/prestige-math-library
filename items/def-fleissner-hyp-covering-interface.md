@@ -40,11 +40,15 @@ chosen beyond the two properties just named.
 
 ## Remarks
 
-- **HYP is met at $\kappa = \omega$ by the continuum hypothesis.** If
-  $\mathrm{CH}$ holds, take $\kappa := \omega$, $\kappa_n := n$, and
-  $E := \{\, \delta < \omega_1 : \delta \text{ is a limit ordinal} \,\}$; then
-  $(1\mathrm{a})$, $(1\mathrm{b})$ hold trivially and $(2)$ is
-  $\mathrm{CH}$, while $(3)$ is proved on the companion $\mathrm{CH}$ item.
+- **The CH construction is not literally an instance of HYP.** Under
+  $\mathrm{CH}$, the parameters $\kappa := \omega$, $\kappa_n := n$, and
+  $E := \{\, \delta < \omega_1 : \delta \text{ is a nonzero limit ordinal} \,\}$
+  satisfy $(1\mathrm{a})$, $(1\mathrm{b})$, $(2)$, and $(3\mathrm{a})$, but
+  $(3\mathrm{b})$ fails. Indeed, at $\beta := \omega^2$ the set
+  $\{\,\omega \cdot n : 1 \le n < \omega\,\}$ is a club in $\omega^2$
+  contained in $E \cap \omega^2$. The separate CH theorem instead proves the
+  ladder-separation input directly in the countable case and does not invoke
+  HYP.
 
 - **The separation function is not recorded here.** Fleissner's Lemma 1 derives,
   from $(3\mathrm{b})$ and the ladders, a function $m_\beta$ separating distinct

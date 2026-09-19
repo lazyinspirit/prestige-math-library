@@ -4,7 +4,11 @@
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { holdStep5 } from './step5-hold.mts';
 
-const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
+// Step-5 lanes (owner, 2026-09-19): readers Sol/high, refuters Terra/xhigh,
+// group adjudicators and every 5b agent Sol/xhigh.
+const SOL_HIGH = MODEL_PROFILE_NAMES.solHigh;
+const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
+const TERRA_XHIGH = MODEL_PROFILE_NAMES.terraXHigh;
 
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
 export function step5Stages(d: any) {
@@ -46,7 +50,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-read',
       label: 'independent readers over authored content',
-      modelProfile: (plan: any) => plan.role === 'reader' ? DEEPSEEK_FLASH_MAX : undefined,
+      modelProfile: (plan: any) => plan.role === 'reader' ? SOL_HIGH : undefined,
       pipeline: 'read',
       role: 'reader',
       units: batches,
@@ -92,7 +96,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-refute',
       label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? DEEPSEEK_FLASH_MAX : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? TERRA_XHIGH : undefined,
       pipeline: 'read',
       role: 'refuter',
       units: batches,
@@ -134,7 +138,7 @@ export function step5Stages(d: any) {
     {
       id: '5a-adjudicate',
       label: 'group Alpha adjudication of reader repairs, refuter findings and pages',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? DEEPSEEK_FLASH_MAX : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_XHIGH : undefined,
       units: batches,
       pattern: resultPattern('alpha', '5a-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {
@@ -191,7 +195,7 @@ export function step5Stages(d: any) {
     {
       id: '5b-cross',
       label: 'lead Alpha cross-batch audit and final Step 5 closure',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? DEEPSEEK_FLASH_MAX : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL_XHIGH : undefined,
       units: () => ['all'],
       pattern: resultPattern('alpha', '5b-[a-z-]+'),
       artifacts: (ctx: any) => [`research/${ctx.run}-alpha-5b.md`, `research/${ctx.run}-5b-verdicts.jsonl`],

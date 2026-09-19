@@ -30,9 +30,11 @@ locally square-integrable integrands $X\eta$ and $Y\xi$
 Then, up to indistinguishability, for every $t\ge0$
 $$X_tY_t=X_0Y_0+\int_0^tX_s\,dY_s+\int_0^tY_s\,dX_s+[X,Y]_t,$$
 with $[X,Y]$ the quadratic covariation of
-[[thm-quadratic-covariation-of-brownian-ito-processes]]. In particular
-$X_tY_t-[X,Y]_t$ is a continuous local martingale and, when both integrals have
-finite energy on $[0,t]$, a true martingale identity holds in expectation.
+[[thm-quadratic-covariation-of-brownian-ito-processes]]. In particular, when
+$b^X=b^Y=0$, the process $X_tY_t-[X,Y]_t$ is a continuous local martingale.
+If in addition the two stochastic integrands have finite energy on $[0,t]$
+and the initial product is integrable, then
+$E[X_tY_t]=E[X_0Y_0]+E[X,Y]_t$.
 
 ## Facts & Assumptions
 
@@ -82,7 +84,7 @@ finite energy on $[0,t]$, a true martingale identity holds in expectation.
  
 6.1 Removing the localization: by step 1.1 the identity holds on $\{\rho_c\ge T\}$ for each $c$, and $\rho_c\uparrow T$ almost surely, so the events $\{\rho_c\ge T\}$ increase to a full-probability event and the identity holds almost surely on a single event for each fixed horizon; taking the intersection over the countably many rational horizons and using continuity gives indistinguishability on $[0,\infty)$. [F7, step 1.1, step 5.1]
  
-7.1 Martingale corollary and boundary cases: since $M^X,M^Y$ are continuous local martingales and $A^X,A^Y$ are continuous finite-variation processes, the identity exhibits $X_tY_t-[X,Y]_t-X_0Y_0$ as a sum of two localized Ito integrals, hence a continuous local martingale; when the energies $\int_0^T(X\eta)^2,\int_0^T(Y\xi)^2$ are finite the integrals are square-integrable martingales and the expectation identity $E[X_TY_T]=X_0Y_0+E[X,Y]_T$ holds. If $X\equiv X_0$ is constant, $[X,Y]=0$ and the identity reduces to $X_0Y_T=X_0Y_0+X_0\int dY$, the defining display; if $X=Y$ it reads $X_t^2=X_0^2+2\int X\,dX+[X]_t$, the quadratic identity; if $\xi\equiv0$ or $\eta\equiv0$ then the corresponding covariation integral vanishes and the formula reduces to the ordinary product rule for a finite-variation factor; at $t=0$ both sides equal $X_0Y_0$; and $T=0$ is the empty-partition case. AC enters only through [F9], and all localization levels are canonical. [F2, F3, F9, step 6.1] ∎
+7.1 Martingale corollary and boundary cases: when $b^X=b^Y=0$, the two differential integrals in step 6.1 are precisely the localized Ito integrals of $X\eta$ and $Y\xi$, so $X_tY_t-[X,Y]_t-X_0Y_0$ is a continuous local martingale. When their energies on $[0,T]$ are finite and $X_0Y_0$ is integrable, those integrals are square-integrable martingales and the expectation identity is $E[X_TY_T]=E[X_0Y_0]+E[X,Y]_T$. For general drifts, the two finite-variation terms $\int Xb^Yds+\int Yb^Xds$ remain in the product formula and no local-martingale corollary is claimed. If $X\equiv X_0$ is constant, $[X,Y]=0$ and the identity reduces to $X_0Y_T=X_0Y_0+X_0\int dY$, the defining display; if $X=Y$ it reads $X_t^2=X_0^2+2\int X\,dX+[X]_t$, the quadratic identity; if $\xi\equiv0$ or $\eta\equiv0$ then the corresponding covariation integral vanishes and the formula reduces to the ordinary product rule for a finite-variation factor; at $t=0$ both sides equal $X_0Y_0$; and $T=0$ is the empty-partition case. AC enters only through [F9], and all localization levels are canonical. [F2, F3, F9, step 6.1] ∎
 
 ## Source notes
 

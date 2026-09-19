@@ -5,7 +5,7 @@ title: The complex tautological Euler class restricts to the projective-fiber ge
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-orientation-of-underlying-real-bundles, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-stable-stiefel-space-is-contractible, def-oriented-grassmannian-and-tautological-oriented-bundle, def-stiefel-space-grassmannian-and-tautological-bundle, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, lem-cohomology-ring-of-infinite-complex-projective-space, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, thm-universal-coefficient-theorem-for-cohomology-over-a-pid, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
+deps: [def-complex-projective-bundle-and-tautological-complex-line, lem-complex-orientation-of-underlying-real-bundles, thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle, thm-stable-stiefel-space-is-contractible, def-oriented-grassmannian-and-tautological-oriented-bundle, def-stiefel-space-grassmannian-and-tautological-bundle, lem-integral-cohomology-ring-of-complex-projective-space-by-splitting, lem-cohomology-ring-of-infinite-complex-projective-space, thm-naturality-orientation-sign-and-whitney-product-for-euler-classes, def-schubert-cells-in-real-and-complex-grassmannians, thm-schubert-cells-give-the-stable-grassmannian-cw-structure, thm-cellular-cochains-compute-cohomology-with-local-coefficients, def-singular-cohomology-with-coefficients, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from the oriented bundle classification and the Euler-class supplier."
 provenance:
@@ -67,7 +67,7 @@ no statement below depends on which sign it is.
 
 [F8] The Euler class of an $R$-oriented numerable bundle is natural under orientation-preserving pullback and depends only on the oriented isomorphism class ([[thm-naturality-orientation-sign-and-whitney-product-for-euler-classes]]).
 
-[F9] For a PID $R$ and any space there is a natural short exact sequence $0\to H^n(X;R)\otimes S\to H^n(X;S)\to\operatorname{Tor}(H^{n+1}(X;R),S)\to0$ for every $R$-module $S$ ([[thm-universal-coefficient-theorem-for-cohomology-over-a-pid]]).
+[F9] The Schubert CW structure on $\mathbb{CP}^{n-1}$ has one cell in each even degree $0,2,\dots,2n-2$ and no odd cells, and cellular cochains with any constant coefficient group compute singular cohomology; coefficient reduction is induced cellwise ([[def-schubert-cells-in-real-and-complex-grassmannians]], [[thm-schubert-cells-give-the-stable-grassmannian-cw-structure]], [[thm-cellular-cochains-compute-cohomology-with-local-coefficients]]).
 
 [F10] For a path-connected space $X$ the degree-zero singular cohomology $H^0(X;\mathbb Z)$ is $\mathbb Z$ ([[def-singular-cohomology-with-coefficients]]).
 
@@ -87,7 +87,7 @@ no statement below depends on which sign it is.
 
 4.1 Bases. By [F6] the ring $H^*(\mathbb{CP}^{n-1};\mathbb Z)$ is $\mathbb Z[x]/(x^n)$ with $x$ a generator of the degree-two part; since $j_b^*x=\pm x$ by step 3.1, the classes $1,j_b^*x,\dots,(j_b^*x)^{n-1}$ are the standard $\mathbb Z$-basis up to the fixed signs. [F6, step 3.1]
 
-5.1 Coefficient reductions. The groups $H^k(\mathbb{CP}^{n-1};\mathbb Z)$ are free by [F6], so the universal-coefficient sequence of [F9] with $S=\mathbb F_p$ has vanishing Tor term and identifies $H^k(\mathbb{CP}^{n-1};\mathbb F_p)$ with the tensor product; the cup product is compatible with the coefficient map, so the reductions of the classes of step 4.1 are an $\mathbb F_p$-basis of $H^*(\mathbb{CP}^{n-1};\mathbb F_p)$. [F6, F9, step 4.1]
+5.1 Coefficient reductions. By [F9], the cellular cochain complexes with $\mathbb Z$ and $\mathbb F_p$ coefficients have one copy of the coefficient group in each even degree and zero in odd degrees, hence zero differentials. The coefficient-reduction cochain map reduces each integral cell coordinate modulo $p$. Since the classes of step 4.1 are generators in their respective integral degrees, their reductions are the nonzero coordinate generators in the corresponding one-dimensional $\mathbb F_p$ groups. Thus those reductions form an $\mathbb F_p$-basis of $H^*(\mathbb{CP}^{n-1};\mathbb F_p)$. [F9, step 4.1]
 
 6.1 Boundary cases. For $n=1$ the fiber is a single point, so $H^2(\mathbb{CP}^0;\mathbb Z)=0$ by [F6] with $m=0$, the restriction $j_b^*x$ lies in degree two of a point and is $0$, and the asserted basis is just $1$; step 2.2 is vacuous. The empty-base case contributes no fiber, and the zero-bundle convention of [F1] has empty projective bundle and no class $x$. The sign of step 3.1 is fixed by the complex orientation and is not used in steps 4.1 and 5.1, which only use generation. AC is used exactly as inherited by [A1] in the classification and Euler-class supplies. [A1, F1, F6, step 2.2, step 3.1] ∎
 

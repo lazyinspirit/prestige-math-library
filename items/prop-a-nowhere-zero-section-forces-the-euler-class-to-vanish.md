@@ -4,7 +4,7 @@ kind: proposition
 title: A nowhere-zero section forces the Euler class to vanish
 status: draft
 origin: pipeline
-deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-pullback-vector-bundle-and-pullback-section", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-numerable-vector-bundles-admit-bundle-metrics", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice"]
+deps: ["def-euler-class-by-zero-section-pullback-of-the-thom-class", "def-disk-sphere-and-thom-space-of-a-metric-vector-bundle", "thm-gysin-long-exact-sequence-of-an-oriented-sphere-bundle", "thm-numerable-vector-bundles-admit-bundle-metrics", "prop-singular-cohomology-is-contravariantly-functorial", "def-axiom-of-choice"]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -37,7 +37,7 @@ No converse is asserted.
 
 [F3] Pullback of cohomology is contravariantly functorial, so $(p\sigma)^*=\sigma^*p^*$ and the identity map induces the identity on cohomology ([[prop-singular-cohomology-is-contravariantly-functorial]]).
 
-[F4] The zero section and pullback sections have the displayed coordinate formulas; in particular the sphere bundle is the locus of unit vectors ([[def-pullback-vector-bundle-and-pullback-section]]).
+[F4] For a bundle with a supplied metric, the sphere bundle is the subspace of unit vectors and its projection is the restriction of the bundle projection ([[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]]).
 
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]].
 

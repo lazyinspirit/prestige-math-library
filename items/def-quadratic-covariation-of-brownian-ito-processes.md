@@ -24,7 +24,7 @@ $(\pi_n)$ of $[0,T]$ with mesh tending to $0$
 [[def-quadratic-variation-along-a-partition-sequence]]. For each $n$ write
 $\pi_n=(m_n,s^{(n)})$ and form the two families of **cross-increment partial
 sums**
-$$S^{\mathrm{step}}_n(t):=\sum_{k:\,s^{(n)}_k\le t}\bigl(X_{s^{(n)}_k}-X_{s^{(n)}_{k-1}}\bigr)\bigl(Y_{s^{(n)}_k}-Y_{s^{(n)}_{k-1}}\bigr),$$
+$$S^{\mathrm{step}}_n(t):=\sum_{\substack{1\le k\le m_n\\s^{(n)}_k\le t}}\bigl(X_{s^{(n)}_k}-X_{s^{(n)}_{k-1}}\bigr)\bigl(Y_{s^{(n)}_k}-Y_{s^{(n)}_{k-1}}\bigr),$$
 $$S^{\mathrm{part}}_n(t):=S^{\mathrm{step}}_n(t)+\bigl(X_t-X_{s^{(n)}_{k(t)}}\bigr)\bigl(Y_t-Y_{s^{(n)}_{k(t)}}\bigr)\quad(k(t)<m_n),$$
 with $S^{\mathrm{part}}_n(T):=S^{\mathrm{step}}_n(T)$ and $k(t)$ the largest
 index with $s^{(n)}_{k(t)}\le t$; these are the cross sums corresponding to the

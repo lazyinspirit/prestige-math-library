@@ -5,7 +5,7 @@ title: Continuous functions form a commutative Banach algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-unital-banach-algebra, def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-uniform-cauchy-criterion-complex-functions, thm-uniform-limit-continuous-complex-functions, thm-compactness-under-continuous-maps]
+deps: [def-unital-banach-algebra, def-spectrum-and-resolvent-set-in-a-banach-algebra, thm-uniform-cauchy-criterion-complex-functions, thm-compactness-under-continuous-maps]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -36,7 +36,12 @@ $$\sigma(f) = f[K] = \{\,f(x) : x \in K\,\}$$
 
 [L1] The image of a compact set under a continuous map is compact, and a continuous real-valued function on a nonempty compact space attains a maximum and a minimum ([[thm-compactness-under-continuous-maps]]).
 
-[L2] A sequence of continuous complex-valued functions that is uniformly Cauchy converges uniformly to a continuous function; a uniformly convergent sequence is uniformly Cauchy ([[thm-uniform-cauchy-criterion-complex-functions]], [[thm-uniform-limit-continuous-complex-functions]]).
+[L2] A uniformly Cauchy sequence of complex-valued functions on a set converges
+uniformly to a function on that set
+([[thm-uniform-cauchy-criterion-complex-functions]]).  If the domain is a
+topological space and all the functions are continuous, the limit is continuous:
+given $x$ and $\varepsilon>0$, choose one function uniformly within
+$\varepsilon/3$ of the limit and then use its continuity at $x$.
 
 [L3] A unital complex Banach algebra is an associative complex algebra with submultiplicative complete norm and unit of norm one; $z \in \rho(a)$ exactly when $z1 - a$ is invertible, and $\sigma(a)$ is its complement ([[def-unital-banach-algebra]], [[def-spectrum-and-resolvent-set-in-a-banach-algebra]]).
 

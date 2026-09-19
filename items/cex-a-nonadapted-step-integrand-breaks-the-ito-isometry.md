@@ -32,7 +32,7 @@ an admissible elementary predictable integrand.
 
 ## Facts & Assumptions
 
-**Given:** AC, the standing hypothesis (H), a horizon $T>0$, the event $A:=\{|B_T|>\sqrt T\}$, and the step integrand $H=1_A$ on $(0,T]$.
+**Given:** AC, the standing hypothesis (H), with $(\mathcal F_t)$ chosen to be the usual augmented natural filtration of $B$, a horizon $T>0$, the event $A:=\{|B_T|>\sqrt T\}$, and the step integrand $H=1_A$ on $(0,T]$.
 
 [F1] $B_T$ has law $N(0,T)$; in particular $P(A)=P(|Z|>1)$ for a standard normal $Z$, which lies strictly between $0$ and $1$ because the standard normal density is strictly positive on $(1,\infty)$ and has total mass one. [[def-standard-normal-and-normal-laws]] [[lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments]] [[def-brownian-motion]]
 

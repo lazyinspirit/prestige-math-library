@@ -35,7 +35,7 @@ $iTx$. Thus the generator of $U$ is $G=iT$, with $D(G)=D(T)$.
 
 ## Facts & Assumptions
 
-[A1] For bounded Borel $h$ the operator $h(T)$ is bounded with $\|h(T)x\|^2=\int|h|^2dE_x$, $h(T)^*=\overline h(T)$, $h_1(T)h_2(T)=(h_1h_2)(T)$, and bounded Borel approximants converge in the strong operator topology; the truncation definition gives $g(T)x=\lim_m g_m(T)x$ for $x\in D_g$ ([[thm-unbounded-borel-functional-calculus]], [[lem-unbounded-pvm-integral-is-well-defined-and-closed]], [[def-unbounded-integral-against-a-pvm]]).
+[A1] For bounded Borel $h$ the operator $h(T)$ is bounded with $\|h(T)x\|^2=\int|h|^2dE_x$, $h(T)^*=\overline h(T)$, and $h_1(T)h_2(T)=(h_1h_2)(T)$; the truncation definition gives $g(T)x=\lim_m g_m(T)x$ for $x\in D_g$ ([[thm-unbounded-borel-functional-calculus]], [[lem-unbounded-pvm-integral-is-well-defined-and-closed]], [[def-unbounded-integral-against-a-pvm]]).
 
 [A2] $D(T)=\{x:\int\lambda^2dE_x<\infty\}$, and for $x\in D(T)$ one has $\|(T-a)x\|^2=\int(\lambda-a)^2dE_x$ for real $a$; also $U(t)D(T)=D(T)$ and $TU(t)=U(t)T$ on $D(T)$, since $U(t)=e^{it\lambda}(T)$ commutes with $E(B)$ and products of functions multiply ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[thm-unbounded-borel-functional-calculus]]).
 

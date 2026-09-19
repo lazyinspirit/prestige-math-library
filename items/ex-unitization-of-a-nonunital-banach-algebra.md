@@ -61,6 +61,11 @@ $$\sigma(a) := \sigma_{\widetilde A}\bigl((0,a)\bigr) = \{\,\lambda \in \mathbb 
 
 ## Remarks
 
-- **The unitization is the unique one up to isomorphism adding a unit.** The algebra $\widetilde A$ contains $A$ as a closed two-sided ideal of codimension one, and every unital complex Banach algebra containing $A$ as such an ideal is isometrically isomorphic to $\widetilde A$ when its unit has norm one; the proof is the coordinate computation above.
+- **The algebraic unitization is canonical, but its Banach norm is not.** The
+  algebra $\widetilde A$ contains $A$ as a closed two-sided ideal of codimension
+  one, and the displayed multiplication is the usual algebraic unitization.
+  The sum norm is one convenient submultiplicative complete norm; merely
+  requiring another unitization to restrict to the norm of $A$ and to have unit
+  norm one does not force an isometry with this sum-norm model.
 
 - **Why the convention is needed at all.** Without a unit the expressions $z1 - a$ in the definition of the spectrum are meaningless inside $A$; the named unitization supplies the missing $1$, and the example fixes it so that no later statement has to guess which unitization was meant.

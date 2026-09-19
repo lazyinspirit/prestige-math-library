@@ -18,7 +18,7 @@ sources:
 
 ## Example
 
-Assume AC. Let $I$ be a set, let $(\lambda_i)_{i\in I}$ be a bounded family of
+Assume AC. Let $I$ be a nonempty set, let $(\lambda_i)_{i\in I}$ be a bounded family of
 complex numbers with $M:=\sup_i|\lambda_i|<\infty$, and let
 $$T:\ell^2(I;\mathbb C)\to\ell^2(I;\mathbb C),\qquad (Tx)_i:=\lambda_ix_i ,$$
 be the associated diagonal operator. Then $T$ is a bounded normal operator with

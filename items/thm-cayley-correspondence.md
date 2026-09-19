@@ -5,7 +5,7 @@ title: "Cayley correspondence between self-adjoint operators and unitaries"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-cayley-transform-of-a-self-adjoint-operator, thm-self-adjointness-range-criterion, thm-hilbert-adjoint-properties, lem-unbounded-adjoint-is-well-defined-and-closed, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-orthogonality-and-orthogonal-complement, def-dense-top, def-countable-choice, def-adjoint-of-a-densely-defined-unbounded-operator, thm-self-adjoint-resolvent-estimate]
+deps: [def-cayley-transform-of-a-self-adjoint-operator, thm-self-adjointness-range-criterion, thm-hilbert-adjoint-properties, lem-kernel-range-orthogonality-for-hilbert-adjoints, lem-unbounded-adjoint-is-well-defined-and-closed, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-orthogonality-and-orthogonal-complement, def-dense-top, def-countable-choice, def-adjoint-of-a-densely-defined-unbounded-operator, thm-self-adjoint-resolvent-estimate]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -36,7 +36,7 @@ self-adjoint, and $C_{T_U}=U$.
 
 [A2] A densely defined symmetric operator $T$ is self-adjoint if $\operatorname{ran}(T-i)=\operatorname{ran}(T+i)=H$ ([[thm-self-adjointness-range-criterion]]).
 
-[A3] For unitary $U$ one has $U^*U=UU^*=I$ and $U$ is bijective, with $U^{-1}=U^*$; moreover $\operatorname{ran}(A)^\perp=\ker(A^*)$ for bounded $A$, so $\operatorname{ran}(I-U)$ is dense exactly when $\ker(I-U^*)=\{0\}$ ([[thm-hilbert-adjoint-properties]], [[def-orthogonality-and-orthogonal-complement]], [[def-dense-top]]).
+[A3] For unitary $U$ one has $U^*U=UU^*=I$ and $U$ is bijective, with $U^{-1}=U^*$; moreover $\operatorname{ran}(A)^\perp=\ker(A^*)$ for bounded $A$, so $\operatorname{ran}(I-U)$ is dense exactly when $\ker(I-U^*)=\{0\}$ ([[thm-hilbert-adjoint-properties]], [[lem-kernel-range-orthogonality-for-hilbert-adjoints]], [[def-orthogonality-and-orthogonal-complement]], [[def-dense-top]]).
 
 ## Proof
 

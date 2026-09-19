@@ -49,7 +49,7 @@ consistent with the same formula.
 
 [L4] $\Delta(A^+)$ and $\Delta(A) \cup \{\chi_\infty\}$ are related by the bijection $\Psi$ of [step 1.1] below; the unital Gelfand–Naimark theorem gives $A^+ \cong C(\Delta(A^+))$, under which $A$ corresponds to the ideal of functions vanishing at $\chi_\infty$ ([[thm-commutative-gelfand-naimark]], [[def-axiom-of-choice]]).
 
-[L5] The one-point compactification $X^+$ of a locally compact Hausdorff space $X$ is compact and Hausdorff, contains $X$ as an open dense subspace, and an open subset of a compact Hausdorff space is locally compact and Hausdorff ([[thm-one-point-compactification-properties]], [[def-one-point-compactification]], [[thm-locally-compact-hausdorff-basics]]).
+[L5] The one-point compactification $X^+$ of a locally compact Hausdorff space $X$ is compact and Hausdorff and contains $X$ as an open subspace; this copy of $X$ is dense exactly when $X$ is noncompact. An open subset of a compact Hausdorff space is locally compact and Hausdorff ([[thm-one-point-compactification-properties]], [[def-one-point-compactification]], [[thm-locally-compact-hausdorff-basics]]).
 
 [L6] A continuous bijection from a compact space onto a Hausdorff space is a homeomorphism ([[thm-compactness-under-continuous-maps]]).
 

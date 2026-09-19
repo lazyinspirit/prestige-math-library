@@ -31,8 +31,11 @@ $$R(m):=\bigl\{z\in\mathbb C:\ \mu\bigl(m^{-1}(B(z,\varepsilon))\bigr)>0\ \text{
 its spectral projection valued measure $E$ on the Borel $\sigma$-algebra of
 $R(m)$ is $E(B)f=\mathbf 1_{m^{-1}(B)}f$, and its bounded Borel functional
 calculus is
-$$f(M_m)=M_{f\circ m},\qquad f(M_m)h=(f\circ m)\cdot h ,$$
-for every bounded Borel $f$ on $R(m)$.
+$$f(M_m)=M_{\widetilde f\circ m},\qquad f(M_m)h=(\widetilde f\circ m)\cdot h ,$$
+for every bounded Borel $f$ on $R(m)$, where $\widetilde f$ is the zero
+extension of $f$ to $\mathbb C$. Since $m\in R(m)$ almost everywhere, the
+resulting multiplication operator is independent of the values chosen for an
+extension off $R(m)$ and is customarily denoted $M_{f\circ m}$.
 
 ## Facts & Assumptions
 
@@ -68,6 +71,6 @@ for every bounded Borel $f$ on $R(m)$.
 
 3.1 The coordinate integral is $M_m$: for bounded $h,g$ the measure $E_{h,g}(B)=\int_{m^{-1}(B)}h\overline g\,d\mu$ satisfies $\int\varphi\,dE_{h,g}=\int(\varphi\circ m)h\overline g\,d\mu$ for every simple $\varphi$, and approximating the bounded Borel function $z$ on the compact set $R$ uniformly by simple functions and passing to the limit gives $\int z\,dE_{h,g}=\int m\,h\overline g\,d\mu=\langle M_mh,g\rangle$; density of bounded functions in $L^2$ extends this to all $h,g$, so $\int z\,dE=M_m$. [step 2.2, A1, A2, A7]
 
-4.1 By the uniqueness clause of the spectral theorem the regular PVM $E$ on $R=\sigma(M_m)$ with $\int z\,dE=M_m$ is the spectral PVM of $M_m$; for every bounded Borel $f$ on $R$ the same approximation argument gives $\langle f(M_m)h,g\rangle=\int f\,dE_{h,g}=\int(f\circ m)h\overline g\,d\mu=\langle M_{f\circ m}h,g\rangle$, hence $f(M_m)=M_{f\circ m}$ for all $h,g$. [step 3.1, A6]
+4.1 By the uniqueness clause of the spectral theorem the regular PVM $E$ on $R=\sigma(M_m)$ with $\int z\,dE=M_m$ is the spectral PVM of $M_m$; for every bounded Borel $f$ on $R$, let $\widetilde f$ be its zero extension to $\mathbb C$. The same approximation argument gives $\langle f(M_m)h,g\rangle=\int f\,dE_{h,g}=\int(\widetilde f\circ m)h\overline g\,d\mu=\langle M_{\widetilde f\circ m}h,g\rangle$, hence $f(M_m)=M_{\widetilde f\circ m}$ for all $h,g$; because $m\in R$ almost everywhere, this class is independent of the extension off $R$. [step 2.2, step 3.1, A6]
 
-5.1 The multiplication operator has spectrum the essential range of $m$, spectral projections given by multiplication by the pulled-back indicators, and Borel calculus $f(M_m)=M_{f\circ m}$. [step 2.1, step 2.2, step 4.1, A8] ∎
+5.1 The multiplication operator has spectrum the essential range of $m$, spectral projections given by multiplication by the pulled-back indicators, and Borel calculus $f(M_m)=M_{\widetilde f\circ m}$, customarily written $M_{f\circ m}$ modulo the null set where $m\notin R(m)$. [step 2.1, step 2.2, step 4.1, A8] ∎

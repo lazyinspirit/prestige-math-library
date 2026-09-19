@@ -28,9 +28,9 @@ are equivalent:
 
 1. **(weak countable additivity)** for every pairwise disjoint sequence
    $(B_n)_{n\in\mathbb N}$ in $\Sigma$ with union $B$ and all $x,y\in H$,
-   $$\langle E(B)x,y\rangle=\sum_{n=1}^{\infty}\langle E(B_n)x,y\rangle ;$$
+   $$\langle E(B)x,y\rangle=\sum_{n=0}^{\infty}\langle E(B_n)x,y\rangle ;$$
 2. **(strong countable additivity)** for every such sequence and every $x\in H$,
-   $$E(B)x=\sum_{n=1}^{\infty}E(B_n)x$$
+   $$E(B)x=\sum_{n=0}^{\infty}E(B_n)x$$
    with the series converging in norm.
 
 ## Facts & Assumptions

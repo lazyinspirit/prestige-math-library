@@ -38,8 +38,9 @@ operator $(T_kf)(m)=a_mf(m)$, and for every $N\in\mathbb N$ the truncation
 $k_N(m,n):=k(m,n)$ for $n\le N$ and $k_N(m,n):=0$ for $n>N$ satisfies:
 
 1. $T_{k_N}$ has finite rank: its range admits the ordered basis
-   $(e_n)_{n\in J}$ of [[def-linear-basis]], where
-   $J=\{n\le N:a_n\ne0\}$ and $e_n$ is the class of $\mathbf 1_{\{n\}}$, so
+   $(e_{j_q})_{q<r}$ of [[def-linear-basis]], where
+   $J=\{n\le N:a_n\ne0\}=\{j_0<\cdots<j_{r-1}\}$ is the increasing
+   enumeration of $J$ and $e_n$ is the class of $\mathbf 1_{\{n\}}$, so
    $T_{k_N}$ is compact
    ([[lem-finite-rank-operators-are-compact]]);
 2. $\|T_k-T_{k_N}\|_{HS}=\bigl(\sum_{n>N}|a_n|^2\bigr)^{1/2}$
@@ -79,7 +80,7 @@ $k_N(m,n):=k(m,n)$ for $n\le N$ and $k_N(m,n):=0$ for $n>N$ satisfies:
 
 2.2 **The truncated kernels.** For fixed $N$ the kernel $k-k_N$ is diagonal with coefficients $a_n\mathbf 1_{n>N}$, a square-summable family, so [step 1.1] applied to it gives $\|T_k-T_{k_N}\|_{HS}=\|k-k_N\|_{L^2(\#\times\#)}=\bigl(\sum_{n>N}|a_n|^2\bigr)^{1/2}$ by the exact-norm part of [F3]; moreover $k_N$ is the diagonal kernel with coefficients $a_n\mathbf 1_{n\le N}$, so $T_{k_N}$ is the diagonal operator with those coefficients. [step 1.1, F3]
 
-3.1 **Finite rank of the truncations.** By [step 2.2] the range of $T_{k_N}$ is the set of sequences $a_n\mathbf 1_{n\le N}f(n)e_n$, which is exactly the span of $\{e_n:n\in J\}$; listing $J\subseteq\{0,\dots,N\}$ in increasing order gives an injective finite list $(e_n)_{n\in J}$ whose image is an orthonormal family, hence linearly independent, and spans the range; thus the range admits an ordered basis of finite length and $T_{k_N}$ is compact by [F4], while its Hilbert–Schmidt norm is finite by [step 2.2]. [step 2.2, F4, F5]
+3.1 **Finite rank of the truncations.** By [step 2.2] the range of $T_{k_N}$ is the set of sequences $a_n\mathbf 1_{n\le N}f(n)e_n$, which is exactly the span of $\{e_n:n\in J\}$. Since $J\subseteq\{0,\dots,N\}$ is finite, write its increasing enumeration as $J=\{j_0<\cdots<j_{r-1}\}$ for some $r\in\mathbb N$. The map $q\mapsto e_{j_q}$ with domain the von Neumann natural $r$ is an injective finite list whose image is an orthonormal family, hence is linearly independent, and it spans the range. Thus $(e_{j_q})_{q<r}$ is an ordered basis of the range, and $T_{k_N}$ is compact by [F4], while its Hilbert–Schmidt norm is finite by [step 2.2]. [step 2.2, F4, F5]
 
 3.2 **Operator norm of the difference.** Let $D:=T_k-T_{k_N}$, so that $(Df)(m)=a_m\mathbf 1_{m>N}f(m)$ by [step 2.2]. For every $f$ in $L^2(\#;\mathbb C)$ one has $\|Df\|^2=\sum_{m>N}|a_m|^2|f(m)|^2\le S_N^2\|f\|^2$ where $S_N:=\sup_{n>N}|a_n|$ is the real number of [F7], so $\|D\|\le S_N$ by [F6]; conversely for each $m>N$ the vector $e_m$ has norm one by [F5] and $De_m=a_me_m$, so $\|D\|\ge|a_m|$ and hence $\|D\|\ge S_N$. Therefore $\|D\|=S_N=\sup_{n>N}|a_n|$. [step 2.2, F5, F6, F7]
 

@@ -38,7 +38,7 @@ $V=L^2(\mu)$.
  
 [F3] **Inner product bounds.** $|\langle u,w\rangle|\le\|u\|_2\|w\|_2$ and the norm is induced by the inner product, $\|z\|_2^2=\langle z,z\rangle$; for a closed subspace the distance $d:=\inf_{v\in V}\|x-v\|_2$ is a nonnegative real number. [[cor-cauchy-schwarz-inequality-for-l-two]] [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
  
-[F4] **Countable choice for a minimizing sequence.** For each $n$ the set $\{v\in V:\|x-v\|_2^2<d^2+1/n\}$ is nonempty by definition of the infimum; AC provides a sequence $(v_n)$ with $\|x-v_n\|_2^2\le d^2+1/n$. [[def-axiom-of-choice]]
+[F4] **Countable choice for a minimizing sequence.** For each integer $n\ge1$ the set $\{v\in V:\|x-v\|_2^2<d^2+1/n\}$ is nonempty by definition of the infimum; AC provides a sequence $(v_n)_{n\ge1}$ with $\|x-v_n\|_2^2\le d^2+1/n$. [[def-axiom-of-choice]]
  
 [F5] **Linear structure.** $V$ is closed under finite linear combinations and under multiplication by real scalars; in the complex case also by $i$. [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
  
@@ -50,7 +50,7 @@ $V=L^2(\mu)$.
 
 **Proof technique:** direct.
  
-1.1 Choose a minimizing sequence $(v_n)\subseteq V$ with $\|x-v_n\|_2^2\le d^2+1/n$ by [F4], where $d=\inf_{v\in V}\|x-v\|_2$. [F3, F4]
+1.1 Choose a minimizing sequence $(v_n)_{n\ge1}\subseteq V$ with $\|x-v_n\|_2^2\le d^2+1/n$ by [F4], where $d=\inf_{v\in V}\|x-v\|_2$. [F3, F4]
  
 2.1 The sequence is Cauchy: applying the parallelogram law [F2] to $u=x-v_n$ and $v=x-v_m$ gives $\|v_n-v_m\|_2^2=2\|x-v_n\|_2^2+2\|x-v_m\|_2^2-4\|x-(v_n+v_m)/2\|_2^2$, and $(v_n+v_m)/2\in V$ by convexity, so $\|x-(v_n+v_m)/2\|_2^2\ge d^2$; hence $\|v_n-v_m\|_2^2\le2(d^2+1/n)+2(d^2+1/m)-4d^2=2/n+2/m\to0$. [F2, F5, step 1.1]
  

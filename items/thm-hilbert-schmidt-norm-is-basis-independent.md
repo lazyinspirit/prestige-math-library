@@ -41,8 +41,9 @@ finite-subset-supremum sums of
 3. **(membership and norms)** $T$ is Hilbert–Schmidt relative to $E$ if and
    only if it is Hilbert–Schmidt relative to every other Hilbert basis of $H$,
    and then $\|T\|_{HS,E}=\|T\|_{HS,E'}=\|T^*\|_{HS,F}$ for all such bases
-   $E,E'$ and every Hilbert basis $F$ of $K$; all three numbers are
-   $+\infty$ when one of them is.
+   $E,E'$ and every Hilbert basis $F$ of $K$; when the common defining sum is
+   $+\infty$, none of these Hilbert–Schmidt norms is defined, and $T$ is
+   Hilbert–Schmidt relative to none of the bases.
 
 ## Facts & Assumptions
 

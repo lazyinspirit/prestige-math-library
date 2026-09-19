@@ -31,7 +31,7 @@ that is, it has the form $\beta-p\alpha,\dots,\beta+q\alpha$ with $p=0$ and
 $q=1$, and indeed
 $$p-q=-1=\beta(h_\alpha)=(\varepsilon_2-\varepsilon_3)(E_{11}-E_{22}),$$
 in agreement with [[thm-root-string-property]]. The $\alpha$-string through
-$\alpha$ is $\{-\alpha,0,\alpha\}$, so $p=q=1$ and
+$\alpha$ is $\{-\alpha,0,\alpha\}$, so $p=2$, $q=0$, $p-q=2$, and
 $\alpha(h_\alpha)=2$.
 
 ## Facts & Assumptions
@@ -48,4 +48,4 @@ $\alpha(h_\alpha)=2$.
 
 2.1 For the $\alpha$-string through $\beta$: the indices $k\in\mathbb Z$ with $\beta+k\alpha$ a root or $0$ are $k=0,1$; indeed $\beta+\alpha=\varepsilon_1-\varepsilon_3$ is a root, while $\beta-\alpha=2\varepsilon_2-\varepsilon_1-\varepsilon_3$ and $\beta+2\alpha=2\varepsilon_1-\varepsilon_2-\varepsilon_3$ are not among the six roots and are nonzero. Hence $p=0$, $q=1$. [given, step 1.1, algebra]
 
-3.1 For the $\alpha$-string through $\alpha$: the roots among $k\alpha$ are $\pm\alpha$ and $0$ at $k=0$, that is $k\in\{-1,0,1\}$, so $p=q=1$ and $p-q=0$; and $\alpha(h_\alpha)=(\varepsilon_1-\varepsilon_2)(E_{11}-E_{22})=1-(-1)=2$, consistent with the general identity $\alpha(h_\alpha)=2$ and with $p-q=0$ for $\beta=\alpha$. [given, step 1.1, algebra] ∎
+3.1 For the $\alpha$-string through $\beta=\alpha$, the terms are $\beta+k\alpha=(k+1)\alpha$. They are roots or zero exactly for $k\in\{-2,-1,0\}$, giving the terms $-\alpha,0,\alpha$ and hence $p=2$, $q=0$, and $p-q=2$. Also $\alpha(h_\alpha)=(\varepsilon_1-\varepsilon_2)(E_{11}-E_{22})=1-(-1)=2$, so the string identity $p-q=\beta(h_\alpha)$ holds. [given, step 1.1, algebra] ∎

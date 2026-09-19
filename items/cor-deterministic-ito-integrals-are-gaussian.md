@@ -19,7 +19,8 @@ sources:
 
 Assume the Axiom of Choice and the standing hypothesis (H) of
 [[def-elementary-predictable-brownian-integrand]]. Fix $T>0$ and let
-$h\in L^2[0,T]$ be deterministic, so that the process $h(s,\omega):=h(s)$ is
+$h\in L^2[0,T]$ be deterministic, choose a Borel representative of its
+Lebesgue-equivalence class, and set $h(s,\omega):=h(s)$. This process is
 predictable with finite energy. Then the Ito integral
 $\int_0^Th_s\,dB_s$
 [[def-ito-integral-for-square-integrable-predictable-processes]] is centered
@@ -36,7 +37,7 @@ integrands with disjoint supports are independent.
 
 ## Facts & Assumptions
 
-**Given:** AC, the standing hypothesis (H), a horizon $T>0$, deterministic $h,h_1,\dots,h_d\in L^2[0,T]$, real coefficients $c_1,\dots,c_d$, and a sequence of deterministic step functions $h^m\to h$ in $L^2[0,T]$ with $h^m=\sum_ka^m_k1_{(t^m_k,t^m_{k+1}]}$.
+**Given:** AC, the standing hypothesis (H), a horizon $T>0$, deterministic $h,h_1,\dots,h_d\in L^2[0,T]$ represented by Borel functions, real coefficients $c_1,\dots,c_d$, and a sequence of deterministic step functions $h^m\to h$ in $L^2[0,T]$ with $h^m=\sum_ka^m_k1_{(t^m_k,t^m_{k+1}]}$.
 
 [F1] A deterministic step function is an elementary predictable integrand with deterministic coefficients, and its Ito integral is the finite sum $\sum_ka^m_k(B_{t^m_{k+1}}-B_{t^m_k})$; the Brownian increments over disjoint intervals are independent with laws $N(0,\Delta_k)$ and mean $0$. [[def-elementary-predictable-brownian-integrand]] [[def-ito-integral-of-an-elementary-predictable-process]] [[def-brownian-motion]]
 

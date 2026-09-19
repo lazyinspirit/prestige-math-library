@@ -33,7 +33,7 @@ $$E_2^{p,q}\cong H^p\bigl(X;h^q(*)\bigr).$$
 
 [F1] The first page is identified with cellular cochains by $E_1^{p,q}\cong\operatorname{Hom}(C_p^{\mathrm{cell}}(X),h^q(*))$, via the wedge decomposition of $X^p/X^{p-1}$ and the suspension isomorphisms ([[lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients]]).
 
-[F2] The differential of the skeletal exact couple is the composite of the pair map and the connecting map: $d_1$ sends a class on the pair $(X^p,X^{p-1})$ first to its image in $h^{p+q}(X^p)$ and then by the connecting map of the pair $(X^{p+1},X^p)$ into $h^{p+q+1}(X^{p+1},X^p)$; the first arrow is the pair map $k:E\to D$ and the second the connecting map $j:D\to E$, so this is the composite $j\circ k=jk$ of the exact-couple structure maps, in the indexing of the generation theorem where the initial differential is $jk$ ([[def-exact-couple]], [[thm-an-exact-couple-generates-a-spectral-sequence]]).
+[F2] In the homological indexing of [[def-exact-couple]] and [[thm-an-exact-couple-generates-a-spectral-sequence]], the initial differential is $jk:E^1_{a,b}\to E^1_{a-1,b}$ and has bidegree $(-1,0)$. Under the cohomological reindexing $(p,q)=(-a,-b)$ used for the skeletal AHSS, it becomes $d_1:E_1^{p,q}\to E_1^{p+1,q}$. Concretely it sends a class on $(X^p,X^{p-1})$ first by the pair map to $h^{p+q}(X^p)$ and then by the connecting map of $(X^{p+1},X^p)$ to $h^{p+q+1}(X^{p+1},X^p)$.
 
 [F3] A based map $S^p\to S^p$ of degree $d$ acts by multiplication by $d$ on any reduced generalized cohomology group of $S^p$ ([[prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory]]).
 

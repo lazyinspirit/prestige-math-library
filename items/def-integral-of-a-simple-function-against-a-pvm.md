@@ -27,10 +27,12 @@ and let $s:X\to\mathbb C$ be a complex simple function
 
 $$s=\sum_{j=1}^{m}a_j\mathbf 1_{B_j},$$
 
-where $B_1,\dots,B_m\in\Sigma$ are pairwise disjoint with
+where $m\ge1$, and $B_1,\dots,B_m\in\Sigma$ are pairwise disjoint with
 $B_1\cup\dots\cup B_m=X$ and $a_1,\dots,a_m\in\mathbb C$; a representation over
 a disjoint family whose union misses some measurable set is completed by adding
 that set with the coefficient $0$, and any coefficient is allowed to vanish.
+In particular the zero function on the empty space uses $m=1$, $B_1=\varnothing$
+and $a_1=0$; an empty presentation is not used.
 Then define
 
 $$\int s\,dE:=\sum_{j=1}^{m}a_jE(B_j)\in\mathcal B(H).$$

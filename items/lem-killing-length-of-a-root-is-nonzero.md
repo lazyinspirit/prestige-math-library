@@ -47,7 +47,7 @@ $$B(H_\alpha,H_\alpha)=\alpha(H_\alpha)\ne0 .$$
 
 **Proof technique:** contradiction via Lie's theorem.
 
-1.1 By [L1] choose $e\in\mathfrak g_\alpha$ and $f\in\mathfrak g_{-\alpha}$ with $B(e,f)\ne0$ and put $z=[e,f]$. By [L2] $z=-B(e,f)H_\alpha\in\mathfrak h$ and $z\ne0$, since $H_\alpha\ne0$. Also $[z,e]=\alpha(z)e$ and $[z,f]=-\alpha(z)f$, while $\alpha(z)=-B(e,f)\alpha(H_\alpha)$. [L1, L2, algebra]
+1.1 By [L1] choose $e\in\mathfrak g_\alpha$ and $f\in\mathfrak g_{-\alpha}$ with $B(e,f)\ne0$ and put $z=[e,f]$. By [L2], $z\in\mathfrak h$. For every $H\in\mathfrak h$, invariance from [L5] gives $B(z,H)=B(e,[f,H])=\alpha(H)B(e,f)=B\bigl(B(e,f)H_\alpha,H\bigr)$. Nondegeneracy of $B|_{\mathfrak h}$ from [L1] therefore gives $z=B(e,f)H_\alpha\ne0$. Also $[z,e]=\alpha(z)e$ and $[z,f]=-\alpha(z)f$, while $\alpha(z)=B(e,f)\alpha(H_\alpha)$. [L1, L2, L5, algebra]
 
 1.2 Suppose $\alpha(H_\alpha)=0$. Then $\alpha(z)=0$, so $[z,e]=[z,f]=0$, the span $\mathfrak a=\mathbb Ce+\mathbb Cf+\mathbb Cz$ is a Lie subalgebra with $[\mathfrak a,\mathfrak a]\subseteq\mathbb Cz$ and $z$ central in $\mathfrak a$; in particular $\mathfrak a$ is nilpotent and hence solvable by [L4]. By [L4] there is a basis of $\mathfrak g$ in which every $\operatorname{ad}_x$, $x\in\mathfrak a$, is upper triangular; then $\operatorname{ad}_z=[\operatorname{ad}_e,\operatorname{ad}_f]$ is a commutator of upper triangular matrices, hence strictly upper triangular and therefore nilpotent. [L2, L4, algebra]
 

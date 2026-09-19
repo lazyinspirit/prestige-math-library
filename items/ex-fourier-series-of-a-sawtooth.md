@@ -5,7 +5,7 @@ title: The Fourier series of a sawtooth and the Basel sum
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-fourier-coefficients-and-trigonometric-polynomials, thm-l-two-fourier-series-converges-in-mean-square, thm-parseval-identity-for-fourier-series, def-countable-choice, thm-integration-by-parts, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, lem-derivative-of-a-power, thm-sine-and-cosine-derivatives, thm-chain-rule, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-sine-cosine-zero-sets-and-fundamental-period, def-square-summable-family-on-an-arbitrary-index-set]
+deps: [def-fourier-coefficients-and-trigonometric-polynomials, thm-l-two-fourier-series-converges-in-mean-square, thm-parseval-identity-for-fourier-series, def-countable-choice, thm-integration-by-parts, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, lem-derivative-of-a-power, thm-sine-and-cosine-derivatives, thm-chain-rule, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas, def-square-summable-family-on-an-arbitrary-index-set]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -42,7 +42,7 @@ is asserted; no pointwise claim is made at the discontinuity.
 
 [A3] The derivatives of sine and cosine are cosine and minus sine, the chain rule gives the derivatives of $t\mapsto\sin(ct)$ and $t\mapsto\cos(ct)$, and power functions have the expected derivatives; continuous functions on a closed interval are Riemann integrable, and a bounded Riemann integrable function on $[a,b]$ is Lebesgue measurable with the same integral ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[lem-derivative-of-a-power]], [[thm-continuous-implies-integrable]], [[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]]).
 
-[A4] $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for integers $m$ ([[thm-sine-cosine-zero-sets-and-fundamental-period]]).
+[A4] $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for integers $m$: the zero-set theorem gives the sine values, while $\cos(x+\pi)=-\cos x$ and $\cos0=1$ give the cosine values by integer induction ([[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
 [A5] The characters satisfy $\int_{\mathbb T}e_m\,dm_{\mathbb T}=1$ for $m=0$ and $0$ otherwise; the coefficient family is square-summable and its total square sum is the supremum of the symmetric partial sums ([[def-fourier-coefficients-and-trigonometric-polynomials]], [[def-square-summable-family-on-an-arbitrary-index-set]]).
 

@@ -20,8 +20,8 @@ sources:
 
 ## Statement
 
-Assume AC. Let $B$ be a path-connected CW complex. Suppose that to every
-numerable complex bundle $V\to C$ over a CW-type base one assigns classes
+Assume AC. Suppose that to every numerable complex bundle $V\to C$ over a
+path-connected CW complex one assigns classes
 $d_i(V)\in H^{2i}(C;\mathbb Z)$ for $i\geq0$ with the following properties:
 
 1. **Naturality:** $d_i(f^*V)=f^*d_i(V)$ for pullbacks;
@@ -30,7 +30,7 @@ $d_i(V)\in H^{2i}(C;\mathbb Z)$ for $i\geq0$ with the following properties:
 3. **Whitney multiplicativity:** $d(V\oplus W)=d(V)d(W)$ for the total classes
    $d=\sum_i d_i$.
 
-Then $d(V)=c(V)$ for every numerable complex bundle over a CW-type base, where
+Then $d(V)=c(V)$ for every numerable complex bundle over a path-connected CW complex, where
 $c$ is the total Chern class of
 [[def-chern-classes-from-the-projective-bundle-relation]]. In particular the
 assignments $c_i$ are the unique ones satisfying 1-3.
@@ -51,15 +51,17 @@ assignments $c_i$ are the unique ones satisfying 1-3.
 
 1.1 On a complex line $L$ the two assignments agree: $d_1(L)=e(L_{\mathbb R})=c_1(L)$ and $d_0=1=c_0$, while $d_i(L)=c_i(L)=0$ for $i\geq2$ by the properties of $d$ and [F1]. Hence $d(L)=c(L)=1+e(L_{\mathbb R})$ for every line. [F1, given]
 
-1.2 Pulling back to the flag bundle, $q^*E$ splits as the sum of the tautological lines $L_1,\dots,L_n$ by [F2]. [F2]
+1.2 If $n=0$, both total classes are $1$, so assume $n\geq1$. Pulling back to
+the flag bundle, $q^*E$ splits as the sum of the tautological lines
+$L_1,\dots,L_n$ by [F2]. [F1, F2]
 
 2.1 Evaluating both assignments on $q^*E$: multiplicativity for $d$ and for $c$ (property 3 of the statement and [F1]) gives $d(q^*E)=\prod_i d(L_i)$ and $c(q^*E)=\prod_i c(L_i)$; by step 1.1 each factor agrees, so $d(q^*E)=c(q^*E)$. [F1, step 1.1, step 1.2]
 
 3.1 Naturality of both assignments (property 1 and [F1]) writes the common value as $d(q^*E)=q^*d(E)$ and $c(q^*E)=q^*c(E)$, so $q^*(d(E)-c(E))=0$. [F1, step 2.1]
 
-4.1 Injectivity of $q^*$ by [F2] gives $d(E)=c(E)$ for every numerable complex bundle over a CW-type base, which is the assertion. [F2, step 3.1]
+4.1 Injectivity of $q^*$ by [F2] gives $d(E)=c(E)$ for every numerable complex bundle over a path-connected CW complex, which is the assertion. [F2, step 3.1]
 
-5.1 Boundary cases. For a rank-one bundle the flag bundle is the base itself and steps 1.1-3.1 reduce to the normalization; for the rank-zero bundle both total classes are $1$ by [F1] and the convention in the statement. The empty base is excluded by the path-connected hypothesis, and the coefficient ring $\mathbb Z$ is nonzero. The assignment $d$ is assumed to be defined on all numerable bundles over CW-type bases, which is exactly the domain on which [F2] and [F1] operate; AC is used only through [A1]. [A1, F1, F2, step 1.1, step 4.1] ∎
+5.1 Boundary cases. For a rank-one bundle the flag bundle is the base itself and steps 1.1-3.1 reduce to the normalization; the rank-zero case was discharged in step 1.2. The empty base is excluded by the path-connected hypothesis, and the coefficient ring $\mathbb Z$ is nonzero. The assignment $d$ is assumed on the path-connected CW domain on which [F2] and [F1] operate; AC is used only through [A1]. [A1, F1, F2, step 1.1, step 1.2, step 4.1] ∎
 
 ## Source notes
 

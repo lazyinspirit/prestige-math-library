@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ c4ab06bfaf23 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 5b5cd75c644c by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 9043 |
+| defects caught before publication | 9591 |
 | now mechanically prevented | 356 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -772,29 +772,35 @@
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
 
-## phase-2-remaining-27 — 244 row(s)
+## phase-2-remaining-27 — 792 row(s)
 
-| subclass | 5a-adjudicate | 5b-cross |
-|---|---|---|
-| false-claim | 72 |  |
-| citation-inaccurate | 28 |  |
-| unlicensed-inference | 28 |  |
-| citation-missing | 5 | 16 |
-| ill-formed | 20 |  |
-| citation-inflated |  | 15 |
-| false-computation | 13 |  |
-| arithmetic-error | 8 |  |
-| missing-hypothesis | 8 |  |
-| false-or-overstrong-statement | 7 |  |
-| invalid-inference | 7 |  |
-| unsupported-inference | 4 |  |
-| contract-mismatch | 3 |  |
-| undefined-notation | 3 |  |
-| invalid-witness | 2 |  |
-| other | 2 |  |
-| missing-choice-scope | 1 |  |
-| ill-typed-claim | 1 |  |
-| reader-repair | 1 |  |
+| subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
+|---|---|---|---|
+| invalid-inference | 7 |  | 229 |
+| citation-inaccurate | 28 |  | 201 |
+| false-claim | 72 |  | 11 |
+| citation-missing | 5 | 16 | 10 |
+| citation-inflated |  | 15 | 14 |
+| unlicensed-inference | 28 |  |  |
+| false-or-overstrong-statement | 7 |  | 20 |
+| missing-hypothesis | 8 |  | 16 |
+| ill-formed | 20 |  |  |
+| false-computation | 13 |  | 3 |
+| ill-typed-construction |  |  | 15 |
+| arithmetic-error | 8 |  | 6 |
+| false-boundary-disposition |  |  | 6 |
+| missing-case |  |  | 5 |
+| missing-choice-scope | 1 |  | 3 |
+| unsupported-inference | 4 |  |  |
+| ill-typed-claim | 1 |  | 3 |
+| contract-mismatch | 3 |  |  |
+| undefined-notation | 3 |  |  |
+| invalid-witness | 2 |  | 1 |
+| other | 2 |  | 1 |
+| false-or-overstrong-title |  |  | 2 |
+| reader-repair | 1 |  |  |
+| citation-misattributed |  |  | 1 |
+| invalid-refutation |  |  | 1 |
 
 ## phase-2-wave-1 — 74 row(s)
 

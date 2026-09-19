@@ -37,7 +37,7 @@ appears, and no choice principle is used.
 
 [A1] If $E$ is a finite orthonormal set in $H$ and $x\in H$, then $v:=x-\sum_{e\in E}\langle x,e\rangle e$ is orthogonal to every element of $E$; if $v\ne0$ then $v/\|v\|$ has norm $1$ and $E\cup\{v/\|v\|\}$ is orthonormal ([[lem-finite-bessel-inequality]]).
 
-[A2] A sequence of sets can be defined by recursion on $\mathbb N$ from a rule that assigns $L_{n+1}$ to $L_n$ ([[thm-recursion]]).
+[A2] For a fixed function $f:A\to A$ and initial state $a_0\in A$, recursion on $\mathbb N$ produces the unique sequence with $a_{n+1}=f(a_n)$ ([[thm-recursion]]).
 
 [A3] The span of a finite orthonormal set is a linear subspace, and $x=P+v$ with $P=\sum_{e\in E}\langle x,e\rangle e\in\operatorname{span}E$ and $v\in\operatorname{span}(E\cup\{v\})$ ([[def-linear-subspace]]).
 
@@ -53,7 +53,7 @@ appears, and no choice principle is used.
 
 **Given:** A dense sequence $(x_n)_{n\in\mathbb N}$ in the Hilbert space $H$ and the Gram–Schmidt sets $L_n$ defined by the displayed recursion.
 
-1.1 The displayed definition is a recursion on $\mathbb N$, so the sets $L_n$ exist; by induction on $n$, each $L_n$ is a finite orthonormal set with $L_n\subseteq L_{n+1}$. Indeed $L_0=\varnothing$ is orthonormal, and if $L_n$ is finite and orthonormal then $v_n$ is orthogonal to every element of $L_n$; either $v_n=0$ and $L_{n+1}=L_n$, or $v_n\ne0$ and $L_{n+1}=L_n\cup\{v_n/\|v_n\|\}$ is orthonormal. [A1, A2]
+1.1 To put the stage-dependent rule into the fixed-function form of [A2], use the state space $A=\mathbb N\times\mathcal P(H)$ and define $f(n,E)=(n+1,\Phi_n(E))$, where $\Phi_n(E)$ is the displayed update computed from $x_n$ and $E$. Recursion from $(0,\varnothing)$ gives states $(n,L_n)$ and hence the required sets $L_n$. By induction on $n$, each $L_n$ is a finite orthonormal set with $L_n\subseteq L_{n+1}$. Indeed $L_0=\varnothing$ is orthonormal, and if $L_n$ is finite and orthonormal then $v_n$ is orthogonal to every element of $L_n$; either $v_n=0$ and $L_{n+1}=L_n$, or $v_n\ne0$ and $L_{n+1}=L_n\cup\{v_n/\|v_n\|\}$ is orthonormal. [A1, A2]
 
 2.1 $L=\bigcup_{n\in\mathbb N}(L_{n+1}\setminus L_n)$ and each difference $L_{n+1}\setminus L_n$ has at most one element; hence the map assigning to every $n$ with $L_{n+1}\setminus L_n\ne\varnothing$ its unique element is a surjection onto $L$ from a subset of $\mathbb N$, so $L$ is finite or countably infinite, and this enumeration is canonical. [step 1.1, A6]
 

@@ -41,7 +41,7 @@ index set may be taken finite or countable.
 
 [A2] If $x\in H$ has cyclic subspace $H_x$, then $U_x[f]:=f(T)x$ extends to a unitary $U_x:L^2(\sigma(T),E_x)\to H_x$ with $U_xM_z=TU_x$, where $E_x$ is the finite positive regular measure $\langle E(\cdot)x,x\rangle$ ([[thm-cyclic-spectral-representation]], [[lem-scalar-and-complex-measures-from-a-pvm]]).
 
-[A3] A vector cyclic for $T|_{H_j}$ that lies in $H_j$ has $H_x=H_j$ as its cyclic subspace for $T$, because $H_j$ is $T$-invariant ([[def-cyclic-vector-and-cyclic-normal-operator]]).
+[A3] If $H_j$ reduces $T$, then both $T$ and $T^*$ preserve $H_j$ and agree there with the restriction and its adjoint. Hence a vector cyclic for $T|_{H_j}$ has the same cyclic subspace when computed for $T$, namely $H_x=H_j$ ([[def-cyclic-vector-and-cyclic-normal-operator]]).
 
 [A4] Orthogonal direct sums of Hilbert spaces: vectors with pairwise orthogonal component subspaces have squares of norms summing, and a direct sum of unitaries between corresponding summands is a unitary between the Hilbert sums; the direct sum of multiplication operators acts componentwise ([[def-hilbert-space]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).
 

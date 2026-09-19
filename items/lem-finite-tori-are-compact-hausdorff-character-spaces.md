@@ -33,9 +33,10 @@ topology ([[def-the-one-dimensional-torus-and-normalized-haar-integral]],
 2. For every natural $n\ge1$ the finite torus $\mathbb T^n$ is compact and
    Hausdorff in the finite product topology
    ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]), and the
-   coordinate characters separate its points: for distinct
-   $x,y\in\mathbb T^n$ there is $j<n$ with
-   $\exp(2\pi i\,x_j)\ne\exp(2\pi i\,y_j)$
+   coordinate characters separate its points. Explicitly, define
+   $\chi_j(x):=\exp(2\pi i t)$ using any real representative $t$ with
+   $q(t)=x_j$; this is well defined, and for distinct $x,y\in\mathbb T^n$
+   some $j<n$ satisfies $\chi_j(x)\ne\chi_j(y)$
    ([[def-complex-exponential]]).
 
 ## Facts & Assumptions
@@ -66,7 +67,7 @@ topology ([[def-the-one-dimensional-torus-and-normalized-haar-integral]],
 
 1.3 $\varphi$ is well defined and continuous: if $t'-t\in\mathbb Z$ then $t'=t+m$ and $2\pi t'=2\pi t+2\pi m$, so periodicity gives the same pair $(\cos,\sin)$; the map $t\mapsto(\cos 2\pi t,\sin 2\pi t)$ is continuous, being built from sine and cosine, which are differentiable and hence continuous, by composition with the continuous linear multiplication by $2\pi$, and it is constant on the fibres of $q$, so it induces a continuous $\varphi$ by the universal property. [A3, A6]
 
-1.4 The coordinate characters separate points of every $\mathbb T^n$ with $n\ge1$: if $x\ne y$ then $x_j\ne y_j$ for some $j<n$, and then $\exp(2\pi ix_j)\ne\exp(2\pi iy_j)$ because otherwise the difference of the representatives would be an integer by [A4], forcing $x_j=y_j$. [A4]
+1.4 The coordinate character $\chi_j(x):=\exp(2\pi it)$, where $t\in\mathbb R$ is any representative with $q(t)=x_j$, is well defined by [A4]. If $x\ne y$ in $\mathbb T^n$, then $x_j\ne y_j$ for some $j<n$. Were $\chi_j(x)=\chi_j(y)$, [A4] would make the difference of chosen real representatives an integer and hence force $x_j=y_j$, a contradiction. Thus the coordinate characters separate points. [A4]
 
 2.1 $\varphi$ is bijective: it is surjective because every point of $S^1$ is $(\cos\theta,\sin\theta)$ for some $\theta\in[0,2\pi)$ and then $\theta/(2\pi)\in[0,1)$ represents a class mapping to it; and it is injective because if $\varphi([s])=\varphi([t])$, then choosing representatives $s',t'\in[0,1)$ of the two classes and using periodicity gives $(\cos 2\pi s',\sin 2\pi s')=(\cos 2\pi t',\sin 2\pi t')$ with $2\pi s',2\pi t'\in[0,2\pi)$, so $2\pi s'=2\pi t'$ by injectivity of the parametrisation, whence $[s]=[t]$. [step 1.3, A3]
 

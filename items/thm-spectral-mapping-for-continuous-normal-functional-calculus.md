@@ -5,7 +5,7 @@ title: Spectral mapping for continuous normal functional calculus
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, lem-spectral-permanence-for-unital-c-star-subalgebras, def-axiom-of-choice, def-c-star-algebra-generated-by-a-normal-operator, thm-spectrum-as-character-values, lem-character-space-of-generated-normal-algebra-is-operator-spectrum, def-spectrum-and-resolvent-of-a-bounded-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra]
+deps: [thm-continuous-functional-calculus-for-bounded-normal-operators, lem-spectral-permanence-for-unital-c-star-subalgebras, lem-characters-of-continuous-functions-are-evaluations, def-axiom-of-choice, def-c-star-algebra-generated-by-a-normal-operator, thm-spectrum-as-character-values, lem-character-space-of-generated-normal-algebra-is-operator-spectrum, def-spectrum-and-resolvent-of-a-bounded-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -32,7 +32,7 @@ Assume AC. For a bounded normal operator $T$ on a nonzero complex Hilbert space 
 
 [A4] For a nonzero commutative unital complex Banach algebra $C$ and $c\in C$ one has $\sigma_C(c)=\{\chi(c):\chi\in\Delta(C)\}$ ([[thm-spectrum-as-character-values]]).
 
-[A5] For normal $T$ the map $\Phi(\chi)=\chi(T)$ is a homeomorphism $\Delta(C^*(I,T))\to\sigma(T)$, so $\Phi(\Delta(C^*(I,T)))=\sigma(T)$ ([[lem-character-space-of-generated-normal-algebra-is-operator-spectrum]]).
+[A5] For normal $T$ the map $\Phi(\chi)=\chi(T)$ is a homeomorphism $\Delta(C^*(I,T))\to\sigma(T)$. More precisely, $\chi\circ\Psi$ is the evaluation character at the unique point $\Phi(\chi)$, so $\chi(f(T))=f(\Phi(\chi))$ ([[lem-character-space-of-generated-normal-algebra-is-operator-spectrum]], [[lem-characters-of-continuous-functions-are-evaluations]]).
 
 [A6] The operator spectrum of $f(T)\in C^*(I,T)\subseteq\mathcal B(H)$ is the spectrum in $\mathcal B(H)$ ([[def-spectrum-and-resolvent-of-a-bounded-operator]] for the spectrum convention).
 
@@ -48,7 +48,7 @@ Assume AC. For a bounded normal operator $T$ on a nonzero complex Hilbert space 
 
 1.1 $f(T)$ lies in the commutative C\*-algebra $C^*(I,T)$ and $f(T)^*=\overline f(T)$ also lies there, so the two commute and $f(T)$ is normal. [A1, A2]
 
-1.2 The spectrum of $f(T)$ computed in $C^*(I,T)$ is the set of character values: for $\chi\in\Delta(C^*(I,T))$ one has $\chi(f(T))=(\Psi(f))^{\wedge}(\chi)=f(\Phi(\chi))$, because $\Psi$ is a $\ast$-isomorphism onto $C^*(I,T)$ and $\Phi(\chi)=\chi(T)$; hence $\sigma_{C^*(I,T)}(f(T))=f(\Phi(\Delta(C^*(I,T))))=f(\sigma(T))$. [A1, A4, A5]
+1.2 The spectrum of $f(T)$ computed in $C^*(I,T)$ is the set of character values. For $\chi\in\Delta(C^*(I,T))$, A5 gives $\chi(f(T))=f(\Phi(\chi))$; hence $\sigma_{C^*(I,T)}(f(T))=f(\Phi(\Delta(C^*(I,T))))=f(\sigma(T))$. [A4, A5]
 
 2.1 Spectral permanence for the unital C\*-subalgebra $C^*(I,T)\subseteq\mathcal B(H)$ gives $\sigma_{\mathcal B(H)}(f(T))=\sigma_{C^*(I,T)}(f(T))=f(\sigma(T))$. [step 1.1, step 1.2, A3, A6, A8]
 

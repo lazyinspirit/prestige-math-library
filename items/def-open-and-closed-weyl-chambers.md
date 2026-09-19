@@ -5,7 +5,7 @@ title: Open and closed Weyl chambers
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-weyl-group-of-a-root-system, def-positive-system-and-base-of-simple-roots]
+deps: [def-weyl-group-of-a-root-system, def-positive-system-and-base-of-simple-roots, def-reduced-crystallographic-euclidean-root-system, thm-simple-roots-form-a-basis-and-every-root-has-one-sign-of-integral-coordinates]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -25,10 +25,13 @@ $\alpha$ the **root hyperplane** is
 $L_\alpha=\{x\in E:(x,\alpha)=0\}$. The complement
 $E\setminus\bigcup_{\alpha\in\Phi}L_\alpha$ is a finite union of open convex
 cones, and its connected components are the **open Weyl chambers** of $\Phi$.
-Each chamber is open, convex, and has as its **walls** the root hyperplanes
-$L_\alpha$ containing points of its boundary; every chamber is the set of
-solutions of a system of strict homogeneous linear inequalities
-$\pm(x,\alpha)>0$.
+Each chamber is open and convex. A root hyperplane $L_\alpha$ is a
+**wall** of a chamber $D$ when $\overline D\cap L_\alpha$ contains a
+nonempty relatively open subset of $L_\alpha$—equivalently, when it is the
+supporting hyperplane of a codimension-one face of $\overline D$. In rank at
+least two, merely meeting the boundary at the common vertex $0$ does not make
+a root hyperplane a wall. Every chamber is the set of solutions of a system
+of strict homogeneous linear inequalities $\pm(x,\alpha)>0$.
 
 Fix a positive system $\Phi^{+}$ with simple roots
 $\Delta=\{\alpha_1,\dots,\alpha_r\}$

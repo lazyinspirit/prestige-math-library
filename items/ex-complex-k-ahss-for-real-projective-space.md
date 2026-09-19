@@ -24,8 +24,9 @@ Assume AC. For $m\geq0$,
 $$\widetilde K^0(\mathbb{RP}^{2m})\cong\mathbb Z/2^m,\qquad K^1(\mathbb{RP}^{2m})=0,$$
 and
 $$\widetilde K^0(\mathbb{RP}^{2m+1})\cong\mathbb Z/2^m,\qquad K^1(\mathbb{RP}^{2m+1})\cong\mathbb Z.$$
-The repeated $\mathbb Z/2$ graded pieces of the collapsed page form nonsplit
-extensions.
+For $m\ge2$, the repeated $\mathbb Z/2$ graded pieces of the collapsed page
+form a nonsplit extension; for $m=0$ there is no torsion piece, and for $m=1$
+there is a single $\mathbb Z/2$ piece and hence no nontrivial additive extension.
 
 ## Facts & Assumptions
 
@@ -45,9 +46,9 @@ extensions.
 
 2.1 The graded pieces in total degree zero are $m$ copies of $\mathbb Z/2$ together with the $\mathbb Z$ from degree zero; the associated graded of $\widetilde K^0$ is therefore $(\mathbb Z/2)^m$ of order $2^m$. [A1, step 1.1]
 
-3.1 By [A2] the class $\alpha$ has exact order $2^m$ and generates $\widetilde K^0(\mathbb{RP}^r)$, so the $m$ copies of $\mathbb Z/2$ assemble into the single cyclic group $\mathbb Z/2^m$; this is a nonsplit extension, since the associated graded is not cyclic. The odd-degree statement is the corresponding clause of [A2]. [A2, A3, step 2.1]
+3.1 By [A2] the class $\alpha$ has exact order $2^m$ and generates $\widetilde K^0(\mathbb{RP}^r)$, so the $m$ copies of $\mathbb Z/2$ assemble into the single cyclic group $\mathbb Z/2^m$. For $m\ge2$ this is a nonsplit extension because $(\mathbb Z/2)^m$ is not cyclic; for $m=0$ the reduced group is zero, and for $m=1$ it is the lone graded piece $\mathbb Z/2$. The odd-degree statement is the corresponding clause of [A2]. [A2, A3, step 2.1]
 
-4.1 Steps 1.1, 2.1 and 3.1 verify the displayed groups and the nonsplit nature of the extensions. [step 1.1, step 3.1] ∎
+4.1 Steps 1.1, 2.1 and 3.1 verify the displayed groups and identify exactly when a nonsplit extension occurs. [step 1.1, step 3.1] ∎
 
 ## Source notes
 

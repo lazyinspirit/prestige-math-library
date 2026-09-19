@@ -4,7 +4,7 @@ kind: example
 title: "Covariance of deterministic Ito integrals"
 status: draft
 origin: pipeline
-deps: [thm-ito-isometry-and-linearity-in-predictable-l2, lem-cross-ito-isometry, cor-deterministic-ito-integrals-are-gaussian, def-multivariate-normal-law, def-ito-integral-for-square-integrable-predictable-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [thm-ito-isometry-and-linearity-in-predictable-l2, lem-cross-ito-isometry, cor-deterministic-ito-integrals-are-gaussian, def-multivariate-normal-law, lem-characteristic-function-of-a-multivariate-normal-law, def-ito-integral-for-square-integrable-predictable-processes, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 proof_strategy: direct
 generation:
   role: example
@@ -35,7 +35,7 @@ integrands with disjoint supports have independent integrals.
 
 [F2] The general cross identity $E[(\int_0^Th\,dB)(\int_0^Tk\,dB)]=E\int_0^Thk\,ds$ holds for predictable $L^2$ integrands; for elementary (in particular deterministic step) integrands this is the polarized elementary isometry. [[thm-ito-isometry-and-linearity-in-predictable-l2]] [[lem-cross-ito-isometry]]
 
-[F3] For deterministic $h,k$ the vector of the two integrals has law $N_2(0,\Sigma)$ with $\Sigma_{11}=\int h^2$, $\Sigma_{22}=\int k^2$, $\Sigma_{12}=\int hk$; a multivariate normal law with diagonal covariance can be realized with independent coordinates, and the law is unique. [[def-multivariate-normal-law]] [[cor-deterministic-ito-integrals-are-gaussian]]
+[F3] For deterministic $h,k$ the vector of the two integrals has law $N_2(0,\Sigma)$ with $\Sigma_{11}=\int h^2$, $\Sigma_{22}=\int k^2$, $\Sigma_{12}=\int hk$; a multivariate normal law with diagonal covariance can be realized with independent coordinates, and its characteristic function determines the law. [[def-multivariate-normal-law]] [[lem-characteristic-function-of-a-multivariate-normal-law]] [[cor-deterministic-ito-integrals-are-gaussian]]
 
 [F4] AC is declared for the ambient interfaces. [[def-axiom-of-choice]]
 

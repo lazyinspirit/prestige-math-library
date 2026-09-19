@@ -19,7 +19,7 @@ sources:
 
 ## Definition
 
-Let $X$ and $Y$ be Banach spaces over the same scalar field
+Let $X$ and $Y$ be Banach spaces over the same scalar field $\mathbb F$
 ([[def-banach-space]]) and let $T:X\to Y$ be a bounded linear operator
 ([[def-bounded-linear-operator]]). Then $T$ is a **Fredholm operator** when
 all three of the following hold:
@@ -39,7 +39,7 @@ quotient and does not depend on that norm.
 
 For a Fredholm operator $T$ the **index** of $T$ is the integer
 
-$$\operatorname{ind}T:=\dim\ker T-\dim\operatorname{coker}T$$
+$$\operatorname{ind}T:=\dim_{\mathbb F}\ker T-\dim_{\mathbb F}\operatorname{coker}T$$
 
 ([[def-integers]]). Both terms are natural numbers by the definition, so the
 index is a well-defined integer; it may be positive, negative or zero.

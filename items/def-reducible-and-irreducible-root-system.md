@@ -35,8 +35,12 @@ then $\Phi$ spans $E_1$ and $E_2$ separately, because otherwise a nonzero
 vector of $E_i$ orthogonal to $\Phi\cap E_i$ and to $E_{3-i}$ would be
 orthogonal to all of $\Phi$ and hence zero. Consequently both $\Phi\cap E_i$
 are nonempty, and each of them is itself a reduced crystallographic root
-system in $E_i$ whose root spaces are those of $\Phi$.
+system in $E_i$ whose roots are those of $\Phi$ lying in $E_i$.
 
-A root system that is a single point is impossible, since $0\notin\Phi$; the
-zero vector space carries no root system, so every rank-one root system
-$\{\pm\alpha\}$ is irreducible.
+A one-element root system is impossible: if $\alpha\in\Phi$, reflection in
+$\alpha$ sends $\alpha$ to the distinct root $-\alpha$, because
+$\alpha\ne0$. The zero vector space carries the empty root system under the
+stated root-system axioms; it is irreducible by the definition above, since
+the zero space has no orthogonal direct-sum decomposition into two nonzero
+subspaces. Every rank-one root system $\{\pm\alpha\}$ is likewise
+irreducible.

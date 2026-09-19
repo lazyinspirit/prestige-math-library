@@ -5,7 +5,7 @@ title: Gelfand transform
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-character-and-maximal-ideal-space]
+deps: [def-character-and-maximal-ideal-space, def-unital-banach-algebra, thm-maximal-ideal-space-is-compact-hausdorff, def-axiom-of-choice]
 justified_by: []
 provenance:
   statement: ai-altered
@@ -37,10 +37,12 @@ Each $\hat a$ is continuous for the pointwise-evaluation topology, because that
 topology is by definition the coarsest one making every evaluation
 $\chi \mapsto \chi(b)$ continuous and $\hat a$ is the evaluation at $a$; the
 codomain is written $\mathbb C^{\Delta(A)}$ with the product topology, and the
-image of $\Gamma_A$ therefore lies in $C(\Delta(A))$, where
-$C(\Delta(A))$ carries the supremum norm for a compact $\Delta(A)$
-([[thm-maximal-ideal-space-is-compact-hausdorff]], where compactness is
-proved).
+image of $\Gamma_A$ therefore lies in the algebra $C(\Delta(A))$ of continuous
+functions.  No supremum norm or compactness is asserted for a general $A$.
+If $A$ is in addition a nonzero unital commutative Banach algebra and the Axiom
+of Choice is assumed ([[def-axiom-of-choice]]), then
+[[thm-maximal-ideal-space-is-compact-hausdorff]] makes $\Delta(A)$ compact and
+$C(\Delta(A))$ carries its supremum norm.
 
 Two qualifications are part of the definition:
 

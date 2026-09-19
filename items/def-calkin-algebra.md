@@ -74,8 +74,8 @@ $1 := I_X + \mathcal K(X)$.
   quotient in [[thm-quotient-of-banach-by-closed-subspace-is-banach]]; the ideal
   properties, properness and the norm of the unit are choice-free.
 
-- **The Calkin algebra is noncommutative and does not contain compact
-  information.** Two operators have the same coset exactly when they differ by
+- **The Calkin algebra forgets compact perturbations.** Two operators have the
+  same coset exactly when they differ by
   a compact operator, so $\mathcal C(X)$ records the "Fredholm part" of
   $\mathcal B(X)$; this is what makes the Atkinson theorem a statement about
   invertibility in $\mathcal C(X)$

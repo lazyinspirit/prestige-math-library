@@ -5,7 +5,7 @@ title: Maximal ideal space of the disc algebra
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-taylor-expansion-holomorphic-function, thm-uniform-limit-continuous-complex-functions, thm-uniform-limit-interchanges-complex-line-integrals, thm-morera-triangle-theorem, thm-boundary-maximum-modulus-principle, thm-complex-power-series-converge-locally-uniformly, thm-maximal-ideal-space-is-compact-hausdorff]
+deps: [thm-characters-on-a-unital-banach-algebra-are-continuous, thm-taylor-expansion-holomorphic-function, thm-uniform-limit-continuous-complex-functions, thm-uniform-limit-interchanges-complex-line-integrals, thm-morera-triangle-theorem, thm-boundary-maximum-modulus-principle, thm-complex-power-series-converge-locally-uniformly, def-character-and-maximal-ideal-space, thm-compactness-under-continuous-maps]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -51,7 +51,12 @@ circle.
 
 [L5] For $f$ continuous on $\overline\Omega$ and holomorphic on a bounded domain $\Omega$, the maximum of $|f|$ is attained on $\partial\Omega$ ([[thm-boundary-maximum-modulus-principle]]).
 
-[L6] For a nonzero commutative unital complex Banach algebra the character space is compact Hausdorff ([[thm-maximal-ideal-space-is-compact-hausdorff]]).
+[L6] The pointwise-evaluation topology on a character space is Hausdorff: two
+distinct characters differ on some algebra element, and disjoint small discs
+about the two values pull back to disjoint evaluation neighbourhoods
+([[def-character-and-maximal-ideal-space]]). A continuous bijection from a
+compact space to a Hausdorff space is a homeomorphism
+([[thm-compactness-under-continuous-maps]]).
 
 ## Verification
 
@@ -69,7 +74,7 @@ circle.
 
 2.1 Consequently $\chi(f) = f(a)$ for every $f \in A(\mathbb D)$: by [step 1.5] take polynomials $p_n \to f$ uniformly and use continuity of $\chi$ from [L1] together with $\chi(p_n) = p_n(a)$ from [step 1.4]; hence $\chi = \mathrm{ev}_a$ with $a = \chi(z) \in \overline{\mathbb D}$, so every character is an evaluation at a point of the disc, and the point is unique because $\mathrm{ev}_a = \mathrm{ev}_b$ forces $a = \mathrm{ev}_a(z) = \mathrm{ev}_b(z) = b$. [step 1.4, step 1.5, L1, algebra]
 
-3.1 The map $a \mapsto \mathrm{ev}_a$ is a continuous bijection from the compact space $\overline{\mathbb D}$ onto the Hausdorff space $\Delta(A(\mathbb D))$ by [L6] and [step 2.1] and [step 1.3], hence a homeomorphism. [step 1.3, step 2.1, L6]
+3.1 The map $a \mapsto \mathrm{ev}_a$ is continuous because every coordinate $a\mapsto\mathrm{ev}_a(f)=f(a)$ is continuous; it is a bijection by [step 2.1] and [step 1.3]. Its domain $\overline{\mathbb D}$ is compact and its target is Hausdorff by [L6], so [L6] makes it a homeomorphism. [step 1.3, step 2.1, L6]
 
 4.1 The boundary restriction is isometric: by [L5] applied to the bounded domain $\mathbb D$ and the function $f$, continuous on the closure, one has $\sup_{\overline{\mathbb D}}|f| = \max_{\partial\mathbb D}|f|$, so $\|f\|_\infty = \|f|_{\partial\mathbb D}\|_\infty$ and $R$ preserves norms; and the character space is $\Delta(A(\mathbb D)) \cong \overline{\mathbb D}$, which contains points not on the boundary, so it is not the circle alone. [step 3.1, L5, algebra] ∎
 

@@ -65,15 +65,15 @@ stopping times occur, and every object mentioned is constructed from them.
    or $[0,t]\times\Omega$, both of which are in
    $\mathcal B([0,t])\otimes\mathcal F_t$.
 
-The family $\mathcal G$ is not assumed to be a pi-system: a finite intersection
+The family $\mathcal G$ need not itself contain the whole space, but a finite intersection
 of generators is empty or again a generator, or a time-zero generator, because
 $(s,u]\cap(s',u']=(s\vee s',u\wedge u']$ and $A\cap A'\in\mathcal F_{s\vee s'}$
 whenever $A\in\mathcal F_s$, $A'\in\mathcal F_{s'}$, while
 $\{0\}\times A$ meets an interval generator only if that interval begins at
 $0$, in which case their product is $\{0\}\times(A\cap A')$ with
-$A\cap A'\in\mathcal F_0$. This observation, and the fact that the family of
-finite unions of disjoint generators is an algebra generating $\mathcal P$, is
-used by the density theorem below.
+$A\cap A'\in\mathcal F_0$. Thus the family consisting of the whole space
+together with finite intersections of generators is a pi-system generating
+$\mathcal P$; this is the structural fact used by the density theorem below.
 
 Because predictability is a measurability requirement for the joint map, it is
 preserved by pointwise limits, products and linear combinations of predictable

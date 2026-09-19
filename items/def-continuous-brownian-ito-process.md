@@ -44,7 +44,9 @@ with $B_t-B_s$ independent of $\mathcal F_s$ of law $N(0,t-s)$ for $0\le s<t$.
 
 2. **Multidimensional Brownian-driven process.** Let $d\ge1$ and $m\ge1$ be
    finite integers, let $B=(B^1,\dots,B^m)$ be a standard $m$-dimensional
-   Brownian motion [[def-d-dimensional-brownian-motion]], let $X_0$ be a finite
+   Brownian motion [[def-d-dimensional-brownian-motion]] that is adapted to
+   $(\mathcal F_t)$ and whose vector increment $B_t-B_s$ is independent of
+   $\mathcal F_s$ for $0\le s<t$, let $X_0$ be a finite
    $\mathcal F_0$-measurable $\mathbb R^d$-valued random vector, let $b$ be an
    $\mathbb R^d$-valued progressively measurable process with
    $\int_0^t|b^i_s|\,ds<\infty$ a.s. for every $i$ and finite $t$, and let

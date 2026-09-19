@@ -37,7 +37,7 @@ $P_x(A)=P\bigl((x+B_t)_{t\ge0}\in A\bigr)$.
 
 The following are part of the definition and are used later in this form.
 
-1. **Initial value.** $B^x_0=x$ and $P_x$-almost every path starts at $x$;
+1. **Initial value.** $B^x_0=x$ almost surely, and $P_x$-almost every path starts at $x$;
    because every path of $B$ is continuous on one probability-one event,
    $P_x$-almost every path of $B^x$ is continuous as well.
 2. **Increments.** For $0\le s\le t$ one has the pathwise identity

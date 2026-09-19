@@ -40,7 +40,7 @@ Choice, $\lambda \in \sigma_{ap}(T)$ if and only if there is a sequence
 $(x_n)$ of unit vectors in $X$ with
 $$\|(T-\lambda)x_n\| \longrightarrow 0 .$$
 Indeed, if $T-\lambda$ is not bounded below then for each $n$ the set
-$\{x : \|x\| = 1,\ \|(T-\lambda)x\| < 1/n\}$ is nonempty, and Countable Choice
+$\{x : \|x\| = 1,\ \|(T-\lambda)x\| < 1/(n+1)\}$ is nonempty, and Countable Choice
 selects one unit vector $x_n$ for each $n$; the resulting sequence witnesses
 the failure of the bound. Conversely a sequence of unit vectors with
 $\|(T-\lambda)x_n\| \to 0$ rules out every constant $c > 0$ in the estimate.

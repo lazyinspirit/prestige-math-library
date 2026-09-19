@@ -43,7 +43,7 @@ is a property of the given joint map.
 
 [F3] A pointwise limit of measurable functions into $\mathbb R$ is measurable; the same theorem applied coordinatewise gives measurability of limits of jointly measurable maps. [[thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]]
 
-[F4] The generators of the predictable sigma-algebra are the sets $(s,u]\times A$ with $A\in\mathcal F_s$ and the time-zero sets $\{0\}\times A$ with $A\in\mathcal F_0$; $[0,T]\times\Omega$ itself is a generator, as it equals $(0,T]\times\Omega$ together with $\{0\}\times\Omega$. [[def-progressively-measurable-and-predictable-process]]
+[F4] The generators of the predictable sigma-algebra are the sets $(s,u]\times A$ with $A\in\mathcal F_s$ and the time-zero sets $\{0\}\times A$ with $A\in\mathcal F_0$. The set $[0,T]\times\Omega$ is predictable, being the union of the generator $(0,T]\times\Omega$ and the time-zero generator $\{0\}\times\Omega$. [[def-progressively-measurable-and-predictable-process]]
 
 ## Proof
 

@@ -52,7 +52,7 @@ $EX+\int_0^tH_s\,dB_s$.
  
 2.1 Uniqueness: if $H$ and $K$ both represent $X-EX$, then $\int_0^T(H-K)dB=0$ almost surely, so by the isometry of [F2] $E\int_0^T(H-K)^2ds=0$, which is exactly $H=K$ $(\mathrm dt\otimes P)$-almost everywhere. [F2, step 1.1]
  
-3.1 Endpoint and degenerate cases: for $X$ constant, $H=0$ and the representation reads $X=EX$; for $T=0$ the space $L^2(\mathcal F_0)$ consists of constants almost surely, so again $H=0$; for $X=E[X\mid\mathcal F_T]$ the tower property [F3] supplies the conditional-expectation interpretation used in the last sentence of the statement; the uniqueness is modulo $(\mathrm dt\otimes P)$-null sets, so two integrands differing on a $dt$-null set of times or on a $P$-null set of paths are the same element of $L^2(\mathrm dt\otimes P)$; and AC enters only through [F4]. [F2, F3, F4, step 2.1] ∎
+3.1 Endpoint and degenerate cases: for $X$ constant, $H=0$ and the representation reads $X=EX$; for $X=E[X\mid\mathcal F_T]$ the tower property [F3] supplies the conditional-expectation interpretation used in the last sentence of the statement; the uniqueness is modulo $(\mathrm dt\otimes P)$-null sets, so two integrands differing on a $dt$-null set of times or on a $P$-null set of paths are the same element of $L^2(\mathrm dt\otimes P)$; and AC enters only through [F4]. [F2, F3, F4, step 2.1] ∎
 
 ## Source notes
 

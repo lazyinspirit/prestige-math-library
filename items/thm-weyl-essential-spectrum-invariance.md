@@ -5,7 +5,7 @@ title: "Weyl's theorem: invariance of the essential spectrum"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-weyl-criterion-for-essential-spectrum, def-relative-compactness-with-respect-to-an-operator, lem-second-resolvent-identity-for-closed-operator-perturbations, thm-kato-rellich, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-compositions-with-a-compact-operator-are-compact, def-compact-linear-operator]
+deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-weyl-criterion-for-essential-spectrum, def-relative-compactness-with-respect-to-an-operator, lem-second-resolvent-identity-for-closed-operator-perturbations, lem-resolvent-star-algebra-is-dense-in-c-zero, thm-kato-rellich, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-axiom-of-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-compositions-with-a-compact-operator-are-compact, def-compact-linear-operator]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -36,7 +36,7 @@ $D(A+K)=D(A)$.
 
 [A3] A compact operator maps weakly convergent sequences to norm convergent sequences, and $R_S(z)$ is bounded ([[thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences]], [[def-compact-linear-operator]]).
 
-[A4] With $D_z:=R_A(z)-R_C(z)$ the resolvent identity gives $D_z=R_A(z)(C-A)R_C(z)$, and for $w\in\rho(A)\cap\rho(C)$ the algebraic identity $D_w=[I+(w-z)R_A(z)]^{-1}D_z[I-(w-z)R_C(w)]$ holds, the first factor being $I+(z-w)R_A(w)$; hence compactness of $D_z$ transfers to every common resolvent point $w$, and conversely by exchanging the roles of $z$ and $w$ ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], [[lem-compositions-with-a-compact-operator-are-compact]]).
+[A4] For self-adjoint $A,C$ and nonreal $z,w$, the bounded resolvent identity gives $D_w=[I+(w-z)R_A(z)]^{-1}D_z[I-(w-z)R_C(w)]$, where $D_z:=R_A(z)-R_C(z)$ and the inverse first factor is $I+(z-w)R_A(w)$. Hence compactness of $D_z$ transfers to $D_w$, and conversely by exchanging $z,w$ ([[lem-resolvent-star-algebra-is-dense-in-c-zero]], [[lem-compositions-with-a-compact-operator-are-compact]]).
 
 [A5] An $A$-compact symmetric $K$ has $A$-bound zero, so Kato-Rellich makes $A+K$ self-adjoint on $D(A)$; the second resolvent identity $R_{A+K}(z)-R_A(z)=R_{A+K}(z)KR_A(z)$ holds for $z$ in the common resolvent set ([[def-relative-compactness-with-respect-to-an-operator]], [[thm-kato-rellich]], [[lem-second-resolvent-identity-for-closed-operator-perturbations]]).
 

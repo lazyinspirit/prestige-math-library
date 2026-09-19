@@ -21,7 +21,7 @@ sources:
 ## Statement
 
 Assume AC. Let $E\to B$ be a numerable complex rank-$n$ bundle over a
-path-connected CW complex (or CW-type base) and let $\rho_2$ denote reduction
+path-connected CW complex and let $\rho_2$ denote reduction
 of coefficients modulo two. Then
 $$w_{2i+1}(E_{\mathbb R})=0,\qquad w_{2i}(E_{\mathbb R})=\rho_2c_i(E) \qquad(i\geq0),$$
 where $w$ denotes the total Stiefel-Whitney class of the underlying real
@@ -51,7 +51,7 @@ bundle.
 
 1.1 For a complex line $L$: the underlying real bundle $L_{\mathbb R}$ is oriented by the complex orientation, so $w_1(L_{\mathbb R})=0$ by [F5]; and by [F3] applied to the rank-two oriented bundle $L_{\mathbb R}$ together with [F6], $w_2(L_{\mathbb R})=\rho_2e(L_{\mathbb R})=\rho_2c_1(L)$. Hence $w(L_{\mathbb R})=1+\rho_2c_1(L)$. [F3, F5, F6]
 
-1.2 Pulling back to the flag bundle gives $q^*E=L_1\oplus\cdots\oplus L_n$ with all lines complex, by [F1]. [F1]
+1.2 If $n=0$, then $E_{\mathbb R}$ is the zero bundle and both total classes are $1$, so the theorem holds directly. Assume henceforth that $n\geq1$. Pulling back to the flag bundle gives $q^*E=L_1\oplus\cdots\oplus L_n$ with all lines complex, by [F1]. [F1]
 
 2.1 Multiplicativity [F4] and step 1.1 give $w((q^*E)_{\mathbb R})=\prod_i(1+\rho_2c_1(L_i))=\rho_2\prod_i(1+c_1(L_i))=\rho_2q^*c(E)=q^*\rho_2c(E)$, where the last two equalities use multiplicativity and naturality of the Chern class [F2]. [F2, F4, step 1.1, step 1.2]
 

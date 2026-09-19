@@ -45,7 +45,9 @@ $u_n = 0$ for all $n \ge k$ and both sides equal $0$.
 
 [L4] If $x_k \le y_k$ eventually, then $\limsup_k x_k \le \limsup_k y_k$ and $\liminf_k x_k \le \liminf_k y_k$ ([[lem-limsup-monotone-comparison]]).
 
-[L5] For every real $c > 0$ the sequence $c^{1/n}$ converges to $1$ ([[lem-nth-root-of-constant-tends-to-one]]).
+[L5] For every real $c > 0$ the positive-indexed sequence
+$(c^{1/n})_{n\geq1}$ converges to $1$
+([[lem-nth-root-of-constant-tends-to-one]]).
 
 ## Proof
 

@@ -49,7 +49,7 @@ Weyl group $W(\Phi)$ acts simply transitively on each of these three sets.
 
 1.2 Conversely each positive system $\Phi^{+}$ determines a chamber $C(\Phi^{+})=\{x:(x,\alpha)>0\text{ for all }\alpha\in\Phi^{+}\}$: it is nonempty because it contains the regular vector defining $\Phi^{+}$; it is an open convex cone defined by finitely many strict linear inequalities, hence is contained in a single chamber; and it equals that chamber because no root changes sign strictly inside it and every boundary point lies in some root hyperplane. [L1, L2, algebra]
 
-1.3 Positive systems correspond bijectively to their simple-root bases: a base determines its positive system as the set of nonnegative integral combinations of its members (plus zero), and the positive system determines the base as its indecomposable elements, by [L2]; these are inverse constructions. [L2, algebra]
+1.3 Positive systems correspond bijectively to their simple-root bases: a base $\Delta$ determines the positive system $\{\beta\in\Phi:\beta=\sum_{\alpha\in\Delta}n_\alpha\alpha\text{ with all }n_\alpha\in\mathbb Z_{\ge0}\}$, and the positive system determines the base as its indecomposable elements, by [L2]; these are inverse constructions. [L2, algebra]
 
 2.1 The two assignments are inverse: $\Phi^{+}(C(\Phi^{+}))=\Phi^{+}$ because the roots positive on $C(\Phi^{+})$ are exactly those in $\Phi^{+}$, one sign being constant on the cone; and $C(\Phi^{+}(C))=C$ because both are open convex sets defined by the same sign conditions and the sign pattern determines the chamber. [step 1.1, step 1.2, algebra]
 

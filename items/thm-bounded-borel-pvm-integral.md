@@ -44,7 +44,7 @@ $$\|f\|_{E,\infty}:=\sup\bigl\{\|f\|_{\infty,E_x}:\ x\in H,\ \|x\|=1\bigr\}, \qq
 
 [A2] $E_{x,y}$ is a finite complex measure on $(X,\Sigma)$ with $|E_{x,y}|(X)\le\|x\|\,\|y\|$, the integral $\int g\,dE_{x,y}$ of a bounded measurable $g$ satisfies $|\int g\,dE_{x,y}|\le\|g\|_\infty|E_{x,y}|(X)$ ([[lem-scalar-and-complex-measures-from-a-pvm]], [[thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation]], [[def-integration-against-a-signed-or-complex-measure]]).
 
-[A3] $E_x(B)=\langle E(B)x,x\rangle=\|E(B)x\|^2$ is a positive measure with $E_x(X)=\|x\|^2$, and $E_x$ is concentrated wherever the corresponding projection is: if $E(A)y=y$ then $E_y(X\setminus A)=0$ ([[lem-scalar-and-complex-measures-from-a-pvm]]).
+[A3] $E_x(B)=\langle E(B)x,x\rangle=\|E(B)x\|^2$ is a positive measure with $E_x(X)=\|x\|^2$. Moreover, if $E(A)y=y$, then $E(X\setminus A)y=E(X\setminus A)E(A)y=E(\varnothing)y=0$, so $E_y(X\setminus A)=0$ ([[lem-scalar-and-complex-measures-from-a-pvm]], [[def-projection-valued-measure]]).
 
 [A4] $\mathcal B(H)$ is complete for the operator norm ([[thm-bounded-operator-space-is-banach]], [[def-hilbert-space]]).
 

@@ -1,7 +1,7 @@
 ---
 id: prop-ahss-collapse-determines-only-the-associated-graded-object
 kind: proposition
-title: AHSS collapse determines only the associated graded object
+title: AHSS collapse generally determines only the associated graded object
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
@@ -25,10 +25,12 @@ sources:
 For the Atiyah–Hirzebruch spectral sequences of
 [[thm-cohomological-atiyah-hirzebruch-spectral-sequence]] and
 [[thm-homological-atiyah-hirzebruch-spectral-sequence]], a collapse of the
-spectral sequence determines the associated graded object
-$\operatorname{gr}_Fh^*(X)$ and no more: the pages determine the filtration
-quotients, while recovering the abutment requires additional additive extension
-data, and when the theory is multiplicative also multiplicative extension data.
+spectral sequence always determines the associated graded object
+$\operatorname{gr}_Fh^*(X)$, but in general does not determine the abutment: the
+pages determine the filtration quotients, while a filtration with more than one
+nonzero quotient may require additional additive extension data, and when the
+theory is multiplicative also multiplicative extension data. For a one-jump
+filtration there is no additive extension problem.
 In particular there is no general rule recovering $h^n(X)$ from a collapsed
 $E_2=E_\infty$ page.
 

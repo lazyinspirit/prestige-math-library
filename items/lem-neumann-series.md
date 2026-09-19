@@ -32,8 +32,8 @@ $S_N := \sum_{n=0}^{N} a^n$, a finite sum with $a^0 := 1$
    ([[def-invertible-element-and-general-linear-group-of-a-banach-algebra]]);
 2. for every $N \in \mathbb N$ the tail estimate
    $$\left\|(1-a)^{-1} - S_N\right\| \; \le \; \frac{\|a\|^{N+1}}{1 - \|a\|}$$
-   holds. The hypothesis $\|a\| < 1$ is not symmetric: it is $\|1 - a\|$ that is
-   estimated, and $1 - a$ is invertible whenever $a$ lies in the open unit ball.
+   holds. The hypothesis $\|a\| < 1$ is not symmetric: the estimate is in terms
+   of $\|a\|$, and $1-a$ is invertible whenever $a$ lies in the open unit ball.
 
 ## Facts & Assumptions
 

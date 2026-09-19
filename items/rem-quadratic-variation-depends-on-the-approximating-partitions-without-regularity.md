@@ -24,11 +24,14 @@ that assertion is
 **not** a simultaneous assertion over all refining sequences, and the
 path-dependent or arbitrary refinements of a realized path are not covered.
 
-**What the quantifiers allow.** For each prescribed sequence of partitions with
-mesh tending to zero, the probability-one event on which the sums converge to
-$t$ may be chosen after the sequence is fixed. There is no single event on
-which every sequence simultaneously has that limit, and the definition
-deliberately builds in no partition-independent object.
+**What the quantifiers allow.** The theorem cited above supplies almost-sure
+uniform convergence for the fixed dyadic sequence.  For a general prescribed
+deterministic sequence whose mesh tends to zero, the standard conclusion
+without an additional summability or regularity hypothesis is convergence in
+probability, not almost-sure convergence along the whole sequence.  In
+particular there is no single event on which every refining sequence
+simultaneously has the same limit, and the definition deliberately builds in
+no partition-independent object.
 
 **What fails without regularity.** The convergence proofs use the independence
 of increments over a preselected mesh together with a summable mesh estimate. A

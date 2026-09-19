@@ -33,7 +33,7 @@ Let $B := \operatorname{RO}(P)$ be the regular-open completion
 group** $G$ consists of the automorphisms of $B$ induced by permutations of
 $\lambda \times \mathbb{R} \times \lambda$ of the form
 $(\xi, r, \alpha) \mapsto (\xi, \rho(r), \alpha')$ where for each fixed $\xi$ the
-map $\alpha \mapsto \alpha'$ is a permutation of the third coordinate and
+map on the third coordinate in each fixed $(\xi,r)$-block is a permutation and
 $\rho : \mathbb{R} \to \mathbb{R}$ is either the identity or a reflection about a
 real point; the action on names is the recursion of
 [[def-forcing-name-automorphism-action]].
@@ -49,13 +49,27 @@ transitive model of ZF between $M$ and the full extension $M[H]$
 ([[thm-hereditarily-symmetric-interpretations-form-a-zf-model]]).
 
 **The canonical families.** For $\xi < \lambda$, $r \in \mathbb{R}$ and
-$\alpha < \lambda$ let $x_{\xi r \alpha}$ be the real coded by the $\xi$-th
-component of the generic sequence at parameters $(r,\alpha)$, let
+$\alpha < \lambda$ let
+$$x_{\xi r \alpha}:=\{\,\delta<\lambda: (\exists p\in H)\,
+p(\xi,r,\alpha,\delta)=1\,\}.$$
+Thus $x_{\xi r\alpha}$ is a generic subset of $\lambda$, not in general a real.
+Let
 $X_{\xi r} := \{x_{\xi r \alpha} : \alpha < \lambda\}$, let
-$R_\xi := \{X_{\xi r} : r \in \mathbb{R}\}$ be the $\xi$-th metric component
-with its induced metric, and let $M := \{R_\xi : \xi < \lambda\}$. Each of these
-is fixed by every automorphism of the group, hence hereditarily symmetric, so all
-five families lie in $N$ and are indexed by the full $\lambda$.
+$R_\xi := \{X_{\xi r} : r \in \mathbb{R}\}$, and let
+$M := \{R_\xi : \xi < \lambda\}$. Genericity makes the canonical subsets for
+distinct coordinate triples distinct. Consequently the rule
+$$d_\xi(X_{\xi r},X_{\xi s})
+ :=\frac{|r-s|}{1+|r-s|}$$
+is a well-defined metric on $R_\xi$, transported from the displayed bounded
+metric on $\mathbb R$; no metric is induced from the sets
+$x_{\xi r\alpha}\subseteq\lambda$ themselves.
+
+The name for $x_{\xi r\alpha}$ is fixed by
+$\operatorname{fix}(\{(\xi,r,\alpha)\})$, the name for $X_{\xi r}$ is fixed by
+$\operatorname{fix}(\{(\xi,r,\alpha_0)\})$ for any fixed
+$\alpha_0<\lambda$, and the names for $R_\xi$ and $M$ are fixed by the whole
+group. Their members are hereditarily symmetric by induction, so all four kinds
+of canonical object lie in $N$ and are indexed by the full $\lambda$.
 
 The case $\lambda = \omega_1$ is the case used for the dependent-choice model
 below; the same definition with larger $\lambda$ is the one whose

@@ -5,7 +5,7 @@ title: Reduction of the integral Bockstein is the first Steenrod square
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-bockstein-connecting-operation, prop-first-steenrod-square-is-the-mod-two-bockstein]
+deps: [def-bockstein-connecting-operation, lem-the-bockstein-is-independent-of-lift-and-cocycle-representative, prop-first-steenrod-square-is-the-mod-two-bockstein]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -29,7 +29,7 @@ choice principle is needed.
 
 ## Facts & Assumptions
 
-[F1] Assume AC. For a cocycle $x$ in $C^n(X;\mathbb F_2)$ choose a lift $b\in C^n(X;\mathbb Z)$; if $\delta b=2a$ then $\beta_{\mathbb Z}[x]=[a]$, independently of the lift and the representative; for the cyclic coefficient sequences least nonnegative residues give the lift without AC, and the integral Bockstein $\widetilde\beta$ is the Bockstein of $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb F_2\to0$ ([[def-bockstein-connecting-operation]]).
+[F1] For a cocycle $x$ in $C^n(X;\mathbb F_2)$ choose a lift $b\in C^n(X;\mathbb Z)$; if $\delta b=2a$ then $\beta_{\mathbb Z}[x]=[a]$. The definition gives this cochain formula, while independence of the lift and cocycle representative—and hence descent to cohomology—is proved by [[lem-the-bockstein-is-independent-of-lift-and-cocycle-representative]]. For the cyclic coefficient sequences least nonnegative residues give the lift without AC, and the integral Bockstein is the Bockstein of $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb F_2\to0$ ([[def-bockstein-connecting-operation]]).
 
 [F2] The mod-two Bockstein $\beta$ of $0\to\mathbb F_2\xrightarrow{2}\mathbb Z/4\to\mathbb F_2\to0$ satisfies $Sq^1(x)=\beta(x)$ for every $x\in H^n(X;\mathbb F_2)$, and the identification requires no AC ([[prop-first-steenrod-square-is-the-mod-two-bockstein]]).
 

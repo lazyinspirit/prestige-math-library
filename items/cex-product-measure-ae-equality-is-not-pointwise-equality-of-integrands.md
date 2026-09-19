@@ -34,7 +34,7 @@ almost-everywhere class, not pointwise agreement.
 
 **Given:** AC, a horizon $T>1/2$, the deterministic processes $H=1_{\{1/2\}}$ and $K=0$.
 
-[F1] $H$ and $K$ are predictable: a deterministic Borel function of the time variable is a predictable process, $1_{[0,1/2]}$ and the pointwise limit $1_{[0,1/2)}=\lim_n1_{[0,1/2-1/n]}$ of predictable indicators are predictable, and $1_{\{1/2\}}=1_{[0,1/2]}-1_{[0,1/2)}$. [[def-progressively-measurable-and-predictable-process]]
+[F1] $H$ and $K$ are predictable: a deterministic Borel function of the time variable is a predictable process, $1_{[0,1/2]}$ and the pointwise limit $1_{[0,1/2)}=\lim_{n\to\infty}1_{[0,1/2-1/(n+3)]}$ of predictable indicators are predictable, and $1_{\{1/2\}}=1_{[0,1/2]}-1_{[0,1/2)}$. [[def-progressively-measurable-and-predictable-process]]
 
 [F2] $\mathrm dt\otimes P(\{1/2\}\times\Omega)=0$: the section at $\omega$ is the singleton $\{1/2\}$, which is Lebesgue-null, so Tonelli gives the value $0$. Hence $H=K$ almost everywhere for the product measure, and both have finite energy, $\int_0^T\!\!\int H^2dP\,dt=0$. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
 

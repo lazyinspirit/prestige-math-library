@@ -35,7 +35,7 @@ the integral process satisfies the same bound.
 
 [F2] For each $m\ge1$ the sampled family $Y_k:=M_{kT/2^m}$, $0\le k\le2^m$, is a discrete martingale for the filtration $(\mathcal F_{kT/2^m})_k$, by the tower property; hence Doob's $L^2$ inequality gives $E\max_{k\le2^m}Y_k^2\le4E Y_{2^m}^2$. [[thm-tower-property-of-conditional-expectation]] [[thm-doob-lp-maximal-inequality]]
 
-[F3] For every $\omega$ in the Brownian continuity event the path of $M$ is continuous on $[0,T]$, so its supremum equals the supremum over the dyadic rationals $D:=\bigcup_m\{kT/2^m\}$, which in turn is the increasing limit $\lim_m\max_{k\le2^m}|M_{kT/2^m}|$ because the grids are nested. [[lem-rat-embeds-dense]] [[def-elementary-predictable-brownian-integrand]]
+[F3] By the continuous-version theorem there is an event of probability one on which the path of $M$ is continuous on $[0,T]$. On that event its supremum equals the supremum over the dyadic grid union $D:=\bigcup_m\{kT/2^m\}$, which in turn is the increasing limit $\lim_m\max_{k\le2^m}|M_{kT/2^m}|$ because the grids are nested. [[lem-rat-embeds-dense]] [[thm-ito-integral-process-has-a-continuous-martingale-version]]
 
 [F4] For $0\le Z_m\uparrow Z$, $EZ_m\uparrow EZ$, so the expectation of the supremum is the limit of the expectations of the finite-grid maxima. [[thm-monotone-convergence-for-the-integral]]
 
@@ -49,9 +49,9 @@ the integral process satisfies the same bound.
 
 1.1 For fixed $m$ the finite-grid quantity $\max_{k\le2^m}|M_{kT/2^m}|^2$ is square-integrable, and [F2] gives $E\max_{k\le2^m}|M_{kT/2^m}|^2\le4EM_T^2=4E\int_0^TH^2ds$. [F1, F2]
 
-1.2 As $m$ increases the grids $\{kT/2^m:0\le k\le2^m\}$ are nested, so the maxima increase to $\sup_{q\in D}|M_q|$, which equals $\sup_{t\in[0,T]}|M_t|$ on the continuity event by [F3]. [F3]
+1.2 As $m$ increases the grids $\{kT/2^m:0\le k\le2^m\}$ are nested, so the maxima increase pointwise to the measurable random variable $S_D:=\sup_{q\in D}|M_q|$. By [F3], $S_D=\sup_{t\in[0,T]}|M_t|$ almost surely. [F3]
 
-2.1 Monotone convergence [F4] applied to $Z_m:=\max_{k\le2^m}|M_{kT/2^m}|^2$ and $Z:=\sup_{t\le T}|M_t|^2$ gives $E\sup_{t\le T}|M_t|^2=\lim_mE\max_{k\le2^m}|M_{kT/2^m}|^2\le4E\int_0^TH^2ds$, and the bound is finite because the right-hand side is finite. [F1, F4, step 1.1, step 1.2]
+2.1 Monotone convergence [F4] applies pointwise to $Z_m:=\max_{k\le2^m}|M_{kT/2^m}|^2\uparrow S_D^2$. Hence, using the almost-sure equality in step 1.2, $E\sup_{t\le T}|M_t|^2=ES_D^2=\lim_mEZ_m\le4E\int_0^TH^2ds$, and the bound is finite because the right-hand side is finite. [F1, F4, step 1.1, step 1.2]
 
 3.1 Every continuous version $N$ of the integral satisfies the same identity $EN_t^2=E\int_0^tH^2ds$ and the same discrete martingale property, so the argument gives the bound for $N$; and $N$ is indistinguishable from $M$ by [F5], so the path suprema, and hence the expectations, agree. AC enters only through the declared ambient interfaces [F6]. [F5, F6, step 2.1] ∎
 

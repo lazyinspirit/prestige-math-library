@@ -35,7 +35,7 @@ $\|k\|_{L^2(\overline{\mu\times\nu})}=\|a\|_{L^2(\mu)}\|b\|_{L^2(\nu)}$, the
 kernel operator of [[thm-l-two-kernels-give-hilbert-schmidt-operators]] is the
 rank-one form
 
-$$(T_kf)(x)=a(x)\,\langle f,b\rangle_{L^2(\nu)}\qquad\text{for every }x\in X\text{ and every }f\in L^2(\nu;\mathbb C),$$
+$$(T_kf)(x)=a(x)\,\langle f,b\rangle_{L^2(\nu)}\qquad\text{for }\mu\text{-almost every }x\in X\text{ and every }f\in L^2(\nu;\mathbb C),$$
 
 its range is contained in the one-dimensional subspace $\mathbb C\cdot a$
 (so the range admits an ordered basis of length at most one, and $T_k$ is
@@ -71,9 +71,9 @@ zero operator, so both displayed formulas still hold.
 
 1.1 The function $(x,y)\mapsto a(x)\overline{b(y)}$ is $(\mathcal A\otimes\mathcal B)$-measurable, and [F1] applied to its squared modulus gives $\|k\|_{L^2(\overline{\mu\times\nu})}^2=\int_X\bigl(\int_Y|a(x)|^2|b(y)|^2\,d\overline\nu(y)\bigr)d\mu(x)=\int_X|a(x)|^2\bigl(\int_Y|b(y)|^2\,d\overline\nu(y)\bigr)d\mu(x)$; [F2] rewrites the inner integral as $\|b\|_{L^2(\nu)}^2$, so the value is $\|a\|_{L^2(\mu)}^2\|b\|_{L^2(\nu)}^2$, finite because both factors are $L^2$ classes. [F1, F2, F6]
 
-1.2 For $f\in L^2(\nu;\mathbb C)$ the integrand $y\mapsto\overline{b(y)}f(y)$ is $\nu$-integrable with $\int_Y|\overline bf|\,d\nu\le\|b\|_{L^2(\nu)}\|f\|_{L^2(\nu)}$ by [F3], so the section integral defining $T_kf$ converges at every $x$ and equals $a(x)\int_Y\overline{b(y)}f(y)\,d\nu(y)=a(x)\langle f,b\rangle$; in particular $(T_kf)(x)=a(x)\beta(f)$ for all $x$. [F3, F4]
+1.2 For $f\in L^2(\nu;\mathbb C)$ the integrand $y\mapsto\overline{b(y)}f(y)$ is $\nu$-integrable with $\int_Y|\overline bf|\,d\nu\le\|b\|_{L^2(\nu)}\|f\|_{L^2(\nu)}$ by [F3]. Hence the product representative has section integral $a(x)\int_Y\overline{b(y)}f(y)\,d\nu(y)=a(x)\langle f,b\rangle$ wherever its sections represent the completed-product class, and [F4] identifies this function with the $L^2(\mu)$ class $T_kf$. Thus $(T_kf)(x)=a(x)\beta(f)$ for $\mu$-almost every $x$. [F3, F4]
 
-2.1 Hence the range of $T_k$ is the set of multiples $a(x)\beta(f)$, so it is contained in $\mathbb C\cdot a$; by [F5] the range therefore admits an ordered basis of length at most one, namely $(a)$ when $a\ne0$ and the empty list when $a=0$. [step 1.2, F5]
+2.1 Hence the range of $T_k$ is contained in $\mathbb C\cdot a$. If $a\ne0$ and $b\ne0$, then $\beta(b/\|b\|_{L^2(\nu)}^2)=1$, so the range equals $\mathbb C\cdot a$ and $(a)$ is an ordered basis. If $a=0$ or $b=0$, then [step 1.2] makes $T_k$ the zero operator, so its range has the empty ordered basis. Thus the range always has dimension at most one. [step 1.2, F3, F5]
 
 2.2 **Operator norm.** By [step 1.2], $\|T_kf\|_{L^2(\mu)}=\|a\|_{L^2(\mu)}|\langle f,b\rangle|\le\|a\|_{L^2(\mu)}\|b\|_{L^2(\nu)}\|f\|_{L^2(\nu)}$; if $b\ne0$ then $f_0:=b/\|b\|_{L^2(\nu)}$ has norm one and $T_kf_0=\|b\|_{L^2(\nu)}a$, so $\|T_k\|=\|a\|_{L^2(\mu)}\|b\|_{L^2(\nu)}$, while if $b=0$ both sides are zero; the computation also covers $a=0$. [step 1.2, F3]
 

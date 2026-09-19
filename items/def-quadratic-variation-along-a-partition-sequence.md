@@ -29,7 +29,8 @@ For $t\in[0,T]$ two partial sums are attached to $(\pi_n)$. If $t$ is a
 partition point, both are defined by the same formula; the cases $t=0$ and
 $t=T$ are included, and an empty sum is $0$.
 
-1. **Step convention.** With $k(t)$ the largest index with $s^{(n)}_{k(t)}\le t$,
+1. **Step convention.** With $k(t)$ the largest index in
+   $\{0,\dots,m_n\}$ with $s^{(n)}_{k(t)}\le t$,
 $$[x]^{\pi_n,\mathrm{step}}_t:=\sum_{k=1}^{k(t)}\bigl(x_{s^{(n)}_k}-x_{s^{(n)}_{k-1}}\bigr)^2 .$$
 2. **Partial-increment convention.** On the interval $[s^{(n)}_{k(t)},s^{(n)}_{k(t)+1}]$ containing $t$ one also adds the terminal increment,
 $$[x]^{\pi_n,\mathrm{part}}_t:=[x]^{\pi_n,\mathrm{step}}_t+\bigl(x_t-x_{s^{(n)}_{k(t)}}\bigr)^2\qquad(k(t)<m_n),$$

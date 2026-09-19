@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 landmark: true
-deps: [def-exact-couple, thm-an-exact-couple-generates-a-spectral-sequence, lem-the-ahss-first-differential-is-the-cellular-coboundary, def-skeletal-filtration-for-generalized-cohomology, lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients, def-cohomological-spectral-sequence, prop-reduced-and-unreduced-generalized-cohomology-theories-correspond]
+deps: [def-exact-couple, thm-an-exact-couple-generates-a-spectral-sequence, prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences, lem-the-ahss-first-differential-is-the-cellular-coboundary, def-skeletal-filtration-for-generalized-cohomology, lem-ahss-e-one-page-is-cellular-cochains-with-theory-coefficients, def-cohomological-spectral-sequence, prop-reduced-and-unreduced-generalized-cohomology-theories-correspond]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -52,7 +52,7 @@ $\widetilde h$ for morphisms of reduced generalized cohomology theories.
 
 **Given:** A finite CW complex $X$ of dimension $N$, a reduced generalized cohomology theory $\widetilde h$, the associated pair theory $h$, and the conventions $X^p=\varnothing$ for $p<0$, $X^p=X$ for $p\geq N$.
 
-1.1 Put $D_{p,q}:=h^{-p-q-1}(X^{-p-1})$ and $E_{p,q}:=h^{-p-q}(X^{-p},X^{-p-1})$, and let $i$ be the restriction, $j$ the connecting map of the pair $(X^{-p},X^{-p-1})$, and $k$ the map to $h^{-p-q}(X^{-p})$ of that pair. The three exactness conditions are the three exactness statements of the long exact sequence of that pair: the image of the restriction from $X^{-p-2}$ is the kernel of the connecting map; the image of the connecting map is the kernel of the pair map; and the image of the pair map is the kernel of the restriction to $X^{-p-1}$. Hence the data form an initial exact couple in the sense of [F2]. [F1, F2, given]
+1.1 Put $D_{p,q}:=h^{-p-q-1}(X^{-p-1})$ and $E_{p,q}:=h^{-p-q}(X^{-p},X^{-p-1})$, and let $i$ be restriction from $X^{-p-1}$ to $X^{-p-2}$, $j$ the connecting map of the pair $(X^{-p},X^{-p-1})$, and $k$ the pair map to $h^{-p-q}(X^{-p})$. The three exactness conditions are the corresponding portions of the pair long exact sequences: at $D_{p,q}$ the incoming restriction is $h^{-p-q-1}(X^{-p})\to h^{-p-q-1}(X^{-p-1})$ and its image is the kernel of $j$; the image of $j$ is the kernel of the pair map; and the image of the pair map is the kernel of the outgoing restriction to $X^{-p-1}$. Hence the data form an initial exact couple in the sense of [F2]. [F1, F2, given]
 
 1.2 The identification $(P,Q)=(-p,-q)$ turns the pair $(X^{-p},X^{-p-1})$ into $(X^P,X^{P-1})$ and the group $E_{p,q}=h^{-p-q}(X^{-p},X^{-p-1})$ into $h^{P+Q}(X^P,X^{P-1})$; under this reindexing the exact-couple differentials $d^r:E_{p,q}\to E_{p-r,q+r-1}$ become $d_r:E_r^{P,Q}\to E_r^{P+r,Q-r+1}$. [F4, given]
 
@@ -66,7 +66,7 @@ $\widetilde h$ for morphisms of reduced generalized cohomology theories.
 
 4.1 The map $k$ sends the stable numerator onto $K:=\operatorname{im}(h^n(X)\to h^n(X^P))\cap\ker(h^n(X^P)\to h^n(X^{P-1}))$ with kernel $B^\infty_{p,q}=\ker(k)$, so $E^\infty_{p,q}=N^\infty_{p,q}/B^\infty_{p,q}\cong K$. Restriction $h^n(X)\to h^n(X^P)$ carries $\ker(h^n(X)\to h^n(X^{P-1}))$ onto $K$ with kernel $\ker(h^n(X)\to h^n(X^P))$; hence $E^\infty_{p,q}\cong F^Ph^n(X)/F^{P+1}h^n(X)$. [F1, F5, step 3.2]
 
-5.1 The reindexed spectral sequence of step 3.1 has the asserted first and second pages and differentials, and step 4.1 identifies its stable terms with the associated graded of the skeletal filtration, which proves the theorem; naturality is inherited from the naturality of the pair long exact sequences and of the exact-couple construction. [step 3.1, step 4.1] ∎
+5.1 The reindexed spectral sequence of step 3.1 has the asserted first and second pages and differentials, and step 4.1 identifies its stable terms with the associated graded of the skeletal filtration. A cellular map preserves every skeleton and therefore gives commuting maps of all the pair sequences used in step 1.1; a morphism of reduced theories gives the same commuting ladders objectwise. These ladders are morphisms of exact couples, so [[prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences]] supplies the asserted natural page maps. [step 1.1, step 3.1, step 4.1] ∎
 
 ## Source notes
 

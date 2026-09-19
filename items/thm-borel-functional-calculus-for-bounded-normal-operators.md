@@ -36,7 +36,7 @@ let $f\mapsto f(T)$ be the bounded Borel functional calculus of
    $\|f(T)\|=\|f\|_{E,\infty}\le\|f\|_\infty$, the exact norm being the
    $E$-essential supremum of $f$; in particular $f(T)$ is normal with
    $f(T)^*=\overline f(T)$;
-4. if $(f_n)$ are uniformly bounded bounded Borel functions with
+4. if $(f_n)$ are uniformly bounded Borel functions, $f$ is bounded Borel, and
    $f_n\to f$ pointwise $E$-almost everywhere, then $f_n(T)\to f(T)$ in the
    strong operator topology;
 5. every $S\in\mathcal B(H)$ commuting with $T$ and $T^*$ commutes with every

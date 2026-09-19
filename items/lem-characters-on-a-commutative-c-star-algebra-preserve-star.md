@@ -53,7 +53,7 @@ spectrum of a self-adjoint element is real.
 
 2.1 For a self-adjoint $s$ and real $t$: $|\chi(s)+it|^2 = |\chi(s+it1)|^2 \le \|s+it1\|^2 = \|(s+it1)^*(s+it1)\| = \|s^2+t^21\| \le \|s^2\| + t^2 \le \|s\|^2 + t^2$, using [step 1.1], [step 1.2], the C\*-identity, the triangle inequality and submultiplicativity. [step 1.1, step 1.2, L2]
 
-3.1 Writing $\chi(s) = u + iv$ with $u,v$ real, the inequality of [step 2.1] reads $u^2 + (v+t)^2 \le \|s\|^2 + t^2$, that is, $u^2+v^2+2vt \le \|s\|^2$ for every real $t$. If $v > 0$ then $t \to -\infty$ makes the left side tend to $-\infty$; if $v < 0$ then $t \to +\infty$ does the same; both contradict a uniform upper bound. Hence $v = 0$ and $\chi(s) \in \mathbb R$ for every self-adjoint $s$. [step 2.1, algebra]
+3.1 Writing $\chi(s) = u + iv$ with $u,v$ real, the inequality of [step 2.1] reads $u^2 + (v+t)^2 \le \|s\|^2 + t^2$, that is, $u^2+v^2+2vt \le \|s\|^2$ for every real $t$. If $v > 0$ then $t \to +\infty$ makes the left side tend to $+\infty$; if $v < 0$ then $t \to -\infty$ does the same; both contradict the uniform upper bound. Hence $v = 0$ and $\chi(s) \in \mathbb R$ for every self-adjoint $s$. [step 2.1, algebra]
 
 4.1 For arbitrary $a = s+it$ as in [step 1.3]: $\chi(a^*) = \chi(s - it) = \chi(s) - i\chi(t) = \overline{\chi(s) + i\chi(t)} = \overline{\chi(a)}$ by [step 3.1] and linearity. [step 1.3, step 3.1, L1, algebra] ∎
 

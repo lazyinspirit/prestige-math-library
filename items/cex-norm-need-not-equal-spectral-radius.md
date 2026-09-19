@@ -48,6 +48,6 @@ need not equal its spectral radius.
 
 ## Remarks
 
-- **The witness is a nonzero nilpotent of minimal size.** $E_{12}$ is the smallest nonzero nilpotent: its square vanishes and its norm is the largest possible for a rank-one operator on the Euclidean plane, so the gap between norm and spectral radius is as wide as the unit ball permits.
+- **The witness is a nonzero nilpotent of minimal size.** $E_{12}$ is the smallest nonzero nilpotent: its square vanishes and its norm is one, so the gap between norm and spectral radius is already visible on the unit sphere of the matrix algebra.
 
 - **The spectral radius formula records the same gap asymptotically.** $\|E_{12}^n\|^{1/n}$ equals $1$ for $n = 1$ and $0$ for $n \ge 2$, and its limit is $0 = r(E_{12})$, in agreement with [[thm-spectral-radius-formula]].

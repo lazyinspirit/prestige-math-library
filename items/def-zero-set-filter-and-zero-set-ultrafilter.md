@@ -62,10 +62,11 @@ here rather than reproved each time:
 
 ## Remarks
 
-- **Why zero sets and not arbitrary closed sets.** The finite-intersection
-  identity $Z(f)\cap Z(g) = Z(f^2+g^2)$ holds for zero sets and fails for
-  arbitrary closed sets; this is the structural reason the theory of
-  $\beta X$ is developed with $\mathcal Z(X)$.
+- **Why zero sets and not arbitrary closed sets.** Arbitrary closed sets are
+  also closed under finite intersections.  What is special here is that the
+  intersection remains represented by continuous functions through the
+  explicit identity $Z(f)\cap Z(g) = Z(f^2+g^2)$; this function-theoretic
+  representation is what connects z-filters to ideals of $C(X)$.
 - **Source status.** The historical target
   (the neighbouring deferral is recorded as a remark on the companion examples
   page) was inaccessible in this run, and the failed recovery record is in

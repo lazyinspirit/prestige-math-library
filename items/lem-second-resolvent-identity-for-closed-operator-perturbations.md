@@ -5,7 +5,7 @@ title: "Second resolvent identity for a closed perturbation"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-relative-boundedness-with-respect-to-an-operator, def-densely-defined-closed-and-closable-operator, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph]
+deps: [def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-relative-boundedness-with-respect-to-an-operator, def-densely-defined-closed-and-closable-operator, def-bounded-linear-operator, def-unbounded-linear-operator-domain-and-graph, thm-closed-graph-theorem, def-dependent-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -19,7 +19,7 @@ sources:
 
 ## Statement
 
-Let $A$ and $C$ be closed operators with $D(C)=D(A)$, put $B:=C-A$, and
+Assume Dependent Choice. Let $A$ and $C$ be closed operators with $D(C)=D(A)$, put $B:=C-A$, and
 assume $B$ is bounded for the graph norm of $A$
 ([[def-relative-boundedness-with-respect-to-an-operator]]). Then for every
 $z\in\rho(A)\cap\rho(C)$
@@ -34,13 +34,15 @@ and every product here is defined on all of $H$ and is bounded.
 
 [A3] $(z-C)R_C(z)=I$ and $(z-A)R_A(z)=I$ on $H$, so $R_A(z)(C-z)R_C(z)=-R_A(z)$ and $R_C(z)(A-z)R_A(z)=-R_C(z)$, because $R_C(z)$ has range $D(C)=D(A)$ ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]).
 
+[A4] The graph norms of two closed operators with the same domain are equivalent: both domains are Banach, and the identity map from the $C$-graph norm to the $A$-graph norm has closed graph, hence is bounded by the closed graph theorem ([[thm-closed-graph-theorem]], [[def-dependent-choice]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 **Given:** Closed $A,C$ with $D(A)=D(C)$, $B=C-A$ graph-norm bounded for $A$, and $z\in\rho(A)\cap\rho(C)$.
 
-1.1 Both $BR_A(z)$ and $BR_C(z)$ are everywhere defined and bounded by [A1] and [A2]. [A1, A2]
+1.1 The operator $BR_A(z)$ is bounded by [A1] and [A2]. By [A4] the $A$-graph norm is bounded by a constant times the $C$-graph norm, so the same relative bound makes $B$ bounded for the $C$-graph norm; applying [A1] with $C$ in place of $A$ shows that $BR_C(z)$ is bounded as well. [A1, A2, A4]
 
 2.1 $-R_C(z)+R_A(z)BR_C(z)=-R_A(z)$, that is $R_C(z)-R_A(z)=R_A(z)BR_C(z)$: by [A3], $R_A(z)(C-z)R_C(z)=-R_A(z)$, and expanding $C=A+B$ gives $R_A(z)(C-z)R_C(z)=R_A(z)(A-z)R_C(z)+R_A(z)BR_C(z)=-R_C(z)+R_A(z)BR_C(z)$, because $R_A(z)(A-z)$ is minus the identity on $D(A)=D(C)$ and $R_C(z)$ takes values in $D(C)$. [A2, A3, step 1.1]
 

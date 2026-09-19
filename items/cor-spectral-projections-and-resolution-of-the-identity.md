@@ -22,7 +22,12 @@ sources:
 
 Assume AC. Let $T$ be a bounded normal operator on a nonzero complex Hilbert
 space $H$, with spectral projection valued measure $E$ on $\sigma(T)$ and Borel
-calculus $f\mapsto f(T)$. Then:
+calculus $f\mapsto f(T)$. For every Borel set $A\subseteq\mathbb C$, use the
+zero-extension convention
+
+$$E(A):=E(A\cap\sigma(T)).$$
+
+Then:
 
 1. every spectral projection $E(B)=\mathbf 1_B(T)$ reduces $T$: it commutes
    with $T$ and $T^*$, so its range and its kernel are invariant under $T$ and

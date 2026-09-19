@@ -33,7 +33,7 @@ matter and are fixed by that choice.
    $\tau_n=2^{-n}\lceil2^n\tau\rceil$ are stopping times of the same filtration
    and satisfy $\mathcal F_\tau\subseteq\mathcal F_{\tau_n}$; the countably
    valued case applies the deterministic future-path theorem
-   [[thm-brownian-future-path-markov-property]] at the finitely many values of
+   [[thm-brownian-future-path-markov-property]] at the countably many values of
    $\tau_n$; and the passage to general $\tau$ uses path continuity and
    dominated convergence. Completion enters through the null event
    $\{\tau=\infty\}$, on which $B_\tau$ is defined by a convention, and through

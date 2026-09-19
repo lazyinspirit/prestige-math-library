@@ -5,7 +5,7 @@ title: The inner product is jointly continuous
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cauchy-schwarz-in-an-inner-product-space, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space, def-metric-topology, def-metric-ball, def-product-topology, def-metric-convergence]
+deps: [thm-cauchy-schwarz-in-an-inner-product-space, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space, def-metric-topology, def-metric-ball, thm-metric-open-set-algebra, def-product-topology, def-metric-convergence]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -34,7 +34,7 @@ and consequently $x_n\to x$ and $y_n\to y$ in norm imply $\langle x_n,y_n\rangle
 
 [A3] The induced length is a norm, so it is nonnegative, homogeneous and satisfies the triangle inequality ([[cor-inner-product-induces-a-norm]]).
 
-[A4] In the metric topology a set is open exactly when every one of its points has a ball around it inside the set, and $B(x,r)=\{y:d(x,y)<r\}$ is the open ball ([[def-metric-topology]], [[def-metric-ball]]).
+[A4] In the metric topology a set is open exactly when every one of its points has a ball around it inside the set, $B(x,r)=\{y:d(x,y)<r\}$ is the open ball, and every open ball is open ([[def-metric-topology]], [[def-metric-ball]], [[thm-metric-open-set-algebra]]).
 
 [A5] For a finite product the boxes $U\times W$ with $U,W$ open are basic product-open sets ([[def-product-topology]]).
 

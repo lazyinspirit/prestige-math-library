@@ -5,7 +5,7 @@ title: The norm completion of an inner-product space is a Hilbert space
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-completion-of-a-normed-space, thm-metric-completion-carries-a-unique-banach-space-structure, lem-inner-product-is-jointly-continuous, thm-parallelogram-law, thm-jordan-von-neumann-polarization, thm-cauchy-schwarz-in-an-inner-product-space, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, def-countable-choice, def-hilbert-space]
+deps: [def-completion-of-a-normed-space, thm-metric-completion-carries-a-unique-banach-space-structure, lem-inner-product-is-jointly-continuous, thm-parallelogram-law, thm-jordan-von-neumann-polarization, thm-cauchy-schwarz-in-an-inner-product-space, lem-vector-operations-are-continuous-in-a-normed-space, lem-reverse-triangle-inequality-in-a-normed-space, cor-archimedean-reciprocal, def-countable-choice, def-hilbert-space]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -32,7 +32,7 @@ Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product
 
 [A4] Vector addition and scalar multiplication are continuous, and $\bigl|\|u\|-\|v\|\bigr|\le\|u-v\|$ ([[lem-vector-operations-are-continuous-in-a-normed-space]], [[lem-reverse-triangle-inequality-in-a-normed-space]]).
 
-[A5] Countable Choice is the published countable selection principle consumed by the Cauchy-sequence completion ([[def-countable-choice]]).
+[A5] Countable Choice selects a point from every member of a countable family of nonempty sets, and $1/(n+1)\to0$ ([[def-countable-choice]], [[cor-archimedean-reciprocal]]).
 
 [A6] Every real or complex inner-product norm satisfies the parallelogram law ([[thm-parallelogram-law]]).
 
@@ -44,7 +44,7 @@ Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product
 
 **Given:** Countable Choice, an inner-product space $X$ with norm $\|\cdot\|$, and its norm completion $(\widehat X,\kappa)$ with completion norm also written $\|\cdot\|$.
 
-1.1 Let $\xi,\eta\in\widehat X$ and let $(x_n),(y_n)$ be Cauchy sequences in $X$ with $\kappa(x_n)\to\xi$ and $\kappa(y_n)\to\eta$; such sequences exist because $\kappa[X]$ is dense, and by continuity of the vector operations $\kappa(x_n\pm y_n)=\kappa(x_n)\pm\kappa(y_n)\to\xi\pm\eta$. [A1, A4]
+1.1 Let $\xi,\eta\in\widehat X$. For every $n$, density makes the sets $\{x\in X:\|\kappa x-\xi\|<1/(n+1)\}$ and $\{y\in X:\|\kappa y-\eta\|<1/(n+1)\}$ nonempty. Countable Choice selects $x_n,y_n$ from these sets. Thus $\kappa(x_n)\to\xi$ and $\kappa(y_n)\to\eta$, the selected sequences are Cauchy, and continuity of the vector operations gives $\kappa(x_n\pm y_n)=\kappa(x_n)\pm\kappa(y_n)\to\xi\pm\eta$. [A1, A4, A5]
 
 2.1 The parallelogram identities $\|x_n+y_n\|^2+\|x_n-y_n\|^2=2\|x_n\|^2+2\|y_n\|^2$ hold in $X$ by [A6]; passing to the limit using continuity of the norm and of sums, and the isometry $\|\kappa z\|=\|z\|$, gives $\|\xi+\eta\|^2+\|\xi-\eta\|^2=2\|\xi\|^2+2\|\eta\|^2$, so the completion norm satisfies the parallelogram law. [step 1.1, A1, A4, A6]
 
@@ -54,4 +54,4 @@ Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product
 
 5.1 Uniqueness: if $B'$ is any inner product on $\widehat X$ that extends the pairing along $\kappa$ and induces the completion norm, then for $\xi,\eta$ and approximating sequences as in step 1.1 the Cauchy–Schwarz inequality for both forms gives $|B'(\xi,\eta)-B'(\kappa x_n,\kappa y_n)|\le\|\xi-\kappa x_n\|\,\|\eta\|+\|\kappa x_n\|\,\|\eta-\kappa y_n\|$ and the same bound for $B$, so both pairings are the limits of the common values $\langle x_n,y_n\rangle$ and $B'=B$. [step 1.1, step 4.1, A1, A3]
 
-6.1 Hence $\widehat X$ carries the inner product $B$ extending the original one with the completion norm as induced length, so it is complete and therefore a Hilbert space by [A7]; Countable Choice is used exactly through the published completion [A1] of step 1.1, and no further choice enters the limit arguments. [step 1.1, step 3.1, step 5.1, A1, A5, A7] ∎
+6.1 Hence $\widehat X$ carries the inner product $B$ extending the original one with the completion norm as induced length, so it is complete and therefore a Hilbert space by [A7]. Countable Choice is used in the published completion interface and explicitly in step 1.1 to select the two approximating sequences; no further choice enters the limit arguments. [step 1.1, step 3.1, step 5.1, A1, A5, A7] ∎

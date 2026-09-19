@@ -42,7 +42,7 @@ $a\in\mathbb R$.
 
 **Proof technique:** direct.
 
-1.1 Let $a>0$. The events $\{\tau_a\le t\}$ increase with $t$ to $\{\tau_a<\infty\}$, so [F2] applied to the sequence $t=n$ gives $P(\tau_a<\infty)=\lim_{n\to\infty}P(\tau_a\le n)=\lim_{n\to\infty}2(1-\Phi(a/\sqrt n))=2(1-\Phi(0))=1$ by [F1]. [F1, F2, given]
+1.1 Let $a>0$. The events $\{\tau_a\le t\}$ increase with $t$ to $\{\tau_a<\infty\}$, so [F2] applied to the sequence $t=n+1$ gives $P(\tau_a<\infty)=\lim_{n\to\infty}P(\tau_a\le n+1)=\lim_{n\to\infty}2(1-\Phi(a/\sqrt{n+1}))=2(1-\Phi(0))=1$ by [F1]. [F1, F2, given]
 
 1.2 For $a=0$ the identity $\tau_0=0$ holds almost surely by [F4], so $P(\tau_0<\infty)=1$. [F4, given]
 

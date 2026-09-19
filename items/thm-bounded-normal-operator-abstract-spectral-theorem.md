@@ -20,7 +20,7 @@ sources:
 
 ## Statement
 
-Assume AC. A bounded operator $T$ on a nonzero complex Hilbert space is normal exactly when it is the image of the coordinate function under a unital star representation of $C(K)$ for some compact Hausdorff $K$; canonically $K=\sigma(T)$ and the representation is the continuous functional calculus.
+Assume AC. A bounded operator $T$ on a nonzero complex Hilbert space is normal exactly when it is the image of the coordinate function $z\mapsto z$ under a unital star representation of $C(K)$ for some nonempty compact set $K\subseteq\mathbb C$; canonically $K=\sigma(T)$ and the representation is the continuous functional calculus.
 
 ## Facts & Assumptions
 
@@ -40,8 +40,8 @@ Assume AC. A bounded operator $T$ on a nonzero complex Hilbert space is normal e
 
 **Given:** A nonzero complex Hilbert space $H$ and a bounded operator $T\in\mathcal B(H)$.
 
-1.1 Suppose $T=\rho(z)$ for a unital star-homomorphism $\rho:C(K)\to\mathcal B(H)$ on a compact Hausdorff space $K$; then $T^*=\rho(z)^*=\rho(\overline z)$ and $T^*T=\rho(\overline z)\rho(z)=\rho(\overline zz)=\rho(z\overline z)=\rho(z)\rho(\overline z)=TT^*$, so $T$ is normal. [A1, A2]
+1.1 Suppose $K\subseteq\mathbb C$ is nonempty and compact and $T=\rho(z)$ for a unital star-homomorphism $\rho:C(K)\to\mathcal B(H)$, where $z$ is the coordinate function; then $T^*=\rho(z)^*=\rho(\overline z)$ and $T^*T=\rho(\overline z)\rho(z)=\rho(\overline zz)=\rho(z\overline z)=\rho(z)\rho(\overline z)=TT^*$, so $T$ is normal. [A1, A2]
 
 1.2 Conversely, if $T$ is normal, take $K:=\sigma(T)$, a compact Hausdorff space, and the continuous functional calculus $\Psi:C(\sigma(T))\to C^*(I,T)$; it is a unital star-homomorphism into $\mathcal B(H)$ with $\Psi(z)=T$. [A3, A4]
 
-2.1 The two implications show that normality is equivalent to being the image of the coordinate function under a unital star representation of some $C(K)$ with $K$ compact Hausdorff; the canonical instance is $K=\sigma(T)$ with the continuous functional calculus, and no other compact space is needed for the equivalence. [step 1.1, step 1.2, A5] ∎
+2.1 The two implications show that normality is equivalent to being the image of the coordinate function under a unital star representation of some $C(K)$ with nonempty compact $K\subseteq\mathbb C$; the canonical instance is $K=\sigma(T)$ with the continuous functional calculus, and no other compact set is needed for the equivalence. [step 1.1, step 1.2, A5] ∎

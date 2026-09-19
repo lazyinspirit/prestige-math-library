@@ -5,7 +5,7 @@ title: "A symmetric closed operator that is not self-adjoint"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-dependent-choice]
+deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, lem-schwartz-cutoffs-from-the-standard-smooth-step, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-dependent-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -47,7 +47,7 @@ and imaginary parts ([[def-absolutely-continuous-function]]). Then:
 
 [A2] For real-valued absolutely continuous functions the fundamental theorem of calculus and integration by parts hold, and the indefinite integral of an $L^1$ function is absolutely continuous; applied to real and imaginary parts this gives the same calculus for complex-valued absolutely continuous functions ([[def-absolutely-continuous-function]], [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]], [[thm-integration-by-parts-for-absolutely-continuous-functions]], [[cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous]]).
 
-[A3] $C_c^\infty(\mathbb R)$ is dense in $L^2(\mathbb R)$, so its restrictions to $(0,1)$ are dense in $L^2(0,1)$ after extending a function by zero ([[thm-c-c-infinity-rn-is-dense-in-l-p-of-rn]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
+[A3] $C_c^\infty(\mathbb R)$ is dense in $L^2(\mathbb R)$. Hence, after extending $u\in L^2(0,1)$ by zero, one may approximate it by smooth compactly supported functions and then multiply the approximants by smooth cutoffs supported in $(0,1)$ that tend pointwise to $1$ there; dominated convergence makes the resulting $C_c^\infty(0,1)$ functions dense in $L^2(0,1)$. [[thm-c-c-infinity-rn-is-dense-in-l-p-of-rn]] [[lem-schwartz-cutoffs-from-the-standard-smooth-step]] [[thm-dominated-convergence]] [[def-l-p-space-as-a-quotient-by-null-functions]]
 
 [A4] $y\in D(T^*)$ exactly when $x\mapsto\langle Tx,y\rangle$ is bounded on $D(T)$, and then $\langle Tx,y\rangle=\langle x,T^*y\rangle$ for all $x\in D(T)$ ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[lem-unbounded-adjoint-is-well-defined-and-closed]]).
 
@@ -59,7 +59,7 @@ and imaginary parts ([[def-absolutely-continuous-function]]). Then:
 
 1.1 Complex absolutely continuous calculus, componentwise from the real theory. If $F,G$ are complex-valued with absolutely continuous real and imaginary parts, then $F(x)-F(0)=\int_0^xF'$ for all $x$, and $\int_0^1F'\overline G=F(1)\overline{G(1)}-F(0)\overline{G(0)}-\int_0^1F\overline{G'}$; if $h\in L^2(0,1)$ then $x\mapsto\int_0^xh$ is of this kind with derivative $h$ almost everywhere. [A2]
 
-1.2 Every $\varphi\in C_c^\infty(\mathbb R)$ restricted to $(0,1)$ lies in $D(T)$, because it vanishes on a neighbourhood of $0$ and of $1$; and $D(T)$ is dense in $L^2(0,1)$, since $C_c^\infty(\mathbb R)$ is dense in $L^2(\mathbb R)$ and for $u\in L^2(0,1)$ extended by zero to $\tilde u$ one has $\|\varphi|_{(0,1)}-u\|_{L^2(0,1)}\le\|\varphi-\tilde u\|_{L^2(\mathbb R)}$. [A3]
+1.2 Every $\varphi\in C_c^\infty(0,1)$ lies in $D(T)$ because it vanishes near both endpoints. The cutoff approximation in [A3] shows that $C_c^\infty(0,1)$ is dense in $L^2(0,1)$, so $D(T)$ is dense. [A3]
 
 2.1 Symmetry: for $f,g\in D(T)$ the boundary term in 1.1 vanishes because $f(0)=f(1)=0$, so $\langle Tf,g\rangle=-i\int_0^1f'\overline g=\int_0^1f\overline{-ig'}=\langle f,Tg\rangle$; hence $T\subseteq T^*$, and $T$ is symmetric. [A1, step 1.1]
 

@@ -59,7 +59,7 @@ unital.
 
 1.2 For every $y \in L$ the point evaluation $\delta_y$ is an extreme point of $B_{C(L)^*}$ of the form $1\cdot\delta_y$, so by [L1] and [L3] its image $T^*\delta_y$ is an extreme point of $B_{C(K)^*}$; by [L1] there are unique $h(y) \in K$ and $u(y) \in \mathbb K$ with $|u(y)| = 1$ and $T^*\delta_y = u(y)\delta_{h(y)}$. This defines functions $h : L \to K$ and $u : L \to \mathbb K$. [1.1, L1, L3]
 
-1.3 Conversely, let $h : L \to K$ be a homeomorphism and $u : L \to \mathbb K$ continuous with $|u| = 1$, and set $Tf := u\cdot(f\circ h)$. Then $T$ is complex-linear, $\|Tf\|_\infty = \sup_y|u(y)f(h(y))| = \sup_x|f(x)| = \|f\|_\infty$ because $h$ is surjective, and $T$ is surjective with inverse $Sg := (g\circ h^{-1})/u(h^{-1})$. [algebra]
+1.3 Conversely, let $h : L \to K$ be a homeomorphism and $u : L \to \mathbb K$ continuous with $|u| = 1$, and set $Tf := u\cdot(f\circ h)$. Then $T$ is $\mathbb K$-linear, $\|Tf\|_\infty = \sup_y|u(y)f(h(y))| = \sup_x|f(x)| = \|f\|_\infty$ because $h$ is surjective, and $T$ is surjective with inverse $Sg := (g\circ h^{-1})/u(h^{-1})$. [algebra]
 
 2.1 Evaluating $T^*\delta_y = u(y)\delta_{h(y)}$ at the constant function $\mathbf 1$ gives $u(y) = (T^*\delta_y)(\mathbf 1) = \delta_y(T\mathbf 1) = (T\mathbf 1)(y)$, so $u = T\mathbf 1$ is continuous, and $|u(y)| = 1$ for all $y$ by [step 1.2]. [step 1.2, L2, algebra]
 

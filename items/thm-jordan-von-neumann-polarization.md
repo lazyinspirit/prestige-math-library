@@ -60,7 +60,7 @@ in the complex case with the first-variable-linear convention.
 
 1.1 Assume first that $V$ is real and satisfies the parallelogram law, and define $b(x,y)=\tfrac14(q(x+y)-q(x-y))$; then $b(x,x)=q(x)$, $b(y,x)=b(x,y)$, $b(-x,y)=b(x,-y)=-b(x,y)$, $b(0,y)=0$, and $q(\lambda z)=\lambda^2q(z)$ for real $\lambda$. [A3, A4, algebra]
 
-1.2 Applying the parallelogram law to the four pairs $(p+q,r)$, $(p-q,r)$, $(p+r,q)$ and $(p-r,q)$ and subtracting the second identity from the fourth gives $8b(p,r)=4b(p+q,r)+4b(p-q,r)$, that is $b(p+q,r)+b(p-q,r)=2b(p,r)$ for all $p,q,r$. [A4, algebra]
+1.2 Applying the parallelogram law to the four pairs $(p+q,r)$, $(p-q,r)$, $(p+r,q)$ and $(p-r,q)$ and subtracting the fourth identity from the third gives $8b(p,r)=4b(p+q,r)+4b(p-q,r)$, that is $b(p+q,r)+b(p-q,r)=2b(p,r)$ for all $p,q,r$. [A4, algebra]
 
 2.1 Adding that identity at $(p,q)=(u,v)$ and at $(p,q)=(v,u)$ gives $b(u+v,w)+b(v-u,w)=2b(v,w)$ and $b(u+v,w)+b(u-v,w)=2b(u,w)$; since $b(v-u,w)=-b(u-v,w)$ by step 1.1, the two relations add to $2b(u+v,w)=2b(u,w)+2b(v,w)$, so $b(u+v,w)=b(u,w)+b(v,w)$, and symmetry gives additivity in the second argument as well. [step 1.2, step 1.1, algebra]
 

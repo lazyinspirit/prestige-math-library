@@ -43,9 +43,13 @@ is defined as follows.
    in $L^2(P)$; the limit is a class in $L^2(P)$, and
    $$\int_0^TH_s\,dB_s:=\lim_{n\to\infty}I_T(H^n)\qquad\text{in }L^2(P).$$
    The limit is a random variable only up to almost-sure equality; statements
-   about it are statements about that class. That the limit does not depend on
-   the chosen sequence $(H^n)$ is item 11, which is proved before any
-   computational use of the definition.
+   about it are statements about that class. The limit does not depend on the
+   chosen sequence: if another elementary sequence $K^n\to H$ is used, then
+   the elementary isometry and linearity give
+   $$\|I_T(H^n)-I_T(K^n)\|_{L^2(P)}
+   =\|H^n-K^n\|_{L^2(\mathrm dt\otimes P)}
+   \le\|H^n-H\|_2+\|K^n-H\|_2\longrightarrow0,$$
+   so the two $L^2(P)$ limits agree.
 
 2. **Integrals at a time.** For $t\in[0,T]$ put
    $\int_0^tH_s\,dB_s:=\int_0^TH_s1_{[0,t]}(s)\,dB_s$, the construction of
@@ -86,4 +90,4 @@ The Axiom of Choice is declared because the construction selects an
 approximating sequence and uses the completeness and conditional-expectation
 interfaces that assume it; the inherited obligations are declared as
 dependencies of this item. An alternative construction that avoids selecting the sequence is
-not needed, because item 11 shows every sequence gives the same class.
+not needed, because clause 1 shows every sequence gives the same class.

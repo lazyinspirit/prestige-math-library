@@ -5,7 +5,7 @@ title: Projection onto a nonempty closed convex set
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy, def-hilbert-space, thm-infimum-property, lem-inf-epsilon, def-infimum, cor-archimedean-reciprocal, def-real-limit, def-countable-choice, def-relative-normed-convexity-and-separation, def-metric-topology, lem-reverse-triangle-inequality-in-a-normed-space, thm-parallelogram-law]
+deps: [lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy, def-hilbert-space, thm-infimum-property, lem-inf-epsilon, def-infimum, cor-archimedean-reciprocal, def-real-limit, def-countable-choice, def-relative-normed-convexity-and-separation, thm-metric-closure-characterisation, lem-metric-limits-unique, lem-reverse-triangle-inequality-in-a-normed-space, thm-parallelogram-law]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -34,7 +34,7 @@ Assume the Axiom of Countable Choice. Let $H$ be a real or complex Hilbert space
 
 [A4] A minimizing sequence in a nonempty convex set is Cauchy ([[lem-minimizing-sequence-in-a-closed-convex-set-is-cauchy]]).
 
-[A5] $C$ is convex and $d\le\|x-c\|$ for every $c\in C$ ([[def-relative-normed-convexity-and-separation]], [[def-infimum]]); a closed set contains the limits of its convergent sequences, and limits in a metric space are unique ([[def-metric-topology]]).
+[A5] $C$ is convex and $d\le\|x-c\|$ for every $c\in C$ ([[def-relative-normed-convexity-and-separation]], [[def-infimum]]). A closed set equals its closure, and a point lies in the closure whenever every ball about it meets the set ([[thm-metric-closure-characterisation]]); limits in a metric space are unique ([[lem-metric-limits-unique]]).
 
 [A6] Norm distance is continuous: $\bigl|\|u\|-\|v\|\bigr|\le\|u-v\|$ ([[lem-reverse-triangle-inequality-in-a-normed-space]]).
 

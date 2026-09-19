@@ -50,7 +50,7 @@ canonical orientation and $e(0_B)=1$.
 
 [F1] The underlying real bundle $E_{\mathbb R}$ is obtained by regarding the complex transition matrices as real-linear; the construction commutes with pullback and with direct sums ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
-[F2] An orientation of a real bundle is a compatible family of generators of the fiber orientation groups, and a global orientation is determined by positive local frames ([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
+[F2] For positive rank, an orientation of a real bundle is a continuous choice of one of the two fiber orientations and is determined by positive local frames; the zero vector space and every rank-zero bundle have one canonical orientation ([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
 
 [F3] Bundles over a common cover are glued from their transition cocycles, and the cocycle determines the bundle up to canonical isomorphism ([[thm-vector-bundles-glued-from-transition-cocycles]]).
 

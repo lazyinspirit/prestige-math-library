@@ -36,7 +36,7 @@ $(\mathrm dt\otimes P)$-class alone.
 
 [F1] For elementary predictable $G,G'$ on a common refinement, $I_T(G)-I_T(G')=I_T(G-G')$ identically and $E(I_T(G)-I_T(G'))^2=E\int_0^T(G-G')^2ds=\|G-G'\|^2_{L^2(\mathrm dt\otimes P)}$. [[thm-ito-isometry-for-elementary-integrands]] [[def-ito-integral-of-an-elementary-predictable-process]]
 
-[F2] Each of the sequences $I_T(H^n)$ and $I_T(K^n)$ is Cauchy in $L^2(P)$ and therefore convergent, its limit being the class $\int_0^TH\,dB$ defined by the construction. [[def-ito-integral-for-square-integrable-predictable-processes]]
+[F2] Each of the sequences $I_T(H^n)$ and $I_T(K^n)$ is Cauchy in the complete space $L^2(P)$ and therefore has an $L^2(P)$ limit.  The construction designates the limit obtained from one admissible approximating sequence as $\int_0^TH\,dB$; equality with the limit from every other sequence is what is proved below. [[def-ito-integral-for-square-integrable-predictable-processes]]
 
 [F3] The $L^2$ triangle inequality and the identities $\|U-V\|_2=0\iff U=V$ almost surely hold on the quotient space. [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]
 

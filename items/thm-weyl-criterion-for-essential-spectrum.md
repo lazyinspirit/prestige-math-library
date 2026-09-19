@@ -5,7 +5,7 @@ title: "Weyl criterion for the essential spectrum"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-unbounded-borel-functional-calculus, def-weak-convergence-of-nets-and-sequences, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-axiom-of-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-dependent-choice]
+deps: [def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-unbounded-borel-functional-calculus, lem-unbounded-pvm-integral-is-well-defined-and-closed, def-weak-convergence-of-nets-and-sequences, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-axiom-of-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-dependent-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -30,7 +30,7 @@ sequence is called a singular Weyl sequence for $\lambda$.
 
 [A1] $\lambda\in\sigma_{\mathrm{ess}}(A)$ exactly when $\operatorname{rank}E((\lambda-\varepsilon,\lambda+\varepsilon))=\infty$ for every $\varepsilon>0$, and $\lambda\in\sigma_{\mathrm d}(A)$ exactly when $\lambda$ is an eigenvalue and some such rank is finite ([[def-discrete-and-essential-spectrum-of-a-self-adjoint-operator]]).
 
-[A2] For bounded Borel $h$, $\|h(A)x\|^2=\int|h|^2dE_x$ and $h(A)$ is bounded; hence for a bounded Borel set $B$ and $x\in D(A)$ one has $\|(A-\lambda)E(B)x\|^2=\int_B|\mu-\lambda|^2dE_x$ ([[thm-unbounded-borel-functional-calculus]], [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]).
+[A2] For bounded Borel $h$, $\|h(A)x\|^2=\int|h|^2dE_x$ and $h(A)$ is bounded; hence for a bounded Borel set $B$ and $x\in D(A)$ one has $\|(A-\lambda)E(B)x\|^2=\int_B|\mu-\lambda|^2dE_x$ ([[lem-unbounded-pvm-integral-is-well-defined-and-closed]], [[thm-unbounded-borel-functional-calculus]], [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]).
 
 [A3] If $P$ is a finite-rank orthogonal projection and $x_n\rightharpoonup0$, then $\|Px_n\|\to0$: expand in a finite orthonormal basis of $\operatorname{ran}P$ and use that each coefficient tends to $0$ ([[def-weak-convergence-of-nets-and-sequences]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).
 

@@ -5,7 +5,7 @@ title: "The minimal derivative has deficiency indices (1,1) and many self-adjoin
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [cex-symmetric-need-not-be-self-adjoint, def-deficiency-subspaces-and-deficiency-indices, thm-von-neumann-self-adjoint-extension-parameterization, cor-self-adjoint-extension-exists-iff-deficiency-indices-agree, def-countable-choice, def-dependent-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-absolutely-continuous-function, ex-periodic-derivative-and-its-unitary-translation-group]
+deps: [cex-symmetric-need-not-be-self-adjoint, def-deficiency-subspaces-and-deficiency-indices, thm-von-neumann-self-adjoint-extension-parameterization, cor-self-adjoint-extension-exists-iff-deficiency-indices-agree, def-axiom-of-choice, def-countable-choice, def-dependent-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-absolutely-continuous-function, ex-periodic-derivative-and-its-unitary-translation-group]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,7 +22,7 @@ sources:
 
 ## Statement refuted
 
-Assume the Axioms of Countable Choice and Dependent Choice. Let $T$ be the
+Assume the Axiom of Choice (and hence Countable Choice and Dependent Choice). Let $T$ be the
 minimal operator of [[cex-symmetric-need-not-be-self-adjoint]], that is
 $T=-i\,d/dx$ on $D(T)=\{f\in AC[0,1]:f'\in L^2(0,1),\ f(0)=f(1)=0\}$ in
 $H=L^2(0,1)$. Then $T$ is a closed symmetric operator with

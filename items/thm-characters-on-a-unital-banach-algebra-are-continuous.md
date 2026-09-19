@@ -62,6 +62,6 @@ theorem of ZF.
 
 ## Remarks
 
-- **The unit hypothesis is not cosmetic.** For a nonzero unital Banach algebra the computation $\chi(1)^2 = \chi(1)$ is what forces unitality; on a nonunital Banach algebra characters can be unbounded, which is why the nonunital theory on this page is developed through the C\*-algebraic unitization.
+- **The unit hypothesis streamlines the proof, but continuity survives without it.** For a nonzero unital Banach algebra the computation $\chi(1)^2=\chi(1)$ forces unitality. A character on a nonunital Banach algebra $B$ extends to the algebraic sum-norm unitization $\mathbb C\oplus B$, with product $(\lambda,a)(\mu,b)=(\lambda\mu,\lambda b+\mu a+ab)$, by $\chi^+(\lambda,a)=\lambda+\chi(a)$. This is a unital character on a unital Banach algebra, so the theorem applied to $\chi^+$ shows that the original character is continuous as well.
 - **Choice-free.** Steps 1.1–2.2 use only the algebra axioms, the definition of the spectrum and the Neumann series; no selection from nonempty sets and no separation theorem occurs.
 - **Where the bound is used.** Part 3 is what puts $\Delta(A)$ inside the dual unit ball and identifies the pointwise-evaluation topology with the weak-star subspace topology; this is the standard automatic-continuity statement for characters.

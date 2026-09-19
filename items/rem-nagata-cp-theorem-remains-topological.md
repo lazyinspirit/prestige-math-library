@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
 proved_here: false
-deps: []
+deps: [thm-gelfand-kolmogorov-for-rings-of-continuous-functions]
 justified_by: []
 external_refs: [rem-nagata-theorem-cp]
 provenance:
@@ -33,10 +33,14 @@ pointwise convergence inherited from $\mathbb R^X$ and $\mathbb R^Y$, implies
 $X \cong Y$.
 
 This result is **recorded, not proved here**, and it is distinct from the
-ring-only reconstruction of the Stone–Čech compactification: the algebraic
-isomorphism class of $C(X,\mathbb R)$ alone reconstructs $\beta X$
-([[thm-gelfand-kolmogorov-for-rings-of-continuous-functions]]), whereas Nagata's
-theorem adds the pointwise topology as part of the data and recovers $X$ itself.
+ring-only description of the Stone–Čech compactification: the local
+Gelfand–Kolmogorov theorem identifies the maximal ideals of
+$C(X,\mathbb R)$ set-theoretically with the points of $\beta X$ and detects
+which of those ideals are fixed
+([[thm-gelfand-kolmogorov-for-rings-of-continuous-functions]]), but does not
+assert that the ring alone reconstructs the topology of $\beta X$. Nagata's
+theorem instead includes the pointwise topology as part of the data and
+recovers $X$ itself.
 The catalogue target is [[rem-nagata-theorem-cp]], and it stays a Recorded result.
 
 ## Remarks

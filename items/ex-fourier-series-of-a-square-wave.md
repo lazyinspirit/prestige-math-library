@@ -1,11 +1,11 @@
 ---
 id: ex-fourier-series-of-a-square-wave
 kind: example
-title: The Fourier series of a square wave and Leibniz's series
+title: The Fourier series of a square wave and the odd reciprocal-square sum
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-fourier-coefficients-and-trigonometric-polynomials, thm-l-two-fourier-series-converges-in-mean-square, thm-parseval-identity-for-fourier-series, def-countable-choice, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-sine-and-cosine-derivatives, thm-chain-rule, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-sine-cosine-zero-sets-and-fundamental-period, def-square-summable-family-on-an-arbitrary-index-set]
+deps: [def-fourier-coefficients-and-trigonometric-polynomials, thm-l-two-fourier-series-converges-in-mean-square, thm-parseval-identity-for-fourier-series, def-countable-choice, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-sine-and-cosine-derivatives, thm-chain-rule, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas, def-square-summable-family-on-an-arbitrary-index-set]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -41,11 +41,11 @@ and no endpoint statement is made.
 
 [A2] With sine and cosine having the stated derivatives and the chain rule applying, $\int_a^bG'=G(b)-G(a)$ for differentiable $G$ with integrable derivative; continuous functions on a closed interval are Riemann integrable, and a bounded Riemann integrable function is Lebesgue measurable with the same integral ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[thm-ftc-second-part]], [[thm-continuous-implies-integrable]], [[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]]).
 
-[A3] $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for integers $m$ ([[thm-sine-cosine-zero-sets-and-fundamental-period]]).
+[A3] $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for integers $m$: the zero-set theorem gives the sine values, while $\cos(x+\pi)=-\cos x$ and $\cos0=1$ give the cosine values by integer induction ([[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
 [A4] The averaged character integrals are $\int_0^{1/2}e^{-2\pi ikt}\,dt=\frac{1-(-1)^k}{2\pi ik}$ and $\int_{1/2}^1e^{-2\pi ikt}\,dt=\frac{(-1)^k-1}{2\pi ik}$ for $k\ne0$ ([[def-fourier-coefficients-and-trigonometric-polynomials]]).
 
-[A5] The coefficient family is square-summable and absolutely summable in the finite-subset sense, and its total square sum is the supremum of the symmetric partial sums ([[def-square-summable-family-on-an-arbitrary-index-set]], [[thm-parseval-identity-for-fourier-series]]).
+[A5] The coefficient family is square-summable in the finite-subset sense, and its total square sum is the supremum of the symmetric partial sums ([[def-square-summable-family-on-an-arbitrary-index-set]], [[thm-parseval-identity-for-fourier-series]]).
 
 ## Verification
 

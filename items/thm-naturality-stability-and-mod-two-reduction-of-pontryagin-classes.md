@@ -21,7 +21,7 @@ sources:
 ## Statement
 
 Assume AC. Let $E,F\to B$ be numerable real bundles over a path-connected CW
-base (or CW-type base), and let $\rho_2$ denote reduction mod two. Then
+base, and let $\rho_2$ denote reduction mod two. Then
 
 1. **Naturality:** $p_i(f^*E)=f^*p_i(E)$ for every pullback;
 2. **Stability:** $p_i(E\oplus\varepsilon^r)=p_i(E)$ for the trivial bundle
@@ -40,7 +40,7 @@ base (or CW-type base), and let $\rho_2$ denote reduction mod two. Then
 
 [F4] Total Stiefel-Whitney classes are multiplicative over Whitney sums ([[thm-whitney-sum-formula-for-stiefel-whitney-classes]]).
 
-[F5] The complexification of a real bundle commutes with pullback and with direct sums: $(f^*E)_{\mathbb C}\cong f^*(E_{\mathbb C})$ and $(E\oplus F)_{\mathbb C}\cong E_{\mathbb C}\oplus F_{\mathbb C}$; the underlying real bundle of $E_{\mathbb C}$ is canonically isomorphic to $E\oplus E$ ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
+[F5] Pullbacks, direct sums and scalar extensions of bundles are formed fiberwise from their transition functions ([[def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles]]).
 
 ## Proof
 
@@ -48,11 +48,11 @@ base (or CW-type base), and let $\rho_2$ denote reduction mod two. Then
 
 **Given:** AC and a numerable real bundle $E\to B$ over a path-connected CW base.
 
-1.1 Naturality: by [F5] the complexification of $f^*E$ is the pullback of $E_{\mathbb C}$, so [F1] and naturality of Chern classes [F2] give $p_i(f^*E)=(-1)^ic_{2i}(f^*(E_{\mathbb C}))=(-1)^if^*c_{2i}(E_{\mathbb C})=f^*p_i(E)$. [F1, F2, F5]
+1.1 Tensoring the transition functions of $E$ with $\mathbb C$ before or after pulling them back gives the same cocycle, so $(f^*E)_{\mathbb C}\cong f^*(E_{\mathbb C})$. Thus [F1] and naturality of Chern classes [F2] give $p_i(f^*E)=(-1)^ic_{2i}(f^*(E_{\mathbb C}))=(-1)^if^*c_{2i}(E_{\mathbb C})=f^*p_i(E)$. [F1, F2, F5]
 
-1.2 Stability: by [F5] one has $(E\oplus\varepsilon^r)_{\mathbb C}\cong E_{\mathbb C}\oplus(\varepsilon^r)_{\mathbb C}$, and the Chern class of the trivial complex bundle is $1$ by [F2], so multiplicativity gives $c_{2i}((E\oplus\varepsilon^r)_{\mathbb C})=c_{2i}(E_{\mathbb C})$ and hence $p_i(E\oplus\varepsilon^r)=p_i(E)$; the rank cutoff is part of the definition [F1]. [F1, F2, F5]
+1.2 The fiberwise map obtained by distributing the tensor product gives $(E\oplus\varepsilon^r)_{\mathbb C}\cong E_{\mathbb C}\oplus(\varepsilon^r)_{\mathbb C}$ and is compatible with all transition functions. The Chern class of the trivial complex bundle is $1$ by [F2], so multiplicativity gives stability; the rank cutoff is part of [F1]. [F1, F2, F5]
 
-1.3 Mod two: for the complex bundle $E_{\mathbb C}$, [F3] gives $\rho_2c_{2i}(E_{\mathbb C})=w_{4i}((E_{\mathbb C})_{\mathbb R})$; the canonical real isomorphism $(E_{\mathbb C})_{\mathbb R}\cong E\oplus E$ of [F5] and multiplicativity [F4] give $w((E_{\mathbb C})_{\mathbb R})=w(E)^2$. In $\mathbb F_2$ coefficients the square of a sum is the sum of squares, so $w(E)^2=\sum_jw_j(E)^2$ and its degree-$4i$ component is $w_{2i}(E)^2$. [F3, F4, F5]
+1.3 For each real fiber, $v\otimes(a+ib)\mapsto(av,bv)$ is a real-linear isomorphism from $(E_b\otimes_{\mathbb R}\mathbb C)_{\mathbb R}$ to $E_b\oplus E_b$; it is compatible with real transition functions and hence defines $(E_{\mathbb C})_{\mathbb R}\cong E\oplus E$. For the complex bundle $E_{\mathbb C}$, [F3] now gives $\rho_2c_{2i}(E_{\mathbb C})=w_{4i}((E_{\mathbb C})_{\mathbb R})$, while multiplicativity [F4] gives $w((E_{\mathbb C})_{\mathbb R})=w(E)^2$. In $\mathbb F_2$ coefficients the square of a sum is the sum of squares, whose degree-$4i$ component is $w_{2i}(E)^2$. [F3, F4, F5]
 
 2.1 Combining steps 1.2 and 1.3 with the definition [F1]: $\rho_2p_i(E)=(-1)^i\rho_2c_{2i}(E_{\mathbb C})=(-1)^iw_{2i}(E)^2=w_{2i}(E)^2$, because $(-1)^i$ is $\pm1$ and the target has exponent two. [F1, step 1.2, step 1.3]
 

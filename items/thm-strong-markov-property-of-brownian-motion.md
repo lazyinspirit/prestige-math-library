@@ -4,7 +4,7 @@ kind: theorem
 title: "Strong Markov property of Brownian motion"
 status: draft
 origin: pipeline
-deps: [def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-wiener-measure-on-continuous-path-space, thm-brownian-future-path-markov-property, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-dynkin-pi-lambda, def-product-sigma-algebra-and-finite-product-sigma-algebras, def-measure-kernel-and-probability-kernel, thm-measurability-of-integration-against-a-kernel, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice]
+deps: [def-continuous-time-stopping-time, def-natural-and-usual-augmented-brownian-filtrations, def-brownian-motion, def-wiener-measure-on-continuous-path-space, thm-brownian-future-path-markov-property, lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-dynkin-pi-lambda, def-measure-kernel-and-probability-kernel, thm-measurability-of-integration-against-a-kernel, def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -27,6 +27,9 @@ stopping time for $(\mathcal F_t)$ with $\tau<\infty$ almost surely
 [[def-wiener-measure-on-continuous-path-space]] and, for a bounded Borel
 functional $\Phi$ on the product space $\mathbb R^{[0,\infty)}$, put
 $$\Psi_\Phi(x):=\int_{C([0,\infty),\mathbb R)}\Phi(x+w)\,\mu(dw),\qquad x\in\mathbb R .$$
+Here the product sigma-algebra is, by definition, the sigma-algebra generated
+by all finite coordinate cylinders, and the product topology is the topology
+of coordinatewise convergence.
 
 Then, with the convention $B_\tau:=0$ on the null event $\{\tau=\infty\}$:
 
@@ -48,11 +51,11 @@ Then, with the convention $B_\tau:=0$ on the null event $\{\tau=\infty\}$:
 
 [F3] For every $s\ge0$ and every bounded Borel functional $\Phi$, $E[\Phi((B_{s+t})_{t\ge0})|\mathcal F_s]=\Psi_\Phi(B_s)$ almost surely, and the same holds with $\mathcal F^0_s$ in place of $\mathcal F_s$. [[thm-brownian-future-path-markov-property]]
 
-[F4] Brownian paths are continuous on a probability-one event; coordinatewise convergence in the product space is convergence in the product topology, and continuous functions preserve it. [[def-brownian-motion]] [[def-product-sigma-algebra-and-finite-product-sigma-algebras]]
+[F4] Brownian paths are continuous on a probability-one event; by the product-topology convention in the statement, coordinatewise convergence is convergence in the product topology, and continuous functions preserve it. [[def-brownian-motion]]
 
 [F5] Conditional-expectation versions are characterized by their event integrals and are unique almost surely; monotone and dominated convergence pass limits through integrals; bounded Borel functions are increasing limits of simple functions. [[def-conditional-expectation-as-an-ae-class]] [[lem-conditional-expectation-is-unique-almost-surely]] [[thm-monotone-convergence-for-the-integral]] [[thm-dominated-convergence]] [[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]]
 
-[F6] The half-line coordinate cylinders $\{z:z(t_1)\le c_1,\dots,z(t_k)\le c_k\}$ form a pi-system containing the whole space that generates the product sigma-algebra, and a lambda-system containing a pi-system contains the generated sigma-algebra. [[thm-dynkin-pi-lambda]] [[def-product-sigma-algebra-and-finite-product-sigma-algebras]]
+[F6] By the product-sigma convention in the statement, the half-line coordinate cylinders $\{z:z(t_1)\le c_1,\dots,z(t_k)\le c_k\}$ form a pi-system containing the whole space that generates the product sigma-algebra. A lambda-system containing a pi-system contains the generated sigma-algebra. [[thm-dynkin-pi-lambda]]
 
 [F7] $x\mapsto\Psi_\Phi(x)$ is Borel for bounded Borel $\Phi$, by the integration theorem for the constant probability kernel $\mu$; Wiener measure is the law of a continuous Brownian motion. [[thm-measurability-of-integration-against-a-kernel]] [[def-measure-kernel-and-probability-kernel]] [[def-wiener-measure-on-continuous-path-space]] [[lem-borel-sigma-algebra-of-continuous-path-space-is-generated-by-coordinates]]
 

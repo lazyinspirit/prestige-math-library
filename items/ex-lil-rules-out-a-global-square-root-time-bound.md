@@ -29,7 +29,7 @@ false as a pathwise statement near the origin.
 
 [F1] Almost surely $\limsup_{t\downarrow0}B_t/\sqrt{2t\log\log(1/t)}=1$ and the corresponding limit inferior is $-1$. [[cor-brownian-law-of-the-iterated-logarithm-at-zero]]
 
-[F2] AC is the ambient assumption of the Brownian interfaces. [[def-axiom-of-choice]]
+[F2] AC is assumed explicitly in this example. [[def-axiom-of-choice]]
 
 ## Verification
 

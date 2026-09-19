@@ -5,7 +5,7 @@ title: Opposite root spaces pair nondegenerately
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-killing-form-orthogonality-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra]
+deps: [prop-killing-form-orthogonality-of-root-spaces, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-root-and-root-space-relative-to-a-cartan-subalgebra, thm-cartans-semisimplicity-criterion]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -33,7 +33,7 @@ $\mathfrak g_{-\alpha}\ne0$ and $B$ is nonzero on $\mathfrak g_\alpha\times\math
 
 [L1] $B(\mathfrak g_\gamma,\mathfrak g_\delta)=0$ whenever $\gamma+\delta\ne0$, and $B|_{\mathfrak h}$ is nondegenerate ([[prop-killing-form-orthogonality-of-root-spaces]]).
 
-[L2] $\mathfrak g=\mathfrak h\oplus\bigoplus_{\gamma\in\Phi}\mathfrak g_\gamma$ is a direct sum and $B$ is nondegenerate on $\mathfrak g$ ([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]], [[prop-killing-form-orthogonality-of-root-spaces]]).
+[L2] $\mathfrak g=\mathfrak h\oplus\bigoplus_{\gamma\in\Phi}\mathfrak g_\gamma$ is a direct sum ([[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]), and $B$ is nondegenerate on the semisimple algebra $\mathfrak g$ ([[thm-cartans-semisimplicity-criterion]]).
 
 ## Proof
 

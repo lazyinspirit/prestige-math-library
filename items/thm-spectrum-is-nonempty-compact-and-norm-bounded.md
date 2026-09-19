@@ -44,7 +44,10 @@ boundedness and nonemptiness arguments are otherwise choice-free.
 
 [L3] If $\|y\| < 1$ then $1-y$ is invertible with $(1-y)^{-1} = \sum_{n\ge0}y^n$ ([[lem-neumann-series]]).
 
-[L4] The resolvent set $\rho_A(a)$ is open, $z \mapsto R(z,a)$ is norm holomorphic on it with continuous norm, and for $|z| > \|a\|$ one has the Neumann expansion $R(z,a) = \sum_{n\ge0}z^{-n-1}a^n$ and the bound $\|R(z,a)\| \le 1/(|z| - \|a\|)$ ([[thm-resolvent-is-banach-valued-holomorphic]], [[thm-invertible-group-is-open-and-inversion-is-continuous]]).
+[L4] The resolvent set $\rho_A(a)$ is open, and
+$z\mapsto R(z,a)$ is norm holomorphic there and hence norm continuous
+([[thm-resolvent-is-banach-valued-holomorphic]],
+[[thm-invertible-group-is-open-and-inversion-is-continuous]]).
 
 [L5] Every bounded entire function $\mathbb C \to \mathbb C$ is constant ([[thm-liouville-bounded-entire-function]]).
 
@@ -56,7 +59,12 @@ boundedness and nonemptiness arguments are otherwise choice-free.
 
 **Proof technique:** direct.
 
-1.1 If $|z| > \|a\|$ then $\|a/z\| = \|a\|/|z| < 1$, so by [L3] the element $1 - a/z$ is invertible and hence $z1 - a = z(1 - a/z)$ is invertible with inverse $z^{-1}(1-a/z)^{-1}$; therefore $z \in \rho_A(a)$ and $\sigma_A(a) \subseteq \{|z| \le \|a\|\}$. [L1, L2, L3, algebra]
+1.1 If $|z| > \|a\|$ then $\|a/z\| = \|a\|/|z| < 1$, so by [L3] the element $1 - a/z$ is invertible and hence $z1 - a = z(1 - a/z)$ is invertible with
+$$R(z,a)=z^{-1}(1-a/z)^{-1}=\sum_{n\ge0}z^{-n-1}a^n.$$
+The Neumann-series norm estimate gives
+$\|R(z,a)\|\le |z|^{-1}/(1-\|a\|/|z|)=1/(|z|-\|a\|)$.
+Therefore $z \in \rho_A(a)$ and
+$\sigma_A(a) \subseteq \{|z| \le \|a\|\}$. [L1, L2, L3, algebra]
 
 2.1 The set $\rho_A(a)$ is open by [L4], so its complement $\sigma_A(a)$ is closed; combined with the boundedness of [step 1.1] this makes $\sigma_A(a)$ a closed bounded subset of $\mathbb C$, hence compact, which is claim 1. [step 1.1, L4]
 
@@ -68,9 +76,9 @@ boundedness and nonemptiness arguments are otherwise choice-free.
 
 6.1 Define $g : \mathbb C \to \mathbb C$ by $g(z) := \varphi(R(z,a))$. Then $g$ is holomorphic on $\mathbb C$: at each $z_0$ the resolvent is complex differentiable with $R'(z_0,a) = -R(z_0,a)^2$ by [L4], and a bounded linear functional is complex differentiable with $\varphi'(x) = \varphi$ for $x \in A$, so the chain rule gives $g'(z_0) = -\varphi(R(z_0,a)^2)$; thus $g$ is entire. [step 3.1, step 5.1, L4, algebra]
 
-7.1 The function $g$ is bounded: on the compact set $\{|z| \le \|a\| + 1\}$ the norm $\|R(z,a)\|$ is bounded by some $C_1 < \infty$ because $z \mapsto R(z,a)$ is norm continuous by [L4], and for $|z| > \|a\| + 1$ one has $\|R(z,a)\| \le 1/(|z| - \|a\|) \le 1$; hence $|g(z)| \le \|\varphi\|\max(C_1,1)$ for every $z \in \mathbb C$. [step 6.1, L4, algebra]
+7.1 The function $g$ is bounded: on the compact set $\{|z| \le \|a\| + 1\}$ the norm $\|R(z,a)\|$ is bounded by some $C_1 < \infty$ because $z \mapsto R(z,a)$ is norm continuous by [L4], and for $|z| > \|a\| + 1$ the estimate in [step 1.1] gives $\|R(z,a)\| \le 1/(|z| - \|a\|) \le 1$; hence $|g(z)| \le \|\varphi\|\max(C_1,1)$ for every $z \in \mathbb C$. [step 6.1, step 1.1, L4, algebra]
 
-8.1 By [L5] the bounded entire function $g$ is constant; since $\|R(z,a)\| \le 1/(|z|-\|a\|) \to 0$ as $|z| \to \infty$ by [L4] and $\varphi$ is continuous, $g(z) \to 0$ along $|z| \to \infty$, so the constant value is $0$ and $g \equiv 0$. [step 7.1, L4, L5, algebra]
+8.1 By [L5] the bounded entire function $g$ is constant; since the estimate in [step 1.1] gives $\|R(z,a)\| \le 1/(|z|-\|a\|) \to 0$ as $|z| \to \infty$ and $\varphi$ is continuous, $g(z) \to 0$ along $|z| \to \infty$, so the constant value is $0$ and $g \equiv 0$. [step 1.1, step 7.1, L5, algebra]
 
 9.1 But $g(0) = \varphi(R(0,a)) \ne 0$ by the choice of $\varphi$ in [step 5.1], contradicting $g \equiv 0$; hence $\sigma_A(a) \ne \varnothing$, which is claim 2. [step 8.1, step 5.1]
 

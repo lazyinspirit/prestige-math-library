@@ -9,6 +9,11 @@ Return only the supplied Step-7 context JSON. `pages_read`, `items_read`, and
 group's conventions, load-bearing items, opened published dependencies, and
 concrete concerns; an empty concerns or alerts list is valid.
 
+The reply is parsed as JSON, so every backslash inside a string is an escape:
+write a LaTeX command as a doubled backslash (`\\perp`, `\\omega`), never as
+`\perp`. An invalid escape invalidates the whole digest. When a symbol is
+available in plain text or Unicode (⊥, ω, ≤, ∈), prefer it over TeX.
+
 Inventory boundary: `pages_read` must contain exactly the ids under **Your
 pages**, and `items_read` exactly the ids under **Your content**, with no extras.
 Opening a published dependency does not expand either inventory; record its item

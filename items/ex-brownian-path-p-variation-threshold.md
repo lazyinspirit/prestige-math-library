@@ -25,7 +25,7 @@ $$V_p(x;[a,b]):=\sup\Bigl\{\sum_{i<n}|x_{t_{i+1}}-x_{t_i}|^p\Bigr\},$$
 the supremum running over all partitions of $[a,b]$ in the sense of
 [[def-partition-and-refinement]], and declared $+\infty$ when the set of sums
 is unbounded above. For a standard Brownian motion $B$ [[def-brownian-motion]],
-almost surely on every nondegenerate compact interval $[a,b]$:
+almost surely on every nondegenerate compact interval $[a,b]\subseteq[0,\infty)$:
 $$V_p(B;[a,b])<\infty\quad\text{for every }p>2, \qquad V_p(B;[a,b])=+\infty\quad\text{for every }1\le p\le2 .$$
 The threshold exponent is therefore $2$, and the example keeps the supremal
 two-variation $V_2$ distinct from the dyadic quadratic sums of
@@ -34,7 +34,7 @@ and converge to $b-a$.
 
 ## Facts & Assumptions
 
-**Given:** AC, AC$_\omega$, a standard Brownian motion $B$ with its all-path continuous jointly measurable version, rationals $1\le p$, $a<b$ and the notation $V_p$ above.
+**Given:** AC, AC$_\omega$, a standard Brownian motion $B$ with its all-path continuous jointly measurable version, rationals $1\le p$, $0\le a<b$ and the notation $V_p$ above.
 
 [F1] Almost surely there is one event on which every path is continuous and, for every $T>0$ and $0<\gamma<1/2$, a finite $K=K(\omega,T,\gamma)$ bounds $|B_t-B_s|\le K|t-s|^\gamma$ on $[0,T]$. [[cor-brownian-paths-are-locally-holder-of-every-order-below-one-half]] [[lem-brownian-motion-has-a-jointly-measurable-continuous-version]]
 

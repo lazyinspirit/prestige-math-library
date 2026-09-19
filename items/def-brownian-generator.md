@@ -4,7 +4,7 @@ kind: definition
 title: "The Brownian differential generator"
 status: draft
 origin: pipeline
-deps: [thm-multidimensional-ito-formula-for-brownian-driven-processes, def-c-c-and-c-c-infinity-on-rn, thm-ito-formula-one-dimensional, thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
+deps: [thm-multidimensional-ito-formula-for-brownian-driven-processes, thm-ito-formula-one-dimensional, thm-space-time-harmonic-functions-yield-brownian-local-martingales, def-axiom-of-choice, lem-ac-supplies-sequential-choices-for-probability-constructions]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -16,9 +16,9 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice. For a function $f\in C^2(\mathbb R^d)$, meaning
-that all second partial derivatives exist and are continuous
-[[def-c-c-and-c-c-infinity-on-rn]], the **Brownian differential operator**, also
+Assume the Axiom of Choice. For a function $f\in C^2(\mathbb R^d)$, where
+$C^2(\mathbb R^d)$ means that all partial derivatives of order at most two
+exist and are continuous, the **Brownian differential operator**, also
 called the **Brownian generator** or the **Ito differential operator**, is
 $$Lf:=\tfrac12\Delta f=\tfrac12\sum_{k=1}^d\partial^2_{x_k}f .$$
 For a space-time function $f\in C^{1,2}([0,\infty)\times\mathbb R^d)$ one writes

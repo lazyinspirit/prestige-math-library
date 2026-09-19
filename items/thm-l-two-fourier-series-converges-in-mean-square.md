@@ -37,7 +37,7 @@ made, and no ordering of $\mathbb Z$ other than the symmetric one is required.
 
 [A2] The Fourier coefficient satisfies $\widehat f(k)=\langle f,e_k\rangle$, so the partial sums displayed above are exactly the values $\sum_{k\in F}\langle f,e_k\rangle e_k$ of the net at the symmetric index sets $F=[-N,N]$ ([[def-fourier-coefficients-and-trigonometric-polynomials]], [[lem-trigonometric-characters-are-orthonormal]]).
 
-[A3] For every finite $F\subseteq\mathbb Z$ there is $N\in\mathbb N$ with $F\subseteq\{k:|k|\le N\}$, namely an $N$ at least $\max\{|k|:k\in F\}$, which exists because $F$ is finite ([[lem-finite-set-has-max]]).
+[A3] For every finite $F\subseteq\mathbb Z$ there is $N\in\mathbb N$ with $F\subseteq\{k:|k|\le N\}$. If $F=\varnothing$, take $N=0$; otherwise the nonempty finite set $\{|k|:k\in F\}$ has a maximum and one may take that maximum ([[lem-finite-set-has-max]]).
 
 [A4] If a net in a metric space converges to $x$ then every cofinal sub-net converges to $x$: given $\varepsilon>0$ the net is eventually in the ball of radius $\varepsilon$ around $x$ at some index, and any cofinal sub-net passes beyond that index ([[def-directed-set-and-net]], [[def-square-summable-family-on-an-arbitrary-index-set]]).
 

@@ -1,7 +1,7 @@
 ---
 id: ex-unbounded-multiplication-operator-and-its-domain
 kind: example
-title: "Unbounded multiplication operators: domain, spectral measure and spectrum"
+title: "Multiplication operators: domain, spectral measure and spectrum"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27

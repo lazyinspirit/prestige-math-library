@@ -5,7 +5,7 @@ title: The trigonometric characters are orthonormal in $L^2$ of the torus
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-sine-and-cosine-derivatives, def-countable-choice, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-chain-rule, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-cosine-zero-sets-and-fundamental-period]
+deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-sine-and-cosine-derivatives, def-countable-choice, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, thm-chain-rule, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -41,7 +41,7 @@ $\widehat p(j)=c_j$, and $\widehat p(j)=0$ for $j\notin F$.
 
 [A3] A continuous real function on a closed interval is Riemann integrable, and for differentiable $G$ with $G'=g$ integrable, $\int_a^bg=G(b)-G(a)$; the derivatives of sine and cosine are cosine and minus sine, and the chain rule computes the derivatives of $t\mapsto\sin(2\pi mt)$ and $t\mapsto\cos(2\pi mt)$ ([[thm-continuous-implies-integrable]], [[thm-ftc-second-part]], [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]]).
 
-[A4] $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for every integer $m$, since $\sin x=0$ exactly for $x=m\pi$ ([[thm-sine-cosine-zero-sets-and-fundamental-period]]).
+[A4] $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for every integer $m$: the zero-set theorem gives the sine values, while the shift formula $\cos(x+\pi)=-\cos x$ and $\cos0=1$ give the cosine values by integer induction ([[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
 [A5] The pairing on complex $L^2$ is linear in the first variable and conjugate-linear in the second, with $\langle f,g\rangle=\int f\overline g$, and the Fourier coefficient is $\widehat f(k)=\langle f,e_k\rangle$ ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[def-fourier-coefficients-and-trigonometric-polynomials]]).
 

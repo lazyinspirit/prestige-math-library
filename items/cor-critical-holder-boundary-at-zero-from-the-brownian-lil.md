@@ -22,7 +22,7 @@ sources:
 Let $B$ be a standard Brownian motion [[def-brownian-motion]]. Almost surely
 both of the following hold.
 
-1. For every exponent $\alpha<1/2$ and every $T>0$ the path is
+1. For every exponent $0<\alpha<1/2$ and every $T>0$ the path is
    $\alpha$-Hölder on $[0,T]$, that is, locally below the critical exponent.
 2. The path is not one-half Hölder at zero: there is no finite constant $C$
    and no $\delta>0$ with $|B_t|\le C\sqrt t$ for all $0<t<\delta$. In fact

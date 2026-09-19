@@ -35,7 +35,11 @@ multiplicative.
 
 **Given:** The Axiom of Choice, the homeomorphism $h : [0,1] \to [0,1]$, $h(t) = 1-t$, and the continuous unimodular weight $u(t) = e^{it}$.
 
-[L1] For a homeomorphism $h : L \to K$ and continuous $u : L \to \mathbb C$ with $|u| = 1$, the map $Tf := u\cdot(f\circ h)$ is a surjective linear isometry $C(K) \to C(L)$, and every surjective linear isometry arises this way ([[thm-banach-stone]], [[def-axiom-of-choice]]).
+[L1] For nonempty compact Hausdorff spaces $K,L$, a homeomorphism
+$h : L \to K$ and continuous $u : L \to \mathbb C$ with $|u| = 1$, the map
+$Tf := u\cdot(f\circ h)$ is a surjective linear isometry
+$C(K) \to C(L)$, and every surjective linear isometry arises this way
+([[thm-banach-stone]], [[def-axiom-of-choice]]).
 
 ## Verification
 

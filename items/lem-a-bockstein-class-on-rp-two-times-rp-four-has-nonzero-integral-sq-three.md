@@ -27,6 +27,8 @@ $\mathbb{RP}^2\times\mathbb{RP}^4$ with relations $u^3=0=v^5$. For
 $$z=\beta_{\mathbb Z}(uv)\in H^3(\mathbb{RP}^2\times\mathbb{RP}^4;\mathbb Z)$$
 one has
 $$Sq^3_{\mathbb Z}(z)=\beta_{\mathbb Z}(uv^4)\ne0.$$
+Here the integral operation is defined by
+$Sq^3_{\mathbb Z}:=\beta_{\mathbb Z}Sq^2\rho_2$.
 
 ## Facts & Assumptions
 
@@ -48,7 +50,7 @@ $$Sq^3_{\mathbb Z}(z)=\beta_{\mathbb Z}(uv^4)\ne0.$$
 
 2.1 By [A1] we have $\rho_2z=Sq^1(uv)=u^2v+uv^2$, so step 1.2 gives $Sq^2(\rho_2z)=uv^4$. [A1, step 1.2]
 
-3.1 Therefore $Sq^3_{\mathbb Z}(z)=\beta_{\mathbb Z}(Sq^2(\rho_2z))=\beta_{\mathbb Z}(uv^4)$; its reduction is $\rho_2\beta_{\mathbb Z}(uv^4)=Sq^1(uv^4)=u^2v^4\ne0$ by [A1], [A3] and step 1.1, so the class $Sq^3_{\mathbb Z}(z)$ is nonzero. [A1, A3, step 1.1, step 2.1]
+3.1 By the displayed definition, $Sq^3_{\mathbb Z}(z)=\beta_{\mathbb Z}(Sq^2(\rho_2z))=\beta_{\mathbb Z}(uv^4)$; its reduction is $\rho_2\beta_{\mathbb Z}(uv^4)=Sq^1(uv^4)=u^2v^4\ne0$ by [A1], [A3] and step 1.1, so the class $Sq^3_{\mathbb Z}(z)$ is nonzero. [A1, A3, step 1.1, step 2.1]
 
 4.1 Steps 2.1 and 3.1 identify $Sq^3_{\mathbb Z}(z)$ with $\beta_{\mathbb Z}(uv^4)$ and show that it does not vanish. [step 3.1] ∎
 

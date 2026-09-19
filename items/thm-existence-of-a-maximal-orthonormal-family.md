@@ -33,9 +33,9 @@ orthonormal as an indexed family when indexed by itself
    therefore a Hilbert basis, and every orthonormal family whose image is
    maximal is complete.
 
-**The hypothesis is full AC, and it is used exactly once**, through Zorn's
-lemma. The Parseval supplier used in the second claim needs only
-$\mathrm{AC}_\omega$, which AC supplies.
+**The hypothesis is full AC.** It is used directly through Zorn's lemma and
+also supplies the $\mathrm{AC}_\omega$ hypothesis of the Parseval-equivalence
+supplier used in the second claim.
 
 ## Facts & Assumptions
 

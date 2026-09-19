@@ -5,7 +5,7 @@ title: Positive square root
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-continuous-functional-calculus-properties, thm-commutative-gelfand-naimark, lem-spectral-permanence-for-unital-c-star-subalgebras, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, lem-spectrum-of-a-positive-operator-is-nonnegative, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-c-star-algebra-generated-by-a-normal-operator, def-order-on-bounded-self-adjoint-operators, thm-hilbert-adjoint-properties]
+deps: [thm-continuous-functional-calculus-properties, thm-complex-stone-weierstrass-self-adjoint, thm-commutative-gelfand-naimark, lem-spectral-permanence-for-unital-c-star-subalgebras, def-axiom-of-choice, def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, lem-spectrum-of-a-positive-operator-is-nonnegative, def-self-adjoint-positive-unitary-and-normal-operator, def-c-star-algebra, lem-characters-on-a-commutative-c-star-algebra-preserve-star, def-c-star-algebra-generated-by-a-normal-operator, def-order-on-bounded-self-adjoint-operators, thm-hilbert-adjoint-properties]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -30,7 +30,7 @@ Assume AC. Every bounded positive operator $T$ on a nonzero complex Hilbert spac
 
 [A3] A bounded positive operator has $\sigma(T)\subseteq[0,+\infty)$ ([[lem-spectrum-of-a-positive-operator-is-nonnegative]]), and self-adjoint operators have $\sigma(T)\subseteq\mathbb R$ ([[thm-continuous-functional-calculus-for-bounded-self-adjoint-operators]]).
 
-[A4] For self-adjoint $T$ the calculus is an isometric unital star-isomorphism $C(\sigma(T))\to C^*(I,T)$ with $z\mapsto T$, it preserves products and positivity, and it commutes with every bounded operator commuting with $T$ ([[thm-continuous-functional-calculus-properties]]).
+[A4] For self-adjoint $T$ the calculus is an isometric unital star-isomorphism $C(\sigma(T))\to C^*(I,T)$ with $z\mapsto T$, it preserves products and positivity, and it commutes with every bounded operator commuting with $T$. Polynomials in the coordinate are uniformly dense in the continuous functions on the compact real set $\sigma(T)$ ([[thm-continuous-functional-calculus-properties]], [[thm-complex-stone-weierstrass-self-adjoint]]).
 
 [A5] In a commutative unital complex C\*-algebra the Gelfand transform is injective and characters preserve the involution and send positive elements to nonnegative reals; positive means $a=b^*b$ ([[thm-commutative-gelfand-naimark]], [[lem-characters-on-a-commutative-c-star-algebra-preserve-star]], [[def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra]]).
 
@@ -50,7 +50,7 @@ Assume AC. Every bounded positive operator $T$ on a nonzero complex Hilbert spac
 
 1.2 The spectrum of the self-adjoint operator $T$ is a nonempty compact subset of $[0,+\infty)$, and the function $g(\lambda)=\sqrt\lambda$ is continuous and nonnegative on it. [A3]
 
-2.1 Define $S:=g(T)$ by the self-adjoint calculus; then $S\in C^*(I,T)$, $S\ge0$ because $g\ge0$, and $S^2=g(T)g(T)=(g\cdot g)(T)=z(T)=T$. [step 1.1, step 1.2, A4, A7]
+2.1 Define $S:=g(T)$ by the self-adjoint calculus; then $S\in C^*(I,T)$, $S\ge0$ because $g\ge0$, and $S^2=g(T)g(T)=(g\cdot g)(T)=z(T)=T$. If polynomials $p_n$ converge uniformly to $g$ on $\sigma(T)$, isometry gives $\|p_n(T)-S\|=\|p_n-g\|_\infty\to0$, so this square root is obtained by continuous polynomial approximation. [step 1.1, step 1.2, A4, A7]
 
 3.1 $S$ commutes with every bounded operator commuting with $T$, by the commutant clause of the calculus. [step 2.1, A4]
 

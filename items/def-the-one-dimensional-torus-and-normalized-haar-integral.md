@@ -114,9 +114,12 @@ The same four checks apply with $\mathbb R^n$ and $\mathbb Z^n$ in place of
 $\mathbb R$ and $\mathbb Z$: $\mathbb T^n$ is compact Hausdorff, the fundamental
 domain is $[0,1)^n$, $m_{\mathbb T^n}$ is a translation-invariant probability
 Borel measure, and the integral is represented on $[0,1)^n$ and on every
-translate of it. The coordinate projections induce a homeomorphism
-$\mathbb T^n\to(\mathbb R/\mathbb Z)^n$ by the universal property, so
-$\mathbb T^n$ carries the finite product topology ([[def-product-topology]],
+translate of it. The coordinate projections induce a continuous bijection
+$\Phi:\mathbb T^n\to(\mathbb R/\mathbb Z)^n$ by the universal property. Its
+domain is compact by the preceding check, while its codomain is a finite
+product of Hausdorff spaces and hence Hausdorff; the continuous-bijection
+theorem therefore makes $\Phi$ a homeomorphism. Thus $\mathbb T^n$ carries the
+finite product topology ([[def-product-topology]],
 [[thm-finite-products-of-compact-spaces]],
 [[thm-compactness-under-continuous-maps]]), and its characters
 $x\mapsto\exp(2\pi i\,k\cdot x)$, $k\in\mathbb Z^n$, are defined on this compact

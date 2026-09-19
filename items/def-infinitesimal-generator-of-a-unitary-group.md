@@ -38,6 +38,6 @@ is therefore well defined and linear ([[def-linear-subspace]],
 **Sign convention.** This page writes $T=-iG$ for the generator, so that
 Stone's theorem reads $U(t)=e^{itT}$ with $T$ self-adjoint; equivalently
 $G=iT$. In the convention of Teschl's book one has $U(t)=e^{-itA}$ with $A$
-self-adjoint, and $A=-G=iT$; every formula below is written in the
+self-adjoint, so $G=-iA$ and hence $A=iG=-T$; every formula below is written in the
 $U(t)=e^{itT}$ convention and the translation is recorded where a source is
 cited.

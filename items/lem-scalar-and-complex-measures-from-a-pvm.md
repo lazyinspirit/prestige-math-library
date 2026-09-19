@@ -70,10 +70,10 @@ Then:
 
 1.4 Conjugate symmetry: $\overline{E_{x,y}(B)}=\overline{\langle E(B)x,y\rangle}=\langle y,E(B)x\rangle=\langle E(B)y,x\rangle=E_{y,x}(B)$, using that $E(B)$ is self-adjoint. [A1, A3, A6]
 
-1.5 Variation bound: for a finite measurable partition $(B_1,\dots,B_m)$ of $X$, $\sum_j|E_{x,y}(B_j)|=\sum_j|\langle E(B_j)x,E(B_j)y\rangle|\le\sum_j\|E(B_j)x\|\,\|E(B_j)y\|\le\bigl(\sum_j\|E(B_j)x\|^2\bigr)^{1/2}\bigl(\sum_j\|E(B_j)y\|^2\bigr)^{1/2}$, and $\sum_j\|E(B_j)x\|^2=\sum_j\langle E(B_j)x,x\rangle=E_x(X)=\|x\|^2$ because $E(B_j)^2=E(B_j)=E(B_j)^*$ and the $B_j$ partition $X$; the same holds with $y$. [A1, A4]
+1.5 Variation bound: let $(B_j)_{j\ge0}$ be a countable measurable partition of $X$. For every $N$, Cauchy--Schwarz gives $\sum_{j=0}^N|E_{x,y}(B_j)|=\sum_{j=0}^N|\langle E(B_j)x,E(B_j)y\rangle|\le\bigl(\sum_{j=0}^N\|E(B_j)x\|^2\bigr)^{1/2}\bigl(\sum_{j=0}^N\|E(B_j)y\|^2\bigr)^{1/2}\le\|x\|\,\|y\|$. Indeed, orthogonality and strong additivity give $\sum_{j\ge0}\|E(B_j)x\|^2=\sum_{j\ge0}\langle E(B_j)x,x\rangle=E_x(X)=\|x\|^2$, because $E(B_j)^2=E(B_j)=E(B_j)^*$ and the $B_j$ partition $X$; the same holds with $y$. Taking $N\to\infty$ yields $\sum_{j\ge0}|E_{x,y}(B_j)|\le\|x\|\,\|y\|$. [A1, A4]
 
 1.6 Polarization: for fixed $B$ the form $\Lambda(u,v):=\langle E(B)u,v\rangle$ is sesquilinear, so expanding the four terms gives $\frac14\sum_{k=0}^{3}i^k\Lambda(u+i^kv,u+i^kv)=\Lambda(u,v)$ for all $u,v$ (the $|u|^2$ and $|v|^2$ coefficients cancel and the mixed terms add to $4\Lambda(u,v)$); reading the identity at $B$ and letting $B$ vary gives $E_{x,y}=\frac14\sum_{k=0}^{3}i^kE_{x+i^ky}$. [A6, algebra]
 
-2.1 Hence every finite partition contributes at most $\|x\|\,\|y\|$ to the defining supremum of $|E_{x,y}|(X)$, so $|E_{x,y}|(X)\le\|x\|\,\|y\|$ and $|E_{x,y}(B)|\le|E_{x,y}|(X)\le\|x\|\,\|y\|$ for every $B$. [step 1.5, A5]
+2.1 Hence every countable partition contributes at most $\|x\|\,\|y\|$ to the defining supremum of $|E_{x,y}|(X)$, so $|E_{x,y}|(X)\le\|x\|\,\|y\|$ and $|E_{x,y}(B)|\le|E_{x,y}|(X)\le\|x\|\,\|y\|$ for every $B$. [step 1.5, A5]
 
 3.1 All asserted properties of $E_x$, $E_{x,y}$ hold for arbitrary $x,y$, so the scalar pairings of a projection valued measure are a positive measure of mass $\|x\|^2$ and a family of finite complex measures of variation at most $\|x\|\,\|y\|$, conjugate symmetric and recovered by polarization. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 1.6, A7] ∎

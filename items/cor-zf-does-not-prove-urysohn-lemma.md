@@ -35,7 +35,12 @@ unconditional nonprovability is asserted.
 
 [F1] Relative to $\operatorname{Con}(\mathrm{ZF})$, the theory $\mathrm{ZF} + \mathrm{AC}_{\omega} + \neg\mathrm{URY}$ is consistent ([[thm-relative-consistency-countable-choice-without-urysohn]], [[def-countable-choice]]).
 
-[L1] If a theory $T$ is consistent and $T' \supseteq T$ proves a sentence $\sigma$ while $T$ proves $\neg\sigma$, then $T$ is inconsistent; and if $\mathrm{ZF}$ proves $\sigma$ then so does every extension of $\mathrm{ZF}$, in particular $\mathrm{ZF} + \mathrm{AC}_\omega$ (elementary consequence of the definition of derivability).
+[L1] If $T'\supseteq T$ and $T$ proves a sentence $\sigma$, then $T'$ also
+proves $\sigma$; consequently $T'+\neg\sigma$ is inconsistent. Equivalently,
+if $T'+\neg\sigma$ is consistent, then $T$ does not prove $\sigma$. In
+particular, if $\mathrm{ZF}$ proves $\sigma$, then so does
+$\mathrm{ZF}+\mathrm{AC}_\omega$ (elementary consequences of the definition of
+derivability).
 
 ## Proof
 

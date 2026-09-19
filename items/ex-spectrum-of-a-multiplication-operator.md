@@ -5,7 +5,7 @@ title: Spectrum of a multiplication operator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, ex-bounded-operators-form-a-noncommutative-banach-algebra, def-l-p-space-as-a-quotient-by-null-functions, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-riesz-fischer-completeness-of-l-p, lem-complex-lp-completeness-density-and-inner-product, def-countable-choice]
+deps: [def-spectrum-and-resolvent-set-in-a-banach-algebra, ex-bounded-operators-form-a-noncommutative-banach-algebra, def-l-p-space-as-a-quotient-by-null-functions, thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, thm-riesz-fischer-completeness-of-l-p, lem-complex-lp-completeness-density-and-inner-product, def-countable-choice, def-axiom-of-choice]
 justified_by: []
 proof_strategy: direct
 provenance:
@@ -19,7 +19,7 @@ sources:
 
 ## Example
 
-Assume Countable Choice ([[def-countable-choice]]). Let $(X,\mathcal A,\mu)$ be
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $(X,\mathcal A,\mu)$ be
 a nonzero $\sigma$-finite measure space and let $m : X \to \mathbb C$ be
 measurable and essentially bounded, with
 
@@ -41,7 +41,7 @@ convention of this page does not apply.
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, a nonzero $\sigma$-finite measure space $(X,\mathcal A,\mu)$, an essentially bounded measurable $m$, and the operator $M_m$ on $L^2(\mu)$.
+**Given:** The Axiom of Choice, a nonzero $\sigma$-finite measure space $(X,\mathcal A,\mu)$, an essentially bounded measurable $m$, and the operator $M_m$ on $L^2(\mu)$.
 
 [L1] $L^2(\mu)$ is a complex Banach space of almost-everywhere equivalence classes, with $\|[f]\|_2 = \|f\|_2$; convergence in norm and equality of classes are as in [[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], [[thm-riesz-fischer-completeness-of-l-p]] and [[lem-complex-lp-completeness-density-and-inner-product]] ([[def-l-p-space-as-a-quotient-by-null-functions]]).
 
@@ -51,7 +51,10 @@ convention of this page does not apply.
 
 [L4] An essentially bounded measurable function $\phi$ defines a bounded multiplication operator on $L^2(\mu)$ whose class map is the identity: $M_\phi M_\psi = M_{\phi\psi}$ on classes ([[ex-bounded-operators-form-a-noncommutative-banach-algebra]]).
 
-[L5] The countable exhaustions and the "least index" selections below are licensed by Countable Choice, and $\sigma$-finiteness provides an increasing sequence $E_k$ of finite measure with $X = \bigcup_kE_k$ ([[def-countable-choice]]).
+[L5] The Axiom of Choice implies Countable Choice, which licenses the
+countable selections below, and $\sigma$-finiteness provides an increasing
+sequence $E_k$ of finite measure with $X = \bigcup_kE_k$
+([[def-axiom-of-choice]], [[def-countable-choice]]).
 
 ## Verification
 

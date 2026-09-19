@@ -5,7 +5,7 @@ title: Pairings of skeletal exact couples induce multiplicative AHSS
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences, thm-cellular-approximation-for-maps-of-cw-pairs, lem-spectral-sequence-subquotient-and-local-lifting-calculus, def-exact-couple, def-skeletal-filtration-for-generalized-cohomology]
+deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-cellular-approximation-for-maps-of-cw-pairs, lem-spectral-sequence-subquotient-and-local-lifting-calculus, def-exact-couple, def-skeletal-filtration-for-generalized-cohomology]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -37,18 +37,17 @@ $h^*(*)$, each differential $d_r$ is a derivation of total degree one,
 $$d_r(xy)=d_r(x)\,y+(-1)^{p+q}x\,d_r(y)\qquad(x\in E_r^{p,q}),$$
 the filtration is multiplicative, $F^p\cdot F^q\subseteq F^{p+q}$, and the
 induced product on $E_\infty\cong\operatorname{gr}_Fh^*(X)$ is the
-associated-graded product of the ring $h^*(X)$. Two cellular diagonals are
-homotopic and define the same product on $E_2$ and hence on all later pages.
+associated-graded product of the ring $h^*(X)$. The construction uses the
+chosen cellular approximation of the diagonal; no independence assertion is
+made here for different filtered approximations.
 
 ## Facts & Assumptions
 
 [F1] The cohomological skeletal exact couple has $E_1^{p,q}=h^{p+q}(X^p,X^{p-1})$, $D_{1}$-terms the absolute groups on skeleta, $i$ the restriction, $j$ the connecting map and $k$ the pair map, and its $E_\infty$ is the associated graded of the skeletal filtration ([[thm-cohomological-atiyah-hirzebruch-spectral-sequence]], [[def-skeletal-filtration-for-generalized-cohomology]]).
 
-[F2] The cellular diagonal can be chosen cellular, so that $\Delta(X^s)\subseteq\bigcup_{i+j=s}X^i\times X^j$; two cellular diagonals are homotopic through a cellular homotopy ([[thm-cellular-approximation-for-maps-of-cw-pairs]]).
+[F2] A cellular approximation of the diagonal can be chosen so that $\Delta(X^s)\subseteq\bigcup_{i+j=s}X^i\times X^j$ ([[thm-cellular-approximation-for-maps-of-cw-pairs]]).
 
 [F3] In the exact couple of [F1] the pair map $k$ is multiplicative, $k(xy)=k(x)k(y)$, and the connecting map $j$ satisfies the Leibniz rule $j(xy)=j(x)y+(-1)^{|x|}x\,j(y)$ on the absolute groups of the couple; hence if $kx=i^{r-1}u$ and $ky=i^{r-1}v$ then $k(xy)=i^{r-1}(uv)$ on the $r$-th derived couple, and $d_r[e]=[jx]$ whenever $ke=i^{r-1}x$; subquotient identities are established after finite epic pullbacks and descend uniquely ([[thm-cohomological-atiyah-hirzebruch-spectral-sequence]], [[lem-spectral-sequence-subquotient-and-local-lifting-calculus]]).
-
-[F4] A morphism of exact couples induces a morphism of spectral sequences preserving pages and differentials, and a homotopy of couple morphisms induces the same map on $E_2$ and beyond ([[prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences]]).
 
 ## Proof
 
@@ -66,9 +65,9 @@ homotopic and define the same product on $E_2$ and hence on all later pages.
 
 2.2 Products of $d_r$-cycles are $d_r$-cycles, products of $d_r$-boundaries with cycles are boundaries, and the induced product on $H(E_r,d_r)=E_{r+1}$ satisfies the displayed sign rule; moreover the product of a class in $F^ph^m(X)$ with one in $F^qh^n(X)$ lies in $F^{p+q}h^{m+n}(X)$, because both factors restrict to zero on the appropriate skeleta and $\Delta(X^{p+q-1})$ lies in the union where one factor vanishes. [F1, F3, step 1.3]
 
-3.1 By step 2.2 the filtration is multiplicative and the stable product on $E_\infty$ is induced by the product on $h^*(X)$; since $E_\infty\cong\operatorname{gr}_Fh^*(X)$ by [F1], this is the associated-graded product. If $\Delta'$ is another cellular diagonal, the two are homotopic through a cellular homotopy by [F2], and the induced couple morphisms agree on $E_2$ and all later pages by [F4]; hence the product is independent of the diagonal from $E_2$ onward. [F1, F2, F4, step 2.2]
+3.1 By step 2.2 the filtration is multiplicative and the stable product on $E_\infty$ is induced by the product on $h^*(X)$; since $E_\infty\cong\operatorname{gr}_Fh^*(X)$ by [F1], this is the associated-graded product for the chosen cellular diagonal. [F1, step 2.2]
 
-4.1 Steps 1.1 to 3.1 construct the pairing of the skeletal exact couple with itself, the page products, the derivation property, the multiplicative filtration and the associated-graded product, and prove the independence of the diagonal from the second page on. [step 1.1, step 3.1] ∎
+4.1 Steps 1.1 to 3.1 construct, for the chosen cellular diagonal, the pairing of the skeletal exact couple with itself, the page products, the derivation property, the multiplicative filtration and the associated-graded product. [step 1.1, step 3.1] ∎
 
 ## Source notes
 

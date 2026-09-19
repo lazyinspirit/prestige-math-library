@@ -51,11 +51,12 @@ $\int H1_{(0,\tau_n]}\,dB$
 4. **Stopping identity for finite-energy integrands.** If $G$ is a predictable
    process with $E\int_0^TG^2ds<\infty$ and $G\cdot B$ denotes its continuous
    version [[thm-ito-integral-process-has-a-continuous-martingale-version]],
-   then for every stopping time $\sigma$ and every $t$
+   then for every stopping time $\sigma$ and every $0\le t\le T$
    $$(G\cdot B)_{t\wedge\sigma}=\int_0^tG_s1_{(0,\sigma]}(s)\,dB_s\qquad\text{almost surely},$$
-   and the two sides are continuous processes on $[0,\infty)$, hence
-   indistinguishable. This clause is the finite-energy stopping identity used
-   by item 17.
+   and the two sides are continuous processes on $[0,T]$, hence
+   indistinguishable there. A global identity follows by applying this clause
+   on each finite horizon when $G$ has finite energy on every finite horizon.
+   This clause is the finite-energy stopping identity used by item 17.
 
 ## Facts & Assumptions
 

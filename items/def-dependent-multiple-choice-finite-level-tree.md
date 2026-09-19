@@ -70,9 +70,12 @@ subsets $F_n \subseteq A$ such that
 $$\text{for every } n \text{ and every } x \in F_n \text{ there is } y \in F_{n+1} \text{ with } x \mathbin{R} y .$$
 
 It is **coherent** when in addition every $y \in F_{n+1}$ has a predecessor in
-$F_n$: some $x \in F_n$ with $x \mathbin{R} y$. Coherence is exactly the
-condition that no unused element survives into the next menu, and it is what
-makes the levels of a subtree of $T_R$ into a menu sequence.
+$F_n$: some $x \in F_n$ with $x \mathbin{R} y$. Downward closure makes the
+levels of any subtree of $T_R$ coherent in this predecessor sense, but it does
+not supply the forward-successor condition: a subtree with nonempty levels may
+have leaves. Its levels form a successor menu sequence only after restricting
+to nodes that continue to later levels, as carried out in the equivalence
+proof.
 
 **The two forms of DMC.** *Dependent multiple choice in tree form* is the
 assertion

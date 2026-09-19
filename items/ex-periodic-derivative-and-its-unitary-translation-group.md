@@ -5,7 +5,7 @@ title: "Periodic derivative and its unitary translation group"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [cex-symmetric-need-not-be-self-adjoint, thm-cayley-correspondence, thm-self-adjointness-range-criterion, thm-stone-one-parameter-unitary-groups, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-strongly-continuous-one-parameter-unitary-group, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, def-countable-choice, def-dependent-choice, def-infinitesimal-generator-of-a-unitary-group]
+deps: [cex-symmetric-need-not-be-self-adjoint, thm-cayley-correspondence, thm-self-adjointness-range-criterion, thm-stone-one-parameter-unitary-groups, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-strongly-continuous-one-parameter-unitary-group, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, def-axiom-of-choice, def-countable-choice, def-dependent-choice, def-infinitesimal-generator-of-a-unitary-group]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -22,7 +22,7 @@ sources:
 
 ## Example
 
-Assume the Axioms of Countable Choice and Dependent Choice. On $H=L^2(0,1)$
+Assume the Axiom of Choice. On $H=L^2(0,1)$
 let
 $$D(P)=\{f\in AC[0,1]:f'\in L^2(0,1),\ f(0)=f(1)\},\qquad Pf:=-i f' .$$
 Then $P$ is self-adjoint, and $V(t)f(x):=f((x+t)\bmod 1)$ defines a strongly
@@ -44,7 +44,7 @@ $D(P)$.
 
 **Proof technique:** direct.
 
-**Given:** $H=L^2(0,1)$ and the periodic operator $P$ above.
+**Given:** AC, $H=L^2(0,1)$ and the periodic operator $P$ above. [[def-axiom-of-choice]]
 
 1.1 $P$ is densely defined (the functions of $C_c^\infty(0,1)$, extended by zero, lie in $D(P)$ and are dense in $L^2(0,1)$) and symmetric: for $f,g\in D(P)$ the complex integration by parts of [[cex-symmetric-need-not-be-self-adjoint]] gives $\langle Pf,g\rangle=-i\bigl(f(1)\overline{g(1)}-f(0)\overline{g(0)}\bigr)+i\int_0^1f\overline{g'}=i\int_0^1f\overline{g'}=\langle f,Pg\rangle$, the boundary term vanishing by periodicity and $\langle f,Pg\rangle=\int_0^1f\overline{(-ig')}=i\int_0^1f\overline{g'}$. [A1, given]
 

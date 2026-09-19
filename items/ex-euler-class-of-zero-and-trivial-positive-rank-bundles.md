@@ -36,7 +36,7 @@ ring $R$:
 
 [F2] If an oriented positive-rank bundle admits a nowhere-zero section then its Euler class vanishes; no converse is asserted ([[prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish]]).
 
-[F3] The trivial bundle $\varepsilon_B^n=B\times\mathbb R^n$ is the pullback of the trivial bundle over a point along the constant map, and its standard orientation is the constant product orientation; the first basis vector gives the constant section $b\mapsto(b,e_1)$ ([[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]).
+[F3] The standard orientation of $\mathbb R^n$ defines the constant product orientation of $\varepsilon_B^n=B\times\mathbb R^n$ in the sense of [[def-oriented-real-vector-bundle-and-oriented-frame-bundle]]. The formula $b\mapsto(b,e_1)$ is a continuous section by the product topology and is nowhere zero because $e_1\ne0$.
 
 [A1] AC is the Axiom of Choice in the form fixed by [[def-axiom-of-choice]].
 

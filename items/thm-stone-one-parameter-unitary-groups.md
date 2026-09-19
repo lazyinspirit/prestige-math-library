@@ -42,7 +42,7 @@ $\frac1t(U(t)x-x)\to iTx$ for $x\in D(T)$.
 
 [A3] If $x\in D(G)$ then $U(t)x\in D(G)$, $GU(t)x=U(t)Gx$, and $t\mapsto U(t)x$ is differentiable with derivative $U(t)Gx$ ([[lem-laplace-resolvents-of-a-unitary-group]], [[def-infinitesimal-generator-of-a-unitary-group]]).
 
-[A4] A symmetric operator $H$ satisfies $\operatorname{Re}\langle Hw,w\rangle=0$ for $w\in D(H)$, because $\langle Hw,w\rangle=-\langle w,Hw\rangle=-\overline{\langle Hw,w\rangle}$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]], [[def-hilbert-space]]).
+[A4] A skew-symmetric operator $G$ satisfies $\operatorname{Re}\langle Gw,w\rangle=0$ for $w\in D(G)$, because $\langle Gw,w\rangle=-\langle w,Gw\rangle=-\overline{\langle Gw,w\rangle}$. The generator in [A2] is skew-adjoint and hence skew-symmetric. [[lem-generator-of-a-unitary-group-is-skew-adjoint]] [[def-hilbert-space]]
 
 ## Proof
 

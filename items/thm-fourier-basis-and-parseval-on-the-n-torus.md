@@ -5,7 +5,7 @@ title: The Fourier basis and Parseval's identity on the finite torus
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-complex-stone-weierstrass-self-adjoint, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, lem-finite-tori-are-compact-hausdorff-character-spaces, def-countable-choice, thm-complex-holder-minkowski-and-the-quotient-norm, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-hilbert-space-fourier-expansion]
+deps: [def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, lem-trigonometric-characters-are-orthonormal, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-complex-stone-weierstrass-self-adjoint, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set, lem-finite-tori-are-compact-hausdorff-character-spaces, def-countable-choice, thm-complex-holder-minkowski-and-the-quotient-norm, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-hilbert-space-fourier-expansion]
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -40,7 +40,7 @@ No Hilbert tensor-product identification is used anywhere.
 
 ## Facts & Assumptions
 
-[A1] On the product measure $m_{\mathbb T^n}$ Fubini's theorem computes iterated integrals of $L^1$ functions, and for a product of functions $h(x)=\prod_jh_j(x_j)$ with each $h_j\in L^1(m_{\mathbb T})$ the integral is the product $\prod_j\int h_j\,dm_{\mathbb T}$, by applying Fubini one coordinate at a time; each character has modulus one, so $e_k\overline{e_l}$ is bounded and hence in $L^1$ ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[def-the-one-dimensional-torus-and-normalized-haar-integral]]).
+[A1] On the product measure $m_{\mathbb T^n}$ Fubini's theorem computes iterated integrals of $L^1$ functions, and for a product of functions $h(x)=\prod_jh_j(x_j)$ with each $h_j\in L^1(m_{\mathbb T})$ the integral is the product $\prod_j\int h_j\,dm_{\mathbb T}$, by applying Fubini one coordinate at a time; each character has modulus one, so $e_k\overline{e_l}$ is bounded and hence in $L^1$. In one dimension, the character family is orthonormal ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[def-the-one-dimensional-torus-and-normalized-haar-integral]], [[lem-trigonometric-characters-are-orthonormal]]).
 
 [A2] $\mathbb T^n$ is compact Hausdorff and its coordinate characters separate points ([[lem-finite-tori-are-compact-hausdorff-character-spaces]]).
 

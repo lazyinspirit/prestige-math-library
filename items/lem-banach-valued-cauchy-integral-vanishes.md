@@ -43,7 +43,15 @@ step supplied by [[cor-dual-separates-points]].
 
 [L1] For $p \notin \Gamma^\ast$ one has $\int_\Gamma dz/(z-p) = 2\pi i\,n(\Gamma,p)$, and $\int_\Gamma g\,dz = \sum_k m_k\int_{\gamma_k}g\,dz$ for every $g$ continuous on $\Gamma^\ast$; integrals over chains are additive ([[def-banach-algebra-valued-contour-integral]], [[def-integration-and-index-of-complex-chain]]).
 
-[L2] For a bounded linear $\varphi : A \to \mathbb C$ and every $f$ continuous on $\Gamma^\ast$, $\varphi\bigl(\int_\Gamma f\,dz\bigr) = \int_\Gamma (\varphi\circ f)\,dz$ ([[lem-contour-integral-commutes-with-bounded-linear-maps]]).
+[L2] For a bounded linear $\varphi:A\to\mathbb C$ and a single contour
+$\gamma$, bounded linearity commutes with the contour integral
+([[lem-contour-integral-commutes-with-bounded-linear-maps]]). Hence for the
+finite chain $\Gamma=\sum_{k<r}m_k\gamma_k$ and every $f$ continuous on its
+trace,
+$$\varphi\!\left(\int_\Gamma f\,dz\right)
+=\sum_{k<r}m_k\varphi\!\left(\int_{\gamma_k}f\,dz\right)
+=\int_\Gamma(\varphi\circ f)\,dz,$$
+by the chain-integral definition in [L1].
 
 [L3] If $\Omega \subseteq \mathbb C$ is open, $g : \Omega \to \mathbb C$ is holomorphic, and $\Gamma$ is a complex chain which is a cycle with trace in $\Omega$ and null-homologous in $\Omega$, then $\int_\Gamma g\,dz = 0$ ([[cor-global-cauchy-theorem-homology]]).
 

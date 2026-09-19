@@ -5,7 +5,7 @@ title: All integer multiples of a root are roots
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional, thm-root-string-property, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two]
+deps: [cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root, thm-root-string-property, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-special-linear-lie-algebra-sl-two]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -25,7 +25,7 @@ multiple $k\alpha$ with $k\in\mathbb Z$ is again a root.
 
 ## Facts & Assumptions
 
-**Given:** For a root $\alpha$ the only scalar multiples of $\alpha$ that are roots are $\pm\alpha$ ([[cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root]]), and in particular $2\alpha$ is not a root ([[thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional]]); the root-string property describes the roots of the form $\beta+k\alpha$ ([[thm-root-string-property]]). The root spaces are the eigenspaces of [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], and $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ is the Lie algebra of [[def-special-linear-lie-algebra-sl-two]].
+**Given:** For a root $\alpha$ the only scalar multiples of $\alpha$ that are roots are $\pm\alpha$, so in particular $2\alpha$ is not a root ([[cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root]]); the root-string property describes the roots of the form $\beta+k\alpha$ ([[thm-root-string-property]]). The root spaces are the eigenspaces of [[def-root-and-root-space-relative-to-a-cartan-subalgebra]], and $\mathfrak{sl}_2(\mathbb C)=\mathbb Ch\oplus\mathbb Ce\oplus\mathbb Cf$ is the Lie algebra of [[def-special-linear-lie-algebra-sl-two]].
 
 ## Refutation
 

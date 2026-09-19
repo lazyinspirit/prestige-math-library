@@ -5,7 +5,7 @@ title: "Relative compactness with respect to an operator"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-relative-boundedness-with-respect-to-an-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-compact-linear-operator, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, thm-self-adjoint-resolvent-estimate, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-schauder-compact-adjoint-theorem]
+deps: [def-relative-boundedness-with-respect-to-an-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-compact-linear-operator, lem-compositions-with-a-compact-operator-are-compact, lem-linear-combinations-of-compact-operators-are-compact, thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences, thm-self-adjoint-resolvent-estimate, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-schauder-compact-adjoint-theorem, def-axiom-of-choice]
 proof_strategy: not-applicable
 provenance:
   statement: ai-altered
@@ -22,7 +22,7 @@ sources:
 
 ## Definition
 
-Let $A$ be a self-adjoint operator and let $B$ be defined on $D(A)$ and bounded
+Assume the Axiom of Choice. Let $A$ be a self-adjoint operator and let $B$ be defined on $D(A)$ and bounded
 for the graph norm of $A$ ([[def-relative-boundedness-with-respect-to-an-operator]]).
 Then $B$ is **$A$-compact**, or **relatively compact with respect to $A$**,
 when $BR_A(z)\in\mathcal K(H)$ is a compact operator

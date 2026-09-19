@@ -30,9 +30,9 @@ first three members are
 
 $$e_0=\frac{1}{\sqrt 2},\qquad e_1=\sqrt{\frac32}\,x,\qquad e_2=\sqrt{\frac58}\,(3x^2-1).$$
 
-The classical Legendre polynomials $P_n$ are the unnormalised multiples with
-$P_n(1)=1$ and $\|P_n\|_2^2=2/(2n+1)$; they are not the normalised family
-displayed here.
+The corresponding unnormalised polynomials with value $1$ at $x=1$ are
+$P_0=1$, $P_1=x$, and $P_2=(3x^2-1)/2$, the first three classical Legendre
+polynomials. No general formula for $P_n$ or its norm is asserted here.
 
 ## Facts & Assumptions
 
@@ -58,4 +58,4 @@ displayed here.
 
 3.1 Third element: $v_2=x^2-\langle x^2,e_0\rangle e_0-\langle x^2,e_1\rangle e_1$ with $\langle x^2,e_1\rangle=\sqrt{\frac32}\int_{-1}^1x^3\,dx=0$ and $\langle x^2,e_0\rangle=\frac{1}{\sqrt2}\int_{-1}^1x^2\,dx=\frac{1}{\sqrt2}\cdot\frac23$, so $v_2=x^2-\frac13$; its squared norm is $\int_{-1}^1(x^2-\frac13)^2dx=\bigl[x^5/5-\frac29x^3+\frac19x\bigr]_{-1}^1=\frac25-\frac49+\frac29=\frac{8}{45}$, giving $e_2=\sqrt{45/8}\,(x^2-\frac13)=\sqrt{5/8}\,(3x^2-1)$. [step 1.2, step 2.1, A1, A3, algebra]
 
-4.1 Therefore the Gram–Schmidt family of the monomials is a complete orthonormal family of $L^2([-1,1])$ beginning with $1/\sqrt2$, $\sqrt{3/2}\,x$ and $\sqrt{5/8}\,(3x^2-1)$, and the displayed members are unit vectors, whereas the classical Legendre polynomials differ from them by the normalising constants $P_n(1)=1$. [step 1.1, step 1.2, step 2.1, step 3.1] ∎
+4.1 Therefore the Gram–Schmidt family of the monomials is a complete orthonormal family of $L^2([-1,1])$ beginning with $1/\sqrt2$, $\sqrt{3/2}\,x$ and $\sqrt{5/8}\,(3x^2-1)$. Rescaling these three displayed unit vectors to have value $1$ at $x=1$ gives $P_0=1$, $P_1=x$, and $P_2=(3x^2-1)/2$. [step 1.1, step 1.2, step 2.1, step 3.1, algebra] ∎

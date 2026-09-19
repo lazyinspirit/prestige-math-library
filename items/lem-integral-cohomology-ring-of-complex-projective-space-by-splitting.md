@@ -47,7 +47,7 @@ $\mathbb C^{m+1}\subseteq\mathbb C^{N+1}$, pulls $x$ back to $x$.
 
 [F6] The homology of spheres is $H_0(S^m;\mathbb Z)=\mathbb Z=H_m(S^m;\mathbb Z)$ for $m\geq1$ and zero otherwise, with supplied positive generators ([[cor-homology-of-spheres]]).
 
-[F7] For a PID $R$ and any space there is a natural short exact sequence $0\to H^n(X;R)\otimes S\to H^n(X;S)\to\operatorname{Tor}(H^{n+1}(X;R),S)\to0$, and $H^0$ of a path-connected space is $\mathbb Z$ ([[thm-universal-coefficient-theorem-for-cohomology-over-a-pid]], [[def-singular-cohomology-with-coefficients]]).
+[F7] For a free chain complex over the PID $\mathbb Z$ and coefficient group $G$, the universal-coefficient sequence is $0\to\operatorname{Ext}^1(H_{n-1},G)\to H^n\to\operatorname{Hom}(H_n,G)\to0$; also $H^0$ of a path-connected space is $\mathbb Z$ ([[thm-universal-coefficient-theorem-for-cohomology-over-a-pid]], [[def-singular-cohomology-with-coefficients]]).
 
 ## Proof
 

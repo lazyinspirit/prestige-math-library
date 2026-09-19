@@ -27,7 +27,7 @@ notions of size are independent.
 
 **Given:** AC and a standard Brownian motion $B$ with zero set $Z$.
 
-[F1] Almost surely $\lambda(Z\cap[0,T])=0$ for every $T<\infty$. [[lem-brownian-zero-set-has-lebesgue-measure-zero]]
+[F1] For each fixed $T<\infty$, almost surely $\lambda(Z\cap[0,T])=0$. [[lem-brownian-zero-set-has-lebesgue-measure-zero]]
 
 [F2] Almost surely $Z\cap[0,T]$ is uncountable for every $T>0$. [[cor-brownian-zero-set-is-uncountable]]
 
@@ -39,11 +39,11 @@ notions of size are independent.
 
 **Proof technique:** direct.
 
-1.1 Intersecting the probability-one events of [F1] over integer horizons and the probability-one event of [F2] gives a single probability-one event on which both conclusions hold for every integer horizon; for an arbitrary $T>0$, choosing an integer $N\ge T$ gives $\lambda(Z\cap[0,T])\le\lambda(Z\cap[0,N])=0$ and $Z\cap[0,T]\supseteq Z\cap[0,N']$ for any integer $N'\le T$, which is uncountable whenever such an $N'$ with $Z\cap[0,N']$ uncountable exists, since [F2] provides uncountability for every positive horizon. [F1, F2]
+1.1 Intersecting the probability-one events supplied by [F1] for the positive integer horizons with the single probability-one event of [F2] gives a probability-one event on which nullity holds at every positive integer horizon and uncountability holds at every positive horizon.  For arbitrary $T>0$, choose an integer $N\ge T$; then $\lambda(Z\cap[0,T])\le\lambda(Z\cap[0,N])=0$, while uncountability of $Z\cap[0,T]$ follows directly from [F2]. [F1, F2]
 
 2.1 On that event the set $Z\cap[0,T]$ is closed by [F3] and compact, uncountable by [step 1.1], and null by [step 1.1]; the two properties are not in tension because uncountability imposes no lower bound on Lebesgue measure, as the Cantor set shows in the deterministic setting. [step 1.1, F3]
 
-3.1 The cases are covered: the horizon is positive and finite, and the statements for all horizons are obtained from countably many integer horizons; the point $0$ belongs to $Z$ and to every truncated set but is a singleton of measure zero; the uncountability concerns $Z\cap[0,T]$ and not just $Z$; and AC enters only through [F4]. [step 2.1, F4, given] ∎
+3.1 The cases are covered: the horizon is positive and finite; simultaneous nullity for all horizons is obtained from the countable integer exhaustion, whereas simultaneous uncountability for all positive horizons is exactly [F2]; the point $0$ belongs to $Z$ and to every truncated set but is a singleton of measure zero; and AC enters only through [F4]. [step 2.1, F4, given] ∎
 
 ## Source notes
 

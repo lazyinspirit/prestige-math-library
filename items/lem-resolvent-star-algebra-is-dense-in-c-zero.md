@@ -36,7 +36,7 @@ $\overline z$.
 
 [A2] Let $X$ be a compact Hausdorff space and let $B\subseteq C(X,\mathbb C)$ be a self-adjoint complex function algebra containing the constants, separating points, with no common zero. Then $B$ is uniformly dense in $C(X,\mathbb C)$ ([[thm-complex-stone-weierstrass-self-adjoint]]).
 
-[A3] With $D_z:=R_A(z)-R_{A'}(z)$ for self-adjoint $A,A'$ and nonreal $z$, the resolvent identity gives $D_{z'}=[I+(z'-z)R_A(z)]^{-1}D_z[I-(z'-z)R_{A'}(z')]$ for nonreal $z'$, the first factor being $I+(z-z')R_A(z')$ and the second $I+(z-z')R_{A'}(z')$; both outer factors are resolvents at $z'$ and are bounded with norms at most $1+|z'-z|/|\operatorname{Im}z'|$ ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], [[thm-self-adjoint-resolvent-estimate]], [[def-norm-and-strong-resolvent-convergence]]).
+[A3] With $D_z:=R_A(z)-R_{A'}(z)$ for self-adjoint $A,A'$ and nonreal $z$, the resolvent identity gives $D_{z'}=[I+(z'-z)R_A(z)]^{-1}D_z[I-(z'-z)R_{A'}(z')]$ for nonreal $z'$, the first factor being $I+(z-z')R_A(z')$ and the second $I+(z-z')R_{A'}(z')$; these affine transforms of resolvents are bounded with norms at most $1+|z'-z|/|\operatorname{Im}z'|$ ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], [[thm-self-adjoint-resolvent-estimate]], [[def-norm-and-strong-resolvent-convergence]]).
 
 ## Proof
 

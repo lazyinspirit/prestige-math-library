@@ -5,7 +5,7 @@ title: The graded Chern character respects relative maps and skeletal filtration
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-graded-chern-character-by-suspension-and-bott-periodicity, prop-reduced-and-unreduced-generalized-cohomology-theories-correspond, def-skeletal-filtration-for-generalized-cohomology, thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, cor-complex-k-theory-ahss, def-axiom-of-choice]
+deps: [def-graded-chern-character-by-suspension-and-bott-periodicity, prop-reduced-and-unreduced-generalized-cohomology-theories-correspond, def-skeletal-filtration-for-generalized-cohomology, thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory, prop-singular-cohomology-is-contravariantly-functorial, cor-singular-cohomology-is-homotopy-invariant, thm-long-exact-sequence-of-a-pair-in-singular-cohomology, thm-excision-for-singular-cohomology, def-axiom-of-choice]
 proof_strategy: direct
 axiom_strength: "ZF + AC; inherited from complex K-theory."
 provenance:
@@ -43,7 +43,7 @@ $$\operatorname{ch}\bigl(F^pK^j(X)\bigr)\subseteq F^pH^{j}(X;\mathbb Q).$$
 
 [F4] Complex K-theory is a two-periodic generalized cohomology theory on finite CW pairs, with natural cofiber sequences and suspension isomorphisms ([[thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory]]).
 
-[F5] The singular cohomology of a finite CW complex likewise satisfies the cohomology axioms, so the shifted sum $\bigoplus_kH^{j+2k}(-;\mathbb Q)$ is a two-periodic generalized cohomology theory ([[cor-complex-k-theory-ahss]]).
+[F5] Singular cohomology is contravariantly functorial and homotopy invariant and has natural pair long exact sequences and excision. Its cochains turn disjoint unions into products, so these properties make $H^*(-;\mathbb Q)$ a CW-pair cohomology theory; finite direct sums of its even shifts therefore give the two-periodic theory $h^j(-)=\bigoplus_kH^{j+2k}(-;\mathbb Q)$ ([[prop-singular-cohomology-is-contravariantly-functorial]], [[cor-singular-cohomology-is-homotopy-invariant]], [[thm-long-exact-sequence-of-a-pair-in-singular-cohomology]], [[thm-excision-for-singular-cohomology]], [[prop-reduced-and-unreduced-generalized-cohomology-theories-correspond]]).
 
 ## Proof
 

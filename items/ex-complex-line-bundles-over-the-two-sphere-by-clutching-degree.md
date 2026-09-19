@@ -54,13 +54,13 @@ complex line bundles over $S^2$.
 
 1.1 Multiplication of clutching functions corresponds to tensor product: $E_g\otimes E_h\cong E_{gh}$, because the transition functions multiply in the clutching convention; in particular $E_d\otimes E_{d'}\cong E_{d+d'}$ and $E_{-d}\cong E_d^*$, since $z^{-d}=(z^d)^{-1}$ and dualizing inverts transition functions. [F1, F5, given]
 
-1.2 The class $u=c_1(E_1)$ is nonzero, hence a generator of $H^2(S^2;\mathbb Z)\cong\mathbb Z$: the bundle $E_1=\gamma$ is clutched by the degree-one map $z\mapsto z$, which is not nullhomotopic by [F4] and [F1], so $E_1$ is nontrivial, and by the isomorphism [F2] its first Chern class cannot vanish. [F1, F2, F3, F4]
+2.1 The class $u=c_1(E_1)$ is a generator of $H^2(S^2;\mathbb Z)\cong\mathbb Z$. By [F1] and [F4], clutching identifies the isomorphism classes of complex lines with $\mathbb Z$, with $E_1$ corresponding to $1$. Step 1.1 shows that this bijection carries addition of degrees to tensor product, so $E_1$ generates the Picard group. The group isomorphism $c_1$ of [F2] therefore carries $E_1$ to a generator $u$ of cohomology. By [F3] this is the tautological Hopf line in the fixed convention. [F1, F2, F3, F4, step 1.1]
 
-2.1 For $d\geq0$, iterating step 1.1 and additivity [F2] gives $c_1(E_d)=d\,c_1(E_1)=d\,u$; for $d<0$, $E_d\cong E_{|d|}^*$ by step 1.1 and the dual formula of [F5] gives $c_1(E_d)=-|d|u=d\,u$. [F2, F5, step 1.1, step 1.2]
+3.1 For $d\geq0$, iterating step 1.1 and additivity [F2] gives $c_1(E_d)=d\,c_1(E_1)=d\,u$; for $d<0$, $E_d\cong E_{|d|}^*$ by step 1.1 and the dual formula of [F5] gives $c_1(E_d)=-|d|u=d\,u$. [F2, F5, step 1.1, step 2.1]
 
-3.1 The pairing with the fundamental class: by step 1.2 the class $u$ generates $H^2(S^2;\mathbb Z)$, so there is a unique orientation $[S^2]$ with $\langle u,[S^2]\rangle=+1$; this is the Hopf normalization of the statement, and then $\langle c_1(E_d),[S^2]\rangle=d$ by step 2.1. [step 2.1]
+4.1 The pairing with the fundamental class: by step 2.1 the class $u$ generates $H^2(S^2;\mathbb Z)$, so there is a unique orientation $[S^2]$ with $\langle u,[S^2]\rangle=+1$; this is the Hopf normalization of the statement, and then $\langle c_1(E_d),[S^2]\rangle=d$ by step 3.1. [step 3.1]
 
-4.1 Boundary cases. For $d=0$ the clutching map is constant, $E_0$ is trivial and $c_1=0=0\cdot u$. For $d=1$ we have $c_1(E_1)=u$ by definition; for $d=-1$ the bundle is the dual of the Hopf line and $c_1=-u$. Negative exponents are covered by the dual computation in step 2.1 and by [F4], which includes $d<0$. The coefficient ring $\mathbb Z$ is nonzero, so a nonzero multiple $d\cdot u$ of a generator is nonzero exactly when $d\neq0$, giving the claimed classification. AC is used only through [A1]. [A1, F1, F4, step 2.1] ∎
+5.1 Boundary cases. For $d=0$ the clutching map is constant, $E_0$ is trivial and $c_1=0=0\cdot u$. For $d=1$ we have $c_1(E_1)=u$ by definition; for $d=-1$ the bundle is the dual of the Hopf line and $c_1=-u$. Negative exponents are covered by the dual computation in step 3.1 and by [F4], which includes $d<0$. The coefficient ring $\mathbb Z$ is nonzero, so a nonzero multiple $d\cdot u$ of a generator is nonzero exactly when $d\neq0$, giving the claimed classification. AC is used only through [A1]. [A1, F1, F4, step 3.1] ∎
 
 ## Source notes
 
