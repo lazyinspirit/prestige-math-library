@@ -5,7 +5,7 @@ title: Low-rank Dynkin coincidences
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-classical-root-systems-in-euclidean-coordinates, ex-root-system-a-one, ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras]
+deps: [ex-classical-root-systems-in-euclidean-coordinates, ex-root-system-a-one, prop-root-systems-of-the-classical-complex-lie-algebras]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -32,7 +32,7 @@ $$B_1=C_1=A_1,\qquad B_2=C_2,\qquad D_2=A_1\sqcup A_1,\qquad D_3=A_3 .$$
 
 [L1] The set $\{\pm\alpha\}$ in a Euclidean line is the root system $A_1$ ([[ex-root-system-a-one]]).
 
-[L2] The coordinate root systems $B_2$ and $C_2$ are isomorphic: an explicit orthogonal transformation followed by a uniform rescaling carries one root set to the other ([[ex-root-systems-b-two-and-c-two-from-matrix-lie-algebras]]).
+[L2] The coordinate root systems $B_2$ and $C_2$ are isomorphic: an explicit orthogonal transformation followed by a uniform rescaling carries one root set to the other ([[prop-root-systems-of-the-classical-complex-lie-algebras]]).
 
 [L3] In the classical coordinate models,
 $$D_n=\{\pm e_i\pm e_j:1\le i<j\le n\}.$$

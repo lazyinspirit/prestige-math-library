@@ -25,13 +25,13 @@ $K$ be real or complex Hilbert spaces ([[def-hilbert-space]]), let
 $T\in\mathcal B(H,K)$ be a compact operator
 ([[def-compact-linear-operator]]), let $|T|$ and the singular values $s_n(T)$ be
 as in the absolute-value definition
-([[def-absolute-value-and-singular-values-of-a-compact-operator]]), and put
-$$r:=\dim\operatorname{ran}T\in\mathbb N\cup\{\infty\}$$
-([[def-dimension]]), so that $r$ is also the number of positive singular values
-counted with multiplicity. Let
-$$J:=\begin{cases}\{1,\dots,r\},&r<+\infty,\\ \mathbb N,&r=+\infty,\\ \varnothing,&T=0,\end{cases}$$
-the empty case occurring only for $r=0$. Index the positive singular values
-with multiplicity as $(s_j)_{j\in J}$ in nonincreasing order. Then:
+([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Let
+$J=\{1,2,3,\ldots\}$ when $\operatorname{ran}T$ is infinite-dimensional. When
+$\operatorname{ran}T$ is finite-dimensional, put
+$r:=\dim\operatorname{ran}T\in\mathbb N$ ([[def-dimension]]) and let
+$J=\{1,\dots,r\}$, interpreted as $\varnothing$ when $r=0$. Thus $J$ indexes
+exactly the positive singular values counted with multiplicity, which we write
+as $(s_j)_{j\in J}$ in nonincreasing order. Then:
 
 1. there are orthonormal families $(e_j)_{j\in J}$ in $(\ker T)^\perp$ and
    $(f_j)_{j\in J}$ in $\overline{\operatorname{ran}T}$, indexed by exactly $J$,
@@ -54,9 +54,9 @@ with multiplicity as $(s_j)_{j\in J}$ in nonincreasing order. Then:
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, compact $T:H\to K$, its absolute value $|T|$, the rank $r=\dim\operatorname{ran}T$, the index set $J$ of the positive singular values with multiplicity, and the zero-padded sequence $(s_n(T))$.
+**Given:** Countable Choice, compact $T:H\to K$, its absolute value $|T|$, the index set $J$ of the positive singular values with multiplicity, the finite dimension $r=\dim\operatorname{ran}T$ when the range is finite-dimensional, and the zero-padded sequence $(s_n(T))$.
 
-[A1] **Absolute value and rank.** $|T|$ is compact, self-adjoint and positive with $|T|^2=T^*T$, $\||T|x\|=\|Tx\|$ and $\ker|T|=\ker T$; the positive singular values with multiplicity are the positive eigenvalues of $|T|$ with multiplicity; they are finite in number exactly when $r<+\infty$, that is in the finite-rank case, and the index set $J$ is at most countable; the map $\Phi:\operatorname{ran}|T|\to\operatorname{ran}T$, $\Phi(|T|x)=Tx$, is an isometric linear bijection, so $\dim\operatorname{ran}|T|=\dim\operatorname{ran}T=r$ ([[def-absolute-value-and-singular-values-of-a-compact-operator]], [[def-dimension]]).
+[A1] **Absolute value and finite rank.** $|T|$ is compact, self-adjoint and positive with $|T|^2=T^*T$, $\||T|x\|=\|Tx\|$ and $\ker|T|=\ker T$; the positive singular values with multiplicity are the positive eigenvalues of $|T|$ with multiplicity. They are finite in number exactly when $\operatorname{ran}T$ is finite-dimensional, and otherwise form a countably infinite list. In the finite-dimensional case the isometric linear bijection $\Phi:\operatorname{ran}|T|\to\operatorname{ran}T$, $\Phi(|T|x)=Tx$, gives $\dim\operatorname{ran}|T|=\dim\operatorname{ran}T=r$ ([[def-absolute-value-and-singular-values-of-a-compact-operator]], [[def-dimension]]). No value $\dim V=\infty$ is used.
 
 [A2] **Spectral theorem for $|T|$.** The nonzero eigenvalues of $|T|$ are positive, have finite-dimensional eigenspaces $E_\lambda$, are mutually orthogonal across distinct $\lambda$, and their closed span is $(\ker|T|)^\perp=\overline{\operatorname{ran}|T|}$; moreover $\ker|T|=\ker T$ and $H=(\ker T)^\perp\oplus\ker T$, so the closed span of the eigenspaces is $(\ker T)^\perp$ ([[thm-spectral-theorem-for-compact-self-adjoint-operators]], [[lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal]], [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]], [[def-orthogonality-and-orthogonal-complement]], [[thm-orthogonal-decomposition-by-a-closed-subspace]]).
 
@@ -70,7 +70,7 @@ with multiplicity as $(s_j)_{j\in J}$ in nonincreasing order. Then:
 
 **Proof technique:** direct.
 
-**Given:** Countable Choice, the compact $T$, its absolute value $|T|$, the rank $r$, the index set $J$ and the singular values $s_j$, and the eigenspaces $E_\lambda$ of $|T|$ for positive eigenvalues $\lambda$.
+**Given:** Countable Choice, the compact $T$, its absolute value $|T|$, the index set $J$ and the singular values $s_j$, the finite integer $r$ when $\operatorname{ran}T$ is finite-dimensional, and the eigenspaces $E_\lambda$ of $|T|$ for positive eigenvalues $\lambda$.
 
 1.1 **Choosing the left system.** By [A2] the positive eigenvalues of $|T|$ are precisely the positive singular values with multiplicity, and their eigenspaces are finite-dimensional with closed span $(\ker T)^\perp$; listing those eigenvalues with multiplicity as $(s_j)_{j\in J}$ and choosing by [A5] an orthonormal basis of each $E_\lambda$ gives an orthonormal family $(e_j)_{j\in J}$ with $|T|e_j=s_je_j$ for every $j$, whose closed linear span is $(\ker T)^\perp$, and the terms $s_j>0$ are in nonincreasing order. [A1, A2, A3, A5]
 
@@ -82,4 +82,4 @@ with multiplicity as $(s_j)_{j\in J}$ in nonincreasing order. Then:
 
 5.1 **The partial isometry and $T=U|T|$.** Define $U$ first on the linear span $V$ of $\{e_j:j\in J\}$ by $U(\sum_{j\in F}c_je_j):=\sum_{j\in F}c_jf_j$ for finite $F$. This is well defined because $(e_j)$ is linearly independent as an orthonormal family, and it is isometric, since by [step 2.1] $\|\sum c_jf_j\|^{2}=\sum|c_j|^{2}=\|\sum c_je_j\|^{2}$; by [step 1.1] the closure of $V$ is $(\ker T)^\perp$, so $U$ extends uniquely to a bounded linear operator, still denoted $U$, on $(\ker T)^\perp$ with $\|Um\|=\|m\|$ for all $m\in(\ker T)^\perp$ and $U((\ker T)^\perp)=\overline{\operatorname{span}}\{f_j\}=\overline{\operatorname{ran}T}$ by [step 4.1]. Extend $U$ to $H=(\ker T)^\perp\oplus\ker T$ by $U=0$ on $\ker T$; then $U$ is bounded and, because $|T|$ is self-adjoint with $|T|e_j=s_je_j$, $U|T|e_j=Us_je_j=s_jf_j=Te_j$ for every $j$ and $U|T|=0=T$ on $\ker T=|T|^{-1}(0)$ [A1], so $U|T|=T$ by continuity on the closed span of $\ker T$ and the $e_j$, which is $H$ by [A2]. Finally $U^*U$ and $UU^*$: for $x,y\in H$ one has $\langle Ux,Uy\rangle=\langle Px,Py\rangle$ where $P$ is the orthogonal projection onto $(\ker T)^\perp$, because $U$ is isometric on $(\ker T)^\perp$ and vanishes on $\ker T$, so $\langle U^*Ux,y\rangle=\langle Px,y\rangle$ and $U^*U=P$; dually, for $y\in K$ the vector $U^*y\in(\ker T)^\perp$ is characterised by $\langle U^*y,z\rangle=\langle y,Uz\rangle$ for all $z\in(\ker T)^\perp$, so $UU^*y=y$ for $y\in\overline{\operatorname{ran}T}$ and $UU^*y=0$ for $y\perp\overline{\operatorname{ran}T}$, that is $UU^*$ is the orthogonal projection onto $\overline{\operatorname{ran}T}$. [step 1.1, step 2.1, step 4.1, A1, A2, A4]
 
-6.1 **Conclusion.** Claim 1 is [step 1.1] and [step 2.1]; claim 2 is [step 3.1], whose index set is $J$ by construction; claim 3 is [step 5.1] together with [step 4.1]. Claim 4 is the indexing discipline used throughout: $J$ indexes the positive singular values with multiplicity and is $\varnothing$ only for $T=0$ (then also $r=0$), finite only for $r<+\infty$; the vanishing terms $s_n(T)=0$ with $n>r$ are numerical padding and index no vector. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, A1] ∎
+6.1 **Conclusion.** Claim 1 is [step 1.1] and [step 2.1]; claim 2 is [step 3.1], whose index set is $J$ by construction; claim 3 is [step 5.1] together with [step 4.1]. Claim 4 is the indexing discipline used throughout: $J$ indexes the positive singular values with multiplicity and is $\varnothing$ only for $T=0$, when the finite dimension is $r=0$; it is finite exactly when the range is finite-dimensional. In that case the vanishing terms $s_n(T)=0$ with $n>r$ are numerical padding and index no vector. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, A1] ∎

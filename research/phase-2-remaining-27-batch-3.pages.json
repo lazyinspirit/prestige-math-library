@@ -1123,7 +1123,7 @@
         "id": "thm-singular-value-decomposition-for-compact-operators",
         "kind": "theorem",
         "title": "Singular value decomposition for compact operators",
-        "statement": "Assume the Axiom of Countable Choice. For compact T:H→K, index the positive singular values as (s_n) over 1≤n≤r when rank T=r<∞, over n∈N when T has infinite rank, and by the empty family when T=0. There are orthonormal systems (e_n) in (ker T)^⊥ and (f_n) in closure(ran T), with exactly that index set, such that Tx=Σ_ns_n⟨x,e_n⟩f_n in norm. The map Ue_n=f_n extends by zero on ker T to a partial isometry and T=U|T|. The separate singular-value sequence remains zero-padded after rank r.",
+        "statement": "Assume the Axiom of Countable Choice. For compact T:H→K, index the positive singular values as (s_n) over 1≤n≤r when ran T is finite-dimensional of dimension r, over the positive integers when ran T is infinite-dimensional, and by the empty family when T=0. There are orthonormal systems (e_n) in (ker T)^⊥ and (f_n) in closure(ran T), with exactly that index set, such that Tx=Σ_ns_n⟨x,e_n⟩f_n in norm. The map Ue_n=f_n extends by zero on ker T to a partial isometry and T=U|T|. The separate singular-value sequence remains zero-padded after finite rank r.",
         "deps": [
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "lem-positive-square-root-of-a-compact-positive-operator",
@@ -1374,6 +1374,7 @@
           "def-trace-class-operator",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
           "thm-singular-value-decomposition-for-compact-operators",
+          "lem-positive-square-root-of-a-compact-positive-operator",
           "thm-hilbert-schmidt-operators-form-a-two-sided-ideal",
           "thm-hilbert-schmidt-operators-are-compact",
           "thm-hilbert-schmidt-norm-is-basis-independent",
@@ -1394,7 +1395,7 @@
           "def-dimension",
           "def-countable-choice"
         ],
-        "strategy": "For trace-class T=U|T| define C=|T|^{1/2} on its singular system and take B=C, A=UC; squared HS norms are Σs_n. Conversely AB is compact. For its first n singular pairs, Σs_j=Σ⟨Be_j,A*f_j⟩; finite Cauchy–Schwarz and HS bounds on orthonormal families give ≤||B||_HS||A*||_HS. Take sup n and use adjoint invariance.",
+        "strategy": "For trace-class T=U|T| apply the compact-positive square-root lemma to obtain C=|T|^{1/2}, then take B=C, A=UC; squared HS norms are Σs_n. Conversely AB is compact. For its first n singular pairs, Σs_j=Σ⟨Be_j,A*f_j⟩; finite Cauchy–Schwarz and HS bounds on orthonormal families give ≤||B||_HS||A*||_HS. Take sup n and use adjoint invariance.",
         "axiom_audit": "AC_omega is inherited from SVD and the imported Hilbert–Schmidt results. Estimating interchanges are finite.",
         "provenance": {
           "statement": "literature-derived",
@@ -1464,6 +1465,8 @@
           "lem-nuclear-series-characterizes-trace-norm",
           "def-trace-class-operator",
           "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
           "thm-hilbert-schmidt-operators-form-a-two-sided-ideal",
           "thm-hilbert-adjoint-properties",
           "def-operator-norm",
@@ -1479,7 +1482,7 @@
           "def-countable-choice",
           "def-square-summable-family-on-an-arbitrary-index-set"
         ],
-        "strategy": "Rank-one norms and the nuclear infimum give operator norm, triangle, and ideal bounds. For a trace-norm Cauchy sequence choose a subsequence with summable differences and near-minimizing nuclear representations, concatenate them to build the operator-norm limit, and prove trace-norm convergence; then recover the whole sequence.",
+        "strategy": "Rank-one norms and the nuclear infimum give operator norm, triangle, and ideal bounds, with compactness established in each converse use by finite-rank partial sums and the norm-limit theorem. For a trace-norm Cauchy sequence choose a subsequence with summable differences and near-minimizing nuclear representations, flatten them to build a compact operator-norm limit, and prove trace-norm convergence; then recover the whole sequence.",
         "axiom_audit": "AC_omega supplies the needed countable selections of a fast subsequence and near-minimizing nuclear series; no stronger use occurs.",
         "provenance": {
           "statement": "literature-derived",
@@ -1565,7 +1568,7 @@
           "def-countable",
           "def-countable-choice"
         ],
-        "strategy": "A nuclear representation R=(u_j,v_j) gives an absolutely convergent scalar tau_R=Σ_j⟨v_j,u_j⟩ because |⟨v_j,u_j⟩|≤||u_j||||v_j||. To compare two representations R and R', let K be the closed span of the union of their four countable support families {u_j,v_j,u'_j,v'_j}. Pad a finite or empty family by zeros and explicitly enumerate all finite rational-complex linear combinations of that combined sequence, including the constant zero sequence when K={0}; this is a supplied countable dense sequence in K. The separable-Hilbert supplier therefore constructs a finite or countable Hilbert basis F of K without choosing a basis of the ambient space. Both representations show that T maps K into K and vanishes on K-perp. For either representation, Bessel and Cauchy–Schwarz give Σ_jΣ_{f in F}|⟨f,u_j⟩⟨v_j,f⟩|≤Σ_j||u_j||||v_j||, so absolute convergence permits interchange; first-variable-linear Parseval in K gives Σ_{f in F}⟨Tf,f⟩=Σ_j⟨v_j,u_j⟩. Applying this to R and R' proves tau_R=tau_R'. Nuclear existence then gives a unique scalar tr(T). For any supplied ambient Hilbert basis E, the same absolutely convergent double-sum calculation and Parseval in H give tr_E(T)=Σ_j⟨v_j,u_j⟩=tr(T); no existence of E is asserted. The estimate |tr(T)|≤Σ_j||u_j||||v_j|| for every representation and the nuclear infimum give |tr(T)|≤||T||_1. Finally, concatenate chosen nuclear representations of S and T after multiplying the v-vectors by the two scalars; representation independence then proves tr(aS+bT)=a tr(S)+b tr(T).",
+        "strategy": "A nuclear representation R=(u_j,v_j) gives an absolutely convergent scalar tau_R=Σ_j⟨v_j,u_j⟩ because |⟨v_j,u_j⟩|≤||u_j||||v_j||. To compare two representations R and R', let K be the closed span of the union of their four countable support families {u_j,v_j,u'_j,v'_j}. Pad a finite or empty family by zeros and explicitly enumerate all finite combinations over Q in the real case and over Q(i) in the complex case, including the constant zero sequence when K={0}; this is a supplied countable dense sequence in K. The separable-Hilbert supplier therefore constructs a finite or countable Hilbert basis F of K without choosing a basis of the ambient space. Both representations show that T maps K into K and vanishes on K-perp. For either representation, Bessel and Cauchy–Schwarz give Σ_jΣ_{f in F}|⟨f,u_j⟩⟨v_j,f⟩|≤Σ_j||u_j||||v_j||, so absolute convergence permits interchange; first-variable-linear Parseval in K gives Σ_{f in F}⟨Tf,f⟩=Σ_j⟨v_j,u_j⟩. Applying this to R and R' proves tau_R=tau_R'. Nuclear existence then gives a unique scalar tr(T). For any supplied ambient Hilbert basis E, the same absolutely convergent double-sum calculation and Parseval in H give tr_E(T)=Σ_j⟨v_j,u_j⟩=tr(T); no existence of E is asserted. The estimate |tr(T)|≤Σ_j||u_j||||v_j|| for every representation and the nuclear infimum give |tr(T)|≤||T||_1. Finally, concatenate chosen nuclear representations of S and T after multiplying the v-vectors by the two scalars; representation independence then proves tr(aS+bT)=a tr(S)+b tr(T).",
         "axiom_audit": "AC_omega is inherited from nuclear characterization and arbitrary-index Parseval. The comparison uses only the deterministically generated countable dense sequence in the closed span of two supplied nuclear supports; the separable-Hilbert supplier constructs its basis from that sequence. No Hilbert basis of the possibly nonseparable ambient space, no simultaneous choice of representations, and no full AC are used.",
         "provenance": {
           "statement": "literature-derived",

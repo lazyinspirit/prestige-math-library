@@ -36,8 +36,7 @@ filtration-like families are distinguished.
    positive rationals, since $t\mapsto\mathcal F^0_t$ is increasing. This
    family is not adjoined to $P$.
 3. **Terminal null ideal and completed raw filtration.** Let
-   $$\mathcal N:=\{M\in\mathcal F:\text{there is }N_0\in\mathcal F^0_\infty
-   \text{ with }P(N_0)=0\text{ and }M\subseteq N_0\}$$
+   $$\mathcal N:=\{M\in\mathcal F:\text{there is }N_0\in\mathcal F^0_\infty \text{ with }P(N_0)=0\text{ and }M\subseteq N_0\}$$
    be the family of ambient-measurable subsets of $P$-null events of
    $\mathcal F^0_\infty$. Put
    $$\overline{\mathcal F}{}^0_t:=\sigma\bigl(\mathcal F^0_t\cup\mathcal N\bigr),\qquad t\ge0 .$$

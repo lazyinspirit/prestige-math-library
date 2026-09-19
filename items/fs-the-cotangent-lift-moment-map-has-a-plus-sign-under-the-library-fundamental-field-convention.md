@@ -48,6 +48,6 @@ component is $+p(\xi_Q(q))$ rather than $-p(\xi_Q(q))$. **This is false.**
 
 1.1 With the coordinates and conventions of [F1], [F2] and [F3], $\iota_{\xi_{T^*Q}}\omega_{\mathrm{can}}=\iota_{-\partial_q}(dq\wedge dp)=-dp$, so the required component function must satisfy $d\mu^1=dp$. [F2, F3]
 
-2.1 At this point both candidates can be tested directly: $d\,p=dp$, whereas $d\,(-p)=-dp$. Hence only the candidate $-p$ has the differential required by the library convention; this is exactly $-p(\xi_Q(q))$ since $\xi_Q=-1$ for $\xi=1$. [step 1.1, F2, F3]
+2.1 Distinguish the fibre coordinate $p$ from evaluation of the covector $p$ on a tangent vector. Since $\xi_Q(q)=-1$ for $\xi=1$, the tautological candidate is $-p(\xi_Q(q))=+p$, whose differential is $dp$ as required. By contrast, $+p(\xi_Q(q))=-p$ has differential $-dp$. [step 1.1, F2, F3, F4]
 
-3.1 The candidate $+p(\xi_Q(q))$ equals $-p$ in this example, and its differential is $-dp$, which would satisfy the equation $d\mu^1=+\iota_{\xi_{T^*Q}}\omega_{\mathrm{can}}$ of the opposite (positive generator) convention. It therefore fails the library sign, and the false statement is refuted. [step 2.1, F3, F4, A1] ∎
+3.1 Thus the asserted plus-sign candidate $+p(\xi_Q(q))$ fails the component moment equation, while the library's minus-sign candidate $-p(\xi_Q(q))$ satisfies it. This refutes the false statement. [step 2.1, F3, F4, A1] ∎

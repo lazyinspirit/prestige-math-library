@@ -21,9 +21,7 @@ $(Q,D,(E_n))$ be a sweetness model, and let $(A_j)_{j<\omega}$ be subsets of
 $P$ whose union is dense in $P$. Write $e:Q\to B\setminus\{0_B\}$ for the
 canonical dense completion map, and use Shelah's quotient convention
 
-$$p\Vdash_P q\in Q/P\quad\Longleftrightarrow\quad
-  \text{every }p_0\in P\text{ with }p_0\le p
-  \text{ is compatible in }B\text{ with }e(q).$$
+$$p\Vdash_P q\in Q/P\quad\Longleftrightarrow\quad \text{every }p_0\in P\text{ with }p_0\le p \text{ is compatible in }B\text{ with }e(q).$$
 
 Suppose $q\in D$ and $p\in P$ forces $q\in Q/P$. Then some $j,k<\omega$ have
 the following uniform property: for every $q'\mathrel{E_k}q$ there is

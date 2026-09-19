@@ -5,7 +5,8 @@ title: "A symmetric closed operator that is not self-adjoint"
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, lem-schwartz-cutoffs-from-the-standard-smooth-step, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-dependent-choice]
+deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, def-densely-defined-closed-and-closable-operator, def-absolutely-continuous-function, thm-integration-by-parts-for-absolutely-continuous-functions, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-dependent-choice]
+forward_refs: [lem-schwartz-cutoffs-from-the-standard-smooth-step]
 proof_strategy: direct
 provenance:
   statement: literature-derived

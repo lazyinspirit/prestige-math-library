@@ -41,7 +41,7 @@ obstruction to equivariance.
 
 **Given:** $\mathrm{AC}_\omega$, connected $G$ and $M$, an infinitesimal moment map $\mu$ for the action, and a finite-dimensional real semisimple $\mathfrak g$.
 
-[A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field and exponential interfaces cited in [F1] and [F5].
+[A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used through the moment-map, defect, and equivariance interfaces cited in [F1], [F2], and [F6].
 
 [F1] The components satisfy $d\mu^\xi=-\iota_{\xi_M}\omega$ for all $\xi$. [[def-moment-map-and-component-hamiltonian]].
 

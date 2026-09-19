@@ -5,7 +5,7 @@ title: Naturality and edge maps of the AHSS
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-homological-atiyah-hirzebruch-spectral-sequence, prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences, lem-edge-maps-of-a-bounded-skeletal-ahss, thm-cellular-approximation-for-maps-of-cw-pairs, def-exact-couple]
+deps: [thm-cohomological-atiyah-hirzebruch-spectral-sequence, thm-homological-atiyah-hirzebruch-spectral-sequence, prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences, lem-edge-maps-of-a-bounded-skeletal-ahss, def-exact-couple]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -33,8 +33,6 @@ induces a morphism of the homological spectral sequences. These morphisms preser
 compatible with composition and identities.
 
 ## Facts & Assumptions
-
-[F1] Every continuous map of finite CW pairs is homotopic rel the subcomplex to a cellular map; the result does not assert that a cellular homotopy preserves every skeleton ([[thm-cellular-approximation-for-maps-of-cw-pairs]]).
 
 [F2] A morphism of exact couples induces a morphism of their derived couples and of their spectral sequences, preserving every bidegree and page transition, and this construction respects identities and composition ([[prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences]]).
 

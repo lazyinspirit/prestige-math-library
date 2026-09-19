@@ -5,7 +5,7 @@ title: The coadjoint representation, action and orbits
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-conjugation-and-the-adjoint-representation-of-a-lie-group, prop-adjoint-is-a-smooth-lie-group-representation, def-algebraic-dual-and-linear-functional, def-smooth-left-action-of-a-lie-group, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, def-lie-group]
+deps: [def-countable-choice, def-conjugation-and-the-adjoint-representation-of-a-lie-group, prop-adjoint-is-a-smooth-lie-group-representation, def-algebraic-dual-and-linear-functional, def-smooth-left-action-of-a-lie-group, def-orbit-stabilizer-and-orbit-map-of-a-smooth-action, def-lie-group, def-fundamental-vector-field-of-a-left-action, prop-adjoint-exponential-identity]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -21,6 +21,8 @@ landmark: false
 ---
 
 ## Definition
+
+Assume $\mathrm{AC}_\omega$.
 
 Let $G$ be a finite-dimensional real Lie group with Lie algebra
 $\mathfrak g=T_eG$ and dual $\mathfrak g^*=\mathcal L(\mathfrak g,\mathbb R)$
@@ -90,3 +92,7 @@ of orbits and of the $\exp(-t\xi)$ convention, but of no further structure, is
 involved; the coadjoint action applies verbatim to disconnected $G$, to
 $\alpha=0$, whose orbit is the singleton $\{0\}$, and to abelian $G$, where it
 is trivial.
+
+Here $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]] and is
+used only through the supplied fundamental-vector-field convention and the
+adjoint-exponential identity; no further choice is made in this definition.

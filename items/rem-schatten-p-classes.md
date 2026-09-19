@@ -43,9 +43,7 @@ so orthonormality of the $f_j$, Parseval for the supplied basis $E$, and the
 interchange of the nonnegative finite-subset suprema give
 $$\sum_{e\in E}\|Te\|^2=\sum_{n\ge1}s_n(T)^2,$$
 since
-$$\sum_{e\in E}\|Te\|^2
-=\sum_{j\in J}s_j^2\sum_{e\in E}|\langle e,e_j\rangle|^2
-=\sum_{j\in J}s_j^2,$$
+$$\sum_{e\in E}\|Te\|^2 =\sum_{j\in J}s_j^2\sum_{e\in E}|\langle e,e_j\rangle|^2 =\sum_{j\in J}s_j^2,$$
 and the last sum is the zero-padded singular-value sum
 ([[thm-singular-value-decomposition-for-compact-operators]],
 [[def-hilbert-schmidt-operator]],

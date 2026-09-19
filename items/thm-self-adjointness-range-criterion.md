@@ -61,7 +61,7 @@ by $i\lambda$ for any real $\lambda>0$.
 
 1.2 (1) implies (2): if $T=T^*$ then $T$ is closed by [A1]. If $z$ is nonreal and $v\in\ker(T^*-z)$, then $v\in D(T^*)=D(T)$ and $z\|v\|^2=\langle Tv,v\rangle=\overline z\|v\|^2$ by [A1], so $v=0$. [A1]
 
-1.3 (4) implies (5) is immediate, since $\pm i$ are nonreal.
+1.3 (4) implies (5) is immediate, since $\pm i$ are nonreal. [given]
 
 1.4 (5) implies (1): let $v\in D(T^*)$. Since $\operatorname{ran}(T-i)=H$, choose $w\in D(T)$ with $(T-i)w=(T^*-i)v$. Then $(T^*-i)(v-w)=0$, because $T^*w=Tw$ for $w\in D(T)$; and by [A2] with $z=-i$ the kernel of $T^*-i$ is $\operatorname{ran}(T+i)^\perp=\{0\}$. Hence $v=w\in D(T)$. So $D(T^*)\subseteq D(T)$, and with $T\subseteq T^*$ this gives $T=T^*$. [A1, A2]
 
@@ -75,4 +75,4 @@ by $i\lambda$ for any real $\lambda>0$.
 
 3.2 (3) implies (5): by [A2], $\operatorname{ran}(T\mp i)^\perp=\ker(T^*\pm i)=\{0\}$, and by step 2.1 applied to the closed $T$ with $z=\mp i$ the two ranges are closed; hence they equal $H$ by [A3]. So (3) and (5) are equivalent. [A2, A3, step 2.1]
 
-4.1 Collecting: (1)$\Rightarrow$(2)$\Rightarrow$(4)$\Rightarrow$(5)$\Rightarrow$(1) by steps 1.2, 3.1, 1.3 and 1.4, and (3)$\Leftrightarrow$(5) by steps 2.2 and 3.2, while (6)$\Leftrightarrow$(4) by steps 1.5 and 1.3; all six statements are equivalent. The final clause follows because only nonreality of the parameters was used, so $i\lambda$ with $\lambda>0$ may replace $i$. ∎
+4.1 Collecting: $(1)\Rightarrow(2)\Rightarrow(4)\Rightarrow(5)\Rightarrow(1)$ by steps 1.2, 3.1, 1.3 and 1.4; $(5)\Rightarrow(3)$ and $(3)\Rightarrow(5)$ by steps 2.2 and 3.2; and $(1)\Rightarrow(6)\Rightarrow(4)$ by step 1.5. Thus all six statements are equivalent. The final clause follows because only nonreality of the parameters was used, so $i\lambda$ with $\lambda>0$ may replace $i$. [step 1.2, step 3.1, step 1.3, step 1.4, step 2.2, step 3.2, step 1.5] ∎

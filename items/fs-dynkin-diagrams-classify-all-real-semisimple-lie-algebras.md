@@ -5,7 +5,7 @@ title: Dynkin diagrams classify real semisimple Lie algebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra, ex-cartan-subalgebra-and-roots-of-sl-two, ex-classical-simple-lie-algebras-and-their-killing-forms]
+deps: [thm-cartans-semisimplicity-criterion, def-killing-form-of-a-finite-dimensional-lie-algebra, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n, ex-classical-simple-lie-algebras-and-their-killing-forms]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -37,7 +37,7 @@ complexification.
 
 [L3] The real Lie algebra $\mathfrak{su}(2)$ has the basis $A_1=\begin{pmatrix}0&i\\ i&0\end{pmatrix}$, $A_2=\begin{pmatrix}0&1\\ -1&0\end{pmatrix}$, $A_3=\begin{pmatrix}i&0\\ 0&-i\end{pmatrix}$ with $[A_a,A_b]=-2\varepsilon_{abc}A_c$.
 
-[L4] The root system of $\mathfrak{sl}_2(\mathbb C)$ with respect to the diagonal Cartan subalgebra is the two-root system $A_1$, with Cartan matrix $[2]$ ([[ex-cartan-subalgebra-and-roots-of-sl-two]]).
+[L4] Specializing the diagonal-Cartan computation for $\mathfrak{sl}_n(\mathbb C)$ to $n=2$ gives the two roots $\pm(\varepsilon_1-\varepsilon_2)$, hence the rank-one root system $A_1$ with Cartan matrix $[2]$ ([[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]]).
 
 ## Proof
 

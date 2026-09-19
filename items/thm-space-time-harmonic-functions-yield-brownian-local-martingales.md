@@ -34,8 +34,7 @@ $K\subseteq U$ put $\tau_K:=\inf\{t\ge0:(t,B_t)\notin\operatorname{int}K\}$.
 2. If $\tau_U:=\inf\{t\ge0:(t,B_t)\notin U\}$ and
    $E\int_0^t|\nabla f|^2(s,B_s)1_{[0,\tau_U)}(s)\,ds<\infty$ for a given
    $t\ge0$, then the process
-   $$N_r:=\int_0^r1_{[0,\tau_U)}(s)\sum_{k=1}^d\partial_{x_k}f(s,B_s)\,dB^k_s,
-   \qquad 0\le r\le t,$$
+   $$N_r:=\int_0^r1_{[0,\tau_U)}(s)\sum_{k=1}^d\partial_{x_k}f(s,B_s)\,dB^k_s, \qquad 0\le r\le t,$$
    is a square-integrable martingale, and for every $0\le r\le t$ one has
    $$f(r,B_r)-f(0,0)=N_r\qquad\text{on the event }\{r<\tau_U\}.$$
    No value of $f$ at the exit point $(\tau_U,B_{\tau_U})\notin U$ is asserted.

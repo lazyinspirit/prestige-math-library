@@ -13,10 +13,10 @@ sources:
   references:
     - title: "Anthony W. Knapp, Lie Groups Beyond an Introduction, 2nd ed."
       url: "https://www.math.stonybrook.edu/~aknapp/download/Beyond2-clickable.pdf"
-      locator: "Chapter V §§1–2"
+      locator: "Chapter II §§4–5, especially Corollary 2.38 and Theorem 2.42"
     - title: "Alexander Kirillov Jr., An Introduction to Lie Groups and Lie Algebras"
       url: "https://www.math.stonybrook.edu/~kirillov/liegroups/liegroups.pdf"
-      locator: "§§7.5 and 8.1"
+      locator: "§§6.6–7.4, especially Theorems 6.45, 7.3, and 7.16"
 proof_strategy: direct
 ---
 

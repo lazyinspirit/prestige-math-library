@@ -39,7 +39,7 @@
 // in this window, so it can never be mistaken for a nonfatal polish.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
 import { parseTerminalResolutions } from './step7-terminal-resolution.mjs';
@@ -49,13 +49,13 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const ITEMS = join(REPO, 'items');
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const option = (name) => {
   const index = argv.indexOf(name);
   return index >= 0 ? argv[index + 1] : null;
 };
+const ITEMS = option('--items-dir') ? resolve(option('--items-dir')) : join(REPO, 'items');
 
 const touchesPath = option('--touches');
 const baselineLabel = option('--baseline');
@@ -92,6 +92,7 @@ const auditorCertificationsPath = option('--auditor-certifications');
 // item's terminal receipt; prose claiming that an FA was involved is not
 // authority.
 const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
+const defectLedgerPath = option('--defect-ledger') ?? join(REPO, 'research', 'defect-ledger.jsonl');
 
 const usage = () => {
   console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--auditor-certifications <file.json>] [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
@@ -368,7 +369,13 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
     const authorizedByFa = record?.authorized_by === 'final-adjudicator';
     const prerequisiteRepair = record?.kind === 'owner-prerequisite-repair';
     const impactRepair = record?.kind === 'owner-impact-repair';
-    if (record?.version !== 1 || (!prerequisiteRepair && !impactRepair)
+    // A defect found while SATISFYING the Step-7 preflight battery (a stale
+    // contract quote whose re-read exposes a real defect in the item itself)
+    // has no judge rejection to license it: the judge passed the item. The
+    // owner authorises the repair explicitly, bound to the closed fatal
+    // defect-ledger row the reviewing Alpha wrote for it.
+    const preflightRepair = record?.kind === 'owner-preflight-repair';
+    if (record?.version !== 1 || (!prerequisiteRepair && !impactRepair && !preflightRepair)
       || record?.run !== scope.run || (!authorizedByOwner && !authorizedByFa)
       || typeof record?.id !== 'string' || typeof record?.found_via !== 'string'
       || typeof record?.defect !== 'string' || record.defect.trim().length < 20
@@ -393,7 +400,26 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       error('owner-prerequisite-repair-group', `${where}: prerequisite and exposing item must belong to the recorded group`, record.id);
       continue;
     }
-    if (prerequisiteRepair) {
+    if (preflightRepair) {
+      if (!authorizedByOwner) {
+        error('owner-preflight-repair-authority', `${where}: a preflight repair requires authorized_by:"owner"`, record.id);
+        continue;
+      }
+      if (record.id !== record.found_via) {
+        error('owner-preflight-repair-site', `${where}: id and found_via must be the same item — the defect is in the repaired item itself`, record.id);
+        continue;
+      }
+      const rows = readFileSync(defectLedgerPath, 'utf8')
+        .split(/\r?\n/).filter(Boolean).map((line) => { try { return JSON.parse(line); } catch { return null; } })
+        .filter(Boolean);
+      const row = rows.find((entry) => entry.defect_id === record.defect_id);
+      if (!row || row.subject !== record.id || row.severity !== 'fatal'
+        || !['fixed', 'narrowed'].includes(row.disposition)) {
+        error('owner-preflight-repair-defect',
+          `${where}: defect_id must name a closed fatal defect-ledger row for ${record.id}`, record.id);
+        continue;
+      }
+    } else if (prerequisiteRepair) {
       const exposingText = readFileSync(join(ITEMS, `${record.found_via}.md`), 'utf8');
       const deps = frontmatterList(exposingText, 'deps');
       if (!deps.includes(record.id)) {

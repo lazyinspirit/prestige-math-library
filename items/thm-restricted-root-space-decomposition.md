@@ -5,7 +5,7 @@ title: Restricted root space decomposition
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-restricted-root-and-restricted-root-space, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice]
+deps: [def-restricted-root-and-restricted-root-space, prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition, def-killing-form-of-a-finite-dimensional-lie-algebra, prop-trace-forms-are-symmetric-and-invariant, thm-cartans-semisimplicity-criterion, def-cartan-involution-of-a-real-semisimple-lie-algebra, cor-trace-is-invariant-under-similarity, thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -56,7 +56,7 @@ $\lambda\in\Sigma$, then $Z_{\mathfrak g_0}(H)=\mathfrak g_0^0$.
 
 [A1] The Axiom of Choice is [[def-axiom-of-choice]]. It is declared here as part of the ZFC interface of the restricted-root chain, which every consumer of this decomposition propagates; the argument below performs no selection beyond the cited finite-dimensional linear algebra of [L2] and [L3].
 
-[L1] $B$ is invariant and nondegenerate, $B(\theta X,\theta Y)=B(X,Y)$, the summands $\mathfrak k_0,\mathfrak p_0$ are $B$-orthogonal, $B$ is negative definite on $\mathfrak k_0$ and positive definite on $\mathfrak p_0$, and $[\mathfrak k_0,\mathfrak k_0]\subseteq\mathfrak k_0$, $[\mathfrak k_0,\mathfrak p_0]\subseteq\mathfrak p_0$, $[\mathfrak p_0,\mathfrak p_0]\subseteq\mathfrak k_0$ ([[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]]).
+[L1] The Killing form $B(X,Y)=\operatorname{tr}(\operatorname{ad}_X\operatorname{ad}_Y)$ is invariant and nondegenerate, and an automorphism preserves it because it conjugates every adjoint operator and trace is similarity-invariant. Thus $B(\theta X,\theta Y)=B(X,Y)$. The summands $\mathfrak k_0,\mathfrak p_0$ are $B$-orthogonal, $B$ is negative definite on $\mathfrak k_0$ and positive definite on $\mathfrak p_0$, and $[\mathfrak k_0,\mathfrak k_0]\subseteq\mathfrak k_0$, $[\mathfrak k_0,\mathfrak p_0]\subseteq\mathfrak p_0$, $[\mathfrak p_0,\mathfrak p_0]\subseteq\mathfrak k_0$ ([[def-killing-form-of-a-finite-dimensional-lie-algebra]], [[prop-trace-forms-are-symmetric-and-invariant]], [[thm-cartans-semisimplicity-criterion]], [[def-cartan-involution-of-a-real-semisimple-lie-algebra]], [[cor-trace-is-invariant-under-similarity]], [[prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition]]).
 
 [L2] A finite family of pairwise commuting diagonalisable endomorphisms of a finite-dimensional real vector space is simultaneously diagonalisable: there is a basis consisting of common eigenvectors ([[thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms]]).
 
@@ -66,7 +66,7 @@ $\lambda\in\Sigma$, then $Z_{\mathfrak g_0}(H)=\mathfrak g_0^0$.
 
 **Proof technique:** direct.
 
-1.1 For $H\in\mathfrak p_0$ the endomorphism $\operatorname{ad}H$ of $\mathfrak g_0$ is self-adjoint for $B_\theta$: for all $X,Y\in\mathfrak g_0$, using $\theta H=-H$ and [L1], $B_\theta([H,X],Y)=-B([H,X],\theta Y)=-B(X,[H,\theta Y])=B(X,[H,\theta Y])=B_\theta(X,[H,Y])$; moreover $\operatorname{ad}[H,H']=[\operatorname{ad}H,\operatorname{ad}H']$, so for $H,H'\in\mathfrak a$ the endomorphisms $\operatorname{ad}H$ and $\operatorname{ad}H'$ commute because $[H,H']=0$, and hence $\{\operatorname{ad}H:H\in\mathfrak a\}$ is a commuting family of self-adjoint, therefore diagonalisable, endomorphisms of $\mathfrak g_0$. [L1, L3, algebra]
+1.1 For $H\in\mathfrak p_0$ the endomorphism $\operatorname{ad}H$ of $\mathfrak g_0$ is self-adjoint for $B_\theta$: for all $X,Y\in\mathfrak g_0$, using $\theta H=-H$ and [L1], $B_\theta([H,X],Y)=-B([H,X],\theta Y)=-B(X,[\theta Y,H])=B(X,[H,\theta Y])=B_\theta(X,[H,Y])$; moreover $\operatorname{ad}[H,H']=[\operatorname{ad}H,\operatorname{ad}H']$, so for $H,H'\in\mathfrak a$ the endomorphisms $\operatorname{ad}H$ and $\operatorname{ad}H'$ commute because $[H,H']=0$, and hence $\{\operatorname{ad}H:H\in\mathfrak a\}$ is a commuting family of self-adjoint, therefore diagonalisable, endomorphisms of $\mathfrak g_0$. [L1, L3, algebra]
 
 1.2 If $0\ne X\in\mathfrak g_0$ is a common eigenvector of the family $\{\operatorname{ad}H:H\in\mathfrak a\}$, define $\lambda_X:\mathfrak a\to\mathbb R$ by $\operatorname{ad}H(X)=\lambda_X(H)X$ for $H\in\mathfrak a$; then $\lambda_X$ is linear, because for $H,H'\in\mathfrak a$ and $c\in\mathbb R$ one has $\lambda_X(H+cH')X=\operatorname{ad}(H+cH')X=(\lambda_X(H)+c\lambda_X(H'))X$ and $X\ne0$ permits cancellation of $X$. [algebra]
 

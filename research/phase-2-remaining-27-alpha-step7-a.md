@@ -2,7 +2,7 @@
 
 Run: `phase-2-remaining-27`  
 Batches: 11, 12, 13  
-Status: in progress
+Status: complete for group-a adjudication; engine-owned certification refresh remains after dispatch completion
 
 This report is the task-authorized continuity record. Each completed item records the exact rejection, local evidence, dependency/source checks, decision, repair, focused validation, unresolved obligations, and next action. No judge, final adjudicator, or stage transition was run by this dispatch.
 
@@ -1822,3 +1822,402 @@ This report is the task-authorized continuity record. Each completed item record
 - `thm-every-real-cartan-subalgebra-is-conjugate-to-a-theta-stable-one`
 - `thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications`
 - `thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence`
+
+## Remaining batch-13 adjudications
+
+### `ex-two-sphere-as-a-coadjoint-orbit-of-so-three`
+
+- Rejection tuple: `gpt-5.6-terra` / `69915b37bcf42491723a7464af61eaa803c443e212cb8cb9b6bf9e87ffb08846`; decision `confirmed_fatal` (`logic`) at pre-edit guard `1dbe0e63a029245b92afc73f43664dd7c8c7ede132d009c152f559e35ffb10fb`.
+- Exact issue and repair: the unit-sphere area form was evaluated on tangent vectors based at the radius-$r$ sphere. The repair introduces the dilation $D_r:S^2\to S_r^2$, applies $dD_r^{-1}$ to both tangent vectors, and states the typed identity $D_r^*\omega_r=r\omega_{S^2}$.
+- Evidence: the complete item and its KKS/area-form interfaces in the frozen bundle; no external source was needed for the linear dilation calculation. Post-edit guard `f8dace232c7cda84c1e8ff8e6ccd9e849dd8cdc474236e9c2734126f46ac3413`.
+- Focused checks: precheck, rendercheck, and strict Batch-13 proof contract passed; defect `phase-2-remaining-27-step7-a-182`.
+
+### `ex-weighted-circle-actions-and-weighted-projective-singular-quotients`
+
+- Rejection tuple: `gpt-5.6-terra` / `56832536ffca21f02f83b3424380198118a5906222f870adb56ea1abd48ef70b`; decision `confirmed_fatal` (`logic`) at pre-edit guard `116fc8beb4105c7748e3f14241d37551ba194344eb020be680fe9cde1c131b10`.
+- Exact issue and repair: for $\mu=-\frac12\sum w_j|z_j|^2+c$, the old level $\mu^{-1}(c)$ is the origin, not the asserted ellipsoid. The repair assumes $c>0$, reduces at $0$, proves the ellipsoid equation, locates each coordinate-axis point on that level, and distinguishes nonfree orbifold isotropy from the coarse-space manifold question.
+- Evidence: the complete item and the reduction/local-freeness interfaces in the frozen bundle; the correction is a direct calculation. Post-edit guard `0f7602ec553ab336c7d9511fe994a860bd5376db65ca337ef07185c8700c1e90`.
+- Focused checks: precheck, rendercheck, and strict Batch-13 proof contract passed; defect `phase-2-remaining-27-step7-a-184`.
+
+### `fs-every-symplectic-action-is-hamiltonian`
+
+- Rejection tuple: `gpt-5.6-terra` / `289c3161f74c64c73bbba7bf8912e033f89f33c0dea857e0ad1dcc66df2380d0`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `73b8d26066366778d212ac057e97a3e7a5f44f88dd3b89c4a50ae5405060b857`.
+- Exact issue and repair: the topological torus definition supplied none of the smooth forms, vector fields, or period calculation attributed to it. The repair cites the exact published symplectic-torus example, derives the translation action's smoothness and fundamental field from the smooth-action definitions, and removes the inapplicable dependency.
+- Evidence: complete current statements of `ex-a-symplectic-nonhamiltonian-vector-field-on-the-two-torus`, `def-smooth-left-action-of-a-lie-group`, and `def-fundamental-vector-field-of-a-left-action`. Post-edit guard `7bc529382cabb6e656ae96dc41c42cde1b5d22d1f58c12a8c0519d1d06d91e11`.
+- Focused checks: precheck, rendercheck, strict Batch-13 proof contract, manifest dependency synchronization, and frontier-ledger refresh passed; defect `phase-2-remaining-27-step7-a-186`.
+
+### `fs-moment-maps-are-unique-without-normalization`
+
+- Rejection tuple: `gpt-5.6-terra` / `b5abea1c15c79e554d3a0fc476ad813ed8cdd452bd7cdf74deb040d9d9c83301`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `23d78a11e805effcf27288955e73fa424b86fcce2afd717f72453dfbcec268ff`.
+- Exact issue and repair: the cotangent-lift proposition's public Statement supplies the component equations but delegates equivariance. The repair declares and cites `lem-tautological-cotangent-moment-map-is-equivariant` for that missing conclusion.
+- Evidence: complete current Statements of the cotangent-lift proposition and its companion equivariance lemma. Post-edit guard `c9ae96708c76447e819505947cfb7470fd363fc2a53bb91c40c6c01436a4afcd`.
+- Focused checks: precheck, rendercheck, strict Batch-13 proof contract, manifest dependency synchronization, and frontier-ledger refresh passed; defect `phase-2-remaining-27-step7-a-188`.
+
+## Completion of the remaining Batch-13 queue
+
+### `ex-vogan-diagrams-for-real-forms-of-sl-three-c`
+
+- Rejection tuple: `gpt-5.6-terra` / `d0db550f7b1b601c168ea5452c1f4df71a4de51d15c098e9c859520848596d15`; decision `confirmed_fatal` (`logic`) at pre-edit guard `381ffb2595a5c01af9f5b5a137fc0b12d43f2b3a6f103bfc112a602f32dab0b5`.
+- Evidence and decision: The example placed complex root vectors E12 and E23 in real Cartan-decomposition summands. The repair states the eigenspace assertions in the complexifications of k and p and identifies the corresponding real combinations.
+- Repair record: post-edit guard `b7651e7bf2f0e5aee5c3debc4e66290ceea9d99fdb740726b94367da99ea01f9`; defect `phase-2-remaining-27-step7-a-183`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `fs-a-plain-dynkin-diagram-classifies-real-forms`
+
+- Rejection tuple: `gpt-5.6-terra` / `c88509715eefca24a9c017c557905d6f7f1edbebd4ed0d531b12e1c086735c0d`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `b1fc2bc4e0aa12bb5fd94fe4404320371079c890c23decb19883d4cf2c0b2776`.
+- Evidence and decision: The proof attributed a full real-form counterexample to suppliers that did not state it. The repair makes the ambient Choice assumption explicit and routes the distinction through the exact real-form classification examples.
+- Repair record: post-edit guard `b3f6299ffa4553ac84d4e5ecd8c582c5d405e45d67f277f8f487909661920099`; defect `phase-2-remaining-27-step7-a-185`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `fs-global-cartan-and-iwasawa-decompositions-hold-for-every-nonlinear-cover-without-modified-k`
+
+- Rejection tuple: `gpt-5.6-terra` / `712712173536fff7e0652d953afc5e82ad19317e7ec371ce880ea821576c66f1`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `4579008b0fc56b1138bf86862fdce5daff466a793611a799c80bd301792e7e67`.
+- Evidence and decision: The proof used closed-subgroup, one-parameter-subgroup, and exponential naturality facts without exact suppliers. The repair adds the precise published dependencies and confines the inference to their stated hypotheses.
+- Repair record: post-edit guard `7cb1c9ead7cb494af9404f036bff3e7043bb341fe38799a87f31badf5d130305`; defect `phase-2-remaining-27-step7-a-187`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `fs-restricted-root-systems-are-always-reduced`
+
+- Rejection tuple: `gpt-5.6-terra` / `0de75d9b9e6dffe1990ea76769143297925898f437fee76d93e96935a31fc8db`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `90a87b99656a6f22ca8eb7e67f24b05791fbf4cb9cbe84f580808de3ed8b9f65`.
+- Evidence and decision: The counterexample relied on a classical real-form classification under Choice without recording that scope. The repair states the Choice assumption and routes the example through its exact supplier.
+- Repair record: post-edit guard `95defcdc79a2cf75e1a22a5316c85dd03216dc0b2565e48b25fd1d9683e81f88`; defect `phase-2-remaining-27-step7-a-189`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `fs-the-cotangent-lift-moment-map-has-a-plus-sign-under-the-library-fundamental-field-convention`
+
+- Rejection tuple: `gpt-5.6-terra` / `7bf9a710f322dcd959d6c336af244a79f3baaeafb221ae97fbac2f7f624d109a`; decision `confirmed_fatal` (`logic`) at pre-edit guard `8b4d4467c0555d26744cd9f32521d7e462637fe6defe1720ab972694b7272c3e`.
+- Evidence and decision: The sign computation conflated the cotangent lift with the base infinitesimal generator under the library convention. The repair differentiates the lifted action explicitly and obtains the stated negative sign.
+- Repair record: post-edit guard `d32f8f99c1e0cb02a3aeba442d099dcdc128d1d05788159cd334eb96983abd42`; defect `phase-2-remaining-27-step7-a-190`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `fs-the-general-reduced-dimension-is-dim-m-minus-two-dim-g`
+
+- Rejection tuple: `gpt-5.6-terra` / `81238af834f59eeb1e14083cc1793ddd84fb210e436a730dce0396de9d4f91d1`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `298a495d84f21e6d43cfe08a96bf00642965a9ab3a2fe198b3670e77e07b7ead`.
+- Evidence and decision: The SO(3) example attributed cross-product and coadjoint-stabilizer facts to a supplier that did not state them. The repair derives those facts directly and fixes alpha along the third axis.
+- Repair record: post-edit guard `b9d5dc7c58e8470b349342d5e54e8cc51ad6dd5e393fda5d0093d852b9934f45`; defect `phase-2-remaining-27-step7-a-191`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `lem-characteristic-kernel-on-a-regular-moment-level`
+
+- Rejection tuple: `gpt-5.6-terra` / `77812c1224f5fefbce9be33141acef48e45755e28c25cdf1ccd7c66e1897b161`; decision `confirmed_fatal` (`logic`) at pre-edit guard `bc723dfe0483baed6549e57ece14203474ad75545e526b089a39bb9dc71ddbeb`.
+- Evidence and decision: The reverse kernel inclusion silently used a dimension equality that fails without tracking the coadjoint stabilizer. The repair proves the relevant tangent-space and orbit dimensions before concluding equality.
+- Repair record: post-edit guard `7e3043a2030836f31421f301429a2de67145ffab0d04ae0ba26376b90b431249`; defect `phase-2-remaining-27-step7-a-192`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k`
+
+- Rejection tuple: `gpt-5.6-terra` / `b6938e50f18d3a8d4a1a1254326a419fa8676c07a889091c60b43bf84e494a86`; decision `false_positive` at pre-edit guard `249923b356b3d37f1b5c5da0140729a272f47b3a8a6847bba1f8e7f8cbb09ede`.
+- Evidence and decision: The rejection attacks an assertion absent from the current item. Step 3 explicitly says the fields are not G-invariant and applies Koszul to fundamental fields, so no content repair is licensed.
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `prop-classical-real-forms-of-the-classical-complex-lie-algebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `e3f4d4ea413a3c143ddc1f8146c54523cf6fdc0f8ce558be0a8f0211873c77ec`; decision `false_positive` at pre-edit guard `0fb2427bb2b7e66149c44237020e3c9a7ddc6acc349a4906d1eef48040ec91a1`.
+- Evidence and decision: The rejection describes a transpose-only map absent from the current item. Step 1.3 uses the conjugate-linear involution I_{p,q} overline(X) I_{p,q} and conjugates its fixed locus to so(p,q).
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `prop-compact-group-moment-map-can-be-averaged-to-an-equivariant-one-when-the-affine-obstruction-vanishes`
+
+- Rejection tuple: `gpt-5.6-terra` / `587c6f53e396faafefd729d026a1225adafcdb9ac3b18925c4f46bde16c5c491`; decision `confirmed_fatal` (`logic`) at pre-edit guard `c1051af1ad17aabaae2129ecaca005957c97e9fbde4872d87e73ddda49f77cb4`.
+- Evidence and decision: The proof incorrectly declared a constant nonequivariance defect coadjoint-fixed and did not handle disconnected components. The repair performs the Haar substitution directly and states the component-group qualification.
+- Repair record: post-edit guard `302d3b05b10b6518b6b704b691f99ca6f9caa85513393adbbb6f9ab124519f94`; defect `phase-2-remaining-27-step7-a-193`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-dimension-of-a-regular-nonzero-reduced-space`
+
+- Rejection tuple: `gpt-5.6-terra` / `577a8d14a66e6fceccda5f4e519769747e9cf755a43b60cbbf663db474c07dbf`; decision `confirmed_fatal` (`logic`) at pre-edit guard `731faa7e666f1f9e71f130698976469fa91b4c77f2a1fe49b643f5328c4a2e67`.
+- Evidence and decision: The dimension statement omitted the necessary nonempty-level hypothesis, making the manifold-dimension conclusion false for an empty regular level. The repair adds nonemptiness explicitly.
+- Repair record: post-edit guard `60112dc8bbe594bd2c040a1e142966c64f32a90cba9acd7faacac11bc8baa958`; defect `phase-2-remaining-27-step7-a-194`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity`
+
+- Rejection tuple: `gpt-5.6-terra` / `d83cc74a30509334bd20a01b3cf48140240ac0365b70003aaebee2be9b7d84b9`; decision `confirmed_fatal` (`logic`) at pre-edit guard `7cec08c49d1c657ca2048fd215454de6914a1348cb60a1a85c9bf385201366b9`.
+- Evidence and decision: Infinitesimal Poisson-bracket equivariance implies global equivariance only for connected groups. The repair puts that hypothesis in the title and statement and preserves the unrestricted forward direction.
+- Repair record: post-edit guard `ced62ec15d1067e6556fecd8f812f4785b283a93cb3065ad05382eecf16016f3`; defect `phase-2-remaining-27-step7-a-195`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-equivariant-symplectomorphisms-preserve-moment-maps-up-to-a-coadjoint-fixed-covector`
+
+- Rejection tuple: `gpt-5.6-terra` / `0a59601f689c27b7d4076189bb2b5c23bff4b892e9f893316ad87d4c31af5c9b`; decision `confirmed_fatal` (`logic`) at pre-edit guard `8301860e8b9aa07865a978a89c0654f1466dedeac04ccec2d3535b2d048e641b`.
+- Evidence and decision: The item claimed a normalization could remove a fixed covector difference, although shifting both maps leaves the difference unchanged. The repair states literal preservation iff the difference vanishes and gives a fixed-point sufficient condition.
+- Repair record: post-edit guard `71479fe08d1587b99018d082745dd6d6b1396f7ae5face0db5f7eb1952f9938a`; defect `phase-2-remaining-27-step7-a-196`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-infinitesimal-generator-of-a-symplectic-action-is-symplectic`
+
+- Rejection tuple: `gpt-5.6-terra` / `ddbbb2d96b74adbbbea1df8cd1edfcb9788af96a3274beeb90c2b78854864e19`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `d4a95cf209fac9da53eb2e665e67c6d2912bc1e7c624e2b4b14ea80eac70afce`.
+- Evidence and decision: The proof used differentiation of pullbacks along a flow without an exact stated supplier. The repair adds the precise Lie-derivative identity and matches its hypotheses to the action flow.
+- Repair record: post-edit guard `93bce35265b9d16c14ad91b8e2f5f03dc81149987a542ddc0d04357ff2bf3be5`; defect `phase-2-remaining-27-step7-a-197`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-invariant-hamiltonians-descend-to-reduced-hamiltonians`
+
+- Rejection tuple: `gpt-5.6-terra` / `c26f41b04f0516aef60868d1f6ee6eddf072dcc1d700b28b4f35dc6fd8fc4532`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `dcf272283a9eb7c6c74d413058cc322f57b224aca62c168bcda04d29dcf54488`.
+- Evidence and decision: The descent of a smooth invariant function was attributed to a form-descent lemma that did not state the function case. The repair proves descent from the quotient universal property and local sections.
+- Repair record: post-edit guard `e9f4c89c53c4d170852505fc45215ca1cd6c9c2ed74e3c9337028d71085076ff`; defect `phase-2-remaining-27-step7-a-198`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-real-cartan-subalgebras-need-not-be-conjugate`
+
+- Rejection tuple: `gpt-5.6-terra` / `78670ac4cf8633ec84ab585197e0d07142909ca3c0b9b53bb1fec6992d6d0262`; decision `false_positive` at pre-edit guard `c0e666f1b211670c91d59b9f836c771b76fc3d8c7c408f01df3b78e14d5da1aa`.
+- Evidence and decision: The alleged sign error is absent. The current computation is B_theta(e-f,e-f)=-B(e-f,e-f)=8, consistent with B(e-f,e-f)=-8.
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `prop-reduction-commutes-with-products`
+
+- Rejection tuple: `gpt-5.6-terra` / `6afb74146c83d322e3e65464fbaeb8c5b033edde0808d72a2d860ea12c5e0ba5`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `ec3b95c848edbdd7dfe72c5290ebb33d04b87ce38daaa449cfcfa07988367871`.
+- Evidence and decision: The proof invoked product preservation of free proper quotient manifolds without a supplier. The repair proves freeness, properness, and the product quotient identification directly.
+- Repair record: post-edit guard `0ac425cab889c890f0122a3896f61538be434fd7c188468defb4c66b14a0671d`; defect `phase-2-remaining-27-step7-a-199`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness`
+
+- Rejection tuple: `gpt-5.6-terra` / `cb76ab7048d94b743a28ca3fe13769a5f63b923b2ffa7aae00e15142abe3db9a`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `21ad6ff411fedf79b4f846fb27dfd75c1d43f9e1120ef16a4a63bcd82efb8b74`.
+- Evidence and decision: The proof used the stabilizer-Lie-algebra characterization of local freeness without an exact dependency. The repair supplies the orbit/stabilizer statement and applies it pointwise.
+- Repair record: post-edit guard `52acb537f8a4ca8a1e92be0f387b6d56506265035a40abd8c5cd06d5bcf25678`; defect `phase-2-remaining-27-step7-a-200`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-restricted-root-systems-may-be-nonreduced`
+
+- Rejection tuple: `gpt-5.6-terra` / `a3d1218bd4f60eda72c61aa6169173b68e74ca722661a50e35c436788d0647ee`; decision `confirmed_fatal` (`logic`) at pre-edit guard `a2d02cf5d48f9b72235b15e0105fea83506f8889418656ab6f267dbdc565709f`.
+- Evidence and decision: The rank-one string indexing in steps 9 and 10 was reversed relative to the stated root-string convention. The repair corrects the indices and the resulting Cartan integer calculation.
+- Repair record: post-edit guard `40c73cefb69101bc10130d812cc0097d56268a4734d5234f2a1680c63fa20691`; defect `phase-2-remaining-27-step7-a-201`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction`
+
+- Rejection tuple: `gpt-5.6-terra` / `072c05f0ac7e30e1bef25e32c2454b47acc6e0cec4f13c137ea0610cabf0a391`; decision `confirmed_fatal` (`logic`) at pre-edit guard `d6d0c8a6250c58bf1cebb104f83cc23c944c14227e64816dbd748942dceb22a2`.
+- Evidence and decision: The zero-set/orbit correspondence used an inconsistent sign for the opposite coadjoint orbit. The repair aligns the product moment map, orbit point, and stabilizer quotient under one convention.
+- Repair record: post-edit guard `2ee0558d9001f30c5024ccb0e1fe207514d0f10bca33213a5e32b6ce259e104c`; defect `phase-2-remaining-27-step7-a-202`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `prop-uniqueness-and-change-of-positive-system-in-iwasawa-decomposition`
+
+- Rejection tuple: `gpt-5.6-terra` / `bd9d9745bb4e92ce985534d626323afe85e5636a72c3951ce53cdda0f9cde5e6`; decision `false_positive` at pre-edit guard `7b834b8a25e992bcd610166aed853a30ced4a55e2b034af89aeceebddbd517b0`.
+- Evidence and decision: The rejection attributes an exponential-injectivity argument absent from the current item. Step 1.5 obtains equality of Lie algebras from equal connected subgroups and then uses the direct restricted-root-space sum.
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `prop-whitehead-two-removes-the-infinitesimal-equivariance-obstruction-for-semisimple-actions`
+
+- Rejection tuple: `gpt-5.6-terra` / `d607c562ab27315b7128874e12b90fb6150a3a3bf4be367721135e52f490ffef`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `f0e6e4341ea338c79aaaac075132da7bb72c26f8abc5ffa72d43c528603f755b`.
+- Evidence and decision: The argument invoked the trivial-coefficient Whitehead lemma without recording the finite-dimensional semisimple hypotheses and sign convention needed for the coboundary correction. The repair states them and checks the correction explicitly.
+- Repair record: post-edit guard `bbf7ad5dfffdb655f231a766664c11f2a075bee6cf18b0e17a8813233a81e767`; defect `phase-2-remaining-27-step7-a-203`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `rem-nonregular-or-nonfree-symplectic-quotients-need-not-be-manifolds`
+
+- Rejection tuple: `gpt-5.6-terra` / `96e70c8ecc2c8e03db0e18417523235a0c921a5e3731e91869e6fb1289eae7ae`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `8b55187f53ba0c52bf340ceb57053acce20745dea11230c5585a0c83c35e4177`.
+- Evidence and decision: The singular quotient assertion cited only general reduction hypotheses, not the concrete nonfree example. The repair cites the exact angular-momentum counterexample and limits the prose to what that item proves.
+- Repair record: post-edit guard `6c8e905ad50eb587509d7657a219b1544f4d48a043de23fe7beffa8d41832510`; defect `phase-2-remaining-27-step7-a-204`. Direct precheck and rendercheck passed; this remark is outside the pre-existing Batch-13 proof-contract scope.
+
+### `rem-representation-theory-of-noncompact-real-reductive-groups`
+
+- Rejection tuple: `gpt-5.6-terra` / `313a1e7ca61b3f1a1e0bee2e3adb81f0991a7e18466749eb6ac70a55521d6ba4`; decision `false_positive` at pre-edit guard `8aae3071df953062a192fdaa3f292dc95326b0cc8ba5fcdeb2833486aa4dc797`.
+- Evidence and decision: The current remark explicitly allows faithful finite-dimensional unitary representations with nonclosed image and asserts only that a noncompact group cannot be realized as a closed subgroup of U(n).
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification`
+
+- Rejection tuple: `gpt-5.6-terra` / `845ef52546261a11b10b3552587fe281262672cb1ca817358e41a81eaa1fdb8a`; decision `confirmed_fatal` (`logic`) at pre-edit guard `c54e17801015906b866fdb61ca8bccde055805e26b28cbc465a477ffdc110cb0`.
+- Evidence and decision: The displayed adjoint-exponential calculation was false for the chosen sl2 element. The repair replaces it with the kernel decomposition and the previously proved Cayley-transform calculation.
+- Repair record: post-edit guard `2972a6535f3be228f52adc1eb234081f651ba8259b9f5c1245ef7ee378639078`; defect `phase-2-remaining-27-step7-a-205`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-classification-of-real-forms-by-vogan-diagrams`
+
+- Rejection tuple: `gpt-5.6-terra` / `a027f8df1a1ab400dd7818b5c067f46299f41271871cf8fa0608dc2912eb5c16`; decision `confirmed_fatal` (`logic`) at pre-edit guard `aa78f5329897bdec9f4942a2aa3ac7c8df5a1a43e0bb69dd308077e51634a9ef`.
+- Evidence and decision: The proof treated a coefficient as its own inverse instead of its complex conjugate under the compact conjugation. The repair derives a_minus_alpha=conjugate(a_alpha) and then the required modulus condition.
+- Repair record: post-edit guard `d6c660daf9669d79f6bb4395ffdbfe5420c7ef3433b3311367bd3541a97ce10a`; defect `phase-2-remaining-27-step7-a-206`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-classification-of-real-semisimple-lie-algebras`
+
+- Rejection tuple: `gpt-5.6-terra` / `ab22be88a8971f2131c9257e9c1653e645b909025743ce43aa304d14b19c74d8`; decision `confirmed_fatal` (`logic`) at pre-edit guard `25c0d943f420b1f02be138d415d4f30e7b8037ca410bd87f2407f924ad709c10`.
+- Evidence and decision: The classical-list argument undercounted D_n real forms by treating only an even-signature subfamily. The repair includes odd signatures and routes exhaustiveness through the diagram classification rather than the invalid count.
+- Repair record: post-edit guard `ed9725f72b3b4c0a194c6f41f2734753c7967030adeaeecad737f211d5f07cdc`; defect `phase-2-remaining-27-step7-a-207`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-coadjoint-orbits-are-symplectic-manifolds`
+
+- Rejection tuple: `gpt-5.6-terra` / `f86f5804d96d55a7ff5953941d46dbf39c106606559dfb0851038dd93bee4784`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `9f767ef11eb3890f860f41d7bed2fca7902c7a25410a8d643f71e3fa7717a02f`.
+- Evidence and decision: The proof used the homogeneous-space tangent identification and smooth quotient model without exact dependencies. The repair cites the orbit-stabilizer and quotient-manifold suppliers and matches their hypotheses.
+- Repair record: post-edit guard `14574e273cf4424602d1c3943354883e264d7dc684d8a2581f35de7f344cd789`; defect `phase-2-remaining-27-step7-a-208`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `thm-complexification-dichotomy-for-a-real-simple-lie-algebra`
+
+- Rejection tuple: `gpt-5.6-terra` / `aad31ddeb924f4a4e97bfd37a2ad451d28d6431fe3b6192888870ff1e0e17f1f`; decision `false_positive` at pre-edit guard `820c43ab1916c3c4d67d5d0c9f8f2635986e4faeda496279f510ef6e28b19465`.
+- Evidence and decision: The rejection overlooks Fact L6, which explicitly cites existence of Cartan subalgebras and one-dimensional root spaces. Those exact suppliers support the finite-dimensional counting step.
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `thm-conjugacy-of-compact-real-forms`
+
+- Rejection tuple: `gpt-5.6-terra` / `8dcb849a9cd49487d5476b4683c571888184141289edb5417e7230304cbe7f7e`; decision `false_positive` at pre-edit guard `325350b95eb40371de3a28665dbc94064d44bfac986f5bbb203835dc7997b83a`.
+- Evidence and decision: The alleged identity 2 rho tau is absent. The current proof derives rho tau=tau rho^{-1} and uses that correct relation throughout.
+- No content, contract, impact, or judge record was changed for this rejection; the guard remained unchanged.
+
+### `thm-existence-of-a-compact-real-form`
+
+- Rejection tuple: `gpt-5.6-terra` / `4b2293d542473e47480def9e24310381e846436ad1903ecc3e4abd241a446ed7`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `3cc66c9db95c9f75ad52887a7c9a215998ec24683f29cb022d2e7de061506cbf`.
+- Evidence and decision: The construction relied on Chevalley-basis bracket normalizations beyond the cited statement. The repair adds the exact basis supplier and records the normalization used in each closure computation.
+- Repair record: post-edit guard `9d0e334c564cf014ba114fd142d5939e131d0bdcd1e506fd8c8aec16ab77880a`; defect `phase-2-remaining-27-step7-a-209`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group`
+
+- Rejection tuple: `gpt-5.6-terra` / `7865fe22abdc6815b9d69f9ba288fc70286c7d45227ccdc81145351bcad86e3a`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `1d8c613a87d3fa427ef90ae8d98006a20b962859909e7a2cad88fb446012d20f`.
+- Evidence and decision: The global proof used properness and covering consequences not supplied by the cited local Cartan data. The repair adds the exact covering/proper-action dependencies and checks the finite-center hypotheses at their uses.
+- Repair record: post-edit guard `68b5b0d4437ad1eb8ee8c02da516e981543df6ae5b77e346698e5d59fd002894`; defect `phase-2-remaining-27-step7-a-210`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-global-iwasawa-decomposition`
+
+- Rejection tuple: `gpt-5.6-terra` / `45da2bb7d2ab16a8b2d09eece7d30ac437b9710ffac23d1204a7a20b43380785`; decision `confirmed_fatal` (`logic`) at pre-edit guard `04620b1382e11963e115aaaaee4fc3aba13abda7e2778055e00f1d3f413d904f`.
+- Evidence and decision: The proof used exponential coordinates on N before showing that the subgroup in the given group is the simply connected nilpotent model. The repair proves the covering N to N1 is an isomorphism before invoking exponential coordinates.
+- Repair record: post-edit guard `f3bd2fe4eaba98a4714320df65ac4c8f947e5641119b6671038d6d4be1f9fb2c`; defect `phase-2-remaining-27-step7-a-211`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-marsden-weinstein-meyer-symplectic-reduction`
+
+- Rejection tuple: `gpt-5.6-terra` / `59711950b53931e4b2b5805be3ac1a0d5a0d1d2d2696b33b543806ec09f9dd60`; decision `confirmed_fatal` (`logic`) at pre-edit guard `dd935485079ec51bf0daff3193b5d0595d1d883523e2bab4fb08ebf6f1f1da41`.
+- Evidence and decision: The theorem asserted a manifold dimension without treating an empty regular level. The repair adds an explicit empty-level branch and states the dimension conclusion for the nonempty quotient.
+- Repair record: post-edit guard `cec01f8a58856c8eb05f634d12e5af6b97389b7350acff459698b50dcc98ca34`; defect `phase-2-remaining-27-step7-a-212`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `thm-reduction-in-stages-for-free-proper-regular-actions`
+
+- Rejection tuple: `gpt-5.6-terra` / `fcfac9b2f434ea94fc5d4ff37817a29976f90dd636675b236fbc1ea03da49aea`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `bfc710ff1d973a3e0889ef7dadd30a8e7a73eae7e3afc5c2d52e80531fe85099`.
+- Evidence and decision: The staged quotient identification and descended action were asserted without the quotient universal properties needed to define and compare them. The repair supplies the exact quotient statements and proves the induced map.
+- Repair record: post-edit guard `7b3f1a029e2bb2ecafe49b40a09d33f042a1f997fb6e67c091ba53f825834be1`; defect `phase-2-remaining-27-step7-a-213`. Direct precheck and rendercheck passed; the strict Batch-13 item contract passed.
+
+### `thm-restricted-root-space-decomposition`
+
+- Rejection tuple: `gpt-5.6-terra` / `a2d0d1c31737718a1d84e72787fc316a8ffc0db52b3034fa6733d7b0295bc2f2`; decision `confirmed_fatal` (`dependency_citation`) at pre-edit guard `06f756623dd4e9ff91f25a1da362b3539423c70849284e9181c4700e2872bcb3`.
+- Evidence and decision: The proof used simultaneous diagonalization and orthogonality facts beyond the stated suppliers. The repair adds exact dependencies and restricts each decomposition inference to their stated finite-dimensional hypotheses.
+- Repair record: post-edit guard `257eef4bc1adbe9d25b986cb4a626363f128347c72cf6ee4fbfe0d6b7f9b76fc`; defect `phase-2-remaining-27-step7-a-214`. Direct precheck and rendercheck passed; this real-form item is outside the pre-existing Batch-13 proof-contract scope.
+
+## Final rejudge targets from this queue
+
+- `ex-two-sphere-as-a-coadjoint-orbit-of-so-three`
+- `ex-vogan-diagrams-for-real-forms-of-sl-three-c`
+- `ex-weighted-circle-actions-and-weighted-projective-singular-quotients`
+- `fs-a-plain-dynkin-diagram-classifies-real-forms`
+- `fs-every-symplectic-action-is-hamiltonian`
+- `fs-global-cartan-and-iwasawa-decompositions-hold-for-every-nonlinear-cover-without-modified-k`
+- `fs-moment-maps-are-unique-without-normalization`
+- `fs-restricted-root-systems-are-always-reduced`
+- `fs-the-cotangent-lift-moment-map-has-a-plus-sign-under-the-library-fundamental-field-convention`
+- `fs-the-general-reduced-dimension-is-dim-m-minus-two-dim-g`
+- `lem-characteristic-kernel-on-a-regular-moment-level`
+- `prop-compact-group-moment-map-can-be-averaged-to-an-equivariant-one-when-the-affine-obstruction-vanishes`
+- `prop-dimension-of-a-regular-nonzero-reduced-space`
+- `prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity`
+- `prop-equivariant-symplectomorphisms-preserve-moment-maps-up-to-a-coadjoint-fixed-covector`
+- `prop-infinitesimal-generator-of-a-symplectic-action-is-symplectic`
+- `prop-invariant-hamiltonians-descend-to-reduced-hamiltonians`
+- `prop-reduction-commutes-with-products`
+- `prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness`
+- `prop-restricted-root-systems-may-be-nonreduced`
+- `prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction`
+- `prop-whitehead-two-removes-the-infinitesimal-equivariance-obstruction-for-semisimple-actions`
+- `rem-nonregular-or-nonfree-symplectic-quotients-need-not-be-manifolds`
+- `thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification`
+- `thm-classification-of-real-forms-by-vogan-diagrams`
+- `thm-classification-of-real-semisimple-lie-algebras`
+- `thm-coadjoint-orbits-are-symplectic-manifolds`
+- `thm-existence-of-a-compact-real-form`
+- `thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group`
+- `thm-global-iwasawa-decomposition`
+- `thm-marsden-weinstein-meyer-symplectic-reduction`
+- `thm-reduction-in-stages-for-free-proper-regular-actions`
+- `thm-restricted-root-space-decomposition`
+- `prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k`
+- `prop-classical-real-forms-of-the-classical-complex-lie-algebras`
+- `prop-real-cartan-subalgebras-need-not-be-conjugate`
+- `prop-uniqueness-and-change-of-positive-system-in-iwasawa-decomposition`
+- `rem-representation-theory-of-noncompact-real-reductive-groups`
+- `thm-complexification-dichotomy-for-a-real-simple-lie-algebra`
+- `thm-conjugacy-of-compact-real-forms`
+
+## Final-queue validation and routing
+
+- Direct item precheck and rendercheck passed for all 40 changed items; the seven repairs recovered from the compaction commit were rerun explicitly (`6 checked, 0 failing` for proof-bearing items; rendercheck passed all seven).
+- The strict Batch-13 proof contract passed for all 20 changed items in its scope; the 20 changed items outside that scope were checked directly.
+- The Batch-13 manifest dependency arrays were synchronized from live item frontmatter, and the manifest dependency check passed for all 117 manifest items.
+- The unified frontier dependency ledger was refreshed and deduplicated after the repairs.
+- All 12 Step-6 reader warnings already have exactly one owning-group disposition. No new cross-group alert arose from this final queue.
+- Sources consulted for this queue were the frozen bundle, complete current item files, and exact cited repository statements. No web source was needed because the disputed points were settled by the written claims, dependency interfaces, or direct calculations.
+## Guard-form reconciliation (authoritative final disposition)
+
+The fatal-only guard recovered the immutable pre-Step-7 text states after the automatic compaction commit. The seven rows below supersede the earlier false-positive descriptions in this report: each rejection was absent only from the already-repaired current text, but was present in the frozen pre-stage item. The append-only adjudication ledger therefore carries later, authoritative `confirmed_fatal` rows with exact guard-form hashes.
+
+### `prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `b6938e50f18d3a8d4a1a1254326a419fa8676c07a889091c60b43bf84e494a86`; `confirmed_fatal` (`logic`).
+- The pre-stage proof falsely treated fundamental fields of the left action as G-invariant and used an incorrectly typed symmetry/transport formula. The committed repair explicitly uses fundamental fields with the Koszul identity and the correctly centered symmetric-space symmetries.
+- Exact guards: `b3730141ef6c3d00d2f246e9ea0f242aa4c4111c23053eede29fd055e09f4265` -> `249923b356b3d37f1b5c5da0140729a272f47b3a8a6847bba1f8e7f8cbb09ede`; defect `phase-2-remaining-27-step7-a-215`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `prop-classical-real-forms-of-the-classical-complex-lie-algebras`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `e3f4d4ea413a3c143ddc1f8146c54523cf6fdc0f8ce558be0a8f0211873c77ec`; `confirmed_fatal` (`logic`).
+- The pre-stage orthogonal-form map was complex-linear and its asserted fixed locus was not the real form so(p,q). The committed repair uses the conjugate-linear involution I_{p,q} overline(X) I_{p,q} and conjugates its fixed locus to the standard real algebra.
+- Exact guards: `cb7750b85956d03bae298f938b183b9a37ea4688fe4406d278977d55088c96fe` -> `0fb2427bb2b7e66149c44237020e3c9a7ddc6acc349a4906d1eef48040ec91a1`; defect `phase-2-remaining-27-step7-a-216`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `prop-real-cartan-subalgebras-need-not-be-conjugate`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `78670ac4cf8633ec84ab585197e0d07142909ca3c0b9b53bb1fec6992d6d0262`; `confirmed_fatal` (`logic`).
+- The pre-stage positivity calculation contained the false equality -B(e-f,e-f)=B(e-f,e-f)=8. The committed repair uses B(e-f,e-f)=-8 and obtains B_theta(e-f,e-f)=8.
+- Exact guards: `49686142bf6a9a05ce8dc6ebe59753a4539e217fd3b6af5b03761a4e273fd495` -> `c0e666f1b211670c91d59b9f836c771b76fc3d8c7c408f01df3b78e14d5da1aa`; defect `phase-2-remaining-27-step7-a-217`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `prop-uniqueness-and-change-of-positive-system-in-iwasawa-decomposition`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `bd9d9745bb4e92ce985534d626323afe85e5636a72c3951ce53cdda0f9cde5e6`; `confirmed_fatal` (`logic`).
+- The pre-stage proof incorrectly used injectivity of exp on n plus theta(n), which is not contained in p. The committed repair gets equality of the two Lie algebras from equality of the connected Lie subgroups and then uses the direct root-space sum.
+- Exact guards: `6ac3a14c74d2c9168f103378f0660168fa6114d729db5a8ce64982fd0d2d8646` -> `7b834b8a25e992bcd610166aed853a30ced4a55e2b034af89aeceebddbd517b0`; defect `phase-2-remaining-27-step7-a-218`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `rem-representation-theory-of-noncompact-real-reductive-groups`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `313a1e7ca61b3f1a1e0bee2e3adb81f0991a7e18466749eb6ac70a55521d6ba4`; `confirmed_fatal` (`logic`).
+- The pre-stage remark falsely ruled out faithful finite-dimensional unitary representations of every noncompact group. The committed repair permits faithful dense-image representations and states the valid closed-subgroup obstruction.
+- Exact guards: `87975328c83031914e6b99328badfbea7013c49f86892a80a3af4a0e2224ea3f` -> `8aae3071df953062a192fdaa3f292dc95326b0cc8ba5fcdeb2833486aa4dc797`; defect `phase-2-remaining-27-step7-a-219`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-complexification-dichotomy-for-a-real-simple-lie-algebra`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `aad31ddeb924f4a4e97bfd37a2ad451d28d6431fe3b6192888870ff1e0e17f1f`; `confirmed_fatal` (`logic`).
+- The pre-stage proof identified a complex simple algebra with its conjugate by claiming their root spaces were the same sets, ignoring scalar conjugation. The committed repair uses a Chevalley basis with real structure constants and adds the exact suppliers.
+- Exact guards: `0c3772fa1caa8f75c1b3b5f93b6522d3b8f131fa532aba66552b8bf362e0619d` -> `820c43ab1916c3c4d67d5d0c9f8f2635986e4faeda496279f510ef6e28b19465`; defect `phase-2-remaining-27-step7-a-220`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### `thm-conjugacy-of-compact-real-forms`
+
+- Authoritative rejection tuple: `gpt-5.6-terra` / `8dcb849a9cd49487d5476b4683c571888184141289edb5417e7230304cbe7f7e`; `confirmed_fatal` (`logic`).
+- The pre-stage proof used an invalid involution composition identity. The committed repair derives rho tau=tau rho^{-1} and carries the conjugacy argument with that correct relation.
+- Exact guards: `c3286d7e93dacb3f692f071ed0a73aaad31b4aac9bde5f30793a8e98fe78fd4f` -> `325350b95eb40371de3a28665dbc94064d44bfac986f5bbb203835dc7997b83a`; defect `phase-2-remaining-27-step7-a-221`. Direct precheck and rendercheck passed; the item is outside the pre-existing Batch-13 proof-contract scope.
+
+### Append-only guard-hash corrections for earlier repairs
+
+Sixteen earlier fatal decisions had recorded raw or judge-form pre-edit digests instead of the guard form. Their mathematical outcomes and repairs do not change. The defect ledger preserves those historical rows and activates these exact-hash corrections through `supersedes`:
+
+- `cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group`: `phase-2-remaining-27-step7-a-222` supersedes `phase-2-remaining-27-step7-a-107`; guard `e14baf65b7c4486103a8c9fc054031573dcdf14e82bb1be1059e5a024d77ceae` -> `bcd2894f29cd7851cddc24a058be599a18b94dba5679283817d7de5ddd7e880e`.
+- `ex-the-peter-weyl-decomposition-of-l-two-su-two`: `phase-2-remaining-27-step7-a-223` supersedes `phase-2-remaining-27-step7-a-178`; guard `ba08296d66478edb1b2b6da85fc8371a02f54be5326a8c6bfe7e7d42442f99a2` -> `cfca27986309c42d558b157515d32c5dec7d267d179178d147b049a1b043609c`.
+- `ex-weyl-integration-formula-for-su-two`: `phase-2-remaining-27-step7-a-224` supersedes `phase-2-remaining-27-step7-a-170`; guard `f6fa999735ca112b357f7bb1b857ed86fe1bb81b266041737fe6ad1c7b562f80` -> `ad035d416645303b1f529ae03680f8f054fb0b1d049de3a97c74788a3ef00706`.
+- `fs-every-dominant-weight-of-the-abstract-weight-lattice-integrates-to-every-compact-group-form`: `phase-2-remaining-27-step7-a-225` supersedes `phase-2-remaining-27-step7-a-169`; guard `6246d5ab145a8eda50bf3f0101ff7f9a6340fb81c2952e3386694b78a96994c5` -> `16ad25e0ffb780be696286cf5be220250cc3a3a34b29440440f070a5a541de9a`.
+- `fs-every-unitary-representation-of-a-compact-group-is-finite-dimensional`: `phase-2-remaining-27-step7-a-226` supersedes `phase-2-remaining-27-step7-a-171`; guard `941cb27cce486895cdb151fda753db2377bc8063915b2b8ec3c7f794294934d4` -> `bd05461eb0fe00d27dc14635e38c470c41c0ad8fe8645320b40385c6688306e7`.
+- `fs-haar-measure-on-a-compact-group-is-only-left-invariant-not-right-invariant`: `phase-2-remaining-27-step7-a-227` supersedes `phase-2-remaining-27-step7-a-167`; guard `f818becaadd72700e9313b1a99c52dc512ce722c38318ce7fead0238a226402e` -> `fddf195a67c25ccc1e7f33ff10197d4f45f77fbcc951f21ea2688aed6ceb7a85`.
+- `fs-peter-weyl-says-every-continuous-function-is-a-finite-sum-of-matrix-coefficients`: `phase-2-remaining-27-step7-a-228` supersedes `phase-2-remaining-27-step7-a-174`; guard `0a0d4ec3b990158c4c533a5aa8a9772c4a9ff2083641ff22695c715d646262f7` -> `c3bc2a4143b3a1bd478fdaa23a4fbb8398f5200bd0b330822903521b6efc6835`.
+- `lem-compact-lie-groups-admit-central-continuous-approximate-identities`: `phase-2-remaining-27-step7-a-229` supersedes `phase-2-remaining-27-step7-a-173`; guard `3f77f7cd7bce582ea5caf988345454e87e90bceaefb79533f922ab14a7830e20` -> `7f03187439d176970905256821e12749c0d7e0917f747d2042c76af3e82237b6`.
+- `lem-weyl-denominator-and-anti-invariant-orbit-sum-basis`: `phase-2-remaining-27-step7-a-230` supersedes `phase-2-remaining-27-step7-a-168`; guard `113227d524a03b4152198d2596525f304d3ed496aa973eabc9d8fb0fea14ae17` -> `fdb302e88bfae50e4e4b828cbfc7c10c72cf8afa62320c2a576389421e90a4be`.
+- `lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator`: `phase-2-remaining-27-step7-a-231` supersedes `phase-2-remaining-27-step7-a-172`; guard `86c0c42c093a5ea21766d12cbed07f0044f3d47fcafab5e49273c4a1a188cbb8` -> `fa48fde424cfc68b399754efab7e9a1f438aa27593ec2c4897f99351baa9933b`.
+- `prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero`: `phase-2-remaining-27-step7-a-232` supersedes `phase-2-remaining-27-step7-a-176`; guard `70382863c7a6c61d75bbdd8c84032d6e4bccf44867e66b9d52ce28ce0a28aa62` -> `d867fca5cb26af7063b328e1d93c1e138f693b904ec964671f94200a3f6c1b79`.
+- `thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space`: `phase-2-remaining-27-step7-a-233` supersedes `phase-2-remaining-27-step7-a-177`; guard `b987b247267d1902c4b44401f753b9d17cfcd4a8ff0d92ab94616e362a190928` -> `6bb00c7d51808fdae64a001a3fa5f6989227bfb82e98501a8fcf0135dc8c6e82`.
+- `thm-every-real-cartan-subalgebra-is-conjugate-to-a-theta-stable-one`: `phase-2-remaining-27-step7-a-234` supersedes `phase-2-remaining-27-step7-a-179`; guard `c68e0efbbd5857e05f7da99cf71b89ae404074f686924ab1a489368228d8ba44` -> `9f6371de41b87064b512da86bd6e10d7b5b1b3e02084c3e2a60e6a6cbbf6225d`.
+- `thm-real-forms-correspond-to-conjugate-linear-involutions`: `phase-2-remaining-27-step7-a-235` supersedes `phase-2-remaining-27-step7-a-175`; guard `f3a828c6944b77b9572a68564814a3845542cd7b9c159bf01d5c602d5e5bb561` -> `ab57832e41e339672f0dd1be14bb21236212a3ba6181de0581a58f5f8bfb715e`.
+- `thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications`: `phase-2-remaining-27-step7-a-236` supersedes `phase-2-remaining-27-step7-a-180`; guard `bd01379f5ba2e629e257eae943630ad1446d654593e669a7737be1459f77a83d` -> `04f4baffef214b261ae994cf2ecda8e45de25a78d99e0efb6b845c1b2c89cbad`.
+- `thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence`: `phase-2-remaining-27-step7-a-237` supersedes `phase-2-remaining-27-step7-a-181`; guard `d5b1b43ead5918f0bd2e550970666ae4c53b3e14706ca73b812b67e78d83f1fd` -> `f63fbce77ca9f17d4e73b39e752316ad8e1b95bb164332a0e11e04043681cfe8`.
+
+- Final fatal-only guard: `688/688` changed items licensed; no created or deleted item; result `OK`.
+- Final Step-7 scope check: 5 groups, 1032 partitioned items, 0 open rejections, and 43/43 reader warnings or alerts dispositioned.
+
+### Active ownership rows for corrected historical hashes
+
+The defect-ledger bijection checks every historical fatal adjudication row, while the Step-7 evidence loader uses the latest row for each rejection tuple. To preserve one active defect owner for both forms, `phase-2-remaining-27-step7-a-238` through `phase-2-remaining-27-step7-a-253` supersede `phase-2-remaining-27-step7-a-222` through `phase-2-remaining-27-step7-a-237` in the same order and carry both the historical and exact guard-hash adjudication references. The earlier rows remain in the append-only audit trail. The defect-ledger check passed with 0 errors.
+
+After synchronizing the four downstream proof-contract quote mirrors changed by the repaired supplier statements, the strict Batch-13 contract passed all 47/47 scoped items with 0 errors and 0 warnings.
+
+## Resumed-dispatch reconciliation
+
+This dispatch resumed the completed group-a queue from the append-only ledgers rather than repeating settled adjudications. The authoritative current evidence contains 220 exact group-a rejection tuples: 219 latest `confirmed_fatal` decisions and one latest `confirmed_nonfatal` decision, with no missing answer and no surplus adjudication. All 12 group-a Step-6 warnings retain current owning-group dispositions, and no new cross-group alert arose.
+
+Fresh validation against the current working tree produced:
+
+- Step-7 scope check: 5 groups, 1032 partitioned items, 0 open rejections, and 43/43 reader warnings or alerts dispositioned.
+- Fatal-only guard: 688/688 changed items licensed from the immutable `pre-step7` baseline; no created or deleted item; result `OK`.
+- Defect-ledger check: 1116 run rows checked with 0 errors.
+- Manifest dependency check: all 350 group-a manifest items have explicit dependency arrays, with 0 errors.
+- Batch-13 strict proof contract: 47/47 checked with 0 errors and 0 warnings.
+
+The fresh strict checks also found stale quotation mirrors in 10 Batch-11 contract entries and 11 Batch-12 contract entries. These were contract-only consequences of already licensed supplier-statement repairs. Their citations and derivation mirrors were regenerated from the current item text, without changing any item, claim, proof, dependency, boundary disposition, risk review, adjudication, or judge evidence. After synchronization:
+
+- Batch 11 strict proof contract: 118/118 checked with 0 errors and 0 warnings.
+- Batch 12 strict proof contract: 115/115 checked with 0 errors and two pre-existing nonblocking shotgun-citation warnings (`lem-highest-weight-modules-have-weights-below-the-top-weight` and `prop-highest-weight-of-the-dual-representation`).
+- The merged proof contract was rebuilt from all 15 batch contracts and contains 962 scoped items.
+- Focused `git diff --check` passed for the two owned batch contracts and the merged contract.
+- The current auditor-created target `prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system` again passed direct precheck (`1 checked, 0 failing`) and rendercheck.
+
+The full merged-contract strict check is not clean: it reports 1291 errors in batches outside group a. Because the three owned batch contracts pass their strict checks, none of those diagnostics belongs to Batches 11–13; this dispatch did not alter another group's contract entries. The engine must route that level-wide preflight residue to the actual owners rather than treating this group-a report as repair authority.
+
+No judge, final adjudicator, retry, coverage transition, or stage transition was run. The prior targeted successful dispatch covered only Batch 12, so the live engine's recorded auditor-created-certification hold for `prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system` can only be recomputed after this covering 11/12/13 dispatch finishes successfully. That is an engine-owned post-dispatch refresh, not unresolved mathematics or an authorization to alter the item again.

@@ -45,7 +45,7 @@ $(M,\omega,\mu)$ at $\alpha$.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field, level-set and quotient suppliers cited below.
 
-[F1] $\mu^{-1}(\alpha)$ is an embedded submanifold with $T_p\mu^{-1}(\alpha)=\ker d\mu_p$, and $\iota^*\omega$ is a smooth two-form on it. [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
+[F1] If $\mu^{-1}(\alpha)$ is nonempty, it is an embedded submanifold with $T_p\mu^{-1}(\alpha)=\ker d\mu_p$, and $\iota^*\omega$ is a smooth two-form on it. If it is empty, it is the empty smooth manifold and all pointwise tangent assertions below are vacuous. [[thm-a-regular-level-set-is-an-embedded-submanifold]], [[prop-tangent-space-of-a-regular-level-set-is-the-kernel]].
 
 [F2] Since $G_\alpha$ acts freely and properly on $\mu^{-1}(\alpha)$, the quotient $M_\alpha$ is a smooth manifold and $\pi$ is a smooth surjective submersion. [[thm-free-proper-action-quotient-manifold]].
 
@@ -61,7 +61,7 @@ $(M,\omega,\mu)$ at $\alpha$.
 
 **Proof technique:** direct.
 
-1.1 The restricted form $\iota^*\omega$ is $G_\alpha$-invariant: for $h\in G_\alpha$ the action $a_h$ preserves the level by [F3], so $a_h|_{\mu^{-1}(\alpha)}$ is a diffeomorphism of the level with $\iota\circ a_h|_{\text{level}}=a_h\circ\iota$, and $(a_h|_{\text{level}})^*\iota^*\omega=\iota^*a_h^*\omega=\iota^*\omega$ because $a_h$ preserves $\omega$. [F1, F3]
+1.1 If the level is empty, its quotient is the empty smooth manifold and the unique two-form on it is closed and nondegenerate vacuously, so the conclusion holds. Henceforth suppose the level is nonempty. The restricted form $\iota^*\omega$ is $G_\alpha$-invariant: for $h\in G_\alpha$ the action $a_h$ preserves the level by [F3], so $a_h|_{\mu^{-1}(\alpha)}$ is a diffeomorphism of the level with $\iota\circ a_h|_{\text{level}}=a_h\circ\iota$, and $(a_h|_{\text{level}})^*\iota^*\omega=\iota^*a_h^*\omega=\iota^*\omega$ because $a_h$ preserves $\omega$. [F1, F3]
 
 1.2 The restricted form is horizontal for the $G_\alpha$-action: by [F4] each vertical vector $\xi_M(p)$, $\xi\in\mathfrak g_\alpha$, lies in the kernel of $(\iota^*\omega)_p$, so any contraction of $\iota^*\omega$ with a vertical entry vanishes. [F4]
 

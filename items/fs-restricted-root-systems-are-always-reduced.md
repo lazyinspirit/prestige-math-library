@@ -20,12 +20,14 @@ proof_strategy: counterexample
 
 ## Statement
 
-False: the restricted-root system of a real semisimple Lie algebra is always a
+Assume the Axiom of Choice. False: the restricted-root system of a real semisimple Lie algebra is always a
 reduced root system.
 
 ## Facts & Assumptions
 
-**Given:** The real semisimple Lie algebra $\mathfrak{su}(2,1)$ with $J=\operatorname{diag}(1,1,-1)$, the Cartan involution $\theta(X)=-X^{*}$, the maximal abelian subspace $\mathfrak a=\mathbb RH\subseteq\mathfrak p_0$ for $H=E_{13}+E_{31}$, and its restricted-root system $\Sigma\subseteq\mathfrak a^{*}$ with the functionals $f$ given by $f(H)=1$.
+**Given:** The Axiom of Choice; the real semisimple Lie algebra $\mathfrak{su}(2,1)$ with $J=\operatorname{diag}(1,1,-1)$, the Cartan involution $\theta(X)=-X^{*}$, the maximal abelian subspace $\mathfrak a=\mathbb RH\subseteq\mathfrak p_0$ for $H=E_{13}+E_{31}$, and its restricted-root system $\Sigma\subseteq\mathfrak a^{*}$ with the functionals $f$ given by $f(H)=1$.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it is the hypothesis required by the restricted-root suppliers used in [L3].
 
 [L1] Restricted roots and restricted-root spaces are the nonzero functionals $\lambda\in\mathfrak a^{*}$ with $\mathfrak g_0^{\lambda}=\{X:[H,X]=\lambda(H)X$ for all $H\in\mathfrak a\}\ne0$, and the multiplicity $m_\lambda$ is $\dim_{\mathbb R}\mathfrak g_0^{\lambda}$ ([[def-restricted-root-and-restricted-root-space]]).
 
@@ -37,7 +39,7 @@ reduced root system.
 
 **Proof technique:** counterexample.
 
-1.1 The algebra $\mathfrak{su}(2,1)$ with the data of [L3] is a real semisimple Lie algebra with a maximal abelian subspace $\mathfrak a=\mathbb RH$ of $\mathfrak p_0$ and restricted-root system $\Sigma=\{\pm f,\pm2f\}$, where $f(H)=1$ and $2f(H)=2$. [L1, L3]
+1.1 The algebra $\mathfrak{su}(2,1)$ with the data of [L3] is a real semisimple Lie algebra with a maximal abelian subspace $\mathfrak a=\mathbb RH$ of $\mathfrak p_0$ and restricted-root system $\Sigma=\{\pm f,\pm2f\}$, where $f(H)=1$ and $2f(H)=2$. [A1, L1, L3]
 
 1.2 Both $f$ and $2f$ are elements of $\Sigma$, and $2f\notin\{f,-f\}$ because $2f(H)=2\ne\pm1=\pm f(H)$ for $H\in\mathfrak a$ with $f(H)=1$. [L1, L3]
 

@@ -50,16 +50,14 @@ transitive model of ZF between $M$ and the full extension $M[H]$
 
 **The canonical families.** For $\xi < \lambda$, $r \in \mathbb{R}$ and
 $\alpha < \lambda$ let
-$$x_{\xi r \alpha}:=\{\,\delta<\lambda: (\exists p\in H)\,
-p(\xi,r,\alpha,\delta)=1\,\}.$$
+$$x_{\xi r \alpha}:=\{\,\delta<\lambda: (\exists p\in H)\, p(\xi,r,\alpha,\delta)=1\,\}.$$
 Thus $x_{\xi r\alpha}$ is a generic subset of $\lambda$, not in general a real.
 Let
 $X_{\xi r} := \{x_{\xi r \alpha} : \alpha < \lambda\}$, let
 $R_\xi := \{X_{\xi r} : r \in \mathbb{R}\}$, and let
 $M := \{R_\xi : \xi < \lambda\}$. Genericity makes the canonical subsets for
 distinct coordinate triples distinct. Consequently the rule
-$$d_\xi(X_{\xi r},X_{\xi s})
- :=\frac{|r-s|}{1+|r-s|}$$
+$$d_\xi(X_{\xi r},X_{\xi s}) :=\frac{|r-s|}{1+|r-s|}$$
 is a well-defined metric on $R_\xi$, transported from the displayed bounded
 metric on $\mathbb R$; no metric is induced from the sets
 $x_{\xi r\alpha}\subseteq\lambda$ themselves.

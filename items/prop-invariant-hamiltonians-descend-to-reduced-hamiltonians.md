@@ -5,7 +5,7 @@ title: Invariant Hamiltonians descend to reduced Hamiltonians
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-noether-conservation-law-for-hamiltonian-actions, thm-marsden-weinstein-meyer-symplectic-reduction, prop-equivariant-maps-descend-to-smooth-maps-on-free-proper-quotients, thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions, thm-unique-maximal-integral-curve-through-each-point, def-poisson-bracket-on-a-symplectic-manifold, def-countable-choice]
+deps: [thm-noether-conservation-law-for-hamiltonian-actions, thm-marsden-weinstein-meyer-symplectic-reduction, thm-quotient-universal-property, thm-constant-rank-theorem-for-manifolds, thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions, thm-unique-maximal-integral-curve-through-each-point, def-poisson-bracket-on-a-symplectic-manifold, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -49,7 +49,7 @@ map $\pi$. Then:
 
 [F3] $\pi^*\omega_\alpha=\iota^*\omega$ and $M_\alpha$ is a smooth manifold with $\pi$ a surjective submersion. [[thm-marsden-weinstein-meyer-symplectic-reduction]].
 
-[F4] A smooth $G_\alpha$-equivariant map from the free proper $G_\alpha$-manifold $\mu^{-1}(\alpha)$ to a manifold with trivial $G_\alpha$-action descends to a unique smooth map on $M_\alpha$; in particular $H|_{\mu^{-1}(\alpha)}$ descends to $h$ with $\pi^*h=\iota^*H$. [[prop-equivariant-maps-descend-to-smooth-maps-on-free-proper-quotients]], [[thm-marsden-weinstein-meyer-symplectic-reduction]].
+[F4] A continuous map constant on quotient fibres factors uniquely through the quotient, and a smooth submersion has smooth local sections. [[thm-quotient-universal-property]], [[thm-constant-rank-theorem-for-manifolds]].
 
 [F5] Integral curves of a smooth vector field through a given initial point are unique. [[thm-unique-maximal-integral-curve-through-each-point]].
 
@@ -63,7 +63,7 @@ map $\pi$. Then:
 
 2.1 By steps 1.1 and 1.2 the field $X_H$ is $G_\alpha$-invariant and tangent to the level, so $Y_{[p]}:=d\pi_p(X_H(p))$ is well defined: for $p'=h\cdot p$ with $h\in G_\alpha$ one has $d\pi_{p'}X_H(p')=d\pi_{p'}d(a_h)X_H(p)=d(\pi\circ a_h)_pX_H(p)=d\pi_pX_H(p)$ because $\pi\circ a_h=\pi$. It is smooth, since near any point of $M_\alpha$ the submersion $\pi$ has a smooth local section. [step 1.1, step 1.2, F3]
 
-2.2 By [F4] the invariant function $H|_{\mu^{-1}(\alpha)}$ descends to a unique smooth $h\in C^\infty(M_\alpha)$ with $\pi^*h=\iota^*H$. [step 1.2, F4]
+2.2 By invariance, $H|_{\mu^{-1}(\alpha)}$ is constant on the fibres of $\pi$, so [F4] gives a unique continuous $h:M_\alpha\to\mathbb R$ with $\pi^*h=\iota^*H$. Near every point of $M_\alpha$, the submersion $\pi$ has a smooth local section $s$ by [F3] and [F4], and there $h=H\circ s$; hence $h$ is smooth. [step 1.2, F3, F4]
 
 3.1 The projected field is the Hamiltonian field of $h$: for $v\in T_p\mu^{-1}(\alpha)$, $$dh_{[p]}(d\pi_pv)=d(\pi^*h)_p(v)=d(\iota^*H)_p(v)=dH_p(v)=\omega_p(X_H(p),v)=(\pi^*\omega_\alpha)_p(X_H(p),v)=\omega_\alpha(Y_{[p]},d\pi_pv),$$ using [F3]; since $d\pi_p$ is onto, $\iota_Y\omega_\alpha=dh$, and uniqueness of Hamiltonian fields [F2] gives $Y=X_h$. [step 2.1, step 2.2, F2, F3]
 

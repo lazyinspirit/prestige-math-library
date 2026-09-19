@@ -5,7 +5,7 @@ title: Regularity of a moment map is equivalent to local freeness
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups, def-regular-and-critical-points-and-values, def-countable-choice]
+deps: [lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-stabilizers-are-closed-embedded-lie-subgroups, cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups, def-regular-and-critical-points-and-values, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -38,7 +38,7 @@ $\mu^{-1}(\alpha)$.
 
 [F1] $\operatorname{im}d\mu_p=\operatorname{ann}(\mathfrak g_p)$. [[lem-differential-of-the-moment-map-and-orbit-orthogonal-identity]].
 
-[F2] The infinitesimal orbit map has kernel exactly the stabilizer Lie algebra $\mathfrak g_p=T_eG_p$, so $\mathfrak g_p$ is the Lie algebra of the stabilizer subgroup $G_p$. [[prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra]].
+[F2] The infinitesimal orbit map has kernel exactly the stabilizer Lie algebra $\mathfrak g_p=T_eG_p$, and $G_p$ is a closed embedded Lie subgroup. [[prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra]], [[thm-stabilizers-are-closed-embedded-lie-subgroups]].
 
 [F3] A subgroup of a finite-dimensional real Lie group is discrete in the subspace topology if and only if it is a closed embedded zero-dimensional Lie subgroup; a Lie group is zero-dimensional exactly when its Lie algebra is zero. [[cor-discrete-subgroups-of-lie-groups-are-closed-embedded-zero-dimensional-subgroups]].
 

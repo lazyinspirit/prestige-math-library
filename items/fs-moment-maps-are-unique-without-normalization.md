@@ -5,7 +5,7 @@ title: Moment maps are unique without normalization
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed-covectors, def-coadjoint-representation-of-a-lie-group, def-two-dimensional-torus, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
+deps: [prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map, lem-tautological-cotangent-moment-map-is-equivariant, prop-moment-maps-for-one-action-form-an-affine-space-over-coadjoint-fixed-covectors, def-coadjoint-representation-of-a-lie-group, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -31,7 +31,7 @@ condition. **This is false.**
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field and cotangent suppliers.
 
-[F1] For the lifted action of a group acting on $Q$, the tautological moment map has components $\mu^\xi(q,p)=-p(\xi_Q(q))$, and it is an equivariant moment map. [[prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map]].
+[F1] For the lifted action of a group acting on $Q$, the tautological map has components $\mu^\xi(q,p)=-p(\xi_Q(q))$ and satisfies the component moment equations; the companion lemma proves its coadjoint equivariance, so it is an equivariant moment map. [[prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map]], [[lem-tautological-cotangent-moment-map-is-equivariant]].
 
 [F2] For $Q=\mathbb R$ with the translation action, the fundamental field of $\xi=1$ is the constant field $\xi_Q=-\partial_q$, the lifted action is $t\cdot(q,p)=(q+t,p)$, and the tautological moment map is $\mu(q,p)=p$. [[def-fundamental-vector-field-of-a-left-action]], [[prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map]].
 

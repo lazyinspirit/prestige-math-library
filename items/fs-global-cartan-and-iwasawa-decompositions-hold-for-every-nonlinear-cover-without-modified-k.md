@@ -5,7 +5,7 @@ title: Global cartan and iwasawa decompositions hold for every nonlinear cover w
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, thm-global-iwasawa-decomposition, thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, def-axiom-of-choice, def-special-linear-lie-algebra-sl-two, thm-lie-subgroup-lie-subalgebra-correspondence, def-cartan-involution-of-a-real-semisimple-lie-algebra, prop-real-cartan-subalgebras-need-not-be-conjugate]
+deps: [thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group, thm-global-iwasawa-decomposition, thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations, def-axiom-of-choice, def-special-linear-lie-algebra-sl-two, thm-cartans-closed-subgroup-theorem, thm-lie-subgroup-lie-subalgebra-correspondence, thm-one-parameter-subgroups-are-exactly-exponentials, prop-exponential-map-is-natural-for-lie-group-homomorphisms, def-cartan-involution-of-a-real-semisimple-lie-algebra, prop-real-cartan-subalgebras-need-not-be-conjugate]
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -23,24 +23,26 @@ proof_strategy: counterexample
 
 ## Statement
 
-False: the global Cartan and Iwasawa decompositions, as stated for connected
+Assume the Axiom of Choice. False: the global Cartan and Iwasawa decompositions, as stated for connected
 semisimple groups with finite center and compact $K$, hold verbatim for every
 nonlinear cover with the same compact $K$, so that no modification of $K$ is
 needed.
 
 ## Facts & Assumptions
 
-**Given:** The group $G=\operatorname{SL}_2(\mathbb R)$, its maximal compact subgroup $K=\operatorname{SO}(2)$, the Cartan involution $\theta(X)=-X^{T}$ of $\mathfrak{sl}_2(\mathbb R)$ with $\mathfrak k_0=\mathfrak{so}(2)=\mathbb Rk$, $k=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, and the universal covering homomorphism $\pi\colon\widetilde G\to G$.
+**Given:** The Axiom of Choice; the group $G=\operatorname{SL}_2(\mathbb R)$, its maximal compact subgroup $K=\operatorname{SO}(2)$, the Cartan involution $\theta(X)=-X^{T}$ of $\mathfrak{sl}_2(\mathbb R)$ with $\mathfrak k_0=\mathfrak{so}(2)=\mathbb Rk$, $k=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, and the universal covering homomorphism $\pi\colon\widetilde G\to G$.
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; in particular it supplies the countable-choice hypothesis of the closed-subgroup and subgroup-correspondence interfaces in [L3].
 
 [L1] For a connected semisimple Lie group with finite center and a global Cartan involution with differential $\theta$, the fixed group $K$ is a closed compact subgroup with Lie algebra $\mathfrak k_0$ and $K\times\mathfrak p_0\to G$, $(k,X)\mapsto k\exp X$, is a diffeomorphism; moreover $G=KAN$ with $A=\exp\mathfrak a$, $N$ the connected subgroup with Lie algebra $\mathfrak n$, and the multiplication map $K\times A\times N\to G$ is a diffeomorphism ([[thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group]], [[thm-global-iwasawa-decomposition]]).
 
 [L2] Every connected real Lie group $G$ is isomorphic to $\widetilde G/\Gamma$ for its simply connected covering group and a discrete central subgroup $\Gamma$, and a covering homomorphism is a surjective homomorphism and a covering map ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]).
 
-[L3] Closed subgroups of a Lie group are embedded Lie subgroups whose Lie algebra is $\{X:\exp(tX)\in H$ for all $t\}$, and connected subgroups with equal Lie algebras coincide ([[thm-lie-subgroup-lie-subalgebra-correspondence]]).
+[L3] A closed subgroup of a finite-dimensional real Lie group is an embedded Lie subgroup whose Lie algebra is $\{X:\exp(tX)\in H\text{ for all }t\}$; connected immersed subgroups with the same Lie algebra are uniquely isomorphic by an isomorphism commuting with their inclusions; and every one-parameter subgroup is $t\mapsto\exp(tX)$ for a unique $X$ ([[thm-cartans-closed-subgroup-theorem]], [[thm-lie-subgroup-lie-subalgebra-correspondence]], [[thm-one-parameter-subgroups-are-exactly-exponentials]]).
 
 [L4] The map $\theta(X)=-X^{T}$ is a Cartan involution of $\mathfrak{sl}_2(\mathbb R)$, the group $G=\operatorname{SL}_2(\mathbb R)$ is connected semisimple with finite center $\{\pm I\}$ and Lie algebra $\mathfrak{sl}_2(\mathbb R)$, and the involutive automorphism $\Theta(g)=(g^{-1})^{T}$ of $G$ has differential $\theta$ and fixed group $K=\operatorname{SO}(2)$ ([[def-cartan-involution-of-a-real-semisimple-lie-algebra]], [[def-special-linear-lie-algebra-sl-two]], [[prop-real-cartan-subalgebras-need-not-be-conjugate]]).
 
-[L5] The universal cover $\widetilde G$ of $G$ is connected and simply connected, and every loop in $G$ lifts; the lifted one-parameter subgroups of $\widetilde G$ project to the corresponding one-parameter subgroups of $G$ ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]], [[thm-lie-subgroup-lie-subalgebra-correspondence]]).
+[L5] The universal cover $\widetilde G$ of $G$ is connected and simply connected, and every loop in $G$ lifts. The covering homomorphism intertwines exponential maps, so the one-parameter subgroup $t\mapsto\widetilde\exp(tX)$ projects to $t\mapsto\exp(tX)$ ([[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]], [[prop-exponential-map-is-natural-for-lie-group-homomorphisms]], [[thm-one-parameter-subgroups-are-exactly-exponentials]]).
 
 ## Refutation
 
@@ -48,7 +50,7 @@ needed.
 
 1.1 For $G=\operatorname{SL}_2(\mathbb R)$ the Iwasawa decomposition of [L1] reads $G=KAN$ with $K=\operatorname{SO}(2)$, $A=\exp(\mathbb R h)$ and $N=\exp(\mathbb R e)$, so as a manifold $G$ is diffeomorphic to $\operatorname{SO}(2)\times\mathbb R^{2}$; consequently the fundamental group of $G$ is $\pi_1(G)\cong\pi_1(\operatorname{SO}(2))\cong\mathbb Z$. [L1, L4]
 
-1.2 The subgroup $\widetilde K:=\pi^{-1}(K)$ is a closed subgroup of $\widetilde G$ with Lie algebra $\mathfrak k_0=\mathbb Rk$: it is closed because $K$ is closed and $\pi$ is continuous, and its Lie algebra consists of the $X$ with $\exp(tX)\in\widetilde K$ for all $t$, which is exactly the preimage of the corresponding condition in $G$, namely $\mathfrak k_0$. [L3, L4]
+1.2 The subgroup $\widetilde K:=\pi^{-1}(K)$ is closed because $K$ is closed and $\pi$ is continuous, hence is an embedded Lie subgroup by [L3]. Its Lie algebra is $\mathfrak k_0=\mathbb Rk$: after identifying the two Lie algebras by the differential of the covering homomorphism, naturality of the exponential map in [L5] shows that $\widetilde\exp(tX)\in\widetilde K$ for every $t$ exactly when $\exp(tX)\in K$ for every $t$, which by [L3] is exactly $X\in\mathfrak k_0$. [L3, L4, L5]
 
 2.1 By [L2] the universal cover $\pi\colon\widetilde G\to G$ satisfies $G\cong\widetilde G/\Gamma$ with $\Gamma$ a discrete central subgroup isomorphic to $\pi_1(G)$, so $\Gamma\cong\mathbb Z$ and the center of $\widetilde G$ contains a copy of $\mathbb Z$; in particular $Z(\widetilde G)$ is infinite and $\widetilde G$ does not have finite center. [L2, step 1.1]
 

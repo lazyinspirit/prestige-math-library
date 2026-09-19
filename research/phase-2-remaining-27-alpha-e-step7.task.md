@@ -1,6 +1,6 @@
 # Step 7 adjudication — group **e**, run `phase-2-remaining-27`
 
-You are the group Alpha for batches **14**, **15**, **3**: 5 A/B pair(s), 10 page(s), 166 item(s), 10 open rejection(s) over 10 item(s).
+You are the group Alpha for batches **14**, **15**, **3**: 5 A/B pair(s), 10 page(s), 166 item(s), 0 open rejection(s) over 0 item(s).
 
 This is a fresh adjudication context. The durable digest below carries the
 findings from the rejection-blind whole-group reading at step 6 without
@@ -302,30 +302,10 @@ judge rejection; never reuse its source rejection as target evidence.
 
 ## Your rejections
 
-| item | page | model | context_sha256 |
-|---|---|---|---|
-| `thm-shelah-inner-model-satisfies-zf-and-dependent-choice` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `6c668080fcadd9ebeab39ba56c2ee2a8642fac3a70bad30a6cf4c1c73e5348f6` |
-| `thm-shelah-sweet-amalgamation-preserves-sweetness` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `9807a4d8fcf88a6fe95668e7f106be382e7fa3fd56b5e4e0fcb0112d0fcbd72c` |
-| `thm-shelah-sweet-partial-isomorphism-extension` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `a82fa741d982cc366ffe745c331d69766053c8896723ab9daaa9ec108d2ab136` |
-| `thm-shelah-universal-meagre-composition-preserves-sweetness` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `9eeab02fe2ae7d2ecb6042aa0531455b99f94b0631b7a757aadb506e0373c1ba` |
-| `thm-singular-value-decomposition-for-compact-operators` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `a3524f533a36cfdab4753e2543dcb030e8c1ec405379277934fd0cc48e63917f` |
-| `thm-spectral-theorem-for-compact-self-adjoint-operators` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `157d91c860cdc02188071dd11693ebd9d252de83e2af759d8bb722c5fa187dd1` |
-| `thm-strongly-compact-relative-consistency-normal-moore` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `3cf65c4789628c51660b2b22d8aacfd66e79479c24b9802a1d3a227b3b63cef6` |
-| `thm-trace-class-iff-product-of-two-hilbert-schmidt-operators` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `f08023c26bf77de4a6da2b96ec37ec6343c4f8c98406f1d33924f27797fe1b9b` |
-| `thm-trace-class-is-a-two-sided-banach-operator-ideal` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `475fd360fb8cd4990d06ff0e295820e2e9170a2c7cdd057f608e42ab78e5b45a` |
-| `thm-trace-is-absolutely-convergent-and-basis-independent` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `4f8ec60f08727a7a14c100672b15c1bbfeb48ec24470151b3c0a0c1782a15dfe` |
-
-Rendered from the ledger at scope time. **The ledger is the authority** — if
-a row appeared since, it is still yours to adjudicate.
-
-Start from `research/phase-2-remaining-27-step7-bundle-e.md`: it carries each rejected
-item's claim section, its Facts section and the verbatim quote of every cited fact.
-Work the table **grouped by item** — settle every objection to an item in one pass,
-repairing it once — and do not re-read a file already in your context.
-The bundle is an entry point, never a fence: open the full item whenever the bundle
-is insufficient, read any item of this frontier (including other groups' items) for
-seams and cross-group alerts, read the published `library/`, and search the web when a
-source check is needed.
+**None open at render time.** That is a real outcome, not an error: Terra
+may have passed every item you own. Verify it against
+`research/phase-2-remaining-27-judge.jsonl` yourself before reporting nothing to do —
+a rejection recorded after this file was rendered is still yours.
 
 ---
 

@@ -23,7 +23,7 @@ proof_strategy: direct
 ## Statement
 
 Assume $\mathrm{AC}_\omega$. Let $(M,\omega,G,\mu)$ be a Hamiltonian $G$-space,
-let $\alpha\in\mathfrak g^*$ be a regular value, and suppose that $G_\alpha$
+let $\alpha\in\mathfrak g^*$ be a regular value with nonempty level, and suppose that $G_\alpha$
 acts freely and properly on $\mu^{-1}(\alpha)$. Then the reduced space
 $M_\alpha=\mu^{-1}(\alpha)/G_\alpha$ has dimension
 
@@ -35,7 +35,7 @@ specialises to $\dim M-2\dim G$.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, a Hamiltonian $G$-space, a regular value $\alpha$, and a free proper $G_\alpha$-action on the level.
+**Given:** $\mathrm{AC}_\omega$, a Hamiltonian $G$-space, a regular value $\alpha$ with nonempty level, and a free proper $G_\alpha$-action on the level.
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the reduction and fundamental-field suppliers.
 

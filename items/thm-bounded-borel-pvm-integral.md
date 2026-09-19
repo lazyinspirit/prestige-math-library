@@ -5,7 +5,7 @@ title: Bounded borel pvm integral
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-simple-pvm-integral-is-representation-independent, lem-scalar-and-complex-measures-from-a-pvm, def-hilbert-space, def-countable-choice, thm-bounded-operator-space-is-banach, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-dominated-convergence, def-essential-supremum-with-respect-to-a-measure, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-measurable-function-between-measurable-spaces, def-integration-against-a-signed-or-complex-measure, def-complex-simple-function]
+deps: [lem-simple-pvm-integral-is-representation-independent, lem-scalar-and-complex-measures-from-a-pvm, def-projection-valued-measure, def-hilbert-space, def-countable-choice, thm-bounded-operator-space-is-banach, thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation, thm-dominated-convergence, def-essential-supremum-with-respect-to-a-measure, prop-essential-supremum-is-attained-as-the-least-essential-bound, def-measurable-function-between-measurable-spaces, def-integration-against-a-signed-or-complex-measure, def-complex-simple-function]
 proof_strategy: direct
 provenance:
   statement: ai-altered

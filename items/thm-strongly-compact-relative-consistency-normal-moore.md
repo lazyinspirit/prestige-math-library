@@ -34,7 +34,11 @@ strongly compact cardinal is asserted
 
 [F2] $\mathrm{ZFC} + \mathrm{PMEA}$ proves NMSC ([[thm-pmea-implies-normal-moore-space-conjecture]]).
 
-[F3] A verified finite-proof reduction turns a fixed formal proof of a first-order statement into the corresponding consistency implication: if $T$ proves $\varphi$ then $\operatorname{Con}(T)$ implies $\operatorname{Con}(T+\varphi)$ ([[thm-formal-relative-consistency-from-verified-proof-reduction]]).
+[F3] If an arithmetic base $B$ verifies a total code map $r$ and
+$\forall p(\operatorname{Prf}_U(p,\ulcorner\bot\urcorner)\to
+\operatorname{Prf}_T(r(p),\ulcorner\bot\urcorner))$, then
+$B\vdash\operatorname{Con}(T)\to\operatorname{Con}(U)$
+([[thm-formal-relative-consistency-from-verified-proof-reduction]]).
 
 [F4] Both theories are formulated over $\mathrm{ZFC}$ with $\mathrm{AC}$ explicit ([[def-axiom-of-choice]]).
 
@@ -44,13 +48,13 @@ strongly compact cardinal is asserted
 
 1.1 Assume $\operatorname{Con}(\mathrm{ZFC} + \text{a strongly compact cardinal})$. [given]
 
+1.2 Put $T_0:=\mathrm{ZFC}+\mathrm{PMEA}$ and $U:=\mathrm{ZFC}+\mathrm{NMSC}$. By [F2], fix a finite $T_0$-proof $q$ of NMSC. Define $r$ on codes of $U$-proofs by scanning the finite proof, copying logical and ZFC axiom lines and inference steps, and replacing every use of the added NMSC axiom by the fixed proof $q$, with line references renumbered. This is a total primitive-recursive code map. The chosen arithmetic proof checker verifies by induction on the length of the input proof that every copied line remains valid and every replaced line is the conclusion of $q$; hence it verifies $\operatorname{Prf}_U(p,\ulcorner\bot\urcorner)\to\operatorname{Prf}_{T_0}(r(p),\ulcorner\bot\urcorner)$ for every $p$. [F2, F3, F4, construct]
+
 2.1 By [F1] the theory $\mathrm{ZFC} + \mathrm{PMEA}$ is consistent. [step 1.1, F1]
 
-2.2 By [F2] the fixed theory $\mathrm{ZFC}+\mathrm{PMEA}$ formally proves that every normal Moore space is metrizable, and this proof is a finite object whose axiom support lies in that theory. [step 1.1, F2, F4]
+2.2 Apply [F3] to the verified map $r$ of [step 1.2]. It gives $\operatorname{Con}(T_0)\to\operatorname{Con}(U)$, that is, $\operatorname{Con}(\mathrm{ZFC}+\mathrm{PMEA})\to\operatorname{Con}(\mathrm{ZFC}+\mathrm{NMSC})$. [step 1.2, F3]
 
-3.1 By [F3] applied to that fixed proof, $\operatorname{Con}(\mathrm{ZFC}+\mathrm{PMEA})$ implies $\operatorname{Con}(\mathrm{ZFC}+\mathrm{PMEA}+\mathrm{NMSC})$, hence in particular $\operatorname{Con}(\mathrm{ZFC}+\mathrm{NMSC})$. [step 2.1, step 2.2, F3]
-
-4.1 Chaining steps 1.1, 2.1 and 3.1 gives the displayed implication, under the metatheoretic consistency assumption only. [step 2.1, step 3.1] ∎
+3.1 Chaining steps 1.1, 2.1 and 2.2 gives the displayed implication, under the metatheoretic consistency assumption only. [step 2.1, step 2.2] ∎
 
 ## Remarks
 

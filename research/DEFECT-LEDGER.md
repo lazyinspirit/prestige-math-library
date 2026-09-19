@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 0254da570ae1 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ a1a4d2b76abe by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 9834 |
-| now mechanically prevented | 356 |
+| defects caught before publication | 9940 |
+| now mechanically prevented | 371 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -772,35 +772,38 @@
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
 
-## phase-2-remaining-27 — 1035 row(s)
+## phase-2-remaining-27 — 1141 row(s)
 
 | subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
 |---|---|---|---|
-| citation-inaccurate | 28 |  | 262 |
-| invalid-inference | 7 |  | 273 |
-| false-claim | 72 |  | 41 |
+| citation-inaccurate | 28 |  | 285 |
+| invalid-inference | 7 |  | 297 |
+| false-claim | 72 |  | 43 |
+| citation-missing | 5 | 16 | 38 |
 | citation-inflated |  | 15 | 37 |
-| ill-typed-construction |  |  | 44 |
-| citation-missing | 5 | 16 | 19 |
-| missing-hypothesis | 8 |  | 31 |
-| false-or-overstrong-statement | 7 |  | 23 |
+| ill-typed-construction |  |  | 48 |
+| missing-hypothesis | 8 |  | 33 |
+| false-or-overstrong-statement | 7 |  | 32 |
 | unlicensed-inference | 28 |  |  |
-| false-computation | 13 |  | 10 |
+| false-computation | 13 |  | 11 |
 | ill-formed | 20 |  |  |
-| missing-case |  |  | 16 |
-| arithmetic-error | 8 |  | 6 |
-| missing-choice-scope | 1 |  | 6 |
+| missing-case |  |  | 18 |
+| arithmetic-error | 8 |  | 8 |
+| contract-mismatch | 3 |  | 7 |
+| missing-choice-scope | 1 |  | 8 |
+| ill-typed-claim | 1 |  | 8 |
 | unsupported-inference | 4 |  | 3 |
-| ill-typed-claim | 1 |  | 5 |
 | false-boundary-disposition |  |  | 6 |
 | invalid-witness | 2 |  | 3 |
-| contract-mismatch | 3 |  |  |
+| false-or-overstrong-title |  |  | 4 |
 | undefined-notation | 3 |  |  |
 | other | 2 |  | 1 |
-| false-or-overstrong-title |  |  | 3 |
+| citation-truncated |  |  | 3 |
 | reader-repair | 1 |  |  |
 | citation-misattributed |  |  | 1 |
 | invalid-refutation |  |  | 1 |
+| unsupported-universal-property |  |  | 1 |
+| frontmatter-schema |  |  | 1 |
 
 ## phase-2-wave-1 — 74 row(s)
 

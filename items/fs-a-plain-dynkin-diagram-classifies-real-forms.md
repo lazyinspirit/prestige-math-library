@@ -23,13 +23,15 @@ proof_strategy: counterexample
 
 ## Statement
 
-False: the plain Dynkin diagram of the complexification classifies the real
+Assume the Axiom of Choice. False: the plain Dynkin diagram of the complexification classifies the real
 forms of a complex semisimple Lie algebra, so that no additional decoration is
 needed.
 
 ## Facts & Assumptions
 
-**Given:** The complex simple Lie algebra $\mathfrak{sl}_2(\mathbb C)$ with its real forms $\mathfrak{su}(2)=\{X:X^{*}=-X\}$ and $\mathfrak{sl}_2(\mathbb R)$, and the Dynkin diagram conventions of [[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]].
+**Given:** The Axiom of Choice; the complex simple Lie algebra $\mathfrak{sl}_2(\mathbb C)$ with its real forms $\mathfrak{su}(2)=\{X:X^{*}=-X\}$ and $\mathfrak{sl}_2(\mathbb R)$, and the Dynkin diagram conventions of [[def-dynkin-diagram-with-edge-multiplicity-and-arrow-convention]].
+
+[A1] The Axiom of Choice is [[def-axiom-of-choice]]; it is the hypothesis required by the Vogan-classification interface in [L4].
 
 [L1] $\mathfrak{su}(2)$ and $\mathfrak{sl}_2(\mathbb R)$ are real forms of $\mathfrak{sl}_2(\mathbb C)$: the unitary algebra is the fixed locus of the conjugate-linear involution $X\mapsto-X^{*}$, and the real basis $h,e,f$ of $\mathfrak{sl}_2(\mathbb R)$ is a complex basis of $\mathfrak{sl}_2(\mathbb C)$ ([[prop-real-cartan-subalgebras-need-not-be-conjugate]], [[def-special-linear-lie-algebra-sl-two]], [[def-classical-complex-matrix-lie-algebras]]).
 
@@ -47,6 +49,6 @@ needed.
 
 2.1 The complexification of each of them is $\mathfrak{sl}_2(\mathbb C)$, which is complex simple with Dynkin diagram $A_1$ by [L3]; consequently both real forms have the same plain Dynkin diagram of the complexification, namely one vertex and no edge. [L3, step 1.1]
 
-3.1 If the plain Dynkin diagram of the complexification classified real forms, then the two real forms of step 1.1 — which share the diagram $A_1$ — would be isomorphic; they are not, by [L2]. Hence the plain diagram does not classify real forms, and the passage from the diagram to a real form requires the additional data recalled in [L4]: for $\mathfrak{sl}_2(\mathbb C)$ the single vertex is painted for one of the two forms and unpainted for the other, which is exactly the distinction between $\mathfrak{su}(2)$ and $\mathfrak{sl}_2(\mathbb R)$. [L2, L4, step 1.1, step 2.1]
+3.1 If the plain Dynkin diagram of the complexification classified real forms, then the two real forms of step 1.1 — which share the diagram $A_1$ — would be isomorphic; they are not, by [L2]. Hence the plain diagram does not classify real forms, and the passage from the diagram to a real form requires the additional data recalled in [L4]: for $\mathfrak{sl}_2(\mathbb C)$ the single vertex is painted for one of the two forms and unpainted for the other, which is exactly the distinction between $\mathfrak{su}(2)$ and $\mathfrak{sl}_2(\mathbb R)$. [A1, L2, L4, step 1.1, step 2.1]
 
 4.1 Therefore two non-isomorphic real forms of a complex semisimple Lie algebra can have the same plain Dynkin diagram of the complexification, and the statement that a plain Dynkin diagram classifies real forms is false. [step 2.1, step 3.1] ∎

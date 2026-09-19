@@ -1,6 +1,6 @@
 # Step 7 adjudication — group **a**, run `phase-2-remaining-27`
 
-You are the group Alpha for batches **11**, **12**, **13**: 6 A/B pair(s), 12 page(s), 350 item(s), 40 open rejection(s) over 40 item(s).
+You are the group Alpha for batches **11**, **12**, **13**: 6 A/B pair(s), 12 page(s), 350 item(s), 0 open rejection(s) over 0 item(s).
 
 This is a fresh adjudication context. The durable digest below carries the
 findings from the rejection-blind whole-group reading at step 6 without
@@ -487,60 +487,10 @@ judge rejection; never reuse its source rejection as target evidence.
 
 ## Your rejections
 
-| item | page | model | context_sha256 |
-|---|---|---|---|
-| `ex-two-sphere-as-a-coadjoint-orbit-of-so-three` | `moment-maps-and-symplectic-reduction-examples` | gpt-5.6-terra | `69915b37bcf42491723a7464af61eaa803c443e212cb8cb9b6bf9e87ffb08846` |
-| `ex-vogan-diagrams-for-real-forms-of-sl-three-c` | `real-forms-and-real-semisimple-lie-algebras-examples` | gpt-5.6-terra | `d0db550f7b1b601c168ea5452c1f4df71a4de51d15c098e9c859520848596d15` |
-| `ex-weighted-circle-actions-and-weighted-projective-singular-quotients` | `moment-maps-and-symplectic-reduction-examples` | gpt-5.6-terra | `56832536ffca21f02f83b3424380198118a5906222f870adb56ea1abd48ef70b` |
-| `fs-a-plain-dynkin-diagram-classifies-real-forms` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `c88509715eefca24a9c017c557905d6f7f1edbebd4ed0d531b12e1c086735c0d` |
-| `fs-every-symplectic-action-is-hamiltonian` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `289c3161f74c64c73bbba7bf8912e033f89f33c0dea857e0ad1dcc66df2380d0` |
-| `fs-global-cartan-and-iwasawa-decompositions-hold-for-every-nonlinear-cover-without-modified-k` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `712712173536fff7e0652d953afc5e82ad19317e7ec371ce880ea821576c66f1` |
-| `fs-moment-maps-are-unique-without-normalization` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `b5abea1c15c79e554d3a0fc476ad813ed8cdd452bd7cdf74deb040d9d9c83301` |
-| `fs-restricted-root-systems-are-always-reduced` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `0de75d9b9e6dffe1990ea76769143297925898f437fee76d93e96935a31fc8db` |
-| `fs-the-cotangent-lift-moment-map-has-a-plus-sign-under-the-library-fundamental-field-convention` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `7bf9a710f322dcd959d6c336af244a79f3baaeafb221ae97fbac2f7f624d109a` |
-| `fs-the-general-reduced-dimension-is-dim-m-minus-two-dim-g` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `81238af834f59eeb1e14083cc1793ddd84fb210e436a730dce0396de9d4f91d1` |
-| `lem-characteristic-kernel-on-a-regular-moment-level` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `77812c1224f5fefbce9be33141acef48e45755e28c25cdf1ccd7c66e1897b161` |
-| `prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `b6938e50f18d3a8d4a1a1254326a419fa8676c07a889091c60b43bf84e494a86` |
-| `prop-classical-real-forms-of-the-classical-complex-lie-algebras` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `e3f4d4ea413a3c143ddc1f8146c54523cf6fdc0f8ce558be0a8f0211873c77ec` |
-| `prop-compact-group-moment-map-can-be-averaged-to-an-equivariant-one-when-the-affine-obstruction-vanishes` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `587c6f53e396faafefd729d026a1225adafcdb9ac3b18925c4f46bde16c5c491` |
-| `prop-dimension-of-a-regular-nonzero-reduced-space` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `577a8d14a66e6fceccda5f4e519769747e9cf755a43b60cbbf663db474c07dbf` |
-| `prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `d83cc74a30509334bd20a01b3cf48140240ac0365b70003aaebee2be9b7d84b9` |
-| `prop-equivariant-symplectomorphisms-preserve-moment-maps-up-to-a-coadjoint-fixed-covector` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `0a59601f689c27b7d4076189bb2b5c23bff4b892e9f893316ad87d4c31af5c9b` |
-| `prop-infinitesimal-generator-of-a-symplectic-action-is-symplectic` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `ddbbb2d96b74adbbbea1df8cd1edfcb9788af96a3274beeb90c2b78854864e19` |
-| `prop-invariant-hamiltonians-descend-to-reduced-hamiltonians` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `c26f41b04f0516aef60868d1f6ee6eddf072dcc1d700b28b4f35dc6fd8fc4532` |
-| `prop-real-cartan-subalgebras-need-not-be-conjugate` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `78670ac4cf8633ec84ab585197e0d07142909ca3c0b9b53bb1fec6992d6d0262` |
-| `prop-reduction-commutes-with-products` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `6afb74146c83d322e3e65464fbaeb8c5b033edde0808d72a2d860ea12c5e0ba5` |
-| `prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `cb76ab7048d94b743a28ca3fe13769a5f63b923b2ffa7aae00e15142abe3db9a` |
-| `prop-restricted-root-systems-may-be-nonreduced` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `a3d1218bd4f60eda72c61aa6169173b68e74ca722661a50e35c436788d0647ee` |
-| `prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `072c05f0ac7e30e1bef25e32c2454b47acc6e0cec4f13c137ea0610cabf0a391` |
-| `prop-uniqueness-and-change-of-positive-system-in-iwasawa-decomposition` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `bd9d9745bb4e92ce985534d626323afe85e5636a72c3951ce53cdda0f9cde5e6` |
-| `prop-whitehead-two-removes-the-infinitesimal-equivariance-obstruction-for-semisimple-actions` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `d607c562ab27315b7128874e12b90fb6150a3a3bf4be367721135e52f490ffef` |
-| `rem-nonregular-or-nonfree-symplectic-quotients-need-not-be-manifolds` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `96e70c8ecc2c8e03db0e18417523235a0c921a5e3731e91869e6fb1289eae7ae` |
-| `rem-representation-theory-of-noncompact-real-reductive-groups` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `313a1e7ca61b3f1a1e0bee2e3adb81f0991a7e18466749eb6ac70a55521d6ba4` |
-| `thm-cayley-transforms-connect-theta-stable-cartans-in-the-classification` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `845ef52546261a11b10b3552587fe281262672cb1ca817358e41a81eaa1fdb8a` |
-| `thm-classification-of-real-forms-by-vogan-diagrams` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `a027f8df1a1ab400dd7818b5c067f46299f41271871cf8fa0608dc2912eb5c16` |
-| `thm-classification-of-real-semisimple-lie-algebras` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `ab22be88a8971f2131c9257e9c1653e645b909025743ce43aa304d14b19c74d8` |
-| `thm-coadjoint-orbits-are-symplectic-manifolds` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `f86f5804d96d55a7ff5953941d46dbf39c106606559dfb0851038dd93bee4784` |
-| `thm-complexification-dichotomy-for-a-real-simple-lie-algebra` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `aad31ddeb924f4a4e97bfd37a2ad451d28d6431fe3b6192888870ff1e0e17f1f` |
-| `thm-conjugacy-of-compact-real-forms` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `8dcb849a9cd49487d5476b4683c571888184141289edb5417e7230304cbe7f7e` |
-| `thm-existence-of-a-compact-real-form` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `4b2293d542473e47480def9e24310381e846436ad1903ecc3e4abd241a446ed7` |
-| `thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `7865fe22abdc6815b9d69f9ba288fc70286c7d45227ccdc81145351bcad86e3a` |
-| `thm-global-iwasawa-decomposition` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `45da2bb7d2ab16a8b2d09eece7d30ac437b9710ffac23d1204a7a20b43380785` |
-| `thm-marsden-weinstein-meyer-symplectic-reduction` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `59711950b53931e4b2b5805be3ac1a0d5a0d1d2d2696b33b543806ec09f9dd60` |
-| `thm-reduction-in-stages-for-free-proper-regular-actions` | `moment-maps-and-symplectic-reduction` | gpt-5.6-terra | `fcfac9b2f434ea94fc5d4ff37817a29976f90dd636675b236fbc1ea03da49aea` |
-| `thm-restricted-root-space-decomposition` | `real-forms-and-real-semisimple-lie-algebras` | gpt-5.6-terra | `a2d0d1c31737718a1d84e72787fc316a8ffc0db52b3034fa6733d7b0295bc2f2` |
-
-Rendered from the ledger at scope time. **The ledger is the authority** — if
-a row appeared since, it is still yours to adjudicate.
-
-Start from `research/phase-2-remaining-27-step7-bundle-a.md`: it carries each rejected
-item's claim section, its Facts section and the verbatim quote of every cited fact.
-Work the table **grouped by item** — settle every objection to an item in one pass,
-repairing it once — and do not re-read a file already in your context.
-The bundle is an entry point, never a fence: open the full item whenever the bundle
-is insufficient, read any item of this frontier (including other groups' items) for
-seams and cross-group alerts, read the published `library/`, and search the web when a
-source check is needed.
+**None open at render time.** That is a real outcome, not an error: Terra
+may have passed every item you own. Verify it against
+`research/phase-2-remaining-27-judge.jsonl` yourself before reporting nothing to do —
+a rejection recorded after this file was rendered is still yours.
 
 ---
 

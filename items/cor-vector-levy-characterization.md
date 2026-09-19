@@ -35,7 +35,7 @@ $\mathcal F_s$ with law $N_d(0,(t-s)I_d)$.
 
 [F2] **Bilinearity of covariation.** For continuous processes whose pairwise covariations exist the covariation is bilinear: $[X_1+X_2,Y]=[X_1,Y]+[X_2,Y]$ and $[cX,Y]=c[X,Y]$, because cross-increment sums are exactly bilinear and probability limits are unique. [[def-quadratic-covariation-of-brownian-ito-processes]]
 
-[F3] **Scalar Levy characterization.** A real continuous local martingale $N$ with $N_0=0$ and $[N]_t=t$ is a standard Brownian motion with the increment independence and $N(0,t-s)$ conditional law of [[thm-levy-characterization-of-brownian-motion]]. [[thm-levy-characterization-of-brownian-motion]] [[def-continuous-time-adapted-process-and-martingale]]
+[F3] **Scalar Levy characterization.** A real continuous local martingale $N$ with $N_0=0$ and $[N]_t=t$ is a standard Brownian motion with the increment independence and $N(0,t-s)$ conditional law of [[thm-levy-characterization-of-brownian-motion]]. [[def-continuous-time-adapted-process-and-martingale]]
 
 [F4] **Multivariate Fourier uniqueness and Gaussian laws.** Finite Borel measures on $\mathbb R^n$ with equal Fourier transforms are equal. The law $N_d(0,(t-s)I_d)$ exists, can be realized as the product of independent $N(0,t-s)$ coordinates, and its Fourier transform at $\lambda$ is $e^{-(t-s)|\lambda|^2/2}$. [[cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms]] [[def-multivariate-normal-law]] [[lem-characteristic-function-of-a-multivariate-normal-law]] [[def-standard-normal-and-normal-laws]] [[def-d-dimensional-brownian-motion]]
 

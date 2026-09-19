@@ -5,7 +5,7 @@ title: Nonregular or nonfree symplectic quotients need not be manifolds
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-countable-choice]
+deps: [thm-marsden-weinstein-meyer-symplectic-reduction, lem-differential-of-the-moment-map-and-orbit-orthogonal-identity, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-countable-choice]
 provenance:
   statement: literature-derived
   proof: not-applicable
@@ -29,7 +29,7 @@ load-bearing, and nothing on this page asserts a smooth quotient without them:
 * if the value is not regular, the image of the differential is only
   $\operatorname{ann}(\mathfrak g_p)$ and the level need not be a submanifold
   of the ambient symplectic manifold at all
-  ([[prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness]]);
+  ([[lem-differential-of-the-moment-map-and-orbit-orthogonal-identity]]);
 * if the action on the level is not free, the quotient is only an orbifold or
   a stratified space in general. For the weighted circle actions
   $e^{i\theta}\cdot(z_1,z_2)=(e^{ik\theta}z_1,e^{i\ell\theta}z_2)$ the quotient

@@ -5,7 +5,8 @@ title: Root systems B_2 and C_2 from matrix Lie algebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, def-rank-and-isomorphism-of-root-systems, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion]
+deps: [thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system, def-root-and-root-space-relative-to-a-cartan-subalgebra, def-cartan-subalgebra-of-a-lie-algebra, def-normalizer-of-a-lie-subalgebra, ex-classical-simple-lie-algebras-and-their-killing-forms, thm-cartans-semisimplicity-criterion]
+forward_refs: [def-rank-and-isomorphism-of-root-systems]
 provenance:
   statement: literature-derived
   proof: ai-altered

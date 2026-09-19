@@ -5,7 +5,7 @@ title: Root systems of the classical complex Lie algebras
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-classical-complex-matrix-lie-algebras, prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-reduced-crystallographic-euclidean-root-system, def-cartan-subalgebra-of-a-lie-algebra, thm-existence-of-each-classified-root-system, ex-low-rank-dynkin-coincidences]
+deps: [def-classical-complex-matrix-lie-algebras, prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras, thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra, def-reduced-crystallographic-euclidean-root-system, def-cartan-subalgebra-of-a-lie-algebra, thm-existence-of-each-classified-root-system]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -48,6 +48,12 @@ reduced crystallographic Euclidean root systems of types $A_{n-1}$, $C_n$,
 $D_n$, $B_n$ respectively, with the low-rank identifications
 $B_1=C_1=A_1$, $C_2=B_2$, $D_2=A_1\sqcup A_1$, and $D_3=A_3$.
 
+## Remarks
+
+The low-rank identifications are checked directly in step 3.1. The later
+example collecting those coincidences is therefore explanatory rather than a
+logical prerequisite, which breaks the former circular dependency.
+
 ## Facts & Assumptions
 
 **Given:** One of the classical matrix Lie algebras $\mathfrak g$, its diagonal subalgebra $\mathfrak h$, the coordinate functionals $\varepsilon_i$, and the matrix units $E_{ab}$.
@@ -56,7 +62,7 @@ $B_1=C_1=A_1$, $C_2=B_2$, $D_2=A_1\sqcup A_1$, and $D_3=A_3$.
 
 [L2] The diagonal subalgebra $\mathfrak h$ is a Cartan subalgebra with simultaneous diagonalization of the adjoint action ([[prop-classical-matrix-lie-algebras-have-split-cartan-subalgebras]], [[thm-root-space-decomposition-of-a-complex-semisimple-lie-algebra]]).
 
-[L3] The standard coordinate models of $A_{n-1}$, $B_n$, $C_n$, $D_n$ are the root sets $\{\varepsilon_i-\varepsilon_j\}$, $\{\pm\varepsilon_i,\pm\varepsilon_i\pm\varepsilon_j\}$, $\{\pm2\varepsilon_i,\pm\varepsilon_i\pm\varepsilon_j\}$, $\{\pm\varepsilon_i\pm\varepsilon_j\}$ in their stable ranges; the low-rank models have the identifications stated above ([[thm-existence-of-each-classified-root-system]], [[ex-low-rank-dynkin-coincidences]]).
+[L3] Every type on the classification list has a reduced crystallographic realization with its indicated Dynkin diagram ([[thm-existence-of-each-classified-root-system]]).
 
 [L4] A root system in the sense used here is a reduced crystallographic root system ([[def-reduced-crystallographic-euclidean-root-system]]).
 
@@ -70,4 +76,4 @@ $B_1=C_1=A_1$, $C_2=B_2$, $D_2=A_1\sqcup A_1$, and $D_3=A_3$.
 
 2.2 Each listed root set is a reduced crystallographic Euclidean root system: it is finite, spans the dual of the diagonal subalgebra, excludes $0$, and the functions $\pm\varepsilon_i\pm\varepsilon_j$ have only $\pm$ themselves on their lines. Integrality: the squared lengths are $2$ for $\varepsilon_i-\varepsilon_j$ and $\varepsilon_i\pm\varepsilon_j$ and $1$ or $4$ for $\pm\varepsilon_i$ and $\pm2\varepsilon_i$, and the inner products are $0,\pm1,\pm2$; hence $2(\beta,\alpha)/(\alpha,\alpha)\in\{0,\pm1,\pm2\}$ in every case. Reflection closure: the reflections act by the signed permutations of coordinates described in the explicit construction of these systems, so they permute each listed set. [L1, step 1.1, L4, algebra]
 
-3.1 By [L3] the four listed sets are the standard coordinate models of types $A_{n-1}$, $C_n$, $D_n$, $B_n$ respectively (the fourth list is the $B_n$ model with the additional roots $\pm\varepsilon_i$); combined with steps 2.1 and 2.2 this proves all assertions of the statement. [L3, step 2.1, step 2.2, algebra] ∎
+3.1 The standard simple roots in the four lists are $\varepsilon_i-\varepsilon_{i+1}$, with the last root respectively absent, $2\varepsilon_n$, $\varepsilon_{n-1}+\varepsilon_n$, or $\varepsilon_n$. Their Cartan matrices are the matrices of $A_{n-1},C_n,D_n,B_n$ from [L3], so the four root sets have the asserted types in the stable ranges. The remaining ranks follow directly from the same lists: $B_1=\{\pm\varepsilon_1\}$ and $C_1=\{\pm2\varepsilon_1\}$ are both $A_1$ after uniform rescaling; the map $\varepsilon_1\mapsto\varepsilon_1+\varepsilon_2$, $\varepsilon_2\mapsto\varepsilon_1-\varepsilon_2$ carries the eight roots of $B_2$ to those of $C_2$ and rescales every inner product by $2$; $D_2=\{\pm(\varepsilon_1-\varepsilon_2),\pm(\varepsilon_1+\varepsilon_2)\}$ is the orthogonal union $A_1\sqcup A_1$; and the three simple roots $\varepsilon_1-\varepsilon_2$, $\varepsilon_2-\varepsilon_3$, $\varepsilon_2+\varepsilon_3$ of $D_3$ have the three-vertex path Cartan matrix of $A_3$. Combined with steps 2.1 and 2.2, this proves every assertion without using the later low-rank example as a prerequisite. [L3, step 2.1, step 2.2, algebra] ∎

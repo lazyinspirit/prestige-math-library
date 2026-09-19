@@ -5,7 +5,7 @@ title: The same Dynkin diagram forces isomorphic connected Lie groups
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups, def-countable-choice, ex-cartan-subalgebra-and-roots-of-sl-two]
+deps: [ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups, def-countable-choice, ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -34,7 +34,7 @@ covering-group supplier used in the refutation
 
 [L1] Conjugation on imaginary quaternions defines a twofold covering homomorphism $\operatorname{SU}(2)\to\operatorname{SO}(3)$ whose differential is an isomorphism $\mathfrak{su}(2)\cong\mathfrak{so}(3)$; the groups are connected and are not isomorphic, because $\operatorname{SU}(2)$ is simply connected while $\pi_1(\operatorname{SO}(3))\cong\mathbb Z/2$ ([[ex-su-two-and-so-three-have-isomorphic-real-lie-algebras-locally-but-different-global-groups]]).
 
-[L2] In $\mathfrak{sl}_2(\mathbb C)$, the diagonal Cartan subalgebra has the two roots $\pm\alpha$ and hence the rank-one root system $A_1$ ([[ex-cartan-subalgebra-and-roots-of-sl-two]]).
+[L2] Specializing the diagonal-Cartan computation for $\mathfrak{sl}_n(\mathbb C)$ to $n=2$ gives the two roots $\pm(\varepsilon_1-\varepsilon_2)$ and hence the rank-one root system $A_1$ ([[ex-diagonal-cartan-subalgebra-and-roots-of-sl-n]]).
 
 ## Proof
 

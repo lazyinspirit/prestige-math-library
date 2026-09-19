@@ -29,10 +29,9 @@ $\phi(g\cdot p)=g\cdot\phi(p)$ and $\phi^*\omega=\omega$ for all $g,p$. Then
 
 $$\mu\circ\phi-\mu=\delta$$
 
-for a constant coadjoint-fixed covector $\delta\in(\mathfrak g^*)^G$. In
-particular, after a normalization of the moment map that fixes the affine
-ambiguity of the previous proposition, an equivariant symplectomorphism
-preserves the moment map literally: $\mu\circ\phi=\mu$.
+for a constant coadjoint-fixed covector $\delta\in(\mathfrak g^*)^G$.
+Literal preservation holds exactly when $\delta=0$; for example it holds if
+$\phi$ has a fixed point in $M$.
 
 ## Facts & Assumptions
 
@@ -60,4 +59,4 @@ preserves the moment map literally: $\mu\circ\phi=\mu$.
 
 3.1 By steps 1.2 and 2.1 the composite $\mu\circ\phi$ is an equivariant moment map for the same action as $\mu$. Both are equivariant moment maps on the connected manifold $M$, so [F4] provides $\delta\in(\mathfrak g^*)^G$ with $\mu\circ\phi-\mu=\delta$. [step 1.2, step 2.1, F4]
 
-4.1 The difference vanishes exactly when $\delta=0$. A normalization that selects one representative of the affine class of moment maps fixes $\delta=0$, and for that representative $\mu\circ\phi=\mu$; without such a normalization the two maps differ by the constant coadjoint-fixed covector $\delta$. [step 3.1, F3, A1] ∎
+4.1 The difference vanishes exactly when $\delta=0$. Adding any constant covector $c$ to the moment map does not change this difference, because $(\mu+c)\circ\phi-(\mu+c)=\mu\circ\phi-\mu$. If $p$ is a fixed point of $\phi$, however, then evaluating step 3.1 at $p$ gives $\delta=\mu(\phi(p))-\mu(p)=0$, so $\mu\circ\phi=\mu$. [step 3.1, F3, A1, algebra] ∎

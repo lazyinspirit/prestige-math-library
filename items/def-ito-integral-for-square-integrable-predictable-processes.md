@@ -46,9 +46,7 @@ is defined as follows.
    about it are statements about that class. The limit does not depend on the
    chosen sequence: if another elementary sequence $K^n\to H$ is used, then
    the elementary isometry and linearity give
-   $$\|I_T(H^n)-I_T(K^n)\|_{L^2(P)}
-   =\|H^n-K^n\|_{L^2(\mathrm dt\otimes P)}
-   \le\|H^n-H\|_2+\|K^n-H\|_2\longrightarrow0,$$
+   $$\|I_T(H^n)-I_T(K^n)\|_{L^2(P)} =\|H^n-K^n\|_{L^2(\mathrm dt\otimes P)} \le\|H^n-H\|_2+\|K^n-H\|_2\longrightarrow0,$$
    so the two $L^2(P)$ limits agree.
 
 2. **Integrals at a time.** For $t\in[0,T]$ put

@@ -38,9 +38,7 @@ $$N_{n,k}(e_1(x),\dots,e_n(x))=\sum_{i=1}^nx_i^k$$
 for all $x_1,\dots,x_n$, which exists by
 [[thm-fundamental-theorem-of-symmetric-polynomials]] applied to the symmetric
 polynomial $\sum_ix_i^k$. On a positive-rank component define
-$$\operatorname{ch}_k(E)|_{X_\alpha}:=
-\tfrac1{k!}\,N_{n_\alpha,k}\bigl(c_1(E|_{X_\alpha}),\dots,
-c_{n_\alpha}(E|_{X_\alpha})\bigr).$$
+$$\operatorname{ch}_k(E)|_{X_\alpha}:= \tfrac1{k!}\,N_{n_\alpha,k}\bigl(c_1(E|_{X_\alpha}),\dots, c_{n_\alpha}(E|_{X_\alpha})\bigr).$$
 On a rank-zero component define every $\operatorname{ch}_k$ to be zero.
 These componentwise classes determine an element of $H^{2k}(X;\mathbb Q)$.
 The **Chern character** is

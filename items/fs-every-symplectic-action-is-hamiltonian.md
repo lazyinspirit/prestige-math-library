@@ -5,7 +5,7 @@ title: Every symplectic action is Hamiltonian
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-symplectic-and-hamiltonian-lie-group-action, def-fundamental-vector-field-of-a-left-action, def-two-dimensional-torus, def-countable-choice, thm-symplectic-vector-fields-modulo-hamiltonian-vector-fields-are-first-de-rham-cohomology, cor-a-nonzero-period-obstructs-exactness-and-bounding]
+deps: [def-symplectic-and-hamiltonian-lie-group-action, def-fundamental-vector-field-of-a-left-action, def-smooth-left-action-of-a-lie-group, def-countable-choice, def-two-dimensional-torus, cor-a-nonzero-period-obstructs-exactness-and-bounding]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -30,9 +30,9 @@ Every symplectic Lie-group action is Hamiltonian. **This is false.**
 
 [A1] $\mathrm{AC}_\omega$ is [[def-countable-choice|countable choice]]; it is used only through the fundamental-field interface.
 
-[F1] On $T^2$ the one-forms $dx$ and $dy$ are well defined, $\omega=dx\wedge dy$ is symplectic, and the vector field $\partial_x$ is symplectic but not Hamiltonian: $\iota_{\partial_x}\omega=dy$ has nonzero period and is not exact. [[def-two-dimensional-torus]].
+[F1] On the given standard smooth torus $T^2=\mathbb R^2/\mathbb Z^2$ the forms $dx,dy$ descend, $\omega=dx\wedge dy$ is symplectic, and $\iota_{\partial_x}\omega=dy$. A closed one-form with nonzero period on an oriented embedded circle is not exact ([[cor-a-nonzero-period-obstructs-exactness-and-bounding]]).
 
-[F2] The action $t\cdot[(x,y)]:=[(x+t,y)]$ is a smooth left action of $\mathbb R$ on $T^2$, and its fundamental field for $\xi=1$ is $\xi_{T^2}=\left.\frac d{dt}\right|_0(-t)\cdot p=-\partial_x$. [[def-fundamental-vector-field-of-a-left-action]], [[def-two-dimensional-torus]].
+[F2] A smooth left action is jointly smooth and satisfies the identity and action laws; in the library convention its fundamental field is $\xi_M(p)=\left.\frac d{dt}\right|_0\exp(-t\xi)\cdot p$. [[def-smooth-left-action-of-a-lie-group]], [[def-fundamental-vector-field-of-a-left-action]].
 
 [F3] A Hamiltonian action admits a map whose component for $\xi$ satisfies $d\mu^\xi=-\iota_{\xi_{T^2}}\omega$. [[def-symplectic-and-hamiltonian-lie-group-action]].
 
@@ -42,9 +42,9 @@ Every symplectic Lie-group action is Hamiltonian. **This is false.**
 
 **Proof technique:** direct.
 
-1.1 The translation action is symplectic: translations of the first coordinate preserve $dx$, $dy$ and hence $\omega=dx\wedge dy$. [F1, F2, given]
+1.1 The displayed formula descends from the smooth translations $(x,y)\mapsto(x+t,y)$ of $\mathbb R^2$, and the identity and action laws hold by addition, so it is a smooth left action by [F2]. These translations preserve $dx$, $dy$ and hence $\omega=dx\wedge dy$, so the action is symplectic. [F1, F2, given, algebra]
 
-1.2 By [F2] the component equation for $\xi=1$ would read $d\mu^1=-\iota_{-\partial_x}\omega=\iota_{\partial_x}\omega=dy$, so the function $\mu^1$ would be a primitive of $dy$. [F2, F3]
+1.2 By [F2] the fundamental field for $\xi=1$ is $\left.\frac d{dt}\right|_0(-t)\cdot p=-\partial_x$. Thus the component equation would read $d\mu^1=-\iota_{-\partial_x}\omega=\iota_{\partial_x}\omega=dy$, so $\mu^1$ would be a primitive of $dy$. [F2, F3, algebra]
 
 2.1 But $dy$ has nonzero period: integrating it over the closed loop $\gamma(t)=[(0,t)]$, $0\le t\le1$, gives $1$, while the integral of an exact one-form over a closed loop vanishes. Hence $dy$ is not exact, and no such function $\mu^1$ exists. [step 1.2, F1]
 

@@ -1,7 +1,7 @@
 ---
 id: prop-equivariance-is-equivalent-to-the-moment-map-poisson-bracket-identity
 kind: proposition
-title: Equivariance is equivalent to the moment-map Poisson bracket identity
+title: For connected groups, equivariance is equivalent to the moment-map Poisson bracket identity
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27

@@ -5,7 +5,7 @@ title: Coadjoint orbits are symplectic manifolds
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit, lem-kks-form-is-independent-of-lie-algebra-representatives, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-every-orbit-is-an-injectively-immersed-homogeneous-space, def-coadjoint-representation-of-a-lie-group, prop-adjoint-intertwines-the-exponential-map, prop-adjoint-is-a-smooth-lie-group-representation, prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes, thm-cartans-magic-formula, def-lie-algebra-over-a-field, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
+deps: [def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit, lem-kks-form-is-independent-of-lie-algebra-representatives, prop-kernel-of-the-infinitesimal-orbit-map-at-a-point-is-the-stabilizer-lie-algebra, thm-every-orbit-is-an-injectively-immersed-homogeneous-space, def-coadjoint-representation-of-a-lie-group, prop-adjoint-intertwines-the-exponential-map, prop-adjoint-is-a-smooth-lie-group-representation, thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism, prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes, thm-cartans-magic-formula, def-lie-algebra-over-a-field, def-countable-choice, def-fundamental-vector-field-of-a-left-action]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -46,7 +46,7 @@ $G$-invariant symplectic form with that property.
 
 [F3] The fundamental field of the coadjoint action satisfies $\xi_{\mathfrak g^*}(\beta)(\eta)=\beta([\xi,\eta])$. [[def-coadjoint-representation-of-a-lie-group]].
 
-[F4] Fundamental fields are equivariant: $d(a_h)_\beta\xi_{\mathcal O}(\beta)=(\operatorname{Ad}_h\xi)_{\mathcal O}(h\cdot\beta)$, and $\operatorname{Ad}_h$ preserves brackets. [[prop-adjoint-intertwines-the-exponential-map]], [[prop-adjoint-is-a-smooth-lie-group-representation]], [[def-fundamental-vector-field-of-a-left-action]].
+[F4] Fundamental fields are equivariant: $d(a_h)_\beta\xi_{\mathcal O}(\beta)=(\operatorname{Ad}_h\xi)_{\mathcal O}(h\cdot\beta)$, and $\operatorname{Ad}_h=d(C_h)_e$ preserves brackets because the differential of a Lie-group homomorphism is a Lie-algebra homomorphism. [[prop-adjoint-intertwines-the-exponential-map]], [[prop-adjoint-is-a-smooth-lie-group-representation]], [[thm-differential-of-a-lie-group-homomorphism-is-a-lie-algebra-homomorphism]], [[def-fundamental-vector-field-of-a-left-action]].
 
 [F5] Cartan's magic formula $\mathcal L_X\omega=d(\iota_X\omega)+\iota_X(d\omega)$ holds, and $\mathcal L_X\omega=0$ whenever the flow of $X$ preserves $\omega$. [[thm-cartans-magic-formula]], [[prop-a-tensor-field-is-invariant-under-a-flow-if-and-only-if-its-lie-derivative-vanishes]].
 

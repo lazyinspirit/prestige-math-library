@@ -55,8 +55,6 @@ right.
 
 [F3] The dual of a direct sum is the direct sum of the duals, and the coadjoint action of a product group is componentwise, with stabilizer $(\alpha,\beta)$ equal to $G_\alpha\times H_\beta$. [[def-coadjoint-representation-of-a-lie-group]].
 
-[F4] The product of free actions is free and the product of proper actions is proper; the quotient of a product by a product group is the product of the quotients. [[thm-marsden-weinstein-meyer-symplectic-reduction]], [[prop-product-and-opposite-symplectic-moment-maps]].
-
 [F5] Under the stated regularity, freeness and properness hypotheses the reduction theorem gives a unique symplectic form on each reduced space, characterised by the pullback identity. [[thm-marsden-weinstein-meyer-symplectic-reduction]].
 
 ## Proof
@@ -67,10 +65,10 @@ right.
 
 1.2 Equivariance: $\mu_{M\times N}((g,h)\cdot(p,q))=\mu_M(g\cdot p)\oplus\mu_N(h\cdot q)=(g\cdot\mu_M(p))\oplus(h\cdot\mu_N(q))=(g,h)\cdot(\mu_M(p)\oplus\mu_N(q))$ by componentwise coadjoint action [F3]. [F2, F3]
 
-1.3 The stabilizer action: $G_\alpha\times H_\beta$ acts on $\mu_{M\times N}^{-1}(\alpha,\beta)=\mu_M^{-1}(\alpha)\times\mu_N^{-1}(\beta)$; it is free and proper exactly when the two factor actions are, by [F4]. [F3, F4, given]
+1.3 The stabilizer action on $\mu_M^{-1}(\alpha)\times\mu_N^{-1}(\beta)$ is free: if $(g,h)$ fixes $(p,q)$, then $g$ fixes $p$ and $h$ fixes $q$, so $g=e$ and $h=e$. It is proper as well. Indeed, after permuting factors, its action map is the product of the two proper action maps. The inverse image of a compact set is a closed subset of the product of the inverse images of its compact coordinate projections, and is therefore compact. [F3, given]
 
 2.1 Regularity: the differential of $\mu_{M\times N}$ at $(p,q)$ is $d(\mu_M)_p\oplus d(\mu_N)_q$, whose image is $\operatorname{im}d(\mu_M)_p\oplus\operatorname{im}d(\mu_N)_q$. Hence it is surjective if and only if both summands are, so $(\alpha,\beta)$ is a regular value of the product moment map precisely when $\alpha$ is regular for $\mu_M$ and $\beta$ for $\mu_N$. [step 1.1, given]
 
-3.1 Form comparison: the product of the quotient maps is a surjective submersion onto $M_\alpha\times N_\beta$ with pullback of $\omega_\alpha\oplus\omega_\beta$ equal to $\iota_M^*\omega_M\oplus\iota_N^*\omega_N$, which is also the pullback of the product form along the inclusion of the product level. Since by [F5] the reduced form on the product quotient is the unique form with that pullback, the canonical product diffeomorphism of the quotients carries $\omega_\alpha\oplus\omega_\beta$ to the reduced form. [step 2.1, step 1.3, F1, F5]
+3.1 The map $([p],[q])\mapsto[(p,q)]$ is a well-defined bijection from $M_\alpha\times N_\beta$ to the product-level quotient, since two pairs have the same product orbit exactly when their coordinates have the same factor orbits. The quotient maps are surjective submersions by [F5], so their local smooth sections show that this bijection and its inverse are smooth. The product quotient map pulls $\omega_\alpha\oplus\omega_\beta$ back to $\iota_M^*\omega_M\oplus\iota_N^*\omega_N$, also the pullback of the product form along the product-level inclusion. By uniqueness in [F5], the canonical diffeomorphism carries $\omega_\alpha\oplus\omega_\beta$ to the reduced form. [step 2.1, step 1.3, F1, F5]
 
 4.1 Steps 1.1 and 1.2 show that $\mu_{M\times N}$ is an equivariant moment map; steps 2.1 and 1.3 verify the reduction hypotheses for the product; step 3.1 identifies the reduced symplectic form with the product form under the canonical diffeomorphism. [step 2.1, step 3.1, A1] ∎

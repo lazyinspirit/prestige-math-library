@@ -41,13 +41,16 @@ Then:
 3. Every $G$-orbit in $\Psi^{-1}(0)$ meets the slice
    $\mu^{-1}(\alpha)\times\{\alpha\}$ in exactly one $G_\alpha$-orbit, so the
    inclusion of the slice induces a canonical bijection
-   $M_\alpha=\mu^{-1}(\alpha)/G_\alpha\to\Psi^{-1}(0)/G$, which is a
+   $\mu^{-1}(\alpha)/G_\alpha\to\Psi^{-1}(0)/G$. Whenever both orbit spaces
+   carry their free-proper quotient manifold structures, this bijection is a
    diffeomorphism.
 4. The pullbacks of the reduced form of $M_\alpha$ and of the zero-reduced form
    of $M\times\mathcal O^-$ to $\mu^{-1}(\alpha)$ agree, both being
    $\iota^*\omega$. Hence, whenever $0$ is a regular value of $\Psi$ and $G$
    acts freely and properly on $\Psi^{-1}(0)$, the shift map of item 3 is a
-   symplectomorphism $M_\alpha\to\Psi^{-1}(0)/G$. Moreover $0$ is a regular
+   symplectomorphism $M_\alpha\to\Psi^{-1}(0)/G$. Here both the $G_\alpha$-
+   action on $\mu^{-1}(\alpha)$ and the $G$-action on $\Psi^{-1}(0)$ are
+   assumed free and proper. Moreover $0$ is a regular
    value of $\Psi$ if and only if $\alpha$ is a regular value of $\mu$, and
    the $G$-action on $\Psi^{-1}(0)$ is free if and only if the $G_\alpha$-action
    on $\mu^{-1}(\alpha)$ is free.
@@ -78,9 +81,9 @@ Then:
 
 2.1 The zero set is $\{(m,\beta):\beta=\mu(m)\}$ together with the condition $\beta\in\mathcal O$; the map $m\mapsto(m,\mu(m))$ is a $G$-equivariant bijection $\mu^{-1}(G\cdot\alpha)\to\Psi^{-1}(0)$, since $\Psi(m,\mu(m))=0$ and $\mu(m)\in\mathcal O$ exactly when $\mu(m)=g\cdot\alpha$ for some $g$, i.e. when $m\in g\cdot\mu^{-1}(\alpha)\subseteq\mu^{-1}(G\cdot\alpha)$. [step 1.1, F3]
 
-3.1 Orbit-slice property: given $(m,\mu(m))\in\Psi^{-1}(0)$ with $\mu(m)=g\cdot\alpha$, the element $g^{-1}$ moves it to $(g^{-1}\cdot m,\alpha)$ with $\mu(g^{-1}\cdot m)=\alpha$, so every orbit meets the slice. Two slice points $(m,\alpha)$ and $(m',\alpha)$ lie in the same $G$-orbit exactly when $m'=h\cdot m$ with $h\cdot\alpha=\alpha$, i.e. $h\in G_\alpha$. Hence the inclusion of the slice induces a bijection $\mu^{-1}(\alpha)/G_\alpha\to\Psi^{-1}(0)/G$, which is a diffeomorphism because both sides are quotients of the same free action by the slice argument. [step 2.1, F3, F4]
+3.1 Orbit-slice property: given $(m,\mu(m))\in\Psi^{-1}(0)$ with $\mu(m)=g\cdot\alpha$, the element $g^{-1}$ moves it to $(g^{-1}\cdot m,\alpha)$ with $\mu(g^{-1}\cdot m)=\alpha$, so every orbit meets the slice. Two slice points $(m,\alpha)$ and $(m',\alpha)$ lie in the same $G$-orbit exactly when $m'=h\cdot m$ with $h\cdot\alpha=\alpha$, i.e. $h\in G_\alpha$. Hence the inclusion of the slice induces a canonical bijection $\mu^{-1}(\alpha)/G_\alpha\to\Psi^{-1}(0)/G$. If both actions are free and proper, the quotient maps are submersions and their local smooth sections make the induced bijection and its inverse smooth. [step 2.1, F3, F4]
 
-4.1 Form comparison: pulling the reduced form of $M_\alpha$ back along $\mu^{-1}(\alpha)\to M_\alpha$ gives $\iota^*\omega$ by [F4]; pulling the zero-reduced form of $M\times\mathcal O^-$ back along the composite $\mu^{-1}(\alpha)\to\Psi^{-1}(0)\to\Psi^{-1}(0)/G$ gives the restriction of $\Omega$ to the slice, which is $\iota^*\omega$ by [F6]. Both composite maps are surjective submersions, so the two forms agree under the identification of item 3. [step 3.1, F4, F6]
+4.1 Under the stated regularity, freeness, and properness hypotheses, pulling the reduced form of $M_\alpha$ back along $\mu^{-1}(\alpha)\to M_\alpha$ gives $\iota^*\omega$ by [F4]; pulling the zero-reduced form of $M\times\mathcal O^-$ back along the composite $\mu^{-1}(\alpha)\to\Psi^{-1}(0)\to\Psi^{-1}(0)/G$ gives the restriction of $\Omega$ to the slice, which is $\iota^*\omega$ by [F6]. Both composite maps are surjective submersions, so the two forms agree under the identification of item 3. [step 3.1, F4, F6]
 
 4.2 Regularity and freeness: for $m\in\mu^{-1}(\alpha)$, the infinitesimal stabilizers of $m$ for the $G$-action and for the $G_\alpha$-action coincide, because $g\cdot m=m$ implies $g\cdot\alpha=\alpha$ by equivariance; the stabilizer of the point $(m,\alpha)$ for the $G$-action on the slice is the same group. Hence, by [F5], $0$ is a regular value of $\Psi$ exactly when $\alpha$ is a regular value of $\mu$, and the $G$-action on $\Psi^{-1}(0)$ is free exactly when the $G_\alpha$-action on $\mu^{-1}(\alpha)$ is free. [step 3.1, F5]
 
