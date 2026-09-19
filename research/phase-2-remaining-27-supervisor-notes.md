@@ -132,3 +132,35 @@ was stopped by hand (its judge lane is the exhausted Codex/OpenAI lane and was
 recording zero-token failures; the five alpha group reads were killed
 ~30 s in). Resume continues at `6-judge`; it costs nothing to re-dispatch the
 killed lanes.
+
+## 2026-09-20 — token-reduction mechanisms (owner-authorized)
+
+Measured first: the two Step-7 adjudicator lanes averaged **130k input tokens per
+call** over ~2,900 calls (177 M and 196 M cumulative, 98% cached), while the
+stateless judge sweep averaged 24k per item. Four mechanisms now cut that
+without weakening the mathematics:
+
+1. **Evidence bundles** (`tools/evidence-bundle.mjs`, shared with `judge.mts`).
+   `step7-scope.mjs render` writes `research/<run>-step7-bundle-<group>.md`: for
+   every item under an open objection, the item's claim section and Facts
+   section verbatim, plus the recorded `quote` of every cited fact from the
+   proof contract. Nothing is summarised, and every cap names the file to open.
+   Measured on this run: group a 198 KB (~49k tokens) for 40 rejections; the
+   three groups with no open rejection get a 0.9 KB header.
+2. **Item-grouped queues.** The renderer sorts rejections by item so a lane
+   settles every objection to an item in one pass (167 items carried 359 of the
+   811 fatal rows).
+3. **Earlier compaction.** `dispatch.mjs` compacts long lanes at 120k instead of
+   200k; the briefs already require re-anchoring to the live item and
+   dependencies after any compaction.
+4. **Read-once, ordered reading.** The shared prompt guidance and the bundle
+   preamble require reading each file once in the order given, using the bundle
+   first, and reading whatever else the mathematics requires.
+
+Access guarantees restated by the owner on 2026-09-20 and encoded in both the
+bundle preamble and the task header: adjudicators keep web search
+(`tools.web_search=true`) and shell network access, the entire published
+`library/`, and every item of the frontier under `items/` — including other
+groups' items for seams and cross-group alerts. A bundle is an entry point,
+never a fence. Asserted by `step7-groups.test.mts` on the lane's own command
+line and by `evidence-bundle.test.mts` on the bundle text.

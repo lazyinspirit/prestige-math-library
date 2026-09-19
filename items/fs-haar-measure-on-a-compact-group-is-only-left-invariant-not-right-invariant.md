@@ -28,7 +28,7 @@ left invariant, not right invariant.
 
 [A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through [L1].
 
-[L1] Every compact Lie group has a unique regular Borel probability measure invariant under left and right translations and inversion ([[cor-normalized-haar-measure-on-a-compact-lie-group]]).
+[L1] Every compact Lie group has a unique regular Borel probability measure that is left invariant, and this measure is also right invariant and inversion invariant ([[cor-normalized-haar-measure-on-a-compact-lie-group]]).
 
 [L2] A finite Radon measure $\mu$ is right invariant when $\mu(Eh)=\mu(E)$ for all Borel $E$ and all $h\in G$ ([[def-left-right-and-bi-invariant-borel-measure-on-a-lie-group]]).
 
@@ -38,6 +38,6 @@ left invariant, not right invariant.
 
 1.1 For fixed $h\in G$ define $\mu_h(E):=\mu(Eh)$; since right translation is a homeomorphism and $\mu$ is a regular Borel probability, $\mu_h$ is again a regular Borel probability, and it is left invariant: $\mu_h(gE)=\mu(gEh)=\mu(Eh)=\mu_h(E)$ for all $g$, because $\mu$ is left invariant. [L2]
 
-2.1 By the uniqueness statement of [L1] we get $\mu_h=\mu$ for every $h$, so $\mu(Eh)=\mu(E)$ for all Borel $E$ and $h$: normalized Haar measure on a compact group is right invariant as well as left invariant. [L1, step 1.1]
+2.1 The measure $\mu_h$ is a regular left-invariant Borel probability by step 1.1, so the uniqueness among left-invariant regular Borel probabilities in [L1] gives $\mu_h=\mu$ for every $h$. Thus $\mu(Eh)=\mu(E)$ for all Borel $E$ and $h$: normalized Haar measure on a compact group is right invariant as well as left invariant. [L1, step 1.1]
 
 3.1 Hence the statement of this item is false: the correct conclusion is bi-invariance, and the uniqueness argument above shows that no example of a compact group with a merely left-invariant normalized Haar measure exists. [A1, L1, step 2.1]∎

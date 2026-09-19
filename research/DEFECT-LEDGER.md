@@ -1,12 +1,12 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ aea2b60f7183 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ cab8857aa912 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 9770 |
+| defects caught before publication | 9833 |
 | now mechanically prevented | 356 |
 | escaped to publication | 1 |
 | still open | 27 |
@@ -772,25 +772,25 @@
 | citation-misattributed |  |  |  | 1 |
 | citation-truncated |  |  |  | 1 |
 
-## phase-2-remaining-27 — 971 row(s)
+## phase-2-remaining-27 — 1034 row(s)
 
 | subclass | 5a-adjudicate | 5b-cross | 7-adjudicate |
 |---|---|---|---|
-| citation-inaccurate | 28 |  | 238 |
-| invalid-inference | 7 |  | 259 |
-| false-claim | 72 |  | 37 |
+| citation-inaccurate | 28 |  | 261 |
+| invalid-inference | 7 |  | 273 |
+| false-claim | 72 |  | 41 |
 | citation-inflated |  | 15 | 37 |
-| ill-typed-construction |  |  | 41 |
-| missing-hypothesis | 8 |  | 27 |
-| citation-missing | 5 | 16 | 12 |
+| ill-typed-construction |  |  | 44 |
+| citation-missing | 5 | 16 | 19 |
+| missing-hypothesis | 8 |  | 31 |
+| false-or-overstrong-statement | 7 |  | 23 |
 | unlicensed-inference | 28 |  |  |
-| false-or-overstrong-statement | 7 |  | 20 |
+| false-computation | 13 |  | 10 |
 | ill-formed | 20 |  |  |
-| false-computation | 13 |  | 6 |
 | missing-case |  |  | 16 |
 | arithmetic-error | 8 |  | 6 |
 | missing-choice-scope | 1 |  | 6 |
-| unsupported-inference | 4 |  | 2 |
+| unsupported-inference | 4 |  | 3 |
 | ill-typed-claim | 1 |  | 5 |
 | false-boundary-disposition |  |  | 6 |
 | invalid-witness | 2 |  | 3 |

@@ -31,7 +31,7 @@ serial-relation form of Dependent Choice.
 
 [F3] [[thm-solovay-inner-model-satisfies-zf-and-real-ordinal-definability]] and [[thm-solovay-inner-model-satisfies-dependent-choice]]: the corresponding ZF and DC clauses are already proved for the Solovay $HOD(S)$ model at exactly this interface.
 
-[F4] [[def-serial-relation-dependent-choice-principle-over-zf]]: DC says that for a nonempty set $A$, a serial relation $R$ on $A$ and $a_0\in A$, there is a sequence $\langle a_n:n<\omega\rangle$ with $a_0$ given and $R(a_n,a_{n+1})$ for all $n$.
+[F4] [[def-serial-relation-dependent-choice-principle-over-zf]]: DC says that for every nonempty set $A$ and every serial relation $R$ on $A$, there is a sequence $\langle a_n:n<\omega\rangle$ in $A$ with $R(a_n,a_{n+1})$ for all $n$. The definition expressly distinguishes this from the prescribed-start form.
 
 [F5] [[def-axiom-of-choice]]: ambient AC, used only to produce the ambient recursive chain below.
 
@@ -47,7 +47,7 @@ serial-relation form of Dependent Choice.
 
 1.5 Power set: for $A\in N$, the uniform predicate "$y$ is a subset of $A$" is ranked and definable from the parameters defining $A$, so the power set of $A$ as computed in $N$ is a set of $N$. Together with steps 1.2 through 1.4 this verifies all axioms of ZF in $N$. [F1]
 
-1.6 Dependent Choice: let $A\in N$ be nonempty, $R\in N$ serial on $A$, and $a_0\in A$. In the ambient model, AC recursively chooses $a_{n+1}$ with $R(a_n,a_{n+1})$, which is possible by seriality. The resulting $\omega$-sequence lies in $N$ by [F2]; transitivity and the absoluteness of the relation computation give $N\models R(a_n,a_{n+1})$ for all $n$; hence the serial-relation form of DC holds in $N$. [F2, F4, F5]
+1.6 Dependent Choice: let $A\in N$ be nonempty and let $R\in N$ be serial on $A$. In the ambient model, AC first selects some $a_0\in A$ and then recursively chooses $a_{n+1}\in A$ with $R(a_n,a_{n+1})$, which is possible by seriality. The resulting $\omega$-sequence lies in $N$ by [F2]; transitivity and the absoluteness of membership in the set $R$ give $N\models R(a_n,a_{n+1})$ for all $n$. Thus the starting-point-free serial-relation form of DC stated in [F4] holds in $N$; no equivalence with the separately named prescribed-start form is used. [F2, F4, F5]
 
 2.1 $N$ has the same ordinals and reals as the ambient extension, since it contains them all and is transitive. [F1, step 1.1]
 

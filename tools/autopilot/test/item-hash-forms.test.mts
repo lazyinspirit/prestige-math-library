@@ -130,8 +130,14 @@ test('nothing keeps a private copy of either normalisation any more', () => {
 
 test('whole-source pair interfaces exclude generated judge stamps', () => {
   const judge = readFileSync(join(REPO, 'tools', 'judge.mts'), 'utf8');
-  assert.match(judge, /\|\| stripJudgeStamp\(source\)\.trim\(\)/,
+  // The interface extractor lives in the shared evidence-bundle module since
+  // 2026-09-20 (judge.mts and the Step-7 bundle renderer both use it), so the
+  // invariant is asserted where it is implemented and that the judge uses it.
+  const bundle = readFileSync(join(REPO, 'tools', 'evidence-bundle.mjs'), 'utf8');
+  assert.match(bundle, /\|\| stripJudgeStamp\(source\)\.trim\(\)/,
     'an uncommon item kind that uses the whole-source interface must not make stamping invalidate every page-mate context');
+  assert.match(judge, /import \{ section, interfaceText \} from '\.\/evidence-bundle\.mjs'/,
+    'judge.mts must take the interface from the shared extractor');
 });
 
 test('the errors that consume these hashes say which form they expect', () => {

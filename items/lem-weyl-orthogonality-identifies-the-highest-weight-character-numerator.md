@@ -5,7 +5,7 @@ title: Orthogonality identifies the Weyl numerator
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-weyl-integration-formula, cor-irreducible-characters-are-orthonormal-class-functions, thm-highest-weight-classification-for-a-compact-connected-lie-group, lem-weyl-denominator-and-anti-invariant-orbit-sum-basis, prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one, def-axiom-of-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]
+deps: [thm-weyl-integration-formula, cor-irreducible-characters-are-orthonormal-class-functions, thm-highest-weight-classification-for-a-compact-connected-lie-group, lem-weyl-denominator-and-anti-invariant-orbit-sum-basis, prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one, def-axiom-of-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t, thm-fourier-basis-and-parseval-on-the-n-torus]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -42,7 +42,7 @@ representation of highest weight $\lambda$ and $A_\nu=\sum_{w\in W}\det(w)e^{w\n
 
 [L3] Weyl integration and character orthonormality hold on the compact connected cover with its maximal torus: for class functions $f$, $\int f\,dg=|W|^{-1}\int_{T_p}fJ\,dt$, and $\langle\chi_\lambda,\chi_\mu\rangle=\delta_{\lambda\mu}$; also $J=|A_\rho|^2$ by [L1] and the root/product identities ([[thm-weyl-integration-formula]], [[cor-irreducible-characters-are-orthonormal-class-functions]]).
 
-[L4] The characters $e^\nu$ of $T_p$ are orthonormal in $L^2(T_p,dt)$: $\int_{T_p}e^{\nu}\overline{e^{\mu}}dt=\delta_{\nu\mu}$ ([[prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]]).
+[L4] After identifying the torus $T_p$ with $(\mathbb R/\mathbb Z)^r$, its characters are the exponential characters indexed by $\mathbb Z^r$, and these form an orthonormal basis of $L^2(T_p)$; in particular $\int_{T_p}e^{\nu}\overline{e^{\mu}}dt=\delta_{\nu\mu}$ ([[prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]], [[thm-fourier-basis-and-parseval-on-the-n-torus]]).
 
 ## Proof
 

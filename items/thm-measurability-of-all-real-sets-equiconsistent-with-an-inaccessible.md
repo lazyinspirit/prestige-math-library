@@ -4,7 +4,7 @@ kind: theorem
 title: Exact equiconsistency of universal measurability and an inaccessible
 status: draft
 origin: pipeline
-deps: [thm-all-real-sets-measurable-gives-an-inaccessible-inner-model, thm-solovay-model-regularity-relative-to-an-inaccessible, lem-solovay-construction-is-uniformly-formalizable, thm-formal-consistency-transfer-by-forcing, def-countable-choice, def-boldface-sigma-one-three-measurability]
+deps: [thm-all-real-sets-measurable-gives-an-inaccessible-inner-model, thm-solovay-model-regularity-relative-to-an-inaccessible, thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l, thm-constructible-inner-model-semantic-and-formal-schema, lem-interpretation-translates-finite-derivations, def-countable-choice, def-boldface-sigma-one-three-measurability]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -25,21 +25,19 @@ universal boldface $\Sigma^1_3$ measurability under Countable Choice.
 
 **Given:** Fixed arithmetizations of the two theories and their finite fragments.
 
-[F1] [[thm-solovay-model-regularity-relative-to-an-inaccessible]] with [[lem-solovay-construction-is-uniformly-formalizable]]: the Lévy-collapse construction from an inaccessible yields, fragment by fragment, a set model of ZF+DC in which every set of reals is Lebesgue measurable (among further regularity properties).
+[F1] [[thm-solovay-model-regularity-relative-to-an-inaccessible]]: by the externally indexed finite-fragment transfer for the Lévy-collapse construction, $$ \operatorname{Con}(\mathrm{ZFC}+\text{an inaccessible}) \Longrightarrow \operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{universal LM}). $$ No uniform arithmetic proof-code transformer is used in that theorem.
 
-[F2] [[thm-all-real-sets-measurable-gives-an-inaccessible-inner-model]]: from ZF+DC plus universal measurability, the constructible universe satisfies ZFC and contains an inaccessible cardinal, with the consistency implication verified fragment by fragment.
+[F2] [[thm-all-real-sets-measurable-gives-an-inaccessible-inner-model]]: from ZF+DC plus universal measurability, the constructible universe satisfies ZFC and contains an inaccessible cardinal. Relativization to that definable inner model is an interpretation, so it sends every actual finite target refutation to a source refutation ([[lem-interpretation-translates-finite-derivations]]).
 
-[F3] [[def-countable-choice]] with [[def-boldface-sigma-one-three-measurability]] and the argument of [F2]: the same inner-model lower bound applies when the hypothesis is ZF+Countable Choice plus universal boldface $\Sigma^1_3$ measurability, because the argument needs only Countable Choice and the $\Sigma^1_3$ clause.
-
-[F4] [[thm-formal-consistency-transfer-by-forcing]]: the general compiler that turns the uniform verification supplied by [F1] into a consistency implication.
+[F3] Under ZF+Countable Choice plus universal boldface $\Sigma^1_3$ measurability, the ambient $\omega_1$ is inaccessible in $L$ ([[thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l]], [[def-countable-choice]], [[def-boldface-sigma-one-three-measurability]]), and $L$ satisfies ZFC ([[thm-constructible-inner-model-semantic-and-formal-schema]]). Relativization to $L$ therefore gives the same refutation translation as in [F2] ([[lem-interpretation-translates-finite-derivations]]).
 
 ## Proof
 
-1.1 Upper bound: assume $\operatorname{Con}(\mathrm{ZFC}+\text{inaccessible})$. By [F1] the Solovay construction is uniformly formalizable fragment by fragment, and the compiler [F4] yields $\operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{every set of reals is Lebesgue measurable})$. [F1, F4]
+1.1 Upper bound: assume $\operatorname{Con}(\mathrm{ZFC}+\text{inaccessible})$. The exact external finite-fragment consistency implication in [F1] yields $\operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{every set of reals is Lebesgue measurable})$. [F1]
 
-1.2 Lower bound: assume $\operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{universal LM})$. By [F2] every model of this theory has an internal constructible universe satisfying ZFC together with an inaccessible cardinal, so $\operatorname{Con}(\mathrm{ZFC}+\text{inaccessible})$ follows. [F2]
+1.2 Lower bound: assume $\operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{universal LM})$. If ZFC plus an inaccessible had an actual refutation, [F2] would translate it to a refutation of the assumed source theory. Hence $\operatorname{Con}(\mathrm{ZFC}+\text{inaccessible})$ follows. [F2]
 
-1.3 The refinement: if only Countable Choice and boldface $\Sigma^1_3$ measurability are assumed, the argument of [F2] still applies by [F3] and gives the same inaccessible in the constructible universe; hence the consistency of ZF+CC+boldface $\Sigma^1_3$ measurability already implies the consistency of ZFC plus an inaccessible cardinal. This is the stronger form of the lower bound stated. [F3]
+1.3 The refinement: if ZF+Countable Choice plus boldface $\Sigma^1_3$ measurability is consistent, an actual refutation of ZFC plus an inaccessible would translate by [F3] to a refutation of that source theory. Thus its consistency already implies the consistency of ZFC plus an inaccessible cardinal. This is the stronger form of the lower bound stated. [F3]
 
 1.4 The inaccessible hypothesis is needed only on the Solovay branch: steps 1.1 uses it, and steps 1.2 and 1.3 use none; the separation of the two branches is the point of this pair. [F1, F2, F3]
 

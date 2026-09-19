@@ -5,7 +5,7 @@ title: Conjugacy classes meet T in Weyl orbits
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori, def-weyl-group-of-a-compact-connected-lie-group, def-axiom-of-choice, def-torus-and-maximal-torus-in-a-compact-lie-group]
+deps: [thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus, thm-conjugacy-of-maximal-tori, def-weyl-group-of-a-compact-connected-lie-group, thm-cartans-closed-subgroup-theorem, def-countable-choice, def-axiom-of-choice, def-torus-and-maximal-torus-in-a-compact-lie-group]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -39,7 +39,7 @@ $w$ of the Weyl group $W(G,T)=N_G(T)/T$.
 
 [L3] The Weyl group is $W(G,T)=N_G(T)/T$, and $w=gT$ acts on $T$ by $(gT)\cdot t=gtg^{-1}$, which lies in $T$ because $g$ normalizes $T$; the action is well defined ([[def-weyl-group-of-a-compact-connected-lie-group]]).
 
-[L4] For a fixed element $x$ of a topological group, the centralizer $C_G(x)$ is closed; if $G$ is a compact connected Lie group with $x\in G$, then the identity component $C_G(x)^0$ is a compact connected Lie group, and a torus of $G$ contained in $C_G(x)$ is a maximal torus of $C_G(x)^0$ exactly when no torus of $G$ contained in $C_G(x)$ properly contains it ([[def-torus-and-maximal-torus-in-a-compact-lie-group]]).
+[L4] For a fixed $x\in G$, the centralizer $C_G(x)$ is closed because it is the equalizer of the continuous maps $g\mapsto gx$ and $g\mapsto xg$. Under countable choice it is therefore an embedded Lie subgroup by [[thm-cartans-closed-subgroup-theorem]], and its identity component $C_G(x)^0$ is a compact connected Lie group. Every connected subgroup of $C_G(x)$ containing the identity lies in this identity component ([[def-countable-choice]]).
 
 ## Proof
 
@@ -47,8 +47,8 @@ $w$ of the Weyl group $W(G,T)=N_G(T)/T$.
 
 1.1 Let $x\in G$. By [L1] there is a maximal torus $M$ with $x\in M$, and by [L2] there is $g\in G$ with $M=gTg^{-1}$; then $g^{-1}xg\in T$, so the conjugacy class of $x$ meets $T$. [L1, L2]
 
-2.1 Suppose $t'=gtg^{-1}$ for some $g\in G$. Put $M:=gTg^{-1}$, a maximal torus containing $t'$. Both $T$ and $M$ lie in the closed subgroup $C_G(t')$ and contain $t'$, so both are connected abelian subgroups of the compact connected Lie group $H:=C_G(t')^0$; by [L4] each of them is a maximal torus of $H$. [L4, step 1.1]
+1.2 Suppose $t'=gtg^{-1}$ for some $g\in G$. Put $M:=gTg^{-1}$, a maximal torus containing $t'$. Both $T$ and $M$ lie in $C_G(t')$ and, being connected and containing the identity, lie in the compact connected Lie group $H:=C_G(t')^0$ by [L4]. A torus of $H$ properly containing $T$ or $M$ would also be a torus of $G$ properly containing a maximal torus of $G$; hence $T$ and $M$ are maximal tori of $H$. [L4]
 
-3.1 By [L2] applied to the compact connected Lie group $H$, there is $h\in H$ with $hTh^{-1}=M=gTg^{-1}$. Then $n:=g^{-1}h\in N_G(T)$, and since $h$ centralizes $t'$ we obtain $t'=h^{-1}t'h=h^{-1}(gtg^{-1})h=n^{-1}t\,n$; hence $t'$ lies in the $W(G,T)$-orbit of $t$ by [L3]. [L2, L3, step 2.1]
+2.1 By [L2] applied to the compact connected Lie group $H$, there is $h\in H$ with $hTh^{-1}=M=gTg^{-1}$. Then $n:=g^{-1}h\in N_G(T)$, and since $h$ centralizes $t'$ we obtain $t'=h^{-1}t'h=h^{-1}(gtg^{-1})h=n^{-1}t\,n$; hence $t'$ lies in the $W(G,T)$-orbit of $t$ by [L3]. [L2, L3, step 1.2]
 
-4.1 Conversely, if $t'=ntn^{-1}$ for some $n\in N_G(T)$, then $t'=ntn^{-1}$ is conjugate to $t$ and lies in $T$; hence conjugacy in $G$ between points of $T$ is exactly the orbit relation of the Weyl group action, and by step 1.1 every conjugacy class meets $T$. The Axiom of Choice entered only through [L1] and [L2]. [A1, L3, step 1.1, step 3.1] ∎
+3.1 Conversely, if $t'=ntn^{-1}$ for some $n\in N_G(T)$, then $t'=ntn^{-1}$ is conjugate to $t$ and lies in $T$; hence conjugacy in $G$ between points of $T$ is exactly the orbit relation of the Weyl group action, and by step 1.1 every conjugacy class meets $T$. The Axiom of Choice entered only through [L1] and [L2]. [A1, L3, step 1.1, step 2.1] ∎

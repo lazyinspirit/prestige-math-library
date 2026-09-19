@@ -31,7 +31,7 @@ normal ([[def-product-measure-extension-axioms-pmea-and-pmea-sigma]],
 
 ## Facts & Assumptions
 
-**Given:** A normal space $X$; under PMEA a neighbourhood base $\mathcal U_x$ at each $x$ of cardinality $\chi(x,X) < \mathfrak c$, and under PMEA-$\sigma$ with first countability a countable open local base $\mathcal U_x$ at each $x$; and a discrete family $\mathcal F = \{F_i : i \in I\}$ of closed subsets of $X$.
+**Given:** A normal space $X$; under PMEA an open neighbourhood base $\mathcal U_x$ at each $x$ of cardinality $\chi(x,X)<\mathfrak c$, and under PMEA-$\sigma$ with first countability a countable open local base $\mathcal U_x$ at each $x$; and a discrete family $\mathcal F=\{F_i:i\in I\}$ of closed subsets of $X$. Such open bases may be used without increasing cardinality by replacing every base member $N$ with its interior, which is an open neighbourhood of $x$ contained in $N$ ([[def-neighbourhood-top]]).
 
 [F1] The three-quarter separation estimate: under PMEA with $|\mathcal U_x| < \mathfrak c$, and under PMEA-$\sigma$ for first countable $X$ with countable local bases, there is $x \mapsto U^x$ with $U^x \in \mathcal U_x$ and $U^x \cap U^y = \varnothing$ for $x \in F_i$, $y \in F_j$, $i \ne j$ ([[lem-pmea-three-quarter-separation-estimate]]).
 
@@ -43,11 +43,11 @@ normal ([[def-product-measure-extension-axioms-pmea-and-pmea-sigma]],
 
 **Proof technique:** direct.
 
-1.1 Fix the discrete family $\mathcal F$ and, using the character hypothesis, a neighbourhood base $\mathcal U_x$ at each $x$ with $|\mathcal U_x| < \mathfrak c$, or with $|\mathcal U_x| = \omega$ in the first countable case. [given, F2]
+1.1 Fix the discrete family $\mathcal F$ and the open neighbourhood bases $\mathcal U_x$ from the Given line, with $|\mathcal U_x|<\mathfrak c$, or with $|\mathcal U_x|\leq\omega$ in the first countable case. [given, F2]
 
 2.1 Apply [F1] to $\mathcal F$ and the bases $\mathcal U_x$, obtaining $U^x \in \mathcal U_x$ with $U^x \cap U^y = \varnothing$ whenever $x \in F_i$, $y \in F_j$, $i \ne j$. [step 1.1, F1, F2]
 
-3.1 For each $i$ put $G_i := \bigcup \{\, U^x : x \in F_i \,\}$. Each $G_i$ is open, contains $F_i$ because $x \in U^x$, and distinct $G_i, G_j$ are disjoint by step 2.1. Hence $\mathcal F$ is separated and $X$ is collectionwise normal. [step 2.1, F3] ∎
+3.1 For each $i$ put $G_i:=\bigcup\{U^x:x\in F_i\}$. Each selected $U^x$ belongs to the open base $\mathcal U_x$, so $G_i$ is open; it contains $F_i$ because $x\in U^x$, and distinct $G_i,G_j$ are disjoint by step 2.1. Hence $\mathcal F$ is separated and $X$ is collectionwise normal. [given, step 2.1, F3] ∎
 
 ## Remarks
 

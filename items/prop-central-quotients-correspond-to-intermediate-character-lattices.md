@@ -5,7 +5,7 @@ title: Central quotients and intermediate character lattices
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, thm-compact-connected-lie-groups-are-classified-by-root-data, def-axiom-of-choice, thm-compact-group-weyl-group-is-finite, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]
+deps: [prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group, thm-compact-connected-lie-groups-are-classified-by-root-data, def-axiom-of-choice, cor-semisimple-lie-algebras-are-centerless-and-perfect, thm-cartans-closed-subgroup-theorem, def-countable-choice, prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -40,7 +40,7 @@ Then:
 
 [A1] The Axiom of Choice is [[def-axiom-of-choice]]; it enters through [L1] and [L3].
 
-[L1] For compact connected semisimple groups, $Q\subseteq X^*(T)\subseteq P$, and the simply connected form has $X^*(T)=P$; central subgroups of a compact connected group are finite and lie in every maximal torus ([[prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group]], [[thm-compact-group-weyl-group-is-finite]]).
+[L1] For compact connected semisimple groups, $Q\subseteq X^*(T)\subseteq P$, and the simply connected form has $X^*(T)=P$ ([[prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group]]). The centre $Z(G_{sc})$ is finite: it is a closed subgroup and hence an embedded compact Lie subgroup by [[thm-cartans-closed-subgroup-theorem]], while its Lie algebra is the zero centre of the semisimple Lie algebra by [[cor-semisimple-lie-algebras-are-centerless-and-perfect]], so it is zero-dimensional, discrete, and compact. Every central element lies in $T_{sc}$ because it lies in some maximal torus and conjugating that torus to $T_{sc}$ does not move a central element ([[def-countable-choice]]).
 
 [L2] Finite abelian group duality: for a finite central subgroup $C$ of a torus $T$, the characters of $T/C$ are exactly the characters of $T$ trivial on $C$, and $C$ is recovered as the common kernel of those characters ([[prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t]]).
 

@@ -4,7 +4,7 @@ kind: theorem
 title: "Relative consistency of DC with failure of Stone's theorem"
 status: draft
 origin: pipeline
-deps: [def-good-tree-watson-symmetric-stone-model, lem-good-tree-watson-omega-sequence-closure, lem-good-tree-watson-selector-obstruction, def-dependent-choice, def-paracompact-space, def-cover-refinement-and-local-finiteness, thm-formal-consistency-of-zfc-plus-gch-from-zf, thm-formal-relative-consistency-from-verified-proof-reduction, def-metric-space, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-topological-space, def-compact-space, thm-forcing-theorem, thm-hereditarily-symmetric-interpretations-form-a-zf-model, def-dependent-choice]
+deps: [def-good-tree-watson-symmetric-stone-model, lem-good-tree-watson-omega-sequence-closure, lem-good-tree-watson-selector-obstruction, def-dependent-choice, def-paracompact-space, def-cover-refinement-and-local-finiteness, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-metric-space, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-topological-space, def-compact-space, thm-forcing-theorem, thm-hereditarily-symmetric-interpretations-form-a-zf-model]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -46,13 +46,13 @@ $\mathrm{ZF}$ without DC.)
 
 [F4] The metric sum $\bigsqcup_{\xi<\lambda} R_\xi$ carries the metric that agrees with the metric of each component and puts distance $1$ between different components; its topology is the topological sum of the components, each $R_\xi$ is a clopen connected subspace with more than one point, and the whole space is metrizable ([[def-metric-space]], [[def-metric-ball]], [[def-metric-topology]], [[thm-metric-open-set-algebra]], [[def-topological-space]]). Because a clopen connected set with more than one point has no proper nonempty clopen subset, the space has no base of clopen sets and is therefore not zero-dimensional.
 
-[F5] The formal consistency compilers convert the construction and its verification into the syntactic implication $\operatorname{Con}(\mathrm{ZF}) \Rightarrow \operatorname{Con}(\mathrm{ZF}+\mathrm{DC}+\text{failure of Stone's theorem})$ ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]], [[thm-formal-relative-consistency-from-verified-proof-reduction]]).
+[F5] The verified constructible-universe reduction gives $\operatorname{Con}(\mathrm{ZF})\Rightarrow\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]]). Good--Tree--Watson's regular-$\lambda$ construction is then an external forcing-and-symmetric-model construction over that ground model; the source's discussion after Theorem 3 supplies the regular-$\lambda$ replacement used here. No formal proof-code reduction for this construction is asserted. [source]
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Assume $\operatorname{Con}(\mathrm{ZF})$ and form the regular-$\lambda$ Good-Tree-Watson model with $\lambda = \omega_1$. [given, F5]
+1.1 Assume $\operatorname{Con}(\mathrm{ZF})$. By [F5], start with a model of $\mathrm{ZFC}+\mathrm{GCH}$ and form the regular-$\lambda$ Good--Tree--Watson symmetric model with $\lambda = \omega_1$. [given, F5]
 
 2.1 The model satisfies DC by [F2], because every $\omega$-sequence in the full extension with values in $N$ is already in $N$ by [F1]. [step 1.1, F1, F2]
 
@@ -64,4 +64,4 @@ $\mathrm{ZF}$ without DC.)
 
 5.1 By [F3] no such function exists in $N$; hence $\mathcal{U}$ has no locally finite open refinement, and $X$ is not paracompact. [step 4.1, F3]
 
-6.1 Steps 2.1 and 5.1 give a model of $\mathrm{ZF} + \mathrm{DC}$ containing a metrizable nonparacompact space, and by [F5] the construction yields the displayed relative-consistency implication, conditional on $\operatorname{Con}(\mathrm{ZF})$; the argument uses the regular-$\lambda$ presentation and not the finite-support $\omega$-indexed one. [step 2.1, step 5.1, F5] ∎
+6.1 Steps 2.1 and 5.1 give a model of $\mathrm{ZF} + \mathrm{DC}$ containing a metrizable nonparacompact space. Together with step 1.1, this external construction proves the displayed relative-consistency implication, conditional on $\operatorname{Con}(\mathrm{ZF})$; it does not invoke the formal proof-reduction theorem without a verified code map. The argument uses the regular-$\lambda$ presentation and not the finite-support $\omega$-indexed one. [step 1.1, step 2.1, step 5.1, F5] ∎

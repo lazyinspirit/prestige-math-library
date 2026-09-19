@@ -34,7 +34,7 @@ with $dz$ the normalized Haar measure of the circle.
 
 [L2] Weyl integration: for a class function $f$ on a compact connected $G$ with maximal torus $T$, $\int_Gf\,dg=|W|^{-1}\int_Tf(t)J(t)\,dt$ with $J(t)=\prod_{\alpha>0}|1-\alpha(t)^{-1}|^2$ ([[thm-weyl-integration-formula]], [[def-weyl-jacobian-on-a-maximal-torus]]).
 
-[L3] For type $A_1$ there is one positive root $\alpha$, and it acts on the diagonal torus by $\alpha(\operatorname{diag}(z,z^{-1}))=z^2$. [L1]
+[L3] In $\mathfrak{sl}_2(\mathbb C)$, the adjoint action of $t=\operatorname{diag}(z,z^{-1})$ sends $E_{12}$ to $z^2E_{12}$ and $E_{21}$ to $z^{-2}E_{21}$, while it fixes the diagonal trace-zero line. Thus the roots of $(SU(2),T)$ are the two characters $z\mapsto z^{\pm2}$, and one may choose $\alpha(t)=z^2$ as the positive root. [algebra]
 
 ## Verification
 

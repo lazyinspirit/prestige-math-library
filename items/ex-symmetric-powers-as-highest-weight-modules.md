@@ -42,7 +42,7 @@ irreducible module of highest weight $m\omega_1$.
 
 **Proof technique:** direct.
 
-1.1 The vector $x_1^m$ is a highest weight vector: $H\cdot x_1^m=mH_{11}x_1^m$, so its weight is $m\varepsilon_1=m\omega_1$; and $E_{ij}\cdot x_1=0$ for $i<j$ because $i\ne1$, so $E_{ij}\cdot x_1^m=0$ for every positive root vector. [L1, given, A1]
+1.1 The vector $x_1^m$ is a highest weight vector: $H\cdot x_1^m=mH_{11}x_1^m$, so its weight is $m\varepsilon_1=m\omega_1$; and $E_{ij}\cdot x_1=0$ for $i<j$ because $j\ne1$, so $E_{ij}\cdot x_1^m=0$ for every positive root vector. [L1, given, A1]
 
 1.2 Let $0\ne U\subseteq W$ be a submodule; writing a nonzero element as a sum of distinct-weight monomials, [L2] produces an element of $U(\mathfrak h)$ that projects onto one of them, so $U$ contains a monomial $x_1^{a_1}\cdots x_n^{a_n}$ with $a_j>0$ for some $j>1$ unless it already contains $x_1^m$. [L1, L2]
 

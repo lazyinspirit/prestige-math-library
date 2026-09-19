@@ -26,8 +26,7 @@ sources:
 $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$ implies
 $\operatorname{Con}(\mathrm{ZFC} + \text{there is a measurable cardinal})$,
 while $\operatorname{Con}(\mathrm{ZFC} + \text{there is a strongly compact
-cardinal})$ implies $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$; a
-modern $\omega_1$-strongly compact upper refinement is recorded separately
+cardinal})$ implies $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$
 ([[thm-strongly-compact-relative-consistency-normal-moore]],
 [[thm-formal-nmsc-consistency-lower-bound]]).
 
@@ -35,18 +34,11 @@ modern $\omega_1$-strongly compact upper refinement is recorded separately
 
 **Given:** The two metatheoretic consistency hypotheses.
 
-[F1] The lower bound: $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$
-implies $\operatorname{Con}(\mathrm{ZFC} + \text{a measurable cardinal})$
-([[thm-formal-nmsc-consistency-lower-bound]]).
+[F1] The lower bound: $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$ implies $\operatorname{Con}(\mathrm{ZFC} + \text{a measurable cardinal})$ ([[thm-formal-nmsc-consistency-lower-bound]]).
 
-[F2] The upper bound: $\operatorname{Con}(\mathrm{ZFC} + \text{a strongly
-compact cardinal})$ implies $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$
-([[thm-strongly-compact-relative-consistency-normal-moore]]).
+[F2] The upper bound: $\operatorname{Con}(\mathrm{ZFC} + \text{a strongly compact cardinal})$ implies $\operatorname{Con}(\mathrm{ZFC} + \mathrm{NMSC})$ ([[thm-strongly-compact-relative-consistency-normal-moore]]).
 
-[F3] The internal assertion "$\mathrm{ZFC}+\mathrm{NMSC}$ proves that there is
-an inner model with a measurable cardinal"
-([[thm-normal-moore-implies-inner-model-measurable]]) is a distinct claim from
-both consistency implications. [given]
+[F3] The internal assertion "$\mathrm{ZFC}+\mathrm{NMSC}$ proves that there is an inner model with a measurable cardinal" ([[thm-normal-moore-implies-inner-model-measurable]]) is a distinct claim from both consistency implications. [given]
 
 
 
@@ -60,8 +52,4 @@ both consistency implications. [given]
 
 ## Remarks
 
-- **Three distinct claims.** The internal theorem, the lower consistency
-  implication and the forcing/measure upper implication are kept as three
-  separate assertions; no converse of the upper bound is claimed here, and the
-  $\omega_1$-strongly compact refinement is orientation only
-  ([[thm-strongly-compact-relative-consistency-normal-moore]]).
+- **Three distinct claims.** The internal theorem, the lower consistency implication and the forcing/measure upper implication are kept as three separate assertions; no converse of the upper bound is claimed here ([[thm-strongly-compact-relative-consistency-normal-moore]]).

@@ -5,7 +5,7 @@ title: Continuous convolution operators are Hilbert–Schmidt
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, thm-l-two-kernels-give-hilbert-schmidt-operators, thm-hilbert-schmidt-operators-are-compact, def-axiom-of-choice, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, thm-linearity-of-the-lebesgue-integral-on-l-one]
+deps: [def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group, thm-l-two-kernels-give-hilbert-schmidt-operators, thm-hilbert-schmidt-operators-are-compact, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-axiom-of-choice, prop-integration-against-haar-is-invariant-under-translations-and-conjugation, thm-linearity-of-the-lebesgue-integral-on-l-one]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -37,7 +37,7 @@ $\|T_k\|_{HS}=\|k\|_2$, and is compact.
 
 [L2] If $k\in L^2(G\times G)$ is a kernel class, the associated operator $T$ on $L^2(G)$ is Hilbert–Schmidt with $\|T\|_{HS}=\|k\|_2$; Hilbert–Schmidt operators are compact ([[thm-l-two-kernels-give-hilbert-schmidt-operators]], [[thm-hilbert-schmidt-operators-are-compact]]).
 
-[L3] Fubini's theorem holds for nonnegative and integrable functions on the product of the compact measure spaces, and the Haar measure is translation invariant ([[prop-integration-against-haar-is-invariant-under-translations-and-conjugation]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
+[L3] Fubini's theorem identifies the product integral of an integrable function on two sigma-finite measure spaces with either iterated integral ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]), and Haar measure is translation invariant ([[prop-integration-against-haar-is-invariant-under-translations-and-conjugation]]).
 
 ## Proof
 

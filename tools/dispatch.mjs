@@ -24,6 +24,16 @@ import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 // tools/models.mjs owns model IDs and semantic lane assignments.
 import { lane, modelProfile } from './models.mjs';
 
+// Earlier compaction for the multi-item agentic lanes (owner, 2026-09-20).
+// Measured on phase-2-remaining-27's Step-7 adjudicators: ~130k input tokens
+// PER CALL over ~2,900 calls, because a long-lived lane re-sends its whole
+// history every turn. Compacting at 120k instead of 200k cuts the average
+// context by roughly a third; the briefs already require re-anchoring to the
+// live item and dependencies after any compaction, which is what makes the
+// smaller window safe. One-shot judge lanes build their own prompt and do not
+// use this.
+const DEFAULT_AUTO_COMPACT_TOKEN_LIMIT = 120_000;
+
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
   // `web: true` on the two source-reading build lanes (owner, 2026-08-11). Every
@@ -267,7 +277,9 @@ const spec = Object.freeze({
   requestedEffort: ROLES[role].effort ?? 'xhigh',
   ...profileSpec,
   profile: profileName,
-  autoCompactTokenLimit: profileSpec?.provider === 'deepseek' ? null : 200_000,
+  autoCompactTokenLimit: profileSpec?.provider === 'deepseek'
+    ? null
+    : (ROLES[role].autoCompactTokenLimit ?? DEFAULT_AUTO_COMPACT_TOKEN_LIMIT),
 });
 const compactionArgs = spec.autoCompactTokenLimit == null ? [] : [
   '-c', `model_auto_compact_token_limit=${spec.autoCompactTokenLimit}`,
@@ -327,11 +339,18 @@ dependency statements, and source passages. Never infer a missing hypothesis fro
 a summary. Preserve independent reviews; report unrecoverable evidence as a blocker.
 Use only task-authorized notes; do not create transcripts.\n`;
 } else if (resolvedBrief !== join(REPO, 'briefs/beta-scaffold.md')) {
-  prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
+prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
 exclude dispatch logs from routine content searches. Fetch complete relevant source
 sections and dependency statements, using bounded output chunks. A truncated result
 is not evidence of absence; continue reading until the required argument is complete.
 Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+Read each file ONCE per session, in the order the task gives it, and pull only the sections
+and clauses you need — use the rendered evidence bundle first, and read the cited lines
+rather than re-reading whole items. Budget the context you carry: this same
+context is re-sent on every turn. The bundle is an entry point, never a fence: read
+whatever else the mathematics requires, including other items of this frontier and the
+published library, and search the web when a source must be checked.
 
 For writing roles, after each completed item update the task-authorized notes or report with the
 current item IDs, exact claim and conventions, source paths/URLs and locators,

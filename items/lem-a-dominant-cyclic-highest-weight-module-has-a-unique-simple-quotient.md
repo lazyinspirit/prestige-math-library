@@ -5,7 +5,7 @@ title: Unique simple quotient of the dominant cyclic module
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives, lem-highest-weight-modules-have-weights-below-the-top-weight, def-dominant-integrable-highest-weight-cyclic-module, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-subrepresentation-quotient-representation-and-intertwiner, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-universal-enveloping-algebra, thm-poincare-birkhoff-witt, thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra, def-axiom-of-choice]
+deps: [lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives, lem-highest-weight-modules-have-weights-below-the-top-weight, prop-root-vectors-shift-weight-spaces, def-dominant-integrable-highest-weight-cyclic-module, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-subrepresentation-quotient-representation-and-intertwiner, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-universal-enveloping-algebra, thm-poincare-birkhoff-witt, thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -44,7 +44,7 @@ isomorphism, a unique simple quotient.
 
 [L3] For an ordered basis of the abelian Lie algebra $\mathfrak h$ the PBW monomials form a basis of $U(\mathfrak h)$, so $U(\mathfrak h)$ is the commutative polynomial algebra in these variables and acts on a weight vector of weight $\mu$ through evaluation at $\mu$ ([[thm-poincare-birkhoff-witt]], [[def-universal-enveloping-algebra]]).
 
-[L4] Every element of $M$ is a finite sum of weight vectors: this follows from the spanning set $U(\mathfrak n^-)\mathbb Cv_\lambda$ of [L1] and the shift property of root vectors ([[def-weight-and-weight-space-of-a-lie-algebra-representation]]).
+[L4] Every element of $M$ is a finite sum of weight vectors: [L1] gives the spanning set $U(\mathfrak n^-)\mathbb Cv_\lambda$, PBW expresses its elements as finite linear combinations of monomials in negative-root vectors, and each such monomial sends a weight vector to a weight vector (or zero) by repeated application of [[prop-root-vectors-shift-weight-spaces]]. [L1, L3]
 
 ## Proof
 

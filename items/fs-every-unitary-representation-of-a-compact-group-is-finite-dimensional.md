@@ -1,7 +1,7 @@
 ---
 id: fs-every-unitary-representation-of-a-compact-group-is-finite-dimensional
 kind: false-statement
-title: Compact groups have infinite-dimensional unitary representations
+title: A compact group can have infinite-dimensional unitary representations
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27

@@ -4,7 +4,7 @@ kind: theorem
 title: "Relative consistency of BPI without Urysohn's lemma"
 status: draft
 origin: pipeline
-deps: [def-brunner-ordered-lauchli-permutation-models, lem-brunner-choice-and-urysohn-obstructions, thm-extreme-amenability-yields-bpi-in-finite-support-models, lem-ordered-rational-automorphism-stabilizers-are-extremely-amenable, lem-brunner-urysohn-obstruction-is-injectively-boundable, thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions, thm-formal-consistency-of-zfc-plus-gch-from-zf, thm-formal-relative-consistency-from-verified-proof-reduction, def-boolean-prime-ideal-principle, def-normal-and-t4-spaces]
+deps: [def-brunner-ordered-lauchli-permutation-models, lem-brunner-choice-and-urysohn-obstructions, thm-extreme-amenability-yields-bpi-in-finite-support-models, lem-ordered-rational-automorphism-stabilizers-are-extremely-amenable, lem-brunner-urysohn-obstruction-is-injectively-boundable, thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions, thm-formal-consistency-of-zfc-plus-gch-from-zf, def-boolean-prime-ideal-principle, def-normal-and-t4-spaces]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -39,16 +39,16 @@ separation ([[def-normal-and-t4-spaces]]).
 
 [F3] The same model contains the ordered continuum with every continuous real-valued function constant, hence a normal space violating Urysohn's lemma ([[lem-brunner-choice-and-urysohn-obstructions]]), and that failure is certified with an absolute bound ([[lem-brunner-urysohn-obstruction-is-injectively-boundable]]).
 
-[F4] Pincus transfer with the exceptional clauses permits BPI to be conjoined with the certified sentence ([[thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions]]), and the formal consistency compilers turn the transfer into a syntactic implication ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]], [[thm-formal-relative-consistency-from-verified-proof-reduction]]).
+[F4] Pincus transfer with the exceptional clauses permits BPI to be conjoined with the certified sentence ([[thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions]]). The verified constructible-universe reduction gives $\operatorname{Con}(\mathrm{ZF})\Rightarrow\operatorname{Con}(\mathrm{ZFC}+\mathrm{GCH})$ ([[thm-formal-consistency-of-zfc-plus-gch-from-zf]]); a model of ZFC expands in the standard way to a ZFA+AC model with the required countably infinite atom set. No formal proof-reduction theorem is invoked for the subsequent external permutation-model and Pincus constructions.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Assume $\operatorname{Con}(\mathrm{ZF})$ and form the rational-ordered finite-support Läuchli permutation model. [given]
+1.1 Assume $\operatorname{Con}(\mathrm{ZF})$. By [F4], start with a model of $\mathrm{ZFC}+\mathrm{GCH}$, adjoin the countably infinite ordered atom set, and form the rational-ordered finite-support Läuchli permutation model. [given, F4]
 
 2.1 By [F1] the finite stabilisers in that model are extremely amenable, so by [F2] the model satisfies BPI. [step 1.1, F1, F2]
 
 2.2 By [F3] the model contains the certified Urysohn obstruction, so BPI and that certified sentence hold together in the permutation model. [step 1.1, F3]
 
-3.1 By [F4] the conjunction of BPI with the certified sentence transfers to a model of $\mathrm{ZF}$, and the formal consistency compilers yield $\operatorname{Con}(\mathrm{ZF}) \Rightarrow \operatorname{Con}(\mathrm{ZF} + \mathrm{BPI} + \neg\mathrm{URY})$; the statement is therefore proved relative to $\operatorname{Con}(\mathrm{ZF})$. [step 2.1, step 2.2, F4] ∎
+3.1 By [F4], the conjunction of BPI with the certified sentence transfers to an atom-free model of $\mathrm{ZF}$. Therefore $$\operatorname{Con}(\mathrm{ZF}) \Rightarrow \operatorname{Con}(\mathrm{ZF} + \mathrm{BPI} + \neg\mathrm{URY}).$$ This is an external relative-consistency construction; it does not assert the uniform proof-code reduction required by the formal compiler. [step 1.1, step 2.1, step 2.2, F4] ∎

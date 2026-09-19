@@ -5,7 +5,7 @@ title: Standard and dual representations of sl_n
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [prop-root-systems-of-the-classical-complex-lie-algebras, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-classical-complex-matrix-lie-algebras, def-fundamental-weights, def-coroot-of-a-lie-algebra-root, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, def-killing-form-of-a-finite-dimensional-lie-algebra, def-axiom-of-choice]
+deps: [prop-root-systems-of-the-classical-complex-lie-algebras, prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system, def-classical-complex-matrix-lie-algebras, def-fundamental-weights, def-coroot-of-a-lie-algebra-root, def-highest-weight-vector-and-highest-weight-module, def-weight-and-weight-space-of-a-lie-algebra-representation, def-irreducible-completely-reducible-and-faithful-lie-algebra-representation, thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, def-killing-form-of-a-finite-dimensional-lie-algebra, def-axiom-of-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -48,7 +48,7 @@ $\omega_{n-1}=-\varepsilon_n$
 
 [L3] The fundamental weights are the functionals dual to the simple coroots: $\omega_k(h_{\alpha_j})=\delta_{kj}$, and the simple coroots form a basis of $\mathfrak h$ ([[def-fundamental-weights]], [[prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system]]).
 
-[L4] A finite-dimensional irreducible module has a unique highest weight, and a nonzero vector killed by all positive root vectors and of weight $\lambda$ is a highest weight vector of the module it generates ([[def-highest-weight-vector-and-highest-weight-module]], [[def-weight-and-weight-space-of-a-lie-algebra-representation]], [[def-irreducible-completely-reducible-and-faithful-lie-algebra-representation]]).
+[L4] A nonzero weight vector killed by all positive root vectors is a highest-weight vector of the module it generates; every finite-dimensional irreducible module has a unique highest weight ([[def-highest-weight-vector-and-highest-weight-module]], [[def-weight-and-weight-space-of-a-lie-algebra-representation]], [[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]]).
 
 ## Verification
 

@@ -4,7 +4,7 @@ kind: theorem
 title: "Pincus transfer for BPI, Countable Choice, and injectively boundable conjunctions"
 status: draft
 origin: pipeline
-deps: [thm-jech-sochor-transfer-for-boundable-sentences, thm-finite-fragment-relative-consistency-transfer, thm-formal-relative-consistency-from-verified-proof-reduction, def-boolean-prime-ideal-principle, def-boundable-sentence-over-an-atom-set, def-countable-choice, rem-pincus-transfer-interface-and-preservation-limits]
+deps: [thm-jech-sochor-transfer-for-boundable-sentences, def-boolean-prime-ideal-principle, def-boundable-sentence-over-an-atom-set, def-countable-choice, rem-pincus-transfer-interface-and-preservation-limits]
 justified_by: []
 provenance:
   statement: literature-derived
@@ -39,25 +39,21 @@ full Choice, and no uncertified sentence is transferred.
 
 **Given:** A permutation model of ZFA with atom set $A$; finitely many certified atom-blind boundable sentences with their absolute rank bounds.
 
-[F1] Jech–Sochor transfer: a certified atom-blind boundable sentence with its transfer certificate holds in the symmetric ZF model obtained from the permutation model by the pure forcing at the certificate's iterate height ([[thm-jech-sochor-transfer-for-boundable-sentences]], [[def-boundable-sentence-over-an-atom-set]]).
+[F1] A boundable statement is injectively boundable (Pincus, cited in Tachtsis as Fact 5.4). Thus an atom-blind boundable statement carrying the typed certificate of [[thm-jech-sochor-transfer-for-boundable-sentences]] has the preservation data needed by the Pincus theorem ([[def-boundable-sentence-over-an-atom-set]]).
 
-[F2] Pincus's exceptional clauses: alongside the injectively boundable conjuncts, BPI and $\mathrm{AC}_\omega$ may occur in the transferred conjunction when they hold in the permutation model, as stated explicitly in the cited Theorem 5.5 of Tachtsis and applied in Brunner's §3.4(a) to the Urysohn obstruction ([[rem-pincus-transfer-interface-and-preservation-limits]], [[def-boolean-prime-ideal-principle]], [[def-countable-choice]]).
-
-[F3] Finite-fragment model transfer and the verified proof reduction convert a family of set models of finite fragments into the syntactic consistency implication ([[thm-finite-fragment-relative-consistency-transfer]], [[thm-formal-relative-consistency-from-verified-proof-reduction]]).
+[F2] Pincus's transfer theorems admit BPI and $\mathrm{AC}_\omega$ as named exceptional conjuncts alongside a finite conjunction of injectively boundable statements. Tachtsis Theorem 5.5 explicitly records the simultaneous $\mathrm{BPI}\wedge\mathrm{AC}_\omega$ form, while the cited Pincus metatheorems give the individual exceptional-clause forms used here. This is direct source input, not an inference from the orientation-only remark [[rem-pincus-transfer-interface-and-preservation-limits]] ([[def-boolean-prime-ideal-principle]], [[def-countable-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Fix the finite list $T_1,\dots,T_k$ of certified sentences, each with its absolute bound, and let $\alpha$ be the maximum of those bounds; the maximum exists because the list is finite and the bounds are absolute ordinals. [given]
+1.1 Fix the finite list $T_1,\dots,T_k$ of certified sentences. By [F1], each $T_j$ is injectively boundable; the finite conjunction retains the finitely many certificates and absolute bounds. [given, F1]
 
-2.1 For each $j \le k$ the certificate of $T_j$ names finitely many carried levels below $V_{\alpha}(A \cup \omega)$ after the bound is increased to $\alpha$, and increasing the height of a certificate preserves it: the same formula is relativised to a larger segment and the equivalence of [F1] remains provable, so the single iterate height $\alpha$ serves all conjuncts. [step 1.1, F1]
+2.1 Let $\Omega$ be the conjunction of the $T_j$ and whichever of BPI and $\mathrm{AC}_\omega$ are asserted in the given permutation model. No other truth of that model is included in $\Omega$. [step 1.1, given]
 
-3.1 By [F1] applied at height $\alpha$ to the conjunction, the finite conjunction $T_1 \wedge \dots \wedge T_k$ holds in the atom-free ZF model that the Jech–Sochor embedding produces; this is an external finite application of the transfer theorem, and the embeddings for the finitely many conjuncts are taken at the one height $\alpha$. [step 2.1, F1]
+3.1 Apply the corresponding Pincus theorem in [F2] to $\Omega$. It produces an atom-free model of ZF satisfying every injectively boundable conjunct and the named exceptional principle or principles. In particular, omitting both exceptional clauses transfers the finite conjunction alone, adjoining BPI transfers BPI with it, and adjoining $\mathrm{AC}_\omega$ transfers Countable Choice with it. [step 1.1, step 2.1, F2]
 
-4.1 If the permutation model satisfies BPI, then by [F2] BPI may be adjoined to the conjunction before transfer, and the same applies to $\mathrm{AC}_\omega$; the hypothesis that these are exceptional clauses rather than injectively boundable sentences is respected, and neither is asserted to be injectively boundable. [step 3.1, F2]
-
-5.1 Finally [F3] converts the existence of set models of every finite fragment of the transferred theory into the syntactic implication $\operatorname{Con}(\mathrm{ZF}) \Rightarrow \operatorname{Con}(\mathrm{ZF} + \text{transferred principles})$, using the verified proof reduction as its input. [step 3.1, step 4.1, F3] ∎
+4.1 Step 3.1 is exactly the transfer asserted in the Statement. BPI and $\mathrm{AC}_\omega$ enter only through [F2]'s exceptional clauses and are not relabelled as injectively boundable; the typed certificates restrict all other transferred content to the named $T_j$. [step 2.1, step 3.1, F1, F2] ∎
 
 ## Remarks
 

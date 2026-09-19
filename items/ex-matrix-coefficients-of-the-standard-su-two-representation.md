@@ -34,14 +34,12 @@ pairwise orthogonal in $L^2(SU(2))$ with squared norm $\tfrac12$.
 
 [L2] Schur orthogonality: for an irreducible unitary representation of dimension $d$, $\int_G\pi_{ij}(g)\overline{\pi_{kl}(g)}\,dg=\delta_{ik}\delta_{jl}/d$ ([[thm-schur-orthogonality-for-compact-lie-groups]]).
 
-[L3] $SU(2)$ acts transitively on the unit sphere of $\mathbb C^2$, so the standard representation is irreducible: any invariant subspace containing a nonzero vector contains its whole $SU(2)$-orbit, and the orbit of a unit vector is the unit sphere, whose span is $\mathbb C^2$. [L2]
-
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 With $g e_1=(a,-\overline b)$ and $g e_2=(b,\overline a)$, the matrix coefficients in the standard basis are $\pi_{11}=a$, $\pi_{21}=b$, $\pi_{12}=-\overline b$ and $\pi_{22}=\overline a$, by [L1]; these are exactly the four displayed coordinate functions. [L1]
+1.1 With $g e_1=(a,-\overline b)$ and $g e_2=(b,\overline a)$, the matrix coefficients in the standard basis are $\pi_{11}=a$, $\pi_{21}=-\overline b$, $\pi_{12}=b$ and $\pi_{22}=\overline a$, by [L1]; these are exactly the four displayed coordinate functions. [L1]
 
-2.1 The standard representation is irreducible by [L3] and has dimension two, so [L2] applies with $d=2$: $\int_{SU(2)}\pi_{ij}\overline{\pi_{kl}}\,dg=\delta_{ik}\delta_{jl}/2$. [L2, step 1.1]
+2.1 The standard representation is irreducible. Indeed, for every unit vector $(u,v)\in\mathbb C^2$, the matrix $\begin{pmatrix}u&-\overline v\\v&\overline u\end{pmatrix}$ lies in $SU(2)$ and sends $e_1$ to $(u,v)$; hence $SU(2)$ acts transitively on the unit sphere. Any nonzero invariant subspace therefore contains the whole unit sphere and equals $\mathbb C^2$. Since the representation has dimension two, [L2] applies with $d=2$: $\int_{SU(2)}\pi_{ij}\overline{\pi_{kl}}\,dg=\delta_{ik}\delta_{jl}/2$. [L2, step 1.1, algebra]
 
 3.1 Reading off the four cases gives that each of $a,b,-\overline b,\overline a$ has squared norm $\tfrac12$ and that distinct coordinate functions are orthogonal, which is the assertion. [L2, step 2.1] ∎

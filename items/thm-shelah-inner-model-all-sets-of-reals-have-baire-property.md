@@ -4,7 +4,7 @@ kind: theorem
 title: Every real set in the Shelah inner model has the Baire property
 status: draft
 origin: pipeline
-deps: [thm-shelah-inner-model-satisfies-zf-and-dependent-choice, lem-shelah-homogeneous-truth-has-baire-representatives, lem-solovay-borel-code-and-regularity-absoluteness, def-property-of-baire-for-subsets, lem-shelah-inner-model-is-closed-under-ambient-omega-sequences, def-shelah-hereditarily-ordinal-sequence-definable-model]
+deps: [thm-shelah-inner-model-satisfies-zf-and-dependent-choice, lem-shelah-homogeneous-truth-has-baire-representatives, def-property-of-baire-for-subsets, def-shelah-hereditarily-ordinal-sequence-definable-model]
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -29,22 +29,18 @@ $A$ is the symmetric difference of $U$ and a subset of $M$.
 
 [F2] [[lem-shelah-homogeneous-truth-has-baire-representatives]]: for every formula with a countable ordinal-sequence parameter, the set of reals satisfying it differs from an open set by a meagre set, and both the open code and the meagre-error code lie in the final extension.
 
-[F3] [[lem-shelah-inner-model-is-closed-under-ambient-omega-sequences]]: $N$ is closed under ambient $\omega$-sequences of its elements.
+[F3] [[thm-shelah-inner-model-satisfies-zf-and-dependent-choice]]: $N$ is transitive and has the same reals as the ambient extension.
 
-[F4] [[lem-solovay-borel-code-and-regularity-absoluteness]]: Borel codes evaluate identically on shared reals and coded category witnesses transfer between models with the same reals, so the approximation computed in the extension is the same inside $N$.
-
-[F5] [[def-property-of-baire-for-subsets]]: the property of Baire is the existence of an open set differing from the given set by a meagre set.
-
-[F6] [[thm-shelah-inner-model-satisfies-zf-and-dependent-choice]]: $N$ satisfies ZF and has the same reals as the ambient extension.
+[F4] [[def-property-of-baire-for-subsets]]: the property of Baire is the existence of an open set differing from the given set by a meagre set.
 
 ## Proof
 
 1.1 By [F1] the set $A$ has a rank-bounded definition from one parameter $s\in S$ and finitely many ordinals; applying [F2] to that defining formula yields an open set $W\subseteq 2^\omega$ and a meagre set $E$ with $A\mathbin\triangle W\subseteq E$, both coded in the ambient extension. [F1, F2]
 
-1.2 The codes of $W$ and $E$ are countable objects: an open set of Cantor space has a code consisting of a set of finite binary strings, which is a real, and $E$ is given as the union of a countable sequence of closed nowhere-dense sets, each coded by a real; the sequence itself is an ambient $\omega$-sequence of reals. Since all reals and all ordinals lie in $N$ and $N$ is closed under ambient $\omega$-sequences, the codes of $W$ and the witnessing nowhere-dense sequence belong to $N$. [F1, F3]
+1.2 The code of $W$ is a subset of the countable set $2^{<\omega}$ and hence a real. The code of $E$ supplied by [F2] is a sequence of closed nowhere-dense tree codes; using the fixed pairing of $\omega\times\omega$ with $\omega$, the entire sequence is again one real. By [F3], both code reals belong to $N$. [F2, F3]
 
-1.3 Inside $N$, the same codes define a set $W^N$ and a sequence of closed nowhere-dense sets whose union contains $E^N$: by [F4] the Borel-code evaluations agree between the extension and $N$, because the two models have the same reals. [F4]
+1.3 The interpretations of these particular codes are absolute between the ambient extension and $N$. Membership in the open set is the arithmetic assertion that some coded finite string is an initial segment of the real. Membership in the closed set coded by a tree is the arithmetic assertion that every finite initial segment belongs to that tree. Since the two transitive models have the same natural numbers and reals, these assertions have the same truth value in both models. The rational-cylinder test saying that a closed tree code has empty interior is likewise arithmetic in the code, so every member of the coded sequence is still closed nowhere dense in $N$. [F3]
 
-2.1 Therefore $N$ satisfies $A\mathbin\triangle W^N\subseteq E^N$ with $W^N$ open and $E^N$ meagre as witnessed by the same coded sequence of closed nowhere-dense sets; since $W^N$ and the witness sequence lie in $N$, the property of Baire holds in $N$ in the form of [F5]. [F5, step 1.3]
+2.1 Therefore $N$ satisfies $A\mathbin\triangle W\subseteq E$ with $W$ open and $E$ meagre as witnessed by the same coded sequence of closed nowhere-dense sets. The codes lie in $N$, so the property of Baire holds in $N$ in the form of [F4]. [F4, step 1.3]
 
-3.1 As $A\in N$ was arbitrary and [F6] supplies the ambient ZF theory, every subset of the reals in $N$ has a Baire witness in $N$; this is the Statement. [F6, step 2.1] ∎
+3.1 As $A\in N$ was arbitrary and [F3] supplies the ambient ZF theory, every subset of the reals in $N$ has a Baire witness in $N$; this is the Statement. [F3, step 2.1] ∎

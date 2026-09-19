@@ -1533,3 +1533,292 @@ This report is the task-authorized continuity record. Each completed item record
 - Anthony W. Knapp, *Lie Groups Beyond an Introduction*, 2nd ed., Chapter II, Proposition 2.44, printed pp. 151–152 (author-hosted PDF). Exact use: the proposition states and proves that the root system of a complex semisimple Lie algebra is irreducible if and only if the algebra is simple, replacing an inflated internal citation in the Cartan–Killing classification proof.
 - Pavel Etingof, *MIT 18.745 Lie Groups and Lie Algebras I*, Lecture 23, Exercises 23.10 and 23.13 (official MIT OCW PDF). Exact use: these exercises identify the displayed coordinate vectors as the simple positive roots for the $F_4$ and $E_8$ polarizations and give their Cartan matrices, closing the existence theorem's diagram-identification gap.
 - Pavel Etingof, *MIT 18.745 Lie Groups and Lie Algebras I*, Examples 20.12--20.14 and Remark 23.18 (official MIT OCW PDF). Exact use: the examples compute the classical coordinate root systems, while the remark records the low-rank root-system coincidences $D_2=A_1\sqcup A_1$, $D_3=A_3$, and $B_2=C_2$ used to separate the stable simple ranges from the exceptional cases.
+
+## Continued adjudications: example block
+
+### `ex-cotangent-reduction-for-a-principal-bundle-at-zero`
+
+- Rejection tuple: `gpt-5.6-terra` / `f285d57401a0dbdcea2d830ecf3d2b8842d05861dad2047510b982f928085794`; decision `confirmed_fatal` (`logic`) at guard `e5c8ddae0d5a3529351af3ad5fe963180dc89b6f20750be115a7e028120fdc4c`.
+- Repair: separated the invariant level map from its induced quotient map, identified its fibres with the $G$-orbits, proved the induced map a diffeomorphism in local principal-bundle charts, and compared forms through the quotient projection. Post-guard `0c8fd465f2cd0ad9b544b5585b50024cd1a26439c9d0ea5c97809b259d565380`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-137`.
+
+### `ex-diagonal-action-and-addition-of-angular-momenta`
+
+- Rejection tuple: `gpt-5.6-terra` / `93f83f02f1018acecfcfcd1154df54de295bf482460ebc9cf448e79ffb3df662`; decision `confirmed_fatal` (`dependency_citation`) at guard `83e4400092c692a92fa4724206ab3b626d44c0ff1f44f46d23c7865ff198ebc4`.
+- Repair: proved rotation covariance of the cross product directly and identified it with the coadjoint action before applying the product moment-map proposition. Post-guard `de1973bc315bf60fb32f573769687b63b3395c5864c847f6332dc8b2ee6740ce`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-138`.
+
+### `ex-fourier-series-on-a-torus-as-peter-weyl`
+
+- Rejection tuple: `gpt-5.6-terra` / `2ddf0dcc656312b73ef0320aab6d64bb212356916d01a7af7bf2e912f44898f3`; decision `confirmed_fatal` (`dependency_citation`) at guard `d22e1c5fe14a85af779aa284d6c43f940dbc3245ac4eaecc8fd754533eb2f307`.
+- Repair: cited the scalar-endomorphism corollary and derived that every complex irreducible representation of the abelian torus is one-dimensional. Post-guard `d42add084fd3a80b1fba5a149875c17b6e9bc451bdf8f330d86f6f53c066c493`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-139`.
+
+### `ex-grassmannians-from-unitary-symplectic-reduction`
+
+- Rejection tuple: `gpt-5.6-terra` / `e9f28ecd956b34133f248530ec98037b8a98f8ba4ae2a3503be4ca8baf4e412d`; decision `confirmed_fatal` (`logic`) at guard `839b3f060eeb5963e60fea4c3e94b4e97f04ad14c3053af717473fae5bea409f`.
+- Repair: imposed $1\le k\le n$, supplied the exact unitary-group interface, and derived regularity from freeness on the level. Post-guard `fb76ebc305376ae2ca274400aed98087507745bccb66e5d31c76697cacbe4fed`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-140`.
+
+### `ex-hyperbolic-space-as-so-zero-n-one-mod-so-n`
+
+- Rejection tuple: `gpt-5.6-terra` / `91a06e4697345169240be8cacb33b862c50fc61af2ec4376dbefe1caaa108719`; decision `confirmed_fatal` (`dependency_citation`) at guard `6fae4b7051ca571a4afad924837fd01c58123bbfc847549d65dd961515fb5040`.
+- Repair: replaced the supplier claim that omitted the $m=4$ case with a direct adjoint-trace computation of $B(X,Y)=(n-1)\operatorname{tr}(XY)$ on a matrix basis for every $n\ge2$, then used the exact nondegeneracy criterion. Post-guard `656970469510c24b13f5bf1666c36d100739d130eff9c7b1b9e9405b4fa3b12f`; direct precheck and rendercheck passed. This real-form example is absent from the pre-existing Batch-13 proof-contract scope, so no strict item contract exists to run; defect `phase-2-remaining-27-step7-a-141`.
+
+### `ex-iwasawa-decomposition-of-sl-two-r`
+
+- Rejection tuple: `gpt-5.6-terra` / `c2eee1dd62a7d9f78771496d068bc889b769f575422bbdddb7e8d3a3294df029`; decision `confirmed_fatal` (`logic`) at guard `7b96bd6b6657d704d4687e0c41d11dbd03086b6b2f87638013180875d0f54199`.
+- Repair: constructed $\Theta(g)=(g^{\mathsf T})^{-1}$, verified its differential, its fixed group $SO(2)$, and its pointwise action on the center before invoking global Iwasawa. Post-guard `43e2a5fb33bd7e6b045de897b4e29f448cfd93819e855c2ff164a4a0f435a2fa`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-142`.
+
+### `ex-matrix-coefficients-of-the-standard-su-two-representation`
+
+- Rejection tuple: `gpt-5.6-terra` / `b037b9f80f085dbdbafbd2146837409aeffb1fc1836a2f16ffd0c253b859bff9`; decision `confirmed_fatal` (`logic`) at guard `9d42336c70ff4243c5166ad73bdda214433e5c06a24615962df2aba6d44a2d27`.
+- Repair: corrected $\pi_{21}=-\overline b$ and $\pi_{12}=b$, and proved irreducibility directly from the explicit transitive action on the unit sphere. Post-guard `2deabe0d0084f9ea1a7bffef57b40f69947505c3704df68972e69909509368f8`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-143`.
+
+### `ex-maximal-tori-and-weyl-groups-of-u-n-and-su-n`
+
+- Rejection tuple: `gpt-5.6-terra` / `2c005939c23809f6762be9cd891e94bca61321e486d7f8feac1344916cce2716`; decision `confirmed_fatal` (`logic`) at guard `d80396d4106d9c3714b817a3d2c8653beea173c6aef14b62603363f5690bb8a8`.
+- Repair: corrected the determinant adjustment to use a diagonal unitary of reciprocal determinant and supplied direct centralizer arguments, including $n=1$. Post-guard `d7ca2e78e0da432cab8c88cdf6daf6e1939cb55a477401df66c5e02dbf4b6448`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-144`.
+
+### `ex-normalized-haar-measure-on-a-torus`
+
+- Rejection tuple: `gpt-5.6-terra` / `da5201fff7093d2b3efdbac8538731cf962207fe998e3f87e0abc38d5515b499`; decision `confirmed_fatal` (`dependency_citation`) at guard `f3b4ece19030e23df387edeb7a945b8f962b80ea8523a53d97e40c274bea2f86`.
+- Repair: proved inner and outer regularity of the fundamental-domain pushforward from the exact Lebesgue Radon theorem and handled the one-point torus separately before using Haar uniqueness. Post-guard `95b46041bcead260d917095f3ba8b8ef2880cacd25049065671e5ec8d3ac9ab2`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-145`.
+
+### `ex-polar-cartan-decomposition-of-sl-n-r`
+
+- Rejection tuple: `gpt-5.6-terra` / `423dd352e09adb71c43d1a7f93f0e1586af9b5e76ac240799ee7634cb47f6d41`; decision `confirmed_fatal` (`logic`) at guard `7735b95f6e1e7f8d2384850569975ac132fec926b11b274772da11595e4c04c5`.
+- Repair: verified the global involution, its fixed group, its differential, and its pointwise action on the center before invoking the global Cartan theorem. Post-guard `aa846b1650a3561a955bdc2e799ff5a4eade8e977b26fd7199de7e28c7bfa7d8`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-146`.
+
+### `ex-reduced-harmonic-oscillator-flow-on-projective-space`
+
+- Rejection tuple: `gpt-5.6-terra` / `8a9a43eaae3c589559df20fd63c8c31e1a2fd69b1e8ca3787bf283d857a3a173`; decision `confirmed_fatal` (`logic`) at guard `c55dd9d1899d5b6303813a858d562d01e25585fa5dd39a0662ee347bfac0e8be`.
+- Repair: added the necessary hypotheses $n\ge1$ and $c>0$ for the nonempty free Hopf-sphere reduction. Post-guard `d8cc1bdeb5462322e6996557dcdda67d37be4e16e1b5428e749684da6a053cab`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-147`.
+
+### `ex-restricted-roots-of-sl-n-r`
+
+- Rejection tuple: `gpt-5.6-terra` / `a1ffbc5d606d28c922b2d40da4f4b03ebd52f522c5adfaa04aebbb36315380c1`; decision `confirmed_fatal` (`logic`) at guard `b8fe105015149bb0c3f0d8226b347ad7fc015010cb1b67dd9527ed482233ce84`.
+- Repair: compared the eigenvalue equation for every $H\in\mathfrak a$, proving equality of functionals instead of inferring it from one regular diagonal element. Post-guard `20e1301251b15a974ec7f9d00d7ce5f107916fef65674db9026c4291fc4b6674`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-148`.
+
+### `ex-schur-orthogonality-for-a-finite-group-as-a-zero-dimensional-compact-case`
+
+- Rejection tuple: `gpt-5.6-terra` / `6ce6ac64b03496dc2820723860d9d77fa9f6412fc373058f8d7afb0f9b6005fa`; decision `confirmed_fatal` (`logic`) at guard `5f5dde54357c7c64a61e5e967d2b54ba7e11ba3aea25bcc602b6d5a7eed5fdc4`.
+- Repair: explicitly ranged $\pi,\sigma$ through a fixed set of unitary representatives, so the diagonal case $\pi=\sigma$ covers exactly the equivalent case. Post-guard `ca7d5b260db74dccb5df132bb2bf5e93ce7397f51765947626a8005ff89ef990`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-149`.
+
+### `ex-shifting-trick-for-a-nonzero-coadjoint-orbit`
+
+- Rejection tuple: `gpt-5.6-terra` / `d576fdd5b0061c62e98f1d6faffc0308ed0466d9c7ac32d11470f24999641d86`; decision `confirmed_fatal` (`dependency_citation`) at guard `ec9f2ad0994aed43ce786d28c5997dcfd661b7eb92ccb499458d62313d6d76d3`.
+- Repair: proved surjectivity of $d\mu$ from the scalar-triple-product identity, proved the stabilizer action free, used compactness for properness, and only then applied the dimension and shifting interfaces. Post-guard `213e436fb4c4e720bcb22403c2054d990c55468e3140a2c6dd9f0c352c6aff60`; direct precheck, rendercheck, and strict Batch-13 contract passed; defect `phase-2-remaining-27-step7-a-150`.
+
+### `ex-standard-and-dual-representations-of-sl-n-by-highest-weights`
+
+- Rejection tuple: `gpt-5.6-terra` / `3acb12849aef7da6e44fe0dae8abc0284edf6f67ef8e9b422a0b3a2f882f3416`; decision `confirmed_fatal` (`dependency_citation`) at guard `7bf0e82e5814685a4d1120cb964fb8c779c612a1681b3aa67d796d8ba3666339`.
+- Repair: cited the exact highest-weight classification theorem for existence and uniqueness and restricted the definitions to the claims they actually state. Post-guard `c5068a9a0b79abb5bed57c87d9e8496b228097e5d0a3af6d6d4c9f869d5a34f5`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-151`.
+
+## Additional rejudge targets
+
+- `ex-cotangent-reduction-for-a-principal-bundle-at-zero`
+- `ex-diagonal-action-and-addition-of-angular-momenta`
+- `ex-fourier-series-on-a-torus-as-peter-weyl`
+- `ex-grassmannians-from-unitary-symplectic-reduction`
+- `ex-hyperbolic-space-as-so-zero-n-one-mod-so-n`
+- `ex-iwasawa-decomposition-of-sl-two-r`
+- `ex-matrix-coefficients-of-the-standard-su-two-representation`
+- `ex-maximal-tori-and-weyl-groups-of-u-n-and-su-n`
+- `ex-normalized-haar-measure-on-a-torus`
+- `ex-polar-cartan-decomposition-of-sl-n-r`
+- `ex-reduced-harmonic-oscillator-flow-on-projective-space`
+- `ex-restricted-roots-of-sl-n-r`
+- `ex-schur-orthogonality-for-a-finite-group-as-a-zero-dimensional-compact-case`
+- `ex-shifting-trick-for-a-nonzero-coadjoint-orbit`
+- `ex-standard-and-dual-representations-of-sl-n-by-highest-weights`
+
+## Continued adjudications: structural representation block
+
+### `ex-the-eight-dimensional-adjoint-representation-of-sl-three`
+
+- Rejection tuple: `gpt-5.6-terra` / `2df098900f8b5a24213a1aaf23fa308dbfaac3f024dac0d1dba41c1d972a64bc`; decision `confirmed_fatal` (`dependency_citation`) at guard `317c8b22013b8fe255f8e43ffe7a6e6dc7a5044ba4b3c891787eb196b0beca94`.
+- Repair: removed an irreducibility conclusion that the cited supplier did not establish; the example now claims only the proved weight-space decomposition and dimension. Post-guard `22b46797392b7de6f66c7629b0bbf39e58d739bb6107b83c6aaf0678822917a6`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-152`.
+
+### `prop-top-highest-weight-summand-in-a-tensor-product`
+
+- Rejection tuple: `gpt-5.6-terra` / `b82755b29f3dbb4d2ab98a1c5fd5fbe811704448868be238740596cea7eaab58`; decision `confirmed_fatal` (`logic`) at guard `28a33e18859deba2aeebd49976adac8ae8d3782e271333d8e488cd647a423683`.
+- Repair: removed the false assertion that a submodule of a semisimple direct sum is literally a selected subset of fixed summands; complete reducibility plus the one-dimensional top-weight space now gives the unique top summand. Post-guard `800bdd3ccea71f84460fad7425c5b3a1e3fab97dc9aca5776cfce9f1386c3f2b`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-153`.
+
+### `fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition`
+
+- Rejection tuple: `gpt-5.6-terra` / `4344d1e43e3171a471e135d910d4ffb155d4258c6507118840dc37680eafd8d0`; decision `confirmed_fatal` (`logic`) at guard `51bc3e89e2d09d15cf197337549feb2c7c8d10336d0ce73e6efb2dbc4df1027b`.
+- Repair: supplied explicit symmetric and alternating invariant subspaces and a direct weight/root-arrow proof that the symmetric square is irreducible. Post-guard `8932f02d0ece7e766797da81839545a75271c0b89b68b4f9451851f836d9cd11`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-154`.
+
+### `prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system`
+
+- Rejection tuple: `gpt-5.6-terra` / `7b467d042527e7f92559b1281fbd84f3f203c8e4c4855e44f17873594d534e33`; decision `confirmed_fatal` (`logic`) at guard `d70ad210f2d61db61fd4a46efea3609cf242b100ebcc8d9e4fce57f1549202be`.
+- Repair: proved positivity on each root direction by the adjoint-trace identity $\alpha(H_\alpha)=4/\sum_\beta\beta(h_\alpha)^2>0$ before passing to the real span. Post-guard `802f8f0fe3828da8f19a86d8529cb85a648b74df72c4b7e14afb2f49356eec72`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-155`.
+
+### `lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient`
+
+- Rejection tuple: `gpt-5.6-terra` / `fc769082e23f1e647164805b38609d153790ceda25c75669c8962fdaf69125f4`; decision `confirmed_fatal` (`dependency_citation`) at guard `8839833d0e39bbeb931640117365ef78583742d329cfa50a554b1c2bf3a89606`.
+- Repair: added the exact root-vector weight-shift dependency and used it with PBW to prove that the highest-weight line survives every proper quotient. Post-guard `be96fd3ea1f0cc62b7d499ac4e41e1f7e5f937c81c0b2c7dc7a6fbb86c035a49`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-156`.
+
+### `thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate`
+
+- Rejection tuple: `gpt-5.6-terra` / `024059a74433c2b99f300441135e047fe5d05a28244a5aae9404d5c492d08370`; decision `confirmed_fatal` (`dependency_citation`) at guard `dff03bfac9e99bc10a2720ac18aa322e8dc3635580fcec75c4560309ce8ad4d5`.
+- Repair: cited the exact proposition establishing that the adjoint map is a smooth Lie-group representation before using its image as a connected subgroup of automorphisms. Post-guard `bfed28749bba17546824ff7a81a6be01c953ba1271305e07b7859971fbc93b5c`; direct precheck, rendercheck, and strict Batch-11 contract passed; defect `phase-2-remaining-27-step7-a-157`.
+
+### `thm-serre-presentation-theorem`
+
+- Rejection tuple: `gpt-5.6-terra` / `70d8c8d4643f568fcfa5d59c9997d4325f2d03d5f04a67fa625aeb68c56c42a5`; decision `confirmed_fatal` (`logic`) at guard `51ebcca0646a8e0e6cad2db7ac5c6bc5de2b82e6fcae03c34c551b300b2d6295`.
+- Repair: replaced the invalid nonsimply-laced invariant-form normalization with the standard weight-space and ideal-propagation proof of simplicity on each connected component. Post-guard `fcdca3586e4558a8b6b216939090c8cf60440aebabf2495a6ce71d8b0809033d`; direct precheck, rendercheck, and strict Batch-11 contract passed; defect `phase-2-remaining-27-step7-a-158`.
+
+### `prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits`
+
+- Rejection tuple: `gpt-5.6-terra` / `2a5b23b537e32c470e4a1a2174a8b8e265ca1e2addc22bbf4f0725567e569ac0`; decision `confirmed_fatal` (`dependency_citation`) at guard `3dcc7a80c94976b4a6eb20a74062be44ac8ff8f3eb45c43485b68ef6219f6c37`.
+- Repair: added the closed-subgroup and countable-choice interfaces and proved that the two relevant tori are maximal in the identity component of the centralizer before invoking conjugacy. Post-guard `400c6d329c51895b134d1d0f27a824a4ca52416c2f6e8239aba128ee7ecd31f3`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-159`.
+
+### `prop-central-quotients-correspond-to-intermediate-character-lattices`
+
+- Rejection tuple: `gpt-5.6-terra` / `5b684c74d0f6b1b66d7f0ef4da07ad15c901285a4f017438f585ebc638a48e8d`; decision `confirmed_fatal` (`logic`) at guard `65a048b83f11078d3a5ee25e57d9fbccf1da16f748eef804a984779e8b0228f7`.
+- Repair: narrowed the false blanket assertion about central subgroups to the center of the compact semisimple simply connected cover and proved its finiteness as a compact zero-dimensional Lie subgroup. Post-guard `567238a84af1aa63cfa395dd5b8903aa7699773a9f2543ab4142fc76812c7134`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-160`.
+
+### `lem-continuous-convolution-operators-are-hilbert-schmidt-and-compact`
+
+- Rejection tuple: `gpt-5.6-terra` / `4c749c660f9f82fcc485537f6245dbb650df1b68e6252b27b65d01d4f6d58eac`; decision `confirmed_fatal` (`dependency_citation`) at guard `a80f8a7afb7abbe048c6baf00d34330ac7dec4e9fed502e8edac8d60c4c1ea0c`.
+- Repair: added the exact Fubini--Tonelli supplier needed for the Hilbert--Schmidt kernel computation. Post-guard `ce675f472837f15ad5f9dbb76f58d708f1a1b4be40e2c953f2d0d833c2a20431`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-161`.
+
+### `lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces`
+
+- Rejection tuple: `gpt-5.6-terra` / `38083d199ef77bda02d58af31e9cdc58540973b6638af5e5f10bb4ad3125c1c3`; decision `confirmed_fatal` (`logic`) at guard `e64ea8e196a9019b9f3acd0e354156c3467e48b9f9cf0f54ede9dcb12f98e656`.
+- Repair: removed the false right-translation invariance claim for a general convolution kernel, retained and proved left invariance, and added the exact Fubini interface. Post-guard `b5a9c603313891339bd56635f4acfd5036a6b6480017bcc7abfe80700c525ae0`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-162`.
+
+### `thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems`
+
+- Rejection tuple: `gpt-5.6-terra` / `8731640936a9cc8b30f27c6b629b0b28cb32dd9ef5d5a854f4bd04f82f589377`; decision `confirmed_fatal` (`logic`) at guard `9492e480e778b4e02c9e1c4be5b86050d9d5aab8725f100c66b1e4b745c3823b`.
+- Repair: derived finite central kernels from a common compact simply connected form, using that a closed discrete subgroup of a compact group is finite, instead of assuming finiteness. Post-guard `495ff8ef536aacb5a0bd758137006fcc4e7fe23ef871bf366337143f76166623`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-163`.
+
+### `thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part`
+
+- Rejection tuple: `gpt-5.6-terra` / `0be64ba65dd4d54c16610555f5260ea48cbe5f7ed15d9a66efb2f9848913b61d`; decision `confirmed_fatal` (`logic`) at guard `7a02220ef0798d3903656df762381f97e5bf40dffc1b666279f4a866ccc2faf5`.
+- Repair: restricted the one-dimensionality claim to nonzero $T$-weight spaces and explicitly separated the zero-weight Cartan subalgebra. Post-guard `3ed52f298081aa7e8e19821cf9cd15f347f1ad094b6290002b09a735da91e4a2`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-164`.
+
+### `prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights`
+
+- Rejection tuple: `gpt-5.6-terra` / `9b5c56f5f566863d8110b6d6981c928c45d4ac3626c1165a60e3ac446891a4d1`; decision `confirmed_fatal` (`logic`) at guard `75d450234b7ccbdc7d72e7673992f973d0acdd36658e0757559eb6799d8686f0`.
+- Repair: corrected the ill-typed converse: a representation of the complexified derived algebra must be paired with a commuting action of $Z(G)^0$, and the resulting representation descends exactly when the finite kernel acts trivially. Post-guard `48178455656fcc71b671c2b2fdcf83b821ac7a26c8951ab48b61123d92dfc2a8`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-165`.
+
+### `ex-symmetric-powers-as-highest-weight-modules`
+
+- Rejection tuple: `gpt-5.6-terra` / `7bec953c91ac4b4880213c9dbbe48ee7e4ce3e81fe3800cb6037af800a181431`; decision `confirmed_fatal` (`logic`) at guard `3f1b403c83e92e6def842f58d28e81a259fa5ee0597682c264a6059e2571c62c`.
+- Repair: corrected the root-vector annihilation condition from the wrong row index $i\ne1$ to the required column index $j\ne1$. Post-guard `f62c3e691873ad3dadd16b591853d32a8d4961514d553b6204682fd66240f7fb`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-166`.
+
+## Additional source consulted
+
+- Pavel Etingof, *MIT 18.745 Lie Groups and Lie Algebras I*, Lecture 24, Theorem 24.2 and proof, printed pp. 129--132 (official MIT OCW PDF). Exact use: the proof establishes the Serre algebra by its weight decomposition and shows simplicity by propagation of a nonzero ideal through root spaces; this supports the repaired componentwise argument without the rejected invariant-form normalization.
+
+## Further rejudge targets
+
+- `ex-the-eight-dimensional-adjoint-representation-of-sl-three`
+- `prop-top-highest-weight-summand-in-a-tensor-product`
+- `fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition`
+- `prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system`
+- `lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient`
+- `thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate`
+- `thm-serre-presentation-theorem`
+- `prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits`
+- `prop-central-quotients-correspond-to-intermediate-character-lattices`
+- `lem-continuous-convolution-operators-are-hilbert-schmidt-and-compact`
+- `lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces`
+- `thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems`
+- `thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part`
+- `prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights`
+- `ex-symmetric-powers-as-highest-weight-modules`
+
+## Continued adjudications: compact and real-form interfaces
+
+### `fs-haar-measure-on-a-compact-group-is-only-left-invariant-not-right-invariant`
+
+- Rejection tuple: `gpt-5.6-terra` / `9971128a707f7c4b3b5f203b94c754c04d7e4704d34f990337c0d9e3a62733a7`; decision `confirmed_fatal` (`dependency_citation`) at guard `d4c4e6e7527888800858b1e706e1eee0fed33be0f62a1f43e8e904641c1e29dc`.
+- Repair: stated the actual Haar uniqueness hypothesis—regular left-invariant Borel probability measure—and applied it to the right translate. Post-guard `fddf195a67c25ccc1e7f33ff10197d4f45f77fbcc951f21ea2688aed6ceb7a85`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-167`.
+
+### `lem-weyl-denominator-and-anti-invariant-orbit-sum-basis`
+
+- Rejection tuple: `gpt-5.6-terra` / `ff5644d0a5a86f1f45de9c94a05f74eeb5bc8b90e9b94a1424e21a87234faa23`; decision `confirmed_fatal` (`logic`) at guard `7a0451f4fd22dd9c4ef8c8eb0d6787c3bb6a0d10bb0f009888c3c30d8ef7b841`.
+- Repair: restricted the claim to the anti-invariant integral group algebra, corrected the lattice/group-algebra and reflection-sign arguments, and proved the denominator identity and orbit-sum basis in that setting. Post-guard `fdb302e88bfae50e4e4b828cbfc7c10c72cf8afa62320c2a576389421e90a4be`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-168`.
+
+### `fs-every-dominant-weight-of-the-abstract-weight-lattice-integrates-to-every-compact-group-form`
+
+- Rejection tuple: `gpt-5.6-terra` / `17f2f7ffd402df2bdb8678cfa323a90bb1a65f9aaeb7864b618b38ad010669d1`; decision `confirmed_fatal` (`dependency_citation`) at guard `a654c3a80b12419c3ad7c5a89e5efebaaf428b0df6675ef9fde996d6c8afa771`.
+- Repair: removed the unsupported supplier and used the compact highest-weight theorem's exact classification by dominant elements of the actual character lattice. Post-guard `16ad25e0ffb780be696286cf5be220250cc3a3a34b29440440f070a5a541de9a`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-169`.
+
+### `ex-weyl-integration-formula-for-su-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `569036a12b54305a334be5b8111c0499b2c6bb496f362058db41c95df6ac5a9f`; decision `confirmed_fatal` (`dependency_citation`) at guard `a6d27787ac4a0942c1f047a39caf1de8b7871917e4873fe0a5bf7c5dbab08b37`.
+- Repair: computed the root character $z^2$ directly from conjugation of the matrix units instead of relying on an absent supplier. Post-guard `ad035d416645303b1f529ae03680f8f054fb0b1d049de3a97c74788a3ef00706`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-170`.
+
+### `fs-every-unitary-representation-of-a-compact-group-is-finite-dimensional`
+
+- Rejection tuple: `gpt-5.6-terra` / `e4d0f0f779e72140e7a20aa02f713fb0ce184df706389ce6be653929e1577953`; decision `confirmed_fatal` (`logic`) at guard `7ea44c2969a97226e81a5e8175421d89d64f19af910b746212f68dffaaba0bd7`.
+- Repair: changed the overstrong title to the existential conclusion proved by the infinite-dimensional regular representation example. Post-guard `bd05461eb0fe00d27dc14635e38c470c41c0ad8fe8645320b40385c6688306e7`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-171`.
+
+### `lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator`
+
+- Rejection tuple: `gpt-5.6-terra` / `1e37a33dc26a89850b70e38fa34d59bc4394b17a11c49d096f02eed81f9484c7`; decision `confirmed_fatal` (`dependency_citation`) at guard `7971445dd4a3c56ed9dbe3ec7763c411de9266b4aa2d2bc0fd07ac779b305d12`.
+- Repair: added the torus Fourier-basis theorem and invoked its exact character orthogonality statement. Post-guard `fa48fde424cfc68b399754efab7e9a1f438aa27593ec2c4897f99351baa9933b`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-172`.
+
+### `lem-compact-lie-groups-admit-central-continuous-approximate-identities`
+
+- Rejection tuple: `gpt-5.6-terra` / `ceaf436f93944595a08c7d4643ba451faa04bab7d57c4db5133c92ae2591eb35`; decision `confirmed_fatal` (`logic`) at guard `707a3ef981837c761ffc27fb821a68955037649fd79f0a914b2f68a8d5b81516`.
+- Repair: used centrality to rewrite convolution as an integral of left translates, which lie in the asserted invariant subspace. Post-guard `7f03187439d176970905256821e12749c0d7e0917f747d2042c76af3e82237b6`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-173`.
+
+### `fs-peter-weyl-says-every-continuous-function-is-a-finite-sum-of-matrix-coefficients`
+
+- Rejection tuple: `gpt-5.6-terra` / `9c5a581410422520cecf949c3f4c5be1c91fff545ac6a194358060a48d575cc9`; decision `confirmed_fatal` (`dependency_citation`) at guard `4b61af6638f30a1d22f6c5260dc538261e43eda78f54a643dbc3c9a7f969bacb`.
+- Repair: supplied unitarizability, complete reducibility, and scalar-endomorphism dependencies and derived the finite representation decomposition needed by the counterexample. Post-guard `c3bc2a4143b3a1bd478fdaa23a4fbb8398f5200bd0b330822903521b6efc6835`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-174`.
+
+### `thm-real-forms-correspond-to-conjugate-linear-involutions`
+
+- Rejection tuple: `gpt-5.6-terra` / `933b39aba7cb554450dc826e8b9c74744a03639b7ae5d2593594d45954970b88`; decision `confirmed_fatal` (`logic`) at guard `9a0885891d200910123a6eaf0dac394e06a457652bebf80424c66245b2806988`.
+- Repair: used the real form's own involution $\sigma_{\mathfrak g_0}$ consistently in the conjugated fixed-locus identity. Post-guard `ab57832e41e339672f0dd1be14bb21236212a3ba6181de0581a58f5f8bfb715e`; direct precheck and rendercheck passed. This item is absent from the pre-existing Batch-13 proof-contract scope, so no strict item contract exists to run; defect `phase-2-remaining-27-step7-a-175`.
+
+### `prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero`
+
+- Rejection tuple: `gpt-5.6-terra` / `21581164fdd5ce3941e0717e20f386015728972069f81e108001a0a24aab1985`; decision `confirmed_fatal` (`logic`) at guard `b8597e75ca5a8955363b91f0b7dc429a986c1ad736606551e88c00f59196a027`.
+- Repair: proved the fixed-algebra assertion for arbitrary tensor sums using unique coordinates in a real basis, rather than checking pure tensors only. Post-guard `d867fca5cb26af7063b328e1d93c1e138f693b904ec964671f94200a3f6c1b79`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-176`.
+
+### `thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space`
+
+- Rejection tuple: `gpt-5.6-terra` / `9b30bea17923aaeefc309210a0f1110570cdd27030680fb232f83dba9e9b807f`; decision `confirmed_fatal` (`logic`) at guard `216a2d77054ccf65c8f6d364bbbdb65ddd6b98a7f6258f077cb7084fda9094c6`.
+- Repair: corrected the inverse to $F(k\exp X)=\operatorname{Ad}_kX$, proved right-$K$ invariance and descent, and repaired injectivity. Post-guard `6bb00c7d51808fdae64a001a3fa5f6989227bfb82e98501a8fcf0135dc8c6e82`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-177`.
+
+### `ex-the-peter-weyl-decomposition-of-l-two-su-two`
+
+- Rejection tuple: `gpt-5.6-terra` / `41ed1684a47688776b9aa45dfa03d24e7bc8356babe95a3e1d7d839dfffe6fda`; decision `confirmed_fatal` (`dependency_citation`) at guard `243db5add6dd950fd059c797bc36c10f558bd5f0d1727810f9fb4e4adeccdb17`.
+- Repair: added the compact highest-weight classification and the precise compact-group/Lie-algebra differentiation-and-integration interface. Post-guard `cfca27986309c42d558b157515d32c5dec7d267d179178d147b049a1b043609c`; direct precheck, rendercheck, and strict Batch-12 contract passed; defect `phase-2-remaining-27-step7-a-178`.
+
+### `thm-every-real-cartan-subalgebra-is-conjugate-to-a-theta-stable-one`
+
+- Rejection tuple: `gpt-5.6-terra` / `98dc7b5b94dd649770fa3bf95358cd97f482682be9e15c620045243f626ab8b7`; decision `confirmed_fatal` (`logic`) at guard `af021b0342251a1d003bb1de20822044b9dc85f8d83ab4463d1fa95faacdcf1e`.
+- Repair: removed the false premise that the fixed Cartan involution preserves an arbitrary Cartan subalgebra. Post-guard `9f6371de41b87064b512da86bd6e10d7b5b1b3e02084c3e2a60e6a6cbbf6225d`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-179`.
+
+### `thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications`
+
+- Rejection tuple: `gpt-5.6-terra` / `91333c9f637069b4e146aca7c28c929d930b671189655b91188ca6879fcd31cc`; decision `confirmed_fatal` (`logic`) at guard `1d9dde603d8ba4ae569bb51946db1d490cc1bad013509301157f89d877491ae3`.
+- Repair: computed restricted-root multiplicities by counting all complex roots with each restriction rather than asserting a false additivity law. Post-guard `04f4baffef214b261ae994cf2ecda8e45de25a78d99e0efb6b845c1b2c89cbad`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-180`.
+
+### `thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence`
+
+- Rejection tuple: `gpt-5.6-terra` / `a165dff5f80210489c38c2842cc83f741af00c2832cfe067b4794bce99fc1249`; decision `confirmed_fatal` (`dependency_citation`) at guard `536a947818d8f30aaeb66298f5a8f64cb44d48e4e2f98743ea21e7e31a9a571a`.
+- Repair: established $K^0$-conjugacy from compact parts, their centralizers, and maximal-torus conjugacy, adding each exact supporting dependency. Post-guard `f63fbce77ca9f17d4e73b39e752316ad8e1b95bb164332a0e11e04043681cfe8`; direct precheck and rendercheck passed; no strict item contract exists in the pre-existing Batch-13 scope; defect `phase-2-remaining-27-step7-a-181`.
+
+## Further rejudge targets
+
+- `fs-haar-measure-on-a-compact-group-is-only-left-invariant-not-right-invariant`
+- `lem-weyl-denominator-and-anti-invariant-orbit-sum-basis`
+- `fs-every-dominant-weight-of-the-abstract-weight-lattice-integrates-to-every-compact-group-form`
+- `ex-weyl-integration-formula-for-su-two`
+- `fs-every-unitary-representation-of-a-compact-group-is-finite-dimensional`
+- `lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator`
+- `lem-compact-lie-groups-admit-central-continuous-approximate-identities`
+- `fs-peter-weyl-says-every-continuous-function-is-a-finite-sum-of-matrix-coefficients`
+- `thm-real-forms-correspond-to-conjugate-linear-involutions`
+- `prop-complexification-has-a-canonical-conjugation-with-fixed-algebra-g-zero`
+- `thm-cartan-decomposition-identifies-p-with-the-noncompact-symmetric-space`
+- `ex-the-peter-weyl-decomposition-of-l-two-su-two`
+- `thm-every-real-cartan-subalgebra-is-conjugate-to-a-theta-stable-one`
+- `thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications`
+- `thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence`

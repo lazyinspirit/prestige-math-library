@@ -463,12 +463,28 @@ test('the final-adjudicator lane is independently pinned to Astra medium with we
   assert.equal(row.model, MODELS.astra.id);
   assert.equal(row.requested_effort, 'medium');
   assert.equal(row.provider_effort, 'medium');
-  assert.equal(row.auto_compact_token_limit, 200000);
-  assert.match(row.command, /model_auto_compact_token_limit=200000/);
-  assert.equal(row.auto_compact_token_limit, 200000);
-  assert.match(row.command, /model_auto_compact_token_limit=200000/);
+  assert.equal(row.auto_compact_token_limit, 120000);
+  assert.match(row.command, /model_auto_compact_token_limit=120000/);
   assert.match(row.command, /tools\.web_search=true/);
+  // The access guarantees the owner restated on 2026-09-20: an adjudicator keeps
+  // web search AND shell network access (source fetch), reads the whole library
+  // and every item of the frontier — bundles are an entry point, not a fence.
+  assert.match(row.command, /sandbox_workspace_write\.network_access=true/);
   assert.match(row.prompt, /one item at a time/i);
+});
+
+test('the Step-7 group adjudicator lane keeps web search, network access and earlier compaction', () => {
+  const result = spawnSync('node', ['tools/dispatch.mjs',
+    '--role', 'alpha-adjudicate', '--brief', 'briefs/alpha.md',
+    '--task', 'briefs/tasks/alpha-step7.md', '--label', 'step7-x',
+    '--run', 'fa-test', '--covers', '1', '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const row = JSON.parse(result.stdout);
+  assert.equal(row.role, 'alpha-adjudicate');
+  assert.equal(row.sandbox, 'workspace-write');
+  assert.match(row.command, /tools\.web_search=true/);
+  assert.match(row.command, /sandbox_workspace_write\.network_access=true/);
+  assert.equal(row.auto_compact_token_limit, 120000);
 });
 
 // Against the live run, because the plan reads the VALIDATED group assignment
@@ -517,7 +533,8 @@ function withFixtureRun(files: Record<string, unknown>, body: (run: string) => v
   try {
     for (const [suffix, content] of Object.entries(files)) {
       const p = join(REPO, 'research', `${run}-${suffix}`);
-      writeFileSync(p, JSON.stringify(content));
+      // A string is written verbatim, so jsonl ledgers can be fixtures too.
+      writeFileSync(p, typeof content === 'string' ? content : JSON.stringify(content));
       written.push(p);
     }
     body(run);
@@ -525,6 +542,69 @@ function withFixtureRun(files: Record<string, unknown>, body: (run: string) => v
     for (const p of written) rmSync(p, { force: true });
   }
 }
+
+test('render writes an item-grouped evidence bundle and a grouped rejection queue', () => {
+  withFixtureRun({
+    'alpha-groups.json': [{ label: 'a', covers: ['1'] }],
+    'batch-1.pages.json': [{
+      id: 'page-demo', kind: 'A', title: 'Demo', category: 'demo', order: 1,
+      items: [{ id: 'thm-parallelogram-law' }, { id: 'thm-cauchy-schwarz-in-an-inner-product-space' }],
+      requires: [],
+    }],
+    'judge.jsonl': [
+      { id: 'thm-parallelogram-law', model: 'gpt-5.6-terra', keep: false,
+        reason: 'the converse direction is unproved', context_sha256: 'a'.repeat(64) },
+      { id: 'thm-cauchy-schwarz-in-an-inner-product-space', model: 'gpt-5.6-terra', keep: false,
+        reason: 'equality case missing', context_sha256: 'b'.repeat(64) },
+      { id: 'thm-parallelogram-law', model: 'gpt-5.6-sol', keep: false,
+        reason: 'the real case assumes the complex convention', context_sha256: 'c'.repeat(64) },
+    ].map((row) => JSON.stringify(row)).join('\n') + '\n',
+    'alpha-a-step7-context.json': {
+      group: 'a', pages_read: ['page-demo'],
+      items_read: ['thm-parallelogram-law', 'thm-cauchy-schwarz-in-an-inner-product-space'],
+      conventions: [{ convention: 'Demo convention', fixed_by: 'thm-parallelogram-law', matters_for: [] }],
+      load_bearing: [{ id: 'thm-parallelogram-law', statement: 'Demo statement', used_by: [] }],
+      published_dependencies: [], concerns: [], alerts: [], seams_checked: [],
+    },
+  }, (run) => {
+    const generated = [
+      'step7-scope.json', 'step7-alerts.json', 'alpha-a-step7.task.md',
+      'alpha-a-step7-recovery.task.md', 'alpha-a-step7-preflight.task.md',
+      'alpha-a-step7-close.task.md', 'alpha-a-step6-read.task.md',
+      'step7-alert-decisions.jsonl', 'step7-bundle-a.md',
+    ].map((suffix) => join(REPO, 'research', `${run}-${suffix}`));
+    try {
+      const rendered = render(run);
+      assert.equal(rendered.status, 0, `${rendered.stdout}${rendered.stderr}`);
+      // The rejection queue is item-grouped: both judge lanes for one item sit
+      // together, so the lane settles the item once.
+      const task = readFileSync(generated[2], 'utf8');
+      const order = (['thm-cauchy-schwarz-in-an-inner-product-space', 'thm-parallelogram-law'] as string[])
+        .map((id): [string, number] => [id, task.indexOf(`| \`${id}\` |`)])
+        .sort((left, right) => left[1] - right[1])
+        .map(([id]) => id);
+      assert.deepEqual(order,
+        ['thm-cauchy-schwarz-in-an-inner-product-space', 'thm-parallelogram-law', 'thm-parallelogram-law']
+          .filter((id, index, all) => all.indexOf(id) === index)
+          .sort());
+      const rows = task.split('\n').filter((line) => line.startsWith('| `thm-parallelogram-law` |'));
+      assert.equal(rows.length, 2, 'both rejections of the item are listed');
+      assert.equal(Math.abs(task.indexOf(rows[0]) - task.indexOf(rows[1])) < 200, true,
+        'the two rows for one item are adjacent');
+      assert.match(task, /grouped by item/i);
+      assert.match(task, /step7-bundle-a\.md/);
+      // The bundle exists, names the access guarantees, and is verbatim evidence.
+      const bundle = readFileSync(generated[8], 'utf8');
+      assert.match(bundle, /Step-7 evidence bundle — group a/);
+      assert.match(bundle, /entry point, never a fence/);
+      assert.match(bundle, /web search/);
+      assert.match(bundle, /### `thm-parallelogram-law` — 2 rejection\(s\)/);
+      assert.match(bundle, /Every recorded block below|Every block below is verbatim/);
+    } finally {
+      for (const p of generated) rmSync(p, { force: true });
+    }
+  });
+});
 
 for (const subject of ['thm-demo-one', 'page-demo']) test(`Step-6 concern on ${subject} requires an owning-group decision`, () => {
   withFixtureRun({

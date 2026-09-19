@@ -31,14 +31,12 @@ Lie algebra.
 
 [L2] For type $A_1$ the weight lattice is $P=\mathbb Z\omega$ with root lattice $Q=2\mathbb Z\omega$, and the adjoint form has character lattice $X^*(T)=Q$ ([[prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group]], [[def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice]]).
 
-[L3] All weights of a finite-dimensional representation of $G$ on its maximal torus are characters of $T$, hence lie in $X^*(T)$ ([[thm-highest-weight-classification-for-a-compact-connected-lie-group]]).
-
 ## Refutation
 
 **Proof technique:** direct.
 
 1.1 The fundamental weight $\omega$ is dominant in $P$, and it is not an element of $Q=2\mathbb Z\omega$; hence for the adjoint form $SO(3)$, whose character lattice is $Q$ by [L2], the weight $\omega$ lies outside $X^*(T)$. [L2]
 
-2.1 If some finite-dimensional representation of $SO(3)$ had highest weight $\omega$, then $\omega$ would be a weight of that representation and hence an element of $X^*(T)$ by [L3]; this contradicts step 1.1. [L1, L3, step 1.1]
+2.1 If some irreducible finite-dimensional representation of $SO(3)$ had highest weight $\omega$, then $\omega$ would be a dominant element of the actual character lattice $X^*(T)$ by the classification in [L1]; this contradicts step 1.1. [L1, step 1.1]
 
 3.1 Therefore $\omega$ is a dominant weight of the abstract weight lattice that does not integrate to the compact group form $SO(3)$; the correct statement is the classification by dominant elements of the actual character lattice $X^*(T)$, between $Q$ and $P$, and the failure is exactly the finite central quotient obstructing the descent of the $SU(2)$-representation of highest weight $\omega$. [L1, step 1.1, step 2.1] ∎

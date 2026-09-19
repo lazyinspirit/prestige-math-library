@@ -22,7 +22,7 @@ proof_strategy: direct
 
 ## Example
 
-On $\mathbb C^n$ with the scalar circle action and its moment map
+Let $n\ge1$ and $c>0$. On $\mathbb C^n$ with the scalar circle action and its moment map
 $\mu(z)=-\frac12|z|^2+c$, consider the harmonic oscillator Hamiltonian
 $H(z)=\frac12|z|^2$. It is circle invariant, so by Noether's theorem its flow
 preserves every level $\mu^{-1}(\lambda)$, and on the zero level
@@ -37,7 +37,7 @@ flow of the descended function.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the scalar circle action on $\mathbb C^n$, its moment map $\mu(z)=-\frac12|z|^2+c$, the zero level $S^{2n-1}_r$ with $r^2=2c$, and $H(z)=\frac12|z|^2$.
+**Given:** $\mathrm{AC}_\omega$, an integer $n\ge1$, a real number $c>0$, the scalar circle action on $\mathbb C^n$, its moment map $\mu(z)=-\frac12|z|^2+c$, the zero level $S^{2n-1}_r$ with $r^2=2c$, and $H(z)=\frac12|z|^2$.
 
 [F1] $\mu$ is an equivariant moment map for the scalar circle action and the level $\mu^{-1}(0)=S^{2n-1}_r$ is a free orbit sphere whose reduction is $\mathbb{CP}^{n-1}$ with the reduced form characterised by the pullback identity. [[ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map]], [[ex-complex-projective-space-as-a-circle-symplectic-reduction]].
 

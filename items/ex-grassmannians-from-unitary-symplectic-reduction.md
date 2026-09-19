@@ -5,7 +5,7 @@ title: Grassmannians from unitary symplectic reduction
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-dimension-of-a-regular-nonzero-reduced-space, thm-the-canonical-cotangent-two-form-is-symplectic, def-coadjoint-representation-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-countable-choice, cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus]
+deps: [thm-marsden-weinstein-meyer-symplectic-reduction, prop-dimension-of-a-regular-nonzero-reduced-space, prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness, def-coadjoint-representation-of-a-lie-group, def-fundamental-vector-field-of-a-left-action, def-countable-choice, ex-unitary-and-special-unitary-lie-groups]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -22,7 +22,7 @@ proof_strategy: direct
 
 ## Example
 
-Let $M=\mathbb C^{k\times n}$ with the real inner product
+Let $1\le k\le n$ and let $M=\mathbb C^{k\times n}$ with the real inner product
 $\langle X,Y\rangle=\operatorname{Re}\operatorname{tr}(X^*Y)$ and the
 symplectic form
 
@@ -46,17 +46,17 @@ the Grassmannian in this frame model.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$, the space $M=\mathbb C^{k\times n}$ with the forms above, the left action of $U(k)$, and $\lambda>0$.
+**Given:** $\mathrm{AC}_\omega$, integers $1\le k\le n$, the space $M=\mathbb C^{k\times n}$ with the forms above, the left action of $U(k)$, and $\lambda>0$.
 
-[F1] $U(k)$ is a compact Lie group with Lie algebra $\mathfrak u(k)=\{X:X^*+X=0\}$. .
+[F1] $U(k)$ is a compact Lie group with Lie algebra $\mathfrak u(k)=\{X:X^*+X=0\}$. [[ex-unitary-and-special-unitary-lie-groups]].
 
-[F2] $\omega(X,Y)=\operatorname{Im}\operatorname{tr}(X^*Y)$ is a symplectic form on the real vector space $M$, since it is an alternating bilinear form with $\omega(X,iX)=\|X\|^2>0$. [[thm-the-canonical-cotangent-two-form-is-symplectic]].
+[F2] $\omega(X,Y)=\operatorname{Im}\operatorname{tr}(X^*Y)$ is a symplectic form on the real vector space $M$, since it is an alternating bilinear form with $\omega(X,iX)=\|X\|^2>0$. [algebra]
 
 [F3] The fundamental field of $\xi\in\mathfrak u(k)$ is $\xi_M(A)=\left.\frac d{dt}\right|_0e^{-t\xi}A=-\xi A$. [[def-fundamental-vector-field-of-a-left-action]].
 
 [F4] The coadjoint action of $U(k)$ on $\mathfrak u(k)^*$ corresponds under the invariant inner product to $H\mapsto gHg^{-1}$, so central elements are fixed. [[def-coadjoint-representation-of-a-lie-group]].
 
-[F5] The reduction theorem applies when the value is regular and the stabilizer acts freely and properly; the reduced dimension is $\dim M-\dim G-\dim G_\alpha$. [[thm-marsden-weinstein-meyer-symplectic-reduction]], [[prop-dimension-of-a-regular-nonzero-reduced-space]].
+[F5] The reduction theorem applies when the value is regular and the stabilizer acts freely and properly; regularity is equivalent to local freeness on the level, and the reduced dimension is $\dim M-\dim G-\dim G_\alpha$. [[thm-marsden-weinstein-meyer-symplectic-reduction]], [[prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness]], [[prop-dimension-of-a-regular-nonzero-reduced-space]].
 
 
 
@@ -70,7 +70,7 @@ the Grassmannian in this frame model.
 
 3.1 Equivariance: $\mu(gA)=-\frac i2gAA^*g^{-1}+\lambda iI=g\mu(A)g^{-1}$, which is the coadjoint action by [F4]; the added central term $\lambda iI$ is fixed. Hence $\mu$ is an equivariant moment map. [step 2.1, F4]
 
-4.1 The zero level is $\mu^{-1}(0)=\{A:AA^*=2\lambda I\}$: a nonempty embedded submanifold (it contains the scaled matrix $A=\sqrt{2\lambda}(I\ 0)$). The value is regular and the action is free and proper: if $gA=A$ and $AA^*=2\lambda I$ then $g=gA A^*(2\lambda)^{-1}=A A^*(2\lambda)^{-1}=I$ because $gA=A$ and $AA^*$ is invertible, and the action is proper because $U(k)$ is compact. [step 3.1, F5]
+4.1 The zero level is $\mu^{-1}(0)=\{A:AA^*=2\lambda I\}$: it is nonempty because $k\le n$ and contains $A=\sqrt{2\lambda}(I_k\ 0)$. If $gA=A$ on this level, then $g=gA A^*(2\lambda)^{-1}=A A^*(2\lambda)^{-1}=I$, so the action is free; [F5] therefore makes $0$ a regular value. The action is proper because $U(k)$ is compact, so the zero level is an embedded submanifold and reduction applies. [step 3.1, F1, F5]
 
 5.1 Quotient: two frames $A,A'$ with $AA^*=A'A^*=2\lambda I$ lie in the same $U(k)$-orbit exactly when their rows span the same $k$-plane, so the quotient is the Grassmannian $\operatorname{Gr}(k,n)$ of $k$-planes in $\mathbb C^n$. [step 4.1]
 

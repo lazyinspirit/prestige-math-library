@@ -30,7 +30,7 @@ normal Moore space is metrizable. Already PMEA-$\sigma$ suffices
 
 ## Facts & Assumptions
 
-**Given:** A normal Moore space $X$ and PMEA-$\sigma$ (hence PMEA).
+**Given:** A normal Moore space $X$ and PMEA-$\sigma$. (The formally stronger PMEA hypothesis in the first sentence of the Statement supplies PMEA-$\sigma$ by [F4].)
 
 [F1] Every Moore space is first countable: a development supplies at each point the countable star family as a local base ([[def-moore-spaces-and-developments]]).
 

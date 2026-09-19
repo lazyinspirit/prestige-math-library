@@ -21,17 +21,18 @@ proof_strategy: direct
 
 Assume the Axiom of Choice. Let $G$ be a finite group, regarded as a
 zero-dimensional compact Lie group. Then normalized Haar measure is counting
-measure divided by $|G|$, and compact Schur orthogonality becomes the classical
-finite-group matrix-coefficient formula
+measure divided by $|G|$. If $\pi,\sigma$ range through a fixed set of unitary
+representatives of the irreducible isomorphism classes, compact Schur
+orthogonality becomes the classical finite-group matrix-coefficient formula
 $$\frac1{|G|}\sum_{g\in G}\pi_{ij}(g)\overline{\sigma_{kl}(g)}=\begin{cases}0,&\pi\not\cong\sigma,\\ \delta_{ik}\delta_{jl}/d_\pi,&\pi=\sigma.\end{cases}$$
 
 ## Facts & Assumptions
 
-**Given:** Assume the Axiom of Choice; a finite group $G$ with normalized counting measure $\mu(E)=|E|/|G|$.
+**Given:** Assume the Axiom of Choice; a finite group $G$ with normalized counting measure $\mu(E)=|E|/|G|$, and one unitary representative of each irreducible isomorphism class.
 
 [L1] A finite group with the discrete topology is a compact zero-dimensional Lie group, and the normalized counting measure is a regular Borel probability invariant under all translations, hence is its normalized Haar measure ([[cor-normalized-haar-measure-on-a-compact-lie-group]]).
 
-[L2] Schur orthogonality on a compact Lie group reads $\int_G\pi_{ij}\overline{\sigma_{kl}}\,dg=0$ for inequivalent irreducible unitary $\pi,\sigma$ and $\delta_{ik}\delta_{jl}/d_\pi$ for $\pi=\sigma$ ([[thm-schur-orthogonality-for-compact-lie-groups]]).
+[L2] Schur orthogonality on a compact Lie group reads $\int_G\pi_{ij}\overline{\sigma_{kl}}\,dg=0$ for inequivalent irreducible unitary $\pi,\sigma$ and $\delta_{ik}\delta_{jl}/d_\pi$ when the two chosen representatives are equal ([[thm-schur-orthogonality-for-compact-lie-groups]]).
 
 ## Verification
 

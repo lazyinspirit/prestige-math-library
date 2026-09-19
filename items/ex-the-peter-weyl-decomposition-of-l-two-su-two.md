@@ -5,7 +5,7 @@ title: Peter–Weyl decomposition of L2(SU(2))
 status: draft
 origin: pipeline
 pipeline_run: phase-2-remaining-27
-deps: [thm-peter-weyl-for-compact-lie-groups, thm-highest-weight-classification-of-finite-dimensional-irreducible-representations, prop-highest-weight-of-the-dual-representation, def-axiom-of-choice, thm-finite-dimensional-representations-of-sl-two]
+deps: [thm-peter-weyl-for-compact-lie-groups, thm-highest-weight-classification-for-a-compact-connected-lie-group, prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights, prop-highest-weight-of-the-dual-representation, def-axiom-of-choice, thm-finite-dimensional-representations-of-sl-two]
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -31,7 +31,7 @@ $V(n)$ occurs with multiplicity $n+1$.
 
 [L1] The normalized matrix coefficients $\sqrt{d_\pi}\pi_{ij}$ form an orthonormal Hilbert basis of $L^2(G)$, and the $\pi$-isotypic summand of the left regular representation has multiplicity $d_\pi$ ([[thm-peter-weyl-for-compact-lie-groups]]).
 
-[L2] Irreducible finite-dimensional representations of $SU(2)$ are the $V(n)$ of highest weight $n\ge0$, and the dual of $V(n)$ is irreducible of the same dimension ([[thm-highest-weight-classification-of-finite-dimensional-irreducible-representations]], [[prop-highest-weight-of-the-dual-representation]]).
+[L2] Irreducible finite-dimensional representations of a compact connected group are classified by dominant characters of a maximal torus, and differentiation identifies them with the corresponding representations of the complexified derived Lie algebra. For $SU(2)$ the actual character lattice is the full $A_1$ weight lattice, so the irreducibles are the modules $V(n)$ of highest weight $n\ge0$; their duals are irreducible ([[thm-highest-weight-classification-for-a-compact-connected-lie-group]], [[prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights]], [[prop-highest-weight-of-the-dual-representation]]).
 
 [L3] For a finite-dimensional irreducible module over $\mathfrak{sl}_2$ of highest weight $n$, the weights are $n,n-2,\dots,-n$, each on a one-dimensional space; hence $\dim V(n)=n+1$ ([[thm-finite-dimensional-representations-of-sl-two]]).
 

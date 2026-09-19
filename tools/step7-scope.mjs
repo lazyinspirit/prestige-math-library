@@ -46,6 +46,7 @@
 // answered.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { buildGroupBundle } from './evidence-bundle.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
@@ -492,15 +493,31 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step7') {
       L.push(`\`research/${run}-judge.jsonl\` yourself before reporting nothing to do —`);
       L.push('a rejection recorded after this file was rendered is still yours.');
     } else {
+      // Item-grouped: two or three judge lanes often reject the SAME item, and a
+      // ledger-ordered table made the lane re-open the item and its dependencies
+      // once per row. Settling an item's objections in one pass is the same
+      // adjudication with a fraction of the reading.
+      const ordered = [...mine].sort((left, right) =>
+        String(left.id).localeCompare(String(right.id))
+        || String(left.model).localeCompare(String(right.model)));
       L.push('| item | page | model | context_sha256 |');
       L.push('|---|---|---|---|');
-      for (const r of mine) {
+      for (const r of ordered) {
         const owner = index.itemOwner.get(r.id);
         L.push(`| \`${r.id}\` | \`${owner.page}\` | ${r.model} | \`${r.context_sha256}\` |`);
       }
       L.push('');
       L.push('Rendered from the ledger at scope time. **The ledger is the authority** — if');
       L.push('a row appeared since, it is still yours to adjudicate.');
+      L.push('');
+      L.push(`Start from \`research/${run}-step7-bundle-${g.label}.md\`: it carries each rejected`);
+      L.push('item\'s claim section, its Facts section and the verbatim quote of every cited fact.');
+      L.push('Work the table **grouped by item** — settle every objection to an item in one pass,');
+      L.push('repairing it once — and do not re-read a file already in your context.');
+      L.push('The bundle is an entry point, never a fence: open the full item whenever the bundle');
+      L.push('is insufficient, read any item of this frontier (including other groups\' items) for');
+      L.push('seams and cross-group alerts, read the published `library/`, and search the web when a');
+      L.push('source check is needed.');
     }
     L.push('');
   }
@@ -563,6 +580,19 @@ if (mode === 'render') {
     writeFileSync(R('research', `${run}-alpha-${g.label}-step7-recovery.task.md`), compose(header, recoveryPath));
     const readingHeader = groupHeader(g, index, seam.get(g.label), [], [], 'step6');
     writeFileSync(R('research', `${run}-alpha-${g.label}-step6-read.task.md`), compose(readingHeader, readPath));
+    // The evidence bundle is rendered from the same partition, so a repaired
+    // item's bundle is refreshed whenever the scope is.
+    const group = scope.groups.find((row) => row.label === g.label);
+    const bundle = buildGroupBundle({
+      repo: REPO,
+      run,
+      group: g.label,
+      // Only the items under an open objection: the lane opens the full item
+      // when it repairs, and the bundle stays an entry point rather than a dump.
+      items: group.rejections.map((row) => row.id),
+      rejections: group.rejections,
+    });
+    writeFileSync(R('research', `${run}-step7-bundle-${g.label}.md`), bundle);
   }
 
   const total = rejections.length;

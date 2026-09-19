@@ -102,7 +102,7 @@ files under `items/` for that.
 - `lem-metrizable-spaces-are-collectionwise-normal` · lemma — Metrizable spaces are collectionwise normal
 - `thm-moore-spaces-are-subparacompact` · theorem — Moore spaces are subparacompact
 - `lem-collectionwise-normal-moore-spaces-are-screenable` · lemma — Collectionwise normal Moore spaces are screenable
-- `lem-sigma-cellular-base-yields-a-compatible-metric` · lemma — A sigma-cellular base yields a compatible metric
+- `lem-sigma-cellular-base-yields-a-compatible-metric` · lemma — A sigma-cellular base metrizes a normal Moore space
 - `thm-normal-screenable-moore-spaces-are-metrizable` · theorem — Normal screenable Moore spaces are metrizable
 - `thm-collectionwise-normal-moore-spaces-are-metrizable` · theorem — Collectionwise normal Moore spaces are metrizable
 - `def-q-sets-and-heath-moore-space-interface` · definition — Q-sets and Bing's tangent-disk Moore-space interface
@@ -138,7 +138,7 @@ files under `items/` for that.
 ### `shelahs-baire-property-model-and-inner-model-lower-bounds` — Shelah's Baire-Property Model and Inner-Model Lower Bounds (29 item(s))
 
 - `def-shelah-sweetness-model` · definition — Shelah sweetness models for forcing
-- `lem-shelah-sweet-forcings-are-sigma-directed-ccc` · lemma — Sweet forcings are sigma-directed and ccc
+- `lem-shelah-sweet-forcings-are-sigma-directed-ccc` · lemma — Sweet forcings are countable unions of directed sets and ccc
 - `lem-shelah-sweet-density-transfer-along-complete-suborders` · lemma — Sweet density transfers along complete suborders
 - `thm-shelah-sweet-amalgamation-preserves-sweetness` · theorem — Shelah amalgamation preserves sweetness
 - `def-shelah-universal-meagre-forcing` · definition — Shelah's universal-meagre forcing
@@ -160,7 +160,7 @@ files under `items/` for that.
 - `thm-rapid-filters-are-not-lebesgue-measurable` · theorem — Rapid filters are not Lebesgue measurable
 - `lem-measurable-null-code-orders-bound-constructible-null-unions` · lemma — A measurable null-code order bounds the constructible null union
 - `lem-uniform-null-g-delta-capture-functions` · lemma — Uniform null G-delta sets capture block functions
-- `thm-raisonnier-filter-is-rapid-from-null-code-measurability` · theorem — Null-code measurability makes the Raisonnier filter rapid
+- `thm-raisonnier-filter-is-rapid-from-null-code-measurability` · theorem — Uniform null-code measurability makes the Raisonnier filter rapid
 - `lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one` · lemma — Failure of inaccessibility in L produces a real with correct omega-one
 - `thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l` · theorem — Sigma-one-three measurability makes omega-one inaccessible in L
 - `thm-all-real-sets-measurable-gives-an-inaccessible-inner-model` · theorem — All-real-set measurability yields an inaccessible inner model
@@ -194,7 +194,7 @@ files under `items/` for that.
 - `def-fredholm-map-between-banach-manifolds` · definition — Fredholm map between Banach manifolds
 - `lem-local-finite-dimensional-reduction-for-a-fredholm-map` · lemma — Local finite-dimensional reduction for a Fredholm map
 - `prop-the-index-of-a-fredholm-map-is-locally-constant` · proposition — The index of a Fredholm map is locally constant
-- `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` · remark — Surjectivity alone does not give a Banach submanifold without a split kernel
+- `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` · remark — Surjectivity alone does not imply a complemented kernel
 
 ### `banach-space-differential-calculus-and-banach-manifolds-examples` — Banach-Space Differential Calculus and Banach Manifolds: Examples (5 item(s))
 
@@ -236,7 +236,7 @@ files under `items/` for that.
 - `ex-integral-operator-trace-under-a-valid-diagonal-hypothesis` · example — Integral operator trace under a valid diagonal hypothesis
 - `cex-compact-does-not-imply-hilbert-schmidt` · counterexample — Compact does not imply Hilbert Schmidt
 - `cex-hilbert-schmidt-does-not-imply-trace-class` · counterexample — Hilbert Schmidt does not imply trace class
-- `cex-trace-of-products-is-not-cyclic-without-summability` · counterexample — Trace of products is not cyclic without summability
+- `cex-trace-of-products-is-not-cyclic-without-summability` · counterexample — The unilateral shift obstructs a cyclic linear trace extension
 - `rem-schatten-p-classes` · remark — Schatten p classes
 
 ## Your seams

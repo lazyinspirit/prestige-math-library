@@ -42,7 +42,9 @@ as $M_\alpha$.
 
 [F2] On the product with the diagonal action and the opposite form on the orbit, the moment map is the difference $\Psi(q,p,\beta)=\mu(q,p)-\beta$, and the zero reduction of the product is canonically symplectomorphic to the reduction of $M$ at $\alpha$. [[prop-shifting-trick-identifies-reduction-at-alpha-with-zero-reduction]].
 
-[F3] The rotation action on $T^*\mathbb R^3$ has moment map $\mu(q,p)=q\times p$, which is regular at nonzero values with coadjoint stabilizer of dimension $1$, so the reduced space at $\alpha\ne0$ has dimension $\dim M-\dim G-\dim G_\alpha=6-3-1=2$. [[ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle]], [[prop-dimension-of-a-regular-nonzero-reduced-space]].
+[F3] The rotation action on $T^*\mathbb R^3$ has moment map $\mu(q,p)=q\times p$. [[ex-angular-momentum-as-the-moment-map-for-rotations-of-a-cotangent-bundle]].
+
+[F4] At a regular value where the coadjoint stabilizer acts freely and properly, the reduced dimension is $\dim M-\dim G-\dim G_\alpha$. [[prop-dimension-of-a-regular-nonzero-reduced-space]].
 
 
 
@@ -50,10 +52,12 @@ as $M_\alpha$.
 
 **Proof technique:** direct.
 
-1.1 By [F1] the orbit of a nonzero $\alpha$ is a sphere and by [F3] the reduced space at $\alpha$ has dimension $2$. [F1, F3, given]
+1.1 By [F1] the orbit of a nonzero $\alpha$ is a sphere, and its stabilizer $G_\alpha$ is the one-dimensional rotation group about the axis $\mathbb R\alpha$. If $q\times p=\alpha\ne0$, then $q,p$ are linearly independent. The differential
+$$d\mu_{(q,p)}(u,v)=u\times p+q\times v$$
+is surjective: if $\xi$ annihilates its image, then the scalar triple-product identity for all $u,v$ gives $p\times\xi=0$ and $\xi\times q=0$, so $\xi$ is parallel to both independent vectors $p,q$ and hence is zero. Thus $\alpha$ is regular. Moreover a rotation about $\alpha$ fixing $(q,p)$ fixes the nonzero vector $q\perp\alpha$, so it is the identity; the $G_\alpha$-action on the level is free, and it is proper because $G_\alpha$ is compact. Therefore [F4] gives $\dim M_\alpha=6-3-1=2$. [F1, F3, F4, given, algebra]
 
 2.1 By [F2] the product moment map is $\Psi=\mu-\beta$; its zero level consists of the pairs $(q,p,\beta)$ with $q\times p=\beta\in S^2_r$, and the diagonal action makes this zero level the equivariant image of the saturated level $\mu^{-1}(S^2_r)$. [step 1.1, F2]
 
-3.1 Dimension check for the shifted picture: $\dim(M\times\mathcal O_\alpha^-)=6+2=8$ and the zero value is regular there exactly because $\alpha$ is a regular value of $\mu$ by [F2]; the zero level therefore has dimension $8-3=5$, and quotienting by the three-dimensional group gives dimension $2$, in agreement with [step 1.1]. [step 2.1, F2, F3]
+3.1 Dimension check for the shifted picture: $\dim(M\times\mathcal O_\alpha^-)=6+2=8$ and the zero value is regular there exactly because $\alpha$ is a regular value of $\mu$ by [F2] and step 1.1. The shifted action is free by [F2] and proper because $SO(3)$ is compact. Thus the zero level has dimension $8-3=5$, and quotienting by the three-dimensional group gives dimension $2$, in agreement with step 1.1. [step 1.1, step 2.1, F2]
 
-4.1 Consequently the two-dimensional reduced manifold $M_\alpha$ is exhibited as the zero reduction of $M\times S^2_r{}^-$; the identification is the shifting map $(q,p)\mapsto(q,p,q\times p)$, which is a diffeomorphism from the level of $\mu$ over $\alpha$ onto the slice where $\beta=\alpha$, and it matches the two pulled-back forms because both restrict to the same canonical form on that slice. [step 3.1, F2] ∎
+4.1 Consequently the two-dimensional reduced manifold $M_\alpha$ is exhibited as the zero reduction of $M\times S^2_r{}^-$. On the level $\mu^{-1}(\alpha)$ the slice map is $(q,p)\mapsto(q,p,\alpha)=(q,p,q\times p)$, and [F2] identifies its quotient by $G_\alpha$ with the shifted zero quotient by $SO(3)$; the two reduced forms agree because their pullbacks to this slice are both the restriction of the canonical form on $T^*\mathbb R^3$. [step 3.1, F2] ∎

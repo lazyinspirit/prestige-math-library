@@ -1,6 +1,6 @@
 # Step 7 adjudication — group **e**, run `phase-2-remaining-27`
 
-You are the group Alpha for batches **14**, **15**, **3**: 5 A/B pair(s), 10 page(s), 166 item(s), 122 open rejection(s) over 122 item(s).
+You are the group Alpha for batches **14**, **15**, **3**: 5 A/B pair(s), 10 page(s), 166 item(s), 10 open rejection(s) over 10 item(s).
 
 This is a fresh adjudication context. The durable digest below carries the
 findings from the rejection-blind whole-group reading at step 6 without
@@ -121,7 +121,7 @@ files under `items/` for that.
 - `lem-metrizable-spaces-are-collectionwise-normal` · lemma — Metrizable spaces are collectionwise normal
 - `thm-moore-spaces-are-subparacompact` · theorem — Moore spaces are subparacompact
 - `lem-collectionwise-normal-moore-spaces-are-screenable` · lemma — Collectionwise normal Moore spaces are screenable
-- `lem-sigma-cellular-base-yields-a-compatible-metric` · lemma — A sigma-cellular base yields a compatible metric
+- `lem-sigma-cellular-base-yields-a-compatible-metric` · lemma — A sigma-cellular base metrizes a normal Moore space
 - `thm-normal-screenable-moore-spaces-are-metrizable` · theorem — Normal screenable Moore spaces are metrizable
 - `thm-collectionwise-normal-moore-spaces-are-metrizable` · theorem — Collectionwise normal Moore spaces are metrizable
 - `def-q-sets-and-heath-moore-space-interface` · definition — Q-sets and Bing's tangent-disk Moore-space interface
@@ -157,7 +157,7 @@ files under `items/` for that.
 ### `shelahs-baire-property-model-and-inner-model-lower-bounds` — Shelah's Baire-Property Model and Inner-Model Lower Bounds (29 item(s))
 
 - `def-shelah-sweetness-model` · definition — Shelah sweetness models for forcing
-- `lem-shelah-sweet-forcings-are-sigma-directed-ccc` · lemma — Sweet forcings are sigma-directed and ccc
+- `lem-shelah-sweet-forcings-are-sigma-directed-ccc` · lemma — Sweet forcings are countable unions of directed sets and ccc
 - `lem-shelah-sweet-density-transfer-along-complete-suborders` · lemma — Sweet density transfers along complete suborders
 - `thm-shelah-sweet-amalgamation-preserves-sweetness` · theorem — Shelah amalgamation preserves sweetness
 - `def-shelah-universal-meagre-forcing` · definition — Shelah's universal-meagre forcing
@@ -179,7 +179,7 @@ files under `items/` for that.
 - `thm-rapid-filters-are-not-lebesgue-measurable` · theorem — Rapid filters are not Lebesgue measurable
 - `lem-measurable-null-code-orders-bound-constructible-null-unions` · lemma — A measurable null-code order bounds the constructible null union
 - `lem-uniform-null-g-delta-capture-functions` · lemma — Uniform null G-delta sets capture block functions
-- `thm-raisonnier-filter-is-rapid-from-null-code-measurability` · theorem — Null-code measurability makes the Raisonnier filter rapid
+- `thm-raisonnier-filter-is-rapid-from-null-code-measurability` · theorem — Uniform null-code measurability makes the Raisonnier filter rapid
 - `lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one` · lemma — Failure of inaccessibility in L produces a real with correct omega-one
 - `thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l` · theorem — Sigma-one-three measurability makes omega-one inaccessible in L
 - `thm-all-real-sets-measurable-gives-an-inaccessible-inner-model` · theorem — All-real-set measurability yields an inaccessible inner model
@@ -213,7 +213,7 @@ files under `items/` for that.
 - `def-fredholm-map-between-banach-manifolds` · definition — Fredholm map between Banach manifolds
 - `lem-local-finite-dimensional-reduction-for-a-fredholm-map` · lemma — Local finite-dimensional reduction for a Fredholm map
 - `prop-the-index-of-a-fredholm-map-is-locally-constant` · proposition — The index of a Fredholm map is locally constant
-- `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` · remark — Surjectivity alone does not give a Banach submanifold without a split kernel
+- `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` · remark — Surjectivity alone does not imply a complemented kernel
 
 ### `banach-space-differential-calculus-and-banach-manifolds-examples` — Banach-Space Differential Calculus and Banach Manifolds: Examples (5 item(s))
 
@@ -255,7 +255,7 @@ files under `items/` for that.
 - `ex-integral-operator-trace-under-a-valid-diagonal-hypothesis` · example — Integral operator trace under a valid diagonal hypothesis
 - `cex-compact-does-not-imply-hilbert-schmidt` · counterexample — Compact does not imply Hilbert Schmidt
 - `cex-hilbert-schmidt-does-not-imply-trace-class` · counterexample — Hilbert Schmidt does not imply trace class
-- `cex-trace-of-products-is-not-cyclic-without-summability` · counterexample — Trace of products is not cyclic without summability
+- `cex-trace-of-products-is-not-cyclic-without-summability` · counterexample — The unilateral shift obstructs a cyclic linear trace extension
 - `rem-schatten-p-classes` · remark — Schatten p classes
 
 ## Your seams
@@ -304,118 +304,6 @@ judge rejection; never reuse its source rejection as target evidence.
 
 | item | page | model | context_sha256 |
 |---|---|---|---|
-| `cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold` | `banach-space-differential-calculus-and-banach-manifolds-examples` | gpt-5.6-terra | `d6e236d77869ccf2ab3894237e5b7098ae7ed52b81c8014a3b7cadaabe5dbf2e` |
-| `cex-compact-does-not-imply-hilbert-schmidt` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `cab6541e3d98ed5d98e4a864a80e8a3e9ea44d5001c9e75f57fe73a4e82e23aa` |
-| `cex-kelley-cofinite-set-is-not-closed` | `choice-strength-in-baire-urysohn-stone-and-tychonoff-examples` | gpt-5.6-terra | `9e5a3cd8b47dffa6e59ea01d44de80bdbfc1b51a87818205f2c36d4bbda1900b` |
-| `cex-trace-of-products-is-not-cyclic-without-summability` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `892b567ae4547835a9560fd898349e7e98e6640ebba3f1361269e41de8124d35` |
-| `cor-brunner-models-also-refute-tietze-extension` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `ab544d7fde585b369bc4d6331c938c8ebc837bd65cc01b2afe51913f698b445b` |
-| `cor-compact-operator-iff-approximation-numbers-tend-to-zero` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `2944be90181c8a6e1e23d4fd645bf4efca336409f0c7e7b3e234d025522712c0` |
-| `cor-finite-rank-operators-are-norm-dense-in-compact-hilbert-space-operators` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `fa58431db5cc1542409d2ad256c6455ccd3749fc540003e0c3db76e239b8e8ce` |
-| `cor-zf-does-not-prove-urysohn-lemma` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `140daa0ff028c3abe652e713937ee2737bf1d1fdb3781cee172fff0ec78dd467` |
-| `def-absolute-value-and-singular-values-of-a-compact-operator` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `253022a5ca8b432d0b8b3c24e2b272f816c1b975445969e277d0f87ad87dbca9` |
-| `def-boldface-sigma-one-three-measurability` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `d822499e0cd1aa021a4c7953d2db5a9d897b84e607c6c591c6b57283cbeff6c9` |
-| `def-brunner-ordered-lauchli-permutation-models` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `381fca7cbbdd81fd2fdf8375834df4f5bbdeab5266cf90881918532b626c7f33` |
-| `def-corson-ordered-rational-permutation-model` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `bc862980b7358b089778c1b97b8bf09acb47559196074352c4c08d2560b07d41` |
-| `def-countable-base-banach-manifold-and-smooth-map` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `b953363e5a7214993d1c092e02d1e756fddc40b940c6e34315118da0035357b4` |
-| `def-dependent-multiple-choice-finite-level-tree` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `e68d3d14268c73542b5e5c4a0be2b8d2c2cbce539c17885ad028307e42bd8260` |
-| `def-fleissner-hyp-covering-interface` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `0121bf897a8a590ac11415e100bc4d0549ed17b090b9a75c2da11c1d3eb3c5ea` |
-| `def-good-tree-watson-symmetric-stone-model` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `e90266f46cf03df0324304f365503c7442733eaf887c6e27df440801185ac176` |
-| `def-metacompact-space` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `e43bd12bec41f56812145e04f8db42e0fc0ee271fd56ab4cbe725baf68ce85ee` |
-| `def-moore-spaces-and-developments` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `2bb07215ca60ef3411084ecae246ed1dfd5bbb28a890b1ec3f2ab13080ebb097` |
-| `def-product-measure-extension-axioms-pmea-and-pmea-sigma` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `d59965043f3f4d31cd686c21498d484b698787c3f8bffbf9bf5a044e9c57f265` |
-| `def-q-sets-and-heath-moore-space-interface` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `8ec2a8e8b53c02b4f32c1cbe0934fbd4dd5832c15a5e78b82d4ed07d496f0db9` |
-| `def-rapid-and-raisonnier-filters` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `065c52e79e7f682b75704ded12bb22541a121e1317f764ced4724488374babc4` |
-| `def-shelah-sweetness-model` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `9094d669087542cc3a0d1e61de853a715cce59c0f1bbaba249d7002146be73cb` |
-| `def-shelah-universal-meagre-forcing` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `f26bcdc87d551d7d84c537e0e34a484e33647d624f7c21db5a30a8d70cd87e31` |
-| `def-smooth-banach-vector-bundle-and-section` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `6674790387d140f76a774b2f24650e961f2a9df89db06e192f938eec260af14a` |
-| `def-split-banach-submanifold` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `aeb2f6eacaed9b508115f5a39b15e922c8e7cb0496df6b3dbe494e1cd3705191` |
-| `def-tangent-space-and-differential-on-a-banach-manifold` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `70c45e06fb93554155e1124d2bafba4ced4c639c7749c0b275f76b0c00f6c2ec` |
-| `def-trace-class-operator` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `d2ac2dd2b0ff897bc7cacdaed573af5b36ce37d232bc8c0d2cc2718508dcc74b` |
-| `ex-a-projection-with-finite-dimensional-kernel-is-fredholm` | `banach-space-differential-calculus-and-banach-manifolds-examples` | gpt-5.6-terra | `817077fa2a42a7f35f338813bf442f51f82097b80d68acfc76ba45ff8a7853e5` |
-| `ex-a-universal-meagre-stage-absorbs-old-nowhere-dense-sets` | `shelahs-baire-property-model-and-inner-model-lower-bounds-examples` | gpt-5.6-terra | `c09f9bdae8a7860da4b83e4246476ac951cef11e30195ae9a80de0758eade56c` |
-| `ex-canonical-least-ball-selection-in-separable-baire-proof` | `choice-strength-in-baire-urysohn-stone-and-tychonoff-examples` | gpt-5.6-terra | `b00917b9cfaf642de27f6e6902d21b306f668d5f3da35f4ee8e740e9d09c5075` |
-| `ex-development-stars-form-a-countable-local-base` | `normal-moore-spaces-pmea-and-consistency-strength-examples` | gpt-5.6-terra | `88d3e2644ca7afc57ada9f10dc7d7bd56206713cb2bf3b386e3e3257aaaebb71` |
-| `ex-diagonal-schatten-class-criteria-on-ell-two` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `bd27005c51500135972cf48d1b225f5117cd4c9c0d8295d36030889bde51834c` |
-| `ex-dmc-urysohn-finite-menu-intersection` | `choice-strength-in-baire-urysohn-stone-and-tychonoff-examples` | gpt-5.6-terra | `e630d8602d3414f41622229b8b3d9d8b153c37afd057ddfebebfdc503e5007b7` |
-| `ex-integral-operator-trace-under-a-valid-diagonal-hypothesis` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `752ab0a8ac6183fbdb3e67371f239a3d8c356c2b07618f084c881cc30cbf5d2c` |
-| `ex-pmea-three-quarter-event-calculation` | `normal-moore-spaces-pmea-and-consistency-strength-examples` | gpt-5.6-terra | `01636fa34999b8b327bbb1266b605859f4a234a63870606bc06c21b560d3becb` |
-| `ex-raisonnier-first-difference-cover` | `shelahs-baire-property-model-and-inner-model-lower-bounds-examples` | gpt-5.6-terra | `e1005be0b84ba29987d74e808d34a2fbd05fd478de7dccabc740b25bb54ca779` |
-| `ex-rank-one-operator-adjoint-norm-and-trace` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `a4efc7498e4ea7e38cec0da6e121e3052f44404bb3a5e065fd03285cd2982126` |
-| `ex-sweet-amalgam-over-a-common-complete-subalgebra` | `shelahs-baire-property-model-and-inner-model-lower-bounds-examples` | gpt-5.6-terra | `f00eb31165a28809c171f3dbc496d60cb8ac545f29a5f22ca6b42feed8740918` |
-| `ex-the-derivative-of-a-bounded-bilinear-map` | `banach-space-differential-calculus-and-banach-manifolds-examples` | gpt-5.6-terra | `ed1612b2dd2e85cc542ba21a6d2284ca8129bfcde7e735e291af006a8c8e1c65` |
-| `ex-uniform-null-capture-on-a-block-function` | `shelahs-baire-property-model-and-inner-model-lower-bounds-examples` | gpt-5.6-terra | `c540f3b0fa98537db41ab78d8fbb32688ab67432fb93be14e9e39acda0b4d113` |
-| `ex-volterra-operator-is-hilbert-schmidt-and-quasinilpotent` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `7d26f8af3578c49963dac3821331ef6256637ceb19d870db3729e42ab560d8b2` |
-| `fs-bpi-proves-stone-for-metric-spaces` | `choice-strength-in-baire-urysohn-stone-and-tychonoff-examples` | gpt-5.6-terra | `1bbba799e73856f3f4075ee1f90f6a12ab7e44affccc6e959169a585f57cff03` |
-| `fs-zfc-proves-normal-moore-space-conjecture` | `normal-moore-spaces-pmea-and-consistency-strength-examples` | gpt-5.6-terra | `9a2dcdf1587f483016b39820e41e01cb84fc41b86fd256633e4687c2f6eccd58` |
-| `lem-banach-mean-value-estimate-on-a-convex-set` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `285492e647cf3bbd11f91a2fa9057e7bab1ea56c3921c1101acba09b330fc495` |
-| `lem-brunner-choice-and-urysohn-obstructions` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `977eea32f02e13f27d7cfbb74644c832195b201cc92bdb0ff8d81d5de45f2fd4` |
-| `lem-corson-ordered-urysohn-automorphism-group-is-extremely-amenable` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `b5f8244de7e15bb82f4126abb7cd6cbb532ce5cf1d3b2529effc520d8807b894` |
-| `lem-corson-rational-metric-not-metacompact` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `95c3085c7e562453d2e2d54b89ddbdc08d0777bc1a938742103152446a5234d7` |
-| `lem-corson-stone-obstruction-is-ordinal-boundable` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `f152de5293a2303833da5c5748f058d78138506e9b38008fa2763e8021e3ea6d` |
-| `lem-good-tree-watson-omega-sequence-closure` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `2f30142633a48eef49290c5a8b5279be8a943e74a7e344da24ca573d343e0b24` |
-| `lem-good-tree-watson-selector-obstruction` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `da1d80e98f9626ee6566a66f8069eec6efe855314b5e80a0cef5a67338bfd1e0` |
-| `lem-isolated-point-kelley-repair` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `a18d8de6e5e57baaaa956d7cb4eceeccfb98617396a85eb48ed893a4eba6d84f` |
-| `lem-ladder-separation-from-hyp` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `c010e8c47d5007faa3eb45074bddb30d55e14569db28a5b9cabb0621e6341987` |
-| `lem-local-finite-dimensional-reduction-for-a-fredholm-map` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `40ad321635c344fa59a71c0e69d5326999ea4b9e72500074312af81663f92a00` |
-| `lem-ma-produces-an-uncountable-q-set` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `249765950830fff6f40927c5c17791f60eea3feef31850f2d8493bb01f4d951e` |
-| `lem-measurable-null-code-orders-bound-constructible-null-unions` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `0825cd3a6e00736289ad6aeb41c5baa7eeaac52ce1719610ae596a7c1b9743b3` |
-| `lem-noninaccessibility-in-l-produces-a-real-with-correct-omega-one` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `e64f49807d949356a8e38a267a858ad8b7802d65535742d11c88a2bdee052d0f` |
-| `lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `0402b12204235e0d0eb0301a39c5bc320863bc16e40ed885f1f34f85debae092` |
-| `lem-nuclear-series-characterizes-trace-norm` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `6935dc90c920edea4a2bb41d17e0ae5f8739e61ca69a4aba322310aa744164fd` |
-| `lem-ordered-rational-automorphism-stabilizers-are-extremely-amenable` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `924149b7a2fca2f3e3799b4e08b3866b81b5dd3d44d4f9944c43ad66b03658a8` |
-| `lem-pmea-three-quarter-separation-estimate` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `cf15b7e0f09b95d7af0eeac2e89a17618f24cb397b4df17d08e615e92a49a147` |
-| `lem-positive-square-root-of-a-compact-positive-operator` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `973dbb8a4bcd0629c6f0ad042b5659d2f62aee0e781d6a0a90ea91b0e27a7153` |
-| `lem-raisonnier-family-is-a-sigma-one-three-filter` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `ed95f883e9aa4c7701c68bbc06143aa83281e0213cfb8ef7a9ef914c3035fc46` |
-| `lem-shelah-continuous-unions-of-sweetness-models` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `1afee8117a4c4640d7e74b42c90fa15df1a59d36e597985b5b0e6dc43ce8e8e9` |
-| `lem-shelah-homogeneous-truth-has-baire-representatives` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `656a57915da27a8a346f0b8dd2e85103a00834ef8c6d5525a85ca4f6ef0ad3b6` |
-| `lem-shelah-inner-model-is-closed-under-ambient-omega-sequences` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `e1fa82a82b71bd352a45ad73570c92b3b2aebb3bf080df4e6431187618cfc7d4` |
-| `lem-shelah-real-name-capture-and-coded-meagre-unions` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `ac13b99e2f2ca5eefb00017eea59e0f87d70b8ded4bd3022ac2fc47d0ab767d7` |
-| `lem-shelah-sweet-density-transfer-along-complete-suborders` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `56fb44637ece6c0792ca95e659ce7dfc7d97940fd3223964fb313c99f3e75277` |
-| `lem-shelah-sweet-forcings-are-sigma-directed-ccc` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `111f440e750fbd3b13a10d014516d321dfec58aa7cc42a7904a26dbf67fc8ad7` |
-| `lem-shelah-universal-meagre-forcing-absorbs-old-nowhere-dense-sets` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `cb960d474e3c0ae73dc98422e5cf6a78e86b34e904b22de251cc3163284d8798` |
-| `lem-sigma-cellular-base-yields-a-compatible-metric` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `0adc33d1a83a8c83cb1297bf89d791d1d366fd80737c67a6d5b067723cc16d4c` |
-| `lem-solovay-almost-disjoint-extension-under-ma` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `554ecae4bd431f25a8bc8fc29f41dbe04088175336358473aad6394ce3864164` |
-| `lem-uniform-null-g-delta-capture-functions` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `60100e4f51badb52ef4fcafd213dfb676c5e3cb0d9239c1f00ff13004549313b` |
-| `rem-choice-strength-ledger-baire-urysohn-stone-tychonoff` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `3c1dff51f4730c14064ba15fd0bd329540c5bea9e170dbb3aef76943a9482ef9` |
-| `rem-dmc-versus-dc-over-zf-is-open` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `f97d090df4c60008ad48100fae4c52c6a399c97d2aa72bc01b96daef8e61b256` |
-| `rem-schatten-p-classes` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators-examples` | gpt-5.6-terra | `b0037d47d27816c47c1752b1255a847599a9bd8a79e6d8f960878946080ed5f2` |
-| `rem-stone-exact-choice-strength-open-status` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `43d1a9418ad182d9ade3de6bbc40d0d8dbb61a5bbb88cd1487bdbe31e6094928` |
-| `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `2ea89aec6a919e08b3c4004ca2452595bdf9adecdc30ddcdf663b3b243e012fe` |
-| `rem-urysohn-implies-dmc-open-status` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `61a2677b01dc39f233228577445492b201dc26afdd488ff47ba6a27f040ae7d9` |
-| `thm-all-real-sets-measurable-gives-an-inaccessible-inner-model` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `bea1965df804b4a4a9fe6c65e6c97f802f7e59158ed8127f3aad4aac1f495904` |
-| `thm-baire-property-model-equiconsistent-with-zfc` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `88bf30f1310977b0d532e4302cb6fa7f96a4d30482b00ddf73de1cf6c232eadc` |
-| `thm-bing-q-set-moore-space-is-normal-and-nonmetrizable` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `ae20a65d99842826963b90b5a090a33d67caff08ed84736d6d3c9a2173c244a3` |
-| `thm-ch-normal-nonmetrizable-moore-space` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `e7862fc13d51715f952dfc10913b5dca1d22727433da374b54448a1e6d5f585c` |
-| `thm-chain-sum-product-and-composition-rules-for-banach-derivatives` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `5ba58c020e86e86c139965a056c23624663b31a50733bad09ee3c8e32343e06b` |
-| `thm-compact-hausdorff-baire-implies-dmc` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `a0cf21dc945cb42d58b10298ba7a7da265fbf869d8eb74d8335a5de714157a82` |
-| `thm-compact-t1-product-theorem-iff-ac` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `71d5f551933673ab534feab8d9c8110b2e499dfe2de14deef3262446a0948345` |
-| `thm-cyclicity-of-the-trace` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `ba6bf65234796e3b70bbee3a8b64af1be35e4bf445e9d40a5d4b0dbceeaca082` |
-| `thm-dmc-implies-urysohn-lemma` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `6fcf566f0b933905c335628fd0b219b1e30a04fdaeab69a14d241b240324a269` |
-| `thm-dmc-tree-and-successor-menu-formulations` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `a5c2006c3e477f99ca455ae88a128d8fa4116c78863523e3daf5c2c07b5dac06` |
-| `thm-effective-metacompact-discrete-metrics-implies-ac` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `eeadfb346a817b299dae32b21bd492b888cbfc362bef967c35f9d5b8eb4ec932` |
-| `thm-extreme-amenability-yields-bpi-in-finite-support-models` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `6ae1e966e726da6bffe3c1eb2f44a267a444beef8f505f4fc54c1bf0332786dc` |
-| `thm-fleissner-hyp-normal-nonmetrizable-moore-space` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `2d9961c8cef7a913039b9efec31d03c2c285f0fa317ca5ccaaea1106354da1f7` |
-| `thm-fleissner-normal-moore-space-construction` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `f4c3f9655649853c3d488b8bdb72aab9abff5b916007aca4ad5318220c8c32f4` |
-| `thm-formal-nmsc-consistency-lower-bound` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `fa0e8403e445afeaf1d3ea967ce003195bf6fc40ef0b6923a5f8a7decf4853bc` |
-| `thm-hilbert-schmidt-operators-form-a-two-sided-ideal` | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators` | gpt-5.6-terra | `b2e890b2710f8cde68dc01ac4c8f4c2db7a0add5087700442a23fcd9cf5671ee` |
-| `thm-inverse-function-theorem-for-banach-spaces` | `banach-space-differential-calculus-and-banach-manifolds` | gpt-5.6-terra | `566a07066cfa924b430c104f3ea46bafbac305caf0abfdc01fab4a56d5a82554` |
-| `thm-measurability-of-all-real-sets-equiconsistent-with-an-inaccessible` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `e60c3be33ddf9c5e768c248af4de3dbf5540b40937f1d0369ff4bc9fda65944c` |
-| `thm-moore-spaces-are-subparacompact` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `81ec65b82ea76883bf0cb36c4cfceb75dad7d13902dbb436166ba03eeb3c8371` |
-| `thm-normal-moore-consistency-strength-sandwich` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `da3cd87289699dba45f94d7936963633d5d181121778f2f443eb95f4ed7fdb77` |
-| `thm-pincus-transfer-for-bpi-and-injectively-boundable-conjunctions` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `2a8c594771e134b18991499478437fc393c92926e19370653a78c0be6b1cfae3` |
-| `thm-pmea-implies-normal-moore-space-conjecture` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `cea011def00b348b8cd3d1669f3b1a26a886346c29f496b0ab4e9a48790dddc3` |
-| `thm-pmea-normal-low-character-spaces-are-collectionwise-normal` | `normal-moore-spaces-pmea-and-consistency-strength` | gpt-5.6-terra | `92c939b7ecdf68393a8dc6bcd287036e5ba362f34958854ce17a22762d9b0924` |
-| `thm-products-of-cofinite-spaces-compact-iff-bpi` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `a783d91ca212682042da8d830e27429df0ee8aa2c4131ea6028c3aba34cfdc5e` |
-| `thm-raisonnier-filter-is-rapid-from-null-code-measurability` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `42213c4ab799b832f55a27f0492c5422446b5cd8efeceb16df73a57189f26952` |
-| `thm-rapid-filters-are-not-lebesgue-measurable` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `bde0a897b8baff356d88a710b3918f602f2bc09cb49fe3708fd303ad1ff3f554` |
-| `thm-relative-consistency-bpi-without-stone` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `6551a505c520307630677fe65175d0704162db3b1afd5c76b81a495d71392743` |
-| `thm-relative-consistency-bpi-without-urysohn` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `e87fdd397eb494e4e582b0fbac74de9bdd22e16ed213751488e20c58058f59f1` |
-| `thm-relative-consistency-countable-choice-without-urysohn` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `bd99608cec7d8e824c6cdf7e637f1dcce119d97240d9ee48c84eaa2440df5bfb` |
-| `thm-relative-consistency-dc-without-stone` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `0ea5942729302b21b607cc2e30a31f197477c74b77457d0760e95f2fab34b90f` |
-| `thm-separable-complete-metric-baire-in-zf` | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | gpt-5.6-terra | `631c1dc9fcebdf67feb6e65e8f8e3810138102814a6e61d5a870d6a0b0fae663` |
-| `thm-shelah-baire-model-separates-baire-property-from-measurability` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `8893ce04a1affd231784d3187139890e35b6999a244896ff5ababdf88dfb836f` |
-| `thm-shelah-ch-omega-one-sweet-construction` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `a53e0b11840f028f48a2a783b65b66891e7e6dbc40af11b22853dd8fc46b1e9a` |
-| `thm-shelah-inner-model-all-sets-of-reals-have-baire-property` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `af9b0a77075ba9bd3cd682769395859ae28601ba06ab0a3ce5028711d2f7f20f` |
 | `thm-shelah-inner-model-satisfies-zf-and-dependent-choice` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `6c668080fcadd9ebeab39ba56c2ee2a8642fac3a70bad30a6cf4c1c73e5348f6` |
 | `thm-shelah-sweet-amalgamation-preserves-sweetness` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `9807a4d8fcf88a6fe95668e7f106be382e7fa3fd56b5e4e0fcb0112d0fcbd72c` |
 | `thm-shelah-sweet-partial-isomorphism-extension` | `shelahs-baire-property-model-and-inner-model-lower-bounds` | gpt-5.6-terra | `a82fa741d982cc366ffe745c331d69766053c8896723ab9daaa9ec108d2ab136` |
@@ -429,6 +317,15 @@ judge rejection; never reuse its source rejection as target evidence.
 
 Rendered from the ledger at scope time. **The ledger is the authority** — if
 a row appeared since, it is still yours to adjudicate.
+
+Start from `research/phase-2-remaining-27-step7-bundle-e.md`: it carries each rejected
+item's claim section, its Facts section and the verbatim quote of every cited fact.
+Work the table **grouped by item** — settle every objection to an item in one pass,
+repairing it once — and do not re-read a file already in your context.
+The bundle is an entry point, never a fence: open the full item whenever the bundle
+is insufficient, read any item of this frontier (including other groups' items) for
+seams and cross-group alerts, read the published `library/`, and search the web when a
+source check is needed.
 
 ---
 
