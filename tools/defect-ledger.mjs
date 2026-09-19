@@ -137,7 +137,7 @@ const ENUMS = {
   // Keep one role value per registered GPT judge lane so dispositions remain
   // valid when the active GPT lineup changes.
   caught_by_role: ['beta', 'reader', 'refuter', 'judge-terra', 'judge-sol', 'judge-gpt54',
-    'group-alpha', 'lead-alpha', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
+    'group-alpha', 'lead-alpha', 'final-adjudicator', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
   disposition: ['fixed', 'narrowed', 'deferred', 'dropped', 'open', 'false-positive', 'nonfatal-recorded'],
 };
 const OPTIONAL_ENUMS = {

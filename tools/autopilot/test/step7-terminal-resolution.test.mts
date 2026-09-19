@@ -10,6 +10,7 @@ import {
   finalAdjudicatorPredecessorProblems,
   finalAdjudicatorQueueProblems,
   parseTerminalResolutions,
+  pendingTerminalIds,
   TERMINAL_RESOLUTION_VERSION,
   OWNER_TERMINAL_RESOLUTION_VERSION,
 } from '../../step7-terminal-resolution.mjs';
@@ -361,6 +362,70 @@ test('the FA recorder CLI refuses an out-of-order item before touching repositor
       '--root', root]);
     assert.equal(result.status, 1);
     assert.match(result.stderr, /thm-one.*must be resolved before thm-two/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('a receipt frozen by a later sibling repair stays pending and a current one does not', () => {
+  const row = { context_sha256: 'a'.repeat(64), item_sha256: 'b'.repeat(64) };
+  const latest = new Map([['thm-resealed', row], ['thm-stale', row]]);
+  const hashes = new Map([
+    ['thm-resealed', { context_sha256: row.context_sha256, item_sha256: row.item_sha256 }],
+    ['thm-stale', { context_sha256: 'c'.repeat(64), item_sha256: row.item_sha256 }],
+  ]);
+  assert.deepEqual(pendingTerminalIds(['thm-resealed', 'thm-stale', 'thm-new'], latest, hashes),
+    ['thm-stale', 'thm-new'], 'the queue keeps its order and only current receipts are dropped');
+  assert.deepEqual(pendingTerminalIds(['thm-resealed'], latest, new Map()), ['thm-resealed'],
+    'a receipt with no recomputed hash cannot be treated as current');
+});
+
+test('an owner escalation is only readable from a final-adjudicator terminal row', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'step7-terminal-escalation-'));
+  try {
+    const path = join(dir, 'terminal.jsonl');
+    const row = {
+      version: OWNER_TERMINAL_RESOLUTION_VERSION, run: 'fixture', stage: '7-rejudge',
+      id: 'thm-demo', resolved_by: 'owner', disposition: 'escalated-to-owner',
+      rejudge_rounds_exhausted: 1, exhausted_at: '2026-09-05T00:00:00.000Z',
+      context_sha256: 'a'.repeat(64), item_sha256: 'b'.repeat(64),
+      basis: 'Owner rows record a decision, never a queue position held open for a decision that is still owed.',
+      at: '2026-09-05T00:10:00.000Z',
+      failure_evidence: { cycle_ids: ['terra-1'], closure_path: 'research/fixture-closure.json',
+        closure_sha256: 'c'.repeat(64), unresolved_as: 'unadjudicated',
+        rejected_item_sha256: 'd'.repeat(64) },
+      owner_evidence: { path: 'research/fixture-evidence.md', sha256: 'e'.repeat(64) },
+    };
+    writeFileSync(path, `${JSON.stringify(row)}\n`);
+    const parsed = parseTerminalResolutions(path, { allowMissing: true });
+    assert.ok(parsed.errors.some((error) =>
+      /only a version \d+ final-adjudicator row may escalate an item to the owner/.test(error)), parsed.errors.join('\n'));
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('queue-status names the positions that still owe work and how to reseal them', () => {
+  const root = mkdtempSync(join(tmpdir(), 'step7-fa-queue-status-'));
+  try {
+    const research = join(root, 'research');
+    mkdirSync(research);
+    writeFileSync(join(research, 'fixture-step7-fa-a-round-2.json'),
+      `${JSON.stringify({
+        version: 1, run: 'fixture', stage: '7-rejudge', group: 'a', round: 2,
+        dispatch_label: 'step7-fa-a-round-2', state_dir: '.autopilot/fixture',
+        items: [
+          { id: 'thm-one', scope: 'run', owner: 'a', position: 1 },
+          { id: 'thm-two', scope: 'run', owner: 'a', position: 2 },
+        ],
+      }, null, 2)}\n`);
+    const result = spawnSync(process.execPath, [join(REPO, 'tools/step7-terminal-resolution.mjs'),
+      'queue-status', '--run', 'fixture', '--queue', 'research/fixture-step7-fa-a-round-2.json',
+      '--root', root], { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /1\tunrecorded\tthm-one/);
+    assert.match(result.stdout, /pending: 2 of 2/);
+    assert.doesNotMatch(result.stdout, /RESEAL/, 'an unrecorded queue owes review, not resealing');
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

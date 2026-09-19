@@ -32,6 +32,7 @@ import { loadStep7JudgeEvidence } from '../../step7-evidence.mjs';
 import { repairFingerprint } from './authored-repairs.mts';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../pathway-lib.mjs';
+import { pendingQueueIds } from '../../step7-terminal-resolution.mjs';
 
 // Version the composed Step-5 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -1108,6 +1109,15 @@ function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: s
     `This is the exact queue frozen in \`${queueRel}\`. It contains ${ordered.length} item(s).`,
     'Work in the numbered order below. Do not substantively review the next item until the recorder accepts the current one.',
     '',
+    '## Recovery rules (part of this dispatch)',
+    '',
+    `- Before recording any position, run \`node tools/step7-terminal-resolution.mjs queue-status --run ${ctx.run} --queue ${queueRel}\`.`,
+    '- A repair can change the shared page context of an earlier position and freeze its receipt. That is expected, never an escalation.',
+    '- Reseal every `stale` position the command lists, in ascending order, before recording a later position: re-read the item against its new context, confirm its bytes still match the recorded `item_sha256`, repair it when the new context invalidates its justification, write the reseal evidence to the printed `--basis-file` path, then run the printed `RESEAL` command.',
+    '- Never escalate a context-hash conflict, never skip a stale predecessor, never edit a receipt file by hand.',
+    '- Never edit `published/`. When a published supplier is internally inconsistent, or contradicts the convention this item needs, repair the queued run item so it is correct and source-supported under a convention you state, keep the finding and its citations in your evidence file, add one line `PUBLISHED-DEFECT <item>: <exact defect>` there, and continue. Published repairs need a paid judge round this stage cannot buy, so the owner schedules them.',
+    '- Escalate only when the queued item is itself published scope, a required existing-supplier edit is outside your authority, or the point cannot be settled from authoritative sources and the library. Record the escalation, then continue with the next position; a queue never stalls on an owner decision.',
+    '',
   ];
   for (const [index, row] of ordered.entries()) {
     const position = index + 1;
@@ -1120,15 +1130,18 @@ function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: s
       `3. Write concrete evidence to \`${evidenceRel}\`, including exact source URLs and what they support, or explain why the mathematics was familiar.`,
       '4. Accept or repair the queued licensed fatal item and its own contracts/metadata. You may add only fully proved new dependency lemma chains directly required by that repair, on the same owned page and within the same group, before their consumers.',
       '   Fully author each new lemma and register it in the owning manifest, proof contract and Step-7 scope. The engine supplies hash-bound auditor/adjudicator-created-item certification after the successful dispatch; do not create self-review decisions, judge verdicts or pass stamps for new lemmas. Normal content, dependency, licence, scope and proof-contract gates still apply.',
-      '   Existing supplier edits, new theorems, pages or pairs, other scope changes and unresolved mathematics require escalation. Run focused checks and record the queued item\'s final decision. Do not launch another judge or review wave or reopen settled items.',
+      '   Existing supplier edits, new theorems, pages or pairs, other scope changes and unresolved mathematics require an owner escalation: record `escalated-to-owner` for the untouched item, then continue with the next position. Never record an escalation over partially repaired bytes. Do not launch another judge or review wave or reopen settled items.',
       '5. Record the exact final bytes with exactly one of these commands:',
       '',
       '```bash',
+      `node tools/step7-terminal-resolution.mjs queue-status --run ${ctx.run} --queue ${queueRel}`,
       `node tools/step7-terminal-resolution.mjs record --run ${ctx.run} --id ${row.id} --resolved-by final-adjudicator --group ${group} --queue ${queueRel} --state-dir ${stateDir} --disposition accepted-after-review --source-status verified --basis-file ${evidenceRel}`,
       `node tools/step7-terminal-resolution.mjs record --run ${ctx.run} --id ${row.id} --resolved-by final-adjudicator --group ${group} --queue ${queueRel} --state-dir ${stateDir} --disposition repaired --source-status verified --basis-file ${evidenceRel}`,
+      `node tools/step7-terminal-resolution.mjs record --run ${ctx.run} --id ${row.id} --resolved-by final-adjudicator --group ${group} --queue ${queueRel} --state-dir ${stateDir} --disposition escalated-to-owner --source-status verified --basis-file ${evidenceRel}`,
       '```',
       '',
-      'Both commands default to `--source-status verified` and require at least one authoritative http(s) URL in the evidence file. Change only that exact word to `familiar` when no external verification was needed.',
+      'The `queue-status` line must show every earlier position `current` first. The record commands default to `--source-status verified` and require at least one authoritative http(s) URL in the evidence file. Change only that exact word to `familiar` when no external verification was needed.',
+      'Use `escalated-to-owner` only while the item still holds its rejected bytes. Its evidence must name the exact unresolved point, the decision the owner owes, and the authorities consulted. The item stays unresolved until the owner decides it.',
       '',
     );
   }
@@ -2684,6 +2697,9 @@ export const stages = [
       closureGate(ctx),
     ],
     // One terminal adjudication pass. No new sweeps or repair waves follow it.
+    // The pass is a dispatch ROUND, not a single lane lifetime: a further round
+    // is an operator action (clear `repairExhaustedAt`, retry), because every
+    // extra round re-runs the whole closure battery.
     maxFixRounds: 1,
     terminalFixBudget: true,
     onGateFailure: async ({ ctx, executor, stage, round }) => {
@@ -2704,7 +2720,18 @@ export const stages = [
           executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });
       }
       const queue = [...new Set([...contested.filter(id => !blocked.includes(id)), ...refresh])];
-      if (queue.length) startFinalAdjudicators(ctx, executor, stage, round, queue);
+      // A surviving receipt is not re-adjudicated, and a receipt whose shared
+      // page context moved under it is: the lane reseals it against the new
+      // context before continuing. Without this filter a re-dispatch reopens
+      // every item the previous round already settled.
+      let pending = queue;
+      try { pending = pendingQueueIds(ctx.repo, ctx.run, queue); }
+      catch (error: any) {
+        const message = `terminal receipt currency could not be recomputed (${error?.message ?? error}); dispatching the full contested set`;
+        if (executor.state?.addBlocker?.(stage.id, message, 'step7-terminal-hashes'))
+          executor.reporter?.notify?.('blocked', message, { stage: stage.id });
+      }
+      if (pending.length) startFinalAdjudicators(ctx, executor, stage, round, pending);
     },
   },
 

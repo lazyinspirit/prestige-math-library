@@ -175,3 +175,57 @@ live DeepSeek probe with the threshold lowered to 1,500: the session recorded a
 the earlier token win in the Step-7 lanes (they were already carrying ~130k per
 turn after their own 200k compactions) without forcing the more aggressive
 120k rewinds.
+
+## Step-7 final adjudication: three workflow defects, three mechanisms
+
+The round-1 final-adjudicator lanes (Astra/medium, one per Alpha group, 339
+queued items) stopped after 23 decisions. Three defects, each fixed in the
+engine rather than worked around:
+
+1. **A sibling repair froze earlier receipts.** A queue item's judge context
+   hash covers its page-mates, so repairing position N invalidated the receipts
+   of positions 1..N-1 and the recorder refused to go on (groups c and e). The
+   FA task now carries a reseal rule, and
+   `step7-terminal-resolution.mjs queue-status --run <run> --queue <file>`
+   prints each position as `current`, `stale`, or `unrecorded` plus the exact
+   reseal command with its evidence path. A stale position is re-read against
+   the new context and re-recorded in ascending order; the reseal is a real
+   mathematical check, never a silent re-stamp. Proven live: c and e resealed
+   and continued.
+2. **One escalation killed a whole lane.** The queue treats escalation as a
+   stop, so group b (a published rank-zero orientation conflict in the Thom
+   suppliers) and group a (a circular draft supplier) ended their dispatches
+   after one item. A third disposition, `escalated-to-owner`, now records the
+   untouched item, holds its queue position open, and lets the lane continue.
+   `level-coverage.mjs` deliberately refuses to count it as closure and reports
+   it in `terminal_escalated`, so the stage still cannot close without an owner
+   decision. Proven live: a-1 escalated and the lane moved on.
+3. **A re-dispatch reopened settled work.** `pendingQueueIds` now filters the
+   contested set to items whose latest receipt is missing or stale, so round 2
+   carried 320 items instead of re-adjudicating the 23 already settled.
+
+Round 2 dispatched 2026-09-20 05:43 local (a 77, b 74, c 36, d 72, e 61).
+Two mechanisms are operator levers, not code, and are recorded here so they are
+not lost: the run's `gateFailurePolicy` is temporarily `repair` (production is
+`owner-recertify`, which short-circuits the terminal hook), and
+`stages["7-rejudge"].repairExhaustedAt` was cleared in the run state. Both must
+be restored to production values once Step 7 closes.
+
+## Published defects found by the Step-7 final adjudicators (owner work)
+
+Published repairs need a paid judge round that the terminal stage cannot buy, so
+each finding is recorded in the defect ledger as `deferred` owner work and the
+queued run item is repaired around it. Consolidating lane-written rows into the
+schema-valid ledger is the supervisor's job: the first three lane-written rows
+used `class: "published"` and `disposition: "pending"`, neither of which is in
+the ledger's closed enum.
+
+- `def-thom-euler-class-of-an-oriented-vector-bundle` — the rank-zero paragraph
+  asserts `u = 1` and `e = 1` for an arbitrary supplied R-orientation; the
+  formula gives `e = -1` for the reversed generator.
+- `thm-thom-isomorphism-for-oriented-vector-bundles` — Proof 4.1 asserts `u = 1`
+  and identity maps at rank zero for an arbitrary supplied R-orientation.
+- `def-law-modification-and-indistinguishability-of-processes` — on an
+  incomplete probability space the definition demands a measurable all-times
+  equality event, which a rational-grid almost-sure-continuity argument cannot
+  supply.

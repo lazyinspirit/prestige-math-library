@@ -436,6 +436,18 @@ test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-me
   assert.match(taskA, /Do not substantively review the next item until the recorder accepts the current one/);
   assert.match(taskA, /--resolved-by final-adjudicator/);
   assert.match(taskA, /authoritative http\(s\) URL/);
+  // A later repair legitimately moves the page context under an earlier
+  // receipt, so the dispatch has to carry the reseal recovery rather than
+  // leave the lane to escalate a hash conflict.
+  assert.match(taskA, /queue-status --run demo --queue research\/demo-step7-fa-a-round-1\.json/);
+  assert.match(taskA, /Reseal every `stale` position the command lists, in ascending order/);
+  assert.match(taskA, /Never escalate a context-hash conflict/);
+  assert.match(taskA, /Never edit `published\/`/);
+  assert.match(taskA, /PUBLISHED-DEFECT <item>/);
+  // An owner escalation holds the item open without stalling the queue, so the
+  // task has to carry the exact command that records it.
+  assert.match(taskA, /--disposition escalated-to-owner/);
+  assert.match(taskA, /a queue never stalls on an owner decision/);
   const brief = readFileSync(join(REPO, 'briefs/final-adjudicator.md'), 'utf8');
   for (const text of [taskA, brief]) {
     assert.match(text, /queued licensed fatal item/);
@@ -449,6 +461,42 @@ test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-me
     assert.match(text, /[Dd]o not launch another judge or review wave/);
     assert.doesNotMatch(text, /If new items or supplier edits are necessary, escalate instead/);
   }
+  for (const text of [taskA, brief]) {
+    assert.match(text, /Never edit `published\/`/);
+    assert.match(text, /queue-status/);
+    assert.match(text, /escalated-to-owner/);
+  }
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('a re-dispatched final adjudication keeps the contested set when receipt currency cannot be recomputed', async () => {
+  const repo = fixtureRepoWithGroups();
+  mkdirSync(join(repo, 'items'));
+  writeFileSync(join(repo, 'items', 'thm-demo-x.md'), '---\nid: thm-demo-x\ndeps: []\n---\n');
+  writeFileSync(join(repo, 'research', 'demo-step7-scope.json'), JSON.stringify({
+    by_item: { 'thm-demo-x': 'a' },
+  }));
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    needs_rejudge: [], unadjudicated: ['thm-demo-x'], open_fatal: [], closed: false,
+  }));
+  writeFileSync(join(repo, 'research', 'demo-step7-terminal-resolutions.jsonl'),
+    `${JSON.stringify({ version: 1, run: 'demo', stage: '7-rejudge', id: 'thm-demo-x', at: '2026-01-01T00:00:00.000Z' })}\n`);
+
+  const started: any[] = [];
+  const blockers: string[] = [];
+  const s: any = stage('7-rejudge');
+  await s.onGateFailure({
+    ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
+    executor: {
+      start: (_x: any, plan: any) => started.push(plan),
+      state: { addBlocker: (_stage: string, message: string) => blockers.push(message) },
+      reporter: { notify: () => {} },
+    },
+    stage: s, round: 2, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
+  });
+  assert.equal(started.length, 1, 'the contested item is still adjudicated rather than silently dropped');
+  assert.equal(started[0].label, 'step7-fa-a-round-2');
+  assert.match(blockers.join('\n'), /terminal receipt currency could not be recomputed/);
   rmSync(repo, { recursive: true, force: true });
 });
 

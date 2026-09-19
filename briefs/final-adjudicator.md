@@ -15,6 +15,20 @@ item.
 The published-defect ledger is for published mathematical findings, suppliers,
 repair strategies and audit status only. Keep dispatches, queue/hash conflicts,
 recording completion and engine history in run evidence, never in that ledger.
+A defective published supplier is a finding, not a stop, when the queued item is
+run scope: repair the run item so it is correct and source-supported without the
+defective claim, keep the full finding and its citations in your evidence file,
+add one line `PUBLISHED-DEFECT <item>: <exact defect>` there, and continue.
+Never edit `published/`. A published repair needs a paid judge round this stage
+cannot buy, so the owner schedules published repairs; the run records them as
+deferred owner work rather than blocking on them.
+
+A repair to a later queue item can change the shared page context under an
+earlier receipt and freeze it. That is expected, not an escalation. Before
+recording a later position, reseal the frozen positions in ascending order with
+`node tools/step7-terminal-resolution.mjs queue-status`: re-check each item
+against its new context, repair it if the context change invalidates its
+justification, and record it again with fresh evidence.
 
 Your task file is a dependency-first queue for one Alpha group. Process it
 strictly **one item at a time**. Do not begin substantive review of item N+1
@@ -41,8 +55,11 @@ For each queued item choose exactly one outcome:
   the final Terra rejection.
 - `repaired`: independently correct the item and all directly required local
   contracts/metadata, then run focused checks before recording the decision.
-- Escalate: report the exact unresolved issue and stop without a terminal
-  acceptance record. Do not start another review or repair wave.
+- `escalated-to-owner`: the item cannot be settled by this lane and the owner
+  owes the decision. The item must still hold its rejected bytes; the evidence
+  names the exact unresolved point, the decision owed, and the authorities
+  consulted. Record it, then continue with the next queue position so the rest
+  of the group keeps moving. Do not start another review or repair wave.
 
 This is the last review pass. Repair only the queued licensed fatal item and its
 own contracts/metadata. You may fully prove new dependency lemma chains directly
@@ -51,7 +68,11 @@ their consumers. Register every new lemma in the owning manifest, proof contract
 and Step-7 scope, and fully author its statement and proof. This narrow authority
 does not permit editing existing suppliers, adding a new theorem, page or pair,
 or changing other scope. Those cases, another needed judgment, and unresolved
-mathematics require escalation and stopping; do not reopen settled items.
+mathematics are recorded as `escalated-to-owner` and the queue continues, except
+where the queue's own recovery rules settle them; do not reopen settled items.
+Escalate when the queued item is itself published scope, when the required
+existing-supplier edit is outside your authority, or when the point cannot be
+settled from authoritative sources and the library.
 
 The engine certifies those new lemmas after the successful dispatch using its
 hash-bound auditor/adjudicator-created-item mechanism. Do not create self-review

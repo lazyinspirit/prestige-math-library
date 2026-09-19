@@ -27,7 +27,9 @@ export const OWNER_TERMINAL_RESOLUTION_VERSION = 4;
 export const TERMINAL_REJUDGE_ROUNDS = 1;
 
 const HASH = /^[a-f0-9]{64}$/;
-const DISPOSITIONS = new Set(['repaired', 'accepted-after-review']);
+// An escalated row keeps its place in the ordered queue and is deliberately not
+// closure: the item stays unresolved until the owner decides it.
+const DISPOSITIONS = new Set(['repaired', 'accepted-after-review', 'escalated-to-owner']);
 const RESOLVERS = new Set(['owner', 'session', 'final-adjudicator']);
 const FA_SOURCE_STATUSES = new Set(['verified', 'familiar']);
 
@@ -133,6 +135,8 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
       errors.push(`${where}: version ${OWNER_TERMINAL_RESOLUTION_VERSION} requires owner resolution`);
     if (row?.version === TERMINAL_RESOLUTION_VERSION && row?.resolved_by !== 'final-adjudicator')
       errors.push(`${where}: version ${TERMINAL_RESOLUTION_VERSION} requires final-adjudicator resolution`);
+    if (row?.disposition === 'escalated-to-owner' && row?.version !== TERMINAL_RESOLUTION_VERSION)
+      errors.push(`${where}: only a version ${TERMINAL_RESOLUTION_VERSION} final-adjudicator row may escalate an item to the owner`);
     if (!DISPOSITIONS.has(row?.disposition))
       errors.push(`${where}: disposition must be repaired or accepted-after-review`);
     const expectedRounds = legacy ? 3 : previous ? 2 : TERMINAL_REJUDGE_ROUNDS;
@@ -206,7 +210,12 @@ export function terminalResolutionStatus(row, now, hasCurrentJudgeCoverage = fal
   return hasCurrentJudgeCoverage ? 'superseded-by-current-judge' : 'stale';
 }
 
-export function currentHashes(root, id) {
+/** Batch form of `currentHashes`: one judge process for every id. A serial
+ *  FA lane needs the whole queue's hashes at once, and one process per item
+ *  reads the corpus once instead of once per id. */
+export function currentHashesMany(root, ids) {
+  const wanted = [...new Set(ids.filter((id) => typeof id === 'string' && id))];
+  if (!wanted.length) return new Map();
   const loader = tsxLoader();
   const scratch = mkdtempSync(join(tmpdir(), 'step7-terminal-hash-'));
   try {
@@ -219,7 +228,7 @@ export function currentHashes(root, id) {
       // File-backed stdio also works in managed sandboxes that forbid the
       // anonymous pipes normally created by spawnSync's default stdio.
       child = spawnSync(process.execPath,
-        ['--import', loader, 'tools/judge.mts', `items/${id}.md`, '--context-hash'],
+        ['--import', loader, 'tools/judge.mts', '--context-hashes', wanted.join(',')],
         { cwd: root, stdio: ['ignore', stdoutFd, stderrFd] });
     } finally {
       closeSync(stdoutFd);
@@ -230,10 +239,34 @@ export function currentHashes(root, id) {
     if (child.status !== 0 || !stdout.trim()) {
       throw child.error ?? new Error(stderr.trim() || `judge hash process exited ${child.status}`);
     }
-    return JSON.parse(stdout);
+    const contexts = JSON.parse(stdout)?.contexts ?? {};
+    return new Map(wanted.filter((id) => contexts[id]).map((id) => [id, contexts[id]]));
   } finally {
     rmSync(scratch, { recursive: true, force: true });
   }
+}
+
+export function currentHashes(root, id) {
+  const hashes = currentHashesMany(root, [id]).get(id);
+  if (!hashes) throw new Error(`${id}: judge returned no context hash`);
+  return hashes;
+}
+
+/** Pure half of queue-pending selection: a queued item still owes work when its
+ *  latest receipt is missing or no longer matches the current item and page
+ *  context. A stale receipt is real work — the repaired sibling page changed
+ *  the context the receipt was written against — so it is re-reviewed rather
+ *  than dropped. */
+export function pendingTerminalIds(ids, latest, hashes) {
+  return ids.filter((id) => !terminalResolutionIsCurrent(latest?.get?.(id), hashes?.get?.(id)));
+}
+
+/** Queue ids that still owe a terminal decision, in queue order. Hashes are
+ *  computed only for ids that already have a receipt. */
+export function pendingQueueIds(root, run, ids) {
+  const parsed = parseTerminalResolutions(join(root, terminalResolutionPath(run)), { allowMissing: true });
+  const recorded = ids.filter((id) => parsed.latest.has(id));
+  return pendingTerminalIds(ids, parsed.latest, currentHashesMany(root, recorded));
 }
 
 function initialFatalCycleErrors(root, run, cycles) {
@@ -354,6 +387,7 @@ function usage() {
   console.error('usage: node tools/step7-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|final-adjudicator --disposition repaired|accepted-after-review --basis-file research/<evidence> [--root <repo>] [--state-dir <dir>]');
   console.error('       final-adjudicator requires --group <label> --queue <research/...json> --source-status verified|familiar');
   console.error('       node tools/step7-terminal-resolution.mjs check --run <run> [--root <repo>] [--allow-missing]');
+  console.error('       node tools/step7-terminal-resolution.mjs queue-status --run <run> --queue <research/...json> [--root <repo>]');
   process.exit(2);
 }
 
@@ -362,9 +396,46 @@ function main() {
   const command = argv[0];
   const root = resolve(value(argv, '--root') || process.cwd());
   const run = value(argv, '--run');
-  if (!run || !['record', 'check'].includes(command)) usage();
+  if (!run || !['record', 'check', 'queue-status'].includes(command)) usage();
   const rel = terminalResolutionPath(run);
   const path = join(root, rel);
+
+  // A serial FA lane is expected to hit a frozen receipt whenever a later
+  // repair changes a shared page context. This reports exactly which earlier
+  // positions owe a reseal, in queue order, with the command that records it.
+  if (command === 'queue-status') {
+    const queuePath = value(argv, '--queue');
+    if (!relativeResearchPath(queuePath)) usage();
+    let queue;
+    try { queue = JSON.parse(readFileSync(join(root, queuePath), 'utf8')); }
+    catch (cause) { console.error(`cannot read final-adjudicator queue ${queuePath}: ${cause.message}`); process.exit(2); }
+    const parsed = parseTerminalResolutions(path, { allowMissing: true });
+    const rows = Array.isArray(queue?.items) ? queue.items : [];
+    const recorded = rows.map((item) => item?.id).filter((id) => parsed.latest.has(id));
+    let hashes;
+    try { hashes = currentHashesMany(root, recorded); }
+    catch (cause) { console.error(`cannot hash queued items: ${cause.message}`); process.exit(1); }
+    let pending = 0;
+    const reseals = [];
+    for (const item of rows) {
+      const latest = parsed.latest.get(item?.id);
+      const status = !latest ? 'unrecorded'
+        : terminalResolutionIsCurrent(latest, hashes.get(item.id)) ? 'current' : 'stale';
+      if (status !== 'current') pending += 1;
+      if (status === 'stale') {
+        const resealsSoFar = parsed.rows.filter((row) => row.id === item.id).length;
+        const evidenceRel = `research/${run}-${queue.dispatch_label}-${item.position}-${item.id}-reseal-${resealsSoFar}.md`;
+        reseals.push(`node tools/step7-terminal-resolution.mjs record --run ${run} --id ${item.id}`
+          + ` --resolved-by final-adjudicator --group ${queue.group} --queue ${queuePath}`
+          + ` --state-dir ${value(argv, '--state-dir') || queue.state_dir || '.autopilot'}`
+          + ` --disposition ${latest.disposition} --source-status verified --basis-file ${evidenceRel}`);
+      }
+      console.log(`${item.position}\t${status}\t${item.id}`);
+    }
+    console.log(`pending: ${pending} of ${rows.length}`);
+    for (const command of reseals) console.log(`RESEAL ${command}`);
+    return;
+  }
 
   if (command === 'check') {
     const parsed = parseTerminalResolutions(path, { allowMissing: argv.includes('--allow-missing') });
@@ -422,6 +493,15 @@ function main() {
             errors.push(`${row.id}: owner resolution rejected-item hash does not match the bound verdict`);
         } catch (cause) { errors.push(`${row.id}: cannot verify owner evidence (${cause.message})`); }
       }
+      // An escalation is a queue position, not a resolution: it is only honest
+      // while the rejected bytes are untouched.
+      if (row.disposition === 'escalated-to-owner') {
+        try {
+          const rejected = rejectedVerdict(root, run, row.id, row.failure_evidence);
+          if (rejected.item_sha256 !== row.item_sha256)
+            errors.push(`${row.id}: an escalated item must be unchanged from its rejected text; repair or accept it instead`);
+        } catch (cause) { errors.push(`${row.id}: cannot verify the escalated rejection binding (${cause.message})`); }
+      }
       if (row.resolved_by === 'final-adjudicator' && row.final_adjudicator) {
         const fa = row.final_adjudicator;
         try {
@@ -462,7 +542,10 @@ function main() {
         }
       } catch (cause) { errors.push(`${row.id}: ${cause.message}`); }
     }
-    console.log(`step7-terminal-resolution: ${parsed.latest.size} current resolution(s), ${errors.length} error(s)`);
+    const escalations = [...parsed.latest.values()]
+      .filter((row) => row.disposition === 'escalated-to-owner').length;
+    console.log(`step7-terminal-resolution: ${parsed.latest.size} current resolution(s), `
+      + `${escalations} owner escalation(s), ${errors.length} error(s)`);
     for (const error of errors) console.error(`ERROR ${error}`);
     process.exit(errors.length ? 1 : 0);
   }
@@ -545,6 +628,17 @@ function main() {
   const exhausted = terminalEvidence(root, run, id, value(argv, '--state-dir') || '.autopilot');
   const now = currentHashes(root, id);
   let ownerEvidence = null;
+  if (disposition === 'escalated-to-owner') {
+    if (resolvedBy !== 'final-adjudicator') {
+      console.error('ERROR only a final adjudicator may record an item as escalated to the owner');
+      process.exit(2);
+    }
+    const rejected = rejectedVerdict(root, run, id, exhausted.evidence);
+    if (now.item_sha256 !== rejected.item_sha256) {
+      console.error(`ERROR ${id}: an escalated item must keep its rejected text; repair or accept it instead`);
+      process.exit(2);
+    }
+  }
   if (resolvedBy === 'owner') {
     if (!['unadjudicated', 'open_fatal'].includes(exhausted.evidence.unresolved_as))
       throw new Error(`${id}: owner cannot replace a missing paid verdict with a terminal resolution`);

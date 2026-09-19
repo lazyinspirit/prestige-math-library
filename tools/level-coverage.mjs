@@ -492,6 +492,7 @@ const openFatalRows = [];     // exact current confirmed-fatal tuples for repair
 const judgeCoverage = [];
 const terminalResolved = [];
 const terminalSuperseded = [];
+const terminalEscalated = [];
 for (const id of judgePath ? judgeScope : []) {
   // An invalid certification is a certification hold, not a paid self-review
   // target. Keep closure false without manufacturing coverage or judge work.
@@ -538,6 +539,20 @@ for (const id of judgePath ? judgeScope : []) {
         item_sha256: currentItem,
       }, eligible.length > 0);
       if (status === 'current') {
+        // A recorded escalation holds its queue position open and is not
+        // closure: the item stays unresolved until the owner decides it.
+        if (terminal.disposition === 'escalated-to-owner') {
+          terminalEscalated.push({
+            id,
+            context_sha256: terminal.context_sha256,
+            item_sha256: terminal.item_sha256,
+            resolved_by: terminal.resolved_by,
+            disposition: terminal.disposition,
+          });
+          error('terminal-resolution-escalated',
+            `${id}: escalated to the owner by final adjudication and still unresolved`, id);
+          continue;
+        }
         terminalResolved.push({
           id,
           context_sha256: terminal.context_sha256,
@@ -616,6 +631,7 @@ if (outPath) {
     pairs_complete: judgeCoverage.length,
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     terminal_superseded: terminalSuperseded.sort((a, b) => a.id.localeCompare(b.id)),
+    terminal_escalated: terminalEscalated.sort((a, b) => a.id.localeCompare(b.id)),
     auditor_certified: [...auditorCertified.keys()].sort(),
     auditor_certification_blocked: auditorCertificationBlocked,
     needs_rejudge: needsRejudge.sort(),
