@@ -144,23 +144,8 @@ test('Step-7 fatal group adjudicator uses Sol xhigh', () => {
   assert.equal(row.provider_effort, 'xhigh');
 });
 
-test('Step 8 retains its lineup and every Step 9 agent uses DeepSeek Flash max', () => {
-  for (const s of stages.filter((candidate: any) => /^8-/.test(candidate.id))) {
-    for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
-      assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.terraHigh,
-        `${s.id}/${role}`);
-    }
-    assert.equal(selected(s, { role: 'tool', job: 'bookkeeping-mechanical' }), undefined,
-      `${s.id} changed a deterministic tool job into a model call`);
-  }
-  assert.equal(selected(stage('7-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }), undefined,
-    'Step 7 must retain its dedicated adjudication role');
-  assert.equal(selected(stage('8-scope'), { role: 'alpha', label: 'step8-lead', job: 'audit' }),
-    MODEL_PROFILE_NAMES.astraMedium);
-  const profile = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
-  assert.equal(profile.model, MODELS.astra.id);
-  assert.equal(profile.effort, 'medium');
-  for (const s of stages.filter((candidate: any) => /^9-/.test(candidate.id))) {
+test('every Step 8 and Step 9 agent uses DeepSeek Flash max', () => {
+  for (const s of stages.filter((candidate: any) => /^(?:8|9)-/.test(candidate.id))) {
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
       assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.deepseekFlashMax,
         `${s.id}/${role}`);
@@ -168,6 +153,13 @@ test('Step 8 retains its lineup and every Step 9 agent uses DeepSeek Flash max',
     assert.equal(selected(s, { role: 'tool', job: 'bookkeeping-mechanical' }), undefined,
       `${s.id} changed a deterministic tool job into a model call`);
   }
+  assert.equal(selected(stage('8-scope'), { role: 'alpha', label: 'step8-lead', job: 'audit' }),
+    MODEL_PROFILE_NAMES.deepseekFlashMax, 'the Step 8 lead no longer runs on the Astra lane');
+  assert.equal(selected(stage('7-adjudicate'), { role: 'alpha-adjudicate', job: 'adjudication' }), undefined,
+    'Step 7 must retain its dedicated adjudication role');
+  const profile = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax];
+  assert.equal(profile.provider, 'deepseek');
+  assert.equal(profile.effort, 'max');
 });
 
 test('the shared Step-3 authoring brief mandates authoritative web verification', () => {

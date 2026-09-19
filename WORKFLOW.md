@@ -43,12 +43,11 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 1 drift review; group Alpha | Sol / high |
 | Step 3a pair scope and Step 3b pair authors | DeepSeek V4.1 Flash / max |
 | Step 5a readers, refuters and adjudicators | DeepSeek V4.1 Flash / max |
-| Step 5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
+| Step 5b; Step 6 group readers; Step 8 and Step 9 agent lanes | DeepSeek V4.1 Flash / max |
 | Assignment | DeepSeek V4.1 Flash / max |
-| Ordinary Step 8 work | Terra / high |
 | Item judges | Terra / xhigh |
 | Step 7 adjudication | Sol / xhigh |
-| Step 7 final adjudication; Step 8 lead | Astra / medium |
+| Step 7 final adjudication | Astra / medium |
 
 tools/models.mjs owns profiles; stages override role defaults. Substituting a
 model requires explicit owner authorization; the owner authorized DeepSeek

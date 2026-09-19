@@ -42,8 +42,6 @@ const { step5Stages } = await import(
   `${STEP5_MODULE_URL.href}?v=${STEP5_MODULE_STAT.mtimeMs}:${STEP5_MODULE_STAT.size}`
 );
 
-const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
-const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
@@ -3343,10 +3341,11 @@ for (const stage of stages) {
       ...(previousGates?.(ctx) ?? [])];
   }
   if (/^(?:8|9)-/.test(stage.id)) {
-    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined
-      : stage.id === '8-scope' && plan.role === 'alpha' && plan.label === 'step8-lead'
-        ? MODEL_PROFILE_NAMES.astraMedium
-        : /^9-/.test(stage.id) ? DEEPSEEK_FLASH_MAX : TERRA_HIGH;
+    // Owner decision (2026-09-19): every agent lane in Steps 8 and 9 runs on
+    // the DeepSeek V4.1 Flash max lane, so the late-stage repair hooks and
+    // obligation re-dispatches cannot fall back to a Terra or Astra lane. The
+    // item-judge lineup is a separate lane and is unchanged.
+    stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined : DEEPSEEK_FLASH_MAX;
   }
 }
 
