@@ -125,13 +125,18 @@ recertifies what the repair invalidates, then retries the same gate.
 7.1 one Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs
 confirmed defects (including nonfatal defects) and identifies all downstream
 consumers; 7.2 three Sol
-xhigh owner repair agents resolve all relevant downstream effects across the
-whole library, including published items; 7.3 the orchestrator recertifies the
-complete repaired state in one pass after all writers drain. Then 7.4 Terra
+xhigh owner repair agents examine all downstream consumers across the whole
+library, including published items, and repair only consumers for which a change
+is absolutely necessary, using the smallest logically sufficient edit; sound
+consumers remain unchanged with an evidenced unaffected review. 7.3 the
+orchestrator verifies that every consumer was examined and every necessary
+repair completed, then recertifies the complete stable state in one pass after
+all writers drain. Then 7.4 Terra
 rejudges repaired items; 7.5 Sol xhigh adjudicators adjudicate and repair renewed
 rejections and identify downstream effects; 7.6 three Sol xhigh owner agents
-repair those effects; 7.7 the orchestrator recertifies everything in one stable
-pass. Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original
+examine those consumers and make only necessary minimal repairs; 7.7 the
+orchestrator verifies complete examination and necessary-repair closure, then
+recertifies everything in one stable pass. Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original
 frontier items divided by the immutable original frontier count is strictly
 less than 5%. Neither added items nor a shrinking queue changes the denominator.
 This threshold permits the final gate, never unresolved defects or uncertainty.

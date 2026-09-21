@@ -43,7 +43,10 @@ Identify every relevant downstream consumer throughout the library, including
 published items and consumers outside this run or batch. Inspect transitive
 dependencies, citations, proof uses, definitions and page interfaces. Give exact
 paths, affected clauses, required repairs or reasons no repair is needed.
-A mechanically discovered candidate is not automatically defective.
+A mechanically discovered candidate is not automatically defective. Route it
+for examination, but never prescribe an edit unless the supplier repair makes
+one absolutely necessary; identify the smallest logically sufficient change
+when it does.
 Route targets outside your write ownership to the three owner repair agents;
 do not overlap their writers or defer a relevant published consumer.
 Record newly discovered targets even when absent from the initial task.

@@ -12,16 +12,22 @@ authoritative sources when unsure, and check their actual arguments: sources,
 judges and prior reviewers can be mistaken. Record exact claims and URLs read.
 Never fabricate confidence, proof completion or checks.
 
-Repair all relevant downstream effects in your assignment throughout the whole
-library, including published consumers. This task explicitly authorizes those
-published repairs; publication alone is no reason to defer them. Trace changes
-through declared dependencies and actual proof/citation/page-interface uses.
-Assess candidates individually, recording sound/no-change dispositions where
-appropriate. Repair suppliers before consumers and preserve exact dependency
-paths and the mathematical reason for each change. Confirmed nonfatal defects
-also require repair; fatal classification controls only the convergence
-threshold. Reconcile contracts, page prerequisites and other metadata required
-by each repair.
+Examine every assigned downstream consumer throughout the whole library,
+including published consumers. Assignment means mandatory impact review, not
+automatic permission to rewrite: edit a consumer only when the repaired
+supplier actually makes its statement, proof, dependency, citation, contract,
+metadata or page interface logically invalid or inaccurate. If it remains
+sound, leave it byte-for-byte unchanged and record an `unaffected` review with
+the concrete reason. When a change is absolutely necessary, make the smallest
+logically sufficient repair; do not improve style, broaden scope or rewrite
+unaffected clauses. This task explicitly authorizes necessary published repairs;
+publication alone is no reason to defer them. Trace changes through declared
+dependencies and actual proof/citation/page-interface uses. Repair suppliers
+before consumers and preserve exact dependency paths and the mathematical
+reason and minimal extent of each change. Confirmed nonfatal defects also
+require repair; fatal classification controls only the convergence threshold.
+Reconcile only the contracts, page prerequisites and metadata actually
+invalidated by a necessary repair.
 
 Discover and report additional affected consumers, including ones outside the
 initial closure. Route another lane's items through the task's integration
@@ -80,8 +86,9 @@ recertifies the complete stable state once after all writers drain in 7.3/7.7,
 and recertifies changed items after 7.9. Only the engine dispatches Terra and
 controls repeats. The strict less-than-5% threshold permits the final gate;
 it never waives unresolved mathematics or downstream effects.
-ALL assigned repairs, including newly discovered relevant downstream effects,
-must be complete before certification. Report unfinished work explicitly; do
+ALL necessary repairs among the examined assignments, including newly discovered
+relevant downstream effects, must be complete before certification. Sound
+consumers require evidenced `unaffected` reviews, not edits. Report unfinished work explicitly; do
 not certify a partial repair wave merely because its workers have exited.
 If repairs reveal additional consumers, the engine continues this repair phase
 with fresh disjoint ownership until the additional work and its downstream

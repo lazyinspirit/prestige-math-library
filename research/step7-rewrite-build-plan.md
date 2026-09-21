@@ -12,17 +12,20 @@ it paused during this build. Do not run paid mathematical workers as tests.
    adjudicates logical validity, repairs all confirmed defects (including
    nonfatal defects), and identifies
    all downstream consumers.
-2. **7.2:** Three Sol xhigh owner repair agents resolve relevant downstream
-   effects across the whole library, including published items.
-3. **7.3:** After every writer drains, the orchestrator recertifies the complete
-   repaired state in one pass.
+2. **7.2:** Three Sol xhigh owner repair agents examine all downstream consumers
+   across the whole library, including published items. They leave sound
+   consumers unchanged and make only absolutely necessary, minimally sufficient
+   repairs.
+3. **7.3:** After every writer drains, the orchestrator verifies that all
+   consumers were examined and all necessary repairs are complete, then
+   recertifies the complete stable state in one pass.
 4. **7.4:** Terra rejudges the repaired items on that stable state.
 5. **7.5:** Sol xhigh adjudicators review and repair renewed rejections and
    identify all downstream consumers.
-6. **7.6:** Three Sol xhigh owner agents repair downstream effects, including
-   published consumers.
-7. **7.7:** The orchestrator recertifies everything in one pass after writers
-   drain. Repeat 7.4–7.7 until the latest adjudication round finds fatal defects
+6. **7.6:** Three Sol xhigh owner agents examine downstream consumers, including
+   published consumers, and make only necessary minimal repairs.
+7. **7.7:** The orchestrator verifies examination and necessary-repair closure,
+   then recertifies everything in one pass after writers drain. Repeat 7.4–7.7 until the latest adjudication round finds fatal defects
    in strictly less than 5% of the original frozen frontier. The denominator
    never shrinks; count unique fatal frontier items, not rejection rows.
 8. **7.8:** Run the complete gate battery.
