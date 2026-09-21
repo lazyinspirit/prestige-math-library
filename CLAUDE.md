@@ -150,6 +150,11 @@ certification. Keep ownership disjoint and bind
 every decision, verdict and certification to the current round and content.
 Missing evidence, stale certification or incomplete impact coverage blocks
 progress. Agents never manufacture verdicts or certify their own dispatches.
+Distinguish declared load-bearing dependencies from explanatory references.
+Examine direct reference candidates, but do not infer transitive mathematical
+dependence merely from chains of body links. Repair actual effects, reconcile
+missing load-bearing dependencies and report further consumers; unchanged sound
+reference consumers do not automatically spread impact to their own consumers.
 All three owner lanes run concurrently in 7.2, 7.6, 7.9 and every continuation
 pass, for current and future runs. Item ownership stays disjoint. Shared
 metadata edits use `tools/step7-shared-write-lock.mjs` for short read/edit/check

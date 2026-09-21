@@ -55,6 +55,10 @@ than 5% of the frozen original scope. Every confirmed defect, including nonfatal
 defects, requires repair; fatal classification controls only that threshold.
 New downstream work continues in the repair phase until complete, before
 certification.
+Declared dependencies propagate transitively; explanatory links remain direct
+examination candidates without automatically spreading impact through reference
+cycles. Necessary repairs restart propagation, and explicit worker discoveries
+always remain in scope.
 Batch adjudicators and all three owner agents may fully author new items for
 genuine unmet prerequisites only. Additions require unique IDs, registry/index
 and metadata registration, downstream repair closure, central certification and

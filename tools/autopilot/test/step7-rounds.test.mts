@@ -100,13 +100,36 @@ test('durable state preserves frozen frontier and detects concurrent or stale wr
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('library reader includes load-bearing frontmatter and body links but excludes external reference metadata', () => {
+test('library reader separates declared dependencies from reference candidates', () => {
   const dir = mkdtempSync(join(tmpdir(), 'step7-library-'));
   try {
     mkdirSync(join(dir, 'items'));
     writeFileSync(join(dir, 'items', 'item.md'), '---\nid: item\nstatus: published\ndeps: [supplier]\njustified_by: [contract]\nforward_refs: [forward]\nexternal_refs: [orientation]\n---\nUses [[body-supplier|result]].\n');
     const [item] = readLibraryItems(dir);
     assert.equal(item.published, true);
-    assert.deepEqual(item.deps, ['body-supplier', 'contract', 'forward', 'supplier']);
+    assert.deepEqual(item.deps, ['contract', 'forward', 'supplier']);
+    assert.deepEqual(item.references, ['body-supplier', 'orientation']);
+    assert.deepEqual(item.body_links, ['body-supplier']);
   } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('reference edges require examination but do not transitively flood explanatory cycles', () => {
+  const items = [
+    {id:'root',deps:[],aliases:['old-root']},
+    {id:'actual',deps:['old-root']},
+    {id:'leaf',deps:['actual']},
+    {id:'remark',deps:[],references:['old-root','definition']},
+    {id:'definition',deps:[],references:['remark']},
+    {id:'library',deps:['definition']},
+    {id:'leaf-reference',deps:[],references:['leaf']},
+    {id:'reference-user',deps:['remark']},
+  ];
+  assert.deepEqual(discoverDownstream({items,repairedIds:['root']}).map((r:any)=>r.id),
+    ['actual','leaf','leaf-reference','remark']);
+  // A repaired reference consumer becomes a genuine new propagation seed.
+  assert.deepEqual(discoverDownstream({items,repairedIds:['remark']}).map((r:any)=>r.id),
+    ['definition','reference-user']);
+  // Promoting an actual proof use to a declared edge also propagates it.
+  items[3].deps=['old-root'];
+  assert.ok(discoverDownstream({items,repairedIds:['root']}).some((r:any)=>r.id==='reference-user'));
 });

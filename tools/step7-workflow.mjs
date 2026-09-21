@@ -72,17 +72,51 @@ function validVerdicts(rows) {
   for(const row of rows)requireValue(typeof row.id==='string'&&typeof row.model==='string'&&/^[a-f0-9]{64}$/.test(row.context_sha256??'')&&[true,false,null].includes(row.keep),'malformed frozen judge verdict');
   return rows;
 }
-function dependencyReviewHasher(items,current) {
-  const graph=new Map(items.map(row=>[row.id,row.deps])),aliases=new Map();
+function reviewContexts(items) {
+  const graph=new Map(items.map(row=>[row.id,row])),aliases=new Map();
   for(const row of items)for(const alias of row.aliases??[])if(!graph.has(alias))aliases.set(alias,row.id);
-  return id=>{
-    const seen=new Set(),queue=[id];
+  const canonical=id=>aliases.get(id)??id;
+  function closure(id,legacy=false) {
+    const seen=new Set(),queue=[id,...(legacy?[]:graph.get(canonical(id))?.references??[])];
     for(let index=0;index<queue.length;index++){
-      const next=aliases.get(queue[index])??queue[index];if(seen.has(next))continue;seen.add(next);
-      queue.push(...(graph.get(next)??[]));
+      const next=canonical(queue[index]);if(seen.has(next))continue;seen.add(next);
+      const row=graph.get(next);
+      queue.push(...(row?.deps??[]),...(legacy?row?.body_links??[]:[]));
     }
-    return digest([...seen].sort().map(supplier=>[supplier,current[supplier]??null]));
+    return [...seen].sort();
+  }
+  const hash=(ids,current,legacy=false)=>{
+    const carriers=ids.map(supplier=>[supplier,current[supplier]??null]);
+    return digest(legacy?carriers:{version:2,carriers});
   };
+  return {hash:(id,current)=>hash(closure(id),current),matches:(row,current,snapshot)=>{
+    if(!row||row.post_sha256!==current[row.id])return false;
+    const ids=closure(row.id),now=hash(ids,current);
+    if(row.review_context_sha256===now)return true;
+    // Legacy receipts remain immutable. Reuse only if their original broad
+    // context is exactly reconstructible and covered every currently required
+    // carrier. Narrowing a graph never licenses refreshing a stale review.
+    const legacyIds=closure(row.id,true),legacySet=new Set(legacyIds);
+    if(ids.some(id=>!legacySet.has(id)))return false;
+    if(row.review_context_sha256===hash(legacyIds,current,true))return true;
+    return Boolean(snapshot&&row.post_sha256===snapshot[row.id]
+      &&row.review_context_sha256===hash(legacyIds,snapshot,true)
+      &&now===hash(ids,snapshot));
+  }};
+}
+function dependencyReviewHasher(items,current) {
+  const contexts=reviewContexts(items);
+  return id=>contexts.hash(id,current);
+}
+
+export function reviewMatchesCurrent(items,current,row,snapshot) {
+  return reviewContexts(items).matches(row,current,snapshot);
+}
+
+function nextImpactPhase(phase,progress) {
+  const phases=[...progress.passes,...(progress.superseded??[]).map(row=>row.phase)];
+  const highest=Math.max(1,...phases.map(value=>Number(value.match(/-pass-(\d+)$/)?.[1]??1)));
+  return `${phase}-pass-${highest+1}`;
 }
 
 /** Workers call this read-only helper immediately after the mathematical
@@ -147,7 +181,7 @@ function writeTasks(root,pack,mode) {
       'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
       'Read all cited suppliers and relevant consumers. Repair confirmed fatal defects fully. Identify all downstream consumers, including published items.',
       mode==='adjudicate' ? 'Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.' :
-        'Examine every assigned downstream item, including published items. Assignment requires impact review, not an edit. Leave a sound consumer byte-for-byte unchanged and explain why it is unaffected. Repair only when the supplier change makes the consumer logically invalid or inaccurate, and then make the smallest logically sufficient change without stylistic or unrelated rewriting. Work supplier-before-consumer. Necessary published repairs are authorized by the owner for this impact wave. Reconcile only proof contracts, dependencies, page metadata and publication audit evidence actually invalidated by a necessary repair.',
+        'Examine every assigned downstream item, including published items. Assignment requires impact review, not an edit. Leave a sound consumer byte-for-byte unchanged and explain why it is unaffected. Repair only when the supplier change makes the consumer logically invalid or inaccurate, and then make the smallest logically sufficient change without stylistic or unrelated rewriting. Work supplier-before-consumer. Necessary published repairs are authorized by the owner for this impact wave. Reconcile only proof contracts, dependencies, page metadata and publication audit evidence actually invalidated by a necessary repair. Reference-only candidates require examination of the actual cited clause, not automatic transitive propagation; declare genuine missing load-bearing dependencies and report downstream effects of necessary repairs.',
       `Return JSON {run,phase,round,unit,input_sha256:"${digest(pack)}",decisions:[],reviews:[],created_items:[],downstream:[]}. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters); unresolved uncertainty blocks completion.`,
       `Immediately after completing each mathematical review, before editing another supplier, run node tools/step7-workflow.mjs review-contexts --run ${pack.run} --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.`,
       mode==='adjudicate' ? 'Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.' :
@@ -293,6 +327,7 @@ export function advanceImpact(root,run,phase,round) {
   requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid base owner phase');
   const path=impactProgressPath(root,run,phase,round);
   const progress=existsSync(path)?read(path):{version:2,run,phase,round,passes:[phase],activePhase:phase,complete:false};
+  for(const row of progress.superseded??[])verifyEvidence(row.evidence);
   if(progress.complete)return {complete:true,phase,round,passes:progress.passes};
   const active=readPack(root,run,progress.activePhase,round);
   if(active.units.some(unit=>!existsSync(workerReport(root,run,active.phase,round,unit))))return {complete:false,pack:active,passes:progress.passes};
@@ -313,10 +348,11 @@ export function advanceImpact(root,run,phase,round) {
   for(const receipt of [sourceReceipt,...completed])for(const id of receipt?.downstream??[])required.add(id);
   const sourceReviews=new Map((sourceReceipt?.reviews??[]).map(row=>[row.id,row]));
   for(const id of sourceReviews.keys())required.add(id);
-  const contextHash=dependencyReviewHasher(items,current);
-  const pending=[...required].filter(id=>{const row=reviews.get(id)??sourceReviews.get(id);return row?.post_sha256!==current[id]||row?.review_context_sha256!==contextHash(id);}).sort();
+  const contexts=reviewContexts(items);
+  const snapshots=new Map([sourceReceipt,...completed].filter(Boolean).flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
+  const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
   if(pending.length) {
-    const nextPhase=`${phase}-pass-${progress.passes.length+1}`;
+    const nextPhase=nextImpactPhase(phase,progress);
     const assignments={'1':[],'2':[],'3':[]};
     const {order,cycles}=orderImpacts(items,pending);
     order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));

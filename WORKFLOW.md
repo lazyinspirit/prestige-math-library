@@ -364,6 +364,20 @@ Downstream discovery includes transitive declared dependencies and actual uses
 in proofs, citations and page interfaces throughout the library. Record exact
 dependency paths and mathematical effects, distinguish candidates from confirmed
 repair targets, and reconcile newly discovered consumers before certification.
+The graph keeps declared `deps`, `justified_by` and `forward_refs` separate from
+body links and `external_refs`. Declared dependencies propagate transitively.
+References to a repaired item or its declared transitive consumers require
+examination, but a reference-only edge terminates automatic propagation.
+It does not declare the reference irrelevant: owners check the actual use,
+repair genuine effects and reconcile missing load-bearing dependencies. A
+repaired reference consumer becomes a new propagation source. This prevents
+explanatory reference cycles from turning a local correction into a whole-library
+review while retaining direct-reference and explicit-discovery coverage.
+Review contexts follow the same rule: the item, its direct references and their
+declared prerequisite closures, never recursively expanded explanatory links.
+Legacy review evidence is not rewritten. It may be reused only when its original
+broader hash is exactly reconstructible, covered every now-required carrier,
+and those carriers remain unchanged; otherwise a genuine new review is required.
 Worker-reported consumer IDs enter owner assignments even when the dependency
 graph has no edge to them. Continuations retain those IDs until a current review
 covers them; a sound consumer closes unchanged, and only necessary minimal
@@ -468,6 +482,17 @@ source evidence; it cannot overwrite repairs or reuse an active target.
 Migration authorizes no new frontier, publication or push.
 
 ### Run controls
+
+To recover an interrupted, uncollected owner continuation after fixing impact
+tracking, pause and stop the controller, then run
+`node tools/step7-impact-recovery.mjs --run RUN --state-dir .autopilot/RUN
+--reason "Explanation of the corrected routing defect"`.
+The guarded operation refuses active work, completed evidence or item changes
+since the pending assignment. It preserves old tasks and failed dispatches,
+records their supersession, and recomputes a fresh monotonically numbered pass
+from completed evidence. It never overwrites successful reviews, certifies
+items, or resumes automatically. Resume/start the controller only after checking
+the corrected assignments. Repeating the same recovery reason is idempotent.
 
 Always use the exact run and state directory:
 

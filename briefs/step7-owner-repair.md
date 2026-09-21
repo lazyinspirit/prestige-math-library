@@ -44,6 +44,16 @@ require repair; fatal classification controls only the convergence threshold.
 Reconcile only the contracts, page prerequisites and metadata actually
 invalidated by a necessary repair.
 
+The impact graph distinguishes declared load-bearing dependencies from body
+links and external references. Declared dependencies propagate transitively;
+reference-only edges require examination but do not automatically propagate
+past an unchanged reference consumer. Examine the actual cited clause: explain
+why it is unaffected, or minimally repair it and identify its consumers. If a
+reference is genuinely load-bearing but undeclared, reconcile the necessary
+dependency metadata and downstream effects. Never dismiss a real proof use
+merely because it was discovered through a body link. A repaired candidate
+becomes a new propagation source before certification.
+
 Discover and report additional affected consumers, including ones outside the
 initial closure. Route another lane's items through the task's integration
 mechanism; never write another agent's files. Missing ownership or a shared-file

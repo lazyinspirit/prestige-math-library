@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync,appendFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
-import { initialize,prepareAdjudication,prepareImpact,validateReports,collect,certify,judge,checkWorkflow,verifyCertification,workflowDir,workerReport,workerLabel,digest,advanceImpact,impactPasses,reviewContextHashes } from '../../step7-workflow.mjs';
+import { initialize,prepareAdjudication,prepareImpact,validateReports,collect,certify,judge,checkWorkflow,verifyCertification,workflowDir,workerReport,workerLabel,digest,advanceImpact,impactPasses,reviewContextHashes,reviewMatchesCurrent } from '../../step7-workflow.mjs';
 import {itemHashGuard,itemHashJudge} from '../../item-hash.mjs';
 import {MODELS} from '../../models.mjs';
 import {writeAuditorCreatedBaseline,certifyAuditorCreatedItems} from '../../auditor-created-items.mjs';
@@ -11,6 +11,63 @@ import {writeAuditorCreatedBaseline,certifyAuditorCreatedItems} from '../../audi
 const run='fixture', reason='The proof and its supplier hypotheses were checked for logical validity.', h='a'.repeat(64);
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
+
+test('legacy context reuse requires exact historical binding and unchanged typed context',()=>{
+  const items=[
+    {id:'consumer',deps:['supplier'],references:['remark'],body_links:['remark']},
+    {id:'supplier',deps:[],references:[],body_links:[]},
+    {id:'remark',deps:[],references:['orientation'],body_links:['orientation']},
+    {id:'orientation',deps:[],references:[],body_links:[]},
+  ];
+  const snapshot={consumer:'c',supplier:'s',remark:'r',orientation:'o'};
+  const row={id:'consumer',post_sha256:'c',review_context_sha256:digest(Object.entries(snapshot).sort(([a],[b])=>a.localeCompare(b)))};
+  assert.equal(reviewMatchesCurrent(items,snapshot,row,snapshot),true);
+  assert.equal(reviewMatchesCurrent(items,{...snapshot,orientation:'changed'},row,snapshot),true);
+  assert.equal(reviewMatchesCurrent(items,{...snapshot,supplier:'changed'},row,snapshot),false);
+  assert.equal(reviewMatchesCurrent(items,{...snapshot,remark:'changed'},row,snapshot),false);
+  assert.equal(reviewMatchesCurrent(items,{...snapshot,consumer:'changed'},row,snapshot),false);
+  assert.equal(reviewMatchesCurrent(items,snapshot,{...row,review_context_sha256:h},snapshot),false);
+  assert.equal(reviewMatchesCurrent(items,{...snapshot,orientation:'changed'},row,undefined),false);
+  // A reference not covered by the old graph cannot inherit a legacy review.
+  const expanded=items.map(item=>item.id==='consumer'?{...item,references:['remark','new-source']}:item);
+  assert.equal(reviewMatchesCurrent(expanded,{...snapshot,'new-source':'n'},row,snapshot),false);
+});
+
+test('review contexts stop at reference edges but retain declared prerequisite closure',()=>{
+  const f=fixture();try{
+    item(f.root,'thm-item-0','See [[thm-item-1]].');
+    item(f.root,'thm-item-1','See [[thm-item-2]].',['thm-item-3']);
+    const before=reviewContextHashes(f.root,['thm-item-0'])['thm-item-0'];
+    item(f.root,'thm-item-2','Changed explanatory reference behind another reference.');
+    assert.deepEqual(reviewContextHashes(f.root,['thm-item-0'])['thm-item-0'],before);
+    item(f.root,'thm-item-3','Changed actual prerequisite of referenced supplier.');
+    assert.notEqual(reviewContextHashes(f.root,['thm-item-0'])['thm-item-0'].review_context_sha256,before.review_context_sha256);
+  }finally{f.cleanup();}
+});
+
+test('a reference candidate closes unchanged, or propagates after necessary repair before certification',()=>{
+  for(const repair of [false,true]){
+    const f=fixture();try{
+      item(f.root,'thm-reference','Orientation [[thm-item-0]].',[],true);
+      item(f.root,'thm-reference-consumer','Uses reference result.',['thm-reference'],true);
+      const adjudicate=prepareAdjudication(f.root,run,'initial',1);
+      item(f.root,'thm-item-0','Repaired root.');reports(f.root,adjudicate,{},['thm-published-consumer','thm-reference']);
+      const owners=prepareImpact(f.root,run,'impact-initial',1);
+      assert.ok(Object.values(owners.assignments).flat().includes('thm-reference'));
+      assert.equal(Object.values(owners.assignments).flat().includes('thm-reference-consumer'),false);
+      if(repair)item(f.root,'thm-reference','Corrected orientation [[thm-item-0]].',[],true);
+      reports(f.root,owners);
+      const next=advanceImpact(f.root,run,'impact-initial',1);
+      if(repair){
+        assert.equal(next.complete,false);
+        assert.deepEqual(Object.values(next.pack.assignments).flat(),['thm-reference-consumer']);
+        assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:contexts}),/continuation/);
+        reports(f.root,next.pack);
+      }else assert.equal(next.complete,true);
+      certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+    }finally{f.cleanup();}
+  }
+});
 function item(root:string,id:string,body='Original proof.',deps:string[]=[],published=false,kind='theorem') {
   writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: ${kind}\nstatus: ${published?'published':'draft'}\ndeps: [${deps.join(', ')}]\n---\n${body}\n`);
 }

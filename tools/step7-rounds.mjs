@@ -37,9 +37,9 @@ export function validateFrontier(frontier) {
   return rebuilt;
 }
 
-/** Read every item, including published and off-frontier items. Explicit
- * dependency interfaces and body links both enter the conservative impact graph.
- * External reference metadata does not establish a proof dependency. */
+/** Declared dependencies propagate transitively. Other links are examination
+ * candidates, not proof-dependency declarations. Keep them separate so an
+ * explanatory link cannot turn a reference cycle into library-wide impact. */
 export function readLibraryItems(repo) {
   return readdirSync(join(repo, 'items')).filter((name) => name.endsWith('.md')).sort().map((name) => {
     const text = readFileSync(join(repo, 'items', name), 'utf8');
@@ -51,7 +51,9 @@ export function readLibraryItems(repo) {
     requireValue(id === name.slice(0, -3), `item id mismatch: ${name}`);
     const body = text.slice(match[0].length);
     const links = [...body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map((m) => m[1]);
-    return { id, deps: unique([...frontmatterList(fm, 'deps'), ...frontmatterList(fm, 'justified_by'), ...frontmatterList(fm, 'forward_refs'), ...links]), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text) };
+    const deps = unique([...frontmatterList(fm, 'deps'), ...frontmatterList(fm, 'justified_by'), ...frontmatterList(fm, 'forward_refs')]);
+    const references = unique([...links, ...frontmatterList(fm, 'external_refs')]).filter(id => !deps.includes(id));
+    return { id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text) };
   });
 }
 
@@ -65,17 +67,22 @@ export function discoverDownstream({ items, repairedIds }) {
     requireValue(!aliases.has(alias) || aliases.get(alias) === item.id, `ambiguous item alias: ${alias}`);
     aliases.set(alias, item.id);
   }
-  const consumers = new Map();
+  const consumers = new Map(), references = new Map();
   for (const item of items) for (const dep of item.deps ?? []) {
     const supplier = aliases.get(dep) ?? dep;
     if (!consumers.has(supplier)) consumers.set(supplier, new Set());
     consumers.get(supplier).add(item.id);
   }
+  for (const item of items) for (const ref of item.references ?? []) {
+    const supplier = aliases.get(ref) ?? ref;
+    if (!references.has(supplier)) references.set(supplier, new Set());
+    references.get(supplier).add(item.id);
+  }
   const roots = unique(repairedIds);
   for (const id of roots) requireValue(byId.has(id), `repaired item missing: ${id}`);
   const impacts = new Map();
   for (const root of roots) {
-    const queue = [[root]], visited = new Set([root]);
+    const queue = [[root]], visited = new Set([root]), paths = new Map();
     for (let i = 0; i < queue.length; i++) {
       const path = queue[i];
       for (const id of [...(consumers.get(path.at(-1)) ?? [])].sort()) {
@@ -83,10 +90,19 @@ export function discoverDownstream({ items, repairedIds }) {
         visited.add(id);
         const next = [...path, id];
         queue.push(next);
-        if (!impacts.has(id)) impacts.set(id, { id, published: Boolean(byId.get(id).published), suppliers: [], paths: [] });
-        impacts.get(id).suppliers.push(root);
-        impacts.get(id).paths.push(next);
+        paths.set(id, next);
       }
+    }
+    // Examine references to the root or a declared transitive consumer, but
+    // never traverse through a reference-only candidate. A repair to that
+    // candidate makes it a new root on the next closure pass.
+    for (const path of queue) for (const id of [...(references.get(path.at(-1)) ?? [])].sort()) {
+      if (id !== root && !paths.has(id)) paths.set(id, [...path, id]);
+    }
+    for (const [id, path] of paths) {
+      if (!impacts.has(id)) impacts.set(id, { id, published: Boolean(byId.get(id).published), suppliers: [], paths: [] });
+      impacts.get(id).suppliers.push(root);
+      impacts.get(id).paths.push(path);
     }
   }
   return [...impacts.values()].sort((a, b) => a.id.localeCompare(b.id));
