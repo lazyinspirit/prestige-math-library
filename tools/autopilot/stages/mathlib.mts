@@ -930,7 +930,7 @@ const scopeDecisionsGate = (ctx) => gate('scope-decisions', ['node', 'tools/scop
   'check', '--run', ctx.run]);
 
 const step7GuardGate = (ctx) => gate('step7-guard', ['node', 'tools/step7-guard.mjs',
-  '--touches', touchesPath(ctx), '--baseline', 'pre-step7',
+  '--touches', touchesPath(ctx), '--baseline', 'pre-step7-v2',
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
   '--scope', `research/${ctx.run}-step7-scope.json`,
@@ -1904,7 +1904,7 @@ export const stages = [
       job: 'bookkeeping-mechanical',
       covers: ['all'],
       argv: ['node', 'tools/stage-touch-baseline.mjs', '--run', ctx.run, '--step', '7',
-        '--touches', touchesPath(ctx), '--label', 'pre-step7'],
+        '--touches', touchesPath(ctx), '--label', 'pre-step7-v2'],
     }],
     gatesWaived: 'A snapshot has nothing to check beyond its own existence; it is the baseline '
       + 'the step-7 guard measures the next stage against.',
