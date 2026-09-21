@@ -106,6 +106,9 @@ test('an owner may author a missing definition and the next Terra wave includes 
 test('all three owners review published downstreams before single stable, idempotent certification',()=>{
   const f=fixture();try {
     const pack=initial(f.root,f.ids);assert.equal(pack.units.length,3);assert.ok(Object.values(pack.assignments).flat().includes('thm-published-consumer'));
+    const task=readFileSync(join(workflowDir(f.root,run),`${workerLabel(pack.phase,pack.round,'1')}.task.md`),'utf8');
+    assert.match(task,/Assignment requires impact review, not an edit/);
+    assert.match(task,/smallest logically sufficient change/);
     item(f.root,'thm-published-consumer','Updated published proof.',['thm-item-0'],true);reports(f.root,pack);
     const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     assert.ok(cert.changed.includes('thm-published-consumer'));assert.equal(cert.items.length,2);
