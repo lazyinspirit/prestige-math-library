@@ -61,6 +61,7 @@ import { verdictIsCurrent } from './judge-currency.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
 import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+import { loadStep7ClosureCertification, currentStep7Certification, stripStep7JudgeStamp } from './step7-certification-consumer.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -131,6 +132,9 @@ const ids = manifestsArg
   })();
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
+let step7Certificate;
+try { step7Certificate = loadStep7ClosureCertification(process.cwd(), value('--run'), ledgerPath); }
+catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
 const auditorRows = new Map();
 {
   let loaded;
@@ -256,6 +260,20 @@ for (const id of ids) {
     continue;
   }
   const text = readFileSync(file, 'utf8');
+  if (step7Certificate?.items.some(row => row.id === id)) {
+    let certified;
+    try { certified = currentStep7Certification(step7Certificate, id, text, contextHash(id)); }
+    catch (cause) { problems.push(`${id}: cannot verify Step-7 certification — ${cause.message}`); continue; }
+    if (certified) {
+      const cleaned = stripStep7JudgeStamp(text);
+      const stale = cleaned !== text;
+      if (stale && apply) writeFileSync(file, cleaned);
+      if (stale && verify) problems.push(`${id}: a judge pass block sits on a centrally certified Step-7 item`);
+      result.skipped.push({ id, reason: 'step7-centrally-certified', round: step7Certificate.round,
+        ...(stale ? { stripped_stale_pass: apply } : {}) });
+      continue;
+    }
+  }
   // `proved_here: false` is an explicit record that this library supplies no
   // proof. The paired lanes may still have checked citation fidelity and the
   // honesty of that boundary, but `verification.judge` means a local proof

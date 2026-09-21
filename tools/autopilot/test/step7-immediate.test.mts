@@ -52,10 +52,14 @@ test('handoff never accepts an old context or another item verdict', () => {
   assert.equal(itemVerdict(rows,'missing',hashes),undefined);
 });
 
-test('Step 7 has no immediate handoff hook and permits one terminal pass', () => {
-  const adjudicate:any=stages.find(s=>s.id==='7-adjudicate');
-  const terminal:any=stages.find(s=>s.id==='7-rejudge');
-  assert.equal(adjudicate.onProgress,undefined);
-  assert.equal(terminal.maxFixRounds,1);
-  assert.equal(terminal.terminalFixBudget,true);
+test('Step 7 drains repair writers before central certification and repeat routing', () => {
+  const byId=(id:string):any=>stages.find(s=>s.id===id);
+  for (const id of ['7.1-adjudicate','7.2-impact','7.5-adjudicate','7.6-impact','7.9-repair']) {
+    if(['7.2-impact','7.6-impact','7.9-repair'].includes(id))assert.equal(typeof byId(id).onProgress,'function');
+    else assert.equal(byId(id).onProgress,undefined);
+    assert.equal(byId(id).pipeline,undefined);
+  }
+  assert.deepEqual(byId('7.7-certify').routeTargets,['7.4-rejudge']);
+  assert.deepEqual(byId('7.10-gate').routeTargets,['7.9-repair']);
+  assert.equal(byId('7-rejudge'),undefined);
 });

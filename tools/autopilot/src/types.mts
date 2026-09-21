@@ -23,6 +23,11 @@ export interface Ctx {
   dispatchDir: string;
   coversMap?: Record<string, Unit[]>;
   config?: Config;
+  /** Durable execution identity, initially 1; repeated stages must scope their
+   * labels, result matchers and artifacts to this number. */
+  stageRounds?: Record<string, number>;
+  /** Latest routed failure for each gate stage, retained through repeat resets. */
+  stageFailures?: Record<string, GateResult>;
 }
 
 /**
@@ -96,6 +101,14 @@ export interface GateResult {
 export interface Stage {
   id: string;
   label: string;
+  /** Explicit engine-controlled branch, evaluated after the full gate battery
+   * with all writers drained. A failed gate may route only through this opt-in
+   * API; ordinary stages retain the configured owner-hold policy. This callback
+   * must be read-only: the executor atomically records the transition itself. */
+  route?: (args: { ctx: Ctx; outcome: 'passed' | 'failed'; failure?: GateResult }) =>
+    { next: string } | null;
+  /** Every possible route target; validated before starting the workflow. */
+  routeTargets?: string[];
   /**
    * OVERLAP GROUP. A maximal run of CONSECUTIVE stages carrying the same
    * `pipeline` name is executed with per-unit progression: a unit may be
@@ -291,6 +304,8 @@ export interface StageState {
    *  fires; the hook receives the PREVIOUS stamp as `prevRoundAt`. */
   lastRepairAt?: string | null;
   skipped?: boolean;
+  /** A routed failure is complete for scheduling, never a gate pass. */
+  routedTo?: string;
 }
 
 export interface Blocker {
@@ -311,6 +326,10 @@ export interface StateData {
   stage: string | null;
   dispatches: Record<string, DispatchRecord>;
   stages: Record<string, StageState>;
+  stageRounds?: Record<string, number>;
+  transitions?: Array<{ from: string; to: string; round: number;
+    outcome: 'passed' | 'failed'; at: string; failure?: GateResult }>;
+  stageFailures?: Record<string, GateResult>;
   blockers: Blocker[];
   lastReportAt: string | null;
   paused: boolean;

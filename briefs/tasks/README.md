@@ -2,7 +2,9 @@
 
 `tools/run-tasks.mjs` renders every Markdown file here except this README to
 `research/<run>-<template>.task.md`; `tools/step7-scope.mjs` separately composes
-the Step 6/7 group tasks. The live stage table is the selection authority.
+the historical Step 6/7 group tasks. Current Step-7 round tasks come from
+`tools/step7-workflow.mjs`, with `briefs/step7-adjudicator.md` and
+`briefs/step7-owner-repair.md`. The live stage table is the selection authority.
 
 Templates contain only stage-specific inputs, write authority, required output,
 and focused gate work. Role-wide conduct and mathematical standards belong in

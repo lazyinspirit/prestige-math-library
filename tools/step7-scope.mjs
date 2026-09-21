@@ -55,6 +55,7 @@ import { resolveLineup } from './models.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { validateCodexOutput } from './codex-output-schema.mjs';
 import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
+import { loadStep7ClosureCertification, currentStep7Certification } from './step7-certification-consumer.mjs';
 import {
   exactSetProblems,
   loadStep7JudgeEvidence,
@@ -695,14 +696,31 @@ if (mode === 'digests') {
 if (mode === 'published') {
   const rows = readJsonl(R('research', `${run}-step7-published-repairs.jsonl`));
   const bad = [];
+  let step7Certificate = null;
+  try { step7Certificate = loadStep7ClosureCertification(REPO, run); }
+  catch (cause) { bad.push(cause.message); }
   const repaired = rows.filter((r) => r.kind === 'repaired');
   const latestRepaired = new Map();
   for (const row of repaired) if (typeof row.id === 'string') latestRepaired.set(row.id, row);
+  // Central owner waves can discover published consumers absent from the old
+  // repair ledger. Check their current certification too, without relabeling a
+  // reviewed-but-unaffected item as a mathematical repair.
+  const centrallyReviewedPublished = [];
+  for (const row of step7Certificate?.items ?? []) {
+    const path = R('items', `${row.id}.md`);
+    if (!existsSync(path)) { bad.push(`certified item missing: ${row.id}`); continue; }
+    const text = readFileSync(path, 'utf8');
+    const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text)?.[1] ?? '';
+    if (!/^status:[ \t]*["']?published["']?[ \t]*$/m.test(frontmatter)) continue;
+    centrallyReviewedPublished.push(row.id);
+    if (!latestRepaired.has(row.id)) latestRepaired.set(row.id, { id: row.id, kind: 'step7-certified' });
+  }
   const escalated = rows.filter((r) => r.kind === 'escalated');
   const receiptPath = opt('out');
   const pending = { version: 1, run, repaired: [...new Set(repaired.map((row) => row.id).filter(Boolean))],
     needs_rejudge: [], unadjudicated_rows: [], open_fatal: [], open_fatal_rows: [],
-    terminal_resolved: [], escalations: escalated };
+    terminal_resolved: [], step7_certified: [], centrally_reviewed_published: centrallyReviewedPublished,
+    escalations: escalated };
   const terminal = parseTerminalResolutions(terminalPath, { allowMissing: true });
   bad.push(...terminal.errors);
 
@@ -739,6 +757,10 @@ if (mode === 'published') {
     if (!existsSync(p)) { bad.push(`repaired row names \`${r.id}\`, which is not an item on disk`); continue; }
     const now = currentHashes.get(r.id);
     if (!now) continue;
+    if (currentStep7Certification(step7Certificate, r.id, readFileSync(p, 'utf8'), now.context)) {
+      pending.step7_certified.push({ id: r.id, round: step7Certificate.round, phase: step7Certificate.phase });
+      continue;
+    }
     const terminalRow = terminal.latest.get(r.id);
     if (terminalRow) {
       if (!terminalResolutionIsCurrent(terminalRow, {

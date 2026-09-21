@@ -1,6 +1,11 @@
-# Step 7 FA task fallback
+# Historical Step-7 final-adjudicator fallback
 
-This fallback is not a work queue. A Final Adjudicator must receive a generated
-`research/RUN-step7-fa-GROUP-round-N.task.md` file containing an exact,
-ordered item queue. If this file is the only task supplied, stop without editing
-and report that the mechanical FA queue is missing.
+Historical compatibility task only. This fallback is not a work queue and grants
+no authority to edit content or issue receipts. Retain historical queues and
+decisions as evidence; the terminal final-adjudicator lane is retired.
+
+Current rounds use `briefs/step7-adjudicator.md`,
+`briefs/step7-owner-repair.md` and generated tasks from
+`tools/step7-workflow.mjs`. Follow WORKFLOW.md's 7.1–7.10 protocol:
+all confirmed defects and downstream effects must be repaired before central
+certification, with further repair-phase continuation whenever needed.

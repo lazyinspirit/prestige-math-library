@@ -1,17 +1,11 @@
-# Step 7 — repair a guard violation, `{{run}}`
+# Historical Step-7 guard recovery, `{{run}}`
 
-The exact repair envelope above supplies the guard output, assigned ids, and
-run or published ownership. Diagnose only those ids.
+Historical compatibility task only. This template grants no current edit,
+reversion or certification authority. Preserve historical guard evidence;
+do not restore content or alter decisions using this obsolete task.
 
-For `nonfatal-edit`, restore the pre-Step-7 mathematics when the edit was not
-licensed. Correct an adjudication or hash record only when an already-existing
-exact rejection was genuinely adjudicated `confirmed_fatal`; never create or
-upgrade a verdict after the edit merely to justify it. For a Step-7 creation or
-deletion, restore the baseline inventory if that can be done exactly from
-durable evidence. Otherwise make no speculative change and report the precise
-blocker.
-
-Run `step7-guard` after the narrow correction. Do not start a judge sweep,
-change another group's records, or perform unrelated repair or polish. Return
-the guard code, ids, evidence establishing the correction, files changed,
-focused result, and blockers.
+Current guard failures belong to the generated owner repair task under
+WORKFLOW.md's 7.1–7.10 protocol. Use `briefs/step7-owner-repair.md` and
+`tools/step7-workflow.mjs`. Resolve every confirmed defect, complete all
+downstream effects and wait for all writers to drain before central
+recertification. The engine reruns the complete gate battery.

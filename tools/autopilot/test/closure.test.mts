@@ -70,12 +70,8 @@ test('the real mathlib table validates', async () => {
 });
 
 test('every post-judge mathematical window ends at an exact closure boundary', async () => {
-  // Requiring the same expensive closure gate on every mechanical/documentary
-  // stage made 7-scope repeat Step 6 over unchanged bytes and made 7-close ask
-  // for a Step-8 audit receipt that did not exist. Pin the safety property
-  // instead: every stage that can alter Step-7 mathematics is closed before the
-  // next window, and documentary finalisation is followed by one hard currency
-  // stage with no repair hook capable of opening a fourth cycle.
+  // Writers drain at stage barriers; each repair wave is centrally certified
+  // before judgment or the complete gate battery can consume its content.
   const mod = await import('../stages/mathlib.mts');
   const repo = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
   const ctx: any = { run: 'frontier-14', repo };
@@ -86,19 +82,26 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
     .find((candidate: any) => candidate.id === 'judge-closure')?.argv ?? [];
   assert.ok(gateIds('6-judge').includes('judge-closure'));
   assert.ok(!gateIds('7-scope').includes('judge-closure'), 'unchanged Step-6 bytes are not rescanned at scope render');
-  for (const id of ['7-adjudicate', '7-preflight', '7-rejudge']) {
-    assert.ok(gateIds(id).includes('judge-closure'), `${id} must close its mathematical window`);
+  for (const id of ['7.3-certify', '7.7-certify']) {
+    assert.deepEqual(gateIds(id), ['step7-wave-certification']);
+    assert.equal(stage(id).concurrency, 1);
+    assert.ok(stage(id).gates(ctx)[0].argv.includes('verify-wave'),
+      'initial wave validation must not demand the later convergence threshold');
   }
-  assert.ok(!gateIds('7-preflight').includes('level-coverage'), 'Step-8 Alpha audit receipt is not available yet');
-  assert.deepEqual(gateIds('7-rejudge'),
-    ['frontier-dependency-ledger', 'step7-auditor-created-certifications', 'step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure']);
-  assert.equal(stage('7-rejudge').maxFixRounds, 1);
-  assert.equal(stage('7-rejudge').terminalFixBudget, true);
+  for (const id of ['7.8-gate','7.10-gate']) {
+    assert.ok(gateIds(id).includes('judge-closure'));
+    assert.ok(gateIds(id).includes('step7-round-certification'));
+    assert.ok(gateIds(id).includes('step7-published'));
+    assert.ok(!gateIds(id).includes('level-coverage'), 'Step-8 audit receipt is not available yet');
+  }
+  assert.deepEqual(gateIds('7.9-repair'), ['frontier-dependency-ledger', 'step7-gate-recertify']);
+  assert.equal(stage('7.4-rejudge').maxAttempts, 1);
   assert.equal(stage('7-close'), undefined);
   assert.equal(stage('7-final'), undefined);
-  assert.equal(stages.indexOf(stage('7-rejudge')) + 1, stages.indexOf(stage('7-freeze')));
+  assert.equal(stage('7-rejudge'), undefined);
+  assert.equal(stages.indexOf(stage('7.10-gate')) + 1, stages.indexOf(stage('7-freeze')));
 
-  for (const id of ['6-judge', '7-adjudicate', '7-preflight', '7-rejudge',
+  for (const id of ['6-judge', '7.8-gate', '7.10-gate',
     '8-scope', '8-changes-judge', '8-close', '9-readiness-v2']) {
     assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must certify current item evidence, not chat identity`);
   }

@@ -719,7 +719,9 @@ test('the do-not-relax stages are still barriers', async () => {
   // cohort test below.
   const mod = await import('../stages/mathlib.mts');
   const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-prepare', '5a-adjudicate', '5a-baseline',
-    '5b-cross', '5b-close', '6-judge', '7-baseline', '7-adjudicate', '7-rejudge',
+    '5b-cross', '5b-close', '6-judge', '7-baseline', '7-scope',
+    '7.1-adjudicate', '7.2-impact', '7.3-certify', '7.4-rejudge', '7.5-adjudicate',
+    '7.6-impact', '7.7-certify', '7.8-gate', '7.9-repair', '7.10-gate', '7-freeze',
     '8-scope', '8-scope-render', '8-scope-freeze', '8-changes-judge', '8-close', '8-changes-stamp', '8-receipt', '9-contract-close', '9-snapshot-v2',
     '9-pathway-sync-v2', '9-pathway-seed-v2', '9-pathway-author-v2',
     '9-stamps-v2', '9-readiness-v2', '9-evidence-v2', '9-owner-report-v2', '9-close-v2'];

@@ -1,22 +1,13 @@
-# Step 7 — exact closure recovery, `{{run}}`
+# Historical Step-7 closure recovery, `{{run}}`
 
-Read `research/{{run}}-judge-closure.json`,
-`research/{{run}}-judge.jsonl`,
-`research/{{run}}-judge-adjudications.jsonl`, and the generated `by_item`
-ownership map in `research/{{run}}-step7-scope.json`. Take only current
-unadjudicated `(id, model, context_sha256)` rows owned by this group; leave
-other groups' rows untouched. A row owned by no group is a reported blocker,
-not a row to discard.
+Historical compatibility task only. Preserve historical exact-tuple decisions
+as evidence; this template grants no current repair or certification authority.
+Historical receipts constrain `defect_type` to exactly one of
+`logic`, `dependency_citation`, or `other`; do not reinterpret those records
+as current round coverage.
 
-Append one exact adjudication outcome per owned row. Only
-`confirmed_fatal` licenses its coherent repair and matching ledger row; update
-only records made stale by that repair. Send a concrete other-group finding to
-`research/{{run}}-step7-cross-group.jsonl`, never repair that item.
-
-Every `confirmed_fatal` row must also set `defect_type` to exactly one of
-`logic`, `dependency_citation`, or `other`. Do not use a descriptive
-defect-ledger subclass in that field.
-
-Write `research/{{run}}-alpha-step7-closure-recovery-<group>.md` with the rows
-handled, outcomes, licensed repairs, rejudge targets, cross-group alerts, and
-blockers. Preserve shared append-only ledgers.
+Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
+and `briefs/step7-owner-repair.md`. Follow WORKFLOW.md's 7.1–7.10 protocol
+and the generated round-bound task. Repair all confirmed defects, including
+nonfatal defects, and continue downstream repair until complete before the
+single central certification pass.

@@ -90,6 +90,26 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
   }
 
   // THE OVERLAP-GROUP RULE.
+  for (const [from, s] of stages.entries()) {
+    if (!s.route && !s.routeTargets) continue;
+    if (typeof s.route !== 'function' || !Array.isArray(s.routeTargets) || !s.routeTargets.length) {
+      P(s.id, 'routing requires a route callback and nonempty routeTargets');
+      continue;
+    }
+    if (s.pipeline || s.gatesWaived) P(s.id, 'routing requires a standalone stage with gates');
+    for (const target of s.routeTargets) {
+      const to = stages.findIndex(stage => stage.id === target);
+      if (to < 0) { P(s.id, `unknown route target ${target}`); continue; }
+      const span = stages.slice(Math.min(from, to), Math.max(from, to) + 1);
+      if (span.some(stage => stage.pipeline)) P(s.id, `route to ${target} crosses a pipeline group`);
+      if (to <= from) for (const repeated of span) {
+        if (typeof repeated.pattern !== 'function')
+          P(s.id, `repeat route requires a round-scoped pattern(ctx) on ${repeated.id}`);
+      }
+    }
+  }
+
+  // THE OVERLAP-GROUP RULE.
   //
   // A group is the maximal run of CONSECUTIVE stages sharing a `pipeline` name.
   // Reusing a name non-contiguously therefore does not make one group, it makes

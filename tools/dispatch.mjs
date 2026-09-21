@@ -88,7 +88,8 @@ const ROLES = Object.freeze({
   // Step 7 is the sharpest role in the build: a `false_positive` adjudication
   // silently discards a real defect and no later gate re-examines it. It keeps
   // the highest effort supported by the active adjudication lane.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'step-7 fatal-only adjudication, one Sol lane per group Alpha' },
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'Step-7 logical adjudication and repair, one Sol xhigh worker per batch' },
+  'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, requiresTask: true, why: 'Three Step-7 Sol xhigh owner agents repair all assigned downstream consumers, including published items, before centralized recertification' },
   // `final-adjudicator` — the independent Step-7 close after the owning group
   // Alpha's initial repair receives a rejecting Terra rejudge. It is
   // intentionally a fresh Astra conversation rather than a

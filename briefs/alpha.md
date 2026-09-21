@@ -31,7 +31,9 @@ write judge verdicts or stamps. Published content, scope changes, deletion,
 and reading-order changes require the exact task-authorised protocol. Step-7
 adjudicators may add fully proved missing-dependency lemmas and register them
 on their owned pages under the Step-7 task's explicit exception; otherwise
-report the issue without changing it.
+report the issue without changing it. Current Step-7 dispatches also follow
+`step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
+published downstream repairs across the whole library.
 
 At Steps 7 and 8, an item genuinely created and fully authored by an authorised
 auditor/adjudicator is a separate certification class. Do not manufacture a
@@ -39,11 +41,13 @@ judge verdict or send that addition through a judge/audit-repair loop. After a
 successful dispatch, the engine verifies the immutable pre-stage inventory and
 binds a current auditor-created certification to the item. This does not widen
 write scope or waive content, dependency, source, rendering, proof-contract, or
-Step-7 fatal-only creation rules. Existing-item edits still require ordinary
+Step-7 task ownership rules. Existing-item edits still require ordinary
 current judge evidence.
 
 ## Review and repair standard
 
+Logical validity is the ground truth; authoritative sources and judges can err.
+State uncertainty honestly and consult primary sources when unsure.
 Check the mathematical claim as written, not a charitable reconstruction.
 Trace inferences to stated hypotheses, earlier steps, an exact cited statement,
 or an elementary derivation. Preserve domains, quantifiers, hypotheses,
@@ -65,11 +69,11 @@ its prior `verification.judge` record.
 
 Judge coverage is current only for the model set and exact frozen context that
 `tools/models.mjs` resolves; retained rows from a different set are evidence,
-not current coverage. In a Step-7 adjudication, only a `confirmed_fatal`
-outcome for the exact assigned rejection licenses a content repair.
-`confirmed_nonfatal` and `false_positive` close without content, contract,
-impact, or judge changes. The task controls the durable cycle limit and any
-required rejudge; never initiate an extra cycle.
+not current coverage. Current Step-7 adjudication repairs every confirmed defect,
+including `confirmed_nonfatal`; `confirmed_fatal` additionally enters the fatal
+threshold count. A `false_positive` requires evidence without unnecessary edits.
+The task controls repair ownership, fresh downstream continuation and any
+required rejudge; never initiate a cycle independently.
 
 Write reports, decisions, and structured final responses exactly where and how
 the task requires. Use the prescribed append interface for shared JSONL

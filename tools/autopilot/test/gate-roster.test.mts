@@ -14,35 +14,24 @@ import assert from 'node:assert/strict';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
-test('the step-7 window is guarded end to end', async () => {
-  // Mathematical currency and non-judge integrity intentionally have separate
-  // stages. The guard remains live around every mathematical edit/rejudge,
-  // while contracts run before paid calls and once more after the loop.
+test('the step-7 window validates round evidence and repeats the complete battery', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['7-adjudicate', '7-rejudge']) {
-    const st = mod.stages.find((s: any) => s.id === id);
-    const argvRows = st.gates(ctx)
-      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv));
-    const tools = argvRows
-      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
-    assert.ok(tools.includes('tools/step7-guard.mjs'), `${id} does not run the fatal-only guard`);
-    const guardArgv = argvRows.find((argv: string[]) => argv.includes('tools/step7-guard.mjs'));
-    assert.ok(guardArgv?.includes('--owner-prerequisite-repairs'),
-      `${id} drops exact owner-authorized prerequisite repair receipts`);
-    assert.ok(!tools.includes('tools/proof-contract.mjs'),
-      `${id} lets contract bookkeeping consume the bounded judge loop`);
+  const gates = (id: string) => mod.stages.find((s: any) => s.id === id).gates(ctx);
+  for (const id of ['7.1-adjudicate', '7.2-impact', '7.5-adjudicate', '7.6-impact']) {
+    const rows = gates(id).filter((g: any) => g.id !== 'frontier-dependency-ledger');
+    assert.deepEqual(rows.map((g: any) => g.id), ['step7-wave-evidence']);
+    assert.ok(rows[0].argv.includes('tools/step7-workflow.mjs'));
+    assert.ok(rows[0].argv.includes('collect'));
   }
-  for (const id of ['7-preflight']) {
-    const st = mod.stages.find((s: any) => s.id === id);
-    const tools = st.gates(ctx)
-      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
-      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
-    for (const tool of ['tools/step7-guard.mjs', 'tools/proof-contract.mjs',
+  for (const id of ['7.8-gate', '7.10-gate']) {
+    const tools = gates(id).map((g: any) => g.argv.find((a: string) => a.startsWith('tools/')));
+    for (const tool of ['tools/step7-workflow.mjs', 'tools/proof-contract.mjs',
       'tools/boundary-audit.mjs', 'tools/citation-fidelity.mjs']) {
       assert.ok(tools.includes(tool), `${id} does not run ${tool}`);
     }
   }
+  assert.deepEqual(gates('7.8-gate').map((g: any) => g.id), gates('7.10-gate').map((g: any) => g.id));
 });
 
 test('the scope-loss gate never switches off once content exists', async () => {
@@ -53,7 +42,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
   // in-flight items as needed"). Step 8 built two items on frontier-14.
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['5a-adjudicate', '5b-cross', '7-preflight', '8-scope', '9-readiness-v2']) {
+  for (const id of ['5a-adjudicate', '5b-cross', '7.8-gate', '7.10-gate', '8-scope', '9-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))

@@ -14,17 +14,11 @@
 // tools/level-coverage.mjs already lets them clear closure as warnings, so no
 // gate ever demanded the edit.
 //
-// The loop this prevents. Any edit to an item is a material rewrite under
-// SCHEMA §3 — whose test is deliberately broad ("would the judge have seen
-// something different", explicitly including Remark prose, because a `rem-` item
-// IS its prose). So a cosmetic polish applied to a nonfatal finding voids
-// `verification.judge`, forces a rejudge, and resamples a refuter that
-// "tends to surface a different nitpick on each stochastic run of the same long
-// proof" (WORKFLOW.md §5). Each turn of that loop costs another judge call and an
-// adjudication and converges on nothing. The automatic path permits one paid
-// Terra rejudge after the initial Sol repair. A rejection then goes only to the
-// Astra final adjudicator for exact-hash terminal resolution; it never
-// fabricates another judge verdict.
+// The replacement round protocol uses centralized certification of the complete
+// repaired state, with published downstream repairs included. When its frozen
+// frontier exists, exact certification and baseline coverage are mandatory;
+// legacy adjudication/terminal licences cannot substitute for missing evidence.
+// Runs without that frontier retain the historical fatal-edit licence checks.
 //
 // HOW IT DECIDES, from disk rather than from an agent's account of its own edit.
 // A dedicated baseline snapshot is taken immediately before step-7 adjudication
@@ -47,6 +41,8 @@ import { loadStep7JudgeEvidence, rejectionKey, isFrozenStep5CrossRepair } from '
 import { permittedNewLemmas } from './step7-new-lemmas.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { checkWorkflow, workflowDir } from './step7-workflow.mjs';
+import { validateFrontier } from './step7-rounds.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -56,6 +52,7 @@ const option = (name) => {
   return index >= 0 ? argv[index + 1] : null;
 };
 const ITEMS = option('--items-dir') ? resolve(option('--items-dir')) : join(REPO, 'items');
+const workflowRoot = option('--workflow-root') ? resolve(option('--workflow-root')) : REPO;
 
 const touchesPath = option('--touches');
 const baselineLabel = option('--baseline');
@@ -95,7 +92,7 @@ const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
 const defectLedgerPath = option('--defect-ledger') ?? join(REPO, 'research', 'defect-ledger.jsonl');
 
 const usage = () => {
-  console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--auditor-certifications <file.json>] [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
+  console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--workflow-root <repo>] [--auditor-certifications <file.json>] [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
   process.exit(2);
 };
 if (!touchesPath || !baselineLabel || !judgeLedgerPath || !adjudicationsPath || !scopePath) usage();
@@ -106,11 +103,6 @@ const error = (code, message, id = null) => errors.push({ code, message, id });
 const warn = (code, message, id = null) => warnings.push({ code, message, id });
 
 const resolvePath = (p) => (p.startsWith('/') ? p : join(REPO, p));
-const terminalParsed = parseTerminalResolutions(
-  terminalResolutionsPath ? resolvePath(terminalResolutionsPath) : '',
-  { allowMissing: true },
-);
-for (const message of terminalParsed.errors) error('terminal-resolution-shape', message);
 
 // ---- the baseline, and the state to compare it against ---------------------
 
@@ -148,7 +140,58 @@ const currentHashes = () => {
 };
 const now = currentHashes();
 
+// The replacement protocol certifies an entire drained repair wave, including
+// published downstream items. Its exact baseline and evidence replace the old
+// per-item terminal licences; it never needs a synthetic judge rejection.
+const workflowScope = JSON.parse(readFileSync(resolvePath(scopePath), 'utf8'));
+const workflowDirectory = workflowDir(workflowRoot, workflowScope.run);
+if (existsSync(workflowDirectory)) {
+  const changed = Object.keys(now).filter(id => baseline.hashes?.[id] && baseline.hashes[id] !== now[id]);
+  const created = Object.keys(now).filter(id => !Object.hasOwn(baseline.hashes ?? {}, id));
+  const deleted = Object.keys(baseline.hashes ?? {}).filter(id => !Object.hasOwn(now, id));
+  let licensed = 0;
+  try {
+    const certificate = checkWorkflow(workflowRoot, workflowScope.run);
+    if (!['impact-repeat', 'gate'].includes(certificate.phase)) throw Error('Step 7 requires a completed repeat-round certification');
+    const frontier = validateFrontier(JSON.parse(readFileSync(join(workflowDirectory, 'frontier.json'), 'utf8')));
+    if (frontier.run !== workflowScope.run
+      || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
+      throw Error('frozen original frontier does not match Step-7 scope');
+    const original = JSON.parse(readFileSync(join(workflowDirectory, 'baseline.json'), 'utf8'));
+    if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
+      || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
+      throw Error('workflow baseline does not exactly match the original touchlog baseline');
+    const certified = new Map(certificate.items.map(row => [row.id, row]));
+    for (const id of changed) {
+      if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id])
+        error('step7-certification-unlicensed', `${id}: changed item lacks an exact current centralized certification`, id);
+      else licensed++;
+    }
+    for (const id of created) error('step7-creation', `${id}: item creation is outside the frozen replacement protocol`, id);
+    for (const id of deleted) error('step7-deletion', `${id}: deleting results is not licensed at Step 7`, id);
+  } catch (cause) { error('step7-certification-invalid', cause.message); }
+  const summary = { baseline: baselineLabel, baseline_at: baseline.at ?? null,
+    compared_against: againstLabel ?? 'working tree', items_at_baseline: Object.keys(baseline.hashes ?? {}).length,
+    changed: changed.length, licensed_by_centralized_certification: licensed,
+    created: created.length, deleted: deleted.length, errors: errors.length, warnings: warnings.length };
+  if (asJson) console.log(JSON.stringify({ summary, changed, created, deleted, errors, warnings }, null, 2));
+  else {
+    console.log(`step7-guard: baseline "${baselineLabel}" vs ${summary.compared_against}`);
+    console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
+    console.log(`  ${licensed}/${changed.length} change(s) licensed by centralized Step-7 certification`);
+    for (const entry of errors) console.log(`  ERROR ${entry.code}: ${entry.message}`);
+    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — every Step-7 edit has exact centralized certification');
+  }
+  process.exit(errors.length ? 1 : 0);
+}
+
 // ---- adjudications ---------------------------------------------------------
+
+const terminalParsed = parseTerminalResolutions(
+  terminalResolutionsPath ? resolvePath(terminalResolutionsPath) : '',
+  { allowMissing: true },
+);
+for (const message of terminalParsed.errors) error('terminal-resolution-shape', message);
 
 /** id -> Set of pre-edit text states a confirmed_fatal row licenses editing. */
 const fatalLicences = new Map();

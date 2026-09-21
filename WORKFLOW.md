@@ -1,8 +1,9 @@
 # Build and operations
 
 CLAUDE.md governs agents; SCHEMA.md governs content. tools/autopilot owns every
-dispatch, retry, check and transition. Stage definitions in mathlib.mts and
-mathlib.step5.mts are authoritative. There is no LLM orchestrator.
+dispatch, retry, check and transition. Stage definitions in mathlib.mts,
+mathlib.step5.mts and mathlib.step7.mts are authoritative. There is no LLM
+orchestrator.
 
 ## Workflow
 
@@ -15,7 +16,7 @@ mathlib.step5.mts are authoritative. There is no LLM orchestrator.
 | 5a — review | 5a-prepare, 5a-read, 5a-split, 5a-refute, 5a-collect, 5a-adjudicate, 5a-baseline | Independent reader/refuter pass, routed group adjudication and frozen post-review evidence |
 | 5b — reconcile and close | 5b-edges, 5b-cross, 5b-close | Cross-group dependency audit, impact accounting and closure receipt |
 | 6 — judge | 6-scope, 6-judge | Frozen item judgments and group reader digests |
-| 7 — repair | 7-baseline, 7-scope, 7-adjudicate, 7-preflight, 7-rejudge, 7-freeze | Repairs/checks, one rejudge, one final adjudication, then Step 8 |
+| 7 — repair | 7-baseline, 7-scope, 7.1-adjudicate through 7.10-gate, 7-freeze | Repeat adjudication, downstream repair and stable certification to the threshold, then repair/gate until green |
 | 8 — certify changes | 8-scope, 8-scope-render, 8-scope-freeze, 8-changes-judge, 8-close, 8-changes-stamp, 8-receipt | Scope review, change judgments, impact closure and stamps |
 | 9 — close run | 9-contract-close through 9-close-v2 | Contracts, pathways, readiness, evidence, owner report and commit |
 
@@ -23,7 +24,8 @@ These are the only active step numbers. Historical run artifacts remain evidence
 not aliases or current instructions. Do not install this workflow under a live
 engine or reuse historical receipts: use a fresh run after owner coordination.
 
-Every failed gate in Steps 1–9 is owner-terminal. The production executor
+Outside Step 7's explicitly authorized repair/gate loop, every failed gate in
+Steps 1–9 is owner-held. The production executor
 escalates it before consulting any stage repair hook or charging any repair
 budget. Normal first-pass authoring, adjudication, repair and judging stages are
 unchanged; only gate-triggered follow-up waves are forbidden. After an owner or
@@ -35,6 +37,8 @@ current disk state. It does not authorize an automatic repair round.
 Every agent must be impartial and honest about its mathematical understanding.
 When unsure, search the web and read complete relevant arguments in authoritative
 sources. Report uncertainty; never fabricate understanding, reading or checks.
+Logical validity is the ground truth. Check the actual argument independently;
+authoritative sources, prior decisions and judges can contain mistakes.
 The dispatcher and item-judge prompt apply this rule to every role.
 
 | Assignment | Model / effort |
@@ -48,8 +52,7 @@ The dispatcher and item-judge prompt apply this rule to every role.
 | Step 6 group readers; Step 8 and Step 9 agent lanes | DeepSeek V4.1 Flash / max |
 | Assignment | DeepSeek V4.1 Flash / max |
 | Item judges | Terra / xhigh |
-| Step 7 adjudication | Sol / xhigh |
-| Step 7 final adjudication | Astra / medium |
+| Step 7 batch adjudicators and three owner repair agents | Sol / xhigh |
 
 tools/models.mjs owns profiles; stages override role defaults. Substituting a
 model requires explicit owner authorization; the owner authorized DeepSeek
@@ -323,44 +326,66 @@ output before exiting and retain failure exit codes.
 Step 6 judges frozen items using full text and dependency/pair interfaces; sibling
 proofs are judged separately. Verdicts bind to item, model and context hashes.
 Group readers supply Step 7 evidence. Step 7 resolves each reader concern, alert
-and rejection. Only confirmed fatal findings license mathematical repair;
-published repairs need separate authority. Register necessary suppliers before
-consumers. A genuinely new supplier fully authored by the Step-7 adjudicator is
-mechanically certified as a distinct class and receives no fabricated judge row;
-existing-item repairs still require the configured rejudge route.
+and rejection against the actual mathematics. A rejection is evidence requiring
+adjudication, not automatic authority to rewrite a sound result.
 
-When a confirmed-fatal interface correction makes an existing downstream item
-state the retracted interface, the owner records an `owner-impact-repair` in the
-run's owner-repair ledger. The receipt binds the downstream item's Step-7
-baseline and repaired hashes, its group, authoritative sources, and an ordered
-declared dependency path rooted at the fatal item. Each intermediate changed
-consumer must already have its own exact licence. This permits required impact
-synchronization without inventing a rejection for an item the judge accepted,
-and does not license unrelated edits elsewhere in the dependency cone.
+## Step 7 repair protocol
 
-Step 7 is: group repairs → preflight checks → one Terra rejudge → terminal
-resolution → snapshot → Step 8. Only the engine dispatches judges. A gate-held
-rejection is resolved by the owner against the exact rejected text and context:
-repair a real mathematical defect or write item-specific evidence for an
-accepted-after-review finding. The owner then recertifies changed items and
-records a hash-bound version-4 terminal receipt with the rejected verdict,
-closure, current item/context and research evidence. The gate verifies these
-bindings before a transition; a receipt is not a fabricated judge pass.
-Where the configured final-adjudicator route is used, final adjudicators accept
-or repair queued items using existing suppliers.
-Within each queue, process suppliers before consumers, including transitive
-prerequisites, with stable ID ordering for unrelated items. Preserve frozen
-queues and append-only decisions. Legacy queue/hash conflicts require explicit
-operator recovery, not an automatic new judge wave.
-New prerequisites, missing paid verdicts or unresolved mathematics stop the run;
-they do not trigger another sweep. A completed paid verdict made stale by a
-licensed correction goes to the terminal pass, never another Terra call.
-Initial defect records do not count as paid reviews.
+`tools/step7-workflow.mjs` owns round preparation, result collection, central
+certification, judgment and closure checks. `7-baseline` and `7-scope` freeze
+the original frontier before the numbered protocol starts.
 
-There is no post-final repair or judging loop. The terminal pass cannot be reset
-by retry. Preflight retains dependency, contract, boundary, citation and ledger
-checks before judging. Repair prompts contain only unresolved findings; upheld
-records and cited suppliers are not repair targets. Full reports stay on disk.
+| Part / stage | Required work |
+|---|---|
+| 7.1 / `7.1-adjudicate` | One Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs all confirmed defects and identifies all downstream consumers. |
+| 7.2 / `7.2-impact` | Exactly three Sol xhigh owner agents repair relevant downstream effects throughout the library, including published items. Empty ownership lanes record a no-op. |
+| 7.3 / `7.3-certify` | After every writer drains, the orchestrator recertifies the complete repaired state in one stable pass. |
+| 7.4 / `7.4-rejudge` | Terra rejudges repaired items against that stable state. |
+| 7.5 / `7.5-adjudicate` | Sol xhigh batch adjudicators resolve renewed rejections, repair all confirmed defects and identify downstream consumers. |
+| 7.6 / `7.6-impact` | Three Sol xhigh owner agents repair all relevant downstream effects, including published consumers. |
+| 7.7 / `7.7-certify` | The orchestrator recertifies the complete state in one pass after all writers drain; repeat 7.4–7.7 until the threshold is met. |
+| 7.8 / `7.8-gate` | Run the complete gate battery. |
+| 7.9 / `7.9-repair` | Owner agents repair every gate failure; the orchestrator recertifies changed items after writers drain. |
+| 7.10 / `7.10-gate` | Rerun the complete gate battery; repeat 7.9–7.10 until green. |
+
+The threshold is `20 * unique_fatal_original_frontier_items < original_scope_size`
+in the latest completed adjudication round. Count each original item once even
+if several judges or rejection rows name it. The denominator is immutable;
+new suppliers, published consumers and a shrinking repair queue do not change
+it. Exactly 5% continues the loop. The threshold licenses entry to the final
+gate, never acceptance of an unresolved defect. Missing verdicts or decisions,
+uncertainty, stale certification and incomplete impact coverage block closure.
+Fatal classification controls only the threshold. Confirmed nonfatal defects
+also require repair; false positives require evidence without unnecessary edits.
+
+Downstream discovery includes transitive declared dependencies and actual uses
+in proofs, citations and page interfaces throughout the library. Record exact
+dependency paths and mathematical effects, distinguish candidates from confirmed
+repair targets, and reconcile newly discovered consumers before certification.
+Owners have disjoint write assignments and repair suppliers before consumers.
+If a repair reveals additional relevant consumers, the engine continues the
+repair phase with fresh disjoint assignments. Complete that work and any further
+downstream effects before entering the one stable certification pass.
+Published status does not exempt a relevant consumer from this authorized
+repair pass; maintain the canonical published-defect ledger with evidence and
+current audit status. Shared ledgers and metadata require the assigned serial
+integration path, never overlapping writers.
+
+Mathematical workers record evidence, outcomes and repairs only. The central
+tool stage certifies after all writers finish; there is no per-item resealing
+while another worker can change context. Round identity and exact current hashes
+bind verdicts, decisions and certificates. Historical terminal receipts remain
+audit evidence and do not close a new round. Genuine new suppliers must be
+fully proved and registered before consumers; their distinct author-provenance
+certification never fabricates a judge verdict or waives other gates.
+
+`7-freeze` snapshots the successfully closed state for Step 8. Legacy terminal
+resolution and recovery tools remain available only for their historical
+protocols; they are not the new workflow's convergence mechanism.
+Preflight retains dependency, contract, boundary, citation and ledger checks.
+Repair prompts contain current unresolved findings and assigned impact targets;
+upheld records and mere supplier mentions are not repair targets.
+Full reports stay on disk.
 Forward-reference gates suppress inventories and drain their output before exit.
 Inherited published items need not acquire a new-batch proof contract merely
 to enter certification; their licence, precheck and final published-repair checks
@@ -447,13 +472,16 @@ without killing workers. Stage skipping needs explicit owner authority.
 
 Stages clear only after successful matching coverage, artifacts and gates. The
 engine adopts compatible workers and waits for existing in-flight work. Any
-subsequent gate failure is owner-held before a repair hook or budget can run.
-For every step from 1 through 9, the owner/operator must repair each rejected
+subsequent gate failure outside Step 7's authorized loop is owner-held before a
+repair hook or budget can run. For every step from 1 through 9, the owner/operator
+or assigned Step-7 owner repair agents must repair each rejected
 item and refresh all certifications invalidated by that repair. `retry` then
 reruns the rejecting gate on the repaired, recertified carrier; transition to
 the next step is forbidden until it passes. Thus the universal order is
 certify, gate, owner repair on rejection, recertify, and rerun the same gate.
-Infrastructure retries are bounded; unchanged mathematical failures hold.
+Infrastructure retries are bounded. Step 7's mathematical and gate repeats are
+explicit protocol transitions, with fresh round evidence; they do not reuse an
+earlier successful dispatch as a new review.
 
 An owner-authorized fatal finding discovered after Step 7 may use
 `recover-step8 --authorization FILE` only while the run is paused, inactive and

@@ -3,8 +3,9 @@
 A deterministic TypeScript engine. Read the repository's WORKFLOW.md for its
 operating contract and CLAUDE.md for agent instructions.
 
-- stages/mathlib.mts: Steps1–4 and6–9, gates and scoped recovery.
+- stages/mathlib.mts: Steps1–4, 6, 8–9, shared gates and scoped recovery.
 - stages/mathlib.step5.mts: independent reader/refuter pass, routed group adjudication, cross-group audit and closure.
+- stages/mathlib.step7.mts: batch adjudication, three-owner impact repair, stable certification and both explicit repeat loops.
 - src/executor.mts: barriers, dispatch/adoption, owner escalation and hot reload.
 - src/spec.mts: stage validation.
 - src/coverage.mts: successful result and artifact accounting.
@@ -24,16 +25,37 @@ When a run-local owner authoring direction exists, the Step1 Beta brief and
 generated per-batch task both name it as a binding input. If it is added after
 `plan`, run `refresh-tasks` before any Beta dispatch so materialized prompts do
 not omit it.
-Step7 completes repairs and checks, runs one rejudge and one terminal
-adjudication pass, then snapshots for Step8. No post-final repair loop exists.
+Step7 runs batch Sol xhigh adjudicators, three Sol xhigh owner agents for all
+relevant downstream repairs (including published items), then one stable
+orchestrator certification pass. Terra rejudgment, Sol adjudication, three-owner
+downstream repair and recertification repeat until the latest round's unique
+fatal original-frontier count is strictly below 5% of the frozen original scope.
+All confirmed defects, including nonfatal defects, require repair. New downstream
+work continues in the repair phase with fresh disjoint assignments until complete
+before certification; fatal classification controls only the threshold.
+The complete gate battery then repeats with owner repair and recertification
+until green. The threshold never permits unresolved defects or missing evidence.
 Coverage, artifacts and gates are independently required. Every agent must be
-honest about uncertainty and read authoritative sources when unsure.
-The production configuration makes all Step 1–9 gate failures
+honest about uncertainty and read authoritative sources when unsure. Logical
+validity governs decisions; authoritative sources can also contain mistakes.
+Outside the explicitly authorized Step7 gate-repair loop, Step 1–9 failures are
 owner-recertification holds: no failing gate invokes a stage repair hook or
 spends a repair budget. The owner/operator must repair every rejected item,
 refresh every certification invalidated by that repair, and retry the same gate;
 the stage cannot transition until the repaired, recertified carrier passes.
 This does not suppress the workflow's normal first-pass dispatches.
+
+Standalone stages can declare a read-only `route({ctx, outcome, failure})`
+callback and explicit `routeTargets`. The engine evaluates it only after the
+complete battery and all writers drain. Forward branches bypass intervening
+stages; backward branches reopen the inclusive stage span and increment its
+durable `ctx.stageRounds` identities (initially 1). Repeated stage labels,
+result patterns and artifact paths must use those identities. The engine rejects
+unchanged matchers or matchers which still accept the previous round's receipts.
+One atomic state write records each transition, resets completion stamps and
+preserves failure diagnostics in `ctx.stageFailures` and the transition history.
+Routed failures and bypassed gates never receive a gate-pass stamp. A pending
+`pause-at` boundary also takes effect before a repeated round starts.
 
 Use tools/tsx-run.mjs from the repository root for status, doctor and tests.
 Tests use temporary fixtures and fake dispatches, never live state. Do not
@@ -43,10 +65,9 @@ and owner coordination. The verified checkpoint procedure in WORKFLOW.md preserv
 original evidence, creates no model-success receipts, and runs current gates
 before fresh cross-group closure and judgment.
 
-The active model boundary is stage-owned: Step 1 scaffolding, Step 5a readers
-and Step 5a refuters use Sol high; Step 5a adjudication uses Sol xhigh; Step 3a
-pair scope, Step 3b pair authoring, Step 5b, Step 6 group readers and Step 9
-agent closure use DeepSeek V4.1 Flash max. DeepSeek dispatches require the
+The active model boundary is stage-owned; see WORKFLOW.md and tools/models.mjs.
+Step7 adjudicators and owner repair agents use Sol xhigh, and item rejudgments
+use Terra. DeepSeek dispatches require the
 repository's single-tool live web bridge. It prefers Tavily and falls back to
 Firecrawl when Tavily is not configured. Deterministic tool plans remain
 model-free.

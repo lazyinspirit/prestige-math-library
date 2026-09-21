@@ -82,11 +82,11 @@ const stagePattern = (stage: Stage, ctx: Ctx): RegExp => {
 export function completedPrefixProblem(
   oldStages: Array<Pick<Stage, 'id'>>,
   newStages: Array<Pick<Stage, 'id'>>,
-  stageState: Record<string, { gatesPassedAt?: string }> = {},
+  stageState: Record<string, { gatesPassedAt?: string; doneAt?: string; routedTo?: string }> = {},
 ): string | null {
   const oldIds = oldStages.map((stage) => stage.id);
   const newIds = newStages.map((stage) => stage.id);
-  for (const completedId of oldIds.filter((id) => stageState[id]?.gatesPassedAt)) {
+  for (const completedId of oldIds.filter((id) => stageState[id]?.gatesPassedAt || stageState[id]?.doneAt)) {
     const oldIndex = oldIds.indexOf(completedId);
     const newIndex = newIds.indexOf(completedId);
     const oldPrefix = oldIds.slice(0, oldIndex + 1);
@@ -266,6 +266,8 @@ export class Executor {
       dispatchDir: this.config.dispatchDir,
       coversMap: this.config.coversMap ?? {},
       config: this.config,
+      stageRounds: { ...(this.state.data.stageRounds ?? {}) },
+      stageFailures: structuredClone(this.state.data.stageFailures ?? {}),
     };
   }
 
@@ -306,6 +308,10 @@ export class Executor {
     // each tick. On a 27-pair run that re-ran Step 1's per-item readiness
     // hashing — minutes of CPU per tick — to learn what the stamp already says.
     if (this.state.data.stages[stage.id]?.doneAt) {
+      const stamped = this.state.data.stages[stage.id];
+      if (stamped.routedTo) return { done: true, unitsDone: true,
+        gatesPassed: Boolean(stamped.gatesPassedAt), why: `routed to ${stamped.routedTo}`,
+        missing: [], mode: 'coverage' };
       return { done: true, unitsDone: true, gatesPassed: true, why: 'stamped complete', missing: [], mode: 'coverage' };
     }
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
@@ -1617,6 +1623,7 @@ export class Executor {
    * has a different argv and still runs on its own.
    */
   async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
+    if (this.inflight.size || this.liveDispatchLabels().length) return 'working';
     const list: Gate[] = [];
     const owners: Stage[] = [];
     const seen = new Set<string>();
@@ -1719,6 +1726,8 @@ export class Executor {
           }
         }
         (bad as any).advisory = advisory;
+        const routed = this.routeStage(stage, ctx, 'failed', bad);
+        if (routed) return routed;
 
         // THE REPAIR LOOP.
         //
@@ -1776,6 +1785,10 @@ export class Executor {
       this.reporter.notify('gates-ok', `${where}: all gates green`);
     }
 
+    if (group.length === 1) {
+      const routed = this.routeStage(group[0], ctx, 'passed');
+      if (routed) return routed;
+    }
     // The group clears as one. A member that waived its gates is stamped here
     // too — it has been unit-complete since the join began.
     for (const { s, st } of statuses) {
@@ -1786,6 +1799,70 @@ export class Executor {
     }
     this.state.save();
     return 'ok';
+  }
+
+  /** Commit a branch and its fresh execution identities in one state-file
+   * rename. A crash therefore sees either the old join or the complete branch. */
+  private routeStage(stage: Stage, ctx: Ctx, outcome: 'passed' | 'failed', failure?: GateResult): 'working' | 'blocked' | null {
+    if (!stage.route) return null;
+    try {
+      if (stage.pipeline || this.inflight.size || this.liveDispatchLabels().length)
+        throw new Error('routing requires a standalone stage and every writer drained');
+      const route = stage.route({ ctx, outcome, failure });
+      if (!route) return null;
+      if (!stage.routeTargets?.includes(route.next)) throw new Error(`undeclared route target ${route.next}`);
+      const from = this.stages.indexOf(stage), to = this.stages.findIndex(s => s.id === route.next);
+      if (to < 0) throw new Error(`unknown route target ${route.next}`);
+      const at = new Date().toISOString();
+      const data = structuredClone(this.state.data);
+      data.stageRounds ??= {};
+      data.transitions ??= [];
+      if (failure) {
+        data.stageFailures ??= {};
+        data.stageFailures[stage.id] = failure;
+      }
+      data.transitions.push({ from: stage.id, to: route.next, round: data.stageRounds[stage.id] ?? 1,
+        outcome, at, ...(failure ? { failure } : {}) });
+      if (to <= from) {
+        const receipts = existsSync(ctx.dispatchDir)
+          ? readdirSync(ctx.dispatchDir).filter(file => file.endsWith('.result.json')) : [];
+        for (const member of this.stages.slice(to, from + 1)) {
+          data.stageRounds[member.id] = (data.stageRounds[member.id] ?? 1) + 1;
+          const freshCtx = { ...ctx, stageRounds: data.stageRounds };
+          if (stagePattern(member, ctx).toString() === stagePattern(member, freshCtx).toString())
+            throw new Error(`${member.id}: repeated stage result pattern must change with stageRounds`);
+          if (receipts.some(file => stagePattern(member, ctx).test(file) && stagePattern(member, freshCtx).test(file)))
+            throw new Error(`${member.id}: new round result pattern still accepts old receipts`);
+          delete data.stages[member.id];
+        }
+      } else {
+        data.stages[stage.id] = { ...data.stages[stage.id], enteredAt: data.stages[stage.id]?.enteredAt ?? at,
+          fixRounds: data.stages[stage.id]?.fixRounds ?? 0, doneAt: at,
+          gatesPassedAt: outcome === 'passed' ? at : null, routedTo: route.next };
+        for (const member of this.stages.slice(from + 1, to)) {
+          data.stages[member.id] = { enteredAt: at, doneAt: at, gatesPassedAt: null,
+            fixRounds: 0, routedTo: route.next };
+        }
+      }
+      const affected = new Set(this.stages.slice(Math.min(from, to), Math.max(from, to) + 1).map(s => s.id));
+      data.blockers = data.blockers.filter((b: any) => !affected.has(b.stage));
+      data.stage = route.next;
+      data.finishedAt = null;
+      if (data.pauseAfter === stage.id) {
+        data.paused = true;
+        data.pauseAfter = null;
+      }
+      this.state.data = data;
+      this.state.save();
+      this.stateVersion++;
+      this.lastBattery.clear();
+      this._adoptStage = undefined;
+      this.reporter.notify('stage-route', `${stage.id} (${outcome}) → ${route.next}`);
+      return 'working';
+    } catch (error: any) {
+      this.state.addBlocker(stage.id, `${stage.id}: route refused — ${error.message}`, 'stage-route');
+      return 'blocked';
+    }
   }
 
   /** The dispatch key a unit would use, so the retry policy can find its prior

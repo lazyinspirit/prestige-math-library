@@ -25,6 +25,7 @@ import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { loadStep7ClosureCertification, currentStep7Certification } from './step7-certification-consumer.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -493,6 +494,9 @@ const judgeCoverage = [];
 const terminalResolved = [];
 const terminalSuperseded = [];
 const terminalEscalated = [];
+let step7Certificate = null;
+try { step7Certificate = loadStep7ClosureCertification(REPO, option('--run'), judgePath ?? ''); }
+catch (cause) { error('step7-certification-invalid', cause.message); }
 for (const id of judgePath ? judgeScope : []) {
   // An invalid certification is a certification hold, not a paid self-review
   // target. Keep closure false without manufacturing coverage or judge work.
@@ -507,6 +511,15 @@ for (const id of judgePath ? judgeScope : []) {
   const now = verifyCurrent ? currentHashes.get(id) ?? null : null;
   const current = now?.context ?? null;
   const currentItem = now?.item ?? null;
+  const centrallyCertified = verifyCurrent && step7Certificate?.items.some(row => row.id === id)
+    && existsSync(join(REPO, 'items', `${id}.md`)) && currentStep7Certification(step7Certificate,
+    id, readFileSync(join(REPO, 'items', `${id}.md`), 'utf8'), current);
+  if (centrallyCertified) {
+    judgeCoverage.push({ id, step7_certified: true, round: step7Certificate.round,
+      phase: step7Certificate.phase, item_sha256: centrallyCertified.item_sha256,
+      context_sha256: centrallyCertified.context_sha256 });
+    continue;
+  }
   // The per-lane currency rule is tools/judge-currency.mjs, shared with
   // tools/judge-sweep.mjs — the tool that decides which items to SPEND a judge
   // call on. The two implemented it separately and disagreed: the sweep read

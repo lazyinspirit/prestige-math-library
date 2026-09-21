@@ -23,6 +23,8 @@ sources when possible. Repair the item only after resolving that uncertainty.
 Every workflow agent must be honest about its mathematical understanding.
 Whenever unsure, search the web and read authoritative sources before deciding.
 Report unresolved uncertainty; never invent proof completion or source reading.
+Logical validity is the ground truth. Independently check arguments: even an
+authoritative source, a judge, or an earlier acceptance can be mistaken.
 
 **5. Context continuity.** Before compaction or handoff, record the objective,
 verified state, open blockers, and next action in the appropriate durable
@@ -33,7 +35,8 @@ credentials or transcripts.
 it every ten minutes for stalled work. Do not intervene unless a blocker exists
 or a stage fails to close. Every gate failure in Steps 1–9 is owner-held: the
 engine must not launch a gate-triggered repair, review, authoring, adjudication
-or judge round. Normal first-pass stage dispatches still run. The owner/operator
+or judge round, except for the explicitly authorized Step-7 protocol below.
+Normal first-pass stage dispatches still run. The owner/operator
 must repair every rejected item and refresh every certification invalidated by
 that repair. Only then may `retry` rerun the rejecting gate; the stage cannot
 transition until it passes. This certify → gate → repair → recertify → same-gate
@@ -118,16 +121,35 @@ Preserve cross-group dependency, impact and exact-hash closure checks. Every 5a
 and 5b gate failure is an owner hold: the owner repairs the rejected items and
 recertifies what the repair invalidates, then retries the same gate.
 
-**Step 7.** Repair and reconcile all assigned findings before rejudging.
-The engine runs one rejudge, then one terminal final-adjudication pass. No
-early final handoffs, post-final repair stages, repeat judge waves or new
-prerequisites at final adjudication. Unresolved work escalates and stops.
-Successful final adjudication freezes the result and proceeds to Step 8.
+**Step 7.** The engine owns the following repeatable protocol:
+7.1 one Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs
+confirmed defects (including nonfatal defects) and identifies all downstream
+consumers; 7.2 three Sol
+xhigh owner repair agents resolve all relevant downstream effects across the
+whole library, including published items; 7.3 the orchestrator recertifies the
+complete repaired state in one pass after all writers drain. Then 7.4 Terra
+rejudges repaired items; 7.5 Sol xhigh adjudicators adjudicate and repair renewed
+rejections and identify downstream effects; 7.6 three Sol xhigh owner agents
+repair those effects; 7.7 the orchestrator recertifies everything in one stable
+pass. Repeat 7.4–7.7 until the latest round's unique confirmed-fatal original
+frontier items divided by the immutable original frontier count is strictly
+less than 5%. Neither added items nor a shrinking queue changes the denominator.
+This threshold permits the final gate, never unresolved defects or uncertainty.
+7.8 runs the complete gate battery; 7.9 owner agents repair every failure and
+the orchestrator recertifies changed items; 7.10 reruns the complete battery.
+Repeat 7.9–7.10 until green, then freeze the result and proceed to Step 8.
+Fatal classification controls only the convergence threshold; all actual defects
+must be repaired. Newly discovered downstream work continues in the repair phase
+with fresh disjoint assignments until every relevant repair is complete, before
+certification. Keep ownership disjoint and bind
+every decision, verdict and certification to the current round and content.
+Missing evidence, stale certification or incomplete impact coverage blocks
+progress. Agents never manufacture verdicts or certify their own dispatches.
 If the owner explicitly authorizes recovery for a fatal defect discovered after
 that freeze, use the guarded `recover-step8` command: preserve the Step-7
 snapshot and judgment history, repair only the hash-bound allowlist, and reopen
 only changed-item judgment, impact closure, stamps and receipts before Step 9.
-This bounded recovery is not permission for an ordinary repeat judge wave.
+This bounded Step-8 recovery does not reopen the completed Step-7 loop.
 
 **12. Phase-3 repair ledger.** Throughout Phase 2, maintain
 `research/published-consumer-supplier-ledger.md` as the existing canonical
@@ -149,8 +171,10 @@ published items or dependency interfaces remain unaudited. Distinguish
 confirmed defects from downstream impact-review candidates and incomplete
 audits. Update existing entries rather than create duplicate ledgers. A new
 scaffold or published supplier does not close a published-proof defect;
-published content remains read-only except for owner-authorized early repairs.
-The current authorization permits confident repairs needing no Phase-2
+published content remains read-only except for owner-authorized repairs,
+including the assigned whole-library downstream repairs in Step 7 above.
+Outside that Step-7 protocol, the current early-repair authorization permits
+confident repairs needing no Phase-2
 dependencies, one item at a time, without judges. It covers necessary
 dependency, home and verification updates. Record local checks honestly;
 do not represent them as independent review or an owner audit.

@@ -161,55 +161,19 @@ test('the budget still exhausts on genuine failures', async () => {
   rmSync(repo, { recursive: true, force: true });
 });
 
-// ----------------------------- Step 7: one sweep, then terminal adjudication
-
-test('7-rejudge holds missing verdicts after its sole sweep instead of re-dispatching', async (t) => {
+// Step 7 issues one engine-controlled Terra sweep per durable round.
+test('7.4-rejudge isolates attempt identity by round without a gate repair hook', async (t) => {
   const repo = fixtureRepo();
   t.after(() => rmSync(repo, { recursive: true, force: true }));
-  const ctx: any = { repo, run: 'demo' };
-  const cut = '2026-08-17T03:00:00.000Z';
-  const after = '2026-08-17T04:00:00.000Z';
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    closed: false, needs_rejudge: ['thm-x'],
-  }));
-  const started: any[] = [];
-  const blockers: any[] = [];
-  const executor = {
-    start: (_s: any, p: any) => started.push(p),
-    state: { addBlocker: (stage: string, message: string, key: string) => {
-      blockers.push({ stage, message, key });
-      return true;
-    } },
-  };
-  const terminal: any = stages.find((s: any) => s.id === '7-rejudge');
-
-  // The normal stage plan, not the failure hook, owns the one paid sweep.
-  const [initial] = terminal.plan(ctx);
-  assert.equal(initial.label, 'rejudge');
-  assert.ok(initial.argv.includes('tools/step7-rejudge-cycle.mjs'));
-  assert.ok(initial.argv.includes('thm-x'));
-  assert.equal(terminal.maxAttempts, 1);
-  assert.equal(terminal.maxFixRounds, 1);
-  assert.equal(terminal.terminalFixBudget, true);
-  writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
-    cycles: [{ kind: 'initial', items: ['thm-x'], lineup: 'm', exit_code: 0,
-      started_at: cut, completed_at: after }],
-  }));
-
-  // Neither an outage nor malformed output is a completed paid verdict. The
-  // sole terminal pass must hold the item, not refund itself into another wave.
-  for (const reason of [SESSION_LIMIT, UNPARSEABLE]) {
-    blockers.length = 0;
-    writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason, at: after,
-      item_sha256: 'a'.repeat(64), context_sha256: 'b'.repeat(64) }]);
-    const result = await terminal.onGateFailure({ ctx, executor, stage: terminal,
-      round: 1, prevRoundAt: null, failure: { id: 'judge-closure', ok: false, why: '' } });
-    assert.equal(result, undefined, 'terminal adjudication does not request an outage retry');
-    assert.equal(started.length, 0, 'missing verdicts cannot launch another judge or adjudicator');
-    assert.deepEqual(blockers, [{
-      stage: '7-rejudge',
-      message: 'thm-x: required verdict missing; the terminal pass cannot launch another judge wave',
-      key: 'step7-terminal-missing:thm-x',
-    }]);
-  }
+  const rejudge: any = stages.find((s: any) => s.id === '7.4-rejudge');
+  const first = rejudge.plan({ repo, run: 'demo', stageRounds: { '7.4-rejudge': 1 } })[0];
+  const second = rejudge.plan({ repo, run: 'demo', stageRounds: { '7.4-rejudge': 2 } })[0];
+  assert.ok(first.argv.includes('tools/step7-workflow.mjs'));
+  assert.ok(first.argv.includes('judge'));
+  assert.equal(first.argv[first.argv.indexOf('--round') + 1], '1');
+  assert.equal(second.argv[second.argv.indexOf('--round') + 1], '2');
+  assert.notEqual(first.label, second.label, 'completed dispatches cannot cover a renewed judge round');
+  assert.equal(rejudge.maxAttempts, 1);
+  assert.equal(rejudge.onGateFailure, undefined, 'incomplete verdicts block; only the protocol routes a new wave');
+  assert.equal(rejudge.route, undefined, 'failed or missing verdicts cannot skip adjudication');
 });

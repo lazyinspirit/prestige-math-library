@@ -1,18 +1,6 @@
-// Step 7 is partitioned by group Alpha (owner, 2026-08-25).
-//
-// It was one lead Alpha reading every rejection on the level. These tests pin
-// the shape of the replacement, and one class-level guard that the old shape
-// would have failed.
-//
-// THE LATENT DEFECT THIS FILE EXISTS FOR. `7-adjudicate` declared
-// `pattern: resultPattern('alpha', 'step7-[a-z-]+')` while its plan dispatched
-// role `alpha-adjudicate` — a role added 2026-08-24 and never yet run. The
-// dispatcher writes `<role>-<label>.result.json`, so the completed adjudication
-// would have landed at `alpha-adjudicate-step7-lead.result.json`, which that
-// pattern does not match: the stage would have re-dispatched a finished
-// six-hour Alpha forever, with an ok:true result sitting on disk. The last test
-// here checks every stage's pattern against the result filename its own plan
-// produces, so the class cannot come back.
+// Step-6 readers, historical group-scope compatibility, and dispatcher result
+// naming. The replacement Step-7 protocol is covered by step7-stages-v2 and
+// step7-workflow tests; historical group receipts cannot satisfy its rounds.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -162,345 +150,22 @@ test('the step-6 reader hands off a digest without a resumable session', { skip:
   }
 });
 
-test('a step-7 adjudicator always starts fresh from its rendered digest handoff', () => {
-  const repo = fixtureRepoWithGroups();
-  const plans = stage('7-adjudicate').plan({ run: 'demo', repo }, ['1', '2']);
-  assert.ok(plans.length, 'the stage still plans');
-  for (const p of plans) {
-    assert.equal(p.resumeSession, undefined, 'never resume an id that was never recorded');
-    assert.equal(p.sessionHome, undefined, 'and do not point at a home with nothing in it');
-    assert.ok(p.task, 'it works from the rendered file instead');
-  }
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('7-scope renders the partition before any adjudicator is dispatched', () => {
-  const scope = stage('7-scope');
-  const adj = stage('7-adjudicate');
-  assert.ok(scope, '7-scope must exist');
-  assert.ok(stages.indexOf(scope) < stages.indexOf(adj), 'the scope must be rendered first');
-  assert.ok(stages.indexOf(stage('7-baseline')) < stages.indexOf(scope),
-    'the pre-step7 snapshot is still taken before anything else at step 7');
-  // Mechanical: no agent decides who owns which rejection.
-  assert.equal(scope.plan({ run: 'demo' })[0].role, 'tool');
-});
 
-test('7-scope checks its partition without repeating unchanged judge closure', () => {
-  const scope = stage('7-scope');
-  assert.ok(!scope.gatesWaived, 'a stage that writes the partition must be checkable');
-  const gates = scope.gates({ run: 'demo', repo: REPO });
-  const ids = gates.map((g: any) => g.id);
-  assert.ok(ids.includes('step7-scope'), 'the partition must be checked, not just written');
-  assert.ok(gates.find((g: any) => g.id === 'step7-scope').argv.includes('--allow-pending-alerts'),
-    'reader warnings must reach their owning groups before dispositions are required');
-  assert.ok(!ids.includes('judge-closure'),
-    '6-judge already proved closure and no item-writing stage intervenes before this render');
-  const adjudicationGates = stage('7-adjudicate').gates({ run: 'demo', repo: REPO });
-  assert.ok(adjudicationGates.some((g: any) => g.id === 'judge-closure'),
-  'closure is checked after the first Step-7 stage that can edit mathematics');
-  assert.ok(!adjudicationGates.find((g: any) => g.id === 'step7-scope').argv
-    .includes('--allow-pending-alerts'),
-  'post-adjudication closure must require every alert disposition');
-});
 
-test('7-adjudicate runs one Alpha per group over the group cohort', () => {
-  const s = stage('7-adjudicate');
-  assert.ok(s.cohort, 'a group stage advances on its cohort, not on a single batch');
-  assert.equal(s.concurrency, 9, 'nine groups cover the 27-batch ceiling at three batches each');
-  assert.ok(!s.pipeline, 'step 7 is a whole-level barrier: it follows the level-wide sweep');
-  const units = s.units({ run: 'demo', repo: REPO });
-  assert.ok(Array.isArray(units), 'units are the batches, not the literal "all"');
-  assert.ok(!units.includes('all'), 'the single-lead unit is gone');
-});
 
-test('Step 7 has one terminal pass followed only by snapshot and Step 8', () => {
-  const ids = stages.map(s => s.id);
-  assert.deepEqual(ids.filter(id => id.startsWith('7-')), [
-    '7-baseline', '7-scope', '7-adjudicate', '7-preflight', '7-rejudge', '7-freeze',
-  ]);
-  assert.equal(ids[ids.indexOf('7-rejudge') + 1], '7-freeze');
-  assert.equal(ids[ids.indexOf('7-freeze') + 1], '8-scope');
-  const terminal = stage('7-rejudge');
-  assert.equal(terminal.maxFixRounds, 1);
-  assert.equal(terminal.terminalFixBudget, true);
-  assert.equal(terminal.maxAttempts, 1);
-  assert.equal(stage('7-adjudicate').onProgress, undefined);
-  const repo = fixtureRepoWithGroups();
-  try {
-    const ctx = {run: 'demo', repo};
-    assert.ok(stage('7-preflight').gates(ctx).some((g: any) => g.id === 'proof-contract'));
-    assert.ok(!terminal.gates(ctx).some((g: any) => g.id === 'proof-contract'));
-    assert.equal(stage('7-freeze').plan(ctx).filter((p: any) => p.argv?.includes('post-step7')).length, 1);
-    assert.equal(stage('7-freeze').onGateFailure, undefined);
-  } finally { rmSync(repo, {recursive: true, force: true}); }
-});
 
-test('Step-7 preflight adjudicates existing rejection rows before any rejudge', async () => {
-  const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: ['thm-demo-y'], unadjudicated: ['thm-demo-x'], open_fatal: [], closed: false,
-  }));
-  const started: any[] = [];
-  const s: any = stage('7-preflight');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
-    stage: s, round: 1, failure: { id: 'judge-closure', why: 'current rejection awaits adjudication' },
-  });
-  assert.equal(started.length, 1, 'only the owning group is asked to decide the existing row');
-  assert.equal(started[0].role, 'alpha-adjudicate');
-  assert.match(started[0].task[0], /7-preflight-repair-envelope-1-a\.task\.md$/);
-  assert.match(readFileSync(join(repo, started[0].task[0]), 'utf8'), /Fixture closure recovery/,
-    'the exact repair envelope embeds the rejection-recovery brief, not contract-repair instructions');
-  assert.ok(!started.some((p) => p.role === 'tool' && p.argv?.includes('tools/judge-sweep.mjs')),
-    'preflight must not buy verdicts that the pending repair would immediately stale');
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('Step-7 preflight routes unhandled advisory residue in the same repair round', async () => {
-  const repo = fixtureRepoWithGroups();
-  const started: any[] = [];
-  const s: any = stage('7-preflight');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
-    stage: s, round: 1,
-    failure: {
-      id: 'splice-verify', why: 'mechanical receipt is stale',
-      advisory: [{ id: 'proof-contract', why: 'ERROR step-entry [thm-demo-y]: exact contract residue' }],
-    },
-  });
-  assert.equal(started.length, 1, 'the advisory item is not deferred behind another full battery');
-  assert.equal(started[0].role, 'alpha-adjudicate');
-  assert.match(started[0].label, /-b-/);
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('Step-7 groups retain full shared evidence but receive only relevant diagnostic records', async () => {
-  const repo = fixtureRepoWithGroups();
-  try {
-    const started: any[] = [];
-    const s: any = stage('7-preflight');
-    const output = 'ERROR contract [thm-demo-x]: x detail\n    x continuation\n'
-      + 'ERROR contract [thm-demo-y]: y detail\n    y continuation\n';
-    await s.onGateFailure({
-      ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
-      stage: s, round: 1, failure: { id: 'proof-contract', why: 'contract residue', output },
-    });
-    assert.equal(started.length, 2);
-    const envelopes = started.map((p) => JSON.parse(
-      readFileSync(join(repo, p.task[0]), 'utf8').match(/```json\n([\s\S]*?)\n```/)![1]));
-    assert.equal(envelopes[0].full_evidence, envelopes[1].full_evidence);
-    const full = JSON.parse(readFileSync(join(repo, envelopes[0].full_evidence), 'utf8'));
-    assert.equal(full.failures[0].output, output);
-    assert.equal(full.live_items.length, 2);
-    for (const envelope of envelopes) {
-      assert.equal(envelope.assigned_items.length, 1);
-      assert.equal(envelope.live_items.length, 1);
-      const own = envelope.group === 'a' ? 'x' : 'y';
-      const other = own === 'x' ? 'y' : 'x';
-      assert.match(envelope.failures[0].output, new RegExp(`${own} detail\\n    ${own} continuation`));
-      assert.doesNotMatch(envelope.failures[0].output, new RegExp(`${other} detail`));
-    }
-  } finally { rmSync(repo, { recursive: true, force: true }); }
-});
 
-test('terminal review sends contested rows to Astra and never launches another judge sweep', async () => {
-  const repo = fixtureRepoWithGroups();
-  const s: any = stage('7-rejudge');
-  const runHook = async (closure: any) => {
-    writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify(closure));
-    const started: any[] = [];
-    await s.onGateFailure({
-      ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
-      stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
-    });
-    return started;
-  };
-  const contested = await runHook({ needs_rejudge: ['thm-demo-y'], unadjudicated: ['thm-demo-x'], open_fatal: [], closed: false });
-  assert.ok(contested.length && contested.every((p) => p.role === 'final-adjudicator'));
-  assert.ok(contested.every((p) => !String(p.label).includes('adjudicate-rejudge')),
-    'a Terra rejudge rejection never returns to the Sol group adjudicator');
-  const missing = await runHook({ needs_rejudge: ['thm-demo-y'], unadjudicated: [], open_fatal: [], closed: false });
-  assert.equal(missing.length, 0);
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('Step-7 rejudge blocks exhausted owed items without stranding eligible page-mates', async () => {
-  const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: ['thm-demo-x', 'thm-demo-y'], unadjudicated: [], open_fatal: [], closed: false,
-  }));
-  writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
-    version: 2, run: 'demo', max_cycles_per_item: 1, cycles: [
-      { cycle_id: 'x-1', kind: 'repair', items: ['thm-demo-x'] },
-    ],
-  }));
-  const started: any[] = [];
-  const blockers: any[] = [];
-  const notices: any[] = [];
-  const s: any = stage('7-rejudge');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo },
-    executor: {
-      start: (_x: any, p: any) => started.push(p),
-      state: { addBlocker: (...args: any[]) => { blockers.push(args); return true; } },
-      reporter: { notify: (...args: any[]) => notices.push(args) },
-    },
-    stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
-  });
-  assert.equal(blockers.length, 2);
-  assert.match(blockers[0][1], /thm-demo-x.*required verdict missing/);
-  assert.equal(notices[0][0], 'blocked');
-  assert.equal(started.length, 0);
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('initial fatal provenance does not consume a paid rejudge', () => {
-  const repo = fixtureRepoWithGroups();
-  try {
-    writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({needs_rejudge: ['thm-demo-x']}));
-    writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
-      cycles: [{kind: 'initial-fatal', items: ['thm-demo-x']}],
-    }));
-    const s: any = stage('7-rejudge');
-    assert.ok(s.plan({run: 'demo', repo})[0].argv.includes('thm-demo-x'));
-  } finally { rmSync(repo, {recursive: true, force: true}); }
-});
 
-test('a completed paid verdict made stale by later licensed work goes to FA, never a second paid call', async () => {
-  const repo = fixtureRepoWithGroups();
-  try {
-    const ctx: any = { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } };
-    writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-      needs_rejudge: ['thm-demo-x'], unadjudicated: [], open_fatal: [], closed: false,
-    }));
-    writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
-      cycles: [{ kind: 'repair', items: ['thm-demo-x'], lineup: 'terra:gpt-5.6-terra', exit_code: 0,
-        started_at: '2026-09-10T00:00:00Z', completed_at: '2026-09-10T00:02:00Z' }],
-    }));
-    writeFileSync(join(repo, 'research', 'demo-judge.jsonl'), JSON.stringify({
-      id: 'thm-demo-x', model: 'gpt-5.6-terra', keep: true, at: '2026-09-10T00:01:00Z',
-      item_sha256: 'a'.repeat(64), context_sha256: 'b'.repeat(64),
-    }) + '\n');
-    const s: any = stage('7-rejudge');
-    assert.ok(!s.plan(ctx)[0].argv.includes('tools/step7-rejudge-cycle.mjs'));
-    const started: any[] = [];
-    await s.onGateFailure({ctx, stage: s, round: 1, failure: {id: 'judge-closure'},
-      executor: {start: (_s: any, p: any) => started.push(p)}});
-    assert.equal(started.length, 1);
-    assert.equal(started[0].role, 'final-adjudicator');
-  } finally { rmSync(repo, {recursive: true, force: true}); }
-});
 
-test('repair stage never launches final adjudication before preflight', async () => {
-  const repo = fixtureRepoWithGroups();
-  try {
-    const started: any[] = [];
-    const s: any = stage('7-adjudicate');
-    await s.onGateFailure({ctx: {run: 'demo', repo}, stage: s, round: 1,
-      executor: {start: (_s: any, p: any) => started.push(p)},
-      failure: {id: 'judge-closure', output: 'ERROR terminal-resolution-stale [thm-demo-x]: changed context'}});
-    assert.ok(started.every(p => p.role !== 'final-adjudicator'));
-  } finally { rmSync(repo, {recursive: true, force: true}); }
-});
 
-test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-medium FA per group', async () => {
-  const repo = fixtureRepoWithGroups();
-  mkdirSync(join(repo, 'items'));
-  writeFileSync(join(repo, 'items', 'thm-demo-x.md'), '---\nid: thm-demo-x\ndeps: [thm-demo-z]\n---\n');
-  writeFileSync(join(repo, 'research', 'demo-step7-scope.json'), JSON.stringify({
-    by_item: { 'thm-demo-x': 'a', 'thm-demo-z': 'a', 'thm-demo-y': 'b' },
-  }));
-  const ids = ['thm-demo-z', 'thm-demo-y', 'thm-demo-x'];
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: [], unadjudicated: ids, open_fatal: [], closed: false,
-  }));
 
-  const started: any[] = [];
-  const s: any = stage('7-rejudge');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
-    executor: { start: (_x: any, plan: any) => started.push(plan) },
-    stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
-  });
 
-  assert.equal(started.length, 2, 'three escalated items in two groups produce two FA agents');
-  assert.deepEqual(started.map((plan) => plan.role), ['final-adjudicator', 'final-adjudicator']);
-  assert.deepEqual(started.map((plan) => plan.label), ['step7-fa-a-round-1', 'step7-fa-b-round-1']);
-  assert.ok(started.every((plan) => plan.covers.length === 0), 'FA repair work cannot satisfy stage coverage');
-  const queueA = JSON.parse(readFileSync(join(repo, 'research', 'demo-step7-fa-a-round-1.json'), 'utf8'));
-  const queueB = JSON.parse(readFileSync(join(repo, 'research', 'demo-step7-fa-b-round-1.json'), 'utf8'));
-  assert.deepEqual(queueA.items.map((row: any) => [row.id, row.position]),
-    [['thm-demo-z', 1], ['thm-demo-x', 2]], 'the supplier precedes its alphabetically earlier consumer');
-  assert.deepEqual(queueB.items.map((row: any) => [row.id, row.position]), [['thm-demo-y', 1]]);
-  const taskA = readFileSync(join(repo, 'research', 'demo-step7-fa-a-round-1.task.md'), 'utf8');
-  assert.match(taskA, /Do not substantively review the next item until the recorder accepts the current one/);
-  assert.match(taskA, /--resolved-by final-adjudicator/);
-  assert.match(taskA, /authoritative http\(s\) URL/);
-  // A later repair legitimately moves the page context under an earlier
-  // receipt, so the dispatch has to carry the reseal recovery rather than
-  // leave the lane to escalate a hash conflict.
-  assert.match(taskA, /queue-status --run demo --queue research\/demo-step7-fa-a-round-1\.json/);
-  assert.match(taskA, /Reseal every `stale` position the command lists, in ascending order/);
-  assert.match(taskA, /Never escalate a context-hash conflict/);
-  assert.match(taskA, /Never edit `published\/`/);
-  assert.match(taskA, /PUBLISHED-DEFECT <item>/);
-  // An owner escalation holds the item open without stalling the queue, so the
-  // task has to carry the exact command that records it.
-  assert.match(taskA, /--disposition escalated-to-owner/);
-  assert.match(taskA, /a queue never stalls on an owner decision/);
-  const brief = readFileSync(join(REPO, 'briefs/final-adjudicator.md'), 'utf8');
-  for (const text of [taskA, brief]) {
-    assert.match(text, /queued licensed fatal item/);
-    assert.match(text, /new dependency lemma chains directly\s+required by that repair/);
-    assert.match(text, /same owned page and within the same group/);
-    assert.match(text, /owning manifest, proof contract\s+and Step-7 scope/);
-    assert.match(text, /engine[\s\S]*hash-bound auditor\/adjudicator-created-item/i);
-    assert.match(text, /[Dd]o not create self-review\s+decisions, judge verdicts or pass stamps/);
-    assert.match(text, /[Ee]xisting supplier edits|editing existing suppliers/);
-    assert.match(text, /new theorems, pages or pairs|new theorem, page or pair/);
-    assert.match(text, /[Dd]o not launch another judge or review wave/);
-    assert.doesNotMatch(text, /If new items or supplier edits are necessary, escalate instead/);
-  }
-  for (const text of [taskA, brief]) {
-    assert.match(text, /Never edit `published\/`/);
-    assert.match(text, /queue-status/);
-    assert.match(text, /escalated-to-owner/);
-  }
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('a re-dispatched final adjudication keeps the contested set when receipt currency cannot be recomputed', async () => {
-  const repo = fixtureRepoWithGroups();
-  mkdirSync(join(repo, 'items'));
-  writeFileSync(join(repo, 'items', 'thm-demo-x.md'), '---\nid: thm-demo-x\ndeps: []\n---\n');
-  writeFileSync(join(repo, 'research', 'demo-step7-scope.json'), JSON.stringify({
-    by_item: { 'thm-demo-x': 'a' },
-  }));
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: [], unadjudicated: ['thm-demo-x'], open_fatal: [], closed: false,
-  }));
-  writeFileSync(join(repo, 'research', 'demo-step7-terminal-resolutions.jsonl'),
-    `${JSON.stringify({ version: 1, run: 'demo', stage: '7-rejudge', id: 'thm-demo-x', at: '2026-01-01T00:00:00.000Z' })}\n`);
-
-  const started: any[] = [];
-  const blockers: string[] = [];
-  const s: any = stage('7-rejudge');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
-    executor: {
-      start: (_x: any, plan: any) => started.push(plan),
-      state: { addBlocker: (_stage: string, message: string) => blockers.push(message) },
-      reporter: { notify: () => {} },
-    },
-    stage: s, round: 2, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
-  });
-  assert.equal(started.length, 1, 'the contested item is still adjudicated rather than silently dropped');
-  assert.equal(started[0].label, 'step7-fa-a-round-2');
-  assert.match(blockers.join('\n'), /terminal receipt currency could not be recomputed/);
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('the final-adjudicator lane is independently pinned to Astra medium with web search', () => {
+test('the historical final-adjudicator lane retains its profile and explicitly retires from current Step 7', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'final-adjudicator', '--brief', 'briefs/final-adjudicator.md',
     '--task', 'briefs/tasks/final-adjudicator-step7.md', '--label', 'fa-test',
@@ -518,7 +183,9 @@ test('the final-adjudicator lane is independently pinned to Astra medium with we
   // web search AND shell network access (source fetch), reads the whole library
   // and every item of the frontier — bundles are an entry point, not a fence.
   assert.match(row.command, /sandbox_workspace_write\.network_access=true/);
-  assert.match(row.prompt, /one item at a time/i);
+  assert.match(row.prompt, /retired from the current Step-7 workflow/);
+  assert.match(row.prompt, /step7-adjudicator\.md/);
+  assert.match(row.prompt, /step7-owner-repair\.md/);
 });
 
 test('the Step-7 group adjudicator lane keeps web search, network access and earlier compaction', () => {
@@ -569,31 +236,6 @@ test('every role lane carries the 250k auto-compaction rule, DeepSeek included',
 // Against the live run, because the plan reads the VALIDATED group assignment
 // and a fixture would exercise the positional fallback instead — the one thing
 // `alphaGroups` documents as deliberately not the answer.
-test('every group Alpha at step 7 has its own task file and fresh context', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
-  const s = stage('7-adjudicate');
-  const ctx = { run: 'frontier-18', repo: REPO };
-  const plans = s.plan(ctx, s.units(ctx).map(String));
-  assert.ok(plans.length >= 2, 'more than one adjudicator');
-  const labels = new Set(plans.map((p: any) => p.label));
-  assert.equal(labels.size, plans.length, 'no two groups share a label, so no two share a result file');
-  for (const p of plans) {
-    assert.equal(p.role, 'alpha-adjudicate');
-    assert.ok(Array.isArray(p.task), 'a per-group file with the generic fallback behind it');
-    assert.match(p.task[0], /-alpha-[a-z]+-step7\.task\.md$/);
-    assert.ok(p.covers.length, 'each Alpha declares the batches it claims');
-    assert.equal(p.sessionHome, undefined);
-    assert.equal(p.resumeSession, undefined);
-    assert.ok(s.pattern.test(`${p.role}-${p.label}.result.json`),
-      `the stage pattern must match the result file ${p.role}-${p.label}.result.json`);
-  }
-  // Disjoint coverage is what makes concurrent appends to the shared
-  // adjudication ledger safe.
-  const seen = new Set<string>();
-  for (const p of plans) for (const c of p.covers) {
-    assert.ok(!seen.has(String(c)), `batch ${c} is claimed by two Alphas`);
-    seen.add(String(c));
-  }
-});
 
 // `step7-scope.mjs` resolves the repository from its OWN location, not from
 // cwd — deliberately, so a tool cannot be pointed at half a repo. A fixture
@@ -804,97 +446,12 @@ test('a fatal reader warning requires an exact repaired post-state', () => {
 // already refused to close over an unanswered one, but a gate that blocks and
 // dispatches nobody spends a round doing nothing and ends in a blocker — which is
 // the opposite of alerting the group that has to act.
-test('an unanswered cross-group finding re-dispatches the owning group', async () => {
-  const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-step7-alerts.json'),
-    JSON.stringify({ version: 1, run: 'demo', alerts: [{
-      alert_id: 's8a-demo', source: 'step6-read', from_group: 'a',
-      item: 'thm-demo-y', owning_group: 'b', finding: 'the dependency statement is false',
-    }] }));
-  const started: any[] = [];
-  const s8: any = stage('7-adjudicate');
-  await s8.onGateFailure({
-    ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
-    stage: s8, round: 1, failure: { id: 'step7-scope', why: 'cross-group finding on `thm-y` has no adjudication row' },
-  });
-  assert.equal(started.length, 1, 'exactly the owning group is alerted');
-  assert.equal(started[0].label, 'cross-group-b-round-1');
-  assert.deepEqual(started[0].covers, []);
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('a cross-group finding the owning group has answered dispatches nobody', async () => {
-  const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-step7-alerts.json'),
-    JSON.stringify({ version: 1, run: 'demo', alerts: [{
-      alert_id: 's8a-demo', source: 'step6-read', from_group: 'a',
-      item: 'thm-demo-y', owning_group: 'b', finding: 'the dependency statement is false',
-    }] }));
-  writeFileSync(join(repo, 'research', 'demo-step7-alert-decisions.jsonl'),
-    `${JSON.stringify({ version: 1, alert_id: 's8a-demo', from_group: 'a', owning_group: 'b',
-      item: 'thm-demo-y', outcome: 'nonfatal', rationale: 'The target statement remains valid under its written hypotheses.', at: new Date().toISOString() })}\n`);
-  const started: any[] = [];
-  const s8: any = stage('7-adjudicate');
-  await s8.onGateFailure({
-    ctx: { run: 'demo', repo }, executor: { start: (_x: any, p: any) => started.push(p) },
-    stage: s8, round: 1, failure: { id: 'step7-scope', why: 'something else' },
-  });
-  assert.equal(started.length, 0, 'an answered finding must not re-dispatch its group');
-  rmSync(repo, { recursive: true, force: true });
-});
 
 // A PUBLISHED REPAIR IS ROUTED TO THE CONFIGURED JUDGE (owner, 2026-08-25). The
 // closure receipt is computed over the RUN's scope, so a published item is never
 // in it — without the union below the repair ships to a live page unjudged.
-test('a repaired published item is swept even though closure never names it', () => {
-  const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: ['thm-demo-x'], unadjudicated: [], open_fatal: [], closed: false,
-  }));
-  writeFileSync(join(repo, 'research', 'demo-step7-published-repairs.jsonl'), [
-    JSON.stringify({ kind: 'repaired', id: 'lem-published-thing', group: 'a', found_via: 'thm-demo-x', pre_sha256: 'f'.repeat(64), defect: 'x', correction_basis: 'y' }),
-    JSON.stringify({ kind: 'escalated', id: 'lem-needs-owner', group: 'a', found_via: 'thm-demo-x', why: 'needs a reading-order change' }),
-  ].join('\n') + '\n');
-  const s: any = stage('7-rejudge');
-  const argv = s.plan({ run: 'demo', repo })[0].argv.join(' ');
-  assert.match(argv, /--items [^ ]*thm-demo-x/);
-  assert.match(argv, /lem-published-thing/, 'the repaired published item must be in the sweep');
-  assert.ok(!argv.includes('lem-needs-owner'), 'an escalated row was never edited, so there is nothing to rejudge');
-  rmSync(repo, { recursive: true, force: true });
-});
 
-test('a rejected published repair goes directly to Astra even after run closure', async () => {
-  const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    needs_rejudge: [], unadjudicated: [], open_fatal: [], closed: true,
-  }));
-  writeFileSync(join(repo, 'research', 'demo-step7-published-closure.json'), JSON.stringify({
-    repaired: ['lem-published-thing'],
-    needs_rejudge: [],
-    unadjudicated_rows: [{
-      id: 'lem-published-thing', model: 'gpt-5.6-terra', context_sha256: 'a'.repeat(64),
-    }],
-    open_fatal: [],
-    escalations: [],
-  }));
-  writeFileSync(join(repo, 'research', 'demo-step7-published-repairs.jsonl'),
-    `${JSON.stringify({ kind: 'repaired', id: 'lem-published-thing', group: 'a',
-      found_via: 'thm-demo-x', pre_sha256: 'f'.repeat(64), defect: 'false bound', correction_basis: 'direct calculation' })}\n`);
-  const started: any[] = [];
-  const s: any = stage('7-rejudge');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo },
-    executor: { start: (_x: any, plan: any) => started.push(plan) },
-    stage: s,
-    round: 1,
-    failure: { id: 'step7-published', why: 'published rejection awaits adjudication' },
-  });
-  assert.equal(started.length, 1);
-  assert.equal(started[0].role, 'final-adjudicator');
-  assert.match(started[0].label, /-a-/,
-    'published work is routed to the Astra queue for the group that owns its repair');
-  rmSync(repo, { recursive: true, force: true });
-});
 
 test('step7-guard licenses a published repair, and only a well-formed one', () => {
   const run = `step7guardtest${process.pid}`;
@@ -1090,11 +647,13 @@ test('step6 scope renders before the judge ledger exists', () => {
       const scope = JSON.parse(readFileSync(generated[0], 'utf8'));
       assert.deepEqual(scope.groups[0].rejections, []);
       assert.match(readFileSync(generated[2], 'utf8'),
-        /defect_type` to exactly one of\s+`logic`, `dependency_citation`, or `other`/,
-        'rendered adjudication tasks must name the validator\'s closed defect-type vocabulary');
+        /engine-generated, round-bound task/,
+        'current adjudication instructions defer exact schemas and ownership to the round task');
+      assert.match(readFileSync(generated[2], 'utf8'), /step7-adjudicator\.md/);
       assert.match(readFileSync(generated[3], 'utf8'),
         /defect_type` to exactly one of\s+`logic`, `dependency_citation`, or `other`/,
         'rendered recovery tasks must preserve the same defect-type vocabulary');
+      assert.match(readFileSync(generated[3], 'utf8'), /Historical compatibility task only/);
       const checked = check(run);
       assert.equal(checked.status, 0, `${checked.stdout}${checked.stderr}`);
       assert.match(checked.stdout, /1 item\(s\) partitioned/);
@@ -1191,6 +750,9 @@ test('every stage pattern matches the result file its own plan produces', () => 
   const ctx = { run: 'frontier-18', repo: REPO };
   const checked: string[] = [];
   for (const s of stages as any[]) {
+    // V2's round-specific plans freeze inputs; their fixture tests own coverage
+    // here so this historical smoke never materializes a new live-run pack.
+    if (s.id === '7-scope' || /^7\./.test(s.id)) continue;
     if (!s.pattern || !s.plan || !s.units) continue;
     const pattern = typeof s.pattern === 'function' ? s.pattern(ctx) : s.pattern;
     let plans: any[];

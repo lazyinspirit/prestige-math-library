@@ -37,15 +37,25 @@ They may supply local definitions/lemmas; substantial prerequisites and potentia
 published defects go to the owner. Step 4 splices the plan and snapshots content.
 Step 5a runs independent reviewers, read-only refuters and routed group
 adjudication; Step 5b reconciles dependencies and closes it.
-Every agent must acknowledge uncertainty and consult authoritative sources when unsure.
-Step 7 is repairs/checks → one rejudge → one final adjudication → Step 8.
-Unresolved terminal findings stop the run; no post-final repair loop exists.
-Across Steps 1–9, every failed gate is immediately escalated to the owner. A
+Every agent must acknowledge uncertainty and consult authoritative sources when
+unsure. Logical validity governs decisions; sources and judges can be mistaken.
+Step 7 runs batch Sol xhigh adjudication/repair, three Sol xhigh owner agents
+for downstream repairs across the whole library including published items, and
+one orchestrator certification pass after all writers drain. Terra rejudgment,
+Sol adjudication, three-owner downstream repair and stable recertification repeat
+until the latest round's unique fatal original-frontier items are strictly less
+than 5% of the frozen original scope. Every confirmed defect, including nonfatal
+defects, requires repair; fatal classification controls only that threshold.
+New downstream work continues in the repair phase until complete, before
+certification.
+The complete gate then repeats with owner repairs and recertification until green.
+Across Steps 1–9 outside this authorized Step-7 loop, every failed gate is
+immediately escalated to the owner. A
 gate failure never launches another automatic repair, review, author or judge
 round. The owner/operator repairs every rejected item, refreshes every
 certification invalidated by the repair, and only then uses `retry` to rerun the
 rejecting gate. No item can enter the next step until that gate passes on its
-repaired, recertified carrier. This rule applies uniformly to Steps 1–9. Normal
+repaired, recertified carrier. Normal
 first-pass stages and their planned dispatches are unchanged.
 An explicitly owner-authorized fatal finding discovered after the freeze uses
 the guarded Step-8 recovery command documented in WORKFLOW; it preserves Step 7

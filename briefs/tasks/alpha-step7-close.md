@@ -1,16 +1,11 @@
-# Step 7 — frozen integrity close, `{{run}}`
+# Historical Step-7 integrity close, `{{run}}`
 
-The final judge boundary is closed. The generated repair envelope above is
-authoritative: review only its exact `assigned_items` and `live_tuples`, with
-their explicit run or published scope; use a focused check when supported.
+Historical compatibility task only. This template grants no current repair or
+certification authority. Preserve existing receipts as evidence; do not dispatch
+the retired frozen-close lane for a current run.
 
-Resolve all assigned documentary findings in this pass. A serial reviewer must
-establish ownership before editing an ambiguous record. Report detector or
-authority defects explicitly; unchanged retries stop.
-
-Do not alter mathematical items, start a judge cycle, or change another group's
-records. You may correct a contract or receipt only when it exactly describes
-the current item and cannot conceal a defect. A mathematical correction is a
-blocker for the supervising session.
-
-Return the gate, ids, non-item records changed, focused checks, and blockers.
+Current rounds use `tools/step7-workflow.mjs`, `briefs/step7-adjudicator.md`
+and `briefs/step7-owner-repair.md`. Follow WORKFLOW.md's 7.1–7.10 protocol:
+repair every confirmed defect, finish all newly discovered downstream repairs,
+then centrally certify once all writers drain. Repeat the full final gate and
+owner repair until green. Use the generated round task for scope and schema.
