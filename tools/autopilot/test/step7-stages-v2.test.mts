@@ -57,6 +57,13 @@ test('owner repair continuations remain in the repair stage with unique results 
     assert.equal(scanned,false,'a live writer prevents repair-closure evaluation');
   }finally{f.close();}
 });
+test('doctor can inspect every future Step 7 command before prerequisite evidence exists',()=>{
+  const f=fixture();try {
+    rmSync(join(f.repo,'research/demo-step7-v2'),{recursive:true,force:true});
+    const ctx={...f.ctx,doctor:true};
+    for(const stage of f.stages)assert.doesNotThrow(()=>stage.plan?.(ctx,stage.units(ctx))??[],stage.id);
+  }finally{f.close();}
+});
 test('7.7 repeats only on a complete above-threshold report; gate failures preserve the repair loop',()=>{
   const f=fixture();try {
     const path=join(f.repo,'research/demo-step7-v2/threshold-1.json');

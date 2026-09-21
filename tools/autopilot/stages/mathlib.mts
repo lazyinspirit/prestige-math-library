@@ -1999,7 +1999,7 @@ export const stages = [
     pattern: resultPattern('tool', 'step8-changes-index|step8-changes-judge'),
     concurrency: 1,
     plan: (ctx) => {
-      const ids = step8ChangesOnDisk(ctx);
+      const ids = ctx.doctor ? [] : step8ChangesOnDisk(ctx);
       return [{
         role: 'tool',
         label: 'step8-changes-index',

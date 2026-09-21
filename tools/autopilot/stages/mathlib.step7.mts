@@ -32,11 +32,11 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     artifacts:(ctx:any,u:string)=>{const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
     plan:(ctx:any,pending:string[])=>{
       const n=round(ctx,id);
-      if(adjudication)prepareAdjudication(ctx.repo,ctx.run,phase,n);
+      if(adjudication&&!ctx.doctor)prepareAdjudication(ctx.repo,ctx.run,phase,n);
       else {
         const failures=phase==='gate'?(ctx.stageFailures?.['7.10-gate']??ctx.stageFailures?.['7.8-gate']):null;
-        if(phase==='gate'&&!failures)throw Error('7.9 requires actual failed gate diagnostics');
-        prepareImpact(ctx.repo,ctx.run,phase,n,{failures});
+        if(phase==='gate'&&!failures&&!ctx.doctor)throw Error('7.9 requires actual failed gate diagnostics');
+        if(!ctx.doctor)prepareImpact(ctx.repo,ctx.run,phase,n,{failures});
       }
       return pending.map(u=>{const [pass,unit]=decode(phase,u);return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
         job:adjudication?'adjudication':'authoring',covers:[u],profile:MODEL_PROFILE_NAMES.solXHigh,

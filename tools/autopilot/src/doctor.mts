@@ -42,7 +42,9 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   const ok: any[] = [];
 
   const mod = await import(stagesPath);
-  const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`), config };
+  // Plans may depend on artifacts produced by earlier stages. `doctor` asks
+  // them only for command descriptors, before those artifacts exist.
+  const ctx = { run, repo, dispatchDir: join(repo, 'research', `${run}-dispatch`), config, doctor: true };
   const syntheticUnits = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
   // Probe each plan with the identities that its own unit function declares.

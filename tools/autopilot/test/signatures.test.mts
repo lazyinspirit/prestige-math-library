@@ -26,7 +26,7 @@ const flagsOf = (s: string): string[] => [...new Set<string>(s.match(/--[a-z-]+/
 test('every gate and command in the stage table passes flags its tool defines', async (t) => {
   if (!existsSync(join(REPO, 'tools'))) return t.skip('target repo not present');
   const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO };
+  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
   const problems = [];
 
   for (const st of mod.stages) {
@@ -130,6 +130,7 @@ test('doctor probes a plan with the stage\'s declared unit identities', async (t
       id: 'pair-plan', label: 'pair-plan', units: () => ['pair-a'], pattern: /x/,
       gates: () => [{ id: 'g', argv: ['node', '--version'] }],
       plan: (_ctx, pending) => {
+        if (_ctx.doctor !== true) throw new Error('doctor context was not declared');
         if (pending.length !== 1 || pending[0] !== 'pair-a')
           throw new Error('received synthetic units ' + pending.join(','));
         return [];

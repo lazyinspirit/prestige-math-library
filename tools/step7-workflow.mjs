@@ -386,17 +386,17 @@ export function checkWorkflow(root,run,options={}) {
 }
 
 function main() {
-  const args=process.argv.slice(2),opt=(name,fallback='')=>{const i=args.indexOf(`--${name}`);return i<0?fallback:args[i+1];};
-  const root=resolve(opt('root',process.cwd())),run=opt('run'),phase=opt('phase'),round=Number(opt('round','1'));
+  const args=process.argv.slice(2),opt=(flag,fallback='')=>{const i=args.indexOf(flag);return i<0?fallback:args[i+1];};
+  const root=resolve(opt('--root',process.cwd())),run=opt('--run'),phase=opt('--phase'),round=Number(opt('--round','1'));
   if(!/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(run)||!Number.isInteger(round)||round<1)throw Error('valid --run and --round required');
   let result;
   if(args[0]==='review-contexts'){
-    const ids=opt('items').split(',').filter(Boolean);requireValue(ids.length,'--items required');
+    const ids=opt('--items').split(',').filter(Boolean);requireValue(ids.length,'--items required');
     console.log(JSON.stringify(reviewContextHashes(root,ids),null,2));return;
   }
   switch(args[0]) {
     case 'init':result=initialize(root,run);break;
-    case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('failures')?read(opt('failures')):null});break;
+    case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('--failures')?read(opt('--failures')):null});break;
     case 'collect':result=collect(root,run,phase,round);break;
     case 'advance-impact':result=advanceImpact(root,run,phase,round);break;
     case 'certify':result=certify(root,run,phase,round);break;
