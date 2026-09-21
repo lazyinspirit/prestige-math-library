@@ -118,6 +118,35 @@ test('all three owners review published downstreams before single stable, idempo
   }finally{f.cleanup();}
 });
 
+test('worker-reported consumers without graph edges require owner coverage before certification',()=>{
+  for(const reporter of ['adjudicator','owner']){
+    const f=fixture();try{
+      const target='thm-unrelated-consumer';
+      let pack;
+      if(reporter==='adjudicator'){
+        const initialPack=prepareAdjudication(f.root,run,'initial',1);
+        item(f.root,f.ids[0],'Repaired root proof.');
+        reports(f.root,initialPack,{},['thm-published-consumer',target]);
+        pack=prepareImpact(f.root,run,'impact-initial',1);
+        assert.ok(Object.values(pack.assignments).flat().includes(target));
+        reports(f.root,pack);
+      }else{
+        pack=initial(f.root,f.ids);reports(f.root,pack,{},[target]);
+        assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:contexts}),/continuation/);
+        assert.equal(existsSync(join(workflowDir(f.root,run),'certification.json')),false);
+        const next=advanceImpact(f.root,run,'impact-initial',1);
+        assert.deepEqual(Object.values(next.pack.assignments).flat(),[target]);
+        reports(f.root,next.pack);
+      }
+      const before=readFileSync(join(f.root,'items',`${target}.md`),'utf8');
+      const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+      assert.ok(cert.items.some((row:any)=>row.id===target));
+      assert.equal(cert.changed.includes(target),false);
+      assert.equal(readFileSync(join(f.root,'items',`${target}.md`),'utf8'),before);
+    }finally{f.cleanup();}
+  }
+});
+
 test('stale downstream review and newly introduced downstream edge prevent any certification',()=>{
   for(const mode of ['stale','new-edge']){
     const f=fixture();try{

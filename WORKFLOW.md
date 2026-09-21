@@ -362,6 +362,10 @@ Downstream discovery includes transitive declared dependencies and actual uses
 in proofs, citations and page interfaces throughout the library. Record exact
 dependency paths and mathematical effects, distinguish candidates from confirmed
 repair targets, and reconcile newly discovered consumers before certification.
+Worker-reported consumer IDs enter owner assignments even when the dependency
+graph has no edge to them. Continuations retain those IDs until a current review
+covers them; a sound consumer closes unchanged, and only necessary minimal
+repairs are made.
 Owners have disjoint write assignments and repair suppliers before consumers.
 If a repair reveals additional relevant consumers, the engine continues the
 repair phase with fresh disjoint assignments. Complete that work and any further

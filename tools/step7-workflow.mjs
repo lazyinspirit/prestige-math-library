@@ -308,6 +308,9 @@ export function advanceImpact(root,run,phase,round) {
   // It is used only for closure accounting, never counted as an owner repair.
   const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
   const sourceReceipt=source?read(join(workflowDir(root,run),`${source}-${round}-collected.json`)):null;
+  // Actual proof/interface consumers reported by workers need not yet have a
+  // graph edge. Keep them in closure until a current owner review covers them.
+  for(const receipt of [sourceReceipt,...completed])for(const id of receipt?.downstream??[])required.add(id);
   const sourceReviews=new Map((sourceReceipt?.reviews??[]).map(row=>[row.id,row]));
   for(const id of sourceReviews.keys())required.add(id);
   const contextHash=dependencyReviewHasher(items,current);
@@ -349,7 +352,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   const named=failures ? [...new Set(JSON.stringify(failures).match(/\b(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*\b/g)??[])].filter(id=>allIds.has(id)) : [];
   const seeds=result?.changed??named;
   const impacts=discoverDownstream({items,repairedIds:seeds});
-  const targets=[...new Set([...impacts.map(r=>r.id),...named])].sort();
+  const targets=[...new Set([...impacts.map(r=>r.id),...(result?.downstream??[]),...named])].sort();
   // Deterministic disjoint lanes run serially. This protects shared contracts
   // and transitive suppliers while still giving exactly three owner agents.
   const assignments={'1':[],'2':[],'3':[]};
