@@ -48,6 +48,10 @@ than 5% of the frozen original scope. Every confirmed defect, including nonfatal
 defects, requires repair; fatal classification controls only that threshold.
 New downstream work continues in the repair phase until complete, before
 certification.
+Batch adjudicators and all three owner agents may fully author new items for
+genuine unmet prerequisites only. Additions require unique IDs, registry/index
+and metadata registration, downstream repair closure, central certification and
+all applicable gates; they never change the frozen threshold denominator.
 The complete gate then repeats with owner repairs and recertification until green.
 Across Steps 1–9 outside this authorized Step-7 loop, every failed gate is
 immediately escalated to the owner. A

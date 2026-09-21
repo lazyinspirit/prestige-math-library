@@ -35,6 +35,11 @@ impact coverage, uncertainty, or stale certification cannot count as success.
 Fatal classification affects only that threshold. Every actual defect must be
 repaired; newly discovered downstream work continues in the repair phase with
 fresh disjoint assignments until complete, before central certification.
+Batch adjudicators and all three owner agents may fully author new items only
+for genuine unmet prerequisites of assigned repairs. Require exact mathematical
+justification, unique IDs, registry/index and metadata registration, dependency
+and downstream closure, and inclusion in central certification and gates. Added
+items never enlarge the frozen original-frontier denominator.
 Logical validity is authoritative; agents and the orchestrator must state
 uncertainty, consult authoritative sources when uncertain, and independently
 check arguments because sources can contain mistakes.

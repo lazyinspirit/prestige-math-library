@@ -19,9 +19,25 @@ uncertainty using the task's schema and concrete mathematical evidence.
 Multiple rejection rows for one item still require complete coverage.
 Repair all confirmed defects, including nonfatal defects, in assigned items and
 local contracts/metadata. Fatal classification controls only the threshold;
-a sound item needs no cosmetic rewrite. Fully prove and register any necessary
-local supplier before consumers, within the task's authority. Preserve the
-content contract and Foundations boundary. Unresolved mathematics blocks closure.
+a sound item needs no cosmetic rewrite. Preserve the content contract and
+Foundations boundary. Unresolved mathematics blocks closure.
+
+You and all three owner repair agents may author new items only to satisfy
+genuine unmet prerequisites of assigned repairs. Identify the precise missing
+claim, its consuming proof step and why existing items cannot supply it.
+Do not add unrelated results or assume the missing claim. Fully author the
+definition or proof, state exact hypotheses and dependency uses, and apply the
+same logical and source-evidence standard as to every repaired item.
+Choose unique IDs after checking existing IDs, aliases and current assignments;
+resolve an ownership or ID collision before writing. Register each addition in
+the canonical registry/index, owning page, applicable manifest and proof contract
+through the task's serialized integration path. Do not leave orphan item files.
+Include each new item and its creation evidence in the generated task's result
+schema. Declare dependency edges and discover all downstream consumers of the
+addition, including published consumers. Complete their relevant repairs before
+certification. New items enter the central certification inventory and complete
+gate battery; they do not enlarge the frozen original-frontier denominator or
+permit self-issued judge verdicts, certificates or pass stamps.
 
 Identify every relevant downstream consumer throughout the library, including
 published items and consumers outside this run or batch. Inspect transitive

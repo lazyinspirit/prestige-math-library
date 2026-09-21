@@ -165,6 +165,22 @@ test('the step-6 reader hands off a digest without a resumable session', { skip:
 
 
 
+test('both current Step-7 role briefs authorize prerequisite additions with closed registration and repair obligations', () => {
+  for (const name of ['step7-adjudicator.md', 'step7-owner-repair.md']) {
+    const brief = readFileSync(join(REPO, 'briefs', name), 'utf8').replace(/\s+/g, ' ');
+    assert.match(brief, /all three owner repair agents|All three owner repair agents/, name);
+    assert.match(brief, /only to satisfy genuine unmet prerequisites of assigned repairs/, name);
+    assert.match(brief, /precise missing claim.*consuming proof step.*existing items cannot supply it/, name);
+    assert.match(brief, /unique IDs.*existing IDs, aliases and current assignments/, name);
+    assert.match(brief, /canonical registry\/index, owning page, applicable manifest and proof contract/, name);
+    assert.match(brief, /serialized integration path/, name);
+    assert.match(brief, /central certification inventory and complete gate battery/, name);
+    assert.match(brief, /downstream consumer.*published consumers/, name);
+    assert.match(brief, /before certification/, name);
+    assert.match(brief, /frozen original-frontier denominator/, name);
+  }
+});
+
 test('the historical final-adjudicator lane retains its profile and explicitly retires from current Step 7', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'final-adjudicator', '--brief', 'briefs/final-adjudicator.md',

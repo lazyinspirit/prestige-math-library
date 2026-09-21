@@ -12,3 +12,7 @@ writers drain. Terra rejudgment and adjudication/repair/certification repeat
 under WORKFLOW.md. New downstream work continues in the repair phase until
 complete before certification. Fatal classification controls only the threshold.
 Historical terminal receipts cannot close current rounds.
+Adjudicators and all three owner agents may author new items only for genuine
+unmet prerequisites. Follow the dedicated briefs for evidence, unique IDs,
+registry/index and metadata inclusion, downstream repair closure and central
+certification and gates; the frozen original scope never grows.

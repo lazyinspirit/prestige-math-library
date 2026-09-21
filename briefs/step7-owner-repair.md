@@ -26,9 +26,26 @@ by each repair.
 Discover and report additional affected consumers, including ones outside the
 initial closure. Route another lane's items through the task's integration
 mechanism; never write another agent's files. Missing ownership or a shared-file
-collision must be reconciled before closure. Fully prove necessary suppliers
-within task authority; do not weaken results merely to clear a check.
+collision must be reconciled before closure. Do not weaken results merely to
+clear a check.
 Preserve the Foundations boundary and actual AC contracts.
+
+All three owner repair agents and the batch adjudicators may author new items
+only to satisfy genuine unmet prerequisites of assigned repairs. Identify the
+precise missing claim, its consuming proof step and why existing items cannot
+supply it. Do not add unrelated results or assume an unproved prerequisite.
+Fully author the definition or proof, state exact hypotheses and dependency
+uses, and apply the same logical and source-evidence standard as to repairs.
+Choose unique IDs after checking existing IDs, aliases and current assignments;
+resolve an ownership or ID collision before writing. Register each addition in
+the canonical registry/index, owning page, applicable manifest and proof contract
+through the task's serialized integration path. Do not leave orphan item files.
+Include new items and creation evidence in the generated task's result schema.
+Declare dependency edges and discover every affected downstream consumer,
+including published consumers. New downstream work continues within the repair
+phase until complete before certification. New items enter the central
+certification inventory and complete gate battery; they do not change the frozen
+original-frontier denominator or authorize self-issued verdicts or stamps.
 
 For 7.9, resolve every assigned full-battery failure, not only the first printed
 error. Distinguish mathematical defects from detector/runtime defects and name

@@ -2,7 +2,7 @@
 // Round-based Step 7. Mathematical workers write evidence; only the controller
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
 import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -27,6 +27,47 @@ const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().
 const requireValue=(condition,message)=>{if(!condition)throw Error(message);};
 const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&digest(readFileSync(p,'utf8'))===hash,`Step 7 evidence changed: ${p}`);};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
+const creationId=/^(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+function libraryIdentity(root) {
+  const items=readLibraryItems(root),ids=new Set(items.map(row=>row.id)),aliases=new Map();
+  for(const row of items)for(const alias of row.aliases??[]){
+    if(ids.has(alias))continue; // Existing canonical IDs win, matching depcheck.
+    requireValue(!aliases.has(alias),`duplicate library alias: ${alias}`);aliases.set(alias,row.id);
+  }
+  return {items,ids,aliases};
+}
+function itemKind(root,id) {
+  const text=readFileSync(join(root,'items',`${id}.md`),'utf8');
+  return text.match(/^---\r?\n[\s\S]*?^kind:\s*["']?([^\r\n"']+)["']?\s*$[\s\S]*?^---/m)?.[1]?.trim();
+}
+function manifestHomes(root,run) {
+  const homes={};
+  for(const file of readdirSync(join(root,'research')).sort()){
+    const match=file.match(new RegExp(`^${run}-batch-(\\d+)\\.pages\\.json$`));if(!match)continue;
+    const raw=read(join(root,'research',file)),pages=Array.isArray(raw)?raw:raw.pages??[];
+    homes[match[1]]=pages.map(page=>String(page.id)).sort();
+  }
+  return homes;
+}
+function creationRegistration(root,run,row) {
+  requireValue(creationId.test(row.id??''),`invalid created item ID: ${row.id}`);
+  requireValue(typeof row.kind==='string'&&row.kind.length>0,`missing created item kind: ${row.id}`);
+  requireValue(typeof row.home_page==='string'&&row.home_page.length>0,`missing created item home_page: ${row.id}`);
+  requireValue(typeof row.batch==='string'&&row.batch.length>0,`missing created item batch: ${row.id}`);
+  requireValue(itemKind(root,row.id)===row.kind,`created item kind mismatch: ${row.id}`);
+  const matches=[];
+  for(const file of readdirSync(join(root,'research')).sort()){
+    const match=file.match(new RegExp(`^${run}-batch-(\\d+)\\.pages\\.json$`));if(!match)continue;
+    const raw=read(join(root,'research',file)),pages=Array.isArray(raw)?raw:raw.pages??[];
+    for(const page of pages)for(const entry of page.items??[])if((typeof entry==='string'?entry:entry?.id)===row.id)
+      matches.push({batch:match[1],page:String(page.id)});
+  }
+  requireValue(matches.length===1&&matches[0].batch===row.batch&&matches[0].page===row.home_page,
+    `created item must be registered exactly once in its declared batch/page: ${row.id}`);
+  const contract=join(root,'research',`${run}-batch-${row.batch}.proof-contracts.json`);
+  requireValue(existsSync(contract)&&Object.hasOwn(read(contract)?.contracts??{},row.id),`created item lacks its batch proof contract: ${row.id}`);
+  return matches[0];
+}
 function validVerdicts(rows) {
   for(const row of rows)requireValue(typeof row.id==='string'&&typeof row.model==='string'&&/^[a-f0-9]{64}$/.test(row.context_sha256??'')&&[true,false,null].includes(row.keep),'malformed frozen judge verdict');
   return rows;
@@ -81,12 +122,14 @@ export function prepareAdjudication(root,run,phase,round) {
   if(phase==='initial')for(const id of frontier.ids)requireValue([...latest.values()].some(row=>row.id===id&&typeof row.keep==='boolean'),`missing Step 6 verdict: ${id}`);
   for(const row of latest.values())requireValue(typeof row.keep==='boolean',`missing complete judge verdict: ${row.id}`);
   const rejected=[...latest.values()].filter(r=>r.keep===false);
+  const prior=verifyCertification(root,run), additions=new Map((prior?.creations??[]).map(row=>[row.id,String(row.batch)]));
   const byId=new Map(frontier.batches.flatMap(b=>b.items.map(id=>[id,String(b.id)])));
   // Published consumers acquired during owner repair are assigned once to the
   // first batch. The original denominator and ownership remain immutable.
   const units=frontier.batches.map(b=>String(b.id));
-  const assignments=Object.fromEntries(units.map(u=>[u,rejected.filter(r=>(byId.get(r.id)??units[0])===u)]));
-  const pack={version:2,run,phase,round,units,assignments,before:hashes(root),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
+  const assignments=Object.fromEntries(units.map(u=>[u,rejected.filter(r=>(byId.get(r.id)??additions.get(r.id)??units[0])===u)]));
+  const identity=libraryIdentity(root);
+  const pack={version:2,run,phase,round,units,assignments,before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
   frozen(path,pack); writeTasks(root,pack,'adjudicate'); return pack;
 }
 
@@ -99,13 +142,13 @@ function writeTasks(root,pack,mode) {
     const body=[`# Step 7 ${mode}: ${pack.phase}, round ${pack.round}, unit ${unit}`,
       `Read briefs/step7-${mode==='adjudicate'?'adjudicator':'owner-repair'}.md.`,
       `Frozen inputs: ${packPath(root,pack.run,pack.phase,pack.round)}.`,
-      `Write only your assigned item files, owning contracts/metadata, and ${report}.`,
+      `Write only your assigned item files, genuinely required new prerequisite items, their owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
       'Read all cited suppliers and relevant consumers. Repair confirmed fatal defects fully. Identify all downstream consumers, including published items.',
       mode==='adjudicate' ? 'Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.' :
         'Review every assigned downstream item, including published items. Repair each relevant impact, or explain why unaffected. Work supplier-before-consumer. Published repairs are authorized by the owner for this impact wave. Reconcile proof contracts, dependencies, page metadata and publication audit evidence.',
-      `Return JSON {run,phase,round,unit,input_sha256:"${digest(pack)}",decisions:[],reviews:[],downstream:[]}. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. All assigned items require a review. Reasons must explain actual logical checks (at least 40 characters); unresolved uncertainty must be reported and blocks completion.`,
+      `Return JSON {run,phase,round,unit,input_sha256:"${digest(pack)}",decisions:[],reviews:[],created_items:[],downstream:[]}. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters); unresolved uncertainty blocks completion.`,
       `Immediately after completing each mathematical review, before editing another supplier, run node tools/step7-workflow.mjs review-contexts --run ${pack.run} --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.`,
       mode==='adjudicate' ? 'Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.' :
         'Owner repair units run serially. You may update research/published-consumer-supplier-ledger.md for your assigned findings, maintaining its canonical deduplicated classification index and exact supplier/evidence links. Resolve supplied ledger proposals; do not silently discard them. Do not write judge verdicts or shared adjudication JSONL. Unit 1 also reconciles initial-adjudicator ledger proposals whose item has no downstream owner assignment. Record unresolved ledger work honestly in your report; it blocks the final gate.',
@@ -119,28 +162,35 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now) {
-  const errors=[], decisions=[],reviews=[];
+export function validateReports(pack,reports,now,{root=null}={}) {
+  const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
     if(!report||report.run!==pack.run||report.phase!==pack.phase||report.round!==pack.round||report.input_sha256!==digest(pack)) { errors.push(`missing or mismatched report ${unit}`);continue; }
-    if(!Array.isArray(report.reviews)||!Array.isArray(report.decisions)||!Array.isArray(report.downstream)){errors.push(`malformed report arrays ${unit}`);continue;}
-    const ids=new Set(pack.assignments[unit].map(r=>typeof r==='string'?r:r.id));
-    const seen=new Set();
+    if(!Array.isArray(report.reviews)||!Array.isArray(report.decisions)||!Array.isArray(report.created_items)||!Array.isArray(report.downstream)){errors.push(`malformed report arrays ${unit}`);continue;}
+    const assigned=new Set(pack.assignments[unit].map(r=>typeof r==='string'?r:r.id)),creations=new Set();
+    for(const row of report.created_items){
+      if(!row||!creationId.test(row.id??'')||creations.has(row.id)||creatorById.has(row.id)||pack.before[row.id]
+        ||Object.hasOwn(pack.before_aliases??{},row.id)||!evidenceText(row)||!Array.isArray(row.consumers)||!row.consumers.length
+        ||row.consumers.some(id=>typeof id!=='string')||!pack.home_pages?.[row.batch]?.includes(row.home_page)
+        ||(pack.rejected&&String(row.batch)!==unit))errors.push(`invalid created item ${unit}/${row?.id}`);
+      creations.add(row.id);creatorById.set(row.id,{unit,row,assigned,report});createdItems.push(row);
+    }
+    const ids=new Set([...assigned,...creations]),seen=new Set();
     for(const row of report.reviews??[]) {
-      if(!ids.has(row.id)||seen.has(row.id)||!evidenceText(row)||!['repaired','unaffected'].includes(row.disposition)||row.post_sha256!==now[row.id]||!/^[a-f0-9]{64}$/.test(row.review_context_sha256??'')) errors.push(`invalid review ${unit}/${row.id}`);
+      const dispositions=creations.has(row.id)?['authored']:['repaired','unaffected'];
+      if(!ids.has(row.id)||seen.has(row.id)||!evidenceText(row)||!dispositions.includes(row.disposition)||row.post_sha256!==now[row.id]||!/^[a-f0-9]{64}$/.test(row.review_context_sha256??'')) errors.push(`invalid review ${unit}/${row.id}`);
       seen.add(row.id);reviews.push(row);
     }
-    for(const id of ids) if(!seen.has(id))errors.push(`missing review ${unit}/${id}`);
-    const expected=new Map((pack.rejected?pack.assignments[unit]:[]).map(row=>[key(row),row]));
-    const decided=new Set();
+    for(const id of ids)if(!seen.has(id))errors.push(`missing review ${unit}/${id}`);
+    const expected=new Map((pack.rejected?pack.assignments[unit]:[]).map(row=>[key(row),row])),decided=new Set();
     for(const row of report.decisions??[]) {
       if(!expected.has(key(row))||decided.has(key(row))||!evidenceText(row)||!['confirmed_fatal','confirmed_nonfatal','false_positive'].includes(row.outcome)) errors.push(`invalid adjudication ${unit}/${row.id}`);
       decided.add(key(row));decisions.push(row);
     }
     for(const tuple of expected.keys())if(!decided.has(tuple))errors.push(`missing adjudication ${tuple}`);
     if(report.downstream.some(id=>typeof id!=='string'||!now[id]))errors.push(`invalid downstream inventory ${unit}`);
-    const gateExpected=new Set((pack.gateAssignments?.[unit]??[]).map(row=>row.index)), gateSeen=new Set();
+    const gateExpected=new Set((pack.gateAssignments?.[unit]??[]).map(row=>row.index)),gateSeen=new Set();
     for(const row of report.gate_resolutions??[]) {
       if(!gateExpected.has(row.index)||gateSeen.has(row.index)||!evidenceText(row))errors.push(`invalid gate resolution ${unit}/${row.index}`);
       gateSeen.add(row.index);
@@ -150,13 +200,43 @@ export function validateReports(pack,reports,now) {
   if(reports.length!==pack.units.length)errors.push('unexpected or duplicate reports');
   const changed=diff(pack.before,now);
   for(const id of changed) {
-    const review=reviews.find(r=>r.id===id&&r.disposition==='repaired');
-    if(!now[id]||!pack.before[id]||!review)errors.push(`unlicensed or unreviewed change ${id}`);
-    if(pack.rejected&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
+    const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
+    if(!now[id]||!review||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
+    if(pack.rejected&&!created&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
   }
-  for(const row of decisions) if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
-  for(const row of reviews)if(row.disposition==='repaired'&&!changed.includes(row.id))errors.push(`claimed repair without change ${row.id}`);
-  return {errors,decisions,reviews,changed};
+  for(const id of Object.keys(pack.before))if(!now[id])errors.push(`unlicensed deletion ${id}`);
+  for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
+  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
+  for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
+  if(createdItems.length&&root){
+    try{
+      const identity=libraryIdentity(root),itemById=new Map(identity.items.map(value=>[value.id,value]));
+      for(const row of createdItems)creationRegistration(root,pack.run,row);
+      for(const [id,owner] of creatorById){
+        const {row,assigned,report}=owner,local=new Set(report.created_items.map(value=>value.id));
+        for(const alias of itemById.get(id)?.aliases??[]){
+          if(identity.ids.has(alias)||identity.aliases.get(alias)!==id)errors.push(`created item alias is not globally unique ${id}/${alias}`);
+        }
+        for(const consumer of row.consumers){
+          if(!assigned.has(consumer)&&!local.has(consumer))errors.push(`created prerequisite consumer is outside creator scope ${id}/${consumer}`);
+          if(!(itemById.get(consumer)?.deps??[]).includes(id))errors.push(`created prerequisite is not a declared direct dependency ${id}/${consumer}`);
+        }
+        const queue=[id],seen=new Set([id]);let anchored=false;
+        while(queue.length){
+          const next=queue.shift(),created=report.created_items.find(value=>value.id===next);
+          for(const consumer of created?.consumers??[]){
+            if(assigned.has(consumer)){
+              const review=report.reviews.find(value=>value.id===consumer);
+              const decision=report.decisions.find(value=>value.id===consumer&&['confirmed_fatal','confirmed_nonfatal'].includes(value.outcome));
+              if(review?.disposition==='repaired'&&(!pack.rejected||decision))anchored=true;
+            }else if(local.has(consumer)&&!seen.has(consumer)){seen.add(consumer);queue.push(consumer);}
+          }
+        }
+        if(!anchored)errors.push(`created prerequisite is not load-bearing for an assigned completed repair ${id}`);
+      }
+    }catch(error){errors.push(error.message);}
+  }else if(createdItems.length)errors.push('creation validation requires repository root');
+  return {errors,decisions,reviews,changed,created_items:createdItems};
 }
 
 export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
@@ -172,18 +252,20 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported);
+  const result=validateReports(pack,reports,reported,{root});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   verifyEvidence(evidence);
+  const creationAuthors=new Map();
   for(const unit of pack.units) {
     const p=workerReport(root,run,phase,round,unit); evidence[p]=digest(readFileSync(p,'utf8'));
     const role=phase==='initial'||phase==='repeat'?'alpha-adjudicate':'alpha-repair';
     const dispatch=join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(phase,round,unit)}.result.json`);
     const receipt=read(dispatch); if(receipt.ok!==true||receipt.run!==run||receipt.role!==role||receipt.label!==workerLabel(phase,round,unit)||receipt.model!==MODELS.sol.id||receipt.provider_effort!=='xhigh')throw Error(`worker did not succeed with required Sol xhigh identity: ${dispatch}`);
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
+    for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
-  const receipt={...result,version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   const required=discoverDownstream({items:readLibraryItems(root),repairedIds:result.changed});
   receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
   if(!deferImpactClosure)for(const id of receipt.inventory_missing)requireValue(false,`missing downstream inventory: ${id}`);
@@ -235,14 +317,15 @@ export function advanceImpact(root,run,phase,round) {
     const assignments={'1':[],'2':[],'3':[]};
     const {order,cycles}=orderImpacts(items,pending);
     order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
-    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,units:['1','2','3'],assignments,before:current,seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
+    const identity=libraryIdentity(root);
+    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,units:['1','2','3'],assignments,before:current,before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
   }
   const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence));
   for(const pass of progress.passes){const p=join(workflowDir(root,run),`${pass}-${round}-collected.json`);evidence[p]=digest(readFileSync(p,'utf8'));}
-  const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],changed,post:current,evidence,downstream:impacts.map(row=>row.id),ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
+  const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,post:current,evidence,downstream:impacts.map(row=>row.id),ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
   frozen(join(workflowDir(root,run),`${phase}-${round}-closed.json`),receipt);
   progress.complete=true;atomic(path,progress);
   return {complete:true,phase,round,passes:progress.passes};
@@ -276,7 +359,8 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
   const diagnostics=failures===null?[]:(Array.isArray(failures)?failures:[failures]);
   const gateAssignments=Object.fromEntries(['1','2','3'].map(unit=>[unit,diagnostics.map((failure,index)=>({index,failure})).filter(row=>String(row.index%3+1)===unit)]));
-  const pack={version:2,run,phase,round,units:['1','2','3'],assignments,before:hashes(root),impacts,seeds,failures,gateAssignments,cycles:[...new Set(cycles)],ledger_updates:result?.ledger_updates??[]};
+  const identity=libraryIdentity(root);
+  const pack={version:2,run,phase,round,units:['1','2','3'],assignments,before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures,gateAssignments,cycles:[...new Set(cycles)],ledger_updates:result?.ledger_updates??[]};
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
@@ -284,10 +368,11 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
   const path=join(workflowDir(root,run),'certification.json');
   if(!existsSync(path)){if(allowMissing)return null;throw Error('Step 7 certification missing');}
   const row=read(path);
-  if(row.version!==2||row.run!==run||!Array.isArray(row.items)||!row.evidence)throw Error('malformed Step 7 certification');
+  if(row.version!==2||row.run!==run||!Array.isArray(row.items)||!Array.isArray(row.creations??[])||!row.evidence)throw Error('malformed Step 7 certification');
   const {sha256,...payload}=row;
   requireValue(sha256===digest(payload),'Step 7 certification payload changed');
   const seen=new Set();for(const item of row.items){requireValue(!seen.has(item.id)&&['item_sha256','context_sha256','guard_sha256'].every(k=>/^[a-f0-9]{64}$/.test(item[k]??'')),`malformed Step 7 certificate item ${item.id}`);seen.add(item.id);}
+  const created=new Set();for(const item of row.creations??[]){requireValue(!created.has(item.id)&&seen.has(item.id)&&typeof item.author_result==='string',`malformed Step 7 creation ${item.id}`);created.add(item.id);creationRegistration(root,run,item);}
   verifyEvidence(row.evidence);
   return row;
 }
@@ -328,7 +413,11 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
   for(const name of ['frontier.json','baseline.json','step6-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
-  const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,evidence,changed,
+  const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
+  for(const row of creationRows){const old=creationById.get(row.id);if(old&&JSON.stringify(old)!==JSON.stringify(row))throw Error(`conflicting creation provenance: ${row.id}`);creationById.set(row.id,row);}
+  const creations=[...creationById.values()].sort((a,b)=>a.id.localeCompare(b.id));
+  for(const row of creations){creationRegistration(root,run,row);requireValue(current[row.id],`created item missing at certification: ${row.id}`);}
+  const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));

@@ -56,6 +56,21 @@ test('centralized certification licenses published downstream repair without syn
   assert.equal(JSON.parse(result.stdout).summary.licensed_by_centralized_certification, 2);
 });
 
+test('centralized certification licenses a registered prerequisite addition but rejects missing creation provenance', () => {
+  const fx=fixture(),id='lem-new-prerequisite';
+  const body=`---\nid: ${id}\nkind: lemma\nstatus: draft\ndeps: []\n---\n\nA complete proof of the genuinely missing prerequisite.\n`;
+  writeFileSync(join(fx.root,'items',`${id}.md`),body);
+  fx.write(join(fx.root,'research','demo-batch-1.pages.json'),[{id:'page',items:[{id:'a'},{id}]}]);
+  fx.write(join(fx.root,'research','demo-batch-1.proof-contracts.json'),{contracts:{[id]:{risk:'medium'}}});
+  const item={id,guard_sha256:itemHashGuard(body),item_sha256:itemHashJudge(body),context_sha256:'c'.repeat(64),reason:'Reviewed the new proof and every dependency in its exact context.'};
+  const cert={...fx.cert,changed:[...fx.cert.changed,id],items:[...fx.cert.items,item],creations:[{id,kind:'lemma',home_page:'page',batch:'1',consumers:['a'],author_result:'alpha-adjudicate-step7-v2-initial-r1-u1.result.json',reason:'This exact lemma is required by the repaired proof and no existing result supplies it.',uncertain:false,source_urls:[],familiar:true}]};
+  writeFileSync(join(fx.root,'tools','judge.mts'),`console.log(${JSON.stringify(JSON.stringify({contexts:Object.fromEntries(cert.items.map((row:any)=>[row.id,{item_sha256:row.item_sha256,context_sha256:row.context_sha256}]))}))});`);
+  fx.write(join(fx.dir,'certification.json'),cert);
+  let result=fx.guard();assert.equal(result.status,0,result.stdout+result.stderr);
+  fx.write(join(fx.dir,'certification.json'),{...cert,creations:[]});
+  result=fx.guard();assert.equal(result.status,1);assert.match(result.stdout,/creation provenance/);
+});
+
 test('centralized guard preserves the exact original touchlog baseline and frontier', () => {
   const fx = fixture();
   fx.write(join(fx.root, 'scope.json'), { run: 'demo', by_item: { a: '1', extra: '1' } });

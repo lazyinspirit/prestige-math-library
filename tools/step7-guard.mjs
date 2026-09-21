@@ -167,7 +167,13 @@ if (existsSync(workflowDirectory)) {
         error('step7-certification-unlicensed', `${id}: changed item lacks an exact current centralized certification`, id);
       else licensed++;
     }
-    for (const id of created) error('step7-creation', `${id}: item creation is outside the frozen replacement protocol`, id);
+    const creationRecords = new Map((certificate.creations ?? []).map(row => [row.id, row]));
+    for (const id of created) {
+      const record = creationRecords.get(id);
+      if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id] || !record)
+        error('step7-creation', `${id}: created item lacks exact current centralized certification and creation provenance`, id);
+      else licensed++;
+    }
     for (const id of deleted) error('step7-deletion', `${id}: deleting results is not licensed at Step 7`, id);
   } catch (cause) { error('step7-certification-invalid', cause.message); }
   const summary = { baseline: baselineLabel, baseline_at: baseline.at ?? null,
@@ -178,7 +184,7 @@ if (existsSync(workflowDirectory)) {
   else {
     console.log(`step7-guard: baseline "${baselineLabel}" vs ${summary.compared_against}`);
     console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-    console.log(`  ${licensed}/${changed.length} change(s) licensed by centralized Step-7 certification`);
+    console.log(`  ${licensed}/${changed.length + created.length} changed/created item(s) licensed by centralized Step-7 certification`);
     for (const entry of errors) console.log(`  ERROR ${entry.code}: ${entry.message}`);
     console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — every Step-7 edit has exact centralized certification');
   }
@@ -534,11 +540,25 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
         continue;
       }
     }
-    if (shortHash(record.pre_sha256) !== baseline.hashes?.[record.id]
-      || shortHash(record.post_sha256) !== now?.[record.id]
+    const preMatchesBaseline = shortHash(record.pre_sha256) === baseline.hashes?.[record.id];
+    const postMatchesCurrent = shortHash(record.post_sha256) === now?.[record.id];
+    // Owner-repair rows are append-only history. A later final adjudication may
+    // legitimately repair the same item again, leaving the historical post
+    // hash stale even though the current bytes have stronger, exact terminal
+    // evidence. Preserve the original baseline licence in that case instead of
+    // requiring an in-place rewrite of immutable repair history.
+    const currentTerminal = terminalParsed.latest.get(record.id);
+    const supersededByCurrentTerminal = !postMatchesCurrent
+      && currentTerminal?.item_sha256 === itemHashJudge(readFileSync(join(ITEMS, `${record.id}.md`), 'utf8'));
+    if (!preMatchesBaseline
+      || (!postMatchesCurrent && !supersededByCurrentTerminal)
       || record.pre_sha256 === record.post_sha256) {
       error('owner-prerequisite-repair-stale', `${where}: exact pre/post hashes do not match the Step-7 baseline and current item`, record.id);
       continue;
+    }
+    if (supersededByCurrentTerminal) {
+      warn('owner-prerequisite-repair-superseded',
+        `${where}: historical post hash was superseded by the current terminal resolution`, record.id);
     }
     if (!ownerPrerequisiteLicences.has(record.id)) ownerPrerequisiteLicences.set(record.id, new Set());
     ownerPrerequisiteLicences.get(record.id).add(shortHash(record.pre_sha256));

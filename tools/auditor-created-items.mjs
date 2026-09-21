@@ -190,7 +190,9 @@ export function authorResultAllowed(step, row) {
   if (Number(step) === 7) return (row.role === 'final-adjudicator'
     && /^step7-fa-[a-z]-round-[1-9]\d*$/.test(label))
     || (row.role === 'alpha-adjudicate'
-      && /^(?:step7-[a-z]|step7-guard-(?:[a-z]|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]|review)-[1-9]\d*|repair-8-(?:[a-z]-)?round-[1-9]\d*|cross-group-[a-z]-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]-)?[1-9]\d*)$/.test(label));
+      && /^(?:step7-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step7-[a-z]|step7-guard-(?:[a-z]|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]|review)-[1-9]\d*|repair-8-(?:[a-z]-)?round-[1-9]\d*|cross-group-[a-z]-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]-)?[1-9]\d*)$/.test(label))
+    || (row.role === 'alpha-repair'
+      && /^step7-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
   return Number(step) === 8 && row.role === 'alpha'
     && /^(?:step8-lead|step8-changes-adjudicate-[1-9]\d*|step8-carried-adjudicate-(?:[a-z]-)?[1-9]\d*|step8-gate-adjudication-[1-9]\d*|impact-close-[1-9]\d*|step8-close-adjudicate-[1-9]\d*|step8-close-carried-(?:[a-z]-)?[1-9]\d*|receipts(?:-fix-[1-9]\d*)?)$/.test(label);
 }
@@ -272,6 +274,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
     // Receipts are engine-owned records of the historical write-window check;
     // their author link must still resolve to genuine dispatch evidence. Do not
     // compare current mtimes here: an unchanged V2 receipt survives file touches.
+    const v2Author = step === 7 ? step7V2Creation(root, run, row.id, row) : null;
     if (!authors.some(author => {
       const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
       const covers = author.covers.map(String);
@@ -282,9 +285,10 @@ function provenanceRows(root, run, step, cache = new Map()) {
         ? Boolean(pair && author.label.startsWith(`step3b-pair-${pair}-`) && covers.includes(pair))
         : covers.includes(String(row.batch));
       return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
-        && (step === 3 ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
+        && (v2Author?.result_file === author.result_file
+        || (step === 3 ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
           && step3Covered : author.result_file === row.author_result
-          && (!covers.length || covers.includes('all') || covers.includes(String(row.batch))));
+          && (!covers.length || covers.includes('all') || covers.includes(String(row.batch)))));
     })) throw Error(`${row.id}: missing successful Step ${step} author-result provenance`);
     if (step === 3 && row.owner_recertification !== undefined) {
       const marker = row.owner_recertification;
@@ -336,6 +340,35 @@ function carrierHashes(root, run, row) {
   return { guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text),
     item_file_sha256: itemFileSha, manifest_sha256: carrier.manifest_sha256,
     contract_sha256: carrier.contract_sha256, step5_subject_sha256: hashValue(carrier) };
+}
+
+// Rebuilt Step 7 binds new-item authorship directly into its centralized
+// certificate. This survives later serialized edits to a shared manifest or
+// contract and avoids inferring per-item provenance from shared-file mtimes.
+function step7V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
+  const path = join(root, 'research', `${run}-step7-v2`, 'certification.json');
+  if (!existsSync(path)) return null;
+  const certificate = read(path), { sha256, ...payload } = certificate;
+  if (certificate.version !== 2 || certificate.run !== run
+    || sha256 !== sha(JSON.stringify(payload))
+    || !Array.isArray(certificate.creations) || !Array.isArray(certificate.items)) return null;
+  const creation = certificate.creations.find(value => value.id === id);
+  const item = certificate.items.find(value => value.id === id);
+  if (!creation || !item || creation.home_page !== row.page
+    || String(creation.batch) !== String(row.batch)
+    || typeof creation.author_result !== 'string') return null;
+  if (requireCurrent) {
+    const text = readFileSync(join(root, 'items', `${safe(id, 'item ID')}.md`), 'utf8');
+    if (item.guard_sha256 !== itemHashGuard(text)) return null;
+  }
+  const resultPath = join(root, 'research', `${run}-dispatch`, creation.author_result);
+  if (!existsSync(resultPath)) return null;
+  const result = { ...read(resultPath), result_file: creation.author_result };
+  const evidenceHash = certificate.evidence?.[resultPath]
+    ?? certificate.evidence?.[`research/${run}-dispatch/${creation.author_result}`];
+  if (result.run !== run || !authorResultAllowed(7, result)
+    || evidenceHash !== sha(readFileSync(resultPath, 'utf8'))) return null;
+  return result;
 }
 
 // Step 3 checks currency with its transitive item/scope hash implementation;
@@ -435,7 +468,8 @@ export function certifyAuditorCreatedItems(root, run, step) {
       const before = baseline.item_carriers?.[id];
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
-    const covering = priorCurrent ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
+    const v2Author = step === 7 ? step7V2Creation(root, run, id, row, { requireCurrent: true }) : null;
+    const covering = priorCurrent || v2Author ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
     const bootstrap = !priorCurrent && !covering && !prior && step === 7 && carried
       ? bootstrapStep7Author(root, run, id, row, hashes) : null;
     const authorResult = prior?.author_result ?? bootstrap?.result_file;
@@ -443,7 +477,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
       ? ownerRecertification(root, run, step, id, hashes, authorResult,
         bootstrap?.basis === 'initial-step7-contract-only' ? bootstrap.basis : null) : null;
     const author = priorCurrent ? { result_file: prior.author_result }
-      : covering ?? (owner ? { result_file: authorResult } : null);
+      : v2Author ?? covering ?? (owner ? { result_file: authorResult } : null);
     if (!author) throw Error(`${id}: no successful Step ${step} auditor/adjudicator dispatch authored its current carriers`);
     const originStep = carried?.origin_step ?? carried?.step;
     if (priorCurrent) for (const key of Object.keys(hashes)) hashes[key] = prior[key];

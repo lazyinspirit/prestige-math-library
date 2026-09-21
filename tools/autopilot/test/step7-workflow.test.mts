@@ -6,12 +6,13 @@ import {tmpdir} from 'node:os';
 import { initialize,prepareAdjudication,prepareImpact,validateReports,collect,certify,judge,checkWorkflow,verifyCertification,workflowDir,workerReport,workerLabel,digest,advanceImpact,impactPasses,reviewContextHashes } from '../../step7-workflow.mjs';
 import {itemHashGuard,itemHashJudge} from '../../item-hash.mjs';
 import {MODELS} from '../../models.mjs';
+import {writeAuditorCreatedBaseline,certifyAuditorCreatedItems} from '../../auditor-created-items.mjs';
 
 const run='fixture', reason='The proof and its supplier hypotheses were checked for logical validity.', h='a'.repeat(64);
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
-function item(root:string,id:string,body='Original proof.',deps:string[]=[],published=false) {
-  writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: theorem\nstatus: ${published?'published':'draft'}\ndeps: [${deps.join(', ')}]\n---\n${body}\n`);
+function item(root:string,id:string,body='Original proof.',deps:string[]=[],published=false,kind='theorem') {
+  writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: ${kind}\nstatus: ${published?'published':'draft'}\ndeps: [${deps.join(', ')}]\n---\n${body}\n`);
 }
 function guard(root:string,id:string){return itemHashGuard(readFileSync(join(root,'items',`${id}.md`),'utf8'));}
 function contexts(root:string,ids:string[]){return new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),context_sha256:h}]));}
@@ -32,16 +33,21 @@ function reports(root:string,pack:any,outcomes:any={},downstream:string[]=[]) {
     const assigned=pack.assignments[unit], ids=[...new Set(assigned.map((r:any)=>typeof r==='string'?r:r.id))] as string[];
     json(workerReport(root,run,pack.phase,pack.round,unit),{run,phase:pack.phase,round:pack.round,unit,input_sha256:digest(pack),
       decisions:pack.rejected?assigned.map((r:any)=>({...r,outcome:outcomes[r.id]??'confirmed_fatal',...evidence})):[],
-      reviews:ids.map(id=>({id,disposition:guard(root,id)===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...evidence})),downstream,
+      reviews:ids.map(id=>({id,disposition:guard(root,id)===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...evidence})),created_items:[],downstream,
       gate_resolutions:(pack.gateAssignments?.[unit]??[]).map((r:any)=>({index:r.index,...evidence}))});
     const role=pack.rejected?'alpha-adjudicate':'alpha-repair';
-    json(join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(pack.phase,pack.round,unit)}.result.json`),{run,role,label:workerLabel(pack.phase,pack.round,unit),ok:true,model:MODELS.sol.id,provider_effort:'xhigh'});
+    json(join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(pack.phase,pack.round,unit)}.result.json`),{run,role,label:workerLabel(pack.phase,pack.round,unit),covers:[unit],started_at:'2026-09-21T00:00:00Z',ended_at:'2026-09-21T23:59:59Z',ok:true,model:MODELS.sol.id,provider_effort:'xhigh'});
   }
 }
 function initial(root:string,ids:string[]) {
   const pack=prepareAdjudication(root,run,'initial',1);
   item(root,ids[0],'Repaired root proof.');reports(root,pack,{},['thm-published-consumer']);
   return prepareImpact(root,run,'impact-initial',1);
+}
+function registerCreated(root:string,id:string,kind:string) {
+  const manifest=join(root,'research',`${run}-batch-1.pages.json`),pages=JSON.parse(readFileSync(manifest,'utf8'));
+  pages[0].items.push({id});json(manifest,pages);
+  json(join(root,'research',`${run}-batch-1.proof-contracts.json`),{contracts:{[id]:{risk:'medium',kind}}});
 }
 
 test('initialization freezes real batch shape and initial reports bind exact rejection inputs',()=>{
@@ -54,6 +60,46 @@ test('initialization freezes real batch shape and initial reports bind exact rej
     assert.match(validateReports(pack,[report],{...pack.before,'thm-item-0':guard(f.root,'thm-item-0')}).errors.join('\n'),/mismatched/);
     collect(f.root,run,'initial',1);collect(f.root,run,'initial',1);
     assert.equal(readFileSync(join(f.root,'research',`${run}-judge-adjudications.jsonl`),'utf8').trim().split('\n').length,1);
+  }finally{f.cleanup();}
+});
+
+test('an adjudicator may author a registered load-bearing prerequisite before owner closure and certification',()=>{
+  const f=fixture();try{
+    writeAuditorCreatedBaseline(f.root,run,7);
+    const pack=prepareAdjudication(f.root,run,'initial',1),created='lem-created-prerequisite';
+    item(f.root,created,'A complete proof of the missing prerequisite.',[],false,'lemma');registerCreated(f.root,created,'lemma');
+    item(f.root,f.ids[0],'Repaired proof using the new prerequisite.',[created]);
+    reports(f.root,pack,{},[f.ids[0],'thm-published-consumer']);
+    const path=workerReport(f.root,run,'initial',1,'1'),report=JSON.parse(readFileSync(path,'utf8'));
+    report.created_items=[{id:created,kind:'lemma',home_page:'page',batch:'1',consumers:[f.ids[0]],...evidence}];
+    report.reviews.push({id:created,disposition:'authored',...reviewContextHashes(f.root,[created])[created],...evidence});json(path,report);
+    const receipt=collect(f.root,run,'initial',1);assert.deepEqual(receipt.created_items.map((row:any)=>row.id),[created]);
+    const owners=prepareImpact(f.root,run,'impact-initial',1);assert.ok(Object.values(owners.assignments).flat().includes(f.ids[0]));
+    reports(f.root,owners);const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+    assert.ok(cert.items.some((row:any)=>row.id===created));assert.equal(cert.creations[0].id,created);
+    assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
+    assert.equal(JSON.parse(readFileSync(join(workflowDir(f.root,run),'frontier.json'),'utf8')).ids.length,21);
+  }finally{f.cleanup();}
+});
+
+test('an owner may author a missing definition and the next Terra wave includes it',()=>{
+  const f=fixture();try{
+    writeAuditorCreatedBaseline(f.root,run,7);
+    const pack=initial(f.root,f.ids),created='def-created-prerequisite';
+    item(f.root,created,'The exact missing definition used below.',[],false,'definition');registerCreated(f.root,created,'definition');
+    item(f.root,'thm-published-consumer','Repaired published proof using the definition.',[f.ids[0],created],true);
+    reports(f.root,pack,{},['thm-published-consumer']);
+    const unit=pack.units.find((value:string)=>pack.assignments[value].includes('thm-published-consumer'));
+    const path=workerReport(f.root,run,pack.phase,1,unit),report=JSON.parse(readFileSync(path,'utf8'));
+    report.created_items=[{id:created,kind:'definition',home_page:'page',batch:'1',consumers:['thm-published-consumer'],...evidence}];
+    report.reviews.push({id:created,disposition:'authored',...reviewContextHashes(f.root,[created])[created],...evidence});json(path,report);
+    const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});assert.ok(cert.creations.some((row:any)=>row.id===created));
+    assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
+    const judged=judge(f.root,run,1,{contextHasher:contexts,runSweep:({ids,ledger}:any)=>{
+      for(const id of ids){const current=contexts(f.root,[id]).get(id);appendFileSync(ledger,JSON.stringify({id,model:MODELS.terra.id,...current,keep:true})+'\n');}
+      return {status:0};
+    }});
+    assert.ok(judged.items.includes(created));
   }finally{f.cleanup();}
 });
 

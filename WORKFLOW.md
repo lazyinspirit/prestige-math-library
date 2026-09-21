@@ -375,9 +375,21 @@ Mathematical workers record evidence, outcomes and repairs only. The central
 tool stage certifies after all writers finish; there is no per-item resealing
 while another worker can change context. Round identity and exact current hashes
 bind verdicts, decisions and certificates. Historical terminal receipts remain
-audit evidence and do not close a new round. Genuine new suppliers must be
-fully proved and registered before consumers; their distinct author-provenance
-certification never fabricates a judge verdict or waives other gates.
+audit evidence and do not close a new round.
+
+Batch adjudicators and all three owner repair agents may author new items only
+to satisfy genuine unmet prerequisites of assigned repairs. Document the precise
+missing claim, the consuming proof step and why existing items do not suffice.
+Fully author definitions/proofs with explicit hypotheses and source evidence;
+uncertain mathematics remains a blocker. Check existing IDs, aliases and active
+assignments before choosing unique IDs. Register additions in the canonical
+registry/index, owning page, applicable manifest and proof contract through the
+serialized integration path. Discover dependencies and all downstream consumers,
+including published consumers, and finish every relevant repair before central
+certification. New items join the complete certification inventory and gate
+battery without enlarging the frozen original scope. Their author-provenance
+evidence never fabricates a judge verdict or waives other gates. Unrelated
+new results, orphan item files and overlapping ownership remain unauthorized.
 
 `7-freeze` snapshots the successfully closed state for Step 8. Legacy terminal
 resolution and recovery tools remain available only for their historical

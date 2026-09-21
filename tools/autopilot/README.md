@@ -33,6 +33,11 @@ fatal original-frontier count is strictly below 5% of the frozen original scope.
 All confirmed defects, including nonfatal defects, require repair. New downstream
 work continues in the repair phase with fresh disjoint assignments until complete
 before certification; fatal classification controls only the threshold.
+Adjudicators and all three owner agents may author new items solely for genuine
+unmet prerequisites, with unique IDs, complete registry/index registration and
+mathematical evidence. All dependency/downstream effects must close before new
+items enter central certification and the complete gates; the frozen denominator
+does not change.
 The complete gate battery then repeats with owner repair and recertification
 until green. The threshold never permits unresolved defects or missing evidence.
 Coverage, artifacts and gates are independently required. Every agent must be

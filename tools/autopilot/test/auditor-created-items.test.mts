@@ -564,7 +564,8 @@ test('judge closure requires full current carriers without fabricating a verdict
   mkdirSync(join(root, 'tools'));
   copyFileSync(join(REPO, 'tools/level-coverage.mjs'), join(root, 'tools/level-coverage.mjs'));
   for (const module of ['models', 'judge-currency', 'step7-terminal-resolution',
-    'context-hash-pool', 'auditor-created-items', 'item-hash', 'frontmatter-list'])
+    'step7-certification-consumer', 'step7-workflow', 'step7-rounds', 'context-hash-pool',
+    'auditor-created-items', 'item-hash', 'frontmatter-list'])
     symlinkSync(join(REPO, `tools/${module}.mjs`), join(root, `tools/${module}.mjs`));
   const manifest = join(root, 'scope.pages.json');
   const ledger = join(root, 'judge.jsonl');
@@ -609,7 +610,10 @@ const emittedRoutes: [number, string, string[]][] = [
     '5b-gate-risk-report-1', '5b-edge-step5-cross-group-2']],
   [7, 'alpha-adjudicate', ['step7-a', 'step7-guard-a-round-1', 'step7-guard-review-round-2',
     'step7-preflight-a-1', 'step7-preflight-review-2', 'cross-group-a-round-1',
-    'adjudicate-closure-recovery-a-1', 'adjudicate-closure-recovery-1', 'repair-8-a-round-1', 'repair-8-round-1']],
+    'adjudicate-closure-recovery-a-1', 'adjudicate-closure-recovery-1', 'repair-8-a-round-1', 'repair-8-round-1',
+    'step7-v2-initial-r1-u1', 'step7-v2-repeat-r12-u15']],
+  [7, 'alpha-repair', ['step7-v2-impact-initial-r1-u1', 'step7-v2-impact-repeat-pass-2-r3-u2',
+    'step7-v2-gate-r4-u3']],
   [7, 'final-adjudicator', ['step7-fa-a-round-1']],
   [8, 'alpha', ['step8-lead', 'step8-changes-adjudicate-1', 'step8-carried-adjudicate-a-1',
     'step8-carried-adjudicate-1', 'step8-gate-adjudication-1', 'impact-close-1',
@@ -618,7 +622,7 @@ const emittedRoutes: [number, string, string[]][] = [
 
 test('every emitted author-capable family is accepted only at its own stage and role', () => {
   for (const [ownStep, ownRole, labels] of emittedRoutes) for (const label of labels)
-    for (const step of [3, 5, 7, 8, 9]) for (const role of ['alpha-high', 'alpha', 'alpha-adjudicate', 'final-adjudicator', 'tool'])
+    for (const step of [3, 5, 7, 8, 9]) for (const role of ['alpha-high', 'alpha', 'alpha-adjudicate', 'alpha-repair', 'final-adjudicator', 'tool'])
       assert.equal(authorResultAllowed(step, { ok: true, started_at: '2025-01-01', ended_at: '2025-01-02', covers: ['1'], role, label }),
         step === ownStep && role === ownRole, `${step}/${role}/${label}`);
 });
@@ -628,7 +632,7 @@ test('generic, cross-step substrings and malformed author labels never establish
     'not-step8-malformed', 'step8-fix-step7-guard-1', 'impact-close', 'step7-aa',
     'step7-fa-a-round-0', 'step7-fa-a-round-01', 'step7-fa-a-round-1-extra',
     'step3b-a', 'step3b-aa-0123456789abcdef', 'step3b-a-0123456789abcdeg'])
-    for (const step of [3, 5, 7, 8]) for (const role of ['alpha-high', 'alpha', 'alpha-adjudicate', 'final-adjudicator'])
+    for (const step of [3, 5, 7, 8]) for (const role of ['alpha-high', 'alpha', 'alpha-adjudicate', 'alpha-repair', 'final-adjudicator'])
       assert.equal(authorResultAllowed(step, { ok: true, started_at: '2025-01-01', ended_at: '2025-01-02', covers: ['1'], role, label }), false, `${step}/${role}/${label}`);
 });
 

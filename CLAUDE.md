@@ -145,6 +145,14 @@ certification. Keep ownership disjoint and bind
 every decision, verdict and certification to the current round and content.
 Missing evidence, stale certification or incomplete impact coverage blocks
 progress. Agents never manufacture verdicts or certify their own dispatches.
+Both batch adjudicators and all three owner agents may author new items only
+for genuine unmet prerequisites of assigned repairs. Record the precise missing
+claim and its consuming proof step; fully author and verify the addition with
+honest uncertainty and source evidence. Use unique IDs, register the item in the
+canonical registry/index, page, applicable manifest and contract, and reconcile
+all dependencies and downstream effects before certification. New items enter
+central certification and every applicable gate, while the original-frontier
+denominator stays frozen. This grants no unrelated scope expansion.
 If the owner explicitly authorizes recovery for a fatal defect discovered after
 that freeze, use the guarded `recover-step8` command: preserve the Step-7
 snapshot and judgment history, repair only the hash-bound allowlist, and reopen

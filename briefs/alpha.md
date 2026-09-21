@@ -29,9 +29,12 @@ Lead and special Alpha tasks may own level-wide artifacts; write only the
 artifacts named by those tasks. Never rename an established item id. Do not
 write judge verdicts or stamps. Published content, scope changes, deletion,
 and reading-order changes require the exact task-authorised protocol. Step-7
-adjudicators may add fully proved missing-dependency lemmas and register them
-on their owned pages under the Step-7 task's explicit exception; otherwise
-report the issue without changing it. Current Step-7 dispatches also follow
+adjudicators and all three owner repair agents may fully author new items only
+for genuine unmet prerequisites of assigned repairs. Use unique IDs and register
+each addition in the canonical registry/index, page, applicable manifest and
+contract. Resolve dependency and downstream effects before central certification
+and the complete gate battery. Otherwise report the issue without changing it.
+Current Step-7 dispatches also follow
 `step7-adjudicator.md` or `step7-owner-repair.md`; their tasks authorize assigned
 published downstream repairs across the whole library.
 
