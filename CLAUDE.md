@@ -125,7 +125,7 @@ recertifies what the repair invalidates, then retries the same gate.
 7.1 one Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs
 confirmed defects (including nonfatal defects) and identifies all downstream
 consumers; 7.2 three Sol
-xhigh owner repair agents examine all downstream consumers across the whole
+xhigh owner repair agents run in parallel and examine all downstream consumers across the whole
 library, including published items, and repair only consumers for which a change
 is absolutely necessary, using the smallest logically sufficient edit; sound
 consumers remain unchanged with an evidenced unaffected review. 7.3 the
@@ -150,6 +150,11 @@ certification. Keep ownership disjoint and bind
 every decision, verdict and certification to the current round and content.
 Missing evidence, stale certification or incomplete impact coverage blocks
 progress. Agents never manufacture verdicts or certify their own dispatches.
+All three owner lanes run concurrently in 7.2, 7.6, 7.9 and every continuation
+pass, for current and future runs. Item ownership stays disjoint. Shared
+metadata edits use `tools/step7-shared-write-lock.mjs` for short read/edit/check
+sections; never hold that lock during research. Each continuation waits for all
+writers in the preceding pass, and certification waits for complete closure.
 Both batch adjudicators and all three owner agents may author new items only
 for genuine unmet prerequisites of assigned repairs. Record the precise missing
 claim and its consuming proof step; fully author and verify the addition with

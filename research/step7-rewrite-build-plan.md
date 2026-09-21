@@ -49,6 +49,16 @@ check arguments because sources can contain mistakes.
 
 ## Build sequence
 
+### Parallel owner update (2026-09-22)
+
+Remove sibling prerequisites in every Step 7 owner wave (7.2, 7.6, 7.9 and
+continuations), retaining a barrier between passes and before certification.
+Use a repository-wide shared-metadata lock for short read/edit/check sections;
+item review and disjoint item repairs run concurrently. Protect the already
+running legacy owner during rollout with that lock until its dispatch drains.
+Test parallel scheduling, writer barriers and lock ownership, then reload the
+controller and verify owner 3 joins owner 2 without duplicate dispatches.
+
 - [x] Confirm the live engine is paused and write this plan.
 - [x] Implement durable round state, immutable original scope, complete impact
   discovery, disjoint ownership, stable certification barriers, and threshold

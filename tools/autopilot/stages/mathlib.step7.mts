@@ -19,10 +19,10 @@ export function step7Stages({ gate, repoWide, contractGates, ledgerGate, closure
     units:(ctx:any)=>adjudication ? (existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
       ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1']) : ownerUnits(ctx,phase,id),
     pattern:pattern(phase,id),concurrency:adjudication?24:3,
-    // Shared batch contracts and page files require one writer at a time in
-    // owner phases; three separate owner agents still receive disjoint scopes.
+    // Sibling owners run concurrently. Shared metadata edits use a short
+    // critical section; a new pass waits for the entire preceding pass.
     ...(!adjudication?{
-      unitPrerequisites:(ctx:any,u:string)=>{const units=ownerUnits(ctx,phase,id),i=units.indexOf(u);return i>0?[units[i-1]]:[];},
+      unitPrerequisites:(ctx:any,u:string)=>{const units=ownerUnits(ctx,phase,id),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
       onProgress:({ctx,executor,stage}:any)=>{
         if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
         const complete=executor.unitsComplete(stage,ctx);

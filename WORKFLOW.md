@@ -60,7 +60,9 @@ V4.1 Flash / max for any lane the Codex provider cannot serve. Group capacity is
 global limit is in autopilot.config.json. The `alpha-high` lane permits twelve
 concurrent authors for an owner-directed three-lead/nine-helper partition;
 helpers write only their assigned pair files and leads integrate shared batch
-artifacts. Dispatches start three seconds apart. Shared-file stages are serial.
+artifacts. Dispatches start three seconds apart. Shared-file stages are serial
+except Step 7 owner waves, which run parallel item assignments and lock only
+short shared-metadata edit sections.
 Writing agents checkpoint after each item and
 reread current proofs, dependencies and sources after compaction. Read-only
 roles write no extra files. Compaction starts at 200,000 total context tokens;
@@ -366,14 +368,19 @@ Worker-reported consumer IDs enter owner assignments even when the dependency
 graph has no edge to them. Continuations retain those IDs until a current review
 covers them; a sound consumer closes unchanged, and only necessary minimal
 repairs are made.
-Owners have disjoint write assignments and repair suppliers before consumers.
+All three owners run concurrently in 7.2, 7.6, 7.9 and their continuation passes.
+Owners have disjoint item assignments and repair suppliers before consumers
+within each assignment. Shared metadata changes use the short acquire/edit/release
+protocol in `briefs/step7-owner-repair.md` and `tools/step7-shared-write-lock.mjs`.
+Reread shared files after acquisition; keep mathematical research outside the
+lock. Later supplier changes requeue stale consumer reviews before certification.
 If a repair reveals additional relevant consumers, the engine continues the
 repair phase with fresh disjoint assignments. Complete that work and any further
 downstream effects before entering the one stable certification pass.
 Published status does not exempt a relevant consumer from this authorized
 repair pass; maintain the canonical published-defect ledger with evidence and
-current audit status. Shared ledgers and metadata require the assigned serial
-integration path, never overlapping writers.
+current audit status. Shared ledgers and metadata require the shared metadata
+lock, never overlapping edits to those files.
 
 Mathematical workers record evidence, outcomes and repairs only. The central
 tool stage certifies after all writers finish; there is no per-item resealing
@@ -388,7 +395,7 @@ Fully author definitions/proofs with explicit hypotheses and source evidence;
 uncertain mathematics remains a blocker. Check existing IDs, aliases and active
 assignments before choosing unique IDs. Register additions in the canonical
 registry/index, owning page, applicable manifest and proof contract through the
-serialized integration path. Discover dependencies and all downstream consumers,
+shared metadata lock for owner waves. Discover dependencies and all downstream consumers,
 including published consumers, and finish every relevant repair before central
 certification. New items join the complete certification inventory and gate
 battery without enlarging the frozen original scope. Their author-provenance

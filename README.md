@@ -40,12 +40,15 @@ adjudication; Step 5b reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when
 unsure. Logical validity governs decisions; sources and judges can be mistaken.
 Step 7 runs batch Sol xhigh adjudication/repair, three Sol xhigh owner agents
-to examine downstream consumers across the whole library including published
+in parallel to examine downstream consumers across the whole library including published
 items, and one orchestrator certification pass after all writers drain. A
 consumer is changed only when absolutely necessary and then with the smallest
 logically sufficient edit; sound consumers remain unchanged with an evidenced
 review. The orchestrator verifies complete examination and necessary-repair
-closure before certifying. Terra rejudgment,
+closure before certifying.
+Shared metadata edits use short exclusive sections through
+`tools/step7-shared-write-lock.mjs`; item review and disjoint repairs remain
+parallel in all owner waves and continuations. Terra rejudgment,
 Sol adjudication, three-owner downstream repair and stable recertification repeat
 until the latest round's unique fatal original-frontier items are strictly less
 than 5% of the frozen original scope. Every confirmed defect, including nonfatal

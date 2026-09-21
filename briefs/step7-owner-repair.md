@@ -6,6 +6,21 @@ an assigned owner repair agent resolving final gate failures in 7.9.
 The task defines your disjoint ownership, current round, evidence, authorized
 findings and structured output. An empty lane reports an honest no-op.
 
+All three Step 7 owner agents run in parallel, including continuation and gate
+repair waves. This supersedes serial-owner wording in older generated tasks.
+Keep item writes disjoint. Before editing ANY shared file (pages, batch
+contracts/manifests, registry/index, ledger), acquire the shared metadata lock:
+`node tools/step7-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`.
+Exit 2 means busy: continue independent review and retry before shared edits.
+After acquiring, reread the shared file from disk, merge only your necessary
+changes, check them, then promptly release with the same command using `release`.
+Never hold the lock during mathematical research, source retrieval, or waiting
+for another agent. Never remove another owner's lock; report an abandoned lock
+to the supervisor. Reserve/check new IDs and register additions under this lock.
+Finish all required shared edits before reporting completion. Supplier changes
+may invalidate a parallel review: retain its original context hash so the engine
+assigns a fresh review before certification.
+
 Logical validity is the ground truth. Understand every affected statement,
 proof and dependency before repairing it. State uncertainty honestly, consult
 authoritative sources when unsure, and check their actual arguments: sources,
@@ -45,7 +60,7 @@ uses, and apply the same logical and source-evidence standard as to repairs.
 Choose unique IDs after checking existing IDs, aliases and current assignments;
 resolve an ownership or ID collision before writing. Register each addition in
 the canonical registry/index, owning page, applicable manifest and proof contract
-through the task's serialized integration path. Do not leave orphan item files.
+under the shared metadata lock. Do not leave orphan item files.
 Include new items and creation evidence in the generated task's result schema.
 Declare dependency edges and discover every affected downstream consumer,
 including published consumers. New downstream work continues within the repair
@@ -60,7 +75,7 @@ The engine reruns the complete battery after collection and recertification;
 your focused checks do not replace it.
 
 Maintain the canonical published-consumer-supplier ledger through the assigned
-serial integration path, with findings, suppliers, repair strategy and audit
+shared metadata lock, with findings, suppliers, repair strategy and audit
 status. Keep workflow history in run evidence. Report changed items, examined
 consumers, evidence, checks and blockers in the prescribed schema.
 Return `{run, phase, round, unit, input_sha256, decisions:[], reviews:[], downstream:[]}`.
