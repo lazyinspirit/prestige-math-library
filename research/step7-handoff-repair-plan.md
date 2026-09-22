@@ -26,5 +26,16 @@ source rejection, and supplemental-evidence tamper detection.
 
 Live read-only check: all 380 item/context hashes are current. The seven erroneous
 item-repair labels and one phase typo are corrected, retaining original reports.
-Sixteen reviews still require the separately attributed Sol xhigh source-evidence
-supplements before final validation and resumption.
+Sixteen reviews now have separately attributed Sol xhigh source-evidence
+supplements: eight Shelah/Baire, five normal-Moore-space and three choice-strength
+impact reviews. Full-text retrieval limitations in the last group are explicit;
+the reviewer confirmed the scoped effect using the publisher-deposited abstract,
+the corrected supplier interface and Brunner's primary text, without claiming
+to read inaccessible erratum text.
+
+Final read-only validation: 380 reviews, zero errors, zero stale contexts, three
+actual item repairs and seven metadata-only corrections. All original reports
+and supplements are hash-bound in the corrected handoffs. No item content was
+changed by this recovery, and no certifications were minted by the supervisor.
+Controller restart passed preflight; ordinary retry/resume controls are used
+only after this validation. Any newly discovered impact remains engine-owned.
