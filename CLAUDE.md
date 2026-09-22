@@ -130,6 +130,9 @@ no downstream work and do not invalidate consumer reviews. New prerequisite
 interfaces count as additions. Gate subjects remain mandatory independently.
 Frozen historical inputs without section snapshots retain their existing
 obligations; never invent historical statement content.
+Under the statement-aware protocol, do not launch a continuation with the same
+pending items at a previously assigned content state. Hold for operator repair
+of stale evidence or an oscillating repair; never certify unfinished work.
 7.1 one Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs
 confirmed defects (including nonfatal defects) and identifies all downstream
 consumers; 7.2 three Sol

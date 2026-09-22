@@ -29,3 +29,10 @@ Validation: 95 focused tests passed; autopilot TypeScript typecheck passed.
 Existing pass-4 frozen assignments lack before-section snapshots and retain
 their obligations. Their artifacts are not rewritten. Subsequent packs record
 the snapshots and apply the new rule.
+
+Follow-up loop audit: a stale review could previously cause an identical owner
+wave at unchanged content. Added an exact pending-set/content-state repeat hold
+for statement-aware packs, including return-to-earlier-state oscillations.
+Historical policy migration remains permitted once; no pass limit or waived
+coverage. Regression tests verify no duplicate dispatch artifact or certification
+is written on a no-progress hold. 97 focused tests passed; typecheck passed.

@@ -354,6 +354,18 @@ export function impactPasses(root,run,phase,round) {
   return existsSync(path)?read(path).passes:[phase];
 }
 
+export function assertImpactProgress(packs,pending,current) {
+  const targets=[...new Set(pending)].sort();
+  for(const pack of packs) {
+    // Pre-statement-policy assignments may legitimately need one migration
+    // pass with the new review context. Do not mistake that for a repeat.
+    if(!pack.before_statements)continue;
+    const previous=[...new Set(Object.values(pack.assignments).flat())].sort();
+    if(JSON.stringify(previous)===JSON.stringify(targets)&&diff(pack.before,current).length===0)
+      throw Error(`Step 7 no-progress hold: ${pack.phase} already assigned the same ${targets.length} pending item(s) at this exact content state. Resolve stale/missing review evidence or the repair oscillation before retry; no duplicate owner wave was launched.`);
+  }
+}
+
 /** Called only after all three dispatches for the active pass have drained.
  * Completed evidence is immutable. Only missing or stale downstream reviews
  * enter the next three-owner pass; certification has not begun at this point. */
@@ -386,6 +398,7 @@ export function advanceImpact(root,run,phase,round) {
   const snapshots=new Map([sourceReceipt,...completed].filter(Boolean).flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
   const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
   if(pending.length) {
+    assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current);
     const nextPhase=nextImpactPhase(phase,progress);
     const assignments={'1':[],'2':[],'3':[]};
     const {order,cycles}=orderImpacts(items,pending);

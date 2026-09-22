@@ -60,6 +60,8 @@ Downstream work starts only when a repair changes its `## Statement` or
 Proof-only, citation and metadata repairs do not trigger downstream review or
 invalidate consumer reviews. New packs freeze section hashes; historical packs
 without them keep existing obligations without guessing old content.
+An identical pending set at a previously assigned content state holds for
+operator resolution instead of launching a duplicate repair wave.
 For statement changes, declared dependencies propagate transitively; explanatory links remain direct
 examination candidates without automatically spreading impact through reference
 cycles. Necessary statement changes restart propagation, and explicit worker discoveries

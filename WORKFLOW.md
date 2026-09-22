@@ -401,6 +401,13 @@ graph has no edge to them. Continuations retain those IDs until a current review
 covers them; a sound consumer closes unchanged, and only necessary minimal
 repairs are made.
 All three owners run concurrently in 7.2, 7.6, 7.9 and their continuation passes.
+Before launching a continuation, the engine compares its pending item set and
+whole-library content guards with prior assignments. An exact repeat is a
+no-progress owner hold, not another paid wave. This also catches a return to an
+earlier content state with the same pending work. Resolve the stale evidence or
+repair oscillation before retry; the hold never certifies or waives unfinished work.
+Pre-statement-policy packs are excluded from this comparison so a one-time
+migration to statement-based review contexts is not mistaken for stagnation.
 Owners have disjoint item assignments and repair suppliers before consumers
 within each assignment. Shared metadata changes use the short acquire/edit/release
 protocol in `briefs/step7-owner-repair.md` and `tools/step7-shared-write-lock.mjs`.

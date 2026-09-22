@@ -6,12 +6,37 @@ import {tmpdir} from 'node:os';
 import { initialize,prepareAdjudication,prepareImpact,validateReports,collect,certify,judge,checkWorkflow,verifyCertification,workflowDir,workerReport,workerLabel,digest,advanceImpact,impactPasses,reviewContextHashes,reviewMatchesCurrent } from '../../step7-workflow.mjs';
 import {itemHashGuard,itemHashJudge} from '../../item-hash.mjs';
 import {MODELS} from '../../models.mjs';
+import {assertImpactProgress} from '../../step7-workflow.mjs';
 import {recoverStep7Impact} from '../../step7-impact-recovery.mjs';
 import {writeAuditorCreatedBaseline,certifyAuditorCreatedItems} from '../../auditor-created-items.mjs';
 
 const run='fixture', reason='The proof and its supplier hypotheses were checked for logical validity.', h='a'.repeat(64);
 const evidence={reason,uncertain:false,source_urls:[],familiar:true};
 const json=(path:string,value:any)=>writeFileSync(path,JSON.stringify(value,null,2)+'\n');
+
+test('no-progress guard stops unchanged repeated assignments and exact state oscillations',()=>{
+  const first={phase:'gate',assignments:{'1':['a'],'2':['b'],'3':[]},before:{a:'A',b:'B',supplier:'S'},before_statements:{a:'a',b:'b',supplier:'s'}};
+  const second={...first,phase:'gate-pass-2',before:{...first.before,a:'repaired'}};
+  assert.throws(()=>assertImpactProgress([first],['b','a'],first.before),/no-progress hold/);
+  assert.throws(()=>assertImpactProgress([first,second],['a','b'],first.before),/repair oscillation/);
+  assert.doesNotThrow(()=>assertImpactProgress([first],['a'],first.before));
+  assert.doesNotThrow(()=>assertImpactProgress([first],['a','b'],{...first.before,supplier:'restated'}));
+  assert.doesNotThrow(()=>assertImpactProgress([{...first,before_statements:undefined}],['a','b'],first.before));
+});
+
+test('stale unchanged owner evidence holds instead of dispatching an identical repair wave',()=>{
+  const f=fixture();try{
+    initialize(f.root,run);
+    const pack=prepareImpact(f.root,run,'gate',1,{failures:{id:'precheck',output:'FAIL thm-item-0: stale metadata'}});
+    reports(f.root,pack);
+    const unit=pack.units.find((u:string)=>pack.assignments[u].includes('thm-item-0'));
+    const path=workerReport(f.root,run,'gate',1,unit),report=JSON.parse(readFileSync(path,'utf8'));
+    report.reviews[0].review_context_sha256=h;json(path,report);
+    assert.throws(()=>advanceImpact(f.root,run,'gate',1),/no-progress hold/);
+    assert.equal(existsSync(join(workflowDir(f.root,run),'gate-pass-2-1.json')),false);
+    assert.equal(existsSync(join(workflowDir(f.root,run),'certification.json')),false);
+  }finally{f.cleanup();}
+});
 
 test('new adjudication packs require an explicit fatal category before collection',()=>{
   const f=fixture();try{
