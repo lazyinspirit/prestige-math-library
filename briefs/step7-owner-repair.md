@@ -17,7 +17,7 @@ changes, check them, then promptly release with the same command using `release`
 Never hold the lock during mathematical research, source retrieval, or waiting
 for another agent. Never remove another owner's lock; report an abandoned lock
 to the supervisor. Reserve/check new IDs and register additions under this lock.
-Finish all required shared edits before reporting completion. Supplier changes
+Finish all required shared edits before reporting completion. Supplier statement changes
 may invalidate a parallel review: retain its original context hash so the engine
 assigns a fresh review before certification.
 
@@ -26,6 +26,12 @@ proof and dependency before repairing it. State uncertainty honestly, consult
 authoritative sources when unsure, and check their actual arguments: sources,
 judges and prior reviewers can be mistaken. Record exact claims and URLs read.
 Never fabricate confidence, proof completion or checks.
+
+Downstream work is required ONLY after a repair changes its original `## Statement`
+or `## Definition` section. Compare before and after directly; no semantic
+classifier. Proof-only, citation, dependency and metadata edits with unchanged
+statements require no downstream inventory, review or repair. New prerequisite
+interfaces count as additions. Existing frozen assignments remain binding.
 
 Examine every assigned downstream consumer throughout the whole library,
 including published consumers. Assignment means mandatory impact review, not
@@ -51,10 +57,10 @@ past an unchanged reference consumer. Examine the actual cited clause: explain
 why it is unaffected, or minimally repair it and identify its consumers. If a
 reference is genuinely load-bearing but undeclared, reconcile the necessary
 dependency metadata and downstream effects. Never dismiss a real proof use
-merely because it was discovered through a body link. A repaired candidate
+merely because it was discovered through a body link. A candidate with a changed Statement/Definition section
 becomes a new propagation source before certification.
 
-Discover and report additional affected consumers, including ones outside the
+Discover and report additional consumers affected by statement changes, including ones outside the
 initial closure. Route another lane's items through the task's integration
 mechanism; never write another agent's files. Missing ownership or a shared-file
 collision must be reconciled before closure. Do not weaken results merely to

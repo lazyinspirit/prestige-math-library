@@ -55,9 +55,14 @@ than 5% of the frozen original scope. Every confirmed defect, including nonfatal
 defects, requires repair; fatal classification controls only that threshold.
 New downstream work continues in the repair phase until complete, before
 certification.
-Declared dependencies propagate transitively; explanatory links remain direct
+Downstream work starts only when a repair changes its `## Statement` or
+`## Definition` section, including theorem-like lemmas and corollaries.
+Proof-only, citation and metadata repairs do not trigger downstream review or
+invalidate consumer reviews. New packs freeze section hashes; historical packs
+without them keep existing obligations without guessing old content.
+For statement changes, declared dependencies propagate transitively; explanatory links remain direct
 examination candidates without automatically spreading impact through reference
-cycles. Necessary repairs restart propagation, and explicit worker discoveries
+cycles. Necessary statement changes restart propagation, and explicit worker discoveries
 always remain in scope.
 Batch adjudicators and all three owner agents may fully author new items for
 genuine unmet prerequisites only. Additions require unique IDs, registry/index
@@ -65,7 +70,7 @@ and metadata registration, downstream repair closure, central certification and
 all applicable gates; they never change the frozen threshold denominator.
 The complete gate then repeats with owner repairs and recertification until green.
 Gate repair assigns actual failing subjects, not passing inventories or cited
-suppliers. Full diagnostics remain in frozen files; only actual repairs and
+suppliers. Full diagnostics remain in frozen files; only statement/definition changes and
 reported consumer effects propagate into further downstream review.
 Historical V2 fatal decisions lacking a category require exact original evidence
 to remain usable; reports label their category unclassified, without changing

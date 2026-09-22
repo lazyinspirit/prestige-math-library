@@ -122,6 +122,14 @@ and 5b gate failure is an owner hold: the owner repairs the rejected items and
 recertifies what the repair invalidates, then retries the same gate.
 
 **Step 7.** The engine owns the following repeatable protocol:
+Downstream review/repair is triggered ONLY when a repair changes the original
+`## Statement` or `## Definition` section, including lemmas and corollaries.
+Compare the sections before and after directly; no semantic classifier.
+Proof, citation, dependency and metadata edits with unchanged statements trigger
+no downstream work and do not invalidate consumer reviews. New prerequisite
+interfaces count as additions. Gate subjects remain mandatory independently.
+Frozen historical inputs without section snapshots retain their existing
+obligations; never invent historical statement content.
 7.1 one Sol xhigh adjudicator per batch adjudicates Step-6 rejections, repairs
 confirmed defects (including nonfatal defects) and identifies all downstream
 consumers; 7.2 three Sol
@@ -146,7 +154,7 @@ Repeat 7.9–7.10 until green, then freeze the result and proceed to Step 8.
 Gate repair ownership comes from actual failing subjects, never passing
 inventories or merely cited suppliers. Preserve every diagnostic, including
 global/tool failures, as an explicit assigned obligation. Propagate downstream
-from actual repairs and discoveries, not speculative gate candidates.
+from statement/definition changes and their discoveries, not speculative gate candidates.
 Fatal classification controls only the convergence threshold; all actual defects
 must be repaired. Newly discovered downstream work continues in the repair phase
 with fresh disjoint assignments until every relevant repair is complete, before

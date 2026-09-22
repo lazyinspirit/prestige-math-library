@@ -39,7 +39,12 @@ certification. New items enter the central certification inventory and complete
 gate battery; they do not enlarge the frozen original-frontier denominator or
 permit self-issued judge verdicts, certificates or pass stamps.
 
-Identify every relevant downstream consumer throughout the library, including
+Only a change to the original `## Statement` or `## Definition` section triggers
+downstream work. Compare before and after directly; no semantic classifier.
+Proof-only, citation, dependency and metadata repairs with unchanged statements
+require no downstream inventory, review or repair. New prerequisite interfaces
+count as additions. Existing frozen assignments remain binding.
+For qualifying statement changes, identify relevant downstream consumers, including
 published items and consumers outside this run or batch. Inspect transitive
 dependencies, citations, proof uses, definitions and page interfaces. Give exact
 paths, affected clauses, required repairs or reasons no repair is needed.

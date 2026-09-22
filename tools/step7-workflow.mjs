@@ -12,6 +12,7 @@ import { currentHashesMany } from './step7-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
 import { gateDiagnostics } from './step7-gate-diagnostics.mjs';
 import { FATAL_TYPES } from './step7-adjudication-compat.mjs';
+import { restatedIds } from './step7-statement.mjs';
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -22,6 +23,7 @@ const atomic = (path, value) => { mkdirSync(resolve(path, '..'), {recursive:true
 const frozen = (path, value) => { if (existsSync(path)) { if (JSON.stringify(read(path)) !== JSON.stringify(value)) throw Error(`immutable evidence conflict: ${path}`); } else atomic(path,value); };
 const key = row => `${row.id}\0${row.model}\0${row.context_sha256}`;
 const hashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,itemHashGuard(readFileSync(join(root,'items',`${row.id}.md`),'utf8'))]));
+const statementHashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,row.statement_sha256]));
 const diff = (a,b) => [...new Set([...Object.keys(a),...Object.keys(b)])].filter(id=>a[id]!==b[id]).sort();
 const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().length >= 40 && row.uncertain === false
   && Array.isArray(row.source_urls) && row.source_urls.every(url=>/^https:\/\//.test(url))
@@ -91,8 +93,14 @@ function reviewContexts(items) {
     const carriers=ids.map(supplier=>[supplier,current[supplier]??null]);
     return digest(legacy?carriers:{version:2,carriers});
   };
-  return {hash:(id,current)=>hash(closure(id),current),matches:(row,current,snapshot)=>{
+  const interfaceHash=(id,current)=>{
+    const row=graph.get(id),suppliers=[...new Set([...(row?.deps??[]),...(row?.references??[])].map(canonical))].filter(supplier=>supplier!==id).sort();
+    return digest({version:3,item:[id,current[id]??null],suppliers:suppliers.map(supplier=>[supplier,graph.get(supplier)?.statement_sha256??null])});
+  };
+  const hasStatements=items.every(row=>typeof row.statement_sha256==='string');
+  return {hash:(id,current)=>hasStatements?interfaceHash(id,current):hash(closure(id),current),matches:(row,current,snapshot)=>{
     if(!row||row.post_sha256!==current[row.id])return false;
+    if(hasStatements&&row.review_context_sha256===interfaceHash(row.id,current))return true;
     const ids=closure(row.id),now=hash(ids,current);
     if(row.review_context_sha256===now)return true;
     // Legacy receipts remain immutable. Reuse only if their original broad
@@ -165,7 +173,7 @@ export function prepareAdjudication(root,run,phase,round) {
   const units=frontier.batches.map(b=>String(b.id));
   const assignments=Object.fromEntries(units.map(u=>[u,rejected.filter(r=>(byId.get(r.id)??additions.get(r.id)??units[0])===u)]));
   const identity=libraryIdentity(root);
-  const pack={version:2,adjudicationSchemaVersion:1,run,phase,round,units,assignments,before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
+  const pack={version:2,adjudicationSchemaVersion:1,run,phase,round,units,assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
   frozen(path,pack); writeTasks(root,pack,'adjudicate'); return pack;
 }
 
@@ -184,7 +192,7 @@ function writeTasks(root,pack,mode) {
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.',
       'Use logical validity as ground truth. State uncertainty honestly. Consult authoritative sources when uncertain and check for errors in sources.',
-      'Read all cited suppliers and relevant consumers. Repair confirmed fatal defects fully. Identify all downstream consumers, including published items.',
+      'Repair confirmed defects fully. Downstream review/repair is required ONLY when a repair changes its original ## Statement or ## Definition section. Compare before and after directly; no semantic classifier. Proof-only, citation, dependency and metadata repairs with unchanged statements trigger no downstream work. Identify consumers only of qualifying statement changes, including published items. Existing frozen assignments remain binding.',
       mode==='adjudicate' ? 'Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.' :
         'Examine every assigned downstream item, including published items. Assignment requires impact review, not an edit. Leave a sound consumer byte-for-byte unchanged and explain why it is unaffected. Repair only when the supplier change makes the consumer logically invalid or inaccurate, and then make the smallest logically sufficient change without stylistic or unrelated rewriting. Work supplier-before-consumer. Necessary published repairs are authorized by the owner for this impact wave. Reconcile only proof contracts, dependencies, page metadata and publication audit evidence actually invalidated by a necessary repair. Reference-only candidates require examination of the actual cited clause, not automatic transitive propagation; declare genuine missing load-bearing dependencies and report downstream effects of necessary repairs.',
       `Return JSON {run:"${pack.run}",phase:"${pack.phase}",round:${pack.round},unit:"${unit}",input_sha256:"${digest(pack)}",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.`,
@@ -193,12 +201,12 @@ function writeTasks(root,pack,mode) {
         'Owner repair units run in parallel with disjoint item ownership. Follow the shared metadata lock protocol in briefs/step7-owner-repair.md before editing pages, contracts, manifests, registry/index or the published-consumer-supplier ledger; reread shared files after acquiring the lock and release promptly. Maintain the canonical deduplicated classification index and exact supplier/evidence links. Resolve supplied ledger proposals; do not silently discard them. Do not write judge verdicts or shared adjudication JSONL. Unit 1 also reconciles initial-adjudicator ledger proposals whose item has no downstream owner assignment. Record unresolved ledger work honestly in your report; it blocks the final gate.',
       pack.ledger_updates?.length ? `Adjudicator ledger proposals requiring reconciliation:\n${JSON.stringify(pack.ledger_updates,null,2)}` : '',
       'For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.',
-      'Empty assignments return empty arrays. Downstream is an array of item IDs; include consumers reached through changed intermediate items.',
+      'Empty assignments return empty arrays. Downstream is an array of consumer IDs affected by a Statement/Definition change; proof-only intermediate repairs do not restart propagation.',
       pack.gateRoutingVersion===1
         ? `Assigned input: read assignments["${unit}"] from the frozen pack above (${assigned.length} item(s)). Do not dump the whole pack or the entire library into context. Read your assignment array and the needed item files in bounded chunks.`
         : `Assigned input:\n${JSON.stringify(assigned,null,2)}`,
       pack.gateRoutingVersion===1
-        ? `Gate diagnostics: read ${gateInput}. This file contains your diagnostic indices, scoped subject IDs and complete raw failure outputs. Examine every assigned diagnostic in bounded chunks, filtering item diagnostics to its subjects list; passing inventories and cited supplier names are not repair authority. Each item has exactly one owner. For a shared diagnostic, resolve only your listed subjects, not another lane's items. Global/owner-held diagnostic components belong only to the designated owner; reconcile shared metadata under the lock and report operator-only work honestly. Record gate_resolutions for every assigned index, stating the actual scope resolved. A resolution does not certify or waive the gate. Full diagnostics remain preserved on disk; never ignore a failure because its output is large. Further downstream work is scheduled after actual repairs, not from merely named suppliers.`
+        ? `Gate diagnostics: read ${gateInput}. This file contains your diagnostic indices, scoped subject IDs and complete raw failure outputs. Examine every assigned diagnostic in bounded chunks, filtering item diagnostics to its subjects list; passing inventories and cited supplier names are not repair authority. Each item has exactly one owner. For a shared diagnostic, resolve only your listed subjects, not another lane's items. Global/owner-held diagnostic components belong only to the designated owner; reconcile shared metadata under the lock and report operator-only work honestly. Record gate_resolutions for every assigned index, stating the actual scope resolved. A resolution does not certify or waive the gate. Full diagnostics remain preserved on disk; never ignore a failure because its output is large. Further downstream work is scheduled only after Statement/Definition changes, not proof-only repairs or merely named suppliers.`
         : pack.failures ? `Your gate diagnostics:\n${JSON.stringify((pack.gateAssignments??{})[unit]??[],null,2)}\nAll failures:\n${JSON.stringify(pack.failures,null,2)}` : '',
     ].join('\n\n');
     requireValue(pack.gateRoutingVersion!==1||body.length<64000,'gate launch task exceeds bounded prompt budget');
@@ -324,7 +332,9 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
-  const required=discoverDownstream({items:readLibraryItems(root),repairedIds:result.changed});
+  receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
+  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
+  const required=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
   receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
   if(!deferImpactClosure)for(const id of receipt.inventory_missing)requireValue(false,`missing downstream inventory: ${id}`);
   // Merge compatibility evidence once, bound to the actual frozen rejection.
@@ -359,7 +369,7 @@ export function advanceImpact(root,run,phase,round) {
   const completed=progress.passes.map(pass=>read(join(workflowDir(root,run),`${pass}-${round}-collected.json`)));
   for(const receipt of completed)verifyEvidence(receipt.evidence);
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
-  const changed=diff(base.before,current),seeds=[...new Set([...(base.seeds??[]),...changed])];
+  const changed=diff(base.before,current),seeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed)])];
   const impacts=discoverDownstream({items,repairedIds:seeds});
   const required=new Set([...Object.values(base.assignments).flat(),...impacts.map(row=>row.id),...changed]);
   const reviews=new Map(completed.flatMap(receipt=>receipt.reviews).map(row=>[row.id,row]));
@@ -381,14 +391,14 @@ export function advanceImpact(root,run,phase,round) {
     const {order,cycles}=orderImpacts(items,pending);
     order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
     const identity=libraryIdentity(root);
-    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,units:['1','2','3'],assignments,before:current,before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
+    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
   }
   const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence));
   for(const pass of progress.passes){const p=join(workflowDir(root,run),`${pass}-${round}-collected.json`);evidence[p]=digest(readFileSync(p,'utf8'));}
-  const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,post:current,evidence,downstream:impacts.map(row=>row.id),ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
+  const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:impacts.map(row=>row.id),ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
   frozen(join(workflowDir(root,run),`${phase}-${round}-closed.json`),receipt);
   progress.complete=true;atomic(path,progress);
   return {complete:true,phase,round,passes:progress.passes};
@@ -410,7 +420,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   const source=phase==='impact-initial'?'initial':'repeat';
   const result=collect(root,run,source,round);
   const items=readLibraryItems(root);
-  const seeds=result.changed;
+  const seeds=result.restated??result.changed;
   const impacts=discoverDownstream({items,repairedIds:seeds});
   const targets=[...new Set([...impacts.map(r=>r.id),...(result.downstream??[])])].sort();
   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
@@ -420,7 +430,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   const {order,cycles}=orderImpacts(items,targets);
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
   const identity=libraryIdentity(root);
-  const pack={version:2,run,phase,round,units:['1','2','3'],assignments,before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
+  const pack={version:2,run,phase,round,units:['1','2','3'],assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
@@ -447,7 +457,7 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
     for(const [unit,subjects] of scoped)gateAssignments[unit].push({...diagnostic,subjects,ownerHeld:unit===globalOwner});
   }
   const pack={version:2,gateRoutingVersion:1,run,phase,basePhase:'gate',round,units:['1','2','3'],assignments,
-    before:hashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+    before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
     impacts:[],seeds:[],failures,gateAssignments,cycles,ledger_updates:[]};
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
@@ -494,7 +504,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   // Certification covers an examination of every discovered consumer. A
   // consumer may remain unchanged when sound; only logically necessary owner
   // repairs belong in `changed`.
-  const currentImpacts=discoverDownstream({items:readLibraryItems(root),repairedIds:[...new Set([...(impactPack.seeds??[]),...result.changed])]}).map(row=>row.id);
+  const currentImpacts=discoverDownstream({items:readLibraryItems(root),repairedIds:result.restated??[...new Set([...(impactPack.seeds??[]),...result.changed])]}).map(row=>row.id);
   for(const id of currentImpacts)if(!reviewed.has(id))throw Error(`new downstream consumer requires owner review: ${id}`);
   for(const row of allReviews)if(row.post_sha256!==current[row.id]&&reviewed.get(row.id)===row)throw Error(`review changed before certification: ${row.id}`);
   for(const id of changed) if(!reviewed.has(id)&&priorItems.get(id)?.guard_sha256!==current[id])throw Error(`uncertified change ${id}`);

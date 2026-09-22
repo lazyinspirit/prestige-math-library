@@ -368,7 +368,15 @@ statistics; no historical decision is rewritten or mathematical category guessed
 Changed evidence and unbound legacy omissions still fail. This compatibility
 does not replace current-carrier, repair, judgment or certification checks.
 
-Downstream discovery includes transitive declared dependencies and actual uses
+Downstream work is triggered only by a change to the original `## Statement`
+or `## Definition` section, including lemmas, propositions and corollaries.
+The engine freezes section hashes in repair packs and compares them after
+repairs; no semantic classifier. Proof-only, citation, dependency and metadata
+edits leave consumers alone. New prerequisite interfaces count as additions.
+Gate subjects remain mandatory independently. Historical frozen packs without
+section snapshots retain their existing obligations; no before-state is guessed.
+
+For qualifying statement changes, discovery includes transitive dependencies and uses
 in proofs, citations and page interfaces throughout the library. Record exact
 dependency paths and mathematical effects, distinguish candidates from confirmed
 repair targets, and reconcile newly discovered consumers before certification.
@@ -378,15 +386,17 @@ References to a repaired item or its declared transitive consumers require
 examination, but a reference-only edge terminates automatic propagation.
 It does not declare the reference irrelevant: owners check the actual use,
 repair genuine effects and reconcile missing load-bearing dependencies. A
-repaired reference consumer becomes a new propagation source. This prevents
+restated reference consumer becomes a new propagation source. This prevents
 explanatory reference cycles from turning a local correction into a whole-library
 review while retaining direct-reference and explicit-discovery coverage.
-Review contexts follow the same rule: the item, its direct references and their
-declared prerequisite closures, never recursively expanded explanatory links.
+New review contexts bind the reviewed item's full guard and its direct suppliers'
+Statement/Definition hashes, not supplier proofs or internal dependency closures.
+Proof-only supplier edits therefore do not invalidate consumer reviews.
+Certification still binds complete stable content and context.
 Legacy review evidence is not rewritten. It may be reused only when its original
 broader hash is exactly reconstructible, covered every now-required carrier,
 and those carriers remain unchanged; otherwise a genuine new review is required.
-Worker-reported consumer IDs enter owner assignments even when the dependency
+Worker-reported consumers of qualifying statement changes enter assignments even when the dependency
 graph has no edge to them. Continuations retain those IDs until a current review
 covers them; a sound consumer closes unchanged, and only necessary minimal
 repairs are made.
@@ -395,7 +405,7 @@ Owners have disjoint item assignments and repair suppliers before consumers
 within each assignment. Shared metadata changes use the short acquire/edit/release
 protocol in `briefs/step7-owner-repair.md` and `tools/step7-shared-write-lock.mjs`.
 Reread shared files after acquisition; keep mathematical research outside the
-lock. Later supplier changes requeue stale consumer reviews before certification.
+lock. Later supplier statement changes requeue stale reviews before certification.
 If a repair reveals additional relevant consumers, the engine continues the
 repair phase with fresh disjoint assignments. Complete that work and any further
 downstream effects before entering the one stable certification pass.
@@ -446,7 +456,7 @@ suppliers do not confer repair ownership. Three disjoint lanes receive the
 diagnostics relevant to their subjects; global or unrecognized components remain
 explicit obligations assigned to one lane. Full diagnostics and assignments stay
 in frozen files, read in bounded chunks rather than embedded in launch prompts.
-Gate candidates are not propagation seeds: actual subsequent repairs and explicit
+Gate candidates are not propagation seeds: actual statement changes and their explicit
 consumer discoveries trigger downstream closure before certification.
 Forward-reference gates suppress inventories and drain their output before exit.
 Inherited published items need not acquire a new-batch proof contract merely

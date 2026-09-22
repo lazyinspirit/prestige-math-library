@@ -67,7 +67,7 @@ test('legacy context reuse requires exact historical binding and unchanged typed
   assert.equal(reviewMatchesCurrent(expanded,{...snapshot,'new-source':'n'},row,snapshot),false);
 });
 
-test('review contexts stop at reference edges but retain declared prerequisite closure',()=>{
+test('review contexts bind direct supplier statements, not indirect proof dependencies',()=>{
   const f=fixture();try{
     item(f.root,'thm-item-0','See [[thm-item-1]].');
     item(f.root,'thm-item-1','See [[thm-item-2]].',['thm-item-3']);
@@ -75,6 +75,8 @@ test('review contexts stop at reference edges but retain declared prerequisite c
     item(f.root,'thm-item-2','Changed explanatory reference behind another reference.');
     assert.deepEqual(reviewContextHashes(f.root,['thm-item-0'])['thm-item-0'],before);
     item(f.root,'thm-item-3','Changed actual prerequisite of referenced supplier.');
+    assert.equal(reviewContextHashes(f.root,['thm-item-0'])['thm-item-0'].review_context_sha256,before.review_context_sha256);
+    item(f.root,'thm-item-1','Restated direct supplier.',['thm-item-3']);
     assert.notEqual(reviewContextHashes(f.root,['thm-item-0'])['thm-item-0'].review_context_sha256,before.review_context_sha256);
   }finally{f.cleanup();}
 });
@@ -103,7 +105,8 @@ test('a reference candidate closes unchanged, or propagates after necessary repa
   }
 });
 function item(root:string,id:string,body='Original proof.',deps:string[]=[],published=false,kind='theorem') {
-  writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: ${kind}\nstatus: ${published?'published':'draft'}\ndeps: [${deps.join(', ')}]\n---\n${body}\n`);
+  const content=body.startsWith('## ')?body:`## ${kind==='definition'?'Definition':'Statement'}\n${body}`;
+  writeFileSync(join(root,'items',`${id}.md`),`---\nid: ${id}\nkind: ${kind}\nstatus: ${published?'published':'draft'}\ndeps: [${deps.join(', ')}]\n---\n${content}\n`);
 }
 function guard(root:string,id:string){return itemHashGuard(readFileSync(join(root,'items',`${id}.md`),'utf8'));}
 function contexts(root:string,ids:string[]){return new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,'items',`${id}.md`),'utf8')),context_sha256:h}]));}
@@ -140,6 +143,45 @@ function registerCreated(root:string,id:string,kind:string) {
   pages[0].items.push({id});json(manifest,pages);
   json(join(root,'research',`${run}-batch-1.proof-contracts.json`),{contracts:{[id]:{risk:'medium',kind}}});
 }
+
+test('proof-only initial and gate repairs create no downstream assignments and still certify repairs',()=>{
+  for(const phase of ['initial','gate']){
+    const f=fixture();try{
+      item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nBroken proof.');
+      initialize(f.root,run);
+      const pack=phase==='initial'?prepareAdjudication(f.root,run,'initial',1):prepareImpact(f.root,run,'gate',1,{failures:{id:'precheck',output:'FAIL thm-item-0: invalid proof'}});
+      const before=reviewContextHashes(f.root,['thm-published-consumer'])['thm-published-consumer'];
+      item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nRepaired proof.', ['thm-item-1']);
+      assert.deepEqual(reviewContextHashes(f.root,['thm-published-consumer'])['thm-published-consumer'],before);
+      reports(f.root,pack,{},['thm-published-consumer']);
+      if(phase==='initial'){
+        const owners=prepareImpact(f.root,run,'impact-initial',1);
+        assert.deepEqual(Object.values(owners.assignments).flat(),[]);
+        reports(f.root,owners);
+      }
+      const ownerPhase=phase==='initial'?'impact-initial':'gate';
+      assert.equal(advanceImpact(f.root,run,ownerPhase,1).complete,true);
+      const certificate=certify(f.root,run,ownerPhase,1,{contextHasher:contexts});
+      assert.ok(certificate.changed.includes('thm-item-0'));
+      assert.equal(certificate.items.some((row:any)=>row.id==='thm-published-consumer'),false);
+    }finally{f.cleanup();}
+  }
+});
+
+test('a proof-only owner repair preserves a parallel consumer review and starts no further wave',()=>{
+  const f=fixture();try{
+    item(f.root,'thm-published-consumer','## Statement\nStable interface.\n## Proof\nOld proof.',['thm-item-0'],true);
+    item(f.root,'thm-leaf','Uses published supplier.',['thm-published-consumer'],true);
+    const adjudicate=prepareAdjudication(f.root,run,'initial',1);
+    item(f.root,'thm-item-0','Restated root.');reports(f.root,adjudicate,{},['thm-published-consumer','thm-leaf']);
+    const owners=prepareImpact(f.root,run,'impact-initial',1);
+    const before=reviewContextHashes(f.root,['thm-leaf'])['thm-leaf'];
+    item(f.root,'thm-published-consumer','## Statement\nStable interface.\n## Proof\nRepaired proof.',['thm-item-0'],true);
+    reports(f.root,owners);
+    assert.deepEqual(reviewContextHashes(f.root,['thm-leaf'])['thm-leaf'],before);
+    assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
+  }finally{f.cleanup();}
+});
 
 test('initialization freezes real batch shape and initial reports bind exact rejection inputs',()=>{
   const f=fixture();try {

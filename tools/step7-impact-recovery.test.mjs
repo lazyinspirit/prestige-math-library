@@ -38,7 +38,7 @@ function fixture(t, baseGate = false) {
       if (pass !== active) save(path, {});
       else save(join(dispatchDir, `alpha-repair-${workerLabel(pass, 1, unit)}.result.json`), { ok: false, label: workerLabel(pass, 1, unit) });
     }
-    if (pass !== active) save(join(dir, `${pass}-1-collected.json`), { evidence: {}, reviews: [], downstream: [], ledger_updates: [], created_items: [] });
+    if (pass !== active) save(join(dir, `${pass}-1-collected.json`), { evidence: {}, reviews: [], changed: [], post: current, downstream: [], ledger_updates: [], created_items: [] });
   }
   save(join(dir, 'initial-1-collected.json'), { evidence: {}, reviews: [], downstream: [] });
   if (baseGate) save(join(dir, 'certification.json'), { phase: 'impact-repeat', round: 3, preserved: 'Step 7.7 certification' });

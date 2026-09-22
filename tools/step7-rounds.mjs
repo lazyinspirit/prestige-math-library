@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { statementHash } from './step7-statement.mjs';
 
 const digest = (value) => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const unique = (values) => [...new Set(values)].sort();
@@ -53,7 +54,7 @@ export function readLibraryItems(repo) {
     const links = [...body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map((m) => m[1]);
     const deps = unique([...frontmatterList(fm, 'deps'), ...frontmatterList(fm, 'justified_by'), ...frontmatterList(fm, 'forward_refs')]);
     const references = unique([...links, ...frontmatterList(fm, 'external_refs')]).filter(id => !deps.includes(id));
-    return { id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text) };
+    return { id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text), statement_sha256: statementHash(text) };
   });
 }
 
