@@ -23,5 +23,7 @@ rejudge and gates. Outside consumers do not enter those mechanisms.
    necessary/minimal edit evidence, frontier membership boundaries, restart
    idempotence and all-repairs-before-certification. Run focused regressions
    and TypeScript checking; review diffs and commit only build files/docs.
-6. Do not automatically resume the stopped historical wave. Report build/test
-   results and any guarded recovery still required; never fabricate completion.
+6. The owner subsequently authorized resuming 7.9 with close supervision.
+   Preserve and supersede the stopped historical wave through guarded recovery,
+   inspect replacement scope, then resume the controller and verify dispatches.
+   Report actual progress; never fabricate completion.
